@@ -1,12 +1,8 @@
 package net.osmand.plus.osmedit;
 
-
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.util.Xml;
@@ -16,9 +12,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -26,12 +24,13 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.OsmBugsUtil.OsmBugResult;
 import net.osmand.plus.osmedit.OsmPoint.Action;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -54,12 +53,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final OsmEditingPlugin plugin;
 
 	private OsmandMapTileView view;
-
-	private Paint paintIcon;
-	private Bitmap unresolvedNote;
-	private Bitmap resolvedNote;
-	private Bitmap unresolvedNoteSmall;
-	private Bitmap resolvedNoteSmall;
 
 	private final MapActivity activity;
 	private OsmBugsLocalUtil local;
@@ -86,13 +79,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-
-		paintIcon = new Paint();
-		resolvedNote = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_osm_resolved);
-		unresolvedNote = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_osm_unresolved);
-		resolvedNoteSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_osm_resolved_small);
-		unresolvedNoteSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_osm_unresolved_small);
-
 		data = new OsmandMapLayer.MapLayerData<List<OpenStreetNote>>() {
 
 			{
@@ -125,7 +111,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			List<OpenStreetNote> objects = data.getResults();
 
 			if (objects != null) {
-				float iconSize = resolvedNote.getWidth() * 3 / 2.5f;
+				float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+				float iconSize = getIconSize(activity) * 3 / 2.5f * textScale;
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 				List<OpenStreetNote> fullObjects = new ArrayList<>();
 				List<LatLon> fullObjectsLatLon = new ArrayList<>();
@@ -139,14 +126,15 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
 					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-						Bitmap b;
+						int backgroundColorRes;
 						if (o.isOpened()) {
-							b = unresolvedNoteSmall;
+							backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
 						} else {
-							b = resolvedNoteSmall;
+							backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 						}
-						canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
-						smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
+								ContextCompat.getColor(activity, backgroundColorRes), true);
+						pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 					} else {
 						fullObjects.add(o);
 						fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
@@ -158,13 +146,21 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					}
 					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-					Bitmap b;
+					int iconId;
+					int backgroundColorRes;
 					if (o.isOpened()) {
-						b = unresolvedNote;
+						iconId = R.drawable.mx_special_symbol_remove;
+						backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
 					} else {
-						b = resolvedNote;
+						iconId = R.drawable.mx_special_symbol_check_mark;
+						backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 					}
-					canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+					BackgroundType backgroundType = BackgroundType.COMMENT;
+					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
+							ContextCompat.getColor(activity, backgroundColorRes), true, false, iconId,
+							backgroundType);
+					int offsetY = backgroundType.getOffsetY(activity, textScale);
+					pointImageDrawable.drawPoint(canvas, x, y - offsetY, textScale, false);
 				}
 				this.fullObjectsLatLon = fullObjectsLatLon;
 				this.smallObjectsLatLon = smallObjectsLatLon;
@@ -196,7 +192,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		return (int) (z * tb.getDensity());
 	}
 
-
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
@@ -207,8 +202,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		if (objects != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			final int rad = getRadiusBug(tb);
-			int radius = rad * 3 / 2;
+			final int rad = getScaledTouchRadius(activity.getMyApplication(), getRadiusBug(tb));
+			int radius = rad * 3;
 			int small = rad * 3 / 4;
 			boolean showClosed = activity.getMyApplication().getSettings().SHOW_CLOSED_OSM_BUGS.get();
 			try {
@@ -455,7 +450,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			((EditText) view.findViewById(R.id.message_field)).setText(text);
 		}
 		view.findViewById(R.id.message_field).requestFocus();
-		AndroidUtils.softKeyboardDelayed(view.findViewById(R.id.message_field));
+		AndroidUtils.softKeyboardDelayed(activity, view.findViewById(R.id.message_field));
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.shared_string_commit);

@@ -42,7 +42,7 @@ public class OsmBugMenuController extends MenuController {
 		} else {
 			leftTitleButtonController.caption = mapActivity.getString(R.string.poi_dialog_reopen);
 		}
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_note_dark;
+		leftTitleButtonController.startIconId = R.drawable.ic_action_note_dark;
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -54,7 +54,7 @@ public class OsmBugMenuController extends MenuController {
 			}
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_close);
-		rightTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
+		rightTitleButtonController.startIconId = R.drawable.ic_action_remove_dark;
 
 		updateData();
 	}
@@ -79,9 +79,9 @@ public class OsmBugMenuController extends MenuController {
 	@Override
 	public Drawable getRightIcon() {
 		if (bug.isOpened()) {
-			return getIcon(R.drawable.ic_action_info_dark, R.color.osm_bug_unresolved_icon_color);
+			return getIcon(R.drawable.ic_action_osm_note_unresolved, R.color.osm_bug_unresolved_icon_color);
 		} else {
-			return getIcon(R.drawable.ic_action_info_dark, R.color.osm_bug_resolved_icon_color);
+			return getIcon(R.drawable.ic_action_osm_note_resolved, R.color.osm_bug_resolved_icon_color);
 		}
 	}
 

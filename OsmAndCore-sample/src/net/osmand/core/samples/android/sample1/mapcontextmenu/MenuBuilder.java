@@ -1,13 +1,13 @@
 package net.osmand.core.samples.android.sample1.mapcontextmenu;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.text.ClipboardManager;
 import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.TypedValue;

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="send_report">Send report</string>
+    <string name="logcat_buffer_descr">Check and share detailed logs of the app</string>
+    <string name="logcat_buffer">Logcat buffer</string>
+    <string name="shared_string_export">Export</string>
     <string name="shared_string_error_short">ERR</string>
     <string name="last_update_from_telegram_date">Last update from Telegram: %1$s</string>
     <string name="last_response_date">Last response: %1$s</string>

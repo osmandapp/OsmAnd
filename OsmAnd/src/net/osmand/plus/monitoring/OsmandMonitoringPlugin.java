@@ -1,9 +1,11 @@
 package net.osmand.plus.monitoring;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -25,24 +28,25 @@ import com.google.android.material.slider.Slider;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -56,11 +60,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.monitoring";
 	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
+	public static final int REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING = 208;
 
+	private MapActivity mapActivity;
 	private OsmandSettings settings;
 	private TextInfoWidget monitoringControl;
 	private LiveMonitoringHelper liveMonitoringHelper;
 	private boolean isSaving;
+	private boolean showDialogWhenActivityResumed;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		super(app);
@@ -155,9 +162,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 	
-	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 30, 60, 90};
+	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
 	public static final int[] MINUTES = new int[] {2, 3, 5};
-	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[] {1, 2, 5, 10, 15, 20, 30, 60};
+	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[] {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
 
 	
 	@Override
@@ -291,6 +298,31 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return monitoringControl;
 	}
 
+	@Override
+	public void mapActivityResume(MapActivity activity) {
+		this.mapActivity = activity;
+		if (showDialogWhenActivityResumed) {
+			showDialogWhenActivityResumed = false;
+			controlDialog(mapActivity, true);
+		}
+	}
+
+	@Override
+	public void mapActivityPause(MapActivity activity) {
+		this.mapActivity = null;
+	}
+
+	@Override
+	public void handleRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		if (requestCode == REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING) {
+			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				showDialogWhenActivityResumed = true;
+			} else {
+				app.showToastMessage(R.string.no_location_permission);
+			}
+		}
+	}
+
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		final boolean nightMode;
@@ -329,22 +361,32 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				if(item == R.string.save_current_track){
 					saveCurrentTrack(null, activity);
 				} else if(item == R.string.gpx_monitoring_start) {
-					if (app.getLocationProvider().checkGPSEnabled(activity)) {
+					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
+						if (mapActivity != null) {
+							ActivityCompat.requestPermissions(mapActivity,
+									new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+									REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING);
+						} else {
+							app.showToastMessage(R.string.no_location_permission);
+						}
+					} else if (app.getLocationProvider().checkGPSEnabled(activity)) {
 						startGPXMonitoring(activity, showTrackSelection);
 					}
 				} else if (item == R.string.clear_recorded_data) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
-					builder.setTitle(R.string.clear_recorded_data);
-					builder.setMessage(R.string.are_you_sure);
-					builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
-							R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									app.getSavingTrackHelper().clearRecordedData(true);
-									app.getNotificationHelper().refreshNotifications();
-								}
-							});
-					builder.show();
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
+						builder.setTitle(R.string.clear_recorded_data);
+						builder.setMessage(R.string.are_you_sure);
+						builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
+								R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										app.getSavingTrackHelper().clearRecordedData(true);
+										app.getNotificationHelper().refreshNotifications();
+									}
+								});
+						builder.show();
+					}
 				} else if(item == R.string.gpx_monitoring_stop) {
 					stopRecording();
 				} else if(item == R.string.gpx_start_new_segment) {
@@ -392,6 +434,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable Activity activity) {
+		stopRecording();
 
 		final WeakReference<Activity> activityRef = activity != null ? new WeakReference<>(activity) : null;
 
@@ -481,19 +524,21 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
-
-	public static void showIntervalChooseDialog(final Context uiCtx, final String patternMsg,
+	public static void showIntervalChooseDialog(final Activity activity, final String patternMsg,
 												String title, final int[] seconds, final int[] minutes,
 												final ValueHolder<Boolean> choice, final ValueHolder<Integer> v,
 												final boolean showTrackSelection, OnClickListener onclick) {
-		final OsmandApplication app = (OsmandApplication) uiCtx.getApplicationContext();
+		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+			return;
+		}
+		final OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		boolean nightMode;
-		if (uiCtx instanceof MapActivity) {
+		if (activity instanceof MapActivity) {
 			nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		} else {
 			nightMode = !app.getSettings().isLightContent();
 		}
-		Context themedContext = UiUtilities.getThemedContext(uiCtx, nightMode);
+		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder dlg = new AlertDialog.Builder(themedContext);
 		dlg.setTitle(title);
 		LinearLayout ll = createIntervalChooseLayout(app, themedContext, patternMsg, seconds, minutes, choice, v, showTrackSelection, nightMode);

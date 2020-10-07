@@ -22,7 +22,7 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.DrivingRegion;
 import net.osmand.plus.R;
@@ -46,6 +46,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		setupRotateMapPref();
 		setupCenterPositionOnMapPref();
 		setupMapScreenOrientationPref();
+		setupTurnScreenOnPref();
 
 		setupDrivingRegionPref();
 		setupUnitsOfLengthPref();
@@ -53,6 +54,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		setupAngularUnitsPref();
 		setupSpeedSystemPref();
 
+		setupVolumeButtonsAsZoom();
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
 		setupMapEmptyStateAllowedPref();
@@ -93,14 +95,37 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	};
 
 	private void setupAppThemePref() {
-		final ListPreferenceEx appTheme = (ListPreferenceEx) findPreference(settings.OSMAND_THEME.getId());
-		appTheme.setEntries(new String[] {getString(R.string.dark_theme), getString(R.string.light_theme)});
-		appTheme.setEntryValues(new Integer[] {OsmandSettings.OSMAND_DARK_THEME, OsmandSettings.OSMAND_LIGHT_THEME});
+		final ListPreferenceEx appTheme =
+				(ListPreferenceEx) findPreference(settings.OSMAND_THEME.getId());
+
+		ArrayList<String> entries = new ArrayList<>();
+		entries.add(getString(R.string.dark_theme));
+		entries.add(getString(R.string.light_theme));
+
+		ArrayList<Integer> values = new ArrayList<>();
+		values.add(OsmandSettings.OSMAND_DARK_THEME);
+		values.add(OsmandSettings.OSMAND_LIGHT_THEME);
+
+		if (settings.isSupportSystemDefaultTheme()) {
+			entries.add(getString(R.string.system_default_theme));
+			values.add(OsmandSettings.SYSTEM_DEFAULT_THEME);
+		}
+
+		String[] entriesStrings = new String[entries.size()];
+		appTheme.setEntries(entries.toArray(entriesStrings));
+		appTheme.setEntryValues(values.toArray());
 		appTheme.setIcon(getOsmandThemeIcon());
 	}
 
 	private Drawable getOsmandThemeIcon() {
-		return getActiveIcon(settings.isLightContent() ? R.drawable.ic_action_sun : R.drawable.ic_action_moon);
+		int iconId;
+		ApplicationMode mode = getSelectedAppMode();
+		if (settings.isSystemDefaultThemeUsedForMode(mode)) {
+			iconId = R.drawable.ic_action_android;
+		} else {
+			iconId = settings.isLightContentForMode(mode) ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;
+		}
+		return getActiveIcon(iconId);
 	}
 
 	private void setupRotateMapPref() {
@@ -135,6 +160,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
 		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
+	}
+
+	private void setupTurnScreenOnPref() {
+		Preference screenControl = findPreference("screen_control");
+		screenControl.setIcon(getContentIcon(R.drawable.ic_action_turn_screen_on));
 	}
 
 	private Drawable getMapScreenOrientationIcon() {
@@ -216,6 +246,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		speedSystem.setEntryValues(entryValues);
 		speedSystem.setDescription(R.string.default_speed_system_descr);
 		speedSystem.setIcon(getActiveIcon(R.drawable.ic_action_speed));
+	}
+
+	private void setupVolumeButtonsAsZoom() {
+		SwitchPreferenceEx volumeButtonsPref = (SwitchPreferenceEx) findPreference(settings.USE_VOLUME_BUTTONS_AS_ZOOM.getId());
+		volumeButtonsPref.setTitle(getString(R.string.use_volume_buttons_as_zoom));
+		volumeButtonsPref.setDescription(getString(R.string.use_volume_buttons_as_zoom_descr));
+		Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_zoom_volume_buttons);
+		volumeButtonsPref.setIcon(icon);
 	}
 
 	private void setupKalmanFilterPref() {

@@ -13,6 +13,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.AngularConstants;
 import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
@@ -24,10 +25,10 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import static net.osmand.data.PointDescription.getLocationOlcName;
@@ -101,7 +102,7 @@ public class OsmAndFormatter {
 		} else {
 			calendar.setTimeInMillis(seconds * 1000);
 		}
-		if (isSameDay(calendar, Calendar.getInstance())) {
+		if (org.apache.commons.lang3.time.DateUtils.isSameDay(calendar, Calendar.getInstance())) {
 			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime());
 		} else {
 			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime()) + " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
@@ -117,7 +118,22 @@ public class OsmAndFormatter {
 	public static String getFormattedDate(Context context, long milliseconds) {
 		return DateUtils.formatDateTime(context, milliseconds, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 	}
-	
+
+	public static String getFormattedTimeInterval(OsmandApplication app, double interval) {
+		if (interval < 60) {
+			return interval + " " + app.getString(R.string.int_seconds);
+		} else if (interval % 60 == 0) {
+			return (interval / 60) + " " + app.getString(R.string.int_min);
+		} else {
+			return (interval / 60f) + " " + app.getString(R.string.int_min);
+		}
+	}
+
+	public static String getFormattedDistanceInterval(OsmandApplication app, double interval) {
+		double roundedDist = OsmAndFormatter.calculateRoundedDist(interval, app);
+		return OsmAndFormatter.getFormattedDistance((float) roundedDist, app);
+	}
+
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
@@ -275,27 +291,13 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static Map<MetricsConstants, String> getDistanceData(OsmandApplication app, float meters) {
-		Map<MetricsConstants, String> results = new LinkedHashMap<>();
-
-		String kilometersAndMeters = getFormattedDistance(meters, app, true, MetricsConstants.KILOMETERS_AND_METERS);
-		String milesAndFeet = getFormattedDistance(meters, app, true, MetricsConstants.MILES_AND_FEET);
-		String milesAndMeters = getFormattedDistance(meters, app, true, MetricsConstants.MILES_AND_METERS);
-		String milesAndYards = getFormattedDistance(meters, app, true, MetricsConstants.MILES_AND_YARDS);
-		String nauticalMiles = getFormattedDistance(meters, app, true, MetricsConstants.NAUTICAL_MILES);
-
-		results.put(MetricsConstants.KILOMETERS_AND_METERS, kilometersAndMeters);
-		results.put(MetricsConstants.MILES_AND_FEET, milesAndFeet);
-		results.put(MetricsConstants.MILES_AND_METERS, milesAndMeters);
-		results.put(MetricsConstants.MILES_AND_YARDS, milesAndYards);
-		results.put(MetricsConstants.NAUTICAL_MILES, nauticalMiles);
-
-		return results;
-	}
-
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		return getFormattedAlt(alt, ctx, mc);
+	}
+
+	public static String getFormattedAlt(double alt, OsmandApplication ctx, MetricsConstants mc) {
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
 		if (!useFeet) {
 			return ((int) (alt + 0.5)) + " " + ctx.getString(R.string.m);
@@ -387,24 +389,55 @@ public class OsmAndFormatter {
 	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-		String nm = amenity.getSubType();
+		String typeName = amenity.getSubType();
 		if (pt != null) {
-			nm = pt.getTranslation();
-		} else if(nm != null){
-			nm = Algorithms.capitalizeFirstLetterAndLowercase(nm.replace('_', ' '));
+			typeName = pt.getTranslation();
+		} else if(typeName != null){
+			typeName = Algorithms.capitalizeFirstLetterAndLowercase(typeName.replace('_', ' '));
 		}
-		String n = amenity.getName(locale, transliterate);
-		if (n.indexOf(nm) != -1) {
+		String localName = amenity.getName(locale, transliterate);
+		if (typeName != null && localName.contains(typeName)) {
 			// type is contained in name e.g.
-			// n = "Bakery the Corner"
+			// localName = "Bakery the Corner"
 			// type = "Bakery"
 			// no need to repeat this
-			return n;
+			return localName;
 		}
-		if (n.length() == 0) {
-			return nm;
+		if (localName.length() == 0) {
+			return typeName;
 		}
-		return nm + " " + n; //$NON-NLS-1$
+		return typeName + " " + localName; //$NON-NLS-1$
+	}
+
+	public static List<String> getPoiStringsWithoutType(Amenity amenity, String locale, boolean transliterate) {
+		PoiCategory pc = amenity.getType();
+		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
+		String typeName = amenity.getSubType();
+		if (pt != null) {
+			typeName = pt.getTranslation();
+		} else if(typeName != null){
+			typeName = Algorithms.capitalizeFirstLetterAndLowercase(typeName.replace('_', ' '));
+		}
+		List<String> res = new ArrayList<>();
+		String localName = amenity.getName(locale, transliterate);
+		addPoiString(typeName, localName, res);
+		for (String name : amenity.getAllNames(true)) {
+			addPoiString(typeName, name, res);
+		}
+		for (String name : amenity.getAdditionalInfo().values()) {
+			addPoiString(typeName, name, res);
+		}
+		return res;
+	}
+
+	private static void addPoiString(String poiTypeName, String poiName, List<String> res) {
+		if (poiTypeName != null && poiName.contains(poiTypeName)) {
+			res.add(poiName);
+		}
+		if (poiName.length() == 0) {
+			res.add(poiTypeName);
+		}
+		res.add(poiTypeName + " " + poiName);
 	}
 
 	public static String getAmenityDescriptionContent(OsmandApplication ctx, Amenity amenity, boolean shortDescription) {
@@ -460,12 +493,6 @@ public class OsmAndFormatter {
 		return newStrings;
 	}
 
-	private static boolean isSameDay(Calendar cal1, Calendar cal2) {
-		return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
-				cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
-				cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
-	}
-	
 	public static String getFormattedCoordinates(double lat, double lon, int outputFormat) {
 		StringBuilder result = new StringBuilder();
 		if (outputFormat == FORMAT_DEGREES_SHORT) {

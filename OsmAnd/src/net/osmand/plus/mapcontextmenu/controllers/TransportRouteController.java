@@ -17,7 +17,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.layers.TransportStopsLayer;
 
 import java.util.List;
 
@@ -82,11 +82,11 @@ public class TransportRouteController extends MenuController {
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_next);
 
 		if (AndroidUtils.isLayoutRtl(mapActivity)) {
-			leftTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
-			rightTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
+			leftTitleButtonController.endIconId = R.drawable.ic_arrow_forward;
+			rightTitleButtonController.startIconId = R.drawable.ic_arrow_back;
 		} else {
-			leftTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
-			rightTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
+			leftTitleButtonController.startIconId = R.drawable.ic_arrow_back;
+			rightTitleButtonController.endIconId = R.drawable.ic_arrow_forward;
 		}
 	}
 

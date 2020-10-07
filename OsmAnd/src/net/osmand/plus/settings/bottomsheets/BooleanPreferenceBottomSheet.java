@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -110,7 +110,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		if (description != null) {
 			BaseBottomSheetItem preferenceDescription = new BottomSheetItemWithDescription.Builder()
 					.setDescription(description)
-					.setLayoutId(R.layout.bottom_sheet_item_preference_descr)
+					.setLayoutId(R.layout.bottom_sheet_item_descr)
 					.create();
 			items.add(preferenceDescription);
 		}

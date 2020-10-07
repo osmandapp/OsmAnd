@@ -14,7 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.Type;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 
 
 import java.util.ArrayList;
@@ -25,15 +25,15 @@ import java.util.Map;
 
 public class ImportedSettingsItemsAdapter extends
 		RecyclerView.Adapter<ImportedSettingsItemsAdapter.ItemViewHolder> {
-	private Map<Type, List<?>> itemsMap;
-	private List<Type> itemsTypes;
+	private Map<ExportSettingsType, List<?>> itemsMap;
+	private List<ExportSettingsType> itemsTypes;
 	private UiUtilities uiUtils;
 	private OsmandApplication app;
 	private boolean nightMode;
 	private OnItemClickListener listener;
 
-	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<Type, List<?>> itemsMap,
-								 boolean nightMode, OnItemClickListener listener) {
+	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<ExportSettingsType, List<?>> itemsMap,
+	                             boolean nightMode, OnItemClickListener listener) {
 		this.app = app;
 		this.itemsMap = itemsMap;
 		this.nightMode = nightMode;
@@ -53,7 +53,7 @@ public class ImportedSettingsItemsAdapter extends
 
 	@Override
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-		final Type currentItemType = itemsTypes.get(position);
+		final ExportSettingsType currentItemType = itemsTypes.get(position);
 		boolean isLastItem = itemsTypes.size() - 1 == position;
 		int activeColorRes = nightMode
 				? R.color.active_color_primary_dark
@@ -83,7 +83,7 @@ public class ImportedSettingsItemsAdapter extends
 				holder.title.setText(R.string.shared_string_settings);
 				break;
 			case QUICK_ACTIONS:
-				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.map_quick_action, activeColorRes));
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_quick_action, activeColorRes));
 				holder.title.setText(R.string.configure_screen_quick_action);
 				break;
 			case POI_TYPES:
@@ -130,6 +130,6 @@ public class ImportedSettingsItemsAdapter extends
 	}
 
 	interface OnItemClickListener {
-		void onItemClick(Type type);
+		void onItemClick(ExportSettingsType type);
 	}
 }

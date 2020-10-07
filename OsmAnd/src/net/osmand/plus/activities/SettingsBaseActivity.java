@@ -23,7 +23,7 @@ import androidx.appcompat.app.AlertDialog.Builder;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -31,6 +31,10 @@ import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.AppProfileArrayAdapter;
 import net.osmand.plus.profiles.ProfileDataObject;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 
 import org.apache.commons.logging.Log;
 
@@ -287,8 +291,9 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	public ListPreference createTimeListPreference(OsmandPreference<Integer> b, int[] seconds, int[] minutes, int coeff, int title, int summary) {
 		return createTimeListPreference(b, seconds, minutes, coeff, null, title, summary);
 	}
-	public ListPreference createTimeListPreference(OsmandPreference<Integer> b, int[] seconds, int[] minutes, int coeff, CommonPreference<Boolean> disable, int title,
-			int summary) {
+
+	public ListPreference createTimeListPreference(OsmandPreference<Integer> b, int[] seconds, int[] minutes,
+	                                               int coeff, CommonPreference<Boolean> disable, int title, int summary) {
 		int minutesLength = minutes == null ? 0 : minutes.length;
 		int secondsLength = seconds == null ? 0 : seconds.length;
 		Integer[] ints = new Integer[secondsLength + minutesLength];
@@ -299,18 +304,18 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			intDescriptions[k] = seconds[i] + " " + getString(R.string.int_seconds); //$NON-NLS-1$
 			k++;
 		}
+		OsmandApplication app = getMyApplication();
 		for (int i = 0; i < minutesLength; i++) {
 			ints[k] = (minutes[i] * 60) * coeff;
-			intDescriptions[k] = minutes[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
+			intDescriptions[k] = OsmAndFormatter.getFormattedDuration(minutes[i] * 60, app);
 			k++;
 		}
 		ListPreference lp = createListPreference(b, intDescriptions, ints, title, summary);
-		if(disable != null) {
+		if (disable != null) {
 			registerDisablePreference(b, getString(R.string.confirm_every_run), disable);
 		}
 		return lp;
 	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

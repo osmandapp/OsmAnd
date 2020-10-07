@@ -2,9 +2,7 @@ package net.osmand.plus.dialogs;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,8 +23,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.ContextMenuAdapter;
@@ -34,7 +31,6 @@ import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -44,20 +40,17 @@ import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityLayers;
-import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.ListStringPreference;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
-import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
@@ -66,7 +59,6 @@ import net.osmand.util.SunriseSunset;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -100,14 +92,15 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_WIDTH_ATTR;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
 
 public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
@@ -178,201 +171,12 @@ public class ConfigureMapMenu {
 		return customRules;
 	}
 
-	private final class LayerMenuListener extends OnRowItemClick {
-		private MapActivity ma;
-		private ContextMenuAdapter cm;
-
-		private LayerMenuListener(MapActivity ma, ContextMenuAdapter cm) {
-			this.ma = ma;
-			this.cm = cm;
-		}
-
-		private List<String> getAlreadySelectedGpx() {
-			GpxSelectionHelper selectedGpxHelper = ma.getMyApplication().getSelectedGpxHelper();
-			List<GpxSelectionHelper.SelectedGpxFile> selectedGpxFiles = selectedGpxHelper.getSelectedGPXFiles();
-
-			List<String> files = new ArrayList<>();
-			for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
-				files.add(file.getGpxFile().path);
-			}
-			if (selectedGpxFiles.isEmpty()) {
-				Map<GPXUtilities.GPXFile, Long> fls = selectedGpxHelper.getSelectedGpxFilesBackUp();
-				for(Map.Entry<GPXUtilities.GPXFile, Long> f : fls.entrySet()) {
-					if(!Algorithms.isEmpty(f.getKey().path)) {
-						File file = new File(f.getKey().path);
-						if(file.exists() && !file.isDirectory()) {
-							files.add(f.getKey().path);
-						}
-					}
-				}
-			}
-
-			return files;
-		}
-
-		@Override
-		public boolean onRowItemClick(final ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int pos) {
-			if (itemId == R.string.layer_poi) {
-				showPoiFilterDialog(adapter, adapter.getItem(pos));
-				return false;
-			} else if (itemId == R.string.layer_gpx_layer && cm.getItem(pos).getSelected()) {
-				showGpxSelectionDialog(adapter, adapter.getItem(pos));
-				return false;
-			} else if (itemId == R.string.shared_string_wikipedia) {
-				ma.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.WIKIPEDIA,
-						AndroidUtils.getCenterViewCoordinates(view));
-				return false;
-			} else if (itemId == R.string.rendering_category_transport) {
-				final ContextMenuItem item = adapter.getItem(pos);
-				TransportLinesMenu.showTransportsDialog(ma, new CallbackWithObject<Boolean>() {
-					@Override
-					public boolean processResult(Boolean result) {
-						if (item != null) {
-							item.setSelected(result);
-							item.setColorRes(result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-							adapter.notifyDataSetChanged();
-						}
-						return true;
-					}
-				});
-				boolean selected = TransportLinesMenu.isShowLines(ma.getMyApplication());
-				if (!selected && item != null) {
-					item.setSelected(true);
-					item.setColorRes(R.color.osmand_orange);
-					adapter.notifyDataSetChanged();
-				}
-				return false;
-			} else {
-				CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
-				if (btn != null && btn.getVisibility() == View.VISIBLE) {
-					btn.setChecked(!btn.isChecked());
-					cm.getItem(pos).setColorRes(btn.isChecked() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					adapter.notifyDataSetChanged();
-					return false;
-				} else {
-					return onContextMenuClick(adapter, itemId, pos, false, null);
-				}
-			}
-		}
-
-		@Override
-		public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
-			final OsmandSettings settings = ma.getMyApplication().getSettings();
-			final PoiFiltersHelper poiFiltersHelper = ma.getMyApplication().getPoiFilters();
-			final ContextMenuItem item = cm.getItem(pos);
-			if (item.getSelected() != null) {
-				item.setColorRes(isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-			}
-			if (itemId == R.string.layer_poi) {
-				poiFiltersHelper.clearSelectedPoiFilters(PoiTemplateList.POI);
-				if (isChecked) {
-					showPoiFilterDialog(adapter, adapter.getItem(pos));
-				} else {
-					adapter.getItem(pos).setDescription(
-							poiFiltersHelper.getSelectedPoiFiltersName(PoiTemplateList.POI));
-				}
-			} else if (itemId == R.string.layer_amenity_label) {
-				settings.SHOW_POI_LABEL.set(isChecked);
-			} else if (itemId == R.string.shared_string_favorites) {
-				settings.SHOW_FAVORITES.set(isChecked);
-			} else if (itemId == R.string.layer_gpx_layer) {
-				final GpxSelectionHelper selectedGpxHelper = ma.getMyApplication().getSelectedGpxHelper();
-				if (selectedGpxHelper.isShowingAnyGpxFiles()) {
-					selectedGpxHelper.clearAllGpxFilesToShow(true);
-					adapter.getItem(pos).setDescription(selectedGpxHelper.getGpxDescription());
-				} else {
-					showGpxSelectionDialog(adapter, adapter.getItem(pos));
-				}
-			} else if (itemId == R.string.shared_string_wikipedia) {
-				WikipediaPoiMenu.toggleWikipediaPoi(ma, isChecked, true,
-						new CallbackWithObject<Boolean>() {
-							@Override
-							public boolean processResult(Boolean selected) {
-								item.setSelected(selected);
-								item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-								item.setDescription(selected ? WikipediaPoiMenu.getLanguagesSummary(ma.getMyApplication()) : null);
-								adapter.notifyDataSetChanged();
-								return true;
-							}
-						});
-			} else if (itemId == R.string.rendering_category_transport) {
-				boolean selected = TransportLinesMenu.isShowLines(ma.getMyApplication());
-				TransportLinesMenu.toggleTransportLines(ma, !selected, new CallbackWithObject<Boolean>() {
-					@Override
-					public boolean processResult(Boolean result) {
-						item.setSelected(result);
-						item.setColorRes(result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-						adapter.notifyDataSetChanged();
-						return true;
-					}
-				});
-			} else if (itemId == R.string.map_markers) {
-				settings.SHOW_MAP_MARKERS.set(isChecked);
-			} else if (itemId == R.string.layer_map) {
-				if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
-					Intent intent = new Intent(ma, PluginActivity.class);
-					intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, OsmandRasterMapsPlugin.ID);
-					ma.startActivity(intent);
-				} else {
-					ContextMenuItem it = adapter.getItem(pos);
-					ma.getMapLayers().selectMapLayer(ma.getMapView(), it, adapter);
-				}
-			}
-			adapter.notifyDataSetChanged();
-			ma.getMapLayers().updateLayers(ma.getMapView());
-			ma.getMapView().refreshMap();
-			return false;
-		}
-
-		private void showGpxSelectionDialog(final ArrayAdapter<ContextMenuItem> adapter,
-											final ContextMenuItem item) {
-			AlertDialog dialog = ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(),
-					ma.getMapView());
-			dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					OsmandApplication app = ma.getMyApplication();
-					boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
-					item.setSelected(selected);
-					item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
-					item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					adapter.notifyDataSetChanged();
-				}
-			});
-		}
-
-		protected void showPoiFilterDialog(final ArrayAdapter<ContextMenuItem> adapter,
-										   final ContextMenuItem item) {
-			final PoiFiltersHelper poiFiltersHelper = ma.getMyApplication().getPoiFilters();
-			MapActivityLayers.DismissListener dismissListener =
-					new MapActivityLayers.DismissListener() {
-						@Override
-						public void dismiss() {
-							PoiFiltersHelper pf = ma.getMyApplication().getPoiFilters();
-							boolean selected = pf.isShowingAnyPoi(PoiTemplateList.POI);
-							item.setSelected(selected);
-							item.setDescription(pf.getSelectedPoiFiltersName(PoiTemplateList.POI));
-							item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-							adapter.notifyDataSetChanged();
-						}
-					};
-			if (poiFiltersHelper.isShowingAnyPoi(PoiTemplateList.POI)) {
-				ma.getMapLayers().showMultichoicePoiFilterDialog(ma.getMapView(),
-						dismissListener);
-			} else {
-				ma.getMapLayers().showSingleChoicePoiFilterDialog(ma.getMapView(),
-						dismissListener);
-			}
-		}
-	}
-
 	private void createLayersItems(List<RenderingRuleProperty> customRules, ContextMenuAdapter adapter,
 	                               final MapActivity activity, final int themeRes, final boolean nightMode) {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final int selectedProfileColorRes = settings.getApplicationMode().getIconColorInfo().getColor(nightMode);
-		final int selectedProfileColor = ContextCompat.getColor(app, selectedProfileColorRes);
-		LayerMenuListener l = new LayerMenuListener(activity, adapter);
+		MapLayerMenuListener l = new MapLayerMenuListener(activity, adapter);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(SHOW_CATEGORY_ID)
 				.setTitleId(R.string.shared_string_show, activity)
@@ -388,12 +192,13 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.SHOW_FAVORITES))
 				.setListener(l)
 				.createItem());
-		selected = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.POI);
+		PoiUIFilter wiki = app.getPoiFilters().getTopWikiPoiFilter();
+		selected = app.getPoiFilters().isShowingAnyPoi(wiki);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(POI_OVERLAY_ID)
 				.setTitleId(R.string.layer_poi, activity)
 				.setSelected(selected)
-				.setDescription(app.getPoiFilters().getSelectedPoiFiltersName(PoiTemplateList.POI))
+				.setDescription(app.getPoiFilters().getSelectedPoiFiltersName(wiki))
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
@@ -429,18 +234,6 @@ public class ConfigureMapMenu {
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
 
-		selected = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.WIKI);
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(WIKIPEDIA_ID)
-				.setTitleId(R.string.shared_string_wikipedia, activity)
-				.setDescription(selected ? WikipediaPoiMenu.getLanguagesSummary(app) : null)
-				.setSelected(selected)
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_plugin_wikipedia)
-				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setItemDeleteAction(makeDeleteAction(settings.SHOW_WIKIPEDIA_POI))
-				.setListener(l).createItem());
-
 		selected = settings.SHOW_MAP_MARKERS.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAP_MARKERS_ID)
@@ -455,7 +248,7 @@ public class ConfigureMapMenu {
 				.setId(MAP_SOURCE_ID)
 				.setTitleId(R.string.layer_map, activity)
 				.setIcon(R.drawable.ic_world_globe_dark)
-				.setDescription(settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get() : null)
+				.setDescription(settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get().replace(IndexConstants.SQLITE_EXT, "") : null)
 				.setItemDeleteAction(makeDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES))
 				.setListener(l).createItem());
 
@@ -488,10 +281,12 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
 				.setId(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_renderer, activity)
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAP_STYLE_ID)
-				.setDescription(getRenderDescr(activity)).setLayout(R.layout.list_item_single_line_descrition_narrow)
-				.setIcon(R.drawable.ic_map).setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setTitleId(R.string.map_widget_renderer, activity)
+				.setLayout(R.layout.list_item_single_line_descrition_narrow)
+				.setIcon(R.drawable.ic_map)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
@@ -501,11 +296,18 @@ public class ConfigureMapMenu {
 					}
 				})
 				.setItemDeleteAction(makeDeleteAction(settings.RENDERER))
+				.setOnUpdateCallback(new ContextMenuItem.OnUpdateCallback() {
+					@Override
+					public void onUpdateMenuItem(ContextMenuItem item) {
+						String renderDescr = getRenderDescr(app);
+						item.setDescription(renderDescr);
+					}
+				})
 				.createItem());
 
 		String description = "";
 		SunriseSunset sunriseSunset = activity.getMyApplication().getDaynightHelper().getSunriseSunset();
-		if (sunriseSunset != null) {
+		if (sunriseSunset != null && sunriseSunset.getSunrise() != null && sunriseSunset.getSunset() != null) {
 			DateFormat dateFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
 			String sunriseTime = dateFormat.format(sunriseSunset.getSunrise());
 			String sunsetTime = dateFormat.format(sunriseSunset.getSunset());
@@ -530,6 +332,9 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
+						if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+							return false;
+						}
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						bld.setTitle(R.string.daynight);
@@ -571,6 +376,9 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
+						if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+							return false;
+						}
 						final OsmandMapTileView view = activity.getMapView();
 						final OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 						AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
@@ -639,6 +447,9 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
+						if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+							return false;
+						}
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						// test old descr as title
@@ -683,6 +494,9 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
+						if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+							return false;
+						}
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 
@@ -773,12 +587,12 @@ public class ConfigureMapMenu {
 				.createItem());
 
 		props = createProperties(customRules, null, R.string.rendering_category_details, R.drawable.ic_action_layers,
-				"details", null, adapter, activity, true, DETAILS_ID, themeRes, nightMode, selectedProfileColor);
+				UI_CATEGORY_DETAILS, null, adapter, activity, true, DETAILS_ID, themeRes, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, null, R.string.rendering_category_hide, R.drawable.ic_action_hide,
-				"hide", null, adapter, activity, true, HIDE_ID, themeRes, nightMode, selectedProfileColor);
+				UI_CATEGORY_HIDE, null, adapter, activity, true, HIDE_ID, themeRes, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -790,7 +604,7 @@ public class ConfigureMapMenu {
 			}
 		}
 		props = createProperties(customRules, customRulesIncluded, R.string.rendering_category_routes, R.drawable.ic_action_map_routes,
-				"routes", null, adapter, activity, true, ROUTES_ID, themeRes, nightMode, selectedProfileColor);
+				UI_CATEGORY_ROUTES, null, adapter, activity, true, ROUTES_ID, themeRes, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -802,7 +616,7 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	public static String[] mapNamesIds = new String[]{"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
+	public static String[] mapNamesIds = new String[]{"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
 
 	public static String[] getSortedMapNamesIds(Context ctx, String[] ids, String[] values) {
 		final Map<String, String> mp = new HashMap<>();
@@ -848,15 +662,15 @@ public class ConfigureMapMenu {
 											 final List<RenderingRuleProperty> customRulesIncluded,
 											 @StringRes final int strId,
 											 @DrawableRes final int icon,
-											 String category,
+											 final String category,
 											 final ListStringPreference defaultSettings,
 											 final ContextMenuAdapter adapter,
 											 final MapActivity activity,
 											 final boolean useDescription,
 											 final String id,
-	                                         final int themeRes,
-	                                         final boolean nightMode,
-	                                         @ColorInt final int selectedProfileColor) {
+											 final int themeRes,
+											 final boolean nightMode,
+											 @ColorInt final int selectedProfileColor) {
 
 		final List<RenderingRuleProperty> ps = new ArrayList<>();
 		final List<CommonPreference<Boolean>> prefs = new ArrayList<>();
@@ -904,8 +718,12 @@ public class ConfigureMapMenu {
 						refreshMapComplete(activity);
 						activity.getMapLayers().updateLayers(activity.getMapView());
 					} else {
-						showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
-								useDescription, defaultSettings, true, customRulesIncluded, themeRes, nightMode, selectedProfileColor);
+						if (UI_CATEGORY_DETAILS.equals(category)) {
+							DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, a, adapter, pos);
+						} else {
+							showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
+									useDescription, defaultSettings, true, customRulesIncluded, themeRes, nightMode, selectedProfileColor);
+						}
 					}
 					return false;
 				}
@@ -992,7 +810,9 @@ public class ConfigureMapMenu {
 	                                     final int themeRes,
 	                                     final boolean nightMode,
 	                                     @ColorInt final int selectedProfileColor) {
-
+		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+			return;
+		}
 		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		boolean[] checkedItems = new boolean[prefs.size()];
 		final boolean[] tempPrefs = new boolean[prefs.size()];
@@ -1135,13 +955,13 @@ public class ConfigureMapMenu {
 		dialog.show();
 	}
 
-	protected String getRenderDescr(final MapActivity activity) {
-		RendererRegistry rr = activity.getMyApplication().getRendererRegistry();
+	protected String getRenderDescr(OsmandApplication app) {
+		RendererRegistry rr = app.getRendererRegistry();
 		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
 		if (storage == null) {
 			return "";
 		}
-		String translation = RendererRegistry.getTranslatedRendererName(activity, storage.getName());
+		String translation = RendererRegistry.getTranslatedRendererName(app, storage.getName());
 		return translation == null ? storage.getName() : translation;
 	}
 
@@ -1246,7 +1066,10 @@ public class ConfigureMapMenu {
 
 						@Override
 						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad,
-														  final int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
+						                                  final int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
+							if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+								return false;
+							}
 							AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 							// test old descr as title
 							b.setTitle(propertyDescr);
@@ -1299,230 +1122,35 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	private class StringSpinnerArrayAdapter extends ArrayAdapter<String> {
+	private static class StringSpinnerArrayAdapter extends ArrayAdapter<String> {
 
 		private boolean nightMode;
 
 		public StringSpinnerArrayAdapter(Context context, boolean nightMode) {
 			super(context, android.R.layout.simple_spinner_item);
 			setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			OsmandApplication app = (OsmandApplication )getContext().getApplicationContext();
 			this.nightMode = nightMode;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			TextView label = (TextView) super.getView(position, convertView, parent);
-
-			String text = getItem(position);
-			label.setText(text);
-			label.setTextColor(nightMode ?
-					ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_dark) : ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_light));
-			return label;
-		}
-
-		@Override
-		public View getDropDownView(int position, View convertView, ViewGroup parent) {
-			TextView label = (TextView) super.getDropDownView(position, convertView, parent);
-
-			String text = getItem(position);
-			label.setText(text);
-			label.setTextColor(nightMode ?
-						ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_dark) : ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_light));
-
-			return label;
-		}
-	}
-
-	public static class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
-
-		private OsmandApplication app;
-		private int currentColor;
-		private GpxAppearanceAdapterType adapterType = GpxAppearanceAdapterType.TRACK_WIDTH_COLOR;
-
-		public enum GpxAppearanceAdapterType {
-			TRACK_WIDTH,
-			TRACK_COLOR,
-			TRACK_WIDTH_COLOR
-		}
-
-		public GpxAppearanceAdapter(Context context, String currentColorValue, GpxAppearanceAdapterType adapterType) {
-			super(context, R.layout.rendering_prop_menu_item);
-			this.app = (OsmandApplication) getContext().getApplicationContext();
-			this.adapterType = adapterType;
-			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			this.currentColor = parseTrackColor(renderer, currentColorValue);
-			init();
-		}
-
-		public GpxAppearanceAdapter(Context context, int currentColor, GpxAppearanceAdapterType adapterType) {
-			super(context, R.layout.rendering_prop_menu_item);
-			this.app = (OsmandApplication) getContext().getApplicationContext();
-			this.adapterType = adapterType;
-			this.currentColor = currentColor;
-			init();
-		}
-
-		public void init() {
-			RenderingRuleProperty trackWidthProp = null;
-			RenderingRuleProperty trackColorProp = null;
-			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			if (renderer != null) {
-				if (adapterType == GpxAppearanceAdapterType.TRACK_WIDTH || adapterType == GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
-					trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
-				}
-				if (adapterType == GpxAppearanceAdapterType.TRACK_COLOR || adapterType == GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
-					trackColorProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_COLOR_ATTR);
-				}
-			}
-
-			if (trackWidthProp != null) {
-				AppearanceListItem item = new AppearanceListItem(CURRENT_TRACK_WIDTH_ATTR, "",
-						SettingsActivity.getStringPropertyValue(getContext(), trackWidthProp.getDefaultValueDescription()));
-				add(item);
-				for (int j = 0; j < trackWidthProp.getPossibleValues().length; j++) {
-					item = new AppearanceListItem(CURRENT_TRACK_WIDTH_ATTR,
-							trackWidthProp.getPossibleValues()[j],
-							SettingsActivity.getStringPropertyValue(getContext(), trackWidthProp.getPossibleValues()[j]));
-					add(item);
-				}
-				item.setLastItem(true);
-			}
-			if (trackColorProp != null) {
-				AppearanceListItem item = new AppearanceListItem(CURRENT_TRACK_COLOR_ATTR, "",
-						SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getDefaultValueDescription()),
-						parseTrackColor(renderer, ""));
-				add(item);
-				for (int j = 0; j < trackColorProp.getPossibleValues().length; j++) {
-					item = new AppearanceListItem(CURRENT_TRACK_COLOR_ATTR,
-							trackColorProp.getPossibleValues()[j],
-							SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getPossibleValues()[j]),
-							parseTrackColor(renderer, trackColorProp.getPossibleValues()[j]));
-					add(item);
-				}
-				item.setLastItem(true);
-			}
-		}
-
-		public static int parseTrackColor(RenderingRulesStorage renderer, String colorName) {
-			int defaultColor = -1;
-			RenderingRule gpxRule = null;
-			if (renderer != null) {
-				gpxRule = renderer.getRenderingAttributeRule("gpx");
-			}
-			if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
-				List<RenderingRule> rules = gpxRule.getIfElseChildren().get(0).getIfElseChildren();
-				for (RenderingRule r : rules) {
-					String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
-					if (!Algorithms.isEmpty(cName) && cName.equals(colorName)) {
-						return r.getIntPropertyValue(COLOR_ATTR);
-					}
-					if (cName == null && defaultColor == -1) {
-						defaultColor = r.getIntPropertyValue(COLOR_ATTR);
-					}
-				}
-			}
-			return defaultColor;
-		}
-
-		public static String parseTrackColorName(RenderingRulesStorage renderer, int color) {
-			RenderingRule gpxRule = null;
-			if (renderer != null) {
-				gpxRule = renderer.getRenderingAttributeRule("gpx");
-			}
-			if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
-				List<RenderingRule> rules = gpxRule.getIfElseChildren().get(0).getIfElseChildren();
-				for (RenderingRule r : rules) {
-					String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
-					if (!Algorithms.isEmpty(cName) && color == r.getIntPropertyValue(COLOR_ATTR)) {
-						return cName;
-					}
-				}
-			}
-			return Algorithms.colorToString(color);
 		}
 
 		@NonNull
 		@Override
 		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-			AppearanceListItem item = getItem(position);
-			View v = convertView;
-			if (v == null) {
-				v = LayoutInflater.from(getContext()).inflate(R.layout.rendering_prop_menu_item, null);
-			}
-			if (item != null) {
-				TextView textView = (TextView) v.findViewById(R.id.text1);
-				textView.setText(item.localizedValue);
-				if (item.attrName == CURRENT_TRACK_WIDTH_ATTR) {
-					int iconId;
-					if (item.value.equals("bold")) {
-						iconId = R.drawable.ic_action_gpx_width_bold;
-					} else if (item.value.equals("medium")) {
-						iconId = R.drawable.ic_action_gpx_width_medium;
-					} else {
-						iconId = R.drawable.ic_action_gpx_width_thin;
-					}
-					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-							app.getUIUtilities().getPaintedIcon(iconId, currentColor), null);
-				} else {
-					if (item.color == -1) {
-						textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-								app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle), null);
-					} else {
-						textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-								app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, item.color), null);
-					}
-				}
-				textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(getContext(), 10f));
-				v.findViewById(R.id.divider).setVisibility(item.lastItem
-						&& position < getCount() - 1 ? View.VISIBLE : View.GONE);
-			}
-			return v;
-		}
-	}
-
-	public static class AppearanceListItem {
-		private String attrName;
-		private String value;
-		private String localizedValue;
-		private int color;
-		private boolean lastItem;
-
-		public AppearanceListItem(String attrName, String value, String localizedValue) {
-			this.attrName = attrName;
-			this.value = value;
-			this.localizedValue = localizedValue;
+			TextView label = (TextView) super.getView(position, convertView, parent);
+			setupLabel(label, getItem(position));
+			return label;
 		}
 
-		public AppearanceListItem(String attrName, String value, String localizedValue, int color) {
-			this.attrName = attrName;
-			this.value = value;
-			this.localizedValue = localizedValue;
-			this.color = color;
+		@Override
+		public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
+			TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+			setupLabel(label, getItem(position));
+			return label;
 		}
 
-		public String getAttrName() {
-			return attrName;
-		}
-
-		public String getValue() {
-			return value;
-		}
-
-		public String getLocalizedValue() {
-			return localizedValue;
-		}
-
-		public int getColor() {
-			return color;
-		}
-
-		public boolean isLastItem() {
-			return lastItem;
-		}
-
-		public void setLastItem(boolean lastItem) {
-			this.lastItem = lastItem;
+		private void setupLabel(TextView label, String text) {
+			int colorId = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+			label.setText(text);
+			label.setTextColor(ContextCompat.getColorStateList(getContext(), colorId));
 		}
 	}
 }

@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,7 +11,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.ClipboardManager;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -66,15 +66,14 @@ import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.RulerMode;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.RulerControlLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
-import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
+import net.osmand.plus.views.layers.RulerControlLayer;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.ExitInfo;
-import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -161,54 +160,6 @@ public class MapInfoWidgetsFactory {
 			}
 		});
 		return gpsInfoControl;
-	}
-
-	public static class CompassRulerControlWidgetState extends WidgetState {
-
-		public static final int COMPASS_CONTROL_WIDGET_STATE_SHOW = R.id.compass_ruler_control_widget_state_show;
-		public static final int COMPASS_CONTROL_WIDGET_STATE_HIDE = R.id.compass_ruler_control_widget_state_hide;
-
-		private final OsmandPreference<Boolean> showCompass;
-
-		public CompassRulerControlWidgetState(OsmandApplication ctx) {
-			super(ctx);
-			showCompass = ctx.getSettings().SHOW_COMPASS_CONTROL_RULER;
-		}
-
-		@Override
-		public int getMenuTitleId() {
-			return R.string.map_widget_ruler_control;
-		}
-
-		@Override
-		public int getMenuIconId() {
-			return R.drawable.ic_action_ruler_circle;
-		}
-
-		@Override
-		public int getMenuItemId() {
-			return showCompass.get() ? COMPASS_CONTROL_WIDGET_STATE_SHOW : COMPASS_CONTROL_WIDGET_STATE_HIDE;
-		}
-
-		@Override
-		public int[] getMenuTitleIds() {
-			return new int[]{R.string.show_compass_ruler, R.string.hide_compass_ruler};
-		}
-
-		@Override
-		public int[] getMenuIconIds() {
-			return new int[]{R.drawable.ic_action_compass_widget, R.drawable.ic_action_compass_widget_hide};
-		}
-
-		@Override
-		public int[] getMenuItemIds() {
-			return new int[]{COMPASS_CONTROL_WIDGET_STATE_SHOW, COMPASS_CONTROL_WIDGET_STATE_HIDE};
-		}
-
-		@Override
-		public void changeState(int stateId) {
-			showCompass.set(stateId == COMPASS_CONTROL_WIDGET_STATE_SHOW);
-		}
 	}
 
 	public TextInfoWidget createRulerControl(final MapActivity map) {
@@ -932,14 +883,14 @@ public class MapInfoWidgetsFactory {
 		private View waypointInfoBar;
 		private LocationPointWrapper lastPoint;
 		private TurnDrawable turnDrawable;
-		private boolean showMarker;
 		private int shadowRad;
 		RouteCalculationResult.NextDirectionInfo calc1;
 
 		private static final Log LOG = PlatformUtil.getLog(TopTextView.class);
+		private boolean showMarker;
 
 		public TopTextView(OsmandApplication app, MapActivity map) {
-			turnDrawable = new NextTurnInfoWidget.TurnDrawable(map, true);
+			turnDrawable = new TurnDrawable(map, true);
 			topBar = map.findViewById(R.id.map_top_bar);
 			addressText = (TextView) map.findViewById(R.id.map_address_text);
 			addressTextShadow = (TextView) map.findViewById(R.id.map_address_text_shadow);
@@ -982,138 +933,84 @@ public class MapInfoWidgetsFactory {
 		}
 
 
-		public boolean updateInfo(DrawSettings d) {
-			String text = null;
-			TurnType[] type = new TurnType[1];
-			boolean showNextTurn = false;
-			boolean showMarker = this.showMarker;
-			boolean showExitInfo = false;
-			boolean showShield = false;
-			boolean imminentTurn = false;
-			ExitInfo exitInfo = null;
-			RouteDataObject object = null;
 
+		public boolean updateInfo(DrawSettings d) {
+			RoutingHelper.CurrentStreetName streetName = null;
+			boolean showClosestWaypointFirstInAddress = true;
 			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
 				if (routingHelper.isFollowingMode()) {
 					if (settings.SHOW_STREET_NAME.get()) {
 						RouteCalculationResult.NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc1, true);
-						text = routingHelper.getCurrentName(type, nextDirInfo);
-						if (text == null) {
-							text = "";
-						} else {
-							if (type[0] == null) {
-								showMarker = true;
-							} else {
-								turnDrawable.setColor(R.color.nav_arrow);
-							}
-						}
-
-						RouteDirectionInfo directionInfo = nextDirInfo.directionInfo;
-
-						if (nextDirInfo.imminent >= 0) {
-							imminentTurn = true;
-						} else {
-							imminentTurn = false;
-						}
-
-						if (directionInfo != null && directionInfo.getExitInfo() != null) {
-							exitInfo = directionInfo.getExitInfo();
-							showExitInfo = true;
-						} else {
-							showExitInfo = false;
-						}
-
-						if (showExitInfo) {
-							if(!Algorithms.isEmpty(exitInfo.getExitStreetName())) {
-								text = exitInfo.getExitStreetName();
-							}
-						}
-
-						if (directionInfo != null && directionInfo.getRouteDataObject() != null) {
-							object = directionInfo.getRouteDataObject();
-							showShield = true;
-						}
+						streetName = routingHelper.getCurrentName(nextDirInfo);
+						turnDrawable.setColor(R.color.nav_arrow);
 					}
 				} else {
 					int di = MapRouteInfoMenu.getDirectionInfo();
-					if (di >= 0 && map.getMapRouteInfoMenu().isVisible() &&
-							di < routingHelper.getRouteDirections().size()) {
-						showNextTurn = true;
+					if (di >= 0 && map.getMapRouteInfoMenu().isVisible() && di < routingHelper.getRouteDirections().size()) {
+						showClosestWaypointFirstInAddress = false;
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-						type[0] = next.getTurnType();
+						streetName = routingHelper.getCurrentName(routingHelper.getNextRouteDirectionInfo(calc1, true));
 						turnDrawable.setColor(R.color.nav_arrow_distant);
-						text = RoutingHelper.formatStreetName(next.getStreetName(), null, next.getDestinationName(), "»");
-						if (text == null) {
-							text = "";
-						}
-					} else {
-						text = null;
 					}
 				}
 			} else if (map.getMapViewTrackingUtilities().isMapLinkedToLocation() &&
 					settings.SHOW_STREET_NAME.get()) {
+				streetName = new RoutingHelper.CurrentStreetName();
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
 					Location lastKnownLocation = locationProvider.getLastKnownLocation();
-					text = RoutingHelper.formatStreetName(
+					streetName.text = RoutingHelper.formatStreetName(
 							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()),
 							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
 							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
 							"»");
-				}
-				if (text == null) {
-					text = "";
-				} else {
-					Location lastKnownLocation = locationProvider.getLastKnownLocation();
-					if (!Algorithms.isEmpty(text) && lastKnownLocation != null) {
-						double dist =
-								CurrentPositionHelper.getOrthogonalDistance(rt, lastKnownLocation);
+					if (!Algorithms.isEmpty(streetName.text) && lastKnownLocation != null) {
+						double dist = CurrentPositionHelper.getOrthogonalDistance(rt, lastKnownLocation);
 						if (dist < 50) {
-							showMarker = true;
+							streetName.showMarker = true;
 						} else {
-							text = map.getResources().getString(R.string.shared_string_near) + " " + text;
+							streetName.text = map.getResources().getString(R.string.shared_string_near) + " " + streetName.text;
 						}
 					}
 				}
 			}
 			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls() || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
 				updateVisibility(false);
-			} else if (!showNextTurn && updateWaypoint()) {
+			} else if (showClosestWaypointFirstInAddress && updateWaypoint()) {
 				updateVisibility(true);
 				AndroidUiHelper.updateVisibility(addressText, false);
 				AndroidUiHelper.updateVisibility(addressTextShadow, false);
-			} else if (text == null) {
+				AndroidUiHelper.updateVisibility(turnIcon, false);
+				AndroidUiHelper.updateVisibility(shieldIcon, false);
+				AndroidUiHelper.updateVisibility(exitRefText, false);
+			} else if (streetName == null) {
 				updateVisibility(false);
 			} else {
 				updateVisibility(true);
 				AndroidUiHelper.updateVisibility(waypointInfoBar, false);
 				AndroidUiHelper.updateVisibility(addressText, true);
 				AndroidUiHelper.updateVisibility(addressTextShadow, shadowRad > 0);
-				boolean update = turnDrawable.setTurnType(type[0]) || showMarker != this.showMarker;
-				this.showMarker = showMarker;
-				if (showShield && setRoadShield(shieldIcon, object)) {
+
+				if (streetName.shieldObject != null && streetName.shieldObject.nameIds != null
+						&& setRoadShield(shieldIcon, streetName.shieldObject)) {
 					AndroidUiHelper.updateVisibility(shieldIcon, true);
 				} else {
 					AndroidUiHelper.updateVisibility(shieldIcon, false);
 				}
 
-				if (showExitInfo) {
-					String exitRef = exitInfo.getRef();
-					if (!Algorithms.isEmpty(exitRef) && imminentTurn) {
-						exitRefText.setText(exitRef);
-						AndroidUiHelper.updateVisibility(exitRefText, true);
-					} else {
-						AndroidUiHelper.updateVisibility(exitRefText, false);
-					}
+				if (!Algorithms.isEmpty(streetName.exitRef) ) {
+					exitRefText.setText(streetName.exitRef);
+					AndroidUiHelper.updateVisibility(exitRefText, true);
 				} else {
 					AndroidUiHelper.updateVisibility(exitRefText, false);
 				}
-				if (update) {
-					if (type[0] != null) {
+				if (turnDrawable.setTurnType(streetName.turnType) || streetName.showMarker != this.showMarker) {
+					this.showMarker = streetName.showMarker;
+					if (streetName.turnType != null) {
 						turnIcon.invalidateDrawable(turnDrawable);
 						turnIcon.setImageDrawable(turnDrawable);
 						AndroidUiHelper.updateVisibility(turnIcon, true);
-					} else if (showMarker) {
+					} else if (streetName.showMarker) {
 						Drawable marker = map.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, R.color.color_myloc_distance);
 						turnIcon.setImageDrawable(marker);
 						AndroidUiHelper.updateVisibility(turnIcon, true);
@@ -1121,9 +1018,12 @@ public class MapInfoWidgetsFactory {
 						AndroidUiHelper.updateVisibility(turnIcon, false);
 					}
 				}
-				if (!text.equals(addressText.getText().toString())) {
-					addressTextShadow.setText(text);
-					addressText.setText(text);
+				if(streetName.text == null || streetName.text.isEmpty()) {
+					addressTextShadow.setText("");
+					addressText.setText("");
+				} else if (!streetName.text.equals(addressText.getText().toString())) {
+					addressTextShadow.setText(streetName.text);
+					addressText.setText(streetName.text );
 					return true;
 				}
 			}
@@ -1326,13 +1226,17 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			});
+			AndroidUtils.setTextDirection(latitudeText, false);
+			AndroidUtils.setTextDirection(longitudeText, false);
 		}
 
 		@SuppressLint("SetTextI18n")
 		public boolean updateInfo() {
 			boolean visible = settings.SHOW_COORDINATES_WIDGET.get() && map.getContextMenu().shouldShowTopControls()
 					&& map.getMapRouteInfoMenu().shouldShowTopControls() && !map.isTopToolbarActive()
-					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible;
+					&& !map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
+					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible
+					&& !MapRouteInfoMenu.followTrackVisible;
 
 			updateVisibility(visible);
 			if (visible) {

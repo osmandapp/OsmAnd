@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.Version;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
@@ -110,6 +111,8 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 			descr.append("\n").append("— ").append(feature.toHumanString(ctx));
 		}
 		infoDescr.setText(descr);
+		TextViewEx inappDescr = (TextViewEx) view.findViewById(R.id.inapp_descr);
+		inappDescr.setText(Version.isHuawei(app) ? R.string.osm_live_payment_desc_hw : R.string.osm_live_payment_desc);
 
 		osmLiveButton = view.findViewById(R.id.card_button);
 

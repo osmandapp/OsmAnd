@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
@@ -24,12 +23,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
+import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.Map;
 
 public class WptPtEditorFragment extends PointEditorFragment {
@@ -251,7 +251,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 					}
 				} else {
 					addWpt(gpx, description, name, category, color);
-					new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
 			}
@@ -284,7 +284,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 				} else {
 					gpx.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(),
 							System.currentTimeMillis(), description, name, category, color);
-					new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
 			}
@@ -309,7 +309,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 							savingTrackHelper.deletePointData(wpt);
 						} else {
 							gpx.deleteWptPt(wpt);
-							new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+							saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
 						}
 						syncGpx(gpx);
 					}
@@ -365,7 +365,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public Drawable getNameIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), getPointColor(), false, wpt);
+		return PointImageDrawable.getFromWpt(getMapActivity(), getPointColor(), false, wpt);
 	}
 
 	@Override
@@ -378,28 +378,19 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		return color == 0 ? defaultColor : color;
 	}
 
-	private static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
-		private final OsmandApplication app;
-		private final GPXFile gpx;
-		private final boolean gpxSelected;
+	private void saveGpx(final OsmandApplication app, final GPXFile gpxFile, final boolean gpxSelected) {
+		new SaveGpxAsyncTask(gpxFile, new SaveGpxListener() {
+			@Override
+			public void gpxSavingStarted() {
 
-		SaveGpxAsyncTask(OsmandApplication app, GPXFile gpx, boolean gpxSelected) {
-			this.app = app;
-			this.gpx = gpx;
-			this.gpxSelected = gpxSelected;
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			if (!gpxSelected) {
-				app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
 			}
-		}
+
+			@Override
+			public void gpxSavingFinished(Exception errorMessage) {
+				if (errorMessage == null && !gpxSelected) {
+					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
+				}
+			}
+		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 }

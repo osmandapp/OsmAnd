@@ -242,7 +242,7 @@
     <string name="poi_hockey">Hockey</string>
     <string name="poi_horse_racing">Cursas de sos caddos</string>
     <string name="poi_ice_skating">Patinàgiu in s\'astra</string>
-    <string name="poi_korfbal">Korfbal</string>
+    <string name="poi_korfbal">Korfball</string>
     <string name="poi_sport_multi">Prus isports</string>
     <string name="poi_paddle_tennis">Paddle tènnis</string>
     <string name="poi_pelota">Pelota</string>
@@ -1010,7 +1010,7 @@
     <string name="poi_toll_hgv_yes">Pedàgiu pro veìculos pesantes</string>
     <string name="poi_information_bicyclemap">Mapa tziclìstica</string>
     <string name="poi_water_characteristic_mineral">Minerale</string>
-    <string name="poi_water_characteristic_mud">Caraterìsica de s’abba: ludu</string>
+    <string name="poi_water_characteristic_mud">Ludu</string>
     <string name="poi_water_characteristic_sulfuric">Solfòrica</string>
     <string name="poi_water_point">Puntu de abba</string>
     <string name="poi_cuisine">Coghina</string>
@@ -1229,7 +1229,7 @@
     <string name="poi_tactile_paving_yes">Eja</string>
     <string name="poi_tactile_paving_no">Chene pamentu tàtile</string>
     <string name="poi_traffic_signals_sound_yes">Eja</string>
-    <string name="poi_traffic_signals_sound_no">Nono</string>
+    <string name="poi_traffic_signals_sound_no">Sonu: nono</string>
     <string name="poi_traffic_signals_sound_walk">Petzi cando est possìbile colare</string>
     <string name="poi_services">Àrea de servìtziu</string>
     <string name="poi_historic_period_nuragic">Època istòrica: nuràgica</string>
@@ -1248,7 +1248,7 @@
     <string name="poi_historic_period_old_kingdom">Època istòrica: rennu antigu (2686 – 2181 AC)</string>
     <string name="poi_historic_period_first_intermediate_period">Època istòrica: primu perìodu intermèdiu (2181 – 2055 AC)</string>
     <string name="poi_historic_period_second_intermediate_period">Època istòrica: segundu perìodu intermèdiu (1650 – 1550 AC)</string>
-    <string name="poi_historic_period_third_intermediate_period">"Època istòrica: tertzu perìodu intermèdiu (1069 – 664 AC) "</string>
+    <string name="poi_historic_period_third_intermediate_period">Època istòrica: tertzu perìodu intermèdiu (1069 – 664 AC)</string>
     <string name="poi_historic_period_first_persian_period">Època istòrica: primu perìodu persianu</string>
     <string name="poi_historic_period_late_period">Època istòrica: perìodu bassu (664 – 332 AC)</string>
     <string name="poi_historic_period_second_persian_period">Època istòrica: segundu perìodu persianu</string>
@@ -1912,7 +1912,7 @@
     <string name="poi_payment_gift_card_no">No aztetat cartas pro donos</string>
     <string name="poi_payment_golden_crown_yes">Golden Crown</string>
     <string name="poi_payment_golden_crown_no">No aztetat cartas Golden Crown</string>
-    <string name="poi_payment_pro100_yes">"PRO100 "</string>
+    <string name="poi_payment_pro100_yes">PRO100</string>
     <string name="poi_payment_pro100_no">No aztetat cartas PRO100</string>
     <string name="poi_payment_union_card_yes">Union Card</string>
     <string name="poi_payment_union_card_no">No aztetat Union Card</string>
@@ -2215,7 +2215,7 @@
     <string name="poi_fuel_100ll">Carburante 100LL</string>
     <string name="poi_fuel_autogas">Autogas</string>
     <string name="poi_fuel_jeta1">Carburante Jet A-1</string>
-    <string name="poi_fuel_adblue">Carburante AdBlue</string>
+    <string name="poi_fuel_adblue">AdBlue - additivu de iscàrrigu diesel</string>
     <string name="poi_fuel_wood">Combustìbile: linna</string>
     <string name="poi_fuel_charcoal">Combustìbile: carbone vegetale</string>
     <string name="poi_fuel_coal">Combustìbile: carbone</string>
@@ -2955,8 +2955,8 @@
     <string name="poi_xmas_tree">Àrbore de Nadale</string>
     <string name="poi_xmas_day_date">Pasca de Nadale: perìodu pro s\'eventu</string>
     <string name="poi_xmas_note">Pasca de Nadale: nota</string>
-    <string name="poi_xmas_opening_hours">"Pasca de Nadale:  oràriu de abertura"</string>
-    <string name="poi_xmas_location">"Pasca de Nadale:  positzione"</string>
+    <string name="poi_xmas_opening_hours">Pasca de Nadale: oràriu de abertura</string>
+    <string name="poi_xmas_location">Pasca de Nadale: positzione</string>
     <string name="poi_xmas_url">Pasca de Nadale: situ web</string>
     <string name="poi_public_bookcase">Libreria pùblica</string>
     <string name="poi_public_bookcase_type_phone_box">Casta: cabina telefònica</string>
@@ -2973,8 +2973,7 @@
     <string name="poi_cuisine_chicken">Puddu</string>
     <string name="poi_cuisine_ice_cream">Geladu</string>
     <string name="poi_cuisine_sushi">Sushi</string>
-    <string name="poi_cuisine_fish_and_chips">Pische e patatas fritas (Fish and chips)
-\n</string>
+    <string name="poi_cuisine_fish_and_chips">Pische e patatas fritas (Fish and chips)</string>
     <string name="poi_cuisine_seafood">Frutos de mare</string>
     <string name="poi_cuisine_barbecue">Barbecue</string>
     <string name="poi_cuisine_noodle">Ispaghitos (noodles) orientales</string>
@@ -3135,8 +3134,7 @@
     <string name="poi_cuisine_shawarma">Shawarma</string>
     <string name="poi_gambling_lottery">Loteria</string>
     <string name="poi_gambling_pachinko">Pachinko</string>
-    <string name="poi_gambling_slot_machines">Machineddas (slot machines)
-\n</string>
+    <string name="poi_gambling_slot_machines">Machineddas (slot machines)</string>
     <string name="poi_gambling_betting">Iscummissas</string>
     <string name="poi_gambling_bingo">Bingo</string>
     <string name="poi_nutrition_supplements">Integradores alimentares</string>
@@ -3723,7 +3721,7 @@
     <string name="poi_craft_floorer">Pamentadore</string>
     <string name="poi_craft_bakery">Furru de su pane</string>
     <string name="poi_craft_cabinet_maker">Ebanista</string>
-    <string name="poi_charge">Tarifa</string>
+    <string name="poi_charge">Càrriga</string>
     <string name="poi_pet_grooming">Toeletadura pro animales domèsticos</string>
     <string name="poi_atm_yes">ATM: eja</string>
     <string name="poi_cash_withdrawal_bank_card">Prelievu de dinare</string>
@@ -3788,7 +3786,7 @@
     <string name="poi_shop_security">Butega de artìculos pro sa seguresa</string>
     <string name="poi_bowling_alley">Tzentru pro su bowling</string>
     <string name="poi_piste_ref">Nùmeru de referèntzia de sa pista</string>
-    <string name="poi_resort_hunting">Base pro sa cassa</string>
+    <string name="poi_resort_hunting">Base de cassa</string>
     <string name="poi_dive_centre">Tzentru pro sas imbèrghidas in s\'abba</string>
     <string name="poi_sms">SMS</string>
     <string name="poi_video_telephone">Vìdeu</string>
@@ -3813,12 +3811,34 @@
     <string name="poi_seamark_water_level_above_mwl">Raportu cun su livellu de s\'abba: in foras de su livellu mèdiu de s\'abba</string>
     <string name="poi_seamark_water_level_below_mwl">Raportu cun su livellu de s\'abba: in suta de su livellu mèdiu de s\'abba</string>
     <string name="poi_seamark_obstruction">Tapadura</string>
-    <string name="poi_drinking_water_refill_yes">Ricàrica de s\'abba potàbile: eja</string>
-    <string name="poi_drinking_water_refill_no">Ricàrica de s\'abba potàbile: nono</string>
-    <string name="poi_drinking_water_refill_network">Retza de ricàrica de s\'abba potàbile</string>
+    <string name="poi_drinking_water_refill_yes">Eja</string>
+    <string name="poi_drinking_water_refill_no">Ricàrriga de abba potàbile: nono</string>
+    <string name="poi_drinking_water_refill_network">Retza de ricàrriga de abba potàbile</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sutzione</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizada</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Abbas suta de terra</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Abba suta de terra</string>
     <string name="poi_fire_hydrant_type_pipe">Pompa</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressione</string>
+    <string name="poi_pump_status_missing_beam">Istadu de sa pompa: mancat sa trave</string>
+    <string name="poi_traffic_signals_arrow_yes">Eja</string>
+    <string name="poi_traffic_signals_vibration_yes">Eja</string>
+    <string name="poi_traffic_signals_vibration_no">Vibratzione: nono</string>
+    <string name="poi_traffic_signals_arrow">Fritza</string>
+    <string name="poi_traffic_signals_vibration">Vibratzione</string>
+    <string name="poi_give_box">Iscàtula pro donos (give box)</string>
+    <string name="poi_city_block">Isuladu</string>
+    <string name="poi_borough">Unidade amministrativa (Borough)</string>
+    <string name="poi_elevator">Ascensore</string>
+    <string name="poi_traffic_signals_arrow_no">Fritza: nono</string>
+    <string name="poi_nuts">Butega de pilarda (nughes e àteru)</string>
+    <string name="poi_beehive">Moju</string>
+    <string name="poi_departures_board_timetable">Oràriu</string>
+    <string name="poi_departures_board_realtime">Tempus reale</string>
+    <string name="poi_departures_board_delay">Ritardu</string>
+    <string name="poi_departures_board_yes">Eja</string>
+    <string name="poi_departures_board_no">Tabella de sas tzucadas: nono</string>
+    <string name="poi_recycling_small_electrical_appliances">Eletrodomèsticos minores</string>
+    <string name="poi_departures_board">Tabellone de sas tzucadas</string>
+    <string name="poi_drinking_water_refill">Ricàrriga de abba potàbile</string>
+    <string name="poi_fuel_lng">GNL (LNG)</string>
 </resources>

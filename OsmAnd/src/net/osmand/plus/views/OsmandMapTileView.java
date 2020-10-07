@@ -13,6 +13,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -42,12 +43,13 @@ import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
@@ -267,6 +269,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		view.setClickable(true);
 		view.setLongClickable(true);
 		view.setFocusable(true);
+		if (Build.VERSION.SDK_INT >= 26) {
+			view.setDefaultFocusHighlightEnabled(false);
+		}
 		refreshMap(true);
 	}
 

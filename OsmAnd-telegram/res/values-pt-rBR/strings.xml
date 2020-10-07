@@ -26,7 +26,7 @@
     <string name="searching_for_gps">Posicionando…</string>
     <string name="connecting_to_the_internet">Conectando-se à Internet</string>
     <string name="background_work_description">Altere as configurações de otimização da bateria para estabilizar o compartilhamento de local.</string>
-    <string name="background_work">"Funcionamento em segundo plano "</string>
+    <string name="background_work">Funcionamento em segundo plano</string>
     <string name="battery_optimization_description">Desative a otimização da bateria do OsmAnd Tracker para que ele não seja desligado repentinamente quando estiver em segundo plano.</string>
     <string name="sharing_in_background">Compartilhando em segundo plano</string>
     <string name="go_to_settings">Vá para as configurações</string>
@@ -72,7 +72,7 @@
     <string name="shared_string_account">Conta</string>
     <string name="in_time">no %1$s</string>
     <string name="osmand_connect_desc">Escolha a versão OsmAnd que OsmAnd Tracker usa para exibir posições.</string>
-    <string name="osmand_connect">"Conectar OsmAnd "</string>
+    <string name="osmand_connect">Conectar OsmAnd</string>
     <string name="location_history_desc">Ocultar contatos que não foram movidos em um determinado momento.</string>
     <string name="location_history">Histórico de localização</string>
     <string name="stale_location_desc">A última vez que um contato foi movido.</string>
@@ -102,7 +102,7 @@
     <string name="minutes_format">%1$d m</string>
     <string name="hours_format">%1$d h</string>
     <string name="shared_string_install">Instalar</string>
-    <string name="shared_string_share">Enviar</string>
+    <string name="shared_string_share">Compartilhe</string>
     <string name="shared_string_back">Voltar</string>
     <string name="visible_time_for_all">Hora visível para todos</string>
     <string name="set_time_description">Defina a hora em que seus contatos e grupos selecionados verão sua localização em tempo real.</string>
@@ -173,9 +173,7 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">seg</string>
-    <string name="welcome_descr">
-        <b>OsmAnd Tracker</b> permite que você compartilhe sua localização e veja a dos outros no OsmAnd.<br/>
-        <br/>O aplicativo usa a API Telegram e você precisa de uma conta Telegram.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> permite que você compartilhe sua localização e veja a dos outros no OsmAnd.<br/> <br/>O aplicativo usa a API Telegram e você precisa de uma conta Telegram.</string>
     <string name="my_location">Minha localização</string>
     <string name="live_now">Ao vivo agora</string>
     <string name="monitoring_is_enabled">Monitoramento está ativado</string>
@@ -186,13 +184,13 @@
     <string name="open_in_osmand">Mostrar no OsmAnd</string>
     <string name="end_date">Data final</string>
     <string name="start_date">Data de início</string>
-    <string name="timeline">"Linha do tempo "</string>
+    <string name="timeline">Linha do tempo</string>
     <string name="gps_points_in_buffer">enviado (%1$d em buffer)</string>
-    <string name="points_size">"%1$d pontos "</string>
+    <string name="points_size">%1$d pontos</string>
     <string name="shared_string_date">Data</string>
     <string name="shared_string_collected">Coletado</string>
     <string name="gps_points">Pontos de GPS</string>
-    <string name="shared_string_sent">"Enviar "</string>
+    <string name="shared_string_sent">Enviar</string>
     <string name="please_update_osmand">Por favor, atualize o OsmAnd para ver os dados no mapa</string>
     <string name="shared_string_update">Atualizar</string>
     <string name="shared_string_telegram">Telegram</string>
@@ -201,7 +199,7 @@
     <string name="privacy_policy_agree">Ao clicar em \"Continuar\", você concorda com as condições da política de privacidade do Telegram- e OsmAnd.</string>
     <string name="shared_string_accept">Aceitar</string>
     <string name="telegram_privacy_policy">Política de privacidade do Telegram</string>
-    <string name="osmand_privacy_policy">"Política de privacidade do OsmAnd "</string>
+    <string name="osmand_privacy_policy">Política de privacidade do OsmAnd</string>
     <string name="how_it_works">Como funciona</string>
     <string name="received_gps_points">Pontos GPX recebidos: %1$s</string>
     <string name="shared_string_appearance">Aparência</string>
@@ -269,4 +267,8 @@
     <string name="last_response_duration">Última resposta: %1$s atrás</string>
     <string name="duration_ago">%1$s atrás</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="shared_string_export">Exportar</string>
+    <string name="logcat_buffer">Buffer de Logcat</string>
+    <string name="logcat_buffer_descr">Verifique e compartilhe registros detalhados do aplicativo</string>
+    <string name="send_report">Enviar o relatório</string>
 </resources>

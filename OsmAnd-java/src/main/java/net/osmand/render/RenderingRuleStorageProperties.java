@@ -8,6 +8,9 @@ import java.util.Map;
 public class RenderingRuleStorageProperties {
 
 	public static final String UI_CATEGORY_HIDDEN = "ui_hidden";
+	public static final String UI_CATEGORY_DETAILS = "details";
+	public static final String UI_CATEGORY_HIDE = "hide";
+	public static final String UI_CATEGORY_ROUTES = "routes";
 	public static final String A_ENGINE_V1 = "engine_v1";
 	public static final String A_APP_MODE= "appMode";
 	public static final String A_BASE_APP_MODE = "baseAppMode";

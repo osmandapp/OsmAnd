@@ -207,7 +207,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		if (editor != null && editor.isNew()) {
 			nameEdit.selectAll();
 			nameEdit.requestFocus();
-			AndroidUtils.softKeyboardDelayed(nameEdit);
+			AndroidUtils.softKeyboardDelayed(getActivity(), nameEdit);
 		}
 	}
 
@@ -370,6 +370,12 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	public String getDescriptionTextValue() {
 		EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
 		String res = descriptionEdit.getText().toString().trim();
+		return Algorithms.isEmpty(res) ? null : res;
+	}
+
+	public String getAddressTextValue() {
+		EditText addressEdit = (EditText) view.findViewById(R.id.address_edit);
+		String res = addressEdit.getText().toString().trim();
 		return Algorithms.isEmpty(res) ? null : res;
 	}
 

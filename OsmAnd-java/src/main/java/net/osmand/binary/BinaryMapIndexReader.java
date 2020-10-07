@@ -496,7 +496,7 @@ public class BinaryMapIndexReader {
 			}
 		}
 		Iterator<Entry<TransportIndex, TIntArrayList>> it = groupPoints.entrySet().iterator();
-		if (it.hasNext()) {
+		while (it.hasNext()) {
 			Entry<TransportIndex, TIntArrayList> e = it.next();
 			TransportIndex ind = e.getKey();
 			TIntArrayList pointers = e.getValue();
@@ -696,6 +696,7 @@ public class BinaryMapIndexReader {
 	private void readMapIndex(MapIndex index, boolean onlyInitEncodingRules) throws IOException {
 		int defaultId = 1;
 		int oldLimit;
+		int encodingRulesSize = 0;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -712,10 +713,14 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER :
 				if (onlyInitEncodingRules) {
+					if(encodingRulesSize == 0) {
+						encodingRulesSize = codedIS.getTotalBytesRead();
+					}
 					int len = codedIS.readInt32();
 					oldLimit = codedIS.pushLimit(len);
 					readMapEncodingRule(index, defaultId++);
 					codedIS.popLimit(oldLimit);
+					index.encodingRulesSizeBytes = (codedIS.getTotalBytesRead() - encodingRulesSize);
 				} else {
 					skipUnknownField(t);
 				}
@@ -1457,8 +1462,14 @@ public class BinaryMapIndexReader {
 
 	public static <T> SearchRequest<T> buildAddressByNameRequest(ResultMatcher<T> resultMatcher, String nameRequest, 
 			StringMatcherMode matcherMode) {
+		return buildAddressByNameRequest(resultMatcher, null, nameRequest, matcherMode);
+	}
+
+	public static <T> SearchRequest<T> buildAddressByNameRequest(ResultMatcher<T> resultMatcher, ResultMatcher<T> rawDataCollector, String nameRequest,
+			StringMatcherMode matcherMode) {
 		SearchRequest<T> request = new SearchRequest<T>();
 		request.resultMatcher = resultMatcher;
+		request.rawDataCollector = rawDataCollector;
 		request.nameQuery = nameRequest.trim();
 		request.matcherMode = matcherMode;
 		return request;
@@ -1542,6 +1553,10 @@ public class BinaryMapIndexReader {
 
 
 	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, ResultMatcher<Amenity> resultMatcher) {
+		return buildSearchPoiRequest(x, y, nameFilter, sleft, sright, stop, sbottom, resultMatcher, null);
+	}
+
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, ResultMatcher<Amenity> resultMatcher, ResultMatcher<Amenity> rawDataCollector) {
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.x = x;
 		request.y = y;
@@ -1550,6 +1565,7 @@ public class BinaryMapIndexReader {
 		request.top = stop;
 		request.bottom = sbottom;
 		request.resultMatcher = resultMatcher;
+		request.rawDataCollector = rawDataCollector;
 		request.nameQuery = nameFilter.trim();
 		return request;
 	}
@@ -1634,6 +1650,7 @@ public class BinaryMapIndexReader {
 		private boolean ocean = false;
 
 		private ResultMatcher<T> resultMatcher;
+		private ResultMatcher<T> rawDataCollector;
 
 		// 31 zoom tiles
 		// common variables
@@ -1709,6 +1726,12 @@ public class BinaryMapIndexReader {
 				return true;
 			}
 			return false;
+		}
+
+		public void collectRawData(T obj) {
+			if (rawDataCollector != null) {
+				rawDataCollector.publish(obj);
+			}
 		}
 
 		protected void publishOceanTile(boolean ocean) {
@@ -1811,9 +1834,12 @@ public class BinaryMapIndexReader {
 		public int onewayReverseAttribute = -1;
 		public TIntHashSet positiveLayers = new TIntHashSet(2);
 		public TIntHashSet negativeLayers = new TIntHashSet(2);
+		public int encodingRulesSizeBytes;
 
 		// to speed up comparision
 		private MapIndex referenceMapIndex;
+
+		
 
 		public Integer getRule(String t, String v) {
 			Map<String, Integer> m = encodingRules.get(t);
@@ -2637,18 +2663,20 @@ public class BinaryMapIndexReader {
 		}
 	}
 
+	
 	public TLongObjectHashMap<IncompleteTransportRoute> getIncompleteTransportRoutes() throws InvalidProtocolBufferException, IOException {
 		if (incompleteTransportRoutes == null) {
 			incompleteTransportRoutes = new TLongObjectHashMap<>();
 			for (TransportIndex ti : transportIndexes) {
 				if (ti.incompleteRoutesLength > 0) {
-					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.incompleteRoutesLength,
-							ti.incompleteRoutesOffset);
+					codedIS.seek(ti.incompleteRoutesOffset);
+					int oldLimit = codedIS.pushLimit(ti.incompleteRoutesLength);
+					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.filePointer);
+					codedIS.popLimit(oldLimit);
 				}
 			}
 		}
 		return incompleteTransportRoutes;
 	}
-
 
 }

@@ -142,7 +142,6 @@
     <string name="animate_route">Zapnout animaci</string>
     <string name="file_can_not_be_renamed">Nelze přejmenovat soubor.</string>
     <string name="file_with_name_already_exists">Soubor tohoto jména již existuje.</string>
-    <string name="shared_string_gpx_route">GPX trasa</string>
     <string name="poi_query_by_name_matches_categories">Vašemu dotazu odpovídá několik kategorií POI:</string>
     <string name="data_to_search_poi_not_available">Lokální data pro vyhledávání POI není dostupný.</string>
     <string name="poi_filter_by_name">Hledat podle jména</string>
@@ -156,11 +155,10 @@
     <string name="search_position_current_location_found">Moje poloha [nalezeno]</string>
     <string name="search_position_address">Adresy…</string>
     <string name="search_position_favorites">Oblíbených…</string>
-    <string name="search_position_undefined">Nedefinováno</string>
+    <string name="shared_string_undefined">Nedefinováno</string>
     <string name="search_position_map_view">Současný střed mapy</string>
     <string name="select_search_position">Počáteční bod:</string>
     <string name="context_menu_item_search">Hledat v okolí</string>
-    <string name="shared_string_save_as_gpx">Uložit jako nový soubor GPX</string>
     <string name="route_successfully_saved_at">Trasa uložena jako „%1$s“.</string>
     <string name="filename_input">Jméno souboru:</string>
     <string name="file_with_name_already_exist">Soubor s tímto jménem už existuje.</string>
@@ -312,7 +310,6 @@
     <string name="context_menu_item_share_location">Sdílet polohu</string>
     <string name="add_waypoint_dialog_added">GPX bod na trase \'\'{0}\'\' byl přidán</string>
     <string name="add_waypoint_dialog_title">Přidat bod na zaznamenávanou GPX trasu</string>
-    <string name="context_menu_item_add_waypoint">Přidat bod na GPX trasu</string>
     <string name="osmand_routing_experimental">Off-line navigace je experimentální a funguje jen pro větší vzdálenosti než 20 km. Navigace je dočasně přepnuta na on-line CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
     <string name="application_dir">Adresář pro data</string>
@@ -362,7 +359,6 @@
     <string name="voice">Nahrávka hlasu</string>
     <string name="no_vector_map_loaded">Vektorové mapy nebyly načteny</string>
     <string name="gpx_files_not_found">Žádné GPX soubory nebyly nalezeny v adresáři tracks</string>
-    <string name="layer_gpx_layer">GPX soubory…</string>
     <string name="error_reading_gpx">Nelze načíst GPX data</string>
     <string name="vector_data">Vektorové off-line mapy</string>
     <string name="transport_context_menu">Hledat dopravu ze zastávky</string>
@@ -549,7 +545,6 @@
     <string name="save_track_interval_descr">Vyberte interval pro ukládání trasy během navigace.</string>
     <string name="save_track_interval">Interval ukládání trasy během navigace</string>
     <string name="save_track_to_gpx_descrp">Během navigace budou GPX trasy automaticky ukládány do adresáře s trasami.</string>
-    <string name="save_track_to_gpx">Automaticky zaznamenat trasu během navigace</string>
     <string name="update_tile">Aktualizovat mapu</string>
     <string name="reload_tile">Načíst znovu dlaždici</string>
     <string name="mark_point">Cíl</string>
@@ -749,7 +744,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Obnovit výchozí hodnoty</string>
     <string name="map_widget_parking">Parkování</string>
-    <string name="map_widget_monitoring">Záznam trasy</string>
     <string name="map_widget_speed">Aktuální rychlost</string>
     <string name="map_widget_distance">Cíl</string>
     <string name="map_widget_altitude">Nadmořská výška</string>
@@ -866,7 +860,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="map_widget_max_speed">Rychlostní omezení</string>
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic (administrativní úrovně 5-9).</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
@@ -1247,8 +1240,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="live_monitoring_m">On-line sledování (vyžaduje GPX)</string>
     <string name="live_monitoring_start">Spustit on-line sledování</string>
     <string name="live_monitoring_stop">Zastavit on-line sledování</string>
-    <string name="gpx_monitoring_start">Pokračovat v GPX logování</string>
-    <string name="gpx_monitoring_stop">Pozastavit GPX logování</string>
     <string name="gpx_start_new_segment">Začít nový segment</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Cesty, které nejsou pro vozidla</string>
     <string name="rendering_attr_buildings15zoom_name">Budovy při přiblížení 15</string>
@@ -1297,14 +1288,12 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="distance">Vzdálenost</string>
     <string name="index_tours">Cesty</string>
     <string name="shared_string_all">Všechny</string>
-    <string name="save_track_to_gpx_globally">"Ukládat trasu do GPX  souboru"</string>
     <string name="shared_string_waypoints">Body na trase</string>
     <string name="way_alarms">Dopravní varování</string>
     <string name="speak_favorites">Blízké Oblíbené body</string>
     <string name="speak_poi">Blízké body zájmu POI</string>
     <string name="save_track_to_gpx_globally_descr">Záznam do GPX souboru může být zapnut nebo vypnut pomocí widgetu Záznam trasy na mapové obrazovce.</string>
     <string name="confirm_every_run">Vždy se zeptat</string>
-    <string name="save_global_track_interval_descr">Vybrat interval ukládání pro globální záznam trasy (aktivovaný přes widget Záznam trasy na mapové obrazovce).</string>
     <string name="save_global_track_interval">Globální interval záznamu</string>
     <string name="traffic_warning_speed_limit">Rychlostní limit</string>
     <string name="traffic_warning_border_control">Hraniční kontrola</string>
@@ -1572,7 +1561,6 @@ Délka %2$s</string>
     <string name="download_wikipedia_files">Stáhnout dodatečná Wikipedia data (%1$s MB) \?</string>
     <string name="gps_network_not_enabled">Služba zjištění polohy není zapnuta. Aktivovat\?</string>
     <string name="disable_recording_once_app_killed">Zabránit samostatnému logování</string>
-    <string name="disable_recording_once_app_killed_descrp">Pozastaví záznam GPX trasy pokud je aplikace ukončena (přes nedávné aplikace). (OsmAnd indikátor zmizí ze stavového řádku Androidu.)</string>
     <string name="download_live_updates">Okamžité aktualizace</string>
     <string name="no_updates_available">Nejsou dostupné žádné aktualizace</string>
     <string name="traffic_warning_hazard">Nebezpečí</string>
@@ -1617,7 +1605,6 @@ Délka %2$s</string>
     <string name="number_of_rows_in_dash">Počet řádků v bloku %1$s</string>
     <string name="saved_at_time">Uloženo na: %1$s</string>
     <string name="poi_deleted_localy">POI bude smazán, jakmile své změny odešlete</string>
-    <string name="show_gpx">Zobrazit GPX data</string>
     <string name="lang_bn">Bengálština</string>
     <string name="lang_tl">Tagalština</string>
     <string name="lang_sh">Srbochorvatština</string>
@@ -1755,7 +1742,6 @@ Délka %2$s</string>
     <string name="context_menu_item_open_note">Otevřít OSM poznámku</string>
     <string name="osm_edit_reopened_note">Znovuotevřená OSM poznámka</string>
     <string name="osm_edit_commented_note">Komentovaná OSM poznámka</string>
-    <string name="osm_edit_removed_note">Smazaná OSM poznámka</string>
     <string name="osm_edit_created_note">Vytvořená OSM poznámka</string>
     <string name="osn_bug_name">OSM poznámka</string>
     <string name="osn_add_dialog_title">Vytvořit poznámku</string>
@@ -1941,7 +1927,6 @@ Délka %2$s</string>
     <string name="access_shared_string_navigate_up">Navigovat nahoru</string>
     <string name="access_sort">Setřídit</string>
     <string name="map_mode">Režim mapy</string>
-    <string name="number_of_gpx_files_selected_pattern">%s vybraných GPX souborů</string>
     <string name="rendering_value_thin_name">Tenké</string>
     <string name="rendering_value_medium_name">Střední</string>
     <string name="rendering_value_bold_name">Tučné</string>
@@ -2100,7 +2085,6 @@ Délka %2$s</string>
     <string name="quick_action_navigation_voice">Hlas zapnout/vypnout</string>
     <string name="quick_action_navigation_voice_off">Zrušit ztlumení hlasu</string>
     <string name="quick_action_navigation_voice_on">Ztlumit hlas</string>
-    <string name="quick_action_add_gpx">Přidat GPX mezicíl</string>
     <string name="quick_action_add_parking">Přidat parkovací místo</string>
     <string name="quick_action_new_action">Přidat akci</string>
     <string name="quick_action_edit_action">Upravit akci</string>
@@ -2355,14 +2339,11 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="choose_navigation_type">Vyberte profil navigace</string>
     <string name="add_route_points">Přidat body trasy</string>
     <string name="add_line">Přidat čáru</string>
-    <string name="empty_state_my_tracks">Přidejte soubory GPX</string>
-    <string name="empty_state_my_tracks_desc">Přidejte soubory GPX obsahující trasy nebo vytvořte nové zaznamenáním pohybu.</string>
     <string name="empty_state_favourites">Přidejte Oblíbené</string>
     <string name="empty_state_favourites_desc">Importujte Oblíbené nebo je přidejte označením bodů na mapě.</string>
     <string name="import_track">Import souboru GPX</string>
     <string name="import_track_desc">Soubor %1$s neobsahuje body GPX trasy, chcete jej přesto importovat jako trasu?</string>
     <string name="move_point">Přesunout bod</string>
-    <string name="add_segment_to_the_track">Přidat do GPX souboru</string>
     <string name="move_all_to_history">Přesunout vše do historie</string>
     <string name="show_direction">Indikace vzdálenosti</string>
     <string name="sort_by">Seřadit podle</string>
@@ -2391,7 +2372,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_sort">Seřadit</string>
     <string name="coordinate_input">Zadání souřadnic</string>
     <string name="marker_save_as_track_descr">Vyexportovat vaše značky do tohoto GPX souboru:</string>
-    <string name="marker_save_as_track">Uložit jako soubor GPX</string>
     <string name="move_to_history">Přesunout do historie</string>
     <string name="group_will_be_removed_after_restart">Skupina bude odstraněna po příštím restartu aplikace.</string>
     <string name="show_guide_line">Zobrazit vodicí čáry</string>
@@ -2781,7 +2761,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="travel_card_update_descr">Jsou dostupná nová data Wikivoyage, aktualizujte je na nejnovější verzi.</string>
     <string name="wikivoyage_travel_guide">Turistický průvodce Wikivoyage</string>
     <string name="wikivoyage_travel_guide_descr">Průvodce Wikivoyage Vám ukáže nejzajímavější místa planety, přímo v aplikaci OsmAnd a bez nutnosti připojení k internetu.</string>
-    <string name="shared_string_gpx_files">Soubory GPX</string>
     <string name="access_intermediate_arrival_time">Čas příjezdu do mezicíle</string>
     <string name="map_widget_intermediate_time">Do průjezdního bodu</string>
     <string name="test_voice_desrc">Klepněte na tlačítko pro vyslechnutí odpovídajícího hlasového pokynu, aby jste zjistili chybné nebo chybějící pokyny.</string>
@@ -3442,7 +3421,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="favorites_item">Oblíbené</string>
     <string name="subscription_osmandlive_item">Předplatné - OsmAnd Live</string>
     <string name="osmand_purchases_item">Nákupy v OsmAnd</string>
-    <string name="legend_item_description">Průvodce symboly na mapě</string>
+    <string name="legend_item_description">Průvodce symboly na mapě.</string>
     <string name="navigation_profiles_item">Navigační profily</string>
     <string name="release_3_7">• Nové offline mapy svahů
 \n
@@ -3463,4 +3442,140 @@ Zobrazená oblast: %1$s x %2$s</string>
 \n• Opraveny chyby pro jazyky psané zprava doleva
 \n
 \n</string>
+    <string name="edit_online_source">Upravit online zdroj</string>
+    <string name="expire_time">Doba vypršení platnosti</string>
+    <string name="mercator_projection">Mercatorovo zobrazení</string>
+    <string name="storage_format">Formát uložení</string>
+    <string name="map_source_zoom_levels">Nastavte minimální a maximální úroveň přiblížení, při níž se zobrazí nebo načte online mapa.</string>
+    <string name="map_source_zoom_levels_descr">Tyto parametry ovlivňují zobrazení při použití jako mapy nebo překryvu/podkladu.
+\n
+\n%1$s: Zobrazení mapy bude omezeno na vybrané úrovně přiblížení.
+\n
+\n%2$s: Úrovně přiblížení, při nichž budou zobrazeny původní dlaždice. Mimo tyto hodnoty se dlaždice přeškálují.</string>
+    <string name="expire_time_descr">Čas obnovení v minutách. Dlaždice v mezipaměti budou znovu načteny po uplynutí zadaného času. Necháte-li toto pole prázdné, dlaždice z tohoto zdroje se nebudou obnovovat nikdy.
+\n
+\nJeden den má 1440 minut.
+\nJeden týden má 10 080 minut.
+\nJeden měsíc má 43 829 minut.</string>
+    <string name="tiles_storage_descr">Zvolte způsob uložení stažených dlaždic.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Rychlé akce můžete importovat nebo exportovat prostřednictvím profilů.</string>
+    <string name="shared_string_delete_all_q">Odstranit vše\?</string>
+    <string name="app_mode_go_cart">Motokára</string>
+    <string name="osm_edit_closed_note">Uzavřená OSM poznámka</string>
+    <string name="set_working_days_to_continue">Pro pokračování je potřeba nastavit pracovní dny</string>
+    <string name="route_between_points">Trasa mezi body</string>
+    <string name="plan_a_route">Naplánovat trasu</string>
+    <string name="add_to_a_track">Přidat k trase</string>
+    <string name="track_show_start_finish_icons">Zobrazit ikony startu a cíle</string>
+    <string name="select_track_width">Zvolte šířku</string>
+    <string name="gpx_split_interval_descr">Vyberte interval pro zobrazování značek na trase se vzdáleností nebo časem.</string>
+    <string name="gpx_split_interval_none_descr">Vyberte požadovaný způsob dělení: podle času nebo podle vzdálenosti.</string>
+    <string name="shared_string_custom">Vlastní</string>
+    <string name="gpx_direction_arrows">Směrové šipky</string>
+    <string name="plan_route_last_edited">Naposledy upraveno</string>
+    <string name="plan_route_import_track">Importovat trasu</string>
+    <string name="plan_route_open_existing_track">Otevřít existující trasu</string>
+    <string name="plan_route_create_new_route">Vytvořit novou trasu</string>
+    <string name="plan_route_select_track_file_for_open">Vyberte trasu k otevření.</string>
+    <string name="shared_string_done">Hotovo</string>
+    <string name="please_provide_point_name_error">Zadejte prosím název bodu</string>
+    <string name="quick_action_remove_next_destination_descr">Současný cílový bod na trase bude smazán. Jestliže to je poslední cíl, navigace se zastaví.</string>
+    <string name="search_download_wikipedia_maps">Stáhnout Wikipedia mapy</string>
+    <string name="plugin_wikipedia_description">Získejte informace o zájmových bodech z Wikipedie. Je to váš offline kapesní průvodce - zapněte Wikipedia plugin a užívejte si články o objektech okolo Vás.</string>
+    <string name="add_hidden_group_info">Přidaný bod nebude na mapě vidět, protože vybraná skupina je skrytá. Můžete jej najít v \"%s\".</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motorka</string>
+    <string name="app_mode_motor_scooter">Motorový skútr</string>
+    <string name="app_mode_wheelchair">Invalidní vozík</string>
+    <string name="app_mode_wheelchair_forward">Invalidní vozík vpřed</string>
+    <string name="context_menu_item_add_waypoint">Přidat mezicíl</string>
+    <string name="quick_action_add_gpx">Přidat mezicíl</string>
+    <string name="map_widget_monitoring">Záznam trasy</string>
+    <string name="marker_save_as_track">Uložit jako soubor trasy</string>
+    <string name="follow_track">Sledovat trasu</string>
+    <string name="follow_track_descr">Zvolte soubor trasy, kterou chcete sledovat</string>
+    <string name="import_track_descr">Zvolte soubor trasy, kterou chcete sledovat, nebo jej importujte ze zařízení.</string>
+    <string name="select_another_track">Zvolit jinou trasu</string>
+    <string name="navigate_to_track_descr">Navigovat z mé polohy k trase</string>
+    <string name="pass_whole_track_descr">Bod trasy pro navigování</string>
+    <string name="start_of_the_track">Začátek trasy</string>
+    <string name="nearest_point">Nejbližší bod</string>
+    <string name="attach_to_the_roads">Připojit k cestám</string>
+    <string name="delete_address">Smazat adresu</string>
+    <string name="add_address">Přidat adresu</string>
+    <string name="access_hint_enter_address">Zadat adresu</string>
+    <string name="plan_route_trim_before">Oříznout před</string>
+    <string name="plan_route_trim_after">Oříznout po</string>
+    <string name="plan_route_change_route_type_before">Změnit typ trasy před</string>
+    <string name="plan_route_change_route_type_after">Změnit typ trasy po</string>
+    <string name="video_notes">Video poznámky</string>
+    <string name="vessel_height_limit_description">Nastavte výšku plavidla, abyste se vyhnuli nízkým mostům. Mějte na paměti, že u pohyblivých mostů se zohledňuje jejich výška v otevřeném stavu.</string>
+    <string name="vessel_width_limit_description">Nastavte šířku plavidla, abyste se vyhnuli úzkým mostům</string>
+    <string name="quick_action_showhide_mapillary_title">Zobrazit/skrýt Mapillary</string>
+    <string name="quick_action_mapillary_hide">Skrýt Mapillary</string>
+    <string name="quick_action_mapillary_show">Zobrazit Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Přepínač pro zobrazení nebo skrytí mapové vrstvy Mapillary.</string>
+    <string name="routing_attr_length_description">Zadejte délku vozidla, která musí být na trase povolená.</string>
+    <string name="routing_attr_length_name">Omezení délky</string>
+    <string name="shared_string_bearing">Azimut</string>
+    <string name="item_deleted">%1$s smazáno</string>
+    <string name="speed_cameras_restart_descr">Ke kompletnímu smazání dat o rychlostních radarech je nutný restart.</string>
+    <string name="shared_string_uninstall_and_restart">Odinstalovat a restartovat</string>
+    <string name="speed_cameras_removed_descr">Toto zařízení nemá rychlostní kamery.</string>
+    <string name="app_mode_inline_skates">Inline brusle</string>
+    <string name="quick_action_remove_next_destination">Smazat následující cílový bod</string>
+    <string name="use_volume_buttons_as_zoom_descr">Umožní ovládat úroveň přiblížení mapy pomocí tlačítek hlasitosti zařízení.</string>
+    <string name="use_volume_buttons_as_zoom">Tlačítka hlasitosti pro přibližování</string>
+    <string name="threshold_distance">Mezní vzdálenost</string>
+    <string name="navigation_profile">Navigační profil</string>
+    <string name="route_between_points_add_track_desc">Vyberte soubor stopy, do níž se nový úsek přidá.</string>
+    <string name="street_level_imagery">Snímky z úrovně ulice</string>
+    <string name="plan_route_exit_dialog_descr">Opravdu chcete zavřít plánovanou trasu a zahodit tak všechny změny\?</string>
+    <string name="in_case_of_reverse_direction">V případě opačného směru</string>
+    <string name="shared_string_save_as_gpx">Uložit jako nový soubor stopy</string>
+    <string name="add_segment_to_the_track">Přidat do souboru stopy</string>
+    <string name="shared_string_gpx_files">Stopy</string>
+    <string name="layer_gpx_layer">Stopy</string>
+    <string name="show_gpx">Stopy</string>
+    <string name="save_track_to_gpx_globally">"Ukládat trasu do GPX  souboru"</string>
+    <string name="shared_string_gpx_route">Trasa ze stopy</string>
+    <string name="empty_state_my_tracks">Přidat soubory stop</string>
+    <string name="simplified_track">Zjednodušená trasa</string>
+    <string name="simplified_track_description">Uloží se pouze linie trasy, mezicíle budou odstraněny.</string>
+    <string name="shared_string_file_name">Název souboru</string>
+    <string name="number_of_gpx_files_selected_pattern">%s vybraných souborů stop</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="disable_recording_once_app_killed_descrp">Pozastaví záznam trasy, pokud je aplikace ukončena (přes nedávné aplikace). (Ikona režimu na pozadí zmizí z notifikační oblasti Androidu.)</string>
+    <string name="gpx_monitoring_stop">Pozastavit záznam trasy</string>
+    <string name="gpx_monitoring_start">Pokračovat v záznamu trasy</string>
+    <string name="system_default_theme">Výchozí</string>
+    <string name="all_next_segments">Všechny následující úseky</string>
+    <string name="previous_segment">Přecházející úsek</string>
+    <string name="all_previous_segments">Všechny předcházející úseky</string>
+    <string name="only_selected_segment_recalc">Pouze vybraný úsek bude přepočítán pomocí vybraného profilu.</string>
+    <string name="all_next_segments_will_be_recalc">Všechny následující úseky budou přepočítány pomocí vybraného profilu.</string>
+    <string name="all_previous_segments_will_be_recalc">Všechny předcházející úseky budou přepočítány pomocí vybraného profilu.</string>
+    <string name="open_saved_track">Otevřít uloženou trasu</string>
+    <string name="shared_string_is_saved">je uloženo</string>
+    <string name="one_point_error">Přidejte prosím alespoň dva body.</string>
+    <string name="shared_string_redo">Znovu</string>
+    <string name="release_3_8">• Vylepšená funkce plánování trasy: umožňuje použít různé typy navigace pro úseky trasy a přidává stopy
+\n
+\n • Nové menu pro vzhled stop: zvolte barvu, tloušťku, směrové šipky, ikony startu a cíle
+\n
+\n • Vylepšená viditelnost bodů pro cyklistiku.
+\n
+\n • Stopy je nyní možné aktivovat, nabízejí kontextové menu se základními údaji.
+\n
+\n • Vylepšený algoritmus vyhledávání
+\n
+\n • Vylepšené možnosti následování stopy v navigaci
+\n
+\n • Opravené problémy s importem a exportem nastavení profilů
+\n
+\n</string>
+    <string name="sort_last_modified">Naposledy změněno</string>
+    <string name="sort_name_descending">Název: Z – A</string>
+    <string name="sort_name_ascending">Název: A – Z</string>
+    <string name="start_finish_icons">Ikony startu/cíle</string>
+    <string name="contour_lines_thanks">Děkujeme za zakoupení modulu \'Vrstevnice\'</string>
 </resources>

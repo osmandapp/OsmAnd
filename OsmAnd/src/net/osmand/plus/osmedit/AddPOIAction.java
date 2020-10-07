@@ -121,7 +121,7 @@ public class AddPOIAction extends QuickAction {
 		Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
 		node.replaceTags(getTagsFromParams());
 		EditPoiData editPoiData = new EditPoiData(node, activity.getMyApplication());
-		if (Boolean.valueOf(getParams().get(KEY_DIALOG))) {
+		if (Boolean.parseBoolean(getParams().get(KEY_DIALOG)) || editPoiData.hasEmptyValue()) {
 			Entity newEntity = editPoiData.getEntity();
 			EditPoiDialogFragment editPoiDialogFragment =
 					EditPoiDialogFragment.createInstance(newEntity, true, getTagsFromParams());

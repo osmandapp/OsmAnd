@@ -1,20 +1,23 @@
 package net.osmand.plus.routing;
 
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
+import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -22,13 +25,20 @@ import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RouteProvider.RoutingEnvironment;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
+import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -468,8 +478,8 @@ public class RoutingHelper {
 				boolean isStraight =
 						route.getRouteService() == RouteService.DIRECT_TO || route.getRouteService() == RouteService.STRAIGHT;
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if (allowableDeviation > 0 && wrongMovementDirection && !isStraight
-						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) {
+				if ((allowableDeviation > 0 && wrongMovementDirection && !isStraight
+						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) && !settings.DISABLE_WRONG_DIRECTION_RECALC.get()) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;
 					calculateRoute = true;
@@ -857,10 +867,9 @@ public class RoutingHelper {
 						l.newRouteIsCalculated(newRoute, showToast);
 					}
 				}
-				if (showToast.value && OsmandPlugin.isDevelopment()) {
+				if (showToast.value && newRoute && OsmandPlugin.isDevelopment()) {
 					String msg = app.getString(R.string.new_route_calculated_dist_dbg,
 							OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
-
 							((int)res.getRoutingTime()) + " sec",
 							res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
 					app.showToastMessage(msg);
@@ -915,9 +924,6 @@ public class RoutingHelper {
 
 
 	public static String formatStreetName(String name, String ref, String destination, String towards) {
-	//Hardy, 2016-08-05:
-	//Now returns: (ref) + ((" ")+name) + ((" ")+"toward "+dest) or ""
-
 		String formattedStreetName = "";
 		if (ref != null && ref.length() > 0) {
 			formattedStreetName = ref;
@@ -938,56 +944,78 @@ public class RoutingHelper {
 
 	}
 
-//	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed){
-//		if(dist < etalon || ((dist / currentSpeed) < (etalon / defSpeed))){
-//			return true;
-//		}
-//		return false;
-//	}
 
-	public synchronized String getCurrentName(TurnType[] next, NextDirectionInfo n){
+	public static class CurrentStreetName {
+		public String text;
+		public TurnType turnType;
+		public boolean showMarker; // turn type has priority over showMarker
+		public RouteDataObject shieldObject;
+		public String exitRef;
+	}
+
+	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n){
+		CurrentStreetName streetName = new CurrentStreetName();
 		Location l = lastFixedLocation;
 		float speed = 0;
-		if(l != null && l.hasSpeed()) {
+		if (l != null && l.hasSpeed()) {
 			speed = l.getSpeed();
 		}
-		if(next != null && n.directionInfo != null) {
-			next[0] = n.directionInfo.getTurnType();
-		}
-		if(n.distanceTo > 0  && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
+		boolean isSet = false;
+		// 1. turn is imminent
+		if (n.distanceTo > 0 && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
 				voiceRouter.isDistanceLess(speed, n.distanceTo, voiceRouter.PREPARE_DISTANCE * 0.75f)) {
 			String nm = n.directionInfo.getStreetName();
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
-
-			return formatStreetName(nm, null, dn, "»");
-		}
-		RouteSegmentResult rs = getCurrentSegmentResult();
-		if(rs != null) {
-			String name = getRouteSegmentStreetName(rs);
-			if (!Algorithms.isEmpty(name)) {
-				return name;
+			isSet = !(Algorithms.isEmpty(nm) && Algorithms.isEmpty(rf) && Algorithms.isEmpty(dn));
+			streetName.text = formatStreetName(nm, null, dn, "»");
+			streetName.turnType = n.directionInfo.getTurnType();
+			streetName.shieldObject = n.directionInfo.getRouteDataObject();
+			if (streetName.turnType == null) {
+				streetName.turnType = TurnType.valueOf(TurnType.C, false);
 			}
-		}
-		rs = getNextStreetSegmentResult();
-		if(rs != null) {
-			String name = getRouteSegmentStreetName(rs);
-			if (!Algorithms.isEmpty(name)) {
-				if(next != null) {
-					next[0] = TurnType.valueOf(TurnType.C, false);
+			if (n.directionInfo.getExitInfo() != null) {
+				streetName.exitRef = n.directionInfo.getExitInfo().getRef();
+				if (!Algorithms.isEmpty(n.directionInfo.getExitInfo().getExitStreetName())) {
+					streetName.text = n.directionInfo.getExitInfo().getExitStreetName();
 				}
-				return name;
 			}
 		}
-		return null;
+		// 2. display current road street name
+		if (!isSet) {
+			RouteSegmentResult rs = getCurrentSegmentResult();
+			if (rs != null) {
+				streetName.text = getRouteSegmentStreetName(rs, false);
+				if (Algorithms.isEmpty(streetName.text)) {
+					isSet = !Algorithms.isEmpty(getRouteSegmentStreetName(rs, true));
+				} else {
+					isSet = true;
+				}
+				streetName.showMarker = true;
+				streetName.shieldObject = rs.getObject();
+			}
+		}
+		// 3. display next road street name if this one empty
+		if (!isSet) {
+			RouteSegmentResult rs = getNextStreetSegmentResult();
+			if (rs != null) {
+				streetName.text = getRouteSegmentStreetName(rs, false);
+				streetName.turnType = TurnType.valueOf(TurnType.C, false);
+				streetName.shieldObject = rs.getObject();
+			}
+		}
+		if (streetName.turnType == null) {
+			streetName.showMarker = true;
+		}
+		return streetName;
 	}
 
-	private String getRouteSegmentStreetName(RouteSegmentResult rs) {
+	private String getRouteSegmentStreetName(RouteSegmentResult rs, boolean includeRef) {
 		String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
-//		String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
+		String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
 		String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
 				settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
-		return formatStreetName(nm, null, dn, "»");
+		return formatStreetName(nm, includeRef ? rf : null, dn, "»");
 	}
 
 	public RouteSegmentResult getCurrentSegmentResult() {
@@ -1014,7 +1042,30 @@ public class RoutingHelper {
 		return route.getRouteDirections();
 	}
 
+	@Nullable
+	public QuadRect getRouteRect(@NonNull RouteCalculationResult result) {
+		QuadRect rect = new QuadRect(0, 0, 0, 0);
+		Location lt = getLastProjection();
+		if (lt == null) {
+			lt = app.getTargetPointsHelper().getPointToStartLocation();
+		}
+		if (lt == null) {
+			lt = app.getLocationProvider().getLastKnownLocation();
+		}
+		if (lt != null) {
+			MapUtils.insetLatLonRect(rect, lt.getLatitude(), lt.getLongitude());
+		}
+		List<Location> list = result.getImmutableAllLocations();
+		for (Location l : list) {
+			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
+		}
+		List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+		for (TargetPoint l : targetPoints) {
+			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
+		}
 
+		return rect.left == 0 && rect.right == 0 ? null : rect;
+	}
 
 	private class RouteRecalculationThread extends Thread {
 
@@ -1153,7 +1204,7 @@ public class RoutingHelper {
 			params.start = start;
 			params.end = end;
 			params.intermediates = intermediates;
-			params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(start, settings);
+			params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(app);
 			params.onlyStartPointChanged = onlyStartPointChanged;
 			if (recalculateCountInInterval < RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE
 					|| (gpxRoute != null && gpxRoute.isPassWholeRoute() && isDeviatedFromRoute)) {
@@ -1236,13 +1287,12 @@ public class RoutingHelper {
 				public void run() {
 					RouteCalculationProgress calculationProgress = params.calculationProgress;
 					if (isRouteBeingCalculated()) {
-						float pr = calculationProgress.getLinearProgress();
-						progressRoute.updateProgress((int) pr);
 						Thread t = currentRunningJob;
 						if(t instanceof RouteRecalculationThread && ((RouteRecalculationThread) t).params != params) {
 							// different calculation started
 							return;
 						} else {
+							progressRoute.updateProgress((int) calculationProgress.getLinearProgress());
 							if (calculationProgress.requestPrivateAccessRouting) {
 								progressRoute.requestPrivateAccessRouting();
 							}
@@ -1295,6 +1345,10 @@ public class RoutingHelper {
 		return mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT);
 	}
 
+	public boolean isBoatMode() {
+		return mode.isDerivedRoutingFrom(ApplicationMode.BOAT);
+	}
+
 	public boolean isOsmandRouting() {
 		return mode.getRouteService() == RouteService.OSMAND;
 	}
@@ -1314,6 +1368,7 @@ public class RoutingHelper {
 
 
 	// NEVER returns null
+	@NonNull
 	public RouteCalculationResult getRoute() {
 		return route;
 	}
@@ -1322,12 +1377,24 @@ public class RoutingHelper {
 		return generateGPXFileWithRoute(route, name);
 	}
 
-	public GPXFile generateGPXFileWithRoute(RouteCalculationResult route, String name){
+	public GPXFile generateGPXFileWithRoute(RouteCalculationResult route, String name) {
 		return provider.createOsmandRouterGPX(route, app, name);
 	}
 
+	public RoutingEnvironment getRoutingEnvironment(OsmandApplication ctx, ApplicationMode mode, LatLon start, LatLon end) throws IOException {
+		return provider.getRoutingEnvironment(ctx, mode, start, end);
+	}
+
+	public List<GpxPoint> generateGpxPoints(RoutingEnvironment env, GpxRouteApproximation gctx, LocationsHolder locationsHolder) {
+		return provider.generateGpxPoints(env, gctx, locationsHolder);
+	}
+
+	public GpxRouteApproximation calculateGpxApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+		return provider.calculateGpxPointsApproximation(env, gctx, points, resultMatcher);
+	}
+
 	public void notifyIfRouteIsCalculated() {
-		if(route.isCalculated()) {
+		if (route.isCalculated()) {
 			voiceRouter.newRouteIsCalculated(true)	;
 		}
 	}

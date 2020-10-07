@@ -35,7 +35,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -46,7 +45,6 @@ import net.osmand.Collator;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -59,7 +57,6 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -67,10 +64,12 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -303,10 +302,24 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 	}
 
 	private void shareItems() {
-		GPXFile gpxFile = getGpx();
-		if (gpxFile != null) {
-			if (gpxFile.path.isEmpty() && getTrackActivity() != null) {
-				new SaveAndShareTask(this, gpxFile).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		final GPXFile gpxFile = getGpx();
+		if (gpxFile != null && getTrackActivity() != null) {
+			if (Algorithms.isEmpty(gpxFile.path)) {
+				SaveGpxListener saveGpxListener = new SaveGpxListener() {
+					@Override
+					public void gpxSavingStarted() {
+						showProgressBar();
+					}
+
+					@Override
+					public void gpxSavingFinished(Exception errorMessage) {
+						if (isResumed()) {
+							hideProgressBar();
+							shareGpx(gpxFile.path);
+						}
+					}
+				};
+				new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else {
 				shareGpx(gpxFile.path);
 			}
@@ -393,7 +406,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 		if (!mi.isActionViewExpanded()) {
 
-			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark, MenuItem.SHOW_AS_ACTION_NEVER);
+			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark, MenuItem.SHOW_AS_ACTION_NEVER, true);
 			GPXFile gpxFile = getGpx();
 			if (gpxFile != null && gpxFile.path != null) {
 				final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
@@ -435,7 +448,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				setSelectionMode(true);
 				createMenuItem(menu, DELETE_ACTION_ID, R.string.shared_string_delete,
 						R.drawable.ic_action_delete_dark,
-						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				selectedItems.clear();
 				selectedGroups.clear();
 				adapter.notifyDataSetInvalidated();
@@ -622,7 +635,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					FavouritesDbHelper fdb = app.getFavorites();
 					for (GpxDisplayItem i : getSelectedItems()) {
 						if (i.locationStart != null) {
-							FavouritePoint fp = new FavouritePoint(i.locationStart.lat, i.locationStart.lon, i.name, editText.getText().toString());
+							FavouritePoint fp = FavouritePoint.fromWpt(
+									i.locationStart, app, editText.getText().toString());
 							if (!Algorithms.isEmpty(i.description)) {
 								fp.setDescription(i.description);
 							}
@@ -973,7 +987,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					categoryName = getString(R.string.shared_string_waypoints);
 				}
 				SpannableStringBuilder text = new SpannableStringBuilder(categoryName).append(" (").append(String.valueOf(getChildrenCount(groupPosition))).append(")");
-				text.setSpan(new ForegroundColorSpan(AndroidUtils.getColorFromAttr(app, R.attr.wikivoyage_primary_text_color)),
+				text.setSpan(new ForegroundColorSpan(AndroidUtils.getColorFromAttr(mainView.getContext(), R.attr.wikivoyage_primary_text_color)),
 						0, categoryName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				text.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, R.color.wikivoyage_secondary_text)),
 						categoryName.length() + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -1114,7 +1128,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				} else {
 					description.setVisibility(View.GONE);
 				}
-				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), groupColor, false, wpt));
+				icon.setImageDrawable(PointImageDrawable.getFromWpt(getActivity(), groupColor, false, wpt));
 
 			} else {
 				boolean showAll = gpxItem == null;
@@ -1232,62 +1246,6 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			}
 			adapter.notifyDataSetChanged();
 			expandAllGroups();
-		}
-	}
-
-	public static class SaveAndShareTask extends AsyncTask<Void, Void, Boolean> {
-		private final GPXFile gpx;
-		private final OsmandApplication app;
-		private final WeakReference<TrackPointFragment> fragmentRef;
-
-		SaveAndShareTask(@NonNull TrackPointFragment fragment, @NonNull GPXFile gpx) {
-			this.gpx = gpx;
-			fragmentRef = new WeakReference<>(fragment);
-			app = fragment.getMyApplication();
-		}
-
-		@Override
-		protected void onPreExecute() {
-			TrackPointFragment fragment = fragmentRef.get();
-			if (fragment != null) {
-				fragment.showProgressBar();
-			}
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-			Map<String, GPXFile> files = savingTrackHelper.collectRecordedData();
-			File dir;
-			boolean shouldClearPath = false;
-			if (gpx.path.isEmpty()) {
-				dir = app.getCacheDir();
-				shouldClearPath = true;
-			} else {
-				dir = app.getAppCustomization().getTracksDir();
-			}
-			if (!dir.exists()) {
-				dir.mkdir();
-			}
-			for (final String f : files.keySet()) {
-				File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
-				GPXUtilities.writeGpxFile(fout, gpx);
-			}
-			return shouldClearPath;
-		}
-
-		@Override
-		protected void onPostExecute(Boolean shouldClearPath) {
-			TrackPointFragment fragment = fragmentRef.get();
-			if (gpx != null) {
-				if (fragment != null && fragment.isResumed()) {
-					fragment.hideProgressBar();
-					fragment.shareGpx(gpx.path);
-				}
-				if (shouldClearPath) {
-					gpx.path = "";
-				}
-			}
 		}
 	}
 

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        app:title="@string/edit_online_source"
+        tools:background="?attr/actionModeBackground">
+
+        <ImageButton
+            android:id="@+id/toolbar_action"
+            style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+            android:layout_width="@dimen/acceptable_touch_radius"
+            android:layout_height="@dimen/acceptable_touch_radius"
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/list_item_button_padding"
+            android:layout_marginLeft="@dimen/list_item_button_padding"
+            android:layout_marginEnd="@dimen/list_item_button_padding"
+            android:layout_marginRight="@dimen/list_item_button_padding"
+            android:contentDescription="@string/back_to_map"
+            app:srcCompat="@drawable/ic_action_help" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/name_input_layout"
+                    style="@style/InputLayoutStyle.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/content_padding"
+                    android:hint="@string/shared_string_name"
+                    app:helperText="@string/online_map_name_helper_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/name_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/favorites_list_item_height" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/url_input_layout"
+                    style="@style/InputLayoutStyle.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/content_padding"
+                    android:layout_marginLeft="@dimen/content_padding"
+                    android:layout_marginRight="@dimen/content_padding"
+                    android:layout_marginEnd="@dimen/content_padding"
+                    android:layout_marginBottom="@dimen/content_padding"
+                    android:hint="@string/edit_tilesource_url_to_load"
+                    app:helperText="@string/online_map_url_helper_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/url_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/favorites_list_item_height" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <include layout="@layout/divider" />
+
+                <LinearLayout
+                    android:id="@+id/content_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/topBarShadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:rotation="180"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bg_shadow_onmap" />
+    </FrameLayout>
+
+    <include layout="@layout/divider" />
+
+    <FrameLayout
+        android:id="@+id/save_button_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/dialog_button_ex_height"
+        android:paddingStart="@dimen/content_padding"
+        android:paddingTop="@dimen/content_padding_small"
+        android:paddingLeft="@dimen/content_padding_small"
+        android:paddingRight="@dimen/content_padding_small"
+        android:paddingEnd="@dimen/content_padding"
+        android:paddingBottom="@dimen/content_padding_small"
+        tools:background="?attr/list_background_color">
+
+        <FrameLayout
+            android:id="@+id/save_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_button_height"
+            android:layout_gravity="center"
+            tools:background="?attr/dlg_btn_primary">
+
+            <TextView
+                android:id="@+id/save_button_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/shared_string_save"
+                tools:textColor="?attr/dlg_btn_primary_text" />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

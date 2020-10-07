@@ -219,10 +219,10 @@
     <string name="shared_string_authorization_descr">国際形式でTelegramを利用する端末の電話番号を入力してください(日本の場合+81を先頭につけて電話番号最初の0を除いた番号を入力)</string>
     <string name="shared_string_welcome">ようこそ</string>
     <string name="yard">ヤード</string>
-    <string name="foot">フィート</string>
-    <string name="mile">マイル</string>
-    <string name="km">キロメートル</string>
-    <string name="m">メートル</string>
+    <string name="foot">ft</string>
+    <string name="mile">mi</string>
+    <string name="km">km</string>
+    <string name="m">m</string>
     <string name="nm">海里</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>

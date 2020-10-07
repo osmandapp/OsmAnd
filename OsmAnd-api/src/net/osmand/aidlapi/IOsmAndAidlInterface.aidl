@@ -20,6 +20,8 @@ import net.osmand.aidlapi.mapmarker.UpdateMapMarkerParams;
 
 import net.osmand.aidlapi.calculateroute.CalculateRouteParams;
 
+import net.osmand.aidlapi.profile.ExportProfileParams;
+
 import net.osmand.aidlapi.gpx.ImportGpxParams;
 import net.osmand.aidlapi.gpx.ShowGpxParams;
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams;
@@ -74,6 +76,7 @@ import net.osmand.aidlapi.customization.OsmandSettingsParams;
 import net.osmand.aidlapi.customization.OsmandSettingsInfoParams;
 import net.osmand.aidlapi.customization.CustomizationInfoParams;
 import net.osmand.aidlapi.customization.ProfileSettingsParams;
+import net.osmand.aidlapi.customization.MapMarginsParams;
 
 import net.osmand.aidlapi.gpx.AGpxFile;
 import net.osmand.aidlapi.gpx.AGpxFileDetails;
@@ -95,6 +98,14 @@ import net.osmand.aidlapi.mapmarker.RemoveMapMarkersParams;
 
 import net.osmand.aidlapi.quickaction.QuickActionParams;
 import net.osmand.aidlapi.quickaction.QuickActionInfoParams;
+
+import net.osmand.aidlapi.lock.SetLockStateParams;
+
+import net.osmand.aidlapi.events.AKeyEventsParams;
+
+import net.osmand.aidlapi.info.AppInfoParams;
+
+import net.osmand.aidlapi.profile.ExportProfileParams;
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -841,4 +852,25 @@ interface IOsmAndAidlInterface {
     boolean executeQuickAction(in QuickActionParams params);
 
     boolean getQuickActionsInfo(out List<QuickActionInfoParams> quickActions);
+
+    /**
+     * Toggle Lock/Unlock screen.
+     */
+     boolean setLockState(in SetLockStateParams params);
+
+    /**
+     * Method to register for  key events.
+     *
+     * @params subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from key events
+     * @params callbackId (long) - id of callback, needed to unsubscribe key events
+     * @params callback (IOsmAndAidlCallback) - callback to notify user on key event
+     * @params keyEventList (List<Integer>) - list of requested key events
+     */
+    long registerForKeyEvents(in AKeyEventsParams params, IOsmAndAidlCallback callback);
+
+    AppInfoParams getAppInfo();
+
+    boolean setMapMargins(in MapMarginsParams params);
+
+    boolean exportProfile(in ExportProfileParams params);
 }

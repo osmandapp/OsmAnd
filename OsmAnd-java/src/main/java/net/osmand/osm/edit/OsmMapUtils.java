@@ -87,6 +87,11 @@ public class OsmMapUtils {
 	}
 	
 	public static LatLon getComplexPolyCenter(Collection<Node> outer, List<List<Node>> inner) {
+		if (outer.size() > 3 && outer.size() <= 5 && inner == null) {
+			List<Node> sub = new ArrayList<>(outer);
+			return getWeightCenterForNodes(sub.subList(0, sub.size()-1));
+		}
+		
 		final List<List<LatLon>> rings = new ArrayList<>();
 		List<LatLon> outerRing = new ArrayList<>();
 		
@@ -551,6 +556,9 @@ public class OsmMapUtils {
         
         // take centroid as the first best guess
         Cell bestCell = getCentroidCell(rings);
+        if(bestCell == null) {
+        	 return new LatLon(minX, minY);
+        }
 
         // special case for rectangular polygons
         Cell bboxCell = new Cell(minX + width / 2, minY + height / 2, 0, rings);
@@ -601,10 +609,13 @@ public class OsmMapUtils {
             area += f * 3;
         }
 
-        if (area == 0) {
-            LatLon p = points.get(0);
-            return new Cell(p.getLatitude(), p.getLongitude(), 0, rings);
-        }
+		if (area == 0) {
+			if (points.size() == 0) {
+				return null;
+			}
+			LatLon p = points.get(0);
+			return new Cell(p.getLatitude(), p.getLongitude(), 0, rings);
+		}
 
         return new Cell(x / area, y / area, 0, rings);
     }

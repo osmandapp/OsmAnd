@@ -121,7 +121,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Resetiraj na zadano</string>
     <string name="map_widget_parking">Parkiralište</string>
-    <string name="map_widget_monitoring">GPX snimanje</string>
     <string name="map_widget_speed">Brzina</string>
     <string name="map_widget_distance">Odredište</string>
     <string name="map_widget_altitude">Visina</string>
@@ -407,7 +406,6 @@
     <string name="rotate_map_bearing_opt">Po smijeru kretanja</string>
     <string name="poi_context_menu_modify">Izmjeni POI</string>
     <string name="poi_context_menu_delete">Izbriši POI</string>
-    <string name="layer_gpx_layer">GPX trag…</string>
     <string name="error_reading_gpx">Došlo je do pogreške pri čitanju GPX podataka</string>
     <string name="vector_data">Offline vektorske karte</string>
     <string name="voice">Glas</string>
@@ -543,7 +541,6 @@
     <string name="save_track_interval">Interval bilježenja</string>
     <string name="save_track_interval_descr">Odaberite interval bilježenja za staze</string>
     <string name="save_track_to_gpx_descrp">Staze se spremaju u direktorij \'tracks\' grupirane po danima</string>
-    <string name="save_track_to_gpx">Spremi GPX tijekom navigacije</string>
     <string name="map_view_3d_descr">Omogući 3D prikaz na karti</string>
     <string name="map_view_3d">3D prikaz karte</string>
     <string name="show_poi_over_map_description">Prikaži POI preko karte (koristi zadnji odabrani filtar)</string>
@@ -610,7 +607,6 @@
     <string name="amenity_type_administrative">Upravni</string>
     <string name="add_waypoint_dialog_added">GPX međutočka \'\'{0}\'\' je uspješno dodana</string>
     <string name="add_waypoint_dialog_title">Dodaj međutočku na zabilježeni GPX zapis</string>
-    <string name="context_menu_item_add_waypoint">Dodaj GPX međutočku</string>
     <string name="search_osm_offline">Traži adresu pomoću offline karte</string>
     <string name="error_doing_search">Dogodila se pogreška u offline traženju</string>
     <string name="level_to_switch_vector_raster_descr">Minimalna razina uvećanja kod korištenja vektorske karte</string>
@@ -664,11 +660,10 @@
     <string name="local_index_upload_gpx_description">Uploadaj GPX datoteke na OSM. Koristiti će se za poboljšanje karata.</string>
     <string name="local_index_items_uploaded">%1$d od %2$d stavke uspješno su upload-ane.</string>
     <string name="file_with_name_already_exist">Datoteka sa istim imenom već postoji.</string>
-    <string name="shared_string_save_as_gpx">Spremi rutu kao GPX trag</string>
     <string name="route_successfully_saved_at">Ruta je uspješno spremljena kao \'%1$s\'.</string>
     <string name="filename_input">Naziv datoteke: </string>
     <string name="context_menu_item_search">Traži u blizini ovog mjesta</string>
-    <string name="search_position_undefined">Nedefinirano</string>
+    <string name="shared_string_undefined">Nedefinirano</string>
     <string name="search_position_map_view">Posljednje gledano na karti</string>
     <string name="select_search_position">Traži u blizini:</string>
     <string name="search_position_current_location_search">Tražim poziciju-…</string>
@@ -680,7 +675,6 @@
     <string name="map_version_changed_info">Server sadrži datoteke karata koje nisu kompatibilne s trenutnom verzijom aplikacije. Za preuzimanje i korištenje, molimo vas da nadogradite aplikaciju na noviju verziju.</string>
     <string name="poi_filter_by_name">Traži po imenu</string>
     <string name="old_poi_file_should_be_deleted">POI datoteka \'%1$s\' je suvišna i može se izbrisati.</string>
-    <string name="shared_string_gpx_route">GPX ruta</string>
     <string name="poi_query_by_name_matches_categories">Nekoliko POI kategorija podudara se s upitom:</string>
     <string name="file_can_not_be_renamed">Datoteka se ne može preimenovati.</string>
     <string name="file_with_name_already_exists">Datoteka s tim imenom već postoji.</string>
@@ -991,7 +985,6 @@
     <string name="lang_he">Hebrejski</string>
     <string name="forward">Naprijed</string>
     <string name="home">Početna</string>
-    <string name="save_track_to_gpx_globally">Spremi rutu kao GPX trag</string>
     <string name="duration">Trajanje</string>
     <string name="distance">Udaljenost</string>
     <string name="shared_string_all">Sve</string>
@@ -1001,8 +994,6 @@
     <string name="download_additional_maps">Preuzeti karte koje nedostaju %1$s (%2$d MB)?</string>
     <string name="live_monitoring_start">Započnite online praćenje</string>
     <string name="live_monitoring_stop">Zaustavi online praćenje</string>
-    <string name="gpx_monitoring_start">Započni GPX bilježenje položaja</string>
-    <string name="gpx_monitoring_stop">Zaustavi GPX bilježenje položaja</string>
     <string name="rendering_attr_hideBuildings_name">Sakrij zgrade</string>
     <string name="rendering_attr_hideText_name">Sakrij tekst</string>
     <string name="rendering_attr_hideWoodScrubs_name">Sakrij šume i šikare</string>

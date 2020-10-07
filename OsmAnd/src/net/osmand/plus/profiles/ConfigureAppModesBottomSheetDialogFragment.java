@@ -1,6 +1,6 @@
 package net.osmand.plus.profiles;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 
 import java.util.ArrayList;

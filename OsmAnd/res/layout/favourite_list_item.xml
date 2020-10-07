@@ -18,9 +18,9 @@
         android:layout_width="@dimen/standard_icon_size"
         android:layout_height="@dimen/standard_icon_size"
         android:layout_gravity="center_vertical"
-        android:layout_marginEnd="@dimen/route_info_icon_padding_right"
-        android:layout_marginRight="@dimen/route_info_icon_padding_right"
-        osmand:srcCompat="@drawable/map_favorite" />
+        android:layout_marginEnd="@dimen/list_content_padding"
+        android:layout_marginRight="@dimen/list_content_padding"
+        osmand:srcCompat="@drawable/ic_action_favorite" />
 
     <LinearLayout
         android:layout_width="0dp"

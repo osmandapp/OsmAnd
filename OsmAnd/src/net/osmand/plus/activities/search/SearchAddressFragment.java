@@ -16,7 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.data.LatLon;
@@ -82,7 +81,7 @@ public class SearchAddressFragment extends Fragment {
 		}
 		if(getActivity() instanceof SearchAddressActivity) {
 			MenuItem menuItem = menu.add(0, SELECT_POINT, 0, "");
-			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			if (getApplication().accessibilityEnabled())
 				menuItem.setTitle(R.string.shared_string_ok);
 			menuItem = menuItem.setIcon(R.drawable.ic_action_done);
@@ -95,7 +94,7 @@ public class SearchAddressFragment extends Fragment {
 			});
 		} else {
 			MenuItem menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
-			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menuItem = menuItem.setIcon(R.drawable.ic_action_marker_dark);
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -107,7 +106,7 @@ public class SearchAddressFragment extends Fragment {
 			});
 			if (ENABLE_ONLINE_ADDRESS) {
 				menuItem = menu.add(0, ONLINE_SEARCH, 0, R.string.search_online_address);
-				MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 				menuItem = menuItem.setIcon(R.drawable.ic_world_globe_dark);
 				menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					@Override

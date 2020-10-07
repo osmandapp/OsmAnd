@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -32,17 +34,10 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	public static boolean SHOW = true;
 	public static boolean VISIBLE = false;
 
+	private boolean systemDefaultNightMode;
+
 	public MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
-	}
-
-	private boolean hasNavBar() {
-		int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
-		if (id > 0) {
-			return getResources().getBoolean(id);
-		} else {
-			return false;
-		}
 	}
 
 	private int getStatusBarHeight() {
@@ -55,7 +50,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	}
 
 	private int getNavigationBarHeight() {
-		if (!hasNavBar())
+		if (!AndroidUtils.hasNavBar(getContext()) && !AndroidUtils.isNavBarVisible(getMapActivity()))
 			return 0;
 		int orientation = getResources().getConfiguration().orientation;
 		if (isSmartphone() && Configuration.ORIENTATION_LANDSCAPE == orientation)
@@ -67,7 +62,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	}
 
 	private int getNavigationBarWidth() {
-		if (!hasNavBar())
+		if (!AndroidUtils.hasNavBar(getContext()) && !AndroidUtils.isNavBarVisible(getMapActivity()))
 			return 0;
 		int orientation = getResources().getConfiguration().orientation;
 		if (orientation == Configuration.ORIENTATION_LANDSCAPE && isSmartphone()) {
@@ -80,13 +75,20 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		OsmandApplication app = requireMyApplication();
 		FragmentActivity activity = requireActivity();
+		UiUtilities iconsCache = app.getUIUtilities();
+		systemDefaultNightMode = app.getSettings().isSupportSystemDefaultTheme() &&
+				!app.getSettings().isLightSystemDefaultTheme();
 
 		RelativeLayout view = new RelativeLayout(activity);
 		view.setOnClickListener(null);
-		view.setBackgroundColor(getResources().getColor(R.color.map_background_color_light));
+
+		int backgroundColorId = systemDefaultNightMode ?
+				R.color.list_background_color_dark :
+				R.color.map_background_color_light;
+		view.setBackgroundColor(getResources().getColor(backgroundColorId));
 
 		ImageView logo = new ImageView(getContext());
 		logo.setId(LOGO_ID);
@@ -98,26 +100,29 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		RelativeLayout.LayoutParams logoLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		if (isSmartphone()) {
 			logoLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-			logoLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+			logoLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 		} else {
 			logoLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 		}
 
 		ImageView text = new ImageView(activity);
 		text.setId(TEXT_ID);
+		int textColorId = systemDefaultNightMode ?
+				R.color.text_color_tertiary_dark :
+				R.color.text_color_tertiary_light;
 		if (Version.isFreeVersion(app)) {
 			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_osmlive));
+				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_osmlive, textColorId));
 			} else if (InAppPurchaseHelper.isFullVersionPurchased(app)) {
-				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_inapp));
+				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_inapp, textColorId));
 			} else {
-				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand));
+				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand, textColorId));
 			}
 		} else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
 			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_plus_osmlive));
+				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_plus_osmlive, textColorId));
 			} else {
-				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_plus));
+				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_plus, textColorId));
 			}
 		}
 		RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -126,15 +131,15 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		
 		ImageView osmText = new ImageView(activity);
 		osmText.setId(OSM_TEXT_ID);
-		osmText.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_openstreetmap));
+		osmText.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_openstreetmap, textColorId));
 		RelativeLayout.LayoutParams osmTextLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		osmTextLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		osmTextLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-		
-		int defaultLogoMarginTop = (int) getResources().getDimension(R.dimen.splash_screen_logo_top);
+
+		int defaultLogoMarginTop = getResources().getDimensionPixelSize(R.dimen.splash_screen_logo_top);
 		int logoMarginTop = defaultLogoMarginTop - (Build.VERSION.SDK_INT >= 21 ? 0 : getStatusBarHeight());
-		int textMarginBottom = (int) getResources().getDimension(R.dimen.splash_screen_text_bottom);
-		int osmTextMarginBottom = (int) getResources().getDimension(R.dimen.splash_screen_osm_text_bottom);
+		int textMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_text_bottom);
+		int osmTextMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_osm_text_bottom);
 		int elementsPaddingLeft = 0;
 		int elementsPaddingRight = 0;
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
@@ -181,6 +186,8 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return R.color.status_bar_transparent_light;
+		return systemDefaultNightMode ?
+				R.color.status_bar_color_dark :
+				R.color.status_bar_transparent_light;
 	}
 }

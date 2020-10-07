@@ -21,7 +21,12 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
-	private final RouteDataObject object;
+	// this should be bigger (50-80m) but tests need to be fixed first
+	public static final float DIST_BEARING_DETECT = 5;
+	
+	public static final float DIST_BEARING_DETECT_UNMATCHED = 50;
+	
+	private RouteDataObject object;
 	private int startPointIndex;
 	private int endPointIndex;
 	private List<RouteSegmentResult>[] attachedRoutes;
@@ -266,7 +271,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				bundle.putString("turnLanes", TurnType.lanesToString(turnLanes));
 			}
 		}
-		bundle.putLong("id", object.id);
+		bundle.putLong("id", object.id >> 6); // OsmAnd ID to OSM ID
 		bundle.putArray("types", convertTypes(object.types, rules));
 
 		int start = Math.min(startPointIndex, endPointIndex);
@@ -322,19 +327,21 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		Location prevLocation = null;
 		for (int i = 0; i < length; i++) {
 			Location location = resources.getLocation(index);
-			double dist = 0;
-			if (prevLocation != null) {
-				dist = MapUtils.getDistance(prevLocation.getLatitude(), prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());
-				distance += dist;
-			}
-			prevLocation = location;
-			object.pointsX[i] = MapUtils.get31TileNumberX(location.getLongitude());
-			object.pointsY[i] = MapUtils.get31TileNumberY(location.getLatitude());
-			if (location.hasAltitude() && object.heightDistanceArray.length > 0) {
-				object.heightDistanceArray[i * 2] = (float) dist;
-				object.heightDistanceArray[i * 2 + 1] = (float) location.getAltitude();
-			} else {
-				object.heightDistanceArray = new float[0];
+			if (location != null) {
+				double dist = 0;
+				if (prevLocation != null) {
+					dist = MapUtils.getDistance(prevLocation.getLatitude(), prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());
+					distance += dist;
+				}
+				prevLocation = location;
+				object.pointsX[i] = MapUtils.get31TileNumberX(location.getLongitude());
+				object.pointsY[i] = MapUtils.get31TileNumberY(location.getLatitude());
+				if (location.hasAltitude() && object.heightDistanceArray.length > 0) {
+					object.heightDistanceArray[i * 2] = (float) dist;
+					object.heightDistanceArray[i * 2 + 1] = (float) location.getAltitude();
+				} else {
+					object.heightDistanceArray = new float[0];
+				}
 			}
 			if (plus) {
 				index++;
@@ -403,7 +410,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 	
 	public void copyPreattachedRoutes(RouteSegmentResult toCopy, int shift) {
-		if(toCopy.preAttachedRoutes != null) {
+		if (toCopy.preAttachedRoutes != null) {
 			int l = toCopy.preAttachedRoutes.length - shift;
 			preAttachedRoutes = new RouteSegmentResult[l][];
 			System.arraycopy(toCopy.preAttachedRoutes, shift, preAttachedRoutes, 0, l);
@@ -412,7 +419,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	
 	public RouteSegmentResult[] getPreAttachedRoutes(int routeInd) {
 		int st = Math.abs(routeInd - startPointIndex);
-		if(preAttachedRoutes != null && st < preAttachedRoutes.length) {
+		if (preAttachedRoutes != null && st < preAttachedRoutes.length) {
 			return preAttachedRoutes[st];
 		}
 		return null;
@@ -421,7 +428,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public List<RouteSegmentResult> getAttachedRoutes(int routeInd) {
 		int st = Math.abs(routeInd - startPointIndex);
 		List<RouteSegmentResult> list = attachedRoutes[st];
-		if(list == null) {
+		if (list == null) {
 			return Collections.emptyList();
 		}
 		return list;
@@ -444,19 +451,32 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 	
 	public float getBearingBegin() {
-		return (float) (object.directionRoute(startPointIndex, startPointIndex < endPointIndex) / Math.PI * 180);
+		return getBearingBegin(startPointIndex, DIST_BEARING_DETECT);
 	}
 	
-	public float getBearing(int point, boolean plus) {
-		return (float) (object.directionRoute(point, plus) / Math.PI * 180);
-	}
-	
-	public float getDistance(int point, boolean plus) {
-		return (float) (plus? object.distance(point, endPointIndex): object.distance(startPointIndex, point));
+	public float getBearingBegin(int point, float dist) {
+		return getBearing(point, true, dist);
 	}
 	
 	public float getBearingEnd() {
-		return (float) (MapUtils.alignAngleDifference(object.directionRoute(endPointIndex, startPointIndex > endPointIndex) - Math.PI) / Math.PI * 180);
+		return getBearingEnd(endPointIndex, DIST_BEARING_DETECT);
+	}
+	
+	public float getBearingEnd(int point, float dist) {
+		return getBearing(point, false, dist);
+	}
+	
+	public float getBearing(int point, boolean begin, float dist) {
+		if (begin) {
+			return (float) (object.directionRoute(point, startPointIndex < endPointIndex, dist) / Math.PI * 180);
+		} else {
+			double dr = object.directionRoute(point, startPointIndex > endPointIndex, dist);
+			return (float) (MapUtils.alignAngleDifference(dr - Math.PI) / Math.PI * 180);
+		}
+	}
+	
+	public float getDistance(int point, boolean plus) {
+		return (float) (plus ? object.distance(point, endPointIndex) : object.distance(startPointIndex, point));
 	}
 	
 	public void setSegmentTime(float segmentTime) {
@@ -495,7 +515,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return endPointIndex - startPointIndex > 0;
 	}
 
-	
+
 	private LatLon convertPoint(RouteDataObject o, int ind){
 		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(ind)), MapUtils.get31LongitudeX(o.getPoint31XTile(ind)));
 	}
@@ -533,10 +553,16 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public void setObject(RouteDataObject r) {
+		this.object = r;
+	}
 
 	@Override
 	public String toString() {
 		return object.toString() + ": " + startPointIndex + "-" + endPointIndex;
 	}
+
+	
 
 }

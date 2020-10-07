@@ -49,7 +49,7 @@ public class RendererRegistry {
 
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
-	
+
 	private Map<String, File> externalRenderers = new LinkedHashMap<String, File>();
 	private Map<String, String> internalRenderers = new LinkedHashMap<String, String>();
 	

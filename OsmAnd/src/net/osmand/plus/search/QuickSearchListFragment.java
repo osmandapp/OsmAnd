@@ -307,7 +307,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					int position = getListView().getPositionForView(selected);
 					if ((position != AdapterView.INVALID_POSITION) && (position >= getListView().getHeaderViewsCount())) {
 						dialogFragment.getNavigationInfo().updateTargetDirection(
-								listAdapter.getItem(position - getListView().getHeaderViewsCount()).getSearchResult().location, 
+								listAdapter.getItem(position - getListView().getHeaderViewsCount()).getSearchResult().location,
 								heading.floatValue());
 					}
 				} catch (Exception e) {

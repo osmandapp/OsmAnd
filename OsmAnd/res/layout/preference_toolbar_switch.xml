@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/toolbar_switch_container"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/list_background_color"
-	android:orientation="vertical">
+	android:background="?attr/list_background_color">
 
 	<LinearLayout
 		android:id="@+id/selectable_item"
@@ -40,6 +39,7 @@
 			android:background="@null"
 			android:clickable="false"
 			android:focusable="false"
+			android:saveEnabled="false"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingStart="@dimen/content_padding"
@@ -47,4 +47,7 @@
 
 	</LinearLayout>
 
-</LinearLayout>
+	<include layout="@layout/card_bottom_divider"
+		android:id="@+id/top_shadow_inner" />
+
+</FrameLayout>

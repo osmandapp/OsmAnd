@@ -2,12 +2,17 @@ package net.osmand.plus.views;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.layers.geometry.GeometryWay;
+import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,10 +66,12 @@ public class Renderable {
         protected AsynchronousResampler culler = null;                        // The currently active resampler
         protected Paint paint = null;                               // MUST be set by 'updateLocalPaint' before use
 
-        public RenderableSegment(List <WptPt> points, double segmentSize) {
+        protected GpxGeometryWay geometryWay;
+
+        public RenderableSegment(List<WptPt> points, double segmentSize) {
             this.points = points;
-            calculateBounds(points);
             this.segmentSize = segmentSize;
+            trackBounds = GPXUtilities.calculateBounds(points);
         }
 
         protected void updateLocalPaint(Paint p) {
@@ -72,10 +79,18 @@ public class Renderable {
                 paint = new Paint(p);
                 paint.setStrokeCap(Paint.Cap.ROUND);
                 paint.setStrokeJoin(Paint.Join.ROUND);
-                paint.setStyle(Paint.Style.FILL);
+                paint.setStyle(Paint.Style.STROKE);
             }
             paint.setColor(p.getColor());
             paint.setStrokeWidth(p.getStrokeWidth());
+        }
+
+        public GpxGeometryWay getGeometryWay() {
+            return geometryWay;
+        }
+
+        public void setGeometryWay(GpxGeometryWay geometryWay) {
+            this.geometryWay = geometryWay;
         }
 
         protected abstract void startCuller(double newZoom);
@@ -90,65 +105,57 @@ public class Renderable {
             }
         }
 
-        private void calculateBounds(List<WptPt> pts) {
-            trackBounds = new QuadRect(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
-                    Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-            updateBounds(pts, 0);
-        }
-
-        protected void updateBounds(List<WptPt> pts, int startIndex) {
-            pointSize = pts.size();
-            for (int i = startIndex; i < pointSize; i++) {
-                WptPt pt = pts.get(i);
-                trackBounds.right = Math.max(trackBounds.right, pt.lon);
-                trackBounds.left = Math.min(trackBounds.left, pt.lon);
-                trackBounds.top = Math.max(trackBounds.top, pt.lat);
-                trackBounds.bottom = Math.min(trackBounds.bottom, pt.lat);
-            }
-        }
-
         public void setRDP(List<WptPt> cull) {
             culled = cull;
         }
 
+        public List<WptPt> getPointsForDrawing() {
+            return culled.isEmpty() ? points : culled;
+        }
+
+        public void drawGeometry(Canvas canvas, RotatedTileBox tileBox, QuadRect quadRect, int arrowColor, int trackColor, float trackWidth) {
+            if (geometryWay != null) {
+                List<WptPt> points = getPointsForDrawing();
+                if (!Algorithms.isEmpty(points)) {
+                    geometryWay.setTrackStyleParams(arrowColor, trackColor, trackWidth);
+                    geometryWay.updatePoints(tileBox, points);
+                    geometryWay.drawSegments(tileBox, canvas, quadRect.top, quadRect.left, quadRect.bottom, quadRect.right, null, 0);
+                }
+            }
+        }
+
         protected void draw(List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
-
             if (pts.size() > 1) {
-
                 updateLocalPaint(p);
                 canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
                 QuadRect tileBounds = tileBox.getLatLonBounds();
-
                 WptPt lastPt = pts.get(0);
-                float lastx = 0;
-                float lasty = 0;
-                boolean reCalculateLastXY = true;
-
-                int size = pts.size();
-                for (int i = 1; i < size; i++) {
+                boolean recalculateLastXY = true;
+                Path path = new Path();
+                for (int i = 1; i < pts.size(); i++) {
                     WptPt pt = pts.get(i);
-
                     if (Math.min(pt.lon, lastPt.lon) < tileBounds.right && Math.max(pt.lon, lastPt.lon) > tileBounds.left
                             && Math.min(pt.lat, lastPt.lat) < tileBounds.top && Math.max(pt.lat, lastPt.lat) > tileBounds.bottom) {
-
-                        if (reCalculateLastXY) {
-                            lastx = tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon);
-                            lasty = tileBox.getPixYFromLatLon(lastPt.lat, lastPt.lon);
-                            reCalculateLastXY = false;
+                        if (recalculateLastXY) {
+                            recalculateLastXY = false;
+                            float lastX = tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon);
+                            float lastY = tileBox.getPixYFromLatLon(lastPt.lat, lastPt.lon);
+                            if (!path.isEmpty()) {
+                                canvas.drawPath(path, paint);
+                            }
+                            path.reset();
+                            path.moveTo(lastX, lastY);
                         }
-
                         float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
                         float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
-
-                        canvas.drawLine(lastx, lasty, x, y, paint);
-
-                        lastx = x;
-                        lasty = y;
-
+                        path.lineTo(x, y);
                     } else {
-                        reCalculateLastXY = true;
+                        recalculateLastXY = true;
                     }
                     lastPt = pt;
+                }
+                if (!path.isEmpty()) {
+                    canvas.drawPath(path, paint);
                 }
                 canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             }
@@ -198,7 +205,9 @@ public class Renderable {
 
         @Override public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (points.size() != pointSize) {
-                updateBounds(points, pointSize);
+                int prevSize = pointSize;
+                pointSize = points.size();
+                GPXUtilities.updateBounds(trackBounds, points, prevSize);
             }
             drawSingleSegment(zoom, p, canvas, tileBox);
         }

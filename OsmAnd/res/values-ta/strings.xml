@@ -95,7 +95,6 @@
     <string name="shared_string_sort">வகைபடுத்து.</string>
     <string name="coordinate_input">ஒருங்கிணைப்பு உள்ளீடு</string>
     <string name="marker_save_as_track_descr">பின்வரும் ஜிபிஎக்ஸ் கோப்புக்கு குறிப்பாங்களை ஏற்றுமதி செய்:</string>
-    <string name="marker_save_as_track">ஜிபிஎக்ஸ் கோப்பாக சேமி</string>
     <string name="move_to_history">வறலாற்றுக்கு நகர்த்து</string>
     <string name="group_will_be_removed_after_restart">அடுத்த முறை இந்த செயலியை இயக்கும் பொழுது இந்த குழு அழிந்திருக்கும்.</string>
     <string name="show_guide_line">வழிகாட்டி குறிப்புகளை காட்டு</string>
@@ -254,7 +253,6 @@
     <string name="shared_string_my_places">என் இடங்கள்</string>
     <string name="shared_string_my_favorites">பிடித்தவைகள்</string>
     <string name="shared_string_tracks">தடங்கள்</string>
-    <string name="shared_string_gpx_files">ஜிபிஎக்ஸ் கோப்புகள்</string>
     <string name="shared_string_currently_recording_track">தற்பொழுது பதிவாகும் தடம்</string>
     <string name="shared_string_audio">ஒழி</string>
     <string name="shared_string_video">காணோளி</string>
@@ -480,7 +478,6 @@
     <string name="access_shared_string_navigate_up">மேலே செல்க</string>
     <string name="access_sort">வரிசைப்படுத்த</string>
     <string name="map_mode">வரைபட பயன்முறை</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX கோப்புகள் தேர்ந்தெடுக்கப்பட்டன</string>
     <string name="rendering_value_fine_name">சரி</string>
     <string name="rendering_value_thin_name">மெல்லிய</string>
     <string name="rendering_value_medium_name">நடுத்தர</string>
@@ -585,7 +582,6 @@
     <string name="shared_string_clear">தெளிவான</string>
     <string name="shared_string_clear_all">அனைத்தையும் அழி</string>
     <string name="shared_string_save">சேமி</string>
-    <string name="shared_string_save_as_gpx">புதிய GPX கோப்பாக சேமிக்கவும்</string>
     <string name="shared_string_rename">மறுபெயரிடு</string>
     <string name="shared_string_delete">அழி</string>
     <string name="shared_string_delete_all">அனைத்தையும் நீக்கு</string>
@@ -628,8 +624,7 @@
     <string name="background_service_is_enabled_question">OsmAnd பின்னணி சேவை இன்னும் இயங்கும். அதை நிறுத்துங்கள், கூடவா\?</string>
     <string name="sleep_mode_stop_dialog">GPS பின்னணி பயன்முறையை நிறுத்தவா\?</string>
     <string name="stop_navigation_service">நிறுத்து</string>
-    <string name="confirm_every_run">எப்போதும் கேள்</string>
-    <string name="save_global_track_interval_descr">பொதுவான பாதையில் பதிவு செய்வதற்கான இடைவெளியைத் தேர்வுசெய்க (வரைபடத்தில் GPX உள்நுழைவு விட்ஜெட்டை வழியாக செயல்படுத்தப்படுகிறது).
+    <string name="confirm_every_run">எப்போதும் கேள்
 \n</string>
     <string name="save_global_track_interval">பொது பதிவு இடைவெளி</string>
     <string name="background_service_int">ஜிபிஎஸ் வேக் அப் இடைவேளை</string>
@@ -672,7 +667,6 @@
     <string name="rendering_value_bicycle_name">மிதிவண்டி</string>
     <string name="gps_network_not_enabled">இருப்பிடச் சேவை இயக்கப்பட்டது. அதை இயக்கவா\?</string>
     <string name="disable_recording_once_app_killed">தனியான பதிவுகளை தடுக்கிறது</string>
-    <string name="disable_recording_once_app_killed_descrp">பயன்பாட்டைக் கொல்லும் போது (சமீபத்திய பயன்பாடுகளின் வழியாக) ஜி.பீ.எக்ஸ் லாக்கிங் இடைநிறுத்தப்படும். (ஆஸ்மண்ட் பின்னணி அறிகுறி Android அறிவிப்பு பட்டியில் இருந்து மறைந்துவிடும்.)</string>
     <string name="shared_string_import2osmand">OsmAnd க்கு இறக்குமதி செய்</string>
     <string name="read_full_article">முழு கட்டுரை (ஆன்லைன்) படிக்கவும்</string>
     <string name="shared_string_wikipedia">விக்கிப்பீடியா</string>
@@ -712,8 +706,6 @@
     <string name="live_monitoring_m">ஆன்லைன் கண்காணிப்பு (ஜிபிஎக்ஸ் தேவை)</string>
     <string name="live_monitoring_start">ஆன்லைன் கண்காணிப்பதைத் தொடங்குங்கள்</string>
     <string name="live_monitoring_stop">ஆன்லைன் கண்காணிப்பதை நிறுத்தவும்</string>
-    <string name="gpx_monitoring_start">ஜி.பி.எக்ஸ் பதிவுகளைத் தொடங்கவும்</string>
-    <string name="gpx_monitoring_stop">ஜி.பி.எக்ஸ் பதிவுகளை நிறுத்து</string>
     <string name="gpx_start_new_segment">புதிய பிரிவைத் தொடங்குக</string>
     <string name="rendering_attr_hideBuildings_name">கட்டிடங்கள்</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">வாகன-அல்லாத நெடுஞ்சாலைகள்</string>
@@ -1064,7 +1056,6 @@
     <string name="rendering_attr_noAdminboundaries_description">பிராந்திய எல்லைகளை காட்சிப்படுத்த (நிர்வாகம் அளவு 5-9).
 \n</string>
     <string name="map_widget_max_speed">வேக வரம்பு</string>
-    <string name="monitoring_control_start">ஜிபிஎக்ஸ்</string>
     <string name="no_buildings_found">கட்டிடங்கள் இல்லை.</string>
     <string name="incremental_search_city">"நகரத்தை தேடுங்கள் படிப்படியாக "</string>
     <string name="search_villages_and_postcodes">மேலும் கிராமங்கள் / அஞ்சல் குறியீட்டைத் தேடுக</string>
@@ -1134,7 +1125,6 @@
     <string name="context_menu_item_share_location">இருப்பிடத்தை பகிரவும்</string>
     <string name="add_waypoint_dialog_added">ஜி.பி.எக்ஸ் வேப்பிங் \'\'{0}\'\' சேர்க்கப்பட்டது</string>
     <string name="add_waypoint_dialog_title">பதிவுசெய்யப்பட்ட ஜி.பி.எக்ஸ் டிராக்கு வழிப்பாதையைச் சேர்க்கவும்</string>
-    <string name="context_menu_item_add_waypoint">GPX வழிப்பாதையைச் சேர்</string>
     <string name="amenity_type_administrative">நிர்வாக</string>
     <string name="amenity_type_barrier">தடை</string>
     <string name="amenity_type_education">கல்வி</string>
@@ -1311,7 +1301,6 @@
     <string name="add_line">வரி சேர்க்க</string>
     <string name="empty_state_favourites">பிடித்தவை சேர்க்க</string>
     <string name="move_point">நகரும் புள்ளி</string>
-    <string name="add_segment_to_the_track">GPX கோப்பில் சேர்க்கவும்</string>
     <string name="osm_recipients_label">OSM பெறுபவர்கள்</string>
     <string name="total_donations">மொத்த நன்கொடைகள்</string>
     <string name="day_off_label">தொலைவில் உள்ள</string>
@@ -1395,4 +1384,5 @@
     <string name="quick_action_day_night_mode">%s விதம்</string>
     <string name="avoid_pt_types">போக்குவரத்து வகையை தவிர்க்க…</string>
     <string name="turn_screen_on_router">திருப்பத்தில் எழுந்திரு</string>
+    <string name="shared_string_is_saved"></string>
 </resources>

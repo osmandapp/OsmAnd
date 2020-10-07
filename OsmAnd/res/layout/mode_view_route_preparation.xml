@@ -9,7 +9,7 @@
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center"
-		tools:src="@drawable/ic_dashboard_dark" />
+		tools:src="@drawable/ic_dashboard" />
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/selection"

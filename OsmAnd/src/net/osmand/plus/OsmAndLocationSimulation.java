@@ -19,6 +19,7 @@ import net.osmand.Location;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class OsmAndLocationSimulation {
 							@Override
 							public boolean processResult(GPXUtilities.GPXFile[] result) {
 								GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-								startAnimationThread(app, builder.getPoints(), true, speedup.getValue() + 1);
+								startAnimationThread(app, builder.getPoints(app), true, speedup.getValue() + 1);
 								if (runnable != null) {
 									runnable.run();
 								}

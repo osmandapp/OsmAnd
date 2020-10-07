@@ -32,12 +32,12 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
-import net.osmand.plus.measurementtool.NewGpxData;
+import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
@@ -136,14 +136,14 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
-	public void addNewGpxData(NewGpxData.ActionType actionType) {
+	public void addNewGpxData(GpxData.ActionType actionType) {
 		addNewGpxData(actionType, null);
 	}
 
-	public void addNewGpxData(NewGpxData.ActionType actionType, TrkSegment segment) {
+	public void addNewGpxData(GpxData.ActionType actionType, TrkSegment segment) {
 		GPXFile gpxFile = getGpx();
 		QuadRect rect = getRect();
-		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, actionType, segment);
+		GpxData gpxData = new GpxData(gpxFile, rect, actionType, segment);
 		WptPt pointToShow = gpxFile != null ? gpxFile.findPointToShow() : null;
 		if (pointToShow != null) {
 			LatLon location = new LatLon(pointToShow.getLatitude(), pointToShow.getLongitude());
@@ -152,7 +152,7 @@ public class TrackActivity extends TabActivity {
 					settings.getLastKnownMapZoom(),
 					new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_line)),
 					false,
-					newGpxData
+					gpxData
 			);
 
 			MapActivity.launchMapActivityMoveToTop(this);

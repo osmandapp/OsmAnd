@@ -26,7 +26,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.SettingsHelper;
@@ -257,8 +257,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		toolbarLayout.setTitle(getString(R.string.shared_string_importing));
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(R.string.importing_from), file.getName()),
-				file.getName(),
-				new StyleSpan(Typeface.BOLD)
+				new StyleSpan(Typeface.BOLD), file.getName()
 		));
 		progressBar.setVisibility(View.VISIBLE);
 		list.setVisibility(View.GONE);

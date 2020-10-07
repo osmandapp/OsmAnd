@@ -46,11 +46,11 @@
       android:fillType="evenOdd"/>
   <path
       android:pathData="M38,22L50,30L62,22H38Z"
-      android:fillColor="#000000"/>
+      android:fillColor="#212121"/>
   <path
-      android:pathData="M46,34V40H54V34H58V50H54V44H46L46,50H42V34H46Z"
-      android:fillColor="#000000"/>
+      android:pathData="M46,32L46,40H54V32H58V52H54V44H46L46,52H42V32H46Z"
+      android:fillColor="#212121"/>
   <path
       android:pathData="M50,54L38,62H62L50,54Z"
-      android:fillColor="#000000"/>
+      android:fillColor="#212121"/>
 </vector>

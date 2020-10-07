@@ -48,7 +48,7 @@ public class MapMarkerMenuController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(mapMarker.history ? R.string.shared_string_restore : R.string.mark_passed);
-		leftTitleButtonController.leftIcon = createPassedIcon(getPassedIconBgNormalColorId());
+		leftTitleButtonController.startIcon = createPassedIcon(getPassedIconBgNormalColorId());
 
 		if (!mapMarker.history) {
 			rightTitleButtonController = new TitleButtonController() {
@@ -69,7 +69,7 @@ public class MapMarkerMenuController extends MenuController {
 				}
 			};
 			rightTitleButtonController.caption = mapActivity.getString(R.string.make_active);
-			rightTitleButtonController.leftIcon = createShowOnTopbarIcon(getDeviceTopNormalColorId());
+			rightTitleButtonController.startIcon = createShowOnTopbarIcon(getDeviceTopNormalColorId());
 		}
 	}
 

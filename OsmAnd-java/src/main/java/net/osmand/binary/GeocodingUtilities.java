@@ -4,6 +4,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -23,9 +24,11 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import gnu.trove.set.hash.TLongHashSet;
@@ -40,7 +43,7 @@ public class GeocodingUtilities {
 	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 250;
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
 
-	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
+	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 45000;
 	public static final float DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME = 1000;
 
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
@@ -142,15 +145,12 @@ public class GeocodingUtilities {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd();
 		List<GeocodingResult> lst = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		List<RouteSegmentPoint> listR = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
-		rp.findRouteSegment(lat, lon, ctx, listR);
+		// we allow duplications to search in both files for boundary regions 
+		rp.findRouteSegment(lat, lon, ctx, listR, false, true);
 		double distSquare = 0;
-		TLongHashSet set = new TLongHashSet();
-		Set<String> streetNames = new HashSet<String>();
+		Map<String, List<RouteRegion>> streetNames = new HashMap<>();
 		for (RouteSegmentPoint p : listR) {
 			RouteDataObject road = p.getRoad();
-			if (!set.add(road.getId())) {
-				continue;
-			}
 //			System.out.println(road.toString() +  " " + Math.sqrt(p.distSquare));
 			String name = Algorithms.isEmpty(road.getName()) ? road.getRef("", false, true) : road.getName();
 			if (allowEmptyNames || !Algorithms.isEmpty(name)) {
@@ -164,7 +164,13 @@ public class GeocodingUtilities {
 				sr.connectionPoint = new LatLon(MapUtils.get31LatitudeY(p.preciseY), MapUtils.get31LongitudeX(p.preciseX));
 				sr.regionFP = road.region.getFilePointer();
 				sr.regionLen = road.region.getLength();
-				if (streetNames.add(sr.streetName)) {
+				List<RouteRegion> plst = streetNames.get(sr.streetName);
+				if (plst == null) {
+					plst = new ArrayList<BinaryMapRouteReaderAdapter.RouteRegion>();
+					streetNames.put(sr.streetName, plst);
+				}
+				if (!plst.contains(road.region)) {
+					plst.add(road.region);
 					lst.add(sr);
 				}
 			}
@@ -306,6 +312,50 @@ public class GeocodingUtilities {
 		}
 		Collections.sort(res, DISTANCE_COMPARATOR);
 		return res;
+	}
+
+	public void filterDuplicateRegionResults(final List<GeocodingResult> res) {
+		Collections.sort(res, DISTANCE_COMPARATOR);
+		// filter duplicate city results (when building is in both regions on boundary)
+		for (int i = 0; i < res.size() - 1;) {
+			int cmp = cmpResult(res.get(i), res.get(i + 1));
+			if (cmp > 0) {
+				res.remove(i);
+			} else if (cmp < 0) {
+				res.remove(i + 1);
+			} else {
+				// nothing to delete
+				i++;
+			}
+		}
+	}
+
+	private int cmpResult(GeocodingResult gr1, GeocodingResult gr2) {
+		boolean eqStreet = Algorithms.stringsEqual(gr1.streetName, gr2.streetName);
+		if (eqStreet) {
+			boolean sameObj = false;
+			if (gr1.city != null && gr2.city != null) {
+				if (gr1.building != null && gr2.building != null) {
+					if (Algorithms.stringsEqual(gr1.building.getName(), gr2.building.getName())) {
+						// same building
+						sameObj = true;
+					}
+				} else if (gr1.building == null && gr2.building == null) {
+					// same street
+					sameObj = true;
+				}
+			}
+			if (sameObj) {
+				double cityDist1 = MapUtils.getDistance(gr1.searchPoint, gr1.city.getLocation());
+				double cityDist2 = MapUtils.getDistance(gr2.searchPoint, gr2.city.getLocation());
+				if (cityDist1 < cityDist2) {
+					return -1;
+				} else {
+					return 1;
+				}
+			}
+		}
+		return 0;
 	}
 
 	private List<GeocodingResult> loadStreetBuildings(final GeocodingResult road, BinaryMapIndexReader reader,

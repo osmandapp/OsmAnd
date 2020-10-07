@@ -220,7 +220,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 											  final double latitude,
 											  final double longitude,
 											  ContextMenuAdapter adapter,
-											  final Object selectedObj) {
+											  final Object selectedObj, boolean configureMenu) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked, int[] viewCoordinates) {
@@ -266,14 +266,14 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
-					.setId(MAP_CONTEXT_MENU_MODIFY_POI)
+					.setId(MAP_CONTEXT_MENU_CREATE_POI)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_POI_ITEM_ORDER)
 					.setListener(listener)
 					.createItem());
 		} else if (selectedObj instanceof OpenstreetmapPoint && ((OpenstreetmapPoint) selectedObj).getAction() != Action.DELETE) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify_osm_change, mapActivity)
-					.setId(MAP_CONTEXT_MENU_MODIFY_OSM_CHANGE)
+					.setId(MAP_CONTEXT_MENU_CREATE_POI)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_OSM_CHANGE_ITEM_ORDER)
 					.setListener(listener)
@@ -288,7 +288,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		if (selectedObj instanceof OsmNotesPoint) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_modify_note, mapActivity)
-					.setId(MAP_CONTEXT_MENU_MODIFY_OSM_NOTE)
+					.setId(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_OSM_NOTE_ITEM_ORDER)
 					.setListener(listener)
@@ -296,7 +296,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		} else {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_open_note, mapActivity)
 					.setId(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
-					.setIcon(R.drawable.ic_action_bug_dark)
+					.setIcon(R.drawable.ic_action_osm_note_add)
 					.setOrder(OPEN_OSM_NOTE_ITEM_ORDER)
 					.setListener(listener)
 					.createItem());
@@ -338,7 +338,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				.setId(OSM_NOTES)
 				.setTitleId(R.string.layer_osm_bugs, mapActivity)
 				.setSelected(settings.SHOW_OSM_BUGS.get())
-				.setIcon(R.drawable.ic_action_bug_dark)
+				.setIcon(R.drawable.ic_action_osm_note)
 				.setColor(settings.SHOW_OSM_BUGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {

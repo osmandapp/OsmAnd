@@ -28,23 +28,22 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.views.POIMapLayer;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
+import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -58,11 +57,13 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
@@ -276,7 +277,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
 			Drawable pressed = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
 					light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
-			button.setCompoundDrawablesWithIntrinsicBounds(Build.VERSION.SDK_INT >= 21
+			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button, Build.VERSION.SDK_INT >= 21
 					? AndroidUtils.createPressedStateListDrawable(normal, pressed) : normal, null, null, null);
 			button.setCompoundDrawablePadding(dpToPx(8f));
 			llText.addView(button);
@@ -406,7 +407,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			if (amenity.getType().isWiki()) {
 				if (!hasWiki) {
-					String articleLang = WikipediaPoiMenu.getWikiArticleLanguage(app, amenity.getSupportedContentLocales(), preferredLang);
+					String articleLang = OsmandPlugin.onGetMapObjectsLocale(amenity, preferredLang);
 					String lng = amenity.getContentLanguage("content", articleLang, "en");
 					if (Algorithms.isEmpty(lng)) {
 						lng = "en";
@@ -470,7 +471,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				textPrefix = app.getString(R.string.poi_cuisine);
 				vl = sb.toString();
-			} else if (key.contains(Amenity.ROUTE)) {
+			} else if (key.contains(Amenity.ROUTE)
+					|| key.equals(Amenity.WIKIDATA)
+					|| key.equals(Amenity.WIKIMEDIA_COMMONS))  {
 				continue;
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {
@@ -529,10 +532,16 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			if ("ele".equals(key)) {
 				try {
 					float distance = Float.parseFloat(vl);
-					Map<MetricsConstants, String> distanceData = OsmAndFormatter.getDistanceData(app, distance);
-					MetricsConstants currentFormat = app.getSettings().METRIC_SYSTEM.get();
-					vl = OsmAndFormatter.getFormattedDistance(distance, app, true, currentFormat);
-					collapsableView = getDistanceCollapsableView(distanceData);
+					vl = OsmAndFormatter.getFormattedAlt(distance, app, metricSystem);
+					String collapsibleVal;
+					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.MILES_AND_YARDS) {
+						collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MetricsConstants.KILOMETERS_AND_METERS);
+					} else {
+						collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MetricsConstants.MILES_AND_FEET);
+					}
+					Set<String> elevationData = new HashSet<>();
+					elevationData.add(collapsibleVal);
+					collapsableView = getDistanceCollapsableView(elevationData);
 					collapsable = true;
 				} catch (NumberFormatException ex) {
 					LOG.error(ex);
@@ -654,7 +663,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildAmenityRow(view, info);
 		}
 
-		if (processNearstWiki() && nearestWiki.size() > 0) {
+		if (processNearestWiki() && nearestWiki.size() > 0) {
 			AmenityInfoRow wikiInfo = new AmenityInfoRow(
 					"nearest_wiki", R.drawable.ic_plugin_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")", true,
 					getCollapsableWikiView(view.getContext(), true),
@@ -777,11 +786,19 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
 		String imageValue = additionalInfo.get("image");
 		String mapillaryValue = additionalInfo.get("mapillary");
+		String wikidataValue = additionalInfo.get(Amenity.WIKIDATA);
+		String wikimediaValue = additionalInfo.get(Amenity.WIKIMEDIA_COMMONS);
 		if (!Algorithms.isEmpty(imageValue)) {
 			params.put("osm_image", imageValue);
 		}
 		if (!Algorithms.isEmpty(mapillaryValue)) {
 			params.put("osm_mapillary_key", mapillaryValue);
+		}
+		if (!Algorithms.isEmpty(wikidataValue)) {
+			params.put(Amenity.WIKIDATA, wikidataValue);
+		}
+		if (!Algorithms.isEmpty(wikimediaValue)) {
+			params.put(Amenity.WIKIMEDIA_COMMONS, wikimediaValue);
 		}
 		return params;
 	}

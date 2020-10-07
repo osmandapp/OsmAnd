@@ -23,32 +23,36 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.download.ui.LocalIndexesFragment.ILLEGAL_FILE_NAME_CHARACTERS;
+import static net.osmand.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = "OnSaveCurrentTrackBottomSheetFragment";
 	public static final String SAVED_TRACKS_KEY = "saved_track_filename";
+	private static final Log LOG = PlatformUtil.getLog(OnSaveCurrentTrackFragment.class);
 
 	private boolean openTrack = false;
 	private File file;
@@ -185,7 +189,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return null;
 		}
-		return LocalIndexesFragment.renameGpxFile(app, savedFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
+		return FileUtils.renameGpxFile(app, savedFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
 	}
 
 	private void showOnMap(File f, boolean animated) {
@@ -216,10 +220,17 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, List<String> filenames) {
+		if (fragmentManager.isStateSaved()) {
+			return;
+		}
 		OnSaveCurrentTrackFragment f = new OnSaveCurrentTrackFragment();
 		Bundle b = new Bundle();
 		b.putStringArrayList(SAVED_TRACKS_KEY, new ArrayList<>(filenames));
 		f.setArguments(b);
-		f.show(fragmentManager, TAG);
+		try {
+			f.show(fragmentManager, TAG);
+		} catch (IllegalStateException ex) {
+			LOG.error("Can not perform this action after onSaveInstanceState");
+		}
 	}
 }

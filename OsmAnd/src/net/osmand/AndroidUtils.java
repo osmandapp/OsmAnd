@@ -46,6 +46,7 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.AttrRes;
@@ -53,6 +54,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -95,20 +98,24 @@ public class AndroidUtils {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
 
-	public static void softKeyboardDelayed(final View view) {
+	public static void softKeyboardDelayed(final Activity activity, final View view) {
 		view.post(new Runnable() {
 			@Override
 			public void run() {
 				if (!isHardwareKeyboardAvailable(view.getContext())) {
-					showSoftKeyboard(view);
+					showSoftKeyboard(activity,view);
 				}
 			}
 		});
 	}
 
-	public static void showSoftKeyboard(final View view) {
+	public static void showSoftKeyboard(final Activity activity, final View view) {
 		InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (imm != null) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+				KeyguardManager keyguardManager = (KeyguardManager) view.getContext().getSystemService(Context.KEYGUARD_SERVICE);
+				keyguardManager.requestDismissKeyguard(activity,null);
+			}
 			imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
 		}
 	}
@@ -156,6 +163,10 @@ public class AndroidUtils {
 		return src;
 	}
 
+	public static String addColon(OsmandApplication app, @StringRes int stringRes) {
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(stringRes), "").trim();
+	}
+
 	public static Uri getUriForFile(Context context, File file) {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
 			return Uri.fromFile(file);
@@ -168,11 +179,11 @@ public class AndroidUtils {
 		return intent.resolveActivity(context.getPackageManager()) != null;
 	}
 
-	public static boolean isActivityNotDestroyed(Activity activity) {
+	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {
 		if (Build.VERSION.SDK_INT >= 17) {
-			return !activity.isFinishing() && !activity.isDestroyed();
+			return activity != null && !activity.isFinishing() && !activity.isDestroyed();
 		}
-		return !activity.isFinishing();
+		return activity != null && !activity.isFinishing();
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
@@ -374,13 +385,20 @@ public class AndroidUtils {
 		}
 	}
 
-	public static void updateImageButton(Context ctx, ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {
-		button.setImageDrawable(AppCompatResources.getDrawable(ctx, night ? iconDarkId : iconLightId));
+	public static void updateImageButton(OsmandApplication ctx, ImageButton button,
+	                                     @DrawableRes int iconLightId, @DrawableRes int iconDarkId,
+	                                     @DrawableRes int bgLightId, @DrawableRes int bgDarkId, boolean night) {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			button.setBackground(AppCompatResources.getDrawable(ctx, night ? bgDarkId : bgLightId));
+			button.setBackground(ctx.getUIUtilities().getIcon(night ? bgDarkId : bgLightId));
 		} else {
-			button.setBackgroundDrawable(AppCompatResources.getDrawable(ctx, night ? bgDarkId : bgLightId));
+			button.setBackgroundDrawable(ctx.getUIUtilities().getIcon(night ? bgDarkId : bgLightId));
 		}
+		int btnSizePx = button.getLayoutParams().height;
+		int iconSizePx = ctx.getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
+		int iconPadding = (btnSizePx - iconSizePx) / 2;
+		button.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
+		button.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		button.setImageDrawable(ctx.getUIUtilities().getMapIcon(night ? iconDarkId : iconLightId, !night));
 	}
 
 	public static void setDashButtonBackground(Context ctx, View view, boolean night) {
@@ -415,6 +433,17 @@ public class AndroidUtils {
 		textView.setHintTextColor(night ?
 				ctx.getResources().getColor(R.color.text_color_secondary_dark)
 				: ctx.getResources().getColor(R.color.text_color_secondary_light));
+	}
+
+	public static int getTextMaxWidth(float textSize, List<String> titles) {
+		int width = 0;
+		for (String title : titles) {
+			int titleWidth = getTextWidth(textSize, title);
+			if (titleWidth > width) {
+				width = titleWidth;
+			}
+		}
+		return width;
 	}
 
 	public static int getTextWidth(float textSize, String text) {
@@ -678,6 +707,13 @@ public class AndroidUtils {
 		if (isSupportRTL()) {
 			layoutParams.setMarginStart(start);
 			layoutParams.setMarginEnd(end);
+		}
+	}
+
+	public static void setTextDirection(@NonNull TextView tv, boolean rtl) {
+		if (isSupportRTL()) {
+			int textDirection = rtl ? View.TEXT_DIRECTION_RTL : View.TEXT_DIRECTION_LTR;
+			tv.setTextDirection(textDirection);
 		}
 	}
 	

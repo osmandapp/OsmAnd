@@ -196,7 +196,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (l\'applicazione di messaggistica) viene usato per connettersi e comunicare con le persone.</string>
     <string name="privacy_policy_telegram_client">Il tracker OsmAnd è uno dei client utilizzati dalla piattaforma aperta Telegram. I tuoi contatti possono usare un qualsiasi cliente Telegram.</string>
-    <string name="privacy_policy_agree">Cliccando continua tu sottoscrivi le condizioni di Privacy di Telegram e quelle di OsmAnd.</string>
+    <string name="privacy_policy_agree">Cliccando \"Continua\" tu sottoscrivi le condizioni di privacy di Telegram e quelle di OsmAnd.</string>
     <string name="shared_string_accept">Accettazione</string>
     <string name="how_it_works">Come funziona</string>
     <string name="telegram_privacy_policy">Informativa sulla privacy di Telegram</string>
@@ -257,4 +257,12 @@
     <string name="time_zone">Fuso orario</string>
     <string name="unit_of_speed_system">Unità di misura della velocità</string>
     <string name="back_to_osmand">Torna a OsmAnd</string>
+    <string name="status_widget_title">Stato di OsmAnd Tracker</string>
+    <string name="shared_string_suggested">Suggerito</string>
+    <string name="duration_ago">%1$s fa</string>
+    <string name="last_response_duration">Ultima risposta: %1$s fa</string>
+    <string name="last_update_from_telegram_duration">Ultimo aggiornamento da Telegram: %1$s fa</string>
+    <string name="last_response_date">Ultima risposta: %1$s</string>
+    <string name="last_update_from_telegram_date">Ultimo aggiornamento da Telegram: %1$s</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>

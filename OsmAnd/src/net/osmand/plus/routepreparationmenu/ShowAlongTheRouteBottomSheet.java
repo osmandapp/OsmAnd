@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.ValueHolder;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -44,8 +44,6 @@ import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 
 public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment implements IRouteInformationListener, IRoutingDataUpdateListener {
 
@@ -83,8 +81,8 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		}
 		int expandType = args.getInt(EXPAND_TYPE_KEY, -1);
 
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final View titleView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_toolbar_title, null);
+		final View titleView = UiUtilities.getInflater(ctx, nightMode)
+				.inflate(R.layout.bottom_sheet_item_toolbar_title, null);
 		TextView textView = (TextView) titleView.findViewById(R.id.title);
 		textView.setText(R.string.show_along_the_route);
 
@@ -436,8 +434,8 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			View v;
 			if (type == WaypointHelper.POI) {
 				v = themedInflater.inflate(R.layout.along_the_route_radius_poi, null);
-				String descEx = !app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.POI) ?
-						getString(R.string.poi) : app.getPoiFilters().getSelectedPoiFiltersName(PoiTemplateList.POI);
+				String descEx = !app.getPoiFilters().isShowingAnyPoi() ?
+						getString(R.string.poi) : app.getPoiFilters().getSelectedPoiFiltersName();
 				((TextView) v.findViewById(R.id.title)).setText(getString(R.string.search_radius_proximity) + ":");
 				((TextView) v.findViewById(R.id.titleEx)).setText(getString(R.string.shared_string_type) + ":");
 				final TextView radiusEx = (TextView) v.findViewById(R.id.descriptionEx);
@@ -487,7 +485,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 					new MapActivityLayers.DismissListener() {
 						@Override
 						public void dismiss() {
-							if (app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.POI)) {
+							if (app.getPoiFilters().isShowingAnyPoi()) {
 								enableType(type, enable);
 							}
 						}

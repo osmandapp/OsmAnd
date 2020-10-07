@@ -7,20 +7,24 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 
-public class GlobalSettingsFragment extends BaseSettingsFragment implements SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate, OnPreferenceChanged {
+public class GlobalSettingsFragment extends BaseSettingsFragment
+		implements OnSendAnalyticsPrefsUpdate, OnPreferenceChanged {
 
 	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
@@ -36,7 +40,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		setupSendAnonymousDataPref();
 		setupDialogsAndNotificationsPref();
 		setupEnableProxyPref();
-		setupUseSystemScreenTimeout();
+		setupUninstallSpeedCamerasPref();
 	}
 
 	@Override
@@ -101,12 +105,26 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 				app.checkPreferredLocale();
 				app.restartApp(activity);
 			}
+		} else if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
+			setupUninstallSpeedCamerasPref();
 		}
 	}
 
 	@Override
 	public void onAnalyticsPrefsUpdate() {
 		setupSendAnonymousDataPref();
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String prefId = preference.getKey();
+		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
+			FragmentManager fm = getFragmentManager();
+			if (fm != null) {
+				SpeedCamerasBottomSheet.showInstance(fm, this);
+			}
+		}
+		return super.onPreferenceClick(preference);
 	}
 
 	private void setupDefaultAppModePref() {
@@ -193,9 +211,12 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_proxy));
 	}
 
-	private void setupUseSystemScreenTimeout() {
-		SwitchPreferenceEx useSystemScreenTimeout = (SwitchPreferenceEx) findPreference(settings.USE_SYSTEM_SCREEN_TIMEOUT.getId());
-		useSystemScreenTimeout.setTitle(app.getString(R.string.use_system_screen_timeout));
-		useSystemScreenTimeout.setDescription(app.getString(R.string.use_system_screen_timeout_promo));
+	private void setupUninstallSpeedCamerasPref() {
+		boolean uninstalled = settings.SPEED_CAMERAS_UNINSTALLED.get();
+		Preference uninstallSpeedCameras = (Preference) findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
+		if (!uninstalled) {
+			uninstallSpeedCameras.setIcon(getActiveIcon(R.drawable.ic_speed_camera_disabled));
+		}
+		uninstallSpeedCameras.setTitle(uninstalled ? R.string.speed_cameras_removed_descr : R.string.uninstall_speed_cameras);
 	}
 }

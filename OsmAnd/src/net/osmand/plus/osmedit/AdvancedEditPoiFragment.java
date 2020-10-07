@@ -7,7 +7,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,7 +22,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -45,7 +44,8 @@ import java.util.Set;
 import static net.osmand.plus.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
 
 public class AdvancedEditPoiFragment extends BaseOsmAndFragment
-		implements EditPoiDialogFragment.OnFragmentActivatedListener {
+		implements EditPoiDialogFragment.OnFragmentActivatedListener,
+		EditPoiDialogFragment.OnSaveButtonClickListener {
 	private static final String TAG = "AdvancedEditPoiFragment";
 	private static final Log LOG = PlatformUtil.getLog(AdvancedEditPoiFragment.class);
 
@@ -55,6 +55,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 	private TextView nameTextView;
 	private TextView amenityTagTextView;
 	private TextView amenityTextView;
+	private EditText currentTagEditText;
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -165,6 +166,13 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 		}
 	}
 
+	@Override
+	public void onSaveButtonClick() {
+		if (currentTagEditText != null) {
+			currentTagEditText.clearFocus();
+		}
+	}
+
 	public class TagAdapterLinearLayoutHack {
 		private final LinearLayout linearLayout;
 		private final EditPoiData editPoiData;
@@ -196,15 +204,16 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 					continue;
 				addTagView(tag.getKey(), tag.getValue());
 			}
+			if (editPoiData.hasEmptyValue() && linearLayout.findViewById(R.id.valueEditText) != null) {
+				linearLayout.findViewById(R.id.valueEditText).requestFocus();
+			}
 			editPoiData.setIsInEdit(false);
 		}
 
 		public void addTagView(String tg, String vl) {
 			View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.poi_tag_list_item, null, false);
-			final AutoCompleteTextView tagEditText =
-					(AutoCompleteTextView) convertView.findViewById(R.id.tagEditText);
-			AndroidUtils.setTextHorizontalGravity(tagEditText, Gravity.START);
+			final AutoCompleteTextView tagEditText = convertView.findViewById(R.id.tagEditText);
 			ImageButton deleteItemImageButton =
 					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
 			deleteItemImageButton.setImageDrawable(deleteDrawable);
@@ -216,17 +225,15 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 					editPoiData.removeTag(tagEditText.getText().toString());
 				}
 			});
-			final AutoCompleteTextView valueEditText =
-					(AutoCompleteTextView) convertView.findViewById(R.id.valueEditText);
-			AndroidUtils.setTextHorizontalGravity(valueEditText, Gravity.START);
-			valueEditText.setFilters(new InputFilter[] {
-				new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)
+			final AutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);
+			valueEditText.setFilters(new InputFilter[]{
+					new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)
 			});
 			tagEditText.setText(tg);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
 			tagEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
-			    @Override
+				@Override
 				public void onFocusChange(View v, boolean hasFocus) {
 					if (!hasFocus) {
 						if (!editPoiData.isInEdit()) {
@@ -238,6 +245,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 							}
 						}
 					} else {
+						currentTagEditText = tagEditText;
 						tagAdapter.getFilter().filter(tagEditText.getText());
 					}
 				}
@@ -266,7 +274,6 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			initAutocompleteTextView(valueEditText, valueAdapter);
 
 			linearLayout.addView(convertView);
-			tagEditText.requestFocus();
 		}
 
 		public void setTagData(String[] tags) {

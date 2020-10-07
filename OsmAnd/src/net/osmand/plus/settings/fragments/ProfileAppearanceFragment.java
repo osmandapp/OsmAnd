@@ -23,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -39,7 +40,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.UiUtilities;
@@ -151,6 +152,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			changedProfile.navigationIcon = profile.navigationIcon;
 			isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
 		}
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				showExitDialog();
+			}
+		});
 	}
 
 	public void setupAppProfileObjectFromAppMode(ApplicationMode baseModeForNewProfile) {
@@ -368,7 +374,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				public void onFocusChange(View v, boolean hasFocus) {
 					if(hasFocus){
 						profileName.setSelection(profileName.getText().length());
-						AndroidUtils.showSoftKeyboard(profileName);
+						AndroidUtils.showSoftKeyboard(getMyActivity(), profileName);
 					}
 				}
 			});
@@ -893,7 +899,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		profileNameOtfb.setError(errorMessage, true);
 	}
 
-	public boolean isProfileAppearanceChanged() {
+	public void showExitDialog() {
 		hideKeyboard();
 		if (isChanged()) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
@@ -906,9 +912,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				}
 			});
 			dismissDialog.show();
-			return true;
 		} else {
-			return false;
+			dismiss();
 		}
 	}
 

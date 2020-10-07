@@ -21,15 +21,15 @@
 			android:layout_height="match_parent"
 			android:background="@null"
 			android:gravity="center_vertical"
-			android:paddingLeft="@dimen/context_menu_button_padding_x"
-			android:paddingRight="@dimen/context_menu_button_padding_x"
+			android:paddingLeft="@dimen/content_padding_half"
+			android:paddingRight="@dimen/content_padding_half"
 			android:textAllCaps="true"
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			android:duplicateParentState="true"
 			tools:text="Button"
-			android:paddingStart="@dimen/context_menu_button_padding_x"
-			android:paddingEnd="@dimen/context_menu_button_padding_x" />
+			android:paddingStart="@dimen/content_padding_half"
+			android:paddingEnd="@dimen/content_padding_half" />
 
 	</LinearLayout>
 

@@ -215,7 +215,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		SunriseSunset sunriseSunset = getMyApplication().getDaynightHelper().getSunriseSunset();
 		pref = new Preference(this);
 		pref.setTitle(R.string.day_night_info);
-		if (sunriseSunset != null) {
+		if (sunriseSunset != null && sunriseSunset.getSunrise() != null && sunriseSunset.getSunset() != null) {
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 			pref.setSummary(getString(R.string.day_night_info_description, prt.format(sunriseSunset.getSunrise()),
 					prt.format(sunriseSunset.getSunset())));

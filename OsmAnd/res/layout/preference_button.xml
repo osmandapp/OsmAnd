@@ -28,25 +28,37 @@
 
 		<LinearLayout
 			android:layout_width="0dp"
-			android:layout_height="wrap_content"
+			android:layout_height="match_parent"
 			android:layout_gravity="center_vertical"
 			android:layout_weight="1"
-			android:orientation="vertical"
-			android:paddingLeft="@dimen/content_padding"
-			android:paddingRight="@dimen/content_padding"
-			android:paddingEnd="@dimen/content_padding"
-			android:paddingStart="@dimen/content_padding">
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:orientation="vertical">
 
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@android:id/title"
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@android:id/title"
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					android:layout_weight="1"
+					android:layout_gravity="center_vertical"
+					android:gravity="center_vertical"
+					android:ellipsize="marquee"
+					android:singleLine="true"
+					android:textColor="?colorAccent"
+					android:paddingStart="0dp"
+					android:paddingLeft="0dp"
+					android:paddingEnd="@dimen/content_padding"
+					android:paddingRight="@dimen/content_padding"
+					android:textSize="@dimen/default_list_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:text="Button text" />
+
+			<View
+				android:id="@+id/divider"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:ellipsize="marquee"
-				android:singleLine="true"
-				android:textColor="?colorAccent"
-				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_medium"
-				tools:text="Button text" />
+				android:layout_height="1dp"
+				android:visibility="gone"
+				android:background="?attr/dashboard_divider" />
 
 		</LinearLayout>
 

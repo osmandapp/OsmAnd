@@ -49,6 +49,14 @@
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_cameras" />
 
+	<Preference
+		android:key="speed_cameras_uninstalled"
+		android:layout="@layout/preference_permission"
+		android:persistent="false"
+		android:summary="@string/read_more"
+		android:title="@string/speed_cameras_alert"
+		tools:icon="@drawable/ic_action_alert" />
+
 	<SwitchPreferenceCompat
 		android:key="speak_tunnels"
 		android:layout="@layout/preference_switch"

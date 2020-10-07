@@ -16,49 +16,75 @@ import java.util.Collection;
 public class SearchResult {
 	// search phrase that makes search result valid 
 	public SearchPhrase requiredSearchPhrase;
+
+	// internal package fields (used for sorting)
+	public SearchResult parentSearchResult;
+	String wordsSpan ;
+	boolean firstUnknownWordMatches;
+	Collection<String> otherWordsMatch = null;
+
 	
 	public Object object;
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
-	
+
 	public double priority;
 	public double priorityDistance;
-	public String wordsSpan ;
-	public SearchResult parentSearchResult;
-	public Collection<String> otherWordsMatch = null;
-	public boolean firstUnknownWordMatches = true;
-	public boolean unknownPhraseMatches = false;
+
+	public LatLon location;
+	public int preferredZoom = 15;
+
+	public String localeName;
+	public String alternateName;
+	public Collection<String> otherNames;
+	
+	public String localeRelatedObjectName;
+	public Object relatedObject;
+	public double distRelatedObjectName;
 
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
 	}
+	private static final double MAX_TYPE_WEIGHT = 10;
 
+	// maximum corresponds to the top entry
 	public double getUnknownPhraseMatchWeight() {
-		return getUnknownPhraseMatchWeight(false);
+		// if result is a complete match in the search we prioritize it higher
+		return getSumPhraseMatchWeight() / Math.pow(MAX_TYPE_WEIGHT, getDepth() - 1);
 	}
-
-	private double getUnknownPhraseMatchWeight(boolean isHouse) {
-		double res = 0;
-		isHouse = isHouse || objectType == ObjectType.HOUSE;
-		if (unknownPhraseMatches) {
-			res = isHouse ? ObjectType.getTypeWeight(ObjectType.HOUSE) : ObjectType.getTypeWeight(objectType);
-		}
-		if (res == 0 && parentSearchResult != null) {
-			return parentSearchResult.getUnknownPhraseMatchWeight(isHouse);
+	
+	public double getSumPhraseMatchWeight() {
+		// if result is a complete match in the search we prioritize it higher
+		boolean match = requiredSearchPhrase.countWords(localeName) <= getSelfWordCount();
+		double res = ObjectType.getTypeWeight(match ? objectType : null);
+		if (parentSearchResult != null) {
+			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
 		return res;
 	}
 
+	public int getDepth() {
+		if (parentSearchResult != null) {
+			return 1 + parentSearchResult.getDepth();
+		}
+		return 1;
+	}
+
 	public int getFoundWordCount() {
+		int inc = getSelfWordCount();
+		if (parentSearchResult != null) {
+			inc += parentSearchResult.getFoundWordCount();
+		}
+		return inc;
+	}
+
+	private int getSelfWordCount() {
 		int inc = 0;
 		if (firstUnknownWordMatches) {
 			inc = 1;
 		}
 		if (otherWordsMatch != null) {
 			inc += otherWordsMatch.size();
-		}
-		if (parentSearchResult != null) {
-			inc += parentSearchResult.getFoundWordCount();
 		}
 		return inc;
 	}
@@ -79,16 +105,6 @@ public class SearchResult {
 		return priority - 1 / (1 + pd * distance);
 	}
 	
-	public LatLon location;
-	public int preferredZoom = 15;
-	public String localeName;
-	public String alternateName;
-	
-	public Collection<String> otherNames;
-	
-	public String localeRelatedObjectName;
-	public Object relatedObject;
-	public double distRelatedObjectName;
 
 	@Override
 	public String toString() {

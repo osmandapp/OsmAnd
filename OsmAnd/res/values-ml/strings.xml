@@ -205,7 +205,6 @@
     <string name="access_direction_audio_feedback">ദിശ ശബ്ദസൂചിക</string>
     <string name="access_direction_haptic_feedback">"ദിശ ഹാപ്ടിക്  ഫീഡ്ബാക്ക്"</string>
     <string name="map_mode">മാപ് രീതി</string>
-    <string name="number_of_gpx_files_selected_pattern">"%s ജിപിഎക്സ് ഫയലുകള്‍ തിരഞ്ഞെടുത്തിരിക്കുന്നു "</string>
     <string name="no_waypoints_found">"വഴിത്തിരിവുകളൊന്നും കണ്ടെത്താനായില്ല "</string>
     <string name="osm_editors_ranking">ഓ എസ് എം എഡിറ്ററുഡെ റാങ്കിങ്ങ്</string>
     <string name="osm_live_month_cost_desc">മാസവരി.</string>
@@ -272,8 +271,6 @@
     <string name="int_hour">മ.</string>
     <string name="keep_navigation_service">നിലനിര്‍ത്തുക</string>
     <string name="lang_he">"ഹീബ്രൂ ഭാക്ഷ "</string>
-    <string name="gpx_monitoring_start">"ജിപിഎക്സ് റിക്കോഡിങ്ങ് തുടങ്ങുക "</string>
-    <string name="gpx_monitoring_stop">"ജിപിഎക്സ് റിക്കോഡിങ്ങ് നിര്‍ത്തുക "</string>
     <string name="rendering_attr_showSurfaces_name">പാതയുടെ പ്രതലം കാണിക്കുക</string>
     <string name="sort_by_distance">"ദൂരക്രമത്തിലടുക്കുക "</string>
     <string name="loading_smth">%1$s... വന്ന് കൊണ്ടിരിക്കുന്നു…</string>
@@ -334,7 +331,6 @@
     <string name="auto_zoom_map">ഭൂപടം ഓട്ടോസൂമാക്കിക്കാണിക്കുക</string>
     <string name="bg_service_sleep_mode_on">"ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിക്കുന്നത് നിര്‍ത്തുക "</string>
     <string name="map_widget_back_to_loc">എവിടെയാണ് ഞാന്‍</string>
-    <string name="map_widget_monitoring">ജിപിഎക്സ് റിക്കോഡിങ്ങ്</string>
     <string name="map_widget_altitude">ഉയരം</string>
     <string name="map_widget_next_turn">അടുത്ത തിരുവ്</string>
     <string name="map_widget_next_turn_small">അടുത്ത (ചെറു) തിരുവ്</string>
@@ -358,7 +354,6 @@
     <string name="user_password">"നിങ്ങളുടെ ഓഎസ്എം പാസ്സ്വേഡ് "</string>
     <string name="animate_route">"സിമുലേഷന്‍ ആരംഭിക്കുക "</string>
     <string name="file_with_name_already_exists">ആ പേരില്‍ ഒരു ഫയല്‍ നിലവിലുണ്ടു്.</string>
-    <string name="shared_string_gpx_route">ജിപിഎക്സ് മാര്‍ഗം</string>
     <string name="file_with_name_already_exist">അതെ പേരില്‍ ഒരു ഫയല്‍ നിലവിലുണ്ടു്.</string>
     <string name="local_index_map_data">ഭൂപട വിവരങ്ങ</string>
     <string name="search_offline_clear_search">"പുതിയ  തെരച്ചില്‍"</string>
@@ -948,7 +943,6 @@
     <string name="switch_start_finish">പ്രാരംഭ സ്ഥലം ലക്ഷ്യസ്ഥാനവും തിരിച്ചിടുക</string>
     <string name="simulate_your_location_stop_descr">"നിങ്ങളുടെ സ്ഥാനം  സിമുലേറ്റ് ചെയ്യുന്നത് നിര്‍ത്തുക"</string>
     <string name="download_live_updates">"പരിഷ്കരണങ്ങള്‍ "</string>
-    <string name="disable_recording_once_app_killed_descrp">"ആപ്പിനെ (അടുത്തകാലത്തുള്ള അപ്പുകള്‍ -ആന്ഡ്രോയിഡ് വഴി)നിര്‍ത്തിയാല്‍ ജി പി എക്സ് റിക്കോഡിങ്ങ് നിര്‍ത്തും. (ഓഎസ്എംആന്ഡിന്റെ ബാക്ക്ഗ്രൗണ്ട് സൂചിക ആന്ഡ്രോയിഡില്‍ നോട്ടിഫിക്കേഷന്‍ പലകയില്‍ നിന്നും  അപ്രത്യ്ക്ഷമാകും"</string>
     <string name="application_dir_change_warning3">പുതിയ ലക്ഷ്യത്തിലേക്കുള്ള OsmAnd ഡാറ്റാ ഫയലുകൾ നീക്കണോ\?</string>
     <string name="storage_directory_multiuser">ഒന്നിലധികം ഉപഭോക്താക്കളുടെ സംഭരണസ്ഥലം</string>
     <string name="agps_data_last_downloaded">അവസാനം ഡൗണ്‍ലോഡ് ചെയ്തത്: %1$s</string>
@@ -1097,7 +1091,6 @@
     <string name="max_speed_none">"ഇല്ല "</string>
     <string name="map_widget_distancemeasurement">ദൂരം അളക്കുക</string>
     <string name="map_widget_audionotes">ഓഡിയോ കുറിപ്പുകള്‍</string>
-    <string name="monitoring_control_start">ജിപിഎക്സ്</string>
     <string name="no_buildings_found">"കെട്ടിടം  കണ്ടുപിടിക്കാനായില്ല."</string>
     <string name="gps_not_available">ഉപകരണ സജ്ജീകരണത്തില്‍ നിന്നും ജിപിഎസ് സജീവമാക്കുക</string>
     <string name="no_route">"വഴി കണ്ടെത്തിയില്ല "</string>
@@ -1132,7 +1125,6 @@
         <u>ഓണ്‍ലൈന്‍ ഓഎസ്എം </u> ഭൂപടങ്ങള്‍ ചിത്രങ്ങളോടെ തരംതിരിച്ചത്</string>
     <string name="foot">അടി</string>
     <string name="mile">മൈ.</string>
-    <string name="context_menu_item_add_waypoint">ജിപിഎക്സ് പാതയില്‍ പാതബിന്ദു ചേര്‍ക്കുക</string>
     <string name="build_installed">{0} വിജയകരമായി ഇന്സ്റ്റാള്‍ ചെയതിരിക്കുന്നു ({1}).</string>
     <string name="maps_could_not_be_downloaded">"ഈ ഭൂപടം ഡൗണ്‍ലോഡ് ചെയ്യാനാവില്ല "</string>
     <string name="continuous_rendering">തുടര്‍ച്ചയായി വരച്ച് കാണിക്കുക</string>
@@ -1208,7 +1200,6 @@
     <string name="shared_string_clear">വൃത്തിയാക്കുക</string>
     <string name="shared_string_clear_all">എല്ലാം വൃത്തിയാക്കുക(കളയുക -ക്ളീയര്‍)</string>
     <string name="shared_string_save">സൂക്ഷിക്കുക</string>
-    <string name="shared_string_save_as_gpx">"പുതിയ ജിപിഎക്സ്  ഫയലായി സൂക്ഷിക്കുക "</string>
     <string name="shared_string_delete_all">എല്ലാം നീക്കം ചെയ്യുക</string>
     <string name="shared_string_share">പങ്ക് വക്കുക</string>
     <string name="shared_string_apply">പ്രയോഗിക്കുക</string>
@@ -1291,7 +1282,7 @@
     <string name="search_position_current_location_found">എന്റെ സ്ഥാനം (കണ്ടെത്തിയത്)</string>
     <string name="search_position_address">വിലാസം…</string>
     <string name="search_position_favorites">ഇഷ്ടമുളളവ…</string>
-    <string name="search_position_undefined">നിഷ്കര്‍ഷിക്കപെടാത്തത്</string>
+    <string name="shared_string_undefined">നിഷ്കര്‍ഷിക്കപെടാത്തത്</string>
     <string name="select_search_position">മൂലസ്ഥാനം:</string>
     <string name="local_index_upload_gpx_description">ഓഎസ്എം കംമ്മ്യൂണിറ്റിക്ക് ജിപിഎക്സ് ഫയലുകള്‍ കയറ്റി അയക്കുക (അപ്ലോഡ്). അവര്‍ക്ക് ഇത് ഭൂപടങ്ങള്‍ മെച്ച്പ്പെടുത്താന്‍ ഉപകരിക്കും.</string>
     <string name="local_index_items_uploaded">%2$d യില്‍ %1$d ഇനങ്ങള്‍ വിജയകരമായ് കയറ്റിയിരിക്കുന്നു(അപ്ലോഡ്).</string>
@@ -1335,7 +1326,6 @@
     <string name="av_camera_focus_hiperfocal">ഹൈപ്പര്‍ഫോക്കല്‍ ഫോക്കസ്</string>
     <string name="av_camera_focus_infinity">"അനന്തതയിലുള്ള  ഫോക്കസ് "</string>
     <string name="av_camera_pic_size">"ക്യാമറയിലെ പടത്തിന്റെ വലിപ്പം "</string>
-    <string name="show_gpx">"ജിപിഎക്സ്  വിവരങ്ങള്‍ കാണിക്കുക"</string>
     <string name="update_all">എല്ലാം പരിഷ്കരിക്കട്ടെ (%1$s MB)</string>
     <string name="search_on_the_map_item">"ഭൂപടത്തില്‍ തിരയുന്നു "</string>
     <string name="updates_size">" പരിഷ്ക്കരണത്തിന്റെ വലിപ്പം"</string>
@@ -1380,7 +1370,6 @@
     <string name="navigate_point_easting">കിഴക്കോട്ട്</string>
     <string name="rendering_attr_busRoutes_name">ബസ് റൂട്ടുകള്‍</string>
     <string name="save_global_track_interval">സാധാരണ റിക്കോഡിങ്ങിന്റെ ഇടവേള</string>
-    <string name="save_track_to_gpx_globally">"ജിപിഎക്സ് ഫയലിലോട്ട്  പാത റിക്കോഡ് ചെയ്യുക"</string>
     <string name="save_current_track">ഇപ്പോഴത്തെ ട്രാക്ക് സംഭരിക്കുക</string>
     <string name="save_track_interval">വഴികാട്ടുമ്പോളുള്ള റിക്കോഡിങ്ങിന്റെ ഇടവേള</string>
     <string name="lang_sw">"സ്വാഹിലി "</string>
@@ -1520,7 +1509,6 @@
     <string name="poi_filter_closest_poi">അടുത്തുള്ള താല്‍പര്യബിന്ദുക്കള്‍ (പിഓഐ)</string>
     <string name="poi_filter_custom_filter">കസ്റ്റം അരിപ്പ</string>
     <string name="poi_filter_namefinder">ഓണ്‍ലൈനില്‍ പേര് തെരയുക</string>
-    <string name="layer_gpx_layer">"ജിപിഎക്സ് ഫയലുകള്‍ "</string>
     <string name="layer_osm_bugs">"ഓണ്‍ലൈനിലുള്ള ഓഎസ്എം കുറിപ്പുകള്‍ "</string>
     <string name="layer_poi">താല്‍പര്യ ബിന്ദു (പി ഓ ഐ )…</string>
     <string name="layer_map">ഭൂപടഉറവിടം…</string>
@@ -1784,7 +1772,6 @@
     <string name="lang_lo">ലാവോ</string>
     <string name="proxy_host_title">പ്രോക്സി ഹോസ്റ്റ്</string>
     <string name="average">ശരാശരി</string>
-    <string name="quick_action_add_gpx">ജിപിഎക്സ് പാതയില്‍ പാതബിന്ദു ചേര്‍ക്കുക</string>
     <string name="quick_action_add_favorite">"താല്‍പര്യമുള്ളവയില്‍ കൂട്ടുക "</string>
     <string name="quick_action_add_configure_map">ഭൂപടം സജ്ജീകരിക്കുക</string>
     <string name="quick_action_add_navigation">ഗതിനിയന്ത്രണം</string>
@@ -1921,8 +1908,6 @@
     <string name="save_route_point">"റൂട്ട് പോയിന്റ് സൂക്ഷിക്കുക "</string>
     <string name="waypoint_one">വേപോയിന്റ് 1</string>
     <string name="route_point_one">റൂട്ട് പോയിന്റ് 1</string>
-    <string name="empty_state_my_tracks">"ജിപിഎക്സ് ഫയലുകള്‍  ചേര്‍ക്കു"</string>
-    <string name="empty_state_my_tracks_desc">"ജിപിഎക്സ്  ഫയലുകള്‍ ഇംപോര്‍ട്ടോ  , ട്രാക്കുകള്‍ റിക്കോ ചെയ്യുക"</string>
     <string name="empty_state_favourites">ഫേവറൈറ്റുകള്‍ ചേര്‍ക്കു</string>
     <string name="total_donations">"ആകെ സംഭാവനകള്‍ "</string>
     <string name="day_off_label">ഓഫ്</string>
@@ -2058,7 +2043,6 @@
     <string name="osm_edit_deleted_poi">OSM POI ഇല്ലാതാക്കി</string>
     <string name="osm_edit_reopened_note">OSM കുറിപ്പ് വീണ്ടും തുറന്നു</string>
     <string name="osm_edit_commented_note">OSM കുറിപ്പിൽ അഭിപ്രായമിട്ടു</string>
-    <string name="osm_edit_removed_note">OSM കുറിപ്പ് ഇല്ലാതാക്കി</string>
     <string name="osm_edit_created_note">OSM കുറിപ്പു് സൃഷ്ടിച്ചു</string>
     <string name="osn_add_dialog_title">കുറിപ്പ് സൃഷ്ടിക്കുക</string>
     <string name="osm_edit_created_poi">OSM POI സൃഷ്ടിച്ചു</string>
@@ -2093,7 +2077,6 @@
     <string name="speed_limit_exceed_message">സ്പീഡ് ലിമിറ്റ് ടോളറൻസ് മാർജിൻ തിരഞ്ഞെടുക്കുക, അതിന് മുകളിൽ നിങ്ങൾക്ക് ഒരു വോയ്സ് മുന്നറിയിപ്പ് ലഭിക്കും.</string>
     <string name="fav_point_emoticons_message">സ്ട്രിംഗ് ഇമോട്ടിക്കോണുകൾ ഒരു ഫയലിലേക്ക് ശരിയായി സംരക്ഷിക്കുന്നതിന് പേര് %1$s എന്നതിലേക്ക് പരിഷ്ക്കരിച്ചു.</string>
     <string name="print_route">പ്രിന്റ് റൂട്ട്</string>
-    <string name="save_global_track_interval_descr">" ട്രാക്ക് റെക്കോർഡിംഗിന് പൊതുവായ ലോഗിംഗ് ഇടവേള തിരഞ്ഞെടുക്കുക (മാപ്പിലെ ജിപിഎക്സ് ലോഗിംഗ് വിഡ്ജറ്റ് വഴി പ്രവർത്തനക്ഷമമാക്കിയത്)."</string>
     <string name="save_track_to_gpx_globally_descr">"ജിപിഎക്സ് ഫയലിലേക്കു്  സ്ഥാനം ലോഗ്ഗിങ് ചെയ്യുന്നത്, ഭൂപടത്തിൽ ജിപിഎക്സ് ലോഗിങ് വിഡ്ജെറ്റ് ഉപയോഗിച്ചു് ഓണാക്കുന്നതാണു്."</string>
     <string name="save_current_track_descr">ഇപ്പോൾ നിലവിലുള്ള ട്രാക്ക് ജിപിഎക്സ് ഫയൽ ആയി സംരക്ഷിക്കുക.</string>
     <string name="save_track_to_gpx">നാവിഗേഷൻ സമയത്ത് ട്രാക്ക് ഓട്ടോമാറ്റിക്കായി റെക്കോർഡ് ചെയ്യുക</string>
@@ -2540,7 +2523,6 @@
     <string name="import_track">GPX ഫയൽ ഇംപോർട്ട് ചെയ്യുക</string>
     <string name="import_track_desc">%1$s ഫയലില്‍ -വേപോയിന്റ് ഇല്ല, ട്രാക്കായി ഇംപോർട്ട് ചെയ്യണോ\?</string>
     <string name="move_point">പോയിന്റ് നീക്കുക</string>
-    <string name="add_segment_to_the_track">ഒരു GPX ഫയലിൽ ചേർക്കുക</string>
     <string name="show_direction">ദൂരം സൂചന</string>
     <string name="map_orientation_change_in_accordance_with_speed">മാപ്പ് ഓറിയന്റേഷൻ ത്രെഷോൾഡ്</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">"താഴെയുള്ള \'ചലന ദിശ\' നിന്നും \'Compass Directon\' എന്നതിലേക്കുള്ള സ്വിച്ചുചെയ്യാനുള്ള  വേഗത തിരഞ്ഞെടുക്കുക."</string>
@@ -2563,7 +2545,6 @@
     <string name="shared_string_finish">പൂർത്തിയാക്കുക</string>
     <string name="plan_route">റൂട്ട് പ്ലാന്‍ ചെയ്യുക</string>
     <string name="marker_save_as_track_descr">ഇനിപ്പറയുന്ന GPX ഫയലിലേക്ക് നിങ്ങളുടെ മാർക്കറുകൾ എക്സ്പോര്‍ട്ട് ചെയ്യുക:</string>
-    <string name="marker_save_as_track">GPX ഫയൽ ആയി സംരക്ഷിക്കുക</string>
     <string name="move_to_history">ചരിത്രത്തിലേക്ക് നീക്കുക</string>
     <string name="group_will_be_removed_after_restart">നിങ്ങൾ അടുത്ത തവണ ആപ്പ് ആരംഭിക്കുമ്പോൾ ഈ ഗ്രൂപ്പ് നഷ്ടമാകും.</string>
     <string name="use_system_keyboard">സിസ്റ്റം കീബോർഡ് ഉപയോഗിക്കുക</string>
@@ -2662,7 +2643,6 @@
     <string name="map_widget_intermediate_time">ഇടയ്ക്കുള്ള സമയം</string>
     <string name="shared_string_gpx_file">GPX ഫയൽ</string>
     <string name="shared_string_gpx_track">ട്രാക്ക്</string>
-    <string name="shared_string_gpx_files">GPX ഫയലുകൾ</string>
     <string name="wikivoyage_travel_guide">യാത്ര സഹായികള്‍</string>
     <string name="wikivoyage_travel_guide_descr">ഒസ്മാൻഡിനുള്ളിലുള്ള ലോകത്തേ പ്രധാനസ്ഥലങ്ങളുടെ യാത്രാസഹായി, ഇന്റർനെറ്റാവശ്യമില്ലാത്തത്.</string>
     <string name="test_voice_desrc">"ഇല്ലാത്ത അല്ലെങ്കിൽ തെറ്റായ നിർദ്ദേശങ്ങൾ തിരിച്ചറിയാൻ  ഒരു ബട്ടൺ ടാപ്പുചെയ്ത്,  വോയ്സ് പ്രോംപ്റ്റ് ശ്രദ്ധിക്കുക."</string>

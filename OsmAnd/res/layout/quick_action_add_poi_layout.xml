@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:theme="?attr/new_app_theme">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -17,12 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:minHeight="56dp"
+            android:minHeight="@dimen/wpt_list_item_height"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
@@ -38,8 +36,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/content_padding"
                 android:layout_marginRight="@dimen/content_padding"
-	            android:layout_marginEnd="@dimen/content_padding"
-	            android:layout_marginStart="@dimen/content_padding" />
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginStart="@dimen/content_padding" />
 
         </LinearLayout>
 
@@ -82,30 +80,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/content_padding"
                 android:layout_weight="1"
-	            android:layout_marginStart="@dimen/content_padding">
+                android:layout_marginStart="@dimen/content_padding">
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/poiTypeEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="@dimen/wpt_list_item_height"
+                    android:gravity="bottom"
+                    android:paddingBottom="@dimen/text_margin_small"
                     android:completionThreshold="1"
-                    android:drawableTint="@color/osmand_orange"
-                    android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                    osmand:drawableTint="@color/osmand_orange"
+                    osmand:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
+                    osmand:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
                     android:hint="@string/poi_dialog_poi_type"
                     android:imeOptions="actionSend"
                     android:inputType="text"
-                    android:layout_marginLeft="-4dp"
-                    tools:text="@string/lorem_ipsum"
-	                android:drawableEnd="@drawable/ic_action_arrow_drop_down"
-	                android:layout_marginStart="-4dp" />
+                    tools:text="@string/lorem_ipsum" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageButton
                 android:id="@+id/onlineDocumentationButton"
                 android:contentDescription="@string/shared_string_help"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/dashboard_parking_icon_size"
+                android:layout_height="@dimen/dashboard_parking_icon_size"
                 android:layout_gravity="bottom"
                 android:background="@null"
                 osmand:srcCompat="@drawable/ic_action_help"/>
@@ -153,9 +152,9 @@
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/default_sub_text_size"
                 osmand:typeface="@string/font_roboto_medium"
-	            android:layout_marginStart="@dimen/content_padding"
-	            android:paddingEnd="@dimen/content_padding"
-	            android:paddingStart="@dimen/content_padding" />
+                android:layout_marginStart="@dimen/content_padding"
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding" />
 
             <!--<net.osmand.plus.widgets.ButtonEx-->
                 <!--android:id="@+id/addTypeButton"-->

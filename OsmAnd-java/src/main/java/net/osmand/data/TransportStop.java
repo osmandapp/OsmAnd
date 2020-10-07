@@ -22,8 +22,6 @@ public class TransportStop extends MapObject {
 	public int y31;
 	private List<TransportStopExit> exits;
 	private List<TransportRoute> routes = null;
-	private LinkedHashMap<String, int[]> referencesToRoutesMap;
-	
 	private TransportStopAggregated transportStopAggregated;
 
 	public TransportStop() {}
@@ -34,19 +32,6 @@ public class TransportStop extends MapObject {
 	
 	public boolean isMissingStop() {
 		return MISSING_STOP_NAME.equals(getName());
-	}
-	
-	public LinkedHashMap<String, int[]> getReferencesToRoutesMap() {
-		return referencesToRoutesMap;
-	}
-
-	public void putReferencesToRoutes(String repositoryFileName, int[] referencesToRoutes) {
-		LinkedHashMap<String, int[]> referencesToRoutesMap = this.referencesToRoutesMap;
-		if (referencesToRoutesMap == null) {
-			referencesToRoutesMap = new LinkedHashMap<>();
-			this.referencesToRoutesMap = referencesToRoutesMap;
-		}
-		referencesToRoutesMap.put(repositoryFileName, referencesToRoutes);
 	}
 
 	public void setRoutes(List<TransportRoute> routes) {
@@ -113,10 +98,6 @@ public class TransportStop extends MapObject {
 
 	public boolean hasReferencesToRoutes() {
 		return !isDeleted() && referencesToRoutes != null && referencesToRoutes.length > 0;
-	}
-
-	public boolean hasReferencesToRoutesMap() {
-		return !isDeleted() && referencesToRoutesMap != null && !referencesToRoutesMap.isEmpty();
 	}
 
 	public Amenity getAmenity() {

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding">
+
+	<com.jaredrummler.android.colorpicker.ColorPickerView
+		android:id="@+id/color_picker_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:paddingBottom="@dimen/content_padding_small"
+		app:cpv_alphaChannelVisible="true" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<com.jaredrummler.android.colorpicker.ColorPanelView
+			android:id="@+id/color_panel_new"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			app:cpv_colorShape="square" />
+
+		<Space
+			android:layout_width="@dimen/content_padding"
+			android:layout_height="match_parent" />
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/color_hex_text_input"
+			style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			app:boxBackgroundColor="@color/material_text_input_layout_bg"
+			app:hintEnabled="false"
+			app:prefixText="#">
+
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/color_hex_edit_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="text"
+				android:maxLines="1"
+				android:minHeight="@dimen/bottom_sheet_list_item_height"
+				android:paddingTop="@dimen/content_padding_small"
+				android:paddingBottom="@dimen/content_padding_small"
+				android:paddingStart="@dimen/content_padding_small"
+				android:paddingLeft="@dimen/content_padding_small"
+				android:paddingEnd="@dimen/content_padding_small"
+				android:paddingRight="@dimen/content_padding_small"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="F1FF00" />
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

@@ -3,8 +3,9 @@ package net.osmand.plus.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -72,12 +74,13 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					public void onClick(View v) {
 						Activity activity = getActivity();
 						if (activity != null) {
-							AlertDialog.Builder b = new AlertDialog.Builder(activity);
+							Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+							AlertDialog.Builder b = new AlertDialog.Builder(themedContext);
 							b.setTitle(R.string.favorite_category_name);
-							final EditText nameEditText = new EditText(activity);
+							final EditText nameEditText = new EditText(themedContext);
 							nameEditText.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 							nameEditText.setText(group.getName());
-							LinearLayout container = new LinearLayout(activity);
+							LinearLayout container = new LinearLayout(themedContext);
 							int sidePadding = AndroidUtils.dpToPx(activity, 24f);
 							int topPadding = AndroidUtils.dpToPx(activity, 4f);
 							container.setPadding(sidePadding, topPadding, sidePadding, topPadding);
@@ -104,9 +107,8 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.create();
 		items.add(editNameItem);
 
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final View changeColorView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.change_fav_color, null);
+		final View changeColorView = UiUtilities.getInflater(getContext(), nightMode)
+				.inflate(R.layout.change_fav_color, null, false);
 		((ImageView) changeColorView.findViewById(R.id.change_color_icon))
 				.setImageDrawable(getContentIcon(R.drawable.ic_action_appearance));
 		updateColorView((ImageView) changeColorView.findViewById(R.id.colorImage));
@@ -117,13 +119,15 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					public void onClick(View v) {
 						Activity activity = getActivity();
 						if (activity != null) {
-							final ListPopupWindow popup = new ListPopupWindow(activity);
+							final ListPopupWindow popup = new ListPopupWindow(v.getContext());
 							popup.setAnchorView(v);
 							popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
 							popup.setModal(true);
 							popup.setDropDownGravity(Gravity.END | Gravity.TOP);
 							if (AndroidUiHelper.isOrientationPortrait(activity)) {
-								popup.setVerticalOffset(AndroidUtils.dpToPx(app, 48f));
+								if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+									popup.setVerticalOffset(AndroidUtils.dpToPx(app, 48f));
+								}
 							} else {
 								popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
 							}
@@ -197,8 +201,12 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					.create();
 			items.add(markersGroupItem);
 
+			Drawable shareIcon = getContentIcon(R.drawable.ic_action_gshare_dark);
+			if (shareIcon != null) {
+				shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
+			}
 			BaseBottomSheetItem shareItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
+					.setIcon(shareIcon)
 					.setTitle(getString(R.string.shared_string_share))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {

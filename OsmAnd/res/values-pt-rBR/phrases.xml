@@ -66,7 +66,7 @@
     <string name="poi_bed">Loja de roupa de cama</string>
     <string name="poi_boutique">Butique</string>
     <string name="poi_carpet">Loja de tapetes</string>
-    <string name="poi_charity">Brechó beneficente</string>
+    <string name="poi_charity">Loja de caridade</string>
     <string name="poi_chemist">Drogaria</string>
     <string name="poi_clothes">Loja de roupas</string>
     <string name="poi_clothes_children">Vestuário infantil</string>
@@ -242,7 +242,7 @@
     <string name="poi_aerialway_drag_lift">Telesquis</string>
     <string name="poi_aerialway_rope_tow">Telecorda</string>
     <string name="poi_aerialway_goods">Teleférico de carga</string>
-    <string name="poi_aerialway_magic_carpet">"Esteira rolante "</string>
+    <string name="poi_aerialway_magic_carpet">Esteira rolante</string>
     <string name="poi_tunnel">Túnel</string>
     <string name="poi_bridge">Ponte</string>
     <string name="poi_speed_camera">Radar</string>
@@ -1171,7 +1171,7 @@
     <string name="poi_pump_powered">Elétrica</string>
     <string name="poi_pump_no">Sem bomba</string>
     <string name="poi_water_characteristic_mineral">Mineral</string>
-    <string name="poi_water_characteristic_mud">Característica d\'água: barrenta</string>
+    <string name="poi_water_characteristic_mud">Lama</string>
     <string name="poi_water_characteristic_sulfuric">Sulfurosa</string>
     <string name="poi_water_point">Ponto de água</string>
     <string name="poi_cooling_tower">Torre de resfriamento</string>
@@ -1221,7 +1221,7 @@
     <string name="poi_tactile_paving_yes">Sim</string>
     <string name="poi_tactile_paving_no">Sem piso tátil</string>
     <string name="poi_traffic_signals_sound_yes">Sim</string>
-    <string name="poi_traffic_signals_sound_no">Não</string>
+    <string name="poi_traffic_signals_sound_no">Som: Não</string>
     <string name="poi_traffic_signals_sound_walk">Só quando permitido atravessar</string>
     <string name="poi_ford_stepping_stones">Poldras (pedras de passagem)</string>
     <string name="poi_toll_hgv_yes">Pedágio para veículos pesados</string>
@@ -1809,11 +1809,11 @@
     <string name="poi_service_bicycle_rental_no">Aluguel de bicicletas: não</string>
     <string name="poi_service_bicycle_pump_yes">Bomba</string>
     <string name="poi_service_bicycle_pump_no">Bomba de bicicleta: não</string>
-    <string name="poi_service_bicycle_diy_yes">"Ferramentas para reparação "</string>
+    <string name="poi_service_bicycle_diy_yes">Ferramentas para reparação</string>
     <string name="poi_service_bicycle_diy_no">Ferramentas para reparação de bicicleta DIY: não</string>
-    <string name="poi_service_bicycle_cleaning_yes">"Limpeza "</string>
+    <string name="poi_service_bicycle_cleaning_yes">Limpeza</string>
     <string name="poi_service_bicycle_cleaning_no">Limpeza de bicicletas: não</string>
-    <string name="poi_service_bicycle_chaintool_yes">"Correia "</string>
+    <string name="poi_service_bicycle_chaintool_yes">Correia</string>
     <string name="poi_service_bicycle_chaintool_no">Ferramenta para correia de bicicleta: não</string>
     <string name="poi_service_bicycle_second_hand_yes">Venda de bicicletas de segunda mão</string>
     <string name="poi_service_bicycle_second_hand_no">Venda de bicicletas de segunda mão: não</string>
@@ -1881,7 +1881,7 @@
     <string name="poi_fuel_100ll">Combustível 100LL</string>
     <string name="poi_fuel_autogas">Autogás (GPL)</string>
     <string name="poi_fuel_jeta1">Combustível Jet A-1</string>
-    <string name="poi_fuel_adblue">Combustível AdBlue</string>
+    <string name="poi_fuel_adblue">Fluido de escape diesel</string>
     <string name="poi_crop_grass">Cultivo: grama</string>
     <string name="poi_crop_corn">Cultivo: milho</string>
     <string name="poi_crop_cereal">Cultivo: cereais</string>
@@ -2091,7 +2091,7 @@
     <string name="poi_historic_period_old_kingdom">Período histórico: império antigo (2686 – 2181 a.C.)</string>
     <string name="poi_historic_period_first_intermediate_period">Período histórico: primeiro período intermediário (2181 – 2055 a.C.)</string>
     <string name="poi_historic_period_second_intermediate_period">Período histórico: segundo período intermediário (1650 – 1550 a.C.)</string>
-    <string name="poi_historic_period_third_intermediate_period">"Período histórico: terceiro período intermediário (1069 – 664 a.C.) "</string>
+    <string name="poi_historic_period_third_intermediate_period">Período histórico: terceiro período intermediário (1069 – 664 a.C.)</string>
     <string name="poi_historic_period_first_persian_period">Período histórico: primeiro período persa</string>
     <string name="poi_historic_period_late_period">Período histórico: último período (664 – 332 a.C.)</string>
     <string name="poi_historic_period_second_persian_period">Período histórico: segundo período persa</string>
@@ -3502,7 +3502,7 @@
     <string name="poi_outcrop">Afloramento</string>
     <string name="poi_payment_contactless_yes">Sem contato</string>
     <string name="poi_payment_contactless_no">Não aceita Contactless</string>
-    <string name="poi_hazard_nuclear">"Risco nuclear "</string>
+    <string name="poi_hazard_nuclear">Risco nuclear</string>
     <string name="poi_hazard_erosion">Risco de erosão</string>
     <string name="poi_hazard_avalanche">Risco de avalanche</string>
     <string name="poi_hazard_slippery_road">Via escorregadia</string>
@@ -3544,7 +3544,7 @@
     <string name="poi_books_academic">Acadêmicos</string>
     <string name="poi_books_children">Crianças</string>
     <string name="poi_atoll">Atol</string>
-    <string name="poi_toll_gantry">"Portal de pedágio "</string>
+    <string name="poi_toll_gantry">Portal de pedágio</string>
     <string name="poi_childcare">Creche</string>
     <string name="poi_denotation">Denotação</string>
     <string name="poi_denotation_natural_monument">Monumento natural</string>
@@ -3815,7 +3815,7 @@
     <string name="poi_seamark_water_level_above_mwl">Nível de água: acima do nível médio da água</string>
     <string name="poi_seamark_water_level_below_mwl">Nível de água: abaixo do nível médio da água</string>
     <string name="poi_seamark_obstruction">Obstrução</string>
-    <string name="poi_drinking_water_refill_yes">Recarga de água potável: sim</string>
+    <string name="poi_drinking_water_refill_yes">Sim</string>
     <string name="poi_drinking_water_refill_no">Recarga de água potável: não</string>
     <string name="poi_drinking_water_refill_network">Rede de recarga de água potável</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sucção</string>
@@ -3824,4 +3824,25 @@
     <string name="poi_fire_hydrant_type_pipe">Tubo</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressão</string>
     <string name="poi_pump_status_missing_beam">Status da bomba: falta de feixe</string>
+    <string name="poi_traffic_signals_arrow_yes">Sim</string>
+    <string name="poi_traffic_signals_vibration_yes">Sim</string>
+    <string name="poi_traffic_signals_vibration_no">Vibração: Não</string>
+    <string name="poi_traffic_signals_arrow">Seta</string>
+    <string name="poi_traffic_signals_vibration">Vibração</string>
+    <string name="poi_give_box">Caixa de distribuição</string>
+    <string name="poi_city_block">Quarteirão</string>
+    <string name="poi_borough">Burgo</string>
+    <string name="poi_traffic_signals_arrow_no">Flecha: não</string>
+    <string name="poi_elevator">Elevador</string>
+    <string name="poi_departures_board_timetable">Calendário</string>
+    <string name="poi_departures_board_delay">Demora</string>
+    <string name="poi_departures_board_realtime">Tempo real</string>
+    <string name="poi_departures_board_yes">Sim</string>
+    <string name="poi_departures_board_no">Quadro de partidas: não</string>
+    <string name="poi_departures_board">Quadro de partidas</string>
+    <string name="poi_drinking_water_refill">Recarga de água potável</string>
+    <string name="poi_recycling_small_electrical_appliances">Pequenos aparelhos elétricos</string>
+    <string name="poi_beehive">Colmeia</string>
+    <string name="poi_nuts">Loja de nozes</string>
+    <string name="poi_fuel_lng">GNL</string>
 </resources>

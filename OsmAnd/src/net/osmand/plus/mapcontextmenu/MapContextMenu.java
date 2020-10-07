@@ -22,7 +22,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -51,7 +51,7 @@ import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -914,7 +914,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public int getFabIconId() {
-		int res = R.drawable.map_directions;
+		int res = R.drawable.ic_action_gdirections_dark;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
@@ -1042,7 +1042,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					}
 					FavoritePointEditor favoritePointEditor = getFavoritePointEditor();
 					if (favoritePointEditor != null) {
-						favoritePointEditor.add(getLatLon(), title, originObjectName);
+						favoritePointEditor.add(getLatLon(), title, getStreetStr(), originObjectName);
 					}
 				}
 			});
@@ -1062,7 +1062,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public ContextMenuAdapter getActionsContextMenuAdapter(boolean all) {
+	public ContextMenuAdapter getActionsContextMenuAdapter(boolean configure) {
 		MapActivity mapActivity = getMapActivity();
 		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(getMyApplication());
 		if (mapActivity != null) {
@@ -1070,8 +1070,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {
 				layer.populateObjectContextMenu(latLon, getObject(), menuAdapter, mapActivity);
 			}
-			mapActivity.getMapActions().addActionsToAdapter(all ? 0 : latLon.getLatitude(), all ? 0 : latLon.getLongitude(), menuAdapter, getObject(), all);
-		}
+			mapActivity.getMapActions().addActionsToAdapter(configure ? 0 : latLon.getLatitude(), configure ? 0 : latLon.getLongitude(), menuAdapter, configure ? null : getObject(), configure);		}
 		return menuAdapter;
 	}
 
@@ -1474,7 +1473,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController != null && menuController.displayDistanceDirection();
 	}
 
-	public String getSubtypeStr() {
+	public CharSequence getSubtypeStr() {
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
 			return menuController.getSubtypeStr();

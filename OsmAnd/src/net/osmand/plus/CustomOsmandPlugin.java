@@ -17,11 +17,12 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.settings.backend.SettingsHelper.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.MapSourcesSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.PluginSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.PoiUiFilterSettingsItem;
+import net.osmand.plus.settings.backend.SettingsHelper.PoiUiFiltersSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.SettingsCollectListener;
@@ -304,9 +305,9 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 									Algorithms.removeAllFiles(dir);
 								}
 							}
-						} else if (item instanceof PoiUiFilterSettingsItem) {
-							PoiUiFilterSettingsItem poiUiFilterSettingsItem = (PoiUiFilterSettingsItem) item;
-							List<PoiUIFilter> poiUIFilters = poiUiFilterSettingsItem.getItems();
+						} else if (item instanceof PoiUiFiltersSettingsItem) {
+							PoiUiFiltersSettingsItem poiUiFiltersSettingsItem = (PoiUiFiltersSettingsItem) item;
+							List<PoiUIFilter> poiUIFilters = poiUiFiltersSettingsItem.getItems();
 							for (PoiUIFilter filter : poiUIFilters) {
 								app.getPoiFilters().removePoiFilter(filter);
 							}

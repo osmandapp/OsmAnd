@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
@@ -40,32 +41,30 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.ContextMenuLayer;
-import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.FavouritesLayer;
-import net.osmand.plus.views.GPXLayer;
-import net.osmand.plus.views.ImpassableRoadsLayer;
-import net.osmand.plus.views.MapControlsLayer;
-import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.plus.views.MapMarkersLayer;
-import net.osmand.plus.views.MapQuickActionLayer;
-import net.osmand.plus.views.MapTextLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.DownloadedRegionsLayer;
+import net.osmand.plus.views.layers.FavouritesLayer;
+import net.osmand.plus.views.layers.GPXLayer;
+import net.osmand.plus.views.layers.ImpassableRoadsLayer;
+import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.layers.MapMarkersLayer;
+import net.osmand.plus.views.layers.MapQuickActionLayer;
+import net.osmand.plus.views.layers.MapTextLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.POIMapLayer;
-import net.osmand.plus.views.PointLocationLayer;
-import net.osmand.plus.views.PointNavigationLayer;
-import net.osmand.plus.views.RouteLayer;
-import net.osmand.plus.views.RulerControlLayer;
-import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.layers.POIMapLayer;
+import net.osmand.plus.views.layers.PointLocationLayer;
+import net.osmand.plus.views.layers.PointNavigationLayer;
+import net.osmand.plus.views.layers.RouteLayer;
+import net.osmand.plus.views.layers.RulerControlLayer;
+import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
-
-import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 
 /**
  * Object is responsible to maintain layers using by map activity
@@ -273,7 +272,9 @@ public class MapActivityLayers {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		final List<PoiUIFilter> list = new ArrayList<>();
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
-			addFilterToList(adapter, list, f, true);
+			if (!f.isTopWikiFilter()) {
+				addFilterToList(adapter, list, f, true);
+			}
 		}
 		list.add(poiFilters.getCustomPOIFilter());
 		adapter.setProfileDependent(true);
@@ -306,9 +307,9 @@ public class MapActivityLayers {
 								if (filter.isStandardFilter()) {
 									filter.removeUnsavedFilterByName();
 								}
-								poiFilters.addSelectedPoiFilter(PoiTemplateList.POI, filter);
+								poiFilters.addSelectedPoiFilter(filter);
 							} else {
-								poiFilters.removeSelectedPoiFilter(PoiTemplateList.POI, filter);
+								poiFilters.removeSelectedPoiFilter(filter);
 							}
 						}
 						mapView.refreshMap();
@@ -351,7 +352,9 @@ public class MapActivityLayers {
 		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
-			addFilterToList(adapter, list, f, false);
+			if (!f.isTopWikiFilter()) {
+				addFilterToList(adapter, list, f, false);
+			}
 		}
 
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !isNightMode(app));
@@ -370,8 +373,9 @@ public class MapActivityLayers {
 					if (pf.isStandardFilter()) {
 						pf.removeUnsavedFilterByName();
 					}
-					poiFilters.clearSelectedPoiFilters(PoiTemplateList.POI);
-					poiFilters.addSelectedPoiFilter(PoiTemplateList.POI, pf);
+					PoiUIFilter wiki = poiFilters.getTopWikiPoiFilter();
+					poiFilters.clearSelectedPoiFilters(wiki);
+					poiFilters.addSelectedPoiFilter(pf);
 					mapView.refreshMap();
 				}
 			}
@@ -445,12 +449,12 @@ public class MapActivityLayers {
 
 		final String layerOsmVector = "LAYER_OSM_VECTOR";
 		final String layerInstallMore = "LAYER_INSTALL_MORE";
-		final String layerEditInstall = "LAYER_EDIT";
+		final String layerAdd = "LAYER_ADD";
 
 		entriesMap.put(layerOsmVector, getString(R.string.vector_data));
 		entriesMap.putAll(settings.getTileSourceEntries());
 		entriesMap.put(layerInstallMore, getString(R.string.install_more));
-		entriesMap.put(layerEditInstall, getString(R.string.maps_define_edit));
+		entriesMap.put(layerAdd, getString(R.string.shared_string_add));
 
 		final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
@@ -499,26 +503,8 @@ public class MapActivityLayers {
 								updateMapSource(mapView, null);
 								updateItem(it, adapter, null);
 								break;
-							case layerEditInstall:
-								OsmandRasterMapsPlugin.defineNewEditLayer(activity, new ResultMatcher<TileSourceTemplate>() {
-
-									@Override
-									public boolean publish(TileSourceTemplate object) {
-										settings.MAP_TILE_SOURCES.set(object.getName());
-										settings.MAP_ONLINE_DATA.set(true);
-										if(it != null) {
-											it.setDescription(object.getName());
-										}
-										updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-										return true;
-									}
-
-									@Override
-									public boolean isCancelled() {
-										return false;
-									}
-
-								}, null);
+							case layerAdd:
+								OsmandRasterMapsPlugin.defineNewEditLayer(activity.getSupportFragmentManager(), null, null);
 								break;
 							case layerInstallMore:
 								OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
@@ -552,7 +538,7 @@ public class MapActivityLayers {
 							default:
 								settings.MAP_TILE_SOURCES.set(layerKey);
 								settings.MAP_ONLINE_DATA.set(true);
-								updateItem(it, adapter, layerKey);
+								updateItem(it, adapter, layerKey.replace(IndexConstants.SQLITE_EXT, ""));
 								updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 								break;
 						}

@@ -18,27 +18,26 @@
 
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
-			android:layout_width="fill_parent"
+			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height"
 			android:background="?attr/card_and_list_background_basic"
-			android:paddingRight="@dimen/content_padding"
-			android:paddingEnd="@dimen/content_padding"
-			android:minHeight="@dimen/toolbar_height"
+			app:contentInsetStartWithNavigation="@dimen/toolbar_inset_start_with_navigation"
 			osmand:subtitleTextColor="?android:textColorPrimary"
 			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar"
 			osmand:titleTextColor="?android:textColorPrimary">
 
-			<androidx.appcompat.widget.AppCompatImageView
+			<ImageButton
 				android:id="@+id/toolbar_action"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="match_parent"
+				style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+				android:layout_width="@dimen/acceptable_touch_radius"
+				android:layout_height="@dimen/acceptable_touch_radius"
 				android:layout_gravity="end"
-				android:contentDescription="@string/replace_all"
-				app:srcCompat="@drawable/ic_action_replace"
-				android:layout_marginRight="@dimen/content_padding_half"
-				android:layout_marginStart="@dimen/content_padding_half"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginEnd="@dimen/content_padding" />
+				android:layout_marginStart="@dimen/list_item_button_padding"
+				android:layout_marginLeft="@dimen/list_item_button_padding"
+				android:layout_marginEnd="@dimen/list_item_button_padding"
+				android:layout_marginRight="@dimen/list_item_button_padding"
+				android:contentDescription="@string/access_shared_string_navigate_up"
+				app:srcCompat="@drawable/ic_action_replace" />
 
 		</androidx.appcompat.widget.Toolbar>
 
@@ -70,13 +69,13 @@
 
 						<com.google.android.material.textfield.TextInputLayout
 
-							style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
 							android:id="@+id/name_caption"
+							style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_weight="1"
 							android:hint="@string/shared_string_name"
-							app:boxBackgroundColor="#4DCCCCCC">
+							app:boxBackgroundColor="@color/material_text_input_layout_bg">
 
 							<com.google.android.material.textfield.TextInputEditText
 								android:id="@+id/name_edit"
@@ -90,8 +89,8 @@
 								android:minHeight="@dimen/favorites_list_item_height"
 								android:paddingStart="@dimen/content_padding_small"
 								android:paddingLeft="@dimen/content_padding_small"
-								android:paddingRight="@dimen/content_padding_small"
 								android:paddingEnd="@dimen/content_padding_small"
+								android:paddingRight="@dimen/content_padding_small"
 								android:scrollHorizontally="false"
 								android:textSize="@dimen/default_list_text_size"
 								tools:text="@string/lorem_ipsum" />
@@ -104,13 +103,102 @@
 						android:id="@+id/name_icon"
 						android:layout_width="@dimen/favorites_icon_size"
 						android:layout_height="@dimen/favorites_icon_size"
-						android:padding="@dimen/favorites_icon_padding"
 						android:layout_gravity="end"
 						android:layout_margin="@dimen/content_padding_small"
 						android:contentDescription="@string/icon"
+						android:padding="@dimen/favorites_icon_padding"
 						app:srcCompat="@drawable/ic_action_home_dark" />
 
 				</FrameLayout>
+
+				<LinearLayout
+					android:id="@+id/address"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:gravity="center_vertical"
+					android:orientation="horizontal">
+
+					<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/address_caption"
+						style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginRight="@dimen/content_padding"
+						android:layout_weight="1"
+						android:hint="@string/shared_string_address"
+						app:boxBackgroundColor="@color/material_text_input_layout_bg"
+						app:hintAnimationEnabled="false">
+
+						<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/address_edit"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="start"
+							android:maxLines="4"
+							android:minHeight="@dimen/favorites_list_item_height"
+							android:paddingStart="@dimen/content_padding_small"
+							android:paddingLeft="@dimen/content_padding_small"
+							android:paddingEnd="@dimen/content_padding_small"
+							android:paddingRight="@dimen/content_padding_small"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="@string/lorem_ipsum" />
+
+					</com.google.android.material.textfield.TextInputLayout>
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/address_row"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/address_button"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding_half"
+						android:layout_marginLeft="@dimen/content_padding_half"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_marginRight="@dimen/content_padding"
+						android:layout_weight="1"
+						android:drawablePadding="8dp"
+						android:duplicateParentState="true"
+						android:gravity="center_vertical"
+						android:minHeight="@dimen/setting_list_item_small_height"
+						android:paddingStart="@dimen/content_padding_half"
+						android:paddingLeft="@dimen/content_padding_half"
+						android:paddingTop="@dimen/content_padding_half"
+						android:paddingEnd="@dimen/content_padding_half"
+						android:paddingRight="@dimen/content_padding_half"
+						android:paddingBottom="@dimen/content_padding_half"
+						android:text="@string/add_address"
+						android:textSize="@dimen/default_desc_text_size"
+						osmand:typeface="@string/font_roboto_medium"
+						tools:text="@string/add_address" />
+
+					<ImageButton
+						android:id="@+id/delete_address_icon"
+						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+						android:layout_width="@dimen/setting_list_item_small_height"
+						android:layout_height="@dimen/setting_list_item_small_height"
+						android:layout_gravity="center_vertical"
+						android:layout_marginStart="@dimen/list_item_button_padding"
+						android:layout_marginLeft="@dimen/list_item_button_padding"
+						android:layout_marginEnd="@dimen/list_item_button_padding"
+						android:layout_marginRight="@dimen/list_item_button_padding"
+						android:contentDescription="@string/delete_address"
+						app:srcCompat="@drawable/ic_action_trash_basket_16" />
+
+				</LinearLayout>
+
+				<View
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
+					android:background="?attr/dashboard_divider" />
 
 				<LinearLayout
 					android:id="@+id/description"
@@ -121,15 +209,16 @@
 					android:orientation="horizontal">
 
 					<com.google.android.material.textfield.TextInputLayout
-						style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
 						android:id="@+id/description_caption"
+						style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="@dimen/content_padding"
 						android:layout_marginRight="@dimen/content_padding"
 						android:layout_weight="1"
 						android:hint="@string/shared_string_description"
-						app:boxBackgroundColor="#4DCCCCCC">
+						app:boxBackgroundColor="@color/material_text_input_layout_bg"
+						app:hintAnimationEnabled="false">
 
 						<com.google.android.material.textfield.TextInputEditText
 							android:id="@+id/description_edit"
@@ -140,8 +229,8 @@
 							android:minHeight="@dimen/favorites_list_item_height"
 							android:paddingStart="@dimen/content_padding_small"
 							android:paddingLeft="@dimen/content_padding_small"
-							android:paddingRight="@dimen/content_padding_small"
 							android:paddingEnd="@dimen/content_padding_small"
+							android:paddingRight="@dimen/content_padding_small"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="@string/lorem_ipsum" />
 
@@ -151,19 +240,20 @@
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/description_button"
 					android:layout_width="wrap_content"
-					android:layout_height="@dimen/context_menu_buttons_bottom_height"
+					android:layout_height="@dimen/setting_list_item_small_height"
 					android:layout_marginStart="@dimen/content_padding_half"
 					android:layout_marginLeft="@dimen/content_padding_half"
-					android:paddingLeft="@dimen/content_padding_half"
-					android:paddingRight="@dimen/content_padding_half"
+					android:drawablePadding="8dp"
+					android:duplicateParentState="true"
 					android:gravity="center"
+					android:paddingStart="@dimen/content_padding_half"
+					android:paddingLeft="@dimen/content_padding_half"
+					android:paddingEnd="@dimen/content_padding_half"
+					android:paddingRight="@dimen/content_padding_half"
+					android:text="@string/add_description"
 					android:textSize="@dimen/default_desc_text_size"
 					osmand:typeface="@string/font_roboto_medium"
-					android:duplicateParentState="true"
-					android:text="@string/add_description"
-					tools:text="@string/add_description"
-					android:paddingStart="@dimen/content_padding_half"
-					android:paddingEnd="@dimen/content_padding_half"/>
+					tools:text="@string/add_description" />
 
 				<View
 					android:layout_width="match_parent"
@@ -175,7 +265,8 @@
 					android:layout_height="wrap_content"
 					android:gravity="center_vertical"
 					android:minHeight="@dimen/toolbar_height"
-					android:orientation="vertical">
+					android:orientation="vertical"
+					android:paddingBottom="@dimen/content_padding_half">
 
 					<LinearLayout
 						android:layout_width="match_parent"
@@ -227,8 +318,8 @@
 								android:layout_marginLeft="@dimen/content_padding_small"
 								android:layout_marginEnd="@dimen/content_padding"
 								android:layout_marginRight="@dimen/content_padding"
-								app:srcCompat="@drawable/ic_action_folder"
-								android:contentDescription="@string/shared_string_list" />
+								android:contentDescription="@string/shared_string_list"
+								app:srcCompat="@drawable/ic_action_folder" />
 
 						</LinearLayout>
 					</LinearLayout>
@@ -238,24 +329,37 @@
 						android:layout_height="wrap_content"
 						android:orientation="horizontal"
 						android:paddingTop="@dimen/context_menu_padding_margin_tiny"
-						android:paddingBottom="@dimen/content_padding">
+						android:paddingBottom="@dimen/content_padding_half">
 
 						<androidx.recyclerview.widget.RecyclerView
 							android:id="@+id/group_recycler_view"
-							android:paddingLeft="@dimen/content_padding_half"
-							android:paddingStart="@dimen/content_padding_half"
-							android:paddingRight="@dimen/content_padding"
-							android:paddingEnd="@dimen/content_padding"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:clipToPadding="false"
 							android:orientation="horizontal"
+							android:paddingStart="@dimen/content_padding_half"
+							android:paddingLeft="@dimen/content_padding_half"
+							android:paddingEnd="@dimen/content_padding"
+							android:paddingRight="@dimen/content_padding"
 							tools:itemCount="3"
-							tools:orientation="horizontal"
 							tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-							tools:listitem="@layout/point_editor_group_select_item"/>
+							tools:listitem="@layout/point_editor_group_select_item"
+							tools:orientation="horizontal" />
 					</LinearLayout>
 
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/add_hidden_group_info"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:letterSpacing="@dimen/description_letter_spacing"
+						android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+						android:text="@string/add_hidden_group_info"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_desc_text_size"
+						android:visibility="gone"
+						osmand:typeface="@string/font_roboto_regular" />
 				</LinearLayout>
 
 				<View
@@ -280,16 +384,16 @@
 					android:id="@+id/group_name_recycler_view"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:paddingLeft="@dimen/content_padding"
-					android:paddingRight="@dimen/content_padding"
-					android:paddingStart="@dimen/content_padding"
-					android:paddingEnd="@dimen/content_padding"
 					android:clipToPadding="false"
 					android:orientation="horizontal"
+					android:paddingStart="@dimen/content_padding"
+					android:paddingLeft="@dimen/content_padding"
+					android:paddingEnd="@dimen/content_padding"
+					android:paddingRight="@dimen/content_padding"
 					tools:itemCount="3"
-					tools:orientation="horizontal"
 					tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-					tools:listitem="@layout/point_editor_icon_category_item" />
+					tools:listitem="@layout/point_editor_icon_category_item"
+					tools:orientation="horizontal" />
 
 				<net.osmand.plus.widgets.FlowLayout
 					android:id="@+id/select_icon"
@@ -348,6 +452,7 @@
 					android:layout_marginLeft="@dimen/content_padding_small"
 					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
 					android:layout_marginBottom="@dimen/content_padding_half" />
+
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
@@ -392,11 +497,11 @@
 					android:id="@+id/select_shape"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:gravity="start"
 					android:layout_marginStart="@dimen/content_padding_small"
 					android:layout_marginLeft="@dimen/content_padding_small"
 					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
-					android:layout_marginBottom="@dimen/content_padding_half" />
+					android:layout_marginBottom="@dimen/content_padding_half"
+					android:gravity="start" />
 
 				<View
 					android:layout_width="match_parent"
@@ -448,6 +553,7 @@
 							android:lines="1"
 							android:text="@string/replace_point_descr"
 							android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+							android:textColor="@null"
 							tools:text="@string/replace_point_descr" />
 
 					</LinearLayout>
@@ -466,11 +572,11 @@
 						android:id="@+id/delete_action_icon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
+						android:layout_gravity="center_vertical"
 						android:layout_marginStart="@dimen/content_padding"
 						android:layout_marginLeft="@dimen/content_padding"
 						android:layout_marginEnd="@dimen/content_padding"
 						android:layout_marginRight="@dimen/content_padding"
-						android:layout_gravity="center_vertical"
 						android:contentDescription="@string/delete_point"
 						app:srcCompat="@drawable/ic_action_delete_dark" />
 

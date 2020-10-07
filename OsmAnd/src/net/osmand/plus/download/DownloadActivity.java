@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.legacy.widget.Space;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.AndroidUtils;
@@ -196,8 +196,14 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (intent != null && intent.getExtras() != null) {
 			String region = getIntent().getStringExtra(REGION_TO_SEARCH);
 			if (region != null && !region.isEmpty()) {
-				showDialog(this, SearchDialogFragment.createInstance(region,
-						getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)));
+				if (getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)) {
+					showDialog(this, SearchDialogFragment.createInstance(
+							region, true, DownloadActivityType.NORMAL_FILE,
+							DownloadActivityType.WIKIPEDIA_FILE));
+				} else {
+					showDialog(this, SearchDialogFragment.createInstance(
+							region, true, DownloadActivityType.NORMAL_FILE));
+				}
 			}
 			filter = intent.getExtras().getString(FILTER_KEY);
 			filterCat = intent.getExtras().getString(FILTER_CAT);
@@ -616,7 +622,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			return;
 		}
 		IndexItem worldMap = getDownloadThread().getIndexes().getWorldBaseMapItem();
-		if (!SUGGESTED_TO_DOWNLOAD_BASEMAP && worldMap != null && (!worldMap.isDownloaded() || worldMap.isOutdated()) &&
+		// (!worldMap.isDownloaded() || worldMap.isOutdated()) - now suggest to download if downloaded 
+		if (!SUGGESTED_TO_DOWNLOAD_BASEMAP && worldMap != null && worldMap.isDownloaded() && worldMap.isOutdated() &&
 				!getDownloadThread().isDownloading(worldMap)) {
 			SUGGESTED_TO_DOWNLOAD_BASEMAP = true;
 			AskMapDownloadFragment fragment = new AskMapDownloadFragment();

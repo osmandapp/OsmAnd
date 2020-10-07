@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -122,7 +123,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		if (child.getGroup() == Group.POI) {
 			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark, R.color.color_distance));
 		} else if (child.getGroup() == Group.BUG) {
-			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_bug_dark, R.color.color_distance));
+			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_osm_note_add, R.color.color_distance));
 		}
 
 		TextView descr = (TextView) v.findViewById(R.id.description);
@@ -248,7 +249,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-		item = menu.add(R.string.shared_string_export).setIcon(R.drawable.ic_action_gshare_dark);
+		Drawable shareIcon = getMyApplication().getUIUtilities().getIcon((R.drawable.ic_action_gshare_dark));
+		item = menu.add(R.string.shared_string_export)
+				.setIcon(AndroidUtils.getDrawableForDirection(getMyApplication(), shareIcon));
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -664,8 +667,17 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		recreateAdapterData();
 	}
 
+	private int getFirstVisible() {
+		return getListView().getFirstVisiblePosition();
+	}
+
 	private void notifyDataSetChanged() {
 		listAdapter.notifyDataSetChanged();
+	}
+
+	private void notifyDataSetChangedWithSelection(int firstVisible) {
+		listAdapter.notifyDataSetChanged();
+		getListView().setSelection(firstVisible);
 	}
 
 	public static class DeleteOsmEditsConfirmDialogFragment extends DialogFragment {
@@ -695,6 +707,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			builder.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					int firstVisible = parentFragment.getFirstVisible();
 					Iterator<OsmPoint> it = points.iterator();
 					while (it.hasNext()) {
 						OsmPoint osmPoint = it.next();
@@ -707,8 +720,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 						it.remove();
 						parentFragment.deletePoint(osmPoint);
 					}
-					parentFragment.notifyDataSetChanged();
-
+					parentFragment.notifyDataSetChangedWithSelection(firstVisible);
 				}
 			});
 			builder.setNegativeButton(R.string.shared_string_cancel, null);

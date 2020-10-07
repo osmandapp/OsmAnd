@@ -92,52 +92,7 @@
 					android:background="?attr/bg_color"
 					android:orientation="vertical">
 
-					<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="@dimen/dialog_button_height"
-						android:layout_marginStart="@dimen/content_padding"
-						android:layout_marginEnd="@dimen/content_padding"
-						android:background="?attr/btn_bg_border_inactive"
-						android:baselineAligned="false"
-						android:orientation="horizontal">
-
-						<FrameLayout
-							android:id="@+id/hillshade_btn_container"
-							android:layout_width="0dp"
-							android:layout_height="match_parent"
-							android:layout_weight="1">
-
-							<net.osmand.plus.widgets.TextViewEx
-								android:id="@+id/hillshade_btn"
-								android:layout_width="match_parent"
-								android:layout_height="match_parent"
-								android:background="?attr/selectableItemBackground"
-								android:gravity="center"
-								android:text="@string/shared_string_hillshade"
-								android:textSize="@dimen/default_desc_text_size"
-								osmand:typeface="@string/font_roboto_medium" />
-
-						</FrameLayout>
-
-						<FrameLayout
-							android:id="@+id/slope_btn_container"
-							android:layout_width="0dp"
-							android:layout_height="match_parent"
-							android:layout_weight="1">
-
-							<net.osmand.plus.widgets.TextViewEx
-								android:id="@+id/slope_btn"
-								android:layout_width="match_parent"
-								android:layout_height="match_parent"
-								android:background="?attr/selectableItemBackground"
-								android:gravity="center"
-								android:text="@string/shared_string_slope"
-								android:textSize="@dimen/default_desc_text_size"
-								osmand:typeface="@string/font_roboto_medium" />
-
-						</FrameLayout>
-
-					</LinearLayout>
+					<include layout="@layout/custom_radio_buttons" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/description"
@@ -197,7 +152,6 @@
 
 					<com.google.android.material.slider.Slider
 						android:id="@+id/transparency_slider"
-						style="@style/Widget.Styled.Slider"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:paddingTop="@dimen/list_header_settings_top_margin"
@@ -275,9 +229,8 @@
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="3" />
 
-						<com.google.android.material.slider.Slider
+						<com.google.android.material.slider.RangeSlider
 							android:id="@+id/zoom_slider"
-							style="@style/Widget.Styled.Slider"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_weight="1"

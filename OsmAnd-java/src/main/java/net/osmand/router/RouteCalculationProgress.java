@@ -12,11 +12,28 @@ public class RouteCalculationProgress {
 	public float totalEstimatedDistance = 0;
 	
 	public float routingCalculatedTime = 0;
-	public int loadedTiles = 0;
+	
+	public int relaxedSegments = 0;
 	public int visitedSegments = 0;
+	public int visitedDirectSegments = 0;
+	public int visitedOppositeSegments = 0;
+	public int directQueueSize = 0;
+	public int oppositeQueueSize = 0;
 	
 	public int totalIterations = 1;
 	public int iteration = -1;
+	
+	public long timeNanoToCalcDeviation = 0;
+	public long timeToLoad = 0;
+	public long timeToLoadHeaders = 0;
+	public long timeToFindInitialSegments = 0;
+	public long timeToCalculate = 0;
+	
+	public int distinctLoadedTiles = 0;
+	public int maxLoadedTiles = 0;
+	public int loadedPrevUnloadedTiles = 0;
+	public int unloadedTiles = 0;
+	public int loadedTiles = 0;
 	
 	public boolean isCancelled;
 	public boolean requestPrivateAccessRouting;
@@ -32,14 +49,16 @@ public class RouteCalculationProgress {
 			pr = Math.min(p * p / (all * all), 1);
 		}
 		float progress = INITIAL_PROGRESS;
-		if (totalIterations > 1) {
+		if (totalIterations <= 1) {
+			progress = INITIAL_PROGRESS + pr * (1 - INITIAL_PROGRESS);
+		} else if (totalIterations <= 2) {
 			if (iteration < 1) {
 				progress = pr * FIRST_ITERATION + INITIAL_PROGRESS;
 			} else {
 				progress = (INITIAL_PROGRESS + FIRST_ITERATION) + pr * (1 - FIRST_ITERATION - INITIAL_PROGRESS);
 			}
 		} else {
-			progress = INITIAL_PROGRESS + pr * (1 - INITIAL_PROGRESS);
+			progress = (float) ((iteration + Math.min(pr, 0.7)) / totalIterations);
 		}
 		return Math.min(progress * 100f, 99);
 	}

@@ -3,7 +3,7 @@ package net.osmand.plus.profiles;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 public abstract class AbstractProfileMenuAdapter<T extends ProfileAbstractViewHolder> extends RecyclerView.Adapter<T> {
 	protected ProfilePressedListener profilePressedListener;

@@ -14,6 +14,7 @@ import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
@@ -24,7 +25,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -153,7 +153,7 @@ public class CurrentPositionHelper {
 
 	// single synchronized method
 	private synchronized void processGeocoding(@NonNull Location loc,
-											   @Nullable ResultMatcher<GeocodingResult> geoCoding,
+											   @Nullable final ResultMatcher<GeocodingResult> geoCoding,
 											   boolean storeFound,
 											   boolean allowEmptyNames,
 											   @Nullable final ResultMatcher<RouteDataObject> result,
@@ -163,6 +163,21 @@ public class CurrentPositionHelper {
 											   boolean cancelPreviousSearch) {
 
 		if (cancelPreviousSearch && request != requestNumber.get()) {
+			if (geoCoding != null) {
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						geoCoding.publish(null);
+					}
+				});
+			} else if (result != null) {
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						result.publish(null);
+					}
+				});
+			}
 			return;
 		}
 
@@ -171,9 +186,18 @@ public class CurrentPositionHelper {
 		if (storeFound) {
 			lastAskedLocation = loc;
 			lastFound = gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad();
-		} else if(geoCoding != null) {
-			justifyResult(gr, geoCoding);
-		} else if(result != null) {
+		} else if (geoCoding != null) {
+			try {
+				justifyResult(gr, geoCoding);
+			} catch (Exception e) {
+				app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							geoCoding.publish(null);
+						}
+					});
+			}
+		} else if (result != null) {
 			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {
@@ -236,6 +260,7 @@ public class CurrentPositionHelper {
 		List<GeocodingResult> complete = new ArrayList<>();
 		double minBuildingDistance = 0;
 		if (res != null) {
+			GeocodingUtilities gu = new GeocodingUtilities();
 			for (GeocodingResult r : res) {
 				BinaryMapIndexReader foundRepo = null;
 				List<BinaryMapReaderResource> rts  = usedReaders;
@@ -258,7 +283,7 @@ public class CurrentPositionHelper {
 				} else if (foundRepo != null) {
 					List<GeocodingResult> justified = null;
 					try {
-						justified = new GeocodingUtilities().justifyReverseGeocodingSearch(r, foundRepo,
+						justified = gu.justifyReverseGeocodingSearch(r, foundRepo,
 								minBuildingDistance, result);
 					} catch (IOException e) {
 						log.error("Exception happened during reverse geocoding", e);
@@ -276,6 +301,7 @@ public class CurrentPositionHelper {
 					complete.add(r);
 				}
 			}
+			gu.filterDuplicateRegionResults(complete);
 		}
 
 		if (result.isCancelled()) {
@@ -286,7 +312,7 @@ public class CurrentPositionHelper {
 			});
 			return;
 		}
-		Collections.sort(complete, GeocodingUtilities.DISTANCE_COMPARATOR);
+//		Collections.sort(complete, GeocodingUtilities.DISTANCE_COMPARATOR);
 //		for(GeocodingResult rt : complete) {
 //			System.out.println(rt.toString());
 //		}

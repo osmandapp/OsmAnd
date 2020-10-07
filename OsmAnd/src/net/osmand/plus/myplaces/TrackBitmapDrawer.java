@@ -87,7 +87,7 @@ public class TrackBitmapDrawer {
 		paint.setStrokeWidth(AndroidUtils.dpToPx(app, 4f));
 		defPointColor = ContextCompat.getColor(app, R.color.gpx_color_point);
 		paintIcon = new Paint();
-		pointSmall = BitmapFactory.decodeResource(app.getResources(), R.drawable.map_white_shield_small);
+		pointSmall = BitmapFactory.decodeResource(app.getResources(), R.drawable.ic_white_shield_small);
 		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(app, R.drawable.map_location_default);
 	}
 

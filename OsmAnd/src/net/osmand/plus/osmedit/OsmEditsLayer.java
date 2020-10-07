@@ -1,28 +1,33 @@
 package net.osmand.plus.osmedit;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		ContextMenuLayer.IMoveObjectProvider {
@@ -31,10 +36,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	private final MapActivity activity;
 	private final OpenstreetmapLocalUtil mOsmChangeUtil;
 	private final OsmBugsLocalUtil mOsmBugsUtil;
-	private Bitmap poi;
-	private Bitmap bug;
-	private OsmandMapTileView view;
-	private Paint paintIcon;
 
 	private ContextMenuLayer contextMenuLayer;
 
@@ -47,12 +48,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
-		this.view = view;
-
-		poi = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_poi);
-		bug = poi;
-		paintIcon = new Paint();
-
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
@@ -87,21 +82,54 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 	}
 
-	private void drawPoint(Canvas canvas, OsmPoint o, float x, float y) {
-		Bitmap b;
-		if (o.getGroup() == OsmPoint.Group.POI) {
-			b = poi;
-		} else if (o.getGroup() == OsmPoint.Group.BUG) {
-			b = bug;
-		} else {
-			b = poi;
+	private void drawPoint(Canvas canvas, OsmPoint osmPoint, float x, float y) {
+		float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+		int iconId = getIconId(osmPoint);
+		BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
+		if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+			backgroundType = BackgroundType.COMMENT;
 		}
-		canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
+				ContextCompat.getColor(activity, R.color.created_poi_icon_color), true, false,
+				iconId, backgroundType);
+		pointImageDrawable.setAlpha(0.8f);
+		int offsetY = backgroundType.getOffsetY(activity, textScale);
+		pointImageDrawable.drawPoint(canvas, x, y - offsetY, textScale, false);
+	}
+
+	public int getIconId(OsmPoint osmPoint) {
+		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
+			int iconResId = 0;
+			String poiTranslation = osmP.getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			if (poiTranslation != null && activity != null) {
+				Map<String, PoiType> poiTypeMap = activity.getMyApplication().getPoiTypes().getAllTranslatedNames(false);
+				PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
+				if (poiType != null) {
+					String id = null;
+					if (RenderingIcons.containsBigIcon(poiType.getIconKeyName())) {
+						id = poiType.getIconKeyName();
+					} else if (RenderingIcons.containsBigIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+						id = poiType.getOsmTag() + "_" + poiType.getOsmValue();
+					}
+					if (id != null) {
+						iconResId = RenderingIcons.getBigIconResourceId(id);
+					}
+				}
+			}
+			if (iconResId == 0) {
+				iconResId = R.drawable.ic_action_info_dark;
+			}
+			return iconResId;
+		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+			return R.drawable.mm_special_symbol_plus;
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
 	public void destroyLayer() {
-
 	}
 
 	@Override
@@ -113,7 +141,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	public void getOsmEditsFromPoint(PointF point, RotatedTileBox tileBox, List<? super OsmPoint> am) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		int compare = getRadiusPoi(tileBox);
+		int compare = getScaledTouchRadius(activity.getMyApplication(), getRadiusPoi(tileBox));
 		int radius = compare * 3 / 2;
 		compare = getFromPoint(tileBox, am, ex, ey, compare, radius, plugin.getDBBug().getOsmbugsPoints());
 		getFromPoint(tileBox, am, ex, ey, compare, radius, plugin.getDBPOI().getOpenstreetmapPoints());

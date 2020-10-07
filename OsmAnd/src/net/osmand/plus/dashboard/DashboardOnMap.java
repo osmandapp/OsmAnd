@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
@@ -49,13 +50,11 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -78,11 +77,13 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.srtmplugin.ContourLinesMenu;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.srtmplugin.TerrainFragment;
-import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.layers.DownloadedRegionsLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
@@ -317,7 +318,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (visibleType == DashboardType.OVERLAY_MAP) {
 			tv.setText(R.string.map_overlay);
 		} else if (visibleType == DashboardType.MAPILLARY) {
-			tv.setText(R.string.mapillary);
+			tv.setText(R.string.street_level_imagery);
 		} else if (visibleType == DashboardType.CONTOUR_LINES) {
 			tv.setText(R.string.srtm_plugin_name);
 		} else if (visibleType == DashboardType.OSM_NOTES) {
@@ -340,7 +341,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 		ImageView lst = (ImageView) dashboardView.findViewById(R.id.toolbar_list);
 		lst.setVisibility(View.GONE);
-		ImageView back = (ImageView) dashboardView.findViewById(R.id.toolbar_back);
+		ImageButton back = (ImageButton) dashboardView.findViewById(R.id.toolbar_back);
 		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(mapActivity));
 		back.setImageDrawable(icBack);
 		back.setOnClickListener(new View.OnClickListener() {
@@ -407,14 +408,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		int btnSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_button_size);
 		actionButton.setLayoutParams(getActionButtonLayoutParams(btnSizePx));
 		actionButton.setBackgroundResource(R.drawable.btn_circle_blue);
-		int iconSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
+		int iconSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
 		int iconPadding = (btnSizePx - iconSizePx) / 2;
 		actionButton.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
 		hideActionButton();
 
 
 		DashboardActionButton myLocationButton = new DashboardActionButton();
-		myLocationButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_my_location);
+		myLocationButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.ic_my_location);
 		myLocationButton.text = mapActivity.getString(R.string.map_widget_back_to_loc);
 		myLocationButton.onClickListener = new View.OnClickListener() {
 			@Override
@@ -429,7 +430,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		};
 
 		DashboardActionButton navigateButton = new DashboardActionButton();
-		navigateButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_start_navigation);
+		navigateButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.ic_action_start_navigation);
 		navigateButton.text = mapActivity.getString(R.string.follow);
 		navigateButton.onClickListener = new View.OnClickListener() {
 			@Override
@@ -440,7 +441,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		};
 
 		DashboardActionButton routeButton = new DashboardActionButton();
-		routeButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_directions);
+		routeButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.ic_action_gdirections_dark);
 		routeButton.text = mapActivity.getString(R.string.layer_route);
 		routeButton.onClickListener = new View.OnClickListener() {
 			@Override
@@ -567,7 +568,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		boolean refresh = this.visibleType == type && !appModeChanged;
 		previousAppMode = currentAppMode;
-		this.visibleType = type;
+		visibleType = type;
 		DashboardOnMap.staticVisible = visible;
 		DashboardOnMap.staticVisibleType = type;
 		mapActivity.enableDrawer();
@@ -1031,6 +1032,24 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
+	public void onMapSettingsUpdated() {
+		if (DashboardType.CONFIGURE_MAP.equals(visibleType)) {
+			updateMenuItems();
+		}
+	}
+
+	public void updateMenuItems() {
+		if (listAdapter != null) {
+			for (int i = 0; i < listAdapter.getCount(); i++) {
+				Object o = listAdapter.getItem(i);
+				if (o instanceof ContextMenuItem) {
+					((ContextMenuItem) o).update();
+				}
+			}
+			listAdapter.notifyDataSetChanged();
+		}
+	}
+
 	public void updateLocation(final boolean centerChanged, final boolean locationChanged,
 							   final boolean compassChanged) {
 		if (inLocationUpdate) {
@@ -1216,7 +1235,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private void setTranslationY(View v, int y) {
-		ViewCompat.setTranslationY(v, y);
+		v.setTranslationY(y);
 	}
 
 	@SuppressLint("NewApi")
@@ -1305,7 +1324,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		showToast.value = false;
 	}
 
 	@Override

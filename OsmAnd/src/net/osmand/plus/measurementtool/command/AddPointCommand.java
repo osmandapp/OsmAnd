@@ -2,7 +2,9 @@ package net.osmand.plus.measurementtool.command;
 
 import net.osmand.data.LatLon;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 public class AddPointCommand extends MeasurementModeCommand {
 
@@ -11,19 +13,24 @@ public class AddPointCommand extends MeasurementModeCommand {
 	private boolean center;
 
 	public AddPointCommand(MeasurementToolLayer measurementLayer, boolean center) {
+		super(measurementLayer);
 		init(measurementLayer, null, center);
 	}
 
 	public AddPointCommand(MeasurementToolLayer measurementLayer, LatLon latLon) {
+		super(measurementLayer);
 		init(measurementLayer, latLon, false);
 	}
 
 	private void init(MeasurementToolLayer measurementLayer, LatLon latLon, boolean center) {
-		this.measurementLayer = measurementLayer;
 		if (latLon != null) {
 			point = new WptPt();
 			point.lat = latLon.getLatitude();
 			point.lon = latLon.getLongitude();
+			ApplicationMode appMode = measurementLayer.getEditingCtx().getAppMode();
+			if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+				point.setProfileType(appMode.getStringKey());
+			}
 		}
 		this.center = center;
 		position = measurementLayer.getEditingCtx().getPointsCount();
@@ -32,32 +39,32 @@ public class AddPointCommand extends MeasurementModeCommand {
 	@Override
 	public boolean execute() {
 		if (point != null) {
-			measurementLayer.getEditingCtx().addPoint(point);
+			getEditingCtx().addPoint(point);
 			measurementLayer.moveMapToPoint(position);
 		} else if (center) {
 			point = measurementLayer.addCenterPoint();
 		} else {
 			point = measurementLayer.addPoint();
 		}
-		measurementLayer.refreshMap();
+		refreshMap();
 		return point != null;
 	}
 
 	@Override
 	public void undo() {
-		measurementLayer.getEditingCtx().removePoint(position, true);
-		measurementLayer.refreshMap();
+		getEditingCtx().removePoint(position, true);
+		refreshMap();
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getEditingCtx().addPoint(position, point);
-		measurementLayer.refreshMap();
+		getEditingCtx().addPoint(position, point);
+		refreshMap();
 		measurementLayer.moveMapToPoint(position);
 	}
 
 	@Override
-	MeasurementCommandType getType() {
+	public MeasurementCommandType getType() {
 		return MeasurementCommandType.ADD_POINT;
 	}
 }

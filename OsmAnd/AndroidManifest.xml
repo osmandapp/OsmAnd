@@ -371,6 +371,72 @@
 				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.xml" />
 			</intent-filter>
 
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:host="*"/>
+				<data android:pathPattern=".*\\.wpt.chart" />
+				<data android:pathPattern=".*\\..*\\.wpt.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\.wpt.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.wpt.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.wpt.chart" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern=".*\\.wpt.chart" />
+				<data android:pathPattern=".*\\..*\\.wpt.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\.wpt.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.wpt.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.wpt.chart" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:host="*"/>
+				<data android:pathPattern=".*\\.3d.chart" />
+				<data android:pathPattern=".*\\..*\\.3d.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\.3d.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.3d.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.3d.chart" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern=".*\\.3d.chart" />
+				<data android:pathPattern=".*\\..*\\.3d.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\.3d.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.3d.chart" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.3d.chart" />
+			</intent-filter>
+
 			<!--trying to handle emails-->
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
@@ -391,6 +457,12 @@
 				<data android:scheme="osmand.api" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+
+			<intent-filter>
+				<action android:name="android.intent.action.SEND" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:mimeType="text/plain" />
 			</intent-filter>
 
 		</activity>
@@ -481,6 +553,13 @@
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+			<intent-filter>
+				<data android:host="ge0.me" android:scheme="https"/>
+				<data android:host="ge0.me" android:scheme="http"/>
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
 			</intent-filter>
 			<intent-filter>
 				<data android:scheme="http" android:host="openstreetmap.de" android:pathPrefix="/karte" />
@@ -949,6 +1028,7 @@
 		    android:process="net.osmand.plus" 
 		    android:label="@string/process_navigation_service"
 			android:name="net.osmand.plus.NavigationService"
+			android:foregroundServiceType="location"
 			android:stopWithTask="false">
 			<intent-filter>
 				<action android:name="net.osmand.plus.NavigationService" />

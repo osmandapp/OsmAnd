@@ -68,7 +68,6 @@
     <string name="shared_string_clear">ತೆಳಿಸಿ</string>
     <string name="shared_string_clear_all">ಎಲ್ಲವನ್ನು ತೆಳಿಸಿ</string>
     <string name="shared_string_save">ಉಳಿಸಿ</string>
-    <string name="shared_string_save_as_gpx">ಜಿಪಿಎಕ್ಸ್ ಟ್ರ್ಯಾಕ್ಆಗಿ ಉಳಿಸಿ</string>
     <string name="shared_string_rename">ಮರುಹೆಸರಿಸಿ</string>
     <string name="shared_string_delete">ಅಳಿಸಿ</string>
     <string name="shared_string_delete_all">ಎಲ್ಲವನ್ನು ಅಳಿಸಿ</string>
@@ -209,7 +208,6 @@
     <string name="available_maps">ಲಭ್ಯವಿರುವ ನಕ್ಷೆಗಳು</string>
     <string name="route_distance">ದೂರ:</string>
     <string name="context_menu_item_open_note">ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿಯನ್ನು ತೆರೆಯಿರಿ</string>
-    <string name="osm_edit_removed_note">ಅಳಿಸಲಾದ ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿ</string>
     <string name="osm_edit_created_note">ಸೃಷ್ಟಿಸಲಾದ ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿ</string>
     <string name="osn_bug_name">ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿ</string>
     <string name="osn_add_dialog_title">ಟಿಪ್ಪಣಿಯನ್ನು ಹಾಕಿರಿ</string>
@@ -270,7 +268,6 @@
     <string name="shared_string_install">ಅನುಸ್ಥಾಪಿಸಿ</string>
     <string name="mapillary_widget">ಮ್ಯಾಪಿಲರಿ ವಿಜೆಟ್</string>
     <string name="shared_string_plugin">ಪ್ಲಗಿನ್</string>
-    <string name="add_segment_to_the_track">GPX ಟ್ರ್ಯಾಕ್ಅನ್ನು ಸೇರಿಸಿ</string>
     <string name="default_speed_dialog_msg">ಅಜ್ಞಾತ ರೀತಿಯ ರಸ್ತೆಗಳಿಗೆ ಆಗಮನದ ಸಮಯವನ್ನು ಅಂದಾಜು ಮಾಡಲು ಮತ್ತು ಎಲ್ಲಾ ರಸ್ತೆಗಳ ವೇಗವನ್ನು ಮಿತಿಗೊಳಿಸಲು ಬಳಸಲಾಗುತ್ತದೆ (ಮಾರ್ಗವನ್ನು ಬದಲಾಯಿಸಬಹುದು)</string>
     <string name="change_data_storage_full_description">OsmAnd ಡೇಟಾ ಫೈಲ್‌ಗಳನ್ನು ಹೊಸ ಸ್ಥಳಕ್ಕೆ ಸೇರಿಸುವುದೇ\?
 \n%1$s &gt; %2$s</string>

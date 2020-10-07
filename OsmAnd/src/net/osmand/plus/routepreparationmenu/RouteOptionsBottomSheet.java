@@ -2,37 +2,34 @@ package net.osmand.plus.routepreparationmenu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
 import net.osmand.StateChangedListener;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerStartItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DividerItem;
@@ -46,6 +43,8 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRou
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.TimeConditionalRoutingItem;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.router.GeneralRouter;
 
@@ -168,32 +167,62 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private BaseBottomSheetItem createMuteSoundItem(final LocalRoutingParameter optionsItem) {
 		boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
-		final BottomSheetItemWithCompoundButton[] muteSoundItem = new BottomSheetItemWithCompoundButton[1];
-		muteSoundItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setCompoundButtonColorId(selectedModeColorId)
-				.setChecked(active)
-				.setDescription(getString(R.string.voice_announcements))
-				.setIcon(getContentIcon(active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()))
-				.setTitle(getString(R.string.shared_string_sound))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-						boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
-						routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
-						String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
-						if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-							OsmAndDialogs.showVoiceProviderDialog(mapActivity, applicationMode, false);
-						} else {
-							muteSoundItem[0].setChecked(!active);
-							muteSoundItem[0].setIcon(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
-						}
-						updateMenu();
-					}
-				})
+		int selectedModeColor = ContextCompat.getColor(app, selectedModeColorId);
+		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
+		final ImageView icon = itemView.findViewById(R.id.icon);
+		TextView tvTitle = itemView.findViewById(R.id.title);
+		TextView tvDescription = itemView.findViewById(R.id.description);
+		View basicItem = itemView.findViewById(R.id.basic_item_body);
+		final CompoundButton cb = itemView.findViewById(R.id.compound_button);
+		View voicePromptsBtn = itemView.findViewById(R.id.additional_button);
+		ImageView voicePromptsBtnImage = itemView.findViewById(R.id.additional_button_icon);
+
+		tvTitle.setText(getString(R.string.shared_string_sound));
+		tvDescription.setText(getString(R.string.voice_announcements));
+		icon.setImageDrawable(getContentIcon(active ?
+				optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+		cb.setChecked(active);
+		cb.setFocusable(false);
+		UiUtilities.setupCompoundButton(nightMode, selectedModeColor, cb);
+
+		basicItem.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+				boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
+				routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
+				String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
+				if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+					OsmAndDialogs.showVoiceProviderDialog(mapActivity, applicationMode, false);
+				} else {
+					cb.setChecked(!active);
+					icon.setImageDrawable(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+				}
+				updateMenu();
+			}
+		});
+
+		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings,
+				nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+		if (Build.VERSION.SDK_INT >= 21) {
+			Drawable activeDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings, selectedModeColorId);
+			drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
+		}
+		voicePromptsBtnImage.setImageDrawable(drawable);
+
+		voicePromptsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				BaseSettingsFragment.showInstance(
+						mapActivity, BaseSettingsFragment.SettingsScreenType.VOICE_ANNOUNCES);
+				dismiss();
+			}
+		});
+
+		return new BaseBottomSheetItem.Builder()
+				.setCustomView(itemView)
 				.create();
-		return muteSoundItem[0];
 	}
 
 	private BaseBottomSheetItem createTimeConditionalRoutingItem(final LocalRoutingParameter optionsItem) {
@@ -312,30 +341,33 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private BaseBottomSheetItem createGpxRoutingItem(final LocalRoutingParameter optionsItem) {
-		View view = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
-		AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) view.findViewById(R.id.title), nightMode);
-		final TextView gpxDescription = (TextView) view.findViewById(R.id.description);
-
-		((ImageView) view.findViewById(R.id.icon)).setImageDrawable(getContentIcon(optionsItem.getActiveIconId()));
-		((ImageView) view.findViewById(R.id.dropDownIcon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
-
-		RouteProvider.GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
-		String gpxName;
-		if (rp == null) {
-			AndroidUtils.setTextSecondaryColor(mapActivity, gpxDescription, nightMode);
-			gpxName = mapActivity.getString(R.string.choose_track_file_to_follow);
+		RouteProvider.GPXRouteParamsBuilder routeParamsBuilder = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		String description;
+		int descriptionColorId;
+		if (routeParamsBuilder == null) {
+			descriptionColorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+			description = mapActivity.getString(R.string.follow_track_descr);
 		} else {
-			gpxDescription.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
-			gpxName = new File(rp.getFile().path).getName();
+			descriptionColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			description = new File(routeParamsBuilder.getFile().path).getName();
 		}
-		gpxDescription.setText(gpxName);
 
-		return new BaseBottomSheetItem.Builder().setCustomView(view).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				showOptionsMenu(gpxDescription);
-			}
-		}).create();
+		return new BottomSheetItemWithDescription.Builder()
+				.setDescription(description)
+				.setDescriptionColorId(descriptionColorId)
+				.setIcon(getContentIcon(optionsItem.getActiveIconId()))
+				.setTitle(getString(R.string.follow_track))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
+						mapRouteInfoMenu.hide();
+						mapRouteInfoMenu.selectTrack();
+						dismiss();
+					}
+				})
+				.create();
 	}
 
 	private BaseBottomSheetItem createOtherSettingsRoutingItem(final LocalRoutingParameter optionsItem) {
@@ -463,58 +495,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		f.show(fragmentManager, RouteOptionsBottomSheet.TAG);
 	}
 
-	protected void openGPXFileSelection() {
-		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
-
-			@Override
-			public boolean processResult(GPXUtilities.GPXFile[] result) {
-				mapActivity.getMapActions().setGPXRouteParams(result[0]);
-				app.getTargetPointsHelper().updateRouteAndRefresh(true);
-				updateParameters();
-				routingHelper.recalculateRouteDueToSettingsChange();
-				return true;
-			}
-		}, nightMode);
-	}
-
-	private void showOptionsMenu(View view) {
-		RouteProvider.GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
-		final PopupMenu optionsMenu = new PopupMenu(new ContextThemeWrapper(view.getContext(), themeRes), view);
-		MenuItem item = optionsMenu.getMenu().add(
-				mapActivity.getString(R.string.shared_string_none));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				if (mapActivity.getRoutingHelper().getCurrentGPXRoute() != null) {
-					mapActivity.getRoutingHelper().setGpxParams(null);
-					settings.FOLLOW_THE_GPX_ROUTE.set(null);
-					mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
-				}
-				updateParameters();
-				return true;
-			}
-		});
-		item = optionsMenu.getMenu().add(mapActivity.getString(R.string.select_gpx));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				openGPXFileSelection();
-				return true;
-			}
-		});
-		if (rp != null) {
-			item = optionsMenu.getMenu().add(new File(rp.getFile().path).getName());
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					// nothing to change
-					return true;
-				}
-			});
-		}
-		optionsMenu.show();
-	}
-
 	public void updateParameters() {
 		Activity activity = getActivity();
 		View mainView = getView();
@@ -539,11 +519,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				DividerItem.KEY,
+				GpxLocalRoutingParameter.KEY,
+				DividerItem.KEY,
 				GeneralRouter.ALLOW_PRIVATE,
 				GeneralRouter.USE_SHORTEST_WAY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -554,9 +536,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				GeneralRouter.ALLOW_MOTORWAYS,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				GpxLocalRoutingParameter.KEY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -565,9 +547,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				GpxLocalRoutingParameter.KEY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -583,9 +565,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				GpxLocalRoutingParameter.KEY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 

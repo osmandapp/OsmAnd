@@ -1,5 +1,7 @@
 /*.json
 /osm_live/*.json
+/search/*
 *.obf
 *.osm
 phrases.xml
+*.obf.gz

@@ -159,7 +159,7 @@ public class TransportStopController extends MenuController {
 
 	private void addTransportStopRoutes(OsmandApplication app, List<TransportStop> stops, List<TransportStopRoute> routes, boolean useEnglishNames) {
 		for (TransportStop tstop : stops) {
-			if (tstop.hasReferencesToRoutesMap()) {
+			if (!tstop.isDeleted()) {
 				addRoutes(app, routes, useEnglishNames, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 			}
 		}
@@ -231,9 +231,11 @@ public class TransportStopController extends MenuController {
 			stopAggregated = new TransportStopAggregated();
 			stopAggregated.setAmenity(amenity);
 			TransportStop nearestStop = null;
+			String amenityName = amenity.getName().toLowerCase();
 			for (TransportStop stop : transportStops) {
 				stop.setTransportStopAggregated(stopAggregated);
-				if ((stop.getName().startsWith(amenity.getName())
+				String stopName = stop.getName().toLowerCase();
+				if (((stopName.contains(amenityName) || amenityName.contains(stopName))
 						&& (nearestStop == null
 						|| nearestStop.getLocation().equals(stop.getLocation())))
 						|| stop.getLocation().equals(loc)) {

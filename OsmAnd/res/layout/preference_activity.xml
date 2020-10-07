@@ -4,8 +4,7 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
 			  android:orientation="vertical"
-			  android:background="?attr/list_background_color"
-			  tools:context="com.antonioleiva.materialeverywhere.SettingsActivity" >
+			  android:background="?attr/list_background_color">
 
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
@@ -15,10 +14,9 @@
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?attr/colorPrimary"
-			android:minHeight="?attr/actionBarSize"
-			app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+			android:layout_height="@dimen/toolbar_height"
+			android:padding="0dp"
+			android:background="?attr/colorPrimary">
 
 			<Spinner
 				android:id="@+id/spinner_nav"

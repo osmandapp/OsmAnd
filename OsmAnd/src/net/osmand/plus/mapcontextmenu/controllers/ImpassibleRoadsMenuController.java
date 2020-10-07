@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -41,7 +40,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_remove);
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+		leftTitleButtonController.startIconId = R.drawable.ic_action_delete_dark;
 	}
 
 	@Override
@@ -69,7 +68,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return AppCompatResources.getDrawable(mapActivity, R.drawable.map_pin_avoid_road);
+			return AppCompatResources.getDrawable(mapActivity, R.drawable.ic_pin_avoid_road);
 		} else {
 			return null;
 		}

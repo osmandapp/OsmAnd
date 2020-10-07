@@ -39,7 +39,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.AngularConstants;
@@ -280,7 +280,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"fi",
 				"fr",
 				"gl",
-				"he",
+				"iw",
 				"hr",
 				"hsb",
 				"hu",

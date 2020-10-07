@@ -28,9 +28,6 @@ public class IndexConstants {
 	public static final String EXTRA_EXT = ".extra";
 	public static final String EXTRA_ZIP_EXT = ".extra.zip";
 	
-	public static final String TOUR_INDEX_EXT = ".tour"; //$NON-NLS-1$
-	public static final String TOUR_INDEX_EXT_ZIP = ".tour.zip"; //$NON-NLS-1$
-	
 	public static final String GEN_LOG_EXT = ".gen.log"; //$NON-NLS-1$
 	
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip"; //$NON-NLS-1$
@@ -47,6 +44,9 @@ public class IndexConstants {
 	public static final String RENDERER_INDEX_EXT = ".render.xml"; //$NON-NLS-1$
 
 	public static final String GPX_FILE_EXT = ".gpx"; //$NON-NLS-1$
+
+	public static final String WPT_CHART_FILE_EXT = ".wpt.chart";
+	public static final String SQLITE_CHART_FILE_EXT = ".3d.chart";
 
 	public final static String POI_TABLE = "poi"; //$NON-NLS-1$
 	

@@ -21,7 +21,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.DialogFragment;
 
 import net.osmand.AndroidNetworkUtils;
@@ -402,7 +401,12 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		String filter = getDownloadActivity().getFilterAndClear();
 		String filterCat = getDownloadActivity().getFilterCatAndClear();
 		String filterGroup = getDownloadActivity().getFilterGroupAndClear();
-		if (filter != null) {
+		if (filter != null && filterCat != null
+				&& filterCat.equals(DownloadActivityType.WIKIPEDIA_FILE.getTag())) {
+			getDownloadActivity().showDialog(getActivity(),
+					SearchDialogFragment.createInstance(filter, false,
+							DownloadActivityType.WIKIPEDIA_FILE));
+		} else if (filter != null) {
 			getDownloadActivity().showDialog(getActivity(),
 					SearchDialogFragment.createInstance(filter));
 		} else if (filterCat != null) {
@@ -535,12 +539,12 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			MenuItem itemReload = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
 			Drawable icReload = app.getUIUtilities().getIcon(R.drawable.ic_action_refresh_dark, colorResId);
 			itemReload.setIcon(icReload);
-			MenuItemCompat.setShowAsAction(itemReload, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			itemReload.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 			MenuItem itemSearch = menu.add(0, SEARCH_ID, 1, R.string.shared_string_search);
 			Drawable icSearch = app.getUIUtilities().getIcon(R.drawable.ic_action_search_dark, colorResId);
 			itemSearch.setIcon(icSearch);
-			MenuItemCompat.setShowAsAction(itemSearch, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			itemSearch.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
 	}
 

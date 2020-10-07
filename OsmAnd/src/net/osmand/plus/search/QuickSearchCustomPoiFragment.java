@@ -7,9 +7,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -18,9 +20,11 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.SwitchCompat;
@@ -31,16 +35,24 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
+import net.osmand.ResultMatcher;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
-
+import net.osmand.search.SearchUICore;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,7 +63,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class QuickSearchCustomPoiFragment extends DialogFragment {
+import static net.osmand.search.core.ObjectType.SEARCH_FINISHED;
+
+public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFiltersSelectedListener {
 
 	public static final String TAG = "QuickSearchCustomPoiFragment";
 	private static final String QUICK_SEARCH_CUSTOM_POI_FILTER_ID_KEY = "quick_search_custom_poi_filter_id_key";
@@ -71,11 +85,17 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	private TextView barSubTitle;
 	private boolean editMode;
 	private boolean nightMode;
+	private boolean wasChanged;
 	private EditText searchEditText;
 	private FrameLayout button;
 	private List<PoiCategory> poiCategoryList;
 	private View headerShadow;
 	private View headerDescription;
+	private ProgressBar searchProgressBar;
+	private ImageView searchCloseIcon;
+	private SearchUICore searchUICore;
+	private boolean searchCancelled;
+	private Collator collator;
 
 	public QuickSearchCustomPoiFragment() {
 	}
@@ -87,9 +107,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		collator = OsmAndCollator.primaryCollator();
 		app = getMyApplication();
 		uiUtilities = app.getUIUtilities();
-		this.nightMode = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME;
+		searchUICore = app.getSearchUICore().getCore();
+		this.nightMode = !app.getSettings().isLightContent();
 		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		poiCategoryList = app.getPoiTypes().getCategories(false);
 		Collections.sort(poiCategoryList, new Comparator<PoiCategory>() {
@@ -120,8 +142,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		editMode = !filterId.equals(helper.getCustomPOIFilter().getFilterId());
 
 		view = layoutInflater.inflate(R.layout.search_custom_poi, container, false);
-
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		searchProgressBar = view.findViewById(R.id.searchProgressBar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark,
 				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
 		toolbar.setNavigationIcon(icClose);
@@ -129,18 +151,21 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				if (wasChanged) {
+					showExitDialog();
+				} else {
+					dismiss();
+				}
 			}
 		});
 		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
 		toolbar.setTitleTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light));
-
-		TextView title = (TextView) view.findViewById(R.id.title);
+		TextView title = view.findViewById(R.id.title);
 		if (editMode) {
 			title.setText(filter.getName());
 		}
 
-		listView = (ListView) view.findViewById(android.R.id.list);
+		listView = view.findViewById(android.R.id.list);
 		listView.setBackgroundColor(getResources().getColor(
 				app.getSettings().isLightContent() ? R.color.activity_background_color_light
 						: R.color.activity_background_color_dark));
@@ -171,6 +196,19 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				}
 			}
 		});
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				if (i == SCROLL_STATE_TOUCH_SCROLL) {
+					AndroidUtils.hideSoftKeyboard(requireActivity(), searchEditText);
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int first, int visibleCount, int totalCount) {
+
+			}
+		});
 
 		bottomBarShadow = view.findViewById(R.id.bottomBarShadow);
 		bottomBar = view.findViewById(R.id.bottomBar);
@@ -180,7 +218,14 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 
 		ImageView searchIcon = view.findViewById(R.id.search_icon);
 		searchIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_search_dark, nightMode));
-		ImageView searchCloseIcon = view.findViewById(R.id.search_close);
+		searchIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				searchEditText.requestFocus();
+				AndroidUtils.showSoftKeyboard(getActivity(), searchEditText);
+			}
+		});
+		searchCloseIcon = view.findViewById(R.id.search_close);
 		searchCloseIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_cancel, nightMode));
 		searchCloseIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -198,15 +243,15 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 
 			@Override
 			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-				searchSubCategory(charSequence.toString());
+
 			}
 
 			@Override
 			public void afterTextChanged(Editable editable) {
-
+				searchSubCategory(editable.toString());
 			}
 		});
-
+		view.findViewById(R.id.topBarShadow).setVisibility(View.VISIBLE);
 		return view;
 	}
 
@@ -227,7 +272,146 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				quickSearchDialogFragment.reloadCategories();
 			}
 		}
+		resetSearchTypes();
 		super.onDismiss(dialog);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		saveFilter();
+		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
+					if (event.getAction() == KeyEvent.ACTION_DOWN) {
+						return true;
+					} else {
+						if (wasChanged) {
+							showExitDialog();
+						} else {
+							dismiss();
+						}
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+	}
+
+	private void resetSearchTypes() {
+		searchUICore.updateSettings(searchUICore.getSearchSettings().resetSearchTypes());
+	}
+
+	private void updateCloseSearchIcon(boolean searching) {
+		AndroidUiHelper.updateVisibility(searchProgressBar, searching);
+		AndroidUiHelper.updateVisibility(searchCloseIcon, !searching);
+	}
+
+	private void searchSubCategory(String text) {
+		if (text.isEmpty()) {
+			cancelSearchSubCategories();
+			if (subCategoriesAdapter.getSelectedItems().isEmpty()) {
+				listView.setAdapter(categoryListAdapter);
+				categoryListAdapter.notifyDataSetChanged();
+				removeAllHeaders();
+				listView.addHeaderView(headerDescription, null, false);
+				saveFilter();
+			} else {
+				listView.setAdapter(subCategoriesAdapter);
+				subCategoriesAdapter.clear();
+				subCategoriesAdapter.addAll(subCategoriesAdapter.getSelectedItems());
+				subCategoriesAdapter.notifyDataSetChanged();
+				removeAllHeaders();
+				listView.addHeaderView(headerShadow, null, false);
+				setupAddButton();
+			}
+		} else {
+			startSearchSubCategories(text);
+		}
+	}
+
+	private void cancelSearchSubCategories() {
+		searchCancelled = true;
+		resetSearchTypes();
+		updateCloseSearchIcon(false);
+	}
+
+	private void startSearchSubCategories(final String text) {
+		updateCloseSearchIcon(true);
+		searchCancelled = false;
+		SearchSettings searchSettings = searchUICore.getSearchSettings().setSearchTypes(ObjectType.POI_TYPE);
+		searchUICore.updateSettings(searchSettings);
+		searchUICore.search(text, true, new ResultMatcher<SearchResult>() {
+			@Override
+			public boolean publish(SearchResult searchResult) {
+				if (searchResult.objectType == SEARCH_FINISHED) {
+					final List<PoiType> selectedSubCategories = getSelectedSubCategories();
+					SearchResultCollection resultCollection = searchUICore.getCurrentSearchResult();
+					final List<PoiType> results = new ArrayList<>();
+					for (SearchResult result : resultCollection.getCurrentSearchResults()) {
+						Object poiObject = result.object;
+						if (poiObject instanceof PoiType) {
+							PoiType poiType = (PoiType) poiObject;
+							if (!poiType.isAdditional()) {
+								results.add(poiType);
+							}
+						}
+					}
+					app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							resetSearchTypes();
+							if (!searchCancelled) {
+								subCategoriesAdapter.setSelectedItems(selectedSubCategories);
+								showSearchResults(results);
+							}
+							updateCloseSearchIcon(false);
+						}
+					});
+				}
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return searchCancelled;
+			}
+		});
+	}
+
+	private void showSearchResults(List<PoiType> poiTypes) {
+		listView.setAdapter(subCategoriesAdapter);
+		subCategoriesAdapter.clear();
+		subCategoriesAdapter.addAll(poiTypes);
+		subCategoriesAdapter.notifyDataSetChanged();
+		removeAllHeaders();
+		listView.addHeaderView(headerShadow, null, false);
+		setupAddButton();
+	}
+
+	private List<PoiType> getSelectedSubCategories() {
+		List<PoiType> poiTypes = new ArrayList<>();
+		for (Map.Entry<PoiCategory, LinkedHashSet<String>> entry : filter.getAcceptedTypes().entrySet()) {
+			if (entry.getValue() == null) {
+				poiTypes.addAll(entry.getKey().getPoiTypes());
+			} else {
+				for (String key : entry.getValue()) {
+					PoiType poiType = app.getPoiTypes().getPoiTypeByKey(key);
+					if (poiType != null) {
+						poiTypes.add(poiType);
+					}
+				}
+			}
+		}
+		Collections.sort(poiTypes, new Comparator<PoiType>() {
+			@Override
+			public int compare(PoiType poiType1, PoiType poiType2) {
+				return collator.compare(poiType1.getTranslation(), poiType2.getTranslation());
+			}
+		});
+		return poiTypes;
 	}
 
 	private QuickSearchDialogFragment getQuickSearchDialogFragment() {
@@ -266,6 +450,21 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		}
 	}
 
+	private void showExitDialog() {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
+		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
+		dismissDialog.setMessage(getString(R.string.exit_without_saving));
+		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
+		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dismiss();
+			}
+		});
+		dismissDialog.show();
+	}
+
 	public static void showDialog(DialogFragment parentFragment, String filterId) {
 		Bundle bundle = new Bundle();
 		if (filterId != null) {
@@ -274,6 +473,28 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		QuickSearchCustomPoiFragment fragment = new QuickSearchCustomPoiFragment();
 		fragment.setArguments(bundle);
 		fragment.show(parentFragment.getChildFragmentManager(), TAG);
+	}
+
+	@Override
+	public void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters) {
+		List<String> subCategories = new ArrayList<>();
+		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
+		if (acceptedCategories != null) {
+			subCategories.addAll(acceptedCategories);
+		}
+		for (PoiType pt : poiCategory.getPoiTypes()) {
+			subCategories.add(pt.getKeyName());
+		}
+		if (subCategories.size() == filters.size()) {
+			filter.selectSubTypesToAccept(poiCategory, null);
+		} else if (filters.size() == 0) {
+			filter.setTypeToAccept(poiCategory, false);
+		} else {
+			filter.selectSubTypesToAccept(poiCategory, filters);
+		}
+		saveFilter();
+		categoryListAdapter.notifyDataSetChanged();
+		wasChanged = true;
 	}
 
 	private class CategoryListAdapter extends ArrayAdapter<PoiCategory> {
@@ -298,6 +519,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				AppCompatImageView iconView = (AppCompatImageView) row.findViewById(R.id.icon);
 				row.findViewById(R.id.secondary_icon).setVisibility(View.GONE);
 				AppCompatTextView titleView = (AppCompatTextView) row.findViewById(R.id.title);
+				titleView.setMaxLines(Integer.MAX_VALUE);
+				titleView.setEllipsize(null);
 				AppCompatTextView descView = (AppCompatTextView) row.findViewById(R.id.description);
 				SwitchCompat check = (SwitchCompat) row.findViewById(R.id.toggle_item);
 				UiUtilities.setupCompoundButton(check, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
@@ -346,10 +569,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					wasChanged = true;
 					if (check.isChecked()) {
 						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
-							showSubCategoriesFragment(fm, category, true);
+							showSubCategoriesFragment(fm, category, false);
 						}
 					} else {
 						filter.setTypeToAccept(category, false);
@@ -361,8 +585,34 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		}
 	}
 
+	private void updateFilterName(PoiUIFilter filter) {
+		if (!editMode) {
+			Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
+			List<PoiCategory> categories = new ArrayList<>(acceptedTypes.keySet());
+			if (categories.size() == 1) {
+				String name = "";
+				PoiCategory category = categories.get(0);
+				LinkedHashSet<String> filters = acceptedTypes.get(category);
+				if (filters == null || filters.size() > 1) {
+					name = category.getTranslation();
+				} else {
+					PoiType poiType = category.getPoiTypeByKeyName(filters.iterator().next());
+					if (poiType != null) {
+						name = poiType.getTranslation();
+					}
+				}
+				if (!Algorithms.isEmpty(name)) {
+					filter.setName(Algorithms.capitalizeFirstLetter(name));
+				}
+			} else {
+				filter.setName(getString(R.string.poi_filter_custom_filter));
+			}
+		}
+	}
+
 	@SuppressLint("SetTextI18n")
 	private void saveFilter() {
+		updateFilterName(filter);
 		helper.editPoiFilter(filter);
 		Context ctx = getContext();
 		if (ctx != null) {
@@ -399,40 +649,6 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		}
 	}
 
-	private void searchSubCategory(String search) {
-		List<PoiType> result = new ArrayList<>();
-		if (search.isEmpty()) {
-			if (subCategoriesAdapter.getSelectedItems().isEmpty()) {
-				listView.setAdapter(categoryListAdapter);
-				categoryListAdapter.notifyDataSetChanged();
-				removeAllHeaders();
-				listView.addHeaderView(headerDescription, null, false);
-			} else {
-				listView.setAdapter(subCategoriesAdapter);
-				subCategoriesAdapter.clear();
-				subCategoriesAdapter.addAll(new ArrayList<>(subCategoriesAdapter.getSelectedItems()));
-				subCategoriesAdapter.notifyDataSetChanged();
-				removeAllHeaders();
-				listView.addHeaderView(headerShadow, null, false);
-			}
-		} else {
-			for (PoiCategory category : poiCategoryList) {
-				for (PoiType poiType : category.getPoiTypes()) {
-					if (poiType.getTranslation().toLowerCase().contains(search.toLowerCase())) {
-						result.add(poiType);
-					}
-				}
-			}
-			listView.setAdapter(subCategoriesAdapter);
-			subCategoriesAdapter.clear();
-			subCategoriesAdapter.addAll(result);
-			subCategoriesAdapter.notifyDataSetChanged();
-			removeAllHeaders();
-			listView.addHeaderView(headerShadow, null, false);
-		}
-		setupAddButton();
-	}
-
 	private void removeAllHeaders() {
 		listView.removeHeaderView(headerDescription);
 		listView.removeHeaderView(headerShadow);
@@ -466,6 +682,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	}
 
 	private void updateFilter(List<PoiType> selectedPoiCategoryList) {
+		wasChanged = true;
 		if (selectedPoiCategoryList.isEmpty()) {
 			return;
 		}
@@ -482,11 +699,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 
 		for (Map.Entry<PoiCategory, LinkedHashSet<String>> entry : map.entrySet()) {
 			PoiCategory poiCategory = entry.getKey();
-			Set<String> acceptedSubtypes = filter.getAcceptedSubtypes(poiCategory);
+			List<PoiType> poiTypes = poiCategory.getPoiTypes();
 			LinkedHashSet<String> filters = entry.getValue();
 			if (filters.isEmpty()) {
 				filter.setTypeToAccept(poiCategory, false);
-			} else if (acceptedSubtypes != null && acceptedSubtypes.size() == filters.size()) {
+			} else if (poiTypes != null && poiTypes.size() == filters.size()) {
 				filter.selectSubTypesToAccept(poiCategory, null);
 			} else {
 				filter.selectSubTypesToAccept(poiCategory, filters);
@@ -502,28 +719,10 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 										   @NonNull PoiCategory poiCategory,
 										   boolean selectAll) {
 		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
-		QuickSearchSubCategoriesFragment.showInstance(fm, poiCategory, acceptedCategories, selectAll,
-				new QuickSearchSubCategoriesFragment.OnFiltersSelectedListener() {
-					@Override
-					public void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters) {
-						List<String> subCategories = new ArrayList<>();
-						Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
-						if (acceptedCategories != null) {
-							subCategories.addAll(acceptedCategories);
-						}
-						for (PoiType pt : poiCategory.getPoiTypes()) {
-							subCategories.add(pt.getKeyName());
-						}
-						if (subCategories.size() == filters.size()) {
-							filter.selectSubTypesToAccept(poiCategory, null);
-						} else if (filters.size() == 0) {
-							filter.setTypeToAccept(poiCategory, false);
-						} else {
-							filter.selectSubTypesToAccept(poiCategory, filters);
-						}
-						saveFilter();
-						categoryListAdapter.notifyDataSetChanged();
-					}
-				});
+		QuickSearchSubCategoriesFragment.showInstance(fm, this, poiCategory, acceptedCategories, selectAll);
 	}
+}
+
+interface OnFiltersSelectedListener {
+	void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters);
 }

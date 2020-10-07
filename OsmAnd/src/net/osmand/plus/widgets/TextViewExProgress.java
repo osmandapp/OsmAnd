@@ -27,11 +27,6 @@ public class TextViewExProgress extends TextViewEx {
 		initPaint();
 	}
 
-	public TextViewExProgress(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
-		initPaint();
-	}
-
 	@Override
 	public void onDraw(Canvas canvas) {
 		super.onDraw(canvas);

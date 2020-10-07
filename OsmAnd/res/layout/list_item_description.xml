@@ -17,7 +17,7 @@
         android:paddingTop="@dimen/list_header_settings_top_margin"
         android:paddingEnd="@dimen/content_padding"
         android:paddingBottom="@dimen/list_header_settings_top_margin"
-        android:textColor="?android:textColorPrimary"
+        android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/default_desc_text_size"
         tools:text="@string/select_data_to_import" />
 

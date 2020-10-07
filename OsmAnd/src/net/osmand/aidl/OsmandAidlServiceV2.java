@@ -22,11 +22,14 @@ import net.osmand.aidlapi.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.RemoveContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.UpdateContextMenuButtonsParams;
 import net.osmand.aidlapi.copyfile.CopyFileParams;
+import net.osmand.aidlapi.customization.MapMarginsParams;
+import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.customization.CustomizationInfoParams;
 import net.osmand.aidlapi.customization.OsmandSettingsInfoParams;
 import net.osmand.aidlapi.customization.OsmandSettingsParams;
 import net.osmand.aidlapi.customization.ProfileSettingsParams;
 import net.osmand.aidlapi.customization.SetWidgetsParams;
+import net.osmand.aidlapi.events.AKeyEventsParams;
 import net.osmand.aidlapi.favorite.AFavorite;
 import net.osmand.aidlapi.favorite.AddFavoriteParams;
 import net.osmand.aidlapi.favorite.RemoveFavoriteParams;
@@ -45,6 +48,7 @@ import net.osmand.aidlapi.gpx.RemoveGpxParams;
 import net.osmand.aidlapi.gpx.ShowGpxParams;
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams;
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams;
+import net.osmand.aidlapi.lock.SetLockStateParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.SetMapLocationParams;
 import net.osmand.aidlapi.maplayer.AddMapLayerParams;
@@ -81,14 +85,15 @@ import net.osmand.aidlapi.note.StartVideoRecordingParams;
 import net.osmand.aidlapi.note.StopRecordingParams;
 import net.osmand.aidlapi.note.TakePhotoNoteParams;
 import net.osmand.aidlapi.plugins.PluginParams;
+import net.osmand.aidlapi.profile.ExportProfileParams;
 import net.osmand.aidlapi.quickaction.QuickActionInfoParams;
 import net.osmand.aidlapi.quickaction.QuickActionParams;
 import net.osmand.aidlapi.search.SearchParams;
 import net.osmand.aidlapi.search.SearchResult;
 import net.osmand.aidlapi.tiles.ASqliteDbFile;
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -100,6 +105,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_KEY_EVENT;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
@@ -310,7 +316,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 					AFavorite newFav = params.getFavoriteNew();
 					if (prevFav != null && newFav != null) {
 						return api.updateFavorite(prevFav.getName(), prevFav.getCategory(), prevFav.getLat(), prevFav.getLon(),
-								newFav.getName(), newFav.getCategory(), newFav.getDescription(), newFav.getLat(), newFav.getLon());
+								newFav.getName(), newFav.getCategory(), newFav.getDescription(), newFav.getAddress(), newFav.getLat(), newFav.getLon());
 					}
 				}
 				return false;
@@ -597,7 +603,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				if (params != null) {
 					OsmandAidlApi api = getApi("setMapLocation");
 					return api != null && api.setMapLocation(params.getLatitude(), params.getLongitude(),
-							params.getZoom(), params.isAnimated());
+							params.getZoom(), params.getRotation(), params.isAnimated());
 				}
 				return false;
 			} catch (Exception e) {
@@ -1086,7 +1092,8 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				if (api == null) {
 					return CANNOT_ACCESS_API_ERROR;
 				}
-				return api.copyFile(params.getFileName(), params.getFilePartData(), params.getStartTime(), params.isDone());
+				return api.copyFileV2(params.getDestinationDir(), params.getFileName(), params.getFilePartData(),
+						params.getStartTime(), params.isDone());
 			} catch (Exception e) {
 				handleException(e);
 				return UNKNOWN_API_ERROR;
@@ -1105,6 +1112,28 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 					} else {
 						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
 						api.registerForNavigationUpdates(id);
+						return id;
+					}
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
+		}
+		@Override
+		public long registerForKeyEvents(AKeyEventsParams params, final IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("registerForKeyEvents");
+				if (api != null) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						api.unregisterFromKeyEvents(params.getCallbackId());
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						long id = addAidlCallback(callback, KEY_ON_KEY_EVENT);
+						api.registerForKeyEvents(id, params.getKeyEventList());
 						return id;
 					}
 				} else {
@@ -1231,7 +1260,19 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		public boolean importProfile(ProfileSettingsParams params) {
 			try {
 				OsmandAidlApi api = getApi("importProfile");
-				return api != null && api.importProfile(params.getProfileSettingsUri(), params.getLatestChanges(), params.getVersion());
+				return api != null && api.importProfileV2(params.getProfileSettingsUri(), params.getSettingsTypeKeys(),
+						params.isReplace(), params.getLatestChanges(), params.getVersion());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean exportProfile(ExportProfileParams params) {
+			try {
+				OsmandAidlApi api = getApi("exportProfile");
+				return api != null && api.exportProfile(params.getProfile(), params.getSettingsTypeKeys());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1254,6 +1295,41 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("getQuickActionsInfo");
 				return api != null && api.getQuickActionsInfoV2(quickActions);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean setLockState(SetLockStateParams params) {
+			try {
+				OsmandAidlApi api = getApi("setLockState");
+				return api != null && api.setLockState(params.getLockState());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public AppInfoParams getAppInfo() {
+			try {
+				OsmandAidlApi api = getApi("getAppInfo");
+				return api != null ? api.getAppInfo() : null;
+			} catch (Exception e) {
+				handleException(e);
+				return null;
+			}
+		}
+
+		@Override
+		public boolean setMapMargins(MapMarginsParams params) {
+			try {
+				OsmandAidlApi api = getApi("setMapMargins");
+				String packName = getCallingAppPackName();
+				return api != null && api.setMapMargins(packName, params.getAppModeKey(), params.getLeftMargin(),
+						params.getTopMargin(), params.getBottomMargin(), params.getRightMargin());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

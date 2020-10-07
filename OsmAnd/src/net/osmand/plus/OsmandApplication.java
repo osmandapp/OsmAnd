@@ -69,6 +69,8 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.voice.CommandPlayer;
@@ -758,23 +760,23 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void applyTheme(Context c) {
-		int t = R.style.OsmandDarkTheme;
+		int themeResId;
 		boolean doNotUseAnimations = osmandSettings.DO_NOT_USE_ANIMATIONS.get();
-		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
+		if (!osmandSettings.isLightContent()) {
 			if (doNotUseAnimations) {
-				t = R.style.OsmandDarkTheme_NoAnimation;
+				themeResId = R.style.OsmandDarkTheme_NoAnimation;
 			} else {
-				t = R.style.OsmandDarkTheme;
+				themeResId = R.style.OsmandDarkTheme;
 			}
-		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME) {
+		} else {
 			if (doNotUseAnimations) {
-				t = R.style.OsmandLightTheme_NoAnimation;
+				themeResId = R.style.OsmandLightTheme_NoAnimation;
 			} else {
-				t = R.style.OsmandLightTheme;
+				themeResId = R.style.OsmandLightTheme;
 			}
 		}
 		setLanguage(c);
-		c.setTheme(t);
+		c.setTheme(themeResId);
 	}
 	
 	public IBRouterService getBRouterService() {
@@ -983,15 +985,14 @@ public class OsmandApplication extends MultiDexApplication {
 	public void setupDrivingRegion(WorldRegion reg) {
 		OsmandSettings.DrivingRegion drg = null;
 		WorldRegion.RegionParams params = reg.getParams();
-		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
+//		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
 		OsmandSettings.MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ?
 				OsmandSettings.MetricsConstants.MILES_AND_FEET : OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS;
 		OsmandSettings.MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ?
 				OsmandSettings.MetricsConstants.MILES_AND_METERS : OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS;
 		for (OsmandSettings.DrivingRegion r : OsmandSettings.DrivingRegion.values()) {
-			if (r.americanSigns == americanSigns && r.leftHandDriving == leftHand &&
-					(r.defMetrics == mc1 || r.defMetrics == mc2)) {
+			if (r.leftHandDriving == leftHand && (r.defMetrics == mc1 || r.defMetrics == mc2)) {
 				drg = r;
 				break;
 			}

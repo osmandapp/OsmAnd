@@ -12,6 +12,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
@@ -21,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -30,13 +33,11 @@ import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
-import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.Type;
 
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.settings.fragments.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
-import static net.osmand.plus.settings.fragments.ImportSettingsFragment.getSettingsToOperate;
 
 public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
@@ -63,6 +64,12 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		nightMode = !app.getSettings().isLightContent();
+		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				dismissFragment();
+			}
+		});
 	}
 
 	@Nullable
@@ -77,8 +84,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		recyclerView = root.findViewById(R.id.list);
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(R.string.import_complete_description), fileName),
-				fileName,
-				new StyleSpan(Typeface.BOLD)
+				new StyleSpan(Typeface.BOLD), fileName
 		));
 		btnClose.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -112,11 +118,11 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (settingsItems != null) {
 			ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
 					app,
-					getSettingsToOperate(settingsItems, true),
+					ImportHelper.getSettingsToOperate(settingsItems, true),
 					nightMode,
 					new ImportedSettingsItemsAdapter.OnItemClickListener() {
 						@Override
-						public void onItemClick(Type type) {
+						public void onItemClick(ExportSettingsType type) {
 							navigateTo(type);
 						}
 					});
@@ -132,7 +138,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void navigateTo(Type type) {
+	private void navigateTo(ExportSettingsType type) {
 		FragmentManager fm = getFragmentManager();
 		Activity activity = requireActivity();
 		if (fm == null || fm.isStateSaved()) {

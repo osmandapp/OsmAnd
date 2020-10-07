@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -110,13 +111,12 @@ public class TracksCard extends BaseCard {
 			img.setVisibility(View.VISIBLE);
 			LinearLayout container = (LinearLayout) v.findViewById(R.id.container);
 			container.setMinimumHeight(minCardHeight);
-			container.setPadding(listContentPadding, 0, 0, 0);
+			AndroidUtils.setPadding(container, listContentPadding, 0, 0, 0);
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					mapActivity.getMapActions().setGPXRouteParams(item.file);
 					app.getTargetPointsHelper().updateRouteAndRefresh(true);
-					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
 				}
 			});
 			tracks.addView(v);

@@ -56,6 +56,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -78,6 +79,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.LocationParser;
@@ -390,7 +392,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 				final View focusedView = getDialog().getCurrentFocus();
 				if (focusedView != null) {
-					AndroidUtils.softKeyboardDelayed(focusedView);
+					AndroidUtils.softKeyboardDelayed(getActivity(), focusedView);
 				}
 			}
 		});
@@ -642,20 +644,17 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				itemTv.setText((String) item);
 				itemIv.setVisibility(View.GONE);
 				itemBottomSpace.setVisibility(View.VISIBLE);
-			} else if (item instanceof Integer) {
+			} else if (item instanceof Drawable) {
 				itemTopSpace.setVisibility(View.GONE);
 				itemTv.setVisibility(View.GONE);
 				itemIv.setVisibility(View.VISIBLE);
 				itemBottomSpace.setVisibility(View.GONE);
-				Drawable icon = null;
+				Drawable icon = DrawableCompat.wrap((Drawable) item);
 				if (lightTheme) {
-					Drawable drawable = AppCompatResources.getDrawable(ctx, (Integer) item);
-					if (drawable != null) {
-						icon = DrawableCompat.wrap(drawable);
-						DrawableCompat.setTintList(icon, numberColorStateList);
-					}
+					DrawableCompat.setTintList(icon, numberColorStateList);
 				} else {
-					icon = getColoredIcon((Integer) item, R.color.keyboard_item_divider_control_color_dark);
+					int color = ContextCompat.getColor(ctx, R.color.keyboard_item_divider_control_color_dark);
+					DrawableCompat.setTint(icon, color);
 				}
 				itemIv.setImageDrawable(icon);
 			}
@@ -663,6 +662,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private Object getItemObjectById(@IdRes int id) {
+		Context ctx = requireContext();
 		if (id == R.id.keyboard_item_0) {
 			return "0";
 		} else if (id == R.id.keyboard_item_1) {
@@ -686,11 +686,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		} else if (id == R.id.keyboard_item_clear) {
 			return getString(R.string.shared_string_clear);
 		} else if (id == R.id.keyboard_item_next_field) {
-			return R.drawable.ic_keyboard_next_field;
+			Drawable normal = AppCompatResources.getDrawable(ctx, R.drawable.ic_action_next_field_stroke);
+			Drawable pressed = AppCompatResources.getDrawable(ctx, R.drawable.ic_action_next_field_fill);
+			return AndroidUtils.createPressedStateListDrawable(normal, pressed);
 		} else if (id == R.id.keyboard_item_backspace) {
-			return R.drawable.ic_keyboard_backspace;
+			Drawable normal = AppCompatResources.getDrawable(ctx, R.drawable.ic_action_backspace_stroke);
+			Drawable pressed = AppCompatResources.getDrawable(ctx, R.drawable.ic_action_backspace_fill);
+			return AndroidUtils.createPressedStateListDrawable(normal, pressed);
 		} else if (id == R.id.keyboard_item_hide) {
-			return R.drawable.ic_action_keyboard_hide;
+			return AppCompatResources.getDrawable(ctx, R.drawable.ic_action_keyboard_hide);
 		}
 		return -1;
 	}
@@ -704,7 +708,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		final View focusedView = getDialog().getCurrentFocus();
 		if (focusedView != null) {
 			if (!isOsmandKeyboardOn()) {
-				AndroidUtils.softKeyboardDelayed(focusedView);
+				AndroidUtils.softKeyboardDelayed(getActivity(), focusedView);
 			}
 		}
 	}
@@ -1036,7 +1040,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				new Handler().postDelayed(new Runnable() {
 					@Override
 					public void run() {
-						AndroidUtils.showSoftKeyboard(focusedView);
+						AndroidUtils.showSoftKeyboard(getActivity(), focusedView);
 					}
 				}, 200);
 			}
@@ -1268,7 +1272,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				changeOsmandKeyboardVisibility(true);
 			}
 		} else if (!softKeyboardShown && focusedView != null) {
-			AndroidUtils.softKeyboardDelayed(focusedView);
+			AndroidUtils.softKeyboardDelayed(getActivity(), focusedView);
 		}
 	}
 
@@ -1495,15 +1499,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		protected Void doInBackground(Void... params) {
 			if (Algorithms.isEmpty(gpx.path)) {
 				if (!Algorithms.isEmpty(fileName)) {
-					final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR);
+					String dirName = IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR;
+					File dir = app.getAppPath(dirName);
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
-					File fout = new File(dir, fileName + IndexConstants.GPX_FILE_EXT);
-					int ind = 1;
-					while (fout.exists()) {
-						fout = new File(dir, fileName + "_" + (++ind) + IndexConstants.GPX_FILE_EXT);
-					}
+					String uniqueFileName = FileUtils.createUniqueFileName(app, fileName, dirName, IndexConstants.GPX_FILE_EXT);
+					File fout = new File(dir, uniqueFileName + IndexConstants.GPX_FILE_EXT);
 					GPXUtilities.writeGpxFile(fout, gpx);
 				}
 			} else {

@@ -1,6 +1,7 @@
 package net.osmand.plus.dashboard;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -9,13 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -37,10 +38,10 @@ public abstract class DashBaseFragment extends Fragment {
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		if (activity instanceof MapActivity) {
-			dashboard = ((MapActivity) activity).getDashboard();
+	public void onAttach(@NonNull Context context) {
+		super.onAttach(context);
+		if (context instanceof MapActivity) {
+			dashboard = ((MapActivity) context).getDashboard();
 			dashboard.onAttach(this);
 		}
 	}
@@ -171,8 +172,8 @@ public abstract class DashBaseFragment extends Fragment {
 		@Override
 		public void onDismiss() {
 			dashboardOnMap.blacklistFragmentByTag(fragmentTag);
-			ViewCompat.setTranslationX(fragmentView, 0);
-			ViewCompat.setAlpha(fragmentView, 1);
+			fragmentView.setTranslationX(0);
+			fragmentView.setAlpha(1);
 			Snackbar.make(parentView, dashboardOnMap.getMyApplication().getResources()
 					.getString(R.string.shared_string_card_was_hidden), Snackbar.LENGTH_LONG)
 					.setAction(R.string.shared_string_undo, new View.OnClickListener() {
@@ -186,8 +187,8 @@ public abstract class DashBaseFragment extends Fragment {
 
 		public void onUndo() {
 			dashboardOnMap.unblacklistFragmentClass(fragmentTag);
-			ViewCompat.setTranslationX(fragmentView, 0);
-			ViewCompat.setAlpha(fragmentView, 1);
+			fragmentView.setTranslationX(0);
+			fragmentView.setAlpha(1);
 		}
 	}
 }

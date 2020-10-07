@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -1005,15 +1006,14 @@ public class MapMarkersHelper {
 	}
 
 	public String generateGpx(String fileName) {
-		final File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR);
+		String dirName = IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR;
+		File dir = ctx.getAppPath(dirName);
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
-		File fout = new File(dir, fileName + IndexConstants.GPX_FILE_EXT);
-		int ind = 1;
-		while (fout.exists()) {
-			fout = new File(dir, fileName + "_" + (++ind) + IndexConstants.GPX_FILE_EXT);
-		}
+		String uniqueFileName = FileUtils.createUniqueFileName(ctx, fileName, dirName, IndexConstants.GPX_FILE_EXT);
+		File fout = new File(dir, uniqueFileName + IndexConstants.GPX_FILE_EXT);
+
 		GPXFile file = new GPXFile(Version.getFullVersion(ctx));
 		for (MapMarker marker : mapMarkers) {
 			WptPt wpt = new WptPt();
@@ -1161,7 +1161,6 @@ public class MapMarkersHelper {
 					removeGroupActiveMarkers(group, true);
 					return;
 				}
-
 				for (FavouritePoint fp : favGroup.getPoints()) {
 					addNewMarkerIfNeeded(group, groupMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), fp, null);
 				}

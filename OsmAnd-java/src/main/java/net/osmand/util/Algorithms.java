@@ -26,6 +26,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -41,11 +42,34 @@ public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
 
-	public static boolean isEmpty(Collection c) {
+	public static boolean isEmpty(Collection<?> c) {
 		return c == null || c.size() == 0;
 	}
+	
+	private static char[] CHARS_TO_NORMALIZE_KEY = new char['’'];
+	private static char[] CHARS_TO_NORMALIZE_VALUE = new char['\''];
 
-	public static boolean isEmpty(Map map) {
+	public static String normalizeSearchText(String s) {
+		boolean norm = false;
+		for (int i = 0; i < s.length() && !norm; i++) {
+			char ch = s.charAt(i);
+			for (int j = 0; j < CHARS_TO_NORMALIZE_KEY.length; j++) {
+				if (ch == CHARS_TO_NORMALIZE_KEY[j]) {
+					norm = true;
+					break;
+				}
+			}
+		}
+		if (!norm) {
+			return s;
+		}
+		for (int k = 0; k < CHARS_TO_NORMALIZE_KEY.length; k++) {
+			s = s.replace(CHARS_TO_NORMALIZE_KEY[k], CHARS_TO_NORMALIZE_VALUE[k]);
+		}
+		return s;
+	}
+
+	public static boolean isEmpty(Map<?, ?> map) {
 		return map == null || map.size() == 0;
 	}
 
@@ -90,10 +114,12 @@ public class Algorithms {
 		return def;
 	}
 
-
 	public static String getFileNameWithoutExtension(File f) {
-		String name = f.getName();
-		int i = name.indexOf('.');
+		return getFileNameWithoutExtension(f.getName());
+	}
+
+	public static String getFileNameWithoutExtension(String name) {
+		int i = name.lastIndexOf('.');
 		if (i >= 0) {
 			name = name.substring(0, i);
 		}
@@ -112,6 +138,26 @@ public class Algorithms {
 			return name.substring(i + 1);
 		}
 		return name;
+	}
+
+	public static List<File> collectDirs(File parentDir, List<File> dirs) {
+		return collectDirs(parentDir, dirs, null);
+	}
+
+	public static List<File> collectDirs(File parentDir, List<File> dirs, File exclDir) {
+		File[] listFiles = parentDir.listFiles();
+		if (listFiles != null) {
+			Arrays.sort(listFiles);
+			for (File f : listFiles) {
+				if (f.isDirectory()) {
+					if (!f.equals(exclDir)) {
+						dirs.add(f);
+					}
+					Algorithms.collectDirs(f, dirs);
+				}
+			}
+		}
+		return dirs;
 	}
 
 	public static File[] getSortedFilesVersions(File dir) {
@@ -250,6 +296,32 @@ public class Algorithms {
 		return test == 0x504b0304;
 	}
 
+	/**
+	 * Checks, whether the child directory is a subdirectory of the parent
+	 * directory.
+	 *
+	 * @param parent the parent directory.
+	 * @param child  the suspected child directory.
+	 * @return true if the child is a subdirectory of the parent directory.
+	 */
+	public static boolean isSubDirectory(File parent, File child) {
+		try {
+			parent = parent.getCanonicalFile();
+			child = child.getCanonicalFile();
+
+			File dir = child;
+			while (dir != null) {
+				if (parent.equals(dir)) {
+					return true;
+				}
+				dir = dir.getParentFile();
+			}
+		} catch (IOException e) {
+			return false;
+		}
+		return false;
+	}
+
 	private static int readInt(InputStream in) throws IOException {
 		int ch1 = in.read();
 		int ch2 = in.read();
@@ -292,10 +364,8 @@ public class Algorithms {
 	 * exception. Supported formats are:
 	 * #RRGGBB
 	 * #AARRGGBB
-	 * 'red', 'blue', 'green', 'black', 'white', 'gray', 'cyan', 'magenta',
-	 * 'yellow', 'lightgray', 'darkgray'
 	 */
-	public static int parseColor(String colorString) {
+	public static int parseColor(String colorString) throws IllegalArgumentException {
 		if (colorString.charAt(0) == '#') {
 			// Use a long to avoid rollovers on #ffXXXXXX
 			if (colorString.length() == 4) {
@@ -456,6 +526,10 @@ public class Algorithms {
 	}
 
 	public static StringBuilder readFromInputStream(InputStream i) throws IOException {
+		return readFromInputStream(i, true);
+	}
+	
+	public static StringBuilder readFromInputStream(InputStream i, boolean autoclose) throws IOException {
 		StringBuilder responseBody = new StringBuilder();
 		responseBody.setLength(0);
 		if (i != null) {
@@ -469,6 +543,9 @@ public class Algorithms {
 					f = false;
 				}
 				responseBody.append(s);
+			}
+			if (autoclose) {
+				i.close();
 			}
 		}
 		return responseBody;
@@ -679,13 +756,9 @@ public class Algorithms {
 	}
 
 	public static String formatMinutesDuration(int minutes) {
-		if (minutes < 60) {
-			return String.valueOf(minutes);
-		} else {
-			int min = minutes % 60;
-			int hours = minutes / 60;
-			return String.format(Locale.UK, "%02d:%02d", hours, min);
-		}
+		int min = minutes % 60;
+		int hours = minutes / 60;
+		return String.format(Locale.UK, "%02d:%02d", hours, min);
 	}
 
 	public static <T extends Enum<T>> T parseEnumValue(T[] cl, String val, T defaultValue) {

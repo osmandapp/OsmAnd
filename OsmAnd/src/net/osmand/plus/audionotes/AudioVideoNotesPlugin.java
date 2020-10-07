@@ -47,7 +47,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -67,11 +67,11 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import net.osmand.util.MapUtils;
@@ -659,8 +659,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,
-											  ContextMenuAdapter adapter, Object selectedObj) {
-		if (isRecording()) {
+											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+		if (!configureMenu && isRecording()) {
 			return;
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_arecord, app)
@@ -1036,11 +1036,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			try {
 				Method m = mr.getClass().getDeclaredMethod("setOrientationHint", Integer.TYPE);
 				Display display = ((WindowManager) mapActivity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-				if (display.getOrientation() == Surface.ROTATION_0) {
+				if (display.getRotation() == Surface.ROTATION_0) {
 					m.invoke(mr, 90);
-				} else if (display.getOrientation() == Surface.ROTATION_270) {
+				} else if (display.getRotation() == Surface.ROTATION_270) {
 					m.invoke(mr, 180);
-				} else if (display.getOrientation() == Surface.ROTATION_180) {
+				} else if (display.getRotation() == Surface.ROTATION_180) {
 					m.invoke(mr, 270);
 				}
 			} catch (Exception e) {
@@ -1430,22 +1430,24 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		getMapActivity().getMyApplication().runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				if (!autofocus) {
-					cam.takePicture(null, null, new JpegPhotoHandler());
-				} else {
-					cam.autoFocus(new Camera.AutoFocusCallback() {
-						@Override
-						public void onAutoFocus(boolean success, Camera camera) {
-							try {
-								cam.takePicture(null, null, new JpegPhotoHandler());
-							} catch (Exception e) {
-								logErr(e);
-								closeRecordingMenu();
-								closeCamera();
-								finishRecording();
+				if (cam != null) {
+					if (!autofocus) {
+						cam.takePicture(null, null, new JpegPhotoHandler());
+					} else {
+						cam.autoFocus(new Camera.AutoFocusCallback() {
+							@Override
+							public void onAutoFocus(boolean success, Camera camera) {
+								try {
+									cam.takePicture(null, null, new JpegPhotoHandler());
+								} catch (Exception e) {
+									logErr(e);
+									closeRecordingMenu();
+									closeCamera();
+									finishRecording();
+								}
 							}
-						}
-					});
+						});
+					}
 				}
 			}
 		}, 200);
@@ -2128,7 +2130,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return DashAudioVideoNotesFragment.FRAGMENT_DATA;
 	}
 
-	public class AudioVideoNotesWidgetState extends MapWidgetRegistry.WidgetState {
+	public class AudioVideoNotesWidgetState extends WidgetState {
 
 		private static final int AV_WIDGET_STATE_ASK = R.id.av_notes_widget_state_ask;
 		private static final int AV_WIDGET_STATE_AUDIO = R.id.av_notes_widget_state_audio;

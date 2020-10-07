@@ -60,11 +60,11 @@
     <string name="start_end_date">Başlangıç — Bitiş tarihi</string>
     <string name="timeline_no_data_descr">Seçilen gün için toplanan veri yok</string>
     <string name="timeline_no_data">Veri yok</string>
-    <string name="min_logging_distance">Minimum kayıt mesafesi</string>
-    <string name="min_logging_distance_descr">Filtre: yeni bir nokta kaydetmek için minimum mesafe</string>
-    <string name="min_logging_accuracy">Minimum kayıt hassasiyeti</string>
-    <string name="min_logging_accuracy_descr">Filtre: hassasiyete ulaşılmadığı sürece kaydetme yok</string>
-    <string name="min_logging_speed">Minimum kayıt hızı</string>
+    <string name="min_logging_distance">Asgari kayıt mesafesi</string>
+    <string name="min_logging_distance_descr">Filtre: yeni bir nokta kaydetmek için asgari mesafe</string>
+    <string name="min_logging_accuracy">Asgari kayıt doğruluğu</string>
+    <string name="min_logging_accuracy_descr">Filtre: bu doğruluğa ulaşılmadıkça kaydetme yok</string>
+    <string name="min_logging_speed">Asgari kayıt hızı</string>
     <string name="min_logging_speed_descr">Filtre: seçili hızın altında kaydetme yok</string>
     <string name="gpx_settings">GPX ayarları</string>
     <string name="proxy_key">Anahtar</string>
@@ -81,7 +81,7 @@
     <string name="proxy">Proxy</string>
     <string name="privacy">Gizlilik</string>
     <string name="direction">Yön</string>
-    <string name="precision">Hassaslık</string>
+    <string name="precision">Hassasiyet</string>
     <string name="search_contacts">Kişileri ara</string>
     <string name="search_contacts_descr">Tüm gruplarınızda ve kişilerinizde arayın.</string>
     <string name="type_contact_or_group_name">Kişi veya grup adı yazın</string>
@@ -103,7 +103,7 @@
     <string name="show_gps_points">GPS noktalarını göster</string>
     <string name="show_gps_points_descr">Toplanan ve gönderilen GPS noktalarının miktarını göster.</string>
     <string name="please_update_osmand">Verileri haritada görüntülemek için lütfen OsmAnd\'ı güncelleyin</string>
-    <string name="bearing">Konum açısı</string>
+    <string name="bearing">Kerteriz</string>
     <string name="gps_points_in_buffer">gönderilen (%1$d arabellekte)</string>
     <string name="points_size">%1$d nokta</string>
     <string name="shared_string_date">Tarih</string>
@@ -182,7 +182,7 @@
     <string name="location_history">Konum geçmişi</string>
     <string name="stale_location_desc">Bir kişinin en son hareket ettiği zaman.</string>
     <string name="stale_location">Hareket etmiyor</string>
-    <string name="send_my_location_desc">Konum paylaşımı için minimum aralığı ayarlayın.</string>
+    <string name="send_my_location_desc">Konum paylaşımı için en küçük aralığı ayarlayın.</string>
     <string name="send_my_location">Konumumu gönder</string>
     <string name="gps_and_location">Konum</string>
     <string name="sharing_time">Paylaşım zamanı</string>
@@ -256,7 +256,7 @@
     <string name="unit_of_length">Uzunluk birimleri</string>
     <string name="unit_of_speed_system_descr">Hız birimini tanımlayın.</string>
     <string name="unit_of_speed_system">Hız birimi</string>
-    <string name="buffer_time_descr">Noktaların arabellekte saklanacağı maksimum süre</string>
+    <string name="buffer_time_descr">Noktaların arabellekte saklanacağı azami süre</string>
     <string name="buffer_time">Arabellek zaman aşım süresi</string>
     <string name="shared_string_suggested">Önerilen</string>
     <string name="status_widget_title">OsmAnd Tracker durumu</string>
@@ -267,4 +267,8 @@
     <string name="last_response_duration">Son cevap: %1$s önce</string>
     <string name="duration_ago">%1$s önce</string>
     <string name="shared_string_error_short">HATA</string>
+    <string name="shared_string_export">Dışa aktar</string>
+    <string name="logcat_buffer">Logcat tamponu</string>
+    <string name="logcat_buffer_descr">Uygulamanın ayrıntılı günlük kayıtlarına göz atın ve paylaşın</string>
+    <string name="send_report">Rapor gönder</string>
 </resources>

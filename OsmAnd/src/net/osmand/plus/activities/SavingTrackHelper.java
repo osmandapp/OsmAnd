@@ -214,10 +214,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					if (!data.get(f).isEmpty()) {
 						WptPt pt = data.get(f).findPointToShow();
 						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
-						Integer track_storage_directory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
-						if (track_storage_directory != OsmandSettings.REC_DIRECTORY) {
-							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM");
-//							if (track_storage_directory == OsmandSettings.DAILY_DIRECTORY) {
+						Integer trackStorageDirectory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
+						if (!OsmandSettings.REC_DIRECTORY.equals(trackStorageDirectory)) {
+							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM", Locale.US);
+//							if (trackStorageDirectory == OsmandSettings.DAILY_DIRECTORY) {
 //								dateDirFormat = new SimpleDateFormat("yyyy-MM-dd");
 //							}
 							String dateDirName = dateDirFormat.format(new Date(pt.time));
@@ -369,7 +369,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					if(!newInterval) {
 						segment.points.add(pt);
 					}
-					String date = DateFormat.format("yyyy-MM-dd", time).toString(); //$NON-NLS-1$
+					String date = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date(time));;  //$NON-NLS-1$
 					if (dataTracks.containsKey(date)) {
 						GPXFile gpx = dataTracks.get(date);
 						gpx.tracks.add(track);

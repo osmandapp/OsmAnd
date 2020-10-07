@@ -152,7 +152,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Скриване на границите</string>
     <string name="rendering_attr_noAdminboundaries_description">Не показвай административни граници (admin нива 5–9)</string>
     <string name="map_widget_max_speed">Ограничение на скоростта</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Ширина %1$.3f, дължина %2$.3f</string>
     <string name="no_buildings_found">Няма намерени номера.</string>
     <string name="incremental_search_city">Търсене на град възходящо</string>
@@ -243,7 +242,6 @@
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Начални настройки</string>
     <string name="map_widget_parking">Паркинг</string>
-    <string name="map_widget_monitoring">GPX проследяване</string>
     <string name="map_widget_speed">Скорост</string>
     <string name="map_widget_distance">Крайна цел</string>
     <string name="map_widget_altitude">Надм. височина</string>
@@ -491,7 +489,6 @@
     <string name="animate_route">Старт на симулацията</string>
     <string name="file_can_not_be_renamed">Файлът не може да бъде преименуван.</string>
     <string name="file_with_name_already_exists">Съществува файл с това име.</string>
-    <string name="shared_string_gpx_route">GPX маршрут</string>
     <string name="poi_query_by_name_matches_categories">Намерени са няколко категории POI отговарящи на тези критерии:</string>
     <string name="data_to_search_poi_not_available">Няма местни данни за търсене на POI.</string>
     <string name="poi_filter_by_name">Търсене по име</string>
@@ -505,11 +502,10 @@
     <string name="search_position_current_location_found">Моето място (намерено)</string>
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Предпочитани…</string>
-    <string name="search_position_undefined">Неопределена</string>
+    <string name="shared_string_undefined">Неопределена</string>
     <string name="search_position_map_view">Текущ център на картата</string>
     <string name="select_search_position">Начална точка:</string>
     <string name="context_menu_item_search">Търси близо до това място</string>
-    <string name="shared_string_save_as_gpx">Записване на маршрута като GPX следа</string>
     <string name="route_successfully_saved_at">Маршрутът беше успешно записан като \'%1$s\'.</string>
     <string name="filename_input">Име на файл: </string>
     <string name="file_with_name_already_exist">Съществува файл със същото име.</string>
@@ -612,7 +608,6 @@
     <string name="context_menu_item_share_location">Споделяне на мястото</string>
     <string name="add_waypoint_dialog_added">GPS позицията \'\'{0}\'\' беше успешно добавена</string>
     <string name="add_waypoint_dialog_title">Добавяне на точка към GPX следа</string>
-    <string name="context_menu_item_add_waypoint">Добави GPX точка</string>
     <string name="amenity_type_administrative">Административни</string>
     <string name="amenity_type_barrier">Ограничения</string>
     <string name="amenity_type_education">Образование</string>
@@ -699,7 +694,6 @@
     <string name="voice">Записан глас</string>
     <string name="no_vector_map_loaded">Не са заредени векторни карти</string>
     <string name="gpx_files_not_found">Не са открити файлове GPX в папката за следи</string>
-    <string name="layer_gpx_layer">GPX следа…</string>
     <string name="error_reading_gpx">Грешка при четене на GPX данни</string>
     <string name="vector_data">Офлайн векторни карти</string>
     <string name="transport_context_menu">Търсене за общ. транспорт на тази спирка</string>
@@ -880,7 +874,6 @@
     <string name="save_track_interval">Интервал за запис по време на навигация</string>
     <string name="save_track_interval_descr">Избор на интервал, през който да се прави запис на следата по време на навигация</string>
     <string name="save_track_to_gpx_descrp">Следите ще бъдат записвани в папката tracks по време на самата навигация</string>
-    <string name="save_track_to_gpx">Запиши следата в GPX файл по време на навигация</string>
     <string name="update_tile">Обнови картата</string>
     <string name="reload_tile">Презареждане на картната плочка</string>
     <string name="mark_point">Цел</string>
@@ -1099,8 +1092,6 @@
     <string name="lang_he">Иврит</string>
     <string name="forward">Напред</string>
     <string name="home">Табло за управление</string>
-    <string name="gpx_monitoring_start">Старт на записа в GPX</string>
-    <string name="gpx_monitoring_stop">Край на GPX записа</string>
     <string name="gpx_start_new_segment">Започни нов сегмент</string>
     <string name="rendering_attr_hideBuildings_name">Скрий сградите</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Скрий пътищата, които не са за автомобили</string>
@@ -1112,7 +1103,6 @@
     <string name="confirm_every_run">Винаги питай</string>
     <string name="enable_sleep_mode">Поставяне на GPS във фонов режим</string>
     <string name="sleep_mode_stop_dialog">Прекъсване на фоновия режим GPS?</string>
-    <string name="save_track_to_gpx_globally">Записване на следата в GPX файл</string>
     <string name="save_track_interval_globally">Интервал за запис</string>
     <string name="gps_wake_up_timer">Интервал за задействане на GPS-a</string>
     <string name="map_preferred_locale_descr">Предпочитан език за наименованията по картата (ако този език не е наличен, ще се имената ще се изписват на английски или на местния език)</string>
@@ -1203,7 +1193,6 @@
     <string name="rendering_attr_hideHouseNumbers_name">Номер</string>
     <string name="application_dir_change_warning3">Да премести ли OsmAnd своите файлове на новото място\?</string>
     <string name="general_settings_2">Общи настройки</string>
-    <string name="save_global_track_interval_descr">Изберете интервал при запис на изминат път (достъпен чрез добавката за запис в GPX)</string>
     <string name="save_global_track_interval">Интервал за запис</string>
     <string name="search_for">Търси</string>
     <string name="shared_string_show_all">Покажи всички</string>
@@ -1397,7 +1386,6 @@
     <string name="shared_string_show_details">Покажи подробни данни</string>
     <string name="gps_network_not_enabled">Услугата за местоположение е изключена. Включване\?</string>
     <string name="disable_recording_once_app_killed">Предотвратяване на самостоятелно записване</string>
-    <string name="disable_recording_once_app_killed_descrp">Спира на пауза записа на GPX, когато приложението е затворено (от последни приложения). (Иконата на OsmAnd изчезва от лентата за уведомяване на Андроид.)</string>
     <string name="shared_string_import2osmand">Импортиране към OsmAnd</string>
     <string name="read_full_article">Прочетете пълната статия (онлайн)</string>
     <string name="local_recordings_delete_all_confirm">Сигурни ли сте, че искате да изтриете %1$d бележки\?</string>
@@ -1568,7 +1556,6 @@
     <string name="show_on_start_description">\"Изкл.\" стартира директно картата.</string>
     <string name="osm_edit_reopened_note">Отворена отново бележка на OSM</string>
     <string name="osm_edit_commented_note">Бележка на OSM с коментар</string>
-    <string name="osm_edit_removed_note">Изтрита бележка на OSM</string>
     <string name="osm_edit_created_note">Създадена бележка на OSM</string>
     <string name="osn_bug_name">Бележка на OSM</string>
     <string name="osn_add_dialog_title">Създайте Бележка</string>
@@ -1672,7 +1659,6 @@
     <string name="downloads_left_template">Остават %1$s изтегляния</string>
     <string name="are_you_sure">Сигурни ли сте?</string>
     <string name="count_of_lines">Брой редове</string>
-    <string name="show_gpx">Покажи GPX</string>
     <string name="saved_at_time">Успешно записано в: %1$s</string>
     <string name="please_specify_poi_type">Задайте тип на POI.</string>
     <string name="recent_places">Последни места</string>

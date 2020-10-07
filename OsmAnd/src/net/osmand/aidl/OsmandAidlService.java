@@ -85,8 +85,9 @@ import net.osmand.aidl.quickaction.QuickActionParams;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
+import net.osmand.aidl.lock.SetLockStateParams;
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
@@ -310,7 +311,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 					AFavorite newFav = params.getFavoriteNew();
 					if (prevFav != null && newFav != null) {
 						return api.updateFavorite(prevFav.getName(), prevFav.getCategory(), prevFav.getLat(), prevFav.getLon(),
-								newFav.getName(), newFav.getCategory(), newFav.getDescription(), newFav.getLat(), newFav.getLon());
+								newFav.getName(), newFav.getCategory(), newFav.getDescription(), newFav.getAddress(), newFav.getLat(), newFav.getLon());
 					}
 				}
 				return false;
@@ -597,7 +598,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				if (params != null) {
 					OsmandAidlApi api = getApi("setMapLocation");
 					return api != null && api.setMapLocation(params.getLatitude(), params.getLongitude(),
-							params.getZoom(), params.isAnimated());
+							params.getZoom(), params.getRotation(), params.isAnimated());
 				}
 				return false;
 			} catch (Exception e) {
@@ -1298,7 +1299,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean importProfile(ProfileSettingsParams params) {
 			try {
 				OsmandAidlApi api = getApi("importProfile");
-				return api != null && api.importProfile(params.getProfileSettingsUri(), params.getLatestChanges(), params.getVersion());
+				return api != null && api.importProfile(params.getProfileSettingsUri(), params.getLatestChanges(),
+						params.getVersion());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1321,6 +1323,16 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			try {
 				OsmandAidlApi api = getApi("getQuickActionsInfo");
 				return api != null && api.getQuickActionsInfo(quickActions);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+		@Override
+		public boolean setLockState(SetLockStateParams params) {
+			try {
+				OsmandAidlApi api = getApi("setLockState");
+				return api != null && api.setLockState(params.getLockState());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

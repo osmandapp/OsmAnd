@@ -38,6 +38,8 @@ public class Amenity extends MapObject {
 	public static final String COLLECTION_TIMES = "collection_times";
 	public static final String CONTENT = "content";
 	public static final String CUISINE = "cuisine";
+	public static final String WIKIDATA = "wikidata";
+	public static final String WIKIMEDIA_COMMONS = "wikimedia_commons";
 	public static final String DISH = "dish";
 	public static final String REF = "ref";
 	public static final String OSM_DELETE_VALUE = "delete";
@@ -93,33 +95,6 @@ public class Amenity extends MapObject {
 		return str;
 	}
 
-	public String unzipContent(String str) {
-		if (str != null) {
-			if (str.startsWith(" gz ")) {
-				try {
-					int ind = 4;
-					byte[] bytes = new byte[str.length() - ind];
-					for (int i = ind; i < str.length(); i++) {
-						char ch = str.charAt(i);
-						bytes[i - ind] = (byte) ((int) ch - 128 - 32);
-
-					}
-					GZIPInputStream gzn = new GZIPInputStream(new ByteArrayInputStream(bytes));
-					BufferedReader br = new BufferedReader(new InputStreamReader(gzn, "UTF-8"));
-					StringBuilder bld = new StringBuilder();
-					String s;
-					while ((s = br.readLine()) != null) {
-						bld.append(s);
-					}
-					br.close();
-					str = bld.toString();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return str;
-	}
 
 	public Map<String, String> getAdditionalInfo() {
 		if (additionalInfo == null) {

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -14,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.text.SpannableString;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -24,11 +22,10 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
@@ -466,21 +463,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		super.onBindPreferenceViewHolder(preference, holder);
 		String prefId = preference.getKey();
 		if (CAMERA_PERMISSION.equals(prefId)) {
-			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
-			if (selectableView != null) {
-				int color = AndroidUtils.getColorFromAttr(app, R.attr.activity_background_color);
-				int selectedColor = UiUtilities.getColorWithAlpha(getActiveProfileColor(), 0.3f);
-
-				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
-					Drawable selectable = getPaintedIcon(R.drawable.ripple_rectangle_rounded, selectedColor);
-					Drawable[] layers = {bgDrawable, selectable};
-					AndroidUtils.setBackground(selectableView, new LayerDrawable(layers));
-				} else {
-					Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
-					AndroidUtils.setBackground(selectableView, bgDrawable);
-				}
-			}
+			setupPrefRoundedBg(holder);
 		} else if (OPEN_NOTES_DESCRIPTION.equals(prefId)) {
 			int minHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height);
 			holder.itemView.setMinimumHeight(minHeight);

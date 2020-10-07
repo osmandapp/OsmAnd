@@ -150,6 +150,7 @@ public class RasterMapMenu {
 						@Override
 						public boolean onIntegerValueChangedListener(int newValue) {
 							mapTransparencyPreference.set(newValue);
+							mapActivity.getMapLayers().getMapControlsLayer().updateTransparencySlider();
 							mapActivity.getMapView().refreshMap();
 							return false;
 						}

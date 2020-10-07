@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="splash_screen_background_color">@color/map_background_color_light</color>
+
 	<color name="text_color_primary_light">#212121</color>
 	<color name="text_color_primary_dark">#cccccc</color>
 	<color name="text_color_secondary_light">#727272</color>
@@ -21,6 +23,7 @@
 	<color name="app_bar_color_dark">#252727</color>
 	<color name="status_bar_color_light">#e68200</color>
 	<color name="status_bar_color_dark">#232525</color>
+	<color name="material_text_input_layout_bg">#4DCCCCCC</color>
 
 	<color name="active_buttons_and_links_bg_pressed_light">#0f67eb</color>
 	<color name="active_buttons_and_links_bg_pressed_dark">#b87114</color>
@@ -93,8 +96,8 @@
 
 	<color name="audio_video_icon_color">#128a89</color>
     <color name="created_poi_icon_color">#4caf50</color>
-    <color name="osm_bug_unresolved_icon_color">#d44a4a</color>
-    <color name="osm_bug_resolved_icon_color">#4caf50</color>
+	<color name="osm_bug_unresolved_icon_color">#D42020</color>
+	<color name="osm_bug_resolved_icon_color">#12B21A</color>
 
 	<color name="osmand_orange">#ff8f00</color>
 	<color name="app_mode_icon_color">#33B4E4</color>
@@ -128,6 +131,8 @@
 	<color name="map_widget_light_pressed">#e5e5e5</color>
 	<color name="map_widget_blue">#536dfe</color>
 	<color name="map_widget_blue_pressed">#485dd9</color>
+	<color name="map_button_icon_color_light">#727272</color>
+	<color name="map_button_icon_color_dark">#cccccc</color>
 
 	<color name="map_progress_bar_bg_light">#f0f0f0</color>
 	<color name="map_progress_bar_bg_dark">#1b1d1f</color>
@@ -186,7 +191,9 @@
 	<color name="gpx_time_span_color">#0080FF</color>
 
 	<color name="color_favorite">#eecc22</color>
-	<color name="color_favorite_gray">#b3b3b3</color>
+	<color name="color_favorite_gray">#727272</color>
+	<color name="parking_icon_background">#244DBD</color>
+	<color name="transport_stop_icon_background">#5870FE</color>
 
 	<!-- Themed color list items -->
 	<!-- invalid -red, localindex not supported,  -->
@@ -414,6 +421,9 @@
 	<color name="text_field_box_dark">#3F474B</color>
 	<color name="text_field_box_light">#eeeeee</color>
 
+	<color name="bottom_bar_background_color_dark">#252727</color>
+	<color name="bottom_bar_background_color_light">#FFFFFF</color>
+
 	<color name="preference_category_title">#7E33FF</color>
 	<color name="preference_top_switch_off">#808080</color>
 
@@ -463,7 +473,9 @@
 
 	<color name="switch_button_active_light">#1A237BFF</color>
 	<color name="switch_button_active_dark">#1AD28521</color>
-	<color name="switch_button_active_stroke">#80237BFF</color>
+	<color name="switch_button_active_stroke_light">#80237BFF</color>
+	<color name="switch_button_active_stroke_dark">#80D28521</color>
 	<color name="empty_hint_bg">#80000000</color>
+	<color name="input_layout_bg_color">#4DCCCCCC</color>
 
 </resources>

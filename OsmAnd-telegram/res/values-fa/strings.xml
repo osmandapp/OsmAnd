@@ -38,8 +38,8 @@
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile">mi</string>
-    <string name="km">ک‌م</string>
-    <string name="m">متر</string>
+    <string name="km">km</string>
+    <string name="m">m</string>
     <string name="nm">nmi</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
@@ -73,4 +73,9 @@
     <string name="unit_of_length_descr">یکاهای طول را تغییر دهید.</string>
     <string name="unit_of_length">یکاهای طول</string>
     <string name="shared_string_appearance">ظاهر</string>
+    <string name="last_response_duration">آخرین پاسخ: %1$s پیش</string>
+    <string name="last_update_from_telegram_duration">آخرین به‌روزرسانی تلگرام: %1$s پیش</string>
+    <string name="last_response_date">آخرین پاسخ: %1$s</string>
+    <string name="last_update_from_telegram_date">آخرین به‌روزرسانی تلگرام: %1$s</string>
+    <string name="shared_string_error_short">خطا</string>
 </resources>

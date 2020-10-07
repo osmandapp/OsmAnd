@@ -18,6 +18,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
 	private Drawable background;
 	private Drawable icon;
+	private boolean iconHidden;
 	protected CharSequence title;
 	@ColorRes
 	protected int titleColorId = INVALID_ID;
@@ -34,12 +35,14 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 								 Drawable icon,
 								 Drawable background,
 								 CharSequence title,
-								 @ColorRes int titleColorId) {
+								 @ColorRes int titleColorId,
+								 boolean iconHidden) {
 		super(customView, layoutId, tag, disabled, onClickListener, position);
 		this.icon = icon;
 		this.background = background;
 		this.title = title;
 		this.titleColorId = titleColorId;
+		this.iconHidden = iconHidden;
 	}
 
 	protected SimpleBottomSheetItem() {
@@ -67,6 +70,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 		iconView = ((ImageView) view.findViewById(R.id.icon));
 		if (iconView != null) {
 			iconView.setImageDrawable(icon);
+			iconView.setVisibility(iconHidden ? View.GONE : View.VISIBLE);
 		}
 		titleTv = (TextView) view.findViewById(R.id.title);
 		if (title != null && titleTv != null) {
@@ -87,6 +91,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 		protected CharSequence title;
 		@ColorRes
 		protected int titleColorId = INVALID_ID;
+		protected boolean iconHidden;
 
 		public Builder setIcon(Drawable icon) {
 			this.icon = icon;
@@ -108,6 +113,11 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 			return this;
 		}
 
+		public Builder setIconHidden(boolean iconHidden) {
+			this.iconHidden = iconHidden;
+			return this;
+		}
+
 		public SimpleBottomSheetItem create() {
 			return new SimpleBottomSheetItem(customView,
 					layoutId,
@@ -118,7 +128,8 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 					icon,
 					background,
 					title,
-					titleColorId);
+					titleColorId,
+					iconHidden);
 		}
 	}
 }

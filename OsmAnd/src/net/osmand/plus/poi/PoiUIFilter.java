@@ -51,6 +51,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public final static int INVALID_ORDER  = -1;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
+	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypesOrigin = new LinkedHashMap<>();
 	private Map<String, PoiType> poiAdditionals = new HashMap<>();
 
 	protected String filterId;
@@ -120,6 +121,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			this.acceptedTypes.putAll(acceptedTypes);
 		}
 		updatePoiAdditionals();
+		updateAcceptedTypeOrigins();
 	}
 
 	public PoiUIFilter(Set<PoiUIFilter> filtersToMerge, OsmandApplication app) {
@@ -139,6 +141,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		poiAdditionals = filter.getPoiAdditionals();
 		filterByName = filter.filterByName;
 		savedFilterByName = filter.savedFilterByName;
+		updateAcceptedTypeOrigins();
 	}
 
 	public boolean isDeleted() {
@@ -150,8 +153,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	public boolean isWikiFilter() {
-		return filterId.startsWith(STD_PREFIX + WIKI_PLACE)
-				|| filterId.equals(STD_PREFIX + OSM_WIKI_CATEGORY);
+		return filterId.startsWith(STD_PREFIX + WIKI_PLACE) || isTopWikiFilter();
+	}
+
+	public boolean isTopWikiFilter() {
+		return filterId.equals(STD_PREFIX + OSM_WIKI_CATEGORY);
 	}
 
 	public String getFilterByName() {
@@ -376,17 +382,23 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	private AmenityNameFilter getNameFilterInternal(StringBuilder nmFilter,
 													final boolean allTime, final boolean open, final List<PoiType> poiAdditionals) {
-		final CollatorStringMatcher sm =
-				nmFilter.length() > 0 ?
-						new CollatorStringMatcher(nmFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS) : null;
+		final CollatorStringMatcher sm = nmFilter.length() > 0 ?
+				new CollatorStringMatcher(nmFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS) : null;
 		return new AmenityNameFilter() {
 
 			@Override
 			public boolean accept(Amenity a) {
 				if (sm != null) {
-					String lower = OsmAndFormatter.getPoiStringWithoutType(a,
+					List<String> names = OsmAndFormatter.getPoiStringsWithoutType(a,
 							app.getSettings().MAP_PREFERRED_LOCALE.get(), app.getSettings().MAP_TRANSLITERATE_NAMES.get());
-					if (!sm.matches(lower)) {
+					boolean match = false;
+					for (String name : names) {
+						if (sm.matches(name)) {
+							match = true;
+							break;
+						}
+					}
+					if (!match) {
 						return false;
 					}
 				}
@@ -661,6 +673,31 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		addOtherPoiAdditionals();
 	}
 
+	private void updateAcceptedTypeOrigins() {
+		Map<PoiCategory, LinkedHashSet<String>> acceptedTypesOrigin = new LinkedHashMap<>();
+		for (Entry<PoiCategory, LinkedHashSet<String>> e : acceptedTypes.entrySet()) {
+			if (e.getValue() != null) {
+				for (String s : e.getValue()) {
+					PoiType subtype = poiTypes.getPoiTypeByKey(s);
+					if (subtype != null) {
+						PoiCategory c = subtype.getCategory();
+						String typeName = subtype.getKeyName();
+						Set<String> acceptedSubtypes = getAcceptedSubtypes(c);
+						if (acceptedSubtypes != null && !acceptedSubtypes.contains(typeName)) {
+							LinkedHashSet<String> typeNames = acceptedTypesOrigin.get(c);
+							if (typeNames == null) {
+								typeNames = new LinkedHashSet<>();
+								acceptedTypesOrigin.put(c, typeNames);
+							}
+							typeNames.add(typeName);
+						}
+					}
+				}
+			}
+		}
+		this.acceptedTypesOrigin = acceptedTypesOrigin;
+	}
+
 	private void addOtherPoiAdditionals() {
 		for (PoiType add : poiTypes.getOtherMapCategory().getPoiAdditionalsCategorized()) {
 			poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
@@ -731,6 +768,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public void selectSubTypesToAccept(PoiCategory t, LinkedHashSet<String> accept) {
 		acceptedTypes.put(t, accept);
 		updatePoiAdditionals();
+		updateAcceptedTypeOrigins();
 	}
 
 	public void setTypeToAccept(PoiCategory poiCategory, boolean b) {
@@ -740,6 +778,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			acceptedTypes.remove(poiCategory);
 		}
 		updatePoiAdditionals();
+		updateAcceptedTypeOrigins();
 	}
 
 	@Override
@@ -796,14 +835,19 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		if (!poiTypes.isRegisteredType(type)) {
 			type = poiTypes.getOtherPoiCategory();
 		}
-		if (!acceptedTypes.containsKey(type)) {
-			return false;
+		if (acceptedTypes.containsKey(type)) {
+			LinkedHashSet<String> acceptedTypesSet = acceptedTypes.get(type);
+			if (acceptedTypesSet == null || acceptedTypesSet.contains(subtype)) {
+				return true;
+			}
 		}
-		LinkedHashSet<String> set = acceptedTypes.get(type);
-		if (set == null) {
-			return true;
+		if (acceptedTypesOrigin.containsKey(type)) {
+			LinkedHashSet<String> acceptedTypesSet = acceptedTypesOrigin.get(type);
+			if (acceptedTypesSet == null || acceptedTypesSet.contains(subtype)) {
+				return true;
+			}
 		}
-		return set.contains(subtype);
+		return false;
 	}
 
 	@Override

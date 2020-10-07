@@ -16,23 +16,16 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.Location;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.TextViewExProgress;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
-import net.osmand.util.MapUtils;
-
-import java.util.List;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	public static final String TAG = MapRouteInfoMenuFragment.class.getName();
@@ -289,36 +282,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRoutePlanningMode() && mapActivity.getMapView() != null) {
-			QuadRect r = new QuadRect(0, 0, 0, 0);
-			if (menu.isTransportRouteCalculated()) {
-				TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
-				TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
-				if (result != null) {
-					QuadRect transportRouteRect = transportRoutingHelper.getTransportRouteRect(result);
-					if (transportRouteRect != null) {
-						r = transportRouteRect;
-					}
-				}
-			} else if (rh.isRouteCalculated()) {
-				Location lt = rh.getLastProjection();
-				if (lt == null) {
-					lt = app.getTargetPointsHelper().getPointToStartLocation();
-				}
-				if (lt == null) {
-					lt = app.getLocationProvider().getLastKnownLocation();
-				}
-				if (lt != null) {
-					MapUtils.insetLatLonRect(r, lt.getLatitude(), lt.getLongitude());
-				}
-				List<Location> list = rh.getCurrentCalculatedRoute();
-				for (Location l : list) {
-					MapUtils.insetLatLonRect(r, l.getLatitude(), l.getLongitude());
-				}
-				List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-				for (TargetPoint l : targetPoints) {
-					MapUtils.insetLatLonRect(r, l.getLatitude(), l.getLongitude());
-				}
-			}
+			QuadRect r = menu.getRouteRect(mapActivity);
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
@@ -462,7 +426,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), isNightMode(),
 				R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), isNightMode(),
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.toLayoutDivider), isNightMode(),
 				R.color.divider_color_light, R.color.divider_color_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), isNightMode(),
 				R.color.divider_color_light, R.color.divider_color_dark);
@@ -477,8 +441,8 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		AndroidUtils.setBackground(ctx, getCardsContainer(), isNightMode(),
 				R.color.activity_background_light, R.color.activity_background_dark);
 
-		if (getTopViewId() != 0) {
-			View topView = view.findViewById(getTopViewId());
+		if (getTopView() != null) {
+			View topView = getTopView();
 			AndroidUtils.setBackground(ctx, topView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		}
 
@@ -511,8 +475,9 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				slideInAnim = R.anim.slide_in_bottom;
 				slideOutAnim = R.anim.slide_out_bottom;
 			} else {
-				slideInAnim = R.anim.slide_in_left;
-				slideOutAnim = R.anim.slide_out_left;
+				boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
+				slideInAnim = isLayoutRtl ? R.anim.slide_in_right : R.anim.slide_in_left;
+				slideOutAnim = isLayoutRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
 			}
 		}
 

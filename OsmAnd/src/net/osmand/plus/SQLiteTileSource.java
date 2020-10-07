@@ -39,6 +39,7 @@ public class SQLiteTileSource implements ITileSource {
 	private static final String ELLIPSOID = "ellipsoid";
 	private static final String INVERTED_Y = "inverted_y";
 	private static final String REFERER = "referer";
+	private static final String USER_AGENT = "useragent";
 	private static final String TIME_COLUMN = "timecolumn";
 	private static final String EXPIRE_MINUTES = "expireminutes";
 	private static final String RULE = "rule";
@@ -62,6 +63,7 @@ public class SQLiteTileSource implements ITileSource {
 	private String[] randomsArray;
 	private String rule = null;
 	private String referer = null;
+	private String userAgent = null;
 	
 	int tileSize = 256;
 	boolean tileSizeSpecified = false;
@@ -82,6 +84,8 @@ public class SQLiteTileSource implements ITileSource {
 					if (is.getName().equalsIgnoreCase(sourceName)) {
 						base = is;
 						urlTemplate = is.getUrlTemplate();
+						expirationTimeMillis = is.getExpirationTimeMillis();
+						inversiveZoom = is.getInversiveZoom();
 						break;
 					}
 				}
@@ -91,7 +95,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public SQLiteTileSource(OsmandApplication ctx, String name, int minZoom, int maxZoom, String urlTemplate,
-							String randoms, boolean isEllipsoid, boolean invertedY, String referer,
+							String randoms, boolean isEllipsoid, boolean invertedY, String referer, String userAgent,
 							boolean timeSupported, long expirationTimeMillis, boolean inversiveZoom, String rule) {
 		this.ctx = ctx;
 		this.name = name;
@@ -102,6 +106,7 @@ public class SQLiteTileSource implements ITileSource {
 		this.expirationTimeMillis = expirationTimeMillis;
 		this.randoms = randoms;
 		this.referer = referer;
+		this.userAgent = userAgent;
 		this.rule = rule;
 		this.invertedY = invertedY;
 		this.timeSupported = timeSupported;
@@ -118,13 +123,14 @@ public class SQLiteTileSource implements ITileSource {
 		this.expirationTimeMillis = tileSource.getExpirationTimeMillis();
 		this.randoms = tileSource.getRandoms();
 		this.referer = tileSource.getReferer();
+		this.userAgent = tileSource.getUserAgent();
 		this.invertedY = tileSource.isInvertedYTile();
 		this.timeSupported = tileSource.isTimeSupported();
 		this.inversiveZoom = tileSource.getInversiveZoom();
 	}
 
 	public void createDataBase() {
-		db = ctx.getSQLiteAPI().getOrCreateDatabase(
+		SQLiteConnection db = ctx.getSQLiteAPI().getOrCreateDatabase(
 				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);
 
 		db.execSQL("CREATE TABLE IF NOT EXISTS tiles (x int, y int, z int, s int, image blob, time long, PRIMARY KEY (x,y,z,s))");
@@ -132,14 +138,14 @@ public class SQLiteTileSource implements ITileSource {
 		db.execSQL("CREATE TABLE IF NOT EXISTS info(tilenumbering,minzoom,maxzoom)");
 		db.execSQL("INSERT INTO info (tilenumbering,minzoom,maxzoom) VALUES ('simple','" + minZoom + "','" + maxZoom + "');");
 
-		addInfoColumn(URL, urlTemplate);
-		addInfoColumn(RANDOMS, randoms);
-		addInfoColumn(ELLIPSOID, isEllipsoid ? "1" : "0");
-		addInfoColumn(INVERTED_Y, invertedY ? "1" : "0");
-		addInfoColumn(REFERER, referer);
-		addInfoColumn(TIME_COLUMN, timeSupported ? "yes" : "no");
-		addInfoColumn(EXPIRE_MINUTES, String.valueOf(getExpirationTimeMinutes()));
-
+		addInfoColumn(db, URL, urlTemplate);
+		addInfoColumn(db, RANDOMS, randoms);
+		addInfoColumn(db, ELLIPSOID, isEllipsoid ? "1" : "0");
+		addInfoColumn(db, INVERTED_Y, invertedY ? "1" : "0");
+		addInfoColumn(db, REFERER, referer);
+		addInfoColumn(db, USER_AGENT, userAgent);
+		addInfoColumn(db, TIME_COLUMN, timeSupported ? "yes" : "no");
+		addInfoColumn(db, EXPIRE_MINUTES, String.valueOf(getExpirationTimeMinutes()));
 
 		db.close();
 	}
@@ -263,19 +269,23 @@ public class SQLiteTileSource implements ITileSource {
 					if(refererId != -1) {
 						referer = cursor.getString(refererId);
 					}
+					int userAgentId = list.indexOf(USER_AGENT);
+					if(userAgentId != -1) {
+						userAgent = cursor.getString(userAgentId);
+					}
 					int tnumbering = list.indexOf(TILENUMBERING);
 					if(tnumbering != -1) {
 						inversiveZoom = BIG_PLANET_TILE_NUMBERING.equalsIgnoreCase(cursor.getString(tnumbering));
 					} else {
 						inversiveZoom = true;
-						addInfoColumn(TILENUMBERING, BIG_PLANET_TILE_NUMBERING);
+						addInfoColumn(db, TILENUMBERING, BIG_PLANET_TILE_NUMBERING);
 					}
 					int timecolumn = list.indexOf(TIME_COLUMN);
 					if (timecolumn != -1) {
 						timeSupported = "yes".equalsIgnoreCase(cursor.getString(timecolumn));
 					} else {
-						timeSupported = hasTimeColumn();
-						addInfoColumn(TIME_COLUMN, timeSupported? "yes" : "no");
+						timeSupported = hasTimeColumn(db);
+						addInfoColumn(db, TIME_COLUMN, timeSupported ? "yes" : "no");
 					}
 					int expireminutes = list.indexOf(EXPIRE_MINUTES);
 					this.expirationTimeMillis = -1;
@@ -285,7 +295,7 @@ public class SQLiteTileSource implements ITileSource {
 							this.expirationTimeMillis = minutes * 60 * 1000l;
 						}
 					} else {
-						addInfoColumn(EXPIRE_MINUTES, "0");
+						addInfoColumn(db, EXPIRE_MINUTES, "0");
 					}
 					int tsColumn = list.indexOf(TILESIZE);
 					this.tileSizeSpecified = tsColumn != -1;
@@ -336,7 +346,9 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
-		if (!onlyReadonlyAvailable) {
+		boolean openedBefore = isDbOpened();
+		SQLiteConnection db = getDatabase();
+		if (!onlyReadonlyAvailable && db != null) {
 			int maxZoom = r.getMaximumZoomSupported();
 			int minZoom = r.getMinimumZoomSupported();
 			if (inversiveZoom) {
@@ -347,10 +359,10 @@ public class SQLiteTileSource implements ITileSource {
 			if (getUrlTemplate() != null && !getUrlTemplate().equals(r.getUrlTemplate())) {
 				db.execSQL("update info set " + URL + " = '" + r.getUrlTemplate() + "'");
 			}
-			if (r.getMinimumZoomSupported() != minZoom) {
+			if (minZoom != this.minZoom) {
 				db.execSQL("update info set " + MIN_ZOOM + " = '" + minZoom + "'");
 			}
-			if (r.getMaximumZoomSupported() != maxZoom) {
+			if (maxZoom != this.maxZoom) {
 				db.execSQL("update info set " + MAX_ZOOM + " = '" + maxZoom + "'");
 			}
 			if (r.isEllipticYTile() != isEllipticYTile()) {
@@ -360,9 +372,16 @@ public class SQLiteTileSource implements ITileSource {
 				db.execSQL("update info set " + EXPIRE_MINUTES + " = '" + r.getExpirationTimeMinutes() + "'");
 			}
 		}
+		if (db != null && !openedBefore) {
+			db.close();
+		}
 	}
 
-	private void addInfoColumn(String columnName, String value) {
+	public boolean isDbOpened() {
+		return db != null && !db.isClosed();
+	}
+
+	private void addInfoColumn(SQLiteConnection db, String columnName, String value) {
 		if(!onlyReadonlyAvailable) {
 			try {
 				db.execSQL("alter table info add column " + columnName + " TEXT");
@@ -373,7 +392,7 @@ public class SQLiteTileSource implements ITileSource {
 		}
 	}
 
-	private boolean hasTimeColumn() {
+	private boolean hasTimeColumn(SQLiteConnection db) {
 		SQLiteCursor cursor;
 		cursor = db.rawQuery("SELECT * FROM tiles", null);
 		cursor.moveToFirst();
@@ -473,7 +492,7 @@ public class SQLiteTileSource implements ITileSource {
 			} else if(!tileSizeSpecified &&
 					tileSize != bmp.getWidth() && bmp.getWidth() > 0) {
 				tileSize = bmp.getWidth();
-				addInfoColumn("tilesize", tileSize+"");
+				addInfoColumn(db, "tilesize", tileSize + "");
 				tileSizeSpecified = true;
 			}
 			return bmp;
@@ -661,6 +680,10 @@ public class SQLiteTileSource implements ITileSource {
 	
 	public String getReferer() {
 		return referer;
+	}
+
+	public String getUserAgent() {
+		return userAgent;
 	}
 
 }

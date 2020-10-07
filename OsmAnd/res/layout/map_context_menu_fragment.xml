@@ -122,8 +122,8 @@
                     android:id="@+id/nearby_routes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/context_menu_direction_margin"
-                    android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+                    android:layout_marginBottom="@dimen/content_padding_small"
+                    android:layout_marginTop="@dimen/guide_line_vertical_offset"
                     android:gravity="top"
                     android:orientation="horizontal"
                     android:paddingTop="3dp"
@@ -188,7 +188,7 @@
                             android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                             android:layout_weight="1"
                             android:ellipsize="end"
-                            android:maxLines="1"
+                            android:maxLines="2"
                             osmand:typeface="@string/font_roboto_medium"
                             tools:text="Some really long string"/>
 
@@ -248,6 +248,7 @@
                                 tools:textColor="?android:textColorSecondary"/>
 
                         </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -455,9 +456,8 @@
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/context_menu_directions_button"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:background="?attr/selectableItemBackground"
                     android:gravity="end|center_vertical"
                     android:paddingLeft="@dimen/context_menu_padding_margin_default"
@@ -541,9 +541,7 @@
         android:alpha="0">
 
         <androidx.appcompat.widget.Toolbar
-            xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/context_menu_toolbar"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/dashboard_map_toolbar"
@@ -597,15 +595,15 @@
 
         <LinearLayout
             android:id="@+id/context_menu_zoom_buttons"
-            android:layout_width="@dimen/fab_size_with_shadow"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginRight="@dimen/fab_margin_right"
+            android:layout_marginRight="@dimen/map_button_margin"
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone"
             tools:visibility="visible"
-	        android:layout_marginEnd="@dimen/fab_margin_right">
+            android:layout_marginEnd="@dimen/map_button_margin">
 
             <ImageButton
                 android:id="@+id/context_menu_zoom_in_button"

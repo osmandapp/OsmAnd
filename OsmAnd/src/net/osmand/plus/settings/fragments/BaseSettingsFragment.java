@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -52,7 +53,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilitySettingsFragment;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -123,9 +124,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		VOICE_ANNOUNCES(VoiceAnnouncesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.voice_announces, R.layout.profile_preference_toolbar_with_switch),
 		VEHICLE_PARAMETERS(VehicleParametersFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.vehicle_parameters, R.layout.profile_preference_toolbar),
 		MAP_DURING_NAVIGATION(MapDuringNavigationFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.map_during_navigation, R.layout.profile_preference_toolbar),
-		TURN_SCREEN_ON(TurnScreenOnFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.turn_screen_on, R.layout.profile_preference_toolbar_with_switch),
+		TURN_SCREEN_ON(TurnScreenOnFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.turn_screen_on, R.layout.profile_preference_toolbar),
 		DATA_STORAGE(DataStorageFragment.class.getName(), false, null, R.xml.data_storage, R.layout.global_preference_toolbar),
-		DIALOGS_AND_NOTIFICATIONS_SETTINGS(DialogsAndNotificationsSettingsFragment.class.getName(), false, null, R.xml.dialogs_and_notifications_preferences, R.layout.global_preferences_toolbar_with_switch),
+		DIALOGS_AND_NOTIFICATIONS_SETTINGS(DialogsAndNotificationsSettingsFragment.class.getName(), false, null, R.xml.dialogs_and_notifications_preferences, R.layout.global_preference_toolbar),
 		PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, null, R.xml.profile_appearance, R.layout.profile_preference_toolbar),
 		OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, null, R.xml.osm_editing, R.layout.global_preference_toolbar),
 		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.multimedia_notes, R.layout.profile_preference_toolbar),
@@ -924,14 +925,40 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	protected void applyPreferenceWithSnackBar(final String prefId, final Serializable newValue) {
+	public void setupSpeedCamerasAlert() {
+		Preference speedCamerasAlert = findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
+		speedCamerasAlert.setIcon(getContentIcon(R.drawable.ic_action_alert));
+		speedCamerasAlert.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
+	}
+
+	public void setupPrefRoundedBg(PreferenceViewHolder holder) {
+		View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
+		if (selectableView != null) {
+			int color = AndroidUtils.getColorFromAttr(holder.itemView.getContext(), R.attr.activity_background_color);
+			int selectedColor = UiUtilities.getColorWithAlpha(getActiveProfileColor(), 0.3f);
+
+			Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+				Drawable selectable = getPaintedIcon(R.drawable.ripple_rectangle_rounded, selectedColor);
+				Drawable[] layers = {bgDrawable, selectable};
+				AndroidUtils.setBackground(selectableView, new LayerDrawable(layers));
+			} else {
+				AndroidUtils.setBackground(selectableView, bgDrawable);
+			}
+			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) selectableView.getLayoutParams();
+			params.setMargins(params.leftMargin, AndroidUtils.dpToPx(app, 6), params.rightMargin, params.bottomMargin);
+		}
+	}
+
+	protected void applyPreferenceWithSnackBar(final String prefId,
+											   final Serializable newValue) {
 		onApplyPreferenceChange(prefId, false, newValue);
 		updateSetting(prefId);
 		View containerView = getView();
 		if (containerView != null) {
 			String modeName = appMode.toHumanString();
 			String text = app.getString(R.string.changes_applied_to_profile, modeName);
-			SpannableString message = UiUtilities.createSpannableString(text, modeName, new StyleSpan(Typeface.BOLD));
+			SpannableString message = UiUtilities.createSpannableString(text, new StyleSpan(Typeface.BOLD), modeName);
 			Snackbar snackbar = Snackbar.make(containerView, message, Snackbar.LENGTH_LONG)
 					.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
 						@Override

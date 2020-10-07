@@ -1,9 +1,9 @@
 package net.osmand.plus.routing;
 
 import android.content.Context;
+
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -12,12 +12,12 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
+import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.ExitInfo;
-import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
@@ -26,7 +26,6 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +63,7 @@ public class RouteCalculationResult {
 
 	// params
 	protected final ApplicationMode appMode;
-	protected final RouteProvider.RouteService routeService;
+	protected final RouteService routeService;
 	protected final double routeRecalcDistance;
 	protected final double routeVisibleAngle;
 
@@ -131,7 +130,7 @@ public class RouteCalculationResult {
 		this.routeService = params.mode.getRouteService();
 		if(params.ctx != null) {
 			this.routeRecalcDistance = params.ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(params.mode);
-			this.routeVisibleAngle = routeService == RouteProvider.RouteService.STRAIGHT ?
+			this.routeVisibleAngle = routeService == RouteService.STRAIGHT ?
 					params.ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(params.mode) : 0;
 		} else {
 			this.routeRecalcDistance = 0;
@@ -140,12 +139,16 @@ public class RouteCalculationResult {
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,
-								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode) {
+								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode, boolean calculateFirstAndLastPoint) {
 		if (rctx != null) {
 			this.routingTime = rctx.routingTime;
-			this.visitedSegments = rctx.visitedSegments;
-			this.loadedTiles = rctx.loadedTiles;
-			this.calculateTime = (float) (((System.nanoTime() - rctx.timeToCalculate) / 1e6) / 1000f);
+			this.visitedSegments = rctx.getVisitedSegments();
+			this.loadedTiles = rctx.getLoadedTiles();
+			if (rctx.calculationProgress != null) {
+				this.calculateTime = (float) (rctx.calculationProgress.timeToCalculate / 1.0e9);
+			} else {
+				this.calculateTime = 0;
+			}
 		} else {
 			this.routingTime = 0;
 			this.visitedSegments = 0;
@@ -161,7 +164,9 @@ public class RouteCalculationResult {
 		List<Location> locations = new ArrayList<Location>();
 		ArrayList<AlarmInfo> alarms = new ArrayList<AlarmInfo>();
 		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, locations, list, alarms, ctx);
-		introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
+		if (calculateFirstAndLastPoint) {
+			introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
+		}
 		
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
@@ -175,7 +180,7 @@ public class RouteCalculationResult {
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.alarmInfo = Collections.unmodifiableList(alarms);
 		this.routeRecalcDistance = ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
-		this.routeVisibleAngle = routeService == RouteProvider.RouteService.STRAIGHT ?
+		this.routeVisibleAngle = routeService == RouteService.STRAIGHT ?
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
 	}
 
@@ -273,7 +278,7 @@ public class RouteCalculationResult {
 		return routeRecalcDistance;
 	}
 
-	public RouteProvider.RouteService getRouteService() {
+	public RouteService getRouteService() {
 		return routeService;
 	}
 
@@ -332,13 +337,13 @@ public class RouteCalculationResult {
 				tunnelAlarm = null;
 			}
 			while (true) {
+				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
+					break;
+				}
 				Location n = new Location(""); //$NON-NLS-1$
 				LatLon point = s.getPoint(i);
 				n.setLatitude(point.getLatitude());
 				n.setLongitude(point.getLongitude());
-				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
-					break;
-				}
 				if (vls != null && i * 2 + 1 < vls.length) {
 					float h = vls[2 * i + 1];
 					n.setAltitude(h);
@@ -354,7 +359,7 @@ public class RouteCalculationResult {
 				locations.add(n);
 				attachAlarmInfo(alarms, s, i, locations.size());
 				segmentsToPopulate.add(s);
-				if (i == s.getEndPointIndex() ) {
+				if (i == s.getEndPointIndex()) {
 					break;
 				}
 				if (plus) {
@@ -496,9 +501,9 @@ public class RouteCalculationResult {
 			Location current = locations.get(i);
 			float bearing = current.bearingTo(next);
 			// try to get close to current location if possible
-			while(prevBearingLocation < i - 1){
-				if(locations.get(prevBearingLocation + 1).distanceTo(current) > 70){
-					prevBearingLocation ++;
+			while (prevBearingLocation < i - 1) {
+				if (locations.get(prevBearingLocation + 1).distanceTo(current) > 70) {
+					prevBearingLocation++;
 				} else {
 					break;
 				}

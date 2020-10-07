@@ -39,6 +39,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetEntry;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -47,14 +49,12 @@ import net.osmand.plus.resources.AsyncLoadingThread.OnMapLoadedListener;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.router.TransportRoutePlanner.TransportRoutingContext;
+import net.osmand.router.TransportStopsRouteReader;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -66,16 +66,17 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import gnu.trove.map.hash.TLongObjectHashMap;
 
-import static net.osmand.plus.download.DownloadOsmandIndexesHelper.assetMapping;
+import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -208,7 +209,7 @@ public class ResourceManager {
 	private final Map<String, RegionAddressRepository> addressMap = new ConcurrentHashMap<String, RegionAddressRepository>();
 	protected final Map<String, AmenityIndexRepository> amenityRepositories =  new ConcurrentHashMap<String, AmenityIndexRepository>();
 //	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<String, BinaryMapIndexReader>();
-	protected final Map<String, TransportIndexRepository> transportRepositories = new ConcurrentHashMap<String, TransportIndexRepository>();
+	protected final Map<String, BinaryMapReaderResource> transportRepositories = new ConcurrentHashMap<String, BinaryMapReaderResource>();
 	
 	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<String, String>();
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<String, String>();
@@ -402,8 +403,8 @@ public class ResourceManager {
 	}
 
 
-	public List<String> indexVoiceFiles(IProgress progress){
-		File file = context.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+	public List<String> indexVoiceFiles(IProgress progress) {
+		File file = context.getAppPath(VOICE_INDEX_DIR);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		if (file.exists() && file.canRead()) {
@@ -448,20 +449,20 @@ public class ResourceManager {
 
 	public void copyMissingJSAssets() {
 		try {
-			Map<String, String> mapping = assetMapping(context.getAssets());
+			List<AssetEntry> assets = DownloadOsmandIndexesHelper.getBundledAssets(context.getAssets());
 			File appPath = context.getAppPath(null);
 			if (appPath.canWrite()) {
-				for (Entry<String,String> entry : mapping.entrySet()) {
-					File jsFile = new File(appPath, entry.getValue());
-					if (entry.getValue().contains("-tts") && entry.getValue()
+				for (AssetEntry asset : assets) {
+					File jsFile = new File(appPath, asset.destination);
+					if (asset.destination.contains("-tts") && asset.destination
 							.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-						File oggFile = new File(appPath, entry.getValue().replace("-tts", ""));
+						File oggFile = new File(appPath, asset.destination.replace("-tts", ""));
 						if (oggFile.getParentFile().exists() && !oggFile.exists()) {
-							copyAssets(context.getAssets(), entry.getKey(), oggFile);
+							copyAssets(context.getAssets(), asset.source, oggFile);
 						}
 					}
 					if (jsFile.getParentFile().exists() && !jsFile.exists()) {
-						copyAssets(context.getAssets(), entry.getKey(), jsFile);
+						copyAssets(context.getAssets(), asset.source, jsFile);
 					}
 				}
 			}
@@ -539,54 +540,43 @@ public class ResourceManager {
 	private final static String ASSET_COPY_MODE__alwaysOverwriteOrCopy = "alwaysOverwriteOrCopy";
 	private final static String ASSET_COPY_MODE__copyOnlyIfDoesNotExist = "copyOnlyIfDoesNotExist";
 	private void unpackBundledAssets(AssetManager assetManager, File appDataDir, IProgress progress, boolean isFirstInstall) throws IOException, XmlPullParserException {
-		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser(); 
-		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.xml");
-		xmlParser.setInput(isBundledAssetsXml, "UTF-8");
-		
-		int next = 0;
-		while ((next = xmlParser.next()) != XmlPullParser.END_DOCUMENT) {
-			if (next == XmlPullParser.START_TAG && xmlParser.getName().equals("asset")) {
-				final String source = xmlParser.getAttributeValue(null, "source");
-				final String destination = xmlParser.getAttributeValue(null, "destination");
-				final String combinedMode = xmlParser.getAttributeValue(null, "mode");
-				
-				final String[] modes = combinedMode.split("\\|");
-				if(modes.length == 0) {
-					log.error("Mode '" + combinedMode + "' is not valid");
-					continue;
-				}
-				String installMode = null;
-				String copyMode = null;
-				for(String mode : modes) {
-					if(ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(mode))
-						installMode = mode;
-					else if(ASSET_COPY_MODE__overwriteOnlyIfExists.equals(mode) ||
-							ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(mode) ||
-							ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(mode))
-						copyMode = mode;
-					else
-						log.error("Mode '" + mode + "' is unknown");
-				}
-				
-				final File destinationFile = new File(appDataDir, destination);
-				
-				boolean unconditional = false;
-				if(installMode != null)
-					unconditional = unconditional || (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && isFirstInstall);
-				if(copyMode == null)
-					log.error("No copy mode was defined for " + source);
-				unconditional = unconditional || ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
-				
-				boolean shouldCopy = unconditional;
-				shouldCopy = shouldCopy || (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && destinationFile.exists());
-				shouldCopy = shouldCopy || (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !destinationFile.exists());
-				
-				if(shouldCopy)
-					copyAssets(assetManager, source, destinationFile);
+		List<AssetEntry> assetEntries = DownloadOsmandIndexesHelper.getBundledAssets(assetManager);
+		for (AssetEntry asset : assetEntries) {
+			final String[] modes = asset.combinedMode.split("\\|");
+			if (modes.length == 0) {
+				log.error("Mode '" + asset.combinedMode + "' is not valid");
+				continue;
+			}
+			String installMode = null;
+			String copyMode = null;
+			for (String mode : modes) {
+				if (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(mode))
+					installMode = mode;
+				else if (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(mode) ||
+						ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(mode) ||
+						ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(mode))
+					copyMode = mode;
+				else
+					log.error("Mode '" + mode + "' is unknown");
+			}
+
+			final File destinationFile = new File(appDataDir, asset.destination);
+
+			boolean unconditional = false;
+			if (installMode != null)
+				unconditional = unconditional || (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && isFirstInstall);
+			if (copyMode == null)
+				log.error("No copy mode was defined for " + asset.source);
+			unconditional = unconditional || ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
+
+			boolean shouldCopy = unconditional;
+			shouldCopy = shouldCopy || (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && destinationFile.exists());
+			shouldCopy = shouldCopy || (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !destinationFile.exists());
+
+			if (shouldCopy) {
+				copyAssets(assetManager, asset.source, destinationFile);
 			}
 		}
-		
-		isBundledAssetsXml.close();
 	}
 
 	public static void copyAssets(AssetManager assetManager, String assetName, File file) throws IOException {
@@ -742,7 +732,7 @@ public class ResourceManager {
 						addressMap.put(f.getName(), rarb);
 					}
 					if (mapReader.hasTransportData()) {
-						transportRepositories.put(f.getName(), new TransportIndexRepositoryBinary(resource));
+						transportRepositories.put(f.getName(), resource);
 					}
 					// disable osmc for routing temporarily due to some bugs
 					if (mapReader.containsRouteData() && (!f.getParentFile().equals(liveDir) || 
@@ -765,16 +755,33 @@ public class ResourceManager {
 				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_big_for_memory), f.getName()));
 			}
 		}
+		Map<PoiCategory, Map<String, PoiType>> toAddPoiTypes = new HashMap<>();
 		for (AmenityIndexRepository repo : amenityRepositories.values()) {
 			Map<String, List<String>> categories = ((AmenityIndexRepositoryBinary) repo).getDeltaPoiCategories();
 			if (!categories.isEmpty()) {
 				for (Map.Entry<String, List<String>> entry : categories.entrySet()) {
 					PoiCategory poiCategory = context.getPoiTypes().getPoiCategoryByName(entry.getKey(), true);
-					for (String s : entry.getValue()) {
-						poiCategory.addPoiType(new PoiType(MapPoiTypes.getDefault(), poiCategory, null, s));
+					if (!toAddPoiTypes.containsKey(poiCategory)) {
+						toAddPoiTypes.put(poiCategory, new TreeMap<String, PoiType>());
+					}
+					Map<String, PoiType> poiTypes = toAddPoiTypes.get(poiCategory);
+					if (poiTypes != null) {
+						for (String s : entry.getValue()) {
+							PoiType pt = new PoiType(MapPoiTypes.getDefault(), poiCategory, null, s);
+							pt.setOsmTag("");
+							pt.setOsmValue("");
+							pt.setNotEditableOsm(true);
+							poiTypes.put(s, pt);
+						}
 					}
 				}
 			}
+		}
+		Iterator<Entry<PoiCategory, Map<String, PoiType>>> it = toAddPoiTypes.entrySet().iterator();
+		while(it.hasNext()) {
+			Entry<PoiCategory, Map<String, PoiType>> next = it.next();
+			PoiCategory category = next.getKey();
+			category.addExtraPoiTypes(next.getValue());
 		}
 		log.debug("All map files initialized " + (System.currentTimeMillis() - val) + " ms");
 		if (files.size() > 0 && (!indCache.exists() || indCache.canWrite())) {
@@ -989,51 +996,31 @@ public class ResourceManager {
 	
 	////////////////////////////////////////////// Working with transport ////////////////////////////////////////////////
 
-	public LinkedHashMap<String, TransportIndexRepository> getTransportRepositories() {
+	private List<BinaryMapIndexReader> getTransportRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
 		List<String> fileNames = new ArrayList<>(transportRepositories.keySet());
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
-		LinkedHashMap<String, TransportIndexRepository> res = new LinkedHashMap<>();
+		List<BinaryMapIndexReader> res = new ArrayList<>();
 		for (String fileName : fileNames) {
-			TransportIndexRepository r = transportRepositories.get(fileName);
-			if (r != null) {
-				res.put(fileName, r);
+			BinaryMapReaderResource r = transportRepositories.get(fileName);
+			if (r != null && r.isUseForPublicTransport() &&
+					r.getShallowReader().containTransportData(topLat, leftLon, bottomLat, rightLon)) {
+				res.add(r.getReader(BinaryMapReaderResourceType.TRANSPORT));
 			}
 		}
 		return res;
 	}
 
-	public List<TransportIndexRepository> searchTransportRepositories(double latitude, double longitude) {
-		List<TransportIndexRepository> repos = new ArrayList<>();
-		for (TransportIndexRepository index : getTransportRepositories().values()) {
-			if (index.isUseForPublicTransport() && index.checkContains(latitude,longitude)) {
-				repos.add(index);
-			}
-		}
-		return repos;
-	}
 
 	public List<TransportStop> searchTransportSync(double topLat, double leftLon, double bottomLat, double rightLon,
 												   ResultMatcher<TransportStop> matcher) throws IOException {
-		List<TransportIndexRepository> repos = new ArrayList<>();
-		TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<>();
-		for (TransportIndexRepository index : getTransportRepositories().values()) {
-			if (index.isUseForPublicTransport() && index.checkContains(topLat, leftLon, bottomLat, rightLon)) {
-				repos.add(index);
-			}
-		}
-		if (!repos.isEmpty()) {
-			for (TransportIndexRepository r : repos) {
-				List<TransportStop> stops = new ArrayList<>();
-				r.searchTransportStops(topLat, leftLon, bottomLat, rightLon, -1, stops, matcher);
-				BinaryMapIndexReader reader = ((TransportIndexRepositoryBinary) r).getOpenFile();
-				if (reader != null) {
-					TransportRoutingContext.mergeTransportStops(reader, loadedTransportStops, stops, null, null);
-				}
-			}
-		}
+		TransportStopsRouteReader readers =
+				new TransportStopsRouteReader(getTransportRepositories(topLat, leftLon, bottomLat, rightLon));
 		List<TransportStop> stops = new ArrayList<>();
-		for (TransportStop s : loadedTransportStops.valueCollection()) {
-			if (!s.isDeleted()) {
+		BinaryMapIndexReader.SearchRequest<TransportStop> req = BinaryMapIndexReader.buildSearchTransportRequest(MapUtils.get31TileNumberX(leftLon),
+				MapUtils.get31TileNumberX(rightLon), MapUtils.get31TileNumberY(topLat),
+				MapUtils.get31TileNumberY(bottomLat), -1, stops);
+		for (TransportStop s : readers.readMergedTransportStops(req)) {
+			if (!s.isDeleted() && !s.isMissingStop()) {
 				stops.add(s);
 			}
 		}
@@ -1041,19 +1028,11 @@ public class ResourceManager {
 	}
 
 	public List<TransportRoute> getRoutesForStop(TransportStop stop) {
-		List<TransportRoute> routes = new ArrayList<>();
-		LinkedHashMap<String, TransportIndexRepository> repositories = getTransportRepositories();
-		LinkedHashMap<String, int[]> referencesToRoutes = stop.getReferencesToRoutesMap();
-		if (referencesToRoutes != null) {
-			for (Entry<String, int[]> refs : referencesToRoutes.entrySet()) {
-				TransportIndexRepository r = repositories.get(refs.getKey());
-				if (r != null) {
-					List<TransportRoute> rr = r.getRoutesForReferences(refs.getValue());
-					routes.addAll(rr);
-				}
-			}
+		List<TransportRoute> rts = stop.getRoutes();
+		if(rts != null) {
+			return rts;
 		}
-		return routes;
+		return Collections.emptyList();
 	}
 
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////

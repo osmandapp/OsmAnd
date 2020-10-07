@@ -632,7 +632,7 @@
     <string name="poi_wiki_lang_uk">Wiki á úkranísku</string>
     <string name="poi_wiki_lang_bs">Wiki á bosnísku</string>
     <string name="poi_wiki_lang_ga">Wiki á írsku</string>
-    <string name="poi_wiki_lang_is">"Wiki á  íslensku"</string>
+    <string name="poi_wiki_lang_is">Wiki á íslensku</string>
     <string name="poi_wiki_lang_mn">Wiki á mongólsku</string>
     <string name="poi_block">Reitur</string>
     <string name="poi_entrance_main">Aðalinngangur</string>
@@ -873,7 +873,7 @@
     <string name="poi_pump_no">Engin dæla</string>
     <string name="poi_pump_yes">Já</string>
     <string name="poi_water_characteristic_mineral">Steinefnaríkt</string>
-    <string name="poi_water_characteristic_mud">Eiginleikar vatns: leðja</string>
+    <string name="poi_water_characteristic_mud">Leðja</string>
     <string name="poi_water_characteristic_sulfuric">Brennisteinsmengað</string>
     <string name="poi_information_board">Tafla</string>
     <string name="poi_information_route_marker">Leitarmerki</string>
@@ -895,7 +895,7 @@
     <string name="poi_smoking_separated">Í sérherbergi</string>
     <string name="poi_tactile_paving_yes">Já</string>
     <string name="poi_traffic_signals_sound_yes">Já</string>
-    <string name="poi_traffic_signals_sound_no">Nei</string>
+    <string name="poi_traffic_signals_sound_no">Hljóð: nei</string>
     <string name="poi_bird_hide">Staður til fuglaskoðunar</string>
     <string name="poi_horse_riding">Hestaferðir</string>
     <string name="poi_scrub">Runnar</string>
@@ -949,7 +949,7 @@
     <string name="poi_service_repair">Bílaviðgerðir</string>
     <string name="poi_service_repair_no">Engar viðgerðir</string>
     <string name="poi_self_service_yes">Já</string>
-    <string name="poi_self_service_no">Ekki sjálfsafgreiðsla</string>
+    <string name="poi_self_service_no">Nei</string>
     <string name="poi_automated_yes">Já</string>
     <string name="poi_full_service_yes">Full þjónusta</string>
     <string name="poi_brushless_yes">Já</string>
@@ -1168,7 +1168,7 @@
     <string name="poi_fuel_91ul">Eldsneyti 91UL</string>
     <string name="poi_fuel_100ll">Eldsneyti 100LL</string>
     <string name="poi_fuel_jeta1">Eldsneyti Jet A-1</string>
-    <string name="poi_fuel_adblue">Eldsneyti AdBlue</string>
+    <string name="poi_fuel_adblue">Vökvi fyrir díselútblástur</string>
     <string name="poi_fuel_wood">Eldsneyti: viður</string>
     <string name="poi_fuel_charcoal">Eldsneyti: viðarkol</string>
     <string name="poi_fuel_coal">Eldsneyti:; kol</string>
@@ -2026,7 +2026,7 @@
     <string name="poi_diet_gluten_free_no">Glútenlaus matur: nei</string>
     <string name="poi_automated_no">Ekki sjálfvirkt</string>
     <string name="poi_brushless_no">Burstalaust: nei</string>
-    <string name="poi_car_wash_no">Bílaþvottur: nei</string>
+    <string name="poi_car_wash_no">Nei</string>
     <string name="poi_male_yes">Karlar</string>
     <string name="poi_male_no">Bannað körlum</string>
     <string name="poi_female_yes">Konur</string>
@@ -2057,7 +2057,7 @@
     <string name="poi_bowls">Keiluspil</string>
     <string name="poi_canadian_football">Kanadískur fótbolti</string>
     <string name="poi_ice_stock">Bæversk krulla</string>
-    <string name="poi_korfbal">Korfbal</string>
+    <string name="poi_korfbal">Korfbolti</string>
     <string name="poi_sport_multi">Fjöl-íþrótta</string>
     <string name="poi_paddle_tennis">Spaðatennis (paddle)</string>
     <string name="poi_pelota">Pelota</string>
@@ -2252,7 +2252,7 @@
     <string name="poi_vending_animal_food">Dýrafóður</string>
     <string name="poi_vending_public_transport_plans">Kort yfir almenningssamgöngur</string>
     <string name="poi_vending_drinks_sweets">Drykkir og sælgæti</string>
-    <string name="poi_memorial_cross">Krosslaga</string>
+    <string name="poi_memorial_cross">Krosslögun</string>
     <string name="poi_branch">Útibú</string>
     <string name="poi_memorial_stele">Staur</string>
     <string name="poi_memorial_koshinto">Koshinto</string>
@@ -3664,7 +3664,7 @@
     <string name="poi_tourist_bus_no">Aðgangur hópferðabíla: nei</string>
     <string name="poi_coach_yes">Aðgangur langferðabifreiða: já</string>
     <string name="poi_coach_no">Aðgangur langferðabifreiða: nei</string>
-    <string name="poi_ski_yes">"Aðgangur skíðandi:  já"</string>
+    <string name="poi_ski_yes">Aðgangur skíðandi: já</string>
     <string name="poi_ski_no">Aðgangur skíðandi: nei</string>
     <string name="poi_snowmobile_private">Aðgangur vélsleða: einka</string>
     <string name="poi_snowmobile_no">Aðgangur vélsleða: nei</string>
@@ -3783,7 +3783,7 @@
     <string name="poi_tactile_paving_incorrect">Rangt</string>
     <string name="poi_traffic_signals_sound_locate">Aðeins þegar má ganga</string>
     <string name="poi_seamark_obstruction">Hindrun</string>
-    <string name="poi_drinking_water_refill_yes">Áfylling drykkjarvatns: já</string>
+    <string name="poi_drinking_water_refill_yes">Já</string>
     <string name="poi_drinking_water_refill_no">Áfylling drykkjarvatns: nei</string>
     <string name="poi_drinking_water_refill_network">Kerfi fyrir áfyllingu drykkjarvatns</string>
     <string name="poi_tactile_paving_contrasted">Mislitt</string>
@@ -3803,4 +3803,28 @@
     <string name="poi_seamark_water_level_part_submerged">Vatnsyfirborð: að hluta í kafi</string>
     <string name="poi_tactile_paving_primitive">Gróft</string>
     <string name="poi_internet_access_fee_customers">Merki til að finna staurinn</string>
+    <string name="poi_pump_status_missing_beam">Staða dælu: vantar bita</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Sog</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Undir þrýstingi</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Grunnvatn</string>
+    <string name="poi_fire_hydrant_type_pipe">Leiðsla</string>
+    <string name="poi_fire_hydrant_pressure_filter">Þrýstingur</string>
+    <string name="poi_traffic_signals_arrow_yes">Já</string>
+    <string name="poi_traffic_signals_vibration_yes">Já</string>
+    <string name="poi_traffic_signals_vibration_no">Titringur: nei</string>
+    <string name="poi_traffic_signals_arrow">Ör</string>
+    <string name="poi_traffic_signals_vibration">Titringur</string>
+    <string name="poi_give_box">Gjafakassi</string>
+    <string name="poi_city_block">Götureitur</string>
+    <string name="poi_borough">Kaupstaður</string>
+    <string name="poi_traffic_signals_arrow_no">Ör: nei</string>
+    <string name="poi_nuts">Verslun með þurrkaða ávexti</string>
+    <string name="poi_beehive">Býflugnabú</string>
+    <string name="poi_departures_board_timetable">Tímatafla</string>
+    <string name="poi_departures_board_realtime">Rauntíma</string>
+    <string name="poi_departures_board_delay">Töf</string>
+    <string name="poi_departures_board_yes">Já</string>
+    <string name="poi_elevator">Lyfta</string>
+    <string name="poi_recycling_small_electrical_appliances">Smærri raftæki</string>
+    <string name="poi_drinking_water_refill">Áfylling drykkjarvatns</string>
 </resources>

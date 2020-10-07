@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
@@ -95,7 +95,9 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	protected boolean pluginAvailable(OsmandApplication app) {
-		return super.pluginAvailable(app) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+		return super.pluginAvailable(app)
+				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
+				|| InAppPurchaseHelper.isContourLinesPurchased(app);
 	}
 
 	@Override
@@ -236,9 +238,9 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (contourLinesProp != null) {
 			final CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
 			if (!Algorithms.isEmpty(pref.get())) {
-				contourLinesEnabled = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
+				contourLinesEnabled = !CONTOUR_LINES_DISABLED_VALUE.equals(pref.get());
 			} else {
-				contourLinesEnabled = !contourLinesProp.getDefaultValueDescription().equals(CONTOUR_LINES_DISABLED_VALUE);
+				contourLinesEnabled = !CONTOUR_LINES_DISABLED_VALUE.equals(contourLinesProp.getDefaultValueDescription());
 			}
 		}
 		return contourLinesEnabled;
@@ -359,7 +361,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setTitleId(R.string.shared_string_terrain, mapActivity)
 				.setDescription(app.getString(terrainMode == TerrainMode.HILLSHADE
 						? R.string.shared_string_hillshade
-						: R.string.shared_string_slope))
+						: R.string.download_slope_maps))
 				.setSelected(terrainEnabled)
 				.setColor(terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)

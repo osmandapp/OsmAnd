@@ -3,6 +3,7 @@ package net.osmand.plus.audionotes;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -21,10 +22,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -33,6 +36,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
@@ -163,14 +167,18 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	}
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		menu.clear();
-		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			menu = ((ActionBarProgressActivity) getActivity()).getClearToolbar(true).getMenu();
-		} else {
-			((ActionBarProgressActivity) getActivity()).getClearToolbar(false);
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+		FragmentActivity activity = getActivity();
+		if (activity == null) {
+			return;
 		}
-		((ActionBarProgressActivity) getActivity()).updateListViewFooter(footerView);
+		menu.clear();
+		if (AndroidUiHelper.isOrientationPortrait(activity)) {
+			menu = ((ActionBarProgressActivity) activity).getClearToolbar(true).getMenu();
+		} else {
+			((ActionBarProgressActivity) activity).getClearToolbar(false);
+		}
+		((ActionBarProgressActivity) activity).updateListViewFooter(footerView);
 
 		MenuItem item = menu.add(R.string.shared_string_sort).setIcon(R.drawable.ic_action_list_sort);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -182,7 +190,9 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-		item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark);
+		Drawable shareIcon = AndroidUtils.getDrawableForDirection(activity,
+				getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_gshare_dark));
+		item = menu.add(R.string.shared_string_share).setIcon(shareIcon);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -377,13 +387,16 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 			@Override
 			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
 				LOG.debug("onCreateActionMode");
+				OsmandApplication app = getMyApplication();
 				if (type == MODE_SHARE) {
 					listAdapter.insert(SHARE_LOCATION_FILE, 0);
 				}
 				switchSelectionMode(true);
 				int titleRes = type == MODE_DELETE ? R.string.shared_string_delete_all : R.string.shared_string_share;
 				int iconRes = type == MODE_DELETE ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_gshare_dark;
-				MenuItem item = menu.add(titleRes).setIcon(iconRes);
+				Drawable icon = AndroidUtils.getDrawableForDirection(app,
+						app.getUIUtilities().getIcon(iconRes));
+				MenuItem item = menu.add(titleRes).setIcon(icon);
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {

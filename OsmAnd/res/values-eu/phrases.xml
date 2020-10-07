@@ -1311,7 +1311,7 @@
     <string name="poi_brushless_yes">Bai</string>
     <string name="poi_fee_no">Ez</string>
     <string name="poi_drinking_water_no">Ez</string>
-    <string name="poi_traffic_signals_sound_no">Ez</string>
+    <string name="poi_traffic_signals_sound_no">Soinua: ez</string>
     <string name="poi_piste_grooming_no">Ez</string>
     <string name="poi_washing_machine_yes">Bai</string>
     <string name="poi_washing_machine_no">Garbigailua: ez</string>
@@ -2187,10 +2187,10 @@
     <string name="poi_service_repair_no">Konponketarik ez</string>
     <string name="poi_service_electrical">Gailu elektrikoen konponketa</string>
     <string name="poi_motorcycle_repair">Motorren konponketa</string>
-    <string name="poi_self_service_no">Autozerbitzurik ez</string>
+    <string name="poi_self_service_no">Ez</string>
     <string name="poi_automated_no">Automatizatu gabea</string>
     <string name="poi_full_service_yes">Zerbitzu osoa</string>
-    <string name="poi_car_wash_no">Kotxe-garbiketa: ez</string>
+    <string name="poi_car_wash_no">Ez</string>
     <string name="poi_public_bath">Komun publikoa</string>
     <string name="poi_male_yes">Gizonezkoa</string>
     <string name="poi_male_no">Gizonezkoentzat debekatua</string>
@@ -3294,7 +3294,7 @@
     <string name="poi_cuisine_uzbek">"Uzbekiarra "</string>
     <string name="poi_cuisine_middle_eastern">Ekialde ertainekoa</string>
     <string name="poi_cuisine_afghan">"Afganistangoa "</string>
-    <string name="poi_cuisine_cantonese">Kantonesa</string>
+    <string name="poi_cuisine_cantonese">Kantonera</string>
     <string name="poi_cuisine_hawaiian">Hawaiarra</string>
     <string name="poi_cuisine_taiwanese">Taiwangoa</string>
     <string name="poi_cuisine_dutch">Holandakoa</string>
@@ -3807,4 +3807,15 @@
     <string name="poi_seamark_obstruction">Trabatzea</string>
     <string name="poi_seamark_water_level_below_mwl">Ur maila: batezbestekotik behera</string>
     <string name="poi_seamark_water_level_above_mwl">Ur maila: batezbestekotik gora</string>
+    <string name="poi_pump_status_missing_beam">Bonbaren egora: Habea faltan</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Xurgatzea</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presiopean</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Lurrazpiko ura</string>
+    <string name="poi_fire_hydrant_type_pipe">Hodia</string>
+    <string name="poi_fire_hydrant_pressure_filter">Presioa</string>
+    <string name="poi_traffic_signals_arrow_yes">Bai</string>
+    <string name="poi_traffic_signals_vibration_yes">Bai</string>
+    <string name="poi_traffic_signals_vibration_no">Bibrazioa: ez</string>
+    <string name="poi_traffic_signals_arrow">Gezia</string>
+    <string name="poi_traffic_signals_vibration">Bibrazioa</string>
 </resources>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/color_transparent">
+
+	<LinearLayout
+		android:id="@+id/main_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<include layout="@layout/context_menu_top_shadow" />
+
+		<LinearLayout
+			android:id="@+id/route_menu_top_shadow_all"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/bg_color"
+			android:minHeight="@dimen/bottom_sheet_title_height"
+			android:orientation="vertical"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding">
+
+			<View
+				android:layout_width="@dimen/content_padding"
+				android:layout_height="2dp"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+				android:layout_marginBottom="@dimen/list_item_button_padding"
+				android:background="?attr/bg_dash_line" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/track_title"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical"
+					android:layout_weight="1"
+					android:gravity="center_vertical"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:text="@string/shared_string_appearance"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size"
+					osmand:typeface="@string/font_roboto_medium" />
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/track_icon"
+					android:layout_width="@dimen/standard_icon_size"
+					android:layout_height="@dimen/standard_icon_size"
+					android:layout_gravity="center_vertical"
+					osmand:srcCompat="@drawable/ic_action_gpx_width_bold"
+					tools:tint="@color/description_font_and_bottom_sheet_icons" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<FrameLayout
+			android:id="@+id/bottom_container"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:foreground="@drawable/bg_contextmenu_shadow"
+			android:foregroundGravity="top|fill_horizontal">
+
+			<net.osmand.plus.LockableScrollView
+				android:id="@+id/route_menu_bottom_scroll"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="?attr/route_info_bg">
+
+				<LinearLayout
+					android:id="@+id/route_menu_cards_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/route_info_bg"
+					android:orientation="vertical"
+					android:paddingBottom="@dimen/dialog_button_ex_height">
+
+				</LinearLayout>
+
+			</net.osmand.plus.LockableScrollView>
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:id="@+id/map_controls_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		tools:visibility="invisible">
+
+		<include
+			layout="@layout/map_ruler"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="start|bottom"
+			android:layout_marginStart="@dimen/fab_margin_right"
+			android:layout_marginLeft="@dimen/fab_margin_right"
+			android:layout_marginEnd="@dimen/fab_margin_right"
+			android:layout_marginRight="@dimen/fab_margin_right" />
+
+		<include
+			layout="@layout/map_hud_controls"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_marginStart="@dimen/fab_margin_right"
+			android:layout_marginLeft="@dimen/fab_margin_right"
+			android:layout_marginEnd="@dimen/fab_margin_right"
+			android:layout_marginRight="@dimen/fab_margin_right" />
+
+	</FrameLayout>
+
+	<LinearLayout
+		android:id="@+id/control_buttons"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:orientation="vertical">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/buttons_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="10dp"
+			android:layout_gravity="bottom"
+			android:background="@drawable/bg_contextmenu_shadow_top_light" />
+
+		<include
+			layout="@layout/bottom_buttons"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dialog_button_ex_height"
+			android:layout_gravity="bottom" />
+
+	</LinearLayout>
+
+</FrameLayout>

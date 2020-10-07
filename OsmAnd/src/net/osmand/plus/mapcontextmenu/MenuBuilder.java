@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.text.ClipboardManager;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -21,7 +21,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,7 +43,6 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -55,10 +53,11 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.POIMapLayer;
-import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.layers.POIMapLayer;
+import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
@@ -70,6 +69,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
@@ -281,7 +281,7 @@ public class MenuBuilder {
 	}
 
 	protected void buildNearestWikiRow(View view) {
-		if (processNearstWiki() && nearestWiki.size() > 0) {
+		if (processNearestWiki() && nearestWiki.size() > 0) {
 			buildRow(view, R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size()+")", 0,
 					true, getCollapsableWikiView(view.getContext(), true),
 					false, 0, false, null, false);
@@ -697,62 +697,20 @@ public class MenuBuilder {
 
 	}
 
-	protected CollapsableView getDistanceCollapsableView(Map<OsmandSettings.MetricsConstants, String> distanceData) {
+	protected CollapsableView getDistanceCollapsableView(Set<String> distanceData) {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
-		for (final Map.Entry<OsmandSettings.MetricsConstants, String> line : distanceData.entrySet()) {
+		for (final String distance : distanceData) {
 			TextView button = buildButtonInCollapsableView(mapActivity, false, false);
-			button.setText(line.getValue());
+			button.setText(distance);
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					copyToClipboard(line.getValue(), mapActivity);
+					copyToClipboard(distance, mapActivity);
 				}
 			});
 			llv.addView(button);
 		}
 		return new CollapsableView(llv, this, true);
-	}
-
-	protected void buildButtonRow(final View view, Drawable buttonIcon, String text, OnClickListener onClickListener) {
-		LinearLayout ll = new LinearLayout(view.getContext());
-		ll.setOrientation(LinearLayout.HORIZONTAL);
-		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		ll.setLayoutParams(llParams);
-		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-
-		// Empty
-		LinearLayout llIcon = new LinearLayout(view.getContext());
-		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(62f), dpToPx(58f)));
-		llIcon.setGravity(Gravity.CENTER_VERTICAL);
-		ll.addView(llIcon);
-
-
-		// Button
-		LinearLayout llButton = new LinearLayout(view.getContext());
-		llButton.setOrientation(LinearLayout.VERTICAL);
-		ll.addView(llButton);
-
-		Button buttonView = new Button(view.getContext());
-		LinearLayout.LayoutParams llBtnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		buttonView.setLayoutParams(llBtnParams);
-		AndroidUtils.setPadding(buttonView, dpToPx(10f), 0, dpToPx(10f), 0);
-		buttonView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-		//buttonView.setTextSize(view.getResources().getDimension(resolveAttribute(view.getContext(), R.dimen.default_desc_text_size)));
-		buttonView.setTextColor(view.getResources().getColor(AndroidUtils.resolveAttribute(view.getContext(), R.attr.contextMenuButtonColor)));
-		buttonView.setText(text);
-
-		if (buttonIcon != null) {
-			buttonView.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, null, null, null);
-			buttonView.setCompoundDrawablePadding(dpToPx(8f));
-		}
-		llButton.addView(buttonView);
-
-		((LinearLayout) view).addView(ll);
-
-		ll.setOnClickListener(onClickListener);
-
-		rowBuilt();
 	}
 
 	public void buildRowDivider(View view) {
@@ -797,6 +755,10 @@ public class MenuBuilder {
 		return iconsCache.getIcon(iconId, light ? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark);
 	}
 
+	public Drawable getThemedIcon(int iconId) {
+		return app.getUIUtilities().getThemedIcon(iconId);
+	}
+
 	public Drawable getRowIcon(Context ctx, String fileName) {
 		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
 		if (d != null) {
@@ -824,8 +786,8 @@ public class MenuBuilder {
 		baseView.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		baseView.setLayoutParams(llBaseViewParams);
-		AndroidUtils.setPadding(baseView, dpToPx(16), 0, dpToPx(16), dpToPx(12));
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		AndroidUtils.setPadding(baseView, dpToPx(16), 0, dpToPx(16), dpToPx(12));
 
 		TextViewEx transportRect = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams trParams = new LinearLayout.LayoutParams(dpToPx(32), dpToPx(18));
@@ -1027,22 +989,14 @@ public class MenuBuilder {
 		return button;
 	}
 
-	protected boolean processNearstWiki() {
+	protected boolean processNearestWiki() {
 		if (showNearestWiki && latLon != null) {
 			QuadRect rect = MapUtils.calculateLatLonBbox(
 					latLon.getLatitude(), latLon.getLongitude(), 250);
-			nearestWiki = app.getResourceManager().searchAmenities(
-					new BinaryMapIndexReader.SearchPoiTypeFilter() {
-						@Override
-						public boolean accept(PoiCategory type, String subcategory) {
-							return type != null && type.isWiki();
-						}
+			PoiUIFilter wikiPoiFilter = app.getPoiFilters().getTopWikiPoiFilter();
 
-						@Override
-						public boolean isEmpty() {
-							return false;
-						}
-					}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+			nearestWiki = getAmenities(rect, wikiPoiFilter);
+
 			Collections.sort(nearestWiki, new Comparator<Amenity>() {
 
 				@Override
@@ -1055,8 +1009,7 @@ public class MenuBuilder {
 			Long id = objectId;
 			List<Amenity> wikiList = new ArrayList<>();
 			for (Amenity wiki : nearestWiki) {
-				String lng = wiki.getContentLanguage("content", preferredMapAppLang, "en");
-				if (wiki.getId().equals(id) || (!lng.equals("en") && !lng.equals(preferredMapAppLang))) {
+				if (wiki.getId().equals(id)) {
 					wikiList.add(wiki);
 				}
 			}
@@ -1064,6 +1017,11 @@ public class MenuBuilder {
 			return true;
 		}
 		return false;
+	}
+
+	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter wikiPoiFilter) {
+		return wikiPoiFilter.searchAmenities(rect.top, rect.left,
+						rect.bottom, rect.right, -1, null);
 	}
 
 	@SuppressWarnings("unchecked")

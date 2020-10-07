@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -102,7 +103,7 @@ public class FavouritesDbHelper {
 		}
 
 		public int getColor() {
-				return color;
+			return color;
 		}
 
 		public boolean isVisible() {
@@ -126,6 +127,18 @@ public class FavouritesDbHelper {
 			}
 			return name;
 		}
+	}
+
+	@Nullable
+	public Drawable getColoredIconForGroup(String groupName) {
+		String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(context, groupName);
+		FavoriteGroup favoriteGroup = getGroup(groupIdName);
+		if (favoriteGroup != null) {
+			int color = favoriteGroup.getColor() == 0 ?
+					context.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
+			return context.getUIUtilities().getPaintedIcon(R.drawable.ic_action_group_name_16, color);
+		}
+		return null;
 	}
 
 	public int getColorWithCategory(FavouritePoint point, int defaultColor) {
@@ -183,10 +196,10 @@ public class FavouritesDbHelper {
 			if (fp.getColor() == 0xFF000000 || fp.getColor() == ContextCompat.getColor(context, R.color.color_favorite)) {
 				fp.setColor(0);
 			}
-			if (fp.getBackgroundType() == FavouritePoint.DEFAULT_BACKGROUND_TYPE){
+			if (fp.getBackgroundType() == FavouritePoint.DEFAULT_BACKGROUND_TYPE) {
 				fp.setBackgroundType(null);
 			}
-			if(fp.getIconId()== FavouritePoint.DEFAULT_UI_ICON_ID){
+			if (fp.getIconId() == FavouritePoint.DEFAULT_UI_ICON_ID) {
 				fp.setIconId(0);
 			}
 			FavoriteGroup group = getOrCreateGroup(fp, 0);
@@ -342,7 +355,7 @@ public class FavouritesDbHelper {
 		if (!p.getName().equals("")) {
 			p.setVisible(group.visible);
 			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
-				p.setColor(ContextCompat.getColor(context, R.color.map_widget_blue));
+				p.setColor(ContextCompat.getColor(context, R.color.parking_icon_background));
 			} else {
 				if (p.getColor() == 0) {
 					p.setColor(group.color);
@@ -472,11 +485,12 @@ public class FavouritesDbHelper {
 		return builder.toString();
 	}
 
-	public boolean editFavouriteName(FavouritePoint p, String newName, String category, String descr) {
+	public boolean editFavouriteName(FavouritePoint p, String newName, String category, String descr, String address) {
 		String oldCategory = p.getCategory();
 		p.setName(newName);
 		p.setCategory(category);
 		p.setDescription(descr);
+		p.setAddress(address);
 		if (!oldCategory.equals(category)) {
 			FavoriteGroup old = flatGroups.get(oldCategory);
 			if (old != null) {
@@ -485,7 +499,7 @@ public class FavouritesDbHelper {
 			FavoriteGroup pg = getOrCreateGroup(p, 0);
 			p.setVisible(pg.visible);
 			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
-				p.setColor(ContextCompat.getColor(context, R.color.map_widget_blue));
+				p.setColor(ContextCompat.getColor(context, R.color.parking_icon_background));
 			} else {
 				if (p.getColor() == 0) {
 					p.setColor(pg.color);
@@ -679,6 +693,16 @@ public class FavouritesDbHelper {
 		return favoriteGroups;
 	}
 
+	public boolean isGroupVisible(String name) {
+		String nameLowercase = name.toLowerCase();
+		for (String groupName : flatGroups.keySet()) {
+			if (groupName.toLowerCase().equals(nameLowercase) || FavoriteGroup.getDisplayName(context, groupName).equals(name)) {
+				return flatGroups.get(groupName).isVisible();
+			}
+		}
+		return false;
+	}
+
 	public boolean groupExists(String name) {
 		String nameLowercase = name.toLowerCase();
 		for (String groupName : flatGroups.keySet()) {
@@ -800,10 +824,12 @@ public class FavouritesDbHelper {
 	public void editFavouriteGroup(FavoriteGroup group, String newName, int color, boolean visible) {
 		if (color != 0 && group.color != color) {
 			FavoriteGroup gr = flatGroups.get(group.name);
-			group.color = color;
 			for (FavouritePoint p : gr.points) {
-				p.setColor(color);
+				if (p.getColor() == group.color) {
+					p.setColor(color);
+				}
 			}
+			group.color = color;
 			runSyncWithMarkers(gr);
 		}
 		if (group.visible != visible) {
@@ -872,7 +898,7 @@ public class FavouritesDbHelper {
 	private static final String FAVOURITE_COL_LAT = "latitude"; //$NON-NLS-1$
 	private static final String FAVOURITE_COL_LON = "longitude"; //$NON-NLS-1$
 	private static final String FAVOURITE_TABLE_CREATE = "CREATE TABLE " + FAVOURITE_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
-			FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_CATEGORY + " TEXT, " + //$NON-NLS-1$ //$NON-NLS-2$ 
+			FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_CATEGORY + " TEXT, " + //$NON-NLS-1$ //$NON-NLS-2$
 			FAVOURITE_COL_LAT + " double, " + FAVOURITE_COL_LON + " double);"; //$NON-NLS-1$ //$NON-NLS-2$
 	private SQLiteConnection conn;
 
@@ -913,7 +939,7 @@ public class FavouritesDbHelper {
 				try {
 					SQLiteCursor query = db
 							.rawQuery(
-									"SELECT " + FAVOURITE_COL_NAME + ", " + FAVOURITE_COL_CATEGORY + ", " + FAVOURITE_COL_LAT + "," + FAVOURITE_COL_LON + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
+									"SELECT " + FAVOURITE_COL_NAME + ", " + FAVOURITE_COL_CATEGORY + ", " + FAVOURITE_COL_LAT + "," + FAVOURITE_COL_LON + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 											FAVOURITE_TABLE_NAME, null);
 					cachedFavoritePoints.clear();
 					if (query != null && query.moveToFirst()) {

@@ -34,7 +34,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
 import androidx.core.view.ViewCompat;
 
 import net.osmand.Location;
@@ -77,8 +76,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import gnu.trove.set.hash.TLongHashSet;
-
-import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 
 /**
  * Search poi activity
@@ -126,7 +123,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	public boolean onCreateOptionsMenu(Menu omenu) {
 		Menu menu = getClearToolbar(true).getMenu();
 		searchPOILevel = menu.add(0, SEARCH_MORE, 0, R.string.search_POI_level_btn);
-		MenuItemCompat.setShowAsAction(searchPOILevel, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		searchPOILevel.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		searchPOILevel.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -135,7 +132,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		});
 		showFilterItem = menu.add(0, FILTER, 0, R.string.search_poi_filter);
-		MenuItemCompat.setShowAsAction(showFilterItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		showFilterItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		showFilterItem = showFilterItem.setIcon(getMyApplication().getUIUtilities().getIcon(
 				R.drawable.ic_action_filter_dark));
 		showFilterItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -158,7 +155,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 
 		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
-		MenuItemCompat.setShowAsAction(showOnMapItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		showOnMapItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		showOnMapItem = showOnMapItem.setIcon(getMyApplication().getUIUtilities().getIcon(
 				R.drawable.ic_show_on_map));
 		showOnMapItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -166,7 +163,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			public boolean onMenuItemClick(MenuItem item) {
 				OsmandSettings settings = app.getSettings();
 				filter.setFilterByName(searchFilter.getText().toString().trim());
-				app.getPoiFilters().addSelectedPoiFilter(PoiTemplateList.POI, filter);
+				app.getPoiFilters().addSelectedPoiFilter(filter);
 				if (location != null) {
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(), 15);
 				}
@@ -178,10 +175,10 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		showOnMapItem.setEnabled(!isNameSearch() || amenityAdapter.getCount() > 0);
 		if (filter != null && !isNameSearch()) {
 			createMenuItem(omenu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item, R.drawable.ic_action_favorite,
-					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+					MenuItem.SHOW_AS_ACTION_IF_ROOM);
 			if (!filter.isStandardFilter()) {
 				createMenuItem(omenu, DELETE_FILTER, R.string.shared_string_delete, R.drawable.ic_action_delete_dark,
-						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 			}
 		}
 		updateButtonState(false);

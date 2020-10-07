@@ -91,10 +91,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
-import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
@@ -126,6 +127,7 @@ import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.dialogs.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
 
 public class GpxUiHelper {
 
@@ -533,7 +535,8 @@ public class GpxUiHelper {
 							popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
 							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(new ContextThemeWrapper(activity, themeRes),
 									gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get(),
-									GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR);
+									GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR,
+									gpxAppearanceParams.containsKey(SHOW_START_FINISH_ATTR) ? "true".equals(gpxAppearanceParams.get(SHOW_START_FINISH_ATTR)) : app.getSettings().SHOW_START_FINISH_ICONS.get(), nightMode);
 							popup.setAdapter(gpxApprAdapter);
 							popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -541,10 +544,12 @@ public class GpxUiHelper {
 								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 									AppearanceListItem item = gpxApprAdapter.getItem(position);
 									if (item != null) {
-										if (item.getAttrName() == CURRENT_TRACK_WIDTH_ATTR) {
+										if (CURRENT_TRACK_WIDTH_ATTR.equals(item.getAttrName())) {
 											gpxAppearanceParams.put(CURRENT_TRACK_WIDTH_ATTR, item.getValue());
-										} else if (item.getAttrName() == CURRENT_TRACK_COLOR_ATTR) {
+										} else if (CURRENT_TRACK_COLOR_ATTR.equals(item.getAttrName())) {
 											gpxAppearanceParams.put(CURRENT_TRACK_COLOR_ATTR, item.getValue());
+										} else if (SHOW_START_FINISH_ATTR.equals(item.getAttrName())) {
+											gpxAppearanceParams.put(SHOW_START_FINISH_ATTR, item.getValue());
 										}
 									}
 									popup.dismiss();
@@ -568,9 +573,13 @@ public class GpxUiHelper {
 				public void onClick(DialogInterface dialog, int which) {
 					if (gpxAppearanceParams.size() > 0) {
 						for (Map.Entry<String, String> entry : gpxAppearanceParams.entrySet()) {
-							final CommonPreference<String> pref
-									= app.getSettings().getCustomRenderProperty(entry.getKey());
-							pref.set(entry.getValue());
+							if (SHOW_START_FINISH_ATTR.equals(entry.getKey())) {
+								app.getSettings().SHOW_START_FINISH_ICONS.set("true".equals(entry.getValue()));
+							} else {
+								final CommonPreference<String> pref
+										= app.getSettings().getCustomRenderProperty(entry.getKey());
+								pref.set(entry.getValue());
+							}
 						}
 						if (activity instanceof MapActivity) {
 							ConfigureMapMenu.refreshMapComplete((MapActivity) activity);
@@ -593,7 +602,7 @@ public class GpxUiHelper {
 					}
 					dialog.dismiss();
 					loadGPXFileInDifferentThread(activity, callbackWithObject, dir, currentGPX,
-							s.toArray(new String[s.size()]));
+							s.toArray(new String[0]));
 				}
 			});
 			builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -811,6 +820,14 @@ public class GpxUiHelper {
 		}
 	}
 
+	public static List<String> getSelectedTrackPaths(OsmandApplication app) {
+		List<String> trackNames = new ArrayList<>();
+		for (SelectedGpxFile file : app.getSelectedGpxHelper().getSelectedGPXFiles()) {
+			trackNames.add(file.getGpxFile().path);
+		}
+		return trackNames;
+	}
+
 	public static List<GPXInfo> getSortedGPXFilesInfoByDate(File dir, boolean absolutePath) {
 		final List<GPXInfo> list = new ArrayList<>();
 		readGpxDirectory(dir, list, "", absolutePath);
@@ -914,8 +931,7 @@ public class GpxUiHelper {
 		}
 	}
 
-
-	static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
+	public static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
 	                                         final File dir, final GPXFile currentFile, final String... filename) {
 		final ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading_smth, ""),
 				activity.getString(R.string.loading_data));

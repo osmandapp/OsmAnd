@@ -38,7 +38,7 @@ import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
@@ -53,6 +53,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -102,7 +103,7 @@ public class AppInitializer implements IProgress {
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-7-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-8-released";
 //	public static final String LATEST_CHANGES_URL = null; // not enough to read
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -301,6 +302,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void initPoiTypes() {
+		app.poiTypes.setForbiddenTypes(app.osmandSettings.getForbiddenTypes());
 		if (app.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml").exists()) {
 			app.poiTypes.init(app.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml").getAbsolutePath());
 		} else {
@@ -426,7 +428,7 @@ public class AppInitializer implements IProgress {
 		}
 		getLazyRoutingConfig();
 		app.applyTheme(app);
-		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelper(app), InAppPurchaseHelper.class);
+		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelperImpl(app), InAppPurchaseHelperImpl.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
 		app.transportRoutingHelper = startupInit(new TransportRoutingHelper(app), TransportRoutingHelper.class);
 		app.routingHelper = startupInit(new RoutingHelper(app), RoutingHelper.class);
@@ -552,7 +554,8 @@ public class AppInitializer implements IProgress {
 
 									customConfigs.put(fileName, builder);
 								} catch (XmlPullParserException | IOException e) {
-									throw new IllegalStateException(e);
+									Algorithms.removeAllFiles(f);
+									LOG.error(e.getMessage(), e);
 								}
 							}
 						}

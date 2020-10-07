@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -31,11 +31,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
@@ -150,7 +150,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-				if (itemId == R.string.mapillary) {
+				if (itemId == R.string.street_level_imagery) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
 					return false;
 				}
@@ -160,7 +160,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
 				final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-				if (itemId == R.string.mapillary) {
+				if (itemId == R.string.street_level_imagery) {
 					OsmandMapTileView mapView = mapActivity.getMapView();
 					MapActivityLayers mapLayers = mapActivity.getMapLayers();
 					settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
@@ -181,7 +181,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAPILLARY)
-				.setTitleId(R.string.mapillary, mapActivity)
+				.setTitleId(R.string.street_level_imagery, mapActivity)
+				.setDescription("Mapillary")
 				.setSelected(settings.SHOW_MAPILLARY.get())
 				.setColor(settings.SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_mapillary)

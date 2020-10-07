@@ -194,12 +194,12 @@
                     android:layout_marginRight="@dimen/content_padding"
                     android:layout_marginTop="@dimen/content_padding_half"
                     android:focusable="false"
+                    osmand:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
+                    osmand:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
                     android:text="@string/shared_string_favorites"
-                    android:drawableRight="@drawable/ic_action_arrow_drop_down"
                     android:editable="false"
 	                android:layout_marginStart="@dimen/content_padding_half"
-	                android:layout_marginEnd="@dimen/content_padding"
-	                android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
+	                android:layout_marginEnd="@dimen/content_padding" />
 
             </LinearLayout>
 

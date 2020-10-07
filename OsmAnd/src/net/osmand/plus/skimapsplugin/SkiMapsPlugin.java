@@ -2,7 +2,7 @@ package net.osmand.plus.skimapsplugin;
 
 import android.graphics.drawable.Drawable;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;

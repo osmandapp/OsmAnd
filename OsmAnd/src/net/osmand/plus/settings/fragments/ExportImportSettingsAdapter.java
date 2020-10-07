@@ -16,8 +16,9 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.ApplicationMode.ApplicationModeBean;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -49,9 +50,9 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ExportImportSettingsAdapter.class.getName());
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
-	private List<? super Object> dataToOperate;
-	private Map<Type, List<?>> itemsMap;
-	private List<Type> itemsTypes;
+	private List<? super Object> data;
+	private Map<ExportSettingsType, List<?>> itemsMap;
+	private List<ExportSettingsType> itemsTypes;
 	private boolean nightMode;
 	private boolean importState;
 	private int activeColorRes;
@@ -63,8 +64,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		this.importState = importState;
 		this.itemsMap = new HashMap<>();
 		this.itemsTypes = new ArrayList<>();
-		this.dataToOperate = new ArrayList<>();
-		dataToOperate = new ArrayList<>();
+		this.data = new ArrayList<>();
 		uiUtilities = app.getUIUtilities();
 		activeColorRes = nightMode
 				? R.color.icon_color_active_dark
@@ -83,7 +83,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		}
 
 		boolean isLastGroup = groupPosition == getGroupCount() - 1;
-		final Type type = itemsTypes.get(groupPosition);
+		final ExportSettingsType type = itemsTypes.get(groupPosition);
 
 		TextView titleTv = group.findViewById(R.id.title_tv);
 		TextView subTextTv = group.findViewById(R.id.sub_text_tv);
@@ -102,12 +102,12 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		final List<?> listItems = itemsMap.get(type);
 		subTextTv.setText(getSelectedItemsAmount(listItems));
 
-		if (dataToOperate.containsAll(listItems)) {
+		if (data.containsAll(listItems)) {
 			checkBox.setState(CHECKED);
 		} else {
 			boolean contains = false;
 			for (Object object : listItems) {
-				if (dataToOperate.contains(object)) {
+				if (data.contains(object)) {
 					contains = true;
 					break;
 				}
@@ -122,12 +122,12 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				checkBox.performClick();
 				if (checkBox.getState() == CHECKED) {
 					for (Object object : listItems) {
-						if (!dataToOperate.contains(object)) {
-							dataToOperate.add(object);
+						if (!data.contains(object)) {
+							data.add(object);
 						}
 					}
 				} else {
-					dataToOperate.removeAll(listItems);
+					data.removeAll(listItems);
 				}
 				notifyDataSetChanged();
 			}
@@ -146,8 +146,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		final Object currentItem = itemsMap.get(itemsTypes.get(groupPosition)).get(childPosition);
 
 		boolean isLastGroup = groupPosition == getGroupCount() - 1;
-		boolean itemSelected = dataToOperate.contains(currentItem);
-		final Type type = itemsTypes.get(groupPosition);
+		boolean itemSelected = data.contains(currentItem);
+		final ExportSettingsType type = itemsTypes.get(groupPosition);
 
 		TextView title = child.findViewById(R.id.title_tv);
 		TextView subText = child.findViewById(R.id.sub_title_tv);
@@ -166,10 +166,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		child.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (dataToOperate.contains(currentItem)) {
-					dataToOperate.remove(currentItem);
+				if (data.contains(currentItem)) {
+					data.remove(currentItem);
 				} else {
-					dataToOperate.add(currentItem);
+					data.add(currentItem);
 				}
 				notifyDataSetChanged();
 			}
@@ -293,14 +293,14 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private String getSelectedItemsAmount(List<?> listItems) {
 		int amount = 0;
 		for (Object item : listItems) {
-			if (dataToOperate.contains(item)) {
+			if (data.contains(item)) {
 				amount++;
 			}
 		}
 		return app.getString(R.string.n_items_of_z, String.valueOf(amount), String.valueOf(listItems.size()));
 	}
 
-	private int getGroupTitle(Type type) {
+	private int getGroupTitle(ExportSettingsType type) {
 		switch (type) {
 			case PROFILE:
 				return R.string.shared_string_profiles;
@@ -321,15 +321,15 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		}
 	}
 
-    private void setupIcon(ImageView icon, int iconRes, boolean itemSelected) {
-        if (itemSelected) {
-            icon.setImageDrawable(uiUtilities.getIcon(iconRes, activeColorRes));
-        } else {
-            icon.setImageDrawable(uiUtilities.getIcon(iconRes, nightMode));
-        }
-    }
+	private void setupIcon(ImageView icon, int iconRes, boolean itemSelected) {
+		if (itemSelected) {
+			icon.setImageDrawable(uiUtilities.getIcon(iconRes, activeColorRes));
+		} else {
+			icon.setImageDrawable(uiUtilities.getIcon(iconRes, nightMode));
+		}
+	}
 
-	public void updateSettingsList(Map<Type, List<?>> itemsMap) {
+	public void updateSettingsList(Map<ExportSettingsType, List<?>> itemsMap) {
 		this.itemsMap = itemsMap;
 		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
 		Collections.sort(itemsTypes);
@@ -343,26 +343,16 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	}
 
 	public void selectAll(boolean selectAll) {
-		dataToOperate.clear();
+		data.clear();
 		if (selectAll) {
 			for (List<?> values : itemsMap.values()) {
-				dataToOperate.addAll(values);
+				data.addAll(values);
 			}
 		}
 		notifyDataSetChanged();
 	}
 
-	List<? super Object> getDataToOperate() {
-		return this.dataToOperate;
-	}
-
-	public enum Type {
-		PROFILE,
-		QUICK_ACTIONS,
-		POI_TYPES,
-		MAP_SOURCES,
-		CUSTOM_RENDER_STYLE,
-		CUSTOM_ROUTING,
-		AVOID_ROADS
+	List<? super Object> getData() {
+		return this.data;
 	}
 }

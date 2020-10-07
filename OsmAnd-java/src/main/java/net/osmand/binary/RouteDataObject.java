@@ -1,11 +1,14 @@
 package net.osmand.binary;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
+
+import org.apache.commons.logging.Log;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
@@ -34,7 +37,7 @@ public class RouteDataObject {
 	public int[] nameIds;
 	// mixed array [0, height, cumulative_distance height, cumulative_distance, height, ...] - length is length(points)*2
 	public float[] heightDistanceArray = null;
-
+	private static final Log LOG = PlatformUtil.getLog(RouteDataObject.class);
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
 	}
@@ -56,6 +59,7 @@ public class RouteDataObject {
 		this.pointsY = copy.pointsY;
 		this.types = copy.types;
 		this.names = copy.names;
+		this.nameIds = copy.nameIds;
 		this.restrictions = copy.restrictions;
 		this.restrictionsVia = copy.restrictionsVia;
 		this.pointTypes = copy.pointTypes;
@@ -426,11 +430,18 @@ public class RouteDataObject {
 		int[] opointsX = pointsX;
 		int[] opointsY = pointsY;
 		int[][] opointTypes = pointTypes;
+		String[][] opointNames = pointNames;
+		int[][] opointNameTypes = pointNameTypes;
 		pointsX = new int[pointsX.length + 1];
 		pointsY = new int[pointsY.length + 1];
 		boolean insTypes = this.pointTypes != null && this.pointTypes.length > pos;
+		boolean insNames = this.pointNames != null && this.pointNames.length > pos;
 		if (insTypes) {
 			pointTypes = new int[opointTypes.length + 1][];
+		}
+		if (insNames) {
+			pointNames = new String[opointNames.length + 1][];
+			pointNameTypes = new int[opointNameTypes.length +1][];
 		}
 		int i = 0;
 		for (; i < pos; i++) {
@@ -439,17 +450,31 @@ public class RouteDataObject {
 			if (insTypes) {
 				pointTypes[i] = opointTypes[i];
 			}
+			if (insNames) {
+				pointNames[i] = opointNames[i];
+				pointNameTypes[i] = opointNameTypes[i];
+			}
 		}
 		pointsX[i] = x31;
 		pointsY[i] = y31;
 		if (insTypes) {
 			pointTypes[i] = null;
 		}
+		if (insNames) {
+			pointNames[i] = null;
+			pointNameTypes[i] = null;
+		}
 		for (i = i + 1; i < pointsX.length; i++) {
 			pointsX[i] = opointsX[i - 1];
 			pointsY[i] = opointsY[i - 1];
 			if (insTypes && i < pointTypes.length) {
 				pointTypes[i] = opointTypes[i - 1];
+			}
+			if (insNames && i < pointNames.length) {
+				pointNames[i] = opointNames[i - 1];
+			}
+			if (insNames && i < pointNameTypes.length) {
+				pointNameTypes[i] = opointNameTypes[i - 1];
 			}
 		}
 	}
@@ -1054,6 +1079,4 @@ public class RouteDataObject {
 		}
 		restrictionsVia[k] = viaWay;
 	}
-
-
 }
