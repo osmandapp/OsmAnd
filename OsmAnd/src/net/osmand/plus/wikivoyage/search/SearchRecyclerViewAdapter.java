@@ -135,6 +135,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 	}
 
 	private LayerDrawable getPlaceholder(boolean history) {
+		int colorDefaultLight = 0xff727272;
 		LayerDrawable res = (LayerDrawable) AppCompatResources.getDrawable(
 				app, history
 						? R.drawable.wikivoyage_search_history_placeholder
@@ -146,6 +147,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 					R.color.icon_color_default_light
 			));
 		}
+		res.setTint(colorDefaultLight);
 		return res;
 	}
 
