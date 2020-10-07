@@ -100,6 +100,8 @@ public class SettingsHelper {
 
 	public static final int VERSION = 1;
 
+	public static final String SETTINGS_TYPE_LIST_KEY = "settings_type_list_key";
+	public static final String REPLACE_KEY = "replace";
 	public static final String SETTINGS_LATEST_CHANGES_KEY = "settings_latest_changes";
 	public static final String SETTINGS_VERSION_KEY = "settings_version";
 
@@ -2927,5 +2929,109 @@ public class SettingsHelper {
 		COLLECT,
 		CHECK_DUPLICATES,
 		IMPORT
+	}
+
+	public List<SettingsItem> getFilteredSettingsItems(Map<ExportSettingsType, List<?>> additionalData,
+	                                                   List<ExportSettingsType> settingsTypes) {
+		List<SettingsItem> settingsItems = new ArrayList<>();
+		for (ExportSettingsType settingsType : settingsTypes) {
+			List<?> settingsDataObjects = additionalData.get(settingsType);
+			if (settingsDataObjects != null) {
+				settingsItems.addAll(prepareAdditionalSettingsItems(new ArrayList<>(settingsDataObjects)));
+			}
+		}
+		return settingsItems;
+	}
+
+	public Map<ExportSettingsType, List<?>> getAdditionalData() {
+		Map<ExportSettingsType, List<?>> dataList = new HashMap<>();
+
+		QuickActionRegistry registry = app.getQuickActionRegistry();
+		List<QuickAction> actionsList = registry.getQuickActions();
+		if (!actionsList.isEmpty()) {
+			dataList.put(ExportSettingsType.QUICK_ACTIONS, actionsList);
+		}
+
+		List<PoiUIFilter> poiList = app.getPoiFilters().getUserDefinedPoiFilters(false);
+		if (!poiList.isEmpty()) {
+			dataList.put(ExportSettingsType.POI_TYPES, poiList);
+		}
+
+		List<ITileSource> iTileSources = new ArrayList<>();
+		Set<String> tileSourceNames = app.getSettings().getTileSourceEntries(true).keySet();
+		for (String name : tileSourceNames) {
+			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name);
+			if (f != null) {
+				ITileSource template;
+				if (f.getName().endsWith(SQLiteTileSource.EXT)) {
+					template = new SQLiteTileSource(app, f, TileSourceManager.getKnownSourceTemplates());
+				} else {
+					template = TileSourceManager.createTileSourceTemplate(f);
+				}
+				if (template.getUrlTemplate() != null) {
+					iTileSources.add(template);
+				}
+			}
+		}
+		if (!iTileSources.isEmpty()) {
+			dataList.put(ExportSettingsType.MAP_SOURCES, iTileSources);
+		}
+
+		Map<String, File> externalRenderers = app.getRendererRegistry().getExternalRenderers();
+		if (!externalRenderers.isEmpty()) {
+			dataList.put(ExportSettingsType.CUSTOM_RENDER_STYLE, new ArrayList<>(externalRenderers.values()));
+		}
+
+		File routingProfilesFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+		if (routingProfilesFolder.exists() && routingProfilesFolder.isDirectory()) {
+			File[] fl = routingProfilesFolder.listFiles();
+			if (fl != null && fl.length > 0) {
+				dataList.put(ExportSettingsType.CUSTOM_ROUTING, Arrays.asList(fl));
+			}
+		}
+
+		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
+		if (!impassableRoads.isEmpty()) {
+			dataList.put(ExportSettingsType.AVOID_ROADS, new ArrayList<>(impassableRoads.values()));
+		}
+		return dataList;
+	}
+
+	public List<SettingsItem> prepareAdditionalSettingsItems(List<? super Object> data) {
+		List<SettingsItem> settingsItems = new ArrayList<>();
+		List<QuickAction> quickActions = new ArrayList<>();
+		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
+		List<ITileSource> tileSourceTemplates = new ArrayList<>();
+		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		for (Object object : data) {
+			if (object instanceof QuickAction) {
+				quickActions.add((QuickAction) object);
+			} else if (object instanceof PoiUIFilter) {
+				poiUIFilters.add((PoiUIFilter) object);
+			} else if (object instanceof TileSourceTemplate || object instanceof SQLiteTileSource) {
+				tileSourceTemplates.add((ITileSource) object);
+			} else if (object instanceof File) {
+				try {
+					settingsItems.add(new FileSettingsItem(app, (File) object));
+				} catch (IllegalArgumentException e) {
+					LOG.warn("Trying to export unsuported file type", e);
+				}
+			} else if (object instanceof AvoidRoadInfo) {
+				avoidRoads.add((AvoidRoadInfo) object);
+			}
+		}
+		if (!quickActions.isEmpty()) {
+			settingsItems.add(new QuickActionsSettingsItem(app, quickActions));
+		}
+		if (!poiUIFilters.isEmpty()) {
+			settingsItems.add(new PoiUiFiltersSettingsItem(app, poiUIFilters));
+		}
+		if (!tileSourceTemplates.isEmpty()) {
+			settingsItems.add(new MapSourcesSettingsItem(app, tileSourceTemplates));
+		}
+		if (!avoidRoads.isEmpty()) {
+			settingsItems.add(new AvoidRoadsSettingsItem(app, avoidRoads));
+		}
+		return settingsItems;
 	}
 }
