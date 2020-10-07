@@ -76,7 +76,7 @@ class GpxOrFavouritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile>
 	}
 
 	@Override
-	protected void onPostExecute(final GPXUtilities.GPXFile result) {
+	protected void onPostExecute(GPXFile result) {
 		hideProgress();
 		importHelper.importGpxOrFavourites(result, fileName, save, useImportDir, forceImportFavourites, forceImportGpx);
 	}

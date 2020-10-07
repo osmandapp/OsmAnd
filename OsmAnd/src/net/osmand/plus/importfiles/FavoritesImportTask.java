@@ -5,7 +5,6 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
@@ -45,7 +44,7 @@ class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 	}
 
 	@Override
-	protected void onPostExecute(GPXUtilities.GPXFile result) {
+	protected void onPostExecute(GPXFile result) {
 		hideProgress();
 		FragmentActivity activity = activityRef.get();
 		if (activity != null) {

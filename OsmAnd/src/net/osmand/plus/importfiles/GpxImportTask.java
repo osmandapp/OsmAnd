@@ -52,7 +52,7 @@ class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 	}
 
 	@Override
-	protected void onPostExecute(GPXUtilities.GPXFile result) {
+	protected void onPostExecute(GPXFile result) {
 		hideProgress();
 		importHelper.handleResult(result, fileName, save, useImportDir, false, showInDetailsActivity);
 	}

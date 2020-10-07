@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
-class KmlImportTask extends BaseImportAsyncTask<Void, Void, GPXUtilities.GPXFile> {
+class KmlImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 
 	private ImportHelper importHelper;
 	private Uri uri;

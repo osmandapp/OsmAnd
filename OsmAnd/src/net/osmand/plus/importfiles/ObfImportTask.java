@@ -17,7 +17,7 @@ class ObfImportTask extends BaseImportAsyncTask<Void, Void, String> {
 	private Uri uri;
 	private String name;
 
-	public ObfImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri, String name) {
+	public ObfImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri, @NonNull String name) {
 		super(activity);
 		this.uri = uri;
 		this.name = name;

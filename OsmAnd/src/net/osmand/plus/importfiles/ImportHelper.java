@@ -20,7 +20,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.BackgroundType;
@@ -55,6 +54,7 @@ import java.util.Locale;
 import static android.app.Activity.RESULT_OK;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
@@ -176,7 +176,7 @@ public class ImportHelper {
 		boolean saveFile = !isFileIntent || !isOsmandSubdir;
 
 		if (fileName == null) {
-			handleGpxOrFavouritesImport(intentUri, fileName, saveFile, useImportDir, false, false);
+			handleUriImport(intentUri, saveFile, useImportDir);
 		} else if (fileName.endsWith(KML_SUFFIX)) {
 			handleKmlImport(intentUri, fileName, saveFile, useImportDir);
 		} else if (fileName.endsWith(KMZ_SUFFIX)) {
@@ -243,11 +243,11 @@ public class ImportHelper {
 		executeImportTask(new KmlImportTask(this, activity, kmlFile, name, save, useImportDir));
 	}
 
-	private void handleObfImport(Uri obfFile, String name) {
+	protected void handleObfImport(Uri obfFile, String name) {
 		executeImportTask(new ObfImportTask(activity, obfFile, name));
 	}
 
-	private void handleSqliteTileImport(Uri uri, String name) {
+	protected void handleSqliteTileImport(Uri uri, String name) {
 		executeImportTask(new SqliteTileImportTask(activity, uri, name));
 	}
 
@@ -266,8 +266,12 @@ public class ImportHelper {
 		executeImportTask(new SettingsImportTask(activity, uri, name, latestChanges, version, callback));
 	}
 
-	private void handleXmlFileImport(Uri intentUri, String fileName, CallbackWithObject routingCallback) {
+	protected void handleXmlFileImport(Uri intentUri, String fileName, CallbackWithObject routingCallback) {
 		executeImportTask(new XmlImportTask(activity, intentUri, fileName, routingCallback));
+	}
+
+	private void handleUriImport(Uri uri, boolean save, boolean useImportDir) {
+		executeImportTask(new UriImportTask(this, activity, uri, save, useImportDir));
 	}
 
 	@Nullable
@@ -442,7 +446,7 @@ public class ImportHelper {
 		} else {
 			final File importDir;
 			if (useImportDir) {
-				importDir = app.getAppPath(IndexConstants.GPX_IMPORT_DIR);
+				importDir = app.getAppPath(GPX_IMPORT_DIR);
 			} else {
 				importDir = app.getAppPath(GPX_INDEX_DIR);
 			}
