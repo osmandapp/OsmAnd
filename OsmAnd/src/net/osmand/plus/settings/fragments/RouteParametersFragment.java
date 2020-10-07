@@ -216,8 +216,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				}
 				if (preferParameters.size() > 0) {
 					String title = getString(R.string.prefer_in_routing_title);
-					String descr = getString(R.string.prefer_in_routing_descr);
-					MultiSelectBooleanPreference preferRouting = createRoutingBooleanMultiSelectPref(PREFER_ROUTING_PARAMETER_PREFIX, title, descr, preferParameters);
+					MultiSelectBooleanPreference preferRouting = createRoutingBooleanMultiSelectPref(PREFER_ROUTING_PARAMETER_PREFIX, title, "", preferParameters);
 					screen.addPreference(preferRouting);
 				}
 				if (reliefFactorParameters.size() > 0) {
