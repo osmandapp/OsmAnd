@@ -8,17 +8,15 @@ import java.util.List;
 
 public class ListStringPreference extends StringPreference {
 
-	private OsmandSettings osmandSettings;
 	private String delimiter;
 
 	ListStringPreference(OsmandSettings osmandSettings, String id, String defaultValue, String delimiter) {
-		super(id, defaultValue);
-		this.osmandSettings = osmandSettings;
+		super(osmandSettings, id, defaultValue);
 		this.delimiter = delimiter;
 	}
 
 	public boolean addValue(String res) {
-		return addModeValue(osmandSettings.getApplicationMode(), res);
+		return addModeValue(getApplicationMode(), res);
 	}
 
 	public boolean addModeValue(ApplicationMode appMode, String res) {
@@ -33,7 +31,7 @@ public class ListStringPreference extends StringPreference {
 	}
 
 	public void clearAll() {
-		clearAllForProfile(osmandSettings.getApplicationMode());
+		clearAllForProfile(getApplicationMode());
 	}
 
 	public void clearAllForProfile(ApplicationMode appMode) {
@@ -41,7 +39,7 @@ public class ListStringPreference extends StringPreference {
 	}
 
 	public boolean containsValue(String res) {
-		return containsValue(osmandSettings.getApplicationMode(), res);
+		return containsValue(getApplicationMode(), res);
 	}
 
 	public boolean containsValue(ApplicationMode appMode, String res) {
@@ -51,7 +49,7 @@ public class ListStringPreference extends StringPreference {
 	}
 
 	public boolean removeValue(String res) {
-		return removeValueForProfile(osmandSettings.getApplicationMode(), res);
+		return removeValueForProfile(getApplicationMode(), res);
 	}
 
 	public boolean removeValueForProfile(ApplicationMode appMode, String res) {
@@ -75,7 +73,7 @@ public class ListStringPreference extends StringPreference {
 	}
 
 	public List<String> getStringsList() {
-		return getStringsListForProfile(osmandSettings.getApplicationMode());
+		return getStringsListForProfile(getApplicationMode());
 	}
 
 	public List<String> getStringsListForProfile(ApplicationMode appMode) {
@@ -93,7 +91,7 @@ public class ListStringPreference extends StringPreference {
 	}
 
 	public void setStringsList(List<String> values) {
-		setStringsListForProfile(osmandSettings.getApplicationMode(), values);
+		setStringsListForProfile(getApplicationMode(), values);
 	}
 
 	public void setStringsListForProfile(ApplicationMode appMode, List<String> values) {

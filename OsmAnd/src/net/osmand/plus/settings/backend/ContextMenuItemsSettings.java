@@ -1,7 +1,9 @@
 package net.osmand.plus.settings.backend;
 
+import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +16,9 @@ import java.util.List;
 import androidx.annotation.NonNull;
 
 public class ContextMenuItemsSettings implements Serializable {
+
+	private static final Log LOG = PlatformUtil.getLog(ContextMenuItemsSettings.class.getName());
+
 	private static final String HIDDEN = "hidden";
 	private static final String ORDER = "order";
 	private List<String> hiddenIds = new ArrayList<>();
@@ -40,7 +45,7 @@ public class ContextMenuItemsSettings implements Serializable {
 			JSONObject json = new JSONObject(jsonString);
 			readFromJson(json, idScheme);
 		} catch (JSONException e) {
-			OsmandSettings.LOG.error("Error converting to json string: " + e);
+			LOG.error("Error converting to json string: " + e);
 		}
 	}
 
@@ -66,7 +71,7 @@ public class ContextMenuItemsSettings implements Serializable {
 			writeToJson(json, idScheme);
 			return json.toString();
 		} catch (JSONException e) {
-			OsmandSettings.LOG.error("Error converting to json string: " + e);
+			LOG.error("Error converting to json string: " + e);
 		}
 		return "";
 	}

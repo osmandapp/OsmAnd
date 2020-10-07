@@ -11,12 +11,11 @@ import java.util.StringTokenizer;
 
 class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 
-	private OsmandSettings osmandSettings;
 	protected String roadsIdsKey;
 	protected String appModeKey;
 
 	public ImpassableRoadsStorage(OsmandSettings osmandSettings) {
-		this.osmandSettings = osmandSettings;
+		super(osmandSettings);
 		pointsKey = OsmandSettings.IMPASSABLE_ROAD_POINTS;
 		descriptionsKey = OsmandSettings.IMPASSABLE_ROADS_DESCRIPTIONS;
 		roadsIdsKey = OsmandSettings.IMPASSABLE_ROADS_IDS;
@@ -25,7 +24,7 @@ class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 
 	public List<Long> getRoadIds(int size) {
 		List<Long> list = new ArrayList<>();
-		String roadIds = osmandSettings.settingsAPI.getString(osmandSettings.globalPreferences, roadsIdsKey, "");
+		String roadIds = getSettingsAPI().getString(getOsmandSettings().globalPreferences, roadsIdsKey, "");
 		if (roadIds.trim().length() > 0) {
 			StringTokenizer tok = new StringTokenizer(roadIds, ",");
 			while (tok.hasMoreTokens() && list.size() <= size) {
@@ -40,7 +39,7 @@ class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 
 	public List<String> getAppModeKeys(int size) {
 		List<String> list = new ArrayList<>();
-		String roadIds = osmandSettings.settingsAPI.getString(osmandSettings.globalPreferences, appModeKey, "");
+		String roadIds = getSettingsAPI().getString(getOsmandSettings().globalPreferences, appModeKey, "");
 		if (roadIds.trim().length() > 0) {
 			StringTokenizer tok = new StringTokenizer(roadIds, ",");
 			while (tok.hasMoreTokens() && list.size() <= size) {
@@ -173,7 +172,7 @@ class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 				stringBuilder.append(",");
 			}
 		}
-		return osmandSettings.settingsAPI.edit(osmandSettings.globalPreferences)
+		return getSettingsAPI().edit(getOsmandSettings().globalPreferences)
 				.putString(roadsIdsKey, stringBuilder.toString())
 				.commit();
 	}
@@ -187,7 +186,7 @@ class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 				stringBuilder.append(",");
 			}
 		}
-		return osmandSettings.settingsAPI.edit(osmandSettings.globalPreferences)
+		return getSettingsAPI().edit(getOsmandSettings().globalPreferences)
 				.putString(appModeKey, stringBuilder.toString())
 				.commit();
 	}

@@ -7,13 +7,13 @@ public class BooleanPreference extends CommonPreference<Boolean> {
 	}
 
 	@Override
-	protected Boolean getValue(Object prefs, Boolean defaultValue) {
-		return osmandSettings.settingsAPI.getBoolean(prefs, getId(), defaultValue);
+	public Boolean getValue(Object prefs, Boolean defaultValue) {
+		return getSettingsAPI().getBoolean(prefs, getId(), defaultValue);
 	}
 
 	@Override
 	protected boolean setValue(Object prefs, Boolean val) {
-		return osmandSettings.settingsAPI.edit(prefs).putBoolean(getId(), val).commit();
+		return getSettingsAPI().edit(prefs).putBoolean(getId(), val).commit();
 	}
 
 	@Override

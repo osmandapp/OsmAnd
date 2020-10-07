@@ -6,10 +6,8 @@ import java.util.List;
 
 class IntermediatePointsStorage extends SettingsMapPointsStorage {
 
-	private OsmandSettings osmandSettings;
-
 	public IntermediatePointsStorage(OsmandSettings osmandSettings) {
-		this.osmandSettings = osmandSettings;
+		super(osmandSettings);
 		pointsKey = OsmandSettings.INTERMEDIATE_POINTS;
 		descriptionsKey = OsmandSettings.INTERMEDIATE_POINTS_DESCRIPTION;
 	}
@@ -17,7 +15,7 @@ class IntermediatePointsStorage extends SettingsMapPointsStorage {
 	@Override
 	public boolean savePoints(List<LatLon> ps, List<String> ds) {
 		boolean res = super.savePoints(ps, ds);
-		osmandSettings.backupTargetPoints();
+		getOsmandSettings().backupTargetPoints();
 		return res;
 	}
 }

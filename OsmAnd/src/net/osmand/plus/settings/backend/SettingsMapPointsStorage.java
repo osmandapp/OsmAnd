@@ -2,6 +2,7 @@ package net.osmand.plus.settings.backend;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 
 import java.util.ArrayList;
@@ -19,9 +20,17 @@ abstract class SettingsMapPointsStorage {
 		this.osmandSettings = osmandSettings;
 	}
 
+	protected SettingsAPI getSettingsAPI() {
+		return osmandSettings.getSettingsAPI();
+	}
+
+	protected OsmandSettings getOsmandSettings() {
+		return osmandSettings;
+	}
+
 	public List<String> getPointDescriptions(int sz) {
 		List<String> list = new ArrayList<>();
-		String ip = osmandSettings.settingsAPI.getString(osmandSettings.globalPreferences, descriptionsKey, "");
+		String ip = getSettingsAPI().getString(osmandSettings.globalPreferences, descriptionsKey, "");
 		if (ip.trim().length() > 0) {
 			list.addAll(Arrays.asList(ip.split("--")));
 		}
@@ -36,7 +45,7 @@ abstract class SettingsMapPointsStorage {
 
 	public List<LatLon> getPoints() {
 		List<LatLon> list = new ArrayList<>();
-		String ip = osmandSettings.settingsAPI.getString(osmandSettings.globalPreferences, pointsKey, "");
+		String ip = getSettingsAPI().getString(osmandSettings.globalPreferences, pointsKey, "");
 		if (ip.trim().length() > 0) {
 			StringTokenizer tok = new StringTokenizer(ip, ",");
 			while (tok.hasMoreTokens()) {
@@ -56,8 +65,8 @@ abstract class SettingsMapPointsStorage {
 		List<String> ds = getPointDescriptions(ps.size());
 		ps.add(index, new LatLon(latitude, longitude));
 		ds.add(index, PointDescription.serializeToString(historyDescription));
-		if (historyDescription != null && !historyDescription.isSearchingAddress(osmandSettings.ctx)) {
-			SearchHistoryHelper.getInstance(osmandSettings.ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+		if (historyDescription != null && !historyDescription.isSearchingAddress(osmandSettings.getContext())) {
+			SearchHistoryHelper.getInstance(osmandSettings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription);
 		}
 		return savePoints(ps, ds);
 	}
@@ -68,8 +77,8 @@ abstract class SettingsMapPointsStorage {
 		int i = ps.indexOf(new LatLon(latitude, longitude));
 		if (i != -1) {
 			ds.set(i, PointDescription.serializeToString(historyDescription));
-			if (historyDescription != null && !historyDescription.isSearchingAddress(osmandSettings.ctx)) {
-				SearchHistoryHelper.getInstance(osmandSettings.ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+			if (historyDescription != null && !historyDescription.isSearchingAddress(osmandSettings.getContext())) {
+				SearchHistoryHelper.getInstance(osmandSettings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription);
 			}
 			return savePoints(ps, ds);
 		} else {
@@ -121,7 +130,7 @@ abstract class SettingsMapPointsStorage {
 				tb.append(ds.get(i));
 			}
 		}
-		return osmandSettings.settingsAPI.edit(osmandSettings.globalPreferences)
+		return getSettingsAPI().edit(osmandSettings.globalPreferences)
 				.putString(pointsKey, sb.toString())
 				.putString(descriptionsKey, tb.toString())
 				.commit();

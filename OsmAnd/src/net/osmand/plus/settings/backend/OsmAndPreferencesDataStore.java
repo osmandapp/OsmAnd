@@ -55,7 +55,7 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 	@Nullable
 	@Override
 	public String getString(String key, @Nullable String defValue) {
-		OsmandPreference preference = osmandSettings.getPreference(key);
+		OsmandPreference<?> preference = osmandSettings.getPreference(key);
 		if (preference instanceof StringPreference) {
 			return ((StringPreference) preference).getModeValue(appMode);
 		} else {
@@ -75,25 +75,25 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 
 	@Override
 	public int getInt(String key, int defValue) {
-		OsmandPreference preference = osmandSettings.getPreference(key);
-		if (preference instanceof OsmandSettings.IntPreference) {
-			return ((OsmandSettings.IntPreference) preference).getModeValue(appMode);
+		OsmandPreference<?> preference = osmandSettings.getPreference(key);
+		if (preference instanceof IntPreference) {
+			return ((IntPreference) preference).getModeValue(appMode);
 		}
 		return defValue;
 	}
 
 	@Override
 	public long getLong(String key, long defValue) {
-		OsmandPreference preference = osmandSettings.getPreference(key);
-		if (preference instanceof OsmandSettings.LongPreference) {
-			return ((OsmandSettings.LongPreference) preference).getModeValue(appMode);
+		OsmandPreference<?> preference = osmandSettings.getPreference(key);
+		if (preference instanceof LongPreference) {
+			return ((LongPreference) preference).getModeValue(appMode);
 		}
 		return defValue;
 	}
 
 	@Override
 	public float getFloat(String key, float defValue) {
-		OsmandPreference preference = osmandSettings.getPreference(key);
+		OsmandPreference<?> preference = osmandSettings.getPreference(key);
 		if (preference instanceof FloatPreference) {
 			return ((FloatPreference) preference).getModeValue(appMode);
 		}
@@ -102,7 +102,7 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 
 	@Override
 	public boolean getBoolean(String key, boolean defValue) {
-		OsmandPreference preference = osmandSettings.getPreference(key);
+		OsmandPreference<?> preference = osmandSettings.getPreference(key);
 		if (preference instanceof BooleanPreference) {
 			return ((BooleanPreference) preference).getModeValue(appMode);
 		}
@@ -111,7 +111,7 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 
 	@Nullable
 	public Object getValue(String key, Object defValue) {
-		OsmandPreference preference = osmandSettings.getPreference(key);
+		OsmandPreference<?> preference = osmandSettings.getPreference(key);
 		if (preference != null) {
 			return preference.getModeValue(appMode);
 		}

@@ -113,14 +113,13 @@ public class OsmandSettings {
 	private boolean editObjectToShow;
 	private String searchRequestToShow;
 
-
-	protected OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI) {
+	public OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI) {
 		ctx = clientContext;
 		this.settingsAPI = settinsAPI;
 		initPrefs();
 	}
 
-	protected OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI, String sharedPreferencesName) {
+	public OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI, String sharedPreferencesName) {
 		ctx = clientContext;
 		this.settingsAPI = settinsAPI;
 		CUSTOM_SHARED_PREFERENCES_NAME = CUSTOM_SHARED_PREFERENCES_PREFIX + sharedPreferencesName;
@@ -196,7 +195,7 @@ public class OsmandSettings {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesNameForKey(modeKey));
 	}
 
-	public OsmandPreference getPreference(String key) {
+	public OsmandPreference<?> getPreference(String key) {
 		return registeredPreferences.get(key);
 	}
 
@@ -301,7 +300,7 @@ public class OsmandSettings {
 			} else if (preference instanceof EnumStringPreference) {
 				EnumStringPreference enumPref = (EnumStringPreference) preference;
 				if (value instanceof String) {
-					Enum enumValue = enumPref.parseString((String) value);
+					Enum<?> enumValue = enumPref.parseString((String) value);
 					if (enumValue != null) {
 						return enumPref.setModeValue(mode, enumValue);
 					}
@@ -310,8 +309,8 @@ public class OsmandSettings {
 					return enumPref.setModeValue(mode, value);
 				} else if (value instanceof Integer) {
 					int newVal = (Integer) value;
-					if (enumPref.values.length > newVal) {
-						Enum enumValue = enumPref.values[newVal];
+					if (enumPref.getValues().length > newVal) {
+						Enum<?> enumValue = enumPref.getValues()[newVal];
 						return enumPref.setModeValue(mode, enumValue);
 					}
 					return false;
@@ -358,7 +357,7 @@ public class OsmandSettings {
 	}
 
 	private boolean prefCanBeCopiedOrReset(OsmandPreference pref) {
-		return pref instanceof CommonPreference && !((CommonPreference) pref).global
+		return pref instanceof CommonPreference && !((CommonPreference) pref).isGlobal()
 				&& !APP_MODE_ORDER.getId().equals(pref.getId());
 	}
 
@@ -412,7 +411,7 @@ public class OsmandSettings {
 
 				OsmandAidlApi aidlApi = ctx.getAidlApi();
 				if (aidlApi != null) {
-					ctx.poiFilters.loadSelectedPoiFilters();
+					ctx.getPoiFilters().loadSelectedPoiFilters();
 				}
 
 				fireEvent(oldMode);
@@ -728,13 +727,13 @@ public class OsmandSettings {
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "default_application_mode_string", ApplicationMode.DEFAULT) {
 
 		@Override
-		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+		public ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
 			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
 			return ApplicationMode.valueOfStringKey(key, defaultValue);
 		}
 
 		@Override
-		protected boolean setValue(Object prefs, ApplicationMode val) {
+		public boolean setValue(Object prefs, ApplicationMode val) {
 			boolean valueSaved = settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
 			if (valueSaved) {
 				APPLICATION_MODE.set(val);
@@ -774,13 +773,13 @@ public class OsmandSettings {
 	public final OsmandPreference<ApplicationMode> LAST_ROUTE_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "last_route_application_mode_backup_string", ApplicationMode.DEFAULT) {
 
 		@Override
-		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+		public ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
 			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
 			return ApplicationMode.valueOfStringKey(key, defaultValue);
 		}
 
 		@Override
-		protected boolean setValue(Object prefs, ApplicationMode val) {
+		public boolean setValue(Object prefs, ApplicationMode val) {
 			return settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
 		}
 
@@ -818,7 +817,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference(this, "driving_region_automatic", true).makeProfile().cache();
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumStringPreference<DrivingRegion>(this,
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
-		protected boolean setValue(Object prefs, DrivingRegion val) {
+		public boolean setValue(Object prefs, DrivingRegion val) {
 			if (val != null) {
 				METRIC_SYSTEM.set(val.defMetrics);
 			}
@@ -2067,10 +2066,10 @@ public class OsmandSettings {
 	public final static String MY_LOC_POINT_LON = "my_loc_point_lon";
 	public final static String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
 
-	private static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
-	private static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
-	private static final String IMPASSABLE_ROADS_IDS = "impassable_roads_ids";
-	private static final String IMPASSABLE_ROADS_APP_MODE_KEYS = "impassable_roads_app_mode_keys";
+	public static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
+	public static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
+	public static final String IMPASSABLE_ROADS_IDS = "impassable_roads_ids";
+	public static final String IMPASSABLE_ROADS_APP_MODE_KEYS = "impassable_roads_app_mode_keys";
 
 	public void backupPointToStart() {
 		settingsAPI.edit(globalPreferences)
@@ -2509,7 +2508,7 @@ public class OsmandSettings {
 	@Nullable
 	public ContextMenuItemsPreference getContextMenuItemsPreference(@NonNull String id) {
 		for (ContextMenuItemsPreference preference : CONTEXT_MENU_ITEMS_PREFERENCES) {
-			if (id.startsWith(preference.idScheme)) {
+			if (id.startsWith(preference.getIdScheme())) {
 				return preference;
 			}
 		}
@@ -2743,6 +2742,55 @@ public class OsmandSettings {
 			res.add(toks.nextToken());
 		}
 		return res;
+	}
+
+	public String[] getAppModeBeanPrefsIds() {
+		return new String[]{
+				ICON_COLOR.getId(),
+				ICON_RES_NAME.getId(),
+				PARENT_APP_MODE.getId(),
+				ROUTING_PROFILE.getId(),
+				ROUTE_SERVICE.getId(),
+				USER_PROFILE_NAME.getId(),
+				LOCATION_ICON.getId(),
+				NAVIGATION_ICON.getId(),
+				APP_MODE_ORDER.getId()
+		};
+	}
+
+	public OsmandPreference<?>[] getGeneralPrefs() {
+		return new OsmandPreference[]{
+				EXTERNAL_INPUT_DEVICE,
+				CENTER_POSITION_ON_MAP,
+				ROTATE_MAP,
+				MAP_SCREEN_ORIENTATION,
+				LIVE_MONITORING_URL,
+				LIVE_MONITORING_MAX_INTERVAL_TO_SEND,
+				LIVE_MONITORING_INTERVAL,
+				LIVE_MONITORING,
+				SHOW_TRIP_REC_NOTIFICATION,
+				AUTO_SPLIT_RECORDING,
+				SAVE_TRACK_MIN_SPEED,
+				SAVE_TRACK_PRECISION,
+				SAVE_TRACK_MIN_DISTANCE,
+				SAVE_TRACK_INTERVAL,
+				TRACK_STORAGE_DIRECTORY,
+				SAVE_HEADING_TO_GPX,
+				DISABLE_RECORDING_ONCE_APP_KILLED,
+				SAVE_TRACK_TO_GPX,
+				SAVE_GLOBAL_TRACK_REMEMBER,
+				SAVE_GLOBAL_TRACK_INTERVAL,
+				MAP_EMPTY_STATE_ALLOWED,
+				DO_NOT_USE_ANIMATIONS,
+				USE_KALMAN_FILTER_FOR_COMPASS,
+				USE_MAGNETIC_FIELD_SENSOR_COMPASS,
+				USE_TRACKBALL_FOR_MOVEMENTS,
+				SPEED_SYSTEM,
+				ANGULAR_UNITS,
+				METRIC_SYSTEM,
+				DRIVING_REGION,
+				DRIVING_REGION_AUTOMATIC
+		};
 	}
 
 	public enum DayNightMode {

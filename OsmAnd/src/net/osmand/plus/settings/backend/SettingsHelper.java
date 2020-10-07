@@ -906,18 +906,6 @@ public class SettingsHelper {
 		}
 	}
 
-	String[]
-			appModeBeanPrefsIds = new String[] {
-			ICON_COLOR.getId(),
-			ICON_RES_NAME.getId(),
-			PARENT_APP_MODE.getId(),
-			ROUTING_PROFILE.getId(),
-			ROUTE_SERVICE.getId(),
-			USER_PROFILE_NAME.getId(),
-			LOCATION_ICON.getId(),
-			NAVIGATION_ICON.getId(),
-			APP_MODE_ORDER.getId()
-	};
 
 	public static class ProfileSettingsItem extends OsmandSettingsItem {
 
@@ -947,7 +935,7 @@ public class SettingsHelper {
 		@Override
 		protected void init() {
 			super.init();
-			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
+			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().getAppModeBeanPrefsIds()));
 		}
 
 		@NonNull

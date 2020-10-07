@@ -1,6 +1,8 @@
 package net.osmand.plus.settings.backend;
 
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.api.SettingsAPI;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,16 +29,27 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	// Methods to possibly override
-	protected abstract T getValue(Object prefs, T defaultValue);
+	public abstract T getValue(Object prefs, T defaultValue);
 
 	protected abstract boolean setValue(Object prefs, T val);
 
 	public abstract T parseString(String s);
 
 	protected String toString(T o) {
-		return o == null ?  null : o.toString();
+		return o == null ? null : o.toString();
 	}
 
+	protected SettingsAPI getSettingsAPI() {
+		return osmandSettings.getSettingsAPI();
+	}
+
+	protected ApplicationMode getApplicationMode() {
+		return osmandSettings.getApplicationMode();
+	}
+
+	protected OsmandApplication getContext() {
+		return osmandSettings.getContext();
+	}
 
 	// common methods
 

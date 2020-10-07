@@ -2,19 +2,17 @@ package net.osmand.plus.settings.backend;
 
 public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E> {
 
-	private OsmandSettings osmandSettings;
 	private final E[] values;
 
 	EnumStringPreference(OsmandSettings osmandSettings, String id, E defaultValue, E[] values) {
-		super(id, defaultValue);
-		this.osmandSettings = osmandSettings;
+		super(osmandSettings, id, defaultValue);
 		this.values = values;
 	}
 
 	@Override
-	protected E getValue(Object prefs, E defaultValue) {
+	public E getValue(Object prefs, E defaultValue) {
 		try {
-			String name = osmandSettings.settingsAPI.getString(prefs, getId(), defaultValue.name());
+			String name = getSettingsAPI().getString(prefs, getId(), defaultValue.name());
 			E value = parseString(name);
 			return value != null ? value : defaultValue;
 		} catch (ClassCastException ex) {
@@ -24,8 +22,8 @@ public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E>
 	}
 
 	@Override
-	protected boolean setValue(Object prefs, E val) {
-		return osmandSettings.settingsAPI.edit(prefs).putString(getId(), val.name()).commit();
+	public boolean setValue(Object prefs, E val) {
+		return getSettingsAPI().edit(prefs).putString(getId(), val.name()).commit();
 	}
 
 	@Override
@@ -41,5 +39,9 @@ public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E>
 			}
 		}
 		return null;
+	}
+
+	public E[] getValues() {
+		return values;
 	}
 }
