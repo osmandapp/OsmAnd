@@ -202,7 +202,7 @@
     <string name="shared_string_continue">Продолжить</string>
     <string name="shared_string_pause">Пауза</string>
     <string name="shared_string_trip">Поездка</string>
-    <string name="shared_string_recorded">Записано</string>
+    <string name="shared_string_recorded">Записано в трек</string>
     <string name="shared_string_record">Запись</string>
     <string name="gpx_logging_no_data">Нет данных</string>
     <string name="save_track_min_speed">Минимальная скорость для записи</string>
@@ -726,14 +726,14 @@
     <string name="sd_mounted_ro">Карта памяти доступна только для чтения. 
 \nТеперь можно только просматривать предварительно загруженную карту, а не загружать новые области.</string>
     <string name="unzipping_file">Файл распаковывается…</string>
-    <string name="route_tr">Направо ⇒</string>
-    <string name="route_tshr">Резко направо ⇘</string>
-    <string name="route_tslr">Плавно направо ⇗</string>
-    <string name="route_tl">Налево ⇐</string>
-    <string name="route_tshl">Резко налево ⇙</string>
-    <string name="route_tsll">Плавно налево ⇖</string>
-    <string name="route_tu">Выполните разворот ⇓</string>
-    <string name="route_head">Двигайтесь прямо ⇑</string>
+    <string name="route_tr">Направо</string>
+    <string name="route_tshr">Резко направо</string>
+    <string name="route_tslr">Плавно направо</string>
+    <string name="route_tl">Налево</string>
+    <string name="route_tshl">Резко налево</string>
+    <string name="route_tsll">Плавно налево</string>
+    <string name="route_tu">Выполните разворот</string>
+    <string name="route_head">Двигайтесь прямо</string>
     <string name="first_time_continue">Продолжить</string>
     <string name="first_time_download">Загрузить детальные карты регионов</string>
     <string name="search_poi_location">Поиск сигнала…</string>
@@ -1024,8 +1024,8 @@
     <string name="rendering_attr_hmRendered_description">Показывать больше деталей на карте.</string>
     <string name="rendering_attr_hmRendered_name">Больше деталей</string>
     <string name="route_roundabout">Круговое движение, %1$d съезд</string>
-    <string name="route_kl">Держитесь левее ⇖</string>
-    <string name="route_kr">Держитесь правее ⇗</string>
+    <string name="route_kl">Держитесь левее</string>
+    <string name="route_kr">Держитесь правее</string>
     <string name="asap">Скорее</string>
     <string name="gpxup_public">Общедоступный</string>
     <string name="gpxup_identifiable">Идентифицируемый</string>
@@ -1179,7 +1179,7 @@
     <string name="context_menu_item_last_intermediate_point">Последний промежуточный пункт</string>
     <string name="context_menu_item_first_intermediate_point">Сделать начальной остановкой</string>
     <string name="add_as_last_destination_point">Сделать последней остановкой</string>
-    <string name="add_as_first_destination_point">Первый промежуточный пункт</string>
+    <string name="add_as_first_destination_point">Сделать начальной остановкой</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Пункт назначения уже задан</string>
     <string name="target_point">Пункт %1$s</string>
@@ -1539,7 +1539,7 @@
     <string name="rendering_attr_subwayMode_name">Линии метро</string>
     <string name="continue_navigation">Продолжить навигацию</string>
     <string name="pause_navigation">Приостановить навигацию</string>
-    <string name="rendering_attr_alpineHiking_description">Визуализация маршрута по шкале SAC.</string>
+    <string name="rendering_attr_alpineHiking_description">Отрисовка дорог cогласно шкале SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Отрисовка дорог согласно трассам OSMC.</string>
     <string name="arrival_distance_factor_early">Раннее</string>
     <string name="arrival_distance_factor_normally">По умолчанию</string>
@@ -3790,7 +3790,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Изменение масштаба карты кнопками громкости.</string>
     <string name="use_volume_buttons_as_zoom">Масштабирование кнопками громкости</string>
     <string name="lenght_limit_description">Укажите длину автомобиля, для длинных транспортных средств могут применяться ограничения на маршруте.</string>
-    <string name="quick_action_remove_next_destination">Удалить следующую</string>
+    <string name="quick_action_remove_next_destination">Удалить ближайший пункт</string>
     <string name="please_provide_point_name_error">Задайте название точки</string>
     <string name="quick_action_remove_next_destination_descr">Следующая точка маршрута будет удалена. Если это конечный пункт, навигация завершится.</string>
     <string name="plugin_wikipedia_description">Информация о достопримечательностях из Википедии. Ваш карманный офлайн-путеводитель — просто включите плагин Википедии и читайте об объектах вокруг вас.</string>
