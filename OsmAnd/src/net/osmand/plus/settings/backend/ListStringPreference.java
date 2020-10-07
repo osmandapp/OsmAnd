@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.backend;
 
-import net.osmand.plus.ApplicationMode;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

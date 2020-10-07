@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.backend;
 
 import net.osmand.StateChangedListener;
-import net.osmand.plus.ApplicationMode;
 
 import org.json.JSONException;
 import org.json.JSONObject;

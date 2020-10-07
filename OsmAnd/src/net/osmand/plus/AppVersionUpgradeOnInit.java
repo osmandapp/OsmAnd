@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.EnumStringPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -18,6 +19,7 @@ import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -133,7 +135,7 @@ class AppVersionUpgradeOnInit {
 					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_7_01).commit();
 				}
 				if (prevAppVersion < VERSION_3_8_00) {
-					app.getSettings().migrateQuickActionStates();
+					migrateQuickActionStates();
 					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_8_00).commit();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
@@ -248,6 +250,21 @@ class AppVersionUpgradeOnInit {
 					for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 						migrateEnumPref(enumPref, (SharedPreferences) settings.getProfilePreferences(mode));
 					}
+				}
+			}
+		}
+	}
+
+	public void migrateQuickActionStates() {
+		String quickActionsJson = settings.getSettingsAPI().getString(settings.getGlobalPreferences(), "quick_action_new", "");
+		if (!Algorithms.isEmpty(quickActionsJson)) {
+			Gson gson = new GsonBuilder().create();
+			Type type = new TypeToken<HashMap<String, Boolean>>() {
+			}.getType();
+			HashMap<String, Boolean> quickActions = gson.fromJson(quickActionsJson, type);
+			if (!Algorithms.isEmpty(quickActions)) {
+				for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+					settings.setQuickActions(quickActions, mode);
 				}
 			}
 		}

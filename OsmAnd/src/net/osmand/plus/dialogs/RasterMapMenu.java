@@ -12,7 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarMode;
+import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
@@ -182,8 +182,8 @@ public class RasterMapMenu {
 
 	@NonNull
 	public static Boolean isSeekbarVisible(OsmandApplication app, RasterMapType type) {
-		final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
-				type == RasterMapType.OVERLAY ? OsmandSettings.LayerTransparencySeekbarMode.OVERLAY : OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
+		final LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
+				type == RasterMapType.OVERLAY ? LayerTransparencySeekbarMode.OVERLAY : LayerTransparencySeekbarMode.UNDERLAY;
 		LayerTransparencySeekbarMode seekbarMode = app.getSettings().LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		return seekbarMode == LayerTransparencySeekbarMode.UNDEFINED || seekbarMode == currentMapTypeSeekbarMode;
 	}

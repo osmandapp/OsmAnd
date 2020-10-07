@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.backend;
 
-import net.osmand.plus.ApplicationMode;
-
 class BooleanAccessibilityPreference extends BooleanPreference {
 
 	BooleanAccessibilityPreference(OsmandSettings osmandSettings, String id, boolean defaultValue) {

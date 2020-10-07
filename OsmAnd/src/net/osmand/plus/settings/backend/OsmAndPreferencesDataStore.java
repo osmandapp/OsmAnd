@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.backend;
 
-import net.osmand.plus.ApplicationMode;
-
 import java.util.Set;
 
 import androidx.annotation.NonNull;

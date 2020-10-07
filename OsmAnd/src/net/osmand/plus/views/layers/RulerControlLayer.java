@@ -29,10 +29,9 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.AngularConstants;
-import net.osmand.plus.settings.backend.OsmandSettings.RulerMode;
+import net.osmand.plus.helpers.enums.AngularConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -72,7 +71,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private QuadPoint cacheCenter;
 	private float cacheMapDensity;
 	private OsmandPreference<Float> mapDensity;
-	private OsmandSettings.MetricsConstants cacheMetricSystem;
+	private MetricsConstants cacheMetricSystem;
 	private int cacheIntZoom;
 	private LatLon cacheCenterLatLon;
 	private long cacheMultiTouchEndTime;
@@ -452,7 +451,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 				updateCenter(tb, center);
 			}
 
-			OsmandSettings.MetricsConstants currentMetricSystem = app.getSettings().METRIC_SYSTEM.get();
+			MetricsConstants currentMetricSystem = app.getSettings().METRIC_SYSTEM.get();
 			boolean updateCache = tb.getZoom() != cacheIntZoom
 					|| !tb.getCenterLatLon().equals(cacheCenterLatLon) || mapDensity.get() != cacheMapDensity
 					|| cacheMetricSystem != currentMetricSystem;

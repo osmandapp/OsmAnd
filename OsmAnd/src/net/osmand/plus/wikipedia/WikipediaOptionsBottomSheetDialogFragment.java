@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.WikiArticleShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;

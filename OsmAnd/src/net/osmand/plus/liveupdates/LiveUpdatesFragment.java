@@ -314,7 +314,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 
 		public void add(LocalIndexInfo info) {
 			CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(
-					info.getFileName(), getSettings());
+					info.getFileName(), app.getSettings());
 			if (preference.get()) {
 				dataShouldUpdate.add(info);
 			} else {

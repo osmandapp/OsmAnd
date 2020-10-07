@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.backend;
 
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SettingsAPI;
 

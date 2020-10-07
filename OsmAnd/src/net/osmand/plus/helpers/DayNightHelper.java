@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.helpers;
 
 
 import java.util.Date;
@@ -8,9 +8,9 @@ import java.util.TimeZone;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings.DayNightMode;
 import net.osmand.util.SunriseSunset;
 
 import org.apache.commons.logging.Log;

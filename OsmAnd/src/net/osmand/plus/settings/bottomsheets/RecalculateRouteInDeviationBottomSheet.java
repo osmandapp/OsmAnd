@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -76,8 +77,8 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 
-		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			entryValues = new Float[]{10.f, 20.0f, 30.0f, 50.0f, 100.0f, 200.0f, 500.0f, 1000.0f, 1500.0f};
 		} else {
 			entryValues = new Float[]{9.1f, 18.3f, 30.5f, 45.7f, 91.5f, 183.0f, 482.0f, 965.0f, 1609.0f};

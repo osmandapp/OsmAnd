@@ -84,7 +84,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.TracksSortByMode;
+import net.osmand.plus.helpers.enums.TracksSortByMode;
 
 import java.io.File;
 import java.text.DateFormat;

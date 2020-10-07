@@ -33,6 +33,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -44,9 +45,6 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.ListStringPreference;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -311,7 +309,7 @@ public class ConfigureMapMenu {
 			DateFormat dateFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
 			String sunriseTime = dateFormat.format(sunriseSunset.getSunrise());
 			String sunsetTime = dateFormat.format(sunriseSunset.getSunset());
-			OsmandSettings.DayNightMode dayNightMode = activity.getMyApplication().getSettings().DAYNIGHT_MODE.get();
+			DayNightMode dayNightMode = activity.getMyApplication().getSettings().DAYNIGHT_MODE.get();
 			if (dayNightMode.isDay() || dayNightMode.isNight()) {
 				if (sunriseSunset.isDaytime()) {
 					description = String.format(app.getString(R.string.sunset_at), sunsetTime);
@@ -338,9 +336,9 @@ public class ConfigureMapMenu {
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						bld.setTitle(R.string.daynight);
-						final String[] items = new String[OsmandSettings.DayNightMode.values().length];
+						final String[] items = new String[DayNightMode.values().length];
 						for (int i = 0; i < items.length; i++) {
-							items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(app);
+							items[i] = DayNightMode.values()[i].toHumanString(app);
 						}
 						int i = view.getSettings().DAYNIGHT_MODE.get().ordinal();
 						bld.setNegativeButton(R.string.shared_string_dismiss, null);
@@ -349,7 +347,7 @@ public class ConfigureMapMenu {
 									@Override
 									public void onClick(View v) {
 										int which = (int) v.getTag();
-										view.getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.values()[which]);
+										view.getSettings().DAYNIGHT_MODE.set(DayNightMode.values()[which]);
 										refreshMapComplete(activity);
 										activity.getDashboard().refreshContent(true);
 										// adapter.getItem(pos).setDescription(s, getDayNightDescr(activity));

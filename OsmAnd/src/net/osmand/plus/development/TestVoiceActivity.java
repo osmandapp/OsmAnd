@@ -151,7 +151,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			v += "\n \u25CF BT SCO: The current app profile is not set to use 'Phone call audio'.";
 		}
 
-		//OsmandSettings.OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[stream];
+		//OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[stream];
 		//if(pref != null) {
 		//	v += "\n \u25CF Voice prompt delay for selected output: " + pref.get() + "\u00A0ms";
 		//}

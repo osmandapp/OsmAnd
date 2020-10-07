@@ -34,11 +34,12 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.AutoZoomMap;
+import net.osmand.plus.helpers.enums.AutoZoomMap;
 import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.SpeedConstants;
+import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -49,10 +50,6 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.AutoZoomMap;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.SpeedConstants;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -176,7 +173,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		//array size must be equal!
 		Float[] speedLimitsKmhPos = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
 		Float[] speedLimitsMphPos = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
-		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+		if (settings.METRIC_SYSTEM.get() == MetricsConstants.KILOMETERS_AND_METERS) {
 			String[] speedNames = new String[speedLimitsKmh.length];
 			String[] speedNamesPos = new String[speedLimitsKmhPos.length];
 			for (int i = 0; i < speedLimitsKmh.length; i++) {

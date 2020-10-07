@@ -58,8 +58,6 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
