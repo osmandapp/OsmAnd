@@ -89,7 +89,8 @@ public class ImportHelper {
 		ROUTING(ROUTING_FILE_EXT),
 		RENDERING(RENDERER_INDEX_EXT),
 		GPX(GPX_FILE_EXT),
-		KML(KML_SUFFIX);
+		KML(KML_SUFFIX),
+		KMZ(KMZ_SUFFIX);
 
 		ImportType(String extension) {
 			this.extension = extension;
@@ -237,7 +238,7 @@ public class ImportHelper {
 		executeImportTask(new FavoritesImportTask(activity, gpxFile, fileName, forceImportFavourites));
 	}
 
-	private void handleKmzImport(Uri kmzFile, String name, boolean save, boolean useImportDir) {
+	protected void handleKmzImport(Uri kmzFile, String name, boolean save, boolean useImportDir) {
 		executeImportTask(new KmzImportTask(this, activity, kmzFile, name, save, useImportDir));
 	}
 
@@ -263,8 +264,8 @@ public class ImportHelper {
 		}
 	}
 
-	private void handleOsmAndSettingsImport(Uri uri, String name, String latestChanges, int version,
-											CallbackWithObject<List<SettingsItem>> callback) {
+	protected void handleOsmAndSettingsImport(Uri uri, String name, String latestChanges, int version,
+											  CallbackWithObject<List<SettingsItem>> callback) {
 		executeImportTask(new SettingsImportTask(activity, uri, name, latestChanges, version, callback));
 	}
 
@@ -274,6 +275,10 @@ public class ImportHelper {
 
 	private void handleUriImport(Uri uri, boolean save, boolean useImportDir) {
 		executeImportTask(new UriImportTask(this, activity, uri, save, useImportDir));
+	}
+
+	protected void handleZipImport(Uri uri, boolean save, boolean useImportDir) {
+		executeImportTask(new ZipImportTask(this, activity, uri, save, useImportDir));
 	}
 
 	@Nullable

@@ -110,12 +110,12 @@ class UriImportTask extends BaseImportAsyncTask<Void, Void, String> {
 				}
 			} else if (OBF_FILE_SIGNATURE == fileSignature) {
 				String name = createUniqueFileName(app, "map", MAPS_PATH, BINARY_MAP_INDEX_EXT);
-				importHelper.handleObfImport(tempUri, name);
+				importHelper.handleObfImport(tempUri, name + BINARY_MAP_INDEX_EXT);
 			} else if (ZIP_FILE_SIGNATURE == fileSignature) {
-//				importHelper.handleKmzImport(tempUri, null, save, useImportDir);
+				importHelper.handleZipImport(tempUri, save, useImportDir);
 			} else if (SQLITE_FILE_SIGNATURE == fileSignature) {
 				String name = createUniqueFileName(app, "online_map", TILES_INDEX_DIR, SQLITE_EXT);
-				importHelper.handleSqliteTileImport(tempUri, name);
+				importHelper.handleSqliteTileImport(tempUri, name + SQLITE_EXT);
 			}
 		} else {
 			app.showShortToastMessage(app.getString(R.string.file_import_error, tempFileName, error));
@@ -124,13 +124,13 @@ class UriImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
 	private String getTempFileName() {
 		if (XML_FILE_SIGNATURE == fileSignature) {
-			return createUniqueFileName(app, "xml_file", TEMP_DIR, ROUTING_FILE_EXT);
+			return createUniqueFileName(app, "xml_file", TEMP_DIR, ROUTING_FILE_EXT) + ROUTING_FILE_EXT;
 		} else if (OBF_FILE_SIGNATURE == fileSignature) {
-			return createUniqueFileName(app, "map", TEMP_DIR, BINARY_MAP_INDEX_EXT);
+			return createUniqueFileName(app, "map", TEMP_DIR, BINARY_MAP_INDEX_EXT) + BINARY_MAP_INDEX_EXT;
 		} else if (ZIP_FILE_SIGNATURE == fileSignature) {
-			return createUniqueFileName(app, "zip_file", TEMP_DIR, ZIP_EXT);
+			return createUniqueFileName(app, "zip_file", TEMP_DIR, ZIP_EXT) + ZIP_EXT;
 		} else if (SQLITE_FILE_SIGNATURE == fileSignature) {
-			return createUniqueFileName(app, "online_map", TEMP_DIR, SQLITE_EXT);
+			return createUniqueFileName(app, "online_map", TEMP_DIR, SQLITE_EXT) + SQLITE_EXT;
 		}
 		return "";
 	}
