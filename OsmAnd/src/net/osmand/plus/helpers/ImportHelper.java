@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -29,6 +30,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.map.ITileSource;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.FavouritesDbHelper;
@@ -41,7 +43,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.settings.backend.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.SettingsHelper.PluginSettingsItem;
@@ -49,6 +55,7 @@ import net.osmand.plus.settings.backend.SettingsHelper.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.SettingsCollectListener;
 import net.osmand.plus.settings.backend.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
+import net.osmand.plus.settings.fragments.ImportCompleteFragment;
 import net.osmand.plus.settings.fragments.ImportSettingsFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.RoutingConfiguration;
@@ -69,8 +76,10 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 import static android.app.Activity.RESULT_OK;
@@ -86,6 +95,7 @@ import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.settings.backend.SettingsHelper.*;
 
 /**
  * @author Koen Rabaey
@@ -690,17 +700,29 @@ public class ImportHelper {
 	}
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, CallbackWithObject<List<SettingsItem>> callback) {
-		if (extras != null && extras.containsKey(SettingsHelper.SETTINGS_VERSION_KEY) && extras.containsKey(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY)) {
-			int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
-			String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
-			handleOsmAndSettingsImport(intentUri, fileName, latestChanges, version, callback);
+		if (extras != null && extras.containsKey(SETTINGS_VERSION_KEY)
+				&& extras.containsKey(SETTINGS_LATEST_CHANGES_KEY)) {
+			int version = extras.getInt(SETTINGS_VERSION_KEY, -1);
+			String latestChanges = extras.getString(SETTINGS_LATEST_CHANGES_KEY);
+			boolean replace = extras.getBoolean(REPLACE_KEY);
+			ArrayList<String> settingsTypeKeys = extras.getStringArrayList(SETTINGS_TYPE_LIST_KEY);
+			List<ExportSettingsType> settingsTypes = new ArrayList<>();
+			if (settingsTypeKeys != null) {
+				for (String key : settingsTypeKeys) {
+					settingsTypes.add(ExportSettingsType.valueOf(key));
+				}
+			}
+			handleOsmAndSettingsImport(intentUri, fileName, settingsTypes, replace, latestChanges, version, callback);
 		} else {
-			handleOsmAndSettingsImport(intentUri, fileName, null, -1, callback);
+			handleOsmAndSettingsImport(intentUri, fileName, null, false, null, -1, callback);
 		}
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void handleOsmAndSettingsImport(final Uri uri, final String name, final String latestChanges, final int version,
+	private void handleOsmAndSettingsImport(final Uri uri, final String name,
+	                                        final List<ExportSettingsType> settingsTypes,
+	                                        final boolean replace,
+	                                        final String latestChanges, final int version,
 	                                        final CallbackWithObject<List<SettingsItem>> callback) {
 		final AsyncTask<Void, Void, String> settingsImportTask = new AsyncTask<Void, Void, String>() {
 
@@ -715,20 +737,18 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-				if (!tempDir.exists()) {
-					tempDir.mkdirs();
-				}
+				File tempDir = FileUtils.getTempDir(app);
 				File dest = new File(tempDir, name);
 				return copyFile(app, dest, uri, true);
 			}
 
 			@Override
 			protected void onPostExecute(String error) {
-				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+				File tempDir = FileUtils.getTempDir(app);
 				final File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
-					app.getSettingsHelper().collectSettings(file, latestChanges, version, new SettingsCollectListener() {
+					final SettingsHelper settingsHelper = app.getSettingsHelper();
+					settingsHelper.collectSettings(file, latestChanges, version, new SettingsCollectListener() {
 						@Override
 						public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 							if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
@@ -748,8 +768,14 @@ public class ImportHelper {
 									handlePluginImport(pluginItem, file);
 								}
 								if (!pluginIndependentItems.isEmpty()) {
-									FragmentManager fragmentManager = activity.getSupportFragmentManager();
-									ImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
+									if (settingsTypes == null) {
+										FragmentManager fragmentManager = activity.getSupportFragmentManager();
+										ImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
+									} else {
+										Map<ExportSettingsType, List<?>> allSettingsList = getSettingsToOperate(pluginIndependentItems, false);
+										List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsList, settingsTypes);
+										settingsHelper.checkDuplicates(file, settingsList, settingsList, getDuplicatesListener(file, replace));
+									}
 								}
 							} else if (empty) {
 								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
@@ -765,6 +791,120 @@ public class ImportHelper {
 			}
 		};
 		executeImportTask(settingsImportTask);
+	}
+
+	private CheckDuplicatesListener getDuplicatesListener(final File file, final boolean replace) {
+		return new CheckDuplicatesListener() {
+			@Override
+			public void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items) {
+				if (replace) {
+					for (SettingsItem item : items) {
+						item.setShouldReplace(true);
+					}
+				}
+				app.getSettingsHelper().importSettings(file, items, "", 1, getImportListener(file));
+			}
+		};
+	}
+
+	private SettingsImportListener getImportListener(final File file) {
+		return new SettingsImportListener() {
+			@Override
+			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null && succeed) {
+					FragmentManager fm = mapActivity.getSupportFragmentManager();
+					app.getRendererRegistry().updateExternalRenderers();
+					AppInitializer.loadRoutingFiles(app, null);
+					if (file != null) {
+						ImportCompleteFragment.showInstance(fm, items, file.getName());
+					}
+				}
+			}
+		};
+	}
+
+	public static Map<ExportSettingsType, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean importComplete) {
+		Map<ExportSettingsType, List<?>> settingsToOperate = new HashMap<>();
+		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
+		List<QuickAction> quickActions = new ArrayList<>();
+		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
+		List<ITileSource> tileSourceTemplates = new ArrayList<>();
+		List<File> routingFilesList = new ArrayList<>();
+		List<File> renderFilesList = new ArrayList<>();
+		List<AvoidSpecificRoads.AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		for (SettingsItem item : settingsItems) {
+			switch (item.getType()) {
+				case PROFILE:
+					profiles.add(((ProfileSettingsItem) item).getModeBean());
+					break;
+				case FILE:
+					FileSettingsItem fileItem = (FileSettingsItem) item;
+					if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
+						renderFilesList.add(fileItem.getFile());
+					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
+						routingFilesList.add(fileItem.getFile());
+					}
+					break;
+				case QUICK_ACTIONS:
+					QuickActionsSettingsItem quickActionsItem = (QuickActionsSettingsItem) item;
+					if (importComplete) {
+						quickActions.addAll(quickActionsItem.getAppliedItems());
+					} else {
+						quickActions.addAll(quickActionsItem.getItems());
+					}
+					break;
+				case POI_UI_FILTERS:
+					PoiUiFiltersSettingsItem poiUiFilterItem = (PoiUiFiltersSettingsItem) item;
+					if (importComplete) {
+						poiUIFilters.addAll(poiUiFilterItem.getAppliedItems());
+					} else {
+						poiUIFilters.addAll(poiUiFilterItem.getItems());
+					}
+					break;
+				case MAP_SOURCES:
+					MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) item;
+					if (importComplete) {
+						tileSourceTemplates.addAll(mapSourcesItem.getAppliedItems());
+					} else {
+						tileSourceTemplates.addAll(mapSourcesItem.getItems());
+					}
+					break;
+				case AVOID_ROADS:
+					AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) item;
+					if (importComplete) {
+						avoidRoads.addAll(avoidRoadsItem.getAppliedItems());
+					} else {
+						avoidRoads.addAll(avoidRoadsItem.getItems());
+					}
+					break;
+				default:
+					break;
+			}
+		}
+
+		if (!profiles.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.PROFILE, profiles);
+		}
+		if (!quickActions.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.QUICK_ACTIONS, quickActions);
+		}
+		if (!poiUIFilters.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.POI_TYPES, poiUIFilters);
+		}
+		if (!tileSourceTemplates.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.MAP_SOURCES, tileSourceTemplates);
+		}
+		if (!renderFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.CUSTOM_RENDER_STYLE, renderFilesList);
+		}
+		if (!routingFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.CUSTOM_ROUTING, routingFilesList);
+		}
+		if (!avoidRoads.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.AVOID_ROADS, avoidRoads);
+		}
+		return settingsToOperate;
 	}
 
 	private void handlePluginImport(final PluginSettingsItem pluginItem, final File file) {

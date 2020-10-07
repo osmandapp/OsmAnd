@@ -267,4 +267,8 @@
     <string name="last_response_duration">Son cevap: %1$s önce</string>
     <string name="duration_ago">%1$s önce</string>
     <string name="shared_string_error_short">HATA</string>
+    <string name="shared_string_export">Dışa aktar</string>
+    <string name="logcat_buffer">Logcat tamponu</string>
+    <string name="logcat_buffer_descr">Uygulamanın ayrıntılı günlük kayıtlarına göz atın ve paylaşın</string>
+    <string name="send_report">Rapor gönder</string>
 </resources>

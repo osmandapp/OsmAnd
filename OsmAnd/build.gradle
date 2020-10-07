@@ -46,6 +46,8 @@ android {
 			storePassword System.getenv("OSMAND_HW_APK_PASSWORD")
 			keyAlias "osmand"
 			keyPassword System.getenv("OSMAND_HW_APK_PASSWORD")
+			v1SigningEnabled true
+			v2SigningEnabled true
 		}
 	}
 
@@ -115,6 +117,9 @@ android {
 			manifest.srcFile "AndroidManifest-debug.xml"
 		}
 		full {
+			java.srcDirs = ["src-google"]
+		}
+		fulldev {
 			java.srcDirs = ["src-google"]
 		}
 		free {
@@ -289,14 +294,6 @@ task downloadWorldMiniBasemap {
 	}
 }
 
-task setupHuaweiConfig {
-	doLast {
-		if (System.getenv("HUAWEI_SDK_JSON")) {
-			new File("agconnect-services.json").text = System.getenv("HUAWEI_SDK_JSON")
-		}
-	}
-}
-
 task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -423,11 +420,6 @@ task collectExternalResources {
 			copyWidgetIconsXhdpi,
 			copyPoiCategories,
 			downloadWorldMiniBasemap
-
-	String tskReqStr = gradle.startParameter.taskNames.toString()
-	if (tskReqStr.contains("huawei")) {
-		dependsOn setupHuaweiConfig
-	}
 }
 
 // Legacy core build

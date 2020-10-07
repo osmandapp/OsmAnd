@@ -540,14 +540,24 @@ class TelegramSettings(private val app: TelegramApplication) {
 				if (initTime && initSending) {
 					initializing = true
 				} else {
+					var waitingTimeError = false
 					val maxWaitingTime = WAITING_TDLIB_TIME * MAX_MESSAGES_IN_TDLIB_PER_CHAT * max(1, chatsCount)
-					val textSharingError = !shareInfo.lastTextMessageHandled && currentTime - shareInfo.lastSendTextMessageTime > maxWaitingTime
-					val mapSharingError = !shareInfo.lastMapMessageHandled && currentTime - shareInfo.lastSendMapMessageTime > maxWaitingTime
-					if (shareInfo.hasSharingError
-						|| (shareTypeValue == SHARE_TYPE_MAP_AND_TEXT && (textSharingError || mapSharingError))
-						|| textSharingError && (shareTypeValue == SHARE_TYPE_TEXT)
-						|| mapSharingError && (shareTypeValue == SHARE_TYPE_MAP)
-					) {
+					val textSharingWaitingTime = currentTime - shareInfo.lastSendTextMessageTime
+					val mapSharingWaitingTime = currentTime - shareInfo.lastSendMapMessageTime
+					val textSharingError = !shareInfo.lastTextMessageHandled && textSharingWaitingTime > maxWaitingTime
+					val mapSharingError = !shareInfo.lastMapMessageHandled && mapSharingWaitingTime > maxWaitingTime
+					if ((shareTypeValue == SHARE_TYPE_MAP_AND_TEXT && (textSharingError || mapSharingError))
+							|| textSharingError && (shareTypeValue == SHARE_TYPE_TEXT)
+							|| mapSharingError && (shareTypeValue == SHARE_TYPE_MAP)) {
+						waitingTimeError = true
+						log.debug("Send chats error for share type \"$shareTypeValue\"" +
+								"\nMax waiting time: ${maxWaitingTime}s" +
+								"\nLast text message handled: ${shareInfo.lastTextMessageHandled}" +
+								"\nText sharing waiting time: ${textSharingWaitingTime}s" +
+								"\nLast map message handled: ${shareInfo.lastMapMessageHandled}" +
+								"\nMap sharing waiting time: ${mapSharingWaitingTime}s")
+					}
+					if (shareInfo.hasSharingError || waitingTimeError) {
 						sendChatsErrors = true
 						locationTime = max(shareInfo.lastTextSuccessfulSendTime, shareInfo.lastMapSuccessfulSendTime)
 						chatsIds.add(shareInfo.chatId)

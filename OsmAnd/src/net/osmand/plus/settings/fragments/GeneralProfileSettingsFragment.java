@@ -123,7 +123,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		if (settings.isSystemDefaultThemeUsedForMode(mode)) {
 			iconId = R.drawable.ic_action_android;
 		} else {
-			iconId = settings.isLightContent() ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;
+			iconId = settings.isLightContentForMode(mode) ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;
 		}
 		return getActiveIcon(iconId);
 	}

@@ -267,4 +267,8 @@
     <string name="last_update_from_telegram_duration">Последнее обновление от Telegram: %1$s назад</string>
     <string name="last_response_date">Последний ответ: %1$s</string>
     <string name="last_update_from_telegram_date">Последнее обновление от Telegram: %1$s</string>
+    <string name="shared_string_export">Экспорт</string>
+    <string name="logcat_buffer">Буфер Logcat</string>
+    <string name="logcat_buffer_descr">Проверьте и поделитесь подробными журналами приложения</string>
+    <string name="send_report">Отправить отчёт</string>
 </resources>
