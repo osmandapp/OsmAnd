@@ -28,7 +28,7 @@
 		android:layout_marginRight="@dimen/content_padding"
 		android:layout_weight="1"
 		android:ellipsize="end"
-		android:maxLines="1"
+		android:maxLines="2"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
 		tools:text="Some Title"/>
 
