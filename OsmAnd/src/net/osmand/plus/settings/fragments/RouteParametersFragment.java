@@ -168,16 +168,14 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private void setupNativePublicTransport() {
-		SwitchPreferenceEx setupNativePublicTransport = createSwitchPreferenceEx(settings.PT_SAFE_MODE.getId(),
-				R.string.use_native_pt, R.layout.preference_with_descr_dialog_and_switch);
 		if (!Version.isBlackberry(app)) {
+			SwitchPreferenceEx setupNativePublicTransport = createSwitchPreferenceEx(settings.PT_SAFE_MODE.getId(),
+					R.string.use_native_pt, R.layout.preference_with_descr_dialog_and_switch);
 			setupNativePublicTransport.setDescription(getString(R.string.use_native_pt_desc));
 			setupNativePublicTransport.setSummaryOn(R.string.shared_string_enabled);
 			setupNativePublicTransport.setSummaryOff(R.string.shared_string_disabled);
 			setupNativePublicTransport.setIconSpaceReserved(true);
 			getPreferenceScreen().addPreference(setupNativePublicTransport);
-		} else {
-			setupNativePublicTransport.setVisible(false);
 		}
 	}
 
@@ -192,12 +190,14 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private void setupDisableComplexRoutingPref() {
+		boolean enabled = !settings.DISABLE_COMPLEX_ROUTING.get(); // pref ui was inverted
 		SwitchPreferenceEx disableComplexRouting = createSwitchPreferenceEx(settings.DISABLE_COMPLEX_ROUTING.getId(),
 				R.string.use_complex_routing, R.layout.preference_with_descr_dialog_and_switch);
 		disableComplexRouting.setDescription(getString(R.string.disable_complex_routing_descr));
 		disableComplexRouting.setSummaryOn(R.string.shared_string_enabled);
 		disableComplexRouting.setSummaryOff(R.string.shared_string_disabled);
 		disableComplexRouting.setIconSpaceReserved(true);
+		disableComplexRouting.setChecked(enabled);
 		getPreferenceScreen().addPreference(disableComplexRouting);
 	}
 
@@ -330,7 +330,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
 		addDivider(screen);
-		setupDevelopmentcategoryHeader(screen);
+		setupDevelopmentCategoryHeader(screen);
 		if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
 			setupOsmLiveForPublicTransportPref();
 			setupNativePublicTransport();
@@ -367,7 +367,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		screen.addPreference(routingCategory);
 	}
 
-	private void setupDevelopmentcategoryHeader (PreferenceScreen screen) {
+	private void setupDevelopmentCategoryHeader (PreferenceScreen screen) {
 		PreferenceCategory developmentCategory = new PreferenceCategory(requireContext());
 		developmentCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		developmentCategory.setTitle(R.string.development);

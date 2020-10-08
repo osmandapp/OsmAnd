@@ -14,12 +14,11 @@ import android.preference.PreferenceScreen;
 
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
@@ -38,9 +37,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		PreferenceScreen category = getPreferenceScreen();
 		Preference pref;
 
-		if (app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
-			CheckBoxPreference useOpenglRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render, R.string.use_opengl_render_descr);
-			category.addPreference(useOpenglRender);
+		if (Version.isOpenGlAvailable(app)) {
+			category.addPreference(createCheckBoxPreference(settings.USE_OPENGL_RENDER,
+					R.string.use_opengl_render, R.string.use_opengl_render_descr));
 		}
 
 		if (!Version.isBlackberry(app)) {
@@ -113,10 +112,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.show_free_version_banner,
 				R.string.show_free_version_banner_description));
 		
-
-		
-
-
 		pref = new Preference(this);
 		pref.setTitle(R.string.test_voice_prompts);
 		pref.setSummary(R.string.play_commands_of_currently_selected_voice);
