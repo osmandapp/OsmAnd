@@ -179,6 +179,8 @@ public class OsmandSettings {
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings";
 	private static String CUSTOM_SHARED_PREFERENCES_NAME;
 
+	private static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
+	private static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
 
 	/// Settings variables
 	private final OsmandApplication ctx;
@@ -217,6 +219,14 @@ public class OsmandSettings {
 
 	public Map<String, OsmandPreference<?>> getRegisteredPreferences() {
 		return Collections.unmodifiableMap(registeredPreferences);
+	}
+
+	public static boolean isRendererPreference(String key) {
+		return key.startsWith(RENDERER_PREFERENCE_PREFIX);
+	}
+
+	public static boolean isRoutingPreference(String key) {
+		return key.startsWith(ROUTING_PREFERENCE_PREFIX);
 	}
 
 	private static final String SETTING_CUSTOMIZED_ID = "settings_customized";
@@ -958,7 +968,6 @@ public class OsmandSettings {
 
 	public class BooleanPreference extends CommonPreference<Boolean> {
 
-
 		private BooleanPreference(String id, boolean defaultValue) {
 			super(id, defaultValue);
 		}
@@ -976,6 +985,30 @@ public class OsmandSettings {
 		@Override
 		public Boolean parseString(String s) {
 			return Boolean.parseBoolean(s);
+		}
+	}
+
+	public class BooleanStringPreference extends BooleanPreference {
+
+		public BooleanStringPreference(String id, boolean defaultValue) {
+			super(id, defaultValue);
+		}
+
+		@Override
+		protected Boolean getValue(Object prefs, Boolean defaultValue) {
+			Boolean value;
+			try {
+				value = parseString(settingsAPI.getString(prefs, getId(), defaultValue.toString()));
+			} catch (ClassCastException e) {
+				value = settingsAPI.getBoolean(prefs, getId(), defaultValue);
+				setValue(prefs, value);
+			}
+			return value;
+		}
+
+		@Override
+		protected boolean setValue(Object prefs, Boolean val) {
+			return settingsAPI.edit(prefs).putString(getId(), val != null ? val.toString() : null).commit();
 		}
 	}
 
@@ -1975,6 +2008,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN = new BooleanPreference("live_updates_purchase_cancelled_second_dlg_shown", false).makeGlobal();
 	public final OsmandPreference<Boolean> FULL_VERSION_PURCHASED = new BooleanPreference("billing_full_version_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> DEPTH_CONTOURS_PURCHASED = new BooleanPreference("billing_sea_depth_purchased", false).makeGlobal();
+	public final OsmandPreference<Boolean> CONTOUR_LINES_PURCHASED = new BooleanPreference("billing_srtm_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> EMAIL_SUBSCRIBED = new BooleanPreference("email_subscribed", false).makeGlobal();
 
 	public final OsmandPreference<Integer> DISCOUNT_ID = new IntPreference("discount_id", 0).makeGlobal();
@@ -2180,6 +2214,8 @@ public class OsmandSettings {
 			return valueSaved;
 		}
 	}.makeProfile().cache();
+
+	public final OsmandPreference<Boolean> SHOW_START_FINISH_ICONS = new BooleanPreference("show_start_finish_icons", true).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference("gpx_routing_calculate_osmand_route", true).makeGlobal().cache();
 //	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference("gpx_routing_calculate_rtept", true).makeGlobal().cache();
@@ -2473,6 +2509,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_COORDINATES_WIDGET = new BooleanPreference("show_coordinates_widget", false).makeProfile().cache();
 
 	public final CommonPreference<NotesSortByMode> NOTES_SORT_BY_MODE = new EnumStringPreference<>("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values());
+	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>("tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference("animate_my_location", true).makeProfile().cache();
 
@@ -3776,7 +3813,7 @@ public class OsmandSettings {
 
 	public CommonPreference<String> getCustomRenderProperty(String attrName) {
 		if (!customRendersProps.containsKey(attrName)) {
-			customRendersProps.put(attrName, new StringPreference("nrenderer_" + attrName, "").makeProfile());
+			customRendersProps.put(attrName, new StringPreference(RENDERER_PREFERENCE_PREFIX + attrName, "").makeProfile());
 		}
 		return customRendersProps.get(attrName);
 	}
@@ -3790,30 +3827,25 @@ public class OsmandSettings {
 
 	public CommonPreference<Boolean> getCustomRenderBooleanProperty(String attrName) {
 		if (!customBooleanRendersProps.containsKey(attrName)) {
-			customBooleanRendersProps.put(attrName, new BooleanPreference("nrenderer_" + attrName, false).makeProfile());
+			customBooleanRendersProps.put(attrName, new BooleanPreference(RENDERER_PREFERENCE_PREFIX + attrName, false).makeProfile());
 		}
 		return customBooleanRendersProps.get(attrName);
 	}
 
-	Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<String>>();
+	Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<>();
 
 	public CommonPreference<String> getCustomRoutingProperty(String attrName, String defValue) {
 		if (!customRoutingProps.containsKey(attrName)) {
-			customRoutingProps.put(attrName, new StringPreference("prouting_" + attrName, defValue).makeProfile());
+			customRoutingProps.put(attrName, new StringPreference(ROUTING_PREFERENCE_PREFIX + attrName, defValue).makeProfile());
 		}
 		return customRoutingProps.get(attrName);
 	}
 
-	{
-//		CommonPreference<String> pref = getCustomRoutingProperty("appMode");
-//		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
-	}
-
-	Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<Boolean>>();
+	Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<>();
 
 	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(String attrName, boolean defaulfValue) {
 		if (!customBooleanRoutingProps.containsKey(attrName)) {
-			customBooleanRoutingProps.put(attrName, new BooleanPreference("prouting_" + attrName, defaulfValue).makeProfile());
+			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(ROUTING_PREFERENCE_PREFIX + attrName, defaulfValue).makeProfile());
 		}
 		return customBooleanRoutingProps.get(attrName);
 	}
@@ -4071,6 +4103,38 @@ public class OsmandSettings {
 
 		public boolean isByDate() {
 			return this == BY_DATE;
+		}
+	}
+
+	public enum TracksSortByMode {
+		BY_DATE(R.string.sort_last_modified, R.drawable.ic_action_time_start),
+		BY_NAME_ASCENDING(R.string.sort_name_ascending, R.drawable.ic_action_sort_by_name_ascending),
+		BY_NAME_DESCENDING(R.string.sort_name_descending, R.drawable.ic_action_sort_by_name_descending);
+
+		private final int iconId;
+		private final int nameId;
+
+		TracksSortByMode(int nameId, int iconId) {
+			this.nameId = nameId;
+			this.iconId = iconId;
+		}
+
+		public boolean isByName() {
+			return this == BY_NAME_ASCENDING || this == BY_NAME_DESCENDING;
+		}
+
+		public boolean isByDate() {
+			return this == BY_DATE;
+		}
+
+		@StringRes
+		public int getNameId() {
+			return nameId;
+		}
+
+		@DrawableRes
+		public int getIconId() {
+			return iconId;
 		}
 	}
 

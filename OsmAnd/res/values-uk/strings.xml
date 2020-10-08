@@ -42,7 +42,7 @@
 \nБудь яка з цих мап може використовуватись як основна мапа в OsmAnd, або як покриття чи підкладка до іншої основної мапи (наприклад усталена безмережева мапа OsmAnd). Для того, щоб зробити більш помітною будь-яку мапу-підкладку, певні елементи векторної мапи OsmAnd можна легко сховати через меню „Налаштування мапи“ за бажанням, щоб зробити будь-яку підкладку мапи помітнішою.. 
 \n 
 \nКвадрати мап можна отримувати безпосередньо з мережевих джерел або підготувати їх для безмережевого використання (та вручну скопіювати в теку даних OsmAnd) у вигляді бази даних SQLite, яку можна створити за допомогою різноманітних сторонніх знаряддь підготовки мап.</string>
-    <string name="osmand_background_plugin_description">Показує налаштування для увімкнення фонового трекінгу та навігації шляхом періодичного пробудження GPS-передавача (з вимкненим екраном).</string>
+    <string name="osmand_background_plugin_description">Показує налаштування для увімкнення відстеження у тлі та навігації шляхом періодичного пробудження GPS-передавача (з вимкненим екраном).</string>
     <string name="osmand_accessibility_description">Робить спеціальні можливості пристрою доступними безпосередньо в OsmAnd. Це полегшує, наприклад, налаштування частоти мовлення для голосу синтезу мовлення, настроювання D-Pad навігації, за допомогою трекбола для контролю масштабу або зворотного зв\'язку синтезу мовлення, наприклад, щоб автоматично оголосити свою позицію.</string>
     <string name="osmand_development_plugin_description">Налаштування функцій розробки та налагодження, як-от навігаційне моделювання, дієвість відмальовування чи голосові підказки. Призначений для розробників, не потрібний для звичайного використання застосунку.</string>
     <string name="plugins_screen">Втулки</string>
@@ -158,7 +158,7 @@
     <string name="fav_export_confirmation">Файл з раніше імпортованими Закладками вже існує. Замінити його?</string>
     <string name="profile_settings">Налаштування профілю</string>
     <string name="settings_preset">Усталений профіль</string>
-    <string name="settings_preset_descr">Вид мапи й налаштування навігації зберігаються для кожного окремого профілю. Встановіть ваш типовий профіль.</string>
+    <string name="settings_preset_descr">Вид мапи й налаштування навігації зберігаються для кожного окремого профілю. Встановіть ваш усталений профіль.</string>
     <string name="routing_settings">Навігація</string>
     <string name="routing_settings_descr">Визначити налаштування навігації.</string>
     <string name="global_settings">Загальні налаштування</string>
@@ -169,8 +169,8 @@
     <string name="user_name">Ім\'я користувача OSM</string>
     <string name="open_street_map_login_descr">Потрібно для входу на openstreetmap.org.</string>
     <string name="user_password">Пароль</string>
-    <string name="osmand_service">Фоновий режим</string>
-    <string name="osmand_service_descr">OsmAnd працює у фоновому режимі з вимкненим екраном.</string>
+    <string name="osmand_service">Режим тла</string>
+    <string name="osmand_service_descr">OsmAnd працює у режимі тла з вимкненим екраном.</string>
     <string name="download_files_not_enough_space">Не вистачає місця на диску для завантаження %1$s MB (вільно: %2$s).</string>
     <string name="download_files_question_space">Завантажити {0} файл(ів)\? 
 \n{1} МБ (із {2} МБ) буде використано.</string>
@@ -257,7 +257,7 @@
     <string name="search_offline_clear_search">Новий пошук</string>
     <string name="map_text_size_descr">Виберіть розмір шрифту для позначень на мапі:</string>
     <string name="map_text_size">Розмір тексту</string>
-    <string name="trace_rendering">Налагоджувальні відомості про відмалювання</string>
+    <string name="trace_rendering">Відомості для зневадження про відмальовування</string>
     <string name="trace_rendering_descr">Відображає плідність відмалювання.</string>
     <string name="installing_new_resources">Розпаковуються нові дані…</string>
     <string name="internet_connection_required_for_online_route">Вибрано мережеву службу навігації, але ви не підключені до Інтернету.</string>
@@ -265,7 +265,7 @@
     <string name="tts_language_not_supported">Вибрана мова не підтримується встановленим двигуном Android TTS (текстовим мовленням), замість цього буде використана його попередньо налаштована мова TTS. Шукаєте інший двигун TTS\?</string>
     <string name="tts_missing_language_data_title">Дані відсутні</string>
     <string name="tts_missing_language_data">Перейти в магазин для завантаження обраної мови?</string>
-    <string name="gpx_option_reverse_route">Зворотній напрямок GPX</string>
+    <string name="gpx_option_reverse_route">Зворотний напрямок треку</string>
     <string name="gpx_option_destination_point">Використовувати поточний пункт призначення</string>
     <string name="gpx_option_from_start_point">Пройдіть по усьому треку</string>
     <string name="switch_to_vector_map_to_see">Для цього регіону доступні автономні векторні мапи
@@ -281,8 +281,8 @@
     <string name="overlay_transparency">Прозорість</string>
     <string name="map_transparency_descr">Змінити прозорість основної мапи.</string>
     <string name="map_transparency">Прозорість мапи</string>
-    <string name="layer_underlay">Фонова мапа…</string>
-    <string name="map_underlay">Фонова мапа</string>
+    <string name="layer_underlay">Мапа підкладки…</string>
+    <string name="map_underlay">Мапа підкладки</string>
     <string name="map_underlay_descr">Виберіть тлову мапу</string>
     <string name="layer_overlay">Верхній шар…</string>
     <string name="shared_string_none">Нема</string>
@@ -428,7 +428,7 @@
     <string name="no_fav_to_save">Відсутні точки Закладок для збереження</string>
     <string name="shared_string_import">Імпортувати</string>
     <string name="error_occurred_loading_gpx">Не вдалося завантажити GPX.</string>
-    <string name="send_report">Відправити звіт</string>
+    <string name="send_report">Надіслати звіт</string>
     <string name="none_region_found">Не знайдено завантаженої мапи на карті пам\'яті.</string>
     <string name="poi_namefinder_query_empty">Почніть вводити текст для пошуку POI</string>
     <string name="any_poi">Всі</string>
@@ -456,7 +456,7 @@
     <string name="background_service_provider_descr">Виберіть метод позиціонування, що використовується тловою службою:</string>
     <string name="background_service_provider">Джерело позиціювання</string>
     <string name="background_router_service_descr">Відслідковує Ваше місцерозташування, поки екран вимкнено.</string>
-    <string name="background_router_service">Запустити OsmAnd у фоні</string>
+    <string name="background_router_service">Запустити OsmAnd у тлі</string>
     <string name="off_router_service_no_gps_available">Службі навігації у тлі необхідно, аби постачальник позиціювання був активним.</string>
     <string name="hide_poi_filter">Сховати фільтр</string>
     <string name="show_poi_filter">Показати фільтр</string>
@@ -759,8 +759,9 @@
     <string name="screen_is_locked">Торкніться значка блокування, щоб розблокувати</string>
     <string name="bg_service_screen_unlock">Розблокувати</string>
     <string name="bg_service_sleep_mode_off">Запустити
-\n застосунок у фоновому режимі</string>
-    <string name="bg_service_sleep_mode_on">Вимкнути\nфоновий режим</string>
+\n застосунок у режимі тла</string>
+    <string name="bg_service_sleep_mode_on">Вимкнути
+\nрежим тла</string>
     <string name="access_arrival_time">Час прибуття</string>
     <string name="item_unchecked">не відмічено</string>
     <string name="shared_string_map">Мапа</string>
@@ -846,7 +847,7 @@
     <string name="safe_mode">Безпечний режим</string>
     <string name="native_library_not_running">Програму запущено в безпечному режимі (вимкніть його в \'Налаштуваннях\').</string>
     <string name="audionotes_location_not_defined">Оберіть \"Використати місцезнаходження...\" для прив\'язки нотатки до даного місцезнаходження.</string>
-    <string name="background_service_is_enabled_question">Фоновий режим OsmAnd досі запущений. Зупинити його роботу також?</string>
+    <string name="background_service_is_enabled_question">Службу OsmAnd у тлі досі запущено. Зупинити її роботу також\?</string>
     <string name="close_changeset">Закрити набір змін</string>
     <string name="zxing_barcode_scanner_not_found">Програма \'ZXing Barcode Scanner\' не встановлена. Шукати в Google Play?</string>
     <string name="rendering_attr_roadColors_description">Виберіть кольорову схему доріг:</string>
@@ -1031,7 +1032,7 @@
     <string name="clear_intermediate_points">Очистити проміжні точки</string>
     <string name="new_directions_point_dialog">Ви вже задали проміжні точки.</string>
     <string name="context_menu_item_directions_to">Маршрут до</string>
-    <string name="context_menu_item_directions_from">Напрямки від</string>
+    <string name="context_menu_item_directions_from">Напрямок від</string>
     <string name="route_to">До:</string>
     <string name="speak_title">Оголошувати…</string>
     <string name="speak_descr">Налаштувати оголошення назв вулиць, дорожніх обмежень (вимушені зупинки, долішні (лежачі) поліцейські), попередження про камери контролю швидкості, обмеження швидкості.</string>
@@ -1072,15 +1073,15 @@
     <string name="gpx_file_is_empty">Порожній GPX-файл</string>
     <string name="shared_string_tracks">Треки</string>
     <string name="shared_string_my_favorites">Закладки</string>
-    <string name="shared_string_my_places">Місця та треки</string>
+    <string name="shared_string_my_places">Мої місця</string>
     <string name="rendering_value_pink_name">рожевий</string>
     <string name="rendering_value_brown_name">Коричневий</string>
     <string name="osmo_edit_color">Колір</string>
     <string name="keep_navigation_service">Продовжувати</string>
     <string name="stop_navigation_service">Зупинити</string>
-    <string name="enable_sleep_mode">Ввімкнути фоновий режим GPS</string>
+    <string name="enable_sleep_mode">Увімкнути режим GPS у тлі</string>
     <string name="gps_wake_up_timer">Інтервал вмикання GPS</string>
-    <string name="sleep_mode_stop_dialog">Зупинити фоновий режим GPS?</string>
+    <string name="sleep_mode_stop_dialog">Зупинити режим GPS у тлі\?</string>
     <string name="map_preferred_locale_descr">Бажана мова для підписів на мапі (якщо вона недоступна, будуть використані англійська чи місцева мови).</string>
     <string name="map_preferred_locale">Бажана мова мапи</string>
     <string name="local_map_names">Назви місцевою мовою</string>
@@ -1686,8 +1687,8 @@
     <string name="m_s">м/с</string>
     <string name="shared_string_trip_recording">Запис подорожі</string>
     <string name="shared_string_navigation">Навігація</string>
-    <string name="osmand_running_in_background">Працює у фоновому режимі</string>
-    <string name="favourites_edit_dialog_title">Відомості по закладці</string>
+    <string name="osmand_running_in_background">Працює у тлі</string>
+    <string name="favourites_edit_dialog_title">Відомості про закладки</string>
     <string name="simulate_your_location_stop_descr">Зупинити симуляцію Вашої позиції.</string>
     <string name="looking_up_address">Пошук адреси</string>
     <string name="av_locations">Місця</string>
@@ -1990,8 +1991,8 @@
     <string name="route_roundabout_short">Поверніть на %1$d з’їзд</string>
     <string name="upload_poi">Вивантажити POI</string>
     <string name="route_calculation">Побудова маршруту</string>
-    <string name="gpx_no_tracks_title">Ви досі не маєте жодних GPX-файлів</string>
-    <string name="gpx_no_tracks_title_folder">Ви також можете додати GPX-файли до теки</string>
+    <string name="gpx_no_tracks_title">Ви досі не маєте жодних файлів з треками</string>
+    <string name="gpx_no_tracks_title_folder">Ви також можете додати файли з треками до теки</string>
     <string name="gpx_add_track">Додати ще…</string>
     <string name="shared_string_appearance">Зовнішній вигляд</string>
     <string name="trip_rec_notification_settings">Ввімкнути швидкий запуск запису</string>
@@ -2050,7 +2051,7 @@
     <string name="no_inet_connection_desc_map">Необхідно завантажити мапи.</string>
     <string name="search_location">Визначення місцезнаходження…</string>
     <string name="storage_free_space">Вільне місце</string>
-    <string name="storage_place_description">Сховище даних OsmAnd (мапи, GPXфайли та ін.): %1$s.</string>
+    <string name="storage_place_description">Сховище даних OsmAnd (мапи, файли з треками, тощо): %1$s.</string>
     <string name="give_permission">Дати дозвіл</string>
     <string name="allow_access_location">Дозволити доступ до місця розташування</string>
     <string name="first_usage_greeting">Прокладайте маршрути і відкривайте нові для себе місця без підключення до Інтернету</string>
@@ -2390,12 +2391,12 @@
 \n• Опціональний запис подорожі в локальний GPX-файл чи онлайн-сервіс 
 \n• Опціональне відображення швидкості та висотного розташування 
 \n• Відображення горизонталей та рельєфу (через додатковий втулок)</string>
-    <string name="osmand_plus_extended_description_part7">Безпосередній вклад у OSM 
-\n• Звітуйте про помилки в даних 
-\n• Вивантажуйте GPX-треки в OSM безпосередньо з програми 
-\n• Додавайте POI (цікаві точки) та безпосередньо вивантажуйте їх в OSM (чи пізніше, якщо зараз Ви в офлайні) 
-\n• Опція запису подорожі також і у фоновому режимі (в той час як пристрій знаходиться в сплячому режимі) 
-\nOsmAnd — вільне й відкрите програмне забезпечення, що активно розвивається. Кожен може внести свій вклад, звітуючи про помилки, поліпшуючи переклад чи розробляючи нові функції. Також проєкт покладається на фінансові внески для оплати розробки та тестування нових функціональних можливостей. 
+    <string name="osmand_plus_extended_description_part7">Безпосередній вклад у OSM
+\n• Звітуйте про помилки в даних
+\n• Вивантажуйте GPX-треки в OSM безпосередньо з програми
+\n• Додавайте POI (цікаві точки) та безпосередньо вивантажуйте їх в OSM (чи пізніше, якщо зараз Ви в офлайні)
+\n• Опція запису подорожі також і в режимі тла (в той час як пристрій знаходиться в сплячому режимі)
+\nOsmAnd — вільне й відкрите програмне забезпечення, що активно розвивається. Кожен може внести свій вклад, звітуючи про помилки, поліпшуючи переклад чи розробляючи нові функції. Також проєкт покладається на фінансові внески для оплати розробки та тестування нових функціональних можливостей.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Приблизне охоплення мап та якість: 
 \n • Західна Європа: **** 
@@ -2853,9 +2854,9 @@
     <string name="shared_string_swap">Поміняти</string>
     <string name="show_more">Показати більше</string>
     <string name="tracks_on_map">Показані треки</string>
-    <string name="quick_action_show_hide_gpx_tracks">Показати/Приховати GPX-треки</string>
-    <string name="quick_action_gpx_tracks_hide">Приховати GPX-треки</string>
-    <string name="quick_action_gpx_tracks_show">Показати GPX-треки</string>
+    <string name="quick_action_show_hide_gpx_tracks">Показати/Приховати треки</string>
+    <string name="quick_action_gpx_tracks_hide">Приховати треки</string>
+    <string name="quick_action_gpx_tracks_show">Показати треки</string>
     <string name="add_destination_query">Спершу додайте пункт призначення</string>
     <string name="previous_route">Попередній маршрут</string>
     <string name="add_home">Додати домівку</string>
@@ -2990,7 +2991,7 @@
 \n</string>
     <string name="time_of_day">Час доби</string>
     <string name="by_transport_type">На %1$s</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Кнопка, що показує чи приховує вибрані треки GPX на мапі.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Кнопка, що показує чи приховує вибрані треки на мапі.</string>
     <string name="points_of_interests">Цікаві місця (POI)</string>
     <string name="avoid_roads_descr">Оберіть дорогу, яку Ви хочете уникати при навігації, або на мапі, або зі списку нижче:</string>
     <string name="show_along_the_route">Показувати поруч з маршрутом</string>
@@ -3043,7 +3044,7 @@
     <string name="base_profile_descr_ski">Лижі</string>
     <string name="show_compass_ruler">Показати компас-лінійку</string>
     <string name="hide_compass_ruler">Приховати компас-лінійку</string>
-    <string name="select_icon_profile_dialog_title">Оберіть піктограму</string>
+    <string name="select_icon_profile_dialog_title">Оберіть значок</string>
     <string name="settings_routing_mode_string">Режим: %s</string>
     <string name="settings_derived_routing_mode_string">Користувацький режим, похідний від: %s</string>
     <string name="routing_profile_ski">Лижі</string>
@@ -3068,31 +3069,31 @@
     <string name="press_again_to_change_the_map_orientation">Натисніть ще раз для зміни орієнтації мапи</string>
     <string name="shared_string_min_speed">Мінімальна швидкість</string>
     <string name="shared_string_max_speed">Максимальна швидкість</string>
-    <string name="default_speed_setting_title">Типова швидкість</string>
+    <string name="default_speed_setting_title">Усталена швидкість</string>
     <string name="default_speed_setting_descr">Змінити налаштування усталеної швидкості</string>
     <string name="minmax_speed_dialog_title">Встановити мінімальну/максимальну швидкість</string>
     <string name="new_profile">Новий профіль</string>
     <string name="shared_string_crash">Збій</string>
     <string name="last_launch_crashed">Під час останнього запуску OsmAnd сталася помилка. Допоможіть нам покращити OsmAnd - надішліть повідомлення про помилку.</string>
     <string name="app_mode_ufo">НЛО</string>
-    <string name="release_3_4">• Профілі застосунку: створюйте власний профіль з довільною піктограмою та кольором для ваших особистих потреб
-\n 
-\n• Налаштуйте типову мінімальну/максимальну швидкості профілю
-\n 
-\n• Додано віджет з поточними координатами 
-\n 
+    <string name="release_3_4">• Профілі застосунку: створюйте власний профіль з довільним значком та кольором для ваших особистих потреб
+\n
+\n• Налаштуйте усталену найменшу/найбільшу швидкості профілю
+\n
+\n• Додано віджет з поточними координатами
+\n
 \n• Додано можливість показувати на мапі компас і радіус-лінійку
-\n 
+\n
 \n• Виправлено записування шляху у тлі
-\n 
-\n• Покращено завантаження мап у тлі 
+\n
+\n• Покращено завантаження мап у тлі
 \n
 \n• Повернено параметр \'Увімкнути екран\'
 \n
-\n• Виправлено вибір мови Wikipedia 
-\n 
+\n• Виправлено вибір мови Wikipedia
+\n
 \n• Виправлено поведінку кнопки компаса під час навігації
-\n 
+\n
 \n• Інші виправлення помилок
 \n
 \n</string>
@@ -3430,7 +3431,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок відображається під час навігації чи переміщення.</string>
     <string name="select_map_icon_descr">Значок показано в спокої.</string>
-    <string name="logcat_buffer_descr">Перевіряти та обмінюватися докладними журналами застосунку</string>
+    <string name="logcat_buffer_descr">Переглянути та надіслати докладний журнал застосунку</string>
     <string name="search_offline_geo_error">Не вдалося розібрати метод \'%s\'.</string>
     <string name="permission_is_required">Для використання цього параметра потрібен дозвіл.</string>
     <string name="monitoring_min_speed_descr">Це низькошвидкісний відсічний фільтр, щоб не записувати точки нижче певної швидкості. Це може призвести до плавнішого вигляду записаних треків при перегляді на мапі.</string>
@@ -3670,7 +3671,7 @@
     <string name="navigation_profiles_item">Профілі навігації</string>
     <string name="release_3_7">• Нові автономні мапи схилів
 \n
-\n• Налаштування вибраних та GPX шляхових точок - спеціальні кольори, піктограми, форми
+\n• Налаштування вибраних та GPX шляхових точок - спеціальні кольори, значки, форми
 \n
 \n• Налаштування порядку елементів меню \"Контекстне меню\", \"Налаштувати мапу\" та \"Скринька\"
 \n
@@ -3694,7 +3695,7 @@
     <string name="quick_action_transport_descr">Кнопка показу або приховування громадського транспорту на мапі.</string>
     <string name="create_edit_poi">Створити / змінити POI</string>
     <string name="add_edit_favorite">Додати / правити вибране</string>
-    <string name="reset_deafult_order">Відновити типовий порядок елементів</string>
+    <string name="reset_deafult_order">Відновити усталене впорядкування</string>
     <string name="back_to_editing">Повернутися до редагування</string>
     <string name="additional_actions_descr">Ви можете отримати доступ до цих дій, торкнувшись кнопки “%1$s”.</string>
     <string name="shared_string_resume">Продовжити</string>
@@ -3741,7 +3742,7 @@
 \nОдин тиждень - 10 080 хвилин. 
 \nОдин місяць - 43 829 хвилин.</string>
     <string name="tiles_storage_descr">Виберіть спосіб зберігання завантажених плиток.</string>
-    <string name="default_screen_timeout">Типовий час до вимкнення екрану</string>
+    <string name="default_screen_timeout">Усталений час до вимкнення екрану</string>
     <string name="export_import_quick_actions_with_profiles_promo">Ви можете експортувати або імпортувати швидкі дії з профілями застосунку.</string>
     <string name="shared_string_delete_all_q">Видалити все\?</string>
     <string name="delete_all_actions_message_q">Ви дійсно бажаєте безповоротно видалити %d швидких дій\?</string>
@@ -3779,33 +3780,33 @@
     <string name="speed_cameras_alert">Попередження про камери контролю швидкості в деяких країнах заборонено законом.</string>
     <string name="shared_string_bearing">Орієнтація</string>
     <string name="item_deleted">%1$s видалено</string>
-    <string name="speed_cameras_restart_descr">Для вилучення даних про камери контролю швидкості потрібен перезапуск.</string>
+    <string name="speed_cameras_restart_descr">Перезапустіть застосунок для видалення даних про камери контролю швидкості.</string>
     <string name="shared_string_uninstall_and_restart">Видалити та перезапустити</string>
     <string name="routing_attr_length_description">Вкажіть довжину транспортного засобу для розрахунку маршрутів.</string>
     <string name="routing_attr_length_name">Обмеження довжини</string>
     <string name="speed_cameras_removed_descr">На цьому пристрої немає камер контролю швидкості.</string>
     <string name="app_mode_inline_skates">Роликові ковзани</string>
-    <string name="use_volume_buttons_as_zoom_descr">Увімкнути для зміни масштабу мапи кнопками гучності пристрою.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Зміна масштабу мапи кнопками гучності пристрою.</string>
     <string name="use_volume_buttons_as_zoom">Масштабування кнопками гучності</string>
     <string name="lenght_limit_description">Вкажіть довжину вашого автомобіля, для довгих транспортних засобів можуть застосовуватися деякі обмеження на маршрутах.</string>
-    <string name="quick_action_remove_next_destination">Видалити наступну точку призначення</string>
+    <string name="quick_action_remove_next_destination">Видалити найближчу точку призначення</string>
     <string name="please_provide_point_name_error">Вкажіть назву пункту</string>
     <string name="quick_action_remove_next_destination_descr">Поточну точку призначення на маршруті буде видалено. Якщо це буде місце призначення, навігація припиниться.</string>
     <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
-    <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця у Вікіпедії. Це ваш автономний кишеньковий посібник - просто ввімкніть втулок \"Вікіпедія\" і насолоджуйтеся статтями про об\'єкти навколо вас.</string>
+    <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця у Вікіпедії. Це ваш автономний кишеньковий посібник - просто ввімкніть втулок \"Вікіпедія\" і насолоджуйтеся статтями про об\'єкти довкола вас.</string>
     <string name="app_mode_motor_scooter">Моторолер</string>
     <string name="app_mode_enduro_motorcycle">Спортивний мотоцикл</string>
     <string name="app_mode_wheelchair">Інвалідне крісло</string>
     <string name="app_mode_wheelchair_forward">Інвалідне крісло попереду</string>
     <string name="app_mode_go_cart">Картинг</string>
-    <string name="osm_edit_closed_note">Закрита нотатка OSM</string>
+    <string name="osm_edit_closed_note">Закрита примітка OSM</string>
     <string name="shared_string_custom">Власне</string>
     <string name="add_hidden_group_info">Додану точку не буде показано на мапі, вся вибрана група є прихованою, ви можете побачити її в \"%s\".</string>
     <string name="set_working_days_to_continue">Зазначте робочі дні, щоб продовжити</string>
     <string name="route_between_points">Маршрут між точками</string>
     <string name="plan_a_route">Планування маршруту</string>
     <string name="add_to_a_track">Додати до треку</string>
-    <string name="track_show_start_finish_icons">Показувати старт та фініш</string>
+    <string name="track_show_start_finish_icons">Показувати значки початку та завершення</string>
     <string name="select_track_width">Встановити ширину</string>
     <string name="gpx_split_interval_descr">Виберіть інтервал показу міток часу або відстані для показу поверх треку.</string>
     <string name="gpx_split_interval_none_descr">Виберіть власний варіант поділу: за часом чи відстанню.</string>
@@ -3815,24 +3816,22 @@
     <string name="plan_route_import_track">Імпортувати трек</string>
     <string name="plan_route_open_existing_track">Переглянути наявний трек</string>
     <string name="plan_route_create_new_route">Створити новий маршрут</string>
-    <string name="plan_route_select_track_file_for_open">Оберіть файл з треком для перегляду.</string>
+    <string name="plan_route_select_track_file_for_open">Виберіть який файл з треком відкрити.</string>
     <string name="shared_string_done">Готово</string>
     <string name="overwrite_track">Перезаписати трек</string>
-    <string name="rourte_between_points_warning_desc">Для користування цією функцією, OsmAnd необхідно прив\'язати цей трек до мапи доріг.
-\n
-\nДалі вам потрібно вибрати профіль навігації для виявлення дозволених доріг та обмеження відстані наближення вашого треку до доріг.</string>
+    <string name="route_between_points_warning_desc">Далі, пов\'яжіть трек до найближчої дозволеної дороги з одним із профілів навігації, щоб скористатися цим параметром.</string>
     <string name="reverse_route">Зворотний маршрут</string>
     <string name="whole_track">Весь трек</string>
     <string name="next_segment">Наступний сегмент</string>
     <string name="threshold_distance">Обмеження відстані</string>
     <string name="navigation_profile">Профіль навігації</string>
-    <string name="rourte_between_points_add_track_desc">Виберіть файл треку, до якого буде додано новий сегмент.</string>
+    <string name="route_between_points_add_track_desc">Виберіть файл треку, до якого буде додано новий сегмент.</string>
     <string name="save_as_new_track">Зберегти як новий трек</string>
-    <string name="rourte_between_points_whole_track_button_desc">Весь трек буде перераховано за допомогою вибраного профілю.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Лише наступний сегмент буде перераховано за допомогою обраного профілю.</string>
-    <string name="rourte_between_points_desc">Виберіть спосіб з\'єднання точок: прямою лінією чи розраховувати маршрут між ними за допомогою вибраного профілю.</string>
+    <string name="route_between_points_whole_track_button_desc">Весь трек буде перераховано за допомогою вибраного профілю.</string>
+    <string name="route_between_points_next_segment_button_desc">Лише наступний сегмент буде перераховано за допомогою обраного профілю.</string>
+    <string name="route_between_points_desc">Виберіть спосіб з\'єднання точок: прямою лінією чи обчислити маршрут між ними за, як зазначено далі.</string>
     <string name="street_level_imagery">Зображення вулиць</string>
-    <string name="plan_route_exit_dialog_descr">Ви дійсно бажаєте закрити планування маршруту без збереження\? Внесені зміни буде втрачено.</string>
+    <string name="plan_route_exit_dialog_descr">Ви дійсно бажаєте відхилити всі зміни у запланованому маршруті, закривши його\?</string>
     <string name="in_case_of_reverse_direction">Для зворотного напрямку</string>
     <string name="shared_string_save_as_gpx">Зберегти як новий файл треку</string>
     <string name="add_segment_to_the_track">Додати у файл треку</string>
@@ -3848,9 +3847,9 @@
     <string name="quick_action_add_gpx">Додати шляхову точку треку</string>
     <string name="map_widget_monitoring">Записування подорожі</string>
     <string name="marker_save_as_track">Зберегти як файл треку</string>
-    <string name="follow_track">Стежити за треком</string>
+    <string name="follow_track">Навігація за треком</string>
     <string name="follow_track_descr">Виберіть файл треку для перегляду</string>
-    <string name="import_track_descr">Виберіть файл треку для його перегляду або імпортуйте його.</string>
+    <string name="import_track_descr">Виберіть файл треку для перегляду або імпортуйте його з пристрою.</string>
     <string name="select_another_track">Обрати інший трек</string>
     <string name="navigate_to_track_descr">Перехід від мого розташування до треку</string>
     <string name="pass_whole_track_descr">Точка треку для навігації</string>
@@ -3865,7 +3864,7 @@
     <string name="plan_route_change_route_type_before">Змінити вид маршруту раніше</string>
     <string name="plan_route_change_route_type_after">Змінити вид маршруту після</string>
     <string name="save_global_track_interval_descr">Вкажіть інтервал для загального запису поїздки (включається через віджет запису подорожі на мапі).</string>
-    <string name="system_default_theme">Типова системи</string>
+    <string name="system_default_theme">Усталена системна</string>
     <string name="all_next_segments">Всі наступні сегменти</string>
     <string name="previous_segment">Попередній сегмент</string>
     <string name="all_previous_segments">Усі попередні сегменти</string>
@@ -3878,4 +3877,29 @@
     <string name="open_saved_track">Відкрити збережений трек</string>
     <string name="shared_string_is_saved">збережено</string>
     <string name="one_point_error">Додайте принаймні дві точки.</string>
+    <string name="disable_recording_once_app_killed_descrp">Запис треку буде зупинено після припинення роботи застосунку через меню з переліком нещодавно запущених застосунків. (Індикатор, що повідомляє про роботу OsmAnd у тлі зникне з панелі сповіщень Android)</string>
+    <string name="simplified_track">Спрощений трек</string>
+    <string name="simplified_track_description">Буде збережено лише лінію маршруту, а проміжні точки буде видалено.</string>
+    <string name="shared_string_file_name">Назва файлу</string>
+    <string name="shared_string_redo">Повторити</string>
+    <string name="release_3_8">• Оновлено функції планування маршруту: дозволено застосувати різні типи переходів для кожного сегмента і прив\'язати будь-який трек до доріг
+\n
+\n• Нове меню вигляду треків: вибір кольору, товщина, вигляд стрілки напрямку, значки початку/завершення
+\n
+\n• Покращено оглядовість велосипедних вузлів
+\n
+\n• На треки тепер можна натискати, є контекстне меню з основними подробицями.
+\n
+\n• Вдосконалено алгоритми пошуку
+\n
+\n• Вдосконалено параметри стеження за треками в навігації
+\n
+\n• Виправлено вади перенесення налаштувань профілю
+\n
+\n</string>
+    <string name="sort_last_modified">Востаннє змінено</string>
+    <string name="sort_name_descending">За назвою: Я — А</string>
+    <string name="sort_name_ascending">За назвою: А — Я</string>
+    <string name="start_finish_icons">Значки початку/завершення</string>
+    <string name="contour_lines_thanks">Дякуємо за придбання «Горизонталей»</string>
 </resources>

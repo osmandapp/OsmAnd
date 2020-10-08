@@ -294,7 +294,7 @@
     <string name="poi_traffic_calming_choker">Forgalomlassító útszűkület</string>
     <string name="poi_fuel_diesel">Gázolaj</string>
     <string name="poi_fuel_biodiesel">Biodízel</string>
-    <string name="poi_fuel_lpg">Cseppfolyós gáz (LPG)</string>
+    <string name="poi_fuel_lpg">LPG (cseppfolyósított PB-gáz)</string>
     <string name="poi_fuel_octane_80">80-as oktánszámú</string>
     <string name="poi_fuel_octane_91">91-es oktánszámú</string>
     <string name="poi_fuel_octane_92">92-es oktánszámú</string>
@@ -1863,7 +1863,7 @@
     <string name="poi_scout_camp">Cserkésztáborhely</string>
     <string name="poi_backcountry">Nomád</string>
     <string name="poi_resort_type">Típus</string>
-    <string name="poi_drive_in">Autós</string>
+    <string name="poi_drive_in">Autós (drive-in)</string>
     <string name="poi_beauty_salon_service">Szolgáltatás</string>
     <string name="poi_recycling_type">Típus</string>
     <string name="poi_recycling_accepted_waste">Elfogadott hulladék</string>
@@ -3050,7 +3050,7 @@
     <string name="poi_wetland_palsa_bog">Dagadóláp (palsa-láp)</string>
     <string name="poi_fuel_100ll">Avgas 100LL repülőbenzin</string>
     <string name="poi_fuel_jeta1">Jet A-1 kerozin</string>
-    <string name="poi_fuel_adblue">AdBlue adalékanyag</string>
+    <string name="poi_fuel_adblue">Diesel kipufogó-folyadék</string>
     <string name="poi_social_facility_outreach">Szolgáltatóközpont hátrányos helyzetűeknek</string>
     <string name="poi_fortification_type_sconce">Erődítmény típusa: földsánc</string>
     <string name="poi_fortification_type_ring_ditch">Erődítmény típusa: újkőkori körárok</string>
@@ -3797,7 +3797,7 @@
     <string name="poi_bowling_alley">Bowling</string>
     <string name="poi_shop_security">Biztonságtechnikai szaküzlet</string>
     <string name="poi_mountain_rescue">Hegyimentő</string>
-    <string name="poi_traffic_signals_arrow_yes">Nincs</string>
+    <string name="poi_traffic_signals_arrow_yes">Van</string>
     <string name="poi_traffic_signals_vibration_yes">Van</string>
     <string name="poi_traffic_signals_vibration_no">Rezgés nincs</string>
     <string name="poi_give_box">Adománygyűjtő doboz</string>
@@ -3808,7 +3808,7 @@
     <string name="poi_fire_hydrant_type_pipe">Cső</string>
     <string name="poi_drinking_water_refill_network">Ivóvíz-utántöltő hálózat</string>
     <string name="poi_drinking_water_refill_no">Ivóvíz-utántöltés nincs</string>
-    <string name="poi_drinking_water_refill_yes">Ivóvíz-utántöltés</string>
+    <string name="poi_drinking_water_refill_yes">van</string>
     <string name="poi_seamark_water_level_below_mwl">Vízszint: közepes vízszint alatt</string>
     <string name="poi_seamark_water_level_above_mwl">Vízszint: közepes vízszint fölött</string>
     <string name="poi_seamark_water_level_floating">Vízszint: lebegő</string>
@@ -3821,4 +3821,19 @@
     <string name="poi_tactile_paving_incorrect">Félrevezető</string>
     <string name="poi_tactile_paving_primitive">Véletlenül használható más elemek</string>
     <string name="poi_tactile_paving_contrasted">Kontrasztos színű</string>
+    <string name="poi_departures_board_timetable">Menetrend</string>
+    <string name="poi_departures_board_realtime">Valós idejű</string>
+    <string name="poi_departures_board_delay">Késés</string>
+    <string name="poi_departures_board_yes">van</string>
+    <string name="poi_departures_board_no">Indulásiidő-kijelző nincs</string>
+    <string name="poi_elevator">Lift</string>
+    <string name="poi_traffic_signals_arrow_no">Nyíl nincs</string>
+    <string name="poi_pump_status_missing_beam">Szivattyú állapota: hiányzik a kar</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Szívás</string>
+    <string name="poi_recycling_small_electrical_appliances">Kis elektronikus készülékek</string>
+    <string name="poi_departures_board">Indulásiidő-kijelző</string>
+    <string name="poi_drinking_water_refill">Ivóvíz-utántöltés</string>
+    <string name="poi_nuts">Mag- és aszaltgyümölcsbolt</string>
+    <string name="poi_beehive">Méhkaptár</string>
+    <string name="poi_fuel_lng">LNG (cseppfolyósított földgáz)</string>
 </resources>

@@ -3,14 +3,16 @@ package net.osmand.plus.base;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -48,8 +50,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected int themeRes;
 	protected View dismissButton;
 	protected View rightButton;
+	protected View thirdButton;
 
+	private View buttonsShadow;
 	private LinearLayout itemsContainer;
+	private LinearLayout buttonsContainer;
 
 	@StringRes
 	protected int dismissButtonStringRes = R.string.shared_string_cancel;
@@ -72,45 +77,21 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		createMenuItems(savedInstanceState);
-		Context ctx = requireContext();
-		View mainView = View.inflate(new ContextThemeWrapper(ctx, themeRes), R.layout.bottom_sheet_menu_base, null);
+		Activity activity = requireActivity();
+		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
+		View mainView = themedInflater.inflate(R.layout.bottom_sheet_menu_base, null);
 		if (useScrollableItemsContainer()) {
-			itemsContainer = (LinearLayout) mainView.findViewById(R.id.scrollable_items_container);
+			itemsContainer = mainView.findViewById(R.id.scrollable_items_container);
 		} else {
 			mainView.findViewById(R.id.scroll_view).setVisibility(View.GONE);
-			itemsContainer = (LinearLayout) mainView.findViewById(R.id.non_scrollable_items_container);
+			itemsContainer = mainView.findViewById(R.id.non_scrollable_items_container);
 			itemsContainer.setVisibility(View.VISIBLE);
 		}
+		buttonsShadow = mainView.findViewById(R.id.buttons_shadow);
 
 		inflateMenuItems();
-
-		dismissButton = mainView.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), getDismissButtonTextId());
-		dismissButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				onDismissButtonClickAction();
-				dismiss();
-			}
-		});
-		if (hideButtonsContainer()) {
-			mainView.findViewById(R.id.buttons_container).setVisibility(View.GONE);
-		} else {
-			int rightBottomButtonTextId = getRightBottomButtonTextId();
-			if (rightBottomButtonTextId != DEFAULT_VALUE) {
-				mainView.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
-				rightButton = mainView.findViewById(R.id.right_bottom_button);
-				UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomButtonType(), rightBottomButtonTextId);
-				rightButton.setVisibility(View.VISIBLE);
-				rightButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						onRightBottomButtonClick();
-					}
-				});
-			}
-		}
-		updateBottomButtons();
+		setupScrollShadow(mainView);
+		setupBottomButtons((ViewGroup) mainView);
 		setupHeightAndBackground(mainView);
 		return mainView;
 	}
@@ -197,7 +178,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				if (contentView.getHeight() > contentHeight) {
 					if (useScrollableItemsContainer() || useExpandableList()) {
 						contentView.getLayoutParams().height = contentHeight;
-						mainView.findViewById(R.id.buttons_shadow).setVisibility(View.VISIBLE);
+						buttonsShadow.setVisibility(View.VISIBLE);
 					} else {
 						contentView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
 					}
@@ -207,12 +188,12 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				// 8dp is the shadow height
 				boolean showTopShadow = screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
-					mainView.setBackgroundResource(showTopShadow ? getPortraitBgResId() : getBgColorId());
+					AndroidUtils.setBackground(mainView, showTopShadow ? getPortraitBg(activity) : getColoredBg(activity));
 					if (!showTopShadow) {
 						mainView.setPadding(0, 0, 0, 0);
 					}
 				} else {
-					mainView.setBackgroundResource(showTopShadow ? getLandscapeTopsidesBgResId() : getLandscapeSidesBgResId());
+					AndroidUtils.setBackground(mainView, showTopShadow ? getLandscapeTopsidesBg(activity) : getLandscapeSidesBg(activity));
 				}
 			}
 		});
@@ -220,7 +201,18 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	private int getContentHeight(int availableScreenHeight) {
 		int customHeight = getCustomHeight();
-		int maxHeight = availableScreenHeight - getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
+		int buttonsHeight;
+		if (useVerticalButtons()) {
+			int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+			int buttonHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_height);
+			buttonsHeight = (buttonHeight + padding) * 2 + getFirstDividerHeight();
+			if (getThirdBottomButtonTextId() != DEFAULT_VALUE) {
+				buttonsHeight += buttonHeight + getSecondDividerHeight();
+			}
+		} else {
+			buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
+		}
+		int maxHeight = availableScreenHeight - buttonsHeight;
 		if (customHeight != DEFAULT_VALUE && customHeight <= maxHeight) {
 			return customHeight;
 		}
@@ -278,12 +270,60 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	}
 
+	protected int getThirdBottomButtonTextId() {
+		return DEFAULT_VALUE;
+	}
+
+	protected DialogButtonType getThirdBottomButtonType() {
+		return DialogButtonType.PRIMARY;
+	}
+
+	protected void onThirdBottomButtonClick() {
+
+	}
+
 	protected boolean isDismissButtonEnabled() {
 		return true;
 	}
 
 	protected boolean isRightBottomButtonEnabled() {
 		return true;
+	}
+
+	protected void setupBottomButtons(ViewGroup view) {
+		Activity activity = requireActivity();
+		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
+		if (!hideButtonsContainer()) {
+			if (useVerticalButtons()) {
+				buttonsContainer = (LinearLayout) themedInflater.inflate(R.layout.bottom_buttons_vertical, view);
+				setupThirdButton();
+			} else {
+				buttonsContainer = (LinearLayout) themedInflater.inflate(R.layout.bottom_buttons, view);
+			}
+			setupRightButton();
+			setupDismissButton();
+			updateBottomButtons();
+		}
+	}
+
+	boolean useVerticalButtons() {
+		Activity activity = requireActivity();
+		int rightBottomButtonTextId = getRightBottomButtonTextId();
+		if (getDismissButtonTextId() != DEFAULT_VALUE && rightBottomButtonTextId != DEFAULT_VALUE) {
+			if (getThirdBottomButtonTextId() != DEFAULT_VALUE) {
+				return true;
+			}
+			String rightButtonText = getString(rightBottomButtonTextId);
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(activity);
+			int outerPadding = getResources().getDimensionPixelSize(R.dimen.content_padding);
+			int innerPadding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+			int dialogWidth = portrait ? AndroidUtils.getScreenWidth(activity) : getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+			int availableTextWidth = (dialogWidth - (outerPadding * 3 + innerPadding * 4)) / 2;
+
+			int measuredTextWidth = AndroidUtils.getTextWidth(getResources().getDimensionPixelSize(R.dimen.default_desc_text_size), rightButtonText);
+			return measuredTextWidth > availableTextWidth;
+		}
+		return false;
 	}
 
 	protected void updateBottomButtons() {
@@ -299,24 +339,92 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 	}
 
+	private void setupDismissButton() {
+		dismissButton = buttonsContainer.findViewById(R.id.dismiss_button);
+		int buttonTextId = getDismissButtonTextId();
+		if (buttonTextId != DEFAULT_VALUE) {
+			UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), buttonTextId);
+			dismissButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					onDismissButtonClickAction();
+					dismiss();
+				}
+			});
+		}
+		AndroidUiHelper.updateVisibility(dismissButton, buttonTextId != DEFAULT_VALUE);
+	}
+
+	private void setupRightButton() {
+		rightButton = buttonsContainer.findViewById(R.id.right_bottom_button);
+		int buttonTextId = getRightBottomButtonTextId();
+		if (buttonTextId != DEFAULT_VALUE) {
+			UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomButtonType(), buttonTextId);
+			rightButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					onRightBottomButtonClick();
+				}
+			});
+		}
+		View divider = buttonsContainer.findViewById(R.id.buttons_divider);
+		divider.getLayoutParams().height = getFirstDividerHeight();
+		AndroidUiHelper.updateVisibility(rightButton, buttonTextId != DEFAULT_VALUE);
+		AndroidUiHelper.updateVisibility(divider, buttonTextId != DEFAULT_VALUE);
+	}
+
+	protected int getFirstDividerHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.content_padding);
+	}
+
+	private void setupThirdButton() {
+		thirdButton = buttonsContainer.findViewById(R.id.third_button);
+		int buttonTextId = getThirdBottomButtonTextId();
+		if (buttonTextId != DEFAULT_VALUE) {
+			UiUtilities.setupDialogButton(nightMode, thirdButton, getThirdBottomButtonType(), buttonTextId);
+			thirdButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					onThirdBottomButtonClick();
+				}
+			});
+		}
+		View divider = buttonsContainer.findViewById(R.id.buttons_divider_top);
+		divider.getLayoutParams().height = getSecondDividerHeight();
+		AndroidUiHelper.updateVisibility(thirdButton, buttonTextId != DEFAULT_VALUE);
+		AndroidUiHelper.updateVisibility(divider, buttonTextId != DEFAULT_VALUE);
+	}
+
+	protected int getSecondDividerHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.content_padding);
+	}
+
 	@ColorRes
 	protected int getBgColorId() {
 		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
 
-	@DrawableRes
-	protected int getPortraitBgResId() {
-		return nightMode ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_menu_light;
+	protected Drawable getColoredBg(@NonNull Context ctx) {
+		int bgColor = ContextCompat.getColor(ctx, getBgColorId());
+		return new ColorDrawable(bgColor);
 	}
 
-	@DrawableRes
-	protected int getLandscapeTopsidesBgResId() {
-		return nightMode ? R.drawable.bg_bottom_sheet_topsides_landscape_dark : R.drawable.bg_bottom_sheet_topsides_landscape_light;
+	protected Drawable getPortraitBg(@NonNull Context ctx) {
+		return createBackgroundDrawable(ctx, R.drawable.bg_contextmenu_shadow_top_light);
 	}
 
-	@DrawableRes
-	protected int getLandscapeSidesBgResId() {
-		return nightMode ? R.drawable.bg_bottom_sheet_sides_landscape_dark : R.drawable.bg_bottom_sheet_sides_landscape_light;
+	protected Drawable getLandscapeTopsidesBg(@NonNull Context ctx) {
+		return createBackgroundDrawable(ctx, R.drawable.bg_shadow_bottomsheet_topsides);
+	}
+
+	protected Drawable getLandscapeSidesBg(@NonNull Context ctx) {
+		return createBackgroundDrawable(ctx, R.drawable.bg_shadow_bottomsheet_sides);
+	}
+
+	private LayerDrawable createBackgroundDrawable(@NonNull Context ctx, @DrawableRes int shadowDrawableResId) {
+		Drawable shadowDrawable = ContextCompat.getDrawable(ctx, shadowDrawableResId);
+		Drawable[] layers = new Drawable[] {shadowDrawable, getColoredBg(ctx)};
+		return new LayerDrawable(layers);
 	}
 
 	protected boolean isNightMode(@NonNull OsmandApplication app) {
@@ -324,5 +432,22 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			return app.getDaynightHelper().isNightModeForMapControls();
 		}
 		return !app.getSettings().isLightContent();
+	}
+
+	private void setupScrollShadow(View view) {
+		final View scrollView;
+		if (useScrollableItemsContainer()) {
+			scrollView = view.findViewById(R.id.scroll_view);
+		} else {
+			scrollView = itemsContainer;
+		}
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(new OnScrollChangedListener() {
+
+			@Override
+			public void onScrollChanged() {
+				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+				AndroidUiHelper.updateVisibility(buttonsShadow, scrollToBottomAvailable);
+			}
+		});
 	}
 }

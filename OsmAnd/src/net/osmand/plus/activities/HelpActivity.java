@@ -141,8 +141,8 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 				"feature_articles/map-markers.html"));
 		contextMenuAdapter.addItem(createItem(R.string.travel_item, NULL_ID,
 				"feature_articles/travel.html"));
-		contextMenuAdapter.addItem(createItem(R.string.measure_distance_item, NULL_ID,
-				"feature_articles/measure-distance.html"));
+		contextMenuAdapter.addItem(createItem(R.string.plan_a_route, NULL_ID,
+				"feature_articles/plan-route.html"));
 		contextMenuAdapter.addItem(createItem(R.string.radius_ruler_item, NULL_ID,
 				"feature_articles/ruler.html"));
 		contextMenuAdapter.addItem(createItem(R.string.quick_action_item, NULL_ID,

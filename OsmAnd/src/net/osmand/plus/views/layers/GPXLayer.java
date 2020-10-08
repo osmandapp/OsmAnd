@@ -43,11 +43,13 @@ import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackDrawInfo;
@@ -70,6 +72,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -234,7 +237,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
+		List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
+
+		Iterator<SelectedGpxFile> iterator = selectedGPXFiles.iterator();
+		while (iterator.hasNext()) {
+			SelectedGpxFile selectedGpxFile = iterator.next();
+			if (selectedGpxFile.isFollowTrack(view.getApplication()) && !showTrackToFollow()) {
+				iterator.remove();
+			}
+		}
 		cache.clear();
 		if (!selectedGPXFiles.isEmpty()) {
 			drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
@@ -442,7 +453,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						if (segment.points.size() >= 2) {
 							WptPt start = segment.points.get(0);
 							WptPt end = segment.points.get(segment.points.size() - 1);
-							drawStartEndPoints(canvas, tileBox, start, end);
+							drawStartEndPoints(canvas, tileBox, start, selectedGpxFile.isShowCurrentTrack() ? null : end);
 						}
 					}
 				}
@@ -450,20 +461,28 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	private void drawStartEndPoints(Canvas canvas, RotatedTileBox tileBox, WptPt start, WptPt end) {
-		int startX = (int) tileBox.getPixXFromLatLon(start.lat, start.lon);
-		int startY = (int) tileBox.getPixYFromLatLon(start.lat, start.lon);
-		int endX = (int) tileBox.getPixXFromLatLon(end.lat, end.lon);
-		int endY = (int) tileBox.getPixYFromLatLon(end.lat, end.lon);
+	private void drawStartEndPoints(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @Nullable WptPt start, @Nullable WptPt end) {
+		int startX = start != null ? (int) tileBox.getPixXFromLatLon(start.lat, start.lon) : 0;
+		int startY = start != null ? (int) tileBox.getPixYFromLatLon(start.lat, start.lon) : 0;
+		int endX = end != null ? (int) tileBox.getPixXFromLatLon(end.lat, end.lon) : 0;
+		int endY = end != null ? (int) tileBox.getPixYFromLatLon(end.lat, end.lon) : 0;
 
-		QuadRect startRect = calculateRect(startX, startY, startPointIcon.getIntrinsicWidth(), startPointIcon.getIntrinsicHeight());
-		QuadRect endRect = calculateRect(endX, endY, finishPointIcon.getIntrinsicWidth(), finishPointIcon.getIntrinsicHeight());
+		int iconSize = AndroidUtils.dpToPx(view.getContext(), 14);
+		QuadRect startRectWithoutShadow = calculateRect(startX, startY, iconSize, iconSize);
+		QuadRect endRectWithoutShadow = calculateRect(endX, endY, iconSize, iconSize);
 
-		if (QuadRect.intersects(startRect, endRect)) {
-			drawPoint(canvas, startRect, startAndFinishIcon);
+		if (start != null && end != null && QuadRect.intersects(startRectWithoutShadow, endRectWithoutShadow)) {
+			QuadRect startAndFinishRect = calculateRect(startX, startY, startAndFinishIcon.getIntrinsicWidth(), startAndFinishIcon.getIntrinsicHeight());
+			drawPoint(canvas, startAndFinishRect, startAndFinishIcon);
 		} else {
-			drawPoint(canvas, startRect, startPointIcon);
-			drawPoint(canvas, endRect, finishPointIcon);
+			if (start != null) {
+				QuadRect startRect = calculateRect(startX, startY, startPointIcon.getIntrinsicWidth(), startPointIcon.getIntrinsicHeight());
+				drawPoint(canvas, startRect, startPointIcon);
+			}
+			if (end != null) {
+				QuadRect endRect = calculateRect(endX, endY, finishPointIcon.getIntrinsicWidth(), finishPointIcon.getIntrinsicHeight());
+				drawPoint(canvas, endRect, finishPointIcon);
+			}
 		}
 	}
 
@@ -696,6 +715,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private boolean isShowStartFinishForTrack(GPXFile gpxFile) {
+		return view.getApplication().getSettings().SHOW_START_FINISH_ICONS.get();
+		/*
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.isShowStartFinish();
 		} else if (gpxFile.showCurrentTrack) {
@@ -703,11 +724,27 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			return gpxFile.isShowStartFinish();
 		}
+		*/
 	}
 
 	private boolean hasTrackDrawInfoForTrack(GPXFile gpxFile) {
 		return trackDrawInfo != null && (trackDrawInfo.isCurrentRecording() && gpxFile.showCurrentTrack
 				|| gpxFile.path.equals(trackDrawInfo.getFilePath()));
+	}
+
+	private boolean showTrackToFollow() {
+		if (view.getContext() instanceof MapActivity) {
+			MapActivity mapActivity = (MapActivity) view.getContext();
+			OsmandApplication app = mapActivity.getMyApplication();
+			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
+			return !app.getSelectedGpxHelper().shouldHideTrackToFollow()
+					|| routeInfoMenu.isVisible()
+					|| app.getRoutingHelper().isFollowingMode()
+					|| MapRouteInfoMenu.followTrackVisible
+					|| MapRouteInfoMenu.chooseRoutesVisible
+					|| MapRouteInfoMenu.waypointsVisible;
+		}
+		return false;
 	}
 
 	private boolean isPointVisited(WptPt o) {
@@ -887,12 +924,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public boolean disableSingleTap() {
-		return false;
+		return isInTrackAppearanceMode();
 	}
 
 	@Override
 	public boolean disableLongPressOnMap() {
-		return false;
+		return isInTrackAppearanceMode();
 	}
 
 	@Override

@@ -291,9 +291,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	private void adjustModeButtons(TerrainMode mode) {
 		if (mode == SLOPE) {
-			UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, RIGHT);
+			UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, END);
 		} else {
-			UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, LEFT);
+			UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, START);
 		}
 	}
 

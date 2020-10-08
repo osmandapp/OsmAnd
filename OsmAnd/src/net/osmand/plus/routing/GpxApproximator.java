@@ -22,6 +22,7 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +45,7 @@ public class GpxApproximator {
 
 	private ThreadPoolExecutor singleThreadedExecutor;
 	private GpxApproximationProgressCallback approximationProgress;
+	private Future<?> currentApproximationTask;
 
 	public interface GpxApproximationProgressCallback {
 
@@ -89,8 +91,8 @@ public class GpxApproximator {
 		this.env = routingHelper.getRoutingEnvironment(ctx, mode, start, end);
 	}
 
-	private GpxRouteApproximation getNewGpxApproximationContext(@Nullable GpxRouteApproximation gctx) {
-		GpxRouteApproximation newContext = gctx != null ? new GpxRouteApproximation(gctx) : new GpxRouteApproximation(env.getCtx());
+	private GpxRouteApproximation getNewGpxApproximationContext() {
+		GpxRouteApproximation newContext = new GpxRouteApproximation(env.getCtx());
 		newContext.ctx.calculationProgress = new RouteCalculationProgress();
 		newContext.MINIMUM_POINT_APPROXIMATION = pointApproximation;
 		return newContext;
@@ -98,7 +100,7 @@ public class GpxApproximator {
 
 	private List<GpxPoint> getPoints() {
 		if (points == null) {
-			points = routingHelper.generateGpxPoints(env, getNewGpxApproximationContext(null), locationsHolder);
+			points = routingHelper.generateGpxPoints(env, getNewGpxApproximationContext(), locationsHolder);
 		}
 		List<GpxPoint> points = new ArrayList<>(this.points.size());
 		for (GpxPoint p : this.points) {
@@ -140,19 +142,22 @@ public class GpxApproximator {
 
 	public void cancelApproximation() {
 		if (gctx != null) {
-			gctx.calculationCancelled = true;
+			gctx.ctx.calculationProgress.isCancelled = true;
 		}
 	}
 
 	public void calculateGpxApproximation(@NonNull final ResultMatcher<GpxRouteApproximation> resultMatcher) {
 		if (gctx != null) {
-			gctx.calculationCancelled = true;
+			gctx.ctx.calculationProgress.isCancelled = true;
 		}
-		final GpxRouteApproximation gctx = getNewGpxApproximationContext(this.gctx);
+		final GpxRouteApproximation gctx = getNewGpxApproximationContext();
 		this.gctx = gctx;
 		startProgress();
 		updateProgress(gctx);
-		singleThreadedExecutor.submit(new Runnable() {
+		if (currentApproximationTask != null) {
+			currentApproximationTask.cancel(true);
+		}
+		currentApproximationTask = singleThreadedExecutor.submit(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -187,10 +192,10 @@ public class GpxApproximator {
 				@Override
 				public void run() {
 					RouteCalculationProgress calculationProgress = gctx.ctx.calculationProgress;
-					if (gctx.isCalculationDone() && GpxApproximator.this.gctx == gctx) {
+					if (!gctx.result.isEmpty() && GpxApproximator.this.gctx == gctx) {
 						finishProgress();
 					}
-					if (!gctx.isCalculationDone() && calculationProgress != null && !calculationProgress.isCancelled) {
+					if (gctx.result.isEmpty() && calculationProgress != null && !calculationProgress.isCancelled) {
 						float pr = calculationProgress.getLinearProgress();
 						approximationProgress.updateProgress((int) pr);
 						if (GpxApproximator.this.gctx != gctx) {

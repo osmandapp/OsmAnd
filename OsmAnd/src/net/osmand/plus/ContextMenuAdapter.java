@@ -53,6 +53,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
+
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
 
@@ -134,6 +137,15 @@ public class ContextMenuAdapter {
 		Collections.sort(items, new Comparator<ContextMenuItem>() {
 			@Override
 			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
+				if (DRAWER_SWITCH_PROFILE_ID.equals(item1.getId())) {
+					return -1;
+				}
+				if (DRAWER_CONFIGURE_PROFILE_ID.equals(item1.getId()) && DRAWER_SWITCH_PROFILE_ID.equals(item2.getId())) {
+					return 1;
+				}
+				if (DRAWER_CONFIGURE_PROFILE_ID.equals(item1.getId())) {
+					return -1;
+				}
 				int order1 = item1.getOrder();
 				int order2 = item2.getOrder();
 				if (order1 < order2) {

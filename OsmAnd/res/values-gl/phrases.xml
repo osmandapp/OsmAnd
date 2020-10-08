@@ -36,7 +36,7 @@
     <string name="poi_mobile_phone">Tenda de telefonía móbil</string>
     <string name="poi_motorcycle">Tenda de motos</string>
     <string name="poi_musical_instrument">Instrumentos musicais</string>
-    <string name="poi_newsagent">Axencia de xornalismo</string>
+    <string name="poi_newsagent">Venda de prensa</string>
     <string name="poi_organic">Produtos ecolóxicos</string>
     <string name="poi_paint">Tenda de pinturas</string>
     <string name="poi_pet">Tenda de animais</string>
@@ -3800,7 +3800,7 @@
     <string name="poi_tactile_paving_incorrect">Incorrecto</string>
     <string name="poi_drinking_water_refill_network">Rede de recarga de auga potábel</string>
     <string name="poi_drinking_water_refill_no">Recarga de auga potábel: non</string>
-    <string name="poi_drinking_water_refill_yes">Recarga de auga potábel: si</string>
+    <string name="poi_drinking_water_refill_yes">Si</string>
     <string name="poi_seamark_obstruction">Obstrución</string>
     <string name="poi_seamark_water_level_below_mwl">Nivel da auga: por debaixo do nivel medio da auga</string>
     <string name="poi_seamark_water_level_above_mwl">Nivel da auga: por encima do nivel medio da auga</string>
@@ -3825,4 +3825,16 @@
     <string name="poi_give_box">Caixa de distribución</string>
     <string name="poi_city_block">Predio</string>
     <string name="poi_borough">Concello</string>
+    <string name="poi_nuts">Froitos secos</string>
+    <string name="poi_beehive">Colmea</string>
+    <string name="poi_departures_board_timetable">Horarios</string>
+    <string name="poi_departures_board_realtime">Tempo real</string>
+    <string name="poi_departures_board_delay">Atraso</string>
+    <string name="poi_departures_board_yes">Si</string>
+    <string name="poi_departures_board_no">Taboleiro de saídas: non</string>
+    <string name="poi_elevator">Ascensor</string>
+    <string name="poi_traffic_signals_arrow_no">Frecha: non</string>
+    <string name="poi_recycling_small_electrical_appliances">Pequenos aparellos eléctricos</string>
+    <string name="poi_departures_board">Taboleiro de saídas</string>
+    <string name="poi_drinking_water_refill">Recarga de auga potábel</string>
 </resources>

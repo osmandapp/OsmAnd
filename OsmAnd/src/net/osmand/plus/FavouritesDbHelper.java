@@ -129,6 +129,7 @@ public class FavouritesDbHelper {
 		}
 	}
 
+	@Nullable
 	public Drawable getColoredIconForGroup(String groupName) {
 		String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(context, groupName);
 		FavoriteGroup favoriteGroup = getGroup(groupIdName);

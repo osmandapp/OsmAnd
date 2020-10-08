@@ -147,7 +147,7 @@
     <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Souhaitez-vous rechercher d\'autres moteurs de synthèse vocale sur Google Play \? Sinon la langue par défaut sera utilisée.</string>
     <string name="tts_missing_language_data_title">Données manquantes</string>
     <string name="tts_missing_language_data">Souhaitez-vous installer la langue sélectionnée depuis Google Play ?</string>
-    <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
+    <string name="gpx_option_reverse_route">Inverser le sens de la trace</string>
     <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
     <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
     <string name="switch_to_vector_map_to_see">Cartes vectorielles hors-lignes disponibles pour cette position. 
@@ -2054,8 +2054,8 @@
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
     <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant de démarrer l\'enregistrement de l\'itinéraire.</string>
-    <string name="gpx_no_tracks_title">Vous n\'avez pas encore de fichier GPX</string>
-    <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers GPX dans le dossier</string>
+    <string name="gpx_no_tracks_title">Vous n\'avez aucun fichier de trace pour l\'instant</string>
+    <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers de trace GPX dans le dossier</string>
     <string name="gpx_add_track">Autre trace GPX …</string>
     <string name="shared_string_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Bien</string>
@@ -2883,13 +2883,13 @@
     <string name="step_by_step">Instructions pas à pas</string>
     <string name="routeInfo_road_types_name">Types de route</string>
     <string name="exit_at">Sortir à</string>
-    <string name="quick_action_show_hide_gpx_tracks">Afficher / masquer les traces GPX</string>
-    <string name="quick_action_gpx_tracks_hide">Masquer les traces GPX</string>
-    <string name="quick_action_gpx_tracks_show">Afficher les traces GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Afficher / masquer les traces</string>
+    <string name="quick_action_gpx_tracks_hide">Masquer les traces</string>
+    <string name="quick_action_gpx_tracks_show">Afficher les traces</string>
     <string name="use_osm_live_public_transport_description">Activer les modifications de transports publics en temps réel avec OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transports publics OsmAnd Live</string>
     <string name="sit_on_the_stop">Panneau d\'affichage à l\'arrêt</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Bouton affichant ou masquant les traces GPX sélectionnées sur la carte.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Bouton affichant ou masquant, sur la carte, les traces sélectionnées.</string>
     <string name="transfers_size">%1$d transferts</string>
     <string name="add_start_and_end_points">Ajoutez un point de départ et d\'arrivée</string>
     <string name="route_add_start_point">Ajouter un point de départ</string>
@@ -3231,7 +3231,7 @@
     <string name="map_look_descr">Apparence de la carte</string>
     <string name="map_look">Apparence de la carte</string>
     <string name="general_settings_profile_descr">Thème de l\'application, unités, région</string>
-    <string name="reset_to_default">Restaurer les valeurs par défaut</string>
+    <string name="reset_to_default">Rétablir les paramètres par défaut</string>
     <string name="screen_alerts">Alertes visuelles</string>
     <string name="route_parameters_descr">Définir les paramètres de l\'itinéraire</string>
     <string name="route_parameters">Paramètres de l\'itinéraire</string>
@@ -3412,7 +3412,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icône affiché pendant la navigation ou en déplacement.</string>
     <string name="select_map_icon_descr">Icône affiché à l\'arrêt.</string>
-    <string name="logcat_buffer_descr">Consultez et partagez les journaux de l\'application (pour debug)</string>
+    <string name="logcat_buffer_descr">Vérifier et partager les logs détaillés de l\'application</string>
     <string name="permission_is_required">Vous n\'êtes pas autorisés à utiliser cette option.</string>
     <string name="live_monitoring_tracking_interval">Intervalle de suivi</string>
     <string name="live_monitoring_adress">Adresse web</string>
@@ -3755,7 +3755,7 @@
 \n
 \nSélectionnez %2$s. Toutes les données relatives aux radars (alertes, notifications, PI) seront supprimées.</string>
     <string name="keep_active">Garder actif</string>
-    <string name="speed_cameras_restart_descr">Un redémarrage est nécessaire pour supprimer complètement les données des radars.</string>
+    <string name="speed_cameras_restart_descr">Redémarrez l\'application pour supprimer les données radars.</string>
     <string name="uninstall_speed_cameras">Désinstaller les radars</string>
     <string name="shared_string_legal">Légal</string>
     <string name="speed_camera_pois">PI radars</string>
@@ -3769,12 +3769,12 @@
     <string name="speed_cameras_removed_descr">Cet appareil n\'a pas de radars.</string>
     <string name="app_mode_inline_skates">Patins à roulettes en ligne</string>
     <string name="use_volume_buttons_as_zoom">Zoomer avec les boutons de volume</string>
-    <string name="use_volume_buttons_as_zoom_descr">Activer pour contrôler le niveau de zoom de la carte avec les boutons de réglage du volume sonore.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Contrôler le niveau de zoom de la carte avec les boutons de réglage du volume sonore.</string>
     <string name="quick_action_remove_next_destination_descr">Le prochain point sur la route va être supprimé. S\'il s\'agit de la destination finale, la navigation s\'arrêtera.</string>
     <string name="lenght_limit_description">Indiquez la longueur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules longs.</string>
     <string name="quick_action_remove_next_destination">Supprimer le prochain point</string>
     <string name="please_provide_point_name_error">Merci de renseigner un nom pour le point</string>
-    <string name="plugin_wikipedia_description">Utilisez un guide de poche hors ligne grâce à Wikipédia. Activez le plugin Wikipédia : des points d\'intérêt seront affichés, ils vous permettrons d\'obtenir des informations sur les lieux qui vous entourent.</string>
+    <string name="plugin_wikipedia_description">Utilisez le guide Wikipédia hors ligne. Activez le plugin Wikipédia : des points d\'intérêt seront affichés, ils vous permettrons d\'obtenir des informations sur les lieux qui vous entourent.</string>
     <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
     <string name="app_mode_motor_scooter">Scooter</string>
     <string name="app_mode_enduro_motorcycle">Moto enduro</string>
@@ -3782,11 +3782,11 @@
     <string name="osm_edit_closed_note">Note OSM fermée</string>
     <string name="app_mode_wheelchair">Fauteuil roulant</string>
     <string name="app_mode_wheelchair_forward">Fauteuil roulant vers l\'avant</string>
-    <string name="set_working_days_to_continue">Vous devez définir les jours travaillés avant de poursuivre</string>
+    <string name="set_working_days_to_continue">Définissez les jours travaillés pour continuer</string>
     <string name="route_between_points">Itinéraire entre points</string>
     <string name="plan_a_route">Planifier un itinéraire</string>
     <string name="add_to_a_track">Ajouter à une trace</string>
-    <string name="shared_string_custom">Douane</string>
+    <string name="shared_string_custom">Personnalisé</string>
     <string name="add_hidden_group_info">Le point ajouté ne sera pas visible sur la carte car le groupe sélectionné est masqué. Vous pouvez le trouver dans \"%s\".</string>
     <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle d\'affichage sur la trace des marques de distance ou de durée.</string>
     <string name="gpx_split_interval_none_descr">Sélectionner l\'option de découpage : durée ou distance.</string>
@@ -3801,13 +3801,11 @@
     <string name="plan_route_select_track_file_for_open">Sélectionnez un fichier de trace à ouvrir.</string>
     <string name="shared_string_done">Terminé</string>
     <string name="overwrite_track">Remplacer la trace</string>
-    <string name="rourte_between_points_desc">Sélectionnez comment relier les points : par une ligne droite ou en calculant un itinéraire avec le profil sélectionné.</string>
-    <string name="rourte_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
-    <string name="rourte_between_points_warning_desc">Pour utiliser cette option, OsmAnd doit aligner votre trace sur les routes de la carte.
-\n
-\n À l\'étape suivante, vous devrez sélectionner le profil de navigation pour détecter les routes autorisées et le seuil de distance pour rapprocher votre trace des routes.</string>
-    <string name="rourte_between_points_add_track_desc">Sélectionnez un fichier de trace auquel ajouter un nouveau segment.</string>
+    <string name="route_between_points_desc">Sélectionnez comment relier les points : par une ligne droite ou en calculant un itinéraire reliant les points comme indiqué ci-dessous.</string>
+    <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
+    <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
+    <string name="route_between_points_warning_desc">Ensuite, sélectionnez le profil de navigation pour détecter les routes autorisées et le seuil de distance afin de déplacer votre trace.</string>
+    <string name="route_between_points_add_track_desc">Sélectionnez un fichier de trace auquel ajouter un nouveau segment.</string>
     <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
     <string name="reverse_route">Inverser l\'itinéraire</string>
     <string name="whole_track">Trace entière</string>
@@ -3815,7 +3813,7 @@
     <string name="threshold_distance">Seuil de distance</string>
     <string name="navigation_profile">Profil de navigation</string>
     <string name="street_level_imagery">Photos des rues</string>
-    <string name="plan_route_exit_dialog_descr">Voulez-vous vraiment fermer l\'itinéraire planifié sans enregistrer \? Vous perdrez toutes les modifications.</string>
+    <string name="plan_route_exit_dialog_descr">Voulez-vous vraiment fermer l\'itinéraire planifié sans enregistrer \? (vous perdrez vos modifications)</string>
     <string name="in_case_of_reverse_direction">Si inversion du sens</string>
     <string name="pass_whole_track_descr">Point de la trace vers lequel naviguer</string>
     <string name="shared_string_gpx_route">Enregistrer le parcours</string>
@@ -3831,14 +3829,14 @@
     <string name="shared_string_gpx_files">Traces</string>
     <string name="layer_gpx_layer">Traces</string>
     <string name="show_gpx">Traces</string>
-    <string name="monitoring_control_start">REC</string>
+    <string name="monitoring_control_start">ENR</string>
     <string name="save_track_to_gpx_globally">Enregistrer le parcours dans un fichier GPX</string>
     <string name="map_widget_monitoring">Enregistrement du parcours</string>
     <string name="marker_save_as_track">Enregistrer comme fichier de trace</string>
     <string name="follow_track">Suivre la trace</string>
     <string name="follow_track_descr">Sélectionner un fichier de trace à suivre</string>
     <string name="select_another_track">Sélectionner une autre trace</string>
-    <string name="navigate_to_track_descr">Naviguez de ma position vers la trace</string>
+    <string name="navigate_to_track_descr">Naviguer de ma position vers la trace</string>
     <string name="nearest_point">Point le plus proche</string>
     <string name="delete_address">Supprimer l\'adresse</string>
     <string name="add_address">Ajouter une adresse</string>
@@ -3850,4 +3848,44 @@
     <string name="open_saved_track">Ouvrir une trace enregistrée</string>
     <string name="shared_string_is_saved">a été enregistré</string>
     <string name="one_point_error">Veuillez ajouter au moins deux points.</string>
+    <string name="import_track_descr">Sélectionnez le fichier de trace à suivre ou importez-le depuis votre appareil.</string>
+    <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
+    <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
+    <string name="save_global_track_interval_descr">Définit la fréquence d’enregistrement du parcours (enregistrement activé depuis le gadget sur la carte).</string>
+    <string name="disable_recording_once_app_killed_descrp">Suspend l\'enregistrement du parcours lorsque l\'application est arrêtée via Applications récentes ; les indications OsmAnd ne seront plus affichées dans la barre de notifications.</string>
+    <string name="all_next_segments_will_be_recalc">Tous les segments suivants seront recalculés avec le profil sélectionné.</string>
+    <string name="all_previous_segments_will_be_recalc">Tous les segments précédents seront recalculés avec le profil sélectionné.</string>
+    <string name="all_next_segments">Tous les segments suivants</string>
+    <string name="previous_segment">Segment précédent</string>
+    <string name="all_previous_segments">Tous les segments précédents</string>
+    <string name="only_selected_segment_recalc">Seul le segment sélectionné sera recalculé avec le profil sélectionné.</string>
+    <string name="release_3_8">• Mise à jour du mode de planification d\'itinéraire : il autorise différents types de navigation par segment et permet d\'inclure les traces
+\n
+\n• Nouveau menu pour l\'apparence des traces : choix de la couleur, épaisseur, affichage des flèches de direction et icônes de départ et d\'arrivée
+\n
+\n• Amélioration de la visibilité des nœuds relatifs aux infrastructures cyclistes
+\n
+\n• Les traces peuvent être \"tapées\" pour afficher un menu contextuel avec des informations basiques
+\n
+\n• Amélioration de l\'algorithme de recherche
+\n
+\n• Amélioration du suivi des traces pendant la Navigation
+\n
+\n• Correction de l\'import / export des profils
+\n
+\n</string>
+    <string name="plan_route_trim_before">Couper avant</string>
+    <string name="plan_route_trim_after">Couper après</string>
+    <string name="plan_route_change_route_type_before">Modifier le type d’itinéraire avant</string>
+    <string name="plan_route_change_route_type_after">Modifier le type d’itinéraire après</string>
+    <string name="simplified_track_description">Seule la ligne d\'itinéraire sera enregistrée, les points de passage seront supprimés.</string>
+    <string name="shared_string_redo">Rétablir</string>
+    <string name="sort_last_modified">Dernière modification</string>
+    <string name="sort_name_descending">Nom : Z – A</string>
+    <string name="sort_name_ascending">Nom : A – Z</string>
+    <string name="start_finish_icons">Icônes de départ / arrivée</string>
+    <string name="contour_lines_thanks">Merci pour votre achat de \'Courbes de niveaux\'</string>
+    <string name="osm_live_payment_desc_hw">Abonnement facturé pour chaque période sélectionnée. Annulation possible à tout moment sur AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Éviter les trottoirs</string>
+    <string name="routing_attr_avoid_footways_name">Éviter les trottoirs</string>
 </resources>

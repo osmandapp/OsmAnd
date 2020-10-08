@@ -64,8 +64,6 @@ public class RoutePlannerFrontEnd {
 		public int routeGapDistance;
 		public int routeDistanceUnmatched;
 
-		public boolean calculationCancelled;
-		private boolean calculationDone;
 
 		public GpxRouteApproximation(RoutingContext ctx) {
 			this.ctx = ctx;
@@ -80,10 +78,6 @@ public class RoutePlannerFrontEnd {
 		public String toString() {
 			return String.format(">> GPX approximation (%d of %d m route calcs, %d route points searched) for %d m: %d m umatched",
 					routeCalculations, routeDistCalculations, routePointsSearched, routeDistance, routeDistanceUnmatched);
-		}
-
-		public boolean isCalculationDone() {
-			return calculationDone;
 		}
 
 		public double distFromLastPoint(LatLon startPoint) {
@@ -239,18 +233,25 @@ public class RoutePlannerFrontEnd {
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
 		gctx.ctx.keepNativeRoutingContext = true;
+		if (gctx.ctx.calculationProgress == null) {
+			gctx.ctx.calculationProgress = new RouteCalculationProgress();
+		}
 		GpxPoint start = null;
 		GpxPoint prev = null;
 		if (gpxPoints.size() > 0) {
 			gctx.ctx.calculationProgress.totalIterations = (int) (gpxPoints.get(gpxPoints.size() - 1).cumDist / gctx.MAXIMUM_STEP_APPROXIMATION + 1); 
 			start = gpxPoints.get(0); 
 		}
-		while (start != null && !gctx.calculationCancelled) {
+		while (start != null && !gctx.ctx.calculationProgress.isCancelled) {
+			if (Thread.currentThread().isInterrupted()) {
+				return null;
+			}
 			double routeDist = gctx.MAXIMUM_STEP_APPROXIMATION;
 			GpxPoint next = findNextGpxPointWithin(gctx, gpxPoints, start, routeDist);
 			boolean routeFound = false;
-			gctx.ctx.calculationProgress.nextIteration();
 			if (next != null && initRoutingPoint(start, gctx, gctx.MINIMUM_POINT_APPROXIMATION)) {
+				gctx.ctx.calculationProgress.totalEstimatedDistance = 0;
+				gctx.ctx.calculationProgress.iteration = (int) (next.cumDist / gctx.MAXIMUM_STEP_APPROXIMATION);
 				while (routeDist >= gctx.MINIMUM_STEP_APPROXIMATION && !routeFound) {
 					routeFound = initRoutingPoint(next, gctx, gctx.MINIMUM_POINT_APPROXIMATION);
 					if (routeFound) {
@@ -258,7 +259,7 @@ public class RoutePlannerFrontEnd {
 						if (routeFound) {
 							// route is found - cut the end of the route and move to next iteration
 //							start.stepBackRoute = new ArrayList<RouteSegmentResult>();
-//							boolean stepBack = true; 
+//							boolean stepBack = true;
 							boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
 							if (!stepBack) {
 								// not supported case (workaround increase MAXIMUM_STEP_APPROXIMATION)
@@ -299,20 +300,19 @@ public class RoutePlannerFrontEnd {
 			}
 			start = next;
 		}
-		if(gctx.ctx.calculationProgress != null) {
-			 gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
+		if (gctx.ctx.calculationProgress != null) {
+			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 		}
 		gctx.ctx.deleteNativeRoutingContext();
 		BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
 		calculateGpxRoute(gctx, gpxPoints);
-		if (!gctx.result.isEmpty() && !gctx.calculationCancelled) {
+		if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
 			new RouteResultPreparation().printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
 			System.out.println(gctx);
 		}
 		if (resultMatcher != null) {
-			resultMatcher.publish(gctx.calculationCancelled ? null : gctx);
+			resultMatcher.publish(gctx.ctx.calculationProgress.isCancelled ? null : gctx);
 		}
-		gctx.calculationDone = true;
 		return gctx;
 	}
 
@@ -365,7 +365,7 @@ public class RoutePlannerFrontEnd {
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
 		GpxPoint straightPointStart = null;
-		for (int i = 0; i < gpxPoints.size() && !gctx.calculationCancelled; ) {
+		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			GpxPoint pnt = gpxPoints.get(i);
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
 				LatLon startPoint = pnt.routeToTarget.get(0).getStartPoint();
@@ -459,7 +459,7 @@ public class RoutePlannerFrontEnd {
 	private void cleanupResultAndAddTurns(GpxRouteApproximation gctx) {
 		// cleanup double joints
 		int LOOK_AHEAD = 4;
-		for(int i = 0; i < gctx.result.size() && !gctx.calculationCancelled; i++) {
+		for(int i = 0; i < gctx.result.size() && !gctx.ctx.calculationProgress.isCancelled; i++) {
 			RouteSegmentResult s = gctx.result.get(i);
 			for(int j = i + 2; j <= i + LOOK_AHEAD && j < gctx.result.size(); j++) {
 				RouteSegmentResult e = gctx.result.get(j);
@@ -476,7 +476,7 @@ public class RoutePlannerFrontEnd {
 			r.setTurnType(null);
 			r.setDescription("");
 		}
-		if (!gctx.calculationCancelled) {
+		if (!gctx.ctx.calculationProgress.isCancelled) {
 			preparation.prepareTurnResults(gctx.ctx, gctx.result);
 		}
 	}
@@ -549,8 +549,10 @@ public class RoutePlannerFrontEnd {
 		if (start != null && start.pnt == null) {
 			gctx.routePointsSearched++;
 			RouteSegmentPoint rsp = findRouteSegment(start.loc.getLatitude(), start.loc.getLongitude(), gctx.ctx, null, false);
-			if (MapUtils.getDistance(rsp.getPreciseLatLon(), start.loc) < distThreshold) {
-				start.pnt = rsp;
+			if (rsp != null) {
+				if (MapUtils.getDistance(rsp.getPreciseLatLon(), start.loc) < distThreshold) {
+					start.pnt = rsp;
+				}
 			}
  		} 
 		if (start != null && start.pnt != null) {
@@ -737,7 +739,7 @@ public class RoutePlannerFrontEnd {
 			res = searchRouteImpl(ctx, points, routeDirection);
 		}
 		if (ctx.calculationProgress != null) {
-			ctx.calculationProgress.timeToCalculate += (System.nanoTime() - timeToCalculate);
+			ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
 		}
 		BinaryRoutePlanner.printDebugMemoryInformation(ctx);
 		if (res != null) {

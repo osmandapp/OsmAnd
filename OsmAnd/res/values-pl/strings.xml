@@ -92,7 +92,7 @@
     <string name="tts_language_not_supported">Wybrany język nie jest obsługiwany przez zainstalowany moduł syntezy mowy (TTS), więc zostanie użyty aktualny język. Poszukać innego mechanizmu syntezy mowy w sklepie\?</string>
     <string name="tts_missing_language_data_title">Brakujące dane</string>
     <string name="tts_missing_language_data">Czy chcesz odwiedzić sklep, by zainstalować wybrany język?</string>
-    <string name="gpx_option_reverse_route">Odwróć kierunek GPX</string>
+    <string name="gpx_option_reverse_route">Odwróć kierunek śladu</string>
     <string name="gpx_option_destination_point">Użyj bieżącego celu</string>
     <string name="switch_to_raster_map_to_see">Pobierz mapę wektorową offline tego położenia w „Ustawieniach” (\"Zarządzaj mapami\") lub przełącz na wtyczkę \"Mapy online\".</string>
     <string name="switch_to_vector_map_to_see">Dla bieżącego położenia dostępna jest wektorowa mapa offline.
@@ -2014,7 +2014,7 @@
     <string name="no_inet_connection_desc_map">Wymagane, aby pobrać mapy.</string>
     <string name="search_location">Szukanie położenia…</string>
     <string name="storage_free_space">Wolna pamięć</string>
-    <string name="storage_place_description">Katalog przechowywania danych OsmAnd (mapy, pliki GPX, itp.): %1$s.</string>
+    <string name="storage_place_description">Przechowywanie danych OsmAnd (dla map, plików śladów, itp.): %1$s.</string>
     <string name="give_permission">Zezwól</string>
     <string name="allow_access_location">Zezwól na dostęp do położenia</string>
     <string name="search_my_location">Wyszukaj aktualne położenie</string>
@@ -2066,8 +2066,8 @@
     <string name="trip_rec_notification_settings_desc">Wyświetla powiadomienie systemowe umożliwiające rejestrowanie podróży.</string>
     <string name="shared_string_notifications">Powiadomienia</string>
     <string name="shared_string_resume">Kontynuuj</string>
-    <string name="gpx_no_tracks_title">Nie ma na razie żadnych plików GPX</string>
-    <string name="gpx_no_tracks_title_folder">Można także dodać pliki GPX do katalogu</string>
+    <string name="gpx_no_tracks_title">Nie masz jeszcze żadnych plików śladów</string>
+    <string name="gpx_no_tracks_title_folder">Można również dodać pliki śladów do folderu</string>
     <string name="gpx_add_track">Dodaj więcej…</string>
     <string name="shared_string_appearance">Wygląd</string>
     <string name="rendering_value_fine_name">Bardzo cienki</string>
@@ -2317,7 +2317,7 @@
     <string name="nothing_found_descr">Zmień wyszukiwanie lub zwiększ jego promień.</string>
     <string name="private_access_routing_req">Cel podróży jest położony na obszarze z dostępem prywatnym. Umożliwić używanie prywatnych dróg dla tej trasy\?</string>
     <string name="search_favorites">Szukaj w Ulubionych</string>
-    <string name="mapillary">Zdjęcia z poziomu ulicy</string>
+    <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widżet Mapillary</string>
     <string name="shared_string_add_photos">Dodaj zdjęcia</string>
     <string name="mapillary_action_descr">Udostępnij widok z poziomu ulicy przez Mapillary.</string>
@@ -2896,10 +2896,10 @@
     <string name="shared_string_swap">Wymień</string>
     <string name="show_more">Wyświetl więcej</string>
     <string name="tracks_on_map">Wyświetlane ślady</string>
-    <string name="quick_action_show_hide_gpx_tracks">Przełącz widoczność śladów GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Przycisk do pokazywania lub ukrywania wybranych ścieżek GPX na mapie.</string>
-    <string name="quick_action_gpx_tracks_hide">Ukryj ślady GPX</string>
-    <string name="quick_action_gpx_tracks_show">Wyświetl ślady GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Pokaż/Ukryj ślady</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Przycisk do pokazywania lub ukrywania wybranych śladów na mapie.</string>
+    <string name="quick_action_gpx_tracks_hide">Ukryj ślady</string>
+    <string name="quick_action_gpx_tracks_show">Pokaż ślady</string>
     <string name="add_destination_query">Proszę najpierw ustalić cel</string>
     <string name="previous_route">Poprzednia trasa</string>
     <string name="public_transport_warning_descr_blog">Dowiedz się więcej na naszym blogu, jak OsmAnd wyznacza trasy.</string>
@@ -3783,13 +3783,13 @@
     <string name="clear_tiles_warning">Zastosowanie tych zmian wyczyści dane z pamięci podręcznej dla tego źródła kafelków</string>
     <string name="shared_string_bearing">Kierunek</string>
     <string name="item_deleted">Usunięto %1$s</string>
-    <string name="speed_cameras_restart_descr">Ponowne uruchomienie jest wymagane, żeby całkowicie usunąć dane fotoradarów.</string>
+    <string name="speed_cameras_restart_descr">Uruchom ponownie aplikację, aby usunąć wszystkie dane o fotoradarach.</string>
     <string name="shared_string_uninstall_and_restart">Odinstaluj i zrestartuj</string>
     <string name="tracker_item">Tracker OsmAnd</string>
     <string name="lenght_limit_description">Podaj długość pojazdu, niektóre ograniczenia tras mogą być stosowane dla długich pojazdów.</string>
     <string name="speed_cameras_removed_descr">To urządzenie nie ma fotoradarów.</string>
-    <string name="quick_action_remove_next_destination">Usuń następny punkt docelowy</string>
-    <string name="use_volume_buttons_as_zoom_descr">Włącz sterowanie poziomem powiększenia mapy za pomocą przycisków głośności urządzenia.</string>
+    <string name="quick_action_remove_next_destination">Usuń najbliższy punkt docelowy</string>
+    <string name="use_volume_buttons_as_zoom_descr">Steruj poziomem powiększenia mapy za pomocą przycisków głośności na urządzeniu.</string>
     <string name="please_provide_point_name_error">Podaj nazwę punktu</string>
     <string name="quick_action_remove_next_destination_descr">Bieżący punkt docelowy na trasie zostanie usunięty. Jeśli będzie to miejsce docelowe, nawigacja zostanie zatrzymana.</string>
     <string name="search_download_wikipedia_maps">Pobierz mapy Wikipedii</string>
@@ -3814,8 +3814,8 @@
     <string name="gpx_split_interval_none_descr">Wybierz żądaną opcję podziału: według czasu lub odległości.</string>
     <string name="track_coloring_solid">Stałe</string>
     <string name="gpx_parse_error">OsmAnd GPX nie jest dobrze uformowany, prosimy o kontakt z zespołem wsparcia technicznego w celu dalszego zbadania sprawy.</string>
-    <string name="turn_screen_on_wake_time_descr">Ustaw limit czasu ekranu po przebudzeniu. (\"%1$s\" nie stosuje się żadnego limitu czasu.)</string>
-    <string name="track_show_start_finish_icons">Pokaż ikony rozpoczęcia i zakończenia</string>
+    <string name="turn_screen_on_wake_time_descr">Wybierz limit czasu ekranu po przebudzeniu. (\"%1$s\" nie powoduje przekroczenia limitu czasu).</string>
+    <string name="track_show_start_finish_icons">Pokaż ikony początku i końca</string>
     <string name="gpx_split_interval_descr">Wybierz przedział czasowy, w którym będą wyświetlane znaki z odległością lub czasem na torze.</string>
     <string name="shared_string_custom">Dostosowany</string>
     <string name="gpx_direction_arrows">Strzałki kierunku</string>
@@ -3827,37 +3827,37 @@
     <string name="shared_string_done">Wykonane</string>
     <string name="turn_screen_on_power_button_disabled">Wyłączone. Wymagane „Pozostaw ekran włączony” w sekcji „Limit czasu po wybudzeniu”.</string>
     <string name="overwrite_track">Zastępowanie ścieżki</string>
-    <string name="save_as_new_track">Zapisz jako nowa Ścieżka</string>
+    <string name="save_as_new_track">Zapisz jako nowa ślad</string>
     <string name="reverse_route">Odwróć trasę</string>
     <string name="whole_track">Cała trasa</string>
     <string name="next_segment">Nowy segment</string>
     <string name="threshold_distance">Odległość graniczna</string>
     <string name="navigation_profile">Profil nawigacji</string>
-    <string name="rourte_between_points_add_track_desc">Wybierz plik śladu do którego zostanie dodany nowy segment.</string>
-    <string name="rourte_between_points_whole_track_button_desc">Cała trasa zostanie ponownie wyznaczona przy użyciu wybranego profilu.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Tylko następny segment zostanie ponownie obliczony przy użyciu wybranego profilu.</string>
-    <string name="rourte_between_points_desc">Wybierz sposób łączenia punktów linią prostą lub obliczania trasy między nimi z wybranym profilem.</string>
-    <string name="rourte_between_points_warning_desc">Aby skorzystać z tej opcji, OsmAnd musi przyciągnąć ślad do dróg mapy.
+    <string name="route_between_points_add_track_desc">Wybierz plik śladu do którego zostanie dodany nowy segment.</string>
+    <string name="route_between_points_whole_track_button_desc">Cała trasa zostanie ponownie wyznaczona przy użyciu wybranego profilu.</string>
+    <string name="route_between_points_next_segment_button_desc">Tylko następny segment zostanie przeliczony przy użyciu wybranego profilu.</string>
+    <string name="route_between_points_desc">Wybierz sposób łączenia punktów, za pomocą linii prostej, lub oblicz trasę między nimi w sposób określony poniżej.</string>
+    <string name="route_between_points_warning_desc">Aby skorzystać z tej opcji, OsmAnd musi przyciągnąć ślad do dróg mapy.
 \n
 \nW następnym kroku należy wybrać profil nawigacji w celu wykrycia dozwolonych dróg i odległości progowej w celu przybliżenia śledzenia drogi.</string>
     <string name="street_level_imagery">Zdjęcia z poziomu ulicy</string>
-    <string name="plan_route_exit_dialog_descr">Zakończyć planowanie trasy bez zapisywania\? Wszystkie zmiany zostaną utracone.</string>
+    <string name="plan_route_exit_dialog_descr">Czy na pewno chcesz odrzucić wszystkie zmiany w zaplanowanej trasie, zamykając ją\?</string>
     <string name="in_case_of_reverse_direction">W przypadku odwrotnego kierunku</string>
     <string name="navigate_to_track_descr">Przejdź z mojej lokalizacji na trasę</string>
     <string name="app_mode_wheelchair_forward">Wózek naprzód</string>
     <string name="show_gpx">Ślady</string>
     <string name="follow_track">Podążanie za śladem</string>
-    <string name="import_track_descr">Proszę wybrać plik śladu lub zaimportować go z urządzenia.</string>
+    <string name="import_track_descr">Wybierz plik śladu do śledzenia lub zaimportuj go z urządzenia.</string>
     <string name="shared_string_save_as_gpx">Zapisz jako nowy plik śladu</string>
     <string name="add_segment_to_the_track">Dodaj do pliku śladu</string>
     <string name="shared_string_gpx_files">Ślady</string>
     <string name="layer_gpx_layer">Ślady</string>
-    <string name="monitoring_control_start">GPX</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
     <string name="shared_string_gpx_route">Trasa szlaku</string>
     <string name="empty_state_my_tracks">Dodaj pliki śladów</string>
     <string name="empty_state_my_tracks_desc">Importowanie lub rejestrowanie plików śladu</string>
-    <string name="context_menu_item_add_waypoint">Dodaj punkt orientacyjny</string>
+    <string name="context_menu_item_add_waypoint">Dodaj punkt trasy</string>
     <string name="quick_action_add_gpx">Dodaj punkt trasy</string>
     <string name="map_widget_monitoring">Rejestrowanie śladu</string>
     <string name="marker_save_as_track">Zapisz jako plik śladu</string>
@@ -3874,4 +3874,41 @@
     <string name="plan_route_trim_after">Przytnij po</string>
     <string name="plan_route_change_route_type_before">Zmień typ trasy przed</string>
     <string name="plan_route_change_route_type_after">Zmień typ trasy po</string>
+    <string name="simplified_track">Uproszczona ścieżka</string>
+    <string name="simplified_track_description">Zapisana zostanie tylko linia trasy, punkty trasy zostaną usunięte.</string>
+    <string name="shared_string_file_name">Nazwa pliku</string>
+    <string name="number_of_gpx_files_selected_pattern">%s wybrane pliki ścieżki</string>
+    <string name="save_global_track_interval_descr">Określ interwał rejestrowania dla ogólnego rejestrowania śladu (włączany za pomocą widżetu Rejestrowanie podróży na mapie).</string>
+    <string name="gpx_monitoring_stop">Wstrzymaj nagrywanie podróży</string>
+    <string name="gpx_monitoring_start">Wznowienie rejestracji podróży</string>
+    <string name="system_default_theme">Domyślny systemu</string>
+    <string name="all_next_segments">Wszystkie kolejne segmenty</string>
+    <string name="previous_segment">Poprzedni segment</string>
+    <string name="all_previous_segments">Wszystkie poprzednie segmenty</string>
+    <string name="only_selected_segment_recalc">Tylko wybrany segment zostanie ponownie obliczony przy użyciu wybranego profilu.</string>
+    <string name="all_next_segments_will_be_recalc">Wszystkie kolejne segmenty zostaną ponownie obliczone przy użyciu wybranego profilu.</string>
+    <string name="all_previous_segments_will_be_recalc">Wszystkie poprzednie segmenty zostaną ponownie obliczone przy użyciu wybranego profilu.</string>
+    <string name="open_saved_track">Otwórz zapisaną ścieżkę</string>
+    <string name="shared_string_is_saved">jest zapisywany</string>
+    <string name="one_point_error">Należy dodać co najmniej dwa punkty.</string>
+    <string name="disable_recording_once_app_killed_descrp">Wstrzyma rejestrowanie ścieżki, gdy aplikacja zostanie zabita (za pośrednictwem ostatnich aplikacji). (Wskazanie tła OsmAnd znika z paska powiadomień Androida).</string>
+    <string name="shared_string_redo">Ponów</string>
+    <string name="release_3_8">• Zaktualizowana funkcja planu trasy: umożliwia korzystanie z różnych typów nawigacji na segment i dołączanie ścieżek
+\n
+\n• Nowe menu wygląd utworów: wybierz kolor, grubość, strzałki kierunku wyświetlania, ikony startu / wykończenia
+\n
+\n• Lepsza widoczność węzłów rowerowych.
+\n
+\n• Utwory są teraz tappable, mają menu kontekstowe z podstawowymi informacjami.
+\n
+\n• Ulepszone algorytmy wyszukiwania
+\n
+\n• Ulepszone opcje śledzenia w nawigacji
+\n
+\n• Naprawiono problemy z importem/eksportowaniem ustawień profilu
+\n
+\n</string>
+    <string name="sort_last_modified">Ostatnia modyfikacja</string>
+    <string name="sort_name_descending">Nazwa: Z – A</string>
+    <string name="sort_name_ascending">Nazwa: A – Z</string>
 </resources>

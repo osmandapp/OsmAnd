@@ -25,10 +25,13 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 
 	public static final String TRACK_WIDTH_BOLD = "bold";
 	public static final String TRACK_WIDTH_MEDIUM = "medium";
+	public static final String SHOW_START_FINISH_ATTR = "show_start_finish_attr";
 
 	private OsmandApplication app;
 	private GpxAppearanceAdapterType adapterType;
 	private int currentColor;
+	private boolean showStartFinishIcons;
+	private boolean nightMode;
 
 	public enum GpxAppearanceAdapterType {
 		TRACK_WIDTH,
@@ -36,20 +39,15 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 		TRACK_WIDTH_COLOR
 	}
 
-	public GpxAppearanceAdapter(Context context, String currentColorValue, GpxAppearanceAdapterType adapterType) {
+	public GpxAppearanceAdapter(Context context, String currentColorValue, GpxAppearanceAdapterType adapterType,
+								boolean showStartFinishIcons, boolean nightMode) {
 		super(context, R.layout.rendering_prop_menu_item);
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.adapterType = adapterType;
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		this.currentColor = parseTrackColor(renderer, currentColorValue);
-		init();
-	}
-
-	public GpxAppearanceAdapter(Context context, int currentColor, GpxAppearanceAdapterType adapterType) {
-		super(context, R.layout.rendering_prop_menu_item);
-		this.app = (OsmandApplication) context.getApplicationContext();
-		this.adapterType = adapterType;
-		this.currentColor = currentColor;
+		this.showStartFinishIcons = showStartFinishIcons;
+		this.nightMode = nightMode;
 		init();
 	}
 
@@ -58,8 +56,9 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 	public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 		AppearanceListItem item = getItem(position);
 		View v = convertView;
+		Context context = getContext();
 		if (v == null) {
-			v = LayoutInflater.from(getContext()).inflate(R.layout.rendering_prop_menu_item, null);
+			v = LayoutInflater.from(context).inflate(R.layout.rendering_prop_menu_item, null);
 		}
 		if (item != null) {
 			TextView textView = (TextView) v.findViewById(R.id.text1);
@@ -68,7 +67,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 				int iconId = getWidthIconId(item.value);
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
 						app.getUIUtilities().getPaintedIcon(iconId, currentColor), null);
-			} else {
+			} else if (ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR.equals(item.attrName)) {
 				if (item.color == -1) {
 					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
 							app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle), null);
@@ -76,8 +75,12 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
 							app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, item.color), null);
 				}
+			} else if (SHOW_START_FINISH_ATTR.equals(item.attrName)) {
+				int iconId = showStartFinishIcons ? R.drawable.ic_check_box_dark : R.drawable.ic_check_box_outline_dark;
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, null, app.getUIUtilities().getIcon(iconId,
+						nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light), null);
 			}
-			textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(getContext(), 10f));
+			textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(context, 10f));
 			v.findViewById(R.id.divider).setVisibility(item.lastItem
 					&& position < getCount() - 1 ? View.VISIBLE : View.GONE);
 		}
@@ -95,10 +98,15 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 	}
 
 	private void init() {
-		addAll(getAppearanceItems(app, adapterType));
+		addAll(getAppearanceItems(app, adapterType, showStartFinishIcons));
 	}
 
 	public static List<AppearanceListItem> getAppearanceItems(OsmandApplication app, GpxAppearanceAdapterType adapterType) {
+		return getAppearanceItems(app, adapterType, false);
+	}
+
+	public static List<AppearanceListItem> getAppearanceItems(OsmandApplication app, GpxAppearanceAdapterType adapterType,
+															  boolean showStartFinishIcons) {
 		List<AppearanceListItem> items = new ArrayList<>();
 		RenderingRuleProperty trackWidthProp = null;
 		RenderingRuleProperty trackColorProp = null;
@@ -113,30 +121,35 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 		}
 
 		if (trackWidthProp != null) {
-			AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR, "",
-					SettingsActivity.getStringPropertyValue(app, trackWidthProp.getDefaultValueDescription()));
-			items.add(item);
 			for (int j = 0; j < trackWidthProp.getPossibleValues().length; j++) {
-				item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR,
+				AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR,
 						trackWidthProp.getPossibleValues()[j],
 						SettingsActivity.getStringPropertyValue(app, trackWidthProp.getPossibleValues()[j]));
 				items.add(item);
+				if (adapterType != GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
+					if (j == trackWidthProp.getPossibleValues().length - 1) {
+						item.setLastItem(true);
+					}
+				}
 			}
-			item.setLastItem(true);
+		}
+		if (adapterType == GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
+			AppearanceListItem startFinishIconsitem = new AppearanceListItem(SHOW_START_FINISH_ATTR,
+					showStartFinishIcons ? "false" : "true", app.getString(R.string.start_finish_icons));
+			items.add(startFinishIconsitem);
+			startFinishIconsitem.setLastItem(true);
 		}
 		if (trackColorProp != null) {
-			AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR, "",
-					SettingsActivity.getStringPropertyValue(app, trackColorProp.getDefaultValueDescription()),
-					parseTrackColor(renderer, ""));
-			items.add(item);
 			for (int j = 0; j < trackColorProp.getPossibleValues().length; j++) {
-				item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR,
+				AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR,
 						trackColorProp.getPossibleValues()[j],
 						SettingsActivity.getStringPropertyValue(app, trackColorProp.getPossibleValues()[j]),
 						parseTrackColor(renderer, trackColorProp.getPossibleValues()[j]));
 				items.add(item);
+				if (j == trackColorProp.getPossibleValues().length - 1) {
+					item.setLastItem(true);
+				}
 			}
-			item.setLastItem(true);
 		}
 		return items;
 	}

@@ -15,20 +15,21 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.internal.FlowLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -41,9 +42,9 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
-
 public class TrackColoringCard extends BaseCard implements ColorPickerListener {
+
+	private static final int MINIMUM_CONTRAST_RATIO = 3;
 
 	public static final int INVALID_VALUE = -1;
 
@@ -78,10 +79,10 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 		createColorSelector();
 		updateColorSelector();
 
-		coloringAdapter = new TrackColoringAdapter(appearanceItems);
-		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
-		groupRecyclerView.setAdapter(coloringAdapter);
-		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
+//		coloringAdapter = new TrackColoringAdapter(appearanceItems);
+//		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
+//		groupRecyclerView.setAdapter(coloringAdapter);
+//		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
 	}
@@ -129,7 +130,7 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 		selectColor.addView(createDividerView(selectColor));
 
 		List<Integer> colors = new ArrayList<>();
-		for (AppearanceListItem appearanceListItem : getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
+		for (AppearanceListItem appearanceListItem : GpxAppearanceAdapter.getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
 			if (!colors.contains(appearanceListItem.getColor())) {
 				colors.add(appearanceListItem.getColor());
 			}
@@ -142,13 +143,22 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 
 	private View createColorItemView(@ColorInt final int color, final FlowLayout rootView, boolean customColor) {
 		View colorItemView = createCircleView(rootView);
+
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
-		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle), color));
+
+		Drawable transparencyIcon = getTransparencyIcon(app, color);
+		Drawable colorIcon = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle, color);
+		Drawable layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon);
+		double contrastRatio = ColorUtils.calculateContrast(color, ContextCompat.getColor(app, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
+		if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
+			backgroundCircle.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
+		}
+		backgroundCircle.setImageDrawable(layeredIcon);
 		backgroundCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				updateColorSelector(color, rootView);
-				coloringAdapter.notifyDataSetChanged();
+//				coloringAdapter.notifyDataSetChanged();
 				trackDrawInfo.setColor(color);
 
 				CardListener listener = getListener();
@@ -173,6 +183,12 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 		return colorItemView;
 	}
 
+	private Drawable getTransparencyIcon(OsmandApplication app, @ColorInt int color) {
+		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
+		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
+		return app.getUIUtilities().getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor);
+	}
+
 	private View createAddCustomColorItemView(FlowLayout rootView) {
 		View colorItemView = createCircleView(rootView);
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
@@ -183,7 +199,7 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 		ImageView icon = colorItemView.findViewById(R.id.icon);
 		icon.setVisibility(View.VISIBLE);
 		int activeColorResId = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
-		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId));
+		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_plus, activeColorResId));
 
 		backgroundCircle.setImageDrawable(backgroundIcon);
 		backgroundCircle.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +207,7 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					CustomColorBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), target, TrackColoringCard.INVALID_VALUE);
+					CustomColorBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), target, null);
 				}
 			}
 		});
@@ -278,23 +294,27 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 	}
 
 	@Override
-	public void onColorSelected(int prevColor, int newColor) {
-		if (prevColor == INVALID_VALUE && customColors.size() < 6) {
-			customColors.add(newColor);
-		} else if (!Algorithms.isEmpty(customColors)) {
+	public void onColorSelected(Integer prevColor, int newColor) {
+		if (prevColor != null) {
 			int index = customColors.indexOf(prevColor);
 			if (index != INVALID_VALUE) {
 				customColors.set(index, newColor);
+				saveCustomColorsToTracks(prevColor, newColor);
 			}
+			if (trackDrawInfo.getColor() == prevColor) {
+				trackDrawInfo.setColor(newColor);
+			}
+		} else if (customColors.size() < 6) {
+			customColors.add(newColor);
+			trackDrawInfo.setColor(newColor);
 		}
 		saveCustomColors();
-		saveCustomColorsToTracks(prevColor, newColor);
 		updateContent();
 	}
 
 	private void saveCustomColorsToTracks(int prevColor, int newColor) {
 		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
-		for (GPXDatabase.GpxDataItem dataItem : gpxDataItems) {
+		for (GpxDataItem dataItem : gpxDataItems) {
 			if (prevColor == dataItem.getColor()) {
 				app.getGpxDbHelper().updateColor(dataItem, newColor);
 			}

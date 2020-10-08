@@ -18,7 +18,7 @@
 			android:id="@+id/route_menu_top_shadow_all"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="?attr/card_and_list_background_basic"
+			android:background="?attr/bg_color"
 			android:minHeight="@dimen/bottom_sheet_title_height"
 			android:orientation="vertical"
 			android:paddingLeft="@dimen/content_padding"
@@ -37,7 +37,7 @@
 				android:layout_height="wrap_content">
 
 				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/no_search_results_description"
+					android:id="@+id/track_title"
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
 					android:layout_gravity="center_vertical"

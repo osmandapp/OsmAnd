@@ -119,7 +119,7 @@ public class Algorithms {
 	}
 
 	public static String getFileNameWithoutExtension(String name) {
-		int i = name.indexOf('.');
+		int i = name.lastIndexOf('.');
 		if (i >= 0) {
 			name = name.substring(0, i);
 		}
@@ -941,5 +941,21 @@ public class Algorithms {
 			res[i] = Integer.parseInt(items[i]);
 		}
 		return res;
+	}
+
+	public static boolean isValidMessageFormat(CharSequence sequence) {
+		if (!isEmpty(sequence)) {
+			int counter = 0;
+			for (int i = 0; i < sequence.length(); i++) {
+				char ch = sequence.charAt(i);
+				if (ch == '{') {
+					counter++;
+				} else if (ch == '}') {
+					counter--;
+				}
+			}
+			return counter == 0;
+		}
+		return false;
 	}
 }

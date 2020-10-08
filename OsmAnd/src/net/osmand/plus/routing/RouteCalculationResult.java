@@ -337,13 +337,13 @@ public class RouteCalculationResult {
 				tunnelAlarm = null;
 			}
 			while (true) {
+				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
+					break;
+				}
 				Location n = new Location(""); //$NON-NLS-1$
 				LatLon point = s.getPoint(i);
 				n.setLatitude(point.getLatitude());
 				n.setLongitude(point.getLongitude());
-				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
-					break;
-				}
 				if (vls != null && i * 2 + 1 < vls.length) {
 					float h = vls[2 * i + 1];
 					n.setAltitude(h);
@@ -359,7 +359,7 @@ public class RouteCalculationResult {
 				locations.add(n);
 				attachAlarmInfo(alarms, s, i, locations.size());
 				segmentsToPopulate.add(s);
-				if (i == s.getEndPointIndex() ) {
+				if (i == s.getEndPointIndex()) {
 					break;
 				}
 				if (plus) {

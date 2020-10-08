@@ -224,7 +224,7 @@
     <string name="button_upgrade_osmandplus">Aktualizovať OsmAnd+</string>
     <string name="map_version_changed_info">Stiahnite novú verziu aplikácie, aby ste mohli použiť nové mapové súbory.</string>
     <string name="poi_filter_nominatim">Online filter Nominatim</string>
-    <string name="search_position_current_location_search">Hľadám umiestnenie…</string>
+    <string name="search_position_current_location_search">Hľadám polohu…</string>
     <string name="search_position_current_location_found">Moja poloha (nájdená)</string>
     <string name="search_position_address">Adresa…</string>
     <string name="search_position_favorites">Obľúbené miesta…</string>
@@ -281,7 +281,7 @@
     <string name="tts_language_not_supported">Zvolený jazyk nie je podporovaný nainštalovaným TTS (text-to-speech) modulom v Androide. Bude použitý jeho prednastavený TTS jazyk. Nájsť iný TTS modul v obchode\?</string>
     <string name="tts_missing_language_data_title">Chýbajúce údaje</string>
     <string name="tts_missing_language_data">Prejsť do obchodu pre stiahnutie zvoleného jazyka?</string>
-    <string name="gpx_option_reverse_route">Obrátiť GPX smerovanie</string>
+    <string name="gpx_option_reverse_route">Obrátiť smer stopy</string>
     <string name="gpx_option_destination_point">Použiť aktuálny cieľový bod</string>
     <string name="gpx_option_from_start_point">Prejsť pozdĺž celej trasy</string>
     <string name="switch_to_vector_map_to_see">Pre túto oblasť je dostupná offline vektorová mapa.
@@ -325,11 +325,11 @@
     <string name="foot">ft</string>
     <string name="mile_per_hour">mph</string>
     <string name="mile">mi</string>
-    <string name="send_location_way_choose_title">Zdieľať umiestnenie cez</string>
+    <string name="send_location_way_choose_title">Zdieľať polohu cez</string>
     <string name="send_location_sms_pattern">Pozícia: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Na zobrazenie umiestnenia nasledujte webový odkaz %1$s alebo odkaz androidovského obsahu (intent link) %2$s</string>
-    <string name="send_location">Poslať umiestnenie</string>
-    <string name="context_menu_item_share_location">Zdieľať umiestnenie</string>
+    <string name="send_location">Poslať polohu</string>
+    <string name="context_menu_item_share_location">Zdieľať polohu</string>
     <string name="add_waypoint_dialog_added">GPX bod (waypoint) \"{0}\" pridaný</string>
     <string name="add_waypoint_dialog_title">Pridať waypoint do nahranej GPX stopy</string>
     <string name="amenity_type_administrative">Administratíva</string>
@@ -419,7 +419,7 @@
     <string name="download_type_to_filter">sem zadajte čo chcete nájsť</string>
     <string name="use_high_res_maps">Mapa s vysokým rozlíšením</string>
     <string name="use_high_res_maps_descr">Nerozťahovať (a nerozmazať) mapové dlaždice na obrazovkách s vysokou hustotou bodov.</string>
-    <string name="unknown_location">Umiestnenie zatiaľ nenájdené.</string>
+    <string name="unknown_location">Poloha zatiaľ nezistená.</string>
     <string name="context_menu_item_search_transport">Hľadať hromadnú dopravu</string>
     <string name="transport_searching_transport">Hľadá sa preprava (bez cieľa):</string>
     <string name="transport_searching_route">Hľadá sa preprava ({0} ako cieľ):</string>
@@ -743,7 +743,7 @@
     <string name="osmand_parking_add_event">Pridať pripomienku do aplikácie Kalendár</string>
     <string name="osmand_parking_time_limit">Časovo obmedzené parkovanie</string>
     <string name="osmand_parking_time_no_limit">Časovo neobmedzené parkovanie</string>
-    <string name="osmand_parking_position_description">Umiestnenie vášho zaparkovaného vozidla. %1$s</string>
+    <string name="osmand_parking_position_description">Poloha vášho zaparkovaného vozidla. %1$s</string>
     <string name="osmand_parking_position_description_add">Vyzdvihnúť vozidlo o:</string>
     <string name="osmand_parking_pm">popoludní</string>
     <string name="osmand_parking_am">dopoludnia</string>
@@ -754,7 +754,7 @@
     <string name="context_menu_item_add_parking_point">Označiť ako parkovacie miesto</string>
     <string name="context_menu_item_delete_parking_point">Odstrániť parkovaciu značku</string>
     <string name="starting_point_too_far">Východzí bod je príliš ďaleko od najbližšej cesty.</string>
-    <string name="shared_location">Zdieľané umiestnenie</string>
+    <string name="shared_location">Zdieľaná poloha</string>
     <string name="global_app_allocated_memory_descr">Pridelená pamäť %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Pridelená pamäť</string>
     <string name="native_app_allocated_memory_descr">Celková natívna pamäť pridelená aplikácii %1$s MB (Dalvik %2$s MB, iné %3$s MB).
@@ -886,7 +886,7 @@
 \n 
 \nGlobálne údaje (medzi 70° severne a 70° južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Meranie vzdialenosti</string>
-    <string name="audionotes_location_not_defined">Stlačte \"Použiť umiestnenie…\" pre pridanie poznámky k polohe.</string>
+    <string name="audionotes_location_not_defined">Stlačte \"Použiť polohu…\" pre pridanie poznámky k polohe.</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytvárajte obrazové/zvukové/video poznámky počas výletu, buď tlačidlom na mape alebo v kontextovom menu polohy na mape.</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
@@ -1393,7 +1393,9 @@
 \n 
 \nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
     <string name="plugin_touringview_name">Cestovný mapový pohľad</string>
-    <string name="location_on_map">Umiestnenie:\n Šírka %1$s\n Dĺžka %2$s</string>
+    <string name="location_on_map">Poloha:
+\n Šírka %1$s
+\n Dĺžka %2$s</string>
     <string name="watch">Zobraziť</string>
     <string name="days_behind">dní pozadu</string>
     <string name="rename_failed">Premenovanie zlyhalo.</string>
@@ -2002,7 +2004,7 @@
     <string name="no_inet_connection_desc_map">Potrebné na stiahnutie máp.</string>
     <string name="search_location">Hľadá sa poloha…</string>
     <string name="storage_free_space">Voľné miesto</string>
-    <string name="storage_place_description">Úložisko údajov pre OsmAnd (mapy, súbory GPX, atď.): %1$s.</string>
+    <string name="storage_place_description">Úložisko údajov pre OsmAnd (mapy, súbory stôp, atď.): %1$s.</string>
     <string name="give_permission">Udeliť povolenie</string>
     <string name="allow_access_location">Povoliť prístup k polohe</string>
     <string name="first_usage_greeting">Získajte pokyny a objavte nové miesta bez pripojenia na Internet</string>
@@ -2060,8 +2062,8 @@
     <string name="trip_rec_notification_settings_desc">Zobraziť systémové oznámenie, ktoré umožňuje spustiť nahrávanie.</string>
     <string name="shared_string_notifications">Oznámenia</string>
     <string name="shared_string_resume">Pokračovať</string>
-    <string name="gpx_no_tracks_title">Nemáte zatiaľ žiadne súbory GPX</string>
-    <string name="gpx_no_tracks_title_folder">Do priečinka môžete pridať aj súbory GPX</string>
+    <string name="gpx_no_tracks_title">Nemáte zatiaľ žiadne súbory stôp</string>
+    <string name="gpx_no_tracks_title_folder">Do priečinka môžete pridať aj súbory stôp</string>
     <string name="gpx_add_track">Pridať viac…</string>
     <string name="shared_string_appearance">Vzhľad</string>
     <string name="rendering_value_fine_name">Jemné</string>
@@ -2632,7 +2634,7 @@
     <string name="touring_view_renderer">Cestovný pohľad</string>
     <string name="nautical_renderer">Námorný</string>
     <string name="copy_location_name">Kopírovať názov bodu/umiestnenia</string>
-    <string name="toast_empty_name_error">Nepomenované umiestnenie</string>
+    <string name="toast_empty_name_error">Nepomenované miesto</string>
     <string name="show_closed_notes">Zobraziť uzavreté poznámky</string>
     <string name="switch_osm_notes_visibility_desc">Zobraziť/skryť OSM poznámky na mape.</string>
     <string name="gpx_file_desc">GPX - vhodné na export do JOSM a iných editorov OSM.</string>
@@ -2910,10 +2912,10 @@
     <string name="routeInfo_road_types_name">Druhy ciest</string>
     <string name="exit_at">Vystúpte na</string>
     <string name="sit_on_the_stop">Nastúpte na zastávke</string>
-    <string name="quick_action_show_hide_gpx_tracks">Zobraziť/skryť GPX stopy</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Tlačidlo pre zobrazenie alebo skrytie zvolených stôp GPX na mape.</string>
-    <string name="quick_action_gpx_tracks_hide">Skryť GPX stopy</string>
-    <string name="quick_action_gpx_tracks_show">Zobraziť GPX stopy</string>
+    <string name="quick_action_show_hide_gpx_tracks">Zobraziť/skryť stopy</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Tlačidlo pre zobrazenie alebo skrytie zvolených stôp na mape.</string>
+    <string name="quick_action_gpx_tracks_hide">Skryť stopy</string>
+    <string name="quick_action_gpx_tracks_show">Zobraziť stopy</string>
     <string name="transfers_size">%1$d prestup(y)</string>
     <string name="add_start_and_end_points">Pridať východzí a cieľový bod</string>
     <string name="route_add_start_point">Pridať východzí bod</string>
@@ -3780,17 +3782,17 @@
     <string name="quick_action_showhide_mapillary_descr">Prepínač pre zobrazenie alebo skrytie vrstvy Mapillary na mape.</string>
     <string name="shared_string_bearing">Smerovanie</string>
     <string name="item_deleted">%1$s vymazané</string>
-    <string name="speed_cameras_restart_descr">Pre úplné odstránenie údajov o rýchlostných radaroch je potrebný reštart.</string>
+    <string name="speed_cameras_restart_descr">Reštartovať aplikáciu pre úplné odstránenie údajov o rýchlostných radaroch.</string>
     <string name="shared_string_uninstall_and_restart">Odinštalovať a reštartovať</string>
     <string name="shared_string_uninstall">Odinštalovať</string>
     <string name="routing_attr_length_description">Zadajte aká dĺžka vozidla musí byť povolená na trase.</string>
     <string name="routing_attr_length_name">Limit dĺžky</string>
     <string name="speed_cameras_removed_descr">Toto zariadenie neobsahuje rýchlostné radary.</string>
     <string name="app_mode_inline_skates">Kolieskové korčule</string>
-    <string name="use_volume_buttons_as_zoom_descr">Umožní ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
     <string name="use_volume_buttons_as_zoom">Tlačidlá hlasitosti na približovanie</string>
     <string name="lenght_limit_description">Zadajte dĺžku vášho vozidla, pretože na trase môžu byť obmedzenia pre dlhé vozidlá.</string>
-    <string name="quick_action_remove_next_destination">Vymazať ďalší cieľový bod</string>
+    <string name="quick_action_remove_next_destination">Vymazať najbližší cieľový bod</string>
     <string name="please_provide_point_name_error">Prosím zadajte názov pre bod</string>
     <string name="quick_action_remove_next_destination_descr">Aktuálny cieľový bod na trase bude vymazaný. Ak je to posledný cieľ, navigácia sa zastaví.</string>
     <string name="search_download_wikipedia_maps">Stiahnuť mapy Wikipédia</string>
@@ -3800,8 +3802,8 @@
     <string name="app_mode_wheelchair">Invalidný vozík</string>
     <string name="app_mode_wheelchair_forward">Invalidný vozík dopredu</string>
     <string name="app_mode_go_cart">Motokára</string>
-    <string name="osm_edit_closed_note">Zatvorená OSM poznámka</string>
-    <string name="set_working_days_to_continue">Pre pokračovanie musíte zadať pracovné dni</string>
+    <string name="osm_edit_closed_note">OSM poznámka zatvorená</string>
+    <string name="set_working_days_to_continue">Zadať pracovné dni pre pokračovanie</string>
     <string name="route_between_points">Trasa medzi bodmi</string>
     <string name="plan_a_route">Naplánovať trasu</string>
     <string name="add_to_a_track">Pridať do stopy</string>
@@ -3822,25 +3824,23 @@
     <string name="overwrite_track">Prepísať stopu</string>
     <string name="save_as_new_track">Uložiť ako novú stopu</string>
     <string name="reverse_route">Otočiť trasu</string>
-    <string name="rourte_between_points_whole_track_button_desc">Celá stopa bude prepočítaná pomocou zvoleného profilu.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Len nasledujúci úsek bude prepočítaný pomocou zvoleného profilu.</string>
-    <string name="rourte_between_points_desc">Zvoľte ako spojiť body, priamou čiarou alebo vypočítať trasu medzi nimi pomocou zvoleného profilu.</string>
+    <string name="route_between_points_whole_track_button_desc">Celá stopa bude prepočítaná pomocou zvoleného profilu.</string>
+    <string name="route_between_points_next_segment_button_desc">Len nasledujúci úsek bude prepočítaný pomocou zvoleného profilu.</string>
+    <string name="route_between_points_desc">Zvoľte ako spojiť body, priamou čiarou alebo vypočítať trasu medzi nimi ako je určené ďalej.</string>
     <string name="whole_track">Celá stopa</string>
     <string name="next_segment">Ďalší úsek</string>
-    <string name="rourte_between_points_warning_desc">Pre použitie tejto možnosti musí OsmAnd prichytiť vašu stopu na cesty v mape.
-\n
-\n V ďalšom kroku budete musieť zvoliť navigačný profil pre detekciu povolených ciest a hraničnú vzdialenosť pre aproximovanie vašej stopy cestami.</string>
+    <string name="route_between_points_warning_desc">Ďalej, pre použitie tejto možnosti pripojte vašu stopu k najbližšej povolenej ceste s niektorým vaším navigačným profilom.</string>
     <string name="threshold_distance">Hraničná vzdialenosť</string>
     <string name="navigation_profile">Navigačný profil</string>
-    <string name="rourte_between_points_add_track_desc">Zvoľte súbor stopy, pre ktorú bude pridaný nový úsek.</string>
+    <string name="route_between_points_add_track_desc">Zvoľte súbor stopy, pre ktorú bude pridaný nový úsek.</string>
     <string name="street_level_imagery">Snímky z úrovne ulice</string>
-    <string name="plan_route_exit_dialog_descr">Naozaj chcete zatvoriť plánovanie trasy bez uloženia\? Všetky zmeny sa stratia.</string>
+    <string name="plan_route_exit_dialog_descr">Naozaj chcete zahodiť všetky zmeny v plánovanej trasy jej zatvorením\?</string>
     <string name="in_case_of_reverse_direction">V prípade opačného smeru</string>
     <string name="shared_string_gpx_route">Trasa zo stopy</string>
     <string name="context_menu_item_add_waypoint">Pridať prechodný bod stopy</string>
     <string name="follow_track">Nasledovať stopu</string>
     <string name="follow_track_descr">Zvoľte súbor stopy pre nasledovanie</string>
-    <string name="import_track_descr">Zvoľte súbor stopy pre nasledovanie, alebo nejaký importujte.</string>
+    <string name="import_track_descr">Zvoľte súbor stopy pre nasledovanie alebo nejaký importujte z vášho zariadenia.</string>
     <string name="select_another_track">Zvoliť inú stopu</string>
     <string name="navigate_to_track_descr">Navigovať z mojej polohy k stope</string>
     <string name="pass_whole_track_descr">Bod stopy pre navigovanie</string>
@@ -3885,4 +3885,25 @@
     <string name="gpx_monitoring_stop">Pozastaviť nahrávanie výletu</string>
     <string name="gpx_monitoring_start">Pokračovať v nahrávaní výletu</string>
     <string name="one_point_error">Prosím pridajte aspoň dva body.</string>
+    <string name="shared_string_redo">Vykonať znova</string>
+    <string name="release_3_8">• Vylepšená funkcia plánovania trasy: umožňuje použiť rôzne typy navigácie pre úseky trasy a začlenenie stôp
+\n
+\n • Nové menu pre vzhľad stôp: zvoľte farbu, hrúbku, smerové šípky, ikony štartu a cieľa
+\n
+\n • Zlepšená viditeľnosť bodov pre bicykle.
+\n
+\n • Stopy je teraz možné aktivovať a majú kontextové menu so základnými údajmi.
+\n
+\n • Zlepšený algoritmus vyhľadávania
+\n
+\n • Zlepšené možnosti nasledovania stopy v navigácii
+\n
+\n • Opravené problémy s importom a exportom nastavení profilov
+\n
+\n</string>
+    <string name="sort_last_modified">Naposledy zmenené</string>
+    <string name="sort_name_descending">Názov: Z – A</string>
+    <string name="sort_name_ascending">Názov: A – Z</string>
+    <string name="start_finish_icons">Ikony štartu/cieľa</string>
+    <string name="contour_lines_thanks">Ďakujeme za zakúpenie modulu \'Vrstevnice\'</string>
 </resources>

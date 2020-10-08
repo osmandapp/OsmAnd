@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.GpxSelectionHelper;
@@ -18,6 +20,7 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.regex.Pattern;
 
@@ -120,31 +123,52 @@ public class FileUtils {
 		return null;
 	}
 
-	public static File renameGpxFile(OsmandApplication ctx, File source, String newName, boolean dirAllowed,
-									 RenameCallback callback) {
-		File dest = checkRenamePossibility(ctx, source, newName, dirAllowed);
+	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File source,
+									 @NonNull String newName, boolean dirAllowed, @Nullable RenameCallback callback) {
+		File dest = checkRenamePossibility(app, source, newName, dirAllowed);
 		if (dest == null) {
 			return null;
 		}
+		File res = renameGpxFile(app, source, dest);
+		if (res != null) {
+			if (callback != null) {
+				callback.renamedTo(res);
+			}
+		} else {
+			Toast.makeText(app, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+		}
+		return res;
+	}
+
+	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
 		if (!dest.getParentFile().exists()) {
 			dest.getParentFile().mkdirs();
 		}
-		if (source.renameTo(dest)) {
-			GpxSelectionHelper helper = ctx.getSelectedGpxHelper();
-			SelectedGpxFile selected = helper.getSelectedFileByPath(source.getAbsolutePath());
-			ctx.getGpxDbHelper().rename(source, dest);
+		if (src.renameTo(dest)) {
+			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			SelectedGpxFile selected = helper.getSelectedFileByPath(src.getAbsolutePath());
+			app.getGpxDbHelper().rename(src, dest);
 			if (selected != null && selected.getGpxFile() != null) {
 				selected.getGpxFile().path = dest.getAbsolutePath();
 				helper.updateSelectedGpxFile(selected);
 			}
-			if (callback != null) {
-				callback.renamedTo(dest);
-			}
 			return dest;
-		} else {
-			Toast.makeText(ctx, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
 		}
 		return null;
+	}
+
+	public static boolean removeGpxFile(@NonNull OsmandApplication app, @NonNull File file) {
+		if (file.exists()) {
+			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
+			file.delete();
+			app.getGpxDbHelper().remove(file);
+			if (selected != null && selected.getGpxFile() != null) {
+				helper.selectGpxFile(selected.getGpxFile(), false, false);
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public static File checkRenamePossibility(OsmandApplication ctx, File source, String newName, boolean dirAllowed) {
@@ -163,6 +187,40 @@ public class FileUtils {
 			return null;
 		}
 		return dest;
+	}
+
+	public static String createUniqueFileName(@NonNull OsmandApplication app, String name, String dirName, String extension) {
+		String uniqueFileName = name;
+		File dir = app.getAppPath(dirName);
+		File fout = new File(dir, name + extension);
+		int ind = 0;
+		while (fout.exists()) {
+			uniqueFileName = name + "_" + (++ind);
+			fout = new File(dir, uniqueFileName + extension);
+		}
+		return uniqueFileName;
+	}
+
+	public static File backupFile(@NonNull OsmandApplication app, @NonNull File src) {
+		if (!src.exists()) {
+			return null;
+		}
+		File tempDir = getTempDir(app);
+		File dest = new File(tempDir, src.getName());
+		try {
+			Algorithms.fileCopy(src, dest);
+		} catch (IOException e) {
+			return null;
+		}
+		return dest;
+	}
+
+	public static File getTempDir(OsmandApplication app) {
+		File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+		if (!tempDir.exists()) {
+			tempDir.mkdirs();
+		}
+		return tempDir;
 	}
 
 	public interface RenameCallback {

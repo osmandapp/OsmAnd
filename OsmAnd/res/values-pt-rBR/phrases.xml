@@ -3815,7 +3815,7 @@
     <string name="poi_seamark_water_level_above_mwl">Nível de água: acima do nível médio da água</string>
     <string name="poi_seamark_water_level_below_mwl">Nível de água: abaixo do nível médio da água</string>
     <string name="poi_seamark_obstruction">Obstrução</string>
-    <string name="poi_drinking_water_refill_yes">Recarga de água potável: sim</string>
+    <string name="poi_drinking_water_refill_yes">Sim</string>
     <string name="poi_drinking_water_refill_no">Recarga de água potável: não</string>
     <string name="poi_drinking_water_refill_network">Rede de recarga de água potável</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sucção</string>
@@ -3834,4 +3834,15 @@
     <string name="poi_borough">Burgo</string>
     <string name="poi_traffic_signals_arrow_no">Flecha: não</string>
     <string name="poi_elevator">Elevador</string>
+    <string name="poi_departures_board_timetable">Calendário</string>
+    <string name="poi_departures_board_delay">Demora</string>
+    <string name="poi_departures_board_realtime">Tempo real</string>
+    <string name="poi_departures_board_yes">Sim</string>
+    <string name="poi_departures_board_no">Quadro de partidas: não</string>
+    <string name="poi_departures_board">Quadro de partidas</string>
+    <string name="poi_drinking_water_refill">Recarga de água potável</string>
+    <string name="poi_recycling_small_electrical_appliances">Pequenos aparelhos elétricos</string>
+    <string name="poi_beehive">Colmeia</string>
+    <string name="poi_nuts">Loja de nozes</string>
+    <string name="poi_fuel_lng">GNL</string>
 </resources>

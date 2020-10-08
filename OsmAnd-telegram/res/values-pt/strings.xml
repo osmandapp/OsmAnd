@@ -108,7 +108,7 @@
     <string name="not_found_yet">Ainda não encontrado</string>
     <string name="re_send_location">Reenvie o local</string>
     <string name="last_available_location">Última localização disponível</string>
-    <string name="sharing_status">Status de compartilhamento</string>
+    <string name="sharing_status">Estado de compartilhamento</string>
     <string name="location_sharing_status">Compartilhamento: %1$s</string>
     <string name="shared_string_enabled">Ativado</string>
     <string name="no_gps_connection">Sem conexão GPS</string>
@@ -163,7 +163,7 @@
     <string name="get_telegram_description_continue">Por favor, instale o Telegram e configure uma conta.</string>
     <string name="get_telegram_after_creating_account">Então pode usar esta app.</string>
     <string name="shared_string_all">Todos</string>
-    <string name="shared_string_off">Desativado</string>
+    <string name="shared_string_off">Desligado</string>
     <string name="already_registered_in_telegram">Precisa de uma conta e número de telefone registados no Telegram</string>
     <string name="do_not_have_telegram">Não tenho uma conta do Telegram</string>
     <string name="enter_phone_number">Digite o número de telefone</string>
@@ -204,7 +204,7 @@
     <string name="no_location_permission">A app não tem permissão para acessar os dados de localização.</string>
     <string name="gps_not_available">Por favor, ligue \"Localização\" nas configurações do sistema</string>
     <string name="location_service_no_gps_available">Selecione um dos provedores de localização para compartilhar sua localização.</string>
-    <string name="osmand_service">Modo em segundo plano</string>
+    <string name="osmand_service">Modo de fundo</string>
     <string name="osmand_service_descr">OsmAnd Tracker é executado em segundo plano com o ecrã desligado.</string>
     <string name="shared_string_distance">Distância</string>
     <string name="share_location">Compartilhar localização</string>
@@ -230,15 +230,15 @@
     <string name="m_s">m/s</string>
     <string name="km_h">km/h</string>
     <string name="mile_per_hour">mph</string>
-    <string name="si_kmh">Quilômetros por hora</string>
+    <string name="si_kmh">Quilómetros por hora</string>
     <string name="si_mph">Milhas por hora</string>
     <string name="si_m_s">Metros por segundo</string>
-    <string name="si_min_km">Minutos por quilômetro</string>
+    <string name="si_min_km">Minutos por quilómetro</string>
     <string name="si_min_m">Minutos por milha</string>
     <string name="si_nm_h">Milhas náuticas por hora (nó)</string>
     <string name="si_mi_feet">Milhas/pés</string>
     <string name="si_mi_yard">Milhas/jardas</string>
-    <string name="si_km_m">Quilômetros/metros</string>
+    <string name="si_km_m">Quilómetros/metros</string>
     <string name="si_nm">Milhas náuticas</string>
     <string name="si_mi_meters">Milhas/metros</string>
     <string name="shared_string_hour_short">h</string>
@@ -252,7 +252,7 @@
     <string name="time_zone_descr">Selecione o fuso horário a mostrar nas suas mensagens de localização.</string>
     <string name="time_zone">Fuso horário</string>
     <string name="units_and_formats">Unidades e formatos</string>
-    <string name="unit_of_length_descr">Alterar unidade de distância.</string>
+    <string name="unit_of_length_descr">Alterar a unidade de medida de distância.</string>
     <string name="unit_of_length">Unidades de comprimento</string>
     <string name="unit_of_speed_system_descr">Definir unidade de velocidade.</string>
     <string name="unit_of_speed_system">Unidade de velocidade</string>

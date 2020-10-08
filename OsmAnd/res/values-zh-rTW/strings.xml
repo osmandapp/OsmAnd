@@ -429,7 +429,7 @@
     <string name="tts_language_not_supported">選定的語言未被已安裝的 Android TTS（文字轉語音）引擎支援，其將會使用預先設定的 TTS 語言。要在市集中尋找其他 TTS 引擎嗎？</string>
     <string name="tts_missing_language_data_title">資料遺失</string>
     <string name="tts_missing_language_data">要轉到商店下載所選擇的語言嗎？</string>
-    <string name="gpx_option_reverse_route">反轉 GPX 方向</string>
+    <string name="gpx_option_reverse_route">反轉軌跡方向</string>
     <string name="gpx_option_destination_point">使用目前的目的地</string>
     <string name="gpx_option_from_start_point">沿著整條軌跡往前</string>
     <string name="switch_to_vector_map_to_see">此位置目前有向量地圖可以使用。
@@ -2002,7 +2002,7 @@
     <string name="no_inet_connection_desc_map">需要下載地圖。</string>
     <string name="search_location">正在搜尋位置…</string>
     <string name="storage_free_space">可用空間</string>
-    <string name="storage_place_description">OsmAnd 資料存儲 (給地圖、GPX 檔案等)：%1$s。</string>
+    <string name="storage_place_description">OsmAnd 資料儲存空間（給地圖、軌跡檔案等）：%1$s。</string>
     <string name="give_permission">授予權限</string>
     <string name="allow_access_location">允許位置的存取</string>
     <string name="first_usage_greeting">在沒有網際網路連線的情況下，取得指引與探索新地點</string>
@@ -2056,8 +2056,8 @@
     <string name="christmas_desc">預知聖誕節和新年假期，您可以選擇顯示相關的 POI，如聖誕樹、市集等等。</string>
     <string name="donation_to_osm_desc">您的部分捐款會發送給 OSM 製圖者。訂閱的花費不變。</string>
     <string name="shared_string_notifications">通知</string>
-    <string name="gpx_no_tracks_title">您尚未有任何的 GPX 檔案</string>
-    <string name="gpx_no_tracks_title_folder">您也可以增加 GPX 檔案到資料夾</string>
+    <string name="gpx_no_tracks_title">您尚未有任何的軌跡檔案</string>
+    <string name="gpx_no_tracks_title_folder">您也可以增加軌跡檔案到資料夾</string>
     <string name="gpx_add_track">增加更多…</string>
     <string name="shared_string_appearance">外觀</string>
     <string name="trip_rec_notification_settings">啟用快速錄製</string>
@@ -2890,10 +2890,10 @@
     <string name="routeInfo_road_types_name">道路類型</string>
     <string name="exit_at">離開於</string>
     <string name="sit_on_the_stop">站點的座位</string>
-    <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏 GPX 軌跡</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">在地圖上顯示或隱藏所選 GPX 軌跡的按鈕。</string>
-    <string name="quick_action_gpx_tracks_hide">隱藏 GPX 軌跡</string>
-    <string name="quick_action_gpx_tracks_show">顯示 GPX 軌跡</string>
+    <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏軌跡</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">在地圖上顯示或隱藏所選軌跡的按鈕。</string>
+    <string name="quick_action_gpx_tracks_hide">隱藏軌跡</string>
+    <string name="quick_action_gpx_tracks_show">顯示軌跡</string>
     <string name="send_log">傳送紀錄檔</string>
     <string name="routing_attr_avoid_tram_name">避免電車</string>
     <string name="routing_attr_avoid_tram_description">避免電車</string>
@@ -3425,7 +3425,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">在導航或移動時顯示的圖示。</string>
     <string name="select_map_icon_descr">靜止時顯示的圖示。</string>
-    <string name="logcat_buffer_descr">檢視及分享應用程式的紀錄檔</string>
+    <string name="logcat_buffer_descr">檢查及分享應用程式的詳細紀錄</string>
     <string name="search_offline_geo_error">無法解析地理含義「%s」。</string>
     <string name="tracks_view_descr">您已紀錄的軌跡位於 %1$s，或是 OsmAnd 資料夾。</string>
     <string name="multimedia_notes_view_descr">您的 OSM 註記位於 %1$s。</string>
@@ -3778,27 +3778,27 @@
     <string name="speed_cameras_alert">某些國家禁止使用測速照相的警報裝置。</string>
     <string name="shared_string_bearing">方向</string>
     <string name="item_deleted">%1$s 已刪除</string>
-    <string name="speed_cameras_restart_descr">必須重新啟動才能完全刪除測速照相的資料。</string>
+    <string name="speed_cameras_restart_descr">重新啟動應用程式以刪除所有測速照相的資料。</string>
     <string name="shared_string_uninstall_and_restart">解除安裝並重新啟動</string>
     <string name="routing_attr_length_description">指定路線上允許的車輛長度。</string>
     <string name="routing_attr_length_name">長度限制</string>
     <string name="speed_cameras_removed_descr">此裝置沒有測速照相機。</string>
     <string name="app_mode_inline_skates">直排輪鞋</string>
-    <string name="use_volume_buttons_as_zoom_descr">啟用裝置音量按鈕控制地圖縮放等級。</string>
+    <string name="use_volume_buttons_as_zoom_descr">使用裝置音量按鈕控制地圖縮放等級。</string>
     <string name="use_volume_buttons_as_zoom">音量按鈕以縮放</string>
     <string name="lenght_limit_description">提供您的車輛長度，某些路徑限制可能適用於較長的車輛。</string>
-    <string name="quick_action_remove_next_destination">刪除下一個目的地點</string>
+    <string name="quick_action_remove_next_destination">刪除最近的目的地點</string>
     <string name="please_provide_point_name_error">請提供點的名稱</string>
     <string name="quick_action_remove_next_destination_descr">目前路徑上的目的地點將會被刪除。如果其將為目的地，導航就會停止。</string>
     <string name="search_download_wikipedia_maps">下載維基百科地圖</string>
-    <string name="plugin_wikipedia_description">從維基百科取得關於興趣點的資訊。這是您的離線口袋指南 ── 只要啟用維基百科外掛程式並享受有關於您周圍景點的文章。</string>
+    <string name="plugin_wikipedia_description">從維基百科取得關於興趣點的資訊。這是您的離線口袋指南 ── 只要開啟維基百科外掛程式並享受有關於您周圍景點的文章。</string>
     <string name="app_mode_enduro_motorcycle">耐力賽摩托車</string>
     <string name="app_mode_motor_scooter">小型摩托車</string>
     <string name="app_mode_wheelchair">輪椅</string>
     <string name="app_mode_wheelchair_forward">輪椅向前</string>
     <string name="app_mode_go_cart">卡丁車</string>
     <string name="osm_edit_closed_note">已關閉的 OSM 註記</string>
-    <string name="set_working_days_to_continue">您必須設定工作天以繼續</string>
+    <string name="set_working_days_to_continue">設定工作天以繼續</string>
     <string name="route_between_points">點與點之間的路線</string>
     <string name="plan_a_route">規劃路線</string>
     <string name="add_to_a_track">新增到軌跡</string>
@@ -3819,19 +3819,17 @@
     <string name="overwrite_track">覆寫軌跡</string>
     <string name="save_as_new_track">儲存為新軌跡</string>
     <string name="reverse_route">反向路線</string>
-    <string name="rourte_between_points_whole_track_button_desc">整個軌跡都會使用選定的設定檔重新計算。</string>
-    <string name="rourte_between_points_next_segment_button_desc">僅下一個片段會使用選定的設定檔重新計算。</string>
-    <string name="rourte_between_points_desc">選取如何連接點，用直線或以選定的設定檔計算其間的路徑。</string>
+    <string name="route_between_points_whole_track_button_desc">整個軌跡都會使用選定的設定檔重新計算。</string>
+    <string name="route_between_points_next_segment_button_desc">僅下一個片段會使用選定的設定檔重新計算。</string>
+    <string name="route_between_points_desc">選取如何連接點，透過直線或以下面選定的方法計算其間的路徑。</string>
     <string name="whole_track">整個軌道</string>
     <string name="next_segment">下一段</string>
-    <string name="rourte_between_points_warning_desc">要使用此選項，OsmAnd 必須將您的軌跡捕捉到地圖道路上。
-\n
-\n在下一步，您只需要選取設定檔以偵測允許的道路與距離門檻以追蹤道路。</string>
+    <string name="route_between_points_warning_desc">接下來，使用您其中一個導航設定檔來將路線貼齊到最近可用的道路上以使用此選項。</string>
     <string name="threshold_distance">門檻距離</string>
     <string name="navigation_profile">導航設定檔</string>
-    <string name="rourte_between_points_add_track_desc">選取要加入新片段的軌道檔案。</string>
+    <string name="route_between_points_add_track_desc">選取要加入新片段的軌道檔案。</string>
     <string name="street_level_imagery">街道級照片</string>
-    <string name="plan_route_exit_dialog_descr">您確定要不儲存就關閉計劃錄線嗎？您將會失去所有變更。</string>
+    <string name="plan_route_exit_dialog_descr">您確定要關閉計畫路線來放棄所有變更嗎？</string>
     <string name="in_case_of_reverse_direction">反向時</string>
     <string name="shared_string_save_as_gpx">儲存為新的軌跡檔案</string>
     <string name="add_segment_to_the_track">新增到軌跡檔案</string>
@@ -3849,7 +3847,7 @@
     <string name="marker_save_as_track">儲存為軌跡檔案</string>
     <string name="follow_track">跟隨軌跡</string>
     <string name="follow_track_descr">選擇要跟隨的軌跡檔案</string>
-    <string name="import_track_descr">選擇要跟隨的軌跡檔案，或是匯入一個。</string>
+    <string name="import_track_descr">選擇要跟隨的軌跡檔案，或是從您的裝置匯入。</string>
     <string name="select_another_track">選取其他軌跡</string>
     <string name="navigate_to_track_descr">從我的位置導航到軌跡</string>
     <string name="pass_whole_track_descr">要導航的軌跡點</string>
@@ -3882,4 +3880,33 @@
     <string name="open_saved_track">開啟已儲存的軌跡</string>
     <string name="shared_string_is_saved">已儲存</string>
     <string name="one_point_error">請至少新增兩個點。</string>
+    <string name="shared_string_redo">重做</string>
+    <string name="release_3_8">• 更新「規劃路線」功能：允許每個路段使用不同的導航類型並包含軌跡
+\n
+\n • 新的軌跡外觀選項：選取顏色、厚度、開啟方向箭頭與開始／結束圖示
+\n
+\n • 改善自行車節點的能見度
+\n
+\n • 軌跡現在是可點擊的，且有包含基本資訊的內容選單
+\n
+\n • 改進了搜尋演算法
+\n
+\n • 改進了導航中的「跟隨軌跡」選項
+\n
+\n • 修復設定檔的匯入／匯出問題
+\n
+\n</string>
+    <string name="sort_last_modified">最後修改時間</string>
+    <string name="sort_name_descending">名稱：Z – A</string>
+    <string name="sort_name_ascending">名稱：A – Z</string>
+    <string name="start_finish_icons">開始／結束圖示</string>
+    <string name="contour_lines_thanks">感謝您購買 \'Contour lines\'</string>
+    <string name="osm_live_payment_desc_hw">按選定週期收取訂閱費用。隨時在 AppGallery 上取消。</string>
+    <string name="osm_live_payment_subscription_management_hw">確認購買後將會從您的 AppGallery 帳號中付款。
+\n
+\n除非在續訂日期前取消，否則就會自動續訂。您的帳號將只會在續訂日期收取訂閱週期（一個月／三個月／一年）的費用。
+\n
+\n您可以在您的 AppGallery 設定中管理與取消您的訂閱。</string>
+    <string name="routing_attr_avoid_footways_description">避免人行道</string>
+    <string name="routing_attr_avoid_footways_name">避免人行道</string>
 </resources>

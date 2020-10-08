@@ -36,6 +36,7 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -215,8 +216,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				}
 				if (preferParameters.size() > 0) {
 					String title = getString(R.string.prefer_in_routing_title);
-					String descr = getString(R.string.prefer_in_routing_descr);
-					MultiSelectBooleanPreference preferRouting = createRoutingBooleanMultiSelectPref(PREFER_ROUTING_PARAMETER_PREFIX, title, descr, preferParameters);
+					MultiSelectBooleanPreference preferRouting = createRoutingBooleanMultiSelectPref(PREFER_ROUTING_PARAMETER_PREFIX, title, "", preferParameters);
 					screen.addPreference(preferRouting);
 				}
 				if (reliefFactorParameters.size() > 0) {
@@ -230,14 +230,12 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
 
 					if (p.getType() == RoutingParameterType.BOOLEAN) {
-						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-
+						OsmandPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
 						switchPreferenceEx.setDescription(description);
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 						switchPreferenceEx.setSummaryOn(R.string.shared_string_on);
 						switchPreferenceEx.setSummaryOff(R.string.shared_string_off);
-
 						screen.addPreference(switchPreferenceEx);
 					} else {
 						Object[] vls = p.getPossibleValues();
@@ -246,12 +244,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						for (Object o : vls) {
 							svlss[i++] = o.toString();
 						}
-						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
-
+						OsmandPreference<String> pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
 						ListPreferenceEx listPreferenceEx = (ListPreferenceEx) createListPreferenceEx(pref.getId(), p.getPossibleValueDescriptions(), svlss, title, R.layout.preference_with_descr);
 						listPreferenceEx.setDescription(description);
 						listPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
-
 						screen.addPreference(listPreferenceEx);
 					}
 				}
@@ -460,6 +456,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			}
 			recalculateRoute();
 		} else if (ROUTING_SHORT_WAY.equals(prefId) && newValue instanceof Boolean) {
+			applyPreference(ROUTING_SHORT_WAY, applyToAllProfiles, newValue);
 			applyPreference(settings.FAST_ROUTE_MODE.getId(), applyToAllProfiles, !(Boolean) newValue);
 		} else if (ROUTING_RECALC_DISTANCE.equals(prefId)) {
 			boolean enabled = false;

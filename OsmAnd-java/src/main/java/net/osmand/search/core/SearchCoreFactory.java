@@ -33,6 +33,7 @@ import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -922,6 +923,7 @@ public class SearchCoreFactory {
 
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
 		private static final int BBOX_RADIUS = 10000;
+		private static final int BBOX_RADIUS_NEAREST = 1000;
 		private SearchAmenityTypesAPI searchAmenityTypesAPI;
 		private MapPoiTypes types;
 		private AbstractPoiType unselectedPoiType;
@@ -1006,7 +1008,14 @@ public class SearchCoreFactory {
 			}
 			this.nameFilter = nameFilter;
 			if (poiTypeFilter != null) {
-				QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
+				int radius = BBOX_RADIUS;
+				if (phrase.getRadiusLevel() == 1 && poiTypeFilter instanceof CustomSearchPoiFilter) {
+					String name = ((CustomSearchPoiFilter) poiTypeFilter).getFilterId();
+					if ("std_null".equals(name)) {
+						radius = BBOX_RADIUS_NEAREST;
+					}
+				}
+				QuadRect bbox = phrase.getRadiusBBoxToSearch(radius);
 				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				Set<String> searchedPois = new TreeSet<>();
 				for (BinaryMapIndexReader r : offlineIndexes) {
@@ -1407,6 +1416,7 @@ public class SearchCoreFactory {
 		private LatLon olcPhraseLocation;
 		private ParsedOpenLocationCode cachedParsedCode;
 		private final List<String> citySubTypes = Arrays.asList("city", "town", "village");
+		private final DecimalFormat latLonFormatter = new DecimalFormat("#.0####");
 
 		public SearchLocationAndUrlAPI() {
 			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
@@ -1498,7 +1508,7 @@ public class SearchCoreFactory {
 						sp.priority = SEARCH_LOCATION_PRIORITY;
 
 						sp.object = sp.location = ll;
-						sp.localeName = ((float) sp.location.getLatitude()) + ", <input> ";
+						sp.localeName = formatLatLon(sp.location.getLatitude()) + ", <input> ";
 						sp.objectType = ObjectType.PARTIAL_LOCATION;
 						resultMatcher.publish(sp);
 					}
@@ -1510,7 +1520,7 @@ public class SearchCoreFactory {
 			SearchResult sp = new SearchResult(phrase);
 			sp.priority = SEARCH_LOCATION_PRIORITY;
 			sp.object = sp.location = l;
-			sp.localeName = ((float) sp.location.getLatitude()) + ", " + ((float) sp.location.getLongitude());
+			sp.localeName = formatLatLon(sp.location.getLatitude()) + ", " + formatLatLon(sp.location.getLongitude());
 			sp.objectType = ObjectType.LOCATION;
 			sp.wordsSpan = lw;
 			resultMatcher.publish(sp);
@@ -1525,7 +1535,7 @@ public class SearchCoreFactory {
 				sp.object = pnt;
 				sp.wordsSpan = text;
 				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
-				sp.localeName = ((float)pnt.getLatitude()) +", " + ((float) pnt.getLongitude());
+				sp.localeName = formatLatLon(pnt.getLatitude()) +", " + formatLatLon(pnt.getLongitude());
 				if (pnt.getZoom() > 0) {
 					sp.preferredZoom = pnt.getZoom();
 				}
@@ -1554,6 +1564,10 @@ public class SearchCoreFactory {
 				cachedParsedCode = LocationParser.parseOpenLocationCode(p.getUnknownSearchPhrase());
 			}
 			return cachedParsedCode == null ? SEARCH_LOCATION_PRIORITY : SEARCH_MAX_PRIORITY;
+		}
+
+		private String formatLatLon(double latLon) {
+			return latLonFormatter.format(latLon);
 		}
 	}
 

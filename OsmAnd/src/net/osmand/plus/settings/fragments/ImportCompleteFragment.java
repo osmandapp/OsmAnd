@@ -12,6 +12,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
@@ -21,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -30,7 +33,6 @@ import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
-import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.Type;
 
 import java.util.List;
 
@@ -62,6 +64,12 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		nightMode = !app.getSettings().isLightContent();
+		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				dismissFragment();
+			}
+		});
 	}
 
 	@Nullable
@@ -110,11 +118,11 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (settingsItems != null) {
 			ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
 					app,
-					ImportSettingsFragment.getSettingsToOperate(settingsItems, true),
+					ImportHelper.getSettingsToOperate(settingsItems, true),
 					nightMode,
 					new ImportedSettingsItemsAdapter.OnItemClickListener() {
 						@Override
-						public void onItemClick(Type type) {
+						public void onItemClick(ExportSettingsType type) {
 							navigateTo(type);
 						}
 					});
@@ -130,7 +138,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void navigateTo(Type type) {
+	private void navigateTo(ExportSettingsType type) {
 		FragmentManager fm = getFragmentManager();
 		Activity activity = requireActivity();
 		if (fm == null || fm.isStateSaved()) {

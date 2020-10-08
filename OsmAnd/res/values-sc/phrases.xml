@@ -3811,9 +3811,9 @@
     <string name="poi_seamark_water_level_above_mwl">Raportu cun su livellu de s\'abba: in foras de su livellu mèdiu de s\'abba</string>
     <string name="poi_seamark_water_level_below_mwl">Raportu cun su livellu de s\'abba: in suta de su livellu mèdiu de s\'abba</string>
     <string name="poi_seamark_obstruction">Tapadura</string>
-    <string name="poi_drinking_water_refill_yes">Ricàrica de s\'abba potàbile: eja</string>
-    <string name="poi_drinking_water_refill_no">Ricàrica de s\'abba potàbile: nono</string>
-    <string name="poi_drinking_water_refill_network">Retza de ricàrica de s\'abba potàbile</string>
+    <string name="poi_drinking_water_refill_yes">Eja</string>
+    <string name="poi_drinking_water_refill_no">Ricàrriga de abba potàbile: nono</string>
+    <string name="poi_drinking_water_refill_network">Retza de ricàrriga de abba potàbile</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sutzione</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizada</string>
     <string name="poi_fire_hydrant_style_water_source_groundwater">Abba suta de terra</string>
@@ -3828,4 +3828,17 @@
     <string name="poi_give_box">Iscàtula pro donos (give box)</string>
     <string name="poi_city_block">Isuladu</string>
     <string name="poi_borough">Unidade amministrativa (Borough)</string>
+    <string name="poi_elevator">Ascensore</string>
+    <string name="poi_traffic_signals_arrow_no">Fritza: nono</string>
+    <string name="poi_nuts">Butega de pilarda (nughes e àteru)</string>
+    <string name="poi_beehive">Moju</string>
+    <string name="poi_departures_board_timetable">Oràriu</string>
+    <string name="poi_departures_board_realtime">Tempus reale</string>
+    <string name="poi_departures_board_delay">Ritardu</string>
+    <string name="poi_departures_board_yes">Eja</string>
+    <string name="poi_departures_board_no">Tabella de sas tzucadas: nono</string>
+    <string name="poi_recycling_small_electrical_appliances">Eletrodomèsticos minores</string>
+    <string name="poi_departures_board">Tabellone de sas tzucadas</string>
+    <string name="poi_drinking_water_refill">Ricàrriga de abba potàbile</string>
+    <string name="poi_fuel_lng">GNL (LNG)</string>
 </resources>

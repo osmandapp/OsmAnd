@@ -413,7 +413,7 @@
     <string name="poi_recycling_cardboard">kartonoj</string>
     <string name="poi_recycling_magazines">gazetoj (revuoj)</string>
     <string name="poi_recycling_paper_packaging">paperaj ujoj</string>
-    <string name="poi_recycling_small_appliances">elektronikaj aparatoj etaj</string>
+    <string name="poi_recycling_small_appliances">malgrandaj elektraj aparatoj</string>
     <string name="poi_recycling_wood">ligno</string>
     <string name="poi_recycling_books">libroj</string>
     <string name="poi_recycling_shoes">ŝuoj</string>
@@ -831,7 +831,7 @@
     <string name="poi_barbecue">Rostilo</string>
     <string name="poi_craft_agricultural_engines">Laborejo de agrokulturaj maŝinoj</string>
     <string name="poi_craft_basket_maker">Laborejo de korbisto</string>
-    <string name="poi_craft_beekeeper">Abelistejo</string>
+    <string name="poi_craft_beekeeper">Abelejo</string>
     <string name="poi_craft_blacksmith">Forĝejo</string>
     <string name="poi_craft_brewery">Bierfarejo</string>
     <string name="poi_craft_boatbuilder">Boat-konstruejo</string>
@@ -849,7 +849,7 @@
     <string name="poi_craft_watchmaker">Poŝ-horloĝistejo</string>
     <string name="poi_craft_insulation">Varmizolaĵistejo</string>
     <string name="poi_craft_jeweller">Laborejo de juvelisto</string>
-    <string name="poi_craft_locksmith">Seruristejo</string>
+    <string name="poi_craft_locksmith">Laborejo de seruristo</string>
     <string name="poi_craft_key_cutter">Ŝlosil-kopiistejo</string>
     <string name="poi_craft_metal_construction">Laborejo de metal-konstruaĵisto</string>
     <string name="poi_craft_optician">Okulvitristejo</string>
@@ -1852,7 +1852,7 @@
     <string name="poi_consulting">Oficejo de konsilado</string>
     <string name="poi_cooperative">Oficejo de kunlaborado</string>
     <string name="poi_office_forestry">Oficejo de arbarkultivo</string>
-    <string name="poi_logistics">Oficejo de provizarto</string>
+    <string name="poi_logistics">Oficejo de ekspedo</string>
     <string name="poi_parish">Oficejo de paroĥo</string>
     <string name="poi_publisher">Oficejo de eldonisto</string>
     <string name="poi_fuel_91ul">benzino 91-oktannombra senplumba</string>
@@ -2335,7 +2335,7 @@
     <string name="poi_water_tap">Akvokrano</string>
     <string name="poi_button_operated_yes">Butonprema: jes</string>
     <string name="poi_button_operated_no">Butonprema: ne</string>
-    <string name="poi_bicycle_repair_station">Bicikla mem-riparejo;memriparejo bicikla;riparejo bicikla;pumpilo bicikla;aerpumpilo bicikla</string>
+    <string name="poi_bicycle_repair_station">Bicikla memriparejo;memriparejo bicikla;riparejo bicikla;pumpilo bicikla;aerpumpilo bicikla</string>
     <string name="poi_sport_free_flying">Aersportoj</string>
     <string name="poi_free_flying_site_takeoff">elteriĝejo</string>
     <string name="poi_free_flying_site_landing">surteriĝejo</string>
@@ -3031,7 +3031,7 @@
     <string name="poi_feeding_place">Bestonutrejo</string>
     <string name="poi_party">Okazaĵaj-provizoj-vendejo</string>
     <string name="poi_electrical">Elektraĵ-vendejo</string>
-    <string name="poi_locksmith">Seruristejo</string>
+    <string name="poi_locksmith">Laborejo de seruristo</string>
     <string name="poi_lighting">Prilumigad-aparata vendejo</string>
     <string name="poi_lottery">Loteri-bileta kiosko</string>
     <string name="poi_gambling">Hazardludejo</string>
@@ -3719,7 +3719,7 @@
     <string name="poi_craft_bakery">Bakejo (ne vendejo)</string>
     <string name="poi_craft_cabinet_maker">Laborejo de meblisto</string>
     <string name="poi_charge">Pago</string>
-    <string name="poi_pet_grooming">Dombesta beligejo</string>
+    <string name="poi_pet_grooming">Hejmbesta beligejo</string>
     <string name="poi_atm_yes">Bankaŭtomato: jes</string>
     <string name="poi_cash_withdrawal_bank_card">Elpago de mono</string>
     <string name="poi_cash_withdrawal_yes">Elpago de mono: jes</string>
@@ -3808,7 +3808,7 @@
     <string name="poi_seamark_water_level_above_mwl">Akv-nivelo: sub la mezuma nivelo de akvo</string>
     <string name="poi_seamark_water_level_below_mwl">Akv-nivelo: super la mezuma nivelo de akvo</string>
     <string name="poi_seamark_obstruction">Baraĵo</string>
-    <string name="poi_drinking_water_refill_yes">Plenigi per trinkebla akvo: jes</string>
+    <string name="poi_drinking_water_refill_yes">jes</string>
     <string name="poi_drinking_water_refill_no">Plenigi per trinkebla akvo: ne</string>
     <string name="poi_drinking_water_refill_network">Plenigi per trinkebla akvo: reto</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">senprema</string>
@@ -3826,4 +3826,15 @@
     <string name="poi_city_block">Dombloko</string>
     <string name="poi_borough">Suburbo</string>
     <string name="poi_traffic_signals_arrow_no">Sageto: ne</string>
+    <string name="poi_departures_board_yes">jes</string>
+    <string name="poi_departures_board_no">Tabulo de forveturoj: ne</string>
+    <string name="poi_elevator">Lifto</string>
+    <string name="poi_recycling_small_electrical_appliances">malgrandaj elektraj aparatoj</string>
+    <string name="poi_nuts">Nuksa vendejo</string>
+    <string name="poi_beehive">Abelujo</string>
+    <string name="poi_departures_board_timetable">neelektronika</string>
+    <string name="poi_departures_board_realtime">realtempa</string>
+    <string name="poi_departures_board_delay">prokrasto</string>
+    <string name="poi_departures_board">Tabulo de forveturoj</string>
+    <string name="poi_drinking_water_refill">Plenigi per trinkebla akvo</string>
 </resources>

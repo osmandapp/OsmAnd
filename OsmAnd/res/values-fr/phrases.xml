@@ -1762,7 +1762,7 @@
     <string name="poi_trade_plumbing">Fournitures de plomberie</string>
     <string name="poi_trade_wood">Fournitures de bois</string>
     <string name="poi_bicycle_parking_anchors">Ancres pour vélo</string>
-    <string name="poi_bicycle_parking_stands">Râtelier pour vélo</string>
+    <string name="poi_bicycle_parking_stands">Arceaux pour vélo</string>
     <string name="poi_information_terminal">Terminal d\'informations</string>
     <string name="poi_information_tactile_map">Carte tactile</string>
     <string name="poi_board_type_notice">Tableau d\'affichage</string>
@@ -3380,7 +3380,7 @@
     <string name="poi_zoo_wildlife_park">Parc animalier</string>
     <string name="poi_zoo_enclosure">Enceinte</string>
     <string name="poi_zoo_safari_park">Parc safari</string>
-    <string name="poi_stands">Râtelier pour vélo</string>
+    <string name="poi_stands">Arceaux pour vélo</string>
     <string name="poi_motorcycle_type_sportbike">Vélo de sport</string>
     <string name="poi_motorcycle_type_chopper">Hachoir</string>
     <string name="poi_motorcycle_type_offroad">Hors route</string>
@@ -3814,7 +3814,7 @@
     <string name="poi_seamark_water_level_above_mwl">Niveau d\'eau : au-dessus du niveau d\'eau moyen</string>
     <string name="poi_seamark_water_level_below_mwl">Niveau d\'eau : en-dessous du niveau d\'eau moyen</string>
     <string name="poi_seamark_obstruction">Obstacle</string>
-    <string name="poi_drinking_water_refill_yes">Remplissage d\'eau potable : oui</string>
+    <string name="poi_drinking_water_refill_yes">Oui</string>
     <string name="poi_drinking_water_refill_no">Remplissage d\'eau potable : non</string>
     <string name="poi_drinking_water_refill_network">Réseau de remplissage d\'eau potable</string>
     <string name="poi_traffic_signals_sound_locate">Uniquement si la marche est autorisée</string>

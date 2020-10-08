@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +20,8 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
@@ -37,8 +39,9 @@ import java.util.Comparator;
 import java.util.List;
 
 import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 
-public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
+public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragment {
 
 	public static final String TAG = StartPlanRouteBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(StartPlanRouteBottomSheet.class);
@@ -47,12 +50,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 
 	protected View mainView;
 	protected GpxTrackAdapter adapter;
-	private StartPlanRouteListener listener;
 	private ImportHelper importHelper;
-
-	public void setListener(StartPlanRouteListener listener) {
-		this.listener = listener;
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -70,6 +68,10 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							MeasurementToolFragment.showInstance(activity.getSupportFragmentManager());
+						}
 						dismiss();
 					}
 				})
@@ -83,10 +85,12 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (listener != null) {
-							listener.openExistingTrackOnClick();
+						MapActivity mapActivity = (MapActivity) getActivity();
+						if (mapActivity != null) {
+							hideBottomSheet();
+							SelectFileBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
+									createSelectFileListener(), OPEN_TRACK);
 						}
-						dismiss();
 					}
 				})
 				.create();
@@ -124,7 +128,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		});
 		final List<GPXInfo> gpxTopList = gpxList.subList(0, Math.min(5, gpxList.size()));
-		adapter = new GpxTrackAdapter(requireContext(), gpxTopList, false);
+		adapter = new GpxTrackAdapter(requireContext(), gpxTopList, false, true);
 		adapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
@@ -136,15 +140,16 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected int getCustomHeight() {
-		return AndroidUtils.dpToPx(mainView.getContext(), BOTTOM_SHEET_HEIGHT_DP);
+	protected int getPeekHeight() {
+		return AndroidUtils.dpToPx(requiredMyApplication(), BOTTOM_SHEET_HEIGHT_DP);
 	}
 
 	private void onItemClick(int position, List<GPXInfo> gpxInfoList) {
 		if (position != RecyclerView.NO_POSITION && position < gpxInfoList.size()) {
 			String fileName = gpxInfoList.get(position).getFileName();
-			if (listener != null) {
-				listener.openLastEditTrackOnClick(fileName);
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), fileName);
 			}
 		}
 		dismiss();
@@ -189,35 +194,55 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	public static void showInstance(FragmentManager fragmentManager, StartPlanRouteListener listener) {
+	private SelectFileBottomSheet.SelectFileListener createSelectFileListener() {
+		return new SelectFileBottomSheet.SelectFileListener() {
+			@Override
+			public void selectFileOnCLick(String gpxFileName) {
+				dismiss();
+				MapActivity mapActivity = (MapActivity) getActivity();
+				if (mapActivity != null) {
+					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileName);
+				}
+			}
+
+			@Override
+			public void dismissButtonOnClick() {
+				MapActivity mapActivity = (MapActivity) getActivity();
+				if (mapActivity != null) {
+					showBottomSheet();
+				}
+			}
+		};
+	}
+
+	public static void showInstance(FragmentManager fragmentManager) {
 		if (!fragmentManager.isStateSaved()) {
 			StartPlanRouteBottomSheet fragment = new StartPlanRouteBottomSheet();
-			fragment.setUsedOnMap(true);
 			fragment.setRetainInstance(true);
-			fragment.setListener(listener);
 			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	protected void hideBottomSheet() {
+		MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity != null) {
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			manager.beginTransaction()
+					.hide(this).commit();
+		}
+	}
+
+	protected void showBottomSheet() {
+		MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity != null) {
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			manager.beginTransaction()
+					.show(this).commit();
 		}
 	}
 
 	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_cancel;
-	}
-
-	@Override
-	protected void onDismissButtonClickAction() {
-		if (listener != null) {
-			listener.dismissButtonOnClick();
-		}
-	}
-
-	interface StartPlanRouteListener {
-
-		void openExistingTrackOnClick();
-
-		void openLastEditTrackOnClick(String fileName);
-
-		void dismissButtonOnClick();
-
 	}
 }

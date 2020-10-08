@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.GPXUtilities.WptPt;
@@ -89,6 +90,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			return color;
 	}
 
+	@Nullable
 	public String getAddress() {
 		return address;
 	}

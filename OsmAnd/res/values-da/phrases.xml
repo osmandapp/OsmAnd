@@ -3731,7 +3731,7 @@
     <string name="poi_craft_distillery">Destilleri</string>
     <string name="poi_craft_joiner">Snedker</string>
     <string name="poi_craft_floorer">Gulvlægger</string>
-    <string name="poi_craft_bakery">Bakehouse</string>
+    <string name="poi_craft_bakery">Bageri</string>
     <string name="poi_craft_cabinet_maker">Møbelsnedker</string>
     <string name="poi_charge">Gebyr</string>
     <string name="poi_pet_grooming">Kæledyrspleje</string>
@@ -3831,7 +3831,7 @@
     <string name="poi_fire_hydrant_style_water_source_groundwater">Grundvand</string>
     <string name="poi_fire_hydrant_type_pipe">Rør</string>
     <string name="poi_fire_hydrant_pressure_filter">Tryk</string>
-    <string name="poi_pump_status_missing_beam">Pumpens tilstand: ingen håndtag</string>
+    <string name="poi_pump_status_missing_beam">Pumpe tilstand: ingen stråle</string>
     <string name="poi_traffic_signals_arrow_yes">Ja</string>
     <string name="poi_traffic_signals_vibration_yes">Ja</string>
     <string name="poi_traffic_signals_vibration_no">Vibration: nej</string>
@@ -3841,4 +3841,15 @@
     <string name="poi_borough">Bydistrikt</string>
     <string name="poi_give_box">Donationsboks</string>
     <string name="poi_traffic_signals_arrow_no">Pil: nej</string>
+    <string name="poi_elevator">Elevator</string>
+    <string name="poi_nuts">Nøddebutik</string>
+    <string name="poi_beehive">Bikube</string>
+    <string name="poi_departures_board_timetable">Tidsplan</string>
+    <string name="poi_departures_board_realtime">Realtid</string>
+    <string name="poi_departures_board_delay">Forsinkelse</string>
+    <string name="poi_departures_board_yes">Ja</string>
+    <string name="poi_departures_board_no">Afgangstavle: nej</string>
+    <string name="poi_recycling_small_electrical_appliances">Små elektriske apparater</string>
+    <string name="poi_departures_board">Afgangstavle</string>
+    <string name="poi_drinking_water_refill">Genopfyldning af drikkevand</string>
 </resources>

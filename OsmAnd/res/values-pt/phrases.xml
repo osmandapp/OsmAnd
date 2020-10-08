@@ -436,7 +436,7 @@
     <string name="poi_telephone_exchange">Central telefônica</string>
     <string name="poi_recycling">Reciclagem</string>
     <string name="poi_recycling_centre">Centro de reciclagem</string>
-    <string name="poi_recycling_container">Contêiner</string>
+    <string name="poi_recycling_container">Contentor</string>
     <string name="poi_recycling_glass">Vidro</string>
     <string name="poi_recycling_paper">Papel</string>
     <string name="poi_recycling_clothes">Roupas</string>
@@ -1775,7 +1775,7 @@
     <string name="poi_vending_toys">Brinquedos</string>
     <string name="poi_vending_ice_cream">Sorvete</string>
     <string name="poi_vending_sim_cards">Cartão SIM</string>
-    <string name="poi_branch">Seção</string>
+    <string name="poi_branch">Secção</string>
     <string name="poi_memorial_war">Memorial de guerra</string>
     <string name="poi_memorial_plaque">Placa comemorativa</string>
     <string name="poi_memorial_statue">Estátua</string>
@@ -2400,7 +2400,7 @@
     <string name="poi_cargo_passengers">Passageiros</string>
     <string name="poi_cargo_vehicle">Veículos</string>
     <string name="poi_cargo_bicycle">Bicicletas</string>
-    <string name="poi_cargo_container">Contêineres</string>
+    <string name="poi_cargo_container">Contentor</string>
     <string name="poi_cargo_hgv">Veículos pesados</string>
     <string name="poi_fitness_station">Academia ao ar livre</string>
     <string name="poi_hackerspace">Hackerspace</string>
@@ -2808,9 +2808,9 @@
     <string name="poi_pump_type_gravity">Tipo de bomba: gravidade</string>
     <string name="poi_pump_style_modern">Estilo de bomba: moderno</string>
     <string name="poi_pump_style_historic">Estilo de bomba: histórico</string>
-    <string name="poi_pump_status_ok">Status da bomba: ok</string>
-    <string name="poi_pump_status_broken">Status da bomba: quebrado</string>
-    <string name="poi_pump_status_locked">Status da bomba: bloqueado</string>
+    <string name="poi_pump_status_ok">Estado da bomba: ok</string>
+    <string name="poi_pump_status_broken">Estado da bomba: quebrado</string>
+    <string name="poi_pump_status_locked">Estado da bomba: bloqueado</string>
     <string name="poi_payment_troika_yes">Troika</string>
     <string name="poi_payment_troika_no">Cartão Troika não aceito</string>
     <string name="poi_telescope">Telescópio</string>
@@ -3563,7 +3563,7 @@
     <string name="poi_rtsa_scale_3b">3B</string>
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_flare">Explosão de gás;Queimador de gás</string>
-    <string name="poi_change_delete">Objeto excluído</string>
+    <string name="poi_change_delete">Objeto apagado</string>
     <string name="poi_rescue_box">Caixa de resgate</string>
     <string name="poi_climbing_crag">Sim</string>
     <string name="reddit">Reddit</string>
@@ -3771,7 +3771,7 @@
     <string name="poi_volcano_number_of_eruptions">Quantidade de erupções</string>
     <string name="poi_drinking_water_refill_network">Rede de reabastecimento de água potável</string>
     <string name="poi_drinking_water_refill_no">Reabastecimento de água potável: não</string>
-    <string name="poi_drinking_water_refill_yes">Reabastecimento de água potável: sim</string>
+    <string name="poi_drinking_water_refill_yes">Sim</string>
     <string name="poi_seamark_obstruction">Obstrução</string>
     <string name="poi_seamark_water_level_below_mwl">Nível da água: abaixo do nível médio da água</string>
     <string name="poi_seamark_water_level_above_mwl">Nível da água: acima do nível médio da água</string>
@@ -3818,4 +3818,16 @@
     <string name="poi_borough">Bairro</string>
     <string name="poi_give_box">Give-box</string>
     <string name="poi_traffic_signals_arrow_no">Seta: não</string>
+    <string name="poi_elevator">Elevador</string>
+    <string name="poi_departures_board_timetable">Calendário</string>
+    <string name="poi_departures_board_realtime">Tempo real</string>
+    <string name="poi_departures_board_delay">Atraso</string>
+    <string name="poi_departures_board_yes">Sim</string>
+    <string name="poi_departures_board_no">Quadro de partidas: não</string>
+    <string name="poi_departures_board">Quadro de partidas</string>
+    <string name="poi_drinking_water_refill">Reabastecimento de água potável</string>
+    <string name="poi_recycling_small_electrical_appliances">Pequenos aparelhos elétricos</string>
+    <string name="poi_beehive">Colmeia</string>
+    <string name="poi_nuts">Loja de nozes</string>
+    <string name="poi_fuel_lng">GNL</string>
 </resources>

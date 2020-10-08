@@ -43,6 +43,7 @@ import net.osmand.ValueHolder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
@@ -95,6 +96,7 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarning
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
@@ -147,6 +149,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private PointType selectFromMapPointType;
 	private int selectFromMapMenuState = MenuState.HEADER_ONLY;
 	private boolean selectFromMapWaypoints;
+	private boolean selectFromTracks;
 
 	private boolean showMenu = false;
 	private int showMenuState = DEFAULT_MENU_STATE;
@@ -1392,7 +1395,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			});
 			if (item != null) {
 				LinearLayout.LayoutParams layoutParams = getContainerButtonLayoutParams(mapActivity, false);
-				layoutParams.setMargins(margin, 0, margin, 0);
+				AndroidUtils.setMargins(layoutParams, margin, 0, margin, 0);
 				optionsContainer.addView(item, layoutParams);
 			}
 		}
@@ -1402,7 +1405,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (containerParams) {
 			int margin = AndroidUtils.dpToPx(context, 3);
 			LinearLayout.LayoutParams containerBtnLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-			containerBtnLp.setMargins(margin, 0, margin, 0);
+			AndroidUtils.setMargins(containerBtnLp, margin, 0, margin, 0);
 			return containerBtnLp;
 		} else {
 			return new LinearLayout.LayoutParams(AndroidUtils.dpToPx(context, 100), ViewGroup.LayoutParams.MATCH_PARENT);
@@ -1563,8 +1566,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					if (mapActivity != null) {
 						GPXRouteParamsBuilder routeParams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 						if (routeParams != null) {
-							FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-							FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
+							hide();
+							selectTrack();
 						}
 					}
 				}
@@ -1575,8 +1578,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		setupViaText(mainView);
 
-		FrameLayout viaButton = (FrameLayout) mainView.findViewById(R.id.via_button);
-		AndroidUiHelper.updateVisibility(viaButton, isFinishPointFromTrack());
+		FrameLayout viaButton = mainView.findViewById(R.id.via_button);
+		AndroidUiHelper.updateVisibility(viaButton, routeParams == null || isFinishPointFromTrack());
+
 		viaButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1629,7 +1633,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			String via = generateViaDescription();
 			GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 			if (routeParamsBuilder != null) {
-				String fileName = new File(routeParamsBuilder.getFile().path).getName();
+				GPXFile gpxFile = routeParamsBuilder.getFile();
+				String fileName = null;
+				if (!Algorithms.isEmpty(gpxFile.path)) {
+					fileName = new File(gpxFile.path).getName();
+				} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
+					fileName = gpxFile.tracks.get(0).name;
+				}
+				if (Algorithms.isEmpty(fileName)) {
+					fileName = app.getString(R.string.shared_string_gpx_track);
+				}
 				title.setText(GpxUiHelper.getGpxTitle(fileName));
 				description.setText(R.string.follow_track);
 				buttonDescription.setText(R.string.shared_string_add);
@@ -1747,8 +1760,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (routeParams != null) {
 				TargetPoint target = app.getTargetPointsHelper().getPointToNavigate();
 				if (target != null) {
-					PointDescription pointDescription = target.getOriginalPointDescription();
-					return pointDescription != null && routeParams.getFile().path.equals(pointDescription.getTypeName());
+					List<Location> points = routeParams.getPoints(app);
+					if (!Algorithms.isEmpty(points)) {
+						Location loc = points.get(points.size() - 1);
+						LatLon latLon = new LatLon(loc.getLatitude(), loc.getLongitude());
+						LatLon targetLatLon = new LatLon(target.getLatitude(), target.getLongitude());
+						return latLon.equals(targetLatLon);
+					}
 				}
 			}
 		}
@@ -1947,6 +1965,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			choosePointTypeAction(mapActivity, latLon, pointType, pd, name);
 			updateMenu();
 		}
+	}
+
+	public void selectTrack() {
+		selectFromTracks = true;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
+			FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
+		}
+	}
+
+	public void cancelSelectionFromTracks() {
+		selectFromTracks = false;
 	}
 
 	public void setupFields(PointType pointType) {
@@ -2248,7 +2279,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (switched) {
 					mapActivity.getMapLayers().getMapControlsLayer().switchToRouteFollowingLayout();
 				}
-				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch) {
+				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && !selectFromTracks) {
 					mapActivity.getMapActions().stopNavigationWithoutConfirm();
 				}
 				mapActivity.updateStatusBarColor();
@@ -2361,6 +2392,32 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	@Override
 	public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 		updateMenu();
+	}
+
+	@NonNull
+	public QuadRect getRouteRect(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
+
+		QuadRect rect = new QuadRect(0, 0, 0, 0);
+		if (menu.isTransportRouteCalculated()) {
+			TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+			TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
+			if (result != null) {
+				QuadRect transportRouteRect = transportRoutingHelper.getTransportRouteRect(result);
+				if (transportRouteRect != null) {
+					rect = transportRouteRect;
+				}
+			}
+		} else if (routingHelper.isRouteCalculated()) {
+			RouteCalculationResult result = routingHelper.getRoute();
+			QuadRect routeRect = routingHelper.getRouteRect(result);
+			if (routeRect != null) {
+				rect = routeRect;
+			}
+		}
+		return rect;
 	}
 
 	public enum MapRouteMenuType {

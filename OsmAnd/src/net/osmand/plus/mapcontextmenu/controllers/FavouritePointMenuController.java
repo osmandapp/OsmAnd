@@ -1,8 +1,11 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -18,12 +21,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.view.GravityDrawable;
 
@@ -155,8 +161,17 @@ public class FavouritePointMenuController extends MenuController {
 
 	@NonNull
 	@Override
-	public String getSubtypeStr() {
-		return fav.getAddress();
+	public CharSequence getSubtypeStr() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !Algorithms.isEmpty(fav.getAddress())) {
+			Typeface typeface = FontCache.getRobotoRegular(mapActivity);
+			SpannableString addressSpannable = new SpannableString(fav.getAddress());
+			addressSpannable.setSpan(new CustomTypefaceSpan(typeface), 0, addressSpannable.length(), 0);
+
+			return addressSpannable;
+		} else {
+			return "";
+		}
 	}
 
 	@Override
@@ -166,8 +181,8 @@ public class FavouritePointMenuController extends MenuController {
 			OsmandApplication app = mapActivity.getMyApplication();
 			FavouritesDbHelper helper = app.getFavorites();
 			String group = fav.getCategory();
-			if (helper.getGroup(group) != null) {
-				Drawable line2icon = helper.getColoredIconForGroup(group);
+			Drawable line2icon = helper.getGroup(group) != null ? helper.getColoredIconForGroup(group) : null;
+			if (line2icon != null) {
 				GravityDrawable gravityIcon = new GravityDrawable(line2icon);
 				gravityIcon.setBoundsFrom(line2icon);
 				return gravityIcon;

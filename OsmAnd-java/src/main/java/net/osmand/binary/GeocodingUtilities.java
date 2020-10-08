@@ -334,14 +334,16 @@ public class GeocodingUtilities {
 		boolean eqStreet = Algorithms.stringsEqual(gr1.streetName, gr2.streetName);
 		if (eqStreet) {
 			boolean sameObj = false;
-			if (gr1.building != null && gr2.building != null) {
-				if (Algorithms.stringsEqual(gr1.building.getName(), gr2.building.getName())) {
-					// same building
+			if (gr1.city != null && gr2.city != null) {
+				if (gr1.building != null && gr2.building != null) {
+					if (Algorithms.stringsEqual(gr1.building.getName(), gr2.building.getName())) {
+						// same building
+						sameObj = true;
+					}
+				} else if (gr1.building == null && gr2.building == null) {
+					// same street
 					sameObj = true;
 				}
-			} else if (gr1.building == null && gr2.building == null) {
-				// same street
-				sameObj = true;
 			}
 			if (sameObj) {
 				double cityDist1 = MapUtils.getDistance(gr1.searchPoint, gr1.city.getLocation());
