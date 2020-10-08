@@ -35,10 +35,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="10dp"
 			android:layout_gravity="bottom"
-			android:visibility="gone"
-			android:background="@drawable/bg_contextmenu_shadow_top_light" />
+			android:background="@drawable/bg_contextmenu_shadow_top_light"
+			android:visibility="gone" />
 	</FrameLayout>
-
-	<include layout="@layout/bottom_buttons" />
 
 </LinearLayout>

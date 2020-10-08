@@ -108,7 +108,7 @@
     <string name="not_found_yet">Ainda não encontrado</string>
     <string name="re_send_location">Reenvie o local</string>
     <string name="last_available_location">Última localização disponível</string>
-    <string name="sharing_status">Status de compartilhamento</string>
+    <string name="sharing_status">Estado de compartilhamento</string>
     <string name="location_sharing_status">Compartilhamento: %1$s</string>
     <string name="shared_string_enabled">Ativado</string>
     <string name="no_gps_connection">Sem conexão GPS</string>

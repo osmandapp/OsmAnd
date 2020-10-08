@@ -294,7 +294,7 @@
     <string name="poi_traffic_calming_choker">Forgalomlassító útszűkület</string>
     <string name="poi_fuel_diesel">Gázolaj</string>
     <string name="poi_fuel_biodiesel">Biodízel</string>
-    <string name="poi_fuel_lpg">Cseppfolyós gáz (LPG)</string>
+    <string name="poi_fuel_lpg">LPG (cseppfolyósított PB-gáz)</string>
     <string name="poi_fuel_octane_80">80-as oktánszámú</string>
     <string name="poi_fuel_octane_91">91-es oktánszámú</string>
     <string name="poi_fuel_octane_92">92-es oktánszámú</string>
@@ -3835,4 +3835,5 @@
     <string name="poi_drinking_water_refill">Ivóvíz-utántöltés</string>
     <string name="poi_nuts">Mag- és aszaltgyümölcsbolt</string>
     <string name="poi_beehive">Méhkaptár</string>
+    <string name="poi_fuel_lng">LNG (cseppfolyósított földgáz)</string>
 </resources>

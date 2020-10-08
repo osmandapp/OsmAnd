@@ -34,11 +34,11 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.settings.backend.SettingsHelper.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.FileSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.SettingsHelper.ImportAsyncTask;
 import net.osmand.plus.settings.backend.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.SettingsHelper.MapSourcesSettingsItem;
@@ -53,7 +53,6 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.Type;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -64,6 +63,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.helpers.ImportHelper.getSettingsToOperate;
 
 public class ImportSettingsFragment extends BaseOsmAndFragment
 		implements View.OnClickListener {
@@ -180,7 +181,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 
 		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
-		Map<Type, List<?>> itemsMap = new HashMap<>();
+		Map<ExportSettingsType, List<?>> itemsMap = new HashMap<>();
 		if (settingsItems != null) {
 			itemsMap = getSettingsToOperate(settingsItems, false);
 			adapter.updateSettingsList(itemsMap);
@@ -196,7 +197,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		} else {
 			toolbarLayout.setTitle(getString(R.string.shared_string_import));
 		}
-		if (itemsMap.size() == 1 && itemsMap.containsKey(Type.PROFILE)) {
+		if (itemsMap.size() == 1 && itemsMap.containsKey(ExportSettingsType.PROFILE)) {
 			expandableList.expandGroup(0);
 		}
 	}
@@ -266,11 +267,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				FragmentManager fm = getFragmentManager();
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
-					AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
-						@Override
-						public void onRoutingFilesLoaded() {
-						}
-					});
+					AppInitializer.loadRoutingFiles(app, null);
 					if (fm != null && file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}
@@ -418,89 +415,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 			settingsItems.add(new AvoidRoadsSettingsItem(app, getBaseAvoidRoadsSettingsItem(), avoidRoads));
 		}
 		return settingsItems;
-	}
-
-	public static Map<Type, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean importComplete) {
-		Map<Type, List<?>> settingsToOperate = new HashMap<>();
-		List<ApplicationModeBean> profiles = new ArrayList<>();
-		List<QuickAction> quickActions = new ArrayList<>();
-		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-		List<ITileSource> tileSourceTemplates = new ArrayList<>();
-		List<File> routingFilesList = new ArrayList<>();
-		List<File> renderFilesList = new ArrayList<>();
-		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
-		for (SettingsItem item : settingsItems) {
-			switch (item.getType()) {
-				case PROFILE:
-					profiles.add(((ProfileSettingsItem) item).getModeBean());
-					break;
-				case FILE:
-					FileSettingsItem fileItem = (FileSettingsItem) item;
-					if (fileItem.getSubtype() == FileSubtype.RENDERING_STYLE) {
-						renderFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSubtype.ROUTING_CONFIG) {
-						routingFilesList.add(fileItem.getFile());
-					}
-					break;
-				case QUICK_ACTIONS:
-					QuickActionsSettingsItem quickActionsItem = (QuickActionsSettingsItem) item;
-					if (importComplete) {
-						quickActions.addAll(quickActionsItem.getAppliedItems());
-					} else {
-						quickActions.addAll(quickActionsItem.getItems());
-					}
-					break;
-				case POI_UI_FILTERS:
-					PoiUiFiltersSettingsItem poiUiFilterItem = (PoiUiFiltersSettingsItem) item;
-					if (importComplete) {
-						poiUIFilters.addAll(poiUiFilterItem.getAppliedItems());
-					} else {
-						poiUIFilters.addAll(poiUiFilterItem.getItems());
-					}
-					break;
-				case MAP_SOURCES:
-					MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) item;
-					if (importComplete) {
-						tileSourceTemplates.addAll(mapSourcesItem.getAppliedItems());
-					} else {
-						tileSourceTemplates.addAll(mapSourcesItem.getItems());
-					}
-					break;
-				case AVOID_ROADS:
-					AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) item;
-					if (importComplete) {
-						avoidRoads.addAll(avoidRoadsItem.getAppliedItems());
-					} else {
-						avoidRoads.addAll(avoidRoadsItem.getItems());
-					}
-					break;
-				default:
-					break;
-			}
-		}
-
-		if (!profiles.isEmpty()) {
-			settingsToOperate.put(Type.PROFILE, profiles);
-		}
-		if (!quickActions.isEmpty()) {
-			settingsToOperate.put(Type.QUICK_ACTIONS, quickActions);
-		}
-		if (!poiUIFilters.isEmpty()) {
-			settingsToOperate.put(Type.POI_TYPES, poiUIFilters);
-		}
-		if (!tileSourceTemplates.isEmpty()) {
-			settingsToOperate.put(Type.MAP_SOURCES, tileSourceTemplates);
-		}
-		if (!renderFilesList.isEmpty()) {
-			settingsToOperate.put(Type.CUSTOM_RENDER_STYLE, renderFilesList);
-		}
-		if (!routingFilesList.isEmpty()) {
-			settingsToOperate.put(Type.CUSTOM_ROUTING, routingFilesList);
-		}
-		if (!avoidRoads.isEmpty()) {
-			settingsToOperate.put(Type.AVOID_ROADS, avoidRoads);
-		}
-		return settingsToOperate;
 	}
 
 	@Override

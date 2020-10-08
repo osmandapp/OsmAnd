@@ -16,6 +16,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -50,8 +51,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 	private List<? super Object> data;
-	private Map<Type, List<?>> itemsMap;
-	private List<Type> itemsTypes;
+	private Map<ExportSettingsType, List<?>> itemsMap;
+	private List<ExportSettingsType> itemsTypes;
 	private boolean nightMode;
 	private boolean importState;
 	private int activeColorRes;
@@ -82,7 +83,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		}
 
 		boolean isLastGroup = groupPosition == getGroupCount() - 1;
-		final Type type = itemsTypes.get(groupPosition);
+		final ExportSettingsType type = itemsTypes.get(groupPosition);
 
 		TextView titleTv = group.findViewById(R.id.title_tv);
 		TextView subTextTv = group.findViewById(R.id.sub_text_tv);
@@ -146,7 +147,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		boolean isLastGroup = groupPosition == getGroupCount() - 1;
 		boolean itemSelected = data.contains(currentItem);
-		final Type type = itemsTypes.get(groupPosition);
+		final ExportSettingsType type = itemsTypes.get(groupPosition);
 
 		TextView title = child.findViewById(R.id.title_tv);
 		TextView subText = child.findViewById(R.id.sub_title_tv);
@@ -299,7 +300,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		return app.getString(R.string.n_items_of_z, String.valueOf(amount), String.valueOf(listItems.size()));
 	}
 
-	private int getGroupTitle(Type type) {
+	private int getGroupTitle(ExportSettingsType type) {
 		switch (type) {
 			case PROFILE:
 				return R.string.shared_string_profiles;
@@ -320,15 +321,15 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		}
 	}
 
-    private void setupIcon(ImageView icon, int iconRes, boolean itemSelected) {
-        if (itemSelected) {
-            icon.setImageDrawable(uiUtilities.getIcon(iconRes, activeColorRes));
-        } else {
-            icon.setImageDrawable(uiUtilities.getIcon(iconRes, nightMode));
-        }
-    }
+	private void setupIcon(ImageView icon, int iconRes, boolean itemSelected) {
+		if (itemSelected) {
+			icon.setImageDrawable(uiUtilities.getIcon(iconRes, activeColorRes));
+		} else {
+			icon.setImageDrawable(uiUtilities.getIcon(iconRes, nightMode));
+		}
+	}
 
-	public void updateSettingsList(Map<Type, List<?>> itemsMap) {
+	public void updateSettingsList(Map<ExportSettingsType, List<?>> itemsMap) {
 		this.itemsMap = itemsMap;
 		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
 		Collections.sort(itemsTypes);
@@ -353,15 +354,5 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 	List<? super Object> getData() {
 		return this.data;
-	}
-
-	public enum Type {
-		PROFILE,
-		QUICK_ACTIONS,
-		POI_TYPES,
-		MAP_SOURCES,
-		CUSTOM_RENDER_STYLE,
-		CUSTOM_ROUTING,
-		AVOID_ROADS
 	}
 }

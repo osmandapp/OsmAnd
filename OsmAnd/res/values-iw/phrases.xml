@@ -1390,7 +1390,7 @@
     <string name="poi_car_sharing">שיתוף רכב</string>
     <string name="poi_boat_sharing">שיתוף סירות</string>
     <string name="poi_dock">מעגן</string>
-    <string name="poi_toilets">בית שימוש</string>
+    <string name="poi_toilets">בית שימוש;אסלה;טואלט</string>
     <string name="poi_shower">מקלחת</string>
     <string name="poi_sauna">סאונה</string>
     <string name="poi_brothel">בית בושת</string>
@@ -2043,7 +2043,7 @@
     <string name="poi_toll_hgv_yes">אגרה למשאיות</string>
     <string name="poi_tactile_paving_yes">כן</string>
     <string name="poi_traffic_signals_sound_yes">כן</string>
-    <string name="poi_traffic_signals_sound_no">לא</string>
+    <string name="poi_traffic_signals_sound_no">שמע: לא</string>
     <string name="poi_traffic_signals_sound_walk">רק כאשר מותר לחצות</string>
     <string name="poi_rescue_station">תחנת הצלה</string>
     <string name="poi_services">אזור שירות</string>
@@ -2119,7 +2119,7 @@
     <string name="poi_fuel_100ll">דלק 100LL</string>
     <string name="poi_fuel_autogas">גפ״מ</string>
     <string name="poi_fuel_jeta1">דלק מטוסים A-1</string>
-    <string name="poi_fuel_adblue">תוסף AdBlue</string>
+    <string name="poi_fuel_adblue">נוזל מפלט לדיזל</string>
     <string name="poi_atm">כספומט</string>
     <string name="poi_car_pooling">מקום בנסיעה שיתופית</string>
     <string name="poi_denomination_wesleyan">וסליאן</string>
@@ -2159,4 +2159,19 @@
     <string name="poi_climbing_crag">כן</string>
     <string name="poi_climbing_crag_filter">מצוק טיפוס</string>
     <string name="poi_rtsa_scale_filter">קטגוריית קושי</string>
+    <string name="poi_fire_hydrant_type_pipe">צינור</string>
+    <string name="poi_drinking_water_refill_network">רשת מילוי מי שתייה</string>
+    <string name="poi_drinking_water_refill_no">מילוי מי שתייה: אין</string>
+    <string name="poi_drinking_water_refill_yes">כן</string>
+    <string name="poi_give_box">תיבת תרומה</string>
+    <string name="poi_traffic_signals_arrow_no">חץ: אין</string>
+    <string name="poi_traffic_signals_arrow_yes">כן</string>
+    <string name="poi_traffic_signals_vibration_yes">כן</string>
+    <string name="poi_elevator">מעלית</string>
+    <string name="poi_departures_board_realtime">זמן אמת</string>
+    <string name="poi_departures_board_delay">השהיה</string>
+    <string name="poi_departures_board_yes">כן</string>
+    <string name="poi_departures_board_timetable">לוח זמנים</string>
+    <string name="poi_beehive">כוורת דבורים</string>
+    <string name="poi_nuts">חנות אגוזים</string>
 </resources>

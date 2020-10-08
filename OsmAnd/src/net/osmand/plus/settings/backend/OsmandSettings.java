@@ -2008,6 +2008,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN = new BooleanPreference("live_updates_purchase_cancelled_second_dlg_shown", false).makeGlobal();
 	public final OsmandPreference<Boolean> FULL_VERSION_PURCHASED = new BooleanPreference("billing_full_version_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> DEPTH_CONTOURS_PURCHASED = new BooleanPreference("billing_sea_depth_purchased", false).makeGlobal();
+	public final OsmandPreference<Boolean> CONTOUR_LINES_PURCHASED = new BooleanPreference("billing_srtm_purchased", false).makeGlobal();
 	public final OsmandPreference<Boolean> EMAIL_SUBSCRIBED = new BooleanPreference("email_subscribed", false).makeGlobal();
 
 	public final OsmandPreference<Integer> DISCOUNT_ID = new IntPreference("discount_id", 0).makeGlobal();
@@ -2219,6 +2220,8 @@ public class OsmandSettings {
 			return valueSaved;
 		}
 	}.makeProfile().cache();
+
+	public final OsmandPreference<Boolean> SHOW_START_FINISH_ICONS = new BooleanPreference("show_start_finish_icons", true).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference("gpx_routing_calculate_osmand_route", true).makeGlobal().cache();
 //	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference("gpx_routing_calculate_rtept", true).makeGlobal().cache();

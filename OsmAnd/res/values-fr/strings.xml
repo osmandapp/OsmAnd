@@ -3412,7 +3412,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icône affiché pendant la navigation ou en déplacement.</string>
     <string name="select_map_icon_descr">Icône affiché à l\'arrêt.</string>
-    <string name="logcat_buffer_descr">Consultez et partagez les journaux de l\'application (pour debug)</string>
+    <string name="logcat_buffer_descr">Vérifier et partager les logs détaillés de l\'application</string>
     <string name="permission_is_required">Vous n\'êtes pas autorisés à utiliser cette option.</string>
     <string name="live_monitoring_tracking_interval">Intervalle de suivi</string>
     <string name="live_monitoring_adress">Adresse web</string>
@@ -3883,4 +3883,6 @@
     <string name="sort_last_modified">Dernière modification</string>
     <string name="sort_name_descending">Nom : Z – A</string>
     <string name="sort_name_ascending">Nom : A – Z</string>
+    <string name="start_finish_icons">Icônes de départ / arrivée</string>
+    <string name="contour_lines_thanks">Merci pour votre achat de \'Courbes de niveaux\'</string>
 </resources>
