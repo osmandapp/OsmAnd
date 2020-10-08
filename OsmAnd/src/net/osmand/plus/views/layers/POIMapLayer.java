@@ -66,7 +66,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
-	public MapLayerData<List<Amenity>> data;
+	private MapLayerData<List<Amenity>> data;
 
 	private OsmandApplication app;
 

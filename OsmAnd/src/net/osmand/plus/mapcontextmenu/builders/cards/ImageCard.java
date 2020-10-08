@@ -418,6 +418,7 @@ public abstract class ImageCard extends AbstractCard {
 		private Map<String, String> params;
 		private GetImageCardsListener listener;
 		private List<ImageCard> result;
+		private static final int GET_IMAGE_CARD_THREAD_ID = 10104;
 
 		public interface GetImageCardsListener {
 			void onPostProcess(List<ImageCard> cardList);
@@ -436,10 +437,8 @@ public abstract class ImageCard extends AbstractCard {
 
 		@Override
 		protected List<ImageCard> doInBackground(Void... params) {
-			final int THREAD_ID = 10104;
-			TrafficStats.setThreadStatsTag(THREAD_ID);
+			TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
 			List<ImageCard> result = new ArrayList<>();
-			RotatedTileBox rtb = mapActivity.getMapView().getCurrentRotatedTileBox();
 			Object o = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObject();
 			if (o instanceof Amenity) {
 				Amenity am = (Amenity) o;
@@ -510,7 +509,6 @@ public abstract class ImageCard extends AbstractCard {
 			String url = "https://test.openplacereviews.org/api/objects-by-index?type=opr.place&index=osmid&limit=1&key=" + l;
 			String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
 					"Requesting location images...", false, false);
-
 			try {
 				if (!Algorithms.isEmpty(response)) {
 					JSONArray obj = new JSONObject(response).getJSONArray("objects");
@@ -526,7 +524,7 @@ public abstract class ImageCard extends AbstractCard {
 									}
 								}
 							} catch (JSONException e) {
-								e.printStackTrace();
+								LOG.error(e);
 							}
 						}
 					}

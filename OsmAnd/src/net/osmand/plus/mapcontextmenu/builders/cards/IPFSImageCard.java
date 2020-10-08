@@ -1,28 +1,34 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
 import android.view.View;
+import net.osmand.AndroidNetworkUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
+import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class IPFSImageCard extends ImageCard {
 	private static final String BASE_URL = "https://test.openplacereviews.org/api/ipfs/image-ipfs?cid=";
+	private static final Log LOG = PlatformUtil.getLog(IPFSImageCard.class);
 
 	public IPFSImageCard(MapActivity mapActivity, JSONObject imageObject) {
 		super(mapActivity, imageObject);
+		String cid = "";
 		try {
-			this.url = BASE_URL + imageObject.get("cid");
-			this.imageHiresUrl = BASE_URL + imageObject.get("cid");
-			this.imageUrl = BASE_URL + imageObject.get("cid");
+			cid = (String) imageObject.get("cid");
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
-		if (!Algorithms.isEmpty(getSuitableUrl())) {
+		this.url = BASE_URL + cid;
+		this.imageHiresUrl = BASE_URL + cid;
+		this.imageUrl = BASE_URL + cid;
+		if (!Algorithms.isEmpty(getUrl())) {
 			View.OnClickListener onClickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					openUrl(getMapActivity(), getMyApplication(), getTitle(), getSuitableUrl(),
+					openUrl(getMapActivity(), getMyApplication(), getTitle(), getUrl(),
 							isExternalLink() || Algorithms.isEmpty(getImageHiresUrl()),
 							!Algorithms.isEmpty(getImageHiresUrl()));
 				}
@@ -33,15 +39,5 @@ public class IPFSImageCard extends ImageCard {
 				this.onClickListener = onClickListener;
 			}
 		}
-	}
-
-	private String getSuitableUrl() {
-		final String url;
-		if (Algorithms.isEmpty(getImageHiresUrl())) {
-			url = getUrl();
-		} else {
-			url = getImageHiresUrl();
-		}
-		return url;
 	}
 }
