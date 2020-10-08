@@ -267,4 +267,8 @@
     <string name="status_widget_title">تتبع حالة أوسماند</string>
     <string name="back_to_osmand">العودة إلى OsmAnd</string>
     <string name="duration_ago">%1$s منذ</string>
+    <string name="send_report">إرسال التقرير</string>
+    <string name="shared_string_export">تصدير</string>
+    <string name="logcat_buffer">سجل الاستخدام</string>
+    <string name="logcat_buffer_descr">التحقق من السجلات التفصيلية للتطبيق ومشاركتها</string>
 </resources>
