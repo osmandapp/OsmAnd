@@ -3906,4 +3906,10 @@
     <string name="contour_lines_thanks">Спасибо за покупку \'Контурных линий\'</string>
     <string name="routing_attr_avoid_footways_description">Избегать пешеходных дорожек</string>
     <string name="routing_attr_avoid_footways_name">Избегать пешеходных дорожек</string>
+    <string name="osm_live_payment_desc_hw">Подписка взимается за выбранный период. Отмените её в AppGallery в любое время.</string>
+    <string name="osm_live_payment_subscription_management_hw">Оплата будет снята с вашей учетной записи AppGallery при подтверждении покупки.
+\n
+\nПодписка продлевается автоматически, если она не будет отменена до даты продления. С вашего счета будет взиматься плата за период продления (месяц/три месяца/год) только в дату продления.
+\n
+\nВы можете управлять своими подписками и отменять их, перейдя в настройки AppGallery.</string>
 </resources>
