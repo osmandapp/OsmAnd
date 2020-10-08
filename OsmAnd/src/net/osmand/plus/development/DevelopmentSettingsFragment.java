@@ -59,7 +59,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 
 	private void setupOpenglRenderPref() {
 		SwitchPreferenceEx useOpenglRender = findPreference(settings.USE_OPENGL_RENDER.getId());
-		if (app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
+		if (Version.isOpenGlAvailable(app)) {
 			assert useOpenglRender != null;
 			useOpenglRender.setDescription(getString(R.string.use_opengl_render_descr));
 			useOpenglRender.setIconSpaceReserved(false);
