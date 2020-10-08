@@ -3885,4 +3885,7 @@
     <string name="sort_name_ascending">Nom : A – Z</string>
     <string name="start_finish_icons">Icônes de départ / arrivée</string>
     <string name="contour_lines_thanks">Merci pour votre achat de \'Courbes de niveaux\'</string>
+    <string name="osm_live_payment_desc_hw">Abonnement facturé pour chaque période sélectionnée. Annulation possible à tout moment sur AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Éviter les trottoirs</string>
+    <string name="routing_attr_avoid_footways_name">Éviter les trottoirs</string>
 </resources>

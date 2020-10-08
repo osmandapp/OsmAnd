@@ -3826,7 +3826,7 @@
     <string name="plan_route_select_track_file_for_open">Wählen Sie eine Trackdatei zum Öffnen aus.</string>
     <string name="shared_string_done">Fertig</string>
     <string name="overwrite_track">Track überschreiben</string>
-    <string name="threshold_distance">Schwellenwert-Distanz</string>
+    <string name="threshold_distance">Maximaler Abstand</string>
     <string name="save_as_new_track">Als neuen Track speichern</string>
     <string name="reverse_route">Route umkehren</string>
     <string name="route_between_points_whole_track_button_desc">Der gesamte Track wird mit dem ausgewählten Profil neu berechnet.</string>
@@ -3910,4 +3910,12 @@
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="start_finish_icons">Start-/Ziel-Symbole</string>
     <string name="contour_lines_thanks">Vielen Dank für den Kauf von \'Höhenlinien\'</string>
+    <string name="osm_live_payment_desc_hw">Das Abonnement wird pro ausgewähltem Zeitraum berechnet. Sie können das Abonnement jederzeit über die AppGallery kündigen.</string>
+    <string name="osm_live_payment_subscription_management_hw">Die Bezahlung wird Ihrem AppGallery-Konto bei der Bestätigung des Kaufs belastet.
+\n
+\n Das Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
+\n
+\n Sie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren AppGallery-Einstellungen gehen.</string>
+    <string name="routing_attr_avoid_footways_description">Vermeidet Fußwege</string>
+    <string name="routing_attr_avoid_footways_name">Keine Fußwege</string>
 </resources>
