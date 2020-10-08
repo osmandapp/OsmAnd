@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
@@ -56,7 +56,7 @@ public class MapMarkerMenuController extends MenuController {
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
-						OsmandSettings.OsmandPreference<Boolean> indication
+						OsmandPreference<Boolean> indication
 								= activity.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED;
 						if (!indication.get()) {
 							indication.set(true);

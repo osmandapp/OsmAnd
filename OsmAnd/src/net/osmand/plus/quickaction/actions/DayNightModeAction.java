@@ -6,8 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.DayNightMode;
+import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
@@ -27,9 +26,9 @@ public class DayNightModeAction extends QuickAction {
 	@Override
 	public void execute(MapActivity activity) {
 		if (activity.getMyApplication().getDaynightHelper().isNightMode()) {
-			activity.getMyApplication().getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.DAY);
+			activity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.DAY);
 		} else {
-			activity.getMyApplication().getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.NIGHT);
+			activity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.NIGHT);
 		}
 	}
 

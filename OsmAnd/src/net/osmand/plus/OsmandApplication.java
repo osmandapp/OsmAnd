@@ -30,6 +30,7 @@ import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -42,7 +43,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.activities.ExitActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -56,7 +57,9 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
@@ -189,7 +192,7 @@ public class OsmandApplication extends MultiDexApplication {
 			osmandSettings.initExternalStorageDirectory();
 		}
 		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
-		if (!OsmandSettings.isWritable(externalStorageDirectory)) {
+		if (!FileUtils.isWritable(externalStorageDirectory)) {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
@@ -983,15 +986,15 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void setupDrivingRegion(WorldRegion reg) {
-		OsmandSettings.DrivingRegion drg = null;
+		DrivingRegion drg = null;
 		WorldRegion.RegionParams params = reg.getParams();
 //		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
-		OsmandSettings.MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ?
-				OsmandSettings.MetricsConstants.MILES_AND_FEET : OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS;
-		OsmandSettings.MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ?
-				OsmandSettings.MetricsConstants.MILES_AND_METERS : OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS;
-		for (OsmandSettings.DrivingRegion r : OsmandSettings.DrivingRegion.values()) {
+		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ?
+				MetricsConstants.MILES_AND_FEET : MetricsConstants.KILOMETERS_AND_METERS;
+		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ?
+				MetricsConstants.MILES_AND_METERS : MetricsConstants.KILOMETERS_AND_METERS;
+		for (DrivingRegion r : DrivingRegion.values()) {
 			if (r.leftHandDriving == leftHand && (r.defMetrics == mc1 || r.defMetrics == mc2)) {
 				drg = r;
 				break;

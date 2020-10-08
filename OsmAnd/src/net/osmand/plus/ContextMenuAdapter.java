@@ -38,9 +38,8 @@ import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.ContextMenuItemsPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -647,7 +646,7 @@ public class ContextMenuAdapter {
 		return makeDeleteAction(prefs.toArray(new OsmandPreference[prefs.size()]));
 	}
 
-	private static void resetSetting(ApplicationMode appMode, OsmandSettings.OsmandPreference preference, boolean profileOnly) {
+	private static void resetSetting(ApplicationMode appMode, OsmandPreference preference, boolean profileOnly) {
 		if (profileOnly) {
 			preference.resetModeToDefault(appMode);
 		} else {

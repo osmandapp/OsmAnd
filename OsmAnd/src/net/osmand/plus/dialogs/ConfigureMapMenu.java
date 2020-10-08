@@ -33,6 +33,11 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -40,9 +45,6 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.ListStringPreference;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -307,7 +309,7 @@ public class ConfigureMapMenu {
 			DateFormat dateFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
 			String sunriseTime = dateFormat.format(sunriseSunset.getSunrise());
 			String sunsetTime = dateFormat.format(sunriseSunset.getSunset());
-			OsmandSettings.DayNightMode dayNightMode = activity.getMyApplication().getSettings().DAYNIGHT_MODE.get();
+			DayNightMode dayNightMode = activity.getMyApplication().getSettings().DAYNIGHT_MODE.get();
 			if (dayNightMode.isDay() || dayNightMode.isNight()) {
 				if (sunriseSunset.isDaytime()) {
 					description = String.format(app.getString(R.string.sunset_at), sunsetTime);
@@ -334,9 +336,9 @@ public class ConfigureMapMenu {
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						bld.setTitle(R.string.daynight);
-						final String[] items = new String[OsmandSettings.DayNightMode.values().length];
+						final String[] items = new String[DayNightMode.values().length];
 						for (int i = 0; i < items.length; i++) {
-							items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(app);
+							items[i] = DayNightMode.values()[i].toHumanString(app);
 						}
 						int i = view.getSettings().DAYNIGHT_MODE.get().ordinal();
 						bld.setNegativeButton(R.string.shared_string_dismiss, null);
@@ -345,7 +347,7 @@ public class ConfigureMapMenu {
 									@Override
 									public void onClick(View v) {
 										int which = (int) v.getTag();
-										view.getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.values()[which]);
+										view.getSettings().DAYNIGHT_MODE.set(DayNightMode.values()[which]);
 										refreshMapComplete(activity);
 										activity.getDashboard().refreshContent(true);
 										// adapter.getItem(pos).setDescription(s, getDayNightDescr(activity));
@@ -376,7 +378,7 @@ public class ConfigureMapMenu {
 							return false;
 						}
 						final OsmandMapTileView view = activity.getMapView();
-						final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
+						final OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 						AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						int p = (int) (mapDensity.get() * 100);
 						final TIntArrayList tlist = new TIntArrayList(new int[]{25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
@@ -669,25 +671,25 @@ public class ConfigureMapMenu {
 											 @ColorInt final int selectedProfileColor) {
 
 		final List<RenderingRuleProperty> ps = new ArrayList<>();
-		final List<OsmandSettings.CommonPreference<Boolean>> prefs = new ArrayList<>();
+		final List<CommonPreference<Boolean>> prefs = new ArrayList<>();
 		Iterator<RenderingRuleProperty> it = customRules.iterator();
 
 		while (it.hasNext()) {
 			RenderingRuleProperty p = it.next();
 			if (category.equals(p.getCategory()) && p.isBoolean()) {
 				ps.add(p);
-				final OsmandSettings.CommonPreference<Boolean> pref = activity.getMyApplication().getSettings()
+				final CommonPreference<Boolean> pref = activity.getMyApplication().getSettings()
 						.getCustomRenderBooleanProperty(p.getAttrName());
 				prefs.add(pref);
 				it.remove();
 			}
 		}
 		if (prefs.size() > 0) {
-			final List<OsmandSettings.CommonPreference<String>> includedPrefs = new ArrayList<>();
+			final List<CommonPreference<String>> includedPrefs = new ArrayList<>();
 			if (customRulesIncluded != null) {
 				for (RenderingRuleProperty p : customRulesIncluded) {
 					if (!p.isBoolean()) {
-						final OsmandSettings.CommonPreference<String> pref = activity.getMyApplication().getSettings()
+						final CommonPreference<String> pref = activity.getMyApplication().getSettings()
 								.getCustomRenderProperty(p.getAttrName());
 						includedPrefs.add(pref);
 					}
@@ -729,14 +731,14 @@ public class ConfigureMapMenu {
 					.setId(id)
 					.setIcon(icon).setListener(clickListener);
 			boolean selected = false;
-			for (OsmandSettings.CommonPreference<Boolean> p : prefs) {
+			for (CommonPreference<Boolean> p : prefs) {
 				if (p.get()) {
 					selected = true;
 					break;
 				}
 			}
 			if (!selected &&  includedPrefs.size() > 0) {
-				for (OsmandSettings.CommonPreference<String> p : includedPrefs) {
+				for (CommonPreference<String> p : includedPrefs) {
 					if (!Algorithms.isEmpty(p.get())) {
 						selected = true;
 						break;
@@ -773,17 +775,17 @@ public class ConfigureMapMenu {
 		return null;
 	}
 
-	protected String getDescription(final List<OsmandSettings.CommonPreference<Boolean>> prefs,
-									final List<OsmandSettings.CommonPreference<String>> includedPrefs) {
+	protected String getDescription(final List<CommonPreference<Boolean>> prefs,
+									final List<CommonPreference<String>> includedPrefs) {
 		int count = 0;
 		int enabled = 0;
-		for (OsmandSettings.CommonPreference<Boolean> p : prefs) {
+		for (CommonPreference<Boolean> p : prefs) {
 			count++;
 			if (p.get()) {
 				enabled++;
 			}
 		}
-		for (OsmandSettings.CommonPreference<String> p : includedPrefs) {
+		for (CommonPreference<String> p : includedPrefs) {
 			count++;
 			if (!Algorithms.isEmpty(p.get())) {
 				enabled++;
@@ -856,11 +858,11 @@ public class ConfigureMapMenu {
 					prefs.get(i).set(tempPrefs[i]);
 					selected |= tempPrefs[i];
 				}
-				final List<OsmandSettings.CommonPreference<String>> includedPrefs = new ArrayList<>();
+				final List<CommonPreference<String>> includedPrefs = new ArrayList<>();
 				if (customRulesIncluded != null) {
 					for (RenderingRuleProperty p : customRulesIncluded) {
 						if (p.getAttrName().equals(HIKING_ROUTES_OSMC_ATTR)) {
-							final OsmandSettings.CommonPreference<String> pref = activity.getMyApplication().getSettings()
+							final CommonPreference<String> pref = activity.getMyApplication().getSettings()
 									.getCustomRenderProperty(p.getAttrName());
 							includedPrefs.add(pref);
 							if (hikingRouteOSMCValue == 0) {
@@ -894,7 +896,7 @@ public class ConfigureMapMenu {
 		if (customRulesIncluded != null) {
 			for (RenderingRuleProperty p : customRulesIncluded) {
 				if (!p.isBoolean()) {
-					final OsmandSettings.CommonPreference<String> pref = activity.getMyApplication().getSettings()
+					final CommonPreference<String> pref = activity.getMyApplication().getSettings()
 							.getCustomRenderProperty(p.getAttrName());
 
 					View spinnerView = View.inflate(new ContextThemeWrapper(activity, themeRes), R.layout.spinner_rule_layout, null);
@@ -1031,7 +1033,7 @@ public class ConfigureMapMenu {
 		final String propertyDescr = SettingsActivity.getStringPropertyDescription(view.getContext(),
 				p.getAttrName(), p.getName());
 		if (p.isBoolean()) {
-			final OsmandSettings.CommonPreference<Boolean> pref = view.getApplication().getSettings()
+			final CommonPreference<Boolean> pref = view.getApplication().getSettings()
 					.getCustomRenderBooleanProperty(p.getAttrName());
 			return ContextMenuItem.createBuilder(propertyName)
 					.setId(id)
@@ -1047,7 +1049,7 @@ public class ConfigureMapMenu {
 					.setSelected(pref.get())
 					.createItem();
 		} else {
-			final OsmandSettings.CommonPreference<String> pref = view.getApplication().getSettings()
+			final CommonPreference<String> pref = view.getApplication().getSettings()
 					.getCustomRenderProperty(p.getAttrName());
 			final String descr;
 			if (!Algorithms.isEmpty(pref.get())) {

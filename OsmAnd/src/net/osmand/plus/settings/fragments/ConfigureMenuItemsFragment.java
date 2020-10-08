@@ -27,6 +27,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -171,9 +174,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 	private void initMainActionsIds(ApplicationMode appMode) {
 		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
-		OsmandSettings.ContextMenuItemsSettings pref = getSettingForScreen(app, screenType).getModeValue(appMode);
-		if (pref instanceof OsmandSettings.MainContextMenuItemsSettings) {
-			mainActionItems = new ArrayList<>(((OsmandSettings.MainContextMenuItemsSettings) pref).getMainIds());
+		ContextMenuItemsSettings pref = getSettingForScreen(app, screenType).getModeValue(appMode);
+		if (pref instanceof MainContextMenuItemsSettings) {
+			mainActionItems = new ArrayList<>(((MainContextMenuItemsSettings) pref).getMainIds());
 			if (mainActionItems.isEmpty()) {
 				for (int i = 0; i < MAIN_BUTTONS_QUANTITY && i < defItems.size(); i++) {
 					mainActionItems.add(defItems.get(i).getId());
@@ -265,11 +268,11 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					}
 				}
 				FragmentManager fm = getFragmentManager();
-				final OsmandSettings.ContextMenuItemsSettings prefToSave;
+				final ContextMenuItemsSettings prefToSave;
 				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-					prefToSave = new OsmandSettings.MainContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
+					prefToSave = new MainContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
 				} else {
-					prefToSave = new OsmandSettings.ContextMenuItemsSettings(hiddenMenuItems, ids);
+					prefToSave = new ContextMenuItemsSettings(hiddenMenuItems, ids);
 				}
 				if (fm != null) {
 					ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
@@ -533,7 +536,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	public static OsmandSettings.ContextMenuItemsPreference getSettingForScreen(OsmandApplication app, ScreenType screenType) throws IllegalArgumentException {
+	public static ContextMenuItemsPreference getSettingForScreen(OsmandApplication app, ScreenType screenType) throws IllegalArgumentException {
 		switch (screenType) {
 			case DRAWER:
 				return app.getSettings().DRAWER_ITEMS;
