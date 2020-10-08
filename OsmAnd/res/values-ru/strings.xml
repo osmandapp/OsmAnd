@@ -73,7 +73,7 @@
     <string name="select_postcode">Поиск почтового индекса</string>
     <string name="quick_action_take_audio_note">Запись аудио⁣</string>
     <string name="quick_action_take_video_note">Записать видео</string>
-    <string name="quick_action_take_photo_note">Фотозаметка</string>
+    <string name="quick_action_take_photo_note">Сделать фото</string>
     <string name="quick_action_add_osm_bug">OSM-заметка</string>
     <string name="parking_options">Функции парковки</string>
     <string name="full_version_thanks">Благодарим вас за покупку платной версии OsmAnd.</string>
@@ -1813,7 +1813,7 @@
     <string name="storage_directory">Хранилище карт</string>
     <string name="shared_string_copy">Копировать</string>
     <string name="application_dir_change_warning3">Переместить файлы данных Osmand в новое место назначения\?</string>
-    <string name="search_poi_category_hint">Напечатайте для поиска</string>
+    <string name="search_poi_category_hint">Любой текст для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
     <string name="routing_attr_avoid_borders_description">Избегать пересечения границ</string>
     <string name="routing_attr_height_name">Предельная высота</string>
@@ -3580,8 +3580,7 @@
     <string name="monitoring_min_speed_descr_remark">Примечание: проверка скорости &gt; 0: большинство модулей GPS сообщают значение скорости только в том случае, если алгоритм определяет, что вы движетесь, и ничего, если вы не перемещаетесь. Следовательно, использование параметра &gt; 0 в этом фильтре в некотором смысле приводит к обнаружению факта перемещения модуля GPS. Но даже если мы не производим данную фильтрацию во время записи, то всё равно эта функция используется при анализе GPX для определения скорректированного расстояния, то есть значение, отображаемое в этом поле, является расстоянием, записанным во время движения.</string>
     <string name="multimedia_rec_split_title">Разделение записи</string>
     <string name="live_monitoring_adress_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
-    <string name="monitoring_min_accuracy_descr">"Будут записываться только точки, отвечающие
-\n в минимальной точностью (в метрах/футах —зависит от настроек системы).  Точность — это близость измерений к истинному положению, и она не связана напрямую с точностью, которая представляет собой разброс повторных измерений."</string>
+    <string name="monitoring_min_accuracy_descr">"Будут записываться только точки, отвечающие по показателю минимальной точности (в метрах или футах — зависит от настроек системы).  Точность — это близость измерений к истинному положению, и она не связана напрямую с точностью, которая представляет собой разброс повторных измерений."</string>
     <string name="monitoring_min_speed_descr_recommendation">Рекомендация: попробуйте сначала воспользоваться детектором движения через фильтр минимального смещения (B), что может дать лучшие результаты и вы потеряете меньше данных. Если треки остаются шумными на низких скоростях, попробуйте использовать ненулевые значения. Обратите внимание, что некоторые измерения могут вообще не указывать значения скорости (некоторые сетевые методы), и в этом случае ничего не будет записываться.</string>
     <string name="slope_description">Для визуализации крутизны рельефа используются цвета.</string>
     <string name="slope_read_more">Подробнее об уклонах можно прочитать в %1$s.</string>
