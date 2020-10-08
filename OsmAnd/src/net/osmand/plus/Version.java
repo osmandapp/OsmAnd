@@ -123,8 +123,8 @@ public class Version {
 	public static boolean isFreeVersion(OsmandApplication ctx){
 		return ctx.getPackageName().equals(FREE_VERSION_NAME) || 
 				ctx.getPackageName().equals(FREE_DEV_VERSION_NAME) ||
-				ctx.getPackageName().equals(FREE_CUSTOM_VERSION_NAME)
-				;
+				ctx.getPackageName().equals(FREE_CUSTOM_VERSION_NAME) ||
+				isHuawei(ctx);
 	}
 
 	public static boolean isPaidVersion(OsmandApplication ctx) {

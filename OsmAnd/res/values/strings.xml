@@ -19,6 +19,11 @@
     <string name="use_live_routing">OsmAnd Live data</string>
     <string name="use_live_public_transport">OsmAnd Live data</string>
     <string name="development">Development</string>
+    <string name="routing_attr_avoid_footways_name">Avoid footways</string>
+    <string name="routing_attr_avoid_footways_description">Avoid footways</string>
+    <string name="osm_live_payment_subscription_management_hw">Payment will be charged to your AppGallery account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period(month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your AppGallery settings.</string>
+    <string name="osm_live_payment_desc_hw">Subscription charged per selected period. Cancel it on AppGallery at any time.</string>
+    <string name="contour_lines_thanks">Thank you for purchasing \'Contour lines\'</string>
     <string name="start_finish_icons">Start/finish icons</string>
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="sort_name_descending">Name: Z – A</string>
@@ -2471,6 +2476,7 @@
     <string name="speech_rate_descr">Specify the speech rate for text-to-speech.</string>
     <string name="speech_rate">Speech Rate</string>
     <string name="complex_route_calculation_failed">Fast route calculation failed (%s), fallback to slow calculation.</string>
+    <string name="disable_complex_routing_descr">Disable two-phase routing for car navigation.</string>
     <string name="disable_complex_routing">Disable complex routing</string>
     <string name="amenity_type_seamark">Seamark</string>
     <string name="app_modes_choose_descr">Select shown profiles.</string>

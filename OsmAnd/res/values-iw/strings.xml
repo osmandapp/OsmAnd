@@ -2103,7 +2103,7 @@
     <string name="shared_string_deselect_all">ביטול הבחירה</string>
     <string name="shared_string_delete_all">למחוק הכול</string>
     <string name="shared_string_share">שיתוף</string>
-    <string name="shared_string_export">יצוא</string>
+    <string name="shared_string_export">ייצוא</string>
     <string name="shared_string_more">עוד…</string>
     <string name="shared_string_remember_my_choice">שמירת הבחירה</string>
     <string name="shared_string_unexpected_error">שגיאה בלתי צפויה</string>
@@ -3248,7 +3248,7 @@
     <string name="coordinates_format_info">התצורה הנבחרת תחול בכל רחבי היישומון.</string>
     <string name="pref_selected_by_default_for_profiles">הגדרה זו נבחרת כבררת מחדל על הפרופילים: %s</string>
     <string name="change_default_settings">החלפת הגדרה</string>
-    <string name="logcat_buffer">זיכרון זמני של Logcat</string>
+    <string name="logcat_buffer">מכלא Logcat</string>
     <string name="shared_string_by_default">כבררת מחדל</string>
     <string name="plugins_settings">הגדרות תוסף</string>
     <string name="download_detaile_map">הורדת המפה המפורטת %s, כדי לצפות באזור זה.</string>
@@ -3428,7 +3428,7 @@
     <string name="select_nav_icon_descr">סמל שמופיע רק בעת ניווט או תזוזה.</string>
     <string name="select_map_icon_descr">סמל שמופיע במנוחה.</string>
     <string name="button_rate">דירוג</string>
-    <string name="logcat_buffer_descr">לבדוק ולשתף תיעוד מפורט של יומני היישומון</string>
+    <string name="logcat_buffer_descr">בדיקה ושיתוף יומני תיעוד מפורטים של היישומים</string>
     <string name="permission_is_required">נדרשת הרשאה כדי להשתמש באפשרות הזו.</string>
     <string name="rearrange_categories">סידור הקטגוריות מחדש</string>
     <string name="create_custom_categories_list_promo">ניתן להחליף את סדר הרשימה ולהסתיר קטגוריות בלתי נחוצות. אפשר לייבא או לייצא את כל השינויים עם פרופילים.</string>
@@ -3910,4 +3910,7 @@
     <string name="sort_name_descending">שם: ת – א</string>
     <string name="sort_name_ascending">שם: א – ת</string>
     <string name="start_finish_icons">סמלי התחלה/סיום</string>
+    <string name="contour_lines_thanks">תודה לך על רכישת ‚קווי מתאר’</string>
+    <string name="routing_attr_avoid_footways_description">הימנעות משבילי הולכי רגל</string>
+    <string name="routing_attr_avoid_footways_name">הימנעות משבילי הולכי רגל</string>
 </resources>

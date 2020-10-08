@@ -3243,7 +3243,7 @@
     <string name="screen_alerts_descr">Advarsler vises nederst til venstre under navigationen.</string>
     <string name="switch_profile">Skift profil</string>
     <string name="language_and_output">Sprog og output</string>
-    <string name="reset_to_default">Gendan standardværdi</string>
+    <string name="reset_to_default">Nulstil til standard</string>
     <string name="manage_profiles_descr">Opret, importer, rediger profiler</string>
     <string name="manage_profiles">Administrer programprofiler…</string>
     <string name="osmand_settings_descr">Påvirker hele programmet</string>
@@ -3773,8 +3773,19 @@
     <string name="shared_string_redo">Omgøre</string>
     <string name="navigate_to_track_descr">Navigere fra position til sporet</string>
     <string name="pass_whole_track_descr">Punkt på sporet for at navigere</string>
-    <string name="number_of_gpx_files_selected_pattern">%s spor filer valgt</string>
+    <string name="number_of_gpx_files_selected_pattern">%s sporfiler valgt</string>
     <string name="sort_last_modified">Sidst ændret</string>
     <string name="sort_name_descending">Navn: Z – A</string>
     <string name="sort_name_ascending">Navn: A – Z</string>
+    <string name="plan_route_select_track_file_for_open">Vælg en sporfil, der skal åbnes.</string>
+    <string name="route_between_points_add_track_desc">Vælg en sporfil, som det nye segment skal føjes til.</string>
+    <string name="plan_route_exit_dialog_descr">Kasser alle ændringer i den planlagte rute ved at lukke den\?</string>
+    <string name="add_segment_to_the_track">Føj til en sporfil</string>
+    <string name="import_track_descr">Vælg sporfil, der skal følges eller importeres fra enheden.</string>
+    <string name="simplified_track_description">Kun rutelinjen gemmes, rutepunkter slettes.</string>
+    <string name="all_next_segments">Alle efterfølgende segmenter</string>
+    <string name="only_selected_segment_recalc">Kun det valgte segment genberegnes igen ved hjælp af den valgte profil.</string>
+    <string name="all_next_segments_will_be_recalc">Alle efterfølgende segmenter genberegnes ved hjælp af den valgte profil.</string>
+    <string name="all_previous_segments_will_be_recalc">Alle tidligere segmenter genberegnes ved hjælp af den valgte profil.</string>
+    <string name="start_finish_icons">Start-/slutikoner</string>
 </resources>

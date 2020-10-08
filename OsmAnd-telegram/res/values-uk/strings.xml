@@ -118,7 +118,7 @@
     <string name="shared_string_settings">Налаштування</string>
     <string name="no_location_permission">Застосунок не має дозволу до отримання даних позиціювання.</string>
     <string name="gps_not_available">Будь ласка, увімкніть «Позиціювання» у системних налаштуваннях</string>
-    <string name="osmand_service">Фоновий режим</string>
+    <string name="osmand_service">Режим тла</string>
     <string name="osmand_service_descr">OsmAnd Tracker працює у фоновому режимі з вимкненим екраном.</string>
     <string name="shared_string_distance">Відстань</string>
     <string name="share_location">Поділитися позицією</string>
@@ -267,4 +267,8 @@
     <string name="last_response_duration">Остання відповідь: %1$s тому</string>
     <string name="duration_ago">%1$s тому</string>
     <string name="shared_string_error_short">ПМЛК</string>
+    <string name="shared_string_export">Експорт</string>
+    <string name="logcat_buffer">Буфер logcat</string>
+    <string name="logcat_buffer_descr">Переглянути та надіслати докладний журнал застосунку</string>
+    <string name="send_report">Надіслати звіт</string>
 </resources>

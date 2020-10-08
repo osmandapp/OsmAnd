@@ -1,7 +1,6 @@
 package net.osmand.plus.measurementtool;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,9 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 
@@ -35,44 +33,49 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 		items.add(new DividerSpaceItem(getContext(),
 				getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
 
-		items.add(new BottomSheetItemButton.Builder()
-				.setButtonType(UiUtilities.DialogButtonType.SECONDARY)
-				.setTitle(getString(R.string.shared_string_exit))
-				.setLayoutId(R.layout.bottom_sheet_button)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment != null) {
-							targetFragment.onActivityResult(REQUEST_CODE, EXIT_RESULT_CODE, null);
-						}
-						dismiss();
-					}
-				})
-				.create());
-
-		items.add(new DividerSpaceItem(getContext(),
-				getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin)));
-
-		items.add(new BottomSheetItemButton.Builder()
-				.setTitle(getString(R.string.shared_string_save))
-				.setLayoutId(R.layout.bottom_sheet_button)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment != null) {
-							targetFragment.onActivityResult(REQUEST_CODE, SAVE_RESULT_CODE, null);
-						}
-						dismiss();
-					}
-				})
-				.create());
 	}
 
 	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_cancel;
+	}
+
+	@Override
+	protected int getRightBottomButtonTextId() {
+		return R.string.shared_string_save;
+	}
+
+	@Override
+	protected int getThirdBottomButtonTextId() {
+		return R.string.shared_string_exit;
+	}
+
+	@Override
+	public int getSecondDividerHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
+	}
+
+	@Override
+	protected void onRightBottomButtonClick() {
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment != null) {
+			targetFragment.onActivityResult(REQUEST_CODE, SAVE_RESULT_CODE, null);
+		}
+		dismiss();
+	}
+
+	@Override
+	protected void onThirdBottomButtonClick() {
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment != null) {
+			targetFragment.onActivityResult(REQUEST_CODE, EXIT_RESULT_CODE, null);
+		}
+		dismiss();
+	}
+
+	@Override
+	protected DialogButtonType getThirdBottomButtonType() {
+		return (DialogButtonType.SECONDARY);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {

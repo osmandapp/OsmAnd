@@ -268,4 +268,8 @@
     <string name="last_response_duration">Ùrtima risposta: %1$s a como</string>
     <string name="duration_ago">%1$s a como</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="shared_string_export">Esporta</string>
+    <string name="logcat_buffer">Buffer de Logcat</string>
+    <string name="logcat_buffer_descr">Verìfica e cumpartzi sos registros de s\'aplicatzione fatos a sa minuda</string>
+    <string name="send_report">Imbia resumu</string>
 </resources>

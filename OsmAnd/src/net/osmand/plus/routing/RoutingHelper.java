@@ -21,6 +21,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
@@ -408,8 +409,8 @@ public class RoutingHelper {
 		} else if (mode.getRouteService() == RouteService.DIRECT_TO) {
 			return -1.0f;
 		} else if (mode.getRouteService() == RouteService.STRAIGHT) {
-			OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.getModeValue(mode);
-			if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS || mc == OsmandSettings.MetricsConstants.MILES_AND_METERS) {
+			MetricsConstants mc = settings.METRIC_SYSTEM.getModeValue(mode);
+			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				return 500.f;
 			} else {
 				// 1/4 mile

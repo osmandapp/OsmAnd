@@ -2,24 +2,31 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools">
 
-	<application>
-		<activity android:name="com.huawei.android.sdk.drm.DrmDialogActivity"
-			android:configChanges="screenSize|orientation|keyboardHidden"
-			android:exported="false"
-			android:theme="@android:style/Theme.Translucent">
-			<meta-data
-				android:name="hwc-theme"
-				android:value="androidhwext:style/Theme.Emui.Translucent" />
-		</activity>
+	<application
+		android:icon="@mipmap/icon_free"
+		android:label="@string/app_name_free"
+		tools:replace="android:icon, android:label">
+
+		<meta-data
+			android:name="com.huawei.hms.client.appid"
+			android:value="101486545" />
+		<meta-data
+			android:name="com.huawei.hms.client.cpid"
+			android:value="890031000000000038" />
+		
+		<activity
+			android:name="net.osmand.plus.activities.MapActivity"
+			android:theme="@style/FirstSplashScreenFree"
+			tools:replace="android:theme"/>
+
+		<service
+			android:name="net.osmand.plus.NavigationService"
+			tools:replace="android:process"
+			android:process="net.osmand.huawei"/>
 
 		<provider
 			android:name="androidx.core.content.FileProvider"
-			android:authorities="net.osmand.huawei.fileprovider"
-			tools:replace="android:authorities" />
-		<service
-			android:name="net.osmand.plus.NavigationService"
-			android:process="net.osmand.huawei"
-			tools:replace="android:process" />
+			tools:replace="android:authorities"
+			android:authorities="net.osmand.huawei.fileprovider"/>
 	</application>
-
 </manifest>

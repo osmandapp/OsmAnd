@@ -14,7 +14,7 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.StringPreference;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -72,7 +72,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				parameter.getDescription());
 		String defValue = parameter.getType() == RoutingParameterType.NUMERIC
 				? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
-		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) app.getSettings()
+		StringPreference pref = (StringPreference) app.getSettings()
 				.getCustomRoutingProperty(parameterId, defValue);
 		VehicleSizeAssets assets = VehicleSizeAssets.getAssets(parameterId, routerProfile);
 		Object[] values = parameter.getPossibleValues();
