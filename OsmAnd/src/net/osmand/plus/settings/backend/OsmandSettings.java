@@ -716,7 +716,7 @@ public class OsmandSettings {
 	public final CommonPreference<Long> MAPILLARY_FILTER_TO_DATE = new LongPreference(this, "mapillary_filter_to_date", 0).makeGlobal();
 	public final CommonPreference<Boolean> MAPILLARY_FILTER_PANO = new BooleanPreference(this, "mapillary_filter_pano", false).makeGlobal();
 
-	public final CommonPreference<Boolean> USE_FAST_RECALCULATION = new BooleanPreference(this, "use_fast_recalculation", true).makeGlobal().cache();
+	public final CommonPreference<Boolean> USE_FAST_RECALCULATION = new BooleanPreference(this, "use_fast_recalculation", true).makeProfile().cache();
 	public final CommonPreference<Boolean> FORCE_PRIVATE_ACCESS_ROUTING_ASKED = new BooleanPreference(this, "force_private_access_routing", false).makeProfile().cache();
 
 	public final CommonPreference<Boolean> SHOW_CARD_TO_CHOOSE_DRAWER = new BooleanPreference(this, "show_card_to_choose_drawer", false).makeGlobal();
@@ -1219,7 +1219,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference(this, "fast_route_mode", true).makeProfile();
 	// dev version
-	public final CommonPreference<Boolean> DISABLE_COMPLEX_ROUTING = new BooleanPreference(this, "disable_complex_routing", false).makeGlobal();
+	public final CommonPreference<Boolean> DISABLE_COMPLEX_ROUTING = new BooleanPreference(this, "disable_complex_routing", false).makeProfile();
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
 	public boolean simulateNavigation = false;
@@ -2604,9 +2604,9 @@ public class OsmandSettings {
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference(this, "routing_recalc_distance", 0.f).makeProfile();
 	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference(this, "routing_straight_angle", 30.f).makeProfile();
 
-	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference(this, "enable_osmc_routing", true).makeGlobal();
+	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference(this, "enable_osmc_routing", true).makeProfile();
 
-	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference(this, "enable_osmc_public_transport", false).makeGlobal();
+	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference(this, "enable_osmc_public_transport", false).makeProfile();
 
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference(this, "voice_mute", false).makeProfile().cache();
 
@@ -2615,7 +2615,7 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SAFE_MODE = new BooleanPreference(this, "safe_mode", false).makeGlobal();
-	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference(this, "pt_safe_mode", false).makeGlobal();
+	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference(this, "pt_safe_mode", false).makeProfile();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render",

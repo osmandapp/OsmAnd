@@ -43,7 +43,11 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 
 	@Override
 	public void putBoolean(String key, boolean value) {
-		osmandSettings.setPreference(key, value, appMode);
+		if (osmandSettings.DISABLE_COMPLEX_ROUTING.getId().equals(key)) {
+			osmandSettings.setPreference(key, !value, appMode);
+		} else {
+			osmandSettings.setPreference(key, value, appMode);
+		}
 	}
 
 	public void putValue(String key, Object value) {
@@ -102,7 +106,11 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 	public boolean getBoolean(String key, boolean defValue) {
 		OsmandPreference<?> preference = osmandSettings.getPreference(key);
 		if (preference instanceof BooleanPreference) {
-			return ((BooleanPreference) preference).getModeValue(appMode);
+			BooleanPreference booleanPreference = (BooleanPreference) preference;
+			if (osmandSettings.DISABLE_COMPLEX_ROUTING.getId().equals(booleanPreference.getId())) {
+				return !booleanPreference.getModeValue(appMode);
+			}
+			return booleanPreference.getModeValue(appMode);
 		}
 		return defValue;
 	}
