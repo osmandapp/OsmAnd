@@ -1813,7 +1813,7 @@
     <string name="storage_directory">Хранилище карт</string>
     <string name="shared_string_copy">Копировать</string>
     <string name="application_dir_change_warning3">Переместить файлы данных Osmand в новое место назначения\?</string>
-    <string name="search_poi_category_hint">Любой текст для поиска</string>
+    <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
     <string name="routing_attr_avoid_borders_description">Избегать пересечения границ</string>
     <string name="routing_attr_height_name">Предельная высота</string>
