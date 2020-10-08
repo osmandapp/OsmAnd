@@ -509,7 +509,7 @@
     <string name="poi_register_office">Matričný úrad</string>
     <string name="poi_pension_fund">Dôchodkový fond</string>
     <string name="poi_migration">Imigračný úrad</string>
-    <string name="poi_tax_inspection">Daňová kontrola</string>
+    <string name="poi_tax_inspection">Daňový úrad</string>
     <string name="poi_quarter">Štvrť</string>
     <string name="poi_attraction_summer_toboggan">Suchá bobová dráha</string>
     <string name="poi_attraction_swing_carousel">Kolotoč s hojdačkami</string>
@@ -3652,4 +3652,5 @@
     <string name="poi_covered_booth">Búdka</string>
     <string name="poi_sms_no">Nie</string>
     <string name="poi_sms_yes">Áno</string>
+    <string name="poi_taxi_office">Kancelária taxislužby</string>
 </resources>

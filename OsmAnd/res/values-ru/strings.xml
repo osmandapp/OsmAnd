@@ -531,10 +531,10 @@
     <string name="overlay_transparency">Прозрачность наложения</string>
     <string name="map_transparency_descr">Отрегулируйте прозрачность основной карты.</string>
     <string name="map_transparency">Прозрачность основной карты</string>
-    <string name="layer_underlay">Карта подложки</string>
+    <string name="layer_underlay">Карта подложки…</string>
     <string name="map_underlay">Карта подложки</string>
     <string name="map_underlay_descr">Выберите карту подложки</string>
-    <string name="layer_overlay">Карта наложения</string>
+    <string name="layer_overlay">Карта наложения…</string>
     <string name="map_overlay">Карта наложения</string>
     <string name="map_overlay_descr">Выберите слой наложения поверх основной карты</string>
     <string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены.</string>
@@ -689,7 +689,7 @@
     <string name="layer_route">Маршрут</string>
     <string name="layer_osm_bugs">OSM-заметки (онлайн)</string>
     <string name="layer_poi">POI…</string>
-    <string name="layer_map">Источник карты</string>
+    <string name="layer_map">Источник карты…</string>
     <string name="menu_layers">Слои</string>
     <string name="context_menu_item_search_poi">Поиск POI</string>
     <string name="use_trackball_descr">Использовать трекбол для перемещения по карте.</string>
@@ -1179,7 +1179,7 @@
     <string name="context_menu_item_last_intermediate_point">Последний промежуточный пункт</string>
     <string name="context_menu_item_first_intermediate_point">Сделать начальной остановкой</string>
     <string name="add_as_last_destination_point">Сделать последней остановкой</string>
-    <string name="add_as_first_destination_point">Сделать начальной остановкой</string>
+    <string name="add_as_first_destination_point">Первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Пункт назначения уже задан</string>
     <string name="target_point">Пункт %1$s</string>
