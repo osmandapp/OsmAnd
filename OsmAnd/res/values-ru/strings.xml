@@ -1179,7 +1179,7 @@
     <string name="context_menu_item_last_intermediate_point">Последний промежуточный пункт</string>
     <string name="context_menu_item_first_intermediate_point">Сделать начальной остановкой</string>
     <string name="add_as_last_destination_point">Сделать последней остановкой</string>
-    <string name="add_as_first_destination_point">Сделать начальной остановкой</string>
+    <string name="add_as_first_destination_point">Первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Пункт назначения уже задан</string>
     <string name="target_point">Пункт %1$s</string>
