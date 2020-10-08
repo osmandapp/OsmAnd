@@ -4,6 +4,8 @@ package net.osmand.osm.oauth;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.builder.api.DefaultApi10a;
 import com.github.scribejava.core.builder.api.OAuth1SignatureType;
+import com.github.scribejava.core.httpclient.jdk.JDKHttpClient;
+import com.github.scribejava.core.httpclient.jdk.JDKHttpClientConfig;
 import com.github.scribejava.core.model.*;
 import com.github.scribejava.core.oauth.OAuth10aService;
 import net.osmand.PlatformUtil;
@@ -26,6 +28,7 @@ public class OsmOAuthAuthorizationClient {
     public OsmOAuthAuthorizationClient(String key, String secret) {
         service = new ServiceBuilder(key)
                 .apiSecret(secret)
+                .httpClient(new OsmAndJDKHttpClient(JDKHttpClientConfig.defaultConfig()))
                 .callback("osmand-oauth://example.com/oauth")
                 .build(new OsmApi());
     }

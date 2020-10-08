@@ -4,6 +4,7 @@ import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import net.osmand.PlatformUtil;
+import net.osmand.osm.oauth.IInputStreamHttpClient;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
@@ -72,12 +73,13 @@ public class NetworkUtils {
 			HttpURLConnection conn;
 			if (client != null && client.isValidToken()){
 				OAuthRequest req = new OAuthRequest(Verb.POST, urlText);
-				req.setPayload(prepareStream(formName,fileToUpload,gzip));
 				client.getService().signRequest(client.getAccessToken(), req);
 				req.addHeader("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
 				try {
+					IInputStreamHttpClient service = (IInputStreamHttpClient) client.getService();
+					service.execute(service.getUserAgent(), req.getHeaders(), req.getVerb(), req.getCompleteUrl(), fileToUpload);
 					Response r = client.getService().execute(req);
-					if(r.getCode() != 200){
+					if (r.getCode() != 200) {
 						return r.getBody();
 					}
 					return null;
@@ -100,7 +102,29 @@ public class NetworkUtils {
 	        conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
 	        conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
 	        OutputStream ous = conn.getOutputStream();
-			ous.write(prepareStream(formName,fileToUpload,gzip));
+			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
+			String filename = fileToUpload.getName();
+			if (gzip) {
+				filename += ".gz";
+			}
+			ous.write(("content-disposition: form-data; name=\"" + formName + "\"; filename=\"" + filename + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+			ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
+			InputStream fis = new FileInputStream(fileToUpload);
+			BufferedInputStream bis = new BufferedInputStream(fis, 20 * 1024);
+			ous.flush();
+			if (gzip) {
+				GZIPOutputStream gous = new GZIPOutputStream(ous, 1024);
+				Algorithms.streamCopy(bis, gous);
+				gous.flush();
+				gous.finish();
+			} else {
+				Algorithms.streamCopy(bis, ous);
+			}
+			ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+			ous.flush();
+			Algorithms.closeStream(bis);
+			Algorithms.closeStream(ous);
+
 			log.info("Finish uploading file " + fileToUpload.getName());
 			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
 			if(conn.getResponseCode() != 200){
@@ -131,46 +155,6 @@ public class NetworkUtils {
 		}
 	}
 
-    private static byte[] prepareStream(String formName, File fileToUpload, boolean gzip) {
-        try {
-            ByteArrayOutputStream ous = new ByteArrayOutputStream();
-//			for (String key : additionalMapData.keySet()) {
-//				ous.write(("--" + BOUNDARY + "\r\n").getBytes());
-//				ous.write(("content-disposition: form-data; name=\"" + key + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
-//				ous.write((additionalMapData.get(key) + "\r\n").getBytes());
-//			}
-            ous.write(("--" + BOUNDARY + "\r\n").getBytes());
-
-            String filename = fileToUpload.getName();
-            if (gzip) {
-                filename += ".gz";
-            }
-            ous.write(("content-disposition: form-data; name=\"" + formName + "\"; filename=\"" + filename + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
-            ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
-            InputStream fis = new FileInputStream(fileToUpload);
-            BufferedInputStream bis = new BufferedInputStream(fis, 20 * 1024);
-            ous.flush();
-            if (gzip) {
-                GZIPOutputStream gous = new GZIPOutputStream(ous, 1024);
-                Algorithms.streamCopy(bis, gous);
-                gous.flush();
-                gous.finish();
-				gous.close();
-			} else {
-                Algorithms.streamCopy(bis, ous);
-            }
-
-            ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
-            ous.flush();
-            Algorithms.closeStream(bis);
-            Algorithms.closeStream(ous);
-            return ous.toByteArray();
-        } catch (IOException e) {
-            log.error(e);
-        }
-        return new byte[0];
-    }
-
 	public static void setProxy(String host, int port) {
 		if(host != null && port > 0) {
 			InetSocketAddress isa = new InetSocketAddress(host, port);
@@ -179,7 +163,6 @@ public class NetworkUtils {
 			proxy = null;
 		}
 	}
-
 	public static Proxy getProxy() {
 		return proxy;
 	}
