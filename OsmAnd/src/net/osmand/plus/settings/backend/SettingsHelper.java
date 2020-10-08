@@ -2937,6 +2937,11 @@ public class SettingsHelper {
 		for (ExportSettingsType settingsType : settingsTypes) {
 			List<?> settingsDataObjects = additionalData.get(settingsType);
 			if (settingsDataObjects != null) {
+				for (Object object : settingsDataObjects) {
+					if (object instanceof ApplicationModeBean) {
+						settingsItems.add(new ProfileSettingsItem(app, null, (ApplicationModeBean) object));
+					}
+				}
 				settingsItems.addAll(prepareAdditionalSettingsItems(new ArrayList<>(settingsDataObjects)));
 			}
 		}
