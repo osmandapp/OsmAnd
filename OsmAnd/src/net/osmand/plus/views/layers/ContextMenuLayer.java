@@ -907,9 +907,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	@NonNull
-	public Map<Object, IContextMenuProvider> selectObjectsForContextMenu(RotatedTileBox tileBox,
-	                                                                     PointF point, boolean acquireObjLatLon,
-	                                                                     boolean unknownLocation) {
+	private Map<Object, IContextMenuProvider> selectObjectsForContextMenu(RotatedTileBox tileBox,
+																		  PointF point, boolean acquireObjLatLon,
+																		  boolean unknownLocation) {
 		Map<LatLon, BackgroundType> pressedLatLonFull = new HashMap<>();
 		Map<LatLon, BackgroundType> pressedLatLonSmall = new HashMap<>();
 		Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();

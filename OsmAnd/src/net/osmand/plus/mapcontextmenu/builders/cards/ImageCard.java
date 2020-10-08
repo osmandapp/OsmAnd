@@ -442,7 +442,7 @@ public abstract class ImageCard extends AbstractCard {
 			Object o = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObject();
 			if (o instanceof Amenity) {
 				Amenity am = (Amenity) o;
-				long amenityId = (am.getId() >> 1);
+				long amenityId = am.getId() >> 1;
 				getPicturesForPlace(result, amenityId);
 			}
 			try {

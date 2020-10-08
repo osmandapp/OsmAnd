@@ -21,9 +21,9 @@ public class IPFSImageCard extends ImageCard {
 		} catch (JSONException e) {
 			LOG.error(e);
 		}
-		this.url = BASE_URL + cid;
-		this.imageHiresUrl = BASE_URL + cid;
-		this.imageUrl = BASE_URL + cid;
+		url = BASE_URL + cid;
+		imageHiresUrl = BASE_URL + cid;
+		imageUrl = BASE_URL + cid;
 		if (!Algorithms.isEmpty(getUrl())) {
 			View.OnClickListener onClickListener = new View.OnClickListener() {
 				@Override
@@ -34,7 +34,7 @@ public class IPFSImageCard extends ImageCard {
 				}
 			};
 			if (!Algorithms.isEmpty(buttonText)) {
-				this.onButtonClickListener = onClickListener;
+				onButtonClickListener = onClickListener;
 			} else {
 				this.onClickListener = onClickListener;
 			}
