@@ -137,14 +137,18 @@ public class ContextMenuAdapter {
 		Collections.sort(items, new Comparator<ContextMenuItem>() {
 			@Override
 			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
-				if (DRAWER_SWITCH_PROFILE_ID.equals(item1.getId())) {
-					return -1;
-				}
-				if (DRAWER_CONFIGURE_PROFILE_ID.equals(item1.getId()) && DRAWER_SWITCH_PROFILE_ID.equals(item2.getId())) {
+				if (DRAWER_CONFIGURE_PROFILE_ID.equals(item1.getId())
+						&& DRAWER_SWITCH_PROFILE_ID.equals(item2.getId())) {
 					return 1;
-				}
-				if (DRAWER_CONFIGURE_PROFILE_ID.equals(item1.getId())) {
+				} else if (DRAWER_SWITCH_PROFILE_ID.equals(item1.getId())
+						&& DRAWER_CONFIGURE_PROFILE_ID.equals(item2.getId())) {
 					return -1;
+				} else if (DRAWER_SWITCH_PROFILE_ID.equals(item1.getId())
+						|| DRAWER_CONFIGURE_PROFILE_ID.equals(item1.getId())) {
+					return -1;
+				} else if (DRAWER_SWITCH_PROFILE_ID.equals(item2.getId())
+						|| DRAWER_CONFIGURE_PROFILE_ID.equals(item2.getId())) {
+					return 1;
 				}
 				int order1 = item1.getOrder();
 				int order2 = item2.getOrder();
