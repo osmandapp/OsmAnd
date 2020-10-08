@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="routing_attr_avoid_footways_name">Avoid footways</string>
+    <string name="routing_attr_avoid_footways_description">Avoid footways</string>
     <string name="osm_live_payment_subscription_management_hw">Payment will be charged to your AppGallery account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period(month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your AppGallery settings.</string>
     <string name="osm_live_payment_desc_hw">Subscription charged per selected period. Cancel it on AppGallery at any time.</string>
     <string name="contour_lines_thanks">Thank you for purchasing \'Contour lines\'</string>

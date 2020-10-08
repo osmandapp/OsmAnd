@@ -1625,7 +1625,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">所属ネットワークに応じたカラー変更</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMCのハイキングシンボルカラー</string>
     <string name="traffic_warning_hazard">被災域</string>
-    <string name="rendering_value_boldOutline_name">太線</string>
+    <string name="rendering_value_boldOutline_name">輪郭強調</string>
     <string name="no_updates_available">更新はありません</string>
     <string name="download_live_updates">ライブ更新</string>
     <string name="we_really_care_about_your_opinion">ユーザーからの意見やフィードバックを大切にしています。</string>
@@ -2496,7 +2496,7 @@ POIの更新は利用できません</string>
     <string name="this_year">今年</string>
     <string name="move_all_to_history">全て履歴に移動</string>
     <string name="show_direction">距離表示</string>
-    <string name="sort_by">並び順の変更</string>
+    <string name="sort_by">並び順:</string>
     <string name="keep_showing_on_map">マップ上に表示し続ける</string>
     <string name="exit_without_saving">保存せずに終了しますか？</string>
     <string name="line">線</string>

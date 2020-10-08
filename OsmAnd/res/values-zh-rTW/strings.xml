@@ -3901,4 +3901,12 @@
     <string name="sort_name_ascending">名稱：A – Z</string>
     <string name="start_finish_icons">開始／結束圖示</string>
     <string name="contour_lines_thanks">感謝您購買 \'Contour lines\'</string>
+    <string name="osm_live_payment_desc_hw">按選定週期收取訂閱費用。隨時在 AppGallery 上取消。</string>
+    <string name="osm_live_payment_subscription_management_hw">確認購買後將會從您的 AppGallery 帳號中付款。
+\n
+\n除非在續訂日期前取消，否則就會自動續訂。您的帳號將只會在續訂日期收取訂閱週期（一個月／三個月／一年）的費用。
+\n
+\n您可以在您的 AppGallery 設定中管理與取消您的訂閱。</string>
+    <string name="routing_attr_avoid_footways_description">避免人行道</string>
+    <string name="routing_attr_avoid_footways_name">避免人行道</string>
 </resources>
