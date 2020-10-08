@@ -193,7 +193,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		boolean enabled = !settings.DISABLE_COMPLEX_ROUTING.get(); // pref ui was inverted
 		SwitchPreferenceEx disableComplexRouting = createSwitchPreferenceEx(settings.DISABLE_COMPLEX_ROUTING.getId(),
 				R.string.use_complex_routing, R.layout.preference_with_descr_dialog_and_switch);
-		disableComplexRouting.setDescription(getString(R.string.disable_complex_routing_descr));
+		disableComplexRouting.setDescription(getString(R.string.complex_routing_descr));
 		disableComplexRouting.setSummaryOn(R.string.shared_string_enabled);
 		disableComplexRouting.setSummaryOff(R.string.shared_string_disabled);
 		disableComplexRouting.setIconSpaceReserved(true);
