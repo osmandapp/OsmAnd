@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,19 +25,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.StateChangedListener;
-import net.osmand.plus.Version;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.BooleanPreference;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -190,14 +189,12 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private void setupDisableComplexRoutingPref() {
-		boolean enabled = !settings.DISABLE_COMPLEX_ROUTING.get(); // pref ui was inverted
 		SwitchPreferenceEx disableComplexRouting = createSwitchPreferenceEx(settings.DISABLE_COMPLEX_ROUTING.getId(),
 				R.string.use_complex_routing, R.layout.preference_with_descr_dialog_and_switch);
 		disableComplexRouting.setDescription(getString(R.string.complex_routing_descr));
 		disableComplexRouting.setSummaryOn(R.string.shared_string_enabled);
 		disableComplexRouting.setSummaryOff(R.string.shared_string_disabled);
 		disableComplexRouting.setIconSpaceReserved(true);
-		disableComplexRouting.setChecked(enabled);
 		getPreferenceScreen().addPreference(disableComplexRouting);
 	}
 
@@ -368,7 +365,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		screen.addPreference(routingCategory);
 	}
 
-	private void setupDevelopmentCategoryHeader (PreferenceScreen screen) {
+	private void setupDevelopmentCategoryHeader(PreferenceScreen screen) {
 		PreferenceCategory developmentCategory = new PreferenceCategory(requireContext());
 		developmentCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		developmentCategory.setTitle(R.string.development);
@@ -521,6 +518,14 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		if (settings.DISABLE_COMPLEX_ROUTING.getId().equals(preference.getKey()) && newValue instanceof Boolean) {
+			return onConfirmPreferenceChange(preference.getKey(), !(Boolean) newValue, getApplyQueryType()); // pref ui was inverted
+		}
+		return onConfirmPreferenceChange(preference.getKey(), newValue, getApplyQueryType());
+	}
+
+	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if ((RELIEF_SMOOTHNESS_FACTOR.equals(prefId) || DRIVING_STYLE.equals(prefId)) && newValue instanceof String) {
 			ApplicationMode appMode = getSelectedAppMode();
@@ -547,7 +552,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			applyPreference(ROUTING_RECALC_DISTANCE, applyToAllProfiles, valueToSave);
 			applyPreference(settings.DISABLE_OFFROUTE_RECALC.getId(), applyToAllProfiles, !enabled);
 			updateRouteRecalcDistancePref();
-		} else if (settings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(prefId)){
+		} else if (settings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(prefId)) {
 			applyPreference(settings.DISABLE_WRONG_DIRECTION_RECALC.getId(), applyToAllProfiles, newValue);
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);

@@ -11,7 +11,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
@@ -60,11 +59,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private void setupOpenglRenderPref() {
 		SwitchPreferenceEx useOpenglRender = findPreference(settings.USE_OPENGL_RENDER.getId());
 		if (Version.isOpenGlAvailable(app)) {
-			assert useOpenglRender != null;
 			useOpenglRender.setDescription(getString(R.string.use_opengl_render_descr));
 			useOpenglRender.setIconSpaceReserved(false);
 		} else {
-			assert useOpenglRender != null;
 			useOpenglRender.setVisible(false);
 		}
 	}
