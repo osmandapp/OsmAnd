@@ -135,7 +135,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 	}
 
 	private LayerDrawable getPlaceholder(boolean history) {
-		int colorDefaultLight = 0xff727272;
+		int colorDefault = ContextCompat.getColor(app, R.color.icon_color_default_light);
 		LayerDrawable res = (LayerDrawable) AppCompatResources.getDrawable(
 				app, history
 						? R.drawable.wikivoyage_search_history_placeholder
@@ -146,8 +146,9 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 					history ? R.drawable.ic_action_history : R.drawable.ic_action_placeholder_city,
 					R.color.icon_color_default_light
 			));
+		} else {
+			res.setTint(colorDefault);
 		}
-		res.setTint(colorDefaultLight);
 		return res;
 	}
 
