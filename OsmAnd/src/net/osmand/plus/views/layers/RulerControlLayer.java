@@ -822,4 +822,10 @@ public class RulerControlLayer extends OsmandMapLayer {
 	public boolean drawInScreenPixels() {
 		return false;
 	}
+
+	public enum RulerMode {
+		FIRST,
+		SECOND,
+		EMPTY
+	}
 }

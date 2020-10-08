@@ -1,18 +1,18 @@
 package net.osmand.plus.settings.backend;
 
-import java.util.Set;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceDataStore;
+
+import java.util.Set;
 
 public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 
 	private OsmandSettings osmandSettings;
 	private ApplicationMode appMode;
 
-	public OsmAndPreferencesDataStore(OsmandSettings osmandSettings, @NonNull ApplicationMode appMode) {
-		this.osmandSettings = osmandSettings;
+	public OsmAndPreferencesDataStore(OsmandSettings settings, @NonNull ApplicationMode appMode) {
+		this.osmandSettings = settings;
 		this.appMode = appMode;
 	}
 

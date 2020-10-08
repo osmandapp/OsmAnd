@@ -55,7 +55,7 @@ import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
-import net.osmand.plus.views.layers.RulerMode;
+import net.osmand.plus.views.layers.RulerControlLayer.RulerMode;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
@@ -102,36 +102,35 @@ public class OsmandSettings {
 	/// Settings variables
 	private final OsmandApplication ctx;
 	private SettingsAPI settingsAPI;
-	Object globalPreferences;
-	Object profilePreferences;
-	ApplicationMode currentMode;
-	Map<String, OsmandPreference<?>> registeredPreferences =
-			new LinkedHashMap<String, OsmandPreference<?>>();
-
+	private Object globalPreferences;
+	private Object profilePreferences;
+	private ApplicationMode currentMode;
+	private Map<String, OsmandPreference<?>> registeredPreferences = new LinkedHashMap<>();
 
 	// cache variables
 	private long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
 
 	// TODO variable
-	Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<String, CommonPreference<Boolean>>();
-	Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<String, CommonPreference<String>>();
-	Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<String, CommonPreference<Boolean>>();
-	Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<String, CommonPreference<String>>();
+	private Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<String, CommonPreference<String>>();
+	private Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<String, CommonPreference<String>>();
+	private Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<String, CommonPreference<Boolean>>();
+	private Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<String, CommonPreference<Boolean>>();
+
+	private ImpassableRoadsStorage impassableRoadsStorage = new ImpassableRoadsStorage(this);
 	private IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage(this);
-	private ImpassableRoadsStorage mImpassableRoadsStorage = new ImpassableRoadsStorage(this);
 
 	private Object objectToShow;
 	private boolean editObjectToShow;
 	private String searchRequestToShow;
 
-	public OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI) {
+	protected OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI) {
 		ctx = clientContext;
 		this.settingsAPI = settinsAPI;
 		initPrefs();
 	}
 
-	public OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI, String sharedPreferencesName) {
+	protected OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI, String sharedPreferencesName) {
 		ctx = clientContext;
 		this.settingsAPI = settinsAPI;
 		CUSTOM_SHARED_PREFERENCES_NAME = CUSTOM_SHARED_PREFERENCES_PREFIX + sharedPreferencesName;
@@ -202,8 +201,6 @@ public class OsmandSettings {
 
 		return globalPreferences != null && globalPreferences.getBoolean(SETTING_CUSTOMIZED_ID, false);
 	}
-
-
 
 	// TODO doesn't look correct package visibility
 	public Object getProfilePreferences(ApplicationMode mode) {
@@ -638,6 +635,7 @@ public class OsmandSettings {
 		registeredPreferences.put(id, p);
 		return p;
 	}
+
 	///////////////////// PREFERENCES ////////////////
 
 	public static final String NUMBER_OF_FREE_DOWNLOADS_ID = "free_downloads_v3";
@@ -740,13 +738,13 @@ public class OsmandSettings {
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "default_application_mode_string", ApplicationMode.DEFAULT) {
 
 		@Override
-		public ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
 			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
 			return ApplicationMode.valueOfStringKey(key, defaultValue);
 		}
 
 		@Override
-		public boolean setValue(Object prefs, ApplicationMode val) {
+		protected boolean setValue(Object prefs, ApplicationMode val) {
 			boolean valueSaved = settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
 			if (valueSaved) {
 				APPLICATION_MODE.set(val);
@@ -786,13 +784,13 @@ public class OsmandSettings {
 	public final OsmandPreference<ApplicationMode> LAST_ROUTE_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "last_route_application_mode_backup_string", ApplicationMode.DEFAULT) {
 
 		@Override
-		public ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
 			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
 			return ApplicationMode.valueOfStringKey(key, defaultValue);
 		}
 
 		@Override
-		public boolean setValue(Object prefs, ApplicationMode val) {
+		protected boolean setValue(Object prefs, ApplicationMode val) {
 			return settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
 		}
 
@@ -824,8 +822,7 @@ public class OsmandSettings {
 		}
 	}.makeGlobal();
 
-	public final OsmandPreference<Boolean> FIRST_MAP_IS_DOWNLOADED = new BooleanPreference(this,
-			"first_map_is_downloaded", false);
+	public final OsmandPreference<Boolean> FIRST_MAP_IS_DOWNLOADED = new BooleanPreference(this, "first_map_is_downloaded", false);
 
 	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference(this, "driving_region_automatic", true).makeProfile().cache();
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumStringPreference<DrivingRegion>(this,
@@ -960,7 +957,8 @@ public class OsmandSettings {
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.SKI, "ic_action_skiing");
 	}
 
-	public final CommonPreference<ProfileIconColors> ICON_COLOR = new EnumStringPreference<>(this, "app_mode_icon_color", ProfileIconColors.DEFAULT, ProfileIconColors.values()).makeProfile().cache();
+	public final CommonPreference<ProfileIconColors> ICON_COLOR = new EnumStringPreference<>(this,
+			"app_mode_icon_color", ProfileIconColors.DEFAULT, ProfileIconColors.values()).makeProfile().cache();
 
 	public final CommonPreference<String> USER_PROFILE_NAME = new StringPreference(this, "user_profile_name", "").makeProfile().cache();
 
@@ -2291,27 +2289,27 @@ public class OsmandSettings {
 	}
 
 	public List<AvoidRoadInfo> getImpassableRoadPoints() {
-		return mImpassableRoadsStorage.getImpassableRoadsInfo();
+		return impassableRoadsStorage.getImpassableRoadsInfo();
 	}
 
 	public boolean addImpassableRoad(AvoidRoadInfo avoidRoadInfo) {
-		return mImpassableRoadsStorage.addImpassableRoadInfo(avoidRoadInfo);
+		return impassableRoadsStorage.addImpassableRoadInfo(avoidRoadInfo);
 	}
 
 	public boolean updateImpassableRoadInfo(AvoidRoadInfo avoidRoadInfo) {
-		return mImpassableRoadsStorage.updateImpassableRoadInfo(avoidRoadInfo);
+		return impassableRoadsStorage.updateImpassableRoadInfo(avoidRoadInfo);
 	}
 
 	public boolean removeImpassableRoad(int index) {
-		return mImpassableRoadsStorage.deletePoint(index);
+		return impassableRoadsStorage.deletePoint(index);
 	}
 
 	public boolean removeImpassableRoad(LatLon latLon) {
-		return mImpassableRoadsStorage.deletePoint(latLon);
+		return impassableRoadsStorage.deletePoint(latLon);
 	}
 
 	public boolean moveImpassableRoad(LatLon latLonEx, LatLon latLonNew) {
-		return mImpassableRoadsStorage.movePoint(latLonEx, latLonNew);
+		return impassableRoadsStorage.movePoint(latLonEx, latLonNew);
 	}
 
 	/**
@@ -2783,54 +2781,5 @@ public class OsmandSettings {
 			}
 			setPreference(QUICK_ACTION.getId(), actionState, mode);
 		}
-	}
-
-	public String[] getAppModeBeanPrefsIds() {
-		return new String[]{
-				ICON_COLOR.getId(),
-				ICON_RES_NAME.getId(),
-				PARENT_APP_MODE.getId(),
-				ROUTING_PROFILE.getId(),
-				ROUTE_SERVICE.getId(),
-				USER_PROFILE_NAME.getId(),
-				LOCATION_ICON.getId(),
-				NAVIGATION_ICON.getId(),
-				APP_MODE_ORDER.getId()
-		};
-	}
-
-	public OsmandPreference<?>[] getGeneralPrefs() {
-		return new OsmandPreference[]{
-				EXTERNAL_INPUT_DEVICE,
-				CENTER_POSITION_ON_MAP,
-				ROTATE_MAP,
-				MAP_SCREEN_ORIENTATION,
-				LIVE_MONITORING_URL,
-				LIVE_MONITORING_MAX_INTERVAL_TO_SEND,
-				LIVE_MONITORING_INTERVAL,
-				LIVE_MONITORING,
-				SHOW_TRIP_REC_NOTIFICATION,
-				AUTO_SPLIT_RECORDING,
-				SAVE_TRACK_MIN_SPEED,
-				SAVE_TRACK_PRECISION,
-				SAVE_TRACK_MIN_DISTANCE,
-				SAVE_TRACK_INTERVAL,
-				TRACK_STORAGE_DIRECTORY,
-				SAVE_HEADING_TO_GPX,
-				DISABLE_RECORDING_ONCE_APP_KILLED,
-				SAVE_TRACK_TO_GPX,
-				SAVE_GLOBAL_TRACK_REMEMBER,
-				SAVE_GLOBAL_TRACK_INTERVAL,
-				MAP_EMPTY_STATE_ALLOWED,
-				DO_NOT_USE_ANIMATIONS,
-				USE_KALMAN_FILTER_FOR_COMPASS,
-				USE_MAGNETIC_FIELD_SENSOR_COMPASS,
-				USE_TRACKBALL_FOR_MOVEMENTS,
-				SPEED_SYSTEM,
-				ANGULAR_UNITS,
-				METRIC_SYSTEM,
-				DRIVING_REGION,
-				DRIVING_REGION_AUTOMATIC
-		};
 	}
 }

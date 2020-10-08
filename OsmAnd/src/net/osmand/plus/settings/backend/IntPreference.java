@@ -1,13 +1,13 @@
 package net.osmand.plus.settings.backend;
 
-class IntPreference extends CommonPreference<Integer> {
+public class IntPreference extends CommonPreference<Integer> {
 
-	IntPreference(OsmandSettings osmandSettings, String id, int defaultValue) {
-		super(osmandSettings, id, defaultValue);
+	IntPreference(OsmandSettings settings, String id, int defaultValue) {
+		super(settings, id, defaultValue);
 	}
 
 	@Override
-	public Integer getValue(Object prefs, Integer defaultValue) {
+	protected Integer getValue(Object prefs, Integer defaultValue) {
 		return getSettingsAPI().getInt(prefs, getId(), defaultValue);
 	}
 

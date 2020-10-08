@@ -24,5 +24,4 @@ public enum AngularConstants {
 	public String getUnitSymbol() {
 		return unit;
 	}
-
 }

@@ -10,25 +10,29 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
-	private OsmandSettings osmandSettings;
-	private final String id;
-	private boolean global;
-	private T cachedValue;
+
+	private OsmandSettings settings;
 	private Object cachedPreference;
-	private boolean cache;
-	private Map<ApplicationMode, T> defaultValues;
+
+	private final String id;
+
+	private T cachedValue;
 	private T defaultValue;
+	private Map<ApplicationMode, T> defaultValues;
+
+	private boolean cache;
+	private boolean global;
 
 
-	public CommonPreference(OsmandSettings osmandSettings, String id, T defaultValue) {
-		this.osmandSettings = osmandSettings;
+	public CommonPreference(OsmandSettings settings, String id, T defaultValue) {
+		this.settings = settings;
 		this.id = id;
 		this.defaultValue = defaultValue;
-		osmandSettings.registerInternalPreference(id, this);
+		settings.registerInternalPreference(id, this);
 	}
 
 	// Methods to possibly override
-	public abstract T getValue(Object prefs, T defaultValue);
+	protected abstract T getValue(Object prefs, T defaultValue);
 
 	protected abstract boolean setValue(Object prefs, T val);
 
@@ -39,15 +43,15 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	protected SettingsAPI getSettingsAPI() {
-		return osmandSettings.getSettingsAPI();
+		return settings.getSettingsAPI();
 	}
 
 	protected ApplicationMode getApplicationMode() {
-		return osmandSettings.getApplicationMode();
+		return settings.getApplicationMode();
 	}
 
 	protected OsmandApplication getContext() {
-		return osmandSettings.getContext();
+		return settings.getContext();
 	}
 
 	// common methods
@@ -68,7 +72,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	protected final Object getPreferences() {
-		return osmandSettings.getPreferences(global);
+		return settings.getPreferences(global);
 
 	}
 
@@ -86,7 +90,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 			return set(obj);
 		}
 
-		Object profilePrefs = osmandSettings.getProfilePreferences(mode);
+		Object profilePrefs = settings.getProfilePreferences(mode);
 		boolean valueSaved = setValue(profilePrefs, obj);
 		if (valueSaved && cache && cachedPreference == profilePrefs) {
 			cachedValue = obj;
@@ -121,15 +125,13 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	// TODO final
 	protected T getDefaultValue() {
-		return getProfileDefaultValue(osmandSettings.currentMode);
+		return getProfileDefaultValue(settings.APPLICATION_MODE.get());
 	}
 
 	@Override
 	public final void overrideDefaultValue(T newDefaultValue) {
 		this.defaultValue = newDefaultValue;
 	}
-
-
 
 	// TODO final
 	@Override
@@ -138,7 +140,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 			return get();
 		}
 		T defaultV = getProfileDefaultValue(mode);
-		return getValue(osmandSettings.getProfilePreferences(mode), defaultV);
+		return getValue(settings.getProfilePreferences(mode), defaultV);
 	}
 
 	// TODO final
@@ -148,7 +150,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 			return cachedValue;
 		}
 		cachedPreference = getPreferences();
-		cachedValue = getValue(cachedPreference, getProfileDefaultValue(osmandSettings.currentMode));
+		cachedValue = getValue(cachedPreference, getProfileDefaultValue(settings.APPLICATION_MODE.get()));
 		return cachedValue;
 	}
 
@@ -159,7 +161,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	@Override
 	public final void resetToDefault() {
-		T o = getProfileDefaultValue(osmandSettings.currentMode);
+		T o = getProfileDefaultValue(settings.APPLICATION_MODE.get());
 		set(o);
 	}
 
@@ -186,12 +188,12 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return false;
 	}
 
-	public final  boolean isSet() {
-		return osmandSettings.isSet(global, getId());
+	public final boolean isSet() {
+		return settings.isSet(global, getId());
 	}
 
 	public boolean isSetForMode(ApplicationMode mode) {
-		return osmandSettings.isSet(mode, getId());
+		return settings.isSet(mode, getId());
 	}
 
 	public final boolean isGlobal() {
@@ -218,6 +220,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		}
 		return false;
 	}
+
 	// TODO final
 	@Override
 	public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {

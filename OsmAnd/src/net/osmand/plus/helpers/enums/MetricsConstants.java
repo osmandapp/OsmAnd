@@ -26,5 +26,4 @@ public enum MetricsConstants {
 	public String toTTSString() {
 		return ttsString;
 	}
-
 }

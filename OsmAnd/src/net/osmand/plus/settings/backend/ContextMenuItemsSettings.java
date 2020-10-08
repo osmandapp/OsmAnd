@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
 
@@ -13,14 +15,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-
 public class ContextMenuItemsSettings implements Serializable {
 
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuItemsSettings.class.getName());
 
 	private static final String HIDDEN = "hidden";
 	private static final String ORDER = "order";
+
 	private List<String> hiddenIds = new ArrayList<>();
 	private List<String> orderIds = new ArrayList<>();
 

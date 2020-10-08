@@ -20,8 +20,6 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.CustomOsmandPlugin.SuggestedDownloadItem;
 import net.osmand.plus.CustomRegion;
@@ -34,6 +32,8 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
@@ -918,7 +918,6 @@ public class SettingsHelper {
 		}
 	}
 
-
 	public static class ProfileSettingsItem extends OsmandSettingsItem {
 
 		private ApplicationMode appMode;
@@ -947,7 +946,7 @@ public class SettingsHelper {
 		@Override
 		protected void init() {
 			super.init();
-			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().getAppModeBeanPrefsIds()));
+			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(getAppModeBeanPrefsIds()));
 		}
 
 		@NonNull
@@ -1186,6 +1185,21 @@ public class SettingsHelper {
 						preference.writeToJson(json, appMode);
 					}
 				}
+			};
+		}
+
+		private String[] getAppModeBeanPrefsIds() {
+			OsmandSettings settings = app.getSettings();
+			return new String[] {
+					settings.ICON_COLOR.getId(),
+					settings.ICON_RES_NAME.getId(),
+					settings.PARENT_APP_MODE.getId(),
+					settings.ROUTING_PROFILE.getId(),
+					settings.ROUTE_SERVICE.getId(),
+					settings.USER_PROFILE_NAME.getId(),
+					settings.LOCATION_ICON.getId(),
+					settings.NAVIGATION_ICON.getId(),
+					settings.APP_MODE_ORDER.getId()
 			};
 		}
 	}

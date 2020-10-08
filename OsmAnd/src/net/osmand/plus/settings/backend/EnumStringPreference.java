@@ -4,13 +4,13 @@ public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E>
 
 	private final E[] values;
 
-	EnumStringPreference(OsmandSettings osmandSettings, String id, E defaultValue, E[] values) {
-		super(osmandSettings, id, defaultValue);
+	EnumStringPreference(OsmandSettings settings, String id, E defaultValue, E[] values) {
+		super(settings, id, defaultValue);
 		this.values = values;
 	}
 
 	@Override
-	public E getValue(Object prefs, E defaultValue) {
+	protected E getValue(Object prefs, E defaultValue) {
 		try {
 			String name = getSettingsAPI().getString(prefs, getId(), defaultValue.name());
 			E value = parseString(name);

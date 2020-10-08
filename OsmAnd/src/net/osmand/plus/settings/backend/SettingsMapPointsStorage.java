@@ -30,7 +30,7 @@ abstract class SettingsMapPointsStorage {
 
 	public List<String> getPointDescriptions(int sz) {
 		List<String> list = new ArrayList<>();
-		String ip = getSettingsAPI().getString(osmandSettings.globalPreferences, descriptionsKey, "");
+		String ip = getSettingsAPI().getString(osmandSettings.getGlobalPreferences(), descriptionsKey, "");
 		if (ip.trim().length() > 0) {
 			list.addAll(Arrays.asList(ip.split("--")));
 		}
@@ -45,7 +45,7 @@ abstract class SettingsMapPointsStorage {
 
 	public List<LatLon> getPoints() {
 		List<LatLon> list = new ArrayList<>();
-		String ip = getSettingsAPI().getString(osmandSettings.globalPreferences, pointsKey, "");
+		String ip = getSettingsAPI().getString(osmandSettings.getGlobalPreferences(), pointsKey, "");
 		if (ip.trim().length() > 0) {
 			StringTokenizer tok = new StringTokenizer(ip, ",");
 			while (tok.hasMoreTokens()) {
@@ -130,7 +130,7 @@ abstract class SettingsMapPointsStorage {
 				tb.append(ds.get(i));
 			}
 		}
-		return getSettingsAPI().edit(osmandSettings.globalPreferences)
+		return getSettingsAPI().edit(osmandSettings.getGlobalPreferences())
 				.putString(pointsKey, sb.toString())
 				.putString(descriptionsKey, tb.toString())
 				.commit();

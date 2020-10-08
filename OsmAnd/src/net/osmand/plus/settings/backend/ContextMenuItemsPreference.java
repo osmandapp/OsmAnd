@@ -6,13 +6,13 @@ public class ContextMenuItemsPreference extends CommonPreference<ContextMenuItem
 	@NonNull
 	private String idScheme;
 
-	ContextMenuItemsPreference(OsmandSettings osmandSettings, String id, @NonNull String idScheme, @NonNull ContextMenuItemsSettings defValue) {
-		super(osmandSettings, id, defValue);
+	ContextMenuItemsPreference(OsmandSettings settings, String id, @NonNull String idScheme, @NonNull ContextMenuItemsSettings defValue) {
+		super(settings, id, defValue);
 		this.idScheme = idScheme;
 	}
 
 	@Override
-	public ContextMenuItemsSettings getValue(Object prefs, ContextMenuItemsSettings defaultValue) {
+	protected ContextMenuItemsSettings getValue(Object prefs, ContextMenuItemsSettings defaultValue) {
 		String s = getSettingsAPI().getString(prefs, getId(), "");
 		return readValue(s);
 	}

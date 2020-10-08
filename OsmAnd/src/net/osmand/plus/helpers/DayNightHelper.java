@@ -1,26 +1,26 @@
 package net.osmand.plus.helpers;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.StateChangedListener;
-import net.osmand.plus.helpers.enums.DayNightMode;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.util.SunriseSunset;
-
-import org.apache.commons.logging.Log;
-
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
+
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.util.SunriseSunset;
+
+import org.apache.commons.logging.Log;
+
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Class to help determine if we want to render day or night map - it uses the

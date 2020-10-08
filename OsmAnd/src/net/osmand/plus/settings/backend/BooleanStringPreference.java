@@ -7,7 +7,7 @@ public class BooleanStringPreference extends BooleanPreference {
 	}
 
 	@Override
-	public Boolean getValue(Object prefs, Boolean defaultValue) {
+	protected Boolean getValue(Object prefs, Boolean defaultValue) {
 		Boolean value;
 		try {
 			value = parseString(getSettingsAPI().getString(prefs, getId(), defaultValue.toString()));

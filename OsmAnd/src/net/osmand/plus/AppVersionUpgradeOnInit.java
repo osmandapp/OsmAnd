@@ -7,8 +7,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 class AppVersionUpgradeOnInit {
+
 	public static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	public static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER"; //$NON-NLS-1$
 	public static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS"; //$NON-NLS-1$
@@ -56,16 +59,14 @@ class AppVersionUpgradeOnInit {
 	private int prevAppVersion;
 	private boolean appVersionChanged;
 	private boolean firstTime;
-	private OsmandSettings settings;
 
 	AppVersionUpgradeOnInit(OsmandApplication app) {
 		this.app = app;
-		settings = app.getSettings();
 	}
 
 	@SuppressLint("ApplySharedPref")
 	void upgradeVersion(SharedPreferences startPrefs, int lastVersion) {
-		if(!startPrefs.contains(NUMBER_OF_STARTS)) {
+		if (!startPrefs.contains(NUMBER_OF_STARTS)) {
 			startPrefs.edit().putInt(NUMBER_OF_STARTS, 1).commit();
 		} else {
 			startPrefs.edit().putInt(NUMBER_OF_STARTS, startPrefs.getInt(NUMBER_OF_STARTS, 0) + 1).commit();
@@ -81,7 +82,7 @@ class AppVersionUpgradeOnInit {
 		} else {
 			prevAppVersion = startPrefs.getInt(VERSION_INSTALLED_NUMBER, 0);
 			if (needsUpgrade(startPrefs, lastVersion)) {
-
+				OsmandSettings settings = app.getSettings();
 				if (prevAppVersion < VERSION_2_2) {
 					settings.SHOW_DASHBOARD_ON_START.set(true);
 					settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(true);
@@ -121,13 +122,14 @@ class AppVersionUpgradeOnInit {
 					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_7).commit();
 				}
 				if (prevAppVersion < VERSION_3_7_01) {
-					app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+					app.getAppInitializer().addListener(new AppInitializeListener() {
 						@Override
 						public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-							if (event.equals(AppInitializer.InitEvents.FAVORITES_INITIALIZED)) {
+							if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
 								app.getFavorites().fixBlackBackground();
 							}
 						}
+
 						@Override
 						public void onFinish(AppInitializer init) {
 						}
@@ -158,20 +160,20 @@ class AppVersionUpgradeOnInit {
 	}
 
 	public void resetFirstTimeRun(SharedPreferences startPrefs) {
-		if(startPrefs != null) {
+		if (startPrefs != null) {
 			startPrefs.edit().remove(FIRST_TIME_APP_RUN).commit();
 		}
 	}
 
 	public int getNumberOfStarts(SharedPreferences startPrefs) {
-		if(startPrefs == null) {
+		if (startPrefs == null) {
 			return 0;
 		}
 		return startPrefs.getInt(NUMBER_OF_STARTS, 1);
 	}
 
 	public long getFirstInstalledDays(SharedPreferences startPrefs) {
-		if(startPrefs == null) {
+		if (startPrefs == null) {
 			return 0;
 		}
 		long nd = startPrefs.getLong(FIRST_INSTALLED, 0);
@@ -183,9 +185,8 @@ class AppVersionUpgradeOnInit {
 		return firstTime;
 	}
 
-
-
 	public void migratePreferences() {
+		OsmandSettings settings = app.getSettings();
 		migrateEnumPreferences();
 		SharedPreferences globalSharedPreferences = (SharedPreferences) settings.getGlobalPreferences();
 		Map<String, ?> globalPrefsMap = globalSharedPreferences.getAll();
@@ -213,7 +214,7 @@ class AppVersionUpgradeOnInit {
 				}
 			}
 		}
-		for (OsmandPreference<?> pref : settings.getGeneralPrefs()) {
+		for (OsmandPreference<?> pref : getGeneralPrefs()) {
 			if (pref instanceof CommonPreference) {
 				CommonPreference<?> commonPref = (CommonPreference<?>) pref;
 				Object defaultVal = commonPref.getModeValue(ApplicationMode.DEFAULT);
@@ -224,7 +225,6 @@ class AppVersionUpgradeOnInit {
 				}
 			}
 		}
-
 		String json = settings.getSettingsAPI().getString(settings.getGlobalPreferences(), "custom_app_profiles", "");
 		if (!Algorithms.isEmpty(json)) {
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -241,9 +241,10 @@ class AppVersionUpgradeOnInit {
 	}
 
 	public void migrateEnumPreferences() {
-		for (OsmandPreference pref : settings.getRegisteredPreferences().values()) {
+		OsmandSettings settings = app.getSettings();
+		for (OsmandPreference<?> pref : settings.getRegisteredPreferences().values()) {
 			if (pref instanceof EnumStringPreference) {
-				EnumStringPreference enumPref = (EnumStringPreference) pref;
+				EnumStringPreference<?> enumPref = (EnumStringPreference<?>) pref;
 				if (enumPref.isGlobal()) {
 					migrateEnumPref(enumPref, (SharedPreferences) settings.getGlobalPreferences());
 				} else {
@@ -256,6 +257,7 @@ class AppVersionUpgradeOnInit {
 	}
 
 	public void migrateQuickActionStates() {
+		OsmandSettings settings = app.getSettings();
 		String quickActionsJson = settings.getSettingsAPI().getString(settings.getGlobalPreferences(), "quick_action_new", "");
 		if (!Algorithms.isEmpty(quickActionsJson)) {
 			Gson gson = new GsonBuilder().create();
@@ -282,9 +284,10 @@ class AppVersionUpgradeOnInit {
 	}
 
 	public void migrateHomeWorkParkingToFavorites() {
+		OsmandSettings settings = app.getSettings();
 		FavouritesDbHelper favorites = app.getFavorites();
 		SettingsAPI settingsAPI = settings.getSettingsAPI();
-		Object globalPreferences= settings.getGlobalPreferences();
+		Object globalPreferences = settings.getGlobalPreferences();
 
 		LatLon homePoint = null;
 		float lat = settingsAPI.getFloat(globalPreferences, "home_point_lat", 0);
@@ -299,10 +302,47 @@ class AppVersionUpgradeOnInit {
 			workPoint = new LatLon(lat, lon);
 		}
 		if (homePoint != null) {
-			favorites.setSpecialPoint(homePoint, FavouritePoint.SpecialPointType.HOME, null);
+			favorites.setSpecialPoint(homePoint, SpecialPointType.HOME, null);
 		}
 		if (workPoint != null) {
-			favorites.setSpecialPoint(workPoint, FavouritePoint.SpecialPointType.WORK, null);
+			favorites.setSpecialPoint(workPoint, SpecialPointType.WORK, null);
 		}
+	}
+
+
+	public OsmandPreference<?>[] getGeneralPrefs() {
+		OsmandSettings settings = app.getSettings();
+		return new OsmandPreference[] {
+				settings.EXTERNAL_INPUT_DEVICE,
+				settings.CENTER_POSITION_ON_MAP,
+				settings.ROTATE_MAP,
+				settings.MAP_SCREEN_ORIENTATION,
+				settings.LIVE_MONITORING_URL,
+				settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND,
+				settings.LIVE_MONITORING_INTERVAL,
+				settings.LIVE_MONITORING,
+				settings.SHOW_TRIP_REC_NOTIFICATION,
+				settings.AUTO_SPLIT_RECORDING,
+				settings.SAVE_TRACK_MIN_SPEED,
+				settings.SAVE_TRACK_PRECISION,
+				settings.SAVE_TRACK_MIN_DISTANCE,
+				settings.SAVE_TRACK_INTERVAL,
+				settings.TRACK_STORAGE_DIRECTORY,
+				settings.SAVE_HEADING_TO_GPX,
+				settings.DISABLE_RECORDING_ONCE_APP_KILLED,
+				settings.SAVE_TRACK_TO_GPX,
+				settings.SAVE_GLOBAL_TRACK_REMEMBER,
+				settings.SAVE_GLOBAL_TRACK_INTERVAL,
+				settings.MAP_EMPTY_STATE_ALLOWED,
+				settings.DO_NOT_USE_ANIMATIONS,
+				settings.USE_KALMAN_FILTER_FOR_COMPASS,
+				settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS,
+				settings.USE_TRACKBALL_FOR_MOVEMENTS,
+				settings.SPEED_SYSTEM,
+				settings.ANGULAR_UNITS,
+				settings.METRIC_SYSTEM,
+				settings.DRIVING_REGION,
+				settings.DRIVING_REGION_AUTOMATIC
+		};
 	}
 }

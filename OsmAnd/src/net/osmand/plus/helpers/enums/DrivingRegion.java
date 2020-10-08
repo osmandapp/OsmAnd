@@ -54,7 +54,7 @@ public enum DrivingRegion {
 			return DrivingRegion.JAPAN;
 		} else if (df.getCountry().equalsIgnoreCase("au")) {
 			return DrivingRegion.AUSTRALIA;
-		} else if(df.getCountry().equalsIgnoreCase(Locale.UK.getCountry())) {
+		} else if (df.getCountry().equalsIgnoreCase(Locale.UK.getCountry())) {
 			return DrivingRegion.UK_AND_OTHERS;
 		}
 		return DrivingRegion.EUROPE_ASIA;

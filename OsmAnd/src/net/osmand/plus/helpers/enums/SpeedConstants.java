@@ -29,5 +29,4 @@ public enum SpeedConstants {
 	public String toShortString(Context ctx) {
 		return ctx.getString(key);
 	}
-
 }

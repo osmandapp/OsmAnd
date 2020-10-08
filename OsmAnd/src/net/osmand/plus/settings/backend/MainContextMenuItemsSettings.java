@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-
 public class MainContextMenuItemsSettings extends ContextMenuItemsSettings {
+
 	private static final String MAIN = "main";
+
 	private List<String> mainIds = new ArrayList<>();
 
 	public MainContextMenuItemsSettings() {

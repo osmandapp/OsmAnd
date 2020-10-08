@@ -53,19 +53,17 @@ public class ListStringPreference extends StringPreference {
 	public boolean removeValueForProfile(ApplicationMode appMode, String res) {
 		String vl = getModeValue(appMode);
 		String r = res + delimiter;
-		if(vl != null) {
-			if(vl.startsWith(r)) {
+		if (vl != null) {
+			if (vl.startsWith(r)) {
 				vl = vl.substring(r.length());
-				setModeValue(appMode, vl);
-				return true;
 			} else {
 				int it = vl.indexOf(delimiter + r);
-				if(it >= 0) {
+				if (it >= 0) {
 					vl = vl.substring(0, it + delimiter.length()) + vl.substring(it + delimiter.length() + r.length());
 				}
-				setModeValue(appMode, vl);
-				return true;
 			}
+			setModeValue(appMode, vl);
+			return true;
 		}
 		return false;
 	}
@@ -81,7 +79,9 @@ public class ListStringPreference extends StringPreference {
 				return Arrays.asList(listAsString.split(delimiter));
 			} else {
 				return new ArrayList<String>() {
-					{add(listAsString);}
+					{
+						add(listAsString);
+					}
 				};
 			}
 		}
@@ -105,7 +105,7 @@ public class ListStringPreference extends StringPreference {
 
 	public boolean setModeValues(ApplicationMode mode, List<String> values) {
 		if (values == null || values.size() == 0) {
-			setModeValue(mode,null);
+			setModeValue(mode, null);
 			return false;
 		}
 		clearAll();
