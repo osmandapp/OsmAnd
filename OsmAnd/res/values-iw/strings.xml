@@ -3911,4 +3911,12 @@
     <string name="sort_name_ascending">שם: א – ת</string>
     <string name="start_finish_icons">סמלי התחלה/סיום</string>
     <string name="contour_lines_thanks">תודה לך על רכישת ‚קווי מתאר’</string>
+    <string name="routing_attr_avoid_footways_description">הימנעות משבילי הולכי רגל</string>
+    <string name="routing_attr_avoid_footways_name">הימנעות משבילי הולכי רגל</string>
+    <string name="osm_live_payment_desc_hw">המינוי חויב לתקופה הנבחרת. ניתן לבטל דרך ה־AppGallery בכל עת.</string>
+    <string name="osm_live_payment_subscription_management_hw">התשלום יחויב דרך חשבון ה־AppGallery שלך עם אישור הרכישה.
+\n
+\nהמינוי מתחדש אוטומטי אלא אם כן בוטל בטרם תאריך החידוש. החשבון שלך יחויב על תקופת החידוש (חודש/שלושה חודשים/שנה) רק בתאריך החידוש.
+\n
+\nניתן לנהל ולבטל את המינויים שלך דרך ההגדרות ב־AppGallery שלך.</string>
 </resources>

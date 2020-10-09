@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -113,7 +114,7 @@ public class DashChooseAppDirFragment {
 			boolean copyFiles = !currentAppFile.getAbsolutePath().equals(selectedFile.getAbsolutePath()) && !mapsCopied;
 			warningReadonly.setVisibility(copyFiles ? View.VISIBLE : View.GONE);
 			if (copyFiles) {
-				if (!OsmandSettings.isWritable(currentAppFile)) {
+				if (!FileUtils.isWritable(currentAppFile)) {
 					warningReadonly.setText(activity.getString(R.string.android_19_location_disabled,
 							currentAppFile.getAbsolutePath()));
 				} else {
@@ -385,7 +386,7 @@ public class DashChooseAppDirFragment {
 
 				@Override
 				public void onClick(View v) {
-					boolean wr = OsmandSettings.isWritable(selectedFile);
+					boolean wr = FileUtils.isWritable(selectedFile);
 					if (wr) {
 						boolean changed = !currentAppFile.getAbsolutePath().equals(selectedFile.getAbsolutePath());
 						getMyApplication().setExternalStorageDirectory(type, selectedFile.getAbsolutePath());

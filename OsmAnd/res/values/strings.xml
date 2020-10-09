@@ -15,6 +15,14 @@
     <string name="clear_osm_token">Clear OpenStreetMap OAuth token</string>
     <string name="perform_oauth_authorization">Log in via OAuth</string>
     <string name="perform_oauth_authorization_description">Perform an OAuth Login to use osmedit features</string>
+    <string name="use_native_pt_desc">Switch to Java (safe) Public Transport routing calculation</string>
+    <string name="use_native_pt">Native Public Transport development</string>
+    <string name="use_fast_recalculation_desc">Recalculates only the initial part of the route. Can be used for long trips.</string>
+    <string name="complex_routing_descr">Two-phase routing for car navigation.</string>
+    <string name="use_complex_routing">Complex routing</string>
+    <string name="use_live_routing">OsmAnd Live data</string>
+    <string name="use_live_public_transport">OsmAnd Live data</string>
+    <string name="development">Development</string>
     <string name="routing_attr_avoid_footways_name">Avoid footways</string>
     <string name="routing_attr_avoid_footways_description">Avoid footways</string>
     <string name="osm_live_payment_subscription_management_hw">Payment will be charged to your AppGallery account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period(month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your AppGallery settings.</string>
@@ -3666,7 +3674,6 @@
     <string name="plugin_install_needs_network">You need to be online to install this plugin.</string>
     <string name="get_plugin">Get</string>
     <string name="use_fast_recalculation">Smart route recalculation</string>
-    <string name="use_fast_recalculation_desc">For long trips, only recalculate the initial part of the route.</string>
     <string name="do_you_like_osmand">Do you like OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">Your opinion and feedback is valued.</string>
     <string name="rate_this_app">Rate this app</string>

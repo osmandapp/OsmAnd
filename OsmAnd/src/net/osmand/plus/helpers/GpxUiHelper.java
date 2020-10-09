@@ -80,6 +80,10 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.helpers.enums.SpeedConstants;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -93,7 +97,6 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
@@ -514,9 +517,9 @@ public class GpxUiHelper {
 				} else {
 					final View apprTitleView = View.inflate(new ContextThemeWrapper(activity, themeRes), R.layout.select_gpx_appearance_title, null);
 
-					final OsmandSettings.CommonPreference<String> prefWidth
+					final CommonPreference<String> prefWidth
 							= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
-					final OsmandSettings.CommonPreference<String> prefColor
+					final CommonPreference<String> prefColor
 							= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
 
 					updateAppearanceTitle(activity, app, trackWidthProp, renderer, apprTitleView, prefWidth.get(), prefColor.get());
@@ -574,7 +577,7 @@ public class GpxUiHelper {
 							if (SHOW_START_FINISH_ATTR.equals(entry.getKey())) {
 								app.getSettings().SHOW_START_FINISH_ICONS.set("true".equals(entry.getValue()));
 							} else {
-								final OsmandSettings.CommonPreference<String> pref
+								final CommonPreference<String> pref
 										= app.getSettings().getCustomRenderProperty(entry.getKey());
 								pref.set(entry.getValue());
 							}
@@ -1039,7 +1042,7 @@ public class GpxUiHelper {
 
 	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, float meters) {
 		OsmandSettings settings = ctx.getSettings();
-		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		float divX;
 
 		String format1 = "{0,number,0.#} ";
@@ -1048,10 +1051,10 @@ public class GpxUiHelper {
 		float granularity = 1f;
 		int mainUnitStr;
 		float mainUnitInMeters;
-		if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			mainUnitStr = R.string.km;
 			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == OsmandSettings.MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
 			mainUnitStr = R.string.nm;
 			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
 		} else {
@@ -1065,10 +1068,10 @@ public class GpxUiHelper {
 		if (meters >= 100 * mainUnitInMeters ||
 				meters > 9.99f * mainUnitInMeters ||
 				meters > 0.999f * mainUnitInMeters ||
-				mc == OsmandSettings.MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters ||
-				mc == OsmandSettings.MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters ||
-				mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters ||
-				mc == OsmandSettings.MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+				mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters ||
+				mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters ||
+				mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters ||
+				mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
 
 			divX = mainUnitInMeters;
 			if (fmt == null) {
@@ -1078,13 +1081,13 @@ public class GpxUiHelper {
 		} else {
 			fmt = null;
 			granularity = 1f;
-			if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS || mc == OsmandSettings.MetricsConstants.MILES_AND_METERS) {
+			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				divX = 1f;
 				mainUnitStr = R.string.m;
-			} else if (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
+			} else if (mc == MetricsConstants.MILES_AND_FEET) {
 				divX = 1f / FEET_IN_ONE_METER;
 				mainUnitStr = R.string.foot;
-			} else if (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS) {
+			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 				divX = 1f / YARDS_IN_ONE_METER;
 				mainUnitStr = R.string.yard;
 			} else {
@@ -1306,8 +1309,8 @@ public class GpxUiHelper {
 															   boolean drawFilled,
 															   boolean calcWithoutGaps) {
 		OsmandSettings settings = ctx.getSettings();
-		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
+		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
 		boolean light = settings.isLightContent();
 		final float convEle = useFeet ? 3.28084f : 1.0f;
 
@@ -1408,19 +1411,19 @@ public class GpxUiHelper {
 			divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
 		}
 
-		OsmandSettings.SpeedConstants sps = settings.SPEED_SYSTEM.get();
+		SpeedConstants sps = settings.SPEED_SYSTEM.get();
 		float mulSpeed = Float.NaN;
 		float divSpeed = Float.NaN;
 		final String mainUnitY = sps.toShortString(ctx);
-		if (sps == OsmandSettings.SpeedConstants.KILOMETERS_PER_HOUR) {
+		if (sps == SpeedConstants.KILOMETERS_PER_HOUR) {
 			mulSpeed = 3.6f;
-		} else if (sps == OsmandSettings.SpeedConstants.MILES_PER_HOUR) {
+		} else if (sps == SpeedConstants.MILES_PER_HOUR) {
 			mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
-		} else if (sps == OsmandSettings.SpeedConstants.NAUTICALMILES_PER_HOUR) {
+		} else if (sps == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
-		} else if (sps == OsmandSettings.SpeedConstants.MINUTES_PER_KILOMETER) {
+		} else if (sps == SpeedConstants.MINUTES_PER_KILOMETER) {
 			divSpeed = METERS_IN_KILOMETER / 60;
-		} else if (sps == OsmandSettings.SpeedConstants.MINUTES_PER_MILE) {
+		} else if (sps == SpeedConstants.MINUTES_PER_MILE) {
 			divSpeed = METERS_IN_ONE_MILE / 60;
 		} else {
 			mulSpeed = 1f;
@@ -1571,8 +1574,8 @@ public class GpxUiHelper {
 		}
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
-		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
+		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
 		final float convEle = useFeet ? 3.28084f : 1.0f;
 		final float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 

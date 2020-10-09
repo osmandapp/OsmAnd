@@ -21,8 +21,7 @@ import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.TerrainMode;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
@@ -236,7 +235,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		if (contourLinesProp != null) {
-			final OsmandSettings.CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
+			final CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
 			if (!Algorithms.isEmpty(pref.get())) {
 				contourLinesEnabled = !CONTOUR_LINES_DISABLED_VALUE.equals(pref.get());
 			} else {
@@ -293,7 +292,7 @@ public class SRTMPlugin extends OsmandPlugin {
 						public void run() {
 							RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 							if (contourLinesProp != null) {
-								final OsmandSettings.CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+								final CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 								boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
 
 								SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
@@ -340,7 +339,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		if (contourLinesProp != null) {
-			final OsmandSettings.CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+			final CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 			boolean contourLinesSelected = isContourLinesLayerEnabled(app);
 			String descr = getPrefDescription(app, contourLinesProp, pref);
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -409,7 +408,7 @@ public class SRTMPlugin extends OsmandPlugin {
 								   final Runnable callback) {
 		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		if (contourLinesProp != null) {
-			final OsmandSettings.CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+			final CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 			CommonPreference<String> zoomSetting = settings.CONTOUR_LINES_ZOOM;
 			if (!isChecked) {
 				zoomSetting.set(pref.get());
@@ -437,7 +436,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	public String getPrefDescription(final Context ctx, final RenderingRuleProperty p, final OsmandSettings.CommonPreference<String> pref) {
+	public String getPrefDescription(final Context ctx, final RenderingRuleProperty p, final CommonPreference<String> pref) {
 		if (!Algorithms.isEmpty(pref.get())) {
 			return SettingsActivity.getStringPropertyValue(ctx, pref.get());
 		} else {
@@ -447,7 +446,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public void selectPropertyValue(final MapActivity activity,
 									final RenderingRuleProperty p,
-									final OsmandSettings.CommonPreference<String> pref,
+									final CommonPreference<String> pref,
 									final Runnable callback) {
 		final String propertyDescr = SettingsActivity.getStringPropertyDescription(activity,
 				p.getAttrName(), p.getName());

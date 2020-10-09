@@ -38,9 +38,8 @@ import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.ContextMenuItemsPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -137,14 +136,18 @@ public class ContextMenuAdapter {
 		Collections.sort(items, new Comparator<ContextMenuItem>() {
 			@Override
 			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
-				if (DRAWER_SWITCH_PROFILE_ID.equals(item1.getId())) {
-					return -1;
-				}
-				if (DRAWER_CONFIGURE_PROFILE_ID.equals(item1.getId()) && DRAWER_SWITCH_PROFILE_ID.equals(item2.getId())) {
+				if (DRAWER_CONFIGURE_PROFILE_ID.equals(item1.getId())
+						&& DRAWER_SWITCH_PROFILE_ID.equals(item2.getId())) {
 					return 1;
-				}
-				if (DRAWER_CONFIGURE_PROFILE_ID.equals(item1.getId())) {
+				} else if (DRAWER_SWITCH_PROFILE_ID.equals(item1.getId())
+						&& DRAWER_CONFIGURE_PROFILE_ID.equals(item2.getId())) {
 					return -1;
+				} else if (DRAWER_SWITCH_PROFILE_ID.equals(item1.getId())
+						|| DRAWER_CONFIGURE_PROFILE_ID.equals(item1.getId())) {
+					return -1;
+				} else if (DRAWER_SWITCH_PROFILE_ID.equals(item2.getId())
+						|| DRAWER_CONFIGURE_PROFILE_ID.equals(item2.getId())) {
+					return 1;
 				}
 				int order1 = item1.getOrder();
 				int order2 = item2.getOrder();
@@ -643,7 +646,7 @@ public class ContextMenuAdapter {
 		return makeDeleteAction(prefs.toArray(new OsmandPreference[prefs.size()]));
 	}
 
-	private static void resetSetting(ApplicationMode appMode, OsmandSettings.OsmandPreference preference, boolean profileOnly) {
+	private static void resetSetting(ApplicationMode appMode, OsmandPreference preference, boolean profileOnly) {
 		if (profileOnly) {
 			preference.resetModeToDefault(appMode);
 		} else {

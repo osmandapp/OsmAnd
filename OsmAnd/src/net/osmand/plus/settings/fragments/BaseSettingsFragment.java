@@ -55,8 +55,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilitySettingsFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -834,11 +835,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return icon;
 	}
 
-	public SwitchPreferenceCompat createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary, int layoutId) {
+	public SwitchPreferenceCompat createSwitchPreference(OsmandPreference<Boolean> b, int title, int summary, int layoutId) {
 		return createSwitchPreference(b, getString(title), getString(summary), layoutId);
 	}
 
-	public SwitchPreferenceCompat createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, String title, String summary, int layoutId) {
+	public SwitchPreferenceCompat createSwitchPreference(OsmandPreference<Boolean> b, String title, String summary, int layoutId) {
 		SwitchPreferenceCompat p = new SwitchPreferenceCompat(getContext());
 		p.setTitle(title);
 		p.setKey(b.getId());

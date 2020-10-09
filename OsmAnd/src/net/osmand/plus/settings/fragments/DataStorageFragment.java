@@ -23,6 +23,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
@@ -408,7 +409,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		String newDirectory = newStorageDirectory.getDirectory();
 		int type = newStorageDirectory.getType();
 		File newDirectoryFile = new File(newDirectory);
-		boolean wr = OsmandSettings.isWritable(newDirectoryFile);
+		boolean wr = FileUtils.isWritable(newDirectoryFile);
 		if (wr) {
 			app.setExternalStorageDirectory(type, newDirectory);
 			reloadData();
