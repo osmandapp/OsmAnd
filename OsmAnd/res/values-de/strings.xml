@@ -1570,7 +1570,7 @@
     <string name="routing_attr_height_description">Höhe des Fahrzeugs für Routenberechnung angeben.</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="use_fast_recalculation">Schnelle Routenneuberechnung</string>
-    <string name="use_fast_recalculation_desc">Bei längeren Routen nur den Anfangsteil neu berechnen.</string>
+    <string name="use_fast_recalculation_desc">Nur den Anfangsteil neu berechnen. Kann bei längeren Routen benutzt werden.</string>
     <string name="lang_es_ar">Spanisch (Argentinien)</string>
     <string name="lang_th">Thailändisch</string>
     <string name="lang_ms">Malaysisch</string>
