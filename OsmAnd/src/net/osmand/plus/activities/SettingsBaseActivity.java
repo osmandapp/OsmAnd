@@ -189,16 +189,27 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			if(propertyValue == null) {
 				return "";
 			}
-			final String propertyValueReplaced = propertyValue.replaceAll("\\s+","_");
-			Field f = R.string.class.getField("routeInfo_" + propertyValueReplaced + "_name");
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
-				return ctx.getString(in);
+			int valueId = getStringRouteInfoPropertyValueId(propertyValue);
+			if (valueId != -1) {
+				return ctx.getString(valueId);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		return propertyValue;
+	}
+
+	public static int getStringRouteInfoPropertyValueId(String propertyValue) {
+		try {
+			final String propertyValueReplaced = propertyValue.replaceAll("\\s+","_");
+			Field f = R.string.class.getField("routeInfo_" + propertyValueReplaced + "_name");
+			if (f != null) {
+				return (Integer) f.get(null);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return -1;
 	}
 
 	public <T> void registerListPreference(OsmandPreference<T> b, PreferenceGroup screen, String[] names, T[] values) {
