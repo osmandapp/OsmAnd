@@ -1125,6 +1125,12 @@ public class OsmandSettings {
 	public final OsmandPreference<String> USER_PASSWORD =
 			new StringPreference(this, "user_password", "").makeGlobal();
 
+	public final OsmandPreference<String> USER_ACCESS_TOKEN =
+			new StringPreference("user_access_token", "").makeGlobal();
+
+	public final OsmandPreference<String> USER_ACCESS_TOKEN_SECRET =
+			new StringPreference("user_access_token_secret", "").makeGlobal();
+
 	// this value boolean is synchronized with settings_pref.xml preference offline POI/Bugs edition
 	public final OsmandPreference<Boolean> OFFLINE_EDITION = new BooleanPreference(this, "offline_osm_editing", true).makeGlobal();
 

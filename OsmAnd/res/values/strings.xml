@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="osm_edit_logout_success">Logout successful</string>
+    <string name="clear_osm_token">Clear OpenStreetMap OAuth token</string>
+    <string name="perform_oauth_authorization">Log in via OAuth</string>
+    <string name="perform_oauth_authorization_description">Perform an OAuth Login to use osmedit features</string>
     <string name="use_native_pt_desc">Switch to Java (safe) Public Transport routing calculation</string>
     <string name="use_native_pt">Native Public Transport development</string>
     <string name="use_fast_recalculation_desc">Recalculates only the initial part of the route. Can be used for long trips.</string>

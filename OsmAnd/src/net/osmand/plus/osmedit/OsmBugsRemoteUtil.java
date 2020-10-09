@@ -5,12 +5,12 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
-
 import org.apache.commons.logging.Log;
 
 import java.io.FileNotFoundException;
@@ -109,6 +109,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation,
 									boolean anonymous) {
+		OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
 		OsmBugResult r = new OsmBugResult();
 		try {
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
@@ -118,8 +119,12 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(app)); //$NON-NLS-1$
 
 			if (!anonymous) {
-				String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
-				connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				if (client.isValidToken()) {
+					connection.addRequestProperty("Authorization", "OAuth " + client.getClient().getAccessToken().getToken());
+				} else {
+					String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
+					connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				}
 			}
 
 			connection.setDoInput(true);
