@@ -1393,7 +1393,7 @@
     <string name="plugin_install_needs_network">Bu eklentiyi yüklemek için çevrim içi olmanız gerekmektedir.</string>
     <string name="get_plugin">Al</string>
     <string name="use_fast_recalculation">Akıllı rota yeniden hesaplama</string>
-    <string name="use_fast_recalculation_desc">Uzun seyahatler için rotanın yalnızca ilk bölümünü yeniden hesapla.</string>
+    <string name="use_fast_recalculation_desc">Güzergahın yalnızca ilk bölümünü yeniden hesaplar. Uzun yolculuklar için kullanılabilir.</string>
     <string name="do_you_like_osmand">OsmAnd\'ı Sevdinizmi?</string>
     <string name="we_really_care_about_your_opinion">Fikir ve geri bildirimleriniz değerlidir.</string>
     <string name="rate_this_app">Bu Uygulamayı Oyla</string>
@@ -3869,4 +3869,11 @@
 \n AppGallery ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
     <string name="routing_attr_avoid_footways_description">Yaya yollarından kaçın</string>
     <string name="routing_attr_avoid_footways_name">Yaya yollarından kaçın</string>
+    <string name="development">Geliştirme</string>
+    <string name="use_live_public_transport">OsmAnd Live verileri</string>
+    <string name="use_live_routing">OsmAnd Live verileri</string>
+    <string name="use_complex_routing">Karmaşık yönlendirme</string>
+    <string name="complex_routing_descr">Araç navigasyonu için iki aşamalı yönlendirme.</string>
+    <string name="use_native_pt">Yerel Toplu Taşıma geliştirme</string>
+    <string name="use_native_pt_desc">Java (güvenli) Toplu Taşıma yönlendirme hesaplamasına geçin</string>
 </resources>
