@@ -1534,7 +1534,7 @@
     <string name="routing_attr_height_name">Magasságkorlátozás</string>
     <string name="routing_attr_height_description">Adja meg az útvonalakon a járművekre vonatkozó magasságkorlátozást.</string>
     <string name="use_fast_recalculation">Intelligens útvonal újraszámítás</string>
-    <string name="use_fast_recalculation_desc">Hosszú utaknál csak az útvonal kezdeti részének újraszámítása.</string>
+    <string name="use_fast_recalculation_desc">Csak az útvonal kezdeti részét számítja újra. Hosszú utakhoz használható.</string>
     <string name="shared_string_logoff">Naplózás ki</string>
     <string name="rendering_value_disabled_name">Letiltva</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés hálózathoz tartozás szerint</string>
@@ -3898,4 +3898,19 @@
     <string name="sort_name_ascending">Név: A–Z</string>
     <string name="start_finish_icons">Kiindulás/érkezés ikonjai</string>
     <string name="contour_lines_thanks">Köszönjük, hogy megvásárolta a szintvonalbővítményt (Contour lines)</string>
+    <string name="osm_live_payment_desc_hw">Az előfizetés díja a kiválasztott időszakonként lesz kiszámítva. Bármikor törölheti az AppGallery webhelyen.</string>
+    <string name="osm_live_payment_subscription_management_hw">A fizetést a vásárlás visszaigazolásakor az AppGallery számlájára terheljük.
+\n
+\nAz előfizetés automatikusan megújul, kivéve, ha azt a megújítási dátum előtt lemondják. A megújítási időszakra (hónap / 3 hónap / év) a számláját csak a megújítás napján terheljük meg.
+\n
+\nAz előfizetéseket az AppGallery beállításai között kezelheti és törölheti.</string>
+    <string name="routing_attr_avoid_footways_description">Gyalogutak elkerülése</string>
+    <string name="routing_attr_avoid_footways_name">Gyalogutak elkerülése</string>
+    <string name="development">Fejlesztés</string>
+    <string name="use_live_public_transport">OsmAnd Live adatok</string>
+    <string name="use_live_routing">OsmAnd Live adatok</string>
+    <string name="use_complex_routing">Összetett útvonaltervezés</string>
+    <string name="complex_routing_descr">Kétszakaszos útvonaltervezés autós navigációhoz.</string>
+    <string name="use_native_pt">Natív tömegközlekedési fejlesztés</string>
+    <string name="use_native_pt_desc">Váltás Java (biztonságos) tömegközlekedési útvonaltervezésre</string>
 </resources>
