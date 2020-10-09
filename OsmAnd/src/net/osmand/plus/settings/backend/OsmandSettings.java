@@ -36,13 +36,13 @@ import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.audionotes.NotesSortByMode;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment.RateUsState;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.AngularConstants;
 import net.osmand.plus.helpers.enums.AutoZoomMap;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapillary.MapillaryPlugin;
@@ -1126,10 +1126,10 @@ public class OsmandSettings {
 			new StringPreference(this, "user_password", "").makeGlobal();
 
 	public final OsmandPreference<String> USER_ACCESS_TOKEN =
-			new StringPreference("user_access_token", "").makeGlobal();
+			new StringPreference(this, "user_access_token", "").makeGlobal();
 
 	public final OsmandPreference<String> USER_ACCESS_TOKEN_SECRET =
-			new StringPreference("user_access_token_secret", "").makeGlobal();
+			new StringPreference(this, "user_access_token_secret", "").makeGlobal();
 
 	// this value boolean is synchronized with settings_pref.xml preference offline POI/Bugs edition
 	public final OsmandPreference<Boolean> OFFLINE_EDITION = new BooleanPreference(this, "offline_osm_editing", true).makeGlobal();
