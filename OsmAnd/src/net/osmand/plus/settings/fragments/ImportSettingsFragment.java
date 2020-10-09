@@ -34,8 +34,14 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.settings.backend.SettingsHelper.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.FileSettingsItem;
@@ -47,12 +53,6 @@ import net.osmand.plus.settings.backend.SettingsHelper.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.SettingsItemType;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -64,7 +64,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.helpers.ImportHelper.getSettingsToOperate;
 
 public class ImportSettingsFragment extends BaseOsmAndFragment
 		implements View.OnClickListener {
@@ -183,7 +182,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
 		Map<ExportSettingsType, List<?>> itemsMap = new HashMap<>();
 		if (settingsItems != null) {
-			itemsMap = getSettingsToOperate(settingsItems, false);
+			itemsMap = SettingsHelper.getSettingsToOperate(settingsItems, false);
 			adapter.updateSettingsList(itemsMap);
 		}
 		expandableList.setAdapter(adapter);

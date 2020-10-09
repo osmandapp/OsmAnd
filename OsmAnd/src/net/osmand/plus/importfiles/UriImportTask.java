@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.importfiles.ImportHelper.ImportType;
 import net.osmand.util.Algorithms;
@@ -61,10 +62,7 @@ class UriImportTask extends BaseImportAsyncTask<Void, Void, String> {
 			if (is != null) {
 				fileSignature = Algorithms.readInt(is);
 				if (isSupportedFileSignature()) {
-					File tempDir = app.getAppPath(TEMP_DIR);
-					if (!tempDir.exists()) {
-						tempDir.mkdirs();
-					}
+					File tempDir = FileUtils.getTempDir(app);
 					tempFileName = getTempFileName();
 					File dest = new File(tempDir, tempFileName);
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.R;
@@ -25,7 +26,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.IndexConstants.TEMP_DIR;
 import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 
 class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> {
@@ -37,8 +37,8 @@ class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> {
 	private CallbackWithObject<List<SettingsItem>> callback;
 
 	public SettingsImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
-	                          @NonNull String name, String latestChanges, int version,
-	                          CallbackWithObject<List<SettingsItem>> callback) {
+							  @NonNull String name, String latestChanges, int version,
+							  CallbackWithObject<List<SettingsItem>> callback) {
 		super(activity);
 		this.uri = uri;
 		this.name = name;
@@ -49,17 +49,14 @@ class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
 	@Override
 	protected String doInBackground(Void... voids) {
-		File tempDir = app.getAppPath(TEMP_DIR);
-		if (!tempDir.exists()) {
-			tempDir.mkdirs();
-		}
+		File tempDir = FileUtils.getTempDir(app);
 		File dest = new File(tempDir, name);
 		return ImportHelper.copyFile(app, dest, uri, true);
 	}
 
 	@Override
 	protected void onPostExecute(String error) {
-		File tempDir = app.getAppPath(TEMP_DIR);
+		File tempDir = FileUtils.getTempDir(app);
 		final File file = new File(tempDir, name);
 		if (error == null && file.exists()) {
 			app.getSettingsHelper().collectSettings(file, latestChanges, version, new SettingsCollectListener() {
