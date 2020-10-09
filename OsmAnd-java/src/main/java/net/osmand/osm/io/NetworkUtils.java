@@ -4,7 +4,6 @@ import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import net.osmand.PlatformUtil;
-import net.osmand.osm.oauth.IInputStreamHttpClient;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
@@ -17,7 +16,7 @@ import java.util.zip.GZIPOutputStream;
 
 public class NetworkUtils {
 	private static final Log log = PlatformUtil.getLog(NetworkUtils.class);
-
+	private static final String GPX_UPLOAD_USER_AGENT = "OsmGPXUploadAgent";
 	private static Proxy proxy = null;
 
 	public static String sendGetRequest(String urlText, String userNamePassword, StringBuilder responseBody){
@@ -76,9 +75,8 @@ public class NetworkUtils {
 				client.getService().signRequest(client.getAccessToken(), req);
 				req.addHeader("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
 				try {
-					IInputStreamHttpClient service = (IInputStreamHttpClient) client.getService();
-					service.execute(service.getUserAgent(), req.getHeaders(), req.getVerb(), req.getCompleteUrl(), fileToUpload);
-					Response r = client.getService().execute(req);
+					Response r = client.getHttpClient().execute(GPX_UPLOAD_USER_AGENT, req.getHeaders(), req.getVerb(),
+							req.getCompleteUrl(), fileToUpload);
 					if (r.getCode() != 200) {
 						return r.getBody();
 					}

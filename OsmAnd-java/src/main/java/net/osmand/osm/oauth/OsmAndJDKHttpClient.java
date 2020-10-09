@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-public class OsmAndJDKHttpClient implements IInputStreamHttpClient {
+public class OsmAndJDKHttpClient implements HttpClient {
 	private static final String BOUNDARY = "CowMooCowMooCowCowCow";
 	private final JDKHttpClientConfig config;
 
@@ -72,8 +72,7 @@ public class OsmAndJDKHttpClient implements IInputStreamHttpClient {
 	                                     OAuthRequest.ResponseConverter<T> converter) {
 		try {
 			final Response response = doExecute(userAgent, headers, httpVerb, completeUrl, bodyType, bodyContents);
-			@SuppressWarnings("unchecked")
-			final T t = converter == null ? (T) response : converter.convert(response);
+			@SuppressWarnings("unchecked") final T t = converter == null ? (T) response : converter.convert(response);
 			if (callback != null) {
 				callback.onCompleted(t);
 			}
@@ -143,11 +142,6 @@ public class OsmAndJDKHttpClient implements IInputStreamHttpClient {
 		}
 	}
 
-	@Override
-	public String getUserAgent() {
-		return "OsmandUserAgent";
-	}
-
 	private enum BodyType {
 		BYTE_ARRAY {
 			@Override
@@ -173,6 +167,7 @@ public class OsmAndJDKHttpClient implements IInputStreamHttpClient {
 				addBody(connection, ((String) bodyContents).getBytes(), requiresBody);
 			}
 		};
+
 		abstract void setBody(HttpURLConnection connection, Object bodyContents, boolean requiresBody)
 				throws IOException;
 	}
@@ -206,10 +201,14 @@ public class OsmAndJDKHttpClient implements IInputStreamHttpClient {
 		if (requiresBody) {
 			String filename = file.getName();
 			String formName = "file";
-			final OutputStream ous = prepareConnectionForBodyAndGetOutputStream(connection, 20 * 1024);
-			ous.write(("--" + BOUNDARY+"\r\n").getBytes());
 			InputStream stream = new FileInputStream(file);
-			ous.write(("content-disposition: form-data; name=\""+formName+"\"; filename=\"" + filename + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+			connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
+			connection.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
+			final OutputStream ous = connection.getOutputStream();
+			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
+			ous.write(("content-disposition: form-data; name=\"" + formName + "\"; filename=\"" + filename + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
 			ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
 			BufferedInputStream bis = new BufferedInputStream(stream, 20 * 1024);
 			ous.flush();
@@ -217,13 +216,13 @@ public class OsmAndJDKHttpClient implements IInputStreamHttpClient {
 			ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
 			ous.flush();
 			Algorithms.closeStream(bis);
-			Algorithms.closeStream(ous);
 		}
 	}
 
 	private static void addBody(HttpURLConnection connection, byte[] content, boolean requiresBody) throws IOException {
 		final int contentLength = content.length;
 		if (requiresBody || contentLength > 0) {
+			connection.setDoOutput(true);
 			final OutputStream outputStream = prepareConnectionForBodyAndGetOutputStream(connection, contentLength);
 			if (contentLength > 0) {
 				outputStream.write(content);
@@ -241,6 +240,7 @@ public class OsmAndJDKHttpClient implements IInputStreamHttpClient {
 		if (requiresBody) {
 			final ByteArrayOutputStream os = MultipartUtils.getPayload(multipartPayload);
 			final int contentLength = os.size();
+			connection.setDoOutput(true);
 			final OutputStream outputStream = prepareConnectionForBodyAndGetOutputStream(connection, contentLength);
 			if (contentLength > 0) {
 				os.writeTo(outputStream);
@@ -254,7 +254,6 @@ public class OsmAndJDKHttpClient implements IInputStreamHttpClient {
 		if (connection.getRequestProperty(CONTENT_TYPE) == null) {
 			connection.setRequestProperty(CONTENT_TYPE, DEFAULT_CONTENT_TYPE);
 		}
-		connection.setDoOutput(true);
 		return connection.getOutputStream();
 	}
 }

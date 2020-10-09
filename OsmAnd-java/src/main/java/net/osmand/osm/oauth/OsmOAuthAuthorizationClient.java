@@ -4,7 +4,6 @@ package net.osmand.osm.oauth;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.builder.api.DefaultApi10a;
 import com.github.scribejava.core.builder.api.OAuth1SignatureType;
-import com.github.scribejava.core.httpclient.jdk.JDKHttpClient;
 import com.github.scribejava.core.httpclient.jdk.JDKHttpClientConfig;
 import com.github.scribejava.core.model.*;
 import com.github.scribejava.core.oauth.OAuth10aService;
@@ -23,12 +22,14 @@ public class OsmOAuthAuthorizationClient {
     private OAuth1RequestToken requestToken;
     private OAuth1AccessToken accessToken;
     private final OAuth10aService service;
+    private final OsmAndJDKHttpClient httpClient;
     public final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationClient.class);
 
     public OsmOAuthAuthorizationClient(String key, String secret) {
+        httpClient = new OsmAndJDKHttpClient(JDKHttpClientConfig.defaultConfig());
         service = new ServiceBuilder(key)
                 .apiSecret(secret)
-                .httpClient(new OsmAndJDKHttpClient(JDKHttpClientConfig.defaultConfig()))
+                .httpClient(httpClient)
                 .callback("osmand-oauth://example.com/oauth")
                 .build(new OsmApi());
     }
@@ -53,6 +54,10 @@ public class OsmOAuthAuthorizationClient {
         protected String getAuthorizationBaseUrl() {
             return "https://www.openstreetmap.org/oauth/authorize";
         }
+    }
+
+    public OsmAndJDKHttpClient getHttpClient() {
+        return httpClient;
     }
 
     public OAuth10aService getService() {
