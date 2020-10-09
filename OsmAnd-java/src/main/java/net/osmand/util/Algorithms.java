@@ -947,4 +947,20 @@ public class Algorithms {
 		}
 		return res;
 	}
+
+	public static boolean isValidMessageFormat(CharSequence sequence) {
+		if (!isEmpty(sequence)) {
+			int counter = 0;
+			for (int i = 0; i < sequence.length(); i++) {
+				char ch = sequence.charAt(i);
+				if (ch == '{') {
+					counter++;
+				} else if (ch == '}') {
+					counter--;
+				}
+			}
+			return counter == 0;
+		}
+		return false;
+	}
 }

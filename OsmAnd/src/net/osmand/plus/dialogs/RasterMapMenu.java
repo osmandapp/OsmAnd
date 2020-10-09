@@ -10,8 +10,9 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarMode;
+import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
@@ -39,9 +40,9 @@ public class RasterMapMenu {
 		final OsmandSettings settings = app.getSettings();
 		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
 		assert plugin != null;
-		final OsmandSettings.CommonPreference<Integer> mapTransparencyPreference;
-		final OsmandSettings.CommonPreference<String> mapTypePreference;
-		final OsmandSettings.CommonPreference<String> exMapTypePreference;
+		final CommonPreference<Integer> mapTransparencyPreference;
+		final CommonPreference<String> mapTypePreference;
+		final CommonPreference<String> exMapTypePreference;
 		final LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
 				type == RasterMapType.OVERLAY ? LayerTransparencySeekbarMode.OVERLAY : LayerTransparencySeekbarMode.UNDERLAY;
 		@StringRes final int mapTypeString;
@@ -62,7 +63,7 @@ public class RasterMapMenu {
 			throw new RuntimeException("Unexpected raster map type");
 		}
 
-		final OsmandSettings.CommonPreference<Boolean> hidePolygonsPref =
+		final CommonPreference<Boolean> hidePolygonsPref =
 				mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
 
 		String mapTypeDescr = mapTypePreference.get();
@@ -181,8 +182,8 @@ public class RasterMapMenu {
 
 	@NonNull
 	public static Boolean isSeekbarVisible(OsmandApplication app, RasterMapType type) {
-		final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
-				type == RasterMapType.OVERLAY ? OsmandSettings.LayerTransparencySeekbarMode.OVERLAY : OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
+		final LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
+				type == RasterMapType.OVERLAY ? LayerTransparencySeekbarMode.OVERLAY : LayerTransparencySeekbarMode.UNDERLAY;
 		LayerTransparencySeekbarMode seekbarMode = app.getSettings().LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		return seekbarMode == LayerTransparencySeekbarMode.UNDEFINED || seekbarMode == currentMapTypeSeekbarMode;
 	}

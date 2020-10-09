@@ -385,15 +385,15 @@
 \nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible. 
 \n 
 \nDescarga las teselas de los mapas directamente en línea, o prepáralo para su uso sin conexión (copiar manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros.</string>
-    <string name="record_plugin_description">Este complemento activa la funcionalidad para registrar y guardar tus trazas manualmente pulsando el widget de grabación GPX en el mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX.
-\n 
+    <string name="record_plugin_description">Activa la funcionalidad para registrar y guardar tus trazas manualmente pulsando el widget de grabación GPX en el mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX.
+\n
 \nLas trazas grabadas pueden ser compartidas con tus amigos o ser usadas para contribuir a OSM. Los atletas pueden usar las trazas grabadas para seguir sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente en OsmAnd, como tiempos por vuelta, velocidad media, etc., y por supuesto las trazas pueden analizarse posteriormente con herramientas de análisis de terceros.</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
-    <string name="osmand_srtm_long_description_1000_chars">Este complemento proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
-\n 
+    <string name="osmand_srtm_long_description_1000_chars">Proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
+\n
 \nLos datos globales (entre 70° norte y 70° sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
-    <string name="srtm_plugin_description">Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje. (Note que las curvas de nivel y/o los datos de relieve están disponibles en descargas adicionales separadas luego de activar el complemento.) 
-\n 
+    <string name="srtm_plugin_description">Proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje. (Note que las curvas de nivel y/o los datos de relieve están disponibles en descargas adicionales separadas luego de activar el complemento.)
+\n
 \nLos datos globales (entre 70° norte y 70° sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
     <string name="plugin_touringview_descr">Activando esta vista cambia el estilo del mapa OsmAnd a la «Vista turística», que es una vista de alto detalle especial para viajeros y conductores profesionales. 
 \n 
@@ -406,13 +406,13 @@
 \nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar. 
 \n 
 \nEsta vista puede ser revertida desactivando de nuevo aquí, o cambiando el «Estilo del mapa» desde «Configurar mapa» cuando lo desees.</string>
-    <string name="plugin_nautical_descr">Este complemento enriquece el mapa y la navegación de OsmAnd al producir también mapas náuticos para el canotaje, vela y otros tipos de deportes acuáticos. 
-\n 
-\nUn mapa especial complementado para OsmAnd proporcionará toda las marcas de navegación náutica y símbolos cartográficos para el interior, así como para la navegación cerca de la costa. La descripción de cada marca de navegación proporciona los datos necesarios para su identificación y su significado (categoría, forma, color, número, referencia, etc.). 
-\n 
+    <string name="plugin_nautical_descr">Enriquece el mapa y la navegación de OsmAnd al producir también mapas náuticos para el canotaje, vela y otros tipos de deportes acuáticos.
+\n
+\nUn mapa especial complementado para OsmAnd proporcionará toda las marcas de navegación náutica y símbolos cartográficos para el interior, así como para la navegación cerca de la costa. La descripción de cada marca de navegación proporciona los datos necesarios para su identificación y su significado (categoría, forma, color, número, referencia, etc.).
+\n
 \nPara volver a uno de los estilos del mapas convencionales de OsmAnd, simplemente desactiva este complemento de nuevo, o cambia el «Estilo del mapa» en «Configurar mapa» cuando lo desees.</string>
-    <string name="plugin_ski_descr">Este complemento para OsmAnd pone a tu alcance detalles sobre pistas de esquí de descenso, de travesía, rutas de esquí alpino, teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran por código de color en función de su dificultad y representados con un estilo del mapa especial «Invierno» que lo asemeja a un paisaje invernal nevado. 
-\n 
+    <string name="plugin_ski_descr">Detalles sobre pistas de esquí de descenso, de travesía, rutas de esquí alpino, teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran por código de color en función de su dificultad y representados con un estilo del mapa especial «Invierno» que lo asemeja a un paisaje invernal nevado.
+\n
 \nActivando esta vista, cambia el estilo del mapa a «Invierno y esquí», mostrando las características del terreno en condiciones invernales. Esta vista se puede revertir desactivando de nuevo aquí o cambiando el «Estilo del mapa» en «Configurar mapa» cuando lo desees.</string>
     <string name="audionotes_plugin_description">Toma notas de audio, fotografía y/o video durante un viaje, usando un botón en el mapa o el menú contextual de la ubicación.</string>
     <string name="osmand_parking_plugin_description">Registra dónde se ha estacionado el automóvil, incluyendo cuánto tiempo queda. 
@@ -3907,4 +3907,14 @@
     <string name="sort_last_modified">Último modificado</string>
     <string name="sort_name_descending">Nombre: Z – A</string>
     <string name="sort_name_ascending">Nombre: A – Z</string>
+    <string name="start_finish_icons">Iconos de inicio/fin</string>
+    <string name="contour_lines_thanks">Gracias por comprar las «Curvas de nivel»</string>
+    <string name="osm_live_payment_desc_hw">La suscripción se cobra por el período elegido. Puedes cancelarlo en cualquier momento en AppGallery.</string>
+    <string name="osm_live_payment_subscription_management_hw">El pago será cargado a la cuenta de AppGallery al confirmar la compra.
+\n
+\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. La cuenta será cargada por el período de renovación (mes/trimestre/año) sólo en la fecha de renovación.
+\n
+\nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Evita pasar por las veredas o aceras</string>
+    <string name="routing_attr_avoid_footways_name">Evitar veredas/aceras</string>
 </resources>

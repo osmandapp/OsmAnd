@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -86,7 +87,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		if (CONFIGURE_PROFILE.equals(key)) {
 			View selectedProfile = holder.itemView.findViewById(R.id.selectable_list_item);
 			if (selectedProfile != null) {
-				int activeProfileColor = getActiveProfileColor();
+				int activeProfileColorId = getSelectedAppMode().getIconColorInfo().getColor(isNightMode());
+				int activeProfileColor = ContextCompat.getColor(app, activeProfileColorId);
 				Drawable backgroundDrawable = new ColorDrawable(UiUtilities.getColorWithAlpha(activeProfileColor, 0.15f));
 				AndroidUtils.setBackground(selectedProfile, backgroundDrawable);
 			}
@@ -153,9 +155,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		ApplicationMode selectedMode = app.getSettings().APPLICATION_MODE.get();
 		String title = selectedMode.toHumanString();
 		String profileType = getAppModeDescription(getContext(), selectedMode);
-		int iconRes = selectedMode.getIconRes();
 		Preference configureProfile = findPreference(CONFIGURE_PROFILE);
-		configureProfile.setIcon(getPaintedIcon(iconRes, getActiveProfileColor()));
+		configureProfile.setIcon(getAppProfilesIcon(selectedMode, true));
 		configureProfile.setTitle(title);
 		configureProfile.setSummary(profileType);
 	}

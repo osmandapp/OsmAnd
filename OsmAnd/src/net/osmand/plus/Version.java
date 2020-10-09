@@ -1,12 +1,14 @@
 package net.osmand.plus;
 
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import android.content.pm.PackageInfo;
-import 	android.content.pm.PackageManager;
+import android.content.pm.PackageManager;
 
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class Version {
 	
@@ -121,8 +123,8 @@ public class Version {
 	public static boolean isFreeVersion(OsmandApplication ctx){
 		return ctx.getPackageName().equals(FREE_VERSION_NAME) || 
 				ctx.getPackageName().equals(FREE_DEV_VERSION_NAME) ||
-				ctx.getPackageName().equals(FREE_CUSTOM_VERSION_NAME)
-				;
+				ctx.getPackageName().equals(FREE_CUSTOM_VERSION_NAME) ||
+				isHuawei(ctx);
 	}
 
 	public static boolean isPaidVersion(OsmandApplication ctx) {
@@ -149,4 +151,21 @@ public class Version {
 		return v;
 	}
 
+	public static boolean isOpenGlAvailable(OsmandApplication app) {
+		if ("qnx".equals(System.getProperty("os.name"))) {
+			return false;
+		}
+		File nativeLibraryDir = new File(app.getApplicationInfo().nativeLibraryDir);
+		if (nativeLibraryDir.exists() && nativeLibraryDir.canRead()) {
+			File[] files = nativeLibraryDir.listFiles();
+			if (files != null) {
+				for (File file : files) {
+					if ("libOsmAndCoreWithJNI.so".equals(file.getName())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 }

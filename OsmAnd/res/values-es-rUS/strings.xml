@@ -3904,4 +3904,14 @@
     <string name="sort_name_descending">Nombre: Z – A</string>
     <string name="sort_name_ascending">Nombre: A – Z</string>
     <string name="sort_last_modified">Último modificado</string>
+    <string name="start_finish_icons">Iconos de inicio/fin</string>
+    <string name="contour_lines_thanks">Gracias por comprar las «Curvas de nivel»</string>
+    <string name="osm_live_payment_desc_hw">La suscripción se cobra por el período elegido. Puedes cancelarlo en cualquier momento en AppGallery.</string>
+    <string name="osm_live_payment_subscription_management_hw">El pago será cargado a la cuenta de AppGallery al confirmar la compra.
+\n
+\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. La cuenta será cargada por el período de renovación (mes/trimestre/año) sólo en la fecha de renovación.
+\n
+\nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Evita pasar por aceras o veredas</string>
+    <string name="routing_attr_avoid_footways_name">Evitar aceras</string>
 </resources>

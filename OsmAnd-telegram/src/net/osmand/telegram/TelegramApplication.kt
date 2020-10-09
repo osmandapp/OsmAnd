@@ -3,16 +3,20 @@ package net.osmand.telegram
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
 import android.os.Handler
+import net.osmand.PlatformUtil
+import net.osmand.telegram.ui.TrackerLogcatActivity
 import net.osmand.telegram.helpers.*
 import net.osmand.telegram.helpers.OsmandAidlHelper.OsmandHelperListener
 import net.osmand.telegram.helpers.OsmandAidlHelper.UpdatesListener
 import net.osmand.telegram.notifications.NotificationHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.UiUtils
+import java.io.File
 
 class TelegramApplication : Application() {
 
@@ -199,5 +203,34 @@ class TelegramApplication : Application() {
 
 	fun runInUIThread(action: (() -> Unit), delay: Long) {
 		uiHandler.postDelayed(action, delay)
+	}
+
+	fun sendCrashLog(file: File) {
+		val intent = Intent(Intent.ACTION_SEND)
+		intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("crash@osmand.net"))
+		intent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(this, file))
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+		intent.type = "vnd.android.cursor.dir/email"
+		intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug")
+		val text = StringBuilder()
+		text.append("\nDevice : ").append(Build.DEVICE)
+		text.append("\nBrand : ").append(Build.BRAND)
+		text.append("\nModel : ").append(Build.MODEL)
+		text.append("\nProduct : ").append(Build.PRODUCT)
+		text.append("\nBuild : ").append(Build.DISPLAY)
+		text.append("\nVersion : ").append(Build.VERSION.RELEASE)
+		text.append("\nApp : ").append(getString(R.string.app_name_short))
+		try {
+			val info = packageManager.getPackageInfo(packageName, 0)
+			if (info != null) {
+				text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode)
+			}
+		} catch (e: PackageManager.NameNotFoundException) {
+			PlatformUtil.getLog(TrackerLogcatActivity::class.java).error("", e)
+		}
+		intent.putExtra(Intent.EXTRA_TEXT, text.toString())
+		val chooserIntent = Intent.createChooser(intent, getString(R.string.send_report))
+		chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+		startActivity(chooserIntent)
 	}
 }

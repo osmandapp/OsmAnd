@@ -524,7 +524,7 @@
     <string name="poi_fuel_octane_95">Oktaan 95</string>
     <string name="poi_fuel_octane_98">Oktaan 98</string>
     <string name="poi_fuel_octane_100">Oktaan 100</string>
-    <string name="poi_fuel_cng">CNG</string>
+    <string name="poi_fuel_cng">Surugaas</string>
     <string name="poi_fuel_1_25">1:25 kütus</string>
     <string name="poi_fuel_1_50">1:50 kütus</string>
     <string name="poi_fuel_ethanol">Etanool</string>
@@ -3826,4 +3826,5 @@
     <string name="poi_recycling_small_electrical_appliances">Väikesed elektriseadmed</string>
     <string name="poi_beehive">Mesitaru</string>
     <string name="poi_nuts">Pähklipood</string>
+    <string name="poi_fuel_lng">Veeldatud maagaas</string>
 </resources>

@@ -721,9 +721,9 @@
     <string name="gpx_option_reverse_route">عكس اتجاه المسار</string>
     <string name="gpx_option_destination_point">استخدم الوجهة الحالية</string>
     <string name="gpx_option_from_start_point">يمر على طول المسار باكمله</string>
-    <string name="switch_to_vector_map_to_see">خريطة التنقل متوفرة حالياً لهذا الموقع.
+    <string name="switch_to_vector_map_to_see">خريطة التنقل متوفرة لهذا الموقع فعلها عبر
 \n
-\nلتفعليها \'القائمة\' ← \'ضبط الخريطة\' ← \'مصدر الخريطة\' ← \'الخريطة المحملة\'.</string>
+\n\'القائمة\' ← \'ضبط الخريطة\' ← \'مصدر الخريطة\' ← \'الخريطة المحملة\'.</string>
     <string name="choose_audio_stream">مصدر التوجيه الصوتي</string>
     <string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي.</string>
     <string name="voice_stream_voice_call">صوت المكالمة الهاتفية ( كما يحاول قطع ستريو بلوتوث السيارة )</string>
@@ -1074,7 +1074,7 @@
     <string name="rendering_category_routes">المسارات الرياضية</string>
     <string name="rendering_category_transport">وسائل المواصلات</string>
     <string name="rendering_category_others">سمات أخرى للخريطة</string>
-    <string name="map_widget_appearance_rem">العناصر الاخرى</string>
+    <string name="map_widget_appearance_rem">العناصر الأخرى</string>
     <string name="map_widget_top">شريط المعلومات</string>
     <string name="map_widget_right">العدادات على اليمين</string>
     <string name="map_widget_left">العدادات على اليسار</string>
@@ -1645,7 +1645,7 @@
     <string name="road_blocked">الطريق محظور</string>
     <string name="shared_string_select">تحديد</string>
     <string name="switch_start_finish">اعكس نقطة الانطلاق والوصول</string>
-    <string name="rendering_attr_hideIcons_name">أيقونات POI</string>
+    <string name="rendering_attr_hideIcons_name">أيقونات نقاط الاهتمام</string>
     <string name="shared_string_type">النوع</string>
     <string name="shared_string_not_selected">غير محدد</string>
     <string name="rec_split">قسم مسجل</string>
@@ -1972,7 +1972,7 @@
     <string name="sd_unmounted">بطاقة الذاكرة غير متاحة. 
 \nلن تكون قادرا على رؤية الخرائط أو العثور على أماكن.</string>
     <string name="sd_mounted_ro">بطاقة الذاكرة في وضع القراءة فقط.
-\n يمكنك فقط مشاهدة الخريطة المحملة مسبقا ولا يمكنك التحميل من الإنترنت.</string>
+\n يمكنك فقط مشاهدة الخريطة المحملة مسبقاً ولا يمكنك التحميل من الإنترنت.</string>
     <string name="route_tshr">انعطف يميناً بشكل حاد</string>
     <string name="route_tshl">انعطف يساراً بشكل حاد</string>
     <string name="route_tu">قم بالدوران وواصل</string>
@@ -3413,7 +3413,7 @@
     <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
     <string name="button_rate">قيم</string>
     <string name="select_map_icon_descr">تظهر أيقونة الخريطة فقط على الخريطة ، وتتغير أثناء التنقل إلى أيقونة التنقل.</string>
-    <string name="logcat_buffer_descr">تحقق وتبادل سجلات مفصلة من التطبيق</string>
+    <string name="logcat_buffer_descr">التحقق من السجلات التفصيلية للتطبيق ومشاركتها</string>
     <string name="search_offline_geo_error">تعذر تحليل الهدف الجغرافي \'%s\'.</string>
     <string name="permission_is_required">الإذن مطلوب لاستخدام هذا الخيار.</string>
     <string name="monitoring_min_speed_descr_side_effect">اعراض جانبية: سيفقد المسار الخاص بك جميع الأقسام التي لم يتحقق فيها معيار الحد الأدنى للسرعة (على سبيل المثال ، حيث تدفع دراجتك أعلى تل شديد الانحدار). أيضا ، لن تكون هناك معلومات حول فترات الراحة ، مثل الاستراحات. هذا له تأثيرات على أي تحليل أو مرحلة ما بعد المعالجة ، مثل عند محاولة تحديد المدة الإجمالية لرحلتك ، أو وقت الحركة ، أو متوسط سرعتك.</string>
@@ -3891,4 +3891,14 @@
     <string name="sort_last_modified">آخر تعديل</string>
     <string name="sort_name_descending">الاسم: أ – ي</string>
     <string name="sort_name_ascending">الاسم: أ – ي</string>
+    <string name="start_finish_icons">رموز البدء/الانتهاء</string>
+    <string name="contour_lines_thanks">شكرا لشرائك \"خطوط الكنتور\"</string>
+    <string name="osm_live_payment_desc_hw">رسوم الاشتراك ستفرض كل شهر. يمكنك إلغاء اشتراكك متى أردت عبر Google play.</string>
+    <string name="osm_live_payment_subscription_management_hw">سيتم تحصيل المبلغ على حساب AppGallery الخاص بك عند تأكيد الشراء.
+\n
+\nيتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل تاريخ التجديد. سيتم خصم حسابك على فترة التجديد (شهر/ثلاثة أشهر/سنة) فقط في تاريخ التجديد.
+\n
+\nيمكنك إدارة وإلغاء الاشتراكات الخاصة بك عن طريق الانتقال إلى إعدادات AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">تجنب الممرات</string>
+    <string name="routing_attr_avoid_footways_name">تجنب الممرات</string>
 </resources>

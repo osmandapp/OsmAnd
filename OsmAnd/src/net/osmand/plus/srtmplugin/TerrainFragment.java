@@ -43,7 +43,6 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.TerrainMode;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
@@ -55,8 +54,8 @@ import java.util.List;
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType.*;
 import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
-import static net.osmand.plus.settings.backend.OsmandSettings.TerrainMode.HILLSHADE;
-import static net.osmand.plus.settings.backend.OsmandSettings.TerrainMode.SLOPE;
+import static net.osmand.plus.srtmplugin.TerrainMode.HILLSHADE;
+import static net.osmand.plus.srtmplugin.TerrainMode.SLOPE;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.TERRAIN_MAX_ZOOM;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.TERRAIN_MIN_ZOOM;
 

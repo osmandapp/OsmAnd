@@ -270,4 +270,8 @@
     <string name="last_response_duration">最後回應：%1$s 前</string>
     <string name="duration_ago">%1$s 前</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="send_report">傳送報告</string>
+    <string name="shared_string_export">匯出</string>
+    <string name="logcat_buffer">Logcat 緩衝</string>
+    <string name="logcat_buffer_descr">檢查及分享應用程式的詳細紀錄</string>
 </resources>

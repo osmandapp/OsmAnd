@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -23,11 +24,11 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
@@ -35,6 +36,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
@@ -172,8 +175,20 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		cat.setTitle(R.string.live_monitoring_m);
 		grp.addPreference(cat);
 
-		cat.addPreference(createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
-				R.string.live_monitoring_url_descr));
+		EditTextPreference urlPreference = createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
+				R.string.live_monitoring_url_descr);
+		urlPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				if (Algorithms.isValidMessageFormat((String) newValue)) {
+					return SettingsMonitoringActivity.super.onPreferenceChange(preference, newValue);
+				} else {
+					Toast.makeText(SettingsMonitoringActivity.this, R.string.wrong_format, Toast.LENGTH_SHORT).show();
+					return false;
+				}
+			}
+		});
+		cat.addPreference(urlPreference);
 		final CheckBoxPreference liveMonitoring = createCheckBoxPreference(settings.LIVE_MONITORING, R.string.live_monitoring_m,
 				R.string.live_monitoring_m_descr);
 		cat.addPreference(liveMonitoring);

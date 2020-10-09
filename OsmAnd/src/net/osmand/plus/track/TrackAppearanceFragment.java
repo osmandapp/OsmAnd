@@ -41,7 +41,7 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.render.RenderingRulesStorage;
@@ -185,7 +185,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		}
 		if (color == 0) {
 			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			OsmandSettings.CommonPreference<String> prefColor = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
+			CommonPreference<String> prefColor = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
 			color = GpxAppearanceAdapter.parseTrackColor(renderer, prefColor.get());
 		}
 		trackDrawInfo.setColor(color);

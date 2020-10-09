@@ -268,4 +268,8 @@
     <string name="last_response_duration">תגובה אחרונה: לפני %1$s</string>
     <string name="duration_ago">לפני %1$s</string>
     <string name="shared_string_error_short">שגיאה</string>
+    <string name="shared_string_export">ייצוא</string>
+    <string name="logcat_buffer">מכלא Logcat</string>
+    <string name="logcat_buffer_descr">בדיקה ושיתוף יומני תיעוד מפורטים של היישומים</string>
+    <string name="send_report">שליחת דיווח</string>
 </resources>

@@ -22,9 +22,12 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.helpers.enums.AngularConstants;
+import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.DrivingRegion;
+import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -123,7 +126,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		if (settings.isSystemDefaultThemeUsedForMode(mode)) {
 			iconId = R.drawable.ic_action_android;
 		} else {
-			iconId = settings.isLightContent() ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;
+			iconId = settings.isLightContentForMode(mode) ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;
 		}
 		return getActiveIcon(iconId);
 	}
@@ -186,7 +189,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupUnitsOfLengthPref() {
-		OsmandSettings.MetricsConstants[] metricsConstants = OsmandSettings.MetricsConstants.values();
+		MetricsConstants[] metricsConstants = MetricsConstants.values();
 		String[] entries = new String[metricsConstants.length];
 		Integer[] entryValues = new Integer[metricsConstants.length];
 
@@ -208,20 +211,20 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupAngularUnitsPref() {
-		OsmandSettings.AngularConstants[] ac = OsmandSettings.AngularConstants.values();
+		AngularConstants[] ac = AngularConstants.values();
 		String[] entries = new String[ac.length];
 		Integer[] entryValues = new Integer[ac.length];
 
 		for (int i = 0; i < entries.length; i++) {
-			if (ac[i] == OsmandSettings.AngularConstants.DEGREES) {
-				entries[i] = OsmandSettings.AngularConstants.DEGREES.toHumanString(app) + " 180";
-				entryValues[i] = OsmandSettings.AngularConstants.DEGREES.ordinal();
-			} else if (ac[i] == OsmandSettings.AngularConstants.DEGREES360) {
-				entries[i] = OsmandSettings.AngularConstants.DEGREES.toHumanString(app) + " 360";
-				entryValues[i] = OsmandSettings.AngularConstants.DEGREES360.ordinal();
+			if (ac[i] == AngularConstants.DEGREES) {
+				entries[i] = AngularConstants.DEGREES.toHumanString(app) + " 180";
+				entryValues[i] = AngularConstants.DEGREES.ordinal();
+			} else if (ac[i] == AngularConstants.DEGREES360) {
+				entries[i] = AngularConstants.DEGREES.toHumanString(app) + " 360";
+				entryValues[i] = AngularConstants.DEGREES360.ordinal();
 			} else {
 				entries[i] = ac[i].toHumanString(app);
-				entryValues[i] = OsmandSettings.AngularConstants.MILLIRADS.ordinal();
+				entryValues[i] = AngularConstants.MILLIRADS.ordinal();
 			}
 		}
 
@@ -232,7 +235,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupSpeedSystemPref() {
-		OsmandSettings.SpeedConstants[] speedConstants = OsmandSettings.SpeedConstants.values();
+		SpeedConstants[] speedConstants = SpeedConstants.values();
 		String[] entries = new String[speedConstants.length];
 		Integer[] entryValues = new Integer[speedConstants.length];
 
@@ -377,14 +380,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 				if (mapViewTrackingUtilities != null) {
 					mapViewTrackingUtilities.resetDrivingRegionUpdate();
 				}
-			} else if (newValue instanceof OsmandSettings.DrivingRegion) {
+			} else if (newValue instanceof DrivingRegion) {
 				applyPreference(settings.DRIVING_REGION_AUTOMATIC.getId(), applyToAllProfiles, false);
 				if (applyToAllProfiles) {
 					for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-						settings.DRIVING_REGION.setModeValue(appMode, (OsmandSettings.DrivingRegion) newValue);
+						settings.DRIVING_REGION.setModeValue(appMode, (DrivingRegion) newValue);
 					}
 				} else {
-					settings.DRIVING_REGION.setModeValue(selectedMode, (OsmandSettings.DrivingRegion) newValue);
+					settings.DRIVING_REGION.setModeValue(selectedMode, (DrivingRegion) newValue);
 				}
 			}
 			updateAllSettings();

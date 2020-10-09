@@ -2,14 +2,14 @@ package net.osmand.plus.views.mapwidgets.widgetstates;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandPreference;
 
 public class BearingWidgetState extends WidgetState {
 
 	public static final int BEARING_WIDGET_STATE_RELATIVE_BEARING = R.id.bearing_widget_state_relative_bearing;
 	public static final int BEARING_WIDGET_STATE_MAGNETIC_BEARING = R.id.bearing_widget_state_magnetic_bearing;
 
-	private final OsmandSettings.OsmandPreference<Boolean> showRelativeBearing;
+	private final OsmandPreference<Boolean> showRelativeBearing;
 
 	public BearingWidgetState(OsmandApplication ctx) {
 		super(ctx);

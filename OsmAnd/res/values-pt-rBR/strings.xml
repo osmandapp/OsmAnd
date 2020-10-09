@@ -3427,7 +3427,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ícone mostrado ao navegar ou mover.</string>
     <string name="select_map_icon_descr">Ícone mostrado em repouso.</string>
-    <string name="logcat_buffer_descr">Verifique e compartilhe logs detalhados do aplicativo</string>
+    <string name="logcat_buffer_descr">Verifique e compartilhe registros detalhados do aplicativo</string>
     <string name="search_offline_geo_error">Não foi possível analisar a intenção geográfica \'%s\'.</string>
     <string name="permission_is_required">É necessária permissão para usar esta opção.</string>
     <string name="monitoring_min_speed_descr">Este é um filtro de corte de baixa velocidade para não registrar pontos abaixo de uma determinada velocidade. Isso pode fazer com que as faixas gravadas pareçam mais suaves quando visualizadas no mapa.</string>
@@ -3899,4 +3899,14 @@
     <string name="sort_last_modified">Última modificação</string>
     <string name="sort_name_descending">Nome: Z – A</string>
     <string name="sort_name_ascending">Nome: A – Z</string>
+    <string name="start_finish_icons">Ícones de início/término</string>
+    <string name="contour_lines_thanks">Obrigado por adquirir \'curvas de nível\'</string>
+    <string name="osm_live_payment_desc_hw">Assinatura cobrada por período selecionado. Cancele no AppGallery a qualquer momento.</string>
+    <string name="osm_live_payment_subscription_management_hw">O pagamento será cobrado em sua conta AppGallery na confirmação da compra.
+\n
+\nA assinatura é renovada automaticamente, a menos que seja cancelada antes da data de renovação. Sua conta será cobrada pelo período de renovação (mês/três meses/ano) apenas na data de renovação.
+\n
+\nVocê pode gerenciar e cancelar suas assinaturas acessando as configurações do AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Evite passarelas</string>
+    <string name="routing_attr_avoid_footways_name">Evite passarelas</string>
 </resources>

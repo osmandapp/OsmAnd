@@ -23,6 +23,7 @@ import androidx.fragment.app.DialogFragment;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.download.AbstractDownloadActivity;
@@ -85,7 +86,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final long lastCheck = preferenceLastCheck(fileName, getSettings()).get();
 
 
-		OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(fileName,
+		CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(fileName,
 				getSettings());
 		if (preference.get() && lastCheck != DEFAULT_LAST_CHECK) {
 			String lastCheckString = formatDateTime(getActivity(), lastCheck);
@@ -94,13 +95,13 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 			lastUpdateTextView.setVisibility(View.GONE);
 		}
 
-		final OsmandSettings.CommonPreference<Boolean> liveUpdatePreference =
+		final CommonPreference<Boolean> liveUpdatePreference =
 				preferenceForLocalIndex(fileName, getSettings());
-		final OsmandSettings.CommonPreference<Boolean> downloadViaWiFiPreference =
+		final CommonPreference<Boolean> downloadViaWiFiPreference =
 				preferenceDownloadViaWiFi(fileName, getSettings());
-		final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
+		final CommonPreference<Integer> updateFrequencyPreference =
 				preferenceUpdateFrequency(fileName, getSettings());
-		final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
+		final CommonPreference<Integer> timeOfDayPreference =
 				preferenceTimeOfDayToUpdate(fileName, getSettings());
 
 		downloadOverWiFiCheckBox.setChecked(!liveUpdatePreference.get() || downloadViaWiFiPreference.get());

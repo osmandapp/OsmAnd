@@ -26,9 +26,11 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -80,6 +82,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
@@ -129,11 +132,13 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.FavouritesDbHelper.FILE_TO_SAVE;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_LANES;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_NAME;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DISTANCE;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_IMMINENT;
+import static net.osmand.plus.settings.backend.SettingsHelper.REPLACE_KEY;
 
 public class OsmandAidlApi {
 
@@ -204,7 +209,7 @@ public class OsmandAidlApi {
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
-	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[] {
+	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
 			ApplicationMode.CAR,
 			ApplicationMode.BICYCLE,
 			ApplicationMode.PEDESTRIAN
@@ -284,7 +289,7 @@ public class OsmandAidlApi {
 	}
 
 	private void initOsmandTelegram() {
-		String[] packages = new String[] {"net.osmand.telegram", "net.osmand.telegram.debug"};
+		String[] packages = new String[]{"net.osmand.telegram", "net.osmand.telegram.debug"};
 		Intent intent = new Intent("net.osmand.telegram.InitApp");
 		for (String pack : packages) {
 			intent.setComponent(new ComponentName(pack, "net.osmand.telegram.InitAppBroadcastReceiver"));
@@ -1015,7 +1020,7 @@ public class OsmandAidlApi {
 				}
 				if (!newName.equals(f.getName()) || !newDescription.equals(f.getDescription()) ||
 						!newCategory.equals(f.getCategory()) || !newAddress.equals(f.getAddress())) {
-					favoritesHelper.editFavouriteName(f, newName, newCategory, newDescription,newAddress);
+					favoritesHelper.editFavouriteName(f, newName, newCategory, newDescription, newAddress);
 				}
 				refreshMap();
 				return true;
@@ -2260,6 +2265,21 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	public boolean importProfileV2(final Uri profileUri, ArrayList<String> settingsTypeKeys, boolean replace,
+	                               String latestChanges, int version) {
+		if (profileUri != null) {
+			Bundle bundle = new Bundle();
+			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, settingsTypeKeys);
+			bundle.putBoolean(REPLACE_KEY, replace);
+			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
+			bundle.putInt(SettingsHelper.SETTINGS_VERSION_KEY, version);
+
+			MapActivity.launchMapActivityMoveToTop(app, null, profileUri, bundle);
+			return true;
+		}
+		return false;
+	}
+
 	public void registerLayerContextMenu(ContextMenuAdapter adapter, MapActivity mapActivity) {
 		for (ConnectedApp connectedApp : getConnectedApps()) {
 			if (!connectedApp.getLayers().isEmpty()) {
@@ -2323,6 +2343,25 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	public boolean exportProfile(String appModeKey, List<String> settingsTypesKeys) {
+		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
+		if (app != null && appMode != null) {
+			List<ExportSettingsType> settingsTypes = new ArrayList<>();
+			for (String key : settingsTypesKeys) {
+				settingsTypes.add(ExportSettingsType.valueOf(key));
+			}
+			List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
+			settingsItems.add(new SettingsHelper.ProfileSettingsItem(app, appMode));
+			File exportDir = app.getSettings().getExternalStorageDirectory();
+			String fileName = appMode.toHumanString();
+			SettingsHelper settingsHelper = app.getSettingsHelper();
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsHelper.getAdditionalData(), settingsTypes));
+			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
+			return true;
+		}
+		return false;
+	}
+
 	private static class FileCopyInfo {
 		long startTime;
 		long lastAccessTime;
@@ -2349,13 +2388,35 @@ public class OsmandAidlApi {
 		}
 	}
 
-	private int copyFileImpl(String fileName, byte[] filePartData, long startTime, boolean done, String destinationDir) {
-		File file = app.getAppPath(IndexConstants.TEMP_DIR + fileName);
-		File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-		if (!tempDir.exists()) {
-			tempDir.mkdirs();
+	int copyFileV2(String destinationDir, String fileName, byte[] filePartData, long startTime, boolean done) {
+		if (Algorithms.isEmpty(fileName) || filePartData == null) {
+			return COPY_FILE_PARAMS_ERROR;
 		}
-		File destFile = app.getAppPath(destinationDir + fileName);
+		if (filePartData.length > COPY_FILE_PART_SIZE_LIMIT) {
+			return COPY_FILE_PART_SIZE_LIMIT_ERROR;
+		}
+		int result = copyFileImpl(fileName, filePartData, startTime, done, destinationDir);
+		if (done) {
+			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) && IndexConstants.MAPS_PATH.equals(destinationDir)) {
+				app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+				app.getDownloadThread().updateLoadedFiles();
+			} else if (fileName.endsWith(IndexConstants.GPX_FILE_EXT)) {
+				if (destinationDir.startsWith(IndexConstants.GPX_INDEX_DIR)
+						&& !FILE_TO_SAVE.equals(fileName)) {
+					destinationDir = destinationDir.replaceFirst(IndexConstants.GPX_INDEX_DIR, "");
+					showGpx(new File(destinationDir, fileName).getPath());
+				} else if (destinationDir.isEmpty() && FILE_TO_SAVE.equals(fileName)) {
+					app.getFavorites().loadFavorites();
+				}
+			}
+		}
+		return result;
+	}
+
+	private int copyFileImpl(String fileName, byte[] filePartData, long startTime, boolean done, String destinationDir) {
+		File tempDir = FileUtils.getTempDir(app);
+		File file = new File(tempDir, fileName);
+		File destFile = app.getAppPath(new File(destinationDir, fileName).getPath());
 		long currentTime = System.currentTimeMillis();
 		try {
 			FileCopyInfo info = copyFilesCache.get(fileName);

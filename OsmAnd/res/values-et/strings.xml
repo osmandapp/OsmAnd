@@ -40,7 +40,7 @@
     <string name="shared_string_control_start">Start</string>
     <string name="shared_string_control_stop">Stop</string>
     <string name="shared_string_import">Import</string>
-    <string name="shared_string_export">Eksport</string>
+    <string name="shared_string_export">Ekspordi</string>
     <string name="shared_string_more">Veel…</string>
     <string name="shared_string_more_actions">Veel tegevusi</string>
     <string name="shared_string_do_not_show_again">Ära enam näita</string>
@@ -910,7 +910,7 @@
     <string name="route_parameters_descr">Seadista teekonna parameetrid</string>
     <string name="route_parameters">Teekonna parameetrid</string>
     <string name="application_profile_changed">Rakenduse profiiliks muudetud \"%s\"</string>
-    <string name="logcat_buffer">Logcat puhver</string>
+    <string name="logcat_buffer">Logcati puhver</string>
     <string name="plugins_settings">Laienduse seaded</string>
     <string name="shared_string_by_default">Vaikimisi</string>
     <string name="download_detailed_map">Selle ala vaatlemiseks lae alla üksikasjalik %s kaart.</string>
@@ -3364,7 +3364,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikooni kuvatakse vaid navigeerimise või liikumise ajal.</string>
     <string name="select_map_icon_descr">Peatumisel näidatav ikoon.</string>
-    <string name="logcat_buffer_descr">Kontrolli ja jaga rakenduse detailseid logisid</string>
+    <string name="logcat_buffer_descr">Vaata ja jaga rakenduse detailseid logisid</string>
     <string name="search_offline_geo_error">Geokavatsuse väärtusest \'%s\' ei saanud aru.</string>
     <string name="permission_is_required">Selle valiku kasutamine vajab luba.</string>
     <string name="monitoring_min_speed_descr">See on madala kiirusega väljalülitusfilter, et mitte salvestada punkte, mis jäävad alla teatud kiiruse. See võib muuta salvestatud rajad kaardil vaadates sujuvamaks.</string>
@@ -3497,7 +3497,7 @@
     <string name="custom_color">Kohandatud värv</string>
     <string name="set_working_days_to_continue">Jätkamiseks vali tööpäevad</string>
     <string name="route_between_points">Teekond punktide vahel</string>
-    <string name="plan_a_route">Kavanda teekonda</string>
+    <string name="plan_a_route">Kavanda teekond</string>
     <string name="add_to_a_track">Lisa rajale</string>
     <string name="track_show_start_finish_icons">Näita alguse ja lõpu ikoone</string>
     <string name="select_track_width">Vali laius</string>
@@ -3762,4 +3762,15 @@
     <string name="sort_last_modified">Viimati muudetud</string>
     <string name="sort_name_descending">Nimi: Z – A</string>
     <string name="sort_name_ascending">Nimi: A – Z</string>
+    <string name="screen_timeout">Ekraani väljalülitamine</string>
+    <string name="app_mode_wheelchair_forward">Ratastool edasi</string>
+    <string name="routing_attr_avoid_footways_description">Väldi jalgteid</string>
+    <string name="routing_attr_avoid_footways_name">Väldi jalgteid</string>
+    <string name="contour_lines_thanks">Täname „Kõrgusjoonte“ ostu eest</string>
+    <string name="osm_live_payment_subscription_management_hw">Ostukinnituse saabumisel arveldame tellimuse eest sinu AppGallery konto alusel.
+\n
+\nKui sa ei tühista tellimust enne uue perioodi algust, siis tellimus pikeneb automaatselt ning arveldame järgmise ajavahemiku eest (kuu/kvartal/aasta) selle alguses.
+\n
+\nTellimust saad hallata ja tühistada AppGallery seadistustest.</string>
+    <string name="osm_live_payment_desc_hw">Arveldame tellimuse eest valitud ajavahemiku alusel. Seda saad sa vabalt valitud ajal tühistada AppGallery\'s.</string>
 </resources>

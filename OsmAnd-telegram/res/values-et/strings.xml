@@ -267,4 +267,8 @@
     <string name="last_response_duration">Viimane vastus: %1$s tagasi</string>
     <string name="duration_ago">%1$s tagasi</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="shared_string_export">Ekspordi</string>
+    <string name="logcat_buffer">Logcati puhver</string>
+    <string name="logcat_buffer_descr">Vaata ja jaga rakenduse detailseid logisid</string>
+    <string name="send_report">Saada ettekanne</string>
 </resources>

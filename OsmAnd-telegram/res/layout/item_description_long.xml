@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:minHeight="@dimen/list_description_height"
+    android:paddingLeft="@dimen/content_padding_standard"
+    android:paddingRight="@dimen/content_padding_standard"
+    android:textColor="?android:textColorSecondary"
+    android:textSize="@dimen/hint_text_size"
+    android:linksClickable="true"
+    android:lineSpacingMultiplier="@dimen/text_description_line_spacing_multiplier"
+    tools:text="Some long description"
+    android:paddingEnd="@dimen/content_padding_standard"
+    android:paddingStart="@dimen/content_padding_standard" />
