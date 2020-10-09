@@ -179,7 +179,6 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		Uri uri = intent.getData();
-		System.out.println("URI=" + uri);
 		if (uri != null && uri.toString().startsWith("osmand-oauth")) {
 			String oauthVerifier = uri.getQueryParameter("oauth_verifier");
 			client.authorize(oauthVerifier);
