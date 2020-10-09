@@ -119,9 +119,11 @@ public class Algorithms {
 	}
 
 	public static String getFileNameWithoutExtension(String name) {
-		int i = name.lastIndexOf('.');
-		if (i >= 0) {
-			name = name.substring(0, i);
+		if (name != null) {
+			int index = name.lastIndexOf('.');
+			if (index != -1) {
+				return name.substring(0, index);
+			}
 		}
 		return name;
 	}
