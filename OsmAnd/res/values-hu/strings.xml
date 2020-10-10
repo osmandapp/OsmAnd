@@ -3901,7 +3901,7 @@
     <string name="osm_live_payment_desc_hw">Az előfizetés díja a kiválasztott időszakonként lesz kiszámítva. Bármikor törölheti az AppGallery webhelyen.</string>
     <string name="osm_live_payment_subscription_management_hw">A fizetést a vásárlás visszaigazolásakor az AppGallery számlájára terheljük.
 \n
-\nAz előfizetés automatikusan megújul, kivéve, ha azt a megújítási dátum előtt lemondják. A megújítási időszakra (hónap / 3 hónap / év) a számláját csak a megújítás napján terheljük meg.
+\nAz előfizetés automatikusan megújul, kivéve, ha azt a megújítási dátum előtt lemondja. A megújítási időszakra (hónap / 3 hónap / év) vonatkozóan a számláját csak a megújítás napján terheljük meg.
 \n
 \nAz előfizetéseket az AppGallery beállításai között kezelheti és törölheti.</string>
     <string name="routing_attr_avoid_footways_description">Gyalogutak elkerülése</string>
@@ -3913,4 +3913,9 @@
     <string name="complex_routing_descr">Kétszakaszos útvonaltervezés autós navigációhoz.</string>
     <string name="use_native_pt">Natív tömegközlekedési fejlesztés</string>
     <string name="use_native_pt_desc">Váltás Java (biztonságos) tömegközlekedési útvonaltervezésre</string>
+    <string name="what_is_new">Újdonságok</string>
+    <string name="perform_oauth_authorization_description">Az OSM-szerkesztési funkciók használatához jelentkezzék be az OAuth segítségével</string>
+    <string name="perform_oauth_authorization">Bejelentkezés OAuth segítségével</string>
+    <string name="clear_osm_token">OpenStreetMap OAuth token törlése</string>
+    <string name="osm_edit_logout_success">Sikeresen kijelentkezett</string>
 </resources>
