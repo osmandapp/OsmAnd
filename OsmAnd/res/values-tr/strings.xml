@@ -3876,4 +3876,9 @@
     <string name="complex_routing_descr">Araç navigasyonu için iki aşamalı yönlendirme.</string>
     <string name="use_native_pt">Yerel Toplu Taşıma geliştirme</string>
     <string name="use_native_pt_desc">Java (güvenli) Toplu Taşıma yönlendirme hesaplamasına geçin</string>
+    <string name="what_is_new">Yenilikler</string>
+    <string name="perform_oauth_authorization_description">osmedit özelliklerini kullanmak için OAuth oturum açma işlemi gerçekleştirin</string>
+    <string name="perform_oauth_authorization">OAuth ile oturum aç</string>
+    <string name="clear_osm_token">OpenStreetMap OAuth belirtecini temizle</string>
+    <string name="osm_edit_logout_success">Oturum kapatma başarılı</string>
 </resources>
