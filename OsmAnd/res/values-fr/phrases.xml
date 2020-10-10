@@ -968,7 +968,7 @@
     <string name="poi_recycling_waste">Poubelle (sacs noirs)</string>
     <string name="poi_recycling_cardboard">Carton</string>
     <string name="poi_recycling_magazines">Magazines</string>
-    <string name="poi_recycling_small_appliances">Petits appareils électriques</string>
+    <string name="poi_recycling_small_appliances">Petits appareils</string>
     <string name="poi_recycling_foil">Papier aluminium</string>
     <string name="poi_recycling_hardcore">Blocaille</string>
     <string name="poi_recycling_light_bulbs">Ampoules électriques</string>
@@ -3834,4 +3834,14 @@
     <string name="poi_borough">Arrondissement</string>
     <string name="poi_traffic_signals_arrow_no">Flèche : non</string>
     <string name="poi_pump_status_missing_beam">État de la pompe : faisceau manquant</string>
+    <string name="poi_departures_board_delay">Délai</string>
+    <string name="poi_fuel_lng">GNL</string>
+    <string name="poi_beehive">Ruche</string>
+    <string name="poi_departures_board_timetable">Tableau horaire</string>
+    <string name="poi_departures_board_realtime">Temps réel</string>
+    <string name="poi_recycling_small_electrical_appliances">Petits appareils électriques</string>
+    <string name="poi_departures_board_yes">Oui</string>
+    <string name="poi_departures_board_no">Tableau des départs : non</string>
+    <string name="poi_elevator">Ascenseur</string>
+    <string name="poi_departures_board">Tableau des départs</string>
 </resources>
