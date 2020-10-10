@@ -3861,4 +3861,7 @@
     <string name="development">Utvikling</string>
     <string name="use_live_public_transport">OsmAnd-sanntidsdata</string>
     <string name="use_live_routing">OsmAnd-sanntidsdata</string>
+    <string name="perform_oauth_authorization_description">Utfør OAuth-innlogging for å bruke osmedit-funksjoner</string>
+    <string name="clear_osm_token">Fjern OpenStreetmap-OAuth-symbol</string>
+    <string name="perform_oauth_authorization">Logg inn via OAuth</string>
 </resources>
