@@ -2610,7 +2610,7 @@
     <string name="context_menu_read_full_article">Lire l\'article complet</string>
     <string name="context_menu_read_article">Lire l\'article</string>
     <string name="context_menu_points_of_group">Tous les points du groupe</string>
-    <string name="open_from">Ouvert du</string>
+    <string name="open_from">Ouvre à</string>
     <string name="open_till">Ouvert jusqu\'à</string>
     <string name="will_close_at">Ferme à</string>
     <string name="will_open_at">Ouvre à</string>
