@@ -1538,7 +1538,7 @@
     <string name="routing_attr_height_name">Limite de altura</string>
     <string name="routing_attr_height_description">Especifique a altura permitida do veículo nas rotas.</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
-    <string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas.</string>
+    <string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota. Pode ser usado para viagens longas.</string>
     <string name="rendering_value_disabled_name">Desativado</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Cor por afiliação de rede</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Cor por símbolo de caminhada OSMC</string>
@@ -3909,4 +3909,11 @@
 \nVocê pode gerenciar e cancelar suas assinaturas acessando as configurações do AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Evite passarelas</string>
     <string name="routing_attr_avoid_footways_name">Evite passarelas</string>
+    <string name="development">Desenvolvimento</string>
+    <string name="use_live_public_transport">Dados do OsmAnd Live</string>
+    <string name="use_live_routing">Dados do OsmAnd Live</string>
+    <string name="use_complex_routing">Roteamento complexo</string>
+    <string name="complex_routing_descr">Roteamento de duas fases para navegação automotiva.</string>
+    <string name="use_native_pt">Desenvolvimento de transporte público nativo</string>
+    <string name="use_native_pt_desc">Mudar para cálculo de roteamento de transporte público em Java (seguro)</string>
 </resources>

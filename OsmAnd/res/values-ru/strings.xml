@@ -1177,8 +1177,8 @@
     <string name="poi_filter_restaurants">Рестораны</string>
     <string name="poi_filter_sightseeing">Достопримечательности</string>
     <string name="context_menu_item_last_intermediate_point">Последний промежуточный пункт</string>
-    <string name="context_menu_item_first_intermediate_point">Сделать начальной остановкой</string>
-    <string name="add_as_last_destination_point">Сделать последней остановкой</string>
+    <string name="context_menu_item_first_intermediate_point">Первый промежуточный пункт</string>
+    <string name="add_as_last_destination_point">Последний промежуточный пункт</string>
     <string name="add_as_first_destination_point">Первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Пункт назначения уже задан</string>
@@ -1819,7 +1819,7 @@
     <string name="routing_attr_height_name">Предельная высота</string>
     <string name="routing_attr_height_description">Укажите высоту транспортного средства для учёта при построении маршрута.</string>
     <string name="use_fast_recalculation">Умный пересчёт маршрута</string>
-    <string name="use_fast_recalculation_desc">Для больших маршрутов пересчитывать только начало.</string>
+    <string name="use_fast_recalculation_desc">Пересчитывается только начальная часть маршрута. Может использоваться для дальних поездок.</string>
     <string name="osm_edit_context_menu_delete">Удалить правки OSM</string>
     <string name="rendering_value_disabled_name">Выключено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Раскраска по сетевой принадлежности</string>
@@ -2668,8 +2668,8 @@
     <string name="copy_location_name">Копировать местоположение/название POI</string>
     <string name="toast_empty_name_error">Место без названия</string>
     <string name="shared_string_current">Текущий</string>
-    <string name="last_intermediate_dest_description">Добавить последним промежуточным пунктом</string>
-    <string name="first_intermediate_dest_description">Добавить первым промежуточным пунктом</string>
+    <string name="last_intermediate_dest_description">Добавить последнюю остановку на маршруте</string>
+    <string name="first_intermediate_dest_description">Добавить первую остановку на маршруте</string>
     <string name="subsequent_dest_description">Ранее выбранный пункт назначения станет последним промежуточным пунктом</string>
     <string name="show_closed_notes">Показать закрытые заметки</string>
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
@@ -3911,4 +3911,8 @@
 \nПодписка продлевается автоматически, если она не будет отменена до даты продления. С вашего счета будет взиматься плата за период продления (месяц/три месяца/год) только в дату продления.
 \n
 \nВы можете управлять своими подписками и отменять их, перейдя в настройки AppGallery.</string>
+    <string name="use_live_public_transport">Данные OsmAnd Live</string>
+    <string name="use_live_routing">Данные OsmAnd Live</string>
+    <string name="use_complex_routing">Комплексная маршрутизация</string>
+    <string name="complex_routing_descr">Двухфазная маршрутизация для автомобильной навигации.</string>
 </resources>

@@ -1570,7 +1570,7 @@
     <string name="routing_attr_height_description">Höhe des Fahrzeugs für Routenberechnung angeben.</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="use_fast_recalculation">Schnelle Routenneuberechnung</string>
-    <string name="use_fast_recalculation_desc">Bei längeren Routen nur den Anfangsteil neu berechnen.</string>
+    <string name="use_fast_recalculation_desc">Nur den Anfangsteil neu berechnen. Kann bei längeren Routen benutzt werden.</string>
     <string name="lang_es_ar">Spanisch (Argentinien)</string>
     <string name="lang_th">Thailändisch</string>
     <string name="lang_ms">Malaysisch</string>
@@ -3918,4 +3918,11 @@
 \n Sie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren AppGallery-Einstellungen gehen.</string>
     <string name="routing_attr_avoid_footways_description">Vermeidet Fußwege</string>
     <string name="routing_attr_avoid_footways_name">Keine Fußwege</string>
+    <string name="development">Entwicklung</string>
+    <string name="use_live_public_transport">OsmAnd Live Daten</string>
+    <string name="use_live_routing">OsmAnd Live Daten</string>
+    <string name="use_complex_routing">Komplexe Routenberechnung</string>
+    <string name="complex_routing_descr">Zwei-Phasen-Routenberechnung für die Autonavigation.</string>
+    <string name="use_native_pt">Native ÖPNV Entwicklung</string>
+    <string name="use_native_pt_desc">Wechseln zu Java (sicher) Berechnung des ÖPNV-Routings</string>
 </resources>

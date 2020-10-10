@@ -3672,11 +3672,11 @@
     <string name="use_volume_buttons_as_zoom">Lydstyrkeknapper til forstørring</string>
     <string name="search_download_wikipedia_maps">Last ned Wikipedia-kart</string>
     <string name="accessibility_mode_disabled">Tilgjengelighetsmodus er slått av i Android-systemet.</string>
-    <string name="listed_exist"/>
+    <string name="listed_exist">Angitt %1$s finnes allerede i OsmAnd.</string>
     <string name="turn_screen_on_navigation_instructions">Navigasjonsinstruks</string>
-    <string name="speed_cameras_restart_descr"/>
+    <string name="speed_cameras_restart_descr">Start opp programmet igjen for å slette all fotoboksdata.</string>
     <string name="shared_string_uninstall_and_restart">Avinstaller og start på nytt</string>
-    <string name="quick_action_remove_next_destination_descr"/>
+    <string name="quick_action_remove_next_destination_descr">Nåværende målpunkt på ruten vil slettes. Hvis det er målet, vil navigasjonen stoppe.</string>
     <string name="app_mode_wheelchair">Rullestol</string>
     <string name="app_mode_go_cart">Gokart</string>
     <string name="plan_a_route">Planlegg en rute</string>
@@ -3758,4 +3758,107 @@
     <string name="number_of_gpx_files_selected_pattern">%s sporfiler valgt</string>
     <string name="gpx_monitoring_stop">Sett turopptak på pause</string>
     <string name="gpx_monitoring_start">Gjenoppta turopptak</string>
+    <string name="pass_whole_track_descr">Punkt i sporet å navigere</string>
+    <string name="monitoring_min_speed_descr_remark">Merk: Hastighet &gt; 0-sjekk: De fleste GPS-brikkesett rapporterer en hastighetsverdi kun hvis algoritmen fastslår at du er i bevegelse, og ingen hvis du ikke er det. Derav vil bruk av &gt; 0-innstillingen i dette filteret bruke bevegelsesoppdagelsen fra GPS-brikkesettet. Selv om det ikke filtreres har ved opptak, har man fremdeles denne funksjonen i GPX-analyse for å fastslå korrigert distanse, altså verdien som vises i feltet er distanse tatt opp i bevegelse.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Anbefaling: Prøv å bruke bevegelsesoppdagelse via avstandsfilteret for minimumsmåling (B) først, det kan gi bedre resultater, og du vil ikke gå glipp av data. Hvis dine spor fremdeles er fulle av støy ved lave hastigheter, kan du prøve andre verdier enn null her. Merk at noen målinger ikke rapporterer hastighetsverdi i det hele tatt (som nettverksbaserte metoder), og i sådant fall vil du ikke ta opp noe.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Bieffekt: Sporet ditt vil mangle alle deler der minimumshastigheten ikke er oppfylt (f.eks. når du dytter sykkelen din opp en bratt bakke). Pauser går også tapt siden det ikke er noen bevegelse. Dette forringer også analyse eller etterbehandling, som å forsøke å anslå total turlengde, tid i bevegelse, eller gjennomsnittshastighet.</string>
+    <string name="monitoring_min_speed_descr">Dette lavhastighetsfilteret tar ikke opp punkter under en gitt hastighet. Dette kan gjøre innspilte spor jevnere når de vises på kartet.</string>
+    <string name="monitoring_min_accuracy_descr">Dette tar opp punkter målt med minimal nøyaktighetsindikasjon (i meter/fot, som det rapporteres av Android av brikkesettet ditt). Nøyaktighet er nærheten av målinger til sann posisjon, og er ikke direkte relatert til presisjon, som er en spredning av gjentatte målinger.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Bivirkning: Som et resultat av filtrering etter nøyaktighet, kan noen punkter mangle helt, f.eks. under broer, under trær, mellom høye bygninger, eller under gitte værforhold.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Anbefaling: Det er vanskelig å forutsi hva som blir tatt opp og ikke, det kan være best å skru dette filteret av.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Merk: Hvis GPS har vært av rett før et opptak, kan første punkt ha dårligere nøyaktighet, slik at man fra kodehold kan la det gå et sekund før et punkt blir tatt opp (eller man tar opp det beste av 3 punkter), men dette er ikke implementert enda.</string>
+    <string name="monitoring_min_distance_descr">Filteret unngår dupliserte punkter fra å bli tatt opp der det er for lite bevegelse. Lager et penere resultat uten bruk av etterbehandling.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Bivirkning: Pauseperioder tas ikke opp i det hele tatt, eller kun med ett punkt. Små (faktiske) bevegelser (f.eks. til siden, for å markere en mulig avkjørsel i turen din) kan bli filtrert ut. Din fil inneholder mindre info for etterbehandling, og har dårligere data ved å filtrere ut åpenbart overflødige punkter ved opptak, mens arte-fakter potensielt blir beholdt som følge av dårlige forhold eller GPS-brikkesetteffekter.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Anbefaling: En innstilling på 5 meter kan fungere for deg hvis du ikke vil fange finmaskede detaljer, og ikke ønsker å ta opp data mens du har pause.</string>
+    <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="multimedia_rec_split_title">Opptaksoppdeling</string>
+    <string name="search_offline_geo_error">Kunne ikke tolke geo-intensjon «%s».</string>
+    <string name="osm_authorization_success">Autorisert</string>
+    <string name="use_system_screen_timeout_promo">Avskrudd som forvalg: Skjermen vil ikke slås av så lenge OsmAnd kjører i forgrunnen.
+\n
+\nHvis påskrudd vil OsmAnd bruke systemets innstilling for skjermtidsavbrudd.</string>
+    <string name="terrain_empty_state_text">Skru på for å vise relieffskygge eller skråningskart. Du kan lese mer om disse karttypene på siden vår.</string>
+    <string name="reset_to_default_category_button_promo">«Tilbakestill til forvalg» gjenoppretter sorteringsrekkefølgen til installasjonsforvalg.</string>
+    <string name="hillshade_description">Relieffskyggekart som bruker mørke skygger for å vise skråninger, topper og lavland.</string>
+    <string name="recalculate_route_distance_promo">Ruten vil regnes ut igjen hvis avstanden fra ruten til nåværende posisjon er mer enn valgt verdi.</string>
+    <string name="osm_live_payment_subscription_management">Betaling vil bli belastet din Google Play-konto ved bekreftelse av kjøp.
+\n
+\n Abonnement fornyes automatisk med mindre det avbrytes før fornyelsesdatoen. Din konto vil bli belastet for fornyelsesperioden (måned/tre måneder/år) kun på fornyelsesdatoen.
+\n
+\n Du kan håndtere og avbryte dine abonnementer ved å gå til dine Google Play-innstillinger.</string>
+    <string name="turn_screen_on_descr">Angi når skjermen skal vekkes opp (forsikre deg om at OsmAnd er i forgrunnen når enheten låses):</string>
+    <string name="map_source_zoom_levels">Sett minste og største forstørrelsesnivå å vise eller laste inn på nettbasert kart.</string>
+    <string name="map_source_zoom_levels_descr">Har innvirkning på om skjermen skal brukes som kart eller overlag/underlag.
+\n
+\n%1$s: Kartet er begrenset til valgt forstørrelsesrekkevidde.
+\n
+\n%2$s er nivåene de opprinnelige flisene vil være synlige, oppskalering eller nedskalering finner sted utenfor disse verdiene.</string>
+    <string name="app_mode_inline_skates">Rulleskøyter</string>
+    <string name="speed_cameras_legal_descr">I noen land og områder, er bruk av fotoboksvarsling forbudt ved lov.
+\n
+\nDu må vurdere dette selv i henhold til lovene i ditt land.
+\n
+\nVelg %1$s og du vil motta varsler og advarsler om fotobokser.
+\n
+\nVelg %1$s. All data som har med fotobokser å gjøre, varsler, merknader og interessepunkter vil bli slettet til OsmAnd reinstalleres helt og holdent.</string>
+    <string name="clear_tiles_warning">Å utføre disse endringene vil tømme hurtiglagret data for denne fliskilden.</string>
+    <string name="plugin_wikipedia_description">Hent info om interessepunkter fra Wikipedia. Det er din frakoblede lommeguide - bare skru på Wikipedia-programtillegget og få artikler om objekter rundt deg.</string>
+    <string name="track_coloring_solid">Utfylt</string>
+    <string name="osm_live_payment_subscription_management_hw">Betaling vil bli belastet din programgalleri-konto ved bekreftelse av kjøp.
+\n
+\nAbonnementet fornyes automatisk med mindre det avbrytes før fornyelsesdatoen. Din konto bil bli belastet for fornyelse for hver fornyelsesperiode (måned/tre måneder/år) kun på fornyelsesdatoen.
+\n
+\nDu kan håndtere og avbryte ditt abonnement ved å gå gjennom dine programgalleri-innstillinger.</string>
+    <string name="gpx_parse_error">OsmAnd-GPX er feilformatert, kontakt brukerstøtte for videre etterforskning.</string>
+    <string name="system_screen_timeout_descr">Skrur av skjermen i henhold til systemets skjermtidsavbrudd.</string>
+    <string name="lenght_limit_description">Angi lengden på ditt kjøretøy, noen rutebegrensninger kan gjelde for lange kjøretøy.</string>
+    <string name="turn_screen_on_power_button_disabled">Avskrudd. Krever «Behold skjerm på» under «Tidsavbrudd etter oppvåkning».</string>
+    <string name="turn_screen_on_power_button_descr">Å trykke på enhetens på-knapp vil skru skjermen på med OsmAnd på toppen av låseskjermen.</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercatorprojeksjon</string>
+    <string name="keep_active">Behold på</string>
+    <string name="speed_cameras_alert">Fotoboksvarsling er forbudt ved lov i noen land.</string>
+    <string name="quick_action_showhide_mapillary_descr">Bryter for å vise eller skjule Mapillary-lag på kartet.</string>
+    <string name="speed_cameras_removed_descr">Denne enheten har ikke fotobokser.</string>
+    <string name="in_case_of_reverse_direction">I tilfelle motsatt retning</string>
+    <string name="simplified_track_description">Kun rutelinjen vil lagres, rutepunktene vil slettes.</string>
+    <string name="context_menu_item_add_waypoint">Legg til spor-rutepunkt</string>
+    <string name="quick_action_add_gpx">Legg til spor-rutepunkt</string>
+    <string name="complex_routing_descr">To-delt ruting for bilkjøring.</string>
+    <string name="osm_live_payment_desc_hw">Abonnement påløper per valgte periode. Avbryt det når som helst fra programgalleriet.</string>
+    <string name="attach_to_the_roads">Følg veier</string>
+    <string name="monitoring_min_distance">Minimumsforskyvning</string>
+    <string name="radius_ruler_item">Radiuspasser</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Hver navigasjonsinstruksjon skrur skjermen på.</string>
+    <string name="turn_screen_on_wake_time_descr">Velg skjermtidsavbrudd etter oppvåkning. («%1$s» skrur av tidsavbrudd.)</string>
+    <string name="keep_screen_off">Levn skjermen av</string>
+    <string name="expire_time_descr">Hurtiglagrede filer vil bli lastet ned igjen etter et gitt antall minutter. La dette feltet stå tomt for å aldri gjenoppfriske flis for denne kilden.
+\n
+\nÉn dag er 1440 minutter.
+\nÉn uke er 10080 minutter.
+\nÉn måned er 43829 minutter.</string>
+    <string name="screen_timeout_descr">Hvis «%1$s» er på, vil aktivitetstiden avhenge av den.</string>
+    <string name="routing_attr_length_description">Angi kjøretøylengde som tillates på rutene.</string>
+    <string name="routing_attr_length_name">Lengdebegrensning</string>
+    <string name="plan_route_exit_dialog_descr">Er du sikker på at du ønsker å forkaste alle endringer i planlagt rute ved å lukke den\?</string>
+    <string name="navigate_to_track_descr">Naviger fra min posisjon til sporet</string>
+    <string name="use_native_pt">Innebygd utvikling for offentlig transport</string>
+    <string name="use_native_pt_desc">Bytt til Java (trykk) ruteberegning for offentlig transport</string>
+    <string name="contour_lines_thanks">Takk for at du kjøpte «Koter»</string>
+    <string name="use_complex_routing">Kompleks ruting</string>
+    <string name="routing_attr_avoid_footways_name">Unngå turstier</string>
+    <string name="routing_attr_avoid_footways_description">Unngå turstier</string>
+    <string name="recalc_angle_dialog_descr">Ekstra rett segment mellom min posisjon og utregnet rute vil bli vist til den er regnet ut på ny</string>
+    <string name="checking_for_duplicate_description">OsmAnd sjekker %1$d for duplikater med eksisterende elementer i programmet.
+\n
+\nDet kan ta sin tid.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Du kan eksportere eller importere hurtighandlinger med programprofiler.</string>
+    <string name="delete_all_actions_message_q">Er du sikker på at du vil slette %d hurtighandlinger for godt\?</string>
+    <string name="screen_timeout">Skjermtidsavbrudd</string>
+    <string name="default_screen_timeout">Forvalgt skjermtidsavbrudd</string>
+    <string name="street_level_imagery">Gatenivåbildedata</string>
+    <string name="plan_route_trim_before">Beskjær før</string>
+    <string name="plan_route_trim_after">Beskjær før</string>
+    <string name="development">Utvikling</string>
+    <string name="use_live_public_transport">OsmAnd-sanntidsdata</string>
+    <string name="use_live_routing">OsmAnd-sanntidsdata</string>
 </resources>
