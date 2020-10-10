@@ -3915,4 +3915,9 @@
     <string name="use_live_routing">Данные OsmAnd Live</string>
     <string name="use_complex_routing">Комплексная маршрутизация</string>
     <string name="complex_routing_descr">Двухфазная маршрутизация для автомобильной навигации.</string>
+    <string name="what_is_new">Что нового</string>
+    <string name="perform_oauth_authorization_description">Выполните вход OAuth, чтобы использовать функции osmedit</string>
+    <string name="perform_oauth_authorization">Войти через OAuth</string>
+    <string name="clear_osm_token">Очистить токен OAuth OpenStreetMap</string>
+    <string name="osm_edit_logout_success">Выход выполнен</string>
 </resources>
