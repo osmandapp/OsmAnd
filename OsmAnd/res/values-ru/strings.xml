@@ -2668,7 +2668,7 @@
     <string name="copy_location_name">Копировать местоположение/название POI</string>
     <string name="toast_empty_name_error">Место без названия</string>
     <string name="shared_string_current">Текущий</string>
-    <string name="last_intermediate_dest_description">Добавить последнюю остановку на маршруте</string>
+    <string name="last_intermediate_dest_description">Добавляет промежуточную остановку</string>
     <string name="first_intermediate_dest_description">Добавить первую остановку на маршруте</string>
     <string name="subsequent_dest_description">Ранее выбранный пункт назначения станет последним промежуточным пунктом</string>
     <string name="show_closed_notes">Показать закрытые заметки</string>
