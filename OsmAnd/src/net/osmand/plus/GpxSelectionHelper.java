@@ -29,7 +29,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.routing.RouteProvider;
-import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.util.Algorithms;

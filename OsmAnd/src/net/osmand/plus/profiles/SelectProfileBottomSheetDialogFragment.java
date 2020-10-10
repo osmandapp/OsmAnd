@@ -40,7 +40,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.helpers.ImportHelper.ImportType.ROUTING;
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
 
 public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottomSheet {
 

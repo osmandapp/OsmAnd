@@ -1537,7 +1537,7 @@
     <string name="routing_attr_height_name">Výškový limit</string>
     <string name="routing_attr_height_description">Zadajte výšku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
-    <string name="use_fast_recalculation_desc">Pri dlhých výletoch prepočítať iba začiatočný úsek trasy.</string>
+    <string name="use_fast_recalculation_desc">Prepočíta iba začiatočný úsek trasy. Môže byť použité pre dlhé výlety.</string>
     <string name="shared_string_logoff">Odhlásiť</string>
     <string name="rendering_value_disabled_name">Vypnuté</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Zafarbenie podľa príslušnosti k sieti</string>
@@ -3654,8 +3654,8 @@
     <string name="lang_lmo">Lombardsky</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Platba bude stiahnutá z vášho účtu Google Play po potvrdení nákupu.
-\n 
-\n Predplatné sa automaticky obnovuje ak nie je zrušené pred dátumom jeho obnovenia. Ďalšia platba za obdobie predplatného (mesiac/štvrťrok/rok) bude stiahnutá v deň obnovenia.
+\n
+\n Predplatné sa automaticky obnovuje, ak nie je zrušené pred dátumom jeho obnovenia. Ďalšia platba za obdobie predplatného (mesiac/štvrťrok/rok) bude stiahnutá v deň obnovenia.
 \n
 \n Vaše predplatné môžete spravovať a zrušiť v nastaveniach Google Play.</string>
     <string name="search_poi_types">Hľadať typy bodov záujmu</string>
@@ -3906,4 +3906,19 @@
     <string name="sort_name_ascending">Názov: A – Z</string>
     <string name="start_finish_icons">Ikony štartu/cieľa</string>
     <string name="contour_lines_thanks">Ďakujeme za zakúpenie modulu \'Vrstevnice\'</string>
+    <string name="osm_live_payment_desc_hw">Predplatné bude spoplatnené v zvolenom intervale. Predplatné zrušte kedykoľvek na AppGallery.</string>
+    <string name="osm_live_payment_subscription_management_hw">Platba bude stiahnutá z vášho účtu AppGallery po potvrdení nákupu.
+\n
+\nPredplatné sa automaticky obnovuje, ak nie je zrušené pred dátumom jeho obnovenia. Ďalšia platba za obdobie predplatného (mesiac/štvrťrok/rok) bude stiahnutá v deň obnovenia.
+\n
+\n Vaše predplatné môžete spravovať a zrušiť v nastaveniach AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Vyhnúť sa chodníkom pre chodcov</string>
+    <string name="routing_attr_avoid_footways_name">Vyhnúť sa chodníkom</string>
+    <string name="development">Vývoj</string>
+    <string name="use_live_public_transport">Údaje OsmAnd Live</string>
+    <string name="use_live_routing">Údaje OsmAnd Live</string>
+    <string name="use_complex_routing">Komplexný výpočet trasy</string>
+    <string name="complex_routing_descr">Dvojfázový výpočet trasy pre navigáciu auta.</string>
+    <string name="use_native_pt">Natívny vývoj hromadnej dopravy</string>
+    <string name="use_native_pt_desc">Prepnúť na výpočet trasy hromadnej dopravy v Jave (bezpečné)</string>
 </resources>

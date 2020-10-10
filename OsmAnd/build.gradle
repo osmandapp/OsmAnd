@@ -227,12 +227,16 @@ android {
 
 	buildTypes {
 		debug {
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
 			signingConfig signingConfigs.development
 			debuggable false
 			jniDebuggable false
 			buildConfigField "boolean", "USE_DEBUG_LIBRARIES", "false"
 		}
 		release {
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
 			if (gradle.startParameter.taskNames.toString().contains("huawei")) {
 				signingConfig signingConfigs.publishingHuawei
 			} else {
@@ -534,6 +538,9 @@ dependencies {
 	implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 	implementation ("com.github.HITGIF:TextFieldBoxes:1.4.5"){
 		exclude group: 'com.android.support'
+	}
+	implementation('com.github.scribejava:scribejava-apis:7.1.1'){
+		exclude group: "com.fasterxml.jackson.core"
 	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
 

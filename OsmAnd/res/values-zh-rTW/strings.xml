@@ -1534,7 +1534,7 @@
     <string name="routing_attr_height_name">高度限制</string>
     <string name="routing_attr_height_description">指定被許可在道路上行駛的車輛高度。</string>
     <string name="use_fast_recalculation">智慧路線重新計算</string>
-    <string name="use_fast_recalculation_desc">對於長途航行，只重算路線的初始部分。</string>
+    <string name="use_fast_recalculation_desc">僅重新計算路線的初始部份。可用於長途旅程。</string>
     <string name="shared_string_logoff">登出</string>
     <string name="rendering_value_disabled_name">已停用</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">依網絡從屬著色</string>
@@ -3901,4 +3901,19 @@
     <string name="sort_name_ascending">名稱：A – Z</string>
     <string name="start_finish_icons">開始／結束圖示</string>
     <string name="contour_lines_thanks">感謝您購買 \'Contour lines\'</string>
+    <string name="osm_live_payment_desc_hw">按選定週期收取訂閱費用。隨時在 AppGallery 上取消。</string>
+    <string name="osm_live_payment_subscription_management_hw">確認購買後將會從您的 AppGallery 帳號中付款。
+\n
+\n除非在續訂日期前取消，否則就會自動續訂。您的帳號將只會在續訂日期收取訂閱週期（一個月／三個月／一年）的費用。
+\n
+\n您可以在您的 AppGallery 設定中管理與取消您的訂閱。</string>
+    <string name="routing_attr_avoid_footways_description">避免人行道</string>
+    <string name="routing_attr_avoid_footways_name">避免人行道</string>
+    <string name="development">開發</string>
+    <string name="use_live_public_transport">OsmAnd Live 資料</string>
+    <string name="use_live_routing">OsmAnd Live 資料</string>
+    <string name="use_complex_routing">複雜路線</string>
+    <string name="complex_routing_descr">汽車導航的兩階段路線。</string>
+    <string name="use_native_pt">原生公共運輸發展</string>
+    <string name="use_native_pt_desc">切換到 Java（安全）公共運輸路線計算</string>
 </resources>

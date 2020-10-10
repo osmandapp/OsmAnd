@@ -223,6 +223,19 @@ public class FileUtils {
 		return tempDir;
 	}
 
+	public static boolean isWritable(File dirToTest) {
+		boolean isWriteable;
+		try {
+			dirToTest.mkdirs();
+			File writeTestFile = File.createTempFile("osmand_", ".tmp", dirToTest);
+			isWriteable = writeTestFile.exists();
+			writeTestFile.delete();
+		} catch (IOException e) {
+			isWriteable = false;
+		}
+		return isWriteable;
+	}
+
 	public interface RenameCallback {
 		void renamedTo(File file);
 	}

@@ -20,8 +20,6 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.CustomOsmandPlugin.SuggestedDownloadItem;
 import net.osmand.plus.CustomRegion;
@@ -29,12 +27,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
@@ -947,7 +946,7 @@ public class SettingsHelper {
 		@Override
 		protected void init() {
 			super.init();
-			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(app.getSettings().appModeBeanPrefsIds));
+			appModeBeanPrefsIds = new HashSet<>(Arrays.asList(getAppModeBeanPrefsIds()));
 		}
 
 		@NonNull
@@ -1186,6 +1185,21 @@ public class SettingsHelper {
 						preference.writeToJson(json, appMode);
 					}
 				}
+			};
+		}
+
+		private String[] getAppModeBeanPrefsIds() {
+			OsmandSettings settings = app.getSettings();
+			return new String[] {
+					settings.ICON_COLOR.getId(),
+					settings.ICON_RES_NAME.getId(),
+					settings.PARENT_APP_MODE.getId(),
+					settings.ROUTING_PROFILE.getId(),
+					settings.ROUTE_SERVICE.getId(),
+					settings.USER_PROFILE_NAME.getId(),
+					settings.LOCATION_ICON.getId(),
+					settings.NAVIGATION_ICON.getId(),
+					settings.APP_MODE_ORDER.getId()
 			};
 		}
 	}
@@ -2623,6 +2637,89 @@ public class SettingsHelper {
 		}
 	}
 
+	public static Map<ExportSettingsType, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean importComplete) {
+		Map<ExportSettingsType, List<?>> settingsToOperate = new HashMap<>();
+		List<ApplicationModeBean> profiles = new ArrayList<>();
+		List<QuickAction> quickActions = new ArrayList<>();
+		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
+		List<ITileSource> tileSourceTemplates = new ArrayList<>();
+		List<File> routingFilesList = new ArrayList<>();
+		List<File> renderFilesList = new ArrayList<>();
+		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		for (SettingsItem item : settingsItems) {
+			switch (item.getType()) {
+				case PROFILE:
+					profiles.add(((ProfileSettingsItem) item).getModeBean());
+					break;
+				case FILE:
+					FileSettingsItem fileItem = (FileSettingsItem) item;
+					if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
+						renderFilesList.add(fileItem.getFile());
+					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
+						routingFilesList.add(fileItem.getFile());
+					}
+					break;
+				case QUICK_ACTIONS:
+					QuickActionsSettingsItem quickActionsItem = (QuickActionsSettingsItem) item;
+					if (importComplete) {
+						quickActions.addAll(quickActionsItem.getAppliedItems());
+					} else {
+						quickActions.addAll(quickActionsItem.getItems());
+					}
+					break;
+				case POI_UI_FILTERS:
+					PoiUiFiltersSettingsItem poiUiFilterItem = (PoiUiFiltersSettingsItem) item;
+					if (importComplete) {
+						poiUIFilters.addAll(poiUiFilterItem.getAppliedItems());
+					} else {
+						poiUIFilters.addAll(poiUiFilterItem.getItems());
+					}
+					break;
+				case MAP_SOURCES:
+					MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) item;
+					if (importComplete) {
+						tileSourceTemplates.addAll(mapSourcesItem.getAppliedItems());
+					} else {
+						tileSourceTemplates.addAll(mapSourcesItem.getItems());
+					}
+					break;
+				case AVOID_ROADS:
+					AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) item;
+					if (importComplete) {
+						avoidRoads.addAll(avoidRoadsItem.getAppliedItems());
+					} else {
+						avoidRoads.addAll(avoidRoadsItem.getItems());
+					}
+					break;
+				default:
+					break;
+			}
+		}
+
+		if (!profiles.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.PROFILE, profiles);
+		}
+		if (!quickActions.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.QUICK_ACTIONS, quickActions);
+		}
+		if (!poiUIFilters.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.POI_TYPES, poiUIFilters);
+		}
+		if (!tileSourceTemplates.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.MAP_SOURCES, tileSourceTemplates);
+		}
+		if (!renderFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.CUSTOM_RENDER_STYLE, renderFilesList);
+		}
+		if (!routingFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.CUSTOM_ROUTING, routingFilesList);
+		}
+		if (!avoidRoads.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.AVOID_ROADS, avoidRoads);
+		}
+		return settingsToOperate;
+	}
+
 	@SuppressLint("StaticFieldLeak")
 	public class ImportAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 
@@ -2937,6 +3034,11 @@ public class SettingsHelper {
 		for (ExportSettingsType settingsType : settingsTypes) {
 			List<?> settingsDataObjects = additionalData.get(settingsType);
 			if (settingsDataObjects != null) {
+				for (Object object : settingsDataObjects) {
+					if (object instanceof ApplicationModeBean) {
+						settingsItems.add(new ProfileSettingsItem(app, null, (ApplicationModeBean) object));
+					}
+				}
 				settingsItems.addAll(prepareAdditionalSettingsItems(new ArrayList<>(settingsDataObjects)));
 			}
 		}

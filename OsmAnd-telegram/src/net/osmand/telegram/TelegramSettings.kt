@@ -110,7 +110,7 @@ private const val PROXY_ENABLED = "proxy_enabled"
 private const val PROXY_PREFERENCES_KEY = "proxy_preferences"
 
 private const val SHARING_INITIALIZATION_TIME = 60 * 2L // 2 minutes
-private const val WAITING_TDLIB_TIME = 3 // 3 seconds
+private const val WAITING_TDLIB_TIME = 7 // 7 seconds
 
 private const val GPS_UPDATE_EXPIRED_TIME = 60 * 3L // 3 minutes
 

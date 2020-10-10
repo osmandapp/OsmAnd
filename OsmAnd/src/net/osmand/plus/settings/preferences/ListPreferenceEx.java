@@ -8,7 +8,7 @@ import androidx.preference.DialogPreference;
 import androidx.preference.PreferenceDataStore;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings.PreferencesDataStore;
+import net.osmand.plus.settings.backend.OsmAndPreferencesDataStore;
 
 public class ListPreferenceEx extends DialogPreference {
 
@@ -126,8 +126,8 @@ public class ListPreferenceEx extends DialogPreference {
 
 	private Object getPersistedValue(Object defaultValue) {
 		PreferenceDataStore dataStore = getPreferenceDataStore();
-		if (dataStore instanceof PreferencesDataStore) {
-			Object value = ((PreferencesDataStore) dataStore).getValue(getKey(), defaultValue);
+		if (dataStore instanceof OsmAndPreferencesDataStore) {
+			Object value = ((OsmAndPreferencesDataStore) dataStore).getValue(getKey(), defaultValue);
 			if (value instanceof Enum) {
 				return ((Enum) value).ordinal();
 			} else if (value instanceof ApplicationMode) {
@@ -144,8 +144,8 @@ public class ListPreferenceEx extends DialogPreference {
 			return;
 		}
 		PreferenceDataStore dataStore = getPreferenceDataStore();
-		if (dataStore instanceof PreferencesDataStore) {
-			((PreferencesDataStore) dataStore).putValue(getKey(), value);
+		if (dataStore instanceof OsmAndPreferencesDataStore) {
+			((OsmAndPreferencesDataStore) dataStore).putValue(getKey(), value);
 		}
 	}
 }

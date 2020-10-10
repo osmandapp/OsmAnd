@@ -36,8 +36,7 @@ import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
@@ -70,7 +69,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	private static final String WIKI_LINK = ".wikipedia.org/w";
 	public final static Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
 	private final static DecimalFormat DF = new DecimalFormat("#.##");
-	private OsmandSettings.MetricsConstants metricSystem;
+	private MetricsConstants metricSystem;
 	private final Amenity amenity;
 
 
@@ -714,10 +713,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			case "seamark_height":
 				if (Algorithms.isFloat(value)) {
 					double valueAsDouble = Double.valueOf(value);
-					if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
+					if (metricSystem == MetricsConstants.MILES_AND_FEET) {
 						formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER))
 								+ " " + mapActivity.getResources().getString(R.string.foot);
-					} else if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_YARDS) {
+					} else if (metricSystem == MetricsConstants.MILES_AND_YARDS) {
 						formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.YARDS_IN_ONE_METER))
 								+ " " + mapActivity.getResources().getString(R.string.yard);
 					} else {

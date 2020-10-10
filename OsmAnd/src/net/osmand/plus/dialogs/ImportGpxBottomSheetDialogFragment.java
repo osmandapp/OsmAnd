@@ -13,7 +13,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.importfiles.ImportHelper;
 
 public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 

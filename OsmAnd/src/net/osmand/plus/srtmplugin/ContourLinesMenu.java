@@ -7,6 +7,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -61,8 +62,8 @@ public class ContourLinesMenu {
 
 		final String contourWidthName;
 		final String contourDensityName;
-		final OsmandSettings.CommonPreference<String> widthPref;
-		final OsmandSettings.CommonPreference<String> densityPref;
+		final CommonPreference<String> widthPref;
+		final CommonPreference<String> densityPref;
 		final RenderingRuleProperty contourWidthProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_WIDTH_ATTR);
 		if (contourWidthProp != null) {
 			contourWidthName = SettingsActivity.getStringPropertyName(app, contourWidthProp.getAttrName(),
@@ -82,8 +83,8 @@ public class ContourLinesMenu {
 			densityPref = null;
 		}
 
-		final OsmandSettings.CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
-		final OsmandSettings.CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
+		final CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+		final CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
 
 		final boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
 		final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;

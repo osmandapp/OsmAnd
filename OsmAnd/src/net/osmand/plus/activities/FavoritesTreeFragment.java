@@ -43,6 +43,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -96,7 +97,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<>();
 	private ActionMode actionMode;
 	private Drawable arrowImageDisabled;
-	private HashMap<String, OsmandSettings.OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
+	private HashMap<String, OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
 	private View footerView;
 	private Location lastLocation;
 	private float lastHeading;
@@ -763,8 +764,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		}
 	}
 
-	private OsmandSettings.OsmandPreference<Boolean> getGroupExpandedPreference(String groupName) {
-		OsmandSettings.OsmandPreference<Boolean> preference = preferenceCache.get(groupName);
+	private OsmandPreference<Boolean> getGroupExpandedPreference(String groupName) {
+		OsmandPreference<Boolean> preference = preferenceCache.get(groupName);
 		if (preference == null) {
 			String groupKey = groupName + GROUP_EXPANDED_POSTFIX;
 			preference = getSettings().registerBooleanPreference(groupKey, false);

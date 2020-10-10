@@ -271,7 +271,7 @@
     <string name="empty_route_calculated">Arvutatud teekond on tühi.</string>
     <string name="use_online_routing_descr">Kasuta internetti teekonna arvutamiseks.</string>
     <string name="use_fast_recalculation">Tark teekonna arvutamine</string>
-    <string name="use_fast_recalculation_desc">Pikemate vahemaade korral arvuta uuesti ainult teekonna algusosa.</string>
+    <string name="use_fast_recalculation_desc">Arvuta uuesti ainult teekonna algusosa. Seda võid kasutada pikemate vahemaade korral.</string>
     <string name="simulate_your_location_descr">Simuleeri arvutatud või salvestatud GPX teekonda.</string>
     <string name="hillshade_layer_disabled">Künkavarjutuse kiht keelatud</string>
     <string name="rendering_attr_horseRoutes_name">Ratsutamisteed</string>
@@ -3764,4 +3764,14 @@
     <string name="sort_name_ascending">Nimi: A – Z</string>
     <string name="screen_timeout">Ekraani väljalülitamine</string>
     <string name="app_mode_wheelchair_forward">Ratastool edasi</string>
+    <string name="routing_attr_avoid_footways_description">Väldi jalgteid</string>
+    <string name="routing_attr_avoid_footways_name">Väldi jalgteid</string>
+    <string name="contour_lines_thanks">Täname „Kõrgusjoonte“ ostu eest</string>
+    <string name="osm_live_payment_subscription_management_hw">Ostukinnituse saabumisel arveldame tellimuse eest sinu AppGallery konto alusel.
+\n
+\nKui sa ei tühista tellimust enne uue perioodi algust, siis tellimus pikeneb automaatselt ning arveldame järgmise ajavahemiku eest (kuu/kvartal/aasta) selle alguses.
+\n
+\nTellimust saad hallata ja tühistada AppGallery seadistustest.</string>
+    <string name="osm_live_payment_desc_hw">Arveldame tellimuse eest valitud ajavahemiku alusel. Seda saad sa vabalt valitud ajal tühistada AppGallery\'s.</string>
+    <string name="use_complex_routing">Keeruka teekonna koostamine</string>
 </resources>
