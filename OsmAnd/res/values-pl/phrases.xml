@@ -3834,7 +3834,14 @@
     <string name="poi_pump_status_missing_beam">Stan pompy: brak wiązki</string>
     <string name="poi_traffic_signals_arrow_no">Strzałka: nie</string>
     <string name="poi_elevator">Winda</string>
-    <string name="poi_recycling_small_electrical_appliances">Małogabarytowe urządzenia elektryczne</string>
-    <string name="poi_departures_board">Tablica odjazdów/odlotów</string>
+    <string name="poi_recycling_small_electrical_appliances">Małe urządzenia elektryczne</string>
+    <string name="poi_departures_board">Tablica odlotów</string>
     <string name="poi_drinking_water_refill">Uzupełnianie wody pitnej</string>
+    <string name="poi_fuel_lng">LNG</string>
+    <string name="poi_nuts">Sklep z orzechami</string>
+    <string name="poi_departures_board_timetable">Rozkład jazdy</string>
+    <string name="poi_departures_board_realtime">Czas rzeczywisty</string>
+    <string name="poi_departures_board_delay">Opóźnienie</string>
+    <string name="poi_departures_board_yes">Tak</string>
+    <string name="poi_departures_board_no">Tablica odlotów: nie</string>
 </resources>
