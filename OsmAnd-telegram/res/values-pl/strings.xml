@@ -267,4 +267,8 @@
     <string name="shared_string_error_short">ERR</string>
     <string name="last_response_date">Ostatnia odpowiedź: %1$s</string>
     <string name="last_response_duration">Ostatnia odpowiedź: %1$s temu</string>
+    <string name="shared_string_export">Eksportuj</string>
+    <string name="logcat_buffer">Bufor katalogu dziennika</string>
+    <string name="logcat_buffer_descr">Sprawdzanie i udostępnianie szczegółowych logów aplikacji</string>
+    <string name="send_report">Wyślij raport</string>
 </resources>
