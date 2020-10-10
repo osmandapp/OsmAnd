@@ -3865,5 +3865,5 @@
     <string name="clear_osm_token">Fjern OpenStreetmap-OAuth-symbol</string>
     <string name="perform_oauth_authorization">Logg inn via OAuth</string>
     <string name="what_is_new">Hva er nytt</string>
-    <string name="osm_edit_logout_success">Vellykket utlogging</string>
+    <string name="osm_edit_logout_success">Utlogget</string>
 </resources>
