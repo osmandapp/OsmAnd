@@ -1459,7 +1459,7 @@
     <string name="use_trackball">İzleme topu kullan</string>
     <string name="background_service_int_descr">Arka plan servisi tarafından kullanılan uyanma aralığı:</string>
     <string name="background_service_provider_descr">Arka plan servisi tarafından kullanılan konum yöntemi:</string>
-    <string name="route_head">Baş</string>
+    <string name="route_head">Düz gidin</string>
     <string name="map_screen_orientation">Ekran yönlendirme</string>
     <string name="no_address_found">Hiçbir adres belirlenmedi</string>
     <string name="voices">Sesli uyarılar</string>
@@ -3578,7 +3578,7 @@
     <string name="select_wikipedia_article_langs">Haritadaki Wikipedia makalelerinin dillerini seçin. Makaleyi okurken kullanılabilir herhangi bir dile geçiş yapın.</string>
     <string name="some_articles_may_not_available_in_lang">Bazı Wikipedia makaleleri sizin dilinizde mevcut olmayabilir.</string>
     <string name="lang_zhyue">Kantonca</string>
-    <string name="lang_zhminnan">Güney Min</string>
+    <string name="lang_zhminnan">Güney Mince</string>
     <string name="lang_yo">Yorubaca</string>
     <string name="lang_war">Varayca</string>
     <string name="lang_uz">Özbekçe</string>
@@ -3591,7 +3591,7 @@
     <string name="lang_ne">Nepalce</string>
     <string name="lang_nap">Napolice</string>
     <string name="lang_my">Birmanca</string>
-    <string name="lang_min">Minangkabau dili</string>
+    <string name="lang_min">Minangkabauca</string>
     <string name="lang_mg">Malgaşça</string>
     <string name="lang_ky">Kırgızca</string>
     <string name="lang_kk">Kazakça</string>
