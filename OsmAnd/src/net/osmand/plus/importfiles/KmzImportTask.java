@@ -5,6 +5,7 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.util.Algorithms;
 
@@ -13,22 +14,24 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import static net.osmand.plus.importfiles.ImportHelper.KML_SUFFIX;
-import static net.osmand.plus.importfiles.KmlImportTask.loadGpxFromKml;
+import static net.osmand.plus.importfiles.KmlImportTask.convertKmlToGpxStream;
 
 class KmzImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 
 	private ImportHelper importHelper;
 	private Uri uri;
 	private String name;
+	private long fileSize;
 	private boolean save;
 	private boolean useImportDir;
 
 	public KmzImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
-	                     @NonNull Uri uri, @NonNull String name, boolean save, boolean useImportDir) {
+	                     @NonNull Uri uri, @NonNull String name, @NonNull long fileSize, boolean save, boolean useImportDir) {
 		super(activity);
 		this.importHelper = importHelper;
 		this.uri = uri;
 		this.name = name;
+		this.fileSize = fileSize;
 		this.save = save;
 		this.useImportDir = useImportDir;
 	}
@@ -45,7 +48,11 @@ class KmzImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 				ZipEntry entry;
 				while ((entry = zis.getNextEntry()) != null) {
 					if (entry.getName().endsWith(KML_SUFFIX)) {
-						return loadGpxFromKml(is);
+						InputStream gpxStream = convertKmlToGpxStream(is);
+						if (gpxStream != null) {
+							fileSize = gpxStream.available();
+							return GPXUtilities.loadGPXFile(gpxStream);
+						}
 					}
 				}
 			}
@@ -61,6 +68,6 @@ class KmzImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 	@Override
 	protected void onPostExecute(GPXFile result) {
 		hideProgress();
-		importHelper.handleResult(result, name, save, useImportDir, false);
+		importHelper.handleResult(result, name, fileSize, save, useImportDir, false);
 	}
 }

@@ -12,6 +12,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
@@ -20,15 +21,17 @@ class KmlImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 	private ImportHelper importHelper;
 	private Uri uri;
 	private String name;
+	private long size;
 	private boolean save;
 	private boolean useImportDir;
 
 	public KmlImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
-	                     @NonNull Uri uri, String name, boolean save, boolean useImportDir) {
+						 @NonNull Uri uri, String name, boolean save, boolean useImportDir) {
 		super(activity);
 		this.importHelper = importHelper;
 		this.uri = uri;
 		this.name = name;
+		this.size = size;
 		this.save = save;
 		this.useImportDir = useImportDir;
 	}
@@ -39,11 +42,17 @@ class KmlImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 		try {
 			is = app.getContentResolver().openInputStream(uri);
 			if (is != null) {
-				return loadGpxFromKml(is);
+				InputStream gpxStream = convertKmlToGpxStream(is);
+				if (gpxStream != null) {
+					size = gpxStream.available();
+					return GPXUtilities.loadGPXFile(gpxStream);
+				}
 			}
 		} catch (FileNotFoundException e) {
 			//
 		} catch (SecurityException e) {
+			ImportHelper.log.error(e.getMessage(), e);
+		} catch (IOException e) {
 			ImportHelper.log.error(e.getMessage(), e);
 		} finally {
 			Algorithms.closeStream(is);
@@ -54,16 +63,16 @@ class KmlImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 	@Override
 	protected void onPostExecute(GPXFile result) {
 		hideProgress();
-		importHelper.handleResult(result, name, save, useImportDir, false);
+		importHelper.handleResult(result, name, size, save, useImportDir, false);
 	}
 
-	protected static GPXFile loadGpxFromKml(@NonNull InputStream is) {
+	protected static InputStream convertKmlToGpxStream(@NonNull InputStream is) {
 		String result = Kml2Gpx.toGpx(is);
 		if (result != null) {
 			try {
-				return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
+				return new ByteArrayInputStream(result.getBytes("UTF-8"));
 			} catch (UnsupportedEncodingException e) {
-				return null;
+				ImportHelper.log.error(e.getMessage(), e);
 			}
 		}
 		return null;

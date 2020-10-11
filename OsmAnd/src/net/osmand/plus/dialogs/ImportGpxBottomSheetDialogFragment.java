@@ -6,6 +6,7 @@ import android.view.View;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -13,7 +14,12 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.util.List;
 
 public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -23,6 +29,7 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 
 	private GPXFile gpxFile;
 	private String fileName;
+	private long fileSize;
 	private boolean save;
 	private boolean useImportDir;
 
@@ -34,8 +41,16 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 		this.gpxFile = gpxFile;
 	}
 
+	public void setFilesize(long fileSize) {
+		this.fileSize = fileSize;
+	}
+
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
 	}
 
 	public void setSave(boolean save) {
@@ -84,11 +99,38 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						importHelper.handleGpxImport(gpxFile, fileName, save, useImportDir);
+						final File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
+						final List<GpxUiHelper.GPXInfo> res = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
+						if(isFileExist(res) && isFileSameSize(res)) {
+							getMyApplication().showToastMessage(getMyApplication().getString(R.string.file_imported));
+						} else {
+							importHelper.handleGpxImport(gpxFile, fileName, fileSize, save, true);
+						}
 						dismiss();
 					}
 				})
 				.create();
 		items.add(asGpxItem);
+	}
+
+	private boolean isFileExist(List<GpxUiHelper.GPXInfo> res) {
+		for (GpxUiHelper.GPXInfo r : res) {
+			String pathFile = r.getFileName();
+			String fileNamePath = Algorithms.getFileWithoutDirs(pathFile);
+			if (fileNamePath.equals(fileName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isFileSameSize(List<GpxUiHelper.GPXInfo> res) {
+		for (GpxUiHelper.GPXInfo r : res) {
+			long fileSizeInput = r.getFileSize();
+			if (fileSizeInput == fileSize) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

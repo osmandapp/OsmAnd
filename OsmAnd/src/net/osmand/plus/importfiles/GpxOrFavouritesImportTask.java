@@ -10,29 +10,32 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.util.Algorithms;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import static net.osmand.plus.importfiles.KmlImportTask.loadGpxFromKml;
+import static net.osmand.plus.importfiles.KmlImportTask.convertKmlToGpxStream;
 
 class GpxOrFavouritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 
 	private ImportHelper importHelper;
 	private Uri fileUri;
 	private String fileName;
+	private long fileSize;
 	private boolean save;
 	private boolean useImportDir;
-	private boolean forceImportFavourites;
 	private boolean forceImportGpx;
+	private boolean forceImportFavourites;
 
 	public GpxOrFavouritesImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
-	                                 @NonNull Uri fileUri, String fileName, boolean save, boolean useImportDir,
+	                                 @NonNull Uri fileUri, String fileName, long fileSize, boolean save, boolean useImportDir,
 	                                 boolean forceImportFavourites, boolean forceImportGpx) {
 		super(activity);
 		this.importHelper = importHelper;
 		this.fileUri = fileUri;
 		this.fileName = fileName;
+		this.fileSize = fileSize;
 		this.save = save;
 		this.useImportDir = useImportDir;
 		this.forceImportFavourites = forceImportFavourites;
@@ -46,15 +49,24 @@ class GpxOrFavouritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile>
 		try {
 			is = app.getContentResolver().openInputStream(fileUri);
 			if (is != null) {
+				fileSize = is.available();
 				if (fileName != null && fileName.endsWith(ImportHelper.KML_SUFFIX)) {
-					return loadGpxFromKml(is);
+					InputStream gpxStream = convertKmlToGpxStream(is);
+					if (gpxStream != null) {
+						fileSize = gpxStream.available();
+						return GPXUtilities.loadGPXFile(gpxStream);
+					}
 				} else if (fileName != null && fileName.endsWith(ImportHelper.KMZ_SUFFIX)) {
 					try {
 						zis = new ZipInputStream(is);
 						ZipEntry entry;
 						while ((entry = zis.getNextEntry()) != null) {
 							if (entry.getName().endsWith(ImportHelper.KML_SUFFIX)) {
-								return loadGpxFromKml(zis);
+								InputStream gpxStream = convertKmlToGpxStream(is);
+								if (gpxStream != null) {
+									fileSize = gpxStream.available();
+									return GPXUtilities.loadGPXFile(gpxStream);
+								}
 							}
 						}
 					} catch (Exception e) {
@@ -66,6 +78,8 @@ class GpxOrFavouritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile>
 			}
 		} catch (FileNotFoundException e) {
 			//
+		} catch (IOException e) {
+			ImportHelper.log.error(e.getMessage(), e);
 		} catch (SecurityException e) {
 			ImportHelper.log.error(e.getMessage(), e);
 		} finally {
@@ -78,6 +92,6 @@ class GpxOrFavouritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile>
 	@Override
 	protected void onPostExecute(GPXFile result) {
 		hideProgress();
-		importHelper.importGpxOrFavourites(result, fileName, save, useImportDir, forceImportFavourites, forceImportGpx);
+		importHelper.importGpxOrFavourites(result, fileName, fileSize, save, useImportDir, forceImportFavourites, forceImportGpx);
 	}
 }

@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="file_imported">File is already imported in OsmAnd</string>
     <string name="osm_edit_logout_success">Logout successful</string>
     <string name="clear_osm_token">Clear OpenStreetMap OAuth token</string>
     <string name="perform_oauth_authorization">Log in via OAuth</string>

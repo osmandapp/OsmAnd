@@ -178,7 +178,7 @@ public class IntentHelper {
 					if ("file".equals(scheme)) {
 						final String path = data.getPath();
 						if (path != null) {
-							mapActivity.getImportHelper().handleFileImport(data, new File(path).getName(), intent.getExtras(), true);
+							mapActivity.getImportHelper().handleFileImport(data, new File(path).getName(), new File(path).length(), intent.getExtras(), true);
 						}
 						clearIntent(intent);
 					} else if ("content".equals(scheme)) {

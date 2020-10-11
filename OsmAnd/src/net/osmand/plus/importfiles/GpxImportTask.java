@@ -10,6 +10,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.util.Algorithms;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
@@ -17,17 +18,20 @@ class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 	private ImportHelper importHelper;
 	private Uri gpxFile;
 	private String fileName;
+	private long fileSize;
+
 	private boolean save;
 	private boolean useImportDir;
 	private boolean showInDetailsActivity;
 
 	public GpxImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
-	                     @NonNull Uri gpxFile, @NonNull String fileName, boolean save, boolean useImportDir,
-	                     boolean showInDetailsActivity) {
+                         @NonNull Uri gpxFile, @NonNull String fileName, long fileSize, boolean save, boolean useImportDir,
+                         boolean showInDetailsActivity) {
 		super(activity);
 		this.importHelper = importHelper;
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
+		this.fileSize = fileSize;
 		this.save = save;
 		this.useImportDir = useImportDir;
 		this.showInDetailsActivity = showInDetailsActivity;
@@ -39,10 +43,13 @@ class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 		try {
 			is = app.getContentResolver().openInputStream(gpxFile);
 			if (is != null) {
+				fileSize = is.available();
 				return GPXUtilities.loadGPXFile(is);
 			}
 		} catch (FileNotFoundException e) {
 			//
+		} catch (IOException e) {
+			ImportHelper.log.error(e.getMessage(), e);
 		} catch (SecurityException e) {
 			ImportHelper.log.error(e.getMessage(), e);
 		} finally {
@@ -54,6 +61,6 @@ class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 	@Override
 	protected void onPostExecute(GPXFile result) {
 		hideProgress();
-		importHelper.handleResult(result, fileName, save, useImportDir, false, showInDetailsActivity);
+		importHelper.handleResult(result, fileName, fileSize, save, useImportDir, false, showInDetailsActivity);
 	}
 }

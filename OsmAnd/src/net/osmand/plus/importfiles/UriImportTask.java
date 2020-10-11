@@ -37,6 +37,7 @@ class UriImportTask extends BaseImportAsyncTask<Void, Void, String> {
 	private ImportHelper importHelper;
 	private Uri uri;
 	private String tempFileName;
+	private long fileSize;
 
 	private int fileSignature;
 
@@ -44,10 +45,11 @@ class UriImportTask extends BaseImportAsyncTask<Void, Void, String> {
 	private boolean useImportDir;
 
 	public UriImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
-						 @NonNull Uri uri, boolean save, boolean useImportDir) {
+						 @NonNull Uri uri, @NonNull long fileSize, boolean save, boolean useImportDir) {
 		super(activity);
 		this.importHelper = importHelper;
 		this.uri = uri;
+		this.fileSize = fileSize;
 		this.save = save;
 		this.useImportDir = useImportDir;
 	}
@@ -104,13 +106,13 @@ class UriImportTask extends BaseImportAsyncTask<Void, Void, String> {
 					String name = importType == ImportType.RENDERING ? "renderer" + RENDERER_INDEX_EXT : "router" + ROUTING_FILE_EXT;
 					importHelper.handleXmlFileImport(tempUri, name, null);
 				} else if (importType == ImportType.GPX || importType == ImportType.KML) {
-					importHelper.handleGpxOrFavouritesImport(tempUri, tempFileName, save, useImportDir, false, false);
+					importHelper.handleGpxOrFavouritesImport(tempUri, tempFileName, fileSize, save, useImportDir, false, false);
 				}
 			} else if (OBF_FILE_SIGNATURE == fileSignature) {
 				String name = createUniqueFileName(app, "map", MAPS_PATH, BINARY_MAP_INDEX_EXT);
 				importHelper.handleObfImport(tempUri, name + BINARY_MAP_INDEX_EXT);
 			} else if (ZIP_FILE_SIGNATURE == fileSignature) {
-				importHelper.handleZipImport(tempUri, save, useImportDir);
+				importHelper.handleZipImport(tempUri, save, fileSize, useImportDir);
 			} else if (SQLITE_FILE_SIGNATURE == fileSignature) {
 				String name = createUniqueFileName(app, "online_map", TILES_INDEX_DIR, SQLITE_EXT);
 				importHelper.handleSqliteTileImport(tempUri, name + SQLITE_EXT);
