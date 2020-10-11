@@ -633,7 +633,7 @@
     <string name="local_index_installed">Yerel sürüm</string>
     <string name="local_index_items_backuped">%1$d/%2$d öge devre dışı bırakıldı.</string>
     <string name="local_index_items_deleted">%1$d/%2$d öge silindi.</string>
-    <string name="local_index_items_restored">%1$d/%2$d öge aktifleştirildi.</string>
+    <string name="local_index_items_restored">%1$d/%2$d öge etkinleştirildi.</string>
     <string name="local_index_descr_title">Harita dosyalarını yönetin.</string>
     <string name="local_index_mi_restore">Aktifleştir</string>
     <string name="local_index_mi_backup">Pasifleştir</string>
@@ -641,7 +641,7 @@
     <string name="local_index_address_data">Adres Verisi</string>
     <string name="local_index_transport_data">Toplu taşıma verileri</string>
     <string name="local_index_map_data">Harita Verisi</string>
-    <string name="local_indexes_cat_backup">Pasifleştir</string>
+    <string name="local_indexes_cat_backup">Devre dışı</string>
     <string name="local_indexes_cat_tts">Sesli uyarılar (TTS)</string>
     <string name="local_indexes_cat_voice">Sesli uyarılar (kaydedilmiş)</string>
     <string name="local_indexes_cat_poi">POI Verisi</string>
@@ -2094,7 +2094,7 @@
     <string name="shared_string_deleted">Silindi</string>
     <string name="shared_string_edited">Değiştirildi</string>
     <string name="shared_string_added">Eklendi</string>
-    <string name="marker_activated">İşaretleyici %s aktifleştirildi.</string>
+    <string name="marker_activated">%s işaretleyicisi etkinleştirildi.</string>
     <string name="one_tap_active_descr">İçerik menüsünü açmadan, harita üzerinde bir belirtecin üzerine bas ve aktif belirteçlerin üzerine sürükle.</string>
     <string name="one_tap_active">\'Tek basış\' aktif</string>
     <string name="empty_state_av_notes">Not alın!</string>
