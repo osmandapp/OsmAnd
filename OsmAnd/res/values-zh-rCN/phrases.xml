@@ -40,7 +40,7 @@
     <string name="poi_blood_donation">献血</string>
     <string name="poi_denotation_landmark">地标</string>
     <string name="poi_car_rental">车辆租赁</string>
-    <string name="poi_toilets">洗手间</string>
+    <string name="poi_toilets">洗手间; 厕所</string>
     <string name="poi_shower">淋浴</string>
     <string name="poi_smoking_area">吸烟区</string>
     <string name="poi_internet_cafe">网咖</string>
@@ -101,13 +101,13 @@
     <string name="poi_finance">金融</string>
     <string name="poi_natural">自然</string>
     <string name="poi_military">军事</string>
-    <string name="poi_alcohol">酒商店</string>
+    <string name="poi_alcohol">贩酒商店</string>
     <string name="poi_chocolate">巧克力店</string>
     <string name="poi_coffee">咖啡馆</string>
     <string name="poi_beverages">饮料店</string>
     <string name="poi_ice_cream">冰淇淋馆</string>
     <string name="poi_tea">茶馆</string>
-    <string name="poi_wine">葡萄酒店</string>
+    <string name="poi_wine">葡萄酒商店</string>
     <string name="poi_books">书店</string>
     <string name="poi_bicycle">自行车店</string>
     <string name="poi_bag">袋子店</string>
@@ -407,7 +407,7 @@
     <string name="poi_covered_yes">是</string>
     <string name="poi_tactile_paving_yes">是</string>
     <string name="poi_traffic_signals_sound_yes">是</string>
-    <string name="poi_traffic_signals_sound_no">否</string>
+    <string name="poi_traffic_signals_sound_no">声音：无</string>
     <string name="poi_railway_crossing">铁道交口</string>
     <string name="poi_horse_riding">骑马</string>
     <string name="poi_garden">花园</string>
