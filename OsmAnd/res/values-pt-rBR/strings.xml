@@ -2821,7 +2821,7 @@
     <string name="osm_live_payment_renews_annually">Renova anualmente</string>
     <string name="osm_live_payment_renews_quarterly">Renova trimestralmente</string>
     <string name="powered_by_osmand">Por OsmAnd</string>
-    <string name="default_price_currency_format">%1$,2f %2$s</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Período de pagamento:</string>
     <string name="osm_live_payment_contribute_descr">As doações ajudam a financiar a cartografia no OSM.</string>
     <string name="release_3_1">• Navegação: Corrige barra de progresso, inversão rápida de início e fim de rota 
