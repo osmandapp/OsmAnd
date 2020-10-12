@@ -153,16 +153,6 @@ public class AndroidUtils {
 				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
 	}
 
-	public static String trimExtension(String src) {
-		if (src != null) {
-			int index = src.lastIndexOf('.');
-			if (index != -1) {
-				return src.substring(0, index);
-			}
-		}
-		return src;
-	}
-
 	public static String addColon(OsmandApplication app, @StringRes int stringRes) {
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(stringRes), "").trim();
 	}

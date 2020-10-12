@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -526,7 +525,7 @@ public class MapMarkersHelper {
 
 	private MapMarkersGroup createGPXMarkerGroup(File fl) {
 		return new MapMarkersGroup(getMarkerGroupId(fl),
-				AndroidUtils.trimExtension(fl.getName()),
+				Algorithms.getFileNameWithoutExtension(fl.getName()),
 				MapMarkersGroup.GPX_TYPE);
 	}
 	
