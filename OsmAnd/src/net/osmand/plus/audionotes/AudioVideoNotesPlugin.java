@@ -1800,11 +1800,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return SettingsAudioVideoActivity.class;
-	}
-
-	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.MULTIMEDIA_NOTES;
 	}

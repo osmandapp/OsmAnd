@@ -66,11 +66,6 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return SettingsAccessibilityActivity.class;
-	}
-
-	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.ACCESSIBILITY_SETTINGS;
 	}

@@ -198,11 +198,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return SettingsOsmEditingActivity.class;
-	}
-
-	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.OPEN_STREET_MAP_EDITING;
 	}

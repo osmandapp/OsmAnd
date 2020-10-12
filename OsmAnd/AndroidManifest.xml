@@ -497,8 +497,6 @@
 		<activity android:name="net.osmand.plus.activities.FavoritesListActivity" android:label="@string/favourites_list_activity" />
 		<activity android:name=".myplaces.FavoritesActivity" android:windowSoftInputMode="adjustPan" />
 		<activity android:name="net.osmand.plus.activities.TrackActivity"/>
-		<activity android:name="net.osmand.plus.activities.PluginsActivity" />
-		<activity android:name="net.osmand.plus.activities.PluginActivity" />
 		<activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity" />
 
 

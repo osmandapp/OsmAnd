@@ -111,10 +111,6 @@ public abstract class OsmandPlugin {
 		return app.getUIUtilities().getIcon(getLogoResourceId());
 	}
 
-	public Class<? extends Activity> getSettingsActivity() {
-		return null;
-	}
-
 	public SettingsScreenType getSettingsScreenType() {
 		return null;
 	}

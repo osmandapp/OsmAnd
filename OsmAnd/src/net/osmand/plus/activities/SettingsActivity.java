@@ -1,11 +1,9 @@
 package net.osmand.plus.activities;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
@@ -59,21 +57,21 @@ public class SettingsActivity extends SettingsBaseActivity {
 		}
 		PreferenceCategory plugins = (PreferenceCategory) screen.findPreference("plugin_settings");
 		for(OsmandPlugin op : OsmandPlugin.getEnabledPlugins()) {
-			final Class<? extends Activity> sa = op.getSettingsActivity();
-			if(sa != null) {
-				Preference preference = new Preference(this);
-				preference.setTitle(op.getName());
-				preference.setKey(op.getId());
-				preference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-					@Override
-					public boolean onPreferenceClick(Preference preference) {
-						startActivity(new Intent(SettingsActivity.this, sa));
-						return false;
-					}
-				});
-				plugins.addPreference(preference);
-			}
+//			final Class<? extends Activity> sa = op.getSettingsActivity();
+//			if(sa != null) {
+//				Preference preference = new Preference(this);
+//				preference.setTitle(op.getName());
+//				preference.setKey(op.getId());
+//				preference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+//
+//					@Override
+//					public boolean onPreferenceClick(Preference preference) {
+//						startActivity(new Intent(SettingsActivity.this, sa));
+//						return false;
+//					}
+//				});
+//				plugins.addPreference(preference);
+//			}
 		}
     }
 

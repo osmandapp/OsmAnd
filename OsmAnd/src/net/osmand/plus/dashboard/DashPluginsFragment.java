@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -70,9 +69,10 @@ public class DashPluginsFragment extends DashBaseFragment {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(getActivity(), PluginActivity.class);
-				intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
-				startActivity(intent);
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					PluginsFragment.showInstance(activity.getSupportFragmentManager());
+				}
 				closeDashboard();
 			}
 		};
