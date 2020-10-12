@@ -78,15 +78,6 @@ public class SettingsActivity extends SettingsBaseActivity {
     }
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if ((requestCode == PLUGINS_SELECTION_REQUEST) && (resultCode == PluginsActivity.ACTIVE_PLUGINS_LIST_MODIFIED)) {
-			finish();
-			startActivity(getIntent());
-		}
-	}
-
-	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference == general) {
 			startActivity(new Intent(this, SettingsGeneralActivity.class));

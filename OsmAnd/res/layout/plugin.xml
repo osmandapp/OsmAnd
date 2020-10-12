@@ -1,186 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
-        android:orientation="vertical"
-        tools:context=".activities.PluginActivity">
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
-		<FrameLayout
+		<include layout="@layout/global_preference_toolbar" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			tools:context=".activities.PluginActivity">
 
-			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@+id/plugin_image_placeholder"
-				android:layout_width="360dp"
-				android:layout_height="144dp"
-				android:layout_gravity="center"
-				android:scaleType="center"
-				android:background="@color/osmand_orange"
-				osmand:srcCompat="@drawable/ic_extension_dark"
-				android:visibility="gone"/>
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
 
-			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@+id/plugin_image"
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/plugin_image_placeholder"
+					android:layout_width="360dp"
+					android:layout_height="144dp"
+					android:layout_gravity="center"
+					android:background="@color/osmand_orange"
+					android:scaleType="center"
+					android:visibility="gone"
+					osmand:srcCompat="@drawable/ic_extension_dark" />
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/plugin_image"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"
+					android:adjustViewBounds="true"
+					android:maxWidth="360dp"
+					android:maxHeight="200dp"
+					android:scaleType="fitCenter" />
+
+			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/plugin_header"
+				android:layout_width="match_parent"
+				android:layout_height="66dp"
+				android:background="?attr/expandable_list_item_background"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingLeft="@dimen/content_padding"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingRight="@dimen/content_padding">
+
+				<net.osmand.plus.widgets.ButtonEx
+					android:id="@+id/plugin_settings"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical|start"
+					android:layout_marginTop="9dp"
+					android:layout_marginBottom="9dp"
+					android:background="?attr/expandable_list_item_background"
+					android:drawablePadding="10dp"
+					android:ellipsize="end"
+					android:lines="1"
+					android:maxLines="1"
+					android:paddingStart="0dp"
+					android:paddingLeft="0dp"
+					android:paddingEnd="@dimen/content_padding"
+					android:paddingRight="@dimen/content_padding"
+					android:text="@string/shared_string_settings"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_sub_text_size"
+					osmand:textAllCapsCompat="true"
+					osmand:typeface="@string/font_roboto_medium" />
+
+				<FrameLayout
+					android:layout_width="139dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical|end"
+					android:layout_marginTop="@dimen/content_padding"
+					android:layout_marginBottom="@dimen/content_padding">
+
+					<net.osmand.plus.widgets.SwitchEx
+						android:id="@+id/plugin_enable_disable"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:background="?attr/switch_ex_background"
+						android:ellipsize="end"
+						android:lines="1"
+						android:maxLines="1"
+						android:paddingStart="9.5dp"
+						android:paddingLeft="9.5dp"
+						android:paddingTop="8dp"
+						android:paddingEnd="9.5dp"
+						android:paddingRight="9.5dp"
+						android:paddingBottom="8dp"
+						android:textColor="?attr/switch_ex_text_color"
+						android:textOff="@string/shared_string_off"
+						android:textOn="@string/shared_string_on"
+						android:textSize="@dimen/default_sub_text_size"
+						osmand:textAllCapsCompat="true"
+						osmand:typeface="@string/font_roboto_medium" />
+
+					<net.osmand.plus.widgets.ButtonEx
+						android:id="@+id/plugin_get"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:background="@drawable/get_button_background"
+						android:ellipsize="end"
+						android:lines="1"
+						android:maxLines="1"
+						android:paddingStart="9.5dp"
+						android:paddingLeft="9.5dp"
+						android:paddingTop="8dp"
+						android:paddingEnd="9.5dp"
+						android:paddingRight="9.5dp"
+						android:paddingBottom="8dp"
+						android:text="@string/get_plugin"
+						android:textColor="@color/color_white"
+						android:textSize="@dimen/default_sub_text_size"
+						android:visibility="gone"
+						osmand:textAllCapsCompat="true"
+						osmand:typeface="@string/font_roboto_medium" />
+
+				</FrameLayout>
+
+			</FrameLayout>
+
+			<LinearLayout
+				android:id="@+id/plugin_install_header"
+				android:layout_width="match_parent"
+				android:layout_height="66dp"
+				android:background="?attr/plugin_details_install_header_bg"
+				android:gravity="center_vertical"
+				android:orientation="horizontal"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingLeft="@dimen/content_padding"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingRight="@dimen/content_padding"
+				android:visibility="gone"
+				tools:visibility="visible">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/ic_world_globe"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					tools:background="@drawable/ic_world_globe_dark" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingStart="@dimen/content_padding"
+					android:paddingLeft="@dimen/content_padding"
+					android:paddingEnd="@dimen/content_padding"
+					android:paddingRight="@dimen/content_padding"
+					android:text="@string/plugin_install_needs_network"
+					android:textColor="?android:textColorSecondary"
+					osmand:typeface="@string/font_roboto_regular" />
+
+			</LinearLayout>
+
+			<net.osmand.plus.widgets.TextViewEx
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_horizontal"
-				android:adjustViewBounds="true"
-				android:maxWidth="360dp"
-				android:maxHeight="200dp"
-				android:scaleType="fitCenter" />
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:text="@string/shared_string_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				osmand:textAllCapsCompat="true"
+				osmand:typeface="@string/font_roboto_medium" />
 
-		</FrameLayout>
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/plugin_description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginTop="14dp"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				osmand:typeface="@string/font_roboto_regular"
+				tools:text="@string/lorem_ipsum" />
 
-        <FrameLayout
-            android:id="@+id/plugin_header"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:background="?attr/expandable_list_item_background"
-            android:paddingLeft="@dimen/content_padding"
-            android:paddingRight="@dimen/content_padding"
-	        android:paddingEnd="@dimen/content_padding"
-	        android:paddingStart="@dimen/content_padding">
+		</LinearLayout>
 
-            <net.osmand.plus.widgets.ButtonEx
-                android:id="@+id/plugin_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start"
-                android:layout_marginBottom="9dp"
-                android:layout_marginTop="9dp"
-                android:background="?attr/expandable_list_item_background"
-                android:drawablePadding="10dp"
-                android:ellipsize="end"
-                android:lines="1"
-                android:maxLines="1"
-                android:paddingLeft="0dp"
-                android:paddingRight="@dimen/content_padding"
-                android:text="@string/shared_string_settings"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/default_sub_text_size"
-                osmand:textAllCapsCompat="true"
-                osmand:typeface="@string/font_roboto_medium"
-	            android:paddingEnd="@dimen/content_padding"
-	            android:paddingStart="0dp" />
+	</ScrollView>
 
-            <FrameLayout
-                android:layout_width="139dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginBottom="@dimen/content_padding"
-                android:layout_marginTop="@dimen/content_padding">
-
-                <net.osmand.plus.widgets.SwitchEx
-                    android:id="@+id/plugin_enable_disable"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/switch_ex_background"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="9.5dp"
-                    android:paddingRight="9.5dp"
-                    android:paddingTop="8dp"
-                    android:textColor="?attr/switch_ex_text_color"
-                    android:textOff="@string/shared_string_off"
-                    android:textOn="@string/shared_string_on"
-                    android:textSize="@dimen/default_sub_text_size"
-                    osmand:textAllCapsCompat="true"
-                    osmand:typeface="@string/font_roboto_medium"
-	                android:paddingStart="9.5dp"
-	                android:paddingEnd="9.5dp" />
-
-                <net.osmand.plus.widgets.ButtonEx
-                    android:id="@+id/plugin_get"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/get_button_background"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="9.5dp"
-                    android:paddingRight="9.5dp"
-                    android:paddingTop="8dp"
-                    android:text="@string/get_plugin"
-                    android:textColor="@color/color_white"
-                    android:textSize="@dimen/default_sub_text_size"
-                    android:visibility="gone"
-                    osmand:textAllCapsCompat="true"
-                    osmand:typeface="@string/font_roboto_medium"
-	                android:paddingStart="9.5dp"
-	                android:paddingEnd="9.5dp" />
-            </FrameLayout>
-        </FrameLayout>
-
-        <LinearLayout
-            android:id="@+id/plugin_install_header"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:background="?attr/plugin_details_install_header_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/content_padding"
-            android:paddingRight="@dimen/content_padding"
-            android:visibility="gone"
-            tools:visibility="visible"
-	        android:paddingEnd="@dimen/content_padding"
-	        android:paddingStart="@dimen/content_padding">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ic_world_globe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:background="@drawable/ic_world_globe_dark"/>
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:text="@string/plugin_install_needs_network"
-                android:textColor="?android:textColorSecondary"
-                osmand:typeface="@string/font_roboto_regular"
-	            android:paddingStart="@dimen/content_padding"
-	            android:paddingEnd="@dimen/content_padding" />
-        </LinearLayout>
-
-        <net.osmand.plus.widgets.TextViewEx
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/content_padding"
-            android:layout_marginRight="@dimen/content_padding"
-            android:layout_marginTop="@dimen/content_padding"
-            android:text="@string/shared_string_description"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="@dimen/default_desc_text_size"
-            osmand:textAllCapsCompat="true"
-            osmand:typeface="@string/font_roboto_medium"
-	        android:layout_marginStart="@dimen/content_padding"
-	        android:layout_marginEnd="@dimen/content_padding" />
-
-        <net.osmand.plus.widgets.TextViewEx
-            android:id="@+id/plugin_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/content_padding"
-            android:layout_marginRight="@dimen/content_padding"
-            android:layout_marginTop="14dp"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/default_list_text_size"
-            osmand:typeface="@string/font_roboto_regular"
-            tools:text="@string/lorem_ipsum"
-	        android:layout_marginEnd="@dimen/content_padding"
-	        android:layout_marginStart="@dimen/content_padding" />
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

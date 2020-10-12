@@ -52,6 +52,7 @@
             android:ellipsize="end"
             android:lines="2"
             android:maxLines="2"
+	        android:scrollbars="none"
             android:text="@string/lorem_ipsum"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_desc_text_size"

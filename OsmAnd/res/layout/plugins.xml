@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="?attr/bg_color"
 	android:orientation="vertical">
 
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include layout="@layout/global_preference_toolbar" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
 	<ListView
-		android:id="@android:id/list"
+		android:id="@+id/plugins_list"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		tools:listitem="@layout/plugins_list_item"/>
+		android:dividerHeight="1dp"
+		android:drawSelectorOnTop="true" />
+
 </LinearLayout>

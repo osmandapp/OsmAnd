@@ -974,10 +974,8 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent("drawer_plugins_open");
-						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
-								.getPluginsActivity());
-						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-						mapActivity.startActivity(newIntent);
+						MapActivity.clearPrevActivityIntent();
+						PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 						return true;
 					}
 				}).createItem());

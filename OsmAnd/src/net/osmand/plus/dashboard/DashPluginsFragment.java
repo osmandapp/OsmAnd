@@ -14,11 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.PluginActivity;
+import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
@@ -84,7 +86,10 @@ public class DashPluginsFragment extends DashBaseFragment {
 		view.findViewById(R.id.show_all).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startActivity(new Intent(getActivity(), getMyApplication().getAppCustomization().getPluginsActivity()));
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					PluginsFragment.showInstance(activity.getSupportFragmentManager());
+				}
 				closeDashboard();
 			}
 		});
