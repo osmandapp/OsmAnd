@@ -11,16 +11,12 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.layers.AidlMapLayer;
@@ -28,8 +24,6 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
-import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -39,7 +33,6 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 
 	public static final String AIDL_LAYERS_PREFIX = "aidl_layers_";
 	public static final String AIDL_WIDGETS_PREFIX = "aidl_widgets_";
-	public static final String AIDL_MARGINS_PREFIX = "aidl_margins_";
 
 	static final String AIDL_OBJECT_ID = "aidl_object_id";
 	static final String AIDL_PACKAGE_NAME = "aidl_package_name";
@@ -62,7 +55,6 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 
 	private CommonPreference<Boolean> layersPref;
-	private CommonPreference<String> marginsPref;
 
 	private String pack;
 	private String name;
@@ -76,7 +68,6 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		this.pack = pack;
 		this.enabled = enabled;
 		layersPref = app.getSettings().registerBooleanPreference(AIDL_LAYERS_PREFIX + pack, true).cache();
-		marginsPref = app.getSettings().registerStringPreference(AIDL_MARGINS_PREFIX + pack, null).cache();
 	}
 
 	public boolean isEnabled() {
@@ -131,45 +122,6 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			mapLayer = new AidlMapLayer(mapActivity, layer, pack);
 			mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
 			mapLayers.put(layer.getId(), mapLayer);
-		}
-	}
-
-	void updateMapMargins(@NonNull MapActivity mapActivity) {
-		String marginsJson = marginsPref.get();
-		if (marginsJson != null) {
-			Type type = new TypeToken<HashMap<String, Integer>>() {
-			}.getType();
-			Map<String, Integer> margins = new Gson().fromJson(marginsJson, type);
-			if (margins != null) {
-				Integer leftMargin = margins.get("left");
-				Integer topMargin = margins.get("top");
-				Integer rightMargin = margins.get("right");
-				Integer bottomMargin = margins.get("bottom");
-
-				int left = leftMargin != null ? leftMargin : 0;
-				int top = topMargin != null ? topMargin : 0;
-				int right = rightMargin != null ? rightMargin : 0;
-				int bottom = bottomMargin != null ? bottomMargin : 0;
-
-				mapActivity.setMargins(left, top, right, bottom);
-				return;
-			}
-		}
-		mapActivity.setMargins(0, 0, 0, 0);
-	}
-
-	public void setMargins(@NonNull MapActivity mapActivity, String appModeKey, int leftMargin, int topMargin, int rightMargin, int bottomMargin) {
-		ApplicationMode mode = ApplicationMode.valueOfStringKey(appModeKey, null);
-		if (mode != null) {
-			Map<String, Integer> margins = new HashMap<>();
-			margins.put("left", leftMargin);
-			margins.put("top", topMargin);
-			margins.put("right", rightMargin);
-			margins.put("bottom", bottomMargin);
-
-			String marginsJson = new Gson().toJson(margins);
-			marginsPref.setModeValue(mode, marginsJson);
-			updateMapMargins(mapActivity);
 		}
 	}
 
