@@ -157,14 +157,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private enum AdditionalInfoType {
-		POINTS(MtPointsFragment.TAG),
-		GRAPH(MtGraphFragment.TAG);
+		POINTS(MtPointsFragment.class.getName()),
+		GRAPH(MtGraphFragment.class.getName());
 
 		AdditionalInfoType(String fragmentName) {
 			this.fragmentName = fragmentName;
 		}
 
-		String fragmentName;
+		final String fragmentName;
+
+		public String getFragmentName() {
+			return fragmentName;
+		}
 	}
 
 	private void setEditingCtx(MeasurementEditingContext editingCtx) {
@@ -237,6 +241,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void hideProgressBar() {
 				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setVisibility(View.GONE);
 				progressBarVisible = false;
+				updateAdditionalInfoView();
 			}
 
 			@Override
@@ -526,7 +531,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			} else {
 				return;
 			}
-			setAdditionalInfoFragment(type.fragmentName);
+			setAdditionalInfoFragment(type.getFragmentName());
 		}
 	}
 
@@ -1513,7 +1518,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			for (AdditionalInfoType type : AdditionalInfoType.values()) {
 				try {
 					FragmentManager fm = getChildFragmentManager();
-					Fragment fragment = fm.findFragmentByTag(type.fragmentName);
+					Fragment fragment = fm.findFragmentByTag(type.getFragmentName());
 					if (fragment != null) {
 						return fragment;
 					}

@@ -21,8 +21,6 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 public class MtPointsFragment extends Fragment
 		implements MeasurementToolFragment.OnUpdateAdditionalInfoListener {
 
-	public static final String TAG = MtPointsFragment.class.getName();
-
 	private boolean nightMode;
 	private MeasurementToolAdapter adapter;
 	private MeasurementEditingContext editingCtx;

@@ -48,8 +48,6 @@ import java.util.Map;
 public class MtGraphFragment extends Fragment
 		implements MeasurementToolFragment.OnUpdateAdditionalInfoListener {
 
-	public static final String TAG = MtGraphFragment.class.getName();
-
 	private static String GRAPH_DATA_GPX_FILE_NAME = "graph_data_tmp";
 
 	private View commonGraphContainer;
