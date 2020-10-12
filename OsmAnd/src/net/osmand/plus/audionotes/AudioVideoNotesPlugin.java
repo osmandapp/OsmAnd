@@ -66,7 +66,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -1805,8 +1805,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return MultimediaNotesFragment.class;
+	public SettingsScreenType getSettingsScreenType() {
+		return SettingsScreenType.MULTIMEDIA_NOTES;
 	}
 
 	@Override

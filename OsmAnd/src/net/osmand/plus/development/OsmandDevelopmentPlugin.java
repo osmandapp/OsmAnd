@@ -14,7 +14,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -127,8 +127,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return DevelopmentSettingsFragment.class;
+	public SettingsScreenType getSettingsScreenType() {
+		return SettingsScreenType.DEVELOPMENT_SETTINGS;
 	}
 
 	@Override

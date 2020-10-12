@@ -368,7 +368,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		}
 		List<OsmandPlugin> plugins = OsmandPlugin.getVisiblePlugins();
 		for (OsmandPlugin plugin : plugins) {
-			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin || plugin.getSettingsFragment() == null) {
+			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin || plugin.getSettingsScreenType() == null) {
 				continue;
 			}
 			Preference preference = new Preference(ctx);
@@ -378,7 +378,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			preference.setSummary(plugin.getPrefsDescription());
 			preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
 			preference.setLayoutResource(R.layout.preference_with_descr);
-			preference.setFragment(plugin.getSettingsFragment().getName());
+			preference.setFragment(plugin.getSettingsScreenType().fragmentName);
 
 			preferenceCategory.addPreference(preference);
 		}

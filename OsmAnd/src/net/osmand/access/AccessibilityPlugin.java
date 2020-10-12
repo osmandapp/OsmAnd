@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -71,8 +71,8 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return AccessibilitySettingsFragment.class;
+	public SettingsScreenType getSettingsScreenType() {
+		return SettingsScreenType.ACCESSIBILITY_SETTINGS;
 	}
 
 	@Override
