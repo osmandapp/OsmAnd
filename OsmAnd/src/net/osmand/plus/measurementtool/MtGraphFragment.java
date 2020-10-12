@@ -1,15 +1,10 @@
 package net.osmand.plus.measurementtool;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,12 +16,12 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
@@ -43,7 +38,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class MtGraphFragment extends Fragment
+public class MtGraphFragment extends BaseCard
 		implements MeasurementToolFragment.OnUpdateAdditionalInfoListener {
 
 	private static String GRAPH_DATA_GPX_FILE_NAME = "graph_data_tmp";
@@ -55,10 +50,15 @@ public class MtGraphFragment extends Fragment
 	private HorizontalBarChart customGraphChart;
 	private RecyclerView rvGraphTypesMenu;
 
-	private boolean nightMode;
 	private MeasurementEditingContext editingCtx;
 	private GraphType currentGraphType;
 	private List<GraphType> graphTypes = new ArrayList<>();
+	private MeasurementToolFragment mtf;
+
+	public MtGraphFragment(@NonNull MapActivity mapActivity, MeasurementToolFragment mtf) {
+		super(mapActivity);
+		this.mtf = mtf;
+	}
 
 	private enum CommonGraphType {
 		OVERVIEW(R.string.shared_string_overview, false),
@@ -73,39 +73,6 @@ public class MtGraphFragment extends Fragment
 
 		final int titleId;
 		final boolean canBeCalculated;
-	}
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater,
-	                         @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
-
-		final MapActivity mapActivity = (MapActivity) getActivity();
-		final MeasurementToolFragment mtf = (MeasurementToolFragment) getParentFragment();
-		if (mapActivity == null || mtf == null) return null;
-
-		editingCtx = mtf.getEditingCtx();
-		OsmandApplication app = mapActivity.getMyApplication();
-
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		View view = UiUtilities.getInflater(app, nightMode).inflate(
-				R.layout.fragment_measurement_tool_graph, container, false);
-		commonGraphContainer = view.findViewById(R.id.common_graphs_container);
-		customGraphContainer = view.findViewById(R.id.custom_graphs_container);
-		messageContainer = view.findViewById(R.id.message_container);
-		commonGraphChart = (LineChart) view.findViewById(R.id.line_chart);
-		customGraphChart = (HorizontalBarChart) view.findViewById(R.id.horizontal_chart);
-		updateGraphData();
-
-		rvGraphTypesMenu = view.findViewById(R.id.graph_types_recycler_view);
-		rvGraphTypesMenu.setLayoutManager(
-				new LinearLayoutManager(mapActivity, RecyclerView.HORIZONTAL, false));
-
-		refreshGraphTypesSelectionMenu();
-		setupVisibleGraphType(graphTypes.get(0));
-
-		return view;
 	}
 
 	private void refreshGraphTypesSelectionMenu() {
@@ -149,7 +116,8 @@ public class MtGraphFragment extends Fragment
 	}
 
 	private void setupVisibleGraphType(GraphType preferredType) {
-		currentGraphType = preferredType.hasData() ? preferredType : getFirstAvailableGraphType();
+		currentGraphType = currentGraphType != null && preferredType.hasData()
+				? preferredType : getFirstAvailableGraphType();
 		updateDataView();
 	}
 
@@ -192,7 +160,7 @@ public class MtGraphFragment extends Fragment
 		messageContainer.setVisibility(View.VISIBLE);
 		TextView tvMessage = messageContainer.findViewById(R.id.message_text);
 		ImageView icon = messageContainer.findViewById(R.id.message_icon);
-		String message = getString(R.string.message_need_calculate_route_before_show_graph, currentGraphType.getTitle());
+		String message = app.getString(R.string.message_need_calculate_route_before_show_graph, currentGraphType.getTitle());
 		tvMessage.setText(message);
 		icon.setImageResource(R.drawable.ic_action_altitude_average);
 	}
@@ -224,7 +192,7 @@ public class MtGraphFragment extends Fragment
 			if (!Algorithms.isEmpty(dataSets)) {
 				data = new LineData(dataSets);
 			}
-			String title = getString(commonType.titleId);
+			String title = app.getString(commonType.titleId);
 			graphTypes.add(new GraphType(title, false, commonType.canBeCalculated, data));
 		}
 
@@ -328,12 +296,31 @@ public class MtGraphFragment extends Fragment
 				defaultRender, currentSearchRequest, defaultSearchRequest);
 	}
 
-	private OsmandApplication getMyApplication() {
-		return getMapActivity().getMyApplication();
+	@Override
+	public int getCardLayoutId() {
+		return R.layout.fragment_measurement_tool_graph;
 	}
 
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
+	@Override
+	protected void updateContent() {
+		if (mapActivity == null || mtf == null) return;
+
+		editingCtx = mtf.getEditingCtx();
+		OsmandApplication app = mapActivity.getMyApplication();
+
+		commonGraphContainer = view.findViewById(R.id.common_graphs_container);
+		customGraphContainer = view.findViewById(R.id.custom_graphs_container);
+		messageContainer = view.findViewById(R.id.message_container);
+		commonGraphChart = (LineChart) view.findViewById(R.id.line_chart);
+		customGraphChart = (HorizontalBarChart) view.findViewById(R.id.horizontal_chart);
+		updateGraphData();
+
+		rvGraphTypesMenu = view.findViewById(R.id.graph_types_recycler_view);
+		rvGraphTypesMenu.setLayoutManager(
+				new LinearLayoutManager(mapActivity, RecyclerView.HORIZONTAL, false));
+
+		refreshGraphTypesSelectionMenu();
+		setupVisibleGraphType(currentGraphType);
 	}
 
 	private static class GraphType {

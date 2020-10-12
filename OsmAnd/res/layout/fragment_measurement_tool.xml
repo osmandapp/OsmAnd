@@ -144,7 +144,7 @@
                 android:layout_height="@dimen/content_padding_small" />
 
             <FrameLayout
-                android:id="@+id/fragmentContainer"
+                android:id="@+id/cards_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

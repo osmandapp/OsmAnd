@@ -26,7 +26,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -72,6 +71,7 @@ import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.measurementtool.command.ReversePointsCommand;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.layers.MapControlsLayer;
@@ -116,6 +116,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private TextView distanceToCenterTv;
 	private String pointsSt;
 	private View additionalInfoContainer;
+	private ViewGroup additionalInfoCardsContainer;
+	private BaseCard visibleAdditionalInfoCard;
 	private LinearLayout customRadioButton;
 	private View mainView;
 	private ImageView upDownBtn;
@@ -157,18 +159,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private enum AdditionalInfoType {
-		POINTS(MtPointsFragment.class.getName()),
-		GRAPH(MtGraphFragment.class.getName());
-
-		AdditionalInfoType(String fragmentName) {
-			this.fragmentName = fragmentName;
-		}
-
-		final String fragmentName;
-
-		public String getFragmentName() {
-			return fragmentName;
-		}
+		POINTS,
+		GRAPH
 	}
 
 	private void setEditingCtx(MeasurementEditingContext editingCtx) {
@@ -264,6 +256,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		mainView = view.findViewById(R.id.main_view);
 		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		additionalInfoContainer = mainView.findViewById(R.id.additional_info_container);
+		additionalInfoCardsContainer = mainView.findViewById(R.id.cards_container);
 		if (portrait) {
 			customRadioButton = mainView.findViewById(R.id.custom_radio_buttons);
 
@@ -521,7 +514,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void changeAdditionalInfoType(@NonNull AdditionalInfoType type) {
 		if (!additionalInfoExpanded || !isCurrentAdditionalInfoType(type)) {
 			currentAdditionalInfoType = type;
-			additionalInfoExpanded = true;
 			updateUpDownBtn();
 			OsmandApplication app = getMyApplication();
 			if (AdditionalInfoType.POINTS.equals(type)) {
@@ -531,14 +523,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			} else {
 				return;
 			}
-			setAdditionalInfoFragment(type.getFragmentName());
+			setAdditionalInfoCard(type);
 		}
 	}
 
 	private void updateAdditionalInfoView() {
-		Fragment fragment = getActiveAdditionalInfoFragment();
-		if (fragment instanceof OnUpdateAdditionalInfoListener) {
-			((OnUpdateAdditionalInfoListener) fragment).onUpdateAdditionalInfo();
+		if (visibleAdditionalInfoCard instanceof OnUpdateAdditionalInfoListener) {
+			((OnUpdateAdditionalInfoListener) visibleAdditionalInfoCard).onUpdateAdditionalInfo();
 		}
 	}
 
@@ -1472,29 +1463,28 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (portrait) {
 			additionalInfoExpanded = false;
 			updateUpDownBtn();
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				Fragment activeFragment = getActiveAdditionalInfoFragment();
-				if (activeFragment != null) {
-					FragmentManager manager = getChildFragmentManager();
-					manager.beginTransaction().remove(activeFragment).commitAllowingStateLoss();
-				}
-				additionalInfoContainer.setVisibility(View.GONE);
-				setDefaultMapPosition();
-			}
+			additionalInfoContainer.setVisibility(View.GONE);
+			setDefaultMapPosition();
 		}
 	}
 
-	private void setAdditionalInfoFragment(String fragmentName) {
-		Context ctx = getContext();
-		if (ctx == null) return;
+	private void setAdditionalInfoCard(AdditionalInfoType type) {
+		MapActivity ma = getMapActivity();
+		if (ma == null) return;
 
-		Fragment fragment = Fragment.instantiate(ctx, fragmentName);
-		FragmentManager fm = getChildFragmentManager();
-		FragmentTransaction fragmentTransaction = fm.beginTransaction();
-		fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragmentName);
-		fragmentTransaction.commit();
-		fm.executePendingTransactions();
+		BaseCard additionalInfoCard = null;
+		if (type.equals(AdditionalInfoType.POINTS)) {
+			additionalInfoCard = new MtPointsFragment(ma, this);
+		} else if (type.equals(AdditionalInfoType.GRAPH)) {
+			additionalInfoCard = new MtGraphFragment(ma, this);
+		}
+
+		if (additionalInfoCard != null) {
+			visibleAdditionalInfoCard = additionalInfoCard;
+			additionalInfoCardsContainer.removeAllViews();
+			additionalInfoCardsContainer.addView(additionalInfoCard.build(ma));
+			additionalInfoExpanded = true;
+		}
 	}
 
 	private void collapseAdditionalInfoIfNoPointsEnough() {
@@ -1510,24 +1500,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				}
 			}
 		}
-	}
-
-	private Fragment getActiveAdditionalInfoFragment() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			for (AdditionalInfoType type : AdditionalInfoType.values()) {
-				try {
-					FragmentManager fm = getChildFragmentManager();
-					Fragment fragment = fm.findFragmentByTag(type.getFragmentName());
-					if (fragment != null) {
-						return fragment;
-					}
-				} catch (Exception e) {
-					// ignore
-				}
-			}
-		}
-		return null;
 	}
 
 	private void setDefaultMapPosition() {
