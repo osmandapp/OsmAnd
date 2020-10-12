@@ -12,6 +12,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -19,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -115,6 +117,14 @@ public class TracksCard extends BaseCard {
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					List<GPXUtilities.WptPt> points = item.file.getRoutePoints();
+					if (!points.isEmpty()) {
+						ApplicationMode mode = ApplicationMode.valueOfStringKey(points.get(0).getProfileType(), null);
+						if (mode != null) {
+							app.getRoutingHelper().setAppMode(mode);
+							app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
+						}
+					}
 					mapActivity.getMapActions().setGPXRouteParams(item.file);
 					app.getTargetPointsHelper().updateRouteAndRefresh(true);
 				}

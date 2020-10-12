@@ -216,10 +216,12 @@
 
                 <include
                     android:id="@+id/add_point_button"
+                    layout="@layout/bottom_sheet_dialog_button"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_width="@dimen/measurement_tool_button_width"
                     android:layout_gravity="end"
-                    layout="@layout/bottom_sheet_dialog_button" />
+                    android:minWidth="@dimen/measurement_tool_button_width" />
+
             </FrameLayout>
 
         </LinearLayout>
