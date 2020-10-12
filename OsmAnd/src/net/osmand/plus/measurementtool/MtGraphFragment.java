@@ -41,9 +41,7 @@ import static net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.Ho
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MtGraphFragment extends Fragment
 		implements MeasurementToolFragment.OnUpdateAdditionalInfoListener {
@@ -55,62 +53,26 @@ public class MtGraphFragment extends Fragment
 	private View messageContainer;
 	private LineChart commonGraphChart;
 	private HorizontalBarChart customGraphChart;
-	private RecyclerView rvMenu;
+	private RecyclerView rvGraphTypesMenu;
 
 	private boolean nightMode;
 	private MeasurementEditingContext editingCtx;
 	private GraphType currentGraphType;
-	private Map<GraphType, Object> graphData = new HashMap<>();
+	private List<GraphType> graphTypes = new ArrayList<>();
 
-	private enum GraphType {
-		OVERVIEW(R.string.shared_string_overview, false, false),
-		ALTITUDE(R.string.altitude, false, true),
-//		SLOPE(R.string.shared_string_slope, false, true),
-		SPEED(R.string.map_widget_speed, false, false),
+	private enum CommonGraphType {
+		OVERVIEW(R.string.shared_string_overview, false),
+		ALTITUDE(R.string.altitude, true),
+		SLOPE(R.string.shared_string_slope, true),
+		SPEED(R.string.map_widget_speed, false);
 
-		SURFACE(R.string.routeInfo_surface_name, true, false),
-		ROAD_TYPE(R.string.routeInfo_roadClass_name, true, false),
-		STEEPNESS(R.string.routeInfo_steepness_name, true, false),
-		SMOOTHNESS(R.string.routeInfo_smoothness_name, true, false);
-
-		GraphType(int titleId, boolean isCustomType, boolean canBeCalculated) {
+		CommonGraphType(int titleId, boolean canBeCalculated) {
 			this.titleId = titleId;
-			this.isCustomType = isCustomType;
 			this.canBeCalculated = canBeCalculated;
 		}
 
 		final int titleId;
-		final boolean isCustomType;
 		final boolean canBeCalculated;
-
-		private static List<GraphType> commonTypes;
-		private static List<GraphType> customTypes;
-
-		static List<GraphType> getCommonTypes() {
-			if (commonTypes == null) {
-				prepareLists();
-			}
-			return commonTypes;
-		}
-
-		static List<GraphType> getCustomTypes() {
-			if (customTypes == null) {
-				prepareLists();
-			}
-			return customTypes;
-		}
-
-		private static void prepareLists() {
-			commonTypes = new ArrayList<>();
-			customTypes = new ArrayList<>();
-			for (GraphType type : values()) {
-				if (type.isCustomType) {
-					customTypes.add(type);
-				} else {
-					commonTypes.add(type);
-				}
-			}
-		}
 	}
 
 	@Nullable
@@ -136,35 +98,33 @@ public class MtGraphFragment extends Fragment
 		customGraphChart = (HorizontalBarChart) view.findViewById(R.id.horizontal_chart);
 		updateGraphData();
 
-		rvMenu = view.findViewById(R.id.graph_types_recycler_view);
-		rvMenu.setLayoutManager(
+		rvGraphTypesMenu = view.findViewById(R.id.graph_types_recycler_view);
+		rvGraphTypesMenu.setLayoutManager(
 				new LinearLayoutManager(mapActivity, RecyclerView.HORIZONTAL, false));
 
-		prepareGraphTypesSelectionMenu();
-		setupVisibleGraphType(GraphType.OVERVIEW);
+		refreshGraphTypesSelectionMenu();
+		setupVisibleGraphType(graphTypes.get(0));
 
 		return view;
 	}
 
-	private void prepareGraphTypesSelectionMenu() {
-		rvMenu.removeAllViews();
+	private void refreshGraphTypesSelectionMenu() {
+		rvGraphTypesMenu.removeAllViews();
 		OsmandApplication app = getMyApplication();
 		int activeColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		final HorizontalSelectionAdapter adapter = new HorizontalSelectionAdapter(app, nightMode);
 		final ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
-		for (GraphType type : GraphType.values()) {
-			String title = getString(type.titleId);
-			HorizontalSelectionItem item = new HorizontalSelectionItem(title, type);
-			if (type.isCustomType) {
+		for (GraphType type : graphTypes) {
+			HorizontalSelectionItem item = new HorizontalSelectionItem(type.getTitle(), type);
+			if (type.isCustom()) {
 				item.setTitleColorId(activeColorId);
 			}
-			if (isDataAvailableFor(type) || type.canBeCalculated) {
+			if (type.hasData() || type.canBeCalculated) {
 				items.add(item);
 			}
 		}
 		adapter.setItems(items);
-		String selectedItemKey = currentGraphType != null ?
-				getString(currentGraphType.titleId) : items.get(0).getTitle();
+		String selectedItemKey = currentGraphType != null ? currentGraphType.getTitle() : items.get(0).getTitle();
 		adapter.setSelectedItemByTitle(selectedItemKey);
 		adapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
 			@Override
@@ -177,53 +137,52 @@ public class MtGraphFragment extends Fragment
 				}
 			}
 		});
-		rvMenu.setAdapter(adapter);
+		rvGraphTypesMenu.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
 
 	@Override
 	public void onUpdateAdditionalInfo() {
 		updateGraphData();
-		prepareGraphTypesSelectionMenu();
+		refreshGraphTypesSelectionMenu();
 		setupVisibleGraphType(currentGraphType);
 	}
 
 	private void setupVisibleGraphType(GraphType preferredType) {
-		currentGraphType = isDataAvailableFor(preferredType) ?
-				preferredType : getFirstAvailableGraphType();
+		currentGraphType = preferredType.hasData() ? preferredType : getFirstAvailableGraphType();
 		updateDataView();
 	}
 
 	private GraphType getFirstAvailableGraphType() {
-		for (GraphType type : GraphType.values()) {
-			if (isDataAvailableFor(type) || type.canBeCalculated) {
+		for (GraphType type : graphTypes) {
+			if (type.hasData() || type.canBeCalculated()) {
 				return type;
 			}
 		}
-		return GraphType.OVERVIEW;
+		return null;
 	}
 
 	private void updateDataView() {
-		if (isDataAvailableFor(currentGraphType)) {
+		if (currentGraphType.hasData()) {
 			showGraph();
-		} else if (currentGraphType.canBeCalculated) {
+		} else if (currentGraphType.canBeCalculated()) {
 			showMessage();
 		}
 	}
 
 	private void showGraph() {
-		if (currentGraphType.isCustomType) {
+		if (currentGraphType.isCustom()) {
 			customGraphChart.clear();
 			commonGraphContainer.setVisibility(View.GONE);
 			customGraphContainer.setVisibility(View.VISIBLE);
 			messageContainer.setVisibility(View.GONE);
-			prepareCustomGraphView();
+			prepareCustomGraphView((BarData) currentGraphType.getData());
 		} else {
 			commonGraphChart.clear();
 			commonGraphContainer.setVisibility(View.VISIBLE);
 			customGraphContainer.setVisibility(View.GONE);
 			messageContainer.setVisibility(View.GONE);
-			prepareCommonGraphView();
+			prepareCommonGraphView((LineData) currentGraphType.getData());
 		}
 	}
 
@@ -233,24 +192,19 @@ public class MtGraphFragment extends Fragment
 		messageContainer.setVisibility(View.VISIBLE);
 		TextView tvMessage = messageContainer.findViewById(R.id.message_text);
 		ImageView icon = messageContainer.findViewById(R.id.message_icon);
-		if (GraphType.ALTITUDE.equals(currentGraphType)) {
-			tvMessage.setText(R.string.message_need_calculate_route_for_show_graph);
-			icon.setImageResource(R.drawable.ic_action_altitude_average);
-		}
+		String message = getString(R.string.message_need_calculate_route_before_show_graph, currentGraphType.getTitle());
+		tvMessage.setText(message);
+		icon.setImageResource(R.drawable.ic_action_altitude_average);
 	}
 
-	private void prepareCommonGraphView() {
-		LineData data = (LineData) graphData.get(currentGraphType);
-		if (data == null) return;
-
+	private void prepareCommonGraphView(LineData data) {
 		GpxUiHelper.setupGPXChart(commonGraphChart, 4, 24f, 16f, !nightMode, true);
 		commonGraphChart.setData(data);
 	}
 
-	private void prepareCustomGraphView() {
-		BarData data = (BarData) graphData.get(currentGraphType);
-		OsmandApplication app = getMapActivity().getMyApplication();
-		if (data == null || app == null) return;
+	private void prepareCustomGraphView(BarData data) {
+		OsmandApplication app = getMyApplication();
+		if (app == null) return;
 
 		GpxUiHelper.setupHorizontalGPXChart(app, customGraphChart, 5, 9, 24, true, nightMode);
 		customGraphChart.setExtraRightOffset(16);
@@ -259,75 +213,57 @@ public class MtGraphFragment extends Fragment
 	}
 
 	private void updateGraphData() {
+		graphTypes.clear();
 		OsmandApplication app = getMyApplication();
 		GPXTrackAnalysis analysis = createGpxTrackAnalysis();
 
 		// update common graph data
-		for (GraphType type : GraphType.getCommonTypes()) {
-			List<ILineDataSet> dataSets = getDataSets(type, commonGraphChart, analysis);
+		for (CommonGraphType commonType : CommonGraphType.values()) {
+			List<ILineDataSet> dataSets = getDataSets(commonType, commonGraphChart, analysis);
+			Object data = null;
 			if (!Algorithms.isEmpty(dataSets)) {
-				graphData.put(type, new LineData(dataSets));
-			} else {
-				graphData.put(type, null);
+				data = new LineData(dataSets);
 			}
+			String title = getString(commonType.titleId);
+			graphTypes.add(new GraphType(title, false, commonType.canBeCalculated, data));
 		}
 
 		// update custom graph data
 		List<RouteSegmentResult> routeSegments = editingCtx.getAllRouteSegments();
 		List<RouteStatistics> routeStatistics = calculateRouteStatistics(routeSegments);
-		for (GraphType type : GraphType.getCustomTypes()) {
-			RouteStatistics statistic = getStatisticForGraphType(routeStatistics, type);
-			if (statistic != null && !Algorithms.isEmpty(statistic.elements)) {
-				BarData data = GpxUiHelper.buildStatisticChart(
-						app, customGraphChart, statistic, analysis, true, nightMode);
-				graphData.put(type, data);
-			} else {
-				graphData.put(type, null);
+		if (analysis != null && routeStatistics != null) {
+			for (RouteStatistics statistics : routeStatistics) {
+				String title = SettingsBaseActivity.getStringRouteInfoPropertyValue(app, statistics.name);
+				BarData data = null;
+				if (!Algorithms.isEmpty(statistics.elements)) {
+					data = GpxUiHelper.buildStatisticChart(
+							app, customGraphChart, statistics, analysis, true, nightMode);
+				}
+				graphTypes.add(new GraphType(title, true, false, data));
 			}
 		}
 	}
 
-	private RouteStatistics getStatisticForGraphType(List<RouteStatistics> routeStatistics, GraphType graphType) {
-		if (routeStatistics == null) return null;
-		for (RouteStatistics statistic : routeStatistics) {
-			int graphTypeId = graphType.titleId;
-			int statisticId = SettingsBaseActivity.getStringRouteInfoPropertyValueId(statistic.name);
-			if (graphTypeId == statisticId) {
-				return statistic;
-			}
-		}
-		return null;
-	}
-
-	private List<ILineDataSet> getDataSets(GraphType graphType, LineChart chart, GPXTrackAnalysis analysis) {
+	private List<ILineDataSet> getDataSets(CommonGraphType type, LineChart chart, GPXTrackAnalysis analysis) {
 		List<ILineDataSet> dataSets = new ArrayList<>();
 		if (chart != null && analysis != null) {
 			OsmandApplication app = getMyApplication();
-			switch (graphType) {
+			switch (type) {
 				case OVERVIEW: {
-					GpxUiHelper.OrderedLineDataSet speedDataSet = null;
-					GpxUiHelper.OrderedLineDataSet elevationDataSet = null;
-//					GpxUiHelper.OrderedLineDataSet slopeDataSet = null;
-					if (analysis.hasSpeedData) {
-						speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
-								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, true, true, false);
-					}
-					if (analysis.hasElevationData) {
-						elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
-								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true, false);
-//						slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
-//								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, null, true, true, false);
-					}
 					List<GpxUiHelper.OrderedLineDataSet> dataList = new ArrayList<>();
-					if (speedDataSet != null) {
+					if (analysis.hasSpeedData) {
+						GpxUiHelper.OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
+								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, true, true, false);
 						dataList.add(speedDataSet);
 					}
-					if (elevationDataSet != null) {
+					if (analysis.hasElevationData) {
+						GpxUiHelper.OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
+								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true, false);
 						dataList.add(elevationDataSet);
+						GpxUiHelper.OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
+								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, null, true, true, false);
+						dataList.add(slopeDataSet);
 					}
-//					if (slopeDataSet != null) {
-//						dataList.add(slopeDataSet);
-//					}
 					if (dataList.size() > 0) {
 						Collections.sort(dataList, new Comparator<GpxUiHelper.OrderedLineDataSet>() {
 							@Override
@@ -343,28 +279,22 @@ public class MtGraphFragment extends Fragment
 					if (analysis.hasElevationData) {
 						GpxUiHelper.OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
 								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true, false);//calcWithoutGaps);
-						if (elevationDataSet != null) {
-							dataSets.add(elevationDataSet);
-						}
+						dataSets.add(elevationDataSet);
 					}
 					break;
 				}
-//				case SLOPE:
-//					if (analysis.hasElevationData) {
-//						GpxUiHelper.OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
-//								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, null, true, true, false);
-//						if (slopeDataSet != null) {
-//							dataSets.add(slopeDataSet);
-//						}
-//					}
-//					break;
+				case SLOPE:
+					if (analysis.hasElevationData) {
+						GpxUiHelper.OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
+								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, null, true, true, false);
+						dataSets.add(slopeDataSet);
+					}
+					break;
 				case SPEED: {
 					if (analysis.hasSpeedData) {
 						GpxUiHelper.OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
 								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true, false);//calcWithoutGaps);
-						if (speedDataSet != null) {
-							dataSets.add(speedDataSet);
-						}
+						dataSets.add(speedDataSet);
 					}
 					break;
 				}
@@ -398,15 +328,45 @@ public class MtGraphFragment extends Fragment
 				defaultRender, currentSearchRequest, defaultSearchRequest);
 	}
 
-	private boolean isDataAvailableFor(GraphType graphType) {
-		return graphData != null && graphData.get(graphType) != null;
-	}
-
 	private OsmandApplication getMyApplication() {
 		return getMapActivity().getMyApplication();
 	}
 
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
+	}
+
+	private static class GraphType {
+		private String title;
+		private boolean isCustom;
+		private boolean canBeCalculated;
+		private Object data;
+
+		public GraphType(String title, boolean isCustom, boolean canBeCalculated, Object data) {
+			this.title = title;
+			this.isCustom = isCustom;
+			this.canBeCalculated = canBeCalculated;
+			this.data = data;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public boolean isCustom() {
+			return isCustom;
+		}
+
+		public boolean canBeCalculated() {
+			return canBeCalculated;
+		}
+
+		public boolean hasData() {
+			return getData() != null;
+		}
+
+		public Object getData() {
+			return data;
+		}
 	}
 }

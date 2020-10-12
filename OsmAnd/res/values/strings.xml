@@ -11,7 +11,7 @@
 	Thx - Hardy
 
 -->
-    <string name="message_need_calculate_route_for_show_graph">Altitude data available only on the roads, you need to calculate a route using “Route between points” to get it.</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s data available only on the roads, you need to calculate a route using “Route between points” to get it.</string>
     <string name="shared_string_graph">Graph</string>
     <string name="osm_edit_logout_success">Logout successful</string>
     <string name="clear_osm_token">Clear OpenStreetMap OAuth token</string>

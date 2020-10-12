@@ -314,37 +314,6 @@ public class MeasurementEditingContext {
 	}
 
 	public List<RouteSegmentResult> getAllRouteSegments() {
-		class TmpRouteSegmentData {
-			private WptPt start;
-			private WptPt end;
-			private List<RouteSegmentResult> routeSegments;
-
-			public TmpRouteSegmentData(WptPt start, WptPt end,
-			                           List<RouteSegmentResult> routeSegments) {
-				this.start = start;
-				this.end = end;
-				this.routeSegments = new ArrayList<>(routeSegments);
-			}
-
-			boolean isAfterOf(TmpRouteSegmentData other) {
-				return Algorithms.objectEquals(this.start, other.end);
-			}
-
-			boolean isBeforeOf(TmpRouteSegmentData other) {
-				return Algorithms.objectEquals(this.end, other.start);
-			}
-
-			void joinAfter(TmpRouteSegmentData other) {
-				end = other.end;
-				routeSegments.addAll(other.routeSegments);
-			}
-
-			void joinBefore(TmpRouteSegmentData other) {
-				start = other.start;
-				routeSegments.addAll(0, other.routeSegments);
-			}
-		}
-
 		// prepare data for sorting
 		List<TmpRouteSegmentData> fullList = new ArrayList<>();
 		for (Map.Entry<Pair<WptPt, WptPt>, RoadSegmentData> entry : roadSegmentData.entrySet()) {
@@ -353,7 +322,6 @@ public class MeasurementEditingContext {
 					entry.getKey().second,
 					entry.getValue().getSegments()));
 		}
-
 		// sorting data by connecting together
 		while (fullList.size() > 1) {
 			TmpRouteSegmentData firstInList = fullList.get(0);
@@ -375,8 +343,42 @@ public class MeasurementEditingContext {
 				}
 			}
 		}
+		return fullList.size() > 0 ? fullList.get(0).getRouteSegments() : null;
+	}
 
-		return fullList.size() > 0 ? fullList.get(0).routeSegments : null;
+	private static class TmpRouteSegmentData {
+		private WptPt start;
+		private WptPt end;
+		private List<RouteSegmentResult> routeSegments;
+
+		public TmpRouteSegmentData(WptPt start, WptPt end,
+		                           List<RouteSegmentResult> routeSegments) {
+			this.start = start;
+			this.end = end;
+			this.routeSegments = new ArrayList<>(routeSegments);
+		}
+
+		boolean isAfterOf(TmpRouteSegmentData other) {
+			return Algorithms.objectEquals(this.start, other.end);
+		}
+
+		boolean isBeforeOf(TmpRouteSegmentData other) {
+			return Algorithms.objectEquals(this.end, other.start);
+		}
+
+		void joinAfter(TmpRouteSegmentData other) {
+			end = other.end;
+			routeSegments.addAll(other.routeSegments);
+		}
+
+		void joinBefore(TmpRouteSegmentData other) {
+			start = other.start;
+			routeSegments.addAll(0, other.routeSegments);
+		}
+
+		public List<RouteSegmentResult> getRouteSegments() {
+			return routeSegments;
+		}
 	}
 
 	void splitSegments(int position) {
