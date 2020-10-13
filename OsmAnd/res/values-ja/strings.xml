@@ -3912,4 +3912,6 @@ POIの更新は利用できません</string>
     <string name="use_live_routing">OsmAnd Liveデータ</string>
     <string name="use_complex_routing">複雑なルート計算</string>
     <string name="complex_routing_descr">カーナビゲーション向けの2段階ルート計算です。</string>
+    <string name="use_two_phase_routing">2段階 A*ルーティングアルゴリズムを使用</string>
+    <string name="file_already_imported">ファイルはすでにOsmAndにインポートされています</string>
 </resources>

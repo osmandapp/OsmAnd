@@ -3913,4 +3913,17 @@
 \nPodes amministrare e annullare sos abbonamentos tuos intrende in sas impostatziones de AppGallery tuas.</string>
     <string name="routing_attr_avoid_footways_description">Èvita sos martzapiedis</string>
     <string name="routing_attr_avoid_footways_name">Èvita sos martzapiedis</string>
+    <string name="what_is_new">Ite b\'at de nou</string>
+    <string name="development">Isvilupu</string>
+    <string name="use_live_public_transport">Datos de OsmAnd Live</string>
+    <string name="use_live_routing">Datos de OsmAnd Live</string>
+    <string name="complex_routing_descr">Càrculu de s\'àndala a duas fases pro sa navigatzione in màchina.</string>
+    <string name="use_native_pt">Isvilupu de sos trasportos pùblicos nativos</string>
+    <string name="use_native_pt_desc">Cola a su càrculu de s\'àndala de sos trasportos pùblicos Java (seguru)</string>
+    <string name="perform_oauth_authorization_description">Intra cun OAuth pro impreare sas funtzionalidades osmedit</string>
+    <string name="perform_oauth_authorization">Intra impreende OAuth</string>
+    <string name="clear_osm_token">Iscantzella su getone OAuth de OpenStreetMap</string>
+    <string name="osm_edit_logout_success">Essida fata chene problemas</string>
+    <string name="file_already_imported">Su documentu est giai importadu in OsmAnd</string>
+    <string name="use_two_phase_routing">Imprea un\'algoritmu de càrculu de s\'àndala A* a duas fases</string>
 </resources>
