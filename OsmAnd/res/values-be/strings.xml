@@ -3971,4 +3971,13 @@
     <string name="complex_routing_descr">Дзвюхфазная аўтанавігацыя.</string>
     <string name="use_native_pt">Натыўны грамадскі транспарт (у распрацоўцы)</string>
     <string name="perform_oauth_authorization">Увайсці праз OAuth</string>
+    <string name="use_two_phase_routing">Выкарыстоўваць 2-фазны алгарытм маршрутызацыі A *</string>
+    <string name="use_native_pt_desc">Перайсці на разлік маршруту грамадскага транспарту на Java (бяспечны)</string>
+    <string name="file_already_imported">Файл ужо імпартаваны ў OsmAnd</string>
+    <string name="start_finish_icons">Значкі старту і фінішу</string>
+    <string name="perform_oauth_authorization_description">Увайдзіце праз OAuth, каб выкарыстоўваць функцыі osmedit</string>
+    <string name="clear_osm_token">Ачысціць токен OpenStreetMap OAuth</string>
+    <string name="osm_edit_logout_success">Выхад выкананы</string>
+    <string name="use_live_public_transport">Даныя OsmAnd Live</string>
+    <string name="use_live_routing">Даныя OsmAnd Live</string>
 </resources>
