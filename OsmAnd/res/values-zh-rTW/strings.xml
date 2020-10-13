@@ -3916,4 +3916,9 @@
     <string name="complex_routing_descr">汽車導航的兩階段路線。</string>
     <string name="use_native_pt">原生公共運輸發展</string>
     <string name="use_native_pt_desc">切換到 Java（安全）公共運輸路線計算</string>
+    <string name="what_is_new">有什麼新鮮事</string>
+    <string name="perform_oauth_authorization_description">執行 OAuth 登入以使用 osmedit 功能</string>
+    <string name="perform_oauth_authorization">透過 OAuth 登入</string>
+    <string name="clear_osm_token">清除 OpenStreetMap OAuth 權杖</string>
+    <string name="osm_edit_logout_success">成功登出</string>
 </resources>

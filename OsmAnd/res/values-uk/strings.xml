@@ -1542,7 +1542,7 @@
     <string name="routing_attr_height_name">Обмеження по висоті</string>
     <string name="routing_attr_height_description">Вкажіть висоту транспортного засобу для розрахунку маршрутів.</string>
     <string name="use_fast_recalculation">Інтелектуальне переобчислення маршруту</string>
-    <string name="use_fast_recalculation_desc">Для довгих подорожей перераховувати лише початкову частину маршруту.</string>
+    <string name="use_fast_recalculation_desc">Перераховувати лише початкову частину маршруту. Можна застосовувати для тривалих мандрівок.</string>
     <string name="light_theme">Світла</string>
     <string name="dark_theme">Темна</string>
     <string name="lang_pms">П’ємонтський</string>
@@ -3902,4 +3902,24 @@
     <string name="sort_name_ascending">За назвою: А — Я</string>
     <string name="start_finish_icons">Значки початку/завершення</string>
     <string name="contour_lines_thanks">Дякуємо за придбання «Горизонталей»</string>
+    <string name="what_is_new">Що нового</string>
+    <string name="osm_live_payment_desc_hw">Передплата стягується за вибраний період. Скасуйте її в AppGallery у будь-який час.</string>
+    <string name="osm_live_payment_subscription_management_hw">Оплату буде стягнено з вашого рахунку AppGallery за підтвердження покупки.
+\n
+\nПередплата автоматично поновлюється, якщо її скасувати до дати поновлення. З вашого рахунку буде стягнено плату за період поновлення (місяць/три місяці/рік) лише на дату поновлення.
+\n
+\nВи можете керувати та скасовувати передплати, переходячи до налаштувань AppGallery.</string>
+    <string name="use_live_routing">OsmAnd дані в реальному часі</string>
+    <string name="use_complex_routing">Комплексна маршрутизація</string>
+    <string name="complex_routing_descr">Двофазна маршрутизація для автомобільної навігації.</string>
+    <string name="use_native_pt">Розвиток власного громадського транспорту</string>
+    <string name="use_native_pt_desc">Перемкнутися на розрахунок маршруту громадським транспортом за допомогою Java (безпечний)</string>
+    <string name="perform_oauth_authorization_description">Виконати вхід OAuth для користування функцією osmedit</string>
+    <string name="perform_oauth_authorization">Увійти через OAuth</string>
+    <string name="clear_osm_token">Очистити токен OAuth OpenStreetMap</string>
+    <string name="osm_edit_logout_success">Ви успішно вийшли</string>
+    <string name="use_live_public_transport">OsmAnd дані в реальному часі</string>
+    <string name="routing_attr_avoid_footways_description">Уникати пішохідних шляхів</string>
+    <string name="routing_attr_avoid_footways_name">Уникати пішохідних шляхів</string>
+    <string name="development">Розробка</string>
 </resources>

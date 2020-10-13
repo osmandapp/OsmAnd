@@ -3901,4 +3901,16 @@
 \nيمكنك إدارة وإلغاء الاشتراكات الخاصة بك عن طريق الانتقال إلى إعدادات AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">تجنب الممرات</string>
     <string name="routing_attr_avoid_footways_name">تجنب الممرات</string>
+    <string name="what_is_new">ما الجديد</string>
+    <string name="development">تطوير</string>
+    <string name="use_live_public_transport">بيانات أوسماند لايف</string>
+    <string name="use_live_routing">بيانات أوسماند لايف</string>
+    <string name="use_complex_routing">التوجيه المركب</string>
+    <string name="complex_routing_descr">التوجيه على مرحلتين لملاحة السيارة.</string>
+    <string name="use_native_pt">تطوير النقل العام المحلي</string>
+    <string name="use_native_pt_desc">قم بالتبديل إلى Java (الآمن) حساب توجيه النقل العام</string>
+    <string name="perform_oauth_authorization_description">قم بإجراء تسجيل دخول إلى OAuth لاستخدام ميزات osmedit</string>
+    <string name="perform_oauth_authorization">تسجيل الدخول عبر OAuth</string>
+    <string name="clear_osm_token">مسح رمز OpenStreetMap OAuth</string>
+    <string name="osm_edit_logout_success">تسجيل الخروج بنجاح</string>
 </resources>

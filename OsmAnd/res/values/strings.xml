@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="use_two_phase_routing">Use 2-phase A* routing algorithm</string>
+    <string name="file_already_imported">File is already imported in OsmAnd</string>
     <string name="osm_edit_logout_success">Logout successful</string>
     <string name="clear_osm_token">Clear OpenStreetMap OAuth token</string>
     <string name="perform_oauth_authorization">Log in via OAuth</string>
@@ -19,7 +21,6 @@
     <string name="use_native_pt">Native Public Transport development</string>
     <string name="use_fast_recalculation_desc">Recalculates only the initial part of the route. Can be used for long trips.</string>
     <string name="complex_routing_descr">Two-phase routing for car navigation.</string>
-    <string name="use_complex_routing">Complex routing</string>
     <string name="use_live_routing">OsmAnd Live data</string>
     <string name="use_live_public_transport">OsmAnd Live data</string>
     <string name="development">Development</string>

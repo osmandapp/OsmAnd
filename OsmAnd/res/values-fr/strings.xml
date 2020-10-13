@@ -2610,7 +2610,7 @@
     <string name="context_menu_read_full_article">Lire l\'article complet</string>
     <string name="context_menu_read_article">Lire l\'article</string>
     <string name="context_menu_points_of_group">Tous les points du groupe</string>
-    <string name="open_from">Ouvert du</string>
+    <string name="open_from">Ouvre à</string>
     <string name="open_till">Ouvert jusqu\'à</string>
     <string name="will_close_at">Ferme à</string>
     <string name="will_open_at">Ouvre à</string>
@@ -3891,4 +3891,13 @@
     <string name="development">Développement</string>
     <string name="use_live_public_transport">OsmAnd Live data</string>
     <string name="use_live_routing">OsmAnd Live data</string>
+    <string name="use_native_pt_desc">Basculer vers le calcul d\'itinéraire Transport Public Java (sécurisé)</string>
+    <string name="perform_oauth_authorization_description">Connectez-vous avec OAuth pour utiliser les fonctionnalités osmedit</string>
+    <string name="what_is_new">Nouveautés</string>
+    <string name="use_complex_routing">Routage complexe</string>
+    <string name="complex_routing_descr">Routage en 2 phases pour la navigation en voiture.</string>
+    <string name="use_native_pt">Développement du transport public autochtone</string>
+    <string name="perform_oauth_authorization">Connectez-vous avec OAuth</string>
+    <string name="clear_osm_token">Supprimer le jeton OAuth d\'OpenStreetMap</string>
+    <string name="osm_edit_logout_success">Déconnexion réussie</string>
 </resources>

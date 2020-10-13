@@ -1164,8 +1164,8 @@
     <string name="map_preferred_locale_descr">地图上标签显示的偏好语言（如果不可用，将会切换至英文或者本地名称）</string>
     <string name="wake_on_voice">点亮屏幕</string>
     <string name="impassable_road_desc">选择您在导航时想要避开的道路。</string>
-    <string name="routing_attr_avoid_shuttle_train_name">避开通勤火车</string>
-    <string name="routing_attr_avoid_shuttle_train_description">避开通勤火车</string>
+    <string name="routing_attr_avoid_shuttle_train_name">无区间列车</string>
+    <string name="routing_attr_avoid_shuttle_train_description">避免使用区间列车</string>
     <string name="impassable_road">避开道路…</string>
     <string name="routing_attr_avoid_toll_name">无收费公路</string>
     <string name="routing_attr_avoid_toll_description">避开收费公路</string>
@@ -1570,8 +1570,8 @@
     <string name="lang_kab">卡布列语</string>
     <string name="lang_ber">柏柏尔文</string>
     <string name="archive_wikipedia_data">已下载的旧的不兼容维基百科的数据。你想要将其存档吗？</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">按线路从属标色</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">由 OSMC 徒步旅行符号标色</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">按网络从属着色</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">按 OSMC 徒步旅行标志着色</string>
     <string name="application_dir_change_warning3">你想 OsmAnd 也将其数据文件复制到新的目标吗？</string>
     <string name="specified_directiory_not_writeable">不能在指定目录中创建地图</string>
     <string name="confirm_usage_speed_cameras">在许多国家（德国、法国、意大利和其它）法律上不容许使用测速照相警示。如果您违反了法律，OsmAnd 并不承担任何的责任。请只在您有资格使用此功能时，才按下 \"是\" 。</string>
@@ -2891,7 +2891,7 @@
     <string name="slope_description">坡度使用颜色来可视化地形陡度。</string>
     <string name="accessibility_prefs_descr">选择图标、颜色与名称</string>
     <string name="track_coloring_solid">实线</string>
-    <string name="rendering_attr_surface_compacted_name">马路</string>
+    <string name="rendering_attr_surface_compacted_name">紧凑的</string>
     <string name="rendering_attr_surface_pebblestone_name">卵石</string>
     <string name="rendering_attr_surface_grass_paver_name">草坪砖</string>
     <string name="rendering_attr_surface_fine_gravel_name">细砂砾</string>
@@ -3147,4 +3147,5 @@
     <string name="delete_address">删除地址</string>
     <string name="add_address">添加地址</string>
     <string name="access_hint_enter_address">输入地址</string>
+    <string name="monitoring_control_start">REC</string>
 </resources>

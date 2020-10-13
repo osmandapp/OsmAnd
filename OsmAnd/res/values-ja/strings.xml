@@ -1553,7 +1553,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_height_name">高さ制限</string>
     <string name="routing_attr_height_description">ルート上で通行可能な車両の高さを指定します。</string>
     <string name="use_fast_recalculation">スマートなルート再計算</string>
-    <string name="use_fast_recalculation_desc">経路が長い場合、最初の部分のみ再計算します。</string>
+    <string name="use_fast_recalculation_desc">ルートの最初の部分のみを再計算します。旅程(設定ルート)がとても長い場合に効果的です。</string>
     <string name="light_theme">明色</string>
     <string name="dark_theme">暗色</string>
     <string name="lang_pms">ピエモンテ語</string>
@@ -3307,7 +3307,7 @@ POIの更新は利用できません</string>
     <string name="osmand_settings_descr">アプリ全体に反映されます</string>
     <string name="osmand_settings">OsmAnd設定</string>
     <string name="copy_from_other_profile">他のプロファイルからコピー</string>
-    <string name="turn_screen_on">画面表示機能</string>
+    <string name="turn_screen_on">画面の復帰設定</string>
     <string name="map_during_navigation_info">ナビゲーション中のマップ表示</string>
     <string name="map_during_navigation">ナビゲーション中のマップ表示</string>
     <string name="shared_string_other">その他</string>
@@ -3705,7 +3705,7 @@ POIの更新は利用できません</string>
     <string name="lang_gu">グジャラート語</string>
     <string name="lang_cv">チュヴァシ語</string>
     <string name="gpx_parse_error">OsmAnd GPXの形式が正しくありません。サポートチームに連絡しての調査をおすすめします。</string>
-    <string name="screen_timeout">画面のタイムアウト</string>
+    <string name="screen_timeout">画面の消灯設定</string>
     <string name="turn_screen_on_descr">画面復帰オプションを選択します(端末設定でロックされる場合は、OsmAndがバックグラウンド動作でないことを確認してください):</string>
     <string name="system_screen_timeout_descr">端末側の画面オフ(省電力)設定に従って画面を消灯します。</string>
     <string name="system_screen_timeout">端末側の画面オフ設定を使用</string>
@@ -3760,7 +3760,7 @@ POIの更新は利用できません</string>
     <string name="weight_limit_description">車両の重量を入力してください。一部のルートにおいては、大型車両では通行できない場合があります。</string>
     <string name="lenght_limit_description">車の長さを入力してください。一部のルートにおいては、長い車両では通行できない場合があります。</string>
     <string name="shared_string_always">常に</string>
-    <string name="screen_control">画面制御</string>
+    <string name="screen_control">画面の制御</string>
     <string name="turn_screen_on_power_button_disabled">現在無効。 \'画面を表示する時間\'の下にある\'画面を常に表示\'への設定が必要です。</string>
     <string name="keep_screen_off">画面オフを維持</string>
     <string name="pseudo_mercator_projection">疑似メルカトル図法</string>
@@ -3801,7 +3801,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_uninstall">アンインストール</string>
     <string name="speed_cameras_alert">一部の国では、スピードカメラの事前警告は法律で禁止されています。</string>
     <string name="screen_timeout_descr">\"%1$s\"がオンの場合、設定された動作時間はそちらに依存します。</string>
-    <string name="default_screen_timeout">デフォルトの画面タイムアウト時間</string>
+    <string name="default_screen_timeout">端末設定の画面スリープ時間に従う</string>
     <string name="shared_string_tones">トーン</string>
     <string name="shared_string_meters">メートル</string>
     <string name="details_dialog_decr">追加マップの詳細を表示または非表示にします</string>
@@ -3900,4 +3900,16 @@ POIの更新は利用できません</string>
     <string name="sort_last_modified">最終更新日</string>
     <string name="sort_name_descending">名称: 降順(Z-A)</string>
     <string name="sort_name_ascending">名称: 昇順(A-Z)</string>
+    <string name="use_native_pt_desc">Java(セーフモード)での公共交通機関ルーティング計算に切り替えます</string>
+    <string name="perform_oauth_authorization_description">OsmEdit機能を利用するには、OAuthでのログインが必要です。</string>
+    <string name="perform_oauth_authorization">OAuthでログイン</string>
+    <string name="clear_osm_token">OpenStreetMapOAuthトークンを消去する</string>
+    <string name="osm_edit_logout_success">ログアウトしました</string>
+    <string name="routing_attr_avoid_footways_description">歩道を使わないようにします</string>
+    <string name="routing_attr_avoid_footways_name">歩道を避ける</string>
+    <string name="development">開発</string>
+    <string name="use_live_public_transport">OsmAnd Liveデータ</string>
+    <string name="use_live_routing">OsmAnd Liveデータ</string>
+    <string name="use_complex_routing">複雑なルート計算</string>
+    <string name="complex_routing_descr">カーナビゲーション向けの2段階ルート計算です。</string>
 </resources>

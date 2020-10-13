@@ -162,6 +162,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		useOsmLiveForPublicTransport.setDescription(getString(R.string.use_osm_live_public_transport_description));
 		useOsmLiveForPublicTransport.setSummaryOn(R.string.shared_string_enabled);
 		useOsmLiveForPublicTransport.setSummaryOff(R.string.shared_string_disabled);
+		useOsmLiveForPublicTransport.setIcon(getContentIcon(R.drawable.ic_action_osm_live));
 		useOsmLiveForPublicTransport.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(useOsmLiveForPublicTransport);
 	}
@@ -184,13 +185,14 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		useOsmLiveForRouting.setDescription(getString(R.string.use_osm_live_routing_description));
 		useOsmLiveForRouting.setSummaryOn(R.string.shared_string_enabled);
 		useOsmLiveForRouting.setSummaryOff(R.string.shared_string_disabled);
+		useOsmLiveForRouting.setIcon(getContentIcon(R.drawable.ic_action_osm_live));
 		useOsmLiveForRouting.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(useOsmLiveForRouting);
 	}
 
 	private void setupDisableComplexRoutingPref() {
 		SwitchPreferenceEx disableComplexRouting = createSwitchPreferenceEx(settings.DISABLE_COMPLEX_ROUTING.getId(),
-				R.string.use_complex_routing, R.layout.preference_with_descr_dialog_and_switch);
+				R.string.use_two_phase_routing, R.layout.preference_with_descr_dialog_and_switch);
 		disableComplexRouting.setDescription(getString(R.string.complex_routing_descr));
 		disableComplexRouting.setSummaryOn(R.string.shared_string_enabled);
 		disableComplexRouting.setSummaryOff(R.string.shared_string_disabled);
@@ -204,6 +206,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		useFastRecalculation.setDescription(getString(R.string.use_fast_recalculation_desc));
 		useFastRecalculation.setSummaryOn(R.string.shared_string_enabled);
 		useFastRecalculation.setSummaryOff(R.string.shared_string_disabled);
+		useFastRecalculation.setIcon(getContentIcon(R.drawable.ic_action_route_part));
 		useFastRecalculation.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(useFastRecalculation);
 	}

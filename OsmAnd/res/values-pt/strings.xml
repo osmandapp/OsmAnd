@@ -2691,7 +2691,7 @@
     <string name="av_camera_pic_size_descr">Definir o tamanho da imagem da câmara</string>
     <string name="get_plugin">Obter</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
-    <string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas.</string>
+    <string name="use_fast_recalculation_desc">Recalcula apenas a parte inicial da rota. Pode ser usado para viagens longas.</string>
     <string name="do_you_like_osmand">Está a gostar do OsmAnd\?</string>
     <string name="we_really_care_about_your_opinion">A sua opinião e o seu feedback são importantes.</string>
     <string name="rate_this_app">Avalie esta aplicação</string>
@@ -3916,4 +3916,16 @@
 \nPode gerir e cancelar as suas subscrições a ir às definições da sua AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Evitar passeios</string>
     <string name="routing_attr_avoid_footways_name">Evitar passeios</string>
+    <string name="what_is_new">Novidades</string>
+    <string name="development">Desenvolvimento</string>
+    <string name="use_live_public_transport">Dados do OsmAnd ao vivo</string>
+    <string name="use_live_routing">Dados do OsmAnd ao vivo</string>
+    <string name="use_complex_routing">Roteamento complexo</string>
+    <string name="complex_routing_descr">Roteamento em duas fases para a navegação automotiva.</string>
+    <string name="use_native_pt">Desenvolvimento nativos de transportes públicos</string>
+    <string name="use_native_pt_desc">Mudar para Cálculo de rotas de transporte público Java (seguro)</string>
+    <string name="perform_oauth_authorization_description">Realize um login OAuth para usar as funcionalidades do osmedit</string>
+    <string name="perform_oauth_authorization">Fazer login via OAuth</string>
+    <string name="clear_osm_token">Limpar token do OpenStreetMap OAuth</string>
+    <string name="osm_edit_logout_success">Logout bem sucedido</string>
 </resources>

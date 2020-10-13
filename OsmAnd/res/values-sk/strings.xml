@@ -3919,6 +3919,11 @@
     <string name="use_live_routing">Údaje OsmAnd Live</string>
     <string name="use_complex_routing">Komplexný výpočet trasy</string>
     <string name="complex_routing_descr">Dvojfázový výpočet trasy pre navigáciu auta.</string>
-    <string name="use_native_pt">Natívny vývoj hromadnej dopravy</string>
+    <string name="use_native_pt">Natívna hromadná doprava (vo vývoji)</string>
     <string name="use_native_pt_desc">Prepnúť na výpočet trasy hromadnej dopravy v Jave (bezpečné)</string>
+    <string name="what_is_new">Čo je nové</string>
+    <string name="perform_oauth_authorization_description">Vykonať prihlásenie cez OAuth pre použitie funkcií upravovania OSM</string>
+    <string name="perform_oauth_authorization">Prihlásiť pomocou OAuth</string>
+    <string name="clear_osm_token">Vymazať token OpenStreetMap OAuth</string>
+    <string name="osm_edit_logout_success">Odhlásenie úspešné</string>
 </resources>

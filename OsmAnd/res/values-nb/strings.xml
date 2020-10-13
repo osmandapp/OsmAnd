@@ -346,7 +346,7 @@
     <string name="rotate_map_to_bearing_descr">Kartjustering:</string>
     <string name="rotate_map_to_bearing">Kartorientering</string>
     <string name="show_route">Rutedetaljer</string>
-    <string name="fav_imported_sucessfully">Favoritter er importert</string>
+    <string name="fav_imported_sucessfully">Favoritter importert</string>
     <string name="fav_file_to_load_not_found">GPX-fil som inneholder favoritter er ikke funnet på {0}</string>
     <string name="fav_saved_sucessfully">Favoritter lagret til {0}</string>
     <string name="no_fav_to_save">Ingen favorittpunkter å lagre</string>
@@ -418,7 +418,7 @@
     <string name="update_existing">Erstatt</string>
     <string name="only_show">Vis rute</string>
     <string name="follow">Start veiledning</string>
-    <string name="mark_final_location_first">Velg reisemål først</string>
+    <string name="mark_final_location_first">Angi reisemålet først</string>
     <string name="get_directions">Anvisninger</string>
     <string name="opening_hours">Åpningstider</string>
     <string name="poi">Interessepunkt</string>
@@ -443,7 +443,7 @@
     <string name="show_view_angle">Vis synsretning</string>
     <string name="map_view_3d_descr">Aktiver 3D-visning av kartet.</string>
     <string name="map_view_3d">3D-kartvisning</string>
-    <string name="show_poi_over_map_description">Vis sist valgte interessepunktsoverlegg.</string>
+    <string name="show_poi_over_map_description">Vis sist brukte interessepunktoverlegg.</string>
     <string name="show_poi_over_map">Vis interessepunktoverlegg</string>
     <string name="map_tile_source_descr">Velg kilde for nettbaserte eller hurtiglagrede kart.</string>
     <string name="map_tile_source">Fliskartkilde</string>
@@ -469,7 +469,7 @@
     <string name="app_mode_pedestrian">Gåing</string>
     <string name="position_on_map_center">Senter</string>
     <string name="position_on_map_bottom">Nederst</string>
-    <string name="navigate_point_top_text">Oppfør bredde- og lengdegrad i det valgte formatet (G - grader, M - minutter, S - sekunder)</string>
+    <string name="navigate_point_top_text">Angi bredde- og lengdegrad i det valgte formatet (G - grader, M - minutter, S - sekunder)</string>
     <string name="navigate_point_latitude">Breddegrad</string>
     <string name="navigate_point_longitude">Lengdegrad</string>
     <string name="navigate_point_format_D">DDD.DDDDD</string>
@@ -489,7 +489,7 @@
     <string name="shared_string_no">Nei</string>
     <string name="add_favorite_dialog_top_text">Oppfør favorittnavn</string>
     <string name="add_favorite_dialog_default_favourite_name">Favoritt</string>
-    <string name="add_favorite_dialog_favourite_added_template">Favorittpunkt \'\'{0}\'\' er lagt til.</string>
+    <string name="add_favorite_dialog_favourite_added_template">Favorittpunkt \'\'{0}\'\' lagt til.</string>
     <string name="favourites_context_menu_edit">Rediger favoritt</string>
     <string name="favourites_context_menu_delete">Slett favoritt</string>
     <string name="favourites_remove_dialog_msg">Slett favorittpunkt \'%s\'\?</string>
@@ -945,7 +945,7 @@
     <string name="local_openstreetmap_uploading">Laster opp…</string>
     <string name="osmand_service">Bakgrunnsmodus</string>
     <string name="osmand_service_descr">OsmAnd kjører i bakgrunnen med skjermen av.</string>
-    <string name="overlay_transparency_descr">Endre overleggsgjennomsiktigheten.</string>
+    <string name="overlay_transparency_descr">Juster overleggsgjennomsiktighet.</string>
     <string name="overlay_transparency">Overleggsgjennomsiktighet</string>
     <string name="map_transparency_descr">Juster gjennomsiktighet for basiskartet.</string>
     <string name="map_transparency">Gjennomsiktighet for basiskart</string>
@@ -1285,7 +1285,7 @@
     <string name="recent_places">Nylige steder</string>
     <string name="saved_at_time">Nå lagret her: %1$s</string>
     <string name="new_version">Ny versjon</string>
-    <string name="begin_with_osmand_menu_group">Første steg med OsmAnd</string>
+    <string name="begin_with_osmand_menu_group">Første trinn med OsmAnd</string>
     <string name="features_menu_group">Funksjoner</string>
     <string name="help_us_to_improve_menu_group">Hjelp til med å forbedre OsmAnd</string>
     <string name="plugins_menu_group">Programtillegg</string>
@@ -1458,7 +1458,7 @@
     <string name="failed_to_upload">Klarte ikke å laste opp</string>
     <string name="buy">Kjøp</string>
     <string name="faq_item">Ofte stilte spørsmål</string>
-    <string name="number_of_edits">Antall endringer</string>
+    <string name="number_of_edits">Antall redigeringer</string>
     <string name="number_of_contributors">Antall bidragsytere</string>
     <string name="morning">Morgen</string>
     <string name="night">Natt</string>
@@ -2218,7 +2218,7 @@
     <string name="layer_yandex_traffic">Yandex-trafikk</string>
     <string name="background_service_provider">Stedsbestemmelsestjeneste</string>
     <string name="off_router_service_no_gps_available">Bakgrunnsnavigeringen krever aktivert stedsbestemmelsestjeneste.</string>
-    <string name="opening_hours_not_supported">Åpningstidsformat kan ikke endres.</string>
+    <string name="opening_hours_not_supported">Kan ikke endre åpningstidsformat.</string>
     <string name="update_poi_error_loading">Kunne ikke laste inn data fra tjener.</string>
     <string name="auth_failed">Identitetsbekreftelse mislyktes</string>
     <string name="error_occurred_saving_gpx">Kunne ikke lagre GPX-fil.</string>
@@ -2248,7 +2248,7 @@
     <string name="quick_action_item_screen">Skjerm %d</string>
     <string name="quick_action_add_marker">Legg til kartmarkør</string>
     <string name="quick_action_map_style">Endre kartstil</string>
-    <string name="quick_action_map_style_switch">Kartstil endret til «%s».</string>
+    <string name="quick_action_map_style_switch">Kartstil endret til \"%s\".</string>
     <string name="quick_action_take_audio_note">Nytt lydnotat</string>
     <string name="quick_action_take_video_note">Nytt videonotat</string>
     <string name="quick_action_take_photo_note">Nytt bildenotat</string>
@@ -2463,7 +2463,7 @@
     <string name="vector_data_missing">Last ned (\'nettfrakoblede\') data for å kunne bruke kart nettfrakoblet.</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> – kartklassifisering med bilder.</string>
     <string name="quick_action_duplicates">Hurtighandlingsnavn endret til %1$s for å unngå duplisering.</string>
-    <string name="quick_action_duplicate">Navneduplisering for hurtighandling</string>
+    <string name="quick_action_duplicate">Navneduplikat for hurtighandling</string>
     <string name="osm_recipients_label">OSM-mottakere</string>
     <string name="total_donations">Donasjoner totalt</string>
     <string name="enter_the_file_name">Skriv inn filnavnet.</string>
@@ -2475,9 +2475,9 @@
     <string name="optional_point_name">Valgfritt punktnavn</string>
     <string name="transport_nearby_routes_within">Ruter i nærheten innen</string>
     <string name="transport_nearby_routes">Innenfor</string>
-    <string name="enter_lon">Oppfør lengdegrad</string>
-    <string name="enter_lat">Oppfør breddegrad</string>
-    <string name="enter_lat_and_lon">Oppfør bredde- og lengdegrad</string>
+    <string name="enter_lon">Angi lengdegrad</string>
+    <string name="enter_lat">Angi breddegrad</string>
+    <string name="enter_lat_and_lon">Angi bredde- og lengdegrad</string>
     <string name="dd_mm_ss_format">GG°MM′SS″</string>
     <string name="dd_dddddd_format">GG,GGGGGG°</string>
     <string name="dd_ddddd_format">GG,GGGGG°</string>
@@ -2966,7 +2966,7 @@
     <string name="rendering_attr_highway_class_road_name">Vei</string>
     <string name="rendering_attr_highway_class_street_name">Gate</string>
     <string name="rendering_attr_highway_class_service_name">Tjeneste</string>
-    <string name="rendering_attr_highway_class_footway_name">Tursti</string>
+    <string name="rendering_attr_highway_class_footway_name">Gangvei</string>
     <string name="rendering_attr_highway_class_track_name">Turvei</string>
     <string name="rendering_attr_highway_class_bridleway_name">Ridesti</string>
     <string name="rendering_attr_highway_class_steps_name">Trapper</string>
@@ -3086,8 +3086,8 @@
     <string name="application_profiles">Programprofiler</string>
     <string name="zoom_by_wunderlinq">Bruk WunderLINQ for styring</string>
     <string name="routing_attr_piste_type_downhill_name">Alpint/utfor</string>
-    <string name="routing_attr_piste_type_sled_name">Slede</string>
-    <string name="routing_attr_piste_type_sled_description">Løyper for sledebruk.</string>
+    <string name="routing_attr_piste_type_sled_name">Kjelke</string>
+    <string name="routing_attr_piste_type_sled_description">Løyper for kjelkebruk.</string>
     <string name="routing_attr_allow_advanced_name">Tillat avanserte ruter</string>
     <string name="routing_attr_allow_expert_name">Tillat ekspertruter</string>
     <string name="routing_attr_allow_skating_only_name">Tillat løyper kun for skøyting</string>
@@ -3830,8 +3830,8 @@
     <string name="radius_ruler_item">Radiuspasser</string>
     <string name="turn_screen_on_navigation_instructions_descr">Hver navigasjonsinstruksjon skrur skjermen på.</string>
     <string name="turn_screen_on_wake_time_descr">Velg skjermtidsavbrudd etter oppvåkning. («%1$s» skrur av tidsavbrudd.)</string>
-    <string name="keep_screen_off">Levn skjermen av</string>
-    <string name="expire_time_descr">Hurtiglagrede filer vil bli lastet ned igjen etter et gitt antall minutter. La dette feltet stå tomt for å aldri gjenoppfriske flis for denne kilden.
+    <string name="keep_screen_off">Hold skjermen av</string>
+    <string name="expire_time_descr">Hurtiglagrede fliser blir lastet ned på nytt etter det angitte antall minutter. La dette feltet stå tomt for å aldri gjenoppfriske fliser for denne kilden.
 \n
 \nÉn dag er 1440 minutter.
 \nÉn uke er 10080 minutter.
@@ -3845,8 +3845,8 @@
     <string name="use_native_pt_desc">Bytt til Java (trykk) ruteberegning for offentlig transport</string>
     <string name="contour_lines_thanks">Takk for at du kjøpte «Koter»</string>
     <string name="use_complex_routing">Kompleks ruting</string>
-    <string name="routing_attr_avoid_footways_name">Unngå turstier</string>
-    <string name="routing_attr_avoid_footways_description">Unngå turstier</string>
+    <string name="routing_attr_avoid_footways_name">Unngå gangveier</string>
+    <string name="routing_attr_avoid_footways_description">Unngå gangveier</string>
     <string name="recalc_angle_dialog_descr">Ekstra rett segment mellom min posisjon og utregnet rute vil bli vist til den er regnet ut på ny</string>
     <string name="checking_for_duplicate_description">OsmAnd sjekker %1$d for duplikater med eksisterende elementer i programmet.
 \n
@@ -3861,4 +3861,9 @@
     <string name="development">Utvikling</string>
     <string name="use_live_public_transport">OsmAnd-sanntidsdata</string>
     <string name="use_live_routing">OsmAnd-sanntidsdata</string>
+    <string name="perform_oauth_authorization_description">Utfør OAuth-innlogging for å bruke osmedit-funksjoner</string>
+    <string name="clear_osm_token">Fjern OpenStreetmap-OAuth-symbol</string>
+    <string name="perform_oauth_authorization">Logg inn via OAuth</string>
+    <string name="what_is_new">Hva er nytt</string>
+    <string name="osm_edit_logout_success">Utlogget</string>
 </resources>
