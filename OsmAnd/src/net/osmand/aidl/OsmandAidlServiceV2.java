@@ -1327,9 +1327,30 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		public boolean setMapMargins(MapMarginsParams params) {
 			try {
 				OsmandAidlApi api = getApi("setMapMargins");
-				String packName = getCallingAppPackName();
-				return api != null && api.setMapMargins(packName, params.getAppModeKey(), params.getLeftMargin(),
-						params.getTopMargin(), params.getBottomMargin(), params.getRightMargin());
+				return api != null && api.setMapMargins(params.getLeftMargin(), params.getTopMargin(),
+						params.getBottomMargin(), params.getRightMargin(), params.getAppModesKeys());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean isFragmentOpen() {
+			try {
+				OsmandAidlApi api = getApi("isFragmentOpen");
+				return api != null && api.isFragmentOpen();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean isMenuOpen() {
+			try {
+				OsmandAidlApi api = getApi("isMenuOpen");
+				return api != null && api.isMenuOpen();
 			} catch (Exception e) {
 				handleException(e);
 				return false;

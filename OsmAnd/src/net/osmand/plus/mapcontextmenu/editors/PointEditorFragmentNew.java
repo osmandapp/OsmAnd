@@ -618,12 +618,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				}
 			}
 			HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
-			horizontalSelectionAdapter.setItems(new ArrayList<>(iconCategories.keySet()));
-			horizontalSelectionAdapter.setSelectedItem(selectedIconCategory);
+			horizontalSelectionAdapter.setTitledItems(new ArrayList<>(iconCategories.keySet()));
+			horizontalSelectionAdapter.setSelectedItemByTitle(selectedIconCategory);
 			horizontalSelectionAdapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
 				@Override
-				public void onItemSelected(String item) {
-					selectedIconCategory = item;
+				public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
+					selectedIconCategory = item.getTitle();
 					createIconForCategory();
 					updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
 				}
