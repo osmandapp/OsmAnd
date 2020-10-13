@@ -46,6 +46,7 @@ public class RendererRegistry {
 	public final static String LIGHTRS_RENDER = "LightRS";  //$NON-NLS-1$
 	public final static String UNIRS_RENDER = "UniRS";  //$NON-NLS-1$
 	public final static String DESERT_RENDER = "Desert";  //$NON-NLS-1$
+	public final static String SNOWMOBILE_RENDER = "Snowmobile";  //$NON-NLS-1$
 
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
