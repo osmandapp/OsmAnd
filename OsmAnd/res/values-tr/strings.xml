@@ -633,7 +633,7 @@
     <string name="local_index_installed">Yerel sürüm</string>
     <string name="local_index_items_backuped">%1$d/%2$d öge devre dışı bırakıldı.</string>
     <string name="local_index_items_deleted">%1$d/%2$d öge silindi.</string>
-    <string name="local_index_items_restored">%1$d/%2$d öge aktifleştirildi.</string>
+    <string name="local_index_items_restored">%1$d/%2$d öge etkinleştirildi.</string>
     <string name="local_index_descr_title">Harita dosyalarını yönetin.</string>
     <string name="local_index_mi_restore">Aktifleştir</string>
     <string name="local_index_mi_backup">Pasifleştir</string>
@@ -641,7 +641,7 @@
     <string name="local_index_address_data">Adres Verisi</string>
     <string name="local_index_transport_data">Toplu taşıma verileri</string>
     <string name="local_index_map_data">Harita Verisi</string>
-    <string name="local_indexes_cat_backup">Pasifleştir</string>
+    <string name="local_indexes_cat_backup">Devre dışı</string>
     <string name="local_indexes_cat_tts">Sesli uyarılar (TTS)</string>
     <string name="local_indexes_cat_voice">Sesli uyarılar (kaydedilmiş)</string>
     <string name="local_indexes_cat_poi">POI Verisi</string>
@@ -1459,7 +1459,7 @@
     <string name="use_trackball">İzleme topu kullan</string>
     <string name="background_service_int_descr">Arka plan servisi tarafından kullanılan uyanma aralığı:</string>
     <string name="background_service_provider_descr">Arka plan servisi tarafından kullanılan konum yöntemi:</string>
-    <string name="route_head">Baş</string>
+    <string name="route_head">Düz gidin</string>
     <string name="map_screen_orientation">Ekran yönlendirme</string>
     <string name="no_address_found">Hiçbir adres belirlenmedi</string>
     <string name="voices">Sesli uyarılar</string>
@@ -2094,7 +2094,7 @@
     <string name="shared_string_deleted">Silindi</string>
     <string name="shared_string_edited">Değiştirildi</string>
     <string name="shared_string_added">Eklendi</string>
-    <string name="marker_activated">İşaretleyici %s aktifleştirildi.</string>
+    <string name="marker_activated">%s işaretleyicisi etkinleştirildi.</string>
     <string name="one_tap_active_descr">İçerik menüsünü açmadan, harita üzerinde bir belirtecin üzerine bas ve aktif belirteçlerin üzerine sürükle.</string>
     <string name="one_tap_active">\'Tek basış\' aktif</string>
     <string name="empty_state_av_notes">Not alın!</string>
@@ -3578,7 +3578,7 @@
     <string name="select_wikipedia_article_langs">Haritadaki Wikipedia makalelerinin dillerini seçin. Makaleyi okurken kullanılabilir herhangi bir dile geçiş yapın.</string>
     <string name="some_articles_may_not_available_in_lang">Bazı Wikipedia makaleleri sizin dilinizde mevcut olmayabilir.</string>
     <string name="lang_zhyue">Kantonca</string>
-    <string name="lang_zhminnan">Güney Min</string>
+    <string name="lang_zhminnan">Güney Mince</string>
     <string name="lang_yo">Yorubaca</string>
     <string name="lang_war">Varayca</string>
     <string name="lang_uz">Özbekçe</string>
@@ -3591,7 +3591,7 @@
     <string name="lang_ne">Nepalce</string>
     <string name="lang_nap">Napolice</string>
     <string name="lang_my">Birmanca</string>
-    <string name="lang_min">Minangkabau dili</string>
+    <string name="lang_min">Minangkabauca</string>
     <string name="lang_mg">Malgaşça</string>
     <string name="lang_ky">Kırgızca</string>
     <string name="lang_kk">Kazakça</string>

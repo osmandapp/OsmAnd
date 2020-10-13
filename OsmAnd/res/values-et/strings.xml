@@ -3593,7 +3593,7 @@
     <string name="height_limit_description">Kuna mõnedel marsruutidel võidakse kohaldada sõidukite kõrguspiiranguid, siis palun märkige oma sõiduki kõrgus.</string>
     <string name="lenght_limit_description">Kuna mõnedel marsruutidel võidakse kohaldada piiranguid pikkade sõidukite suhtes, siis palun märkige oma sõiduki pikkus.</string>
     <string name="weight_limit_description">Kuna mõnedel marsruutidel võidakse kohaldada sõidukite kaalupiiranguid, siis palun märkige oma sõiduki kaal.</string>
-    <string name="gpx_parse_error">OsmAnd GPX faili vorming pole korrektne. Täpsemaks uurimiseks palun suhtle meie tugimeeskonnaga.</string>
+    <string name="gpx_parse_error">OsmAnd GPX-andmestiku vorming on vigane. Täpsemaks uurimiseks palun võta ühendust meie kasutajatoega.</string>
     <string name="sort_by_category">Sorteeri kategooria järgi</string>
     <string name="shared_string_resume">Jätka</string>
     <string name="import_profile_dialog_description">Imporditavas profiilis leidub täiendavaid andmeid. Vajutades „Impordi“ imporditakse vaid profiili andmed, täiendavate andmete jaoks pead märkima vastava valiku.</string>

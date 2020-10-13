@@ -3739,11 +3739,11 @@
     <string name="shared_string_include_data">Kiegészítő adatok átvétele</string>
     <string name="import_profile_dialog_description">Az importált profil kiegészítő adatokat is tartalmaz. Koppintson az \"Importál\" gombra kizálólag a profiladatok importálásához vagy válassza a kiegészítő adatokat.</string>
     <string name="import_complete_description">Összes adat importálva innen: %1$s, az alábbi gombokkal megnyithatja az alkalmazás megfelelő részét az adatok kezeléséhez.</string>
-    <string name="osm_live_payment_subscription_management">A fizetés a Google Play fiókhoz lesz felszámítva a vásárlás megerősítésekor.
+    <string name="osm_live_payment_subscription_management">A fizetést a vásárlás visszaigazolásakor a Google Play számlájára terheljük.
 \n
-\nAz előfizetés automatikusan megújul, kivéve ha a meghosszabbítás napja előtt lemondásra kerül. A fókjához az új időszak (hónap/három hónap/év) díja kizárólag a meghosszabítás napján lesz felszámolva.
+\nAz előfizetés automatikusan megújul, kivéve, ha azt a megújítási dátum előtt lemondja. A megújítási időszakra (hónap / 3 hónap / év) vonatkozóan a számláját csak a megújítás napján terheljük meg.
 \n
-\nAz előfizetéseit a Google Play beállításainál tudja kezelni és lemondani.</string>
+\nAz előfizetéseket a Google Play beállításai között kezelheti és törölheti.</string>
     <string name="quick_action_remove_next_destination_descr">Törli az útvonal soron következő célpontját. Amennyiben ez a végző célpont, a navigáció megáll.</string>
     <string name="plugin_wikipedia_description">Tudjon meg többet az érdekes pontokról a Wikipédiából. Ez az Ön offline zsebútikönyve – egyszerűen kapcsolja be a Wikipédia-bővítményt, és élvezze az Ön körüli objektumokról szóló cikkeket.</string>
     <string name="app_mode_enduro_motorcycle">Salakmotor</string>

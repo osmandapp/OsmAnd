@@ -530,7 +530,7 @@
     <string name="global_settings">Víðværar stillingar</string>
     <string name="general_settings">Almennt</string>
     <string name="osmand_service">Bakgrunnshamur</string>
-    <string name="delete_confirmation_msg">Eyða \'%s\'?</string>
+    <string name="delete_confirmation_msg">Eyða %1$s\?</string>
     <string name="city_type_suburb">Úthverfi</string>
     <string name="city_type_hamlet">Byggðakjarni</string>
     <string name="city_type_village">Þorp</string>
@@ -709,8 +709,8 @@
     <string name="routing_attr_allow_motorway_description">Leyfa hraðbrautir.</string>
     <string name="wiki_around">Wikipedia-greinar í nágrenninu</string>
     <string name="route_calculation">Útreikningur leiðar</string>
-    <string name="gpx_no_tracks_title">Þú ert ekki með neina GPX-ferla ennþá</string>
-    <string name="gpx_no_tracks_title_folder">Þú getur líka bætt GPX-skrám í möppuna</string>
+    <string name="gpx_no_tracks_title">Þú ert ekki ennþá með neina ferla</string>
+    <string name="gpx_no_tracks_title_folder">Þú getur líka bætt ferilskrám í möppuna</string>
     <string name="trip_rec_notification_settings">Virkja hraðskráningu ferðar</string>
     <string name="shared_string_trip">Ferð</string>
     <string name="shared_string_recorded">Skráð</string>
@@ -723,7 +723,7 @@
     <string name="no_inet_connection">Engin internettenging</string>
     <string name="no_inet_connection_desc_map">Nauðsynleg til að sækja kort.</string>
     <string name="search_location">Leita að stað…</string>
-    <string name="storage_place_description">Gagnageymsla OsmAnd (fyrir kort, GPX-ferla, o.s.frv.): %1$s.</string>
+    <string name="storage_place_description">Gagnageymsla OsmAnd (fyrir kort, ferilskrár, o.s.frv.): %1$s.</string>
     <string name="give_permission">Gefa heimild</string>
     <string name="no_update_info">Ekki sýna nýjar útgáfur</string>
     <string name="get_started">Komast í gang</string>
@@ -1718,7 +1718,7 @@
     <string name="map_text_size_descr">Stærð leturs fyrir nöfn á kortinu:</string>
     <string name="trace_rendering">Aflúsunarupplýsingar myndgerðar</string>
     <string name="trace_rendering_descr">Birta afköst myndgerðar.</string>
-    <string name="gpx_option_reverse_route">Snúa við stefnu GPX</string>
+    <string name="gpx_option_reverse_route">Snúa við stefnu ferils</string>
     <string name="choose_audio_stream">Frálag raddleiðsagnar</string>
     <string name="voice_stream_music">Hljóð í margmiðlun/tónlist</string>
     <string name="level_to_switch_vector_raster_descr">Nota rastakort fyrir allt undir þessu aðdráttarstigi.</string>
@@ -1746,7 +1746,7 @@
     <string name="incremental_search_building">Stigvaxandi leit byggingar</string>
     <string name="poi_error_info_not_loaded">Upplýsingum um hnút var ekki hlaðið inn</string>
     <string name="use_fast_recalculation">Snjöll endurreiknun leiðar</string>
-    <string name="use_fast_recalculation_desc">Einungis endurreikna upphafshluta leiðar fyrir langar ferðir.</string>
+    <string name="use_fast_recalculation_desc">Endurreiknar aðeins upphafshluta leiðar. Má nota fyrir langar ferðir.</string>
     <string name="confirm_download_roadmaps">Kortið sem eingöngu er með vegum er ekki nauðsynlegt, þar sem þú ert þegar með staðlaða (fulla útgáfu) kortsins. Sækja það samt?</string>
     <string name="rendering_attr_depthContours_description">Birta dýptarlínur og punkta.</string>
     <string name="rendering_attr_depthContours_name">Dýptarlínur sjávar</string>
@@ -2116,7 +2116,7 @@
     <string name="import_gpx_failed_descr">Gat ekki flutt skrána inn. Vinsamlegast athugið hvort OsmAnd hafi réttindi til að lesa skrána þar sem hún er.</string>
     <string name="open_mapillary">Opna Mapillary</string>
     <string name="mapillary_widget">Mapillary græja</string>
-    <string name="mapillary">Götumyndir</string>
+    <string name="mapillary">Mapillary götumyndir</string>
     <string name="mapillary_image">Mapillary-mynd</string>
     <string name="map_widget_ruler_control">Mælistika út frá miðju hrings</string>
     <string name="shared_string_permissions">Heimildir</string>
@@ -2904,10 +2904,10 @@
     <string name="routeInfo_road_types_name">Gerðir vega</string>
     <string name="exit_at">Fara útaf við</string>
     <string name="sit_on_the_stop">Fara um borð við stöðvunina</string>
-    <string name="quick_action_show_hide_gpx_tracks">Birta/Fela GPX-ferla</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Hnappur til að birta eða fela valda GPX-ferla á kortinu.</string>
-    <string name="quick_action_gpx_tracks_hide">Fela GPX-ferla</string>
-    <string name="quick_action_gpx_tracks_show">Birta GPX-ferla</string>
+    <string name="quick_action_show_hide_gpx_tracks">Birta/Fela ferla</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Hnappur til að birta eða fela valda ferla á kortinu.</string>
+    <string name="quick_action_gpx_tracks_hide">Fela ferla</string>
+    <string name="quick_action_gpx_tracks_show">Birta ferla</string>
     <string name="release_3_3">• Nýr skjár fyrir \'Leiðir\': Birtir leiðarhnappa fyrir \'Heim\' og \'Vinna\', flýtileið á fyrri leið, listi yfir virka GPX-ferla og merki, leitarferill
 \n
 \n • Viðbótarupplýsingar undir \'Nánar um leið\': gerð vegar, yfirborð, bratti, áferð
@@ -3766,7 +3766,7 @@
     <string name="quick_action_showhide_mapillary_descr">Víxlhnappur til að birta eða fela Mapillary-lagið á kortinu.</string>
     <string name="shared_string_bearing">Stefna</string>
     <string name="item_deleted">%1$s eytt</string>
-    <string name="speed_cameras_restart_descr">Endurræsing er nauðsynleg til að geta fjarlægt alveg gögn um hraðamyndavélar.</string>
+    <string name="speed_cameras_restart_descr">Endurræstu forritið til að fjarlægja öll gögn um hraðamyndavélar.</string>
     <string name="shared_string_uninstall_and_restart">Fjarlægja og endurræsa</string>
     <string name="shared_string_uninstall">Fjarlægja</string>
     <string name="speed_cameras_legal_descr">Aðvaranir vegna hraðamyndavéla eru bannaðar með lögum í sumum löndum. 
@@ -3777,19 +3777,19 @@
 \n
 \nVeldu %2$s: öllum gögnum sem tengjast hraðamyndavélum; t.d. aðvaranir, tilkynningar, staðsetningar o.fl. verður eytt þar til OsmAnd er sett inn aftur frá grunni.</string>
     <string name="route_between_points_add_track_desc">Veldu ferilskrá þar sem nýjum bút verður bætt inn.</string>
-    <string name="route_between_points_desc">Veldu hvernig eigi að tengja punkta; með beinni línu eða reikna leið milli þeirra með þessu sniði.</string>
+    <string name="route_between_points_desc">Veldu hvernig eigi að tengja punkta; með beinni línu eða reikna leið milli þeirra eins og tiltekið er hér að neðan.</string>
     <string name="route_between_points_whole_track_button_desc">Allur ferillinn verður endurreiknaður með völdu sniði.</string>
     <string name="osm_edit_closed_note">Lokaður OSM-minnispunktur</string>
     <string name="whole_track">Allur ferillinn</string>
-    <string name="track_show_start_finish_icons">Sýna tákn fyrir upphaf/enda</string>
+    <string name="track_show_start_finish_icons">Sýna tákn fyrir upphaf og enda</string>
     <string name="speed_cameras_removed_descr">Þetta tæki er ekki með hraðamyndavélar.</string>
     <string name="app_mode_go_cart">Gókart</string>
-    <string name="set_working_days_to_continue">Þú verður að skilgreina virka daga til að halda áfram</string>
+    <string name="set_working_days_to_continue">Skilgreindu virka daga til að halda áfram</string>
     <string name="quick_action_remove_next_destination">Eyða næsta markpunkti</string>
     <string name="navigation_profile">Leiðsagnarsnið</string>
     <string name="app_mode_wheelchair_forward">Hjólastóll áfram</string>
     <string name="plugin_wikipedia_description">Náðu í upplýsingar um merka staði frá Wikipedia. Þetta er þá orðið að vasaleiðsögn án nettengingar - bara virkjaðu Wikipedia-viðbótina og njóttu þess að geta lesið um hlutina í kringum þig.</string>
-    <string name="use_volume_buttons_as_zoom_descr">Virkja þetta til að hægt sé að stýra aðdráttarstigi korts með hljóðstyrkshnöppum.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Stýrðu aðdráttarstigi korts með hljóðstyrkshnöppum tækisins.</string>
     <string name="routing_attr_length_description">Tilgreindu lengd farartækis sem leyfð er á leiðum.</string>
     <string name="in_case_of_reverse_direction">Ef stefna er öfug</string>
     <string name="route_between_points_next_segment_button_desc">Aðeins næsti bútur verður endurreiknaður með völdu sniði.</string>
@@ -3840,7 +3840,7 @@
 \n</string>
     <string name="gpx_split_interval_descr">Veldu bilið þar sem merki með tíma eða vegalengd á ferlinum verða birt.</string>
     <string name="attach_to_the_roads">Tengja við vegina</string>
-    <string name="plan_route_exit_dialog_descr">Ertu viss um að þú viljir loka leiðaskipulagningu án þess að vista\? Þú munt tapa öllum breytingum.</string>
+    <string name="plan_route_exit_dialog_descr">Ertu viss um að þú viljir loka leiðaskipulagningu án þess að vista\?</string>
     <string name="marker_save_as_track">Vista sem ferilskrá</string>
     <string name="threshold_distance">Þolvik vegalengdar</string>
     <string name="save_track_to_gpx_globally">Skrifa feril í GPX-skrá</string>
@@ -3856,11 +3856,9 @@
     <string name="start_of_the_track">Upphaf ferils</string>
     <string name="shared_string_gpx_files">Ferlar</string>
     <string name="access_hint_enter_address">Settu inn heimilisfang</string>
-    <string name="import_track_descr">Veldu ferilskrá til að fylgja eða flyttu inn úr tæki.</string>
+    <string name="import_track_descr">Veldu ferilskrá til að fylgja eða flyttu hana inn úr tækinu þínu.</string>
     <string name="add_segment_to_the_track">Bæta í ferilskrá</string>
-    <string name="route_between_points_warning_desc">Til að nota þennan valkost þarf OsmAnd að festa ferilinn þinn við vegi á kortinu.
-\n
-\nÍ næsta skrefi þarftu að velja leiðsagnarsnið svo hægt sé að finna hvaða vegir séu leyfilegir og hvaða þolvik vegalengdar eigi að miða við til að nálga ferilinn þinn við fyrirliggjandi vegi.</string>
+    <string name="route_between_points_warning_desc">Í næsta skrefi þarftu að velja leiðsagnarsnið svo hægt sé að finna hvaða vegir séu leyfilegir og hvaða þolvik vegalengdar eigi að miða við til að nálga ferilinn þinn við fyrirliggjandi vegi.</string>
     <string name="empty_state_my_tracks">Bæta við ferilskrám</string>
     <string name="app_mode_inline_skates">Línuskautar</string>
     <string name="add_address">Bæta við heimilisfangi</string>
@@ -3868,7 +3866,7 @@
     <string name="map_widget_monitoring">Skráning ferðar</string>
     <string name="nearest_point">Næsti punktur</string>
     <string name="show_gpx">Ferlar</string>
-    <string name="monitoring_control_start">GPX</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="plan_route_trim_before">Klippa á undan</string>
     <string name="context_menu_item_add_waypoint">Bæta við leiðarpunkti í feril</string>
     <string name="plan_route_change_route_type_after">Skipta um gerð leiðar eftir</string>
@@ -3879,4 +3877,41 @@
     <string name="shared_string_gpx_route">Skrá leið í feril</string>
     <string name="select_another_track">Velja annan feril</string>
     <string name="save_track_to_gpx">Skrifa feril sjálfkrafa í GPX-skrá á meðan leiðsögn stendur</string>
+    <string name="what_is_new">Nýjungar</string>
+    <string name="simplified_track">Einfaldaður ferill</string>
+    <string name="simplified_track_description">Aðeins leiðarlínan verður vistuð, ferilpunktunum verður eytt.</string>
+    <string name="shared_string_file_name">Skráarheiti</string>
+    <string name="system_default_theme">Sjálfgefið í kerfinu</string>
+    <string name="all_next_segments">Allir bútar í kjölfarið</string>
+    <string name="previous_segment">Fyrri bútur</string>
+    <string name="all_previous_segments">Allir fyrri bútar</string>
+    <string name="only_selected_segment_recalc">Aðeins valinn bútur verður endurreiknaður með völdu sniði.</string>
+    <string name="all_next_segments_will_be_recalc">Allir bútar sem á eftir fylgja verða endurreiknaðir með völdu sniði.</string>
+    <string name="all_previous_segments_will_be_recalc">Allir fyrri bútar verða endurreiknaðir með völdu sniði.</string>
+    <string name="open_saved_track">Opna vistaðan feril</string>
+    <string name="shared_string_is_saved">er vistað</string>
+    <string name="one_point_error">Bættu við a.m.k. tveimur punktum.</string>
+    <string name="shared_string_redo">Endurtaka</string>
+    <string name="sort_last_modified">Síðast breytt</string>
+    <string name="sort_name_descending">Nafn: Ö – A</string>
+    <string name="sort_name_ascending">Nafn: A – Ö</string>
+    <string name="start_finish_icons">Tákn við upphaf/enda</string>
+    <string name="routing_attr_avoid_footways_description">Forðast gangstéttir</string>
+    <string name="routing_attr_avoid_footways_name">Forðast gangstéttir</string>
+    <string name="development">Þróun</string>
+    <string name="use_live_public_transport">OsmAnd Live gögn</string>
+    <string name="use_live_routing">OsmAnd Live gögn</string>
+    <string name="use_complex_routing">Flókin leiðagerð</string>
+    <string name="complex_routing_descr">Tveggja-þátta leiðagerð fyrir bílaleiðsögn.</string>
+    <string name="use_native_pt">Innbyggð þróun almenningssamgangna</string>
+    <string name="use_native_pt_desc">Skipta yfir í Java (öruggt) útreikning fyrir almenningssamgöngur</string>
+    <string name="perform_oauth_authorization_description">Framkvæma OAuth-innskráningu til að nota osmedit-eiginleika</string>
+    <string name="perform_oauth_authorization">Skrá inn í gegnum OAuth</string>
+    <string name="clear_osm_token">Hreinsa OAuth-teikn OpenStreetMap</string>
+    <string name="osm_edit_logout_success">Útskráning tókst</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX-skrár valdar</string>
+    <string name="disable_recording_once_app_killed_descrp">Mun setja GPX-skráningu í bið þegar forritið er drepið (slökkt á því í gegnum skjáinn fyrir nýleg forrit - bakgrunnsvísir OsmAnd hverfur þar með úr tilkynningastiku Android-kerfisins.)</string>
+    <string name="save_global_track_interval_descr">Veldu millibil skráninga í almenna leiðarskráningu (virkjað með viðmótshlutanum fyrir GPX-skráningu á kortinu).</string>
+    <string name="gpx_monitoring_stop">Setja skráningu í bið</string>
+    <string name="gpx_monitoring_start">Halda áfram með skráningu</string>
 </resources>

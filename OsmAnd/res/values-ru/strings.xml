@@ -2269,7 +2269,7 @@
     <string name="quick_actions_delete">Удалить действие</string>
     <string name="quick_actions_delete_text">Вы уверены, что хотите удалить действие «%s»\?</string>
     <string name="quick_action_favorites_show">Показать избранные</string>
-    <string name="quick_action_favorites_hide">Скрыть сохранённые</string>
+    <string name="quick_action_favorites_hide">Скрыть избранные</string>
     <string name="quick_action_showhide_poi_title">Показать/скрыть POI</string>
     <string name="quick_action_poi_show">Показать %1$s</string>
     <string name="quick_action_poi_hide">Скрыть %1$s</string>
