@@ -28,6 +28,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
+import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -128,7 +129,7 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 									sortButton.setImageResource(mode.getIconId());
 									updateDescription(descriptionView);
 									sortFolderList();
-									folderAdapter.setItems(getFolderNames());
+									folderAdapter.setTitledItems(getFolderNames());
 									folderAdapter.notifyDataSetChanged();
 									sortFileList();
 									adapter.notifyDataSetChanged();
@@ -191,13 +192,13 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 		folders = new ArrayList<>();
 		collectDirs(gpxDir, folders);
 		sortFolderList();
-		folderAdapter.setItems(getFolderNames());
-		folderAdapter.setSelectedItem(selectedFolder);
+		folderAdapter.setTitledItems(getFolderNames());
+		folderAdapter.setSelectedItemByTitle(selectedFolder);
 		foldersRecyclerView.setAdapter(folderAdapter);
 		folderAdapter.setListener(new HorizontalSelectionAdapterListener() {
 			@Override
-			public void onItemSelected(String item) {
-				selectedFolder = item;
+			public void onItemSelected(HorizontalSelectionItem item) {
+				selectedFolder = item.getTitle();
 				updateFileList(folderAdapter);
 			}
 		});
