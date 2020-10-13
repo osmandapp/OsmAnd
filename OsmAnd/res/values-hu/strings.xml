@@ -3918,4 +3918,6 @@
     <string name="perform_oauth_authorization">Bejelentkezés OAuth segítségével</string>
     <string name="clear_osm_token">OpenStreetMap OAuth token törlése</string>
     <string name="osm_edit_logout_success">Sikeresen kijelentkezett</string>
+    <string name="use_two_phase_routing">Kétszakaszos A* útvonaltervezési algoritmus használata</string>
+    <string name="file_already_imported">A fájl már importálva van az OsmAndba</string>
 </resources>
