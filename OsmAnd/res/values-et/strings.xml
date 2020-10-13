@@ -245,7 +245,7 @@
     <string name="select_animate_speedup">Teekonna simuleerimise kiirus:</string>
     <string name="share_route_as_gpx">Jaga teekonda GPX failina</string>
     <string name="share_route_subject">OsmAnd abil jagatud teekond</string>
-    <string name="route_roundabout">Ringristmik: vali %1d väljumine ja sõida otse</string>
+    <string name="route_roundabout">Ringristmik: vali %1$d väljumine ja sõida otse</string>
     <string name="route_kl">Hoia vasakule ja sõida otse</string>
     <string name="route_kr">Hoia paremale ja sõida otse</string>
     <string name="use_fluorescent_overlays_descr">Kasuta helkivaid värve radade ja teekondade kuvamisel.</string>
@@ -271,7 +271,7 @@
     <string name="empty_route_calculated">Arvutatud teekond on tühi.</string>
     <string name="use_online_routing_descr">Kasuta internetti teekonna arvutamiseks.</string>
     <string name="use_fast_recalculation">Tark teekonna arvutamine</string>
-    <string name="use_fast_recalculation_desc">Pikemate vahemaade korral arvuta uuesti ainult teekonna algusosa.</string>
+    <string name="use_fast_recalculation_desc">Arvuta uuesti ainult teekonna algusosa. Seda võid kasutada pikemate vahemaade korral.</string>
     <string name="simulate_your_location_descr">Simuleeri arvutatud või salvestatud GPX teekonda.</string>
     <string name="hillshade_layer_disabled">Künkavarjutuse kiht keelatud</string>
     <string name="rendering_attr_horseRoutes_name">Ratsutamisteed</string>
@@ -1720,25 +1720,25 @@
 \n 
 \n OsmAnd on aktiivselt arendamisel ning meie projekt ja selle jätkuv edasiminek sõltub rahalisest toetusest uute funktsioonide väljatöötamiseks ja testimiseks. Palun kaalu OsmAnd+ ostmist või konkreetsete uute funktsioonide rahastamist või üldise annetuse tegemist leheküljel https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ kaardid ja navigeerimine</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM automatiseeritud navigeerimisjuhised) 
-\n 
-\n OsmAnd+ on avatud lähtekoodiga tarkvara navigeerimisrakendus, millel on juurdepääs paljudele globaalsetele OpenStreetMap (OSM) andmetele. Kõiki kaardiandmeid (vektor- või paanikaarte) saab salvestada telefoni mälukaardile võrguühenduseta kasutamiseks. Pakutakse ka võrguühenduseta ja veebipõhist teekonna leidmise funktsiooni, sealhulgas hääljuhiseid. 
-\n 
-\n OsmAnd+ on rakenduse tasuline versioon, seda ostes toetate projekti, rahastate uute funktsioonide arendamist ja saate kõige värskemaid uuendusi. 
-\n 
-\n Mõned põhifunktsioonid: 
-\n - Täielik võrguühenduseta funktsioon (salvestage alla laetud vektor- või paanikaardid seadme mällu) 
-\n - Saadaval on kompaktsed võrguühenduseta vektorkaardid üle kogu maailma 
-\n - Riigi või piirkonna kaartide piiramatu allalaadimine otse rakendusest 
-\n - Võrguühenduseta Vikipeedia funktsioon (laadige Vikipeedia huvipunktid alla), sobib suurepäraselt vaatamisväärsustega tutvumiseks 
-\n - Võimalik on mitme kaardikihi ülekatmine, näiteks GPX või navigeerimisrajad, huvipunktid, eelistused, kõrgusjooned, ühistranspordi peatused, täiendavad kaardid kohandatava läbipaistvusega 
-\n 
-\n - Aadresside ja kohtade (huvipunktide) otsing võrguühenduseta 
-\n - Võrguühenduseta teekonna leidmine keskmise vahemaa jaoks 
-\n - Auto-, jalgratta- ja jalakäijarežiim valikuliselt: 
-\n - Automatiseeritud päeva/öö ekraanivaate vahetamine 
-\n - Kiirusest sõltuv kaardi suurendustase 
-\n - Kaardi joondamine vastavalt kompassile või liikumissuunale 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM automatiseeritud navigeerimisjuhised)
+\n
+\n OsmAnd+ on avatud lähtekoodiga tarkvara navigeerimisrakendus, millel on juurdepääs paljudele globaalsetele OpenStreetMap (OSM) andmetele. Kõiki kaardiandmeid (vektor- ja paanikaarte) saab salvestada telefoni mälukaardile võrguühenduseta kasutamiseks. Võimalik on nii võrguühenduseta kui ka -ühendusega teekonna leidmise funktsioon, milles on ka hääljuhiseid.
+\n
+\n OsmAnd+ on rakenduse tasuline versioon, mida ostes toetate projekti, rahastate uute funktsioonide arendamist ja saate kõige värskemaid uuendusi.
+\n
+\n Mõned põhifunktsioonid:
+\n - Täielik võrguühenduseta funktsioon (salvestage alla laetud vektor- ja paanikaardid seadme mällu)
+\n - Saadaval on kompaktsed kogu maailma vektorkaardid (võrguühenduseta režiim)
+\n - Riigi või piirkonna kaartide piiramatu allalaadimine otse rakendusest
+\n - Võrguühenduseta Vikipeedia funktsioon (laadige Vikipeedia huvipunktid alla), sobib suurepäraselt vaatamisväärsustega tutvumiseks
+\n - Võimalik on mitme kaardikihi ülekatmine, näiteks GPX või navigeerimisrajad, huvipunktid, eelistused, kõrgusjooned, ühistranspordi peatused, täiendavad kaardid kohandatava läbipaistvusega
+\n
+\n - Aadresside ja kohtade (huvipunktide) otsing võrguühenduseta
+\n - Võrguühenduseta teekonna leidmine keskmise vahemaa jaoks
+\n - Auto-, jalgratta- ja jalakäijarežiim valikuliselt:
+\n - Automatiseeritud päeva/öö ekraanivaate vahetamine
+\n - Kiirusest sõltuv kaardi suurendustase
+\n - Kaardi joondamine vastavalt kompassile või liikumissuunale
 \n - Raja juhtimine, kiiruspiirangu kuvamine, salvestatud ja kõnesünteesi hääled
 \n</string>
     <string name="filterpoi_activity">Loo huvipunktide filter</string>
@@ -3593,7 +3593,7 @@
     <string name="height_limit_description">Kuna mõnedel marsruutidel võidakse kohaldada sõidukite kõrguspiiranguid, siis palun märkige oma sõiduki kõrgus.</string>
     <string name="lenght_limit_description">Kuna mõnedel marsruutidel võidakse kohaldada piiranguid pikkade sõidukite suhtes, siis palun märkige oma sõiduki pikkus.</string>
     <string name="weight_limit_description">Kuna mõnedel marsruutidel võidakse kohaldada sõidukite kaalupiiranguid, siis palun märkige oma sõiduki kaal.</string>
-    <string name="gpx_parse_error">OsmAnd GPX faili vorming pole korrektne. Täpsemaks uurimiseks palun suhtle meie tugimeeskonnaga.</string>
+    <string name="gpx_parse_error">OsmAnd GPX-andmestiku vorming on vigane. Täpsemaks uurimiseks palun võta ühendust meie kasutajatoega.</string>
     <string name="sort_by_category">Sorteeri kategooria järgi</string>
     <string name="shared_string_resume">Jätka</string>
     <string name="import_profile_dialog_description">Imporditavas profiilis leidub täiendavaid andmeid. Vajutades „Impordi“ imporditakse vaid profiili andmed, täiendavate andmete jaoks pead märkima vastava valiku.</string>
@@ -3719,8 +3719,8 @@
 \nVastavalt oma maa seadustele pead sa otsuse tegema.
 \n
 \nValides %1$s sa saad kiiruskaamerate-kohaseid teateid ja hoiatusi.
-\n 
-\nValides %s$s kustutatakse kõik kiiruskaameratega seotud andmed, nagu hoiatused, teated ja huvipunktid seniks, kuni sa OsmAnd\'ile ei tee täiesti uut paigaldust.</string>
+\n
+\nValides %2$s kustutatakse kõik kiiruskaameratega seotud andmed, nagu hoiatused, teated ja huvipunktid seniks, kuni sa OsmAnd\'ile ei tee täiesti uut paigaldust.</string>
     <string name="quick_action_remove_next_destination_descr">Praegune teekonna vahepunkt saab kustutatud. Kui ta osutub sihtkohaks, siis navigatsioon lõppeb.</string>
     <string name="plan_route_change_route_type_after">Muuda teekonna tüüpi pärast</string>
     <string name="plan_route_change_route_type_before">Muuda teekonna tüüpi enne</string>
@@ -3773,4 +3773,6 @@
 \n
 \nTellimust saad hallata ja tühistada AppGallery seadistustest.</string>
     <string name="osm_live_payment_desc_hw">Arveldame tellimuse eest valitud ajavahemiku alusel. Seda saad sa vabalt valitud ajal tühistada AppGallery\'s.</string>
+    <string name="use_complex_routing">Keeruka teekonna koostamine</string>
+    <string name="osm_edit_logout_success">Väljalogimine õnnestus</string>
 </resources>

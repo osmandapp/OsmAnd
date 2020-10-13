@@ -11,9 +11,8 @@
 	Thx - Hardy
 
 -->
-    <string name="message_graph_will_be_available_after_recalculation">Wait for the route recalculation.\nGraph will be available after recalculation.</string>
-    <string name="message_need_calculate_route_before_show_graph">%1$s data available only on the roads, you need to calculate a route using “Route between points” to get it.</string>
-    <string name="shared_string_graph">Graph</string>
+    <string name="use_two_phase_routing">Use 2-phase A* routing algorithm</string>
+    <string name="file_already_imported">File is already imported in OsmAnd</string>
     <string name="osm_edit_logout_success">Logout successful</string>
     <string name="clear_osm_token">Clear OpenStreetMap OAuth token</string>
     <string name="perform_oauth_authorization">Log in via OAuth</string>
@@ -22,13 +21,12 @@
     <string name="use_native_pt">Native Public Transport development</string>
     <string name="use_fast_recalculation_desc">Recalculates only the initial part of the route. Can be used for long trips.</string>
     <string name="complex_routing_descr">Two-phase routing for car navigation.</string>
-    <string name="use_complex_routing">Complex routing</string>
     <string name="use_live_routing">OsmAnd Live data</string>
     <string name="use_live_public_transport">OsmAnd Live data</string>
     <string name="development">Development</string>
     <string name="routing_attr_avoid_footways_name">Avoid footways</string>
     <string name="routing_attr_avoid_footways_description">Avoid footways</string>
-    <string name="osm_live_payment_subscription_management_hw">Payment will be charged to your AppGallery account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period(month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your AppGallery settings.</string>
+    <string name="osm_live_payment_subscription_management_hw">Payment will be charged to your AppGallery account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period (month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your AppGallery settings.</string>
     <string name="osm_live_payment_desc_hw">Subscription charged per selected period. Cancel it on AppGallery at any time.</string>
     <string name="contour_lines_thanks">Thank you for purchasing \'Contour lines\'</string>
     <string name="start_finish_icons">Start/finish icons</string>
@@ -256,7 +254,7 @@
     <string name="extra_maps_menu_group">Extra maps</string>
     <string name="search_poi_types_descr">Combine POI types from different categories. Tap switch to select all, tap left side to category selection.</string>
     <string name="search_poi_types">Search for POI types</string>
-    <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\n Subscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period(month/three month/year) only on the renewal date.\n\n You can manage and cancel your subscriptions by going to your Google Play settings.</string>
+    <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\n Subscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period (month/three month/year) only on the renewal date.\n\n You can manage and cancel your subscriptions by going to your Google Play settings.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="custom_color">Custom color</string>
     <string name="lang_lmo">Lombard</string>

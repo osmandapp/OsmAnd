@@ -1618,4 +1618,10 @@
     <string name="poi_direction_clockwise">Retning: med urviseren</string>
     <string name="poi_direction_nnw">Retning: nord-nordvest</string>
     <string name="poi_direction_nw">Retning: nordvest</string>
+    <string name="poi_drinking_water_refill">Drikkevannspåfylling</string>
+    <string name="poi_traffic_signals_arrow">Pil</string>
+    <string name="poi_traffic_signals_vibration">Vibrasjon</string>
+    <string name="poi_video_telephone">Video</string>
+    <string name="poi_volcano_status">Status</string>
+    <string name="poi_volcano_type">Type</string>
 </resources>

@@ -1538,7 +1538,7 @@
     <string name="routing_attr_height_name">Limite de altura</string>
     <string name="routing_attr_height_description">Especifique a altura permitida do veículo nas rotas.</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
-    <string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas.</string>
+    <string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota. Pode ser usado para viagens longas.</string>
     <string name="rendering_value_disabled_name">Desativado</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Cor por afiliação de rede</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Cor por símbolo de caminhada OSMC</string>
@@ -2821,7 +2821,7 @@
     <string name="osm_live_payment_renews_annually">Renova anualmente</string>
     <string name="osm_live_payment_renews_quarterly">Renova trimestralmente</string>
     <string name="powered_by_osmand">Por OsmAnd</string>
-    <string name="default_price_currency_format">%1$,2f %2$s</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Período de pagamento:</string>
     <string name="osm_live_payment_contribute_descr">As doações ajudam a financiar a cartografia no OSM.</string>
     <string name="release_3_1">• Navegação: Corrige barra de progresso, inversão rápida de início e fim de rota 
@@ -3909,4 +3909,16 @@
 \nVocê pode gerenciar e cancelar suas assinaturas acessando as configurações do AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Evite passarelas</string>
     <string name="routing_attr_avoid_footways_name">Evite passarelas</string>
+    <string name="development">Desenvolvimento</string>
+    <string name="use_live_public_transport">Dados do OsmAnd Live</string>
+    <string name="use_live_routing">Dados do OsmAnd Live</string>
+    <string name="use_complex_routing">Roteamento complexo</string>
+    <string name="complex_routing_descr">Roteamento de duas fases para navegação automotiva.</string>
+    <string name="use_native_pt">Desenvolvimento de transporte público nativo</string>
+    <string name="use_native_pt_desc">Mudar para cálculo de roteamento de transporte público em Java (seguro)</string>
+    <string name="what_is_new">O que há de novo</string>
+    <string name="perform_oauth_authorization_description">Entre no OAuth para usar os recursos de edição do osm</string>
+    <string name="perform_oauth_authorization">Entrar via OAuth</string>
+    <string name="clear_osm_token">Limpar token do OpenStreetMap OAuth</string>
+    <string name="osm_edit_logout_success">Saída bem sucedida</string>
 </resources>

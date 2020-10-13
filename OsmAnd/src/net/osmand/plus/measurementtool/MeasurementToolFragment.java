@@ -78,6 +78,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -734,8 +735,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					case SnapTrackWarningFragment.CONTINUE_RESULT_CODE:
 						MapActivity mapActivity = getMapActivity();
 						if (mapActivity != null) {
+							ApplicationMode mode = editingCtx.getAppMode();
+							if (mode == ApplicationMode.DEFAULT || "public_transport".equals(mode.getRoutingProfile())) {
+								mode = null;
+							}
 							GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(),
-									this, new LocationsHolder(editingCtx.getPoints()));
+									this, new LocationsHolder(editingCtx.getPoints()), mode);
 						}
 						break;
 				}
@@ -1542,12 +1547,20 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private String getSuggestedFileName() {
 		GpxData gpxData = editingCtx.getGpxData();
-		String displayedName;
-		if (gpxData == null) {
+		String displayedName = null;
+		if (gpxData != null) {
+			GPXFile gpxFile = gpxData.getGpxFile();
+			if (!Algorithms.isEmpty(gpxFile.path)) {
+				displayedName = Algorithms.getFileNameWithoutExtension(new File(gpxFile.path).getName());
+			} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
+				displayedName = gpxFile.tracks.get(0).name;
+			}
+		}
+		if (gpxData == null || displayedName == null) {
 			String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
 			displayedName = FileUtils.createUniqueFileName(requireMyApplication(), suggestedName, GPX_INDEX_DIR, GPX_FILE_EXT);
 		} else {
-			displayedName = AndroidUtils.trimExtension(new File(gpxData.getGpxFile().path).getName());
+			displayedName = Algorithms.getFileNameWithoutExtension(new File(gpxData.getGpxFile().path).getName());
 		}
 		return displayedName;
 	}

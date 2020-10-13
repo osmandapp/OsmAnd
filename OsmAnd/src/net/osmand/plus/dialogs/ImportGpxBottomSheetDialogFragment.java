@@ -23,6 +23,8 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 
 	private GPXFile gpxFile;
 	private String fileName;
+	private long fileSize;
+
 	private boolean save;
 	private boolean useImportDir;
 
@@ -36,6 +38,10 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
 	}
 
 	public void setSave(boolean save) {
@@ -84,7 +90,7 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						importHelper.handleGpxImport(gpxFile, fileName, save, useImportDir);
+						importHelper.handleGpxImport(gpxFile, fileName, fileSize, save, useImportDir);
 						dismiss();
 					}
 				})

@@ -1,8 +1,10 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
 import android.view.View;
+import androidx.core.content.ContextCompat;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
@@ -24,6 +26,7 @@ public class IPFSImageCard extends ImageCard {
 		url = BASE_URL + cid;
 		imageHiresUrl = BASE_URL + cid;
 		imageUrl = BASE_URL + cid;
+		icon = ContextCompat.getDrawable(getMyApplication(), R.drawable.ic_logo_openplacereview);
 		if (!Algorithms.isEmpty(getUrl())) {
 			View.OnClickListener onClickListener = new View.OnClickListener() {
 				@Override

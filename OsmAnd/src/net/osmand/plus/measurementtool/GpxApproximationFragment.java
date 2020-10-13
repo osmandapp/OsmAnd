@@ -298,13 +298,15 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		return (menuState & (MenuState.HEADER_ONLY | MenuState.HALF_SCREEN)) != 0;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment, @NonNull LocationsHolder locationsHolder) {
+	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment,
+	                                @NonNull LocationsHolder locationsHolder, @Nullable ApplicationMode appMode) {
 		try {
 			if (!fm.isStateSaved()) {
 				GpxApproximationFragment fragment = new GpxApproximationFragment();
 				fragment.setRetainInstance(true);
 				fragment.setTargetFragment(targetFragment, REQUEST_CODE);
 				fragment.setLocationsHolder(locationsHolder);
+				fragment.setSnapToRoadAppMode(appMode);
 				fm.beginTransaction()
 						.replace(R.id.fragmentContainer, fragment, TAG)
 						.addToBackStack(TAG)
@@ -348,10 +350,17 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 
 	@Override
 	public void onProfileSelect(ApplicationMode applicationMode) {
-		if (snapToRoadAppMode != applicationMode) {
-			snapToRoadAppMode = applicationMode;
+		if (setSnapToRoadAppMode(applicationMode)) {
 			calculateGpxApproximation();
 		}
+	}
+
+	public boolean setSnapToRoadAppMode(ApplicationMode appMode) {
+		if (appMode != null && snapToRoadAppMode != appMode) {
+			snapToRoadAppMode = appMode;
+			return true;
+		}
+		return false;
 	}
 
 	public LocationsHolder getLocationsHolder() {

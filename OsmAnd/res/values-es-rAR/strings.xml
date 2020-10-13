@@ -1541,7 +1541,7 @@
     <string name="routing_attr_height_name">Límite de altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas.</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
-    <string name="use_fast_recalculation_desc">Para viajes largos, recalcula sólo la parte inicial de la ruta.</string>
+    <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta. Puede usarse para viajes largos.</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Color por red de afiliación</string>
@@ -3917,4 +3917,16 @@
 \nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Evita pasar por las veredas o aceras</string>
     <string name="routing_attr_avoid_footways_name">Evitar veredas/aceras</string>
+    <string name="development">Desarrollo</string>
+    <string name="use_live_public_transport">Datos de «OsmAnd Live»</string>
+    <string name="use_live_routing">Datos de «OsmAnd Live»</string>
+    <string name="use_complex_routing">Navegación compleja</string>
+    <string name="complex_routing_descr">Navegación bifásica en automóvil.</string>
+    <string name="use_native_pt">Desarrollo nativo del transporte público</string>
+    <string name="use_native_pt_desc">Cambiar al cálculo de ruta Java (seguro) del transporte público</string>
+    <string name="what_is_new">Novedades</string>
+    <string name="perform_oauth_authorization_description">Inicia sesión con OAuth para usar las funciones de edición de OSM</string>
+    <string name="perform_oauth_authorization">Ingresar a través de OAuth</string>
+    <string name="clear_osm_token">Vaciar llave OAuth de OpenStreetMap</string>
+    <string name="osm_edit_logout_success">Sesión finalizada</string>
 </resources>

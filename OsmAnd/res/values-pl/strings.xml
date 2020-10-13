@@ -264,7 +264,7 @@
     <string name="no_fav_to_save">Brak ulubionych punktów do zapisania</string>
     <string name="shared_string_import">Importuj</string>
     <string name="error_occurred_loading_gpx">Nie można wczytać GPX.</string>
-    <string name="send_report">Wyślij zgłoszenie</string>
+    <string name="send_report">Wyślij raport</string>
     <string name="none_region_found">Nie znaleziono pobranych map na karcie pamięci.</string>
     <string name="poi_namefinder_query_empty">Napisz, aby odnaleźć POI</string>
     <string name="any_poi">Jakiekolwiek</string>
@@ -1319,7 +1319,7 @@
     <string name="traffic_warning_border_control">Kontrola graniczna</string>
     <string name="traffic_warning_payment">Punkt poboru opłat</string>
     <string name="traffic_warning_stop">Znak Stop</string>
-    <string name="traffic_warning_calming">Spowolnienie ruchu</string>
+    <string name="traffic_warning_calming">Uspokojenie ruchu</string>
     <string name="traffic_warning_speed_camera">Fotoradar</string>
     <string name="traffic_warning">Ostrzeżenia drogowe</string>
     <string name="local_index_description">Kliknij istniejący element, aby zobaczyć szczegóły, naciśnij i przytrzymaj, aby wyłączyć lub usunąć. Aktualne dane na urządzeniu (%1$s wolne):</string>
@@ -1541,7 +1541,7 @@
     <string name="routing_attr_height_name">Ograniczenie wysokości</string>
     <string name="routing_attr_height_description">Określa dozwoloną wysokość pojazdu na trasach.</string>
     <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
-    <string name="use_fast_recalculation_desc">Wyznacza ponownie tylko początkową część trasy dla długich podróży.</string>
+    <string name="use_fast_recalculation_desc">Ponownie oblicza tylko początkową część trasy. Może być stosowany do długich podróży.</string>
     <string name="shared_string_logoff">Wyloguj się</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Linia w kolorze oznakowania OSMC</string>
     <string name="rendering_value_disabled_name">Wyłączenie</string>
@@ -3431,7 +3431,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikona wyświetlana podczas nawigacji lub ruchu.</string>
     <string name="select_map_icon_descr">Ikona wyświetlana podczas spoczynku.</string>
-    <string name="logcat_buffer_descr">Sprawdź i udostępnij szczegółowe dzienniki aplikacji</string>
+    <string name="logcat_buffer_descr">Sprawdzanie i udostępnianie szczegółowych logów aplikacji</string>
     <string name="file_does_not_contain_routing_rules">Brak reguł wyznaczania trasy w „%1$s”. Proszę wybrać inny plik.</string>
     <string name="permission_is_required">Wymagane jest zezwolenie na korzystanie z tej opcji.</string>
     <string name="not_support_file_type_with_ext">Proszę wybrać obsługiwany plik z rozszerzeniem %1$s.</string>
@@ -3802,7 +3802,7 @@
     <string name="use_volume_buttons_as_zoom">Przyciski głośności jako powiększenie</string>
     <string name="app_mode_wheelchair">Wózek inwalidzki</string>
     <string name="app_mode_go_cart">Gokart</string>
-    <string name="osm_edit_closed_note">Zamknięte Uwagi OSM</string>
+    <string name="osm_edit_closed_note">Zamknięta notatka OSM</string>
     <string name="set_working_days_to_continue">Aby kontynuować, musisz ustawić dni robocze</string>
     <string name="route_between_points">Droga pomiędzy punktami</string>
     <string name="plan_a_route">Zaplanuj trasę</string>
@@ -3859,7 +3859,7 @@
     <string name="empty_state_my_tracks_desc">Importowanie lub rejestrowanie plików śladu</string>
     <string name="context_menu_item_add_waypoint">Dodaj punkt trasy</string>
     <string name="quick_action_add_gpx">Dodaj punkt trasy</string>
-    <string name="map_widget_monitoring">Rejestrowanie śladu</string>
+    <string name="map_widget_monitoring">Rejestrowanie śladów</string>
     <string name="marker_save_as_track">Zapisz jako plik śladu</string>
     <string name="follow_track_descr">Wybiera plik śladu do podążania</string>
     <string name="select_another_track">Wybierz inną trasę</string>
@@ -3911,4 +3911,26 @@
     <string name="sort_last_modified">Ostatnia modyfikacja</string>
     <string name="sort_name_descending">Nazwa: Z – A</string>
     <string name="sort_name_ascending">Nazwa: A – Z</string>
+    <string name="what_is_new">Co nowego</string>
+    <string name="start_finish_icons">Ikony start/koniec</string>
+    <string name="contour_lines_thanks">Dziękujemy za zakup linii konturowych</string>
+    <string name="osm_live_payment_desc_hw">Subskrypcja naliczona za wybrany okres. Anuluj ją w AppGallery w dowolnym momencie.</string>
+    <string name="osm_live_payment_subscription_management_hw">Płatność zostanie pobrana z konta AppGallery po potwierdzeniu zakupu.
+\n
+\nSubskrypcja jest automatycznie odnawiana, chyba że zostanie anulowana przed datą odnowienia. Twoje konto zostanie obciążone opłatą za okres odnowienia (miesiąc/trzy miesiące/rok) tylko w dniu odnowienia.
+\n
+\nMożesz zarządzać subskrypcjami i anulować je, przechodząc do ustawień Galerii aplikacji.</string>
+    <string name="routing_attr_avoid_footways_description">Unikaj chodników</string>
+    <string name="routing_attr_avoid_footways_name">Unikaj chodników</string>
+    <string name="development">Rozwój</string>
+    <string name="use_live_public_transport">Dane na żywo z OsmAnd</string>
+    <string name="use_live_routing">Dane na żywo z OsmAnd</string>
+    <string name="use_complex_routing">Routing złożony</string>
+    <string name="complex_routing_descr">Dwufazowe wyznaczanie tras do nawigacji samochodowej.</string>
+    <string name="use_native_pt">Rozwój rodzimego transportu publicznego</string>
+    <string name="use_native_pt_desc">Przejdź do (bezpiecznego) obliczania tras transportu publicznego w języku Java</string>
+    <string name="perform_oauth_authorization_description">Wykonaj logowanie OAuth, aby korzystać z funkcji osmedit</string>
+    <string name="perform_oauth_authorization">Zaloguj się przez OAuth</string>
+    <string name="clear_osm_token">Wyczyść token OpenStreetMap OAuth</string>
+    <string name="osm_edit_logout_success">Wylogowanie powiodło się</string>
 </resources>

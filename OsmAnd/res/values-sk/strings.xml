@@ -1537,7 +1537,7 @@
     <string name="routing_attr_height_name">Výškový limit</string>
     <string name="routing_attr_height_description">Zadajte výšku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
-    <string name="use_fast_recalculation_desc">Pri dlhých výletoch prepočítať iba začiatočný úsek trasy.</string>
+    <string name="use_fast_recalculation_desc">Prepočíta iba začiatočný úsek trasy. Môže byť použité pre dlhé výlety.</string>
     <string name="shared_string_logoff">Odhlásiť</string>
     <string name="rendering_value_disabled_name">Vypnuté</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Zafarbenie podľa príslušnosti k sieti</string>
@@ -3914,4 +3914,16 @@
 \n Vaše predplatné môžete spravovať a zrušiť v nastaveniach AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Vyhnúť sa chodníkom pre chodcov</string>
     <string name="routing_attr_avoid_footways_name">Vyhnúť sa chodníkom</string>
+    <string name="development">Vývoj</string>
+    <string name="use_live_public_transport">Údaje OsmAnd Live</string>
+    <string name="use_live_routing">Údaje OsmAnd Live</string>
+    <string name="use_complex_routing">Komplexný výpočet trasy</string>
+    <string name="complex_routing_descr">Dvojfázový výpočet trasy pre navigáciu auta.</string>
+    <string name="use_native_pt">Natívna hromadná doprava (vo vývoji)</string>
+    <string name="use_native_pt_desc">Prepnúť na výpočet trasy hromadnej dopravy v Jave (bezpečné)</string>
+    <string name="what_is_new">Čo je nové</string>
+    <string name="perform_oauth_authorization_description">Vykonať prihlásenie cez OAuth pre použitie funkcií upravovania OSM</string>
+    <string name="perform_oauth_authorization">Prihlásiť pomocou OAuth</string>
+    <string name="clear_osm_token">Vymazať token OpenStreetMap OAuth</string>
+    <string name="osm_edit_logout_success">Odhlásenie úspešné</string>
 </resources>

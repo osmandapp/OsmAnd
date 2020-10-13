@@ -2063,7 +2063,7 @@
     <string name="poi_dialog_reopen">بازگشایی</string>
     <string name="get_plugin">دریافت</string>
     <string name="use_fast_recalculation">محاسبهٔ مجدد هوشمند</string>
-    <string name="use_fast_recalculation_desc">برای سفرهای طولانی فقط بخش ابتدایی مسیر را مجدداً محاسبه می‌کند.</string>
+    <string name="use_fast_recalculation_desc">فقط بخش ابتدایی مسیر را مجدداً محاسبه می‌کند. برای سفرهای طولانی مفید است.</string>
     <string name="do_you_like_osmand">آیا از OsmAnd راضی هستید؟</string>
     <string name="we_really_care_about_your_opinion">دیدگاه و بازخورد شما ارزشمند است.</string>
     <string name="rate_this_app">به این برنامه امتیاز بدهید</string>
@@ -3933,4 +3933,13 @@
     <string name="app_mode_motor_scooter">اسکوتر موتوری</string>
     <string name="app_mode_wheelchair_forward">ویلچر رو به جلو</string>
     <string name="threshold_distance">فاصله آستانه</string>
+    <string name="start_finish_icons">نمادهای ابتدا/انتها</string>
+    <string name="routing_attr_avoid_footways_name">راه‌های پیاده</string>
+    <string name="routing_attr_avoid_footways_description">از راه‌های پیاده پرهیز می‌کند</string>
+    <string name="development">توسعه</string>
+    <string name="use_live_public_transport">دادهٔ OsmAnd Live</string>
+    <string name="use_live_routing">دادهٔ OsmAnd Live</string>
+    <string name="complex_routing_descr">مسیریابی دومرحله‌ای برای ناوبری خودرویی.</string>
+    <string name="use_complex_routing">مسیریابی پیچیده</string>
+    <string name="use_native_pt_desc">برای مسیریابی حمل‌ونقل عمومی از محاسبات جاوا (امن) استفاده می‌کند</string>
 </resources>

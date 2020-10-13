@@ -1853,7 +1853,7 @@
     <string name="navigation_intent_invalid">Erara formo: %s</string>
     <string name="plugin_install_needs_network">Vi devas esti konektita al la interreto por instali tiun ĉi kromprogramon.</string>
     <string name="use_fast_recalculation">Inteligenta rekalkulado de kurso</string>
-    <string name="use_fast_recalculation_desc">Por longaj vojaĝoj, rekalkuli nur komencan parton de kurso.</string>
+    <string name="use_fast_recalculation_desc">Rekalkuli nur komencan parton de kurso. Uzebla por longaj kursoj.</string>
     <string name="rate_this_app">Taksi tiun ĉi aplikaĵon</string>
     <string name="we_really_care_about_your_opinion">Via opinio estas grava por ni.</string>
     <string name="rate_this_app_long">Bonvolu taksi OsmAnd ĉe Google Play</string>
@@ -1890,7 +1890,7 @@
     <string name="unsaved_changes_will_be_lost">Ĉiuj nekonservitaj ŝanĝoj estos forigitaj. Ĉu pluigi?</string>
     <string name="downloads_left_template">ankoraŭ %1$s elŝutoj</string>
     <string name="roads">Vojoj</string>
-    <string name="downloading_number_of_files">Elŝutado - %1$s dosiero</string>
+    <string name="downloading_number_of_files">Elŝutado – %1$d dosiero</string>
     <string name="show_free_version_banner">Montri reklamaĵon de senpaga versio</string>
     <string name="show_free_version_banner_description">Montri reklamaĵon de senpaga versio, eĉ se vi havas pagan version.</string>
     <string name="activate_seamarks_plugin">Bonvolu aktivigi la kromprogramon “mara map-vido”</string>
@@ -2832,13 +2832,13 @@
     <string name="osm_live_payment_3_months_title">Ĉiu-3-monate</string>
     <string name="osm_live_payment_annual_title">Ĉiujare</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / monato</string>
-    <string name="osm_live_payment_month_cost_descr_ex">%1$,2f %2$s / monato</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / monato</string>
     <string name="osm_live_payment_discount_descr">Ŝparu %1$s</string>
     <string name="osm_live_payment_current_subscription">Nuna kotizo</string>
     <string name="osm_live_payment_renews_monthly">Reaboni ĉiumonate</string>
     <string name="osm_live_payment_renews_quarterly">Reaboni ĉiukvaronjare</string>
     <string name="osm_live_payment_renews_annually">Reaboni ĉiujare</string>
-    <string name="default_price_currency_format">%1$,2f %2$s</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Intertempo de pagoj:</string>
     <string name="osm_live_payment_contribute_descr">Donacoj helpos fondi kartografion de OSM.</string>
     <string name="powered_by_osmand">De OsmAnd</string>
@@ -3651,7 +3651,7 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">La pago estos prenita el via konto Google Play post konfirmi aĉeton.
 \n
-\n La abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la data de renoviĝo.
+\n La abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
 \n
 \n Vi povas administri kaj rezigni viajn abonojn per agordoj de Google Play.</string>
     <string name="search_poi_types_descr">Miksi specojn de interesejoj el diversaj kategorioj. Frapetu ŝaltilon por elekti la tutan kategorion, frapetu ĉe maldekstre por elekti detala(j)n objekto(j)n el la kategorio.</string>
@@ -3894,7 +3894,7 @@
     <string name="simplified_track">Simpligita spuro</string>
     <string name="simplified_track_description">Nur la linio de kurso estos konservita, la navigadpunktoj estos forigitaj.</string>
     <string name="shared_string_file_name">Dosiernomo</string>
-    <string name="number_of_gpx_files_selected_pattern">%d dosieroj de spuroj elektitaj</string>
+    <string name="number_of_gpx_files_selected_pattern">%s dosieroj de spuroj elektitaj</string>
     <string name="disable_recording_once_app_killed_descrp">Paŭzigos registri spuron je halto de la aplikaĵo (per la menuo de lastaj aplikaĵoj). (Fona emblemo de OsmAnd malaperos de la androida sciiga zono.)</string>
     <string name="gpx_monitoring_stop">Paŭzigi registri spuron</string>
     <string name="gpx_monitoring_start">Daŭrigi registri spuron</string>
@@ -3903,4 +3903,26 @@
     <string name="previous_segment">Antaŭa segmento</string>
     <string name="all_previous_segments">Ĉiuj antaŭaj segmentoj</string>
     <string name="only_selected_segment_recalc">Nur la elektita segmento estos rekalkulita uzante la elektitan profilon.</string>
+    <string name="what_is_new">Kio estas nova</string>
+    <string name="osm_live_payment_subscription_management_hw">La pago estos prenita el via konto AppGallery post konfirmi aĉeton.
+\n
+\n La abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
+\n
+\n Vi povas administri kaj rezigni viajn abonojn per la agordoj de AppGallery.</string>
+    <string name="start_finish_icons">Emblemoj komenco/fino</string>
+    <string name="contour_lines_thanks">Dankon al vi por aĉeti la kromprogramon “nivelkurboj”</string>
+    <string name="osm_live_payment_desc_hw">Abonpago prenita por la elektita periodo. VI ĉiam povas rezigni abonon ĉe AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Eviti irejojn</string>
+    <string name="routing_attr_avoid_footways_name">Sen trotuaroj</string>
+    <string name="development">Programado</string>
+    <string name="use_live_public_transport">Datumoj OsmAnd Live</string>
+    <string name="use_live_routing">Datumoj OsmAnd Live</string>
+    <string name="use_complex_routing">Komplika kurs-difinado</string>
+    <string name="complex_routing_descr">Du-faza difinado de kurso por aŭtomobila navigo.</string>
+    <string name="use_native_pt">Indiĝena metodo de publik-transporta navigo</string>
+    <string name="use_native_pt_desc">Aktivigi (sekuran) metodon por kalkuli kursojn de publika transporto uzante programlingvon Java</string>
+    <string name="perform_oauth_authorization_description">Ensaluti uzante OAuth por redakti la mapon OSM</string>
+    <string name="perform_oauth_authorization">Ensaluti per OAuth</string>
+    <string name="clear_osm_token">Forigi ĵetonon OpenStreetMap OAuth</string>
+    <string name="osm_edit_logout_success">Sukcese elsalutinta</string>
 </resources>
