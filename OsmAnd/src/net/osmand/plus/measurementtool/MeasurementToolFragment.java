@@ -127,6 +127,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private Snackbar snackbar;
 	private String fileName;
 
+	private AdditionalInfoType currentAdditionalInfoType;
+
 	private boolean wasCollapseButtonVisible;
 	private boolean progressBarVisible;
 	private boolean additionalInfoExpanded;
@@ -141,7 +143,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean portrait;
 	private boolean nightMode;
 	private int cachedMapPosition;
-	private AdditionalInfoType currentAdditionalInfoType;
 
 	private MeasurementEditingContext editingCtx = new MeasurementEditingContext();
 
@@ -514,17 +515,25 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void changeAdditionalInfoType(@NonNull AdditionalInfoType type) {
 		if (!additionalInfoExpanded || !isCurrentAdditionalInfoType(type)) {
+			MapActivity ma = getMapActivity();
+			if (ma == null) return;
 			currentAdditionalInfoType = type;
 			updateUpDownBtn();
-			OsmandApplication app = getMyApplication();
-			if (AdditionalInfoType.POINTS.equals(type)) {
+			OsmandApplication app = ma.getMyApplication();
+			BaseCard additionalInfoCard = null;
+			if (AdditionalInfoType.POINTS == type) {
+				additionalInfoCard = new PointsCard(ma, this);
 				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, START);
-			} else if (AdditionalInfoType.GRAPH.equals(type)) {
+			} else if (AdditionalInfoType.GRAPH == type) {
+				additionalInfoCard = new GraphsCard(ma, this);
 				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, END);
-			} else {
-				return;
 			}
-			setAdditionalInfoCard(type);
+			if (additionalInfoCard != null) {
+				visibleAdditionalInfoCard = additionalInfoCard;
+				additionalInfoCardsContainer.removeAllViews();
+				additionalInfoCardsContainer.addView(additionalInfoCard.build(ma));
+				additionalInfoExpanded = true;
+			}
 		}
 	}
 
@@ -1477,25 +1486,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private void setAdditionalInfoCard(AdditionalInfoType type) {
-		MapActivity ma = getMapActivity();
-		if (ma == null) return;
-
-		BaseCard additionalInfoCard = null;
-		if (type.equals(AdditionalInfoType.POINTS)) {
-			additionalInfoCard = new MtPointsFragment(ma, this);
-		} else if (type.equals(AdditionalInfoType.GRAPH)) {
-			additionalInfoCard = new MtGraphFragment(ma, this);
-		}
-
-		if (additionalInfoCard != null) {
-			visibleAdditionalInfoCard = additionalInfoCard;
-			additionalInfoCardsContainer.removeAllViews();
-			additionalInfoCardsContainer.addView(additionalInfoCard.build(ma));
-			additionalInfoExpanded = true;
-		}
-	}
-
 	private void collapseAdditionalInfoIfNoPointsEnough() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
@@ -1515,7 +1505,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		setMapPosition(OsmandSettings.CENTER_CONSTANT);
 	}
 
-	public void setMapPosition(int position) {
+	private void setMapPosition(int position) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapView().setMapPosition(position);

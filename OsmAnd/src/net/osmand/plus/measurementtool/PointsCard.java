@@ -7,21 +7,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateAdditionalInfoListener;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
-public class MtPointsFragment extends BaseCard
-		implements MeasurementToolFragment.OnUpdateAdditionalInfoListener {
+public class PointsCard extends BaseCard implements OnUpdateAdditionalInfoListener {
 
 	private MeasurementToolAdapter adapter;
-	private MeasurementEditingContext editingCtx;
-	private RecyclerView pointsRv;
-	private MeasurementToolFragment mtf;
+	private MeasurementToolFragment fragment;
 
-	public MtPointsFragment(@NonNull MapActivity mapActivity, MeasurementToolFragment mtf) {
+	public PointsCard(@NonNull MapActivity mapActivity, MeasurementToolFragment fragment) {
 		super(mapActivity);
-		this.mtf = mtf;
+		this.fragment = fragment;
 	}
 
 	@Override
@@ -36,14 +34,14 @@ public class MtPointsFragment extends BaseCard
 
 	@Override
 	protected void updateContent() {
-		editingCtx = mtf.getEditingCtx();
+		MeasurementEditingContext editingCtx = fragment.getEditingCtx();
 		final GpxData gpxData = editingCtx.getGpxData();
 		adapter = new MeasurementToolAdapter(mapActivity, editingCtx.getPoints(),
 				gpxData != null ? gpxData.getActionType() : null);
-		pointsRv = view.findViewById(R.id.measure_points_recycler_view);
+		RecyclerView pointsRv = view.findViewById(R.id.measure_points_recycler_view);
 		ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(pointsRv);
-		adapter.setAdapterListener(mtf.createMeasurementAdapterListener(touchHelper));
+		adapter.setAdapterListener(fragment.createMeasurementAdapterListener(touchHelper));
 		pointsRv.setLayoutManager(new LinearLayoutManager(app));
 		pointsRv.setAdapter(adapter);
 	}

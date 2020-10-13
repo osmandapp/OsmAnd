@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
@@ -20,13 +21,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
-import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateAdditionalInfoListener;
+import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
-import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
@@ -39,22 +40,22 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class MtGraphFragment extends BaseCard
-		implements MeasurementToolFragment.OnUpdateAdditionalInfoListener {
+public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListener {
 
 	private static String GRAPH_DATA_GPX_FILE_NAME = "graph_data_tmp";
+
+	private MeasurementEditingContext editingCtx;
+	private MeasurementToolFragment fragment;
+
+	private GraphType visibleGraphType;
+	private List<GraphType> graphTypes = new ArrayList<>();
 
 	private View commonGraphContainer;
 	private View customGraphContainer;
 	private View messageContainer;
 	private LineChart commonGraphChart;
 	private HorizontalBarChart customGraphChart;
-	private RecyclerView rvGraphTypesMenu;
-
-	private MeasurementEditingContext editingCtx;
-	private GraphType visibleGraphType;
-	private List<GraphType> graphTypes = new ArrayList<>();
-	private MeasurementToolFragment mtf;
+	private RecyclerView graphTypesMenu;
 
 	private enum CommonGraphType {
 		OVERVIEW(R.string.shared_string_overview, false),
@@ -71,15 +72,15 @@ public class MtGraphFragment extends BaseCard
 		final boolean canBeCalculated;
 	}
 
-	public MtGraphFragment(@NonNull MapActivity mapActivity, MeasurementToolFragment mtf) {
+	public GraphsCard(@NonNull MapActivity mapActivity, MeasurementToolFragment fragment) {
 		super(mapActivity);
-		this.mtf = mtf;
+		this.fragment = fragment;
 	}
 
 	@Override
 	protected void updateContent() {
-		if (mapActivity == null || mtf == null) return;
-		editingCtx = mtf.getEditingCtx();
+		if (mapActivity == null || fragment == null) return;
+		editingCtx = fragment.getEditingCtx();
 
 		commonGraphContainer = view.findViewById(R.id.common_graphs_container);
 		customGraphContainer = view.findViewById(R.id.custom_graphs_container);
@@ -88,8 +89,8 @@ public class MtGraphFragment extends BaseCard
 		customGraphChart = (HorizontalBarChart) view.findViewById(R.id.horizontal_chart);
 		updateGraphData();
 
-		rvGraphTypesMenu = view.findViewById(R.id.graph_types_recycler_view);
-		rvGraphTypesMenu.setLayoutManager(
+		graphTypesMenu = view.findViewById(R.id.graph_types_recycler_view);
+		graphTypesMenu.setLayoutManager(
 				new LinearLayoutManager(mapActivity, RecyclerView.HORIZONTAL, false));
 
 		refreshGraphTypesSelectionMenu();
@@ -111,7 +112,7 @@ public class MtGraphFragment extends BaseCard
 	}
 
 	private void refreshGraphTypesSelectionMenu() {
-		rvGraphTypesMenu.removeAllViews();
+		graphTypesMenu.removeAllViews();
 		OsmandApplication app = getMyApplication();
 		int activeColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		final HorizontalSelectionAdapter adapter = new HorizontalSelectionAdapter(app, nightMode);
@@ -139,7 +140,7 @@ public class MtGraphFragment extends BaseCard
 				}
 			}
 		});
-		rvGraphTypesMenu.setAdapter(adapter);
+		graphTypesMenu.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
 
@@ -192,13 +193,13 @@ public class MtGraphFragment extends BaseCard
 			commonGraphContainer.setVisibility(View.GONE);
 			customGraphContainer.setVisibility(View.VISIBLE);
 			messageContainer.setVisibility(View.GONE);
-			prepareCustomGraphView((BarData) visibleGraphType.getData());
+			prepareCustomGraphView((BarData) visibleGraphType.getGraphData());
 		} else {
 			commonGraphChart.clear();
 			commonGraphContainer.setVisibility(View.VISIBLE);
 			customGraphContainer.setVisibility(View.GONE);
 			messageContainer.setVisibility(View.GONE);
-			prepareCommonGraphView((LineData) visibleGraphType.getData());
+			prepareCommonGraphView((LineData) visibleGraphType.getGraphData());
 		}
 	}
 
@@ -240,7 +241,7 @@ public class MtGraphFragment extends BaseCard
 		// update common graph data
 		for (CommonGraphType commonType : CommonGraphType.values()) {
 			List<ILineDataSet> dataSets = getDataSets(commonType, commonGraphChart, analysis);
-			Object data = null;
+			LineData data = null;
 			if (!Algorithms.isEmpty(dataSets)) {
 				data = new LineData(dataSets);
 			}
@@ -282,24 +283,24 @@ public class MtGraphFragment extends BaseCard
 			OsmandApplication app = getMyApplication();
 			switch (type) {
 				case OVERVIEW: {
-					List<GpxUiHelper.OrderedLineDataSet> dataList = new ArrayList<>();
+					List<OrderedLineDataSet> dataList = new ArrayList<>();
 					if (analysis.hasSpeedData) {
-						GpxUiHelper.OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
-								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, true, true, false);
+						OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, true, true, false);
 						dataList.add(speedDataSet);
 					}
 					if (analysis.hasElevationData) {
-						GpxUiHelper.OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
-								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true, false);
+						OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, false, true, false);
 						dataList.add(elevationDataSet);
-						GpxUiHelper.OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
-								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, null, true, true, false);
+						OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, null, true, true, false);
 						dataList.add(slopeDataSet);
 					}
 					if (dataList.size() > 0) {
-						Collections.sort(dataList, new Comparator<GpxUiHelper.OrderedLineDataSet>() {
+						Collections.sort(dataList, new Comparator<OrderedLineDataSet>() {
 							@Override
-							public int compare(GpxUiHelper.OrderedLineDataSet o1, GpxUiHelper.OrderedLineDataSet o2) {
+							public int compare(OrderedLineDataSet o1, OrderedLineDataSet o2) {
 								return Float.compare(o1.getPriority(), o2.getPriority());
 							}
 						});
@@ -309,23 +310,23 @@ public class MtGraphFragment extends BaseCard
 				}
 				case ALTITUDE: {
 					if (analysis.hasElevationData) {
-						GpxUiHelper.OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
-								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true, false);//calcWithoutGaps);
+						OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, false, true, false);//calcWithoutGaps);
 						dataSets.add(elevationDataSet);
 					}
 					break;
 				}
 				case SLOPE:
 					if (analysis.hasElevationData) {
-						GpxUiHelper.OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
-								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, null, true, true, false);
+						OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, null, true, true, false);
 						dataSets.add(slopeDataSet);
 					}
 					break;
 				case SPEED: {
 					if (analysis.hasSpeedData) {
-						GpxUiHelper.OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
-								analysis, GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true, false);//calcWithoutGaps);
+						OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, false, true, false);//calcWithoutGaps);
 						dataSets.add(speedDataSet);
 					}
 					break;
@@ -348,33 +349,24 @@ public class MtGraphFragment extends BaseCard
 	private List<RouteStatistics> calculateRouteStatistics(List<RouteSegmentResult> route) {
 		OsmandApplication app = getMyApplication();
 		if (route == null || app == null) return null;
-
-		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-		RenderingRulesStorage defaultRender = app.getRendererRegistry().defaultRender();
-		MapRenderRepositories maps = app.getResourceManager().getRenderer();
-		RenderingRuleSearchRequest currentSearchRequest =
-				maps.getSearchRequestWithAppliedCustomRules(currentRenderer, nightMode);
-		RenderingRuleSearchRequest defaultSearchRequest =
-				maps.getSearchRequestWithAppliedCustomRules(defaultRender, nightMode);
-		return RouteStatisticsHelper.calculateRouteStatistic(route, currentRenderer,
-				defaultRender, currentSearchRequest, defaultSearchRequest);
+		return RouteDetailsFragment.calculateRouteStatistics(app, route, nightMode);
 	}
 
 	private boolean isRouteCalculating() {
-		return mtf.isProgressBarVisible();
+		return fragment.isProgressBarVisible();
 	}
 
 	private static class GraphType {
 		private String title;
 		private boolean isCustom;
 		private boolean canBeCalculated;
-		private Object data;
+		private ChartData graphData;
 
-		public GraphType(String title, boolean isCustom, boolean canBeCalculated, Object data) {
+		public GraphType(String title, boolean isCustom, boolean canBeCalculated, ChartData graphData) {
 			this.title = title;
 			this.isCustom = isCustom;
 			this.canBeCalculated = canBeCalculated;
-			this.data = data;
+			this.graphData = graphData;
 		}
 
 		public String getTitle() {
@@ -394,11 +386,11 @@ public class MtGraphFragment extends BaseCard
 		}
 
 		public boolean hasData() {
-			return getData() != null;
+			return getGraphData() != null;
 		}
 
-		public Object getData() {
-			return data;
+		public ChartData getGraphData() {
+			return graphData;
 		}
 	}
 }
