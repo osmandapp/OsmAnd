@@ -52,7 +52,7 @@ public class MtGraphFragment extends BaseCard
 	private RecyclerView rvGraphTypesMenu;
 
 	private MeasurementEditingContext editingCtx;
-	private GraphType currentGraphType;
+	private GraphType visibleGraphType;
 	private List<GraphType> graphTypes = new ArrayList<>();
 	private MeasurementToolFragment mtf;
 
@@ -93,8 +93,7 @@ public class MtGraphFragment extends BaseCard
 				new LinearLayoutManager(mapActivity, RecyclerView.HORIZONTAL, false));
 
 		refreshGraphTypesSelectionMenu();
-		GraphType firstAvailableGraphType = getFirstAvailableGraphType();
-		setupVisibleGraphType(firstAvailableGraphType);
+		updateDataView();
 	}
 
 	@Override
@@ -118,7 +117,7 @@ public class MtGraphFragment extends BaseCard
 			}
 		}
 		adapter.setItems(items);
-		String selectedItemKey = currentGraphType != null ? currentGraphType.getTitle() : items.get(0).getTitle();
+		String selectedItemKey = visibleGraphType.getTitle();
 		adapter.setSelectedItemByTitle(selectedItemKey);
 		adapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
 			@Override
@@ -126,7 +125,7 @@ public class MtGraphFragment extends BaseCard
 				adapter.setItems(items);
 				adapter.setSelectedItem(item);
 				GraphType chosenGraphType = (GraphType) item.getObject();
-				if (chosenGraphType != null && !chosenGraphType.equals(currentGraphType)) {
+				if (!isCurrentVisibleType(chosenGraphType)) {
 					setupVisibleGraphType(chosenGraphType);
 				}
 			}
@@ -139,13 +138,19 @@ public class MtGraphFragment extends BaseCard
 	public void onUpdateAdditionalInfo() {
 		updateGraphData();
 		refreshGraphTypesSelectionMenu();
-		setupVisibleGraphType(currentGraphType.isAvailable()
-				? currentGraphType : getFirstAvailableGraphType());
+		updateDataView();
 	}
 
 	private void setupVisibleGraphType(GraphType type) {
-		currentGraphType = type;
+		visibleGraphType = type;
 		updateDataView();
+	}
+
+	private boolean isCurrentVisibleType(GraphType type) {
+		if (visibleGraphType != null && type != null) {
+			return Algorithms.objectEquals(visibleGraphType.getTitle(), type.getTitle());
+		}
+		return false;
 	}
 
 	private GraphType getFirstAvailableGraphType() {
@@ -160,9 +165,9 @@ public class MtGraphFragment extends BaseCard
 	private void updateDataView() {
 		if (mtf.isProgressBarVisible()) {
 			showProgressMessage();
-		} else if (currentGraphType.hasData()) {
+		} else if (visibleGraphType.hasData()) {
 			showGraph();
-		} else if (currentGraphType.canBeCalculated()) {
+		} else if (visibleGraphType.canBeCalculated()) {
 			showMessage();
 		}
 	}
@@ -180,18 +185,18 @@ public class MtGraphFragment extends BaseCard
 	}
 
 	private void showGraph() {
-		if (currentGraphType.isCustom()) {
+		if (visibleGraphType.isCustom()) {
 			customGraphChart.clear();
 			commonGraphContainer.setVisibility(View.GONE);
 			customGraphContainer.setVisibility(View.VISIBLE);
 			messageContainer.setVisibility(View.GONE);
-			prepareCustomGraphView((BarData) currentGraphType.getData());
+			prepareCustomGraphView((BarData) visibleGraphType.getData());
 		} else {
 			commonGraphChart.clear();
 			commonGraphContainer.setVisibility(View.VISIBLE);
 			customGraphContainer.setVisibility(View.GONE);
 			messageContainer.setVisibility(View.GONE);
-			prepareCommonGraphView((LineData) currentGraphType.getData());
+			prepareCommonGraphView((LineData) visibleGraphType.getData());
 		}
 	}
 
@@ -206,7 +211,7 @@ public class MtGraphFragment extends BaseCard
 		icon.setVisibility(View.VISIBLE);
 		tvMessage.setText(app.getString(
 				R.string.message_need_calculate_route_before_show_graph,
-				currentGraphType.getTitle()));
+				visibleGraphType.getTitle()));
 		icon.setImageResource(R.drawable.ic_action_altitude_average);
 	}
 
@@ -253,6 +258,18 @@ public class MtGraphFragment extends BaseCard
 							app, customGraphChart, statistics, analysis, true, nightMode);
 				}
 				graphTypes.add(new GraphType(title, true, false, data));
+			}
+		}
+
+		// update current visible graph type
+		if (visibleGraphType == null) {
+			visibleGraphType = getFirstAvailableGraphType();
+		} else {
+			for (GraphType type : graphTypes) {
+				if (isCurrentVisibleType(type)) {
+					visibleGraphType = type.isAvailable() ? type : getFirstAvailableGraphType();
+					break;
+				}
 			}
 		}
 	}
