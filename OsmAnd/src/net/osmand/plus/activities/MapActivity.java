@@ -74,6 +74,7 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -1029,13 +1030,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public boolean isMapVisible() {
-		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-			if (fragment.isVisible()) {
-				return false;
-			}
+		if (isFragmentVisible()) {
+			return false;
 		}
 		return AndroidUtils.isActivityNotDestroyed(this) && settings.MAP_ACTIVITY_ENABLED.get()
 				&& !dashboardOnMap.isVisible();
+	}
+
+	public boolean isFragmentVisible() {
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (!(fragment instanceof DashBaseFragment) && fragment.isVisible()
+					|| dashboardOnMap.isVisible()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void restartApp() {

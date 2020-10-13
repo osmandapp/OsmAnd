@@ -2317,6 +2317,14 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	public boolean isFragmentOpen() {
+		return mapActivity.isFragmentVisible();
+	}
+
+	public boolean isMenuOpen() {
+		return mapActivity.getContextMenu().isVisible();
+	}
+
 	private static class FileCopyInfo {
 		long startTime;
 		long lastAccessTime;

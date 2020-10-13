@@ -1334,6 +1334,28 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				return false;
 			}
 		}
+
+		@Override
+		public boolean isFragmentOpen() {
+			try {
+				OsmandAidlApi api = getApi("isFragmentOpen");
+				return api != null && api.isFragmentOpen();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean isMenuOpen() {
+			try {
+				OsmandAidlApi api = getApi("isMenuOpen");
+				return api != null && api.isMenuOpen();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
 	};
 
 	private void setCustomization(OsmandAidlApi api, CustomizationInfoParams params) {
