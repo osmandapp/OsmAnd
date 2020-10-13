@@ -101,6 +101,15 @@ public class MtGraphFragment extends BaseCard
 		return R.layout.fragment_measurement_tool_graph;
 	}
 
+	@Override
+	public void onUpdateAdditionalInfo() {
+		if (!isRouteCalculating()) {
+			updateGraphData();
+			refreshGraphTypesSelectionMenu();
+		}
+		updateDataView();
+	}
+
 	private void refreshGraphTypesSelectionMenu() {
 		rvGraphTypesMenu.removeAllViews();
 		OsmandApplication app = getMyApplication();
@@ -112,7 +121,7 @@ public class MtGraphFragment extends BaseCard
 			if (type.isCustom()) {
 				item.setTitleColorId(activeColorId);
 			}
-			if (type.hasData() || type.canBeCalculated) {
+			if (type.isAvailable()) {
 				items.add(item);
 			}
 		}
@@ -132,13 +141,6 @@ public class MtGraphFragment extends BaseCard
 		});
 		rvGraphTypesMenu.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
-	}
-
-	@Override
-	public void onUpdateAdditionalInfo() {
-		updateGraphData();
-		refreshGraphTypesSelectionMenu();
-		updateDataView();
 	}
 
 	private void setupVisibleGraphType(GraphType type) {
@@ -163,7 +165,7 @@ public class MtGraphFragment extends BaseCard
 	}
 
 	private void updateDataView() {
-		if (mtf.isProgressBarVisible()) {
+		if (isRouteCalculating()) {
 			showProgressMessage();
 		} else if (visibleGraphType.hasData()) {
 			showGraph();
@@ -356,6 +358,10 @@ public class MtGraphFragment extends BaseCard
 				maps.getSearchRequestWithAppliedCustomRules(defaultRender, nightMode);
 		return RouteStatisticsHelper.calculateRouteStatistic(route, currentRenderer,
 				defaultRender, currentSearchRequest, defaultSearchRequest);
+	}
+
+	private boolean isRouteCalculating() {
+		return mtf.isProgressBarVisible();
 	}
 
 	private static class GraphType {
