@@ -3775,4 +3775,11 @@
     <string name="osm_live_payment_desc_hw">Arveldame tellimuse eest valitud ajavahemiku alusel. Seda saad sa vabalt valitud ajal tühistada AppGallery\'s.</string>
     <string name="use_complex_routing">Keeruka teekonna koostamine</string>
     <string name="osm_edit_logout_success">Väljalogimine õnnestus</string>
+    <string name="development">Arendus</string>
+    <string name="clear_osm_token">Kustuta OpenStreetMap\'i OAuth\'i pääsuluba</string>
+    <string name="perform_oauth_authorization">Logi sisse OAuth abil</string>
+    <string name="perform_oauth_authorization_description">Kui sa soovid kasutada kaardi muutmise võimalusi, siis palun logi sisse OAuth abil</string>
+    <string name="what_is_new">Meie uudised</string>
+    <string name="use_two_phase_routing">Kasuta kahefaasilist A-klassi teekonna koostamise algoritmi</string>
+    <string name="file_already_imported">See fail on juba OsmAnd\'i imporditud</string>
 </resources>
