@@ -85,6 +85,16 @@
             android:tint="?attr/default_icon_color"
             tools:src="@drawable/ic_action_info_dark" />
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/card_button_progress_size"
+            android:layout_height="@dimen/card_button_progress_size"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/message_text"
             android:layout_width="0dp"

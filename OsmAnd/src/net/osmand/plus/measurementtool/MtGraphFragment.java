@@ -2,6 +2,7 @@ package net.osmand.plus.measurementtool;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,11 +56,6 @@ public class MtGraphFragment extends BaseCard
 	private List<GraphType> graphTypes = new ArrayList<>();
 	private MeasurementToolFragment mtf;
 
-	public MtGraphFragment(@NonNull MapActivity mapActivity, MeasurementToolFragment mtf) {
-		super(mapActivity);
-		this.mtf = mtf;
-	}
-
 	private enum CommonGraphType {
 		OVERVIEW(R.string.shared_string_overview, false),
 		ALTITUDE(R.string.altitude, true),
@@ -73,6 +69,37 @@ public class MtGraphFragment extends BaseCard
 
 		final int titleId;
 		final boolean canBeCalculated;
+	}
+
+	public MtGraphFragment(@NonNull MapActivity mapActivity, MeasurementToolFragment mtf) {
+		super(mapActivity);
+		this.mtf = mtf;
+	}
+
+	@Override
+	protected void updateContent() {
+		if (mapActivity == null || mtf == null) return;
+		editingCtx = mtf.getEditingCtx();
+
+		commonGraphContainer = view.findViewById(R.id.common_graphs_container);
+		customGraphContainer = view.findViewById(R.id.custom_graphs_container);
+		messageContainer = view.findViewById(R.id.message_container);
+		commonGraphChart = (LineChart) view.findViewById(R.id.line_chart);
+		customGraphChart = (HorizontalBarChart) view.findViewById(R.id.horizontal_chart);
+		updateGraphData();
+
+		rvGraphTypesMenu = view.findViewById(R.id.graph_types_recycler_view);
+		rvGraphTypesMenu.setLayoutManager(
+				new LinearLayoutManager(mapActivity, RecyclerView.HORIZONTAL, false));
+
+		refreshGraphTypesSelectionMenu();
+		GraphType firstAvailableGraphType = getFirstAvailableGraphType();
+		setupVisibleGraphType(firstAvailableGraphType);
+	}
+
+	@Override
+	public int getCardLayoutId() {
+		return R.layout.fragment_measurement_tool_graph;
 	}
 
 	private void refreshGraphTypesSelectionMenu() {
@@ -112,18 +139,18 @@ public class MtGraphFragment extends BaseCard
 	public void onUpdateAdditionalInfo() {
 		updateGraphData();
 		refreshGraphTypesSelectionMenu();
-		setupVisibleGraphType(currentGraphType);
+		setupVisibleGraphType(currentGraphType.isAvailable()
+				? currentGraphType : getFirstAvailableGraphType());
 	}
 
-	private void setupVisibleGraphType(GraphType preferredType) {
-		currentGraphType = currentGraphType != null && preferredType.hasData()
-				? preferredType : getFirstAvailableGraphType();
+	private void setupVisibleGraphType(GraphType type) {
+		currentGraphType = type;
 		updateDataView();
 	}
 
 	private GraphType getFirstAvailableGraphType() {
 		for (GraphType type : graphTypes) {
-			if (type.hasData() || type.canBeCalculated()) {
+			if (type.isAvailable()) {
 				return type;
 			}
 		}
@@ -131,11 +158,25 @@ public class MtGraphFragment extends BaseCard
 	}
 
 	private void updateDataView() {
-		if (currentGraphType.hasData()) {
+		if (mtf.isProgressBarVisible()) {
+			showProgressMessage();
+		} else if (currentGraphType.hasData()) {
 			showGraph();
 		} else if (currentGraphType.canBeCalculated()) {
 			showMessage();
 		}
+	}
+
+	private void showProgressMessage() {
+		commonGraphContainer.setVisibility(View.GONE);
+		customGraphContainer.setVisibility(View.GONE);
+		messageContainer.setVisibility(View.VISIBLE);
+		TextView tvMessage = messageContainer.findViewById(R.id.message_text);
+		ImageView icon = messageContainer.findViewById(R.id.message_icon);
+		ProgressBar pb = messageContainer.findViewById(R.id.progress_bar);
+		pb.setVisibility(View.VISIBLE);
+		icon.setVisibility(View.GONE);
+		tvMessage.setText(R.string.message_graph_will_be_available_after_recalculation);
 	}
 
 	private void showGraph() {
@@ -160,8 +201,12 @@ public class MtGraphFragment extends BaseCard
 		messageContainer.setVisibility(View.VISIBLE);
 		TextView tvMessage = messageContainer.findViewById(R.id.message_text);
 		ImageView icon = messageContainer.findViewById(R.id.message_icon);
-		String message = app.getString(R.string.message_need_calculate_route_before_show_graph, currentGraphType.getTitle());
-		tvMessage.setText(message);
+		ProgressBar pb = messageContainer.findViewById(R.id.progress_bar);
+		pb.setVisibility(View.GONE);
+		icon.setVisibility(View.VISIBLE);
+		tvMessage.setText(app.getString(
+				R.string.message_need_calculate_route_before_show_graph,
+				currentGraphType.getTitle()));
 		icon.setImageResource(R.drawable.ic_action_altitude_average);
 	}
 
@@ -296,33 +341,6 @@ public class MtGraphFragment extends BaseCard
 				defaultRender, currentSearchRequest, defaultSearchRequest);
 	}
 
-	@Override
-	public int getCardLayoutId() {
-		return R.layout.fragment_measurement_tool_graph;
-	}
-
-	@Override
-	protected void updateContent() {
-		if (mapActivity == null || mtf == null) return;
-
-		editingCtx = mtf.getEditingCtx();
-		OsmandApplication app = mapActivity.getMyApplication();
-
-		commonGraphContainer = view.findViewById(R.id.common_graphs_container);
-		customGraphContainer = view.findViewById(R.id.custom_graphs_container);
-		messageContainer = view.findViewById(R.id.message_container);
-		commonGraphChart = (LineChart) view.findViewById(R.id.line_chart);
-		customGraphChart = (HorizontalBarChart) view.findViewById(R.id.horizontal_chart);
-		updateGraphData();
-
-		rvGraphTypesMenu = view.findViewById(R.id.graph_types_recycler_view);
-		rvGraphTypesMenu.setLayoutManager(
-				new LinearLayoutManager(mapActivity, RecyclerView.HORIZONTAL, false));
-
-		refreshGraphTypesSelectionMenu();
-		setupVisibleGraphType(currentGraphType);
-	}
-
 	private static class GraphType {
 		private String title;
 		private boolean isCustom;
@@ -342,6 +360,10 @@ public class MtGraphFragment extends BaseCard
 
 		public boolean isCustom() {
 			return isCustom;
+		}
+
+		public boolean isAvailable() {
+			return hasData() || canBeCalculated();
 		}
 
 		public boolean canBeCalculated() {

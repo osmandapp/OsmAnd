@@ -24,7 +24,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -222,6 +221,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			@Override
 			public void showProgressBar() {
 				MeasurementToolFragment.this.showProgressBar();
+				updateAdditionalInfoView();
 			}
 
 			@Override
@@ -657,6 +657,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		progressBar.setMinimumHeight(0);
 		progressBar.setProgress(0);
 		progressBarVisible = true;
+	}
+
+	public boolean isProgressBarVisible() {
+		return progressBarVisible;
 	}
 
 	private void updateMainIcon() {
