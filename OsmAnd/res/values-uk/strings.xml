@@ -3922,4 +3922,6 @@
     <string name="routing_attr_avoid_footways_description">Уникати пішохідних шляхів</string>
     <string name="routing_attr_avoid_footways_name">Уникати пішохідних шляхів</string>
     <string name="development">Розробка</string>
+    <string name="file_already_imported">Файл уже імпортовано до OsmAnd</string>
+    <string name="use_two_phase_routing">Використання 2-фазного A* алгоритму маршрутизації</string>
 </resources>
