@@ -3913,4 +3913,6 @@
     <string name="perform_oauth_authorization">تسجيل الدخول عبر OAuth</string>
     <string name="clear_osm_token">مسح رمز OpenStreetMap OAuth</string>
     <string name="osm_edit_logout_success">تسجيل الخروج بنجاح</string>
+    <string name="file_already_imported">تم استيراد الملف بالفعل في أوسماند</string>
+    <string name="use_two_phase_routing">استخدام خوارزمية توجيه من مرحلتين A*</string>
 </resources>
