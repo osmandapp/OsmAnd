@@ -3863,4 +3863,10 @@
     <string name="plan_route_trim_after">Скрати после</string>
     <string name="plan_route_change_route_type_before">Промените врсту руте пре</string>
     <string name="plan_route_change_route_type_after">Промените врсту руте након</string>
+    <string name="what_is_new">Шта је ново</string>
+    <string name="shared_string_file_name">Име фајла</string>
+    <string name="number_of_gpx_files_selected_pattern"></string>
+    <string name="gpx_monitoring_stop">Паузирај снимање пута</string>
+    <string name="one_point_error">Додајте бар две тачке.</string>
+    <string name="osm_edit_logout_success">Одјава успешна</string>
 </resources>

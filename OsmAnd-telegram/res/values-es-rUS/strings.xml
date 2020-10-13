@@ -268,4 +268,8 @@
     <string name="last_response_duration">Última respuesta: Hace %1$s</string>
     <string name="duration_ago">Hace %1$s</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="shared_string_export">Exportar</string>
+    <string name="logcat_buffer">Búfer de Logcat</string>
+    <string name="logcat_buffer_descr">Comprueba y comparte los registros detallados de la aplicación</string>
+    <string name="send_report">Enviar informe</string>
 </resources>

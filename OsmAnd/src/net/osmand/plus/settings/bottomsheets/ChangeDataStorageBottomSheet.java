@@ -11,8 +11,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.FileUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -63,7 +63,7 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 		CharSequence desc = null;
 		
 		File currentStorageFile = new File(currentDirectory.getDirectory());
-		if ((!OsmandSettings.isWritable(currentStorageFile))) {
+		if ((!FileUtils.isWritable(currentStorageFile))) {
 			desc = String.format(getString(R.string.android_19_location_disabled), currentStorageFile.getAbsoluteFile());
 		} else {
 			String from = currentDirectory.getKey().equals(MANUALLY_SPECIFIED) ? currentDirectory.getDirectory() : currentDirectory.getTitle();

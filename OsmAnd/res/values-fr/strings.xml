@@ -1532,7 +1532,7 @@
     <string name="routing_attr_height_name">Limite de hauteur</string>
     <string name="routing_attr_height_description">Précisez la hauteur du véhicule à respecter sur les routes.</string>
     <string name="use_fast_recalculation">Recalcule intelligent de l\'itinéraire</string>
-    <string name="use_fast_recalculation_desc">Pour les longs trajets, recalculer uniquement le début de l\'itinéraire</string>
+    <string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire (utile pour les longs trajets).</string>
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Couleur de l\'itinéraire basée sur les symboles de randonnée OSMC</string>
@@ -2610,7 +2610,7 @@
     <string name="context_menu_read_full_article">Lire l\'article complet</string>
     <string name="context_menu_read_article">Lire l\'article</string>
     <string name="context_menu_points_of_group">Tous les points du groupe</string>
-    <string name="open_from">Ouvert du</string>
+    <string name="open_from">Ouvre à</string>
     <string name="open_till">Ouvert jusqu\'à</string>
     <string name="will_close_at">Ferme à</string>
     <string name="will_open_at">Ouvre à</string>
@@ -3885,4 +3885,19 @@
     <string name="sort_name_ascending">Nom : A – Z</string>
     <string name="start_finish_icons">Icônes de départ / arrivée</string>
     <string name="contour_lines_thanks">Merci pour votre achat de \'Courbes de niveaux\'</string>
+    <string name="osm_live_payment_desc_hw">Abonnement facturé pour chaque période sélectionnée. Annulation possible à tout moment sur AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Éviter les trottoirs</string>
+    <string name="routing_attr_avoid_footways_name">Éviter les trottoirs</string>
+    <string name="development">Développement</string>
+    <string name="use_live_public_transport">OsmAnd Live data</string>
+    <string name="use_live_routing">OsmAnd Live data</string>
+    <string name="use_native_pt_desc">Basculer vers le calcul d\'itinéraire Transport Public Java (sécurisé)</string>
+    <string name="perform_oauth_authorization_description">Connectez-vous avec OAuth pour utiliser les fonctionnalités osmedit</string>
+    <string name="what_is_new">Nouveautés</string>
+    <string name="use_complex_routing">Routage complexe</string>
+    <string name="complex_routing_descr">Routage en 2 phases pour la navigation en voiture.</string>
+    <string name="use_native_pt">Développement du transport public autochtone</string>
+    <string name="perform_oauth_authorization">Connectez-vous avec OAuth</string>
+    <string name="clear_osm_token">Supprimer le jeton OAuth d\'OpenStreetMap</string>
+    <string name="osm_edit_logout_success">Déconnexion réussie</string>
 </resources>

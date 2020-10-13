@@ -58,6 +58,8 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -74,7 +76,6 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -642,7 +643,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		// Action buttons
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
 		List<ContextMenuItem> items = adapter.getVisibleItems();
-		List<String> mainIds = ((OsmandSettings.MainContextMenuItemsSettings) mapActivity.getMyApplication()
+		List<String> mainIds = ((MainContextMenuItemsSettings) mapActivity.getMyApplication()
 				.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get()).getMainIds();
 		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
 		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());

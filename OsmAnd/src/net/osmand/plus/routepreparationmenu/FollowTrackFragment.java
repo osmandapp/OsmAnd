@@ -25,6 +25,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
@@ -40,8 +41,8 @@ import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.helpers.ImportHelper;
-import net.osmand.plus.helpers.ImportHelper.OnGpxImportCompleteListener;
+import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.GpxData.ActionType;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
@@ -205,7 +206,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				SelectTrackCard selectTrackCard = new SelectTrackCard(mapActivity);
 				selectTrackCard.setListener(this);
 				cardsContainer.addView(selectTrackCard.build(mapActivity));
-				cardsContainer.addView(buildDividerView(cardsContainer, false));
 
 				ApplicationMode mode = app.getRoutingHelper().getAppMode();
 
@@ -213,13 +213,16 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
 				boolean osmandRouter = mode.getRouteService() == RouteProvider.RouteService.OSMAND;
 				if (rparams != null && osmandRouter) {
-					if (!gpxFile.hasRoute() || gpxFile.hasRtePt()) {
+					boolean showReverseCard = !routingHelper.isCurrentGPXRouteV2();
+					if (showReverseCard) {
+						cardsContainer.addView(buildDividerView(cardsContainer, false));
+
 						ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, rparams.isReverse());
 						reverseTrackCard.setListener(this);
 						cardsContainer.addView(reverseTrackCard.build(mapActivity));
 					}
 					if (!gpxFile.hasRtePt() && !gpxFile.hasRoute()) {
-						cardsContainer.addView(buildDividerView(cardsContainer, true));
+						cardsContainer.addView(buildDividerView(cardsContainer, showReverseCard));
 
 						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
 						attachTrackCard.setListener(this);
@@ -431,14 +434,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (mapActivity != null) {
 			if (card instanceof ImportTrackCard) {
 				importTrack();
-			} else if (card instanceof TrackEditCard) {
-				openPlanRoute(true);
+			} else if (card instanceof TrackEditCard || card instanceof AttachTrackToRoadsCard) {
+				openPlanRoute();
 				close();
 			} else if (card instanceof SelectTrackCard) {
 				updateSelectionMode(true);
-			} else if (card instanceof AttachTrackToRoadsCard) {
-				openPlanRoute(false);
-				close();
 			} else if (card instanceof ReverseTrackCard
 					|| card instanceof NavigateTrackOptionsCard) {
 				updateMenu();
@@ -486,6 +486,14 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			this.gpxFile = gpxFile;
+			List<WptPt> points = gpxFile.getRoutePoints();
+			if (!points.isEmpty()) {
+				ApplicationMode mode = ApplicationMode.valueOfStringKey(points.get(0).getProfileType(), null);
+				if (mode != null) {
+					app.getRoutingHelper().setAppMode(mode);
+					app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
+				}
+			}
 			mapActivity.getMapActions().setGPXRouteParams(gpxFile);
 			app.getTargetPointsHelper().updateRouteAndRefresh(true);
 			app.getRoutingHelper().recalculateRouteDueToSettingsChange();
@@ -542,7 +550,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-	public void openPlanRoute(boolean useAppMode) {
+	public void openPlanRoute() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && gpxFile != null) {
 			editingTrack = true;
@@ -552,9 +560,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			GpxData gpxData = new GpxData(gpxFile, rect, actionType, segment);
 			MeasurementEditingContext editingContext = new MeasurementEditingContext();
 			editingContext.setGpxData(gpxData);
-			if (useAppMode) {
-				editingContext.setAppMode(app.getRoutingHelper().getAppMode());
-			}
+			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
 		}
 	}

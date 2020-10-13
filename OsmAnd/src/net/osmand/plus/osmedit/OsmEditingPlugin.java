@@ -13,11 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -25,11 +23,12 @@ import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
-import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.EnumAdapter;
@@ -43,22 +42,16 @@ import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
-
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_CHANGE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_POI;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 
@@ -355,7 +348,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						if (itemId == R.string.layer_osm_bugs) {
-							OsmandSettings.OsmandPreference<Boolean> showOsmBugs = settings.SHOW_OSM_BUGS;
+							OsmandPreference<Boolean> showOsmBugs = settings.SHOW_OSM_BUGS;
 							showOsmBugs.set(isChecked);
 							adapter.getItem(pos).setColorRes(showOsmBugs.get() ?
 									R.color.osmand_orange : ContextMenuItem.INVALID_ID);
@@ -378,7 +371,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						if (itemId == R.string.layer_osm_edits) {
-							OsmandSettings.OsmandPreference<Boolean> showOsmEdits = settings.SHOW_OSM_EDITS;
+							OsmandPreference<Boolean> showOsmEdits = settings.SHOW_OSM_EDITS;
 							showOsmEdits.set(isChecked);
 							adapter.getItem(pos).setColorRes(showOsmEdits.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							adapter.notifyDataSetChanged();
@@ -464,7 +457,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public boolean sendGPXFiles(final Activity la, AvailableGPXFragment f, final GpxInfo... info) {
 		String name = settings.USER_NAME.get();
 		String pwd = settings.USER_PASSWORD.get();
-		if (Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)) {
+		String authToken = settings.USER_ACCESS_TOKEN.get();
+		if ((Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)) && Algorithms.isEmpty(authToken)) {
 			Toast.makeText(la, R.string.validate_gpx_upload_name_pwd, Toast.LENGTH_LONG).show();
 			return false;
 		}

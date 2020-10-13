@@ -58,7 +58,7 @@
 		android:layout="@layout/preference_button"
 		android:persistent="false"
 		android:title="@string/reorder_profiles"
-		app:fragment="net.osmand.plus.profiles.EditProfilesFragment"
+		app:fragment="net.osmand.plus.profiles.fragments.EditProfilesFragment"
 		tools:icon="@drawable/ic_action_edit_dark" />
 
 	<Preference

@@ -22,9 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.ImportHelper;
-import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -33,6 +30,9 @@ import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 
 import java.util.List;
 
@@ -118,7 +118,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (settingsItems != null) {
 			ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
 					app,
-					ImportHelper.getSettingsToOperate(settingsItems, true),
+					SettingsHelper.getSettingsToOperate(settingsItems, true),
 					nightMode,
 					new ImportedSettingsItemsAdapter.OnItemClickListener() {
 						@Override

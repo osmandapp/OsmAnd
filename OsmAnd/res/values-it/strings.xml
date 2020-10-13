@@ -19,7 +19,7 @@
     <string name="live_monitoring_url">Indirizzo internet per il tracking in diretta</string>
     <string name="gpx_monitoring_disabled_warn">Registra la traccia usando il widget GPX o le impostazioni \'Registrazione viaggi\'.</string>
     <string name="show_current_gpx_title">Visualizza la traccia corrente</string>
-    <string name="free_version_message">Puoi scaricare o caricare %1$s mappe.</string>
+    <string name="free_version_message">Puoi scaricare o aggiornare %1$s mappe.</string>
     <string name="free_version_title">Versione gratuita</string>
     <string name="poi_context_menu_showdescription">Visualizza descrizione PDI.</string>
     <string name="amenity_type_osmwiki">Wikipedia (offline)</string>

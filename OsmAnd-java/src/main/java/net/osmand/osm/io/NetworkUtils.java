@@ -1,30 +1,22 @@
 package net.osmand.osm.io;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Map;
-import java.util.zip.GZIPOutputStream;
-
+import com.github.scribejava.core.model.OAuthRequest;
+import com.github.scribejava.core.model.Response;
+import com.github.scribejava.core.model.Verb;
 import net.osmand.PlatformUtil;
+import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.util.Algorithms;
-
 import org.apache.commons.logging.Log;
+
+import java.io.*;
+import java.net.*;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.zip.GZIPOutputStream;
 
 public class NetworkUtils {
 	private static final Log log = PlatformUtil.getLog(NetworkUtils.class);
-
+	private static final String GPX_UPLOAD_USER_AGENT = "OsmGPXUploadAgent";
 	private static Proxy proxy = null;
 
 	public static String sendGetRequest(String urlText, String userNamePassword, StringBuilder responseBody){
@@ -55,7 +47,6 @@ public class NetworkUtils {
 						responseBody.append("\n"); //$NON-NLS-1$
 					}
 					responseBody.append(s);
-					
 				}
 				is.close();
 			}
@@ -65,9 +56,10 @@ public class NetworkUtils {
 			return e.getMessage();
 		}
 	}
-	
 	private static final String BOUNDARY = "CowMooCowMooCowCowCow"; //$NON-NLS-1$
-	public static String uploadFile(String urlText, File fileToUpload, String userNamePassword, String formName, boolean gzip, Map<String, String> additionalMapData){
+	public static String uploadFile(String urlText, File fileToUpload, String userNamePassword,
+									OsmOAuthAuthorizationClient client,
+									String formName, boolean gzip, Map<String, String> additionalMapData){
 		URL url;
 		try {
 			boolean firstPrm =!urlText.contains("?");
@@ -77,34 +69,48 @@ public class NetworkUtils {
 			}
 			log.info("Start uploading file to " + urlText + " " +fileToUpload.getName());
 			url = new URL(urlText);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setDoInput(true);
-			conn.setDoOutput(true);
-			conn.setRequestMethod("POST");
-			if(userNamePassword != null) {
-				conn.setRequestProperty("Authorization", "Basic " + Base64.encode(userNamePassword)); //$NON-NLS-1$ //$NON-NLS-2$
+			HttpURLConnection conn;
+			if (client != null && client.isValidToken()){
+				OAuthRequest req = new OAuthRequest(Verb.POST, urlText);
+				client.getService().signRequest(client.getAccessToken(), req);
+				req.addHeader("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
+				try {
+					Response r = client.getHttpClient().execute(GPX_UPLOAD_USER_AGENT, req.getHeaders(), req.getVerb(),
+							req.getCompleteUrl(), fileToUpload);
+					if (r.getCode() != 200) {
+						return r.getBody();
+					}
+					return null;
+				} catch (InterruptedException e) {
+					log.error(e);
+				} catch (ExecutionException e) {
+					log.error(e);
+				}
+				return null;
 			}
-			
+			else {
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setDoInput(true);
+				conn.setDoOutput(true);
+				conn.setRequestMethod("POST");
+				if(userNamePassword != null) {
+					conn.setRequestProperty("Authorization", "Basic " + Base64.encode(userNamePassword)); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+			}
 	        conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
 	        conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
-
 	        OutputStream ous = conn.getOutputStream();
-//			for (String key : additionalMapData.keySet()) {
-//				ous.write(("--" + BOUNDARY + "\r\n").getBytes());
-//				ous.write(("content-disposition: form-data; name=\"" + key + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
-//				ous.write((additionalMapData.get(key) + "\r\n").getBytes());
-//			}
-			ous.write(("--" + BOUNDARY+"\r\n").getBytes());
+			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
 			String filename = fileToUpload.getName();
-			if(gzip){
-				filename+=".gz";
+			if (gzip) {
+				filename += ".gz";
 			}
-			ous.write(("content-disposition: form-data; name=\""+formName+"\"; filename=\"" + filename + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
-	        ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
-	        InputStream fis = new FileInputStream(fileToUpload);
+			ous.write(("content-disposition: form-data; name=\"" + formName + "\"; filename=\"" + filename + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+			ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
+			InputStream fis = new FileInputStream(fileToUpload);
 			BufferedInputStream bis = new BufferedInputStream(fis, 20 * 1024);
 			ous.flush();
-			if(gzip){
+			if (gzip) {
 				GZIPOutputStream gous = new GZIPOutputStream(ous, 1024);
 				Algorithms.streamCopy(bis, gous);
 				gous.flush();
@@ -112,8 +118,7 @@ public class NetworkUtils {
 			} else {
 				Algorithms.streamCopy(bis, ous);
 			}
-			
-	        ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+			ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
 			ous.flush();
 			Algorithms.closeStream(bis);
 			Algorithms.closeStream(ous);
@@ -136,7 +141,6 @@ public class NetworkUtils {
 						responseBody.append("\n"); //$NON-NLS-1$
 					}
 					responseBody.append(s);
-					
 				}
 				is.close();
 			}
@@ -157,7 +161,6 @@ public class NetworkUtils {
 			proxy = null;
 		}
 	}
-	
 	public static Proxy getProxy() {
 		return proxy;
 	}

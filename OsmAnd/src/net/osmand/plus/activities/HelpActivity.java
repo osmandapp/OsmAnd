@@ -172,6 +172,8 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 				"feature_articles/technical-articles.html"));
 		contextMenuAdapter.addItem(createItem(R.string.versions_item, NULL_ID,
 				"feature_articles/changes.html"));
+		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID,
+				"feature_articles/blog.html"));
 
 		String releasedate = "";
 		if (!this.getString(R.string.app_edition).equals("")) {

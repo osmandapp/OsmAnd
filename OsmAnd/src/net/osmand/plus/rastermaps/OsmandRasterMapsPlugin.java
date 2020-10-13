@@ -29,6 +29,8 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadTilesDialog;
@@ -38,9 +40,6 @@ import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.RasterMapMenu;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -559,10 +558,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		MapActivityLayers mapLayers = mapActivity.getMapLayers();
 		ITileSource map = layer.getMap();
-		final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type ==
+		final LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type ==
 			OsmandRasterMapsPlugin.RasterMapType.OVERLAY
-			? OsmandSettings.LayerTransparencySeekbarMode.OVERLAY
-			: OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
+			? LayerTransparencySeekbarMode.OVERLAY
+			: LayerTransparencySeekbarMode.UNDERLAY;
 		if (map != null) {
 			mapTypePreference.set(null);
 			if (callback != null) {

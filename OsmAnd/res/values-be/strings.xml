@@ -1576,7 +1576,7 @@
     <string name="routing_attr_height_name">Абмежаванне па вышыні</string>
     <string name="routing_attr_height_description">Пазначыць вышыню транспартнага сродку для разліку маршруту.</string>
     <string name="use_fast_recalculation">Разумны пераразлік маршруту</string>
-    <string name="use_fast_recalculation_desc">Пераразлічваць толькі пачатак маршруту для доўгіх паездак.</string>
+    <string name="use_fast_recalculation_desc">Пераразлічваць толькі пачатак маршруту. Падыходзіць для доўгіх паездак.</string>
     <string name="shared_string_logoff">Выйсці</string>
     <string name="rendering_value_disabled_name">Выключана</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка па пешаходнаму сімвалу OSMC</string>
@@ -3957,4 +3957,18 @@
     <string name="sort_last_modified">Апошняя змена</string>
     <string name="sort_name_descending">Назва: Я — А</string>
     <string name="sort_name_ascending">Назва: А — Я</string>
+    <string name="what_is_new">Што новага</string>
+    <string name="contour_lines_thanks">Дзякуй за набыццё ўбудовы «Контурныя лініі»</string>
+    <string name="osm_live_payment_desc_hw">Плата за падпіску спаганяецца за абраны перыяд. Скасаваць яе на AppGallery можна у любы момант.</string>
+    <string name="osm_live_payment_subscription_management_hw">Пры пацвярджэнні пакупкі аплата будзе спаганяцца з рахунка, звязанага з вашым акаўнтам AppGallery.
+\n
+\nПадпіска аўтаматычна працягваецца, калі вы не скасуеце яе да даты працягу. З вашага рахунка будзе адзін раз спаганяцца аплата за перыяд працягу (месяц/тры месяцы/год).
+\n
+\nВы можаце кіраваць падпіскамі і скасоўваць іх у наладах AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Пазбягаць пешаходныя дарожкі</string>
+    <string name="routing_attr_avoid_footways_name">Пазбягаць пешаходныя дарожкі</string>
+    <string name="development">Распрацоўка</string>
+    <string name="complex_routing_descr">Дзвюхфазная аўтанавігацыя.</string>
+    <string name="use_native_pt">Натыўны грамадскі транспарт (у распрацоўцы)</string>
+    <string name="perform_oauth_authorization">Увайсці праз OAuth</string>
 </resources>

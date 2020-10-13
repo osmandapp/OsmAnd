@@ -15,9 +15,9 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.AngularConstants;
-import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
-import net.osmand.plus.settings.backend.OsmandSettings.SpeedConstants;
+import net.osmand.plus.helpers.enums.AngularConstants;
+import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormatSymbols;

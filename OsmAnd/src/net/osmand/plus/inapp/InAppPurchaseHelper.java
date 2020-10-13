@@ -17,6 +17,8 @@ import net.osmand.AndroidNetworkUtils.OnRequestsResultListener;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;

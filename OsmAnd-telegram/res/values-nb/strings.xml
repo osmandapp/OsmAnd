@@ -267,4 +267,8 @@
     <string name="last_response_duration">Siste respons: %1$s siden</string>
     <string name="duration_ago">%1$s siden</string>
     <string name="shared_string_error_short">FEIL</string>
+    <string name="logcat_buffer">Logcat-mellomlager</string>
+    <string name="shared_string_export">Eksporter</string>
+    <string name="logcat_buffer_descr">Sjekk og del detaljert loggføring fra programmet</string>
+    <string name="send_report">Send rapport</string>
 </resources>

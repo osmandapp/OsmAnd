@@ -27,6 +27,9 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -192,7 +195,7 @@ public class RoutingOptionsHelper {
 	public void applyVoiceProvider(MapActivity mapActivity, String provider, boolean applyAllModes) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
-		OsmandSettings.OsmandPreference<String> VP = app.getSettings().VOICE_PROVIDER;
+		OsmandPreference<String> VP = app.getSettings().VOICE_PROVIDER;
 		if (applyAllModes) {
 			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 				VP.setModeValue(mode, provider);
@@ -668,7 +671,7 @@ public class RoutingOptionsHelper {
 		}
 
 		public boolean isSelected(OsmandSettings settings) {
-			final OsmandSettings.CommonPreference<Boolean> property =
+			final CommonPreference<Boolean> property =
 					settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 			if (am != null) {
 				return property.getModeValue(am);
@@ -678,7 +681,7 @@ public class RoutingOptionsHelper {
 		}
 
 		public void setSelected(OsmandSettings settings, boolean isChecked) {
-			final OsmandSettings.CommonPreference<Boolean> property =
+			final CommonPreference<Boolean> property =
 					settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 			if (am != null) {
 				property.setModeValue(am, isChecked);

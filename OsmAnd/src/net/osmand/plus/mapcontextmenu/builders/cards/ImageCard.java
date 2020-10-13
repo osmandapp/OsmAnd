@@ -2,7 +2,9 @@ package net.osmand.plus.mapcontextmenu.builders.cards;
 
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
+import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,21 +16,28 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
-import net.osmand.AndroidNetworkUtils;
-import net.osmand.AndroidUtils;
-import net.osmand.Location;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import net.osmand.*;
 import net.osmand.data.Amenity;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
+import net.osmand.plus.osmedit.OsmBugsLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,18 +45,16 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public abstract class ImageCard extends AbstractCard {
 
 	public static String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
 	public static String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
 
+	private static final Log LOG = PlatformUtil.getLog(ImageCard.class);
 	protected String type;
 	// Image location
 	protected LatLon location;
@@ -187,6 +194,14 @@ public abstract class ImageCard extends AbstractCard {
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
+		}
+		return imageCard;
+	}
+
+	private static ImageCard createCardOpr(MapActivity mapActivity, JSONObject imageObject) {
+		ImageCard imageCard = null;
+		if (imageObject.has("cid")) {
+			imageCard = new IPFSImageCard(mapActivity, imageObject);
 		}
 		return imageCard;
 	}
@@ -403,6 +418,7 @@ public abstract class ImageCard extends AbstractCard {
 		private Map<String, String> params;
 		private GetImageCardsListener listener;
 		private List<ImageCard> result;
+		private static final int GET_IMAGE_CARD_THREAD_ID = 10104;
 
 		public interface GetImageCardsListener {
 			void onPostProcess(List<ImageCard> cardList);
@@ -411,7 +427,7 @@ public abstract class ImageCard extends AbstractCard {
 		}
 
 		public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon,
-								 @Nullable Map<String, String> params, GetImageCardsListener listener) {
+		                         @Nullable Map<String, String> params, GetImageCardsListener listener) {
 			this.mapActivity = mapActivity;
 			this.app = mapActivity.getMyApplication();
 			this.latLon = latLon;
@@ -421,7 +437,14 @@ public abstract class ImageCard extends AbstractCard {
 
 		@Override
 		protected List<ImageCard> doInBackground(Void... params) {
+			TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
 			List<ImageCard> result = new ArrayList<>();
+			Object o = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObject();
+			if (o instanceof Amenity) {
+				Amenity am = (Amenity) o;
+				long amenityId = am.getId() >> 1;
+				getPicturesForPlace(result, amenityId);
+			}
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
 				pms.put("lat", "" + (float) latLon.getLatitude());
@@ -480,6 +503,35 @@ public abstract class ImageCard extends AbstractCard {
 				listener.onPostProcess(result);
 			}
 			return result;
+		}
+
+		private void getPicturesForPlace(List<ImageCard> result, long l) {
+			String url = "https://test.openplacereviews.org/api/objects-by-index?type=opr.place&index=osmid&limit=1&key=" + l;
+			String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
+					"Requesting location images...", false, false);
+			try {
+				if (!Algorithms.isEmpty(response)) {
+					JSONArray obj = new JSONObject(response).getJSONArray("objects");
+					JSONArray images = ((JSONObject) ((JSONObject) obj.get(0)).get("images")).getJSONArray("outdoor");
+					if (images.length() > 0) {
+						for (int i = 0; i < images.length(); i++) {
+							try {
+								JSONObject imageObject = (JSONObject) images.get(i);
+								if (imageObject != JSONObject.NULL) {
+									ImageCard imageCard = ImageCard.createCardOpr(mapActivity, imageObject);
+									if (imageCard != null) {
+										result.add(imageCard);
+									}
+								}
+							} catch (JSONException e) {
+								LOG.error(e);
+							}
+						}
+					}
+				}
+			} catch (Exception e) {
+				LOG.error(e);
+			}
 		}
 
 		@Override

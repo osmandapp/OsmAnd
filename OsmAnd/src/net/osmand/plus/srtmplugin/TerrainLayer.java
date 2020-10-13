@@ -18,7 +18,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.settings.backend.OsmandSettings.TerrainMode;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.util.Algorithms;
 
@@ -31,7 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.settings.backend.OsmandSettings.TerrainMode.HILLSHADE;
+import static net.osmand.plus.srtmplugin.TerrainMode.HILLSHADE;
 
 public class TerrainLayer extends MapTileLayer {
 

@@ -14,11 +14,11 @@ import android.preference.PreferenceScreen;
 
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
@@ -34,41 +34,27 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.debugging_and_development);
-		PreferenceScreen cat = getPreferenceScreen();
+		PreferenceScreen category = getPreferenceScreen();
 		Preference pref;
 
-		cat.addPreference(createCheckBoxPreference(settings.USE_OPENGL_RENDER,
-				R.string.use_opengl_render, R.string.use_opengl_render_descr));
+		if (Version.isOpenGlAvailable(app)) {
+			category.addPreference(createCheckBoxPreference(settings.USE_OPENGL_RENDER,
+					R.string.use_opengl_render, R.string.use_opengl_render_descr));
+		}
 
 		if (!Version.isBlackberry(app)) {
 			CheckBoxPreference nativeCheckbox = createCheckBoxPreference(settings.SAFE_MODE, R.string.safe_mode, R.string.safe_mode_description);
-			CheckBoxPreference nativePTCheckbox = createCheckBoxPreference(settings.PT_SAFE_MODE, "Native PT routing development", "Switch to Java (safe) Public Transport routing calculation");
 			// disable the checkbox if the library cannot be used
 			if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || settings.NATIVE_RENDERING_FAILED.get()) {
 				nativeCheckbox.setEnabled(false);
 				nativeCheckbox.setChecked(true);
 			}
-			cat.addPreference(nativeCheckbox);
-			cat.addPreference(nativePTCheckbox);
+			category.addPreference(nativeCheckbox);
 		}
 
 		PreferenceCategory navigation = new PreferenceCategory(this);
 		navigation.setTitle(R.string.routing_settings);
-		cat.addPreference(navigation);
-		navigation.addPreference(createCheckBoxPreference(settings.DISABLE_COMPLEX_ROUTING,
-				R.string.disable_complex_routing, R.string.disable_complex_routing_descr));
-
-		navigation.addPreference(createCheckBoxPreference(settings.USE_FAST_RECALCULATION,
-				R.string.use_fast_recalculation, R.string.use_fast_recalculation_desc));
-
-		navigation.addPreference(createCheckBoxPreference(settings.USE_OSM_LIVE_FOR_ROUTING,
-				R.string.use_osm_live_routing,
-				R.string.use_osm_live_routing_description));
-
-		navigation.addPreference(createCheckBoxPreference(settings.USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT,
-				R.string.use_osm_live_public_transport,
-				R.string.use_osm_live_public_transport_description));
-
+		category.addPreference(navigation);
 		pref = new Preference(this);
 		final Preference simulate = pref;
 		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();
@@ -95,7 +81,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
 		PreferenceCategory debug = new PreferenceCategory(this);
 		debug.setTitle(R.string.debugging_and_development);
-		cat.addPreference(debug);
+		category.addPreference(debug);
 
 		CheckBoxPreference dbg = createCheckBoxPreference(settings.DEBUG_RENDERING_INFO,
 				R.string.trace_rendering, R.string.trace_rendering_descr);
@@ -125,10 +111,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		debug.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
 				R.string.show_free_version_banner,
 				R.string.show_free_version_banner_description));
-		
-
-		
-
 
 		pref = new Preference(this);
 		pref.setTitle(R.string.test_voice_prompts);
@@ -141,7 +123,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				return true;
 			}
 		});
-		cat.addPreference(pref);
+		category.addPreference(pref);
 
 		pref = new Preference(this);
 		pref.setTitle(R.string.logcat_buffer);
@@ -154,11 +136,11 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				return true;
 			}
 		});
-		cat.addPreference(pref);
+		category.addPreference(pref);
 
 		PreferenceCategory info = new PreferenceCategory(this);
 		info.setTitle(R.string.info_button);
-		cat.addPreference(info);
+		category.addPreference(info);
 
 		pref = new Preference(this);
 		pref.setTitle(R.string.global_app_allocated_memory);

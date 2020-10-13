@@ -3887,7 +3887,7 @@
     <string name="shared_string_redo">Torra a fàghere</string>
     <string name="release_3_8">• Funtzionalidade de pranificatione de un\'àndala agiornada: permitit de impreare castas diferentes de navigatzione pro segmentu e s\'inclusione de rastas
 \n
-\n • New Appearance menu for tracks: select color, thickness, display direction arrows, start/finish icons
+\n • Menù de Aparèntzia nou pro sas rastas: ischerta su colore, grussària, visulaizatzione de sas fritzas de diretzione, iconas de incumintzu/fine
 \n
 \n • Visibilidade megiorada de sos nodos pro sas bitzicletas.
 \n
@@ -3905,4 +3905,12 @@
     <string name="sort_name_ascending">Nùmene: A – Z</string>
     <string name="start_finish_icons">Iconas de incumintzu/fine</string>
     <string name="contour_lines_thanks">Gràtzias pro àere comporadu \'Curvas de livellu\'</string>
+    <string name="osm_live_payment_desc_hw">Costu periòdicu de s\'abbonamentu. Lu podes anullare in AppGallery cando boles.</string>
+    <string name="osm_live_payment_subscription_management_hw">Su pagamentu at a èssere addebitadu a su contu tuo de AppGallery cando sa còmpora at a èssere cunfirmada. 
+\n 
+\nS\'abbonamentu si rinnovat a sa sola automaticamente, francu chi siat istadu annulladu in antis de sa die de su rinnovu. Su contu tuo at a bènnere addebitadu pro su perìodu de rinnovu (mese/tres meses/annu) in sa die de rinnovu ebbia. 
+\n 
+\nPodes amministrare e annullare sos abbonamentos tuos intrende in sas impostatziones de AppGallery tuas.</string>
+    <string name="routing_attr_avoid_footways_description">Èvita sos martzapiedis</string>
+    <string name="routing_attr_avoid_footways_name">Èvita sos martzapiedis</string>
 </resources>

@@ -49,6 +49,11 @@ public class Algorithms {
 	private static char[] CHARS_TO_NORMALIZE_KEY = new char['’'];
 	private static char[] CHARS_TO_NORMALIZE_VALUE = new char['\''];
 
+	public static final int ZIP_FILE_SIGNATURE = 0x504b0304;
+	public static final int XML_FILE_SIGNATURE = 0x3c3f786d;
+	public static final int OBF_FILE_SIGNATURE = 0x08029001;
+	public static final int SQLITE_FILE_SIGNATURE = 0x53514C69;
+
 	public static String normalizeSearchText(String s) {
 		boolean norm = false;
 		for (int i = 0; i < s.length() && !norm; i++) {
@@ -119,9 +124,11 @@ public class Algorithms {
 	}
 
 	public static String getFileNameWithoutExtension(String name) {
-		int i = name.lastIndexOf('.');
-		if (i >= 0) {
-			name = name.substring(0, i);
+		if (name != null) {
+			int index = name.lastIndexOf('.');
+			if (index != -1) {
+				return name.substring(0, index);
+			}
 		}
 		return name;
 	}
@@ -293,7 +300,7 @@ public class Algorithms {
 		FileInputStream in = new FileInputStream(file);
 		int test = readInt(in);
 		in.close();
-		return test == 0x504b0304;
+		return test == ZIP_FILE_SIGNATURE;
 	}
 
 	/**
@@ -322,7 +329,7 @@ public class Algorithms {
 		return false;
 	}
 
-	private static int readInt(InputStream in) throws IOException {
+	public static int readInt(InputStream in) throws IOException {
 		int ch1 = in.read();
 		int ch2 = in.read();
 		int ch3 = in.read();

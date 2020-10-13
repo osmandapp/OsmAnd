@@ -633,7 +633,7 @@
     <string name="local_index_installed">Yerel sürüm</string>
     <string name="local_index_items_backuped">%1$d/%2$d öge devre dışı bırakıldı.</string>
     <string name="local_index_items_deleted">%1$d/%2$d öge silindi.</string>
-    <string name="local_index_items_restored">%1$d/%2$d öge aktifleştirildi.</string>
+    <string name="local_index_items_restored">%1$d/%2$d öge etkinleştirildi.</string>
     <string name="local_index_descr_title">Harita dosyalarını yönetin.</string>
     <string name="local_index_mi_restore">Aktifleştir</string>
     <string name="local_index_mi_backup">Pasifleştir</string>
@@ -641,7 +641,7 @@
     <string name="local_index_address_data">Adres Verisi</string>
     <string name="local_index_transport_data">Toplu taşıma verileri</string>
     <string name="local_index_map_data">Harita Verisi</string>
-    <string name="local_indexes_cat_backup">Pasifleştir</string>
+    <string name="local_indexes_cat_backup">Devre dışı</string>
     <string name="local_indexes_cat_tts">Sesli uyarılar (TTS)</string>
     <string name="local_indexes_cat_voice">Sesli uyarılar (kaydedilmiş)</string>
     <string name="local_indexes_cat_poi">POI Verisi</string>
@@ -1393,7 +1393,7 @@
     <string name="plugin_install_needs_network">Bu eklentiyi yüklemek için çevrim içi olmanız gerekmektedir.</string>
     <string name="get_plugin">Al</string>
     <string name="use_fast_recalculation">Akıllı rota yeniden hesaplama</string>
-    <string name="use_fast_recalculation_desc">Uzun seyahatler için rotanın yalnızca ilk bölümünü yeniden hesapla.</string>
+    <string name="use_fast_recalculation_desc">Güzergahın yalnızca ilk bölümünü yeniden hesaplar. Uzun yolculuklar için kullanılabilir.</string>
     <string name="do_you_like_osmand">OsmAnd\'ı Sevdinizmi?</string>
     <string name="we_really_care_about_your_opinion">Fikir ve geri bildirimleriniz değerlidir.</string>
     <string name="rate_this_app">Bu Uygulamayı Oyla</string>
@@ -1459,7 +1459,7 @@
     <string name="use_trackball">İzleme topu kullan</string>
     <string name="background_service_int_descr">Arka plan servisi tarafından kullanılan uyanma aralığı:</string>
     <string name="background_service_provider_descr">Arka plan servisi tarafından kullanılan konum yöntemi:</string>
-    <string name="route_head">Baş</string>
+    <string name="route_head">Düz gidin</string>
     <string name="map_screen_orientation">Ekran yönlendirme</string>
     <string name="no_address_found">Hiçbir adres belirlenmedi</string>
     <string name="voices">Sesli uyarılar</string>
@@ -2094,7 +2094,7 @@
     <string name="shared_string_deleted">Silindi</string>
     <string name="shared_string_edited">Değiştirildi</string>
     <string name="shared_string_added">Eklendi</string>
-    <string name="marker_activated">İşaretleyici %s aktifleştirildi.</string>
+    <string name="marker_activated">%s işaretleyicisi etkinleştirildi.</string>
     <string name="one_tap_active_descr">İçerik menüsünü açmadan, harita üzerinde bir belirtecin üzerine bas ve aktif belirteçlerin üzerine sürükle.</string>
     <string name="one_tap_active">\'Tek basış\' aktif</string>
     <string name="empty_state_av_notes">Not alın!</string>
@@ -3578,7 +3578,7 @@
     <string name="select_wikipedia_article_langs">Haritadaki Wikipedia makalelerinin dillerini seçin. Makaleyi okurken kullanılabilir herhangi bir dile geçiş yapın.</string>
     <string name="some_articles_may_not_available_in_lang">Bazı Wikipedia makaleleri sizin dilinizde mevcut olmayabilir.</string>
     <string name="lang_zhyue">Kantonca</string>
-    <string name="lang_zhminnan">Güney Min</string>
+    <string name="lang_zhminnan">Güney Mince</string>
     <string name="lang_yo">Yorubaca</string>
     <string name="lang_war">Varayca</string>
     <string name="lang_uz">Özbekçe</string>
@@ -3591,7 +3591,7 @@
     <string name="lang_ne">Nepalce</string>
     <string name="lang_nap">Napolice</string>
     <string name="lang_my">Birmanca</string>
-    <string name="lang_min">Minangkabau dili</string>
+    <string name="lang_min">Minangkabauca</string>
     <string name="lang_mg">Malgaşça</string>
     <string name="lang_ky">Kırgızca</string>
     <string name="lang_kk">Kazakça</string>
@@ -3861,4 +3861,24 @@
     <string name="sort_name_ascending">İsim: A – Z</string>
     <string name="start_finish_icons">Başlangıç/bitiş simgeleri</string>
     <string name="contour_lines_thanks">\'Eş yükselti eğrileri\'ni satın aldığınız için teşekkürler</string>
+    <string name="osm_live_payment_desc_hw">Abonelik seçilen dönem başına ücretlendirilir. İstediğiniz zaman AppGallery\'den iptal edin.</string>
+    <string name="osm_live_payment_subscription_management_hw">Ödeme, satın alma onaylandığında AppGallery hesabınızdan alınacaktır.
+\n
+\nYenileme tarihinden önce iptal edilmedikçe abonelik otomatik olarak yenilenir. Hesabınızdan yenileme süresi (ay/üç ay/yıl) için yalnızca yenileme tarihinde ücret alınacaktır.
+\n
+\n AppGallery ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
+    <string name="routing_attr_avoid_footways_description">Yaya yollarından kaçın</string>
+    <string name="routing_attr_avoid_footways_name">Yaya yollarından kaçın</string>
+    <string name="development">Geliştirme</string>
+    <string name="use_live_public_transport">OsmAnd Live verileri</string>
+    <string name="use_live_routing">OsmAnd Live verileri</string>
+    <string name="use_complex_routing">Karmaşık yönlendirme</string>
+    <string name="complex_routing_descr">Araç navigasyonu için iki aşamalı yönlendirme.</string>
+    <string name="use_native_pt">Yerel Toplu Taşıma geliştirme</string>
+    <string name="use_native_pt_desc">Java (güvenli) Toplu Taşıma yönlendirme hesaplamasına geçin</string>
+    <string name="what_is_new">Yenilikler</string>
+    <string name="perform_oauth_authorization_description">osmedit özelliklerini kullanmak için OAuth oturum açma işlemi gerçekleştirin</string>
+    <string name="perform_oauth_authorization">OAuth ile oturum aç</string>
+    <string name="clear_osm_token">OpenStreetMap OAuth belirtecini temizle</string>
+    <string name="osm_edit_logout_success">Oturum kapatma başarılı</string>
 </resources>

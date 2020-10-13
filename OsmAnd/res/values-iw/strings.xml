@@ -2171,7 +2171,7 @@
     <string name="plugin_install_needs_network">צריך חיבור לאינטרנט כדי להתקין את התוסף הזה.</string>
     <string name="get_plugin">קבלה</string>
     <string name="use_fast_recalculation">חישוב חכם לנתיב מחדש</string>
-    <string name="use_fast_recalculation_desc">לטיולים ארוכים, יש לחשב מחדש רק את החלק ההתחלתי של הנתיב.</string>
+    <string name="use_fast_recalculation_desc">לחשב מחדש רק את החלק ההתחלתי של המסלול, יכול לשמש לטיולים ארוכים.</string>
     <string name="do_you_like_osmand">OsmAnd נושא חן בעיניך?</string>
     <string name="we_really_care_about_your_opinion">הדעה והמשוב שלך יקרים לנו.</string>
     <string name="rate_this_app">דירוג היישומון הזה</string>
@@ -3911,4 +3911,24 @@
     <string name="sort_name_ascending">שם: א – ת</string>
     <string name="start_finish_icons">סמלי התחלה/סיום</string>
     <string name="contour_lines_thanks">תודה לך על רכישת ‚קווי מתאר’</string>
+    <string name="routing_attr_avoid_footways_description">הימנעות משבילי הולכי רגל</string>
+    <string name="routing_attr_avoid_footways_name">הימנעות משבילי הולכי רגל</string>
+    <string name="osm_live_payment_desc_hw">המינוי חויב לתקופה הנבחרת. ניתן לבטל דרך ה־AppGallery בכל עת.</string>
+    <string name="osm_live_payment_subscription_management_hw">התשלום יחויב דרך חשבון ה־AppGallery שלך עם אישור הרכישה.
+\n
+\nהמינוי מתחדש אוטומטי אלא אם כן בוטל בטרם תאריך החידוש. החשבון שלך יחויב על תקופת החידוש (חודש/שלושה חודשים/שנה) רק בתאריך החידוש.
+\n
+\nניתן לנהל ולבטל את המינויים שלך דרך ההגדרות ב־AppGallery שלך.</string>
+    <string name="what_is_new">מה חדש</string>
+    <string name="development">פיתוח</string>
+    <string name="use_live_public_transport">נתוני זמן אמת של OsmAnd</string>
+    <string name="use_live_routing">נתוני זמן אמת של OsmAnd</string>
+    <string name="use_complex_routing">חישוב מורכב של מסלול</string>
+    <string name="complex_routing_descr">חישוב מסלול דו־שלבי לניווט במכונית.</string>
+    <string name="use_native_pt">פיתוח עצמי לתחבורה ציבורית</string>
+    <string name="use_native_pt_desc">מעבר לחישוב ניווט בתחבורה ציבורית ב־Java (בטוח)</string>
+    <string name="perform_oauth_authorization_description">יש להיכנס עם OAuth כדי להשתמש ביכולות של osmedit</string>
+    <string name="perform_oauth_authorization">להיכנס דרך OAuth</string>
+    <string name="clear_osm_token">למחוק את אסימון ה־OAuth של OpenStreetMap</string>
+    <string name="osm_edit_logout_success">היציאה הצליחה</string>
 </resources>
