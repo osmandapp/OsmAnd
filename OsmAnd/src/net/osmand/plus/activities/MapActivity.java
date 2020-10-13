@@ -1421,7 +1421,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		});
 		getMapView().refreshMap(true);
 		applyScreenOrientation();
-		app.getAidlApi().updateMapMargins(this);
+		app.getAppCustomization().updateMapMargins(this);
 	}
 
 	public void updateNavigationBarColor() {
