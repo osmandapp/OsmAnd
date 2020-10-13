@@ -325,6 +325,8 @@ public class RendererRegistry {
 				return ctx.getString(R.string.off_road_render_descr);
 			case DESERT_RENDER:
 				return ctx.getString(R.string.desert_render_descr);
+			case SNOWMOBILE_RENDER:
+			return ctx.getString(R.string.snowmobile_render_descr);
 		}
 		return ""; 
 	}
