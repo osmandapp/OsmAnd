@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -178,6 +180,24 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 		return view;
 	}
+
+	private void testShadowOn() {
+//		buttonsShadow.setAlpha(0f);
+		buttonsShadow.setVisibility(View.VISIBLE);
+		buttonsShadow.animate()
+				.alpha(1f)
+				.setDuration(100)
+				.setListener(null);
+	}
+
+	private void testShadowOff() {
+//		buttonsShadow.setAlpha(0.5f);
+		buttonsShadow.animate()
+				.alpha(0f)
+				.setDuration(100);
+
+	}
+
 
 	private void setupCards() {
 		MapActivity mapActivity = getMapActivity();
@@ -602,7 +622,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_close);
 	}
 
-
 	private void setupScrollShadow() {
 		final View scrollView = getBottomScrollView();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new OnScrollChangedListener() {
@@ -610,7 +629,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			@Override
 			public void onScrollChanged() {
 				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-				AndroidUiHelper.updateVisibility(buttonsShadow, scrollToBottomAvailable);
+				if (scrollToBottomAvailable) {
+					testShadowOn();
+				} else {
+					testShadowOff();
+				}
 			}
 		});
 	}
