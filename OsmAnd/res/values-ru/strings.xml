@@ -3242,8 +3242,8 @@
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="plugins_settings">Настройки плагинов</string>
     <string name="language_and_output">Язык и вывод</string>
-    <string name="change_data_storage_full_description">Переместить файлы данных OsmAnd в новое место назначения\? 
-\n%1$s &gt; %2$s</string>
+    <string name="change_data_storage_full_description">Переместить файлы данных OsmAnd в новое место назначения\?
+\n%1$s → %2$s</string>
     <string name="shared_string_by_default">По умолчанию</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s ГБ свободно (из %2$s ГБ)</string>
@@ -3349,7 +3349,7 @@
     <string name="select_color">Выберите цвет</string>
     <string name="edit_profiles_descr">Вы не можете удалить стандартные профили OsmAnd, но вы можете отключить их на предыдущем экране или переместить вниз.</string>
     <string name="edit_profiles">Редактировать профили</string>
-    <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчета маршрутов.</string>
+    <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчёта маршрутов.</string>
     <string name="profile_appearance">Внешний вид профиля</string>
     <string name="choose_icon_color_name">Значок, цвет и имя</string>
     <string name="reorder_profiles">Редактировать список профилей</string>
@@ -3920,6 +3920,8 @@
     <string name="perform_oauth_authorization">Войти через OAuth</string>
     <string name="clear_osm_token">Очистить токен OAuth OpenStreetMap</string>
     <string name="osm_edit_logout_success">Выход выполнен</string>
-    <string name="shared_string_graph">»в 997777777:66666776666</string>
+    <string name="shared_string_graph">График</string>
     <string name="file_already_imported">Файл уже импортирован</string>
+    <string name="message_graph_will_be_available_after_recalculation">Дождитесь пересчёта маршрута.
+\nГрафик будет доступен после пересчёта.</string>
 </resources>
