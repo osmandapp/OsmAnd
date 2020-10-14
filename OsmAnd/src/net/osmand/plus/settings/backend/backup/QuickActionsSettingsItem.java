@@ -47,8 +47,8 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.QUICK_ACTIONS;
+	public SettingsItemType getType() {
+		return SettingsItemType.QUICK_ACTIONS;
 	}
 
 	@Override

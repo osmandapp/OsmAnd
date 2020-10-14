@@ -93,106 +93,131 @@ public class SettingsHelper {
 		void onSettingsExportFinished(@NonNull File file, boolean succeed);
 	}
 
+	public enum ImportType {
+		COLLECT,
+		CHECK_DUPLICATES,
+		IMPORT
+	}
+
 	public SettingsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
-	public enum SettingsItemType {
-		GLOBAL,
-		PROFILE,
-		PLUGIN,
-		DATA,
-		FILE,
-		RESOURCES,
-		QUICK_ACTIONS,
-		POI_UI_FILTERS,
-		MAP_SOURCES,
-		AVOID_ROADS,
-		SUGGESTED_DOWNLOADS,
-		DOWNLOADS
+	@Nullable
+	public ImportAsyncTask getImportTask() {
+		return importTask;
 	}
 
-	public static Map<ExportSettingsType, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean importComplete) {
-		Map<ExportSettingsType, List<?>> settingsToOperate = new HashMap<>();
-		List<ApplicationModeBean> profiles = new ArrayList<>();
-		List<QuickAction> quickActions = new ArrayList<>();
-		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-		List<ITileSource> tileSourceTemplates = new ArrayList<>();
-		List<File> routingFilesList = new ArrayList<>();
-		List<File> renderFilesList = new ArrayList<>();
-		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
-		for (SettingsItem item : settingsItems) {
-			switch (item.getType()) {
-				case PROFILE:
-					profiles.add(((ProfileSettingsItem) item).getModeBean());
-					break;
-				case FILE:
-					FileSettingsItem fileItem = (FileSettingsItem) item;
-					if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
-						renderFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
-						routingFilesList.add(fileItem.getFile());
-					}
-					break;
-				case QUICK_ACTIONS:
-					QuickActionsSettingsItem quickActionsItem = (QuickActionsSettingsItem) item;
-					if (importComplete) {
-						quickActions.addAll(quickActionsItem.getAppliedItems());
-					} else {
-						quickActions.addAll(quickActionsItem.getItems());
-					}
-					break;
-				case POI_UI_FILTERS:
-					PoiUiFiltersSettingsItem poiUiFilterItem = (PoiUiFiltersSettingsItem) item;
-					if (importComplete) {
-						poiUIFilters.addAll(poiUiFilterItem.getAppliedItems());
-					} else {
-						poiUIFilters.addAll(poiUiFilterItem.getItems());
-					}
-					break;
-				case MAP_SOURCES:
-					MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) item;
-					if (importComplete) {
-						tileSourceTemplates.addAll(mapSourcesItem.getAppliedItems());
-					} else {
-						tileSourceTemplates.addAll(mapSourcesItem.getItems());
-					}
-					break;
-				case AVOID_ROADS:
-					AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) item;
-					if (importComplete) {
-						avoidRoads.addAll(avoidRoadsItem.getAppliedItems());
-					} else {
-						avoidRoads.addAll(avoidRoadsItem.getItems());
-					}
-					break;
-				default:
-					break;
+	@Nullable
+	public ImportType getImportTaskType() {
+		ImportAsyncTask importTask = this.importTask;
+		return importTask != null ? importTask.getImportType() : null;
+	}
+
+	public boolean isImportDone() {
+		ImportAsyncTask importTask = this.importTask;
+		return importTask == null || importTask.isImportDone();
+	}
+
+	public boolean isFileExporting(File file) {
+		return exportAsyncTasks.containsKey(file);
+	}
+
+	public void updateExportListener(File file, SettingsExportListener listener) {
+		ExportAsyncTask exportAsyncTask = exportAsyncTasks.get(file);
+		if (exportAsyncTask != null) {
+			exportAsyncTask.listener = listener;
+		}
+	}
+
+	private void finishImport(@Nullable SettingsImportListener listener, boolean success, @NonNull List<SettingsItem> items) {
+		importTask = null;
+		List<String> warnings = new ArrayList<>();
+		for (SettingsItem item : items) {
+			warnings.addAll(item.getWarnings());
+		}
+		if (!warnings.isEmpty()) {
+			app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
+		}
+		if (listener != null) {
+			listener.onSettingsImportFinished(success, items);
+		}
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private class ImportItemsAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+		private SettingsImporter importer;
+		private File file;
+		private SettingsImportListener listener;
+		private List<SettingsItem> items;
+
+		ImportItemsAsyncTask(@NonNull File file,
+							 @Nullable SettingsImportListener listener,
+							 @NonNull List<SettingsItem> items) {
+			importer = new SettingsImporter(app);
+			this.file = file;
+			this.listener = listener;
+			this.items = items;
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... voids) {
+			try {
+				importer.importItems(file, items);
+				return true;
+			} catch (IllegalArgumentException e) {
+				LOG.error("Failed to import items from: " + file.getName(), e);
+			} catch (IOException e) {
+				LOG.error("Failed to import items from: " + file.getName(), e);
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean success) {
+			finishImport(listener, success, items);
+		}
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private class ExportAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+		private SettingsExporter exporter;
+		private File file;
+		private SettingsExportListener listener;
+
+		ExportAsyncTask(@NonNull File settingsFile,
+						@Nullable SettingsExportListener listener,
+						@NonNull List<SettingsItem> items, boolean exportItemsFiles) {
+			this.file = settingsFile;
+			this.listener = listener;
+			this.exporter = new SettingsExporter(exportItemsFiles);
+			for (SettingsItem item : items) {
+				exporter.addSettingsItem(item);
 			}
 		}
 
-		if (!profiles.isEmpty()) {
-			settingsToOperate.put(ExportSettingsType.PROFILE, profiles);
+		@Override
+		protected Boolean doInBackground(Void... voids) {
+			try {
+				exporter.exportSettings(file);
+				return true;
+			} catch (JSONException e) {
+				LOG.error("Failed to export items to: " + file.getName(), e);
+			} catch (IOException e) {
+				LOG.error("Failed to export items to: " + file.getName(), e);
+			}
+			return false;
 		}
-		if (!quickActions.isEmpty()) {
-			settingsToOperate.put(ExportSettingsType.QUICK_ACTIONS, quickActions);
+
+		@Override
+		protected void onPostExecute(Boolean success) {
+			exportAsyncTasks.remove(file);
+			if (listener != null) {
+				listener.onSettingsExportFinished(file, success);
+			}
 		}
-		if (!poiUIFilters.isEmpty()) {
-			settingsToOperate.put(ExportSettingsType.POI_TYPES, poiUIFilters);
-		}
-		if (!tileSourceTemplates.isEmpty()) {
-			settingsToOperate.put(ExportSettingsType.MAP_SOURCES, tileSourceTemplates);
-		}
-		if (!renderFilesList.isEmpty()) {
-			settingsToOperate.put(ExportSettingsType.CUSTOM_RENDER_STYLE, renderFilesList);
-		}
-		if (!routingFilesList.isEmpty()) {
-			settingsToOperate.put(ExportSettingsType.CUSTOM_ROUTING, routingFilesList);
-		}
-		if (!avoidRoads.isEmpty()) {
-			settingsToOperate.put(ExportSettingsType.AVOID_ROADS, avoidRoads);
-		}
-		return settingsToOperate;
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -355,123 +380,6 @@ public class SettingsHelper {
 		}
 	}
 
-	@Nullable
-	public ImportAsyncTask getImportTask() {
-		return importTask;
-	}
-
-	@Nullable
-	public ImportType getImportTaskType() {
-		ImportAsyncTask importTask = this.importTask;
-		return importTask != null ? importTask.getImportType() : null;
-	}
-
-	public boolean isImportDone() {
-		ImportAsyncTask importTask = this.importTask;
-		return importTask == null || importTask.isImportDone();
-	}
-
-	public boolean isFileExporting(File file) {
-		return exportAsyncTasks.containsKey(file);
-	}
-
-	public void updateExportListener(File file, SettingsExportListener listener) {
-		ExportAsyncTask exportAsyncTask = exportAsyncTasks.get(file);
-		if (exportAsyncTask != null) {
-			exportAsyncTask.listener = listener;
-		}
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	private class ImportItemsAsyncTask extends AsyncTask<Void, Void, Boolean> {
-
-		private SettingsImporter importer;
-		private File file;
-		private SettingsImportListener listener;
-		private List<SettingsItem> items;
-
-		ImportItemsAsyncTask(@NonNull File file,
-							 @Nullable SettingsImportListener listener,
-							 @NonNull List<SettingsItem> items) {
-			importer = new SettingsImporter(app);
-			this.file = file;
-			this.listener = listener;
-			this.items = items;
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... voids) {
-			try {
-				importer.importItems(file, items);
-				return true;
-			} catch (IllegalArgumentException e) {
-				LOG.error("Failed to import items from: " + file.getName(), e);
-			} catch (IOException e) {
-				LOG.error("Failed to import items from: " + file.getName(), e);
-			}
-			return false;
-		}
-
-		@Override
-		protected void onPostExecute(Boolean success) {
-			finishImport(listener, success, items);
-		}
-	}
-
-	private void finishImport(@Nullable SettingsImportListener listener, boolean success, @NonNull List<SettingsItem> items) {
-		importTask = null;
-		List<String> warnings = new ArrayList<>();
-		for (SettingsItem item : items) {
-			warnings.addAll(item.getWarnings());
-		}
-		if (!warnings.isEmpty()) {
-			app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
-		}
-		if (listener != null) {
-			listener.onSettingsImportFinished(success, items);
-		}
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	private class ExportAsyncTask extends AsyncTask<Void, Void, Boolean> {
-
-		private SettingsExporter exporter;
-		private File file;
-		private SettingsExportListener listener;
-
-		ExportAsyncTask(@NonNull File settingsFile,
-						@Nullable SettingsExportListener listener,
-						@NonNull List<SettingsItem> items, boolean exportItemsFiles) {
-			this.file = settingsFile;
-			this.listener = listener;
-			this.exporter = new SettingsExporter(exportItemsFiles);
-			for (SettingsItem item : items) {
-				exporter.addSettingsItem(item);
-			}
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... voids) {
-			try {
-				exporter.exportSettings(file);
-				return true;
-			} catch (JSONException e) {
-				LOG.error("Failed to export items to: " + file.getName(), e);
-			} catch (IOException e) {
-				LOG.error("Failed to export items to: " + file.getName(), e);
-			}
-			return false;
-		}
-
-		@Override
-		protected void onPostExecute(Boolean success) {
-			exportAsyncTasks.remove(file);
-			if (listener != null) {
-				listener.onSettingsExportFinished(file, success);
-			}
-		}
-	}
-
 	public void collectSettings(@NonNull File settingsFile, String latestChanges, int version,
 								@Nullable SettingsCollectListener listener) {
 		new ImportAsyncTask(settingsFile, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -495,12 +403,6 @@ public class SettingsHelper {
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener,
 							   boolean exportItemsFiles, @NonNull SettingsItem... items) {
 		exportSettings(fileDir, fileName, listener, new ArrayList<>(Arrays.asList(items)), exportItemsFiles);
-	}
-
-	public enum ImportType {
-		COLLECT,
-		CHECK_DUPLICATES,
-		IMPORT
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(Map<ExportSettingsType, List<?>> additionalData,
@@ -610,5 +512,88 @@ public class SettingsHelper {
 			settingsItems.add(new AvoidRoadsSettingsItem(app, avoidRoads));
 		}
 		return settingsItems;
+	}
+
+	public static Map<ExportSettingsType, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean importComplete) {
+		Map<ExportSettingsType, List<?>> settingsToOperate = new HashMap<>();
+		List<ApplicationModeBean> profiles = new ArrayList<>();
+		List<QuickAction> quickActions = new ArrayList<>();
+		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
+		List<ITileSource> tileSourceTemplates = new ArrayList<>();
+		List<File> routingFilesList = new ArrayList<>();
+		List<File> renderFilesList = new ArrayList<>();
+		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		for (SettingsItem item : settingsItems) {
+			switch (item.getType()) {
+				case PROFILE:
+					profiles.add(((ProfileSettingsItem) item).getModeBean());
+					break;
+				case FILE:
+					FileSettingsItem fileItem = (FileSettingsItem) item;
+					if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
+						renderFilesList.add(fileItem.getFile());
+					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
+						routingFilesList.add(fileItem.getFile());
+					}
+					break;
+				case QUICK_ACTIONS:
+					QuickActionsSettingsItem quickActionsItem = (QuickActionsSettingsItem) item;
+					if (importComplete) {
+						quickActions.addAll(quickActionsItem.getAppliedItems());
+					} else {
+						quickActions.addAll(quickActionsItem.getItems());
+					}
+					break;
+				case POI_UI_FILTERS:
+					PoiUiFiltersSettingsItem poiUiFilterItem = (PoiUiFiltersSettingsItem) item;
+					if (importComplete) {
+						poiUIFilters.addAll(poiUiFilterItem.getAppliedItems());
+					} else {
+						poiUIFilters.addAll(poiUiFilterItem.getItems());
+					}
+					break;
+				case MAP_SOURCES:
+					MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) item;
+					if (importComplete) {
+						tileSourceTemplates.addAll(mapSourcesItem.getAppliedItems());
+					} else {
+						tileSourceTemplates.addAll(mapSourcesItem.getItems());
+					}
+					break;
+				case AVOID_ROADS:
+					AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) item;
+					if (importComplete) {
+						avoidRoads.addAll(avoidRoadsItem.getAppliedItems());
+					} else {
+						avoidRoads.addAll(avoidRoadsItem.getItems());
+					}
+					break;
+				default:
+					break;
+			}
+		}
+
+		if (!profiles.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.PROFILE, profiles);
+		}
+		if (!quickActions.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.QUICK_ACTIONS, quickActions);
+		}
+		if (!poiUIFilters.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.POI_TYPES, poiUIFilters);
+		}
+		if (!tileSourceTemplates.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.MAP_SOURCES, tileSourceTemplates);
+		}
+		if (!renderFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.CUSTOM_RENDER_STYLE, renderFilesList);
+		}
+		if (!routingFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.CUSTOM_ROUTING, routingFilesList);
+		}
+		if (!avoidRoads.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.AVOID_ROADS, avoidRoads);
+		}
+		return settingsToOperate;
 	}
 }

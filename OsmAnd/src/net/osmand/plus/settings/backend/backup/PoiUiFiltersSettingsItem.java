@@ -47,8 +47,8 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.POI_UI_FILTERS;
+	public SettingsItemType getType() {
+		return SettingsItemType.POI_UI_FILTERS;
 	}
 
 	@Override

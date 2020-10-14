@@ -34,8 +34,8 @@ public class DownloadsItem extends SettingsItem {
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.DOWNLOADS;
+	public SettingsItemType getType() {
+		return SettingsItemType.DOWNLOADS;
 
 	}
 

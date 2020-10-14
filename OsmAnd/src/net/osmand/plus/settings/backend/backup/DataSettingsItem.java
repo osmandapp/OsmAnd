@@ -35,8 +35,8 @@ public class DataSettingsItem extends StreamSettingsItem {
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.DATA;
+	public SettingsItemType getType() {
+		return SettingsItemType.DATA;
 	}
 
 	@NonNull

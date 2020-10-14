@@ -45,8 +45,8 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.MAP_SOURCES;
+	public SettingsItemType getType() {
+		return SettingsItemType.MAP_SOURCES;
 	}
 
 	@Override

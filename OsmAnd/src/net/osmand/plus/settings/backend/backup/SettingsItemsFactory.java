@@ -40,7 +40,7 @@ class SettingsItemsFactory {
 				item = createItem(itemJson);
 				items.add(item);
 				String pluginId = item.getPluginId();
-				if (pluginId != null && item.getType() != SettingsHelper.SettingsItemType.PLUGIN) {
+				if (pluginId != null && item.getType() != SettingsItemType.PLUGIN) {
 					List<SettingsItem> items = pluginItems.get(pluginId);
 					if (items != null) {
 						items.add(item);
@@ -86,7 +86,7 @@ class SettingsItemsFactory {
 	@NonNull
 	private SettingsItem createItem(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
 		SettingsItem item = null;
-		SettingsHelper.SettingsItemType type = SettingsItem.parseItemType(json);
+		SettingsItemType type = SettingsItem.parseItemType(json);
 		OsmandSettings settings = app.getSettings();
 		switch (type) {
 			case GLOBAL:

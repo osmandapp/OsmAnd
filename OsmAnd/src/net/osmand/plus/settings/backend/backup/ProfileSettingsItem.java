@@ -47,7 +47,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	}
 
 	public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
-		super(SettingsHelper.SettingsItemType.PROFILE, app.getSettings(), json);
+		super(SettingsItemType.PROFILE, app.getSettings(), json);
 	}
 
 	@Override
@@ -58,8 +58,8 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.PROFILE;
+	public SettingsItemType getType() {
+		return SettingsItemType.PROFILE;
 	}
 
 	public ApplicationMode getAppMode() {

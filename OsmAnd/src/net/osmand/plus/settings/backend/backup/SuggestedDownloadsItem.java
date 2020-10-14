@@ -33,8 +33,8 @@ public class SuggestedDownloadsItem extends SettingsItem {
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.SUGGESTED_DOWNLOADS;
+	public SettingsItemType getType() {
+		return SettingsItemType.SUGGESTED_DOWNLOADS;
 
 	}
 

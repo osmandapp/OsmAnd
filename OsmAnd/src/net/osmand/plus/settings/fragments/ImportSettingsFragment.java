@@ -52,7 +52,7 @@ import net.osmand.plus.settings.backend.backup.PoiUiFiltersSettingsItem;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 

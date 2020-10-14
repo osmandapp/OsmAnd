@@ -32,8 +32,8 @@ public class PluginSettingsItem extends SettingsItem {
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.PLUGIN;
+	public SettingsItemType getType() {
+		return SettingsItemType.PLUGIN;
 	}
 
 	@NonNull

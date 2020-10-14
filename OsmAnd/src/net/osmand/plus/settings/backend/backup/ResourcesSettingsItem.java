@@ -24,8 +24,8 @@ public class ResourcesSettingsItem extends FileSettingsItem {
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.RESOURCES;
+	public SettingsItemType getType() {
+		return SettingsItemType.RESOURCES;
 	}
 
 	@Override

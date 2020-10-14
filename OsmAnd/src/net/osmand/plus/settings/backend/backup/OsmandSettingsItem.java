@@ -22,7 +22,7 @@ public abstract class OsmandSettingsItem extends SettingsItem {
 		this.settings = settings;
 	}
 
-	protected OsmandSettingsItem(@NonNull SettingsHelper.SettingsItemType type, @NonNull OsmandSettings settings, @NonNull JSONObject json) throws JSONException {
+	protected OsmandSettingsItem(@NonNull SettingsItemType type, @NonNull OsmandSettings settings, @NonNull JSONObject json) throws JSONException {
 		super(settings.getContext(), json);
 		this.settings = settings;
 	}

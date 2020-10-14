@@ -19,7 +19,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;

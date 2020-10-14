@@ -20,8 +20,8 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.GLOBAL;
+	public SettingsItemType getType() {
+		return SettingsItemType.GLOBAL;
 	}
 
 	@NonNull

@@ -46,8 +46,8 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.AVOID_ROADS;
+	public SettingsItemType getType() {
+		return SettingsItemType.AVOID_ROADS;
 	}
 
 	@NonNull

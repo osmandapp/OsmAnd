@@ -120,8 +120,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 	@NonNull
 	@Override
-	public SettingsHelper.SettingsItemType getType() {
-		return SettingsHelper.SettingsItemType.FILE;
+	public SettingsItemType getType() {
+		return SettingsItemType.FILE;
 	}
 
 	public File getPluginPath() {

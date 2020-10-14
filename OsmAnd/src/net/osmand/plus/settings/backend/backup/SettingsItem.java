@@ -59,7 +59,7 @@ public abstract class SettingsItem {
 	}
 
 	@NonNull
-	public abstract SettingsHelper.SettingsItemType getType();
+	public abstract SettingsItemType getType();
 
 	@NonNull
 	public abstract String getName();
@@ -99,7 +99,7 @@ public abstract class SettingsItem {
 		this.shouldReplace = shouldReplace;
 	}
 
-	static SettingsHelper.SettingsItemType parseItemType(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
+	static SettingsItemType parseItemType(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
 		String type = json.has("type") ? json.getString("type") : null;
 		if (type == null) {
 			throw new IllegalArgumentException("No type field");
@@ -107,7 +107,7 @@ public abstract class SettingsItem {
 		if (type.equals("QUICK_ACTION")) {
 			type = "QUICK_ACTIONS";
 		}
-		return SettingsHelper.SettingsItemType.valueOf(type);
+		return SettingsItemType.valueOf(type);
 	}
 
 	public boolean exists() {
