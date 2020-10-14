@@ -423,7 +423,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	private LayerDrawable createBackgroundDrawable(@NonNull Context ctx, @DrawableRes int shadowDrawableResId) {
 		Drawable shadowDrawable = ContextCompat.getDrawable(ctx, shadowDrawableResId);
-		Drawable[] layers = new Drawable[] {shadowDrawable, getColoredBg(ctx)};
+		Drawable[] layers = new Drawable[]{shadowDrawable, getColoredBg(ctx)};
 		return new LayerDrawable(layers);
 	}
 
@@ -432,6 +432,21 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			return app.getDaynightHelper().isNightModeForMapControls();
 		}
 		return !app.getSettings().isLightContent();
+	}
+
+	private void testShadowOn() {
+		buttonsShadow.setVisibility(View.VISIBLE);
+		buttonsShadow.animate()
+				.alpha(0.8f)
+				.setDuration(200)
+				.setListener(null);
+	}
+
+	private void testShadowOff() {
+		buttonsShadow.animate()
+				.alpha(0f)
+				.setDuration(200);
+
 	}
 
 	private void setupScrollShadow(View view) {
@@ -446,7 +461,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			@Override
 			public void onScrollChanged() {
 				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-				AndroidUiHelper.updateVisibility(buttonsShadow, scrollToBottomAvailable);
+				if (scrollToBottomAvailable) {
+					testShadowOn();
+				} else {
+					testShadowOff();
+				}
 			}
 		});
 	}
