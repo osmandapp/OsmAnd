@@ -3920,4 +3920,5 @@
     <string name="perform_oauth_authorization">Войти через OAuth</string>
     <string name="clear_osm_token">Очистить токен OAuth OpenStreetMap</string>
     <string name="osm_edit_logout_success">Выход выполнен</string>
+    <string name="shared_string_graph">»в 997777777:66666776666</string>
 </resources>
