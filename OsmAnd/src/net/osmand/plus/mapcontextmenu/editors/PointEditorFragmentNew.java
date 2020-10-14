@@ -632,7 +632,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
 			iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 			horizontalSelectionAdapter.notifyDataSetChanged();
-			iconCategoriesRecyclerView.smoothScrollToPosition(horizontalSelectionAdapter.getItemPosition(selectedIconCategory));
+			iconCategoriesRecyclerView.smoothScrollToPosition(horizontalSelectionAdapter.getItemPositionByTitle(selectedIconCategory));
 			for (String name : iconNameList) {
 				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(0, 0));
 			}

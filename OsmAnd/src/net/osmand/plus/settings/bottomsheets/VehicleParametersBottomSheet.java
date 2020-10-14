@@ -122,7 +122,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 				}
 				selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
 				adapter.setSelectedItemByTitle(selectedItem);
-				int itemPosition = adapter.getItemPosition(selectedItem);
+				int itemPosition = adapter.getItemPositionByTitle(selectedItem);
 				if (itemPosition >= 0) {
 					recyclerView.smoothScrollToPosition(itemPosition);
 				}
