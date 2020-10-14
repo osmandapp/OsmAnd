@@ -3925,4 +3925,8 @@
     <string name="complex_routing_descr">Zwei-Phasen-Routenberechnung für die Autonavigation.</string>
     <string name="use_native_pt">Native ÖPNV Entwicklung</string>
     <string name="use_native_pt_desc">Wechseln zu Java (sicher) Berechnung des ÖPNV-Routings</string>
+    <string name="osm_edit_logout_success">Abmeldung erfolgreich</string>
+    <string name="file_already_imported">Datei wurde bereits in OsmAnd importiert</string>
+    <string name="perform_oauth_authorization">Anmelden über OAuth</string>
+    <string name="clear_osm_token">OpenStreetMap OAuth-Token löschen</string>
 </resources>
