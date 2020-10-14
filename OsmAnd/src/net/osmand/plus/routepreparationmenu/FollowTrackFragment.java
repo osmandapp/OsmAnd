@@ -3,6 +3,7 @@ package net.osmand.plus.routepreparationmenu;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -16,6 +17,7 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -86,6 +88,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private GPXFile gpxFile;
 
+	private View buttonsShadow;
+
 	private boolean editingTrack;
 	private boolean selectingTrack;
 	private int menuTitleHeight;
@@ -148,6 +152,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			ImageButton closeButton = view.findViewById(R.id.close_button);
+			buttonsShadow = view.findViewById(R.id.buttons_shadow);
 			closeButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
 			closeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -597,22 +602,15 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_close);
 	}
 
-	private void setupScrollShadow() {
-		int shadowIconId = isNightMode() ? R.drawable.bg_contextmenu_shadow : R.drawable.bg_contextmenu_shadow;
-		final Drawable shadowIcon = app.getUIUtilities().getIcon(shadowIconId);
 
+	private void setupScrollShadow() {
 		final View scrollView = getBottomScrollView();
-		final FrameLayout bottomContainer = getBottomContainer();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new OnScrollChangedListener() {
 
 			@Override
 			public void onScrollChanged() {
-				int scrollY = scrollView.getScrollY();
-				if (scrollY <= 0 && bottomContainer.getForeground() != null) {
-					bottomContainer.setForeground(null);
-				} else if (scrollY > 0 && bottomContainer.getForeground() == null) {
-					bottomContainer.setForeground(shadowIcon);
-				}
+				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+				AndroidUiHelper.updateVisibility(buttonsShadow, scrollToBottomAvailable);
 			}
 		});
 	}

@@ -477,21 +477,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void setupScrollShadow() {
-		int shadowIconId = isNightMode() ? R.drawable.bg_contextmenu_shadow : R.drawable.bg_contextmenu_shadow;
-		final Drawable shadowIcon = app.getUIUtilities().getIcon(shadowIconId);
-
 		final View scrollView = getBottomScrollView();
-		final FrameLayout bottomContainer = getBottomContainer();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 
 			@Override
 			public void onScrollChanged() {
-				int scrollY = scrollView.getScrollY();
-				if (scrollY <= 0 && bottomContainer.getForeground() != null) {
-					bottomContainer.setForeground(null);
-				} else if (scrollY > 0 && bottomContainer.getForeground() == null) {
-					bottomContainer.setForeground(shadowIcon);
-				}
+				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+				AndroidUiHelper.updateVisibility(buttonsShadow, scrollToBottomAvailable);
 				updateButtonsShadow();
 			}
 		});

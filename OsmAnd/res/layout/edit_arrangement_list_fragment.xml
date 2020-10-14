@@ -32,8 +32,8 @@
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/buttons_shadow"
 				android:layout_width="match_parent"
-				android:layout_height="10dp"
-				android:background="@drawable/bg_contextmenu_shadow_top_light" />
+				android:layout_height="8dp"
+				android:background="@drawable/shadow" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
