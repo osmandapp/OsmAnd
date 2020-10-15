@@ -115,7 +115,14 @@ public class FileSettingsItem extends StreamSettingsItem {
 		} else if (subtype == FileSubtype.UNKNOWN || subtype == null) {
 			throw new IllegalArgumentException("Unknown file subtype: " + getFileName());
 		} else {
-			this.file = new File(app.getAppPath(subtype.subtypeFolder), name);
+			String subtypeFolder = subtype.subtypeFolder;
+			int nameIndex = fileName.indexOf(name);
+			int folderIndex = fileName.indexOf(subtype.subtypeFolder);
+			if (nameIndex != -1 && folderIndex != -1) {
+				String subfolderPath = fileName.substring(folderIndex + subtype.subtypeFolder.length(), nameIndex);
+				subtypeFolder = subtypeFolder + subfolderPath;
+			}
+			this.file = new File(app.getAppPath(subtypeFolder), name);
 		}
 	}
 
