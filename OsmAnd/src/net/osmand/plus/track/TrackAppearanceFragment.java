@@ -475,6 +475,20 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		AndroidUiHelper.updateVisibility(saveButton, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
 	}
+	private void testShadowOn() {
+		buttonsShadow.setVisibility(View.VISIBLE);
+		buttonsShadow.animate()
+				.alpha(0.8f)
+				.setDuration(200)
+				.setListener(null);
+	}
+
+	private void testShadowOff() {
+		buttonsShadow.animate()
+				.alpha(0f)
+				.setDuration(200);
+
+	}
 
 	private void setupScrollShadow() {
 		final View scrollView = getBottomScrollView();
@@ -483,8 +497,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			@Override
 			public void onScrollChanged() {
 				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-				AndroidUiHelper.updateVisibility(buttonsShadow, scrollToBottomAvailable);
-				updateButtonsShadow();
+				if (scrollToBottomAvailable) {
+					testShadowOn();
+				} else {
+					testShadowOff();
+				}
 			}
 		});
 	}
