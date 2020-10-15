@@ -22,6 +22,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
@@ -255,6 +256,12 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				setupIcon(icon, iconId, itemSelected);
 				subText.setVisibility(View.GONE);
 				break;
+			case TRACKS:
+				String fileName = ((File) currentItem).getName();
+				title.setText(GpxUiHelper.getGpxTitle(fileName));
+				setupIcon(icon, R.drawable.ic_action_route_distance, itemSelected);
+				subText.setVisibility(View.GONE);
+				break;
 			default:
 				return child;
 		}
@@ -327,6 +334,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.shared_string_routing;
 			case AVOID_ROADS:
 				return R.string.avoid_road;
+			case TRACKS:
+				return R.string.shared_string_tracks;
 			case MULTIMEDIA_NOTES:
 				return R.string.audionotes_plugin_name;
 			default:

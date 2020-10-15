@@ -19,6 +19,8 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -489,6 +491,20 @@ public class SettingsHelper {
 				dataList.put(ExportSettingsType.MULTIMEDIA_NOTES, files);
 			}
 		}
+		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfo(gpxDir, null, true);
+		if (!gpxInfoList.isEmpty()) {
+			List<File> files = new ArrayList<>();
+			for (GPXInfo gpxInfo : gpxInfoList) {
+				File file = new File(gpxInfo.getFileName());
+				if (file.exists()) {
+					files.add(file);
+				}
+			}
+			if (!files.isEmpty()) {
+				dataList.put(ExportSettingsType.TRACKS, files);
+			}
+		}
 		return dataList;
 	}
 
@@ -539,6 +555,7 @@ public class SettingsHelper {
 		List<File> routingFilesList = new ArrayList<>();
 		List<File> renderFilesList = new ArrayList<>();
 		List<File> multimediaFilesList = new ArrayList<>();
+		List<File> tracksFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
@@ -553,6 +570,8 @@ public class SettingsHelper {
 						routingFilesList.add(fileItem.getFile());
 					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.MULTIMEDIA_NOTES) {
 						multimediaFilesList.add(fileItem.getFile());
+					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.GPX) {
+						tracksFilesList.add(fileItem.getFile());
 					}
 					break;
 				case QUICK_ACTIONS:
@@ -615,6 +634,9 @@ public class SettingsHelper {
 		}
 		if (!multimediaFilesList.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.MULTIMEDIA_NOTES, multimediaFilesList);
+		}
+		if (!tracksFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.TRACKS, tracksFilesList);
 		}
 		return settingsToOperate;
 	}

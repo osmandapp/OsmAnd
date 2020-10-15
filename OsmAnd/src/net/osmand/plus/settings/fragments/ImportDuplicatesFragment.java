@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.RENDERERS_DIR;
 import static net.osmand.IndexConstants.ROUTING_PROFILES_DIR;
 import static net.osmand.plus.settings.fragments.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
@@ -175,6 +176,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		List<File> renderFilesList = new ArrayList<>();
 		List<File> routingFilesList = new ArrayList<>();
 		List<File> multimediaFilesList = new ArrayList<>();
+		List<File> trackFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
@@ -194,6 +196,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 					routingFilesList.add(file);
 				} else if (file.getAbsolutePath().contains(AV_INDEX_DIR)) {
 					multimediaFilesList.add(file);
+				} else if (file.getAbsolutePath().contains(GPX_INDEX_DIR)) {
+					trackFilesList.add(file);
 				}
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
@@ -226,6 +230,10 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		if (!multimediaFilesList.isEmpty()) {
 			duplicates.add(getString(R.string.audionotes_plugin_name));
 			duplicates.addAll(multimediaFilesList);
+		}
+		if (!trackFilesList.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_tracks));
+			duplicates.addAll(trackFilesList);
 		}
 		if (!avoidRoads.isEmpty()) {
 			duplicates.add(getString(R.string.avoid_road));

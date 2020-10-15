@@ -14,6 +14,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.OsmandApplication;
@@ -131,6 +132,9 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				if (file.getAbsolutePath().contains(IndexConstants.RENDERERS_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+				}  else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
+					itemHolder.title.setText(GpxUiHelper.getGpxTitle(file.getName()));
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
 					int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);

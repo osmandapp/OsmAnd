@@ -110,6 +110,10 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_photo_dark, activeColorRes));
 				holder.title.setText(R.string.audionotes_plugin_name);
 				break;
+			case TRACKS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+				holder.title.setText(R.string.shared_string_tracks);
+				break;
 		}
 	}
 
