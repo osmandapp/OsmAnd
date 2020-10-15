@@ -50,8 +50,8 @@
     <string name="poi_internet_access">インターネット有り</string>
     <string name="poi_entertainment">レジャー</string>
     <string name="poi_club">クラブ</string>
-    <string name="poi_sustenance">食堂</string>
-    <string name="poi_cafe_and_restaurant">軽食</string>
+    <string name="poi_sustenance">飲食店</string>
+    <string name="poi_cafe_and_restaurant">カフェ・レストラン</string>
     <string name="poi_service">サービス</string>
     <string name="poi_craft">工芸</string>
     <string name="poi_finance">金融機関</string>
@@ -568,9 +568,9 @@
     <string name="poi_park">公園</string>
     <string name="poi_recreation_ground">レクリエーション広場</string>
     <string name="poi_village_green">共有地</string>
-    <string name="poi_cafe">喫茶店・カフェ</string>
+    <string name="poi_cafe">カフェ</string>
     <string name="poi_biergarten">ビアガーデン</string>
-    <string name="poi_restaurant">レストラン・食堂</string>
+    <string name="poi_restaurant">レストラン</string>
     <string name="poi_fast_food">ファーストフード</string>
     <string name="poi_bar">バー・立ち呑み屋</string>
     <string name="poi_food_court">フードコート</string>
@@ -1012,7 +1012,7 @@
     <string name="poi_entrance_main">正面玄関</string>
     <string name="poi_entrance">入り口</string>
     <string name="poi_entrance_exit">出口</string>
-    <string name="poi_highway_crossing">高速道路の横断歩道</string>
+    <string name="poi_highway_crossing">横断歩道</string>
     <string name="poi_opening_hours">営業時間</string>
     <string name="poi_collection_times">収集時間</string>
     <string name="poi_description">詳細</string>
@@ -3834,4 +3834,5 @@
     <string name="poi_borough">行政区</string>
     <string name="poi_give_box">ギブボックス(提供品置場)</string>
     <string name="poi_fire_hydrant_type_pipe">簡易給水栓</string>
+    <string name="poi_fuel_lng">液化天然ガス</string>
 </resources>
