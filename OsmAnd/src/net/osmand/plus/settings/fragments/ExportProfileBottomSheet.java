@@ -174,7 +174,6 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		super.onRightBottomButtonClick();
 		prepareFile();
 	}
 

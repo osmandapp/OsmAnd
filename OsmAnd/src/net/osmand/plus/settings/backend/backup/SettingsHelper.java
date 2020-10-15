@@ -14,7 +14,10 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
@@ -473,6 +476,19 @@ public class SettingsHelper {
 		if (!impassableRoads.isEmpty()) {
 			dataList.put(ExportSettingsType.AVOID_ROADS, new ArrayList<>(impassableRoads.values()));
 		}
+		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		if (plugin != null) {
+			List<File> files = new ArrayList<>();
+			for (Recording rec : plugin.getAllRecordings()) {
+				File file = rec.getFile();
+				if (file != null && file.exists()) {
+					files.add(file);
+				}
+			}
+			if (!files.isEmpty()) {
+				dataList.put(ExportSettingsType.MULTIMEDIA_NOTES, files);
+			}
+		}
 		return dataList;
 	}
 
@@ -522,6 +538,7 @@ public class SettingsHelper {
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<File> routingFilesList = new ArrayList<>();
 		List<File> renderFilesList = new ArrayList<>();
+		List<File> multimediaFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
@@ -534,6 +551,8 @@ public class SettingsHelper {
 						renderFilesList.add(fileItem.getFile());
 					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
 						routingFilesList.add(fileItem.getFile());
+					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.MULTIMEDIA_NOTES) {
+						multimediaFilesList.add(fileItem.getFile());
 					}
 					break;
 				case QUICK_ACTIONS:
@@ -593,6 +612,9 @@ public class SettingsHelper {
 		}
 		if (!avoidRoads.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.AVOID_ROADS, avoidRoads);
+		}
+		if (!multimediaFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.MULTIMEDIA_NOTES, multimediaFilesList);
 		}
 		return settingsToOperate;
 	}

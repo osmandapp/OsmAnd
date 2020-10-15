@@ -30,7 +30,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 		TILES_MAP("tiles_map", IndexConstants.TILES_INDEX_DIR),
 		GPX("gpx", IndexConstants.GPX_INDEX_DIR),
 		VOICE("voice", IndexConstants.VOICE_INDEX_DIR),
-		TRAVEL("travel", IndexConstants.WIKIVOYAGE_INDEX_DIR);
+		TRAVEL("travel", IndexConstants.WIKIVOYAGE_INDEX_DIR),
+		MULTIMEDIA_NOTES("multimedia_notes", IndexConstants.AV_INDEX_DIR);
 
 		private String subtypeName;
 		private String subtypeFolder;

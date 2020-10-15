@@ -11,6 +11,6 @@ public enum ExportSettingsType {
 	MARKERS,
 	FAVORITES,
 	TRACKS,
-	AUDIO_VIDEO_NOTES,
+	MULTIMEDIA_NOTES,
 	OSM_CHANGES
 }

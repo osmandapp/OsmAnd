@@ -106,6 +106,10 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_alert, activeColorRes));
 				holder.title.setText(R.string.avoid_road);
 				break;
+			case MULTIMEDIA_NOTES:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_photo_dark, activeColorRes));
+				holder.title.setText(R.string.audionotes_plugin_name);
+				break;
 		}
 	}
 
