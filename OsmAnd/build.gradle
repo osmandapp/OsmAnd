@@ -40,15 +40,6 @@ android {
 			keyAlias "osmand"
 			keyPassword System.getenv("OSMAND_APK_PASSWORD")
 		}
-
-		publishingHuawei {
-			storeFile file("/var/lib/jenkins/osmand_hw_key")
-			storePassword System.getenv("OSMAND_HW_APK_PASSWORD")
-			keyAlias "osmand"
-			keyPassword System.getenv("OSMAND_HW_APK_PASSWORD")
-			v1SigningEnabled true
-			v2SigningEnabled true
-		}
 	}
 
 	defaultConfig {
@@ -231,11 +222,7 @@ android {
 			signingConfig signingConfigs.development
 		}
 		release {
-			if (gradle.startParameter.taskNames.toString().contains("huawei")) {
-				signingConfig signingConfigs.publishingHuawei
-			} else {
-				signingConfig signingConfigs.publishing
-			}
+			signingConfig signingConfigs.publishing
 		}
 	}
 
