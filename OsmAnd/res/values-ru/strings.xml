@@ -3882,7 +3882,7 @@
     <string name="disable_recording_once_app_killed_descrp">Остановка записи GPX при принудительном закрытии (через последние приложения). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
     <string name="shared_string_is_saved">сохранен</string>
     <string name="one_point_error">Добавьте хотя бы две точки.</string>
-    <string name="shared_string_redo">ПОВТОРИТЬ</string>
+    <string name="shared_string_redo">Повторить</string>
     <string name="release_3_8">• Обновлённая функция планирования маршрута позволяет применять к сегментам разные режимы навигации и настраивать привязку к дорогам
 \n
 \n • Новые настройки вида треков: выбор цвета и толщины линии, указатели направления, метки начала и конца маршрута
@@ -3920,6 +3920,6 @@
     <string name="perform_oauth_authorization">Войти через OAuth</string>
     <string name="clear_osm_token">Очистить токен OAuth OpenStreetMap</string>
     <string name="osm_edit_logout_success">Выход выполнен</string>
-    <string name="shared_string_graph">»в 997777777:66666776666</string>
+    <string name="shared_string_graph">График</string>
     <string name="file_already_imported">Файл уже импортирован</string>
 </resources>
