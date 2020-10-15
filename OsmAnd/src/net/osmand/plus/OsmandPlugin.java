@@ -46,7 +46,6 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -499,6 +498,9 @@ public abstract class OsmandPlugin {
 	public void mapActivityResume(MapActivity activity) {
 	}
 
+	public void mapActivityResumeOnTop(MapActivity activity) {
+	}
+
 	public void mapActivityPause(MapActivity activity) {
 	}
 
@@ -749,6 +751,12 @@ public abstract class OsmandPlugin {
 	public static void onMapActivityResume(MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityResume(activity);
+		}
+	}
+
+	public static void onMapActivityResumeOnTop(MapActivity activity) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.mapActivityResumeOnTop(activity);
 		}
 	}
 

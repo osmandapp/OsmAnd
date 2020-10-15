@@ -110,13 +110,16 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		return items.size();
 	}
 
-	public int getItemPosition(String name) {
-		return items.indexOf(name);
+	public int getItemPositionByTitle(String title) {
+		return getItemPosition(getItemByTitle(title));
 	}
 
-	public void setSelectedItemByTitle(String selectedItemTitle) {
-		HorizontalSelectionItem selectedItem = getItemByTitle(selectedItemTitle);
-		setSelectedItem(selectedItem);
+	public int getItemPosition(HorizontalSelectionItem item) {
+		return items.indexOf(item);
+	}
+
+	public void setSelectedItemByTitle(String title) {
+		setSelectedItem(getItemByTitle(title));
 	}
 
 	public void setSelectedItem(HorizontalSelectionItem selectedItem) {
