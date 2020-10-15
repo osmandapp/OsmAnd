@@ -18,7 +18,6 @@ import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
-import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.OsmandApplication;
@@ -31,8 +30,10 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.*;
-import java.net.HttpURLConnection;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -107,16 +108,14 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			boolean doAuthenticate) {
 		log.info("Sending request " + url); //$NON-NLS-1$
 		try {
-			OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(ctx);
-			if (doAuthenticate) {
-				if (client.isValidToken()) {
-					Response response = client.performRequest(url, requestMethod, requestBody);
-					return response.getBody();
-				} else {
-					return performBasicAuthRequest(url, requestMethod, requestBody, userOperation);
-				}
-			} else {
-				Response response = client.performRequestWithoutAuth(url, requestMethod, requestBody);
+			if (doAuthenticate){
+				OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(ctx);
+				Response response = client.performRequest(url,requestMethod,requestBody);
+				return response.getBody();
+			}
+			else {
+				OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(ctx);
+				Response response = client.performRequestWithoutAuth(url,requestMethod,requestBody);
 				return response.getBody();
 			}
 		} catch (NullPointerException e) {
@@ -136,61 +135,16 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			log.error(userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
 			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
 					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
+		} catch (ExecutionException e) {
+			log.error(userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
+			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
+					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
 		} catch (Exception e) {
 			log.error(userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
 			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
 					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
 		}
 
-		return null;
-	}
-
-	private String performBasicAuthRequest(String url, String requestMethod, String requestBody, String userOperation) throws IOException {
-		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-		connection.setConnectTimeout(15000);
-		connection.setRequestMethod(requestMethod);
-		connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
-		StringBuilder responseBody = new StringBuilder();
-		String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
-		connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		connection.setDoInput(true);
-		if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			connection.setDoOutput(true);
-			connection.setRequestProperty("Content-type", "text/xml"); //$NON-NLS-1$ //$NON-NLS-2$
-			OutputStream out = connection.getOutputStream();
-			if (requestBody != null) {
-				BufferedWriter bwr = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"), 1024); //$NON-NLS-1$
-				bwr.write(requestBody);
-				bwr.flush();
-			}
-			out.close();
-		}
-		connection.connect();
-		if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-			String msg = userOperation
-					+ " " + ctx.getString(R.string.failed_op) + " : " + connection.getResponseMessage(); //$NON-NLS-1$//$NON-NLS-2$
-			log.error(msg);
-			showWarning(msg);
-		} else {
-			log.info("Response : " + connection.getResponseMessage()); //$NON-NLS-1$
-			// populate return fields.
-			responseBody.setLength(0);
-			InputStream i = connection.getInputStream();
-			if (i != null) {
-				BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256); //$NON-NLS-1$
-				String s;
-				boolean f = true;
-				while ((s = in.readLine()) != null) {
-					if (!f) {
-						responseBody.append("\n"); //$NON-NLS-1$
-					} else {
-						f = false;
-					}
-					responseBody.append(s);
-				}
-			}
-			return responseBody.toString();
-		}
 		return null;
 	}
 
