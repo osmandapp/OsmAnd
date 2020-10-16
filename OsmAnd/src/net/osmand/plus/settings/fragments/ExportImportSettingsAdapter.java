@@ -23,6 +23,9 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
@@ -153,6 +156,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		TextView title = child.findViewById(R.id.title_tv);
 		TextView subText = child.findViewById(R.id.sub_title_tv);
+		subText.setVisibility(View.GONE);
 		final CheckBox checkBox = child.findViewById(R.id.check_box);
 		ImageView icon = child.findViewById(R.id.icon);
 		View lineDivider = child.findViewById(R.id.divider);
@@ -197,9 +201,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 						LOG.error("Error trying to get routing resource for " + routingProfileValue + "\n" + e);
 					}
 				}
-				if (Algorithms.isEmpty(routingProfile)) {
-					subText.setVisibility(View.GONE);
-				} else {
+				if (!Algorithms.isEmpty(routingProfile)) {
 					subText.setText(String.format(
 							app.getString(R.string.ltr_or_rtl_combine_via_colon),
 							app.getString(R.string.nav_type_hint),
@@ -213,38 +215,32 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			case QUICK_ACTIONS:
 				title.setText(((QuickAction) currentItem).getName(app.getApplicationContext()));
 				setupIcon(icon, ((QuickAction) currentItem).getIconRes(), itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case POI_TYPES:
 				title.setText(((PoiUIFilter) currentItem).getName());
 				int iconRes = RenderingIcons.getBigIconResourceId(((PoiUIFilter) currentItem).getIconId());
 				setupIcon(icon, iconRes != 0 ? iconRes : R.drawable.ic_action_user, itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case MAP_SOURCES:
 				title.setText(((ITileSource) currentItem).getName());
 				setupIcon(icon, R.drawable.ic_map, itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case CUSTOM_RENDER_STYLE:
 				String renderName = ((File) currentItem).getName();
 				renderName = renderName.replace('_', ' ').replaceAll(IndexConstants.RENDERER_INDEX_EXT, "");
 				title.setText(renderName);
 				setupIcon(icon, R.drawable.ic_action_map_style, itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case CUSTOM_ROUTING:
 				String routingName = ((File) currentItem).getName();
 				routingName = routingName.replace('_', ' ').replaceAll(".xml", "");
 				title.setText(routingName);
 				setupIcon(icon, R.drawable.ic_action_route_distance, itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case AVOID_ROADS:
 				AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) currentItem;
 				title.setText(avoidRoadInfo.name);
 				setupIcon(icon, R.drawable.ic_action_alert, itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case MULTIMEDIA_NOTES:
 				File file = (File) currentItem;
@@ -254,13 +250,19 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 					iconId = R.drawable.ic_action_photo_dark;
 				}
 				setupIcon(icon, iconId, itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case TRACKS:
 				String fileName = ((File) currentItem).getName();
 				title.setText(GpxUiHelper.getGpxTitle(fileName));
 				setupIcon(icon, R.drawable.ic_action_route_distance, itemSelected);
-				subText.setVisibility(View.GONE);
+				break;
+			case OSM_NOTES:
+				title.setText(((OsmNotesPoint) currentItem).getText());
+				setupIcon(icon, R.drawable.ic_action_osm_note_add, itemSelected);
+				break;
+			case OSM_EDITS:
+				title.setText(OsmEditingPlugin.getTitle((OpenstreetmapPoint) currentItem, app));
+				setupIcon(icon, R.drawable.ic_action_info_dark, itemSelected);
 				break;
 			default:
 				return child;
@@ -338,6 +340,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.shared_string_tracks;
 			case MULTIMEDIA_NOTES:
 				return R.string.audionotes_plugin_name;
+			case OSM_NOTES:
+				return R.string.osm_notes;
+			case OSM_EDITS:
+				return R.string.osm_edit_modified_poi;
 			default:
 				return R.string.access_empty_list;
 		}

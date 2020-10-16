@@ -75,6 +75,20 @@ public class OpenstreetmapPoint extends OsmPoint {
 		this.comment = comment;
 	}
 
+	public String getTagsString() {
+		StringBuilder sb = new StringBuilder();
+		for (String tag : entity.getTagKeySet()) {
+			String val = entity.getTag(tag);
+			if (entity.isNotValid(tag)) {
+				continue;
+			}
+			sb.append(tag).append(" : ");
+			sb.append(val).append("; ");
+		}
+		return sb.toString();
+	}
+
+
 	@Override
 	public String toString() {
 		return new StringBuffer("Openstreetmap Point ").append(this.getAction()).append(" ").append(this.getName())

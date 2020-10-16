@@ -114,6 +114,8 @@ public abstract class Entity implements Serializable {
 	public static final int MODIFY_DELETED = -1;
 	public static final int MODIFY_MODIFIED = 1;
 	public static final int MODIFY_CREATED = 2;
+	public static final String POI_TYPE_TAG = "poi_type_tag";
+	public static final String REMOVE_TAG_PREFIX = "----";
 
 	public Entity(long id) {
 		this.id = id;
@@ -241,6 +243,11 @@ public abstract class Entity implements Serializable {
 		return Collections.unmodifiableMap(tags);
 	}
 
+	public boolean isNotValid(String tag) {
+		String val = getTag(tag);
+		return val == null || val.length() == 0 || tag.length() == 0
+				|| tag.startsWith(REMOVE_TAG_PREFIX) || tag.equals(POI_TYPE_TAG);
+	}
 
 	public Collection<String> getTagKeySet() {
 		if (tags == null) {

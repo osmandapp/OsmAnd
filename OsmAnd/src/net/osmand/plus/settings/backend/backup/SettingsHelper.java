@@ -21,6 +21,9 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -505,6 +508,17 @@ public class SettingsHelper {
 				dataList.put(ExportSettingsType.TRACKS, files);
 			}
 		}
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (osmEditingPlugin != null) {
+			List<OsmNotesPoint> notesPointList = osmEditingPlugin.getDBBug().getOsmbugsPoints();
+			if (!notesPointList.isEmpty()) {
+				dataList.put(ExportSettingsType.OSM_NOTES, notesPointList);
+			}
+			List<OpenstreetmapPoint> editsPointList = osmEditingPlugin.getDBPOI().getOpenstreetmapPoints();
+			if (!editsPointList.isEmpty()) {
+				dataList.put(ExportSettingsType.OSM_EDITS, editsPointList);
+			}
+		}
 		return dataList;
 	}
 
@@ -514,6 +528,9 @@ public class SettingsHelper {
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
+		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
+
 		for (Object object : data) {
 			if (object instanceof QuickAction) {
 				quickActions.add((QuickAction) object);
@@ -529,6 +546,10 @@ public class SettingsHelper {
 				}
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
+			} else if (object instanceof OsmNotesPoint) {
+				osmNotesPointList.add((OsmNotesPoint) object);
+			} else if (object instanceof OpenstreetmapPoint) {
+				osmEditsPointList.add((OpenstreetmapPoint) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
@@ -542,6 +563,12 @@ public class SettingsHelper {
 		}
 		if (!avoidRoads.isEmpty()) {
 			settingsItems.add(new AvoidRoadsSettingsItem(app, avoidRoads));
+		}
+		if (!osmNotesPointList.isEmpty()) {
+			settingsItems.add(new OsmNotesSettingsItem(app, osmNotesPointList));
+		}
+		if (!osmEditsPointList.isEmpty()) {
+			settingsItems.add(new OsmEditsSettingsItem(app, osmEditsPointList));
 		}
 		return settingsItems;
 	}
@@ -557,6 +584,8 @@ public class SettingsHelper {
 		List<File> multimediaFilesList = new ArrayList<>();
 		List<File> tracksFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<OsmNotesPoint> notesPointList = new ArrayList<>();
+		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
 				case PROFILE:
@@ -606,6 +635,22 @@ public class SettingsHelper {
 						avoidRoads.addAll(avoidRoadsItem.getItems());
 					}
 					break;
+				case OSM_NOTES:
+					OsmNotesSettingsItem osmNotesSettingsItem = (OsmNotesSettingsItem) item;
+					if (importComplete) {
+						notesPointList.addAll(osmNotesSettingsItem.getAppliedItems());
+					} else {
+						notesPointList.addAll(osmNotesSettingsItem.getItems());
+					}
+					break;
+				case OSM_EDITS:
+					OsmEditsSettingsItem osmEditsSettingsItem = (OsmEditsSettingsItem) item;
+					if (importComplete) {
+						editsPointList.addAll(osmEditsSettingsItem.getAppliedItems());
+					} else {
+						editsPointList.addAll(osmEditsSettingsItem.getItems());
+					}
+					break;
 				default:
 					break;
 			}
@@ -637,6 +682,12 @@ public class SettingsHelper {
 		}
 		if (!tracksFilesList.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.TRACKS, tracksFilesList);
+		}
+		if (!notesPointList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.OSM_NOTES, notesPointList);
+		}
+		if (!editsPointList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.OSM_NOTES, editsPointList);
 		}
 		return settingsToOperate;
 	}

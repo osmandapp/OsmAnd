@@ -17,5 +17,6 @@ public enum SettingsItemType {
 	FAVORITES,
 	TRACKS,
 	AUDIO_VIDEO_NOTES,
-	OSM_CHANGES
+	OSM_NOTES,
+	OSM_EDITS
 }

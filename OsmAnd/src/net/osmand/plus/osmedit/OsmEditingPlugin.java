@@ -5,17 +5,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -526,6 +532,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		} else {
 			return prefix;
 		}
+	}
+
+	public static SpannableString getTitle(OsmPoint osmPoint, Context ctx) {
+		SpannableString title = new SpannableString(getName(osmPoint));
+		if (TextUtils.isEmpty(title)) {
+			title = SpannableString.valueOf(getCategory(osmPoint, ctx));
+			title.setSpan(new StyleSpan(Typeface.ITALIC), 0, title.length(), 0);
+		}
+		return title;
 	}
 
 	public static String getName(OsmPoint point) {
