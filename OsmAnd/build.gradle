@@ -523,4 +523,5 @@ dependencies {
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
 
 	freehuaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
+	freehuaweiImplementation 'com.huawei.hms:game:5.0.3.301'
 }
