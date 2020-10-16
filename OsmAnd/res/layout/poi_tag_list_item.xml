@@ -21,6 +21,7 @@
             android:id="@+id/tagEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="@dimen/wpt_list_item_height"
             android:hint="@string/hint_tag"
             tools:text="Tag text"/>
 
@@ -36,6 +37,7 @@
             android:id="@+id/valueEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="@dimen/wpt_list_item_height"
             android:hint="@string/hint_value"
             tools:text="Value text"/>
 
