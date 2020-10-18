@@ -313,6 +313,20 @@ public class MeasurementEditingContext {
 		return before.points.size();
 	}
 
+	public List<RouteSegmentResult> getAllRouteSegments() {
+		List<RouteSegmentResult> allSegments = new ArrayList<>();
+		for (Pair<WptPt, WptPt> key : getOrderedRoadSegmentDataKeys()) {
+			RoadSegmentData data = roadSegmentData.get(key);
+			if (data != null) {
+				List<RouteSegmentResult> segments = data.getSegments();
+				if (segments != null) {
+					allSegments.addAll(segments);
+				}
+			}
+		}
+		return allSegments.size() > 0 ? allSegments : null;
+	}
+
 	void splitSegments(int position) {
 		List<WptPt> points = new ArrayList<>();
 		points.addAll(before.points);
@@ -431,6 +445,16 @@ public class MeasurementEditingContext {
 			}
 		}
 		return res;
+	}
+
+	private List<Pair<WptPt, WptPt>> getOrderedRoadSegmentDataKeys() {
+		List<Pair<WptPt, WptPt>> keys = new ArrayList<>();
+		for (List<WptPt> points : Arrays.asList(before.points, after.points)) {
+			for (int i = 0; i < points.size() - 1; i++) {
+				keys.add(new Pair<>(points.get(i), points.get(i + 1)));
+			}
+		}
+		return keys;
 	}
 
 	private void recreateCacheForSnap(TrkSegment cache, TrkSegment original, boolean calculateIfNeeded) {

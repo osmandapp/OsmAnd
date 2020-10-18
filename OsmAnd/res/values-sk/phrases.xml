@@ -3653,4 +3653,15 @@
     <string name="poi_sms_no">Nie</string>
     <string name="poi_sms_yes">Áno</string>
     <string name="poi_taxi_office">Kancelária taxislužby</string>
+    <string name="poi_cash_withdrawal_postbank">Postbank</string>
+    <string name="poi_surface_decoturf">DecoTurf</string>
+    <string name="poi_health_specialty_podology_yes">Podológia</string>
+    <string name="poi_health_specialty_obstetrics_caesarean_section_no">Zdravotná špecializácia: pôrodníctvo (cisársky rez): nie</string>
+    <string name="poi_health_specialty_social_paediatrics_no">Zdravotná špecializácia: sociálna pediatria: nie</string>
+    <string name="poi_health_specialty_social_paediatrics_yes">Sociálna pediatria</string>
+    <string name="poi_health_specialty_obstetrics_antenatal_no">Zdravotná špecializácia: pôrodníctvo (prenatálne): nie</string>
+    <string name="poi_health_specialty_obstetrics_antenatal_yes">Pôrodníctvo (prenatálne)</string>
+    <string name="poi_health_specialty_obstetrics_postnatal_no">Zdravotná špecializácia: pôrodníctvo (postnatálne): nie</string>
+    <string name="poi_wetland_palsa_bog">Rašelinisko</string>
+    <string name="poi_wetland_fen">Slatina</string>
 </resources>

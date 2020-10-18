@@ -873,4 +873,14 @@ interface IOsmAndAidlInterface {
     boolean setMapMargins(in MapMarginsParams params);
 
     boolean exportProfile(in ExportProfileParams params);
+
+     /**
+     * Is any fragment open.
+     */
+    boolean isFragmentOpen();
+
+    /**
+    * Is contect menu open.
+    */
+    boolean isMenuOpen();
 }

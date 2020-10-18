@@ -823,7 +823,7 @@ public class MapPoiTypes {
 		}
 		String name = keyName;
 		name = name.replace('_', ' ');
-		return Algorithms.capitalizeFirstLetterAndLowercase(name);
+		return Algorithms.capitalizeFirstLetter(name);
 	}
 
 	public boolean isRegisteredType(PoiCategory t) {

@@ -3837,4 +3837,5 @@
     <string name="poi_departures_board_delay">prokrasto</string>
     <string name="poi_departures_board">Tabulo de forveturoj</string>
     <string name="poi_drinking_water_refill">Plenigi per trinkebla akvo</string>
+    <string name="poi_fuel_lng">tergaso likva (LNG)</string>
 </resources>

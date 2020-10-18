@@ -494,6 +494,9 @@ public abstract class OsmandPlugin {
 	public void mapActivityResume(MapActivity activity) {
 	}
 
+	public void mapActivityResumeOnTop(MapActivity activity) {
+	}
+
 	public void mapActivityPause(MapActivity activity) {
 	}
 
@@ -744,6 +747,12 @@ public abstract class OsmandPlugin {
 	public static void onMapActivityResume(MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityResume(activity);
+		}
+	}
+
+	public static void onMapActivityResumeOnTop(MapActivity activity) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.mapActivityResumeOnTop(activity);
 		}
 	}
 
