@@ -230,6 +230,9 @@ android {
 			buildConfigField "String", "OSM_OAUTH_CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
 			buildConfigField "String", "OSM_OAUTH_CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
 			signingConfig signingConfigs.development
+			debuggable false
+			jniDebuggable false
+			buildConfigField "boolean", "USE_DEBUG_LIBRARIES", "false"
 		}
 		release {
 			buildConfigField "String", "OSM_OAUTH_CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
