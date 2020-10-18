@@ -927,10 +927,10 @@ POIの更新は利用できません</string>
     <string name="free_version_message">このOsmAnd 無料版はダウンロード数が%1$s個に制限されており、オフラインでのWikipedia記事利用もサポートしていません。</string>
     <string name="free_version_title">無料版</string>
     <string name="poi_context_menu_showdescription">POIの説明文を表示</string>
-    <string name="index_name_north_america">北米</string>
+    <string name="index_name_north_america">北アメリカ</string>
     <string name="index_name_us">アメリカ合衆国</string>
-    <string name="index_name_central_america">中米</string>
-    <string name="index_name_south_america">南米</string>
+    <string name="index_name_central_america">中央アメリカ</string>
+    <string name="index_name_south_america">南アメリカ</string>
     <string name="index_name_europe">ヨーロッパ</string>
     <string name="index_name_france">ヨーロッパ - フランス</string>
     <string name="index_name_germany">ヨーロッパ - ドイツ</string>
@@ -1936,7 +1936,7 @@ POIの更新は利用できません</string>
     <string name="app_mode_bus">バス</string>
     <string name="app_mode_train">鉄道</string>
     <string name="current_track">現在の経路</string>
-    <string name="map_widget_battery">バッテリーレベル</string>
+    <string name="map_widget_battery">バッテリー残量</string>
     <string name="change_markers_position">マーカーの位置を変更</string>
     <string name="move_marker_bottom_sheet_title">マップ画面のドラッグでマーカー位置を調整できます</string>
     <!-- string name="lat_lon_pattern">"緯度:%1$.5f  経度:%2$.5f"</string -->
@@ -3912,4 +3912,6 @@ POIの更新は利用できません</string>
     <string name="use_live_routing">OsmAnd Liveデータ</string>
     <string name="use_complex_routing">複雑なルート計算</string>
     <string name="complex_routing_descr">カーナビゲーション向けの2段階ルート計算です。</string>
+    <string name="use_two_phase_routing">2段階 A*ルーティングアルゴリズムを使用</string>
+    <string name="file_already_imported">ファイルはすでにOsmAndにインポートされています</string>
 </resources>

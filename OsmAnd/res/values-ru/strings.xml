@@ -1336,7 +1336,7 @@
     <string name="local_index_tile_data_name">Данные о тайлах: %1$s</string>
     <string name="base_world_map">Обзорная карта мира</string>
     <string name="edit_tilesource_expiration_time">Время действия (в минутах)</string>
-    <string name="app_mode_aircraft">Самолёт</string>
+    <string name="app_mode_aircraft">Воздушное судно</string>
     <string name="app_mode_boat">Лодка</string>
     <string name="app_mode_hiking">Пеший туризм</string>
     <string name="app_mode_motorcycle">Мотоцикл</string>
@@ -3242,8 +3242,8 @@
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="plugins_settings">Настройки плагинов</string>
     <string name="language_and_output">Язык и вывод</string>
-    <string name="change_data_storage_full_description">Переместить файлы данных OsmAnd в новое место назначения\? 
-\n%1$s &gt; %2$s</string>
+    <string name="change_data_storage_full_description">Переместить файлы данных OsmAnd в новое место назначения\?
+\n%1$s → %2$s</string>
     <string name="shared_string_by_default">По умолчанию</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s ГБ свободно (из %2$s ГБ)</string>
@@ -3349,7 +3349,7 @@
     <string name="select_color">Выберите цвет</string>
     <string name="edit_profiles_descr">Вы не можете удалить стандартные профили OsmAnd, но вы можете отключить их на предыдущем экране или переместить вниз.</string>
     <string name="edit_profiles">Редактировать профили</string>
-    <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчета маршрутов.</string>
+    <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчёта маршрутов.</string>
     <string name="profile_appearance">Внешний вид профиля</string>
     <string name="choose_icon_color_name">Значок, цвет и имя</string>
     <string name="reorder_profiles">Редактировать список профилей</string>
@@ -3580,7 +3580,7 @@
     <string name="monitoring_min_speed_descr_remark">Примечание: проверка скорости &gt; 0: большинство модулей GPS сообщают значение скорости только в том случае, если алгоритм определяет, что вы движетесь, и ничего, если вы не перемещаетесь. Следовательно, использование параметра &gt; 0 в этом фильтре в некотором смысле приводит к обнаружению факта перемещения модуля GPS. Но даже если мы не производим данную фильтрацию во время записи, то всё равно эта функция используется при анализе GPX для определения скорректированного расстояния, то есть значение, отображаемое в этом поле, является расстоянием, записанным во время движения.</string>
     <string name="multimedia_rec_split_title">Разделение записи</string>
     <string name="live_monitoring_adress_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
-    <string name="monitoring_min_accuracy_descr">"Будут записываться только точки, отвечающие по показателю минимальной точности (в метрах или футах — зависит от настроек системы).  Точность — это близость измерений к истинному положению, и она не связана напрямую с точностью, которая представляет собой разброс повторных измерений."</string>
+    <string name="monitoring_min_accuracy_descr">Будут записываться только точки, отвечающие по показателю минимальной точности (в метрах или футах — зависит от настроек системы). Точность — это близость измерений к истинному положению, и она не связана напрямую с точностью, которая представляет собой разброс повторных измерений.</string>
     <string name="monitoring_min_speed_descr_recommendation">Рекомендация: попробуйте сначала воспользоваться детектором движения через фильтр минимального смещения (B), что может дать лучшие результаты и вы потеряете меньше данных. Если треки остаются шумными на низких скоростях, попробуйте использовать ненулевые значения. Обратите внимание, что некоторые измерения могут вообще не указывать значения скорости (некоторые сетевые методы), и в этом случае ничего не будет записываться.</string>
     <string name="slope_description">Для визуализации крутизны рельефа используются цвета.</string>
     <string name="slope_read_more">Подробнее об уклонах можно прочитать в %1$s.</string>
@@ -3882,7 +3882,7 @@
     <string name="disable_recording_once_app_killed_descrp">Остановка записи GPX при принудительном закрытии (через последние приложения). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
     <string name="shared_string_is_saved">сохранен</string>
     <string name="one_point_error">Добавьте хотя бы две точки.</string>
-    <string name="shared_string_redo">ПОВТОРИТЬ</string>
+    <string name="shared_string_redo">Повторить</string>
     <string name="release_3_8">• Обновлённая функция планирования маршрута позволяет применять к сегментам разные режимы навигации и настраивать привязку к дорогам
 \n
 \n • Новые настройки вида треков: выбор цвета и толщины линии, указатели направления, метки начала и конца маршрута
@@ -3906,9 +3906,9 @@
     <string name="routing_attr_avoid_footways_description">Избегать пешеходных дорожек</string>
     <string name="routing_attr_avoid_footways_name">Избегать пешеходных дорожек</string>
     <string name="osm_live_payment_desc_hw">Подписка взимается за выбранный период. Отмените её в AppGallery в любое время.</string>
-    <string name="osm_live_payment_subscription_management_hw">Оплата будет снята с вашей учетной записи AppGallery при подтверждении покупки.
+    <string name="osm_live_payment_subscription_management_hw">Оплата будет снята с вашей учётной записи AppGallery при подтверждении покупки.
 \n
-\nПодписка продлевается автоматически, если она не будет отменена до даты продления. С вашего счета будет взиматься плата за период продления (месяц/три месяца/год) только в дату продления.
+\nПодписка продлевается автоматически, если она не будет отменена до даты продления. С вашего счёта будет взиматься плата за период продления (месяц/три месяца/год) только в дату продления.
 \n
 \nВы можете управлять своими подписками и отменять их, перейдя в настройки AppGallery.</string>
     <string name="use_live_public_transport">Данные OsmAnd Live</string>
@@ -3920,4 +3920,8 @@
     <string name="perform_oauth_authorization">Войти через OAuth</string>
     <string name="clear_osm_token">Очистить токен OAuth OpenStreetMap</string>
     <string name="osm_edit_logout_success">Выход выполнен</string>
+    <string name="shared_string_graph">График</string>
+    <string name="file_already_imported">Файл уже импортирован</string>
+    <string name="message_graph_will_be_available_after_recalculation">Дождитесь пересчёта маршрута.
+\nГрафик будет доступен после пересчёта.</string>
 </resources>

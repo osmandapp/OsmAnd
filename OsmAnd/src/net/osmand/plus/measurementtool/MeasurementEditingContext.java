@@ -314,71 +314,17 @@ public class MeasurementEditingContext {
 	}
 
 	public List<RouteSegmentResult> getAllRouteSegments() {
-		// prepare data for sorting
-		List<TmpRouteSegmentData> fullList = new ArrayList<>();
-		for (Map.Entry<Pair<WptPt, WptPt>, RoadSegmentData> entry : roadSegmentData.entrySet()) {
-			fullList.add(new TmpRouteSegmentData(
-					entry.getKey().first,
-					entry.getKey().second,
-					entry.getValue().getSegments()));
-		}
-		// sorting data by connecting together
-		while (fullList.size() > 1) {
-			TmpRouteSegmentData firstInList = fullList.get(0);
-			for (int i = 1; i < fullList.size(); i++) {
-				TmpRouteSegmentData other = fullList.get(i);
-				boolean isMatched = false;
-
-				if (firstInList.isAfterOf(other)) {
-					isMatched = true;
-					firstInList.joinBefore(other);
-				} else if (firstInList.isBeforeOf(other)) {
-					isMatched = true;
-					firstInList.joinAfter(other);
-				}
-
-				if (isMatched) {
-					fullList.remove(other);
-					break;
+		List<RouteSegmentResult> allSegments = new ArrayList<>();
+		for (Pair<WptPt, WptPt> key : getOrderedRoadSegmentDataKeys()) {
+			RoadSegmentData data = roadSegmentData.get(key);
+			if (data != null) {
+				List<RouteSegmentResult> segments = data.getSegments();
+				if (segments != null) {
+					allSegments.addAll(segments);
 				}
 			}
 		}
-		return fullList.size() > 0 ? fullList.get(0).getRouteSegments() : null;
-	}
-
-	private static class TmpRouteSegmentData {
-		private WptPt start;
-		private WptPt end;
-		private List<RouteSegmentResult> routeSegments;
-
-		public TmpRouteSegmentData(WptPt start, WptPt end,
-		                           List<RouteSegmentResult> routeSegments) {
-			this.start = start;
-			this.end = end;
-			this.routeSegments = new ArrayList<>(routeSegments);
-		}
-
-		boolean isAfterOf(TmpRouteSegmentData other) {
-			return Algorithms.objectEquals(this.start, other.end);
-		}
-
-		boolean isBeforeOf(TmpRouteSegmentData other) {
-			return Algorithms.objectEquals(this.end, other.start);
-		}
-
-		void joinAfter(TmpRouteSegmentData other) {
-			end = other.end;
-			routeSegments.addAll(other.routeSegments);
-		}
-
-		void joinBefore(TmpRouteSegmentData other) {
-			start = other.start;
-			routeSegments.addAll(0, other.routeSegments);
-		}
-
-		public List<RouteSegmentResult> getRouteSegments() {
-			return routeSegments;
-		}
+		return allSegments.size() > 0 ? allSegments : null;
 	}
 
 	void splitSegments(int position) {
@@ -499,6 +445,16 @@ public class MeasurementEditingContext {
 			}
 		}
 		return res;
+	}
+
+	private List<Pair<WptPt, WptPt>> getOrderedRoadSegmentDataKeys() {
+		List<Pair<WptPt, WptPt>> keys = new ArrayList<>();
+		for (List<WptPt> points : Arrays.asList(before.points, after.points)) {
+			for (int i = 0; i < points.size() - 1; i++) {
+				keys.add(new Pair<>(points.get(i), points.get(i + 1)));
+			}
+		}
+		return keys;
 	}
 
 	private void recreateCacheForSnap(TrkSegment cache, TrkSegment original, boolean calculateIfNeeded) {

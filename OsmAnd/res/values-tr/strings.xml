@@ -8,7 +8,7 @@
     <string name="enable_plugin_monitoring_services">Konum günlüğü hizmetlerini kullanmak için \"Yolculuk kaydı\" eklentisini etkinleştirin (GPX günlüğü, çevrim içi izleme)</string>
     <string name="non_optimal_route_calculation">Uzak hedefler için tahmini rotayı hesapla</string>
     <string name="gps_not_available">Lütfen GPS\'yi ayarlardan açık konuma getirin</string>
-    <string name="map_widget_monitoring_services">Log servisi</string>
+    <string name="map_widget_monitoring_services">Günlük kayıt hizmetleri</string>
     <string name="no_route">Rota yok</string>
     <string name="delete_target_point">Varış Noktasını kaldır</string>
     <string name="target_point">Varış noktası %1$s</string>
@@ -78,7 +78,7 @@
     <string name="safe_mode_description">Uygulamayı güvenli modda çalıştırın (yerel kod yerine daha yavaş Android kullanarak).</string>
     <string name="safe_mode">Güvenli kip</string>
     <string name="native_library_not_running">Uygulama güvenli modda çalışıyor (\'Ayarlar\'dan kapatın).</string>
-    <string name="background_service_is_enabled_question">OsmAnd arka plan hizmeti hala çalışıyor. Onu da durdur\?</string>
+    <string name="background_service_is_enabled_question">OsmAnd arka plan hizmeti hala çalışıyor. O da durdurulsun mu\?</string>
     <string name="local_indexes_cat_av">Ses/Video verisi</string>
     <string name="stop_routing_confirm">Navigasyonu durdurmak istediğinizden emin misiniz\?</string>
     <string name="clear_dest_confirm">Hedefi (ve ara hedefleri) temizlemek istediğinizden emin misiniz\?</string>
@@ -837,7 +837,7 @@
     <string name="background_service_provider">Konum sağlayıcı</string>
     <string name="background_router_service_descr">Ekran kapalıyken konumunuzu izler.</string>
     <string name="background_router_service">Arka planda Osmand başlat</string>
-    <string name="off_router_service_no_gps_available">Arka plan navigasyon hizmeti açık olması bir konum sağlayıcı gerektirir.</string>
+    <string name="off_router_service_no_gps_available">Arka plan navigasyon hizmeti, bir konum sağlayıcının açık olmasını gerektirir.</string>
     <string name="hide_poi_filter">Süzgeci gizle</string>
     <string name="show_poi_filter">Süzgeci göster</string>
     <string name="search_poi_filter">Süzgeç</string>
@@ -881,7 +881,7 @@
     <string name="hint_search_online">Çevrim içi arama: Ev numarası, sokak, şehir</string>
     <string name="search_offline_address">Çevrim dışı arama</string>
     <string name="route_general_information">Toplam uzaklık %1$s, seyahat süresi %2$d s %3$d dak.</string>
-    <string name="router_service_descr">Çevrim içi veya çevrim dışı navigasyon servisi.</string>
+    <string name="router_service_descr">Çevrim içi veya çevrim dışı navigasyon hizmeti.</string>
     <string name="sd_dir_not_accessible">Bellek kartındaki depolama klasörüne erişilemiyor!</string>
     <string name="download_question">{0} - {1} indir ?</string>
     <string name="download_question_exist">{0} için çevrim dışı veri zaten var ({1}). ({2}) güncellensin mi\?</string>
@@ -1065,7 +1065,7 @@
     <string name="try_again">Tekrar deneyin</string>
     <string name="archive_wikipedia_data">Eski uyumsuz Wikipedia verileriniz var. Arşivle\?</string>
     <string name="download_wikipedia_files">Ekstra Wikipedia verilerini indir (%1$s MB)\?</string>
-    <string name="gps_network_not_enabled">Konum servisi kapalı. Aç\?</string>
+    <string name="gps_network_not_enabled">Konum hizmeti kapalı. Açılsın mı\?</string>
     <string name="shared_string_show_details">Ayrıntıları göster</string>
     <string name="rendering_value_disabled_name">Devre dışı</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ev kapı numaraları</string>
@@ -1457,8 +1457,8 @@
     <string name="layer_osm_bugs">OSM notları (çevrim içi)</string>
     <string name="use_trackball_descr">Haritayı hareket ettirmek için bir izleme topu aygıtı kullanın.</string>
     <string name="use_trackball">İzleme topu kullan</string>
-    <string name="background_service_int_descr">Arka plan servisi tarafından kullanılan uyanma aralığı:</string>
-    <string name="background_service_provider_descr">Arka plan servisi tarafından kullanılan konum yöntemi:</string>
+    <string name="background_service_int_descr">Arka plan hizmeti tarafından kullanılan uyanma aralığı:</string>
+    <string name="background_service_provider_descr">Arka plan hizmeti tarafından kullanılan konum yöntemi:</string>
     <string name="route_head">Düz gidin</string>
     <string name="map_screen_orientation">Ekran yönlendirme</string>
     <string name="no_address_found">Hiçbir adres belirlenmedi</string>
@@ -1466,9 +1466,9 @@
     <string name="transport_context_menu">Durakta ulaşım aracı ara</string>
     <string name="rotate_map_to_bearing">Harita yönlendirme</string>
     <string name="version_index_is_not_supported">\'\'{0}\'\' indeks sürümü desteklenmemektedir</string>
-    <string name="osmand_routing_experimental">OsmAnd çevrim dışı navigasyon deneysel bir özelliktir ve yaklaşık 20 km\'den daha uzun mesafelerde çalışmaz. 
-\n 
-\nNavigasyon geçici olarak çevrim içi CloudMade servisine geçti.</string>
+    <string name="osmand_routing_experimental">OsmAnd çevrim dışı navigasyon deneysel bir özelliktir ve yaklaşık 20 km\'den daha uzun mesafelerde çalışmaz.
+\n
+\nNavigasyon geçici olarak çevrim içi CloudMade hizmetine geçti.</string>
     <string name="install_selected_build">OsmAnd Yükle - {1} {2} üzerinden {0} MB \?</string>
     <string name="tiles_to_download_estimated_size">Yakınlaştırma {0} indirmek {1} fayans ({2} MB)</string>
     <string name="select_max_zoom_preload_area">Önceden yükleme için en fazla yakınlaştırma</string>
@@ -1595,7 +1595,7 @@
     <string name="lang_eu">Baskça</string>
     <string name="lang_be">Belarusça</string>
     <string name="lang_bs">Boşnakça</string>
-    <string name="use_points_as_intermediates">Noktalar arasındaki rotayı hesaplamak</string>
+    <string name="use_points_as_intermediates">Noktalar arasındaki güzergahı hesapla</string>
     <string name="always_center_position_on_map">Konumu sürekli ortada tut</string>
     <string name="voice_pref_title">Ses</string>
     <string name="misc_pref_title">Çeşitli</string>
@@ -1791,7 +1791,7 @@
     <string name="lang_sw">Svahili dili</string>
     <string name="lang_he">İbranice</string>
     <string name="forward">İleri</string>
-    <string name="live_monitoring_m_descr">GPX kaydı açıksa, izleme verilerini belirtilen bir web servisine gönder.</string>
+    <string name="live_monitoring_m_descr">GPX kaydı açıksa, izleme verilerini belirtilen bir web hizmetine gönder.</string>
     <string name="live_monitoring_m">Online izleme (GPX gerekli)</string>
     <string name="live_monitoring_start">Online izleme başlat</string>
     <string name="live_monitoring_stop">Online izleme durdurun</string>
@@ -2282,7 +2282,7 @@
     <string name="show_passed">Geçilmiş-olanı göster</string>
     <string name="hide_passed">Geçilmiş-olanı gizle</string>
     <string name="marker_show_distance_descr">Haritada harita işaretleyicilerine olan uzaklık ve yönün nasıl belirtileceğini seçin:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Harita oryantasyon eşiği</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Harita yönlendirme eşiği</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Harita yönünün \'Hareket yönü\'nden \'Pusula yönü\'ne geçiş hızını aşağıdan seçin.</string>
     <string name="save_as_route_point">Rota noktaları olarak kaydet</string>
     <string name="add_point_before">Öncesinde nokta ekle</string>
@@ -2362,7 +2362,7 @@
     <string name="shared_string_explore">Gezin</string>
     <string name="shared_string_contents">İçerikler</string>
     <string name="shared_string_result">Sonuç</string>
-    <string name="shared_string_travel_guides">Seyehat</string>
+    <string name="shared_string_travel_guides">Seyahat rehberleri</string>
     <string name="shared_string_total">Toplam</string>
     <string name="clear_all_intermediates">Tüm başlangıç noktalarını temizle</string>
     <string name="group_deleted">Grup silindi</string>
@@ -3881,4 +3881,11 @@
     <string name="perform_oauth_authorization">OAuth ile oturum aç</string>
     <string name="clear_osm_token">OpenStreetMap OAuth belirtecini temizle</string>
     <string name="osm_edit_logout_success">Oturum kapatma başarılı</string>
+    <string name="file_already_imported">Dosya zaten OsmAnd\'da içe aktarıldı</string>
+    <string name="use_two_phase_routing">2 aşamalı A* yönlendirme algoritması kullan</string>
+    <string name="snowmobile_render_descr">Ayrılmış yollar ve parkurlarla kar arabası sürüşü için.</string>
+    <string name="shared_string_graph">Grafik</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s verileri yalnızca yollarda kullanılabilir, elde etmek için “Noktalar arasındaki güzergah” kullanarak bir rota hesaplamanız gerekir.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Güzergahın yeniden hesaplanmasını bekleyin.
+\nGrafik yeniden hesaplandıktan sonra kullanılabilir olacak.</string>
 </resources>
