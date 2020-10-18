@@ -58,14 +58,13 @@ public class RenderingRule {
 					attributesRef[i] = storage.getRenderingAttributeRule(vl.substring(1));
 				} else if (property.isString()) {
 					intProperties[i] = storage.getDictionaryValue(vl);
-				} else if (property.isFloat()) {
-					if (floatProperties == null) {
+				} else {
+					float floatVal = property.parseFloatValue(vl);
+					if (floatProperties == null && floatVal != 0) {
 						// lazy creates
 						floatProperties = new float[attributes.size()];
+						floatProperties[i] = property.parseFloatValue(vl);
 					}
-					floatProperties[i] = property.parseFloatValue(vl);
-					intProperties[i] = property.parseIntValue(vl);
-				} else {
 					intProperties[i] = property.parseIntValue(vl);
 				}
 				i++;
