@@ -244,8 +244,6 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_HALO_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(TEXT_HALO_COLOR));
 		R_TEXT_SIZE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_SIZE));
 		R_TEXT_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_ORDER));
-		R_ICON_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ICON_ORDER));
-		R_ICON_VISIBLE_SIZE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(ICON_VISIBLE_SIZE));
 		R_TEXT_MIN_DISTANCE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_MIN_DISTANCE));
 		R_TEXT_SHIELD = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(TEXT_SHIELD));
 		
@@ -265,7 +263,9 @@ public class RenderingRuleStorageProperties {
 		R_ICON_3 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty("icon_3"));
 		R_ICON_4 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty("icon_4"));
 		R_ICON_5 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty("icon_5"));
+		R_ICON_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ICON_ORDER));
 		R_SHIELD = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(SHIELD));
+		R_ICON_VISIBLE_SIZE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(ICON_VISIBLE_SIZE));
 
 		// polygon/way
 		R_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(COLOR));
