@@ -239,6 +239,7 @@ public class MenuBuilder {
 										public void onResult(int resultCode, Intent resultData) {
 											InputStream inputStream = null;
 											try {
+												//TODO add checAttempt to invoke virtual method 'android.net.Uri android.content.Intent.getData()' on a null object reference
 												inputStream = mapActivity.getContentResolver().openInputStream(resultData.getData());
 											} catch (FileNotFoundException e) {
 												LOG.error(e);
