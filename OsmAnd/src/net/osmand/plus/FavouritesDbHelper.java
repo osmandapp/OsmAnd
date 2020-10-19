@@ -586,7 +586,7 @@ public class FavouritesDbHelper {
 	}
 
 	private String getKey(FavouritePoint p) {
-		return p.getName() + DELIMETER + p.getCategory();
+		return p.getName() + DELIMETER + p.getCategory() + p.getLatitude() + p.getLongitude();
 	}
 
 	public boolean deleteGroup(FavoriteGroup group) {
