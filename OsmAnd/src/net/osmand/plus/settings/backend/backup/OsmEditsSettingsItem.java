@@ -22,8 +22,24 @@ import java.util.List;
 
 public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPoint> {
 
+	public static final String ID_KEY = "id";
+	public static final String NAME_KEY = "name";
+	public static final String LAT_KEY = "lat";
+	public static final String LON_KEY = "lon";
+	public static final String COMMENT_KEY = "comment";
+	public static final String ACTION_KEY = "action";
+
 	public OsmEditsSettingsItem(@NonNull OsmandApplication app, @NonNull List<OpenstreetmapPoint> items) {
 		super(app, null, items);
+	}
+
+	public OsmEditsSettingsItem(@NonNull OsmandApplication app, @Nullable OsmEditsSettingsItem baseItem,
+	                            @NonNull List<OpenstreetmapPoint> items) {
+		super(app, baseItem, items);
+	}
+
+	public OsmEditsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+		super(app, json);
 	}
 
 	@Override
@@ -92,10 +108,12 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 			try {
 				for (OpenstreetmapPoint point : items) {
 					JSONObject jsonObject = new JSONObject();
-					jsonObject.put("name", point.getTagsString());
-					jsonObject.put("lat", point.getLatitude());
-					jsonObject.put("lon", point.getLongitude());
-					jsonObject.put("action", OsmPoint.stringAction.get(point.getAction()));
+					jsonObject.put(ID_KEY, point.getId());
+					jsonObject.put(NAME_KEY, point.getTagsString());
+					jsonObject.put(LAT_KEY, point.getLatitude());
+					jsonObject.put(LON_KEY, point.getLongitude());
+					jsonObject.put(COMMENT_KEY, point.getComment());
+					jsonObject.put(ACTION_KEY, OsmPoint.stringAction.get(point.getAction()));
 					jsonArray.put(jsonObject);
 					jsonArray.put(writeTags(point.getEntity()));
 				}

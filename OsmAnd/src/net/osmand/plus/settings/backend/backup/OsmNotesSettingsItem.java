@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.osmedit.OsmBugsDbHelper;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
@@ -21,8 +22,24 @@ import java.util.List;
 
 public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> {
 
+	public static final String ID_KEY = "id";
+	public static final String TEXT_KEY = "text";
+	public static final String LAT_KEY = "lat";
+	public static final String LON_KEY = "lon";
+	public static final String AUTHOR_KEY = "author";
+	public static final String ACTION_KEY = "action";
+
 	public OsmNotesSettingsItem(@NonNull OsmandApplication app, @NonNull List<OsmNotesPoint> items) {
 		super(app, null, items);
+	}
+
+	public OsmNotesSettingsItem(@NonNull OsmandApplication app, @Nullable OsmNotesSettingsItem baseItem,
+	                            @NonNull List<OsmNotesPoint> items) {
+		super(app, baseItem, items);
+	}
+
+	public OsmNotesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+		super(app, json);
 	}
 
 	@Override
@@ -48,6 +65,14 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 
 			for (OsmNotesPoint duplicate : duplicateItems) {
 				appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
+			}
+			OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+			OsmBugsDbHelper db;
+			if (osmEditingPlugin != null) {
+				db = osmEditingPlugin.getDBBug();
+				for (OsmNotesPoint point : appliedItems) {
+					db.addOsmbugs(point);
+				}
 			}
 		}
 	}
@@ -82,6 +107,33 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 
 	@Override
 	void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+		try {
+			if (!json.has("items")) {
+				return;
+			}
+			JSONArray jsonArray = json.getJSONArray("items");
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject object = jsonArray.getJSONObject(i);
+				long id = object.getLong(ID_KEY);
+				String text = object.optString(TEXT_KEY);
+				double lat = object.getDouble(LAT_KEY);
+				double lon = object.getDouble(LON_KEY);
+				String author = object.optString(AUTHOR_KEY, null);
+				String action = object.getString(ACTION_KEY);
+
+				OsmNotesPoint point = new OsmNotesPoint();
+				point.setId(id);
+				point.setText(text);
+				point.setLatitude(lat);
+				point.setLongitude(lon);
+				point.setAuthor(author);
+				point.setAction(action);
+				items.add(point);
+			}
+		} catch (JSONException e) {
+			warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
+			throw new IllegalArgumentException("Json parse error", e);
+		}
 	}
 
 	@Override
@@ -91,10 +143,12 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 			try {
 				for (OsmNotesPoint point : items) {
 					JSONObject jsonObject = new JSONObject();
-					jsonObject.put("text", point.getText());
-					jsonObject.put("lat", point.getLatitude());
-					jsonObject.put("lon", point.getLongitude());
-					jsonObject.put("action", OsmPoint.stringAction.get(point.getAction()));
+					jsonObject.put(ID_KEY, point.getId());
+					jsonObject.put(TEXT_KEY, point.getText());
+					jsonObject.put(LAT_KEY, point.getLatitude());
+					jsonObject.put(LON_KEY, point.getLongitude());
+					jsonObject.put(AUTHOR_KEY, point.getAuthor());
+					jsonObject.put(ACTION_KEY, OsmPoint.stringAction.get(point.getAction()));
 					jsonArray.put(jsonObject);
 				}
 				json.put("items", jsonArray);

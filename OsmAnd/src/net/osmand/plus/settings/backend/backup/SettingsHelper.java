@@ -687,7 +687,7 @@ public class SettingsHelper {
 			settingsToOperate.put(ExportSettingsType.OSM_NOTES, notesPointList);
 		}
 		if (!editsPointList.isEmpty()) {
-			settingsToOperate.put(ExportSettingsType.OSM_NOTES, editsPointList);
+			settingsToOperate.put(ExportSettingsType.OSM_EDITS, editsPointList);
 		}
 		return settingsToOperate;
 	}

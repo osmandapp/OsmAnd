@@ -125,6 +125,12 @@ class SettingsItemsFactory {
 			case DOWNLOADS:
 				item = new DownloadsItem(app, json);
 				break;
+			case OSM_NOTES:
+				item = new OsmNotesSettingsItem(app, json);
+				break;
+			case OSM_EDITS:
+				item = new OsmEditsSettingsItem(app, json);
+				break;
 		}
 		return item;
 	}

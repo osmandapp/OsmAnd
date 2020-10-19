@@ -38,10 +38,14 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.OsmEditsSettingsItem;
+import net.osmand.plus.settings.backend.backup.OsmNotesSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
@@ -374,6 +378,16 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		return null;
 	}
 
+	@Nullable
+	private <T> T getBaseItem(SettingsItemType settingsItemType, Class<T> clazz) {
+		for (SettingsItem settingsItem : settingsItems) {
+			if (settingsItem.getType() == settingsItemType && clazz.isInstance(settingsItem)) {
+				return clazz.cast(settingsItem);
+			}
+		}
+		return null;
+	}
+
 	private List<SettingsItem> getSettingsItemsFromData(List<?> data) {
 		List<SettingsItem> settingsItems = new ArrayList<>();
 		List<ApplicationModeBean> appModeBeans = new ArrayList<>();
@@ -381,6 +395,8 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
+		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
 		for (Object object : data) {
 			if (object instanceof ApplicationModeBean) {
 				appModeBeans.add((ApplicationModeBean) object);
@@ -394,6 +410,10 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				settingsItems.add(new FileSettingsItem(app, (File) object));
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
+			} else if (object instanceof OsmNotesPoint) {
+				osmNotesPointList.add((OsmNotesPoint) object);
+			} else if (object instanceof OpenstreetmapPoint) {
+				osmEditsPointList.add((OpenstreetmapPoint) object);
 			}
 		}
 		if (!appModeBeans.isEmpty()) {
@@ -412,6 +432,14 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 		if (!avoidRoads.isEmpty()) {
 			settingsItems.add(new AvoidRoadsSettingsItem(app, getBaseAvoidRoadsSettingsItem(), avoidRoads));
+		}
+		if (!osmNotesPointList.isEmpty()) {
+			OsmNotesSettingsItem baseItem = getBaseItem(SettingsItemType.OSM_NOTES, OsmNotesSettingsItem.class);
+			settingsItems.add(new OsmNotesSettingsItem(app, baseItem, osmNotesPointList));
+		}
+		if (!osmEditsPointList.isEmpty()) {
+			OsmEditsSettingsItem baseItem = getBaseItem(SettingsItemType.OSM_EDITS, OsmEditsSettingsItem.class);
+			settingsItems.add(new OsmEditsSettingsItem(app, baseItem, osmEditsPointList));
 		}
 		return settingsItems;
 	}
