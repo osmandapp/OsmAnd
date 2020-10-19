@@ -10,6 +10,7 @@ import java.security.spec.EncodedKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import android.os.Build;
@@ -178,7 +179,12 @@ public class SecUtils {
 
 	public static KeyPair getKeyPair(String algo, String prKey, String pbKey) throws FailedVerificationException {
 		try {
-			//inconsistent security provider
+			for (Provider p : Security.getProviders()){
+				System.out.println("PROVIDER: " + p.getName());
+				for (Provider.Service s : p.getServices()){
+					System.out.println("ALGORITHM: " + s.getAlgorithm());
+				}
+			}
 			KeyFactory keyFactory = KeyFactory.getInstance(algo);
 			PublicKey pb = null;
 			PrivateKey pr = null;

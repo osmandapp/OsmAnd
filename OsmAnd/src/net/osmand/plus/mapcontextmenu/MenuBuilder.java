@@ -216,6 +216,55 @@ public class MenuBuilder {
 //		buildAfter(view);
 	}
 
+	public void buildUploadImagesRow(View view) {
+		if (mapContextMenu != null) {
+			//TODO to strings
+			String title = "Upload images";
+			buildRow(view, R.drawable.ic_action_note_dark, null, title, 0, false,
+					null, false, 0, false, new OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE,
+									new ActivityResultListener.OnActivityResultListener() {
+										@Override
+										public void onResult(int resultCode, Intent resultData) {
+											InputStream inputStream = null;
+											try {
+												//TODO add checAttempt to invoke virtual method 'android.net.Uri android.content.Intent.getData()' on a null object reference
+												inputStream = mapActivity.getContentResolver().openInputStream(resultData.getData());
+											} catch (FileNotFoundException e) {
+												LOG.error(e);
+											}
+											handleSelectedImage(inputStream);
+										}
+									}));
+							Intent intent = new Intent();
+							intent.setType("image/*");
+							intent.setAction(Intent.ACTION_GET_CONTENT);
+							mapActivity.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+						}
+					}, false);
+		}
+	}
+
+	private void handleSelectedImage(final InputStream image) {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try{
+					String url = "https://test.openplacereviews.org/api/ipfs/image";
+					String response = NetworkUtils.sendPostDataRequest(url, image);
+					//TODO
+					(new SecUtils()).main(new String[0]);
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
+			}
+		});
+		t.start();
+	}
+
 	private boolean showTransportRoutes() {
 		return showLocalTransportRoutes() || showNearbyTransportRoutes();
 	}
@@ -254,7 +303,7 @@ public class MenuBuilder {
 	protected boolean needBuildPlainMenuItems() {
 		return true;
 	}
-	
+
 	protected boolean needBuildCoordinatesRow() {
 		return true;
 	}
@@ -324,7 +373,7 @@ public class MenuBuilder {
 		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv, false, 1,
 			false, null, false);
 	}
-	
+
 	private void startLoadingImages() {
 		if (onlinePhotoCardsRow == null) {
 			return;
