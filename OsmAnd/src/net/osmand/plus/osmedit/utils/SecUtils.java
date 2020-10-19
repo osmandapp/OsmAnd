@@ -1,18 +1,19 @@
 package net.osmand.plus.osmedit.utils;
 
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
 import java.security.spec.EncodedKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-//import java.util.Base64;
 import java.util.concurrent.ThreadLocalRandom;
 
+import android.os.Build;
+import android.util.Base64;
 import net.osmand.plus.osmedit.utils.ops.OpOperation;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
@@ -22,7 +23,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class SecUtils {
 	private static final String SIG_ALGO_SHA1_EC = "SHA1withECDSA";
 	private static final String SIG_ALGO_NONE_EC = "NonewithECDSA";
-	
+
 	public static final String SIG_ALGO_ECDSA = "ECDSA";
 	public static final String ALGO_EC = "EC";
 	public static final String EC_256SPEC_K1 = "secp256k1";
@@ -35,82 +36,69 @@ public class SecUtils {
 	public static final String JSON_MSG_TYPE = "json";
 	public static final String KEY_BASE64 = DECODE_BASE64;
 
-	public static void main(String[] args) {
-		//1) create op, 2) sign op 3) send to server process op
-		//
-		KeyPairGenerator keyGen = null ;
-		SecureRandom random = null;
-		try {
-			keyGen = KeyPairGenerator.getInstance(ALGO_EC);
-			random = SecureRandom.getInstance("SHA1PRNG");
-			keyGen.initialize(1024, random);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		KeyPair kp = null;
-		try {
-			kp = SecUtils.getKeyPair(ALGO_EC,
-					"base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCDR+/ByIjTHZgfdnMfP9Ab5s14mMzFX+8DYqUiGmf/3rw=="
-					, "base64:X.509:MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEOMUiRZwU7wW8L3A1qaJPwhAZy250VaSxJmKCiWdn9EMeubXQgWNT8XUWLV5Nvg7O3sD+1AAQLG5kHY8nOc/AyA==");
-		} catch (FailedVerificationException e) {
-			e.printStackTrace();
-		}
-//		KeyPair kp = generateECKeyPairFromPassword(KEYGEN_PWD_METHOD_1, "openplacereviews", "");
-//		KeyPair kp = generateRandomEC256K1KeyPair();
-		System.out.println(kp.getPrivate().getFormat());
-		System.out.println(kp.getPrivate().getAlgorithm());
-		try {
-			System.out.println(SecUtils.validateKeyPair(ALGO_EC, kp.getPrivate(), kp.getPublic()));
-		} catch (FailedVerificationException e) {
-			e.printStackTrace();
-		}
-		String pr = encodeKey(KEY_BASE64, kp.getPrivate());
-		String pk = encodeKey(KEY_BASE64, kp.getPublic());
-		String algo = kp.getPrivate().getAlgorithm();
-		System.out.println(String.format("Private key: %s %s\nPublic key: %s %s", kp.getPrivate().getFormat(), pr, kp
-				.getPublic().getFormat(), pk));
-		String signMessageTest = "Hello this is a registration message test";
-		byte[] signature = signMessageWithKey(kp, signMessageTest.getBytes(), SIG_ALGO_SHA1_EC);
-		System.out.println(String.format("Signed message: %s %s", android.util.Base64.decode(signature, android.util.Base64.DEFAULT),
-				signMessageTest));
 
-		KeyPair nk = null;
-		try {
-			nk = getKeyPair(algo, pr, pk);
-		} catch (FailedVerificationException e) {
-			e.printStackTrace();
-		}
-		// validate
-		pr = new String(android.util.Base64.decode(nk.getPrivate().getEncoded(), android.util.Base64.DEFAULT));
-		pk = new String(android.util.Base64.decode(nk.getPublic().getEncoded(), android.util.Base64.DEFAULT));
+	public static void main(String[] args) throws FailedVerificationException {
+		KeyPair kp = SecUtils.getKeyPair(ALGO_EC,
+				"base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCDJy0f8+uI5Lh3gQHp+wa9EzqrIgdKdFdVuQZooRiywcA=="
+				, "base64:X.509:MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEQ4xuycvus0e0qggdaeYJstMHpn025COnttRcup93L+VCS1ryv0iPSXeyBEnhgV0GdeAQ6GRHQB057ccZn/yzpQ==");
 
-		System.out.println(String.format("Private key: %s %s\nPublic key: %s %s", nk.getPrivate().getFormat(), pr, nk
-				.getPublic().getFormat(), pk));
-		System.out.println(validateSignature(nk, signMessageTest.getBytes(), SIG_ALGO_SHA1_EC, signature));
-
+		System.out.println("MY KEY PAIR");
+		System.out.println("-------");
+		System.out.println(Base64.encodeToString(kp.getPrivate().getEncoded(), Base64.DEFAULT));
+		System.out.println(Base64.encodeToString(kp.getPublic().getEncoded(), Base64.DEFAULT));
+		System.out.println("-------");
+		String signed = "test1234567:opr-web";
 		JsonFormatter formatter = new JsonFormatter();
-		String msg = "{\n" +
-				"		\"type\" : \"sys.signup\",\n" +
-				"		\"signed_by\": \"openplacereviews\",\n" +
-				"		\"create\": [{\n" +
-				"			\"id\": [\"openplacereviews\"],\n" +
-				"			\"name\" : \"openplacereviews\",\n" +
-				"			\"algo\": \"EC\",\n" +
-				"			\"auth_method\": \"provided\",\n" +
-				"			\"pubkey\": \"base64:X.509:MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEn6GkOTN3SYc+OyCYCpqPzKPALvUgfUVNDJ+6eyBlCHI1/gKcVqzHLwaO90ksb29RYBiF4fW/PqHcECNzwJB+QA==\"\n" +
-				"		}]\n" +
-				"	}";
-
+		String msg = "{\"type\": \"opr.place\",\"edit\": [{\"id\": [\"9G2GCG\",\"wlkomu\"],\"change\": {\"version\": \"increment\",\"images\": {\"set\": {\"outdoor\": [{\"cid\": \"Qmca596saVerchSQT9Q6uEMdDGzHWvQkZqPey4PgwZ4w6E\",\"extension\": \"jpg\",\"hash\": \"07c9b0445629a985b5cbee7aac9f3e33039eb9d6fcc4b0c1bb27de332c0114db\",\"type\": \"#image\"}]}}},\"current\": {}}]}";
+		System.out.println("OPERATION: " + msg );
 		OpOperation opOperation = formatter.parseOperation(msg);
+		System.out.println("OPERATION PARSED: " + formatter.opToJson(opOperation) );
+		opOperation.setSignedBy(signed);
 		String hash = JSON_MSG_TYPE + ":"
 				+ SecUtils.calculateHashWithAlgo(SecUtils.HASH_SHA256, null,
-				formatter.opToJsonNoHash(opOperation));
-
+					formatter.opToJsonNoHash(opOperation));
+		System.out.println("HASH : " + hash);
 		byte[] hashBytes = SecUtils.getHashBytes(hash);
-		String signatureTxt = SecUtils.signMessageWithKeyBase64(kp, hashBytes, SecUtils.SIG_ALGO_ECDSA, null);
-		System.out.println(formatter.opToJsonNoHash(opOperation));
-		System.out.println(hash);
-		System.out.println(signatureTxt);
+		String signature = signMessageWithKeyBase64(kp, hashBytes, SIG_ALGO_ECDSA, null);
+		System.out.println("SIGNATURE : " + signature);
+		opOperation.addOrSetStringValue("hash", hash);
+		opOperation.addOrSetStringValue("signature", signature);
+			String url = "http://test.openplacereviews.org/api/auth/process-operation?addToQueue=true&dontSignByServer=false";
+		String json = formatter.opToJson(opOperation);
+		System.out.println("JSON: " + formatter.opToJson(opOperation));
+		HttpURLConnection connection;
+		try {
+			connection = (HttpURLConnection) new URL(url).openConnection();
+			connection.setRequestProperty("Content-Type", "application/json");
+			connection.setConnectTimeout(10000);
+			connection.setRequestMethod("POST");
+			connection.setDoOutput(true);
+			try( DataOutputStream wr = new DataOutputStream( connection.getOutputStream())) {
+				wr.write( json.getBytes() );
+			}
+
+			if(connection.getResponseCode() != 200){
+				System.out.println("ERROR HAPPENED " + connection.getResponseCode());
+				System.out.println(connection.getResponseMessage());
+				System.out.println("ERROR");
+				BufferedReader br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+				String strCurrentLine;
+				while ((strCurrentLine = br.readLine()) != null) {
+					System.out.println(strCurrentLine);
+				}
+			}
+			else {
+				System.out.println("SUCCESS");
+				BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				String strCurrentLine;
+				while ((strCurrentLine = br.readLine()) != null) {
+					System.out.println(strCurrentLine);
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static EncodedKeySpec decodeKey(String key) {
@@ -120,8 +108,11 @@ public class SecUtils {
 			if (s == -1) {
 				throw new IllegalArgumentException(String.format("Key doesn't contain algorithm of hashing to verify"));
 			}
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+				return getKeySpecByFormat(key.substring(0, s), java.util.Base64.getDecoder().decode(key.substring(s + 1)));
+			}
 			return getKeySpecByFormat(key.substring(0, s),
-					android.util.Base64.decode(key.substring(s + 1), android.util.Base64.DEFAULT));
+					android.util.Base64.decode(key.substring(s + 1), Base64.DEFAULT));
 		}
 		throw new IllegalArgumentException(String.format("Key doesn't contain algorithm of hashing to verify"));
 	}
@@ -187,6 +178,7 @@ public class SecUtils {
 
 	public static KeyPair getKeyPair(String algo, String prKey, String pbKey) throws FailedVerificationException {
 		try {
+			//inconsistent security provider
 			KeyFactory keyFactory = KeyFactory.getInstance(algo);
 			PublicKey pb = null;
 			PrivateKey pr = null;
@@ -256,7 +248,12 @@ public class SecUtils {
 	}
 
 	public static String signMessageWithKeyBase64(KeyPair keyPair, byte[] msg, String signAlgo, ByteArrayOutputStream out) {
-		byte[] sigBytes = signMessageWithKey(keyPair, msg, signAlgo);
+		byte[] sigBytes = new byte[0];
+		try {
+			sigBytes = signMessageWithKey(keyPair, msg, signAlgo);
+		} catch (FailedVerificationException e) {
+			throw new IllegalStateException("Cannot get bytes");
+		}
 		if(out != null) {
 			try {
 				out.write(sigBytes);
@@ -264,11 +261,11 @@ public class SecUtils {
 				throw new IllegalStateException(e);
 			}
 		}
-		String signature = new String(android.util.Base64.decode(sigBytes, android.util.Base64.DEFAULT));
+		String signature = Base64.encodeToString(sigBytes, Base64.DEFAULT);
 		return signAlgo + ":" + DECODE_BASE64 + ":" + signature;
 	}
 
-	public static byte[] signMessageWithKey(KeyPair keyPair, byte[] msg, String signAlgo) {
+	public static byte[] signMessageWithKey(KeyPair keyPair, byte[] msg, String signAlgo) throws FailedVerificationException {
 		try {
 			Signature sig = Signature.getInstance(getInternalSigAlgo(signAlgo));
 			sig.initSign(keyPair.getPrivate());
@@ -276,15 +273,14 @@ public class SecUtils {
 			byte[] signatureBytes = sig.sign();
 			return signatureBytes;
 		} catch (NoSuchAlgorithmException e) {
-			//throw new FailedVerificationException(e);
+			throw new FailedVerificationException(e);
 		} catch (InvalidKeyException e) {
-			//throw new FailedVerificationException(e);
+			throw new FailedVerificationException(e);
 		} catch (SignatureException e) {
-			//throw new FailedVerificationException(e);
+			throw new FailedVerificationException(e);
 		}
-		return new byte[0];
 	}
-	
+
 	public static boolean validateSignature(KeyPair keyPair, byte[] msg, String sig) {
 		if(sig == null || keyPair == null) {
 			 return false;
@@ -316,7 +312,7 @@ public class SecUtils {
 	private static String getInternalSigAlgo(String sigAlgo) {
 		return sigAlgo.equals(SIG_ALGO_ECDSA)? SIG_ALGO_NONE_EC : sigAlgo;
 	}
-	
+
 
 	public static byte[] calculateHash(String algo, byte[] b1, byte[] b2) {
 		byte[] m = mergeTwoArrays(b1, b2);
@@ -337,7 +333,7 @@ public class SecUtils {
 		}
 		return m;
 	}
-	
+
 	public static String calculateHashWithAlgo(String algo, String salt, String msg) {
 		try {
 			String hex = Hex.encodeHexString(calculateHash(algo, salt == null ? null : salt.getBytes("UTF-8"),
@@ -345,9 +341,9 @@ public class SecUtils {
 			return algo + ":" + hex;
 		} catch (UnsupportedEncodingException e) {
 			throw new IllegalStateException(e);
-		} 
+		}
 	}
-	
+
 	public static String calculateHashWithAlgo(String algo, byte[] bts) {
 		byte[] hash = calculateHash(algo, bts, null);
 		return formatHashWithAlgo(algo, hash);
@@ -371,7 +367,7 @@ public class SecUtils {
 			throw new IllegalArgumentException(e);
 		}
 	}
-	
+
 
 	public static boolean validateHash(String hash, String salt, String msg) {
 		int s = hash.indexOf(":");
@@ -403,9 +399,9 @@ public class SecUtils {
 			return "";
 		}
 		return Hex.encodeHexString(bytes);
-		
+
 	}
 
-	
+
 
 }

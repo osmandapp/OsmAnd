@@ -17,7 +17,7 @@ public class OpOperation extends OpObject {
 	public static final String F_CREATE = "create";
 	public static final String F_DELETE = "delete";
 	public static final String F_EDIT = "edit";
-	
+
 	public static final String F_NAME = "name";
 	public static final String F_COMMENT = "comment";
 
@@ -114,7 +114,7 @@ public class OpOperation extends OpObject {
 		}
 		return l;
 	}
-	
+
 	public boolean hasDeleted() {
 		return getDeleted().size() > 0;
 	}
@@ -160,7 +160,7 @@ public class OpOperation extends OpObject {
 	public boolean hasEdited() {
 		return editedObjects.size() > 0;
 	}
-	
+
 
 	public String getName() {
 		return getStringValue(F_NAME);
@@ -242,14 +242,14 @@ public class OpOperation extends OpObject {
 			if(createdObjs != null) {
 				JsonArray ar = createdObjs.getAsJsonArray();
 				for(int i = 0; i < ar.size(); i++) {
-					//op.addCreated(context.deserialize(ar.get(i), OpObject.class));
+					op.addCreated((OpObject) context.deserialize(ar.get(i), OpObject.class));
 				}
 			}
 
 			JsonElement editedObjs = jsonObj.remove(F_EDIT);
 			if (editedObjs != null) {
 				for (JsonElement editElem : editedObjs.getAsJsonArray()) {
-					//op.addEdited(context.deserialize(editElem, OpObject.class));
+					op.addEdited((OpObject) context.deserialize(editElem, OpObject.class));
 				}
 			}
 
