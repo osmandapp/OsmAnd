@@ -434,7 +434,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return !app.getSettings().isLightContent();
 	}
 
-	private void testShadowOn() {
+	private void showShadowButton() {
 		buttonsShadow.setVisibility(View.VISIBLE);
 		buttonsShadow.animate()
 				.alpha(0.8f)
@@ -442,7 +442,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				.setListener(null);
 	}
 
-	private void testShadowOff() {
+	private void hideShadowButton() {
 		buttonsShadow.animate()
 				.alpha(0f)
 				.setDuration(200);
@@ -462,9 +462,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			public void onScrollChanged() {
 				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
 				if (scrollToBottomAvailable) {
-					testShadowOn();
+					showShadowButton();
 				} else {
-					testShadowOff();
+					hideShadowButton();
 				}
 			}
 		});

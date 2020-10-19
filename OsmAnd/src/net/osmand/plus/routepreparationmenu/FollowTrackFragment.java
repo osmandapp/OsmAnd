@@ -181,8 +181,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		return view;
 	}
 
-	private void testShadowOn() {
-//		buttonsShadow.setAlpha(0.3f);
+	private void showShadowButton() {
 		buttonsShadow.setVisibility(View.VISIBLE);
 		buttonsShadow.animate()
 				.alpha(0.8f)
@@ -190,8 +189,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				.setListener(null);
 	}
 
-	private void testShadowOff() {
-//		buttonsShadow.setAlpha(0.5f);
+	private void hideShadowButton() {
 		buttonsShadow.animate()
 				.alpha(0f)
 				.setDuration(200);
@@ -630,9 +628,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			public void onScrollChanged() {
 				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
 				if (scrollToBottomAvailable) {
-					testShadowOn();
+					showShadowButton();
 				} else {
-					testShadowOff();
+					hideShadowButton();
 				}
 			}
 		});
