@@ -45,6 +45,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	private static final String TAG = PluginInfoFragment.class.getName();
 
 	public static final String EXTRA_PLUGIN_ID = "plugin_id";
+	public static final String PLUGIN_INFO = "plugin_info";
 
 	private OsmandPlugin plugin;
 	private OsmandApplication app;
@@ -135,7 +136,9 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 				if (activity != null) {
 					SettingsScreenType settingsScreenType = plugin.getSettingsScreenType();
 					if (settingsScreenType != null) {
-						BaseSettingsFragment.showInstance(activity, settingsScreenType);
+						Bundle args = new Bundle();
+						args.putBoolean(PLUGIN_INFO, true);
+						BaseSettingsFragment.showInstance(activity, settingsScreenType, null, args);
 					}
 				}
 			}
