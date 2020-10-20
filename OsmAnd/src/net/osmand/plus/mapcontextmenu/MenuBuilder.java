@@ -239,6 +239,7 @@ public class MenuBuilder {
 										public void onResult(int resultCode, Intent resultData) {
 											InputStream inputStream = null;
 											try {
+												//TODO Failure delivering result ResultInfo{who=null, request=1231, result=0, data=null} to activity {net.osmand.plus/net.osmand.plus.activities.MapActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'android.net.Uri android.content.Intent.getData()' on a null object reference
 												//TODO add checAttempt to invoke virtual method 'android.net.Uri android.content.Intent.getData()' on a null object reference
 												inputStream = mapActivity.getContentResolver().openInputStream(resultData.getData());
 											} catch (FileNotFoundException e) {
@@ -264,7 +265,7 @@ public class MenuBuilder {
 					String url = "https://test.openplacereviews.org/api/ipfs/image";
 					String response = NetworkUtils.sendPostDataRequest(url, image);
 					//TODO
-					(new SecUtils()).main(new String[0]);
+					(new SecUtils()).main(response);
 				}
 				catch (Exception e){
 					e.printStackTrace();

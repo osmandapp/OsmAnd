@@ -13,6 +13,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import android.net.TrafficStats;
 import android.os.Build;
 import android.util.Base64;
 import net.osmand.plus.osmedit.utils.ops.OpOperation;
@@ -37,11 +38,18 @@ public class SecUtils {
 	public static final String JSON_MSG_TYPE = "json";
 	public static final String KEY_BASE64 = DECODE_BASE64;
 
+	private static final int THREAD_ID = 11200;
 
-	public static void main(String[] args) throws FailedVerificationException {
+
+	public static void main(String image) throws FailedVerificationException {
 		KeyPair kp = SecUtils.getKeyPair(ALGO_EC,
 				"base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCDJy0f8+uI5Lh3gQHp+wa9EzqrIgdKdFdVuQZooRiywcA=="
 				, "base64:X.509:MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEQ4xuycvus0e0qggdaeYJstMHpn025COnttRcup93L+VCS1ryv0iPSXeyBEnhgV0GdeAQ6GRHQB057ccZn/yzpQ==");
+
+
+		//KeyPair kp = getKeyPair(ALGO_EC,
+		//		"base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCDR+/ByIjTHZgfdnMfP9Ab5s14mMzFX+8DYqUiGmf/3rw=="
+		//		, "base64:X.509:MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEOMUiRZwU7wW8L3A1qaJPwhAZy250VaSxJmKCiWdn9EMeubXQgWNT8XUWLV5Nvg7O3sD+1AAQLG5kHY8nOc/AyA==");
 
 		System.out.println("MY KEY PAIR");
 		System.out.println("-------");
@@ -50,7 +58,10 @@ public class SecUtils {
 		System.out.println("-------");
 		String signed = "test1234567:opr-web";
 		JsonFormatter formatter = new JsonFormatter();
-		String msg = "{\"type\": \"opr.place\",\"edit\": [{\"id\": [\"9G2GCG\",\"wlkomu\"],\"change\": {\"version\": \"increment\",\"images\": {\"set\": {\"outdoor\": [{\"cid\": \"Qmca596saVerchSQT9Q6uEMdDGzHWvQkZqPey4PgwZ4w6E\",\"extension\": \"jpg\",\"hash\": \"07c9b0445629a985b5cbee7aac9f3e33039eb9d6fcc4b0c1bb27de332c0114db\",\"type\": \"#image\"}]}}},\"current\": {}}]}";
+		String msg = "{\"type\": \"opr.place\",\"edit\": [{\"id\": [\"9G2GCG\",\"wlkomu\"],\"change\": {\"version\": \"increment\",\"images\": {\"append\": {\"outdoor\": [" +
+				image +
+				//"{\"cid\": \"Qmca596saVerchSQT9Q6uEMdDGzHWvQkZqPey4PgwZ4w6E\",\"extension\": \"jpg\",\"hash\": \"07c9b0445629a985b5cbee7aac9f3e33039eb9d6fcc4b0c1bb27de332c0114db\",\"type\": \"#image\"}" +
+				"]}}},\"current\": {}}]}";
 		System.out.println("OPERATION: " + msg );
 		OpOperation opOperation = formatter.parseOperation(msg);
 		System.out.println("OPERATION PARSED: " + formatter.opToJson(opOperation) );
@@ -60,11 +71,12 @@ public class SecUtils {
 					formatter.opToJsonNoHash(opOperation));
 		System.out.println("HASH : " + hash);
 		byte[] hashBytes = SecUtils.getHashBytes(hash);
-		String signature = signMessageWithKeyBase64(kp, hashBytes, SIG_ALGO_ECDSA, null);
+		String signature = signMessageWithKeyBase64(kp, hashBytes, SIG_ALGO_SHA1_EC, null);
 		System.out.println("SIGNATURE : " + signature);
 		opOperation.addOrSetStringValue("hash", hash);
 		opOperation.addOrSetStringValue("signature", signature);
-			String url = "http://test.openplacereviews.org/api/auth/process-operation?addToQueue=true&dontSignByServer=false";
+		TrafficStats.setThreadStatsTag(THREAD_ID);
+		String url = "http://test.openplacereviews.org/api/auth/process-operation?addToQueue=true&dontSignByServer=false";
 		String json = formatter.opToJson(opOperation);
 		System.out.println("JSON: " + formatter.opToJson(opOperation));
 		HttpURLConnection connection;
@@ -267,13 +279,13 @@ public class SecUtils {
 				throw new IllegalStateException(e);
 			}
 		}
-		String signature = Base64.encodeToString(sigBytes, Base64.DEFAULT);
+		String signature = Base64.encodeToString(sigBytes, Base64.DEFAULT).replace("\n", "");
 		return signAlgo + ":" + DECODE_BASE64 + ":" + signature;
 	}
 
 	public static byte[] signMessageWithKey(KeyPair keyPair, byte[] msg, String signAlgo) throws FailedVerificationException {
 		try {
-			Signature sig = Signature.getInstance(getInternalSigAlgo(signAlgo));
+			Signature sig = Signature.getInstance(getInternalSigAlgo(signAlgo), "BC");
 			sig.initSign(keyPair.getPrivate());
 			sig.update(msg);
 			byte[] signatureBytes = sig.sign();
@@ -284,6 +296,8 @@ public class SecUtils {
 			throw new FailedVerificationException(e);
 		} catch (SignatureException e) {
 			throw new FailedVerificationException(e);
+		} catch (NoSuchProviderException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -342,9 +356,10 @@ public class SecUtils {
 
 	public static String calculateHashWithAlgo(String algo, String salt, String msg) {
 		try {
-			String hex = Hex.encodeHexString(calculateHash(algo, salt == null ? null : salt.getBytes("UTF-8"),
+			char[] hex = Hex.encodeHex(calculateHash(algo, salt == null ? null : salt.getBytes("UTF-8"),
 					msg == null ? null : msg.getBytes("UTF-8")));
-			return algo + ":" + hex;
+
+			return algo + ":" + new String(hex);
 		} catch (UnsupportedEncodingException e) {
 			throw new IllegalStateException(e);
 		}
@@ -368,7 +383,7 @@ public class SecUtils {
 		int i = msg.lastIndexOf(':');
 		String s = i >= 0 ? msg.substring(i + 1) : msg;
 		try {
-			return Hex.decodeHex(s);
+			return Hex.decodeHex(s.toCharArray());
 		} catch (DecoderException e) {
 			throw new IllegalArgumentException(e);
 		}
