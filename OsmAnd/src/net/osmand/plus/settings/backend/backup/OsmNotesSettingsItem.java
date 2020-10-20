@@ -118,9 +118,9 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 				String text = object.optString(TEXT_KEY);
 				double lat = object.getDouble(LAT_KEY);
 				double lon = object.getDouble(LON_KEY);
-				String author = object.optString(AUTHOR_KEY, null);
+				String author = object.optString(AUTHOR_KEY);
+				author = author.isEmpty() ? null : author;
 				String action = object.getString(ACTION_KEY);
-
 				OsmNotesPoint point = new OsmNotesPoint();
 				point.setId(id);
 				point.setText(text);

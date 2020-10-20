@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -28,6 +29,9 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 	public static final String LON_KEY = "lon";
 	public static final String COMMENT_KEY = "comment";
 	public static final String ACTION_KEY = "action";
+	public static final String TYPE_KEY = "type";
+	public static final String TAGS_KEY = "tags";
+	public static final String ENTITY_KEY = "entity";
 
 	public OsmEditsSettingsItem(@NonNull OsmandApplication app, @NonNull List<OpenstreetmapPoint> items) {
 		super(app, null, items);
@@ -99,6 +103,32 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 
 	@Override
 	void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
+		try {
+			if (!json.has("items")) {
+				return;
+			}
+			JSONArray jsonArray = json.getJSONArray("items");
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonPoint = jsonArray.getJSONObject(i);
+				String comment = jsonPoint.optString(COMMENT_KEY);
+				comment = comment.isEmpty() ? null : comment;
+				JSONObject entityJson = jsonPoint.getJSONObject(ENTITY_KEY);
+				long id = entityJson.getLong(ID_KEY);
+				double lat = entityJson.getDouble(LAT_KEY);
+				double lon = entityJson.getDouble(LON_KEY);
+				String action = entityJson.getString(ACTION_KEY);
+				Entity entity;
+				entity = new Node(lat, lon, id);
+				OpenstreetmapPoint point = new OpenstreetmapPoint();
+				point.setComment(comment);
+				point.setEntity(entity);
+				point.setAction(action);
+				items.add(point);
+			}
+		} catch (JSONException e) {
+			warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
+			throw new IllegalArgumentException("Json parse error", e);
+		}
 	}
 
 	@Override
@@ -107,15 +137,18 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 		if (!items.isEmpty()) {
 			try {
 				for (OpenstreetmapPoint point : items) {
-					JSONObject jsonObject = new JSONObject();
-					jsonObject.put(ID_KEY, point.getId());
-					jsonObject.put(NAME_KEY, point.getTagsString());
-					jsonObject.put(LAT_KEY, point.getLatitude());
-					jsonObject.put(LON_KEY, point.getLongitude());
-					jsonObject.put(COMMENT_KEY, point.getComment());
-					jsonObject.put(ACTION_KEY, OsmPoint.stringAction.get(point.getAction()));
-					jsonArray.put(jsonObject);
-					jsonArray.put(writeTags(point.getEntity()));
+					JSONObject jsonPoint = new JSONObject();
+					JSONObject jsonEntity = new JSONObject();
+					jsonEntity.put(ID_KEY, point.getId());
+					jsonEntity.put(NAME_KEY, point.getTagsString());
+					jsonEntity.put(LAT_KEY, point.getLatitude());
+					jsonEntity.put(LON_KEY, point.getLongitude());
+					jsonEntity.put(TYPE_KEY, Entity.EntityType.valueOf(point.getEntity()));
+					jsonEntity.put(TAGS_KEY, point.getEntity().getTags());
+					jsonPoint.put(COMMENT_KEY, point.getComment());
+					jsonEntity.put(ACTION_KEY, OsmPoint.stringAction.get(point.getAction()));
+					jsonPoint.put(ENTITY_KEY, jsonEntity);
+					jsonArray.put(jsonPoint);
 				}
 				json.put("items", jsonArray);
 			} catch (JSONException e) {
@@ -123,25 +156,6 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 				SettingsHelper.LOG.error("Failed write to json", e);
 			}
 		}
-	}
-
-	private JSONArray writeTags(Entity entity) {
-		JSONArray tagList = new JSONArray();
-		for (String tag : entity.getTagKeySet()) {
-			String val = entity.getTag(tag);
-			if (entity.isNotValid(tag)) {
-				continue;
-			}
-			try {
-				JSONObject tagItem = new JSONObject();
-				tagItem.put("k", tag);
-				tagItem.put("v", val);
-				tagList.put(tagItem);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-		return tagList;
 	}
 
 	@Nullable
