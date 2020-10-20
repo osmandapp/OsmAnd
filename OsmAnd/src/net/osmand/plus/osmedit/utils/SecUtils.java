@@ -14,11 +14,13 @@ import android.net.TrafficStats;
 import android.os.Build;
 import android.util.Base64;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.osmedit.utils.ops.OpObject;
 import net.osmand.plus.osmedit.utils.ops.OpOperation;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 public class SecUtils {
 	private static final String SIG_ALGO_SHA1_EC = "SHA1withECDSA";
@@ -40,6 +42,10 @@ public class SecUtils {
 
 
 	public static void uploadImage(String image) throws FailedVerificationException {
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+			Security.removeProvider("BC");
+			Security.addProvider(new BouncyCastleProvider());
+		}
 		KeyPair kp = SecUtils.getKeyPair(ALGO_EC,
 				"base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCDJy0f8+uI5Lh3gQHp+wa9EzqrIgdKdFdVuQZooRiywcA=="
 				, "base64:X.509:MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEQ4xuycvus0e0qggdaeYJstMHpn025COnttRcup93L+VCS1ryv0iPSXeyBEnhgV0GdeAQ6GRHQB057ccZn/yzpQ==");
@@ -50,6 +56,9 @@ public class SecUtils {
 		String msg = "{\"type\": \"opr.place\",\"edit\": [{\"id\": [\"9G2GCG\",\"wlkomu\"],\"change\": {\"version\": \"increment\",\"images\": {\"append\": {\"outdoor\": [" +
 				image +
 				"]}}},\"current\": {}}]}";
+		//OpOperation opOperation = new OpOperation();
+		//opOperation.setType("opr.place");
+		//opOperation.setFieldByExpr("current", new OpObject());
 		OpOperation opOperation = formatter.parseOperation(msg);
 		opOperation.setSignedBy(signed);
 		String hash = JSON_MSG_TYPE + ":"

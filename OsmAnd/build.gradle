@@ -543,6 +543,7 @@ dependencies {
 		exclude group: "com.fasterxml.jackson.core"
 	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
+	implementation "org.bouncycastle:bcpkix-jdk15on:1.56"
 
 	freehuaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
 }
