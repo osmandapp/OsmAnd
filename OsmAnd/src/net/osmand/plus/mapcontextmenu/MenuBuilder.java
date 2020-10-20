@@ -34,11 +34,13 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -218,7 +220,6 @@ public class MenuBuilder {
 
 	public void buildUploadImagesRow(View view) {
 		if (mapContextMenu != null) {
-			//TODO to strings
 			String title = "Upload images";
 			buildRow(view, R.drawable.ic_action_note_dark, null, title, 0, false,
 					null, false, 0, false, new OnClickListener() {
@@ -230,10 +231,8 @@ public class MenuBuilder {
 										public void onResult(int resultCode, Intent resultData) {
 											InputStream inputStream = null;
 											try {
-												//TODO Failure delivering result ResultInfo{who=null, request=1231, result=0, data=null} to activity {net.osmand.plus/net.osmand.plus.activities.MapActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'android.net.Uri android.content.Intent.getData()' on a null object reference
-												//TODO add checAttempt to invoke virtual method 'android.net.Uri android.content.Intent.getData()' on a null object reference
 												inputStream = mapActivity.getContentResolver().openInputStream(resultData.getData());
-											} catch (FileNotFoundException e) {
+											} catch (Exception e) {
 												LOG.error(e);
 											}
 											handleSelectedImage(inputStream);
@@ -255,7 +254,7 @@ public class MenuBuilder {
 				try{
 					String url = "https://test.openplacereviews.org/api/ipfs/image";
 					String response = NetworkUtils.sendPostDataRequest(url, image);
-					SecUtils.main(response);
+					SecUtils.uploadImage(response);
 				}
 				catch (Exception e){
 					e.printStackTrace();
