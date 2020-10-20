@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -169,6 +170,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+				.detectDiskReads()
+				.detectDiskWrites()
+				.detectNetwork()
+				.penaltyLog()
+				.build());
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			boolean enabled = mapActivity.getQuickSearchDialogFragment() == null;
