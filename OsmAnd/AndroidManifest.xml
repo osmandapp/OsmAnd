@@ -478,7 +478,6 @@
 		<activity android:name="net.osmand.plus.activities.SettingsActivity" android:label="@string/shared_string_settings" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.activities.SettingsGeneralActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation" />
 
 		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity"
 				  android:launchMode="singleInstance"
@@ -490,9 +489,6 @@
 				<data android:scheme="osmand-oauth" />
 			</intent-filter>
 		</activity>
-		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.plus.audionotes.SettingsAudioVideoActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.access.SettingsAccessibilityActivity" android:configChanges="keyboardHidden|orientation" />
 
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" />
 		<activity android:name="net.osmand.plus.activities.FavoritesListActivity" android:label="@string/favourites_list_activity" />
