@@ -5,38 +5,38 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.*;
-import java.security.spec.ECGenParameterSpec;
 import java.security.spec.EncodedKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
-
 import android.net.TrafficStats;
 import android.os.Build;
 import android.util.Base64;
+
+import net.osmand.NativeLibrary;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.osmedit.utils.ops.OpOperation;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
-//import org.bouncycastle.crypto.generators.SCrypt;
-//import org.bouncycastle.crypto.prng.FixedSecureRandom;
+import org.apache.commons.logging.Log;
+
 public class SecUtils {
 	private static final String SIG_ALGO_SHA1_EC = "SHA1withECDSA";
 	private static final String SIG_ALGO_NONE_EC = "NonewithECDSA";
 
 	public static final String SIG_ALGO_ECDSA = "ECDSA";
 	public static final String ALGO_EC = "EC";
-	public static final String EC_256SPEC_K1 = "secp256k1";
 
-	public static final String KEYGEN_PWD_METHOD_1 = "EC256K1_S17R8";
 	public static final String DECODE_BASE64 = "base64";
 	public static final String HASH_SHA256 = "sha256";
 	public static final String HASH_SHA1 = "sha1";
 
 	public static final String JSON_MSG_TYPE = "json";
 	public static final String KEY_BASE64 = DECODE_BASE64;
+
+	private static final Log log = PlatformUtil.getLog(SecUtils.class);
 
 	private static final int THREAD_ID = 11200;
 
@@ -45,40 +45,25 @@ public class SecUtils {
 		KeyPair kp = SecUtils.getKeyPair(ALGO_EC,
 				"base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCDJy0f8+uI5Lh3gQHp+wa9EzqrIgdKdFdVuQZooRiywcA=="
 				, "base64:X.509:MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEQ4xuycvus0e0qggdaeYJstMHpn025COnttRcup93L+VCS1ryv0iPSXeyBEnhgV0GdeAQ6GRHQB057ccZn/yzpQ==");
-
-
-		//KeyPair kp = getKeyPair(ALGO_EC,
-		//		"base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCDR+/ByIjTHZgfdnMfP9Ab5s14mMzFX+8DYqUiGmf/3rw=="
-		//		, "base64:X.509:MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEOMUiRZwU7wW8L3A1qaJPwhAZy250VaSxJmKCiWdn9EMeubXQgWNT8XUWLV5Nvg7O3sD+1AAQLG5kHY8nOc/AyA==");
-
-		System.out.println("MY KEY PAIR");
-		System.out.println("-------");
-		System.out.println(Base64.encodeToString(kp.getPrivate().getEncoded(), Base64.DEFAULT));
-		System.out.println(Base64.encodeToString(kp.getPublic().getEncoded(), Base64.DEFAULT));
-		System.out.println("-------");
 		String signed = "test1234567:opr-web";
+
 		JsonFormatter formatter = new JsonFormatter();
+		//TODO
 		String msg = "{\"type\": \"opr.place\",\"edit\": [{\"id\": [\"9G2GCG\",\"wlkomu\"],\"change\": {\"version\": \"increment\",\"images\": {\"append\": {\"outdoor\": [" +
 				image +
-				//"{\"cid\": \"Qmca596saVerchSQT9Q6uEMdDGzHWvQkZqPey4PgwZ4w6E\",\"extension\": \"jpg\",\"hash\": \"07c9b0445629a985b5cbee7aac9f3e33039eb9d6fcc4b0c1bb27de332c0114db\",\"type\": \"#image\"}" +
 				"]}}},\"current\": {}}]}";
-		System.out.println("OPERATION: " + msg );
 		OpOperation opOperation = formatter.parseOperation(msg);
-		System.out.println("OPERATION PARSED: " + formatter.opToJson(opOperation) );
 		opOperation.setSignedBy(signed);
 		String hash = JSON_MSG_TYPE + ":"
 				+ SecUtils.calculateHashWithAlgo(SecUtils.HASH_SHA256, null,
-					formatter.opToJsonNoHash(opOperation));
-		System.out.println("HASH : " + hash);
+				formatter.opToJsonNoHash(opOperation));
 		byte[] hashBytes = SecUtils.getHashBytes(hash);
 		String signature = signMessageWithKeyBase64(kp, hashBytes, SIG_ALGO_SHA1_EC, null);
-		System.out.println("SIGNATURE : " + signature);
 		opOperation.addOrSetStringValue("hash", hash);
 		opOperation.addOrSetStringValue("signature", signature);
 		TrafficStats.setThreadStatsTag(THREAD_ID);
 		String url = "http://test.openplacereviews.org/api/auth/process-operation?addToQueue=true&dontSignByServer=false";
 		String json = formatter.opToJson(opOperation);
-		System.out.println("JSON: " + formatter.opToJson(opOperation));
 		HttpURLConnection connection;
 		try {
 			connection = (HttpURLConnection) new URL(url).openConnection();
@@ -86,11 +71,11 @@ public class SecUtils {
 			connection.setConnectTimeout(10000);
 			connection.setRequestMethod("POST");
 			connection.setDoOutput(true);
-			try( DataOutputStream wr = new DataOutputStream( connection.getOutputStream())) {
-				wr.write( json.getBytes() );
+			try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+				wr.write(json.getBytes());
 			}
 
-			if(connection.getResponseCode() != 200){
+			if (connection.getResponseCode() != 200) {
 				System.out.println("ERROR HAPPENED " + connection.getResponseCode());
 				System.out.println(connection.getResponseMessage());
 				System.out.println("ERROR");
@@ -99,8 +84,7 @@ public class SecUtils {
 				while ((strCurrentLine = br.readLine()) != null) {
 					System.out.println(strCurrentLine);
 				}
-			}
-			else {
+			} else {
 				System.out.println("SUCCESS");
 				BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				String strCurrentLine;
@@ -109,8 +93,7 @@ public class SecUtils {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e);
 		}
 	}
 
@@ -214,59 +197,8 @@ public class SecUtils {
 		}
 	}
 
-	public static KeyPair generateKeyPairFromPassword(String algo, String keygenMethod, String salt, String pwd)
-			throws FailedVerificationException {
-		if (algo.equals(ALGO_EC)) {
-			return generateECKeyPairFromPassword(keygenMethod, salt, pwd);
-		}
-		throw new UnsupportedOperationException("Unsupported algo keygen method: " + algo);
-	}
-
-	public static KeyPair generateECKeyPairFromPassword(String keygenMethod, String salt, String pwd)
-			throws FailedVerificationException {
-		if (keygenMethod.equals(KEYGEN_PWD_METHOD_1)) {
-			return generateEC256K1KeyPairFromPassword(salt, pwd);
-		}
-		throw new UnsupportedOperationException("Unsupported keygen method: " + keygenMethod);
-	}
-
-	// "EC:secp256k1:scrypt(salt,N:17,r:8,p:1,len:256)" algorithm - EC256K1_S17R8
-	public static KeyPair generateEC256K1KeyPairFromPassword(String salt, String pwd)
-			throws FailedVerificationException {
-		try {
-			KeyPairGenerator kpg = KeyPairGenerator.getInstance(ALGO_EC);
-			ECGenParameterSpec ecSpec = new ECGenParameterSpec(EC_256SPEC_K1);
-			if (pwd.length() < 10) {
-				throw new IllegalArgumentException("Less than 10 characters produces only 50 bit entropy");
-			}
-			byte[] bytes = pwd.getBytes("UTF-8");
-			//byte[] scrypt = SCrypt.generate(bytes, salt.getBytes("UTF-8"), 1 << 17, 8, 1, 256);
-			//kpg.initialize(ecSpec, new FixedSecureRandom(scrypt));
-			return kpg.genKeyPair();
-		} catch (NoSuchAlgorithmException e) {
-			throw new FailedVerificationException(e);
-		} catch (UnsupportedEncodingException e) {
-			throw new FailedVerificationException(e);
-		} /* catch (InvalidAlgorithmParameterException e) {
-			throw new FailedVerificationException(e);
-		}*/
-	}
-
-	public static KeyPair generateRandomEC256K1KeyPair() throws FailedVerificationException {
-		try {
-			KeyPairGenerator kpg = KeyPairGenerator.getInstance(ALGO_EC);
-			ECGenParameterSpec ecSpec = new ECGenParameterSpec(EC_256SPEC_K1);
-			kpg.initialize(ecSpec);
-			return kpg.genKeyPair();
-		} catch (NoSuchAlgorithmException e) {
-			throw new FailedVerificationException(e);
-		} catch (InvalidAlgorithmParameterException e) {
-			throw new FailedVerificationException(e);
-		}
-	}
-
 	public static String signMessageWithKeyBase64(KeyPair keyPair, byte[] msg, String signAlgo, ByteArrayOutputStream out) {
-		byte[] sigBytes = new byte[0];
+		byte[] sigBytes;
 		try {
 			sigBytes = signMessageWithKey(keyPair, msg, signAlgo);
 		} catch (FailedVerificationException e) {
@@ -301,38 +233,9 @@ public class SecUtils {
 		}
 	}
 
-	public static boolean validateSignature(KeyPair keyPair, byte[] msg, String sig) {
-		if(sig == null || keyPair == null) {
-			 return false;
-		}
-		int ind = sig.indexOf(':');
-		String sigAlgo = sig.substring(0, ind);
-		return validateSignature(keyPair, msg, sigAlgo, decodeSignature(sig.substring(ind + 1)));
-	}
-
-	public static boolean validateSignature(KeyPair keyPair, byte[] msg, String sigAlgo, byte[] signature) {
-		if (keyPair == null) {
-			return false;
-		}
-		try {
-			Signature sig = Signature.getInstance(getInternalSigAlgo(sigAlgo));
-			sig.initVerify(keyPair.getPublic());
-			sig.update(msg);
-			return sig.verify(signature);
-		} catch (NoSuchAlgorithmException e) {
-			//throw new FailedVerificationException(e);
-		} catch (InvalidKeyException e) {
-			//throw new FailedVerificationException(e);
-		} catch (SignatureException e) {
-			//throw new FailedVerificationException(e);
-		}
-		return false;
-	}
-
 	private static String getInternalSigAlgo(String sigAlgo) {
 		return sigAlgo.equals(SIG_ALGO_ECDSA)? SIG_ALGO_NONE_EC : sigAlgo;
 	}
-
 
 	public static byte[] calculateHash(String algo, byte[] b1, byte[] b2) {
 		byte[] m = mergeTwoArrays(b1, b2);
@@ -365,16 +268,6 @@ public class SecUtils {
 		}
 	}
 
-	public static String calculateHashWithAlgo(String algo, byte[] bts) {
-		byte[] hash = calculateHash(algo, bts, null);
-		return formatHashWithAlgo(algo, hash);
-	}
-
-	public static String formatHashWithAlgo(String algo, byte[] hash) {
-		String hex = Hex.encodeHexString(hash);
-		return algo + ":" + hex;
-	}
-
 	public static byte[] getHashBytes(String msg) {
 		if(msg == null || msg.length() == 0) {
 			// special case for empty hash
@@ -388,41 +281,5 @@ public class SecUtils {
 			throw new IllegalArgumentException(e);
 		}
 	}
-
-
-	public static boolean validateHash(String hash, String salt, String msg) {
-		int s = hash.indexOf(":");
-		if (s == -1) {
-			throw new IllegalArgumentException(String.format("Hash %s doesn't contain algorithm of hashing to verify",
-					s));
-		}
-		String v = calculateHashWithAlgo(hash.substring(0, s), salt, msg);
-		return hash.equals(v);
-	}
-
-	public static byte[] decodeSignature(String digest) {
-		try {
-			int indexOf = digest.indexOf(DECODE_BASE64 + ":");
-			if (indexOf != -1) {
-//				return Base64.getDecoder().decode(digest.substring(indexOf + DECODE_BASE64.length() + 1).
-//						getBytes("UTF-8"));
-				return android.util.Base64.decode(digest.substring(indexOf + DECODE_BASE64.length() + 1)
-						.getBytes("UTF-8"), android.util.Base64.DEFAULT);
-			}
-		} catch (UnsupportedEncodingException e) {
-			throw new IllegalStateException(e);
-		}
-		throw new IllegalArgumentException("Unknown format for signature " + digest);
-	}
-
-	public static String hexify(byte[] bytes) {
-		if(bytes == null || bytes.length == 0) {
-			return "";
-		}
-		return Hex.encodeHexString(bytes);
-
-	}
-
-
 
 }
