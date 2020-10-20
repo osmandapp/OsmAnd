@@ -13,8 +13,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import android.net.TrafficStats;
 import android.os.Build;
 import android.util.Base64;
-
-import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.osmedit.utils.ops.OpOperation;
 import org.apache.commons.codec.DecoderException;
@@ -41,7 +39,7 @@ public class SecUtils {
 	private static final int THREAD_ID = 11200;
 
 
-	public static void main(String image) throws FailedVerificationException {
+	public static void uploadImage(String image) throws FailedVerificationException {
 		KeyPair kp = SecUtils.getKeyPair(ALGO_EC,
 				"base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCDJy0f8+uI5Lh3gQHp+wa9EzqrIgdKdFdVuQZooRiywcA=="
 				, "base64:X.509:MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEQ4xuycvus0e0qggdaeYJstMHpn025COnttRcup93L+VCS1ryv0iPSXeyBEnhgV0GdeAQ6GRHQB057ccZn/yzpQ==");
