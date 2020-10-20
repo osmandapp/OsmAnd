@@ -486,17 +486,6 @@
 		<activity android:name="net.osmand.plus.activities.SettingsGeneralActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation" />
 
-		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity"
-				  android:launchMode="singleInstance"
-				  android:configChanges="keyboardHidden|orientation">
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="osmand-oauth" />
-			</intent-filter>
-		</activity>
-
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" />
 		<activity android:name="net.osmand.plus.activities.FavoritesListActivity" android:label="@string/favourites_list_activity" />
 		<activity android:name=".myplaces.FavoritesActivity" android:windowSoftInputMode="adjustPan" />
