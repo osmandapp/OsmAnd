@@ -19,6 +19,7 @@ import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
+import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -58,6 +59,9 @@ public class IntentHelper {
 		}
 		if (!applied) {
 			applied = parseSendIntent();
+		}
+		if (!applied) {
+			applied = parseOAuthIntent();
 		}
 		return applied;
 	}
@@ -278,6 +282,23 @@ public class IntentHelper {
 			if (Intent.ACTION_SEND.equals(action) && type != null) {
 				if ("text/plain".equals(type)) {
 					return handleSendText(intent);
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean parseOAuthIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri uri = intent.getData();
+			if (uri.toString().startsWith("osmand-oauth")) {
+				OsmEditingFragment fragment = mapActivity.getOsmEditingFragment();
+				if (fragment != null) {
+					String oauthVerifier = uri.getQueryParameter("oauth_verifier");
+					fragment.authorize(oauthVerifier);
+					mapActivity.setIntent(null);
+					return true;
 				}
 			}
 		}
