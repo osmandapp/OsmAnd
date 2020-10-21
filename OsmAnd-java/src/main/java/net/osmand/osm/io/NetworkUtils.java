@@ -57,25 +57,25 @@ public class NetworkUtils {
 		}
 	}
 
-	public static String sendPostDataRequest(String urlText, InputStream data){
+	public static String sendPostDataRequest(String urlText, InputStream data) {
 		try {
 			log.info("POST : " + urlText);
 			HttpURLConnection conn = getHttpURLConnection(urlText);
 			conn.setDoInput(true);
 			conn.setDoOutput(false);
 			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Accept","*/*");
+			conn.setRequestProperty("Accept", "*/*");
 			conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
 			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
 			OutputStream ous = conn.getOutputStream();
 			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
 			ous.write(("content-disposition: form-data; name=\"" + "file" + "\"; filename=\"" + "image1" + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
 			ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
-			Algorithms.streamCopy(data,ous);
+			Algorithms.streamCopy(data, ous);
 			ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
 			ous.flush();
 			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
-			if(conn.getResponseCode() != 200){
+			if (conn.getResponseCode() != 200) {
 				return null;
 			}
 			StringBuilder responseBody = new StringBuilder();
@@ -86,7 +86,7 @@ public class NetworkUtils {
 				String s;
 				boolean first = true;
 				while ((s = in.readLine()) != null) {
-					if(first){
+					if (first) {
 						first = false;
 					} else {
 						responseBody.append("\n"); //$NON-NLS-1$
