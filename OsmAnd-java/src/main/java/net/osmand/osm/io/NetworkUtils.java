@@ -76,7 +76,7 @@ public class NetworkUtils {
 			ous.flush();
 			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
 			if(conn.getResponseCode() != 200){
-				return conn.getResponseMessage();
+				return null;
 			}
 			StringBuilder responseBody = new StringBuilder();
 			InputStream is = conn.getInputStream();
