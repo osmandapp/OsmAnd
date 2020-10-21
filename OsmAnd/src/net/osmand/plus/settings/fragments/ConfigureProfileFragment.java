@@ -436,7 +436,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				ExportProfileBottomSheet.showInstance(
 						fragmentManager,
 						this,
-						getSelectedAppMode());
+						getSelectedAppMode(), false);
 			}
 		} else if (DELETE_PROFILE.equals(prefId)) {
 			onDeleteProfileClick();

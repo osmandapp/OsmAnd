@@ -31,10 +31,11 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
@@ -52,37 +53,45 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private static final Log LOG = PlatformUtil.getLog(ExportProfileBottomSheet.class);
 
-	private static final String INCLUDE_ADDITIONAL_DATA_KEY = "INCLUDE_ADDITIONAL_DATA_KEY";
+	private static final String GLOBAL_EXPORT_KEY = "global_export_key";
 	private static final String EXPORTING_PROFILE_KEY = "exporting_profile_key";
+	private static final String INCLUDE_ADDITIONAL_DATA_KEY = "include_additional_data_key";
+	private static final String INCLUDE_GLOBAL_SETTINGS_KEY = "include_global_settings_key";
 
 	private OsmandApplication app;
 	private ApplicationMode profile;
 	private Map<ExportSettingsType, List<?>> dataList = new HashMap<>();
 	private ExportImportSettingsAdapter adapter;
 
-	private SettingsHelper.SettingsExportListener exportListener;
+	private SettingsExportListener exportListener;
 	private ProgressDialog progress;
 
-	private boolean includeAdditionalData = false;
+	private boolean globalExport = false;
 	private boolean exportingProfile = false;
+	private boolean includeAdditionalData = false;
+	private boolean includeGlobalSettings = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
 		profile = getAppMode();
-		dataList = app.getSettingsHelper().getAdditionalData();
 		if (savedInstanceState != null) {
-			includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
+			globalExport = savedInstanceState.getBoolean(GLOBAL_EXPORT_KEY);
 			exportingProfile = savedInstanceState.getBoolean(EXPORTING_PROFILE_KEY);
+			includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
+			includeGlobalSettings = savedInstanceState.getBoolean(INCLUDE_GLOBAL_SETTINGS_KEY);
 		}
+		dataList = app.getSettingsHelper().getAdditionalData(globalExport);
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putBoolean(INCLUDE_ADDITIONAL_DATA_KEY, includeAdditionalData);
+		outState.putBoolean(GLOBAL_EXPORT_KEY, globalExport);
 		outState.putBoolean(EXPORTING_PROFILE_KEY, exportingProfile);
+		outState.putBoolean(INCLUDE_ADDITIONAL_DATA_KEY, includeAdditionalData);
+		outState.putBoolean(INCLUDE_GLOBAL_SETTINGS_KEY, includeGlobalSettings);
 	}
 
 	@Override
@@ -91,32 +100,55 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		if (context == null) {
 			return;
 		}
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		if (globalExport) {
+			items.add(new TitleItem(getString(R.string.shared_string_export)));
 
-		int profileColor = profile.getIconColorInfo().getColor(nightMode);
-		int colorNoAlpha = ContextCompat.getColor(context, profileColor);
+			final BottomSheetItemWithCompoundButton[] globalSettingsItem = new BottomSheetItemWithCompoundButton[1];
+			globalSettingsItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+					.setChecked(includeGlobalSettings)
+					.setTitle(getString(R.string.general_settings_2))
+					.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							boolean checked = !globalSettingsItem[0].isChecked();
+							globalSettingsItem[0].setChecked(checked);
+							includeGlobalSettings = checked;
+						}
+					})
+					.create();
+			items.add(globalSettingsItem[0]);
+		} else {
+			items.add(new TitleItem(getString(R.string.export_profile)));
 
-		Drawable backgroundIcon = UiUtilities.getColoredSelectableDrawable(context, colorNoAlpha, 0.3f);
-		Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.10f)), backgroundIcon};
+			int profileColor = profile.getIconColorInfo().getColor(nightMode);
+			int colorNoAlpha = ContextCompat.getColor(context, profileColor);
 
-		items.add(new TitleItem(getString(R.string.export_profile)));
+			Drawable backgroundIcon = UiUtilities.getColoredSelectableDrawable(context, colorNoAlpha, 0.3f);
+			Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.10f)), backgroundIcon};
 
-		BaseBottomSheetItem profileItem = new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(true)
-				.setCompoundButtonColorId(profileColor)
-				.setButtonTintList(ColorStateList.valueOf(getResolvedColor(profileColor)))
-				.setDescription(BaseSettingsFragment.getAppModeDescription(context, profile))
-				.setIcon(getIcon(profile.getIconRes(), profileColor))
-				.setTitle(profile.toHumanString())
-				.setBackground(new LayerDrawable(layers))
-				.setLayoutId(R.layout.preference_profile_item_with_radio_btn)
-				.create();
-		items.add(profileItem);
+			BaseBottomSheetItem profileItem = new BottomSheetItemWithCompoundButton.Builder()
+					.setChecked(true)
+					.setCompoundButtonColorId(profileColor)
+					.setButtonTintList(ColorStateList.valueOf(getResolvedColor(profileColor)))
+					.setDescription(BaseSettingsFragment.getAppModeDescription(context, profile))
+					.setIcon(getIcon(profile.getIconRes(), profileColor))
+					.setTitle(profile.toHumanString())
+					.setBackground(new LayerDrawable(layers))
+					.setLayoutId(R.layout.preference_profile_item_with_radio_btn)
+					.create();
+			items.add(profileItem);
+		}
+		setupAdditionalItems();
+	}
 
+	private void setupAdditionalItems() {
 		if (!dataList.isEmpty()) {
-			final View additionalDataView = inflater.inflate(R.layout.bottom_sheet_item_additional_data, null);
+			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+			View additionalDataView = inflater.inflate(R.layout.bottom_sheet_item_additional_data, null);
 			ExpandableListView listView = additionalDataView.findViewById(R.id.list);
 			adapter = new ExportImportSettingsAdapter(app, nightMode, false);
+
 			View listHeader = inflater.inflate(R.layout.item_header_export_expand_list, null);
 			final View topSwitchDivider = listHeader.findViewById(R.id.topSwitchDivider);
 			final View bottomSwitchDivider = listHeader.findViewById(R.id.bottomSwitchDivider);
@@ -130,7 +162,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 					topSwitchDivider.setVisibility(includeAdditionalData ? View.VISIBLE : View.GONE);
 					bottomSwitchDivider.setVisibility(includeAdditionalData ? View.VISIBLE : View.GONE);
 					if (includeAdditionalData) {
-						adapter.updateSettingsList(app.getSettingsHelper().getAdditionalData());
+						adapter.updateSettingsList(app.getSettingsHelper().getAdditionalData(globalExport));
 						adapter.selectAll(true);
 					} else {
 						adapter.selectAll(false);
@@ -207,9 +239,18 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		}
 	}
 
+	private void setGlobalExport(boolean globalExport) {
+		this.globalExport = globalExport;
+	}
+
 	private List<SettingsItem> prepareSettingsItemsForExport() {
 		List<SettingsItem> settingsItems = new ArrayList<>();
-		settingsItems.add(new ProfileSettingsItem(app, profile));
+		if (!globalExport) {
+			settingsItems.add(new ProfileSettingsItem(app, profile));
+		}
+		if (includeGlobalSettings) {
+			settingsItems.add(new GlobalSettingsItem(app.getSettings()));
+		}
 		if (includeAdditionalData) {
 			settingsItems.addAll(app.getSettingsHelper().prepareAdditionalSettingsItems(adapter.getData()));
 		}
@@ -241,9 +282,9 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		progress.show();
 	}
 
-	private SettingsHelper.SettingsExportListener getSettingsExportListener() {
+	private SettingsExportListener getSettingsExportListener() {
 		if (exportListener == null) {
-			exportListener = new SettingsHelper.SettingsExportListener() {
+			exportListener = new SettingsExportListener() {
 
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
@@ -304,11 +345,12 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-									   Fragment target,
-									   @NonNull ApplicationMode appMode) {
+									   Fragment target, @NonNull ApplicationMode appMode,
+									   boolean globalExport) {
 		try {
 			ExportProfileBottomSheet fragment = new ExportProfileBottomSheet();
 			fragment.setAppMode(appMode);
+			fragment.setGlobalExport(globalExport);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 			return true;
