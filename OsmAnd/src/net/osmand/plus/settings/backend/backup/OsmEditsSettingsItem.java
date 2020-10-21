@@ -5,12 +5,16 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OpenstreetmapsDbHelper;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmPoint;
 
@@ -19,7 +23,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPoint> {
 
@@ -71,6 +77,14 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 				appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
 			}
 		}
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		OpenstreetmapsDbHelper db;
+		if (osmEditingPlugin != null) {
+			db = osmEditingPlugin.getDBPOI();
+			for (OpenstreetmapPoint point : appliedItems) {
+				db.addOpenstreetmap(point);
+			}
+		}
 	}
 
 	@Override
@@ -116,9 +130,15 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 				long id = entityJson.getLong(ID_KEY);
 				double lat = entityJson.getDouble(LAT_KEY);
 				double lon = entityJson.getDouble(LON_KEY);
+				String tags = entityJson.getString(TAGS_KEY);
+				Map<String, String> tagMap = new Gson().fromJson(
+						tags, new TypeToken<HashMap<String, String>>() {
+						}.getType()
+				);
 				String action = entityJson.getString(ACTION_KEY);
 				Entity entity;
 				entity = new Node(lat, lon, id);
+				entity.replaceTags(tagMap);
 				OpenstreetmapPoint point = new OpenstreetmapPoint();
 				point.setComment(comment);
 				point.setEntity(entity);
@@ -144,7 +164,8 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 					jsonEntity.put(LAT_KEY, point.getLatitude());
 					jsonEntity.put(LON_KEY, point.getLongitude());
 					jsonEntity.put(TYPE_KEY, Entity.EntityType.valueOf(point.getEntity()));
-					jsonEntity.put(TAGS_KEY, point.getEntity().getTags());
+					JSONObject jsonTags = new JSONObject(point.getEntity().getTags());
+					jsonEntity.put(TAGS_KEY, jsonTags);
 					jsonPoint.put(COMMENT_KEY, point.getComment());
 					jsonEntity.put(ACTION_KEY, OsmPoint.stringAction.get(point.getAction()));
 					jsonPoint.put(ENTITY_KEY, jsonEntity);
