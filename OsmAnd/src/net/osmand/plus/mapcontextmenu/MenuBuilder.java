@@ -225,7 +225,7 @@ public class MenuBuilder {
 
 	public void buildUploadImagesRow(View view) {
 		if (mapContextMenu != null) {
-			String title = "Upload images";
+			String title = view.getContext().getString(R.string.upload_images);
 			buildRow(view, R.drawable.ic_action_note_dark, null, title, 0, false,
 					null, false, 0, false, new OnClickListener() {
 						@Override
