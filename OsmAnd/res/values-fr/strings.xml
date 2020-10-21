@@ -3902,4 +3902,14 @@
     <string name="osm_edit_logout_success">Déconnexion réussie</string>
     <string name="file_already_imported">Le fichier est déjà importé dans OsmAnd</string>
     <string name="use_two_phase_routing">Utiliser un algorithme de routage A* à 2 phases</string>
+    <string name="osm_live_payment_subscription_management_hw">Le paiement sera débité de votre compte AppGallery dès confirmation de l\'achat.
+\n
+\nA moins qu\'il ne soit annulé avant sa date de renouvellement, l\'abonnement sera automatiquement débité à chaque échéance (mensuelle / trimestrielle / annuelle).
+\n
+\nVous pouvez gérer et annuler vos abonnements dans vos paramètres AppGallery.</string>
+    <string name="message_need_calculate_route_before_show_graph">Seulement %1$s données disponibles sur les routes. Vous devez calculer l\'itinéraire via \"Itinéraire entre 2 points\".</string>
+    <string name="message_graph_will_be_available_after_recalculation">Recalcul de l\'itinéraire en cours.
+\nLe graphique sera disponible à l\'issue du calcul.</string>
+    <string name="snowmobile_render_descr">Pour la conduite en motoneige avec des routes et des pistes dédiées.</string>
+    <string name="shared_string_graph">Graphique</string>
 </resources>
