@@ -254,7 +254,9 @@ public class MenuBuilder {
 				try{
 					String url = "https://test.openplacereviews.org/api/ipfs/image";
 					String response = NetworkUtils.sendPostDataRequest(url, image);
-					SecUtils.uploadImage(response);
+					if (response != null){
+						SecUtils.uploadImage(response);
+					}
 				}
 				catch (Exception e){
 					e.printStackTrace();

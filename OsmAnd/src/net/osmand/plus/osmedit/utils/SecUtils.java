@@ -9,10 +9,18 @@ import java.security.spec.EncodedKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
 import android.net.TrafficStats;
 import android.os.Build;
 import android.util.Base64;
+
+import com.google.gson.GsonBuilder;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.osmedit.utils.ops.OpObject;
 import net.osmand.plus.osmedit.utils.ops.OpOperation;
@@ -52,14 +60,33 @@ public class SecUtils {
 		String signed = "test1234567:opr-web";
 
 		JsonFormatter formatter = new JsonFormatter();
-		//TODO
-		String msg = "{\"type\": \"opr.place\",\"edit\": [{\"id\": [\"9G2GCG\",\"wlkomu\"],\"change\": {\"version\": \"increment\",\"images\": {\"append\": {\"outdoor\": [" +
-				image +
-				"]}}},\"current\": {}}]}";
-		//OpOperation opOperation = new OpOperation();
-		//opOperation.setType("opr.place");
-		//opOperation.setFieldByExpr("current", new OpObject());
-		OpOperation opOperation = formatter.parseOperation(msg);
+		IPFSImage ipfsImage = new GsonBuilder().create().fromJson(image, IPFSImage.class);
+		OpOperation opOperation = new OpOperation();
+		opOperation.setType("opr.place");
+		List<Object> edits = new ArrayList<>();
+		Map<String, Object> edit = new TreeMap<>();
+		List<String> ids = new ArrayList<>();
+		List<Object> imageResponseList = new ArrayList<>();
+		Map<String,Object> imageMap = new TreeMap<>();
+		imageMap.put("cid",ipfsImage.cid);
+		imageMap.put("hash",ipfsImage.hash);
+		imageMap.put("extension",ipfsImage.extension);
+		imageMap.put("type",ipfsImage.type);
+		imageResponseList.add(imageMap);
+		ids.add("9G2GCG");
+		ids.add("wlkomu");
+		Map<String, Object> change = new TreeMap<>();
+		Map<String, Object> images = new TreeMap<>();
+		Map<String, Object> outdoor = new TreeMap<>();
+		outdoor.put("outdoor",imageResponseList);
+		images.put("append", outdoor);
+		change.put("version","increment");
+		change.put("images",images);
+		edit.put("id",ids);
+		edit.put("change",change);
+		edit.put("current",new Object());
+		edits.add(edit);
+		opOperation.putObjectValue(OpOperation.F_EDIT, edits);
 		opOperation.setSignedBy(signed);
 		String hash = JSON_MSG_TYPE + ":"
 				+ SecUtils.calculateHashWithAlgo(SecUtils.HASH_SHA256, null,
@@ -71,6 +98,7 @@ public class SecUtils {
 		TrafficStats.setThreadStatsTag(THREAD_ID);
 		String url = "http://test.openplacereviews.org/api/auth/process-operation?addToQueue=true&dontSignByServer=false";
 		String json = formatter.opToJson(opOperation);
+		System.out.println("JSON: " + json);
 		HttpURLConnection connection;
 		try {
 			connection = (HttpURLConnection) new URL(url).openConnection();
@@ -181,12 +209,6 @@ public class SecUtils {
 
 	public static KeyPair getKeyPair(String algo, String prKey, String pbKey) throws FailedVerificationException {
 		try {
-			for (Provider p : Security.getProviders()){
-				System.out.println("PROVIDER: " + p.getName());
-				for (Provider.Service s : p.getServices()){
-					System.out.println("ALGORITHM: " + s.getAlgorithm());
-				}
-			}
 			KeyFactory keyFactory = KeyFactory.getInstance(algo);
 			PublicKey pb = null;
 			PrivateKey pr = null;
