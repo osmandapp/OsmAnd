@@ -576,6 +576,7 @@ public class SettingsHelper {
 		List<File> multimediaFilesList = new ArrayList<>();
 		List<File> tracksFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<GlobalSettingsItem> globalSettingsItems = new ArrayList<>();
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
 				case PROFILE:
@@ -625,6 +626,9 @@ public class SettingsHelper {
 						avoidRoads.addAll(avoidRoadsItem.getItems());
 					}
 					break;
+				case GLOBAL:
+					globalSettingsItems.add((GlobalSettingsItem) item);
+					break;
 				default:
 					break;
 			}
@@ -656,6 +660,9 @@ public class SettingsHelper {
 		}
 		if (!tracksFilesList.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.TRACKS, tracksFilesList);
+		}
+		if (!globalSettingsItems.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.GLOBAL, globalSettingsItems);
 		}
 		return settingsToOperate;
 	}
