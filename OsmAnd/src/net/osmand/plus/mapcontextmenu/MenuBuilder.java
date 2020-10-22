@@ -21,6 +21,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,6 +54,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.osmedit.opr.OPRWebviewActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.POIMapLayer;
@@ -70,7 +72,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static android.content.Context.POWER_SERVICE;
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+import static net.osmand.plus.osmedit.opr.OPRWebviewActivity.getCookie;
 
 public class MenuBuilder {
 
@@ -212,7 +216,26 @@ public class MenuBuilder {
 			buildNearestPhotosRow(view);
 		}
 		buildPluginRows(view);
+		buildLoginRow(view);
 //		buildAfter(view);
+	}
+
+	private void buildLoginRow(View view) {
+		if (mapContextMenu != null) {
+			String title = "Registration";
+			buildRow(view, R.drawable.ic_action_note_dark,
+					null, title, 0, false, null,
+					false, 0, false, new OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							String cookie = getCookie();
+							if (cookie == null || cookie.isEmpty()){
+								Intent intent = new Intent(view.getContext(), OPRWebviewActivity.class);
+								view.getContext().startActivity(intent);
+							}
+						}
+					}, false);
+		}
 	}
 
 	private boolean showTransportRoutes() {
