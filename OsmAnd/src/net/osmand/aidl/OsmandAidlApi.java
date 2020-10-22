@@ -81,8 +81,10 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
@@ -138,7 +140,7 @@ import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_NAME;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DISTANCE;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_IMMINENT;
-import static net.osmand.plus.settings.backend.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 
 public class OsmandAidlApi {
 
@@ -2305,8 +2307,8 @@ public class OsmandAidlApi {
 			for (String key : settingsTypesKeys) {
 				settingsTypes.add(ExportSettingsType.valueOf(key));
 			}
-			List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
-			settingsItems.add(new SettingsHelper.ProfileSettingsItem(app, appMode));
+			List<SettingsItem> settingsItems = new ArrayList<>();
+			settingsItems.add(new ProfileSettingsItem(app, appMode));
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			SettingsHelper settingsHelper = app.getSettingsHelper();

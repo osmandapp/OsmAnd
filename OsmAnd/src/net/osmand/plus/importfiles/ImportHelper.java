@@ -34,8 +34,8 @@ import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
