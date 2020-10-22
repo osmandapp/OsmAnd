@@ -242,6 +242,11 @@ public class MenuBuilder {
 							Intent intent = new Intent();
 							intent.setType("image/*");
 							intent.setAction(Intent.ACTION_GET_CONTENT);
+							Object o = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObject();
+							if (o instanceof Amenity) {
+								Amenity a = (Amenity) o;
+								System.out.println("AMENITY ID: " + a.getId());
+							}
 							mapActivity.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 						}
 					}, false);
@@ -271,6 +276,8 @@ public class MenuBuilder {
 					String url = "https://test.openplacereviews.org/api/ipfs/image";
 					String response = NetworkUtils.sendPostDataRequest(url, image);
 					if (response != null) {
+						//TODO change
+						String[] id = new String[0];
 						int res = SecUtils.uploadImage(
 								OPRWebviewActivity.getPrivateKeyFromCookie(),
 								OPRWebviewActivity.getUsernameFromCookie(),
@@ -280,7 +287,7 @@ public class MenuBuilder {
 							showMessageWith(view, view.getResources().getString(R.string.cannot_upload_image));
 						} else {
 							String str = MessageFormat.format(view.getResources()
-											.getString(R.string.successfully_uploaded_pattern), 1, 1);
+									.getString(R.string.successfully_uploaded_pattern), 1, 1);
 							showMessageWith(view, str);
 						}
 					} else {
@@ -423,6 +430,11 @@ public class MenuBuilder {
 					@Override
 					public void onPostProcess(List<ImageCard> cardList) {
 						processOnlinePhotosCards(cardList);
+					}
+
+					@Override
+					public void onOPRPlaceIdAcquired(String[] id) {
+
 					}
 
 					@Override

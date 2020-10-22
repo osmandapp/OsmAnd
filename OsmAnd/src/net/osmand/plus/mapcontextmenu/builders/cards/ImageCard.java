@@ -423,6 +423,8 @@ public abstract class ImageCard extends AbstractCard {
 		public interface GetImageCardsListener {
 			void onPostProcess(List<ImageCard> cardList);
 
+			void onOPRPlaceIdAcquired(String[] id);
+
 			void onFinish(List<ImageCard> cardList);
 		}
 
@@ -443,7 +445,12 @@ public abstract class ImageCard extends AbstractCard {
 			if (o instanceof Amenity) {
 				Amenity am = (Amenity) o;
 				long amenityId = am.getId() >> 1;
-				getPicturesForPlace(result, amenityId);
+				String url = "https://test.openplacereviews.org/api/objects-by-index?type=opr.place&index=osmid&limit=1&key=" + amenityId;
+				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
+						"Requesting location images...", false, false);
+				getPicturesForPlace(result, response);
+				String[] id = getIdFromResponse(response);
+				listener.onOPRPlaceIdAcquired(id);
 			}
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
@@ -505,10 +512,29 @@ public abstract class ImageCard extends AbstractCard {
 			return result;
 		}
 
-		private void getPicturesForPlace(List<ImageCard> result, long l) {
-			String url = "https://test.openplacereviews.org/api/objects-by-index?type=opr.place&index=osmid&limit=1&key=" + l;
-			String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
-					"Requesting location images...", false, false);
+		private String[] getIdFromResponse(String response) {
+			try {
+				JSONArray obj = new JSONObject(response).getJSONArray("objects");
+				JSONArray images = (JSONArray)((JSONObject)obj.get(0)).get("id");
+				return toStringArray(images);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			return new String[0];
+		}
+
+		private String[] toStringArray(JSONArray array) {
+			if(array==null)
+				return null;
+
+			String[] arr=new String[array.length()];
+			for(int i=0; i<arr.length; i++) {
+				arr[i]=array.optString(i);
+			}
+			return arr;
+		}
+
+		private void getPicturesForPlace(List<ImageCard> result, String response) {
 			try {
 				if (!Algorithms.isEmpty(response)) {
 					JSONArray obj = new JSONObject(response).getJSONArray("objects");
