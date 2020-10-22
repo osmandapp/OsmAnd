@@ -34,6 +34,7 @@ class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 	protected GPXFile doInBackground(Void... nothing) {
 		List<FavouritePoint> favourites = asFavourites(app, gpxFile.getPoints(), fileName, forceImportFavourites);
 		FavouritesDbHelper favoritesHelper = app.getFavorites();
+		checkDuplicateNames(favourites);
 		for (FavouritePoint favourite : favourites) {
 			favoritesHelper.deleteFavourite(favourite, false);
 			favoritesHelper.addFavourite(favourite, false);
@@ -41,6 +42,27 @@ class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 		favoritesHelper.sortAll();
 		favoritesHelper.saveCurrentPointsIntoFile();
 		return null;
+	}
+
+	public void checkDuplicateNames(List<FavouritePoint> favourites) {
+		for (FavouritePoint fp : favourites) {
+			int number = 1;
+			String index;
+			String name = fp.getName();
+			boolean duplicatesFound = false;
+			for (FavouritePoint fp2 : favourites) {
+				if (name.equals(fp2.getName()) && fp.getCategory().equals(fp2.getCategory()) && !fp.equals(fp2)) {
+					if (!duplicatesFound) {
+						index = " (" + number + ")";
+						fp.setName(name + index);
+					}
+					duplicatesFound = true;
+					number++;
+					index = " (" + number + ")";
+					fp2.setName(fp2.getName() + index);
+				}
+			}
+		}
 	}
 
 	@Override

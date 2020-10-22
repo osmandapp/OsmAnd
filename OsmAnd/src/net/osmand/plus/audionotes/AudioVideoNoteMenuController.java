@@ -96,13 +96,11 @@ public class AudioVideoNoteMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		if (mRecording.isPhoto()) {
-			return getIcon(R.drawable.ic_action_photo_dark, R.color.audio_video_icon_color);
-		} else if (mRecording.isAudio()) {
-			return getIcon(R.drawable.ic_action_micro_dark, R.color.audio_video_icon_color);
-		} else {
-			return getIcon(R.drawable.ic_action_video_dark, R.color.audio_video_icon_color);
+		int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(mRecording.getFile());
+		if (iconId == -1) {
+			iconId = R.drawable.ic_action_photo_dark;
 		}
+		return getIcon(iconId, R.color.audio_video_icon_color);
 	}
 
 	@NonNull
