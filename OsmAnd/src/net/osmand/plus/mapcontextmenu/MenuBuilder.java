@@ -32,21 +32,14 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import net.osmand.AndroidUtils;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.osm.PoiCategory;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.*;
+import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
@@ -55,9 +48,9 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.osmedit.opr.OPRWebviewActivity;
 import net.osmand.plus.osmedit.utils.SecUtils;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.osmedit.opr.OPRWebviewActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.POIMapLayer;
@@ -67,14 +60,9 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
+
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.text.MessageFormat;
 import java.util.*;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
@@ -233,7 +221,7 @@ public class MenuBuilder {
 			buildRow(view, R.drawable.ic_action_note_dark, null, title, 0, false,
 					null, false, 0, false, new OnClickListener() {
 						@Override
-						public void onClick(View view) {
+						public void onClick(final View view) {
 							mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE,
 									new ActivityResultListener.OnActivityResultListener() {
 										@Override
@@ -244,9 +232,13 @@ public class MenuBuilder {
 											} catch (Exception e) {
 												LOG.error(e);
 											}
-											handleSelectedImage(inputStream);
+											handleSelectedImage(view, inputStream);
 										}
 									}));
+							String cookie = getPrivateKeyFromCookie();
+							if (cookie == null || cookie.isEmpty()) {
+								Toast.makeText(view.getContext(), R.string.register_before_upload, Toast.LENGTH_SHORT).show();
+							}
 							Intent intent = new Intent();
 							intent.setType("image/*");
 							intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -264,17 +256,14 @@ public class MenuBuilder {
 					false, 0, false, new OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							String cookie = getPrivateKeyFromCookie();
-							if (cookie == null || cookie.isEmpty()) {
-								Intent intent = new Intent(view.getContext(), OPRWebviewActivity.class);
-								view.getContext().startActivity(intent);
-							}
+							Intent intent = new Intent(view.getContext(), OPRWebviewActivity.class);
+							view.getContext().startActivity(intent);
 						}
 					}, false);
 		}
 	}
 
-	private void handleSelectedImage(final InputStream image) {
+	private void handleSelectedImage(final View view, final InputStream image) {
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -282,7 +271,20 @@ public class MenuBuilder {
 					String url = "https://test.openplacereviews.org/api/ipfs/image";
 					String response = NetworkUtils.sendPostDataRequest(url, image);
 					if (response != null) {
-						SecUtils.uploadImage(response);
+						int res = SecUtils.uploadImage(
+								OPRWebviewActivity.getPrivateKeyFromCookie(),
+								OPRWebviewActivity.getUsernameFromCookie(),
+								response);
+						if (res != 200) {
+							//image was uploaded but not added to blockchain
+							showMessageWith(view, view.getResources().getString(R.string.cannot_upload_image));
+						} else {
+							String str = MessageFormat.format(view.getResources()
+											.getString(R.string.successfully_uploaded_pattern), 1, 1);
+							showMessageWith(view, str);
+						}
+					} else {
+						showMessageWith(view, view.getResources().getString(R.string.cannot_upload_image));
 					}
 				} catch (Exception e) {
 					LOG.error(e);
@@ -290,6 +292,15 @@ public class MenuBuilder {
 			}
 		});
 		t.start();
+	}
+
+	private void showMessageWith(final View view, final String str) {
+		view.post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(view.getContext(), str, Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	private boolean showTransportRoutes() {
