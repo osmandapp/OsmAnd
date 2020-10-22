@@ -42,7 +42,9 @@ import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,17 +56,21 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	private static final Log LOG = PlatformUtil.getLog(ExportProfileBottomSheet.class);
 
 	private static final String GLOBAL_EXPORT_KEY = "global_export_key";
+	private static final String EXPORT_START_TIME_KEY = "export_start_time_key";
 	private static final String EXPORTING_PROFILE_KEY = "exporting_profile_key";
 	private static final String INCLUDE_ADDITIONAL_DATA_KEY = "include_additional_data_key";
 	private static final String INCLUDE_GLOBAL_SETTINGS_KEY = "include_global_settings_key";
 
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yy");
+
 	private OsmandApplication app;
-	private ApplicationMode profile;
 	private Map<ExportSettingsType, List<?>> dataList = new HashMap<>();
 	private ExportImportSettingsAdapter adapter;
 
 	private SettingsExportListener exportListener;
 	private ProgressDialog progress;
+
+	private long exportStartTime;
 
 	private boolean globalExport = false;
 	private boolean exportingProfile = false;
@@ -75,12 +81,12 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
-		profile = getAppMode();
 		if (savedInstanceState != null) {
 			globalExport = savedInstanceState.getBoolean(GLOBAL_EXPORT_KEY);
 			exportingProfile = savedInstanceState.getBoolean(EXPORTING_PROFILE_KEY);
 			includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
 			includeGlobalSettings = savedInstanceState.getBoolean(INCLUDE_GLOBAL_SETTINGS_KEY);
+			exportStartTime = savedInstanceState.getLong(EXPORT_START_TIME_KEY);
 		}
 		dataList = app.getSettingsHelper().getAdditionalData(globalExport);
 	}
@@ -92,6 +98,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		outState.putBoolean(EXPORTING_PROFILE_KEY, exportingProfile);
 		outState.putBoolean(INCLUDE_ADDITIONAL_DATA_KEY, includeAdditionalData);
 		outState.putBoolean(INCLUDE_GLOBAL_SETTINGS_KEY, includeGlobalSettings);
+		outState.putLong(EXPORT_START_TIME_KEY, exportStartTime);
 	}
 
 	@Override
@@ -120,7 +127,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			items.add(globalSettingsItem[0]);
 		} else {
 			items.add(new TitleItem(getString(R.string.export_profile)));
-
+			ApplicationMode profile = getAppMode();
 			int profileColor = profile.getIconColorInfo().getColor(nightMode);
 			int colorNoAlpha = ContextCompat.getColor(context, profileColor);
 
@@ -246,7 +253,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	private List<SettingsItem> prepareSettingsItemsForExport() {
 		List<SettingsItem> settingsItems = new ArrayList<>();
 		if (!globalExport) {
-			settingsItems.add(new ProfileSettingsItem(app, profile));
+			settingsItems.add(new ProfileSettingsItem(app, getAppMode()));
 		}
 		if (includeGlobalSettings) {
 			settingsItems.add(new GlobalSettingsItem(app.getSettings()));
@@ -260,10 +267,22 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	private void prepareFile() {
 		if (app != null) {
 			exportingProfile = true;
+			exportStartTime = System.currentTimeMillis();
 			showExportProgressDialog();
 			File tempDir = FileUtils.getTempDir(app);
-			String fileName = profile.toHumanString();
+			String fileName = getFileName();
 			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), prepareSettingsItemsForExport(), true);
+		}
+	}
+
+	private String getFileName() {
+		if (globalExport) {
+			if (exportStartTime == 0) {
+				exportStartTime = System.currentTimeMillis();
+			}
+			return "Export_" + DATE_FORMAT.format(new Date(exportStartTime));
+		} else {
+			return getAppMode().toHumanString();
 		}
 	}
 
@@ -291,7 +310,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 					dismissExportProgressDialog();
 					exportingProfile = false;
 					if (succeed) {
-						shareProfile(file, profile);
+						shareProfile(file);
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
 					}
@@ -310,7 +329,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 				app.getSettingsHelper().updateExportListener(file, getSettingsExportListener());
 			} else if (file.exists()) {
 				dismissExportProgressDialog();
-				shareProfile(file, profile);
+				shareProfile(file);
 			}
 		}
 	}
@@ -324,15 +343,15 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private File getExportFile() {
 		File tempDir = FileUtils.getTempDir(app);
-		String fileName = profile.toHumanString();
+		String fileName = getFileName();
 		return new File(tempDir, fileName + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
 	}
 
-	private void shareProfile(@NonNull File file, @NonNull ApplicationMode profile) {
+	private void shareProfile(@NonNull File file) {
 		try {
 			final Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_SUBJECT, profile.toHumanString() + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
+			sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
 			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
 			sendIntent.setType("*/*");
 			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
