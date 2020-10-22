@@ -34,11 +34,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.AndroidUtils;
-<<<<<<< HEAD
 import net.osmand.binary.BinaryMapIndexReader;
-=======
 import net.osmand.PlatformUtil;
->>>>>>> issue_202_203_opr
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -50,6 +47,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
@@ -58,6 +56,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.osmedit.utils.SecUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -67,7 +66,9 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import org.apache.commons.logging.Log;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -108,6 +109,8 @@ public class MenuBuilder {
 	private String preferredMapLang;
 	private String preferredMapAppLang;
 	private boolean transliterateNames;
+	private static final int PICK_IMAGE = 1231;
+	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 
 	public interface CollapseExpandListener {
 		void onCollapseExpand(boolean collapsed);
@@ -217,13 +220,14 @@ public class MenuBuilder {
 		if (showOnlinePhotos) {
 			buildNearestPhotosRow(view);
 		}
+		buildUploadImagesRow(view);
 		buildPluginRows(view);
 //		buildAfter(view);
 	}
 
 	public void buildUploadImagesRow(View view) {
 		if (mapContextMenu != null) {
-			String title = "Upload images";
+			String title = view.getContext().getString(R.string.upload_images);
 			buildRow(view, R.drawable.ic_action_note_dark, null, title, 0, false,
 					null, false, 0, false, new OnClickListener() {
 						@Override
@@ -262,7 +266,7 @@ public class MenuBuilder {
 					}
 				}
 				catch (Exception e){
-					e.printStackTrace();
+					LOG.error(e);
 				}
 			}
 		});

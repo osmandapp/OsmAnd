@@ -24,6 +24,8 @@ import com.google.gson.GsonBuilder;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.osmedit.utils.ops.OpObject;
 import net.osmand.plus.osmedit.utils.ops.OpOperation;
+import net.osmand.plus.osmedit.utils.util.JsonFormatter;
+import net.osmand.plus.osmedit.utils.util.exception.FailedVerificationException;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -138,9 +140,6 @@ public class SecUtils {
 			int s = key.indexOf(':');
 			if (s == -1) {
 				throw new IllegalArgumentException(String.format("Key doesn't contain algorithm of hashing to verify"));
-			}
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-				return getKeySpecByFormat(key.substring(0, s), java.util.Base64.getDecoder().decode(key.substring(s + 1)));
 			}
 			return getKeySpecByFormat(key.substring(0, s),
 					android.util.Base64.decode(key.substring(s + 1), Base64.DEFAULT));
