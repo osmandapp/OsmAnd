@@ -409,6 +409,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				}
 			}
 			OsmandPreference<Long> subscriptionCancelledTime = ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME;
+			OsmandSettings.OsmandPreference<Long> subscriptionCancelledTime = ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME;
 			if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
 				if (subscriptionCancelledTime.get() == 0) {
 					subscriptionCancelledTime.set(System.currentTimeMillis());

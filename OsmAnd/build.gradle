@@ -546,4 +546,5 @@ dependencies {
 	implementation "org.bouncycastle:bcpkix-jdk15on:1.56"
 
 	freehuaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
+	freehuaweiImplementation 'com.huawei.hms:game:5.0.3.301'
 }
