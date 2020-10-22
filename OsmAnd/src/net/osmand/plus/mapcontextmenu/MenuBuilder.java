@@ -21,6 +21,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,13 +35,11 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.osm.io.NetworkUtils;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -55,7 +54,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.osmedit.opr.OPRWebviewActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.POIMapLayer;
@@ -73,7 +72,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static android.content.Context.POWER_SERVICE;
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+import static net.osmand.plus.osmedit.opr.OPRWebviewActivity.getCookie;
 
 public class MenuBuilder {
 
@@ -215,55 +216,26 @@ public class MenuBuilder {
 			buildNearestPhotosRow(view);
 		}
 		buildPluginRows(view);
+		buildLoginRow(view);
 //		buildAfter(view);
 	}
 
-	public void buildUploadImagesRow(View view) {
+	private void buildLoginRow(View view) {
 		if (mapContextMenu != null) {
-			String title = "Upload images";
-			buildRow(view, R.drawable.ic_action_note_dark, null, title, 0, false,
-					null, false, 0, false, new OnClickListener() {
+			String title = "Registration";
+			buildRow(view, R.drawable.ic_action_note_dark,
+					null, title, 0, false, null,
+					false, 0, false, new OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE,
-									new ActivityResultListener.OnActivityResultListener() {
-										@Override
-										public void onResult(int resultCode, Intent resultData) {
-											InputStream inputStream = null;
-											try {
-												inputStream = mapActivity.getContentResolver().openInputStream(resultData.getData());
-											} catch (Exception e) {
-												LOG.error(e);
-											}
-											handleSelectedImage(inputStream);
-										}
-									}));
-							Intent intent = new Intent();
-							intent.setType("image/*");
-							intent.setAction(Intent.ACTION_GET_CONTENT);
-							mapActivity.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+							String cookie = getCookie();
+							if (cookie == null || cookie.isEmpty()){
+								Intent intent = new Intent(view.getContext(), OPRWebviewActivity.class);
+								view.getContext().startActivity(intent);
+							}
 						}
 					}, false);
 		}
-	}
-
-	private void handleSelectedImage(final InputStream image) {
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try{
-					String url = "https://test.openplacereviews.org/api/ipfs/image";
-					String response = NetworkUtils.sendPostDataRequest(url, image);
-					if (response != null){
-						SecUtils.uploadImage(response);
-					}
-				}
-				catch (Exception e){
-					e.printStackTrace();
-				}
-			}
-		});
-		t.start();
 	}
 
 	private boolean showTransportRoutes() {
@@ -304,7 +276,7 @@ public class MenuBuilder {
 	protected boolean needBuildPlainMenuItems() {
 		return true;
 	}
-
+	
 	protected boolean needBuildCoordinatesRow() {
 		return true;
 	}
@@ -374,7 +346,7 @@ public class MenuBuilder {
 		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv, false, 1,
 			false, null, false);
 	}
-
+	
 	private void startLoadingImages() {
 		if (onlinePhotoCardsRow == null) {
 			return;
@@ -1043,10 +1015,18 @@ public class MenuBuilder {
 		if (showNearestWiki && latLon != null) {
 			QuadRect rect = MapUtils.calculateLatLonBbox(
 					latLon.getLatitude(), latLon.getLongitude(), 250);
-			PoiUIFilter wikiPoiFilter = app.getPoiFilters().getTopWikiPoiFilter();
+			nearestWiki = app.getResourceManager().searchAmenities(
+					new BinaryMapIndexReader.SearchPoiTypeFilter() {
+						@Override
+						public boolean accept(PoiCategory type, String subcategory) {
+							return type != null && type.isWiki();
+						}
 
-			nearestWiki = getAmenities(rect, wikiPoiFilter);
-
+						@Override
+						public boolean isEmpty() {
+							return false;
+						}
+					}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
 			Collections.sort(nearestWiki, new Comparator<Amenity>() {
 
 				@Override
@@ -1059,7 +1039,8 @@ public class MenuBuilder {
 			Long id = objectId;
 			List<Amenity> wikiList = new ArrayList<>();
 			for (Amenity wiki : nearestWiki) {
-				if (wiki.getId().equals(id)) {
+				String lng = wiki.getContentLanguage("content", preferredMapAppLang, "en");
+				if (wiki.getId().equals(id) || (!lng.equals("en") && !lng.equals(preferredMapAppLang))) {
 					wikiList.add(wiki);
 				}
 			}
@@ -1067,11 +1048,6 @@ public class MenuBuilder {
 			return true;
 		}
 		return false;
-	}
-
-	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter wikiPoiFilter) {
-		return wikiPoiFilter.searchAmenities(rect.top, rect.left,
-						rect.bottom, rect.right, -1, null);
 	}
 
 	@SuppressWarnings("unchecked")
