@@ -34,12 +34,17 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.AndroidUtils;
+<<<<<<< HEAD
 import net.osmand.binary.BinaryMapIndexReader;
+=======
+import net.osmand.PlatformUtil;
+>>>>>>> issue_202_203_opr
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -214,6 +219,54 @@ public class MenuBuilder {
 		}
 		buildPluginRows(view);
 //		buildAfter(view);
+	}
+
+	public void buildUploadImagesRow(View view) {
+		if (mapContextMenu != null) {
+			String title = "Upload images";
+			buildRow(view, R.drawable.ic_action_note_dark, null, title, 0, false,
+					null, false, 0, false, new OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE,
+									new ActivityResultListener.OnActivityResultListener() {
+										@Override
+										public void onResult(int resultCode, Intent resultData) {
+											InputStream inputStream = null;
+											try {
+												inputStream = mapActivity.getContentResolver().openInputStream(resultData.getData());
+											} catch (Exception e) {
+												LOG.error(e);
+											}
+											handleSelectedImage(inputStream);
+										}
+									}));
+							Intent intent = new Intent();
+							intent.setType("image/*");
+							intent.setAction(Intent.ACTION_GET_CONTENT);
+							mapActivity.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+						}
+					}, false);
+		}
+	}
+
+	private void handleSelectedImage(final InputStream image) {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try{
+					String url = "https://test.openplacereviews.org/api/ipfs/image";
+					String response = NetworkUtils.sendPostDataRequest(url, image);
+					if (response != null){
+						SecUtils.uploadImage(response);
+					}
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
+			}
+		});
+		t.start();
 	}
 
 	private boolean showTransportRoutes() {
