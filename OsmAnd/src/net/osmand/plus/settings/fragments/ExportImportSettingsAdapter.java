@@ -264,6 +264,11 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				title.setText(OsmEditingPlugin.getTitle((OpenstreetmapPoint) currentItem, app));
 				setupIcon(icon, R.drawable.ic_action_info_dark, itemSelected);
 				break;
+			case OFFLINE_MAPS:
+				file = (File) currentItem;
+				title.setText(file.getName());
+				setupIcon(icon, R.drawable.ic_map, itemSelected);
+				break;
 			default:
 				return child;
 		}
@@ -344,6 +349,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.osm_notes;
 			case OSM_EDITS:
 				return R.string.osm_edit_modified_poi;
+			case OFFLINE_MAPS:
+				return R.string.download_regular_maps;
 			default:
 				return R.string.access_empty_list;
 		}

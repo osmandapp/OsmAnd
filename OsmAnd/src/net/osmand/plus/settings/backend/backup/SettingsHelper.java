@@ -16,8 +16,11 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.activities.LocalIndexHelper;
+import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
@@ -519,7 +522,28 @@ public class SettingsHelper {
 				dataList.put(ExportSettingsType.OSM_EDITS, editsPointList);
 			}
 		}
+		List<File> files = getLocalMapFiles();
+		if (!files.isEmpty()) {
+			dataList.put(ExportSettingsType.OFFLINE_MAPS, files);
+		}
 		return dataList;
+	}
+
+	private List<File> getLocalMapFiles() {
+		List<File> files = new ArrayList<>();
+		LocalIndexHelper helper = new LocalIndexHelper(app);
+		List<LocalIndexInfo> localMapFileList = helper.getLocalFullMaps(new AbstractLoadLocalIndexTask() {
+			@Override
+			public void loadFile(LocalIndexInfo... loaded) {
+			}
+		});
+		for (LocalIndexInfo map : localMapFileList) {
+			File file = new File(map.getPathToData());
+			if (file != null && file.exists()) {
+				files.add(file);
+			}
+		}
+		return files;
 	}
 
 	public List<SettingsItem> prepareAdditionalSettingsItems(List<? super Object> data) {
@@ -583,6 +607,7 @@ public class SettingsHelper {
 		List<File> renderFilesList = new ArrayList<>();
 		List<File> multimediaFilesList = new ArrayList<>();
 		List<File> tracksFilesList = new ArrayList<>();
+		List<File> mapFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		List<OsmNotesPoint> notesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
@@ -601,6 +626,8 @@ public class SettingsHelper {
 						multimediaFilesList.add(fileItem.getFile());
 					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.GPX) {
 						tracksFilesList.add(fileItem.getFile());
+					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.OBF_MAP) {
+						mapFilesList.add(fileItem.getFile());
 					}
 					break;
 				case QUICK_ACTIONS:
@@ -688,6 +715,9 @@ public class SettingsHelper {
 		}
 		if (!editsPointList.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.OSM_EDITS, editsPointList);
+		}
+		if (!mapFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.OFFLINE_MAPS, mapFilesList);
 		}
 		return settingsToOperate;
 	}

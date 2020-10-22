@@ -18,5 +18,6 @@ public enum SettingsItemType {
 	TRACKS,
 	AUDIO_VIDEO_NOTES,
 	OSM_NOTES,
-	OSM_EDITS
+	OSM_EDITS,
+	OFFLINE_MAPS
 }
