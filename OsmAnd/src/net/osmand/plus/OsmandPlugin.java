@@ -48,7 +48,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -111,11 +111,7 @@ public abstract class OsmandPlugin {
 		return app.getUIUtilities().getIcon(getLogoResourceId());
 	}
 
-	public Class<? extends Activity> getSettingsActivity() {
-		return null;
-	}
-
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+	public SettingsScreenType getSettingsScreenType() {
 		return null;
 	}
 

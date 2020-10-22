@@ -6,10 +6,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
@@ -32,6 +35,7 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import static net.osmand.plus.activities.PluginInfoFragment.PLUGIN_INFO;
 import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
@@ -45,6 +49,35 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_TRACKS = "open_tracks";
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
+
+	boolean showSwitchProfile = false;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		Bundle args = getArguments();
+		if (args != null) {
+			showSwitchProfile = args.getBoolean(PLUGIN_INFO, false);
+		}
+	}
+
+	@Override
+	protected void createToolbar(LayoutInflater inflater, View view) {
+		super.createToolbar(inflater, view);
+
+		View switchProfile = view.findViewById(R.id.profile_button);
+		if (switchProfile != null) {
+			AndroidUiHelper.updateVisibility(switchProfile, showSwitchProfile);
+		}
+	}
+
+	@Override
+	public Bundle buildArguments() {
+		Bundle args = super.buildArguments();
+		args.putBoolean(PLUGIN_INFO, showSwitchProfile);
+		return args;
+	}
 
 	@Override
 	protected void setupPreferences() {
