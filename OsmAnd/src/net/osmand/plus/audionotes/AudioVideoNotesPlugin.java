@@ -47,14 +47,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -66,12 +63,15 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import net.osmand.util.MapUtils;
@@ -517,7 +517,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 			return additional.toString();
 		}
+	}
 
+	public static int getIconIdForRecordingFile(@NonNull File file) {
+		String fileName = file.getName();
+		if (fileName.endsWith(IMG_EXTENSION)) {
+			return R.drawable.ic_action_photo_dark;
+		} else if (fileName.endsWith(MPEG4_EXTENSION)) {
+			return R.drawable.ic_action_video_dark;
+		} else if (fileName.endsWith(THREEGP_EXTENSION)) {
+			return R.drawable.ic_action_micro_dark;
+		}
+		return -1;
 	}
 
 //	private static void initializeRemoteControlRegistrationMethods() {
@@ -1800,13 +1811,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return SettingsAudioVideoActivity.class;
-	}
-
-	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return MultimediaNotesFragment.class;
+	public SettingsScreenType getSettingsScreenType() {
+		return SettingsScreenType.MULTIMEDIA_NOTES;
 	}
 
 	@Override

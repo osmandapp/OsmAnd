@@ -13,12 +13,12 @@ import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.SettingsHelper.CheckDuplicatesListener;
-import net.osmand.plus.settings.backend.SettingsHelper.PluginSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsCollectListener;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsImportListener;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
+import net.osmand.plus.settings.backend.backup.PluginSettingsItem;
+import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsCollectListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsImportListener;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.settings.fragments.ImportSettingsFragment;
 import net.osmand.util.Algorithms;
 

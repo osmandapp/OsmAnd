@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,13 +21,13 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -36,13 +35,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
-import net.osmand.plus.activities.PluginsActivity;
+import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-
 
 import org.apache.commons.logging.Log;
 
@@ -229,8 +228,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			if (holder instanceof DescriptionHolder) {
 				DescriptionHolder descriptionHolder = (DescriptionHolder) holder;
 				String plugins = getString(R.string.prefs_plugins);
-				setupClickableText(
-						descriptionHolder.description, (String) currentItem, plugins, new Intent(app, PluginsActivity.class));
+				setupClickableText(descriptionHolder.description, (String) currentItem, plugins);
 				descriptionHolder.image.setVisibility(View.GONE);
 			} else {
 				final ScreenType item = (ScreenType) currentItem;
@@ -253,12 +251,15 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			return items.size();
 		}
 
-		private void setupClickableText(TextView textView, String text, String clickableText, final Intent intent) {
+		private void setupClickableText(TextView textView, String text, String clickableText) {
 			SpannableString spannableString = new SpannableString(text);
 			ClickableSpan clickableSpan = new ClickableSpan() {
 				@Override
 				public void onClick(@NonNull View view) {
-					startActivity(intent);
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						PluginsFragment.showInstance(activity.getSupportFragmentManager());
+					}
 				}
 			};
 			try {

@@ -22,6 +22,7 @@ import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -110,8 +111,7 @@ public class MapDataMenuController extends MenuController {
 										activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
 							}
 						} else {
-							activity.startActivity(new Intent(activity, activity.getMyApplication().getAppCustomization()
-									.getPluginsActivity()));
+							PluginsFragment.showInstance(activity.getSupportFragmentManager());
 							Toast.makeText(activity, activity.getString(R.string.activate_srtm_plugin),
 									Toast.LENGTH_SHORT).show();
 						}
