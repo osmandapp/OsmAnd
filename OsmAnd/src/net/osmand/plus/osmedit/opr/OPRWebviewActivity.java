@@ -13,7 +13,6 @@ public class OPRWebviewActivity extends AppCompatActivity {
 
 	private WebView webView;
 	private static String url = "https://test.openplacereviews.org/login";
-	private static String cookieName = "opr-token";
 	private final Log log = PlatformUtil.getLog(OPRWebviewActivity.class);
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,8 +26,16 @@ public class OPRWebviewActivity extends AppCompatActivity {
 	}
 
 	public static String getPrivateKeyFromCookie() {
-		String CookieValue = null;
+		return returnCookieByKey("opr-token");
+	}
 
+
+	public static String getUsernameFromCookie() {
+		return returnCookieByKey("opr-nickname");
+	}
+
+	private static String returnCookieByKey(String key){
+		String CookieValue = null;
 		CookieManager cookieManager = CookieManager.getInstance();
 		String cookies = cookieManager.getCookie(url);
 		if (cookies == null || cookies.isEmpty()) {
@@ -36,7 +43,7 @@ public class OPRWebviewActivity extends AppCompatActivity {
 		}
 		String[] temp = cookies.split(";");
 		for (String ar1 : temp) {
-			if (ar1.contains(cookieName)) {
+			if (ar1.contains(key)) {
 				String[] temp1 = ar1.split("=");
 				CookieValue = temp1[1];
 				break;

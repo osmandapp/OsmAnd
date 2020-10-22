@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
+
 import android.net.TrafficStats;
 import android.os.Build;
 import android.util.Base64;
@@ -49,15 +50,13 @@ public class SecUtils {
 	private static final int THREAD_ID = 11200;
 
 
-	public static void uploadImage(String image) throws FailedVerificationException {
-		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+	public static int uploadImage(String privateKey, String username, String image) throws FailedVerificationException {
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 			Security.removeProvider("BC");
 			Security.addProvider(new BouncyCastleProvider());
 		}
-		KeyPair kp = SecUtils.getKeyPair(ALGO_EC,
-				"base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCDJy0f8+uI5Lh3gQHp+wa9EzqrIgdKdFdVuQZooRiywcA=="
-				, "base64:X.509:MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEQ4xuycvus0e0qggdaeYJstMHpn025COnttRcup93L+VCS1ryv0iPSXeyBEnhgV0GdeAQ6GRHQB057ccZn/yzpQ==");
-		String signed = "test1234567:opr-web";
+		KeyPair kp = SecUtils.getKeyPair(ALGO_EC, privateKey, null);
+		String signed = username + ":opr-web";
 
 		JsonFormatter formatter = new JsonFormatter();
 		IPFSImage ipfsImage = new GsonBuilder().create().fromJson(image, IPFSImage.class);
@@ -67,24 +66,24 @@ public class SecUtils {
 		Map<String, Object> edit = new TreeMap<>();
 		List<String> ids = new ArrayList<>();
 		List<Object> imageResponseList = new ArrayList<>();
-		Map<String,Object> imageMap = new TreeMap<>();
-		imageMap.put("cid",ipfsImage.cid);
-		imageMap.put("hash",ipfsImage.hash);
-		imageMap.put("extension",ipfsImage.extension);
-		imageMap.put("type",ipfsImage.type);
+		Map<String, Object> imageMap = new TreeMap<>();
+		imageMap.put("cid", ipfsImage.cid);
+		imageMap.put("hash", ipfsImage.hash);
+		imageMap.put("extension", ipfsImage.extension);
+		imageMap.put("type", ipfsImage.type);
 		imageResponseList.add(imageMap);
 		ids.add("9G2GCG");
 		ids.add("wlkomu");
 		Map<String, Object> change = new TreeMap<>();
 		Map<String, Object> images = new TreeMap<>();
 		Map<String, Object> outdoor = new TreeMap<>();
-		outdoor.put("outdoor",imageResponseList);
+		outdoor.put("outdoor", imageResponseList);
 		images.put("append", outdoor);
-		change.put("version","increment");
-		change.put("images",images);
-		edit.put("id",ids);
-		edit.put("change",change);
-		edit.put("current",new Object());
+		change.put("version", "increment");
+		change.put("images", images);
+		edit.put("id", ids);
+		edit.put("change", change);
+		edit.put("current", new Object());
 		edits.add(edit);
 		opOperation.putObjectValue(OpOperation.F_EDIT, edits);
 		opOperation.setSignedBy(signed);
@@ -109,27 +108,20 @@ public class SecUtils {
 			try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
 				wr.write(json.getBytes());
 			}
-
-			if (connection.getResponseCode() != 200) {
-				System.out.println("ERROR HAPPENED " + connection.getResponseCode());
-				System.out.println(connection.getResponseMessage());
-				System.out.println("ERROR");
+			int rc = connection.getResponseCode();
+			if (rc != 200) {
+				log.error("ERROR HAPPENED");
 				BufferedReader br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
 				String strCurrentLine;
 				while ((strCurrentLine = br.readLine()) != null) {
-					System.out.println(strCurrentLine);
-				}
-			} else {
-				System.out.println("SUCCESS");
-				BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-				String strCurrentLine;
-				while ((strCurrentLine = br.readLine()) != null) {
-					System.out.println(strCurrentLine);
+					log.error(strCurrentLine);
 				}
 			}
+			return rc;
 		} catch (IOException e) {
 			log.error(e);
 		}
+		return -1;
 	}
 
 	public static EncodedKeySpec decodeKey(String key) {
@@ -164,10 +156,10 @@ public class SecUtils {
 
 	public static EncodedKeySpec getKeySpecByFormat(String format, byte[] data) {
 		switch (format) {
-		case "PKCS#8":
-			return new PKCS8EncodedKeySpec(data);
-		case "X.509":
-			return new X509EncodedKeySpec(data);
+			case "PKCS#8":
+				return new PKCS8EncodedKeySpec(data);
+			case "X.509":
+				return new X509EncodedKeySpec(data);
 		}
 		throw new IllegalArgumentException(format);
 	}
@@ -233,7 +225,7 @@ public class SecUtils {
 		} catch (FailedVerificationException e) {
 			throw new IllegalStateException("Cannot get bytes");
 		}
-		if(out != null) {
+		if (out != null) {
 			try {
 				out.write(sigBytes);
 			} catch (IOException e) {
@@ -263,7 +255,7 @@ public class SecUtils {
 	}
 
 	private static String getInternalSigAlgo(String sigAlgo) {
-		return sigAlgo.equals(SIG_ALGO_ECDSA)? SIG_ALGO_NONE_EC : sigAlgo;
+		return sigAlgo.equals(SIG_ALGO_ECDSA) ? SIG_ALGO_NONE_EC : sigAlgo;
 	}
 
 	public static byte[] calculateHash(String algo, byte[] b1, byte[] b2) {
@@ -278,7 +270,7 @@ public class SecUtils {
 
 	public static byte[] mergeTwoArrays(byte[] b1, byte[] b2) {
 		byte[] m = b1 == null ? b2 : b1;
-		if(b2 != null && b1 != null) {
+		if (b2 != null && b1 != null) {
 			m = new byte[b1.length + b2.length];
 			System.arraycopy(b1, 0, m, 0, b1.length);
 			System.arraycopy(b2, 0, m, b1.length, b2.length);
@@ -298,7 +290,7 @@ public class SecUtils {
 	}
 
 	public static byte[] getHashBytes(String msg) {
-		if(msg == null || msg.length() == 0) {
+		if (msg == null || msg.length() == 0) {
 			// special case for empty hash
 			return new byte[0];
 		}
