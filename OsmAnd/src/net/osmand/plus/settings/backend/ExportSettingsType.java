@@ -13,5 +13,6 @@ public enum ExportSettingsType {
 	TRACKS,
 	MULTIMEDIA_NOTES,
 	OSM_NOTES,
-	OSM_EDITS
+	OSM_EDITS,
+	OFFLINE_MAPS
 }
