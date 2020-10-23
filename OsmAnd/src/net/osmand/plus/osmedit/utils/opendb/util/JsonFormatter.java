@@ -1,8 +1,8 @@
-package net.osmand.plus.osmedit.utils.util;
+package net.osmand.plus.osmedit.utils.opendb.util;
 
 import com.google.gson.*;
-import net.osmand.plus.osmedit.utils.ops.OpObject;
-import net.osmand.plus.osmedit.utils.ops.OpOperation;
+import net.osmand.plus.osmedit.utils.opendb.ops.OpObject;
+import net.osmand.plus.osmedit.utils.opendb.ops.OpOperation;
 
 import java.io.Reader;
 import java.lang.reflect.Type;

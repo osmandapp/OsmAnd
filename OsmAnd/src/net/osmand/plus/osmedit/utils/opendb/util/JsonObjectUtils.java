@@ -1,4 +1,4 @@
-package net.osmand.plus.osmedit.utils.util;
+package net.osmand.plus.osmedit.utils.opendb.util;
 
 import java.util.*;
 

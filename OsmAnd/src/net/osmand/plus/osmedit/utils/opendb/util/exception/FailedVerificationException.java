@@ -1,4 +1,4 @@
-package net.osmand.plus.osmedit.utils.util.exception;
+package net.osmand.plus.osmedit.utils.opendb.util.exception;
 
 public class FailedVerificationException extends Exception {
 

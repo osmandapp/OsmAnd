@@ -1,7 +1,7 @@
-package net.osmand.plus.osmedit.utils.ops;
+package net.osmand.plus.osmedit.utils.opendb.ops;
 
 import com.google.gson.*;
-import net.osmand.plus.osmedit.utils.util.JsonObjectUtils;
+import net.osmand.plus.osmedit.utils.opendb.util.JsonObjectUtils;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;

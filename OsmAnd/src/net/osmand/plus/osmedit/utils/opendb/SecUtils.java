@@ -1,4 +1,4 @@
-package net.osmand.plus.osmedit.utils;
+package net.osmand.plus.osmedit.utils.opendb;
 
 
 import android.net.TrafficStats;
@@ -6,9 +6,10 @@ import android.os.Build;
 import android.util.Base64;
 import com.google.gson.GsonBuilder;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.osmedit.utils.ops.OpOperation;
-import net.osmand.plus.osmedit.utils.util.JsonFormatter;
-import net.osmand.plus.osmedit.utils.util.exception.FailedVerificationException;
+import net.osmand.plus.osmedit.utils.IPFSImage;
+import net.osmand.plus.osmedit.utils.opendb.ops.OpOperation;
+import net.osmand.plus.osmedit.utils.opendb.util.JsonFormatter;
+import net.osmand.plus.osmedit.utils.opendb.util.exception.FailedVerificationException;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
