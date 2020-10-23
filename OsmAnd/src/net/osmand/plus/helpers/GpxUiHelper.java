@@ -13,6 +13,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.ContextThemeWrapper;
@@ -80,6 +81,7 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -90,7 +92,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
@@ -649,9 +650,9 @@ public class GpxUiHelper {
 							confirm.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									Intent intent = new Intent(activity, PluginActivity.class);
-									intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, OsmandMonitoringPlugin.ID);
-									activity.startActivity(intent);
+									Bundle params = new Bundle();
+									params.putBoolean(PluginsFragment.OPEN_PLUGINS, true);
+									MapActivity.launchMapActivityMoveToTop(activity, null, null, params);
 								}
 							});
 							confirm.setNegativeButton(R.string.shared_string_cancel, null);
