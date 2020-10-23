@@ -50,6 +50,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.osmedit.opr.OPRWebviewActivity;
 import net.osmand.plus.osmedit.utils.SecUtils;
+import net.osmand.plus.osmedit.utils.util.exception.FailedVerificationException;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -100,6 +101,72 @@ public class MenuBuilder {
 	private boolean transliterateNames;
 	private static final int PICK_IMAGE = 1231;
 	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
+	private View view;
+
+	private GetImageCardsListener imageCardListener = new GetImageCardsListener() {
+		private String[] idOfCurrentPlace = new String[0];
+
+		@Override
+		public void onPostProcess(List<ImageCard> cardList) {
+			processOnlinePhotosCards(cardList);
+		}
+
+		@Override
+		public void onOPRPlaceIdAcquired(String[] id) {
+			idOfCurrentPlace = id;
+			firstRow = false;
+			view.post(new Runnable() {
+				@Override
+				public void run() {
+					buildUploadImagesRow(view);
+				}
+			});
+		}
+
+		@Override
+		public void uploadImageToPlace(View view, InputStream image) {
+			String url = "https://test.openplacereviews.org/api/ipfs/image";
+			String response = NetworkUtils.sendPostDataRequest(url, image);
+			if (response != null) {
+				int res = 0;
+				try {
+					res = SecUtils.uploadImage(
+							idOfCurrentPlace,
+							OPRWebviewActivity.getPrivateKeyFromCookie(),
+							OPRWebviewActivity.getUsernameFromCookie(),
+							response);
+				} catch (FailedVerificationException e) {
+					LOG.error(e);
+					showMessageWith(view, view.getResources().getString(R.string.cannot_upload_image));
+				}
+				if (res != 200) {
+					//image was uploaded but not added to blockchain
+					showMessageWith(view, view.getResources().getString(R.string.cannot_upload_image));
+				} else {
+					String str = MessageFormat.format(view.getResources()
+							.getString(R.string.successfully_uploaded_pattern), 1, 1);
+					showMessageWith(view, str);
+				}
+			} else {
+				showMessageWith(view, view.getResources().getString(R.string.cannot_upload_image));
+			}
+		}
+
+		@Override
+		public void onFinish(List<ImageCard> cardList) {
+			if (!isHidden()) {
+				List<AbstractCard> cards = new ArrayList<>();
+				cards.addAll(cardList);
+				if (cardList.size() == 0) {
+					cards.add(new NoImagesCard(mapActivity));
+				}
+				if (onlinePhotoCardsRow != null) {
+					onlinePhotoCardsRow.setCards(cards);
+				}
+				onlinePhotoCards = cards;
+			}
+		}
+	};
 
 	public interface CollapseExpandListener {
 		void onCollapseExpand(boolean collapsed);
@@ -209,7 +276,7 @@ public class MenuBuilder {
 		if (showOnlinePhotos) {
 			buildNearestPhotosRow(view);
 		}
-		buildUploadImagesRow(view);
+		this.view = view;
 		buildPluginRows(view);
 		buildLoginRow(view);
 //		buildAfter(view);
@@ -242,11 +309,6 @@ public class MenuBuilder {
 							Intent intent = new Intent();
 							intent.setType("image/*");
 							intent.setAction(Intent.ACTION_GET_CONTENT);
-							Object o = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObject();
-							if (o instanceof Amenity) {
-								Amenity a = (Amenity) o;
-								System.out.println("AMENITY ID: " + a.getId());
-							}
 							mapActivity.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 						}
 					}, false);
@@ -255,7 +317,7 @@ public class MenuBuilder {
 
 	private void buildLoginRow(View view) {
 		if (mapContextMenu != null) {
-			String title = "Registration";
+			String title = app.getString(R.string.opr_login);
 			buildRow(view, R.drawable.ic_action_note_dark,
 					null, title, 0, false, null,
 					false, 0, false, new OnClickListener() {
@@ -273,26 +335,7 @@ public class MenuBuilder {
 			@Override
 			public void run() {
 				try {
-					String url = "https://test.openplacereviews.org/api/ipfs/image";
-					String response = NetworkUtils.sendPostDataRequest(url, image);
-					if (response != null) {
-						//TODO change
-						String[] id = new String[0];
-						int res = SecUtils.uploadImage(
-								OPRWebviewActivity.getPrivateKeyFromCookie(),
-								OPRWebviewActivity.getUsernameFromCookie(),
-								response);
-						if (res != 200) {
-							//image was uploaded but not added to blockchain
-							showMessageWith(view, view.getResources().getString(R.string.cannot_upload_image));
-						} else {
-							String str = MessageFormat.format(view.getResources()
-									.getString(R.string.successfully_uploaded_pattern), 1, 1);
-							showMessageWith(view, str);
-						}
-					} else {
-						showMessageWith(view, view.getResources().getString(R.string.cannot_upload_image));
-					}
+					imageCardListener.uploadImageToPlace(view, image);
 				} catch (Exception e) {
 					LOG.error(e);
 				}
@@ -425,33 +468,7 @@ public class MenuBuilder {
 		}
 		onlinePhotoCards = new ArrayList<>();
 		onlinePhotoCardsRow.setProgressCard();
-		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(),
-				new GetImageCardsListener() {
-					@Override
-					public void onPostProcess(List<ImageCard> cardList) {
-						processOnlinePhotosCards(cardList);
-					}
-
-					@Override
-					public void onOPRPlaceIdAcquired(String[] id) {
-
-					}
-
-					@Override
-					public void onFinish(List<ImageCard> cardList) {
-						if (!isHidden()) {
-							List<AbstractCard> cards = new ArrayList<>();
-							cards.addAll(cardList);
-							if (cardList.size() == 0) {
-								cards.add(new NoImagesCard(mapActivity));
-							}
-							if (onlinePhotoCardsRow != null) {
-								onlinePhotoCardsRow.setCards(cards);
-							}
-							onlinePhotoCards = cards;
-						}
-					}
-				}));
+		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 	}
 
 	protected Map<String, String> getAdditionalCardParams() {

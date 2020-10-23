@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.builders.cards;
 
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
-import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.net.TrafficStats;
 import android.os.AsyncTask;
@@ -16,24 +15,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import net.osmand.*;
 import net.osmand.data.Amenity;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
-import net.osmand.plus.osmedit.OsmBugsLayer;
-import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.util.Algorithms;
 
@@ -42,12 +33,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public abstract class ImageCard extends AbstractCard {
 
@@ -425,6 +415,8 @@ public abstract class ImageCard extends AbstractCard {
 
 			void onOPRPlaceIdAcquired(String[] id);
 
+			void uploadImageToPlace(View context, InputStream image);
+
 			void onFinish(List<ImageCard> cardList);
 		}
 
@@ -448,9 +440,11 @@ public abstract class ImageCard extends AbstractCard {
 				String url = "https://test.openplacereviews.org/api/objects-by-index?type=opr.place&index=osmid&limit=1&key=" + amenityId;
 				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
 						"Requesting location images...", false, false);
-				getPicturesForPlace(result, response);
-				String[] id = getIdFromResponse(response);
-				listener.onOPRPlaceIdAcquired(id);
+				if (response != null) {
+					getPicturesForPlace(result, response);
+					String[] id = getIdFromResponse(response);
+					listener.onOPRPlaceIdAcquired(id);
+				}
 			}
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
@@ -515,7 +509,7 @@ public abstract class ImageCard extends AbstractCard {
 		private String[] getIdFromResponse(String response) {
 			try {
 				JSONArray obj = new JSONObject(response).getJSONArray("objects");
-				JSONArray images = (JSONArray)((JSONObject)obj.get(0)).get("id");
+				JSONArray images = (JSONArray) ((JSONObject) obj.get(0)).get("id");
 				return toStringArray(images);
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -524,12 +518,12 @@ public abstract class ImageCard extends AbstractCard {
 		}
 
 		private String[] toStringArray(JSONArray array) {
-			if(array==null)
+			if (array == null)
 				return null;
 
-			String[] arr=new String[array.length()];
-			for(int i=0; i<arr.length; i++) {
-				arr[i]=array.optString(i);
+			String[] arr = new String[array.length()];
+			for (int i = 0; i < arr.length; i++) {
+				arr[i] = array.optString(i);
 			}
 			return arr;
 		}

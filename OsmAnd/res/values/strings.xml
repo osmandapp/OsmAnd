@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="opr_login">OpenPlaceReviews login</string>
     <string name="cannot_upload_image">Cannot upload image, please, try again later</string>
     <string name="register_before_upload">Please, login in before uploading images</string>
     <string name="upload_images">Upload images</string>

@@ -1,29 +1,11 @@
 package net.osmand.plus.osmedit.utils;
 
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.security.*;
-import java.security.spec.EncodedKeySpec;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.concurrent.ThreadLocalRandom;
-
 import android.net.TrafficStats;
 import android.os.Build;
 import android.util.Base64;
-
 import com.google.gson.GsonBuilder;
-
 import net.osmand.PlatformUtil;
-import net.osmand.plus.osmedit.utils.ops.OpObject;
 import net.osmand.plus.osmedit.utils.ops.OpOperation;
 import net.osmand.plus.osmedit.utils.util.JsonFormatter;
 import net.osmand.plus.osmedit.utils.util.exception.FailedVerificationException;
@@ -32,6 +14,17 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.*;
+import java.security.spec.EncodedKeySpec;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SecUtils {
 	private static final String SIG_ALGO_SHA1_EC = "SHA1withECDSA";
@@ -52,7 +45,7 @@ public class SecUtils {
 	private static final int THREAD_ID = 11200;
 
 
-	public static int uploadImage(String privateKey, String username, String image) throws FailedVerificationException {
+	public static int uploadImage(String[] placeId, String privateKey, String username, String image) throws FailedVerificationException {
 		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 			Security.removeProvider("BC");
 			Security.addProvider(new BouncyCastleProvider());
@@ -66,7 +59,6 @@ public class SecUtils {
 		opOperation.setType("opr.place");
 		List<Object> edits = new ArrayList<>();
 		Map<String, Object> edit = new TreeMap<>();
-		List<String> ids = new ArrayList<>();
 		List<Object> imageResponseList = new ArrayList<>();
 		Map<String, Object> imageMap = new TreeMap<>();
 		imageMap.put("cid", ipfsImage.cid);
@@ -74,8 +66,7 @@ public class SecUtils {
 		imageMap.put("extension", ipfsImage.extension);
 		imageMap.put("type", ipfsImage.type);
 		imageResponseList.add(imageMap);
-		ids.add("9G2GCG"); //86766295
-		ids.add("wlkomu");
+		List<String> ids = new ArrayList<>(Arrays.asList(placeId));
 		Map<String, Object> change = new TreeMap<>();
 		Map<String, Object> images = new TreeMap<>();
 		Map<String, Object> outdoor = new TreeMap<>();
