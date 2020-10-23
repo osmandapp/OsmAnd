@@ -1,4 +1,4 @@
-package net.osmand.plus.osmedit.utils.ops;
+package net.osmand.plus.osmedit.utils.opendb.ops;
 
 import com.google.gson.*;
 
