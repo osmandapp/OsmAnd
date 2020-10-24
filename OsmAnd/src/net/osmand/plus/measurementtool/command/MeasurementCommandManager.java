@@ -80,6 +80,6 @@ public class MeasurementCommandManager {
 	}
 
 	public MeasurementModeCommand getLastCommand() {
-		return undoCommands.getLast();
+		return undoCommands.getFirst();
 	}
 }

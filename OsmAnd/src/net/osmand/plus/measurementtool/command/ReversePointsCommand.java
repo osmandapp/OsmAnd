@@ -47,7 +47,7 @@ public class ReversePointsCommand extends MeasurementModeCommand {
 			WptPt lastPoint = newPoints.get(newPoints.size() - 1);
 			editingCtx.setAppMode(ApplicationMode.valueOfStringKey(lastPoint.getProfileType(), DEFAULT_APP_MODE));
 		}
-		editingCtx.updateCacheForSnap();
+		editingCtx.updateSegmentsForSnap();
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class ReversePointsCommand extends MeasurementModeCommand {
 		editingCtx.addPoints(oldPoints);
 		editingCtx.setAppMode(oldMode);
 		editingCtx.setRoadSegmentData(oldRoadSegmentData);
-		editingCtx.updateCacheForSnap();
+		editingCtx.updateSegmentsForSnap();
 
 	}
 

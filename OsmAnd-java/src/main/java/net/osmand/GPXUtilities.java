@@ -52,6 +52,7 @@ public class GPXUtilities {
 	private static final String DEFAULT_ICON_NAME = "special_star";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
 	private static final String PROFILE_TYPE_EXTENSION = "profile";
+	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 
 	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
@@ -324,6 +325,11 @@ public class GPXUtilities {
 			getExtensionsToWrite().put(PROFILE_TYPE_EXTENSION, profileType);
 		}
 
+		public boolean hasProfile() {
+			String profileType = getProfileType();
+			return profileType != null && !GAP_PROFILE_TYPE.equals(profileType);
+		}
+
 		public void removeProfileType() {
 			getExtensionsToWrite().remove(PROFILE_TYPE_EXTENSION);
 		}
@@ -374,11 +380,16 @@ public class GPXUtilities {
 
 	public static class TrkSegment extends GPXExtensions {
 		public boolean generalSegment = false;
-
 		public List<WptPt> points = new ArrayList<>();
 
 		public Object renderer;
 
+		public List<RouteSegment> routeSegments = new ArrayList<>();
+		public List<RouteType> routeTypes = new ArrayList<>();
+
+		public boolean hasRoute() {
+			return !routeSegments.isEmpty() && !routeTypes.isEmpty();
+		}
 
 		public List<GPXTrackAnalysis> splitByDistance(double meters, boolean joinSegments) {
 			return split(getDistanceMetric(), getTimeSplit(), meters, joinSegments);
@@ -393,7 +404,6 @@ public class GPXUtilities {
 			splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this, joinSegments);
 			return convert(splitSegments);
 		}
-
 	}
 
 	public static class Track extends GPXExtensions {
@@ -1078,9 +1088,6 @@ public class GPXUtilities {
 		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
 
-		public List<RouteSegment> routeSegments = new ArrayList<>();
-		public List<RouteType> routeTypes = new ArrayList<>();
-
 		public Exception error = null;
 		public String path = "";
 		public boolean showCurrentTrack;
@@ -1108,7 +1115,7 @@ public class GPXUtilities {
 		}
 
 		public boolean hasRoute() {
-			return !routeSegments.isEmpty() && !routeTypes.isEmpty();
+			return getNonEmptyTrkSegments(true).size() > 0;
 		}
 
 		public List<WptPt> getPoints() {
@@ -1218,7 +1225,7 @@ public class GPXUtilities {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
 			g.wptCategoryNames = getWaypointCategories(true);
-			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
+			List<SplitSegment> splitSegments = new ArrayList<>();
 			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
 				for (TrkSegment segment : subtrack.segments) {
@@ -1238,6 +1245,15 @@ public class GPXUtilities {
 			List<WptPt> points = new ArrayList<>();
 			for (int i = 0; i < routes.size(); i++) {
 				Route rt = routes.get(i);
+				points.addAll(rt.points);
+			}
+			return points;
+		}
+
+		public List<WptPt> getRoutePoints(int routeIndex) {
+			List<WptPt> points = new ArrayList<>();
+			if (routes.size() > routeIndex) {
+				Route rt = routes.get(routeIndex);
 				points.addAll(rt.points);
 			}
 			return points;
@@ -1318,15 +1334,16 @@ public class GPXUtilities {
 			return pt;
 		}
 
-		public TrkSegment getNonEmptyTrkSegment() {
-			for (GPXUtilities.Track t : tracks) {
+		public List<TrkSegment> getNonEmptyTrkSegments(boolean routesOnly) {
+			List<TrkSegment> segments = new ArrayList<>();
+			for (Track t : tracks) {
 				for (TrkSegment s : t.segments) {
-					if (s.points.size() > 0) {
-						return s;
+					if (!s.generalSegment && s.points.size() > 0 && (!routesOnly || s.hasRoute())) {
+						segments.add(s);
 					}
 				}
 			}
-			return null;
+			return segments;
 		}
 
 		public void addTrkSegment(List<WptPt> points) {
@@ -1365,8 +1382,8 @@ public class GPXUtilities {
 			return false;
 		}
 
-		public void addRoutePoints(List<WptPt> points) {
-			if (routes.size() == 0) {
+		public void addRoutePoints(List<WptPt> points, boolean addRoute) {
+			if (routes.size() == 0 || addRoute) {
 				Route route = new Route();
 				routes.add(route);
 			}
@@ -1608,7 +1625,7 @@ public class GPXUtilities {
 					bottom = Math.min(bottom, p.getLatitude());
 				}
 			}
-			for (GPXUtilities.Route route : routes) {
+			for (Route route : routes) {
 				for (WptPt p : route.points) {
 					if (left == 0 && right == 0) {
 						left = p.getLongitude();
@@ -1720,7 +1737,7 @@ public class GPXUtilities {
 
 	public static String asString(GPXFile file) {
 		final Writer writer = new StringWriter();
-		GPXUtilities.writeGpx(writer, file);
+		writeGpx(writer, file);
 		return writer.toString();
 	}
 
@@ -1807,6 +1824,8 @@ public class GPXUtilities {
 							writeWpt(format, serializer, p);
 							serializer.endTag(null, "trkpt"); //$NON-NLS-1$
 						}
+						assignRouteExtensionWriter(segment);
+						writeExtensions(serializer, segment);
 						serializer.endTag(null, "trkseg"); //$NON-NLS-1$
 					}
 					writeExtensions(serializer, track);
@@ -1834,7 +1853,6 @@ public class GPXUtilities {
 				serializer.endTag(null, "wpt"); //$NON-NLS-1$
 			}
 
-			assignRouteExtensionWriter(file);
 			writeExtensions(serializer, file);
 
 			serializer.endTag(null, "gpx"); //$NON-NLS-1$
@@ -1847,19 +1865,19 @@ public class GPXUtilities {
 		return null;
 	}
 
-	private static void assignRouteExtensionWriter(final GPXFile gpxFile) {
-		if (gpxFile.hasRoute() && gpxFile.getExtensionsWriter() == null) {
-			gpxFile.setExtensionsWriter(new GPXExtensionsWriter() {
+	private static void assignRouteExtensionWriter(final TrkSegment segment) {
+		if (segment.hasRoute() && segment.getExtensionsWriter() == null) {
+			segment.setExtensionsWriter(new GPXExtensionsWriter() {
 				@Override
 				public void writeExtensions(XmlSerializer serializer) {
 					StringBundle bundle = new StringBundle();
 					List<StringBundle> segmentsBundle = new ArrayList<>();
-					for (RouteSegment segment : gpxFile.routeSegments) {
+					for (RouteSegment segment : segment.routeSegments) {
 						segmentsBundle.add(segment.toStringBundle());
 					}
 					bundle.putBundleList("route", "segment", segmentsBundle);
 					List<StringBundle> typesBundle = new ArrayList<>();
-					for (RouteType routeType : gpxFile.routeTypes) {
+					for (RouteType routeType : segment.routeTypes) {
 						typesBundle.add(routeType.toStringBundle());
 					}
 					bundle.putBundleList("types", "type", typesBundle);
@@ -1901,12 +1919,15 @@ public class GPXUtilities {
 	}
 
 	private static void writeExtensions(XmlSerializer serializer, GPXExtensions p) throws IOException {
-		Map<String, String> extensionsToRead = p.getExtensionsToRead();
+		writeExtensions(serializer, p.getExtensionsToRead(), p);
+	}
+
+	private static void writeExtensions(XmlSerializer serializer, Map<String, String> extensions, GPXExtensions p) throws IOException {
 		GPXExtensionsWriter extensionsWriter = p.getExtensionsWriter();
-		if (!extensionsToRead.isEmpty() || extensionsWriter != null) {
+		if (!extensions.isEmpty() || extensionsWriter != null) {
 			serializer.startTag(null, "extensions");
-			if (!extensionsToRead.isEmpty()) {
-				for (Entry<String, String> s : extensionsToRead.entrySet()) {
+			if (!extensions.isEmpty()) {
+				for (Entry<String, String> s : extensions.entrySet()) {
 					writeNotNullText(serializer, s.getKey(), s.getValue());
 				}
 			}
@@ -1943,7 +1964,20 @@ public class GPXUtilities {
 		if (!Float.isNaN(p.heading)) {
 			p.getExtensionsToWrite().put("heading", String.valueOf(Math.round(p.heading)));
 		}
-		writeExtensions(serializer, p);
+		Map<String, String> extensions = p.getExtensionsToRead();
+		if (!"rtept".equals(serializer.getName())) {
+			// Leave "profile" and "trkpt" tags for rtept only
+			extensions.remove(PROFILE_TYPE_EXTENSION);
+			extensions.remove(TRKPT_INDEX_EXTENSION);
+			writeExtensions(serializer, extensions, p);
+		} else {
+			// Remove "gap" profile
+			String profile = extensions.get(PROFILE_TYPE_EXTENSION);
+			if (GAP_PROFILE_TYPE.equals(profile)) {
+				extensions.remove(PROFILE_TYPE_EXTENSION);
+			}
+			writeExtensions(serializer, p);
+		}
 	}
 
 	private static void writeAuthor(XmlSerializer serializer, Author author) throws IOException {
@@ -2099,10 +2133,11 @@ public class GPXUtilities {
 			TrkSegment routeTrackSegment = new TrkSegment();
 			routeTrack.segments.add(routeTrackSegment);
 			Stack<GPXExtensions> parserState = new Stack<>();
+			TrkSegment firstSegment = null;
 			boolean extensionReadMode = false;
 			boolean routePointExtension = false;
-			List<RouteSegment> routeSegments = gpxFile.routeSegments;
-			List<RouteType> routeTypes = gpxFile.routeTypes;
+			List<RouteSegment> routeSegments = new ArrayList<>();
+			List<RouteType> routeTypes = new ArrayList<>();
 			boolean routeExtension = false;
 			boolean typesExtension = false;
 			parserState.push(gpxFile);
@@ -2403,6 +2438,16 @@ public class GPXUtilities {
 						assert pop instanceof Route;
 					} else if (tag.equals("trkseg")) {
 						Object pop = parserState.pop();
+						if (pop instanceof TrkSegment) {
+							TrkSegment segment = (TrkSegment) pop;
+							segment.routeSegments = routeSegments;
+							segment.routeTypes = routeTypes;
+							routeSegments = new ArrayList<>();
+							routeTypes = new ArrayList<>();
+							if (firstSegment == null) {
+								firstSegment = segment;
+							}
+						}
 						assert pop instanceof TrkSegment;
 					} else if (tag.equals("rpt")) {
 						Object pop = parserState.pop();
@@ -2412,6 +2457,10 @@ public class GPXUtilities {
 			}
 			if (!routeTrackSegment.points.isEmpty()) {
 				gpxFile.tracks.add(routeTrack);
+			}
+			if (!routeSegments.isEmpty() && !routeTypes.isEmpty() && firstSegment != null) {
+				firstSegment.routeSegments = routeSegments;
+				firstSegment.routeTypes = routeTypes;
 			}
 		} catch (Exception e) {
 			gpxFile.error = e;

@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
@@ -15,13 +17,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.measurementtool.GpxData.ActionType;
-import net.osmand.plus.measurementtool.MeasurementToolFragment.SaveType;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
@@ -31,26 +30,22 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
     private WeakReference<MeasurementToolFragment> fragmentRef;
     private ProgressDialog progressDialog;
 
-    private SaveType saveType;
-    private ActionType actionType;
-
     private File outFile;
     private File backupFile;
     private GPXFile gpxFile;
     private GPXFile savedGpxFile;
+    private boolean simplified;
     private boolean showOnMap;
 
     private SaveGpxRouteListener saveGpxRouteListener;
 
-
     public SaveGpxRouteAsyncTask(MeasurementToolFragment fragment, File outFile, GPXFile gpxFile,
-                                 ActionType actionType, SaveType saveType, boolean showOnMap, SaveGpxRouteListener saveGpxRouteListener) {
+                                 boolean simplified, boolean showOnMap, SaveGpxRouteListener saveGpxRouteListener) {
         fragmentRef = new WeakReference<>(fragment);
         this.outFile = outFile;
         this.showOnMap = showOnMap;
         this.gpxFile = gpxFile;
-        this.actionType = actionType;
-        this.saveType = saveType;
+        this.simplified = simplified;
         this.saveGpxRouteListener = saveGpxRouteListener;
     }
 
@@ -77,119 +72,70 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
         OsmandApplication app = mapActivity.getMyApplication();
         MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
         MeasurementEditingContext editingCtx = fragment.getEditingCtx();
-
-        List<WptPt> points = editingCtx.getPoints();
-        TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
-        TrkSegment after = editingCtx.getAfterTrkSegmentLine();
+        Exception res = null;
         if (gpxFile == null) {
             String fileName = outFile.getName();
             String trackName = fileName.substring(0, fileName.length() - GPX_FILE_EXT.length());
-            GPXFile gpx = new GPXFile(Version.getFullVersion(app));
-            if (measurementLayer != null) {
-                if (saveType == MeasurementToolFragment.SaveType.LINE) {
-                    TrkSegment segment = new TrkSegment();
-                    if (editingCtx.hasRoute()) {
-                        segment.points.addAll(editingCtx.getRoutePoints());
-                    } else {
-                        segment.points.addAll(before.points);
-                        segment.points.addAll(after.points);
-                    }
-                    Track track = new Track();
-                    track.name = trackName;
-                    track.segments.add(segment);
-                    gpx.tracks.add(track);
-                } else if (saveType == MeasurementToolFragment.SaveType.ROUTE_POINT) {
-                    if (editingCtx.hasRoute()) {
-                        GPXFile newGpx = editingCtx.exportRouteAsGpx(trackName);
-                        if (newGpx != null) {
-                            gpx = newGpx;
-                        }
-                    }
-                    gpx.addRoutePoints(points);
-                }
-            }
-            Exception res = GPXUtilities.writeGpxFile(outFile, gpx);
+            GPXFile gpx = generateGpxFile(measurementLayer, editingCtx, trackName, new GPXFile(Version.getFullVersion(app)));
+            res = GPXUtilities.writeGpxFile(outFile, gpx);
             gpx.path = outFile.getAbsolutePath();
             savedGpxFile = gpx;
             if (showOnMap) {
-                MeasurementToolFragment.showGpxOnMap(app, gpx, actionType, true);
+                MeasurementToolFragment.showGpxOnMap(app, gpx, true);
             }
-            return res;
         } else {
-            GPXFile gpx = gpxFile;
             backupFile = FileUtils.backupFile(app, outFile);
             String trackName = Algorithms.getFileNameWithoutExtension(outFile);
-            if (measurementLayer != null) {
-                if (fragment.isPlanRouteMode()) {
-                    if (saveType == MeasurementToolFragment.SaveType.LINE) {
-                        TrkSegment segment = new TrkSegment();
-                        if (editingCtx.hasRoute()) {
-                            segment.points.addAll(editingCtx.getRoutePoints());
-                        } else {
-                            segment.points.addAll(before.points);
-                            segment.points.addAll(after.points);
-                        }
-                        Track track = new Track();
-                        track.name = trackName;
-                        track.segments.add(segment);
-                        gpx.tracks.add(track);
-                    } else if (saveType == MeasurementToolFragment.SaveType.ROUTE_POINT) {
-                        if (editingCtx.hasRoute()) {
-                            GPXFile newGpx = editingCtx.exportRouteAsGpx(trackName);
-                            if (newGpx != null) {
-                                gpx = newGpx;
-                            }
-                        }
-                        gpx.addRoutePoints(points);
-                    }
-                } else if (actionType != null) {
-                    GpxData gpxData = editingCtx.getGpxData();
-                    switch (actionType) {
-                        case ADD_SEGMENT: {
-                            List<WptPt> snappedPoints = new ArrayList<>();
-                            snappedPoints.addAll(before.points);
-                            snappedPoints.addAll(after.points);
-                            gpx.addTrkSegment(snappedPoints);
-                            break;
-                        }
-                        case ADD_ROUTE_POINTS: {
-                            gpx.replaceRoutePoints(points);
-                            break;
-                        }
-                        case EDIT_SEGMENT: {
-                            if (gpxData != null) {
-                                TrkSegment segment = new TrkSegment();
-                                segment.points.addAll(points);
-                                gpx.replaceSegment(gpxData.getTrkSegment(), segment);
-                            }
-                            break;
-                        }
-                        case OVERWRITE_SEGMENT: {
-                            if (gpxData != null) {
-                                List<WptPt> snappedPoints = new ArrayList<>();
-                                snappedPoints.addAll(before.points);
-                                snappedPoints.addAll(after.points);
-                                TrkSegment segment = new TrkSegment();
-                                segment.points.addAll(snappedPoints);
-                                gpx.replaceSegment(gpxData.getTrkSegment(), segment);
-                            }
-                            break;
-                        }
-                    }
-                } else {
-                    gpx.addRoutePoints(points);
-                }
-            }
-            Exception res = null;
+            GPXFile gpx = generateGpxFile(measurementLayer, editingCtx, trackName, gpxFile);
             if (!gpx.showCurrentTrack) {
                 res = GPXUtilities.writeGpxFile(outFile, gpx);
             }
             savedGpxFile = gpx;
             if (showOnMap) {
-                MeasurementToolFragment.showGpxOnMap(app, gpx, actionType, false);
+                MeasurementToolFragment.showGpxOnMap(app, gpx, false);
             }
-            return res;
         }
+        return res;
+    }
+
+    private GPXFile generateGpxFile(MeasurementToolLayer measurementLayer, MeasurementEditingContext editingCtx,
+                                    String trackName, @Nullable GPXFile gpx) {
+        if (measurementLayer != null) {
+            List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();
+            List<TrkSegment> after = editingCtx.getAfterTrkSegmentLine();
+            if (simplified) {
+                Track track = new Track();
+                track.name = trackName;
+                gpx.tracks.add(track);
+                for (TrkSegment s : before) {
+                    TrkSegment segment = new TrkSegment();
+                    segment.points.addAll(s.points);
+                    track.segments.add(segment);
+                }
+                for (TrkSegment s : after) {
+                    TrkSegment segment = new TrkSegment();
+                    segment.points.addAll(s.points);
+                    track.segments.add(segment);
+                }
+            } else {
+                GPXFile newGpx = editingCtx.exportGpx(trackName);
+                if (newGpx != null) {
+                    List<WptPt> gpxPoints = null;
+                    if (gpx != null) {
+                        gpxPoints = gpx.getPoints();
+                    }
+                    gpx = newGpx;
+                    List<List<WptPt>> routePoints = editingCtx.getRoutePoints();
+                    for (List<WptPt> points : routePoints) {
+                        gpx.addRoutePoints(points, true);
+                    }
+                    if (!Algorithms.isEmpty(gpxPoints)) {
+                        gpx.addPoints(gpxPoints);
+                    }
+                }
+            }
+        }
+        return gpx;
     }
 
     @Override

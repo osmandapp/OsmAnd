@@ -183,22 +183,27 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 
 			if (editingCtx.isInApproximationMode()) {
-				List<WptPt> originalTrackPointList = editingCtx.getOriginalTrackPointList();
-				if (originalTrackPointList != null) {
+				List<List<WptPt>> originalPointsList = editingCtx.getOriginalSegmentPointsList();
+				if (originalPointsList != null) {
 					lineAttrs.customColorPaint.setColor(ContextCompat.getColor(view.getContext(),
 							R.color.activity_background_transparent_color_dark));
-					new Renderable.StandardTrack(new ArrayList<>(originalTrackPointList), 17.2).
-							drawSegment(view.getZoom(), lineAttrs.customColorPaint, canvas, tb);
+					for (List<WptPt> points : originalPointsList) {
+						new Renderable.StandardTrack(new ArrayList<>(points), 17.2).
+								drawSegment(view.getZoom(), lineAttrs.customColorPaint, canvas, tb);
+					}
 				}
 			}
 
-			TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
-			new Renderable.StandardTrack(new ArrayList<>(before.points), 17.2).
-					drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
-
-			TrkSegment after = editingCtx.getAfterTrkSegmentLine();
-			new Renderable.StandardTrack(new ArrayList<>(after.points), 17.2).
-					drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
+			List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();
+			for (TrkSegment segment : before) {
+				new Renderable.StandardTrack(new ArrayList<>(segment.points), 17.2).
+						drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
+			}
+			List<TrkSegment> after = editingCtx.getAfterTrkSegmentLine();
+			for (TrkSegment segment : after) {
+				new Renderable.StandardTrack(new ArrayList<>(segment.points), 17.2).
+						drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
+			}
 
 			drawPoints(canvas, tb);
 		}
@@ -308,36 +313,48 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	private void drawBeforeAfterPath(Canvas canvas, RotatedTileBox tb) {
-		TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
-		TrkSegment after = editingCtx.getAfterTrkSegmentLine();
-		if (before.points.size() > 0 || after.points.size() > 0) {
+		List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();
+		List<TrkSegment> after = editingCtx.getAfterTrkSegmentLine();
+		if (before.size() > 0 || after.size() > 0) {
 			path.reset();
 			tx.clear();
 			ty.clear();
 
-			if (before.points.size() > 0) {
-				WptPt pt = before.points.get(before.points.size() - 1);
-				float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
-				float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-				tx.add(locX);
-				ty.add(locY);
-				tx.add((float) tb.getCenterPixelX());
-				ty.add((float) tb.getCenterPixelY());
-			}
-			if (after.points.size() > 0) {
-				if (before.points.size() == 0) {
-					tx.add((float) tb.getCenterPixelX());
-					ty.add((float) tb.getCenterPixelY());
+			boolean hasPointsBefore = false;
+			if (before.size() > 0) {
+				TrkSegment segment = before.get(before.size() - 1);
+				if (segment.points.size() > 0) {
+					hasPointsBefore = true;
+					WptPt pt = segment.points.get(segment.points.size() - 1);
+					if (!ApplicationMode.GAP.getStringKey().equals(pt.getProfileType())) {
+						float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+						float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
+						tx.add(locX);
+						ty.add(locY);
+						tx.add((float) tb.getCenterPixelX());
+						ty.add((float) tb.getCenterPixelY());
+					}
 				}
-				WptPt pt = after.points.get(0);
-				float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
-				float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-				tx.add(locX);
-				ty.add(locY);
+			}
+			if (after.size() > 0) {
+				TrkSegment segment = after.get(0);
+				if (segment.points.size() > 0) {
+					if (!hasPointsBefore) {
+						tx.add((float) tb.getCenterPixelX());
+						ty.add((float) tb.getCenterPixelY());
+					}
+					WptPt pt = segment.points.get(0);
+					float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+					float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
+					tx.add(locX);
+					ty.add(locY);
+				}
 			}
 
-			GeometryWay.calculatePath(tb, tx, ty, path);
-			canvas.drawPath(path, lineAttrs.paint);
+			if (!tx.isEmpty() && !ty.isEmpty()) {
+				GeometryWay.calculatePath(tb, tx, ty, path);
+				canvas.drawPath(path, lineAttrs.paint);
+			}
 		}
 	}
 
@@ -367,7 +384,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		pt.lon = l.getLongitude();
 		boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 		if (allowed) {
-
 			ApplicationMode applicationMode = editingCtx.getAppMode();
 			if (applicationMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
 				pt.setProfileType(applicationMode.getStringKey());

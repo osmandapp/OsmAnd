@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -25,7 +26,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.measurementtool.GpxData.ActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.MapUtils;
 
@@ -39,6 +39,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	private static final Log LOG = PlatformUtil.getLog(SelectedPointBottomSheetDialogFragment.class);
 	private MeasurementEditingContext editingCtx;
 
+	@SuppressLint("InflateParams")
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		MapActivity mapActivity = getMapActivity();
@@ -264,11 +265,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (!TextUtils.isEmpty(pointName)) {
 			return pointName;
 		}
-		GpxData gpxData = editingCtx.getGpxData();
-		if (gpxData != null && gpxData.getActionType() == ActionType.ADD_ROUTE_POINTS) {
-			return getString(R.string.route_point) + " - " + (pos + 1);
-		}
-		return getString(R.string.plugin_distance_point) + " - " + (pos + 1);
+		return getString(R.string.ltr_or_rtl_combine_via_dash, getString(R.string.plugin_distance_point), String.valueOf(pos + 1));
 	}
 
 	@NonNull
@@ -305,18 +302,15 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			}
 			description.append(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
 		}
-		GpxData gpxData = editingCtx.getGpxData();
-		if (gpxData != null && gpxData.getActionType() == ActionType.EDIT_SEGMENT) {
-			double elevation = pt.ele;
-			if (!Double.isNaN(elevation)) {
-				description.append("  ").append((getString(R.string.altitude)).substring(0, 1)).append(": ");
-				description.append(OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication()));
-			}
-			float speed = (float) pt.speed;
-			if (speed != 0) {
-				description.append("  ").append((getString(R.string.map_widget_speed)).substring(0, 1)).append(": ");
-				description.append(OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
-			}
+		double elevation = pt.ele;
+		if (!Double.isNaN(elevation)) {
+			description.append("  ").append((getString(R.string.altitude)).substring(0, 1)).append(": ");
+			description.append(OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication()));
+		}
+		float speed = (float) pt.speed;
+		if (speed != 0) {
+			description.append("  ").append((getString(R.string.map_widget_speed)).substring(0, 1)).append(": ");
+			description.append(OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
 		}
 		return description.toString();
 	}

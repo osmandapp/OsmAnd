@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_gap">Gap</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="file_already_imported">File is already imported in OsmAnd</string>
     <string name="osm_edit_logout_success">Logout successful</string>
     <string name="clear_osm_token">Clear OpenStreetMap OAuth token</string>
