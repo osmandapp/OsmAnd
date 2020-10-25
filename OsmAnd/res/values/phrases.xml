@@ -3935,20 +3935,20 @@
 	<string name="poi_park_ride_tram">Tram</string>
 	<string name="poi_park_ride_ferry">Ferry</string>
 
-	<string name="poi_rtsa_scale_nc">н/к</string>
-	<string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
-	<string name="poi_rtsa_scale_1a">1А</string>
-	<string name="poi_rtsa_scale_1a_asterisk">1А*</string>
-	<string name="poi_rtsa_scale_1b">1Б</string>
-	<string name="poi_rtsa_scale_1b_asterisk">1Б*</string>
-	<string name="poi_rtsa_scale_2a">2А</string>
-	<string name="poi_rtsa_scale_2a_asterisk">2А*</string>
-	<string name="poi_rtsa_scale_2b">2Б</string>
-	<string name="poi_rtsa_scale_2b_asterisk">2Б*</string>
-	<string name="poi_rtsa_scale_3a">3А</string>
-	<string name="poi_rtsa_scale_3a_asterisk">3А*</string>
-	<string name="poi_rtsa_scale_3b">3Б</string>
-	<string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
+	<string name="poi_rtsa_scale_nc">n/c</string>
+	<string name="poi_rtsa_scale_nc_asterisk">n/c*</string>
+	<string name="poi_rtsa_scale_1a">1A</string>
+	<string name="poi_rtsa_scale_1a_asterisk">1A*</string>
+	<string name="poi_rtsa_scale_1b">1B</string>
+	<string name="poi_rtsa_scale_1b_asterisk">1B*</string>
+	<string name="poi_rtsa_scale_2a">2A</string>
+	<string name="poi_rtsa_scale_2a_asterisk">2A*</string>
+	<string name="poi_rtsa_scale_2b">2B</string>
+	<string name="poi_rtsa_scale_2b_asterisk">2B*</string>
+	<string name="poi_rtsa_scale_3a">3A</string>
+	<string name="poi_rtsa_scale_3a_asterisk">3A*</string>
+	<string name="poi_rtsa_scale_3b">3B</string>
+	<string name="poi_rtsa_scale_3b_asterisk">3B*</string>
 
 	<string name="poi_flare">Gas flare;Flare stack</string>
 	<string name="poi_change_delete">Deleted object</string>
@@ -4206,7 +4206,7 @@
 	<string name="poi_video_yes">Yes</string>
 	<string name="poi_video_no">No</string>
 
-	<string name="poi_internet_access_fee_customers">Signal to find the pole</string>
+	<string name="poi_internet_access_fee_customers">Internet access: customers</string>
 	<string name="poi_traffic_signals_sound_locate">Only when walking is allowed</string>
 	<string name="poi_tactile_paving_contrasted">Contrasted</string>
 	<string name="poi_tactile_paving_primitive">Primitive</string>
@@ -4259,5 +4259,10 @@
 
 	<string name="poi_fuel_lng">LNG</string>
 
+	<string name="poi_gpx_point">GPX point</string>
+
+	<string name="poi_parking_rooftop">Rooftop</string>
+	<string name="poi_parking_sheds">Sheds</string>
+	<string name="poi_parking_layby">Layby</string>
 
 </resources>

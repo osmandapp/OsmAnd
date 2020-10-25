@@ -11,16 +11,18 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
-import net.osmand.plus.search.QuickSearchDialogFragment;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
+import net.osmand.plus.osmedit.OsmEditingFragment;
+import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.util.Algorithms;
@@ -57,6 +59,9 @@ public class IntentHelper {
 		}
 		if (!applied) {
 			applied = parseSendIntent();
+		}
+		if (!applied) {
+			applied = parseOAuthIntent();
 		}
 		return applied;
 	}
@@ -207,10 +212,22 @@ public class IntentHelper {
 				mapActivity.setIntent(null);
 			}
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_SETTINGS)) {
-				String settingsType = intent.getStringExtra(BaseSettingsFragment.OPEN_SETTINGS);
 				String appMode = intent.getStringExtra(BaseSettingsFragment.APP_MODE_KEY);
-				if (BaseSettingsFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
-					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.CONFIGURE_PROFILE, ApplicationMode.valueOfStringKey(appMode, null));
+				String settingsTypeName = intent.getStringExtra(BaseSettingsFragment.OPEN_SETTINGS);
+				if (!Algorithms.isEmpty(settingsTypeName)) {
+					try {
+						SettingsScreenType screenType = SettingsScreenType.valueOf(settingsTypeName);
+						BaseSettingsFragment.showInstance(mapActivity, screenType, ApplicationMode.valueOfStringKey(appMode, null));
+					} catch (IllegalArgumentException e) {
+						LOG.error("error", e);
+					}
+				}
+				mapActivity.setIntent(null);
+			}
+			if (intent.hasExtra(PluginsFragment.OPEN_PLUGINS)) {
+				boolean openPlugins = intent.getBooleanExtra(PluginsFragment.OPEN_PLUGINS, false);
+				if (openPlugins) {
+					PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}
 				mapActivity.setIntent(null);
 			}
@@ -265,6 +282,23 @@ public class IntentHelper {
 			if (Intent.ACTION_SEND.equals(action) && type != null) {
 				if ("text/plain".equals(type)) {
 					return handleSendText(intent);
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean parseOAuthIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri uri = intent.getData();
+			if (uri.toString().startsWith("osmand-oauth")) {
+				OsmEditingFragment fragment = mapActivity.getOsmEditingFragment();
+				if (fragment != null) {
+					String oauthVerifier = uri.getQueryParameter("oauth_verifier");
+					fragment.authorize(oauthVerifier);
+					mapActivity.setIntent(null);
+					return true;
 				}
 			}
 		}

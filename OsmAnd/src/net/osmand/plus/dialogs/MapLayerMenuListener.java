@@ -1,7 +1,6 @@
 package net.osmand.plus.dialogs;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -20,7 +19,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
-import net.osmand.plus.activities.PluginActivity;
+import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -149,9 +148,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			settings.SHOW_MAP_MARKERS.set(isChecked);
 		} else if (itemId == R.string.layer_map) {
 			if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
-				Intent intent = new Intent(mapActivity, PluginActivity.class);
-				intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, OsmandRasterMapsPlugin.ID);
-				mapActivity.startActivity(intent);
+				PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 			} else {
 				ContextMenuItem it = adapter.getItem(pos);
 				mapActivity.getMapLayers().selectMapLayer(mapActivity.getMapView(), it, adapter);

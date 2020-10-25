@@ -3827,4 +3827,7 @@
     <string name="poi_elevator">Lyfta</string>
     <string name="poi_recycling_small_electrical_appliances">Smærri raftæki</string>
     <string name="poi_drinking_water_refill">Áfylling drykkjarvatns</string>
+    <string name="poi_fuel_lng">LNG</string>
+    <string name="poi_departures_board_no">Brottfaratafla: nei</string>
+    <string name="poi_departures_board">Brottfaratafla</string>
 </resources>

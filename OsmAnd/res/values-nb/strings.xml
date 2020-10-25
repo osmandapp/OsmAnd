@@ -3866,4 +3866,6 @@
     <string name="perform_oauth_authorization">Logg inn via OAuth</string>
     <string name="what_is_new">Hva er nytt</string>
     <string name="osm_edit_logout_success">Utlogget</string>
+    <string name="use_two_phase_routing">Bruk 2-stegs A*-rutingsalgoritme</string>
+    <string name="file_already_imported">Filen er allerede importert i OsmAnd</string>
 </resources>

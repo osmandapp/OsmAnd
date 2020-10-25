@@ -345,17 +345,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 		List<RouteSegmentResult> route = app.getRoutingHelper().getRoute().getOriginalRoute();
 		if (route != null) {
-			RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			RenderingRulesStorage defaultRender = app.getRendererRegistry().defaultRender();
-
-			MapRenderRepositories maps = app.getResourceManager().getRenderer();
-			RenderingRuleSearchRequest currentSearchRequest = maps.getSearchRequestWithAppliedCustomRules(currentRenderer, isNightMode());
-			RenderingRuleSearchRequest defaultSearchRequest = maps.getSearchRequestWithAppliedCustomRules(defaultRender, isNightMode());
-
-			List<RouteStatistics> routeStatistics = RouteStatisticsHelper.calculateRouteStatistic(route,
-					currentRenderer, defaultRender, currentSearchRequest, defaultSearchRequest);
+			List<RouteStatistics> routeStatistics = calculateRouteStatistics(app, route, isNightMode());
 			GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-
 
 			for (RouteStatistics statistic : routeStatistics) {
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, statistic, analysis);
@@ -373,6 +364,20 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			chart.setExtraRightOffset(16);
 			chart.setExtraLeftOffset(16);
 		}
+	}
+
+	public static List<RouteStatistics> calculateRouteStatistics(OsmandApplication app,
+	                                                             List<RouteSegmentResult> route,
+	                                                             boolean nightMode) {
+		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRulesStorage defaultRender = app.getRendererRegistry().defaultRender();
+		MapRenderRepositories maps = app.getResourceManager().getRenderer();
+		RenderingRuleSearchRequest currentSearchRequest =
+				maps.getSearchRequestWithAppliedCustomRules(currentRenderer, nightMode);
+		RenderingRuleSearchRequest defaultSearchRequest =
+				maps.getSearchRequestWithAppliedCustomRules(defaultRender, nightMode);
+		return RouteStatisticsHelper.calculateRouteStatistic(route, currentRenderer,
+				defaultRender, currentSearchRequest, defaultSearchRequest);
 	}
 
 	@Override

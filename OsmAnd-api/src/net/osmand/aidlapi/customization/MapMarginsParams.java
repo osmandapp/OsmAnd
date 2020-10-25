@@ -3,18 +3,31 @@ package net.osmand.aidlapi.customization;
 import android.os.Bundle;
 import android.os.Parcel;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.aidlapi.AidlParams;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapMarginsParams extends AidlParams {
 
-	private String appModeKey;
+	public static final String LEFT_MARGIN_KEY = "leftMargin";
+	public static final String TOP_MARGIN_KEY = "topMargin";
+	public static final String RIGHT_MARGIN_KEY = "rightMargin";
+	public static final String BOTTOM_MARGIN_KEY = "bottomMargin";
+	public static final String APP_MODES_KEYS_KEY = "appModesKeys";
+	private ArrayList<String> appModesKeys = new ArrayList<>();
 	private int leftMargin;
 	private int topMargin;
 	private int rightMargin;
 	private int bottomMargin;
 
-	public MapMarginsParams(String appModeKey, int leftMargin, int topMargin, int rightMargin, int bottomMargin) {
-		this.appModeKey = appModeKey;
+	public MapMarginsParams(int leftMargin, int topMargin, int rightMargin, int bottomMargin,
+	                        @Nullable List<String> appModesKeys) {
+		if (appModesKeys != null) {
+			this.appModesKeys.addAll(appModesKeys);
+		}
 		this.leftMargin = leftMargin;
 		this.topMargin = topMargin;
 		this.rightMargin = rightMargin;
@@ -37,8 +50,8 @@ public class MapMarginsParams extends AidlParams {
 		}
 	};
 
-	public String getAppModeKey() {
-		return appModeKey;
+	public List<String> getAppModesKeys() {
+		return appModesKeys;
 	}
 
 	public int getLeftMargin() {
@@ -59,19 +72,19 @@ public class MapMarginsParams extends AidlParams {
 
 	@Override
 	public void writeToBundle(Bundle bundle) {
-		bundle.putString("appModeKey", appModeKey);
-		bundle.putInt("leftMargin", leftMargin);
-		bundle.putInt("topMargin", topMargin);
-		bundle.putInt("rightMargin", rightMargin);
-		bundle.putInt("bottomMargin", bottomMargin);
+		bundle.putInt(LEFT_MARGIN_KEY, leftMargin);
+		bundle.putInt(TOP_MARGIN_KEY, topMargin);
+		bundle.putInt(RIGHT_MARGIN_KEY, rightMargin);
+		bundle.putInt(BOTTOM_MARGIN_KEY, bottomMargin);
+		bundle.putStringArrayList(APP_MODES_KEYS_KEY, appModesKeys);
 	}
 
 	@Override
 	protected void readFromBundle(Bundle bundle) {
-		appModeKey = bundle.getString("appModeKey");
-		leftMargin = bundle.getInt("leftMargin");
-		topMargin = bundle.getInt("topMargin");
-		rightMargin = bundle.getInt("rightMargin");
-		bottomMargin = bundle.getInt("bottomMargin");
+		leftMargin = bundle.getInt(LEFT_MARGIN_KEY);
+		topMargin = bundle.getInt(TOP_MARGIN_KEY);
+		rightMargin = bundle.getInt(RIGHT_MARGIN_KEY);
+		bottomMargin = bundle.getInt(BOTTOM_MARGIN_KEY);
+		appModesKeys = bundle.getStringArrayList(APP_MODES_KEYS_KEY);
 	}
 }

@@ -42,7 +42,7 @@ import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -166,15 +166,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public static final int[] MINUTES = new int[] {2, 3, 5};
 	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[] {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
 
-	
 	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return SettingsMonitoringActivity.class;
-	}
-
-	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return MonitoringSettingsFragment.class;
+	public SettingsScreenType getSettingsScreenType() {
+		return SettingsScreenType.MONITORING_SETTINGS;
 	}
 
 	@Override

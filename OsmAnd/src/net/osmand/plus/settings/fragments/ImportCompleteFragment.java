@@ -31,8 +31,8 @@ import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 
 import java.util.List;
 

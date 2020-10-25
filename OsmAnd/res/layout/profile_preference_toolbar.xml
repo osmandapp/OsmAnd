@@ -64,6 +64,13 @@
 				tools:text="Some description" />
 		</LinearLayout>
 
+		<include
+			layout="@layout/profile_button_small"
+			android:layout_width="@dimen/list_header_height"
+			android:layout_height="@dimen/list_header_height"
+			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginRight="@dimen/content_padding_half" />
+
 	</LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

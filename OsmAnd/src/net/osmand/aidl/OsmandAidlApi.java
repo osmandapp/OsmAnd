@@ -81,8 +81,10 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
@@ -138,7 +140,7 @@ import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_NAME;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DISTANCE;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_IMMINENT;
-import static net.osmand.plus.settings.backend.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 
 public class OsmandAidlApi {
 
@@ -200,13 +202,6 @@ public class OsmandAidlApi {
 	private static final String AIDL_QUICK_ACTION_NUMBER = "aidl_quick_action_number";
 	private static final String AIDL_LOCK_STATE = "lock_state";
 
-	private static final String AIDL_SET_MAP_MARGINS = "set_map_margins";
-	private static final String AIDL_APP_MODE = "app_mode";
-	private static final String AIDL_LEFT_MARGIN = "left_margin";
-	private static final String AIDL_TOP_MARGIN = "top_margin";
-	private static final String AIDL_RIGHT_MARGIN = "right_margin";
-	private static final String AIDL_BOTTOM_MARGIN = "bottom_margin";
-
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
 	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
@@ -257,7 +252,6 @@ public class OsmandAidlApi {
 		registerHideSqliteDbFileReceiver(mapActivity);
 		registerExecuteQuickActionReceiver(mapActivity);
 		registerLockStateReceiver(mapActivity);
-		registerMapMarginsReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		this.mapActivity = mapActivity;
@@ -379,28 +373,10 @@ public class OsmandAidlApi {
 		registerReceiver(addMapWidgetReceiver, mapActivity, AIDL_ADD_MAP_WIDGET);
 	}
 
-	private void registerMapMarginsReceiver(MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-		BroadcastReceiver addMapWidgetReceiver = new BroadcastReceiver() {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				MapActivity mapActivity = mapActivityRef.get();
-				String appModeKey = intent.getStringExtra(AIDL_APP_MODE);
-				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
-				if (mapActivity != null && appModeKey != null && packName != null) {
-					ConnectedApp connectedApp = connectedApps.get(packName);
-					if (connectedApp != null) {
-						int leftMargin = intent.getIntExtra(AIDL_LEFT_MARGIN, 0);
-						int topMargin = intent.getIntExtra(AIDL_TOP_MARGIN, 0);
-						int bottomMargin = intent.getIntExtra(AIDL_RIGHT_MARGIN, 0);
-						int rightMargin = intent.getIntExtra(AIDL_BOTTOM_MARGIN, 0);
-
-						connectedApp.setMargins(mapActivity, appModeKey, leftMargin, topMargin, rightMargin, bottomMargin);
-					}
-				}
-			}
-		};
-		registerReceiver(addMapWidgetReceiver, mapActivity, AIDL_SET_MAP_MARGINS);
+	boolean setMapMargins(int left, int top, int right, int bottom, @Nullable List<String> appModeKeys) {
+		app.getAppCustomization().setMapMargins(left, top, right, bottom, appModeKeys);
+		app.getAppCustomization().updateMapMargins(mapActivity);
+		return true;
 	}
 
 	private void registerAddContextMenuButtonsReceiver(MapActivity mapActivity) {
@@ -916,12 +892,6 @@ public class OsmandAidlApi {
 	public void registerMapLayers(@NonNull MapActivity mapActivity) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
 			connectedApp.registerMapLayers(mapActivity);
-		}
-	}
-
-	public void updateMapMargins(@NonNull MapActivity mapActivity) {
-		for (ConnectedApp connectedApp : connectedApps.values()) {
-			connectedApp.updateMapMargins(mapActivity);
 		}
 	}
 
@@ -2330,19 +2300,6 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public boolean setMapMargins(String packName, String appModeKey, int leftMargin, int topMargin, int bottomMargin, int rightMargin) {
-		Intent intent = new Intent();
-		intent.setAction(AIDL_SET_MAP_MARGINS);
-		intent.putExtra(AIDL_PACKAGE_NAME, packName);
-		intent.putExtra(AIDL_APP_MODE, appModeKey);
-		intent.putExtra(AIDL_LEFT_MARGIN, leftMargin);
-		intent.putExtra(AIDL_TOP_MARGIN, topMargin);
-		intent.putExtra(AIDL_RIGHT_MARGIN, bottomMargin);
-		intent.putExtra(AIDL_BOTTOM_MARGIN, rightMargin);
-		app.sendBroadcast(intent);
-		return true;
-	}
-
 	public boolean exportProfile(String appModeKey, List<String> settingsTypesKeys) {
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 		if (app != null && appMode != null) {
@@ -2350,8 +2307,8 @@ public class OsmandAidlApi {
 			for (String key : settingsTypesKeys) {
 				settingsTypes.add(ExportSettingsType.valueOf(key));
 			}
-			List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
-			settingsItems.add(new SettingsHelper.ProfileSettingsItem(app, appMode));
+			List<SettingsItem> settingsItems = new ArrayList<>();
+			settingsItems.add(new ProfileSettingsItem(app, appMode));
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			SettingsHelper settingsHelper = app.getSettingsHelper();
@@ -2360,6 +2317,14 @@ public class OsmandAidlApi {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean isFragmentOpen() {
+		return mapActivity.isFragmentVisible();
+	}
+
+	public boolean isMenuOpen() {
+		return mapActivity.getContextMenu().isVisible();
 	}
 
 	private static class FileCopyInfo {

@@ -41,7 +41,7 @@ public class RenderingRule {
 	public void init(Map<String, String> attributes) {
 		ArrayList<RenderingRuleProperty> props = new ArrayList<RenderingRuleProperty>(attributes.size());
 		intProperties = new int[attributes.size()];
-		floatProperties = null;
+		floatProperties = new float[attributes.size()];
 		attributesRef = null;
 		int i = 0;
 		Iterator<Entry<String, String>> it = attributes.entrySet().iterator();
@@ -58,14 +58,13 @@ public class RenderingRule {
 					attributesRef[i] = storage.getRenderingAttributeRule(vl.substring(1));
 				} else if (property.isString()) {
 					intProperties[i] = storage.getDictionaryValue(vl);
-				} else if (property.isFloat()) {
-					if (floatProperties == null) {
-						// lazy creates
-						floatProperties = new float[attributes.size()];
-					}
-					floatProperties[i] = property.parseFloatValue(vl);
-					intProperties[i] = property.parseIntValue(vl);
 				} else {
+					float floatVal = property.parseFloatValue(vl);
+//					if (floatProperties == null && floatVal != 0) {
+//						// lazy creates
+//						floatProperties = new float[attributes.size()];
+						floatProperties[i] = floatVal;
+//					}
 					intProperties[i] = property.parseIntValue(vl);
 				}
 				i++;
@@ -95,7 +94,7 @@ public class RenderingRule {
 	
 	public float getFloatPropertyValue(String property) {
 		int i = getPropertyIndex(property);
-		if(i >= 0 && floatProperties != null){
+		if (i >= 0) {
 			return floatProperties[i];
 		}
 		return 0;

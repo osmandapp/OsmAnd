@@ -74,9 +74,6 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -87,6 +84,7 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.OsmLiveCancelledDialog;
+import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
@@ -100,13 +98,14 @@ import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.firstusage.FirstUsageWelcomeFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DiscountHelper;
-import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -119,6 +118,7 @@ import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
+import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -132,7 +132,9 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
@@ -885,6 +887,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.addListener(useSystemScreenTimeoutListener);
 	}
 
+	@Override
+	public void onTopResumedActivityChanged(boolean isTopResumedActivity) {
+		if (isTopResumedActivity) {
+			OsmandPlugin.onMapActivityResumeOnTop(this);
+		}
+	}
+
 	public void applyScreenOrientation() {
 		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
 			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
@@ -1029,13 +1038,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public boolean isMapVisible() {
-		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-			if (fragment.isVisible()) {
-				return false;
-			}
+		if (isFragmentVisible()) {
+			return false;
 		}
 		return AndroidUtils.isActivityNotDestroyed(this) && settings.MAP_ACTIVITY_ENABLED.get()
 				&& !dashboardOnMap.isVisible();
+	}
+
+	public boolean isFragmentVisible() {
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (!(fragment instanceof DashBaseFragment) && fragment.isVisible()
+					|| dashboardOnMap.isVisible()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void restartApp() {
@@ -1421,7 +1438,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		});
 		getMapView().refreshMap(true);
 		applyScreenOrientation();
-		app.getAidlApi().updateMapMargins(this);
+		app.getAppCustomization().updateMapMargins(this);
 	}
 
 	public void updateNavigationBarColor() {
@@ -2198,6 +2215,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public GpxApproximationFragment getGpxApproximationFragment() {
 		return getFragment(GpxApproximationFragment.TAG);
+	}
+
+	public OsmEditingFragment getOsmEditingFragment() {
+		return getFragment(SettingsScreenType.OPEN_STREET_MAP_EDITING.fragmentName);
 	}
 
 	public SnapTrackWarningFragment getSnapTrackWarningBottomSheet() {

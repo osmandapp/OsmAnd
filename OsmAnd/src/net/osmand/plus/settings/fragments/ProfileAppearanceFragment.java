@@ -42,7 +42,8 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.profiles.LocationIcon;
@@ -828,7 +829,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				tempDir.mkdirs();
 			}
 			app.getSettingsHelper().exportSettings(tempDir, mode.getStringKey(),
-					getSettingsExportListener(), true, new SettingsHelper.ProfileSettingsItem(app, mode));
+					getSettingsExportListener(), true, new ProfileSettingsItem(app, mode));
 		}
 	}
 

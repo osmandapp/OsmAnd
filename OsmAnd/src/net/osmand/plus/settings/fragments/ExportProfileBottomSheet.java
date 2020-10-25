@@ -33,9 +33,9 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.settings.backend.SettingsHelper.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
 import org.apache.commons.logging.Log;
@@ -174,7 +174,6 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		super.onRightBottomButtonClick();
 		prepareFile();
 	}
 

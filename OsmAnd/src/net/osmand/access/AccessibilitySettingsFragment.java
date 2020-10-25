@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener;
 import android.widget.ImageView;
@@ -13,20 +15,23 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.OnPreferenceChanged;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+
+import static net.osmand.plus.activities.PluginInfoFragment.PLUGIN_INFO;
 
 public class AccessibilitySettingsFragment extends BaseSettingsFragment implements OnPreferenceChanged, CopyAppModePrefsListener, ResetAppModePrefsListener {
 
@@ -35,6 +40,8 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 
 	private AccessibilityStateChangeListener accessibilityListener;
+
+	boolean showSwitchProfile = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +54,28 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 				}
 			}
 		};
+
+		Bundle args = getArguments();
+		if (args != null) {
+			showSwitchProfile = args.getBoolean(PLUGIN_INFO, false);
+		}
+	}
+
+	@Override
+	protected void createToolbar(LayoutInflater inflater, View view) {
+		super.createToolbar(inflater, view);
+
+		View switchProfile = view.findViewById(R.id.profile_button);
+		if (switchProfile != null) {
+			AndroidUiHelper.updateVisibility(switchProfile, showSwitchProfile);
+		}
+	}
+
+	@Override
+	public Bundle buildArguments() {
+		Bundle args = super.buildArguments();
+		args.putBoolean(PLUGIN_INFO, showSwitchProfile);
+		return args;
 	}
 
 	@Override

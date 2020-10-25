@@ -12,13 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
+import net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.osmedit.SettingsOsmEditingActivity;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 
 public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
@@ -84,7 +84,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		app.getSettings().USER_NAME.set(userNameEditText.getText().toString());
 		app.getSettings().USER_PASSWORD.set(passwordEditText.getText().toString());
-		new SettingsOsmEditingActivity.ValidateOsmLoginDetailsTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		new ValidateOsmLoginDetailsTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 		Fragment target = getTargetFragment();
 		Preference preference = getPreference();
