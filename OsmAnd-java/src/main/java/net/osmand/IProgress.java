@@ -45,7 +45,7 @@ public interface IProgress {
 		public boolean isInterrupted() {return false;}
 		
 		@Override
-		public boolean isIndeterminate() {return false;}
+		public boolean isIndeterminate() {return true;}
 		
 		@Override
 		public void finishTask() {}

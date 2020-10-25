@@ -118,6 +118,7 @@ import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
+import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -2214,6 +2215,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public GpxApproximationFragment getGpxApproximationFragment() {
 		return getFragment(GpxApproximationFragment.TAG);
+	}
+
+	public OsmEditingFragment getOsmEditingFragment() {
+		return getFragment(SettingsScreenType.OPEN_STREET_MAP_EDITING.fragmentName);
 	}
 
 	public SnapTrackWarningFragment getSnapTrackWarningBottomSheet() {
