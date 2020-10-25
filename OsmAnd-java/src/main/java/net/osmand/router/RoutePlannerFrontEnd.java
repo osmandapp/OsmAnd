@@ -243,9 +243,6 @@ public class RoutePlannerFrontEnd {
 			start = gpxPoints.get(0); 
 		}
 		while (start != null && !gctx.ctx.calculationProgress.isCancelled) {
-			if (Thread.currentThread().isInterrupted()) {
-				return null;
-			}
 			double routeDist = gctx.MAXIMUM_STEP_APPROXIMATION;
 			GpxPoint next = findNextGpxPointWithin(gctx, gpxPoints, start, routeDist);
 			boolean routeFound = false;

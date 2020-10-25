@@ -24,7 +24,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -44,7 +43,6 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.measurementtool.GpxData;
-import net.osmand.plus.measurementtool.GpxData.ActionType;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -554,10 +552,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && gpxFile != null) {
 			editingTrack = true;
-			QuadRect rect = gpxFile.getRect();
-			TrkSegment segment = gpxFile.getNonEmptyTrkSegment();
-			ActionType actionType = segment == null ? ActionType.ADD_ROUTE_POINTS : ActionType.EDIT_SEGMENT;
-			GpxData gpxData = new GpxData(gpxFile, rect, actionType, segment);
+			GpxData gpxData = new GpxData(gpxFile);
 			MeasurementEditingContext editingContext = new MeasurementEditingContext();
 			editingContext.setGpxData(gpxData);
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
