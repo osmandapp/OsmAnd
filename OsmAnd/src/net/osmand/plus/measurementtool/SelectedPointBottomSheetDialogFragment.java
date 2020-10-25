@@ -173,7 +173,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
-				.setDisabled(editingCtx.isFirstPointSelected())
+				.setDisabled(editingCtx.isFirstPointSelected() || editingCtx.isSelectionNeedApproximation())
 				.create();
 		items.add(changeRouteTypeBefore);
 
@@ -192,7 +192,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
-				.setDisabled(editingCtx.isLastPointSelected())
+				.setDisabled(editingCtx.isLastPointSelected() || editingCtx.isSelectionNeedApproximation())
 				.create();
 		items.add(changeRouteTypeAfter);
 

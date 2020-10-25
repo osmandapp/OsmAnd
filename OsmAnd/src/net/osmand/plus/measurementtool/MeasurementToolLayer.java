@@ -17,7 +17,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
@@ -313,27 +313,29 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	private void drawBeforeAfterPath(Canvas canvas, RotatedTileBox tb) {
-		List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();
-		List<TrkSegment> after = editingCtx.getAfterTrkSegmentLine();
+		List<TrkSegment> before = editingCtx.getBeforeSegments();
+		List<TrkSegment> after = editingCtx.getAfterSegments();
 		if (before.size() > 0 || after.size() > 0) {
 			path.reset();
 			tx.clear();
 			ty.clear();
 
 			boolean hasPointsBefore = false;
+			boolean hasGapBefore = false;
 			if (before.size() > 0) {
 				TrkSegment segment = before.get(before.size() - 1);
 				if (segment.points.size() > 0) {
 					hasPointsBefore = true;
 					WptPt pt = segment.points.get(segment.points.size() - 1);
-					if (!ApplicationMode.GAP.getStringKey().equals(pt.getProfileType())) {
+					hasGapBefore = pt.isGap();
+					if (!pt.isGap() || !editingCtx.isInAddPointBeforeMode()) {
 						float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 						float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 						tx.add(locX);
 						ty.add(locY);
-						tx.add((float) tb.getCenterPixelX());
-						ty.add((float) tb.getCenterPixelY());
 					}
+					tx.add((float) tb.getCenterPixelX());
+					ty.add((float) tb.getCenterPixelY());
 				}
 			}
 			if (after.size() > 0) {
@@ -343,11 +345,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 						tx.add((float) tb.getCenterPixelX());
 						ty.add((float) tb.getCenterPixelY());
 					}
-					WptPt pt = segment.points.get(0);
-					float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
-					float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-					tx.add(locX);
-					ty.add(locY);
+					if (!hasGapBefore || editingCtx.isInAddPointBeforeMode()) {
+						WptPt pt = segment.points.get(0);
+						float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+						float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
+						tx.add(locX);
+						ty.add(locY);
+					}
 				}
 			}
 
@@ -376,7 +380,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
-	public WptPt addCenterPoint() {
+	public WptPt addCenterPoint(boolean addPointBefore) {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		LatLon l = tb.getCenterLatLon();
 		WptPt pt = new WptPt();
@@ -384,17 +388,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		pt.lon = l.getLongitude();
 		boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 		if (allowed) {
-			ApplicationMode applicationMode = editingCtx.getAppMode();
-			if (applicationMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
-				pt.setProfileType(applicationMode.getStringKey());
-			}
-			editingCtx.addPoint(pt);
+			editingCtx.addPoint(pt, addPointBefore ? AdditionMode.ADD_BEFORE : AdditionMode.ADD_AFTER);
 			return pt;
 		}
 		return null;
 	}
 
-	public WptPt addPoint() {
+	public WptPt addPoint(boolean addPointBefore) {
 		if (pressedPointLatLon != null) {
 			WptPt pt = new WptPt();
 			double lat = pressedPointLatLon.getLatitude();
@@ -404,11 +404,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			pressedPointLatLon = null;
 			boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 			if (allowed) {
-				ApplicationMode applicationMode = editingCtx.getAppMode();
-				if (applicationMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
-					pt.setProfileType(applicationMode.getStringKey());
-				}
-				editingCtx.addPoint(pt);
+				editingCtx.addPoint(pt, addPointBefore ? AdditionMode.ADD_BEFORE : AdditionMode.ADD_AFTER);
 				moveMapToLatLon(lat, lon);
 				return pt;
 			}

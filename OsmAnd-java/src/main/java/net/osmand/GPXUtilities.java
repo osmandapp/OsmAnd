@@ -330,6 +330,15 @@ public class GPXUtilities {
 			return profileType != null && !GAP_PROFILE_TYPE.equals(profileType);
 		}
 
+		public boolean isGap() {
+			String profileType = getProfileType();
+			return GAP_PROFILE_TYPE.equals(profileType);
+		}
+
+		public void setGap() {
+			setProfileType(GAP_PROFILE_TYPE);
+		}
+
 		public void removeProfileType() {
 			getExtensionsToWrite().remove(PROFILE_TYPE_EXTENSION);
 		}

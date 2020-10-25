@@ -150,10 +150,12 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 	}
 
 	private void updateProfileType(WptPt pt) {
-		if (newMode != null && newMode != DEFAULT_APP_MODE) {
-			pt.setProfileType(newMode.getStringKey());
-		} else {
-			pt.removeProfileType();
+		if (!pt.isGap()) {
+			if (newMode != null && newMode != DEFAULT_APP_MODE) {
+				pt.setProfileType(newMode.getStringKey());
+			} else {
+				pt.removeProfileType();
+			}
 		}
 	}
 }

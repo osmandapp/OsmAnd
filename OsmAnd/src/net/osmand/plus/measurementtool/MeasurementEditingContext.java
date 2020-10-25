@@ -65,6 +65,7 @@ public class MeasurementEditingContext {
 	private WptPt originalPointToMove;
 
 	private boolean inAddPointMode;
+	private boolean inAddPointBeforeMode;
 	private boolean inApproximationMode;
 	private int calculatedPairs;
 	private int pointsToCalculateSize;
@@ -74,10 +75,15 @@ public class MeasurementEditingContext {
 	private RouteCalculationProgress calculationProgress;
 	private Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = new ConcurrentHashMap<>();
 
-
 	public enum CalculationMode {
 		NEXT_SEGMENT,
 		WHOLE_TRACK
+	}
+
+	public enum AdditionMode {
+		UNDEFINED,
+		ADD_AFTER,
+		ADD_BEFORE,
 	}
 
 	public static class RoadSegmentData {
@@ -158,6 +164,10 @@ public class MeasurementEditingContext {
 		return inAddPointMode;
 	}
 
+	public boolean isInAddPointBeforeMode() {
+		return inAddPointBeforeMode;
+	}
+
 	public void updateSegmentsForSnap() {
 		updateSegmentsForSnap(true);
 	}
@@ -178,8 +188,9 @@ public class MeasurementEditingContext {
 		this.originalPointToMove = originalPointToMove;
 	}
 
-	void setInAddPointMode(boolean inAddPointMode) {
+	void setInAddPointMode(boolean inAddPointMode, boolean inAddPointAfterMode) {
 		this.inAddPointMode = inAddPointMode;
+		this.inAddPointBeforeMode = inAddPointAfterMode;
 	}
 
 	public boolean isInApproximationMode() {
@@ -294,6 +305,32 @@ public class MeasurementEditingContext {
 		return !newData && hasDefaultPoints && getPoints().size() > 2;
 	}
 
+	public boolean isSelectionNeedApproximation() {
+		boolean hasDefaultPoints = false;
+		boolean newData = isNewData();
+		if (!newData && selectedPointPosition != -1) {
+			WptPt selectedPoint = getPoints().get(selectedPointPosition);
+			List<TrkSegment> segments = getBeforeSegments();
+			List<WptPt> points = null;
+			for (TrkSegment segment : segments) {
+				if (segment.points.contains(selectedPoint)) {
+					points = segment.points;
+				}
+			}
+			WptPt prevPoint = null;
+			if (points != null) {
+				for (WptPt point : points) {
+					if (!point.hasProfile() && (prevPoint == null || !prevPoint.hasProfile())) {
+						hasDefaultPoints = true;
+						break;
+					}
+					prevPoint = point;
+				}
+			}
+		}
+		return !newData && hasDefaultPoints && getPoints().size() > 2;
+	}
+
 	public void clearSnappedToRoadPoints() {
 		roadSegmentData.clear();
 	}
@@ -312,6 +349,14 @@ public class MeasurementEditingContext {
 		return afterSegments;
 	}
 
+	public List<TrkSegment> getBeforeSegments() {
+		return beforeSegments;
+	}
+
+	public List<TrkSegment> getAfterSegments() {
+		return afterSegments;
+	}
+
 	public List<WptPt> getPoints() {
 		return getBeforePoints();
 	}
@@ -323,7 +368,7 @@ public class MeasurementEditingContext {
 		String prevProfileType = null;
 		for (WptPt point : allPoints) {
 			String profileType = point.getProfileType();
-			boolean isGap = ApplicationMode.GAP.getStringKey().equals(profileType);
+			boolean isGap = point.isGap();
 			boolean plainPoint = Algorithms.isEmpty(profileType) || (isGap && Algorithms.isEmpty(prevProfileType));
 			boolean routePoint = !plainPoint;
 			if (plain && plainPoint || route && routePoint) {
@@ -364,12 +409,71 @@ public class MeasurementEditingContext {
 		updateSegmentsForSnap(true);
 	}
 
+	private void preAddPoint(int position, AdditionMode additionMode, WptPt point) {
+		switch (additionMode) {
+			case UNDEFINED: {
+				if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+					point.setProfileType(appMode.getStringKey());
+				}
+				break;
+			}
+			case ADD_AFTER: {
+				List<WptPt> points = getBeforePoints();
+				if (position > 0 && position <= points.size()) {
+					WptPt prevPt = points.get(position - 1);
+					if (prevPt.isGap()) {
+						point.setGap();
+						if (position > 1) {
+							WptPt pt = points.get(position - 2);
+							if (pt.hasProfile()) {
+								prevPt.setProfileType(pt.getProfileType());
+							} else {
+								prevPt.removeProfileType();
+							}
+						}
+					} else if (prevPt.hasProfile()) {
+						point.setProfileType(prevPt.getProfileType());
+					}
+				} else if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+					point.setProfileType(appMode.getStringKey());
+				}
+				break;
+			}
+			case ADD_BEFORE: {
+				List<WptPt> points = getAfterPoints();
+				if (position >= -1 && position + 1 < points.size()) {
+					WptPt nextPt = points.get(position + 1);
+					if (nextPt.hasProfile()) {
+						point.setProfileType(nextPt.getProfileType());
+					}
+				} else if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+					point.setProfileType(appMode.getStringKey());
+				}
+				break;
+			}
+		}
+	}
+
 	public void addPoint(WptPt pt) {
+		addPoint(pt, AdditionMode.UNDEFINED);
+	}
+
+	public void addPoint(WptPt pt, AdditionMode additionMode) {
+		if (additionMode == AdditionMode.ADD_AFTER || additionMode == AdditionMode.ADD_BEFORE) {
+			preAddPoint(additionMode == AdditionMode.ADD_BEFORE ? -1 : getBeforePoints().size(), additionMode, pt);
+		}
 		before.points.add(pt);
 		updateSegmentsForSnap(false);
 	}
 
 	public void addPoint(int position, WptPt pt) {
+		addPoint(position, pt, AdditionMode.UNDEFINED);
+	}
+
+	public void addPoint(int position, WptPt pt, AdditionMode additionMode) {
+		if (additionMode == AdditionMode.ADD_AFTER || additionMode == AdditionMode.ADD_BEFORE) {
+			preAddPoint(position, additionMode, pt);
+		}
 		before.points.add(position, pt);
 		updateSegmentsForSnap(false);
 	}
@@ -404,7 +508,14 @@ public class MeasurementEditingContext {
 		if (position < 0 || position >= before.points.size()) {
 			return new WptPt();
 		}
-		WptPt pt = before.points.remove(position);
+		WptPt pt = before.points.get(position);
+		if (position > 0 && pt.isGap()) {
+			WptPt prevPt = before.points.get(position - 1);
+			if (!prevPt.isGap()) {
+				prevPt.setGap();
+			}
+		}
+		before.points.remove(position);
 		if (updateSnapToRoad) {
 			updateSegmentsForSnap(false);
 		}
@@ -442,11 +553,27 @@ public class MeasurementEditingContext {
 	}
 
 	public boolean isFirstPointSelected() {
-		return selectedPointPosition == 0;
+		return isBorderPointSelected(true);
 	}
 
 	public boolean isLastPointSelected() {
-		return selectedPointPosition == getPoints().size() - 1;
+		return isBorderPointSelected(false);
+	}
+
+	private boolean isBorderPointSelected(boolean first) {
+		WptPt selectedPoint = getPoints().get(selectedPointPosition);
+		List<TrkSegment> segments = getBeforeSegments();
+		int count = 0;
+		for (TrkSegment segment : segments) {
+			int i = segment.points.indexOf(selectedPoint);
+			if (i != -1) {
+				int segmentPosition = selectedPointPosition - count;
+				return first ? segmentPosition == 0 : segmentPosition == segment.points.size() - 1;
+			} else {
+				count += segment.points.size();
+			}
+		}
+		return false;
 	}
 
 	public ApplicationMode getSelectedPointAppMode() {
@@ -508,7 +635,7 @@ public class MeasurementEditingContext {
 				String profileType = point.getProfileType();
 				if (profileType != null) {
 					boolean isDefault = profileType.equals(DEFAULT_APP_MODE.getStringKey());
-					boolean isGap = profileType.equals(ApplicationMode.GAP.getStringKey());
+					boolean isGap = point.isGap();
 					if (defaultMode && !isDefault && !isGap) {
 						roadSegmentIndexes.add(segments.size() - 1);
 						defaultMode = false;
@@ -522,6 +649,8 @@ public class MeasurementEditingContext {
 					}
 				}
 			}
+		} else {
+			s.points.addAll(points);
 		}
 		if (s.points.isEmpty()) {
 			segments.remove(s);
@@ -541,6 +670,9 @@ public class MeasurementEditingContext {
 						}
 						segmentForSnap.points.addAll(Arrays.asList(pair.first, pair.second));
 					}
+				}
+				if (segmentForSnap.points.isEmpty()) {
+					segmentForSnap.points.addAll(segment.points);
 				}
 				segmentsForSnap.add(segmentForSnap);
 			}
@@ -609,13 +741,13 @@ public class MeasurementEditingContext {
 					}
 				}
 				if (!routePoints.isEmpty() && si < segments.size() - 1) {
-					routePoints.get(routePoints.size() - 1).setProfileType(ApplicationMode.GAP.getStringKey());
+					routePoints.get(routePoints.size() - 1).setGap();
 				}
 				addPoints(routePoints);
 			} else {
 				addPoints(points);
 				if (!points.isEmpty() && si < segments.size() - 1) {
-					points.get(points.size() - 1).setProfileType(ApplicationMode.GAP.getStringKey());
+					points.get(points.size() - 1).setGap();
 				}
 			}
 		}
@@ -668,8 +800,8 @@ public class MeasurementEditingContext {
 		}
 		WptPt lastOriginalPoint = originalPoints.get(originalPoints.size() - 1);
 		WptPt lastRoutePoint = routePoints.get(routePoints.size() - 1);
-		if (ApplicationMode.GAP.getStringKey().equals(lastOriginalPoint.getProfileType())) {
-			lastRoutePoint.setProfileType(ApplicationMode.GAP.getStringKey());
+		if (lastOriginalPoint.isGap()) {
+			lastRoutePoint.setGap();
 		}
 		replacePoints(originalPoints, routePoints);
 		return routePoints;
@@ -864,7 +996,7 @@ public class MeasurementEditingContext {
 		for (WptPt point : plainPoints) {
 			if (point.getTrkPtIndex() != -1) {
 				points.add(point);
-				if (ApplicationMode.GAP.getStringKey().equals(point.getProfileType())) {
+				if (point.isGap()) {
 					res.add(points);
 					points = new ArrayList<>();
 				}
@@ -920,7 +1052,7 @@ public class MeasurementEditingContext {
 		List<Integer> lastPointIndexes = new ArrayList<>();
 		for (int i = 0; i < before.points.size(); i++) {
 			WptPt pt = before.points.get(i);
-			if (ApplicationMode.GAP.getStringKey().equals(pt.getProfileType())) {
+			if (pt.isGap()) {
 				lastPointIndexes.add(i);
 			}
 		}

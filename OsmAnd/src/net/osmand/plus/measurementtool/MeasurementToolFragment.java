@@ -810,7 +810,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void addToTheTrackOnClick() {
+	public void addToTrackOnClick() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (editingCtx.getPointsCount() > 0) {
@@ -877,7 +877,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
-			editingCtx.setInAddPointMode(true);
+			editingCtx.setInAddPointMode(true, false);
 			editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
 		}
 		((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
@@ -890,7 +890,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
-			editingCtx.setInAddPointMode(true);
+			editingCtx.setInAddPointMode(true, true);
 			editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 		}
 		((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
@@ -1031,7 +1031,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper()
 							.getSelectedFileByPath(gpxFile.path);
 					boolean showOnMap = selectedGpxFile != null;
-					saveExistingGpx(gpxFile, showOnMap, false, FinalSaveAction.SHOW_TOAST);
+					saveExistingGpx(gpxFile, showOnMap, false, true, FinalSaveAction.SHOW_TOAST);
 				}
 			}
 
@@ -1270,7 +1270,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		switchAddPointBeforeAfterMode(false);
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		editingCtx.setSelectedPointPosition(-1);
-		editingCtx.setInAddPointMode(false);
+		editingCtx.setInAddPointMode(false, false);
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			measurementLayer.refreshMap();
@@ -1282,7 +1282,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		switchAddPointBeforeAfterMode(false);
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		editingCtx.setSelectedPointPosition(-1);
-		editingCtx.setInAddPointMode(false);
+		editingCtx.setInAddPointMode(false, false);
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
 			measurementToolLayer.refreshMap();
@@ -1468,7 +1468,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			SelectedGpxFile selectedGpxFile =
 					mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpx.path);
 			boolean showOnMap = selectedGpxFile != null;
-			saveExistingGpx(gpx, showOnMap, false, finalSaveAction);
+			saveExistingGpx(gpx, showOnMap, false, false, finalSaveAction);
 		}
 	}
 
@@ -1507,16 +1507,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void saveNewGpx(@NonNull File dir, @NonNull String fileName, boolean showOnMap,
 							boolean simplified, FinalSaveAction finalSaveAction) {
-		saveGpx(new File(dir, fileName), null, simplified, finalSaveAction, showOnMap);
+		saveGpx(new File(dir, fileName), null, simplified, false, finalSaveAction, showOnMap);
 	}
 
 	private void saveExistingGpx(@NonNull GPXFile gpx, boolean showOnMap,
-								 boolean simplified, FinalSaveAction finalSaveAction) {
-		saveGpx(new File(gpx.path), gpx, simplified, finalSaveAction, showOnMap);
+								 boolean simplified, boolean addToTrack, FinalSaveAction finalSaveAction) {
+		saveGpx(new File(gpx.path), gpx, simplified, addToTrack, finalSaveAction, showOnMap);
 	}
 
 	private void saveGpx(@NonNull final File outFile, @Nullable GPXFile gpxFile, boolean simplified,
-						 final FinalSaveAction finalSaveAction, final boolean showOnMap) {
+						 boolean addToTrack, final FinalSaveAction finalSaveAction, final boolean showOnMap) {
 		SaveGpxRouteListener saveGpxRouteListener = new SaveGpxRouteListener() {
 			@Override
 			public void gpxSavingFinished(Exception warning, GPXFile savedGpxFile, File backupFile) {
@@ -1524,7 +1524,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		};
 
-		SaveGpxRouteAsyncTask saveTask = new SaveGpxRouteAsyncTask(this, outFile, gpxFile, simplified, showOnMap, saveGpxRouteListener);
+		SaveGpxRouteAsyncTask saveTask = new SaveGpxRouteAsyncTask(this, outFile, gpxFile, simplified,
+				addToTrack, showOnMap, saveGpxRouteListener);
 		saveTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

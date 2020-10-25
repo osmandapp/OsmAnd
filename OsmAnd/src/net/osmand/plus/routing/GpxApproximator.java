@@ -78,10 +78,6 @@ public class GpxApproximator {
 		}
 	}
 
-	public static void cancelPendingApproximations() {
-		SINGLE_THREAD_EXECUTOR.getQueue().clear();
-	}
-
 	private void prepareEnvironment(@NonNull OsmandApplication ctx, @NonNull ApplicationMode mode) throws IOException {
 		this.env = routingHelper.getRoutingEnvironment(ctx, mode, start, end);
 	}
@@ -196,9 +192,7 @@ public class GpxApproximator {
 					if (approximationTask != null && calculationProgress != null && !calculationProgress.isCancelled) {
 						float pr = calculationProgress.getLinearProgress();
 						approximationProgress.updateProgress(GpxApproximator.this, (int) pr);
-						if (GpxApproximator.this.gctx != gctx) {
-							// different calculation started
-						} else {
+						if (GpxApproximator.this.gctx == gctx) {
 							updateProgress(gctx);
 						}
 					}
