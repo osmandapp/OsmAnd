@@ -428,7 +428,7 @@ public class FavouritesDbHelper {
 		while (fl) {
 			fl = false;
 			for (FavouritePoint fp : fdb.getFavouritePoints()) {
-				if (fp.getName().equals(name) && p.getLatitude() != fp.getLatitude() && p.getLongitude() != fp.getLongitude()) {
+				if (fp.getName().equals(name) && p.getLatitude() != fp.getLatitude() && p.getLongitude() != fp.getLongitude() && fp.getCategory().equals(p.getCategory())) {
 					number++;
 					index = " (" + number + ")";
 					name = p.getName() + index;
