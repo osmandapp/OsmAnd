@@ -81,12 +81,12 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		super(app);
 		OsmandSettings set = app.getSettings();
 		ApplicationMode.regWidgetVisibility("parking", (ApplicationMode[]) null);
-		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal();
-		parkingLon = set.registerFloatPreference(PARKING_POINT_LON, 0f).makeGlobal();
-		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal();
-		parkingEvent = set.registerBooleanPreference(PARKING_EVENT_ADDED, false).makeGlobal();
-		parkingTime = set.registerLongPreference(PARKING_TIME, -1).makeGlobal();
-		parkingStartTime = set.registerLongPreference(PARKING_START_TIME, -1).makeGlobal();
+		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal().makeVisible();
+		parkingLon = set.registerFloatPreference(PARKING_POINT_LON, 0f).makeGlobal().makeVisible();
+		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal().makeVisible();
+		parkingEvent = set.registerBooleanPreference(PARKING_EVENT_ADDED, false).makeGlobal().makeVisible();
+		parkingTime = set.registerLongPreference(PARKING_TIME, -1).makeGlobal().makeVisible();
+		parkingStartTime = set.registerLongPreference(PARKING_START_TIME, -1).makeGlobal().makeVisible();
 		parkingPosition = constructParkingPosition();
 	}
 
