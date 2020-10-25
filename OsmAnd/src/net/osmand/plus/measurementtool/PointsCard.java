@@ -35,9 +35,7 @@ public class PointsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 	@Override
 	protected void updateContent() {
 		MeasurementEditingContext editingCtx = fragment.getEditingCtx();
-		final GpxData gpxData = editingCtx.getGpxData();
-		adapter = new MeasurementToolAdapter(mapActivity, editingCtx.getPoints(),
-				gpxData != null ? gpxData.getActionType() : null);
+		adapter = new MeasurementToolAdapter(mapActivity, editingCtx.getPoints());
 		RecyclerView pointsRv = view.findViewById(R.id.measure_points_recycler_view);
 		ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(pointsRv);

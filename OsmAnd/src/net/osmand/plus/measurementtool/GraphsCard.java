@@ -341,7 +341,7 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 		if (editingCtx.getGpxData() != null) {
 			gpx = editingCtx.getGpxData().getGpxFile();
 		} else {
-			gpx = editingCtx.exportRouteAsGpx(GRAPH_DATA_GPX_FILE_NAME);
+			gpx = editingCtx.exportGpx(GRAPH_DATA_GPX_FILE_NAME);
 		}
 		return gpx != null ? gpx.getAnalysis(0) : null;
 	}
