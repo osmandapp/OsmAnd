@@ -4,6 +4,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.RouteSegment;
 import net.osmand.GPXUtilities.RouteType;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -28,10 +29,9 @@ public class RouteImporter {
 
 	private File file;
 	private GPXFile gpxFile;
+	private TrkSegment segment;
 
-	private List<RouteSegmentResult> route = new ArrayList<>();
-	private RouteRegion region = new RouteRegion();
-	private RouteDataResources resources = new RouteDataResources();
+	private final List<RouteSegmentResult> route = new ArrayList<>();
 
 	public RouteImporter(File file) {
 		this.file = file;
@@ -41,8 +41,12 @@ public class RouteImporter {
 		this.gpxFile = gpxFile;
 	}
 
+	public RouteImporter(TrkSegment segment) {
+		this.segment = segment;
+	}
+
 	public List<RouteSegmentResult> importRoute() {
-		if (gpxFile != null) {
+		if (gpxFile != null || segment != null) {
 			parseRoute();
 		} else if (file != null) {
 			FileInputStream fis = null;
@@ -69,19 +73,34 @@ public class RouteImporter {
 	}
 
 	private void parseRoute() {
-		collectLocations();
-		collectSegments();
-		collectTypes();
-		for (RouteSegmentResult segment : route) {
-			segment.fillNames(resources);
+		if (segment != null) {
+			parseRoute(segment);
+		} else if (gpxFile != null) {
+			List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(true);
+			for (TrkSegment s : segments) {
+				parseRoute(s);
+			}
 		}
 	}
 
-	private void collectLocations() {
+	private void parseRoute(TrkSegment segment) {
+		RouteRegion region = new RouteRegion();
+		RouteDataResources resources = new RouteDataResources();
+
+		collectLocations(resources, segment);
+		List<RouteSegmentResult> route = collectRouteSegments(region, resources, segment);
+		collectRouteTypes(region, segment);
+		for (RouteSegmentResult routeSegment : route) {
+			routeSegment.fillNames(resources);
+		}
+		this.route.addAll(route);
+	}
+
+	private void collectLocations(RouteDataResources resources, TrkSegment segment) {
 		List<Location> locations = resources.getLocations();
 		double lastElevation = HEIGHT_UNDEFINED;
-		if (gpxFile.tracks.size() > 0 && gpxFile.tracks.get(0).segments.size() > 0 && gpxFile.tracks.get(0).segments.get(0).points.size() > 0) {
-			for (WptPt point : gpxFile.tracks.get(0).segments.get(0).points) {
+		if (segment.hasRoute()) {
+			for (WptPt point : segment.points) {
 				Location loc = new Location("", point.getLatitude(), point.getLongitude());
 				if (!Double.isNaN(point.ele)) {
 					loc.setAltitude(point.ele);
@@ -94,18 +113,20 @@ public class RouteImporter {
 		}
 	}
 
-	private void collectSegments() {
-		for (RouteSegment segment : gpxFile.routeSegments) {
+	private List<RouteSegmentResult> collectRouteSegments(RouteRegion region, RouteDataResources resources, TrkSegment segment) {
+		List<RouteSegmentResult> route = new ArrayList<>();
+		for (RouteSegment routeSegment : segment.routeSegments) {
 			RouteDataObject object = new RouteDataObject(region);
 			RouteSegmentResult segmentResult = new RouteSegmentResult(object);
-			segmentResult.readFromBundle(new RouteDataBundle(resources, segment.toStringBundle()));
+			segmentResult.readFromBundle(new RouteDataBundle(resources, routeSegment.toStringBundle()));
 			route.add(segmentResult);
 		}
+		return route;
 	}
 
-	private void collectTypes() {
+	private void collectRouteTypes(RouteRegion region, TrkSegment segment) {
 		int i = 0;
-		for (RouteType routeType : gpxFile.routeTypes) {
+		for (RouteType routeType : segment.routeTypes) {
 			StringBundle bundle = routeType.toStringBundle();
 			String t = bundle.getString("t", null);
 			String v = bundle.getString("v", null);

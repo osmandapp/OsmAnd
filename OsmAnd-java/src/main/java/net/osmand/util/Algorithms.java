@@ -886,6 +886,14 @@ public class Algorithms {
 		return map;
 	}
 
+	public static <T> void reverseArray(T[] array) {
+		for (int i = 0; i < array.length / 2; i++) {
+			T temp = array[i];
+			array[i] = array[array.length - i - 1];
+			array[array.length - i - 1] = temp;
+		}
+	}
+
 	public static boolean containsInArrayL(long[] array, long value) {
 		return Arrays.binarySearch(array, value) >= 0;
 	}
