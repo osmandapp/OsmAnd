@@ -184,7 +184,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 									@Override
 									public void onClick(View v) {
 										sortByMode = mode;
-										sortGPXInfoItems(list);
+										setupTracksCard();
 									}
 								}, sortByMode == mode
 						));
