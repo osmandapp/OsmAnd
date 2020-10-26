@@ -29,7 +29,7 @@ public class OpenDBAPI {
 
 	private static final int THREAD_ID = 11200;
 
-	public static int uploadImage(String[] placeId, String privateKey, String username, String image) throws FailedVerificationException {
+	public int uploadImage(String[] placeId, String privateKey, String username, String image) throws FailedVerificationException {
 		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 			Security.removeProvider("BC");
 			Security.addProvider(new BouncyCastleProvider());

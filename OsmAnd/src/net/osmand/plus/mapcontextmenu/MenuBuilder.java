@@ -132,7 +132,7 @@ public class MenuBuilder {
 			if (response != null) {
 				int res = 0;
 				try {
-					res = OpenDBAPI.uploadImage(
+					res = openDBAPI.uploadImage(
 							idOfCurrentPlace,
 							OPRWebviewActivity.getPrivateKeyFromCookie(),
 							OPRWebviewActivity.getUsernameFromCookie(),
