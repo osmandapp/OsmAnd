@@ -24,12 +24,16 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.Collator;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.data.QuadRect;
@@ -37,6 +41,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SimplePopUpMenuItemAdapter;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
@@ -44,6 +49,7 @@ import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.measurementtool.GpxData;
@@ -71,6 +77,9 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -89,10 +98,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	private GPXFile gpxFile;
 
 	private View buttonsShadow;
+	protected boolean nightMode;
 
 	private boolean editingTrack;
 	private boolean selectingTrack;
 	private int menuTitleHeight;
+	TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
 
 	@Override
 	public int getMainLayoutId() {
@@ -151,6 +162,36 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
+			final ImageButton sortButton = view.findViewById(R.id.sort_button);
+			Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark,
+					nightMode
+							? R.color.inactive_buttons_and_links_bg_dark
+							: R.color.inactive_buttons_and_links_bg_light);
+			sortButton.setImageResource(sortByMode.getIconId());
+			AndroidUtils.setBackground(sortButton, background);
+			sortButton.setVisibility(View.VISIBLE);
+			final RecyclerView filesRecyclerView = view.findViewById(R.id.gpx_track_list);
+			filesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+			sortButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					final List<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> items = new ArrayList<>();
+					for (final TracksSortByMode mode : TracksSortByMode.values()) {
+						items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
+								getString(mode.getNameId()),
+								app.getUIUtilities().getThemedIcon(mode.getIconId()),
+								new View.OnClickListener() {
+									@Override
+									public void onClick(View v) {
+										sortByMode = mode;
+										sortGPXInfoItems(list);
+									}
+								}, sortByMode == mode
+						));
+					}
+					UiUtilities.showPopUpMenu(v, items);
+				}
+			});
 			ImageButton closeButton = view.findViewById(R.id.close_button);
 			buttonsShadow = view.findViewById(R.id.buttons_shadow);
 			closeButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
@@ -204,7 +245,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (gpxFile == null || selectingTrack) {
 				ImportTrackCard importTrackCard = new ImportTrackCard(mapActivity);
 				importTrackCard.setListener(this);
-				cardsContainer.addView(importTrackCard.build(mapActivity));
 
 				setupTracksCard();
 			} else {
@@ -264,12 +304,34 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackPaths(app);
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
 			if (list.size() > 0) {
+				sortGPXInfoItems(list);
 				String defaultCategory = app.getString(R.string.shared_string_all);
 				TracksToFollowCard tracksCard = new TracksToFollowCard(mapActivity, list, defaultCategory);
 				tracksCard.setListener(FollowTrackFragment.this);
 				getCardsContainer().addView(tracksCard.build(mapActivity));
 			}
 		}
+	}
+
+	public void sortGPXInfoItems(List<GPXInfo> gpxInfoList) {
+		final Collator collator = OsmAndCollator.primaryCollator();
+		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
+			@Override
+			public int compare(GPXInfo i1, GPXInfo i2) {
+				if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
+					return collator.compare(i1.getFileName(), i2.getFileName());
+				} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
+					return -collator.compare(i1.getFileName(), i2.getFileName());
+				} else {
+					long time1 = i1.getLastModified();
+					long time2 = i2.getLastModified();
+					if (time1 == time2) {
+						return collator.compare(i1.getFileName(), i2.getFileName());
+					}
+					return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
+				}
+			}
+		});
 	}
 
 	private void setupNavigateOptionsCard(GPXRouteParamsBuilder rparams) {
