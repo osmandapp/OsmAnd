@@ -136,7 +136,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			log.error(userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
 			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
 					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
-		} catch (Exception e) {
+		} catch (ExecutionException e) {
 			log.error(userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
 			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
 					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));

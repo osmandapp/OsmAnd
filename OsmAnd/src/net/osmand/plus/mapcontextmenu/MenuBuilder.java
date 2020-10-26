@@ -49,6 +49,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.osmedit.opr.OPRWebviewActivity;
+import net.osmand.plus.osmedit.utils.opendb.OpenDBAPI;
 import net.osmand.plus.osmedit.utils.opendb.SecUtils;
 import net.osmand.plus.osmedit.utils.opendb.util.exception.FailedVerificationException;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -102,6 +103,7 @@ public class MenuBuilder {
 	private static final int PICK_IMAGE = 1231;
 	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	private View view;
+	private OpenDBAPI openDBAPI = new OpenDBAPI();
 
 	private GetImageCardsListener imageCardListener = new GetImageCardsListener() {
 		private String[] idOfCurrentPlace = new String[0];
@@ -130,7 +132,7 @@ public class MenuBuilder {
 			if (response != null) {
 				int res = 0;
 				try {
-					res = SecUtils.uploadImage(
+					res = OpenDBAPI.uploadImage(
 							idOfCurrentPlace,
 							OPRWebviewActivity.getPrivateKeyFromCookie(),
 							OPRWebviewActivity.getUsernameFromCookie(),

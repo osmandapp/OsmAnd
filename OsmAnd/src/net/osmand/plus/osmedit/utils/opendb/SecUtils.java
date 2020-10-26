@@ -1,35 +1,26 @@
 package net.osmand.plus.osmedit.utils.opendb;
 
 
-import android.net.TrafficStats;
-import android.os.Build;
 import android.util.Base64;
-import com.google.gson.GsonBuilder;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.osmedit.utils.IPFSImage;
-import net.osmand.plus.osmedit.utils.opendb.ops.OpOperation;
-import net.osmand.plus.osmedit.utils.opendb.util.JsonFormatter;
 import net.osmand.plus.osmedit.utils.opendb.util.exception.FailedVerificationException;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.logging.Log;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.*;
 import java.security.spec.EncodedKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+//This class is a copy of SecUtils class from OpenDB project with changes for android platform
 public class SecUtils {
-	private static final String SIG_ALGO_SHA1_EC = "SHA1withECDSA";
-	private static final String SIG_ALGO_NONE_EC = "NonewithECDSA";
+	public static final String SIG_ALGO_SHA1_EC = "SHA1withECDSA";
+	public static final String SIG_ALGO_NONE_EC = "NonewithECDSA";
 
 	public static final String SIG_ALGO_ECDSA = "ECDSA";
 	public static final String ALGO_EC = "EC";
@@ -41,82 +32,6 @@ public class SecUtils {
 	public static final String JSON_MSG_TYPE = "json";
 	public static final String KEY_BASE64 = DECODE_BASE64;
 
-	private static final Log log = PlatformUtil.getLog(SecUtils.class);
-
-	private static final int THREAD_ID = 11200;
-
-
-	public static int uploadImage(String[] placeId, String privateKey, String username, String image) throws FailedVerificationException {
-		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-			Security.removeProvider("BC");
-			Security.addProvider(new BouncyCastleProvider());
-		}
-		KeyPair kp = SecUtils.getKeyPair(ALGO_EC, privateKey, null);
-		String signed = username + ":opr-web";
-
-		JsonFormatter formatter = new JsonFormatter();
-		IPFSImage ipfsImage = new GsonBuilder().create().fromJson(image, IPFSImage.class);
-		OpOperation opOperation = new OpOperation();
-		opOperation.setType("opr.place");
-		List<Object> edits = new ArrayList<>();
-		Map<String, Object> edit = new TreeMap<>();
-		List<Object> imageResponseList = new ArrayList<>();
-		Map<String, Object> imageMap = new TreeMap<>();
-		imageMap.put("cid", ipfsImage.cid);
-		imageMap.put("hash", ipfsImage.hash);
-		imageMap.put("extension", ipfsImage.extension);
-		imageMap.put("type", ipfsImage.type);
-		imageResponseList.add(imageMap);
-		List<String> ids = new ArrayList<>(Arrays.asList(placeId));
-		Map<String, Object> change = new TreeMap<>();
-		Map<String, Object> images = new TreeMap<>();
-		Map<String, Object> outdoor = new TreeMap<>();
-		outdoor.put("outdoor", imageResponseList);
-		images.put("append", outdoor);
-		change.put("version", "increment");
-		change.put("images", images);
-		edit.put("id", ids);
-		edit.put("change", change);
-		edit.put("current", new Object());
-		edits.add(edit);
-		opOperation.putObjectValue(OpOperation.F_EDIT, edits);
-		opOperation.setSignedBy(signed);
-		String hash = JSON_MSG_TYPE + ":"
-				+ SecUtils.calculateHashWithAlgo(SecUtils.HASH_SHA256, null,
-				formatter.opToJsonNoHash(opOperation));
-		byte[] hashBytes = SecUtils.getHashBytes(hash);
-		String signature = signMessageWithKeyBase64(kp, hashBytes, SIG_ALGO_SHA1_EC, null);
-		opOperation.addOrSetStringValue("hash", hash);
-		opOperation.addOrSetStringValue("signature", signature);
-		TrafficStats.setThreadStatsTag(THREAD_ID);
-		String url = "http://test.openplacereviews.org/api/auth/process-operation?addToQueue=true&dontSignByServer=false";
-		String json = formatter.opToJson(opOperation);
-		System.out.println("JSON: " + json);
-		HttpURLConnection connection;
-		try {
-			connection = (HttpURLConnection) new URL(url).openConnection();
-			connection.setRequestProperty("Content-Type", "application/json");
-			connection.setConnectTimeout(10000);
-			connection.setRequestMethod("POST");
-			connection.setDoOutput(true);
-			try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
-				wr.write(json.getBytes());
-			}
-			int rc = connection.getResponseCode();
-			if (rc != 200) {
-				log.error("ERROR HAPPENED");
-				BufferedReader br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-				String strCurrentLine;
-				while ((strCurrentLine = br.readLine()) != null) {
-					log.error(strCurrentLine);
-				}
-			}
-			return rc;
-		} catch (IOException e) {
-			log.error(e);
-		}
-		return -1;
-	}
 
 	public static EncodedKeySpec decodeKey(String key) {
 		if (key.startsWith(KEY_BASE64 + ":")) {
@@ -125,6 +40,7 @@ public class SecUtils {
 			if (s == -1) {
 				throw new IllegalArgumentException(String.format("Key doesn't contain algorithm of hashing to verify"));
 			}
+			//should use android.util.Base64 for android platform instead of Base64.getDecoder()
 			return getKeySpecByFormat(key.substring(0, s),
 					android.util.Base64.decode(key.substring(s + 1), Base64.DEFAULT));
 		}
@@ -156,6 +72,7 @@ public class SecUtils {
 	}
 
 	public static String encodeBase64(byte[] data) {
+		//should use android.util.Base64 for android platform instead of Base64.getDecoder()
 		return new String(android.util.Base64.decode(data, android.util.Base64.DEFAULT));
 	}
 
@@ -229,6 +146,7 @@ public class SecUtils {
 
 	public static byte[] signMessageWithKey(KeyPair keyPair, byte[] msg, String signAlgo) throws FailedVerificationException {
 		try {
+			//use BouncyCastle on android platform in order to achieve consistency between platforms
 			Signature sig = Signature.getInstance(getInternalSigAlgo(signAlgo), "BC");
 			sig.initSign(keyPair.getPrivate());
 			sig.update(msg);
@@ -271,6 +189,7 @@ public class SecUtils {
 
 	public static String calculateHashWithAlgo(String algo, String salt, String msg) {
 		try {
+			//use Hex.encodeHex for android platform instead of Hex.encodeHexString
 			char[] hex = Hex.encodeHex(calculateHash(algo, salt == null ? null : salt.getBytes("UTF-8"),
 					msg == null ? null : msg.getBytes("UTF-8")));
 
