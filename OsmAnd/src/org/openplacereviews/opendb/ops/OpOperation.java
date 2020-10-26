@@ -1,10 +1,13 @@
-package net.osmand.plus.osmedit.utils.opendb.ops;
+//Revision d1a1f6e81d0716a47cbddf5754ee77fa5fc6d1d8
+package org.openplacereviews.opendb.ops;
 
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
 import java.util.*;
-
+// OSMAND ANDROID CHANGE BEGIN:
+// removed dependency OUtils
+// OSMAND ANDROID CHANGE END:
 public class OpOperation extends OpObject {
 
 	public static final String F_TYPE = "type";
@@ -207,7 +210,12 @@ public class OpOperation extends OpObject {
 		return true;
 	}
 
-
+	// OSMAND ANDROID CHANGE BEGIN:
+	// removed unused classes and methods
+	//      public static OpObjectDiffBuilder createDiffOperation(OpObject o)
+	//      private static Object diffSet(Object vl)
+	//      public static class OpObjectDiffBuilder{}
+	// OSMAND ANDROID CHANGE END
 
 	public static class OpOperationBeanAdapter implements JsonDeserializer<OpOperation>,
 			JsonSerializer<OpOperation> {

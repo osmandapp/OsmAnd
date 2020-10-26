@@ -1,8 +1,9 @@
-package net.osmand.plus.osmedit.utils.opendb;
+//Revision d1a1f6e81d0716a47cbddf5754ee77fa5fc6d1d8
+package org.openplacereviews.opendb;
 
 
 import android.util.Base64;
-import net.osmand.plus.osmedit.utils.opendb.util.exception.FailedVerificationException;
+import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;

@@ -1,7 +1,11 @@
-package net.osmand.plus.osmedit.utils.opendb.ops;
+//Revision d1a1f6e81d0716a47cbddf5754ee77fa5fc6d1d8
+package org.openplacereviews.opendb.ops;
 
 import com.google.gson.*;
-import net.osmand.plus.osmedit.utils.opendb.util.JsonObjectUtils;
+import org.openplacereviews.opendb.util.JsonObjectUtils;
+// OSMAND ANDROID CHANGE BEGIN:
+// removed unused imports
+// OSMAND ANDROID CHANGE END
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
@@ -106,7 +110,11 @@ public class OpObject {
 				copy.put(o, copyingObjects(map.get(o), copyCacheFields));
 			}
 			return copy;
-		} else if (object instanceof OpObject) {
+		}
+		// OSMAND ANDROID CHANGE BEGIN:
+		// removed instanceOf OpExprEvaluator
+		// OSMAND ANDROID CHANGE END:
+		else if (object instanceof OpObject) {
 			return new OpObject((OpObject) object);
 		} else {
 			throw new UnsupportedOperationException("Type of object is not supported");
@@ -314,6 +322,9 @@ public class OpObject {
 
 	public long getDate(String field) {
 		String date = getStringValue(field);
+		// OSMAND ANDROID CHANGE BEGIN:
+		// removed check OUtils.isEmpty(date)
+		// OSMAND ANDROID CHANGE END
 		try {
 			return dateFormat.parse(date).getTime();
 		} catch (ParseException e) {

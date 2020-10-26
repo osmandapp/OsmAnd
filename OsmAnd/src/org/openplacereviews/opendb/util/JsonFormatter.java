@@ -1,13 +1,23 @@
-package net.osmand.plus.osmedit.utils.opendb.util;
+//Revision d1a1f6e81d0716a47cbddf5754ee77fa5fc6d1d8
+package org.openplacereviews.opendb.util;
 
 import com.google.gson.*;
-import net.osmand.plus.osmedit.utils.opendb.ops.OpObject;
-import net.osmand.plus.osmedit.utils.opendb.ops.OpOperation;
+// OSMAND ANDROID CHANGE BEGIN:
+// removed dependency org.openplacereviews.opendb.ops.OpBlock;
+// OSMAND ANDROID CHANGE END
+import org.openplacereviews.opendb.ops.OpObject;
+import org.openplacereviews.opendb.ops.OpOperation;
+// OSMAND ANDROID CHANGE BEGIN:
+// removed dependency org.springframework.stereotype.Component;
+// OSMAND ANDROID CHANGE END
 
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.*;
 
+// OSMAND ANDROID CHANGE BEGIN:
+// removed annotation @Component
+// OSMAND ANDROID CHANGE END
 public class JsonFormatter {
 
 	private Gson gson;
@@ -21,6 +31,9 @@ public class JsonFormatter {
 		builder.disableHtmlEscaping();
 		builder.registerTypeAdapter(OpOperation.class, new OpOperation.OpOperationBeanAdapter(false));
 		builder.registerTypeAdapter(OpObject.class, new OpObject.OpObjectAdapter(false));
+		// OSMAND ANDROID CHANGE BEGIN:
+		// removed OpBlock.class TypeAdapter
+		// OSMAND ANDROID CHANGE END
 		builder.registerTypeAdapter(TreeMap.class, new MapDeserializerDoubleAsIntFix());
 		gson = builder.create();
 		
@@ -28,6 +41,9 @@ public class JsonFormatter {
 		builder.disableHtmlEscaping();
 		builder.registerTypeAdapter(OpOperation.class, new OpOperation.OpOperationBeanAdapter(false, true));
 		builder.registerTypeAdapter(OpObject.class, new OpObject.OpObjectAdapter(false));
+		// OSMAND ANDROID CHANGE BEGIN:
+		// removed OpBlock.class TypeAdapter
+		// OSMAND ANDROID CHANGE END
 		builder.registerTypeAdapter(TreeMap.class, new MapDeserializerDoubleAsIntFix());
 		gsonOperationHash = builder.create();
 		
@@ -95,6 +111,12 @@ public class JsonFormatter {
 	public OpObject parseObject(String opJson) {
 		return gson.fromJson(opJson, OpObject.class);
 	}
+
+	// OSMAND ANDROID CHANGE BEGIN:
+	// removed unused methods
+	//      public OpBlock parseBlock(String opJson)
+	//      public String toJson(OpBlock bl)
+	// OSMAND ANDROID CHANGE END
 
 	public JsonElement toJsonElement(Object o) {
 		return gson.toJsonTree(o);

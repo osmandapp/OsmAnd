@@ -1,14 +1,14 @@
-package net.osmand.plus.osmedit.utils.opendb;
+package net.osmand.plus.osmedit.opr;
 
 import android.net.TrafficStats;
 import android.os.Build;
 import com.google.gson.GsonBuilder;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.BuildConfig;
-import net.osmand.plus.osmedit.utils.IPFSImage;
-import net.osmand.plus.osmedit.utils.opendb.ops.OpOperation;
-import net.osmand.plus.osmedit.utils.opendb.util.JsonFormatter;
-import net.osmand.plus.osmedit.utils.opendb.util.exception.FailedVerificationException;
+import org.openplacereviews.opendb.SecUtils;
+import org.openplacereviews.opendb.ops.OpOperation;
+import org.openplacereviews.opendb.util.JsonFormatter;
+import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 import org.apache.commons.logging.Log;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -22,7 +22,9 @@ import java.security.KeyPair;
 import java.security.Security;
 import java.util.*;
 
-import static net.osmand.plus.osmedit.utils.opendb.SecUtils.*;
+import static org.openplacereviews.opendb.SecUtils.ALGO_EC;
+import static org.openplacereviews.opendb.SecUtils.*;
+
 
 public class OpenDBAPI {
 	private static final Log log = PlatformUtil.getLog(SecUtils.class);
@@ -38,17 +40,17 @@ public class OpenDBAPI {
 		String signed = username + ":opr-web";
 
 		JsonFormatter formatter = new JsonFormatter();
-		IPFSImage ipfsImage = new GsonBuilder().create().fromJson(image, IPFSImage.class);
+		OPRImage OPRImage = new GsonBuilder().create().fromJson(image, OPRImage.class);
 		OpOperation opOperation = new OpOperation();
 		opOperation.setType("opr.place");
 		List<Object> edits = new ArrayList<>();
 		Map<String, Object> edit = new TreeMap<>();
 		List<Object> imageResponseList = new ArrayList<>();
 		Map<String, Object> imageMap = new TreeMap<>();
-		imageMap.put("cid", ipfsImage.cid);
-		imageMap.put("hash", ipfsImage.hash);
-		imageMap.put("extension", ipfsImage.extension);
-		imageMap.put("type", ipfsImage.type);
+		imageMap.put("cid", OPRImage.cid);
+		imageMap.put("hash", OPRImage.hash);
+		imageMap.put("extension", OPRImage.extension);
+		imageMap.put("type", OPRImage.type);
 		imageResponseList.add(imageMap);
 		List<String> ids = new ArrayList<>(Arrays.asList(placeId));
 		Map<String, Object> change = new TreeMap<>();

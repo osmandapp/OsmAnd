@@ -1,4 +1,5 @@
-package net.osmand.plus.osmedit.utils.opendb.util;
+//Revision d1a1f6e81d0716a47cbddf5754ee77fa5fc6d1d8
+package org.openplacereviews.opendb.util;
 
 import java.util.*;
 
