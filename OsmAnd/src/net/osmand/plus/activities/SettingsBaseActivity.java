@@ -113,6 +113,19 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		booleanPreferences.put(b.getId(), b);
 		return p;
 	}
+
+	public static String getIconStringPropertyName(Context ctx, String propertyName, String defValue) {
+		try {
+			Field f = R.string.class.getField("category_group_" + propertyName + "_icon");
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return defValue;
+	}
 	
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {
 		try {
