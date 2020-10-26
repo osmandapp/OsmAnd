@@ -127,7 +127,7 @@ public class MenuBuilder {
 
 		@Override
 		public void uploadImageToPlace(View view, InputStream image) {
-			String url = "https://test.openplacereviews.org/api/ipfs/image";
+			String url = BuildConfig.OPR_BASE_URL + "api/ipfs/image";
 			String response = NetworkUtils.sendPostDataRequest(url, image);
 			if (response != null) {
 				int res = 0;

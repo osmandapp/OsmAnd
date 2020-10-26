@@ -4,6 +4,7 @@ import android.view.View;
 import androidx.core.content.ContextCompat;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.BuildConfig;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
@@ -12,7 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class IPFSImageCard extends ImageCard {
-	private static final String BASE_URL = "https://test.openplacereviews.org/api/ipfs/image-ipfs?cid=";
+	private static final String BASE_URL = BuildConfig.OPR_BASE_URL + "api/ipfs/image-ipfs?cid=";
 	private static final Log LOG = PlatformUtil.getLog(IPFSImageCard.class);
 
 	public IPFSImageCard(MapActivity mapActivity, JSONObject imageObject) {

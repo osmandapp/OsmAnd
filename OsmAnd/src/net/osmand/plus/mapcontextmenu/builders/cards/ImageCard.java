@@ -18,6 +18,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import net.osmand.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.plus.BuildConfig;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -437,7 +438,7 @@ public abstract class ImageCard extends AbstractCard {
 			if (o instanceof Amenity) {
 				Amenity am = (Amenity) o;
 				long amenityId = am.getId() >> 1;
-				String url = "https://test.openplacereviews.org/api/objects-by-index?type=opr.place&index=osmid&limit=1&key=" + amenityId;
+				String url = BuildConfig.OPR_BASE_URL + "api/objects-by-index?type=opr.place&index=osmid&limit=1&key=" + amenityId;
 				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
 						"Requesting location images...", false, false);
 				if (response != null) {

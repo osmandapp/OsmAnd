@@ -4,6 +4,7 @@ import android.net.TrafficStats;
 import android.os.Build;
 import com.google.gson.GsonBuilder;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.BuildConfig;
 import net.osmand.plus.osmedit.utils.IPFSImage;
 import net.osmand.plus.osmedit.utils.opendb.ops.OpOperation;
 import net.osmand.plus.osmedit.utils.opendb.util.JsonFormatter;
@@ -71,7 +72,7 @@ public class OpenDBAPI {
 		opOperation.addOrSetStringValue("hash", hash);
 		opOperation.addOrSetStringValue("signature", signature);
 		TrafficStats.setThreadStatsTag(THREAD_ID);
-		String url = "http://test.openplacereviews.org/api/auth/process-operation?addToQueue=true&dontSignByServer=false";
+		String url = BuildConfig.OPR_BASE_URL + "api/auth/process-operation?addToQueue=true&dontSignByServer=false";
 		String json = formatter.opToJson(opOperation);
 		System.out.println("JSON: " + json);
 		HttpURLConnection connection;
