@@ -114,7 +114,7 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 		editingCtx.addPoints(oldPoints);
 		editingCtx.setAppMode(oldMode);
 		editingCtx.setRoadSegmentData(oldRoadSegmentData);
-		editingCtx.updateCacheForSnap();
+		editingCtx.updateSegmentsForSnap();
 	}
 
 	@Override
@@ -146,14 +146,16 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 		if (newRoadSegmentData != null) {
 			editingCtx.setRoadSegmentData(newRoadSegmentData);
 		}
-		editingCtx.updateCacheForSnap();
+		editingCtx.updateSegmentsForSnap();
 	}
 
 	private void updateProfileType(WptPt pt) {
-		if (newMode != null && newMode != DEFAULT_APP_MODE) {
-			pt.setProfileType(newMode.getStringKey());
-		} else {
-			pt.removeProfileType();
+		if (!pt.isGap()) {
+			if (newMode != null && newMode != DEFAULT_APP_MODE) {
+				pt.setProfileType(newMode.getStringKey());
+			} else {
+				pt.removeProfileType();
+			}
 		}
 	}
 }
