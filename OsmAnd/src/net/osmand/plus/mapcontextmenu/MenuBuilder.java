@@ -50,7 +50,6 @@ import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.osmedit.opr.OPRWebviewActivity;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
-import org.openplacereviews.opendb.opendb.SecUtils;
 import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
