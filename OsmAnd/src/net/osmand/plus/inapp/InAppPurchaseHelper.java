@@ -22,8 +22,6 @@ import net.osmand.AndroidNetworkUtils.OnRequestsResultListener;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
@@ -36,6 +34,8 @@ import net.osmand.plus.inapp.util.BillingManager;
 import net.osmand.plus.inapp.util.BillingManager.BillingUpdatesListener;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -51,6 +51,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class InAppPurchaseHelper {
@@ -64,6 +65,7 @@ public class InAppPurchaseHelper {
 	private InAppPurchases purchases;
 	private long lastValidationCheckTime;
 	private boolean inventoryRequested;
+	private final Map<String, SubscriptionState> subscriptionStateMap = new HashMap<>();
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
 	// (arbitrary) request code for the purchase flow
@@ -117,6 +119,32 @@ public class InAppPurchaseHelper {
 		PURCHASE_FULL_VERSION,
 		PURCHASE_LIVE_UPDATES,
 		PURCHASE_DEPTH_CONTOURS
+	}
+
+	public enum SubscriptionState {
+		UNDEFINED("undefined"),
+		ACTIVE("active"),
+		CANCELLED("cancelled"),
+		IN_GRACE_PERIOD("in_grace_period"),
+		ON_HOLD("on_hold"),
+		PAUSED("paused"),
+		EXPIRED("expired");
+
+		private final String name;
+
+		SubscriptionState(@NonNull String name) {
+			this.name = name;
+		}
+
+		@NonNull
+		public static SubscriptionState getByName(@NonNull String name) {
+			for (SubscriptionState state : SubscriptionState.values()) {
+				if (state.name.equals(name)) {
+					return state;
+				}
+			}
+			return UNDEFINED;
+		}
 	}
 
 	public interface InAppRunnable {
@@ -192,6 +220,16 @@ public class InAppPurchaseHelper {
 			return isDepthContoursPurchased(ctx);
 		}
 		return false;
+	}
+
+	public List<String> getSubscriptionsByState(@NonNull SubscriptionState state) {
+		List<String> res = new ArrayList<>();
+		for (Entry<String, SubscriptionState> entry : subscriptionStateMap.entrySet()) {
+			if (entry.getValue() == state) {
+				res.add(entry.getKey());
+			}
+		}
+		return res;
 	}
 
 	private BillingManager getBillingManager() {
@@ -286,6 +324,7 @@ public class InAppPurchaseHelper {
 								for (Purchase p : purchases) {
 									skuSubscriptions.add(p.getSku());
 								}
+								skuSubscriptions.addAll(subscriptionStateMap.keySet());
 
 								BillingManager billingManager = getBillingManager();
 								// Have we been disposed of in the meantime? If so, quit.
@@ -779,21 +818,33 @@ public class InAppPurchaseHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private class RequestInventoryTask extends AsyncTask<Void, Void, String> {
+	private class RequestInventoryTask extends AsyncTask<Void, Void, String[]> {
 
 		RequestInventoryTask() {
 		}
 
 		@Override
-		protected String doInBackground(Void... params) {
+		protected String[] doInBackground(Void... params) {
 			try {
 				Map<String, String> parameters = new HashMap<>();
 				parameters.put("androidPackage", ctx.getPackageName());
 				addUserInfo(parameters);
-				return AndroidNetworkUtils.sendRequest(ctx,
+				String activeSubscriptionsIds = AndroidNetworkUtils.sendRequest(ctx,
 						"https://osmand.net/api/subscriptions/active",
 						parameters, "Requesting active subscriptions...", false, false);
 
+				String subscriptionsState = null;
+				String userId = ctx.getSettings().BILLING_USER_ID.get();
+				String userToken = ctx.getSettings().BILLING_USER_TOKEN.get();
+				if (!Algorithms.isEmpty(userId) && !Algorithms.isEmpty(userToken)) {
+					parameters.put("userId", userId);
+					parameters.put("userToken", userToken);
+					subscriptionsState = AndroidNetworkUtils.sendRequest(ctx,
+							"https://osmand.net/api/subscriptions/get",
+							parameters, "Requesting subscriptions state...", false, false);
+				}
+
+				return new String[] { activeSubscriptionsIds, subscriptionsState };
 			} catch (Exception e) {
 				logError("sendRequest Error", e);
 			}
@@ -801,19 +852,39 @@ public class InAppPurchaseHelper {
 		}
 
 		@Override
-		protected void onPostExecute(String response) {
-			logDebug("Response=" + response);
-			if (response != null) {
+		protected void onPostExecute(String[] response) {
+			logDebug("Response=" + Arrays.toString(response));
+			String activeSubscriptionsIdsJson = response[0];
+			String subscriptionsStateJson = response[1];
+			if (activeSubscriptionsIdsJson != null) {
 				inventoryRequested = true;
 				try {
-					JSONObject obj = new JSONObject(response);
+					JSONObject obj = new JSONObject(activeSubscriptionsIdsJson);
 					JSONArray names = obj.names();
-					for (int i = 0; i < names.length(); i++) {
-						String skuType = names.getString(i);
-						JSONObject subObj = obj.getJSONObject(skuType);
+					if (names != null) {
+						for (int i = 0; i < names.length(); i++) {
+							String skuType = names.getString(i);
+							JSONObject subObj = obj.getJSONObject(skuType);
+							String sku = subObj.getString("sku");
+							if (!Algorithms.isEmpty(sku)) {
+								getLiveUpdates().upgradeSubscription(sku);
+							}
+						}
+					}
+				} catch (JSONException e) {
+					logError("Json parsing error", e);
+				}
+			}
+			if (subscriptionsStateJson != null) {
+				inventoryRequested = true;
+				try {
+					JSONArray subArrJson = new JSONArray(subscriptionsStateJson);
+					for (int i = 0; i < subArrJson.length(); i++) {
+						JSONObject subObj = subArrJson.getJSONObject(i);
 						String sku = subObj.getString("sku");
-						if (!Algorithms.isEmpty(sku)) {
-							getLiveUpdates().upgradeSubscription(sku);
+						String state = subObj.getString("state");
+						if (!Algorithms.isEmpty(sku) && !Algorithms.isEmpty(state)) {
+							subscriptionStateMap.put(sku, SubscriptionState.getByName(state));
 						}
 					}
 				} catch (JSONException e) {
