@@ -3509,7 +3509,7 @@
     <string name="clear_recorded_data">Rögzített adatok törlése</string>
     <string name="terrain_empty_state_text">Engedélyezésével domborzatárnyékolás vagy lejtőtérkép jeleníthető meg. Ezekről a térképfajtákról többet olvashat a honlapunkon.</string>
     <string name="app_mode_ski_touring">Túrasízés</string>
-    <string name="app_mode_ski_snowmobile">Motoros hószán</string>
+    <string name="app_mode_ski_snowmobile">Motoros szán</string>
     <string name="custom_osmand_plugin">Egyéni OsmAnd bővítmény</string>
     <string name="settings_item_read_error">Sikertelen olvasás innen: \'%1$s\'.</string>
     <string name="settings_item_write_error">Sikertelen írás ide: \'%1$s\'.</string>
@@ -3920,4 +3920,10 @@
     <string name="osm_edit_logout_success">Sikeresen kijelentkezett</string>
     <string name="use_two_phase_routing">Kétszakaszos A* útvonaltervezési algoritmus használata</string>
     <string name="file_already_imported">A fájl már importálva van az OsmAndba</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
+    <string name="snowmobile_render_descr">Motorosszánutakhoz kifejezetten motoros szán számára kijelölt utakon.</string>
+    <string name="shared_string_graph">Grafikon</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s adatok csak az utakról állnak rendelkezésre. Használja az „Útvonal tervezése pontok között” funkciót.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Várja meg az útvonal újraszámítását.
+\nAz ábra az újraszámítás után lesz látható.</string>
 </resources>

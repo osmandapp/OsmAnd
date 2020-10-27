@@ -3938,4 +3938,5 @@
     <string name="shared_string_graph">תרשים</string>
     <string name="message_graph_will_be_available_after_recalculation">נא להמתין לחישוב המסלול מחדש.
 \nהתרשים יהיה זמין לאחר החישוב מחדש.</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s ‏— %2$s</string>
 </resources>

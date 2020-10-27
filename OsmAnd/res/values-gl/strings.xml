@@ -3950,4 +3950,9 @@ Lon %2$s</string>
     <string name="perform_oauth_authorization">Entrar polo OAuth</string>
     <string name="clear_osm_token">Limpar token do OpenStreetMap OAuth</string>
     <string name="osm_edit_logout_success">Sesión rematada</string>
+    <string name="snowmobile_render_descr">Para estradas e pistas exclusivas de motos de neve.</string>
+    <string name="file_already_imported">O ficheiro xa foi importado no OsmAnd</string>
+    <string name="use_two_phase_routing">Usar algoritmo de enrutamento A* de 2 fases</string>
+    <string name="shared_string_graph">Gráfica</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>
