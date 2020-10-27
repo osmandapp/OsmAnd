@@ -7,13 +7,12 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.SettingsGeneralActivity;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
@@ -156,7 +155,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		preferredLocale.setIcon(getActiveIcon(R.drawable.ic_action_map_language));
 		preferredLocale.setSummary(settings.PREFERRED_LOCALE.get());
 
-		Pair<String[], String[]> preferredLocaleInfo = SettingsGeneralActivity.getPreferredLocaleIdsAndValues(ctx);
+		Pair<String[], String[]> preferredLocaleInfo = getPreferredLocaleIdsAndValues(ctx);
 		if (preferredLocaleInfo != null) {
 			preferredLocale.setEntries(preferredLocaleInfo.first);
 			preferredLocale.setEntryValues(preferredLocaleInfo.second);
@@ -218,5 +217,148 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			uninstallSpeedCameras.setIcon(getActiveIcon(R.drawable.ic_speed_camera_disabled));
 		}
 		uninstallSpeedCameras.setTitle(uninstalled ? R.string.speed_cameras_removed_descr : R.string.uninstall_speed_cameras);
+	}
+
+	public static Pair<String[], String[]> getPreferredLocaleIdsAndValues(Context ctx) {
+		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
+		// Hardy maintenance 2016-05-29:
+		//  - Include languages if their translation is >= ~10%    (but any language will be visible if it is the device's system locale)
+		//  - Mark as "incomplete" if                    < ~80%
+		String incompleteSuffix = " (" + ctx.getString(R.string.incomplete_locale) + ")";
+
+		// Add " (Device language)" to system default entry in Latin letters, so it can be more easily identified if a foreign language has been selected by mistake
+		String latinSystemDefaultSuffix = " (" + ctx.getString(R.string.system_locale_no_translate) + ")";
+
+		//getResources().getAssets().getLocales();
+		String[] entryValues = new String[] {
+				"",
+				"en",
+				"af",
+				"ar",
+				"ast",
+				"az",
+				"be",
+				//"be_BY",
+				"bg",
+				"ca",
+				"cs",
+				"cy",
+				"da",
+				"de",
+				"el",
+				"en_GB",
+				"eo",
+				"es",
+				"es_AR",
+				"es_US",
+				"eu",
+				"fa",
+				"fi",
+				"fr",
+				"gl",
+				"iw",
+				"hr",
+				"hsb",
+				"hu",
+				"hy",
+				"is",
+				"it",
+				"ja",
+				"ka",
+				"kab",
+				"kn",
+				"ko",
+				"lt",
+				"lv",
+				"ml",
+				"mr",
+				"nb",
+				"nl",
+				"nn",
+				"oc",
+				"pl",
+				"pt",
+				"pt_BR",
+				"ro",
+				"ru",
+				"sc",
+				"sk",
+				"sl",
+				"sr",
+				"sr+Latn",
+				"sv",
+				"tr",
+				"uk",
+				"vi",
+				"zh_CN",
+				"zh_TW"};
+
+		String[] entries = new String[] {
+				ctx.getString(R.string.system_locale) + latinSystemDefaultSuffix,
+				ctx.getString(R.string.lang_en),
+				ctx.getString(R.string.lang_af) + incompleteSuffix,
+				ctx.getString(R.string.lang_ar),
+				ctx.getString(R.string.lang_ast) + incompleteSuffix,
+				ctx.getString(R.string.lang_az),
+				ctx.getString(R.string.lang_be),
+				// getString(R.string.lang_be_by),
+				ctx.getString(R.string.lang_bg),
+				ctx.getString(R.string.lang_ca),
+				ctx.getString(R.string.lang_cs),
+				ctx.getString(R.string.lang_cy) + incompleteSuffix,
+				ctx.getString(R.string.lang_da),
+				ctx.getString(R.string.lang_de),
+				ctx.getString(R.string.lang_el),
+				ctx.getString(R.string.lang_en_gb),
+				ctx.getString(R.string.lang_eo),
+				ctx.getString(R.string.lang_es),
+				ctx.getString(R.string.lang_es_ar),
+				ctx.getString(R.string.lang_es_us),
+				ctx.getString(R.string.lang_eu),
+				ctx.getString(R.string.lang_fa),
+				ctx.getString(R.string.lang_fi) + incompleteSuffix,
+				ctx.getString(R.string.lang_fr),
+				ctx.getString(R.string.lang_gl),
+				ctx.getString(R.string.lang_he),
+				ctx.getString(R.string.lang_hr) + incompleteSuffix,
+				ctx.getString(R.string.lang_hsb) + incompleteSuffix,
+				ctx.getString(R.string.lang_hu),
+				ctx.getString(R.string.lang_hy),
+				ctx.getString(R.string.lang_is),
+				ctx.getString(R.string.lang_it),
+				ctx.getString(R.string.lang_ja),
+				ctx.getString(R.string.lang_ka) + incompleteSuffix,
+				ctx.getString(R.string.lang_kab) + incompleteSuffix,
+				ctx.getString(R.string.lang_kn) + incompleteSuffix,
+				ctx.getString(R.string.lang_ko),
+				ctx.getString(R.string.lang_lt),
+				ctx.getString(R.string.lang_lv),
+				ctx.getString(R.string.lang_ml),
+				ctx.getString(R.string.lang_mr) + incompleteSuffix,
+				ctx.getString(R.string.lang_nb),
+				ctx.getString(R.string.lang_nl),
+				ctx.getString(R.string.lang_nn) + incompleteSuffix,
+				ctx.getString(R.string.lang_oc) + incompleteSuffix,
+				ctx.getString(R.string.lang_pl),
+				ctx.getString(R.string.lang_pt),
+				ctx.getString(R.string.lang_pt_br),
+				ctx.getString(R.string.lang_ro) + incompleteSuffix,
+				ctx.getString(R.string.lang_ru),
+				ctx.getString(R.string.lang_sc),
+				ctx.getString(R.string.lang_sk),
+				ctx.getString(R.string.lang_sl),
+				ctx.getString(R.string.lang_sr),
+				ctx.getString(R.string.lang_sr_latn) + incompleteSuffix,
+				ctx.getString(R.string.lang_sv),
+				ctx.getString(R.string.lang_tr),
+				ctx.getString(R.string.lang_uk),
+				ctx.getString(R.string.lang_vi) + incompleteSuffix,
+				ctx.getString(R.string.lang_zh_cn) + incompleteSuffix,
+				ctx.getString(R.string.lang_zh_tw)};
+
+		String[] valuesPl = ConfigureMapMenu.getSortedMapNamesIds(ctx, entries, entries);
+		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(ctx, entryValues, entries);
+
+		return Pair.create(valuesPl, idsPl);
 	}
 }

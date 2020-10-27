@@ -1,8 +1,10 @@
 package net.osmand.plus.development;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Debug;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import net.osmand.plus.OsmAndLocationSimulation;
@@ -11,6 +13,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
@@ -198,5 +201,24 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 			return true;
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		String prefId = preference.getKey();
+		if (settings.SAFE_MODE.getId().equals(prefId) && newValue instanceof Boolean) {
+			loadNativeLibrary();
+			return true;
+		}
+		return super.onPreferenceChange(preference, newValue);
+	}
+
+	public void loadNativeLibrary() {
+		FragmentActivity activity = getActivity();
+		if (!NativeOsmandLibrary.isLoaded() && activity != null) {
+			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+			NativeLibraryLoadTask nativeLibraryLoadTask = new NativeLibraryLoadTask(activity, storage);
+			nativeLibraryLoadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
 	}
 }
