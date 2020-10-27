@@ -899,7 +899,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode) {
-		return showInstance(activity, screenType, null, new Bundle());
+		return showInstance(activity, screenType, appMode, new Bundle());
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType,
