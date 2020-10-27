@@ -451,6 +451,8 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
 				settingsItems.add(new FileSettingsItem(app, (File) object));
+			} else if (object instanceof FileSettingsItem) {
+				settingsItems.add((FileSettingsItem) object);
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
 			} else if (object instanceof OsmNotesPoint) {

@@ -46,6 +46,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+import static net.osmand.plus.activities.LocalIndexHelper.*;
 
 /*
 	Usage:
@@ -532,14 +533,14 @@ public class SettingsHelper {
 	private List<File> getLocalMapFiles() {
 		List<File> files = new ArrayList<>();
 		LocalIndexHelper helper = new LocalIndexHelper(app);
-		List<LocalIndexInfo> localMapFileList = helper.getLocalFullMaps(new AbstractLoadLocalIndexTask() {
+		List<LocalIndexInfo> localMapFileList = helper.getLocalIndexData(new AbstractLoadLocalIndexTask() {
 			@Override
 			public void loadFile(LocalIndexInfo... loaded) {
 			}
 		});
 		for (LocalIndexInfo map : localMapFileList) {
 			File file = new File(map.getPathToData());
-			if (file != null && file.exists()) {
+			if (file != null && file.exists() && map.getType() != LocalIndexType.TTS_VOICE_DATA) {
 				files.add(file);
 			}
 		}
@@ -607,7 +608,7 @@ public class SettingsHelper {
 		List<File> renderFilesList = new ArrayList<>();
 		List<File> multimediaFilesList = new ArrayList<>();
 		List<File> tracksFilesList = new ArrayList<>();
-		List<File> mapFilesList = new ArrayList<>();
+		List<FileSettingsItem> mapFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		List<OsmNotesPoint> notesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
@@ -626,8 +627,11 @@ public class SettingsHelper {
 						multimediaFilesList.add(fileItem.getFile());
 					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.GPX) {
 						tracksFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.OBF_MAP) {
-						mapFilesList.add(fileItem.getFile());
+					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.OBF_MAP
+							|| fileItem.getSubtype() == FileSettingsItem.FileSubtype.WIKI_MAP
+							|| fileItem.getSubtype() == FileSettingsItem.FileSubtype.SRTM_MAP
+							|| fileItem.getSubtype() == FileSettingsItem.FileSubtype.TILES_MAP) {
+						mapFilesList.add(fileItem);
 					}
 					break;
 				case QUICK_ACTIONS:

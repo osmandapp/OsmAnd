@@ -22,6 +22,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
@@ -34,6 +35,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -46,6 +48,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.plus.settings.backend.ExportSettingsType.*;
+import static net.osmand.plus.settings.backend.backup.FileSettingsItem.*;
 import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
 import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
@@ -105,7 +109,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		cardBottomDivider.setVisibility(importState && !isExpanded ? View.VISIBLE : View.GONE);
 
 		final List<?> listItems = itemsMap.get(type);
-		subTextTv.setText(getSelectedItemsAmount(listItems));
+		subTextTv.setText(getSelectedItemsAmount(listItems, type));
 
 		if (data.containsAll(listItems)) {
 			checkBox.setState(CHECKED);
@@ -265,9 +269,25 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				setupIcon(icon, R.drawable.ic_action_info_dark, itemSelected);
 				break;
 			case OFFLINE_MAPS:
-				file = (File) currentItem;
-				title.setText(file.getName());
-				setupIcon(icon, R.drawable.ic_map, itemSelected);
+				FileSettingsItem currentFileItem = (FileSettingsItem) currentItem;
+				file = currentFileItem.getFile();
+				title.setText(FileNameTranslationHelper.getFileName(app,
+						app.getResourceManager().getOsmandRegions(),
+						file.getName()));
+				FileSubtype subtype = FileSubtype.getSubtypeByFileName(file.getPath().replace(app.getAppPath(null).getPath(), ""));
+				switch (subtype) {
+					case SRTM_MAP:
+						iconId = R.drawable.ic_plugin_srtm;
+						break;
+					case WIKI_MAP:
+						iconId = R.drawable.ic_plugin_wikipedia;
+						break;
+					default:
+						iconId = R.drawable.ic_map;
+				}
+				setupIcon(icon, iconId, itemSelected);
+				subText.setText(AndroidUtils.formatSize(app, currentFileItem.getSize()));
+				subText.setVisibility(View.VISIBLE);
 				break;
 			default:
 				return child;
@@ -315,14 +335,20 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		return true;
 	}
 
-	private String getSelectedItemsAmount(List<?> listItems) {
+	private String getSelectedItemsAmount(List<?> listItems, ExportSettingsType type) {
 		int amount = 0;
+		long amountSize = 0;
 		for (Object item : listItems) {
 			if (data.contains(item)) {
 				amount++;
+				if (type == OFFLINE_MAPS && item instanceof FileSettingsItem) {
+					amountSize += ((FileSettingsItem) item).getSize();
+				}
 			}
 		}
-		return app.getString(R.string.n_items_of_z, String.valueOf(amount), String.valueOf(listItems.size()));
+		String itemsOf = app.getString(R.string.n_items_of_z, String.valueOf(amount), String.valueOf(listItems.size()));
+		return amountSize == 0 ? itemsOf : app.getString(R.string.ltr_or_rtl_combine_via_bold_point, itemsOf,
+				AndroidUtils.formatSize(app, amountSize));
 	}
 
 	private int getGroupTitle(ExportSettingsType type) {
@@ -350,7 +376,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			case OSM_EDITS:
 				return R.string.osm_edit_modified_poi;
 			case OFFLINE_MAPS:
-				return R.string.download_regular_maps;
+				return R.string.shared_string_local_maps;
 			default:
 				return R.string.access_empty_list;
 		}
