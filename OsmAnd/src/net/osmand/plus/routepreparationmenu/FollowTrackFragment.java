@@ -98,7 +98,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	private GPXFile gpxFile;
 
 	private View buttonsShadow;
-	protected boolean nightMode;
 	private TracksToFollowCard tracksCard;
 
 	private boolean editingTrack;
@@ -165,7 +164,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (view != null) {
 			final ImageButton sortButton = view.findViewById(R.id.sort_button);
 			Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark,
-					nightMode
+					isNightMode()
 							? R.color.inactive_buttons_and_links_bg_dark
 							: R.color.inactive_buttons_and_links_bg_light);
 			sortButton.setImageResource(sortByMode.getIconId());
