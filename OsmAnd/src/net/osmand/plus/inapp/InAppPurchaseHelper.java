@@ -28,6 +28,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.util.BillingManager;
@@ -35,7 +36,7 @@ import net.osmand.plus.inapp.util.BillingManager.BillingUpdatesListener;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -60,12 +61,10 @@ public class InAppPurchaseHelper {
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
 	private boolean mDebugLog = false;
 
-	public static final long SUBSCRIPTION_HOLDING_TIME_MSEC = 1000 * 60 * 60 * 24 * 3; // 3 days
-
 	private InAppPurchases purchases;
 	private long lastValidationCheckTime;
 	private boolean inventoryRequested;
-	private final Map<String, SubscriptionState> subscriptionStateMap = new HashMap<>();
+	private Map<String, SubscriptionState> subscriptionStateMap = new HashMap<>();
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
 	// (arbitrary) request code for the purchase flow
@@ -119,32 +118,6 @@ public class InAppPurchaseHelper {
 		PURCHASE_FULL_VERSION,
 		PURCHASE_LIVE_UPDATES,
 		PURCHASE_DEPTH_CONTOURS
-	}
-
-	public enum SubscriptionState {
-		UNDEFINED("undefined"),
-		ACTIVE("active"),
-		CANCELLED("cancelled"),
-		IN_GRACE_PERIOD("in_grace_period"),
-		ON_HOLD("on_hold"),
-		PAUSED("paused"),
-		EXPIRED("expired");
-
-		private final String name;
-
-		SubscriptionState(@NonNull String name) {
-			this.name = name;
-		}
-
-		@NonNull
-		public static SubscriptionState getByName(@NonNull String name) {
-			for (SubscriptionState state : SubscriptionState.values()) {
-				if (state.name.equals(name)) {
-					return state;
-				}
-			}
-			return UNDEFINED;
-		}
 	}
 
 	public interface InAppRunnable {
@@ -220,16 +193,6 @@ public class InAppPurchaseHelper {
 			return isDepthContoursPurchased(ctx);
 		}
 		return false;
-	}
-
-	public List<String> getSubscriptionsByState(@NonNull SubscriptionState state) {
-		List<String> res = new ArrayList<>();
-		for (Entry<String, SubscriptionState> entry : subscriptionStateMap.entrySet()) {
-			if (entry.getValue() == state) {
-				res.add(entry.getKey());
-			}
-		}
-		return res;
 	}
 
 	private BillingManager getBillingManager() {
@@ -490,6 +453,15 @@ public class InAppPurchaseHelper {
 					}
 				}
 			}
+			for (Entry<String, SubscriptionState> entry : subscriptionStateMap.entrySet()) {
+				SubscriptionState state = entry.getValue();
+				if (state == SubscriptionState.PAUSED || state == SubscriptionState.ON_HOLD) {
+					String sku = entry.getKey();
+					if (!result.contains(sku)) {
+						result.add(sku);
+					}
+				}
+			}
 			return result;
 		}
 
@@ -594,26 +566,17 @@ public class InAppPurchaseHelper {
 					}
 				}
 			}
-			OsmandPreference<Long> subscriptionCancelledTime = ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME;
 			if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
-				if (subscriptionCancelledTime.get() == 0) {
-					subscriptionCancelledTime.set(System.currentTimeMillis());
-					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN.set(false);
-					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.set(false);
-				} else if (System.currentTimeMillis() - subscriptionCancelledTime.get() > SUBSCRIPTION_HOLDING_TIME_MSEC) {
-					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
-					if (!isDepthContoursPurchased(ctx)) {
-						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
-					}
+				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
+				if (!isDepthContoursPurchased(ctx)) {
+					ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
 				}
 			} else if (subscribedToLiveUpdates) {
-				subscriptionCancelledTime.set(0L);
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}
 
 			lastValidationCheckTime = System.currentTimeMillis();
-			logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
-					+ " live updates purchased.");
+			logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE") + " live updates purchased.");
 
 			OsmandSettings settings = ctx.getSettings();
 			settings.INAPPS_READ.set(true);
@@ -683,12 +646,24 @@ public class InAppPurchaseHelper {
 			}
 		}
 		if (inAppPurchase instanceof InAppSubscription) {
+			InAppSubscription s = (InAppSubscription) inAppPurchase;
+
+			SubscriptionState state = subscriptionStateMap.get(inAppPurchase.getSku());
+			s.setState(state == null ? SubscriptionState.UNDEFINED : state);
+			CommonPreference<String> statePref = ctx.getSettings().registerStringPreference(
+					s.getSku() + "_state", SubscriptionState.UNDEFINED.getStateStr()).makeGlobal();
+			s.setPrevState(SubscriptionState.getByStateStr(statePref.get()));
+			statePref.set(s.getState().getStateStr());
+			if (s.getState().isGone() && s.hasStateChanged()) {
+				ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
+				ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
+			}
+
 			String introductoryPrice = skuDetails.getIntroductoryPrice();
 			String introductoryPricePeriod = skuDetails.getIntroductoryPricePeriod();
 			String introductoryPriceCycles = skuDetails.getIntroductoryPriceCycles();
 			long introductoryPriceAmountMicros = skuDetails.getIntroductoryPriceAmountMicros();
 			if (!Algorithms.isEmpty(introductoryPrice)) {
-				InAppSubscription s = (InAppSubscription) inAppPurchase;
 				try {
 					s.setIntroductoryInfo(new InAppSubscriptionIntroductoryInfo(s, introductoryPrice,
 							introductoryPriceAmountMicros, introductoryPricePeriod, introductoryPriceCycles));
@@ -877,6 +852,7 @@ public class InAppPurchaseHelper {
 			}
 			if (subscriptionsStateJson != null) {
 				inventoryRequested = true;
+				Map<String, SubscriptionState> subscriptionStateMap = new HashMap<>();
 				try {
 					JSONArray subArrJson = new JSONArray(subscriptionsStateJson);
 					for (int i = 0; i < subArrJson.length(); i++) {
@@ -884,12 +860,13 @@ public class InAppPurchaseHelper {
 						String sku = subObj.getString("sku");
 						String state = subObj.getString("state");
 						if (!Algorithms.isEmpty(sku) && !Algorithms.isEmpty(state)) {
-							subscriptionStateMap.put(sku, SubscriptionState.getByName(state));
+							subscriptionStateMap.put(sku, SubscriptionState.getByStateStr(state));
 						}
 					}
 				} catch (JSONException e) {
 					logError("Json parsing error", e);
 				}
+				InAppPurchaseHelper.this.subscriptionStateMap = subscriptionStateMap;
 			}
 			exec(InAppPurchaseTaskType.REQUEST_INVENTORY, new InAppRunnable() {
 				@Override
@@ -948,9 +925,8 @@ public class InAppPurchaseHelper {
 					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 					ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 
-					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME.set(0L);
-					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN.set(false);
-					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.set(false);
+					ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
+					ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
 
 					notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
 					notifyItemPurchased(sku, active);
