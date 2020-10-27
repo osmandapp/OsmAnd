@@ -19,7 +19,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.util.Algorithms;
 
@@ -215,7 +215,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						speechAllowed = true;
 						switch (mTts.isLanguageAvailable(newLocale)) {
 							case TextToSpeech.LANG_MISSING_DATA:
-								if (isSettingsActivity(act)) {
+								if (isSettingsBaseActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 										R.string.tts_missing_language_data_title,
 										R.string.tts_missing_language_data,
@@ -251,7 +251,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do this if condition
-								if (isSettingsActivity(act)) {
+								if (isSettingsBaseActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 											R.string.tts_language_not_supported_title,
 											R.string.tts_language_not_supported,
@@ -269,8 +269,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					}
 				}
 
-				private boolean isSettingsActivity(final Context ctx) {
-					return ctx instanceof SettingsActivity;
+				private boolean isSettingsBaseActivity(final Context ctx) {
+					return ctx instanceof SettingsBaseActivity;
 				}
 				
 				private String getVoiceUsed() {

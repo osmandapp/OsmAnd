@@ -24,7 +24,7 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.render.RenderingRuleProperty;
 
@@ -105,7 +105,7 @@ public class TransportLinesMenu {
 		for (int i = 0; i < transportRules.size(); i++) {
 			RenderingRuleProperty p = transportRules.get(i);
 			String attrName = p.getAttrName();
-			String propertyName = SettingsActivity
+			String propertyName = SettingsBaseActivity
 					.getStringPropertyName(themedCtx, attrName, p.getName());
 			vals[i] = propertyName;
 			Integer iconId = transportIcons.get(attrName);
