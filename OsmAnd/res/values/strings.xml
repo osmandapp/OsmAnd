@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="subscription_on_hold_title">OsmAnd Live subscription is on hold</string>
+    <string name="subscription_paused_title">OsmAnd Live subscription has been paused</string>
+    <string name="subscription_expired_title">OsmAnd Live subscription has been expired</string>
+    <string name="subscription_payment_issue_title">There is a problem with your subscription. Click the button to go to the Google Play subscription settings to fix your payment method.</string>
+    <string name="manage_subscription">Manage subscription</string>
     <string name="start_finish_icons">Start/finish icons</string>
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="sort_name_descending">Name: Z – A</string>
