@@ -20,10 +20,10 @@ public class RouteExporter {
 
 	public static final String OSMAND_ROUTER_V2 = "OsmAndRouterV2";
 
-	private String name;
-	private List<RouteSegmentResult> route;
-	private List<Location> locations;
-	private List<WptPt> points;
+	private final String name;
+	private final List<RouteSegmentResult> route;
+	private final List<Location> locations;
+	private final List<WptPt> points;
 
 	public RouteExporter(String name, List<RouteSegmentResult> route, List<Location> locations, List<WptPt> points) {
 		this.name = name;
@@ -33,6 +33,34 @@ public class RouteExporter {
 	}
 
 	public GPXFile exportRoute() {
+		GPXFile gpx = new GPXFile(OSMAND_ROUTER_V2);
+		Track track = new Track();
+		track.name = name;
+		gpx.tracks.add(track);
+		track.segments.add(generateRouteSegment());
+		if (points != null) {
+			for (WptPt pt : points) {
+				gpx.addPoint(pt);
+			}
+		}
+		return gpx;
+	}
+
+	public static GPXFile exportRoute(String name, List<TrkSegment> trkSegments, List<WptPt> points) {
+		GPXFile gpx = new GPXFile(OSMAND_ROUTER_V2);
+		Track track = new Track();
+		track.name = name;
+		gpx.tracks.add(track);
+		track.segments.addAll(trkSegments);
+		if (points != null) {
+			for (WptPt pt : points) {
+				gpx.addPoint(pt);
+			}
+		}
+		return gpx;
+	}
+
+	public TrkSegment generateRouteSegment() {
 		RouteDataResources resources = new RouteDataResources(locations);
 		List<StringBundle> routeItems = new ArrayList<>();
 		if (!Algorithms.isEmpty(route)) {
@@ -57,15 +85,9 @@ public class RouteExporter {
 			typeList.add(typeBundle);
 		}
 
-		GPXFile gpx = new GPXFile(OSMAND_ROUTER_V2);
-		Track track = new Track();
-		track.name = name;
-		gpx.tracks.add(track);
 		TrkSegment trkSegment = new TrkSegment();
-		track.segments.add(trkSegment);
-
 		if (locations == null || locations.isEmpty()) {
-			return gpx;
+			return trkSegment;
 		}
 		for (int i = 0; i < locations.size(); i++) {
 			Location loc = locations.get(i);
@@ -83,23 +105,17 @@ public class RouteExporter {
 			}
 			trkSegment.points.add(pt);
 		}
-		if (points != null) {
-			for (WptPt pt : points) {
-				gpx.addPoint(pt);
-			}
-		}
 
 		List<RouteSegment> routeSegments = new ArrayList<>();
 		for (StringBundle item : routeItems) {
 			routeSegments.add(RouteSegment.fromStringBundle(item));
 		}
-		gpx.routeSegments = routeSegments;
+		trkSegment.routeSegments = routeSegments;
 		List<RouteType> routeTypes = new ArrayList<>();
 		for (StringBundle item : typeList) {
 			routeTypes.add(RouteType.fromStringBundle(item));
 		}
-		gpx.routeTypes = routeTypes;
-
-		return gpx;
+		trkSegment.routeTypes = routeTypes;
+		return trkSegment;
 	}
 }

@@ -108,7 +108,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					public void onClick(View v) {
 						Fragment fragment = getTargetFragment();
 						if (fragment instanceof OptionsFragmentListener) {
-							((OptionsFragmentListener) fragment).addToTheTrackOnClick();
+							((OptionsFragmentListener) fragment).addToTrackOnClick();
 						}
 						dismiss();
 					}
@@ -229,7 +229,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		void saveAsNewTrackOnClick();
 
-		void addToTheTrackOnClick();
+		void addToTrackOnClick();
 
 		void directionsOnClick();
 

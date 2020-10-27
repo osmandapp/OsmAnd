@@ -670,7 +670,10 @@ public class ImportHelper {
 				}
 				fp.setAddress(p.getExtensionsToRead().get("address"));
 				fp.setColor(p.getColor(0));
-				fp.setIconIdFromName(app, p.getIconName());
+				String iconName = p.getIconName();
+				if (iconName != null) {
+					fp.setIconIdFromName(app, iconName);
+				}
 				fp.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 				favourites.add(fp);
 			}

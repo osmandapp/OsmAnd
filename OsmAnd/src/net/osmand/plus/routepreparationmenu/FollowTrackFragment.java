@@ -1,8 +1,11 @@
 package net.osmand.plus.routepreparationmenu;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -16,6 +19,7 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -24,7 +28,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -44,7 +47,6 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.measurementtool.GpxData;
-import net.osmand.plus.measurementtool.GpxData.ActionType;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -85,6 +87,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	private ImportHelper importHelper;
 
 	private GPXFile gpxFile;
+
+	private View buttonsShadow;
 
 	private boolean editingTrack;
 	private boolean selectingTrack;
@@ -148,6 +152,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			ImageButton closeButton = view.findViewById(R.id.close_button);
+			buttonsShadow = view.findViewById(R.id.buttons_shadow);
 			closeButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
 			closeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -173,6 +178,22 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 		return view;
 	}
+
+	private void showShadowButton() {
+		buttonsShadow.setVisibility(View.VISIBLE);
+		buttonsShadow.animate()
+				.alpha(0.8f)
+				.setDuration(200)
+				.setListener(null);
+	}
+
+	private void hideShadowButton() {
+		buttonsShadow.animate()
+				.alpha(0f)
+				.setDuration(200);
+
+	}
+
 
 	private void setupCards() {
 		MapActivity mapActivity = getMapActivity();
@@ -554,10 +575,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && gpxFile != null) {
 			editingTrack = true;
-			QuadRect rect = gpxFile.getRect();
-			TrkSegment segment = gpxFile.getNonEmptyTrkSegment();
-			ActionType actionType = segment == null ? ActionType.ADD_ROUTE_POINTS : ActionType.EDIT_SEGMENT;
-			GpxData gpxData = new GpxData(gpxFile, rect, actionType, segment);
+			GpxData gpxData = new GpxData(gpxFile);
 			MeasurementEditingContext editingContext = new MeasurementEditingContext();
 			editingContext.setGpxData(gpxData);
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
@@ -598,20 +616,16 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	private void setupScrollShadow() {
-		int shadowIconId = isNightMode() ? R.drawable.bg_contextmenu_shadow : R.drawable.bg_contextmenu_shadow;
-		final Drawable shadowIcon = app.getUIUtilities().getIcon(shadowIconId);
-
 		final View scrollView = getBottomScrollView();
-		final FrameLayout bottomContainer = getBottomContainer();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new OnScrollChangedListener() {
 
 			@Override
 			public void onScrollChanged() {
-				int scrollY = scrollView.getScrollY();
-				if (scrollY <= 0 && bottomContainer.getForeground() != null) {
-					bottomContainer.setForeground(null);
-				} else if (scrollY > 0 && bottomContainer.getForeground() == null) {
-					bottomContainer.setForeground(shadowIcon);
+				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+				if (scrollToBottomAvailable) {
+					showShadowButton();
+				} else {
+					hideShadowButton();
 				}
 			}
 		});

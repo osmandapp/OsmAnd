@@ -50,14 +50,13 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
-import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -918,17 +917,10 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 	}
 
-	public void addNewGpxData(GpxData.ActionType actionType) {
+	public void addNewGpxData() {
 		TrackActivity activity = getTrackActivity();
 		if (activity != null) {
-			activity.addNewGpxData(actionType);
-		}
-	}
-
-	public void addNewGpxData(GpxData.ActionType actionType, GPXUtilities.TrkSegment segment) {
-		TrackActivity activity = getTrackActivity();
-		if (activity != null) {
-			activity.addNewGpxData(actionType, segment);
+			activity.addNewGpxData();
 		}
 	}
 
@@ -951,10 +943,8 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				PointDescription pointWptDescription =
 						new PointDescription(PointDescription.POINT_TYPE_WPT, app.getString(R.string.add_waypoint));
 				addPoint(pointWptDescription);
-			} else if (i == R.id.route_text_layout || i == R.id.route_fab) {
-				addNewGpxData(GpxData.ActionType.ADD_ROUTE_POINTS);
-			} else if (i == R.id.line_text_layout || i == R.id.line_fab) {
-				addNewGpxData(GpxData.ActionType.ADD_SEGMENT);
+			} else if (i == R.id.route_text_layout || i == R.id.route_fab || i == R.id.line_fab) {
+				addNewGpxData();
 			}
 		}
 	};
