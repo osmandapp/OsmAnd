@@ -3652,9 +3652,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Die Bezahlung wird Ihrem Google Play-Konto bei der Bestätigung des Kaufs belastet.
 \n
-\n Das Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
+\nDas Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
 \n
-\n Sie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren Google Play-Einstellungen gehen.</string>
+\nSie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren Google Play-Einstellungen gehen.</string>
     <string name="search_poi_types">Suche nach POI-Typen</string>
     <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf den Schalter, um alle auszuwählen, tippen Sie auf die linke Seite zur Kategorieauswahl.</string>
     <string name="shared_string_divider">Trenner</string>
@@ -3913,9 +3913,9 @@
     <string name="osm_live_payment_desc_hw">Das Abonnement wird pro ausgewähltem Zeitraum berechnet. Sie können das Abonnement jederzeit über die AppGallery kündigen.</string>
     <string name="osm_live_payment_subscription_management_hw">Die Bezahlung wird Ihrem AppGallery-Konto bei der Bestätigung des Kaufs belastet.
 \n
-\n Das Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
+\nDas Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
 \n
-\n Sie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren AppGallery-Einstellungen gehen.</string>
+\nSie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren AppGallery-Einstellungen gehen.</string>
     <string name="routing_attr_avoid_footways_description">Vermeidet Fußwege</string>
     <string name="routing_attr_avoid_footways_name">Keine Fußwege</string>
     <string name="development">Entwicklung</string>
@@ -3929,4 +3929,8 @@
     <string name="file_already_imported">Datei wurde bereits in OsmAnd importiert</string>
     <string name="perform_oauth_authorization">Anmelden über OAuth</string>
     <string name="clear_osm_token">OpenStreetMap OAuth-Token löschen</string>
+    <string name="what_is_new">Was ist neu</string>
+    <string name="snowmobile_render_descr">Für das Schneemobilfahren mit speziellen Straßen und Tracks.</string>
+    <string name="perform_oauth_authorization_description">Durchführen eines OAuth-Logins zur Nutzung der osmedit-Funktionen</string>
+    <string name="use_two_phase_routing">2-Phasen-A*-Routing-Algorithmus verwenden</string>
 </resources>

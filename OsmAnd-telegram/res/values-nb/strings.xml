@@ -179,7 +179,7 @@
     <string name="monitoring_is_enabled">Oppsyn er påskrudd</string>
     <string name="monitoring_is_disabled">Oppsyn er ikke aktivert</string>
     <string name="time_on_the_move">Tid i bevegelse</string>
-    <string name="average_altitude">Gjennomsnittlig høyde</string>
+    <string name="average_altitude">Gjennomsnittshøyde</string>
     <string name="average_speed">Gjennomsnittsfart</string>
     <string name="open_in_osmand">Vis i OsmAnd</string>
     <string name="end_date">Sluttdato</string>
