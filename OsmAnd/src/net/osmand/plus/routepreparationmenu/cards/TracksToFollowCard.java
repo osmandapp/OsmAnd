@@ -3,16 +3,21 @@ package net.osmand.plus.routepreparationmenu.cards;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.Collator;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +30,11 @@ public class TracksToFollowCard extends BaseCard {
 	private String selectedCategory;
 	private String defaultCategory;
 	private String visibleCategory;
+	TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
+
+	public void setSortByMode(TracksSortByMode sortByMode) {
+		this.sortByMode = sortByMode;
+	}
 
 	private GpxTrackAdapter tracksAdapter;
 
@@ -34,17 +44,23 @@ public class TracksToFollowCard extends BaseCard {
 		this.selectedCategory = selectedCategory;
 		defaultCategory = app.getString(R.string.shared_string_all);
 		visibleCategory = app.getString(R.string.shared_string_visible);
+		sortGPXInfoItems(gpxInfoList);
 		gpxInfoCategories = getGpxInfoCategories();
 	}
 
 	public void setGpxInfoList(List<GPXInfo> gpxInfoList) {
 		this.gpxInfoList = gpxInfoList;
+		sortGPXInfoItems(gpxInfoList);
 		gpxInfoCategories = getGpxInfoCategories();
+		List<GPXInfo> items = gpxInfoCategories.get(selectedCategory);
+		tracksAdapter.setGpxInfoList(items != null ? items : new ArrayList<GPXInfo>());
+		tracksAdapter.notifyDataSetChanged();
 	}
 
 	public List<GPXInfo> getGpxInfoList() {
 		return gpxInfoList;
 	}
+
 
 	public String getSelectedCategory() {
 		return selectedCategory;
@@ -141,4 +157,26 @@ public class TracksToFollowCard extends BaseCard {
 		}
 		items.add(info);
 	}
+
+	public void sortGPXInfoItems(List<GPXInfo> gpxInfoList) {
+		final Collator collator = OsmAndCollator.primaryCollator();
+		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
+			@Override
+			public int compare(GPXInfo i1, GPXInfo i2) {
+				if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
+					return collator.compare(i1.getFileName(), i2.getFileName());
+				} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
+					return -collator.compare(i1.getFileName(), i2.getFileName());
+				} else {
+					long time1 = i1.getLastModified();
+					long time2 = i2.getLastModified();
+					if (time1 == time2) {
+						return collator.compare(i1.getFileName(), i2.getFileName());
+					}
+					return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
+				}
+			}
+		});
+	}
 }
+

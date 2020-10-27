@@ -99,6 +99,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private View buttonsShadow;
 	protected boolean nightMode;
+	private TracksToFollowCard tracksCard;
 
 	private boolean editingTrack;
 	private boolean selectingTrack;
@@ -184,7 +185,13 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 									@Override
 									public void onClick(View v) {
 										sortByMode = mode;
-										setupCards();
+										sortButton.setImageResource(mode.getIconId());
+										if (tracksCard != null) {
+											List<GPXInfo> list = tracksCard.getGpxInfoList();
+											tracksCard.setSortByMode(mode);
+											tracksCard.setGpxInfoList(list);
+
+										}
 									}
 								}, sortByMode == mode
 						));
@@ -304,35 +311,15 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackPaths(app);
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
 			if (list.size() > 0) {
-				sortGPXInfoItems(list);
 				String defaultCategory = app.getString(R.string.shared_string_all);
-				TracksToFollowCard tracksCard = new TracksToFollowCard(mapActivity, list, defaultCategory);
+				tracksCard = new TracksToFollowCard(mapActivity, list, defaultCategory);
 				tracksCard.setListener(FollowTrackFragment.this);
 				getCardsContainer().addView(tracksCard.build(mapActivity));
 			}
 		}
 	}
 
-	public void sortGPXInfoItems(List<GPXInfo> gpxInfoList) {
-		final Collator collator = OsmAndCollator.primaryCollator();
-		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
-			@Override
-			public int compare(GPXInfo i1, GPXInfo i2) {
-				if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
-					return collator.compare(i1.getFileName(), i2.getFileName());
-				} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
-					return -collator.compare(i1.getFileName(), i2.getFileName());
-				} else {
-					long time1 = i1.getLastModified();
-					long time2 = i2.getLastModified();
-					if (time1 == time2) {
-						return collator.compare(i1.getFileName(), i2.getFileName());
-					}
-					return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
-				}
-			}
-		});
-	}
+
 
 	private void setupNavigateOptionsCard(GPXRouteParamsBuilder rparams) {
 		MapActivity mapActivity = getMapActivity();
