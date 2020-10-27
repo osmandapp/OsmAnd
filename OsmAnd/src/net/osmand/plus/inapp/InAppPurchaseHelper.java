@@ -557,10 +557,12 @@ public class InAppPurchaseHelper {
 			// Do we have the live updates?
 			boolean subscribedToLiveUpdates = false;
 			List<Purchase> liveUpdatesPurchases = new ArrayList<>();
-			for (InAppPurchase p : getLiveUpdates().getAllSubscriptions()) {
-				Purchase purchase = getPurchase(p.getSku());
-				if (purchase != null) {
-					liveUpdatesPurchases.add(purchase);
+			for (InAppSubscription s : getLiveUpdates().getAllSubscriptions()) {
+				Purchase purchase = getPurchase(s.getSku());
+				if (purchase != null || s.getState().isActive()) {
+					if (purchase != null) {
+						liveUpdatesPurchases.add(purchase);
+					}
 					if (!subscribedToLiveUpdates) {
 						subscribedToLiveUpdates = true;
 					}

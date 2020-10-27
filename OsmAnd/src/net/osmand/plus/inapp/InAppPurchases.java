@@ -697,6 +697,10 @@ public class InAppPurchases {
 			public boolean isGone() {
 				return this == ON_HOLD || this == PAUSED || this == EXPIRED;
 			}
+
+			public boolean isActive() {
+				return this == ACTIVE || this == CANCELLED || this == IN_GRACE_PERIOD;
+			}
 		}
 
 		InAppSubscription(@NonNull String skuNoVersion, int version) {
