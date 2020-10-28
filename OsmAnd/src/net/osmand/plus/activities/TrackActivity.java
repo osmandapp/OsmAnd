@@ -21,7 +21,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
@@ -32,9 +31,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.measurementtool.GpxData;
@@ -44,6 +41,8 @@ import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 
 import java.io.File;
@@ -136,14 +135,9 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
-	public void addNewGpxData(GpxData.ActionType actionType) {
-		addNewGpxData(actionType, null);
-	}
-
-	public void addNewGpxData(GpxData.ActionType actionType, TrkSegment segment) {
+	public void addNewGpxData() {
 		GPXFile gpxFile = getGpx();
-		QuadRect rect = getRect();
-		GpxData gpxData = new GpxData(gpxFile, rect, actionType, segment);
+		GpxData gpxData = new GpxData(gpxFile);
 		WptPt pointToShow = gpxFile != null ? gpxFile.findPointToShow() : null;
 		if (pointToShow != null) {
 			LatLon location = new LatLon(pointToShow.getLatitude(), pointToShow.getLongitude());
@@ -154,7 +148,6 @@ public class TrackActivity extends TabActivity {
 					false,
 					gpxData
 			);
-
 			MapActivity.launchMapActivityMoveToTop(this);
 		}
 	}

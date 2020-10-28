@@ -1,35 +1,20 @@
 package net.osmand.plus.measurementtool;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.data.QuadRect;
 
 public class GpxData {
 
-	public enum ActionType {
-		ADD_SEGMENT,
-		ADD_ROUTE_POINTS,
-		EDIT_SEGMENT,
-		OVERWRITE_SEGMENT
-	}
+	private final GPXFile gpxFile;
+	private final QuadRect rect;
 
-	private GPXFile gpxFile;
-	private TrkSegment trkSegment;
-	private QuadRect rect;
-	private ActionType actionType;
-
-	public GpxData(GPXFile gpxFile, QuadRect rect, ActionType actionType, TrkSegment trkSegment) {
+	public GpxData(GPXFile gpxFile) {
 		this.gpxFile = gpxFile;
-		this.rect = rect;
-		this.actionType = actionType;
-		this.trkSegment = trkSegment;
-	}
-
-	public GpxData(GPXFile gpxFile, GpxData gpxData) {
-		this.gpxFile = gpxFile;
-		this.rect = gpxData.rect;
-		this.actionType = gpxData.actionType;
-		this.trkSegment = gpxData.trkSegment;
+		if (gpxFile != null) {
+			this.rect = gpxFile.getRect();
+		} else {
+			this.rect = new QuadRect(0, 0, 0, 0);
+		}
 	}
 
 	public GPXFile getGpxFile() {
@@ -38,13 +23,5 @@ public class GpxData {
 
 	public QuadRect getRect() {
 		return rect;
-	}
-
-	public ActionType getActionType() {
-		return actionType;
-	}
-
-	public TrkSegment getTrkSegment() {
-		return trkSegment;
 	}
 }
