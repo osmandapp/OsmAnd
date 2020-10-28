@@ -3704,7 +3704,7 @@
     <string name="select_track_width">Selecteer dikte</string>
     <string name="track_show_start_finish_icons">Toon start en aankomst pictogrammen</string>
     <string name="gpx_direction_arrows">Richtingaanwijzers</string>
-    <string name="add_hidden_group_info">Het toegevoegde punt zal niet zichtbaar zijn op de kaart, aangezien de geselecteerde groep verborgen is, je kan het vinden in \"% s\".</string>
+    <string name="add_hidden_group_info">Het toegevoegde punt zal niet zichtbaar zijn op de kaart, aangezien de geselecteerde groep verborgen is, je kan het vinden in \"%s\".</string>
     <string name="system_default_theme">Standaard</string>
     <string name="route_between_points">Route tussen punten</string>
     <string name="route_between_points_warning_desc">"Vervolgens, zet  uw track vast op de dichtstbijzijnde toegestane weg met een van uw navigatieprofielen om deze optie te gebruiken."</string>

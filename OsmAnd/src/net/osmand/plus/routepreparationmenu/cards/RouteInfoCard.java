@@ -27,7 +27,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
@@ -148,7 +147,7 @@ public class RouteInfoCard extends BaseCard {
 				legendIcon.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
 			}
 			String propertyName = segment.getUserPropertyName();
-			String name = SettingsNavigationActivity.getStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
+			String name = SettingsBaseActivity.getStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
 			Spannable text = getSpanLegend(name, segment, segment.getUserPropertyName().equals(selectedPropertyName));
 			TextView legend = (TextView) view.findViewById(R.id.legend_text);
 			legend.setText(text);

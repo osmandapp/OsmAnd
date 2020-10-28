@@ -25,13 +25,13 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.AppProfileArrayAdapter;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
@@ -50,7 +50,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	public static final String INTENT_APP_MODE = "INTENT_APP_MODE";
 	private static final String PREV_MODE_KEY = "previous_mode";
 	private static final String SELECTED_MODE_KEY = "selected_mode";
-	
+
 	protected OsmandSettings settings;
 	protected final boolean profileSettings;
 	protected List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
@@ -93,7 +93,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		booleanPreferences.put(b.getId(), b);
 		return p;
 	}
-	
+
 	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b, String title, String summary) {
 		CheckBoxPreference p = new CheckBoxPreference(this);
 		p.setTitle(title);
@@ -104,7 +104,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		booleanPreferences.put(b.getId(), b);
 		return p;
 	}
-	
+
 	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b) {
 		CheckBoxPreference p = new CheckBoxPreference(this);
 		p.setKey(b.getId());
@@ -113,7 +113,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		booleanPreferences.put(b.getId(), b);
 		return p;
 	}
-	
+
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {
 		try {
 			Field f = R.string.class.getField("routing_attr_" + propertyName + "_name");
@@ -126,7 +126,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		}
 		return defValue;
 	}
-	
+
 	public static String getRoutingStringPropertyDescription(Context ctx, String propertyName, String defValue) {
 		try {
 			Field f = R.string.class.getField("routing_attr_" + propertyName + "_description");
@@ -166,8 +166,8 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		}
 		return defValue;
 	}
-	
-	public static String getStringPropertyValue(Context ctx, String propertyValue) {		
+
+	public static String getStringPropertyValue(Context ctx, String propertyValue) {
 		try {
 			if(propertyValue == null) {
 				return "";
@@ -215,7 +215,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		prepareListPreference(b, names, values, p);
 		return p;
 	}
-	
+
 	public <T> ListPreference createListPreference(OsmandPreference<T> b, String[] names, T[] values, String title, String summary) {
 		ListPreference p = new ListPreference(this);
 		p.setTitle(title);
@@ -225,7 +225,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		prepareListPreference(b, names, values, p);
 		return p;
 	}
-	
+
 	public <T> ListPreference createListPreference(OsmandPreference<T> b, String[] names, T[] values) {
 		ListPreference p = new ListPreference(this);
 		p.setKey(b.getId());
@@ -244,7 +244,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			vals.put(names[i], values[i]);
 		}
 	}
-	
+
 	private void registerDisablePreference(OsmandPreference p, String value, OsmandPreference<Boolean> disable) {
 		LinkedHashMap<String, Object> vals = (LinkedHashMap<String, Object>) listPrefValues.get(p.getId());
 		vals.put(value, disable);
@@ -337,15 +337,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		if (profileSettings) {
 			modes.clear();
 			findViewById(R.id.selector_shadow).setVisibility(View.VISIBLE);
-			if (this instanceof SettingsNavigationActivity) {
-				for (ApplicationMode a : ApplicationMode.values(app)) {
-					if (a != ApplicationMode.DEFAULT) {
-						modes.add(a);
-					}
-				}
-			} else {
-				modes.addAll(ApplicationMode.values(app));
-			}
+			modes.addAll(ApplicationMode.values(app));
 
 			getTypeButton().setVisibility(View.VISIBLE);
 			getTypeButton().setOnClickListener(new View.OnClickListener() {
@@ -367,7 +359,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	    for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
 		    boolean isSelected = am == selectedAppMode;
 
-		    if (am != ApplicationMode.DEFAULT || !(this instanceof SettingsNavigationActivity)) {
+		    if (am != ApplicationMode.DEFAULT) {
 			    activeModes.add(new ProfileDataObject(
 					    am.toHumanString(),
 					    getAppModeDescription(am),
@@ -467,7 +459,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			}
 		}
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -475,7 +467,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			settings.APPLICATION_MODE.set(previousAppMode);
 		}
 	}
-	
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -485,7 +477,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			}
 			if (selectedAppMode != null) {
 				outState.putString(SELECTED_MODE_KEY, selectedAppMode.getStringKey());
-			} 
+			}
 		}
 	}
 
@@ -502,7 +494,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 						previousAppMode = am;
 					}
 				}
-			}	
+			}
 		}
 	}
 
@@ -557,7 +549,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			} else {
 				changed = listPref.set(obj);
 			}
-			
+
 			return changed;
 		}
 		return true;
@@ -582,7 +574,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			});
 		}
 	}
-	
+
 
 
 
