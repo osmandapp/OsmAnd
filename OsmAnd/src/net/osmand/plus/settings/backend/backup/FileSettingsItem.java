@@ -45,6 +45,10 @@ public class FileSettingsItem extends StreamSettingsItem {
 			this.subtypeFolder = subtypeFolder;
 		}
 
+		public boolean isMap() {
+			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP;
+		}
+
 		public String getSubtypeName() {
 			return subtypeName;
 		}

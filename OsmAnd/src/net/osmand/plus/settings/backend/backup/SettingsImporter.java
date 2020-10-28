@@ -86,7 +86,7 @@ class SettingsImporter {
 		Enumeration<? extends ZipEntry> zipEnum = zipfile.entries();
 		while (zipEnum.hasMoreElements()) {
 			ZipEntry zipEntry = zipEnum.nextElement();
-			int size = (int) zipEntry.getSize();
+			long size = zipEntry.getSize();
 			for (SettingsItem settingsItem : settingsItemList) {
 				if (settingsItem instanceof FileSettingsItem
 						&& zipEntry.getName().equals(settingsItem.getFileName())) {

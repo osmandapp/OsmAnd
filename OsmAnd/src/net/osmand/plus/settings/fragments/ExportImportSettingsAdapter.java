@@ -269,12 +269,20 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				setupIcon(icon, R.drawable.ic_action_info_dark, itemSelected);
 				break;
 			case OFFLINE_MAPS:
-				FileSettingsItem currentFileItem = (FileSettingsItem) currentItem;
-				file = currentFileItem.getFile();
+				long size;
+				if (currentItem instanceof FileSettingsItem) {
+					FileSettingsItem currentFileItem = (FileSettingsItem) currentItem;
+					file = currentFileItem.getFile();
+					size = currentFileItem.getSize();
+				} else {
+					file = (File) currentItem;
+					size = file.length();
+				}
 				title.setText(FileNameTranslationHelper.getFileName(app,
 						app.getResourceManager().getOsmandRegions(),
 						file.getName()));
-				FileSubtype subtype = FileSubtype.getSubtypeByFileName(file.getPath().replace(app.getAppPath(null).getPath(), ""));
+				FileSubtype subtype = FileSubtype.getSubtypeByFileName(file.getPath().replace(
+						app.getAppPath(null).getPath(), ""));
 				switch (subtype) {
 					case SRTM_MAP:
 						iconId = R.drawable.ic_plugin_srtm;
@@ -286,7 +294,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 						iconId = R.drawable.ic_map;
 				}
 				setupIcon(icon, iconId, itemSelected);
-				subText.setText(AndroidUtils.formatSize(app, currentFileItem.getSize()));
+				subText.setText(AndroidUtils.formatSize(app, size));
 				subText.setVisibility(View.VISIBLE);
 				break;
 			default:

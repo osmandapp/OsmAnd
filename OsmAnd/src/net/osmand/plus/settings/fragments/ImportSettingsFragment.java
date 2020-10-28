@@ -71,9 +71,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype.*;
-
-
 public class ImportSettingsFragment extends BaseOsmAndFragment
 		implements View.OnClickListener {
 
@@ -287,7 +284,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 
 	private void reloadIndexes(@NonNull List<SettingsItem> items) {
 		for (SettingsItem item : items) {
-			if (item instanceof FileSettingsItem && ((FileSettingsItem) item).getSubtype() == OBF_MAP) {
+			if (item instanceof FileSettingsItem && ((FileSettingsItem) item).getSubtype().isMap()) {
 				Activity activity = getActivity();
 				if (activity instanceof MapActivity) {
 					new ReloadIndexesTack((MapActivity) activity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -78,9 +79,8 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 			}
 		}
 		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-		OpenstreetmapsDbHelper db;
 		if (osmEditingPlugin != null) {
-			db = osmEditingPlugin.getDBPOI();
+			OpenstreetmapsDbHelper db = osmEditingPlugin.getDBPOI();
 			for (OpenstreetmapPoint point : appliedItems) {
 				db.addOpenstreetmap(point);
 			}
@@ -137,7 +137,13 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 				);
 				String action = entityJson.getString(ACTION_KEY);
 				Entity entity;
-				entity = new Node(lat, lon, id);
+				if (entityJson.get(TYPE_KEY).equals(Entity.EntityType.NODE.name())) {
+					entity = new Node(lat, lon, id);
+				} else {
+					entity = new Way(id);
+					entity.setLatitude(lat);
+					entity.setLongitude(lon);
+				}
 				entity.replaceTags(tagMap);
 				OpenstreetmapPoint point = new OpenstreetmapPoint();
 				point.setComment(comment);

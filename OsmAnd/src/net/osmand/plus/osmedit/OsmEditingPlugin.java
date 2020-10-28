@@ -61,6 +61,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_C
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 
@@ -554,7 +555,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public static String getCategory(OsmPoint osmPoint, Context context) {
 		String category = "";
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(POI_TYPE_TAG);
 			if (Algorithms.isEmpty(category)) {
 				category = context.getString(R.string.shared_string_without_name);
 			}

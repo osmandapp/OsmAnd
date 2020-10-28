@@ -67,9 +67,8 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 				appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
 			}
 			OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-			OsmBugsDbHelper db;
 			if (osmEditingPlugin != null) {
-				db = osmEditingPlugin.getDBBug();
+				OsmBugsDbHelper db = osmEditingPlugin.getDBBug();
 				for (OsmNotesPoint point : appliedItems) {
 					db.addOsmbugs(point);
 				}

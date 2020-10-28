@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -244,7 +245,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		if (point.getGroup() == OsmPoint.Group.POI) {
 			OpenstreetmapPoint osmPoint = (OpenstreetmapPoint) point;
 			int iconResId = 0;
-			String poiTranslation = osmPoint.getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			String poiTranslation = osmPoint.getEntity().getTag(Entity.POI_TYPE_TAG);
 			if (poiTranslation != null) {
 				Map<String, PoiType> poiTypeMap = app.getPoiTypes().getAllTranslatedNames(false);
 				PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
