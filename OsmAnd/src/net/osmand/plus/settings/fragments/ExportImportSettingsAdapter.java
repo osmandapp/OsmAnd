@@ -16,6 +16,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -35,8 +36,8 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -49,8 +50,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.settings.backend.ExportSettingsType.*;
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.*;
+import static net.osmand.plus.settings.backend.ExportSettingsType.OFFLINE_MAPS;
+import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
 import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
@@ -303,6 +304,11 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				subText.setText(AndroidUtils.formatSize(app, size));
 				subText.setVisibility(View.VISIBLE);
 				break;
+			case FAVORITES:
+				FavoriteGroup favoriteGroup = (FavoriteGroup) currentItem;
+				title.setText(favoriteGroup.getDisplayName(app));
+				setupIcon(icon, R.drawable.ic_action_favorite, itemSelected);
+				break;
 			default:
 				return child;
 		}
@@ -393,6 +399,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.osm_edit_modified_poi;
 			case OFFLINE_MAPS:
 				return R.string.shared_string_local_maps;
+			case FAVORITES:
+				return R.string.shared_string_favorites;
 			default:
 				return R.string.access_empty_list;
 		}

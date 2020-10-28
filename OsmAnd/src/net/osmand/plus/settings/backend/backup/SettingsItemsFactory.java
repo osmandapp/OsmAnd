@@ -131,6 +131,9 @@ class SettingsItemsFactory {
 			case OSM_EDITS:
 				item = new OsmEditsSettingsItem(app, json);
 				break;
+			case FAVOURITES:
+				item = new FavoritesSettingsItem(app, json);
+				break;
 		}
 		return item;
 	}
