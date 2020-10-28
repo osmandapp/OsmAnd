@@ -906,6 +906,11 @@ public class AndroidUtils {
 		return value != null ? value : defValue;
 	}
 
+	public static String getIconStringPropertyName(Context ctx, String propertyName) {
+		String value = getStringByProperty(ctx, "icon_group_" + propertyName);
+		return value != null ? value : propertyName;
+	}
+
 	public static String getRenderingStringPropertyValue(Context ctx, String propertyValue) {
 		if (propertyValue == null) {
 			return "";

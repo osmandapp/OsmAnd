@@ -47,7 +47,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
@@ -595,9 +594,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			JSONObject categories = obj.getJSONObject("categories");
 			for (int i = 0; i < categories.length(); i++) {
 				JSONArray names = categories.names();
-				JSONObject icons = categories.getJSONObject(names.get(i).toString());
 				String name = names.get(i).toString();
-				String translatedName = SettingsBaseActivity.getIconStringPropertyName(app, name, name);
+				JSONObject icons = categories.getJSONObject(name);
+				String translatedName = AndroidUtils.getIconStringPropertyName(app, name);
 				iconCategories.put(translatedName, icons.getJSONArray("icons"));
 			}
 		} catch (JSONException e) {
