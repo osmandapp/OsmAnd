@@ -47,6 +47,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
@@ -567,23 +568,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 										: R.color.inactive_buttons_and_links_bg_light)));
 	}
 
-	private void createIconSelector() {
-		iconCategories = new LinkedHashMap<>();
-		try {
-			JSONObject obj = new JSONObject(loadJSONFromAsset());
-			JSONObject categories = obj.getJSONObject("categories");
-			for (int i = 0; i < categories.length(); i++) {
-				JSONArray names = categories.names();
-				JSONObject icons = categories.getJSONObject(names.get(i).toString());
-				iconCategories.put(names.get(i).toString(), icons.getJSONArray("icons"));
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		selectedIconCategory = getInitCategory();
-		createIconForCategory();
-	}
-
 	private String getInitCategory() {
 		for (int j = 0; j < iconCategories.values().size(); j++) {
 			JSONArray iconJsonArray = (JSONArray) iconCategories.values().toArray()[j];
@@ -602,6 +586,25 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	private String getNameFromIconId(int iconId) {
 		return app.getResources().getResourceEntryName(iconId).replaceFirst("mx_", "");
+	}
+
+	private void createIconSelector() {
+		iconCategories = new LinkedHashMap<>();
+		try {
+			JSONObject obj = new JSONObject(loadJSONFromAsset());
+			JSONObject categories = obj.getJSONObject("categories");
+			for (int i = 0; i < categories.length(); i++) {
+				JSONArray names = categories.names();
+				JSONObject icons = categories.getJSONObject(names.get(i).toString());
+				String name = names.get(i).toString();
+				String translatedName = SettingsBaseActivity.getIconStringPropertyName(app, name, name);
+				iconCategories.put(translatedName, icons.getJSONArray("icons"));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		selectedIconCategory = getInitCategory();
+		createIconForCategory();
 	}
 
 	private void createIconForCategory() {
