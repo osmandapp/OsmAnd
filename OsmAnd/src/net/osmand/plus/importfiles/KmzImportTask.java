@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.util.Algorithms;
 
 import java.io.InputStream;
@@ -16,7 +17,7 @@ import java.util.zip.ZipInputStream;
 import static net.osmand.plus.importfiles.ImportHelper.KML_SUFFIX;
 import static net.osmand.plus.importfiles.KmlImportTask.convertKmlToGpxStream;
 
-class KmzImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
+class KmzImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
 	private ImportHelper importHelper;
 	private Uri uri;

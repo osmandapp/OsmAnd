@@ -13,6 +13,7 @@ import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.PluginSettingsItem;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
@@ -28,7 +29,7 @@ import java.util.List;
 
 import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 
-class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> {
+class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private Uri uri;
 	private String name;

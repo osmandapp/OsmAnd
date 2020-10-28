@@ -22,12 +22,11 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
@@ -127,7 +126,7 @@ public class RouteInfoCard extends BaseCard {
 
 	private void updateHeader() {
 		TextView title = (TextView) view.findViewById(R.id.info_type_title);
-		String name = SettingsBaseActivity.getStringRouteInfoPropertyValue(app, routeStatistics.name);
+		String name = AndroidUtils.getStringRouteInfoPropertyValue(app, routeStatistics.name);
 		title.setText(name);
 	}
 
@@ -148,7 +147,7 @@ public class RouteInfoCard extends BaseCard {
 				legendIcon.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
 			}
 			String propertyName = segment.getUserPropertyName();
-			String name = SettingsNavigationActivity.getStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
+			String name = AndroidUtils.getRenderingStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
 			Spannable text = getSpanLegend(name, segment, segment.getUserPropertyName().equals(selectedPropertyName));
 			TextView legend = (TextView) view.findViewById(R.id.legend_text);
 			legend.setText(text);

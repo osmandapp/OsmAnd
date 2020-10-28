@@ -8,11 +8,12 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseLoadAsyncTask;
 
 import java.io.File;
 import java.util.ArrayList;
 
-class ObfImportTask extends BaseImportAsyncTask<Void, Void, String> {
+class ObfImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private Uri uri;
 	private String name;
