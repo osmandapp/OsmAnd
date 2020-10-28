@@ -20,10 +20,10 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.google.android.material.slider.Slider;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
@@ -86,8 +86,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 			return;
 		}
 		String parameterId = parameter.getId();
-		String title = SettingsBaseActivity.getRoutingStringPropertyName(app, parameterId, parameter.getName());
-		String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, parameterId,
+		String title = AndroidUtils.getRoutingStringPropertyName(app, parameterId, parameter.getName());
+		String description = AndroidUtils.getRoutingStringPropertyDescription(app, parameterId,
 				parameter.getDescription());
 		String defValue = parameter.getType() == RoutingParameterType.NUMERIC
 				? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;

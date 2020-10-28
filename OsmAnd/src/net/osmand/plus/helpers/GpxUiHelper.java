@@ -92,7 +92,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
@@ -810,9 +809,9 @@ public class GpxUiHelper {
 		TextView widthTextView = (TextView) apprTitleView.findViewById(R.id.widthTitle);
 		ImageView colorImageView = (ImageView) apprTitleView.findViewById(R.id.colorImage);
 		if (Algorithms.isEmpty(prefWidthValue)) {
-			widthTextView.setText(SettingsBaseActivity.getStringPropertyValue(activity, trackWidthProp.getDefaultValueDescription()));
+			widthTextView.setText(AndroidUtils.getRenderingStringPropertyValue(activity, trackWidthProp.getDefaultValueDescription()));
 		} else {
-			widthTextView.setText(SettingsBaseActivity.getStringPropertyValue(activity, prefWidthValue));
+			widthTextView.setText(AndroidUtils.getRenderingStringPropertyValue(activity, prefWidthValue));
 		}
 		int color = GpxAppearanceAdapter.parseTrackColor(renderer, prefColorValue);
 		if (color == -1) {

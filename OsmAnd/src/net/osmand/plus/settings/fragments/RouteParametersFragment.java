@@ -24,13 +24,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.slider.Slider;
 
+import net.osmand.AndroidUtils;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -282,8 +282,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					screen.addPreference(reliefFactorRouting);
 				}
 				for (RoutingParameter p : otherRoutingParameters) {
-					String title = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
-					String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
+					String title = AndroidUtils.getRoutingStringPropertyName(app, p.getId(), p.getName());
+					String description = AndroidUtils.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
 
 					if (p.getType() == RoutingParameterType.BOOLEAN) {
 						OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
@@ -571,7 +571,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey, List<RoutingParameter> routingParameters) {
 		String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(groupKey.replace('_', ' '));
-		String title = SettingsBaseActivity.getRoutingStringPropertyName(app, groupKey, defaultTitle);
+		String title = AndroidUtils.getRoutingStringPropertyName(app, groupKey, defaultTitle);
 		ApplicationMode am = getSelectedAppMode();
 
 		Object[] entryValues = new Object[routingParameters.size()];
@@ -614,7 +614,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			RoutingParameter p = routingParameters.get(i);
 			BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 
-			entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
+			entries[i] = AndroidUtils.getRoutingStringPropertyName(app, p.getId(), p.getName());
 			prefsIds[i] = booleanRoutingPref.getId();
 
 			if (booleanRoutingPref.getModeValue(selectedMode)) {
@@ -646,7 +646,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private String getRoutingParameterTitle(Context context, RoutingParameter parameter) {
-		return SettingsBaseActivity.getRoutingStringPropertyName(context, parameter.getId(), parameter.getName());
+		return AndroidUtils.getRoutingStringPropertyName(context, parameter.getId(), parameter.getName());
 	}
 
 	private boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode, RoutingParameter parameter) {
