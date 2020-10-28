@@ -3777,7 +3777,7 @@
 \n
 \nVeldu %2$s: öllum gögnum sem tengjast hraðamyndavélum; t.d. aðvaranir, tilkynningar, staðsetningar o.fl. verður eytt þar til OsmAnd er sett inn aftur frá grunni.</string>
     <string name="route_between_points_add_track_desc">Veldu ferilskrá þar sem nýjum bút verður bætt inn.</string>
-    <string name="route_between_points_desc">Veldu hvernig eigi að tengja punkta; með beinni línu eða reikna leið milli þeirra eins og tiltekið er hér að neðan.</string>
+    <string name="route_between_points_desc">Veldu hvernig eigi að tengja punktana; með beinni línu eða reikna leið milli þeirra eins og tiltekið er hér að neðan.</string>
     <string name="route_between_points_whole_track_button_desc">Allur ferillinn verður endurreiknaður með völdu sniði.</string>
     <string name="osm_edit_closed_note">Lokaður OSM-minnispunktur</string>
     <string name="whole_track">Allur ferillinn</string>
@@ -3914,4 +3914,35 @@
     <string name="save_global_track_interval_descr">Veldu millibil skráninga í almenna leiðarskráningu (virkjað með viðmótshlutanum fyrir GPX-skráningu á kortinu).</string>
     <string name="gpx_monitoring_stop">Setja skráningu í bið</string>
     <string name="gpx_monitoring_start">Halda áfram með skráningu</string>
+    <string name="release_3_8">• Uppfærðar aðgerðir í skipulagningu leiða: mismunandi leiðsögn á hverjum bút auk slóða
+\n
+\n • Ný útlitsvalmynd fyrir slóðir: val á lit, þykkt, birting stefnuörva, táknmynda við upphaf/endi
+\n
+\n • Bættur sýnileiki hjólreiðahnúta.
+\n
+\n • Hægt að ýta á slóðir, hafa samhengisvalmynd með grunnupplýsingum.
+\n
+\n • Bætt reiknirit leitar
+\n
+\n • Bættir valkostir fyrir \'Fylgja slóð\' í leiðsögn
+\n
+\n • Lagfærð vandamál við inn/útflutning á stillingum sniða
+\n
+\n</string>
+    <string name="message_graph_will_be_available_after_recalculation">Bíddu eftir endurútreikningi leiðar.
+\nGrafið verður tiltækt eftir endurútreikning.</string>
+    <string name="snowmobile_render_descr">Fyrir akstur vélsleða á sérstökum vegum og slóðum.</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s gögn aðeins tiltæk á vegunum, þú þarft að reikna leið með “Leið milli punkta” til að fá hana.</string>
+    <string name="file_already_imported">Skrá hefur þegar verið flutt inn í OsmAnd</string>
+    <string name="app_mode_gap">Bil</string>
+    <string name="contour_lines_thanks">Takk fyrir að kaupa \'Hæðarlínur\'</string>
+    <string name="osm_live_payment_desc_hw">Áskriftargjaldið verður rukkað miðað við valið tímabil. Þú getur sagt áskriftinni upp hvenær sem er á AppGallery.</string>
+    <string name="use_two_phase_routing">Nota 2-umferða A* leiðararútreikning</string>
+    <string name="osm_live_payment_subscription_management_hw">Greiðsla verður gjaldfærð á AppGallery reikninginn þinn við staðfestingu á kaupunum.
+\n
+\n Áskrift endurnýjast sjálfkrafa nema hún sé felld niður fyrir endurnýjunardag. Reikningur þinn verður einungis gjaldfærður fyrir endurnýjunartímabil (mánuður / þrír mánuðir / ár) á endurnýjunardegi.
+\n
+\n Þú getur stýrt og aflýst áskriftunum þínum með því að fara í AppGallery stillingarnar þínar.</string>
+    <string name="shared_string_graph">Graf</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>
