@@ -22,7 +22,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	private boolean cache;
 	private boolean global;
-	private boolean visible;
+	private boolean shared;
 
 
 	public CommonPreference(OsmandSettings settings, String id, T defaultValue) {
@@ -72,8 +72,8 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return this;
 	}
 
-	public final CommonPreference<T> makeVisible() {
-		visible = true;
+	public final CommonPreference<T> makeShared() {
+		shared = true;
 		return this;
 	}
 
@@ -206,8 +206,8 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return global;
 	}
 
-	public final boolean isVisible() {
-		return visible;
+	public final boolean isShared() {
+		return shared;
 	}
 
 	// TODO final

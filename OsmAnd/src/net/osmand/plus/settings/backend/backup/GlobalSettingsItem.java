@@ -48,7 +48,7 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 		return new OsmandSettingsItemReader<OsmandSettingsItem>(this, getSettings()) {
 			@Override
 			protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-				if ((preference instanceof CommonPreference) && (((CommonPreference<?>) preference).isVisible())
+				if ((preference instanceof CommonPreference) && (((CommonPreference<?>) preference).isShared())
 						|| getSettings().APPLICATION_MODE.getId().equals(preference.getId())) {
 					preference.readFromJson(json, null);
 				}
@@ -62,7 +62,7 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 		return new OsmandSettingsItemWriter<OsmandSettingsItem>(this, getSettings()) {
 			@Override
 			protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-				if ((preference instanceof CommonPreference) && (((CommonPreference<?>) preference).isVisible())
+				if ((preference instanceof CommonPreference) && (((CommonPreference<?>) preference).isShared())
 						|| getSettings().APPLICATION_MODE.getId().equals(preference.getId())) {
 					preference.writeToJson(json, null);
 				}
