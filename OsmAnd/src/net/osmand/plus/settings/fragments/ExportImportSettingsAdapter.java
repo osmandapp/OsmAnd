@@ -31,6 +31,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -262,6 +263,12 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				setupIcon(icon, R.drawable.ic_action_route_distance, itemSelected);
 				subText.setVisibility(View.GONE);
 				break;
+			case GLOBAL:
+				String name = ((GlobalSettingsItem) currentItem).getPublicName(app);
+				title.setText(name);
+				setupIcon(icon, R.drawable.ic_action_settings, itemSelected);
+				subText.setVisibility(View.GONE);
+				break;
 			default:
 				return child;
 		}
@@ -338,6 +345,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.shared_string_tracks;
 			case MULTIMEDIA_NOTES:
 				return R.string.audionotes_plugin_name;
+			case GLOBAL:
+				return R.string.general_settings_2;
 			default:
 				return R.string.access_empty_list;
 		}

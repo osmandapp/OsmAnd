@@ -5,6 +5,7 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.importfiles.ImportHelper.ImportType;
 import net.osmand.util.Algorithms;
 
@@ -20,7 +21,7 @@ import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.TEMP_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.KML_SUFFIX;
 
-public class ZipImportTask extends BaseImportAsyncTask<Void, Void, ImportType> {
+public class ZipImportTask extends BaseLoadAsyncTask<Void, Void, ImportType> {
 
 	private ImportHelper importHelper;
 	private Uri uri;

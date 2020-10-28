@@ -3,6 +3,7 @@ package net.osmand.plus.srtmplugin;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -11,7 +12,6 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -66,7 +66,7 @@ public class ContourLinesMenu {
 		final CommonPreference<String> densityPref;
 		final RenderingRuleProperty contourWidthProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_WIDTH_ATTR);
 		if (contourWidthProp != null) {
-			contourWidthName = SettingsActivity.getStringPropertyName(app, contourWidthProp.getAttrName(),
+			contourWidthName = AndroidUtils.getRenderingStringPropertyName(app, contourWidthProp.getAttrName(),
 					contourWidthProp.getName());
 			widthPref = settings.getCustomRenderProperty(contourWidthProp.getAttrName());
 		} else {
@@ -75,7 +75,7 @@ public class ContourLinesMenu {
 		}
 		final RenderingRuleProperty contourDensityProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_DENSITY_ATTR);
 		if (contourDensityProp != null) {
-			contourDensityName = SettingsActivity.getStringPropertyName(app, contourDensityProp.getAttrName(),
+			contourDensityName = AndroidUtils.getRenderingStringPropertyName(app, contourDensityProp.getAttrName(),
 					contourDensityProp.getName());
 			densityPref = settings.getCustomRenderProperty(contourDensityProp.getAttrName());
 		} else {

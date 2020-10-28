@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -124,7 +123,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 			for (int j = 0; j < trackWidthProp.getPossibleValues().length; j++) {
 				AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR,
 						trackWidthProp.getPossibleValues()[j],
-						SettingsActivity.getStringPropertyValue(app, trackWidthProp.getPossibleValues()[j]));
+						AndroidUtils.getRenderingStringPropertyValue(app, trackWidthProp.getPossibleValues()[j]));
 				items.add(item);
 				if (adapterType != GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
 					if (j == trackWidthProp.getPossibleValues().length - 1) {
@@ -143,7 +142,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 			for (int j = 0; j < trackColorProp.getPossibleValues().length; j++) {
 				AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR,
 						trackColorProp.getPossibleValues()[j],
-						SettingsActivity.getStringPropertyValue(app, trackColorProp.getPossibleValues()[j]),
+						AndroidUtils.getRenderingStringPropertyValue(app, trackColorProp.getPossibleValues()[j]),
 						parseTrackColor(renderer, trackColorProp.getPossibleValues()[j]));
 				items.add(item);
 				if (j == trackColorProp.getPossibleValues().length - 1) {

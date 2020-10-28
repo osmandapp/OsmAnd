@@ -15,12 +15,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -215,16 +214,16 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						speechAllowed = true;
 						switch (mTts.isLanguageAvailable(newLocale)) {
 							case TextToSpeech.LANG_MISSING_DATA:
-								if (isSettingsActivity(act)) {
-									AlertDialog.Builder builder = createAlertDialog(
-										R.string.tts_missing_language_data_title,
-										R.string.tts_missing_language_data,
-										new IntentStarter(
-												act,
-												TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA),
-										act);
-									builder.show();
-								}
+//								if (isSettingsActivity(act)) {
+//									AlertDialog.Builder builder = createAlertDialog(
+//										R.string.tts_missing_language_data_title,
+//										R.string.tts_missing_language_data,
+//										new IntentStarter(
+//												act,
+//												TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA),
+//										act);
+//									builder.show();
+//								}
 								ttsVoiceStatus = newLocale.getDisplayName() + ": LANG_MISSING_DATA";
 								ttsVoiceUsed = getVoiceUsed();
 								break;
@@ -251,17 +250,17 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do this if condition
-								if (isSettingsActivity(act)) {
-									AlertDialog.Builder builder = createAlertDialog(
-											R.string.tts_language_not_supported_title,
-											R.string.tts_language_not_supported,
-											new IntentStarter(
-													act,
-													Intent.ACTION_VIEW, Uri.parse("market://search?q=text to speech engine"
-														)),
-											act);
-									builder.show();
-								}
+//								if (isSettingsActivity(act)) {
+//									AlertDialog.Builder builder = createAlertDialog(
+//											R.string.tts_language_not_supported_title,
+//											R.string.tts_language_not_supported,
+//											new IntentStarter(
+//													act,
+//													Intent.ACTION_VIEW, Uri.parse("market://search?q=text to speech engine"
+//														)),
+//											act);
+//									builder.show();
+//								}
 								ttsVoiceStatus = newLocale.getDisplayName() + ": LANG_NOT_SUPPORTED";
 								ttsVoiceUsed = getVoiceUsed();
 								break;
@@ -269,10 +268,6 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					}
 				}
 
-				private boolean isSettingsActivity(final Context ctx) {
-					return ctx instanceof SettingsActivity;
-				}
-				
 				private String getVoiceUsed() {
 					try {
 						if (android.os.Build.VERSION.SDK_INT >= 21) {

@@ -11,6 +11,14 @@
 	Thx - Hardy
 
 -->
+    <string name="icon_group_travel">Travel</string>
+    <string name="icon_group_emergency">Emergency</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="icon_group_symbols">Symbols</string>
+    <string name="icon_group_service">Service</string>
+    <string name="icon_group_transport">Transport</string>
+    <string name="icon_group_special">Special</string>
+    <string name="icon_group_amenity">Amenity</string>
     <string name="app_mode_gap">Gap</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="message_graph_will_be_available_after_recalculation">Wait for the route recalculation.\nGraph will be available after recalculation.</string>
@@ -105,7 +113,7 @@
     <string name="route_between_points_warning_desc">Next, snap your track to the nearest allowed road with one of your navigation profiles to use this option.</string>
     <string name="next_segment">Next segment</string>
     <string name="whole_track">Whole track</string>
-    <string name="route_between_points_desc">Select how to connect points, by a straight line, or calculate a route between them as specified below.</string>
+    <string name="route_between_points_desc">Choose how to connect the points, by a straight line, or calculate a route between them as specified below.</string>
     <string name="route_between_points_next_segment_button_desc">Only the next segment will be recalculated using the selected profile.</string>
     <string name="route_between_points_whole_track_button_desc">The whole track will be recalculated using the selected profile.</string>
     <string name="reverse_route">Reverse route</string>

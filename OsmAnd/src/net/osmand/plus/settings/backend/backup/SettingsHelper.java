@@ -24,6 +24,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 
@@ -427,7 +428,7 @@ public class SettingsHelper {
 		return settingsItems;
 	}
 
-	public Map<ExportSettingsType, List<?>> getAdditionalData() {
+	public Map<ExportSettingsType, List<?>> getAdditionalData(boolean globalExport) {
 		Map<ExportSettingsType, List<?>> dataList = new HashMap<>();
 
 		QuickActionRegistry registry = app.getQuickActionRegistry();
@@ -505,6 +506,13 @@ public class SettingsHelper {
 				dataList.put(ExportSettingsType.TRACKS, files);
 			}
 		}
+		if (globalExport) {
+			List<ApplicationModeBean> appModeBeans = new ArrayList<>();
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				appModeBeans.add(mode.toModeBean());
+			}
+			dataList.put(ExportSettingsType.PROFILE, appModeBeans);
+		}
 		return dataList;
 	}
 
@@ -514,6 +522,7 @@ public class SettingsHelper {
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<ApplicationModeBean> appModeBeans = new ArrayList<>();
 		for (Object object : data) {
 			if (object instanceof QuickAction) {
 				quickActions.add((QuickAction) object);
@@ -529,6 +538,8 @@ public class SettingsHelper {
 				}
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
+			} else if (object instanceof ApplicationModeBean) {
+				appModeBeans.add((ApplicationModeBean) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
@@ -542,6 +553,14 @@ public class SettingsHelper {
 		}
 		if (!avoidRoads.isEmpty()) {
 			settingsItems.add(new AvoidRoadsSettingsItem(app, avoidRoads));
+		}
+		if (!appModeBeans.isEmpty()) {
+			for (ApplicationModeBean modeBean : appModeBeans) {
+				ApplicationMode mode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
+				if (mode != null) {
+					settingsItems.add(new ProfileSettingsItem(app, mode));
+				}
+			}
 		}
 		return settingsItems;
 	}
@@ -557,6 +576,7 @@ public class SettingsHelper {
 		List<File> multimediaFilesList = new ArrayList<>();
 		List<File> tracksFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<GlobalSettingsItem> globalSettingsItems = new ArrayList<>();
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
 				case PROFILE:
@@ -606,6 +626,9 @@ public class SettingsHelper {
 						avoidRoads.addAll(avoidRoadsItem.getItems());
 					}
 					break;
+				case GLOBAL:
+					globalSettingsItems.add((GlobalSettingsItem) item);
+					break;
 				default:
 					break;
 			}
@@ -637,6 +660,9 @@ public class SettingsHelper {
 		}
 		if (!tracksFilesList.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.TRACKS, tracksFilesList);
+		}
+		if (!globalSettingsItems.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.GLOBAL, globalSettingsItems);
 		}
 		return settingsToOperate;
 	}

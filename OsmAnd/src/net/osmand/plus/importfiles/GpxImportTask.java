@@ -7,13 +7,14 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.util.Algorithms;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
+class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
 	private ImportHelper importHelper;
 	private Uri gpxFile;

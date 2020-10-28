@@ -24,7 +24,6 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -222,7 +221,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			if (parameter != null) {
 				defValue = parameter.getName();
 			}
-			String parameterName = SettingsBaseActivity.getRoutingStringPropertyName(app, parameterId, defValue);
+			String parameterName = AndroidUtils.getRoutingStringPropertyName(app, parameterId, defValue);
 
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()

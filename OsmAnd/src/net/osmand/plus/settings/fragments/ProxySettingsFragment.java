@@ -16,11 +16,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 
-import static net.osmand.plus.activities.SettingsGeneralActivity.IP_ADDRESS_PATTERN;
-
 public class ProxySettingsFragment extends BaseSettingsFragment {
 
 	public static final String TAG = ProxySettingsFragment.class.getSimpleName();
+
+	private static final String IP_ADDRESS_PATTERN =
+			"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
 	@Override
 	protected void setupPreferences() {

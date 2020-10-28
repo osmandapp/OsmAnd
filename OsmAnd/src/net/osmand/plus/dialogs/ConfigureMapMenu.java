@@ -41,7 +41,6 @@ import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
@@ -821,7 +820,7 @@ public class ConfigureMapMenu {
 		final String[] vals = new String[ps.size()];
 		for (int i = 0; i < ps.size(); i++) {
 			RenderingRuleProperty p = ps.get(i);
-			String propertyName = SettingsActivity.getStringPropertyName(activity, p.getAttrName(),
+			String propertyName = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(),
 					p.getName());
 			vals[i] = propertyName;
 		}
@@ -904,9 +903,9 @@ public class ConfigureMapMenu {
 					final Spinner spinner = (Spinner) spinnerView.findViewById(R.id.spinner);
 					TextView description = (TextView) spinnerView.findViewById(R.id.description);
 
-					String propertyName = SettingsActivity.getStringPropertyName(activity, p.getAttrName(),
+					String propertyName = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(),
 							p.getName());
-					String propertyDescr = SettingsActivity.getStringPropertyDescription(activity,
+					String propertyDescr = AndroidUtils.getRenderingStringPropertyDescription(activity,
 							p.getAttrName(), p.getName());
 
 					title.setText(propertyName);
@@ -920,11 +919,11 @@ public class ConfigureMapMenu {
 					}
 
 					String[] possibleValuesString = new String[p.getPossibleValues().length + 1];
-					possibleValuesString[0] = SettingsActivity.getStringPropertyValue(activity,
+					possibleValuesString[0] = AndroidUtils.getRenderingStringPropertyValue(activity,
 							p.getDefaultValueDescription());
 
 					for (int j = 0; j < p.getPossibleValues().length; j++) {
-						possibleValuesString[j + 1] = SettingsActivity.getStringPropertyValue(activity,
+						possibleValuesString[j + 1] = AndroidUtils.getRenderingStringPropertyValue(activity,
 								p.getPossibleValues()[j]);
 					}
 
@@ -1027,10 +1026,10 @@ public class ConfigureMapMenu {
 										 @DrawableRes final int icon, final RenderingRuleProperty p, final String id,
 	                                                final OsmandApplication app, final int currentProfileColor, final boolean nightMode, final int themeRes) {
 		final OsmandMapTileView view = activity.getMapView();
-		String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(),
+		String propertyName = AndroidUtils.getRenderingStringPropertyName(view.getContext(), p.getAttrName(),
 				p.getName());
 
-		final String propertyDescr = SettingsActivity.getStringPropertyDescription(view.getContext(),
+		final String propertyDescr = AndroidUtils.getRenderingStringPropertyDescription(view.getContext(),
 				p.getAttrName(), p.getName());
 		if (p.isBoolean()) {
 			final CommonPreference<Boolean> pref = view.getApplication().getSettings()
@@ -1053,9 +1052,9 @@ public class ConfigureMapMenu {
 					.getCustomRenderProperty(p.getAttrName());
 			final String descr;
 			if (!Algorithms.isEmpty(pref.get())) {
-				descr = SettingsActivity.getStringPropertyValue(activity, pref.get());
+				descr = AndroidUtils.getRenderingStringPropertyValue(activity, pref.get());
 			} else {
-				descr = SettingsActivity.getStringPropertyValue(view.getContext(),
+				descr = AndroidUtils.getRenderingStringPropertyValue(view.getContext(),
 						p.getDefaultValueDescription());
 			}
 			ContextMenuItem.ItemBuilder builder = ContextMenuItem.createBuilder(propertyName)
@@ -1080,11 +1079,11 @@ public class ConfigureMapMenu {
 							}
 
 							String[] possibleValuesString = new String[p.getPossibleValues().length + 1];
-							possibleValuesString[0] = SettingsActivity.getStringPropertyValue(view.getContext(),
+							possibleValuesString[0] = AndroidUtils.getRenderingStringPropertyValue(view.getContext(),
 									p.getDefaultValueDescription());
 
 							for (int j = 0; j < p.getPossibleValues().length; j++) {
-								possibleValuesString[j + 1] = SettingsActivity.getStringPropertyValue(view.getContext(),
+								possibleValuesString[j + 1] = AndroidUtils.getRenderingStringPropertyValue(view.getContext(),
 										p.getPossibleValues()[j]);
 							}
 							DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
@@ -1098,7 +1097,7 @@ public class ConfigureMapMenu {
 												pref.set(p.getPossibleValues()[which - 1]);
 											}
 											refreshMapComplete(activity);
-											String description = SettingsActivity.getStringPropertyValue(activity, pref.get());
+											String description = AndroidUtils.getRenderingStringPropertyValue(activity, pref.get());
 											adapter.getItem(pos).setDescription(description);
 										}
 									}
