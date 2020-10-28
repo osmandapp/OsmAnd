@@ -3796,7 +3796,7 @@
     <string name="poi_booth">Casta de cabina</string>
     <string name="poi_video_yes">Eja</string>
     <string name="poi_video_no">Nono</string>
-    <string name="poi_internet_access_fee_customers">Sinnale pro agatare su palu</string>
+    <string name="poi_internet_access_fee_customers">Atzessu a ìnternet: clientes</string>
     <string name="poi_traffic_signals_sound_locate">Petzi cando si podet camminare</string>
     <string name="poi_tactile_paving_contrasted">Cuntrastadu</string>
     <string name="poi_tactile_paving_primitive">Primitivu</string>
@@ -3841,4 +3841,8 @@
     <string name="poi_departures_board">Tabellone de sas tzucadas</string>
     <string name="poi_drinking_water_refill">Ricàrriga de abba potàbile</string>
     <string name="poi_fuel_lng">GNL (LNG)</string>
+    <string name="poi_parking_layby">Ispiatzu (layby)</string>
+    <string name="poi_parking_sheds">Cabannas</string>
+    <string name="poi_parking_rooftop">Cobertura</string>
+    <string name="poi_gpx_point">Puntu GPX</string>
 </resources>

@@ -30,7 +30,7 @@
     <string name="back_to_location">Terug naar locatie</string>
     <string name="accessibility_mode">Toegankelijkheidsmodus</string>
     <string name="accessibility_mode_descr">Zet toegankelijkheidsmodus aan.</string>
-    <string name="accessibility_default">Gelijk aan systeeminstelling</string>
+    <string name="accessibility_default">Gelijk aan de Android systeeminstelling</string>
     <string name="backToMenu">Terug naar menu</string>
     <string name="zoomOut">Zoom uit</string>
     <string name="zoomIn">Zoom in</string>
@@ -251,8 +251,8 @@
     <string name="error_doing_search">Fout bij offline zoeken.</string>
     <string name="search_osm_offline">Zoek adres in de offline kaarten</string>
     <string name="system_locale">Systeem</string>
-    <string name="preferred_locale_descr">App menu-taal (OsmAnd dient opnieuw gestart).</string>
-    <string name="preferred_locale">Taal</string>
+    <string name="preferred_locale_descr">App toon talen (OsmAnd dient opnieuw gestart).</string>
+    <string name="preferred_locale">Toon talen</string>
     <string name="unit_of_length_descr">Wijzig de eenheid van afstand voor metingen.</string>
     <string name="unit_of_length">Afstand eenheden</string>
     <string name="si_mi_feet">Mijlen/voeten</string>
@@ -636,10 +636,10 @@
     <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart).</string>
     <string name="shared_string_online_maps">Online kaarten</string>
     <string name="online_map_settings_descr">Configureer online of bewaarde kaarttegels.</string>
-    <string name="osmand_rastermaps_plugin_description">Geeft toegang tot vele soorten online (zogenaamde tile of raster) kaarten, van vooraf gedefinieerde OSM tiles (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaatkaarten, geologische kaarten, reliëfschaduwlagen, enz. 
-\n 
-\nAl deze kaarten kunnen worden gebruikt als de hoofd(basis)kaart, of als een extra laag of een achtergrondlaag bij een andere basiskaart (zoals de normale offline kaarten van OsmAnd). Om een achtergrondlaag beter te kunnen zien, kunt u elementen van de OsmAnd vectorkaarten eenvoudig verbergen via het menu \'Kaart instellen\'. 
-\n 
+    <string name="osmand_rastermaps_plugin_description">Geeft toegang tot vele soorten online (zogenaamde tile of raster) kaarten, van vooraf gedefinieerde OSM tiles (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaatkaarten, geologische kaarten, reliëfschaduwlagen, enz.
+\n
+\nAl deze kaarten kunnen worden gebruikt als de hoofd(basis)kaart, of als een extra laag of een achtergrondlaag bij een andere basiskaart (zoals de normale offline kaarten van OsmAnd). Om een achtergrondlaag beter te kunnen zien, kunt u elementen van de OsmAnd vectorkaarten eenvoudig verbergen via het menu \'Kaart instellen\'.
+\n
 \nRasterkaarten zijn direct via online bronnen verkrijgbaar of kunnen voor offline gebruik gereedgemaakt worden (en handmatig gekopieerd naar de OsmAnd gegevensmap) als SQLite database door diverse hulpprogramma\'s van derden.</string>
     <string name="osmand_background_plugin_description">Instellingen om tracking en navigatie te kunnen gebruiken met het scherm uit (schakelt de GPS periodiek in).</string>
     <string name="osmand_accessibility_description">"Maakt de toegankelijkheidsopties van het toestel rechtstreeks beschikbaar in OsmAnd. Hiermee kan o.a. de spreeksnelheid van tekst-naar-spraak-stemmen aangepast worden,  D-pad schermnavigatie geconfigureerd worden, een trackball gebruikt worden voor de zoomregeling, of het gebruiken van meldingen via tekst-naar-spraak, bijvoorbeeld het automatisch melden van de positie."</string>
@@ -824,7 +824,7 @@
     <string name="intermediate_point">Tussenpunt %1$s</string>
     <string name="gps_not_available">Schakel GPS in via de instellingen</string>
     <string name="map_widget_show_destination_arrow">Richting van de bestemming tonen</string>
-    <string name="enable_plugin_monitoring_services">Activeer de GPX-Track opnemen- Plugin om de afgelegde weg vast te leggen (GPX-track, online tracking)</string>
+    <string name="enable_plugin_monitoring_services">Activeer de \"GPX-Track opnemen\" Plug-in om de afgelegde weg vast te leggen (GPX-track, online tracking)</string>
     <string name="non_optimal_route_calculation">Bereken mogelijk niet-optimale route voor lange afstanden</string>
     <string name="rendering_attr_roadColors_description">Kies kleurschema voor wegen:</string>
     <string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
@@ -921,7 +921,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd Kaarten &amp; Navigatie</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Kaarten &amp; Navigatie</string>
     <string name="hno">Huisnummer</string>
-    <string name="monitoring_settings">GPX-track</string>
+    <string name="monitoring_settings">Track opnemen</string>
     <string name="monitoring_settings_descr">Stel in hoe uw trips op te nemen.</string>
     <string name="street_name">Straatnaam</string>
     <string name="choose_osmand_theme_descr">Aanpassen van app uitzicht aan uw wensen.</string>
@@ -952,8 +952,8 @@
     <string name="plugin_distance_point">Punt</string>
     <string name="gpx_file_name">GPX-bestandsnaam</string>
     <string name="gpx_saved_sucessfully">GPX-bestand succesvol opgeslagen als {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Deze plug-in voorziet een kaart-widget waarmee u een route kan ontwerpen door op de kaart te tikken, of gebruik te maken (of wijzigen) van bestaande GPX-bestanden. Plan zo een reis en bereken de afstand tussen punten. Het resultaat kan worden bewaard als GPX-bestand, om later te gebruiken als navigatieroute.</string>
-    <string name="osmand_distance_planning_plugin_name">Afstand meten en Route plannen</string>
+    <string name="osmand_distance_planning_plugin_description">Maak paden door op de kaart te tikken of door bestaande GPX-bestanden te gebruiken of te wijzigen om een reis te plannen en de afstand tussen punten te meten. Het resultaat kan worden opgeslagen als een GPX-bestand om later als richtlijn te gebruiken.</string>
+    <string name="osmand_distance_planning_plugin_name">Afstandscalculator en planningstool</string>
     <string name="use_distance_measurement_help">* Tik om een punt te markeren.
 \n* Druk lang op de kaart om het vorige punt te verwijderen. 
 \n* Druk lang en houd vast op een punt om de beschrijving te zien en toe te voegen. 
@@ -1247,7 +1247,7 @@
     <string name="speak_poi">Dichtbij POI</string>
     <string name="shared_string_all">Alles</string>
     <string name="index_tours">Reizen</string>
-    <string name="record_plugin_name">GPX-track opnemen</string>
+    <string name="record_plugin_name">Track opnemen</string>
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
@@ -1462,7 +1462,7 @@
     <string name="shared_string_audio">Geluid</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Foto</string>
-    <string name="delay_to_start_navigation_descr">Kies de wachttijd in om op het route-planning scherm te blijven.</string>
+    <string name="delay_to_start_navigation_descr">Geef de wachttijd op om op het route-planning scherm te blijven.</string>
     <string name="delay_to_start_navigation">Start begeleiding na…</string>
     <string name="shared_string_go">Start</string>
     <string name="action_create">Actietoets aanmaken</string>
@@ -1639,7 +1639,7 @@
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="shared_string_trip_recording">GPX-Track opnemen</string>
+    <string name="shared_string_trip_recording">Track opnemen</string>
     <string name="shared_string_navigation">Navigatie</string>
     <string name="favourites_edit_dialog_title">Informatie over favoriet</string>
     <string name="simulate_your_location_stop_descr">Positiesimulatie beëindigen.</string>
@@ -2058,7 +2058,7 @@
     <string name="gpx_add_track">Meer toevoegen…</string>
     <string name="shared_string_appearance">Weergave</string>
     <string name="trip_rec_notification_settings">Snelle opname activeren</string>
-    <string name="trip_rec_notification_settings_desc">Toon systeemmelding waarmee ritopname toegestaan wordt.</string>
+    <string name="trip_rec_notification_settings_desc">Toon systeemmelding waarmee track opname toegestaan wordt.</string>
     <string name="shared_string_notifications">Meldingen</string>
     <string name="route_calculation">Route berekening</string>
     <string name="rendering_value_fine_name">Fijn</string>
@@ -2359,10 +2359,10 @@
     <string name="shared_string_install">Installeer</string>
     <string name="improve_coverage_mapillary">Verbeter de fotocollectie van Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installeer Mapillary om foto\'s aan deze kaartlocatie toe te voegen.</string>
-    <string name="mapillary_action_descr">Deel uw straatniveau uitzicht via Mapillary.</string>
+    <string name="mapillary_action_descr">Deel uw weergave op straatniveau via Mapillary.</string>
     <string name="mapillary_widget_descr">Snel bijdragen aan Mapillary.</string>
-    <string name="mapillary_descr">Foto\'s van buiten voor iedereen. Ondek plaatsen, werk samen, en leg de wereld vast.</string>
-    <string name="plugin_mapillary_descr">Foto\'s van buiten voor iedereen. Ondek plaatsen, werk samen, en leg de wereld vast.</string>
+    <string name="mapillary_descr">Online foto\'s op straatniveau voor iedereen. Ontdek plaatsen, werk samen, leg de wereld vast.</string>
+    <string name="plugin_mapillary_descr">Foto\'s op straatniveau voor iedereen. Ontdek plaatsen, werk samen, leg de wereld vast.</string>
     <string name="shared_string_permissions">Rechten</string>
     <string name="import_gpx_failed_descr">Kan bestand niet importeren. Controleer of OsmAnd rechten heeft om het bestand te lezen.</string>
     <string name="distance_moving">Gecorrigeerde afstand</string>
@@ -3297,7 +3297,7 @@
     <string name="added_profiles_descr">Door plug-in toegevoegde profielen</string>
     <string name="shared_string_turn_off">Uitschakelen</string>
     <string name="new_plugin_added">Nieuwe plug-in toegevoegd</string>
-    <string name="join_segments">verbind segmenten</string>
+    <string name="join_segments">Segmenten samenvoegen</string>
     <string name="release_3_4">• App profiles: Create a custom profile for your own needs, with a custom icon and color 
 \n 
 \n • Nu aan te passen standaard en min / max snelheden voor elk profiel 
@@ -3356,7 +3356,7 @@
     <string name="multimedia_notes_prefs_descr">Afbeeldingsgrootte, geluids- en videokwaliteit</string>
     <string name="osm_editing_prefs_descr">Login, wachtwoord, offline bewerken</string>
     <string name="accessibility_prefs_descr">Kies icoon, kleur en naam</string>
-    <string name="live_monitoring_descr">Laat u toe uw positie te delen dankzij reisopname.</string>
+    <string name="live_monitoring_descr">Laat u toe uw positie te delen dankzij track opname.</string>
     <string name="live_monitoring">Online volgen</string>
     <string name="save_track_logging_accuracy">Opnamenauwkeurigheid</string>
     <string name="tracks_view_descr">De opgenomen tracks zijn opgeslagen in %1$s, of in de OsmAnd-map.</string>
@@ -3406,8 +3406,8 @@
     <string name="sunrise_at">Zonsopkomst om %1$s</string>
     <string name="accessibility_mode_disabled">Toegankelijkheidsmodus is uitgeschakeld in de Android systeeminstellingen.</string>
     <string name="use_system_screen_timeout">Gebruik de scherm time-out van het systeem</string>
-    <string name="use_system_screen_timeout_promo">Standaard niet actief: Wanneer OsmAnd in de voorgrond actief is zal het scherm niet uitschakelen. 
-\n 
+    <string name="use_system_screen_timeout_promo">Standaard niet actief: Wanneer OsmAnd in de voorgrond actief is zal het scherm niet uitschakelen.
+\n
 \nBij activatie zal OsmAnd de time-out instellingen van het systeem volgen.</string>
     <string name="clear_recorded_data">Verwijder opgenomen gegevens</string>
     <string name="copy_coordinates">Kopieer coördinaten</string>
@@ -3530,7 +3530,7 @@
     <string name="shared_string_terrain">Terrein</string>
     <string name="slope_description">Helling gebruikt kleuren om de steilheid van het terrein te visualiseren.</string>
     <string name="terrain_slider_description">Stel de minimale en maximale zoomniveaus in waarbij de laag wordt weergegeven.</string>
-    <string name="slope_download_description">Om Hellingen te tonen zijn extra kaarten nodig.</string>
+    <string name="slope_download_description">Om hellingen te tonen zijn extra kaarten nodig.</string>
     <string name="slope_read_more">Meer over Hellingen in %1$s.</string>
     <string name="shared_string_transparency">Transparantie</string>
     <string name="shared_string_zoom_levels">Zoomniveaus</string>
@@ -3666,7 +3666,7 @@
     <string name="shared_string_legal">Legaal</string>
     <string name="speed_camera_pois">Snelheidscamera’s als POI’s</string>
     <string name="hillshade_description">De reliëfschaduwkaart maakt gebruik van donkere schaduwen om hellingen, bergtoppen en valleien te visualiseren.</string>
-    <string name="hillshade_download_description">Om Reliëfschaduw te tonen zijn extra kaarten nodig.</string>
+    <string name="hillshade_download_description">Om reliëfschaduw te tonen zijn extra kaarten nodig.</string>
     <string name="shared_string_hillshade">Reliëfschaduw</string>
     <string name="terrain_empty_state_text">Selecteer deze optie om een reliëfschaduw- of hellingskaart te tonen. Op onze site staat meer informatie over deze kaarttypes.</string>
     <string name="map_source_zoom_levels_descr">Heeft invloed op de weergave bij gebruik als kaart of als extra kaartlaag/achtergrondlaag. 
@@ -3696,4 +3696,79 @@
     <string name="app_mode_wheelchair_forward">Rolstoel vooraanzicht</string>
     <string name="osm_edit_closed_note">Opgeloste OSM-opmerking</string>
     <string name="app_mode_go_cart">Kart</string>
+    <string name="map_widget_monitoring">Track opnemen</string>
+    <string name="save_global_track_interval_descr">Specificeer het registratie-interval voor de algemene trackregistratie (ingeschakeld via de track-widget op de kaart).</string>
+    <string name="gpx_monitoring_stop">Pauzeer track opname</string>
+    <string name="gpx_monitoring_start">Hervat track opnemen</string>
+    <string name="street_level_imagery">Beelden op srraatniveau</string>
+    <string name="select_track_width">Selecteer dikte</string>
+    <string name="track_show_start_finish_icons">Toon start en aankomst pictogrammen</string>
+    <string name="gpx_direction_arrows">Richtingaanwijzers</string>
+    <string name="add_hidden_group_info">Het toegevoegde punt zal niet zichtbaar zijn op de kaart, aangezien de geselecteerde groep verborgen is, je kan het vinden in \"% s\".</string>
+    <string name="system_default_theme">Standaard</string>
+    <string name="route_between_points">Route tussen punten</string>
+    <string name="route_between_points_warning_desc">"Vervolgens, zet  uw track vast op de dichtstbijzijnde toegestane weg met een van uw navigatieprofielen om deze optie te gebruiken."</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s gegevens alleen beschikbaar op de wegen, u moet een route berekenen met behulp van \"Route tussen punten\" om deze te krijgen.</string>
+    <string name="route_between_points_desc">Selecteer hoe de punten verbonden worden, via een rechte lijn, of een route berekenen tussen de punten zoals hieronder aangegeven.</string>
+    <string name="route_between_points_next_segment_button_desc">Alleen het volgende segment wordt opnieuw berekend met het geselecteerde profiel.</string>
+    <string name="next_segment">Volgende segment</string>
+    <string name="all_next_segments">Alle volgende segmenten</string>
+    <string name="all_next_segments_will_be_recalc">Alle volgende segmenten worden opnieuw berekend met het geselecteerde profiel.</string>
+    <string name="whole_track">De ganse track</string>
+    <string name="route_between_points_whole_track_button_desc">De ganse track wordt herberekend volgens het geselecteerde profiel.</string>
+    <string name="pass_whole_track_descr">Punt van de track om te navigeren</string>
+    <string name="shared_string_save_as_gpx">Bewaar als nieuw trackbestand</string>
+    <string name="save_as_new_track">Bewaar als nieuwe track</string>
+    <string name="release_3_7">Nieuwe offline pistekaarten
+\n
+\n • Volledige aanpassing van favorieten en GPX-waypoints - aangepaste kleuren, pictogrammen, vormen
+\n
+\n • Pas de volgorde van items aan in \"Contextmenu\", \"Configureer kaart\" en \"........\"
+\n
+\n •Wikipedia als een afzonderlijke laag in Kaart configureren, selecteer alleen de benodigde talen
+\n
+\n • Creëer uw eigen POI-filter / kaarten met totale flexibiliteit
+\n
+\n • Opties toegevoegd om instellingen voor aangepaste profielen te herstellen
+\n
+\n • Volledige GPX-routes van navigatieondersteunende rijstroken en volledige afslaginstructies
+\n
+\n •Verbeterde UI-formaten op tablets
+\n
+\n •Herstel bugs met RTL
+\n
+\n</string>
+    <string name="add_to_a_track">Voeg toe aan een track</string>
+    <string name="add_segment_to_the_track">Voeg toe aan een trackbestand</string>
+    <string name="simplified_track">Vereenvoudigde track</string>
+    <string name="simplified_track_description">Alleen de routelijn wordt opgeslagen, de waypoints worden verwijderd.</string>
+    <string name="shared_string_done">Bewaar</string>
+    <string name="reverse_route">Route omkeren</string>
+    <string name="route_between_points_add_track_desc">"Selecteer een track waaraan je een nieuw segment wil  toevoegen."</string>
+    <string name="plan_route_select_track_file_for_open">Selecteer een trackbestand om te openen.</string>
+    <string name="plan_route_exit_dialog_descr">Weet u zeker dat u alle wijzigingen in de geplande route wilt annuleren door deze te sluiten\?</string>
+    <string name="plan_route_trim_before">Opsmukken voor</string>
+    <string name="plan_route_trim_after">Opsmukken na</string>
+    <string name="plan_route_change_route_type_before">Wijzig het routetype voor</string>
+    <string name="plan_route_change_route_type_after">Wijzig het routetype na</string>
+    <string name="release_3_8">• Bijgewerkt Plan een route functie: maakt het mogelijk om verschillende navigatietypes per segment te gebruiken en tracks op te nemen
+\n
+\n • Nieuw menu voor tracks: selecteer kleur, dikte, weergeven van richtingspijlen, start / finish-pictogrammen.
+\n
+\n • Verbeterde zichtbaarheid van fietsknooppunten.
+\n
+\n • Tracks kun je nu aantikken en hebben een contextmenu met basisinformatie.
+\n
+\n • Verbeterde zoekalgoritmen.
+\n
+\n • Verbeterde volg track-opties bij navigatie
+\n
+\n • Problemen opgelost met het importeren / exporteren van profielinstellingen
+\n
+\n</string>
+    <string name="plan_route_import_track">Importeer track</string>
+    <string name="plan_route_last_edited">Laatst bewerkt</string>
+    <string name="plan_route_create_new_route">Maak een nieuwe route</string>
+    <string name="plan_route_open_existing_track">Open een bestaande track</string>
+    <string name="plan_a_route">Plan een route</string>
 </resources>

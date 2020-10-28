@@ -3845,7 +3845,7 @@
     <string name="simplified_track">Trace simplifiée</string>
     <string name="shared_string_file_name">Nom de fichier</string>
     <string name="system_default_theme">Par défaut</string>
-    <string name="open_saved_track">Ouvrir une trace enregistrée</string>
+    <string name="open_saved_track">Ouvrir la trace enregistrée</string>
     <string name="shared_string_is_saved">a été enregistré</string>
     <string name="one_point_error">Veuillez ajouter au moins deux points.</string>
     <string name="import_track_descr">Sélectionnez le fichier de trace à suivre ou importez-le depuis votre appareil.</string>
@@ -3912,4 +3912,6 @@
 \nLe graphique sera disponible à l\'issue du calcul.</string>
     <string name="snowmobile_render_descr">Pour la conduite en motoneige avec des routes et des pistes dédiées.</string>
     <string name="shared_string_graph">Graphique</string>
+    <string name="app_mode_gap">Écart</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
 </resources>

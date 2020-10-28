@@ -3265,7 +3265,7 @@
     <string name="language_and_output">Język i wyjście</string>
     <string name="plugins_settings">Ustawienia wtyczki</string>
     <string name="shared_string_by_default">Domyślnie</string>
-    <string name="download_detailed_map">Pobierz szczegółową mapę %S, aby zobaczyć ten obszar.</string>
+    <string name="download_detailed_map">Pobierz szczegółową mapę %s, aby zobaczyć ten obszar.</string>
     <string name="change_data_storage_full_description">Przenieść pliki danych OsmAnd do nowego położenia\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Proszę wprowadzić ścieżkę do katalogu</string>
@@ -3769,11 +3769,11 @@
     <string name="uninstall_speed_cameras">Odinstaluj fotoradary</string>
     <string name="shared_string_legal">Prawny</string>
     <string name="speed_camera_pois">Punkty fotoradarów</string>
-    <string name="speed_cameras_legal_descr">W niektórych krajachi regionach uzywanie aplikacji ostrzegających o fotoradarach jest zabronione przez prawo. 
+    <string name="speed_cameras_legal_descr">W niektórych krajach i regionach używanie aplikacji ostrzegających o fotoradarach jest zabronione przez prawo.
 \n
-\nMusisz dokonać wyboru w zależności od prawa danego kraju. 
+\nMusisz dokonać wyboru w zależności od prawa danego kraju.
 \n
-\nWybierz %1$S i będziesz otrzymywać powiadomienia i ostrzeżenia o fotoradarach. 
+\nWybierz %1$s i będziesz otrzymywać powiadomienia i ostrzeżenia o fotoradarach.
 \n
 \nWybierz %2$s. Wszystkie dane o fotoradarach: ostrzeżenia, powiadomienia, miejsca użyteczne zostaną usunięte, aż OsmAnd zostanie zainstalowany ponownie.</string>
     <string name="keep_active">Nie wyłączaj</string>
@@ -3814,7 +3814,7 @@
     <string name="gpx_split_interval_none_descr">Wybierz żądaną opcję podziału: według czasu lub odległości.</string>
     <string name="track_coloring_solid">Stałe</string>
     <string name="gpx_parse_error">OsmAnd GPX nie jest dobrze uformowany, prosimy o kontakt z zespołem wsparcia technicznego w celu dalszego zbadania sprawy.</string>
-    <string name="turn_screen_on_wake_time_descr">Wybierz limit czasu ekranu po przebudzeniu. (\"%1$s\" nie powoduje przekroczenia limitu czasu).</string>
+    <string name="turn_screen_on_wake_time_descr">Wybierz limit czasu ekranu po przebudzeniu. (\"%1$s\" nie powoduje przekroczenia limitu czasu.)</string>
     <string name="track_show_start_finish_icons">Pokaż ikony początku i końca</string>
     <string name="gpx_split_interval_descr">Wybierz przedział czasowy, w którym będą wyświetlane znaki z odległością lub czasem na torze.</string>
     <string name="shared_string_custom">Dostosowany</string>
@@ -3891,7 +3891,7 @@
     <string name="open_saved_track">Otwórz zapisaną ścieżkę</string>
     <string name="shared_string_is_saved">jest zapisywany</string>
     <string name="one_point_error">Należy dodać co najmniej dwa punkty.</string>
-    <string name="disable_recording_once_app_killed_descrp">Wstrzyma rejestrowanie ścieżki, gdy aplikacja zostanie zabita (za pośrednictwem ostatnich aplikacji). (Wskazanie tła OsmAnd znika z paska powiadomień Androida).</string>
+    <string name="disable_recording_once_app_killed_descrp">Wstrzyma rejestrowanie ścieżki, gdy aplikacja zostanie zabita (za pośrednictwem ostatnich aplikacji). (Wskazanie tła OsmAnd znika z paska powiadomień Androida.)</string>
     <string name="shared_string_redo">Ponów</string>
     <string name="release_3_8">• Zaktualizowana funkcja planu trasy: umożliwia korzystanie z różnych typów nawigacji na segment i dołączanie ścieżek
 \n
@@ -3933,4 +3933,6 @@
     <string name="perform_oauth_authorization">Zaloguj się przez OAuth</string>
     <string name="clear_osm_token">Wyczyść token OpenStreetMap OAuth</string>
     <string name="osm_edit_logout_success">Wylogowanie powiodło się</string>
+    <string name="file_already_imported">Plik jest już zaimportowany do OsmAnd</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>
