@@ -10,6 +10,8 @@ import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
@@ -28,8 +30,8 @@ import java.util.Set;
 public class ProfileSettingsItem extends OsmandSettingsItem {
 
 	private ApplicationMode appMode;
-	private ApplicationMode.ApplicationModeBuilder builder;
-	private ApplicationMode.ApplicationModeBean modeBean;
+	private ApplicationModeBuilder builder;
+	private ApplicationModeBean modeBean;
 
 	private JSONObject additionalPrefsJson;
 	private Set<String> appModeBeanPrefsIds;
@@ -39,7 +41,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 		this.appMode = appMode;
 	}
 
-	public ProfileSettingsItem(@NonNull OsmandApplication app, @Nullable ProfileSettingsItem baseItem, @NonNull ApplicationMode.ApplicationModeBean modeBean) {
+	public ProfileSettingsItem(@NonNull OsmandApplication app, @Nullable ProfileSettingsItem baseItem, @NonNull ApplicationModeBean modeBean) {
 		super(app.getSettings(), baseItem);
 		this.modeBean = modeBean;
 		builder = ApplicationMode.fromModeBean(app, modeBean);
@@ -66,7 +68,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 		return appMode;
 	}
 
-	public ApplicationMode.ApplicationModeBean getModeBean() {
+	public ApplicationModeBean getModeBean() {
 		return modeBean;
 	}
 

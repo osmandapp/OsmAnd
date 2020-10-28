@@ -35,6 +35,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
@@ -260,6 +261,11 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				title.setText(GpxUiHelper.getGpxTitle(fileName));
 				setupIcon(icon, R.drawable.ic_action_route_distance, itemSelected);
 				break;
+			case GLOBAL:
+				String name = ((GlobalSettingsItem) currentItem).getPublicName(app);
+				title.setText(name);
+				setupIcon(icon, R.drawable.ic_action_settings, itemSelected);
+				break;
 			case OSM_NOTES:
 				title.setText(((OsmNotesPoint) currentItem).getText());
 				setupIcon(icon, R.drawable.ic_action_osm_note_add, itemSelected);
@@ -379,6 +385,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.shared_string_tracks;
 			case MULTIMEDIA_NOTES:
 				return R.string.audionotes_plugin_name;
+			case GLOBAL:
+				return R.string.general_settings_2;
 			case OSM_NOTES:
 				return R.string.osm_notes;
 			case OSM_EDITS:

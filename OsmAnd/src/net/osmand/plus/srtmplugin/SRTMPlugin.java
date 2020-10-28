@@ -24,7 +24,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -438,9 +437,9 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public String getPrefDescription(final Context ctx, final RenderingRuleProperty p, final CommonPreference<String> pref) {
 		if (!Algorithms.isEmpty(pref.get())) {
-			return SettingsActivity.getStringPropertyValue(ctx, pref.get());
+			return AndroidUtils.getRenderingStringPropertyValue(ctx, pref.get());
 		} else {
-			return SettingsActivity.getStringPropertyValue(ctx, p.getDefaultValueDescription());
+			return AndroidUtils.getRenderingStringPropertyValue(ctx, p.getDefaultValueDescription());
 		}
 	}
 
@@ -448,7 +447,7 @@ public class SRTMPlugin extends OsmandPlugin {
 									final RenderingRuleProperty p,
 									final CommonPreference<String> pref,
 									final Runnable callback) {
-		final String propertyDescr = SettingsActivity.getStringPropertyDescription(activity,
+		final String propertyDescr = AndroidUtils.getRenderingStringPropertyDescription(activity,
 				p.getAttrName(), p.getName());
 		boolean nightMode = isNightMode(activity, app);
 		int themeRes = getThemeRes(activity, app);
@@ -467,11 +466,11 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 
 		String[] possibleValuesString = new String[possibleValues.length + 1];
-		possibleValuesString[0] = SettingsActivity.getStringPropertyValue(activity,
+		possibleValuesString[0] = AndroidUtils.getRenderingStringPropertyValue(activity,
 				p.getDefaultValueDescription());
 
 		for (int j = 0; j < possibleValues.length; j++) {
-			possibleValuesString[j + 1] = SettingsActivity.getStringPropertyValue(activity,
+			possibleValuesString[j + 1] = AndroidUtils.getRenderingStringPropertyValue(activity,
 					possibleValues[j]);
 		}
 

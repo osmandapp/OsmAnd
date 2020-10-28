@@ -9,11 +9,12 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
 import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 
-class SqliteTileImportTask extends BaseImportAsyncTask<Void, Void, String> {
+class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private Uri uri;
 	private String name;

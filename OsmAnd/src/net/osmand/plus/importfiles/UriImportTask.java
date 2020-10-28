@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.importfiles.ImportHelper.ImportType;
 import net.osmand.util.Algorithms;
 
@@ -32,7 +33,7 @@ import static net.osmand.util.Algorithms.SQLITE_FILE_SIGNATURE;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 import static net.osmand.util.Algorithms.ZIP_FILE_SIGNATURE;
 
-class UriImportTask extends BaseImportAsyncTask<Void, Void, String> {
+class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private ImportHelper importHelper;
 	private Uri uri;

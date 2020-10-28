@@ -30,6 +30,7 @@ import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 
@@ -434,7 +435,7 @@ public class SettingsHelper {
 		return settingsItems;
 	}
 
-	public Map<ExportSettingsType, List<?>> getAdditionalData() {
+	public Map<ExportSettingsType, List<?>> getAdditionalData(boolean globalExport) {
 		Map<ExportSettingsType, List<?>> dataList = new HashMap<>();
 
 		QuickActionRegistry registry = app.getQuickActionRegistry();
@@ -512,6 +513,13 @@ public class SettingsHelper {
 				dataList.put(ExportSettingsType.TRACKS, files);
 			}
 		}
+		if (globalExport) {
+			List<ApplicationModeBean> appModeBeans = new ArrayList<>();
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				appModeBeans.add(mode.toModeBean());
+			}
+			dataList.put(ExportSettingsType.PROFILE, appModeBeans);
+		}
 		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null) {
 			List<OsmNotesPoint> notesPointList = osmEditingPlugin.getDBBug().getOsmbugsPoints();
@@ -553,6 +561,7 @@ public class SettingsHelper {
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<ApplicationModeBean> appModeBeans = new ArrayList<>();
 		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
 
@@ -571,6 +580,8 @@ public class SettingsHelper {
 				}
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
+			} else if (object instanceof ApplicationModeBean) {
+				appModeBeans.add((ApplicationModeBean) object);
 			} else if (object instanceof OsmNotesPoint) {
 				osmNotesPointList.add((OsmNotesPoint) object);
 			} else if (object instanceof OpenstreetmapPoint) {
@@ -588,6 +599,14 @@ public class SettingsHelper {
 		}
 		if (!avoidRoads.isEmpty()) {
 			settingsItems.add(new AvoidRoadsSettingsItem(app, avoidRoads));
+		}
+		if (!appModeBeans.isEmpty()) {
+			for (ApplicationModeBean modeBean : appModeBeans) {
+				ApplicationMode mode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
+				if (mode != null) {
+					settingsItems.add(new ProfileSettingsItem(app, mode));
+				}
+			}
 		}
 		if (!osmNotesPointList.isEmpty()) {
 			settingsItems.add(new OsmNotesSettingsItem(app, osmNotesPointList));
@@ -610,6 +629,7 @@ public class SettingsHelper {
 		List<File> tracksFilesList = new ArrayList<>();
 		List<FileSettingsItem> mapFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<GlobalSettingsItem> globalSettingsItems = new ArrayList<>();
 		List<OsmNotesPoint> notesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
 		for (SettingsItem item : settingsItems) {
@@ -666,6 +686,9 @@ public class SettingsHelper {
 						avoidRoads.addAll(avoidRoadsItem.getItems());
 					}
 					break;
+				case GLOBAL:
+					globalSettingsItems.add((GlobalSettingsItem) item);
+					break;
 				case OSM_NOTES:
 					OsmNotesSettingsItem osmNotesSettingsItem = (OsmNotesSettingsItem) item;
 					if (importComplete) {
@@ -713,6 +736,9 @@ public class SettingsHelper {
 		}
 		if (!tracksFilesList.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.TRACKS, tracksFilesList);
+		}
+		if (!globalSettingsItems.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.GLOBAL, globalSettingsItems);
 		}
 		if (!notesPointList.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.OSM_NOTES, notesPointList);

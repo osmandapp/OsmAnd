@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -24,7 +25,6 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.render.RenderingRuleProperty;
 
@@ -105,8 +105,7 @@ public class TransportLinesMenu {
 		for (int i = 0; i < transportRules.size(); i++) {
 			RenderingRuleProperty p = transportRules.get(i);
 			String attrName = p.getAttrName();
-			String propertyName = SettingsActivity
-					.getStringPropertyName(themedCtx, attrName, p.getName());
+			String propertyName = AndroidUtils.getRenderingStringPropertyName(themedCtx, attrName, p.getName());
 			vals[i] = propertyName;
 			Integer iconId = transportIcons.get(attrName);
 			if (iconId != null) {
