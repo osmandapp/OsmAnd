@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
@@ -47,7 +48,10 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 		return new OsmandSettingsItemReader<OsmandSettingsItem>(this, getSettings()) {
 			@Override
 			protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-				preference.readFromJson(json, null);
+				if ((preference instanceof CommonPreference) && (((CommonPreference<?>) preference).isShared())
+						|| getSettings().APPLICATION_MODE.getId().equals(preference.getId())) {
+					preference.readFromJson(json, null);
+				}
 			}
 		};
 	}
@@ -58,7 +62,10 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 		return new OsmandSettingsItemWriter<OsmandSettingsItem>(this, getSettings()) {
 			@Override
 			protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-				preference.writeToJson(json, null);
+				if ((preference instanceof CommonPreference) && (((CommonPreference<?>) preference).isShared())
+						|| getSettings().APPLICATION_MODE.getId().equals(preference.getId())) {
+					preference.writeToJson(json, null);
+				}
 			}
 		};
 	}

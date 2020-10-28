@@ -22,6 +22,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	private boolean cache;
 	private boolean global;
+	private boolean shared;
 
 
 	public CommonPreference(OsmandSettings settings, String id, T defaultValue) {
@@ -68,6 +69,11 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	public final CommonPreference<T> makeProfile() {
 		global = false;
+		return this;
+	}
+
+	public final CommonPreference<T> makeShared() {
+		shared = true;
 		return this;
 	}
 
@@ -198,6 +204,10 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	public final boolean isGlobal() {
 		return global;
+	}
+
+	public final boolean isShared() {
+		return shared;
 	}
 
 	// TODO final

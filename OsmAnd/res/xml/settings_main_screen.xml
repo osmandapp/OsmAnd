@@ -54,6 +54,13 @@
 		tools:icon="@drawable/ic_action_import" />
 
 	<Preference
+		android:key="export_profiles"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/shared_string_export"
+		tools:icon="@drawable/ic_action_export" />
+
+	<Preference
 		android:key="reorder_profiles"
 		android:layout="@layout/preference_button"
 		android:persistent="false"
