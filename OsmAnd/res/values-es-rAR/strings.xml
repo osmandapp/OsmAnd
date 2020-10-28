@@ -3551,14 +3551,14 @@
     <string name="saving_new_profile">Guardando el nuevo perfil</string>
     <string name="profile_backup_failed">No se pudo respaldar el perfil.</string>
     <string name="clear_recorded_data_warning">¿Borrar los datos registrados\?</string>
-    <string name="importing_from">Importación de datos de %1$s</string>
-    <string name="shared_string_importing">Importación</string>
+    <string name="importing_from">Importando de datos de «%1$s»</string>
+    <string name="shared_string_importing">Importando</string>
     <string name="checking_for_duplicate_description">OsmAnd comprueba %1$s para ver si hay duplicados con los elementos existentes en la aplicación.
 \n
 \nPuede llevar algún tiempo.</string>
     <string name="items_added">Elementos añadidos</string>
     <string name="shared_string_import_complete">Importación completa</string>
-    <string name="import_complete_description">Todos los datos de %1$s son importados, puedes usar los botones de abajo para abrir la parte necesaria de la aplicación para manejarla.</string>
+    <string name="import_complete_description">Todos los datos de «%1$s» fueron importados. Puedes usar los botones de abajo para gestionar la sección necesaria de la aplicación.</string>
     <string name="shared_string_min">Min</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="shared_string_terrain">Terreno</string>
