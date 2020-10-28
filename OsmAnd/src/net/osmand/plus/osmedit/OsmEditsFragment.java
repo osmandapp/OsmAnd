@@ -781,7 +781,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					if (point.getGroup() == Group.POI) {
 						OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 						WptPt wpt = new WptPt();
-						wpt.name = getTagsString(p);
+						wpt.name = p.getTagsString();
 						wpt.lat = p.getLatitude();
 						wpt.lon = p.getLongitude();
 						wpt.desc = "id: " + String.valueOf(p.getId()) +
@@ -815,24 +815,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			}
 			sb.append(oscFile ? ".osc" : IndexConstants.GPX_FILE_EXT);
 			return sb.toString();
-		}
-
-		private String getTagsString(OpenstreetmapPoint point) {
-			StringBuilder sb = new StringBuilder();
-			for (String tag : point.getEntity().getTagKeySet()) {
-				String val = point.getEntity().getTag(tag);
-				if (isNotValid(tag, val)) {
-					continue;
-				}
-				sb.append(tag).append(" : ");
-				sb.append(val).append("; ");
-			}
-			return sb.toString();
-		}
-
-		private boolean isNotValid(String tag, String val) {
-			return val == null || val.length() == 0 || tag.length() == 0
-					|| tag.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || tag.equals("poi_type_tag");
 		}
 
 		private void writeContent(XmlSerializer sz, OsmPoint[] points, OsmPoint.Action a) throws IllegalArgumentException, IllegalStateException, IOException {
@@ -878,7 +860,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		private void writeTags(XmlSerializer sz, Entity p) {
 			for (String tag : p.getTagKeySet()) {
 				String val = p.getTag(tag);
-				if (isNotValid(tag, val)) {
+				if (p.isNotValid(tag)) {
 					continue;
 				}
 				try {

@@ -114,6 +114,14 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 				holder.title.setText(R.string.shared_string_tracks);
 				break;
+			case OSM_NOTES:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_osm_note_add, activeColorRes));
+				holder.title.setText(R.string.osm_notes);
+				break;
+			case OSM_EDITS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_info_dark, activeColorRes));
+				holder.title.setText(R.string.osm_edit_modified_poi);
+				break;
 		}
 	}
 

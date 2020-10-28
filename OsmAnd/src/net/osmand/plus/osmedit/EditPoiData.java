@@ -17,15 +17,15 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
 public class EditPoiData {
 	private static final Log LOG = PlatformUtil.getLog(EditPoiData.class);
 	private Set<TagsChangedListener> mListeners = new HashSet<>();
-	private LinkedHashMap<String, String > tagValues = new LinkedHashMap<String, String>();
+	private final LinkedHashMap<String, String> tagValues = new LinkedHashMap<String, String>();
 	private boolean isInEdit = false;
 	private Entity entity;
-	
-	public static final String POI_TYPE_TAG = "poi_type_tag";
-	public static final String REMOVE_TAG_PREFIX = "----";
+
 	public static final String REMOVE_TAG_VALUE = "DELETE";
 	private boolean hasChangesBeenMade = false;
 	private Map<String, PoiType> allTranslatedSubTypes;
@@ -123,7 +123,7 @@ public class EditPoiData {
 		checkNotInEdit();
 		try {
 			isInEdit = true;
-			tagValues.remove(REMOVE_TAG_PREFIX+tag);
+			tagValues.remove(Entity.REMOVE_TAG_PREFIX + tag);
 			String oldValue = tagValues.get(tag);
 			if (oldValue == null || !oldValue.equals(value)) {
 				changedTags.add(tag);
@@ -154,9 +154,9 @@ public class EditPoiData {
 	
 	public void removeTag(String tag) {
 		checkNotInEdit();
-		try { 
+		try {
 			isInEdit = true;
-			tagValues.put(REMOVE_TAG_PREFIX+tag, REMOVE_TAG_VALUE);
+			tagValues.put(Entity.REMOVE_TAG_PREFIX + tag, REMOVE_TAG_VALUE);
 			tagValues.remove(tag);
 			changedTags.remove(tag);
 			notifyDatasetChanged(tag);
@@ -216,7 +216,7 @@ public class EditPoiData {
 			PoiType pt = getPoiTypeDefined();
 			String editOsmTag = pt != null ? pt.getEditOsmTag() : null;
 			if (editOsmTag != null) {
-				removeTypeTagWithPrefix(!tagValues.containsKey(REMOVE_TAG_PREFIX + editOsmTag));
+				removeTypeTagWithPrefix(!tagValues.containsKey(Entity.REMOVE_TAG_PREFIX + editOsmTag));
 				currentPoiType = pt;
 				String tagVal = pt.getEditOsmValue() != null ? pt.getEditOsmValue() : "";
 				tagValues.put(editOsmTag, tagVal);
@@ -237,11 +237,11 @@ public class EditPoiData {
 	private void removeTypeTagWithPrefix(boolean needRemovePrefix) {
 		if (currentPoiType != null) {
 			if (needRemovePrefix) {
-				tagValues.put(REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag(), REMOVE_TAG_VALUE);
-				tagValues.put(REMOVE_TAG_PREFIX + currentPoiType.getOsmTag2(), REMOVE_TAG_VALUE);
+				tagValues.put(Entity.REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag(), REMOVE_TAG_VALUE);
+				tagValues.put(Entity.REMOVE_TAG_PREFIX + currentPoiType.getOsmTag2(), REMOVE_TAG_VALUE);
 			} else {
-				tagValues.remove(REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag());
-				tagValues.remove(REMOVE_TAG_PREFIX + currentPoiType.getOsmTag2());
+				tagValues.remove(Entity.REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag());
+				tagValues.remove(Entity.REMOVE_TAG_PREFIX + currentPoiType.getOsmTag2());
 			}
 			removeCurrentTypeTag();
 		}

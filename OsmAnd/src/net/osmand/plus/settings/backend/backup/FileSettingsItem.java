@@ -21,11 +21,15 @@ import java.io.OutputStream;
 
 public class FileSettingsItem extends StreamSettingsItem {
 
+
+
 	public enum FileSubtype {
 		UNKNOWN("", null),
 		OTHER("other", ""),
 		ROUTING_CONFIG("routing_config", IndexConstants.ROUTING_PROFILES_DIR),
 		RENDERING_STYLE("rendering_style", IndexConstants.RENDERERS_DIR),
+		WIKI_MAP("wiki_map", IndexConstants.WIKI_INDEX_DIR),
+		SRTM_MAP("srtm_map", IndexConstants.SRTM_INDEX_DIR),
 		OBF_MAP("obf_map", IndexConstants.MAPS_PATH),
 		TILES_MAP("tiles_map", IndexConstants.TILES_INDEX_DIR),
 		GPX("gpx", IndexConstants.GPX_INDEX_DIR),
@@ -39,6 +43,10 @@ public class FileSettingsItem extends StreamSettingsItem {
 		FileSubtype(String subtypeName, String subtypeFolder) {
 			this.subtypeName = subtypeName;
 			this.subtypeFolder = subtypeFolder;
+		}
+
+		public boolean isMap() {
+			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP;
 		}
 
 		public String getSubtypeName() {
@@ -68,8 +76,18 @@ public class FileSettingsItem extends StreamSettingsItem {
 					case UNKNOWN:
 					case OTHER:
 						break;
+					case SRTM_MAP:
+						if (name.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+							return subtype;
+						}
+						break;
+					case WIKI_MAP:
+						if (name.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+							return subtype;
+						}
+						break;
 					case OBF_MAP:
-						if (name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+						if (name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) && !name.contains(File.separator)) {
 							return subtype;
 						}
 						break;
@@ -93,6 +111,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	protected File file;
 	private File appPath;
 	protected FileSubtype subtype;
+	private long size;
 
 	public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
 		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
@@ -169,6 +188,14 @@ public class FileSettingsItem extends StreamSettingsItem {
 		if (subtype != null) {
 			json.put("subtype", subtype.getSubtypeName());
 		}
+	}
+
+	public long getSize() {
+		return size;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
 	}
 
 	@NonNull
