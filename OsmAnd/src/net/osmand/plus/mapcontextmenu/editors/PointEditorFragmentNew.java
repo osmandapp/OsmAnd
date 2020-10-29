@@ -567,23 +567,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 										: R.color.inactive_buttons_and_links_bg_light)));
 	}
 
-	private void createIconSelector() {
-		iconCategories = new LinkedHashMap<>();
-		try {
-			JSONObject obj = new JSONObject(loadJSONFromAsset());
-			JSONObject categories = obj.getJSONObject("categories");
-			for (int i = 0; i < categories.length(); i++) {
-				JSONArray names = categories.names();
-				JSONObject icons = categories.getJSONObject(names.get(i).toString());
-				iconCategories.put(names.get(i).toString(), icons.getJSONArray("icons"));
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		selectedIconCategory = getInitCategory();
-		createIconForCategory();
-	}
-
 	private String getInitCategory() {
 		for (int j = 0; j < iconCategories.values().size(); j++) {
 			JSONArray iconJsonArray = (JSONArray) iconCategories.values().toArray()[j];
@@ -602,6 +585,25 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	private String getNameFromIconId(int iconId) {
 		return app.getResources().getResourceEntryName(iconId).replaceFirst("mx_", "");
+	}
+
+	private void createIconSelector() {
+		iconCategories = new LinkedHashMap<>();
+		try {
+			JSONObject obj = new JSONObject(loadJSONFromAsset());
+			JSONObject categories = obj.getJSONObject("categories");
+			for (int i = 0; i < categories.length(); i++) {
+				JSONArray names = categories.names();
+				String name = names.get(i).toString();
+				JSONObject icons = categories.getJSONObject(name);
+				String translatedName = AndroidUtils.getIconStringPropertyName(app, name);
+				iconCategories.put(translatedName, icons.getJSONArray("icons"));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		selectedIconCategory = getInitCategory();
+		createIconForCategory();
 	}
 
 	private void createIconForCategory() {

@@ -15,12 +15,12 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton.OnBottomBtnClickListener;
@@ -125,7 +125,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 			for (int i = 0; i < properties.size(); i++) {
 				RenderingRuleProperty property = properties.get(i);
 				final CommonPreference<Boolean> pref = preferences.get(i);
-				final String propertyName = SettingsActivity.getStringPropertyName(app, property.getAttrName(), property.getName());
+				final String propertyName = AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName());
 				if (STREET_LIGHTING.equals(property.getAttrName()) && streetLightNightProp != null) {
 					final CommonPreference<Boolean> streetLightsNightPref = preferences.get(properties.indexOf(streetLightNightProp));
 					final BottomSheetItemTwoChoicesButton[] item = new BottomSheetItemTwoChoicesButton[1];

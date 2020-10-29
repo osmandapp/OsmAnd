@@ -1974,7 +1974,7 @@
     <string name="downloads">Загрузки</string>
     <string name="show_free_version_banner">Показывать баннер бесплатной версии</string>
     <string name="show_free_version_banner_description">Показывать баннер бесплатной версии даже в платной версии.</string>
-    <string name="confirm_download_roadmaps">В карте дорог не необходимости, так как у вас уже есть стандартная (полная) карта. Загрузить в любом случае?</string>
+    <string name="confirm_download_roadmaps">В карте дорог нет необходимости, так как у вас уже есть стандартная (полная) карта. Загрузить в любом случае?</string>
     <string name="value_downloaded_of_max">%1$.1f из %2$.1f МБ</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="update_all">Обновить все (%1$s МБ)</string>

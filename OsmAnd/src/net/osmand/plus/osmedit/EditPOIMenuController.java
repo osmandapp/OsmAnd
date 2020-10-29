@@ -18,6 +18,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
 public class EditPOIMenuController extends MenuController {
 
 	private OsmPoint osmPoint;
@@ -166,7 +168,7 @@ public class EditPOIMenuController extends MenuController {
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
 			int iconResId = 0;
-			String poiTranslation = osmP.getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			String poiTranslation = osmP.getEntity().getTag(POI_TYPE_TAG);
 			MapActivity mapActivity = getMapActivity();
 			if (poiTranslation != null && mapActivity != null) {
 				Map<String, PoiType> poiTypeMap = mapActivity.getMyApplication().getPoiTypes().getAllTranslatedNames(false);

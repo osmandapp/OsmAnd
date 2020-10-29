@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
 	public final static Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
@@ -122,7 +124,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 			entity = new Node(loc.getLatitude(), loc.getLongitude(), entityId);
 		}
 		if (poiType != null) {
-			entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
+			entity.putTagNoLC(POI_TYPE_TAG, poiType.getTranslation());
 			if (poiType.getOsmTag2() != null) {
 				entity.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 			}

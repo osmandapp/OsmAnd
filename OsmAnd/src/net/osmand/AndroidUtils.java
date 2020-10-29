@@ -67,6 +67,7 @@ import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -883,5 +884,66 @@ public class AndroidUtils {
 			builder.append(w);
 		}
 		return builder;
+	}
+
+	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {
+		String value = getStringByProperty(ctx, "routing_attr_" + propertyName + "_name");
+		return value != null ? value : defValue;
+	}
+
+	public static String getRoutingStringPropertyDescription(Context ctx, String propertyName, String defValue) {
+		String value = getStringByProperty(ctx, "routing_attr_" + propertyName + "_description");
+		return value != null ? value : defValue;
+	}
+
+	public static String getRenderingStringPropertyName(Context ctx, String propertyName, String defValue) {
+		String value = getStringByProperty(ctx, "rendering_attr_" + propertyName + "_name");
+		return value != null ? value : defValue;
+	}
+
+	public static String getRenderingStringPropertyDescription(Context ctx, String propertyName, String defValue) {
+		String value = getStringByProperty(ctx, "rendering_attr_" + propertyName + "_description");
+		return value != null ? value : defValue;
+	}
+
+	public static String getIconStringPropertyName(Context ctx, String propertyName) {
+		String value = getStringByProperty(ctx, "icon_group_" + propertyName);
+		return value != null ? value : propertyName;
+	}
+
+	public static String getRenderingStringPropertyValue(Context ctx, String propertyValue) {
+		if (propertyValue == null) {
+			return "";
+		}
+		String propertyValueReplaced = propertyValue.replaceAll("\\s+", "_");
+		String value = getStringByProperty(ctx, "rendering_value_" + propertyValueReplaced + "_name");
+		return value != null ? value : propertyValue;
+	}
+
+	public static String getStringRouteInfoPropertyValue(Context ctx, String propertyValue) {
+		if (propertyValue == null) {
+			return "";
+		}
+		String propertyValueReplaced = propertyValue.replaceAll("\\s+", "_");
+		String value = getStringByProperty(ctx, "routeInfo_" + propertyValueReplaced + "_name");
+		return value != null ? value : propertyValue;
+	}
+
+	private static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
+		try {
+			Field field = R.string.class.getField(property);
+			return getStringForField(ctx, field);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	private static String getStringForField(@NonNull Context ctx, @Nullable Field field) throws IllegalAccessException {
+		if (field != null) {
+			Integer in = (Integer) field.get(null);
+			return ctx.getString(in);
+		}
+		return null;
 	}
 }

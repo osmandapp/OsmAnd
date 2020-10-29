@@ -39,7 +39,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
+
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
@@ -273,8 +274,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			throws IllegalArgumentException, IllegalStateException, IOException {
 		for (String k : entity.getTagKeySet()) {
 			String val = entity.getTag(k);
-			if (val.length() == 0 || k.length() == 0 || EditPoiData.POI_TYPE_TAG.equals(k) ||
-					k.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || k.contains(EditPoiData.REMOVE_TAG_PREFIX))
+			if (val.length() == 0 || k.length() == 0 || POI_TYPE_TAG.equals(k) ||
+					k.startsWith(Entity.REMOVE_TAG_PREFIX) || k.contains(Entity.REMOVE_TAG_PREFIX))
 				continue;
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", k); //$NON-NLS-1$
@@ -455,7 +456,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	private boolean deletedTag(Entity entity, String tag) {
-		return entity.getTagKeySet().contains(EditPoiData.REMOVE_TAG_PREFIX + tag);
+		return entity.getTagKeySet().contains(Entity.REMOVE_TAG_PREFIX + tag);
 	}
 
 	@Override
@@ -542,12 +543,12 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			PoiType poiType = type.getPoiTypeByKeyName(subType);
 			if (poiType != null && poiType.getEditOsmValue().equals(entity.getTag(poiType.getEditOsmTag()))) {
 				entity.removeTag(poiType.getEditOsmTag());
-				entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
+				entity.putTagNoLC(POI_TYPE_TAG, poiType.getTranslation());
 			} else {
 				for (PoiType pt : type.getPoiTypes()) {
 					if (pt.getEditOsmValue().equals(entity.getTag(pt.getEditOsmTag()))) {
 						entity.removeTag(pt.getEditOsmTag());
-						entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, pt.getTranslation());
+						entity.putTagNoLC(POI_TYPE_TAG, pt.getTranslation());
 					}
 				}
 			}

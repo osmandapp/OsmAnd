@@ -101,7 +101,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
 			int iconResId = 0;
-			String poiTranslation = osmP.getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			String poiTranslation = osmP.getEntity().getTag(Entity.POI_TYPE_TAG);
 			if (poiTranslation != null && activity != null) {
 				Map<String, PoiType> poiTypeMap = activity.getMyApplication().getPoiTypes().getAllTranslatedNames(false);
 				PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());

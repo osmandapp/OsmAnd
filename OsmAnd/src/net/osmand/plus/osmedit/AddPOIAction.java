@@ -58,7 +58,7 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.osmedit.AdvancedEditPoiFragment.addPoiToStringSet;
-import static net.osmand.plus.osmedit.EditPoiData.POI_TYPE_TAG;
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class AddPOIAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(13,
@@ -140,7 +140,7 @@ public class AddPOIAction extends QuickAction {
 			Node newNode = new Node(node.getLatitude(), node.getLongitude(), node.getId());
 			OsmPoint.Action action = newNode.getId() < 0 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 			for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
-				if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
+				if (tag.getKey().equals(POI_TYPE_TAG)) {
 					final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
 					if (poiType != null) {
 						newNode.putTagNoLC(poiType.getEditOsmTag(), poiType.getEditOsmValue());

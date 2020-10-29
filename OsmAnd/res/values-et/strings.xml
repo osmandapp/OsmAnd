@@ -3782,4 +3782,8 @@
     <string name="what_is_new">Meie uudised</string>
     <string name="use_two_phase_routing">Kasuta kahefaasilist A-klassi teekonna koostamise algoritmi</string>
     <string name="file_already_imported">See fail on juba OsmAnd\'i imporditud</string>
+    <string name="use_live_routing">OsmAnd andmed reaalajas</string>
+    <string name="use_live_public_transport">OsmAnd andmed reaalajas</string>
+    <string name="snowmobile_render_descr">Mootorsaanide sõitmine eraldi määratud teedel ja radadel.</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>

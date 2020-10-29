@@ -28,7 +28,7 @@ public class OpenstreetmapPoint extends OsmPoint {
 		String type = "amenity";
 		for (String k : entity.getTagKeySet()) {
 			if (!OSMTagKey.NAME.getValue().equals(k) && !OSMTagKey.OPENING_HOURS.getValue().equals(k) && 
-					!k.startsWith(EditPoiData.REMOVE_TAG_PREFIX)) {
+					!k.startsWith(Entity.REMOVE_TAG_PREFIX)) {
 				type = k;
 				break;
 			}
@@ -74,6 +74,20 @@ public class OpenstreetmapPoint extends OsmPoint {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public String getTagsString() {
+		StringBuilder sb = new StringBuilder();
+		for (String tag : entity.getTagKeySet()) {
+			String val = entity.getTag(tag);
+			if (entity.isNotValid(tag)) {
+				continue;
+			}
+			sb.append(tag).append(" : ");
+			sb.append(val).append("; ");
+		}
+		return sb.toString();
+	}
+
 
 	@Override
 	public String toString() {

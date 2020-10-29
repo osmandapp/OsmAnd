@@ -3799,7 +3799,7 @@
     <string name="poi_booth">亭類型</string>
     <string name="poi_video_yes">是</string>
     <string name="poi_video_no">否</string>
-    <string name="poi_internet_access_fee_customers">找到極點的訊號</string>
+    <string name="poi_internet_access_fee_customers">網際網路存取：顧客</string>
     <string name="poi_traffic_signals_sound_locate">僅在步行時允許</string>
     <string name="poi_tactile_paving_contrasted">對比</string>
     <string name="poi_tactile_paving_primitive">粗糙</string>
@@ -3844,4 +3844,8 @@
     <string name="poi_beehive">蜂箱</string>
     <string name="poi_nuts">堅果店</string>
     <string name="poi_fuel_lng">LNG</string>
+    <string name="poi_parking_layby">停車區</string>
+    <string name="poi_parking_sheds">車棚</string>
+    <string name="poi_parking_rooftop">屋頂</string>
+    <string name="poi_gpx_point">GPX 點</string>
 </resources>

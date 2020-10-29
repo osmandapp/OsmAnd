@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 
@@ -186,6 +188,14 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				break;
 			case AVOID_ROADS:
 				new AvoidRoadsBottomSheetDialogFragment().show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
+				break;
+			case OSM_NOTES:
+			case OSM_EDITS:
+				OsmAndAppCustomization appCustomization = app.getAppCustomization();
+				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
+				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				app.getSettings().FAVORITES_TAB.set(R.string.osm_edits);
+				startActivity(favorites);
 				break;
 			default:
 				break;
