@@ -3762,7 +3762,7 @@
     <string name="poi_monastery_type_monastics">Тип монастыря: монашество</string>
     <string name="poi_shop_security">Магазин защиты и безопасности</string>
     <string name="poi_mountain_rescue">Горноспасательная станция</string>
-    <string name="poi_internet_access_fee_customers">Сигнал для поиска полюса</string>
+    <string name="poi_internet_access_fee_customers">Доступ в Интернет: клиенты</string>
     <string name="poi_climbing_multipitch_no">Многоуровневые маршруты: нет</string>
     <string name="poi_climbing_multipitch_yes">Многоуровневые маршруты: есть</string>
     <string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Взрывной залп: вторая или более поздняя детонация залпового теста</string>
@@ -3833,4 +3833,6 @@
     <string name="poi_nuts">Магазин орехов</string>
     <string name="poi_beehive">Улей</string>
     <string name="poi_fuel_lng">СПГ</string>
+    <string name="poi_parking_sheds">Навесы</string>
+    <string name="poi_gpx_point">Точка GPX</string>
 </resources>
