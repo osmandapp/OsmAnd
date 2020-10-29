@@ -1258,7 +1258,7 @@ public class MapInfoWidgetsFactory {
 						AndroidUiHelper.updateVisibility(latitudeIcon, true);
 						latitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.widget_coordinates_utm_night : R.drawable.widget_coordinates_utm_day));
 						MGRSPoint pnt = new MGRSPoint(new LatLonPoint(lat, lon));
-						latitudeText.setText(pnt.toString());
+						latitudeText.setText(pnt.toFlavoredString(5));
 					} else if (f == PointDescription.OLC_FORMAT) {
 						AndroidUiHelper.updateVisibility(lonCoordinatesContainer, false);
 						AndroidUiHelper.updateVisibility(coordinatesDivider, false);

@@ -609,7 +609,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 				final EditText mgrsEdit = ((EditText) view.findViewById(R.id.mgrsEditText));
 				if (latLon != null) {
 					MGRSPoint pnt = new MGRSPoint(new LatLonPoint(latLon.getLatitude(), latLon.getLongitude()));
-					mgrsEdit.setText(pnt.toString());
+					mgrsEdit.setText(pnt.toFlavoredString(5));
 				} else {
 					mgrsEdit.setText(latEdit.getText());
 

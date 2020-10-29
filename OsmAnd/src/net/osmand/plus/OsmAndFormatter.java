@@ -522,7 +522,7 @@ public class OsmAndFormatter {
 			result.append(r);
 		} else if (outputFormat == MGRS_FORMAT) {
 			MGRSPoint pnt = new MGRSPoint(new LatLonPoint(lat, lon));
-			result.append(pnt.toString());
+			result.append(pnt.toFlavoredString(5));
 		}
 		return result.toString();
 	}

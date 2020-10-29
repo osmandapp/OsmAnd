@@ -182,7 +182,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 
 				final EditText mgrsEdit = ((EditText) view.findViewById(R.id.MGRSEdit));
 				MGRSPoint pnt = new MGRSPoint(new LatLonPoint(l.getLatitude(), l.getLongitude()));
-				mgrsEdit.setText(pnt.toString());
+				mgrsEdit.setText(pnt.toFlavoredString(5));
 				break;
 			}
 
