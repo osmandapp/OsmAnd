@@ -618,8 +618,10 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 								@Override
 								public void onClick(View v) {
 									sortByMode = mode;
-									tracksCard.setSortByMode(mode);
 									sortButton.setImageResource(mode.getIconId());
+									if (tracksCard != null) {
+										tracksCard.setSortByMode(mode);
+									}
 								}
 							}, sortByMode == mode
 					));
