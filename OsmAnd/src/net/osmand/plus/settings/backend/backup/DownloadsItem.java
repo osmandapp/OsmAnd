@@ -97,6 +97,6 @@ public class DownloadsItem extends SettingsItem {
 	@Nullable
 	@Override
 	SettingsItemWriter<? extends SettingsItem> getWriter() {
-		return null;
+		return getJsonWriter();
 	}
 }

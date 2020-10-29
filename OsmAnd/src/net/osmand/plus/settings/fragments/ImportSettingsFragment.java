@@ -48,6 +48,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FavoritesSettingsItem;
+import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.OsmEditsSettingsItem;
 import net.osmand.plus.settings.backend.backup.OsmNotesSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -461,6 +462,8 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				osmEditsPointList.add((OpenstreetmapPoint) object);
 			} else if (object instanceof FavoriteGroup) {
 				favoriteGroups.add((FavoriteGroup) object);
+			} else if (object instanceof GlobalSettingsItem) {
+				settingsItems.add((GlobalSettingsItem) object);
 			}
 		}
 		if (!appModeBeans.isEmpty()) {

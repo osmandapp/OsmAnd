@@ -90,7 +90,7 @@ class SettingsItemsFactory {
 		OsmandSettings settings = app.getSettings();
 		switch (type) {
 			case GLOBAL:
-				item = new GlobalSettingsItem(settings);
+				item = new GlobalSettingsItem(settings, json);
 				break;
 			case PROFILE:
 				item = new ProfileSettingsItem(app, json);
