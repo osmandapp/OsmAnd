@@ -287,8 +287,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				title.setText(FileNameTranslationHelper.getFileName(app,
 						app.getResourceManager().getOsmandRegions(),
 						file.getName()));
-				FileSubtype subtype = FileSubtype.getSubtypeByFileName(file.getPath().replace(
-						app.getAppPath(null).getPath(), ""));
+				FileSubtype subtype = FileSubtype.getSubtypeByPath(app, file.getPath());
 				switch (subtype) {
 					case SRTM_MAP:
 						iconId = R.drawable.ic_plugin_srtm;
@@ -303,6 +302,18 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				subText.setText(AndroidUtils.formatSize(app, size));
 				subText.setVisibility(View.VISIBLE);
 				break;
+			case TTS_VOICE:
+				file = (File) currentItem;
+				title.setText(FileNameTranslationHelper.getFileName(app,
+						app.getResourceManager().getOsmandRegions(),
+						file.getName()));
+				setupIcon(icon, R.drawable.ic_action_volume_up, itemSelected);
+			case VOICE:
+				file = (File) currentItem;
+				title.setText(FileNameTranslationHelper.getFileName(app,
+						app.getResourceManager().getOsmandRegions(),
+						file.getName()));
+				setupIcon(icon, R.drawable.ic_action_volume_up, itemSelected);
 			default:
 				return child;
 		}
@@ -393,6 +404,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.osm_edit_modified_poi;
 			case OFFLINE_MAPS:
 				return R.string.shared_string_local_maps;
+			case TTS_VOICE:
+				return R.string.local_indexes_cat_tts;
+			case VOICE:
+				return R.string.local_indexes_cat_voice;
 			default:
 				return R.string.access_empty_list;
 		}

@@ -33,6 +33,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 		OBF_MAP("obf_map", IndexConstants.MAPS_PATH),
 		TILES_MAP("tiles_map", IndexConstants.TILES_INDEX_DIR),
 		GPX("gpx", IndexConstants.GPX_INDEX_DIR),
+		TTS_VOICE("tts_voice", IndexConstants.VOICE_INDEX_DIR),
 		VOICE("voice", IndexConstants.VOICE_INDEX_DIR),
 		TRAVEL("travel", IndexConstants.WIKIVOYAGE_INDEX_DIR),
 		MULTIMEDIA_NOTES("multimedia_notes", IndexConstants.AV_INDEX_DIR);
@@ -66,6 +67,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 			return null;
 		}
 
+		public static FileSubtype getSubtypeByPath(@NonNull OsmandApplication app, @NonNull String fileName) {
+			fileName = fileName.replace(app.getAppPath(null).getPath(), "");
+			return getSubtypeByFileName(fileName);
+		}
+
 		public static FileSubtype getSubtypeByFileName(@NonNull String fileName) {
 			String name = fileName;
 			if (fileName.startsWith(File.separator)) {
@@ -91,6 +97,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 							return subtype;
 						}
 						break;
+					case TTS_VOICE:
+						if (name.startsWith(subtype.subtypeFolder) && name.endsWith(IndexConstants.TTS_DIR_SUFFIX)) {
+							return subtype;
+						}
+						break;
 					default:
 						if (name.startsWith(subtype.subtypeFolder)) {
 							return subtype;
@@ -109,9 +120,10 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	protected File file;
-	private File appPath;
+	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
+	private boolean subFolders;
 
 	public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
 		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
@@ -198,6 +210,14 @@ public class FileSettingsItem extends StreamSettingsItem {
 		this.size = size;
 	}
 
+	public boolean isSubFolders() {
+		return subFolders;
+	}
+
+	public void setSubFolders(boolean subFolders) {
+		this.subFolders = subFolders;
+	}
+
 	@NonNull
 	public File getFile() {
 		return file;
@@ -259,7 +279,9 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		try {
-			setInputStream(new FileInputStream(file));
+			if (!file.isDirectory()) {
+				setInputStream(new FileInputStream(file));
+			}
 		} catch (FileNotFoundException e) {
 			warnings.add(app.getString(R.string.settings_item_read_error, file.getName()));
 			SettingsHelper.LOG.error("Failed to set input stream from file: " + file.getName(), e);

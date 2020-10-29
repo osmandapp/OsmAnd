@@ -13,5 +13,7 @@ public enum ExportSettingsType {
 	GLOBAL,
 	OSM_NOTES,
 	OSM_EDITS,
-	OFFLINE_MAPS
+	OFFLINE_MAPS,
+	TTS_VOICE,
+	VOICE
 }

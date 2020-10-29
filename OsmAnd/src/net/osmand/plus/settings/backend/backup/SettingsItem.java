@@ -88,7 +88,7 @@ public abstract class SettingsItem {
 
 	public boolean applyFileName(@NonNull String fileName) {
 		String n = getFileName();
-		return n != null && n.endsWith(fileName);
+		return n != null && (n.endsWith(fileName) || fileName.startsWith(n));
 	}
 
 	public boolean shouldReadOnCollecting() {
