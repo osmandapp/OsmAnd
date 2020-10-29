@@ -55,6 +55,17 @@
 					android:textSize="@dimen/default_list_text_size"
 					osmand:typeface="@string/font_roboto_medium" />
 
+				<ImageButton
+					android:id="@+id/sort_button"
+					android:layout_width="@dimen/wikipedia_options_button_width"
+					android:layout_height="@dimen/dialog_button_height"
+					android:layout_gravity="center"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
+					android:background="?attr/bg_dash_line"
+					android:tint="?attr/color_dialog_buttons"
+					osmand:srcCompat="@drawable/ic_sort_waypoint_dark" />
+
 			</LinearLayout>
 
 		</FrameLayout>
