@@ -3718,7 +3718,7 @@
     <string name="hidden_items_descr">Questi elementi sono nascosti dal menu, ma le opzioni rappresentate o i plugins continueranno a funzionare.</string>
     <string name="reset_items_descr">Nascondere le opzioni le reimposta al loro valore originale.</string>
     <string name="main_actions">Azioni principali</string>
-    <string name="additional_actions_descr">Puoi accedere a queste azioni toccando il pulsante \"Azioni aggiuntive\".</string>
+    <string name="additional_actions_descr">Puoi accedere a queste azioni toccando il pulsante “%1$s”.</string>
     <string name="move_inside_category">Puoi spostare gli elementi solo all\'interno di questa categoria.</string>
     <string name="select_wikipedia_article_langs">Seleziona i linguaggi in cui gli articoli di Wikipedia appariranno sulla mappa. Puoi cambiare fra tutte le lingue disponibili mentre leggi questo articolo.</string>
     <string name="some_articles_may_not_available_in_lang">Alcuni articoli di Wikipedia potrebbero non essere disponibili nella tua lingua.</string>
