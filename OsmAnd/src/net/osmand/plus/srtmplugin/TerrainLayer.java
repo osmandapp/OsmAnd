@@ -35,7 +35,7 @@ import static net.osmand.plus.srtmplugin.TerrainMode.HILLSHADE;
 public class TerrainLayer extends MapTileLayer {
 
 	private final static Log log = PlatformUtil.getLog(TerrainLayer.class);
-	private Map<String, SQLiteTileSource> resources = new LinkedHashMap<String, SQLiteTileSource>(); 
+	private Map<String, SQLiteTileSource> resources = new LinkedHashMap<String, SQLiteTileSource>();
 	private final static String HILLSHADE_CACHE = "hillshade.cache";
 	private final static String SLOPE_CACHE = "slope.cache";
 	private int ZOOM_BOUNDARY = 15;
@@ -68,7 +68,6 @@ public class TerrainLayer extends MapTileLayer {
 		} else {
 			// ignore
 		}
-
 	}
 
 	private void indexTerrainFiles(final OsmandApplication app) {
@@ -77,7 +76,6 @@ public class TerrainLayer extends MapTileLayer {
 			private String type = mode.name().toLowerCase();
 			@Override
 			protected Void doInBackground(Void... params) {
-				
 				File tilesDir = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 				File cacheDir = app.getCacheDir();
 				// fix http://stackoverflow.com/questions/26937152/workaround-for-nexus-9-sqlite-file-write-operations-on-external-dirs
@@ -91,17 +89,21 @@ public class TerrainLayer extends MapTileLayer {
 					sqliteDb = null;
 				}
 				if (sqliteDb != null) {
-					if (sqliteDb.getVersion() == 0) {
-						sqliteDb.setVersion(1);
-					}
-					sqliteDb.execSQL("CREATE TABLE IF NOT EXISTS TILE_SOURCES(filename varchar2(256), date_modified int, left int, right int, top int, bottom int)");
+					try {
+						if (sqliteDb.getVersion() == 0) {
+							sqliteDb.setVersion(1);
+						}
+						sqliteDb.execSQL("CREATE TABLE IF NOT EXISTS TILE_SOURCES(filename varchar2(256), date_modified int, left int, right int, top int, bottom int)");
 
-					Map<String, Long> fileModified = new HashMap<String, Long>();
-					Map<String, SQLiteTileSource> rs = readFiles(app, tilesDir, fileModified);
-					indexCachedResources(fileModified, rs);
-					indexNonCachedResources(fileModified, rs);
-					sqliteDb.close();
-					resources = rs;
+						Map<String, Long> fileModified = new HashMap<String, Long>();
+						Map<String, SQLiteTileSource> rs = readFiles(app, tilesDir, fileModified);
+						indexCachedResources(fileModified, rs);
+						indexNonCachedResources(fileModified, rs);
+						sqliteDb.close();
+						resources = rs;
+					} catch (RuntimeException e) {
+						log.error(e.getMessage(), e);
+					}
 				}
 				return null;
 			}
@@ -150,7 +152,6 @@ public class TerrainLayer extends MapTileLayer {
 							indexedResources.insert(filename, new QuadRect(left, top, right, bottom));
 							fileModified.remove(filename);
 						}
-						
 					} while(cursor.moveToNext());
 				}
 				cursor.close();
@@ -172,7 +173,6 @@ public class TerrainLayer extends MapTileLayer {
 				}
 				return rs;
 			}
-			
 		};
 		executeTaskInBackground(task);
 	}

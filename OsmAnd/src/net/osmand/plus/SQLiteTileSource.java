@@ -509,26 +509,27 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null || coordinatesZoom > 25 ){
 			return null;
 		}
-		SQLiteCursor q ;
+		SQLiteCursor cursor ;
 		if (inversiveZoom) {
 			int minZoom = (17 - minZ) + 1;
 			// 17 - z = zoom, x << (25 - zoom) = 25th x tile = 8 + z,
-			q = db.rawQuery("SELECT max(x << (8+z)), min(x << (8+z)), max(y << (8+z)), min(y << (8+z))" +
+			cursor = db.rawQuery("SELECT max(x << (8+z)), min(x << (8+z)), max(y << (8+z)), min(y << (8+z))" +
 					" from tiles where z < "
 					+ minZoom, new String[0]);
 		} else {
-			q = db.rawQuery("SELECT max(x << (25-z)), min(x << (25-z)), max(y << (25-z)), min(y << (25-z))"
+			cursor = db.rawQuery("SELECT max(x << (25-z)), min(x << (25-z)), max(y << (25-z)), min(y << (25-z))"
 					+ " from tiles where z > " + minZ,
 					new String[0]);
 		}
-		q.moveToFirst();
-		int right = (int) (q.getInt(0) >> (25 - coordinatesZoom));
-		int left = (int) (q.getInt(1) >> (25 - coordinatesZoom));
-		int top = (int) (q.getInt(3) >> (25 - coordinatesZoom));
-		int bottom  = (int) (q.getInt(2) >> (25 - coordinatesZoom));
+		cursor.moveToFirst();
+		int right = (int) (cursor.getInt(0) >> (25 - coordinatesZoom));
+		int left = (int) (cursor.getInt(1) >> (25 - coordinatesZoom));
+		int top = (int) (cursor.getInt(3) >> (25 - coordinatesZoom));
+		int bottom  = (int) (cursor.getInt(2) >> (25 - coordinatesZoom));
+
+		cursor.close();
+
 		return new QuadRect(left, top, right, bottom);
-		
-		
 	}
 
 	public void deleteImage(int x, int y, int zoom) {

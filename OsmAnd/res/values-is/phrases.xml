@@ -3802,7 +3802,7 @@
     <string name="poi_seamark_water_level_submerged">Vatnsyfirborð: í kafi</string>
     <string name="poi_seamark_water_level_part_submerged">Vatnsyfirborð: að hluta í kafi</string>
     <string name="poi_tactile_paving_primitive">Gróft</string>
-    <string name="poi_internet_access_fee_customers">Merki til að finna staurinn</string>
+    <string name="poi_internet_access_fee_customers">Internetaðgangur: viðskiptavinir</string>
     <string name="poi_pump_status_missing_beam">Staða dælu: vantar bita</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sog</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Undir þrýstingi</string>
@@ -3830,4 +3830,8 @@
     <string name="poi_fuel_lng">LNG</string>
     <string name="poi_departures_board_no">Brottfaratafla: nei</string>
     <string name="poi_departures_board">Brottfaratafla</string>
+    <string name="poi_parking_layby">Meðfram götu</string>
+    <string name="poi_parking_sheds">Skýli</string>
+    <string name="poi_parking_rooftop">Á þaki</string>
+    <string name="poi_gpx_point">GPX-punktur</string>
 </resources>

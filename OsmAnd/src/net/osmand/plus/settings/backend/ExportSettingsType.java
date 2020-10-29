@@ -10,5 +10,8 @@ public enum ExportSettingsType {
 	AVOID_ROADS,
 	TRACKS,
 	MULTIMEDIA_NOTES,
-	GLOBAL
+	GLOBAL,
+	OSM_NOTES,
+	OSM_EDITS,
+	OFFLINE_MAPS
 }

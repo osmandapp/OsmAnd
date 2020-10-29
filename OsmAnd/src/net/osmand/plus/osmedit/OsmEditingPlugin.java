@@ -5,8 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -57,6 +61,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_C
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 
@@ -528,6 +533,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
+	public static SpannableString getTitle(OsmPoint osmPoint, Context ctx) {
+		SpannableString title = new SpannableString(getName(osmPoint));
+		if (TextUtils.isEmpty(title)) {
+			title = SpannableString.valueOf(getCategory(osmPoint, ctx));
+			title.setSpan(new StyleSpan(Typeface.ITALIC), 0, title.length(), 0);
+		}
+		return title;
+	}
+
 	public static String getName(OsmPoint point) {
 		if (point.getGroup() == OsmPoint.Group.POI) {
 			return ((OpenstreetmapPoint) point).getName();
@@ -541,7 +555,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public static String getCategory(OsmPoint osmPoint, Context context) {
 		String category = "";
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(POI_TYPE_TAG);
 			if (Algorithms.isEmpty(category)) {
 				category = context.getString(R.string.shared_string_without_name);
 			}

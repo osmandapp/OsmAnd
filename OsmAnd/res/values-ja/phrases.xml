@@ -1479,7 +1479,7 @@
     <string name="poi_takeaway_no">持ち帰り不可</string>
     <string name="poi_takeaway_only">テイクアウト・持ち帰りのみ</string>
     <string name="poi_archaeological_site_type">遺跡の種類</string>
-    <string name="poi_health_specialty">医療機関</string>
+    <string name="poi_health_specialty">専門分野</string>
     <string name="poi_health_specialty_general_yes">総合診療医</string>
     <string name="poi_health_specialty_ophthalmology_yes">眼科</string>
     <string name="poi_health_specialty_gynaecology_yes">婦人科</string>
@@ -1487,7 +1487,7 @@
     <string name="poi_health_specialty_orthopaedics_yes">整形外科</string>
     <string name="poi_health_specialty_otolaryngology_yes">耳鼻咽喉科</string>
     <string name="poi_health_specialty_paediatrics_yes">小児科</string>
-    <string name="poi_health_specialty_paediatrics_no">医療機関:小児科:無し</string>
+    <string name="poi_health_specialty_paediatrics_no">専門分野:小児科:無し</string>
     <string name="poi_health_specialty_dermatology_yes">皮膚科</string>
     <string name="poi_health_specialty_urology_yes">泌尿器科</string>
     <string name="poi_health_specialty_surgery_yes">一般外科</string>

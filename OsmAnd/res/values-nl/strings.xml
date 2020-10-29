@@ -12,7 +12,7 @@
     <string name="map_widget_view_direction">Kijkrichting</string>
     <string name="map_widget_transparent">Transparante widgets</string>
     <string name="int_continuosly">continu</string>
-    <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
+    <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op alle toestellen.</string>
     <string name="play_commands_of_currently_selected_voice">Kies een stem en test door aankondigingen af te spelen:</string>
     <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
     <string name="native_rendering">Interne kaartgeneratie</string>
@@ -218,7 +218,7 @@
     <string name="tts_language_not_supported_title">Taal niet ondersteund</string>
     <string name="tts_language_not_supported">De gekozen taal wordt niet ondersteund door de geïnstalleerde Android TTS (tekst-naar-spraak) stemgenerator. De standaard TTS taal zal worden gebruikt. Zoek een andere TTS stemgenerator op de markt\?</string>
     <string name="tts_missing_language_data_title">Ontbrekende gegevens</string>
-    <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wil je naar de Play-store gaan om deze te installeren?</string>
+    <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Ga naar \"Play Store\" om deze te installeren\?</string>
     <string name="gpx_option_reverse_route">Keer richting van GPX-track om</string>
     <string name="gpx_option_destination_point">Huidige bestemming gebruiken</string>
     <string name="gpx_option_from_start_point">Volg de gehele track</string>
@@ -251,7 +251,7 @@
     <string name="error_doing_search">Fout bij offline zoeken.</string>
     <string name="search_osm_offline">Zoek adres in de offline kaarten</string>
     <string name="system_locale">Systeem</string>
-    <string name="preferred_locale_descr">App toon talen (OsmAnd dient opnieuw gestart).</string>
+    <string name="preferred_locale_descr">App \"Toon talen\" (OsmAnd dient opnieuw gestart).</string>
     <string name="preferred_locale">Toon talen</string>
     <string name="unit_of_length_descr">Wijzig de eenheid van afstand voor metingen.</string>
     <string name="unit_of_length">Afstand eenheden</string>
@@ -433,7 +433,7 @@
     <string name="search_poi_location">Naar signaal zoeken…</string>
     <string name="search_near_map">Zoek bij het midden van de kaart</string>
     <string name="search_nearby">Zoek dichtbij</string>
-    <string name="map_orientation_default">Zelfde als apparaat-instelling</string>
+    <string name="map_orientation_default">Zelfde als apparaatinstelling</string>
     <string name="map_orientation_portrait">Portret</string>
     <string name="map_orientation_landscape">Landschap</string>
     <string name="map_screen_orientation">Kaartscherm-oriëntatie</string>
@@ -642,7 +642,7 @@
 \n
 \nRasterkaarten zijn direct via online bronnen verkrijgbaar of kunnen voor offline gebruik gereedgemaakt worden (en handmatig gekopieerd naar de OsmAnd gegevensmap) als SQLite database door diverse hulpprogramma\'s van derden.</string>
     <string name="osmand_background_plugin_description">Instellingen om tracking en navigatie te kunnen gebruiken met het scherm uit (schakelt de GPS periodiek in).</string>
-    <string name="osmand_accessibility_description">"Maakt de toegankelijkheidsopties van het toestel rechtstreeks beschikbaar in OsmAnd. Hiermee kan o.a. de spreeksnelheid van tekst-naar-spraak-stemmen aangepast worden,  D-pad schermnavigatie geconfigureerd worden, een trackball gebruikt worden voor de zoomregeling, of het gebruiken van meldingen via tekst-naar-spraak, bijvoorbeeld het automatisch melden van de positie."</string>
+    <string name="osmand_accessibility_description">Maakt de toegankelijkheidsopties van het toestel rechtstreeks beschikbaar in OsmAnd. Hiermee kan o.a. de spreeksnelheid van tekst-naar-spraak stemmen aangepast worden, D-pad schermnavigatie geconfigureerd worden, een trackball gebruikt worden voor de zoomregeling, of het gebruiken van meldingen via tekst-naar-spraak, bijvoorbeeld het automatisch melden van de positie.</string>
     <string name="osmand_development_plugin_description">Deze plug-in toont de instellingen voor ontwikkel- en debug-opties, zoals routetest en -simulatie, schermweergave-prestaties, en spraaksturing. Deze instellingen zijn bedoeld voor programmeurs die OsmAnd willen verbeteren en zijn niet nodig voor normaal gebruik.</string>
     <string name="plugins_screen">Plugins beheren</string>
     <string name="prefs_plugins_descr">Schakel plugins in voor speciale functies en extra instellingen.</string>
@@ -750,7 +750,7 @@
     <string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
-\n OsmAnd is een open-source navigatie-app die toegang geeft tot een grote variëteit aan wereldwijde OSM-gegevens. Alle kaartgegevens (vector- of rasterkaarten) kunnen in het telefoongeheugen worden opgeslagen voor offline gebruik. OsmAnd biedt ook zowel offline als online routeaanwijzingen, met stembegeleiding.
+\nOsmAnd is een open-source navigatie-app die toegang geeft tot een grote variëteit aan wereldwijde OSM-gegevens. Alle kaartgegevens (vector- of rasterkaarten) kunnen in het telefoongeheugen worden opgeslagen voor offline gebruik. OsmAnd biedt ook zowel offline als online routeaanwijzingen, met stembegeleiding.
 \n
 \n Enkele van de belangrijkste mogelijkheden:
 \n - Volledig offline gebruik (gedownloade vector- of rasterkaarten worden opgeslagen op het apparaat)
@@ -767,9 +767,9 @@
 \n
 \n Beperkingen van deze gratis versie van OsmAnd:
 \n - Beperkt aantal kaartdownloads
-\n - Geen toegang tot offline Wikipedia POI\'s. 
+\n - Geen toegang tot offline Wikipedia POI\'s
 \n
-\n OsmAnd wordt actief ontwikkeld en ons project en de verdere vooruitgang ervan is afhankelijk van
+\nOsmAnd wordt actief ontwikkeld en ons project en de verdere vooruitgang ervan is afhankelijk van
 \nfinanciële bijdragen om de ontwikkeling en testen van nieuwe functionaliteit te kunnen bekostigen.
 \nWij verzoeken je om OsmAnd+ te kopen, of om een donatie over te maken via https://osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
@@ -1283,7 +1283,7 @@
     <string name="map_widget_left">Widgets Linker Kolom</string>
     <string name="configure_map">Kaart instellen</string>
     <string name="search_radius_proximity">Binnen</string>
-    <string name="anonymous_user_hint">Anonieme gebruikesr kunnen geen
+    <string name="anonymous_user_hint">Anonieme gebruikers kunnen geen
 \n- groepen aanmaken;
 \n- groepen en apparaten synchroniseren met de server;
 \n- groepen en apparaten beheren in een eigen omgeving op de website.</string>
@@ -1437,7 +1437,7 @@
     <string name="shared_string_control_start">Start</string>
     <string name="shared_string_control_stop">Stop</string>
     <string name="shared_string_import">Importeren</string>
-    <string name="shared_string_export">Export naar OSM</string>
+    <string name="shared_string_export">Exporteer naar OSM</string>
     <string name="shared_string_more">Meer…</string>
     <string name="shared_string_more_actions">Meer acties</string>
     <string name="shared_string_do_not_show_again">Toon niet meer</string>
@@ -2285,10 +2285,10 @@
 \n • Toon POIs (Points Of Interest) in uw omgeving
 \n • Draai de kaart in uw bewegingsrichting (of kompasrichting)
 \n • Toon uw positie en waar u naar kijkt
-\n • Deel uw lokatie met vrienden
+\n • Deel uw locatie met vrienden
 \n • Bewaar belangrijke plaatsen in ‘Favorieten’
 \n • Toon namen in het Engels, de lokale taal, of fonetisch
-\n • Toon extra online tiles, zoals een satellietfoto (van Bing), verschillende extra lagen zoals GPX-tracks voor navigatie e.d. met instelbare transparantie
+\n • Toon extra online tegels, zoals een satellietfoto (van Bing), verschillende extra lagen zoals GPX-tracks voor navigatie e.d. met instelbare transparantie
 \n</string>
     <string name="osmand_extended_description_part4">Skiën
 \nMet de OsmAnd Ski plug-in ziet u pistes met hun moeilijkheidsgraad, en extra informatie zoals liften en andere faciliteiten.</string>
@@ -2302,7 +2302,7 @@
 \n • De kaart toont voetpaden en wandelpaden
 \n • Wikipedia kan je veel vertellen tijdens een stadswandeling, in je eigen taal
 \n • OV-haltes (tram, bus, trein, metro), inclusief lijnnummers, helpen je bij het reizen in een onbekende stad
-\n • GPS-navigatie in voetgangermodus gebruikt voor het berekenen van de route voet- en wandelpaden
+\n • GPS-navigatie in voetgangersmodus gebruikt voor het berekenen van de route voet- en wandelpaden
 \n • Upload en volg een GPX-route of neem er zelf één op en deel deze.
 \n</string>
     <string name="osmand_extended_description_part7">Draag bij aan OpenStreetMap (OSM)
@@ -2384,7 +2384,7 @@
 \n • Kaart draaien in kompas- of bewegingsrichting
 \n • Bewaar belangrijke plaatsen in ‘Favorieten’.
 \n • Toon POI’s (points of interest) in de buurt
-\n • Toon specifieke online tiles, satellietbeelden (van Bing), en extra lagen zoals GPX-tracks met rit-/routeinformatie e.d., met instelbare transparantie
+\n • Toon specifieke online tegels, satellietbeelden (van Bing), en extra lagen zoals GPX-tracks met rit-/routeinformatie e.d., met instelbare transparantie
 \n • Toon plaatsnamen in het Engels, de lokale taal of fonetisch weergegeven
 \n</string>
     <string name="osmand_plus_extended_description_part4">Gebruik OSM- en Wikipedia-gegevens
@@ -3235,7 +3235,7 @@
     <string name="routing_attr_freeride_policy_description">\'Freeride\' en \'Off-piste\' zijn officieuze routes en passages. Meestal onverzorgd en niet onderhouden, en niet \'s avonds gecontroleerd. Betreden op eigen risico.</string>
     <string name="collected_data">Verzamelde data</string>
     <string name="last_launch_crashed">Laatste OsmAnd uitvoering gecrasht. Help ons alstublieft OsmAnd te verbeteren door de foutmelding te delen.</string>
-    <string name="app_mode_personal_transporter">Personal transporter</string>
+    <string name="app_mode_personal_transporter">Persoonlijke transporteur</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="routeInfo_roadClass_name">Wegtype</string>
@@ -3298,24 +3298,24 @@
     <string name="shared_string_turn_off">Uitschakelen</string>
     <string name="new_plugin_added">Nieuwe plug-in toegevoegd</string>
     <string name="join_segments">Segmenten samenvoegen</string>
-    <string name="release_3_4">• App profiles: Create a custom profile for your own needs, with a custom icon and color 
-\n 
-\n • Nu aan te passen standaard en min / max snelheden voor elk profiel 
-\n 
-\n • Widget toegevoegd voor de huidige coördinaten 
-\n 
-\n • Opties toegevoegd om het kompas en een straalliniaal op de kaart te tonen 
-\n 
-\n • Fix background track logging 
-\n 
-\n • Improved background map downloads 
-\n 
-\n • \'Zet scherm aan\' optie is terug 
-\n 
-\n • Wikipedia taalkeuze aangepast 
-\n 
-\n • Vast kompasknop tijdens navigatie 
-\n 
+    <string name="release_3_4">• App-profielen: maak een eigen profiel, met een aangepast pictogram en kleur
+\n
+\n • Nu aan te passen standaard en min / max snelheden voor elk profiel
+\n
+\n • Widget toegevoegd voor de huidige coördinaten
+\n
+\n • Opties toegevoegd om het kompas en een straalliniaal op de kaart te tonen
+\n
+\n • Trackregistratie op de achtergrond herstellen
+\n
+\n • Verbeterde downloads van achtergrondkaarten
+\n
+\n • \'Zet scherm aan\' optie is terug
+\n
+\n • Wikipedia taalkeuze aangepast
+\n
+\n • Vast kompasknop tijdens navigatie
+\n
 \n • Andere fouten verholpen
 \n
 \n</string>
@@ -3567,7 +3567,7 @@
     <string name="replace_point_descr">Vervang een ander punt door dit punt.</string>
     <string name="app_mode_ski_touring">Toerskiën</string>
     <string name="app_mode_ski_snowmobile">Sneeuwscooter</string>
-    <string name="custom_osmand_plugin">Aangepaste OsmAnd-plug-in</string>
+    <string name="custom_osmand_plugin">Aangepaste OsmAnd plug-in</string>
     <string name="shared_string_items">Elementen</string>
     <string name="changes_applied_to_profile">Wijzigingen toegepast op het \'%1$s\'-profiel.</string>
     <string name="settings_item_read_error">Kon niet lezen van \'%1$s\'.</string>
@@ -3579,7 +3579,7 @@
     <string name="shared_string_all_languages">Alle talen</string>
     <string name="wiki_menu_download_descr">Om Wikipedia-POI’s op de kaart te tonen zijn extra kaarten nodig.</string>
     <string name="select_wikipedia_article_langs">Selecteer de talen voor Wikipedia-artikelen op de kaart. Tijdens het lezen van het artikel kan omgeschakeld worden naar een andere beschikbare taal.</string>
-    <string name="some_articles_may_not_available_in_lang">Sommige Wikipedia-artikelen zijn mogelijk niet beschikbaar in de eigen taal.</string>
+    <string name="some_articles_may_not_available_in_lang">Sommige Wikipedia-artikelen zijn mogelijk niet beschikbaar in je eigen taal.</string>
     <string name="lang_zhyue">Kantonees</string>
     <string name="lang_zhminnan">Minnanyu</string>
     <string name="lang_yo">Yoruba</string>
@@ -3624,8 +3624,8 @@
     <string name="change_application_profile">App-profiel wijzigingen</string>
     <string name="index_item_world_basemap_detailed">Wereldoverzichtskaart (gedetailleerd)</string>
     <string name="unsupported_type_error">Niet ondersteund type</string>
-    <string name="width_limit_description">Geef de voertuigbreedte op, er zijn mogelijk routebeperkingen voor brede voertuigen.</string>
-    <string name="height_limit_description">Geef de voertuighoogte op, er zijn mogelijk routebeperkingen voor hoge voertuigen.</string>
+    <string name="width_limit_description">Geef de voertuigbreedte op, er zijn mogelijk routebeperkingen voor te brede voertuigen.</string>
+    <string name="height_limit_description">Geef de voertuighoogte op, er zijn mogelijk routebeperkingen voor te hoge voertuigen.</string>
     <string name="weight_limit_description">Geef het voertuiggewicht op, er zijn mogelijk routebeperkingen voor zwaar verkeer.</string>
     <string name="gpx_parse_error">OsmAnd GPX is corrupt, neem contact op met het support team voor verder onderzoek.</string>
     <string name="shared_string_always">Altijd</string>
@@ -3636,7 +3636,7 @@
     <string name="turn_screen_on_navigation_instructions_descr">Scherm aanzetten bij elke routeaanwijzing.</string>
     <string name="turn_screen_on_navigation_instructions">Routeaanwijzingen</string>
     <string name="turn_screen_on_power_button_disabled">Uitgeschakeld. De instelling ‘Timeout na wakker worden’ moet ingesteld zijn op ‘Scherm aanlaten’.</string>
-    <string name="turn_screen_on_power_button_descr">Door op de aan/uit-knop te drukken gaat het scherm aan met OsmAnd op de voorgrond van het vergrendelscherm.</string>
+    <string name="turn_screen_on_power_button_descr">Door op de aan/uit knop te drukken gaat het scherm aan met OsmAnd op de voorgrond van het vergrendelde scherm.</string>
     <string name="turn_screen_on_power_button">Aan/uit-knop</string>
     <string name="turn_screen_on_proximity_sensor">Nabijheidssensor</string>
     <string name="turn_screen_on_wake_time_descr">Selecteer de schermtimeout na wakker worden. (Kies “%1$s” om geen timeout te gebruiken.)</string>
@@ -3682,7 +3682,7 @@
     <string name="tiles_storage_descr">Kies hoe gedownloade rasterkaartsegmenten worden opgeslagen.</string>
     <string name="profiles_for_action_not_found">Geen overeenkomende profielen gevonden.</string>
     <string name="screen_timeout">Time-out van het scherm</string>
-    <string name="use_volume_buttons_as_zoom_descr">Inschakelen om het zoomniveau van de kaart in te stellen met de volumeknoppen.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Regel het zoomniveau, van de kaart, met de volumeknop op het apparaat.</string>
     <string name="use_volume_buttons_as_zoom">Gebruik volumeknoppen om in en uit te zoomen</string>
     <string name="plugin_wikipedia_description">Verkrijg informatie over POIs uit Wikipedia. Het is je offline reisgidsje - schakel de Wikipedia-plug-in in en geniet van artikelen over de bezienswaardigheden in je omgeving.</string>
     <string name="lenght_limit_description">Geef de voertuiglengte op, er zijn mogelijk routebeperkingen voor lange voertuigen.</string>
@@ -3707,7 +3707,7 @@
     <string name="add_hidden_group_info">Het toegevoegde punt zal niet zichtbaar zijn op de kaart, aangezien de geselecteerde groep verborgen is, je kan het vinden in \"%s\".</string>
     <string name="system_default_theme">Standaard</string>
     <string name="route_between_points">Route tussen punten</string>
-    <string name="route_between_points_warning_desc">"Vervolgens, zet  uw track vast op de dichtstbijzijnde toegestane weg met een van uw navigatieprofielen om deze optie te gebruiken."</string>
+    <string name="route_between_points_warning_desc">Vervolgens, zet uw track vast op de dichtstbijzijnde toegestane weg met een van uw navigatieprofielen om deze optie te gebruiken.</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s gegevens alleen beschikbaar op de wegen, u moet een route berekenen met behulp van \"Route tussen punten\" om deze te krijgen.</string>
     <string name="route_between_points_desc">Selecteer hoe de punten verbonden worden, via een rechte lijn, of een route berekenen tussen de punten zoals hieronder aangegeven.</string>
     <string name="route_between_points_next_segment_button_desc">Alleen het volgende segment wordt opnieuw berekend met het geselecteerde profiel.</string>
@@ -3744,7 +3744,7 @@
     <string name="simplified_track_description">Alleen de routelijn wordt opgeslagen, de waypoints worden verwijderd.</string>
     <string name="shared_string_done">Bewaar</string>
     <string name="reverse_route">Route omkeren</string>
-    <string name="route_between_points_add_track_desc">"Selecteer een track waaraan je een nieuw segment wil  toevoegen."</string>
+    <string name="route_between_points_add_track_desc">Selecteer een track waaraan je een nieuw segment wil toevoegen.</string>
     <string name="plan_route_select_track_file_for_open">Selecteer een trackbestand om te openen.</string>
     <string name="plan_route_exit_dialog_descr">Weet u zeker dat u alle wijzigingen in de geplande route wilt annuleren door deze te sluiten\?</string>
     <string name="plan_route_trim_before">Opsmukken voor</string>
@@ -3771,4 +3771,12 @@
     <string name="plan_route_create_new_route">Maak een nieuwe route</string>
     <string name="plan_route_open_existing_track">Open een bestaande track</string>
     <string name="plan_a_route">Plan een route</string>
+    <string name="use_two_phase_routing">Gebruik 2-fasen A* routeringsalgoritme</string>
+    <string name="shared_string_graph">Grafiek</string>
+    <string name="message_graph_will_be_available_after_recalculation">Wacht op de herberekening van de route.
+\nDe grafiek is beschikbaar na herberekening.</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="import_track_descr">Kies een trackbestand om te volgen of importeer het, vanaf uw apparaat.</string>
+    <string name="app_mode_gap">Kloof</string>
+    <string name="shared_string_custom">Op maat</string>
 </resources>
