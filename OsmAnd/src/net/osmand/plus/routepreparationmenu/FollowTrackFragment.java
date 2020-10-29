@@ -1,11 +1,8 @@
 package net.osmand.plus.routepreparationmenu;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -19,21 +16,16 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.Collator;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
-import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.data.QuadRect;
@@ -41,7 +33,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SimplePopUpMenuItemAdapter;
+import net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
@@ -78,8 +70,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -98,12 +88,14 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	private GPXFile gpxFile;
 
 	private View buttonsShadow;
+	private ImageButton sortButton;
+
 	private TracksToFollowCard tracksCard;
+	private TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
 
 	private boolean editingTrack;
 	private boolean selectingTrack;
 	private int menuTitleHeight;
-	TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
 
 	@Override
 	public int getMainLayoutId() {
@@ -162,42 +154,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			final ImageButton sortButton = view.findViewById(R.id.sort_button);
-			Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark,
-					isNightMode()
-							? R.color.inactive_buttons_and_links_bg_dark
-							: R.color.inactive_buttons_and_links_bg_light);
-			sortButton.setImageResource(sortByMode.getIconId());
-			AndroidUtils.setBackground(sortButton, background);
-			sortButton.setVisibility(View.VISIBLE);
-			final RecyclerView filesRecyclerView = view.findViewById(R.id.gpx_track_list);
-			filesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-			sortButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					final List<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> items = new ArrayList<>();
-					for (final TracksSortByMode mode : TracksSortByMode.values()) {
-						items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
-								getString(mode.getNameId()),
-								app.getUIUtilities().getThemedIcon(mode.getIconId()),
-								new View.OnClickListener() {
-									@Override
-									public void onClick(View v) {
-										sortByMode = mode;
-										sortButton.setImageResource(mode.getIconId());
-										if (tracksCard != null) {
-											List<GPXInfo> list = tracksCard.getGpxInfoList();
-											tracksCard.setSortByMode(mode);
-											tracksCard.setGpxInfoList(list);
-
-										}
-									}
-								}, sortByMode == mode
-						));
-					}
-					UiUtilities.showPopUpMenu(v, items);
-				}
-			});
 			ImageButton closeButton = view.findViewById(R.id.close_button);
 			buttonsShadow = view.findViewById(R.id.buttons_shadow);
 			closeButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
@@ -213,6 +169,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			}
 			setupCards();
 			setupButtons(view);
+			setupSortButton(view);
 			setupScrollShadow();
 			if (!isPortrait()) {
 				int widthNoShadow = getLandscapeNoShadowWidth();
@@ -249,9 +206,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			cardsContainer.removeAllViews();
 
 			if (gpxFile == null || selectingTrack) {
-				ImportTrackCard importTrackCard = new ImportTrackCard(mapActivity);
-				importTrackCard.setListener(this);
-
 				setupTracksCard();
 			} else {
 				String fileName = null;
@@ -317,8 +271,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			}
 		}
 	}
-
-
 
 	private void setupNavigateOptionsCard(GPXRouteParamsBuilder rparams) {
 		MapActivity mapActivity = getMapActivity();
@@ -647,6 +599,34 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
 			}
 		}
+	}
+
+	private void setupSortButton(View view) {
+		final ImageButton sortButton = view.findViewById(R.id.sort_button);
+		int colorId = isNightMode() ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
+		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, colorId);
+		sortButton.setImageResource(sortByMode.getIconId());
+		AndroidUtils.setBackground(sortButton, background);
+		sortButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				List<SimplePopUpMenuItem> items = new ArrayList<>();
+				for (final TracksSortByMode mode : TracksSortByMode.values()) {
+					items.add(new SimplePopUpMenuItem(getString(mode.getNameId()),
+							app.getUIUtilities().getThemedIcon(mode.getIconId()),
+							new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									sortByMode = mode;
+									tracksCard.setSortByMode(mode);
+									sortButton.setImageResource(mode.getIconId());
+								}
+							}, sortByMode == mode
+					));
+				}
+				UiUtilities.showPopUpMenu(v, items);
+			}
+		});
 	}
 
 	private void setupButtons(View view) {

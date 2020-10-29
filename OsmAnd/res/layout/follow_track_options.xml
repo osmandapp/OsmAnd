@@ -60,14 +60,11 @@
 					android:layout_width="@dimen/wikipedia_options_button_width"
 					android:layout_height="@dimen/dialog_button_height"
 					android:layout_gravity="center"
-					osmand:srcCompat="@drawable/ic_sort_waypoint_dark"
-					android:tint="?attr/color_dialog_buttons"
-					android:background="?attr/bg_dash_line"
-					android:visibility="gone"
-					tools:visibility="visible"
 					android:layout_marginEnd="@dimen/content_padding"
-					android:layout_marginRight="@dimen/content_padding" />
-
+					android:layout_marginRight="@dimen/content_padding"
+					android:background="?attr/bg_dash_line"
+					android:tint="?attr/color_dialog_buttons"
+					osmand:srcCompat="@drawable/ic_sort_waypoint_dark" />
 
 			</LinearLayout>
 
@@ -94,14 +91,6 @@
 					android:background="?attr/route_info_bg"
 					android:orientation="vertical"
 					android:paddingBottom="@dimen/dialog_button_ex_height">
-
-					<androidx.recyclerview.widget.RecyclerView
-						android:id="@+id/gpx_track_list"
-						android:layout_width="match_parent"
-						android:layout_height="0dp"
-						android:layout_weight="1"
-						tools:itemCount="1"
-						tools:listitem="@layout/gpx_track_select_item" />
 
 				</LinearLayout>
 

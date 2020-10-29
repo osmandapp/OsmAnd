@@ -24,19 +24,15 @@ import java.util.Map;
 
 public class TracksToFollowCard extends BaseCard {
 
+	private List<GPXInfo> gpxInfoList;
 	private Map<String, List<GPXInfo>> gpxInfoCategories;
 
-	private List<GPXInfo> gpxInfoList;
-	private String selectedCategory;
+	private GpxTrackAdapter tracksAdapter;
+	private TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
+
 	private String defaultCategory;
 	private String visibleCategory;
-	TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
-
-	public void setSortByMode(TracksSortByMode sortByMode) {
-		this.sortByMode = sortByMode;
-	}
-
-	private GpxTrackAdapter tracksAdapter;
+	private String selectedCategory;
 
 	public TracksToFollowCard(MapActivity mapActivity, List<GPXInfo> gpxInfoList, String selectedCategory) {
 		super(mapActivity);
@@ -44,23 +40,18 @@ public class TracksToFollowCard extends BaseCard {
 		this.selectedCategory = selectedCategory;
 		defaultCategory = app.getString(R.string.shared_string_all);
 		visibleCategory = app.getString(R.string.shared_string_visible);
-		sortGPXInfoItems(gpxInfoList);
 		gpxInfoCategories = getGpxInfoCategories();
 	}
 
-	public void setGpxInfoList(List<GPXInfo> gpxInfoList) {
-		this.gpxInfoList = gpxInfoList;
-		sortGPXInfoItems(gpxInfoList);
+	public void setSortByMode(TracksSortByMode sortByMode) {
+		this.sortByMode = sortByMode;
 		gpxInfoCategories = getGpxInfoCategories();
-		List<GPXInfo> items = gpxInfoCategories.get(selectedCategory);
-		tracksAdapter.setGpxInfoList(items != null ? items : new ArrayList<GPXInfo>());
-		tracksAdapter.notifyDataSetChanged();
+		updateTracksAdapter();
 	}
 
 	public List<GPXInfo> getGpxInfoList() {
 		return gpxInfoList;
 	}
-
 
 	public String getSelectedCategory() {
 		return selectedCategory;
@@ -107,11 +98,8 @@ public class TracksToFollowCard extends BaseCard {
 			@Override
 			public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
 				selectedCategory = item.getTitle();
-				List<GPXInfo> items = gpxInfoCategories.get(selectedCategory);
 				tracksAdapter.setShowFolderName(showFoldersName());
-				tracksAdapter.setGpxInfoList(items != null ? items : new ArrayList<GPXInfo>());
-				tracksAdapter.notifyDataSetChanged();
-
+				updateTracksAdapter();
 				selectionAdapter.notifyDataSetChanged();
 			}
 		});
@@ -120,6 +108,12 @@ public class TracksToFollowCard extends BaseCard {
 		iconCategoriesRecyclerView.setAdapter(selectionAdapter);
 		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 		selectionAdapter.notifyDataSetChanged();
+	}
+
+	private void updateTracksAdapter() {
+		List<GPXInfo> items = gpxInfoCategories.get(selectedCategory);
+		tracksAdapter.setGpxInfoList(items != null ? items : new ArrayList<GPXInfo>());
+		tracksAdapter.notifyDataSetChanged();
 	}
 
 	private boolean showFoldersName() {
@@ -132,6 +126,7 @@ public class TracksToFollowCard extends BaseCard {
 		gpxInfoCategories.put(visibleCategory, new ArrayList<GPXInfo>());
 		gpxInfoCategories.put(defaultCategory, new ArrayList<GPXInfo>());
 
+		sortGPXInfoItems(gpxInfoList);
 		for (GPXInfo info : gpxInfoList) {
 			if (info.isSelected()) {
 				addGpxInfoCategory(gpxInfoCategories, info, visibleCategory);
@@ -179,4 +174,3 @@ public class TracksToFollowCard extends BaseCard {
 		});
 	}
 }
-
