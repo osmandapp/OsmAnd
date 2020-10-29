@@ -15,6 +15,7 @@ public class LocationConvert {
 	public static final int FORMAT_SECONDS = 2;
 	public static final int UTM_FORMAT = 3;
 	public static final int OLC_FORMAT = 4;
+	public static final int MGRS_FORMAT = 5;
 	private static final char DELIM = ':';
 	private static final char DELIMITER_DEGREES = '°';
 	private static final char DELIMITER_MINUTES = '′';

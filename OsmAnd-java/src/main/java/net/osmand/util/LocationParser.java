@@ -3,6 +3,7 @@ package net.osmand.util;
 import com.google.openlocationcode.OpenLocationCode;
 import com.google.openlocationcode.OpenLocationCode.CodeArea;
 import com.jwetherell.openmap.common.LatLonPoint;
+import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
 import net.osmand.data.LatLon;
@@ -111,7 +112,7 @@ public class LocationParser {
 			return null;
 		}
 		// detect UTM
-		if (all.size() == 4 && d.size() == 3 && all.get(1) instanceof String) {
+		if (all.size() == 4 && d.size() == 3 && all.get(1) instanceof String && ((String) all.get(1)).length() == 1) {
 			char ch = all.get(1).toString().charAt(0);
 			if (Character.isLetter(ch)) {
 				UTMPoint upoint = new UTMPoint(d.get(2), d.get(1), d.get(0).intValue(), ch);
@@ -120,7 +121,7 @@ public class LocationParser {
 			}
 		}
 
-		if (all.size() == 3 && d.size() == 2 && all.get(1) instanceof String) {
+		if (all.size() == 3 && d.size() == 2 && all.get(1) instanceof String && ((String) all.get(1)).length() == 1) {
 			char ch = all.get(1).toString().charAt(0);
 			String combined = strings.get(2);
 			if (Character.isLetter(ch)) {
@@ -133,6 +134,21 @@ public class LocationParser {
 					return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
 				} catch (NumberFormatException e) {
 				}
+			}
+		}
+
+		//detect MGRS
+		if (all.size() >= 3 && (d.size() == 2 || d.size() == 3) && all.get(1) instanceof String) {
+			try {
+				StringBuilder s = new StringBuilder();
+				for (String i : strings) {
+					s.append(i);
+				}
+				MGRSPoint mgrsPoint = new MGRSPoint(s.toString());
+				LatLonPoint ll = mgrsPoint.toLatLonPoint();
+				return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
+			} catch (NumberFormatException e) {
+				//do nothing
 			}
 		}
 		// try to find split lat/lon position

@@ -171,7 +171,8 @@ public class PointDescription {
 		
 		String utm = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.UTM_FORMAT);
 		String olc = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.OLC_FORMAT);
-		
+		String mgrs = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.MGRS_FORMAT);
+
 		try {
 			latLonString = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES_SHORT);
 			latLonDeg = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES);
@@ -190,7 +191,8 @@ public class PointDescription {
 		results.put(OsmAndFormatter.FORMAT_SECONDS, latLonSec);
 		results.put(OsmAndFormatter.UTM_FORMAT, utm);
 		results.put(OsmAndFormatter.OLC_FORMAT, olc);
-		
+		results.put(OsmAndFormatter.MGRS_FORMAT, mgrs);
+
 		int zoom = 17;
 		if (ctx.getMapView() != null) {
 			zoom = ctx.getMapView().getZoom();
@@ -204,6 +206,8 @@ public class PointDescription {
 			results.put(LOCATION_LIST_HEADER, utm);
 		} else if (f == PointDescription.OLC_FORMAT) {
 			results.put(LOCATION_LIST_HEADER, olc);
+		} else if (f == PointDescription.MGRS_FORMAT) {
+			results.put(LOCATION_LIST_HEADER, mgrs);
 		} else if (f == PointDescription.FORMAT_DEGREES) {
 			results.put(LOCATION_LIST_HEADER, latLonDeg);
 		} else if (f == PointDescription.FORMAT_MINUTES) {
@@ -396,7 +400,8 @@ public class PointDescription {
 	public static final int FORMAT_SECONDS = LocationConvert.FORMAT_SECONDS;
 	public static final int UTM_FORMAT = LocationConvert.UTM_FORMAT;
 	public static final int OLC_FORMAT = LocationConvert.OLC_FORMAT;
-	
+	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
+
 	public static String formatToHumanString(Context ctx, int format) {
 		switch (format) {
 			case LocationConvert.FORMAT_DEGREES:
@@ -409,6 +414,8 @@ public class PointDescription {
 				return "UTM";
 			case LocationConvert.OLC_FORMAT:
 				return "OLC";
+			case LocationConvert.MGRS_FORMAT:
+				return "MGRS";
 			default:
 				return "Unknown format";
 		}

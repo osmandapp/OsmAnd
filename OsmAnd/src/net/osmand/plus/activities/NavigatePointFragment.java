@@ -21,6 +21,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.jwetherell.openmap.common.LatLonPoint;
+import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
 import net.osmand.LocationConvert;
@@ -70,8 +71,8 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		}
 		currentFormat = app.getSettings().COORDINATES_FORMAT.get();
 		initUI(location.getLatitude(), location.getLongitude());
-		if(savedInstanceState != null && savedInstanceState.containsKey(SEARCH_LAT) && savedInstanceState.containsKey(SEARCH_LON) && 
-				currentFormat != PointDescription.UTM_FORMAT) {
+		if(savedInstanceState != null && savedInstanceState.containsKey(SEARCH_LAT) && savedInstanceState.containsKey(SEARCH_LON) &&
+				currentFormat != PointDescription.UTM_FORMAT && currentFormat != PointDescription.MGRS_FORMAT) {
 			String lat = savedInstanceState.getString(SEARCH_LAT);
 			String lon = savedInstanceState.getString(SEARCH_LON);
 			if(lat != null && lon != null && lat.length() > 0 && lon.length() > 0) {
@@ -152,23 +153,52 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	protected void showCurrentFormat(LatLon l) {
 		final EditText latEdit = ((EditText)view.findViewById(R.id.LatitudeEdit));
 		final EditText lonEdit = ((EditText)view.findViewById(R.id.LongitudeEdit));
-		boolean utm = currentFormat == PointDescription.UTM_FORMAT;
-		view.findViewById(R.id.easting_row).setVisibility(utm ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.northing_row).setVisibility(utm ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.zone_row).setVisibility(utm ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.lat_row).setVisibility(!utm ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.lon_row).setVisibility(!utm ? View.VISIBLE : View.GONE);
-		if(currentFormat == PointDescription.UTM_FORMAT) {
-			final EditText northingEdit = ((EditText)view.findViewById(R.id.NorthingEdit));
-			final EditText eastingEdit = ((EditText)view.findViewById(R.id.EastingEdit));
-			final EditText zoneEdit = ((EditText)view.findViewById(R.id.ZoneEdit));
-			UTMPoint pnt = new UTMPoint(new LatLonPoint(l.getLatitude(), l.getLongitude()));
-			zoneEdit.setText(pnt.zone_number + ""+pnt.zone_letter);
-			northingEdit.setText(((long)pnt.northing)+"");
-			eastingEdit.setText(((long)pnt.easting)+"");
-		} else {
-			latEdit.setText(LocationConvert.convert(MapUtils.checkLatitude(l.getLatitude()), currentFormat));
-			lonEdit.setText(LocationConvert.convert(MapUtils.checkLongitude(l.getLongitude()), currentFormat));
+		switch (currentFormat){
+			case PointDescription.UTM_FORMAT: {
+				view.findViewById(R.id.easting_row).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.northing_row).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.zone_row).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.lat_row).setVisibility(View.GONE);
+				view.findViewById(R.id.lon_row).setVisibility(View.GONE);
+				view.findViewById(R.id.mgrs_row).setVisibility(View.GONE);
+
+				final EditText northingEdit = ((EditText) view.findViewById(R.id.NorthingEdit));
+				final EditText eastingEdit = ((EditText) view.findViewById(R.id.EastingEdit));
+				final EditText zoneEdit = ((EditText) view.findViewById(R.id.ZoneEdit));
+				UTMPoint pnt = new UTMPoint(new LatLonPoint(l.getLatitude(), l.getLongitude()));
+				zoneEdit.setText(pnt.zone_number + "" + pnt.zone_letter);
+				northingEdit.setText(((long) pnt.northing) + "");
+				eastingEdit.setText(((long) pnt.easting) + "");
+				break;
+			}
+
+			case PointDescription.MGRS_FORMAT: {
+				view.findViewById(R.id.easting_row).setVisibility(View.GONE);
+				view.findViewById(R.id.northing_row).setVisibility(View.GONE);
+				view.findViewById(R.id.zone_row).setVisibility(View.GONE);
+				view.findViewById(R.id.lat_row).setVisibility(View.GONE);
+				view.findViewById(R.id.lon_row).setVisibility(View.GONE);
+				view.findViewById(R.id.mgrs_row).setVisibility(View.VISIBLE);
+
+				final EditText mgrsEdit = ((EditText) view.findViewById(R.id.MGRSEdit));
+				MGRSPoint pnt = new MGRSPoint(new LatLonPoint(l.getLatitude(), l.getLongitude()));
+				mgrsEdit.setText(pnt.toString());
+				break;
+			}
+
+			default: {
+				view.findViewById(R.id.easting_row).setVisibility(View.GONE);
+				view.findViewById(R.id.northing_row).setVisibility(View.GONE);
+				view.findViewById(R.id.zone_row).setVisibility(View.GONE);
+				view.findViewById(R.id.lat_row).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.lon_row).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.mgrs_row).setVisibility(View.GONE);
+
+
+				latEdit.setText(LocationConvert.convert(MapUtils.checkLatitude(l.getLatitude()), currentFormat));
+				lonEdit.setText(LocationConvert.convert(MapUtils.checkLongitude(l.getLongitude()), currentFormat));
+			}
+
 		}
 	}
 
@@ -199,6 +229,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 				PointDescription.formatToHumanString(this.getContext(), PointDescription.FORMAT_MINUTES),
 				PointDescription.formatToHumanString(this.getContext(), PointDescription.FORMAT_SECONDS),
 				PointDescription.formatToHumanString(this.getContext(), PointDescription.UTM_FORMAT),
+				PointDescription.formatToHumanString(this.getContext(), PointDescription.MGRS_FORMAT),
 		});
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		format.setAdapter(adapter);
@@ -217,6 +248,8 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 					newFormat = PointDescription.FORMAT_SECONDS;
 				} else if (PointDescription.formatToHumanString(NavigatePointFragment.this.getContext(), PointDescription.UTM_FORMAT).equals(itm)) {
 					newFormat = PointDescription.UTM_FORMAT;
+				} else if (PointDescription.formatToHumanString(NavigatePointFragment.this.getContext(), PointDescription.MGRS_FORMAT).equals(itm)) {
+					newFormat = PointDescription.MGRS_FORMAT;
 				}
 				try { 
 					LatLon loc = parseLocation();
