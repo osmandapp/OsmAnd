@@ -1,20 +1,22 @@
 package net.osmand.plus.routing;
 
 
+import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
 import net.osmand.Location;
+import net.osmand.StateChangedListener;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.data.StreetName;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
@@ -80,7 +82,10 @@ public class VoiceRouter {
 	private int TURN_IN_DISTANCE;
 	private int TURN_IN_DISTANCE_END;
 	private int TURN_NOW_DISTANCE;
-	
+
+	private SoundPool soundPool;
+	private int soundClick = -1;
+
 	private VoiceCommandPending pendingCommand = null;
 	private RouteDirectionInfo nextRouteDirection;
 
@@ -103,8 +108,36 @@ public class VoiceRouter {
 			}
 		};
 		app.getAppCustomization().addListener(customizationListener);
+
+		if (!isMute()) {
+			loadCameraSound();
+		}
+		settings.VOICE_MUTE.addListener(new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				if (!isMute() && soundPool == null) {
+					loadCameraSound();
+				}
+			}
+		});
 	}
-	
+
+	private void loadCameraSound() {
+		if (soundPool == null) {
+			soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+		}
+		if (soundClick == -1) {
+			try {
+				// Taken unaltered from https://freesound.org/people/Corsica_S/sounds/91926/ under license http://creativecommons.org/licenses/by/3.0/ :
+				AssetFileDescriptor assetFileDescriptor = app.getAssets().openFd("sounds/ding.ogg");
+				soundClick = soundPool.load(assetFileDescriptor, 1);
+				assetFileDescriptor.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public void setPlayer(CommandPlayer player) {
 		this.player = player;
 		if (pendingCommand != null && player != null) {
@@ -1015,18 +1048,8 @@ public class VoiceRouter {
 		if (isMute()) {
 			return;
 		}
-		SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-		int soundClick = -1;
-		boolean success = true;
-		try {
-			// Taken unaltered from https://freesound.org/people/Corsica_S/sounds/91926/ under license http://creativecommons.org/licenses/by/3.0/ :
-			soundClick = sp.load(settings.getContext().getAssets().openFd("sounds/ding.ogg"), 1);
-		} catch (IOException e) {
-			e.printStackTrace();
-			success = false;
-		}
-		if (success) {
-			sp.play(soundClick, 1 ,1, 0, 0, 1);
+		if (soundPool != null && soundClick != -1) {
+			soundPool.play(soundClick, 1, 1, 0, 0, 1);
 		}
 	}
 
