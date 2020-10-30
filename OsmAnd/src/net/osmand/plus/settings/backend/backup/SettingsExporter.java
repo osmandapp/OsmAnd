@@ -68,7 +68,7 @@ class SettingsExporter {
 				if (Algorithms.isEmpty(fileName)) {
 					fileName = item.getDefaultFileName();
 				}
-				if (item instanceof FileSettingsItem && ((FileSettingsItem) item).isSubFolders()) {
+				if (item instanceof FileSettingsItem && ((FileSettingsItem) item).getSubtype().isDirectory()) {
 					File file = ((FileSettingsItem) item).getFile();
 					zipDirsWithFiles(file, writer, zos);
 				} else {
@@ -97,7 +97,7 @@ class SettingsExporter {
 			FileSettingsItem item = (FileSettingsItem) writer.getItem();
 			String zipEntryName = Algorithms.isEmpty(item.getSubtype().getSubtypeFolder())
 					? f.getName()
-					: f.getPath().substring(f.getPath().indexOf(item.getSubtype().getSubtypeFolder()));
+					: f.getPath().substring(f.getPath().indexOf(item.getSubtype().getSubtypeFolder()) - 1);
 			ZipEntry entry = new ZipEntry(zipEntryName);
 			zos.putNextEntry(entry);
 			item.setInputStream(new FileInputStream(f));

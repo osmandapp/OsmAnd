@@ -610,9 +610,6 @@ public class SettingsHelper {
 				try {
 					FileSettingsItem fileItem = new FileSettingsItem(app, (File) object);
 					settingsItems.add(fileItem);
-					if (FileSubtype.getSubtypeByPath(app, ((File) object).getPath()) == FileSubtype.VOICE) {
-						fileItem.setSubFolders(true);
-					}
 				} catch (IllegalArgumentException e) {
 					LOG.warn("Trying to export unsuported file type", e);
 				}

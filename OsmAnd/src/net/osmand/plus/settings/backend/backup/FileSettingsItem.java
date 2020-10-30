@@ -21,8 +21,6 @@ import java.io.OutputStream;
 
 public class FileSettingsItem extends StreamSettingsItem {
 
-
-
 	public enum FileSubtype {
 		UNKNOWN("", null),
 		OTHER("other", ""),
@@ -48,6 +46,10 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 		public boolean isMap() {
 			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP;
+		}
+
+		public boolean isDirectory() {
+			return this == TTS_VOICE || this == VOICE;
 		}
 
 		public String getSubtypeName() {
@@ -123,7 +125,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
-	private boolean subFolders;
 
 	public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
 		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
@@ -210,14 +211,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 		this.size = size;
 	}
 
-	public boolean isSubFolders() {
-		return subFolders;
-	}
-
-	public void setSubFolders(boolean subFolders) {
-		this.subFolders = subFolders;
-	}
-
 	@NonNull
 	public File getFile() {
 		return file;
@@ -253,7 +246,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
 				OutputStream output;
-				File dest = FileSettingsItem.this.file;
+				File dest = getDestination();
 				if (dest.exists() && !shouldReplace) {
 					dest = renameFile(dest);
 				}

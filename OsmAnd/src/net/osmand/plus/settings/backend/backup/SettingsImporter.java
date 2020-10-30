@@ -25,7 +25,7 @@ import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 
 class SettingsImporter {
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	SettingsImporter(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -124,6 +124,7 @@ class SettingsImporter {
 					try {
 						SettingsItemReader<? extends SettingsItem> reader = item.getReader();
 						if (reader != null) {
+							reader.setDestination(app.getAppPath(fileName));
 							reader.readFromStream(ois);
 						}
 					} catch (IllegalArgumentException e) {
