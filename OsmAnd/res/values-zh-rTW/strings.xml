@@ -3930,4 +3930,13 @@
 \n重新計算後即可使用圖表。</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="app_mode_gap">分隔</string>
+    <string name="shared_string_local_maps">本機地圖</string>
+    <string name="icon_group_amenity">便利設施</string>
+    <string name="icon_group_special">特殊</string>
+    <string name="icon_group_transport">運輸</string>
+    <string name="icon_group_service">服務</string>
+    <string name="icon_group_symbols">符號</string>
+    <string name="icon_group_sport">運動</string>
+    <string name="icon_group_emergency">警急</string>
+    <string name="icon_group_travel">旅行</string>
 </resources>
