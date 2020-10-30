@@ -636,7 +636,7 @@
     <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart).</string>
     <string name="shared_string_online_maps">Online kaarten</string>
     <string name="online_map_settings_descr">Configureer online of bewaarde kaarttegels.</string>
-    <string name="osmand_rastermaps_plugin_description">Geeft toegang tot vele soorten online (zogenaamde tile of raster) kaarten, van vooraf gedefinieerde OSM tiles (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaatkaarten, geologische kaarten, reliëfschaduwlagen, enz.
+    <string name="osmand_rastermaps_plugin_description">Geeft toegang tot vele soorten online (zogenaamde tile of raster) kaarten, van vooraf gedefinieerde OSM tiles (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaatkaarten, geologische kaarten, reliëf schaduwlagen, enz.
 \n
 \nAl deze kaarten kunnen worden gebruikt als de hoofd(basis)kaart, of als een extra laag of een achtergrondlaag bij een andere basiskaart (zoals de normale offline kaarten van OsmAnd). Om een achtergrondlaag beter te kunnen zien, kunt u elementen van de OsmAnd vectorkaarten eenvoudig verbergen via het menu \'Kaart instellen\'.
 \n
@@ -769,9 +769,7 @@
 \n - Beperkt aantal kaartdownloads
 \n - Geen toegang tot offline Wikipedia POI\'s
 \n
-\nOsmAnd wordt actief ontwikkeld en ons project en de verdere vooruitgang ervan is afhankelijk van
-\nfinanciële bijdragen om de ontwikkeling en testen van nieuwe functionaliteit te kunnen bekostigen.
-\nWij verzoeken je om OsmAnd+ te kopen, of om een donatie over te maken via https://osmand.net.</string>
+\n OsmAnd wordt actief ontwikkeld en ons project en de verdere vooruitgang ervan is afhankelijk van financiële bijdragen om de ontwikkeling en testen van nieuwe functionaliteit te kunnen bekostigen. Wij verzoeken je om OsmAnd+ te kopen, of om een donatie over te maken via https://osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
 \n 
 \nOsmAnd+ is een open-source app voor navigatie die gebruikmaakt van de wereldwijde verzameling van OSM-gegevens. Alle kaartmateriaal (vector- en rasterkaarten) kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. De app biedt ook offline- en online-navigatie, met stembegeleiding. 
@@ -1283,7 +1281,7 @@
     <string name="map_widget_left">Widgets Linker Kolom</string>
     <string name="configure_map">Kaart instellen</string>
     <string name="search_radius_proximity">Binnen</string>
-    <string name="anonymous_user_hint">Anonieme gebruikers kunnen geen
+    <string name="anonymous_user_hint">Anonieme gebruikers kunnen geen:
 \n- groepen aanmaken;
 \n- groepen en apparaten synchroniseren met de server;
 \n- groepen en apparaten beheren in een eigen omgeving op de website.</string>
@@ -1532,7 +1530,7 @@
     <string name="routing_attr_height_name">Hoogte van het voertuig</string>
     <string name="routing_attr_height_description">Geef de hoogte die minimaal toegestaan moet zijn op de route.</string>
     <string name="use_fast_recalculation">Slim opnieuw berekenen van routes</string>
-    <string name="use_fast_recalculation_desc">Herbereken alleen het begin van de route voor lange trajecten.</string>
+    <string name="use_fast_recalculation_desc">Herbereken alleen het begin van de route. Kan gebruikt worden voor lange trajecten.</string>
     <string name="osm_edit_context_menu_delete">Verwijder OSM-wijziging</string>
     <string name="rendering_value_disabled_name">Uitgeschakeld</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Kleuren naar Wandelroute-netwerk</string>
@@ -3336,7 +3334,7 @@
     <string name="edit_profiles_descr">U kunt geen standaard OsmAnd profielen verwijderen, maar u kunt ze deactiveren (in het vorige scherm), of naar onderen verplaatsen.</string>
     <string name="edit_profiles">Wijzig profielen</string>
     <string name="select_nav_profile_dialog_message">\'Navigatietype\' bepaalt hoe routes berekend worden.</string>
-    <string name="profile_appearance">Profiel aanzicht</string>
+    <string name="profile_appearance">Profiel weergave</string>
     <string name="choose_icon_color_name">Icoon, kleur en naam</string>
     <string name="reorder_profiles">Wijzig lijst met profielen</string>
     <string name="selected_profile">Geselecteerd profiel</string>
@@ -3779,4 +3777,121 @@
     <string name="import_track_descr">Kies een trackbestand om te volgen of importeer het, vanaf uw apparaat.</string>
     <string name="app_mode_gap">Kloof</string>
     <string name="shared_string_custom">Op maat</string>
+    <string name="perform_oauth_authorization_description">Voer een OAuth-login uit om osm edit functies te gebruiken</string>
+    <string name="release_3_5">"• Bijgewerkte app- en profielinstellingen: instellingen zijn nu gerangschikt op type. Elk profiel kan afzonderlijk worden aangepast.
+\n
+\n  • Nieuw dialoogvenster voor het downloaden van kaarten waarin wordt voorgesteld een kaart te downloaden tijdens het browsen
+\n
+\n  • Donkere thema-fixes
+\n
+\n  • Verschillende routeringsproblemen over de hele wereld opgelost
+\n
+\n  • Bijgewerkte basiskaart met meer gedetailleerd wegennet
+\n
+\n  • Vaste overstroomde gebieden over de hele wereld
+\n
+\n  • Skirouting: hoogteprofiel en routecomplexiteit toegevoegd aan de routedetails
+\n
+\n  • Andere bugs opgelost
+\n
+\n"</string>
+    <string name="release_3_6">"• Profielen: nu kunt u de volgorde wijzigen, het pictogram voor de kaart instellen, alle instellingen voor basisprofielen wijzigen en ze terugzetten naar de standaardinstellingen
+\n
+\n  • Exitnummer toegevoegd in de navigatie
+\n
+\n  • Herwerkte plug-in instellingen
+\n
+\n  • Herwerkt instellingenscherm voor snelle toegang tot alle profielen
+\n
+\n  • Optie toegevoegd om instellingen van een ander profiel te kopiëren
+\n
+\n  • Mogelijkheid toegevoegd om een volgorde te wijzigen of POI-categorieën in Zoeken te verbergen
+\n
+\n  • Correct uitgelijnde POI-pictogrammen op de kaart
+\n
+\n  • Zonsondergang / zonsopganggegevens toegevoegd om de kaart te configureren
+\n
+\n  • Thuis/werk-pictogrammen toegevoegd op de kaart
+\n
+\n  • Ondersteuning toegevoegd voor meerdere regels beschrijving bij Instellingen
+\n
+\n • Correcte transliteratie toegevoegd aan de kaart van Japan
+\n
+\n  • Antarctica-kaart toegevoegd
+\n
+\n"</string>
+    <string name="what_is_new">Wat is er nieuw</string>
+    <string name="snowmobile_render_descr">Voor sneeuwscooter, rijden met speciale wegen en tracks.</string>
+    <string name="set_working_days_to_continue">Stel aantal werkdagen in om door te gaan</string>
+    <string name="gpx_split_interval_descr">Selecteer het interval waarmee markeringen met afstand of tijd op de track worden weergegeven.</string>
+    <string name="gpx_split_interval_none_descr">Selecteer de gewenste splitsingsoptie: op tijd of op afstand.</string>
+    <string name="track_coloring_solid">Vaste</string>
+    <string name="overwrite_track">Overschrijf track</string>
+    <string name="threshold_distance">Drempelafstand</string>
+    <string name="navigation_profile">Navigatieprofiel</string>
+    <string name="in_case_of_reverse_direction">In geval van een omgekeerde richting</string>
+    <string name="shared_string_gpx_files">Routes</string>
+    <string name="layer_gpx_layer">Routes</string>
+    <string name="show_gpx">Routes</string>
+    <string name="save_track_to_gpx_globally">Log track naar GPX-bestand</string>
+    <string name="shared_string_gpx_route">Volg route</string>
+    <string name="empty_state_my_tracks">Voeg trackbestanden toe</string>
+    <string name="context_menu_item_add_waypoint">Voeg een trackwaypoint toe</string>
+    <string name="follow_track">Volg de track</string>
+    <string name="follow_track_descr">Kies een trackbestand om te volgen</string>
+    <string name="select_another_track">Selecteer een andere track</string>
+    <string name="navigate_to_track_descr">Navigeer vanaf mijn positie naar de track</string>
+    <string name="start_of_the_track">Track starten</string>
+    <string name="nearest_point">Dichtstbijzijnde punt</string>
+    <string name="attach_to_the_roads">Aan wegen koppelen</string>
+    <string name="delete_address">Adres verwijderen</string>
+    <string name="add_address">Adres ingeven</string>
+    <string name="access_hint_enter_address">Adres ingeven</string>
+    <string name="shared_string_file_name">Bestandsnaam</string>
+    <string name="number_of_gpx_files_selected_pattern">%s trackbestanden geselecteerd</string>
+    <string name="disable_recording_once_app_killed_descrp">Zal trackregistratie onderbreken wanneer de app wordt uitgeschakeld (via recente apps). (OsmAnd-achtergrondindicatie verdwijnt uit de Android-berichtenbalk.)</string>
+    <string name="previous_segment">Vorig segment</string>
+    <string name="all_previous_segments">Alle voorgaande segmenten</string>
+    <string name="only_selected_segment_recalc">Alleen het geselecteerde segment wordt opnieuw berekend met het geselecteerde profiel.</string>
+    <string name="all_previous_segments_will_be_recalc">Alle voorgaande segmenten worden opnieuw berekend met het geselecteerde profiel.</string>
+    <string name="open_saved_track">Open opgeslagen track</string>
+    <string name="shared_string_is_saved">wordt opgeslagen</string>
+    <string name="one_point_error">Voeg ten minste twee punten toe.</string>
+    <string name="shared_string_redo">Opnieuw doen</string>
+    <string name="sort_last_modified">Laatst gewijzigd</string>
+    <string name="sort_name_descending">Naam: A – Z</string>
+    <string name="sort_name_ascending">Naam: A – Z</string>
+    <string name="start_finish_icons">Start/stop iconen</string>
+    <string name="contour_lines_thanks">Bedankt voor het kopen van \'Contourlijnen\'</string>
+    <string name="osm_live_payment_desc_hw">Abonnement berekend per geselecteerde periode. Annuleer het op elk moment op AppGallery.</string>
+    <string name="osm_live_payment_subscription_management_hw">De betaling wordt bij de bevestiging van de aankoop in rekening gebracht op uw AppGallery-account.
+\n
+\nHet abonnement wordt automatisch verlengd, tenzij het vóór de verlengingsdatum wordt opgezegd. Uw account wordt alleen op de verlengingsdatum in rekening gebracht voor de verlengingsperiode (maand / drie maanden / jaar).
+\n
+\nU kunt uw abonnementen beheren en annuleren door naar uw AppGallery-instellingen te gaan.</string>
+    <string name="routing_attr_avoid_footways_description">Vermijd voetpaden</string>
+    <string name="routing_attr_avoid_footways_name">Vermijd voetpaden</string>
+    <string name="development">Ontwikkeling</string>
+    <string name="use_live_public_transport">OsmAnd Live gegevens</string>
+    <string name="use_live_routing">OsmAnd Live gegevens</string>
+    <string name="complex_routing_descr">Twee stappen routeberekening voor autonavigatie.</string>
+    <string name="use_native_pt">Eigen ontwikkeling van het openbaar vervoer</string>
+    <string name="use_native_pt_desc">Schakel over naar Java (veilige) routeberekening voor het openbaar vervoer</string>
+    <string name="perform_oauth_authorization">Inloggen via OAuth</string>
+    <string name="clear_osm_token">Wis OpenStreetMap OAuth-token</string>
+    <string name="osm_edit_logout_success">Uitloggen gelukt</string>
+    <string name="file_already_imported">Het bestand is al geïmporteerd in OsmAnd</string>
+    <string name="shared_string_local_maps">Lokale kaarten</string>
+    <string name="icon_group_amenity">Aangenaam</string>
+    <string name="icon_group_special">Speciaal</string>
+    <string name="icon_group_transport">Transport</string>
+    <string name="icon_group_service">Onderhoud</string>
+    <string name="icon_group_symbols">Symbolen</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="icon_group_emergency">Noodtoestand</string>
+    <string name="icon_group_travel">Reizen</string>
+    <string name="empty_state_my_tracks_desc">Trackbestanden importeren of opnemen</string>
+    <string name="quick_action_add_gpx">Track waypoint toevoegen</string>
+    <string name="marker_save_as_track">Opslaan als trackbestand</string>
+    <string name="monitoring_control_start">Rec</string>
 </resources>
