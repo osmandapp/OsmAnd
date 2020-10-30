@@ -75,6 +75,8 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
@@ -2045,6 +2047,71 @@ public class GpxUiHelper {
 		return gpx;
 	}
 
+	public enum LineGraphType {
+		ALTITUDE,
+		SLOPE,
+		SPEED;
+	}
+
+	public static List<ILineDataSet> getDataSets(LineChart chart,
+	                                             OsmandApplication app,
+	                                             GPXTrackAnalysis analysis,
+	                                             boolean calcWithoutGaps,
+	                                             LineGraphType... types) {
+		if (app == null || chart == null || analysis == null || types == null) {
+			return Collections.emptyList();
+		}
+		List<OrderedLineDataSet> dataList = new ArrayList<>();
+		for (LineGraphType type : types) {
+			switch (type) {
+				case ALTITUDE: {
+					if (analysis.hasElevationData) {
+						OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
+						dataList.add(elevationDataSet);
+					}
+					break;
+				}
+				case SLOPE:
+					if (analysis.hasElevationData) {
+						OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, null, true, true, calcWithoutGaps);
+						dataList.add(slopeDataSet);
+					}
+					break;
+				case SPEED: {
+					if (analysis.hasSpeedData) {
+						OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
+						dataList.add(speedDataSet);
+					}
+					break;
+				}
+			}
+		}
+		if (dataList.size() > 0) {
+			Collections.sort(dataList, new Comparator<OrderedLineDataSet>() {
+				@Override
+				public int compare(OrderedLineDataSet o1, OrderedLineDataSet o2) {
+					return Float.compare(o1.getPriority(), o2.getPriority());
+				}
+			});
+		}
+		return new ArrayList<ILineDataSet>(dataList);
+	}
+
+	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXUtilities.GPXFile gpx) {
+		GpxDisplayItem gpxItem = null;
+		String groupName = app.getString(R.string.current_route);
+		GpxDisplayGroup group = app.getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
+		if (group != null && group.getModifiableList().size() > 0) {
+			gpxItem = group.getModifiableList().get(0);
+			if (gpxItem != null) {
+				gpxItem.route = true;
+			}
+		}
+		return gpxItem;
+	}
 
 
 	public static class GPXInfo {

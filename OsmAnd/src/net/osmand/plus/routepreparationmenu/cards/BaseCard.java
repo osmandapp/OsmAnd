@@ -31,7 +31,6 @@ public abstract class BaseCard {
 	protected boolean nightMode;
 
 	private CardListener listener;
-	private CardChartListener chartListener;
 
 	public interface CardListener {
 		void onCardLayoutNeeded(@NonNull BaseCard card);
@@ -76,14 +75,6 @@ public abstract class BaseCard {
 
 	public void setListener(CardListener listener) {
 		this.listener = listener;
-	}
-
-	public CardChartListener getChartListener() {
-		return chartListener;
-	}
-
-	public void setChartListener(CardChartListener chartListener) {
-		this.chartListener = chartListener;
 	}
 
 	public void setLayoutNeeded() {

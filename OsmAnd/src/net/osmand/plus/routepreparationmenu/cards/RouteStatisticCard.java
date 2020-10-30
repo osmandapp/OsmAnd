@@ -1,13 +1,10 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.graphics.Matrix;
 import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,18 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -36,6 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
 import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
@@ -52,16 +44,15 @@ public class RouteStatisticCard extends BaseCard {
 	private OrderedLineDataSet slopeDataSet;
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
-	private OnTouchListener onTouchListener;
 	private OnClickListener onAnalyseClickListener;
+	private CommonGraphAdapter graphAdapter;
 
-	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx, OnTouchListener onTouchListener,
+	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx,
 							  OnClickListener onAnalyseClickListener) {
 		super(mapActivity);
 		this.gpx = gpx;
-		this.onTouchListener = onTouchListener;
 		this.onAnalyseClickListener = onAnalyseClickListener;
-		makeGpxDisplayItem();
+		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx);
 	}
 
 	@Nullable
@@ -219,26 +210,14 @@ public class RouteStatisticCard extends BaseCard {
 		return elevationDataSet;
 	}
 
-	private void makeGpxDisplayItem() {
-		String groupName = getMyApplication().getString(R.string.current_route);
-		GpxSelectionHelper.GpxDisplayGroup group = getMyApplication().getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
-		if (group != null && group.getModifiableList().size() > 0) {
-			gpxItem = group.getModifiableList().get(0);
-			if (gpxItem != null) {
-				gpxItem.route = true;
-			}
-		}
-	}
-
 	@Nullable
-	public LineChart getChart() {
-		return (LineChart) view.findViewById(R.id.chart);
+	public CommonGraphAdapter getGraphAdapter() {
+		return graphAdapter;
 	}
 
 	private void buildHeader(GPXTrackAnalysis analysis) {
-		final LineChart mChart = (LineChart) view.findViewById(R.id.chart);
-		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
-		mChart.setOnTouchListener(onTouchListener);
+		LineChart mChart = (LineChart) view.findViewById(R.id.chart);
+		graphAdapter = new CommonGraphAdapter(mChart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
@@ -256,99 +235,7 @@ public class RouteStatisticCard extends BaseCard {
 			this.elevationDataSet = elevationDataSet;
 			this.slopeDataSet = slopeDataSet;
 
-			LineData data = new LineData(dataSets);
-			mChart.setData(data);
-
-			mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-				@Override
-				public void onValueSelected(Entry e, Highlight h) {
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onValueSelected(RouteStatisticCard.this, e, h);
-					}
-				}
-
-				@Override
-				public void onNothingSelected() {
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onNothingSelected(RouteStatisticCard.this);
-					}
-				}
-			});
-
-			mChart.setOnChartGestureListener(new OnChartGestureListener() {
-				boolean hasTranslated = false;
-				float highlightDrawX = -1;
-
-				@Override
-				public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
-					hasTranslated = false;
-					if (mChart.getHighlighted() != null && mChart.getHighlighted().length > 0) {
-						highlightDrawX = mChart.getHighlighted()[0].getDrawX();
-					} else {
-						highlightDrawX = -1;
-					}
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onChartGestureStart(RouteStatisticCard.this, me, lastPerformedGesture);
-					}
-				}
-
-				@Override
-				public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
-					gpxItem.chartMatrix = new Matrix(mChart.getViewPortHandler().getMatrixTouch());
-					Highlight[] highlights = mChart.getHighlighted();
-					if (highlights != null && highlights.length > 0) {
-						gpxItem.chartHighlightPos = highlights[0].getX();
-					} else {
-						gpxItem.chartHighlightPos = -1;
-					}
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onChartGestureEnd(RouteStatisticCard.this, me, lastPerformedGesture, hasTranslated);
-					}
-				}
-
-				@Override
-				public void onChartLongPressed(MotionEvent me) {
-				}
-
-				@Override
-				public void onChartDoubleTapped(MotionEvent me) {
-				}
-
-				@Override
-				public void onChartSingleTapped(MotionEvent me) {
-				}
-
-				@Override
-				public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-				}
-
-				@Override
-				public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-				}
-
-				@Override
-				public void onChartTranslate(MotionEvent me, float dX, float dY) {
-					hasTranslated = true;
-					if (highlightDrawX != -1) {
-						Highlight h = mChart.getHighlightByTouchPoint(highlightDrawX, 0f);
-						if (h != null) {
-							/*
-							ILineDataSet set = mChart.getLineData().getDataSetByIndex(h.getDataSetIndex());
-							if (set != null && set.isHighlightEnabled()) {
-								Entry e = set.getEntryForXValue(h.getX(), h.getY());
-								MPPointD pix = mChart.getTransformer(set.getAxisDependency()).getPixelForValues(e.getX(), e.getY());
-								h.setDraw((float) pix.x, (float) pix.y);
-							}
-							*/
-							mChart.highlightValue(h, true);
-						}
-					}
-				}
-			});
+			graphAdapter.fullUpdate(new LineData(dataSets), gpxItem);
 			mChart.setVisibility(View.VISIBLE);
 		} else {
 			mChart.setVisibility(View.GONE);

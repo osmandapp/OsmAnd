@@ -313,6 +313,10 @@ public class MeasurementEditingContext {
 		return before.points.size();
 	}
 
+	public boolean isPointsEnoughToCalculateRoute() {
+		return getPointsCount() >= 2;
+	}
+
 	public List<RouteSegmentResult> getAllRouteSegments() {
 		List<RouteSegmentResult> allSegments = new ArrayList<>();
 		for (Pair<WptPt, WptPt> key : getOrderedRoadSegmentDataKeys()) {
