@@ -14,6 +14,10 @@
 
 package com.jwetherell.openmap.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MGRSPoint extends ZonedUTMPoint {
 
     /**
@@ -104,6 +108,15 @@ public class MGRSPoint extends ZonedUTMPoint {
      *            an UPPERCASE coordinate string is expected.
      */
     protected void decode(String mgrsString) throws NumberFormatException {
+        if (mgrsString.contains(" ")) {
+            String[] parts = mgrsString.split(" ");
+            StringBuilder s = new StringBuilder();
+            for (String i : parts) {
+                s.append(i);
+            }
+            mgrsString = s.toString();
+        }
+
         if (mgrsString == null || mgrsString.length() == 0) {
             throw new NumberFormatException("MGRSPoint coverting from nothing");
         }
@@ -632,6 +645,97 @@ public class MGRSPoint extends ZonedUTMPoint {
 
         return twoLetter;
     }
+
+    public String toFlavoredString() {
+        try {
+            List<String> all = new ArrayList<>();
+            for (int i = 0; i <= mgrs.length(); i++) {
+                if (Character.isAlphabetic(mgrs.charAt(i))){
+                    all.add(mgrs.substring(0,i+1));
+                    all.add(mgrs.substring(i+1,i+3));
+                    String remains = mgrs.substring(i+3);
+                    all.add(remains.substring(0,remains.length()/2));
+                    all.add(remains.substring(remains.length()/2));
+                    break;
+                }
+            }
+            StringBuilder os = new StringBuilder();
+            for(String part: all){
+                if (os.length() > 0) os.append(" ");
+                os.append(part);
+            }
+            return os.toString();
+        }catch (Exception e){
+            return mgrs;
+        }
+    }
+
+    public String toFlavoredString(int accuracy) {
+        try {
+            List<String> all = new ArrayList<>();
+            for (int i = 0; i <= mgrs.length(); i++) {
+                if (Character.isAlphabetic(mgrs.charAt(i))){
+                    all.add(mgrs.substring(0,i+1));
+                    all.add(mgrs.substring(i+1,i+3));
+                    String remains = mgrs.substring(i+3);
+                    int easting = Integer.parseInt(remains.substring(0,remains.length()/2));
+                    int northing = Integer.parseInt(remains.substring(remains.length()/2));
+                    double resolution = Math.pow(10, getAccuracy() - accuracy);
+                    long roundedEasting = Math.round(easting/resolution);
+                    long roundedNorthing = Math.round(northing/resolution);
+                    int eastShift = 0;
+                    int northShift = 0;
+                    if (roundedEasting == resolution*10){
+                        roundedEasting = 0L;
+                        eastShift = 1;
+                    }
+                    if (roundedNorthing == resolution*10){
+                        roundedNorthing = 0L;
+                        northShift = 1;
+                    }
+                    if (eastShift != 0 || northShift != 0){
+                        all.set(1, shiftChar(all.get(1), eastShift, northShift));
+                        String zero = "";
+                    }
+
+
+                    all.add(String.format("%0" + accuracy + "d", roundedEasting));
+                    all.add(String.format("%0" + accuracy + "d", roundedNorthing));
+                    break;
+                }
+            }
+            StringBuilder os = new StringBuilder();
+            for(String part: all){
+                if (os.length() > 0) os.append(" ");
+                os.append(part);
+            }
+            return os.toString();
+        }catch (Exception e){
+            return toFlavoredString();
+        }
+    }
+
+    private static String shiftChar(String chars, int east, int north){
+        ArrayList<Character> keys = new ArrayList<Character>(
+                Arrays.asList('A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z'));
+        StringBuilder s = new StringBuilder();
+        if (east != 0){
+            int idx = keys.indexOf(chars.charAt(0));
+            idx += east;
+            if (idx >= keys.size()) idx -= keys.size();
+            if (idx < 0) idx += keys.size();
+            s.append(keys.get(idx));
+        }else s.append(chars.charAt(0));
+        if (north != 0){
+            int idx = keys.indexOf(chars.charAt(1));
+            idx += north;
+            if (idx >= keys.size()) idx -= keys.size();
+            if (idx < 0) idx += keys.size();
+            s.append(keys.get(idx));
+        }else s.append(chars.charAt(1));
+        return s.toString();
+    }
+
 
     /**
      * {@inheritDoc}

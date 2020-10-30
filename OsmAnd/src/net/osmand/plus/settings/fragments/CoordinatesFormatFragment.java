@@ -31,11 +31,13 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	public static final String TAG = CoordinatesFormatFragment.class.getSimpleName();
 
 	private static final String UTM_FORMAT_WIKI_LINK = "https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system";
+	private static final String MGRS_FORMAT_WIKI_LINK = "https://en.wikipedia.org/wiki/Military_Grid_Reference_System";
 
 	private static final String FORMAT_DEGREES = "format_degrees";
 	private static final String FORMAT_MINUTES = "format_minutes";
 	private static final String FORMAT_SECONDS = "format_seconds";
 	private static final String UTM_FORMAT = "utm_format";
+	private static final String MGRS_FORMAT = "mgrs_format";
 	private static final String OLC_FORMAT = "olc_format";
 
 	@Override
@@ -44,6 +46,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		CheckBoxPreference minutesPref = (CheckBoxPreference) findPreference(FORMAT_MINUTES);
 		CheckBoxPreference secondsPref = (CheckBoxPreference) findPreference(FORMAT_SECONDS);
 		CheckBoxPreference utmPref = (CheckBoxPreference) findPreference(UTM_FORMAT);
+		CheckBoxPreference mgrsPref = (CheckBoxPreference) findPreference(MGRS_FORMAT);
 		CheckBoxPreference olcPref = (CheckBoxPreference) findPreference(OLC_FORMAT);
 
 		Location loc = app.getLocationProvider().getLastKnownLocation();
@@ -52,6 +55,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		minutesPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.FORMAT_MINUTES));
 		secondsPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.FORMAT_SECONDS));
 		utmPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.UTM_FORMAT));
+		mgrsPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.MGRS_FORMAT));
 		olcPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.OLC_FORMAT));
 
 		int currentFormat = settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode());
@@ -64,6 +68,12 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		if (UTM_FORMAT.equals(preference.getKey())) {
+			TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
+			if (summaryView != null) {
+				summaryView.setOnTouchListener(new ClickableSpanTouchListener());
+			}
+		}
+		if (MGRS_FORMAT.equals(preference.getKey())) {
 			TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
 			if (summaryView != null) {
 				summaryView.setOnTouchListener(new ClickableSpanTouchListener());
@@ -93,6 +103,36 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 					Context ctx = getContext();
 					if (ctx != null) {
 						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(UTM_FORMAT_WIKI_LINK), isNightMode());
+					}
+				}
+
+				@Override
+				public void updateDrawState(@NonNull TextPaint ds) {
+					super.updateDrawState(ds);
+					ds.setUnderlineText(false);
+				}
+			};
+			spannableBuilder.setSpan(clickableSpan, start, spannableBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+			return spannableBuilder;
+		}
+		if (format == PointDescription.MGRS_FORMAT) {
+			SpannableStringBuilder spannableBuilder = new SpannableStringBuilder();
+			String combined = getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_example), formattedCoordinates);
+			spannableBuilder.append(combined);
+			spannableBuilder.append("\n");
+			spannableBuilder.append(getString(R.string.mgrs_format_descr));
+
+			int start = spannableBuilder.length();
+			spannableBuilder.append(" ");
+			spannableBuilder.append(getString(R.string.shared_string_read_more));
+
+			ClickableSpan clickableSpan = new ClickableSpan() {
+				@Override
+				public void onClick(@NonNull View widget) {
+					Context ctx = getContext();
+					if (ctx != null) {
+						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(MGRS_FORMAT_WIKI_LINK), isNightMode());
 					}
 				}
 
@@ -159,6 +199,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return PointDescription.FORMAT_SECONDS;
 			case UTM_FORMAT:
 				return PointDescription.UTM_FORMAT;
+			case MGRS_FORMAT:
+				return PointDescription.MGRS_FORMAT;
 			case OLC_FORMAT:
 				return PointDescription.OLC_FORMAT;
 			default:
@@ -176,6 +218,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return FORMAT_SECONDS;
 			case PointDescription.UTM_FORMAT:
 				return UTM_FORMAT;
+			case PointDescription.MGRS_FORMAT:
+				return MGRS_FORMAT;
 			case PointDescription.OLC_FORMAT:
 				return OLC_FORMAT;
 			default:

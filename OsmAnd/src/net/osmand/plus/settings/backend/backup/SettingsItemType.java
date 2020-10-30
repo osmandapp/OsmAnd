@@ -15,4 +15,5 @@ public enum SettingsItemType {
 	DOWNLOADS,
 	OSM_NOTES,
 	OSM_EDITS,
+	FAVOURITES
 }

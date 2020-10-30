@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.format.DateUtils;
 
 import com.jwetherell.openmap.common.LatLonPoint;
+import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
 import net.osmand.LocationConvert;
@@ -53,6 +54,7 @@ public class OsmAndFormatter {
 	public static final int FORMAT_SECONDS = LocationConvert.FORMAT_SECONDS;
 	public static final int UTM_FORMAT = LocationConvert.UTM_FORMAT;
 	public static final int OLC_FORMAT = LocationConvert.OLC_FORMAT;
+	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
 	private static final char DELIMITER_DEGREES = '°';
 	private static final char DELIMITER_MINUTES = '′';
 	private static final char DELIMITER_SECONDS = '″';
@@ -518,6 +520,9 @@ public class OsmAndFormatter {
 				r = "0, 0";
 			}
 			result.append(r);
+		} else if (outputFormat == MGRS_FORMAT) {
+			MGRSPoint pnt = new MGRSPoint(new LatLonPoint(lat, lon));
+			result.append(pnt.toFlavoredString(5));
 		}
 		return result.toString();
 	}

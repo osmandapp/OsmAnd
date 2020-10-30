@@ -3931,4 +3931,13 @@
 \nГрафік буде доступний після переобчислення.</string>
     <string name="app_mode_gap">Розрив</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="shared_string_local_maps">Місцеві мапи</string>
+    <string name="icon_group_amenity">Зручності</string>
+    <string name="icon_group_special">Спеціальні</string>
+    <string name="icon_group_transport">Транспорт</string>
+    <string name="icon_group_service">Послуги</string>
+    <string name="icon_group_symbols">Знаки</string>
+    <string name="icon_group_sport">Спорт</string>
+    <string name="icon_group_emergency">Аварійні служби</string>
+    <string name="icon_group_travel">Мандрівка</string>
 </resources>

@@ -33,6 +33,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.jwetherell.openmap.common.LatLonPoint;
+import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
 import net.osmand.AndroidUtils;
@@ -1251,6 +1252,13 @@ public class MapInfoWidgetsFactory {
 						UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
 						String utmLocation = pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " " + ((long) pnt.northing);
 						latitudeText.setText(utmLocation);
+					} else if (f == PointDescription.MGRS_FORMAT) {
+						AndroidUiHelper.updateVisibility(lonCoordinatesContainer, false);
+						AndroidUiHelper.updateVisibility(coordinatesDivider, false);
+						AndroidUiHelper.updateVisibility(latitudeIcon, true);
+						latitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.widget_coordinates_utm_night : R.drawable.widget_coordinates_utm_day));
+						MGRSPoint pnt = new MGRSPoint(new LatLonPoint(lat, lon));
+						latitudeText.setText(pnt.toFlavoredString(5));
 					} else if (f == PointDescription.OLC_FORMAT) {
 						AndroidUiHelper.updateVisibility(lonCoordinatesContainer, false);
 						AndroidUiHelper.updateVisibility(coordinatesDivider, false);

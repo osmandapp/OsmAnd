@@ -2170,4 +2170,20 @@
     <string name="restore_all_profile_settings">Възстановяване на всички настройки на профила\?</string>
     <string name="clear_recorded_data_warning">Наистина ли искате да изчистите записаните данни\?</string>
     <string name="recalculate_route_in_deviation">Преизчисляване на маршрута в случай на отклонение</string>
+    <string name="osm_edit_logout_success">Успешно излязохте</string>
+    <string name="file_already_imported">Файлът вече е импортиран в OsmAnd</string>
+    <string name="use_two_phase_routing">Използване на 2-стъпков A* рутиращ алгоритъм</string>
+    <string name="message_graph_will_be_available_after_recalculation">Изчакайте преизчисляването на маршрута.
+\nГрафиката ще бъде достъпна след преизчисляване.</string>
+    <string name="shared_string_local_maps">Местни карти</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="app_mode_gap">Пропуск</string>
+    <string name="icon_group_amenity">Удобства</string>
+    <string name="icon_group_special">Специални</string>
+    <string name="icon_group_transport">Транспорт</string>
+    <string name="icon_group_service">Услуги</string>
+    <string name="icon_group_symbols">Символи</string>
+    <string name="icon_group_sport">Спорт</string>
+    <string name="icon_group_emergency">Аварийни служби</string>
+    <string name="icon_group_travel">Пътуване</string>
 </resources>

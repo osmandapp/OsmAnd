@@ -676,9 +676,15 @@ public class MenuBuilder {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 		for (final Map.Entry<Integer, String> line : locationData.entrySet()) {
 			final TextViewEx button = buildButtonInCollapsableView(mapActivity, false, false);
-			if (line.getKey() == OsmAndFormatter.UTM_FORMAT || line.getKey() == OsmAndFormatter.OLC_FORMAT) {
+			if (line.getKey() == OsmAndFormatter.UTM_FORMAT || line.getKey() == OsmAndFormatter.OLC_FORMAT || line.getKey() == OsmAndFormatter.MGRS_FORMAT) {
 				SpannableStringBuilder ssb = new SpannableStringBuilder();
-				ssb.append(line.getKey() == OsmAndFormatter.UTM_FORMAT ? "UTM: " : "OLC: ");
+				if (line.getKey() == OsmAndFormatter.UTM_FORMAT) {
+					ssb.append("UTM: ");
+				} else if (line.getKey() == OsmAndFormatter.MGRS_FORMAT) {
+					ssb.append("MGRS: ");
+				} else if (line.getKey() == OsmAndFormatter.OLC_FORMAT){
+					ssb.append("OLC: ");
+				}
 				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				ssb.append(line.getValue());
 				button.setText(ssb);

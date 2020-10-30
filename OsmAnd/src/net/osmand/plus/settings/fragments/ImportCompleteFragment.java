@@ -28,6 +28,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
+import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -194,8 +196,14 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				OsmAndAppCustomization appCustomization = app.getAppCustomization();
 				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				app.getSettings().FAVORITES_TAB.set(R.string.osm_edits);
+				app.getSettings().FAVORITES_TAB.set(OsmEditingPlugin.OSM_EDIT_TAB);
 				startActivity(favorites);
+				break;
+			case FAVORITES:
+				Intent favoritesActivity = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
+				favoritesActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				app.getSettings().FAVORITES_TAB.set(FavoritesActivity.FAV_TAB);
+				startActivity(favoritesActivity);
 				break;
 			default:
 				break;

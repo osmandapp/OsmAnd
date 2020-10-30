@@ -2754,7 +2754,7 @@ POIの更新は利用できません</string>
     <string name="osm_edits_export_desc">OSMメモ、POI、またはその両方用にエクスポートします。</string>
     <string name="all_data">全てのデータ</string>
     <string name="osm_notes">OSMメモ</string>
-    <string name="will_open_tomorrow_at">明日開く</string>
+    <string name="will_open_tomorrow_at">明日以降の次の時間に営業</string>
     <string name="shared_string_without_name">名無し</string>
     <string name="release_3_2_pre">• 一部の機種で起動時にクラッシュしていた問題を修正 
 \n 
@@ -2775,11 +2775,11 @@ POIの更新は利用できません</string>
     <string name="pick_up_till">駐車上限時刻</string>
     <string name="without_time_limit">時間制限なし</string>
     <string name="context_menu_read_full_article">記事の全文を読む</string>
-    <string name="open_from">以下の場所から開く</string>
-    <string name="open_till">以下の所まで開く</string>
-    <string name="will_close_at">閉店時間</string>
-    <string name="will_open_at">開店予定時間</string>
-    <string name="will_open_on">営業予定時刻</string>
+    <string name="open_from">次の時間から営業</string>
+    <string name="open_till">次の時間まで営業</string>
+    <string name="will_close_at">営業終了時間</string>
+    <string name="will_open_at">営業開始時間</string>
+    <string name="will_open_on">営業開始時間</string>
     <string name="empty_state_markers_active">マップマーカーを作成しよう！</string>
     <string name="empty_state_markers_history_desc">通過した地点のマーカーと通過予定地点のマーカーがこの画面に表示されます。</string>
     <string name="shared_string_right">右</string>

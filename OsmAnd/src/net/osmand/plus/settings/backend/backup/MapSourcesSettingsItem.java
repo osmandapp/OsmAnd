@@ -236,6 +236,6 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	@Nullable
 	@Override
 	SettingsItemWriter<? extends SettingsItem> getWriter() {
-		return null;
+		return getJsonWriter();
 	}
 }
