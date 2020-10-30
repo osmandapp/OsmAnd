@@ -33,6 +33,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -46,6 +47,8 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.FavoritesSettingsItem;
+import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.OsmEditsSettingsItem;
 import net.osmand.plus.settings.backend.backup.OsmNotesSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -437,6 +440,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
+		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		for (Object object : data) {
 			if (object instanceof ApplicationModeBean) {
 				appModeBeans.add((ApplicationModeBean) object);
@@ -456,6 +460,10 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				osmNotesPointList.add((OsmNotesPoint) object);
 			} else if (object instanceof OpenstreetmapPoint) {
 				osmEditsPointList.add((OpenstreetmapPoint) object);
+			} else if (object instanceof FavoriteGroup) {
+				favoriteGroups.add((FavoriteGroup) object);
+			} else if (object instanceof GlobalSettingsItem) {
+				settingsItems.add((GlobalSettingsItem) object);
 			}
 		}
 		if (!appModeBeans.isEmpty()) {
@@ -482,6 +490,10 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		if (!osmEditsPointList.isEmpty()) {
 			OsmEditsSettingsItem baseItem = getBaseItem(SettingsItemType.OSM_EDITS, OsmEditsSettingsItem.class);
 			settingsItems.add(new OsmEditsSettingsItem(app, baseItem, osmEditsPointList));
+		}
+		if (!favoriteGroups.isEmpty()) {
+			FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class);
+			settingsItems.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
 		}
 		return settingsItems;
 	}

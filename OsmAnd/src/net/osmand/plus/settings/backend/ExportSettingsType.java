@@ -13,5 +13,6 @@ public enum ExportSettingsType {
 	GLOBAL,
 	OSM_NOTES,
 	OSM_EDITS,
-	OFFLINE_MAPS
+	OFFLINE_MAPS,
+	FAVORITES
 }

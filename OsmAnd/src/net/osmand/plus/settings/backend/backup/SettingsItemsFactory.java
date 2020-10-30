@@ -90,7 +90,7 @@ class SettingsItemsFactory {
 		OsmandSettings settings = app.getSettings();
 		switch (type) {
 			case GLOBAL:
-				item = new GlobalSettingsItem(settings);
+				item = new GlobalSettingsItem(settings, json);
 				break;
 			case PROFILE:
 				item = new ProfileSettingsItem(app, json);
@@ -130,6 +130,9 @@ class SettingsItemsFactory {
 				break;
 			case OSM_EDITS:
 				item = new OsmEditsSettingsItem(app, json);
+				break;
+			case FAVOURITES:
+				item = new FavoritesSettingsItem(app, json);
 				break;
 		}
 		return item;

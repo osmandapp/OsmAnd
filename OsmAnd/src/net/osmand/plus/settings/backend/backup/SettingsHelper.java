@@ -13,6 +13,7 @@ import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
@@ -47,7 +48,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
-import static net.osmand.plus.activities.LocalIndexHelper.*;
+import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 
 /*
 	Usage:
@@ -535,6 +536,10 @@ public class SettingsHelper {
 		if (!files.isEmpty()) {
 			dataList.put(ExportSettingsType.OFFLINE_MAPS, files);
 		}
+		List<FavoriteGroup> favoriteGroups = app.getFavorites().getFavoriteGroups();
+		if (!favoriteGroups.isEmpty()) {
+			dataList.put(ExportSettingsType.FAVORITES, favoriteGroups);
+		}
 		return dataList;
 	}
 
@@ -562,6 +567,7 @@ public class SettingsHelper {
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		List<ApplicationModeBean> appModeBeans = new ArrayList<>();
+		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
 
@@ -586,6 +592,8 @@ public class SettingsHelper {
 				osmNotesPointList.add((OsmNotesPoint) object);
 			} else if (object instanceof OpenstreetmapPoint) {
 				osmEditsPointList.add((OpenstreetmapPoint) object);
+			} else if (object instanceof FavoriteGroup) {
+				favoriteGroups.add((FavoriteGroup) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
@@ -614,6 +622,9 @@ public class SettingsHelper {
 		if (!osmEditsPointList.isEmpty()) {
 			settingsItems.add(new OsmEditsSettingsItem(app, osmEditsPointList));
 		}
+		if (!favoriteGroups.isEmpty()) {
+			settingsItems.add(new FavoritesSettingsItem(app, favoriteGroups));
+		}
 		return settingsItems;
 	}
 
@@ -632,6 +643,8 @@ public class SettingsHelper {
 		List<GlobalSettingsItem> globalSettingsItems = new ArrayList<>();
 		List<OsmNotesPoint> notesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
+		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
+
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
 				case PROFILE:
@@ -705,6 +718,10 @@ public class SettingsHelper {
 						editsPointList.addAll(osmEditsSettingsItem.getItems());
 					}
 					break;
+				case FAVOURITES:
+					FavoritesSettingsItem favoritesSettingsItem = (FavoritesSettingsItem) item;
+					favoriteGroups.addAll(favoritesSettingsItem.getItems());
+					break;
 				default:
 					break;
 			}
@@ -748,6 +765,9 @@ public class SettingsHelper {
 		}
 		if (!mapFilesList.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.OFFLINE_MAPS, mapFilesList);
+		}
+		if (!favoriteGroups.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.FAVORITES, favoriteGroups);
 		}
 		return settingsToOperate;
 	}

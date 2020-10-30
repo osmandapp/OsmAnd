@@ -167,6 +167,6 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 	@Nullable
 	@Override
 	SettingsItemWriter<? extends SettingsItem> getWriter() {
-		return null;
+		return getJsonWriter();
 	}
 }
