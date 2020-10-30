@@ -3914,4 +3914,13 @@
     <string name="shared_string_graph">Graphique</string>
     <string name="app_mode_gap">Écart</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
+    <string name="shared_string_local_maps">Cartes locales</string>
+    <string name="icon_group_amenity">Loisir</string>
+    <string name="icon_group_special">Spécial</string>
+    <string name="icon_group_transport">Transport</string>
+    <string name="icon_group_service">Service</string>
+    <string name="icon_group_symbols">Symboles</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="icon_group_emergency">Urgence</string>
+    <string name="icon_group_travel">Voyage</string>
 </resources>

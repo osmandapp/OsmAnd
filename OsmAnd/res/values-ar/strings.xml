@@ -3922,4 +3922,13 @@
     <string name="shared_string_graph">رسم بياني</string>
     <string name="ltr_or_rtl_combine_via_dash">%2$s — %1$s</string>
     <string name="app_mode_gap">فجوة</string>
+    <string name="shared_string_local_maps">الخرائط المحلية</string>
+    <string name="icon_group_amenity">راحة</string>
+    <string name="icon_group_special">خاص</string>
+    <string name="icon_group_transport">نقل</string>
+    <string name="icon_group_service">خدمة</string>
+    <string name="icon_group_symbols">الرموز</string>
+    <string name="icon_group_sport">رياضة</string>
+    <string name="icon_group_emergency">الطوارئ</string>
+    <string name="icon_group_travel">سفر</string>
 </resources>
