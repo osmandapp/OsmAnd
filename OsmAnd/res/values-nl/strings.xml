@@ -3233,7 +3233,7 @@
     <string name="routing_attr_freeride_policy_description">\'Freeride\' en \'Off-piste\' zijn officieuze routes en passages. Meestal onverzorgd en niet onderhouden, en niet \'s avonds gecontroleerd. Betreden op eigen risico.</string>
     <string name="collected_data">Verzamelde data</string>
     <string name="last_launch_crashed">Laatste OsmAnd uitvoering gecrasht. Help ons alstublieft OsmAnd te verbeteren door de foutmelding te delen.</string>
-    <string name="app_mode_personal_transporter">Persoonlijke transporteur</string>
+    <string name="app_mode_personal_transporter">Persoonlijk transport</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="routeInfo_roadClass_name">Wegtype</string>
@@ -3797,11 +3797,11 @@
 \n"</string>
     <string name="release_3_6">"• Profielen: nu kunt u de volgorde wijzigen, het pictogram voor de kaart instellen, alle instellingen voor basisprofielen wijzigen en ze terugzetten naar de standaardinstellingen
 \n
-\n  • Exitnummer toegevoegd in de navigatie
+\n • Exitnummer toegevoegd in de navigatie
 \n
-\n  • Herwerkte plug-in instellingen
+\n • Herwerkte plug-in instellingen
 \n
-\n  • Herwerkt instellingenscherm voor snelle toegang tot alle profielen
+\n • Herwerkt instellingenscherm voor snelle toegang tot alle profielen
 \n
 \n  • Optie toegevoegd om instellingen van een ander profiel te kopiëren
 \n
