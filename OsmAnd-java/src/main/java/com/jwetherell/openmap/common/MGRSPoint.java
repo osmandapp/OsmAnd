@@ -108,6 +108,15 @@ public class MGRSPoint extends ZonedUTMPoint {
      *            an UPPERCASE coordinate string is expected.
      */
     protected void decode(String mgrsString) throws NumberFormatException {
+        if (mgrsString.contains(" ")) {
+            String[] parts = mgrsString.split(" ");
+            StringBuilder s = new StringBuilder();
+            for (String i : parts) {
+                s.append(i);
+            }
+            mgrsString = s.toString();
+        }
+
         if (mgrsString == null || mgrsString.length() == 0) {
             throw new NumberFormatException("MGRSPoint coverting from nothing");
         }

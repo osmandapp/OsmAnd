@@ -610,6 +610,10 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 				if (latLon != null) {
 					MGRSPoint pnt = new MGRSPoint(new LatLonPoint(latLon.getLatitude(), latLon.getLongitude()));
 					mgrsEdit.setText(pnt.toFlavoredString(5));
+				} else if (prevFormat == PointDescription.UTM_FORMAT) {
+					mgrsEdit.setText(zoneEdit.getText());
+				} else if (prevFormat == PointDescription.OLC_FORMAT) {
+					mgrsEdit.setText(olcEdit.getText());
 				} else {
 					mgrsEdit.setText(latEdit.getText());
 

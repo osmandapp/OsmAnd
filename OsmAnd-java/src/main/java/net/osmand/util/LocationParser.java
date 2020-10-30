@@ -140,11 +140,7 @@ public class LocationParser {
 		//detect MGRS
 		if (all.size() >= 3 && (d.size() == 2 || d.size() == 3) && all.get(1) instanceof String) {
 			try {
-				StringBuilder s = new StringBuilder();
-				for (String i : strings) {
-					s.append(i);
-				}
-				MGRSPoint mgrsPoint = new MGRSPoint(s.toString());
+				MGRSPoint mgrsPoint = new MGRSPoint(locPhrase);
 				LatLonPoint ll = mgrsPoint.toLatLonPoint();
 				return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
 			} catch (NumberFormatException e) {
