@@ -2186,4 +2186,5 @@
     <string name="icon_group_sport">Спорт</string>
     <string name="icon_group_emergency">Аварийни служби</string>
     <string name="icon_group_travel">Пътуване</string>
+    <string name="clear_osm_token">Изчистете маркера OAuth на OpenStreetMap</string>
 </resources>
