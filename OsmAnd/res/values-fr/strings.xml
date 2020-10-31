@@ -3923,4 +3923,7 @@
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Urgence</string>
     <string name="icon_group_travel">Voyage</string>
+    <string name="mgrs_format_descr">OsmAnd utilise le système de référence MDRS de l\'OTAN dérivé des formats UTM et UPS.</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="navigate_point_mgrs">MGRS</string>
 </resources>
