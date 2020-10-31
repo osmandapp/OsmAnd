@@ -3934,4 +3934,13 @@
 \nDiagramo estos videbla post rekalkulado.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="app_mode_gap">Manko</string>
+    <string name="shared_string_local_maps">Lokaj mapoj</string>
+    <string name="icon_group_amenity">Oportunaĵo</string>
+    <string name="icon_group_special">Specialaj</string>
+    <string name="icon_group_transport">Transporto</string>
+    <string name="icon_group_service">Servo</string>
+    <string name="icon_group_symbols">Simboloj</string>
+    <string name="icon_group_sport">Sporto</string>
+    <string name="icon_group_emergency">Vivsavo</string>
+    <string name="icon_group_travel">Vojaĝo</string>
 </resources>
