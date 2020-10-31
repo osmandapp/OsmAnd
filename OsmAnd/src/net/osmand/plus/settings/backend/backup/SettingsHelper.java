@@ -684,10 +684,7 @@ public class SettingsHelper {
 						multimediaFilesList.add(fileItem.getFile());
 					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
 						tracksFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSubtype.OBF_MAP
-							|| fileItem.getSubtype() == FileSubtype.WIKI_MAP
-							|| fileItem.getSubtype() == FileSubtype.SRTM_MAP
-							|| fileItem.getSubtype() == FileSubtype.TILES_MAP) {
+					} else if (fileItem.getSubtype().isMap()) {
 						mapFilesList.add(fileItem);
 					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
 						ttsVoiceFilesList.add(fileItem.getFile());

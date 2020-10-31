@@ -45,7 +45,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 
 		public boolean isMap() {
-			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP;
+			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP || this == TILES_MAP;
 		}
 
 		public boolean isDirectory() {

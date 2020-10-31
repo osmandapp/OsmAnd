@@ -71,8 +71,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ImportSettingsFragment extends BaseOsmAndFragment
-		implements View.OnClickListener {
+public class ImportSettingsFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
@@ -135,12 +134,28 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		progressBar = root.findViewById(R.id.progress_bar);
 		setupToolbar(toolbar);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
-		View header = inflater.inflate(R.layout.list_item_description_header, null);
+		View header = inflater.inflate(R.layout.list_item_description_header, container, false);
 		description = header.findViewById(R.id.description);
 		description.setText(R.string.select_data_to_import);
 		expandableList.addHeaderView(header);
-		continueBtn.setOnClickListener(this);
-		selectBtn.setOnClickListener(this);
+		continueBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (adapter.getData().isEmpty()) {
+					app.showShortToastMessage(getString(R.string.shared_string_nothing_selected));
+				} else {
+					importItems();
+				}
+			}
+		});
+		selectBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				allSelected = !allSelected;
+				selectBtn.setText(allSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
+				adapter.selectAll(allSelected);
+			}
+		});
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
@@ -222,26 +237,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	@Override
-	public void onClick(View view) {
-		switch (view.getId()) {
-			case R.id.select_button: {
-				allSelected = !allSelected;
-				selectBtn.setText(allSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
-				adapter.selectAll(allSelected);
-				break;
-			}
-			case R.id.continue_button: {
-				if (adapter.getData().isEmpty()) {
-					app.showShortToastMessage(getString(R.string.shared_string_nothing_selected));
-				} else {
-					importItems();
-				}
-				break;
-			}
-		}
-	}
-
 	private void updateUi(int toolbarTitleRes, int descriptionRes) {
 		if (file != null) {
 			String fileName = file.getName();
@@ -265,15 +260,15 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	private SettingsHelper.SettingsImportListener getImportListener() {
+	public SettingsHelper.SettingsImportListener getImportListener() {
 		return new SettingsHelper.SettingsImportListener() {
 			@Override
 			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
-				FragmentManager fm = getFragmentManager();
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
 					AppInitializer.loadRoutingFiles(app, null);
 					reloadIndexes(items);
+					FragmentManager fm = getFragmentManager();
 					if (fm != null && file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}
@@ -348,7 +343,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				}
 				settingsHelper.importSettings(file, items, "", 1, getImportListener());
 			} else if (fm != null && !isStateSaved()) {
-				ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
+				ImportDuplicatesFragment.showInstance(fm, duplicates, items, file, this);
 			}
 		}
 	}

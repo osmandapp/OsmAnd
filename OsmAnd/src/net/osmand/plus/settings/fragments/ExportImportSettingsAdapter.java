@@ -303,17 +303,13 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				subText.setVisibility(View.VISIBLE);
 				break;
 			case TTS_VOICE:
-				file = (File) currentItem;
-				title.setText(FileNameTranslationHelper.getFileName(app,
-						app.getResourceManager().getOsmandRegions(),
-						file.getName()));
-				setupIcon(icon, R.drawable.ic_action_volume_up, itemSelected);
 			case VOICE:
 				file = (File) currentItem;
 				title.setText(FileNameTranslationHelper.getFileName(app,
 						app.getResourceManager().getOsmandRegions(),
 						file.getName()));
 				setupIcon(icon, R.drawable.ic_action_volume_up, itemSelected);
+				break;
 			default:
 				return child;
 		}
