@@ -3944,4 +3944,7 @@
     <string name="icon_group_sport">Šport</string>
     <string name="icon_group_emergency">Núdzová situácia/Záchrana</string>
     <string name="icon_group_travel">Cestovanie</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd používa MGSR, ktorý je podobný ako formát UTM NATO.</string>
 </resources>

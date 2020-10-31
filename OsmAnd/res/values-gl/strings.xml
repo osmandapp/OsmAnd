@@ -500,15 +500,15 @@
     <string name="interrupt_music">Deter a música</string>
     <string name="osmand_play_title_30_chars">Mapas e navegación OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visualización e navegación móbil de mapas globais do OSM con e sen conexión</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (Indicacións de navegación automatizadas do OSM) 
-\n 
+    <string name="osmand_long_description_1000_chars">OsmAnd (Indicacións de navegación automatizadas do OSM)
+\n
 \n O OsmAnd é unha aplicación de navegación de código aberto con acceso a unha ampla variedade de datos globais do OSM. Tódolos datos do mapa (mapas vectoriais ou teselas) poden ser almacenados no cartón de memoria do teléfono móbil para empregalos sen conexión. O OsmAnd tamen fornece a funcionalidade de cálculo de rotas sen conexión, incluíndo a guía por voz paso a paso.
 \n
 \n Algunhas das funcións principais:
 \n - Funcionalidade completa sen conexión (os mapas vectoriais ou de teselas baixados almacénanse no cartafol que se escolla)
 \n - Mapas vectoriais compactos sen conexión para todo o mundo
 \n - Pódense baixar mapas de países ou rexións de xeito directo dende a aplicación
-\n - É posíbel sobrepor varias capas de mapas, coma pistas de GPX ou de navegación, puntos de interese (PDI), favoritos, curvas do nivel, paraxes de transporte público ou mapas adicionais con transparencia regulábel
+\n - É posíbel sobrepor varias capas de mapas, coma pistas de GPX ou de navegación, puntos de interese (PDI), favoritos, curvas do nivel, paradas de transporte público ou mapas adicionais con transparencia regulábel
 \n - Procura sen conexión dos enderezos e lugares (PDI)
 \n - Cálculo de rotas sen conexión para distancias medias
 \n - Modos para automóbil, bicicleta e peóns, opcionalmente con:
@@ -517,29 +517,29 @@
 \n - Aliñamento do mapa dependendo do compás ou da dirección do movemento
 \n - Guía de faixas ou carrís da estrada, límites de velocidade, voces gravadas e TTS
 \n
-\n Limitacións desta versión de balde do OsmAnd: 
-\n - O número de mapas a baixar está limitado 
-\n - Non hai acceso ós puntos de interese (PDI) da Wikipedia sen conexión 
-\n 
+\n Limitacións desta versión de balde do OsmAnd:
+\n - O número de mapas a baixar está limitado
+\n - Non hai acceso ós puntos de interese (PDI) da Wikipedia sen conexión
+\n
 \n O OsmAnd está a ser desenvolvido activamente e o noso proxecto e o seu progreso futuro depende da contribución financeira para financia-lo desenvolvemento e as probas das funcionalidades novas. Coida a posibilidade de mercar o OsmAnd+ ou de financiar funcións novas específicas ou de facer unha doazón xeral no osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">Mapas e navegación de OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visualización e navegación móbil de mapas globais para mapas de OSM con e sen conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">O OsmAnd+ (Indicacións da navegación automatizadas do OSM) é un aplicativo de navegación de código aberto con acceso a unha ampla variedade de datos globais do OSM. Tódolos mapas dos datos (mapas vectoriais ou teselas) poden seren almacenados no cartón de memoria do teléfono para empregalos sen conexión. O OsmAnd tamén fornece funcionalidade de cálculo de rotas sen conexión, incluíndo a guía por voz paso a paso. 
-\n 
-\nO OsmAnd+ é a versión de pagamento, mais ó mercala estás a apoiar o proxecto, financiar o desenvolvemento de funcións novas e tes a oportunidade de recibir as últimas actualizacións. 
-\n 
-\nAlgunhas das funcións principais son: 
-\n-Funcionalidade completa sen conexión (os mapas vectoriais ou de teselas baixados almacénanse no cartafol que se escolleu) 
-\n-Mapas vectoriais compactos sen conexión para todo o mundo. 
-\n-Pódense baixar mapas de países ou rexións de xeito directo dende a aplicación. 
-\n-É posíbel sobrepór varias capas de mapas, coma pistas de GPX ou de navegación, puntos de interese (PDI), favoritos, curvas do nivel, paraxes de transporte público ou mapas adicionais con transparencia regulábel. 
-\n 
-\n- Procura sen conexión de enderezos e lugares (PDI). 
-\n-Cálculo de rotas sen conexión para distancias curtas (distancias medias) 
-\n- Modos para automóbil, bicicleta e peóns, con: 
-\n-Vistas de noite e día automatizadas opcionais. 
-\n-Achegamento opcional do mapa dependendo da velocidade 
-\n-Aliñamento opcional do mapa dependendo do compás ou da dirección do movemento. 
+    <string name="osmand_plus_long_description_1000_chars">O OsmAnd+ (Indicacións da navegación automatizadas do OSM) é un aplicativo de navegación de código aberto con acceso a unha ampla variedade de datos globais do OSM. Tódolos mapas dos datos (mapas vectoriais ou teselas) poden seren almacenados no cartón de memoria do teléfono para empregalos sen conexión. O OsmAnd tamén fornece funcionalidade de cálculo de rotas sen conexión, incluíndo a guía por voz paso a paso.
+\n
+\nO OsmAnd+ é a versión de pagamento, mais ó mercala estás a apoiar o proxecto, financiar o desenvolvemento de funcións novas e tes a oportunidade de recibir as últimas actualizacións.
+\n
+\nAlgunhas das funcións principais son:
+\n-Funcionalidade completa sen conexión (os mapas vectoriais ou de teselas baixados almacénanse no cartafol que se escolleu)
+\n-Mapas vectoriais compactos sen conexión para todo o mundo.
+\n-Pódense baixar mapas de países ou rexións de xeito directo dende a aplicación.
+\n-É posíbel sobrepór varias capas de mapas, coma pistas de GPX ou de navegación, puntos de interese (PDI), favoritos, curvas do nivel, paradas de transporte público ou mapas adicionais con transparencia regulábel.
+\n
+\n- Procura sen conexión de enderezos e lugares (PDI).
+\n-Cálculo de rotas sen conexión para distancias curtas (distancias medias)
+\n- Modos para automóbil, bicicleta e peóns, con:
+\n-Vistas de noite e día automatizadas opcionais.
+\n-Achegamento opcional do mapa dependendo da velocidade
+\n-Aliñamento opcional do mapa dependendo do compás ou da dirección do movemento.
 \n-Guía opcional de faixas ou carrís da estrada, límites de velocidade, voces gravadas e TTS
 \n</string>
     <string name="filterpoi_activity">Crear un filtro de PDI</string>
@@ -1043,7 +1043,7 @@
     <string name="gpx_files_not_found">Non foi posíbel atopar ficheiros GPX no cartafol de pistas</string>
     <string name="error_reading_gpx">Non foi posíbel ler os datos do GPX.</string>
     <string name="vector_data">Mapas vectoriais sen conexión</string>
-    <string name="transport_context_menu">Procurar transporte na paraxe</string>
+    <string name="transport_context_menu">Procurar transporte na parada</string>
     <string name="poi_context_menu_modify">Modificar o PDI</string>
     <string name="poi_context_menu_delete">Eliminar PDI</string>
     <string name="rotate_map_compass_opt">Dirección do compás</string>
@@ -1126,19 +1126,19 @@
     <string name="add_new_rule">Engadir unha regra nova</string>
     <string name="transport_Routes">Liñas</string>
     <string name="transport_Stop">Stop</string>
-    <string name="transport_stops">paraxes</string>
+    <string name="transport_stops">paradas</string>
     <string name="transport_search_after">Itinerario posterior</string>
     <string name="transport_search_before">Itinerario anterior</string>
     <string name="transport_finish_search">Rematar a procura</string>
-    <string name="transport_stop_to_go_out">Escolle a paraxe na que baixar</string>
+    <string name="transport_stop_to_go_out">Escolle a parada na que baixar</string>
     <string name="transport_to_go_after">distancia anterior</string>
     <string name="transport_to_go_before">distancia posterior</string>
-    <string name="transport_stops_to_pass">paraxes a pasar</string>
+    <string name="transport_stops_to_pass">paradas a pasar</string>
     <string name="transport_route_distance">Distancia do itinerario</string>
     <string name="transport">Transporte</string>
     <string name="shared_string_ok">Feito</string>
-    <string name="show_transport_over_map_description">Amosar paraxes do transporte público no mapa.</string>
-    <string name="show_transport_over_map">Amosar paraxes do transporte</string>
+    <string name="show_transport_over_map_description">Amosar paradas de transporte público no mapa.</string>
+    <string name="show_transport_over_map">Amosar paradas de transporte</string>
     <string name="hello">OsmAnd, aplicación de navegación</string>
     <string name="update_poi_success">Os datos do PDI foron actualizados ({0} foron carregados)</string>
     <string name="update_poi_error_local">Non podes atualizar a listaxe local de PDI.</string>
@@ -1986,7 +1986,7 @@ Lon %2$s</string>
     <string name="routing_attr_short_way_description">Empregar o camiño con aforro no combustíbel (normalmente máis curto).</string>
     <string name="shared_string_change">Mudar</string>
     <string name="get_started">Comezar</string>
-    <string name="route_stops_before">%1$s paraxes antes</string>
+    <string name="route_stops_before">%1$s paradas antes</string>
     <string name="access_direction_haptic_feedback_descr">Inserir o enderezo do destino mediante vibración.</string>
     <string name="use_osm_live_routing_description">Activar a navegación por modificacións do OsmAnd ao Vivo.</string>
     <string name="access_disable_offroute_recalc">Non recalcular a ruta ó saírme da mesma</string>
@@ -2362,8 +2362,8 @@ Lon %2$s</string>
     <string name="map_imported_successfully">Mapa importado</string>
     <string name="make_as_start_point">Converter isto no punto de partida</string>
     <string name="shared_string_current">Actual</string>
-    <string name="last_intermediate_dest_description">Engade unha paraxe intermedia</string>
-    <string name="first_intermediate_dest_description">Engade a primeira paraxe do percorrido</string>
+    <string name="last_intermediate_dest_description">Engade unha parada intermedia</string>
+    <string name="first_intermediate_dest_description">Engade a primeira parada do percorrido</string>
     <string name="subsequent_dest_description">Move o destino cara enriba e crea un novo</string>
     <string name="switch_osm_notes_visibility_desc">Amosar/agochar as notas do OSM no mapa.</string>
     <string name="gpx_file_desc">GPX - axeitado para exportar a JOSM ou outros editores do OSM.</string>
@@ -2430,7 +2430,7 @@ Lon %2$s</string>
     <string name="start_search_from_city">Primeiro especificar a cidade, vila ou lugar</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="keep_passed_markers">Manter no mapa as marcaxes desbotadas</string>
-    <string name="more_transport_on_stop_hint">Máis transportes dispoñíbeis dende esta paraxe.</string>
+    <string name="more_transport_on_stop_hint">Máis transportes dispoñíbeis dende esta parada.</string>
     <string name="ask_for_location_permission">Para proseguer, permite acceder á localización ó OsmAnd.</string>
     <string name="thank_you_for_feedback">Grazas polos teus comentarios</string>
     <string name="poi_cannot_be_found">Non foi posíbel atopar o nó ou a vía.</string>
@@ -2757,11 +2757,11 @@ Lon %2$s</string>
 \n• Olla a velocidade e altitude 
 \n• A opción da gravación GPX, permite gravar o viaxe e partillalo ou compartilo 
 \n• Mediante un plugin adicional, podes activar as curvas de nivel e o asombreado dos outeiros ou colinas</string>
-    <string name="osmand_extended_description_part6">Camiñar, sendeirismo, turismo de cidade 
-\n • O mapa amosa as rotas para camiñar e de sendeirismo 
-\n • Wikipedia na lingua de preferencia, pode dicir moito durante unha visita turística 
-\n • As paraxes do transporte público (autobús, tranvía, tren), incluíndo os nomes de liña, axuda a navigar nunha nova cidade 
-\n • Navegación GPS no modo peón, constrúe a rota empregando rotas de sendeirismo 
+    <string name="osmand_extended_description_part6">Camiñar, sendeirismo, turismo de cidade
+\n • O mapa amosa as rotas para camiñar e de sendeirismo
+\n • Wikipedia na lingua de preferencia, pode dicir moito durante unha visita turística
+\n • As paradas do transporte público (autobús, tranvía, tren), incluíndo os nomes de liña, axuda a navigar nunha nova cidade
+\n • Navegación GPS no modo peón, constrúe a rota empregando rotas de sendeirismo
 \n • Soba e sigua unha rota GPX ou grave e partille ou comparta as súas propias rotas
 \n</string>
     <string name="osmand_extended_description_part7">Contribúe co OSM 
@@ -2897,7 +2897,7 @@ Lon %2$s</string>
     <string name="step_by_step">Tódolos cruzamentos (xiro a xiro)</string>
     <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Saír en</string>
-    <string name="sit_on_the_stop">Embarcar na paraxe</string>
+    <string name="sit_on_the_stop">Embarcar na parada</string>
     <string name="shared_string_swap">Trocar</string>
     <string name="show_more">Amosar máis</string>
     <string name="tracks_on_map">Pistas amosadas</string>
@@ -3879,7 +3879,7 @@ Lon %2$s</string>
     <string name="reverse_route">Ruta inversa</string>
     <string name="route_between_points_whole_track_button_desc">Recalcular toda a pista empregando o perfil escollido.</string>
     <string name="route_between_points_next_segment_button_desc">Recalcular só o seguinte segmento empregando o perfil escollido.</string>
-    <string name="route_between_points_desc">Marca de que xeito conectar os puntos, cunha liña recta ou calcular unha ruta entre eles como se detalla deseguido.</string>
+    <string name="route_between_points_desc">Escolle de que xeito conectar os puntos, cunha liña recta ou calcular unha ruta entre eles como se detalla deseguido.</string>
     <string name="whole_track">Pista enteira</string>
     <string name="next_segment">Seguinte segmento</string>
     <string name="route_between_points_warning_desc">Deseguido, axusta a pista á estrada permitida máis preto cun perfil de navegación.</string>
@@ -3955,4 +3955,20 @@ Lon %2$s</string>
     <string name="use_two_phase_routing">Usar algoritmo de enrutamento A* de 2 fases</string>
     <string name="shared_string_graph">Gráfica</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">O OsmAnd emprega MGRS, que é semellante ó formato UTM NATO.</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s datos dispoñíbeis só nas estrada, necesitas calcular unha ruta empregando \"Ruta entre puntos\" para obtela.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Agarda polo recálculo da ruta.
+\nO gráfico estará dispoñíbel após o recálculo.</string>
+    <string name="shared_string_local_maps">Mapas locais</string>
+    <string name="app_mode_gap">Salto</string>
+    <string name="icon_group_amenity">Instalación</string>
+    <string name="icon_group_special">Especial</string>
+    <string name="icon_group_transport">Transporte</string>
+    <string name="icon_group_service">Servizo</string>
+    <string name="icon_group_symbols">Símbolos</string>
+    <string name="icon_group_sport">Deporte</string>
+    <string name="icon_group_emergency">Emerxencia</string>
+    <string name="icon_group_travel">Viaxe</string>
 </resources>

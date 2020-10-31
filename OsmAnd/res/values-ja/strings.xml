@@ -1808,7 +1808,7 @@ POIの更新は利用できません</string>
     <string name="item_removed">項目の削除</string>
     <string name="n_items_removed">項目は削除されました</string>
     <string name="shared_string_undo_all">すべて元に戻す</string>
-    <string name="shared_string_type">タイプ</string>
+    <string name="shared_string_type">種類</string>
     <string name="starting_point">出発地点</string>
     <string name="shared_string_not_selected">指定しない</string>
     <string name="report">レポート</string>
