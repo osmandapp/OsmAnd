@@ -14,6 +14,7 @@ public enum ExportSettingsType {
 	OSM_NOTES,
 	OSM_EDITS,
 	OFFLINE_MAPS,
+	FAVORITES,
 	TTS_VOICE,
 	VOICE
 }

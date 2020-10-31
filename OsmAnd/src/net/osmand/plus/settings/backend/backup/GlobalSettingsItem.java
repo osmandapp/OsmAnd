@@ -19,6 +19,10 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 		super(settings);
 	}
 
+	public GlobalSettingsItem(@NonNull OsmandSettings settings, @NonNull JSONObject json) throws JSONException {
+		super(SettingsItemType.GLOBAL, settings, json);
+	}
+
 	@NonNull
 	@Override
 	public SettingsItemType getType() {

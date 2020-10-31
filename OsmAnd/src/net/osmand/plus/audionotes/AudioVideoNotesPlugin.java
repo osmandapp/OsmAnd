@@ -44,6 +44,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -158,7 +159,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int AV_CAMERA_FOCUS_CONTINUOUS = 5;
 	// photo shot:
 	private static int shotId = 0;
-	private SoundPool sp = null;
+	private SoundPool soundPool = null;
 	public static final int FULL_SCEEN_RESULT_DELAY_MS = 3000;
 
 	public final CommonPreference<Integer> AV_CAMERA_PICTURE_SIZE;
@@ -596,12 +597,38 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
+		if (AV_PHOTO_PLAY_SOUND.get()) {
+			loadCameraSound();
+		}
+		AV_PHOTO_PLAY_SOUND.addListener(new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				if (AV_PHOTO_PLAY_SOUND.get() && soundPool == null) {
+					loadCameraSound();
+				}
+			}
+		});
 //		initializeRemoteControlRegistrationMethods();
 //		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
 //		if (am != null) {
 //			registerMediaListener(am);
 //		}
 		return true;
+	}
+
+	private void loadCameraSound() {
+		if (soundPool == null) {
+			soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+		}
+		if (shotId == 0) {
+			try {
+				AssetFileDescriptor assetFileDescriptor = app.getAssets().openFd("sounds/camera_click.ogg");
+				shotId = soundPool.load(assetFileDescriptor, 1);
+				assetFileDescriptor.close();
+			} catch (Exception e) {
+				log.error("cannot get shotId for sounds/camera_click.ogg");
+			}
+		}
 	}
 
 	@Override
@@ -1338,21 +1365,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				@Override
 				public void surfaceCreated(SurfaceHolder holder) {
 					try {
-						// load sound befor shot
-						if (AV_PHOTO_PLAY_SOUND.get()) {
-							if (sp == null)
-								sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-							if (shotId == 0) {
-								try {
-									AssetFileDescriptor assetFileDescriptor = app.getAssets().openFd("sounds/camera_click.ogg");
-									shotId = sp.load(assetFileDescriptor, 1);
-									assetFileDescriptor.close();
-								} catch (Exception e) {
-									log.error("cannot get shotId for sounds/camera_click.ogg");
-								}
-							}
-						}
-
 						Parameters parameters = cam.getParameters();
 						parameters.setPictureSize(selectedCamPicSize.width, selectedCamPicSize.height);
 						log.debug("takePhotoWithCamera() set Picture size: width=" + selectedCamPicSize.width
@@ -1734,6 +1746,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void disable(OsmandApplication app) {
+		if (soundPool != null) {
+			soundPool.release();
+			soundPool = null;
+			shotId = 0;
+		}
 //		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
 //		if (am != null) {
 //			unregisterMediaListener(am);
@@ -2043,8 +2060,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			photoJpegData = data;
 
 			if (AV_PHOTO_PLAY_SOUND.get()) {
-				if (sp != null && shotId != 0) {
-					sp.play(shotId, 0.7f, 0.7f, 0, 0, 1);
+				if (soundPool != null && shotId != 0) {
+					soundPool.play(shotId, 0.7f, 0.7f, 0, 0, 1);
 				}
 			}
 

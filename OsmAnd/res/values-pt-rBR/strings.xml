@@ -3819,7 +3819,7 @@
     <string name="reverse_route">Rota reversa</string>
     <string name="route_between_points_whole_track_button_desc">A trilha inteira será recalculada usando o perfil selecionado.</string>
     <string name="route_between_points_next_segment_button_desc">Apenas o próximo segmento será recalculado usando o perfil selecionado.</string>
-    <string name="route_between_points_desc">Selecione como conectar pontos, por uma linha reta, ou calcular uma rota entre eles conforme especificado abaixo.</string>
+    <string name="route_between_points_desc">Escolha como conectar os pontos, por uma linha reta, ou calcular uma rota entre eles conforme especificado abaixo.</string>
     <string name="whole_track">Trilha inteira</string>
     <string name="next_segment">Próximo segmento</string>
     <string name="route_between_points_warning_desc">Para usar esta opção, OsmAnd precisa ajustar sua trilha para as estradas do mapa.
@@ -3929,4 +3929,13 @@
     <string name="message_graph_will_be_available_after_recalculation">Aguarde o recálculo da rota.
 \nO gráfico estará disponível após o recálculo.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="shared_string_local_maps">Mapas locais</string>
+    <string name="icon_group_amenity">Amenidade</string>
+    <string name="icon_group_special">Especial</string>
+    <string name="icon_group_transport">Transporte</string>
+    <string name="icon_group_service">Serviço</string>
+    <string name="icon_group_symbols">Símbolos</string>
+    <string name="icon_group_sport">Esporte</string>
+    <string name="icon_group_emergency">Emergência</string>
+    <string name="icon_group_travel">Viagem</string>
 </resources>

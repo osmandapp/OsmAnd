@@ -628,7 +628,7 @@
     <string name="index_item_world_basemap">Oversiktskart (verden)</string>
     <string name="index_item_world_ski">Skikart (verden)</string>
     <string name="lang_hr">Kroatisk</string>
-    <string name="calculate_osmand_route_without_internet">Nettfrakoblet beregning av OsmAnd-rutesegment</string>
+    <string name="calculate_osmand_route_without_internet">Frakoblet beregning av OsmAnd-rutesegment</string>
     <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd-rute for første og siste rutesegment</string>
     <string name="map_widget_top">Statuslinje</string>
     <string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis utilgjengelig brukes engelsk eller lokale navn).</string>
@@ -3694,7 +3694,7 @@
     <string name="shared_string_custom">Egendefinert</string>
     <string name="gpx_direction_arrows">Retningspiler</string>
     <string name="shared_string_tones">tonn</string>
-    <string name="route_between_points">Rute mellom punkter</string>
+    <string name="route_between_points">Rut mellom punkter</string>
     <string name="app_mode_enduro_motorcycle">Enduro-motorsykkel</string>
     <string name="screen_control">Skjermkontroll</string>
     <string name="system_screen_timeout">Bruk systemets skjermtidsavbrudd</string>
@@ -3706,7 +3706,7 @@
     <string name="reverse_route">Snu rute</string>
     <string name="overwrite_track">Overskriv spor</string>
     <string name="route_between_points_whole_track_button_desc">Hele sporet blir beregnet på nytt med den valgte profilen.</string>
-    <string name="route_between_points_desc">Velg hvordan punkter skal forbindes; med en rett linje, eller beregn en rute mellom dem som spesifisert nedenfor.</string>
+    <string name="route_between_points_desc">Velg hvordan punktene skal forbindes; med en rett linje, eller beregn en rute mellom dem som spesifisert nedenfor.</string>
     <string name="route_between_points_next_segment_button_desc">Kun det neste segmentet blir beregnet på nytt med den valgte profilen.</string>
     <string name="whole_track">Hele sporet</string>
     <string name="next_segment">Neste segment</string>
@@ -3872,4 +3872,6 @@
 \nGraf vil være tilgjengelig etter omberegning.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_graph">Graf</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s-data er tilgjengelig kun på veiene, du må beregne en rute med “Rut mellom punkter”.</string>
+    <string name="shared_string_gpx_route">Spor rute</string>
 </resources>

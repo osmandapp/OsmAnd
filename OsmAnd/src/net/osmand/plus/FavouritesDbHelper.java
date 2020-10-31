@@ -76,6 +76,22 @@ public class FavouritesDbHelper {
 		private int color;
 		private List<FavouritePoint> points = new ArrayList<>();
 
+		public FavoriteGroup() {
+		}
+
+		public FavoriteGroup(String name, boolean visible, int color) {
+			this.name = name;
+			this.visible = visible;
+			this.color = color;
+		}
+
+		public FavoriteGroup(String name, List<FavouritePoint> points, int color, boolean visible) {
+			this.name = name;
+			this.color = color;
+			this.points = points;
+			this.visible = visible;
+		}
+
 		public boolean isPersonal() {
 			return isPersonal(name);
 		}
@@ -640,7 +656,7 @@ public class FavouritesDbHelper {
 		return asGpxFile(cachedFavoritePoints);
 	}
 
-	private GPXFile asGpxFile(List<FavouritePoint> favoritePoints) {
+	public GPXFile asGpxFile(List<FavouritePoint> favoritePoints) {
 		GPXFile gpx = new GPXFile(Version.getFullVersion(context));
 		for (FavouritePoint p : favoritePoints) {
 			context.getSelectedGpxHelper().addPoint(p.toWpt(context), gpx);

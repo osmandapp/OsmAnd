@@ -143,7 +143,6 @@ public abstract class SettingsItem {
 			}
 			json.put("file", fileName);
 		}
-		writeItemsToJson(json);
 	}
 
 	String toJson() throws JSONException {

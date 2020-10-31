@@ -26,6 +26,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -194,6 +195,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		List<File> multimediaFilesList = new ArrayList<>();
 		List<File> trackFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
 			if (object instanceof ApplicationMode.ApplicationModeBean) {
@@ -217,6 +219,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 				}
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
+			} else if (object instanceof FavoriteGroup) {
+				favoriteGroups.add((FavoriteGroup) object);
 			}
 		}
 		if (!profiles.isEmpty()) {
@@ -254,6 +258,10 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		if (!avoidRoads.isEmpty()) {
 			duplicates.add(getString(R.string.avoid_road));
 			duplicates.addAll(avoidRoads);
+		}
+		if (!favoriteGroups.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_favorites));
+			duplicates.addAll(favoriteGroups);
 		}
 		return duplicates;
 	}

@@ -827,7 +827,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_help">ヘルプ</string>
     <string name="accessibility_mode">アクセシビリティモード</string>
     <string name="accessibility_mode_descr">アクセシビリティ(ユーザー補助)機能を設定します</string>
-    <string name="shared_string_on">ON</string>
+    <string name="shared_string_on">On</string>
     <string name="shared_string_off">OFF</string>
     <string name="accessibility_default">デバイス側のユーザー補助設定に従う</string>
     <string name="backToMenu">メニューに戻る</string>
@@ -1547,7 +1547,7 @@ POIの更新は利用できません</string>
     <string name="storage_directory">マップストレージ</string>
     <string name="shared_string_copy">コピー</string>
     <string name="osm_edit_context_menu_delete">OSMの編集を削除</string>
-    <string name="rendering_value_disabled_name">無効化</string>
+    <string name="rendering_value_disabled_name">無効</string>
     <string name="shared_string_logoff">ログオフ</string>
     <string name="routing_attr_avoid_borders_description">国境を越えて別の国に入るようなルート設定を避けます。</string>
     <string name="routing_attr_height_name">高さ制限</string>
@@ -2754,7 +2754,7 @@ POIの更新は利用できません</string>
     <string name="osm_edits_export_desc">OSMメモ、POI、またはその両方用にエクスポートします。</string>
     <string name="all_data">全てのデータ</string>
     <string name="osm_notes">OSMメモ</string>
-    <string name="will_open_tomorrow_at">明日開く</string>
+    <string name="will_open_tomorrow_at">明日以降の次の時間に営業</string>
     <string name="shared_string_without_name">名無し</string>
     <string name="release_3_2_pre">• 一部の機種で起動時にクラッシュしていた問題を修正 
 \n 
@@ -2775,11 +2775,11 @@ POIの更新は利用できません</string>
     <string name="pick_up_till">駐車上限時刻</string>
     <string name="without_time_limit">時間制限なし</string>
     <string name="context_menu_read_full_article">記事の全文を読む</string>
-    <string name="open_from">以下の場所から開く</string>
-    <string name="open_till">以下の所まで開く</string>
-    <string name="will_close_at">閉店時間</string>
-    <string name="will_open_at">開店予定時間</string>
-    <string name="will_open_on">営業予定時刻</string>
+    <string name="open_from">次の時間から営業</string>
+    <string name="open_till">次の時間まで営業</string>
+    <string name="will_close_at">営業終了時間</string>
+    <string name="will_open_at">営業開始時間</string>
+    <string name="will_open_on">営業開始時間</string>
     <string name="empty_state_markers_active">マップマーカーを作成しよう！</string>
     <string name="empty_state_markers_history_desc">通過した地点のマーカーと通過予定地点のマーカーがこの画面に表示されます。</string>
     <string name="shared_string_right">右</string>
@@ -2853,7 +2853,7 @@ POIの更新は利用できません</string>
     <string name="by_transport_type">%1$s を利用</string>
     <string name="routeInfo_road_types_name">道路種別</string>
     <string name="shared_string_swap">入れ替え</string>
-    <string name="show_more">詳細を見る</string>
+    <string name="show_more">さらに表示</string>
     <string name="tracks_on_map">マップ上の経路</string>
     <string name="quick_action_show_hide_gpx_tracks">GPX経路の表示/非表示</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">マップ上にある選択したGPX経路の表示/非表示を切り替えるボタンです。</string>
@@ -2898,7 +2898,7 @@ POIの更新は利用できません</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">支払い方法の選択:</string>
     <string name="osm_live_payment_contribute_descr">寄付金はOSMの地図製作に役立てられます。</string>
-    <string name="mapillary_menu_title_pano">360°イメージのみ表示</string>
+    <string name="mapillary_menu_title_pano">360°画像のみを表示</string>
     <string name="osm_recipient_stat">編集 %1$s, 合計 %2$s mBTC</string>
     <string name="shared_string_launch">起動</string>
     <string name="lang_gn_py">グアラニー語</string>
@@ -3048,9 +3048,9 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_showLez_description">マップ上に低排出ゾーン(CO2排出量の多い車両に課税するエリア)を表示します。ルーティングには影響しません。</string>
     <string name="rendering_attr_showLez_name">低排出ゾーンの表示</string>
     <string name="shared_string_default">デフォルト</string>
-    <string name="exit_at">出口：</string>
+    <string name="exit_at">降車</string>
     <string name="transfers_size">%1$d回の乗り換え</string>
-    <string name="shared_string_walk">歩行</string>
+    <string name="shared_string_walk">徒歩</string>
     <string name="send_log">ログの送信</string>
     <string name="files_moved">%1$d個のファイルを移動しました。(%2$s)</string>
     <string name="files_copied">%1$d個のファイルをコピーしました。(%2$s)</string>
@@ -3106,12 +3106,12 @@ POIの更新は利用できません</string>
     <string name="select_base_profile_dialog_title">開始時に表示するプロファイルの選択</string>
     <string name="select_base_profile_dialog_message">カスタムプロファイルは標準のアプリケーションプロファイルを元に作成します。ウィジェットなどの表示設定や速度と距離の単位などの標準設定をプロファイルごとに定義可能です。これらは標準のアプリプロファイルを基本としており、今後それらと共に拡張される可能性があります:</string>
     <string name="select_nav_profile_dialog_title">ナビゲーションタイプの選択</string>
-    <string name="base_profile_descr_car">乗用車,トラック,オートバイ</string>
-    <string name="base_profile_descr_bicycle">マウンテンバイク、モペッド(ペダル付き原動機付自転車)、馬</string>
-    <string name="base_profile_descr_pedestrian">徒歩,ハイキング,ランニング</string>
+    <string name="base_profile_descr_car">乗用車、トラック、オートバイ</string>
+    <string name="base_profile_descr_bicycle">マウンテンバイク、モペッド、馬</string>
+    <string name="base_profile_descr_pedestrian">徒歩、ハイキング、ランニング</string>
     <string name="base_profile_descr_public_transport">公共交通機関の種類</string>
-    <string name="base_profile_descr_boat">エンジン付き船舶,漕ぎボート,帆船</string>
-    <string name="base_profile_descr_aircraft">航空機,グライダー</string>
+    <string name="base_profile_descr_boat">船舶、漕ぎボート、帆船</string>
+    <string name="base_profile_descr_aircraft">航空機、グライダー</string>
     <string name="routing_profile_geocoding">ジオコーディング</string>
     <string name="routing_profile_straightline">直線</string>
     <string name="routing_profile_broutrer">BRouter(オフライン)</string>

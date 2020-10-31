@@ -3551,14 +3551,14 @@
     <string name="saving_new_profile">Guardando el nuevo perfil</string>
     <string name="profile_backup_failed">No se pudo respaldar el perfil.</string>
     <string name="clear_recorded_data_warning">¿Borrar los datos registrados\?</string>
-    <string name="importing_from">Importación de datos de %1$s</string>
-    <string name="shared_string_importing">Importación</string>
+    <string name="importing_from">Importando de datos de «%1$s»</string>
+    <string name="shared_string_importing">Importando</string>
     <string name="checking_for_duplicate_description">OsmAnd comprueba %1$s para ver si hay duplicados con los elementos existentes en la aplicación.
 \n
 \nPuede llevar algún tiempo.</string>
     <string name="items_added">Elementos añadidos</string>
     <string name="shared_string_import_complete">Importación completa</string>
-    <string name="import_complete_description">Todos los datos de %1$s son importados, puedes usar los botones de abajo para abrir la parte necesaria de la aplicación para manejarla.</string>
+    <string name="import_complete_description">Todos los datos de «%1$s» fueron importados. Puedes usar los botones de abajo para gestionar la sección necesaria de la aplicación.</string>
     <string name="shared_string_min">Min</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="shared_string_terrain">Terreno</string>
@@ -3829,7 +3829,7 @@
     <string name="reverse_route">Ruta inversa</string>
     <string name="route_between_points_next_segment_button_desc">Recalcular sólo el siguiente segmento usando el perfil elegido.</string>
     <string name="route_between_points_whole_track_button_desc">Recalcular toda la traza usando el perfil elegido.</string>
-    <string name="route_between_points_desc">Marca cómo conectar los puntos, con una línea recta o calcular una ruta entre ellos como se detalla a continuación.</string>
+    <string name="route_between_points_desc">Elige cómo conectar los puntos, con una línea recta o calcular una ruta entre ellos como se detalla a continuación.</string>
     <string name="whole_track">Traza completa</string>
     <string name="next_segment">Siguiente segmento</string>
     <string name="route_between_points_warning_desc">A continuación, ajusta la traza al camino permitido más cercano con un perfil de navegación.</string>
@@ -3937,4 +3937,13 @@
     <string name="message_graph_will_be_available_after_recalculation">Espera el recálculo de la ruta.
 \nEl gráfico estará disponible después del recálculo.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="shared_string_local_maps">Mapas locales</string>
+    <string name="icon_group_amenity">Comodidad</string>
+    <string name="icon_group_special">Especial</string>
+    <string name="icon_group_transport">Transporte</string>
+    <string name="icon_group_service">Servicio</string>
+    <string name="icon_group_symbols">Símbolos</string>
+    <string name="icon_group_sport">Deporte</string>
+    <string name="icon_group_emergency">Emergencia</string>
+    <string name="icon_group_travel">Viaje</string>
 </resources>

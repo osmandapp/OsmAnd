@@ -3935,4 +3935,13 @@
 \nGraf bude dostupný po prepočte.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="app_mode_gap">Medzera</string>
+    <string name="shared_string_local_maps">Lokálne mapy</string>
+    <string name="icon_group_amenity">Občianska vybavenosť</string>
+    <string name="icon_group_special">Špeciálne</string>
+    <string name="icon_group_transport">Doprava</string>
+    <string name="icon_group_service">Služby</string>
+    <string name="icon_group_symbols">Symboly</string>
+    <string name="icon_group_sport">Šport</string>
+    <string name="icon_group_emergency">Núdzová situácia/Záchrana</string>
+    <string name="icon_group_travel">Cestovanie</string>
 </resources>

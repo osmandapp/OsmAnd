@@ -3811,7 +3811,7 @@
     <string name="poi_tactile_paving_contrasted">Contrastado</string>
     <string name="poi_tactile_paving_primitive">Primitivo</string>
     <string name="poi_tactile_paving_incorrect">Incorrecto</string>
-    <string name="poi_internet_access_fee_customers">Señal para encontrar el poste</string>
+    <string name="poi_internet_access_fee_customers">Conexión a Internet: clientes</string>
     <string name="poi_seamark_water_level_part_submerged">Nivel del agua: parcialmente sumergido</string>
     <string name="poi_seamark_water_level_submerged">Nivel del agua: sumergido</string>
     <string name="poi_seamark_water_level_dry">Nivel de agua: seco</string>
@@ -3852,4 +3852,8 @@
     <string name="poi_beehive">Panal de abejas</string>
     <string name="poi_nuts">Frutos secos</string>
     <string name="poi_fuel_lng">Gas natural licuado</string>
+    <string name="poi_parking_layby">Apartadero</string>
+    <string name="poi_parking_sheds">Cobertizos</string>
+    <string name="poi_parking_rooftop">Azotea</string>
+    <string name="poi_gpx_point">Punto GPX</string>
 </resources>

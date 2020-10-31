@@ -178,6 +178,6 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 	@Nullable
 	@Override
 	SettingsItemWriter<? extends SettingsItem> getWriter() {
-		return null;
+		return getJsonWriter();
 	}
 }

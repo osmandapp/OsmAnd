@@ -990,7 +990,7 @@
     <string name="poi_wiki_lang_vi">ベトナム語 wiki</string>
     <string name="poi_wiki_lang_vo">ボラピュク語 wiki</string>
     <string name="poi_wiki_lang_zh">中国語 wiki</string>
-    <string name="poi_bollard">係船柱</string>
+    <string name="poi_bollard">杭</string>
     <string name="poi_cycle_barrier">自転車用車止め</string>
     <string name="poi_motorcycle_barrier">オートバイ用車止め</string>
     <string name="poi_block">ブロック</string>
@@ -1260,8 +1260,8 @@
     <string name="poi_amenity_vacuum_cleaner">掃除機</string>
     <string name="poi_fuel_adblue">ディーゼル排気用液(AdBlue・尿素水)</string>
     <string name="poi_drive_through">ドライブスルー</string>
-    <string name="poi_drive_through_yes">有り</string>
-    <string name="poi_drive_through_no">無し</string>
+    <string name="poi_drive_through_yes">可</string>
+    <string name="poi_drive_through_no">ドライブスルー: 不可</string>
     <string name="poi_fuel_91ul">91UL 無鉛航空燃料</string>
     <string name="poi_fuel_100ll">100LL 有鉛航空燃料</string>
     <string name="poi_fuel_jeta1">JET A-1ジェット燃料</string>
@@ -1479,7 +1479,7 @@
     <string name="poi_takeaway_no">持ち帰り不可</string>
     <string name="poi_takeaway_only">テイクアウト・持ち帰りのみ</string>
     <string name="poi_archaeological_site_type">遺跡の種類</string>
-    <string name="poi_health_specialty">医療機関</string>
+    <string name="poi_health_specialty">専門分野</string>
     <string name="poi_health_specialty_general_yes">総合診療医</string>
     <string name="poi_health_specialty_ophthalmology_yes">眼科</string>
     <string name="poi_health_specialty_gynaecology_yes">婦人科</string>
@@ -1487,7 +1487,7 @@
     <string name="poi_health_specialty_orthopaedics_yes">整形外科</string>
     <string name="poi_health_specialty_otolaryngology_yes">耳鼻咽喉科</string>
     <string name="poi_health_specialty_paediatrics_yes">小児科</string>
-    <string name="poi_health_specialty_paediatrics_no">医療機関:小児科:無し</string>
+    <string name="poi_health_specialty_paediatrics_no">専門分野:小児科:無し</string>
     <string name="poi_health_specialty_dermatology_yes">皮膚科</string>
     <string name="poi_health_specialty_urology_yes">泌尿器科</string>
     <string name="poi_health_specialty_surgery_yes">一般外科</string>
@@ -1577,7 +1577,7 @@
     <string name="poi_free_flying_characteristic">スカイスポーツの対応要素</string>
     <string name="poi_seasonal">季節営業</string>
     <string name="poi_drive_in">ドライブイン</string>
-    <string name="poi_drive_in_no">無し</string>
+    <string name="poi_drive_in_no">ドライブイン: 不可</string>
     <string name="poi_power_supply_yes">有り</string>
     <string name="poi_scout_camp">ボーイスカウト用キャンプ</string>
     <string name="poi_scout_yes">肯定</string>
@@ -1710,7 +1710,7 @@
     <string name="poi_medical_system_sidda_yes">南インドのタミル伝統医学</string>
     <string name="poi_medical_system_unani_yes">ユナニ医学・南アジアの伝統医学</string>
     <string name="poi_health_facility_type_office">医療事務</string>
-    <string name="poi_drive_in_yes">有り</string>
+    <string name="poi_drive_in_yes">可</string>
     <string name="poi_healthcare_alternative_types">代替医療の専門種</string>
     <string name="poi_home_visit">往診</string>
     <string name="poi_home_visit_no">無し</string>
@@ -3835,4 +3835,8 @@
     <string name="poi_give_box">ギブボックス(提供品置場)</string>
     <string name="poi_fire_hydrant_type_pipe">簡易給水栓</string>
     <string name="poi_fuel_lng">液化天然ガス</string>
+    <string name="poi_gpx_point">GPXポイント</string>
+    <string name="poi_parking_layby">待避所</string>
+    <string name="poi_parking_sheds">車庫</string>
+    <string name="poi_parking_rooftop">屋上</string>
 </resources>

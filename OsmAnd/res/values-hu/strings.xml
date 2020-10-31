@@ -3834,7 +3834,7 @@
     <string name="simplified_track">Egyszerűsített nyomvonal</string>
     <string name="shared_string_done">Kész</string>
     <string name="shared_string_is_saved">elmentve</string>
-    <string name="route_between_points_desc">Jelölje ki, hogyan legyenek összekötve a pontok: egyenes vonallal vagy az alábbiak szerint kiszámított útvonallal.</string>
+    <string name="route_between_points_desc">Válassza ki, hogyan legyenek összekötve a pontok: egyenes vonallal vagy az alábbiak szerint kiszámított útvonallal.</string>
     <string name="whole_track">Teljes nyomvonal</string>
     <string name="monitoring_min_accuracy_descr_remark">Megjegyzés: Ha a GPS közvetlenül a felvétel előtt ki volt kapcsolva, akkor rosszabb lehet az első mért pont pontossága. A kódban ezért szeretnénk majd talán várni egy-két másodpercet egy pont rögzítése előtt (vagy a 3 egymást követő pont közül a legjobbat rögzíteni vagy valami hasonló), de ezt még nem programoztuk le.</string>
     <string name="delete_address">Cím törlése</string>
@@ -3926,4 +3926,13 @@
     <string name="message_need_calculate_route_before_show_graph">%1$s adatok csak az utakról állnak rendelkezésre. Használja az „Útvonal tervezése pontok között” funkciót.</string>
     <string name="message_graph_will_be_available_after_recalculation">Várja meg az útvonal újraszámítását.
 \nAz ábra az újraszámítás után lesz látható.</string>
+    <string name="shared_string_local_maps">Helyi térképek</string>
+    <string name="icon_group_amenity">Hasznos és fontos létesítmény</string>
+    <string name="icon_group_special">Különleges</string>
+    <string name="icon_group_transport">Közlekedés</string>
+    <string name="icon_group_service">Szolgáltatás</string>
+    <string name="icon_group_symbols">Jelképek</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="icon_group_emergency">Vészhelyzet</string>
+    <string name="icon_group_travel">Utazás</string>
 </resources>

@@ -3821,7 +3821,7 @@
     <string name="reverse_route">反向路線</string>
     <string name="route_between_points_whole_track_button_desc">整個軌跡都會使用選定的設定檔重新計算。</string>
     <string name="route_between_points_next_segment_button_desc">僅下一個片段會使用選定的設定檔重新計算。</string>
-    <string name="route_between_points_desc">選取如何連接點，透過直線或以下面選定的方法計算其間的路徑。</string>
+    <string name="route_between_points_desc">選擇如何連接點，透過直線或以下面選定的方法計算其間的路徑。</string>
     <string name="whole_track">整個軌道</string>
     <string name="next_segment">下一段</string>
     <string name="route_between_points_warning_desc">接下來，使用您其中一個導航設定檔來將路線貼齊到最近可用的道路上以使用此選項。</string>
@@ -3930,4 +3930,13 @@
 \n重新計算後即可使用圖表。</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="app_mode_gap">分隔</string>
+    <string name="shared_string_local_maps">本機地圖</string>
+    <string name="icon_group_amenity">便利設施</string>
+    <string name="icon_group_special">特殊</string>
+    <string name="icon_group_transport">運輸</string>
+    <string name="icon_group_service">服務</string>
+    <string name="icon_group_symbols">符號</string>
+    <string name="icon_group_sport">運動</string>
+    <string name="icon_group_emergency">警急</string>
+    <string name="icon_group_travel">旅行</string>
 </resources>
