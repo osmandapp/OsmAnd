@@ -36,7 +36,6 @@ import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routepreparationmenu.cards.RouteStatisticCard;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
