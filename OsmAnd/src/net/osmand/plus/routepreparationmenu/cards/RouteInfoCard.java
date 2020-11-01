@@ -36,9 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class RouteInfoCard extends BaseCard {
+import static net.osmand.plus.track.ColorsCard.MINIMUM_CONTRAST_RATIO;
 
-	private static final int MINIMUM_CONTRAST_RATIO = 3;
+public class RouteInfoCard extends BaseCard {
 
 	private RouteStatistics routeStatistics;
 	private GPXTrackAnalysis analysis;

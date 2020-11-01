@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -52,6 +53,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.track.ColorsCard;
+import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.util.Algorithms;
 
@@ -72,7 +77,7 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
-public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
+public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
 
 	public static final String TAG = PointEditorFragmentNew.class.getSimpleName();
 
@@ -458,35 +463,38 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	}
 
 	private void createColorSelector() {
-		FlowLayout selectColor = view.findViewById(R.id.select_color);
-		for (int color : ColorDialogs.pallette) {
-			selectColor.addView(createColorItemView(color, selectColor), new FlowLayout.LayoutParams(0, 0));
-		}
-		int customColor = getPointColor();
-		if (!ColorDialogs.isPaletteColor(customColor)) {
-			selectColor.addView(createColorItemView(customColor, selectColor), new FlowLayout.LayoutParams(0, 0));
+		trackColoringCard = new ColorsCard(getMapActivity(), 0, this, ColorDialogs.pallette);
+		trackColoringCard.setListener(this);
+
+		LinearLayout container = view.findViewById(R.id.container);
+		container.addView(trackColoringCard.build(getMapActivity()));
+	}
+
+	@Override
+	public void onColorSelected(Integer prevColor, int newColor) {
+		trackColoringCard.onColorSelected(prevColor, newColor);
+		selectedColor = trackColoringCard.getSelectedColor();
+		updateColorSelector(selectedColor, view);
+	}
+
+	ColorsCard trackColoringCard;
+
+	@Override
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+
+	}
+
+	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+		if (card instanceof ColorsCard) {
+			selectedColor = ((ColorsCard) card).getSelectedColor();
+			updateColorSelector(selectedColor, view);
 		}
 	}
 
-	private View createColorItemView(@ColorInt final int color, final FlowLayout rootView) {
-		FrameLayout colorItemView = (FrameLayout) UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.point_editor_button, rootView, false);
-		ImageView outline = colorItemView.findViewById(R.id.outline);
-		outline.setImageDrawable(
-				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle_contour),
-						ContextCompat.getColor(app,
-								nightMode ? R.color.stroked_buttons_and_links_outline_dark
-										: R.color.stroked_buttons_and_links_outline_light)));
-		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
-		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle), color));
-		backgroundCircle.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateColorSelector(color, rootView);
-			}
-		});
-		colorItemView.setTag(color);
-		return colorItemView;
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+
 	}
 
 	private void updateColorSelector(int color, View rootView) {
