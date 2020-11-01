@@ -3047,7 +3047,7 @@
     <string name="poi_cuisine_shawarma">Shawarma;Carne a las brasas en asador horizontal</string>
     <string name="poi_waterway_fuel">Estación de combustible náutica;Gasolinera náutica</string>
     <string name="poi_feeding_place">Cebadero para animales</string>
-    <string name="poi_party">Artículos de cotillón;Artículos para fiestas</string>
+    <string name="poi_party">Artículos para fiestas;Cotillón</string>
     <string name="poi_electrical">Artículos de electricidad</string>
     <string name="poi_locksmith">Cerrajería</string>
     <string name="poi_lighting">Artículos de iluminación</string>
@@ -3206,7 +3206,7 @@
     <string name="poi_gorge">Cañón (desfiladero)</string>
     <string name="poi_couloir">Couloir (barranco estrecho y empinado)</string>
     <string name="poi_mountain_area">Área montañosa</string>
-    <string name="poi_surface_clay">Polvo de ladrillo</string>
+    <string name="poi_surface_clay">Polvo de ladrillo (arcilla)</string>
     <string name="poi_surface_tartan">Tartán</string>
     <string name="poi_surface_artificial_turf">Césped artificial</string>
     <string name="poi_surface_decoturf">Decoturf (superficie dura para tenis)</string>
@@ -3856,4 +3856,5 @@
     <string name="poi_parking_sheds">Cobertizos</string>
     <string name="poi_parking_rooftop">Azotea</string>
     <string name="poi_gpx_point">Punto GPX</string>
+    <string name="poi_radar_tower">Torre de radar</string>
 </resources>
