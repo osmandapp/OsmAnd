@@ -11,6 +11,14 @@
 	Thx - Hardy
 
 -->
+    <string name="login_account">Account</string>
+    <string name="use_login_password">Use login and password</string>
+    <string name="open_street_map_login_mode">You need to login to upload new or modified changes. \n\nYou can log in using the safe OAuth method or use your login and password.</string>
+    <string name="osm_edits_view_descr">You can view all your unloaded edits or OSM bugs in %1$s. Uploaded points don’t show in OsmAnd.</string>
+    <string name="sing_in_with_open_street_map">Sing in with OpenStreetMap</string>
+    <string name="login_open_street_map_org">Login to OpenStreetMap.org</string>
+    <string name="login_open_street_map">Login to OpenStreetMap</string>
+    <string name="plugin_global_prefs_info">These plugin setting are global, and apply to all profiles</string>
     <string name="icon_group_travel">Travel</string>
     <string name="icon_group_emergency">Emergency</string>
     <string name="icon_group_sport">Sport</string>
@@ -481,9 +489,7 @@
     <string name="route_recalculation">Route recalculation</string>
     <string name="accessibility_announce">Announce</string>
     <string name="login_and_pass">Username and password</string>
-    <string name="plugin_global_prefs_info">These settings apply to all profiles.</string>
     <string name="osm_editing">OSM editing</string>
-    <string name="osm_edits_view_descr">View your edits or OSM bugs not yet uploaded in %1$s. Uploaded points will not show any more.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icon shown while navigating or moving.</string>
     <string name="select_map_icon_descr">Icon shown at rest.</string>

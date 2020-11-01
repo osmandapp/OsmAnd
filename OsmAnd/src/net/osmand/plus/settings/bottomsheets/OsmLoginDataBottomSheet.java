@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
+import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -20,6 +21,8 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
+
+import java.lang.ref.WeakReference;
 
 public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
@@ -84,19 +87,13 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		app.getSettings().USER_NAME.set(userNameEditText.getText().toString());
 		app.getSettings().USER_PASSWORD.set(passwordEditText.getText().toString());
-		new ValidateOsmLoginDetailsTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-		Fragment target = getTargetFragment();
-		Preference preference = getPreference();
-		if (target instanceof OnPreferenceChanged && preference != null) {
-			((OnPreferenceChanged) target).onPreferenceChanged(preference.getKey());
-		}
+		new ValidateOsmLoginDetailsTask(app, (OsmEditingFragment) getTargetFragment()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 		dismiss();
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
-	                                   boolean usedOnMap, @Nullable ApplicationMode appMode) {
+									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
