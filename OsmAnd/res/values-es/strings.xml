@@ -609,18 +609,18 @@
     <string name="map_online_data_descr">Usa mapas en línea (descarga y guarda teselas en la tarjeta de memoria).</string>
     <string name="shared_string_online_maps">Mapas en línea</string>
     <string name="online_map_settings_descr">Elige las fuentes de teselas de mapas en línea o en caché.</string>
-    <string name="osmand_rastermaps_plugin_description">"Accede a muchos tipos de mapas en línea (llamados teselas o ráster), desde teselas predefinidas de OpenStreetMap (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas del clima, mapas geológicos, capas de sombreado, etc.
+    <string name="osmand_rastermaps_plugin_description">Accede a muchos tipos de mapas en línea (llamados teselas o ráster), desde teselas predefinidas de OpenStreetMap (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas del clima, mapas geológicos, capas de sombreado, etc.
 \n
 \nCualquiera de estos mapas puede mostrarse como el mapa (base) principal, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd sin conexión). Ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar a través del menú «Configurar mapa» para hacer más visible cualquier mapa subyacente.
 \n
-\nDescarga los mapas de teselas directamente  a través de fuentes en línea, o prepararlos para tu uso sin conexión (copiándolos manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede generarse con varias herramientas de preparación de mapas de terceros."</string>
+\nDescarga los mapas de teselas directamente a través de fuentes en línea, o prepararlos para tu uso sin conexión (copiándolos manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede generarse con varias herramientas de preparación de mapas de terceros.</string>
     <string name="osmand_background_plugin_description">Muestra los ajustes para activar en modo reposo el seguimiento y la navegación, activando periódicamente el dispositivo GPS (con la pantalla apagada).</string>
     <string name="osmand_accessibility_description">Activa las funciones de accesibilidad del dispositivo directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces de texto a voz, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control del zoom, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
     <string name="osmand_development_plugin_description">Este complemento muestra los ajustes de funciones de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado, o las indicaciones por voz. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins_descr">Los complementos activan ajustes avanzados y funcionalidades adicionales.</string>
     <string name="prefs_plugins">Complementos</string>
-    <string name="osm_editing_plugin_description">Este complemento puede usarse para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX. OSM es un proyecto de mapeo global impulsado por la comunidad y de dominio público. Para más detalles, consulta https://openstreetmap.org. Se aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, especificando las credenciales personales de OSM en la aplicación.</string>
+    <string name="osm_editing_plugin_description">Haz contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX grabados en OsmAnd, proporcionando tu nombre de usuario y contraseña. OpenStreetMap.org es un proyecto de mapeo de dominio público, global, libre e impulsado por la comunidad.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
     <string name="play_commands_of_currently_selected_voice">Elige una voz y reproduce pruebas de los avisos:</string>
     <string name="debugging_and_development">Desarrollo de OsmAnd</string>
@@ -890,8 +890,8 @@
     <string name="audionotes_plugin_description">Tomar notas de audio/foto/video durante un viaje, usando un botón de mapa o un menú contextual de la ubicación.</string>
     <string name="audionotes_plugin_name">Notas audio/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel sin conexión</string>
-    <string name="osmand_srtm_long_description_1000_chars">Este complemento proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje. 
-\n 
+    <string name="osmand_srtm_long_description_1000_chars">Proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
+\n
 \nLos datos globales (entre 70° norte y 70° sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">Pulsa «Usar ubicación…» para añadir una nota a la ubicación.</string>
@@ -3014,22 +3014,24 @@
     <string name="searching_gps">Buscando GPS</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
     <string name="app_mode_ufo">OVNI</string>
-    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado. 
-\n 
-\n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil 
-\n 
-\n • Se ha añadido un widget para las coordenadas actuales 
-\n 
-\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa 
-\n 
-\n • Se ha corregido la grabación de trazas en segundo plano 
-\n 
-\n • Se mejoraron las descargas de mapas en segundo plano 
-\n 
-\n • Se ha corregido la selección de idioma de Wikipedia 
-\n 
-\n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación 
-\n 
+    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado.
+\n
+\n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil
+\n
+\n • Se ha añadido un widget para las coordenadas actuales
+\n
+\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa
+\n
+\n • Se ha corregido la grabación de trazas en segundo plano
+\n
+\n • Se mejoraron las descargas de mapas en segundo plano
+\n
+\n • Se ha vuelto a añadir la opción «Encender pantalla»
+\n
+\n • Se ha corregido la selección de idioma de Wikipedia
+\n
+\n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación
+\n
 \n • Otras correcciones de errores
 \n
 \n</string>
@@ -3840,7 +3842,7 @@
     <string name="reverse_route">Ruta inversa</string>
     <string name="route_between_points_whole_track_button_desc">La traza completa será recalculada utilizando el perfil seleccionado.</string>
     <string name="route_between_points_next_segment_button_desc">Sólo el siguiente segmento será recalculado usando el perfil seleccionado.</string>
-    <string name="route_between_points_desc">Selecciona cómo conectar puntos, con línea recta, o calcula una ruta entre ellos como se especifica a continuación.</string>
+    <string name="route_between_points_desc">Elija cómo conectar los puntos, en línea recta o calcular una ruta entre ellos como se especifica a continuación.</string>
     <string name="whole_track">Traza completa</string>
     <string name="next_segment">Siguiente segmento</string>
     <string name="route_between_points_warning_desc">A continuación, ajusta tu traza a la carretera permitida más cercana con uno de tus perfiles de navegación para usar esta opción.</string>
