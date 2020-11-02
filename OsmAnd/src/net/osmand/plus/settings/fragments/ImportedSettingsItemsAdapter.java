@@ -130,6 +130,14 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_map, activeColorRes));
 				holder.title.setText(R.string.shared_string_local_maps);
 				break;
+			case TTS_VOICE:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_volume_up, activeColorRes));
+				holder.title.setText(R.string.local_indexes_cat_tts);
+				break;
+			case VOICE:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_volume_up, activeColorRes));
+				holder.title.setText(R.string.local_indexes_cat_voice);
+				break;
 			case GLOBAL:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_settings, activeColorRes));
 				holder.title.setText(R.string.general_settings_2);
