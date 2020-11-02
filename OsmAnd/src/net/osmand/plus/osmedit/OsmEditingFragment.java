@@ -40,7 +40,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	private static final String OSM_EDITING_INFO = "osm_editing_info";
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
 	private static final String OSM_LOGIN_DATA = "osm_login_data";
-	private static final String OSM_LOGIN_EXIT = "osm_login_exit";
+	private static final String OSM_LOGOUT = "osm_logout";
 	private static final String OSM_OAUTH_CLEAR = "osm_oauth_clear";
 	private static final String OSM_OAUTH_LOGIN = "osm_oauth_login";
 
@@ -95,7 +95,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private void setupExitPref() {
-		Preference nameAndPasswordPref = findPreference(OSM_LOGIN_EXIT);
+		Preference nameAndPasswordPref = findPreference(OSM_LOGOUT);
 		nameAndPasswordPref.setSummary(settings.USER_NAME.get());
 		nameAndPasswordPref.setIcon(getContentIcon(R.drawable.ic_action_user_account));
 
@@ -157,7 +157,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 				LoginBottomSheetFragment.showInstance(fragmentManager, this);
 				return true;
 			}
-		} else if (OSM_LOGIN_EXIT.equals(prefId)) {
+		} else if (OSM_LOGOUT.equals(prefId)) {
 			if (client.isValidToken()) {
 				settings.USER_ACCESS_TOKEN.set("");
 				settings.USER_ACCESS_TOKEN_SECRET.set("");

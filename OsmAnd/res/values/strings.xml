@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="user_login">Login</string>
+    <string name="user_password">Password</string>
     <string name="login_account">Account</string>
     <string name="use_login_password">Use login and password</string>
     <string name="open_street_map_login_mode">You need to login to upload new or modified changes. \n\nYou can log in using the safe OAuth method or use your login and password.</string>
@@ -3201,7 +3203,6 @@
     <string name="global_app_settings">Global app settings</string>
     <string name="user_name">Your OSM username</string>
     <string name="open_street_map_login_descr">Needed for openstreetmap.org submissions.</string>
-    <string name="user_password">Your OSM password</string>
     <string name="osmand_service">Background mode</string>
     <string name="osmand_service_descr">OsmAnd runs in the background with the screen off.</string>
     <string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>

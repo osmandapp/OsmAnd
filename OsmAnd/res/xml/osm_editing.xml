@@ -19,7 +19,7 @@
 		android:title="@string/login_open_street_map" />
 
 	<Preference
-		android:key="osm_login_exit"
+		android:key="osm_logout"
 		android:layout="@layout/preference_login"
 		android:persistent="false"
 		android:title="@string/login_account" />
