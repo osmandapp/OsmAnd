@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -145,7 +146,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		return new SettingsItemReader<FavoritesSettingsItem>(this) {
 
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream) throws IllegalArgumentException {
+			public void readFromStream(@NonNull InputStream inputStream, File destination) throws IllegalArgumentException {
 				GPXFile gpxFile = GPXUtilities.loadGPXFile(inputStream);
 				if (gpxFile.error != null) {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));

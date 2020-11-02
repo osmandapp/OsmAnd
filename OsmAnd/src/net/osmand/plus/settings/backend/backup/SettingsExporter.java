@@ -67,13 +67,11 @@ class SettingsExporter {
 				if (Algorithms.isEmpty(fileName)) {
 					fileName = item.getDefaultFileName();
 				}
-				ZipEntry entry = new ZipEntry(fileName);
-				zos.putNextEntry(entry);
-				writer.writeToStream(zos);
-				zos.closeEntry();
+				writer.writeEntry(fileName, zos);
 			}
 		}
 	}
+
 
 	private JSONObject createItemsJson() throws JSONException {
 		JSONObject json = new JSONObject();

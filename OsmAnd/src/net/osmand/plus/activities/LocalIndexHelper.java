@@ -214,7 +214,7 @@ public class LocalIndexHelper {
 		return result;
 	}
 
-	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
+	public void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
 		if (voiceDir.canRead()) {
 			//First list TTS files, they are preferred
 			for (File voiceF : listFilesSorted(voiceDir)) {

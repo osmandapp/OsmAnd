@@ -288,8 +288,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				title.setText(FileNameTranslationHelper.getFileName(app,
 						app.getResourceManager().getOsmandRegions(),
 						file.getName()));
-				FileSubtype subtype = FileSubtype.getSubtypeByFileName(file.getPath().replace(
-						app.getAppPath(null).getPath(), ""));
+				FileSubtype subtype = FileSubtype.getSubtypeByPath(app, file.getPath());
 				switch (subtype) {
 					case SRTM_MAP:
 						iconId = R.drawable.ic_plugin_srtm;
@@ -308,6 +307,14 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				FavoriteGroup favoriteGroup = (FavoriteGroup) currentItem;
 				title.setText(favoriteGroup.getDisplayName(app));
 				setupIcon(icon, R.drawable.ic_action_favorite, itemSelected);
+				break;
+			case TTS_VOICE:
+			case VOICE:
+				file = (File) currentItem;
+				title.setText(FileNameTranslationHelper.getFileName(app,
+						app.getResourceManager().getOsmandRegions(),
+						file.getName()));
+				setupIcon(icon, R.drawable.ic_action_volume_up, itemSelected);
 				break;
 			default:
 				return child;
@@ -361,8 +368,12 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		for (Object item : listItems) {
 			if (data.contains(item)) {
 				amount++;
-				if (type == OFFLINE_MAPS && item instanceof FileSettingsItem) {
-					amountSize += ((FileSettingsItem) item).getSize();
+				if (type == OFFLINE_MAPS) {
+					if (item instanceof FileSettingsItem) {
+						amountSize += ((FileSettingsItem) item).getSize();
+					} else {
+						amountSize += ((File) item).length();
+					}
 				}
 			}
 		}
@@ -396,11 +407,15 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			case OSM_NOTES:
 				return R.string.osm_notes;
 			case OSM_EDITS:
-				return R.string.osm_edit_modified_poi;
+				return R.string.osm_edits;
 			case OFFLINE_MAPS:
-				return R.string.shared_string_local_maps;
+				return R.string.shared_string_maps;
 			case FAVORITES:
 				return R.string.shared_string_favorites;
+			case TTS_VOICE:
+				return R.string.local_indexes_cat_tts;
+			case VOICE:
+				return R.string.local_indexes_cat_voice;
 			default:
 				return R.string.access_empty_list;
 		}

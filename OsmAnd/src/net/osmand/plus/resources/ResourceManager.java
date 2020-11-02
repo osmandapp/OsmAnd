@@ -413,7 +413,7 @@ public class ResourceManager {
 				java.text.DateFormat dateFormat = getDateFormat();
 				for (File f : lf) {
 					if (f.isDirectory()) {
-						String lang = f.getName().replace("-tts", "");
+						String lang = f.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
 						File conf = new File(f, lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
 						if (!conf.exists()) {
 							conf = new File(f, "_config.p");
@@ -454,9 +454,10 @@ public class ResourceManager {
 			if (appPath.canWrite()) {
 				for (AssetEntry asset : assets) {
 					File jsFile = new File(appPath, asset.destination);
-					if (asset.destination.contains("-tts") && asset.destination
+					if (asset.destination.contains(IndexConstants.VOICE_PROVIDER_SUFFIX) && asset.destination
 							.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-						File oggFile = new File(appPath, asset.destination.replace("-tts", ""));
+						File oggFile = new File(appPath, asset.destination.replace(
+								IndexConstants.VOICE_PROVIDER_SUFFIX, ""));
 						if (oggFile.getParentFile().exists() && !oggFile.exists()) {
 							copyAssets(context.getAssets(), asset.source, oggFile);
 						}

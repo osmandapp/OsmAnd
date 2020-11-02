@@ -85,10 +85,10 @@ public class FileNameTranslationHelper {
 	public static String getVoiceName(Context ctx, String fileName) {
 		try {
 			String nm = fileName.replace('-', '_').replace(' ', '_');
-			if (nm.endsWith("_tts") || nm.endsWith("-tts")) {
+			if (nm.endsWith("_tts") || nm.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
 				nm = nm.substring(0, nm.length() - 4);
 			}
-			Field f = R.string.class.getField("lang_"+nm);
+			Field f = R.string.class.getField("lang_" + nm);
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
 				return ctx.getString(in);

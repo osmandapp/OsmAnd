@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +26,6 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -38,6 +38,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.view.ComplexButton;
 
@@ -52,7 +53,7 @@ import static net.osmand.IndexConstants.ROUTING_PROFILES_DIR;
 import static net.osmand.plus.settings.fragments.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
 
 
-public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View.OnClickListener {
+public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ImportDuplicatesFragment.class.getSimpleName();
 	private OsmandApplication app;
@@ -69,8 +70,9 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	private SettingsHelper settingsHelper;
 
 	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
-									List<SettingsItem> settingsItems, File file) {
+	                                List<SettingsItem> settingsItems, File file, Fragment targetFragment) {
 		ImportDuplicatesFragment fragment = new ImportDuplicatesFragment();
+		fragment.setTargetFragment(targetFragment, 0);
 		fragment.setDuplicatesList(duplicatesList);
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFile(file);
@@ -97,7 +99,11 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			if (file == null) {
 				file = importTask.getFile();
 			}
-			importTask.setImportListener(getImportListener());
+			Fragment target = getTargetFragment();
+			if (target instanceof ImportSettingsFragment) {
+				SettingsImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
+				importTask.setImportListener(importListener);
+			}
 		}
 	}
 
@@ -125,8 +131,18 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
 						: getResources().getColor(R.color.active_buttons_and_links_text_light))
 		);
-		keepBothBtn.setOnClickListener(this);
-		replaceAllBtn.setOnClickListener(this);
+		keepBothBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				importItems(false);
+			}
+		});
+		replaceAllBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				importItems(true);
+			}
+		});
 		list = root.findViewById(R.id.list);
 		ViewCompat.setNestedScrollingEnabled(list, false);
 		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
@@ -251,20 +267,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	}
 
 	@Override
-	public void onClick(View view) {
-		switch (view.getId()) {
-			case R.id.keep_both_btn: {
-				importItems(false);
-				break;
-			}
-			case R.id.replace_all_btn: {
-				importItems(true);
-				break;
-			}
-		}
-	}
-
-	@Override
 	public int getStatusBarColorId() {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
@@ -275,7 +277,11 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			for (SettingsItem item : settingsItems) {
 				item.setShouldReplace(shouldReplace);
 			}
-			settingsHelper.importSettings(file, settingsItems, "", 1, getImportListener());
+			Fragment target = getTargetFragment();
+			if (target instanceof ImportSettingsFragment) {
+				SettingsImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
+				settingsHelper.importSettings(file, settingsItems, "", 1, importListener);
+			}
 		}
 	}
 
@@ -288,22 +294,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		progressBar.setVisibility(View.VISIBLE);
 		list.setVisibility(View.GONE);
 		buttonsContainer.setVisibility(View.GONE);
-	}
-
-	private SettingsHelper.SettingsImportListener getImportListener() {
-		return new SettingsHelper.SettingsImportListener() {
-			@Override
-			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
-				if (succeed) {
-					app.getRendererRegistry().updateExternalRenderers();
-					AppInitializer.loadRoutingFiles(app, null);
-					FragmentManager fm = getFragmentManager();
-					if (fm != null && file != null) {
-						ImportCompleteFragment.showInstance(fm, items, file.getName());
-					}
-				}
-			}
-		};
 	}
 
 	private void setupToolbar(Toolbar toolbar) {

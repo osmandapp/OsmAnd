@@ -48,6 +48,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+import static net.osmand.plus.settings.backend.backup.FileSettingsItem.*;
 import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 
 /*
@@ -532,28 +533,48 @@ public class SettingsHelper {
 				dataList.put(ExportSettingsType.OSM_EDITS, editsPointList);
 			}
 		}
-		List<File> files = getLocalMapFiles();
-		if (!files.isEmpty()) {
-			dataList.put(ExportSettingsType.OFFLINE_MAPS, files);
-		}
 		List<FavoriteGroup> favoriteGroups = app.getFavorites().getFavoriteGroups();
 		if (!favoriteGroups.isEmpty()) {
 			dataList.put(ExportSettingsType.FAVORITES, favoriteGroups);
 		}
+		List<LocalIndexInfo> localIndexInfoList = getVoiceIndexInfo();
+		List<File> files;
+		files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
+				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA);
+		if (!files.isEmpty()) {
+			dataList.put(ExportSettingsType.OFFLINE_MAPS, files);
+		}
+		files = getFilesByType(localIndexInfoList, LocalIndexType.TTS_VOICE_DATA);
+		if (!files.isEmpty()) {
+			dataList.put(ExportSettingsType.TTS_VOICE, files);
+		}
+		files = getFilesByType(localIndexInfoList, LocalIndexType.VOICE_DATA);
+		if (!files.isEmpty()) {
+			dataList.put(ExportSettingsType.VOICE, files);
+		}
 		return dataList;
 	}
 
-	private List<File> getLocalMapFiles() {
-		List<File> files = new ArrayList<>();
-		LocalIndexHelper helper = new LocalIndexHelper(app);
-		List<LocalIndexInfo> localMapFileList = helper.getLocalIndexData(new AbstractLoadLocalIndexTask() {
+	private List<LocalIndexInfo> getVoiceIndexInfo() {
+		return new LocalIndexHelper(app).getLocalIndexData(new AbstractLoadLocalIndexTask() {
 			@Override
 			public void loadFile(LocalIndexInfo... loaded) {
 			}
 		});
-		for (LocalIndexInfo map : localMapFileList) {
+	}
+
+	private List<File> getFilesByType(List<LocalIndexInfo> localVoiceFileList, LocalIndexType... localIndexType) {
+		List<File> files = new ArrayList<>();
+		for (LocalIndexInfo map : localVoiceFileList) {
 			File file = new File(map.getPathToData());
-			if (file != null && file.exists() && map.getType() != LocalIndexType.TTS_VOICE_DATA) {
+			boolean filtered = false;
+			for (LocalIndexType type : localIndexType) {
+				if (map.getType() == type) {
+					filtered = true;
+					break;
+				}
+			}
+			if (file.exists() && filtered) {
 				files.add(file);
 			}
 		}
@@ -638,6 +659,8 @@ public class SettingsHelper {
 		List<File> renderFilesList = new ArrayList<>();
 		List<File> multimediaFilesList = new ArrayList<>();
 		List<File> tracksFilesList = new ArrayList<>();
+		List<File> ttsVoiceFilesList = new ArrayList<>();
+		List<File> voiceFilesList = new ArrayList<>();
 		List<FileSettingsItem> mapFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		List<GlobalSettingsItem> globalSettingsItems = new ArrayList<>();
@@ -652,19 +675,20 @@ public class SettingsHelper {
 					break;
 				case FILE:
 					FileSettingsItem fileItem = (FileSettingsItem) item;
-					if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
+					if (fileItem.getSubtype() == FileSubtype.RENDERING_STYLE) {
 						renderFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
+					} else if (fileItem.getSubtype() == FileSubtype.ROUTING_CONFIG) {
 						routingFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.MULTIMEDIA_NOTES) {
+					} else if (fileItem.getSubtype() == FileSubtype.MULTIMEDIA_NOTES) {
 						multimediaFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.GPX) {
+					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
 						tracksFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.OBF_MAP
-							|| fileItem.getSubtype() == FileSettingsItem.FileSubtype.WIKI_MAP
-							|| fileItem.getSubtype() == FileSettingsItem.FileSubtype.SRTM_MAP
-							|| fileItem.getSubtype() == FileSettingsItem.FileSubtype.TILES_MAP) {
+					} else if (fileItem.getSubtype().isMap()) {
 						mapFilesList.add(fileItem);
+					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
+						ttsVoiceFilesList.add(fileItem.getFile());
+					} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
+						voiceFilesList.add(fileItem.getFile());
 					}
 					break;
 				case QUICK_ACTIONS:
@@ -768,6 +792,12 @@ public class SettingsHelper {
 		}
 		if (!favoriteGroups.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.FAVORITES, favoriteGroups);
+		}
+		if (!ttsVoiceFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.TTS_VOICE, ttsVoiceFilesList);
+		}
+		if (!voiceFilesList.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.VOICE, voiceFilesList);
 		}
 		return settingsToOperate;
 	}
