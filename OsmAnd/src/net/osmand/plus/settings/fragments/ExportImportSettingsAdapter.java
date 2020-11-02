@@ -368,8 +368,12 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		for (Object item : listItems) {
 			if (data.contains(item)) {
 				amount++;
-				if (type == OFFLINE_MAPS && item instanceof FileSettingsItem) {
-					amountSize += ((FileSettingsItem) item).getSize();
+				if (type == OFFLINE_MAPS) {
+					if (item instanceof FileSettingsItem) {
+						amountSize += ((FileSettingsItem) item).getSize();
+					} else {
+						amountSize += ((File) item).length();
+					}
 				}
 			}
 		}
@@ -403,9 +407,9 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			case OSM_NOTES:
 				return R.string.osm_notes;
 			case OSM_EDITS:
-				return R.string.osm_edit_modified_poi;
+				return R.string.osm_edits;
 			case OFFLINE_MAPS:
-				return R.string.shared_string_local_maps;
+				return R.string.shared_string_maps;
 			case FAVORITES:
 				return R.string.shared_string_favorites;
 			case TTS_VOICE:

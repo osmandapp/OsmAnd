@@ -8,9 +8,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 import net.osmand.AndroidUtils;
@@ -159,10 +157,13 @@ public class DownloadOsmandIndexesHelper {
 			List<AssetEntry> mapping = getBundledAssets(amanager);
 			for (AssetEntry asset : mapping) {
 				String target = asset.destination;
-				if (target.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) && target.startsWith("voice/") && target.contains("-tts")) {
-					String lang = target.substring("voice/".length(), target.indexOf("-tts"));
-					File destFile = new File(voicePath, target.substring("voice/".length(),
-							target.indexOf("/", "voice/".length())) + "/" + lang + "_tts.js");
+				if (target.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)
+						&& target.startsWith(IndexConstants.VOICE_INDEX_DIR)
+						&& target.contains(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
+					String lang = target.substring(IndexConstants.VOICE_INDEX_DIR.length(),
+							target.indexOf(IndexConstants.VOICE_PROVIDER_SUFFIX));
+					File destFile = new File(voicePath, target.substring(IndexConstants.VOICE_INDEX_DIR.length(),
+							target.indexOf("/", IndexConstants.VOICE_INDEX_DIR.length())) + "/" + lang + "_tts.js");
 					result.add(new AssetIndexItem(lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS,
 							"voice", date, dateModified, "0.1", destFile.length(), asset.source,
 							destFile.getPath(), DownloadActivityType.VOICE_FILE));

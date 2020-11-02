@@ -295,7 +295,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			progress.dismiss();
 		}
 		progress = new ProgressDialog(context);
-		progress.setTitle(app.getString(R.string.export_profile));
+		progress.setTitle(app.getString(R.string.shared_string_export));
 		progress.setMessage(app.getString(R.string.shared_string_preparing));
 		progress.setCancelable(false);
 		progress.show();

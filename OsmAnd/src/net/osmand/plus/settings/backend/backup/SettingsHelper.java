@@ -533,20 +533,22 @@ public class SettingsHelper {
 				dataList.put(ExportSettingsType.OSM_EDITS, editsPointList);
 			}
 		}
-		List<File> files = getLocalMapFiles();
-		if (!files.isEmpty()) {
-			dataList.put(ExportSettingsType.OFFLINE_MAPS, files);
-		}
 		List<FavoriteGroup> favoriteGroups = app.getFavorites().getFavoriteGroups();
 		if (!favoriteGroups.isEmpty()) {
 			dataList.put(ExportSettingsType.FAVORITES, favoriteGroups);
 		}
-		List<LocalIndexInfo> localVoiceFileList = getVoiceIndexInfo();
-		files = getFilesByType(localVoiceFileList, LocalIndexType.TTS_VOICE_DATA);
+		List<LocalIndexInfo> localIndexInfoList = getVoiceIndexInfo();
+		List<File> files;
+		files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
+				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA);
+		if (!files.isEmpty()) {
+			dataList.put(ExportSettingsType.OFFLINE_MAPS, files);
+		}
+		files = getFilesByType(localIndexInfoList, LocalIndexType.TTS_VOICE_DATA);
 		if (!files.isEmpty()) {
 			dataList.put(ExportSettingsType.TTS_VOICE, files);
 		}
-		files = getFilesByType(localVoiceFileList, LocalIndexType.VOICE_DATA);
+		files = getFilesByType(localIndexInfoList, LocalIndexType.VOICE_DATA);
 		if (!files.isEmpty()) {
 			dataList.put(ExportSettingsType.VOICE, files);
 		}
@@ -554,40 +556,25 @@ public class SettingsHelper {
 	}
 
 	private List<LocalIndexInfo> getVoiceIndexInfo() {
-		LocalIndexHelper helper = new LocalIndexHelper(app);
-		List<LocalIndexInfo> localVoiceInfoList = new ArrayList<>();
-		helper.loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), localVoiceInfoList, false,
-				new AbstractLoadLocalIndexTask() {
-					@Override
-					public void loadFile(LocalIndexInfo... loaded) {
-					}
-				});
-		return localVoiceInfoList;
-	}
-
-	private List<File> getFilesByType(List<LocalIndexInfo> localVoiceFileList, LocalIndexType localIndexType) {
-		List<File> files = new ArrayList<>();
-		for (LocalIndexInfo map : localVoiceFileList) {
-			File file = new File(map.getPathToData());
-			if (file.exists() && map.getType() == localIndexType) {
-				files.add(file);
-			}
-		}
-		return files;
-	}
-
-	private List<File> getLocalMapFiles() {
-		List<File> files = new ArrayList<>();
-		LocalIndexHelper helper = new LocalIndexHelper(app);
-		List<LocalIndexInfo> localMapFileList = helper.getLocalIndexData(new AbstractLoadLocalIndexTask() {
+		return new LocalIndexHelper(app).getLocalIndexData(new AbstractLoadLocalIndexTask() {
 			@Override
 			public void loadFile(LocalIndexInfo... loaded) {
 			}
 		});
-		for (LocalIndexInfo map : localMapFileList) {
+	}
+
+	private List<File> getFilesByType(List<LocalIndexInfo> localVoiceFileList, LocalIndexType... localIndexType) {
+		List<File> files = new ArrayList<>();
+		for (LocalIndexInfo map : localVoiceFileList) {
 			File file = new File(map.getPathToData());
-			if (file.exists() && map.getType() != LocalIndexType.TTS_VOICE_DATA
-					&& map.getType() != LocalIndexType.VOICE_DATA) {
+			boolean filtered = false;
+			for (LocalIndexType type : localIndexType) {
+				if (map.getType() == type) {
+					filtered = true;
+					break;
+				}
+			}
+			if (file.exists() && filtered) {
 				files.add(file);
 			}
 		}

@@ -78,5 +78,5 @@ public class IndexConstants {
 	public static final String ROUTING_PROFILES_DIR = "routing/";
 	public static final String PLUGINS_DIR = "plugins/";
 
-	public static final String TTS_DIR_SUFFIX = "-tts";
+	public static final String VOICE_PROVIDER_SUFFIX = "-tts";
 }

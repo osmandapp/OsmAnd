@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.zip.ZipOutputStream;
 
 public class FileSettingsItem extends StreamSettingsItem {
 
@@ -100,7 +101,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 						}
 						break;
 					case TTS_VOICE:
-						if (name.startsWith(subtype.subtypeFolder) && name.endsWith(IndexConstants.TTS_DIR_SUFFIX)) {
+						if (name.startsWith(subtype.subtypeFolder) && name.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
 							return subtype;
 						}
 						break;
@@ -244,9 +245,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 	SettingsItemReader<? extends SettingsItem> getReader() {
 		return new StreamSettingsItemReader(this) {
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+			public void readFromStream(@NonNull InputStream inputStream, File dest) throws IOException, IllegalArgumentException {
 				OutputStream output;
-				File dest = getDestination();
 				if (dest.exists() && !shouldReplace) {
 					dest = renameFile(dest);
 				}
@@ -279,6 +279,38 @@ public class FileSettingsItem extends StreamSettingsItem {
 			warnings.add(app.getString(R.string.settings_item_read_error, file.getName()));
 			SettingsHelper.LOG.error("Failed to set input stream from file: " + file.getName(), e);
 		}
-		return super.getWriter();
+		return new StreamSettingsItemWriter(this) {
+
+			@Override
+			public void writeEntry(String fileName, @NonNull ZipOutputStream zos) throws IOException {
+				if (getSubtype().isDirectory()) {
+					File file = getFile();
+					zipDirsWithFiles(file, zos);
+				} else {
+					super.writeEntry(fileName, zos);
+				}
+			}
+
+			public void zipDirsWithFiles(File f, ZipOutputStream zos)
+					throws IOException {
+				if (f == null) {
+					return;
+				}
+				if (f.isDirectory()) {
+					File[] fs = f.listFiles();
+					if (fs != null) {
+						for (File c : fs) {
+							zipDirsWithFiles(c, zos);
+						}
+					}
+				} else {
+					String zipEntryName = Algorithms.isEmpty(getSubtype().getSubtypeFolder())
+							? f.getName()
+							: f.getPath().substring(f.getPath().indexOf(getSubtype().getSubtypeFolder()) - 1);
+					setInputStream(new FileInputStream(f));
+					super.writeEntry(zipEntryName, zos);
+				}
+			}
+		};
 	}
 }

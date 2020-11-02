@@ -10,19 +10,9 @@ public abstract class SettingsItemReader<T extends SettingsItem> {
 
 	private T item;
 
-	File destination;
-
 	public SettingsItemReader(@NonNull T item) {
 		this.item = item;
 	}
 
-	public void setDestination(File destination) {
-		this.destination = destination;
-	}
-
-	public File getDestination() {
-		return destination;
-	}
-
-	public abstract void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException;
+	public abstract void readFromStream(@NonNull InputStream inputStream, File destination) throws IOException, IllegalArgumentException;
 }

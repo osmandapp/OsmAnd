@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -68,43 +67,11 @@ class SettingsExporter {
 				if (Algorithms.isEmpty(fileName)) {
 					fileName = item.getDefaultFileName();
 				}
-				if (item instanceof FileSettingsItem && ((FileSettingsItem) item).getSubtype().isDirectory()) {
-					File file = ((FileSettingsItem) item).getFile();
-					zipDirsWithFiles(file, writer, zos);
-				} else {
-					ZipEntry entry = new ZipEntry(fileName);
-					zos.putNextEntry(entry);
-					writer.writeToStream(zos);
-					zos.closeEntry();
-				}
+				writer.writeEntry(fileName, zos);
 			}
 		}
 	}
 
-	public void zipDirsWithFiles(File f, SettingsItemWriter<? extends SettingsItem> writer, ZipOutputStream zos)
-			throws IOException {
-		if (f == null) {
-			return;
-		}
-		if (f.isDirectory()) {
-			File[] fs = f.listFiles();
-			if (fs != null) {
-				for (File c : fs) {
-					zipDirsWithFiles(c, writer, zos);
-				}
-			}
-		} else {
-			FileSettingsItem item = (FileSettingsItem) writer.getItem();
-			String zipEntryName = Algorithms.isEmpty(item.getSubtype().getSubtypeFolder())
-					? f.getName()
-					: f.getPath().substring(f.getPath().indexOf(item.getSubtype().getSubtypeFolder()) - 1);
-			ZipEntry entry = new ZipEntry(zipEntryName);
-			zos.putNextEntry(entry);
-			item.setInputStream(new FileInputStream(f));
-			writer.writeToStream(zos);
-			zos.closeEntry();
-		}
-	}
 
 	private JSONObject createItemsJson() throws JSONException {
 		JSONObject json = new JSONObject();
