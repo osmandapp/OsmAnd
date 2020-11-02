@@ -3651,4 +3651,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Nouzová situace</string>
     <string name="icon_group_travel">Cestování</string>
+    <string name="keep_screen_on">Nechat obrazovku zapnutou</string>
+    <string name="keep_screen_off">Nechat obrazovku vypnutou</string>
+    <string name="route_between_points_warning_desc">Dále, pro použití této možnosti připojte vaši stopu k nejbližší povolené cestě s některým z vašich navigačních profilů.</string>
 </resources>
