@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
@@ -55,7 +56,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		this.targetFragment = targetFragment;
 		this.selectedColor = selectedColor;
 		this.colors = colors;
-		customColors = getCustomColors();
+		customColors = getCustomColors(app);
 	}
 
 	public int getSelectedColor() {
@@ -214,7 +215,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return app.getUIUtilities().getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor);
 	}
 
-	private List<Integer> getCustomColors() {
+	public static List<Integer> getCustomColors(@NonNull OsmandApplication app) {
 		List<Integer> colors = new ArrayList<>();
 		List<String> colorNames = app.getSettings().CUSTOM_TRACK_COLORS.getStringsList();
 		if (colorNames != null) {
