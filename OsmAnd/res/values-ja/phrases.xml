@@ -3839,4 +3839,5 @@
     <string name="poi_parking_layby">待避所</string>
     <string name="poi_parking_sheds">車庫</string>
     <string name="poi_parking_rooftop">屋上</string>
+    <string name="poi_radar_tower">レーダー塔</string>
 </resources>
