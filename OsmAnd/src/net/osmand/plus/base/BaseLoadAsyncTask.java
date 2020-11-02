@@ -1,4 +1,4 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.base;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -12,13 +12,13 @@ import net.osmand.plus.R;
 
 import java.lang.ref.WeakReference;
 
-abstract class BaseImportAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
+public abstract class BaseLoadAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
 
 	protected OsmandApplication app;
 	protected WeakReference<FragmentActivity> activityRef;
 	protected ProgressDialog progress;
 
-	public BaseImportAsyncTask(@NonNull FragmentActivity activity) {
+	public BaseLoadAsyncTask(@NonNull FragmentActivity activity) {
 		app = (OsmandApplication) activity.getApplicationContext();
 		activityRef = new WeakReference<>(activity);
 	}

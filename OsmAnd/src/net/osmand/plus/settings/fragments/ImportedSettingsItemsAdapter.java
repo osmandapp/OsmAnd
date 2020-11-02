@@ -106,6 +106,34 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_alert, activeColorRes));
 				holder.title.setText(R.string.avoid_road);
 				break;
+			case MULTIMEDIA_NOTES:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_photo_dark, activeColorRes));
+				holder.title.setText(R.string.audionotes_plugin_name);
+				break;
+			case TRACKS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+				holder.title.setText(R.string.shared_string_tracks);
+				break;
+			case OSM_NOTES:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_osm_note_add, activeColorRes));
+				holder.title.setText(R.string.osm_notes);
+				break;
+			case OSM_EDITS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_info_dark, activeColorRes));
+				holder.title.setText(R.string.osm_edit_modified_poi);
+				break;
+			case FAVORITES:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_favorite, activeColorRes));
+				holder.title.setText(R.string.shared_string_favorites);
+				break;
+			case OFFLINE_MAPS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_map, activeColorRes));
+				holder.title.setText(R.string.shared_string_local_maps);
+				break;
+			case GLOBAL:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_settings, activeColorRes));
+				holder.title.setText(R.string.general_settings_2);
+				break;
 		}
 	}
 

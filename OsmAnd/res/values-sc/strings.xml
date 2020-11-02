@@ -89,7 +89,7 @@
     <string name="routing_preferences_descr">Preferèntzias de càrculu de s’àndala</string>
     <string name="speech_rate_descr">Imposta sa lestresa de sa boghe de sintetizatzione vocale (TTS).</string>
     <string name="speech_rate">Lestresa de sa boghe</string>
-    <string name="complex_route_calculation_failed">Càrculu lestru de s’àndala fallidu (%s), rinviu a su càlculu lentu.</string>
+    <string name="complex_route_calculation_failed">Càrculu lestru de s’àndala fallidu (%s), rinviu a su càrculu lentu.</string>
     <string name="disable_complex_routing_descr">Istuda su carculu de s’àndala in duas fases pro s’impreu in màchina.</string>
     <string name="disable_complex_routing">Istuta su carculu cumplessu de s’àndala</string>
     <string name="amenity_type_seamark">Pidagnu</string>
@@ -1540,7 +1540,7 @@
     <string name="routing_attr_height_description">Dislinda s’artària de su veìculu permìtida pro sos caminos.</string>
     <string name="routing_attr_avoid_borders_description">Non faghet rugrare sas fronteras intre sos istados</string>
     <string name="use_fast_recalculation">Recàrculu intelligente de s’àndala</string>
-    <string name="use_fast_recalculation_desc">Pro biàgios longos, torra a carculare petzi su cantu initziale de s’àndala.</string>
+    <string name="use_fast_recalculation_desc">Torra a carculare petzi su cantu initziale de s’àndala. Podet èssere impreadu pro biàgios longos.</string>
     <string name="rendering_value_disabled_name">Disabilitadu</string>
     <string name="shared_string_logoff">Essi</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta (afiliatzione) de àndala</string>
@@ -3824,8 +3824,8 @@
     <string name="overwrite_track">Subraiscrie sa rasta</string>
     <string name="save_as_new_track">Sarva comente una rasta noa</string>
     <string name="reverse_route">Fùrria s\'àndala</string>
-    <string name="route_between_points_whole_track_button_desc">Sa rasta intrea at a èssere torrada a calculare impreende su profilu ischertadu.</string>
-    <string name="route_between_points_next_segment_button_desc">Petzi su segmentu imbeniente at a èssere torradu a calculare impreende su profilu ischertadu.</string>
+    <string name="route_between_points_whole_track_button_desc">Sa rasta intrea at a èssere torrada a carculare impreende su profilu ischertadu.</string>
+    <string name="route_between_points_next_segment_button_desc">Petzi su segmentu imbeniente at a èssere torradu a carculare impreende su profilu ischertadu.</string>
     <string name="route_between_points_desc">Ischerta comente connètere sos puntos: cun una lìnia reta o calculende un\'àndala intre issos comente dislindadu inoghe in suta.</string>
     <string name="whole_track">Rasta intrea</string>
     <string name="next_segment">Segmentu imbeniente</string>
@@ -3926,4 +3926,17 @@
     <string name="osm_edit_logout_success">Essida fata chene problemas</string>
     <string name="file_already_imported">Su documentu est giai importadu in OsmAnd</string>
     <string name="use_two_phase_routing">Imprea un\'algoritmu de càrculu de s\'àndala A* a duas fases</string>
+    <string name="snowmobile_render_descr">Pro sa ghia de motoislitas cun caminos e rastas dedicados.</string>
+    <string name="message_need_calculate_route_before_show_graph">Datos %1$s a disponimentu in sos caminos ebbia. Depes carculare un\'àndala impreende \"Àndala intre puntos\" pro los otènnere.</string>
+    <string name="shared_string_graph">Gràficu</string>
+    <string name="message_graph_will_be_available_after_recalculation">Iseta su càrculu nou de s\'àndala.
+\nSu gràficu at a èssere a disponimentu a pustis de su càrculu.</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="icon_group_emergency">Apretu/Emergèntzia</string>
+    <string name="icon_group_special">Ispetziales</string>
+    <string name="icon_group_transport">Trasportu</string>
+    <string name="icon_group_service">Servìtziu</string>
+    <string name="icon_group_symbols">Sìmbulos</string>
+    <string name="icon_group_sport">Isport</string>
+    <string name="icon_group_travel">Biàgiu</string>
 </resources>

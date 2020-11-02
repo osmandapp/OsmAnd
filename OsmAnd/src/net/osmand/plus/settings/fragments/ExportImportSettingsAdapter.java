@@ -16,19 +16,28 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -41,6 +50,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.plus.settings.backend.ExportSettingsType.OFFLINE_MAPS;
+import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
 import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
@@ -100,7 +111,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		cardBottomDivider.setVisibility(importState && !isExpanded ? View.VISIBLE : View.GONE);
 
 		final List<?> listItems = itemsMap.get(type);
-		subTextTv.setText(getSelectedItemsAmount(listItems));
+		subTextTv.setText(getSelectedItemsAmount(listItems, type));
 
 		if (data.containsAll(listItems)) {
 			checkBox.setState(CHECKED);
@@ -151,6 +162,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		TextView title = child.findViewById(R.id.title_tv);
 		TextView subText = child.findViewById(R.id.sub_title_tv);
+		subText.setVisibility(View.GONE);
 		final CheckBox checkBox = child.findViewById(R.id.check_box);
 		ImageView icon = child.findViewById(R.id.icon);
 		View lineDivider = child.findViewById(R.id.divider);
@@ -195,9 +207,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 						LOG.error("Error trying to get routing resource for " + routingProfileValue + "\n" + e);
 					}
 				}
-				if (Algorithms.isEmpty(routingProfile)) {
-					subText.setVisibility(View.GONE);
-				} else {
+				if (!Algorithms.isEmpty(routingProfile)) {
 					subText.setText(String.format(
 							app.getString(R.string.ltr_or_rtl_combine_via_colon),
 							app.getString(R.string.nav_type_hint),
@@ -211,38 +221,93 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			case QUICK_ACTIONS:
 				title.setText(((QuickAction) currentItem).getName(app.getApplicationContext()));
 				setupIcon(icon, ((QuickAction) currentItem).getIconRes(), itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case POI_TYPES:
 				title.setText(((PoiUIFilter) currentItem).getName());
 				int iconRes = RenderingIcons.getBigIconResourceId(((PoiUIFilter) currentItem).getIconId());
 				setupIcon(icon, iconRes != 0 ? iconRes : R.drawable.ic_action_user, itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case MAP_SOURCES:
 				title.setText(((ITileSource) currentItem).getName());
 				setupIcon(icon, R.drawable.ic_map, itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case CUSTOM_RENDER_STYLE:
 				String renderName = ((File) currentItem).getName();
 				renderName = renderName.replace('_', ' ').replaceAll(IndexConstants.RENDERER_INDEX_EXT, "");
 				title.setText(renderName);
 				setupIcon(icon, R.drawable.ic_action_map_style, itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case CUSTOM_ROUTING:
 				String routingName = ((File) currentItem).getName();
 				routingName = routingName.replace('_', ' ').replaceAll(".xml", "");
 				title.setText(routingName);
 				setupIcon(icon, R.drawable.ic_action_route_distance, itemSelected);
-				subText.setVisibility(View.GONE);
 				break;
 			case AVOID_ROADS:
 				AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) currentItem;
 				title.setText(avoidRoadInfo.name);
 				setupIcon(icon, R.drawable.ic_action_alert, itemSelected);
-				subText.setVisibility(View.GONE);
+				break;
+			case MULTIMEDIA_NOTES:
+				File file = (File) currentItem;
+				title.setText(file.getName());
+				int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
+				if (iconId == -1) {
+					iconId = R.drawable.ic_action_photo_dark;
+				}
+				setupIcon(icon, iconId, itemSelected);
+				break;
+			case TRACKS:
+				String fileName = ((File) currentItem).getName();
+				title.setText(GpxUiHelper.getGpxTitle(fileName));
+				setupIcon(icon, R.drawable.ic_action_route_distance, itemSelected);
+				break;
+			case GLOBAL:
+				String name = ((GlobalSettingsItem) currentItem).getPublicName(app);
+				title.setText(name);
+				setupIcon(icon, R.drawable.ic_action_settings, itemSelected);
+				break;
+			case OSM_NOTES:
+				title.setText(((OsmNotesPoint) currentItem).getText());
+				setupIcon(icon, R.drawable.ic_action_osm_note_add, itemSelected);
+				break;
+			case OSM_EDITS:
+				title.setText(OsmEditingPlugin.getTitle((OpenstreetmapPoint) currentItem, app));
+				setupIcon(icon, R.drawable.ic_action_info_dark, itemSelected);
+				break;
+			case OFFLINE_MAPS:
+				long size;
+				if (currentItem instanceof FileSettingsItem) {
+					FileSettingsItem currentFileItem = (FileSettingsItem) currentItem;
+					file = currentFileItem.getFile();
+					size = currentFileItem.getSize();
+				} else {
+					file = (File) currentItem;
+					size = file.length();
+				}
+				title.setText(FileNameTranslationHelper.getFileName(app,
+						app.getResourceManager().getOsmandRegions(),
+						file.getName()));
+				FileSubtype subtype = FileSubtype.getSubtypeByFileName(file.getPath().replace(
+						app.getAppPath(null).getPath(), ""));
+				switch (subtype) {
+					case SRTM_MAP:
+						iconId = R.drawable.ic_plugin_srtm;
+						break;
+					case WIKI_MAP:
+						iconId = R.drawable.ic_plugin_wikipedia;
+						break;
+					default:
+						iconId = R.drawable.ic_map;
+				}
+				setupIcon(icon, iconId, itemSelected);
+				subText.setText(AndroidUtils.formatSize(app, size));
+				subText.setVisibility(View.VISIBLE);
+				break;
+			case FAVORITES:
+				FavoriteGroup favoriteGroup = (FavoriteGroup) currentItem;
+				title.setText(favoriteGroup.getDisplayName(app));
+				setupIcon(icon, R.drawable.ic_action_favorite, itemSelected);
 				break;
 			default:
 				return child;
@@ -290,14 +355,20 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		return true;
 	}
 
-	private String getSelectedItemsAmount(List<?> listItems) {
+	private String getSelectedItemsAmount(List<?> listItems, ExportSettingsType type) {
 		int amount = 0;
+		long amountSize = 0;
 		for (Object item : listItems) {
 			if (data.contains(item)) {
 				amount++;
+				if (type == OFFLINE_MAPS && item instanceof FileSettingsItem) {
+					amountSize += ((FileSettingsItem) item).getSize();
+				}
 			}
 		}
-		return app.getString(R.string.n_items_of_z, String.valueOf(amount), String.valueOf(listItems.size()));
+		String itemsOf = app.getString(R.string.n_items_of_z, String.valueOf(amount), String.valueOf(listItems.size()));
+		return amountSize == 0 ? itemsOf : app.getString(R.string.ltr_or_rtl_combine_via_bold_point, itemsOf,
+				AndroidUtils.formatSize(app, amountSize));
 	}
 
 	private int getGroupTitle(ExportSettingsType type) {
@@ -316,6 +387,20 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.shared_string_routing;
 			case AVOID_ROADS:
 				return R.string.avoid_road;
+			case TRACKS:
+				return R.string.shared_string_tracks;
+			case MULTIMEDIA_NOTES:
+				return R.string.audionotes_plugin_name;
+			case GLOBAL:
+				return R.string.general_settings_2;
+			case OSM_NOTES:
+				return R.string.osm_notes;
+			case OSM_EDITS:
+				return R.string.osm_edit_modified_poi;
+			case OFFLINE_MAPS:
+				return R.string.shared_string_local_maps;
+			case FAVORITES:
+				return R.string.shared_string_favorites;
 			default:
 				return R.string.access_empty_list;
 		}

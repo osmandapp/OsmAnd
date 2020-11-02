@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.CustomIndexItem;
@@ -343,8 +346,7 @@ public class ItemViewHolder {
 							ChoosePlanDialogFragment.showSeaDepthMapsInstance(context.getSupportFragmentManager());
 							break;
 						case ASK_FOR_SEAMARKS_PLUGIN:
-							context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
-									.getPluginsActivity()));
+							showPluginsScreen();
 							Toast.makeText(context.getApplicationContext(),
 									context.getString(R.string.activate_seamarks_plugin), Toast.LENGTH_SHORT).show();
 							break;
@@ -352,14 +354,20 @@ public class ItemViewHolder {
 							ChoosePlanDialogFragment.showHillshadeSrtmPluginInstance(context.getSupportFragmentManager());
 							break;
 						case ASK_FOR_SRTM_PLUGIN_ENABLE:
-							context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
-									.getPluginsActivity()));
+							showPluginsScreen();
 							Toast.makeText(context, context.getString(R.string.activate_srtm_plugin),
 									Toast.LENGTH_SHORT).show();
 							break;
 						case DOWNLOAD:
 							break;
 					}
+				}
+
+				private void showPluginsScreen() {
+					Bundle params = new Bundle();
+					params.putBoolean(PluginsFragment.OPEN_PLUGINS, true);
+					Intent intent = context.getIntent();
+					MapActivity.launchMapActivityMoveToTop(context, intent != null ? intent.getExtras() : null, null, params);
 				}
 			};
 		} else {

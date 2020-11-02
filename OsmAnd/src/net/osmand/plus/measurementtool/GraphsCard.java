@@ -19,12 +19,14 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
+import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
@@ -39,14 +41,14 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
-import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.GPXUtilities.GPXFile;
-import static net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static net.osmand.GPXUtilities.GPXFile;
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
+import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
 public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListener {
 
@@ -308,7 +310,7 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 		List<RouteStatistics> routeStatistics = calculateRouteStatistics();
 		if (analysis != null && routeStatistics != null) {
 			for (RouteStatistics statistics : routeStatistics) {
-				String title = SettingsBaseActivity.getStringRouteInfoPropertyValue(app, statistics.name);
+				String title = AndroidUtils.getStringRouteInfoPropertyValue(app, statistics.name);
 				BarData data = null;
 				if (!Algorithms.isEmpty(statistics.elements)) {
 					data = GpxUiHelper.buildStatisticChart(app, customGraphAdapter.getChart(),
@@ -334,7 +336,7 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 
 	private GPXFile getGpxFile() {
 		if (fragment.isTrackReadyToCalculate()) {
-			return editingCtx.exportRouteAsGpx(GRAPH_DATA_GPX_FILE_NAME);
+			return editingCtx.exportGpx(GRAPH_DATA_GPX_FILE_NAME);
 		} else {
 			GpxData gpxData = editingCtx.getGpxData();
 			return gpxData != null ? gpxData.getGpxFile() : null;

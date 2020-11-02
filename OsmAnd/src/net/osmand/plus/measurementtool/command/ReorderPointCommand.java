@@ -18,7 +18,7 @@ public class ReorderPointCommand extends MeasurementModeCommand {
 
 	@Override
 	public boolean execute() {
-		getEditingCtx().updateCacheForSnap();
+		getEditingCtx().updateSegmentsForSnap();
 		refreshMap();
 		return true;
 	}
@@ -36,7 +36,7 @@ public class ReorderPointCommand extends MeasurementModeCommand {
 	private void reorder(int addTo, int removeFrom) {
 		List<WptPt> points = getEditingCtx().getPoints();
 		points.add(addTo, points.remove(removeFrom));
-		getEditingCtx().updateCacheForSnap();
+		getEditingCtx().updateSegmentsForSnap();
 		refreshMap();
 	}
 

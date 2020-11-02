@@ -3821,7 +3821,7 @@
     <string name="reverse_route">反向路線</string>
     <string name="route_between_points_whole_track_button_desc">整個軌跡都會使用選定的設定檔重新計算。</string>
     <string name="route_between_points_next_segment_button_desc">僅下一個片段會使用選定的設定檔重新計算。</string>
-    <string name="route_between_points_desc">選取如何連接點，透過直線或以下面選定的方法計算其間的路徑。</string>
+    <string name="route_between_points_desc">選擇如何連接點，透過直線或以下面選定的方法計算其間的路徑。</string>
     <string name="whole_track">整個軌道</string>
     <string name="next_segment">下一段</string>
     <string name="route_between_points_warning_desc">接下來，使用您其中一個導航設定檔來將路線貼齊到最近可用的道路上以使用此選項。</string>
@@ -3921,4 +3921,22 @@
     <string name="perform_oauth_authorization">透過 OAuth 登入</string>
     <string name="clear_osm_token">清除 OpenStreetMap OAuth 權杖</string>
     <string name="osm_edit_logout_success">成功登出</string>
+    <string name="snowmobile_render_descr">適用於有專用道路與軌道的雪地摩托車駕駛。</string>
+    <string name="file_already_imported">檔案已在 OsmAnd 匯入</string>
+    <string name="use_two_phase_routing">使用 2 相的 A* 路線演算法</string>
+    <string name="shared_string_graph">圖表</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s 資料僅供道路使用，您需要使用「兩點間的路線」來計算路線。</string>
+    <string name="message_graph_will_be_available_after_recalculation">等待路線重新計算。
+\n重新計算後即可使用圖表。</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="app_mode_gap">分隔</string>
+    <string name="shared_string_local_maps">本機地圖</string>
+    <string name="icon_group_amenity">便利設施</string>
+    <string name="icon_group_special">特殊</string>
+    <string name="icon_group_transport">運輸</string>
+    <string name="icon_group_service">服務</string>
+    <string name="icon_group_symbols">符號</string>
+    <string name="icon_group_sport">運動</string>
+    <string name="icon_group_emergency">警急</string>
+    <string name="icon_group_travel">旅行</string>
 </resources>

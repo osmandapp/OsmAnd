@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -65,7 +66,7 @@ public class RouteInfoCard extends BaseCard {
 
 	private void updateHeader() {
 		TextView title = (TextView) view.findViewById(R.id.info_type_title);
-		String name = SettingsBaseActivity.getStringRouteInfoPropertyValue(app, statistics.name);
+		String name = AndroidUtils.getStringRouteInfoPropertyValue(app, routeStatistics.name);
 		title.setText(name);
 	}
 

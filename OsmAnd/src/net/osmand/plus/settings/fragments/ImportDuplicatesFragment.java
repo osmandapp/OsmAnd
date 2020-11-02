@@ -26,24 +26,29 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.settings.backend.SettingsHelper.ImportAsyncTask;
-import net.osmand.plus.settings.backend.SettingsHelper.ImportType;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.view.ComplexButton;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.IndexConstants.AV_INDEX_DIR;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.IndexConstants.RENDERERS_DIR;
+import static net.osmand.IndexConstants.ROUTING_PROFILES_DIR;
 import static net.osmand.plus.settings.fragments.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
 
 
@@ -171,7 +176,10 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		List<ITileSource> tileSources = new ArrayList<>();
 		List<File> renderFilesList = new ArrayList<>();
 		List<File> routingFilesList = new ArrayList<>();
+		List<File> multimediaFilesList = new ArrayList<>();
+		List<File> trackFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
 			if (object instanceof ApplicationMode.ApplicationModeBean) {
@@ -184,13 +192,19 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 				tileSources.add((ITileSource) object);
 			} else if (object instanceof File) {
 				File file = (File) object;
-				if (file.getAbsolutePath().contains("files/rendering")) {
+				if (file.getAbsolutePath().contains(RENDERERS_DIR)) {
 					renderFilesList.add(file);
-				} else if (file.getAbsolutePath().contains("files/routing")) {
+				} else if (file.getAbsolutePath().contains(ROUTING_PROFILES_DIR)) {
 					routingFilesList.add(file);
+				} else if (file.getAbsolutePath().contains(AV_INDEX_DIR)) {
+					multimediaFilesList.add(file);
+				} else if (file.getAbsolutePath().contains(GPX_INDEX_DIR)) {
+					trackFilesList.add(file);
 				}
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
+			} else if (object instanceof FavoriteGroup) {
+				favoriteGroups.add((FavoriteGroup) object);
 			}
 		}
 		if (!profiles.isEmpty()) {
@@ -217,9 +231,21 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			duplicates.add(getString(R.string.shared_string_rendering_style));
 			duplicates.addAll(renderFilesList);
 		}
+		if (!multimediaFilesList.isEmpty()) {
+			duplicates.add(getString(R.string.audionotes_plugin_name));
+			duplicates.addAll(multimediaFilesList);
+		}
+		if (!trackFilesList.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_tracks));
+			duplicates.addAll(trackFilesList);
+		}
 		if (!avoidRoads.isEmpty()) {
 			duplicates.add(getString(R.string.avoid_road));
 			duplicates.addAll(avoidRoads);
+		}
+		if (!favoriteGroups.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_favorites));
+			duplicates.addAll(favoriteGroups);
 		}
 		return duplicates;
 	}

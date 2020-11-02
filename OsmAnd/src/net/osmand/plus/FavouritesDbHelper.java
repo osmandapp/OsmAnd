@@ -76,6 +76,22 @@ public class FavouritesDbHelper {
 		private int color;
 		private List<FavouritePoint> points = new ArrayList<>();
 
+		public FavoriteGroup() {
+		}
+
+		public FavoriteGroup(String name, boolean visible, int color) {
+			this.name = name;
+			this.visible = visible;
+			this.color = color;
+		}
+
+		public FavoriteGroup(String name, List<FavouritePoint> points, int color, boolean visible) {
+			this.name = name;
+			this.color = color;
+			this.points = points;
+			this.visible = visible;
+		}
+
 		public boolean isPersonal() {
 			return isPersonal(name);
 		}
@@ -428,7 +444,7 @@ public class FavouritesDbHelper {
 		while (fl) {
 			fl = false;
 			for (FavouritePoint fp : fdb.getFavouritePoints()) {
-				if (fp.getName().equals(name) && p.getLatitude() != fp.getLatitude() && p.getLongitude() != fp.getLongitude()) {
+				if (fp.getName().equals(name) && p.getLatitude() != fp.getLatitude() && p.getLongitude() != fp.getLongitude() && fp.getCategory().equals(p.getCategory())) {
 					number++;
 					index = " (" + number + ")";
 					name = p.getName() + index;
@@ -640,7 +656,7 @@ public class FavouritesDbHelper {
 		return asGpxFile(cachedFavoritePoints);
 	}
 
-	private GPXFile asGpxFile(List<FavouritePoint> favoritePoints) {
+	public GPXFile asGpxFile(List<FavouritePoint> favoritePoints) {
 		GPXFile gpx = new GPXFile(Version.getFullVersion(context));
 		for (FavouritePoint p : favoritePoints) {
 			context.getSelectedGpxHelper().addPoint(p.toWpt(context), gpx);

@@ -19,7 +19,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.measurementtool.GpxData.ActionType;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import java.util.Collections;
@@ -32,13 +31,11 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	private final List<WptPt> points;
 	private MeasurementAdapterListener listener;
 	private boolean nightMode;
-	private final ActionType actionType;
 	private final static String BULLET = "   •   ";
 
-	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points, ActionType actionType) {
+	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
 		this.mapActivity = mapActivity;
 		this.points = points;
-		this.actionType = actionType;
 	}
 
 	public void setAdapterListener(MeasurementAdapterListener listener) {
@@ -79,11 +76,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (!TextUtils.isEmpty(pointTitle)) {
 			holder.title.setText(pointTitle);
 		} else {
-			if (actionType == ActionType.ADD_ROUTE_POINTS) {
-				holder.title.setText(mapActivity.getString(R.string.route_point) + " - " + (pos + 1));
-			} else {
-				holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
-			}
+			holder.title.setText(mapActivity.getString(R.string.ltr_or_rtl_combine_via_dash, mapActivity.getString(R.string.plugin_distance_point), String.valueOf(pos + 1)));
 		}
 		String pointDesc = pt.desc;
 		if (!TextUtils.isEmpty(pointDesc)) {
@@ -114,21 +107,20 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 				holder.descr.setText(text);
 			}
 		}
-		if (actionType == ActionType.EDIT_SEGMENT) {
-			double elevation = pt.ele;
-			if (!Double.isNaN(elevation)) {
-				String eleStr = (mapActivity.getString(R.string.altitude)).substring(0, 1);
-				holder.elevation.setText(eleStr + ": " + OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication()));
-			} else {
-				holder.elevation.setText("");
-			}
-			float speed = (float) pt.speed;
-			if (speed != 0) {
-				String speedStr = (mapActivity.getString(R.string.map_widget_speed)).substring(0, 1);
-				holder.speed.setText(speedStr + ": " + OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
-			} else {
-				holder.speed.setText("");
-			}
+		double elevation = pt.ele;
+		if (!Double.isNaN(elevation)) {
+			String eleStr = (mapActivity.getString(R.string.altitude)).substring(0, 1);
+			holder.elevation.setText(mapActivity.getString(R.string.ltr_or_rtl_combine_via_colon,
+					eleStr, OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication())));
+		} else {
+			holder.elevation.setText("");
+		}
+		float speed = (float) pt.speed;
+		if (speed != 0) {
+			String speedStr = (mapActivity.getString(R.string.map_widget_speed)).substring(0, 1);
+			holder.speed.setText(speedStr + ": " + OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
+		} else {
+			holder.speed.setText("");
 		}
 		holder.deleteBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
 				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light));

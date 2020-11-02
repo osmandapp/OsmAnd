@@ -34,8 +34,8 @@ import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
@@ -650,8 +650,8 @@ public class ImportHelper {
 		}
 	}
 
-	protected static List<FavouritePoint> asFavourites(OsmandApplication app, List<WptPt> wptPts, String fileName, boolean forceImportFavourites) {
-		final List<FavouritePoint> favourites = new ArrayList<>();
+	public static List<FavouritePoint> asFavourites(OsmandApplication app, List<WptPt> wptPts, String fileName, boolean forceImportFavourites) {
+		List<FavouritePoint> favourites = new ArrayList<>();
 		for (WptPt p : wptPts) {
 			if (p.name != null) {
 				final String fpCat;
@@ -664,15 +664,18 @@ public class ImportHelper {
 				} else {
 					fpCat = p.category;
 				}
-				final FavouritePoint fp = new FavouritePoint(p.lat, p.lon, p.name, fpCat);
+				FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat);
 				if (p.desc != null) {
-					fp.setDescription(p.desc);
+					point.setDescription(p.desc);
 				}
-				fp.setAddress(p.getExtensionsToRead().get("address"));
-				fp.setColor(p.getColor(0));
-				fp.setIconIdFromName(app, p.getIconName());
-				fp.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
-				favourites.add(fp);
+				point.setAddress(p.getExtensionsToRead().get("address"));
+				point.setColor(p.getColor(0));
+				String iconName = p.getIconName();
+				if (iconName != null) {
+					point.setIconIdFromName(app, iconName);
+				}
+				point.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
+				favourites.add(point);
 			}
 		}
 		return favourites;

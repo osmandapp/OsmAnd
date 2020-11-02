@@ -4206,7 +4206,7 @@
 	<string name="poi_video_yes">Yes</string>
 	<string name="poi_video_no">No</string>
 
-	<string name="poi_internet_access_fee_customers">Signal to find the pole</string>
+	<string name="poi_internet_access_fee_customers">Internet access: customers</string>
 	<string name="poi_traffic_signals_sound_locate">Only when walking is allowed</string>
 	<string name="poi_tactile_paving_contrasted">Contrasted</string>
 	<string name="poi_tactile_paving_primitive">Primitive</string>
@@ -4259,5 +4259,12 @@
 
 	<string name="poi_fuel_lng">LNG</string>
 
+	<string name="poi_gpx_point">GPX point</string>
+
+	<string name="poi_parking_rooftop">Rooftop</string>
+	<string name="poi_parking_sheds">Sheds</string>
+	<string name="poi_parking_layby">Layby</string>
+
+	<string name="poi_radar_tower">Radar tower</string>
 
 </resources>

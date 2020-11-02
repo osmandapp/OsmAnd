@@ -255,7 +255,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	@Override
 	public void writeToBundle(RouteDataBundle bundle) {
 		Map<RouteTypeRule, Integer> rules = bundle.getResources().getRules();
-		bundle.putInt("length", (Math.abs(endPointIndex - startPointIndex) + 1) * (endPointIndex >= startPointIndex ? 1 : -1));
+		boolean reversed = endPointIndex < startPointIndex;
+		bundle.putInt("length", Math.abs(endPointIndex - startPointIndex) + 1);
 		bundle.putFloat("segmentTime", segmentTime, 2);
 		bundle.putFloat("speed", speed, 2);
 		if (turnType != null) {
@@ -278,17 +279,22 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		int end = Math.max(startPointIndex, endPointIndex) + 1;
 		if (object.pointTypes != null && start < object.pointTypes.length) {
 			int[][] types = Arrays.copyOfRange(object.pointTypes, start, Math.min(end, object.pointTypes.length));
+			if (reversed) {
+				Algorithms.reverseArray(types);
+			}
 			bundle.putArray("pointTypes", convertTypes(types, rules));
 		}
 		if (object.nameIds != null) {
 			bundle.putArray("names", convertNameIds(object.nameIds, rules));
 		}
-		if (object.pointNameTypes != null && start < object.pointNameTypes.length) {
+		if (object.pointNameTypes != null && start < object.pointNameTypes.length && object.pointNames != null) {
 			int[][] types = Arrays.copyOfRange(object.pointNameTypes, start, Math.min(end, object.pointNameTypes.length));
-			if (object.pointNames != null) {
-				String[][] names = Arrays.copyOfRange(object.pointNames, start, Math.min(end, object.pointNames.length));
-				bundle.putArray("pointNames", convertPointNames(types, names, rules));
+			String[][] names = Arrays.copyOfRange(object.pointNames, start, Math.min(end, object.pointNames.length));
+			if (reversed) {
+				Algorithms.reverseArray(types);
+				Algorithms.reverseArray(names);
 			}
+			bundle.putArray("pointNames", convertPointNames(types, names, rules));
 		}
 	}
 

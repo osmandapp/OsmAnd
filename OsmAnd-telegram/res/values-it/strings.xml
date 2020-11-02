@@ -265,4 +265,5 @@
     <string name="last_response_date">Ultima risposta: %1$s</string>
     <string name="last_update_from_telegram_date">Ultimo aggiornamento da Telegram: %1$s</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
 </resources>

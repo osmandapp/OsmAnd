@@ -13,6 +13,9 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.OsmandApplication;
@@ -131,11 +134,24 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+				}  else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
+					itemHolder.title.setText(GpxUiHelper.getGpxTitle(file.getName()));
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+				} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
+					int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
+					if (iconId == -1) {
+						iconId = R.drawable.ic_action_photo_dark;
+					}
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconId, activeColorRes));
 				}
 				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof AvoidRoadInfo) {
 				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, activeColorRes));
+				itemHolder.subTitle.setVisibility(View.GONE);
+			} else if (currentItem instanceof FavoriteGroup) {
+				itemHolder.title.setText(((FavoriteGroup) currentItem).getDisplayName(app));
+				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_favorite, activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);

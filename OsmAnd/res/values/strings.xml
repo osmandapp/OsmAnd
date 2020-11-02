@@ -11,7 +11,17 @@
 	Thx - Hardy
 
 -->
-    <string name="message_you_need_add_two_points_to_show_graphs">You must add at least two points.</string>
+    <string name="icon_group_travel">Travel</string>
+    <string name="icon_group_emergency">Emergency</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="icon_group_symbols">Symbols</string>
+    <string name="icon_group_service">Service</string>
+    <string name="icon_group_transport">Transport</string>
+    <string name="icon_group_special">Special</string>
+    <string name="icon_group_amenity">Amenity</string>
+    <string name="app_mode_gap">Gap</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="shared_string_local_maps">Local maps</string>
     <string name="message_graph_will_be_available_after_recalculation">Wait for the route recalculation.\nGraph will be available after recalculation.</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s data available only on the roads, you need to calculate a route using “Route between points” to get it.</string>
     <string name="shared_string_graph">Graph</string>
@@ -104,7 +114,7 @@
     <string name="route_between_points_warning_desc">Next, snap your track to the nearest allowed road with one of your navigation profiles to use this option.</string>
     <string name="next_segment">Next segment</string>
     <string name="whole_track">Whole track</string>
-    <string name="route_between_points_desc">Select how to connect points, by a straight line, or calculate a route between them as specified below.</string>
+    <string name="route_between_points_desc">Choose how to connect the points, by a straight line, or calculate a route between them as specified below.</string>
     <string name="route_between_points_next_segment_button_desc">Only the next segment will be recalculated using the selected profile.</string>
     <string name="route_between_points_whole_track_button_desc">The whole track will be recalculated using the selected profile.</string>
     <string name="reverse_route">Reverse route</string>
@@ -618,8 +628,10 @@
     <string name="configure_profile">Configure profile</string>
     <string name="configure_profile_info">Settings for profile:</string>
     <string name="utm_format_descr">OsmAnd uses the UTM Standard, which is similar but not identical to the UTM NATO format.</string>
+    <string name="mgrs_format_descr">OsmAnd uses MGRS, which is similar to the UTM NATO format.</string>
     <string name="shared_string_example">Example</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="coordinates_format_info">The selected format will be applied throughout the app.</string>
     <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s</string>
@@ -2199,6 +2211,7 @@
     <string name="map_locale">Map language</string>
     <string name="rendering_attr_transportStops_name">Transport stops</string>
     <string name="navigate_point_zone">Zone</string>
+    <string name="navigate_point_mgrs">MGRS</string>
     <!-- (OLC) is a geocode system -->
     <string name="navigate_point_olc">Open Location Code</string>
     <string name="navigate_point_olc_info_invalid">Invalid OLC\n</string>

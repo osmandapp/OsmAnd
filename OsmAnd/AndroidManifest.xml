@@ -247,6 +247,7 @@
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
 				<data android:scheme="file"/>
 				<data android:host="*"/>
 				<data android:pathPattern=".*\\.obf" />
@@ -262,6 +263,7 @@
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
 				<data android:scheme="file"/>
 				<data android:host="*"/>
 				<data android:mimeType="*/*"/>
@@ -466,6 +468,13 @@
 				<data android:mimeType="text/plain" />
 			</intent-filter>
 
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="osmand-oauth" />
+			</intent-filter>
+
 		</activity>
 
 		<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
@@ -475,31 +484,10 @@
 			</intent-filter>
 		</receiver>
 
-		<activity android:name="net.osmand.plus.activities.SettingsActivity" android:label="@string/shared_string_settings" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.plus.activities.SettingsGeneralActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation" />
-
-		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity"
-				  android:launchMode="singleInstance"
-				  android:configChanges="keyboardHidden|orientation">
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="osmand-oauth" />
-			</intent-filter>
-		</activity>
-		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.plus.audionotes.SettingsAudioVideoActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="net.osmand.access.SettingsAccessibilityActivity" android:configChanges="keyboardHidden|orientation" />
-
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" />
 		<activity android:name="net.osmand.plus.activities.FavoritesListActivity" android:label="@string/favourites_list_activity" />
 		<activity android:name=".myplaces.FavoritesActivity" android:windowSoftInputMode="adjustPan" />
 		<activity android:name="net.osmand.plus.activities.TrackActivity"/>
-		<activity android:name="net.osmand.plus.activities.PluginsActivity" />
-		<activity android:name="net.osmand.plus.activities.PluginActivity" />
 		<activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity" />
 
 

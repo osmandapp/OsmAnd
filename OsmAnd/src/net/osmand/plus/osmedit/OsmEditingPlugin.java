@@ -5,17 +5,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -23,13 +29,11 @@ import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
-import net.osmand.plus.*;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.EnumAdapter;
 import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
@@ -42,16 +46,22 @@ import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
+
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 
@@ -193,13 +203,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return SettingsOsmEditingActivity.class;
-	}
-
-	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return OsmEditingFragment.class;
+	public SettingsScreenType getSettingsScreenType() {
+		return SettingsScreenType.OPEN_STREET_MAP_EDITING;
 	}
 
 	@Override
@@ -318,9 +323,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabActivity.TabItem> mTabs, Intent intent) {
-		mTabs.add(favoritesActivity.getTabIndicator(R.string.osm_edits, OsmEditsFragment.class));
+		mTabs.add(favoritesActivity.getTabIndicator(OSM_EDIT_TAB, OsmEditsFragment.class));
 		if (intent != null && "OSM".equals(intent.getStringExtra("TAB"))) {
-			app.getSettings().FAVORITES_TAB.set(R.string.osm_edits);
+			app.getSettings().FAVORITES_TAB.set(OSM_EDIT_TAB);
 		}
 	}
 
@@ -528,6 +533,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
+	public static SpannableString getTitle(OsmPoint osmPoint, Context ctx) {
+		SpannableString title = new SpannableString(getName(osmPoint));
+		if (TextUtils.isEmpty(title)) {
+			title = SpannableString.valueOf(getCategory(osmPoint, ctx));
+			title.setSpan(new StyleSpan(Typeface.ITALIC), 0, title.length(), 0);
+		}
+		return title;
+	}
+
 	public static String getName(OsmPoint point) {
 		if (point.getGroup() == OsmPoint.Group.POI) {
 			return ((OpenstreetmapPoint) point).getName();
@@ -541,7 +555,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public static String getCategory(OsmPoint osmPoint, Context context) {
 		String category = "";
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			category = ((OpenstreetmapPoint) osmPoint).getEntity().getTag(POI_TYPE_TAG);
 			if (Algorithms.isEmpty(category)) {
 				category = context.getString(R.string.shared_string_without_name);
 			}

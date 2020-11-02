@@ -3718,7 +3718,7 @@
     <string name="hidden_items_descr">Questi elementi sono nascosti dal menu, ma le opzioni rappresentate o i plugins continueranno a funzionare.</string>
     <string name="reset_items_descr">Nascondere le opzioni le reimposta al loro valore originale.</string>
     <string name="main_actions">Azioni principali</string>
-    <string name="additional_actions_descr">Puoi accedere a queste azioni toccando il pulsante \"Azioni aggiuntive\".</string>
+    <string name="additional_actions_descr">Puoi accedere a queste azioni toccando il pulsante “%1$s”.</string>
     <string name="move_inside_category">Puoi spostare gli elementi solo all\'interno di questa categoria.</string>
     <string name="select_wikipedia_article_langs">Seleziona i linguaggi in cui gli articoli di Wikipedia appariranno sulla mappa. Puoi cambiare fra tutte le lingue disponibili mentre leggi questo articolo.</string>
     <string name="some_articles_may_not_available_in_lang">Alcuni articoli di Wikipedia potrebbero non essere disponibili nella tua lingua.</string>
@@ -3905,4 +3905,32 @@
     <string name="sort_name_ascending">Nome: A – Z</string>
     <string name="start_finish_icons">Icona Partenza/Arrivo</string>
     <string name="contour_lines_thanks">Grazie per l\'acquisto del \'Plugin delle curve di livello\'</string>
+    <string name="what_is_new">Novità</string>
+    <string name="snowmobile_render_descr">Per slitte a motore con strade e sentieri dedicati.</string>
+    <string name="osm_live_payment_desc_hw">Sottoscrizione addebitata per il periodo selezionato. Cancellala nell\'AppGallery in ogni momento.</string>
+    <string name="osm_live_payment_subscription_management_hw">Il pagamento sarà addebitato nella tuo account AppGallery alla conferma dell\'acquisto.
+\n
+\nLe sottoscrizioni si rinnovano automaticamente finché non vengono cancellate prima della date del rinnovo. Il tuo account sarà addebitato per i rinnovi periodici solo (mensile/trimestrale/annuale) solo alla data di rinnovo.
+\n
+\nPuoi gestire le tue sottoscrizioni nelle impostazioni della tua AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Evita i marciapiedi</string>
+    <string name="routing_attr_avoid_footways_name">Evita i marciapiedi</string>
+    <string name="development">Sviluppo</string>
+    <string name="use_live_public_transport">Dati OsmAnd Live</string>
+    <string name="use_live_routing">Dati OsmAnd Live</string>
+    <string name="complex_routing_descr">Calcolo del percorso in due fasi per la navigazione in auto.</string>
+    <string name="use_native_pt">Sviluppo Trasporto Pubblico nativo</string>
+    <string name="use_native_pt_desc">Cambia a Java (safe) calcolo del percorso su Trasporto Pubblico</string>
+    <string name="perform_oauth_authorization_description">Effettua una connessione OAuth per usare le funzionalità osmedit</string>
+    <string name="perform_oauth_authorization">Connettiti via OAuth</string>
+    <string name="clear_osm_token">Cancella il token OAuth OpenStreetMap</string>
+    <string name="osm_edit_logout_success">Disconnessione effettuata</string>
+    <string name="file_already_imported">Il file è già importato in OsmAnd</string>
+    <string name="use_two_phase_routing">Utilizza l\'algoritmo di calcolo a 2-fasi A*</string>
+    <string name="shared_string_graph">Grafico</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s dati disponibili solo per le strade, necessiti di calcolare un percorso utilizzando \"Percorso fra punti\" per ottenerlo.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Attendi per il ricalcolo del percorso.
+\nIl grafico sarà disponibile dopo il ricalcolo.</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="app_mode_gap">Buco</string>
 </resources>

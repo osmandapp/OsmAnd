@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -27,10 +28,17 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.GpxApproximator;
+import net.osmand.plus.routing.GpxApproximator.GpxApproximationProgressCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import org.apache.commons.logging.Log;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static net.osmand.plus.measurementtool.ProfileCard.ProfileCardListener;
 import static net.osmand.plus.measurementtool.SliderCard.SliderCardListener;
@@ -49,8 +57,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	private ApplicationMode snapToRoadAppMode = ApplicationMode.CAR;
 	private int distanceThreshold = 50;
 	private boolean applyApproximation;
+	private GpxApproximationProgressCallback approximationProgress;
 
-	private LocationsHolder locationsHolder;
+	private List<LocationsHolder> locationsHolders;
+	private final Map<LocationsHolder, GpxRouteApproximation> resultMap = new HashMap<>();
+
 	@Nullable
 	private GpxApproximator gpxApproximator;
 	private ProgressBar progressBar;
@@ -119,44 +130,26 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			distanceThreshold = savedInstanceState.getInt(DISTANCE_THRESHOLD_KEY);
 			snapToRoadAppMode = ApplicationMode.valueOfStringKey(
 					savedInstanceState.getString(SNAP_TO_ROAD_APP_MODE_STRING_KEY), ApplicationMode.CAR);
-			try {
-				gpxApproximator = new GpxApproximator(requireMyApplication(), snapToRoadAppMode, distanceThreshold, locationsHolder);
-			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
-			}
-		} else {
-			try {
-				gpxApproximator = new GpxApproximator(requireMyApplication(), locationsHolder);
-			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
-			}
 		}
+		approximationProgress = new GpxApproximationProgressCallback() {
 
-		if (gpxApproximator != null) {
-			gpxApproximator.setApproximationProgress(new GpxApproximator.GpxApproximationProgressCallback() {
+			@Override
+			public void start(GpxApproximator approximator) {
+			}
 
-				@Override
-				public void start() {
-					if (isResumed()) {
-						startProgress();
-					}
+			@Override
+			public void updateProgress(GpxApproximator approximator, int progress) {
+				if (isResumed() && approximator == GpxApproximationFragment.this.gpxApproximator) {
+					float partSize = 100f / locationsHolders.size();
+					float p = resultMap.size() * partSize + (progress / 100f) * partSize;
+					GpxApproximationFragment.this.updateProgress((int) p);
 				}
+			}
 
-				@Override
-				public void updateProgress(int progress) {
-					if (isResumed()) {
-						GpxApproximationFragment.this.updateProgress(progress);
-					}
-				}
-
-				@Override
-				public void finish() {
-					if (isResumed()) {
-						finishProgress();
-					}
-				}
-			});
-		}
+			@Override
+			public void finish(GpxApproximator approximator) {
+			}
+		};
 
 		applyButton = mainView.findViewById(R.id.right_bottom_button);
 		cancelButton = mainView.findViewById(R.id.dismiss_button);
@@ -180,7 +173,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		}
 		runLayoutListener();
 
-		calculateGpxApproximation();
+		calculateGpxApproximation(true);
 
 		return mainView;
 	}
@@ -217,6 +210,20 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 				((GpxApproximationFragmentListener) fragment).onCancelGpxApproximation();
 			}
 		}
+	}
+
+	private GpxApproximator getNewGpxApproximator(@NonNull LocationsHolder locationsHolder) {
+		GpxApproximator gpxApproximator = null;
+		try {
+			OsmandApplication app = getMyApplication();
+			if (app != null) {
+				gpxApproximator = new GpxApproximator(app, snapToRoadAppMode, distanceThreshold, locationsHolder);
+				gpxApproximator.setApproximationProgress(approximationProgress);
+			}
+		} catch (IOException e) {
+			LOG.error(e.getMessage(), e);
+		}
+		return gpxApproximator;
 	}
 
 	private void updateCardsLayout() {
@@ -299,13 +306,17 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment,
-	                                @NonNull LocationsHolder locationsHolder, @Nullable ApplicationMode appMode) {
+									@NonNull List<List<WptPt>> pointsList, @Nullable ApplicationMode appMode) {
 		try {
 			if (!fm.isStateSaved()) {
 				GpxApproximationFragment fragment = new GpxApproximationFragment();
 				fragment.setRetainInstance(true);
 				fragment.setTargetFragment(targetFragment, REQUEST_CODE);
-				fragment.setLocationsHolder(locationsHolder);
+				List<LocationsHolder> locationsHolders = new ArrayList<>();
+				for (List<WptPt> points : pointsList) {
+					locationsHolders.add(new LocationsHolder(points));
+				}
+				fragment.setLocationsHolders(locationsHolders);
 				fragment.setSnapToRoadAppMode(appMode);
 				fm.beginTransaction()
 						.replace(R.id.fragmentContainer, fragment, TAG)
@@ -328,30 +339,48 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		}
 	}
 
-	public void calculateGpxApproximation() {
+	public boolean calculateGpxApproximation(boolean newCalculation) {
+		if (newCalculation) {
+			if (gpxApproximator != null) {
+				gpxApproximator.cancelApproximation();
+				gpxApproximator = null;
+			}
+			resultMap.clear();
+			startProgress();
+		}
+		GpxApproximator gpxApproximator = null;
+		for (LocationsHolder locationsHolder : locationsHolders) {
+			if (!resultMap.containsKey(locationsHolder)) {
+				gpxApproximator = getNewGpxApproximator(locationsHolder);
+				break;
+			}
+		}
 		if (gpxApproximator != null) {
 			try {
+				this.gpxApproximator = gpxApproximator;
 				gpxApproximator.setMode(snapToRoadAppMode);
 				gpxApproximator.setPointApproximation(distanceThreshold);
-				approximateGpx();
+				approximateGpx(gpxApproximator);
+				return true;
 			} catch (Exception e) {
 				LOG.error(e.getMessage(), e);
 			}
 		}
+		return false;
 	}
 
 	@Override
 	public void onSliderChange(int sliderValue) {
 		if (distanceThreshold != sliderValue) {
 			distanceThreshold = sliderValue;
-			calculateGpxApproximation();
+			calculateGpxApproximation(true);
 		}
 	}
 
 	@Override
 	public void onProfileSelect(ApplicationMode applicationMode) {
 		if (setSnapToRoadAppMode(applicationMode)) {
-			calculateGpxApproximation();
+			calculateGpxApproximation(true);
 		}
 	}
 
@@ -363,12 +392,12 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		return false;
 	}
 
-	public LocationsHolder getLocationsHolder() {
-		return locationsHolder;
+	public List<LocationsHolder> getLocationsHolders() {
+		return locationsHolders;
 	}
 
-	public void setLocationsHolder(LocationsHolder locationsHolder) {
-		this.locationsHolder = locationsHolder;
+	public void setLocationsHolders(List<LocationsHolder> locationsHolders) {
+		this.locationsHolders = locationsHolders;
 	}
 
 	public void startProgress() {
@@ -393,35 +422,58 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		}
 	}
 
-	private void approximateGpx() {
-		if (gpxApproximator != null) {
-			setApplyButtonEnabled(false);
-			gpxApproximator.calculateGpxApproximation(new ResultMatcher<GpxRouteApproximation>() {
-				@Override
-				public boolean publish(final GpxRouteApproximation gpxApproximation) {
-					OsmandApplication app = getMyApplication();
-					if (app != null) {
-						app.runInUIThread(new Runnable() {
-							@Override
-							public void run() {
-								Fragment fragment = getTargetFragment();
-								if (fragment instanceof GpxApproximationFragmentListener) {
-									((GpxApproximationFragmentListener) fragment).onGpxApproximationDone(gpxApproximation, gpxApproximator.getMode());
+	private void approximateGpx(@NonNull final GpxApproximator gpxApproximator) {
+		onApproximationStarted();
+		gpxApproximator.calculateGpxApproximation(new ResultMatcher<GpxRouteApproximation>() {
+			@Override
+			public boolean publish(final GpxRouteApproximation gpxApproximation) {
+				OsmandApplication app = getMyApplication();
+				if (app != null) {
+					app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							if (!gpxApproximator.isCancelled()) {
+								if (gpxApproximation != null) {
+									resultMap.put(gpxApproximator.getLocationsHolder(), gpxApproximation);
 								}
-								setApplyButtonEnabled(gpxApproximation != null);
+								if (!calculateGpxApproximation(false)) {
+									onApproximationFinished();
+								}
 							}
-						});
-						return true;
-					}
-					return false;
+						}
+					});
 				}
+				return true;
+			}
 
-				@Override
-				public boolean isCancelled() {
-					return false;
-				}
-			});
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		});
+	}
+
+	private void onApproximationStarted() {
+		setApplyButtonEnabled(false);
+	}
+
+	private void onApproximationFinished() {
+		finishProgress();
+		Fragment fragment = getTargetFragment();
+		List<GpxRouteApproximation> approximations = new ArrayList<>();
+		List<List<WptPt>> points = new ArrayList<>();
+		for (LocationsHolder locationsHolder : locationsHolders) {
+			GpxRouteApproximation approximation = resultMap.get(locationsHolder);
+			if (approximation != null) {
+				approximations.add(approximation);
+				points.add(locationsHolder.getWptPtList());
+			}
 		}
+		if (fragment instanceof GpxApproximationFragmentListener) {
+			((GpxApproximationFragmentListener) fragment).onGpxApproximationDone(
+					approximations, points, snapToRoadAppMode);
+		}
+		setApplyButtonEnabled(!approximations.isEmpty());
 	}
 
 	@Override
@@ -431,7 +483,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 
 	public interface GpxApproximationFragmentListener {
 
-		void onGpxApproximationDone(GpxRouteApproximation gpxApproximation, ApplicationMode mode);
+		void onGpxApproximationDone(List<GpxRouteApproximation> gpxApproximations, List<List<WptPt>> pointsList, ApplicationMode mode);
 
 		void onApplyGpxApproximation();
 

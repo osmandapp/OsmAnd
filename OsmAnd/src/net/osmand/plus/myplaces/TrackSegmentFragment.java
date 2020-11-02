@@ -65,11 +65,10 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-import net.osmand.plus.measurementtool.GpxData;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
@@ -981,7 +980,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 		private void editSegment() {
 			TrkSegment segment = getTrkSegment();
 			if (segment != null && fragmentAdapter != null) {
-				fragmentAdapter.addNewGpxData(GpxData.ActionType.EDIT_SEGMENT, segment);
+				fragmentAdapter.addNewGpxData();
 			}
 		}
 

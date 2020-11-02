@@ -1553,7 +1553,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="routing_attr_height_name">Límit d\'alçada</string>
     <string name="routing_attr_height_description">Indiqueu l\'alçada del vehicle que les rutes han d\'admetre.</string>
     <string name="use_fast_recalculation">Recàlcul intel·ligent de la ruta</string>
-    <string name="use_fast_recalculation_desc">En viatges llargs, només actualitzis la part inicial de la ruta.</string>
+    <string name="use_fast_recalculation_desc">Actualitza només la part inicial de la ruta. Pot ser usat per a viatges llargs.</string>
     <string name="shared_string_logoff">Surt</string>
     <string name="rendering_value_disabled_name">Desactivat</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix segons el tipus de xarxa</string>
@@ -3589,10 +3589,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="slope_description">Les pistes es mostren sobre el terreny i amb colors.</string>
     <string name="download_slope_maps">Pistes</string>
     <string name="custom_osmand_plugin">Connector d\'OsmAnd adaptat</string>
-    <string name="replace_point_descr">Substitueix un altre punt per aquest</string>
+    <string name="replace_point_descr">Substitueix un altre punt per aquest.</string>
     <string name="changes_applied_to_profile">S\'han fet els canvis al perfil \'%1$s\'.</string>
     <string name="settings_item_read_error">No s\'ha pogut llegir des de \'%1$s\'.</string>
-    <string name="settings_item_write_error">No s\'ha pogut escriure %1$s.</string>
+    <string name="settings_item_write_error">No s\'ha pogut escriure a \'%1$s\'.</string>
     <string name="settings_item_import_error">No s\'ha pogut importar des de \'%1$s\'.</string>
     <string name="select_track_file">Seleccioneu fitxer de la traça</string>
     <string name="shared_string_languages">Idiomes</string>
@@ -3619,7 +3619,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="lang_an">Aragonès</string>
     <string name="lang_lmo">Llombard</string>
     <string name="custom_color">Color personalitzat</string>
-    <string name="select_wikipedia_article_langs">Seleccioneu els idiomes de la Viquipèdia en que es veuran els articles al mapa. Mentre llegiu un article podeu modificar la llengua entre les disponibles.</string>
+    <string name="select_wikipedia_article_langs">Seleccioneu els idiomes per als articles de Viquipèdia al mapa. Canvieu la llengua entre les disponibles mentre llegiu un article.</string>
     <string name="some_articles_may_not_available_in_lang">Alguns articles de la Viquipèdia podrien no estar disponibles en el vostre idioma.</string>
     <string name="lang_zhyue">Cantonès</string>
     <string name="lang_zhminnan">Min nan</string>
@@ -3672,11 +3672,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_length_name">Llargada màxima</string>
     <string name="shared_string_bearing">Trajectòria</string>
     <string name="item_deleted">S\'ha esborrat %1$s</string>
-    <string name="speed_cameras_restart_descr">Cal reiniciar per esborrar totalment les dades de les càmeres de radar.</string>
+    <string name="speed_cameras_restart_descr">Reinicia l\'aplicació per esborrar totes les dades de les càmeres de radar.</string>
     <string name="shared_string_uninstall_and_restart">Desinstal·la i Reinicia</string>
     <string name="speed_cameras_removed_descr">Aquest dispositiu no inclou les càmeres de radar.</string>
     <string name="app_mode_inline_skates">Patins en línia</string>
-    <string name="use_volume_buttons_as_zoom_descr">Activeu per controlar el nivell d\'ampliació del mapa amb els botons del volum del dispositiu.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Controla el nivell d\'ampliació del mapa fent servir els botons del volum del dispositiu.</string>
     <string name="use_volume_buttons_as_zoom">Botons de volum pel zoom</string>
     <string name="delete_all_actions_message_q">Esteu segur que voleu suprimir definitivament %d dreceres\?</string>
     <string name="export_import_quick_actions_with_profiles_promo">Podeu exportar o importar les dreceres amb els perfils de les aplicacions.</string>
@@ -3686,7 +3686,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="screen_timeout_descr">Si està activat \"%1$s\" el temps d\'activitat quedarà afectat.</string>
     <string name="shared_string_tones">tones</string>
     <string name="shared_string_meters">metres</string>
-    <string name="quick_action_remove_next_destination">Suprimeix la propera fita</string>
+    <string name="quick_action_remove_next_destination">Suprimeix la fita més propera</string>
     <string name="please_provide_point_name_error">Proporcioneu un nom per al punt</string>
     <string name="quick_action_remove_next_destination_descr">La propera fita de la ruta s\'esborrarà. Si es tractés de la Destinació final, la navegació s\'aturaria.</string>
     <string name="search_download_wikipedia_maps">Baixa mapes de la Viquipèdia</string>
@@ -3850,4 +3850,13 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n • S\'han corregit problemes en la importació/exportació de la configuració dels perfils
 \n
 \n</string>
+    <string name="quick_action_transport_show">Mostra el transport públic</string>
+    <string name="shared_string_add_profile">Afegeix un perfil</string>
+    <string name="change_application_profile">Canvia el perfil de l\'aplicació</string>
+    <string name="index_item_world_basemap_detailed">Mapa general del món (detallat)</string>
+    <string name="unsupported_type_error">Tipus no suportat</string>
+    <string name="shared_string_always">Sempre</string>
+    <string name="screen_control">Control de pantalla</string>
+    <string name="development">Desenvolupament</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>
