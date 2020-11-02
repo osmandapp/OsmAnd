@@ -13,7 +13,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.graph.CustomGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CustomGraphAdapter.LegendViewType;
@@ -66,7 +65,7 @@ public class RouteInfoCard extends BaseCard {
 
 	private void updateHeader() {
 		TextView title = (TextView) view.findViewById(R.id.info_type_title);
-		String name = AndroidUtils.getStringRouteInfoPropertyValue(app, routeStatistics.name);
+		String name = AndroidUtils.getStringRouteInfoPropertyValue(app, statistics.name);
 		title.setText(name);
 	}
 

@@ -22,7 +22,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.CustomBarChartRenderer;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.router.RouteStatisticsHelper;
@@ -34,9 +33,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, BarData, RouteStatistics> {
+import static net.osmand.plus.track.ColorsCard.MINIMUM_CONTRAST_RATIO;
 
-	private static final int MINIMUM_CONTRAST_RATIO = 3;
+public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, BarData, RouteStatistics> {
 
 	private String selectedPropertyName;
 	private ViewGroup legendContainer;
@@ -153,7 +152,7 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 				legendIcon.setBackgroundResource(AndroidUtils.resolveAttribute(app, R.attr.bg_circle_contour));
 			}
 			String propertyName = segment.getUserPropertyName();
-			String name = SettingsNavigationActivity.getStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
+			String name = AndroidUtils.getRenderingStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
 			boolean selected = segment.getPropertyName().equals(propertyNameToFullSpan);
 			Spannable text = getSpanLegend(name, segment, selected);
 			TextView legend = (TextView) view.findViewById(R.id.legend_text);
