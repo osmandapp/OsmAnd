@@ -106,6 +106,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	private EditText descriptionEdit;
 	private EditText addressEdit;
 	private int layoutHeightPrevious = 0;
+	private ColorsCard colorsCard;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -463,21 +464,29 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	}
 
 	private void createColorSelector() {
-		trackColoringCard = new ColorsCard(getMapActivity(), 0, this, ColorDialogs.pallette);
-		trackColoringCard.setListener(this);
-
-		LinearLayout container = view.findViewById(R.id.container);
-		container.addView(trackColoringCard.build(getMapActivity()));
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			List<Integer> colors = new ArrayList<>();
+			for (int color : ColorDialogs.pallette) {
+				colors.add(color);
+			}
+			int customColor = getPointColor();
+			if (!ColorDialogs.isPaletteColor(customColor)) {
+				colors.add(customColor);
+			}
+			colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors);
+			colorsCard.setListener(this);
+			LinearLayout selectColor = view.findViewById(R.id.select_color);
+			selectColor.addView(colorsCard.build(view.getContext()));
+		}
 	}
 
 	@Override
 	public void onColorSelected(Integer prevColor, int newColor) {
-		trackColoringCard.onColorSelected(prevColor, newColor);
-		selectedColor = trackColoringCard.getSelectedColor();
-		updateColorSelector(selectedColor, view);
+		colorsCard.onColorSelected(prevColor, newColor);
+		int color = colorsCard.getSelectedColor();
+		updateColorSelector(color, view);
 	}
-
-	ColorsCard trackColoringCard;
 
 	@Override
 	public void onCardLayoutNeeded(@NonNull BaseCard card) {
@@ -487,8 +496,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
 		if (card instanceof ColorsCard) {
-			selectedColor = ((ColorsCard) card).getSelectedColor();
-			updateColorSelector(selectedColor, view);
+			int color = ((ColorsCard) card).getSelectedColor();
+			updateColorSelector(color, view);
 		}
 	}
 
@@ -498,16 +507,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	}
 
 	private void updateColorSelector(int color, View rootView) {
-		View oldColor = rootView.findViewWithTag(selectedColor);
-		if (oldColor != null) {
-			oldColor.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
-			ImageView icon = oldColor.findViewById(R.id.icon);
-			icon.setImageDrawable(UiUtilities.tintDrawable(icon.getDrawable(), R.color.icon_color_default_light));
-		}
-		View newColor = rootView.findViewWithTag(color);
-		if (newColor != null) {
-			newColor.findViewById(R.id.outline).setVisibility(View.VISIBLE);
-		}
 		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
 		selectedColor = color;
 		setColor(color);

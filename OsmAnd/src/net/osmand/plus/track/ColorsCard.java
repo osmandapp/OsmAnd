@@ -40,7 +40,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 
 	private Fragment targetFragment;
 
-	private int[] colors;
+	private List<Integer> colors;
 	private List<Integer> customColors;
 
 	private int selectedColor;
@@ -50,7 +50,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return R.layout.colors_card;
 	}
 
-	public ColorsCard(MapActivity mapActivity, int selectedColor, Fragment targetFragment, int[] colors) {
+	public ColorsCard(MapActivity mapActivity, int selectedColor, Fragment targetFragment, List<Integer> colors) {
 		super(mapActivity);
 		this.targetFragment = targetFragment;
 		this.selectedColor = selectedColor;
