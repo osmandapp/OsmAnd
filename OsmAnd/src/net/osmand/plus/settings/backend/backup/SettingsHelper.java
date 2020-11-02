@@ -7,7 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Collator;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
@@ -23,6 +25,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
@@ -42,6 +45,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -542,6 +547,7 @@ public class SettingsHelper {
 		files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
 				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA);
 		if (!files.isEmpty()) {
+			sortData(files);
 			dataList.put(ExportSettingsType.OFFLINE_MAPS, files);
 		}
 		files = getFilesByType(localIndexInfoList, LocalIndexType.TTS_VOICE_DATA);
@@ -800,5 +806,19 @@ public class SettingsHelper {
 			settingsToOperate.put(ExportSettingsType.VOICE, voiceFilesList);
 		}
 		return settingsToOperate;
+	}
+
+	public void sortData(List<File> files) {
+		final Collator collator = OsmAndCollator.primaryCollator();
+		Collections.sort(files, new Comparator<File>() {
+			@Override
+			public int compare(File lhs, File rhs) {
+				return collator.compare(getNameToDisplay(lhs), getNameToDisplay(rhs));
+			}
+
+			private String getNameToDisplay(File item) {
+				return FileNameTranslationHelper.getFileNameWithRegion(app, item.getName());
+			}
+		});
 	}
 }
