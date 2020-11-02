@@ -3206,7 +3206,7 @@ POIの更新は利用できません</string>
     <string name="map_look">マップ外観</string>
     <string name="list_of_installed_plugins">インストール済みプラグインリスト</string>
     <string name="configure_navigation">ナビゲーション設定</string>
-    <string name="general_settings_profile_descr">アプリテーマ、ユニット、リージョン</string>
+    <string name="general_settings_profile_descr">アプリテーマ、単位、地域</string>
     <string name="configure_profile">プロファイルの構築</string>
     <string name="switch_profile">プロファイル切替</string>
     <string name="application_profile_changed">アプリケーションプロファイルが\"%s\"に切り替えられました</string>

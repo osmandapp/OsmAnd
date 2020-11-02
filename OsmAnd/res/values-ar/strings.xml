@@ -3931,4 +3931,7 @@
     <string name="icon_group_sport">رياضة</string>
     <string name="icon_group_emergency">الطوارئ</string>
     <string name="icon_group_travel">سفر</string>
+    <string name="navigate_point_mgrs">النظام المرجعي للشبكة العسكرية</string>
+    <string name="navigate_point_format_mgrs">النظام المرجعي للشبكة العسكرية</string>
+    <string name="mgrs_format_descr">OsmAnd يستخدم MGRS، وهو مشابه لتنسيق UTM NATO .</string>
 </resources>

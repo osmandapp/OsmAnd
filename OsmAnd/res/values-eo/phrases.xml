@@ -3842,4 +3842,5 @@
     <string name="poi_parking_sheds">privataj garaĝ-budoj</string>
     <string name="poi_parking_rooftop">tegmento</string>
     <string name="poi_gpx_point">GPX-punkto</string>
+    <string name="poi_radar_tower">Radar-turo</string>
 </resources>
