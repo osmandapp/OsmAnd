@@ -2,7 +2,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarker;
 import net.osmand.plus.activities.MapActivity;
 
 public class MapMarkerEditor extends PointEditor {
