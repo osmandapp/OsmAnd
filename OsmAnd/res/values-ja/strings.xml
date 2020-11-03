@@ -3809,8 +3809,8 @@ POIの更新は利用できません</string>
     <string name="add_online_source">オンラインソースを追加</string>
     <string name="clear_tiles_warning">これらの変更を適用すると、このタイルソースのキャッシュデータがクリアされます</string>
     <string name="vessel_height_warning_link">船の高さを設定</string>
-    <string name="vessel_height_warning">低い橋を避けるために船の高さを調整できます。ブリッジが可動式の場合は、開いた状態の高さが参照されます。</string>
-    <string name="vessel_height_limit_description">低い橋を避けるために船の高さを設定します。注：ブリッジが可動式の場合は、開いた状態の高さが参照されます。</string>
+    <string name="vessel_height_warning">低い橋を避けるために船の高さを調整できます。橋が可動式の場合は、開いた状態の高さが参照されます。</string>
+    <string name="vessel_height_limit_description">低い橋を避けるために船の高さを設定します。注：橋が可動式の場合は、開いた状態の高さが参照されます。</string>
     <string name="vessel_width_limit_description">狭い橋を避けるために船の幅を設定します</string>
     <string name="quick_action_showhide_mapillary_title">Mapillaryの表示切替</string>
     <string name="quick_action_mapillary_hide">Mapillaryを非表示</string>
