@@ -2212,4 +2212,10 @@
     <string name="use_native_pt_desc">Превключете на Java (безопасен режим) изчисляването на маршрути за обществения транспорт</string>
     <string name="perform_oauth_authorization_description">Влезте с OAuth, за да ползвате всички функции на osmedit</string>
     <string name="perform_oauth_authorization">Вход с OAuth</string>
+    <string name="system_default_theme">Системна настройка</string>
+    <string name="all_next_segments">Всички следващи сегменти</string>
+    <string name="previous_segment">Предишен сегмент</string>
+    <string name="all_previous_segments">Всички предишни сегменти</string>
+    <string name="only_selected_segment_recalc">Само избраният сегмент ще бъде преизчислен съобразно избрания профил.</string>
+    <string name="all_next_segments_will_be_recalc">Всички следващи сегменти ще бъдат преизчислени с помощта на избрания профил.</string>
 </resources>
