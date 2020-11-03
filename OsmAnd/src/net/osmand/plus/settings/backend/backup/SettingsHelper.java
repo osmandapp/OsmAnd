@@ -14,6 +14,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
@@ -552,6 +553,10 @@ public class SettingsHelper {
 		if (!files.isEmpty()) {
 			dataList.put(ExportSettingsType.VOICE, files);
 		}
+		List<MapMarkersGroup> markersGroups = app.getMapMarkersHelper().getMapMarkersGroups();
+		if (!markersGroups.isEmpty()) {
+			dataList.put(ExportSettingsType.MARKERS, markersGroups);
+		}
 		return dataList;
 	}
 
@@ -591,6 +596,7 @@ public class SettingsHelper {
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
+		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 
 		for (Object object : data) {
 			if (object instanceof QuickAction) {
@@ -615,6 +621,8 @@ public class SettingsHelper {
 				osmEditsPointList.add((OpenstreetmapPoint) object);
 			} else if (object instanceof FavoriteGroup) {
 				favoriteGroups.add((FavoriteGroup) object);
+			} else if (object instanceof MapMarkersGroup) {
+				markersGroups.add((MapMarkersGroup) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
@@ -646,6 +654,9 @@ public class SettingsHelper {
 		if (!favoriteGroups.isEmpty()) {
 			settingsItems.add(new FavoritesSettingsItem(app, favoriteGroups));
 		}
+		if (!markersGroups.isEmpty()) {
+			settingsItems.add(new MarkersSettingsItem(app, markersGroups));
+		}
 		return settingsItems;
 	}
 
@@ -667,6 +678,7 @@ public class SettingsHelper {
 		List<OsmNotesPoint> notesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
+		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
@@ -746,6 +758,10 @@ public class SettingsHelper {
 					FavoritesSettingsItem favoritesSettingsItem = (FavoritesSettingsItem) item;
 					favoriteGroups.addAll(favoritesSettingsItem.getItems());
 					break;
+				case MARKERS:
+					MarkersSettingsItem markersSettingsItem = (MarkersSettingsItem) item;
+					markersGroups.addAll(markersSettingsItem.getItems());
+					break;
 				default:
 					break;
 			}
@@ -798,6 +814,9 @@ public class SettingsHelper {
 		}
 		if (!voiceFilesList.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.VOICE, voiceFilesList);
+		}
+		if (!markersGroups.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.MARKERS, markersGroups);
 		}
 		return settingsToOperate;
 	}

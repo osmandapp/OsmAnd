@@ -14,19 +14,20 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -134,7 +135,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
-				}  else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
+				} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
 					itemHolder.title.setText(GpxUiHelper.getGpxTitle(file.getName()));
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
@@ -152,6 +153,15 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 			} else if (currentItem instanceof FavoriteGroup) {
 				itemHolder.title.setText(((FavoriteGroup) currentItem).getDisplayName(app));
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_favorite, activeColorRes));
+				itemHolder.subTitle.setVisibility(View.GONE);
+			} else if (currentItem instanceof MapMarkersGroup) {
+				MapMarkersGroup markersGroup = (MapMarkersGroup) currentItem;
+				String groupName = markersGroup.getName();
+				if (Algorithms.isEmpty(groupName)) {
+					groupName = app.getString(R.string.map_markers);
+				}
+				itemHolder.title.setText(groupName);
+				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_flag, activeColorRes));
 				itemHolder.subTitle.setVisibility(View.GONE);
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);

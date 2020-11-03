@@ -16,5 +16,6 @@ public enum ExportSettingsType {
 	OFFLINE_MAPS,
 	FAVORITES,
 	TTS_VOICE,
-	VOICE
+	VOICE,
+	MARKERS
 }

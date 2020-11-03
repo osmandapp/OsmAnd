@@ -134,6 +134,9 @@ class SettingsItemsFactory {
 			case FAVOURITES:
 				item = new FavoritesSettingsItem(app, json);
 				break;
+			case MARKERS:
+				item = new MarkersSettingsItem(app, json);
+				break;
 		}
 		return item;
 	}
