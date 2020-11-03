@@ -3940,7 +3940,7 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="message_graph_will_be_available_after_recalculation">Warte auf die Neuberechnung der Route.
 \nDie Graphik wird nach der Neuberechnung verfügbar sein.</string>
-    <string name="icon_group_amenity">Ausstattung</string>
+    <string name="icon_group_amenity">Einrichtung</string>
     <string name="icon_group_transport">ÖPNV</string>
     <string name="icon_group_service">Dienstleistung</string>
     <string name="icon_group_travel">Reisen</string>
@@ -3948,4 +3948,6 @@
     <string name="icon_group_emergency">Notfall</string>
     <string name="shared_string_graph">Graph</string>
     <string name="icon_group_symbols">Symbole</string>
+    <string name="shared_string_local_maps">Lokale Karten</string>
+    <string name="icon_group_special">Spezial</string>
 </resources>
