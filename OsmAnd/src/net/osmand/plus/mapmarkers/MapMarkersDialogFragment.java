@@ -429,7 +429,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			public void moveAllToHistoryOnClick() {
 				if (mapActivity != null) {
 					final MapMarkersHelper helper = mapActivity.getMyApplication().getMapMarkersHelper();
-					final List<MapMarkersHelper.MapMarker> markers = new ArrayList<>(helper.getMapMarkers());
+					final List<MapMarker> markers = new ArrayList<>(helper.getMapMarkers());
 					helper.moveAllActiveMarkersToHistory();
 					if (viewPager.getCurrentItem() == ACTIVE_MARKERS_POSITION) {
 						activeFragment.updateAdapter();

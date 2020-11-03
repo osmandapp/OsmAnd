@@ -4,8 +4,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;

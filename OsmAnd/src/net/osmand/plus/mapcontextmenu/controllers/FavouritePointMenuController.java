@@ -15,7 +15,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

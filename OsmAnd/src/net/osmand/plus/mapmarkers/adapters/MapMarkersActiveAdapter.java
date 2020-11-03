@@ -13,9 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -215,7 +214,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		final int pos = holder.getAdapterPosition();
 		final MapMarker marker = getItem(pos);
 		mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
-		MapMarkersHelper.MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupById(marker.groupKey,
+		MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupById(marker.groupKey,
 				MapMarkersGroup.ANY_TYPE);
 		if (group != null) {
 			mapActivity.getMyApplication().getMapMarkersHelper().updateGroup(group);

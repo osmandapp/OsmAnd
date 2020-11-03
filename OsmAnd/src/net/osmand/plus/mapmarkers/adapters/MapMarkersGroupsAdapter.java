@@ -21,11 +21,12 @@ import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.mapmarkers.CategoriesSubHeader;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.GroupHeader;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersGroup;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.ShowHideHistoryButton;
+import net.osmand.plus.mapmarkers.GroupHeader;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -159,7 +160,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				items.add(header);
 				if (!group.isDisabled()) {
 					if (group.getWptCategories() != null && !group.getWptCategories().isEmpty()) {
-						MapMarkersHelper.CategoriesSubHeader categoriesSubHeader = group.getCategoriesSubHeader();
+						CategoriesSubHeader categoriesSubHeader = group.getCategoriesSubHeader();
 						items.add(categoriesSubHeader);
 					}
 					TravelDbHelper travelDbHelper = mapActivity.getMyApplication().getTravelDbHelper();
@@ -526,8 +527,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		} else if (holder instanceof MapMarkerCategoriesViewHolder) {
 			final MapMarkerCategoriesViewHolder categoriesViewHolder = (MapMarkerCategoriesViewHolder) holder;
 			final Object header = getItem(position);
-			if (header instanceof MapMarkersHelper.CategoriesSubHeader) {
-				final MapMarkersHelper.CategoriesSubHeader categoriesSubHeader = (MapMarkersHelper.CategoriesSubHeader) header;
+			if (header instanceof CategoriesSubHeader) {
+				final CategoriesSubHeader categoriesSubHeader = (CategoriesSubHeader) header;
 				final MapMarkersGroup group = categoriesSubHeader.getGroup();
 				View.OnClickListener openChooseCategoriesDialog = new View.OnClickListener() {
 					@Override
@@ -599,7 +600,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			return HEADER_TYPE;
 		} else if (item instanceof ShowHideHistoryButton) {
 			return SHOW_HIDE_HISTORY_TYPE;
-		} else if (item instanceof MapMarkersHelper.CategoriesSubHeader) {
+		} else if (item instanceof CategoriesSubHeader) {
 			return CATEGORIES_TYPE;
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");

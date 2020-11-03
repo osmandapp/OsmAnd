@@ -13,7 +13,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -88,7 +88,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	@Override
-	public void onMapMarkerChanged(MapMarkersHelper.MapMarker mapMarker) {
+	public void onMapMarkerChanged(MapMarker mapMarker) {
 	}
 
 	@Override
