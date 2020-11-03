@@ -32,8 +32,6 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 	private EditText userNameEditText;
 	private EditText passwordEditText;
-	private TextInputLayout passwordBox;
-	private TextInputLayout loginBox;
 
 
 	@Override
@@ -48,8 +46,8 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		userNameEditText = view.findViewById(R.id.name_edit_text);
 		passwordEditText = view.findViewById(R.id.password_edit_text);
-		passwordBox = view.findViewById(R.id.password_text_box);
-		loginBox = view.findViewById(R.id.name_text_box);
+		TextInputLayout passwordBox = view.findViewById(R.id.password_text_box);
+		TextInputLayout loginBox = view.findViewById(R.id.name_text_box);
 
 		String name = app.getSettings().USER_NAME.get();
 		String password = app.getSettings().USER_PASSWORD.get();

@@ -7,10 +7,16 @@ import android.webkit.WebView;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
+import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
+import com.github.scribejava.core.model.Verb;
+
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.BuildConfig;
 import net.osmand.plus.OsmandApplication;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -71,6 +77,10 @@ public class OsmOAuthAuthorizationAdapter {
         client.performGetRequest(url, callback);
     }
 
+    public String authorizeOsmUserDetails () throws InterruptedException, ExecutionException, IOException, XmlPullParserException {
+        return client.authorizeOsmUserDetails();
+    }
+
     public Response performRequest(String url, String method, String body)
             throws InterruptedException, ExecutionException, IOException {
         return client.performRequest(url, method, body);
@@ -83,6 +93,20 @@ public class OsmOAuthAuthorizationAdapter {
 
     public void authorize(String oauthVerifier) {
         client.authorize(oauthVerifier);
+        String response = "";
+        try {
+            response= client.authorizeOsmUserDetails();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
         saveToken();
+        application.getSettings().USER_DISPLAY_NAME.set(response);
     }
+
 }

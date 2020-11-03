@@ -2,6 +2,7 @@ package net.osmand.plus.osmedit;
 
 import android.os.AsyncTask;
 
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -12,12 +13,20 @@ import java.lang.ref.WeakReference;
 public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugResult> {
 
 	private OsmandApplication app;
-	private final WeakReference<OsmEditingFragment> fragmentRef;
+	private ValidateOsmLoginListener validateOsmLoginListener;
 
-	public ValidateOsmLoginDetailsTask(OsmandApplication app, OsmEditingFragment targetfragment) {
-		this.app = app;
-		this.fragmentRef = new WeakReference<>(targetfragment);
+	public interface ValidateOsmLoginListener {
+
+		void loginValidationFinished(String error);
+
 	}
+
+	public ValidateOsmLoginDetailsTask(OsmandApplication app, ValidateOsmLoginListener validateTargetOsmLoginDetailsTask ) {
+		this.app = app;
+		this.validateOsmLoginListener = validateTargetOsmLoginDetailsTask;
+	}
+
+
 
 	@Override
 	protected OsmBugResult doInBackground(Void... params) {
@@ -36,9 +45,8 @@ public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugRes
 		} else {
 			app.showToastMessage(R.string.osm_authorization_success);
 		}
-		OsmEditingFragment targetfragment = fragmentRef.get();
-		if (targetfragment != null) {
-			targetfragment.updateAllSettings();
+		if (validateOsmLoginListener != null) {
+			validateOsmLoginListener.loginValidationFinished(osmBugResult.warning);
 		}
 	}
 }

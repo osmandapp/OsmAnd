@@ -29,11 +29,10 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
     private OsmOAuthAuthorizationAdapter client;
     private static final String OSM_LOGIN_DATA = "osm_login_data";
 
-    public static final String TAG = ExitBottomSheetDialogFragment.class.getSimpleName();
+    public static final String TAG = LoginBottomSheetFragment.class.getSimpleName();
 
     @Override
     public void createMenuItems(Bundle savedInstanceState) {
-
         items.add(new ShortDescriptionItem.Builder()
                 .setDescription(getString(R.string.open_street_map_login_mode))
                 .setTitle(getString(R.string.login_open_street_map_org))
@@ -49,7 +48,6 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
     protected int getDismissButtonTextId() {
         return R.string.shared_string_cancel;
     }
-
 
     @Override
     protected int getRightBottomButtonTextId() {
@@ -131,5 +129,21 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
             fragment.show(fragmentManager, TAG);
         }
     }
+
+    public interface LoginOsmAutorizationListener {
+        void informAutorizationPrefsUpdate();
+    }
+
+    public void authorize(String oauthVerifier) {
+        if (client != null) {
+            client.authorize(oauthVerifier);
+        }
+        Fragment target = getTargetFragment();
+        if (target instanceof LoginOsmAutorizationListener) {
+            ((LoginOsmAutorizationListener) target).informAutorizationPrefsUpdate();
+        }
+        dismiss();
+    }
 }
+
 
