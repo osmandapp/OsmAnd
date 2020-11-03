@@ -12,7 +12,6 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.helpers.GpxUiHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,10 +27,10 @@ public class CommonGraphAdapter extends BaseGraphAdapter<LineChart, LineData, Gp
 	}
 
 	@Override
-	protected void prepareCharterView() {
-		super.prepareCharterView();
+	protected void prepareChartView() {
+		super.prepareChartView();
 
-		mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
 			public void onValueSelected(Entry e, Highlight h) {
 				highlight = h;
@@ -48,15 +47,15 @@ public class CommonGraphAdapter extends BaseGraphAdapter<LineChart, LineData, Gp
 			}
 		});
 
-		mChart.setOnChartGestureListener(new OnChartGestureListener() {
+		chart.setOnChartGestureListener(new OnChartGestureListener() {
 			boolean hasTranslated = false;
 			float highlightDrawX = -1;
 
 			@Override
 			public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
 				hasTranslated = false;
-				if (mChart.getHighlighted() != null && mChart.getHighlighted().length > 0) {
-					highlightDrawX = mChart.getHighlighted()[0].getDrawX();
+				if (chart.getHighlighted() != null && chart.getHighlighted().length > 0) {
+					highlightDrawX = chart.getHighlighted()[0].getDrawX();
 				} else {
 					highlightDrawX = -1;
 				}
@@ -68,8 +67,8 @@ public class CommonGraphAdapter extends BaseGraphAdapter<LineChart, LineData, Gp
 			@Override
 			public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
 				GpxDisplayItem gpxItem = getGpxItem();
-				gpxItem.chartMatrix = new Matrix(mChart.getViewPortHandler().getMatrixTouch());
-				Highlight[] highlights = mChart.getHighlighted();
+				gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+				Highlight[] highlights = chart.getHighlighted();
 				if (highlights != null && highlights.length > 0) {
 					gpxItem.chartHighlightPos = highlights[0].getX();
 				} else {
@@ -104,17 +103,9 @@ public class CommonGraphAdapter extends BaseGraphAdapter<LineChart, LineData, Gp
 			public void onChartTranslate(MotionEvent me, float dX, float dY) {
 				hasTranslated = true;
 				if (highlightDrawX != -1) {
-					Highlight h = mChart.getHighlightByTouchPoint(highlightDrawX, 0f);
+					Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
 					if (h != null) {
-							/*
-							ILineDataSet set = mChart.getLineData().getDataSetByIndex(h.getDataSetIndex());
-							if (set != null && set.isHighlightEnabled()) {
-								Entry e = set.getEntryForXValue(h.getX(), h.getY());
-								MPPointD pix = mChart.getTransformer(set.getAxisDependency()).getPixelForValues(e.getX(), e.getY());
-								h.setDraw((float) pix.x, (float) pix.y);
-							}
-							*/
-						mChart.highlightValue(h, true);
+						chart.highlightValue(h, true);
 					}
 				}
 			}
@@ -125,28 +116,23 @@ public class CommonGraphAdapter extends BaseGraphAdapter<LineChart, LineData, Gp
 		this.externalValueSelectedListeners.put(key, listener);
 	}
 
-	public void removeValueSelectedListener(String key) {
-		this.externalValueSelectedListeners.remove(key);
-	}
-
 	public void setExternalGestureListener(ExternalGestureListener listener) {
 		this.externalGestureListener = listener;
 	}
 
 	@Override
 	public void updateView() {
-		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !isNightMode(), true);
-		mChart.setData(mChartData);
+		chart.setData(chartData);
 		updateHighlight();
 	}
 
 	@Override
 	public void highlight(Highlight h) {
 		super.highlight(h);
-		mChart.highlightValue(highlight);
+		chart.highlightValue(highlight);
 	}
 
 	public GpxDisplayItem getGpxItem() {
-		return mAdditionalData;
+		return additionalData;
 	}
 }

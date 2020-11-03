@@ -10,27 +10,27 @@ import com.github.mikephil.charting.listener.ChartTouchListener;
 
 import net.osmand.plus.OsmandApplication;
 
-public abstract class BaseGraphAdapter<CHART extends Chart, CHART_DATA extends ChartData, DATA> {
+public abstract class BaseGraphAdapter<_Chart extends Chart, _ChartData extends ChartData, _Data> {
 
 	private Highlight lastKnownHighlight;
-	protected CHART mChart;
-	protected CHART_DATA mChartData;
-	protected DATA mAdditionalData;
+	protected _Chart chart;
+	protected _ChartData chartData;
+	protected _Data additionalData;
 	protected boolean usedOnMap;
 
-	public BaseGraphAdapter(CHART chart, boolean usedOnMap) {
-		this.mChart = chart;
+	public BaseGraphAdapter(_Chart chart, boolean usedOnMap) {
+		this.chart = chart;
 		this.usedOnMap = usedOnMap;
-		prepareCharterView();
+		prepareChartView();
 	}
 
-	protected void prepareCharterView() {
-		mChart.setExtraRightOffset(16);
-		mChart.setExtraLeftOffset(16);
+	protected void prepareChartView() {
+		chart.setExtraRightOffset(16);
+		chart.setExtraLeftOffset(16);
 	}
 
-	public CHART getChart() {
-		return mChart;
+	public _Chart getChart() {
+		return chart;
 	}
 
 	protected void updateHighlight() {
@@ -41,14 +41,14 @@ public abstract class BaseGraphAdapter<CHART extends Chart, CHART_DATA extends C
 		this.lastKnownHighlight = h;
 	}
 
-	public void fullUpdate(CHART_DATA chartData, DATA data) {
+	public void updateContent(_ChartData chartData, _Data data) {
 		updateData(chartData, data);
 		updateView();
 	}
 
-	public void updateData(CHART_DATA chartData, DATA data) {
-		this.mChartData = chartData;
-		this.mAdditionalData = data;
+	public void updateData(_ChartData chartData, _Data data) {
+		this.chartData = chartData;
+		this.additionalData = data;
 	}
 
 	public abstract void updateView();
@@ -63,7 +63,7 @@ public abstract class BaseGraphAdapter<CHART extends Chart, CHART_DATA extends C
 	}
 
 	protected OsmandApplication getMyApplication() {
-		return (OsmandApplication) mChart.getContext().getApplicationContext();
+		return (OsmandApplication) chart.getContext().getApplicationContext();
 	}
 
 	public interface ExternalValueSelectedListener {

@@ -41,6 +41,7 @@ public class RouteInfoCard extends BaseCard {
 		updateHeader();
 		LinearLayout container = (LinearLayout) view.findViewById(R.id.route_items);
 		HorizontalBarChart chart = (HorizontalBarChart) view.findViewById(R.id.chart);
+		GpxUiHelper.setupHorizontalGPXChart(getMyApplication(), chart, 5, 9, 24, true, nightMode);
 		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, statistics, analysis, true, nightMode);
 		graphAdapter = new CustomGraphAdapter(chart, true);
 		graphAdapter.setLegendContainer(container);

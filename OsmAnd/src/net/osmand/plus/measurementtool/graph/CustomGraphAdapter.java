@@ -23,7 +23,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.CustomBarChartRenderer;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
@@ -53,11 +52,11 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 	}
 
 	@Override
-	protected void prepareCharterView() {
-		super.prepareCharterView();
+	protected void prepareChartView() {
+		super.prepareChartView();
 		legendViewType = LegendViewType.GONE;
-		mChart.setRenderer(new CustomBarChartRenderer(mChart));
-		mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+		chart.setRenderer(new CustomBarChartRenderer(chart));
+		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
 			public void onValueSelected(Entry e, Highlight h) {
 				if (getStatistics() == null) return;
@@ -80,9 +79,7 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 
 	@Override
 	public void updateView() {
-		mChart.clear();
-		GpxUiHelper.setupHorizontalGPXChart(getMyApplication(), mChart, 5, 9, 24, true, isNightMode());
-		mChart.setData(mChartData);
+		chart.setData(chartData);
 		updateHighlight();
 		updateLegend();
 	}
@@ -101,20 +98,20 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 
 	public void highlight(Highlight h) {
 		super.highlight(h);
-		Highlight bh = h != null ? mChart.getHighlighter().getHighlight(1, h.getXPx()) : null;
+		Highlight bh = h != null ? chart.getHighlighter().getHighlight(1, h.getXPx()) : null;
 		if (bh != null) {
 			bh.setDraw(h.getXPx(), 0);
 		}
-		mChart.highlightValue(bh, true);
+		chart.highlightValue(bh, true);
 	}
 
 	private void updateLegend() {
-		if (legendContainer == null) return;
-
-		legendContainer.removeAllViews();
-		attachLegend();
-		if (layoutChangeListener != null) {
-			layoutChangeListener.onLayoutChanged();
+		if (legendContainer != null) {
+			legendContainer.removeAllViews();
+			attachLegend();
+			if (layoutChangeListener != null) {
+				layoutChangeListener.onLayoutChanged();
+			}
 		}
 	}
 
@@ -181,6 +178,6 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 	}
 
 	private RouteStatistics getStatistics() {
-		return mAdditionalData;
+		return additionalData;
 	}
 }

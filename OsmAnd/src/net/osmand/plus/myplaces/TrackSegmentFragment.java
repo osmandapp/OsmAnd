@@ -87,6 +87,7 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
 
 public class TrackSegmentFragment extends OsmAndListFragment implements TrackBitmapDrawerListener {
@@ -657,7 +658,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 						if (analysis != null) {
 							if (analysis.hasElevationData || analysis.hasSpeedData) {
 								GpxUiHelper.setupGPXChart(app, chart, 4);
-								chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, SPEED, ALTITUDE)));
+								chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, ALTITUDE, SPEED)));
 								updateChart(chart);
 								chart.setVisibility(View.VISIBLE);
 							} else {
@@ -775,7 +776,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 						if (analysis != null) {
 							if (analysis.hasElevationData) {
 								GpxUiHelper.setupGPXChart(app, chart, 4);
-								chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_ALTITUDE, ALTITUDE)));
+								chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_ALTITUDE, ALTITUDE, SLOPE)));
 								updateChart(chart);
 								chart.setVisibility(View.VISIBLE);
 							} else {

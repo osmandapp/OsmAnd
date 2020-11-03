@@ -217,6 +217,7 @@ public class RouteStatisticCard extends BaseCard {
 
 	private void buildHeader(GPXTrackAnalysis analysis) {
 		LineChart mChart = (LineChart) view.findViewById(R.id.chart);
+		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
 		graphAdapter = new CommonGraphAdapter(mChart, true);
 
 		if (analysis.hasElevationData) {
@@ -235,7 +236,7 @@ public class RouteStatisticCard extends BaseCard {
 			this.elevationDataSet = elevationDataSet;
 			this.slopeDataSet = slopeDataSet;
 
-			graphAdapter.fullUpdate(new LineData(dataSets), gpxItem);
+			graphAdapter.updateContent(new LineData(dataSets), gpxItem);
 			mChart.setVisibility(View.VISIBLE);
 		} else {
 			mChart.setVisibility(View.GONE);
