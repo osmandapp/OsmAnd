@@ -72,7 +72,6 @@ class SettingsExporter {
 		}
 	}
 
-
 	private JSONObject createItemsJson() throws JSONException {
 		JSONObject json = new JSONObject();
 		json.put("version", SettingsHelper.VERSION);

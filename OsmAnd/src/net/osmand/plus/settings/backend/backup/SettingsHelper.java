@@ -542,9 +542,8 @@ public class SettingsHelper {
 		if (!favoriteGroups.isEmpty()) {
 			dataList.put(ExportSettingsType.FAVORITES, favoriteGroups);
 		}
-		List<LocalIndexInfo> localIndexInfoList = getVoiceIndexInfo();
-		List<File> files;
-		files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
+		List<LocalIndexInfo> localIndexInfoList = getLocalIndexData();
+		List<File> files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
 				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA);
 		if (!files.isEmpty()) {
 			sortData(files);
@@ -561,7 +560,7 @@ public class SettingsHelper {
 		return dataList;
 	}
 
-	private List<LocalIndexInfo> getVoiceIndexInfo() {
+	private List<LocalIndexInfo> getLocalIndexData() {
 		return new LocalIndexHelper(app).getLocalIndexData(new AbstractLoadLocalIndexTask() {
 			@Override
 			public void loadFile(LocalIndexInfo... loaded) {
