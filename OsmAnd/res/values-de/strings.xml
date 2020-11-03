@@ -3946,4 +3946,6 @@
     <string name="icon_group_travel">Reisen</string>
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Notfall</string>
+    <string name="shared_string_graph">Graph</string>
+    <string name="icon_group_symbols">Symbole</string>
 </resources>
