@@ -188,38 +188,24 @@ android {
 			dimension "version"
 			applicationId "net.osmand"
 		}
-		freeres {
-			dimension "version"
-			applicationId "net.osmand"
-			resConfig "en"
-		}
-		freecustom {
-			dimension "version"
-			applicationId "net.osmand.freecustom"
-		}
 		full {
 			dimension "version"
 			applicationId "net.osmand.plus"
-		}
-		fulldev {
-			dimension "version"
-			applicationId "net.osmand.plus"
-			resConfig "en"
-			// resConfigs "xxhdpi", "nodpi"
 		}
 		freehuawei {
 			dimension "version"
 			applicationId "net.osmand.huawei"
 		}
 		// CoreVersion
+        // Build that doesn't include 3D OpenGL
 		legacy {
 			dimension "coreversion"
 		}
-
+        // Build that includes 3D OpenGL release
 		qtcore {
 			dimension "coreversion"
 		}
-
+        // Build that includes 3D OpenGL debug
 		qtcoredebug {
 			dimension "coreversion"
 		}
