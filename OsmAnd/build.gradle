@@ -123,10 +123,15 @@ android {
 			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-free.xml"
 		}
+		freedev {
+			java.srcDirs = ["src-google"]
+			manifest.srcFile "AndroidManifest-freedev.xml"
+		}
 		freehuawei {
 			java.srcDirs = ["src-huawei"]
 			manifest.srcFile "AndroidManifest-freehuawei.xml"
 		}
+
 		legacy {
 			jniLibs.srcDirs = ["libc++"]
 		}
