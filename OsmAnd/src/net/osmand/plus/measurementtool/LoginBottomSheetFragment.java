@@ -130,8 +130,8 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
         }
     }
 
-    public interface LoginOsmAutorizationListener {
-        void informAutorizationPrefsUpdate();
+    public interface LoginOsmAuthorizationListener {
+        void informAuthorizationPrefsUpdate();
     }
 
     public void authorize(String oauthVerifier) {
@@ -139,8 +139,8 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
             client.authorize(oauthVerifier);
         }
         Fragment target = getTargetFragment();
-        if (target instanceof LoginOsmAutorizationListener) {
-            ((LoginOsmAutorizationListener) target).informAutorizationPrefsUpdate();
+        if (target instanceof LoginOsmAuthorizationListener) {
+            ((LoginOsmAuthorizationListener) target).informAuthorizationPrefsUpdate();
         }
         dismiss();
     }

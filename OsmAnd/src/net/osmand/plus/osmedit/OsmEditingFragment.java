@@ -32,7 +32,7 @@ import org.apache.commons.logging.Log;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
-public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginDetailsTask.ValidateOsmLoginListener, LoginBottomSheetFragment.LoginOsmAutorizationListener {
+public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginDetailsTask.ValidateOsmLoginListener, LoginBottomSheetFragment.LoginOsmAuthorizationListener {
 
 	private static final Log log = PlatformUtil.getLog(OsmEditingFragment.class);
 
@@ -188,7 +188,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	@Override
-	public void informAutorizationPrefsUpdate() {
+	public void informAuthorizationPrefsUpdate() {
 		client = new OsmOAuthAuthorizationAdapter(app);
 		updateAllSettings();
 	}

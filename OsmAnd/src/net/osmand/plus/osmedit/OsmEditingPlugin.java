@@ -21,6 +21,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -41,6 +43,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -464,7 +467,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		String pwd = settings.USER_PASSWORD.get();
 		String authToken = settings.USER_ACCESS_TOKEN.get();
 		if ((Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)) && Algorithms.isEmpty(authToken)) {
-			Toast.makeText(la, R.string.validate_gpx_upload_name_pwd, Toast.LENGTH_LONG).show();
+			LoginBottomSheetFragment.showInstance(f.getFragmentManager(), f.getTargetFragment());
 			return false;
 		}
 		AlertDialog.Builder bldr = new AlertDialog.Builder(la);
