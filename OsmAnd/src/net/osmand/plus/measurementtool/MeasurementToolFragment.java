@@ -553,8 +553,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void updateAdditionalInfoView() {
-		if (visibleCard instanceof OnUpdateAdditionalInfoListener) {
-			((OnUpdateAdditionalInfoListener) visibleCard).onUpdateAdditionalInfo();
+		updateAdditionalInfoView(pointsCard);
+		updateAdditionalInfoView(graphsCard);
+	}
+
+	private void updateAdditionalInfoView(OnUpdateAdditionalInfoListener listener) {
+		if (listener != null) {
+			listener.onUpdateAdditionalInfo();
 		}
 	}
 
@@ -1512,6 +1517,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private boolean isCurrentAdditionalInfoType(@NonNull AdditionalInfoType type) {
 		return type.equals(currentAdditionalInfoType);
+	}
+
+	public boolean hasVisibleGraph() {
+		return graphsCard != null && graphsCard.hasVisibleGraph();
 	}
 
 	private String getSuggestedFileName() {

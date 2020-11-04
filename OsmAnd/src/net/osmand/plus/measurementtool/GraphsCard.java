@@ -34,6 +34,7 @@ import net.osmand.plus.measurementtool.graph.CustomGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CustomGraphAdapter.LegendViewType;
 import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
+import net.osmand.plus.measurementtool.graph.GraphAdapterHelper.RefreshMapCallback;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.router.RouteSegmentResult;
@@ -59,6 +60,7 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 	private MeasurementEditingContext editingCtx;
 	private MeasurementToolFragment fragment;
 	private TrackDetailsMenu trackDetailsMenu;
+	private RefreshMapCallback refreshMapCallback;
 	private GPXFile gpxFile;
 	private GPXTrackAnalysis analysis;
 	private GpxDisplayItem gpxItem;
@@ -105,7 +107,7 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 		});
 
 		GraphAdapterHelper.bindGraphAdapters(commonGraphAdapter, Arrays.asList((BaseGraphAdapter) customGraphAdapter), (ViewGroup) view);
-		GraphAdapterHelper.bindToMap(commonGraphAdapter, mapActivity, trackDetailsMenu);
+		refreshMapCallback = GraphAdapterHelper.bindToMap(commonGraphAdapter, mapActivity, trackDetailsMenu);
 		fullUpdate();
 	}
 
@@ -116,7 +118,9 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 
 	@Override
 	public void onUpdateAdditionalInfo() {
-		fullUpdate();
+		if (editingCtx != null) {
+			fullUpdate();
+		}
 	}
 
 	private void fullUpdate() {
@@ -126,6 +130,7 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 			updateMenu();
 		}
 		updateView();
+		updateChartOnMap();
 	}
 
 	private void updateMenu() {
@@ -302,6 +307,13 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 		}
 	}
 
+	private void updateChartOnMap() {
+		if (hasVisibleGraph()) {
+			trackDetailsMenu.reset();
+			refreshMapCallback.refreshMap(false);
+		}
+	}
+
 	private void addCommonType(int titleId,
 	                           boolean canBeCalculated,
 	                           boolean hasData,
@@ -344,6 +356,11 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 
 	private boolean isRouteCalculating() {
 		return fragment.isProgressBarVisible();
+	}
+
+	public boolean hasVisibleGraph() {
+		return (commonGraphContainer != null && commonGraphContainer.getVisibility() == View.VISIBLE)
+				|| (customGraphContainer != null && customGraphContainer.getVisibility() == View.VISIBLE);
 	}
 
 	private abstract class GraphType<T extends ChartData> {

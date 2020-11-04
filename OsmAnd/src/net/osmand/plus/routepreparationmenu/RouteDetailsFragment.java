@@ -60,6 +60,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
+import net.osmand.plus.measurementtool.graph.GraphAdapterHelper.RefreshMapCallback;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -113,6 +114,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	private RouteStatisticCard statisticCard;
 	private List<RouteInfoCard> routeInfoCards = new ArrayList<>();
 	private RouteDetailsMenu routeDetailsMenu;
+	private RefreshMapCallback refreshMapCallback;
 
 	public interface RouteDetailsFragmentListener {
 		void onNavigationRequested();
@@ -336,7 +338,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		CommonGraphAdapter mainGraphAdapter = statisticCard.getGraphAdapter();
 		if (mainGraphAdapter != null) {
 			GraphAdapterHelper.bindGraphAdapters(mainGraphAdapter, getRouteInfoCardsGraphAdapters(), getMainView());
-			GraphAdapterHelper.bindToMap(mainGraphAdapter, mapActivity, routeDetailsMenu);
+			refreshMapCallback = GraphAdapterHelper.bindToMap(mainGraphAdapter, mapActivity, routeDetailsMenu);
 		}
 	}
 
@@ -369,12 +371,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	protected void calculateLayout(View view, boolean initLayout) {
 		super.calculateLayout(view, initLayout);
 		if (!initLayout && getCurrentMenuState() != MenuState.FULL_SCREEN) {
-			MapActivity mapActivity = getMapActivity();
-			CommonGraphAdapter mainGraphAdapter = statisticCard.getGraphAdapter();
-			if (mainGraphAdapter != null) {
-				LineChart chart = mainGraphAdapter.getChart();
-				GraphAdapterHelper.refreshChart(mapActivity, chart, routeDetailsMenu, false);
-			}
+			refreshMapCallback.refreshMap(false);
 		}
 	}
 

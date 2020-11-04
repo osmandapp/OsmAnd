@@ -5,6 +5,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -96,15 +98,27 @@ public class GraphAdapterHelper {
 		}
 	}
 
-	public static void bindToMap(final CommonGraphAdapter graphAdapter,
-	                             final MapActivity mapActivity,
-	                             final TrackDetailsMenu detailsMenu) {
+	public static RefreshMapCallback bindToMap(@NonNull final CommonGraphAdapter graphAdapter,
+	                                           @NonNull final MapActivity mapActivity,
+	                                           @NonNull final TrackDetailsMenu detailsMenu) {
+		final RefreshMapCallback refreshMapCallback = new RefreshMapCallback() {
+			@Override
+			public void refreshMap(boolean forceFit) {
+				LineChart chart = graphAdapter.getChart();
+				OsmandApplication app = mapActivity.getMyApplication();
+				if (!app.getRoutingHelper().isFollowingMode()) {
+					detailsMenu.refreshChart(chart, forceFit);
+					mapActivity.refreshMap();
+				}
+			}
+		};
+
 		graphAdapter.addValueSelectedListener(BIND_TO_MAP_KEY,
 				new CommonGraphAdapter.ExternalValueSelectedListener() {
 
 					@Override
 					public void onValueSelected(Entry e, Highlight h) {
-						refreshChart(mapActivity, graphAdapter.getChart(), detailsMenu, false);
+						refreshMapCallback.refreshMap(false);
 					}
 
 					@Override
@@ -125,21 +139,15 @@ public class GraphAdapterHelper {
 						lastPerformedGesture == ChartTouchListener.ChartGesture.PINCH_ZOOM ||
 						lastPerformedGesture == ChartTouchListener.ChartGesture.DOUBLE_TAP ||
 						lastPerformedGesture == ChartTouchListener.ChartGesture.ROTATE) {
-					refreshChart(mapActivity, graphAdapter.getChart(), detailsMenu, true);
+					refreshMapCallback.refreshMap(true);
 				}
 			}
 		});
+
+		return refreshMapCallback;
 	}
 
-	public static void refreshChart(MapActivity mapActivity,
-	                                 LineChart chart,
-	                                 TrackDetailsMenu menu,
-	                                 boolean forceFit) {
-		if (mapActivity == null || chart == null || menu == null) return;
-		OsmandApplication app = mapActivity.getMyApplication();
-		if (!app.getRoutingHelper().isFollowingMode()) {
-			menu.refreshChart(chart, forceFit);
-			mapActivity.refreshMap();
-		}
+	public interface RefreshMapCallback {
+		void refreshMap(boolean forceFit);
 	}
 }
