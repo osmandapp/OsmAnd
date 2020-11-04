@@ -62,6 +62,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
@@ -430,13 +431,14 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 		private List<ILineDataSet> getDataSets(LineChart chart,
 		                                       GPXTabItemType tabType,
-		                                       GpxUiHelper.LineGraphType... types) {
+		                                       LineGraphType firstType,
+		                                       LineGraphType secondType) {
 			List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
 			if (dataSets == null && chart != null) {
 				GPXTrackAnalysis analysis = gpxItem.analysis;
 				GpxDataItem gpxDataItem = getGpxDataItem();
 				boolean calcWithoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
-				dataSets = GpxUiHelper.getDataSets(chart, app, analysis, calcWithoutGaps, types);
+				dataSets = GpxUiHelper.getDataSets(chart, app, analysis, firstType, secondType, calcWithoutGaps);
 				dataSetsMap.put(tabType, dataSets);
 			}
 			return dataSets;
@@ -878,7 +880,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 						if (analysis != null && analysis.isSpeedSpecified()) {
 							if (analysis.hasSpeedData) {
 								GpxUiHelper.setupGPXChart(app, chart, 4);
-								chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_SPEED, SPEED)));
+								chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_SPEED, SPEED, null)));
 								updateChart(chart);
 								chart.setVisibility(View.VISIBLE);
 							} else {
@@ -1144,7 +1146,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			LatLon location = null;
 			WptPt wpt = null;
 			gpxItem.chartTypes = null;
-			List<ILineDataSet> ds = getDataSets(null, tabType);
+			List<ILineDataSet> ds = getDataSets(null, tabType, null, null);
 			if (ds != null && ds.size() > 0) {
 				gpxItem.chartTypes = new GPXDataSetType[ds.size()];
 				for (int i = 0; i < ds.size(); i++) {

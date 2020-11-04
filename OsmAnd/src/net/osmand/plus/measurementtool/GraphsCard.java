@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -293,9 +294,9 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 		boolean hasElevationData = analysis.hasElevationData;
 		boolean hasSpeedData = analysis.isSpeedSpecified();
 		addCommonType(R.string.shared_string_overview, true, hasElevationData, ALTITUDE, SLOPE);
-		addCommonType(R.string.altitude, true, hasElevationData, ALTITUDE);
-		addCommonType(R.string.shared_string_slope, true, hasElevationData, SLOPE);
-		addCommonType(R.string.map_widget_speed, false, hasSpeedData, SPEED);
+		addCommonType(R.string.altitude, true, hasElevationData, ALTITUDE, null);
+		addCommonType(R.string.shared_string_slope, true, hasElevationData, SLOPE, null);
+		addCommonType(R.string.map_widget_speed, false, hasSpeedData, SPEED, null);
 
 		// update custom graph data
 		List<RouteStatistics> routeStatistics = calculateRouteStatistics();
@@ -317,10 +318,11 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 	private void addCommonType(int titleId,
 	                           boolean canBeCalculated,
 	                           boolean hasData,
-	                           LineGraphType ... lineGraphTypes) {
+	                           LineGraphType firstType,
+	                           LineGraphType secondType) {
 		OsmandApplication app = getMyApplication();
 		String title = app.getString(titleId);
-		graphTypes.add(new CommonGraphType(title, canBeCalculated, hasData, lineGraphTypes));
+		graphTypes.add(new CommonGraphType(title, canBeCalculated, hasData, firstType, secondType));
 	}
 
 	private void setupVisibleType() {
@@ -400,12 +402,14 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 	private class CommonGraphType extends  GraphType<LineData> {
 
 		private boolean hasData;
-		private LineGraphType[] lineGraphTypes;
+		private LineGraphType firstType;
+		private LineGraphType secondType;
 
-		public CommonGraphType(String title, boolean canBeCalculated, boolean hasData, LineGraphType ... lineGraphTypes) {
+		public CommonGraphType(String title, boolean canBeCalculated, boolean hasData, @NonNull LineGraphType firstType, @Nullable LineGraphType secondType) {
 			super(title, canBeCalculated);
 			this.hasData = hasData;
-			this.lineGraphTypes = lineGraphTypes;
+			this.firstType = firstType;
+			this.secondType = secondType;
 		}
 
 		@Override
@@ -417,7 +421,7 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 		public LineData getChartData() {
 			GpxUiHelper.setupGPXChart(commonGraphAdapter.getChart(), 4, 24f, 16f, !nightMode, true);
 			List<ILineDataSet> dataSets = GpxUiHelper.getDataSets(commonGraphAdapter.getChart(),
-					app, analysis, false, lineGraphTypes);
+					app, analysis, firstType, secondType, false);
 			return !Algorithms.isEmpty(dataSets) ? new LineData(dataSets) : null;
 		}
 	}

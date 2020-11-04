@@ -2056,52 +2056,34 @@ public class GpxUiHelper {
 	public static List<ILineDataSet> getDataSets(LineChart chart,
 	                                             OsmandApplication app,
 	                                             GPXTrackAnalysis analysis,
-	                                             boolean calcWithoutGaps,
-	                                             LineGraphType ... types) {
-		if (app == null || chart == null || analysis == null || types == null) {
+	                                             @NonNull LineGraphType firstType,
+	                                             @Nullable LineGraphType secondType,
+	                                             boolean calcWithoutGaps) {
+		if (app == null || chart == null || analysis == null) {
 			return new ArrayList<>();
 		}
-		if (types.length > 1) {
-			return getDataSetsImpl(chart, app, analysis, calcWithoutGaps, types[0], types[1]);
-		} else {
-			return getDataSetsImpl(chart, app, analysis, calcWithoutGaps, types[0]);
-		}
-	}
-
-	private static List<ILineDataSet> getDataSetsImpl(@NonNull LineChart chart,
-	                                                  @NonNull OsmandApplication app,
-	                                                  @NonNull GPXTrackAnalysis analysis,
-	                                                  boolean calcWithoutGaps,
-	                                                  @NonNull LineGraphType type) {
 		List<ILineDataSet> result = new ArrayList<>();
-		ILineDataSet dataSet = getDataSet(chart, app, analysis, calcWithoutGaps, false, type);
-		if (dataSet != null) {
-			result.add(dataSet);
-		}
-		return result;
-	}
-
-	private static List<ILineDataSet> getDataSetsImpl(@NonNull LineChart chart,
-	                                                  @NonNull OsmandApplication app,
-	                                                  @NonNull GPXTrackAnalysis analysis,
-	                                                  boolean calcWithoutGaps,
-	                                                  @NonNull LineGraphType type1,
-	                                                  @NonNull LineGraphType type2) {
-		List<ILineDataSet> result = new ArrayList<>();
-		OrderedLineDataSet dataSet1 = getDataSet(chart, app, analysis, calcWithoutGaps, false, type1);
-		OrderedLineDataSet dataSet2 = getDataSet(chart, app, analysis, calcWithoutGaps, true, type2);
-		if (dataSet1 == null && dataSet2 == null) {
-			return new ArrayList<>();
-		} else if (dataSet1 == null) {
-			result.add(dataSet2);
-		} else if (dataSet2 == null) {
-			result.add(dataSet1);
-		} else if (dataSet1.getPriority() < dataSet2.getPriority()) {
-			result.add(dataSet2);
-			result.add(dataSet1);
+		if (secondType == null) {
+			ILineDataSet dataSet = getDataSet(chart, app, analysis, calcWithoutGaps, false, firstType);
+			if (dataSet != null) {
+				result.add(dataSet);
+			}
 		} else {
-			result.add(dataSet1);
-			result.add(dataSet2);
+			OrderedLineDataSet dataSet1 = getDataSet(chart, app, analysis, calcWithoutGaps, false, firstType);
+			OrderedLineDataSet dataSet2 = getDataSet(chart, app, analysis, calcWithoutGaps, true, secondType);
+			if (dataSet1 == null && dataSet2 == null) {
+				return new ArrayList<>();
+			} else if (dataSet1 == null) {
+				result.add(dataSet2);
+			} else if (dataSet2 == null) {
+				result.add(dataSet1);
+			} else if (dataSet1.getPriority() < dataSet2.getPriority()) {
+				result.add(dataSet2);
+				result.add(dataSet1);
+			} else {
+				result.add(dataSet1);
+				result.add(dataSet2);
+			}
 		}
 		return result;
 	}
