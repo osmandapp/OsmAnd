@@ -208,7 +208,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	public long getSize() {
-		return size;
+		return file != null && !file.isDirectory() ? file.length() : size;
 	}
 
 	public void setSize(long size) {
@@ -273,6 +273,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 					dest = renameFile(dest);
 				}
 				if (dest.getParentFile() != null && !dest.getParentFile().exists()) {
+					//noinspection ResultOfMethodCallIgnored
 					dest.getParentFile().mkdirs();
 				}
 				output = new FileOutputStream(dest);

@@ -111,6 +111,8 @@ public class SettingsHelper {
 
 	public interface SettingsExportListener {
 		void onSettingsExportFinished(@NonNull File file, boolean succeed);
+
+		void onSettingsExportProgressUpdate(int value);
 	}
 
 	public enum ImportType {
@@ -137,6 +139,10 @@ public class SettingsHelper {
 	public boolean isImportDone() {
 		ImportAsyncTask importTask = this.importTask;
 		return importTask == null || importTask.isImportDone();
+	}
+
+	public ExportAsyncTask getExportAsyncTask(File file) {
+		return exportAsyncTasks.get(file);
 	}
 
 	public boolean isFileExporting(File file) {
@@ -200,28 +206,41 @@ public class SettingsHelper {
 		}
 	}
 
-	@SuppressLint("StaticFieldLeak")
-	private class ExportAsyncTask extends AsyncTask<Void, Void, Boolean> {
+	public interface ExportProgress {
+		void setProgress(int value);
+	}
 
-		private SettingsExporter exporter;
-		private File file;
+	@SuppressLint("StaticFieldLeak")
+	public class ExportAsyncTask extends AsyncTask<Void, Integer, Boolean> {
+
+		private final SettingsExporter exporter;
+		private final File file;
 		private SettingsExportListener listener;
+		private final ExportProgress exportProgress;
+
 
 		ExportAsyncTask(@NonNull File settingsFile,
-						@Nullable SettingsExportListener listener,
-						@NonNull List<SettingsItem> items, boolean exportItemsFiles) {
+		                @Nullable SettingsExportListener listener,
+		                @NonNull List<SettingsItem> items, boolean exportItemsFiles) {
 			this.file = settingsFile;
 			this.listener = listener;
 			this.exporter = new SettingsExporter(exportItemsFiles);
 			for (SettingsItem item : items) {
 				exporter.addSettingsItem(item);
 			}
+			exportProgress = new ExportProgress() {
+				@Override
+				public void setProgress(int value) {
+					exporter.setExportCancel(isCancelled());
+					publishProgress(value);
+				}
+			};
 		}
 
 		@Override
 		protected Boolean doInBackground(Void... voids) {
 			try {
-				exporter.exportSettings(file);
+				exporter.exportSettings(file, exportProgress);
 				return true;
 			} catch (JSONException e) {
 				LOG.error("Failed to export items to: " + file.getName(), e);
@@ -232,11 +251,26 @@ public class SettingsHelper {
 		}
 
 		@Override
+		protected void onProgressUpdate(Integer... values) {
+			super.onProgressUpdate(values);
+			if (listener != null) {
+				listener.onSettingsExportProgressUpdate(values[0]);
+			}
+		}
+
+		@Override
 		protected void onPostExecute(Boolean success) {
 			exportAsyncTasks.remove(file);
 			if (listener != null) {
 				listener.onSettingsExportFinished(file, success);
 			}
+		}
+
+		@Override
+		protected void onCancelled() {
+			super.onCancelled();
+			//noinspection ResultOfMethodCallIgnored
+			file.delete();
 		}
 	}
 
@@ -416,6 +450,8 @@ public class SettingsHelper {
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener, @NonNull List<SettingsItem> items, boolean exportItemsFiles) {
 		File file = new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT);
 		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items, exportItemsFiles);
+
+
 		exportAsyncTasks.put(file, exportAsyncTask);
 		exportAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}

@@ -21,6 +21,7 @@ class SettingsExporter {
 	private Map<String, SettingsItem> items;
 	private Map<String, String> additionalParams;
 	private boolean exportItemsFiles;
+	private boolean exportCancel;
 
 	SettingsExporter(boolean exportItemsFiles) {
 		this.exportItemsFiles = exportItemsFiles;
@@ -35,11 +36,15 @@ class SettingsExporter {
 		items.put(item.getName(), item);
 	}
 
+	public void setExportCancel(boolean exportCancel) {
+		this.exportCancel = exportCancel;
+	}
+
 	void addAdditionalParam(String key, String value) {
 		additionalParams.put(key, value);
 	}
 
-	void exportSettings(File file) throws JSONException, IOException {
+	void exportSettings(File file, SettingsHelper.ExportProgress exportProgress) throws JSONException, IOException {
 		JSONObject json = createItemsJson();
 		OutputStream os = new BufferedOutputStream(new FileOutputStream(file), SettingsHelper.BUFFER);
 		ZipOutputStream zos = new ZipOutputStream(os);
@@ -49,7 +54,7 @@ class SettingsExporter {
 			zos.write(json.toString(2).getBytes("UTF-8"));
 			zos.closeEntry();
 			if (exportItemsFiles) {
-				writeItemFiles(zos);
+				writeItemFiles(zos, exportProgress);
 			}
 			zos.flush();
 			zos.finish();
@@ -59,7 +64,8 @@ class SettingsExporter {
 		}
 	}
 
-	private void writeItemFiles(ZipOutputStream zos) throws IOException {
+	private void writeItemFiles(ZipOutputStream zos, SettingsHelper.ExportProgress exportProgress) throws IOException {
+		int progress = 0;
 		for (SettingsItem item : items.values()) {
 			SettingsItemWriter<? extends SettingsItem> writer = item.getWriter();
 			if (writer != null) {
@@ -68,6 +74,17 @@ class SettingsExporter {
 					fileName = item.getDefaultFileName();
 				}
 				writer.writeEntry(fileName, zos);
+			}
+			if (exportCancel) {
+				exportCancel = false;
+				return;
+			}
+			if (item instanceof FileSettingsItem) {
+				int size = (int) ((FileSettingsItem) item).getSize() / 1000000;
+				progress += size;
+				if (exportProgress != null) {
+					exportProgress.setProgress(progress);
+				}
 			}
 		}
 	}

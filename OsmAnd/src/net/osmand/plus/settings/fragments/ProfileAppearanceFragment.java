@@ -735,6 +735,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 						app.showToastMessage(R.string.profile_backup_failed);
 					}
 				}
+
+				@Override
+				public void onSettingsExportProgressUpdate(int value) {
+
+				}
 			};
 		}
 		return exportListener;
