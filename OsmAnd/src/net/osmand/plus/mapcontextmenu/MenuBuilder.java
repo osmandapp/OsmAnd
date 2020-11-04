@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -50,7 +52,6 @@ import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.osmedit.opr.OPRWebviewActivity;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
-import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -61,7 +62,11 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
+import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.*;
@@ -126,8 +131,15 @@ public class MenuBuilder {
 
 		@Override
 		public void uploadImageToPlace(View view, InputStream image) {
+			//compress image
+			BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
+			Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			bmp.compress(Bitmap.CompressFormat.PNG, 70, os);
+			byte[] buff = os.toByteArray();
+			InputStream serverData = new ByteArrayInputStream(buff);
 			String url = BuildConfig.OPR_BASE_URL + "api/ipfs/image";
-			String response = NetworkUtils.sendPostDataRequest(url, image);
+			String response = NetworkUtils.sendPostDataRequest(url, serverData);
 			if (response != null) {
 				int res = 0;
 				try {
@@ -147,6 +159,8 @@ public class MenuBuilder {
 					String str = MessageFormat.format(view.getResources()
 							.getString(R.string.successfully_uploaded_pattern), 1, 1);
 					showMessageWith(view, str);
+					//refresh the image
+					startLoadingImages();
 				}
 			} else {
 				showMessageWith(view, view.getResources().getString(R.string.cannot_upload_image));

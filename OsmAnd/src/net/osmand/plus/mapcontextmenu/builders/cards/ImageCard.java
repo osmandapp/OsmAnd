@@ -442,6 +442,7 @@ public abstract class ImageCard extends AbstractCard {
 				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
 						"Requesting location images...", false, false);
 				if (response != null) {
+					//FIXME BUG {"objects":[],"count":0}
 					getPicturesForPlace(result, response);
 					String[] id = getIdFromResponse(response);
 					listener.onOPRPlaceIdAcquired(id);
@@ -533,7 +534,7 @@ public abstract class ImageCard extends AbstractCard {
 			try {
 				if (!Algorithms.isEmpty(response)) {
 					JSONArray obj = new JSONObject(response).getJSONArray("objects");
-					JSONArray images = ((JSONObject) ((JSONObject) obj.get(0)).get("images")).getJSONArray("outdoor");
+					JSONArray images = ((JSONObject) ((JSONObject) obj.get(0)).get("images")).getJSONArray("reviews");
 					if (images.length() > 0) {
 						for (int i = 0; i < images.length(); i++) {
 							try {

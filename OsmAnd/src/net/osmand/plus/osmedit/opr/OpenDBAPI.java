@@ -56,7 +56,7 @@ public class OpenDBAPI {
 		Map<String, Object> change = new TreeMap<>();
 		Map<String, Object> images = new TreeMap<>();
 		Map<String, Object> outdoor = new TreeMap<>();
-		outdoor.put("outdoor", imageResponseList);
+		outdoor.put("reviews", imageResponseList);
 		images.put("append", outdoor);
 		change.put("version", "increment");
 		change.put("images", images);
