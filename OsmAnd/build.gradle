@@ -130,10 +130,6 @@ android {
 			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-freedev.xml"
 		}
-		freecustom {
-			java.srcDirs = ["src-google"]
-			manifest.srcFile "AndroidManifest-freecustom.xml"
-		}
 		freehuawei {
 			java.srcDirs = ["src-huawei"]
 			manifest.srcFile "AndroidManifest-freehuawei.xml"
