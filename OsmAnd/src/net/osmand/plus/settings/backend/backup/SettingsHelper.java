@@ -216,7 +216,6 @@ public class SettingsHelper {
 		private final SettingsExporter exporter;
 		private final File file;
 		private SettingsExportListener listener;
-		private final ExportProgress exportProgress;
 
 
 		ExportAsyncTask(@NonNull File settingsFile,
@@ -224,23 +223,23 @@ public class SettingsHelper {
 		                @NonNull List<SettingsItem> items, boolean exportItemsFiles) {
 			this.file = settingsFile;
 			this.listener = listener;
-			this.exporter = new SettingsExporter(exportItemsFiles);
-			for (SettingsItem item : items) {
-				exporter.addSettingsItem(item);
-			}
-			exportProgress = new ExportProgress() {
+			ExportProgress exportProgress = new ExportProgress() {
 				@Override
 				public void setProgress(int value) {
 					exporter.setExportCancel(isCancelled());
 					publishProgress(value);
 				}
 			};
+			this.exporter = new SettingsExporter(exportItemsFiles, exportProgress);
+			for (SettingsItem item : items) {
+				exporter.addSettingsItem(item);
+			}
 		}
 
 		@Override
 		protected Boolean doInBackground(Void... voids) {
 			try {
-				exporter.exportSettings(file, exportProgress);
+				exporter.exportSettings(file);
 				return true;
 			} catch (JSONException e) {
 				LOG.error("Failed to export items to: " + file.getName(), e);
@@ -252,7 +251,6 @@ public class SettingsHelper {
 
 		@Override
 		protected void onProgressUpdate(Integer... values) {
-			super.onProgressUpdate(values);
 			if (listener != null) {
 				listener.onSettingsExportProgressUpdate(values[0]);
 			}
@@ -843,7 +841,7 @@ public class SettingsHelper {
 		return settingsToOperate;
 	}
 
-	public void sortData(List<File> files) {
+	private void sortData(List<File> files) {
 		final Collator collator = OsmAndCollator.primaryCollator();
 		Collections.sort(files, new Comparator<File>() {
 			@Override

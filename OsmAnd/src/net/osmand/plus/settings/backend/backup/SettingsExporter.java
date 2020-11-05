@@ -16,15 +16,19 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.*;
+
 class SettingsExporter {
 
 	private Map<String, SettingsItem> items;
 	private Map<String, String> additionalParams;
 	private boolean exportItemsFiles;
 	private boolean exportCancel;
+	private final ExportProgress exportProgress;
 
-	SettingsExporter(boolean exportItemsFiles) {
+	SettingsExporter(boolean exportItemsFiles, ExportProgress exportProgress) {
 		this.exportItemsFiles = exportItemsFiles;
+		this.exportProgress = exportProgress;
 		items = new LinkedHashMap<>();
 		additionalParams = new LinkedHashMap<>();
 	}
@@ -44,9 +48,9 @@ class SettingsExporter {
 		additionalParams.put(key, value);
 	}
 
-	void exportSettings(File file, SettingsHelper.ExportProgress exportProgress) throws JSONException, IOException {
+	void exportSettings(File file) throws JSONException, IOException {
 		JSONObject json = createItemsJson();
-		OutputStream os = new BufferedOutputStream(new FileOutputStream(file), SettingsHelper.BUFFER);
+		OutputStream os = new BufferedOutputStream(new FileOutputStream(file), BUFFER);
 		ZipOutputStream zos = new ZipOutputStream(os);
 		try {
 			ZipEntry entry = new ZipEntry("items.json");
@@ -54,7 +58,7 @@ class SettingsExporter {
 			zos.write(json.toString(2).getBytes("UTF-8"));
 			zos.closeEntry();
 			if (exportItemsFiles) {
-				writeItemFiles(zos, exportProgress);
+				writeItemFiles(zos);
 			}
 			zos.flush();
 			zos.finish();
@@ -64,7 +68,7 @@ class SettingsExporter {
 		}
 	}
 
-	private void writeItemFiles(ZipOutputStream zos, SettingsHelper.ExportProgress exportProgress) throws IOException {
+	private void writeItemFiles(ZipOutputStream zos) throws IOException {
 		int progress = 0;
 		for (SettingsItem item : items.values()) {
 			SettingsItemWriter<? extends SettingsItem> writer = item.getWriter();
@@ -80,7 +84,7 @@ class SettingsExporter {
 				return;
 			}
 			if (item instanceof FileSettingsItem) {
-				int size = (int) ((FileSettingsItem) item).getSize() / 1000000;
+				int size = (int) ((FileSettingsItem) item).getSize() / (1 << 20);
 				progress += size;
 				if (exportProgress != null) {
 					exportProgress.setProgress(progress);
@@ -91,7 +95,7 @@ class SettingsExporter {
 
 	private JSONObject createItemsJson() throws JSONException {
 		JSONObject json = new JSONObject();
-		json.put("version", SettingsHelper.VERSION);
+		json.put("version", VERSION);
 		for (Map.Entry<String, String> param : additionalParams.entrySet()) {
 			json.put(param.getKey(), param.getValue());
 		}

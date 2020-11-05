@@ -74,8 +74,8 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private SettingsExportListener exportListener;
 	private ProgressDialog progress;
-	int progressMax;
-	int progressValue;
+	private int progressMax;
+	private int progressValue;
 
 	private long exportStartTime;
 
@@ -295,7 +295,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 				maxProgress += ((FileSettingsItem) item).getSize();
 			}
 		}
-		return (int) maxProgress / 1000000;
+		return (int) maxProgress / (1 << 20);
 	}
 
 	private String getFileName() {
@@ -339,8 +339,6 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private void cancelExport() {
 		app.getSettingsHelper().getExportAsyncTask(getExportFile()).cancel(true);
-		//noinspection ResultOfMethodCallIgnored
-		getExportFile().delete();
 		progress.dismiss();
 		dismiss();
 	}

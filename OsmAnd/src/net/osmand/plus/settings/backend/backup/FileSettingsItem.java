@@ -24,14 +24,15 @@ import java.util.zip.ZipOutputStream;
 public class FileSettingsItem extends StreamSettingsItem {
 
 	public enum FileSubtype {
-		UNKNOWN("", null, -1),
-		OTHER("other", "", -1),
+		UNKNOWN("", null, R.drawable.ic_type_file),
+		OTHER("other", "", R.drawable.ic_type_file),
 		ROUTING_CONFIG("routing_config", IndexConstants.ROUTING_PROFILES_DIR, R.drawable.ic_action_route_distance),
 		RENDERING_STYLE("rendering_style", IndexConstants.RENDERERS_DIR, R.drawable.ic_action_map_style),
 		WIKI_MAP("wiki_map", IndexConstants.WIKI_INDEX_DIR, R.drawable.ic_plugin_wikipedia),
 		SRTM_MAP("srtm_map", IndexConstants.SRTM_INDEX_DIR, R.drawable.ic_plugin_srtm),
 		OBF_MAP("obf_map", IndexConstants.MAPS_PATH, R.drawable.ic_map),
 		TILES_MAP("tiles_map", IndexConstants.TILES_INDEX_DIR, R.drawable.ic_map),
+		ROAD_MAP("road_map", IndexConstants.ROADS_INDEX_DIR, R.drawable.ic_map),
 		GPX("gpx", IndexConstants.GPX_INDEX_DIR, R.drawable.ic_action_route_distance),
 		TTS_VOICE("tts_voice", IndexConstants.VOICE_INDEX_DIR, R.drawable.ic_action_volume_up),
 		VOICE("voice", IndexConstants.VOICE_INDEX_DIR, R.drawable.ic_action_volume_up),
@@ -49,7 +50,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 
 		public boolean isMap() {
-			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP || this == TILES_MAP;
+			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP || this == TILES_MAP || this == ROAD_MAP;
 		}
 
 		public String getSubtypeName() {
@@ -60,6 +61,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 			return subtypeFolder;
 		}
 
+		@DrawableRes
 		public int getIconId() {
 			return iconId;
 		}
@@ -208,7 +210,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	public long getSize() {
-		return file != null && !file.isDirectory() ? file.length() : size;
+		return size == 0 ? file != null && !file.isDirectory() ? file.length() : size : size;
 	}
 
 	public void setSize(long size) {
@@ -231,23 +233,21 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	private File renameFile(File oldFile) {
-		int number = 0;
 		String oldPath = oldFile.getAbsolutePath();
-		String suffix;
 		String prefix;
 		if (file.isDirectory()) {
 			prefix = file.getAbsolutePath();
-			suffix = oldPath.replace(file.getAbsolutePath(), "");
 		} else if (oldPath.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
-			suffix = IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
 		} else if (oldPath.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
 			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT));
-			suffix = IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
+		} else if (oldPath.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT));
 		} else {
 			prefix = oldPath.substring(0, oldPath.lastIndexOf("."));
-			suffix = "." + Algorithms.getFileExtension(oldFile);
 		}
+		String suffix = oldPath.replace(prefix, "");
+		int number = 0;
 		while (true) {
 			number++;
 			String newName = prefix + "_" + number + suffix;
