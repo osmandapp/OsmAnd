@@ -22,13 +22,14 @@ class SettingsExporter {
 
 	private Map<String, SettingsItem> items;
 	private Map<String, String> additionalParams;
-	private boolean exportItemsFiles;
-	private boolean exportCancel;
-	private final ExportProgress exportProgress;
+	private ExportProgressListener progressListener;
 
-	SettingsExporter(boolean exportItemsFiles, ExportProgress exportProgress) {
+	private boolean cancelled;
+	private boolean exportItemsFiles;
+
+	SettingsExporter(ExportProgressListener progressListener, boolean exportItemsFiles) {
+		this.progressListener = progressListener;
 		this.exportItemsFiles = exportItemsFiles;
-		this.exportProgress = exportProgress;
 		items = new LinkedHashMap<>();
 		additionalParams = new LinkedHashMap<>();
 	}
@@ -40,8 +41,8 @@ class SettingsExporter {
 		items.put(item.getName(), item);
 	}
 
-	public void setExportCancel(boolean exportCancel) {
-		this.exportCancel = exportCancel;
+	public void setCancelled(boolean cancelled) {
+		this.cancelled = cancelled;
 	}
 
 	void addAdditionalParam(String key, String value) {
@@ -79,15 +80,14 @@ class SettingsExporter {
 				}
 				writer.writeEntry(fileName, zos);
 			}
-			if (exportCancel) {
-				exportCancel = false;
+			if (cancelled) {
 				return;
 			}
 			if (item instanceof FileSettingsItem) {
 				int size = (int) ((FileSettingsItem) item).getSize() / (1 << 20);
 				progress += size;
-				if (exportProgress != null) {
-					exportProgress.setProgress(progress);
+				if (progressListener != null) {
+					progressListener.updateProgress(progress);
 				}
 			}
 		}

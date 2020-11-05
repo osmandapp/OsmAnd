@@ -210,7 +210,12 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	public long getSize() {
-		return size == 0 ? file != null && !file.isDirectory() ? file.length() : size : size;
+		if (size != 0) {
+			return size;
+		} else if (file != null && !file.isDirectory()) {
+			return file.length();
+		}
+		return 0;
 	}
 
 	public void setSize(long size) {
@@ -307,26 +312,26 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 				@Override
 				public void writeEntry(String fileName, @NonNull ZipOutputStream zos) throws IOException {
-					zipDirsWithFiles(file, zos);
+					writeDirWithFiles(file, zos);
 				}
 
-				public void zipDirsWithFiles(File file, ZipOutputStream zos) throws IOException {
-					if (file == null) {
-						return;
-					}
-					if (file.isDirectory()) {
-						File[] fs = file.listFiles();
-						if (fs != null) {
-							for (File c : fs) {
-								zipDirsWithFiles(c, zos);
+				public void writeDirWithFiles(File file, ZipOutputStream zos) throws IOException {
+					if (file != null) {
+						if (file.isDirectory()) {
+							File[] files = file.listFiles();
+							if (files != null) {
+								for (File subfolderFile : files) {
+									writeDirWithFiles(subfolderFile, zos);
+								}
 							}
+						} else {
+							String subtypeFolder = getSubtype().getSubtypeFolder();
+							String zipEntryName = Algorithms.isEmpty(subtypeFolder)
+									? file.getName()
+									: file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
+							setInputStream(new FileInputStream(file));
+							super.writeEntry(zipEntryName, zos);
 						}
-					} else {
-						String zipEntryName = Algorithms.isEmpty(getSubtype().getSubtypeFolder())
-								? file.getName()
-								: file.getPath().substring(file.getPath().indexOf(getSubtype().getSubtypeFolder()) - 1);
-						setInputStream(new FileInputStream(file));
-						super.writeEntry(zipEntryName, zos);
 					}
 				}
 			};

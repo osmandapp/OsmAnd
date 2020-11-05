@@ -338,7 +338,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	private void cancelExport() {
-		app.getSettingsHelper().getExportAsyncTask(getExportFile()).cancel(true);
+		app.getSettingsHelper().cancelExportForFile(getExportFile());
 		progress.dismiss();
 		dismiss();
 	}

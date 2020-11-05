@@ -37,6 +37,7 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
@@ -53,8 +54,8 @@ import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.*;
 import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 
 /*
 	Usage:
@@ -141,8 +142,12 @@ public class SettingsHelper {
 		return importTask == null || importTask.isImportDone();
 	}
 
-	public ExportAsyncTask getExportAsyncTask(File file) {
-		return exportAsyncTasks.get(file);
+	public boolean cancelExportForFile(File file) {
+		ExportAsyncTask exportTask = exportAsyncTasks.get(file);
+		if (exportTask != null && (exportTask.getStatus() == AsyncTask.Status.RUNNING)) {
+			return exportTask.cancel(true);
+		}
+		return false;
 	}
 
 	public boolean isFileExporting(File file) {
@@ -206,31 +211,23 @@ public class SettingsHelper {
 		}
 	}
 
-	public interface ExportProgress {
-		void setProgress(int value);
+	public interface ExportProgressListener {
+		void updateProgress(int value);
 	}
 
 	@SuppressLint("StaticFieldLeak")
 	public class ExportAsyncTask extends AsyncTask<Void, Integer, Boolean> {
 
-		private final SettingsExporter exporter;
-		private final File file;
+		private File file;
+		private SettingsExporter exporter;
 		private SettingsExportListener listener;
 
-
 		ExportAsyncTask(@NonNull File settingsFile,
-		                @Nullable SettingsExportListener listener,
-		                @NonNull List<SettingsItem> items, boolean exportItemsFiles) {
+						@Nullable SettingsExportListener listener,
+						@NonNull List<SettingsItem> items, boolean exportItemsFiles) {
 			this.file = settingsFile;
 			this.listener = listener;
-			ExportProgress exportProgress = new ExportProgress() {
-				@Override
-				public void setProgress(int value) {
-					exporter.setExportCancel(isCancelled());
-					publishProgress(value);
-				}
-			};
-			this.exporter = new SettingsExporter(exportItemsFiles, exportProgress);
+			this.exporter = new SettingsExporter(getProgressListener(), exportItemsFiles);
 			for (SettingsItem item : items) {
 				exporter.addSettingsItem(item);
 			}
@@ -266,9 +263,17 @@ public class SettingsHelper {
 
 		@Override
 		protected void onCancelled() {
-			super.onCancelled();
-			//noinspection ResultOfMethodCallIgnored
-			file.delete();
+			Algorithms.removeAllFiles(file);
+		}
+
+		private ExportProgressListener getProgressListener() {
+			return new ExportProgressListener() {
+				@Override
+				public void updateProgress(int value) {
+					exporter.setCancelled(isCancelled());
+					publishProgress(value);
+				}
+			};
 		}
 	}
 
@@ -448,8 +453,6 @@ public class SettingsHelper {
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener, @NonNull List<SettingsItem> items, boolean exportItemsFiles) {
 		File file = new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT);
 		ExportAsyncTask exportAsyncTask = new ExportAsyncTask(file, listener, items, exportItemsFiles);
-
-
 		exportAsyncTasks.put(file, exportAsyncTask);
 		exportAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -580,7 +583,7 @@ public class SettingsHelper {
 		List<File> files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
 				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA);
 		if (!files.isEmpty()) {
-			sortData(files);
+			sortLocalFiles(files);
 			dataList.put(ExportSettingsType.OFFLINE_MAPS, files);
 		}
 		files = getFilesByType(localIndexInfoList, LocalIndexType.TTS_VOICE_DATA);
@@ -841,7 +844,7 @@ public class SettingsHelper {
 		return settingsToOperate;
 	}
 
-	private void sortData(List<File> files) {
+	private void sortLocalFiles(List<File> files) {
 		final Collator collator = OsmAndCollator.primaryCollator();
 		Collections.sort(files, new Comparator<File>() {
 			@Override
