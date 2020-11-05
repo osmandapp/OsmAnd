@@ -3943,4 +3943,5 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd використовує MGRS, який подібний формату UTM NATO.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Додайте принаймні дві точки.</string>
 </resources>
