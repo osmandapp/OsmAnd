@@ -3849,4 +3849,5 @@
     <string name="poi_parking_sheds">Přístřešky</string>
     <string name="poi_parking_rooftop">Střešní</string>
     <string name="poi_gpx_point">Bod GPX</string>
+    <string name="poi_radar_tower">Radarová věž</string>
 </resources>

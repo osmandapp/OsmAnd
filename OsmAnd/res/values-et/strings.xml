@@ -3795,4 +3795,7 @@
     <string name="icon_group_symbols">Sümbolid</string>
     <string name="icon_group_service">Teenused</string>
     <string name="icon_group_transport">Transport</string>
+    <string name="mgrs_format_descr">OsmAnd kasutab MGRS-vormingut, mis on sarnane NATO UTM-vormingule.</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="navigate_point_mgrs">MGRS</string>
 </resources>

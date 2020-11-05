@@ -1710,7 +1710,7 @@
     <string name="poi_deleted_localy">POI ще бъдат изтрити, след като качите Вашите промени</string>
     <string name="user_hates_app_get_feedback_long">Моля, кажете ни какви промени искате в това приложение.</string>
     <string name="we_really_care_about_your_opinion">Вашето мнение е важно за нас.</string>
-    <string name="use_fast_recalculation_desc">Преизчисляване само началната част от дълги маршрути</string>
+    <string name="use_fast_recalculation_desc">Преизчисляване само на началото на маршрута. Може да се ползва за дълги маршрути.</string>
     <string name="create_poi_link_to_osm_doc"><u>Онлайн OSM</u> класификация на картите с изображения</string>
     <string name="free_downloads_used_description">Показва използваните безплатни файлове за изтегляне</string>
     <string name="save_track_to_gpx_globally_descr">Записването в GPX може да бъде включвано и изключвано от основния екран</string>
@@ -2187,4 +2187,35 @@
     <string name="icon_group_emergency">Аварийни служби</string>
     <string name="icon_group_travel">Пътуване</string>
     <string name="clear_osm_token">Изчистете маркера OAuth на OpenStreetMap</string>
+    <string name="all_previous_segments_will_be_recalc">Всички предишни сегменти ще бъдат преизчислени спрямо избрания профил.</string>
+    <string name="open_saved_track">Отваряне на записан трак</string>
+    <string name="shared_string_is_saved">е записан</string>
+    <string name="one_point_error">Моля, добавете поне две точки.</string>
+    <string name="shared_string_redo">Повтаряне</string>
+    <string name="sort_last_modified">Последна промяна</string>
+    <string name="sort_name_descending">Име: Я - А</string>
+    <string name="sort_name_ascending">Име: А - Я</string>
+    <string name="start_finish_icons">Икони за начало/край</string>
+    <string name="contour_lines_thanks">Благодарим ви, че закупихте \"Контурни линии\"</string>
+    <string name="osm_live_payment_desc_hw">Абонаментът се таксува за избрания период. Можете да го отмените в AppGallery по всяко време.</string>
+    <string name="osm_live_payment_subscription_management_hw">Заплащането ще ви бъде приспаднато от вашия акаунт в AppGallery при потвърждаване на покупката.
+\n
+\nАбонаментът се удължава автоматично, ако не бъде отменен преди датата на подновяване. От вашата сметка се удържат пари само в датата на подновяване.
+\n
+\nМожете да управлявате или да прекъснете абонаментите си в настройките на AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Избягване на пътеки</string>
+    <string name="routing_attr_avoid_footways_name">Избягване на пътеки</string>
+    <string name="development">Разработка</string>
+    <string name="use_live_public_transport">Данни на OsmAnd Live</string>
+    <string name="use_live_routing">Данни на OsmAnd Live</string>
+    <string name="complex_routing_descr">Двустъпково изчисляване на маршрута за автомобилна навигация.</string>
+    <string name="use_native_pt_desc">Превключете на Java (безопасен режим) изчисляването на маршрути за обществения транспорт</string>
+    <string name="perform_oauth_authorization_description">Влезте с OAuth, за да ползвате всички функции на osmedit</string>
+    <string name="perform_oauth_authorization">Вход с OAuth</string>
+    <string name="system_default_theme">Системна настройка</string>
+    <string name="all_next_segments">Всички следващи сегменти</string>
+    <string name="previous_segment">Предишен сегмент</string>
+    <string name="all_previous_segments">Всички предишни сегменти</string>
+    <string name="only_selected_segment_recalc">Само избраният сегмент ще бъде преизчислен съобразно избрания профил.</string>
+    <string name="all_next_segments_will_be_recalc">Всички следващи сегменти ще бъдат преизчислени с помощта на избрания профил.</string>
 </resources>

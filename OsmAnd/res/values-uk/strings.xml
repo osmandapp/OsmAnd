@@ -3940,4 +3940,7 @@
     <string name="icon_group_sport">Спорт</string>
     <string name="icon_group_emergency">Аварійні служби</string>
     <string name="icon_group_travel">Мандрівка</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd використовує MGRS, який подібний формату UTM NATO.</string>
 </resources>

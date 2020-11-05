@@ -3943,4 +3943,7 @@
     <string name="icon_group_sport">Sporto</string>
     <string name="icon_group_emergency">Vivsavo</string>
     <string name="icon_group_travel">Vojaĝo</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd uzas MGRS, kiu estas simila al la formo UTM NATO.</string>
 </resources>

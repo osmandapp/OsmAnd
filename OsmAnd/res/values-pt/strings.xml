@@ -3829,7 +3829,7 @@
     <string name="reverse_route">Rota inversa</string>
     <string name="route_between_points_whole_track_button_desc">O trilho inteiro será recalculado a usar o perfil selecionado.</string>
     <string name="route_between_points_next_segment_button_desc">Somente o próximo segmento será recalculado a usar o perfil selecionado.</string>
-    <string name="route_between_points_desc">Selecione como ligar pontos, por uma linha reta ou a calcular uma rota entre eles como especificado abaixo.</string>
+    <string name="route_between_points_desc">Escolha como ligar os pontos por uma linha reta ou calcule uma rota entre eles como especificado abaixo.</string>
     <string name="whole_track">Trilho inteiro</string>
     <string name="next_segment">Próximo segmento</string>
     <string name="route_between_points_warning_desc">Em seguida, encaixe a sua pista na estrada mais próxima permitida com um dos seus perfis de navegação para usar esta opção.</string>
@@ -3937,4 +3937,16 @@
 \nO gráfico estará disponível após o recalculo.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="app_mode_gap">Lacuna</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">O OsmAnd utiliza o MGRS, que é semelhante ao formato UTM NATO.</string>
+    <string name="shared_string_local_maps">Mapas locais</string>
+    <string name="icon_group_amenity">Amenidade</string>
+    <string name="icon_group_special">Especial</string>
+    <string name="icon_group_transport">Transporte</string>
+    <string name="icon_group_service">Serviço</string>
+    <string name="icon_group_symbols">Símbolos</string>
+    <string name="icon_group_sport">Desporto</string>
+    <string name="icon_group_emergency">Emergência</string>
+    <string name="icon_group_travel">Viagem</string>
 </resources>

@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="message_you_need_add_two_points_to_show_graphs">You must add at least two points.</string>
     <string name="icon_group_travel">Travel</string>
     <string name="icon_group_emergency">Emergency</string>
     <string name="icon_group_sport">Sport</string>

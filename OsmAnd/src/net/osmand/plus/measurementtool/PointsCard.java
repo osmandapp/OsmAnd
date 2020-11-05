@@ -24,7 +24,9 @@ public class PointsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 
 	@Override
 	public void onUpdateAdditionalInfo() {
-		adapter.notifyDataSetChanged();
+		if (adapter != null) {
+			adapter.notifyDataSetChanged();
+		}
 	}
 
 	@Override

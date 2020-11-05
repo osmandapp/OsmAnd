@@ -495,7 +495,7 @@ public abstract class ImageCard extends AbstractCard {
 					}
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 			if (listener != null) {
 				listener.onPostProcess(result);

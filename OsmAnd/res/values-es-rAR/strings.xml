@@ -3121,22 +3121,24 @@
     <string name="shared_string_crash">Error</string>
     <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor, ayúdanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
     <string name="app_mode_ufo">OVNI</string>
-    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado 
-\n 
-\n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil 
-\n 
-\n • Se ha añadido un widget para las coordenadas actuales 
-\n 
-\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa 
-\n 
-\n • Se ha corregido la grabación de trazas en segundo plano 
-\n 
-\n • Se mejoraron las descargas de mapas en segundo plano 
-\n 
-\n • Se ha corregido la selección de idioma de Wikipedia 
-\n 
-\n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación 
-\n 
+    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado.
+\n
+\n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil
+\n
+\n • Se ha añadido un widget para las coordenadas actuales
+\n
+\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa
+\n
+\n • Se ha corregido la grabación de trazas en segundo plano
+\n
+\n • Se mejoraron las descargas de mapas en segundo plano
+\n
+\n • Se ha vuelto a añadir la opción «Encender pantalla»
+\n
+\n • Se ha corregido la selección de idioma de Wikipedia
+\n
+\n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación
+\n
 \n • Otras correcciones de errores
 \n
 \n</string>
@@ -3551,7 +3553,7 @@
     <string name="saving_new_profile">Guardando el nuevo perfil</string>
     <string name="profile_backup_failed">No se pudo respaldar el perfil.</string>
     <string name="clear_recorded_data_warning">¿Borrar los datos registrados\?</string>
-    <string name="importing_from">Importando de datos de «%1$s»</string>
+    <string name="importing_from">Importando datos de «%1$s»</string>
     <string name="shared_string_importing">Importando</string>
     <string name="checking_for_duplicate_description">OsmAnd comprueba %1$s para ver si hay duplicados con los elementos existentes en la aplicación.
 \n
@@ -3946,4 +3948,7 @@
     <string name="icon_group_sport">Deporte</string>
     <string name="icon_group_emergency">Emergencia</string>
     <string name="icon_group_travel">Viaje</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd usa MGRS, similar al formato UTM de la OTAN.</string>
 </resources>

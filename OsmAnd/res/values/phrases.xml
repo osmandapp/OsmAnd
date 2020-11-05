@@ -4265,4 +4265,6 @@
 	<string name="poi_parking_sheds">Sheds</string>
 	<string name="poi_parking_layby">Layby</string>
 
+	<string name="poi_radar_tower">Radar tower</string>
+
 </resources>
