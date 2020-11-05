@@ -3926,4 +3926,5 @@
     <string name="mgrs_format_descr">OsmAnd utilise le système de référence MDRS de l\'OTAN dérivé des formats UTM et UPS.</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_mgrs">MGRS</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Vous devez ajouter, au moins, deux points.</string>
 </resources>
