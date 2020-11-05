@@ -124,7 +124,7 @@ class SettingsImporter {
 					try {
 						SettingsItemReader<? extends SettingsItem> reader = item.getReader();
 						if (reader != null) {
-							reader.readFromStream(ois, app.getAppPath(fileName));
+							reader.readFromStream(ois, fileName);
 						}
 					} catch (IllegalArgumentException e) {
 						item.warnings.add(app.getString(R.string.settings_item_read_error, item.getName()));

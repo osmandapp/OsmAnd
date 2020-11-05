@@ -285,21 +285,9 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 					file = (File) currentItem;
 					size = file.length();
 				}
-				title.setText(FileNameTranslationHelper.getFileName(app,
-						app.getResourceManager().getOsmandRegions(),
-						file.getName()));
+				title.setText(FileNameTranslationHelper.getFileNameWithRegion(app, file.getName()));
 				FileSubtype subtype = FileSubtype.getSubtypeByPath(app, file.getPath());
-				switch (subtype) {
-					case SRTM_MAP:
-						iconId = R.drawable.ic_plugin_srtm;
-						break;
-					case WIKI_MAP:
-						iconId = R.drawable.ic_plugin_wikipedia;
-						break;
-					default:
-						iconId = R.drawable.ic_map;
-				}
-				setupIcon(icon, iconId, itemSelected);
+				setupIcon(icon, subtype.getIconId(), itemSelected);
 				subText.setText(AndroidUtils.formatSize(app, size));
 				subText.setVisibility(View.VISIBLE);
 				break;
@@ -311,9 +299,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			case TTS_VOICE:
 			case VOICE:
 				file = (File) currentItem;
-				title.setText(FileNameTranslationHelper.getFileName(app,
-						app.getResourceManager().getOsmandRegions(),
-						file.getName()));
+				title.setText(FileNameTranslationHelper.getFileNameWithRegion(app, file.getName()));
 				setupIcon(icon, R.drawable.ic_action_volume_up, itemSelected);
 				break;
 			default:

@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.backend.backup;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -23,34 +24,33 @@ import java.util.zip.ZipOutputStream;
 public class FileSettingsItem extends StreamSettingsItem {
 
 	public enum FileSubtype {
-		UNKNOWN("", null),
-		OTHER("other", ""),
-		ROUTING_CONFIG("routing_config", IndexConstants.ROUTING_PROFILES_DIR),
-		RENDERING_STYLE("rendering_style", IndexConstants.RENDERERS_DIR),
-		WIKI_MAP("wiki_map", IndexConstants.WIKI_INDEX_DIR),
-		SRTM_MAP("srtm_map", IndexConstants.SRTM_INDEX_DIR),
-		OBF_MAP("obf_map", IndexConstants.MAPS_PATH),
-		TILES_MAP("tiles_map", IndexConstants.TILES_INDEX_DIR),
-		GPX("gpx", IndexConstants.GPX_INDEX_DIR),
-		TTS_VOICE("tts_voice", IndexConstants.VOICE_INDEX_DIR),
-		VOICE("voice", IndexConstants.VOICE_INDEX_DIR),
-		TRAVEL("travel", IndexConstants.WIKIVOYAGE_INDEX_DIR),
-		MULTIMEDIA_NOTES("multimedia_notes", IndexConstants.AV_INDEX_DIR);
+		UNKNOWN("", null, R.drawable.ic_type_file),
+		OTHER("other", "", R.drawable.ic_type_file),
+		ROUTING_CONFIG("routing_config", IndexConstants.ROUTING_PROFILES_DIR, R.drawable.ic_action_route_distance),
+		RENDERING_STYLE("rendering_style", IndexConstants.RENDERERS_DIR, R.drawable.ic_action_map_style),
+		WIKI_MAP("wiki_map", IndexConstants.WIKI_INDEX_DIR, R.drawable.ic_plugin_wikipedia),
+		SRTM_MAP("srtm_map", IndexConstants.SRTM_INDEX_DIR, R.drawable.ic_plugin_srtm),
+		OBF_MAP("obf_map", IndexConstants.MAPS_PATH, R.drawable.ic_map),
+		TILES_MAP("tiles_map", IndexConstants.TILES_INDEX_DIR, R.drawable.ic_map),
+		ROAD_MAP("road_map", IndexConstants.ROADS_INDEX_DIR, R.drawable.ic_map),
+		GPX("gpx", IndexConstants.GPX_INDEX_DIR, R.drawable.ic_action_route_distance),
+		TTS_VOICE("tts_voice", IndexConstants.VOICE_INDEX_DIR, R.drawable.ic_action_volume_up),
+		VOICE("voice", IndexConstants.VOICE_INDEX_DIR, R.drawable.ic_action_volume_up),
+		TRAVEL("travel", IndexConstants.WIKIVOYAGE_INDEX_DIR, R.drawable.ic_plugin_wikipedia),
+		MULTIMEDIA_NOTES("multimedia_notes", IndexConstants.AV_INDEX_DIR, R.drawable.ic_action_photo_dark);
 
-		private String subtypeName;
-		private String subtypeFolder;
+		private final String subtypeName;
+		private final String subtypeFolder;
+		private final int iconId;
 
-		FileSubtype(String subtypeName, String subtypeFolder) {
+		FileSubtype(@NonNull String subtypeName, String subtypeFolder, @DrawableRes int iconId) {
 			this.subtypeName = subtypeName;
 			this.subtypeFolder = subtypeFolder;
+			this.iconId = iconId;
 		}
 
 		public boolean isMap() {
-			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP || this == TILES_MAP;
-		}
-
-		public boolean isDirectory() {
-			return this == TTS_VOICE || this == VOICE;
+			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP || this == TILES_MAP || this == ROAD_MAP;
 		}
 
 		public String getSubtypeName() {
@@ -59,6 +59,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 		public String getSubtypeFolder() {
 			return subtypeFolder;
+		}
+
+		@DrawableRes
+		public int getIconId() {
+			return iconId;
 		}
 
 		public static FileSubtype getSubtypeByName(@NonNull String name) {
@@ -205,7 +210,12 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	public long getSize() {
-		return size;
+		if (size != 0) {
+			return size;
+		} else if (file != null && !file.isDirectory()) {
+			return file.length();
+		}
+		return 0;
 	}
 
 	public void setSize(long size) {
@@ -227,15 +237,28 @@ public class FileSettingsItem extends StreamSettingsItem {
 		return file.exists();
 	}
 
-	private File renameFile(File file) {
+	private File renameFile(File oldFile) {
+		String oldPath = oldFile.getAbsolutePath();
+		String prefix;
+		if (file.isDirectory()) {
+			prefix = file.getAbsolutePath();
+		} else if (oldPath.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
+		} else if (oldPath.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT));
+		} else if (oldPath.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT));
+		} else {
+			prefix = oldPath.substring(0, oldPath.lastIndexOf("."));
+		}
+		String suffix = oldPath.replace(prefix, "");
 		int number = 0;
-		String path = file.getAbsolutePath();
 		while (true) {
 			number++;
-			String copyName = path.replaceAll(file.getName(), file.getName().replaceFirst("[.]", "_" + number + "."));
-			File copyFile = new File(copyName);
-			if (!copyFile.exists()) {
-				return copyFile;
+			String newName = prefix + "_" + number + suffix;
+			File newFile = new File(newName);
+			if (!newFile.exists()) {
+				return newFile;
 			}
 		}
 	}
@@ -245,12 +268,17 @@ public class FileSettingsItem extends StreamSettingsItem {
 	SettingsItemReader<? extends SettingsItem> getReader() {
 		return new StreamSettingsItemReader(this) {
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, File dest) throws IOException, IllegalArgumentException {
+			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
 				OutputStream output;
+				File dest = FileSettingsItem.this.getFile();
+				if (dest.isDirectory()) {
+					dest = new File(dest, entryName.substring(fileName.length()));
+				}
 				if (dest.exists() && !shouldReplace) {
 					dest = renameFile(dest);
 				}
 				if (dest.getParentFile() != null && !dest.getParentFile().exists()) {
+					//noinspection ResultOfMethodCallIgnored
 					dest.getParentFile().mkdirs();
 				}
 				output = new FileOutputStream(dest);
@@ -271,46 +299,42 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		try {
-			if (!file.isDirectory()) {
+		if (!file.isDirectory()) {
+			try {
 				setInputStream(new FileInputStream(file));
+			} catch (FileNotFoundException e) {
+				warnings.add(app.getString(R.string.settings_item_read_error, file.getName()));
+				SettingsHelper.LOG.error("Failed to set input stream from file: " + file.getName(), e);
 			}
-		} catch (FileNotFoundException e) {
-			warnings.add(app.getString(R.string.settings_item_read_error, file.getName()));
-			SettingsHelper.LOG.error("Failed to set input stream from file: " + file.getName(), e);
-		}
-		return new StreamSettingsItemWriter(this) {
+			return super.getWriter();
+		} else {
+			return new StreamSettingsItemWriter(this) {
 
-			@Override
-			public void writeEntry(String fileName, @NonNull ZipOutputStream zos) throws IOException {
-				if (getSubtype().isDirectory()) {
-					File file = getFile();
-					zipDirsWithFiles(file, zos);
-				} else {
-					super.writeEntry(fileName, zos);
+				@Override
+				public void writeEntry(String fileName, @NonNull ZipOutputStream zos) throws IOException {
+					writeDirWithFiles(file, zos);
 				}
-			}
 
-			public void zipDirsWithFiles(File f, ZipOutputStream zos)
-					throws IOException {
-				if (f == null) {
-					return;
-				}
-				if (f.isDirectory()) {
-					File[] fs = f.listFiles();
-					if (fs != null) {
-						for (File c : fs) {
-							zipDirsWithFiles(c, zos);
+				public void writeDirWithFiles(File file, ZipOutputStream zos) throws IOException {
+					if (file != null) {
+						if (file.isDirectory()) {
+							File[] files = file.listFiles();
+							if (files != null) {
+								for (File subfolderFile : files) {
+									writeDirWithFiles(subfolderFile, zos);
+								}
+							}
+						} else {
+							String subtypeFolder = getSubtype().getSubtypeFolder();
+							String zipEntryName = Algorithms.isEmpty(subtypeFolder)
+									? file.getName()
+									: file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
+							setInputStream(new FileInputStream(file));
+							super.writeEntry(zipEntryName, zos);
 						}
 					}
-				} else {
-					String zipEntryName = Algorithms.isEmpty(getSubtype().getSubtypeFolder())
-							? f.getName()
-							: f.getPath().substring(f.getPath().indexOf(getSubtype().getSubtypeFolder()) - 1);
-					setInputStream(new FileInputStream(f));
-					super.writeEntry(zipEntryName, zos);
 				}
-			}
-		};
+			};
+		}
 	}
 }
