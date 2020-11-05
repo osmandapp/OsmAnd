@@ -42,7 +42,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.GPXUtilities.GPXFile;
@@ -107,7 +107,7 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 			}
 		});
 
-		GraphAdapterHelper.bindGraphAdapters(commonGraphAdapter, Arrays.asList((BaseGraphAdapter) customGraphAdapter), (ViewGroup) view);
+		GraphAdapterHelper.bindGraphAdapters(commonGraphAdapter, Collections.singletonList((BaseGraphAdapter) customGraphAdapter), (ViewGroup) view);
 		refreshMapCallback = GraphAdapterHelper.bindToMap(commonGraphAdapter, mapActivity, trackDetailsMenu);
 		fullUpdate();
 	}

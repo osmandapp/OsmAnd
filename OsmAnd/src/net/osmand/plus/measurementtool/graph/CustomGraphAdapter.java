@@ -29,7 +29,7 @@ import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.plus.track.ColorsCard.MINIMUM_CONTRAST_RATIO;
@@ -122,7 +122,7 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 			case ONE_ELEMENT:
 				for (RouteSegmentAttribute segment : getSegmentsList()) {
 					if (segment.getPropertyName().equals(selectedPropertyName)) {
-						attachLegend(Arrays.asList(segment), null);
+						attachLegend(Collections.singletonList(segment), null);
 						break;
 					}
 				}

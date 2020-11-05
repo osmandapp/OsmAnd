@@ -16,6 +16,8 @@ import com.github.mikephil.charting.listener.ChartTouchListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.measurementtool.graph.BaseGraphAdapter.ExternalValueSelectedListener;
+import net.osmand.plus.measurementtool.graph.BaseGraphAdapter.ExternalGestureListener;
 
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class GraphAdapterHelper {
 				}
 				for (BaseGraphAdapter adapter : otherGraphAdapters) {
 					if (adapter.getChart() != null) {
-						final MotionEvent event = MotionEvent.obtainNoHistory(ev);
+						MotionEvent event = MotionEvent.obtainNoHistory(ev);
 						event.setSource(0);
 						adapter.getChart().dispatchTouchEvent(event);
 					}
@@ -52,7 +54,7 @@ public class GraphAdapterHelper {
 		mainChart.setOnTouchListener(mainChartTouchListener);
 
 		mainGraphAdapter.addValueSelectedListener(BIND_GRAPH_ADAPTERS_KEY,
-				new CommonGraphAdapter.ExternalValueSelectedListener() {
+				new ExternalValueSelectedListener() {
 					@Override
 					public void onValueSelected(Entry e, Highlight h) {
 						for (BaseGraphAdapter adapter : otherGraphAdapters) {
@@ -126,7 +128,7 @@ public class GraphAdapterHelper {
 					}
 				});
 
-		graphAdapter.setExternalGestureListener(new CommonGraphAdapter.ExternalGestureListener() {
+		graphAdapter.setExternalGestureListener(new ExternalGestureListener() {
 			@Override
 			public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
 			}
