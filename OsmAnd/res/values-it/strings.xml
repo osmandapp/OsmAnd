@@ -222,7 +222,7 @@
     <string name="version_index_is_not_supported">La versione dell\'indice \'\'{0}\'\' non è supportata</string>
     <string name="osmand_routing_experimental">Il routing offline di OsmAnd è sperimentale e non funziona per distanze superiori ai 20 km.
 \n
-\nNavigazione eseguita temporaneamente tramite servizio online CloudMade.</string>
+\nNavigazione temporaneamente spostata sul servizio online CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Impossibile trovare la cartella specificata.</string>
     <string name="application_dir">Cartella salvataggio dei dati</string>
     <string name="osmand_net_previously_installed">Tutti i dati offline nella vecchia app verranno supportati dalla nuova, ma i Preferiti devono essere esportati dalla vecchia app e importati nella nuova.</string>
@@ -313,13 +313,13 @@
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">secondi</string>
     <string name="int_min">min.</string>
-    <string name="background_service_int_descr">Intervallo di tempo di risveglio usato dal servizio in background:</string>
+    <string name="background_service_int_descr">Intervallo di risveglio usato dal servizio in background:</string>
     <string name="background_service_int">Intervallo di risveglio GPS</string>
-    <string name="background_service_provider_descr">Fornitore di posizione utilizzato dal servizio in background:</string>
+    <string name="background_service_provider_descr">Metodo di localizzazione utilizzato dal servizio in background:</string>
     <string name="background_service_provider">Fornitore di posizionamento</string>
     <string name="background_router_service_descr">Traccia la posizione mentre lo schermo è spento.</string>
     <string name="background_router_service">Esegui OsmAnd in background</string>
-    <string name="off_router_service_no_gps_available">Il servizio di navigazione in background di OsmAnd necessita del sistema di posizionamento attivato.</string>
+    <string name="off_router_service_no_gps_available">Il servizio di navigazione in background necessita di un sistema di posizionamento attivo.</string>
     <string name="hide_poi_filter">Nascondi filtro</string>
     <string name="show_poi_filter">Visualizza filtro</string>
     <string name="search_poi_filter">Filtro</string>
@@ -2695,13 +2695,13 @@
     <string name="wiki_article_search_text">Sto cercando l’articolo Wiki corrispondente</string>
     <string name="wiki_article_not_found">Articolo non trovato</string>
     <string name="how_to_open_wiki_title">Come aprire gli articoli di Wikipedia?</string>
-    <string name="osmand_plus_extended_description_part2">Navigazione 
-\n • Funziona online (veloce) o offline (nessuna tariffa di roaming quando sei all\'estero) 
-\n • Guida vocale svolta-dopo-svolta (voci registrate e sintetizzate) 
-\n • Guida sulla corsia opzionale, visualizzazione dei nomi delle strade, e tempo di arrivo stimato 
-\n • Supporto per punti intermedi del tuo itinerario 
-\n • Rielaborazione del percorso automatico ogni volta che si devia 
-\n • Ricerca di posti per indirizzo, per tipo (es: ristorante, albergo, stazione di servizio, museo) o per coordinate geografiche
+    <string name="osmand_plus_extended_description_part2">Navigazione
+\n • Funziona online (veloce) o offline (nessuna tariffa di roaming quando sei all\'estero)
+\n • Guida vocale svolta-per-svolta (voci registrate e sintetizzate)
+\n • Indicazioni di corsia opzionali, visualizzazione dei nomi delle strade, e tempo di arrivo stimato
+\n • Supporto dei punti intermedi del tuo itinerario
+\n • Rielaborazione del percorso automatico ogni volta che si devia
+\n • Ricerca di luoghi per indirizzo, per tipo (es: ristorante, albergo, stazione di servizio, museo) o per coordinate geografiche
 \n</string>
     <string name="hide_full_description">Nascondi la descrizione completa</string>
     <string name="show_full_description">Mostra la descrizione completa</string>
@@ -2743,12 +2743,12 @@
 \n • Condividi la tua posizione in modo tale che i tuoi amici possano trovarti
 \n</string>
     <string name="osmand_plus_extended_description_part6">Funzioni per pedoni e velocipedi
-\n • Mostra percorsi per pedoni, escursionisti e biciclette, ottimo per le attività all’aperto
+\n • Mostra percorsi per pedoni, escursionisti e biciclette, ottimo per le attività all\'aperto
 \n • Navigazione e visualizzazione speciali per pedoni e velocipedi
 \n • Scegli se mostrare le fermate del trasporto pubblico (bus, tram e treno) inclusi i nomi delle linee
 \n • Scegli se registrare la tua visita su un file GPX locale oppure su di un servizio online
 \n • Scegli se mostrare la velocità e l’altitudine
-\n • Mostra le curve di livello e l’ombreggiatura dei rilievi</string>
+\n • Mostra le curve di livello e l’ombreggiatura dei rilievi (attraverso il componente aggiuntivo)</string>
     <string name="unirs_render_descr">Modifica dello stile standard per un maggior contrasto delle strade pedonali e piste ciclabili. Utilizza i colori della versione vecchia di Mapnik.</string>
     <string name="access_intermediate_arrival_time">Orario di arrivo intermedio</string>
     <string name="map_widget_intermediate_time">Orario intermedio</string>
@@ -3940,7 +3940,7 @@
     <string name="icon_group_amenity">Amenità</string>
     <string name="icon_group_special">Speciale</string>
     <string name="icon_group_transport">Trasporto</string>
-    <string name="icon_group_service">Servizio</string>
+    <string name="icon_group_service">Servizi</string>
     <string name="icon_group_symbols">Simboli</string>
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Emergenza</string>
