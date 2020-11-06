@@ -85,11 +85,11 @@ public class FavoriteDialogs {
 				if (dlgHolder != null && dlgHolder.length > 0 && dlgHolder[0] != null) {
 					dlgHolder[0].dismiss();
 				}
-				if (activity instanceof MapActivity) {
-					MapActivity mapActivity = (MapActivity) activity;
-					FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
-					if (point != null && helper.editFavourite(fp, point.getLatitude(), point.getLongitude())) {
-						helper.deleteFavourite(point);
+				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
+				if (point != null && helper.editFavourite(fp, point.getLatitude(), point.getLongitude())) {
+					helper.deleteFavourite(point);
+					if (activity instanceof MapActivity) {
+						MapActivity mapActivity = (MapActivity) activity;
 						Fragment fragment = mapActivity.getSupportFragmentManager()
 								.findFragmentByTag(FavoritePointEditor.TAG);
 						if (fragment instanceof FavoritePointEditorFragmentNew) {
@@ -98,7 +98,9 @@ public class FavoriteDialogs {
 						mapActivity.getContextMenu()
 								.show(new LatLon(point.getLatitude(), point.getLongitude()), fp.getPointDescription(activity), fp);
 					}
-					mapActivity.getMapView().refreshMap();
+					if (activity instanceof MapActivity) {
+						((MapActivity) activity).getMapView().refreshMap();
+					}
 				}
 			}
 		});
