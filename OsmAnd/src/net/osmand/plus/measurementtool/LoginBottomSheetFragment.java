@@ -17,6 +17,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
@@ -33,9 +34,7 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
     @Override
     public void createMenuItems(Bundle savedInstanceState) {
-        items.add(new ShortDescriptionItem.Builder()
-                .setDescription(getString(R.string.open_street_map_login_mode))
-                .setTitle(getString(R.string.login_open_street_map_org))
+        items.add(new SimpleBottomSheetItem.Builder()
                 .setLayoutId(R.layout.bottom_sheet_login)
                 .create());
 
