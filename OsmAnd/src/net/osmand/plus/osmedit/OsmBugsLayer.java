@@ -104,20 +104,21 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		startZoom = activity.getMyApplication().getSettings().SHOW_OSM_BUGS_MIN_ZOOM.get();
+		OsmandApplication app = activity.getMyApplication();
+		startZoom = app.getSettings().SHOW_OSM_BUGS_MIN_ZOOM.get();
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
 			data.queryNewData(tileBox);
 			List<OpenStreetNote> objects = data.getResults();
 
 			if (objects != null) {
-				float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
-				float iconSize = getIconSize(activity) * 0.45f * textScale;
+				float textScale = app.getSettings().TEXT_SCALE.get();
+				float iconSize = getIconSize(app);
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 				List<OpenStreetNote> fullObjects = new ArrayList<>();
 				List<LatLon> fullObjectsLatLon = new ArrayList<>();
 				List<LatLon> smallObjectsLatLon = new ArrayList<>();
-				boolean showClosed = activity.getMyApplication().getSettings().SHOW_CLOSED_OSM_BUGS.get();
+				boolean showClosed = app.getSettings().SHOW_CLOSED_OSM_BUGS.get();
 				for (OpenStreetNote o : objects) {
 					if (!o.isOpened() && !showClosed) {
 						continue;

@@ -1,6 +1,5 @@
 package net.osmand.plus.views;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -44,6 +43,7 @@ import java.util.Map;
 
 public abstract class OsmandMapLayer {
 
+	public static final float ICON_VISIBLE_PART_RATIO = 0.45f;
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
 
@@ -235,8 +235,8 @@ public abstract class OsmandMapLayer {
 		return (int) (r * tb.getDensity());
 	}
 
-	protected int getIconSize(Context ctx) {
-		return ctx.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size);
+	protected float getIconSize(OsmandApplication app) {
+		return app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size) * ICON_VISIBLE_PART_RATIO * app.getSettings().TEXT_SCALE.get();
 	}
 
 	public Rect getIconDestinationRect(float x, float y, int width, int height, float scale) {

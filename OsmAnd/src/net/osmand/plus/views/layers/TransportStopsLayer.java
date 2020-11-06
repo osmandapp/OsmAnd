@@ -20,6 +20,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -181,10 +182,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		List<TransportStop> objects = null;
 		boolean nightMode = settings.isNightMode();
+		OsmandApplication app = mapActivity.getMyApplication();
 		if (tb.getZoom() >= startZoomRoute) {
 			if (stopRoute != null) {
 				objects = stopRoute.route.getForwardStops();
-				int color = stopRoute.getColor(mapActivity.getMyApplication(), nightMode);
+				int color = stopRoute.getColor(app, nightMode);
 				attrs.paint.setColor(color);
 				attrs.updatePaints(view.getApplication(), settings, tb);
 				try {
@@ -217,8 +219,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		}
 
 		if (objects != null) {
-			float textScale = mapActivity.getMyApplication().getSettings().TEXT_SCALE.get();
-			float iconSize = getIconSize(mapActivity) * 0.45f * textScale;
+			float textScale = app.getSettings().TEXT_SCALE.get();
+			float iconSize = getIconSize(app);
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
 			List<TransportStop> fullObjects = new ArrayList<>();
 			for (TransportStop o : objects) {
