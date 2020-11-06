@@ -3949,4 +3949,5 @@
     <string name="icon_group_sport">Desporto</string>
     <string name="icon_group_emergency">Emergência</string>
     <string name="icon_group_travel">Viagem</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Deve adicionar pelo menos dois pontos.</string>
 </resources>

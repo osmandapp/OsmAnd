@@ -3951,4 +3951,5 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd usa MGRS, similar al formato UTM de la OTAN.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Debes añadir al menos dos puntos.</string>
 </resources>
