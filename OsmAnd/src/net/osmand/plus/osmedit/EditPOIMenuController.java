@@ -15,6 +15,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.render.RenderingIcons;
@@ -48,11 +51,18 @@ public class EditPOIMenuController extends MenuController {
 					OsmandApplication app = activity.getMyApplication();
 					OsmandSettings settings = app.getSettings();
 					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
+					OsmPoint point = getOsmPoint();
 					if (client.isValidToken()
 							|| !Algorithms.isEmpty(settings.USER_NAME.get())
 							&& !Algorithms.isEmpty(settings.USER_PASSWORD.get())) {
-						SimpleProgressDialogPoiUploader poiDialogUploader = new SimpleProgressDialogPoiUploader(activity);
-						poiDialogUploader.showProgressDialog(new OsmPoint[] {getOsmPoint()}, false, false);
+						if (point instanceof OpenstreetmapPoint) {
+							SendPoiBottomSheetFragment sendPoiBottomSheetFragment =
+									SendPoiBottomSheetFragment.showInstance(new OsmPoint[]{getOsmPoint()}, SendPoiBottomSheetFragment.PoiUploaderType.SIMPLE);
+							sendPoiBottomSheetFragment.show(activity.getSupportFragmentManager(), SendPoiDialogFragment.TAG);
+						} else if ( point instanceof OsmNotesPoint) {
+							SendOsmNoteBottomSheetFragment sendOsmNoteBottomSheetFragment =
+									SendOsmNoteBottomSheetFragment.showInstance(new OsmPoint[]{getOsmPoint()}, SendOsmNoteBottomSheetFragment.PoiUploaderType.SIMPLE);
+							sendOsmNoteBottomSheetFragment.show(activity.getSupportFragmentManager(), SendPoiDialogFragment.TAG);}
 					} else {
 						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), null);
 					}
