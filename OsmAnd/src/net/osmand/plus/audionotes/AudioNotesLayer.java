@@ -70,7 +70,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
 			float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
-			float iconSize = getIconSize(activity) * 3 / 2.5f * textScale;
+			float iconSize = getIconSize(activity) * 0.45f * textScale;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 			DataTileManager<Recording> recs = plugin.getRecordings();

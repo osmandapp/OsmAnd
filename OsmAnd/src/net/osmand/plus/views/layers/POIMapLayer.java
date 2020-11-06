@@ -200,7 +200,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				objects = data.getResults();
 				if (objects != null) {
 					float textScale = app.getSettings().TEXT_SCALE.get();
-					float iconSize = getIconSize(app) * 1.5f * textScale;
+					float iconSize = getIconSize(app) * 0.45f * textScale;
 					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 					WaypointHelper wph = app.getWaypointHelper();
 					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(view.getContext(),

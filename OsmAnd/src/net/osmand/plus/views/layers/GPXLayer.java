@@ -494,7 +494,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void drawSelectedFilesPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			float textScale = view.getSettings().TEXT_SCALE.get();
-			float iconSize = getIconSize(view.getContext()) * 3 / 2.5f * textScale;
+			float iconSize = getIconSize(view.getContext()) * 0.45f * textScale;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 			List<LatLon> fullObjectsLatLon = new ArrayList<>();

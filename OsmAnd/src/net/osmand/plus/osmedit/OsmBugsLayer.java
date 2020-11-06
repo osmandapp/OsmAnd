@@ -112,7 +112,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 			if (objects != null) {
 				float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
-				float iconSize = getIconSize(activity) * 3 / 2.5f * textScale;
+				float iconSize = getIconSize(activity) * 0.45f * textScale;
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 				List<OpenStreetNote> fullObjects = new ArrayList<>();
 				List<LatLon> fullObjectsLatLon = new ArrayList<>();

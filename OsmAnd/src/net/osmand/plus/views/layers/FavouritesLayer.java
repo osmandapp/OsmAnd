@@ -95,7 +95,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		if (this.settings.SHOW_FAVORITES.get() && favorites.isFavoritesLoaded()) {
 			if (tileBox.getZoom() >= startZoom) {
 				float textScale = this.settings.TEXT_SCALE.get();
-				float iconSize = getIconSize(view.getContext()) * 3 / 2.5f * textScale;
+				float iconSize = getIconSize(view.getContext()) * 0.45f * textScale;
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 				// request to load

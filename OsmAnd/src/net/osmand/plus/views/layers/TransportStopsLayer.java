@@ -218,7 +218,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 		if (objects != null) {
 			float textScale = mapActivity.getMyApplication().getSettings().TEXT_SCALE.get();
-			float iconSize = getIconSize(mapActivity) * 3 / 2.5f * textScale;
+			float iconSize = getIconSize(mapActivity) * 0.45f * textScale;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
 			List<TransportStop> fullObjects = new ArrayList<>();
 			for (TransportStop o : objects) {
@@ -228,7 +228,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(mapActivity,
 							ContextCompat.getColor(mapActivity, R.color.transport_stop_icon_background),
-					true,false ,0, BackgroundType.SQUARE);
+							true, false, 0, BackgroundType.SQUARE);
 					pointImageDrawable.setAlpha(0.9f);
 					pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 				} else {
