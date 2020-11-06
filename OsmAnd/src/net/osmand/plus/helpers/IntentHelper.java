@@ -20,7 +20,6 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;

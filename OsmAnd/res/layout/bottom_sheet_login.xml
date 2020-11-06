@@ -10,7 +10,8 @@
 	android:paddingTop="@dimen/measurement_tool_menu_title_padding_top"
 	android:orientation="vertical"
 	android:paddingEnd="@dimen/content_padding"
-	android:paddingStart="@dimen/content_padding">
+	android:paddingStart="@dimen/content_padding"
+	android:paddingBottom="@dimen/content_padding_half">
 
 	<ImageView
 		android:id="@+id/header"

@@ -9,12 +9,8 @@ import com.github.scribejava.core.model.*;
 import com.github.scribejava.core.oauth.OAuth10aService;
 import net.osmand.PlatformUtil;
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -93,39 +89,6 @@ public class OsmOAuthAuthorizationClient {
         service.execute(req, callback);
     }
 
-    public String authorizeOsmUserDetails() throws InterruptedException, ExecutionException, IOException, XmlPullParserException {
-        OAuth1RequestToken requestToken = startOAuth();
-        if (requestToken == null) {
-            throw new IllegalArgumentException("Illegal request token: ");
-        }
-        // save for reuse of request ( they usually don't match and should'nt be an issue)
-        String url = "https://api.openstreetmap.org/api/0.6/user/details";
-        OAuthRequest req = new OAuthRequest(Verb.GET, url);
-        service.signRequest(accessToken, req);
-        req.addHeader("Content-Type", "application/xml");
-        Response response = service.execute(req);
-        String user = "";
-        String home = "";
-        String lang = "";
-        XmlPullParser parser = PlatformUtil.newXMLPullParser();
-        parser.setInput(response.getStream(), "UTF-8");
-        List<String> languages = new ArrayList<>();
-        int tok;
-        while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-            if (tok == XmlPullParser.START_TAG) {
-                String name = parser.getName();
-                if ("user".equals(name)) {
-                    user = parser.getAttributeValue("", "display_name");
-                } else if ("home".equals(name)) {
-                } else if ("lang".equals(name)) {
-                    languages.add(parser.nextText());
-                }
-            }
-        }
-        return user;
-    }
-
-
     public Response performRequest(String url, String method, String body)
             throws InterruptedException, ExecutionException, IOException {
         service.getApi().getSignatureType();
@@ -139,8 +102,6 @@ public class OsmOAuthAuthorizationClient {
         req.addHeader("Content-Type", "application/xml");
         return service.execute(req);
     }
-
-
 
     public OAuth1RequestToken startOAuth() {
         try {

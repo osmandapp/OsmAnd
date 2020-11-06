@@ -1,6 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -16,13 +15,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -398,15 +395,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void contextMenuFragment(final Activity la, final Fragment fragment, final Object info, ContextMenuAdapter adapter) {
+	public void contextMenuFragment(final FragmentActivity activity, final Fragment fragment, final Object info, ContextMenuAdapter adapter) {
 		if (fragment instanceof AvailableGPXFragment) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, la)
+			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, activity)
 					.setIcon(R.drawable.ic_action_export)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							sendGPXFiles(la, (AvailableGPXFragment) fragment, (GpxInfo) info);
+							sendGPXFiles(activity, (AvailableGPXFragment) fragment, (GpxInfo) info);
 							return true;
 						}
 					}).createItem());
@@ -414,7 +411,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void optionsMenuFragment(final Activity activity, final Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	public void optionsMenuFragment(final FragmentActivity activity, final Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
 		if (fragment instanceof AvailableGPXFragment) {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
 			optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, activity)
@@ -440,7 +437,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-
 	public enum UploadVisibility implements IEnumWithResource {
 		Public(R.string.gpxup_public),
 		Identifiable(R.string.gpxup_identifiable),
@@ -462,16 +458,16 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean sendGPXFiles(final Activity la, AvailableGPXFragment f, final GpxInfo... info) {
+	public boolean sendGPXFiles(final FragmentActivity activity, AvailableGPXFragment fragment, final GpxInfo... info) {
 		String name = settings.USER_NAME.get();
 		String pwd = settings.USER_PASSWORD.get();
 		String authToken = settings.USER_ACCESS_TOKEN.get();
 		if ((Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)) && Algorithms.isEmpty(authToken)) {
-			LoginBottomSheetFragment.showInstance(f.getFragmentManager(), f.getTargetFragment());
+			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment.getTargetFragment());
 			return false;
 		}
-		AlertDialog.Builder bldr = new AlertDialog.Builder(la);
-		LayoutInflater inflater = (LayoutInflater) la.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View view = inflater.inflate(R.layout.send_gpx_osm, null);
 		final EditText descr = (EditText) view.findViewById(R.id.memory_size);
 		if (info.length > 0 && info[0].getFileName() != null) {
@@ -480,23 +476,23 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		final EditText tags = (EditText) view.findViewById(R.id.TagsText);
 		final Spinner visibility = ((Spinner) view.findViewById(R.id.Visibility));
-		EnumAdapter<UploadVisibility> adapter = new EnumAdapter<>(la, android.R.layout.simple_spinner_item, UploadVisibility.values());
+		EnumAdapter<UploadVisibility> adapter = new EnumAdapter<>(activity, android.R.layout.simple_spinner_item, UploadVisibility.values());
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		visibility.setAdapter(adapter);
 		visibility.setSelection(0);
 
-		bldr.setView(view);
-		bldr.setNegativeButton(R.string.shared_string_no, null);
-		bldr.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+		builder.setView(view);
+		builder.setNegativeButton(R.string.shared_string_no, null);
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				new UploadGPXFilesTask(la, descr.getText().toString(), tags.getText().toString(),
+				new UploadGPXFilesTask(activity, descr.getText().toString(), tags.getText().toString(),
 						(UploadVisibility) visibility.getItemAtPosition(visibility.getSelectedItemPosition())
 				).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 			}
 		});
-		bldr.show();
+		builder.show();
 		return true;
 	}
 

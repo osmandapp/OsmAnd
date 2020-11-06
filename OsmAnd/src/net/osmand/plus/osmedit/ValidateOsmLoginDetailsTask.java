@@ -2,31 +2,22 @@ package net.osmand.plus.osmedit;
 
 import android.os.AsyncTask;
 
-import net.osmand.plus.GpxSelectionHelper;
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.osmedit.OsmBugsUtil.OsmBugResult;
 
-import java.lang.ref.WeakReference;
-
 public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugResult> {
 
 	private OsmandApplication app;
-	private ValidateOsmLoginListener validateOsmLoginListener;
+	private ValidateOsmLoginListener validateListener;
 
-	public interface ValidateOsmLoginListener {
-
-		void loginValidationFinished(String error);
-
-	}
-
-	public ValidateOsmLoginDetailsTask(OsmandApplication app, ValidateOsmLoginListener validateTargetOsmLoginDetailsTask ) {
+	public ValidateOsmLoginDetailsTask(@NonNull OsmandApplication app, ValidateOsmLoginListener validateListener) {
 		this.app = app;
-		this.validateOsmLoginListener = validateTargetOsmLoginDetailsTask;
+		this.validateListener = validateListener;
 	}
-
-
 
 	@Override
 	protected OsmBugResult doInBackground(Void... params) {
@@ -39,14 +30,20 @@ public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugRes
 	@Override
 	protected void onPostExecute(OsmBugResult osmBugResult) {
 		if (osmBugResult.warning != null) {
-			app.getSettings().USER_NAME.set("");
-			app.getSettings().USER_PASSWORD.set("");
+			app.getSettings().USER_NAME.resetToDefault();
+			app.getSettings().USER_PASSWORD.resetToDefault();
 			app.showToastMessage(osmBugResult.warning);
 		} else {
 			app.showToastMessage(R.string.osm_authorization_success);
 		}
-		if (validateOsmLoginListener != null) {
-			validateOsmLoginListener.loginValidationFinished(osmBugResult.warning);
+		if (validateListener != null) {
+			validateListener.loginValidationFinished(osmBugResult.warning);
 		}
+	}
+
+	public interface ValidateOsmLoginListener {
+
+		void loginValidationFinished(String warning);
+
 	}
 }
