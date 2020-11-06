@@ -3482,7 +3482,7 @@
     <string name="tracks_view_descr">ردهای ضبط‌شدهٔ شما در %1$s یا در پوشهٔ OsmAnd قرار دارند.</string>
     <string name="multimedia_notes_view_descr">یادداشت‌های OSMای شما در %1$s قرار دارند.</string>
     <string name="osm_edits_view_descr">ویرایش‌ها یا یادداشت‌های OSMای خود که هنوز بارگذاری نشده‌اند را در %1$s ببینید. نقاط بارگذاری‌شده را دیگر نمی‌بینید.</string>
-    <string name="logcat_buffer_descr">لاگ‌های جزئی برنامه را ببینید و هم‌رسانی کنید</string>
+    <string name="logcat_buffer_descr">لاگ‌های جزئی برنامه را بررسی و هم‌رسانی کنید</string>
     <string name="multimedia_use_system_camera">استفاده از برنامهٔ سیستم</string>
     <string name="multimedia_photo_play_sound">صدای شاتر دوربین</string>
     <string name="osm_authorization_success">احراز هویت موفقیت‌آمیز بود</string>
@@ -3630,8 +3630,8 @@
     <string name="shared_string_language">زبان</string>
     <string name="shared_string_all_languages">همهٔ زبان‌ها</string>
     <string name="ui_customization_description">تعداد اقلام «کشو»، «پیکربندی نقشه» و «منوی زمینه» را به‌دلخواه تنظیم کنید.
-\n 
-\nافزونه‌های بی‌استفاده را غیرفعال کنید تا همهٔ کنترل‌های آن‌ها از برنامه پنهان شود.</string>
+\n
+\nافزونه‌های بی‌استفاده را غیرفعال کنید تا همهٔ کنترل‌های آن‌ها از برنامه پنهان شود. %1$s.</string>
     <string name="reset_items_descr">پنهان‌سازی تنظیمات آن‌ها را به حالت اولیه بازنشانی می‌کند.</string>
     <string name="hidden_items_descr">این اقلام از منو پنهان می‌شوند، اما گزینه‌ها یا افزونه‌های متناظر همچنان کار می‌کنند.</string>
     <string name="shared_string_hidden">پنهان</string>
@@ -3942,4 +3942,12 @@
     <string name="complex_routing_descr">مسیریابی دومرحله‌ای برای ناوبری خودرویی.</string>
     <string name="use_complex_routing">مسیریابی پیچیده</string>
     <string name="use_native_pt_desc">برای مسیریابی حمل‌ونقل عمومی از محاسبات جاوا (امن) استفاده می‌کند</string>
+    <string name="shared_string_local_maps">نقشه‌های محلی</string>
+    <string name="icon_group_special">ویژه</string>
+    <string name="icon_group_transport">حمل‌ونقل</string>
+    <string name="icon_group_service">خدمات</string>
+    <string name="icon_group_symbols">نمادها</string>
+    <string name="icon_group_sport">ورزش</string>
+    <string name="icon_group_emergency">اورژانس</string>
+    <string name="icon_group_travel">سفر</string>
 </resources>

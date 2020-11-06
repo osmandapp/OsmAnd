@@ -62,7 +62,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
@@ -1303,7 +1302,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		for (int i = 0; i < avoidedParameters.size(); i++) {
 			final RoutingParameter routingParameter = avoidedParameters.get(i);
-			final View container = createToolbarSubOptionView(false, SettingsBaseActivity.getRoutingStringPropertyName(app, routingParameter.getId(), routingParameter.getName()), R.drawable.ic_action_remove_dark, i == avoidedParameters.size() - 1, new OnClickListener() {
+			final View container = createToolbarSubOptionView(false, AndroidUtils.getRoutingStringPropertyName(app, routingParameter.getId(), routingParameter.getName()), R.drawable.ic_action_remove_dark, i == avoidedParameters.size() - 1, new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					OsmandApplication app = getApp();

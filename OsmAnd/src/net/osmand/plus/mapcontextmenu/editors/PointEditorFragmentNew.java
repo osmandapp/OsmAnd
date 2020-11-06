@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -52,6 +53,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.track.ColorsCard;
+import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.util.Algorithms;
 
@@ -72,7 +77,7 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
-public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
+public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
 
 	public static final String TAG = PointEditorFragmentNew.class.getSimpleName();
 
@@ -101,6 +106,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private EditText descriptionEdit;
 	private EditText addressEdit;
 	private int layoutHeightPrevious = 0;
+	private ColorsCard colorsCard;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -458,48 +464,49 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	}
 
 	private void createColorSelector() {
-		FlowLayout selectColor = view.findViewById(R.id.select_color);
-		for (int color : ColorDialogs.pallette) {
-			selectColor.addView(createColorItemView(color, selectColor), new FlowLayout.LayoutParams(0, 0));
-		}
-		int customColor = getPointColor();
-		if (!ColorDialogs.isPaletteColor(customColor)) {
-			selectColor.addView(createColorItemView(customColor, selectColor), new FlowLayout.LayoutParams(0, 0));
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			List<Integer> colors = new ArrayList<>();
+			for (int color : ColorDialogs.pallette) {
+				colors.add(color);
+			}
+			int customColor = getPointColor();
+			if (!ColorDialogs.isPaletteColor(customColor)) {
+				colors.add(customColor);
+			}
+			colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors);
+			colorsCard.setListener(this);
+			LinearLayout selectColor = view.findViewById(R.id.select_color);
+			selectColor.addView(colorsCard.build(view.getContext()));
 		}
 	}
 
-	private View createColorItemView(@ColorInt final int color, final FlowLayout rootView) {
-		FrameLayout colorItemView = (FrameLayout) UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.point_editor_button, rootView, false);
-		ImageView outline = colorItemView.findViewById(R.id.outline);
-		outline.setImageDrawable(
-				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle_contour),
-						ContextCompat.getColor(app,
-								nightMode ? R.color.stroked_buttons_and_links_outline_dark
-										: R.color.stroked_buttons_and_links_outline_light)));
-		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
-		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle), color));
-		backgroundCircle.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateColorSelector(color, rootView);
-			}
-		});
-		colorItemView.setTag(color);
-		return colorItemView;
+	@Override
+	public void onColorSelected(Integer prevColor, int newColor) {
+		colorsCard.onColorSelected(prevColor, newColor);
+		int color = colorsCard.getSelectedColor();
+		updateColorSelector(color, view);
+	}
+
+	@Override
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+
+	}
+
+	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+		if (card instanceof ColorsCard) {
+			int color = ((ColorsCard) card).getSelectedColor();
+			updateColorSelector(color, view);
+		}
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+
 	}
 
 	private void updateColorSelector(int color, View rootView) {
-		View oldColor = rootView.findViewWithTag(selectedColor);
-		if (oldColor != null) {
-			oldColor.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
-			ImageView icon = oldColor.findViewById(R.id.icon);
-			icon.setImageDrawable(UiUtilities.tintDrawable(icon.getDrawable(), R.color.icon_color_default_light));
-		}
-		View newColor = rootView.findViewWithTag(color);
-		if (newColor != null) {
-			newColor.findViewById(R.id.outline).setVisibility(View.VISIBLE);
-		}
 		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
 		selectedColor = color;
 		setColor(color);
@@ -567,23 +574,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 										: R.color.inactive_buttons_and_links_bg_light)));
 	}
 
-	private void createIconSelector() {
-		iconCategories = new LinkedHashMap<>();
-		try {
-			JSONObject obj = new JSONObject(loadJSONFromAsset());
-			JSONObject categories = obj.getJSONObject("categories");
-			for (int i = 0; i < categories.length(); i++) {
-				JSONArray names = categories.names();
-				JSONObject icons = categories.getJSONObject(names.get(i).toString());
-				iconCategories.put(names.get(i).toString(), icons.getJSONArray("icons"));
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		selectedIconCategory = getInitCategory();
-		createIconForCategory();
-	}
-
 	private String getInitCategory() {
 		for (int j = 0; j < iconCategories.values().size(); j++) {
 			JSONArray iconJsonArray = (JSONArray) iconCategories.values().toArray()[j];
@@ -602,6 +592,25 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	private String getNameFromIconId(int iconId) {
 		return app.getResources().getResourceEntryName(iconId).replaceFirst("mx_", "");
+	}
+
+	private void createIconSelector() {
+		iconCategories = new LinkedHashMap<>();
+		try {
+			JSONObject obj = new JSONObject(loadJSONFromAsset());
+			JSONObject categories = obj.getJSONObject("categories");
+			for (int i = 0; i < categories.length(); i++) {
+				JSONArray names = categories.names();
+				String name = names.get(i).toString();
+				JSONObject icons = categories.getJSONObject(name);
+				String translatedName = AndroidUtils.getIconStringPropertyName(app, name);
+				iconCategories.put(translatedName, icons.getJSONArray("icons"));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		selectedIconCategory = getInitCategory();
+		createIconForCategory();
 	}
 
 	private void createIconForCategory() {
@@ -933,7 +942,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		}
 	}
 
-	private void exitEditing() {
+	public void exitEditing() {
 		cancelled = true;
 		dismiss();
 	}

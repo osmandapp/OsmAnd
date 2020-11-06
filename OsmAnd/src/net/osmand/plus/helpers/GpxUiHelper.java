@@ -76,6 +76,8 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
@@ -92,7 +94,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
@@ -810,9 +811,9 @@ public class GpxUiHelper {
 		TextView widthTextView = (TextView) apprTitleView.findViewById(R.id.widthTitle);
 		ImageView colorImageView = (ImageView) apprTitleView.findViewById(R.id.colorImage);
 		if (Algorithms.isEmpty(prefWidthValue)) {
-			widthTextView.setText(SettingsActivity.getStringPropertyValue(activity, trackWidthProp.getDefaultValueDescription()));
+			widthTextView.setText(AndroidUtils.getRenderingStringPropertyValue(activity, trackWidthProp.getDefaultValueDescription()));
 		} else {
-			widthTextView.setText(SettingsActivity.getStringPropertyValue(activity, prefWidthValue));
+			widthTextView.setText(AndroidUtils.getRenderingStringPropertyValue(activity, prefWidthValue));
 		}
 		int color = GpxAppearanceAdapter.parseTrackColor(renderer, prefColorValue);
 		if (color == -1) {
@@ -2046,6 +2047,91 @@ public class GpxUiHelper {
 		return gpx;
 	}
 
+	public enum LineGraphType {
+		ALTITUDE,
+		SLOPE,
+		SPEED;
+	}
+
+	public static List<ILineDataSet> getDataSets(LineChart chart,
+	                                             OsmandApplication app,
+	                                             GPXTrackAnalysis analysis,
+	                                             @NonNull LineGraphType firstType,
+	                                             @Nullable LineGraphType secondType,
+	                                             boolean calcWithoutGaps) {
+		if (app == null || chart == null || analysis == null) {
+			return new ArrayList<>();
+		}
+		List<ILineDataSet> result = new ArrayList<>();
+		if (secondType == null) {
+			ILineDataSet dataSet = getDataSet(chart, app, analysis, calcWithoutGaps, false, firstType);
+			if (dataSet != null) {
+				result.add(dataSet);
+			}
+		} else {
+			OrderedLineDataSet dataSet1 = getDataSet(chart, app, analysis, calcWithoutGaps, false, firstType);
+			OrderedLineDataSet dataSet2 = getDataSet(chart, app, analysis, calcWithoutGaps, true, secondType);
+			if (dataSet1 == null && dataSet2 == null) {
+				return new ArrayList<>();
+			} else if (dataSet1 == null) {
+				result.add(dataSet2);
+			} else if (dataSet2 == null) {
+				result.add(dataSet1);
+			} else if (dataSet1.getPriority() < dataSet2.getPriority()) {
+				result.add(dataSet2);
+				result.add(dataSet1);
+			} else {
+				result.add(dataSet1);
+				result.add(dataSet2);
+			}
+		}
+		return result;
+	}
+
+	private static OrderedLineDataSet getDataSet(@NonNull LineChart chart,
+	                                             @NonNull OsmandApplication app,
+	                                             @NonNull GPXTrackAnalysis analysis,
+	                                             boolean calcWithoutGaps,
+	                                             boolean useRightAxis,
+	                                             @NonNull LineGraphType type) {
+		OrderedLineDataSet dataSet = null;
+		switch (type) {
+			case ALTITUDE: {
+				if (analysis.hasElevationData) {
+					dataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
+							analysis, GPXDataSetAxisType.DISTANCE, useRightAxis, true, calcWithoutGaps);
+				}
+				break;
+			}
+			case SLOPE:
+				if (analysis.hasElevationData) {
+					dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
+							analysis, GPXDataSetAxisType.DISTANCE, null, useRightAxis, true, calcWithoutGaps);
+				}
+				break;
+			case SPEED: {
+				if (analysis.hasSpeedData) {
+					dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
+							analysis, GPXDataSetAxisType.DISTANCE, useRightAxis, true, calcWithoutGaps);
+				}
+				break;
+			}
+		}
+		return dataSet;
+	}
+
+	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXUtilities.GPXFile gpx) {
+		GpxDisplayItem gpxItem = null;
+		String groupName = app.getString(R.string.current_route);
+		GpxDisplayGroup group = app.getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
+		if (group != null && group.getModifiableList().size() > 0) {
+			gpxItem = group.getModifiableList().get(0);
+			if (gpxItem != null) {
+				gpxItem.route = true;
+			}
+		}
+		return gpxItem;
+	}
 
 
 	public static class GPXInfo {

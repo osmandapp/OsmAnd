@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.helpers.Kml2Gpx;
 import net.osmand.util.Algorithms;
 
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
-class KmlImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
+class KmlImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
 	private ImportHelper importHelper;
 	private Uri uri;

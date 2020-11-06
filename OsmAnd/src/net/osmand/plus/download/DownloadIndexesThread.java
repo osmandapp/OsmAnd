@@ -138,10 +138,10 @@ public class DownloadIndexesThread {
 			String setTts = null;
 			for (String s : OsmandSettings.TTS_AVAILABLE_VOICES) {
 				if (lng.startsWith(s)) {
-					setTts = s + "-tts";
+					setTts = s + IndexConstants.VOICE_PROVIDER_SUFFIX;
 					break;
 				} else if (lng.contains("," + s)) {
-					setTts = s + "-tts";
+					setTts = s + IndexConstants.VOICE_PROVIDER_SUFFIX;
 				}
 			}
 			if (setTts != null) {
@@ -544,7 +544,7 @@ public class DownloadIndexesThread {
 			// validate enough space
 			if (asz != -1 && cs > asz) {
 				String breakDownloadMessage = app.getString(R.string.download_files_not_enough_space,
-						cs, asz);
+						String.valueOf(cs), String.valueOf(asz));
 				publishProgress(breakDownloadMessage);
 				return false;
 			}

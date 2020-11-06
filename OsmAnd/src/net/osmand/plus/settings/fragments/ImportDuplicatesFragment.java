@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,18 +26,21 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.AppInitializer;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.view.ComplexButton;
 
@@ -44,14 +48,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.IndexConstants.AV_INDEX_DIR;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.IndexConstants.RENDERERS_DIR;
-import static net.osmand.IndexConstants.ROUTING_PROFILES_DIR;
+import static net.osmand.plus.settings.backend.backup.FileSettingsItem.*;
 import static net.osmand.plus.settings.fragments.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
 
 
-public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View.OnClickListener {
+public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ImportDuplicatesFragment.class.getSimpleName();
 	private OsmandApplication app;
@@ -68,8 +69,9 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 	private SettingsHelper settingsHelper;
 
 	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
-									List<SettingsItem> settingsItems, File file) {
+	                                List<SettingsItem> settingsItems, File file, Fragment targetFragment) {
 		ImportDuplicatesFragment fragment = new ImportDuplicatesFragment();
+		fragment.setTargetFragment(targetFragment, 0);
 		fragment.setDuplicatesList(duplicatesList);
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFile(file);
@@ -96,7 +98,11 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			if (file == null) {
 				file = importTask.getFile();
 			}
-			importTask.setImportListener(getImportListener());
+			Fragment target = getTargetFragment();
+			if (target instanceof ImportSettingsFragment) {
+				SettingsImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
+				importTask.setImportListener(importListener);
+			}
 		}
 	}
 
@@ -124,8 +130,18 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
 						: getResources().getColor(R.color.active_buttons_and_links_text_light))
 		);
-		keepBothBtn.setOnClickListener(this);
-		replaceAllBtn.setOnClickListener(this);
+		keepBothBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				importItems(false);
+			}
+		});
+		replaceAllBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				importItems(true);
+			}
+		});
 		list = root.findViewById(R.id.list);
 		ViewCompat.setNestedScrollingEnabled(list, false);
 		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
@@ -178,6 +194,12 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		List<File> multimediaFilesList = new ArrayList<>();
 		List<File> trackFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
+		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
+		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
+		List<File> ttsVoiceFilesList = new ArrayList<>();
+		List<File> voiceFilesList = new ArrayList<>();
+		List<File> mapFilesList = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
 			if (object instanceof ApplicationMode.ApplicationModeBean) {
@@ -190,17 +212,30 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 				tileSources.add((ITileSource) object);
 			} else if (object instanceof File) {
 				File file = (File) object;
-				if (file.getAbsolutePath().contains(RENDERERS_DIR)) {
+				FileSubtype fileSubtype = FileSubtype.getSubtypeByPath(app, file.getPath());
+				if (fileSubtype == FileSubtype.RENDERING_STYLE) {
 					renderFilesList.add(file);
-				} else if (file.getAbsolutePath().contains(ROUTING_PROFILES_DIR)) {
+				} else if (fileSubtype == FileSubtype.ROUTING_CONFIG) {
 					routingFilesList.add(file);
-				} else if (file.getAbsolutePath().contains(AV_INDEX_DIR)) {
+				} else if (fileSubtype == FileSubtype.MULTIMEDIA_NOTES) {
 					multimediaFilesList.add(file);
-				} else if (file.getAbsolutePath().contains(GPX_INDEX_DIR)) {
+				} else if (fileSubtype == FileSubtype.GPX) {
 					trackFilesList.add(file);
+				} else if (fileSubtype.isMap()) {
+					mapFilesList.add(file);
+				} else if (fileSubtype == FileSubtype.TTS_VOICE) {
+					ttsVoiceFilesList.add(file);
+				} else if (fileSubtype == FileSubtype.VOICE) {
+					voiceFilesList.add(file);
 				}
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
+			} else if (object instanceof FavoriteGroup) {
+				favoriteGroups.add((FavoriteGroup) object);
+			} else if (object instanceof OsmNotesPoint) {
+				osmNotesPointList.add((OsmNotesPoint) object);
+			} else if (object instanceof OpenstreetmapPoint) {
+				osmEditsPointList.add((OpenstreetmapPoint) object);
 			}
 		}
 		if (!profiles.isEmpty()) {
@@ -239,21 +274,31 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			duplicates.add(getString(R.string.avoid_road));
 			duplicates.addAll(avoidRoads);
 		}
-		return duplicates;
-	}
-
-	@Override
-	public void onClick(View view) {
-		switch (view.getId()) {
-			case R.id.keep_both_btn: {
-				importItems(false);
-				break;
-			}
-			case R.id.replace_all_btn: {
-				importItems(true);
-				break;
-			}
+		if (!favoriteGroups.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_favorites));
+			duplicates.addAll(favoriteGroups);
 		}
+		if (!osmNotesPointList.isEmpty()) {
+			duplicates.add(getString(R.string.osm_notes));
+			duplicates.addAll(osmNotesPointList);
+		}
+		if (!osmEditsPointList.isEmpty()) {
+			duplicates.add(getString(R.string.osm_edits));
+			duplicates.addAll(osmEditsPointList);
+		}
+		if (!mapFilesList.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_maps));
+			duplicates.addAll(mapFilesList);
+		}
+		if (!ttsVoiceFilesList.isEmpty()) {
+			duplicates.add(getString(R.string.local_indexes_cat_tts));
+			duplicates.addAll(ttsVoiceFilesList);
+		}
+		if (!voiceFilesList.isEmpty()) {
+			duplicates.add(getString(R.string.local_indexes_cat_voice));
+			duplicates.addAll(voiceFilesList);
+		}
+		return duplicates;
 	}
 
 	@Override
@@ -267,7 +312,11 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 			for (SettingsItem item : settingsItems) {
 				item.setShouldReplace(shouldReplace);
 			}
-			settingsHelper.importSettings(file, settingsItems, "", 1, getImportListener());
+			Fragment target = getTargetFragment();
+			if (target instanceof ImportSettingsFragment) {
+				SettingsImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
+				settingsHelper.importSettings(file, settingsItems, "", 1, importListener);
+			}
 		}
 	}
 
@@ -280,22 +329,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		progressBar.setVisibility(View.VISIBLE);
 		list.setVisibility(View.GONE);
 		buttonsContainer.setVisibility(View.GONE);
-	}
-
-	private SettingsHelper.SettingsImportListener getImportListener() {
-		return new SettingsHelper.SettingsImportListener() {
-			@Override
-			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
-				if (succeed) {
-					app.getRendererRegistry().updateExternalRenderers();
-					AppInitializer.loadRoutingFiles(app, null);
-					FragmentManager fm = getFragmentManager();
-					if (fm != null && file != null) {
-						ImportCompleteFragment.showInstance(fm, items, file.getName());
-					}
-				}
-			}
-		};
 	}
 
 	private void setupToolbar(Toolbar toolbar) {

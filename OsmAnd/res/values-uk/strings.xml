@@ -3929,4 +3929,18 @@
     <string name="message_need_calculate_route_before_show_graph">%1$s дані доступні лише для доріг, вам потрібно обчислити маршрут за допомогою «Маршрут між точками», щоб отримати його.</string>
     <string name="message_graph_will_be_available_after_recalculation">Дочекайтеся переобчислення маршруту.
 \nГрафік буде доступний після переобчислення.</string>
+    <string name="app_mode_gap">Розрив</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="shared_string_local_maps">Місцеві мапи</string>
+    <string name="icon_group_amenity">Зручності</string>
+    <string name="icon_group_special">Спеціальні</string>
+    <string name="icon_group_transport">Транспорт</string>
+    <string name="icon_group_service">Послуги</string>
+    <string name="icon_group_symbols">Знаки</string>
+    <string name="icon_group_sport">Спорт</string>
+    <string name="icon_group_emergency">Аварійні служби</string>
+    <string name="icon_group_travel">Мандрівка</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd використовує MGRS, який подібний формату UTM NATO.</string>
 </resources>

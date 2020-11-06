@@ -26,7 +26,9 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -158,7 +160,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
-				(helper.getFinalLocation() != null && helper.getRoute().isCalculated())) {
+				(helper.getFinalLocation() != null && helper.getRoute().isCalculated()) ||
+				isPlanRouteGraphsAvailable()) {
 
 			updateAttrs(settings, tileBox);
 			
@@ -200,6 +203,17 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 		}
 	
+	}
+
+	private boolean isPlanRouteGraphsAvailable() {
+		if (view.getContext() instanceof MapActivity) {
+			MapActivity mapActivity = (MapActivity) view.getContext();
+			MeasurementToolFragment fragment = mapActivity.getMeasurementToolFragment();
+			if (fragment != null) {
+				return fragment.hasVisibleGraph();
+			}
+		}
+		return false;
 	}
 
 	private void updateAttrs(DrawSettings settings, RotatedTileBox tileBox) {

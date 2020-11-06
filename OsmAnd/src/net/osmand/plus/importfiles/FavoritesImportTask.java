@@ -9,6 +9,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseLoadAsyncTask;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
-class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
+class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
 	private GPXFile gpxFile;
 	private String fileName;

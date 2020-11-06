@@ -28,6 +28,12 @@
 		android:title="@string/navigate_point_format_utm" />
 
 	<CheckBoxPreference
+		android:key="mgrs_format"
+		android:layout="@layout/preference_radio_button"
+		android:persistent="false"
+		android:title="@string/navigate_point_format_mgrs" />
+
+	<CheckBoxPreference
 		android:key="olc_format"
 		android:layout="@layout/preference_radio_button"
 		android:persistent="false"

@@ -33,6 +33,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
@@ -40,6 +41,7 @@ import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.measurementtool.GpxData;
@@ -67,6 +69,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -83,6 +86,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	private ImportHelper importHelper;
 
 	private GPXFile gpxFile;
+
+	private View buttonsShadow;
+	private ImageButton sortButton;
+
+	private TracksToFollowCard tracksCard;
+	private TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
 
 	private boolean editingTrack;
 	private boolean selectingTrack;
@@ -146,6 +155,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			ImageButton closeButton = view.findViewById(R.id.close_button);
+			buttonsShadow = view.findViewById(R.id.buttons_shadow);
 			closeButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
 			closeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -159,6 +169,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			}
 			setupCards();
 			setupButtons(view);
+			setupSortButton(view);
 			setupScrollShadow();
 			if (!isPortrait()) {
 				int widthNoShadow = getLandscapeNoShadowWidth();
@@ -172,6 +183,22 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		return view;
 	}
 
+	private void showShadowButton() {
+		buttonsShadow.setVisibility(View.VISIBLE);
+		buttonsShadow.animate()
+				.alpha(0.8f)
+				.setDuration(200)
+				.setListener(null);
+	}
+
+	private void hideShadowButton() {
+		buttonsShadow.animate()
+				.alpha(0f)
+				.setDuration(200);
+
+	}
+
+
 	private void setupCards() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -179,10 +206,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			cardsContainer.removeAllViews();
 
 			if (gpxFile == null || selectingTrack) {
-				ImportTrackCard importTrackCard = new ImportTrackCard(mapActivity);
-				importTrackCard.setListener(this);
-				cardsContainer.addView(importTrackCard.build(mapActivity));
-
 				setupTracksCard();
 			} else {
 				String fileName = null;
@@ -242,7 +265,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
 			if (list.size() > 0) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
-				TracksToFollowCard tracksCard = new TracksToFollowCard(mapActivity, list, defaultCategory);
+				tracksCard = new TracksToFollowCard(mapActivity, list, defaultCategory);
 				tracksCard.setListener(FollowTrackFragment.this);
 				getCardsContainer().addView(tracksCard.build(mapActivity));
 			}
@@ -578,6 +601,36 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
+	private void setupSortButton(View view) {
+		final ImageButton sortButton = view.findViewById(R.id.sort_button);
+		int colorId = isNightMode() ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
+		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, colorId);
+		sortButton.setImageResource(sortByMode.getIconId());
+		AndroidUtils.setBackground(sortButton, background);
+		sortButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				List<SimplePopUpMenuItem> items = new ArrayList<>();
+				for (final TracksSortByMode mode : TracksSortByMode.values()) {
+					items.add(new SimplePopUpMenuItem(getString(mode.getNameId()),
+							app.getUIUtilities().getThemedIcon(mode.getIconId()),
+							new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									sortByMode = mode;
+									sortButton.setImageResource(mode.getIconId());
+									if (tracksCard != null) {
+										tracksCard.setSortByMode(mode);
+									}
+								}
+							}, sortByMode == mode
+					));
+				}
+				UiUtilities.showPopUpMenu(v, items);
+			}
+		});
+	}
+
 	private void setupButtons(View view) {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
@@ -593,20 +646,16 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	private void setupScrollShadow() {
-		int shadowIconId = isNightMode() ? R.drawable.bg_contextmenu_shadow : R.drawable.bg_contextmenu_shadow;
-		final Drawable shadowIcon = app.getUIUtilities().getIcon(shadowIconId);
-
 		final View scrollView = getBottomScrollView();
-		final FrameLayout bottomContainer = getBottomContainer();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new OnScrollChangedListener() {
 
 			@Override
 			public void onScrollChanged() {
-				int scrollY = scrollView.getScrollY();
-				if (scrollY <= 0 && bottomContainer.getForeground() != null) {
-					bottomContainer.setForeground(null);
-				} else if (scrollY > 0 && bottomContainer.getForeground() == null) {
-					bottomContainer.setForeground(shadowIcon);
+				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+				if (scrollToBottomAvailable) {
+					showShadowButton();
+				} else {
+					hideShadowButton();
 				}
 			}
 		});

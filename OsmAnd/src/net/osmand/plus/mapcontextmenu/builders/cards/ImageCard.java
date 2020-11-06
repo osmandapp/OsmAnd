@@ -39,6 +39,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public abstract class ImageCard extends AbstractCard {
 
@@ -422,7 +429,7 @@ public abstract class ImageCard extends AbstractCard {
 		}
 
 		public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon,
-		                         @Nullable Map<String, String> params, GetImageCardsListener listener) {
+								 @Nullable Map<String, String> params, GetImageCardsListener listener) {
 			this.mapActivity = mapActivity;
 			this.app = mapActivity.getMyApplication();
 			this.latLon = latLon;
@@ -499,7 +506,7 @@ public abstract class ImageCard extends AbstractCard {
 					}
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 			if (listener != null) {
 				listener.onPostProcess(result);

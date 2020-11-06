@@ -13,6 +13,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer.LoadRoutingFilesCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.importfiles.ImportHelper.ImportType;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
@@ -28,7 +29,7 @@ import java.io.InputStream;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 
-class XmlImportTask extends BaseImportAsyncTask<Void, Void, String> {
+class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private Uri uri;
 	private String destFileName;

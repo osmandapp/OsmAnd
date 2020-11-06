@@ -3801,7 +3801,7 @@
     <string name="plan_route_select_track_file_for_open">Sélectionnez un fichier de trace à ouvrir.</string>
     <string name="shared_string_done">Terminé</string>
     <string name="overwrite_track">Remplacer la trace</string>
-    <string name="route_between_points_desc">Sélectionnez comment relier les points : par une ligne droite ou en calculant un itinéraire reliant les points comme indiqué ci-dessous.</string>
+    <string name="route_between_points_desc">Définissez comment relier les points : par une ligne droite ou en calculant un itinéraire avec le profil ci-dessous.</string>
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
     <string name="route_between_points_warning_desc">Ensuite, sélectionnez le profil de navigation pour détecter les routes autorisées et le seuil de distance afin de déplacer votre trace.</string>
@@ -3845,7 +3845,7 @@
     <string name="simplified_track">Trace simplifiée</string>
     <string name="shared_string_file_name">Nom de fichier</string>
     <string name="system_default_theme">Par défaut</string>
-    <string name="open_saved_track">Ouvrir une trace enregistrée</string>
+    <string name="open_saved_track">Ouvrir la trace enregistrée</string>
     <string name="shared_string_is_saved">a été enregistré</string>
     <string name="one_point_error">Veuillez ajouter au moins deux points.</string>
     <string name="import_track_descr">Sélectionnez le fichier de trace à suivre ou importez-le depuis votre appareil.</string>
@@ -3912,4 +3912,18 @@
 \nLe graphique sera disponible à l\'issue du calcul.</string>
     <string name="snowmobile_render_descr">Pour la conduite en motoneige avec des routes et des pistes dédiées.</string>
     <string name="shared_string_graph">Graphique</string>
+    <string name="app_mode_gap">Écart</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
+    <string name="shared_string_local_maps">Cartes locales</string>
+    <string name="icon_group_amenity">Loisir</string>
+    <string name="icon_group_special">Spécial</string>
+    <string name="icon_group_transport">Transport</string>
+    <string name="icon_group_service">Service</string>
+    <string name="icon_group_symbols">Symboles</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="icon_group_emergency">Urgence</string>
+    <string name="icon_group_travel">Voyage</string>
+    <string name="mgrs_format_descr">OsmAnd utilise le système de référence MDRS de l\'OTAN dérivé des formats UTM et UPS.</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="navigate_point_mgrs">MGRS</string>
 </resources>

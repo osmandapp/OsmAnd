@@ -3265,7 +3265,7 @@
     <string name="language_and_output">Język i wyjście</string>
     <string name="plugins_settings">Ustawienia wtyczki</string>
     <string name="shared_string_by_default">Domyślnie</string>
-    <string name="download_detailed_map">Pobierz szczegółową mapę %S, aby zobaczyć ten obszar.</string>
+    <string name="download_detailed_map">Pobierz szczegółową mapę %s, aby zobaczyć ten obszar.</string>
     <string name="change_data_storage_full_description">Przenieść pliki danych OsmAnd do nowego położenia\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Proszę wprowadzić ścieżkę do katalogu</string>
@@ -3675,7 +3675,7 @@
     <string name="osmand_purchases_item">Zakupy w OsmAnd</string>
     <string name="osm_live_payment_subscription_management">Opłata zostanie pobrana z twojego konta Google Play przy potwierdzeniu zakupu.
 \n
-\nSubskrypcja automatycznie odnawia się, chyba że anulujesz ją przed dniem odnowienia. Twoje konto zostanie obciążone za okres odnowienia (miesiąc/trzy miesiące/rok) dopiero w dniu odnowienia.
+\nSubskrypcja automatycznie odnawia się, chyba że anulujesz ją przed dniem odnowienia. Twoje konto zostanie obciążone za okres odnowienia (miesiąc/trzy miesiące/rok) dopiero w dniu odnowienia.
 \n
 \nMożesz zarządzać subskrypcjami i anulować je w ustawieniach Google Play.</string>
     <string name="release_3_7">• Nowe mapy stoków offline 
@@ -3769,11 +3769,11 @@
     <string name="uninstall_speed_cameras">Odinstaluj fotoradary</string>
     <string name="shared_string_legal">Prawny</string>
     <string name="speed_camera_pois">Punkty fotoradarów</string>
-    <string name="speed_cameras_legal_descr">W niektórych krajachi regionach uzywanie aplikacji ostrzegających o fotoradarach jest zabronione przez prawo. 
+    <string name="speed_cameras_legal_descr">W niektórych krajach i regionach używanie aplikacji ostrzegających o fotoradarach jest zabronione przez prawo.
 \n
-\nMusisz dokonać wyboru w zależności od prawa danego kraju. 
+\nMusisz dokonać wyboru w zależności od prawa danego kraju.
 \n
-\nWybierz %1$S i będziesz otrzymywać powiadomienia i ostrzeżenia o fotoradarach. 
+\nWybierz %1$s i będziesz otrzymywać powiadomienia i ostrzeżenia o fotoradarach.
 \n
 \nWybierz %2$s. Wszystkie dane o fotoradarach: ostrzeżenia, powiadomienia, miejsca użyteczne zostaną usunięte, aż OsmAnd zostanie zainstalowany ponownie.</string>
     <string name="keep_active">Nie wyłączaj</string>
@@ -3802,7 +3802,7 @@
     <string name="use_volume_buttons_as_zoom">Przyciski głośności jako powiększenie</string>
     <string name="app_mode_wheelchair">Wózek inwalidzki</string>
     <string name="app_mode_go_cart">Gokart</string>
-    <string name="osm_edit_closed_note">Zamknięta notatka OSM</string>
+    <string name="osm_edit_closed_note">Zamknięta uwaga OSM</string>
     <string name="set_working_days_to_continue">Aby kontynuować, musisz ustawić dni robocze</string>
     <string name="route_between_points">Droga pomiędzy punktami</string>
     <string name="plan_a_route">Zaplanuj trasę</string>
@@ -3814,7 +3814,7 @@
     <string name="gpx_split_interval_none_descr">Wybierz żądaną opcję podziału: według czasu lub odległości.</string>
     <string name="track_coloring_solid">Stałe</string>
     <string name="gpx_parse_error">OsmAnd GPX nie jest dobrze uformowany, prosimy o kontakt z zespołem wsparcia technicznego w celu dalszego zbadania sprawy.</string>
-    <string name="turn_screen_on_wake_time_descr">Wybierz limit czasu ekranu po przebudzeniu. (\"%1$s\" nie powoduje przekroczenia limitu czasu).</string>
+    <string name="turn_screen_on_wake_time_descr">Wybierz limit czasu ekranu po przebudzeniu. (\"%1$s\" nie powoduje przekroczenia limitu czasu.)</string>
     <string name="track_show_start_finish_icons">Pokaż ikony początku i końca</string>
     <string name="gpx_split_interval_descr">Wybierz przedział czasowy, w którym będą wyświetlane znaki z odległością lub czasem na torze.</string>
     <string name="shared_string_custom">Dostosowany</string>
@@ -3844,7 +3844,7 @@
     <string name="plan_route_exit_dialog_descr">Czy na pewno chcesz odrzucić wszystkie zmiany w zaplanowanej trasie, zamykając ją\?</string>
     <string name="in_case_of_reverse_direction">W przypadku odwrotnego kierunku</string>
     <string name="navigate_to_track_descr">Przejdź z mojej lokalizacji na trasę</string>
-    <string name="app_mode_wheelchair_forward">Wózek naprzód</string>
+    <string name="app_mode_wheelchair_forward">Wózek inwalidzki naprzód</string>
     <string name="show_gpx">Ślady</string>
     <string name="follow_track">Podążanie za śladem</string>
     <string name="import_track_descr">Wybierz plik śladu do śledzenia lub zaimportuj go z urządzenia.</string>
@@ -3891,7 +3891,7 @@
     <string name="open_saved_track">Otwórz zapisaną ścieżkę</string>
     <string name="shared_string_is_saved">jest zapisywany</string>
     <string name="one_point_error">Należy dodać co najmniej dwa punkty.</string>
-    <string name="disable_recording_once_app_killed_descrp">Wstrzyma rejestrowanie ścieżki, gdy aplikacja zostanie zabita (za pośrednictwem ostatnich aplikacji). (Wskazanie tła OsmAnd znika z paska powiadomień Androida).</string>
+    <string name="disable_recording_once_app_killed_descrp">Wstrzyma rejestrowanie ścieżki, gdy aplikacja zostanie zabita (za pośrednictwem ostatnich aplikacji). (Wskazanie tła OsmAnd znika z paska powiadomień Androida.)</string>
     <string name="shared_string_redo">Ponów</string>
     <string name="release_3_8">• Zaktualizowana funkcja planu trasy: umożliwia korzystanie z różnych typów nawigacji na segment i dołączanie ścieżek
 \n
@@ -3913,7 +3913,7 @@
     <string name="sort_name_ascending">Nazwa: A – Z</string>
     <string name="what_is_new">Co nowego</string>
     <string name="start_finish_icons">Ikony start/koniec</string>
-    <string name="contour_lines_thanks">Dziękujemy za zakup linii konturowych</string>
+    <string name="contour_lines_thanks">Dziękujemy za zakup \"Linii konturowych\"</string>
     <string name="osm_live_payment_desc_hw">Subskrypcja naliczona za wybrany okres. Anuluj ją w AppGallery w dowolnym momencie.</string>
     <string name="osm_live_payment_subscription_management_hw">Płatność zostanie pobrana z konta AppGallery po potwierdzeniu zakupu.
 \n
@@ -3933,4 +3933,23 @@
     <string name="perform_oauth_authorization">Zaloguj się przez OAuth</string>
     <string name="clear_osm_token">Wyczyść token OpenStreetMap OAuth</string>
     <string name="osm_edit_logout_success">Wylogowanie powiodło się</string>
+    <string name="file_already_imported">Plik jest już zaimportowany do OsmAnd</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="use_two_phase_routing">Użyj 2-fazowego algorytmu routingu A *</string>
+    <string name="shared_string_graph">Wykres</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s dane dostępne tylko na drogach, aby je uzyskać, musisz obliczyć trasę za pomocą opcji „Trasa między punktami”.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Poczekaj na ponowne obliczenie trasy.
+\nWykres będzie dostępny po ponownym obliczeniu.</string>
+    <string name="shared_string_local_maps">Mapy lokalne</string>
+    <string name="app_mode_gap">Luka</string>
+    <string name="icon_group_amenity">Udogodnienie</string>
+    <string name="icon_group_special">Specjalne</string>
+    <string name="icon_group_transport">Transport</string>
+    <string name="icon_group_service">Usługi</string>
+    <string name="icon_group_symbols">Symbole</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="icon_group_emergency">Służby ratunkowe</string>
+    <string name="icon_group_travel">Podróże</string>
 </resources>

@@ -454,7 +454,7 @@
     <string name="poi_attraction_train">Vonat (látványosság)</string>
     <string name="poi_attraction_water_slide">Vízi csúszda</string>
     <string name="poi_hunting_lodge">Vadászház</string>
-    <string name="poi_internet_access_wlan">Internetcsatlakozás: WLAN</string>
+    <string name="poi_internet_access_wlan">Internetcsatlakozás: WLAN (wifi)</string>
     <string name="poi_internet_access_terminal">Internetcsatlakozás: munkaállomás</string>
     <string name="poi_internet_access_wired">Internetcsatlakozás: kábel</string>
     <string name="poi_internet_access_public">Internetcsatlakozás: nyilvános</string>
@@ -836,7 +836,7 @@
     <string name="poi_denomination_georgian_orthodox">Grúz ortodox</string>
     <string name="poi_denomination_romanian_orthodox">Román ortodox</string>
     <string name="poi_denomination_coptic_orthodox">Kopt ortodox</string>
-    <string name="poi_internet_access_yes">Internetcsatlakozás</string>
+    <string name="poi_internet_access_yes">Internetcsatlakozás van</string>
     <string name="poi_internet_access_no">Internetcsatlakozás nincs</string>
     <string name="poi_dance_floor">Tánctér</string>
     <string name="poi_nightclub">Night club; Diszkó</string>
@@ -1547,7 +1547,7 @@
     <string name="poi_internet_access_type_wlan">Wi-Fi</string>
     <string name="poi_internet_access_type_terminal">Munkaállomás</string>
     <string name="poi_internet_access_type_wired">Vezetékes</string>
-    <string name="poi_internet_access_type_public">Nyilvános</string>
+    <string name="poi_internet_access_type_public">Internetcsatlakozás: nyilvános</string>
     <string name="poi_internet_access_type_service">Segítenek</string>
     <string name="poi_internet_access_type_no">Internetcsatlakozás nincs</string>
     <string name="poi_internet_access_type_yes">Internetcsatlakozás van</string>
@@ -3836,4 +3836,10 @@
     <string name="poi_nuts">Mag- és aszaltgyümölcsbolt</string>
     <string name="poi_beehive">Méhkaptár</string>
     <string name="poi_fuel_lng">LNG (cseppfolyósított földgáz)</string>
+    <string name="poi_parking_layby">Út mellett parkolósáv (UK)</string>
+    <string name="poi_parking_sheds">Fedett parkolóhely</string>
+    <string name="poi_parking_rooftop">Tető</string>
+    <string name="poi_internet_access_fee_customers">Internetcsatlakozás: ügyfeleknek</string>
+    <string name="poi_radar_tower">Radartorony</string>
+    <string name="poi_gpx_point">GPX-pont</string>
 </resources>

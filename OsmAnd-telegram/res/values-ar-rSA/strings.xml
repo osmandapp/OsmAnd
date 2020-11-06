@@ -267,4 +267,8 @@
     <string name="location_sharing_status">مشاركة: %1$s</string>
     <string name="shared_string_enabled">مفعل</string>
     <string name="duration_ago">%1$s منذ</string>
+    <string name="shared_string_export">تصدير</string>
+    <string name="logcat_buffer">لوجكات العازلة</string>
+    <string name="logcat_buffer_descr">تحقق من السجلات التفصيلية للتطبيق وشاركها</string>
+    <string name="send_report">إرسال تقرير</string>
 </resources>

@@ -1,52 +1,35 @@
 package net.osmand.plus.track;
 
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.internal.FlowLayout;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackColoringCard extends BaseCard implements ColorPickerListener {
+public class TrackColoringCard extends BaseCard {
 
 	private static final int MINIMUM_CONTRAST_RATIO = 3;
-
-	public static final int INVALID_VALUE = -1;
 
 	private final static String SOLID_COLOR = "solid_color";
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
@@ -57,7 +40,6 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 	private TrackAppearanceItem selectedAppearanceItem;
 	private List<TrackAppearanceItem> appearanceItems;
 
-	private List<Integer> customColors;
 	private Fragment target;
 
 	public TrackColoringCard(MapActivity mapActivity, TrackDrawInfo trackDrawInfo, Fragment target) {
@@ -65,7 +47,6 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 		this.target = target;
 		this.trackDrawInfo = trackDrawInfo;
 		appearanceItems = getGradientAppearanceItems();
-		customColors = getCustomColors();
 	}
 
 	@Override
@@ -76,8 +57,6 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 	@Override
 	protected void updateContent() {
 		updateHeader();
-		createColorSelector();
-		updateColorSelector();
 
 //		coloringAdapter = new TrackColoringAdapter(appearanceItems);
 //		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
@@ -85,25 +64,6 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 //		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
-	}
-
-	private List<Integer> getCustomColors() {
-		List<Integer> colors = new ArrayList<>();
-		List<String> colorNames = app.getSettings().CUSTOM_TRACK_COLORS.getStringsList();
-		if (colorNames != null) {
-			for (String colorHex : colorNames) {
-				try {
-					if (!Algorithms.isEmpty(colorHex)) {
-						int color = Algorithms.parseColor(colorHex);
-						colors.add(color);
-					}
-				} catch (IllegalArgumentException e) {
-					log.error(e);
-				}
-			}
-		}
-
-		return colors;
 	}
 
 	private List<TrackAppearanceItem> getGradientAppearanceItems() {
@@ -115,138 +75,6 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 //		}
 
 		return items;
-	}
-
-	private void createColorSelector() {
-		FlowLayout selectColor = view.findViewById(R.id.select_color);
-		selectColor.removeAllViews();
-
-		for (int color : customColors) {
-			selectColor.addView(createColorItemView(color, selectColor, true));
-		}
-		if (customColors.size() < 6) {
-			selectColor.addView(createAddCustomColorItemView(selectColor));
-		}
-		selectColor.addView(createDividerView(selectColor));
-
-		List<Integer> colors = new ArrayList<>();
-		for (AppearanceListItem appearanceListItem : GpxAppearanceAdapter.getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
-			if (!colors.contains(appearanceListItem.getColor())) {
-				colors.add(appearanceListItem.getColor());
-			}
-		}
-		for (int color : colors) {
-			selectColor.addView(createColorItemView(color, selectColor, false));
-		}
-		updateColorSelector(trackDrawInfo.getColor(), selectColor);
-	}
-
-	private View createColorItemView(@ColorInt final int color, final FlowLayout rootView, boolean customColor) {
-		View colorItemView = createCircleView(rootView);
-
-		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
-
-		Drawable transparencyIcon = getTransparencyIcon(app, color);
-		Drawable colorIcon = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle, color);
-		Drawable layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon);
-		double contrastRatio = ColorUtils.calculateContrast(color, ContextCompat.getColor(app, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
-		if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
-			backgroundCircle.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
-		}
-		backgroundCircle.setImageDrawable(layeredIcon);
-		backgroundCircle.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateColorSelector(color, rootView);
-//				coloringAdapter.notifyDataSetChanged();
-				trackDrawInfo.setColor(color);
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(TrackColoringCard.this);
-				}
-			}
-		});
-		if (customColor) {
-			backgroundCircle.setOnLongClickListener(new View.OnLongClickListener() {
-				@Override
-				public boolean onLongClick(View v) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						CustomColorBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), target, color);
-					}
-					return false;
-				}
-			});
-		}
-		colorItemView.setTag(color);
-		return colorItemView;
-	}
-
-	private Drawable getTransparencyIcon(OsmandApplication app, @ColorInt int color) {
-		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
-		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
-		return app.getUIUtilities().getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor);
-	}
-
-	private View createAddCustomColorItemView(FlowLayout rootView) {
-		View colorItemView = createCircleView(rootView);
-		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
-
-		int bgColorId = nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
-		Drawable backgroundIcon = app.getUIUtilities().getIcon(R.drawable.bg_point_circle, bgColorId);
-
-		ImageView icon = colorItemView.findViewById(R.id.icon);
-		icon.setVisibility(View.VISIBLE);
-		int activeColorResId = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
-		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_plus, activeColorResId));
-
-		backgroundCircle.setImageDrawable(backgroundIcon);
-		backgroundCircle.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					CustomColorBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), target, null);
-				}
-			}
-		});
-		return colorItemView;
-	}
-
-	private View createDividerView(FlowLayout rootView) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		View divider = themedInflater.inflate(R.layout.simple_divider_item, rootView, false);
-
-		LinearLayout dividerContainer = new LinearLayout(view.getContext());
-		dividerContainer.addView(divider);
-		dividerContainer.setPadding(0, AndroidUtils.dpToPx(app, 1), 0, AndroidUtils.dpToPx(app, 5));
-
-		return dividerContainer;
-	}
-
-	private View createCircleView(ViewGroup rootView) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		View circleView = themedInflater.inflate(R.layout.point_editor_button, rootView, false);
-		ImageView outline = circleView.findViewById(R.id.outline);
-		int colorId = nightMode ? R.color.stroked_buttons_and_links_outline_dark : R.color.stroked_buttons_and_links_outline_light;
-		Drawable contourIcon = app.getUIUtilities().getIcon(R.drawable.bg_point_circle_contour, colorId);
-		outline.setImageDrawable(contourIcon);
-		return circleView;
-	}
-
-	private void updateColorSelector(int color, View rootView) {
-		View oldColor = rootView.findViewWithTag(trackDrawInfo.getColor());
-		if (oldColor != null) {
-			oldColor.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
-			ImageView icon = oldColor.findViewById(R.id.icon);
-			icon.setImageDrawable(UiUtilities.tintDrawable(icon.getDrawable(), R.color.icon_color_default_light));
-		}
-		View newColor = rootView.findViewWithTag(color);
-		if (newColor != null) {
-			newColor.findViewById(R.id.outline).setVisibility(View.VISIBLE);
-		}
-		mapActivity.refreshMap();
 	}
 
 	private TrackAppearanceItem getSelectedAppearanceItem() {
@@ -291,49 +119,6 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 
 		updateHeader();
 		updateColorSelector();
-	}
-
-	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		if (prevColor != null) {
-			int index = customColors.indexOf(prevColor);
-			if (index != INVALID_VALUE) {
-				customColors.set(index, newColor);
-				saveCustomColorsToTracks(prevColor, newColor);
-			}
-			if (trackDrawInfo.getColor() == prevColor) {
-				trackDrawInfo.setColor(newColor);
-			}
-		} else if (customColors.size() < 6) {
-			customColors.add(newColor);
-			trackDrawInfo.setColor(newColor);
-		}
-		saveCustomColors();
-		updateContent();
-	}
-
-	private void saveCustomColorsToTracks(int prevColor, int newColor) {
-		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
-		for (GpxDataItem dataItem : gpxDataItems) {
-			if (prevColor == dataItem.getColor()) {
-				app.getGpxDbHelper().updateColor(dataItem, newColor);
-			}
-		}
-		List<SelectedGpxFile> files = app.getSelectedGpxHelper().getSelectedGPXFiles();
-		for (SelectedGpxFile selectedGpxFile : files) {
-			if (prevColor == selectedGpxFile.getGpxFile().getColor(0)) {
-				selectedGpxFile.getGpxFile().setColor(newColor);
-			}
-		}
-	}
-
-	private void saveCustomColors() {
-		List<String> colorNames = new ArrayList<>();
-		for (Integer color : customColors) {
-			String colorHex = Algorithms.colorToString(color);
-			colorNames.add(colorHex);
-		}
-		app.getSettings().CUSTOM_TRACK_COLORS.setStringsList(colorNames);
 	}
 
 	private class TrackColoringAdapter extends RecyclerView.Adapter<TrackAppearanceViewHolder> {

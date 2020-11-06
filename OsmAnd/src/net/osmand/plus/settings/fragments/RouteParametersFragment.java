@@ -24,20 +24,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.slider.Slider;
 
+import net.osmand.AndroidUtils;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -65,8 +65,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private static final String ROUTE_PARAMETERS_IMAGE = "route_parameters_image";
 	private static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 	private static final String ROUTING_SHORT_WAY = "prouting_short_way";
-	private static final String ROUTING_RECALC_DISTANCE= "routing_recalc_distance";
-	private static final String ROUTING_RECALC_WRONG_DIRECTION= "disable_wrong_direction_recalc";
+	private static final String ROUTING_RECALC_DISTANCE = "routing_recalc_distance";
+	private static final String ROUTING_RECALC_WRONG_DIRECTION = "disable_wrong_direction_recalc";
 
 	public static final float DISABLE_MODE = -1.0f;
 	public static final float DEFAULT_MODE = 0.0f;
@@ -158,7 +158,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	private void setupOsmLiveForPublicTransportPref() {
 		SwitchPreferenceEx useOsmLiveForPublicTransport = createSwitchPreferenceEx(settings.USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT.getId(),
-		R.string.use_live_public_transport, R.layout.preference_with_descr_dialog_and_switch);
+				R.string.use_live_public_transport, R.layout.preference_with_descr_dialog_and_switch);
 		useOsmLiveForPublicTransport.setDescription(getString(R.string.use_osm_live_public_transport_description));
 		useOsmLiveForPublicTransport.setSummaryOn(R.string.shared_string_enabled);
 		useOsmLiveForPublicTransport.setSummaryOff(R.string.shared_string_disabled);
@@ -282,8 +282,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					screen.addPreference(reliefFactorRouting);
 				}
 				for (RoutingParameter p : otherRoutingParameters) {
-					String title = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
-					String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
+					String title = AndroidUtils.getRoutingStringPropertyName(app, p.getId(), p.getName());
+					String description = AndroidUtils.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
 
 					if (p.getType() == RoutingParameterType.BOOLEAN) {
 						OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
@@ -426,9 +426,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private static void setupAngleSlider(final float[] angleValue,
-	                                     View sliderView,
-	                                     final boolean nightMode,
-	                                     final int activeColor) {
+										 View sliderView,
+										 final boolean nightMode,
+										 final int activeColor) {
 
 		final Slider angleBar = sliderView.findViewById(R.id.angle_slider);
 		final TextView angleTv = sliderView.findViewById(R.id.angle_text);
@@ -536,7 +536,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			List<RoutingParameter> routingParameters = DRIVING_STYLE.equals(prefId) ? drivingStyleParameters : reliefFactorParameters;
 			for (RoutingParameter p : routingParameters) {
 				String parameterId = p.getId();
-				SettingsNavigationActivity.setRoutingParameterSelected(settings, appMode, parameterId, p.getDefaultBoolean(), parameterId.equals(selectedParameterId));
+				setRoutingParameterSelected(settings, appMode, parameterId, p.getDefaultBoolean(), parameterId.equals(selectedParameterId));
 			}
 			recalculateRoute();
 		} else if (ROUTING_SHORT_WAY.equals(prefId) && newValue instanceof Boolean) {
@@ -571,7 +571,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey, List<RoutingParameter> routingParameters) {
 		String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(groupKey.replace('_', ' '));
-		String title = SettingsBaseActivity.getRoutingStringPropertyName(app, groupKey, defaultTitle);
+		String title = AndroidUtils.getRoutingStringPropertyName(app, groupKey, defaultTitle);
 		ApplicationMode am = getSelectedAppMode();
 
 		Object[] entryValues = new Object[routingParameters.size()];
@@ -581,8 +581,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		for (int i = 0; i < routingParameters.size(); i++) {
 			RoutingParameter parameter = routingParameters.get(i);
 			entryValues[i] = parameter.getId();
-			entries[i] = SettingsNavigationActivity.getRoutinParameterTitle(app, parameter);
-			if (SettingsNavigationActivity.isRoutingParameterSelected(settings, am, parameter)) {
+			entries[i] = getRoutingParameterTitle(app, parameter);
+			if (isRoutingParameterSelected(settings, am, parameter)) {
 				selectedParameterId = parameter.getId();
 			}
 		}
@@ -614,7 +614,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			RoutingParameter p = routingParameters.get(i);
 			BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 
-			entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
+			entries[i] = AndroidUtils.getRoutingStringPropertyName(app, p.getId(), p.getName());
 			prefsIds[i] = booleanRoutingPref.getId();
 
 			if (booleanRoutingPref.getModeValue(selectedMode)) {
@@ -643,6 +643,29 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		drivingStyleParameters.clear();
 		reliefFactorParameters.clear();
 		otherRoutingParameters.clear();
+	}
+
+	private String getRoutingParameterTitle(Context context, RoutingParameter parameter) {
+		return AndroidUtils.getRoutingStringPropertyName(context, parameter.getId(), parameter.getName());
+	}
+
+	private boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode, RoutingParameter parameter) {
+		CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+		if (mode != null) {
+			return property.getModeValue(mode);
+		} else {
+			return property.get();
+		}
+	}
+
+	private void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode,
+											 String parameterId, boolean defaultBoolean, boolean isChecked) {
+		CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(parameterId, defaultBoolean);
+		if (mode != null) {
+			property.setModeValue(mode, isChecked);
+		} else {
+			property.set(isChecked);
+		}
 	}
 
 	private Drawable getRoutingPrefIcon(String prefId) {

@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,15 +20,11 @@ import androidx.appcompat.widget.PopupMenu;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
@@ -43,6 +38,8 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherSettingsRo
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.VoiceGuidanceRoutingParameter;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
 
 import java.io.File;
@@ -148,11 +145,6 @@ public class RoutePreferencesMenu {
 							.setNegativeButton(R.string.shared_string_cancel, null);
 
 					builder.create().show();
-				} else if (obj instanceof OtherSettingsRoutingParameter) {
-					final Intent settings = new Intent(mapActivity, SettingsNavigationActivity.class);
-					settings.putExtra(SettingsNavigationActivity.INTENT_SKIP_DIALOG, true);
-					settings.putExtra(SettingsBaseActivity.INTENT_APP_MODE, routingHelper.getAppMode().getStringKey());
-					mapActivity.startActivity(settings);
 				} else if (obj instanceof MuteSoundRoutingParameter) {
 					final CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 					btn.performClick();

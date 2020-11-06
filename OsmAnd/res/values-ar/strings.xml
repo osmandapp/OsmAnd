@@ -904,7 +904,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">مساعد تخطيط OSM</string>
     <string name="agps_info">معلومات A-GPS</string>
     <string name="shared_string_manage">إدارة</string>
-    <string name="shared_string_edit">تعديل/حذف</string>
+    <string name="shared_string_edit">تعديل</string>
     <string name="shared_string_places">أماكن</string>
     <string name="shared_string_search">بحث</string>
     <string name="shared_string_show_description">عرض الوصف.</string>
@@ -1076,8 +1076,8 @@
     <string name="rendering_category_others">سمات أخرى للخريطة</string>
     <string name="map_widget_appearance_rem">العناصر الأخرى</string>
     <string name="map_widget_top">شريط المعلومات</string>
-    <string name="map_widget_right">العدادات على اليمين</string>
-    <string name="map_widget_left">العدادات على اليسار</string>
+    <string name="map_widget_right">العدادات على اليسار</string>
+    <string name="map_widget_left">العدادات على اليمين</string>
     <string name="search_radius_proximity">ضمن</string>
     <string name="anonymous_user">مستخدم مجهول</string>
     <string name="logged_as">سجل الدخول ب %1$s</string>
@@ -1153,7 +1153,7 @@
     <string name="action_delete">حذف إجراء</string>
     <string name="osm_edits">التعديلات</string>
     <string name="parking_place_limited">وقت وقوف السيارات يقتصر على</string>
-    <string name="shared_string_collapse">تدلي</string>
+    <string name="shared_string_collapse">أقل</string>
     <string name="drawer">قائمة منبسطة</string>
     <string name="osm_settings">تعديل OSM</string>
     <string name="free">فارغ %1$s</string>
@@ -1483,7 +1483,7 @@
     <string name="access_smart_autoannounce">التنبيه الآلي الذكي</string>
     <string name="access_smart_autoannounce_descr">الإشعار فقط عند تغير الوجهة نحو نقطة الهدف.</string>
     <string name="access_autoannounce_period">مهلة التنبيه الآلي</string>
-    <string name="access_autoannounce_period_descr">أقل مهلة بين الاخطارات.</string>
+    <string name="access_autoannounce_period_descr">أقل مهلة بين الإشعارات.</string>
     <string name="access_map_linked_to_location">الخريطة مرتبطة بالموقع</string>
     <string name="rendering_value_bold_name">عريض</string>
     <string name="anonymous_user_hint">المستخدم المجهول لا يمكنه : 
@@ -1658,7 +1658,7 @@
     <string name="no_location_permission">منح الوصول إلى بيانات الموقع.</string>
     <string name="rendering_attr_horseRoutes_name">مسارات الخيول</string>
     <string name="shared_string_hide">إخفاء</string>
-    <string name="av_video_quality_low">أقل جودة</string>
+    <string name="av_video_quality_low">جودة أقل</string>
     <string name="av_video_quality_high">أعلى جودة</string>
     <string name="copied_to_clipboard">تم النسخ في الحافظة</string>
     <string name="context_menu_item_open_note">فتح ملاحظة OSM</string>
@@ -1838,7 +1838,7 @@
     <string name="osb_comment_dialog_error">لا يمكن إضافة تعليق.</string>
     <string name="shared_string_commit">تقديم</string>
     <string name="context_menu_item_delete_waypoint">حذف إحداثية GPX ؟</string>
-    <string name="context_menu_item_edit_waypoint">تعديل/حذف</string>
+    <string name="context_menu_item_edit_waypoint">تعديل</string>
     <string name="lang_nds">ألمانية منخفضة</string>
     <string name="lang_fy">اللغة الفريزية</string>
     <string name="rendering_attr_hideProposed_name">الأشياء المقترحة</string>
@@ -1996,7 +1996,7 @@
     <string name="rendering_attr_hideOverground_name">أشياء فوق سطح الأرض</string>
     <string name="shared_string_change">تغيير</string>
     <string name="get_started">ابدأ</string>
-    <string name="routing_attr_short_way_name">طريق أقل استهلاكا للوقود</string>
+    <string name="routing_attr_short_way_name">طريق أقل استهلاكاً للوقود</string>
     <string name="routing_attr_short_way_description">استخدم طريق أقل استهلاكا للوقود (عادة أقصر).</string>
     <string name="replace_favorite_confirmation">هل تريد استبدال المفضلة %1$s؟</string>
     <string name="clear_tile_data">حذف جميع الطبقات</string>
@@ -2249,7 +2249,7 @@
     <string name="quick_action_auto_zoom_on">قم بتشغيل التكبير التلقائي</string>
     <string name="quick_action_auto_zoom_off">إيقاف التكبير التلقائي</string>
     <string name="quick_action_add_first_intermediate">إضافة وجهة وسطى</string>
-    <string name="analyze_on_map">تحليل على الخريطة</string>
+    <string name="analyze_on_map">تحليل</string>
     <string name="shared_string_visible">المعروضة على الخريطة</string>
     <string name="restore_purchases">استرجاع الشراء</string>
     <string name="do_not_send_anonymous_app_usage">لا ترسل إحصاءات مجهولة عن استخدام التطبيق</string>
@@ -2302,7 +2302,7 @@
     <string name="download_depth_countours">محيطات الأعماق البحرية</string>
     <string name="do_not_send_anonymous_app_usage_desc">أوسماند يقوم بجمع معلومات حول أجزاء من التطبيقات التي تفتحها. الموقع الخاص بك لا يرسل ابدأ، ولا أي شيء تقوم بإدخاله في التطبيق أو أي تفاصيل لمناطق رأيتها ، بحثت عنها أو نزلتها.</string>
     <string name="do_not_show_startup_messages_desc">عرض خصومات التطبيق ورسائل الأحداث المحلية الخاصة.</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">أقل تضاريس</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">تضاريس أقل</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">مسطح</string>
     <string name="routing_attr_driving_style_balance_name">متوازن</string>
     <string name="relief_smoothness_factor_descr">التضاريس المفضلة : مسطحة أو تلال.</string>
@@ -2730,7 +2730,7 @@
     <string name="coord_input_add_point">إضافة نقطة</string>
     <string name="coord_input_save_as_track">حفظ كمسار</string>
     <string name="coord_input_save_as_track_descr">أنت بحاجة %1$s نقاط. اكتب اسم ملف واضغط \"حفظ\".</string>
-    <string name="error_notification_desc">يرجى إرسال لقطة شاشة من هذا الإخطار إلى support@osmand.net</string>
+    <string name="error_notification_desc">يرجى إرسال لقطة شاشة من هذا الإشعار إلى support@osmand.net</string>
     <string name="quick_action_edit_actions">تعديل الإجراء</string>
     <string name="get_osmand_live">احصل على أوسماند لايف لإلغاء قفل جميع الميزات: تحديثات الخرائط اليومية مع تنزيلات غير محدودة، وجميع الإضافات المدفوعة والمجانية ، ويكيبيديا، ويكي الرحلات وأكثر.</string>
     <string name="osm_live_subscriptions">الاشتراكات</string>
@@ -3101,7 +3101,7 @@
     <string name="rendering_attr_tracktype_grade5_name">لينة</string>
     <string name="routeInfo_tracktype_name">متانة السطح</string>
     <string name="shared_string_file_is_saved">%s تم الحفظ</string>
-    <string name="shared_string_open_track">مسار مفتوح</string>
+    <string name="shared_string_open_track">فتح المسار</string>
     <string name="shared_string_track_is_saved">المسار %s تم حفظ</string>
     <string name="gpx_join_gaps">ربط الأجزاء</string>
     <string name="app_mode_camper">العربه</string>
@@ -3223,7 +3223,7 @@
     <string name="app_mode_offroad">الطرق الوعره</string>
     <string name="edit_profile_setup_title">إعداد الوضع</string>
     <string name="edit_profile_setup_subtitle">يحتفظ الوضع بإعداداتك</string>
-    <string name="edit_profile_setup_map_subtitle">حدد خيارات الخريطة للملف الشخصي</string>
+    <string name="edit_profile_setup_map_subtitle">حدد خيارات الخريطة للوضع</string>
     <string name="edit_profile_screen_options_subtitle">حدد خيارات الشاشة للوضع</string>
     <string name="edit_profile_nav_settings_subtitle">حدد إعدادات الملاحة للوضع</string>
     <string name="routing_attr_max_num_changes_description">حدد الحد الأعلى للتغييرات</string>
@@ -3387,7 +3387,7 @@
     <string name="selected_profile">الوضع المحدد</string>
     <string name="reset_confirmation_descr">بالضغط على %1$s، ستفقد كل تغييراتك.</string>
     <string name="reset_all_profile_settings_descr">سيتم إعادة ضبط جميع إعدادات الوضع إلى الحالة الافتراضية بعد التثبيت.</string>
-    <string name="reset_all_profile_settings">استعادة الضبط الافتراضي؟</string>
+    <string name="reset_all_profile_settings">استعادة الضبط الافتراضي لكل الأوضاع؟</string>
     <string name="ltr_or_rtl_combine_via_space">%2$s %1$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%2$s :%1$s</string>
     <string name="file_does_not_contain_routing_rules">\'%1$s\' لا يحتوي الملف على قواعد توجيه ،يرجى اختيار ملف آخر.</string>
@@ -3489,7 +3489,7 @@
     <string name="copy_coordinates">نسخ الإحداثيات</string>
     <string name="routing_profile_direct_to">مباشر إلى نقطة</string>
     <string name="sort_by_category">الفرز حسب الفئة</string>
-    <string name="please_provide_profile_name_message">يرجى اعطاء اسم للملف الشخصي</string>
+    <string name="please_provide_profile_name_message">يرجى إدخال اسم للوضع</string>
     <string name="open_settings">افتح الإعدادات</string>
     <string name="plugin_disabled">الملحق مُعطل</string>
     <string name="shared_string_menu">القائمة</string>
@@ -3732,7 +3732,7 @@
 \nشهر واحد هو 43 829 دقيقة.</string>
     <string name="tiles_storage_descr">اختر كيفية تخزين الطبقات المنزلة.</string>
     <string name="default_screen_timeout">مهلة الشاشة الافتراضية</string>
-    <string name="export_import_quick_actions_with_profiles_promo">يمكنك تصدير أو استيراد إجراءات سريعة باستخدام ملفات بروفايل التطبيق .</string>
+    <string name="export_import_quick_actions_with_profiles_promo">يمكنك تصدير أو استيراد إجراءات سريعة باستخدام أوضاع التطبيق .</string>
     <string name="shared_string_delete_all_q">حذف الكل؟</string>
     <string name="delete_all_actions_message_q">هل أنت متأكد من رغبتك في حذف الاختصارات السريعة %d نهائيًا؟</string>
     <string name="screen_timeout">مهلة الشاشة</string>
@@ -3765,13 +3765,13 @@
     <string name="item_deleted">%1$s محذوفة</string>
     <string name="speed_cameras_restart_descr">إعادة التشغيل مطلوبة لحذف بيانات كاميرا السرعة بالكامل.</string>
     <string name="shared_string_uninstall_and_restart">إلغاء التثبيت وإعادة التشغيل</string>
-    <string name="speed_cameras_legal_descr">في بعض البلدان أو المناطق، يحظر القانون استخدام تطبيقات التحذير من كاميرا السرعة. 
+    <string name="speed_cameras_legal_descr">في بعض البلدان أو المناطق، يحظر القانون استخدام تطبيقات التحذير من كاميرا السرعة.
 \n
-\nعليك أن تختار اعتمادا على قانون بلدك. 
+\nعليك أن تختار اعتمادا على قانون بلدك.
 \n
-\nحدد %1$s وستتلقى تنبيهات وتحذيرات حول كاميرات السرعة. 
+\nحدد %1$s وستتلقى تنبيهات وتحذيرات حول كاميرات السرعة.
 \n
-\nحدد %2$s. جميع البيانات المتعلقة كاميرات السرعة: التنبيهات، والإخطارات، سيتم حذف نقاط الاهتمام حتى يتم إعادة تثبيت أوسماند تماما.</string>
+\nحدد %2$s. جميع البيانات المتعلقة كاميرات السرعة: التنبيهات، والإشعارات، سيتم حذف نقاط الاهتمام حتى يتم إعادة تثبيت أوسماند تماما.</string>
     <string name="routing_attr_length_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
     <string name="routing_attr_length_name">حد الطول</string>
     <string name="speed_cameras_removed_descr">هذا الجهاز لا يملك كاميرات السرعة.</string>
@@ -3909,7 +3909,7 @@
     <string name="complex_routing_descr">التوجيه على مرحلتين لملاحة السيارة.</string>
     <string name="use_native_pt">تطوير النقل العام المحلي</string>
     <string name="use_native_pt_desc">قم بالتبديل إلى Java (الآمن) حساب توجيه النقل العام</string>
-    <string name="perform_oauth_authorization_description">قم بإجراء تسجيل دخول إلى OAuth لاستخدام ميزات osmedit</string>
+    <string name="perform_oauth_authorization_description">قم بتسجيل الدخول إلى OAuth لاستخدام ميزات osmedit</string>
     <string name="perform_oauth_authorization">تسجيل الدخول عبر OAuth</string>
     <string name="clear_osm_token">مسح رمز OpenStreetMap OAuth</string>
     <string name="osm_edit_logout_success">تسجيل الخروج بنجاح</string>
@@ -3920,4 +3920,18 @@
 \nسيتوفر الرسم البياني بعد إعادة الحساب.</string>
     <string name="snowmobile_render_descr">للقيادة على الجليد مع طرق ومسارات مخصصة.</string>
     <string name="shared_string_graph">رسم بياني</string>
+    <string name="ltr_or_rtl_combine_via_dash">%2$s — %1$s</string>
+    <string name="app_mode_gap">فجوة</string>
+    <string name="shared_string_local_maps">الخرائط المحلية</string>
+    <string name="icon_group_amenity">راحة</string>
+    <string name="icon_group_special">خاص</string>
+    <string name="icon_group_transport">نقل</string>
+    <string name="icon_group_service">خدمة</string>
+    <string name="icon_group_symbols">الرموز</string>
+    <string name="icon_group_sport">رياضة</string>
+    <string name="icon_group_emergency">الطوارئ</string>
+    <string name="icon_group_travel">سفر</string>
+    <string name="navigate_point_mgrs">النظام المرجعي للشبكة العسكرية</string>
+    <string name="navigate_point_format_mgrs">النظام المرجعي للشبكة العسكرية</string>
+    <string name="mgrs_format_descr">OsmAnd يستخدم MGRS، وهو مشابه لتنسيق UTM NATO .</string>
 </resources>

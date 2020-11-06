@@ -129,9 +129,9 @@
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/buttons_shadow"
 			android:layout_width="match_parent"
-			android:layout_height="10dp"
+			android:layout_height="8dp"
 			android:layout_gravity="bottom"
-			android:background="@drawable/bg_contextmenu_shadow_top_light" />
+			android:background="@drawable/shadow" />
 
 		<include
 			layout="@layout/bottom_buttons"

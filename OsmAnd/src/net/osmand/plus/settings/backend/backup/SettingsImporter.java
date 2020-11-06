@@ -15,15 +15,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 
 class SettingsImporter {
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	SettingsImporter(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -57,7 +59,9 @@ class SettingsImporter {
 					}
 					try {
 						SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, itemsJson);
-						items.addAll(itemsFactory.getItems());
+						List<SettingsItem> settingsItemList = itemsFactory.getItems();
+						getFilesSize(file, settingsItemList);
+						items.addAll(settingsItemList);
 					} catch (IllegalArgumentException e) {
 						SettingsHelper.LOG.error("Error parsing items: " + itemsJson, e);
 						throw new IllegalArgumentException("No items");
@@ -75,6 +79,22 @@ class SettingsImporter {
 			Algorithms.closeStream(zis);
 		}
 		return items;
+	}
+
+	private void getFilesSize(@NonNull File file, List<SettingsItem> settingsItemList) throws IOException {
+		ZipFile zipfile = new ZipFile(file.getPath());
+		Enumeration<? extends ZipEntry> zipEnum = zipfile.entries();
+		while (zipEnum.hasMoreElements()) {
+			ZipEntry zipEntry = zipEnum.nextElement();
+			long size = zipEntry.getSize();
+			for (SettingsItem settingsItem : settingsItemList) {
+				if (settingsItem instanceof FileSettingsItem
+						&& zipEntry.getName().equals(settingsItem.getFileName())) {
+					((FileSettingsItem) settingsItem).setSize(size);
+					break;
+				}
+			}
+		}
 	}
 
 	private List<SettingsItem> processItems(@NonNull File file, @Nullable List<SettingsItem> items) throws IllegalArgumentException, IOException {
@@ -104,7 +124,7 @@ class SettingsImporter {
 					try {
 						SettingsItemReader<? extends SettingsItem> reader = item.getReader();
 						if (reader != null) {
-							reader.readFromStream(ois);
+							reader.readFromStream(ois, fileName);
 						}
 					} catch (IllegalArgumentException e) {
 						item.warnings.add(app.getString(R.string.settings_item_read_error, item.getName()));

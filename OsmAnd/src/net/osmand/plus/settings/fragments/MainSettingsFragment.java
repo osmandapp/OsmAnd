@@ -15,16 +15,16 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.ArrayList;
@@ -48,6 +48,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	private static final String CREATE_PROFILE = "create_profile";
 	private static final String IMPORT_PROFILE = "import_profile";
 	private static final String REORDER_PROFILES = "reorder_profiles";
+	private static final String EXPORT_PROFILES = "export_profiles";
 
 	private List<ApplicationMode> allAppModes;
 	private Set<ApplicationMode> availableAppModes;
@@ -147,6 +148,13 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 
 				});
 			}
+		} else if (EXPORT_PROFILES.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				ApplicationMode mode = getSelectedAppMode();
+				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+				ExportProfileBottomSheet.showInstance(fragmentManager, this, mode, true);
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -162,17 +170,20 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void profileManagementPref() {
-		int activeColorPrimaryResId = isNightMode() ? R.color.active_color_primary_dark 
+		int activeColorPrimaryResId = isNightMode() ? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light;
-		
+
 		Preference createProfile = findPreference(CREATE_PROFILE);
 		createProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_plus, activeColorPrimaryResId));
-		
+
 		Preference importProfile = findPreference(IMPORT_PROFILE);
 		importProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_import, activeColorPrimaryResId));
-		
+
 		Preference reorderProfiles = findPreference(REORDER_PROFILES);
 		reorderProfiles.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_edit_dark, activeColorPrimaryResId));
+
+		Preference exportProfiles = findPreference(EXPORT_PROFILES);
+		exportProfiles.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_export, activeColorPrimaryResId));
 	}
 
 	private void setupAppProfiles(PreferenceCategory preferenceCategory) {

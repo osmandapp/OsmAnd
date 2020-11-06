@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.style.StyleSpan;
@@ -27,10 +28,12 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -38,10 +41,16 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.FavoritesSettingsItem;
+import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.OsmEditsSettingsItem;
+import net.osmand.plus.settings.backend.backup.OsmNotesSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
@@ -59,14 +68,13 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-public class ImportSettingsFragment extends BaseOsmAndFragment
-		implements View.OnClickListener {
+public class ImportSettingsFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
@@ -129,12 +137,28 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		progressBar = root.findViewById(R.id.progress_bar);
 		setupToolbar(toolbar);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
-		View header = inflater.inflate(R.layout.list_item_description_header, null);
+		View header = inflater.inflate(R.layout.list_item_description_header, container, false);
 		description = header.findViewById(R.id.description);
 		description.setText(R.string.select_data_to_import);
 		expandableList.addHeaderView(header);
-		continueBtn.setOnClickListener(this);
-		selectBtn.setOnClickListener(this);
+		continueBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (adapter.getData().isEmpty()) {
+					app.showShortToastMessage(getString(R.string.shared_string_nothing_selected));
+				} else {
+					importItems();
+				}
+			}
+		});
+		selectBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				allSelected = !allSelected;
+				selectBtn.setText(allSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
+				adapter.selectAll(allSelected);
+			}
+		});
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
@@ -216,26 +240,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	@Override
-	public void onClick(View view) {
-		switch (view.getId()) {
-			case R.id.select_button: {
-				allSelected = !allSelected;
-				selectBtn.setText(allSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
-				adapter.selectAll(allSelected);
-				break;
-			}
-			case R.id.continue_button: {
-				if (adapter.getData().isEmpty()) {
-					app.showShortToastMessage(getString(R.string.shared_string_nothing_selected));
-				} else {
-					importItems();
-				}
-				break;
-			}
-		}
-	}
-
 	private void updateUi(int toolbarTitleRes, int descriptionRes) {
 		if (file != null) {
 			String fileName = file.getName();
@@ -259,20 +263,58 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	private SettingsHelper.SettingsImportListener getImportListener() {
+	public SettingsHelper.SettingsImportListener getImportListener() {
 		return new SettingsHelper.SettingsImportListener() {
 			@Override
 			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
-				FragmentManager fm = getFragmentManager();
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
 					AppInitializer.loadRoutingFiles(app, null);
+					reloadIndexes(items);
+					FragmentManager fm = getFragmentManager();
 					if (fm != null && file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}
 				}
 			}
 		};
+	}
+
+	private void reloadIndexes(@NonNull List<SettingsItem> items) {
+		for (SettingsItem item : items) {
+			if (item instanceof FileSettingsItem && ((FileSettingsItem) item).getSubtype().isMap()) {
+				Activity activity = getActivity();
+				if (activity instanceof MapActivity) {
+					new ReloadIndexesTack((MapActivity) activity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+				break;
+			}
+		}
+	}
+
+	private static class ReloadIndexesTack extends AsyncTask<Void, Void, Void> {
+
+		private final WeakReference<MapActivity> mapActivityRef;
+		private final OsmandApplication app;
+
+		ReloadIndexesTack(@NonNull MapActivity mapActivity) {
+			this.mapActivityRef = new WeakReference<>(mapActivity);
+			this.app = mapActivity.getMyApplication();
+		}
+
+		@Override
+		protected Void doInBackground(Void[] params) {
+			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			MapActivity mapActivity = mapActivityRef.get();
+			if (mapActivity != null) {
+				mapActivity.refreshMap();
+			}
+		}
 	}
 
 	private SettingsHelper.CheckDuplicatesListener getDuplicatesListener() {
@@ -304,7 +346,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				}
 				settingsHelper.importSettings(file, items, "", 1, getImportListener());
 			} else if (fm != null && !isStateSaved()) {
-				ImportDuplicatesFragment.showInstance(fm, duplicates, items, file);
+				ImportDuplicatesFragment.showInstance(fm, duplicates, items, file, this);
 			}
 		}
 	}
@@ -374,6 +416,16 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		return null;
 	}
 
+	@Nullable
+	private <T> T getBaseItem(SettingsItemType settingsItemType, Class<T> clazz) {
+		for (SettingsItem settingsItem : settingsItems) {
+			if (settingsItem.getType() == settingsItemType && clazz.isInstance(settingsItem)) {
+				return clazz.cast(settingsItem);
+			}
+		}
+		return null;
+	}
+
 	private List<SettingsItem> getSettingsItemsFromData(List<?> data) {
 		List<SettingsItem> settingsItems = new ArrayList<>();
 		List<ApplicationModeBean> appModeBeans = new ArrayList<>();
@@ -381,6 +433,9 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
+		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
+		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
+		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		for (Object object : data) {
 			if (object instanceof ApplicationModeBean) {
 				appModeBeans.add((ApplicationModeBean) object);
@@ -392,8 +447,18 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
 				settingsItems.add(new FileSettingsItem(app, (File) object));
+			} else if (object instanceof FileSettingsItem) {
+				settingsItems.add((FileSettingsItem) object);
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
+			} else if (object instanceof OsmNotesPoint) {
+				osmNotesPointList.add((OsmNotesPoint) object);
+			} else if (object instanceof OpenstreetmapPoint) {
+				osmEditsPointList.add((OpenstreetmapPoint) object);
+			} else if (object instanceof FavoriteGroup) {
+				favoriteGroups.add((FavoriteGroup) object);
+			} else if (object instanceof GlobalSettingsItem) {
+				settingsItems.add((GlobalSettingsItem) object);
 			}
 		}
 		if (!appModeBeans.isEmpty()) {
@@ -412,6 +477,18 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		}
 		if (!avoidRoads.isEmpty()) {
 			settingsItems.add(new AvoidRoadsSettingsItem(app, getBaseAvoidRoadsSettingsItem(), avoidRoads));
+		}
+		if (!osmNotesPointList.isEmpty()) {
+			OsmNotesSettingsItem baseItem = getBaseItem(SettingsItemType.OSM_NOTES, OsmNotesSettingsItem.class);
+			settingsItems.add(new OsmNotesSettingsItem(app, baseItem, osmNotesPointList));
+		}
+		if (!osmEditsPointList.isEmpty()) {
+			OsmEditsSettingsItem baseItem = getBaseItem(SettingsItemType.OSM_EDITS, OsmEditsSettingsItem.class);
+			settingsItems.add(new OsmEditsSettingsItem(app, baseItem, osmEditsPointList));
+		}
+		if (!favoriteGroups.isEmpty()) {
+			FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class);
+			settingsItems.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
 		}
 		return settingsItems;
 	}

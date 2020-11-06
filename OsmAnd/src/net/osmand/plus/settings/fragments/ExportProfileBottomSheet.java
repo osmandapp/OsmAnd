@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
@@ -31,19 +32,24 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
@@ -52,37 +58,58 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private static final Log LOG = PlatformUtil.getLog(ExportProfileBottomSheet.class);
 
-	private static final String INCLUDE_ADDITIONAL_DATA_KEY = "INCLUDE_ADDITIONAL_DATA_KEY";
+	private static final String GLOBAL_EXPORT_KEY = "global_export_key";
+	private static final String EXPORT_START_TIME_KEY = "export_start_time_key";
 	private static final String EXPORTING_PROFILE_KEY = "exporting_profile_key";
+	private static final String INCLUDE_ADDITIONAL_DATA_KEY = "include_additional_data_key";
+	private static final String INCLUDE_GLOBAL_SETTINGS_KEY = "include_global_settings_key";
+	private static final String PROGRESS_MAX_KEY = "progress_max_key";
+	private static final String PROGRESS_VALUE_KEY = "progress_value_key";
+
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yy", Locale.US);
 
 	private OsmandApplication app;
-	private ApplicationMode profile;
 	private Map<ExportSettingsType, List<?>> dataList = new HashMap<>();
 	private ExportImportSettingsAdapter adapter;
 
-	private SettingsHelper.SettingsExportListener exportListener;
+	private SettingsExportListener exportListener;
 	private ProgressDialog progress;
+	private int progressMax;
+	private int progressValue;
 
-	private boolean includeAdditionalData = false;
+	private long exportStartTime;
+
+	private boolean globalExport = false;
 	private boolean exportingProfile = false;
+	private boolean includeAdditionalData = false;
+	private boolean includeGlobalSettings = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
-		profile = getAppMode();
-		dataList = app.getSettingsHelper().getAdditionalData();
 		if (savedInstanceState != null) {
-			includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
+			globalExport = savedInstanceState.getBoolean(GLOBAL_EXPORT_KEY);
 			exportingProfile = savedInstanceState.getBoolean(EXPORTING_PROFILE_KEY);
+			includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
+			includeGlobalSettings = savedInstanceState.getBoolean(INCLUDE_GLOBAL_SETTINGS_KEY);
+			exportStartTime = savedInstanceState.getLong(EXPORT_START_TIME_KEY);
+			progressMax = savedInstanceState.getInt(PROGRESS_MAX_KEY);
+			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
+		dataList = app.getSettingsHelper().getAdditionalData(globalExport);
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putBoolean(INCLUDE_ADDITIONAL_DATA_KEY, includeAdditionalData);
+		outState.putBoolean(GLOBAL_EXPORT_KEY, globalExport);
 		outState.putBoolean(EXPORTING_PROFILE_KEY, exportingProfile);
+		outState.putBoolean(INCLUDE_ADDITIONAL_DATA_KEY, includeAdditionalData);
+		outState.putBoolean(INCLUDE_GLOBAL_SETTINGS_KEY, includeGlobalSettings);
+		outState.putLong(EXPORT_START_TIME_KEY, exportStartTime);
+		outState.putInt(PROGRESS_MAX_KEY, progress.getMax());
+		outState.putInt(PROGRESS_VALUE_KEY, progress.getProgress());
 	}
 
 	@Override
@@ -91,32 +118,55 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		if (context == null) {
 			return;
 		}
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		if (globalExport) {
+			items.add(new TitleItem(getString(R.string.shared_string_export)));
 
-		int profileColor = profile.getIconColorInfo().getColor(nightMode);
-		int colorNoAlpha = ContextCompat.getColor(context, profileColor);
+			final BottomSheetItemWithCompoundButton[] globalSettingsItem = new BottomSheetItemWithCompoundButton[1];
+			globalSettingsItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+					.setChecked(includeGlobalSettings)
+					.setTitle(getString(R.string.general_settings_2))
+					.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							boolean checked = !globalSettingsItem[0].isChecked();
+							globalSettingsItem[0].setChecked(checked);
+							includeGlobalSettings = checked;
+						}
+					})
+					.create();
+			items.add(globalSettingsItem[0]);
+		} else {
+			items.add(new TitleItem(getString(R.string.export_profile)));
+			ApplicationMode profile = getAppMode();
+			int profileColor = profile.getIconColorInfo().getColor(nightMode);
+			int colorNoAlpha = ContextCompat.getColor(context, profileColor);
 
-		Drawable backgroundIcon = UiUtilities.getColoredSelectableDrawable(context, colorNoAlpha, 0.3f);
-		Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.10f)), backgroundIcon};
+			Drawable backgroundIcon = UiUtilities.getColoredSelectableDrawable(context, colorNoAlpha, 0.3f);
+			Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.10f)), backgroundIcon};
 
-		items.add(new TitleItem(getString(R.string.export_profile)));
+			BaseBottomSheetItem profileItem = new BottomSheetItemWithCompoundButton.Builder()
+					.setChecked(true)
+					.setCompoundButtonColorId(profileColor)
+					.setButtonTintList(ColorStateList.valueOf(getResolvedColor(profileColor)))
+					.setDescription(BaseSettingsFragment.getAppModeDescription(context, profile))
+					.setIcon(getIcon(profile.getIconRes(), profileColor))
+					.setTitle(profile.toHumanString())
+					.setBackground(new LayerDrawable(layers))
+					.setLayoutId(R.layout.preference_profile_item_with_radio_btn)
+					.create();
+			items.add(profileItem);
+		}
+		setupAdditionalItems();
+	}
 
-		BaseBottomSheetItem profileItem = new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(true)
-				.setCompoundButtonColorId(profileColor)
-				.setButtonTintList(ColorStateList.valueOf(getResolvedColor(profileColor)))
-				.setDescription(BaseSettingsFragment.getAppModeDescription(context, profile))
-				.setIcon(getIcon(profile.getIconRes(), profileColor))
-				.setTitle(profile.toHumanString())
-				.setBackground(new LayerDrawable(layers))
-				.setLayoutId(R.layout.preference_profile_item_with_radio_btn)
-				.create();
-		items.add(profileItem);
-
+	private void setupAdditionalItems() {
 		if (!dataList.isEmpty()) {
-			final View additionalDataView = inflater.inflate(R.layout.bottom_sheet_item_additional_data, null);
+			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+			View additionalDataView = inflater.inflate(R.layout.bottom_sheet_item_additional_data, null);
 			ExpandableListView listView = additionalDataView.findViewById(R.id.list);
 			adapter = new ExportImportSettingsAdapter(app, nightMode, false);
+
 			View listHeader = inflater.inflate(R.layout.item_header_export_expand_list, null);
 			final View topSwitchDivider = listHeader.findViewById(R.id.topSwitchDivider);
 			final View bottomSwitchDivider = listHeader.findViewById(R.id.bottomSwitchDivider);
@@ -130,7 +180,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 					topSwitchDivider.setVisibility(includeAdditionalData ? View.VISIBLE : View.GONE);
 					bottomSwitchDivider.setVisibility(includeAdditionalData ? View.VISIBLE : View.GONE);
 					if (includeAdditionalData) {
-						adapter.updateSettingsList(app.getSettingsHelper().getAdditionalData());
+						adapter.updateSettingsList(app.getSettingsHelper().getAdditionalData(globalExport));
 						adapter.selectAll(true);
 					} else {
 						adapter.selectAll(false);
@@ -207,9 +257,18 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		}
 	}
 
+	private void setGlobalExport(boolean globalExport) {
+		this.globalExport = globalExport;
+	}
+
 	private List<SettingsItem> prepareSettingsItemsForExport() {
 		List<SettingsItem> settingsItems = new ArrayList<>();
-		settingsItems.add(new ProfileSettingsItem(app, profile));
+		if (!globalExport) {
+			settingsItems.add(new ProfileSettingsItem(app, getAppMode()));
+		}
+		if (includeGlobalSettings) {
+			settingsItems.add(new GlobalSettingsItem(app.getSettings()));
+		}
 		if (includeAdditionalData) {
 			settingsItems.addAll(app.getSettingsHelper().prepareAdditionalSettingsItems(adapter.getData()));
 		}
@@ -219,10 +278,34 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	private void prepareFile() {
 		if (app != null) {
 			exportingProfile = true;
+			exportStartTime = System.currentTimeMillis();
 			showExportProgressDialog();
 			File tempDir = FileUtils.getTempDir(app);
-			String fileName = profile.toHumanString();
-			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), prepareSettingsItemsForExport(), true);
+			String fileName = getFileName();
+			List<SettingsItem> items = prepareSettingsItemsForExport();
+			progress.setMax(getMaxProgress(items));
+			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
+		}
+	}
+
+	private int getMaxProgress(List<SettingsItem> items) {
+		long maxProgress = 0;
+		for (SettingsItem item : items) {
+			if (item instanceof FileSettingsItem) {
+				maxProgress += ((FileSettingsItem) item).getSize();
+			}
+		}
+		return (int) maxProgress / (1 << 20);
+	}
+
+	private String getFileName() {
+		if (globalExport) {
+			if (exportStartTime == 0) {
+				exportStartTime = System.currentTimeMillis();
+			}
+			return "Export_" + DATE_FORMAT.format(new Date(exportStartTime));
+		} else {
+			return getAppMode().toHumanString();
 		}
 	}
 
@@ -235,25 +318,49 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			progress.dismiss();
 		}
 		progress = new ProgressDialog(context);
-		progress.setTitle(app.getString(R.string.export_profile));
+		progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		progress.setCancelable(true);
+		progress.setTitle(app.getString(R.string.shared_string_export));
 		progress.setMessage(app.getString(R.string.shared_string_preparing));
-		progress.setCancelable(false);
+		progress.setButton(DialogInterface.BUTTON_NEGATIVE, app.getString(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				cancelExport();
+			}
+		});
+		progress.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				cancelExport();
+			}
+		});
 		progress.show();
 	}
 
-	private SettingsHelper.SettingsExportListener getSettingsExportListener() {
+	private void cancelExport() {
+		app.getSettingsHelper().cancelExportForFile(getExportFile());
+		progress.dismiss();
+		dismiss();
+	}
+
+	private SettingsExportListener getSettingsExportListener() {
 		if (exportListener == null) {
-			exportListener = new SettingsHelper.SettingsExportListener() {
+			exportListener = new SettingsExportListener() {
 
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
 					dismissExportProgressDialog();
 					exportingProfile = false;
 					if (succeed) {
-						shareProfile(file, profile);
+						shareProfile(file);
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
 					}
+				}
+
+				@Override
+				public void onSettingsExportProgressUpdate(int value) {
+					progress.setProgress(value);
 				}
 			};
 		}
@@ -266,10 +373,12 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				showExportProgressDialog();
+				progress.setMax(progressMax);
+				progress.setProgress(progressValue);
 				app.getSettingsHelper().updateExportListener(file, getSettingsExportListener());
 			} else if (file.exists()) {
 				dismissExportProgressDialog();
-				shareProfile(file, profile);
+				shareProfile(file);
 			}
 		}
 	}
@@ -283,15 +392,15 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private File getExportFile() {
 		File tempDir = FileUtils.getTempDir(app);
-		String fileName = profile.toHumanString();
+		String fileName = getFileName();
 		return new File(tempDir, fileName + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
 	}
 
-	private void shareProfile(@NonNull File file, @NonNull ApplicationMode profile) {
+	private void shareProfile(@NonNull File file) {
 		try {
 			final Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_SUBJECT, profile.toHumanString() + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
+			sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
 			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
 			sendIntent.setType("*/*");
 			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -304,11 +413,12 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-									   Fragment target,
-									   @NonNull ApplicationMode appMode) {
+									   Fragment target, @NonNull ApplicationMode appMode,
+									   boolean globalExport) {
 		try {
 			ExportProfileBottomSheet fragment = new ExportProfileBottomSheet();
 			fragment.setAppMode(appMode);
+			fragment.setGlobalExport(globalExport);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 			return true;

@@ -123,6 +123,6 @@ public class SuggestedDownloadsItem extends SettingsItem {
 	@Nullable
 	@Override
 	SettingsItemWriter<? extends SettingsItem> getWriter() {
-		return null;
+		return getJsonWriter();
 	}
 }

@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -88,7 +89,7 @@ public abstract class SettingsItem {
 
 	public boolean applyFileName(@NonNull String fileName) {
 		String n = getFileName();
-		return n != null && n.endsWith(fileName);
+		return n != null && (n.endsWith(fileName) || fileName.startsWith(n + File.separator));
 	}
 
 	public boolean shouldReadOnCollecting() {
@@ -142,7 +143,6 @@ public abstract class SettingsItem {
 			}
 			json.put("file", fileName);
 		}
-		writeItemsToJson(json);
 	}
 
 	String toJson() throws JSONException {
@@ -169,7 +169,7 @@ public abstract class SettingsItem {
 	SettingsItemReader<? extends SettingsItem> getJsonReader() {
 		return new SettingsItemReader<SettingsItem>(this) {
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
 				StringBuilder buf = new StringBuilder();
 				try {
 					BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));

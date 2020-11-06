@@ -28,6 +28,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -112,7 +113,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 				if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {
 					updateName();
 				}
-				if (Algorithms.objectEquals(anyTag, EditPoiData.POI_TYPE_TAG)) {
+				if (Algorithms.objectEquals(anyTag, Entity.POI_TYPE_TAG)) {
 					updatePoiType();
 				}
 			}
@@ -197,9 +198,9 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 				currentPoiTypeKey = pt.getEditOsmTag();
 			}
 			for (Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
-				if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)
+				if (tag.getKey().equals(Entity.POI_TYPE_TAG)
 						|| tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue())
-						|| tag.getKey().startsWith(EditPoiData.REMOVE_TAG_PREFIX)
+						|| tag.getKey().startsWith(Entity.REMOVE_TAG_PREFIX)
 						|| tag.getKey().equals(currentPoiTypeKey))
 					continue;
 				addTagView(tag.getKey(), tag.getValue());

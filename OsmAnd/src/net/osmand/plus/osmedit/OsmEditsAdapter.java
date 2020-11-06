@@ -1,11 +1,7 @@
 package net.osmand.plus.osmedit;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.text.SpannableString;
-import android.text.TextUtils;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -182,7 +179,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 
 	private void bindOsmEditViewHolder(final OsmEditViewHolder holder, final OsmPoint osmEdit, final int position) {
 		setupBackground(holder.mainView);
-		holder.titleTextView.setText(getTitle(osmEdit));
+		holder.titleTextView.setText(OsmEditingPlugin.getTitle(osmEdit, getContext()));
 		holder.descriptionTextView.setText(getDescription(osmEdit));
 		Drawable icon = getIcon(osmEdit);
 		if (icon != null) {
@@ -243,20 +240,12 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		return items.size();
 	}
 
-	private SpannableString getTitle(OsmPoint osmPoint) {
-		SpannableString title = new SpannableString(OsmEditingPlugin.getName(osmPoint));
-		if (TextUtils.isEmpty(title)) {
-			title = SpannableString.valueOf(getCategory(osmPoint));
-			title.setSpan(new StyleSpan(Typeface.ITALIC), 0, title.length(), 0);
-		}
-		return title;
-	}
 
 	private Drawable getIcon(OsmPoint point) {
 		if (point.getGroup() == OsmPoint.Group.POI) {
 			OpenstreetmapPoint osmPoint = (OpenstreetmapPoint) point;
 			int iconResId = 0;
-			String poiTranslation = osmPoint.getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			String poiTranslation = osmPoint.getEntity().getTag(Entity.POI_TYPE_TAG);
 			if (poiTranslation != null) {
 				Map<String, PoiType> poiTypeMap = app.getPoiTypes().getAllTranslatedNames(false);
 				PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
@@ -302,10 +291,6 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			}
 		}
 		return true;
-	}
-
-	private String getCategory(OsmPoint point) {
-		return OsmEditingPlugin.getCategory(point, getContext());
 	}
 
 	private String getDescription(OsmPoint point) {

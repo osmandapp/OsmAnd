@@ -444,9 +444,9 @@
 						osmand:typeface="@string/font_roboto_medium" />
 				</LinearLayout>
 
-				<net.osmand.plus.widgets.FlowLayout
+				<LinearLayout
 					android:id="@+id/select_color"
-					android:layout_width="wrap_content"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="@dimen/content_padding_small"
 					android:layout_marginLeft="@dimen/content_padding_small"

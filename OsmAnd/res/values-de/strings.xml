@@ -3224,8 +3224,10 @@
     <string name="get_discount_first_few_part">%1$s für die ersten %2$s</string>
     <string name="configure_profile_info">Einstellungen für Profil:</string>
     <string name="utm_format_descr">OsmAnd verwendet den UTM-Standard, der ähnlich, aber nicht identisch zum UTM-NATO-Format ist.</string>
+    <string name="mgrs_format_descr">OsmAnd verwendet MGRS, das identisch zum UTM-NATO-Format ist.</string>
     <string name="shared_string_example">Beispiel</string>
     <string name="navigate_point_format_utm">UTM-Standard</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="coordinates_format_info">Das gewählte Format wird in der gesamten App angewandt.</string>
     <string name="pref_selected_by_default_for_profiles">Für Profile wird als Vorgabe diese Einstellung gewählt: %s</string>
     <string name="change_default_settings">Einstellung ändern</string>
@@ -3652,9 +3654,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Die Bezahlung wird Ihrem Google Play-Konto bei der Bestätigung des Kaufs belastet.
 \n
-\n Das Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
+\nDas Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
 \n
-\n Sie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren Google Play-Einstellungen gehen.</string>
+\nSie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren Google Play-Einstellungen gehen.</string>
     <string name="search_poi_types">Suche nach POI-Typen</string>
     <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf den Schalter, um alle auszuwählen, tippen Sie auf die linke Seite zur Kategorieauswahl.</string>
     <string name="shared_string_divider">Trenner</string>
@@ -3913,9 +3915,9 @@
     <string name="osm_live_payment_desc_hw">Das Abonnement wird pro ausgewähltem Zeitraum berechnet. Sie können das Abonnement jederzeit über die AppGallery kündigen.</string>
     <string name="osm_live_payment_subscription_management_hw">Die Bezahlung wird Ihrem AppGallery-Konto bei der Bestätigung des Kaufs belastet.
 \n
-\n Das Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
+\nDas Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
 \n
-\n Sie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren AppGallery-Einstellungen gehen.</string>
+\nSie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren AppGallery-Einstellungen gehen.</string>
     <string name="routing_attr_avoid_footways_description">Vermeidet Fußwege</string>
     <string name="routing_attr_avoid_footways_name">Keine Fußwege</string>
     <string name="development">Entwicklung</string>
@@ -3929,4 +3931,23 @@
     <string name="file_already_imported">Datei wurde bereits in OsmAnd importiert</string>
     <string name="perform_oauth_authorization">Anmelden über OAuth</string>
     <string name="clear_osm_token">OpenStreetMap OAuth-Token löschen</string>
+    <string name="what_is_new">Was ist neu</string>
+    <string name="snowmobile_render_descr">Für das Schneemobilfahren mit speziellen Straßen und Tracks.</string>
+    <string name="perform_oauth_authorization_description">Durchführen eines OAuth-Logins zur Nutzung der osmedit-Funktionen</string>
+    <string name="use_two_phase_routing">2-Phasen-A*-Routing-Algorithmus verwenden</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s Daten sind nur auf den Straßen verfügbar, Sie müssen eine Route mit \"Route zwischen Punkten\" berechnen, um sie zu erhalten.</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="message_graph_will_be_available_after_recalculation">Warte auf die Neuberechnung der Route.
+\nDie Graphik wird nach der Neuberechnung verfügbar sein.</string>
+    <string name="icon_group_amenity">Einrichtung</string>
+    <string name="icon_group_transport">ÖPNV</string>
+    <string name="icon_group_service">Dienstleistung</string>
+    <string name="icon_group_travel">Reisen</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="icon_group_emergency">Notfall</string>
+    <string name="shared_string_graph">Graph</string>
+    <string name="icon_group_symbols">Symbole</string>
+    <string name="shared_string_local_maps">Lokale Karten</string>
+    <string name="icon_group_special">Spezial</string>
 </resources>
