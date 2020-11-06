@@ -7,8 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,7 +42,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
@@ -127,19 +123,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		if (asyncLoader == null || asyncLoader.getResult() == null) {
 			reloadData();
 		}
-
-		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-			@Override
-			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-				long packedPos = ((ExpandableListContextMenuInfo) menuInfo).packedPosition;
-				int group = ExpandableListView.getPackedPositionGroup(packedPos);
-				int child = ExpandableListView.getPackedPositionChild(packedPos);
-				if (child >= 0 && group >= 0) {
-					final LocalIndexInfo point = listAdapter.getChild(group, child);
-					showContextMenu(point);
-				}
-			}
-		});
 	}
 
 	public void reloadData() {
@@ -154,62 +137,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			asyncLoader = new LoadLocalIndexTask();
 			asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
-	}
-
-	private void showContextMenu(final LocalIndexInfo info) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(getMyApplication());
-		basicFileOperation(info, adapter);
-		OsmandPlugin.onContextMenuActivity(getActivity(), null, info, adapter);
-
-		String[] values = adapter.getItemNames();
-		builder.setItems(values, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				ContextMenuItem item = adapter.getItem(which);
-				if (item.getItemClickListener() != null) {
-					item.getItemClickListener().onContextMenuClick(null,
-							item.getTitleId(), which, false, null);
-				}
-			}
-
-		});
-		builder.show();
-	}
-
-	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
-		ItemClickListener listener = new ItemClickListener() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked, int[] viewCoordinates) {
-				return performBasicOperation(resId, info);
-			}
-		};
-		if (info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.SRTM_DATA ||
-				info.getType() == LocalIndexType.WIKI_DATA ) {
-			if (!info.isBackupedData()) {
-				adapter.addItem(new ContextMenuItem.ItemBuilder()
-						.setTitleId(R.string.local_index_mi_backup, getContext())
-						.setListener(listener)
-						.createItem());
-			}
-		}
-		if (info.isBackupedData()) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
-					.setTitleId(R.string.local_index_mi_restore, getContext())
-					.setListener(listener)
-					.createItem());
-		}
-		if (info.getType() != LocalIndexType.TTS_VOICE_DATA && info.getType() != LocalIndexType.VOICE_DATA
-				&& info.getType() != LocalIndexType.FONT_DATA) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
-					.setTitleId(R.string.shared_string_rename, getContext())
-					.setListener(listener)
-					.createItem());
-		}
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.shared_string_delete, getContext())
-				.setListener(listener)
-				.createItem());
 	}
 
 	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {
