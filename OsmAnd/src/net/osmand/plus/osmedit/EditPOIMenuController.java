@@ -54,7 +54,7 @@ public class EditPOIMenuController extends MenuController {
 						SimpleProgressDialogPoiUploader poiDialogUploader = new SimpleProgressDialogPoiUploader(activity);
 						poiDialogUploader.showProgressDialog(new OsmPoint[] {getOsmPoint()}, false, false);
 					} else {
-						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), activity.getLoginBottomSheetFragment());
+						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), null);
 					}
 				}
 			}

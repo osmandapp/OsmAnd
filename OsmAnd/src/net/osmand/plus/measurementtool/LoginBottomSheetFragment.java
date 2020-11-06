@@ -76,11 +76,6 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public int getSecondDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-	}
-
-	@Override
 	protected void onRightBottomButtonClick() {
 		FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null) {
