@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
@@ -33,6 +34,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsExportListener;
@@ -47,6 +49,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
@@ -60,8 +63,10 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	private static final String EXPORTING_PROFILE_KEY = "exporting_profile_key";
 	private static final String INCLUDE_ADDITIONAL_DATA_KEY = "include_additional_data_key";
 	private static final String INCLUDE_GLOBAL_SETTINGS_KEY = "include_global_settings_key";
+	private static final String PROGRESS_MAX_KEY = "progress_max_key";
+	private static final String PROGRESS_VALUE_KEY = "progress_value_key";
 
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yy");
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yy", Locale.US);
 
 	private OsmandApplication app;
 	private Map<ExportSettingsType, List<?>> dataList = new HashMap<>();
@@ -69,6 +74,8 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private SettingsExportListener exportListener;
 	private ProgressDialog progress;
+	private int progressMax;
+	private int progressValue;
 
 	private long exportStartTime;
 
@@ -87,6 +94,8 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
 			includeGlobalSettings = savedInstanceState.getBoolean(INCLUDE_GLOBAL_SETTINGS_KEY);
 			exportStartTime = savedInstanceState.getLong(EXPORT_START_TIME_KEY);
+			progressMax = savedInstanceState.getInt(PROGRESS_MAX_KEY);
+			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
 		dataList = app.getSettingsHelper().getAdditionalData(globalExport);
 	}
@@ -99,6 +108,8 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		outState.putBoolean(INCLUDE_ADDITIONAL_DATA_KEY, includeAdditionalData);
 		outState.putBoolean(INCLUDE_GLOBAL_SETTINGS_KEY, includeGlobalSettings);
 		outState.putLong(EXPORT_START_TIME_KEY, exportStartTime);
+		outState.putInt(PROGRESS_MAX_KEY, progress.getMax());
+		outState.putInt(PROGRESS_VALUE_KEY, progress.getProgress());
 	}
 
 	@Override
@@ -271,8 +282,20 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			showExportProgressDialog();
 			File tempDir = FileUtils.getTempDir(app);
 			String fileName = getFileName();
-			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), prepareSettingsItemsForExport(), true);
+			List<SettingsItem> items = prepareSettingsItemsForExport();
+			progress.setMax(getMaxProgress(items));
+			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
 		}
+	}
+
+	private int getMaxProgress(List<SettingsItem> items) {
+		long maxProgress = 0;
+		for (SettingsItem item : items) {
+			if (item instanceof FileSettingsItem) {
+				maxProgress += ((FileSettingsItem) item).getSize();
+			}
+		}
+		return (int) maxProgress / (1 << 20);
 	}
 
 	private String getFileName() {
@@ -295,10 +318,29 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			progress.dismiss();
 		}
 		progress = new ProgressDialog(context);
-		progress.setTitle(app.getString(R.string.export_profile));
+		progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		progress.setCancelable(true);
+		progress.setTitle(app.getString(R.string.shared_string_export));
 		progress.setMessage(app.getString(R.string.shared_string_preparing));
-		progress.setCancelable(false);
+		progress.setButton(DialogInterface.BUTTON_NEGATIVE, app.getString(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				cancelExport();
+			}
+		});
+		progress.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				cancelExport();
+			}
+		});
 		progress.show();
+	}
+
+	private void cancelExport() {
+		app.getSettingsHelper().cancelExportForFile(getExportFile());
+		progress.dismiss();
+		dismiss();
 	}
 
 	private SettingsExportListener getSettingsExportListener() {
@@ -315,6 +357,11 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 						app.showToastMessage(R.string.export_profile_failed);
 					}
 				}
+
+				@Override
+				public void onSettingsExportProgressUpdate(int value) {
+					progress.setProgress(value);
+				}
 			};
 		}
 		return exportListener;
@@ -326,6 +373,8 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				showExportProgressDialog();
+				progress.setMax(progressMax);
+				progress.setProgress(progressValue);
 				app.getSettingsHelper().updateExportListener(file, getSettingsExportListener());
 			} else if (file.exists()) {
 				dismissExportProgressDialog();

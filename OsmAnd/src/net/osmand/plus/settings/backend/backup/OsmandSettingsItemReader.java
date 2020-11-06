@@ -29,7 +29,7 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 												   @NonNull JSONObject json) throws JSONException;
 
 	@Override
-	public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+	public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
 		StringBuilder buf = new StringBuilder();
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));

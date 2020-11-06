@@ -3935,4 +3935,7 @@
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Vészhelyzet</string>
     <string name="icon_group_travel">Utazás</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">Az OsmAnd a NATO által is használt MGRS (Military Grid Reference System) koordinátákat alkamazza, amely hasonlít az UTM-formátumhoz.</string>
 </resources>

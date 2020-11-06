@@ -2544,7 +2544,7 @@ public class OsmandSettings {
 			Configuration config = ctx.getResources().getConfiguration();
 			for (String lang : TTS_AVAILABLE_VOICES) {
 				if (lang.equals(config.locale.getLanguage())) {
-					return lang + "-tts";
+					return lang + IndexConstants.VOICE_PROVIDER_SUFFIX;
 				}
 			}
 			return "en-tts";

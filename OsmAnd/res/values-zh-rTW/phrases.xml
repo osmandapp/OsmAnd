@@ -3848,4 +3848,5 @@
     <string name="poi_parking_sheds">車棚</string>
     <string name="poi_parking_rooftop">屋頂</string>
     <string name="poi_gpx_point">GPX 點</string>
+    <string name="poi_radar_tower">雷達塔</string>
 </resources>

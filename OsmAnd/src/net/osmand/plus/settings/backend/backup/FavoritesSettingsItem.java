@@ -145,7 +145,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		return new SettingsItemReader<FavoritesSettingsItem>(this) {
 
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream) throws IllegalArgumentException {
+			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IllegalArgumentException {
 				GPXFile gpxFile = GPXUtilities.loadGPXFile(inputStream);
 				if (gpxFile.error != null) {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));

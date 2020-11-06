@@ -226,14 +226,14 @@
     <string name="poi_pension_fund">صندوق بازنشستگی</string>
     <string name="poi_migration">سازمان مهاجرت</string>
     <string name="poi_tax_inspection">اداره مالیات</string>
-    <string name="poi_office_administrative">دفتر اجرایی</string>
+    <string name="poi_office_administrative">اداره حکومتی</string>
     <string name="poi_customs">گمرک</string>
     <string name="poi_city">شهر</string>
     <string name="poi_town">شهر</string>
     <string name="poi_village">روستا</string>
     <string name="poi_hamlet">دهکده</string>
     <string name="poi_isolated_dwelling">سکونتگاه دورافتاده</string>
-    <string name="poi_suburb">حومه شهر</string>
+    <string name="poi_suburb">منطقه شهری</string>
     <string name="poi_neighbourhood">محله</string>
     <string name="poi_locality">محل</string>
     <string name="poi_place_allotments"/>
@@ -346,7 +346,7 @@
     <string name="poi_artwork">اثر هنری</string>
     <string name="poi_archaeological_site">مرکز باستان شناسی</string>
     <string name="poi_battlefield">میدان جنگ</string>
-    <string name="poi_boundary_stone">سنگ یادبود</string>
+    <string name="poi_boundary_stone">سنگ مرز</string>
     <string name="poi_historic_cannon">توپ تاریخی</string>
     <string name="poi_castle">قلعه</string>
     <string name="poi_city_gate">دروازه شهر</string>
@@ -1452,4 +1452,5 @@
     <string name="poi_access_bus">دسترسی اتوبوس</string>
     <string name="poi_climbing_crag">بله</string>
     <string name="poi_protected_area">منطقهٔ حفاظت‌شده</string>
+    <string name="poi_badminton">بدمینتون</string>
 </resources>
