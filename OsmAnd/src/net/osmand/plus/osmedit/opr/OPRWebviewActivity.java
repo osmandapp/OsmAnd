@@ -13,7 +13,9 @@ import org.apache.commons.logging.Log;
 public class OPRWebviewActivity extends AppCompatActivity {
 
 	private WebView webView;
-	private static String url = BuildConfig.OPR_BASE_URL + "login";
+	private static String url = BuildConfig.OPR_BASE_URL;
+	private static String cookieUrl = BuildConfig.OPR_BASE_URL + "profile";
+	private static String loginUrl = BuildConfig.OPR_BASE_URL + "login";
 	private final Log log = PlatformUtil.getLog(OPRWebviewActivity.class);
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,7 @@ public class OPRWebviewActivity extends AppCompatActivity {
 		webView = (WebView) findViewById(R.id.printDialogWebview);
 		webView.getSettings().setJavaScriptEnabled(true);
 		WebView.setWebContentsDebuggingEnabled(true);
-		webView.loadUrl(url);
+		webView.loadUrl(loginUrl);
 	}
 
 	public static String getPrivateKeyFromCookie() {
@@ -38,7 +40,7 @@ public class OPRWebviewActivity extends AppCompatActivity {
 	private static String returnCookieByKey(String key){
 		String CookieValue = null;
 		CookieManager cookieManager = CookieManager.getInstance();
-		String cookies = cookieManager.getCookie(url);
+		String cookies = cookieManager.getCookie(cookieUrl);
 		if (cookies == null || cookies.isEmpty()) {
 			return "";
 		}

@@ -10,12 +10,13 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
-
-import net.osmand.*;
+import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.BuildConfig;
@@ -28,7 +29,6 @@ import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
 import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.util.Algorithms;
-
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -438,11 +438,10 @@ public abstract class ImageCard extends AbstractCard {
 			if (o instanceof Amenity) {
 				Amenity am = (Amenity) o;
 				long amenityId = am.getId() >> 1;
-				String url = BuildConfig.OPR_BASE_URL + "api/objects-by-index?type=opr.place&index=osmid&limit=1&key=" + amenityId;
+				String url = BuildConfig.OPR_BASE_URL + "api/objects-by-index?type=opr.place&index=osmid&key=" + amenityId;
 				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
 						"Requesting location images...", false, false);
 				if (response != null) {
-					//FIXME BUG {"objects":[],"count":0}
 					getPicturesForPlace(result, response);
 					String[] id = getIdFromResponse(response);
 					listener.onOPRPlaceIdAcquired(id);
@@ -534,19 +533,23 @@ public abstract class ImageCard extends AbstractCard {
 			try {
 				if (!Algorithms.isEmpty(response)) {
 					JSONArray obj = new JSONObject(response).getJSONArray("objects");
-					JSONArray images = ((JSONObject) ((JSONObject) obj.get(0)).get("images")).getJSONArray("reviews");
-					if (images.length() > 0) {
-						for (int i = 0; i < images.length(); i++) {
-							try {
-								JSONObject imageObject = (JSONObject) images.get(i);
-								if (imageObject != JSONObject.NULL) {
-									ImageCard imageCard = ImageCard.createCardOpr(mapActivity, imageObject);
-									if (imageCard != null) {
-										result.add(imageCard);
+					JSONObject imagesWrapper = ((JSONObject) ((JSONObject) obj.get(0)).get("images"));
+					Iterator<String> it = imagesWrapper.keys();
+					while (it.hasNext()) {
+						JSONArray images = imagesWrapper.getJSONArray(it.next());
+						if (images.length() > 0) {
+							for (int i = 0; i < images.length(); i++) {
+								try {
+									JSONObject imageObject = (JSONObject) images.get(i);
+									if (imageObject != JSONObject.NULL) {
+										ImageCard imageCard = ImageCard.createCardOpr(mapActivity, imageObject);
+										if (imageCard != null) {
+											result.add(imageCard);
+										}
 									}
+								} catch (JSONException e) {
+									LOG.error(e);
 								}
-							} catch (JSONException e) {
-								LOG.error(e);
 							}
 						}
 					}

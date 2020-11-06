@@ -5,12 +5,12 @@ import android.os.Build;
 import com.google.gson.GsonBuilder;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.BuildConfig;
+import org.apache.commons.logging.Log;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.openplacereviews.opendb.SecUtils;
 import org.openplacereviews.opendb.ops.OpOperation;
 import org.openplacereviews.opendb.util.JsonFormatter;
 import org.openplacereviews.opendb.util.exception.FailedVerificationException;
-import org.apache.commons.logging.Log;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -22,7 +22,6 @@ import java.security.KeyPair;
 import java.security.Security;
 import java.util.*;
 
-import static org.openplacereviews.opendb.SecUtils.ALGO_EC;
 import static org.openplacereviews.opendb.SecUtils.*;
 
 
@@ -37,7 +36,7 @@ public class OpenDBAPI {
 			Security.addProvider(new BouncyCastleProvider());
 		}
 		KeyPair kp = SecUtils.getKeyPair(ALGO_EC, privateKey, null);
-		String signed = username + ":opr-web";
+		String signed = username;// + ":opr-web";
 
 		JsonFormatter formatter = new JsonFormatter();
 		OPRImage OPRImage = new GsonBuilder().create().fromJson(image, OPRImage.class);
@@ -56,7 +55,7 @@ public class OpenDBAPI {
 		Map<String, Object> change = new TreeMap<>();
 		Map<String, Object> images = new TreeMap<>();
 		Map<String, Object> outdoor = new TreeMap<>();
-		outdoor.put("reviews", imageResponseList);
+		outdoor.put("outdoor", imageResponseList);
 		images.put("append", outdoor);
 		change.put("version", "increment");
 		change.put("images", images);
@@ -84,8 +83,11 @@ public class OpenDBAPI {
 			connection.setConnectTimeout(10000);
 			connection.setRequestMethod("POST");
 			connection.setDoOutput(true);
-			try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+			try {
+				DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 				wr.write(json.getBytes());
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			int rc = connection.getResponseCode();
 			if (rc != 200) {

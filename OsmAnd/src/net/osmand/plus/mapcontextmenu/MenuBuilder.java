@@ -73,6 +73,7 @@ import java.util.*;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import static net.osmand.plus.osmedit.opr.OPRWebviewActivity.getPrivateKeyFromCookie;
+import static net.osmand.plus.osmedit.opr.OPRWebviewActivity.getUsernameFromCookie;
 
 public class MenuBuilder {
 
@@ -144,9 +145,9 @@ public class MenuBuilder {
 				int res = 0;
 				try {
 					res = openDBAPI.uploadImage(
-							idOfCurrentPlace,
-							OPRWebviewActivity.getPrivateKeyFromCookie(),
-							OPRWebviewActivity.getUsernameFromCookie(),
+							idOfCurrentPlace, //,
+							"base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCAOpUDyGrTPRPDQRCIRXysxC6gCgSTiNQ5nVEjhvsFITA==",//OPRWebviewActivity.getPrivateKeyFromCookie()
+							"openplacereviews:test_1",//OPRWebviewActivity.getUsernameFromCookie()
 							response);
 				} catch (FailedVerificationException e) {
 					LOG.error(e);
@@ -160,7 +161,7 @@ public class MenuBuilder {
 							.getString(R.string.successfully_uploaded_pattern), 1, 1);
 					showMessageWith(view, str);
 					//refresh the image
-					startLoadingImages();
+					execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 				}
 			} else {
 				showMessageWith(view, view.getResources().getString(R.string.cannot_upload_image));
@@ -317,14 +318,48 @@ public class MenuBuilder {
 											handleSelectedImage(view, inputStream);
 										}
 									}));
-							String cookie = getPrivateKeyFromCookie();
-							if (cookie == null || cookie.isEmpty()) {
+							final String privateKey = "base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCAOpUDyGrTPRPDQRCIRXysxC6gCgSTiNQ5nVEjhvsFITA==";
+							//getPrivateKeyFromCookie();
+							final String name = "openplacereviews:test_1";
+							//getUsernameFromCookie();
+							if (privateKey == null || privateKey.isEmpty()) {
 								Toast.makeText(view.getContext(), R.string.register_before_upload, Toast.LENGTH_SHORT).show();
+								return;
 							}
-							Intent intent = new Intent();
-							intent.setType("image/*");
-							intent.setAction(Intent.ACTION_GET_CONTENT);
-							mapActivity.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+							Thread t = new Thread(new Runnable() {
+								@Override
+								public void run() {
+									boolean valid = true; //checkPrivateKey(name, privateKey);
+									if (valid) {
+										app.runInUIThread(new Runnable() {
+											@Override
+											public void run() {
+												Intent intent = new Intent();
+												intent.setType("image/*");
+												intent.setAction(Intent.ACTION_GET_CONTENT);
+												mapActivity.startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+											}
+										});
+									} else {
+										app.runInUIThread(new Runnable() {
+											@Override
+											public void run() {
+												Toast.makeText(view.getContext(), R.string.register_before_upload, Toast.LENGTH_SHORT).show();
+											}
+										});
+									}
+								}
+							});
+							t.start();
+						}
+
+						private boolean checkPrivateKey(String name, String privateKey) {
+							//TODO check for login(next task)
+							//privateKey = "base64:PKCS#8:MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCAOpUDyGrTPRPDQRCIRXysxC6gCgSTiNQ5nVEjhvsFITA==";
+							//name = "openplacereviews:test_1";
+							String resp = NetworkUtils.sendGetRequest(BuildConfig.OPR_BASE_URL + "api/auth/user-check-loginkey?" +
+									"name=" + name + "opr_web" + "&privateKey=" + privateKey, null, new StringBuilder());
+							return resp == null;
 						}
 					}, false);
 		}
