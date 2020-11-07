@@ -191,12 +191,26 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			final float speechRate = cSpeechRate;
 
 			final String[] lsplit = (language + "____.").split("[\\_\\-]");
-			// constructor supports lang_country_variant
-			Locale newLocale0 = new Locale(lsplit[0], lsplit[1], lsplit[2]);
-			// #3344: Try Locale builder instead of constructor (only available from API 21). Also supports script (for now supported as trailing x_x_x_Scrp)
+			// As per BCP 47: well formed scripts: [a-zA-Z]{4}, variants: [0-9][0-9a-zA-Z]{3} | [0-9a-zA-Z]{5,8}, countries/regions: [a-zA-Z]{2} | [0-9]{3}
+			String lregion = "";
+			String lvariant = "";
+			String lscript = "";
+			for (int i=3; i>0; i--) {
+				if (lsplit[i].length() == 4 && !(lsplit[i] + "A").substring(0, 1).matches("[0-9]")) {
+						lscript = lsplit[i];
+				} else if (lsplit[i].length() >= 4) {
+						lvariant = lsplit[i];
+				} else {
+						lregion = lsplit[i];
+				}
+			}
+			// Locale constructor supports 'language, region, variant'.
+			//Locale newLocale0 = new Locale(lsplit[0], lregion, lvariant); (Setting variant here seems to cause errors on some systems)
+			Locale newLocale0 = new Locale(lsplit[0], lregion);
+			// #3344: Try Locale builder instead (only available from API 21), also supports script (we support as 4 letters)
 			if (android.os.Build.VERSION.SDK_INT >= 21) {
 				try {
-					newLocale0 = new Locale.Builder().setLanguage(lsplit[0]).setScript(lsplit[3]).setRegion(lsplit[1]).setVariant(lsplit[2]).build();
+					newLocale0 = new Locale.Builder().setLanguage(lsplit[0]).setScript(lscript).setRegion(lregion).setVariant(lvariant).build();
 				} catch (RuntimeException e) {
 					// Falls back to constructor
 				}
