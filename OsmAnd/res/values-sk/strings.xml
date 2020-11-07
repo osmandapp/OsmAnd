@@ -3947,4 +3947,10 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd používa MGSR, ktorý je podobný ako formát UTM NATO.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Musíte pridať aspoň dva body.</string>
+    <string name="manage_subscription">Spravovať predplatné</string>
+    <string name="subscription_payment_issue_title">S vaším predplatným je problém. Stlačte tlačidlo pre prechod do nastavení predplatného v Google Play a opravte váš spôsob platby.</string>
+    <string name="subscription_expired_title">Predplatné OsmAnd Live skončilo</string>
+    <string name="subscription_paused_title">Predplatné OsmAnd Live je pozastavené</string>
+    <string name="subscription_on_hold_title">Predplatné OsmAnd Live je zablokované</string>
 </resources>
