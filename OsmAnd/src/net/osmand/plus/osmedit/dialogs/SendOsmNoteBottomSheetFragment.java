@@ -1,7 +1,7 @@
 package net.osmand.plus.osmedit.dialogs;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -20,6 +20,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.util.Algorithms;
 
 public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
@@ -39,14 +40,21 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
+	private boolean isLoginOAuth() {
+		return !Algorithms.isEmpty(getMyApplication().getSettings().USER_DISPLAY_NAME.get());
+	}
+
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final boolean isNightMode = !getMyApplication().getSettings().isLightContent();
-		final View sendOsmNoteView = View.inflate(getContext(), R.layout.send_osm_note_fragment, null);
+		final View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.send_osm_note_fragment, null);
 		final LinearLayout accountBlockView = sendOsmNoteView.findViewById(R.id.account_block);
 		final SwitchCompat uploadAnonymously = sendOsmNoteView.findViewById(R.id.upload_anonymously_switch);
 		final TextView accountName = sendOsmNoteView.findViewById(R.id.user_name);
-		String userName = getMyApplication().getSettings().USER_DISPLAY_NAME.get();
+		settings = getMyApplication().getSettings();
+		String userNameOAuth = settings.USER_DISPLAY_NAME.get();
+		String userNameOpenID = settings.USER_NAME.get();
+		String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
 		accountName.setText(userName);
 		accountBlockView.setVisibility(View.VISIBLE);
 		uploadAnonymously.setBackgroundResource(isNightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);

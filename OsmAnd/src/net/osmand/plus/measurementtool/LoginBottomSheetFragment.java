@@ -92,6 +92,10 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		}
 	}
 
+	private boolean isValidToken() {
+		return authorizationAdapter.isValidToken();
+	}
+
 	@Override
 	protected DialogButtonType getRightBottomButtonType() {
 		return (DialogButtonType.SECONDARY);

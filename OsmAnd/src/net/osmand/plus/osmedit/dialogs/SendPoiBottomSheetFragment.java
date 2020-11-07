@@ -1,6 +1,7 @@
 package net.osmand.plus.osmedit.dialogs;
 
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -17,6 +18,8 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmPoint;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.util.Algorithms;
 
 public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
@@ -24,6 +27,8 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
     public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
     public static final String POI_UPLOADER_TYPE = "poi_uploader_type";
     private OsmPoint[] poi;
+
+    protected OsmandSettings settings;
 
     public enum PoiUploaderType {
         SIMPLE,
@@ -34,13 +39,20 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
         return (OsmandApplication) getActivity().getApplication();
     }
 
+    private boolean isLoginOAuth() {
+        return !Algorithms.isEmpty(getMyApplication().getSettings().USER_DISPLAY_NAME.get());
+    }
+
     @Override
     public void createMenuItems(Bundle savedInstanceState) {
         final boolean isNightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-        final View sendOsmPoiView = View.inflate(getContext(), R.layout.send_poi_fragment, null);
+        final View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.send_poi_fragment, null);
         final SwitchCompat closeChangset = sendOsmPoiView.findViewById(R.id.close_change_set_checkbox);
-        final TextView accountName = (TextView) sendOsmPoiView.findViewById(R.id.user_name);
-        String userName = getMyApplication().getSettings().USER_DISPLAY_NAME.get();
+        final TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
+        settings = getMyApplication().getSettings();
+        String userNameOAuth = settings.USER_DISPLAY_NAME.get();
+        String userNameOpenID = settings.USER_NAME.get();
+        String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
         accountName.setText(userName);
         closeChangset.setBackgroundResource(isNightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
         closeChangset.setPadding(30, 0, 0, 0);
@@ -80,8 +92,8 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
         View view = getView();
         poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
         final SwitchCompat closeChangeSetCheckBox =
-                (SwitchCompat) view.findViewById(R.id.close_change_set_checkbox);
-        final EditText messageEditText = (EditText) view.findViewById(R.id.message_field);
+                view.findViewById(R.id.close_change_set_checkbox);
+        final EditText messageEditText = view.findViewById(R.id.message_field);
         final SendPoiDialogFragment.PoiUploaderType poiUploaderType = SendPoiDialogFragment.PoiUploaderType.valueOf(getArguments().getString(POI_UPLOADER_TYPE, SendPoiDialogFragment.PoiUploaderType.SIMPLE.name()));
         final SendPoiDialogFragment.ProgressDialogPoiUploader progressDialogPoiUploader;
         if (poiUploaderType == SendPoiDialogFragment.PoiUploaderType.SIMPLE && getActivity() instanceof MapActivity) {
