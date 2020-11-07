@@ -7,7 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Collator;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
@@ -24,6 +26,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
@@ -35,6 +38,7 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
@@ -43,14 +47,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.*;
 import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 
 /*
 	Usage:
@@ -107,6 +113,8 @@ public class SettingsHelper {
 
 	public interface SettingsExportListener {
 		void onSettingsExportFinished(@NonNull File file, boolean succeed);
+
+		void onSettingsExportProgressUpdate(int value);
 	}
 
 	public enum ImportType {
@@ -133,6 +141,14 @@ public class SettingsHelper {
 	public boolean isImportDone() {
 		ImportAsyncTask importTask = this.importTask;
 		return importTask == null || importTask.isImportDone();
+	}
+
+	public boolean cancelExportForFile(File file) {
+		ExportAsyncTask exportTask = exportAsyncTasks.get(file);
+		if (exportTask != null && (exportTask.getStatus() == AsyncTask.Status.RUNNING)) {
+			return exportTask.cancel(true);
+		}
+		return false;
 	}
 
 	public boolean isFileExporting(File file) {
@@ -196,11 +212,15 @@ public class SettingsHelper {
 		}
 	}
 
-	@SuppressLint("StaticFieldLeak")
-	private class ExportAsyncTask extends AsyncTask<Void, Void, Boolean> {
+	public interface ExportProgressListener {
+		void updateProgress(int value);
+	}
 
-		private SettingsExporter exporter;
+	@SuppressLint("StaticFieldLeak")
+	public class ExportAsyncTask extends AsyncTask<Void, Integer, Boolean> {
+
 		private File file;
+		private SettingsExporter exporter;
 		private SettingsExportListener listener;
 
 		ExportAsyncTask(@NonNull File settingsFile,
@@ -208,7 +228,7 @@ public class SettingsHelper {
 						@NonNull List<SettingsItem> items, boolean exportItemsFiles) {
 			this.file = settingsFile;
 			this.listener = listener;
-			this.exporter = new SettingsExporter(exportItemsFiles);
+			this.exporter = new SettingsExporter(getProgressListener(), exportItemsFiles);
 			for (SettingsItem item : items) {
 				exporter.addSettingsItem(item);
 			}
@@ -228,11 +248,33 @@ public class SettingsHelper {
 		}
 
 		@Override
+		protected void onProgressUpdate(Integer... values) {
+			if (listener != null) {
+				listener.onSettingsExportProgressUpdate(values[0]);
+			}
+		}
+
+		@Override
 		protected void onPostExecute(Boolean success) {
 			exportAsyncTasks.remove(file);
 			if (listener != null) {
 				listener.onSettingsExportFinished(file, success);
 			}
+		}
+
+		@Override
+		protected void onCancelled() {
+			Algorithms.removeAllFiles(file);
+		}
+
+		private ExportProgressListener getProgressListener() {
+			return new ExportProgressListener() {
+				@Override
+				public void updateProgress(int value) {
+					exporter.setCancelled(isCancelled());
+					publishProgress(value);
+				}
+			};
 		}
 	}
 
@@ -538,11 +580,11 @@ public class SettingsHelper {
 		if (!favoriteGroups.isEmpty()) {
 			dataList.put(ExportSettingsType.FAVORITES, favoriteGroups);
 		}
-		List<LocalIndexInfo> localIndexInfoList = getVoiceIndexInfo();
-		List<File> files;
-		files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
+		List<LocalIndexInfo> localIndexInfoList = getLocalIndexData();
+		List<File> files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
 				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA);
 		if (!files.isEmpty()) {
+			sortLocalFiles(files);
 			dataList.put(ExportSettingsType.OFFLINE_MAPS, files);
 		}
 		files = getFilesByType(localIndexInfoList, LocalIndexType.TTS_VOICE_DATA);
@@ -560,7 +602,7 @@ public class SettingsHelper {
 		return dataList;
 	}
 
-	private List<LocalIndexInfo> getVoiceIndexInfo() {
+	private List<LocalIndexInfo> getLocalIndexData() {
 		return new LocalIndexHelper(app).getLocalIndexData(new AbstractLoadLocalIndexTask() {
 			@Override
 			public void loadFile(LocalIndexInfo... loaded) {
@@ -819,5 +861,19 @@ public class SettingsHelper {
 			settingsToOperate.put(ExportSettingsType.MARKERS, markersGroups);
 		}
 		return settingsToOperate;
+	}
+
+	private void sortLocalFiles(List<File> files) {
+		final Collator collator = OsmAndCollator.primaryCollator();
+		Collections.sort(files, new Comparator<File>() {
+			@Override
+			public int compare(File lhs, File rhs) {
+				return collator.compare(getNameToDisplay(lhs), getNameToDisplay(rhs));
+			}
+
+			private String getNameToDisplay(File item) {
+				return FileNameTranslationHelper.getFileNameWithRegion(app, item.getName());
+			}
+		});
 	}
 }

@@ -10,7 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,7 +29,7 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 												   @NonNull JSONObject json) throws JSONException;
 
 	@Override
-	public void readFromStream(@NonNull InputStream inputStream, File destination) throws IOException, IllegalArgumentException {
+	public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
 		StringBuilder buf = new StringBuilder();
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));

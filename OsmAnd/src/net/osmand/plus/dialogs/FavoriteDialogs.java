@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.FavouritePoint;
@@ -32,6 +33,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -79,20 +82,24 @@ public class FavoriteDialogs {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(dlgHolder != null && dlgHolder.length > 0 && dlgHolder[0] != null) {
+				if (dlgHolder != null && dlgHolder.length > 0 && dlgHolder[0] != null) {
 					dlgHolder[0].dismiss();
 				}
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
-				if (helper.editFavourite(fp, point.getLatitude(), point.getLongitude())) {
+				if (point != null && helper.editFavourite(fp, point.getLatitude(), point.getLongitude())) {
 					helper.deleteFavourite(point);
 					if (activity instanceof MapActivity) {
-						((MapActivity) activity).getContextMenu()
+						MapActivity mapActivity = (MapActivity) activity;
+						Fragment fragment = mapActivity.getSupportFragmentManager()
+								.findFragmentByTag(FavoritePointEditor.TAG);
+						if (fragment instanceof FavoritePointEditorFragmentNew) {
+							((FavoritePointEditorFragmentNew) fragment).exitEditing();
+						}
+						mapActivity.getContextMenu()
 								.show(new LatLon(point.getLatitude(), point.getLongitude()), fp.getPointDescription(activity), fp);
+						mapActivity.getMapView().refreshMap();
 					}
 				}
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).getMapView().refreshMap();
-				}				
 			}
 		});
 		builder.show();

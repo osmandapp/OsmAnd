@@ -125,8 +125,7 @@ public class TrackDetailsMenu {
 			hidding = true;
 			fragment.dismiss(backPressed);
 		} else {
-			segment = null;
-			trackChartPoints = null;
+			reset();
 		}
 	}
 
@@ -274,8 +273,7 @@ public class TrackDetailsMenu {
 		if (hidding) {
 			hidding = false;
 			visible = false;
-			segment = null;
-			trackChartPoints = null;
+			reset();
 		}
 	}
 
@@ -530,6 +528,11 @@ public class TrackDetailsMenu {
 			mapActivity.refreshMap();
 		}
 		fitTrackOnMap(chart, location, forceFit);
+	}
+
+	public void reset() {
+		segment = null;
+		trackChartPoints = null;
 	}
 
 	private List<LatLon> getXAxisPoints(LineChart chart) {

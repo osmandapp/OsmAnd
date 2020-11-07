@@ -3937,4 +3937,8 @@
     <string name="icon_group_sport">Спорт</string>
     <string name="icon_group_emergency">Экстренные службы</string>
     <string name="icon_group_travel">Путешествие</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd использует MGRS, который похож на формат UTM NATO.</string>
+    <string name="use_native_pt">Развитие местного общественного транспорта</string>
 </resources>

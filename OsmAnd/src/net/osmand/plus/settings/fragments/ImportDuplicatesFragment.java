@@ -32,6 +32,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -46,10 +48,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.IndexConstants.AV_INDEX_DIR;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.IndexConstants.RENDERERS_DIR;
-import static net.osmand.IndexConstants.ROUTING_PROFILES_DIR;
+import static net.osmand.plus.settings.backend.backup.FileSettingsItem.*;
 import static net.osmand.plus.settings.fragments.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
 
 
@@ -196,6 +195,11 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		List<File> trackFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
+		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
+		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
+		List<File> ttsVoiceFilesList = new ArrayList<>();
+		List<File> voiceFilesList = new ArrayList<>();
+		List<File> mapFilesList = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
 			if (object instanceof ApplicationMode.ApplicationModeBean) {
@@ -208,19 +212,30 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 				tileSources.add((ITileSource) object);
 			} else if (object instanceof File) {
 				File file = (File) object;
-				if (file.getAbsolutePath().contains(RENDERERS_DIR)) {
+				FileSubtype fileSubtype = FileSubtype.getSubtypeByPath(app, file.getPath());
+				if (fileSubtype == FileSubtype.RENDERING_STYLE) {
 					renderFilesList.add(file);
-				} else if (file.getAbsolutePath().contains(ROUTING_PROFILES_DIR)) {
+				} else if (fileSubtype == FileSubtype.ROUTING_CONFIG) {
 					routingFilesList.add(file);
-				} else if (file.getAbsolutePath().contains(AV_INDEX_DIR)) {
+				} else if (fileSubtype == FileSubtype.MULTIMEDIA_NOTES) {
 					multimediaFilesList.add(file);
-				} else if (file.getAbsolutePath().contains(GPX_INDEX_DIR)) {
+				} else if (fileSubtype == FileSubtype.GPX) {
 					trackFilesList.add(file);
+				} else if (fileSubtype.isMap()) {
+					mapFilesList.add(file);
+				} else if (fileSubtype == FileSubtype.TTS_VOICE) {
+					ttsVoiceFilesList.add(file);
+				} else if (fileSubtype == FileSubtype.VOICE) {
+					voiceFilesList.add(file);
 				}
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
 			} else if (object instanceof FavoriteGroup) {
 				favoriteGroups.add((FavoriteGroup) object);
+			} else if (object instanceof OsmNotesPoint) {
+				osmNotesPointList.add((OsmNotesPoint) object);
+			} else if (object instanceof OpenstreetmapPoint) {
+				osmEditsPointList.add((OpenstreetmapPoint) object);
 			}
 		}
 		if (!profiles.isEmpty()) {
@@ -262,6 +277,26 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		if (!favoriteGroups.isEmpty()) {
 			duplicates.add(getString(R.string.shared_string_favorites));
 			duplicates.addAll(favoriteGroups);
+		}
+		if (!osmNotesPointList.isEmpty()) {
+			duplicates.add(getString(R.string.osm_notes));
+			duplicates.addAll(osmNotesPointList);
+		}
+		if (!osmEditsPointList.isEmpty()) {
+			duplicates.add(getString(R.string.osm_edits));
+			duplicates.addAll(osmEditsPointList);
+		}
+		if (!mapFilesList.isEmpty()) {
+			duplicates.add(getString(R.string.shared_string_maps));
+			duplicates.addAll(mapFilesList);
+		}
+		if (!ttsVoiceFilesList.isEmpty()) {
+			duplicates.add(getString(R.string.local_indexes_cat_tts));
+			duplicates.addAll(ttsVoiceFilesList);
+		}
+		if (!voiceFilesList.isEmpty()) {
+			duplicates.add(getString(R.string.local_indexes_cat_voice));
+			duplicates.addAll(voiceFilesList);
 		}
 		return duplicates;
 	}

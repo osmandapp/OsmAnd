@@ -942,7 +942,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		}
 	}
 
-	private void exitEditing() {
+	public void exitEditing() {
 		cancelled = true;
 		dismiss();
 	}

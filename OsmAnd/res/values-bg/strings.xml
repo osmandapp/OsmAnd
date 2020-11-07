@@ -2218,4 +2218,10 @@
     <string name="all_previous_segments">Всички предишни сегменти</string>
     <string name="only_selected_segment_recalc">Само избраният сегмент ще бъде преизчислен съобразно избрания профил.</string>
     <string name="all_next_segments_will_be_recalc">Всички следващи сегменти ще бъдат преизчислени с помощта на избрания профил.</string>
+    <string name="plan_route_change_route_type_after">Промяна типа на маршрута след</string>
+    <string name="simplified_track">Опростена пътека</string>
+    <string name="simplified_track_description">Само линията на маршрута ще бъде запазена, точките ще бъдат изтрити.</string>
+    <string name="shared_string_file_name">Име на файл</string>
+    <string name="number_of_gpx_files_selected_pattern">Избрани файлове за проследяване: %s</string>
+    <string name="monitoring_control_start">REC</string>
 </resources>

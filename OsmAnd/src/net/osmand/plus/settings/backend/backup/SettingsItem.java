@@ -169,7 +169,7 @@ public abstract class SettingsItem {
 	SettingsItemReader<? extends SettingsItem> getJsonReader() {
 		return new SettingsItemReader<SettingsItem>(this) {
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, File destination) throws IOException, IllegalArgumentException {
+			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
 				StringBuilder buf = new StringBuilder();
 				try {
 					BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
