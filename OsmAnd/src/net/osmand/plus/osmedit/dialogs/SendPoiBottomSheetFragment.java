@@ -2,6 +2,7 @@ package net.osmand.plus.osmedit.dialogs;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,12 +36,27 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
     @Override
     public void createMenuItems(Bundle savedInstanceState) {
+        final boolean isNightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+        final View sendOsmPoiView = View.inflate(getContext(), R.layout.send_poi_fragment, null);
+        final SwitchCompat closeChangset = sendOsmPoiView.findViewById(R.id.close_change_set_checkbox);
+        final TextView accountName = (TextView) sendOsmPoiView.findViewById(R.id.user_name);
         String userName = getMyApplication().getSettings().USER_DISPLAY_NAME.get();
-        final View sendOsmNoteView = View.inflate(getContext(), R.layout.send_poi_fragment, null);
-        final TextView accountName = (TextView) sendOsmNoteView.findViewById(R.id.user_name);
         accountName.setText(userName);
+        closeChangset.setBackgroundResource(isNightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
+        closeChangset.setPadding(30, 0, 0, 0);
+        closeChangset.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isNightMode) {
+                    closeChangset.setBackgroundResource(isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
+                } else {
+                    closeChangset.setBackgroundResource(isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
+                }
+                closeChangset.setPadding(30, 0, 0, 0);
+            }
+        });
         final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-                .setCustomView(sendOsmNoteView)
+                .setCustomView(sendOsmPoiView)
                 .create();
         items.add(titleItem);
     }

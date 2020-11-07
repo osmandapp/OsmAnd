@@ -21,8 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:textSize="@dimen/default_desc_text_size"
-            android:text = "@string/osm_notes" />
+            android:textSize="@dimen/default_list_text_size"
+            osmand:typeface="@string/font_roboto_medium"
+            android:text = "@string/osm_notes"
+            android:letterSpacing="@dimen/text_button_letter_spacing"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/message_label"
@@ -41,12 +43,16 @@
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/upload_anonymously_switch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:minHeight="@dimen/context_menu_buttons_bottom_height"
-            android:text="@string/upload_anonymously"
             android:layout_marginBottom="@dimen/bottom_sheet_content_margin"
-            android:paddingLeft="@dimen/context_menu_padding_margin_medium"
-            android:background="@drawable/layout_bg"/>
+            android:paddingBottom="@dimen/content_padding_small"
+            android:paddingTop="@dimen/content_padding_small"
+            android:text="@string/upload_anonymously"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size"
+            android:letterSpacing="@dimen/text_button_letter_spacing"
+            osmand:typeface="@string/font_roboto_regular"/>
 
     </LinearLayout>
 
