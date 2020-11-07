@@ -3952,4 +3952,8 @@
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Służby ratunkowe</string>
     <string name="icon_group_travel">Podróże</string>
+    <string name="mgrs_format_descr">OsmAnd używa formatu MGRS, który jest podobny do UTM NATO.</string>
+    <string name="manage_subscription">Zarządzaj subskrypcją</string>
+    <string name="subscription_expired_title">Subskrypcja OsmAnd Live wygasła</string>
+    <string name="subscription_paused_title">Subskrypcja OsmAnd Live została wstrzymana</string>
 </resources>
