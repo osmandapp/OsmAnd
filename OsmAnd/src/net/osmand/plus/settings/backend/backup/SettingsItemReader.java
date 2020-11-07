@@ -13,5 +13,5 @@ public abstract class SettingsItemReader<T extends SettingsItem> {
 		this.item = item;
 	}
 
-	public abstract void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException;
+	public abstract void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException;
 }

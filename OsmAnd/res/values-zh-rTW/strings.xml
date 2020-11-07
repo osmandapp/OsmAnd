@@ -3939,4 +3939,7 @@
     <string name="icon_group_sport">運動</string>
     <string name="icon_group_emergency">警急</string>
     <string name="icon_group_travel">旅行</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd 使用 MGRS，其類似於 UTM NATO 格式。</string>
 </resources>

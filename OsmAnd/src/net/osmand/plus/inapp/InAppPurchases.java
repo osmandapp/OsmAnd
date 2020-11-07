@@ -24,6 +24,8 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
@@ -189,6 +191,28 @@ public abstract class InAppPurchases {
 				}
 			}
 			return null;
+		}
+
+		@Nullable
+		public InAppSubscription getTopExpiredSubscription() {
+			List<InAppSubscription> expiredSubscriptions = new ArrayList<>();
+			for (InAppSubscription s : getAllSubscriptions()) {
+				if (s.getState().isGone()) {
+					expiredSubscriptions.add(s);
+				}
+			}
+			Collections.sort(expiredSubscriptions, new Comparator<InAppSubscription>() {
+				@Override
+				public int compare(InAppSubscription s1, InAppSubscription s2) {
+					int orderS1 = s1.getState().ordinal();
+					int orderS2 = s2.getState().ordinal();
+					if (orderS1 != orderS2) {
+						return (orderS1 < orderS2) ? -1 : ((orderS1 == orderS2) ? 0 : 1);
+					}
+					return Double.compare(s1.getMonthlyPriceValue(), s2.getMonthlyPriceValue());
+				}
+			});
+			return expiredSubscriptions.isEmpty() ? null : expiredSubscriptions.get(0);
 		}
 	}
 
@@ -554,8 +578,48 @@ public abstract class InAppPurchases {
 		private String subscriptionPeriodString;
 		private Period subscriptionPeriod;
 		private boolean upgrade = false;
+		private SubscriptionState state = SubscriptionState.UNDEFINED;
+		private SubscriptionState prevState = SubscriptionState.UNDEFINED;
 
 		private InAppSubscriptionIntroductoryInfo introductoryInfo;
+
+		public enum SubscriptionState {
+			UNDEFINED("undefined"),
+			ACTIVE("active"),
+			CANCELLED("cancelled"),
+			IN_GRACE_PERIOD("in_grace_period"),
+			ON_HOLD("on_hold"),
+			PAUSED("paused"),
+			EXPIRED("expired");
+
+			private final String stateStr;
+
+			SubscriptionState(@NonNull String stateStr) {
+				this.stateStr = stateStr;
+			}
+
+			public String getStateStr() {
+				return stateStr;
+			}
+
+			@NonNull
+			public static SubscriptionState getByStateStr(@NonNull String stateStr) {
+				for (SubscriptionState state : SubscriptionState.values()) {
+					if (state.stateStr.equals(stateStr)) {
+						return state;
+					}
+				}
+				return UNDEFINED;
+			}
+
+			public boolean isGone() {
+				return this == ON_HOLD || this == PAUSED || this == EXPIRED;
+			}
+
+			public boolean isActive() {
+				return this == ACTIVE || this == CANCELLED || this == IN_GRACE_PERIOD;
+			}
+		}
 
 		InAppSubscription(@NonNull String skuNoVersion, int version) {
 			super(skuNoVersion + "_v" + version);
@@ -590,6 +654,28 @@ public abstract class InAppPurchases {
 
 		public boolean isUpgrade() {
 			return upgrade;
+		}
+
+		@NonNull
+		public SubscriptionState getState() {
+			return state;
+		}
+
+		public void setState(@NonNull SubscriptionState state) {
+			this.state = state;
+		}
+
+		@NonNull
+		public SubscriptionState getPrevState() {
+			return prevState;
+		}
+
+		public void setPrevState(@NonNull SubscriptionState prevState) {
+			this.prevState = prevState;
+		}
+
+		public boolean hasStateChanged() {
+			return state != prevState;
 		}
 
 		public boolean isAnyPurchased() {

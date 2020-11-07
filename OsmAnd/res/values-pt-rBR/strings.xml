@@ -3938,4 +3938,7 @@
     <string name="icon_group_sport">Esporte</string>
     <string name="icon_group_emergency">Emergência</string>
     <string name="icon_group_travel">Viagem</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd usa MGRS, que é semelhante ao formato UTM NATO.</string>
 </resources>

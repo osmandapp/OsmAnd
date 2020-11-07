@@ -3948,4 +3948,7 @@
     <string name="icon_group_sport">ספורט</string>
     <string name="icon_group_emergency">חירום</string>
     <string name="icon_group_travel">טיול</string>
+    <string name="mgrs_format_descr">ב־OsmAnd נעשה שימוש ב־MGRS, שדומה לתצורת UTM NATO.</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
 </resources>

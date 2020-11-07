@@ -1868,7 +1868,7 @@
     <string name="poi_fuel_100ll">100LL (con plomo, para aviones)</string>
     <string name="poi_fuel_autogas">Autogas (Etanol libre de plomo)</string>
     <string name="poi_fuel_jeta1">Jet A-1 (diésel)</string>
-    <string name="poi_fuel_adblue">Líquido de escape de diesel</string>
+    <string name="poi_fuel_adblue">Aditivo para escapes de Diesel (AdBlue)</string>
     <string name="poi_fuel_wood">Combustible: madera</string>
     <string name="poi_fuel_charcoal">Combustible: carbón vegetal</string>
     <string name="poi_fuel_coal">Combustible: carbón</string>
@@ -3562,8 +3562,8 @@
     <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Advertencia de peligro</string>
     <string name="poi_rtsa_scale_filter">Categoría de dificultad</string>
-    <string name="poi_rtsa_scale_nc">н/к (sin categoría)</string>
-    <string name="poi_rtsa_scale_nc_asterisk">н/к* (sin categoría, posible peligro)</string>
+    <string name="poi_rtsa_scale_nc">s/c (sin categoría)</string>
+    <string name="poi_rtsa_scale_nc_asterisk">s/c* (sin categoría, posible peligro)</string>
     <string name="poi_rtsa_scale_1a">1А</string>
     <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
     <string name="poi_rtsa_scale_1b">1B</string>
@@ -3808,7 +3808,7 @@
     <string name="poi_seamark_water_level_part_submerged">Nivel de agua: parcialmente sumergido</string>
     <string name="poi_tactile_paving_incorrect">Incorrecto</string>
     <string name="poi_traffic_signals_sound_locate">Sólo se permite al caminar</string>
-    <string name="poi_internet_access_fee_customers">Señal para encontrar el poste</string>
+    <string name="poi_internet_access_fee_customers">Acceso a Internet: clientes</string>
     <string name="poi_booth">Tipo de cabina</string>
     <string name="poi_covered_booth">Cabina</string>
     <string name="poi_dive_centre">Centro de buceo</string>
@@ -3845,4 +3845,10 @@
     <string name="poi_recycling_small_electrical_appliances">Pequeños electrodomésticos</string>
     <string name="poi_departures_board">Tablero de salidas</string>
     <string name="poi_drinking_water_refill">Relleno de agua potable</string>
+    <string name="poi_radar_tower">Torre de radar</string>
+    <string name="poi_parking_layby">Apartadero</string>
+    <string name="poi_parking_sheds">Cobertizos</string>
+    <string name="poi_parking_rooftop">Azotea</string>
+    <string name="poi_gpx_point">Punto GPX</string>
+    <string name="poi_fuel_lng">Gas natural licuado</string>
 </resources>

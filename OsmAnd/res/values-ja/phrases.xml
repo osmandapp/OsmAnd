@@ -361,7 +361,7 @@
     <string name="poi_lawyer">法律事務所</string>
     <string name="poi_office_telecommunication">通信会社事務所</string>
     <string name="poi_ngo">NGO・非政府組織</string>
-    <string name="poi_townhall">町役場・市庁舎</string>
+    <string name="poi_townhall">役場・庁舎</string>
     <string name="poi_employment_agency">職業紹介所</string>
     <string name="poi_research">研究所</string>
     <string name="poi_it">IT関連事務所</string>
@@ -370,7 +370,7 @@
     <string name="poi_advertising_agency">広告代理店</string>
     <string name="poi_educational_institution">教育団体事務所</string>
     <string name="poi_studio">テレビ・ラジオ・録音スタジオ</string>
-    <string name="poi_bookmaker">賭博場</string>
+    <string name="poi_bookmaker">ブックメーカー</string>
     <string name="poi_stadium">スタジアム</string>
     <string name="poi_sports_centre">総合スポーツ場</string>
     <string name="poi_golf_course">ゴルフ場</string>
@@ -3839,4 +3839,5 @@
     <string name="poi_parking_layby">待避所</string>
     <string name="poi_parking_sheds">車庫</string>
     <string name="poi_parking_rooftop">屋上</string>
+    <string name="poi_radar_tower">レーダー塔</string>
 </resources>
