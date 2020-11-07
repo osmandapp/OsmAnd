@@ -191,7 +191,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			final float speechRate = cSpeechRate;
 
 			final String[] lsplit = (language + "____.").split("[\\_\\-]");
-			// As per BCP 47: well formed scripts [a-zA-Z]{4}, variants [0-9][0-9a-zA-Z]{3} | [0-9a-zA-Z]{5,8}, countries/regions [a-zA-Z]{2} | [0-9]{3}
+			// As per BCP 47: well formed scripts: [a-zA-Z]{4}, variants: [0-9][0-9a-zA-Z]{3} | [0-9a-zA-Z]{5,8}, countries/regions: [a-zA-Z]{2} | [0-9]{3}
 			String lregion = "";
 			String lvariant = "";
 			String lscript = "";
@@ -204,8 +204,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						lregion = lsplit[i];
 				}
 			}
-			// Locale constructor supports 'language, region, variant'
-			//Locale newLocale0 = new Locale(lsplit[0], lregion, lvariant); //Setting variant here seems to cause errors on some systems
+			// Locale constructor supports 'language, region, variant'.
+			//Locale newLocale0 = new Locale(lsplit[0], lregion, lvariant); (Setting variant here seems to cause errors on some systems)
 			Locale newLocale0 = new Locale(lsplit[0], lregion);
 			// #3344: Try Locale builder instead (only available from API 21), also supports script (we support as 4 letters)
 			if (android.os.Build.VERSION.SDK_INT >= 21) {
