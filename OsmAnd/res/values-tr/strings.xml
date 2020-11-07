@@ -3902,4 +3902,5 @@
     <string name="icon_group_sport">Spor</string>
     <string name="icon_group_emergency">Acil</string>
     <string name="icon_group_travel">Seyahat</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">En az iki nokta eklemelisiniz.</string>
 </resources>
