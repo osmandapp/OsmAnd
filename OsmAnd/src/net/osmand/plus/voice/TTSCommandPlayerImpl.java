@@ -204,7 +204,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						lregion = lsplit[i];
 				}
 			}
-			// Locale constructor supports 'language, region, variant'.
+			// Locale constructor supports 'language, region, variant'
 			//Locale newLocale0 = new Locale(lsplit[0], lregion, lvariant); (Setting variant here seems to cause errors on some systems)
 			Locale newLocale0 = new Locale(lsplit[0], lregion);
 			// #3344: Try Locale builder instead (only available from API 21), also supports script (we support as 4 letters)
