@@ -32,6 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -200,6 +201,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		List<File> ttsVoiceFilesList = new ArrayList<>();
 		List<File> voiceFilesList = new ArrayList<>();
 		List<File> mapFilesList = new ArrayList<>();
+		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
 			if (object instanceof ApplicationMode.ApplicationModeBean) {
@@ -236,6 +238,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 				osmNotesPointList.add((OsmNotesPoint) object);
 			} else if (object instanceof OpenstreetmapPoint) {
 				osmEditsPointList.add((OpenstreetmapPoint) object);
+			} else if (object instanceof MapMarkersGroup) {
+				markersGroups.add((MapMarkersGroup) object);
 			}
 		}
 		if (!profiles.isEmpty()) {
@@ -297,6 +301,10 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		if (!voiceFilesList.isEmpty()) {
 			duplicates.add(getString(R.string.local_indexes_cat_voice));
 			duplicates.addAll(voiceFilesList);
+		}
+		if (!markersGroups.isEmpty()) {
+			duplicates.add(getString(R.string.map_markers));
+			duplicates.addAll(markersGroups);
 		}
 		return duplicates;
 	}

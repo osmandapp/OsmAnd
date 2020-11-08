@@ -41,6 +41,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -49,6 +50,7 @@ import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.MarkersSettingsItem;
 import net.osmand.plus.settings.backend.backup.OsmEditsSettingsItem;
 import net.osmand.plus.settings.backend.backup.OsmNotesSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -436,6 +438,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
+		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		for (Object object : data) {
 			if (object instanceof ApplicationModeBean) {
 				appModeBeans.add((ApplicationModeBean) object);
@@ -459,6 +462,8 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 				favoriteGroups.add((FavoriteGroup) object);
 			} else if (object instanceof GlobalSettingsItem) {
 				settingsItems.add((GlobalSettingsItem) object);
+			} else if (object instanceof MapMarkersGroup) {
+				markersGroups.add((MapMarkersGroup) object);
 			}
 		}
 		if (!appModeBeans.isEmpty()) {
@@ -489,6 +494,10 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 		if (!favoriteGroups.isEmpty()) {
 			FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class);
 			settingsItems.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
+		}
+		if (!markersGroups.isEmpty()) {
+			MarkersSettingsItem baseItem = getBaseItem(SettingsItemType.MARKERS, MarkersSettingsItem.class);
+			settingsItems.add(new MarkersSettingsItem(app, baseItem, markersGroups));
 		}
 		return settingsItems;
 	}

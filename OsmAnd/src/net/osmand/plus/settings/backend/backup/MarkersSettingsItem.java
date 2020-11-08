@@ -96,7 +96,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarkersGroup>
 	public boolean isDuplicate(@NonNull MapMarkersGroup markersGroup) {
 		String name = markersGroup.getName();
 		for (MapMarkersGroup group : existingItems) {
-			if (group.getName().equals(name)) {
+			if (Algorithms.stringsEqual(group.getName(), name)) {
 				return true;
 			}
 		}
@@ -139,12 +139,13 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarkersGroup>
 
 			@Override
 			public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
-//				Exception error = GPXUtilities.writeGpx(new OutputStreamWriter(outputStream, "UTF-8"), gpxFile);
-//				if (error != null) {
-//					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
-//					SettingsHelper.LOG.error("Failed write to gpx file", error);
-//					return false;
-//				}
+				GPXFile gpxFile = generateGpx();
+				Exception error = GPXUtilities.writeGpx(new OutputStreamWriter(outputStream, "UTF-8"), gpxFile);
+				if (error != null) {
+					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
+					SettingsHelper.LOG.error("Failed write to gpx file", error);
+					return false;
+				}
 				return true;
 			}
 		};
