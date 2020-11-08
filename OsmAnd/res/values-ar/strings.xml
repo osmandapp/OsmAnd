@@ -3934,4 +3934,10 @@
     <string name="navigate_point_mgrs">النظام المرجعي للشبكة العسكرية</string>
     <string name="navigate_point_format_mgrs">النظام المرجعي للشبكة العسكرية</string>
     <string name="mgrs_format_descr">OsmAnd يستخدم MGRS، وهو مشابه لتنسيق UTM NATO .</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">يجب عليك إضافة نقطتين على الأقل.</string>
+    <string name="manage_subscription">إدارة الاشتراك</string>
+    <string name="subscription_payment_issue_title">هناك مشكلة في اشتراكك. انقر الزر للانتقال إلى إعدادات اشتراك Google Play لإصلاح طريقة الدفع الخاصة بك.</string>
+    <string name="subscription_expired_title">انتهت صلاحية اشتراك OsmAnd Live</string>
+    <string name="subscription_paused_title">تم إيقاف اشتراك OsmAnd Live مؤقتًا</string>
+    <string name="subscription_on_hold_title">اشتراك OsmAnd Live معلق</string>
 </resources>
