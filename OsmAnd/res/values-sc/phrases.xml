@@ -3845,4 +3845,5 @@
     <string name="poi_parking_sheds">Cabannas</string>
     <string name="poi_parking_rooftop">Cobertura</string>
     <string name="poi_gpx_point">Puntu GPX</string>
+    <string name="poi_radar_tower">Torre ràdar</string>
 </resources>
