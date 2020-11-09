@@ -134,11 +134,11 @@ public class Version {
 	}
 	
 	public static boolean isDeveloperVersion(OsmandApplication ctx){
-		return false;//getAppName(ctx).contains("~") || ctx.getPackageName().equals(FREE_DEV_VERSION_NAME);
+		return getAppName(ctx).contains("~") || ctx.getPackageName().equals(FREE_DEV_VERSION_NAME);
 	}
 
 	public static boolean isDeveloperBuild(OsmandApplication ctx){
-		return false;//getAppName(ctx).contains("~");
+		return getAppName(ctx).contains("~");
 	}
 
 	public static String getVersionForTracker(OsmandApplication ctx) {

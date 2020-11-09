@@ -1,11 +1,11 @@
-The OsmAnd's GPX file format conforms to GPX 1.1 specification with additional data written as extensions. There are few sections of such data:
+The OsmAnd's GPX file format conforms to the GPX 1.1 specification with additional data written as extensions. There are several sections of such data:
 
 ## Track appearance
-These parameters are used to customize the appearance of a track on the map. Used inside "gpx" tag and applies to all tracks inside gpx.
+The following parameters are used to customize the appearance of a track on the map. They are used inside the "gpx" tag and apply to all tracks contained in the gpx.
 #### Parameters
 * **show_arrows** [*true, false*] - show / hide arrows along the path line.
-* **width** [*thin, medium, bold, 1-24*] - width of a track line on the map. The thin, medium and bold are style depended values (should be defined as currentTrackWidth attribute).
-* **color** [*#AARRGGBB, #RRGGBB*] - color of a track line on the map. Hex values.
+* **width** [*thin, medium, bold, 1-24*] - width of the track line on the map. The thin, medium, and bold are style depended values (should be defined as currentTrackWidth attribute).
+* **color** [*#AARRGGBB, #RRGGBB*] - color of a track line on the map. Hex value.
 * **split_type** [*no_split, distance, time*] - split type for a track.
 * **split_interval** [*double*] - split interval for a track. Distance (meters), time (seconds).
 
@@ -41,11 +41,10 @@ Written to a gpx file while recording a track.
 ```
 
 ## Calculated route(s)
-This data contains information about a route built with **OsmAnd** (route segments, turns, road names and types, restrictions, etc.). With their help, route can be restored completely as if it had just been built even without the currently installed offline maps.
+This data contains all details of a route built with **OsmAnd** (route segments, turns, road names, road types, restrictions, etc.). The route can be completely restored as if just built, even in the absence of the respective offline maps.
 
-There can be several routes in one gpx file. Each of them is contained in a specific segment (**trkseg** / **extensions**). In this form, a gpx file is saved when exporting a constructed route or when saving a track that consists of several separate segments via the **Plan route**.
-When using the **Plan route** tool, route key points (**rtept**) are additionally written to the gpx file. There can also be several **rte** blocks (according to a number of separate segments / tracks in a gpx file).
-
+A gpx file may contain several routes. Each of them is contained in a specific segment under **trkseg** / **extensions**. A gpx file is saved in this form when exporting a constructed route or when saving a track that consists of several separate segments via the **Plan a route** functionality.
+**Plan a route** also adds one (or several, in accordance with the number of contained separate segments / tracks) **rte** blocks to the gpx file, containing route key points (**rtept**).
 #### Gpx structure:
 ```xml
 <trk>

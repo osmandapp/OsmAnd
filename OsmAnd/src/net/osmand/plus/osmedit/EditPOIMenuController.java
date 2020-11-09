@@ -2,18 +2,23 @@ package net.osmand.plus.osmedit;
 
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+
 import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.osmedit.OsmPoint.Action;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.util.Map;
@@ -40,15 +45,16 @@ public class EditPOIMenuController extends MenuController {
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
 				if (plugin != null && activity != null) {
-					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(activity.getMyApplication());
-					if (client.isValidToken()){
-						new SendPoiDialogFragment.SimpleProgressDialogPoiUploader(activity).
-								showProgressDialog(new OsmPoint[] { getOsmPoint() }, false, false);
-					}
-					else {
-						SendPoiDialogFragment sendPoiDialogFragment =
-								SendPoiDialogFragment.createInstance(new OsmPoint[]{getOsmPoint()}, SendPoiDialogFragment.PoiUploaderType.SIMPLE);
-						sendPoiDialogFragment.show(activity.getSupportFragmentManager(), SendPoiDialogFragment.TAG);
+					OsmandApplication app = activity.getMyApplication();
+					OsmandSettings settings = app.getSettings();
+					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
+					if (client.isValidToken()
+							|| !Algorithms.isEmpty(settings.USER_NAME.get())
+							&& !Algorithms.isEmpty(settings.USER_PASSWORD.get())) {
+						SimpleProgressDialogPoiUploader poiDialogUploader = new SimpleProgressDialogPoiUploader(activity);
+						poiDialogUploader.showProgressDialog(new OsmPoint[] {getOsmPoint()}, false, false);
+					} else {
+						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), null);
 					}
 				}
 			}
@@ -205,7 +211,7 @@ public class EditPOIMenuController extends MenuController {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public int getAdditionalInfoIconRes() {
 		if (osmPoint.getAction() == Action.DELETE) {

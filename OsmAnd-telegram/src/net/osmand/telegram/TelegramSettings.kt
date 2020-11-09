@@ -304,25 +304,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun prepareForSharingNewMessages() {
 		shareChatsInfo.forEach { (_, shareInfo) ->
-			prepareForSharingNewMessages(shareInfo)
+			shareInfo.resetMessagesInfo()
 		}
 	}
 
 	fun prepareForSharingNewMessages(chatsIds: List<Long>) {
 		chatsIds.forEach {
 			shareChatsInfo[it]?.also { shareInfo ->
-				prepareForSharingNewMessages(shareInfo)
+				shareInfo.resetMessagesInfo()
 			}
 		}
-	}
-
-	fun prepareForSharingNewMessages(shareInfo: ShareChatInfo) {
-		shareInfo.pendingTdLibText = 0
-		shareInfo.pendingTdLibMap = 0
-		shareInfo.currentTextMessageId = -1L
-		shareInfo.currentMapMessageId = -1L
-		shareInfo.pendingTextMessage = false
-		shareInfo.pendingMapMessage = false
 	}
 
 	fun getChatLivePeriod(chatId: Long) = shareChatsInfo[chatId]?.livePeriod
@@ -1496,6 +1487,27 @@ class TelegramSettings(private val app: TelegramApplication) {
 		fun isPendingTextMessagesLimitReached() = pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT
 
 		fun isPendingMapMessagesLimitReached() = pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT
+
+		fun resetMessagesInfo() {
+			resetTextMessageInfo()
+			resetMapMessageInfo()
+		}
+
+		fun resetTextMessageInfo() {
+			pendingTdLibText = 0
+			currentTextMessageId = -1L
+			pendingTextMessage = false
+		}
+
+		fun resetMapMessageInfo() {
+			pendingTdLibMap = 0
+			currentMapMessageId = -1L
+			pendingMapMessage = false
+		}
+
+		fun isTextMessageIdPresent() = currentTextMessageId != -1L
+
+		fun isMapMessageIdPresent() = currentMapMessageId != -1L
 
 		companion object {
 
