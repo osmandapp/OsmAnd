@@ -3938,4 +3938,5 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">Az OsmAnd a NATO által is használt MGRS (Military Grid Reference System) koordinátákat alkamazza, amely hasonlít az UTM-formátumhoz.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Legalább két pontot kell hozzáadnia.</string>
 </resources>

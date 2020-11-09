@@ -79,13 +79,6 @@ public class RasterMapMenu {
 				new OnMapSelectedCallback() {
 					@Override
 					public void onMapSelected(boolean canceled) {
-						if (type == RasterMapType.UNDERLAY && !canceled && !selected) {
-							hidePolygonsPref.set(true);
-							refreshMapComplete(mapActivity);
-						} else if (type == RasterMapType.UNDERLAY && !canceled && mapTypePreference.get() == null) {
-							hidePolygonsPref.set(false);
-							refreshMapComplete(mapActivity);
-						}
 						mapActivity.getDashboard().refreshContent(true);
 					}
 				};

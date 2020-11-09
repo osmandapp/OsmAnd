@@ -3943,4 +3943,10 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd використовує MGRS, який подібний формату UTM NATO.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Додайте принаймні дві точки.</string>
+    <string name="manage_subscription">Керувати передплатою</string>
+    <string name="subscription_payment_issue_title">Виникла проблема з передплатою. Натисніть кнопку, щоб перейти до налаштувань передплати у Google Play, щоб виправити спосіб оплати.</string>
+    <string name="subscription_expired_title">Термін дії передплати OsmAnd Live закінчився</string>
+    <string name="subscription_paused_title">Передплату OsmAnd Live зупинено</string>
+    <string name="subscription_on_hold_title">Передплата OsmAnd Live на утриманні</string>
 </resources>

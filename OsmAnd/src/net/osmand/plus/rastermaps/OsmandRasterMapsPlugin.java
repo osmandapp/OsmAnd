@@ -339,9 +339,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 											adapter.notifyDataSetChanged();
 
-											final CommonPreference<Boolean> hidePolygonsPref =
-													mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
-											hidePolygonsPref.set(hasUnderlayDescription);
 											RasterMapMenu.refreshMapComplete(mapActivity);
 										}
 									}

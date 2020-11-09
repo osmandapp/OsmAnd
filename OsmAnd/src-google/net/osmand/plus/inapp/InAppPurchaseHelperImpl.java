@@ -21,8 +21,10 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.util.BillingManager;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -33,6 +35,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map.Entry;
 
 public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
@@ -139,6 +142,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							for (Purchase p : purchases) {
 								skuSubscriptions.add(p.getSku());
 							}
+							skuSubscriptions.addAll(subscriptionStateMap.keySet());
 
 							BillingManager billingManager = getBillingManager();
 							// Have we been disposed of in the meantime? If so, quit.
@@ -291,7 +295,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	// Listener that's called when we finish querying the items and subscriptions we own
-	private SkuDetailsResponseListener mSkuDetailsResponseListener = new SkuDetailsResponseListener() {
+	private final SkuDetailsResponseListener mSkuDetailsResponseListener = new SkuDetailsResponseListener() {
 
 		@NonNull
 		private List<String> getAllOwnedSubscriptionSkus() {
@@ -301,6 +305,15 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				for (Purchase p : billingManager.getPurchases()) {
 					if (getInAppPurchases().getInAppSubscriptionBySku(p.getSku()) != null) {
 						result.add(p.getSku());
+					}
+				}
+			}
+			for (Entry<String, SubscriptionState> entry : subscriptionStateMap.entrySet()) {
+				SubscriptionState state = entry.getValue();
+				if (state == SubscriptionState.PAUSED || state == SubscriptionState.ON_HOLD) {
+					String sku = entry.getKey();
+					if (!result.contains(sku)) {
+						result.add(sku);
 					}
 				}
 			}
@@ -399,35 +412,28 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			// Do we have the live updates?
 			boolean subscribedToLiveUpdates = false;
 			List<Purchase> liveUpdatesPurchases = new ArrayList<>();
-			for (InAppPurchase p : getLiveUpdates().getAllSubscriptions()) {
-				Purchase purchase = getPurchase(p.getSku());
-				if (purchase != null) {
-					liveUpdatesPurchases.add(purchase);
+			for (InAppSubscription s : getLiveUpdates().getAllSubscriptions()) {
+				Purchase purchase = getPurchase(s.getSku());
+				if (purchase != null || s.getState().isActive()) {
+					if (purchase != null) {
+						liveUpdatesPurchases.add(purchase);
+					}
 					if (!subscribedToLiveUpdates) {
 						subscribedToLiveUpdates = true;
 					}
 				}
 			}
-			OsmandPreference<Long> subscriptionCancelledTime = ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME;
 			if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
-				if (subscriptionCancelledTime.get() == 0) {
-					subscriptionCancelledTime.set(System.currentTimeMillis());
-					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN.set(false);
-					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.set(false);
-				} else if (System.currentTimeMillis() - subscriptionCancelledTime.get() > SUBSCRIPTION_HOLDING_TIME_MSEC) {
-					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
-					if (!isDepthContoursPurchased(ctx)) {
-						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
-					}
+				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
+				if (!isDepthContoursPurchased(ctx)) {
+					ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
 				}
 			} else if (subscribedToLiveUpdates) {
-				subscriptionCancelledTime.set(0L);
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}
 
 			lastValidationCheckTime = System.currentTimeMillis();
-			logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
-					+ " live updates purchased.");
+			logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE") + " live updates purchased.");
 
 			OsmandSettings settings = ctx.getSettings();
 			settings.INAPPS_READ.set(true);
@@ -490,12 +496,24 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			}
 		}
 		if (inAppPurchase instanceof InAppSubscription) {
+			InAppSubscription s = (InAppSubscription) inAppPurchase;
+
+			SubscriptionState state = subscriptionStateMap.get(inAppPurchase.getSku());
+			s.setState(state == null ? SubscriptionState.UNDEFINED : state);
+			CommonPreference<String> statePref = ctx.getSettings().registerStringPreference(
+					s.getSku() + "_state", SubscriptionState.UNDEFINED.getStateStr()).makeGlobal();
+			s.setPrevState(SubscriptionState.getByStateStr(statePref.get()));
+			statePref.set(s.getState().getStateStr());
+			if (s.getState().isGone() && s.hasStateChanged()) {
+				ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
+				ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
+			}
+
 			String introductoryPrice = skuDetails.getIntroductoryPrice();
 			String introductoryPricePeriod = skuDetails.getIntroductoryPricePeriod();
 			String introductoryPriceCycles = skuDetails.getIntroductoryPriceCycles();
 			long introductoryPriceAmountMicros = skuDetails.getIntroductoryPriceAmountMicros();
 			if (!Algorithms.isEmpty(introductoryPrice)) {
-				InAppSubscription s = (InAppSubscription) inAppPurchase;
 				try {
 					s.setIntroductoryInfo(new InAppPurchases.InAppSubscriptionIntroductoryInfo(s, introductoryPrice,
 							introductoryPriceAmountMicros, introductoryPricePeriod, introductoryPriceCycles));
