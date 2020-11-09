@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
@@ -57,6 +58,10 @@ public class MapMarkersHelper {
 	public static final int BY_DATE_ADDED_DESC = 3;
 
 	public static final int BY_DATE_ADDED_ASC = 4;
+
+	public static final String GROUP_NAME = "group_name";
+	public static final String GROUP_TYPE = "group_type";
+	public static final String MARKER_HISTORY = "marker_history";
 
 	private static final Log LOG = PlatformUtil.getLog(MapMarkersHelper.class);
 
@@ -303,7 +308,7 @@ public class MapMarkersHelper {
 	}
 
 	public MapMarkersGroup getMarkersGroup(GPXFile gpx) {
-		if(gpx == null || gpx.path == null) {
+		if (gpx == null || gpx.path == null) {
 			return null;
 		}
 		return getMapMarkerGroupById(getMarkerGroupId(new File(gpx.path)), MapMarkersGroup.GPX_TYPE);
@@ -347,7 +352,7 @@ public class MapMarkersHelper {
 
 	public void enableGroup(@NonNull MapMarkersGroup gr) {
 		// check if group doesn't exist internally
-		if(!mapMarkersGroups.contains(gr)) {
+		if (!mapMarkersGroups.contains(gr)) {
 			addGroupInternally(gr);
 		}
 		if (gr.isDisabled()) {
@@ -558,12 +563,12 @@ public class MapMarkersHelper {
 	public List<MapMarkersGroup> getGroupsForSavedArticlesTravelBook() {
 		List<MapMarkersGroup> res = new ArrayList<>();
 		TravelDbHelper travelDbHelper = ctx.getTravelDbHelper();
-		if(travelDbHelper.getSelectedTravelBook() != null) {
+		if (travelDbHelper.getSelectedTravelBook() != null) {
 			List<TravelArticle> savedArticles = travelDbHelper.getLocalDataHelper().getSavedArticles();
 			for (TravelArticle art : savedArticles) {
 				String gpxName = travelDbHelper.getGPXName(art);
 				File path = ctx.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
-				LOG.debug("Article group " + path.getAbsolutePath()  + " " + path.exists()) ;
+				LOG.debug("Article group " + path.getAbsolutePath() + " " + path.exists());
 				MapMarkersGroup search = getMapMarkerGroupById(getMarkerGroupId(path), MapMarkersGroup.GPX_TYPE);
 				if (search == null) {
 					MapMarkersGroup group = createGPXMarkerGroup(path);
@@ -1001,7 +1006,8 @@ public class MapMarkersHelper {
 		});
 	}
 
-	public String generateGpx(String fileName) {
+	public String saveMarkersToFile(String fileName) {
+		GPXFile gpxFile = generateGpx();
 		String dirName = IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR;
 		File dir = ctx.getAppPath(dirName);
 		if (!dir.exists()) {
@@ -1009,18 +1015,32 @@ public class MapMarkersHelper {
 		}
 		String uniqueFileName = FileUtils.createUniqueFileName(ctx, fileName, dirName, IndexConstants.GPX_FILE_EXT);
 		File fout = new File(dir, uniqueFileName + IndexConstants.GPX_FILE_EXT);
+		GPXUtilities.writeGpxFile(fout, gpxFile);
 
-		GPXFile file = new GPXFile(Version.getFullVersion(ctx));
-		for (MapMarker marker : mapMarkers) {
+		return fout.getAbsolutePath();
+	}
+
+	public GPXFile generateGpx() {
+		return generateGpx(mapMarkers, false);
+	}
+
+	public GPXFile generateGpx(List<MapMarker> markers, boolean completeBackup) {
+		GPXFile gpxFile = new GPXFile(Version.getFullVersion(ctx));
+		for (MapMarker marker : markers) {
 			WptPt wpt = new WptPt();
 			wpt.lat = marker.getLatitude();
 			wpt.lon = marker.getLongitude();
-			wpt.setColor(ctx.getResources().getColor(MapMarker.getColorId(marker.colorIndex)));
 			wpt.name = marker.getOnlyName();
-			file.addPoint(wpt);
+			wpt.setColor(ContextCompat.getColor(ctx, MapMarker.getColorId(marker.colorIndex)));
+			if (completeBackup) {
+				wpt.category = marker.groupKey;
+				wpt.getExtensionsToWrite().put(GROUP_NAME, marker.groupName);
+				wpt.getExtensionsToWrite().put(GROUP_TYPE, String.valueOf(marker.getType()));
+				wpt.getExtensionsToWrite().put(MARKER_HISTORY, String.valueOf(marker.history));
+			}
+			gpxFile.addPoint(wpt);
 		}
-		GPXUtilities.writeGpxFile(fout, file);
-		return fout.getAbsolutePath();
+		return gpxFile;
 	}
 
 	// ---------------------------------------------------------------------------------------------
