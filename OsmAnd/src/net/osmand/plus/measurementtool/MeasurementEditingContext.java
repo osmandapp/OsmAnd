@@ -1069,7 +1069,7 @@ public class MeasurementEditingContext {
 			return new RouteExporter("", route, locations, null).generateRouteSegment();
 		} else if (endPointIndex - startPointIndex >= 0) {
 			TrkSegment segment = new TrkSegment();
-			segment.points = before.points.subList(startPointIndex, endPointIndex + 1);
+			segment.points = new ArrayList<>(before.points.subList(startPointIndex, endPointIndex + 1));
 			return segment;
 		}
 		return null;
