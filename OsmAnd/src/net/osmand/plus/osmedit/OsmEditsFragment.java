@@ -29,6 +29,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -41,6 +42,8 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -624,10 +627,20 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	}
 
 	private void uploadItems(final OsmPoint[] items) {
-		SendPoiDialogFragment.createInstance(items, PoiUploaderType.FRAGMENT)
-				.show(getChildFragmentManager(), SendPoiDialogFragment.TAG);
-//		UploadOsmEditsConfirmDialogFragment.createInstancee(items).show(getChildFragmentManager(),
-//				UploadOsmEditsConfirmDialogFragment.TAG);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			OsmandApplication app = getMyApplication();
+			OsmandSettings settings = app.getSettings();
+			OsmOAuthAuthorizationAdapter authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
+			if (authorizationAdapter.isValidToken()
+					|| !Algorithms.isEmpty(settings.USER_NAME.get())
+					&& !Algorithms.isEmpty(settings.USER_PASSWORD.get())) {
+				SendPoiDialogFragment.createInstance(items, PoiUploaderType.FRAGMENT)
+						.show(getChildFragmentManager(), SendPoiDialogFragment.TAG);
+			} else {
+				LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);
+			}
+		}
 	}
 
 	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {

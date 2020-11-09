@@ -16,6 +16,16 @@
     <string name="subscription_expired_title">OsmAnd Live subscription has been expired</string>
     <string name="subscription_payment_issue_title">There is a problem with your subscription. Click the button to go to the Google Play subscription settings to fix your payment method.</string>
     <string name="manage_subscription">Manage subscription</string>
+    <string name="user_login">Login</string>
+    <string name="user_password">Password</string>
+    <string name="login_account">Account</string>
+    <string name="use_login_password">Use login and password</string>
+    <string name="open_street_map_login_mode">You need to login to upload new or modified changes. \n\nYou can log in using the safe OAuth method or use your login and password.</string>
+    <string name="osm_edits_view_descr">You can view all your unloaded edits or OSM bugs in %1$s. Uploaded points don’t show in OsmAnd.</string>
+    <string name="sing_in_with_open_street_map">Sing in with OpenStreetMap</string>
+    <string name="login_open_street_map_org">Login to OpenStreetMap.org</string>
+    <string name="login_open_street_map">Login to OpenStreetMap</string>
+    <string name="plugin_global_prefs_info">These plugin setting are global, and apply to all profiles</string>
     <string name="message_you_need_add_two_points_to_show_graphs">You must add at least two points.</string>
     <string name="icon_group_travel">Travel</string>
     <string name="icon_group_emergency">Emergency</string>
@@ -2426,7 +2436,6 @@
     <string name="lang_fr">French</string>
     <string name="lang_ka">Georgian</string>
     <string name="lang_de">German</string>
-    <string name="lang_de_casual">German (casual)</string>
     <string name="lang_el">Greek</string>
     <string name="lang_he">Hebrew</string>
     <string name="lang_iw">Hebrew</string>
