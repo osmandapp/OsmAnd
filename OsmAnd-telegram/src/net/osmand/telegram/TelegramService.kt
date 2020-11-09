@@ -18,7 +18,6 @@ import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidUtils
-import net.osmand.telegram.utils.OsmandLocationUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 
@@ -377,7 +376,10 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		Log.d(PlatformUtil.TAG, "Send live location error: $code - $message")
 		when (messageType) {
 			TelegramHelper.MESSAGE_TYPE_TEXT -> shareInfo.pendingTdLibText--
-			TelegramHelper.MESSAGE_TYPE_MAP -> shareInfo.pendingTdLibMap--
+			TelegramHelper.MESSAGE_TYPE_MAP -> {
+				shareInfo.pendingTdLibMap--
+				shareInfo.currentMapMessageId = -1L
+			}
 		}
 	}
 
