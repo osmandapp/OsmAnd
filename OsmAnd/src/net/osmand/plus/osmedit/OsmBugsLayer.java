@@ -25,6 +25,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.osmedit.dialogs.BugBottomSheetDialog;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -67,7 +68,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	public OsmBugsUtil getOsmbugsUtil(OpenStreetNote bug) {
-		OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
+		OsmandSettings settings = activity.getMyApplication().getSettings();
 		if ((bug != null && bug.isLocal()) || settings.OFFLINE_EDITION.get()
 				|| !settings.isInternetConnectionAvailable(true)) {
 			return local;
@@ -413,30 +414,38 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	private void showBugDialog(final OsmNotesPoint point) {
 		String text = point.getText();
-		createBugDialog(true, text, R.string.osn_modify_dialog_title, null, null, point);
+		createBugDialog(true, text, R.string.context_menu_item_modify_note, R.string.osn_modify_dialog_title,
+				null, null, point);
 	}
 
 	private void showBugDialog(final OpenStreetNote bug, final Action action, String text) {
-		int title;
+		int posButtonTextId;
+		int titleTextId;
 		if (action == Action.DELETE) {
-			title = R.string.osn_close_dialog_title;
+			posButtonTextId = R.string.osn_close_dialog_title;
+			titleTextId = R.string.osm_edit_close_note;
 		} else if (action == Action.MODIFY) {
-			title = R.string.osn_comment_dialog_title;
+			posButtonTextId = R.string.osn_comment_dialog_title;
+			titleTextId = R.string.osm_edit_comment_note;
 		} else if (action == Action.REOPEN) {
-			title = R.string.osn_reopen_dialog_title;
+			posButtonTextId = R.string.osn_reopen_dialog_title;
+			titleTextId = R.string.osn_reopen_dialog_title;
 		} else {
-			title = R.string.osn_add_dialog_title;
+			posButtonTextId = R.string.osn_add_dialog_title;
+			titleTextId = R.string.context_menu_item_open_note;
 		}
 
 		OsmBugsUtil util = getOsmbugsUtil(bug);
 		final boolean offline = util instanceof OsmBugsLocalUtil;
 
-		createBugDialog(offline, text, title, action, bug, null);
+		createBugDialog(offline, text, titleTextId, posButtonTextId, action, bug, null);
 	}
 
-	private void createBugDialog(final boolean offline, String text, int posButtonTitleRes, final Action action, final OpenStreetNote bug, final OsmNotesPoint point) {
-		@SuppressLint("InflateParams")
-		final View view = LayoutInflater.from(activity).inflate(R.layout.open_bug, null);
+	private void createBugDialog(final boolean offline, String text, int titleTextId, int posButtonTextId,
+	                             final Action action, final OpenStreetNote bug, final OsmNotesPoint point) {
+		BugBottomSheetDialog.showInstance(activity.getSupportFragmentManager(), offline, text, titleTextId,
+				posButtonTextId, action, bug, null);
+		@SuppressLint("InflateParams") final View view = LayoutInflater.from(activity).inflate(R.layout.open_bug, null);
 		if (offline) {
 			view.findViewById(R.id.user_name_field).setVisibility(View.GONE);
 			view.findViewById(R.id.userNameEditTextLabel).setVisibility(View.GONE);
@@ -455,7 +464,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.shared_string_commit);
 		builder.setView(view);
-		builder.setPositiveButton(posButtonTitleRes, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(posButtonTextId, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String text = offline ? getMessageText(view) : getTextAndUpdateUserPwd(view);

@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="osm_edit_comment_note">Comment OSM Note</string>
+    <string name="osm_edit_close_note">Close OSM Note</string>
     <string name="close_changset">Closed changset</string>
     <string name="user_login">Login</string>
     <string name="user_password">Password</string>
