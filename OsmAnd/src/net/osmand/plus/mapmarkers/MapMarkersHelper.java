@@ -62,6 +62,8 @@ public class MapMarkersHelper {
 	public static final String GROUP_NAME = "group_name";
 	public static final String GROUP_TYPE = "group_type";
 	public static final String MARKER_HISTORY = "marker_history";
+	public static final String CREATION_DATE = "creation_date";
+	public static final String VISITED_DATE = "visited_date";
 
 	private static final Log LOG = PlatformUtil.getLog(MapMarkersHelper.class);
 
@@ -1037,6 +1039,8 @@ public class MapMarkersHelper {
 				wpt.getExtensionsToWrite().put(GROUP_NAME, marker.groupName);
 				wpt.getExtensionsToWrite().put(GROUP_TYPE, String.valueOf(marker.getType()));
 				wpt.getExtensionsToWrite().put(MARKER_HISTORY, String.valueOf(marker.history));
+				wpt.getExtensionsToWrite().put(CREATION_DATE, String.valueOf(marker.creationDate));
+				wpt.getExtensionsToWrite().put(VISITED_DATE, String.valueOf(marker.visitedDate));
 			}
 			gpxFile.addPoint(wpt);
 		}

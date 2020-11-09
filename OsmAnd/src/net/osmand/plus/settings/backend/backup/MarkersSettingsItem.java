@@ -31,8 +31,11 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.plus.mapmarkers.MapMarkersHelper.CREATION_DATE;
 import static net.osmand.plus.mapmarkers.MapMarkersHelper.GROUP_NAME;
 import static net.osmand.plus.mapmarkers.MapMarkersHelper.GROUP_TYPE;
+import static net.osmand.plus.mapmarkers.MapMarkersHelper.MARKER_HISTORY;
+import static net.osmand.plus.mapmarkers.MapMarkersHelper.VISITED_DATE;
 
 public class MarkersSettingsItem extends CollectionSettingsItem<MapMarkersGroup> {
 
@@ -106,7 +109,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarkersGroup>
 			}
 			for (MapMarkersGroup markersGroup : appliedItems) {
 				for (MapMarker marker : markersGroup.getMarkers()) {
-					markersHelper.addMapMarker(marker.point, marker.getOriginalPointDescription());
+					markersHelper.addMarker(marker);
 				}
 			}
 		}
@@ -159,6 +162,13 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarkersGroup>
 
 						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, point.name);
 						MapMarker marker = new MapMarker(latLon, pointDescription, colorIndex, false, 0);
+
+						String historyStr = point.getExtensionsToRead().get(MARKER_HISTORY);
+						String creationDateStr = point.getExtensionsToRead().get(CREATION_DATE);
+						String visitedDateStr = point.getExtensionsToRead().get(VISITED_DATE);
+						marker.creationDate = Algorithms.parseLongSilently(creationDateStr, 0);
+						marker.visitedDate = Algorithms.parseLongSilently(visitedDateStr, 0);
+						marker.history = Boolean.parseBoolean(historyStr);
 						marker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
 
 						MapMarkersGroup group = getOrCreateGroup(point);
