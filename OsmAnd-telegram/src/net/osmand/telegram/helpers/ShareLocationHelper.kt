@@ -138,7 +138,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			}
 		}
 		if (pendingMessagesLimitReached && checkNetworkTypeAllowed) {
-			checkNetworkType()
+			updateNetworkType()
 		}
 	}
 
@@ -167,7 +167,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			app.locationMessages.getBufferedTextMessagesForChat(chatId).take(MAX_MESSAGES_IN_TDLIB_PER_CHAT).forEach {
 				if (!shareInfo.isPendingTextMessagesLimitReached()) {
 					if (it.deviceName.isEmpty()) {
-						if (!shareInfo.pendingTextMessage && shareInfo.currentTextMessageId != -1L) {
+						if (!shareInfo.pendingTextMessage && shareInfo.isTextMessageIdPresent()) {
 							val content = OsmandLocationUtils.getTextMessageContent(shareInfo.updateTextMessageId, it, app)
 							app.telegramHelper.editTextLocation(shareInfo, content)
 							app.locationMessages.removeBufferedMessage(it)
@@ -180,8 +180,12 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			app.locationMessages.getBufferedMapMessagesForChat(chatId).take(MAX_MESSAGES_IN_TDLIB_PER_CHAT).forEach {
 				if (!shareInfo.isPendingMapMessagesLimitReached()) {
 					if (it.deviceName.isEmpty()) {
-						if (!shareInfo.pendingMapMessage && shareInfo.currentMapMessageId != -1L) {
-							app.telegramHelper.editMapLocation(shareInfo, it)
+						if (!shareInfo.pendingMapMessage) {
+							if (shareInfo.isMapMessageIdPresent()) {
+								app.telegramHelper.editMapLocation(shareInfo, it)
+							} else {
+								app.telegramHelper.sendNewMapLocation(shareInfo, it)
+							}
 							app.locationMessages.removeBufferedMessage(it)
 						}
 					} else {
@@ -279,7 +283,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			}
 		}
 		if (pendingMessagesLimitReached) {
-			checkNetworkType()
+			updateNetworkType()
 		}
 	}
 
@@ -347,7 +351,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	fun checkNetworkType(){
+	fun updateNetworkType(){
 		if (app.isInternetConnectionAvailable) {
 			val networkType = when {
 				app.isWifiConnected -> TdApi.NetworkTypeWiFi()

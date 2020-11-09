@@ -15,7 +15,6 @@ import android.widget.TextView
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.telegram.R
@@ -99,7 +98,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 		mainView.findViewById<androidx.swiperefreshlayout.widget.SwipeRefreshLayout>(R.id.swipe_refresh).apply {
 			setOnRefreshListener {
-				app.shareLocationHelper.checkNetworkType()
+				app.shareLocationHelper.updateNetworkType()
 				app.telegramHelper.scanChatsHistory()
 				updateList()
 				isRefreshing = false
