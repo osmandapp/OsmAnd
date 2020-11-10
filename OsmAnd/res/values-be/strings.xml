@@ -562,7 +562,7 @@
     <string name="global_app_settings">Агульныя налады праграмы</string>
     <string name="user_name">Вашае імя карыстальніка OSM</string>
     <string name="open_street_map_login_descr">Патрэбна для падачы ў openstreetmap.org.</string>
-    <string name="user_password">Ваш пароль OSM</string>
+    <string name="user_password">Пароль</string>
     <string name="osmand_service">Фонавы рэжым</string>
     <string name="osmand_service_descr">OsmAnd працуе ў фоне з адключаным экранам.</string>
     <string name="download_files_not_enough_space">Не стае вольнага месца для спампоўвання %1$s МБ (вольна: %2$s).</string>
@@ -905,7 +905,7 @@
     <string name="uploading">Запампоўванне…</string>
     <string name="search_nothing_found">Нічога не знойдзена</string>
     <string name="searching">Пошук…</string>
-    <string name="searching_address">Пошук адрасу…</string>
+    <string name="searching_address">Пошук адраса…</string>
     <string name="search_osm_nominatim">Сеціўны пошук праз OSM Nominatim</string>
     <string name="hint_search_online">Сеціўны пошук: горад, вуліца, дом</string>
     <string name="search_offline_address">Пазасеціўны пошук</string>
@@ -3478,7 +3478,7 @@
     <string name="photo_notes">Фотанататкі</string>
     <string name="route_recalculation">Пераразлік маршруту</string>
     <string name="login_and_pass">Імя карыстальніка і пароль</string>
-    <string name="plugin_global_prefs_info">Гэтыя алады распаўсюджваюцца на ўсе профілі.</string>
+    <string name="plugin_global_prefs_info">Гэтыя налады ўбудовы распаўсюджваюцца на ўсе профілі</string>
     <string name="osm_editing">Рэдагаванне OSM</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок будзе паказвацца падчас навігацыі або руху.</string>
