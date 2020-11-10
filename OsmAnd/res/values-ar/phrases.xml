@@ -277,7 +277,7 @@
     <string name="poi_swimming_pool">حوض سباحة</string>
     <string name="poi_power_generator">مولد طاقة</string>
     <string name="poi_peak">قمة جبلية</string>
-    <string name="poi_soccer">كرة القدم</string>
+    <string name="poi_soccer">كرة قدم</string>
     <string name="poi_bank">بنك</string>
     <string name="poi_insurance">شركة تأمين</string>
     <string name="poi_doctors">أطباء</string>
@@ -648,7 +648,7 @@
     <string name="poi_skiing">تزلج</string>
     <string name="poi_swimming">سباحة</string>
     <string name="poi_table_tennis">تنس الطاولة</string>
-    <string name="poi_tennis">كرة المضرب</string>
+    <string name="poi_tennis">تنس</string>
     <string name="poi_volleyball">الكرة الطائرة</string>
     <string name="poi_museum">متحف</string>
     <string name="poi_archaeological_site">موقع أثري</string>
@@ -658,7 +658,7 @@
     <string name="poi_historic_ruins">أطلال تاريخية</string>
     <string name="poi_historic_ship">سفينة تاريخية</string>
     <string name="poi_monument">نصب تذكاري</string>
-    <string name="poi_zoo">حديقة الحيوانات</string>
+    <string name="poi_zoo">حديقة حيوانات</string>
     <string name="poi_home_visit">الزيارة المنزلية</string>
     <string name="poi_hearing_aids">أدوات مساعدة للسمع</string>
     <string name="poi_ship_chandler">لوازم السفن والقوارب</string>
@@ -772,10 +772,10 @@
     <string name="poi_attraction_water_slide">منزلق مائي</string>
     <string name="poi_lodging">سكن</string>
     <string name="poi_guest_house">بيت ضيافة</string>
-    <string name="poi_hostel">نزل</string>
+    <string name="poi_hostel">شقة</string>
     <string name="poi_motel">نزل صغير</string>
     <string name="poi_alpine_hut">كوخ بجبال الألب</string>
-    <string name="poi_chalet">تشاليه</string>
+    <string name="poi_chalet">شاليه</string>
     <string name="poi_apartment">شقة</string>
     <string name="poi_wilderness_hut">كوخ بري</string>
     <string name="poi_cabin">مقصورة</string>
@@ -1676,4 +1676,6 @@
     <string name="poi_access_moped">مدخل الدراجة</string>
     <string name="poi_access_trailer">مدخل المقطورة</string>
     <string name="poi_socket_type2_combo_output_filter">نوع 2 مخرج combo</string>
+    <string name="poi_theme_park">حديقه</string>
+    <string name="poi_aquarium">حوض سمك</string>
 </resources>
