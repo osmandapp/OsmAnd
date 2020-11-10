@@ -1033,7 +1033,7 @@
     <string name="global_app_settings">Ajustes globales de la aplicación</string>
     <string name="user_name">Nombre de usuario de OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a OpenStreetMap.org.</string>
-    <string name="user_password">Contraseña de OSM</string>
+    <string name="user_password">Contraseña</string>
     <string name="osmand_service">Modo reposo</string>
     <string name="osmand_service_descr">OsmAnd se ejecuta en modo reposo con la pantalla apagada.</string>
     <string name="download_files_not_enough_space">Sin espacio suficiente para descargar %1$s MB (disponible: %2$s).</string>
@@ -3430,7 +3430,7 @@
     <string name="route_recalculation">Recálculo de la ruta</string>
     <string name="accessibility_announce">Anunciar</string>
     <string name="login_and_pass">Nombre de usuario y contraseña</string>
-    <string name="plugin_global_prefs_info">Estos ajustes se aplican a todos los perfiles.</string>
+    <string name="plugin_global_prefs_info">Los ajustes de este complemento son globales y se aplican a todos los perfiles</string>
     <string name="osm_editing">Edición de OSM</string>
     <string name="osm_edits_view_descr">Puedes ver todas tus ediciones no subidas o errores de OSM en «%1$s». Los puntos subidos no se muestran en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
@@ -3957,4 +3957,13 @@
     <string name="subscription_expired_title">La suscripción a OsmAnd Live ha caducado</string>
     <string name="subscription_paused_title">La suscripción a OsmAnd Live se ha pausado</string>
     <string name="subscription_on_hold_title">La suscripción a OsmAnd Live está en espera</string>
+    <string name="sing_in_with_open_street_map">Ingresar con OpenStreetMap</string>
+    <string name="login_open_street_map">Iniciar sesión en OpenStreetMap</string>
+    <string name="login_open_street_map_org">Ingresar a OpenStreetMap.org</string>
+    <string name="open_street_map_login_mode">Necesitas iniciar sesión para subir cambios nuevos o modificados.
+\n
+\nPuedes ingresar usando el método seguro de OAuth o usar el nombre de usuario y contraseña.</string>
+    <string name="use_login_password">Utilice nombre de usuario y contraseña</string>
+    <string name="login_account">Cuenta</string>
+    <string name="user_login">Iniciar sesión</string>
 </resources>
