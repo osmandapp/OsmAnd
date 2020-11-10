@@ -469,7 +469,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment.getTargetFragment());
 			return false;
 		} else {
-			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment.getTargetFragment());
+			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment.getTargetFragment(), info);
 			return true;
 		}
 	}
