@@ -3425,9 +3425,9 @@
     <string name="route_recalculation">Перерахунок маршруту</string>
     <string name="accessibility_announce">Оголошення</string>
     <string name="login_and_pass">Ім\'я користувача і пароль</string>
-    <string name="plugin_global_prefs_info">Ці налаштування стосуються всіх профілів.</string>
+    <string name="plugin_global_prefs_info">Ці налаштування втулка стосуються всіх профілів</string>
     <string name="osm_editing">OSM-правлення</string>
-    <string name="osm_edits_view_descr">Ви можете переглянути всі не завантажені зміни або помилки в OSM в %1$s. Завантажені точки не відображаються в OsmAnd.</string>
+    <string name="osm_edits_view_descr">Ви можете переглянути всі вивантажені зміни або вади OSM у %1$s. Вивантажені точки не показано в OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок відображається під час навігації чи переміщення.</string>
     <string name="select_map_icon_descr">Значок показано в спокої.</string>
@@ -3949,4 +3949,13 @@
     <string name="subscription_expired_title">Термін дії передплати OsmAnd Live закінчився</string>
     <string name="subscription_paused_title">Передплату OsmAnd Live зупинено</string>
     <string name="subscription_on_hold_title">Передплата OsmAnd Live на утриманні</string>
+    <string name="login_open_street_map">Увійти до OpenStreetMap.org</string>
+    <string name="login_open_street_map_org">Увійти до OpenStreetMap.org</string>
+    <string name="sing_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Увійдіть, щоб вивантажити нові або внесені зміни.
+\n
+\nВи можете увійти, за допомогою безпечного методу OAuth, або скористатися своїм ім\'ям та паролем.</string>
+    <string name="use_login_password">Використовувати ім\'я і пароль</string>
+    <string name="login_account">Обліковий запис</string>
+    <string name="user_login">Ім\'я користувача</string>
 </resources>
