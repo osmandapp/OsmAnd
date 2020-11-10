@@ -22,9 +22,11 @@ import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.*;
+
 public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "SendPoiBottomSheetFragment";
+	public static final String TAG = SendOsmNoteBottomSheetFragment.class.getSimpleName();
 	public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
 	public static final String POI_UPLOADER_TYPE = "poi_uploader_type";
 	private OsmPoint[] poi;
@@ -107,12 +109,11 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		final SwitchCompat uploadAnonymously = (SwitchCompat) view.findViewById(R.id.upload_anonymously_switch);
 		final EditText messageEditText = (EditText) view.findViewById(R.id.message_field);
 		final SendPoiDialogFragment.PoiUploaderType poiUploaderType = SendPoiDialogFragment.PoiUploaderType.valueOf(getArguments().getString(POI_UPLOADER_TYPE, SendPoiDialogFragment.PoiUploaderType.SIMPLE.name()));
-		final SendPoiDialogFragment.ProgressDialogPoiUploader progressDialogPoiUploader;
+		final ProgressDialogPoiUploader progressDialogPoiUploader;
 		if (poiUploaderType == SendPoiDialogFragment.PoiUploaderType.SIMPLE && getActivity() instanceof MapActivity) {
-			progressDialogPoiUploader =
-					new SendPoiDialogFragment.SimpleProgressDialogPoiUploader((MapActivity) getActivity());
+			progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) getActivity());
 		} else {
-			progressDialogPoiUploader = (SendPoiDialogFragment.ProgressDialogPoiUploader) getParentFragment();
+			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
 		}
 		if (progressDialogPoiUploader != null) {
 			String comment = messageEditText.getText().toString();
