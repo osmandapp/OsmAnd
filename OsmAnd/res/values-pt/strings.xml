@@ -3950,4 +3950,9 @@
     <string name="icon_group_emergency">Emergência</string>
     <string name="icon_group_travel">Viagem</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Deve adicionar pelo menos dois pontos.</string>
+    <string name="manage_subscription">Gerir a assinatura</string>
+    <string name="subscription_payment_issue_title">Há um problema com a sua assinatura. Clique no botão para ir às definições de assinatura do Google Play para corrigir o seu método de pagamento.</string>
+    <string name="subscription_expired_title">A assinatura do OsmAnd Live expirou</string>
+    <string name="subscription_paused_title">A assinatura do OsmAnd Live foi pausada</string>
+    <string name="subscription_on_hold_title">A assinatura do OsmAnd Live está em espera</string>
 </resources>

@@ -3951,4 +3951,10 @@
     <string name="icon_group_symbols">Symbole</string>
     <string name="shared_string_local_maps">Lokale Karten</string>
     <string name="icon_group_special">Spezial</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Sie müssen mindestens zwei Punkte hinzufügen.</string>
+    <string name="manage_subscription">Abonnement verwalten</string>
+    <string name="subscription_payment_issue_title">Es gibt ein Problem mit Ihrem Abonnement. Klicken Sie auf die Schaltfläche, um zu den Einstellungen des Google Play Abonnements zu gelangen und Ihre Zahlungsmethode zu überprüfen.</string>
+    <string name="subscription_expired_title">OsmAnd Live Abonnement ist abgelaufen</string>
+    <string name="subscription_paused_title">OsmAnd Live Abonnement wurde ausgesetzt</string>
+    <string name="subscription_on_hold_title">OsmAnd Live Abonnement liegt auf Eis</string>
 </resources>

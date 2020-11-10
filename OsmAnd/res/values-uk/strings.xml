@@ -2038,7 +2038,7 @@
     <string name="osm_live_subscription_desc">Передплата включає щогодинні, щоденні та щотижневі оновлення, а також, необмежену кількість доступних завантажень для всіх мап з усього світу.</string>
     <string name="get_it">Отримати</string>
     <string name="get_for">Отримати на %1$s</string>
-    <string name="osm_live_banner_desc">Отримайте необмежені завантаження для мап, а також оновлення мап частіше ніж один раз на місяць: щотижня, щодня або щогодини.</string>
+    <string name="osm_live_banner_desc">Отримайте для мап необмежені завантаження та оновлення частіше ніж раз на місяць: щотижня, щодня або щогодини.</string>
     <string name="osmand_plus_banner_desc">Втулок для необмеженого доступу до мап, їх оновлень та отримання відомостей з Wikipedia.</string>
     <string name="si_mi_meters">Милі/метри</string>
     <string name="skip_map_downloading">Пропустити завантаження мап</string>
@@ -2741,8 +2741,8 @@
 \nРозкажіть нам про це.</string>
     <string name="send_search_query">Надіслати пошуковий запит?</string>
     <string name="shared_string_world">Світ</string>
-    <string name="monthly_map_updates">Оновлення мап: щомісячне</string>
-    <string name="daily_map_updates">Оновлення мап: щогодинне</string>
+    <string name="monthly_map_updates">Оновлення мап: щомісячно</string>
+    <string name="daily_map_updates">Оновлення мап: щогодинно</string>
     <string name="in_app_purchase">Купівля в застосунку</string>
     <string name="in_app_purchase_desc">Одноразовий платіж</string>
     <string name="in_app_purchase_desc_ex">Після покупки він буде завжди доступний для вас.</string>
@@ -3661,7 +3661,7 @@
     <string name="subscription_osmandlive_item">Передплата - OsmAnd Live</string>
     <string name="osmand_purchases_item">OsmAnd покупки</string>
     <string name="legend_item_description">Довідник умовних позначень мапи.</string>
-    <string name="osm_live_payment_subscription_management">Оплату буде здійснено з рахунку, прив\'язаного до вашого облікового запису Google Play, під час підтвердженні придбання.
+    <string name="osm_live_payment_subscription_management">Оплату буде здійснено під час підтвердження придбання з пов\'язаного з вашим обліковим записом Google Play рахунку.
 \n
 \nПередплата продовжується автоматично, якщо ви не скасуєте її до дати продовження. З вашого рахунку буде стягуватися плата за період продовження (щомісяця/щотримісяці/щорік) разово в день продовження.
 \n
