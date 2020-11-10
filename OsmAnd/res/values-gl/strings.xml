@@ -3971,4 +3971,10 @@ Lon %2$s</string>
     <string name="icon_group_sport">Deporte</string>
     <string name="icon_group_emergency">Emerxencia</string>
     <string name="icon_group_travel">Viaxe</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Tes que engadir polo menos dous puntos.</string>
+    <string name="manage_subscription">Xestionar subscrición</string>
+    <string name="subscription_payment_issue_title">Hai un problema coa túa subscrición. Preme no botón para ir ós axustes de subscrición da Google Play e corrixir o teu método de pagamento.</string>
+    <string name="subscription_expired_title">A subscrición do OsmAnd Live expirou</string>
+    <string name="subscription_paused_title">A subscrición do OsmAnd Live foi detida</string>
+    <string name="subscription_on_hold_title">A subscrición do OsmAnd Live está en espera</string>
 </resources>

@@ -99,7 +99,7 @@
     <string name="intermediate_points_change_order">Смяна на реда</string>
     <string name="srtm_paid_version_msg">Можете да закупите добавката Contour lines чрез Market и да подпомогнете нейното бъдещо развитие.</string>
     <string name="srtm_paid_version_title">Добавка за контури (Contour lines)</string>
-    <string name="av_def_action_choose">Избери при заявка</string>
+    <string name="av_def_action_choose">При поискване\?</string>
     <string name="av_def_action_video">Запиши видео</string>
     <string name="av_def_action_audio">Запиши аудио</string>
     <string name="av_widget_action_descr">Изберете действие по подразбиране</string>
@@ -142,7 +142,8 @@
     <string name="index_srtm_parts">части</string>
     <string name="index_srtm_ele">Контури</string>
     <string name="srtm_plugin_description">"Тази добавка осигурява показване на релефни контури върху офлайн картите на OsmAnd. Тази функционалност е много оценявана от спортисти, туристи, всички които се интересуват от ландшафта.
-\n\nГлобалните данни (между 70 градуса северна ширина и 70 градуса южна ширина) се основават на измервания от SRTM  и ASTER - радари намиращи се на борда на Terra - сателит на НАСА за наблюдение на НАСА. ASTER е съвместен проект между НАСА и Япония. "</string>
+\n
+\nГлобалните данни (между 70 градуса северна ширина и 70 градуса южна ширина) се основават на измервания от SRTM  и ASTER - радари намиращи се на борда на Terra - сателит на НАСА за наблюдение на НАСА. ASTER е съвместен проект между НАСА и Япония."</string>
     <string name="srtm_plugin_name">Контурни линии</string>
     <string name="download_select_map_types">Други карти</string>
     <string name="download_roads_only_item">Само пътища</string>
@@ -552,12 +553,12 @@
     <string name="trace_rendering">Информация за производителността</string>
     <string name="trace_rendering_descr">Показване на производителността при изчертаване на картата</string>
     <string name="installing_new_resources">Отваряне на нови данни…</string>
-    <string name="internet_connection_required_for_online_route">Избрана е онлайн навигация, но няма връзка с интернет.</string>
+    <string name="internet_connection_required_for_online_route">Навигацията онлайн не работи без връзка с интернет.</string>
     <string name="tts_language_not_supported_title">Езикът не се поддържа</string>
-    <string name="tts_language_not_supported">Избраният език не се поддържа от инсталираният Android TTS (синтез на глас). Искате ли да изтеглите друг TTS генератор на глас от Market? В противен случай ще бъде използван TTS по подразбиране.</string>
+    <string name="tts_language_not_supported">Избраният език не се поддържа от инсталираният Android TTS (синтез на глас) и ще бъде използван TTS по подразбиране. Искате ли да изтеглите друг генератор на глас от Google Play\?</string>
     <string name="tts_missing_language_data_title">Липсващи данни</string>
-    <string name="tts_missing_language_data">Няма нищо инсталирано за съответния език. Искате ли да отидете в \'Market\' за да инсталирате?</string>
-    <string name="gpx_option_reverse_route">Обръщане посоката на GPX</string>
+    <string name="tts_missing_language_data">Искате ли да отидете в Google Play за да свалите избрания език\?</string>
+    <string name="gpx_option_reverse_route">Обръщане посоката на трека</string>
     <string name="gpx_option_destination_point">Ползвай текущата крайна цел</string>
     <string name="gpx_option_from_start_point">Преминахте по целия маршрут</string>
     <string name="switch_to_vector_map_to_see">За този район има карта в офлайн режим.\n\t\n\tАктивирайте я от \'Меню\' → \'Настройки карта\' → \'Карта източник…\' → \'Офлайн векторни карти\'.</string>
@@ -1196,12 +1197,17 @@
     <string name="save_global_track_interval">Интервал за запис</string>
     <string name="search_for">Търси</string>
     <string name="shared_string_show_all">Покажи всички</string>
-    <string name="plugin_touringview_descr">"Този изглед превключва OsmAnd към \'Touring view\'. Той е предназначен специално за пътуващи и професионални шофьори.
-\n\nИзгледът предоставя при всякакво увеличение максимално количество подробности по картата (пътища, пътеки, ориентири).
-\n\nВсички видове пътища са изобразени с отделен цвят, което е особено полезно при управление на големи превозни средства.
-\n\nAnd it provides special touring options like showing bicycle routes or Alpine mountain routes.
-\n\nНе се изисква специална карта, изгледът се създава от стандартните карти на приложението.
-\n\nThis view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \"Настройка на картата\" as desired. "</string>
+    <string name="plugin_touringview_descr">Активирането на този изглед превключва OsmAnd към \'Туристическа карта\' - предназначен специално за пътешественици и професионални шофьори.
+\n
+\nИзгледът предоставя при всякакво увеличение максимално количество подробности по картата (пътища, пътеки, ориентири).
+\n
+\nВсички видове пътища са изобразени с отделен цвят, което е особено полезно при управление на големи превозни средства.
+\n
+\nИзобразява вело-маршрути и маршрути за планинско катерене.
+\n
+\nНе се изисква специална карта, изгледът се създава от стандартните карти на приложението.
+\n
+\nМожете да деактивирате този изглед или тук или от \"Настройки на картата\" -&gt; \"Стил на картата\"</string>
     <string name="show_railway_warnings">ЖП прелези</string>
     <string name="show_pedestrian_warnings">Пешеходни пътеки</string>
     <string name="rendering_attr_streetLighting_name">Улично осветление</string>
@@ -1295,10 +1301,12 @@
     <string name="proxy_pref_descr">Настройка на прокси сървър.</string>
     <string name="settings_privacy">Поверителност</string>
     <string name="shared_string_gpx_points">Точки</string>
-    <string name="record_plugin_description">"Тази добавка позволява записване на изминатия път в GPX файл. Записът може да се активира чрез докосване на бутон на главния екран или автоматично при стартиране на навигацията.\n\nЗаписаните следи могат да бъдат споделяни или да се изпращат към OSM. Спортистите могат да използват записаните следи за да проследят своя напредък. Основните данни на следата можете да видите директно в OsmAnd, като междинни времена, средната скорост и т.н. По-късно можете да анализирате следите в специални приложения за целта. "</string>
+    <string name="record_plugin_description">Тази добавка позволява записване на изминатия път в GPX файл. Записът може да се активира чрез докосване на бутон на главния екран или автоматично при стартиране на навигацията.
+\n
+\nЗаписаните следи могат да бъдат споделяни или да се изпращат към OSM. Спортистите могат да използват записаните следи за да проследят своя напредък. Основните данни на следата можете да видите директно в OsmAnd, като междинни времена, средната скорост и т.н. По-късно можете да анализирате следите в специални приложения за целта.</string>
     <string name="navigation_over_track">Стартиране на навигацията по маршрута?</string>
     <string name="save_track_to_gpx_globally_headline">Запис на следа при поискване</string>
-    <string name="gpx_info_subtracks">"Части: %1$s "</string>
+    <string name="gpx_info_subtracks">Сегменти: %1$s</string>
     <string name="gpx_selection_track">%1$s
 \nСледа %2$s</string>
     <string name="gpx_file_is_empty">Празен GPX файл</string>
@@ -1348,12 +1356,12 @@
     <string name="rendering_value_pink_name">розов</string>
     <string name="speed_limit_exceed">Толеранс за скоростта</string>
     <string name="delay_navigation_start">Автоматично стартиране на напътствията</string>
-    <string name="gpx_info_waypoints">"Точки: %1$s "</string>
-    <string name="gpx_info_distance">"Разстояние: %1$s (%2$s точки) "</string>
-    <string name="gpx_info_start_time">"Начало: %1$tF, %1$tT "</string>
-    <string name="gpx_info_end_time">"Край: %1$tF, %1$tT "</string>
-    <string name="gpx_info_average_speed">"Средна скорост: %1$s "</string>
-    <string name="gpx_info_maximum_speed">"Макс.скорост: %1$s "</string>
+    <string name="gpx_info_waypoints">Точки: %1$s</string>
+    <string name="gpx_info_distance">Разстояние: %1$s (%2$s точки)</string>
+    <string name="gpx_info_start_time">Начало: %1$tF, %1$tT</string>
+    <string name="gpx_info_end_time">Край: %1$tF, %1$tT</string>
+    <string name="gpx_info_average_speed">Средна скорост: %1$s</string>
+    <string name="gpx_info_maximum_speed">Макс. скорост: %1$s</string>
     <string name="gpx_info_avg_altitude">Средна височина: %1$s</string>
     <string name="gpx_info_diff_altitude">Разлика във височините: %1$s</string>
     <string name="gpx_info_asc_altitude">Изкачване/слизане: %1$s</string>
@@ -1425,7 +1433,11 @@
     <string name="lang_ceb">Себуански</string>
     <string name="lang_ms">Малайски</string>
     <string name="lang_ht">Хаитянски</string>
-    <string name="plugin_nautical_descr">"Добавката обогатява приложението OsmAnd карти и навигация като създава карти за гребане, ветроходство и други водни спортове.\n\nСпециалната добавка за карти на OsmAnd добавя морски навигационни символи и диаграми за вътрешна и крайбрежна навигация. Описанието на всеки навигационен символ показва подробностите, необходими за разпознаването и значението му (категория, фигура, цвят, последователност, препратка и др.).\n\nЗа да се върнете към някой от обикновените режими на картите на OsmAnd, просто изключете добавката или сменете \"Стил на картата\" в менюто \"Настройка на картата\". "</string>
+    <string name="plugin_nautical_descr">Добавката обогатява приложението OsmAnd карти и навигация като създава карти за гребане, ветроходство и други водни спортове.
+\n
+\nСпециалната добавка за карти на OsmAnd добавя морски навигационни символи и диаграми за вътрешна и крайбрежна навигация. Описанието на всеки навигационен символ показва подробностите, необходими за разпознаването и значението му (категория, фигура, цвят, последователност, препратка и др.).
+\n
+\nЗа да се върнете към някой от обикновените режими на картите на OsmAnd, просто изключете добавката или сменете в менюто \"Настройки на картата\" -&gt; \"Стил на картата\".</string>
     <string name="plugin_settings">Добавки</string>
     <string name="rendering_attr_currentTrackColor_name">цвят на GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX ширина</string>
@@ -2224,4 +2236,11 @@
     <string name="shared_string_file_name">Име на файл</string>
     <string name="number_of_gpx_files_selected_pattern">Избрани файлове за проследяване: %s</string>
     <string name="monitoring_control_start">REC</string>
+    <string name="nearest_point">Най-близката точка</string>
+    <string name="attach_to_the_roads">Прикрепяне към пътищата</string>
+    <string name="delete_address">Изтриване на адрес</string>
+    <string name="add_address">Добавете адрес</string>
+    <string name="access_hint_enter_address">Въведете адрес</string>
+    <string name="plan_route_trim_before">Подрязване преди</string>
+    <string name="plan_route_trim_after">Подрязване след</string>
 </resources>

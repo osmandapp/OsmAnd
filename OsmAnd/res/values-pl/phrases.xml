@@ -3562,10 +3562,10 @@
     <string name="poi_hazard">Zagrożenie</string>
     <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
     <string name="poi_change_delete">Usunięty obiekt</string>
-    <string name="poi_rtsa_scale_nc">н/к</string>
-    <string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
+    <string name="poi_rtsa_scale_nc">n/c</string>
+    <string name="poi_rtsa_scale_nc_asterisk">n/c*</string>
     <string name="poi_rtsa_scale_1a">1A</string>
-    <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1A*</string>
     <string name="poi_rtsa_scale_1b">1B</string>
     <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
     <string name="poi_rtsa_scale_2a">2A</string>
@@ -3817,7 +3817,7 @@
     <string name="poi_seamark_water_level_below_mwl">Poziom wody: poniżej średniego poziomu wody</string>
     <string name="poi_seamark_water_level_awash">Poziom wody: obmywający falami</string>
     <string name="poi_seamark_water_level_covers">Poziom wody: pokrywający</string>
-    <string name="poi_internet_access_fee_customers">Dostęp do Internetu dla klientów</string>
+    <string name="poi_internet_access_fee_customers">Dostęp do Internetu: klienci</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Ssanie</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pod ciśnieniem</string>
     <string name="poi_fire_hydrant_style_water_source_groundwater">Woda podziemna</string>
@@ -3830,7 +3830,7 @@
     <string name="poi_traffic_signals_vibration_no">Wibracja: nie</string>
     <string name="poi_city_block">Blok miejski</string>
     <string name="poi_borough">Gmina</string>
-    <string name="poi_give_box">Daj pudełko</string>
+    <string name="poi_give_box">Give box (wystawka)</string>
     <string name="poi_pump_status_missing_beam">Stan pompy: brak wiązki</string>
     <string name="poi_traffic_signals_arrow_no">Strzałka: nie</string>
     <string name="poi_elevator">Winda</string>
@@ -3844,4 +3844,9 @@
     <string name="poi_departures_board_delay">Opóźnienie</string>
     <string name="poi_departures_board_yes">Tak</string>
     <string name="poi_departures_board_no">Tablica odlotów: nie</string>
+    <string name="poi_parking_rooftop">Parking na dachu</string>
+    <string name="poi_radar_tower">Wieża radarowa</string>
+    <string name="poi_parking_sheds">Wiaty parkingowe</string>
+    <string name="poi_gpx_point">Punkt GPX</string>
+    <string name="poi_beehive">Ul</string>
 </resources>

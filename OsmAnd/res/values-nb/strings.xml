@@ -3874,4 +3874,17 @@
     <string name="shared_string_graph">Graf</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s-data er tilgjengelig kun på veiene, du må beregne en rute med “Rut mellom punkter”.</string>
     <string name="shared_string_gpx_route">Spor rute</string>
+    <string name="icon_group_special">Spesiell</string>
+    <string name="mgrs_format_descr">OsmAnd bruker MGRS, som ligner UTM NATO-format</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="snowmobile_render_descr">For snøscooterkjøring med egne veier og løyper.</string>
+    <string name="shared_string_local_maps">Lokale kart</string>
+    <string name="icon_group_transport">Transport</string>
+    <string name="icon_group_service">Tjeneste</string>
+    <string name="icon_group_symbols">Symboler</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="icon_group_emergency">Nødsfall</string>
+    <string name="icon_group_travel">Reise</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Du må legge til minst to punkter.</string>
 </resources>

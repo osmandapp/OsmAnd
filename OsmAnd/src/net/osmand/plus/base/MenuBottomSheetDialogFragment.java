@@ -377,7 +377,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return getResources().getDimensionPixelSize(R.dimen.content_padding);
 	}
 
-	private void setupThirdButton() {
+	protected void setupThirdButton() {
 		thirdButton = buttonsContainer.findViewById(R.id.third_button);
 		int buttonTextId = getThirdBottomButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {

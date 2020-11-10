@@ -3117,7 +3117,7 @@
     <string name="utm_format_descr">يستخدم أوسماند تنسيق UTM وهو مشابه ولكن غير مطابق لتنسيق UTM الناتو.</string>
     <string name="shared_string_example">مثال</string>
     <string name="navigate_point_format_utm">معيار الإحداثيات</string>
-    <string name="navigate_point_format_olc">فتح رمز الموقع</string>
+    <string name="navigate_point_format_olc">رمز الموقع المفتوح (OLC)</string>
     <string name="coordinates_format_info">سيتم تطبيق التنسيق المحدد في كل أنحاء التطبيق.</string>
     <string name="pref_selected_by_default_for_profiles">يتم تحديد هذا الاعداد بشكل افتراضي للأوضاع: %s</string>
     <string name="change_default_settings">تغيير الإعدادات</string>
@@ -3658,15 +3658,15 @@
     <string name="osmand_purchases_item">مشتريات أوسماند</string>
     <string name="legend_item_description">دليل رموز الخريطة.</string>
     <string name="navigation_profiles_item">أوضاع الملاحة</string>
-    <string name="release_3_7">• خرائط جديدة للمنحدرات غير المتصلة بالإنترنت
+    <string name="release_3_7">• خرائط جديدة للتضاريس توضح المنحدرات من دون الحاجة للاتصال بالإنترنت
 \n
 \n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال
 \n
 \n • تخصيص ترتيب العناصر في قائمة السياق ، تكوين الخريطة ، درج
 \n
-\n • ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط
+\n • عرض ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط
 \n
-\n • إنشاء مرشح / خرائط POI الخاصة بك مع مرونة تامة
+\n • إنشاء مرشح / خرائط للمعالم الخاصة بك مع مرونة تامة
 \n
 \n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة
 \n
@@ -3674,7 +3674,7 @@
 \n
 \n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية
 \n
-\n • إصلاح الخلل مع RTL
+\n • إصلاح الخلل مع اللغات التي تكتب من اليمين
 \n
 \n</string>
     <string name="shared_string_resume">إستئناف</string>
@@ -3683,7 +3683,7 @@
     <string name="quick_action_transport_show">إظهار وسائل النقل العام</string>
     <string name="quick_action_show_hide_transport">إظهار/إخفاء وسائل النقل العام</string>
     <string name="quick_action_transport_descr">زر لإظهار أو إخفاء وسائل النقل العام على الخريطة.</string>
-    <string name="create_edit_poi">إنشاء /تحرير POI</string>
+    <string name="create_edit_poi">إنشاء /تحرير موضع مكان</string>
     <string name="parking_positions">مكان الموقف</string>
     <string name="add_edit_favorite">إضافة / تحرير المفضلة</string>
     <string name="reset_deafult_order">استعادة ترتيب العناصر الافتراضية</string>
@@ -3934,4 +3934,10 @@
     <string name="navigate_point_mgrs">النظام المرجعي للشبكة العسكرية</string>
     <string name="navigate_point_format_mgrs">النظام المرجعي للشبكة العسكرية</string>
     <string name="mgrs_format_descr">OsmAnd يستخدم MGRS، وهو مشابه لتنسيق UTM NATO .</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">يجب عليك إضافة نقطتين على الأقل.</string>
+    <string name="manage_subscription">إدارة الاشتراك</string>
+    <string name="subscription_payment_issue_title">هناك مشكلة في اشتراكك. انقر الزر للانتقال إلى إعدادات اشتراك Google Play لإصلاح طريقة الدفع الخاصة بك.</string>
+    <string name="subscription_expired_title">انتهت صلاحية اشتراك OsmAnd Live</string>
+    <string name="subscription_paused_title">تم إيقاف اشتراك OsmAnd Live مؤقتًا</string>
+    <string name="subscription_on_hold_title">اشتراك OsmAnd Live معلق</string>
 </resources>

@@ -72,7 +72,7 @@ class SharingStatusBottomSheet : DialogFragment() {
 					if (sharingStatusType.canResendLocation) {
 						if (i == 0) {
 							setOnClickListener {
-								app.shareLocationHelper.checkNetworkType()
+								app.shareLocationHelper.updateNetworkType()
 								app.settings.prepareForSharingNewMessages(sharingStatus.chatsIds)
 								app.shareLocationHelper.checkAndSendBufferMessages()
 								app.forceUpdateMyLocation()

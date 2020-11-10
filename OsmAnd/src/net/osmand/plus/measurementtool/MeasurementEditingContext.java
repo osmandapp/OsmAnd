@@ -92,7 +92,7 @@ public class MeasurementEditingContext {
 		private final WptPt end;
 		private final List<WptPt> points;
 		private final List<RouteSegmentResult> segments;
-		private double distance;
+		private final double distance;
 
 		public RoadSegmentData(@NonNull ApplicationMode appMode, @NonNull WptPt start, @NonNull WptPt end,
 							   @Nullable List<WptPt> points, @Nullable List<RouteSegmentResult> segments) {
@@ -101,20 +101,18 @@ public class MeasurementEditingContext {
 			this.end = end;
 			this.points = points;
 			this.segments = segments;
-			if (segments != null) {
-				double distance = 0;
-				for (RouteSegmentResult segment : segments) {
-					distance += segment.getDistance();
-				}
-				this.distance = distance;
-			} else if (points != null && points.size() > 1) {
-				double distance = 0;
+			double distance = 0;
+			if (points != null && points.size() > 1) {
 				for (int i = 1; i < points.size(); i++) {
 					distance += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
 							points.get(i).lat, points.get(i).lon);
 				}
-				this.distance = distance;
+			} else if (segments != null) {
+				for (RouteSegmentResult segment : segments) {
+					distance += segment.getDistance();
+				}
 			}
+			this.distance = distance;
 		}
 
 		public ApplicationMode getAppMode() {
@@ -259,14 +257,8 @@ public class MeasurementEditingContext {
 				RoadSegmentData data = this.roadSegmentData.get(pair);
 				if (data == null) {
 					if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE || !pair.first.lastPoint || !pair.second.firstPoint) {
-						double localDist = MapUtils.getDistance(pair.first.getLatitude(), pair.first.getLongitude(),
+						distance += MapUtils.getDistance(pair.first.getLatitude(), pair.first.getLongitude(),
 								pair.second.getLatitude(), pair.second.getLongitude());
-						if (!Double.isNaN(pair.first.ele) && !Double.isNaN(pair.second.ele) &&
-								pair.first.ele != 0 && pair.second.ele != 0) {
-							double h = Math.abs(pair.first.ele - pair.second.ele);
-							localDist = Math.sqrt(localDist * localDist + h * h);
-						}
-						distance += localDist;
 					}
 				} else {
 					distance += data.getDistance();
@@ -1069,7 +1061,7 @@ public class MeasurementEditingContext {
 			return new RouteExporter("", route, locations, null).generateRouteSegment();
 		} else if (endPointIndex - startPointIndex >= 0) {
 			TrkSegment segment = new TrkSegment();
-			segment.points = before.points.subList(startPointIndex, endPointIndex + 1);
+			segment.points = new ArrayList<>(before.points.subList(startPointIndex, endPointIndex + 1));
 			return segment;
 		}
 		return null;

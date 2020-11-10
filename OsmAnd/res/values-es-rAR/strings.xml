@@ -3951,4 +3951,10 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd usa MGRS, similar al formato UTM de la OTAN.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Debes añadir al menos dos puntos.</string>
+    <string name="manage_subscription">Gestionar suscripción</string>
+    <string name="subscription_payment_issue_title">Hay un problema con la suscripción. Pulsa el botón para ir a los ajustes de la suscripción de Google Play y corregir el método de pago.</string>
+    <string name="subscription_expired_title">La suscripción a OsmAnd Live ha caducado</string>
+    <string name="subscription_paused_title">La suscripción a OsmAnd Live se ha pausado</string>
+    <string name="subscription_on_hold_title">La suscripción a OsmAnd Live está en espera</string>
 </resources>
