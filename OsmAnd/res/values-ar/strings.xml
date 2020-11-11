@@ -3940,4 +3940,13 @@
     <string name="subscription_expired_title">انتهت صلاحية اشتراك OsmAnd Live</string>
     <string name="subscription_paused_title">تم إيقاف اشتراك OsmAnd Live مؤقتًا</string>
     <string name="subscription_on_hold_title">اشتراك OsmAnd Live معلق</string>
+    <string name="login_open_street_map">تسجيل الدخول إلى خريطة الشارع المفتوح</string>
+    <string name="login_open_street_map_org">تسجيل الدخول إلى OpenStreetMap.org</string>
+    <string name="sing_in_with_open_street_map">تسجيل الخروج</string>
+    <string name="open_street_map_login_mode">تحتاج إلى تسجيل الدخول لرفع التغييرات الجديدة أو المعدلة.
+\n
+\nيمكنك تسجيل الدخول باستخدام طريقة التفويض الآمنة أو استخدام تسجيل الدخول وكلمة المرور.</string>
+    <string name="use_login_password">استخدام تسجيل الدخول وكلمة المرور</string>
+    <string name="login_account">الحساب</string>
+    <string name="user_login">تسجيل الدخول</string>
 </resources>
