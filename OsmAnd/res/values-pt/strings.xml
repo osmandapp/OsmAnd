@@ -269,7 +269,7 @@
     <string name="finished_task">Concluído</string>
     <string name="use_online_routing_descr">Utilize a Internet para calcular uma rota.</string>
     <string name="use_online_routing">Utilizar navegação online</string>
-    <string name="user_password">A sua palavra-passe no OSM</string>
+    <string name="user_password">Palavra-passe</string>
     <string name="osm_settings_descr">Especifique as configurações de OpenStreetMap.org (OSM) necessárias para envios ao OSM.</string>
     <string name="data_settings_descr">Especifique o idioma, descarregar/enviar dados.</string>
     <string name="data_settings">Dados</string>
@@ -3566,9 +3566,9 @@
     <string name="logcat_buffer_descr">Verifique e compartilhe registos detalhados da app</string>
     <string name="select_map_icon_descr">Ícone mostrado em repouso.</string>
     <string name="select_nav_icon_descr">Ícone mostrado ao navegar ou mover.</string>
-    <string name="osm_edits_view_descr">Pode ver todos os erros de OSM do editor carregado em %1$s. Os pontos enviados não são exibidos no OsmAnd.</string>
+    <string name="osm_edits_view_descr">Pode ver todas as suas edições descarregadas ou bugs OSM em %1$s. Pontos enviados não aparecem no OsmAnd.</string>
     <string name="osm_editing">Edição OSM</string>
-    <string name="plugin_global_prefs_info">Essas configurações aplicam-se a todos os perfis.</string>
+    <string name="plugin_global_prefs_info">Estas configurações de extensão são globais e aplicam-se a todos os perfis</string>
     <string name="login_and_pass">Utilizador e palavra-passe</string>
     <string name="accessibility_announce">Anunciar</string>
     <string name="route_recalculation">Recálculo da rota</string>
@@ -3955,4 +3955,13 @@
     <string name="subscription_expired_title">A assinatura do OsmAnd Live expirou</string>
     <string name="subscription_paused_title">A assinatura do OsmAnd Live foi pausada</string>
     <string name="subscription_on_hold_title">A assinatura do OsmAnd Live está em espera</string>
+    <string name="open_street_map_login_mode">Precisa fazer login para enviar alterações novas ou modificadas.
+\n
+\nPode entrar a usar o método seguro OAuth ou usar o seu nome de utilizador e a sua palavra-passe.</string>
+    <string name="login_open_street_map">Fazer login ao OpenStreetMap</string>
+    <string name="login_open_street_map_org">Entrar com OpenStreetMap.org</string>
+    <string name="sing_in_with_open_street_map">Entrar com OpenStreetMap</string>
+    <string name="use_login_password">Usar nome do utilizador e palavra-passe</string>
+    <string name="login_account">Conta</string>
+    <string name="user_login">Entrar</string>
 </resources>

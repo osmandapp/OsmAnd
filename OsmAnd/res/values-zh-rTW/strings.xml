@@ -335,7 +335,7 @@
     <string name="global_app_settings">整體程式設定</string>
     <string name="user_name">您 OSM 的使用者名稱</string>
     <string name="open_street_map_login_descr">需要向 openstreetmap.org 提出意見。</string>
-    <string name="user_password">您 OSM 的密碼</string>
+    <string name="user_password">密碼</string>
     <string name="osmand_service">背景模式</string>
     <string name="osmand_service_descr">當螢幕關閉後，讓 OsmAnd 在背景運行。</string>
     <string name="download_files_not_enough_space">空間不足以下載 %1$s MB (空間剩餘：%2$s)。</string>
@@ -3420,7 +3420,7 @@
     <string name="route_recalculation">路徑重新計算</string>
     <string name="accessibility_announce">公告</string>
     <string name="login_and_pass">使用者名稱與密碼</string>
-    <string name="plugin_global_prefs_info">這些設定會套用到所有設定檔中。</string>
+    <string name="plugin_global_prefs_info">這些外掛程式是全域的，會套用到所有設定檔中</string>
     <string name="osm_editing">OSM 編輯</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">在導航或移動時顯示的圖示。</string>
@@ -3429,7 +3429,7 @@
     <string name="search_offline_geo_error">無法解析地理含義「%s」。</string>
     <string name="tracks_view_descr">您已紀錄的軌跡位於 %1$s，或是 OsmAnd 資料夾。</string>
     <string name="multimedia_notes_view_descr">您的 OSM 註記位於 %1$s。</string>
-    <string name="osm_edits_view_descr">檢視您的編輯或 OSM 臭蟲尚未上傳到 %1$s。已上傳的點將不會再顯示。</string>
+    <string name="osm_edits_view_descr">您可以在 %1$s 中檢視您所有未上傳的編輯或 OSM 臭蟲。已上傳的點不會在 OsmAnd 中顯示。</string>
     <string name="permission_is_required">使用此選項需要權限。</string>
     <string name="monitoring_min_speed_descr">這是一個低速過濾器，不記錄低於特定速度的點。在地圖上查看時，這可能會使記錄的軌跡看起來更平滑。</string>
     <string name="monitoring_min_speed_descr_side_effect">副作用：您的軌跡將會遺失所有未達到最低速度標準的部份（例如，您將自行車推上陡峭的山坡）。此外，也將沒有其餘的資訊，如休息等。這會影響任何分析或後處理，例如試圖確定行程的總長度，運動時間或平均速度時。</string>
@@ -3948,4 +3948,13 @@
     <string name="subscription_expired_title">OsmAnd Live 訂閱已過期</string>
     <string name="subscription_paused_title">OsmAnd Live 訂閱已暫停</string>
     <string name="subscription_on_hold_title">OsmAnd Live 訂閱已暫停</string>
+    <string name="login_open_street_map">登入到 OpenStreetMap</string>
+    <string name="login_open_street_map_org">登入到 OpenStreetMap.org</string>
+    <string name="sing_in_with_open_street_map">以 OpenStreetMap 登入</string>
+    <string name="open_street_map_login_mode">您必須登入以上傳新的或修正過的變更。
+\n
+\n您可以使用安全的 OAuth 方法或使用您的登入與密碼來登入。</string>
+    <string name="use_login_password">使用登入與密碼</string>
+    <string name="login_account">帳號</string>
+    <string name="user_login">登入</string>
 </resources>
