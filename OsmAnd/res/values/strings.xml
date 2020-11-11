@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="register_opr_have_account">I already have an account</string>
+    <string name="register_opr_create_new_account">Create new account</string>
+    <string name="register_on_openplacereviews_desc">Photos are provided by open data project OpenPlaceReviews.org. In order to upload your photos you need to sign up on website.</string>
+    <string name="register_on_openplacereviews">Register on\nOpenPlaceReviews.org</string>
+    <string name="shared_string_add_photo">Add photo</string>
     <string name="subscription_on_hold_title">OsmAnd Live subscription is on hold</string>
     <string name="subscription_paused_title">OsmAnd Live subscription has been paused</string>
     <string name="subscription_expired_title">OsmAnd Live subscription has been expired</string>
