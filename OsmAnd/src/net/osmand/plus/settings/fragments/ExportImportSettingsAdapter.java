@@ -302,6 +302,14 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				title.setText(FileNameTranslationHelper.getFileNameWithRegion(app, file.getName()));
 				setupIcon(icon, R.drawable.ic_action_volume_up, itemSelected);
 				break;
+			case ACTIVE_MARKERS:
+				title.setText(R.string.map_markers);
+				setupIcon(icon, R.drawable.ic_action_flag, itemSelected);
+				break;
+			case HISTORY_MARKERS:
+				title.setText(R.string.markers_history);
+				setupIcon(icon, R.drawable.ic_action_flag, itemSelected);
+				break;
 			default:
 				return child;
 		}
@@ -402,6 +410,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.local_indexes_cat_tts;
 			case VOICE:
 				return R.string.local_indexes_cat_voice;
+			case ACTIVE_MARKERS:
+				return R.string.map_markers;
+			case HISTORY_MARKERS:
+				return R.string.markers_history;
 			default:
 				return R.string.access_empty_list;
 		}

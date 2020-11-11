@@ -5,7 +5,10 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -17,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -205,11 +209,28 @@ public abstract class SettingsItem {
 						String s = json.toString(2);
 						outputStream.write(s.getBytes("UTF-8"));
 					} catch (JSONException e) {
+						warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 						SettingsHelper.LOG.error("Failed to write json to stream", e);
 					}
 					return true;
 				}
 				return false;
+			}
+		};
+	}
+
+	@NonNull
+	SettingsItemWriter<? extends SettingsItem> getGpxWriter(@NonNull final GPXFile gpxFile) {
+		return new SettingsItemWriter<SettingsItem>(this) {
+			@Override
+			public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
+				Exception error = GPXUtilities.writeGpx(new OutputStreamWriter(outputStream, "UTF-8"), gpxFile);
+				if (error != null) {
+					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
+					SettingsHelper.LOG.error("Failed write to gpx file", error);
+					return false;
+				}
+				return true;
 			}
 		};
 	}
