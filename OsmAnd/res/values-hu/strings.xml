@@ -114,7 +114,7 @@
     <string name="global_app_settings">Globális beállítások az alkalmazáshoz</string>
     <string name="user_name">OSM felhasználóneved</string>
     <string name="open_street_map_login_descr">Az openstreetmap.org felé történő adatküldéshez szükséges.</string>
-    <string name="user_password">OSM jelszavad</string>
+    <string name="user_password">Jelszó</string>
     <string name="osmand_service">Háttérmód</string>
     <string name="osmand_service_descr">Az OsmAnd háttérben fut kikapcsolt kijelzővel.</string>
     <string name="switch_to_raster_map_to_see">Erre a területre letölthet offline vektoros térképet a Beállításokban (Térképfájlok kezelése), vagy váltson át az Online térképek bővítményre.</string>
@@ -3420,7 +3420,7 @@
     <string name="route_recalculation">Útvonal újraszámítása</string>
     <string name="accessibility_announce">Bejelentés</string>
     <string name="login_and_pass">Felhasználónév és jelszó</string>
-    <string name="plugin_global_prefs_info">Ezek a beállítások minden profilra vonatkoznak.</string>
+    <string name="plugin_global_prefs_info">Ezek a bővítménybeállítások globálisak, és minden profilra vonatkoznak</string>
     <string name="osm_editing">OSM-szerkesztés</string>
     <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtalálható a %1$s helyen. A már feltöltött pontok nem láthatók az OsmAndban.</string>
     <string name="app_mode_osm">OSM</string>
