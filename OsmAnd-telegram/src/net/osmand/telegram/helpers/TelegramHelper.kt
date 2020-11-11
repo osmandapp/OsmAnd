@@ -840,7 +840,7 @@ class TelegramHelper private constructor() {
 	}
 
 	fun stopSendingLiveLocationToChat(shareInfo: ShareChatInfo) {
-		if (shareInfo.currentMapMessageId != -1L && shareInfo.chatId != -1L) {
+		if (!shareInfo.isMapMessageIdPresent() && shareInfo.chatId != -1L) {
 			shareInfo.lastSendMapMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			client?.send(
 				TdApi.EditMessageLiveLocation(shareInfo.chatId, shareInfo.currentMapMessageId, null, null)) { obj ->

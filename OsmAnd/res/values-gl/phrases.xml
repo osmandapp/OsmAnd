@@ -3842,4 +3842,5 @@
     <string name="poi_parking_sheds">Pendellos</string>
     <string name="poi_parking_rooftop">Terrazo</string>
     <string name="poi_gpx_point">Punto GPX</string>
+    <string name="poi_radar_tower">Torre de radar</string>
 </resources>

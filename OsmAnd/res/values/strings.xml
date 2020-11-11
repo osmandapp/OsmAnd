@@ -17,6 +17,7 @@
     <string name="gpx_upload_public_visibility_descr">Public means that the trace will be shown publicly in Your GPS traces and in public GPS trace listings. Data served via the API does not reference your trace page. Timestamps of the trace points are not available through the public GPS API, and the points are not chronologically ordered. However, other users are still able to download the raw trace from the public trace list and any timestamps contained within.</string>
     <string name="enter_text_separated">Enter tags separated by comma.</string>
     <string name="send_files_to_openstreetmap">Send GPX file to OpenStreetMap</string>
+    <string name="markers_history">Markers history</string>
     <string name="subscription_on_hold_title">OsmAnd Live subscription is on hold</string>
     <string name="subscription_paused_title">OsmAnd Live subscription has been paused</string>
     <string name="subscription_expired_title">OsmAnd Live subscription has been expired</string>

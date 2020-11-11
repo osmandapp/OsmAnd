@@ -3837,9 +3837,7 @@
     <string name="route_between_points_whole_track_button_desc">Cała trasa zostanie ponownie wyznaczona przy użyciu wybranego profilu.</string>
     <string name="route_between_points_next_segment_button_desc">Tylko następny segment zostanie przeliczony przy użyciu wybranego profilu.</string>
     <string name="route_between_points_desc">Wybierz sposób łączenia punktów, za pomocą linii prostej, lub oblicz trasę między nimi w sposób określony poniżej.</string>
-    <string name="route_between_points_warning_desc">Aby skorzystać z tej opcji, OsmAnd musi przyciągnąć ślad do dróg mapy.
-\n
-\nW następnym kroku należy wybrać profil nawigacji w celu wykrycia dozwolonych dróg i odległości progowej w celu przybliżenia śledzenia drogi.</string>
+    <string name="route_between_points_warning_desc">Następnie przyciągnij trasę do najbliższej dozwolonej drogi za pomocą jednego z profili nawigacji, aby skorzystać z tej opcji.</string>
     <string name="street_level_imagery">Zdjęcia z poziomu ulicy</string>
     <string name="plan_route_exit_dialog_descr">Czy na pewno chcesz odrzucić wszystkie zmiany w zaplanowanej trasie, zamykając ją\?</string>
     <string name="in_case_of_reverse_direction">W przypadku odwrotnego kierunku</string>
@@ -3945,7 +3943,7 @@
     <string name="shared_string_local_maps">Mapy lokalne</string>
     <string name="app_mode_gap">Luka</string>
     <string name="icon_group_amenity">Udogodnienie</string>
-    <string name="icon_group_special">Specjalne</string>
+    <string name="icon_group_special">Specjalny</string>
     <string name="icon_group_transport">Transport</string>
     <string name="icon_group_service">Usługi</string>
     <string name="icon_group_symbols">Symbole</string>
@@ -3956,4 +3954,8 @@
     <string name="manage_subscription">Zarządzaj subskrypcją</string>
     <string name="subscription_expired_title">Subskrypcja OsmAnd Live wygasła</string>
     <string name="subscription_paused_title">Subskrypcja OsmAnd Live została wstrzymana</string>
+    <string name="snowmobile_render_descr">Do jazdy skuterem śnieżnym z wyznaczonymi drogami i torami.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Należy dodać co najmniej dwa punkty.</string>
+    <string name="subscription_payment_issue_title">Wystąpił problem z Twoją subskrypcją. Kliknij przycisk, aby przejść do ustawień subskrypcji Google Play i naprawić metodę płatności.</string>
+    <string name="subscription_on_hold_title">Subskrypcja OsmAnd Live jest wstrzymana</string>
 </resources>
