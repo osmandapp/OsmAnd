@@ -17,6 +17,7 @@
 			android:layout_height="match_parent"
 			android:layout_gravity="start"
 			android:contentDescription="@string/shared_string_back"
+			app:tint="@color/color_black"
 			app:srcCompat="@drawable/ic_arrow_back"/>
 
 	</LinearLayout>
@@ -55,6 +56,7 @@
 		android:textColorLink="@color/icon_color_active_light"
 		android:layout_marginRight="16dp"
 		android:autoLink="all"
+
 		android:text="@string/register_on_openplacereviews_desc"/>
 
 	<LinearLayout
@@ -70,6 +72,7 @@
 			android:layout_marginRight="16dp"
 			android:layout_marginBottom="6dp"
 			android:text="@string/register_opr_create_new_account"
+			android:textColor="@color/color_white"
 			android:layout_marginTop="12dp"
 			android:background="@color/icon_color_active_light"
 			android:layout_width="match_parent"
