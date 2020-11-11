@@ -67,7 +67,7 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected int getThirdBottomButtonTextId() {
-		return R.string.sing_in_with_open_street_map;
+		return R.string.sign_in_with_open_street_map;
 	}
 
 	@Override
