@@ -35,17 +35,23 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static net.osmand.GPXUtilities.GPX_TIME_FORMAT;
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
 public class MapMarkersHelper {
@@ -1024,6 +1030,9 @@ public class MapMarkersHelper {
 	}
 
 	public GPXFile generateGpx(List<MapMarker> markers, boolean completeBackup) {
+		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+
 		GPXFile gpxFile = new GPXFile(Version.getFullVersion(ctx));
 		for (MapMarker marker : markers) {
 			WptPt wpt = new WptPt();
@@ -1033,10 +1042,10 @@ public class MapMarkersHelper {
 			wpt.setColor(ContextCompat.getColor(ctx, MapMarker.getColorId(marker.colorIndex)));
 			if (completeBackup) {
 				if (marker.creationDate != 0) {
-					wpt.getExtensionsToWrite().put(CREATION_DATE, String.valueOf(marker.creationDate));
+					wpt.getExtensionsToWrite().put(CREATION_DATE, format.format(new Date(marker.creationDate)));
 				}
 				if (marker.visitedDate != 0) {
-					wpt.getExtensionsToWrite().put(VISITED_DATE, String.valueOf(marker.visitedDate));
+					wpt.getExtensionsToWrite().put(VISITED_DATE, format.format(new Date(marker.visitedDate)));
 				}
 			}
 			gpxFile.addPoint(wpt);
@@ -1045,6 +1054,9 @@ public class MapMarkersHelper {
 	}
 
 	public List<MapMarker> readMarkersFromGpx(GPXFile gpxFile, boolean history) {
+		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+
 		List<MapMarker> mapMarkers = new ArrayList<>();
 		for (WptPt point : gpxFile.getPoints()) {
 			LatLon latLon = new LatLon(point.lat, point.lon);
@@ -1055,13 +1067,25 @@ public class MapMarkersHelper {
 
 			String visitedDateStr = point.getExtensionsToRead().get(VISITED_DATE);
 			String creationDateStr = point.getExtensionsToRead().get(CREATION_DATE);
-			marker.visitedDate = Algorithms.parseLongSilently(visitedDateStr, 0);
-			marker.creationDate = Algorithms.parseLongSilently(creationDateStr, 0);
+			marker.visitedDate = parseTime(visitedDateStr, format);
+			marker.creationDate = parseTime(creationDateStr, format);
 			marker.nextKey = history ? MapMarkersDbHelper.HISTORY_NEXT_VALUE : MapMarkersDbHelper.TAIL_NEXT_VALUE;
 
 			mapMarkers.add(marker);
 		}
 		return mapMarkers;
+	}
+
+	private static long parseTime(String text, SimpleDateFormat format) {
+		long time = 0;
+		if (text != null) {
+			try {
+				time = format.parse(text).getTime();
+			} catch (ParseException e) {
+				LOG.error(e);
+			}
+		}
+		return time;
 	}
 
 	// ---------------------------------------------------------------------------------------------
