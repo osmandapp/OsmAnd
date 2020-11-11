@@ -3406,7 +3406,7 @@
     <string name="route_recalculation">Recalcul de l\'itinéraire</string>
     <string name="accessibility_announce">Annonce</string>
     <string name="login_and_pass">Nom d\'utilisateur et mot de passe</string>
-    <string name="plugin_global_prefs_info">Ces paramètres s\'appliquent à tous les profils.</string>
+    <string name="plugin_global_prefs_info">Les paramètres du greffon sont globaux et s\'appliquent à tous les profils.</string>
     <string name="osm_editing">Édition OSM</string>
     <string name="osm_edits_view_descr">Vous pouvez consulter vos modifications non téléversées comme vos bugs OSM dans %1$s. Les points envoyés ne sont plus affichés dans OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
