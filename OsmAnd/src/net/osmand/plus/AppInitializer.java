@@ -41,6 +41,7 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;

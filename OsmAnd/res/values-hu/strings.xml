@@ -114,7 +114,7 @@
     <string name="global_app_settings">Globális beállítások az alkalmazáshoz</string>
     <string name="user_name">OSM felhasználóneved</string>
     <string name="open_street_map_login_descr">Az openstreetmap.org felé történő adatküldéshez szükséges.</string>
-    <string name="user_password">OSM jelszavad</string>
+    <string name="user_password">Jelszó</string>
     <string name="osmand_service">Háttérmód</string>
     <string name="osmand_service_descr">Az OsmAnd háttérben fut kikapcsolt kijelzővel.</string>
     <string name="switch_to_raster_map_to_see">Erre a területre letölthet offline vektoros térképet a Beállításokban (Térképfájlok kezelése), vagy váltson át az Online térképek bővítményre.</string>
@@ -239,7 +239,7 @@
     <string name="map_overlay_descr">Rátéttérkép kiválasztása</string>
     <string name="tile_source_already_installed">A térkép már telepítve van, a beállítások frissülnek.</string>
     <string name="select_tile_source_to_install">(Csempés) térkép kiválasztása telepítéshez vagy frissítéshez.</string>
-    <string name="internet_not_available">Nem lehet végrehajtani a műveletet internetkapcsolat nélkül.</string>
+    <string name="internet_not_available">A műveletet nem lehetséges internetkapcsolat nélkül végrehajtani.</string>
     <string name="install_more">További telepítése…</string>
     <string name="level_to_switch_vector_raster_descr">Raszteres térképek használata ezen nagyítási szint alatt.</string>
     <string name="level_to_switch_vector_raster">Legkisebb vektoros nagyítási szint</string>
@@ -1228,7 +1228,7 @@
     <string name="import_file_favourites">Mented az adatokat GPX fájlként, vagy importálod az útpontokat a „Kedvencek”-be?</string>
     <string name="shared_string_share">Megosztás</string>
     <string name="share_fav_subject">OsmAndból megosztott kedvencek</string>
-    <string name="no_index_file_to_download">Nem találhatók letöltések, ellenőrizd az internetkapcsolatot.</string>
+    <string name="no_index_file_to_download">Nem találhatók letöltések, ellenőrizze az internetkapcsolatot.</string>
     <string name="none_selected_gpx">Először egy hosszú koppintással adjon meg egy GPX-fájlt.</string>
     <string name="local_index_select_gpx_file">Nyomvonal kijelölése</string>
     <string name="sort_by_distance">Rendezés távolság szerint</string>
@@ -1370,7 +1370,7 @@
     <string name="download_tab_updates">Frissítések</string>
     <string name="download_tab_downloads">Letöltés</string>
     <string name="download_tab_local">Helyi</string>
-    <string name="no_internet_connection">A letöltés nem lehetséges, ellenőrizd az internet-kapcsolatot.</string>
+    <string name="no_internet_connection">A letöltés nem lehetséges, ellenőrizze az internetkapcsolatot.</string>
     <string name="shared_string_dismiss">Bezárás</string>
     <string name="everything_up_to_date">Minden fájl naprakész</string>
     <string name="use_opengl_render">OpenGL megjelenítő használata</string>
@@ -2493,9 +2493,9 @@
     <string name="context_menu_points_of_group">A csoport összes pontja</string>
     <string name="open_from">Nyitva ekkortól:</string>
     <string name="open_till">Nyitva eddig:</string>
-    <string name="will_close_at">Bezár ekkor:</string>
-    <string name="will_open_at">Kinyit ekkor:</string>
-    <string name="will_open_on">Kinyit ekkor:</string>
+    <string name="will_close_at">Ekkor zár:</string>
+    <string name="will_open_at">Ekkor nyit:</string>
+    <string name="will_open_on">Ekkor nyit:</string>
     <string name="additional_actions">További műveletek</string>
     <string name="av_locations_selected_desc">GPX fájl a kijelölt jegyzetek koordinátáival és adataival.</string>
     <string name="av_locations_all_desc">GPX fájl az összes jegyzet koordinátáival és adataival.</string>
@@ -3420,7 +3420,7 @@
     <string name="route_recalculation">Útvonal újraszámítása</string>
     <string name="accessibility_announce">Bejelentés</string>
     <string name="login_and_pass">Felhasználónév és jelszó</string>
-    <string name="plugin_global_prefs_info">Ezek a beállítások minden profilra vonatkoznak.</string>
+    <string name="plugin_global_prefs_info">Ezek a bővítménybeállítások globálisak, és minden profilra vonatkoznak</string>
     <string name="osm_editing">OSM-szerkesztés</string>
     <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtalálható a %1$s helyen. A már feltöltött pontok nem láthatók az OsmAndban.</string>
     <string name="app_mode_osm">OSM</string>
@@ -3939,4 +3939,5 @@
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">Az OsmAnd a NATO által is használt MGRS (Military Grid Reference System) koordinátákat alkamazza, amely hasonlít az UTM-formátumhoz.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Legalább két pontot kell hozzáadnia.</string>
+    <string name="manage_subscription">Előfizetés kezelése</string>
 </resources>

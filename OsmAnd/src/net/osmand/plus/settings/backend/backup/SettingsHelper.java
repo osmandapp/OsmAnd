@@ -18,6 +18,7 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
@@ -28,6 +29,8 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
@@ -594,6 +597,22 @@ public class SettingsHelper {
 		if (!files.isEmpty()) {
 			dataList.put(ExportSettingsType.VOICE, files);
 		}
+		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
+		if (!mapMarkers.isEmpty()) {
+			String name = app.getString(R.string.map_markers);
+			String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
+			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
+			markersGroup.setMarkers(mapMarkers);
+			dataList.put(ExportSettingsType.ACTIVE_MARKERS, Collections.singletonList(markersGroup));
+		}
+		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
+		if (!markersHistory.isEmpty()) {
+			String name = app.getString(R.string.shared_string_history);
+			String groupId = ExportSettingsType.HISTORY_MARKERS.name();
+			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
+			markersGroup.setMarkers(markersHistory);
+			dataList.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
+		}
 		return dataList;
 	}
 
@@ -633,6 +652,8 @@ public class SettingsHelper {
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		List<OsmNotesPoint> osmNotesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
+		List<MapMarkersGroup> markersGroups = new ArrayList<>();
+		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
 
 		for (Object object : data) {
 			if (object instanceof QuickAction) {
@@ -657,6 +678,13 @@ public class SettingsHelper {
 				osmEditsPointList.add((OpenstreetmapPoint) object);
 			} else if (object instanceof FavoriteGroup) {
 				favoriteGroups.add((FavoriteGroup) object);
+			} else if (object instanceof MapMarkersGroup) {
+				MapMarkersGroup markersGroup = (MapMarkersGroup) object;
+				if (ExportSettingsType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
+					markersGroups.add((MapMarkersGroup) object);
+				} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
+					markersHistoryGroups.add((MapMarkersGroup) object);
+				}
 			}
 		}
 		if (!quickActions.isEmpty()) {
@@ -688,6 +716,20 @@ public class SettingsHelper {
 		if (!favoriteGroups.isEmpty()) {
 			settingsItems.add(new FavoritesSettingsItem(app, favoriteGroups));
 		}
+		if (!markersGroups.isEmpty()) {
+			List<MapMarker> mapMarkers = new ArrayList<>();
+			for (MapMarkersGroup group : markersGroups) {
+				mapMarkers.addAll(group.getMarkers());
+			}
+			settingsItems.add(new MarkersSettingsItem(app, mapMarkers));
+		}
+		if (!markersHistoryGroups.isEmpty()) {
+			List<MapMarker> mapMarkers = new ArrayList<>();
+			for (MapMarkersGroup group : markersHistoryGroups) {
+				mapMarkers.addAll(group.getMarkers());
+			}
+			settingsItems.add(new HistoryMarkersSettingsItem(app, mapMarkers));
+		}
 		return settingsItems;
 	}
 
@@ -709,6 +751,8 @@ public class SettingsHelper {
 		List<OsmNotesPoint> notesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
+		List<MapMarkersGroup> markersGroups = new ArrayList<>();
+		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
 
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
@@ -788,6 +832,14 @@ public class SettingsHelper {
 					FavoritesSettingsItem favoritesSettingsItem = (FavoritesSettingsItem) item;
 					favoriteGroups.addAll(favoritesSettingsItem.getItems());
 					break;
+				case ACTIVE_MARKERS:
+					MarkersSettingsItem markersSettingsItem = (MarkersSettingsItem) item;
+					markersGroups.add(markersSettingsItem.getMarkersGroup());
+					break;
+				case HISTORY_MARKERS:
+					HistoryMarkersSettingsItem historyMarkersSettingsItem = (HistoryMarkersSettingsItem) item;
+					markersHistoryGroups.add(historyMarkersSettingsItem.getMarkersGroup());
+					break;
 				default:
 					break;
 			}
@@ -840,6 +892,12 @@ public class SettingsHelper {
 		}
 		if (!voiceFilesList.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.VOICE, voiceFilesList);
+		}
+		if (!markersGroups.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.ACTIVE_MARKERS, markersGroups);
+		}
+		if (!markersGroups.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.HISTORY_MARKERS, markersHistoryGroups);
 		}
 		return settingsToOperate;
 	}

@@ -1,6 +1,5 @@
-package net.osmand.plus;
+package net.osmand.plus.mapmarkers;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.IntDef;
@@ -16,13 +15,16 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
-import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
@@ -56,6 +58,9 @@ public class MapMarkersHelper {
 	public static final int BY_DATE_ADDED_DESC = 3;
 
 	public static final int BY_DATE_ADDED_ASC = 4;
+
+	public static final String VISITED_DATE = "visited_date";
+	public static final String CREATION_DATE = "creation_date";
 
 	private static final Log LOG = PlatformUtil.getLog(MapMarkersHelper.class);
 
@@ -148,12 +153,12 @@ public class MapMarkersHelper {
 			if (group == null) {
 				if (noGroup == null) {
 					noGroup = new MapMarkersGroup();
-					noGroup.creationDate = Long.MAX_VALUE;
+					noGroup.setCreationDate(Long.MAX_VALUE);
 				}
 				noGroup.getMarkers().add(marker);
 			} else {
-				if (marker.creationDate < group.creationDate) {
-					group.creationDate = marker.creationDate;
+				if (marker.creationDate < group.getCreationDate()) {
+					group.setCreationDate(marker.creationDate);
 				}
 				group.getMarkers().add(marker);
 			}
@@ -190,16 +195,17 @@ public class MapMarkersHelper {
 	}
 
 	private void lookupAddress(final MapMarker mapMarker) {
-		if (mapMarker != null && mapMarker.pointDescription.isSearchingAddress(ctx)) {
+		if (mapMarker != null && mapMarker.getOriginalPointDescription().isSearchingAddress(ctx)) {
 			cancelPointAddressRequests(mapMarker.point);
 			AddressLookupRequest lookupRequest = new AddressLookupRequest(mapMarker.point,
 					new GeocodingLookupService.OnAddressLookupResult() {
 						@Override
 						public void geocodingDone(String address) {
+							PointDescription pointDescription = mapMarker.getOriginalPointDescription();
 							if (Algorithms.isEmpty(address)) {
-								mapMarker.pointDescription.setName(PointDescription.getAddressNotFoundStr(ctx));
+								pointDescription.setName(PointDescription.getAddressNotFoundStr(ctx));
 							} else {
-								mapMarker.pointDescription.setName(address);
+								pointDescription.setName(address);
 							}
 							markersDbHelper.updateMarker(mapMarker);
 							refreshMarker(mapMarker);
@@ -291,7 +297,6 @@ public class MapMarkersHelper {
 		});
 	}
 
-
 	public void runSynchronization(final @NonNull MapMarkersGroup group) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
@@ -301,19 +306,17 @@ public class MapMarkersHelper {
 		});
 	}
 
-	
 	public MapMarkersGroup getMarkersGroup(GPXFile gpx) {
-		if(gpx == null || gpx.path == null) {
+		if (gpx == null || gpx.path == null) {
 			return null;
 		}
 		return getMapMarkerGroupById(getMarkerGroupId(new File(gpx.path)), MapMarkersGroup.GPX_TYPE);
 	}
-	
+
 	public MapMarkersGroup getMarkersGroup(FavoriteGroup favGroup) {
 		return getMapMarkerGroupById(getMarkerGroupId(favGroup), MapMarkersGroup.FAVORITES_TYPE);
 	}
 
-	
 	public MapMarkersGroup addOrEnableGpxGroup(@NonNull File file) {
 		updateGpxShowAsMarkers(file);
 		MapMarkersGroup gr = getMapMarkerGroupById(getMarkerGroupId(file), MapMarkersGroup.GPX_TYPE);
@@ -324,7 +327,7 @@ public class MapMarkersHelper {
 		enableGroup(gr);
 		return gr;
 	}
-	
+
 	public MapMarkersGroup addOrEnableGroup(@NonNull GPXFile file) {
 		updateGpxShowAsMarkers(new File(file.path));
 		MapMarkersGroup gr = getMarkersGroup(file);
@@ -336,7 +339,6 @@ public class MapMarkersHelper {
 		return gr;
 	}
 
-	
 	public MapMarkersGroup addOrEnableGroup(@NonNull FavoriteGroup group) {
 		MapMarkersGroup gr = getMarkersGroup(group);
 		if (gr == null) {
@@ -346,10 +348,10 @@ public class MapMarkersHelper {
 		enableGroup(gr);
 		return gr;
 	}
-	
+
 	public void enableGroup(@NonNull MapMarkersGroup gr) {
 		// check if group doesn't exist internally
-		if(!mapMarkersGroups.contains(gr)) {
+		if (!mapMarkersGroups.contains(gr)) {
 			addGroupInternally(gr);
 		}
 		if (gr.isDisabled()) {
@@ -393,14 +395,14 @@ public class MapMarkersHelper {
 		String id = group.getId();
 		if (id != null) {
 			markersDbHelper.updateGroupDisabled(id, disabled);
-			group.disabled = disabled;
+			group.setDisabled(disabled);
 		}
 	}
 
 	public void updateGroupWptCategories(@NonNull MapMarkersGroup group, Set<String> wptCategories) {
 		String id = group.getId();
 		if (id != null) {
-			group.wptCategories = wptCategories;
+			group.setWptCategories(wptCategories);
 			if (wptCategories != null) {
 				markersDbHelper.updateGroupCategories(id, group.getWptCategoriesString());
 			}
@@ -412,7 +414,7 @@ public class MapMarkersHelper {
 			markersDbHelper.removeActiveMarkersFromGroup(group.getId());
 			removeFromMapMarkersList(group.getActiveMarkers());
 			if (updateGroup) {
-				group.markers = group.getHistoryMarkers();
+				group.setMarkers(group.getHistoryMarkers());
 				updateGroup(group);
 			}
 			reorderActiveMarkersIfNeeded();
@@ -435,12 +437,12 @@ public class MapMarkersHelper {
 		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
 		if (showHideHistoryButton != null) {
 			if (historyMarkersCount == 0) {
-				mapMarkersGroup.showHideHistoryButton = null;
+				mapMarkersGroup.setShowHideHistoryButton(null);
 			}
 		} else if (historyMarkersCount > 0) {
 			showHideHistoryButton = new ShowHideHistoryButton();
 			showHideHistoryButton.showHistory = false;
-			mapMarkersGroup.showHideHistoryButton = showHideHistoryButton;
+			mapMarkersGroup.setShowHideHistoryButton(showHideHistoryButton);
 		}
 	}
 
@@ -460,10 +462,8 @@ public class MapMarkersHelper {
 					sortMarkers(mapMarkersGroup.getMarkers(), false, BY_DATE_ADDED_DESC);
 				}
 			} else {
-				mapMarkersGroup = new MapMarkersGroup();
-				mapMarkersGroup.id = marker.groupKey;
-				mapMarkersGroup.name = marker.groupName;
-				mapMarkersGroup.creationDate = Long.MAX_VALUE;
+				mapMarkersGroup = new MapMarkersGroup(marker.groupKey, marker.groupName, MapMarkersGroup.ANY_TYPE);
+				mapMarkersGroup.setCreationDate(Long.MAX_VALUE);
 				mapMarkersGroup.getMarkers().add(marker);
 				addToGroupsList(mapMarkersGroup);
 				sortGroups();
@@ -473,18 +473,19 @@ public class MapMarkersHelper {
 	}
 
 	private void createHeadersInGroup(@NonNull MapMarkersGroup group) {
-		GroupHeader header = new GroupHeader();
-		CategoriesSubHeader categoriesSubHeader = new CategoriesSubHeader();
 		int type = group.getType();
+		int headerIconId = 0;
+		int subHeaderIconId = 0;
 		if (type != -1) {
-			header.iconRes = type == MapMarkersGroup.FAVORITES_TYPE
+			headerIconId = type == MapMarkersGroup.FAVORITES_TYPE
 					? R.drawable.ic_action_favorite : R.drawable.ic_action_polygom_dark;
-			categoriesSubHeader.iconRes = R.drawable.ic_action_filter;
+			subHeaderIconId = R.drawable.ic_action_filter;
 		}
-		header.group = group;
-		categoriesSubHeader.group = group;
-		group.header = header;
-		group.categoriesSubHeader = categoriesSubHeader;
+		GroupHeader header = new GroupHeader(headerIconId, group);
+		CategoriesSubHeader categoriesSubHeader = new CategoriesSubHeader(subHeaderIconId, group);
+
+		group.setHeader(header);
+		group.setCategoriesSubHeader(categoriesSubHeader);
 	}
 
 	private void removeMarkerFromGroup(MapMarker marker) {
@@ -502,8 +503,8 @@ public class MapMarkersHelper {
 			Collections.sort(mapMarkersGroups, new Comparator<MapMarkersGroup>() {
 				@Override
 				public int compare(MapMarkersGroup group1, MapMarkersGroup group2) {
-					long t1 = group1.creationDate;
-					long t2 = group2.creationDate;
+					long t1 = group1.getCreationDate();
+					long t2 = group2.getCreationDate();
 					return (t1 > t2) ? -1 : ((t1 == t2) ? 0 : 1);
 				}
 			});
@@ -515,7 +516,7 @@ public class MapMarkersHelper {
 		for (MapMarkersGroup group : mapMarkersGroups) {
 			if ((id == null && group.getId() == null)
 					|| (group.getId() != null && group.getId().equals(id))) {
-				if(type == MapMarkersGroup.ANY_TYPE || type == group.type) {
+				if (type == MapMarkersGroup.ANY_TYPE || type == group.getType()) {
 					return group;
 				}
 			}
@@ -528,7 +529,7 @@ public class MapMarkersHelper {
 				Algorithms.getFileNameWithoutExtension(fl.getName()),
 				MapMarkersGroup.GPX_TYPE);
 	}
-	
+
 	private MapMarkersGroup createFavMarkerGroup(FavoriteGroup favGroup) {
 		return new MapMarkersGroup(favGroup.getName(), favGroup.getName(), MapMarkersGroup.FAVORITES_TYPE);
 	}
@@ -536,11 +537,11 @@ public class MapMarkersHelper {
 	private String getMarkerGroupId(File gpx) {
 		return gpx.getAbsolutePath();
 	}
-	
+
 	private String getMarkerGroupId(FavoriteGroup group) {
 		return group.getName();
 	}
-	
+
 	@NonNull
 	public List<MapMarkersGroup> getGroupsForDisplayedGpx() {
 		List<MapMarkersGroup> res = new ArrayList<>();
@@ -549,28 +550,28 @@ public class MapMarkersHelper {
 			MapMarkersGroup search = getMarkersGroup(selected.getGpxFile());
 			if (search == null && selected.getGpxFile() != null && selected.getGpxFile().path != null) {
 				MapMarkersGroup group = createGPXMarkerGroup(new File(selected.getGpxFile().path));
-				group.disabled = true;
+				group.setDisabled(true);
 				createHeadersInGroup(group);
 				res.add(group);
 			}
 		}
 		return res;
 	}
-	
+
 	@NonNull
 	public List<MapMarkersGroup> getGroupsForSavedArticlesTravelBook() {
 		List<MapMarkersGroup> res = new ArrayList<>();
 		TravelDbHelper travelDbHelper = ctx.getTravelDbHelper();
-		if(travelDbHelper.getSelectedTravelBook() != null) {
+		if (travelDbHelper.getSelectedTravelBook() != null) {
 			List<TravelArticle> savedArticles = travelDbHelper.getLocalDataHelper().getSavedArticles();
 			for (TravelArticle art : savedArticles) {
 				String gpxName = travelDbHelper.getGPXName(art);
 				File path = ctx.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
-				LOG.debug("Article group " + path.getAbsolutePath()  + " " + path.exists()) ;
+				LOG.debug("Article group " + path.getAbsolutePath() + " " + path.exists());
 				MapMarkersGroup search = getMapMarkerGroupById(getMarkerGroupId(path), MapMarkersGroup.GPX_TYPE);
 				if (search == null) {
 					MapMarkersGroup group = createGPXMarkerGroup(path);
-					group.disabled = true;
+					group.setDisabled(true);
 					createHeadersInGroup(group);
 					res.add(group);
 				}
@@ -1004,7 +1005,8 @@ public class MapMarkersHelper {
 		});
 	}
 
-	public String generateGpx(String fileName) {
+	public String saveMarkersToFile(String fileName) {
+		GPXFile gpxFile = generateGpx();
 		String dirName = IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR;
 		File dir = ctx.getAppPath(dirName);
 		if (!dir.exists()) {
@@ -1012,18 +1014,54 @@ public class MapMarkersHelper {
 		}
 		String uniqueFileName = FileUtils.createUniqueFileName(ctx, fileName, dirName, IndexConstants.GPX_FILE_EXT);
 		File fout = new File(dir, uniqueFileName + IndexConstants.GPX_FILE_EXT);
+		GPXUtilities.writeGpxFile(fout, gpxFile);
 
-		GPXFile file = new GPXFile(Version.getFullVersion(ctx));
-		for (MapMarker marker : mapMarkers) {
+		return fout.getAbsolutePath();
+	}
+
+	public GPXFile generateGpx() {
+		return generateGpx(mapMarkers, false);
+	}
+
+	public GPXFile generateGpx(List<MapMarker> markers, boolean completeBackup) {
+		GPXFile gpxFile = new GPXFile(Version.getFullVersion(ctx));
+		for (MapMarker marker : markers) {
 			WptPt wpt = new WptPt();
 			wpt.lat = marker.getLatitude();
 			wpt.lon = marker.getLongitude();
-			wpt.setColor(ctx.getResources().getColor(MapMarker.getColorId(marker.colorIndex)));
 			wpt.name = marker.getOnlyName();
-			file.addPoint(wpt);
+			wpt.setColor(ContextCompat.getColor(ctx, MapMarker.getColorId(marker.colorIndex)));
+			if (completeBackup) {
+				if (marker.creationDate != 0) {
+					wpt.getExtensionsToWrite().put(CREATION_DATE, String.valueOf(marker.creationDate));
+				}
+				if (marker.visitedDate != 0) {
+					wpt.getExtensionsToWrite().put(VISITED_DATE, String.valueOf(marker.visitedDate));
+				}
+			}
+			gpxFile.addPoint(wpt);
 		}
-		GPXUtilities.writeGpxFile(fout, file);
-		return fout.getAbsolutePath();
+		return gpxFile;
+	}
+
+	public List<MapMarker> readMarkersFromGpx(GPXFile gpxFile, boolean history) {
+		List<MapMarker> mapMarkers = new ArrayList<>();
+		for (WptPt point : gpxFile.getPoints()) {
+			LatLon latLon = new LatLon(point.lat, point.lon);
+			int colorIndex = MapMarker.getColorIndex(ctx, point.getColor());
+			PointDescription name = new PointDescription(PointDescription.POINT_TYPE_LOCATION, point.name);
+
+			MapMarker marker = new MapMarker(latLon, name, colorIndex, false, 0);
+
+			String visitedDateStr = point.getExtensionsToRead().get(VISITED_DATE);
+			String creationDateStr = point.getExtensionsToRead().get(CREATION_DATE);
+			marker.visitedDate = Algorithms.parseLongSilently(visitedDateStr, 0);
+			marker.creationDate = Algorithms.parseLongSilently(creationDateStr, 0);
+			marker.nextKey = history ? MapMarkersDbHelper.HISTORY_NEXT_VALUE : MapMarkersDbHelper.TAIL_NEXT_VALUE;
+
+			mapMarkers.add(marker);
+		}
+		return mapMarkers;
 	}
 
 	// ---------------------------------------------------------------------------------------------
@@ -1155,7 +1193,7 @@ public class MapMarkersHelper {
 				if (favGroup == null) {
 					return;
 				}
-				group.visible = favGroup.isVisible();
+				group.setVisible(favGroup.isVisible());
 				if (!group.isVisible() || group.isDisabled()) {
 					removeGroupActiveMarkers(group, true);
 					return;
@@ -1175,17 +1213,17 @@ public class MapMarkersHelper {
 				String gpxPath = group.getId();
 				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(gpxPath);
 				GPXFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
-				group.visible = gpx != null || group.visibleUntilRestart;
+				group.setVisible(gpx != null || group.isVisibleUntilRestart());
 				if (gpx == null || group.isDisabled()) {
 					removeGroupActiveMarkers(group, true);
 					return;
 				}
 
-				boolean addAll = group.wptCategories == null || group.wptCategories.isEmpty();
+				boolean addAll = group.getWptCategories() == null || group.getWptCategories().isEmpty();
 				List<WptPt> gpxPoints = new ArrayList<>(gpx.getPoints());
 				for (WptPt pt : gpxPoints) {
-					if (addAll || group.wptCategories.contains(pt.category)
-							|| (pt.category == null && group.wptCategories.contains(""))) {
+					if (addAll || group.getWptCategories().contains(pt.category)
+							|| (pt.category == null && group.getWptCategories().contains(""))) {
 						addNewMarkerIfNeeded(group, groupMarkers, new LatLon(pt.lat, pt.lon), pt.name, null, pt);
 					}
 				}
@@ -1208,295 +1246,4 @@ public class MapMarkersHelper {
 			}
 		}
 	}
-
-	public static class MapMarkersGroup {
-
-		public static final int ANY_TYPE = -1;
-		public static final int FAVORITES_TYPE = 0;
-		public static final int GPX_TYPE = 1;
-
-		public static final String MARKERS_SYNC_GROUP_ID = "markers_sync_group_id";
-
-		private String id;
-		private String name;
-		private int type = -1;
-		private Set<String> wptCategories;
-		private long creationDate;
-		private boolean disabled;
-		private boolean visible = true;
-		private boolean wasShown = false;
-		private boolean visibleUntilRestart;
-		private List<MapMarker> markers = new ArrayList<>();
-		private TravelArticle wikivoyageArticle;
-		// TODO should be removed from this class:
-		private GroupHeader header;
-		private CategoriesSubHeader categoriesSubHeader;
-		private ShowHideHistoryButton showHideHistoryButton;
-
-		public MapMarkersGroup() {
-
-		}
-
-		public MapMarkersGroup(@NonNull String id, @NonNull String name, int type) {
-			this.id = id;
-			this.name = name;
-			this.type = type;
-		}
-
-		public String getId() {
-			return id;
-		}
-		
-		public String getGpxPath() {
-			return id;
-		}
-
-		public TravelArticle getWikivoyageArticle() {
-			return wikivoyageArticle;
-		}
-
-		public void setWikivoyageArticle(TravelArticle wikivoyageArticle) {
-			this.wikivoyageArticle = wikivoyageArticle;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public int getType() {
-			return type;
-		}
-
-		public void setWptCategories(Set<String> wptCategories) {
-			this.wptCategories = wptCategories;
-		}
-
-		public Set<String> getWptCategories() {
-			return wptCategories;
-		}
-
-		public boolean isDisabled() {
-			return disabled;
-		}
-
-		public void setDisabled(boolean disabled) {
-			this.disabled = disabled;
-		}
-
-		public boolean isVisible() {
-			return visible;
-		}
-
-		public boolean wasShown() {
-			return wasShown;
-		}
-
-		public void setWasShown(boolean wasShown) {
-			this.wasShown = wasShown;
-		}
-
-		public void setVisibleUntilRestart(boolean visibleUntilRestart) {
-			this.visibleUntilRestart = visibleUntilRestart;
-		}
-
-		public List<MapMarker> getMarkers() {
-			return markers;
-		}
-
-		public GroupHeader getGroupHeader() {
-			return header;
-		}
-
-		public CategoriesSubHeader getCategoriesSubHeader() {
-			return categoriesSubHeader;
-		}
-
-		public ShowHideHistoryButton getShowHideHistoryButton() {
-			return showHideHistoryButton;
-		}
-
-		@Nullable
-		public String getWptCategoriesString() {
-			if (wptCategories != null) {
-				return Algorithms.encodeStringSet(wptCategories);
-			}
-			return null;
-		}
-
-		public List<MapMarker> getActiveMarkers() {
-			List<MapMarker> markers = new ArrayList<>(this.markers);
-			List<MapMarker> activeMarkers = new ArrayList<>(markers.size());
-			for (MapMarker marker : markers) {
-				if (!marker.history) {
-					activeMarkers.add(marker);
-				}
-			}
-			return activeMarkers;
-		}
-
-		public List<MapMarker> getHistoryMarkers() {
-			List<MapMarker> historyMarkers = new ArrayList<>();
-			for (MapMarker marker : markers) {
-				if (marker.history) {
-					historyMarkers.add(marker);
-				}
-			}
-			return historyMarkers;
-		}
-	}
-
-	public static class ShowHideHistoryButton {
-		public boolean showHistory;
-	}
-
-	public static class GroupHeader {
-		private int iconRes;
-		private MapMarkersGroup group;
-
-		public int getIconRes() {
-			return iconRes;
-		}
-
-		public MapMarkersGroup getGroup() {
-			return group;
-		}
-	}
-
-	public static class CategoriesSubHeader {
-		private int iconRes;
-		private MapMarkersGroup group;
-
-		public int getIconRes() {
-			return iconRes;
-		}
-
-		public MapMarkersGroup getGroup() {
-			return group;
-		}
-	}
-
-	public static class MapMarker implements LocationPoint {
-		private static int[] colors;
-
-		public String id;
-		public LatLon point;
-		private PointDescription pointDescription;
-		public int colorIndex;
-		public int index;
-		public boolean history;
-		public boolean selected;
-		public int dist;
-		public long creationDate;
-		public long visitedDate;
-		public String nextKey;
-		public String groupKey;
-		public String groupName;
-		public WptPt wptPt;
-		public FavouritePoint favouritePoint;
-		public String mapObjectName;
-
-		public MapMarker(LatLon point, PointDescription name, int colorIndex, boolean selected, int index) {
-			this.point = point;
-			this.pointDescription = name;
-			this.colorIndex = colorIndex;
-			this.selected = selected;
-			this.index = index;
-		}
-
-		public int getType() {
-			return favouritePoint == null ? 
-					(wptPt == null ? MapMarkersGroup.ANY_TYPE : MapMarkersGroup.GPX_TYPE) : 
-						MapMarkersGroup.FAVORITES_TYPE;
-		}
-
-		public PointDescription getPointDescription(Context ctx) {
-			return new PointDescription(POINT_TYPE_MAP_MARKER, ctx.getString(R.string.map_marker), getOnlyName());
-		}
-
-		public String getName(Context ctx) {
-			String name;
-			PointDescription pd = getPointDescription(ctx);
-			if (Algorithms.isEmpty(pd.getName())) {
-				name = pd.getTypeName();
-			} else {
-				name = pd.getName();
-			}
-			return name;
-		}
-
-		public PointDescription getOriginalPointDescription() {
-			return pointDescription;
-		}
-
-		public void setOriginalPointDescription(PointDescription pointDescription) {
-			this.pointDescription = pointDescription;
-		}
-
-		public String getOnlyName() {
-			return pointDescription == null ? "" : pointDescription.getName();
-		}
-
-		public double getLatitude() {
-			return point.getLatitude();
-		}
-
-		public double getLongitude() {
-			return point.getLongitude();
-		}
-
-		@Override
-		public int getColor() {
-			return 0;
-		}
-
-		@Override
-		public boolean isVisible() {
-			return false;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			MapMarker mapMarker = (MapMarker) o;
-
-			return colorIndex == mapMarker.colorIndex && point.equals(mapMarker.point);
-		}
-
-		@Override
-		public int hashCode() {
-			int result = point.hashCode();
-			result = 31 * result + colorIndex;
-			return result;
-		}
-
-		private static final int[] colorsIds = new int[]{
-				R.color.marker_blue,
-				R.color.marker_green,
-				R.color.marker_orange,
-				R.color.marker_red,
-				R.color.marker_yellow,
-				R.color.marker_teal,
-				R.color.marker_purple
-		};
-
-		public static int[] getColors(Context context) {
-			if (colors != null) {
-				return colors;
-			}
-			colors = new int[colorsIds.length];
-			for (int i = 0; i < colorsIds.length; i++) {
-				colors[i] = ContextCompat.getColor(context, colorsIds[i]);
-			}
-			return colors;
-		}
-
-		public static int getColorId(int colorIndex) {
-			return (colorIndex >= 0 && colorIndex < colorsIds.length) ? colorsIds[colorIndex] : colorsIds[0];
-		}
-	}
-
-
-
 }

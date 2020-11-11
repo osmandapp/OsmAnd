@@ -3654,4 +3654,78 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="keep_screen_on">Nechat obrazovku zapnutou</string>
     <string name="keep_screen_off">Nechat obrazovku vypnutou</string>
     <string name="route_between_points_warning_desc">Dále, pro použití této možnosti připojte vaši stopu k nejbližší povolené cestě s některým z vašich navigačních profilů.</string>
+    <string name="use_system_screen_timeout">Použít systémový časový limit obrazovky</string>
+    <string name="reset_to_default_category_button_promo">\"Obnovit do základního nastavení\" nastaví výchozí pořadí.</string>
+    <string name="copy_coordinates">Kopírovat souřadnice</string>
+    <string name="release_3_6">• Profily: nyní můžete změnit pořadí, nastavit ikonu pro mapu, změnit všechna nastavení základních profilů a resetovat je zpět do výchozího stavu
+\n
+\n • V navigaci přibylo číslo výjezdu
+\n
+\n • Přepracovaná nastavení modulů
+\n
+\n • Přepracovaná obrazovka nastavení pro rychlý přístup ke všem profilům
+\n
+\n • Přidaná možnost kopírovat nastavení z jiného profilu
+\n
+\n • Přidaná možnost skrýt nebo změnit pořadí kategorií bodů zájmu při hledání
+\n
+\n • Zpřesněné umístění ikon bodů zájmu na mapě
+\n
+\n • Přidané údaje o východu a západu slunce v nastavení mapy
+\n
+\n • Přidané ikony Domov a Práce na mapě
+\n
+\n • Přidaná podpora pro víceřádkové popisy v nastavení
+\n
+\n • Přidaná správná transliterace v mapě Japonska
+\n
+\n • Přidaná mapa Antarktidy
+\n
+\n</string>
+    <string name="clear_recorded_data">Vymazat zaznamenaná data</string>
+    <string name="routing_profile_direct_to">Přímo k bodu</string>
+    <string name="ui_customization_description">Nastavte počet položek v \"Úvodním panelu\", \"Nastavení mapy\" a \"Kontextovém menu\".
+\n
+\nVypněte nepoužívané moduly, abyste skryli jejich ovládací prvky. %1$s.</string>
+    <string name="ui_customization_short_descr">Položky v úvodním panelu a kontextovém menu</string>
+    <string name="ui_customization">Nastavení uživatelského rozhraní</string>
+    <string name="shared_string_drawer">Úvodní panel</string>
+    <string name="quick_action_transport_hide">Skrýt veřejnou dopravu</string>
+    <string name="quick_action_transport_show">Zobrazit veřejnou dopravu</string>
+    <string name="quick_action_show_hide_transport">Zobrazit/skrýt veřejnou dopravu</string>
+    <string name="quick_action_transport_descr">Tlačítko pro zobrazení nebo skrytí veřejné dopravy na mapě.</string>
+    <string name="create_edit_poi">Vytvořit / upravit bod zájmu</string>
+    <string name="parking_positions">Parkovací místa</string>
+    <string name="add_edit_favorite">Přidat / upravit oblíbený bod</string>
+    <string name="reset_deafult_order">Obnovit výchozí pořadí položek</string>
+    <string name="back_to_editing">Zpět k úpravám</string>
+    <string name="quick_action_switch_profile_descr">Tlačítko akce přepne mezi zvolenými profily.</string>
+    <string name="shared_string_add_profile">Přidat profil</string>
+    <string name="change_application_profile">Změnit profil aplikace</string>
+    <string name="profiles_for_action_not_found">Nebyly nalezeny žádné vhodné profily.</string>
+    <string name="index_item_world_basemap_detailed">Přehledová mapa světa (detailní)</string>
+    <string name="unsupported_type_error">Nepodporovaný typ</string>
+    <string name="width_limit_description">Zadejte šířku svého vozidla, na trase mohou být omezení pro široká vozidla.</string>
+    <string name="height_limit_description">Zadejte výšku svého vozidla, na trase mohou být omezení pro vysoká vozidla.</string>
+    <string name="weight_limit_description">Zadejte hmotnost svého vozidla, na trase mohou být omezení pro těžká vozidla.</string>
+    <string name="lenght_limit_description">Zadejte délku svého vozidla, na trase mohou být omezení pro dlouhá vozidla.</string>
+    <string name="gpx_parse_error">GPX nemá správný tvar pro OsmAnd, kontaktujte prosím podporu pro další přezkoumání.</string>
+    <string name="shared_string_always">Vždy</string>
+    <string name="screen_control">Ovládání obrazovky</string>
+    <string name="system_screen_timeout_descr">Vypne obrazovku po uplynutí systémového časového limitu.</string>
+    <string name="system_screen_timeout">Použít systémový časový limit obrazovky</string>
+    <string name="turn_screen_on_descr">Zvolte možnosti probuzení obrazovky (při zamykání zařízení se ujistěte, že je OsmAnd na popředí):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Každý navigační pokyn zapne obrazovku.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigační pokyny</string>
+    <string name="turn_screen_on_power_button_disabled">Vypnuto. Vyžaduje \"Nechat obrazovku zapnutou\" pod \"Časový limit obrazovky po probuzení\".</string>
+    <string name="turn_screen_on_power_button_descr">Stisknutím tlačítka napájení zapnete obrazovku s aplikací OsmAnd na zamčené obrazovce.</string>
+    <string name="turn_screen_on_power_button">Tlačítko napájení</string>
+    <string name="turn_screen_on_proximity_sensor">Senzor přiblížení</string>
+    <string name="turn_screen_on_wake_time_descr">Zvolte časový limit vypnutí obrazovky po probuzení (\"%1$s\" znamená bez časového limitu.)</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Musíte přidat aspoň dva body.</string>
+    <string name="manage_subscription">Spravovat předplatné</string>
+    <string name="subscription_payment_issue_title">S vaším předplatným je problém. Klikněte na tlačítko pro přechod do nastavení předplatného v Google Play a opravte způsob platby.</string>
+    <string name="subscription_expired_title">Předplatné OsmAnd Live skončilo</string>
+    <string name="subscription_paused_title">Předplatné OsmAnd Live je pozastaveno</string>
+    <string name="subscription_on_hold_title">Předplatné OsmAnd Live je zablokované</string>
 </resources>

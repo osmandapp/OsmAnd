@@ -3,7 +3,6 @@ package net.osmand.plus.mapmarkers;
 import android.os.Bundle;
 import android.view.View;
 
-import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;

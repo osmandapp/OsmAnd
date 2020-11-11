@@ -6,18 +6,14 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -34,8 +30,6 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.EnumAdapter;
-import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -45,6 +39,7 @@ import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+import net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -437,24 +432,34 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-	public enum UploadVisibility implements IEnumWithResource {
-		Public(R.string.gpxup_public),
-		Identifiable(R.string.gpxup_identifiable),
-		Trackable(R.string.gpxup_trackable),
-		Private(R.string.gpxup_private);
-		private final int resourceId;
+	public enum UploadVisibility {
+		PUBLIC(R.string.gpxup_public, R.string.gpx_upload_public_visibility_descr),
+		IDENTIFIABLE(R.string.gpxup_identifiable, R.string.gpx_upload_identifiable_visibility_descr),
+		TRACKABLE(R.string.gpxup_trackable, R.string.gpx_upload_trackable_visibility_descr),
+		PRIVATE(R.string.gpxup_private, R.string.gpx_upload_private_visibility_descr);
 
-		UploadVisibility(int resourceId) {
-			this.resourceId = resourceId;
+		@StringRes
+		private final int titleId;
+		@StringRes
+		private final int descriptionId;
+
+		UploadVisibility(int titleId, int descriptionId) {
+			this.titleId = titleId;
+			this.descriptionId = descriptionId;
 		}
 
 		public String asURLparam() {
 			return name().toLowerCase();
 		}
 
-		@Override
-		public int stringResource() {
-			return resourceId;
+		@StringRes
+		public int getTitleId() {
+			return titleId;
+		}
+
+		@StringRes
+		public int getDescriptionId() {
+			return descriptionId;
 		}
 	}
 
@@ -465,35 +470,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if ((Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)) && Algorithms.isEmpty(authToken)) {
 			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment.getTargetFragment());
 			return false;
+		} else {
+			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment.getTargetFragment(), info);
+			return true;
 		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		final View view = inflater.inflate(R.layout.send_gpx_osm, null);
-		final EditText descr = (EditText) view.findViewById(R.id.memory_size);
-		if (info.length > 0 && info[0].getFileName() != null) {
-			int dt = info[0].getFileName().indexOf('.');
-			descr.setText(info[0].getFileName().substring(0, dt));
-		}
-		final EditText tags = (EditText) view.findViewById(R.id.TagsText);
-		final Spinner visibility = ((Spinner) view.findViewById(R.id.Visibility));
-		EnumAdapter<UploadVisibility> adapter = new EnumAdapter<>(activity, android.R.layout.simple_spinner_item, UploadVisibility.values());
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		visibility.setAdapter(adapter);
-		visibility.setSelection(0);
-
-		builder.setView(view);
-		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				new UploadGPXFilesTask(activity, descr.getText().toString(), tags.getText().toString(),
-						(UploadVisibility) visibility.getItemAtPosition(visibility.getSelectedItemPosition())
-				).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
-			}
-		});
-		builder.show();
-		return true;
 	}
 
 	@Override

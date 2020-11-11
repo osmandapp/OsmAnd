@@ -303,7 +303,7 @@
     <string name="global_app_settings">הגדרות יישומים כלליות</string>
     <string name="user_name">שם המשתמש שלך ב־OSM</string>
     <string name="open_street_map_login_descr">נדרש לטובת שליחת נתונים אל openstreetmap.org.</string>
-    <string name="user_password">הססמה שלך ב־OSM</string>
+    <string name="user_password">ססמה</string>
     <string name="osmand_service">מצב רקע</string>
     <string name="osmand_service_descr">OsmAnd פועל ברקע בזמן שהמסך כבוי.</string>
     <string name="download_files_not_enough_space">אין די מקום כדי להוריד %1$s מ״ב (פנויים: %2$s).</string>
@@ -3951,4 +3951,19 @@
     <string name="mgrs_format_descr">ב־OsmAnd נעשה שימוש ב־MGRS, שדומה לתצורת UTM NATO.</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">עליך להוסיף שתי נקודות לפחות.</string>
+    <string name="login_open_street_map">כניסה ל־OpenStreetMap</string>
+    <string name="login_open_street_map_org">כניסה ל־OpenStreetMap.org</string>
+    <string name="sing_in_with_open_street_map">כניסה עם OpenStreetMap</string>
+    <string name="use_login_password">להשתמש בשם כניסה וססמה</string>
+    <string name="login_account">חשבון</string>
+    <string name="user_login">כניסה</string>
+    <string name="manage_subscription">ניהול מינוי</string>
+    <string name="subscription_expired_title">תוקף המינוי ל־OsmAnd Live פג</string>
+    <string name="subscription_paused_title">המינוי ל־OsmAnd Live הושהה</string>
+    <string name="open_street_map_login_mode">עליך להיכנס כדי להעלות דברים חדשים או כאלו ששינית.
+\n
+\nניתן להיכנס בשיטת OAuth המאובטחת או להשתמש בשם הכניסה והססמה שלך.</string>
+    <string name="subscription_payment_issue_title">יש בעיה עם המינוי שלך. יש ללחוץ על הכפתור כדי לגשת להגדרות המינוי של Google Play ולתקן את שיטת התשלום שלך.</string>
+    <string name="subscription_on_hold_title">המינוי ל־OsmAnd Live מוחזק</string>
 </resources>
