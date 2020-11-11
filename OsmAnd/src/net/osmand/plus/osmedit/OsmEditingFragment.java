@@ -40,7 +40,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	private static final String OSM_LOGOUT = "osm_logout";
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
-	private static final String OSM_LOGIN_DATA = "osm_login_data";
+	public static final String OSM_LOGIN_DATA = "osm_login_data";
 	private static final String OSM_EDITING_INFO = "osm_editing_info";
 
 	private OsmOAuthAuthorizationAdapter authorizationAdapter;

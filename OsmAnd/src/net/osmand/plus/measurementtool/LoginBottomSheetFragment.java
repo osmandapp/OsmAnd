@@ -18,9 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 
 import org.apache.commons.logging.Log;
@@ -29,11 +27,12 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
+
 public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = LoginBottomSheetFragment.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(LoginBottomSheetFragment.class);
-	private static final String OSM_LOGIN_DATA = "osm_login_data";
 
 	private OsmOAuthAuthorizationAdapter authorizationAdapter;
 

@@ -43,8 +43,6 @@ import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
-import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -623,30 +621,21 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		return info;
 	}
 
-
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
 	}
-
 
 	private void uploadItems(final OsmPoint[] items) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			OsmandApplication app = getMyApplication();
 			OsmandSettings settings = app.getSettings();
-			boolean isPoi = getOsmEditsByGroup(Group.POI) instanceof OpenstreetmapPoint;
 			OsmOAuthAuthorizationAdapter authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
 			if (authorizationAdapter.isValidToken()
 					|| !Algorithms.isEmpty(settings.USER_NAME.get())
 					&& !Algorithms.isEmpty(settings.USER_PASSWORD.get())) {
-				if (isPoi) {
-					SendOsmNoteBottomSheetFragment sendOsmNoteBottomSheetFragment =
-							SendOsmNoteBottomSheetFragment.showInstance(new OsmPoint[]{}, SendOsmNoteBottomSheetFragment.PoiUploaderType.SIMPLE);
-					sendOsmNoteBottomSheetFragment.show(activity.getSupportFragmentManager(), SendPoiDialogFragment.TAG);
-				} else {
-					SendOsmNoteBottomSheetFragment sendOsmNoteBottomSheetFragment =
-							SendOsmNoteBottomSheetFragment.showInstance(new OsmPoint[]{}, SendOsmNoteBottomSheetFragment.PoiUploaderType.SIMPLE);
-					sendOsmNoteBottomSheetFragment.show(activity.getSupportFragmentManager(), SendPoiDialogFragment.TAG);}
+				SendPoiDialogFragment.createInstance(items, PoiUploaderType.FRAGMENT)
+						.show(getChildFragmentManager(), SendPoiDialogFragment.TAG);
 			} else {
 				LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);
 			}

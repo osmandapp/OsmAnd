@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="osm_login_descr">You can log in using the safe OAuth method or use your login and password.</string>
     <string name="osm_edit_comment_note">Comment OSM Note</string>
     <string name="osm_edit_close_note">Close OSM Note</string>
     <string name="close_changset">Closed changset</string>

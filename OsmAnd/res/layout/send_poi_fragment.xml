@@ -41,18 +41,19 @@
                 android:imeOptions="actionDone" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/close_change_set_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/content_padding"
             android:minHeight="@dimen/context_menu_buttons_bottom_height"
             android:text="@string/close_changset"
-            android:paddingLeft="50dp"
+            android:paddingLeft="@dimen/content_padding_small"
+            android:paddingRight="@dimen/content_padding_small"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
             osmand:typeface="@string/font_roboto_regular"
-            android:letterSpacing="@dimen/text_button_letter_spacing"/>
+            android:letterSpacing="@dimen/text_button_letter_spacing" />
 
     </LinearLayout>
 
@@ -62,7 +63,7 @@
         android:background="?attr/dashboard_divider" />
 
     <LinearLayout
-        android:id="@+id/account_block"
+        android:id="@+id/account_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/context_menu_buttons_bottom_height"

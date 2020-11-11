@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentManager;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -21,9 +23,12 @@ import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
-    public static final String TAG = "SendPoiBottomSheetFragment";
+    public static final String TAG = SendPoiBottomSheetFragment.class.getSimpleName();
+    private static final Log LOG = PlatformUtil.getLog(SendPoiBottomSheetFragment.class);
     public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
     public static final String POI_UPLOADER_TYPE = "poi_uploader_type";
     private OsmPoint[] poi;
@@ -45,26 +50,31 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
     @Override
     public void createMenuItems(Bundle savedInstanceState) {
-        final boolean isNightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-        final View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.send_poi_fragment, null);
+        OsmandApplication app = getMyApplication();
+        final boolean isNightMode = app.getDaynightHelper().isNightModeForMapControls();
+        final View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
+                R.layout.send_poi_fragment, null);
         final SwitchCompat closeChangset = sendOsmPoiView.findViewById(R.id.close_change_set_checkbox);
         final TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
-        settings = getMyApplication().getSettings();
+        settings = app.getSettings();
         String userNameOAuth = settings.USER_DISPLAY_NAME.get();
         String userNameOpenID = settings.USER_NAME.get();
         String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
         accountName.setText(userName);
         closeChangset.setBackgroundResource(isNightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
-        closeChangset.setPadding(30, 0, 0, 0);
+        final int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+        closeChangset.setPadding(paddingSmall, 0, paddingSmall, 0);
         closeChangset.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isNightMode) {
-                    closeChangset.setBackgroundResource(isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
+                    closeChangset.setBackgroundResource(
+                            isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
                 } else {
-                    closeChangset.setBackgroundResource(isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
+                    closeChangset.setBackgroundResource(
+                            isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
                 }
-                closeChangset.setPadding(30, 0, 0, 0);
+                closeChangset.setPadding(paddingSmall, 0, paddingSmall, 0);
             }
         });
         final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
@@ -73,14 +83,21 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
         items.add(titleItem);
     }
 
-    public static SendPoiBottomSheetFragment showInstance(@NonNull OsmPoint[] points, @NonNull SendPoiBottomSheetFragment.PoiUploaderType uploaderType) {
-            SendPoiBottomSheetFragment fragment = new SendPoiBottomSheetFragment();
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(OPENSTREETMAP_POINT, points);
-            bundle.putString(POI_UPLOADER_TYPE, uploaderType.name());
-            fragment.setArguments(bundle);
-            return fragment;
+    public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points,
+                                    @NonNull SendPoiBottomSheetFragment.PoiUploaderType uploaderType) {
+        try {
+            if (!fm.isStateSaved()) {
+                SendPoiBottomSheetFragment fragment = new SendPoiBottomSheetFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(OPENSTREETMAP_POINT, points);
+                bundle.putString(POI_UPLOADER_TYPE, uploaderType.name());
+                fragment.setArguments(bundle);
+                fragment.show(fm, TAG);
+            }
+        } catch (RuntimeException e) {
+            LOG.error("showInstance", e);
         }
+    }
 
     @Override
     protected UiUtilities.DialogButtonType getRightBottomButtonType() {
