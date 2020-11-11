@@ -17,5 +17,6 @@ public enum ExportSettingsType {
 	FAVORITES,
 	TTS_VOICE,
 	VOICE,
-	MARKERS
+	ACTIVE_MARKERS,
+	HISTORY_MARKERS
 }

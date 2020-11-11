@@ -16,5 +16,6 @@ public enum SettingsItemType {
 	OSM_NOTES,
 	OSM_EDITS,
 	FAVOURITES,
-	MARKERS
+	ACTIVE_MARKERS,
+	HISTORY_MARKERS
 }

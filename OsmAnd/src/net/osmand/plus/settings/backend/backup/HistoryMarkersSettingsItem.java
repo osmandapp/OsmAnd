@@ -26,19 +26,19 @@ import java.util.List;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
-public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
+public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 
 	private MapMarkersHelper markersHelper;
 
-	public MarkersSettingsItem(@NonNull OsmandApplication app, @NonNull List<MapMarker> items) {
+	public HistoryMarkersSettingsItem(@NonNull OsmandApplication app, @NonNull List<MapMarker> items) {
 		super(app, null, items);
 	}
 
-	public MarkersSettingsItem(@NonNull OsmandApplication app, @Nullable MarkersSettingsItem baseItem, @NonNull List<MapMarker> items) {
+	public HistoryMarkersSettingsItem(@NonNull OsmandApplication app, @Nullable HistoryMarkersSettingsItem baseItem, @NonNull List<MapMarker> items) {
 		super(app, baseItem, items);
 	}
 
-	MarkersSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	HistoryMarkersSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -46,25 +46,25 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 	protected void init() {
 		super.init();
 		markersHelper = app.getMapMarkersHelper();
-		existingItems = new ArrayList<>(markersHelper.getMapMarkers());
+		existingItems = new ArrayList<>(markersHelper.getMapMarkersHistory());
 	}
 
 	@NonNull
 	@Override
 	public SettingsItemType getType() {
-		return SettingsItemType.ACTIVE_MARKERS;
+		return SettingsItemType.HISTORY_MARKERS;
 	}
 
 	@NonNull
 	@Override
 	public String getName() {
-		return "markers";
+		return "history_markers";
 	}
 
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return ctx.getString(R.string.map_markers);
+		return ctx.getString(R.string.markers_history);
 	}
 
 	@NonNull
@@ -87,7 +87,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 			}
 
 			for (MapMarker marker : appliedItems) {
-				markersHelper.addMarker(marker);
+				markersHelper.moveMapMarkerToHistory(marker);
 			}
 		}
 	}
@@ -118,15 +118,15 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 			PointDescription description = new PointDescription(PointDescription.POINT_TYPE_LOCATION, name);
 			MapMarker renamedMarker = new MapMarker(item.point, description, item.getColor(), item.selected, item.index);
 			if (!isDuplicate(renamedMarker)) {
-				renamedMarker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
+				renamedMarker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
 				return renamedMarker;
 			}
 		}
 	}
 
 	public MapMarkersGroup getMarkersGroup() {
-		String name = app.getString(R.string.map_markers);
-		String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
+		String name = app.getString(R.string.markers_history);
+		String groupId = ExportSettingsType.HISTORY_MARKERS.name();
 		MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
 		markersGroup.setMarkers(items);
 		return markersGroup;
@@ -134,8 +134,8 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 
 	@Nullable
 	@Override
-	SettingsItemReader<MarkersSettingsItem> getReader() {
-		return new SettingsItemReader<MarkersSettingsItem>(this) {
+	SettingsItemReader<HistoryMarkersSettingsItem> getReader() {
+		return new SettingsItemReader<HistoryMarkersSettingsItem>(this) {
 
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IllegalArgumentException {
@@ -144,7 +144,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
 				} else {
-					List<MapMarker> mapMarkers = markersHelper.readMarkersFromGpx(gpxFile, false);
+					List<MapMarker> mapMarkers = markersHelper.readMarkersFromGpx(gpxFile, true);
 					items.addAll(mapMarkers);
 				}
 			}

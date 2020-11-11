@@ -2,9 +2,10 @@ package net.osmand.plus.mapmarkers;
 
 import android.content.Context;
 
+import androidx.annotation.ColorInt;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -15,6 +16,7 @@ import net.osmand.util.Algorithms;
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
 public class MapMarker implements LocationPoint {
+
 	private static int[] colors;
 
 	public String id;
@@ -30,7 +32,7 @@ public class MapMarker implements LocationPoint {
 	public String nextKey;
 	public String groupKey;
 	public String groupName;
-	public GPXUtilities.WptPt wptPt;
+	public WptPt wptPt;
 	public FavouritePoint favouritePoint;
 	public String mapObjectName;
 
@@ -45,7 +47,7 @@ public class MapMarker implements LocationPoint {
 	public int getType() {
 		return favouritePoint == null ?
 				(wptPt == null ? MapMarkersGroup.ANY_TYPE : MapMarkersGroup.GPX_TYPE) :
-					MapMarkersGroup.FAVORITES_TYPE;
+				MapMarkersGroup.FAVORITES_TYPE;
 	}
 
 	public PointDescription getPointDescription(Context ctx) {
@@ -110,7 +112,7 @@ public class MapMarker implements LocationPoint {
 		return result;
 	}
 
-	private static final int[] colorsIds = new int[]{
+	private static final int[] colorsIds = new int[] {
 			R.color.marker_blue,
 			R.color.marker_green,
 			R.color.marker_orange,
@@ -133,5 +135,15 @@ public class MapMarker implements LocationPoint {
 
 	public static int getColorId(int colorIndex) {
 		return (colorIndex >= 0 && colorIndex < colorsIds.length) ? colorsIds[colorIndex] : colorsIds[0];
+	}
+
+	public static int getColorIndex(Context context, @ColorInt int color) {
+		int[] colors = getColors(context);
+		for (int i = 0; i < colors.length; i++) {
+			if (color == colors[i]) {
+				return i;
+			}
+		}
+		return 0;
 	}
 }

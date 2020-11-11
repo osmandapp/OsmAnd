@@ -14,18 +14,14 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
@@ -40,7 +36,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.List;
 
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.*;
+import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 
 public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -162,11 +158,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_favorite, activeColorRes));
 			} else if (currentItem instanceof MapMarkersGroup) {
 				MapMarkersGroup markersGroup = (MapMarkersGroup) currentItem;
-				String groupName = markersGroup.getName();
-				if (Algorithms.isEmpty(groupName)) {
-					groupName = app.getString(R.string.map_markers);
-				}
-				itemHolder.title.setText(groupName);
+				itemHolder.title.setText(markersGroup.getName());
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_flag, activeColorRes));
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);

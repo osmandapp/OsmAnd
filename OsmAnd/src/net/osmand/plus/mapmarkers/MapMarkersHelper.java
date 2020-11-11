@@ -59,11 +59,8 @@ public class MapMarkersHelper {
 
 	public static final int BY_DATE_ADDED_ASC = 4;
 
-	public static final String GROUP_NAME = "group_name";
-	public static final String GROUP_TYPE = "group_type";
-	public static final String MARKER_HISTORY = "marker_history";
-	public static final String CREATION_DATE = "creation_date";
 	public static final String VISITED_DATE = "visited_date";
+	public static final String CREATION_DATE = "creation_date";
 
 	private static final Log LOG = PlatformUtil.getLog(MapMarkersHelper.class);
 
@@ -1035,16 +1032,36 @@ public class MapMarkersHelper {
 			wpt.name = marker.getOnlyName();
 			wpt.setColor(ContextCompat.getColor(ctx, MapMarker.getColorId(marker.colorIndex)));
 			if (completeBackup) {
-				wpt.category = marker.groupKey;
-				wpt.getExtensionsToWrite().put(GROUP_NAME, marker.groupName);
-				wpt.getExtensionsToWrite().put(GROUP_TYPE, String.valueOf(marker.getType()));
-				wpt.getExtensionsToWrite().put(MARKER_HISTORY, String.valueOf(marker.history));
-				wpt.getExtensionsToWrite().put(CREATION_DATE, String.valueOf(marker.creationDate));
-				wpt.getExtensionsToWrite().put(VISITED_DATE, String.valueOf(marker.visitedDate));
+				if (marker.creationDate != 0) {
+					wpt.getExtensionsToWrite().put(CREATION_DATE, String.valueOf(marker.creationDate));
+				}
+				if (marker.visitedDate != 0) {
+					wpt.getExtensionsToWrite().put(VISITED_DATE, String.valueOf(marker.visitedDate));
+				}
 			}
 			gpxFile.addPoint(wpt);
 		}
 		return gpxFile;
+	}
+
+	public List<MapMarker> readMarkersFromGpx(GPXFile gpxFile, boolean history) {
+		List<MapMarker> mapMarkers = new ArrayList<>();
+		for (WptPt point : gpxFile.getPoints()) {
+			LatLon latLon = new LatLon(point.lat, point.lon);
+			int colorIndex = MapMarker.getColorIndex(ctx, point.getColor());
+			PointDescription name = new PointDescription(PointDescription.POINT_TYPE_LOCATION, point.name);
+
+			MapMarker marker = new MapMarker(latLon, name, colorIndex, false, 0);
+
+			String visitedDateStr = point.getExtensionsToRead().get(VISITED_DATE);
+			String creationDateStr = point.getExtensionsToRead().get(CREATION_DATE);
+			marker.visitedDate = Algorithms.parseLongSilently(visitedDateStr, 0);
+			marker.creationDate = Algorithms.parseLongSilently(creationDateStr, 0);
+			marker.nextKey = history ? MapMarkersDbHelper.HISTORY_NEXT_VALUE : MapMarkersDbHelper.TAIL_NEXT_VALUE;
+
+			mapMarkers.add(marker);
+		}
+		return mapMarkers;
 	}
 
 	// ---------------------------------------------------------------------------------------------
