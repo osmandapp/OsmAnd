@@ -3955,7 +3955,7 @@
     <string name="subscription_expired_title">Subskrypcja OsmAnd Live wygasła</string>
     <string name="subscription_paused_title">Subskrypcja OsmAnd Live została wstrzymana</string>
     <string name="snowmobile_render_descr">Do jazdy skuterem śnieżnym z wyznaczonymi drogami i torami.</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Należy dodać co najmniej dwa punkty.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Musisz dodać co najmniej dwa punkty</string>
     <string name="subscription_payment_issue_title">Wystąpił problem z Twoją subskrypcją. Kliknij przycisk, aby przejść do ustawień subskrypcji Google Play i naprawić metodę płatności.</string>
     <string name="subscription_on_hold_title">Subskrypcja OsmAnd Live jest wstrzymana</string>
     <string name="user_login">Login</string>
