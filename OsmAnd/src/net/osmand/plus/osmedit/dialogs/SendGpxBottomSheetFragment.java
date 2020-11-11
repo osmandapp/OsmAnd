@@ -2,7 +2,9 @@ package net.osmand.plus.osmedit.dialogs;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -32,13 +35,14 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SendGpxBottomSheetFragment.class.getSimpleName();
 
 	private GpxInfo[] gpxInfos;
-	private UploadVisibility selectedUploadVisibility = UploadVisibility.Public;
+	private UploadVisibility selectedUploadVisibility = UploadVisibility.PUBLIC;
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
@@ -49,12 +53,14 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.send_gpx_fragment, null);
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		View sendOsmPoiView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
 
 		messageField = sendOsmPoiView.findViewById(R.id.message_field);
 		tagsField = sendOsmPoiView.findViewById(R.id.tags_field);
 
-		OsmandSettings settings = requiredMyApplication().getSettings();
+		OsmandApplication app = requiredMyApplication();
+		OsmandSettings settings = app.getSettings();
 
 		TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
 		if (!Algorithms.isEmpty(settings.USER_DISPLAY_NAME.get())) {
@@ -63,32 +69,29 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			accountName.setText(settings.USER_NAME.get());
 		}
 
-		if (gpxInfos.length > 0 && gpxInfos[0].getFileName() != null) {
-			int dt = gpxInfos[0].getFileName().indexOf('.');
-			messageField.setText(gpxInfos[0].getFileName().substring(0, dt));
-		}
-		tagsField.setText(R.string.app_name_osmand);
+		String fileName = gpxInfos[0].getFileName();
+		messageField.setText(Algorithms.getFileNameWithoutExtension(fileName));
 
 		final TextView visibilityName = sendOsmPoiView.findViewById(R.id.visibility_name);
 		final TextView visibilityDescription = sendOsmPoiView.findViewById(R.id.visibility_description);
-		visibilityName.setText(selectedUploadVisibility.stringResource());
+		visibilityName.setText(selectedUploadVisibility.getTitleId());
 		visibilityDescription.setText(selectedUploadVisibility.getDescriptionId());
 
 		List<HorizontalSelectionItem> itemsVisibility = new ArrayList<>();
 		for (UploadVisibility visibilityType : UploadVisibility.values()) {
-			String title = getString(visibilityType.stringResource());
+			String title = getString(visibilityType.getTitleId());
 			HorizontalSelectionItem item = new HorizontalSelectionAdapter.HorizontalSelectionItem(title, visibilityType);
 			itemsVisibility.add(item);
 		}
 
-		final HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(getMyApplication(), nightMode);
+		final HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
 		horizontalSelectionAdapter.setItems(itemsVisibility);
-		horizontalSelectionAdapter.setSelectedItemByTitle(getString(selectedUploadVisibility.stringResource()));
+		horizontalSelectionAdapter.setSelectedItemByTitle(getString(selectedUploadVisibility.getTitleId()));
 		horizontalSelectionAdapter.setListener(new HorizontalSelectionAdapterListener() {
 			@Override
 			public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
 				selectedUploadVisibility = (OsmEditingPlugin.UploadVisibility) item.getObject();
-				visibilityName.setText(selectedUploadVisibility.stringResource());
+				visibilityName.setText(selectedUploadVisibility.getTitleId());
 				visibilityDescription.setText(selectedUploadVisibility.getDescriptionId());
 				horizontalSelectionAdapter.notifyDataSetChanged();
 			}
@@ -97,17 +100,14 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 		RecyclerView iconCategoriesRecyclerView = sendOsmPoiView.findViewById(R.id.description_view);
 		iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
-		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getMyApplication(), RecyclerView.HORIZONTAL, false));
+		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 		horizontalSelectionAdapter.notifyDataSetChanged();
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(sendOsmPoiView)
 				.create();
 		items.add(titleItem);
-	}
-
-	private boolean isLoginOAuth() {
-		return !Algorithms.isEmpty(getMyApplication().getSettings().USER_DISPLAY_NAME.get());
+		setRetainInstance(true);
 	}
 
 	@Override
@@ -124,8 +124,10 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	protected void onRightBottomButtonClick() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			String tags = tagsField.getText().toString();
-			String descr = messageField.getText().toString();
+			Editable tagsText = tagsField.getText();
+			Editable descrText = messageField.getText();
+			String tags = tagsText != null ? tagsText.toString() : "";
+			String descr = descrText != null ? descrText.toString() : "";
 
 			UploadGPXFilesTask uploadGPXFilesTask = new UploadGPXFilesTask(activity, descr, tags, selectedUploadVisibility);
 			uploadGPXFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfos);

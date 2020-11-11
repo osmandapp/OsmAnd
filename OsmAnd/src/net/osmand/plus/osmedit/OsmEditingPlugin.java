@@ -30,7 +30,6 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -433,16 +432,19 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-	public enum UploadVisibility implements IEnumWithResource {
-		Public(R.string.gpxup_public, R.string.public_visibility),
-		Identifiable(R.string.gpxup_identifiable, R.string.identifiable_visibility),
-		Trackable(R.string.gpxup_trackable, R.string.trackable_visibility),
-		Private(R.string.gpxup_private, R.string.private_visibility);
-		private final int resourceId;
+	public enum UploadVisibility {
+		PUBLIC(R.string.gpxup_public, R.string.gpx_upload_public_visibility_descr),
+		IDENTIFIABLE(R.string.gpxup_identifiable, R.string.gpx_upload_identifiable_visibility_descr),
+		TRACKABLE(R.string.gpxup_trackable, R.string.gpx_upload_trackable_visibility_descr),
+		PRIVATE(R.string.gpxup_private, R.string.gpx_upload_private_visibility_descr);
+
+		@StringRes
+		private final int titleId;
+		@StringRes
 		private final int descriptionId;
 
-		UploadVisibility(int resourceId,int descriptionId ) {
-			this.resourceId = resourceId;
+		UploadVisibility(int titleId, int descriptionId) {
+			this.titleId = titleId;
 			this.descriptionId = descriptionId;
 		}
 
@@ -450,9 +452,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			return name().toLowerCase();
 		}
 
-		@Override
-		public int stringResource() {
-			return resourceId;
+		@StringRes
+		public int getTitleId() {
+			return titleId;
 		}
 
 		@StringRes

@@ -22,7 +22,7 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 		this.la = la;
 		this.description = description;
 		this.tagstring = tagstring;
-		this.visibility = visibility != null ? visibility.asURLparam() : UploadVisibility.Private.asURLparam();
+		this.visibility = visibility != null ? visibility.asURLparam() : UploadVisibility.PRIVATE.asURLparam();
 
 	}
 

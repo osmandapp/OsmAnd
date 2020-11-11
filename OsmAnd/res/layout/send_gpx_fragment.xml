@@ -59,7 +59,8 @@
 				android:id="@+id/tags_field"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:imeOptions="actionDone" />
+				android:imeOptions="actionDone"
+				android:text="osmand"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
 	</LinearLayout>
@@ -98,9 +99,9 @@
 			android:paddingTop="@dimen/context_menu_first_line_top_margin"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingBottom="@dimen/context_menu_first_line_top_margin"
-			android:text="@string/gpx_visibility_txt"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
+			tools:text="@string/gpx_visibility_txt"
 			osmand:typeface="@string/font_roboto_medium" />
 	</LinearLayout>
 
