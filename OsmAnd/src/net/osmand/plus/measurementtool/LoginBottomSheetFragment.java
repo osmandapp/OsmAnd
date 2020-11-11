@@ -2,6 +2,7 @@ package net.osmand.plus.measurementtool;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,9 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 
 import org.apache.commons.logging.Log;
@@ -39,6 +38,11 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
     @Override
     public void createMenuItems(Bundle savedInstanceState) {
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+				.detectAll()
+				.penaltyLog()
+				.build());
+
         OsmandApplication app = requiredMyApplication();
         authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
         items.add(new SimpleBottomSheetItem.Builder().setLayoutId(R.layout.bottom_sheet_login).create());
