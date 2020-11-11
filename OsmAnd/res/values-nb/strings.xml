@@ -3887,4 +3887,9 @@
     <string name="icon_group_emergency">Nødsfall</string>
     <string name="icon_group_travel">Reise</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Du må legge til minst to punkter.</string>
+    <string name="gpx_upload_trackable_visibility_descr"></string>
+    <string name="sign_in_with_open_street_map">Logg inn med OpenStreetMap</string>
+    <string name="use_login_password">Bruk innlogging og passord</string>
+    <string name="login_account">Konto</string>
+    <string name="send_files_to_openstreetmap">Send GPX-fil til OpenStreetMap</string>
 </resources>
