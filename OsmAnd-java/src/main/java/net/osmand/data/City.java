@@ -24,6 +24,10 @@ public class City extends MapObject {
 		public double getRadius() {
 			return radius;
 		}
+		
+		public boolean storedAsSeparateAdminEntity() {
+			return this != DISTRICT && this != NEIGHBOURHOOD && this != BOROUGH;
+		}
 
 		public static String valueToString(CityType t) {
 			return t.toString().toLowerCase();
