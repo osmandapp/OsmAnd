@@ -3165,7 +3165,7 @@
     <string name="use_fluorescent_overlays">Fluorescent overlays</string>
     <string name="use_fluorescent_overlays_descr">Use fluorescent colors to display tracks and routes.</string>
     <string name="offline_edition">Offline editing</string>
-    <string name="offline_edition_descr">Always use offline editing.</string>
+    <string name="offline_edition_descr">If offline editing is enabled, then changes will be saved locally first and uploaded by request, otherwise changes will be uploaded immediately.</string>
     <string name="update_poi_does_not_change_indexes">POI changes inside app do not affect downloaded map files, changes are saved as a file on your device instead.</string>
     <string name="local_openstreetmap_uploading">Uploading…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/notes were uploaded</string>
