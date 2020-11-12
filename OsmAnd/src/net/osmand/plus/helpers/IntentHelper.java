@@ -3,6 +3,7 @@ package net.osmand.plus.helpers;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.ViewGroup;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.CallbackWithObject;
@@ -11,13 +12,13 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -34,6 +35,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static net.osmand.plus.measurementtool.LoginBottomSheetFragment.OSM_LOGIN_DATA;
 
 public class IntentHelper {
 
@@ -231,6 +234,13 @@ public class IntentHelper {
 				}
 				mapActivity.setIntent(null);
 			}
+			if (intent.hasExtra(OSM_LOGIN_DATA)) {
+				boolean openPlugins = intent.getBooleanExtra(OSM_LOGIN_DATA, false);
+				if (openPlugins) {
+					app.getOsmOAuthHelper().startOAuth((ViewGroup) mapActivity.findViewById(R.id.webviewContainer));
+				}
+				mapActivity.setIntent(null);
+			}
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 					case BaseSettingsFragment.MAP_CONFIG:
@@ -293,13 +303,15 @@ public class IntentHelper {
 		if (intent != null && intent.getData() != null) {
 			Uri uri = intent.getData();
 			if (uri.toString().startsWith("osmand-oauth")) {
+				String oauthVerifier = uri.getQueryParameter("oauth_verifier");
+				app.getOsmOAuthHelper().authorize(oauthVerifier);
 				LoginBottomSheetFragment fragment = mapActivity.getLoginBottomSheetFragment();
 				if (fragment != null) {
-					String oauthVerifier = uri.getQueryParameter("oauth_verifier");
-					fragment.authorize(oauthVerifier);
-					mapActivity.setIntent(null);
-					return true;
+					fragment.authorize();
 				}
+				mapActivity.launchPrevActivityIntent();
+				mapActivity.setIntent(null);
+				return true;
 			}
 		}
 		return false;

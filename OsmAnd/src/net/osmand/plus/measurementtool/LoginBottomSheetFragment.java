@@ -2,13 +2,12 @@ package net.osmand.plus.measurementtool;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -16,33 +15,26 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = LoginBottomSheetFragment.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(LoginBottomSheetFragment.class);
-	private static final String OSM_LOGIN_DATA = "osm_login_data";
+	public static final String OSM_LOGIN_DATA = "osm_login_data";
 
-	private OsmOAuthAuthorizationAdapter authorizationAdapter;
-
-    @Override
-    public void createMenuItems(Bundle savedInstanceState) {
-        OsmandApplication app = requiredMyApplication();
-        authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
-        items.add(new SimpleBottomSheetItem.Builder().setLayoutId(R.layout.bottom_sheet_login).create());
-    }
+	@Override
+	public void createMenuItems(Bundle savedInstanceState) {
+		items.add(new SimpleBottomSheetItem.Builder().setLayoutId(R.layout.bottom_sheet_login).create());
+	}
 
 	@Override
 	protected int getDismissButtonTextId() {
@@ -86,9 +78,14 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onThirdBottomButtonClick() {
-		View view = getView();
-		if (view != null) {
-			authorizationAdapter.startOAuth((ViewGroup) view);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Bundle params = new Bundle();
+			params.putBoolean(OSM_LOGIN_DATA, true);
+
+			Bundle bundle = new Bundle();
+			bundle.putInt(TAB_ID, GPX_TAB);
+			MapActivity.launchMapActivityMoveToTop(activity, bundle, null, params);
 		}
 	}
 
@@ -105,35 +102,12 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	public void authorize(String oauthVerifier) {
-		if (authorizationAdapter != null) {
-			authorizationAdapter.authorize(oauthVerifier);
-			updateUserName();
-		}
+	public void authorize() {
 		Fragment target = getTargetFragment();
 		if (target instanceof OsmAuthorizationListener) {
 			((OsmAuthorizationListener) target).authorizationCompleted();
 		}
 		dismiss();
-	}
-
-	private void updateUserName() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			String userName = "";
-			try {
-				userName = authorizationAdapter.getUserName();
-			} catch (InterruptedException e) {
-				log.error(e);
-			} catch (ExecutionException e) {
-				log.error(e);
-			} catch (IOException e) {
-				log.error(e);
-			} catch (XmlPullParserException e) {
-				log.error(e);
-			}
-			app.getSettings().USER_DISPLAY_NAME.set(userName);
-		}
 	}
 
 	public interface OsmAuthorizationListener {

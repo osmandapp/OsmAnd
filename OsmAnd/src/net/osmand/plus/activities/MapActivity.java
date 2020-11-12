@@ -644,7 +644,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void startActivity(Intent intent) {
-		clearPrevActivityIntent();
+//		clearPrevActivityIntent();
 		super.startActivity(intent);
 	}
 
@@ -1612,8 +1612,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		launchMapActivityMoveToTop(activity, null);
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, Bundle intentParams) {
-		launchMapActivityMoveToTop(activity, intentParams, null, null);
+	public static void launchMapActivityMoveToTop(Context activity, Bundle prevIntentParams) {
+		launchMapActivityMoveToTop(activity, prevIntentParams, null, null);
 	}
 
 	public static void clearPrevActivityIntent() {

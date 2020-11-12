@@ -43,7 +43,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.activities.ExitActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -57,14 +56,16 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
-import net.osmand.plus.helpers.enums.DrivingRegion;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.enums.DrivingRegion;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
@@ -155,6 +156,7 @@ public class OsmandApplication extends MultiDexApplication {
 	SettingsHelper settingsHelper;
 	GpxDbHelper gpxDbHelper;
 	QuickActionRegistry quickActionRegistry;
+	OsmOAuthHelper osmOAuthHelper;
 
 	private Resources localizedResources;
 
@@ -367,6 +369,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public SettingsHelper getSettingsHelper() {
 		return settingsHelper;
+	}
+
+	public OsmOAuthHelper getOsmOAuthHelper() {
+		return osmOAuthHelper;
 	}
 
 	public synchronized DownloadIndexesThread getDownloadThread() {
