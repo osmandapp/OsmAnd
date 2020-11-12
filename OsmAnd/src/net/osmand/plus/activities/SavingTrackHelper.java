@@ -488,7 +488,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private void addTrackPoint(WptPt pt, boolean newSegment, long time) {
 		List<TrkSegment> points = currentTrack.getModifiablePointsToDisplay();
 		Track track = currentTrack.getModifiableGpxFile().tracks.get(0);
-		assert track.segments.size() == points.size(); 
 		if (points.size() == 0 || newSegment) {
 			points.add(new TrkSegment());
 		}

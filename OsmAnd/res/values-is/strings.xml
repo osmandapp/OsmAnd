@@ -887,7 +887,7 @@
     <string name="index_settings">Sýsla með kortaskrár</string>
     <string name="global_app_settings">Víðværar stillingar forrits</string>
     <string name="user_name">OSM-notandanafnið þitt</string>
-    <string name="user_password">OSM-lykilorðið þitt</string>
+    <string name="user_password">Lykilorð</string>
     <string name="use_transparent_map_theme">Gegnsætt þema</string>
     <string name="pref_overlay">Yfirlag / Undirlag</string>
     <string name="file_with_name_already_exist">Skrá með sama heiti er þegar til.</string>
@@ -3429,7 +3429,7 @@
     <string name="live_monitoring">Rakning með netstuðningi</string>
     <string name="save_track_logging_accuracy">Nákvæmni skráninga</string>
     <string name="route_recalculation">Endurreikningur leiðar</string>
-    <string name="plugin_global_prefs_info">Þessar stillingar eiga við um öll snið.</string>
+    <string name="plugin_global_prefs_info">Þessar stillingar eru víðværar og eiga við um öll snið</string>
     <string name="osm_editing">OSM-breytingar</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Táknið birtist þegar leiðsögn er í gangi eða á meðan verið er á ferðinni.</string>
@@ -3459,7 +3459,7 @@
     <string name="multimedia_photo_play_sound">Hljóð við myndatöku</string>
     <string name="osm_authorization_success">Heimild fékkst</string>
     <string name="not_support_file_type_with_ext">Veljið studda %1$s kerfisviðaukaskrá í staðinn.</string>
-    <string name="osm_edits_view_descr">Skoðaðu breytingarnar þínar eða villur í OSM sem ekki hafa enn verið sendar inn í %1$s. Innsendir punktar verða ekki lengur birtir.</string>
+    <string name="osm_edits_view_descr">Þú getur skoðað allar óinnsendar breytingar þínar eða villur í OSM í %1$s. Innsendir punktar eru ekki birtir í OsmAnd.</string>
     <string name="monitoring_min_speed_descr_side_effect">Aukaverkanir: Ferilinn þinn mun vanta alla þá hluta þar sem kröfur um lágmarkshraða voru ekki uppfylltar (t.d. þar sem þú ert að ýta hjólinu þínu upp bratta brekku). Að auki verða engar upplýsingar um kyrrstöður, eins og t.d. hvíldarstaði. Þetta hefur áhrif á alla greiningu eða eftirvinnslu, eins og þegar verið er að skilgreina heildarlengd ferðar, tíma á ferðinni eða meðalhraða þinn.</string>
     <string name="monitoring_min_speed_descr_recommendation">Ábending: Reyndu fyrst að nota hreyfiskynjun í gegnum síuna sem mælis skráða lágmarkshliðrun (B), hún gæti gefið betri niðurstöður og þú tapar minna af gögnum. Ef ferlarnir þínir eru áfram loðnir við lágan hraða, skaltu prófa hér gildi sem ekki eru núll. Athugaðu að sumar mælingar gætu gefið gildi án hraða (sumar mæliaðferðir sem byggjast á netkerfum), í þeim tilfellum myndi ekkert vera skráð.</string>
     <string name="monitoring_min_speed_descr_remark">Athugaðu: ef hraði &gt; 0 skoðaðu: Flest GPS kubbasett gefa aðeins upp hraðagildi ef reikniritið ákvarðar að tækið sé á hreyfingu, en gefa ekki neitt gildi ef svo er ekki. Þar af leiðir að sé notuð stillingin &gt; 0 í þessari síu má segja að sé verið að nota hreyfiskynjunina í GPS kubbasettinu. En jafnvel þó þetta sé ekki síað á meðan skráningu stendur, þá notum við samt þennan eiginleika í greiningu okkar á GPX-ferlinum til að ákvarða leiðrétta vegalengd, þ.e.a.s. gildið sem birtist í þeim reit er einmitt skráð vegalengd á meðan verið er á ferðinni.</string>
@@ -3954,4 +3954,25 @@
     <string name="icon_group_sport">Íþróttir</string>
     <string name="icon_group_emergency">Neyðartilfelli</string>
     <string name="icon_group_travel">Ferðalög</string>
+    <string name="open_street_map_login_mode">Þú þarft að skrá þig inn til að geta sent inn ný atriði eða breytingar.
+\n
+\nÞú getur skráð þig inn með öruggu OAuth-aðferðinni eða notað notandanafn og lykilorð innskráningar.</string>
+    <string name="subscription_payment_issue_title">Það er vandamál með áskriftina þína. Smelltu á hnappinn til að fara í stillingar Google Play áskriftarinnar og laga þar greiðslumátann.</string>
+    <string name="use_login_password">Nota notandanafn og lykilorð</string>
+    <string name="login_open_street_map">Skrá inn á OpenStreetMap</string>
+    <string name="user_login">Innskrá</string>
+    <string name="enter_text_separated">Settu inn merki aðskilin með kommu.</string>
+    <string name="send_files_to_openstreetmap">Senda GPX-skrá til OpenStreetMap</string>
+    <string name="subscription_expired_title">Áskrift að OsmAnd Live er útrunnin</string>
+    <string name="sign_in_with_open_street_map">Skrá inn með OpenStreetMap</string>
+    <string name="subscription_on_hold_title">Áskrift að OsmAnd Live er í biðstöðu</string>
+    <string name="login_account">Notandaaðgangur</string>
+    <string name="login_open_street_map_org">Skrá inn á OpenStreetMap.org</string>
+    <string name="markers_history">Vinnsluferill kortamerkja</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Þú þarft að bæta við a.m.k. tveimur punktum</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="subscription_paused_title">Áskrift að OsmAnd Live hefur verið sett í bið</string>
+    <string name="mgrs_format_descr">OsmAnd notar MGRS, sem er svipað og UTM-snið NATO.</string>
+    <string name="manage_subscription">Sýsla með áskrift</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
 </resources>

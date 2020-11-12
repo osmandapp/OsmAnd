@@ -51,7 +51,7 @@
     <string name="global_app_settings">Paramètres globaux de l\'application</string>
     <string name="user_name">Votre identifiant OSM</string>
     <string name="open_street_map_login_descr">Nécessaire pour les contributions à openstreetmap.org.</string>
-    <string name="user_password">Votre mot de passe OSM</string>
+    <string name="user_password">Mot de passe</string>
     <string name="osmand_service">Mode arrière-plan</string>
     <string name="osmand_service_descr">OsmAnd s\'exécute en arrière-plan, écran éteint.</string>
     <string name="switch_to_raster_map_to_see">Téléchargez une carte vectorielle hors-ligne pour ce lieu (depuis « Paramètres » &gt; « Gérer les cartes ») ou utilisez le greffon « cartes en ligne ».</string>
@@ -3406,7 +3406,7 @@
     <string name="route_recalculation">Recalcul de l\'itinéraire</string>
     <string name="accessibility_announce">Annonce</string>
     <string name="login_and_pass">Nom d\'utilisateur et mot de passe</string>
-    <string name="plugin_global_prefs_info">Ces paramètres s\'appliquent à tous les profils.</string>
+    <string name="plugin_global_prefs_info">Les paramètres du greffon sont globaux et s\'appliquent à tous les profils.</string>
     <string name="osm_editing">Édition OSM</string>
     <string name="osm_edits_view_descr">Vous pouvez consulter vos modifications non téléversées comme vos bugs OSM dans %1$s. Les points envoyés ne sont plus affichés dans OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
@@ -3926,5 +3926,19 @@
     <string name="mgrs_format_descr">OsmAnd utilise le système de référence MDRS de l\'OTAN dérivé des formats UTM et UPS.</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_mgrs">MGRS</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Vous devez ajouter, au moins, deux points.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Vous devez, au moins, ajouter deux points</string>
+    <string name="subscription_on_hold_title">L\'abonnement OsmAnd Live est en attente</string>
+    <string name="subscription_expired_title">L’abonnement OsmAnd Live a expiré</string>
+    <string name="subscription_paused_title">L\'abonnement OsmAnd Live a été suspendu</string>
+    <string name="login_open_street_map">Se connecter à OpenStreetMap</string>
+    <string name="login_open_street_map_org">Se connecter à OpenStreetMap.org</string>
+    <string name="sing_in_with_open_street_map">Se connecter avec OpenStreetMap</string>
+    <string name="user_login">Identifiant</string>
+    <string name="use_login_password">Utiliser un identifiant et un mot de passe</string>
+    <string name="login_account">Compte</string>
+    <string name="manage_subscription">Gérer l\'abonnement</string>
+    <string name="sign_in_with_open_street_map">Se connecter avec OpenStreetMap</string>
+    <string name="markers_history">Historique des marqueurs</string>
+    <string name="send_files_to_openstreetmap">Envoyer un fichier GPX vers OpenStreetMap</string>
+    <string name="enter_text_separated">Saisissez les étiquettes séparées par des virgules.</string>
 </resources>

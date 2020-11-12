@@ -3425,9 +3425,9 @@
     <string name="route_recalculation">Перерахунок маршруту</string>
     <string name="accessibility_announce">Оголошення</string>
     <string name="login_and_pass">Ім\'я користувача і пароль</string>
-    <string name="plugin_global_prefs_info">Ці налаштування стосуються всіх профілів.</string>
+    <string name="plugin_global_prefs_info">Ці налаштування втулка стосуються всіх профілів</string>
     <string name="osm_editing">OSM-правлення</string>
-    <string name="osm_edits_view_descr">Ви можете переглянути всі не завантажені зміни або помилки в OSM в %1$s. Завантажені точки не відображаються в OsmAnd.</string>
+    <string name="osm_edits_view_descr">Ви можете переглянути всі вивантажені зміни або вади OSM у %1$s. Вивантажені точки не показано в OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок відображається під час навігації чи переміщення.</string>
     <string name="select_map_icon_descr">Значок показано в спокої.</string>
@@ -3943,10 +3943,27 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd використовує MGRS, який подібний формату UTM NATO.</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Додайте принаймні дві точки.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Додайте принаймні дві точки</string>
     <string name="manage_subscription">Керувати передплатою</string>
     <string name="subscription_payment_issue_title">Виникла проблема з передплатою. Натисніть кнопку, щоб перейти до налаштувань передплати у Google Play, щоб виправити спосіб оплати.</string>
     <string name="subscription_expired_title">Термін дії передплати OsmAnd Live закінчився</string>
     <string name="subscription_paused_title">Передплату OsmAnd Live зупинено</string>
     <string name="subscription_on_hold_title">Передплата OsmAnd Live на утриманні</string>
+    <string name="login_open_street_map">Увійти до OpenStreetMap.org</string>
+    <string name="login_open_street_map_org">Увійти до OpenStreetMap.org</string>
+    <string name="sing_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Увійдіть, щоб вивантажити нові або внесені зміни.
+\n
+\nВи можете увійти, за допомогою безпечного методу OAuth, або скористатися своїм ім\'ям та паролем.</string>
+    <string name="use_login_password">Використовувати ім\'я і пароль</string>
+    <string name="login_account">Обліковий запис</string>
+    <string name="user_login">Ім\'я користувача</string>
+    <string name="sign_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
+    <string name="markers_history">Історія маркерів</string>
+    <string name="send_files_to_openstreetmap">Надіслати файл GPX на OpenStreetMap</string>
+    <string name="enter_text_separated">Введіть мітки через коми.</string>
+    <string name="gpx_upload_public_visibility_descr">Загальнодоступне означає, що трасування буде показано загальнодоступно у ваших GPS-трасуваннях та у загальнодоступних списках GPS-трасування. Дані, що подаються через API, не посилаються на вашу сторінку трасування. Мітки часу точок трасування недоступні через загальнодоступний API GPS і не впорядковані хронологічно. Однак інші користувачі все ще можуть завантажувати необроблену трасування із загальнодоступного списку трасування та будь-які часові позначки, що містяться всередині.</string>
+    <string name="gpx_upload_private_visibility_descr">Приватне означає, що трасування не з\'являтиметься в жодному загальнодоступному списку, але контрольні точки з нього все одно будуть доступні через загальнодоступний API GPS без позначок часу та не впорядковані за хронологією.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Ідентифікований означає, що трасування буде показано публічно у вашому трасуванні GPS і в загальнодоступних списках трасування GPS, тобто інші користувачі зможуть завантажити необроблене трасування та пов\'язати його з вашим ім\'ям користувача. Дані, подані за допомогою API точок відстеження, посилаються на вихідну сторінку трасування. Позначки часу точок трасування доступні через загальнодоступний GPS API.</string>
+    <string name="gpx_upload_trackable_visibility_descr">Відстежуваний означає, що трасування не з\'явиться в жодному загальнодоступному списку, але точки від нього все одно будуть доступні через загальнодоступний API GPS із позначками часу. Інші користувачі зможуть завантажувати лише оброблені контрольні точки з вашого трасування, які не можуть бути безпосередньо пов’язані з вами.</string>
 </resources>

@@ -261,7 +261,7 @@
     <string name="amenity_type_osmwiki">Wikipedia (çevrim dışı)</string>
     <string name="amenity_type_user_defined">Kullanıcı tanımlı</string>
     <string name="settings_preset">Öntanımlı profil</string>
-    <string name="user_password">OSM şifreniz</string>
+    <string name="user_password">Parola</string>
     <string name="download_files_not_enough_space">İndirme için yeterli yer yok: %1$s MB (free: %2$s).</string>
     <string name="animate_route_off">Animasyonu durdur</string>
     <string name="animate_route">Animasyonu başlat</string>
@@ -3382,9 +3382,9 @@
     <string name="route_recalculation">Rotanın yeniden hesaplanması</string>
     <string name="accessibility_announce">Duyuru</string>
     <string name="login_and_pass">Kullanıcı adı ve parola</string>
-    <string name="plugin_global_prefs_info">Bu ayarlar tüm profiller için geçerlidir.</string>
+    <string name="plugin_global_prefs_info">Bu eklenti ayarları geneldir ve tüm profiller için geçerlidir</string>
     <string name="osm_editing">OSM düzenleme</string>
-    <string name="osm_edits_view_descr">Karşıya yüklenmemiş tüm düzenlemelerinizi veya osm hatalarınızı %1$s içinde görüntüleyebilirsiniz. Yüklenen noktalar OsmAnd\'de gösterilmez.</string>
+    <string name="osm_edits_view_descr">Yüklenmemiş tüm düzenlemelerinizi veya OSM hatalarınızı %1$s\'de görüntüleyebilirsiniz. Karşıya yüklenen noktalar OsmAnd\'da gösterilmez.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Navigasyon sırasında veya harekete halindeyken gösterilen simge.</string>
     <string name="select_map_icon_descr">Dinlenme anında gösterilen simge.</string>
@@ -3902,5 +3902,23 @@
     <string name="icon_group_sport">Spor</string>
     <string name="icon_group_emergency">Acil</string>
     <string name="icon_group_travel">Seyahat</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">En az iki nokta eklemelisiniz.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">En az iki nokta eklemelisiniz</string>
+    <string name="login_open_street_map">OpenStreetMap\'te oturum aç</string>
+    <string name="login_open_street_map_org">OpenStreetMap.org\'da oturum aç</string>
+    <string name="sing_in_with_open_street_map">OpenStreetMap ile giriş yap</string>
+    <string name="open_street_map_login_mode">Yenilikleri veya değişiklikleri karşıya yüklemek için oturum açmanız gerekir.
+\n
+\nGüvenli OAuth yöntemini kullanarak oturum açabilir veya kullanıcı adı ve parolanızı kullanabilirsiniz.</string>
+    <string name="use_login_password">Kullanıcı adı ve parola kullan</string>
+    <string name="user_login">Kullanıcı adı</string>
+    <string name="login_account">Hesap</string>
+    <string name="manage_subscription">Aboneliği yönet</string>
+    <string name="subscription_payment_issue_title">Aboneliğinizle ilgili bir sorun var. Ödeme yönteminizi düzeltmek üzere Google Play abonelik ayarlarına gitmek için düğmeye tıklayın.</string>
+    <string name="subscription_expired_title">OsmAnd Live aboneliğinin süresi doldu</string>
+    <string name="subscription_paused_title">OsmAnd Live aboneliği duraklatıldı</string>
+    <string name="subscription_on_hold_title">OsmAnd Live aboneliği beklemede</string>
+    <string name="sign_in_with_open_street_map">OpenStreetMap ile oturum aç</string>
+    <string name="markers_history">İşaretleyiciler geçmişi</string>
+    <string name="send_files_to_openstreetmap">GPX dosyasını OpenStreetMap\'e gönder</string>
+    <string name="enter_text_separated">Virgülle ayrılmış etiketleri girin.</string>
 </resources>
