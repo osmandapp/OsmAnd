@@ -3942,7 +3942,7 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd 使用 MGRS，其類似於 UTM NATO 格式。</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">您必須新增至少兩個點。</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">您必須新增至少兩個點</string>
     <string name="manage_subscription">管理訂閱</string>
     <string name="subscription_payment_issue_title">您的訂閱似乎有點問題。點擊按鈕以跳到 Google Play 訂閱設定以修復您的付款方式。</string>
     <string name="subscription_expired_title">OsmAnd Live 訂閱已過期</string>
@@ -3957,4 +3957,12 @@
     <string name="use_login_password">使用登入與密碼</string>
     <string name="login_account">帳號</string>
     <string name="user_login">登入</string>
+    <string name="sign_in_with_open_street_map">使用 OpenStreetMap 登入</string>
+    <string name="markers_history">標記歷史</string>
+    <string name="send_files_to_openstreetmap">傳送 GPX 檔案到 OpenStreetMap</string>
+    <string name="enter_text_separated">輸入以逗號分隔的標籤。</string>
+    <string name="gpx_upload_public_visibility_descr">公開代表軌跡將會公開顯示在您的 GPS 軌跡與公開的 GPS 軌跡清單中。透過 API 取得的 API 不會參考您的軌跡頁面。軌跡點的時間戳不會透過公開的 GPS API 提供，也不會按時間排序。不過，其他使用者仍可以從公開的軌跡清單下載原始軌跡與任何其中包含的時間戳。</string>
+    <string name="gpx_upload_private_visibility_descr">私有代表了軌跡不會顯示在任何公開的清單中，但其軌跡點仍可透過公開的 GPS API 取得，但沒有時間戳，也不會按時間順序排列。</string>
+    <string name="gpx_upload_identifiable_visibility_descr">可識別代表軌跡將會在您的 GPS 軌跡與公開 GPS 軌跡清單中顯示，亦即其他使用者將可以下載原始軌跡並將其與您的使用者名稱相關聯。透過軌跡點 API 提供的資料將會參考您的原始軌跡頁面。軌跡點的時間戳可透過公開的 GPS API 取得。</string>
+    <string name="gpx_upload_trackable_visibility_descr">可追蹤代表軌跡不會顯示在任何公開的清單中，但其追蹤點仍可以透過帶有時間戳的公開 GPS API 使用。其他使用者將只能從您的軌跡中下載處理過的追蹤點，但這些追蹤點無法直接與與您相關聯。</string>
 </resources>

@@ -3902,7 +3902,7 @@
     <string name="icon_group_sport">Spor</string>
     <string name="icon_group_emergency">Acil</string>
     <string name="icon_group_travel">Seyahat</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">En az iki nokta eklemelisiniz.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">En az iki nokta eklemelisiniz</string>
     <string name="login_open_street_map">OpenStreetMap\'te oturum aç</string>
     <string name="login_open_street_map_org">OpenStreetMap.org\'da oturum aç</string>
     <string name="sing_in_with_open_street_map">OpenStreetMap ile giriş yap</string>
@@ -3917,4 +3917,8 @@
     <string name="subscription_expired_title">OsmAnd Live aboneliğinin süresi doldu</string>
     <string name="subscription_paused_title">OsmAnd Live aboneliği duraklatıldı</string>
     <string name="subscription_on_hold_title">OsmAnd Live aboneliği beklemede</string>
+    <string name="sign_in_with_open_street_map">OpenStreetMap ile oturum aç</string>
+    <string name="markers_history">İşaretleyiciler geçmişi</string>
+    <string name="send_files_to_openstreetmap">GPX dosyasını OpenStreetMap\'e gönder</string>
+    <string name="enter_text_separated">Virgülle ayrılmış etiketleri girin.</string>
 </resources>

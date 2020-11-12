@@ -358,7 +358,7 @@ POIの更新は利用できません</string>
     <string name="finished_task">終了</string>
     <string name="use_online_routing_descr">ルート計算にインターネットを使用します</string>
     <string name="use_online_routing">オンラインルーティングを使用</string>
-    <string name="user_password">OSM パスワード</string>
+    <string name="user_password">パスワード</string>
     <string name="osm_settings_descr">Openstreetmap.org (OSM)にデータを提出する際に必要な項目の設定をおこないます。</string>
     <string name="data_settings_descr">言語、データのダウンロード/リロードを指定します</string>
     <string name="data_settings">データ</string>
@@ -3443,9 +3443,9 @@ POIの更新は利用できません</string>
     <string name="route_recalculation">ルート再計算</string>
     <string name="accessibility_announce">案内</string>
     <string name="login_and_pass">ユーザー名とパスワード</string>
-    <string name="plugin_global_prefs_info">以下設定はすべてのプロファイル共通で使用されます。</string>
+    <string name="plugin_global_prefs_info">これらの設定はアプリ全般に関するもので、すべてのプロファイルに適用されます</string>
     <string name="osm_editing">OSM編集</string>
-    <string name="osm_edits_view_descr">%1$sにまだアップロードされていない編集内容やOSMバグを表示します。アップロード後には表示されなくなります。</string>
+    <string name="osm_edits_view_descr">まだアップロードしていない編集やOSMバグを%1$sで表示できます。アップロードされた後にはOsmAndに表示されません。</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">ナビゲーションまたは移動中に表示されるアイコンです。</string>
     <string name="select_map_icon_descr">静止時に表示されるアイコンです。</string>
@@ -3914,4 +3914,36 @@ POIの更新は利用できません</string>
     <string name="complex_routing_descr">カーナビゲーション向けの2段階ルート計算です。</string>
     <string name="use_two_phase_routing">2段階 A*ルーティングアルゴリズムを使用</string>
     <string name="file_already_imported">ファイルはすでにOsmAndにインポートされています</string>
+    <string name="icon_group_amenity">公共施設</string>
+    <string name="shared_string_local_maps">ローカルマップ</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="icon_group_special">特殊</string>
+    <string name="icon_group_transport">公共交通機関</string>
+    <string name="icon_group_service">サービス</string>
+    <string name="icon_group_symbols">シンボル・道標</string>
+    <string name="icon_group_sport">スポーツ</string>
+    <string name="icon_group_emergency">緊急</string>
+    <string name="icon_group_travel">旅行</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">少なくとも2つの地点を追加する必要があります</string>
+    <string name="login_open_street_map">OpenStreetMapにログイン</string>
+    <string name="login_open_street_map_org">OpenStreetMap.orgにログイン</string>
+    <string name="sign_in_with_open_street_map">OpenStreetMapに登録</string>
+    <string name="open_street_map_login_mode">変更をアップロードするには、ログインする必要があります。
+\n
+\n安全なOAuth方式を使用してログイン、または通常のユーザー名とパスワード方式が選択できます。</string>
+    <string name="use_login_password">ユーザー名とパスワードを使用する</string>
+    <string name="user_login">ログイン</string>
+    <string name="manage_subscription">サブスクリプションの管理</string>
+    <string name="subscription_payment_issue_title">サブスクリプションに際し問題が発生しています。ボタンをタップしてGooglePlayサブスクリプション設定に移動し、お支払い方法を確認してください。</string>
+    <string name="subscription_expired_title">OsmAndLiveサブスクリプションの有効期限が切れました</string>
+    <string name="subscription_paused_title">OsmAndLiveサブスクリプションが一時停止されました</string>
+    <string name="subscription_on_hold_title">OsmAndLiveサブスクリプションは保留中です</string>
+    <string name="markers_history">マーカーの履歴</string>
+    <string name="send_files_to_openstreetmap">GPXファイルをOpenStreetMapに送信</string>
+    <string name="enter_text_separated">タグはカンマで区切って入力してください。</string>
+    <string name="gpx_upload_public_visibility_descr">パブリック状態は、経路がGPS経路およびGPS経路リストに公開を目的として表示されることを示唆しています。 APIを介して提供されるデータは、経路ページを参照していません。経路ポイントのタイムスタンプは、パブリックGPS APIからは入手できず、各地点は時系列で並べられることはありません。ただし他のユーザーは、公開経路リストとその中のタイムスタンプから生の経路データをダウンロードすることができます。</string>
+    <string name="gpx_upload_identifiable_visibility_descr">識別可能状態は、経路がGPS経路およびパブリックGPS経路リストに表示されることを示唆しています。他のユーザーは現在の経路をダウンロードして、ユーザー名とリンクできます。 trackpoints APIを介して配信されるデータは、元の経路追跡ページを参照します。経路ポイントのタイムスタンプは、パブリックGPSAPIを介して入手できます。</string>
+    <string name="gpx_upload_private_visibility_descr">プライベート状態は、経路がパブリックリストに表示されないことを示唆しています。経路ポイントは、タイムスタンプなしでパブリックGPS APIを介して引き続き利用できますが、時系列で並べられることはありません。</string>
+    <string name="gpx_upload_trackable_visibility_descr">追跡可能状態にある場合は経路が公開リストに表示されないことを示唆していますが、経路ポイントは自体はタイムスタンプ付きの公開GPSAPIを介して引き続き利用できます。他のユーザーからはあなたに直接関連付けることはできず、自身の処理済み経路ポイントのみをダウンロードできます。</string>
+    <string name="login_account">アカウント</string>
 </resources>

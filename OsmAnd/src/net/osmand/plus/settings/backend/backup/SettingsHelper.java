@@ -597,7 +597,7 @@ public class SettingsHelper {
 		if (!files.isEmpty()) {
 			dataList.put(ExportSettingsType.VOICE, files);
 		}
-		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
+		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkersFromDefaultGroups(false);
 		if (!mapMarkers.isEmpty()) {
 			String name = app.getString(R.string.map_markers);
 			String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
@@ -605,7 +605,7 @@ public class SettingsHelper {
 			markersGroup.setMarkers(mapMarkers);
 			dataList.put(ExportSettingsType.ACTIVE_MARKERS, Collections.singletonList(markersGroup));
 		}
-		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
+		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersFromDefaultGroups(true);
 		if (!markersHistory.isEmpty()) {
 			String name = app.getString(R.string.shared_string_history);
 			String groupId = ExportSettingsType.HISTORY_MARKERS.name();
