@@ -3926,7 +3926,7 @@
     <string name="mgrs_format_descr">OsmAnd utilise le système de référence MDRS de l\'OTAN dérivé des formats UTM et UPS.</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_mgrs">MGRS</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Vous devez, au moins, ajouter deux points.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Vous devez, au moins, ajouter deux points</string>
     <string name="subscription_on_hold_title">L\'abonnement OsmAnd Live est en attente</string>
     <string name="subscription_expired_title">L’abonnement OsmAnd Live a expiré</string>
     <string name="subscription_paused_title">L\'abonnement OsmAnd Live a été suspendu</string>
@@ -3937,4 +3937,8 @@
     <string name="use_login_password">Utiliser un identifiant et un mot de passe</string>
     <string name="login_account">Compte</string>
     <string name="manage_subscription">Gérer l\'abonnement</string>
+    <string name="sign_in_with_open_street_map">Se connecter avec OpenStreetMap</string>
+    <string name="markers_history">Historique des marqueurs</string>
+    <string name="send_files_to_openstreetmap">Envoyer un fichier GPX vers OpenStreetMap</string>
+    <string name="enter_text_separated">Saisissez les étiquettes séparées par des virgules.</string>
 </resources>

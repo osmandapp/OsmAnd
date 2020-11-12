@@ -3966,4 +3966,6 @@
 \nניתן להיכנס בשיטת OAuth המאובטחת או להשתמש בשם הכניסה והססמה שלך.</string>
     <string name="subscription_payment_issue_title">יש בעיה עם המינוי שלך. יש ללחוץ על הכפתור כדי לגשת להגדרות המינוי של Google Play ולתקן את שיטת התשלום שלך.</string>
     <string name="subscription_on_hold_title">המינוי ל־OsmAnd Live מוחזק</string>
+    <string name="markers_history">היסטוריית סמנים</string>
+    <string name="send_files_to_openstreetmap">שליחת קובץ GPX ל־OpenStreetMap</string>
 </resources>

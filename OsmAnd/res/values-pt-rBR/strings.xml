@@ -3941,7 +3941,7 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd usa MGRS, que é semelhante ao formato UTM NATO.</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Você deve adicionar pelo menos dois pontos.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Você precisa adicionar pelo menos dois pontos</string>
     <string name="manage_subscription">Gerenciar assinatura</string>
     <string name="subscription_payment_issue_title">Há um problema com sua assinatura. Clique no botão para ir para as configurações de assinatura do Google Play para corrigir sua forma de pagamento.</string>
     <string name="subscription_expired_title">A assinatura do OsmAnd Live expirou</string>
@@ -3957,4 +3957,12 @@
     <string name="use_login_password">Usar a entrada e senha</string>
     <string name="login_account">Conta</string>
     <string name="user_login">Entrar</string>
+    <string name="sign_in_with_open_street_map">Entrar com o OpenStreetMap</string>
+    <string name="markers_history">Histórico de marcadores</string>
+    <string name="send_files_to_openstreetmap">Enviar arquivo GPX para OpenStreetMap</string>
+    <string name="enter_text_separated">Insira as etiquetas separadas por vírgula.</string>
+    <string name="gpx_upload_public_visibility_descr">Público significa que o traçado será mostrado publicamente em Seus traços de GPS e em listas públicas de traços de GPS. Os dados fornecidos por meio da API não fazem referência à sua página de rastreamento. Os carimbos de data/hora dos pontos de rastreamento não estão disponíveis por meio da API GPS pública e os pontos não são ordenados cronologicamente. No entanto, outros usuários ainda podem fazer o download do rastreamento bruto da lista pública de rastreamento e de quaisquer carimbos de data/hora contidos nela.</string>
+    <string name="gpx_upload_private_visibility_descr">Privado significa que o rastreamento não aparecerá em nenhuma lista pública, mas os pontos de trilha dele ainda estarão disponíveis por meio da API GPS pública sem carimbos de data/hora, mas não serão ordenados cronologicamente.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Identificável significa que o traço será mostrado publicamente em Seus traços de GPS e em listas públicas de traços de GPS, ou seja, outros usuários poderão fazer download do traço bruto e associá-lo ao seu nome de usuário. Os dados fornecidos por meio da API de pontos de trilha farão referência à sua página de rastreamento original. Os carimbos de data/hora dos pontos de rastreamento estão disponíveis por meio da API GPS pública.</string>
+    <string name="gpx_upload_trackable_visibility_descr">Rastreável significa que o rastreamento não aparecerá em nenhuma lista pública, mas os pontos de trilha dele ainda estarão disponíveis por meio da API GPS pública com carimbos de data/hora. Outros usuários só poderão baixar pontos de trilha processados de seu trace, que não podem ser associados a você diretamente.</string>
 </resources>

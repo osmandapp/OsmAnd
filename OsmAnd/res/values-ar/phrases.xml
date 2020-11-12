@@ -1755,4 +1755,11 @@
     <string name="poi_spring">‮‮نبع</string>
     <string name="poi_denomination_shia">الرافضية</string>
     <string name="poi_lean_to">ملحق ملاصق للمبنى</string>
+    <string name="poi_cycle_barrier">حاجز دراجات</string>
+    <string name="poi_wiki_lang_ast">ويكي أستور وليوني</string>
+    <string name="poi_wiki_lang_zhminnan">جنوب مين ويكي</string>
+    <string name="poi_wiki_lang_sh">ويكي الصربية الكرواتية</string>
+    <string name="poi_wiki_lang_nds">منخفض ساكسون ويكي</string>
+    <string name="poi_wiki_lang_ml">ويكي المالايالامية</string>
+    <string name="poi_wiki_lang_fy">فريسك ويكي</string>
 </resources>

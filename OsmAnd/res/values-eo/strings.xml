@@ -1324,7 +1324,7 @@
     <string name="global_app_settings">Ĝeneralaj agordoj de aplikaĵo</string>
     <string name="user_name">Via OSM-uzantnomo</string>
     <string name="open_street_map_login_descr">Bezonata por sendoj al openstreetmap.org.</string>
-    <string name="user_password">Via OSM-pasvorto</string>
+    <string name="user_password">Pasvorto</string>
     <string name="osmand_service">Fona reĝimo</string>
     <string name="osmand_service_descr">OsmAnd funkcias fone kiam la ekrano estas malaktiva.</string>
     <string name="city_type_village">Vilaĝo</string>
@@ -3424,9 +3424,9 @@
     <string name="button_rate">Taksi</string>
     <string name="accessibility_announce">Anonco</string>
     <string name="login_and_pass">Uzantnomo kaj pasvorto</string>
-    <string name="plugin_global_prefs_info">Tiuj ĉi agordoj influas al ĉiuj profiloj.</string>
+    <string name="plugin_global_prefs_info">Tiuj ĉi agordoj pri kromprogramoj aplikos al ĉiuj profiloj</string>
     <string name="osm_editing">OSM‑redaktilo</string>
-    <string name="osm_edits_view_descr">Montri ĉiujn nesenditajn redaktojn kaj rimarkojn ĉe %1$s. Senditaj puntoj malaperos de tie ĉi.</string>
+    <string name="osm_edits_view_descr">Vi povas vidigi ĉiujn viajn nepublikigitajn redaktojn aŭ rimarkojn ĉe %1$s. Punktoj alŝutitaj al OSM ne estos videblaj en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Emblemo montrata dum navigi aŭ moviĝi.</string>
     <string name="select_map_icon_descr">Montri emblemon dum restado.</string>
@@ -3946,10 +3946,26 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd uzas MGRS, kiu estas simila al la formo UTM NATO.</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Aldonu almenaŭ du punktojn.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Aldonu almenaŭ du punktojn</string>
     <string name="manage_subscription">Administri abonon</string>
     <string name="subscription_payment_issue_title">Okazis problemo pri via abono. Premu la butonon por iri al agordoj pri abonoj ĉe Google Play por korekti vian pagmanieron.</string>
     <string name="subscription_expired_title">Abono OsmAnd Live senvalidiĝis</string>
     <string name="subscription_paused_title">Abono OsmAnd Live estas paŭziigita</string>
     <string name="subscription_on_hold_title">Abono OsmAnd Live estas ĉesigita</string>
+    <string name="login_open_street_map">Ensaluti al OpenStreetMap</string>
+    <string name="login_open_street_map_org">Ensaluti al OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Ensaluti per OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Vi devas ensaluti por alŝuti novajn aŭ modifitajn ŝanĝojn.
+\n
+\nVi povas ensaluti per la sekura metodo OAuth aŭ per enigi uzantnomon kaj pasvorton.</string>
+    <string name="use_login_password">Uzi uzantnomon kaj pasvorton</string>
+    <string name="login_account">Konto</string>
+    <string name="user_login">Uzantnomo</string>
+    <string name="markers_history">Historio de markoj</string>
+    <string name="send_files_to_openstreetmap">Sendi GPX‑dosieron al OpenStreetMap</string>
+    <string name="enter_text_separated">Enigu etikedojn disigitajn per komo (,).</string>
+    <string name="gpx_upload_public_visibility_descr">“Publika” signifas, ke la GPX‑spuro estos publika videbla en “miaj spuroj” kaj en la publika listo de spuro (GPS‑spuroj). Datumoj liverataj per la API ne ligos al paĝo de via spuro. Tempindikoj de punktoj ne estos akireblaj per la publika API GPS, kaj la punktoj ne estos ordigitaj laŭtempe. Tamen aliaj uzantoj plue povos elŝuti la nepritraktitan spuron el la publika listo de spuroj kune kun ĉiuj ampleksitaj tempindikoj.</string>
+    <string name="gpx_upload_private_visibility_descr">“Privata” signifas, ke la GPX‑spuro montriĝos en neniu publika listo, sed ĝiaj punktoj plue estos akireblaj per la publika API GPS sen tempindikoj, sed tiuj punktoj estos ordigitaj laŭtempe.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">“Identigebla” signifas, ke la GPX‑spuro estos publike videbla en “miaj spuroj” kaj en la publika listo de spuroj (GPS‑spuroj), aliaj uzantoj povos elŝuti vian nepritraktitan spuron kaj ligi ĝin al via uzantnomo. Datumoj liveritaj per la API de spuroj ligos al originala paĝo de via spuro. Tempindikoj de la spuro estos akireblaj per la publika API GPS.</string>
+    <string name="gpx_upload_trackable_visibility_descr">“Spurebla” signifas, ke la GPX‑spuro ne estos montrata en publikaj listoj, sed punktoj el ĝi plue estos akireblaj per la publika API GPS kune kun tempindikoj. Aliaj uzantoj povos elŝuti nur pritraktitajn punktojn el via spuro, kiuj ne povos esti senpere ligitaj al vi.</string>
 </resources>
