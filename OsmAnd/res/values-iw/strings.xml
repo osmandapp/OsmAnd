@@ -3422,7 +3422,7 @@
     <string name="route_recalculation">חישוב מסלול מחדש</string>
     <string name="accessibility_announce">הכרזה</string>
     <string name="login_and_pass">שם משתמש וססמה</string>
-    <string name="plugin_global_prefs_info">הגדרות אלו חלות על כל הפרופילים.</string>
+    <string name="plugin_global_prefs_info">הגדרות תוספים אלו הן גלובליות וחלות על כל הפרופילים</string>
     <string name="osm_editing">עריכה של OSM</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">סמל שמופיע רק בעת ניווט או תזוזה.</string>
@@ -3561,7 +3561,7 @@
     <string name="shared_string_rhomb">מעויני</string>
     <string name="shared_string_square">ריבועי</string>
     <string name="shared_string_min">מזערי</string>
-    <string name="osm_edits_view_descr">הצגת העריכות או הבאגים שלא הועלו תחת %1$s. הנקודות שהועלו לא תופענה עוד.</string>
+    <string name="osm_edits_view_descr">ניתן לצפות בכל העריכות או את התקלות ב־OSM שטרם הועלו תחת %1$s. נקודות שהועלו לא מופיעות ב־OsmAnd.</string>
     <string name="hillshade_description">מפת הצללה עם צבעי הצללה כהים כדי להדגיש מדרונות, פסגות ועמקים.</string>
     <string name="shared_string_octagon">מתומן</string>
     <string name="multimedia_notes_view_descr">הערות ה־OSM שלך הן תחת %1$s.</string>
@@ -3951,7 +3951,7 @@
     <string name="mgrs_format_descr">ב־OsmAnd נעשה שימוש ב־MGRS, שדומה לתצורת UTM NATO.</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">עליך להוסיף שתי נקודות לפחות.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">עליך להוסיף שתי נקודות לפחות</string>
     <string name="login_open_street_map">כניסה ל־OpenStreetMap</string>
     <string name="login_open_street_map_org">כניסה ל־OpenStreetMap.org</string>
     <string name="sing_in_with_open_street_map">כניסה עם OpenStreetMap</string>
@@ -3968,4 +3968,6 @@
     <string name="subscription_on_hold_title">המינוי ל־OsmAnd Live מוחזק</string>
     <string name="markers_history">היסטוריית סמנים</string>
     <string name="send_files_to_openstreetmap">שליחת קובץ GPX ל־OpenStreetMap</string>
+    <string name="sign_in_with_open_street_map">כניסה עם OpenStreetMap</string>
+    <string name="enter_text_separated">נא למלא תגיות מופרדות בפסיקים.</string>
 </resources>
