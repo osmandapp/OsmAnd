@@ -3942,4 +3942,5 @@
     <string name="mgrs_format_descr">OsmAnd использует MGRS, который похож на формат UTM NATO.</string>
     <string name="use_native_pt">Развитие местного общественного транспорта</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Нужно добавить не менее двух точек.</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s данные доступны только для дорог, нужно рассчитать маршрут с помощью «Маршрут между точками»</string>
 </resources>
