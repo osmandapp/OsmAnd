@@ -3407,7 +3407,7 @@
     <string name="route_recalculation">إعادة حساب الطريق</string>
     <string name="accessibility_announce">أعلن</string>
     <string name="login_and_pass">اسم المستخدم و كلمة السر</string>
-    <string name="plugin_global_prefs_info">إعدادات المكون الإضافي هذه شاملة، وتنطبق على جميع الأوضاع.</string>
+    <string name="plugin_global_prefs_info">إعدادات plugin هذه شاملة، وتنطبق على جميع الأوضاع</string>
     <string name="osm_editing">تعديل OpenStreetMap</string>
     <string name="app_mode_osm">Osm</string>
     <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
@@ -3955,4 +3955,6 @@
     <string name="enter_text_separated">أدخل العلامات مفصولة بفاصلة.</string>
     <string name="gpx_upload_private_visibility_descr">\"خاص\"يعني أن التتبع لن يظهر في أي قوائم عامة ، ولكن نقاط التتبع الصادرة عنه ستظل متاحة من خلال واجهة برمجة تطبيقات GPS API العامة بدون طوابع زمنية ولكن لن يتم ترتيبها ترتيبًا زمنيًا.</string>
     <string name="sign_in_with_open_street_map">قم بتسجيل الدخول باستخدام OpenStreetMap</string>
+    <string name="gpx_upload_public_visibility_descr">عام يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة. البيانات المقدمة عبر API لا تشير إلى صفحة التتبع الخاصة بك. الطوابع الزمنية لنقاط التتبع غير متاحة من خلال واجهة برمجة تطبيقات GPS API العامة، والنقاط غير مرتبة ترتيبًا زمنيًا. ومع ذلك، لا يزال المستخدمون الآخرون قادرين على تنزيل التتبع الأولي من قائمة التتبع العامة وأي طوابع زمنية مضمنة فيه.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">متعرف عليه يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة، أي سيتمكن المستخدمون الآخرون من تنزيل التتبع الأولي وربطه باسم المستخدم الخاص بك. ستشير البيانات التي يتم تقديمها عبر API نقاط التتبع إلى صفحة التتبع الأصلية الخاصة بك. الطوابع الزمنية لنقاط التتبع متاحة من خلال واجهة برمجة تطبيقات GPS API العامة.</string>
 </resources>
