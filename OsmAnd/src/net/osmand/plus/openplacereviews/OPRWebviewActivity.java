@@ -1,15 +1,13 @@
 package net.osmand.plus.openplacereviews;
 
 
-import android.content.Context;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.CookieManager;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
-import android.widget.ImageView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -26,8 +24,10 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 	private static final String cookieUrl = BuildConfig.OPR_BASE_URL + "profile";
 	private static final String loginUrl = BuildConfig.OPR_BASE_URL + "login";
 	private static final String registerUrl = BuildConfig.OPR_BASE_URL + "signup";
+	private static final String finishUrl = cookieUrl;
 	public static String KEY_TITLE = "TITLE_KEY";
 	private final Log log = PlatformUtil.getLog(OPRWebviewActivity.class);
+	private boolean isRegister = false;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,13 +43,14 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 		upArrow.setColorFilter(ContextCompat.getColor(this, R.color.color_favorite_gray), PorterDuff.Mode.SRC_ATOP);
 		getSupportActionBar().setHomeAsUpIndicator(upArrow);
 		webView = (WebView) findViewById(R.id.printDialogWebview);
+		webView.setWebViewClient(new CloseOnSuccessWebViewClient());
 		webView.getSettings().setJavaScriptEnabled(true);
 		WebView.setWebContentsDebuggingEnabled(true);
-		if (b != null){
-			if (b.getBoolean(KEY_LOGIN)){
+		if (b != null) {
+			isRegister = b.getBoolean(KEY_LOGIN);
+			if (isRegister) {
 				webView.loadUrl(loginUrl);
-			}
-			else {
+			} else {
 				webView.loadUrl(registerUrl);
 			}
 		}
@@ -87,8 +88,13 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 		return CookieValue;
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+	public class CloseOnSuccessWebViewClient extends WebViewClient {
+		@Override
+		public void onPageFinished(WebView view, String url) {
+			if (url.contains(finishUrl) && !isRegister) {
+				finish();
+			}
+			super.onPageFinished(view, url);
+		}
 	}
 }
