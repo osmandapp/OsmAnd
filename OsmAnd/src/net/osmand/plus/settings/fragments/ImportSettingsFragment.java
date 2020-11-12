@@ -141,7 +141,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 		progressBar = root.findViewById(R.id.progress_bar);
 		setupToolbar(toolbar);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
-		View header = inflater.inflate(R.layout.list_item_description_header, container, false);
+		View header = inflater.inflate(R.layout.list_item_description_header, null);
 		description = header.findViewById(R.id.description);
 		description.setText(R.string.select_data_to_import);
 		expandableList.addHeaderView(header);
