@@ -1011,6 +1011,20 @@ public class MapMarkersHelper {
 		});
 	}
 
+	public List<MapMarker> getMapMarkersFromDefaultGroups(boolean history) {
+		List<MapMarker> mapMarkers = new ArrayList<>();
+		for (MapMarkersGroup group : mapMarkersGroups) {
+			if (group.getType() == MapMarkersGroup.ANY_TYPE) {
+				for (MapMarker marker : group.getMarkers()) {
+					if (history && marker.history || !history && !marker.history) {
+						mapMarkers.add(marker);
+					}
+				}
+			}
+		}
+		return mapMarkers;
+	}
+
 	public String saveMarkersToFile(String fileName) {
 		GPXFile gpxFile = generateGpx();
 		String dirName = IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR;
