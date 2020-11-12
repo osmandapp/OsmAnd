@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 import net.osmand.util.Algorithms;
@@ -36,18 +38,23 @@ import org.apache.commons.logging.Log;
 
 import static net.osmand.plus.UiUtilities.setupDialogButton;
 import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
+import static net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.*;
 import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.*;
 
-public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragment {
+public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragment implements ValidateOsmLoginListener,
+		OsmAuthorizationListener {
 
 	public static final String TAG = SendOsmNoteBottomSheetFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SendOsmNoteBottomSheetFragment.class);
 	public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
 	public static final String POI_UPLOADER_TYPE = "poi_uploader_type";
 	private OsmPoint[] poi;
-	private boolean isLogin;
 
 	protected OsmandSettings settings;
+	private TextView accountName;
+	private LinearLayout accountBlockView;
+	private LinearLayout signInView;
+	private SwitchCompat uploadAnonymously;
 
 	public enum PoiUploaderType {
 		SIMPLE,
@@ -64,7 +71,6 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		isLogin = isLogin();
 		poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
 		OsmandApplication app = getMyApplication();
 
@@ -77,23 +83,21 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		noteText.setText(((OsmNotesPoint) poi[0]).getText());
 		TextInputLayout noteHint = sendOsmNoteView.findViewById(R.id.note_hint);
 		noteHint.setHint(AndroidUtils.addColon(app, R.string.osn_bug_name));
-		final LinearLayout accountBlockView = sendOsmNoteView.findViewById(R.id.account_container);
-		final LinearLayout signInView = sendOsmNoteView.findViewById(R.id.sign_in_container);
-		final SwitchCompat uploadAnonymously = sendOsmNoteView.findViewById(R.id.upload_anonymously_switch);
-		final TextView accountName = sendOsmNoteView.findViewById(R.id.user_name);
+		accountBlockView = sendOsmNoteView.findViewById(R.id.account_container);
+		signInView = sendOsmNoteView.findViewById(R.id.sign_in_container);
+		uploadAnonymously = sendOsmNoteView.findViewById(R.id.upload_anonymously_switch);
+		accountName = sendOsmNoteView.findViewById(R.id.user_name);
 
 		settings = app.getSettings();
-		String userNameOAuth = settings.USER_DISPLAY_NAME.get();
-		String userNameOpenID = settings.USER_NAME.get();
-		String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
-		accountName.setText(userName);
+		updateAccountName();
 		View signInButton = sendOsmNoteView.findViewById(R.id.sign_in_button);
 		setupButton(signInButton, R.string.sing_in_with_open_street_map, DialogButtonType.PRIMARY,
 				R.drawable.ic_action_openstreetmap_logo);
 		signInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				OsmandApplication app = requiredMyApplication();
+				app.getOsmOAuthHelper().startOAuth((ViewGroup) v);
 			}
 		});
 		View loginButton = sendOsmNoteView.findViewById(R.id.login_button);
@@ -101,20 +105,18 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		loginButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmLoginDataBottomSheet.showInstance(getFragmentManager(), OSM_LOGIN_DATA, getTargetFragment(),
-						usedOnMap, null);
+				OsmLoginDataBottomSheet.showInstance(getFragmentManager(), OSM_LOGIN_DATA,
+						SendOsmNoteBottomSheetFragment.this, usedOnMap, null);
 			}
 		});
-		accountBlockView.setVisibility(!isLogin ? View.GONE : View.VISIBLE);
-		signInView.setVisibility(isLogin ? View.GONE : View.VISIBLE);
+		updateSignIn(uploadAnonymously.isChecked());
 		uploadAnonymously.setBackgroundResource(nightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
 		final int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
 		uploadAnonymously.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				accountBlockView.setVisibility(isChecked || !isLogin ? View.GONE : View.VISIBLE);
-				signInView.setVisibility(isChecked || isLogin ? View.GONE : View.VISIBLE);
+				updateSignIn(isChecked);
 				if (nightMode) {
 					uploadAnonymously.setBackgroundResource(
 							isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
@@ -129,6 +131,20 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 				.setCustomView(sendOsmNoteView)
 				.create();
 		items.add(bottomSheetItem);
+	}
+
+	private void updateAccountName() {
+		String userNameOAuth = settings.USER_DISPLAY_NAME.get();
+		String userNameOpenID = settings.USER_NAME.get();
+		String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
+		accountName.setText(userName);
+		updateSignIn(uploadAnonymously.isChecked());
+	}
+
+	private void updateSignIn(boolean isChecked) {
+		boolean isLogin = isLogin();
+		accountBlockView.setVisibility(isChecked || !isLogin ? View.GONE : View.VISIBLE);
+		signInView.setVisibility(isChecked || isLogin ? View.GONE : View.VISIBLE);
 	}
 
 	private void setupButton(View buttonView, int buttonTextId, DialogButtonType buttonType, int drawableId) {
@@ -205,11 +221,21 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		return R.string.shared_string_upload;
 	}
 
+	@Override
+	public void authorizationCompleted() {
+		updateAccountName();
+	}
+
+	@Override
+	public void loginValidationFinished(String warning) {
+		updateAccountName();
+	}
+
 	private boolean isLogin() {
 		OsmandApplication app = getMyApplication();
 		OsmandSettings settings = app.getSettings();
-		OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
-		return client.isValidToken()
+		OsmOAuthAuthorizationAdapter adapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
+		return adapter.isValidToken()
 				|| !Algorithms.isEmpty(settings.USER_NAME.get())
 				&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
 	}

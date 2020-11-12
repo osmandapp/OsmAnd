@@ -18,30 +18,32 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
+import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.*;
 
-public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
+public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment implements OsmAuthorizationListener {
 
 	public static final String TAG = LoginBottomSheetFragment.class.getSimpleName();
-	private static final Log log = PlatformUtil.getLog(LoginBottomSheetFragment.class);
+	private static final Log LOG = PlatformUtil.getLog(LoginBottomSheetFragment.class);
 
-	private OsmOAuthAuthorizationAdapter authorizationAdapter;
+	private OsmOAuthHelper osmOAuthHelper;
 
-    @Override
-    public void createMenuItems(Bundle savedInstanceState) {
-        OsmandApplication app = requiredMyApplication();
-        authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
-        items.add(new SimpleBottomSheetItem.Builder().setLayoutId(R.layout.bottom_sheet_login).create());
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		OsmandApplication app = requiredMyApplication();
+		osmOAuthHelper = app.getOsmOAuthHelper();
+	}
+
+	@Override
+	public void createMenuItems(Bundle savedInstanceState) {
+		items.add(new SimpleBottomSheetItem.Builder().setLayoutId(R.layout.bottom_sheet_login).create());
+	}
 
 	@Override
 	protected int getDismissButtonTextId() {
@@ -87,12 +89,8 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	protected void onThirdBottomButtonClick() {
 		View view = getView();
 		if (view != null) {
-			authorizationAdapter.startOAuth((ViewGroup) view);
+			osmOAuthHelper.startOAuth((ViewGroup) view);
 		}
-	}
-
-	private boolean isValidToken() {
-		return authorizationAdapter.isValidToken();
 	}
 
 	@Override
@@ -101,45 +99,19 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {
-		if (!fragmentManager.isStateSaved()) {
-			LoginBottomSheetFragment fragment = new LoginBottomSheetFragment();
-			fragment.setTargetFragment(targetFragment, 0);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
-
-	public void authorize(String oauthVerifier) {
-		if (authorizationAdapter != null) {
-			authorizationAdapter.authorize(oauthVerifier);
-			updateUserName();
-		}
-		Fragment target = getTargetFragment();
-		if (target instanceof OsmAuthorizationListener) {
-			((OsmAuthorizationListener) target).authorizationCompleted();
-		}
-		dismiss();
-	}
-
-	private void updateUserName() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			String userName = "";
-			try {
-				userName = authorizationAdapter.getUserName();
-			} catch (InterruptedException e) {
-				log.error(e);
-			} catch (ExecutionException e) {
-				log.error(e);
-			} catch (IOException e) {
-				log.error(e);
-			} catch (XmlPullParserException e) {
-				log.error(e);
+		try {
+			if (!fragmentManager.isStateSaved()) {
+				LoginBottomSheetFragment fragment = new LoginBottomSheetFragment();
+				fragment.setTargetFragment(targetFragment, 0);
+				fragment.show(fragmentManager, TAG);
 			}
-			app.getSettings().USER_DISPLAY_NAME.set(userName);
+		} catch (RuntimeException e) {
+			LOG.error("showInstance", e);
 		}
 	}
 
-	public interface OsmAuthorizationListener {
-		void authorizationCompleted();
+	@Override
+	public void authorizationCompleted() {
+		dismiss();
 	}
 }
