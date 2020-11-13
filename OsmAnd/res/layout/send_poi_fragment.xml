@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/content_padding"
             android:minHeight="@dimen/context_menu_buttons_bottom_height"
-            android:text="@string/close_changset"
+            android:text="@string/close_changeset"
             android:paddingLeft="@dimen/content_padding_small"
             android:paddingRight="@dimen/content_padding_small"
             android:textColor="?android:textColorPrimary"

@@ -36,7 +36,6 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
     public static final String TAG = SendPoiBottomSheetFragment.class.getSimpleName();
     private static final Log LOG = PlatformUtil.getLog(SendPoiBottomSheetFragment.class);
-    public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
     private OsmPoint[] poi;
 
     private SwitchCompat closeChangeSet;

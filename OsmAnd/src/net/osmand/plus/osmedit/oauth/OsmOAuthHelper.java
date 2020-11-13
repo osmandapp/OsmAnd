@@ -40,21 +40,19 @@ public class OsmOAuthHelper {
 	}
 
 	private void updateUserName() {
-		if (app != null) {
-			String userName = "";
-			try {
-				userName = authorizationAdapter.getUserName();
-			} catch (InterruptedException e) {
-				log.error(e);
-			} catch (ExecutionException e) {
-				log.error(e);
-			} catch (IOException e) {
-				log.error(e);
-			} catch (XmlPullParserException e) {
-				log.error(e);
-			}
-			app.getSettings().USER_DISPLAY_NAME.set(userName);
+		String userName = "";
+		try {
+			userName = authorizationAdapter.getUserName();
+		} catch (InterruptedException e) {
+			log.error(e);
+		} catch (ExecutionException e) {
+			log.error(e);
+		} catch (IOException e) {
+			log.error(e);
+		} catch (XmlPullParserException e) {
+			log.error(e);
 		}
+		app.getSettings().USER_DISPLAY_NAME.set(userName);
 	}
 
 	public interface OsmAuthorizationListener {

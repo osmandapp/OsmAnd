@@ -3950,7 +3950,6 @@
     <string name="app_mode_gap">Diferença</string>
     <string name="login_open_street_map">Entrar para OpenStreetMap</string>
     <string name="login_open_street_map_org">Entrar com OpenStreetMap.org</string>
-    <string name="sing_in_with_open_street_map">Entrar com OpenStreetMap</string>
     <string name="open_street_map_login_mode">Você precisa entrar para enviar alterações novas ou modificadas.
 \n
 \nVocê pode entrar usando o método OAuth seguro ou usar sua entrada e senha.</string>

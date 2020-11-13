@@ -14,7 +14,6 @@
     <string name="osm_login_descr">You can log in using the safe OAuth method or use your login and password.</string>
     <string name="osm_edit_comment_note">Comment OSM Note</string>
     <string name="osm_edit_close_note">Close OSM Note</string>
-    <string name="close_changset">Closed changset</string>
     <string name="gpx_upload_trackable_visibility_descr">Trackable means that the trace will not show up in any public listings but trackpoints from it will still be available through the public GPS API with timestamps. Other users will only be able to download processed trackpoints from your trace which can\'t be associated with you directly.</string>
     <string name="gpx_upload_identifiable_visibility_descr">Identifiable means that the trace will be shown publicly in Your GPS traces and in public GPS trace listings, i.e. other users will be able to download the raw trace and associate it with your username. Data served via the trackpoints API will reference your original trace page. Timestamps of the trace points are available through the public GPS API.</string>
     <string name="gpx_upload_private_visibility_descr">Private means that the trace will not show up in any public listings, but trackpoints from it will still be available through the public GPS API without timestamps but will not be chronologically ordered.</string>

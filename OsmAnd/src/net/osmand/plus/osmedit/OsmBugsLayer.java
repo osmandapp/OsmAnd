@@ -370,18 +370,12 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	private void createBugDialog(final boolean offline, String text, int titleTextId, int posButtonTextId,
 	                             final Action action, final OpenStreetNote bug, final OsmNotesPoint point) {
+		@SuppressLint("InflateParams") final View view = LayoutInflater.from(activity).inflate(R.layout.open_bug, null);
 		if (offline) {
 			activity.getContextMenu().close();
 			BugBottomSheetDialog.showInstance(activity.getSupportFragmentManager(), getOsmbugsUtil(bug), local, text,
 					titleTextId, posButtonTextId, action, bug, point, getHandleBugListener());
 			return;
-		}
-		@SuppressLint("InflateParams") final View view = LayoutInflater.from(activity).inflate(R.layout.open_bug, null);
-		if (offline) {
-			view.findViewById(R.id.user_name_field).setVisibility(View.GONE);
-			view.findViewById(R.id.userNameEditTextLabel).setVisibility(View.GONE);
-			view.findViewById(R.id.password_field).setVisibility(View.GONE);
-			view.findViewById(R.id.passwordEditTextLabel).setVisibility(View.GONE);
 		} else {
 			((EditText) view.findViewById(R.id.user_name_field)).setText(getUserName());
 			((EditText) view.findViewById(R.id.password_field)).setText(

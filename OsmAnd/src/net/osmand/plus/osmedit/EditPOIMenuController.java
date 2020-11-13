@@ -50,12 +50,12 @@ public class EditPOIMenuController extends MenuController {
 					OsmandApplication app = activity.getMyApplication();
 					OsmandSettings settings = app.getSettings();
 					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
-					boolean isLogin = client.isValidToken()
+					boolean isLogged = client.isValidToken()
 							|| !Algorithms.isEmpty(settings.USER_NAME.get())
 							&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
 
 					if (point instanceof OpenstreetmapPoint) {
-						if (isLogin) {
+						if (isLogged) {
 							SendPoiBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
 									new OsmPoint[]{getOsmPoint()});
 						} else {

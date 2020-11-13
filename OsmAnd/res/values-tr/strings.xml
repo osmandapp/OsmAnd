@@ -3905,7 +3905,6 @@
     <string name="message_you_need_add_two_points_to_show_graphs">En az iki nokta eklemelisiniz</string>
     <string name="login_open_street_map">OpenStreetMap\'te oturum aç</string>
     <string name="login_open_street_map_org">OpenStreetMap.org\'da oturum aç</string>
-    <string name="sing_in_with_open_street_map">OpenStreetMap ile giriş yap</string>
     <string name="open_street_map_login_mode">Yenilikleri veya değişiklikleri karşıya yüklemek için oturum açmanız gerekir.
 \n
 \nGüvenli OAuth yöntemini kullanarak oturum açabilir veya kullanıcı adı ve parolanızı kullanabilirsiniz.</string>

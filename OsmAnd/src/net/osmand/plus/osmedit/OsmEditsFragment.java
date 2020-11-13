@@ -633,11 +633,11 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			OsmandApplication app = getMyApplication();
 			OsmandSettings settings = app.getSettings();
 			OsmOAuthAuthorizationAdapter authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
-			boolean isLogin = authorizationAdapter.isValidToken()
+			boolean isLogged = authorizationAdapter.isValidToken()
 					|| !Algorithms.isEmpty(settings.USER_NAME.get())
 					&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
 			if (hasPoiGroup(points)) {
-				if (isLogin) {
+				if (isLogged) {
 					SendPoiBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), points);
 				} else {
 					LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);

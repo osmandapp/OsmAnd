@@ -177,7 +177,6 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 				settings.USER_ACCESS_TOKEN_SECRET.resetToDefault();
 
 				authorizationAdapter.resetToken();
-				authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
 			} else {
 				settings.USER_NAME.resetToDefault();
 				settings.USER_PASSWORD.resetToDefault();
@@ -196,7 +195,6 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	@Override
 	public void authorizationCompleted() {
-		authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
 		updateAllSettings();
 	}
 }

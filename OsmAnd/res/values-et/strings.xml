@@ -3804,7 +3804,7 @@
     <string name="subscription_expired_title">OsmAnd Live tellimus on aegunud</string>
     <string name="subscription_payment_issue_title">Sinu tellimusega on üks pisikene segadus. Selleks et Google Play seadistuses makseviisi parandada, palun klõpsi seda nuppu.</string>
     <string name="manage_subscription">Halda tellimusi</string>
-    <string name="sing_in_with_open_street_map">Logi sisse OpenStreetMapi kasutajakontoga</string>
+    <string name="sign_in_with_open_street_map">Logi sisse OpenStreetMapi kasutajakontoga</string>
     <string name="user_login">Kasutajanimi</string>
     <string name="use_login_password">Pruugi kasutajanime ja salasõna</string>
     <string name="open_street_map_login_mode">Täienduste või muudatuste üleslaadimiseks pead sisse logima.

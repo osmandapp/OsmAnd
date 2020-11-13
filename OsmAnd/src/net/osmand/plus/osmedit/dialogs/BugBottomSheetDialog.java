@@ -34,15 +34,15 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	public static final String TAG = BugBottomSheetDialog.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(BugBottomSheetDialog.class);
 
-	OsmBugsUtil osmBugsUtil;
-	OsmBugsUtil local;
-	String text;
-	int titleTextId;
-	int posButtonTextId;
-	OsmPoint.Action action;
-	OsmBugsLayer.OpenStreetNote bug;
-	OsmNotesPoint point;
-	HandleOsmNoteAsyncTask.HandleBugListener handleBugListener;
+	private OsmBugsUtil osmBugsUtil;
+	private OsmBugsUtil local;
+	private String text;
+	private int titleTextId;
+	private int posButtonTextId;
+	private OsmPoint.Action action;
+	private OsmBugsLayer.OpenStreetNote bug;
+	private OsmNotesPoint point;
+	private HandleOsmNoteAsyncTask.HandleBugListener handleBugListener;
 	private TextInputEditText noteText;
 
 	@Override

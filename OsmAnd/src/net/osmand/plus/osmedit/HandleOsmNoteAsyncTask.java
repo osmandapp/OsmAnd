@@ -5,18 +5,23 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class HandleOsmNoteAsyncTask extends AsyncTask<Void, Void, OsmBugsUtil.OsmBugResult> {
+import net.osmand.plus.osmedit.OsmPoint.Action;
+
+import static net.osmand.plus.osmedit.OsmBugsLayer.*;
+import static net.osmand.plus.osmedit.OsmBugsUtil.*;
+
+public class HandleOsmNoteAsyncTask extends AsyncTask<Void, Void, OsmBugResult> {
 	private OsmBugsUtil osmbugsUtil;
 	private final OsmBugsUtil local;
-	private final OsmBugsLayer.OpenStreetNote bug;
+	private final OpenStreetNote bug;
 	private final OsmNotesPoint point;
 	private final String text;
-	private final OsmPoint.Action action;
+	private final Action action;
 	private final HandleBugListener handleBugListener;
 
 	public HandleOsmNoteAsyncTask(@NonNull OsmBugsUtil osmbugsUtil, @NonNull OsmBugsUtil local,
-	                              @Nullable OsmBugsLayer.OpenStreetNote bug, @Nullable OsmNotesPoint point,
-	                              String text, OsmPoint.Action action,
+	                              @Nullable OpenStreetNote bug, @Nullable OsmNotesPoint point,
+	                              String text, Action action,
 	                              @Nullable HandleBugListener handleBugListener) {
 		this.osmbugsUtil = osmbugsUtil;
 		this.local = local;
@@ -28,7 +33,7 @@ public class HandleOsmNoteAsyncTask extends AsyncTask<Void, Void, OsmBugsUtil.Os
 	}
 
 	@Override
-	protected OsmBugsUtil.OsmBugResult doInBackground(Void... params) {
+	protected OsmBugResult doInBackground(Void... params) {
 		if (bug != null) {
 			OsmNotesPoint pnt = new OsmNotesPoint();
 			pnt.setId(bug.getId());
@@ -42,13 +47,13 @@ public class HandleOsmNoteAsyncTask extends AsyncTask<Void, Void, OsmBugsUtil.Os
 		return null;
 	}
 
-	protected void onPostExecute(OsmBugsUtil.OsmBugResult obj) {
+	protected void onPostExecute(OsmBugResult obj) {
 		handleBugListener.onOsmBugHandled(obj, action, bug, point, text);
 	}
 
 	public interface HandleBugListener {
 
-		void onOsmBugHandled(OsmBugsUtil.OsmBugResult obj, OsmPoint.Action action, OsmBugsLayer.OpenStreetNote bug,
+		void onOsmBugHandled(OsmBugResult obj, Action action, OpenStreetNote bug,
 		                     OsmNotesPoint point, String text);
 	}
 }
