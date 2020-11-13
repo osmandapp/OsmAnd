@@ -5,7 +5,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.webkit.CookieManager;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -27,7 +26,7 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 	private static final String finishUrl = cookieUrl;
 	public static String KEY_TITLE = "TITLE_KEY";
 	private final Log log = PlatformUtil.getLog(OPRWebviewActivity.class);
-	private boolean isRegister = false;
+	private boolean isLogin = false;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,8 +46,8 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 		webView.getSettings().setJavaScriptEnabled(true);
 		WebView.setWebContentsDebuggingEnabled(true);
 		if (b != null) {
-			isRegister = b.getBoolean(KEY_LOGIN);
-			if (isRegister) {
+			isLogin = b.getBoolean(KEY_LOGIN);
+			if (isLogin) {
 				webView.loadUrl(loginUrl);
 			} else {
 				webView.loadUrl(registerUrl);
@@ -91,7 +90,7 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public class CloseOnSuccessWebViewClient extends WebViewClient {
 		@Override
 		public void onPageFinished(WebView view, String url) {
-			if (url.contains(finishUrl) && !isRegister) {
+			if (url.contains(finishUrl) && isLogin) {
 				finish();
 			}
 			super.onPageFinished(view, url);
