@@ -854,7 +854,7 @@
     <string name="empty_route_calculated">Грешка: Изчисленият маршрут е празен</string>
     <string name="new_route_calculated_dist">Изчислен е нов маршрут, дистанция</string>
     <string name="arrived_at_destination">Пристигнахте в крайната цел</string>
-    <string name="invalid_locations">Невалидни координати!</string>
+    <string name="invalid_locations">Невалидни координати</string>
     <string name="go_back_to_osmand">Върни се на картата OsmAnd</string>
     <string name="shared_string_close">Затвори</string>
     <string name="loading_data">Зареждане на данни…</string>
