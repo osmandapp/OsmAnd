@@ -13,11 +13,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import org.apache.commons.logging.Log;
 
 public class OprStartFragment extends BaseOsmAndFragment {
-	private static String openPlaceReviewsUrl = "OpenPlaceReviews.org";
+	private static final String TAG = "fragment_oprstart";
+	private static final Log LOG = PlatformUtil.getLog(OprStartFragment.class);
+	private static final String openPlaceReviewsUrl = "OpenPlaceReviews.org";
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,4 +77,17 @@ public class OprStartFragment extends BaseOsmAndFragment {
 		}
 	}
 
+
+	public static void showInstance(@NonNull FragmentManager fm) {
+		try {
+			if (fm.findFragmentByTag(OprStartFragment.TAG) == null) {
+				OprStartFragment fragment = new OprStartFragment();
+				fm.beginTransaction()
+						.add(R.id.fragmentContainer, fragment, OprStartFragment.TAG)
+						.addToBackStack(null).commit();
+			}
+		} catch (RuntimeException e) {
+			LOG.error("showInstance", e);
+		}
+	}
 }

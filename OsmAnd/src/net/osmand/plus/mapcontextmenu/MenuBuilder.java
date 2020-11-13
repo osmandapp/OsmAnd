@@ -316,9 +316,7 @@ public class MenuBuilder {
 		b.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				mapActivity.getSupportFragmentManager().beginTransaction()
-						.add(R.id.fragmentContainer, new OprStartFragment(), "OPR_REGISTER_FRAGMENT")
-						.addToBackStack(null).commit();
+				OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
 			}
 		});
 		b.setTypeface(FontCache.getRobotoRegular(context));

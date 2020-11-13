@@ -23,7 +23,6 @@
     <string name="enter_text_separated">Enter tags separated by comma.</string>
     <string name="send_files_to_openstreetmap">Send GPX file to OpenStreetMap</string>
     <string name="markers_history">Markers history</string>
->>>>>>> fd85ed7c4201db81b3fbbea71aebfb0155066129
     <string name="subscription_on_hold_title">OsmAnd Live subscription is on hold</string>
     <string name="subscription_paused_title">OsmAnd Live subscription has been paused</string>
     <string name="subscription_expired_title">OsmAnd Live subscription has been expired</string>
