@@ -491,7 +491,7 @@
     <string name="shared_string_accessibility">إمكانية الوصول</string>
     <string name="rendering_out_of_memory">ذاكرة التشغيل غير كافية لعرض المنطقة المختارة</string>
     <string name="offline_edition">التعديل دون اتصال</string>
-    <string name="offline_edition_descr">استخدام التعديل دون اتصال دائماً.</string>
+    <string name="offline_edition_descr">إذا تم تمكين التحرير دون اتصال ، فسيتم حفظ التغييرات محليًا أولاً ثم رفعها حسب الطلب ، أو سيتم رفع التغييرات على الفور.</string>
     <string name="av_camera_focus_infinity">التركيز بشكل غير محدود</string>
     <string name="av_camera_focus_macro">وضع التركيز الكلي (عن قرب)</string>
     <string name="av_camera_focus_auto">تركيز تلقائي</string>
