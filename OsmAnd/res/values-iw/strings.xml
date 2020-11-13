@@ -3968,6 +3968,5 @@
     <string name="subscription_on_hold_title">המינוי ל־OsmAnd Live מוחזק</string>
     <string name="markers_history">היסטוריית סמנים</string>
     <string name="send_files_to_openstreetmap">שליחת קובץ GPX ל־OpenStreetMap</string>
-    <string name="sign_in_with_open_street_map">כניסה עם OpenStreetMap</string>
     <string name="enter_text_separated">נא למלא תגיות מופרדות בפסיקים.</string>
 </resources>
