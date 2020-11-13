@@ -3503,9 +3503,9 @@
     <string name="photo_notes">Фотозаметки</string>
     <string name="route_recalculation">Пересчёт маршрута</string>
     <string name="login_and_pass">Имя пользователя и пароль</string>
-    <string name="plugin_global_prefs_info">Эти настройки применяются ко всем профилям.</string>
+    <string name="plugin_global_prefs_info">Эти настройки плагина применяются ко всем профилям</string>
     <string name="osm_editing">Редактирование OSM</string>
-    <string name="osm_edits_view_descr">Ваши правки и баги OSM, ещё не отправленные в %1$s. Отправленные точки больше не будут отображаться.</string>
+    <string name="osm_edits_view_descr">Здесь отображаются ваши правки и ошибки OSM, ещё не отправленные в %1$s. Отправленные точки не будут отображаться.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок, отображаемый во время навигации или движения.</string>
     <string name="select_map_icon_descr">Значок, отображаемый в состоянии покоя.</string>
@@ -3704,7 +3704,7 @@
     <string name="shared_string_resume">Продолжить</string>
     <string name="index_item_world_basemap_detailed">Мировая обзорная карта (подробная)</string>
     <string name="unsupported_type_error">Неподдерживаемый тип</string>
-    <string name="gpx_parse_error">OsmAnd сформировал GPX не совсем правильно, пожалуйста, свяжитесь со службой поддержки для дальнейшего расследования.</string>
+    <string name="gpx_parse_error">OsmAnd сформировал GPX не совсем правильно, пожалуйста, свяжитесь со службой поддержки для выяснения причин.</string>
     <string name="turn_screen_on_navigation_instructions_descr">Каждая навигационная инструкция включает экран.</string>
     <string name="turn_screen_on_navigation_instructions">Инструкции по навигации</string>
     <string name="screen_timeout_descr">Если функция «%1$s» включена, время работы будет зависеть от неё.</string>
@@ -3941,4 +3941,9 @@
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd использует MGRS, который похож на формат UTM NATO.</string>
     <string name="use_native_pt">Развитие местного общественного транспорта</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Нужно добавить не менее двух точек</string>
+    <string name="message_need_calculate_route_before_show_graph">Данные %1$s доступны только для дорог, нужно рассчитать маршрут с помощью «Маршрут между точками».</string>
+    <string name="enter_text_separated">Вводите теги через запятую.</string>
+    <string name="use_native_pt_desc">Перейти на расчет маршрутов общественного транспорта с помощью Java (safe)</string>
+    <string name="use_two_phase_routing">Использовать 2-фазный алгоритм A*</string>
 </resources>

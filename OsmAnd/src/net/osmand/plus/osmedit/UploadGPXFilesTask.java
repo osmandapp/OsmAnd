@@ -1,29 +1,36 @@
 package net.osmand.plus.osmedit;
 
-import java.io.File;
+import android.app.Activity;
+import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
-import android.app.Activity;
-import android.os.AsyncTask;
-import android.widget.Toast;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
 
 public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
+
+	private final OsmandApplication app;
+	private final WeakReference<Activity> activityRef;
 
 	private final String visibility;
 	private final String description;
 	private final String tagstring;
-	private Activity la;
 
-	public UploadGPXFilesTask(Activity la,
-			String description, String tagstring, UploadVisibility visibility) {
-		this.la = la;
+	public UploadGPXFilesTask(@NonNull Activity activity, String description, String tagsString,
+							  @Nullable UploadVisibility visibility) {
+		app = (OsmandApplication) activity.getApplication();
+		this.activityRef = new WeakReference<>(activity);
 		this.description = description;
-		this.tagstring = tagstring;
-		this.visibility = visibility != null ? visibility.asURLparam() : UploadVisibility.Private.asURLparam();
-
+		this.tagstring = tagsString;
+		this.visibility = visibility != null ? visibility.asURLparam() : UploadVisibility.PRIVATE.asURLparam();
 	}
 
 	@Override
@@ -32,10 +39,9 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 		int total = 0;
 		for (GpxInfo info : params) {
 			if (!isCancelled() && info.file != null) {
-				String warning = null;
 				File file = info.file;
-				warning = new OpenstreetmapRemoteUtil((OsmandApplication) la.getApplication()).uploadGPXFile(tagstring, description, visibility,
-						file);
+				OpenstreetmapRemoteUtil remoteUtil = new OpenstreetmapRemoteUtil(app);
+				String warning = remoteUtil.uploadGPXFile(tagstring, description, visibility, file);
 				total++;
 				if (warning == null) {
 					count++;
@@ -44,7 +50,7 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 				}
 			}
 		}
-		return la.getString(R.string.local_index_items_uploaded, count, total);
+		return app.getString(R.string.local_index_items_uploaded, count, total);
 	}
 
 	@Override
@@ -57,19 +63,24 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 				}
 				b.append(values[i]);
 			}
-			Toast.makeText(la, b.toString(), Toast.LENGTH_LONG).show();
+			app.showToastMessage(b.toString());
 		}
 	}
 
 	@Override
 	protected void onPreExecute() {
-		la.setProgressBarIndeterminateVisibility(true);
+		Activity activity = activityRef.get();
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			activity.setProgressBarIndeterminateVisibility(true);
+		}
 	}
 
 	@Override
 	protected void onPostExecute(String result) {
-		la.setProgressBarIndeterminateVisibility(false);
-		Toast.makeText(la, result, Toast.LENGTH_LONG).show();
+		Activity activity = activityRef.get();
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			activity.setProgressBarIndeterminateVisibility(false);
+		}
+		app.showToastMessage(result);
 	}
-
 }

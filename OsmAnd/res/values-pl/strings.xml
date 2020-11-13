@@ -127,7 +127,7 @@
     <string name="system_locale">Systemowy</string>
     <string name="preferred_locale_descr">Wybiera język interfejsu (po zmianie należy uruchomić OsmAnd ponownie).</string>
     <string name="preferred_locale">Język interfejsu</string>
-    <string name="shared_string_next">Naprzód</string>
+    <string name="shared_string_next">Dalej</string>
     <string name="shared_string_previous">Poprzedni</string>
     <string name="unit_of_length_descr">Zmienia jednostki długości.</string>
     <string name="unit_of_length">Jednostki długości</string>
@@ -422,7 +422,7 @@
     <string name="finished_task">Zakończono</string>
     <string name="use_online_routing_descr">Użyj Internetu do wyznaczenia trasy.</string>
     <string name="use_online_routing">Użyj nawigacji online</string>
-    <string name="user_password">Hasło konta OSM</string>
+    <string name="user_password">Hasło</string>
     <string name="osm_settings_descr">Skonfiguruj ustawienia potrzebne do wysyłania danych do Openstreetmap.org (OSM).</string>
     <string name="data_settings_descr">Ustaw język, pobierz/wczytaj ponownie dane.</string>
     <string name="data_settings">Dane</string>
@@ -3426,7 +3426,7 @@
     <string name="route_recalculation">Ponowne wyliczenie trasy</string>
     <string name="accessibility_announce">Zapowiedź</string>
     <string name="login_and_pass">Nazwa użytkownika i hasło</string>
-    <string name="plugin_global_prefs_info">Te ustawienia mają zastosowanie do wszystkich profilów.</string>
+    <string name="plugin_global_prefs_info">Ustawienia tej wtyczki są globalne i dotyczą wszystkich profili</string>
     <string name="osm_editing">Edycja OSM</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikona wyświetlana podczas nawigacji lub ruchu.</string>
@@ -3549,7 +3549,7 @@
     <string name="shared_string_quick_actions">Szybka czynność</string>
     <string name="keep_both">Zatrzymaj oba</string>
     <string name="shared_string_rendering_style">Styl renderowania</string>
-    <string name="osm_edits_view_descr">Zobacz swoje zmiany lub błędy OSM, które nie zostały jeszcze przesłane w %1$s. Przesłane punkty nie będą już wyświetlane.</string>
+    <string name="osm_edits_view_descr">Możesz zobaczyć wszystkie nieopublikowane edycje lub błędy OSM w %1$s. Przesłane punkty nie są wyświetlane w OsmAnd.</string>
     <string name="import_rendering_file">Importowanie pliku renderowania</string>
     <string name="restore_all_profile_settings">Przywrócić wszystkie ustawienia profilu\?</string>
     <string name="saving_new_profile">Zapisywanie nowego profilu</string>
@@ -3813,7 +3813,7 @@
     <string name="select_track_width">Wybierz szerokość</string>
     <string name="gpx_split_interval_none_descr">Wybierz żądaną opcję podziału: według czasu lub odległości.</string>
     <string name="track_coloring_solid">Stałe</string>
-    <string name="gpx_parse_error">OsmAnd GPX nie jest dobrze uformowany, prosimy o kontakt z zespołem wsparcia technicznego w celu dalszego zbadania sprawy.</string>
+    <string name="gpx_parse_error">Plik OsmAnd GPX nie jest poprawnie skonstruowany, prosimy o kontakt z zespołem wsparcia technicznego w celu dalszego zbadania sprawy.</string>
     <string name="turn_screen_on_wake_time_descr">Wybierz limit czasu ekranu po przebudzeniu. (\"%1$s\" nie powoduje przekroczenia limitu czasu.)</string>
     <string name="track_show_start_finish_icons">Pokaż ikony początku i końca</string>
     <string name="gpx_split_interval_descr">Wybierz przedział czasowy, w którym będą wyświetlane znaki z odległością lub czasem na torze.</string>
@@ -3837,9 +3837,7 @@
     <string name="route_between_points_whole_track_button_desc">Cała trasa zostanie ponownie wyznaczona przy użyciu wybranego profilu.</string>
     <string name="route_between_points_next_segment_button_desc">Tylko następny segment zostanie przeliczony przy użyciu wybranego profilu.</string>
     <string name="route_between_points_desc">Wybierz sposób łączenia punktów, za pomocą linii prostej, lub oblicz trasę między nimi w sposób określony poniżej.</string>
-    <string name="route_between_points_warning_desc">Aby skorzystać z tej opcji, OsmAnd musi przyciągnąć ślad do dróg mapy.
-\n
-\nW następnym kroku należy wybrać profil nawigacji w celu wykrycia dozwolonych dróg i odległości progowej w celu przybliżenia śledzenia drogi.</string>
+    <string name="route_between_points_warning_desc">Następnie przyciągnij trasę do najbliższej dozwolonej drogi za pomocą jednego z profili nawigacji, aby skorzystać z tej opcji.</string>
     <string name="street_level_imagery">Zdjęcia z poziomu ulicy</string>
     <string name="plan_route_exit_dialog_descr">Czy na pewno chcesz odrzucić wszystkie zmiany w zaplanowanej trasie, zamykając ją\?</string>
     <string name="in_case_of_reverse_direction">W przypadku odwrotnego kierunku</string>
@@ -3945,11 +3943,28 @@
     <string name="shared_string_local_maps">Mapy lokalne</string>
     <string name="app_mode_gap">Luka</string>
     <string name="icon_group_amenity">Udogodnienie</string>
-    <string name="icon_group_special">Specjalne</string>
+    <string name="icon_group_special">Specjalny</string>
     <string name="icon_group_transport">Transport</string>
     <string name="icon_group_service">Usługi</string>
     <string name="icon_group_symbols">Symbole</string>
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Służby ratunkowe</string>
     <string name="icon_group_travel">Podróże</string>
+    <string name="mgrs_format_descr">OsmAnd używa formatu MGRS, który jest podobny do UTM NATO.</string>
+    <string name="manage_subscription">Zarządzaj subskrypcją</string>
+    <string name="subscription_expired_title">Subskrypcja OsmAnd Live wygasła</string>
+    <string name="subscription_paused_title">Subskrypcja OsmAnd Live została wstrzymana</string>
+    <string name="snowmobile_render_descr">Do jazdy skuterem śnieżnym z wyznaczonymi drogami i torami.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Musisz dodać co najmniej dwa punkty</string>
+    <string name="subscription_payment_issue_title">Wystąpił problem z Twoją subskrypcją. Kliknij przycisk, aby przejść do ustawień subskrypcji Google Play i naprawić metodę płatności.</string>
+    <string name="subscription_on_hold_title">Subskrypcja OsmAnd Live jest wstrzymana</string>
+    <string name="user_login">Login</string>
+    <string name="login_open_street_map">Zaloguj się do OpenStreetMap</string>
+    <string name="login_open_street_map_org">Zaloguj się do OpenStreetMap.org</string>
+    <string name="sing_in_with_open_street_map">Zaloguj się za pomocą OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Musisz się zalogować, aby przesłać nowe lub zmodyfikowane zmiany.
+\n
+\nMożesz zalogować się za pomocą bezpiecznej metody autoryzacji OAuth lub użyć swojego loginu i hasła.</string>
+    <string name="use_login_password">Użyj loginu i hasła</string>
+    <string name="login_account">Konto</string>
 </resources>

@@ -1020,7 +1020,7 @@
     <string name="global_app_settings">Configurações globais do aplicativo</string>
     <string name="user_name">Seu nome de usuário OSM</string>
     <string name="open_street_map_login_descr">Necessário para envios ao openstreetmap.org.</string>
-    <string name="user_password">Sua senha do OSM</string>
+    <string name="user_password">Senha</string>
     <string name="osmand_service">Modo em segundo plano</string>
     <string name="osmand_service_descr">OsmAnd é executado em segundo plano com a tela desligada.</string>
     <string name="arrival_distance_factor_late">Atrasado</string>
@@ -3421,9 +3421,9 @@
     <string name="route_recalculation">Recálculo da rota</string>
     <string name="accessibility_announce">Anunciar</string>
     <string name="login_and_pass">Usuário e senha</string>
-    <string name="plugin_global_prefs_info">Essas configurações se aplicam a todos os perfis.</string>
+    <string name="plugin_global_prefs_info">Essas configurações de plug-in são globais e se aplicam a todos os perfis</string>
     <string name="osm_editing">Edição OSM</string>
-    <string name="osm_edits_view_descr">Você pode ver todos os erros de osm do editor carregado em %1$s. Os pontos enviados não são exibidos no OsmAnd.</string>
+    <string name="osm_edits_view_descr">Você pode ver todas as suas edições descarregadas ou erros do OSM em %1$s. Os pontos carregados não aparecem no OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ícone mostrado ao navegar ou mover.</string>
     <string name="select_map_icon_descr">Ícone mostrado em repouso.</string>
@@ -3941,4 +3941,28 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd usa MGRS, que é semelhante ao formato UTM NATO.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Você precisa adicionar pelo menos dois pontos</string>
+    <string name="manage_subscription">Gerenciar assinatura</string>
+    <string name="subscription_payment_issue_title">Há um problema com sua assinatura. Clique no botão para ir para as configurações de assinatura do Google Play para corrigir sua forma de pagamento.</string>
+    <string name="subscription_expired_title">A assinatura do OsmAnd Live expirou</string>
+    <string name="subscription_paused_title">A assinatura do OsmAnd Live foi pausada</string>
+    <string name="subscription_on_hold_title">A assinatura do OsmAnd Live está em espera</string>
+    <string name="app_mode_gap">Diferença</string>
+    <string name="login_open_street_map">Entrar para OpenStreetMap</string>
+    <string name="login_open_street_map_org">Entrar com OpenStreetMap.org</string>
+    <string name="sing_in_with_open_street_map">Entrar com OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Você precisa entrar para enviar alterações novas ou modificadas.
+\n
+\nVocê pode entrar usando o método OAuth seguro ou usar sua entrada e senha.</string>
+    <string name="use_login_password">Usar a entrada e senha</string>
+    <string name="login_account">Conta</string>
+    <string name="user_login">Entrar</string>
+    <string name="sign_in_with_open_street_map">Entrar com o OpenStreetMap</string>
+    <string name="markers_history">Histórico de marcadores</string>
+    <string name="send_files_to_openstreetmap">Enviar arquivo GPX para OpenStreetMap</string>
+    <string name="enter_text_separated">Insira as etiquetas separadas por vírgula.</string>
+    <string name="gpx_upload_public_visibility_descr">Público significa que o traçado será mostrado publicamente em Seus traços de GPS e em listas públicas de traços de GPS. Os dados fornecidos por meio da API não fazem referência à sua página de rastreamento. Os carimbos de data/hora dos pontos de rastreamento não estão disponíveis por meio da API GPS pública e os pontos não são ordenados cronologicamente. No entanto, outros usuários ainda podem fazer o download do rastreamento bruto da lista pública de rastreamento e de quaisquer carimbos de data/hora contidos nela.</string>
+    <string name="gpx_upload_private_visibility_descr">Privado significa que o rastreamento não aparecerá em nenhuma lista pública, mas os pontos de trilha dele ainda estarão disponíveis por meio da API GPS pública sem carimbos de data/hora, mas não serão ordenados cronologicamente.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Identificável significa que o traço será mostrado publicamente em Seus traços de GPS e em listas públicas de traços de GPS, ou seja, outros usuários poderão fazer download do traço bruto e associá-lo ao seu nome de usuário. Os dados fornecidos por meio da API de pontos de trilha farão referência à sua página de rastreamento original. Os carimbos de data/hora dos pontos de rastreamento estão disponíveis por meio da API GPS pública.</string>
+    <string name="gpx_upload_trackable_visibility_descr">Rastreável significa que o rastreamento não aparecerá em nenhuma lista pública, mas os pontos de trilha dele ainda estarão disponíveis por meio da API GPS pública com carimbos de data/hora. Outros usuários só poderão baixar pontos de trilha processados de seu trace, que não podem ser associados a você diretamente.</string>
 </resources>

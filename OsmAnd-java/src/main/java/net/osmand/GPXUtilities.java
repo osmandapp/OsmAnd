@@ -55,7 +55,7 @@ public class GPXUtilities {
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 
-	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
+	public final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
 
 	private final static NumberFormat latLonFormat = new DecimalFormat("0.00#####", new DecimalFormatSymbols(
@@ -71,6 +71,7 @@ public class GPXUtilities {
 		WHITE(0xFFFFFFFF),
 		RED(0xFFFF0000),
 		GREEN(0xFF00FF00),
+		DARKGREEN(0xFF006400),
 		BLUE(0xFF0000FF),
 		YELLOW(0xFFFFFF00),
 		CYAN(0xFF00FFFF),

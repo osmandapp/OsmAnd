@@ -1943,7 +1943,7 @@
     <string name="general_settings_descr">Seadista ekraan ja rakenduse üldised seaded.</string>
     <string name="global_app_settings">Rakenduse üldised seaded</string>
     <string name="user_name">Sinu OSM kasutajanimi</string>
-    <string name="user_password">Sinu OSM salasõna</string>
+    <string name="user_password">Salasõna</string>
     <string name="osmand_service">Taustarežiim</string>
     <string name="osmand_service_descr">OsmAnd töötab taustal, ekraan välja lülitatud.</string>
     <string name="download_files_question_space">Kas laeme alla {0} fail(i)\?
@@ -3358,7 +3358,7 @@
     <string name="route_recalculation">Teekonna ümberarvutamine</string>
     <string name="accessibility_announce">Teata</string>
     <string name="login_and_pass">Kasutajanimi ja salasõna</string>
-    <string name="plugin_global_prefs_info">Need seaded rakenduvad kõikidele profiilidele.</string>
+    <string name="plugin_global_prefs_info">Need seaded on üldised ja rakenduvad kõikidele profiilidele</string>
     <string name="osm_editing">OSM\'i andmete muutmine</string>
     <string name="osm_edits_view_descr">Kõiki üleslaadimata muudatusi või OSM vigu saad vaadata menüüs %1$s. Üleslaaditud punkte OsmAnd ei kuva.</string>
     <string name="app_mode_osm">OSM</string>
@@ -3798,4 +3798,18 @@
     <string name="mgrs_format_descr">OsmAnd kasutab MGRS-vormingut, mis on sarnane NATO UTM-vormingule.</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_mgrs">MGRS</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Graafiku joonistamiseks peaksid lisama vähemalt kaks punkti</string>
+    <string name="subscription_on_hold_title">OsmAnd Live tellimus on ootel</string>
+    <string name="subscription_paused_title">OsmAnd Live tellimus on peatatud</string>
+    <string name="subscription_expired_title">OsmAnd Live tellimus on aegunud</string>
+    <string name="subscription_payment_issue_title">Sinu tellimusega on üks pisikene segadus. Selleks et Google Play seadistuses makseviisi parandada, palun klõpsi seda nuppu.</string>
+    <string name="manage_subscription">Halda tellimusi</string>
+    <string name="sing_in_with_open_street_map">Logi sisse OpenStreetMapi kasutajakontoga</string>
+    <string name="user_login">Kasutajanimi</string>
+    <string name="use_login_password">Pruugi kasutajanime ja salasõna</string>
+    <string name="open_street_map_login_mode">Täienduste või muudatuste üleslaadimiseks pead sisse logima.
+\n
+\nSa võid selleks kasutada mõnd turvalust OAuth võimalust või oma kasutajanime ning salasõna.</string>
+    <string name="login_account">Kasutajakonto</string>
+    <string name="send_files_to_openstreetmap">Saada GPX fail OpenStreetMappi</string>
 </resources>
