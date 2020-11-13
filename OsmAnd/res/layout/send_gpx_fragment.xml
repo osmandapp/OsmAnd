@@ -60,6 +60,7 @@
 				android:id="@+id/tags_field"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/subHeaderPadding"
 				android:imeOptions="actionDone"
 				android:background = "?attr/text_input_background"
 				android:text="osmand" />
