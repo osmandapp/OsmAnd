@@ -477,7 +477,7 @@
 	<color name="switch_button_active_stroke_dark">#80D28521</color>
 	<color name="empty_hint_bg">#80000000</color>
 	<color name="input_layout_bg_color">#4DCCCCCC</color>
-	<color name="background_field_light">#14000000</color>
-	<color name="background_field_dark">#0DFFFFFF</color>
+	<color name="text_input_background_light">#14000000</color>
+	<color name="text_input_background_dark">#0DFFFFFF</color>
 
 </resources>
