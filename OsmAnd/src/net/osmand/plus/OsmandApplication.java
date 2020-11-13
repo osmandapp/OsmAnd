@@ -63,6 +63,7 @@ import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -108,17 +109,16 @@ public class OsmandApplication extends MultiDexApplication {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
 	final AppInitializer appInitializer = new AppInitializer(this);
-	OsmandSettings osmandSettings = null;
+	Handler uiHandler;
+	OsmandSettings osmandSettings;
 	OsmAndAppCustomization appCustomization;
+	NavigationService navigationService;
+	DownloadService downloadService;
+	OsmandAidlApi aidlApi;
+
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
-	Handler uiHandler;
-
-	NavigationService navigationService;
-	DownloadService downloadService;
-
-	OsmandAidlApi aidlApi;
 
 	// start variables
 	ResourceManager resourceManager;
@@ -156,10 +156,8 @@ public class OsmandApplication extends MultiDexApplication {
 	QuickActionRegistry quickActionRegistry;
 
 	private Resources localizedResources;
-
 	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
-
-	private Locale preferredLocale = null;
+	private Locale preferredLocale;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
@@ -590,8 +588,7 @@ public class OsmandApplication extends MultiDexApplication {
 					while (getNavigationService() != null) {
 						try {
 							Thread.sleep(100);
-						}
-							catch (InterruptedException e) {
+						} catch (InterruptedException e) {
 						}
 					}
 
@@ -781,12 +778,28 @@ public class OsmandApplication extends MultiDexApplication {
 		setLanguage(c);
 		c.setTheme(themeResId);
 	}
-	
+
+	IBRouterService reconnectToBRouter() {
+		try {
+			bRouterServiceConnection = BRouterServiceConnection.connect(this);
+			if (bRouterServiceConnection != null) {
+				return bRouterServiceConnection.getBrouterService();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public IBRouterService getBRouterService() {
-		if(bRouterServiceConnection == null) {
+		if (bRouterServiceConnection == null) {
 			return null;
 		}
-		return bRouterServiceConnection.getBrouterService();
+		IBRouterService s = bRouterServiceConnection.getBrouterService();
+		if (s != null && !s.asBinder().isBinderAlive()) {
+			s = reconnectToBRouter();
+		}
+		return s;
 	}
 	
 	public void setLanguage(Context context) {

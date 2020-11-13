@@ -313,7 +313,7 @@
     <string name="global_app_settings">Globale Einstellungen</string>
     <string name="user_name">OSM-Benutzername</string>
     <string name="open_street_map_login_descr">Benötigt für openstreetmap.org-Beiträge.</string>
-    <string name="user_password">OSM-Passwort</string>
+    <string name="user_password">Passwort</string>
     <string name="osmand_service">Hintergrundmodus</string>
     <string name="osmand_service_descr">OsmAnd läuft bei ausgeschaltetem Bildschirm im Hintergrund.</string>
     <string name="download_files_not_enough_space">Speicherplatz (frei: %2$s MB) reicht nicht aus, um %1$s MB herunterzuladen.</string>
@@ -3439,7 +3439,7 @@
     <string name="file_does_not_contain_routing_rules">Die Datei \'%1$s\' enthält keine Routing-Regeln. Bitte eine andere Datei wählen.</string>
     <string name="monitoring_min_speed_descr">Dies ist ein Filter, welcher Punkte unter einer gewissen Geschwindigkeit nicht aufzeichnet. Dadurch können aufgezeichnete Tracks auf der Karte gleichmäßiger aussehen.</string>
     <string name="monitoring_min_speed_descr_side_effect">Nebeneffekt: Auf Ihrer Strecke fehlen alle Abschnitte, in denen das Mindestgeschwindigkeitskriterium nicht erfüllt wurde (z. B., wenn Sie Ihr Fahrrad einen steilen Hügel hinaufschieben). Außerdem wird es keine Informationen über Ruhezeiten wie Pausen geben. Dies hat Auswirkungen auf jede Analyse oder Nachbearbeitung, z. B., wenn Sie versuchen, die Gesamtlänge Ihrer Reise, die Zeit in Bewegung oder Ihre Durchschnittsgeschwindigkeit zu bestimmen.</string>
-    <string name="plugin_global_prefs_info">Diese Einstellungen gelten für alle Profile.</string>
+    <string name="plugin_global_prefs_info">Diese Modul-Einstellungen sind global und gelten für alle Profile</string>
     <string name="live_monitoring_time_buffer">Zeitpuffer</string>
     <string name="live_monitoring_tracking_interval">Aufzeichnungsintervall</string>
     <string name="live_monitoring_adress">Webadresse</string>
@@ -3520,7 +3520,7 @@
     <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf \"Importieren\", um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten aus.</string>
     <string name="export_profile_dialog_description">Sie können zusätzliche Daten zum Exportieren zusammen mit dem Profil auswählen.</string>
     <string name="index_name_antarctica">Antarktis</string>
-    <string name="osm_edits_view_descr">Sie finden Ihre noch nicht übertragenen Änderungen oder OSM-Fehler in %1$s. Hochgeladene Punkte werden nicht mehr angezeigt.</string>
+    <string name="osm_edits_view_descr">Sie können alle Ihre noch nicht hochgeladenen Bearbeitungen oder OSM-Fehlermeldungen in %1$s anzeigen. Hochgeladene Punkte werden in OsmAnd nicht angezeigt.</string>
     <string name="monitoring_min_speed_descr_recommendation">Empfehlung: Versuchen Sie zunächst, die Bewegungserkennung über den Filter zur Mindestabstandsmessung (B) zu verwenden. Das kann zu besseren Ergebnissen führen und Sie werden weniger Daten verlieren. Sollten Ihre Tracks bei niedrigen Geschwindigkeiten ungenau bleiben, versuchen Sie hier Werte ungleich Null. Bitte beachten Sie, dass einige Messungen (einige netzwerkbasierte Methoden) möglicherweise überhaupt keine Geschwindigkeitswerte anzeigen. In diesem Fall wird nichts aufgezeichnet.</string>
     <string name="monitoring_min_accuracy_descr">Es werden nur Punkte aufgezeichnet, die mit der gewählten Mindestgenauigkeit bestimmt wurden (in Metern/Fuß, wie von Android je nach Chipsatz bereitgestellt). Die Genauigkeit beschreibt die Nähe der Messungen zur wahren Position und steht nicht unmittelbar in Bezug zur Präzision, der Streuung wiederholter Messungen.</string>
     <string name="monitoring_min_accuracy_descr_remark">Bemerkung: Wenn das GPS unmittelbar vor einer Aufzeichnung ausgeschaltet war, kann der erste gemessene Punkt eine verminderte Genauigkeit haben, sodass wir in unserem Code vielleicht eine Sekunde oder so warten wollen, bevor ein Punkt (oder der beste von 3 aufeinanderfolgenden Punkten usw.) aufgezeichnet wird. Das ist aber noch nicht implementiert.</string>
@@ -3951,4 +3951,26 @@
     <string name="icon_group_symbols">Symbole</string>
     <string name="shared_string_local_maps">Lokale Karten</string>
     <string name="icon_group_special">Spezial</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Sie müssen mindestens zwei Punkte hinzufügen</string>
+    <string name="manage_subscription">Abonnement verwalten</string>
+    <string name="subscription_payment_issue_title">Es gibt ein Problem mit Ihrem Abonnement. Klicken Sie auf die Schaltfläche, um zu den Einstellungen des Google Play Abonnements zu gelangen und Ihre Zahlungsmethode zu überprüfen.</string>
+    <string name="subscription_expired_title">OsmAnd Live Abonnement ist abgelaufen</string>
+    <string name="subscription_paused_title">OsmAnd Live Abonnement wurde ausgesetzt</string>
+    <string name="subscription_on_hold_title">OsmAnd Live Abonnement liegt auf Eis</string>
+    <string name="login_open_street_map">Anmeldung bei OpenStreetMap</string>
+    <string name="login_open_street_map_org">Anmeldung bei OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Anmelden mit OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Sie müssen sich anmelden, um Änderungen hochzuladen.
+\n
+\nSie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Ihr Passwort verwenden.</string>
+    <string name="use_login_password">Benutzername und Passwort verwenden</string>
+    <string name="login_account">Konto</string>
+    <string name="user_login">Login</string>
+    <string name="markers_history">Historie der Marker</string>
+    <string name="send_files_to_openstreetmap">GPX-Datei an OpenStreetMap senden</string>
+    <string name="enter_text_separated">Geben Sie durch Komma getrennte Tags ein.</string>
+    <string name="gpx_upload_public_visibility_descr">Öffentlich bedeutet, dass der Track in Ihren GPS-Tracks und in GPS-Track Verzeichnissen öffentlich angezeigt wird. Die über die API bereitgestellten Daten verweisen nicht auf Ihre Track-Seite. Die Zeitstempel der Trackpunkte sind nicht über die öffentliche GPS-API verfügbar, und die Punkte sind nicht chronologisch geordnet. Andere Benutzer können jedoch nach wie vor den Rohtrack aus der öffentlichen Trackliste und alle darin enthaltenen Zeitstempel herunterladen.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Identifizierbar bedeutet, dass der Track in Ihren GPS-Tracks und in öffentlichen GPS-Track Verzeichnissen angezeigt wird. Andere Benutzer können den Rohtrack herunterladen und mit Ihrem Benutzernamen verknüpfen. Daten, die über die Trackpunkte-API geliefert werden, verweisen auf Ihre ursprüngliche Track-Seite. Die Zeitstempel der Trackpunkte sind über die öffentliche GPS-API verfügbar.</string>
+    <string name="gpx_upload_private_visibility_descr">Privat bedeutet, dass der Track nicht in öffentlichen Verzeichnissen auftaucht. Punkte des Tracks werden weiterhin über die öffentliche GPS-API ohne Zeitstempel verfügbar sein, aber nicht chronologisch geordnet.</string>
+    <string name="gpx_upload_trackable_visibility_descr">Verfolgbar bedeutet, dass der Track in keiner öffentlichen Auflistung auftaucht, aber Trackpunkte weiterhin über die öffentliche GPS API mit Zeitstempel verfügbar sein werden. Andere Benutzer werden nur verarbeitete Trackpunkte Ihres Tracks herunterladen können, die nicht direkt mit Ihnen in Verbindung gebracht werden können.</string>
 </resources>

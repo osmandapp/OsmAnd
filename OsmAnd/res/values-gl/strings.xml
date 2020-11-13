@@ -800,7 +800,7 @@
     <string name="global_app_settings">Axustes globais da aplicación</string>
     <string name="user_name">O teu nome de usuario no OSM</string>
     <string name="open_street_map_login_descr">Precísase para os envíos ó openstreetmap.org.</string>
-    <string name="user_password">O teu contrasinal en OSM</string>
+    <string name="user_password">Contrasinal</string>
     <string name="osmand_service">Modo en segundo plano</string>
     <string name="osmand_service_descr">O OsmAnd execútase en segundo plano coa pantalla apagada.</string>
     <string name="download_files_not_enough_space">Non fica moito espazo libre para baixar %1$s MB (libre: %2$s).</string>
@@ -3448,9 +3448,9 @@ Lon %2$s</string>
     <string name="route_recalculation">Recálculo da ruta</string>
     <string name="accessibility_announce">Anuncio</string>
     <string name="login_and_pass">Nome de usuario e contrasinal</string>
-    <string name="plugin_global_prefs_info">Estes axustes aplícanse a todos os perfís.</string>
+    <string name="plugin_global_prefs_info">Os axustes deste complemento son globais e aplícanse a todos os perfís</string>
     <string name="osm_editing">Edición do OSM</string>
-    <string name="osm_edits_view_descr">Ollar as túas edicións ou erros do OSM aínda non subidos en %1$s. Os puntos subidos xa non se amosarán.</string>
+    <string name="osm_edits_view_descr">Podes ollar todas as túas edición non subidas ou erros do OSM en %1$s. Os puntos subidos non se amosan no OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">A icona amósase mentres se navega ou se move pola pantalla.</string>
     <string name="select_map_icon_descr">A icona amósase en asueto.</string>
@@ -3971,4 +3971,26 @@ Lon %2$s</string>
     <string name="icon_group_sport">Deporte</string>
     <string name="icon_group_emergency">Emerxencia</string>
     <string name="icon_group_travel">Viaxe</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Tes que engadir polo menos dous puntos</string>
+    <string name="manage_subscription">Xestionar subscrición</string>
+    <string name="subscription_payment_issue_title">Hai un problema coa túa subscrición. Preme no botón para ir ós axustes de subscrición da Google Play e corrixir o teu método de pagamento.</string>
+    <string name="subscription_expired_title">A subscrición do OsmAnd Live expirou</string>
+    <string name="subscription_paused_title">A subscrición do OsmAnd Live foi detida</string>
+    <string name="subscription_on_hold_title">A subscrición do OsmAnd Live está en espera</string>
+    <string name="gpx_upload_public_visibility_descr">Público significa que a pista amosarase de xeito público na túa listaxe de pistas e nas listaxes de pistas GPS públicas. Os datos servidos a través da API non farán referencia á túa páxina de pistas. As marcaxes de tempo dos puntos da pista non estarán dispoñíbeis a través da API pública de GPS, aínda que os puntos ordénanse de xeito cronolóxico. Porén, outros usuarios poderán baixar a pista en bruto da listaxe de pistas públicas e as marcaxes de tempo que contén.</string>
+    <string name="login_open_street_map">Iniciar sesión no OpenStreetMap</string>
+    <string name="login_open_street_map_org">Entrar ó OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Entrar co OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Precisas iniciar sesión para subir modificacións novas.
+\n
+\nPodes iniciar sesión empregando o método seguro de OAuth ou empregar o nome de usuario e contrasinal.</string>
+    <string name="use_login_password">Empregar nome de usuario e contrasinal</string>
+    <string name="login_account">Conta</string>
+    <string name="user_login">Iniciar sesión</string>
+    <string name="markers_history">Historial de marcaxes</string>
+    <string name="send_files_to_openstreetmap">Enviar ficheiro GPX ó OpenStreetMap</string>
+    <string name="enter_text_separated">Insire etiquetas separadas por comas.</string>
+    <string name="gpx_upload_private_visibility_descr">Privado significa que a pista non aparecerá en ningunha listaxe pública, mais o conxunto de puntos seguirá estando dispoñíbel en orde cronolóxica a través da API pública de GPS e sen marcaxes de tempo.</string>
+    <string name="gpx_upload_trackable_visibility_descr">Rastrexábel (ou trazábel) significa que a pista non aparecerá en ningunha listaxe pública pero o conxunto de puntos estarán dispoñíbeis a través da API pública de GPS e con marcaxes de tempo. Outros usuarios só poderán baixar o conxunto de puntos procesados da túa pista que non se poden asociar directamente contigo.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Identificábel significa que a pista amosarase de xeito público na túa listaxe de pistas e na listaxe de pistas GPS públicas, é dicir que outros usuarios poderán baixar a pista en bruto e asociala co teu nome de usuario. Os datos servidos a través da API de conxunto de puntos fará referencia á páxina orixinal da pista. As marcaxes de tempo dos puntos da traza estarán dispoñíbeis a través da API pública de GPS.</string>
 </resources>

@@ -29,9 +29,8 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MapMarkersSortByDef;
-import net.osmand.plus.MapMarkersHelper.OnGroupSyncedListener;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersSortByDef;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -430,7 +429,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			public void moveAllToHistoryOnClick() {
 				if (mapActivity != null) {
 					final MapMarkersHelper helper = mapActivity.getMyApplication().getMapMarkersHelper();
-					final List<MapMarkersHelper.MapMarker> markers = new ArrayList<>(helper.getMapMarkers());
+					final List<MapMarker> markers = new ArrayList<>(helper.getMapMarkers());
 					helper.moveAllActiveMarkersToHistory();
 					if (viewPager.getCurrentItem() == ACTIVE_MARKERS_POSITION) {
 						activeFragment.updateAdapter();
@@ -482,7 +481,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 
 			@Override
 			public void saveGpx(final String fileName) {
-				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().generateGpx(fileName);
+				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().saveMarkersToFile(fileName);
 				snackbar = Snackbar.make(viewPager, String.format(getString(R.string.shared_string_file_is_saved), fileName) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override

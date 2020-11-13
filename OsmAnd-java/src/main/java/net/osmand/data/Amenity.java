@@ -134,7 +134,7 @@ public class Amenity extends MapObject {
 			}
 			this.additionalInfo.put(tag, value);
 			if (OPENING_HOURS.equals(tag)) {
-				this.openingHours = value;
+				this.openingHours = unzipContent(value);
 			}
 		}
 	}

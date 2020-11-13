@@ -32,7 +32,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
