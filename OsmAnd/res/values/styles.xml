@@ -245,7 +245,7 @@
         <item name="btn_radio_button_center">@drawable/radio_button_center_light</item>
         <item name="checkboxStyle">@style/CheckboxStyle</item>
         <item name="radioButtonStyle">@style/RadioButtonStyle</item>
-        <item name="background_field">@color/background_field_light</item>
+        <item name="text_input_background">@color/background_field_light</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -540,7 +540,7 @@
         <item name="btn_radio_button_center">@drawable/radio_button_center_dark</item>
         <item name="checkboxStyle">@style/CheckboxStyle</item>
         <item name="radioButtonStyle">@style/RadioButtonStyle</item>
-        <item name="background_field">@color/background_field_dark</item>
+        <item name="text_input_background">@color/background_field_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

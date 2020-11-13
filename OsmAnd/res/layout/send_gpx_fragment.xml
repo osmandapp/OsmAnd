@@ -39,7 +39,7 @@
 			<com.google.android.material.textfield.TextInputEditText
 				android:id="@+id/message_field"
 				android:layout_width="match_parent"
-				android:background = "?attr/background_field"
+				android:background = "?attr/text_input_background"
 				android:layout_height="wrap_content"
 				android:imeOptions="actionDone" />
 
@@ -61,7 +61,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:imeOptions="actionDone"
-				android:background = "?attr/background_field"
+				android:background = "?attr/text_input_background"
 				android:text="osmand" />
 		</com.google.android.material.textfield.TextInputLayout>
 
