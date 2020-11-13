@@ -2525,7 +2525,7 @@
     <string name="empty_state_favourites">Adicione Favoritos</string>
     <string name="empty_state_favourites_desc">Importe Favoritos ou adicione-os marcando pontos do mapa.</string>
     <string name="import_track">Importar arquivo GPX</string>
-    <string name="move_point">Mover Ponto</string>
+    <string name="move_point">Mover ponto</string>
     <string name="osm_recipients_label">Destinatários OSM</string>
     <string name="osmand_plus_extended_description_part6">Recursos de Ciclismo e Pedestre
 \n • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre
@@ -3350,7 +3350,7 @@
     <string name="exported_osmand_profile">Perfil OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">O \'%1$s\' já existe. Substituir\?</string>
     <string name="export_profile_failed">Não foi possível exportar o perfil.</string>
-    <string name="profile_import">Perfil de importação</string>
+    <string name="profile_import">Importar perfil</string>
     <string name="profile_import_descr">Adicione um perfil abrindo seu arquivo com OsmAnd.</string>
     <string name="file_import_error">Erro de importação %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importado.</string>
@@ -3527,7 +3527,7 @@
     <string name="shared_string_nothing_selected">Nada selecionado</string>
     <string name="shared_string_quick_actions">Ações rápidas</string>
     <string name="shared_string_profiles">Perfis</string>
-    <string name="listed_exist">Listado %1$s já existe no OsmAnd.</string>
+    <string name="listed_exist">Listado %1$s, já existe no OsmAnd.</string>
     <string name="replace_all_desc">Os itens atuais serão substituídos pelos itens do arquivo</string>
     <string name="replace_all">Substituir tudo</string>
     <string name="keep_both">Manter os dois</string>
