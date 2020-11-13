@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -33,16 +34,14 @@ public class NavigationService extends Service implements LocationListener {
 	// global id don't conflict with others
 	public static int USED_BY_NAVIGATION = 1;
 	public static int USED_BY_GPX = 2;
-	public static int USED_BY_LIVE = 4;
 	public final static String USAGE_INTENT = "SERVICE_USED_BY";
 	public final static String USAGE_OFF_INTERVAL = "SERVICE_OFF_INTERVAL";
 
-	private NavigationServiceBinder binder = new NavigationServiceBinder();
-
+	private final NavigationServiceBinder binder = new NavigationServiceBinder();
 
 	private int serviceOffInterval;
 	private String serviceOffProvider;
-	private int serviceError;
+	private int serviceErrorTimeout;
 	private long nextManualWakeup;
 	private OsmandSettings settings;
 	private Handler handler;
@@ -61,17 +60,9 @@ public class NavigationService extends Service implements LocationListener {
 	protected synchronized static PowerManager.WakeLock getLock(Context context) {
 		if (lockStatic == null) {
 			PowerManager mgr = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-			lockStatic = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "OsmandServiceLock");
+			lockStatic = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "OsmAnd:NavigationServiceLock");
 		}
 		return lockStatic;
-	}
-
-	protected Handler getHandler() {
-		return handler;
-	}
-
-	public int getServiceError() {
-		return serviceError;
 	}
 
 	public long getNextManualWakeup() {
@@ -88,10 +79,6 @@ public class NavigationService extends Service implements LocationListener {
 
 	public int getUsedBy() {
 		return usedBy;
-	}
-
-	public String getServiceOffProvider() {
-		return serviceOffProvider;
 	}
 
 	public boolean isUsed() {
@@ -112,13 +99,9 @@ public class NavigationService extends Service implements LocationListener {
 		} else {
 			// Issue #3604
 			final OsmandApplication app = (OsmandApplication) getApplication();
-			if ((usedBy == 2) && (app.navigationServiceGpsInterval(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get()) != 0) && (serviceOffInterval == 0)) {
+			if ((usedBy == USED_BY_GPX) && (app.navigationServiceGpsInterval(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get()) != 0) && (serviceOffInterval == 0)) {
 				serviceOffInterval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
-				// From onStartCommand:
-				serviceError = serviceOffInterval / 5;
-				serviceError = Math.min(serviceError, 12 * 60 * 1000);
-				serviceError = Math.max(serviceError, 30 * 1000);
-				serviceError = Math.min(serviceError, serviceOffInterval);
+				setupServiceErrorTimeout();
 				app.setNavigationService(this);
 				AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 				pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
@@ -132,7 +115,6 @@ public class NavigationService extends Service implements LocationListener {
 					alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);
 				}
 			}
-
 			app.getNotificationHelper().updateTopNotification();
 			app.getNotificationHelper().refreshNotifications();
 		}
@@ -150,14 +132,7 @@ public class NavigationService extends Service implements LocationListener {
 		}
 		// use only gps provider
 		serviceOffProvider = LocationManager.GPS_PROVIDER;
-		serviceError = serviceOffInterval / 5;
-		// 1. not more than 12 mins
-		serviceError = Math.min(serviceError, 12 * 60 * 1000);
-		// 2. not less than 30 seconds
-		serviceError = Math.max(serviceError, 30 * 1000);
-		// 3. not more than serviceOffInterval
-		serviceError = Math.min(serviceError, serviceOffInterval);
-
+		setupServiceErrorTimeout();
 
 		locationProvider = app.getLocationProvider();
 		app.setNavigationService(this);
@@ -204,7 +179,6 @@ public class NavigationService extends Service implements LocationListener {
 		}
 	}
 
-
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -215,6 +189,15 @@ public class NavigationService extends Service implements LocationListener {
 		return serviceOffInterval == 0;
 	}
 
+	private void setupServiceErrorTimeout() {
+		serviceErrorTimeout = serviceOffInterval / 5;
+		// 1. not more than 12 mins
+		serviceErrorTimeout = Math.min(serviceErrorTimeout, 12 * 60 * 1000);
+		// 2. not less than 30 seconds
+		serviceErrorTimeout = Math.max(serviceErrorTimeout, 30 * 1000);
+		// 3. not more than serviceOffInterval
+		serviceErrorTimeout = Math.min(serviceErrorTimeout, serviceOffInterval);
+	}
 
 	@Override
 	public void onDestroy() {
@@ -254,6 +237,29 @@ public class NavigationService extends Service implements LocationListener {
 		}, 500);
 	}
 
+	@SuppressLint("MissingPermission")
+	public void onWakeUp() {
+		// request location updates
+		final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+		try {
+			locationManager.requestLocationUpdates(serviceOffProvider, 0, 0, this);
+			if (serviceOffInterval > serviceErrorTimeout) {
+				handler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						WakeLock lock = getLock(NavigationService.this);
+						if (lock.isHeld()) {
+							lock.release();
+							locationManager.removeUpdates(NavigationService.this);
+						}
+					}
+				}, serviceErrorTimeout);
+			}
+		} catch (RuntimeException e) {
+			// ignore
+		}
+	}
+
 	@Override
 	public void onLocationChanged(Location l) {
 		if (l != null && !settings.MAP_ACTIVITY_ENABLED.get()) {
@@ -273,7 +279,6 @@ public class NavigationService extends Service implements LocationListener {
 			}
 			locationProvider.setLocationFromService(location, isContinuous());
 		}
-
 	}
 
 	@Override

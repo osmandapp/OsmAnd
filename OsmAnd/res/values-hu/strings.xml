@@ -114,7 +114,7 @@
     <string name="global_app_settings">Globális beállítások az alkalmazáshoz</string>
     <string name="user_name">OSM felhasználóneved</string>
     <string name="open_street_map_login_descr">Az openstreetmap.org felé történő adatküldéshez szükséges.</string>
-    <string name="user_password">OSM jelszavad</string>
+    <string name="user_password">Jelszó</string>
     <string name="osmand_service">Háttérmód</string>
     <string name="osmand_service_descr">Az OsmAnd háttérben fut kikapcsolt kijelzővel.</string>
     <string name="switch_to_raster_map_to_see">Erre a területre letölthet offline vektoros térképet a Beállításokban (Térképfájlok kezelése), vagy váltson át az Online térképek bővítményre.</string>
@@ -3420,7 +3420,7 @@
     <string name="route_recalculation">Útvonal újraszámítása</string>
     <string name="accessibility_announce">Bejelentés</string>
     <string name="login_and_pass">Felhasználónév és jelszó</string>
-    <string name="plugin_global_prefs_info">Ezek a beállítások minden profilra vonatkoznak.</string>
+    <string name="plugin_global_prefs_info">Ezek a bővítménybeállítások globálisak, és minden profilra vonatkoznak</string>
     <string name="osm_editing">OSM-szerkesztés</string>
     <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtalálható a %1$s helyen. A már feltöltött pontok nem láthatók az OsmAndban.</string>
     <string name="app_mode_osm">OSM</string>
@@ -3938,6 +3938,26 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">Az OsmAnd a NATO által is használt MGRS (Military Grid Reference System) koordinátákat alkamazza, amely hasonlít az UTM-formátumhoz.</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Legalább két pontot kell hozzáadnia.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Legalább két pontot kell hozzáadnia</string>
     <string name="manage_subscription">Előfizetés kezelése</string>
+    <string name="gpx_upload_trackable_visibility_descr">A követhetőség azt jelenti, hogy a nyomvonal semmilyen nyilvános listában nem jelenik meg, de a nyomvonalpontok az időbélyegekkel együtt továbbra is elérhetők lesznek a nyilvános GPS API-n keresztül. Más felhasználók csak a feldolgozott nyomvonalpontokat tölthetik le az Ön nyomvonalából, amelyek közvetlenül nem társítható Önhöz.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Az azonosítható azt jelenti, hogy a nyomvonal nyilvánosan megjelenik az Ön GPS-nyomvonalai között és a GPS-nyomvonalak nyilvános listáin, vagyis más felhasználók letölthetik a nyers nyomvonalat, és társíthatják azt a felhasználónévvel. A nyomvonalpont-API-n keresztül szolgáltatott adatok hivatkozni fognak az Ön eredeti nyomvonaloldalára. A nyomvonalpontok időbélyegei elérhetők a nyilvános GPS API-n keresztül.</string>
+    <string name="gpx_upload_public_visibility_descr">A nyilvános azt jelenti, hogy a nyomvonal nyilvánosan megjelenik az Ön GPS-nyomvonalai között és a GPS-nyomvonalak nyilvános listáin. Az API-n keresztül szolgáltatott adatok nem hivatkoznak az Ön nyomvonaloldalára. A nyomvonalpontok időbélyegei nem érhetők el a nyilvános GPS API-n keresztül, és a pontok nincsenek időrend szerint sorba állítva. Más felhasználók azonban továbbra is letölthetik a nyers nyomvonalat (a benne található időbélyegeket) a nyilvános nyomvonallistáról.</string>
+    <string name="gpx_upload_private_visibility_descr">A privát azt jelenti, hogy a nyomvonal semmilyen nyilvános listán nem jelenik meg, de az abból származó nyomvonalpontok továbbra is elérhetők lesznek a nyilvános GPS API-n időbélyegzők nélkül, nem időrend szerint sorba állítva.</string>
+    <string name="enter_text_separated">A címkéket vesszővel elválasztva írja be.</string>
+    <string name="send_files_to_openstreetmap">GPX-fájl küldése az OpenStreetMapre</string>
+    <string name="markers_history">Jelölők előzményei</string>
+    <string name="subscription_on_hold_title">Az OsmAnd-előfizetés fel van függesztve</string>
+    <string name="subscription_paused_title">Az OsmAnd Live-előfizetés szünetel</string>
+    <string name="subscription_expired_title">Az OsmAnd Live-előfizetés lejárt</string>
+    <string name="subscription_payment_issue_title">Probléma van az előfizetésével. A fizetési mód kijavítása érdekében kattintson a gombra a Google Play előfizetési beállításaihoz történő ugráshoz.</string>
+    <string name="user_login">Bejelentkezés</string>
+    <string name="login_account">Fiók</string>
+    <string name="use_login_password">Fióknév és jelszó használata</string>
+    <string name="open_street_map_login_mode">Az új vagy módosított szerkesztések feltöltéséhez be kell jelentkeznie.
+\n
+\nBejelentkezhet a biztonságos OAuth-módszerrel vagy használhatja fióknevét és jelszavát.</string>
+    <string name="sign_in_with_open_street_map">Bejelentkezés OpenStreetMap-fiókkal</string>
+    <string name="login_open_street_map">Bejelentkezés az OpenStreetMapre</string>
+    <string name="login_open_street_map_org">Bejelentkezés az OpenStreetMap.org-ra</string>
 </resources>

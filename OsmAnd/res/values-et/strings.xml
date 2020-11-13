@@ -3798,7 +3798,7 @@
     <string name="mgrs_format_descr">OsmAnd kasutab MGRS-vormingut, mis on sarnane NATO UTM-vormingule.</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_mgrs">MGRS</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Graafiku joonistamiseks pead lisama vähemalt kaks punkti.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Graafiku joonistamiseks peaksid lisama vähemalt kaks punkti</string>
     <string name="subscription_on_hold_title">OsmAnd Live tellimus on ootel</string>
     <string name="subscription_paused_title">OsmAnd Live tellimus on peatatud</string>
     <string name="subscription_expired_title">OsmAnd Live tellimus on aegunud</string>
@@ -3811,4 +3811,5 @@
 \n
 \nSa võid selleks kasutada mõnd turvalust OAuth võimalust või oma kasutajanime ning salasõna.</string>
     <string name="login_account">Kasutajakonto</string>
+    <string name="send_files_to_openstreetmap">Saada GPX fail OpenStreetMappi</string>
 </resources>

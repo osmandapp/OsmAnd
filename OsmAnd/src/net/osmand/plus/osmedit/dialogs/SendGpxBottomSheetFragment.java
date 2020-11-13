@@ -3,7 +3,6 @@ package net.osmand.plus.osmedit.dialogs;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -21,6 +20,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
@@ -35,7 +35,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
@@ -53,14 +52,14 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View sendOsmPoiView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
-
-		messageField = sendOsmPoiView.findViewById(R.id.message_field);
-		tagsField = sendOsmPoiView.findViewById(R.id.tags_field);
-
 		OsmandApplication app = requiredMyApplication();
 		OsmandSettings settings = app.getSettings();
+
+		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		View sendOsmPoiView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
+
+		tagsField = sendOsmPoiView.findViewById(R.id.tags_field);
+		messageField = sendOsmPoiView.findViewById(R.id.message_field);
 
 		TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
 		if (!Algorithms.isEmpty(settings.USER_DISPLAY_NAME.get())) {
@@ -108,12 +107,11 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 				.setCustomView(sendOsmPoiView)
 				.create();
 		items.add(titleItem);
-		setRetainInstance(true);
 	}
 
 	@Override
-	protected UiUtilities.DialogButtonType getRightBottomButtonType() {
-		return (UiUtilities.DialogButtonType.PRIMARY);
+	protected DialogButtonType getRightBottomButtonType() {
+		return DialogButtonType.PRIMARY;
 	}
 
 	@Override
@@ -141,6 +139,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			SendGpxBottomSheetFragment fragment = new SendGpxBottomSheetFragment();
 			fragment.setTargetFragment(targetFragment, 0);
 			fragment.setGpxInfos(info);
+			fragment.setRetainInstance(true);
 			fragment.show(fragmentManager, TAG);
 		}
 	}
