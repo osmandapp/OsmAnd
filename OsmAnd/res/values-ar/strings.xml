@@ -270,7 +270,7 @@
     <string name="use_english_names">استخدام الأسماء الانجليزية في الخرائط</string>
     <string name="app_settings">إعدادات التطبيق</string>
     <string name="save_current_track">حفظ المسار الحالي</string>
-    <string name="shared_string_settings">الإعدادات</string>
+    <string name="shared_string_settings">إعدادات</string>
     <string name="map_magnifier">حجم الخريطة</string>
     <string name="base_world_map">خريطة العالم العامة</string>
     <string name="local_index_tile_data_expire">الانتهاء (دقائق): %1$s</string>
@@ -951,7 +951,7 @@
     <string name="shared_string_select_on_map">تحديد على الخريطة</string>
     <string name="shared_string_select_all">تحديد الكل</string>
     <string name="shared_string_deselect">قم بإلغاء تحديد</string>
-    <string name="shared_string_deselect_all">قم بإلغاء تحديد الكل</string>
+    <string name="shared_string_deselect_all">إلغاء تحديد الكل</string>
     <string name="shared_string_clear_all">مسح الكل</string>
     <string name="shared_string_share">مشاركة</string>
     <string name="shared_string_import">استيراد</string>
@@ -2087,7 +2087,7 @@
     <string name="rendering_value_medium_w_name">وسط</string>
     <string name="rendering_value_low_name">منخفض</string>
     <string name="rendering_attr_hideWaterPolygons_name">إخفاء المياه</string>
-    <string name="configure_screen_quick_action">زر الاختصار السريع</string>
+    <string name="configure_screen_quick_action">إجراءات سريعة</string>
     <string name="quick_action_item_action">إجراء %d</string>
     <string name="quick_action_item_screen">شاشة %d</string>
     <string name="quick_action_add_marker">إضافة توجيه مباشر للخريطة</string>
@@ -2142,7 +2142,7 @@
     <string name="quick_action_map_styles">أنماط الخريطة</string>
     <string name="quick_action_map_overlay">الخريطة العلوية</string>
     <string name="quick_action_map_source">مصدر الخريطة</string>
-    <string name="quick_action_map_source_title">مصدر الخريطة</string>
+    <string name="quick_action_map_source_title">مصادر الخريطة</string>
     <string name="quick_action_map_source_action">إضافة مصدر خريطة</string>
     <string name="quick_action_map_source_switch">مصدر الخريطة \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">تغيير موقع الزر</string>
@@ -3512,20 +3512,20 @@
     <string name="recalc_angle_dialog_descr">سيتم عرض جزء مستقيم إضافي بين موقعي والمسار المحسوب حتى يتم إعادة حساب المسار</string>
     <string name="recalc_angle_dialog_title">الحد الأدنى للزاوية بين موقعي ومساري</string>
     <string name="shared_string_preparing">تحضير</string>
-    <string name="shared_string_poi_types">أنواع النقاط</string>
+    <string name="shared_string_poi_types">أنواع نقاط الاهتمام</string>
     <string name="shared_string_nothing_selected">لا شيء محدد</string>
-    <string name="shared_string_quick_actions">إجراءات سريعة</string>
-    <string name="shared_string_profiles">الأوضاع</string>
-    <string name="replace_all_desc">سيتم استبدال العناصر الحالية بعناصر من الملف</string>
-    <string name="replace_all">استبدال الكل</string>
+    <string name="shared_string_quick_actions">زر الإجراء السريع</string>
+    <string name="shared_string_profiles">ملفات التعريف</string>
+    <string name="replace_all_desc">سيتم استبدال العناصر الحالية بالعناصر التي في الملف</string>
+    <string name="replace_all">استبدل الكل</string>
     <string name="get_discount_title">احصل على %1$d %2$s عند %3$s مقابل.</string>
     <string name="get_discount_first_part">%1$s لأول %2$s</string>
     <string name="get_discount_first_few_part">%1$s لأول %2$s</string>
     <string name="price_and_discount">%1$s • وفر %2$s</string>
     <string name="listed_exist">المدرج %1$s, موجودة بالفعل في أوسماند.</string>
     <string name="keep_both">احتفظ بكليهما</string>
-    <string name="keep_both_desc">سيتم إضافة العناصر المستوردة مع البادئة</string>
-    <string name="import_duplicates_description">أوسماند لديه بالفعل عناصر بنفس الأسماء مثل تلك المستوردة.
+    <string name="keep_both_desc">سيتم إضافة العناصر المستوردة مع زيادة قبل اسمها</string>
+    <string name="import_duplicates_description">OsmAnd يحتوي بالفعل على عناصر بنفس الأسماء مثل التي استوردتها.
 \n
 \nحدد إجراء.</string>
     <string name="import_duplicates_title">بعض العناصر موجودة بالفعل</string>
@@ -3543,7 +3543,7 @@
 \n
 \nقد يستغرق الأمر بعض الوقت.</string>
     <string name="items_added">العناصر المضافة</string>
-    <string name="shared_string_import_complete">اكتمل الاستيراد</string>
+    <string name="shared_string_import_complete">تم الاستيراد</string>
     <string name="import_complete_description">يتم استيراد جميع البيانات من %1$s، يمكنك استخدام الأزرار أدناه لفتح الجزء المطلوب من التطبيق لإدارته.</string>
     <string name="recalculate_route_distance_promo">سيتم إعادة حساب المسار إذا كانت المسافة من المسار إلى الموقع الحالي أكثر من القيمة المحددة.</string>
     <string name="select_distance_route_will_recalc">حدد المسافة التي سيتم بعدها إعادة حساب المسار.</string>
