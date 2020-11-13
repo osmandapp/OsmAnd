@@ -64,7 +64,7 @@
     <string name="use_fluorescent_overlays">Fluoreszkáló rátétrétegek</string>
     <string name="use_fluorescent_overlays_descr">Élénk színek használata az útvonalak megjelenítéséhez.</string>
     <string name="offline_edition">Offline szerkesztés</string>
-    <string name="offline_edition_descr">Szerkesztés mindig offline módban.</string>
+    <string name="offline_edition_descr">Ha az offline szerkesztés engedélyezve van, akkor az alkalmazás a módosításokat először helyben menti és kérésre tölti fel, egyébként azonnal feltölti a módosításokat.</string>
     <string name="update_poi_does_not_change_indexes">Az alkalmazáson belüli POI módosítások nincsenek hatással a letöltött térképre, a változtatásokat tartalmazó fájl ehelyett az eszközre lesz mentve.</string>
     <string name="local_openstreetmap_uploading">Feltöltés…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/jegyzet feltöltve</string>
@@ -3445,8 +3445,8 @@
     <string name="recalc_angle_dialog_descr">Egy egyenes szakasz fog megjelenni a helyzetem és a tervezett útvonal között, amíg az útvonal újraszámításra kerül</string>
     <string name="recalc_angle_dialog_title">Legkisebb szög a helyzetem és az útvonal között</string>
     <string name="shared_string_preparing">Előkészület</string>
-    <string name="shared_string_poi_types">POI típusok</string>
-    <string name="shared_string_nothing_selected">Nincs kiválasztott</string>
+    <string name="shared_string_poi_types">POI-típusok</string>
+    <string name="shared_string_nothing_selected">Nincs kijelölve semmi</string>
     <string name="shared_string_quick_actions">Gyorsműveletek</string>
     <string name="shared_string_profiles">Profilok</string>
     <string name="import_rendering_file">Renderfájl importálása</string>
@@ -3476,7 +3476,7 @@
     <string name="please_provide_profile_name_message">Kérem, adjon nevet a profilnak</string>
     <string name="select_data_to_import">Válassza ki az importálandó adatot.</string>
     <string name="keep_both">Mindkettő megtartása</string>
-    <string name="replace_all">Összes lecserélése</string>
+    <string name="replace_all">Az összes cseréje</string>
     <string name="shared_string_terrain">Domborzat</string>
     <string name="hillshade_description">A domborzatárnyékolás réteg sötét árnyalattal emeli ki a lejtőket, csúcsokat és a síkságokat.</string>
     <string name="slope_description">A lejtő réteg színezéssel jeleníti meg a terep meredekségét.</string>
@@ -3708,8 +3708,8 @@
     <string name="routing_attr_length_name">Hosszkorlátozás</string>
     <string name="speed_cameras_removed_descr">Az eszköz nem tartalmaz traffipax adatokat.</string>
     <string name="replace_all_desc">Az jelenlegi elemek lecserélésre kerülnek a fájlban lévőkre</string>
-    <string name="keep_both_desc">Az importál elemek előtaggal kerünek hozzáadásra</string>
-    <string name="import_duplicates_description">Az OsmAnd már tartalmaz az importárttal megegyező nevű elemeket.
+    <string name="keep_both_desc">Az importált elemek előtaggal lesznek hozzáadva</string>
+    <string name="import_duplicates_description">Az OsmAnd már tartalmaz az importálttal megegyező nevű elemeket.
 \n
 \nVálasszon egy műveletet.</string>
     <string name="import_duplicates_title">Néhány elem már létezik</string>
@@ -3960,4 +3960,13 @@
     <string name="sign_in_with_open_street_map">Bejelentkezés OpenStreetMap-fiókkal</string>
     <string name="login_open_street_map">Bejelentkezés az OpenStreetMapre</string>
     <string name="login_open_street_map_org">Bejelentkezés az OpenStreetMap.org-ra</string>
+    <string name="osm_edit_close_note">OSM-jegyzet lezárása</string>
+    <string name="osm_edit_comment_note">Hozzászólás az OSM-jegyzethez</string>
+    <string name="osm_login_descr">Bejelentkezhet a biztonságos OAuth módszerrel vagy használhatja saját felhasználónevét és jelszavát.</string>
+    <string name="shared_string_add_photo">Fénykép hozzáadása</string>
+    <string name="register_on_openplacereviews">Regisztráció az
+\nOpenPlaceReviews.org oldalon</string>
+    <string name="register_on_openplacereviews_desc">A fényképeket a OpenPlaceReviews.org nyílt adatprojekt biztosítja. Saját fényképei feltöltéséhez be kell jelentkeznie a weboldalon.</string>
+    <string name="register_opr_create_new_account">Új fiók létrehozása</string>
+    <string name="register_opr_have_account">Már van fiókom</string>
 </resources>
