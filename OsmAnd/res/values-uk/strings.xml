@@ -119,7 +119,7 @@
     <string name="use_fluorescent_overlays">Флуоресцентні кольори</string>
     <string name="use_fluorescent_overlays_descr">Використовувати флуоресцентні кольори для відображення треків та шляхів.</string>
     <string name="offline_edition">Оффлайн редагування</string>
-    <string name="offline_edition_descr">Завжди використовувати оффлайн редагування.</string>
+    <string name="offline_edition_descr">Якщо ввімкнено редагування в автономному режимі, тоді зміни буде збережено спочатку локально та завантажено за запитом, інакше зміни буде завантажено негайно.</string>
     <string name="update_poi_does_not_change_indexes">Зміни POI всередині застосунку не впливають на завантажені файли мап - вони зберігаються в окремий файл на Вашому пристрої.</string>
     <string name="local_openstreetmap_uploading">Вивантаження…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/нотатки вивантажено</string>
@@ -3965,4 +3965,13 @@
     <string name="gpx_upload_private_visibility_descr">Приватне означає, що трасування не з\'являтиметься в жодному загальнодоступному списку, але контрольні точки з нього все одно будуть доступні через загальнодоступний API GPS без позначок часу та не впорядковані за хронологією.</string>
     <string name="gpx_upload_identifiable_visibility_descr">Ідентифікований означає, що трасування буде показано публічно у вашому трасуванні GPS і в загальнодоступних списках трасування GPS, тобто інші користувачі зможуть завантажити необроблене трасування та пов\'язати його з вашим ім\'ям користувача. Дані, подані за допомогою API точок відстеження, посилаються на вихідну сторінку трасування. Позначки часу точок трасування доступні через загальнодоступний GPS API.</string>
     <string name="gpx_upload_trackable_visibility_descr">Відстежуваний означає, що трасування не з\'явиться в жодному загальнодоступному списку, але точки від нього все одно будуть доступні через загальнодоступний API GPS із позначками часу. Інші користувачі зможуть завантажувати лише оброблені контрольні точки з вашого трасування, які не можуть бути безпосередньо пов’язані з вами.</string>
+    <string name="osm_edit_close_note">Закрити примітку OSM</string>
+    <string name="osm_edit_comment_note">Коментувати примітку OSM</string>
+    <string name="osm_login_descr">Ви можете увійти за допомогою безпечного методу OAuth або застосувавши свої ім\'я користувача й пароль.</string>
+    <string name="shared_string_add_photo">Додати світлини</string>
+    <string name="register_on_openplacereviews">Зареєструватися на
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Світлини надаються проєктом відкритих даних OpenPlaceReviews.org. Щоб завантажити світлини зареєструйтеся на сайті.</string>
+    <string name="register_opr_create_new_account">Створити обліковий запис</string>
+    <string name="register_opr_have_account">У мене вже є обліковий запис</string>
 </resources>
