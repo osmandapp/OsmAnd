@@ -3940,4 +3940,12 @@
     <string name="markers_history">Historique des marqueurs</string>
     <string name="send_files_to_openstreetmap">Envoyer un fichier GPX vers OpenStreetMap</string>
     <string name="enter_text_separated">Saisissez les étiquettes séparées par des virgules.</string>
+    <string name="subscription_payment_issue_title">Il y a un problème avec votre abonnement. Cliquez sur le bouton pour accéder aux paramètres de l\'abonnement Google Play et corriger votre mode de paiement.</string>
+    <string name="osm_edit_comment_note">Commenter la note OSM</string>
+    <string name="osm_edit_close_note">Fermer la note OSM</string>
+    <string name="shared_string_add_photo">Ajouter une photo</string>
+    <string name="register_on_openplacereviews">Inscrivez-vous sur
+\nOpenPlaceReviews.org</string>
+    <string name="register_opr_create_new_account">Créer un nouveau compte</string>
+    <string name="register_opr_have_account">J\'ai déjà un compte</string>
 </resources>
