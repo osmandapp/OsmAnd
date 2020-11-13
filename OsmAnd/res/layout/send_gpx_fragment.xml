@@ -40,9 +40,9 @@
 			<com.google.android.material.textfield.TextInputEditText
 				android:id="@+id/message_field"
 				android:layout_width="match_parent"
+				android:background = "?attr/background_field"
 				android:layout_height="wrap_content"
 				android:imeOptions="actionDone"
-				android:background = "#E5E5E5"
 				android:paddingTop = "@dimen/empty_state_image_margin_bottom"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
@@ -62,9 +62,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:imeOptions="actionDone"
-				android:text="osmand"
-				android:background = "#E5E5E5"
-				android:paddingTop = "@dimen/empty_state_image_margin_bottom"/>
+				android:background = "?attr/background_field"
+				android:text="osmand" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 	</LinearLayout>
