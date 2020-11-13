@@ -15,7 +15,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.osmedit.OsmPoint.Action;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
+import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -45,16 +46,24 @@ public class EditPOIMenuController extends MenuController {
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
 				if (plugin != null && activity != null) {
+					OsmPoint point = getOsmPoint();
 					OsmandApplication app = activity.getMyApplication();
 					OsmandSettings settings = app.getSettings();
 					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
-					if (client.isValidToken()
+					boolean isLogged = client.isValidToken()
 							|| !Algorithms.isEmpty(settings.USER_NAME.get())
-							&& !Algorithms.isEmpty(settings.USER_PASSWORD.get())) {
-						SimpleProgressDialogPoiUploader poiDialogUploader = new SimpleProgressDialogPoiUploader(activity);
-						poiDialogUploader.showProgressDialog(new OsmPoint[] {getOsmPoint()}, false, false);
-					} else {
-						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), null);
+							&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
+
+					if (point instanceof OpenstreetmapPoint) {
+						if (isLogged) {
+							SendPoiBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
+									new OsmPoint[]{getOsmPoint()});
+						} else {
+							LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), null);
+						}
+					} else if (point instanceof OsmNotesPoint) {
+						SendOsmNoteBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
+								new OsmPoint[]{getOsmPoint()});
 					}
 				}
 			}

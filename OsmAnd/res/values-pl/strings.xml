@@ -3961,7 +3961,7 @@
     <string name="user_login">Login</string>
     <string name="login_open_street_map">Zaloguj się do OpenStreetMap</string>
     <string name="login_open_street_map_org">Zaloguj się do OpenStreetMap.org</string>
-    <string name="sing_in_with_open_street_map">Zaloguj się za pomocą OpenStreetMap</string>
+    <string name="sign_in_with_open_street_map">Zaloguj się za pomocą OpenStreetMap</string>
     <string name="open_street_map_login_mode">Musisz się zalogować, aby przesłać nowe lub zmodyfikowane zmiany.
 \n
 \nMożesz zalogować się za pomocą bezpiecznej metody autoryzacji OAuth lub użyć swojego loginu i hasła.</string>

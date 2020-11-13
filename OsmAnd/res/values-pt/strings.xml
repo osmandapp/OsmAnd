@@ -3960,7 +3960,7 @@
 \nPode entrar a usar o método seguro OAuth ou usar o seu nome de utilizador e a sua palavra-passe.</string>
     <string name="login_open_street_map">Fazer login ao OpenStreetMap</string>
     <string name="login_open_street_map_org">Entrar com OpenStreetMap.org</string>
-    <string name="sing_in_with_open_street_map">Entrar com OpenStreetMap</string>
+    <string name="sign_in_with_open_street_map">Entrar com OpenStreetMap</string>
     <string name="use_login_password">Usar nome do utilizador e palavra-passe</string>
     <string name="login_account">Conta</string>
     <string name="user_login">Entrar</string>

@@ -43,6 +43,8 @@ import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -621,26 +623,40 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		return info;
 	}
 
-
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	private void uploadItems(final OsmPoint[] items) {
+	private void uploadItems(final OsmPoint[] points) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			OsmandApplication app = getMyApplication();
 			OsmandSettings settings = app.getSettings();
-			OsmOAuthAuthorizationAdapter authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
-			if (authorizationAdapter.isValidToken()
+			OsmOAuthAuthorizationAdapter authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
+			boolean isLogged = authorizationAdapter.isValidToken()
 					|| !Algorithms.isEmpty(settings.USER_NAME.get())
-					&& !Algorithms.isEmpty(settings.USER_PASSWORD.get())) {
-				SendPoiDialogFragment.createInstance(items, PoiUploaderType.FRAGMENT)
-						.show(getChildFragmentManager(), SendPoiDialogFragment.TAG);
+					&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
+			if (hasPoiGroup(points)) {
+				if (isLogged) {
+					SendPoiBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), points);
+				} else {
+					LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);
+				}
 			} else {
-				LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);
+				SendOsmNoteBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), points);
 			}
 		}
+	}
+
+	boolean hasPoiGroup(OsmPoint[] points) {
+		boolean hasPoiGroup = false;
+		for (OsmPoint p : points) {
+			if (p.getGroup() == OsmPoint.Group.POI) {
+				hasPoiGroup = true;
+				break;
+			}
+		}
+		return hasPoiGroup;
 	}
 
 	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {

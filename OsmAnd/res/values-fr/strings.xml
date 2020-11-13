@@ -3932,7 +3932,6 @@
     <string name="subscription_paused_title">L\'abonnement OsmAnd Live a été suspendu</string>
     <string name="login_open_street_map">Se connecter à OpenStreetMap</string>
     <string name="login_open_street_map_org">Se connecter à OpenStreetMap.org</string>
-    <string name="sing_in_with_open_street_map">Se connecter avec OpenStreetMap</string>
     <string name="user_login">Identifiant</string>
     <string name="use_login_password">Utiliser un identifiant et un mot de passe</string>
     <string name="login_account">Compte</string>

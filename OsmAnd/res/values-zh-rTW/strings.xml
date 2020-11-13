@@ -3950,7 +3950,6 @@
     <string name="subscription_on_hold_title">OsmAnd Live 訂閱已暫停</string>
     <string name="login_open_street_map">登入到 OpenStreetMap</string>
     <string name="login_open_street_map_org">登入到 OpenStreetMap.org</string>
-    <string name="sing_in_with_open_street_map">以 OpenStreetMap 登入</string>
     <string name="open_street_map_login_mode">您必須登入以上傳新的或修正過的變更。
 \n
 \n您可以使用安全的 OAuth 方法或使用您的登入與密碼來登入。</string>
