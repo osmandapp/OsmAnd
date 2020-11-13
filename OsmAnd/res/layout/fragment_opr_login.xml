@@ -12,9 +12,9 @@
 		android:layout_height="56dp"
 		android:layout_marginTop="@dimen/dialog_content_margin">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/back_button"
-			android:paddingLeft="@dimen/content_padding"
+			style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:layout_gravity="start"
@@ -24,9 +24,8 @@
 
 	</LinearLayout>
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/opr_img"
-		style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
