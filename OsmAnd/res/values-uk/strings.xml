@@ -3951,7 +3951,6 @@
     <string name="subscription_on_hold_title">Передплата OsmAnd Live на утриманні</string>
     <string name="login_open_street_map">Увійти до OpenStreetMap.org</string>
     <string name="login_open_street_map_org">Увійти до OpenStreetMap.org</string>
-    <string name="sing_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
     <string name="open_street_map_login_mode">Увійдіть, щоб вивантажити нові або внесені зміни.
 \n
 \nВи можете увійти, за допомогою безпечного методу OAuth, або скористатися своїм ім\'ям та паролем.</string>

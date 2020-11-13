@@ -19,9 +19,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.measurementtool.LoginBottomSheetFragment.OsmAuthorizationListener;
 import net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
@@ -34,13 +34,14 @@ import org.apache.commons.logging.Log;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
-public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginListener, OsmAuthorizationListener {
+public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginListener,
+		OsmAuthorizationListener {
 
 	private static final Log log = PlatformUtil.getLog(OsmEditingFragment.class);
 
 	private static final String OSM_LOGOUT = "osm_logout";
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
-	private static final String OSM_LOGIN_DATA = "osm_login_data";
+	public static final String OSM_LOGIN_DATA = "osm_login_data";
 	private static final String OSM_EDITING_INFO = "osm_editing_info";
 
 	private OsmOAuthAuthorizationAdapter authorizationAdapter;
@@ -48,7 +49,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
+		authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
 	}
 
 	@Override
@@ -176,7 +177,6 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 				settings.USER_ACCESS_TOKEN_SECRET.resetToDefault();
 
 				authorizationAdapter.resetToken();
-				authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
 			} else {
 				settings.USER_NAME.resetToDefault();
 				settings.USER_PASSWORD.resetToDefault();
@@ -195,7 +195,6 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	@Override
 	public void authorizationCompleted() {
-		authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
 		updateAllSettings();
 	}
 }
