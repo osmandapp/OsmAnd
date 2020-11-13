@@ -3956,4 +3956,13 @@
     <string name="sign_in_with_open_street_map">قم بتسجيل الدخول باستخدام OpenStreetMap</string>
     <string name="gpx_upload_public_visibility_descr">عام يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة. البيانات المقدمة عبر API لا تشير إلى صفحة التتبع الخاصة بك. الطوابع الزمنية لنقاط التتبع غير متاحة من خلال واجهة برمجة تطبيقات GPS API العامة، والنقاط غير مرتبة ترتيبًا زمنيًا. ومع ذلك، لا يزال المستخدمون الآخرون قادرين على تنزيل التتبع الأولي من قائمة التتبع العامة وأي طوابع زمنية مضمنة فيه.</string>
     <string name="gpx_upload_identifiable_visibility_descr">متعرف عليه يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة، أي سيتمكن المستخدمون الآخرون من تنزيل التتبع الأولي وربطه باسم المستخدم الخاص بك. ستشير البيانات التي يتم تقديمها عبر API نقاط التتبع إلى صفحة التتبع الأصلية الخاصة بك. الطوابع الزمنية لنقاط التتبع متاحة من خلال واجهة برمجة تطبيقات GPS API العامة.</string>
+    <string name="osm_edit_close_note">أغلاق ملاحظة OSM</string>
+    <string name="osm_edit_comment_note">تعليق ملاحظة OSM</string>
+    <string name="osm_login_descr">يمكنك تسجيل الدخول باستخدام طريقة OAuth الآمنة أو استخدام تسجيل الدخول وكلمة المرور الخاصة بك.</string>
+    <string name="shared_string_add_photo">إضافة صورة</string>
+    <string name="register_on_openplacereviews">سجل في
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">يتم توفير الصور من خلال مشروع البيانات المفتوحة OpenPlaceReviews.org. من أجل رفع الصور الخاصة بك، تحتاج إلى الاشتراك بالموقع.</string>
+    <string name="register_opr_create_new_account">إنشاء حساب جديد</string>
+    <string name="register_opr_have_account">لدي حساب بالفعل</string>
 </resources>
