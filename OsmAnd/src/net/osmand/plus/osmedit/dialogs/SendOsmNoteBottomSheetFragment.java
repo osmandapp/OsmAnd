@@ -6,7 +6,6 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,7 +24,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
@@ -47,7 +45,6 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	public static final String TAG = SendOsmNoteBottomSheetFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SendOsmNoteBottomSheetFragment.class);
 	public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
-	public static final String POI_UPLOADER_TYPE = "poi_uploader_type";
 	private OsmPoint[] poi;
 
 	protected OsmandSettings settings;
@@ -56,23 +53,18 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	private LinearLayout signInView;
 	private SwitchCompat uploadAnonymously;
 
-	public enum PoiUploaderType {
-		SIMPLE,
-		FRAGMENT
-	}
-
-	protected OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
-
 	private boolean isLoginOAuth() {
-		return !Algorithms.isEmpty(getMyApplication().getSettings().USER_DISPLAY_NAME.get());
+		return !Algorithms.isEmpty(settings.USER_DISPLAY_NAME.get());
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
 		OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
+		settings = app.getSettings();
+		poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
 
 		items.add(new TitleItem(getString(R.string.upload_osm_note)));
 
@@ -87,8 +79,6 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		signInView = sendOsmNoteView.findViewById(R.id.sign_in_container);
 		uploadAnonymously = sendOsmNoteView.findViewById(R.id.upload_anonymously_switch);
 		accountName = sendOsmNoteView.findViewById(R.id.user_name);
-
-		settings = app.getSettings();
 		updateAccountName();
 		View signInButton = sendOsmNoteView.findViewById(R.id.sign_in_button);
 		setupButton(signInButton, R.string.sing_in_with_open_street_map, DialogButtonType.PRIMARY,
@@ -105,8 +95,11 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		loginButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmLoginDataBottomSheet.showInstance(getFragmentManager(), OSM_LOGIN_DATA,
-						SendOsmNoteBottomSheetFragment.this, usedOnMap, null);
+				FragmentManager fragmentManager = getFragmentManager();
+				if (fragmentManager != null) {
+					OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA,
+							SendOsmNoteBottomSheetFragment.this, usedOnMap, null);
+				}
 			}
 		});
 		updateSignIn(uploadAnonymously.isChecked());
@@ -157,14 +150,12 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		setupDialogButton(nightMode, buttonView, buttonType, buttonTextId);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points,
-	                                @NonNull PoiUploaderType uploaderType) {
+	public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points) {
 		try {
 			if (!fm.isStateSaved()) {
 				SendOsmNoteBottomSheetFragment fragment = new SendOsmNoteBottomSheetFragment();
 				Bundle bundle = new Bundle();
 				bundle.putSerializable(OPENSTREETMAP_POINT, points);
-				bundle.putString(POI_UPLOADER_TYPE, uploaderType.name());
 				fragment.setArguments(bundle);
 				fragment.show(fm, TAG);
 			}
@@ -180,39 +171,9 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		View view = getView();
-		boolean hasPoiGroup = false;
-		assert poi != null;
-		for (OsmPoint p : poi) {
-			if (p.getGroup() == OsmPoint.Group.POI) {
-				hasPoiGroup = true;
-				break;
-			}
-		}
-		final boolean hasPOI = hasPoiGroup;
-		final SwitchCompat uploadAnonymously = (SwitchCompat) view.findViewById(R.id.upload_anonymously_switch);
-		final EditText messageEditText = (EditText) view.findViewById(R.id.message_field);
-		final SendPoiDialogFragment.PoiUploaderType poiUploaderType = SendPoiDialogFragment.PoiUploaderType.valueOf(getArguments().getString(POI_UPLOADER_TYPE, SendPoiDialogFragment.PoiUploaderType.SIMPLE.name()));
-		final ProgressDialogPoiUploader progressDialogPoiUploader;
-		if (poiUploaderType == SendPoiDialogFragment.PoiUploaderType.SIMPLE && getActivity() instanceof MapActivity) {
-			progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) getActivity());
-		} else {
-			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
-		}
-		if (progressDialogPoiUploader != null) {
-			String comment = messageEditText.getText().toString();
-			if (comment.length() > 0) {
-				for (OsmPoint osmPoint : poi) {
-					if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-						((OpenstreetmapPoint) osmPoint).setComment(comment);
-						break;
-					}
-				}
-			}
-			progressDialogPoiUploader.showProgressDialog(poi,
-					false,
-					!hasPOI && uploadAnonymously.isChecked());
-		}
+		ProgressDialogPoiUploader progressDialogPoiUploader;
+		progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) getActivity());
+		progressDialogPoiUploader.showProgressDialog(poi, false, uploadAnonymously.isChecked());
 		dismiss();
 	}
 

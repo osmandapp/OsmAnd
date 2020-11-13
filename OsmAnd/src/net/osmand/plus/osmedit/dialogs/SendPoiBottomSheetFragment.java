@@ -12,6 +12,8 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -25,56 +27,60 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.*;
+
 public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
     public static final String TAG = SendPoiBottomSheetFragment.class.getSimpleName();
     private static final Log LOG = PlatformUtil.getLog(SendPoiBottomSheetFragment.class);
     public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
-    public static final String POI_UPLOADER_TYPE = "poi_uploader_type";
     private OsmPoint[] poi;
 
-    protected OsmandSettings settings;
+    private SwitchCompat closeChangeSet;
+    private EditText messageEditText;
 
-    public enum PoiUploaderType {
-        SIMPLE,
-        FRAGMENT
-    }
 
-    protected OsmandApplication getMyApplication() {
-        return (OsmandApplication) getActivity().getApplication();
-    }
-
-    private boolean isLoginOAuth() {
-        return !Algorithms.isEmpty(getMyApplication().getSettings().USER_DISPLAY_NAME.get());
+    private boolean isLoginOAuth(OsmandSettings settings) {
+        return !Algorithms.isEmpty(settings.USER_DISPLAY_NAME.get());
     }
 
     @Override
     public void createMenuItems(Bundle savedInstanceState) {
         OsmandApplication app = getMyApplication();
+        if (app == null) {
+            return;
+        }
+        poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
         final boolean isNightMode = app.getDaynightHelper().isNightModeForMapControls();
         final View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
                 R.layout.send_poi_fragment, null);
-        final SwitchCompat closeChangset = sendOsmPoiView.findViewById(R.id.close_change_set_checkbox);
+        closeChangeSet = sendOsmPoiView.findViewById(R.id.close_change_set_checkbox);
+        messageEditText = sendOsmPoiView.findViewById(R.id.message_field);
+        String defaultChangeSet = createDefaultChangeSet(app);
+        messageEditText.setText(defaultChangeSet);
         final TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
-        settings = app.getSettings();
+        OsmandSettings settings = app.getSettings();
         String userNameOAuth = settings.USER_DISPLAY_NAME.get();
         String userNameOpenID = settings.USER_NAME.get();
-        String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
+        String userName = isLoginOAuth(settings) ? userNameOAuth : userNameOpenID;
         accountName.setText(userName);
-        closeChangset.setBackgroundResource(isNightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
+        closeChangeSet.setBackgroundResource(isNightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
         final int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-        closeChangset.setPadding(paddingSmall, 0, paddingSmall, 0);
-        closeChangset.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        closeChangeSet.setPadding(paddingSmall, 0, paddingSmall, 0);
+        closeChangeSet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isNightMode) {
-                    closeChangset.setBackgroundResource(
+                    closeChangeSet.setBackgroundResource(
                             isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
                 } else {
-                    closeChangset.setBackgroundResource(
+                    closeChangeSet.setBackgroundResource(
                             isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
                 }
-                closeChangset.setPadding(paddingSmall, 0, paddingSmall, 0);
+                closeChangeSet.setPadding(paddingSmall, 0, paddingSmall, 0);
             }
         });
         final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
@@ -83,14 +89,12 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
         items.add(titleItem);
     }
 
-    public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points,
-                                    @NonNull SendPoiBottomSheetFragment.PoiUploaderType uploaderType) {
+    public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points) {
         try {
             if (!fm.isStateSaved()) {
                 SendPoiBottomSheetFragment fragment = new SendPoiBottomSheetFragment();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(OPENSTREETMAP_POINT, points);
-                bundle.putString(POI_UPLOADER_TYPE, uploaderType.name());
                 fragment.setArguments(bundle);
                 fragment.show(fm, TAG);
             }
@@ -106,40 +110,127 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
     @Override
     protected void onRightBottomButtonClick() {
-        View view = getView();
-        poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
-        final SwitchCompat closeChangeSetCheckBox =
-                view.findViewById(R.id.close_change_set_checkbox);
-        final EditText messageEditText = view.findViewById(R.id.message_field);
-        final SendPoiDialogFragment.PoiUploaderType poiUploaderType = SendPoiDialogFragment.PoiUploaderType.valueOf(getArguments().getString(POI_UPLOADER_TYPE, SendPoiDialogFragment.PoiUploaderType.SIMPLE.name()));
-        final SendPoiDialogFragment.ProgressDialogPoiUploader progressDialogPoiUploader;
-        if (poiUploaderType == SendPoiDialogFragment.PoiUploaderType.SIMPLE && getActivity() instanceof MapActivity) {
-            progressDialogPoiUploader =
-                    new SendPoiDialogFragment.SimpleProgressDialogPoiUploader((MapActivity) getActivity());
-        } else {
-            progressDialogPoiUploader = (SendPoiDialogFragment.ProgressDialogPoiUploader) getParentFragment();
-        }
-        if (progressDialogPoiUploader != null) {
-            String comment = messageEditText.getText().toString();
-            if (comment.length() > 0) {
-                for (OsmPoint osmPoint : poi) {
-                    if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-                        ((OpenstreetmapPoint) osmPoint).setComment(comment);
-                        break;
-                    }
+        final ProgressDialogPoiUploader progressDialogPoiUploader;
+        progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) getActivity());
+
+        String comment = messageEditText.getText().toString();
+        if (comment.length() > 0) {
+            for (OsmPoint osmPoint : poi) {
+                if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+                    ((OpenstreetmapPoint) osmPoint).setComment(comment);
+                    break;
                 }
             }
-            progressDialogPoiUploader.showProgressDialog(poi,
-                    closeChangeSetCheckBox.isChecked(),
-                    false);
         }
-    dismiss();
-}
+        progressDialogPoiUploader.showProgressDialog(poi, closeChangeSet.isChecked(), false);
+        dismiss();
+    }
 
     @Override
     protected int getRightBottomButtonTextId() {
         return R.string.shared_string_upload;
     }
 
+    private String createDefaultChangeSet(OsmandApplication app) {
+        Map<String, PoiType> allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
+        if (allTranslatedSubTypes == null) {
+            return "";
+        }
+        Map<String, Integer> addGroup = new HashMap<>();
+        Map<String, Integer> editGroup = new HashMap<>();
+        Map<String, Integer> deleteGroup = new HashMap<>();
+        Map<String, Integer> reopenGroup = new HashMap<>();
+        String comment = "";
+        for (OsmPoint p : poi) {
+            if (p.getGroup() == OsmPoint.Group.POI) {
+                OsmPoint.Action action = p.getAction();
+                String type = ((OpenstreetmapPoint) p).getEntity().getTag(Entity.POI_TYPE_TAG);
+                if (type == null) {
+                    continue;
+                }
+                PoiType localizedPoiType = allTranslatedSubTypes.get(type.toLowerCase().trim());
+                if (localizedPoiType != null) {
+                    type = Algorithms.capitalizeFirstLetter(localizedPoiType.getKeyName().replace('_', ' '));
+                }
+                if (action == OsmPoint.Action.CREATE) {
+                    if (!addGroup.containsKey(type)) {
+                        addGroup.put(type, 1);
+                    } else {
+                        addGroup.put(type, addGroup.get(type) + 1);
+                    }
+                } else if (action == OsmPoint.Action.MODIFY) {
+                    if (!editGroup.containsKey(type)) {
+                        editGroup.put(type, 1);
+                    } else {
+                        editGroup.put(type, editGroup.get(type) + 1);
+                    }
+                } else if (action == OsmPoint.Action.DELETE) {
+                    if (!deleteGroup.containsKey(type)) {
+                        deleteGroup.put(type, 1);
+                    } else {
+                        deleteGroup.put(type, deleteGroup.get(type) + 1);
+                    }
+                } else if (action == OsmPoint.Action.REOPEN) {
+                    if (!reopenGroup.containsKey(type)) {
+                        reopenGroup.put(type, 1);
+                    } else {
+                        reopenGroup.put(type, reopenGroup.get(type) + 1);
+                    }
+                }
+            }
+        }
+        int modifiedItemsOutOfLimit = 0;
+        for (int i = 0; i < 4; i++) {
+            String action;
+            Map<String, Integer> group;
+            switch (i) {
+                case 0:
+                    action = getString(R.string.default_changeset_add);
+                    group = addGroup;
+                    break;
+                case 1:
+                    action = getString(R.string.default_changeset_edit);
+                    group = editGroup;
+                    break;
+                case 2:
+                    action = getString(R.string.default_changeset_delete);
+                    group = deleteGroup;
+                    break;
+                case 3:
+                    action = getString(R.string.default_changeset_reopen);
+                    group = reopenGroup;
+                    break;
+                default:
+                    action = "";
+                    group = new HashMap<>();
+            }
+
+            if (!group.isEmpty()) {
+                int pos = 0;
+                for (Map.Entry<String, Integer> entry : group.entrySet()) {
+                    String type = entry.getKey();
+                    int quantity = entry.getValue();
+                    if (comment.length() > 200) {
+                        modifiedItemsOutOfLimit += quantity;
+                    } else {
+                        if (pos == 0) {
+                            comment = comment.concat(comment.length() == 0 ? "" : "; ").concat(action).concat(" ")
+                                    .concat(quantity == 1 ? "" : quantity + " ").concat(type);
+                        } else {
+                            comment = comment.concat(", ").concat(quantity == 1 ? "" : quantity + " ").concat(type);
+                        }
+                    }
+                    pos++;
+                }
+            }
+        }
+        if (modifiedItemsOutOfLimit != 0) {
+            comment = comment.concat("; ").concat(modifiedItemsOutOfLimit + " ")
+                    .concat(getString(R.string.items_modified)).concat(".");
+        } else if (!comment.equals("")) {
+            comment = comment.concat(".");
+        }
+        return comment;
+    }
 }
 

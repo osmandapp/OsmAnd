@@ -57,13 +57,13 @@ public class EditPOIMenuController extends MenuController {
 					if (point instanceof OpenstreetmapPoint) {
 						if (isLogin) {
 							SendPoiBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
-									new OsmPoint[]{getOsmPoint()}, SendPoiBottomSheetFragment.PoiUploaderType.SIMPLE);
+									new OsmPoint[]{getOsmPoint()});
 						} else {
 							LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), null);
 						}
 					} else if (point instanceof OsmNotesPoint) {
 						SendOsmNoteBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
-								new OsmPoint[]{getOsmPoint()}, SendOsmNoteBottomSheetFragment.PoiUploaderType.SIMPLE);
+								new OsmPoint[]{getOsmPoint()});
 					}
 				}
 			}
