@@ -3166,7 +3166,7 @@
     <string name="sett_generic_ext_input">Tastatur</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="shared_string_default">Forvalg</string>
-    <string name="shared_string_file_is_saved">% lagret</string>
+    <string name="shared_string_file_is_saved">%s er lagret</string>
     <string name="day">Dag</string>
     <string name="days_2_4">Dager</string>
     <string name="days_5">Dager</string>
@@ -3794,13 +3794,13 @@
 \n
 \n%2$s er nivåene de opprinnelige flisene vil være synlige, oppskalering eller nedskalering finner sted utenfor disse verdiene.</string>
     <string name="app_mode_inline_skates">Rulleskøyter</string>
-    <string name="speed_cameras_legal_descr">I noen land og områder, er bruk av fotoboksvarsling forbudt ved lov.
+    <string name="speed_cameras_legal_descr">I noen land og områder er bruk av fotoboksvarsling forbudt ved lov.
 \n
 \nDu må vurdere dette selv i henhold til lovene i ditt land.
 \n
 \nVelg %1$s og du vil motta varsler og advarsler om fotobokser.
 \n
-\nVelg %1$s. All data som har med fotobokser å gjøre, varsler, merknader og interessepunkter vil bli slettet til OsmAnd reinstalleres helt og holdent.</string>
+\nVelg %2$s. Alle data som har med fotobokser å gjøre: varsler, meldinger og interessepunkter blir slettet til OsmAnd er fullstendig installert på nytt.</string>
     <string name="clear_tiles_warning">Å utføre disse endringene vil tømme hurtiglagret data for denne fliskilden.</string>
     <string name="plugin_wikipedia_description">Hent info om interessepunkter fra Wikipedia. Det er din frakoblede lommeguide - bare skru på Wikipedia-programtillegget og få artikler om objekter rundt deg.</string>
     <string name="track_coloring_solid">Utfylt</string>
@@ -3848,9 +3848,9 @@
     <string name="routing_attr_avoid_footways_name">Unngå gangveier</string>
     <string name="routing_attr_avoid_footways_description">Unngå gangveier</string>
     <string name="recalc_angle_dialog_descr">Ekstra rett segment mellom min posisjon og utregnet rute vil bli vist til den er regnet ut på ny</string>
-    <string name="checking_for_duplicate_description">OsmAnd sjekker %1$d for duplikater med eksisterende elementer i programmet.
+    <string name="checking_for_duplicate_description">OsmAnd sjekker %1$s for duplikater med eksisterende elementer i programmet.
 \n
-\nDet kan ta sin tid.</string>
+\nDet kan ta noe tid.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Du kan eksportere eller importere hurtighandlinger med programprofiler.</string>
     <string name="delete_all_actions_message_q">Er du sikker på at du vil slette %d hurtighandlinger for godt\?</string>
     <string name="screen_timeout">Skjermtidsavbrudd</string>
