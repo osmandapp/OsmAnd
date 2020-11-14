@@ -3948,4 +3948,9 @@
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Créer un nouveau compte</string>
     <string name="register_opr_have_account">J\'ai déjà un compte</string>
+    <string name="open_street_map_login_mode">Vous devez vous connecter pour envoyer vos modifications.
+\n
+\nVous pouvez vous connecter avec la méthode sécurisée OAuth ou utiliser votre identifiant et votre mot de passe.</string>
+    <string name="osm_login_descr">Vous pouvez vous connecter avec la méthode sécurisée OAuth ou utiliser votre identifiant et votre mot de passe.</string>
+    <string name="register_on_openplacereviews_desc">Les photos sont fournies par le projet open data OpenPlaceReviews.org. Pour envoyer vos photos, vous devez au préalable être inscrit sur ce site Web.</string>
 </resources>
