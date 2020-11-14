@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -16,6 +17,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
@@ -23,6 +25,8 @@ import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 
 import org.apache.commons.logging.Log;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
 import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.*;
 
@@ -87,9 +91,14 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment impl
 
 	@Override
 	protected void onThirdBottomButtonClick() {
-		View view = getView();
-		if (view != null) {
-			osmOAuthHelper.startOAuth((ViewGroup) view);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Bundle params = new Bundle();
+			params.putBoolean(OSM_LOGIN_DATA, true);
+
+			Bundle bundle = new Bundle();
+			bundle.putInt(TAB_ID, GPX_TAB);
+			MapActivity.launchMapActivityMoveToTop(activity, bundle, null, params);
 		}
 	}
 

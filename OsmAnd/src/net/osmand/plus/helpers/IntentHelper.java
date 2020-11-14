@@ -3,6 +3,7 @@ package net.osmand.plus.helpers;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
@@ -36,6 +37,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
 import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.*;
 
 public class IntentHelper {
@@ -231,6 +233,13 @@ public class IntentHelper {
 				boolean openPlugins = intent.getBooleanExtra(PluginsFragment.OPEN_PLUGINS, false);
 				if (openPlugins) {
 					PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
+				}
+				mapActivity.setIntent(null);
+			}
+			if (intent.hasExtra(OSM_LOGIN_DATA)) {
+				boolean openPlugins = intent.getBooleanExtra(OSM_LOGIN_DATA, false);
+				if (openPlugins) {
+					app.getOsmOAuthHelper().startOAuth((ViewGroup) mapActivity.findViewById(R.id.webviewContainer));
 				}
 				mapActivity.setIntent(null);
 			}
