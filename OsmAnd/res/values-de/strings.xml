@@ -246,7 +246,7 @@
     <string name="use_fluorescent_overlays">Fluoreszierende Overlays</string>
     <string name="use_fluorescent_overlays_descr">Fluoreszierende Anzeige von Tracks und Routen.</string>
     <string name="offline_edition">Offline-Bearbeitung</string>
-    <string name="offline_edition_descr">Immer Offline-Bearbeitung verwenden.</string>
+    <string name="offline_edition_descr">Wenn die Offline-Bearbeitung aktiviert ist, werden Änderungen zunächst lokal gespeichert und auf Anforderung hochgeladen, andernfalls werden Änderungen sofort hochgeladen.</string>
     <string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb von OsmAnd beeinflusst nicht die heruntergeladenen Offline-Karten, sondern wird in einer Datei auf Ihrem Gerät gespeichert.</string>
     <string name="local_openstreetmap_uploading">Hochladen …</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/Notizen wurden hochgeladen</string>
@@ -3973,4 +3973,13 @@
     <string name="gpx_upload_identifiable_visibility_descr">Identifizierbar bedeutet, dass der Track in Ihren GPS-Tracks und in öffentlichen GPS-Track Verzeichnissen angezeigt wird. Andere Benutzer können den Rohtrack herunterladen und mit Ihrem Benutzernamen verknüpfen. Daten, die über die Trackpunkte-API geliefert werden, verweisen auf Ihre ursprüngliche Track-Seite. Die Zeitstempel der Trackpunkte sind über die öffentliche GPS-API verfügbar.</string>
     <string name="gpx_upload_private_visibility_descr">Privat bedeutet, dass der Track nicht in öffentlichen Verzeichnissen auftaucht. Punkte des Tracks werden weiterhin über die öffentliche GPS-API ohne Zeitstempel verfügbar sein, aber nicht chronologisch geordnet.</string>
     <string name="gpx_upload_trackable_visibility_descr">Verfolgbar bedeutet, dass der Track in keiner öffentlichen Auflistung auftaucht, aber Trackpunkte weiterhin über die öffentliche GPS API mit Zeitstempel verfügbar sein werden. Andere Benutzer werden nur verarbeitete Trackpunkte Ihres Tracks herunterladen können, die nicht direkt mit Ihnen in Verbindung gebracht werden können.</string>
+    <string name="osm_edit_close_note">OSM Notiz schließen</string>
+    <string name="osm_edit_comment_note">OSM Notiz kommentieren</string>
+    <string name="osm_login_descr">Sie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Passwort verwenden.</string>
+    <string name="shared_string_add_photo">Foto hinzufügen</string>
+    <string name="register_on_openplacereviews">Registrieren bei
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Fotos werden vom offenen Datenprojekt OpenPlaceReviews.org zur Verfügung gestellt. Um Ihre Fotos hochladen zu können, müssen Sie sich auf der Website anmelden.</string>
+    <string name="register_opr_create_new_account">Neues Konto erstellen</string>
+    <string name="register_opr_have_account">Ich habe bereits ein Konto</string>
 </resources>
