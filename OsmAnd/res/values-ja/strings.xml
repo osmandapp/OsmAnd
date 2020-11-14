@@ -877,7 +877,7 @@ POIの更新は利用できません</string>
     <string name="use_fluorescent_overlays">蛍光色の重ね表示</string>
     <string name="use_fluorescent_overlays_descr">経路とルートを表示する際に、蛍光色を使用します</string>
     <string name="offline_edition">オフライン編集</string>
-    <string name="offline_edition_descr">常にオフライン編集を使用します</string>
+    <string name="offline_edition_descr">オフライン編集が有効になっている場合、変更は最初にローカルに保存され、リクエストに応じてアップロードされます。有効になっていない場合、変更は即アップロードされます。</string>
     <string name="update_poi_does_not_change_indexes">アプリケーション内部POIの変更はローカルファイルに保存され、ダウンロードしたマップファイルには影響しません。</string>
     <string name="local_openstreetmap_uploading">アップロード中…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/メモはアップロードされました</string>
@@ -1201,7 +1201,8 @@ POIの更新は利用できません</string>
     <string name="gpx_selection_point">地点 %1$s</string>
     <string name="gpx_selection_route_points">%1$s ↵\nルート地点 %2$s</string>
     <string name="gpx_selection_points">%1$s ↵\n地点</string>
-    <string name="gpx_selection_track">%1$s ↵\n経路 %2$s</string>
+    <string name="gpx_selection_track">%1$s↵
+\n経路 %2$s</string>
     <string name="gpx_file_is_empty">GPSトラックは空です</string>
     <string name="shared_string_tracks">使用した経路</string>
     <string name="shared_string_my_favorites">お気に入り</string>
@@ -3716,7 +3717,7 @@ POIの更新は利用できません</string>
     <string name="turn_screen_on_navigation_instructions">ナビゲーション指示</string>
     <string name="turn_screen_on_power_button_descr">端末の電源ボタンを押すと、画面がオンになり、ロック画面上にOsmAndが表示されます。</string>
     <string name="turn_screen_on_power_button">電源ボタン</string>
-    <string name="use_volume_buttons_as_zoom_descr">端末の音量ボタンでマップのズームレベルを変更できるようにします。</string>
+    <string name="use_volume_buttons_as_zoom_descr">端末の音量ボタンで、マップのズームレベルを変更します。</string>
     <string name="use_volume_buttons_as_zoom">音量ボタンでズーム</string>
     <string name="track_show_start_finish_icons">出発地点と目的地アイコンを表示</string>
     <string name="select_track_width">幅の選択</string>
@@ -3745,13 +3746,13 @@ POIの更新は利用できません</string>
     <string name="navigation_profile">ナビゲーションプロファイル</string>
     <string name="route_between_points_add_track_desc">新しいセグメントを追加するための経路ファイルを選択します。</string>
     <string name="street_level_imagery">ストリート画像</string>
-    <string name="plan_route_exit_dialog_descr">保存せずにルート計画を終了した場合すべての変更が失われます。よろしいですか？</string>
+    <string name="plan_route_exit_dialog_descr">このままルートの計画を終了した場合、すべての変更が失われますがよろしいですか？</string>
     <string name="app_mode_enduro_motorcycle">エンデューロバイク</string>
     <string name="app_mode_motor_scooter">電動スクーター</string>
     <string name="app_mode_wheelchair">車椅子</string>
     <string name="app_mode_go_cart">ゴーカート</string>
     <string name="osm_edit_closed_note">OSMのメモを閉じました</string>
-    <string name="set_working_days_to_continue">続けるには営業日を設定する必要があります</string>
+    <string name="set_working_days_to_continue">続行するには営業日を設定する必要があります</string>
     <string name="route_between_points">地点間のルート</string>
     <string name="plan_a_route">ルートを計画</string>
     <string name="add_to_a_track">経路に追加</string>
