@@ -3427,7 +3427,7 @@
     <string name="login_and_pass">Ім\'я користувача і пароль</string>
     <string name="plugin_global_prefs_info">Ці налаштування втулка стосуються всіх профілів</string>
     <string name="osm_editing">OSM-правлення</string>
-    <string name="osm_edits_view_descr">Ви можете переглянути всі вивантажені зміни або вади OSM у %1$s. Вивантажені точки не показано в OsmAnd.</string>
+    <string name="osm_edits_view_descr">Ви можете переглянути всі ще не вивантажені зміни або вади OSM у %1$s. Вивантажені точки не показано в OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок відображається під час навігації чи переміщення.</string>
     <string name="select_map_icon_descr">Значок показано в спокої.</string>
