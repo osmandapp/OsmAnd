@@ -1901,7 +1901,7 @@
     <string name="arrival_distance_descr">Kui vara soovid kohale jõudmise teavitust\?</string>
     <string name="use_fluorescent_overlays">Helkivad ülekatted</string>
     <string name="offline_edition">Võrguühenduseta muutmine</string>
-    <string name="offline_edition_descr">Kasuta alati võrguühenduseta muutmist.</string>
+    <string name="offline_edition_descr">Kui võrguühenduseta muutmine on kasutusel, siis muudatused salvestatakse esmalt kohalikus nutiseadmes ning laetakse üles eraldi päringuga. Muul juhul laetakse muudatused üles koheselt.</string>
     <string name="local_openstreetmap_uploading">Üles laadimine…</string>
     <string name="local_openstreetmap_were_uploaded">{0} huvipunkti/märget üles laetud</string>
     <string name="local_openstreetmap_uploadall">Lae kõik üles</string>
@@ -3398,7 +3398,7 @@
     <string name="import_duplicates_title">Mõned kirjed on juba olemas</string>
     <string name="import_duplicates_description">OsmAndis on juba samade nimedega kirjed kui need, mis imporditud.
 \n
-\nVali toiming.</string>
+\nVali tegevus.</string>
     <string name="keep_both_desc">Imporditud kirjetele lisatakse eesliide</string>
     <string name="keep_both">Säilita mõlemad</string>
     <string name="replace_all">Asenda kõik</string>
@@ -3812,4 +3812,13 @@
 \nSa võid selleks kasutada mõnd turvalust OAuth võimalust või oma kasutajanime ning salasõna.</string>
     <string name="login_account">Kasutajakonto</string>
     <string name="send_files_to_openstreetmap">Saada GPX fail OpenStreetMappi</string>
+    <string name="osm_edit_close_note">Sulge OSM märkus</string>
+    <string name="osm_edit_comment_note">Kommenteeri OSM märkust</string>
+    <string name="osm_login_descr">Sa võid sisse logida kasutades mõnda turvalist OAuth\'i meetodit või oma kasutajanime ja salasõna alusel.</string>
+    <string name="shared_string_add_photo">Lisa foto</string>
+    <string name="register_on_openplacereviews">Registreeru
+\nOpenPlaceReviews.org saidis</string>
+    <string name="register_on_openplacereviews_desc">Fotode allikaks on OpenPlaceReviews.org veebisait. Oma fotode üleslaadimiseks peaksid liituma selle veebisaidi kasutajaks.</string>
+    <string name="register_opr_create_new_account">Loo uus kasutajakonto</string>
+    <string name="register_opr_have_account">Mul juba on kasutajakonto olemas</string>
 </resources>
