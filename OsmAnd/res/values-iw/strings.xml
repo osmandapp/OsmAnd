@@ -254,7 +254,7 @@
     <string name="use_fluorescent_overlays">שכבות מוארות</string>
     <string name="use_fluorescent_overlays_descr">ניתן להשתמש בצבעים מוארים כדי להציג דרכים ומסלולים.</string>
     <string name="offline_edition">עריכה בלתי מקוונת</string>
-    <string name="offline_edition_descr">תמיד להשתמש בעריכה בלתי מקוונת.</string>
+    <string name="offline_edition_descr">אם עריכה בלתי מקוונת פעילה, השינויים יחולו מקומית תחילה ויועלו לפי דרישה, אחרת השינויים יועלו אוטומטית.</string>
     <string name="update_poi_does_not_change_indexes">שינויי הנ״ע בתוך היישום אינם משפיעים על קובצי המפה שהתקבלו, השינויים נשמרים לקובץ על ההתקן שלך במקום.</string>
     <string name="local_openstreetmap_uploading">מתבצעת שליחה…</string>
     <string name="local_openstreetmap_were_uploaded">{0} נ״ע/הערות נשלחו</string>
@@ -3561,7 +3561,7 @@
     <string name="shared_string_rhomb">מעויני</string>
     <string name="shared_string_square">ריבועי</string>
     <string name="shared_string_min">מזערי</string>
-    <string name="osm_edits_view_descr">ניתן לצפות בכל העריכות או את התקלות ב־OSM שטרם הועלו תחת %1$s. נקודות שהועלו לא מופיעות ב־OsmAnd.</string>
+    <string name="osm_edits_view_descr">ניתן לצפות בכל העריכות או בתקלות ב־OSM שטרם הועלו תחת %1$s. נקודות שהועלו לא מופיעות ב־OsmAnd.</string>
     <string name="hillshade_description">מפת הצללה עם צבעי הצללה כהים כדי להדגיש מדרונות, פסגות ועמקים.</string>
     <string name="shared_string_octagon">מתומן</string>
     <string name="multimedia_notes_view_descr">הערות ה־OSM שלך הן תחת %1$s.</string>
@@ -3969,4 +3969,14 @@
     <string name="markers_history">היסטוריית סמנים</string>
     <string name="send_files_to_openstreetmap">שליחת קובץ GPX ל־OpenStreetMap</string>
     <string name="enter_text_separated">נא למלא תגיות מופרדות בפסיקים.</string>
+    <string name="gpx_upload_trackable_visibility_descr">ניתן למעקב משמעו שהמסלול לא יופיע ברישומים ציבוריים אך נקודות המעקב ממנו עדיין תהיינה זמינות דרך API ציבורי ל־GPS עם חותמות זמן. משתמשים אחרים יוכלו להוריד את נקודות המעקב המעובדות מהמסלול שלך שלא ניתן לשייך אותו ישירות אליך.</string>
+    <string name="osm_edit_close_note">סגירת הערת OSM</string>
+    <string name="osm_edit_comment_note">להגיב על הערת OSM</string>
+    <string name="osm_login_descr">ניתן להיכנס באמצעות שיטת האימות המאובטחת OAuth או להיכנס עם שם הכניסה והססמה שלך.</string>
+    <string name="shared_string_add_photo">הוספת תמונה</string>
+    <string name="register_on_openplacereviews">יש להירשם בכתובת
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">תמונות מסופקות על ידי מיזם הנתונים הפתוחים OpenPlaceReviews.org. כדי להעלות את התמונות שלך עליך להירשם לאתר.</string>
+    <string name="register_opr_create_new_account">יצירת חשבון חדש</string>
+    <string name="register_opr_have_account">כבר יש לי חשבון</string>
 </resources>
