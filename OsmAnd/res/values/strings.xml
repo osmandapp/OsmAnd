@@ -36,7 +36,7 @@
     <string name="login_account">Account</string>
     <string name="use_login_password">Use login and password</string>
     <string name="open_street_map_login_mode">You need to login to upload new or modified changes. \n\nYou can log in using the safe OAuth method or use your login and password.</string>
-    <string name="osm_edits_view_descr">You can view all your unloaded edits or OSM bugs in %1$s. Uploaded points don’t show in OsmAnd.</string>
+    <string name="osm_edits_view_descr">You can view all your unuploaded edits or OSM bugs in %1$s. Uploaded points don’t show in OsmAnd.</string>
     <string name="sign_in_with_open_street_map">Sign in with OpenStreetMap</string>
     <string name="login_open_street_map_org">Login to OpenStreetMap.org</string>
     <string name="login_open_street_map">Login to OpenStreetMap</string>
