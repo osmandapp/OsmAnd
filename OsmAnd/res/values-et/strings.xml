@@ -1188,7 +1188,7 @@
     <string name="shared_string_select_on_map">Vali kaardil</string>
     <string name="shared_string_select_all">Vali kõik</string>
     <string name="shared_string_deselect">Tühista valik</string>
-    <string name="shared_string_deselect_all">Tühista kogu valik</string>
+    <string name="shared_string_deselect_all">Eemalda kõik valikud</string>
     <string name="shared_string_clear">Tühjenda</string>
     <string name="shared_string_clear_all">Tühjenda kõik</string>
     <string name="shared_string_rename">Nimeta ümber</string>
@@ -3104,7 +3104,7 @@
     <string name="reports_for">Kanna ette</string>
     <string name="night">Öö</string>
     <string name="file_name_containes_illegal_char">Faili nimi sisaldab keelatud sümbolit</string>
-    <string name="configure_screen_quick_action">Kiirtegevus</string>
+    <string name="configure_screen_quick_action">Kiirtoiming</string>
     <string name="quick_action_item_action">Tegevus %d</string>
     <string name="quick_action_item_screen">Ekraan %d</string>
     <string name="quick_action_add_marker">Lisa kaardimarker</string>
@@ -3402,13 +3402,13 @@
     <string name="keep_both_desc">Imporditud kirjetele lisatakse eesliide</string>
     <string name="keep_both">Säilita mõlemad</string>
     <string name="replace_all">Asenda kõik</string>
-    <string name="replace_all_desc">Olemasolevad kirjed asendatakse failis olevate kirjetega</string>
+    <string name="replace_all_desc">Olemasolevad kirjed asendatakse failis leiduvate kirjetega</string>
     <string name="listed_exist">Märgitud %1$s on juba OsmAndis olemas.</string>
     <string name="shared_string_profiles">Profiilid</string>
     <string name="shared_string_quick_actions">Kiirtoimingud</string>
     <string name="shared_string_nothing_selected">Midagi pole valitud</string>
     <string name="shared_string_poi_types">Huvipunktide tüübid</string>
-    <string name="shared_string_preparing">Ettevalmistus</string>
+    <string name="shared_string_preparing">Valmistun</string>
     <string name="shared_string_app_default_w_val">Rakenduse vaikeväärtus (%s)</string>
     <string name="recalc_angle_dialog_title">Vähim nurk minu asukoha ja teekonna vahel</string>
     <string name="recalc_angle_dialog_descr">Minu asukoha ja arvutatud teekonna vahel kuvatakse teekonna ümberarvutuseni täiendav sirglõik</string>
@@ -3434,7 +3434,7 @@
     <string name="checking_for_duplicate_description">OsmAnd kontrollib %1$s rakenduses korduvaid kirjeid.
 \n
 \nSelleks võib kuluda aega.</string>
-    <string name="shared_string_importing">Importimine</string>
+    <string name="shared_string_importing">Impordin</string>
     <string name="importing_from">Andmete import %1$s-st</string>
     <string name="profile_backup_failed">Ei saanud profiili varundada.</string>
     <string name="saving_new_profile">Uue profiili salvestamine</string>

@@ -286,7 +286,7 @@
     <string name="use_fluorescent_overlays">螢光層</string>
     <string name="use_fluorescent_overlays_descr">使用螢光色彩來顯示軌跡與導航路線。</string>
     <string name="offline_edition">離線編輯</string>
-    <string name="offline_edition_descr">永遠使用離線編輯。</string>
+    <string name="offline_edition_descr">如果啟用離線編輯，則更動將會先儲存在本機，然後按請求上傳，否則更動會立刻上傳。</string>
     <string name="update_poi_does_not_change_indexes">修改應用程式內的 POI，不會影響到已下載的地圖檔案，修改會儲存為檔案在您裝置上。</string>
     <string name="local_openstreetmap_uploading">正在上傳 …</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/註記已上傳</string>
@@ -3964,4 +3964,13 @@
     <string name="gpx_upload_private_visibility_descr">私有代表了軌跡不會顯示在任何公開的清單中，但其軌跡點仍可透過公開的 GPS API 取得，但沒有時間戳，也不會按時間順序排列。</string>
     <string name="gpx_upload_identifiable_visibility_descr">可識別代表軌跡將會在您的 GPS 軌跡與公開 GPS 軌跡清單中顯示，亦即其他使用者將可以下載原始軌跡並將其與您的使用者名稱相關聯。透過軌跡點 API 提供的資料將會參考您的原始軌跡頁面。軌跡點的時間戳可透過公開的 GPS API 取得。</string>
     <string name="gpx_upload_trackable_visibility_descr">可追蹤代表軌跡不會顯示在任何公開的清單中，但其追蹤點仍可以透過帶有時間戳的公開 GPS API 使用。其他使用者將只能從您的軌跡中下載處理過的追蹤點，但這些追蹤點無法直接與與您相關聯。</string>
+    <string name="osm_edit_close_note">關閉 OSM 註記</string>
+    <string name="osm_edit_comment_note">評論 OSM 註記</string>
+    <string name="osm_login_descr">您可以使用安全的 OAuth 方式或是使用您的帳號與密碼來登入。</string>
+    <string name="shared_string_add_photo">新增照片</string>
+    <string name="register_on_openplacereviews">註冊於
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">照片由開放資料專案 OpenPlaceReviews.org 提供。為了上傳您的照片，您必須在網站上註冊。</string>
+    <string name="register_opr_create_new_account">建立新帳號</string>
+    <string name="register_opr_have_account">我已經有帳號了</string>
 </resources>

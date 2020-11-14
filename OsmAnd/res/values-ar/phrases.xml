@@ -1970,7 +1970,7 @@
     <string name="poi_outdoor_seating_no">لا توجد أماكن جلوس في الخارج</string>
     <string name="poi_delivery_no">لا توصيل</string>
     <string name="poi_takeaway_no">الطلب الخارجي:لا</string>
-    <string name="poi_microbrewery_yes"></string>
+    <string name="poi_microbrewery_yes"/>
     <string name="poi_drive_in_no">الشراء من السيارة: لا</string>
     <string name="poi_drive_through_no">الشراء من السيارة: لا</string>
     <string name="poi_diet_pescetarian_yes">نباتيو الأسماك</string>
@@ -2176,4 +2176,21 @@
     <string name="poi_resource_stone">حجر</string>
     <string name="poi_resource_slate_iron_ore_copper">أردواز ؛ خام الحديد ؛ النحاس</string>
     <string name="poi_resource_slate">أردواز</string>
+    <string name="poi_industrial_brickyard">النوع: ساحة الطوب</string>
+    <string name="poi_industrial_agriculture">النوع: زراعة</string>
+    <string name="poi_industrial_auto_wrecker">النوع: متلف/محطم السيارات</string>
+    <string name="poi_industrial_warehouse">النوع: مستودع</string>
+    <string name="poi_industrial_refinery">النوع: مصفاة</string>
+    <string name="poi_industrial_timber">النوع: خشب</string>
+    <string name="poi_industrial_gas">النوع: صناعة الغاز</string>
+    <string name="poi_industrial_factory">النوع: مصنع</string>
+    <string name="poi_industrial_wellsite">النوع: في الموقع</string>
+    <string name="poi_industrial_oil">النوع: صناعة النفط</string>
+    <string name="poi_training_martial_art">تدريب: فن الدفاع عن النفس</string>
+    <string name="poi_training_cooking">تدريب: الطبخ</string>
+    <string name="poi_training_language">تدريب: اللغة</string>
+    <string name="poi_bicycle_repair_station">محطة إصلاح الدراجات؛ محطة التصليح الذاتي للدراجات</string>
+    <string name="poi_service_bicycle_charging_no">الشحن: لا</string>
+    <string name="poi_service_bicycle_charging_yes">الشحن: نعم</string>
+    <string name="poi_service_bicycle_second_hand_no">بيع الدراجات المستعملة بالتجزئة: لا</string>
 </resources>
