@@ -735,7 +735,7 @@
     <string name="routing_attr_avoid_motorway_description">Unngår motorveier</string>
     <string name="routing_attr_weight_name">Vektgrense</string>
     <string name="routing_attr_weight_description">Angi tillatt vektgrense for kjøretøy på ruter.</string>
-    <string name="copying_osmand_files_descr">Kopierer OsmAnd-datafiler til det nye stedet (%s)…</string>
+    <string name="copying_osmand_files_descr">Kopierer OsmAnd-datafiler til den nye plasseringen (%s)…</string>
     <string name="distance_measurement_clear_route">Slett alle punkter</string>
     <string name="use_kalman_filter_compass_descr">Reduserer støy i kompassavlesninger, men legger til treghet.</string>
     <string name="use_kalman_filter_compass">Bruk Kalmanfilter</string>
@@ -767,7 +767,7 @@
     <string name="keep_informing">Gjenta navigeringsinstruksjoner</string>
     <string name="show_more_map_detail_descr">Vis noen vektorkartdetaljer (veier etc.) allerede ved lavere zoomnivåer.</string>
     <string name="choose_audio_stream">Utdata for taleveiledning</string>
-    <string name="choose_audio_stream_descr">Velg høyttaleren til å avspille taleveiledningen.</string>
+    <string name="choose_audio_stream_descr">Velg høyttaler for taleveiledning.</string>
     <string name="voice_stream_voice_call">Telefonanropslyd (for å avbryte Blåtanns-bilstereo)</string>
     <string name="voice_stream_notification">Varslingslyd</string>
     <string name="voice_stream_music">Media-/navigasjonslyd</string>
@@ -921,7 +921,7 @@
 \nPunkter</string>
     <string name="gpx_selection_track">%1$s 
 \nSpor %2$s</string>
-    <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til det nye stedet…</string>
+    <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til den nye plasseringen…</string>
     <string name="copying_osmand_files">Kopierer OsmAnd-datafiler…</string>
     <string name="route_descr_destination">Reisemål</string>
     <string name="gpx_file_name">GPX-filnavn</string>
@@ -1144,7 +1144,7 @@
     <string name="shared_string_audio">Lyd</string>
     <string name="index_name_netherlands">Europa - Nederland</string>
     <string name="user_name">Ditt OSM-brukernavn</string>
-    <string name="user_password">Ditt OSM-passord</string>
+    <string name="user_password">Passord</string>
     <string name="local_index_items_uploaded">%1$d av %2$d element(er) er lastet opp.</string>
     <string name="installing_new_resources">Pakker ut nye data…</string>
     <string name="poi_context_menu_website">Vis nettside til interessepunkt</string>
@@ -1910,7 +1910,7 @@
     <string name="select_street">Velg gate</string>
     <string name="shared_string_in_name">i %1$s</string>
     <string name="type_address">Skriv inn adresse</string>
-    <string name="type_city_town">Skriv inn by/tettsted/plassering</string>
+    <string name="type_city_town">Skriv inn by/småby/plass</string>
     <string name="type_postcode">Skriv inn postnummer</string>
     <string name="nearest_cities">Nærmeste byer</string>
     <string name="select_city">Velg by</string>
@@ -2359,7 +2359,7 @@
     <string name="local_openstreetmap_were_uploaded">{0} interessepunkter/notater opplastet</string>
     <string name="local_openstreetmap_settings">Lokalt lagrede OSM-interessepunkter/notater</string>
     <string name="local_openstreetmap_settings_descr">Vis og behandle OSM-interessepunkter/notater i databasen på enheten.</string>
-    <string name="gpx_monitoring_disabled_warn">Spar spor ved bruk av GPX-miniprogram eller via \"Turopptak\"-innstillinger.</string>
+    <string name="gpx_monitoring_disabled_warn">Ta opp spor ved bruk av GPX-modul eller via \'Turopptak\'-innstillinger.</string>
     <string name="native_library_not_supported">Innebygd bibliotek støttes ikke på denne enheten.</string>
     <string name="init_native_library">Igangsetter innebygget bibliotek…</string>
     <string name="local_index_upload_gpx_description">Last opp GPX-filer til OSM-fellesskapet, og forbedre kartene.</string>
@@ -2434,7 +2434,7 @@
     <string name="touring_view_renderer">Turvisning</string>
     <string name="route_is_too_long_v2">For lange distanser: Legg til mellomliggende reisemål hvis denne lange ruten ikke er beregnet innen 10 minutter.</string>
     <string name="intermediate_items_sort_return">Optimalisert rekkefølge av mellomliggende reisemål underveis til målet.</string>
-    <string name="audionotes_location_not_defined">Sted å assosiere med notatet er ikke definert ennå. \"Bruk posisjon…\" for å tilordne et notat til det angitte stedet.</string>
+    <string name="audionotes_location_not_defined">Trykk \'Bruk posisjon…\' for å legge til et notat til stedet.</string>
     <string name="add_waypoint_dialog_title">Legg til rutepunkt i innspilt GPX-spor</string>
     <string name="voice_is_not_available_msg">Taleveiledning er ikke tilgjengelig, gå til \'Innstillinger\' → \'Navigeringsinnstillinger\' , velg profilen → \'Taleveiledning\' og velg eller last ned en talemeldingspakke.</string>
     <string name="use_fast_recalculation_desc">Beregner på nytt bare den første delen av ruten. Kan brukes for lange turer.</string>
@@ -2824,7 +2824,7 @@
     <string name="edit_map_marker">Rediger kartmarkør</string>
     <string name="third_party_application">Tredjepartsprogram</string>
     <string name="search_street">Gatesøk</string>
-    <string name="start_search_from_city">Velg by/tettsted/plassering først</string>
+    <string name="start_search_from_city">Angi først by/småby/plass</string>
     <string name="shared_string_restore">Gjenopprett</string>
     <string name="keep_passed_markers_descr">Markører lagt til som favorittgrupper eller GPX-rutepunkter markert som passert vil forbli på kartet. Hvis gruppen ikke er aktiv, vil markørene forsvinne fra kartet.</string>
     <string name="keep_passed_markers">Behold passerte markører på kartet</string>
@@ -3060,15 +3060,15 @@
     <string name="profile_alert_need_routing_type_title">Velg navigasjonstype</string>
     <string name="profile_alert_need_routing_type_msg">Du må velge navigasjonstype for den nye programprofilen</string>
     <string name="profile_alert_need_profile_name_title">Skriv inn profilnavn</string>
-    <string name="profile_alert_need_profile_name_msg">Velg et profilnavn først.</string>
+    <string name="profile_alert_need_profile_name_msg">Angi et profilnavn først.</string>
     <string name="profile_alert_duplicate_name_title">Duplikatnavn</string>
-    <string name="profile_alert_duplicate_name_msg">Det finnes allerede en profil med dette navnet</string>
+    <string name="profile_alert_duplicate_name_msg">Det er allerede en profil med det navnet</string>
     <string name="profile_alert_cant_delete_base">Du kan ikke slette OsmAnd sine grunnprofiler</string>
     <string name="profile_alert_need_save_title">Lagre endringer</string>
-    <string name="profile_alert_need_save_msg">Du må lagre endringer før du kan fortsette</string>
+    <string name="profile_alert_need_save_msg">Lagre endringer i profilen først</string>
     <string name="profile_alert_delete_title">Slett profil</string>
-    <string name="profile_alert_delete_msg">Er du sikker på at du ønsker å slette «%s»-profilen</string>
-    <string name="select_base_profile_dialog_title">Velg en grunnprofil</string>
+    <string name="profile_alert_delete_msg">Er du sikker på at du vil slette profilen \"%s\"\?</string>
+    <string name="select_base_profile_dialog_title">Velg profil til å starte med</string>
     <string name="select_nav_profile_dialog_title">Velg navigasjonstype</string>
     <string name="base_profile_descr_car">Bil, lastebil, motorsykkel</string>
     <string name="base_profile_descr_bicycle">Terrengsykkel, moped, hest</string>
@@ -3159,7 +3159,7 @@
     <string name="edit_profile_setup_subtitle">Profil beholder sine egne innstillinger</string>
     <string name="edit_profile_setup_map_subtitle">Velg kartinnstillinger for profilen</string>
     <string name="edit_profile_screen_options_subtitle">Velg skjerminnstillinger for profilen</string>
-    <string name="edit_profile_nav_settings_subtitle">Velg forvalgte navigasjonsinnstillinger for profil</string>
+    <string name="edit_profile_nav_settings_subtitle">Velg navigeringsinnstillinger for profilen</string>
     <string name="routing_attr_max_num_changes_description">Angi øvre grense for endringer</string>
     <string name="external_input_device">Eksterne inndataenheter</string>
     <string name="external_input_device_descr">Velg en enhet for ekstern kontroll, som f.eks. tastatur eller WunderLINQ.</string>
@@ -3254,7 +3254,7 @@
     <string name="tts_initialization_error">Kan ikke starte tekst-til-tale-motor.</string>
     <string name="simulate_your_location_gpx_descr">Simuler posisjonen din ved bruk av et innspilt GPX-spor.</string>
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
-    <string name="profile_import">Profil-import</string>
+    <string name="profile_import">Importer profil</string>
     <string name="rendering_value_white_name">Hvit</string>
     <string name="default_speed_dialog_msg">Estimerer ankomsttid for ukjente veityper og begrenser farten for alle veier (kan påvirke ruting)</string>
     <string name="track_storage_directory">Spor-lagringsmappe</string>
@@ -3436,7 +3436,7 @@
     <string name="route_recalculation">Ruteomberegning</string>
     <string name="accessibility_announce">Kunngjør</string>
     <string name="login_and_pass">Brukernavn og passord</string>
-    <string name="plugin_global_prefs_info">Disse innstillingene gjelder for alle profiler.</string>
+    <string name="plugin_global_prefs_info">Disse programtillegg-innstillingene er globale og gjelder for alle profiler</string>
     <string name="osm_editing">OSM-redigering</string>
     <string name="osm_edits_view_descr">Du kan vise alle dine uopplastede redigeringer eller OSM-feil i %1$s. Opplastede punkter viser ikke i OsmAnd.</string>
     <string name="select_nav_icon_descr">Ikon vist under navigering eller bevegelse.</string>
@@ -3578,7 +3578,7 @@
     <string name="parking_positions">Parkeringsposisjoner</string>
     <string name="add_edit_favorite">Legg til / rediger profil</string>
     <string name="import_complete_description">All data fra %1$s er importert, du kan bruke knappene nedenfor for å åpne den delen du trenger for å håndtere den.</string>
-    <string name="restore_all_profile_settings_descr">Alle profilinnstillinger vil bli gjenopprette til deres opprinnelige tilstand etter opprettelse/import av denne profilen.</string>
+    <string name="restore_all_profile_settings_descr">Alle profilinnstillinger blir gjenopprettet til deres opprinnelige tilstand etter opprettelse/import av denne profilen.</string>
     <string name="clear_recorded_data_warning">Er du sikker på at du vil tømme lagret data\?</string>
     <string name="recalculate_route_in_deviation">Anvis ny rute ved avvik</string>
     <string name="download_slope_maps">Løyper</string>
@@ -3607,13 +3607,13 @@
     <string name="slope_read_more">Du kan lese mer om løyper i %1$s.</string>
     <string name="reorder_or_hide_from">Omarranger eller skjul elementer fra %1$s.</string>
     <string name="divider_descr">Elementer under dette punktet er atskilt med en skillelinje.</string>
-    <string name="reset_items_descr">Skjuling av innstillinger tilbakestiller dem til forvalg.</string>
+    <string name="reset_items_descr">Skjuling av innstillinger tilbakestiller dem til opprinnelig tilstand.</string>
     <string name="app_mode_ski_touring">Skigåing</string>
     <string name="unsupported_type_error">Ustøttet type</string>
     <string name="select_distance_route_will_recalc">Velg hvor mye avviksdistanse som skal utløse omruting.</string>
     <string name="export_profile_dialog_description">Du kan velge ytterligere data å eksportere sammen med profilen.</string>
     <string name="import_profile_dialog_description">Importer profil inneholder ytterligere data. Klikk «Import» for å importere kun profildata, eller velg ytterligere data.</string>
-    <string name="plugin_prefs_reset_successful">Alle programtilleggsinnstillinger tilbakestilt til opprinnelse.</string>
+    <string name="plugin_prefs_reset_successful">Alle programtilleggsinnstillinger tilbakestilt til standard.</string>
     <string name="add_new_custom_category_button_promo">Du kan legge til en ny egendefinert kategori ved å velge én eller flere kategorier.</string>
     <string name="create_custom_categories_list_promo">Endre listens sorteringsrekkefølge, skjul unødvendige kategorier. Du kan importere eller eksportere alle endringer med profiler.</string>
     <string name="rearrange_categories">Omorganiser kategorier</string>
@@ -3887,9 +3887,11 @@
     <string name="icon_group_emergency">Nødsfall</string>
     <string name="icon_group_travel">Reise</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Du må legge til minst to punkter.</string>
-    <string name="gpx_upload_trackable_visibility_descr"></string>
+    <string name="gpx_upload_trackable_visibility_descr"/>
     <string name="sign_in_with_open_street_map">Logg inn med OpenStreetMap</string>
     <string name="use_login_password">Bruk innlogging og passord</string>
     <string name="login_account">Konto</string>
     <string name="send_files_to_openstreetmap">Send GPX-fil til OpenStreetMap</string>
+    <string name="icon_group_amenity">Fasilitet</string>
+    <string name="markers_history">Markørhistorikk</string>
 </resources>
