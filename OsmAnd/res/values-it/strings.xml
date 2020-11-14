@@ -3946,4 +3946,13 @@
     <string name="icon_group_emergency">Emergenza</string>
     <string name="icon_group_travel">Viaggio</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Devi aggiungere almeno due punti.</string>
+    <string name="osm_edit_close_note">Chiudi la nota OSM</string>
+    <string name="osm_edit_comment_note">Commenta la nota OSM</string>
+    <string name="osm_login_descr">Puoi autenticarti con il metodo sicuro OAuth o utilizzare le tue credenziali.</string>
+    <string name="shared_string_add_photo">Aggiungi foto</string>
+    <string name="register_on_openplacereviews">Registrati su
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Le foto sono fornite dal progetto a sorgente aperto OpenPlaceReviews.org. Per contribuire delle tue foto devi registrarti nel sito.</string>
+    <string name="register_opr_create_new_account">Crea un nuovo account</string>
+    <string name="register_opr_have_account">Ho già un account</string>
 </resources>
