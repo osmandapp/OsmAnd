@@ -31,6 +31,8 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
@@ -613,6 +615,10 @@ public class SettingsHelper {
 			markersGroup.setMarkers(markersHistory);
 			dataList.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
 		}
+		List<HistoryEntry> historyEntries = SearchHistoryHelper.getInstance(app).getHistoryEntries(false);
+		if (!historyEntries.isEmpty()) {
+			dataList.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
+		}
 		return dataList;
 	}
 
@@ -654,6 +660,7 @@ public class SettingsHelper {
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
+		List<HistoryEntry> historyEntries = new ArrayList<>();
 
 		for (Object object : data) {
 			if (object instanceof QuickAction) {
@@ -685,6 +692,8 @@ public class SettingsHelper {
 				} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
 					markersHistoryGroups.add((MapMarkersGroup) object);
 				}
+			} else if (object instanceof HistoryEntry) {
+				historyEntries.add((HistoryEntry) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
@@ -730,6 +739,9 @@ public class SettingsHelper {
 			}
 			settingsItems.add(new HistoryMarkersSettingsItem(app, mapMarkers));
 		}
+		if (!historyEntries.isEmpty()) {
+			settingsItems.add(new SearchHistorySettingsItem(app, historyEntries));
+		}
 		return settingsItems;
 	}
 
@@ -753,6 +765,7 @@ public class SettingsHelper {
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
+		List<HistoryEntry> historyEntries = new ArrayList<>();
 
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
@@ -840,6 +853,10 @@ public class SettingsHelper {
 					HistoryMarkersSettingsItem historyMarkersSettingsItem = (HistoryMarkersSettingsItem) item;
 					markersHistoryGroups.add(historyMarkersSettingsItem.getMarkersGroup());
 					break;
+				case SEARCH_HISTORY:
+					SearchHistorySettingsItem searchHistorySettingsItem = (SearchHistorySettingsItem) item;
+					historyEntries.addAll(searchHistorySettingsItem.getItems());
+					break;
 				default:
 					break;
 			}
@@ -898,6 +915,9 @@ public class SettingsHelper {
 		}
 		if (!markersGroups.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.HISTORY_MARKERS, markersHistoryGroups);
+		}
+		if (!historyEntries.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
 		}
 		return settingsToOperate;
 	}

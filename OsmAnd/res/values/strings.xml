@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_search_history">Search history</string>
     <string name="register_opr_have_account">I already have an account</string>
     <string name="register_opr_create_new_account">Create new account</string>
     <string name="register_on_openplacereviews_desc">Photos are provided by open data project OpenPlaceReviews.org. In order to upload your photos you need to sign up on website.</string>

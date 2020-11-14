@@ -121,24 +121,48 @@ public class SearchHistoryHelper {
 		return helper;
 	}
 
+	public void addItemsToHistory(List<HistoryEntry> entries) {
+		for (HistoryEntry model : entries) {
+			addNewItemToHistory(model, false);
+		}
+		updateEntriesList();
+	}
+
 	private void addNewItemToHistory(HistoryEntry model) {
+		addNewItemToHistory(model, true);
+		updateEntriesList();
+	}
+
+	private void addNewItemToHistory(HistoryEntry model, boolean markAsAccessed) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		if (mp.containsKey(model.getName())) {
 			model = mp.get(model.getName());
-			model.markAsAccessed(System.currentTimeMillis());
+			if (markAsAccessed && model != null) {
+				model.markAsAccessed(System.currentTimeMillis());
+			}
 			helper.update(model);
 		} else {
 			loadedEntries.add(model);
 			mp.put(model.getName(), model);
-			model.markAsAccessed(System.currentTimeMillis());
+			if (markAsAccessed) {
+				model.markAsAccessed(System.currentTimeMillis());
+			}
 			helper.add(model);
 		}
+	}
+
+	public void updateEntriesList() {
+		HistoryItemDBHelper helper = checkLoadedEntries();
 		Collections.sort(loadedEntries, new HistoryEntryComparator());
-		if (loadedEntries.size() > HISTORY_LIMIT) {
+		while (loadedEntries.size() > HISTORY_LIMIT) {
 			if (helper.remove(loadedEntries.get(loadedEntries.size() - 1))) {
 				loadedEntries.remove(loadedEntries.size() - 1);
 			}
 		}
+	}
+
+	public HistoryEntry getEntryByName(PointDescription pd) {
+		return mp != null && pd != null ? mp.get(pd) : null;
 	}
 
 	public static class HistoryEntry {
@@ -149,7 +173,7 @@ public class SearchHistoryHelper {
 		private int[] intervals = new int[0];
 		private double[] intervalValues = new double[0];
 
-		HistoryEntry(double lat, double lon, PointDescription name) {
+		public HistoryEntry(double lat, double lon, PointDescription name) {
 			this.lat = lat;
 			this.lon = lon;
 			this.name = name;
@@ -427,12 +451,13 @@ public class SearchHistoryHelper {
 						boolean reinsert = false;
 						do {
 							String name = query.getString(0);
-							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(query.getDouble(1), query.getDouble(2)));
+							double lat = query.getDouble(1);
+							double lon = query.getDouble(2);
+							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
 							if (context.getPoiTypes().isTypeForbidden(p.getName())){
 								query.moveToNext();
 							}
-							HistoryEntry e = new HistoryEntry(query.getDouble(1), query.getDouble(2),
-									p);
+							HistoryEntry e = new HistoryEntry(lat, lon, p);
 							long time = query.getLong(3);
 							e.setLastAccessTime(time);
 							e.setFrequency(query.getString(4), query.getString(5));
