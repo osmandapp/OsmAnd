@@ -561,7 +561,7 @@
     <string name="plugins_screen">Wtyczki</string>
     <string name="prefs_plugins_descr">Aktywuje zaawansowane ustawienia i dodatkową funkcjonalność.</string>
     <string name="prefs_plugins">Wtyczki</string>
-    <string name="osm_editing_plugin_description">Wnieś wkład w OSM, taki jak tworzenie lub modyfikowanie obiektów OSM POI, otwieranie lub komentowanie notatek OSM i tworzenie nagranych plików GPX w OsmAnd podając swoją nazwę użytkownika i hasło. OpenStreetMap.org jest projektem mapowania globalnej domeny publicznej opartej na społeczności.</string>
+    <string name="osm_editing_plugin_description">Wnieś wkład w OSM, taki jak tworzenie lub modyfikowanie obiektów OSM POI, otwieranie lub komentowanie uwag OSM i tworzenie nagranych plików GPX w OsmAnd podając swoją nazwę użytkownika i hasło. OpenStreetMap.org jest projektem mapowania globalnej domeny publicznej opartej na społeczności.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
     <string name="play_commands_of_currently_selected_voice">Wybierz głos i przetestuj, odtwarzając komunikaty:</string>
     <string name="debugging_and_development">Rozwój OsmAnd</string>
@@ -1769,7 +1769,7 @@
     <string name="please_specify_poi_type_only_from_list">Proszę podać właściwy typ POI lub go pominąć.</string>
     <string name="osm_edit_modified_poi">Zmodyfikowane użyteczne miejsce OSM</string>
     <string name="osm_edit_deleted_poi">Usunięto użyteczne miejce OSM</string>
-    <string name="osm_edit_reopened_note">Otwarto ponownie notatkę OSM</string>
+    <string name="osm_edit_reopened_note">Otwarto ponownie uwagę OSM</string>
     <string name="osm_edit_commented_note">Skomentowano uwagę OSM</string>
     <string name="osm_edit_created_note">Utworzono uwagę OSM</string>
     <string name="osn_add_dialog_title">Utwórz uwagę</string>
@@ -2292,7 +2292,7 @@
     <string name="hillshade_purchase_header">Zainstaluj wtyczkę \'Poziomice\', aby pokazać stopniowane obszary pionowe.</string>
     <string name="hillshade_menu_download_descr">Pobierz mapę \"Cieniowanie Rzeźby Terenu\", by wyświetlić cieniowanie pionowe.</string>
     <string name="srtm_purchase_header">Kup i zainstaluj wtyczkę \'Poziomice\', aby pokazać stopniowane obszary pionowe.</string>
-    <string name="quick_action_showhide_osmbugs_title">Pokaż lub ukryj notatki OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Pokaż lub ukryj uwagi OSM</string>
     <string name="quick_action_osmbugs_show">Pokaż uwagi OSM</string>
     <string name="quick_action_osmbugs_hide">Ukryj uwagi OSM</string>
     <string name="osmand_plus_extended_description_part8">Przybliżony zasięg i jakość mapy: 
@@ -2310,7 +2310,7 @@
 \n Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania, …
 \n</string>
     <string name="sorted_by_distance">Posortowane wg odległości</string>
-    <string name="quick_action_showhide_osmbugs_descr">Przycisk do wyświetlania lub ukrywania notatek OSM na mapie.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Przycisk do wyświetlania lub ukrywania uwag OSM na mapie.</string>
     <string name="restart_search">Rozpocznij ponownie wyszukiwanie</string>
     <string name="increase_search_radius">Zwiększ promień wyszukiwania</string>
     <string name="nothing_found">Nic nie odnaleziono</string>
@@ -2533,7 +2533,7 @@
     <string name="osc_file">Plik OSC</string>
     <string name="choose_file_type">Wybierz typ pliku</string>
     <string name="all_data">Wszystkie dane</string>
-    <string name="osm_notes">Notatki OSM</string>
+    <string name="osm_notes">Uwagi OSM</string>
     <string name="av_locations_selected_desc">Plik GPX ze współrzędnymi i danymi wybranych notatek.</string>
     <string name="av_locations_all_desc">Plik GPX ze współrzędnymi i danymi wszystkich notatek.</string>
     <string name="modify_the_search_query">Zmień wyszukiwanie.</string>
@@ -2573,7 +2573,7 @@
     <string name="distance_nearest">Najpierw najbliższe</string>
     <string name="day_off_label">zamknięte</string>
     <string name="osm_edits_export_desc">Eksportuj jako uwagi OSM, POI lub oba.</string>
-    <string name="empty_state_osm_edits_descr">Twórz lub modyfikuj OSM POI, otwórz lub skomentuj notatki OSM, oraz udostępniaj nagrane pliki GPX.</string>
+    <string name="empty_state_osm_edits_descr">Twórz lub modyfikuj OSM POI, otwórz lub skomentuj uwagi OSM, oraz udostępniaj nagrane pliki GPX.</string>
     <string name="empty_state_markers_groups_desc">Importuj ulubione grupy lub punkty trasy jako znaczniki.</string>
     <string name="rendering_attr_whiteWaterSports_name">Sporty spływowe</string>
     <string name="group_deleted">Usunięto grupę</string>
@@ -3842,7 +3842,7 @@
     <string name="plan_route_exit_dialog_descr">Czy na pewno chcesz odrzucić wszystkie zmiany w zaplanowanej trasie, zamykając ją\?</string>
     <string name="in_case_of_reverse_direction">W przypadku odwrotnego kierunku</string>
     <string name="navigate_to_track_descr">Przejdź z mojej lokalizacji na trasę</string>
-    <string name="app_mode_wheelchair_forward">Wózek inwalidzki naprzód</string>
+    <string name="app_mode_wheelchair_forward">Sportowy wózek inwalidzki</string>
     <string name="show_gpx">Ślady</string>
     <string name="follow_track">Podążanie za śladem</string>
     <string name="import_track_descr">Wybierz plik śladu do śledzenia lub zaimportuj go z urządzenia.</string>
@@ -3967,4 +3967,6 @@
 \nMożesz zalogować się za pomocą bezpiecznej metody autoryzacji OAuth lub użyć swojego loginu i hasła.</string>
     <string name="use_login_password">Użyj loginu i hasła</string>
     <string name="login_account">Konto</string>
+    <string name="osm_edit_close_note">Zamknij uwagę OSM</string>
+    <string name="osm_edit_comment_note">Skomentuj uwagę OSM</string>
 </resources>
