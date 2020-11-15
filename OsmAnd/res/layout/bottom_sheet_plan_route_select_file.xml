@@ -78,7 +78,7 @@
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/gpx_track_list"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="800dp"
 		tools:itemCount="1"
 		tools:listitem="@layout/gpx_track_select_item" />
 
