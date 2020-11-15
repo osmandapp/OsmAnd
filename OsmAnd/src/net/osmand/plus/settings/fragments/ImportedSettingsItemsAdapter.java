@@ -151,7 +151,7 @@ public class ImportedSettingsItemsAdapter extends
 				holder.title.setText(R.string.markers_history);
 				break;
 			case SEARCH_HISTORY:
-				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_history));
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_history, activeColorRes));
 				holder.title.setText(R.string.shared_string_search_history);
 				break;
 		}
