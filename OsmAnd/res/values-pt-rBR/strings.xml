@@ -3423,7 +3423,7 @@
     <string name="login_and_pass">Usuário e senha</string>
     <string name="plugin_global_prefs_info">Essas configurações de plug-in são globais e se aplicam a todos os perfis</string>
     <string name="osm_editing">Edição OSM</string>
-    <string name="osm_edits_view_descr">Você pode ver todas as suas edições descarregadas ou erros do OSM em %1$s. Os pontos carregados não aparecem no OsmAnd.</string>
+    <string name="osm_edits_view_descr">Você pode ver todas as suas edições ainda não carregadas ou erros de OSM em %1$s. Os pontos carregados não aparecem no OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ícone mostrado ao navegar ou mover.</string>
     <string name="select_map_icon_descr">Ícone mostrado em repouso.</string>
@@ -3964,4 +3964,13 @@
     <string name="gpx_upload_private_visibility_descr">Privado significa que o rastreamento não aparecerá em nenhuma lista pública, mas os pontos de trilha dele ainda estarão disponíveis por meio da API GPS pública sem carimbos de data/hora, mas não serão ordenados cronologicamente.</string>
     <string name="gpx_upload_identifiable_visibility_descr">Identificável significa que o traço será mostrado publicamente em Seus traços de GPS e em listas públicas de traços de GPS, ou seja, outros usuários poderão fazer download do traço bruto e associá-lo ao seu nome de usuário. Os dados fornecidos por meio da API de pontos de trilha farão referência à sua página de rastreamento original. Os carimbos de data/hora dos pontos de rastreamento estão disponíveis por meio da API GPS pública.</string>
     <string name="gpx_upload_trackable_visibility_descr">Rastreável significa que o rastreamento não aparecerá em nenhuma lista pública, mas os pontos de trilha dele ainda estarão disponíveis por meio da API GPS pública com carimbos de data/hora. Outros usuários só poderão baixar pontos de trilha processados de seu trace, que não podem ser associados a você diretamente.</string>
+    <string name="osm_edit_close_note">Fechar nota do OSM</string>
+    <string name="osm_edit_comment_note">Comentário de nota do OSM</string>
+    <string name="osm_login_descr">Você pode entrar usando o método OAuth seguro ou usar sua entrada e senha.</string>
+    <string name="shared_string_add_photo">Adicionar foto</string>
+    <string name="register_on_openplacereviews">Cadastre-se em
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">As fotos são fornecidas pelo projeto de dados abertos do OpenPlaceReviews.org. Para carregar suas fotos você precisa se inscrever no site.</string>
+    <string name="register_opr_create_new_account">Criar nova conta</string>
+    <string name="register_opr_have_account">Eu já tenho uma conta</string>
 </resources>
