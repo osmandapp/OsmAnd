@@ -2358,7 +2358,7 @@
     <string name="dropbox_plugin_description">Dropbox-tillegget lar deg synkronisere spor og lyd/video-notater med din Dropbox-konto.</string>
     <string name="local_openstreetmap_were_uploaded">{0} interessepunkter/notater opplastet</string>
     <string name="local_openstreetmap_settings">Lokalt lagrede OSM-interessepunkter/notater</string>
-    <string name="local_openstreetmap_settings_descr">Vis og behandle OSM-interessepunkter/notater i databasen på enheten.</string>
+    <string name="local_openstreetmap_settings_descr">Vis og behandle OSM-interessepunkter/notater i din enhetsdatabase.</string>
     <string name="gpx_monitoring_disabled_warn">Ta opp spor ved bruk av GPX-modul eller via \'Turopptak\'-innstillinger.</string>
     <string name="native_library_not_supported">Innebygd bibliotek støttes ikke på denne enheten.</string>
     <string name="init_native_library">Igangsetter innebygget bibliotek…</string>
@@ -2453,7 +2453,7 @@
     <string name="shared_string_gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Velg filtype</string>
-    <string name="osm_edits_export_desc">Velg eksporttypen: OSM-notater, interessepunkt eller begge.</string>
+    <string name="osm_edits_export_desc">Eksporter som OSM-notater, interessepunkter, eller begge.</string>
     <string name="all_data">Alle data</string>
     <string name="osm_notes">OSM-notater</string>
     <string name="tunnel_warning">Tunnel foran</string>
@@ -2531,7 +2531,7 @@
     <string name="show_free_version_banner">Vis gratisversjonsbanner</string>
     <string name="show_free_version_banner_description">Vis gratisversjonsbanneret selv i den betalte versjonen.</string>
     <string name="commiting_node">Sjekker inn knutepunkt…</string>
-    <string name="previous_run_crashed">Den siste kjøringen av OsmAnd kræsjet. Loggfilen finnes i {0}. Rapporter hendelsen og legg ved loggfilen.</string>
+    <string name="previous_run_crashed">Den siste kjøringen av OsmAnd krasjet. Loggfilen finnes i {0}. Rapporter hendelsen og legg ved loggfilen.</string>
     <string name="poi_error_poi_not_found">Knutepunktet ble ikke funnet, eller så består fasiliteten av flere knutepunkter som ikke støttes ennå.</string>
     <string name="android_19_location_disabled">På Android 4.4 (KitKat) og videre, er den gamle lagringsmappen (%s) ikke mulig. Kopier alle OsmAnd-filer til nytt lagringssted\? 
 \n Merknad 1: Dine gamle filer forblir urørt (men kan slettes manuelt). 
@@ -3127,8 +3127,8 @@
     <string name="default_speed_setting_descr">Endre forvalgte hastighetsinnstillinger</string>
     <string name="minmax_speed_dialog_title">Sett min/maks -hastighet</string>
     <string name="new_profile">Ny profil</string>
-    <string name="shared_string_crash">Kræsj</string>
-    <string name="last_launch_crashed">OsmAnd kræsjet tidligere. Hjelp til å forbedre OsmAnd ved å dele feilmeldingen.</string>
+    <string name="shared_string_crash">Krasj</string>
+    <string name="last_launch_crashed">OsmAnd krasjet tidligere. Hjelp til å forbedre OsmAnd ved å dele feilmeldingen.</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">• Programprofiler: Opprett en egendefinert profil for dine egne behov, med egendefinert ikon og farge 
 \n 
@@ -3887,11 +3887,28 @@
     <string name="icon_group_emergency">Nødsfall</string>
     <string name="icon_group_travel">Reise</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Du må legge til minst to punkter.</string>
-    <string name="gpx_upload_trackable_visibility_descr"/>
+    <string name="gpx_upload_trackable_visibility_descr">Sporbar betyr at sporet ikke vil vises i offentlige lister, men punkter fra det vil fremdeles ikke være tilgjengelige gjennom det offentlige GPS-API-et med tidsstempel. Andre brukere vil kun ha mulighet til å laste ned behandlede punkter fra ditt spor, noe som ikke kan tilknyttes deg direkte.</string>
     <string name="sign_in_with_open_street_map">Logg inn med OpenStreetMap</string>
     <string name="use_login_password">Bruk innlogging og passord</string>
     <string name="login_account">Konto</string>
     <string name="send_files_to_openstreetmap">Send GPX-fil til OpenStreetMap</string>
     <string name="icon_group_amenity">Fasilitet</string>
     <string name="markers_history">Markørhistorikk</string>
+    <string name="disable_recording_once_app_killed_descrp">Pauser spor-logging når programmet drepes (via nylige programmer). (OsmAnd-bakgrunnsindikatoren forsvinner fra Android-merknadsfeltet.)</string>
+    <string name="monitoring_control_start">START</string>
+    <string name="osm_edit_close_note">Lukk OSM-notat</string>
+    <string name="osm_edit_comment_note">Kommenter OSM-notat</string>
+    <string name="enter_text_separated">Skriv inn etiketter inndelt med komma.</string>
+    <string name="subscription_payment_issue_title">Det har oppstått et problem med abonnementet ditt. Klikk på knappen for å gå til Google Play-abonnementsinnstillingene for å fikse din betalingsmetode.</string>
+    <string name="subscription_expired_title">OsmAnd-Live-abonnement utløpt</string>
+    <string name="subscription_paused_title">OsmAnd-Live-abonnement har blitt satt på vent</string>
+    <string name="subscription_on_hold_title">OsmAnd-Live-abonnement på vent</string>
+    <string name="osm_login_descr">Du kan logge inn med den trygge OAuth-metoden, eller bruke ditt innloggingsbrukernavn og passord.</string>
+    <string name="register_on_openplacereviews">Registrer deg på
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Bilder tilbys av det åpne dataprosjektet OpenPlaceReviews.org. For å kunne laste opp bilder må du registrere deg på nettsiden.</string>
+    <string name="manage_subscription">Håndter abonnement</string>
+    <string name="shared_string_add_photo">Legg til bilde</string>
+    <string name="register_opr_create_new_account">Opprett ny konto</string>
+    <string name="register_opr_have_account">Jeg har allerede en konto</string>
 </resources>
