@@ -1908,7 +1908,7 @@
     <string name="open_street_map_login_and_pass">OSM felhasználónév és jelszó</string>
     <string name="osm_live_email_desc">Ezzel kaphat friss tájékoztatást a szerkesztéseiről.</string>
     <string name="shared_string_undo_all">Minden visszavonása</string>
-    <string name="file_name_containes_illegal_char">A fájlnév érvénytelen karaktert tartalmaz</string>
+    <string name="file_name_containes_illegal_char">Érvénytelen karakter a fájlnévben</string>
     <string name="storage_permission_restart_is_required">Az alkalmazás már tud írni a külső tárolóra, de ehhez egy kézi újraindítás szükséges.</string>
     <string name="rec_split_desc">Klipek elvágása, ha a felhasznált hely túllépi a tárolási méretet.</string>
     <string name="rec_split_clip_length_desc">A felvett klipek maximális hossza.</string>
@@ -2521,7 +2521,7 @@
     <string name="first_intermediate_dest_description">Első megállót ad hozzá</string>
     <string name="subsequent_dest_description">Célpont följebb mozgatása, vagy létrehozása</string>
     <string name="show_closed_notes">Lezárt jegyzetek megjelenítése</string>
-    <string name="switch_osm_notes_visibility_desc">OSM-jegyzetek megjelenítése/elrejtése a térképen.</string>
+    <string name="switch_osm_notes_visibility_desc">OSM-jegyzetek megjelenítése vagy elrejtése a térképen.</string>
     <string name="gpx_file_desc">GPX – megfelelő export a JOSM és más OSM-szerkesztők számára.</string>
     <string name="osc_file_desc">OSC – megfelelő export az OSM számára.</string>
     <string name="shared_string_gpx_file">GPX-fájl</string>
@@ -3205,7 +3205,7 @@
     <string name="default_speed_dialog_msg">Az érkezési időt becsüli ismeretlen úttípus esetén, valamint korlátozza a sebességet valamennyi úttípusnál (az útvonalat befolyásolhatja)</string>
     <string name="shared_string_revert">Visszaállít</string>
     <string name="track_saved">Nyomvonal elmentve</string>
-    <string name="empty_filename">Fájlnév üres</string>
+    <string name="empty_filename">Üres fájlnév</string>
     <string name="download_map_dialog">Térképletöltés párbeszédablak</string>
     <string name="dialogs_and_notifications_title">Párbeszédablakok és értesítések</string>
     <string name="dialogs_and_notifications_descr">Felugró üzenetek, párbeszédablakok és értesítések beállításai.</string>
@@ -3229,9 +3229,9 @@
     <string name="rendering_value_thick_name">Vastag</string>
     <string name="desert_render_descr">Sivatagokhoz és más ritkán lakott területekhez. Részletesebb.</string>
     <string name="quick_action_need_to_add_item_to_list">Adjon legalább egy elemet a „Gyorsművelet” beállításainál található listához</string>
-    <string name="routing_attr_piste_type_downhill_name">Alpesi sí/lesiklás</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpesi sí és lesiklás</string>
     <string name="routing_attr_piste_type_downhill_description">Alpesi vagy lesikló sípályák és a felvonókhoz vezető utak</string>
-    <string name="routing_attr_piste_type_nordic_name">Sífutás / északi sí</string>
+    <string name="routing_attr_piste_type_nordic_name">Sífutás és északi sí</string>
     <string name="routing_attr_piste_type_nordic_description">Északi vagy sífutónyomok</string>
     <string name="routing_attr_piste_type_skitour_name">Sítúrázás</string>
     <string name="routing_attr_piste_type_skitour_description">Sítúraútvonalak</string>
@@ -3494,7 +3494,7 @@
     <string name="recalculate_route_distance_promo">Az útvonal újraszámításra kerül, amennyiben az útvonal és a jelenlegi helyzet közötti távolság nagyobb, mint a kiválasztott érték.</string>
     <string name="n_items_of_z">%1$s a %2$s-ból</string>
     <string name="download_slope_maps">Lejtők</string>
-    <string name="quick_action_show_hide_terrain">Domborzat megjelenítése / elrejtése</string>
+    <string name="quick_action_show_hide_terrain">Domborzat megjelenítése vagy elrejtése</string>
     <string name="quick_action_terrain_hide">Domborzat elrejtése</string>
     <string name="quick_action_terrain_show">Domborzat megjelenítése</string>
     <string name="quick_action_terrain_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a domborzati réteget.</string>
@@ -3593,10 +3593,10 @@
     <string name="download_unsupported_action">Nem támogatott művelet: %1$s</string>
     <string name="quick_action_transport_hide">Tömegközlekedés elrejtése</string>
     <string name="quick_action_transport_show">Tömegközlekedés megjelenítése</string>
-    <string name="quick_action_show_hide_transport">Tömegközlekedés megjelenítése/elrejtése</string>
-    <string name="create_edit_poi">POI készítés / módosítás</string>
+    <string name="quick_action_show_hide_transport">Tömegközlekedés megjelenítése vagy elrejtése</string>
+    <string name="create_edit_poi">POI készítése vagy módosítása</string>
     <string name="parking_positions">Parkolási pozíció</string>
-    <string name="add_edit_favorite">Kedvenc hozzáadása/módosítása</string>
+    <string name="add_edit_favorite">Kedvenc hozzáadása vagy módosítása</string>
     <string name="reset_deafult_order">Alapértelmezett elemsorrend visszaállítása</string>
     <string name="back_to_editing">Vissza a szerkesztéshez</string>
     <string name="profiles_for_action_not_found">Nem található ilyen profil.</string>
@@ -3853,7 +3853,7 @@
     <string name="gpx_monitoring_stop">Utazás rögzítésének szüneteltetése</string>
     <string name="shared_string_save_as_gpx">Mentés új nyomvonalfájlként</string>
     <string name="plan_route_last_edited">Utoljára szerkesztve</string>
-    <string name="save_global_track_interval_descr">Adja meg az általános nyomvonalrögzítés naplózási intervallumát (engedélyezve a térképen található „Utazás rögzítése” widgettel).</string>
+    <string name="save_global_track_interval_descr">Adja meg az általános nyomvonalrögzítés naplózási intervallumát (bekapcsolva a térképen található „Utazás rögzítése” widgettel).</string>
     <string name="gpx_split_interval_none_descr">Válassza ki a kívánt felosztási lehetőséget: idő vagy távolság szerint.</string>
     <string name="gpx_monitoring_start">Utazás rögzítésének folytatása</string>
     <string name="navigation_profile">Navigációs profil</string>
@@ -3880,7 +3880,7 @@
     <string name="shared_string_redo">Mégis</string>
     <string name="release_3_8">• Frissített útvonaltervezési funkció: szakaszonként különböző navigációtípusok használhatók és nyomvonalak is beilleszthetők
 \n
-\n • Új megjelenési menü a nyomvonalakhoz: válassza ki a színt, a vastagságot, kapcsolja be az iránynyilakat és a kiindulás / célpont ikonjait
+\n • Új megjelenési menü a nyomvonalakhoz: válassza ki a színt, a vastagságot, kapcsolja be az iránynyilakat és a kiindulás és célpont ikonjait
 \n
 \n • Kerékpáros csomópontok jobb láthatósága
 \n
@@ -3896,7 +3896,7 @@
     <string name="sort_last_modified">Utolsó módosítás</string>
     <string name="sort_name_descending">Név: Z–A</string>
     <string name="sort_name_ascending">Név: A–Z</string>
-    <string name="start_finish_icons">Kiindulás/érkezés ikonjai</string>
+    <string name="start_finish_icons">Kiindulás és érkezés ikonjai</string>
     <string name="contour_lines_thanks">Köszönjük, hogy megvásárolta a szintvonalbővítményt (Contour lines)</string>
     <string name="osm_live_payment_desc_hw">Az előfizetés díja a kiválasztott időszakonként lesz kiszámítva. Bármikor törölheti az AppGallery webhelyen.</string>
     <string name="osm_live_payment_subscription_management_hw">A fizetést a vásárlás visszaigazolásakor az AppGallery számlájára terheljük.
@@ -3940,10 +3940,10 @@
     <string name="mgrs_format_descr">Az OsmAnd a NATO által is használt MGRS (Military Grid Reference System) koordinátákat alkamazza, amely hasonlít az UTM-formátumhoz.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Legalább két pontot kell hozzáadnia</string>
     <string name="manage_subscription">Előfizetés kezelése</string>
-    <string name="gpx_upload_trackable_visibility_descr">A követhetőség azt jelenti, hogy a nyomvonal semmilyen nyilvános listában nem jelenik meg, de a nyomvonalpontok az időbélyegekkel együtt továbbra is elérhetők lesznek a nyilvános GPS API-n keresztül. Más felhasználók csak a feldolgozott nyomvonalpontokat tölthetik le az Ön nyomvonalából, amelyek közvetlenül nem társítható Önhöz.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Az azonosítható azt jelenti, hogy a nyomvonal nyilvánosan megjelenik az Ön GPS-nyomvonalai között és a GPS-nyomvonalak nyilvános listáin, vagyis más felhasználók letölthetik a nyers nyomvonalat, és társíthatják azt a felhasználónévvel. A nyomvonalpont-API-n keresztül szolgáltatott adatok hivatkozni fognak az Ön eredeti nyomvonaloldalára. A nyomvonalpontok időbélyegei elérhetők a nyilvános GPS API-n keresztül.</string>
-    <string name="gpx_upload_public_visibility_descr">A nyilvános azt jelenti, hogy a nyomvonal nyilvánosan megjelenik az Ön GPS-nyomvonalai között és a GPS-nyomvonalak nyilvános listáin. Az API-n keresztül szolgáltatott adatok nem hivatkoznak az Ön nyomvonaloldalára. A nyomvonalpontok időbélyegei nem érhetők el a nyilvános GPS API-n keresztül, és a pontok nincsenek időrend szerint sorba állítva. Más felhasználók azonban továbbra is letölthetik a nyers nyomvonalat (a benne található időbélyegeket) a nyilvános nyomvonallistáról.</string>
-    <string name="gpx_upload_private_visibility_descr">A privát azt jelenti, hogy a nyomvonal semmilyen nyilvános listán nem jelenik meg, de az abból származó nyomvonalpontok továbbra is elérhetők lesznek a nyilvános GPS API-n időbélyegzők nélkül, nem időrend szerint sorba állítva.</string>
+    <string name="gpx_upload_trackable_visibility_descr">A követhető azt jelenti, hogy a nyomvonal egyetlen nyilvános listában sem jelenik meg, de a belőle származó, időbélyeggel ellátott, feldolgozott nyomvonalpontok (amelyek közvetlenül nem kapcsolhatók Önhöz) igen, mégpedig a nyilvános GPS API-ról történő letöltések révén.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Az azonosítható azt jelenti, hogy a nyomvonal nyilvánosan megjelenik az Ön GPS-nyomvonalai között és a GPS-nyomvonalak nyilvános listáin, vagyis más felhasználók letölthetik a nyers nyomvonalat, és társíthatják azt a felhasználónévvel. A nyomvonalpont-API-n keresztül kiszolgált GPS API-ból származó nyilvános időbélyegzővel ellátott nyomvonalpont-adatok hivatkoznak az Ön eredeti nyomvonaloldalára.</string>
+    <string name="gpx_upload_public_visibility_descr">A nyilvános azt jelenti, hogy a nyomvonal nyilvánosan megjelenik az Ön GPS-nyomvonalai között és a nyilvános GPS-nyomvonal-listákban, valamint a nyilvános nyomvonal-listában, időbélyegekkel, nyers formában. Az API-n keresztül szolgáltatott adatok nem hivatkoznak az Ön nyomvonal-oldalára. A nyomvonalpont időbélyegei nem érhetők el a nyilvános GPS API-n keresztül, a nyomvonalpontok pedig nincsenek időrendben.</string>
+    <string name="gpx_upload_private_visibility_descr">A privát azt jelenti, hogy a nyomvonal semmilyen nyilvános listán nem jelenik meg, de az abból származó nyomvonalpontok (nem időrendben) továbbra is elérhetők lesznek a nyilvános GPS API-n időbélyegzők nélkül.</string>
     <string name="enter_text_separated">A címkéket vesszővel elválasztva írja be.</string>
     <string name="send_files_to_openstreetmap">GPX-fájl küldése az OpenStreetMapre</string>
     <string name="markers_history">Jelölők előzményei</string>
@@ -3969,4 +3969,7 @@
     <string name="register_on_openplacereviews_desc">A fényképeket a OpenPlaceReviews.org nyílt adatprojekt biztosítja. Saját fényképei feltöltéséhez be kell jelentkeznie a weboldalon.</string>
     <string name="register_opr_create_new_account">Új fiók létrehozása</string>
     <string name="register_opr_have_account">Már van fiókom</string>
+    <string name="app_mode_motorboat">Motorcsónak</string>
+    <string name="app_mode_kayak">Kajak</string>
+    <string name="shared_string_search_history">Keresési előzmények</string>
 </resources>
