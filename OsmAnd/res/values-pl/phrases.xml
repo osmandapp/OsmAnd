@@ -2051,7 +2051,7 @@
     <string name="poi_fuel_100ll">Benzyna 100-oktanowa ołowiowa</string>
     <string name="poi_fuel_autogas">LPG samolotowy</string>
     <string name="poi_fuel_jeta1">Paliwo Jet A-1</string>
-    <string name="poi_fuel_adblue">Dodatek AdBlue (wodny roztwór mocznika)</string>
+    <string name="poi_fuel_adblue">AdBlue (wodny roztwór mocznika)</string>
     <string name="poi_crop_poultry">Uprawa: pasza do zwierząt</string>
     <string name="poi_crop_raspberry">Uprawa: malina</string>
     <string name="poi_crop_cassava">Uprawa: maniok</string>
@@ -3829,7 +3829,7 @@
     <string name="poi_traffic_signals_vibration_yes">Tak</string>
     <string name="poi_traffic_signals_vibration_no">Wibracja: nie</string>
     <string name="poi_city_block">Blok miejski</string>
-    <string name="poi_borough">Gmina</string>
+    <string name="poi_borough">Borough (okręg/część miasta)</string>
     <string name="poi_give_box">Give box (wystawka)</string>
     <string name="poi_pump_status_missing_beam">Stan pompy: brak wiązki</string>
     <string name="poi_traffic_signals_arrow_no">Strzałka: nie</string>

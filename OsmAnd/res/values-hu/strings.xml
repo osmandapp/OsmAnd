@@ -3422,7 +3422,7 @@
     <string name="login_and_pass">Felhasználónév és jelszó</string>
     <string name="plugin_global_prefs_info">Ezek a bővítménybeállítások globálisak, és minden profilra vonatkoznak</string>
     <string name="osm_editing">OSM-szerkesztés</string>
-    <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtalálható a %1$s helyen. A már feltöltött pontok nem láthatók az OsmAndban.</string>
+    <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtekinthető itt: %1$s. A már feltöltött pontok nem láthatók az OsmAndban.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Navigáció vagy haladás közben megjelenő ikon.</string>
     <string name="select_map_icon_descr">Álló helyzetben megjelenő ikon.</string>

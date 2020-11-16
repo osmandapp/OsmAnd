@@ -3728,4 +3728,218 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="subscription_expired_title">Předplatné OsmAnd Live skončilo</string>
     <string name="subscription_paused_title">Předplatné OsmAnd Live je pozastaveno</string>
     <string name="subscription_on_hold_title">Předplatné OsmAnd Live je zablokované</string>
+    <string name="app_mode_gap">Mezera</string>
+    <string name="routing_attr_freeride_policy_description">Freeride a sjezd mimo sjezdovky. Obvykle neupravované a neudržované, bez večerní kontroly. Vstup na vlastní nebezpečí.</string>
+    <string name="routing_attr_difficulty_preference_description">Preferovat trasy s touto obtížností, avšak povolit navigaci přes náročnější nebo jednodušší trasy, pokud jsou kratší.</string>
+    <string name="routing_attr_allow_skating_only_description">Trasy upravované pouze pro volný styl nebo bruslení na lyžích, ne pro klasické lyžování.</string>
+    <string name="search_offline_geo_error">Nepodařilo se rozpoznat geo akci \'%s\'.</string>
+    <string name="routing_attr_width_description">Zadejte povolenou šířku vozidla na trase.</string>
+    <string name="routing_attr_width_name">Omezení šířky</string>
+    <string name="sort_by_category">Seřadit podle kategorie</string>
+    <string name="save_track_to_gpx">Automaticky zaznamenávat stopu během navigace</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="simulate_your_location_gpx_descr">Simulovat polohu pomocí zaznamenané stopy GPX.</string>
+    <string name="what_is_new">Co je nového</string>
+    <string name="quick_action_directions_from_desc">Tlačítko pro určení středu obrazovky jako výchozího bodu a výpočet trasy do cíle nebo otevření dialogu pro výběr cíle.</string>
+    <string name="snowmobile_render_descr">Pro jízdu na sněžném vozidle na vyhrazených cestách.</string>
+    <string name="select_base_profile_dialog_message">Vlastní profil založte na jednom ze základních profilů. Ten určí základní nastavení jako viditelnost nástrojů, jednotky rychlosti a vzdálenosti. Toto jsou základní profily aplikace a návrhy vlastních profilů, na které mohou být rozšířeny:</string>
+    <string name="button_rate">Ohodnotit</string>
+    <string name="release_3_4">• Aplikační profily: Vytvořte si vlastní profil pro své potřeby, s vlastní ikonou i barvou
+\n
+\n• Možnost nastavení zvolené, minimální a maximální rychlosti v profilech
+\n
+\n• Přidaný widget s aktuálními souřadnicemi
+\n
+\n• Přidaná možnost zobrazit kompas a kruhové pravítko na mapě
+\n
+\n• Opravený záznam stopy na pozadí
+\n
+\n• Vylepšené stahování map na pozadí
+\n
+\n• Vrácené nastavení \'Zapnout obrazovku\'
+\n
+\n• Opravený výběr jazyka Wikipedie
+\n
+\n• Opravené chování tlačítka kompasu během navigace
+\n
+\n• Opravy dalších chyb
+\n
+\n</string>
+    <string name="map_look">Vzhled mapy</string>
+    <string name="wake_time">Časový limit obrazovky po probuzení</string>
+    <string name="coordinates_format_info">Zvolený formát bude použitý v celé aplikaci.</string>
+    <string name="navigate_point_format_olc">Open Location Code</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd používá MGRS, který je podobný formátu UTM NATO.</string>
+    <string name="logcat_buffer">Zásobník logcat</string>
+    <string name="shared_string_by_default">Výchozí</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Neurčený</string>
+    <string name="rendering_attr_piste_type_nordic_name">Běh na lyžích</string>
+    <string name="rendering_attr_piste_type_downhill_name">Sjezd</string>
+    <string name="rendering_attr_piste_type_skitour_name">Lyžařský okruh</string>
+    <string name="rendering_attr_piste_type_connection_name">Spojnice</string>
+    <string name="rendering_attr_piste_type_hike_name">Túry</string>
+    <string name="rendering_attr_piste_type_sled_name">Sáňkování</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Saně</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Ski park</string>
+    <string name="avoid_in_routing_descr_">Vyhnout se některým trasám a typům cest</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Lanovka</string>
+    <string name="app_mode_utv">Terénní čtyřkolka</string>
+    <string name="store_tracks_in_daily_directories_descrp">Ukládat stopy do podsložek podle dní (např. 2018-01-10).</string>
+    <string name="store_tracks_in_daily_directories">Ukládat stopy do denních složek</string>
+    <string name="store_tracks_in_rec_directory">Ukládat stopy do složky \'rec</string>
+    <string name="track_storage_directory_descrp">Stopy mohou být ukládány ve složce \'rec\' nebo v měsíčních či denních složkách.</string>
+    <string name="track_storage_directory">Složka pro ukládání stop</string>
+    <string name="contour_lines_and_hillshade">Vrstevnice a stínování svahů</string>
+    <string name="release_3_5">• Vylepšená nastavení aplikace a profilů. Nastavení jsou nyní uspořádána podle typu. Každý profil lze upravovat samostatně.
+\n
+\n• Nový dialog stahování map, který navrhuje mapy ke stažení během prohlížení
+\n
+\n• Opravy tmavého vzhledu
+\n
+\n• Opraveny některé chyby navigace
+\n
+\n• Aktualizovaná základní mapa s podrobnější sítí cest
+\n
+\n• Opraveny zaplavené oblasti ve světě
+\n
+\n• Lyžařská navigace: do detailů trasy byl přidán výškový profil a obtížnost
+\n
+\n• Opravy dalších chyb
+\n
+\n</string>
+    <string name="apply_preference_to_all_profiles">Tuto změnu můžete aplikovat na všechny profily nebo jen na vybraný profil.</string>
+    <string name="quick_action_show_hide_hillshade">Zobrazit/skrýt stínování svahů</string>
+    <string name="quick_action_hillshade_hide">Skrýt stínování svahů</string>
+    <string name="quick_action_hillshade_show">Zobrazit stínování svahů</string>
+    <string name="quick_action_hillshade_descr">Tlačítko pro zobrazení nebo skrytí stínování svahů na mapě.</string>
+    <string name="quick_action_show_hide_contour_lines">Zobrazit/skrýt vrstevnice</string>
+    <string name="quick_action_contour_lines_hide">Skrýt vrstevnice</string>
+    <string name="quick_action_contour_lines_show">Zobrazit vrstevnice</string>
+    <string name="quick_action_contour_lines_descr">Tlačítko pro zobrazení nebo skrytí vrstevnic na mapě.</string>
+    <string name="tts_initialization_error">Nepodařilo se spustit modul převodu textu na řeč.</string>
+    <string name="rendering_value_white_name">Bílá</string>
+    <string name="join_segments">Spojit úseky</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Zobrazit bodovou síť cyklotras</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Sítě bodů</string>
+    <string name="selected_profile">Vybraný profil</string>
+    <string name="reorder_profiles">Upravit seznam profilů</string>
+    <string name="choose_icon_color_name">Ikona, barva a název</string>
+    <string name="profile_appearance">Vzhled profilu</string>
+    <string name="save_heading_descr">Ukládat směr v každém bodu záznamu.</string>
+    <string name="save_heading">Ukládat směr</string>
+    <string name="personal_category_name">Osobní</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
+    <string name="select_nav_profile_dialog_message">\'Typ navigace\' ovlivňuje pravidla pro výpočet trasy.</string>
+    <string name="edit_profiles">Upravit profily</string>
+    <string name="edit_profiles_descr">Základní profily OsmAnd nelze odstranit, ale mohou být vypnuty (na předchozí obrazovce), nebo přesunuty na konec seznamu.</string>
+    <string name="shared_string_downloading_formatted">Stahování %s</string>
+    <string name="desert_render_descr">Pro pouště a jiné řídce osídlené oblasti. Víc detailů.</string>
+    <string name="rendering_value_thick_name">Tučné</string>
+    <string name="select_color">Zvolte barvu</string>
+    <string name="master_profile">Hlavní profil</string>
+    <string name="delete_profiles_descr">Stisknutím \'Použít\' odstraníte vymazané profily natrvalo.</string>
+    <string name="select_map_icon">Ikona polohy v klidu</string>
+    <string name="select_navigation_icon">Ikona polohy při pohybu</string>
+    <string name="reset_all_profile_settings">Resetovat všechna nastavení profilu\?</string>
+    <string name="reset_all_profile_settings_descr">Resetovat všechna nastavení profilu do základního stavu.</string>
+    <string name="reset_confirmation_descr">Stisknutím %1$s zahodíte všechny své změny.</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
+    <string name="select_map_icon_descr">Ikona zobrazená v klidu.</string>
+    <string name="select_nav_icon_descr">Ikona zobrazená během navigace nebo při pohybu.</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="osm_editing">Editace OSM</string>
+    <string name="login_and_pass">Přihlašovací jméno a heslo</string>
+    <string name="accessibility_announce">Oznámení</string>
+    <string name="route_recalculation">Přepočítání trasy</string>
+    <string name="photo_notes">Foto-poznámky</string>
+    <string name="multimedia_notes_view_descr">Vaše OSM poznámky jsou v %1$s.</string>
+    <string name="tracks_view_descr">Všechny vaše zaznamenané stopy jsou v %1$s, nebo ve složce OsmAnd.</string>
+    <string name="save_track_logging_accuracy">Přesnost záznamu</string>
+    <string name="live_monitoring">Sledování online</string>
+    <string name="live_monitoring_descr">Umožňuje sdílení aktuální polohy prostřednictvím záznamu cesty.</string>
+    <string name="accessibility_prefs_descr">Zvolte ikonu, barvu a název</string>
+    <string name="osm_editing_prefs_descr">Přihlášení, heslo, offline úpravy</string>
+    <string name="multimedia_notes_prefs_descr">Velikost obrázků, kvalita zvuku a videa</string>
+    <string name="monitoring_prefs_descr">Navigace, přesnost záznamu</string>
+    <string name="import_profile">Importovat profil</string>
+    <string name="import_routing_file">Importovat navigační soubor</string>
+    <string name="import_from_file">Import ze souboru</string>
+    <string name="osm_authorization_success">Přihlášení bylo úspěšné</string>
+    <string name="multimedia_photo_play_sound">Zvuk spouště fotoaparátu</string>
+    <string name="multimedia_use_system_camera">Použít systémovou aplikaci</string>
+    <string name="multimedia_rec_split_title">Rozdělení záznamu</string>
+    <string name="reset_plugin_to_default">Resetovat modul do základního nastavení</string>
+    <string name="monitoring_min_distance">Minimální posun</string>
+    <string name="monitoring_min_accuracy">Minimální přesnost</string>
+    <string name="monitoring_min_speed">Minimální rychlost</string>
+    <string name="monitoring_notification">Oznámení</string>
+    <string name="live_monitoring_adress_descr">Zadejte webovou adresu se syntaxí parametrů: zeměpisná šířka={0}, zeměpisná délka={1}, časové razítko={2}, přesnost={3}, výška={4}, rychlost={5}, směr={6}.</string>
+    <string name="live_monitoring_adress">Webová adresa</string>
+    <string name="live_monitoring_tracking_interval">Interval záznamu</string>
+    <string name="live_monitoring_time_buffer">Časový zásobník</string>
+    <string name="monitoring_min_distance_descr_recommendation">Doporučení: Nastavení 5 metrů může fungovat, pokud nepotřebujete zaznamenat detaily jemnější než je tato vzdálenost a zároveň výslovně nechcete zaznamenávat úseky bez pohybu.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Vedlejší účinky: Úseky v klidu nejsou vůbec zaznamenané, nebo každý pouze jedním bodem. Malé skutečné pohyby (například do strany na označení možné odbočky na cestě) mohou být odfiltrované. Váš soubor bude obsahovat méně informací pro následné zpracování a má horší statistiky, protože zjevně nadbytečné body budou během záznamu odfiltrovány, avšak artefakty způsobené špatným příjmem nebo efekty GPS čipu mohou v záznamu zůstat.</string>
+    <string name="monitoring_min_distance_descr">Tento filtr nebude zaznamenávat duplicitní body tam, kde se udál příliš malý pohyb. Stopy, které se po záznamu nezpracovávají, budou díky tomu vypadat lépe.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Poznámka: Pokud bylo GPS vypnuté těsně před začátkem záznamu, může mít první změřený bod nižší přesnost, proto bychom v našem programu mohli chvíli počkat před zaznamenáním bodu (nebo zaznamenat nejlepší ze tří po sobě jdoucích bodů), ovšem to ještě není implementováno.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Doporučení: Je těžké předpovědět, co se zaznamená a co ne, proto může být vhodné tento filtr vypnout.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Vedlejší účinek: Kvůli filtrování podle přesnosti mohou zcela chybět body například pod mosty, stromy, mezi vysokými budovami nebo při jistých povětrnostních podmínkách.</string>
+    <string name="monitoring_min_accuracy_descr">Toto zaznamená pouze body změřené se zadanou minimální přesností (v metrech/stopách tak, jak ji hlásí Android pro vaše zařízení). Přesnost udává vzdálenost změřené od skutečné polohy a nesouvisí přímo přesností, která udává rozptyl opakovaných měření.</string>
+    <string name="monitoring_min_speed_descr_remark">Poznámka: kontrola na nenulovou rychlost: Většina GPS čipů hlásí hodnotu rychlosti jen v případě, kdy algoritmus vyhodnotí, že se pohybujete, jinak nevrátí nic. Použití nenulového nastavení v tomto filtru tedy vlastně použije detekci pohybu z GPS čipu. Avšak i když rychlost zde nebude filtrovaná během záznamu, použijeme tuto funkci při analýze GPX pro určení opravené vzdálenosti – hodnota zobrazená v tomto poli je vzdálenost zaznamenaná během pohybu.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Doporučení: Zkuste nejprve použít detekci pohybu filtrem minimálního posunu (B), který může dosáhnout lepších výsledků a ztrácet méně dat. Pokud vaše stopy budou obsahovat mnoho šumu při nízkých rychlostech, zkuste zde zadat nenulovou hodnotu. Mějte na paměti, že některá měření nemusí hlásit žádnou rychlost (některé metody založené na síti). V takových případech se nic nezaznamená.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Vedlejší účinek: Vaše stopa nebude obsahovat úseky, v nichž nebyla dosažená minimální rychlost (např. tam, kde jste tlačili kolo do prudkého kopce). Také budou chybět údaje o úsecích bez pohybu, jako třeba přestávkách. To má vliv na následnou analýzu nebo zpracování, například při zjišťování celkové délky cesty, doby pohybu nebo průměrné rychlosti.</string>
+    <string name="monitoring_min_speed_descr">Tento filtr nebude zaznamenávat body při nižších rychlostech. Díky tomu může být zaznamenaná stopa hladší při zobrazení na mapě.</string>
+    <string name="plugin_global_prefs_info">Tato nastavení jsou globální a platí pro všechny profily</string>
+    <string name="login_open_street_map">Přihlásit se do OpenStreetMap</string>
+    <string name="login_open_street_map_org">Přihlásit se do OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Zaregistrovat se do OpenStreetMap</string>
+    <string name="osm_edits_view_descr">Můžete zobrazit své dosud neodeslané změny či chyby v OSM v %1$s. Odeslané body se již v OsmAnd nezobrazují.</string>
+    <string name="open_street_map_login_mode">Musíte se přihlásit, abyste mohli odesílat nová nebo změněná data.
+\n
+\nMůžete se přihlásit pomocí bezpečné metody OAuth, nebo pomocí jména a hesla.</string>
+    <string name="use_login_password">Použít jméno a heslo</string>
+    <string name="login_account">Účet</string>
+    <string name="user_login">Přihlašovací jméno</string>
+    <string name="markers_history">Historie značek</string>
+    <string name="gpx_upload_public_visibility_descr">Veřejná znamená, že trasa bude veřejně dostupná ve vašich GPS trasách a veřejných seznamech GPS tras. Data poskytnutá prostřednictvím API nebudou odkazovat na vaši stránku s trasou. Časová razítka bodů trasy nebudou dostupná prostřednictvím veřejného GPS API a body nebudou chronologicky seřazeny. Ostatní uživatelé si ale stále budou moci stáhnout nezpracovanou trasu z veřejného seznamu spolu se všemi časovými razítky, které obsahuje.</string>
+    <string name="gpx_upload_private_visibility_descr">Soukromá znamená, že trasa se neobjeví v žádném veřejném seznamu a body trasy budou dostupném prostřednictvím veřejného GPS API bez časových razítek, ale nebudou chronologicky seřazeny.</string>
+    <string name="send_files_to_openstreetmap">Odeslat soubor GPX do OpenStreetMap</string>
+    <string name="enter_text_separated">Zadejte značky oddělené čárkou.</string>
+    <string name="gpx_upload_trackable_visibility_descr">Sledovatelná znamená, že trasa se neobjeví v žádném veřejném seznamu, ale body trasy budou dostupné prostřednictvím veřejného GPS API s časovými razítky. Ostatní uživatelé si budou moci stáhnout zpracované body z vaší trasy, které ale nebude možné přímo spojit s vámi.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Identifikovatelná znamená, že trasa bude veřejně dostupná ve vašich GPS trasách a veřejných seznamech GPS tras, tzn. ostatní uživatelé si budou moci stáhnout nezpracovanou trasu a propojit ji s vaším uživatelským jménem. Data poskytnutá prostřednictvím API se budou odkazovat na vaši původní stránku s trasou. Časová razítka bodů trasy budou dostupná prostřednictvím veřejného GPS API.</string>
+    <string name="osm_edit_close_note">Zavřít OSM poznámku</string>
+    <string name="osm_edit_comment_note">Komentovat OSM poznámku</string>
+    <string name="osm_login_descr">Můžete se přihlásit bezpečnou metodou OAuth nebo použít své přihlašovací jméno a heslo.</string>
+    <string name="shared_string_add_photo">Přidat fotku</string>
+    <string name="register_on_openplacereviews">Zaregistrovat na
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Fotografie poskytuje open source projekt OpenPlaceReviews.org. Před odesláním svých fotografií se musíte zaregistrovat na webové stránce.</string>
+    <string name="register_opr_create_new_account">Vytvořit nový účet</string>
+    <string name="register_opr_have_account">Už mám účet</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="not_support_file_type_with_ext">Zvolte podporovaný soubor s příponou %1$s.</string>
+    <string name="file_does_not_contain_routing_rules">V \'%1$s\' nejsou žádná pravidla pro navigaci. Zvolte prosím jiný soubor.</string>
+    <string name="logcat_buffer_descr">Zkontrolovat a sdílet podrobné záznamy aplikace</string>
+    <string name="permission_is_required">Pro použití této možnosti je potřeba oprávnění.</string>
+    <string name="export_profile_dialog_description">Můžete zvolit dodatečná data k exportu spolu s profilem.</string>
+    <string name="import_profile_dialog_description">Importovaný profil obsahuje dodatečná data. Klikněte na \"Import\" pro importování pouze profilových dat, nebo zvolte dodatečná data.</string>
+    <string name="shared_string_include_data">Zahrnout dodatečná data</string>
+    <string name="shared_string_rendering_style">Styl vykreslování</string>
+    <string name="shared_string_routing">Navigace</string>
+    <string name="sunrise_at">Východ slunce v %1$s</string>
+    <string name="sunset_at">Západ slunce v %1$s</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="profile_prefs_reset_successful">Všechna nastavení profilu obnovena do základního nastavení.</string>
+    <string name="plugin_prefs_reset_successful">Všechna nastavení modulů obnovena do výchozího stavu.</string>
+    <string name="rendering_attr_streetLightingNight_name">Zobrazit pouze v noci</string>
+    <string name="add_custom_category">Přidat vlastní kategorii</string>
+    <string name="shared_string_available">Dostupné</string>
+    <string name="add_new_custom_category_button_promo">Novou kategorii můžete přidat výběrem jedné nebo více existujících kategorií.</string>
+    <string name="create_custom_categories_list_promo">Změňte pořadí seznamu, skryjte kategorie. Všechny změny můžete importovat a exportovat pomocí profilů.</string>
+    <string name="rearrange_categories">Uspořádat kategorie</string>
+    <string name="accessibility_mode_disabled">Režim usnadnění je ve vašem systému Android vypnutý.</string>
+    <string name="use_system_screen_timeout_promo">Ve výchozím stavu vypnuto: běží-li OsmAnd na popředí, obrazovka se nevypne.
+\n
+\nJe-li zapnuto, OsmAnd vypne obrazovku podle systémového limitu.</string>
 </resources>

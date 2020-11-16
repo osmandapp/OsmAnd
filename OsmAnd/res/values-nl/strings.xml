@@ -128,7 +128,7 @@
     <string name="global_app_settings">Algemene instellingen</string>
     <string name="user_name">OSM gebruikersnaam</string>
     <string name="open_street_map_login_descr">Nodig om bij te kunnen dragen aan openstreetmap.org.</string>
-    <string name="user_password">OSM wachtwoord</string>
+    <string name="user_password">Wachtwoord</string>
     <string name="osmand_service">Achtergrond modus</string>
     <string name="osmand_service_descr">OsmAnd werkt op de achtergrond als het scherm uit is.</string>
     <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
@@ -3364,9 +3364,9 @@
     <string name="route_recalculation">Route herberekening</string>
     <string name="accessibility_announce">Meld</string>
     <string name="login_and_pass">Gebruikersnaam en wachtwoord</string>
-    <string name="plugin_global_prefs_info">Deze instellingen hebben betrekking op alle profielen.</string>
+    <string name="plugin_global_prefs_info">Deze instellingen hebben betrekking op alle profielen</string>
     <string name="osm_editing">OSM Bewerking</string>
-    <string name="osm_edits_view_descr">U kan al uw niet-geüploade bewerkingen of OSM fouten zien in %1$s. Geüploade punten ziet u niet meer.</string>
+    <string name="osm_edits_view_descr">U kan al uw niet geüploade bewerkingen of OSM fouten zien in %1$s. Geüploade punten ziet u niet meer.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Tijdens navigatie of beweging getoond icoon.</string>
     <string name="select_map_icon_descr">Bij rust getoond icoon.</string>
@@ -3438,7 +3438,7 @@
     <string name="shared_string_profiles">Profielen</string>
     <string name="listed_exist">De getoonde %1$s zijn in OsmAnd reeds beschikbaar.</string>
     <string name="replace_all_desc">Huidige elementen worden vervangen door elementen uit het bestand</string>
-    <string name="replace_all">Alle vervangen</string>
+    <string name="replace_all">Vervang alles</string>
     <string name="keep_both">Beide houden</string>
     <string name="keep_both_desc">Geïmporteerde elementen zullen toegevoegd worden met een voorvoegsel</string>
     <string name="import_duplicates_description">OsmAnd heeft reeds elementen met dezelfde naam als de geïmporteerde.
@@ -3534,7 +3534,7 @@
     <string name="shared_string_zoom_levels">Zoomniveaus</string>
     <string name="shared_string_legend">Legenda</string>
     <string name="import_complete_description">Alle gegevens uit de %1$s zijn geïmporteerd, open met de onderstaande knoppen het benodigde deel van de app om deze te beheren.</string>
-    <string name="shared_string_import_complete">Import voltooid</string>
+    <string name="shared_string_import_complete">Importeren voltooid</string>
     <string name="items_added">Elementen toegevoegd</string>
     <string name="checking_for_duplicate_description">OsmAnd controleert %1$s op duplicaten met bestaande items in de app.
 \n
@@ -3706,7 +3706,7 @@
     <string name="system_default_theme">Standaard</string>
     <string name="route_between_points">Route tussen punten</string>
     <string name="route_between_points_warning_desc">Vervolgens, zet uw track vast op de dichtstbijzijnde toegestane weg met een van uw navigatieprofielen om deze optie te gebruiken.</string>
-    <string name="message_need_calculate_route_before_show_graph">%1$s gegevens alleen beschikbaar op de wegen, u moet een route berekenen met behulp van \"Route tussen punten\" om deze te krijgen.</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s gegevens alleen beschikbaar op wegen, u moet een route berekenen met behulp van \"Route tussen punten\" om deze gegevens te krijgen.</string>
     <string name="route_between_points_desc">Selecteer hoe de punten verbonden worden, via een rechte lijn, of een route berekenen tussen de punten zoals hieronder aangegeven.</string>
     <string name="route_between_points_next_segment_button_desc">Alleen het volgende segment wordt opnieuw berekend met het geselecteerde profiel.</string>
     <string name="next_segment">Volgende segment</string>
@@ -3769,7 +3769,7 @@
     <string name="plan_route_create_new_route">Maak een nieuwe route</string>
     <string name="plan_route_open_existing_track">Open een bestaande track</string>
     <string name="plan_a_route">Plan een route</string>
-    <string name="use_two_phase_routing">Gebruik 2-fasen A* routeringsalgoritme</string>
+    <string name="use_two_phase_routing">Gebruik de twee-fase A* route berekening methode</string>
     <string name="shared_string_graph">Grafiek</string>
     <string name="message_graph_will_be_available_after_recalculation">Wacht op de herberekening van de route.
 \nDe grafiek is beschikbaar na herberekening.</string>
@@ -3880,7 +3880,7 @@
     <string name="perform_oauth_authorization">Inloggen via OAuth</string>
     <string name="clear_osm_token">Wis OpenStreetMap OAuth-token</string>
     <string name="osm_edit_logout_success">Uitloggen gelukt</string>
-    <string name="file_already_imported">Het bestand is al geïmporteerd in OsmAnd</string>
+    <string name="file_already_imported">Bestand is reeds geïmporteerd in OsmAnd</string>
     <string name="shared_string_local_maps">Lokale kaarten</string>
     <string name="icon_group_amenity">Aangenaam</string>
     <string name="icon_group_special">Speciaal</string>
@@ -3894,4 +3894,35 @@
     <string name="quick_action_add_gpx">Track waypoint toevoegen</string>
     <string name="marker_save_as_track">Opslaan als trackbestand</string>
     <string name="monitoring_control_start">Rec</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">U moet minimaal twee punten toevoegen</string>
+    <string name="login_open_street_map">Login op OpenStreetMap</string>
+    <string name="login_open_street_map_org">Login op OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Login met OpenStreetMap</string>
+    <string name="open_street_map_login_mode">U moet inloggen om nieuwe of gewijzigde wijzigingen te uploaden.
+\n
+\nU kunt inloggen met de veilige OAuth-methode of uw login en wachtwoord gebruiken.</string>
+    <string name="use_login_password">Gebruik uw login gegevens</string>
+    <string name="login_account">Account</string>
+    <string name="user_login">Inloggen</string>
+    <string name="manage_subscription">Abonnement beheren</string>
+    <string name="subscription_payment_issue_title">Er is een probleem met uw abonnement. Klik op de knop om naar de Google Play-abonnementsinstellingen te gaan om uw betalingsmethode te corrigeren.</string>
+    <string name="subscription_expired_title">OsmAnd Live-abonnement is verlopen</string>
+    <string name="subscription_paused_title">OsmAnd Live-abonnement is gepauzeerd</string>
+    <string name="subscription_on_hold_title">Het OsmAnd Live-abonnement is op wacht gezet</string>
+    <string name="markers_history">Markeervlaggen geschiedenis</string>
+    <string name="send_files_to_openstreetmap">Stuur het GPX-bestand naar OpenStreetMap</string>
+    <string name="enter_text_separated">Voer tags in, gescheiden door komma\'s.</string>
+    <string name="gpx_upload_public_visibility_descr">Openbaar betekent dat de trace openbaar zal worden getoond in Uw GPS-sporen en in openbare GPS-traceerlijsten. Gegevens die via de API worden geleverd, verwijzen niet naar uw traceerpagina. Tijdaanduidingen van de traceerpunten zijn niet beschikbaar via de openbare GPS-API en de punten zijn niet chronologisch gerangschikt. Andere gebruikers kunnen de onbewerkte tracering echter nog steeds downloaden van de openbare traceringslijst en eventuele tijdaanduiding erin.</string>
+    <string name="gpx_upload_private_visibility_descr">Privé betekent dat de trace niet in openbare vermeldingen zal verschijnen, maar trackpoints ervan zullen nog steeds beschikbaar zijn via de openbare GPS API zonder tijdaanduiding, maar zullen niet chronologisch worden gerangschikt.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Identificeerbaar betekent dat de trace openbaar wordt getoond in uw GPS-sporen en in openbare GPS-trace-lijsten, dat wil zeggen dat andere gebruikers de onbewerkte trace kunnen downloaden en deze aan uw gebruikersnaam kunnen koppelen. Gegevens die via de trackpoints-API worden aangeboden, verwijzen naar uw oorspronkelijke tracepagina. Tijdaanduidingen van de traceerpunten zijn beschikbaar via de openbare GPS-API.</string>
+    <string name="gpx_upload_trackable_visibility_descr">Trackbaar betekent dat de trace niet in openbare vermeldingen zal verschijnen, maar trackpoints ervan zullen nog steeds beschikbaar zijn via de openbare GPS API met tijdaanduiding. Andere gebruikers kunnen alleen verwerkte trackpoints downloaden van uw trace die niet rechtstreeks aan u kunnen worden gekoppeld.</string>
+    <string name="osm_edit_close_note">Sluit OSM Note</string>
+    <string name="osm_edit_comment_note">Opmerking OSM Note</string>
+    <string name="osm_login_descr">U kunt inloggen met de veilige OAuth-methode of uw login en wachtwoord gebruiken.</string>
+    <string name="shared_string_add_photo">Een foto toevoegen</string>
+    <string name="register_on_openplacereviews">Registreer u op
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Foto\'s zijn afkomstig van het open data-project OpenPlaceReviews.org. Om uw foto\'s te uploaden, moet u zich aanmelden op deze website.</string>
+    <string name="register_opr_create_new_account">Maak een nieuw account aan</string>
+    <string name="register_opr_have_account">Ik heb al een account</string>
 </resources>
