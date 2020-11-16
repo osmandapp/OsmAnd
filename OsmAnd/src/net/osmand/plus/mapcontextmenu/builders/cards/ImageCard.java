@@ -509,6 +509,7 @@ public abstract class ImageCard extends AbstractCard {
 					"Requesting location images...", false, false);
 			try {
 				if (!Algorithms.isEmpty(response)) {
+					//TODO extract place id
 					JSONArray obj = new JSONObject(response).getJSONArray("objects");
 					JSONArray images = ((JSONObject) ((JSONObject) obj.get(0)).get("images")).getJSONArray("outdoor");
 					if (images.length() > 0) {
