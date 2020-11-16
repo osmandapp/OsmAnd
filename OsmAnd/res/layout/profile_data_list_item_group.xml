@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
 			android:layout_height="match_parent"
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center_vertical"
-			android:minHeight="66dp"
+			android:minHeight="@dimen/setting_list_item_large_height"
 			android:orientation="horizontal">
 
 			<androidx.appcompat.widget.AppCompatImageView
@@ -72,11 +72,11 @@
 
 			<FrameLayout
 				android:id="@+id/check_box_container"
+				style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 				android:layout_width="@dimen/acceptable_touch_radius"
 				android:layout_height="@dimen/acceptable_touch_radius"
 				android:layout_marginEnd="@dimen/text_margin_small"
-				android:layout_marginRight="@dimen/text_margin_small"
-				android:background="?attr/selectableItemBackgroundBorderless">
+				android:layout_marginRight="@dimen/text_margin_small">
 
 				<net.osmand.view.ThreeStateCheckbox
 					android:id="@+id/check_box"

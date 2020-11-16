@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="file_size_needed_for_import">Needed for import</string>
+    <string name="select_data_to_export">Select the data to be exported to the file.</string>
+    <string name="approximate_file_size">Approximate file size</string>
+    <string name="shared_string_resources">Resources</string>
     <string name="register_opr_have_account">I already have an account</string>
     <string name="register_opr_create_new_account">Create new account</string>
     <string name="register_on_openplacereviews_desc">Photos are provided by open data project OpenPlaceReviews.org. In order to upload your photos you need to sign up on website.</string>
