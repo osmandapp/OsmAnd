@@ -1921,7 +1921,7 @@
     <string name="full_report">Informe completo</string>
     <string name="open_street_map_login_and_pass">Nombre de usuario y contraseña de OSM</string>
     <string name="report">Informe</string>
-    <string name="file_name_containes_illegal_char">El nombre del archivo contiene caracteres ilegales</string>
+    <string name="file_name_containes_illegal_char">Carácter ilegal en el nombre del archivo</string>
     <string name="no_map_markers_found">Añade marcadores a través del mapa</string>
     <string name="no_waypoints_found">No se encontraron puntos de referencia</string>
     <string name="rendering_value_thin_name">Fino</string>
@@ -2462,7 +2462,7 @@
     <string name="measurement_tool_action_bar">Navega por el mapa y añade puntos</string>
     <string name="measurement_tool">Medir distancia</string>
     <string name="none_point_error">Añadir al menos un punto.</string>
-    <string name="enter_gpx_name">Nombre del GPX:</string>
+    <string name="enter_gpx_name">Nombre del archivo GPX:</string>
     <string name="show_on_map_after_saving">Mostrar en el mapa al guardar</string>
     <string name="add_waypoint">Añadir punto de referencia</string>
     <string name="save_gpx_waypoint">Guardar punto GPX</string>
@@ -3085,9 +3085,9 @@
     <string name="zoom_by_wunderlinq_descr">Cambia el zoom del mapa desplazando la rueda hacia arriba y abajo. La tecla «Escape» retrocede a la aplicación WunderLINQ.</string>
     <string name="zoom_by_wunderlinq">Controlar con WunderLINQ</string>
     <string name="quick_action_need_to_add_item_to_list">Añadir al menos un elemento a la lista en los ajustes de «Acción rápida»</string>
-    <string name="routing_attr_piste_type_downhill_name">Esquí alpino o de descenso</string>
+    <string name="routing_attr_piste_type_downhill_name">Esquí alpino y de descenso</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas de esquí alpino o de descenso y acceso a remontes mecánicos.</string>
-    <string name="routing_attr_piste_type_nordic_name">Esquí de travesía o nórdico</string>
+    <string name="routing_attr_piste_type_nordic_name">Esquí de travesía y nórdico</string>
     <string name="routing_attr_piste_type_nordic_description">Senderos para esquí nórdico o de travesía.</string>
     <string name="routing_attr_piste_type_skitour_name">Esquí de travesía</string>
     <string name="routing_attr_piste_type_skitour_description">Rutas para esquí de travesía.</string>
@@ -3368,7 +3368,7 @@
     <string name="route_start_point">Punto de partida</string>
     <string name="default_speed_dialog_msg">Estima el tiempo de llegada para los tipos de caminos desconocidos, y limita la velocidad para todos los caminos (puede afectar a la ruta)</string>
     <string name="track_saved">Traza guardada</string>
-    <string name="empty_filename">Nombre del archivo vacío</string>
+    <string name="empty_filename">Nombre de archivo vacío</string>
     <string name="shared_string_revert">Revertir</string>
     <string name="quick_action_directions_from_desc">Un botón para hacer que la pantalla se centre en el punto de partida. Luego define el destino o activa el cálculo de la ruta.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar nodo de la red de rutas ciclistas</string>
@@ -3875,7 +3875,7 @@
     <string name="shared_string_file_name">Nombre del archivo</string>
     <string name="monitoring_control_start">Grabar</string>
     <string name="disable_recording_once_app_killed_descrp">La grabación de la traza se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
-    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el widget de grabación de viaje sobre el mapa).</string>
+    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activado desde el widget «Grabación de viaje» en el mapa).</string>
     <string name="gpx_monitoring_stop">Pausar grabación del viaje</string>
     <string name="gpx_monitoring_start">Reanudar grabación del viaje</string>
     <string name="system_default_theme">Predefinido del sistema</string>
@@ -3893,7 +3893,7 @@
     <string name="shared_string_redo">Rehacer</string>
     <string name="release_3_8">• Se ha actualizado la función «Planificar ruta»: permite utilizar diferentes tipos de navegación por segmento y la inclusión de trazas
 \n
-\n • Nuevo menú con el aspecto de las trazas: elegir el color, el grosor, mostrar las flechas de dirección y los iconos de inicio/fin.
+\n • Nuevo menú con el aspecto de las trazas: elegir el color, el grosor, mostrar las flechas de dirección y los iconos de inicio y fin.
 \n
 \n • Mejoras en la visibilidad de los nodos de bicicleta.
 \n
@@ -3909,7 +3909,7 @@
     <string name="sort_last_modified">Último modificado</string>
     <string name="sort_name_descending">Nombre: Z – A</string>
     <string name="sort_name_ascending">Nombre: A – Z</string>
-    <string name="start_finish_icons">Iconos de inicio/fin</string>
+    <string name="start_finish_icons">Iconos de inicio y fin</string>
     <string name="contour_lines_thanks">Gracias por comprar las «Curvas de nivel»</string>
     <string name="osm_live_payment_desc_hw">La suscripción se cobra por el período elegido. Puedes cancelarlo en cualquier momento en AppGallery.</string>
     <string name="osm_live_payment_subscription_management_hw">El pago será cargado a la cuenta de AppGallery al confirmar la compra.
@@ -3969,10 +3969,10 @@
     <string name="markers_history">Historial de marcadores</string>
     <string name="send_files_to_openstreetmap">Enviar archivo GPX a OpenStreetMap</string>
     <string name="enter_text_separated">Ingresa etiquetas separadas por comas.</string>
-    <string name="gpx_upload_trackable_visibility_descr">Trazable significa que la traza no aparecerá en ninguna lista pública pero el conjunto de puntos estarán disponibles a través de la API pública de GPS y con marcas de tiempo. Otros usuarios sólo podrán descargar el conjunto de puntos procesados de su traza que no se pueden asociar directamente con usted.</string>
-    <string name="gpx_upload_private_visibility_descr">Privado significa que la traza no aparecerá en ninguna lista pública, pero el conjunto de puntos seguirá estando disponible en orden cronológico a través de la API pública de GPS y sin marcas de tiempo.</string>
-    <string name="gpx_upload_public_visibility_descr">Público significa que la traza se mostrará públicamente en tu listado de trazas y en los listados de trazas GPS públicas. Los datos servidos a través de la API no harán referencia a su página de trazas. Las marcas de tiempo de los puntos de la traza no estarán disponible a través de la API pública de GPS, aunque los puntos se ordenan cronológicamente. Sin embargo, otros usuarios podrán descargar la traza en bruto de la lista de trazas públicas y las marcas de tiempo que contiene.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Identificable significa que la traza se mostrará públicamente en tu listado de trazas y en el listado de trazas GPS públicas, es decir que otros usuarios podrán descargar la traza en bruto y asociarla con su nombre de usuario. Los datos servidos a través de la API de conjunto de puntos hará referencia a la página original de la traza. Las marcas de tiempo de los puntos de la traza estarán disponibles a través de la API pública de GPS.</string>
+    <string name="gpx_upload_trackable_visibility_descr">«Trazable» significa que la traza no aparece en ninguna lista pública, pero el conjunto de puntos procesados con marcas de tiempo (no se pueden asociar directamente con usted) estarán disponibles a través de la API pública de GPS.</string>
+    <string name="gpx_upload_private_visibility_descr">«Privado» significa que la traza no aparecerá en ninguna lista pública, pero el conjunto de puntos seguirá estando disponible en orden cronológico a través de la API pública de GPS y sin marcas de tiempo.</string>
+    <string name="gpx_upload_public_visibility_descr">«Público» significa que la traza se mostrará públicamente en tu listado de trazas y en los listados de trazas GPS públicas con marcas de tiempo en bruto. Los datos servidos a través de la API no harán referencia a su página de trazas. Las marcas de tiempo de los puntos de la traza no estarán disponible a través de la API pública de GPS, aunque los puntos se ordenan cronológicamente.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">«Identificable» significa que la traza se mostrará públicamente en tu listado de trazas y en el listado de trazas GPS públicas, es decir que otros usuarios podrán descargar la traza en bruto y asociarla con su nombre de usuario. Los datos servidos a través de la API de conjunto de puntos hará referencia a la página original de la traza.</string>
     <string name="osm_edit_close_note">Cerrar nota de OSM</string>
     <string name="osm_edit_comment_note">Comentar nota de OSM</string>
     <string name="osm_login_descr">Puedes iniciar sesión con el método seguro de OAuth o usar el nombre de usuario y contraseña.</string>
@@ -3982,4 +3982,7 @@
     <string name="register_on_openplacereviews_desc">Las fotos son provistas por el proyecto de datos abiertos OpenPlaceReviews.org. Para subir fotos debes registrarte en el sitio web.</string>
     <string name="register_opr_create_new_account">Crear nueva cuenta</string>
     <string name="register_opr_have_account">Ya tengo cuenta</string>
+    <string name="shared_string_search_history">Historial de búsqueda</string>
+    <string name="app_mode_kayak">Kayak</string>
+    <string name="app_mode_motorboat">Lancha a motor</string>
 </resources>
