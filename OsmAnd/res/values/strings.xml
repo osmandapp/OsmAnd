@@ -77,13 +77,13 @@
     <string name="osm_live_payment_subscription_management_hw">Payment will be charged to your AppGallery account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period (month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your AppGallery settings.</string>
     <string name="osm_live_payment_desc_hw">Subscription charged per selected period. Cancel it on AppGallery at any time.</string>
     <string name="contour_lines_thanks">Thank you for purchasing \'Contour lines\'</string>
-    <string name="start_finish_icons">Start/finish icons</string>
+    <string name="start_finish_icons">Start and finish icons</string>
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="sort_name_descending">Name: Z – A</string>
     <string name="sort_last_modified">Last modified</string>
     <string name="release_3_8">
     • Updated "Plan a route" function: allows using different navigation types per segment and the inclusion of tracks\n\n
-    • New "Appearance" menu for tracks: select color, thickness, display direction arrows, start/finish icons\n\n
+    • New "Appearance" menu for tracks: select color, thickness, display direction arrows, start and finish icons\n\n
     • Improved visibility of bicycle nodes.\n\n
     • Tracks are now tappable, have context menu with basic info.\n\n
     • Improved "Search" algorithms\n\n
@@ -269,11 +269,11 @@
     <string name="quick_action_switch_profile_descr">The action button switches between selected profiles.</string>
     <string name="back_to_editing">Back to editing</string>
     <string name="reset_deafult_order">Restore default items order</string>
-    <string name="add_edit_favorite">Add / Edit Favorite</string>
+    <string name="add_edit_favorite">Add or edit favorite</string>
     <string name="parking_positions">Parking positions</string>
-    <string name="create_edit_poi">Create / Edit POI</string>
+    <string name="create_edit_poi">Create or edit POI</string>
     <string name="quick_action_transport_descr">Button showing or hiding public transport on the map.</string>
-    <string name="quick_action_show_hide_transport">Show/hide public transport</string>
+    <string name="quick_action_show_hide_transport">Show or hide public transport</string>
     <string name="quick_action_transport_show">Show public transport</string>
     <string name="quick_action_transport_hide">Hide public transport</string>
     <string name="release_3_7">
@@ -375,7 +375,7 @@
     <string name="quick_action_terrain_descr">A button to show or hide terrain layer on the map.</string>
     <string name="quick_action_terrain_show">Show terrain</string>
     <string name="quick_action_terrain_hide">Hide terrain</string>
-    <string name="quick_action_show_hide_terrain">Show / hide terrain</string>
+    <string name="quick_action_show_hide_terrain">Show or hide terrain</string>
     <string name="download_slope_maps">Slopes</string>
     <string name="n_items_of_z">%1$s of %2$s</string>
     <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
@@ -1172,7 +1172,7 @@
     <string name="first_intermediate_dest_description">Adds initial stop</string>
     <string name="subsequent_dest_description">Move destination up, and create it</string>
     <string name="show_closed_notes">Show closed notes</string>
-    <string name="switch_osm_notes_visibility_desc">Show/hide OSM notes on the map.</string>
+    <string name="switch_osm_notes_visibility_desc">Show or hide OSM notes on the map.</string>
     <string name="gpx_file_desc">GPX - suitable for export to JOSM or other OSM editors.</string>
     <string name="osc_file_desc">OSC - suitable for export to OSM.</string>
     <string name="shared_string_gpx_file">GPX file</string>
@@ -3947,9 +3947,9 @@
     <string name="routing_attr_avoid_sett_name">No cobblestone or sett</string>
     <string name="routing_attr_avoid_sett_description">Avoids cobblestone and sett</string>
     <string name="quick_action_need_to_add_item_to_list">Add at least one item to the list in the \'Quick action\' settings</string>
-    <string name="routing_attr_piste_type_downhill_name">Alpine/downhill ski</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpine and downhill skiing</string>
     <string name="routing_attr_piste_type_downhill_description">Slopes for alpine or downhill skiing and access to ski lifts.</string>
-    <string name="routing_attr_piste_type_nordic_name">Cross country/nordic ski</string>
+    <string name="routing_attr_piste_type_nordic_name">Cross country and nordic skiing</string>
     <string name="routing_attr_piste_type_nordic_description">Trails for nordic or cross-country skiing.</string>
     <string name="routing_attr_piste_type_skitour_name">Ski touring</string>
     <string name="routing_attr_piste_type_skitour_description">Routes for ski touring.</string>
