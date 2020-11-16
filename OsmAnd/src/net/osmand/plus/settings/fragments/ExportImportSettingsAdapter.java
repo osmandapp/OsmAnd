@@ -25,6 +25,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
@@ -310,6 +311,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				title.setText(R.string.markers_history);
 				setupIcon(icon, R.drawable.ic_action_flag, itemSelected);
 				break;
+			case SEARCH_HISTORY:
+				HistoryEntry historyEntry = (HistoryEntry) currentItem;
+				title.setText(historyEntry.getName().getName());
+				break;
 			default:
 				return child;
 		}
@@ -414,6 +419,8 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				return R.string.map_markers;
 			case HISTORY_MARKERS:
 				return R.string.markers_history;
+			case SEARCH_HISTORY:
+				return R.string.shared_string_search_history;
 			default:
 				return R.string.access_empty_list;
 		}

@@ -140,6 +140,9 @@ class SettingsItemsFactory {
 			case HISTORY_MARKERS:
 				item = new HistoryMarkersSettingsItem(app, json);
 				break;
+			case SEARCH_HISTORY:
+				item = new SearchHistorySettingsItem(app, json);
+				break;
 		}
 		return item;
 	}
