@@ -1617,7 +1617,7 @@
     <string name="number_of_contributors">מספר תורמים</string>
     <string name="number_of_edits">מספר עריכות</string>
     <string name="reports_for">דיווח עבור</string>
-    <string name="file_name_containes_illegal_char">שם הקובץ מכיל תווים בלתי תקניים</string>
+    <string name="file_name_containes_illegal_char">תווים בלתי תקניים בשם הקובץ</string>
     <string name="configure_screen_quick_action">פעולה מהירה</string>
     <string name="quick_action_item_action">פעולה %d</string>
     <string name="quick_action_item_screen">מסך %d</string>
@@ -2430,7 +2430,7 @@
     <string name="use_two_digits_longitude">שתי ספרות לציון קו אורך</string>
     <string name="shared_string_travel_guides">מדריכי תיירות</string>
     <string name="nothing_found_in_radius">לא נמצא שום דבר:</string>
-    <string name="switch_osm_notes_visibility_desc">הצגה/הסתרה של הערות OSM במפה.</string>
+    <string name="switch_osm_notes_visibility_desc">הצגת או הסתרת הערות OSM במפה.</string>
     <string name="gpx_file_desc">GPX - מתאים לייצוא ל־JOSM או עורכי OSM אחרים.</string>
     <string name="osc_file_desc">OSC - מתאים לייצוא ל־OSM.</string>
     <string name="shared_string_gpx_file">קובץ GPX</string>
@@ -3131,7 +3131,7 @@
     <string name="application_profiles_descr">נא לבחור את הפרופילים שיופיעו ביישומון.</string>
     <string name="application_profiles">פרופילים ביישומון</string>
     <string name="quick_action_need_to_add_item_to_list">יש להוסיף לפחות פריט אחד לרשימה בהגדרות ה‚פעולה המהירה’</string>
-    <string name="routing_attr_piste_type_downhill_name">סקי אלפיני/במורדות</string>
+    <string name="routing_attr_piste_type_downhill_name">סקי אלפיני ובמורדות</string>
     <string name="routing_attr_piste_type_downhill_description">מדרונים לסקי אלפיני או במורד ההר וגישה למעליות סקי.</string>
     <string name="routing_attr_piste_type_sled_name">מזחלת</string>
     <string name="routing_attr_piste_type_sled_description">מדרונים לגלישה עם מזחלת.</string>
@@ -3155,7 +3155,7 @@
     <string name="make_osmand_better_descr">לאפשר ל־OsmAnd לאסוף ולעבד נתונים אלמוניים בנוגע לשימוש ביישומון. לא נאספים נתונים על המיקום שלך או המקומות בהם צפית במפה. 
 \n 
 \nניתן להגדיר זאת בכל עת דרך ‚הגדרות’ ← ‚פרטיות ואבטחה’.</string>
-    <string name="routing_attr_piste_type_nordic_name">סקי למרחקים/נורדי</string>
+    <string name="routing_attr_piste_type_nordic_name">סקי למרחקים ונורדי</string>
     <string name="routing_attr_piste_type_nordic_description">מסלולים לסקי נורדי או למרחקים.</string>
     <string name="routing_attr_allow_intermediate_description">מסלולים קשים יותר עם מקטעים יותר תלולים. בדרך כלל עם מכשולים שרצוי להימנע מהם.</string>
     <string name="release_3_4">• פרופילי יישומון: יצירת פרופיל שמותאם אישית לצרכיך, עם סמל וצבע לבחירתך 
@@ -3549,7 +3549,7 @@
     <string name="shared_string_hillshade">הצללה</string>
     <string name="n_items_of_z">%1$s מתוך %2$s</string>
     <string name="download_slope_maps">מדרונות</string>
-    <string name="quick_action_show_hide_terrain">הצגה/הסתרה של תוואי שטח</string>
+    <string name="quick_action_show_hide_terrain">הצגה או הסתרה של תוואי שטח</string>
     <string name="quick_action_terrain_hide">הסתרת תוואי שטח</string>
     <string name="quick_action_terrain_show">הצגת תוואי שטח</string>
     <string name="quick_action_terrain_descr">כפתור להצגה או הסתרה של שכבת תוואי שטח על גבי המפה.</string>
@@ -3675,11 +3675,11 @@
     <string name="additional_actions_descr">ניתן לגשת לפעולות האלו על ידי לחיצה על הכפתור „%1$s”.</string>
     <string name="quick_action_transport_hide">הסתרת תחבורה ציבורית</string>
     <string name="quick_action_transport_show">הצגת תחבורה ציבורית</string>
-    <string name="quick_action_show_hide_transport">הצגת/הסתרת תחב״צ</string>
+    <string name="quick_action_show_hide_transport">הצגת או הסתרת תחב״צ</string>
     <string name="quick_action_transport_descr">כפתור להצגה או הסתרה של תחבורה ציבורית על המפה.</string>
-    <string name="create_edit_poi">יצירה/עריכה של נקודת עניין</string>
+    <string name="create_edit_poi">יצירה או עריכה של נקודת עניין</string>
     <string name="parking_positions">מקומות חנייה</string>
-    <string name="add_edit_favorite">הוספה / הסרה של מועדף</string>
+    <string name="add_edit_favorite">הוספה או הסרה של מועדף</string>
     <string name="reset_deafult_order">שחזור סדר בררת המחדל של הפריטים</string>
     <string name="back_to_editing">חזרה לעריכה</string>
     <string name="sit_on_the_stop">לעלות בתחנה</string>
@@ -3872,7 +3872,7 @@
     <string name="plan_route_trim_after">חיתוך אחרי</string>
     <string name="plan_route_change_route_type_before">החלפת סוג המסלול לפני</string>
     <string name="plan_route_change_route_type_after">החלפת סוג המסלול לאחר</string>
-    <string name="save_global_track_interval_descr">נא לציין מרווח בין הקלטות כלליות של מסלול (מופעל דרך וידג׳ט הקלטת המסלול שעל המפה).</string>
+    <string name="save_global_track_interval_descr">נא לציין מרווח בין הקלטות כלליות של מסלול (ניתן להפעלה דרך וידג׳ט ‚הקלטת המסלול’ שעל המפה).</string>
     <string name="simplified_track">מסלול מפושט</string>
     <string name="simplified_track_description">רק קו המסלול יישמר, נקודות הדרך תימחקנה.</string>
     <string name="shared_string_file_name">שם קובץ</string>
@@ -3893,7 +3893,7 @@
     <string name="shared_string_redo">ביצוע מחדש</string>
     <string name="release_3_8">• פונקציית תכנון המסלול עודכנה: מאפשרת שימוש בסוגי ניווט שונים לפי מקטע והכללת מסלולית
 \n
-\n • תפריט מראה חדש למסלולים: ניתן לבחור צבע, עובי, להציג חצי כיוון, סמלי התחלה/סיום
+\n • תפריט מראה חדש למסלולים: ניתן לבחור צבע, עובי, להציג חצי כיוון, סמלי התחלה וסיום
 \n
 \n • אופן הצגת שבילי האופניים השתפר.
 \n
@@ -3909,7 +3909,7 @@
     <string name="sort_last_modified">שינוי אחרון</string>
     <string name="sort_name_descending">שם: ת – א</string>
     <string name="sort_name_ascending">שם: א – ת</string>
-    <string name="start_finish_icons">סמלי התחלה/סיום</string>
+    <string name="start_finish_icons">סמלי התחלה וסיום</string>
     <string name="contour_lines_thanks">תודה לך על רכישת ‚קווי מתאר’</string>
     <string name="routing_attr_avoid_footways_description">הימנעות משבילי הולכי רגל</string>
     <string name="routing_attr_avoid_footways_name">הימנעות משבילי הולכי רגל</string>
@@ -3969,7 +3969,7 @@
     <string name="markers_history">היסטוריית סמנים</string>
     <string name="send_files_to_openstreetmap">שליחת קובץ GPX ל־OpenStreetMap</string>
     <string name="enter_text_separated">נא למלא תגיות מופרדות בפסיקים.</string>
-    <string name="gpx_upload_trackable_visibility_descr">ניתן למעקב משמעו שהמסלול לא יופיע ברישומים ציבוריים אך נקודות המעקב ממנו עדיין תהיינה זמינות דרך API ציבורי ל־GPS עם חותמות זמן. משתמשים אחרים יוכלו להוריד את נקודות המעקב המעובדות מהמסלול שלך שלא ניתן לשייך אותו ישירות אליך.</string>
+    <string name="gpx_upload_trackable_visibility_descr">„ניתן למעקב” משמעו שהמסלול לא מופיע ברישומים ציבוריים אך נקודות המעקב שעובדו עם חותמות זמן ממנו (שלא ניתן לשייך אליך ישירות) תהיינה דרך ההורדות מה־API הציבורי של ה־GPS.</string>
     <string name="osm_edit_close_note">סגירת הערת OSM</string>
     <string name="osm_edit_comment_note">להגיב על הערת OSM</string>
     <string name="osm_login_descr">ניתן להיכנס באמצעות שיטת האימות המאובטחת OAuth או להיכנס עם שם הכניסה והססמה שלך.</string>
@@ -3979,4 +3979,7 @@
     <string name="register_on_openplacereviews_desc">תמונות מסופקות על ידי מיזם הנתונים הפתוחים OpenPlaceReviews.org. כדי להעלות את התמונות שלך עליך להירשם לאתר.</string>
     <string name="register_opr_create_new_account">יצירת חשבון חדש</string>
     <string name="register_opr_have_account">כבר יש לי חשבון</string>
+    <string name="shared_string_search_history">היסטוריית חיפוש</string>
+    <string name="app_mode_kayak">קיאק</string>
+    <string name="app_mode_motorboat">סירת מנוע</string>
 </resources>
