@@ -60,6 +60,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
         messageEditText = sendOsmPoiView.findViewById(R.id.message_field);
         String defaultChangeSet = createDefaultChangeSet(app);
         messageEditText.setText(defaultChangeSet);
+        messageEditText.setSelection(messageEditText.getText().length());
         final TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
         OsmandSettings settings = app.getSettings();
         String userNameOAuth = settings.USER_DISPLAY_NAME.get();
