@@ -105,7 +105,7 @@
     <string name="disable_recording_once_app_killed_descrp">Will pause track logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="monitoring_control_start">REC</string>
     <string name="number_of_gpx_files_selected_pattern">%s track files selected</string>
-    <string name="shared_string_file_name">File name</string>
+    <string name="shared_string_file_name">Filename</string>
     <string name="simplified_track_description">Only the route line will be saved, the waypoints will be deleted.</string>
     <string name="simplified_track">Simplified track</string>
     <string name="plan_route_change_route_type_after">Change route type after</string>
@@ -558,7 +558,7 @@
     <string name="clear_confirmation_msg">Clear %1$s?</string>
     <string name="shared_string_revert">Revert</string>
     <string name="track_saved">Track saved</string>
-    <string name="empty_filename">File name is empty</string>
+    <string name="empty_filename">Empty filename</string>
     <string name="default_speed_dialog_msg">Estimates arrival time for unknown road types, and limits speed for all roads (may affect routing)</string>
     <string name="rendering_value_white_name">White</string>
     <string name="swap_two_places">Swap %1$s and %2$s</string>
@@ -1332,7 +1332,7 @@
     <string name="measurement_tool_save_as_new_track_descr">Save the points either as route points or as a line.</string>
     <string name="choose_navigation_type">Select navigation profile</string>
     <string name="none_point_error">Please add at least one point.</string>
-    <string name="enter_gpx_name">GPX file name:</string>
+    <string name="enter_gpx_name">GPX filename:</string>
     <string name="show_on_map_after_saving">Show on map after saving</string>
     <string name="measurement_tool_action_bar">Browse the map and add points</string>
     <string name="measurement_tool">Measure distance</string>
@@ -3823,7 +3823,7 @@
     <string name="number_of_contributors">Number of contributors</string>
     <string name="number_of_edits">Number of edits</string>
     <string name="reports_for">Report for</string>
-    <string name="file_name_containes_illegal_char">File name contains illegal character</string>
+    <string name="file_name_containes_illegal_char">Iillegal character in filename</string>
     <string name="configure_screen_quick_action">Quick action</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
