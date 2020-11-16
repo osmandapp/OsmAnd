@@ -121,34 +121,26 @@ public class SearchHistoryHelper {
 		return helper;
 	}
 
-	public void addItemsToHistory(List<HistoryEntry> entries) {
-		for (HistoryEntry model : entries) {
-			addNewItemToHistory(model, false);
-		}
-		updateEntriesList();
-	}
-
 	private void addNewItemToHistory(HistoryEntry model) {
-		addNewItemToHistory(model, true);
-		updateEntriesList();
-	}
-
-	private void addNewItemToHistory(HistoryEntry model, boolean markAsAccessed) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		if (mp.containsKey(model.getName())) {
 			model = mp.get(model.getName());
-			if (markAsAccessed && model != null) {
-				model.markAsAccessed(System.currentTimeMillis());
-			}
+			model.markAsAccessed(System.currentTimeMillis());
 			helper.update(model);
 		} else {
 			loadedEntries.add(model);
 			mp.put(model.getName(), model);
-			if (markAsAccessed) {
-				model.markAsAccessed(System.currentTimeMillis());
-			}
+			model.markAsAccessed(System.currentTimeMillis());
 			helper.add(model);
 		}
+		updateEntriesList();
+	}
+
+	public void addItemsToHistory(List<HistoryEntry> entries) {
+		for (HistoryEntry model : entries) {
+			addItemToHistoryWithReplacement(model);
+		}
+		updateEntriesList();
 	}
 
 	public void updateEntriesList() {
@@ -159,6 +151,19 @@ public class SearchHistoryHelper {
 				loadedEntries.remove(loadedEntries.size() - 1);
 			}
 		}
+	}
+
+	private void addItemToHistoryWithReplacement(HistoryEntry model) {
+		HistoryItemDBHelper helper = checkLoadedEntries();
+		PointDescription name = model.getName();
+		if (mp.containsKey(name)) {
+			HistoryEntry oldModel = mp.remove(name);
+			loadedEntries.remove(oldModel);
+			helper.remove(model);
+		}
+		loadedEntries.add(model);
+		mp.put(name, model);
+		helper.add(model);
 	}
 
 	public HistoryEntry getEntryByName(PointDescription pd) {
