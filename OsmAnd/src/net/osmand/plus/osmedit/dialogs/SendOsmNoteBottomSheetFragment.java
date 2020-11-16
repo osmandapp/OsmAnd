@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit.dialogs;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
@@ -24,6 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
@@ -171,9 +173,16 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		ProgressDialogPoiUploader progressDialogPoiUploader;
-		progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) getActivity());
-		progressDialogPoiUploader.showProgressDialog(poi, false, uploadAnonymously.isChecked());
+		ProgressDialogPoiUploader progressDialogPoiUploader = null;
+		Activity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
+		} else if (getParentFragment() instanceof ProgressDialogFragment) {
+			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
+		}
+		if (progressDialogPoiUploader != null) {
+			progressDialogPoiUploader.showProgressDialog(poi, false, uploadAnonymously.isChecked());
+		}
 		dismiss();
 	}
 
