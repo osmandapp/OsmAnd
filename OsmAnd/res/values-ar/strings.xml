@@ -3965,4 +3965,7 @@
     <string name="register_on_openplacereviews_desc">يتم توفير الصور من خلال مشروع البيانات المفتوحة OpenPlaceReviews.org. من أجل رفع الصور الخاصة بك، تحتاج إلى الاشتراك بالموقع.</string>
     <string name="register_opr_create_new_account">إنشاء حساب جديد</string>
     <string name="register_opr_have_account">لدي حساب بالفعل</string>
+    <string name="app_mode_kayak">كاياك (قوارب صغيرة فردية)</string>
+    <string name="app_mode_motorboat">زورق</string>
+    <string name="shared_string_search_history">سجل البحث</string>
 </resources>
