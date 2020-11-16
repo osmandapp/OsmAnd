@@ -20,10 +20,10 @@
     <string name="osm_login_descr">You can log in using the safe OAuth method or use your login and password.</string>
     <string name="osm_edit_comment_note">Comment OSM Note</string>
     <string name="osm_edit_close_note">Close OSM Note</string>
-    <string name="gpx_upload_trackable_visibility_descr">Trackable means that the trace will not show up in any public listings but trackpoints from it will still be available through the public GPS API with timestamps. Other users will only be able to download processed trackpoints from your trace which can\'t be associated with you directly.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Identifiable means that the trace will be shown publicly in Your GPS traces and in public GPS trace listings, i.e. other users will be able to download the raw trace and associate it with your username. Data served via the trackpoints API will reference your original trace page. Timestamps of the trace points are available through the public GPS API.</string>
-    <string name="gpx_upload_private_visibility_descr">Private means that the trace will not show up in any public listings, but trackpoints from it will still be available through the public GPS API without timestamps but will not be chronologically ordered.</string>
-    <string name="gpx_upload_public_visibility_descr">Public means that the trace will be shown publicly in Your GPS traces and in public GPS trace listings. Data served via the API does not reference your trace page. Timestamps of the trace points are not available through the public GPS API, and the points are not chronologically ordered. However, other users are still able to download the raw trace from the public trace list and any timestamps contained within.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Trackable\" means the trace does not show up in any public listings, but processed trackpoints with timestamps from it (that can\'t be associated with you directly) do through downloads from the public GPS API.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identifiable\" means that the trace will be shown publicly in Your GPS traces and in public GPS trace listings, i.e. other users will be able to download the raw trace and associate it with your username. Public timestamped tracepoint data from the GPS API served via the trackpoints API will reference your original trace page.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Private\" means the trace does not show up in any public listings, but trackpoints from it in unchronological order are available through the public GPS API without timestamps.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Public\" means the trace is shown publicly in your GPS traces and in public GPS trace listings, and in the public trace list with timestamps in raw form. Data served via the API does not reference your trace page. Tracepoint timestamps are not available through the public GPS API, and tracepoints are not chronologically ordered.</string>
     <string name="enter_text_separated">Enter tags separated by comma.</string>
     <string name="send_files_to_openstreetmap">Send GPX file to OpenStreetMap</string>
     <string name="markers_history">Markers history</string>
@@ -101,7 +101,7 @@
     <string name="system_default_theme">System default</string>
     <string name="gpx_monitoring_start">Resume trip recording</string>
     <string name="gpx_monitoring_stop">Pause trip recording</string>
-    <string name="save_global_track_interval_descr">Specify the logging interval for the general track recording (enabled via the Trip recording widget on the map).</string>
+    <string name="save_global_track_interval_descr">Specify the logging interval for the general track recording (turned on via the \'Trip recording\' widget on the map).</string>
     <string name="disable_recording_once_app_killed_descrp">Will pause track logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="monitoring_control_start">REC</string>
     <string name="number_of_gpx_files_selected_pattern">%s track files selected</string>
