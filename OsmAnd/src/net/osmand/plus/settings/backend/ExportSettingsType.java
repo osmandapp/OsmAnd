@@ -7,23 +7,24 @@ import net.osmand.plus.R;
 
 public enum ExportSettingsType {
 	PROFILE(R.string.shared_string_profiles, R.drawable.ic_action_manage_profiles),
+	GLOBAL(R.string.general_settings_2, R.drawable.ic_action_settings),
 	QUICK_ACTIONS(R.string.configure_screen_quick_action, R.drawable.ic_quick_action),
 	POI_TYPES(R.string.poi_dialog_poi_type, R.drawable.ic_action_info_dark),
-	MAP_SOURCES(R.string.quick_action_map_source_title, R.drawable.ic_map),
-	CUSTOM_RENDER_STYLE(R.string.shared_string_rendering_style, R.drawable.ic_action_map_style),
-	CUSTOM_ROUTING(R.string.shared_string_routing, R.drawable.ic_action_route_distance),
+	SEARCH_HISTORY(R.string.shared_string_search_history, R.drawable.ic_action_history),
 	AVOID_ROADS(R.string.avoid_road, R.drawable.ic_action_alert),
+	FAVORITES(R.string.shared_string_favorites, R.drawable.ic_action_favorite),
 	TRACKS(R.string.shared_string_tracks, R.drawable.ic_action_route_distance),
-	MULTIMEDIA_NOTES(R.string.audionotes_plugin_name, R.drawable.ic_action_photo_dark),
-	GLOBAL(R.string.general_settings_2, R.drawable.ic_action_settings),
 	OSM_NOTES(R.string.osm_notes, R.drawable.ic_action_openstreetmap_logo),
 	OSM_EDITS(R.string.osm_edits, R.drawable.ic_action_openstreetmap_logo),
-	OFFLINE_MAPS(R.string.shared_string_maps, R.drawable.ic_map),
-	FAVORITES(R.string.shared_string_favorites, R.drawable.ic_action_favorite),
-	TTS_VOICE(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up),
-	VOICE(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
+	MULTIMEDIA_NOTES(R.string.audionotes_plugin_name, R.drawable.ic_grouped_by_type),
 	ACTIVE_MARKERS(R.string.map_markers, R.drawable.ic_action_flag),
-	HISTORY_MARKERS(R.string.markers_history, R.drawable.ic_action_flag);
+	HISTORY_MARKERS(R.string.markers_history, R.drawable.ic_action_flag),
+	CUSTOM_RENDER_STYLE(R.string.shared_string_rendering_style, R.drawable.ic_action_map_style),
+	CUSTOM_ROUTING(R.string.shared_string_routing, R.drawable.ic_action_route_distance),
+	MAP_SOURCES(R.string.quick_action_map_source_title, R.drawable.ic_map),
+	OFFLINE_MAPS(R.string.shared_string_maps, R.drawable.ic_map),
+	TTS_VOICE(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up),
+	VOICE(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up);
 
 	@StringRes
 	private final int titleId;
@@ -46,7 +47,8 @@ public enum ExportSettingsType {
 	}
 
 	public boolean isSettingsCategory() {
-		return this == PROFILE || this == GLOBAL || this == QUICK_ACTIONS || this == POI_TYPES;
+		return this == PROFILE || this == GLOBAL || this == QUICK_ACTIONS || this == POI_TYPES
+				|| this == SEARCH_HISTORY || this == AVOID_ROADS;
 	}
 
 	public boolean isMyPlacesCategory() {

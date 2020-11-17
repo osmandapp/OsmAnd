@@ -35,13 +35,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
-import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.OnItemSelectedListener;
+import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
@@ -78,10 +79,15 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 	private ApplicationMode appMode;
 	private SettingsExportListener exportListener;
 
-	private TextViewEx fileSize;
+	private View headerShadow;
+	private View headerDivider;
+	private View itemsSizeContainer;
+	private View availableSpaceContainer;
+	private TextViewEx selectedItemsSize;
+	private TextViewEx availableSpaceDescr;
 	private LinearLayout buttonsContainer;
 	private ExpandableListView expandableList;
-	private ExportImportSettingsAdapter adapter;
+	private ExportSettingsAdapter adapter;
 
 	private int progressMax;
 	private int progressValue;
@@ -127,15 +133,22 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 		View root = themedInflater.inflate(R.layout.fragment_import, container, false);
 		AndroidUtils.addStatusBarPadding21v(app, root);
 
-		fileSize = root.findViewById(R.id.file_size);
+		selectedItemsSize = root.findViewById(R.id.file_size);
+		itemsSizeContainer = root.findViewById(R.id.file_size_container);
 		expandableList = root.findViewById(R.id.list);
 		buttonsContainer = root.findViewById(R.id.buttons_container);
 
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
+
 		View header = themedInflater.inflate(R.layout.list_item_description_header, null);
+		headerDivider = header.findViewById(R.id.divider);
+		headerShadow = header.findViewById(R.id.card_bottom_divider);
 		expandableList.addHeaderView(header);
+
+		availableSpaceContainer = inflater.inflate(R.layout.enough_space_warning_card, null);
+		availableSpaceDescr = availableSpaceContainer.findViewById(R.id.warning_descr);
 
 		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
 		continueBtn.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +174,7 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 			}
 		});
 
-		adapter = new ExportImportSettingsAdapter(app, this, nightMode);
+		adapter = new ExportSettingsAdapter(app, this, nightMode);
 		adapter.updateSettingsList(dataList);
 		expandableList.setAdapter(adapter);
 
@@ -169,6 +182,7 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 		toolbarLayout.setTitle(getString(R.string.shared_string_export));
 		TextView description = header.findViewById(R.id.description);
 		description.setText(R.string.select_data_to_export);
+		updateAvailableSpace();
 
 		return root;
 	}
@@ -235,20 +249,50 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 		});
 	}
 
-	private void updateFileSize() {
-		long itemsSize = ExportImportSettingsAdapter.calculateItemsSize(adapter.getData());
-		String size = itemsSize != 0 ? AndroidUtils.formatSize(app, itemsSize) : "";
-		fileSize.setText(size);
+	private void updateAvailableSpace() {
+		long calculatedSize = ExportSettingsAdapter.calculateItemsSize(adapter.getData());
+		if (calculatedSize != 0) {
+			String itemsSize = AndroidUtils.formatSize(app, calculatedSize);
+			selectedItemsSize.setText(itemsSize);
+
+			File dir = app.getAppPath("").getParentFile();
+			long availableSizeBytes = AndroidUtils.getAvailableSpace(dir);
+			if (calculatedSize > availableSizeBytes) {
+				String availableSize = AndroidUtils.formatSize(app, availableSizeBytes);
+				availableSpaceDescr.setText(getString(R.string.export_not_enough_space_descr, itemsSize, availableSize));
+				updateWarningHeaderVisibility(true);
+			} else {
+				updateWarningHeaderVisibility(false);
+			}
+			itemsSizeContainer.setVisibility(View.VISIBLE);
+		} else {
+			updateWarningHeaderVisibility(false);
+			itemsSizeContainer.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	private void updateWarningHeaderVisibility(boolean visible) {
+		if (visible) {
+			if (expandableList.getHeaderViewsCount() < 2) {
+				expandableList.addHeaderView(availableSpaceContainer);
+			}
+			AndroidUiHelper.updateVisibility(headerShadow, false);
+			AndroidUiHelper.updateVisibility(headerDivider, true);
+		} else {
+			expandableList.removeHeaderView(availableSpaceContainer);
+			AndroidUiHelper.updateVisibility(headerShadow, true);
+			AndroidUiHelper.updateVisibility(headerDivider, false);
+		}
 	}
 
 	@Override
 	public void onCategorySelected(ExportSettingsCategory type, boolean selected) {
-		updateFileSize();
+		updateAvailableSpace();
 	}
 
 	@Override
 	public void onTypeSelected(ExportSettingsType type, boolean selected) {
-		updateFileSize();
+		updateAvailableSpace();
 	}
 
 	private void prepareFile() {

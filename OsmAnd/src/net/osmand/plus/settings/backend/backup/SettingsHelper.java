@@ -29,6 +29,8 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
@@ -504,12 +506,15 @@ public class SettingsHelper {
 		List<ExportDataObject> resourcesItems = getResourcesItems();
 
 		if (!settingsItems.isEmpty()) {
+			sortExportSettingsObjects(settingsItems);
 			dataList.put(ExportSettingsCategory.SETTINGS, settingsItems);
 		}
 		if (!myPlacesItems.isEmpty()) {
+			sortExportSettingsObjects(myPlacesItems);
 			dataList.put(ExportSettingsCategory.MY_PLACES, myPlacesItems);
 		}
 		if (!resourcesItems.isEmpty()) {
+			sortExportSettingsObjects(resourcesItems);
 			dataList.put(ExportSettingsCategory.RESOURCES, resourcesItems);
 		}
 
@@ -537,7 +542,14 @@ public class SettingsHelper {
 		if (!poiList.isEmpty()) {
 			settingsItems.add(new ExportDataObject(ExportSettingsType.POI_TYPES, poiList));
 		}
-
+		List<HistoryEntry> historyEntries = SearchHistoryHelper.getInstance(app).getHistoryEntries(false);
+		if (!historyEntries.isEmpty()) {
+			settingsItems.add(new ExportDataObject(ExportSettingsType.SEARCH_HISTORY, historyEntries));
+		}
+		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
+		if (!impassableRoads.isEmpty()) {
+			settingsItems.add(new ExportDataObject(ExportSettingsType.AVOID_ROADS, new ArrayList<>(impassableRoads.values())));
+		}
 		return settingsItems;
 	}
 
@@ -653,10 +665,6 @@ public class SettingsHelper {
 		if (!files.isEmpty()) {
 			resourcesItems.add(new ExportDataObject(ExportSettingsType.VOICE, files));
 		}
-		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
-		if (!impassableRoads.isEmpty()) {
-			resourcesItems.add(new ExportDataObject(ExportSettingsType.AVOID_ROADS, new ArrayList<>(impassableRoads.values())));
-		}
 
 		return resourcesItems;
 	}
@@ -699,6 +707,7 @@ public class SettingsHelper {
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
+		List<HistoryEntry> historyEntries = new ArrayList<>();
 
 		for (Object object : data) {
 			if (object instanceof QuickAction) {
@@ -730,6 +739,8 @@ public class SettingsHelper {
 				} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
 					markersHistoryGroups.add((MapMarkersGroup) object);
 				}
+			} else if (object instanceof HistoryEntry) {
+				historyEntries.add((HistoryEntry) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
@@ -775,6 +786,9 @@ public class SettingsHelper {
 			}
 			settingsItems.add(new HistoryMarkersSettingsItem(app, mapMarkers));
 		}
+		if (!historyEntries.isEmpty()) {
+			settingsItems.add(new SearchHistorySettingsItem(app, historyEntries));
+		}
 		return settingsItems;
 	}
 
@@ -797,12 +811,15 @@ public class SettingsHelper {
 			}
 		}
 		if (!settingsItems.isEmpty()) {
+			sortExportSettingsObjects(settingsItems);
 			exportMap.put(ExportSettingsCategory.SETTINGS, settingsItems);
 		}
 		if (!myPlacesItems.isEmpty()) {
+			sortExportSettingsObjects(myPlacesItems);
 			exportMap.put(ExportSettingsCategory.MY_PLACES, myPlacesItems);
 		}
 		if (!resourcesItems.isEmpty()) {
+			sortExportSettingsObjects(resourcesItems);
 			exportMap.put(ExportSettingsCategory.RESOURCES, resourcesItems);
 		}
 
@@ -829,6 +846,7 @@ public class SettingsHelper {
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
+		List<HistoryEntry> historyEntries = new ArrayList<>();
 
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
@@ -916,6 +934,10 @@ public class SettingsHelper {
 					HistoryMarkersSettingsItem historyMarkersSettingsItem = (HistoryMarkersSettingsItem) item;
 					markersHistoryGroups.add(historyMarkersSettingsItem.getMarkersGroup());
 					break;
+				case SEARCH_HISTORY:
+					SearchHistorySettingsItem searchHistorySettingsItem = (SearchHistorySettingsItem) item;
+					historyEntries.addAll(searchHistorySettingsItem.getItems());
+					break;
 				default:
 					break;
 			}
@@ -972,8 +994,11 @@ public class SettingsHelper {
 		if (!markersGroups.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.ACTIVE_MARKERS, markersGroups);
 		}
-		if (!markersGroups.isEmpty()) {
+		if (!markersHistoryGroups.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.HISTORY_MARKERS, markersHistoryGroups);
+		}
+		if (!historyEntries.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
 		}
 		return settingsToOperate;
 	}
@@ -988,6 +1013,17 @@ public class SettingsHelper {
 
 			private String getNameToDisplay(File item) {
 				return FileNameTranslationHelper.getFileNameWithRegion(app, item.getName());
+			}
+		});
+	}
+
+	private static void sortExportSettingsObjects(List<ExportDataObject> items) {
+		Collections.sort(items, new Comparator<ExportDataObject>() {
+			@Override
+			public int compare(ExportDataObject lhs, ExportDataObject rhs) {
+				int order1 = lhs.getType().ordinal();
+				int order2 = rhs.getType().ordinal();
+				return (order1 < order2) ? -1 : ((order1 == order2) ? 0 : 1);
 			}
 		});
 	}

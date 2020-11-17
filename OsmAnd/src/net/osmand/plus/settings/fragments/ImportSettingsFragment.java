@@ -22,13 +22,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -49,7 +49,6 @@ import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.FavoritesSettingsItem;
@@ -69,44 +68,37 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
-import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ImportSettingsFragment extends BaseOsmAndFragment implements OnItemSelectedListener {
+public class ImportSettingsFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
-
-	protected static final String IMPORT_SETTINGS_TAG = "import_settings_tag";
 	private static final String DUPLICATES_START_TIME_KEY = "duplicates_start_time";
 	private static final long MIN_DELAY_TIME_MS = 500;
-
+	static final String IMPORT_SETTINGS_TAG = "import_settings_tag";
 	private OsmandApplication app;
-
-	private File file;
-	private SettingsHelper settingsHelper;
-	private List<SettingsItem> settingsItems;
-	private Map<ExportSettingsCategory, List<ExportDataObject>> dataList;
-
 	private ExportImportSettingsAdapter adapter;
 	private ExpandableListView expandableList;
 	private TextView description;
+	private List<SettingsItem> settingsItems;
+	private File file;
+	private boolean allSelected;
+	private boolean nightMode;
 	private LinearLayout buttonsContainer;
 	private ProgressBar progressBar;
-	private TextViewEx fileSize;
-	private TextViewEx fileSizeDescr;
 	private CollapsingToolbarLayout toolbarLayout;
-
-	private boolean nightMode;
+	private SettingsHelper settingsHelper;
 	private long duplicateStartTime;
 
 	public static void showInstance(@NonNull FragmentManager fm, @NonNull List<SettingsItem> settingsItems, @NonNull File file) {
@@ -143,13 +135,10 @@ public class ImportSettingsFragment extends BaseOsmAndFragment implements OnItem
 		View root = inflater.inflate(R.layout.fragment_import, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
-		fileSize = root.findViewById(R.id.file_size);
 		toolbarLayout = root.findViewById(R.id.toolbar_layout);
 		expandableList = root.findViewById(R.id.list);
 		buttonsContainer = root.findViewById(R.id.buttons_container);
 		progressBar = root.findViewById(R.id.progress_bar);
-		fileSizeDescr = root.findViewById(R.id.file_size_descr);
-		fileSizeDescr.setText(R.string.file_size_needed_for_import);
 		setupToolbar(toolbar);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
 		View header = inflater.inflate(R.layout.list_item_description_header, null);
@@ -210,10 +199,10 @@ public class ImportSettingsFragment extends BaseOsmAndFragment implements OnItem
 			}
 		}
 
-		adapter = new ExportImportSettingsAdapter(app, this, nightMode);
-		Map<ExportSettingsCategory, List<ExportDataObject>> itemsMap = new HashMap<>();
+		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
+		Map<ExportSettingsType, List<?>> itemsMap = new HashMap<>();
 		if (settingsItems != null) {
-			itemsMap = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false);
+			itemsMap = SettingsHelper.getSettingsToOperate(settingsItems, false);
 			adapter.updateSettingsList(itemsMap);
 		}
 		expandableList.setAdapter(adapter);
@@ -227,7 +216,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment implements OnItem
 		} else {
 			toolbarLayout.setTitle(getString(R.string.shared_string_import));
 		}
-		if (itemsMap.size() == 1 && itemsMap.containsKey(ExportSettingsCategory.SETTINGS)) {
+		if (itemsMap.size() == 1 && itemsMap.containsKey(ExportSettingsType.PROFILE)) {
 			expandableList.expandGroup(0);
 		}
 	}
@@ -236,6 +225,15 @@ public class ImportSettingsFragment extends BaseOsmAndFragment implements OnItem
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putLong(DUPLICATES_START_TIME_KEY, duplicateStartTime);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		Activity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).closeDrawer();
+		}
 	}
 
 	private void updateUi(int toolbarTitleRes, int descriptionRes) {
@@ -286,6 +284,31 @@ public class ImportSettingsFragment extends BaseOsmAndFragment implements OnItem
 					new ReloadIndexesTack((MapActivity) activity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
 				break;
+			}
+		}
+	}
+
+	private static class ReloadIndexesTack extends AsyncTask<Void, Void, Void> {
+
+		private final WeakReference<MapActivity> mapActivityRef;
+		private final OsmandApplication app;
+
+		ReloadIndexesTack(@NonNull MapActivity mapActivity) {
+			this.mapActivityRef = new WeakReference<>(mapActivity);
+			this.app = mapActivity.getMyApplication();
+		}
+
+		@Override
+		protected Void doInBackground(Void[] params) {
+			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			MapActivity mapActivity = mapActivityRef.get();
+			if (mapActivity != null) {
+				mapActivity.refreshMap();
 			}
 		}
 	}
@@ -519,8 +542,9 @@ public class ImportSettingsFragment extends BaseOsmAndFragment implements OnItem
 	}
 
 	private void setupToolbar(Toolbar toolbar) {
-		int color = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
+		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, nightMode
+				? getResources().getColor(R.color.active_buttons_and_links_text_dark)
+				: getResources().getColor(R.color.active_buttons_and_links_text_light)));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -532,21 +556,5 @@ public class ImportSettingsFragment extends BaseOsmAndFragment implements OnItem
 
 	public void setFile(File file) {
 		this.file = file;
-	}
-
-	private void updateFileSize() {
-		long itemsSize = ExportImportSettingsAdapter.calculateItemsSize(adapter.getData());
-		String size = itemsSize != 0 ? AndroidUtils.formatSize(app, itemsSize) : "";
-		fileSize.setText(size);
-	}
-
-	@Override
-	public void onCategorySelected(ExportSettingsCategory type, boolean selected) {
-		updateFileSize();
-	}
-
-	@Override
-	public void onTypeSelected(ExportSettingsType type, boolean selected) {
-		updateFileSize();
 	}
 }
