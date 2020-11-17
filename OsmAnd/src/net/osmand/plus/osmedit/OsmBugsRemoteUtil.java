@@ -26,26 +26,12 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	private static final String GET = "GET";
 	private static final String POST = "POST";
 
-	static String getNotesApi() {
-		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-		String RETURN_API;
-		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
-			RETURN_API = "https://api.openstreetmap.org/api/0.6/notes";
-		} else {
-			RETURN_API = "http://api.openstreetmap.org/api/0.6/notes";
-		}
-		return RETURN_API;
+	String getNotesApi() {
+		return settings.getOsmUrl() + "api/0.6/notes";
 	}
 
-	static String getUserDetailsApi() {
-		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-		String RETURN_API;
-		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
-			RETURN_API = "https://api.openstreetmap.org/api/0.6/user/details";
-		} else {
-			RETURN_API = "http://api.openstreetmap.org/api/0.6/user/details";
-		}
-		return RETURN_API;
+	String getUserDetailsApi() {
+		return settings.getOsmUrl() + "api/0.6/user/details";
 	}
 
 	private OsmandApplication app;

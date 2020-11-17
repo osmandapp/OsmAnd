@@ -1133,6 +1133,17 @@ public class OsmandSettings {
 
 	// this value boolean is synchronized with settings_pref.xml preference offline POI/Bugs edition
 	public final OsmandPreference<Boolean> OFFLINE_EDITION = new BooleanPreference(this, "offline_osm_editing", true).makeGlobal().makeShared();
+	public final OsmandPreference<Boolean> USE_DEV_URL = new BooleanPreference(this, "use_dev_url", false).makeGlobal().makeShared();
+
+	public String getOsmUrl() {
+		String osmUrl;
+		if (USE_DEV_URL.get()) {
+			osmUrl = "https://master.apis.dev.openstreetmap.org/";
+		} else {
+			osmUrl = "https://api.openstreetmap.org/";
+		}
+		return osmUrl;
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<DayNightMode> DAYNIGHT_MODE =

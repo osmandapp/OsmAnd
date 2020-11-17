@@ -19,11 +19,16 @@ public class OsmOAuthHelper {
 
 	private final OsmandApplication app;
 
-	private final OsmOAuthAuthorizationAdapter authorizationAdapter;
+	private OsmOAuthAuthorizationAdapter authorizationAdapter;
 
 	public OsmOAuthHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
+	}
+
+	public OsmOAuthAuthorizationAdapter updateAdapter(){
+		authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
+		return authorizationAdapter;
 	}
 
 	public void startOAuth(ViewGroup view) {

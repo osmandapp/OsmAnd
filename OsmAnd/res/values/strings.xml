@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="use_dev_url">Use dev.openstreetmap.org</string>
+    <string name="use_dev_url_descr">Switch to use "dev.openstreetmap.org" instead of "openstreetmap.org" to testing uploading OSM Note / POI / GPX.</string>
     <string name="app_mode_motorboat">Motorboat</string>
     <string name="app_mode_kayak">Kayak</string>
     <string name="shared_string_search_history">Search history</string>

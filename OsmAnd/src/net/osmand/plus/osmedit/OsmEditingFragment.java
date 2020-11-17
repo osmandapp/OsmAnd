@@ -43,6 +43,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
 	public static final String OSM_LOGIN_DATA = "osm_login_data";
 	private static final String OSM_EDITING_INFO = "osm_editing_info";
+	private static final String USE_DEV_URL = "use_dev_url";
 
 	private OsmOAuthAuthorizationAdapter authorizationAdapter;
 
@@ -61,6 +62,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		setupLogoutPref();
 
 		setupOfflineEditingPref();
+		setupUseDevUrlPref();
 		setupOsmEditsDescrPref();
 		setupOsmEditsPref();
 	}
@@ -129,6 +131,13 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		offlineEditingPref.setIcon(icon);
 	}
 
+	private void setupUseDevUrlPref() {
+		Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_laptop);
+		SwitchPreferenceEx useDevUrlPref = findPreference(settings.USE_DEV_URL.getId());
+		useDevUrlPref.setDescription(getString(R.string.use_dev_url_descr));
+		useDevUrlPref.setIcon(icon);
+	}
+
 	private void setupOsmEditsDescrPref() {
 		String menu = getString(R.string.shared_string_menu);
 		String myPlaces = getString(R.string.shared_string_my_places);
@@ -153,6 +162,18 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		String prefId = preference.getKey();
+		if (USE_DEV_URL.equals(prefId) && newValue instanceof Boolean) {
+			settings.USE_DEV_URL.set((Boolean) newValue);
+			osmLogout();
+			authorizationAdapter = app.getOsmOAuthHelper().updateAdapter();
+			return true;
+		}
+		return super.onPreferenceChange(preference, newValue);
+	}
+
+	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (OPEN_OSM_EDITS.equals(prefId)) {
@@ -172,20 +193,23 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 				return true;
 			}
 		} else if (OSM_LOGOUT.equals(prefId)) {
-			if (isValidToken()) {
-				settings.USER_ACCESS_TOKEN.resetToDefault();
-				settings.USER_ACCESS_TOKEN_SECRET.resetToDefault();
-
-				authorizationAdapter.resetToken();
-			} else {
-				settings.USER_NAME.resetToDefault();
-				settings.USER_PASSWORD.resetToDefault();
-			}
-			app.showShortToastMessage(R.string.osm_edit_logout_success);
-			updateAllSettings();
+			osmLogout();
 			return true;
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	private void osmLogout() {
+		if (isValidToken()) {
+			settings.USER_ACCESS_TOKEN.resetToDefault();
+			settings.USER_ACCESS_TOKEN_SECRET.resetToDefault();
+			authorizationAdapter.resetToken();
+		} else {
+			settings.USER_NAME.resetToDefault();
+			settings.USER_PASSWORD.resetToDefault();
+		}
+		app.showShortToastMessage(R.string.osm_edit_logout_success);
+		updateAllSettings();
 	}
 
 	@Override
