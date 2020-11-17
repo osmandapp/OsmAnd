@@ -3324,7 +3324,7 @@
     <string name="quick_action_need_to_add_item_to_list">أضف عنصراً واحداً على الأقل إلى القائمة في إعدادات \"الاختصار السريع\"</string>
     <string name="routing_attr_piste_type_downhill_name">جبال الألب/التزلج علي المنحدرات</string>
     <string name="routing_attr_piste_type_downhill_description">التزلج على جبال الألب أو الانحدار.</string>
-    <string name="routing_attr_piste_type_nordic_name">التزلج عبر البلاد / الشمال</string>
+    <string name="routing_attr_piste_type_nordic_name">التزلج عبر الريف والشمال</string>
     <string name="routing_attr_piste_type_nordic_description">مسارات للتزلج الشمالي أو الريفي علي الثلج.</string>
     <string name="routing_attr_piste_type_skitour_name">جولة تزلج</string>
     <string name="routing_attr_piste_type_skitour_description">طرق لجولات التزلج.</string>
