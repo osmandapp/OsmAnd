@@ -485,7 +485,7 @@
     <string name="use_fluorescent_overlays">Sobreposições Fluorescentes</string>
     <string name="use_fluorescent_overlays_descr">Usar cores fluorescentes para mostrar trajetos e rotas.</string>
     <string name="offline_edition">Edição offline</string>
-    <string name="offline_edition_descr">Usar sempre a edição offline.</string>
+    <string name="offline_edition_descr">Se a edição offline estiver ativada, as alterações serão primeiro gravadas localmente e enviadas por pedido, caso contrário, as alterações serão enviadas imediatamente.</string>
     <string name="update_poi_does_not_change_indexes">As alterações de POI dentro da app não afetam os ficheiros de mapas descarregados; essas alterações são guardadas num ficheiro separado no seu aparelho.</string>
     <string name="local_openstreetmap_uploading">A enviar…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/anotações enviados</string>
@@ -3446,7 +3446,7 @@
     <string name="checking_for_duplicate_description">OsmAnd verifica %1$s para duplicatas com itens existentes na app. 
 \n 
 \nPode demorar algum tempo.</string>
-    <string name="shared_string_importing">Importando</string>
+    <string name="shared_string_importing">A importar</string>
     <string name="importing_from">Importando dados de %1$s</string>
     <string name="clear_recorded_data_warning">Tem certeza de que deseja limpar os dados gravados\?</string>
     <string name="profile_backup_failed">Não foi possível fazer o backup do perfil.</string>
@@ -3469,7 +3469,7 @@
     <string name="shared_string_quick_actions">Ações rápidas</string>
     <string name="shared_string_nothing_selected">Nada selecionado</string>
     <string name="shared_string_poi_types">Tipos de POI</string>
-    <string name="shared_string_preparing">Preparando</string>
+    <string name="shared_string_preparing">A preparar</string>
     <string name="recalc_angle_dialog_title">Ângulo mínimo entre minha localização e rota</string>
     <string name="recalc_angle_dialog_descr">Segmento reto adicional entre minha localização e a rota calculada será exibida até que a rota seja recalculada</string>
     <string name="shared_string_angle">Ângulo</string>
@@ -3566,7 +3566,7 @@
     <string name="logcat_buffer_descr">Verifique e compartilhe registos detalhados da app</string>
     <string name="select_map_icon_descr">Ícone mostrado em repouso.</string>
     <string name="select_nav_icon_descr">Ícone mostrado ao navegar ou mover.</string>
-    <string name="osm_edits_view_descr">Pode ver todas as suas edições descarregadas ou bugs OSM em %1$s. Pontos enviados não aparecem no OsmAnd.</string>
+    <string name="osm_edits_view_descr">Pode ver todas as suas edições ainda não enviadas ou bugs OSM em %1$s. Os pontos enviados não aparecem no OsmAnd.</string>
     <string name="osm_editing">Edição OSM</string>
     <string name="plugin_global_prefs_info">Estas configurações de extensão são globais e aplicam-se a todos os perfis</string>
     <string name="login_and_pass">Utilizador e palavra-passe</string>
@@ -3971,4 +3971,13 @@
     <string name="gpx_upload_private_visibility_descr">Privado significa que o rastreamento não aparecerá em nenhuma listagem pública, mas os pontos de rastreamento dele ainda estarão disponíveis através da API pública do GPS sem carimbos de tempo, mas não serão ordenados cronologicamente.</string>
     <string name="gpx_upload_identifiable_visibility_descr">Identificável significa que o rastreamento será mostrado publicamente nos Seus traços de GPS e em listas públicas de rastreamento de GPS, ou seja, outros utilizadores serão capazes de descarregar o rastreamento bruto e associá-lo ao seu nome de utilizador. Os dados servidos através da API dos pontos de rastreamento referenciarão à sua página de rastreamento original. As marcas de tempo dos pontos de rastreamento estão disponíveis através da API pública do GPS.</string>
     <string name="gpx_upload_trackable_visibility_descr">Rastreável significa que o rastreamento não aparecerá em nenhuma lista pública, mas os pontos de rastreamento a partir dele ainda estarão disponíveis através da API pública do GPS com carimbos de tempo. Outros utilizadores só poderão descarregar pontos de rastreamento processados do seu rastreamento que não podem ser associados diretamente a si.</string>
+    <string name="osm_edit_close_note">Fechar nota do OSM</string>
+    <string name="osm_edit_comment_note">Comentário de nota do OSM</string>
+    <string name="osm_login_descr">Pode entrar a usar o método seguro OAuth ou usar o seu login e palavra-passe.</string>
+    <string name="shared_string_add_photo">Adicionar fotos</string>
+    <string name="register_on_openplacereviews">Cadastre-se em
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">As fotos são fornecidas pelo projeto de dados abertos OpenPlaceReviews.org. Para enviar as suas fotos precisa cadastrar-se no site.</string>
+    <string name="register_opr_create_new_account">Criar uma conta</string>
+    <string name="register_opr_have_account">Já tenho uma conta</string>
 </resources>

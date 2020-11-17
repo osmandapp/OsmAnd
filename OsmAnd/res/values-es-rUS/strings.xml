@@ -985,7 +985,7 @@
     <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
     <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas.</string>
     <string name="offline_edition">Edición sin conexión</string>
-    <string name="offline_edition_descr">Usa siempre edición sin conexión.</string>
+    <string name="offline_edition_descr">Si se activa la edición sin conexión, los cambios serán guardados localmente primero y serán cargados por solicitud, de lo contrario los cambios serán cargados inmediatamente.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación no afectan a los archivos de mapa descargados; en su lugar, los cambios se guardan como un archivo en el dispositivo.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
     <string name="local_openstreetmap_were_uploaded">{0} PDI/notas de OSM subidos</string>
@@ -1881,7 +1881,7 @@
 \n Se utiliza {3} MB temporalmente, {1} MB constantemente. (De {2} MB.)</string>
     <string name="donations">Donaciones</string>
     <string name="number_of_recipients">Número de destinatarios</string>
-    <string name="osm_user_stat">Ediciones %1$s de %3$s, posición %2$s</string>
+    <string name="osm_user_stat">Ediciones: %1$s de %3$s, posición: %2$s</string>
     <string name="osm_editors_ranking">Clasificación de editores OSM</string>
     <string name="osm_live_subscription">Suscripción de OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Suscribirse</string>
@@ -2626,7 +2626,7 @@
     <string name="av_locations_all_desc">Archivo GPX con coordenadas y datos de todas las notas.</string>
     <string name="shared_string_actions">Acciones</string>
     <string name="shared_string_marker">Marcador</string>
-    <string name="osm_recipient_stat">%1$s ediciones, suman %2$s mBTC</string>
+    <string name="osm_recipient_stat">Ediciones: %1$s, total: %2$s mBTC</string>
     <string name="osm_recipients_label">Destinatarios de OSM</string>
     <string name="total_donations">Total de donaciones</string>
     <string name="shared_string_without_name">Sin nombre</string>
@@ -3366,7 +3366,7 @@
     <string name="swap_two_places">Alternar %1$s y %2$s</string>
     <string name="route_start_point">Punto de partida</string>
     <string name="default_speed_dialog_msg">Estima el tiempo de llegada para los tipos de caminos desconocidos, y limita la velocidad para todos los caminos (puede afectar a la ruta)</string>
-    <string name="file_imported_successfully">%1$s importado(s).</string>
+    <string name="file_imported_successfully">«%1$s» importado(s).</string>
     <string name="track_saved">Traza guardada</string>
     <string name="empty_filename">Nombre del archivo vacío</string>
     <string name="shared_string_revert">Revertir</string>
@@ -3432,7 +3432,7 @@
     <string name="login_and_pass">Nombre de usuario y contraseña</string>
     <string name="plugin_global_prefs_info">Los ajustes de este complemento son globales y se aplican a todos los perfiles</string>
     <string name="osm_editing">Edición de OSM</string>
-    <string name="osm_edits_view_descr">Puedes ver todas tus ediciones no subidas o errores de OSM en «%1$s». Los puntos subidos no se muestran en OsmAnd.</string>
+    <string name="osm_edits_view_descr">Puedes ver todas tus ediciones aún no subidas o errores de OSM en «%1$s». Los puntos subidos no se muestran en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">El icono se muestra mientras se navega o se mueve.</string>
     <string name="select_map_icon_descr">El icono se muestra en reposo.</string>
@@ -3779,7 +3779,7 @@
 \nPulsa en «%2$s», para borrar todos los datos relacionados con los radares de velocidad (alertas, notificaciones y PDI) hasta reinstalar OsmAnd completamente.</string>
     <string name="keep_active">Mantener</string>
     <string name="shared_string_uninstall">Desinstalar</string>
-    <string name="quick_action_showhide_mapillary_title">Mostrar/ocultar Mapillary</string>
+    <string name="quick_action_showhide_mapillary_title">Mostrar u ocultar Mapillary</string>
     <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
     <string name="quick_action_mapillary_show">Mostrar Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un botón que alterna la capa de Mapillary en el mapa.</string>
@@ -3807,7 +3807,7 @@
     <string name="set_working_days_to_continue">Definir los días laborales para continuar</string>
     <string name="select_track_width">Elegir la anchura</string>
     <string name="route_between_points">Ruta entre puntos</string>
-    <string name="plan_a_route">Crear una ruta</string>
+    <string name="plan_a_route">Planificar ruta</string>
     <string name="osm_edit_closed_note">Nota de OSM cerrada</string>
     <string name="gpx_split_interval_none_descr">Marca la opción de división deseada: por tiempo o por distancia.</string>
     <string name="gpx_split_interval_descr">Marca el intervalo en el que se mostrarán las marcas con distancia o tiempo en la traza.</string>
@@ -3935,7 +3935,7 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd usa MGRS, similar al formato UTM de la OTAN.</string>
-    <string name="message_need_calculate_route_before_show_graph">%1$s datos disponibles sólo en los caminos, necesitas calcular una ruta usando «Ruta entre puntos» para obtenerla.</string>
+    <string name="message_need_calculate_route_before_show_graph">Hay %1$s datos disponibles sólo en los caminos, debes calcular una ruta usando «Ruta entre puntos» para obtenerla.</string>
     <string name="message_graph_will_be_available_after_recalculation">Espera el recálculo de la ruta.
 \nEl gráfico estará disponible después del recálculo.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
@@ -3949,14 +3949,14 @@
     <string name="icon_group_amenity">Comodidad</string>
     <string name="file_already_imported">El archivo ya fue importado en OsmAnd</string>
     <string name="user_login">Iniciar sesión</string>
-    <string name="use_login_password">Utilice nombre de usuario y contraseña</string>
+    <string name="use_login_password">Usar nombre de usuario y contraseña</string>
     <string name="subscription_payment_issue_title">Hay un problema con la suscripción. Pulsa el botón para ir a los ajustes de la suscripción de Google Play y corregir el método de pago.</string>
     <string name="subscription_paused_title">La suscripción a OsmAnd Live se ha pausado</string>
     <string name="subscription_on_hold_title">La suscripción a OsmAnd Live está en espera</string>
     <string name="subscription_expired_title">La suscripción a OsmAnd Live ha caducado</string>
     <string name="sign_in_with_open_street_map">Ingresar con OpenStreetMap</string>
     <string name="send_files_to_openstreetmap">Enviar archivo GPX a OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Necesitas iniciar sesión para subir cambios nuevos o modificados.
+    <string name="open_street_map_login_mode">Debes iniciar sesión para subir cambios nuevos o modificados.
 \n
 \nPuedes ingresar usando el método seguro de OAuth o usar el nombre de usuario y contraseña.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Debes añadir al menos dos puntos</string>
@@ -3970,4 +3970,13 @@
     <string name="gpx_upload_private_visibility_descr">Privado significa que la traza no aparecerá en ninguna lista pública, pero el conjunto de puntos seguirá estando disponible en orden cronológico a través de la API pública de GPS y sin marcas de tiempo.</string>
     <string name="gpx_upload_identifiable_visibility_descr">Identificable significa que la traza se mostrará públicamente en tu listado de trazas y en el listado de trazas GPS públicas, es decir que otros usuarios podrán descargar la traza en bruto y asociarla con su nombre de usuario. Los datos servidos a través de la API de conjunto de puntos hará referencia a la página original de la traza. Las marcas de tiempo de los puntos de la traza estarán disponibles a través de la API pública de GPS.</string>
     <string name="enter_text_separated">Ingresa etiquetas separadas por comas.</string>
+    <string name="shared_string_add_photo">Añadir foto</string>
+    <string name="register_opr_have_account">Ya tengo cuenta</string>
+    <string name="register_opr_create_new_account">Crear nueva cuenta</string>
+    <string name="register_on_openplacereviews_desc">Las fotos son provistas por el proyecto de datos abiertos OpenPlaceReviews.org. Para subir fotos debes registrarte en el sitio web.</string>
+    <string name="register_on_openplacereviews">Registrarse en
+\nOpenPlaceReviews.org</string>
+    <string name="osm_login_descr">Puedes iniciar sesión con el método seguro de OAuth o usar el nombre de usuario y contraseña.</string>
+    <string name="osm_edit_comment_note">Comentar nota de OSM</string>
+    <string name="osm_edit_close_note">Cerrar nota de OSM</string>
 </resources>

@@ -1910,7 +1910,7 @@
     <string name="active_markers">Marques actives</string>
     <string name="map_markers">Marques</string>
     <string name="map_marker">Marque</string>
-    <string name="file_name_containes_illegal_char">Le nom de fichier contient un caractère interdit</string>
+    <string name="file_name_containes_illegal_char">Caractère interdit dans le nom de fichier</string>
     <string name="osm_live_header">Cet abonnement active les mises à jour horaires pour toutes les cartes.
 \nLes dons sont en partie reversés à la Communauté OSM.
 \nSi vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'est la meilleure façon de le faire.</string>
@@ -2629,7 +2629,7 @@
     <string name="copy_location_name">Copier l\'emplacement / le nom du point</string>
     <string name="toast_empty_name_error">Emplacement sans nom</string>
     <string name="show_closed_notes">Afficher les notes fermées</string>
-    <string name="switch_osm_notes_visibility_desc">Afficher / masquer les notes OSM sur la carte.</string>
+    <string name="switch_osm_notes_visibility_desc">Affiche ou masque les notes OSM sur la carte.</string>
     <string name="gpx_file_desc">GPX - adapté à l\'export vers JOSM et d\'autres éditeurs OSM.</string>
     <string name="osc_file_desc">OSC - adapté à l\'export vers OSM.</string>
     <string name="shared_string_gpx_file">Fichier GPX</string>
@@ -3112,7 +3112,7 @@
     <string name="application_profiles_descr">Sélectionnez les profils affichés dans l\'application.</string>
     <string name="application_profiles">Profils de l\'application</string>
     <string name="quick_action_need_to_add_item_to_list">Ajoutez au moins une action à la barre d\'Actions rapides</string>
-    <string name="routing_attr_piste_type_downhill_name">Ski alpin / ski de descente</string>
+    <string name="routing_attr_piste_type_downhill_name">Ski alpin</string>
     <string name="routing_attr_piste_type_downhill_description">Pistes de ski et accès aux remontées mécaniques.</string>
     <string name="routing_attr_piste_type_nordic_name">Ski de randonnée et ski nordique</string>
     <string name="routing_attr_piste_type_nordic_description">Pistes de ski de fond ou de ski de randonnée.</string>
@@ -3555,7 +3555,7 @@
     <string name="terrain_empty_state_text">Permet d\'afficher l\'ombrage du relief ou les pistes. Vous pouvez en apprendre plus sur ces types de cartes sur notre site.</string>
     <string name="shared_string_hillshade">Ombrage du relief</string>
     <string name="download_slope_maps">Pistes</string>
-    <string name="quick_action_show_hide_terrain">Afficher / masquer le terrain</string>
+    <string name="quick_action_show_hide_terrain">Affiche ou masque le terrain</string>
     <string name="quick_action_terrain_hide">Masquer le terrain</string>
     <string name="quick_action_terrain_show">Afficher le terrain</string>
     <string name="quick_action_terrain_descr">Un bouton pour afficher ou masquer la couche terrain sur la carte.</string>
@@ -3672,11 +3672,11 @@
     <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"%1$s\".</string>
     <string name="quick_action_transport_hide">Masquer les transports publics</string>
     <string name="quick_action_transport_show">Afficher les transports publics</string>
-    <string name="quick_action_show_hide_transport">Afficher / masquer les transports publics</string>
+    <string name="quick_action_show_hide_transport">Affiche ou masque les transports publics</string>
     <string name="quick_action_transport_descr">Bouton pour afficher ou masquer les transports publics sur la carte.</string>
-    <string name="create_edit_poi">Créer / Modifier un PI</string>
+    <string name="create_edit_poi">Créer ou modifier un PI</string>
     <string name="parking_positions">Emplacements de stationnement</string>
-    <string name="add_edit_favorite">Ajouter / Modifier un favori</string>
+    <string name="add_edit_favorite">Ajouter ou modifier un favori</string>
     <string name="reset_deafult_order">Rétablir l\'ordre par défaut des éléments</string>
     <string name="back_to_editing">Retour en modification</string>
     <string name="quick_action_switch_profile_descr">Le bouton d’action bascule entre les profils sélectionnés.</string>
@@ -3851,7 +3851,7 @@
     <string name="import_track_descr">Sélectionnez le fichier de trace à suivre ou importez-le depuis votre appareil.</string>
     <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
     <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
-    <string name="save_global_track_interval_descr">Définit la fréquence d’enregistrement du parcours (enregistrement activé depuis le gadget sur la carte).</string>
+    <string name="save_global_track_interval_descr">Définit la fréquence d’enregistrement des points du parcours (activable depuis le gadget \"Enregistrement\" sur la carte).</string>
     <string name="disable_recording_once_app_killed_descrp">Suspend l\'enregistrement du parcours lorsque l\'application est arrêtée via Applications récentes ; les indications OsmAnd ne seront plus affichées dans la barre de notifications.</string>
     <string name="all_next_segments_will_be_recalc">Tous les segments suivants seront recalculés avec le profil sélectionné.</string>
     <string name="all_previous_segments_will_be_recalc">Tous les segments précédents seront recalculés avec le profil sélectionné.</string>
@@ -3883,7 +3883,7 @@
     <string name="sort_last_modified">Dernière modification</string>
     <string name="sort_name_descending">Nom : Z – A</string>
     <string name="sort_name_ascending">Nom : A – Z</string>
-    <string name="start_finish_icons">Icônes de départ / arrivée</string>
+    <string name="start_finish_icons">Icônes de départ et d\'arrivée</string>
     <string name="contour_lines_thanks">Merci pour votre achat de \'Courbes de niveaux\'</string>
     <string name="osm_live_payment_desc_hw">Abonnement facturé pour chaque période sélectionnée. Annulation possible à tout moment sur AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Éviter les trottoirs</string>
@@ -3948,4 +3948,11 @@
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Créer un nouveau compte</string>
     <string name="register_opr_have_account">J\'ai déjà un compte</string>
+    <string name="open_street_map_login_mode">Vous devez vous connecter pour envoyer vos modifications.
+\n
+\nVous pouvez vous connecter avec la méthode sécurisée OAuth ou utiliser votre identifiant et votre mot de passe.</string>
+    <string name="osm_login_descr">Vous pouvez vous connecter avec la méthode sécurisée OAuth ou utiliser votre identifiant et votre mot de passe.</string>
+    <string name="register_on_openplacereviews_desc">Les photos sont fournies par le projet open data OpenPlaceReviews.org. Pour envoyer vos photos, vous devez au préalable être inscrit sur ce site Web.</string>
+    <string name="shared_string_search_history">Historique de recherche</string>
+    <string name="app_mode_kayak">Kayak</string>
 </resources>

@@ -3429,7 +3429,7 @@
     <string name="search_offline_geo_error">無法解析地理含義「%s」。</string>
     <string name="tracks_view_descr">您已紀錄的軌跡位於 %1$s，或是 OsmAnd 資料夾。</string>
     <string name="multimedia_notes_view_descr">您的 OSM 註記位於 %1$s。</string>
-    <string name="osm_edits_view_descr">您可以在 %1$s 中檢視您所有未上傳的編輯或 OSM 臭蟲。已上傳的點不會在 OsmAnd 中顯示。</string>
+    <string name="osm_edits_view_descr">您可以在 %1$s 中檢視您所有尚未上傳的編輯或 OSM 臭蟲。已上傳的點不會在 OsmAnd 中顯示。</string>
     <string name="permission_is_required">使用此選項需要權限。</string>
     <string name="monitoring_min_speed_descr">這是一個低速過濾器，不記錄低於特定速度的點。在地圖上查看時，這可能會使記錄的軌跡看起來更平滑。</string>
     <string name="monitoring_min_speed_descr_side_effect">副作用：您的軌跡將會遺失所有未達到最低速度標準的部份（例如，您將自行車推上陡峭的山坡）。此外，也將沒有其餘的資訊，如休息等。這會影響任何分析或後處理，例如試圖確定行程的總長度，運動時間或平均速度時。</string>

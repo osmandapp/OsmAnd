@@ -3427,7 +3427,7 @@
     <string name="login_and_pass">Prihlasovacie meno a heslo</string>
     <string name="plugin_global_prefs_info">Tieto nastavenia sú globálne a platia pre všetky profily</string>
     <string name="osm_editing">OSM upravovanie</string>
-    <string name="osm_edits_view_descr">Môžete zobraziť vaše neodoslané zmeny alebo chyby v OSM cez %1$s. Odoslané body sa už v OsmAnd nezobrazujú.</string>
+    <string name="osm_edits_view_descr">Môžete zobraziť vaše ešte neodoslané zmeny alebo chyby v OSM cez %1$s. Odoslané body sa už v OsmAnd nezobrazujú.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikona zobrazená pri navigácii alebo pohybe.</string>
     <string name="select_map_icon_descr">Ikona zobrazená v pokoji.</string>
@@ -3953,4 +3953,25 @@
     <string name="subscription_expired_title">Predplatné OsmAnd Live skončilo</string>
     <string name="subscription_paused_title">Predplatné OsmAnd Live je pozastavené</string>
     <string name="subscription_on_hold_title">Predplatné OsmAnd Live je zablokované</string>
+    <string name="login_open_street_map">Prihlásiť sa do OpenStreetMap</string>
+    <string name="login_open_street_map_org">Prihlásiť sa do OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Zaregistrovať sa do OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Musíte sa prihlásiť pre odoslanie nových alebo zmenených údajov.
+\n
+\nMôžete sa prihlásiť pomocou bezpečnej metódy OAuth alebo pomocou mena a hesla.</string>
+    <string name="use_login_password">Použiť meno a heslo</string>
+    <string name="login_account">Účet</string>
+    <string name="user_login">Prihlasovacie meno</string>
+    <string name="markers_history">História značiek</string>
+    <string name="send_files_to_openstreetmap">Odoslať súbor GPX do OpenStreetMap</string>
+    <string name="enter_text_separated">Zadajte značky oddelené čiarkou.</string>
+    <string name="osm_edit_close_note">Zatvoriť OSM poznámku</string>
+    <string name="osm_edit_comment_note">Komentovať OSM poznámku</string>
+    <string name="osm_login_descr">Môžete sa prihlásiť bezpečnou metódou OAuth alebo použite meno a heslo.</string>
+    <string name="shared_string_add_photo">Pridať foto</string>
+    <string name="register_on_openplacereviews">Zaregistrovať na
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Fotografie sú poskytované projektom OpenPlaceReviews.org s otvorenými dátami. Na odoslanie vašich fotiek sa musíte zaregistrovať na webovej stránke.</string>
+    <string name="register_opr_create_new_account">Vytvoriť nový účet</string>
+    <string name="register_opr_have_account">Už mám účet</string>
 </resources>
