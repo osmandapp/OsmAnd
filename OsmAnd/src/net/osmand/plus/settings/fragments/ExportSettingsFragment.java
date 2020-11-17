@@ -34,6 +34,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -79,6 +80,7 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 	private ApplicationMode appMode;
 	private SettingsExportListener exportListener;
 
+	private View continueBtn;
 	private View headerShadow;
 	private View headerDivider;
 	private View itemsSizeContainer;
@@ -150,13 +152,15 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 		availableSpaceContainer = inflater.inflate(R.layout.enough_space_warning_card, null);
 		availableSpaceDescr = availableSpaceContainer.findViewById(R.id.warning_descr);
 
-		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
+		continueBtn = root.findViewById(R.id.continue_button);
+		UiUtilities.setupDialogButton(nightMode, continueBtn, DialogButtonType.PRIMARY, getString(R.string.shared_string_continue));
 		continueBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				prepareFile();
 			}
 		});
+
 		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
 		treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -252,22 +256,24 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 	private void updateAvailableSpace() {
 		long calculatedSize = ExportSettingsAdapter.calculateItemsSize(adapter.getData());
 		if (calculatedSize != 0) {
-			String itemsSize = AndroidUtils.formatSize(app, calculatedSize);
-			selectedItemsSize.setText(itemsSize);
+			selectedItemsSize.setText(AndroidUtils.formatSize(app, calculatedSize));
 
 			File dir = app.getAppPath("").getParentFile();
 			long availableSizeBytes = AndroidUtils.getAvailableSpace(dir);
 			if (calculatedSize > availableSizeBytes) {
 				String availableSize = AndroidUtils.formatSize(app, availableSizeBytes);
-				availableSpaceDescr.setText(getString(R.string.export_not_enough_space_descr, itemsSize, availableSize));
+				availableSpaceDescr.setText(getString(R.string.export_not_enough_space_descr, availableSize));
 				updateWarningHeaderVisibility(true);
+				continueBtn.setEnabled(false);
 			} else {
 				updateWarningHeaderVisibility(false);
+				continueBtn.setEnabled(adapter.hasSelectedData());
 			}
 			itemsSizeContainer.setVisibility(View.VISIBLE);
 		} else {
 			updateWarningHeaderVisibility(false);
 			itemsSizeContainer.setVisibility(View.INVISIBLE);
+			continueBtn.setEnabled(adapter.hasSelectedData());
 		}
 	}
 

@@ -12,7 +12,7 @@
 
 -->
     <string name="export_not_enough_space">There is not enough space</string>
-    <string name="export_not_enough_space_descr">OsmAnd is needed %1$s to export a file. Your device only has %2$s free. You can free up space on the device, or skip some items from export.</string>
+    <string name="export_not_enough_space_descr">Your device only has %1$s free. Please free up some space or unselect some items to export.</string>
     <string name="file_size_needed_for_import">Needed for import</string>
     <string name="select_data_to_export">Select the data to be exported to the file.</string>
     <string name="approximate_file_size">Approximate file size</string>

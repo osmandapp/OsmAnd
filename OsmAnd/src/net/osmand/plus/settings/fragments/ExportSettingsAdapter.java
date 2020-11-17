@@ -250,6 +250,10 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		notifyDataSetChanged();
 	}
 
+	public boolean hasSelectedData() {
+		return !selectedItemsMap.isEmpty();
+	}
+
 	public List<? super Object> getData() {
 		List<Object> selectedItems = new ArrayList<>();
 		for (List<?> items : selectedItemsMap.values()) {
