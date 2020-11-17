@@ -1029,7 +1029,7 @@
     <string name="poi_observatory_designation">Designación</string>
     <string name="poi_telescope_type">Tipo</string>
     <string name="poi_animal_training_type">Tipo</string>
-    <string name="poi_embassy_type">Tipo</string>
+    <string name="poi_diplomatic_filter">Tipo</string>
     <string name="poi_city_capital">Capital</string>
     <string name="poi_healthcare_alternative_types">Especialidade</string>
     <string name="poi_free_flying_characteristics">Característica</string>

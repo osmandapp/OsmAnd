@@ -436,7 +436,7 @@
     <string name="poi_pump">مضخة</string>
     <string name="poi_telescope_type">النوع</string>
     <string name="poi_animal_training_type">النوع</string>
-    <string name="poi_embassy_type">النوع</string>
+    <string name="poi_diplomatic_filter">النوع</string>
     <string name="poi_healthcare_alternative_types">التخصص</string>
     <string name="poi_archaeological_site_type">النوع</string>
     <string name="poi_religion_type">الدين</string>

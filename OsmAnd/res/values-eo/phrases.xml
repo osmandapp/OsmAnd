@@ -2786,7 +2786,7 @@
     <string name="poi_observatory_designation">Apliko</string>
     <string name="poi_telescope_type">Speco de teleskopo</string>
     <string name="poi_animal_training_type">Dresado de</string>
-    <string name="poi_embassy_type">Speco de diplomata oficejo</string>
+    <string name="poi_diplomatic_filter">Speco de diplomata oficejo</string>
     <string name="poi_city_capital">Ĉefurbo</string>
     <string name="poi_pharmacy_dispensing">Medikamentoj je preskribo</string>
     <string name="poi_healthcare_alternative_types">Kontraŭmedicino</string>

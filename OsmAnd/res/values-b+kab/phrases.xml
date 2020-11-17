@@ -509,7 +509,7 @@
     <string name="poi_information_type">Anaw</string>
     <string name="poi_wheelchair_yes">Ih</string>
     <string name="poi_archaeological_site_type">Anaw</string>
-    <string name="poi_embassy_type">Anaw</string>
+    <string name="poi_diplomatic_filter">Anaw</string>
     <string name="poi_animal_training_type">Anaw</string>
     <string name="poi_telescope_type">Anaw</string>
     <string name="poi_observatory_designation">Isem</string>

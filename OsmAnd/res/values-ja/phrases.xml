@@ -1989,7 +1989,7 @@
     <string name="poi_telescope">望遠鏡</string>
     <string name="poi_observatory_designation">観測ドーム</string>
     <string name="poi_animal_training_type">動物訓練施設の種類</string>
-    <string name="poi_embassy_type">外交関連施設(領事館、大使住居等)の種類</string>
+    <string name="poi_diplomatic_filter">外交関連施設(領事館、大使住居等)の種類</string>
     <string name="poi_service_parts">部品</string>
     <string name="poi_service_dealer">販売</string>
     <string name="poi_service_repair">修理</string>

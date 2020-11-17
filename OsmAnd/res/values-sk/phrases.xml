@@ -1933,7 +1933,7 @@
     <string name="poi_pump">Pumpa</string>
     <string name="poi_telescope_type">Typ</string>
     <string name="poi_animal_training_type">Typ</string>
-    <string name="poi_embassy_type">Typ</string>
+    <string name="poi_diplomatic_filter">Typ</string>
     <string name="poi_city_capital">Hlavné mesto</string>
     <string name="poi_pharmacy_dispensing">Výdaj na predpis</string>
     <string name="poi_healthcare_alternative_types">Špecializácia</string>

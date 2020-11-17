@@ -1849,7 +1849,7 @@
     <string name="poi_pump">Szivattyú</string>
     <string name="poi_telescope_type">Típus</string>
     <string name="poi_animal_training_type">Típus</string>
-    <string name="poi_embassy_type">Típus</string>
+    <string name="poi_diplomatic_filter">Típus</string>
     <string name="poi_city_capital">Főváros</string>
     <string name="poi_healthcare_alternative_types">Szakosodás</string>
     <string name="poi_free_flying_characteristics">Jellemző</string>

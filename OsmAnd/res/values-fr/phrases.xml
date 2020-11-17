@@ -1975,7 +1975,7 @@
     <string name="poi_ferry_terminal_cargo">Cargo</string>
     <string name="poi_telescope_type">Type</string>
     <string name="poi_animal_training_type">Type</string>
-    <string name="poi_embassy_type">Type</string>
+    <string name="poi_diplomatic_filter">Type</string>
     <string name="poi_city_capital">Capitale</string>
     <string name="poi_healthcare_alternative_types">Spécialité</string>
     <string name="poi_free_flying_characteristics">Caractéristiques</string>

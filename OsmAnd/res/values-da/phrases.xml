@@ -2805,7 +2805,7 @@
     <string name="poi_observatory_designation">Betegnelse</string>
     <string name="poi_telescope_type">Type</string>
     <string name="poi_animal_training_type">Type</string>
-    <string name="poi_embassy_type">Type</string>
+    <string name="poi_diplomatic_filter">Type</string>
     <string name="poi_city_capital">Hovedstad</string>
     <string name="poi_pharmacy_dispensing">Udlevering</string>
     <string name="poi_healthcare_alternative_types">Speciale</string>

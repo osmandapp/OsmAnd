@@ -32,7 +32,7 @@
     <string name="poi_observatory_designation">Anv</string>
     <string name="poi_telescope_type">Seurt</string>
     <string name="poi_animal_training_type">Seurt</string>
-    <string name="poi_embassy_type">Seurt</string>
+    <string name="poi_diplomatic_filter">Seurt</string>
     <string name="poi_city_capital">Kêrbenn</string>
     <string name="poi_pharmacy_dispensing">Ordrenañs</string>
     <string name="poi_healthcare_alternative_types">Arbennigiezh</string>
