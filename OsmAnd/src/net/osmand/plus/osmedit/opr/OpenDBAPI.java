@@ -3,7 +3,9 @@ package net.osmand.plus.osmedit.opr;
 import android.net.TrafficStats;
 import android.os.Build;
 import com.google.gson.GsonBuilder;
+import net.osmand.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.BuildConfig;
 import org.apache.commons.logging.Log;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -27,8 +29,29 @@ import static org.openplacereviews.opendb.SecUtils.*;
 
 public class OpenDBAPI {
 	private static final Log log = PlatformUtil.getLog(SecUtils.class);
-
+	private static final String checkLoginEndpoint = "api/auth/user-check-loginkey?";
+	private static final String LOGIN_SUCCESS_MESSAGE = "success";
 	private static final int THREAD_ID = 11200;
+
+	/*
+	 * method for check if user is loggined in blockchain
+	 * params
+	 *  - username: blockchain username in format "openplacereviews:test_1"
+	 *  - privatekey: "base64:PKCS#8:actualKey"
+	 *
+	 * Do not call on mainThread
+	 */
+	public boolean checkPrivateKeyValid(String username, String privateKey){
+		String url = BuildConfig.OPR_BASE_URL + checkLoginEndpoint +
+				"name=" +
+				username +
+				"&" +
+				"privateKey=" +
+				privateKey;
+		StringBuilder response = new StringBuilder();
+		return (NetworkUtils.sendGetRequest(url,null,response) == null) &&
+				response.toString().contains(LOGIN_SUCCESS_MESSAGE);
+	}
 
 	public int uploadImage(String[] placeId, String privateKey, String username, String image) throws FailedVerificationException {
 		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
