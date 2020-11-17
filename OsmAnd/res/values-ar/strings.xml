@@ -2454,7 +2454,7 @@
     <string name="measurement_tool_action_bar">تصفح الخريطة وإضافة نقاط</string>
     <string name="measurement_tool">قياس المسافة</string>
     <string name="none_point_error">الرجاء إضافة نقطة واحدة على الأقل.</string>
-    <string name="enter_gpx_name">اسم مسار الـGPX :</string>
+    <string name="enter_gpx_name">اسم مسار GPX :</string>
     <string name="show_on_map_after_saving">عرض على الخريطة بعد الحفظ</string>
     <string name="add_waypoint">إضافة نقطة</string>
     <string name="save_gpx_waypoint">حفظ نقطة GPX</string>
