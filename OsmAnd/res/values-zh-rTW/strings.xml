@@ -1913,7 +1913,7 @@
     <string name="full_report">完整報告</string>
     <string name="open_street_map_login_and_pass">OSM 的使用者名稱與密碼</string>
     <string name="report">報告</string>
-    <string name="file_name_containes_illegal_char">檔案名稱包含非法字元</string>
+    <string name="file_name_containes_illegal_char">檔案名稱中有非法字元</string>
     <string name="storage_permission_restart_is_required">現在應用程式允許寫入外部記憶體。但是需要重新啟動程式。</string>
     <string name="no_map_markers_found">請透過地圖增加地圖標記</string>
     <string name="no_waypoints_found">未發現任何航點</string>
@@ -2632,7 +2632,7 @@
     <string name="copy_location_name">複製地點／POI 名稱</string>
     <string name="toast_empty_name_error">無名稱的位置</string>
     <string name="show_closed_notes">顯示已關閉的註解</string>
-    <string name="switch_osm_notes_visibility_desc">在地圖上顯示/隱藏 OSM 的註解。</string>
+    <string name="switch_osm_notes_visibility_desc">在地圖上顯示或隱藏 OSM 的註解。</string>
     <string name="gpx_file_desc">GPX - 適合匯出到 JOSM 或其他 OSM 編輯。</string>
     <string name="osc_file_desc">OSC - 適合匯出到 OSM。</string>
     <string name="shared_string_gpx_file">GPX 檔案</string>
@@ -3078,7 +3078,7 @@
     <string name="zoom_by_wunderlinq_descr">透過向上或向下捲以變更地圖縮放。Esc 會將您帶回 WunderLINQ 應用程式。</string>
     <string name="zoom_by_wunderlinq">使用 WunderLINQ 來控制</string>
     <string name="quick_action_need_to_add_item_to_list">至少在「快速動作」設定中新增一個項目</string>
-    <string name="routing_attr_piste_type_downhill_name">高山／下坡滑雪</string>
+    <string name="routing_attr_piste_type_downhill_name">高山與下坡滑雪</string>
     <string name="routing_attr_piste_type_downhill_description">適合高山或下山滑雪的斜坡與滑雪纜車。</string>
     <string name="routing_attr_piste_type_nordic_name">越野滑雪</string>
     <string name="routing_attr_piste_type_nordic_description">越野滑雪的路線。</string>
@@ -3360,7 +3360,7 @@
     <string name="route_start_point">起點</string>
     <string name="default_speed_dialog_msg">估計未知道路類型的到達時間，並限制所有道路的速度（可能會影響路徑）</string>
     <string name="track_saved">已儲存軌跡</string>
-    <string name="empty_filename">檔案名稱為空</string>
+    <string name="empty_filename">空的檔案名稱</string>
     <string name="shared_string_revert">還原</string>
     <string name="quick_action_directions_from_desc">讓出發點置於畫面中央的按鈕。</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">顯示節點網路自行車路徑</string>
@@ -3571,7 +3571,7 @@
     <string name="terrain_empty_state_text">啟用以檢視地形陰影或坡度圖。您可以在我們的網站上閱讀更多關於這些地圖類型的資訊。</string>
     <string name="shared_string_hillshade">地形陰影</string>
     <string name="download_slope_maps">坡度</string>
-    <string name="quick_action_show_hide_terrain">顯示／隱藏地形</string>
+    <string name="quick_action_show_hide_terrain">顯示或隱藏地形</string>
     <string name="quick_action_terrain_hide">隱藏地形</string>
     <string name="quick_action_terrain_show">顯示地形</string>
     <string name="quick_action_terrain_descr">用於顯示或隱藏地圖上地形圖層的按鈕。</string>
@@ -3689,10 +3689,10 @@
     <string name="additional_actions_descr">您可以透過點選「%1$s」按鈕存取這些動作。</string>
     <string name="quick_action_transport_hide">隱藏大眾運輸</string>
     <string name="quick_action_transport_descr">在地圖上顯示或隱藏大眾運輸的按鈕。</string>
-    <string name="quick_action_show_hide_transport">顯示／隱藏大眾運輸</string>
-    <string name="create_edit_poi">建立／編輯 POI</string>
+    <string name="quick_action_show_hide_transport">顯示或隱藏大眾運輸</string>
+    <string name="create_edit_poi">建立或編輯 POI</string>
     <string name="parking_positions">停車位置</string>
-    <string name="add_edit_favorite">新增／編輯收藏</string>
+    <string name="add_edit_favorite">新增與編輯收藏</string>
     <string name="reset_deafult_order">恢復預設項目排序</string>
     <string name="back_to_editing">返回編輯</string>
     <string name="shared_string_resume">恢復</string>
@@ -3867,7 +3867,7 @@
     <string name="shared_string_file_name">檔案名稱</string>
     <string name="number_of_gpx_files_selected_pattern">已選定 %s 軌跡檔案</string>
     <string name="disable_recording_once_app_killed_descrp">將會在應用程式被砍除時（透過最近的應用程式）暫停軌跡錄製。（OsmAnd 背景指示會從 Android 通知列中消失。）</string>
-    <string name="save_global_track_interval_descr">指定一般軌跡錄製的記錄間隔（透過地圖上的旅程錄製小工具啟用）。</string>
+    <string name="save_global_track_interval_descr">指定一般軌跡錄製的記錄間隔（透過地圖上的旅程錄製小工具開啟）。</string>
     <string name="gpx_monitoring_stop">暫停旅程錄製</string>
     <string name="gpx_monitoring_start">恢復旅程錄製</string>
     <string name="system_default_theme">系統預設</string>
@@ -3883,7 +3883,7 @@
     <string name="shared_string_redo">重做</string>
     <string name="release_3_8">• 更新「規劃路線」功能：允許每個路段使用不同的導航類型並包含軌跡
 \n
-\n • 新的軌跡外觀選項：選取顏色、厚度、開啟方向箭頭與開始／結束圖示
+\n • 新的軌跡外觀選項：選取顏色、厚度、開啟方向箭頭與開始與結束圖示
 \n
 \n • 改善自行車節點的能見度
 \n
@@ -3899,7 +3899,7 @@
     <string name="sort_last_modified">最後修改時間</string>
     <string name="sort_name_descending">名稱：Z – A</string>
     <string name="sort_name_ascending">名稱：A – Z</string>
-    <string name="start_finish_icons">開始／結束圖示</string>
+    <string name="start_finish_icons">開始與結束圖示</string>
     <string name="contour_lines_thanks">感謝您購買 \'Contour lines\'</string>
     <string name="osm_live_payment_desc_hw">按選定週期收取訂閱費用。隨時在 AppGallery 上取消。</string>
     <string name="osm_live_payment_subscription_management_hw">確認購買後將會從您的 AppGallery 帳號中付款。
@@ -3960,10 +3960,10 @@
     <string name="markers_history">標記歷史</string>
     <string name="send_files_to_openstreetmap">傳送 GPX 檔案到 OpenStreetMap</string>
     <string name="enter_text_separated">輸入以逗號分隔的標籤。</string>
-    <string name="gpx_upload_public_visibility_descr">公開代表軌跡將會公開顯示在您的 GPS 軌跡與公開的 GPS 軌跡清單中。透過 API 取得的 API 不會參考您的軌跡頁面。軌跡點的時間戳不會透過公開的 GPS API 提供，也不會按時間排序。不過，其他使用者仍可以從公開的軌跡清單下載原始軌跡與任何其中包含的時間戳。</string>
-    <string name="gpx_upload_private_visibility_descr">私有代表了軌跡不會顯示在任何公開的清單中，但其軌跡點仍可透過公開的 GPS API 取得，但沒有時間戳，也不會按時間順序排列。</string>
-    <string name="gpx_upload_identifiable_visibility_descr">可識別代表軌跡將會在您的 GPS 軌跡與公開 GPS 軌跡清單中顯示，亦即其他使用者將可以下載原始軌跡並將其與您的使用者名稱相關聯。透過軌跡點 API 提供的資料將會參考您的原始軌跡頁面。軌跡點的時間戳可透過公開的 GPS API 取得。</string>
-    <string name="gpx_upload_trackable_visibility_descr">可追蹤代表軌跡不會顯示在任何公開的清單中，但其追蹤點仍可以透過帶有時間戳的公開 GPS API 使用。其他使用者將只能從您的軌跡中下載處理過的追蹤點，但這些追蹤點無法直接與與您相關聯。</string>
+    <string name="gpx_upload_public_visibility_descr">「公開」代表軌跡將會公開顯示在您的 GPS 軌跡與公開的 GPS 軌跡清單中，且在公開軌跡清單中會以帶有原始形式的時間戳顯示。透過 API 取得的資料不會引用您的軌跡頁面。軌跡點的時間戳不會透過公開的 GPS API 提供，也不會按時間排序。</string>
+    <string name="gpx_upload_private_visibility_descr">「私有」代表軌跡不會顯示在任何公開的清單中，但其軌跡點仍可透過公開的 GPS API 取得，但沒有時間戳，也不會按時間順序排列。</string>
+    <string name="gpx_upload_identifiable_visibility_descr">「可識別」代表軌跡將會在您的 GPS 軌跡與公開 GPS 軌跡清單中顯示，亦即其他使用者將可以下載原始軌跡並將其與您的使用者名稱相關聯。透過追蹤點 API 提供的 GPS API 中帶有公開時間戳的追蹤點資料將會引用您的原始追蹤頁面。</string>
+    <string name="gpx_upload_trackable_visibility_descr">「可追蹤」代表軌跡不會在任何公開的清單中顯示，但帶有時間戳（這並不會與您直接相關聯）的已處理追蹤點可從公開的 GPS API 下載。</string>
     <string name="osm_edit_close_note">關閉 OSM 註記</string>
     <string name="osm_edit_comment_note">評論 OSM 註記</string>
     <string name="osm_login_descr">您可以使用安全的 OAuth 方式或是使用您的帳號與密碼來登入。</string>
@@ -3973,4 +3973,7 @@
     <string name="register_on_openplacereviews_desc">照片由開放資料專案 OpenPlaceReviews.org 提供。為了上傳您的照片，您必須在網站上註冊。</string>
     <string name="register_opr_create_new_account">建立新帳號</string>
     <string name="register_opr_have_account">我已經有帳號了</string>
+    <string name="shared_string_search_history">搜尋歷史紀錄</string>
+    <string name="app_mode_kayak">皮艇</string>
+    <string name="app_mode_motorboat">快艇</string>
 </resources>
