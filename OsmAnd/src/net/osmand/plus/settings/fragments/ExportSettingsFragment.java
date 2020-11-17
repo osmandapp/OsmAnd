@@ -149,7 +149,7 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 		headerShadow = header.findViewById(R.id.card_bottom_divider);
 		expandableList.addHeaderView(header);
 
-		availableSpaceContainer = inflater.inflate(R.layout.enough_space_warning_card, null);
+		availableSpaceContainer = themedInflater.inflate(R.layout.enough_space_warning_card, null);
 		availableSpaceDescr = availableSpaceContainer.findViewById(R.id.warning_descr);
 
 		continueBtn = root.findViewById(R.id.continue_button);
