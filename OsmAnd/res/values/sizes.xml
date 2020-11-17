@@ -210,6 +210,8 @@
 	<dimen name="welcome_header_text_size">23sp</dimen>
 	<dimen name="text_button_text_size">15sp</dimen>
 	<dimen name="travel_card_primary_text_size">15sp</dimen>
+	<dimen name="default_title_line_height">24sp</dimen>
+	<dimen name="default_desc_line_height">20sp</dimen>
 
 	<dimen name="default_split_segments_overview">13sp</dimen>
 	<dimen name="default_split_segments_data">13sp</dimen>
