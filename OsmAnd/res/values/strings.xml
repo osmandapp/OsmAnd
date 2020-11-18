@@ -11,10 +11,27 @@
 	Thx - Hardy
 
 -->
-    <string name="gpx_upload_trackable_visibility_descr">Trackable means that the trace will not show up in any public listings but trackpoints from it will still be available through the public GPS API with timestamps. Other users will only be able to download processed trackpoints from your trace which can\'t be associated with you directly.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Identifiable means that the trace will be shown publicly in Your GPS traces and in public GPS trace listings, i.e. other users will be able to download the raw trace and associate it with your username. Data served via the trackpoints API will reference your original trace page. Timestamps of the trace points are available through the public GPS API.</string>
-    <string name="gpx_upload_private_visibility_descr">Private means that the trace will not show up in any public listings, but trackpoints from it will still be available through the public GPS API without timestamps but will not be chronologically ordered.</string>
-    <string name="gpx_upload_public_visibility_descr">Public means that the trace will be shown publicly in Your GPS traces and in public GPS trace listings. Data served via the API does not reference your trace page. Timestamps of the trace points are not available through the public GPS API, and the points are not chronologically ordered. However, other users are still able to download the raw trace from the public trace list and any timestamps contained within.</string>
+    <string name="export_not_enough_space">There is not enough space</string>
+    <string name="export_not_enough_space_descr">Your device only has %1$s free. Please free up some space or unselect some items to export.</string>
+    <string name="file_size_needed_for_import">Needed for import</string>
+    <string name="select_data_to_export">Select the data to be exported to the file.</string>
+    <string name="approximate_file_size">Approximate file size</string>
+    <string name="shared_string_resources">Resources</string>
+    <string name="app_mode_motorboat">Motorboat</string>
+    <string name="app_mode_kayak">Kayak</string>
+    <string name="shared_string_search_history">Search history</string>
+    <string name="register_opr_have_account">I already have an account</string>
+    <string name="register_opr_create_new_account">Create new account</string>
+    <string name="register_on_openplacereviews_desc">Photos are provided by open data project OpenPlaceReviews.org. In order to upload your photos you need to sign up on website.</string>
+    <string name="register_on_openplacereviews">Register on\nOpenPlaceReviews.org</string>
+    <string name="shared_string_add_photo">Add photo</string>
+    <string name="osm_login_descr">You can log in using the safe OAuth method or use your login and password.</string>
+    <string name="osm_edit_comment_note">Comment OSM Note</string>
+    <string name="osm_edit_close_note">Close OSM Note</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Trackable\" means the trace does not show up in any public listings, but processed trackpoints with timestamps from it (that can\'t be associated with you directly) do through downloads from the public GPS API.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identifiable\" means that the trace will be shown publicly in Your GPS traces and in public GPS trace listings, i.e. other users will be able to download the raw trace and associate it with your username. Public timestamped tracepoint data from the GPS API served via the trackpoints API will reference your original trace page.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Private\" means the trace does not show up in any public listings, but trackpoints from it in unchronological order are available through the public GPS API without timestamps.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Public\" means the trace is shown publicly in your GPS traces and in public GPS trace listings, and in the public trace list with timestamps in raw form. Data served via the API does not reference your trace page. Tracepoint timestamps are not available through the public GPS API, and tracepoints are not chronologically ordered.</string>
     <string name="enter_text_separated">Enter tags separated by comma.</string>
     <string name="send_files_to_openstreetmap">Send GPX file to OpenStreetMap</string>
     <string name="markers_history">Markers history</string>
@@ -28,7 +45,7 @@
     <string name="login_account">Account</string>
     <string name="use_login_password">Use login and password</string>
     <string name="open_street_map_login_mode">You need to login to upload new or modified changes. \n\nYou can log in using the safe OAuth method or use your login and password.</string>
-    <string name="osm_edits_view_descr">You can view all your unloaded edits or OSM bugs in %1$s. Uploaded points don’t show in OsmAnd.</string>
+    <string name="osm_edits_view_descr">You can view all your not yet uploaded edits or OSM bugs in %1$s. Uploaded points don’t show in OsmAnd.</string>
     <string name="sign_in_with_open_street_map">Sign in with OpenStreetMap</string>
     <string name="login_open_street_map_org">Login to OpenStreetMap.org</string>
     <string name="login_open_street_map">Login to OpenStreetMap</string>
@@ -66,13 +83,13 @@
     <string name="osm_live_payment_subscription_management_hw">Payment will be charged to your AppGallery account at the confirmation of purchase.\n\nSubscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period (month/three month/year) only on the renewal date.\n\nYou can manage and cancel your subscriptions by going to your AppGallery settings.</string>
     <string name="osm_live_payment_desc_hw">Subscription charged per selected period. Cancel it on AppGallery at any time.</string>
     <string name="contour_lines_thanks">Thank you for purchasing \'Contour lines\'</string>
-    <string name="start_finish_icons">Start/finish icons</string>
+    <string name="start_finish_icons">Start and finish icons</string>
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="sort_name_descending">Name: Z – A</string>
     <string name="sort_last_modified">Last modified</string>
     <string name="release_3_8">
     • Updated "Plan a route" function: allows using different navigation types per segment and the inclusion of tracks\n\n
-    • New "Appearance" menu for tracks: select color, thickness, display direction arrows, start/finish icons\n\n
+    • New "Appearance" menu for tracks: select color, thickness, display direction arrows, start and finish icons\n\n
     • Improved visibility of bicycle nodes.\n\n
     • Tracks are now tappable, have context menu with basic info.\n\n
     • Improved "Search" algorithms\n\n
@@ -92,11 +109,11 @@
     <string name="system_default_theme">System default</string>
     <string name="gpx_monitoring_start">Resume trip recording</string>
     <string name="gpx_monitoring_stop">Pause trip recording</string>
-    <string name="save_global_track_interval_descr">Specify the logging interval for the general track recording (enabled via the Trip recording widget on the map).</string>
+    <string name="save_global_track_interval_descr">Specify the logging interval for the general track recording (turned on via the \'Trip recording\' widget on the map).</string>
     <string name="disable_recording_once_app_killed_descrp">Will pause track logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="monitoring_control_start">REC</string>
     <string name="number_of_gpx_files_selected_pattern">%s track files selected</string>
-    <string name="shared_string_file_name">File name</string>
+    <string name="shared_string_file_name">Filename</string>
     <string name="simplified_track_description">Only the route line will be saved, the waypoints will be deleted.</string>
     <string name="simplified_track">Simplified track</string>
     <string name="plan_route_change_route_type_after">Change route type after</string>
@@ -258,11 +275,11 @@
     <string name="quick_action_switch_profile_descr">The action button switches between selected profiles.</string>
     <string name="back_to_editing">Back to editing</string>
     <string name="reset_deafult_order">Restore default items order</string>
-    <string name="add_edit_favorite">Add / Edit Favorite</string>
+    <string name="add_edit_favorite">Add or edit favorite</string>
     <string name="parking_positions">Parking positions</string>
-    <string name="create_edit_poi">Create / Edit POI</string>
+    <string name="create_edit_poi">Create or edit POI</string>
     <string name="quick_action_transport_descr">Button showing or hiding public transport on the map.</string>
-    <string name="quick_action_show_hide_transport">Show/hide public transport</string>
+    <string name="quick_action_show_hide_transport">Show or hide public transport</string>
     <string name="quick_action_transport_show">Show public transport</string>
     <string name="quick_action_transport_hide">Hide public transport</string>
     <string name="release_3_7">
@@ -364,7 +381,7 @@
     <string name="quick_action_terrain_descr">A button to show or hide terrain layer on the map.</string>
     <string name="quick_action_terrain_show">Show terrain</string>
     <string name="quick_action_terrain_hide">Hide terrain</string>
-    <string name="quick_action_show_hide_terrain">Show / hide terrain</string>
+    <string name="quick_action_show_hide_terrain">Show or hide terrain</string>
     <string name="download_slope_maps">Slopes</string>
     <string name="n_items_of_z">%1$s of %2$s</string>
     <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
@@ -549,7 +566,7 @@
     <string name="clear_confirmation_msg">Clear %1$s?</string>
     <string name="shared_string_revert">Revert</string>
     <string name="track_saved">Track saved</string>
-    <string name="empty_filename">File name is empty</string>
+    <string name="empty_filename">Empty filename</string>
     <string name="default_speed_dialog_msg">Estimates arrival time for unknown road types, and limits speed for all roads (may affect routing)</string>
     <string name="rendering_value_white_name">White</string>
     <string name="swap_two_places">Swap %1$s and %2$s</string>
@@ -1161,7 +1178,7 @@
     <string name="first_intermediate_dest_description">Adds initial stop</string>
     <string name="subsequent_dest_description">Move destination up, and create it</string>
     <string name="show_closed_notes">Show closed notes</string>
-    <string name="switch_osm_notes_visibility_desc">Show/hide OSM notes on the map.</string>
+    <string name="switch_osm_notes_visibility_desc">Show or hide OSM notes on the map.</string>
     <string name="gpx_file_desc">GPX - suitable for export to JOSM or other OSM editors.</string>
     <string name="osc_file_desc">OSC - suitable for export to OSM.</string>
     <string name="shared_string_gpx_file">GPX file</string>
@@ -1323,7 +1340,7 @@
     <string name="measurement_tool_save_as_new_track_descr">Save the points either as route points or as a line.</string>
     <string name="choose_navigation_type">Select navigation profile</string>
     <string name="none_point_error">Please add at least one point.</string>
-    <string name="enter_gpx_name">GPX file name:</string>
+    <string name="enter_gpx_name">GPX filename:</string>
     <string name="show_on_map_after_saving">Show on map after saving</string>
     <string name="measurement_tool_action_bar">Browse the map and add points</string>
     <string name="measurement_tool">Measure distance</string>
@@ -3814,7 +3831,7 @@
     <string name="number_of_contributors">Number of contributors</string>
     <string name="number_of_edits">Number of edits</string>
     <string name="reports_for">Report for</string>
-    <string name="file_name_containes_illegal_char">File name contains illegal character</string>
+    <string name="file_name_containes_illegal_char">Illegal character in filename</string>
     <string name="configure_screen_quick_action">Quick action</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
@@ -3936,9 +3953,9 @@
     <string name="routing_attr_avoid_sett_name">No cobblestone or sett</string>
     <string name="routing_attr_avoid_sett_description">Avoids cobblestone and sett</string>
     <string name="quick_action_need_to_add_item_to_list">Add at least one item to the list in the \'Quick action\' settings</string>
-    <string name="routing_attr_piste_type_downhill_name">Alpine/downhill ski</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpine and downhill skiing</string>
     <string name="routing_attr_piste_type_downhill_description">Slopes for alpine or downhill skiing and access to ski lifts.</string>
-    <string name="routing_attr_piste_type_nordic_name">Cross country/nordic ski</string>
+    <string name="routing_attr_piste_type_nordic_name">Cross country and nordic skiing</string>
     <string name="routing_attr_piste_type_nordic_description">Trails for nordic or cross-country skiing.</string>
     <string name="routing_attr_piste_type_skitour_name">Ski touring</string>
     <string name="routing_attr_piste_type_skitour_description">Routes for ski touring.</string>

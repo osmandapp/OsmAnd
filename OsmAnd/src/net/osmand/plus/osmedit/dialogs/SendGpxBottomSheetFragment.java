@@ -70,6 +70,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 		String fileName = gpxInfos[0].getFileName();
 		messageField.setText(Algorithms.getFileNameWithoutExtension(fileName));
+		messageField.setSelection(messageField.getText().length());
 
 		final TextView visibilityName = sendOsmPoiView.findViewById(R.id.visibility_name);
 		final TextView visibilityDescription = sendOsmPoiView.findViewById(R.id.visibility_description);

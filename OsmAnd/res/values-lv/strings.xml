@@ -124,7 +124,7 @@
     <string name="global_app_settings">Globālie lietotnes iestatījumi</string>
     <string name="user_name">OSM lietotāja vārds</string>
     <string name="open_street_map_login_descr">Nepieciešams, lai veiktu augšupielādes openstreetmap.org</string>
-    <string name="user_password">Jūsu OSM parole</string>
+    <string name="user_password">Parole</string>
     <string name="osmand_service">Fona režīms</string>
     <string name="osmand_service_descr">OsmAnd darbosies fonā, kad ekrāns būs izslēgts</string>
     <string name="download_files_not_enough_space">Nepietiek brīvās vietas, lai lejupielādētu %1$s MB (brīvi: %2$s).</string>
@@ -2551,8 +2551,8 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="shared_string_added">Pievienots</string>
     <string name="marker_activated">Marķieris %s ir aktivizēts.</string>
     <string name="wikivoyage_travel_guide">Ceļojumu gids</string>
-    <string name="download_maps_travel">Ceļojumu gidi</string>
-    <string name="shared_string_travel_guides">Ceļojumu gidi</string>
+    <string name="download_maps_travel">Ceļojumu gids</string>
+    <string name="shared_string_travel_guides">Ceļojumu gids</string>
     <string name="shared_string_two">Divi</string>
     <string name="shared_string_one">Viens</string>
     <string name="quick_action_switch_day_night_descr">Spiežot darbības pogu, tiks pārslēgts dienas un nakts režīms</string>
@@ -2889,7 +2889,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="empty_state_markers_active_desc">Ilgs vai ātrs pieskāriens uz \"Vietas\", tad pieskarties marķiera izveides karodziņam.</string>
     <string name="empty_state_markers_groups">Importēt grupas</string>
     <string name="empty_state_markers_groups_desc">Importēt izlases grupas vai ceļapunktus kā marķierus.</string>
-    <string name="empty_state_markers_history_desc">Marķieri, kas atzīmēti kā izieti, parādīsies šeit.</string>
+    <string name="empty_state_markers_history_desc">Marķieri, kas atzīmēti kā izbraukti, parādīsies šeit.</string>
     <string name="appearance_on_the_map">Izskats uz kartes</string>
     <string name="shared_string_more_without_dots">Vēl</string>
     <string name="looking_for_tracks_with_waypoints">Meklē trekus ar ceļapunktiem</string>
@@ -3014,7 +3014,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="download_file">Lejupielādēt failu</string>
     <string name="start_editing_card_image_text">Brīvais pasaules ceļojumu gids, ko ikviens var papildināt.</string>
     <string name="welcome_to_open_beta_description">Ceļojumu gidi dotajā brīdī ir bāzēti uz Vikiceļojumiem. Baudiet visas iespējas beta testēšanas periodā par brīvu. Vēlāk ceļojumu gidi būs pieejami OsmAnd Unlimited abonomentiem un OsmAnd+ lietotājiem.</string>
-    <string name="start_editing_card_description">Jūs varat papildināt jebkuru Vikiceļojuma rakstu. Mēs ļoti iesakām dalīties ar savu pieredzi, zināšanām un spējām rakstu veidošanā</string>
+    <string name="start_editing_card_description">Jūs varat papildināt jebkuru Vikiceļojuma rakstu. Mēs ļoti iesakām dalīties ar savu pieredzi, zināšanām un spējām rakstu veidošanā.</string>
     <string name="start_editing">Sākt rakstīt</string>
     <string name="get_unlimited_access">Saņemiet neierobežotu piekļuvi</string>
     <string name="welcome_to_open_beta">Sveicināti atvērtajā beta testēšanā</string>
@@ -3059,7 +3059,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="unirs_render_descr">Uzlabots kontrasts kājāmgājēju un velosipēdu celiņiem. Izmanto vecākas Mapnik krāsas.</string>
     <string name="shared_string_gpx_file">GPX fails</string>
     <string name="shared_string_gpx_waypoints">Treku ceļapunkti</string>
-    <string name="wikivoyage_travel_guide_descr">Interesantāko vietu gidi uz planētas, OsmAnd lietotnē, bez pieslēguma internetam.</string>
+    <string name="wikivoyage_travel_guide_descr">Interesantāko vietu apraksti uz planētas OsmAnd lietotnē bez pieslēguma internetam.</string>
     <string name="increase_search_radius_to">Palielināt meklēšanas rādiusu līdz %1$s</string>
     <string name="test_voice_desrc">Spiediet uz pogas un klausieties atbilstošo balss uzvedni, lai noteiktu trūkstošās vai kļūdainās uzvednes.</string>
     <string name="rendering_value_black_name">Melns</string>
@@ -3275,4 +3275,32 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="edit_profiles_descr">OsmAnd pamata profilus nevar izdzēst, bet atspējot (uz iepriekšējā ekrāna) vai pārkārtot uz leju.</string>
     <string name="selected_profile">Izvēlētais profils</string>
     <string name="shared_string_nothing_selected">Nekas nav izvēlēts</string>
+    <string name="icon_group_emergency">Ārkārtas</string>
+    <string name="icon_group_travel">Ceļošana</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Nepieciešams pievienot vismaz divus punktus</string>
+    <string name="login_open_street_map">Ieiet OpenStreetMap</string>
+    <string name="login_open_street_map_org">Ieiet OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Pierakstīties ar OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Lai sūtītu labojumus vai jaunus datus, ir nepieciešams pierakstīties.
+\n
+\nJūs varat pierakstīties, lietojot drošo OAuth metodi vai ar savu lietotāja vārdu un paroli.</string>
+    <string name="use_login_password">Lietot pierakstīšanās datus</string>
+    <string name="login_account">Konts</string>
+    <string name="user_login">Lietotājs</string>
+    <string name="manage_subscription">Pārvaldīt abonomentu</string>
+    <string name="subscription_payment_issue_title">Problēma ar abonomenta maksājumu. Noklikšķiniet uz pogas, lai ietu uz Google Play abonomenta iestatījumiem un labotu maksājuma metodi.</string>
+    <string name="subscription_expired_title">OsmAnd Live abonoments ir beidzies</string>
+    <string name="subscription_paused_title">OsmAnd Live abonoments ir nopauzēts</string>
+    <string name="subscription_on_hold_title">OsmAnd Live abonoments ir apturēts</string>
+    <string name="markers_history">Marķieru vēsture</string>
+    <string name="send_files_to_openstreetmap">Sūtīt GPX failu uz OpenStreetMap</string>
+    <string name="enter_text_separated">Ievadiet tagus, atdalītus ar komatu.</string>
+    <string name="osm_edit_close_note">Aizvērt OSM Note</string>
+    <string name="osm_edit_comment_note">Komentēt OSM Note</string>
+    <string name="osm_login_descr">Jūs varat ielogoties lietojot drošo OAuth metodi vai savu lietotāja vārdu un paroli.</string>
+    <string name="shared_string_add_photo">Pievienot foto</string>
+    <string name="register_on_openplacereviews">Reģistrēties
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Fotogrāfijas tiek piegādātas no atvērtā koda projekta OpenPlaceReviews.org. Lai pievienotu savas fotogrāfijas, nepieciešams reģistrēties šajā interneta vietnē.</string>
+    <string name="register_opr_create_new_account">Izveidot jaunu kontu</string>
 </resources>

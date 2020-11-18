@@ -939,7 +939,7 @@ public class MapActivityActions implements DialogProvider {
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.plan_a_route, mapActivity)
 				.setId(DRAWER_MEASURE_DISTANCE_ID)
-				.setIcon(R.drawable.ic_action_ruler)
+				.setIcon(R.drawable.ic_action_plan_route)
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {

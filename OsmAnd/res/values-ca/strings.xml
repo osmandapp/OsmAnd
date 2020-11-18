@@ -2764,12 +2764,12 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="download_all">Baixa-ho tot</string>
     <string name="hide_full_description">Amaga la descripció completa</string>
     <string name="show_full_description">Mostra la descripció completa</string>
-    <string name="nautical_render_descr">"Per a navegació nàutica.  Compta amb boies, fars, rutes fluvials, rutes i referències marítimes, ports, serveis de navegació assistida i isòbates."</string>
+    <string name="nautical_render_descr">Per a navegació nàutica. Compta amb boies, fars, rutes fluvials, rutes i referències marítimes, ports, serveis de navegació assistida i isòbates.</string>
     <string name="ski_map_render_descr">Per a esquiar. Compta amb pistes, remuntadors, rutes d\'esquí de fons, etc. Atenúa objectes de mapes secundaris.</string>
-    <string name="light_rs_render_descr">"Estil senzill i contrastat per navegació amb el cotxe. En mode nocturn té cura de la vista.  Principals característiques: corbes de nivell, vies contrastades d\'estil ataronjat, menys objectes secundaris al mapa que puguin distreure."</string>
+    <string name="light_rs_render_descr">Estil senzill de conducció. Mode nocturn ergonòmic, corbes de nivell, vies contrastades d\'estil ataronjat, filtrat d\'objectes secundaris del mapa.</string>
     <string name="wiki_article_search_text">Buscant el corresponent article a la wiki</string>
     <string name="shared_string_bookmark">Adreça d\'interès</string>
-    <string name="off_road_render_descr">Dissenyat per un ús alternatiu en conducció. Pensat per posar imatges de satèl·lit com un mapa de fons. Principals característiques: gruix reduit de les carreteres principals, augment del gruix de pistes, camins, vies ciclistes i altres vies. Basat en l\'estil Topo.</string>
+    <string name="off_road_render_descr">Per conducció fora d\'asfalt és un tipus d\'estil topogràfic que posa imatges de satèl·lit de fons. Gruix petit de les carreteres principals, major gruix de les pistes, camins, vies ciclistes i altres vies.</string>
     <string name="topo_render_descr">Per senderisme, excursionisme i ciclisme de natura. Pensat per il·luminació d\'exteriors. Contrast de vies i objectes naturals, diferents tipus de rutes, configuració avançada de corbes de nivell, detalls addicionals. Ajustant la integritat de superfície es distingeix el tipus de superfície de la via. No hi ha mode nocturn.</string>
     <string name="mapnik_render_descr">Antic estil per defecte de \'Mapnik\'. Colors semblants als de \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Estil molt detallat per fer turisme. Inclou totes les opcions de configuració de l\'estil per defecte, afegint: Pantalles amb el màxim detall, en particular totes les carreteres, camins, i altres maneres de viatjar. Distinció visual clara entre tots els tipus diferents de via, semblant al de molts atles de viatge. Paleta de colors d\'alt contrast per utilitzar a l\'exterior, mode diürn i nocturn.</string>
@@ -3108,7 +3108,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="visited_screens">Pantalles visitades</string>
     <string name="show_compass_ruler">Mostra el regle de brúixola</string>
     <string name="hide_compass_ruler">Amaga el regle de brúixola</string>
-    <string name="select_base_profile_dialog_message">"Comenceu el vostre perfil personalitzat des d\'un perfil predeterminat de l\'aplicació,que defineixi la configuració bàsica com visibilitat predeterminada, extensions i unitats de velocitat i distància. Aquests són els perfils d\'aplicació predeterminats, junt amb exemples de personalització que es poden  anar ampliant:"</string>
+    <string name="select_base_profile_dialog_message">Comenceu el vostre perfil personalitzat des d\'un perfil predeterminat de l\'aplicació,que defineixi la configuració bàsica com visibilitat predeterminada, extensions i unitats de velocitat i distància. Aquests són els perfils d\'aplicació predeterminats, junt amb exemples de personalització que es poden anar ampliant:</string>
     <string name="base_profile_descr_boat">Vaixell, rem, vela</string>
     <string name="base_profile_descr_aircraft">Avió, vol planat</string>
     <string name="routing_profile_geocoding">Geocodificació</string>
@@ -3442,7 +3442,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="route_recalculation">Recàlcul de la ruta</string>
     <string name="accessibility_announce">Anunci</string>
     <string name="login_and_pass">Nom d\'usuari i contrasenya</string>
-    <string name="plugin_global_prefs_info">Aquest paràmetre de connectors és global i afecta tots els perfils.</string>
+    <string name="plugin_global_prefs_info">Aquest paràmetre de connectors és global i afecta tots els perfils</string>
     <string name="osm_editing">Edició OSM</string>
     <string name="osm_edits_view_descr">Consulteu les vostres edicions o errors OSM encara no pujats a %1$s. Els punts enviats ja no es veuran més.</string>
     <string name="select_nav_icon_descr">La icona es mostra mentre navegueu o us mogueu.</string>
@@ -3528,7 +3528,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="replace_all">Reemplaça-ho tot</string>
     <string name="keep_both">Manté tots dos</string>
     <string name="keep_both_desc">Els elements importats s\'afegiran amb prefix</string>
-    <string name="import_duplicates_description">Els noms dels elements importats ja s\'utilitzen a OsmAnd.
+    <string name="import_duplicates_description">Hi ha elements importats amb els mateixos noms que altres d\'OsmAnd.
 \n
 \nSeleccioneu una opció.</string>
     <string name="import_duplicates_title">Alguns elements ja existeixen</string>

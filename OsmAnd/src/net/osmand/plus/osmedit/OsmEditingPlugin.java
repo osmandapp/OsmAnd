@@ -224,7 +224,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
 							EditPoiDialogFragment.TAG);
 				} else if (resId == R.string.context_menu_item_open_note) {
-					openOsmNote(mapActivity, latitude, longitude);
+					openOsmNote(mapActivity, latitude, longitude, "", false);
 				} else if (resId == R.string.context_menu_item_modify_note) {
 					modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
@@ -293,13 +293,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setListener(listener)
 					.createItem());
 		}
-	}
-
-	public void openOsmNote(MapActivity mapActivity, double latitude, double longitude) {
-		if (osmBugsLayer == null) {
-            registerLayers(mapActivity);
-        }
-		osmBugsLayer.openBug(latitude, longitude, "");
 	}
 
 	public void openOsmNote(MapActivity mapActivity, double latitude, double longitude, String message, boolean autofill) {
@@ -468,10 +461,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		String pwd = settings.USER_PASSWORD.get();
 		String authToken = settings.USER_ACCESS_TOKEN.get();
 		if ((Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)) && Algorithms.isEmpty(authToken)) {
-			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment.getTargetFragment());
+			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment);
 			return false;
 		} else {
-			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment.getTargetFragment(), info);
+			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment, info);
 			return true;
 		}
 	}

@@ -153,7 +153,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			if (mapActivity != null) {
 				ApplicationMode mode = getSelectedAppMode();
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				ExportProfileBottomSheet.showInstance(fragmentManager, this, mode, true);
+				ExportSettingsFragment.showInstance(fragmentManager, mode, true);
 			}
 		}
 		return super.onPreferenceClick(preference);

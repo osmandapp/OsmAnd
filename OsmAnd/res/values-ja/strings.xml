@@ -877,7 +877,7 @@ POIの更新は利用できません</string>
     <string name="use_fluorescent_overlays">蛍光色の重ね表示</string>
     <string name="use_fluorescent_overlays_descr">経路とルートを表示する際に、蛍光色を使用します</string>
     <string name="offline_edition">オフライン編集</string>
-    <string name="offline_edition_descr">常にオフライン編集を使用します</string>
+    <string name="offline_edition_descr">オフライン編集が有効になっている場合、変更は最初にローカルに保存され、リクエストに応じてアップロードされます。有効になっていない場合、変更は即アップロードされます。</string>
     <string name="update_poi_does_not_change_indexes">アプリケーション内部POIの変更はローカルファイルに保存され、ダウンロードしたマップファイルには影響しません。</string>
     <string name="local_openstreetmap_uploading">アップロード中…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/メモはアップロードされました</string>
@@ -1201,7 +1201,8 @@ POIの更新は利用できません</string>
     <string name="gpx_selection_point">地点 %1$s</string>
     <string name="gpx_selection_route_points">%1$s ↵\nルート地点 %2$s</string>
     <string name="gpx_selection_points">%1$s ↵\n地点</string>
-    <string name="gpx_selection_track">%1$s ↵\n経路 %2$s</string>
+    <string name="gpx_selection_track">%1$s↵
+\n経路 %2$s</string>
     <string name="gpx_file_is_empty">GPSトラックは空です</string>
     <string name="shared_string_tracks">使用した経路</string>
     <string name="shared_string_my_favorites">お気に入り</string>
@@ -3716,7 +3717,7 @@ POIの更新は利用できません</string>
     <string name="turn_screen_on_navigation_instructions">ナビゲーション指示</string>
     <string name="turn_screen_on_power_button_descr">端末の電源ボタンを押すと、画面がオンになり、ロック画面上にOsmAndが表示されます。</string>
     <string name="turn_screen_on_power_button">電源ボタン</string>
-    <string name="use_volume_buttons_as_zoom_descr">端末の音量ボタンでマップのズームレベルを変更できるようにします。</string>
+    <string name="use_volume_buttons_as_zoom_descr">端末の音量ボタンで、マップのズームレベルを変更します。</string>
     <string name="use_volume_buttons_as_zoom">音量ボタンでズーム</string>
     <string name="track_show_start_finish_icons">出発地点と目的地アイコンを表示</string>
     <string name="select_track_width">幅の選択</string>
@@ -3745,13 +3746,13 @@ POIの更新は利用できません</string>
     <string name="navigation_profile">ナビゲーションプロファイル</string>
     <string name="route_between_points_add_track_desc">新しいセグメントを追加するための経路ファイルを選択します。</string>
     <string name="street_level_imagery">ストリート画像</string>
-    <string name="plan_route_exit_dialog_descr">保存せずにルート計画を終了した場合すべての変更が失われます。よろしいですか？</string>
+    <string name="plan_route_exit_dialog_descr">このままルートの計画を終了した場合、すべての変更が失われますがよろしいですか？</string>
     <string name="app_mode_enduro_motorcycle">エンデューロバイク</string>
     <string name="app_mode_motor_scooter">電動スクーター</string>
     <string name="app_mode_wheelchair">車椅子</string>
     <string name="app_mode_go_cart">ゴーカート</string>
     <string name="osm_edit_closed_note">OSMのメモを閉じました</string>
-    <string name="set_working_days_to_continue">続けるには営業日を設定する必要があります</string>
+    <string name="set_working_days_to_continue">続行するには営業日を設定する必要があります</string>
     <string name="route_between_points">地点間のルート</string>
     <string name="plan_a_route">ルートを計画</string>
     <string name="add_to_a_track">経路に追加</string>
@@ -3788,7 +3789,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_delete_all_q">全て削除しますか？</string>
     <string name="delete_all_actions_message_q">%d個のクイックアクションを完全に削除してもよろしいですか？</string>
     <string name="uninstall_speed_cameras">スピードカメラデータの削除</string>
-    <string name="shared_string_legal">法的</string>
+    <string name="shared_string_legal">法的事項</string>
     <string name="speed_camera_pois">スピードカメラPOI</string>
     <string name="speed_cameras_legal_descr">一部の国や地域では、スピードカメラ警告機能の使用が法律で禁止されています。
 \n
@@ -3914,13 +3915,13 @@ POIの更新は利用できません</string>
     <string name="complex_routing_descr">カーナビゲーション向けの2段階ルート計算です。</string>
     <string name="use_two_phase_routing">2段階 A*ルーティングアルゴリズムを使用</string>
     <string name="file_already_imported">ファイルはすでにOsmAndにインポートされています</string>
-    <string name="icon_group_amenity">公共施設</string>
+    <string name="icon_group_amenity">店舗・施設</string>
     <string name="shared_string_local_maps">ローカルマップ</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="icon_group_special">特殊</string>
-    <string name="icon_group_transport">公共交通機関</string>
-    <string name="icon_group_service">サービス</string>
-    <string name="icon_group_symbols">シンボル・道標</string>
+    <string name="icon_group_special">特別</string>
+    <string name="icon_group_transport">交通</string>
+    <string name="icon_group_service">設備・技術</string>
+    <string name="icon_group_symbols">記号</string>
     <string name="icon_group_sport">スポーツ</string>
     <string name="icon_group_emergency">緊急</string>
     <string name="icon_group_travel">旅行</string>
@@ -3946,4 +3947,6 @@ POIの更新は利用できません</string>
     <string name="gpx_upload_private_visibility_descr">プライベート状態は、経路がパブリックリストに表示されないことを示唆しています。経路ポイントは、タイムスタンプなしでパブリックGPS APIを介して引き続き利用できますが、時系列で並べられることはありません。</string>
     <string name="gpx_upload_trackable_visibility_descr">追跡可能状態にある場合は経路が公開リストに表示されないことを示唆していますが、経路ポイントは自体はタイムスタンプ付きの公開GPSAPIを介して引き続き利用できます。他のユーザーからはあなたに直接関連付けることはできず、自身の処理済み経路ポイントのみをダウンロードできます。</string>
     <string name="login_account">アカウント</string>
+    <string name="message_graph_will_be_available_after_recalculation">ルートが再計算されるのを待ちます。
+\nグラフは再計算後に利用できるようになります。</string>
 </resources>

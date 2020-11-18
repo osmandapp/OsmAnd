@@ -212,7 +212,7 @@
     <string name="poi_observatory_designation">Määramine</string>
     <string name="poi_telescope_type">Liik</string>
     <string name="poi_animal_training_type">Liik</string>
-    <string name="poi_embassy_type">Liik</string>
+    <string name="poi_diplomatic_filter">Liik</string>
     <string name="poi_city_capital">Pealinn</string>
     <string name="poi_pharmacy_dispensing">Väljastamine</string>
     <string name="poi_healthcare_alternative_types">Eriala</string>

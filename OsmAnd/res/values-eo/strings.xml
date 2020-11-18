@@ -1280,8 +1280,8 @@
     <string name="rendering_out_of_memory">Mankas memoro por montri elektitan regionon</string>
     <string name="use_fluorescent_overlays">Rebrilaj surtavoloj</string>
     <string name="use_fluorescent_overlays_descr">Uzi rebrilajn kolorojn por montri kursojn kaj vojojn.</string>
-    <string name="offline_edition">Eksterreta redaktado</string>
-    <string name="offline_edition_descr">Ĉiam uzi eksterretan redaktadon.</string>
+    <string name="offline_edition">Malkonekta redaktado</string>
+    <string name="offline_edition_descr">Se malkonekta redaktado estas ŝaltita, ŝanĝoj estos unua konservitaj loke kaj alŝutitaj al OSM je peto; alie ŝanĝoj estos alŝutitaj tuj.</string>
     <string name="update_poi_does_not_change_indexes">Redakto de interesejo en aplikaĵo ne kaŭzas ŝanĝon en elŝutitaj map-dosieroj, ŝanĝoj estas konservitaj en dosieron en via aparato.</string>
     <string name="local_openstreetmap_uploading">Alŝutado…</string>
     <string name="local_openstreetmap_were_uploaded">Alŝutis {0} interesejojn/notojn</string>
@@ -3426,7 +3426,7 @@
     <string name="login_and_pass">Uzantnomo kaj pasvorto</string>
     <string name="plugin_global_prefs_info">Tiuj ĉi agordoj pri kromprogramoj aplikos al ĉiuj profiloj</string>
     <string name="osm_editing">OSM‑redaktilo</string>
-    <string name="osm_edits_view_descr">Vi povas vidigi ĉiujn viajn nepublikigitajn redaktojn aŭ rimarkojn ĉe %1$s. Punktoj alŝutitaj al OSM ne estos videblaj en OsmAnd.</string>
+    <string name="osm_edits_view_descr">Vi povas vidigi ĉiujn viajn jam nepublikigitajn redaktojn aŭ rimarkojn ĉe %1$s. Punktoj alŝutitaj al OSM ne estos videblaj en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Emblemo montrata dum navigi aŭ moviĝi.</string>
     <string name="select_map_icon_descr">Montri emblemon dum restado.</string>
@@ -3968,4 +3968,13 @@
     <string name="gpx_upload_private_visibility_descr">“Privata” signifas, ke la GPX‑spuro montriĝos en neniu publika listo, sed ĝiaj punktoj plue estos akireblaj per la publika API GPS sen tempindikoj, sed tiuj punktoj estos ordigitaj laŭtempe.</string>
     <string name="gpx_upload_identifiable_visibility_descr">“Identigebla” signifas, ke la GPX‑spuro estos publike videbla en “miaj spuroj” kaj en la publika listo de spuroj (GPS‑spuroj), aliaj uzantoj povos elŝuti vian nepritraktitan spuron kaj ligi ĝin al via uzantnomo. Datumoj liveritaj per la API de spuroj ligos al originala paĝo de via spuro. Tempindikoj de la spuro estos akireblaj per la publika API GPS.</string>
     <string name="gpx_upload_trackable_visibility_descr">“Spurebla” signifas, ke la GPX‑spuro ne estos montrata en publikaj listoj, sed punktoj el ĝi plue estos akireblaj per la publika API GPS kune kun tempindikoj. Aliaj uzantoj povos elŝuti nur pritraktitajn punktojn el via spuro, kiuj ne povos esti senpere ligitaj al vi.</string>
+    <string name="osm_edit_close_note">Fermi OSM-rimarkon</string>
+    <string name="osm_edit_comment_note">Komenti OSM-rimarkon</string>
+    <string name="osm_login_descr">Vi povas ensaluti per l sekura metodo OAuth aŭ per uzi uzantnomon kaj pasvorton.</string>
+    <string name="shared_string_add_photo">Aldoni foton</string>
+    <string name="register_on_openplacereviews">Registri ĉe
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Fotoj estas liverataj de la malferm‑datuma projekto OpenPlaceReviews.org. Por alŝuti viajn fotojn, vi devas registri ĉe la retejo.</string>
+    <string name="register_opr_create_new_account">Krei novan konton</string>
+    <string name="register_opr_have_account">Mi jam havas konton</string>
 </resources>

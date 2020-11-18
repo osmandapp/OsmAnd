@@ -270,7 +270,7 @@
     <string name="use_english_names">استخدام الأسماء الانجليزية في الخرائط</string>
     <string name="app_settings">إعدادات التطبيق</string>
     <string name="save_current_track">حفظ المسار الحالي</string>
-    <string name="shared_string_settings">الإعدادات</string>
+    <string name="shared_string_settings">إعدادات</string>
     <string name="map_magnifier">حجم الخريطة</string>
     <string name="base_world_map">خريطة العالم العامة</string>
     <string name="local_index_tile_data_expire">الانتهاء (دقائق): %1$s</string>
@@ -491,7 +491,7 @@
     <string name="shared_string_accessibility">إمكانية الوصول</string>
     <string name="rendering_out_of_memory">ذاكرة التشغيل غير كافية لعرض المنطقة المختارة</string>
     <string name="offline_edition">التعديل دون اتصال</string>
-    <string name="offline_edition_descr">استخدام التعديل دون اتصال دائماً.</string>
+    <string name="offline_edition_descr">إذا تم تمكين التحرير دون اتصال ، فسيتم حفظ التغييرات محليًا أولاً ثم رفعها حسب الطلب ، أو سيتم رفع التغييرات على الفور.</string>
     <string name="av_camera_focus_infinity">التركيز بشكل غير محدود</string>
     <string name="av_camera_focus_macro">وضع التركيز الكلي (عن قرب)</string>
     <string name="av_camera_focus_auto">تركيز تلقائي</string>
@@ -951,7 +951,7 @@
     <string name="shared_string_select_on_map">تحديد على الخريطة</string>
     <string name="shared_string_select_all">تحديد الكل</string>
     <string name="shared_string_deselect">قم بإلغاء تحديد</string>
-    <string name="shared_string_deselect_all">قم بإلغاء تحديد الكل</string>
+    <string name="shared_string_deselect_all">إلغاء تحديد الكل</string>
     <string name="shared_string_clear_all">مسح الكل</string>
     <string name="shared_string_share">مشاركة</string>
     <string name="shared_string_import">استيراد</string>
@@ -1469,7 +1469,7 @@
     <string name="rendering_attr_currentTrackColor_description">لون جي بي إكس</string>
     <string name="city_type_district">منطقة</string>
     <string name="city_type_neighbourhood">حي</string>
-    <string name="file_name_containes_illegal_char">يحتوي اسم الملف على حرف غير قانوني</string>
+    <string name="file_name_containes_illegal_char">حرف غير قانوني في اسم الملف</string>
     <string name="reports_for">تقرير عن</string>
     <string name="world_maps">خرائط العالم</string>
     <string name="move_marker_bottom_sheet_title">حرك الخريطة لتغيير مكان التوجيه المباشر</string>
@@ -2087,7 +2087,7 @@
     <string name="rendering_value_medium_w_name">وسط</string>
     <string name="rendering_value_low_name">منخفض</string>
     <string name="rendering_attr_hideWaterPolygons_name">إخفاء المياه</string>
-    <string name="configure_screen_quick_action">زر الاختصار السريع</string>
+    <string name="configure_screen_quick_action">إجراءات سريعة</string>
     <string name="quick_action_item_action">إجراء %d</string>
     <string name="quick_action_item_screen">شاشة %d</string>
     <string name="quick_action_add_marker">إضافة توجيه مباشر للخريطة</string>
@@ -2142,7 +2142,7 @@
     <string name="quick_action_map_styles">أنماط الخريطة</string>
     <string name="quick_action_map_overlay">الخريطة العلوية</string>
     <string name="quick_action_map_source">مصدر الخريطة</string>
-    <string name="quick_action_map_source_title">مصدر الخريطة</string>
+    <string name="quick_action_map_source_title">مصادر الخريطة</string>
     <string name="quick_action_map_source_action">إضافة مصدر خريطة</string>
     <string name="quick_action_map_source_switch">مصدر الخريطة \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">تغيير موقع الزر</string>
@@ -2454,7 +2454,7 @@
     <string name="measurement_tool_action_bar">تصفح الخريطة وإضافة نقاط</string>
     <string name="measurement_tool">قياس المسافة</string>
     <string name="none_point_error">الرجاء إضافة نقطة واحدة على الأقل.</string>
-    <string name="enter_gpx_name">اسم المسار :</string>
+    <string name="enter_gpx_name">اسم مسار الـGPX :</string>
     <string name="show_on_map_after_saving">عرض على الخريطة بعد الحفظ</string>
     <string name="add_waypoint">إضافة نقطة</string>
     <string name="save_gpx_waypoint">حفظ نقطة GPX</string>
@@ -2623,7 +2623,7 @@
     <string name="map_imported_successfully">تمت عملية استيراد الخريطة</string>
     <string name="make_as_start_point">وضعها نقطة البداية</string>
     <string name="show_closed_notes">إظهار الملاحظات المغلقة</string>
-    <string name="switch_osm_notes_visibility_desc">عرض ملاحظات OSM على الخريطة.</string>
+    <string name="switch_osm_notes_visibility_desc">عرض أو اخفاء ملاحظات OSM على الخريطة.</string>
     <string name="shared_string_gpx_file">ملف GPX</string>
     <string name="osc_file">ملف OSC</string>
     <string name="choose_file_type">قم باختيار نسق الملف</string>
@@ -3087,7 +3087,7 @@
     <string name="swap_two_places">تبديل %1$s و %2$s</string>
     <string name="route_start_point">نقطة البداية</string>
     <string name="track_saved">تم حفظ المسار</string>
-    <string name="empty_filename">اسم الملف فارغ</string>
+    <string name="empty_filename">اسم ملف فارغ</string>
     <string name="shared_string_revert">استرجاع</string>
     <string name="clear_confirmation_msg">مسح %1$s\?</string>
     <string name="turn_on_profile_desc">يرجى تشغيل وضع واحد على الأقل لاستخدام هذا الإعداد.</string>
@@ -3322,9 +3322,9 @@
     <string name="application_profiles_descr">حدد الأوضاع لتكون مرئية في التطبيق.</string>
     <string name="application_profiles">أوضاع التطبيق</string>
     <string name="quick_action_need_to_add_item_to_list">أضف عنصراً واحداً على الأقل إلى القائمة في إعدادات \"الاختصار السريع\"</string>
-    <string name="routing_attr_piste_type_downhill_name">جبال الألب/التزلج علي المنحدرات</string>
+    <string name="routing_attr_piste_type_downhill_name">جبال الألب والتزلج علي المنحدرات</string>
     <string name="routing_attr_piste_type_downhill_description">التزلج على جبال الألب أو الانحدار.</string>
-    <string name="routing_attr_piste_type_nordic_name">التزلج عبر البلاد / الشمال</string>
+    <string name="routing_attr_piste_type_nordic_name">التزلج عبر الريف والشمال</string>
     <string name="routing_attr_piste_type_nordic_description">مسارات للتزلج الشمالي أو الريفي علي الثلج.</string>
     <string name="routing_attr_piste_type_skitour_name">جولة تزلج</string>
     <string name="routing_attr_piste_type_skitour_description">طرق لجولات التزلج.</string>
@@ -3407,7 +3407,7 @@
     <string name="route_recalculation">إعادة حساب الطريق</string>
     <string name="accessibility_announce">أعلن</string>
     <string name="login_and_pass">اسم المستخدم و كلمة السر</string>
-    <string name="plugin_global_prefs_info">إعدادات المكون الإضافي هذه شاملة، وتنطبق على جميع الأوضاع.</string>
+    <string name="plugin_global_prefs_info">إعدادات plugin هذه شاملة، وتنطبق على جميع الأوضاع</string>
     <string name="osm_editing">تعديل OpenStreetMap</string>
     <string name="app_mode_osm">Osm</string>
     <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
@@ -3419,7 +3419,7 @@
     <string name="monitoring_min_speed_descr_side_effect">اعراض جانبية: سيفقد المسار الخاص بك جميع الأقسام التي لم يتحقق فيها معيار الحد الأدنى للسرعة (على سبيل المثال ، حيث تدفع دراجتك أعلى تل شديد الانحدار). أيضا ، لن تكون هناك معلومات حول فترات الراحة ، مثل الاستراحات. هذا له تأثيرات على أي تحليل أو مرحلة ما بعد المعالجة ، مثل عند محاولة تحديد المدة الإجمالية لرحلتك ، أو وقت الحركة ، أو متوسط سرعتك.</string>
     <string name="tracks_view_descr">المسارات المسجلة الخاصة بك هي في %1$s، أو مجلد أوسماند.</string>
     <string name="multimedia_notes_view_descr">ملاحظات OSM موجودة في%1$s.</string>
-    <string name="osm_edits_view_descr">عرض تعديلاتك أو أخطاء OSM التي لم يتم تحميلها بعد في%1$s. لن يتم عرض النقاط التي تم تحميلها بعد الآن.</string>
+    <string name="osm_edits_view_descr">يمكنك عرض جميع التعديلات التي لم يتم رفعها بعد أو أخطاء OSM في %1$s. النقاط التي تم رفعها لا تظهر في OsmAnd.</string>
     <string name="monitoring_min_speed_descr">مرشح قطع سرعة منخفضة لعدم تسجيل نقاط أقل من سرعة معينة. وهذا قد يجعل المسارات المسجلة تبدو أكثر سلاسة عند عرضها على الخريطة.</string>
     <string name="monitoring_min_speed_descr_recommendation">التوصية: حاول استخدام كشف الحركة عبر مرشح الحد الأدنى للإزاحة للتسجيل (B) أولاً ، فقد ينتج عنه نتائج أفضل ، ويستهلك بيانات أقل. إذا استمرت المسارات الخاصة بك مزعجة عند السرعات المنخفضة ، فجرب القيم غير الصفرية هنا. يرجى ملاحظة أن بعض القياسات قد لا تبلغ عن أي قيمة سرعة على الإطلاق (بعض الطرق المستندة إلى الشبكة) ، وفي هذه الحالة لن تسجل أي شيء.</string>
     <string name="monitoring_min_speed_descr_remark">ملاحظة: سرعة &gt; 0 الاختيار: معظم شرائح GPS تبلغ عن قيمة السرعة فقط إذا كانت الخوارزمية تحدد الحركة أوالسكون. وبالتالي باستخدام إعدادات&gt; 0 في هذا المرشح يتم كشف عن الحركة من شرائح GPS. ولكن حتى لو لم تتم تصفيتها هنا في وقت التسجيل ، فإننا لا نزال نستخدم هذه الميزة في تحليل GPX لتحديد المسافة المصححة ، أي أن القيمة المعروضة في هذا الحقل هي المسافة المسجلة أثناء الحركة.</string>
@@ -3512,20 +3512,20 @@
     <string name="recalc_angle_dialog_descr">سيتم عرض جزء مستقيم إضافي بين موقعي والمسار المحسوب حتى يتم إعادة حساب المسار</string>
     <string name="recalc_angle_dialog_title">الحد الأدنى للزاوية بين موقعي ومساري</string>
     <string name="shared_string_preparing">تحضير</string>
-    <string name="shared_string_poi_types">أنواع النقاط</string>
+    <string name="shared_string_poi_types">أنواع نقاط الاهتمام</string>
     <string name="shared_string_nothing_selected">لا شيء محدد</string>
-    <string name="shared_string_quick_actions">إجراءات سريعة</string>
-    <string name="shared_string_profiles">الأوضاع</string>
-    <string name="replace_all_desc">سيتم استبدال العناصر الحالية بعناصر من الملف</string>
-    <string name="replace_all">استبدال الكل</string>
+    <string name="shared_string_quick_actions">زر الإجراء السريع</string>
+    <string name="shared_string_profiles">ملفات التعريف</string>
+    <string name="replace_all_desc">سيتم استبدال العناصر الحالية بالعناصر التي في الملف</string>
+    <string name="replace_all">استبدل الكل</string>
     <string name="get_discount_title">احصل على %1$d %2$s عند %3$s مقابل.</string>
     <string name="get_discount_first_part">%1$s لأول %2$s</string>
     <string name="get_discount_first_few_part">%1$s لأول %2$s</string>
     <string name="price_and_discount">%1$s • وفر %2$s</string>
     <string name="listed_exist">المدرج %1$s, موجودة بالفعل في أوسماند.</string>
     <string name="keep_both">احتفظ بكليهما</string>
-    <string name="keep_both_desc">سيتم إضافة العناصر المستوردة مع البادئة</string>
-    <string name="import_duplicates_description">أوسماند لديه بالفعل عناصر بنفس الأسماء مثل تلك المستوردة.
+    <string name="keep_both_desc">سيتم إضافة العناصر المستوردة مع زيادة قبل اسمها</string>
+    <string name="import_duplicates_description">OsmAnd يحتوي بالفعل على عناصر بنفس الأسماء مثل التي استوردتها.
 \n
 \nحدد إجراء.</string>
     <string name="import_duplicates_title">بعض العناصر موجودة بالفعل</string>
@@ -3543,7 +3543,7 @@
 \n
 \nقد يستغرق الأمر بعض الوقت.</string>
     <string name="items_added">العناصر المضافة</string>
-    <string name="shared_string_import_complete">اكتمل الاستيراد</string>
+    <string name="shared_string_import_complete">تم الاستيراد</string>
     <string name="import_complete_description">يتم استيراد جميع البيانات من %1$s، يمكنك استخدام الأزرار أدناه لفتح الجزء المطلوب من التطبيق لإدارته.</string>
     <string name="recalculate_route_distance_promo">سيتم إعادة حساب المسار إذا كانت المسافة من المسار إلى الموقع الحالي أكثر من القيمة المحددة.</string>
     <string name="select_distance_route_will_recalc">حدد المسافة التي سيتم بعدها إعادة حساب المسار.</string>
@@ -3558,7 +3558,7 @@
     <string name="quick_action_terrain_descr">زر لإظهار طبقة التضاريس أو إخفائها على الخريطة.</string>
     <string name="quick_action_terrain_show">إظهار التضاريس</string>
     <string name="quick_action_terrain_hide">إخفاء التضاريس</string>
-    <string name="quick_action_show_hide_terrain">إظهار/إخفاء التضاريس</string>
+    <string name="quick_action_show_hide_terrain">إظهارأو إخفاء التضاريس</string>
     <string name="download_slope_maps">المنحدرات</string>
     <string name="shared_string_hillshade">التضاريس</string>
     <string name="terrain_empty_state_text">تمكين لعرض المنحدرات أو خريطة التضاريس. يمكنك قراءة المزيد عن أنواع الخرائط هذه على موقعنا.</string>
@@ -3681,11 +3681,11 @@
     <string name="additional_actions_descr">يمكنك الوصول إلى هذه الإجراءات عن طريق النقر على زر \"%1$s\".</string>
     <string name="quick_action_transport_hide">إخفاء وسائل النقل العام</string>
     <string name="quick_action_transport_show">إظهار وسائل النقل العام</string>
-    <string name="quick_action_show_hide_transport">إظهار/إخفاء وسائل النقل العام</string>
+    <string name="quick_action_show_hide_transport">إظهارأو إخفاء وسائل النقل العام</string>
     <string name="quick_action_transport_descr">زر لإظهار أو إخفاء وسائل النقل العام على الخريطة.</string>
-    <string name="create_edit_poi">إنشاء /تحرير موضع مكان</string>
+    <string name="create_edit_poi">إنشاء أو تعديل نقطة الأهتمام POI</string>
     <string name="parking_positions">مكان الموقف</string>
-    <string name="add_edit_favorite">إضافة / تحرير المفضلة</string>
+    <string name="add_edit_favorite">إضافة أو تعديل المفضلة</string>
     <string name="reset_deafult_order">استعادة ترتيب العناصر الافتراضية</string>
     <string name="back_to_editing">عودة إلى التحرير</string>
     <string name="quick_action_switch_profile_descr">سيتم تبديل زر الإجراء التسجيل بين التشكيلات الجانبية المحددة.</string>
@@ -3856,7 +3856,7 @@
     <string name="plan_route_change_route_type_after">تغيير نوع المسار بعد</string>
     <string name="number_of_gpx_files_selected_pattern">%s ملفات مسارات محددة</string>
     <string name="disable_recording_once_app_killed_descrp">سيتم إيقاف تسجيل المسار مؤقتًا عند غلق التطبيق (عبر نافذة التطبيقات المستخدمة مؤخرا). (إشارة تشغيل التطبيق في الخلفية ستختفي من الشريط العلوي.)</string>
-    <string name="save_global_track_interval_descr">حدد الفاصل الزمني للادخال الخاص بالتسجيل العام للمسار (مفعل من خلال ودجت تسجيل الرحلة على الخريطة).</string>
+    <string name="save_global_track_interval_descr">حدد الفاصل الزمني للادخال الخاص بالتسجيل العام للمسار (مفعل من خلال ودجت \"تسجيل الرحلة\" على الخريطة).</string>
     <string name="gpx_monitoring_stop">إيقاف تسجيل الرحلة مؤقتًا</string>
     <string name="gpx_monitoring_start">استئناف تسجيل الرحلة</string>
     <string name="system_default_theme">النظام الافتراضي</string>
@@ -3891,7 +3891,7 @@
     <string name="sort_last_modified">آخر تعديل</string>
     <string name="sort_name_descending">الاسم: أ – ي</string>
     <string name="sort_name_ascending">الاسم: أ – ي</string>
-    <string name="start_finish_icons">رموز البدء/الانتهاء</string>
+    <string name="start_finish_icons">أيقونات البدء والانتهاء</string>
     <string name="contour_lines_thanks">شكرا لشرائك \"خطوط الكنتور\"</string>
     <string name="osm_live_payment_desc_hw">رسوم الاشتراك ستفرض كل شهر. يمكنك إلغاء اشتراكك متى أردت عبر Google play.</string>
     <string name="osm_live_payment_subscription_management_hw">سيتم تحصيل المبلغ على حساب AppGallery الخاص بك عند تأكيد الشراء.
@@ -3942,17 +3942,30 @@
     <string name="subscription_on_hold_title">اشتراك OsmAnd Live معلق</string>
     <string name="login_open_street_map">تسجيل الدخول إلى خريطة الشارع المفتوح</string>
     <string name="login_open_street_map_org">تسجيل الدخول إلى OpenStreetMap.org</string>
-    <string name="sing_in_with_open_street_map">تسجيل الخروج</string>
     <string name="open_street_map_login_mode">تحتاج إلى تسجيل الدخول لرفع التغييرات الجديدة أو المعدلة.
 \n
 \nيمكنك تسجيل الدخول باستخدام طريقة التفويض الآمنة أو استخدام تسجيل الدخول وكلمة المرور.</string>
     <string name="use_login_password">استخدام تسجيل الدخول وكلمة المرور</string>
     <string name="login_account">الحساب</string>
     <string name="user_login">تسجيل الدخول</string>
-    <string name="gpx_upload_trackable_visibility_descr">إمكانية التتبع تعني أن التتبع لن يظهر في أي قوائم عامة ولكن ستظل نقاط التتبع الصادرة عنه متاحة من خلال واجهة برمجة تطبيقات GPS API العامة مع طوابع زمنية. سيتمكن المستخدمون الآخرون فقط من تنزيل نقاط التتبع المعالجة من التتبع الخاص بك والتي لا يمكن ربطها بك مباشرةً.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"إمكانية التتبع\" تعني أن التتبع لا يظهر في أي قوائم عامة ولكن نقاط التتبع المعالجة مع طوابع زمنية صادرة عنها(التي لا يمكن أن تكون مرتبطة بك مباشرة) ستظهر خلال التنزيلات من واجهة برمجة التطبيقات GPS API العامة.</string>
     <string name="markers_history">سجل تاريخ العلامات</string>
     <string name="send_files_to_openstreetmap">أرسل ملف GPX إلى OpenStreetMap</string>
     <string name="enter_text_separated">أدخل العلامات مفصولة بفاصلة.</string>
     <string name="gpx_upload_private_visibility_descr">\"خاص\"يعني أن التتبع لن يظهر في أي قوائم عامة ، ولكن نقاط التتبع الصادرة عنه ستظل متاحة من خلال واجهة برمجة تطبيقات GPS API العامة بدون طوابع زمنية ولكن لن يتم ترتيبها ترتيبًا زمنيًا.</string>
     <string name="sign_in_with_open_street_map">قم بتسجيل الدخول باستخدام OpenStreetMap</string>
+    <string name="gpx_upload_public_visibility_descr">عام يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة. البيانات المقدمة عبر API لا تشير إلى صفحة التتبع الخاصة بك. الطوابع الزمنية لنقاط التتبع غير متاحة من خلال واجهة برمجة تطبيقات GPS API العامة، والنقاط غير مرتبة ترتيبًا زمنيًا. ومع ذلك، لا يزال المستخدمون الآخرون قادرين على تنزيل التتبع الأولي من قائمة التتبع العامة وأي طوابع زمنية مضمنة فيه.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">متعرف عليه يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة، أي سيتمكن المستخدمون الآخرون من تنزيل التتبع الأولي وربطه باسم المستخدم الخاص بك. ستشير البيانات التي يتم تقديمها عبر API نقاط التتبع إلى صفحة التتبع الأصلية الخاصة بك. الطوابع الزمنية لنقاط التتبع متاحة من خلال واجهة برمجة تطبيقات GPS API العامة.</string>
+    <string name="osm_edit_close_note">أغلاق ملاحظة OSM</string>
+    <string name="osm_edit_comment_note">تعليق ملاحظة OSM</string>
+    <string name="osm_login_descr">يمكنك تسجيل الدخول باستخدام طريقة OAuth الآمنة أو استخدام تسجيل الدخول وكلمة المرور الخاصة بك.</string>
+    <string name="shared_string_add_photo">إضافة صورة</string>
+    <string name="register_on_openplacereviews">سجل في
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">يتم توفير الصور من خلال مشروع البيانات المفتوحة OpenPlaceReviews.org. من أجل رفع الصور الخاصة بك، تحتاج إلى الاشتراك بالموقع.</string>
+    <string name="register_opr_create_new_account">إنشاء حساب جديد</string>
+    <string name="register_opr_have_account">لدي حساب بالفعل</string>
+    <string name="app_mode_kayak">كاياك (قوارب صغيرة فردية)</string>
+    <string name="app_mode_motorboat">زورق</string>
+    <string name="shared_string_search_history">سجل البحث</string>
 </resources>

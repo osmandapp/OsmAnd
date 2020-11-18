@@ -41,6 +41,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
@@ -53,6 +54,7 @@ import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.SearchHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.HistoryMarkersSettingsItem;
 import net.osmand.plus.settings.backend.backup.MapSourcesSettingsItem;
 import net.osmand.plus.settings.backend.backup.MarkersSettingsItem;
@@ -88,7 +90,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 	private OsmandApplication app;
 	private ExportImportSettingsAdapter adapter;
 	private ExpandableListView expandableList;
-	private TextViewEx selectBtn;
 	private TextView description;
 	private List<SettingsItem> settingsItems;
 	private File file;
@@ -135,7 +136,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
 		toolbarLayout = root.findViewById(R.id.toolbar_layout);
-		selectBtn = root.findViewById(R.id.select_button);
 		expandableList = root.findViewById(R.id.list);
 		buttonsContainer = root.findViewById(R.id.buttons_container);
 		progressBar = root.findViewById(R.id.progress_bar);
@@ -153,14 +153,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 				} else {
 					importItems();
 				}
-			}
-		});
-		selectBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				allSelected = !allSelected;
-				selectBtn.setText(allSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
-				adapter.selectAll(allSelected);
 			}
 		});
 		if (Build.VERSION.SDK_INT >= 21) {
@@ -442,6 +434,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
+		List<HistoryEntry> historyEntries = new ArrayList<>();
 		for (Object object : data) {
 			if (object instanceof ApplicationModeBean) {
 				appModeBeans.add((ApplicationModeBean) object);
@@ -472,6 +465,8 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 				} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
 					markersHistoryGroups.add((MapMarkersGroup) object);
 				}
+			} else if (object instanceof HistoryEntry) {
+				historyEntries.add((HistoryEntry) object);
 			}
 		}
 		if (!appModeBeans.isEmpty()) {
@@ -519,7 +514,10 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 			HistoryMarkersSettingsItem baseItem = getBaseItem(SettingsItemType.HISTORY_MARKERS, HistoryMarkersSettingsItem.class);
 			settingsItems.add(new HistoryMarkersSettingsItem(app, baseItem, mapMarkers));
 		}
-
+		if (!historyEntries.isEmpty()) {
+			SearchHistorySettingsItem baseItem = getBaseItem(SettingsItemType.SEARCH_HISTORY, SearchHistorySettingsItem.class);
+			settingsItems.add(new SearchHistorySettingsItem(app, baseItem, historyEntries));
+		}
 		return settingsItems;
 	}
 

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -204,6 +203,18 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				favoritesActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				app.getSettings().FAVORITES_TAB.set(FavoritesActivity.FAV_TAB);
 				startActivity(favoritesActivity);
+				break;
+			case SEARCH_HISTORY:
+				if (activity instanceof MapActivity) {
+					QuickSearchDialogFragment.showInstance(
+							(MapActivity) activity,
+							"",
+							null,
+							QuickSearchDialogFragment.QuickSearchType.REGULAR,
+							QuickSearchDialogFragment.QuickSearchTab.HISTORY,
+							null
+					);
+				}
 				break;
 			default:
 				break;

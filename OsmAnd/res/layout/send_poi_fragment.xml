@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/bottom_sheet_content_margin"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="16dp"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:text="@string/upload_poi"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_medium" />
+
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/message_label"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/bottom_sheet_content_margin"
+			android:hint="@string/shared_string_message"
+			app:boxBackgroundColor="?attr/text_input_background"
+			app:boxStrokeColor="@color/osmand_orange"
+			app:hintTextColor="@color/text_color_secondary_light">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/message_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+				android:lineSpacingExtra="5sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+		<androidx.appcompat.widget.SwitchCompat
+			android:id="@+id/close_change_set_checkbox"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:minHeight="@dimen/context_menu_buttons_bottom_height"
+			android:paddingLeft="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
+			android:text="@string/close_changeset"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_regular" />
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginBottom="@dimen/bottom_sheet_content_margin_small"
+		android:background="?attr/dashboard_divider" />
+
+	<include layout="@layout/account_details" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_small" />
+
+</LinearLayout>
+

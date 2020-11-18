@@ -183,7 +183,7 @@
     <string name="poi_observatory_designation">Tilgangur</string>
     <string name="poi_telescope_type">Tegund</string>
     <string name="poi_animal_training_type">Tegund</string>
-    <string name="poi_embassy_type">Tegund</string>
+    <string name="poi_diplomatic_filter">Tegund</string>
     <string name="poi_archaeological_site_type">Tegund</string>
     <string name="poi_star_rating">Stjörnugjöf</string>
     <string name="poi_religion_type">Trúarbrögð</string>

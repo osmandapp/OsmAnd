@@ -151,7 +151,7 @@
     <string name="use_fluorescent_overlays">Žiarivejšie prekrytia</string>
     <string name="use_fluorescent_overlays_descr">Použiť žiarivejšie farby pre zobrazenie stôp a ciest.</string>
     <string name="offline_edition">Offline upravovanie</string>
-    <string name="offline_edition_descr">Vždy použiť offline upravovanie dát.</string>
+    <string name="offline_edition_descr">Ak je zapnuté offline upravovanie dát, zmeny budú najprv uložené lokálne a odoslané až na váš pokyn, inak budú zmeny odoslané ihneď.</string>
     <string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, zmeny sú namiesto toho uložené v lokálnom súbore vo vašom zariadení.</string>
     <string name="local_openstreetmap_uploading">Odosielanie…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/poznámok bolo nahratých</string>
@@ -595,7 +595,7 @@
     <string name="finished_task">Dokončené</string>
     <string name="use_online_routing_descr">Použiť Internet na výpočet trasy.</string>
     <string name="use_online_routing">Použiť online navigáciu</string>
-    <string name="user_password">OSM heslo</string>
+    <string name="user_password">Heslo</string>
     <string name="osm_settings_descr">Určiť nastavenia Openstreetmap.org (OSM) potrebné pre prispievanie do OSM.</string>
     <string name="data_settings_descr">Vybrať jazyk, stiahnutie/znovu načítanie údajov.</string>
     <string name="data_settings">Údaje</string>
@@ -3425,9 +3425,9 @@
     <string name="route_recalculation">Prepočítanie trasy</string>
     <string name="accessibility_announce">Oznámenie</string>
     <string name="login_and_pass">Prihlasovacie meno a heslo</string>
-    <string name="plugin_global_prefs_info">Tieto nastavenia platia pre všetky profily.</string>
+    <string name="plugin_global_prefs_info">Tieto nastavenia sú globálne a platia pre všetky profily</string>
     <string name="osm_editing">OSM upravovanie</string>
-    <string name="osm_edits_view_descr">Zobrazte vaše neodoslané zmeny alebo chyby v OSM cez %1$s. Odoslané body sa už nezobrazujú.</string>
+    <string name="osm_edits_view_descr">Môžete zobraziť vaše ešte neodoslané zmeny alebo chyby v OSM cez %1$s. Odoslané body sa už v OsmAnd nezobrazujú.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikona zobrazená pri navigácii alebo pohybe.</string>
     <string name="select_map_icon_descr">Ikona zobrazená v pokoji.</string>
@@ -3947,10 +3947,31 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd používa MGSR, ktorý je podobný ako formát UTM NATO.</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Musíte pridať aspoň dva body.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Musíte pridať aspoň dva body</string>
     <string name="manage_subscription">Spravovať predplatné</string>
     <string name="subscription_payment_issue_title">S vaším predplatným je problém. Stlačte tlačidlo pre prechod do nastavení predplatného v Google Play a opravte váš spôsob platby.</string>
     <string name="subscription_expired_title">Predplatné OsmAnd Live skončilo</string>
     <string name="subscription_paused_title">Predplatné OsmAnd Live je pozastavené</string>
     <string name="subscription_on_hold_title">Predplatné OsmAnd Live je zablokované</string>
+    <string name="login_open_street_map">Prihlásiť sa do OpenStreetMap</string>
+    <string name="login_open_street_map_org">Prihlásiť sa do OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Zaregistrovať sa do OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Musíte sa prihlásiť pre odoslanie nových alebo zmenených údajov.
+\n
+\nMôžete sa prihlásiť pomocou bezpečnej metódy OAuth alebo pomocou mena a hesla.</string>
+    <string name="use_login_password">Použiť meno a heslo</string>
+    <string name="login_account">Účet</string>
+    <string name="user_login">Prihlasovacie meno</string>
+    <string name="markers_history">História značiek</string>
+    <string name="send_files_to_openstreetmap">Odoslať súbor GPX do OpenStreetMap</string>
+    <string name="enter_text_separated">Zadajte značky oddelené čiarkou.</string>
+    <string name="osm_edit_close_note">Zatvoriť OSM poznámku</string>
+    <string name="osm_edit_comment_note">Komentovať OSM poznámku</string>
+    <string name="osm_login_descr">Môžete sa prihlásiť bezpečnou metódou OAuth alebo použite meno a heslo.</string>
+    <string name="shared_string_add_photo">Pridať foto</string>
+    <string name="register_on_openplacereviews">Zaregistrovať na
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Fotografie sú poskytované projektom OpenPlaceReviews.org s otvorenými dátami. Na odoslanie vašich fotiek sa musíte zaregistrovať na webovej stránke.</string>
+    <string name="register_opr_create_new_account">Vytvoriť nový účet</string>
+    <string name="register_opr_have_account">Už mám účet</string>
 </resources>

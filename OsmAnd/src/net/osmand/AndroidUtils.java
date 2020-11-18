@@ -788,6 +788,14 @@ public class AndroidUtils {
 		return result;
 	}
 
+	public static long getAvailableSpace(@Nullable File dir) {
+		if (dir != null && dir.canRead()) {
+			StatFs fs = new StatFs(dir.getAbsolutePath());
+			return fs.getAvailableBlocksLong() * fs.getBlockSize();
+		}
+		return -1;
+	}
+
 	public static float getFreeSpaceGb(File dir) {
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
