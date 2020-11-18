@@ -398,7 +398,7 @@
     <string name="use_fluorescent_overlays">Флуоресцентные цвета</string>
     <string name="use_fluorescent_overlays_descr">Использовать флуоресцентные цвета для отображения треков и маршрутов.</string>
     <string name="offline_edition">Локальное редактирование</string>
-    <string name="offline_edition_descr">Всегда использовать редактирование на устройстве.</string>
+    <string name="offline_edition_descr">Если используется редактирование на устройстве, то изменения будут сохранены локально и загружены на сервер только по запросу, иначе они будут загружаться немедленно.</string>
     <string name="update_poi_does_not_change_indexes">Изменение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл на устройстве.</string>
     <string name="local_openstreetmap_uploading">Отправка…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/заметок отправлено</string>
