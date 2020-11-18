@@ -7,6 +7,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -72,8 +73,9 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		final View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_osm_note_fragment, null);
 
-		TextView noteText = sendOsmNoteView.findViewById(R.id.note_text);
+		EditText noteText = sendOsmNoteView.findViewById(R.id.note_text);
 		noteText.setText(((OsmNotesPoint) poi[0]).getText());
+		noteText.setSelection(noteText.getText().length());
 		TextInputLayout noteHint = sendOsmNoteView.findViewById(R.id.note_hint);
 		noteHint.setHint(AndroidUtils.addColon(app, R.string.osn_bug_name));
 		accountBlockView = sendOsmNoteView.findViewById(R.id.account_container);

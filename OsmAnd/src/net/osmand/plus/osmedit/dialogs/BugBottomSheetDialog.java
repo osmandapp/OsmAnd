@@ -55,7 +55,7 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		items.add(new TitleItem(getString(titleTextId)));
 
 		View osmNoteView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
-				R.layout.track_name_edit_text, null);
+				R.layout.open_osm_note_text, null);
 		TextInputLayout textBox = osmNoteView.findViewById(R.id.name_text_box);
 		int highlightColorId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		textBox.setBoxBackgroundColorResource(highlightColorId);
