@@ -3417,7 +3417,7 @@
     <string name="photo_notes">Note fotografiche</string>
     <string name="route_recalculation">Ricalcolo del percorso</string>
     <string name="login_and_pass">Nome utente e password</string>
-    <string name="plugin_global_prefs_info">Queste impostazioni del plugin sono globali e si applicano a tutti i profili.</string>
+    <string name="plugin_global_prefs_info">Queste impostazioni del plugin sono globali e si applicano a tutti i profili</string>
     <string name="osm_editing">Modifica di OpenStreetMap</string>
     <string name="osm_edits_view_descr">È possibile visualizzare tutte le modifiche non caricate o le note OSM in %1$s. I punti caricati non vengono visualizzati in OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
@@ -3945,7 +3945,7 @@
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Emergenza</string>
     <string name="icon_group_travel">Viaggio</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Devi aggiungere almeno due punti.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Devi aggiungere almeno due punti</string>
     <string name="osm_edit_close_note">Chiudi la nota OSM</string>
     <string name="osm_edit_comment_note">Commenta la nota OSM</string>
     <string name="osm_login_descr">Puoi autenticarti con il metodo sicuro OAuth o utilizzare le tue credenziali.</string>
@@ -3955,4 +3955,28 @@
     <string name="register_on_openplacereviews_desc">Le foto sono fornite dal progetto a sorgente aperto OpenPlaceReviews.org. Per contribuire delle tue foto devi registrarti nel sito.</string>
     <string name="register_opr_create_new_account">Crea un nuovo account</string>
     <string name="register_opr_have_account">Ho già un account</string>
+    <string name="shared_string_search_history">Cronologia di ricerca</string>
+    <string name="app_mode_kayak">Kayak</string>
+    <string name="app_mode_motorboat">Motoscafo</string>
+    <string name="login_open_street_map">Connettiti a OpenStreetMap</string>
+    <string name="login_open_street_map_org">Connettiti a OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Registrati con OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Devi fare il login per inviare nuove modifiche o dei cambiamenti.
+\n
+\nPuoi fare login utilizzando il metodo sicuro OAuth o il nomeutente e password.</string>
+    <string name="use_login_password">Usa login e password</string>
+    <string name="login_account">Account</string>
+    <string name="user_login">Entra</string>
+    <string name="manage_subscription">Gestisci la sottoscrizione</string>
+    <string name="subscription_payment_issue_title">C\'è un problema con la tua sottoscrizione. Clicca sul pulsante per andare alle impostazioni di sottoscrizione di Google Play per correggere il tuo metodo di pagamento.</string>
+    <string name="subscription_expired_title">La sottoscrizione di OsmAnd Live è terminata</string>
+    <string name="subscription_paused_title">La sottoscrizione di OsmAnd Live è stata messa in pausa</string>
+    <string name="subscription_on_hold_title">La sottoscrizione di OsmAnd Live è in sospeso</string>
+    <string name="markers_history">Cronologia dei marcatori</string>
+    <string name="send_files_to_openstreetmap">Invia il file GPX a OpenStreetMap</string>
+    <string name="enter_text_separated">Immetti le etichette separate dalla virgola.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Pubblico\" significa che la traccia è visualizzata pubblicamente nelle tue tracce GPS, nelle liste pubbliche di tracce GPS con le informazioni temporali in forma grezza. I dati forniti attraverso le API non conducono alla tua pagina delle tracce. Le informazioni temporali dei punti traccia non sono disponibili attraverso le API GPS pubbliche, e i punti della traccia non sono ordinati cronologicamente.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privato\" significa che la traccia non è visualizzabile in alcuna lista pubblica ma i suoi punti, in ordine non cronologico, sono disponibili attraverso le API GPS senza le informazioni temporali.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificabile\" significa che la traccia è visualizzabile nelle Mie tracce GPS e nelle liste pubbliche, es. gli altri utenti potranno scaricare la traccia grezza e associarla con il tuo nome utente. I punti della traccia, con le loro informazioni temporali, saranno riconducibili, attraverso le API GPS, alla tua traccia originale.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Tracciabile\" significa che la traccia non è visualizzabile in alcuna lista pubblica, ma solo i suoi punti, processati, con le informazioni temporali (che non possono essere direttamente associati a te) attraverso le API GPS pubbliche.</string>
 </resources>
