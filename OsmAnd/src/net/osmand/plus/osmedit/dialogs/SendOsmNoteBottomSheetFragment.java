@@ -1,6 +1,8 @@
 package net.osmand.plus.osmedit.dialogs;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
@@ -27,6 +29,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
@@ -129,6 +132,14 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 				uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
 			}
 		});
+		LinearLayout account = accountBlockView.findViewById(R.id.account_container);
+		account.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+				showOpenStreetMapScreen();
+			}
+		});
 		final SimpleBottomSheetItem bottomSheetItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(sendOsmNoteView)
 				.create();
@@ -171,6 +182,14 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	private void showOpenStreetMapScreen() {
+		Bundle params = new Bundle();
+		params.putBoolean(OsmEditingFragment.OPEN_PLUGIN, true);
+		Context context = getView().getContext();
+		Intent intent = getActivity().getIntent();
+		MapActivity.launchMapActivityMoveToTop(context, intent != null ? intent.getExtras() : null, null, params);
 	}
 
 	@Override

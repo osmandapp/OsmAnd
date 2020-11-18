@@ -1,11 +1,14 @@
 package net.osmand.plus.osmedit.dialogs;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -84,10 +88,26 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
                 closeChangeSet.setPadding(paddingSmall, 0, paddingSmall, 0);
             }
         });
+        LinearLayout account = sendOsmPoiView.findViewById(R.id.account_container);
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+                showOpenStreetMapScreen();
+            }
+        });
         final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
                 .setCustomView(sendOsmPoiView)
                 .create();
         items.add(titleItem);
+    }
+
+    private void showOpenStreetMapScreen() {
+        Bundle params = new Bundle();
+        params.putBoolean(OsmEditingFragment.OPEN_PLUGIN, true);
+        Context context = getView().getContext();
+        Intent intent = getActivity().getIntent();
+        MapActivity.launchMapActivityMoveToTop(context, intent != null ? intent.getExtras() : null, null, params);
     }
 
     public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points) {

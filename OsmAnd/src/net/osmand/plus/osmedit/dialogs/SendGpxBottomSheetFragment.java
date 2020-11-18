@@ -1,10 +1,13 @@
 package net.osmand.plus.osmedit.dialogs;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,12 +24,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
 import net.osmand.plus.osmedit.UploadGPXFilesTask;
@@ -95,9 +100,15 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 				visibilityDescription.setText(selectedUploadVisibility.getDescriptionId());
 				horizontalSelectionAdapter.notifyDataSetChanged();
 			}
-
 		});
-
+		LinearLayout account = sendOsmPoiView.findViewById(R.id.account_container);
+		account.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+				showOpenStreetMapScreen();
+			}
+		});
 		RecyclerView iconCategoriesRecyclerView = sendOsmPoiView.findViewById(R.id.description_view);
 		iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
 		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
@@ -107,6 +118,15 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 				.setCustomView(sendOsmPoiView)
 				.create();
 		items.add(titleItem);
+	}
+
+	private void showOpenStreetMapScreen() {
+		Bundle params = new Bundle();
+		params.putBoolean(OsmEditingFragment.OPEN_PLUGIN, true);
+		Context context = getView().getContext();
+		Intent intent = getActivity().getIntent();
+		MapActivity.launchMapActivityMoveToTop(context, intent != null ? intent.getExtras() : null, null, params);
+		getActivity().onBackPressed();
 	}
 
 	@Override
