@@ -30,7 +30,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:imeOptions="actionDone"
-                android:lineSpacingExtra="5sp"/>
+				android:lineSpacingExtra="5sp" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<androidx.appcompat.widget.SwitchCompat
@@ -51,8 +51,20 @@
 
 	</LinearLayout>
 
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginBottom="@dimen/bottom_sheet_content_margin_small"
+		android:background="?attr/dashboard_divider" />
+
+	<include layout="@layout/account_details" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_small" />
+
 	<LinearLayout
-		android:id="@+id/account_container"
+		android:id="@+id/sign_in_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:minHeight="@dimen/context_menu_buttons_bottom_height"
@@ -64,115 +76,42 @@
 			android:layout_height="1dp"
 			android:background="?attr/dashboard_divider" />
 
-
-		<LinearLayout
-			android:layout_width="360dp"
-			android:layout_height="48dp"
-			android:layout_marginTop="9dp"
-			android:minHeight="@dimen/context_menu_buttons_bottom_height"
-			android:orientation="horizontal">
-
-			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@android:id/icon"
-				android:layout_width="@dimen/route_info_buttons_padding_left_right"
-				android:layout_height="@dimen/route_info_buttons_padding_left_right"
-				android:layout_gravity="center"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:tint="@color/active_buttons_and_links_text_disabled_light"
-				osmand:srcCompat="@drawable/ic_action_user_account" />
-
-			<RelativeLayout
-				android:id="@+id/padding_ver"
-				android:layout_width="32dp"
-				android:layout_height="36dp"
-				android:layout_marginTop="6dp"
-				android:alpha="0.01" />
-
-			<LinearLayout
-				android:layout_width="216dp"
-				android:layout_height="@dimen/bottom_sheet_descr_height"
-				android:gravity="center_vertical"
-				android:orientation="vertical">
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/account_title"
-					android:layout_width="216dp"
-					android:layout_height="@dimen/context_menu_padding_margin_large"
-					android:layout_marginTop="@dimen/subHeaderPadding"
-					android:gravity="center_vertical"
-					android:lineSpacingExtra="@dimen/map_widget_text_small_bottom_margin"
-					android:text="@string/login_account"
-					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_regular" />
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/user_name"
-					android:layout_width="216dp"
-					android:layout_height="@dimen/context_menu_sub_info_height"
-					android:layout_marginBottom="@dimen/subHeaderPadding"
-					android:gravity="center_vertical"
-					android:letterSpacing="@dimen/description_letter_spacing"
-					android:lineSpacingExtra="5sp"
-					android:text="@string/login_account"
-					android:textColor="?android:textColorPrimary"
-					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_regular" />
-
-			</LinearLayout>
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/sign_in_container"
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/description"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:minHeight="@dimen/context_menu_buttons_bottom_height"
-			android:orientation="vertical"
-			android:paddingTop="@dimen/text_margin_small">
+			android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:paddingBottom="@dimen/content_padding_small"
+			android:text="@string/osm_login_descr"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_regular" />
 
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:background="?attr/dashboard_divider" />
+		<include
+			android:id="@+id/sign_in_button"
+			layout="@layout/bottom_sheet_dialog_button"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dialog_button_height"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding_half" />
 
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/description"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
-				android:paddingStart="@dimen/content_padding"
-				android:paddingLeft="@dimen/content_padding"
-				android:paddingTop="@dimen/content_padding_small"
-				android:paddingEnd="@dimen/content_padding"
-				android:paddingRight="@dimen/content_padding"
-				android:paddingBottom="@dimen/content_padding_small"
-				android:text="@string/osm_login_descr"
-				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_regular" />
-
-			<include
-				android:id="@+id/sign_in_button"
-				layout="@layout/bottom_sheet_dialog_button"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginRight="@dimen/content_padding"
-				android:layout_marginBottom="@dimen/content_padding_half" />
-
-			<include
-				android:id="@+id/login_button"
-				layout="@layout/bottom_sheet_dialog_button"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginTop="@dimen/content_padding_small"
-				android:layout_marginRight="@dimen/content_padding"
-				android:layout_marginBottom="@dimen/content_padding" />
-
-		</LinearLayout>
+		<include
+			android:id="@+id/login_button"
+			layout="@layout/bottom_sheet_dialog_button"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dialog_button_height"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding" />
 
 	</LinearLayout>
 
 </LinearLayout>
+
