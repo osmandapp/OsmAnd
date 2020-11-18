@@ -1208,7 +1208,7 @@
     <string name="poi_observatory_designation">Izendapena</string>
     <string name="poi_telescope_type">Mota</string>
     <string name="poi_animal_training_type">Mota</string>
-    <string name="poi_embassy_type">Mota</string>
+    <string name="poi_diplomatic_filter">Mota</string>
     <string name="poi_city_capital">Hiriburua</string>
     <string name="poi_pharmacy_dispensing">Farmazia</string>
     <string name="poi_healthcare_alternative_types">Espezialitatea</string>

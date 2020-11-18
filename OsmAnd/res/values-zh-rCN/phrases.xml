@@ -21,7 +21,7 @@
     <string name="poi_service_general">服务</string>
     <string name="poi_brushless">无刷</string>
     <string name="poi_animal_training_type">类型</string>
-    <string name="poi_embassy_type">类型</string>
+    <string name="poi_diplomatic_filter">类型</string>
     <string name="poi_clock_option">额外的</string>
     <string name="poi_osmwiki">维基百科</string>
     <string name="poi_user_defined_other">用户自定义</string>
