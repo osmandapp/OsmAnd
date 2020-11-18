@@ -5,12 +5,6 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical">
 
-	<View
-		android:layout_width="0dp"
-		android:layout_height="0dp"
-		android:focusable="true"
-		android:focusableInTouchMode="true" />
-
 	<com.google.android.material.textfield.TextInputLayout
 		android:id="@+id/name_text_box"
 		android:layout_width="match_parent"
