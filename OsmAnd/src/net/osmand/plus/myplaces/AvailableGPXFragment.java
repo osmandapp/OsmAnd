@@ -80,11 +80,12 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.helpers.enums.TracksSortByMode;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -112,7 +113,7 @@ import static net.osmand.util.Algorithms.objectEquals;
 import static net.osmand.util.Algorithms.removeAllFiles;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
-	FavoritesFragmentStateHolder {
+		FavoritesFragmentStateHolder, OsmAuthorizationListener {
 
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 	public static final int SEARCH_ID = -1;
@@ -920,6 +921,18 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	@Override
 	public void restoreState(Bundle bundle) {
+	}
+
+	@Override
+	public void authorizationCompleted() {
+		Bundle bundle = new Bundle();
+		bundle.putInt(TAB_ID, GPX_TAB);
+
+		Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+		intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
+		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+		app.startActivity(intent);
 	}
 
 	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, List<GpxInfo>> {

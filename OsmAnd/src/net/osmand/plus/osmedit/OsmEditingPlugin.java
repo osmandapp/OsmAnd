@@ -461,10 +461,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		String pwd = settings.USER_PASSWORD.get();
 		String authToken = settings.USER_ACCESS_TOKEN.get();
 		if ((Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)) && Algorithms.isEmpty(authToken)) {
-			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment.getTargetFragment());
+			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment);
 			return false;
 		} else {
-			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment.getTargetFragment(), info);
+			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment, info);
 			return true;
 		}
 	}

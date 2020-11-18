@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -38,8 +39,10 @@ import org.apache.commons.logging.Log;
 
 import static net.osmand.plus.UiUtilities.setupDialogButton;
 import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
-import static net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.*;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.*;
+import static net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.OPENSTREETMAP_POINT;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
 
 public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragment implements ValidateOsmLoginListener,
 		OsmAuthorizationListener {
@@ -89,7 +92,10 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		signInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmandApplication app = requiredMyApplication();
+				Fragment fragment = getParentFragment();
+				if (fragment instanceof OsmAuthorizationListener) {
+					app.getOsmOAuthHelper().addListener((OsmAuthorizationListener) fragment);
+				}
 				app.getOsmOAuthHelper().startOAuth((ViewGroup) v);
 			}
 		});
