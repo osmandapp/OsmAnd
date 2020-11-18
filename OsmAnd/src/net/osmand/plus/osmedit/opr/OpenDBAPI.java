@@ -14,12 +14,10 @@ import org.openplacereviews.opendb.ops.OpOperation;
 import org.openplacereviews.opendb.util.JsonFormatter;
 import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.security.KeyPair;
 import java.security.Security;
 import java.util.*;
@@ -38,16 +36,22 @@ public class OpenDBAPI {
 	 * params
 	 *  - username: blockchain username in format "openplacereviews:test_1"
 	 *  - privatekey: "base64:PKCS#8:actualKey"
-	 *
+	 * Need to encode key
 	 * Do not call on mainThread
 	 */
-	public boolean checkPrivateKeyValid(String username, String privateKey){
-		String url = BuildConfig.OPR_BASE_URL + checkLoginEndpoint +
-				"name=" +
-				username +
-				"&" +
-				"privateKey=" +
-				privateKey;
+	public boolean checkPrivateKeyValid(String username, String privateKey) throws UnsupportedEncodingException {
+		String url = null;
+		try {
+			url = BuildConfig.OPR_BASE_URL + checkLoginEndpoint +
+					"name=" +
+					username +
+					"&" +
+					"privateKey=" +
+					//need to encode the key
+					URLEncoder.encode(privateKey, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw e;
+		}
 		StringBuilder response = new StringBuilder();
 		return (NetworkUtils.sendGetRequest(url,null,response) == null) &&
 				response.toString().contains(LOGIN_SUCCESS_MESSAGE);
