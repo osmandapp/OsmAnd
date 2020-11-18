@@ -126,7 +126,6 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		Context context = getView().getContext();
 		Intent intent = getActivity().getIntent();
 		MapActivity.launchMapActivityMoveToTop(context, intent != null ? intent.getExtras() : null, null, params);
-		getActivity().onBackPressed();
 	}
 
 	@Override
