@@ -62,7 +62,6 @@ import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmen
 import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
 import net.osmand.plus.osmedit.OsmPoint.Group;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -638,12 +637,12 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
 			if (hasPoiGroup(points)) {
 				if (isLogged) {
-					SendPoiBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), points);
+					SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), points);
 				} else {
 					LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);
 				}
 			} else {
-				SendOsmNoteBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), points);
+				SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), points);
 			}
 		}
 	}

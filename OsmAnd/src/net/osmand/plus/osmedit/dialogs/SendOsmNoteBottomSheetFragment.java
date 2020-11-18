@@ -25,7 +25,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
@@ -177,7 +176,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
 			progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
-		} else if (getParentFragment() instanceof ProgressDialogFragment) {
+		} else if (getParentFragment() instanceof ProgressDialogPoiUploader) {
 			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
 		}
 		if (progressDialogPoiUploader != null) {
