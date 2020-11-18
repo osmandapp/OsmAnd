@@ -1772,7 +1772,7 @@
     <string name="arrival_distance_descr">Hve snemma viltu fá tilkynningu um komu?</string>
     <string name="rendering_out_of_memory">Ekki nægt vinnsluminni til að birta valið svæði</string>
     <string name="offline_edition">Ónettengdar breytingar</string>
-    <string name="offline_edition_descr">Alltaf nota ónettengdar breytingar.</string>
+    <string name="offline_edition_descr">Ef ónettengdar breytingar eru virkar, þá eru breytingar fyrst vistaðar á tækinu og síðan sendar inn samkvæmt beiðni. Annars gerist þetta jafnóðum.</string>
     <string name="local_openstreetmap_upload">Senda breytingu inn til OSM</string>
     <string name="local_openstreetmap_descr_title">Ósamstilltar (async) OSM-breytingar:</string>
     <string name="free_version_message">Þú getur sótt eða uppfært %1$s kort.</string>
@@ -2164,7 +2164,7 @@
     <string name="routing_attr_no_new_routing_name">Engar v1.9 leiðareglur</string>
     <string name="routing_attr_no_new_routing_description">Ekki nota leiðareglur sem komu til sögunnar í útgáfu 1.9.</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Leiðir deilileigubíla</string>
-    <string name="enter_gpx_name">Nafn GPX skráar:</string>
+    <string name="enter_gpx_name">Heiti GPX-skráar:</string>
     <string name="show_on_map_after_saving">Sýna í korti eftir vistun</string>
     <string name="measurement_tool">Mæla vegalengd</string>
     <string name="store_tracks_in_monthly_directories_descrp">Geyma skráða ferla í undirmöppum fyrir hvern skráningamánuð (svo sem 2018-01).</string>
@@ -2514,7 +2514,7 @@
     <string name="choose_file_type">Veldu skráartegund</string>
     <string name="all_data">Öll gögn</string>
     <string name="show_closed_notes">Sýna lokaða minnispunkta</string>
-    <string name="switch_osm_notes_visibility_desc">Birta/fela OSM-minnispunkta á kortinu.</string>
+    <string name="switch_osm_notes_visibility_desc">Birta eða fela OSM-minnispunkta á kortinu.</string>
     <string name="gpx_file_desc">GPX - hentar til útflutnings fyrir JOSM eða aðra OSM-ritla.</string>
     <string name="osc_file_desc">OSC - hentar til útflutnings í OSM.</string>
     <string name="osm_edits_export_desc">Flytja út sem OSM-minnispunkta, merkisstaði, eða bæði.</string>
@@ -3086,7 +3086,7 @@
     <string name="application_profiles_descr">Veldu notkunarsnið sem eiga að vera sýnileg í forriti.</string>
     <string name="application_profiles">Forritssnið</string>
     <string name="zoom_by_wunderlinq">Nota WunderLINQ við stýringu</string>
-    <string name="routing_attr_piste_type_downhill_name">Brun/svigskíði</string>
+    <string name="routing_attr_piste_type_downhill_name">Brun og svigskíði</string>
     <string name="routing_attr_piste_type_skitour_description">Ferðaleiðir á skíðum.</string>
     <string name="routing_attr_piste_type_sled_description">Brekkur notaðar fyrir sleða.</string>
     <string name="routing_attr_allow_intermediate_name">Leyfa millileiðir</string>
@@ -3105,7 +3105,7 @@
     <string name="zoom_by_wunderlinq_descr">Breyttu aðdrætti á kort með skruni músarhjóls upp og niður. Escape fer aftur með þig inn í WunderLINQ forritið.</string>
     <string name="quick_action_need_to_add_item_to_list">Þú verður að skilgreina a.m.k. eitt atriði í listanum í stillingum flýtiaðgerða</string>
     <string name="routing_attr_piste_type_downhill_description">Brekkur fyrir svigskíði eða brun og aðgangur að skíðalyftum.</string>
-    <string name="routing_attr_piste_type_nordic_name">Gönguskíði/norræn fjallaskíði</string>
+    <string name="routing_attr_piste_type_nordic_name">Gönguskíði og norræn fjallaskíði</string>
     <string name="routing_attr_piste_type_nordic_description">Leiðir fyrir gönguskíði eða norræn fjallaskíði.</string>
     <string name="routing_attr_allow_classic_only_description">Leiðir sem troðnar eru einungis fyrir klassískan stíl en án hluta fyrir skautun. Þetta telur einnig með leiðir sem troðnar eru með minni farartækjum og lausari sporum sem jafnvel eru gerð af skíðagöngufólkinu sjálfu.</string>
     <string name="routing_attr_difficulty_preference_description">Kjósa leiðir á þessu erfiðleikastigi, þótt leiðarval um erfiðari eða auðveldari leiðir séu mögulegar ef um stutta búta sé að ræða.</string>
@@ -3237,7 +3237,7 @@
     <string name="turn_screen_on_info">Birta kort á læsiskjá á meðan leiðsögn stendur.</string>
     <string name="route_parameters_info">Stillingar leiðarvals í valda sniðinu \"%1$s\".</string>
     <string name="wake_time">Tímamörk eftir vöknun</string>
-    <string name="units_and_formats">Einingar og snið þeirra</string>
+    <string name="units_and_formats">Einingar og snið</string>
     <string name="appearance">Útlit</string>
     <string name="map_look_descr">Útlit landakorts</string>
     <string name="map_look">Útlit korts</string>
@@ -3374,7 +3374,7 @@
     <string name="route_start_point">Upphafspunktur</string>
     <string name="default_speed_dialog_msg">Notað til að áætla komutíma á óþekktum gerðum vega og til takmörkunar á hraða á öllum vegum (gæti breytt leiðarvali)</string>
     <string name="track_saved">Ferill vistaður</string>
-    <string name="empty_filename">Skráarheiti er autt</string>
+    <string name="empty_filename">Vantar skráarheiti</string>
     <string name="shared_string_revert">Afturkalla</string>
     <string name="quick_action_directions_from_desc">Hnappur til að gera miðju skjásins að upphafsstað. Mun síðan spyrja um áfangastað eða setja í gang útreikning á leiðum.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Birta hnútanetkerfi fyrir hjólaleiðir</string>
@@ -3582,7 +3582,7 @@
     <string name="terrain_empty_state_text">Virkja til að sjá hæðaskyggingar eða brekkur á korti. Þú getur lesið meira um þessa eiginleika á vefnum okkar.</string>
     <string name="shared_string_hillshade">Hæðaskygging</string>
     <string name="download_slope_maps">Brekkur</string>
-    <string name="quick_action_show_hide_terrain">Birta/fela yfirborð</string>
+    <string name="quick_action_show_hide_terrain">Birta eða fela yfirborð</string>
     <string name="quick_action_terrain_hide">Fela yfirborð</string>
     <string name="quick_action_terrain_show">Sýna yfirborð</string>
     <string name="quick_action_terrain_descr">Hnappur til að birta eða fela yfirborðslag á kortinu.</string>
@@ -3689,7 +3689,7 @@
     <string name="system_screen_timeout">Nota tímamörk kerfis fyrir skjá</string>
     <string name="edit_online_source">Breyta nettengdum gagnagjafa</string>
     <string name="tracker_item">OsmAnd rekjari</string>
-    <string name="create_edit_poi">Búa til / breyta merkisstað</string>
+    <string name="create_edit_poi">Búa til eða breyta merkisstað</string>
     <string name="storage_format">Geymslusnið</string>
     <string name="expire_time">Rennur út</string>
     <string name="quick_action_item">Flýtiaðgerð</string>
@@ -3698,7 +3698,7 @@
     <string name="additional_actions_descr">Þú getur komist í þessar aðgerðir með því að ýta á \"%1$s\"-hnappinn.</string>
     <string name="subscription_osmandlive_item">Áskrift - OsmAnd Live</string>
     <string name="shared_string_always">Alltaf</string>
-    <string name="quick_action_show_hide_transport">Birta/fela almenningssamgöngur</string>
+    <string name="quick_action_show_hide_transport">Birta eða fela almenningssamgöngur</string>
     <string name="reset_deafult_order">Endurheimta sjálfgefna röð atriða</string>
     <string name="unsupported_type_error">Óstudd tegund</string>
     <string name="turn_screen_on_navigation_instructions">Leiðsagnarleiðbeiningar</string>
@@ -3707,7 +3707,7 @@
     <string name="navigation_profiles_item">Leiðsagnarsnið</string>
     <string name="shared_string_resume">Halda áfram</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
-    <string name="add_edit_favorite">Bæta við / breyta eftirlæti</string>
+    <string name="add_edit_favorite">Bæta við eða breyta eftirlæti</string>
     <string name="quick_action_transport_show">Birta almenningssamgöngur</string>
     <string name="default_screen_timeout">Sjálfgefin tímamörk fyrir skjá</string>
     <string name="quick_action_transport_descr">Hnappur til að birta eða fela almenningssamgöngur á kortinu.</string>
@@ -3895,7 +3895,7 @@
     <string name="sort_last_modified">Síðast breytt</string>
     <string name="sort_name_descending">Nafn: Ö – A</string>
     <string name="sort_name_ascending">Nafn: A – Ö</string>
-    <string name="start_finish_icons">Tákn við upphaf/enda</string>
+    <string name="start_finish_icons">Tákn við upphaf og enda</string>
     <string name="routing_attr_avoid_footways_description">Forðast gangstéttir</string>
     <string name="routing_attr_avoid_footways_name">Forðast gangstéttir</string>
     <string name="development">Þróun</string>
@@ -3911,12 +3911,12 @@
     <string name="osm_edit_logout_success">Útskráning tókst</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX-skrár valdar</string>
     <string name="disable_recording_once_app_killed_descrp">Mun setja GPX-skráningu í bið þegar forritið er drepið (slökkt á því í gegnum skjáinn fyrir nýleg forrit - bakgrunnsvísir OsmAnd hverfur þar með úr tilkynningastiku Android-kerfisins.)</string>
-    <string name="save_global_track_interval_descr">Veldu millibil skráninga í almenna leiðarskráningu (virkjað með viðmótshlutanum fyrir GPX-skráningu á kortinu).</string>
+    <string name="save_global_track_interval_descr">Veldu millibil skráninga í almenna leiðarskráningu (virkjað með viðmótshlutanum \'Skráning ferðar\' á kortinu).</string>
     <string name="gpx_monitoring_stop">Setja skráningu í bið</string>
     <string name="gpx_monitoring_start">Halda áfram með skráningu</string>
     <string name="release_3_8">• Uppfærðar aðgerðir í skipulagningu leiða: mismunandi leiðsögn á hverjum bút auk slóða
 \n
-\n • Ný útlitsvalmynd fyrir slóðir: val á lit, þykkt, birting stefnuörva, táknmynda við upphaf/endi
+\n • Ný útlitsvalmynd fyrir slóðir: val á lit, þykkt, birting stefnuörva, táknmynda við upphaf og endi
 \n
 \n • Bættur sýnileiki hjólreiðahnúta.
 \n
@@ -3975,4 +3975,20 @@
     <string name="mgrs_format_descr">OsmAnd notar MGRS, sem er svipað og UTM-snið NATO.</string>
     <string name="manage_subscription">Sýsla með áskrift</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="gpx_upload_public_visibility_descr">\"Opinbert\" þýðir að ferillinn birtist í GPS-ferlunum þínum og á opinberum listum yfir GPS-ferla, þar sem ferilpunktar eru með tímamerkjum á frumsniði. Gögn sem eru sótt í gegnum opinbert GPS API-forritsviðmót vísa ekki í ferlasíðuna þína. Tímamerki ferilpunkta eru ekki tiltæk í gegnum opinbera GPS API-forritsviðmótið og er ekki raðað í tímaröð.</string>
+    <string name="app_mode_kayak">Kayak</string>
+    <string name="shared_string_add_photo">Bæta við mynd</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Auðkennanlegt\" þýðir að ferillinn birtist í GPS-ferlunum þínum og á opinberum listum yfir GPS-ferla, sem þýðir að aðrir notendur geta sútt frumferilinn og tengt þær upplýsingar við notandanafnið þitt. Opinberir ferilpunktar með tímamerkjum sem eru sóttir í gegnum opinbera GPS API-forritsviðmótið vísa í ferlasíðuna þína.</string>
+    <string name="shared_string_search_history">Leitarferill</string>
+    <string name="gpx_upload_private_visibility_descr">\"Einka\" þýðir að ferillinn birtist ekki á neinum opinberum listum, en ferilpunktar í ótímasettri röð eru tiltækir í gegnum opinbert GPS API-forritsviðmót án tímamerkja.</string>
+    <string name="osm_edit_close_note">Loka OSM-minnispunkti</string>
+    <string name="register_opr_have_account">Ég er nú þegar með notandaaðgang</string>
+    <string name="register_on_openplacereviews">Skráðu þig á
+\nOpenPlaceReviews.org</string>
+    <string name="register_opr_create_new_account">Búa til nýjan notandaaðgang</string>
+    <string name="osm_login_descr">Þú getur skráð þig inn með öruggu OAuth-aðferðinni eða notað notandanafn og lykilorð innskráningar.</string>
+    <string name="app_mode_motorboat">Vélbátar</string>
+    <string name="register_on_openplacereviews_desc">Ljósmyndir eru í boði frá opna gagnaverkefninu OpenPlaceReviews.org. Til að geta sent inn myndir þarftu að skrá þig á vefsvæðinu.</string>
+    <string name="osm_edit_comment_note">Gera athugasemd við OSM-minnispunkt</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Rekjanlegt\" þýðir að ferillinn birtist ekki á neinum opinberum listum, en meðhöndlaðir ferilpunktar með tímamerkjum úr ferlinum (sem ekki er hægt að tengja beint við þig) munu birtast í gögnum sem eru sótt í gegnum opinbert GPS API-forritsviðmót.</string>
 </resources>
