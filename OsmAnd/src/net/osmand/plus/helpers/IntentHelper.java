@@ -297,7 +297,8 @@ public class IntentHelper {
 			Uri uri = intent.getData();
 			if (uri.toString().startsWith("osmand-oauth")) {
 				String oauthVerifier = uri.getQueryParameter("oauth_verifier");
-				app.getOsmOAuthHelper().authorize(oauthVerifier, getOnAuthorizeListener());
+				app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
+				app.getOsmOAuthHelper().authorize(oauthVerifier);
 				mapActivity.setIntent(null);
 				return true;
 			}

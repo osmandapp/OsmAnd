@@ -26,8 +26,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.*;
-
 public class OsmOAuthAuthorizationAdapter {
 
     private static final int THREAD_ID = 10101;
@@ -99,8 +97,8 @@ public class OsmOAuthAuthorizationAdapter {
         return client.performRequestWithoutAuth(url, method, body);
     }
 
-    public void authorize(String oauthVerifier, final OsmOAuthHelper helper, final OsmAuthorizationListener listener) {
-        new AuthorizeAsyncTask(helper, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, oauthVerifier);
+    public void authorize(String oauthVerifier, OsmOAuthHelper helper) {
+        new AuthorizeAsyncTask(helper).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, oauthVerifier);
     }
 
     private class StartOAuthAsyncTask extends AsyncTask<Void, Void, OAuth1RequestToken> {
@@ -120,17 +118,14 @@ public class OsmOAuthAuthorizationAdapter {
         protected void onPostExecute(@NonNull OAuth1RequestToken requestToken) {
             loadWebView(rootLayout, client.getService().getAuthorizationUrl(requestToken));
         }
-
     }
 
     private class AuthorizeAsyncTask extends AsyncTask<String, Void, Void> {
 
         private final OsmOAuthHelper helper;
-        private final OsmAuthorizationListener listener;
 
-        public AuthorizeAsyncTask(OsmOAuthHelper helper, OsmAuthorizationListener listener) {
+        public AuthorizeAsyncTask(OsmOAuthHelper helper) {
             this.helper = helper;
-            this.listener = listener;
         }
 
         @Override
@@ -143,9 +138,7 @@ public class OsmOAuthAuthorizationAdapter {
 
         @Override
         protected void onPostExecute(Void result) {
-            if (listener != null) {
-                listener.authorizationCompleted();
-            }
+            helper.notifyAndRemoveListeners();
         }
 
         public void updateUserName() {

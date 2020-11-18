@@ -42,11 +42,6 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
-import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
-import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
@@ -55,13 +50,20 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
 import net.osmand.plus.osmedit.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
 import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
+import net.osmand.plus.osmedit.OpenstreetmapLocalUtil.OnNodeCommittedListener;
 import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
 import net.osmand.plus.osmedit.OsmPoint.Group;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
+import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -79,8 +81,8 @@ import java.util.Map;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
-public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener,
-	FavoritesFragmentStateHolder {
+public class OsmEditsFragment extends OsmAndListFragment implements ProgressDialogPoiUploader,
+		OnNodeCommittedListener, FavoritesFragmentStateHolder, OsmAuthorizationListener {
 
 	public static final int EXPORT_TYPE_ALL = 0;
 	public static final int EXPORT_TYPE_POI = 1;
@@ -104,6 +106,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	private final static int MODE_DELETE = 100;
 	private final static int MODE_UPLOAD = 101;
 
+	private OsmandApplication app;
 	private OsmEditingPlugin plugin;
 
 	private View footerView;
@@ -144,6 +147,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		app = getMyApplication();
 		if (savedInstanceState != null) {
 			exportType = savedInstanceState.getInt(EXPORT_TYPE_KEY);
 		}
@@ -645,6 +649,18 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 				SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), points);
 			}
 		}
+	}
+
+	@Override
+	public void authorizationCompleted() {
+		Bundle bundle = new Bundle();
+		bundle.putInt(TAB_ID, OSM_EDIT_TAB);
+
+		Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+		intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
+		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+		app.startActivity(intent);
 	}
 
 	boolean hasPoiGroup(OsmPoint[] points) {
