@@ -1,9 +1,12 @@
 package net.osmand.plus.osmedit.oauth;
 
 import android.net.TrafficStats;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+
+import androidx.annotation.NonNull;
 
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
@@ -16,11 +19,14 @@ import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.BuildConfig;
 import net.osmand.plus.OsmandApplication;
 
+import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+
+import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.*;
 
 public class OsmOAuthAuthorizationAdapter {
 
@@ -28,6 +34,7 @@ public class OsmOAuthAuthorizationAdapter {
     private static final String OSM_USER = "user";
     private static final String DISPLAY_NAME = "display_name";
     private static final String OSM_USER_DETAILS_URL = "https://api.openstreetmap.org/api/0.6/user/details";
+    public final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationAdapter.class);
 
     private OsmandApplication app;
     private OsmOAuthAuthorizationClient client =
@@ -61,9 +68,8 @@ public class OsmOAuthAuthorizationAdapter {
         }
     }
 
-    public void startOAuth(ViewGroup rootLayout) {
-        OAuth1RequestToken requestToken = client.startOAuth();
-        loadWebView(rootLayout, client.getService().getAuthorizationUrl(requestToken));
+    public void startOAuth(final ViewGroup rootLayout) {
+        new StartOAuthAsyncTask(rootLayout).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
     }
 
     private void saveToken() {
@@ -93,30 +99,91 @@ public class OsmOAuthAuthorizationAdapter {
         return client.performRequestWithoutAuth(url, method, body);
     }
 
-    public void authorize(String oauthVerifier) {
-        client.authorize(oauthVerifier);
-        saveToken();
+    public void authorize(String oauthVerifier, final OsmOAuthHelper helper, final OsmAuthorizationListener listener) {
+        new AuthorizeAsyncTask(helper, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, oauthVerifier);
     }
 
-    public String getUserName() throws InterruptedException, ExecutionException, IOException, XmlPullParserException {
-        Response response = getOsmUserDetails();
-        return parseUserName(response);
+    private class StartOAuthAsyncTask extends AsyncTask<Void, Void, OAuth1RequestToken> {
+
+        private final ViewGroup rootLayout;
+
+        public StartOAuthAsyncTask(ViewGroup rootLayout) {
+            this.rootLayout = rootLayout;
+        }
+
+        @Override
+        protected OAuth1RequestToken doInBackground(Void... params) {
+            return client.startOAuth();
+        }
+
+        @Override
+        protected void onPostExecute(@NonNull OAuth1RequestToken requestToken) {
+            loadWebView(rootLayout, client.getService().getAuthorizationUrl(requestToken));
+        }
+
     }
 
-    public Response getOsmUserDetails() throws InterruptedException, ExecutionException, IOException {
-        return performRequest(OSM_USER_DETAILS_URL, Verb.GET.name(), null);
-    }
+    private class AuthorizeAsyncTask extends AsyncTask<String, Void, Void> {
 
-    public String parseUserName(Response response) throws XmlPullParserException, IOException {
-        String userName = null;
-        XmlPullParser parser = PlatformUtil.newXMLPullParser();
-        parser.setInput(response.getStream(), "UTF-8");
-        int tok;
-        while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-            if (tok == XmlPullParser.START_TAG && OSM_USER.equals(parser.getName())) {
-                userName = parser.getAttributeValue("", DISPLAY_NAME);
+        private final OsmOAuthHelper helper;
+        private final OsmAuthorizationListener listener;
+
+        public AuthorizeAsyncTask(OsmOAuthHelper helper, OsmAuthorizationListener listener) {
+            this.helper = helper;
+            this.listener = listener;
+        }
+
+        @Override
+        protected Void doInBackground(String... oauthVerifier) {
+            client.authorize(oauthVerifier[0]);
+            saveToken();
+            updateUserName();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (listener != null) {
+                listener.authorizationCompleted();
             }
         }
-        return userName;
+
+        public void updateUserName() {
+            String userName = "";
+            try {
+                userName = getUserName();
+            } catch (InterruptedException e) {
+                log.error(e);
+            } catch (ExecutionException e) {
+                log.error(e);
+            } catch (IOException e) {
+                log.error(e);
+            } catch (XmlPullParserException e) {
+                log.error(e);
+            }
+            app.getSettings().USER_DISPLAY_NAME.set(userName);
+        }
+
+        public String getUserName() throws InterruptedException, ExecutionException, IOException, XmlPullParserException {
+            Response response = getOsmUserDetails();
+            return parseUserName(response);
+        }
+
+        public Response getOsmUserDetails() throws InterruptedException, ExecutionException, IOException {
+            return performRequest(OSM_USER_DETAILS_URL, Verb.GET.name(), null);
+        }
+
+        public String parseUserName(Response response) throws XmlPullParserException, IOException {
+            String userName = null;
+            XmlPullParser parser = PlatformUtil.newXMLPullParser();
+            parser.setInput(response.getStream(), "UTF-8");
+            int tok;
+            while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+                if (tok == XmlPullParser.START_TAG && OSM_USER.equals(parser.getName())) {
+                    userName = parser.getAttributeValue("", DISPLAY_NAME);
+                }
+            }
+            return userName;
+        }
     }
 }

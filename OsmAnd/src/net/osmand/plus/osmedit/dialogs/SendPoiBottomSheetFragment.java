@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit.dialogs;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -109,19 +110,25 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
     @Override
     protected void onRightBottomButtonClick() {
-        final ProgressDialogPoiUploader progressDialogPoiUploader;
-        progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) getActivity());
-
-        String comment = messageEditText.getText().toString();
-        if (comment.length() > 0) {
-            for (OsmPoint osmPoint : poi) {
-                if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-                    ((OpenstreetmapPoint) osmPoint).setComment(comment);
-                    break;
+        ProgressDialogPoiUploader progressDialogPoiUploader = null;
+        Activity activity = getActivity();
+        if (activity instanceof MapActivity) {
+            progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
+        } else if (getParentFragment() instanceof ProgressDialogPoiUploader) {
+            progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
+        }
+        if (progressDialogPoiUploader != null) {
+            String comment = messageEditText.getText().toString();
+            if (comment.length() > 0) {
+                for (OsmPoint osmPoint : poi) {
+                    if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+                        ((OpenstreetmapPoint) osmPoint).setComment(comment);
+                        break;
+                    }
                 }
             }
+            progressDialogPoiUploader.showProgressDialog(poi, closeChangeSet.isChecked(), false);
         }
-        progressDialogPoiUploader.showProgressDialog(poi, closeChangeSet.isChecked(), false);
         dismiss();
     }
 

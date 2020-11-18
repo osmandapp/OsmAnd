@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit.dialogs;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
@@ -171,9 +172,16 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		ProgressDialogPoiUploader progressDialogPoiUploader;
-		progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) getActivity());
-		progressDialogPoiUploader.showProgressDialog(poi, false, uploadAnonymously.isChecked());
+		ProgressDialogPoiUploader progressDialogPoiUploader = null;
+		Activity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
+		} else if (getParentFragment() instanceof ProgressDialogPoiUploader) {
+			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
+		}
+		if (progressDialogPoiUploader != null) {
+			progressDialogPoiUploader.showProgressDialog(poi, false, uploadAnonymously.isChecked());
+		}
 		dismiss();
 	}
 
