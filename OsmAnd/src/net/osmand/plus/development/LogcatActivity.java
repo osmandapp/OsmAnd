@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -298,9 +299,7 @@ public class LogcatActivity extends ActionBarProgressActivity {
 				LogcatActivity activity = logcatActivity.get();
 				if (activity != null) {
 					boolean autoscroll = !activity.recyclerView.canScrollVertically(1);
-					for(String s : values) {
-						activity.logs.add(s);
-					}
+					activity.logs.addAll(Arrays.asList(values));
 					activity.adapter.notifyDataSetChanged();
 					if(autoscroll) {
 						activity.recyclerView.scrollToPosition(activity.logs.size() - 1);

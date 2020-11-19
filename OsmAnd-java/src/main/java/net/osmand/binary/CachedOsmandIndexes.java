@@ -241,9 +241,7 @@ public class CachedOsmandIndexes {
 				cblock.type = mr.getType();
 				mi.cities.add(cblock);
 			}
-			for(String s : index.getAdditionalTagsList()) {
-				mi.attributeTagsTable.add(s);
-			}
+			mi.attributeTagsTable.addAll(index.getAdditionalTagsList());
 			reader.addressIndexes.add(mi);
 			reader.indexes.add(mi);
 		}
