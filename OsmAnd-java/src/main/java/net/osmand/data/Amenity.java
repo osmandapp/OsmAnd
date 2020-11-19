@@ -1,16 +1,5 @@
 package net.osmand.data;
 
-import net.osmand.Location;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.util.Algorithms;
-
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -21,9 +10,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.zip.GZIPInputStream;
+
+import org.json.JSONObject;
 
 import gnu.trove.list.array.TIntArrayList;
+import net.osmand.Location;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.util.Algorithms;
 
 
 public class Amenity extends MapObject {
