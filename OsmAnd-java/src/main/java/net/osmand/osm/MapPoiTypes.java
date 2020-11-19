@@ -205,6 +205,20 @@ public class MapPoiTypes {
 			if (pt != null && !pt.isReference()) {
 				return pt;
 			}
+			if (pc.isWiki() && name.startsWith(WIKI_LANG)) {
+				return getPoiTypeForWiki(pc, name);
+			}
+		}
+		return null;
+	}
+
+	public AbstractPoiType getPoiTypeForWiki(PoiCategory osmwiki, String name) {
+		for (PoiType pt : osmwiki.getPoiTypes()) {
+			for (PoiType wikiLangPt : pt.getPoiAdditionals()) {
+				if (wikiLangPt != null && Algorithms.objectEquals(wikiLangPt.getOsmTag(), name)) {
+					return wikiLangPt;
+				}
+			}
 		}
 		return null;
 	}
