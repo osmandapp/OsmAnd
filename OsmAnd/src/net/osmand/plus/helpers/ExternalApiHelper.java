@@ -871,7 +871,7 @@ public class ExternalApiHelper {
 			searchTypes.add(HOUSE);
 			searchTypes.add(STREET_INTERSECTION);
 		}
-		searchSettings = searchSettings.setSearchTypes(searchTypes.toArray(new ObjectType[searchTypes.size()]));
+		searchSettings = searchSettings.setSearchTypes(searchTypes.toArray(new ObjectType[0]));
 
 		core.search(searchQuery, false, null, searchSettings);
 	}

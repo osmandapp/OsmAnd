@@ -415,7 +415,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 										public void onClick(DialogInterface dialog, int which) {
 											List<GpxInfo> selectedItems = f.getSelectedItems();
 											sendGPXFiles(activity, f,
-													selectedItems.toArray(new GpxInfo[selectedItems.size()]));
+													selectedItems.toArray(new GpxInfo[0]));
 										}
 									});
 							return true;

@@ -349,7 +349,7 @@ public class DownloadFileHelper {
 		private int currentRead = 0;
 
 		public CountingMultiInputStream(List<InputStream> streams) {
-			this.delegate = streams.toArray(new InputStream[streams.size()]);
+			this.delegate = streams.toArray(new InputStream[0]);
 		}
 		
 		@Override

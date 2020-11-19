@@ -410,7 +410,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					tabTypeList.add(GPXTabItemType.GPX_TAB_ITEM_SPEED);
 				}
 			}
-			tabTypes = tabTypeList.toArray(new GPXTabItemType[tabTypeList.size()]);
+			tabTypes = tabTypeList.toArray(new GPXTabItemType[0]);
 
 			Context context = tabs.getContext();
 			titles = new String[tabTypes.length];

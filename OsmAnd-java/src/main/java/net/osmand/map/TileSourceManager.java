@@ -140,7 +140,7 @@ public class TileSourceManager {
 					}
 				}
 			}
-			return randoms.toArray(new String[randoms.size()]);
+			return randoms.toArray(new String[0]);
 		}
 
 		public void setMinZoom(int minZoom) {

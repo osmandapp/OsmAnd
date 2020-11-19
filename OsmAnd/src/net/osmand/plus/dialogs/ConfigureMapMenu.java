@@ -404,7 +404,7 @@ public class ConfigureMapMenu {
 						bld.setTitle(R.string.map_magnifier);
 						bld.setNegativeButton(R.string.shared_string_dismiss, null);
 						DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-								values.toArray(new String[values.size()]), nightMode, i, app, selectedProfileColor, themeRes, new View.OnClickListener() {
+								values.toArray(new String[0]), nightMode, i, app, selectedProfileColor, themeRes, new View.OnClickListener() {
 									@Override
 									public void onClick(View v) {
 										int which = (int) v.getTag();
@@ -639,7 +639,7 @@ public class ConfigureMapMenu {
 				return mp.get(lhs).compareTo(mp.get(rhs));
 			}
 		});
-		return lst.toArray(new String[lst.size()]);
+		return lst.toArray(new String[0]);
 	}
 
 	public static String[] getMapNamesValues(Context ctx, String[] ids) {

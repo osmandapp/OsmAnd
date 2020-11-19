@@ -554,7 +554,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	public void doAction(int actionResId) {
 		if (actionResId == R.string.shared_string_delete) {
 			operationTask = new DeleteGpxTask();
-			operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, selectedItems.toArray(new GpxInfo[selectedItems.size()]));
+			operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, selectedItems.toArray(new GpxInfo[0]));
 		} else {
 			operationTask = null;
 		}
@@ -1009,7 +1009,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				List<GpxInfo> progress = new ArrayList<>();
 				loadGPXFolder(mapPath, result, loadTask, progress, "");
 				if (!progress.isEmpty()) {
-					loadTask.loadFile(progress.toArray(new GpxInfo[progress.size()]));
+					loadTask.loadFile(progress.toArray(new GpxInfo[0]));
 				}
 			}
 		}
@@ -1029,7 +1029,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					result.add(info);
 					progress.add(info);
 					if (progress.size() > 7) {
-						loadTask.loadFile(progress.toArray(new GpxInfo[progress.size()]));
+						loadTask.loadFile(progress.toArray(new GpxInfo[0]));
 						progress.clear();
 					}
 				}
@@ -1475,7 +1475,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					list.add(GPXDataSetType.SLOPE);
 				}
 				if (list.size() > 0) {
-					gpxItem.chartTypes = list.toArray(new GPXDataSetType[list.size()]);
+					gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
 				}
 				final OsmandSettings settings = app.getSettings();
 				settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,

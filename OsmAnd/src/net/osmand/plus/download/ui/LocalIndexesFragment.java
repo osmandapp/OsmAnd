@@ -582,7 +582,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			operationTask = null;
 		}
 		if (operationTask != null) {
-			operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, selectedItems.toArray(new LocalIndexInfo[selectedItems.size()]));
+			operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, selectedItems.toArray(new LocalIndexInfo[0]));
 		}
 		if (actionMode != null) {
 			actionMode.finish();

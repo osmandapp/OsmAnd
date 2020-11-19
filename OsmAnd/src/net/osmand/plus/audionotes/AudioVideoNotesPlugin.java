@@ -1860,7 +1860,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	protected Recording[] getRecordingsSorted() {
 		checkRecordings();
 		Collection<Recording> allObjects = getAllRecordings();
-		Recording[] res = allObjects.toArray(new Recording[allObjects.size()]);
+		Recording[] res = allObjects.toArray(new Recording[0]);
 		Arrays.sort(res, new Comparator<Recording>() {
 
 			@Override

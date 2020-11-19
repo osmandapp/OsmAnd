@@ -1100,7 +1100,7 @@ public class ResourceManager {
 				}
 			}
 		}
-		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
+		return readers.toArray(new BinaryMapIndexReader[0]);
 	}
 
 	public BinaryMapIndexReader[] getTransportRoutingMapFiles() {
@@ -1114,7 +1114,7 @@ public class ResourceManager {
 				}
 			}
 		}
-		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
+		return readers.toArray(new BinaryMapIndexReader[0]);
 	}
 
 	public BinaryMapIndexReader[] getQuickSearchFiles() {
@@ -1129,7 +1129,7 @@ public class ResourceManager {
 				}
 			}
 		}
-		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
+		return readers.toArray(new BinaryMapIndexReader[0]);
 	}
 
 	public Map<String, String> getIndexFileNames() {

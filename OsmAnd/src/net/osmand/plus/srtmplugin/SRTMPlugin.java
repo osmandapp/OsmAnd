@@ -456,7 +456,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		List<String> possibleValuesList = new ArrayList<>(Arrays.asList(p.getPossibleValues()));
 		possibleValuesList.remove(CONTOUR_LINES_DISABLED_VALUE);
-		final String[] possibleValues = possibleValuesList.toArray(new String[possibleValuesList.size()]);
+		final String[] possibleValues = possibleValuesList.toArray(new String[0]);
 
 		int i = possibleValuesList.indexOf(pref.get());
 		if (i >= 0) {

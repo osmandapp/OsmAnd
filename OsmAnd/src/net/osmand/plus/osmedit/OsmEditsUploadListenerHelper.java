@@ -221,7 +221,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 					new UploadingMultipleErrorDialogFragment();
 			Bundle bundle = new Bundle();
 			bundle.putSerializable(POINTS_WITH_ERRORS,
-					pointsWithErrors.toArray(new OsmPoint[pointsWithErrors.size()]));
+					pointsWithErrors.toArray(new OsmPoint[0]));
 			bundle.putStringArray(POINT_NAMES, pointNames);
 			bundle.putBooleanArray(HAS_ERROR, hasErrors);
 			fragment.setArguments(bundle);
