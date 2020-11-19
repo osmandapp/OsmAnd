@@ -3914,10 +3914,10 @@
     <string name="complex_routing_descr">Двофазна маршрутизація для автомобільної навігації.</string>
     <string name="use_native_pt">Розвиток власного громадського транспорту</string>
     <string name="use_native_pt_desc">Перемкнутися на розрахунок маршруту громадським транспортом за допомогою Java (безпечний)</string>
-    <string name="perform_oauth_authorization_description">Виконати вхід OAuth для користування функцією osmedit</string>
+    <string name="perform_oauth_authorization_description">Увійти за допомогою OAuth для користування функцією osmedit</string>
     <string name="perform_oauth_authorization">Увійти через OAuth</string>
     <string name="clear_osm_token">Очистити токен OAuth OpenStreetMap</string>
-    <string name="osm_edit_logout_success">Ви успішно вийшли</string>
+    <string name="osm_edit_logout_success">Ви вийшли</string>
     <string name="use_live_public_transport">OsmAnd дані в реальному часі</string>
     <string name="routing_attr_avoid_footways_description">Уникати пішохідних шляхів</string>
     <string name="routing_attr_avoid_footways_name">Уникати пішохідних шляхів</string>
@@ -3951,10 +3951,10 @@
     <string name="subscription_on_hold_title">Передплата OsmAnd Live на утриманні</string>
     <string name="login_open_street_map">Увійти до OpenStreetMap.org</string>
     <string name="login_open_street_map_org">Увійти до OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">Увійдіть, щоб вивантажити нові або внесені зміни.
+    <string name="open_street_map_login_mode">Увійдіть, щоб вивантажити нові або внесені зміни,
 \n
-\nВи можете увійти, за допомогою безпечного методу OAuth, або скористатися своїм ім\'ям та паролем.</string>
-    <string name="use_login_password">Використовувати ім\'я і пароль</string>
+\nабо за допомогою безпечного методу OAuth або свого ім\'я та паролю.</string>
+    <string name="use_login_password">Увійти за допомогою імені користувача і паролю</string>
     <string name="login_account">Обліковий запис</string>
     <string name="user_login">Ім\'я користувача</string>
     <string name="sign_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
@@ -3967,14 +3967,20 @@
     <string name="gpx_upload_trackable_visibility_descr">«Відстежуваний» означає, що трек не з\'явиться в жодному загальнодоступному списку, але обробка точок з позначками часу від нього (які не можуть бути безпосередньо пов’язані з вами) виконується за допомогою завантажень із загальнодоступного API GPS.</string>
     <string name="osm_edit_close_note">Закрити примітку OSM</string>
     <string name="osm_edit_comment_note">Коментувати примітку OSM</string>
-    <string name="osm_login_descr">Ви можете увійти за допомогою безпечного методу OAuth або застосувавши свої ім\'я користувача й пароль.</string>
+    <string name="osm_login_descr">Увійдіть за допомогою безпечного методу OAuth або застосувавши свої ім\'я користувача й пароль.</string>
     <string name="shared_string_add_photo">Додати світлини</string>
     <string name="register_on_openplacereviews">Зареєструватися на
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Світлини надаються проєктом відкритих даних OpenPlaceReviews.org. Щоб завантажити світлини зареєструйтеся на сайті.</string>
+    <string name="register_on_openplacereviews_desc">Увійдіть на вебсайт проєкту відкритих даних OpenPlaceReviews.org, щоб завантажити ще більше світлин.</string>
     <string name="register_opr_create_new_account">Створити обліковий запис</string>
     <string name="register_opr_have_account">У мене вже є обліковий запис</string>
     <string name="shared_string_search_history">Журнал пошуку</string>
     <string name="app_mode_kayak">Каяк</string>
     <string name="app_mode_motorboat">Моторний човен</string>
+    <string name="shared_string_resources">Ресурси</string>
+    <string name="approximate_file_size">Приблизний розмір файлу</string>
+    <string name="select_data_to_export">Виберіть дані, які потрібно експортувати до файлу.</string>
+    <string name="file_size_needed_for_import">Необхідно для імпорту</string>
+    <string name="export_not_enough_space_descr">На вашому пристрої лише %1$s вільного простору. Звільніть місце або приберіть позначки з деяких елементів для експорту.</string>
+    <string name="export_not_enough_space">Бракує простору</string>
 </resources>
