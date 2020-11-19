@@ -3909,10 +3909,10 @@
     <string name="complex_routing_descr">التوجيه على مرحلتين لملاحة السيارة.</string>
     <string name="use_native_pt">تطوير النقل العام المحلي</string>
     <string name="use_native_pt_desc">قم بالتبديل إلى Java (الآمن) حساب توجيه النقل العام</string>
-    <string name="perform_oauth_authorization_description">قم بتسجيل الدخول إلى OAuth لاستخدام ميزات osmedit</string>
+    <string name="perform_oauth_authorization_description">سجّل الدخول باستخدام OAuth لاستخدام ميزات osmedit</string>
     <string name="perform_oauth_authorization">تسجيل الدخول عبر OAuth</string>
     <string name="clear_osm_token">مسح رمز OpenStreetMap OAuth</string>
-    <string name="osm_edit_logout_success">تسجيل الخروج بنجاح</string>
+    <string name="osm_edit_logout_success">تم تسجيل الخروج</string>
     <string name="file_already_imported">تم استيراد الملف بالفعل في أوسماند</string>
     <string name="use_two_phase_routing">استخدام خوارزمية توجيه من مرحلتين A*</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s البيانات المتوفرة فقط على الطرق ، تحتاج إلى حساب طريق باستخدام \"الطريق بين النقاط\" للحصول عليها.</string>
@@ -3940,32 +3940,38 @@
     <string name="subscription_expired_title">انتهت صلاحية اشتراك OsmAnd Live</string>
     <string name="subscription_paused_title">تم إيقاف اشتراك OsmAnd Live مؤقتًا</string>
     <string name="subscription_on_hold_title">اشتراك OsmAnd Live معلق</string>
-    <string name="login_open_street_map">تسجيل الدخول إلى خريطة الشارع المفتوح</string>
+    <string name="login_open_street_map">تسجيل الدخول ل OpenStreetMap</string>
     <string name="login_open_street_map_org">تسجيل الدخول إلى OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">تحتاج إلى تسجيل الدخول لرفع التغييرات الجديدة أو المعدلة.
+    <string name="open_street_map_login_mode">قم بتسجيل الدخول لرفع التغييرات الجديدة أو المعدلة.
 \n
-\nيمكنك تسجيل الدخول باستخدام طريقة التفويض الآمنة أو استخدام تسجيل الدخول وكلمة المرور.</string>
-    <string name="use_login_password">استخدام تسجيل الدخول وكلمة المرور</string>
+\nإما باستخدام OAuth أو باستخدام اسم المستخدم وكلمة المرور.</string>
+    <string name="use_login_password">سجل الدخول باسم المستخدم وكلمة المرور</string>
     <string name="login_account">الحساب</string>
-    <string name="user_login">تسجيل الدخول</string>
+    <string name="user_login">اسم المستخدم</string>
     <string name="gpx_upload_trackable_visibility_descr">\"إمكانية التتبع\" تعني أن التتبع لا يظهر في أي قوائم عامة ولكن نقاط التتبع المعالجة مع طوابع زمنية صادرة عنها(التي لا يمكن أن تكون مرتبطة بك مباشرة) ستظهر خلال التنزيلات من واجهة برمجة التطبيقات GPS API العامة.</string>
     <string name="markers_history">سجل تاريخ العلامات</string>
     <string name="send_files_to_openstreetmap">أرسل ملف GPX إلى OpenStreetMap</string>
     <string name="enter_text_separated">أدخل العلامات مفصولة بفاصلة.</string>
     <string name="gpx_upload_private_visibility_descr">\"خاص\"يعني أن التتبع لن يظهر في أي قوائم عامة ، ولكن نقاط التتبع الصادرة عنه ستظل متاحة من خلال واجهة برمجة تطبيقات GPS API العامة بدون طوابع زمنية ولكن لن يتم ترتيبها ترتيبًا زمنيًا.</string>
-    <string name="sign_in_with_open_street_map">قم بتسجيل الدخول باستخدام OpenStreetMap</string>
+    <string name="sign_in_with_open_street_map">سجّل الدخول باستخدام OpenStreetMap</string>
     <string name="gpx_upload_public_visibility_descr">عام يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة. البيانات المقدمة عبر API لا تشير إلى صفحة التتبع الخاصة بك. الطوابع الزمنية لنقاط التتبع غير متاحة من خلال واجهة برمجة تطبيقات GPS API العامة، والنقاط غير مرتبة ترتيبًا زمنيًا. ومع ذلك، لا يزال المستخدمون الآخرون قادرين على تنزيل التتبع الأولي من قائمة التتبع العامة وأي طوابع زمنية مضمنة فيه.</string>
     <string name="gpx_upload_identifiable_visibility_descr">متعرف عليه يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة، أي سيتمكن المستخدمون الآخرون من تنزيل التتبع الأولي وربطه باسم المستخدم الخاص بك. ستشير البيانات التي يتم تقديمها عبر API نقاط التتبع إلى صفحة التتبع الأصلية الخاصة بك. الطوابع الزمنية لنقاط التتبع متاحة من خلال واجهة برمجة تطبيقات GPS API العامة.</string>
     <string name="osm_edit_close_note">أغلاق ملاحظة OSM</string>
     <string name="osm_edit_comment_note">تعليق ملاحظة OSM</string>
-    <string name="osm_login_descr">يمكنك تسجيل الدخول باستخدام طريقة OAuth الآمنة أو استخدام تسجيل الدخول وكلمة المرور الخاصة بك.</string>
+    <string name="osm_login_descr">قم بتسجيل الدخول باستخدام طريقة OAuth الآمنة أو استخدم اسم المستخدم وكلمة المرور.</string>
     <string name="shared_string_add_photo">إضافة صورة</string>
     <string name="register_on_openplacereviews">سجل في
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">يتم توفير الصور من خلال مشروع البيانات المفتوحة OpenPlaceReviews.org. من أجل رفع الصور الخاصة بك، تحتاج إلى الاشتراك بالموقع.</string>
+    <string name="register_on_openplacereviews_desc">قم بتسجيل الدخول إلى موقع مشروع البيانات المفتوحة OpenPlaceReviews.org لرفع المزيد من الصور.</string>
     <string name="register_opr_create_new_account">إنشاء حساب جديد</string>
     <string name="register_opr_have_account">لدي حساب بالفعل</string>
     <string name="app_mode_kayak">كاياك (قوارب صغيرة فردية)</string>
     <string name="app_mode_motorboat">زورق</string>
     <string name="shared_string_search_history">سجل البحث</string>
+    <string name="export_not_enough_space_descr">جهازك يحتوي على %1$s فقط متاحة . الرجاء إخلاء بعض المساحة أو إلغاء تحديد بعض العناصر للتصدير.</string>
+    <string name="shared_string_resources">المصادر</string>
+    <string name="approximate_file_size">حجم الملف التقريبي</string>
+    <string name="select_data_to_export">حدد البيانات التي سيتم تصديرها إلى الملف.</string>
+    <string name="file_size_needed_for_import">مطلوب للاستيراد</string>
+    <string name="export_not_enough_space">لا يوجد مساحة كافية</string>
 </resources>
