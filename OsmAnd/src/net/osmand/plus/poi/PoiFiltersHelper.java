@@ -231,9 +231,8 @@ public class PoiFiltersHelper {
 	public List<PoiUIFilter> getTopDefinedPoiFilters(boolean includeDeleted) {
 		List<PoiUIFilter> top = this.cacheTopStandardFilters;
 		if (top == null) {
-			top = new ArrayList<>();
 			// user defined
-			top.addAll(getUserDefinedPoiFilters(true));
+			top = new ArrayList<>(getUserDefinedPoiFilters(true));
 			// default
 			MapPoiTypes poiTypes = application.getPoiTypes();
 			for (AbstractPoiType t : poiTypes.getTopVisibleFilters()) {

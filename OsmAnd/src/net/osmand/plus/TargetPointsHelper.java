@@ -345,8 +345,7 @@ public class TargetPointsHelper {
 	}
 
 	public List<TargetPoint> getIntermediatePointsWithTarget() {
-		List<TargetPoint> res = new ArrayList<>();
-		res.addAll(this.intermediatePoints);
+		List<TargetPoint> res = new ArrayList<>(this.intermediatePoints);
 		if(pointToNavigate != null) {
 			res.add(pointToNavigate);
 		}

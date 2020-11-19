@@ -345,7 +345,6 @@ public final class JtsAdapter {
             for(int i = 0; i < geom.getNumGeometries(); ++i) {
 
                 final Polygon nextPoly = (Polygon) geom.getGeometryN(i);
-                final List<Integer> nextPolyGeom = new ArrayList<>();
                 boolean valid = true;
 
                 // Add exterior ring
@@ -362,7 +361,7 @@ public final class JtsAdapter {
                     CoordinateArrays.reverse(exteriorRing.getCoordinates());
                 }
 
-                nextPolyGeom.addAll(linesToGeomCmds(exteriorRing, mvtClosePath, cursor, 2));
+                final List<Integer> nextPolyGeom = new ArrayList<>(linesToGeomCmds(exteriorRing, mvtClosePath, cursor, 2));
 
 
                 // Add interior rings

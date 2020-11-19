@@ -367,8 +367,7 @@ public class MenuBuilder {
 					@Override
 					public void onFinish(List<ImageCard> cardList) {
 						if (!isHidden()) {
-							List<AbstractCard> cards = new ArrayList<>();
-							cards.addAll(cardList);
+							List<AbstractCard> cards = new ArrayList<AbstractCard>(cardList);
 							if (cardList.size() == 0) {
 								cards.add(new NoImagesCard(mapActivity));
 							}

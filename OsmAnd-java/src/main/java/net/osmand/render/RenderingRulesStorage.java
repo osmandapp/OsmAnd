@@ -432,8 +432,7 @@ public class RenderingRulesStorage {
 				for(RenderingRule ch : caseChildren) {
 					List<RenderingRule> apply = applyRules;
 					if(!renderingRule.getIfChildren().isEmpty()) {
-						apply = new ArrayList<RenderingRule>();
-						apply.addAll(renderingRule.getIfChildren());
+						apply = new ArrayList<>(renderingRule.getIfChildren());
 						if(applyRules != null) {
 							apply.addAll(applyRules);
 						}
