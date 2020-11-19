@@ -1,6 +1,7 @@
 package net.osmand.data;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -95,6 +96,13 @@ public class Amenity extends MapObject {
 			return Collections.emptyMap();
 		}
 		return additionalInfo;
+	}
+	
+	public Collection<String> getAdditionalInfoKeys() {
+		if (additionalInfo == null) {
+			return Collections.emptyList();
+		}
+		return additionalInfo.keySet();
 	}
 
 	public void setAdditionalInfo(Map<String, String> additionalInfo) {
