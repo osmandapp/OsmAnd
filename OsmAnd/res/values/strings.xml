@@ -17,6 +17,9 @@
     <string name="select_data_to_export">Select the data to be exported to the file.</string>
     <string name="approximate_file_size">Approximate file size</string>
     <string name="shared_string_resources">Resources</string>
+    <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos specified in OpenStreetMap data.</string>
+    <string name="add_to_opr">Add to OpenPlaceReviews</string>
+    <string name="add_to_mapillary">Add to Mapillary</string>
     <string name="app_mode_motorboat">Motorboat</string>
     <string name="app_mode_kayak">Kayak</string>
     <string name="shared_string_search_history">Search history</string>
