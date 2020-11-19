@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -37,11 +39,8 @@ import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginListener,
 		OsmAuthorizationListener {
 
-	public static final String TAG = OsmEditingFragment.class.getName();
-
 	private static final Log log = PlatformUtil.getLog(OsmEditingFragment.class);
 
-	public static final String OPEN_PLUGIN = "open_plugins";
 	private static final String OSM_LOGOUT = "osm_logout";
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
 	public static final String OSM_LOGIN_DATA = "osm_login_data";
@@ -53,6 +52,17 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
+
+		FragmentActivity activity = requireMyActivity();
+		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					mapActivity.launchPrevActivityIntent();
+				}
+				dismiss();
+			}
+		});
 	}
 
 	@Override
@@ -199,18 +209,5 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	@Override
 	public void authorizationCompleted() {
 		updateAllSettings();
-	}
-
-	public static boolean showInstance(FragmentManager fragmentManager) {
-		try {
-			OsmEditingFragment fragment = new OsmEditingFragment();
-			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
 	}
 }

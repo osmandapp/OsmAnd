@@ -1,8 +1,6 @@
 package net.osmand.plus.osmedit.dialogs;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
@@ -16,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -29,7 +28,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
@@ -43,6 +41,7 @@ import org.apache.commons.logging.Log;
 import static net.osmand.plus.UiUtilities.setupDialogButton;
 import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
 import static net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
+import static net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
 import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.OPENSTREETMAP_POINT;
 import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
 import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
@@ -136,8 +135,11 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		account.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					showOpenStreetMapScreen(activity);
+				}
 				dismiss();
-				showOpenStreetMapScreen();
 			}
 		});
 		final SimpleBottomSheetItem bottomSheetItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
@@ -182,14 +184,6 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
-	}
-
-	private void showOpenStreetMapScreen() {
-		Bundle params = new Bundle();
-		params.putBoolean(OsmEditingFragment.OPEN_PLUGIN, true);
-		Context context = getView().getContext();
-		Intent intent = getActivity().getIntent();
-		MapActivity.launchMapActivityMoveToTop(context, intent != null ? intent.getExtras() : null, null, params);
 	}
 
 	@Override

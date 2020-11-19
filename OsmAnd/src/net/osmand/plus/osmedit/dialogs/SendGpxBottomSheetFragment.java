@@ -1,7 +1,5 @@
 package net.osmand.plus.osmedit.dialogs;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -31,15 +29,18 @@ import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
-import net.osmand.plus.osmedit.OsmEditingFragment;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
 import net.osmand.plus.osmedit.UploadGPXFilesTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.OPEN_STREET_MAP_EDITING;
 
 public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
@@ -105,8 +106,11 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		account.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					showOpenStreetMapScreen(activity);
+				}
 				dismiss();
-				showOpenStreetMapScreen();
 			}
 		});
 		RecyclerView iconCategoriesRecyclerView = sendOsmPoiView.findViewById(R.id.description_view);
@@ -120,12 +124,21 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		items.add(titleItem);
 	}
 
-	private void showOpenStreetMapScreen() {
-		Bundle params = new Bundle();
-		params.putBoolean(OsmEditingFragment.OPEN_PLUGIN, true);
-		Context context = getView().getContext();
-		Intent intent = getActivity().getIntent();
-		MapActivity.launchMapActivityMoveToTop(context, intent != null ? intent.getExtras() : null, null, params);
+	protected static void showOpenStreetMapScreen(@NonNull FragmentActivity activity) {
+		if (activity instanceof MapActivity) {
+			BaseSettingsFragment.showInstance(activity, OPEN_STREET_MAP_EDITING);
+		} else {
+			Bundle prevIntentParams = null;
+			if (activity instanceof FavoritesActivity) {
+				prevIntentParams = ((FavoritesActivity) activity).storeCurrentState();
+			} else if (activity.getIntent() != null) {
+				prevIntentParams = activity.getIntent().getExtras();
+			}
+			Bundle params = new Bundle();
+			params.putString(BaseSettingsFragment.OPEN_SETTINGS, OPEN_STREET_MAP_EDITING.name());
+
+			MapActivity.launchMapActivityMoveToTop(activity, prevIntentParams, null, params);
+		}
 	}
 
 	@Override
