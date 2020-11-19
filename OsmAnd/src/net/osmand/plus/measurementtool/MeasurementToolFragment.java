@@ -279,10 +279,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			View pointListBtn = customRadioButton.findViewById(R.id.left_button_container);
 			TextView tvPointListBtn = customRadioButton.findViewById(R.id.left_button);
 			tvPointListBtn.setText(R.string.shared_string_gpx_points);
+			tvPointListBtn.setEnabled(true);
 			pointListBtn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					changeAdditionalInfoType(AdditionalInfoType.POINTS);
+					int pointsCount = editingCtx.getPointsCount();
+					if (pointsCount < 1) {
+						disable(upDownBtn);
+						collapseAdditionalInfoView();
+					} else {
+						expandAdditionalInfoView();
+					}
+					updateUpDownBtn();
 				}
 			});
 
@@ -293,6 +302,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				@Override
 				public void onClick(View v) {
 					changeAdditionalInfoType(AdditionalInfoType.GRAPH);
+					expandAdditionalInfoView();
+					updateUpDownBtn();
 				}
 			});
 		}
@@ -416,7 +427,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				addCenterPoint();
 			}
 		});
-
+		int widthInPixels = getResources().getDimensionPixelOffset(R.dimen.gpx_group_button_width);
+		addPointButton.setMinimumWidth(widthInPixels);
 		measurementLayer.setOnSingleTapListener(new MeasurementToolLayer.OnSingleTapListener() {
 			@Override
 			public void onAddPoint() {
@@ -425,9 +437,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			@Override
 			public void onSelectPoint(int selectedPointPos) {
-				if (additionalInfoExpanded) {
-					collapseAdditionalInfoView();
-				}
 				if (selectedPointPos != -1) {
 					openSelectedPointMenu(mapActivity);
 				}
@@ -1479,6 +1488,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				collapseAdditionalInfoView();
 			} else if (pointsCount < 1) {
 				disable(upDownBtn);
+				collapseAdditionalInfoView();
 				if (additionalInfoExpanded) {
 					collapseAdditionalInfoView();
 				}

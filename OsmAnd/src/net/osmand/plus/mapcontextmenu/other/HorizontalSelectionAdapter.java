@@ -1,7 +1,9 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -46,6 +48,12 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		setItems(items);
 	}
 
+	public static float convertDpToPixel(float dp){
+		DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+		float px = dp * (metrics.densityDpi / 160f);
+		return Math.round(px);
+	}
+
 	public void setItems(List<HorizontalSelectionItem> items) {
 		this.items = items;
 	}
@@ -63,6 +71,8 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, final int position) {
 		final HorizontalSelectionItem item = items.get(holder.getAdapterPosition());
 		TextView textView = holder.buttonText;
+		int innerPadding = (int) convertDpToPixel(16);
+		textView.setPadding(innerPadding, 0, innerPadding, 0);
 		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		if (item.equals(selectedItem) && item.isEnabled()) {
 			AndroidUtils.setBackground(holder.button, app.getUIUtilities().getPaintedIcon(
