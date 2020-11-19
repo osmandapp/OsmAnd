@@ -14,11 +14,11 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.helpers.enums.AngularConstants;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.enums.SpeedConstants;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormatSymbols;
@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 
 import static net.osmand.data.PointDescription.getLocationOlcName;
 
@@ -417,7 +416,7 @@ public class OsmAndFormatter {
 		String typeName = amenity.getSubType();
 		if (pt != null) {
 			typeName = pt.getTranslation();
-		} else if(typeName != null){
+		} else if (typeName != null) {
 			typeName = Algorithms.capitalizeFirstLetterAndLowercase(typeName.replace('_', ' '));
 		}
 		List<String> res = new ArrayList<>();
@@ -426,7 +425,7 @@ public class OsmAndFormatter {
 		for (String name : amenity.getAllNames(true)) {
 			addPoiString(typeName, name, res);
 		}
-		for (String name : amenity.getAdditionalInfo().values()) {
+		for (String name : amenity.getAdditionalInfoValues(false)) {
 			addPoiString(typeName, name, res);
 		}
 		return res;
@@ -444,36 +443,34 @@ public class OsmAndFormatter {
 
 	public static String getAmenityDescriptionContent(OsmandApplication ctx, Amenity amenity, boolean shortDescription) {
 		StringBuilder d = new StringBuilder();
-		if(amenity.getType().isWiki()) {
+		if (amenity.getType().isWiki()) {
 			return "";
 		}
 		MapPoiTypes poiTypes = ctx.getPoiTypes();
-		for(Entry<String, String>  e : amenity.getAdditionalInfo().entrySet()) {
-			String key = e.getKey();
-			String vl = e.getValue();
-			if(key.startsWith("name:")) {
+		for (String key : amenity.getAdditionalInfoKeys()) {
+			String vl = amenity.getAdditionalInfo(key);
+			if (key.startsWith("name:")) {
 				continue;
-			} else if(vl.length() >= 150) {
-				if(shortDescription) {
+			} else if (vl.length() >= 150) {
+				if (shortDescription) {
 					continue;
 				}
-			} else if(Amenity.OPENING_HOURS.equals(key)) {
+			} else if (Amenity.OPENING_HOURS.equals(key)) {
 				d.append(ctx.getString(R.string.opening_hours) + ": ");
-			} else if(Amenity.PHONE.equals(key)) {
+			} else if (Amenity.PHONE.equals(key)) {
 				d.append(ctx.getString(R.string.phone) + ": ");
-			} else if(Amenity.WEBSITE.equals(key)) {
+			} else if (Amenity.WEBSITE.equals(key)) {
 				d.append(ctx.getString(R.string.website) + ": ");
 			} else {
-				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(e.getKey());
+				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
 				if (pt != null) {
-					if(pt instanceof PoiType && !((PoiType) pt).isText()) {
+					if (pt instanceof PoiType && !((PoiType) pt).isText()) {
 						vl = pt.getTranslation();
 					} else {
-						vl = pt.getTranslation() + ": " + amenity.unzipContent(e.getValue());
+						vl = pt.getTranslation() + ": " + vl;
 					}
 				} else {
-					vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey()) +
-					 ": " + amenity.unzipContent(e.getValue());
+					vl = Algorithms.capitalizeFirstLetterAndLowercase(key) + ": " + vl;
 				}
 			}
 			d.append(vl).append('\n');
