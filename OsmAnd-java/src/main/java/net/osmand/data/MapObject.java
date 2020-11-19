@@ -13,7 +13,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -351,8 +350,8 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return json;
 	}
 	
-	public String unzipContent(String str) {
-		if (str != null && str.startsWith(" gz ")) {
+	String unzipContent(String str) {
+		if (isContentZipped(str)) {
 			try {
 				int ind = 4;
 				byte[] bytes = new byte[str.length() - ind];
@@ -374,6 +373,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 			}
 		}
 		return str;
+	}
+
+	boolean isContentZipped(String str) {
+		return str != null && str.startsWith(" gz ");
 	}
 
 	protected static void parseJSON(JSONObject json, MapObject o) {

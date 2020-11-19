@@ -91,11 +91,38 @@ public class Amenity extends MapObject {
 	}
 
 
-	public Map<String, String> getAdditionalInfo() {
+	// this method should be used carefully
+	public Map<String, String> getInternalAdditionalInfoMap() {
 		if (additionalInfo == null) {
 			return Collections.emptyMap();
 		}
 		return additionalInfo;
+	}
+	
+	public Collection<String> getAdditionalInfoValues(boolean excludeZipped) {
+		if (additionalInfo == null) {
+			return Collections.emptyList();
+		}
+		boolean zipped = false;
+		for(String v : additionalInfo.values()) {
+			if(isContentZipped(v)) {
+				zipped = true;
+				break;
+			}
+		}
+		if(zipped) {
+			List<String> r = new ArrayList<>(additionalInfo.size());
+			for(String str : additionalInfo.values()) {
+				if(excludeZipped && isContentZipped(str)) {
+					
+				} else {
+					r.add(unzipContent(str));
+				}
+			}
+			return r;
+		} else {
+			return additionalInfo.values();
+		}
 	}
 	
 	public Collection<String> getAdditionalInfoKeys() {
@@ -184,7 +211,7 @@ public class Amenity extends MapObject {
 		}
 		int maxLen = 0;
 		String lng = defLang;
-		for (String nm : getAdditionalInfo().keySet()) {
+		for (String nm : getAdditionalInfoKeys()) {
 			if (nm.startsWith(tag + ":")) {
 				String key = nm.substring(tag.length() + 1);
 				String cnt = getAdditionalInfo(tag + ":" + key);
@@ -206,7 +233,7 @@ public class Amenity extends MapObject {
 
 	public List<String> getNames(String tag, String defTag) {
 		List<String> l = new ArrayList<String>();
-		for (String nm : getAdditionalInfo().keySet()) {
+		for (String nm : getAdditionalInfoKeys()) {
 			if (nm.startsWith(tag + ":")) {
 				l.add(nm.substring(tag.length() + 1));
 			} else if (nm.equals(tag)) {
@@ -231,7 +258,7 @@ public class Amenity extends MapObject {
 		if (!Algorithms.isEmpty(enName)) {
 			return enName;
 		}
-		for (String nm : getAdditionalInfo().keySet()) {
+		for (String nm : getAdditionalInfoKeys()) {
 			if (nm.startsWith(tag + ":")) {
 				return getAdditionalInfo(nm);
 			}
@@ -347,4 +374,6 @@ public class Amenity extends MapObject {
 		}
 		return a;
 	}
+
+	
 }
