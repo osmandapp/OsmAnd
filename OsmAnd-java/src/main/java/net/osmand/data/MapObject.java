@@ -368,6 +368,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 				}
 				br.close();
 				str = bld.toString();
+				// ugly fix of temporary problem of map generation
+				if(isContentZipped(str)) {
+					str = unzipContent(str);
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
