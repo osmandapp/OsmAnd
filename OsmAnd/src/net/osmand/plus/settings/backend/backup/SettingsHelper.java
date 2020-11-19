@@ -55,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -473,7 +474,7 @@ public class SettingsHelper {
 
 	public List<SettingsItem> getFilteredSettingsItems(List<ExportSettingsType> settingsTypes, boolean globalExport) {
 		Map<ExportSettingsCategory, List<ExportDataObject>> dataList = getAdditionalData(globalExport);
-		Map<ExportSettingsType, List<?>> typesMap = new HashMap<>();
+		Map<ExportSettingsType, List<?>> typesMap = new EnumMap<>(ExportSettingsType.class);
 		for (List<ExportDataObject> objects : dataList.values()) {
 			for (ExportDataObject exportObject : objects) {
 				typesMap.put(exportObject.getType(), exportObject.getItems());
@@ -828,7 +829,7 @@ public class SettingsHelper {
 	}
 
 	public static Map<ExportSettingsType, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean importComplete) {
-		Map<ExportSettingsType, List<?>> settingsToOperate = new HashMap<>();
+		Map<ExportSettingsType, List<?>> settingsToOperate = new EnumMap<>(ExportSettingsType.class);
 		List<ApplicationModeBean> profiles = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
