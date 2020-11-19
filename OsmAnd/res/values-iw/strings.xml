@@ -3982,4 +3982,5 @@
     <string name="shared_string_search_history">היסטוריית חיפוש</string>
     <string name="app_mode_kayak">קיאק</string>
     <string name="app_mode_motorboat">סירת מנוע</string>
+    <string name="gpx_upload_identifiable_visibility_descr">מגדהי</string>
 </resources>
