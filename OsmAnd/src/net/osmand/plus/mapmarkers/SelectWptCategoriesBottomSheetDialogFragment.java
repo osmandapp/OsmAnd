@@ -81,7 +81,8 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		Map<String, List<WptPt>> pointsByCategories = gpxFile.getPointsByCategories();
 
-		for (String category : pointsByCategories.keySet()) {
+		for (Map.Entry<String, List<WptPt>> entry : pointsByCategories.entrySet()) {
+			String category = entry.getKey();
 			final BottomSheetItemWithCompoundButton[] categoryItem = new BottomSheetItemWithCompoundButton[1];
 			categoryItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(!isUpdateMode || (categories != null && categories.contains(category)))
@@ -96,7 +97,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 						}
 					})
 					.setCompoundButtonColorId(activeColorResId)
-					.setDescription(String.valueOf(pointsByCategories.get(category).size()))
+					.setDescription(String.valueOf(entry.getValue().size()))
 					.setIcon(getContentIcon(R.drawable.ic_action_folder))
 					.setTitle(category.equals("") ? getString(R.string.shared_string_waypoints) : category)
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)

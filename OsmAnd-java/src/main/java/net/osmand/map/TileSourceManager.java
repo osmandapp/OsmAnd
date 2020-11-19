@@ -518,8 +518,8 @@ public class TileSourceManager {
 		}
 		if (override || !metainfo.exists()) {
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(metainfo)));
-			for (String key : properties.keySet()) {
-				writer.write("[" + key + "]\n" + properties.get(key) + "\n");
+			for (Map.Entry<String, String> entry : properties.entrySet()) {
+				writer.write("[" + entry.getKey() + "]\n" + entry.getValue() + "\n");
 			}
 			writer.close();
 		}

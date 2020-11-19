@@ -311,8 +311,9 @@ public class MapRenderRepositories {
 		}
 		boolean containsJapanMapData = false;
 		boolean useLive = context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get();
-		for (String mapName : files.keySet()) {
-			BinaryMapIndexReader fr = files.get(mapName);
+		for (Map.Entry<String, BinaryMapIndexReader> entry : files.entrySet()) {
+			String mapName = entry.getKey();
+			BinaryMapIndexReader fr = entry.getValue();
 			if (fr != null && (fr.containsMapData(leftX, topY, rightX, bottomY, zoom) ||
 					fr.containsRouteData(leftX, topY, rightX, bottomY, zoom))) {
 				if (!nativeFiles.contains(mapName)) {

@@ -803,10 +803,10 @@ public class GeoPointParserUtil {
 				if (map.size() > 0)
 					uriString += "?";
 				int i = 0;
-				for (String key : map.keySet()) {
+				for (Map.Entry<String, String> entry : map.entrySet()) {
 					if (i > 0)
 						uriString += "&";
-					uriString += key + "=" + map.get(key);
+					uriString += entry.getKey() + "=" + entry.getValue();
 					i++;
 				}
 				return uriString;

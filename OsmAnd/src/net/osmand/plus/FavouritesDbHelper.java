@@ -261,10 +261,11 @@ public class FavouritesDbHelper {
 
 	private boolean merge(Map<String, FavouritePoint> source, Map<String, FavouritePoint> destination) {
 		boolean changed = false;
-		for (String ks : source.keySet()) {
+		for (Map.Entry<String, FavouritePoint> entry : source.entrySet()) {
+			String ks = entry.getKey();
 			if (!destination.containsKey(ks)) {
 				changed = true;
-				destination.put(ks, source.get(ks));
+				destination.put(ks, entry.getValue());
 			}
 		}
 		return changed;
@@ -712,9 +713,10 @@ public class FavouritesDbHelper {
 
 	public boolean isGroupVisible(String name) {
 		String nameLowercase = name.toLowerCase();
-		for (String groupName : flatGroups.keySet()) {
+		for (Map.Entry<String, FavoriteGroup> entry : flatGroups.entrySet()) {
+			String groupName = entry.getKey();
 			if (groupName.toLowerCase().equals(nameLowercase) || FavoriteGroup.getDisplayName(context, groupName).equals(name)) {
-				return flatGroups.get(groupName).isVisible();
+				return entry.getValue().isVisible();
 			}
 		}
 		return false;

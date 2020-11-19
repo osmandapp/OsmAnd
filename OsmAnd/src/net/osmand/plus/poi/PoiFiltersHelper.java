@@ -751,14 +751,15 @@ public class PoiFiltersHelper {
 				}
 				Map<PoiCategory, LinkedHashSet<String>> types = p.getAcceptedTypes();
 				SQLiteStatement insertCategories = db.compileStatement("INSERT INTO " + CATEGORIES_NAME + " VALUES (?, ?, ?)");
-				for (PoiCategory a : types.keySet()) {
-					if (types.get(a) == null) {
+				for (Map.Entry<PoiCategory, LinkedHashSet<String>> entry : types.entrySet()) {
+					PoiCategory a = entry.getKey();
+					if (entry.getValue() == null) {
 						insertCategories.bindString(1, p.getFilterId());
 						insertCategories.bindString(2, a.getKeyName());
 						insertCategories.bindNull(3);
 						insertCategories.execute();
 					} else {
-						for (String s : types.get(a)) {
+						for (String s : entry.getValue()) {
 							insertCategories.bindString(1, p.getFilterId());
 							insertCategories.bindString(2, a.getKeyName());
 							insertCategories.bindString(3, s);

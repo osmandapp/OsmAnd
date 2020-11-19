@@ -684,9 +684,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			@Override
 			public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
 				super.uploadEnded(loadErrorsMap);
-				for (OsmPoint osmPoint : loadErrorsMap.keySet()) {
-					if (loadErrorsMap.get(osmPoint) == null) {
-						osmEdits.remove(osmPoint);
+				for (Map.Entry<OsmPoint, String> entry : loadErrorsMap.entrySet()) {
+					if (entry.getValue() == null) {
+						osmEdits.remove(entry.getKey());
 					}
 				}
 				recreateAdapterData();
