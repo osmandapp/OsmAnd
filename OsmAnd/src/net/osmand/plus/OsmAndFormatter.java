@@ -63,7 +63,7 @@ public class OsmAndFormatter {
 	private static final char WEST = 'W';
 	private static final char EAST = 'E';
 
-	{
+	static {
 		fixed2.setMinimumFractionDigits(2);
 		fixed1.setMinimumFractionDigits(1);
 		fixed1.setMinimumIntegerDigits(1);
