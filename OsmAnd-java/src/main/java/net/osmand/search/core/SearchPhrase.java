@@ -720,7 +720,7 @@ public class SearchPhrase {
                 if (result.containsKey(currRegionName)) {
                     result.get(currRegionName).add(r);
                 } else {
-                    result.put(currRegionName, new ArrayList<>(Arrays.asList(r)));
+                    result.put(currRegionName, new ArrayList<>(Collections.singletonList(r)));
                 }
                 it.remove();
             }
