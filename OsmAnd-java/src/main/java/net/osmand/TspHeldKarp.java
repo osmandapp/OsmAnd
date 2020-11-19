@@ -68,7 +68,7 @@ public class TspHeldKarp {
 					}
 					break;
 				}
-				System.err.printf(".");
+				System.err.print(".");
 				PriorityQueue<Node> children = new PriorityQueue<Node>(11, new NodeComparator());
 				children.add(exclude(currentNode, i, currentNode.parent[i]));
 				for (int j = 0; j < n; j++) {
