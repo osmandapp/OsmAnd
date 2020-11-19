@@ -728,7 +728,7 @@ public class MapRenderRepositories {
 			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
 			if(requestedBox.getZoom() <= zoomToOverviewLocalNames &&
-					"".equals(prefs.MAP_PREFERRED_LOCALE.get())) {
+					prefs.MAP_PREFERRED_LOCALE.get() != null && prefs.MAP_PREFERRED_LOCALE.get().isEmpty()) {
 				currentRenderingContext.preferredLocale = app.getLanguage();
 				currentRenderingContext.transliterate =
 						!languagesNotTransliterateOnBasemap.contains(app.getLanguage());

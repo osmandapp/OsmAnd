@@ -62,7 +62,7 @@ public class GeoPointParserUtil {
 
 	private static Map<String, String> getQueryParameters(String query) {
 		final LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
-		if (query != null && !query.equals("")) {
+		if (query != null && !query.isEmpty()) {
 			String[] params = query.split("[&/]");
 			for (String p : params) {
 				String[] keyValue = p.split("=");

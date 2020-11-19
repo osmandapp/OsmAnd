@@ -131,7 +131,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 		String descr;
 		if ((descr = marker.groupName) != null) {
-			if (descr.equals("")) {
+			if (descr.isEmpty()) {
 				descr = mapActivity.getString(R.string.shared_string_favorites);
 			}
 		} else {

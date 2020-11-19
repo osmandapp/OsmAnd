@@ -59,9 +59,9 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		final BooleanPreference pref = (BooleanPreference) preference;
 		CharSequence summaryOn = switchPreference.getSummaryOn();
 		CharSequence summaryOff = switchPreference.getSummaryOff();
-		final String on = summaryOn == null || summaryOn.toString().equals("")
+		final String on = summaryOn == null || summaryOn.toString().isEmpty()
 				? getString(R.string.shared_string_enabled) : summaryOn.toString();
-		final String off = summaryOff == null || summaryOff.toString().equals("")
+		final String off = summaryOff == null || summaryOff.toString().isEmpty()
 				? getString(R.string.shared_string_disabled) : summaryOff.toString();
 		final int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		final int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);

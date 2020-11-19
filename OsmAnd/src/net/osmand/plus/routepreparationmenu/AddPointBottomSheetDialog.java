@@ -651,7 +651,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 									((FavouritePoint) item).getSpecialPointType().getIconId(app), iconColor));
 							favoriteViewHolder.description.setText(point.getDescription());
 						} else {
-							if (point.getCategory().equals("")) {
+							if (point.getCategory().isEmpty()) {
 								favoriteViewHolder.description.setText(R.string.shared_string_favorites);
 							} else {
 								favoriteViewHolder.description.setText(point.getCategory());

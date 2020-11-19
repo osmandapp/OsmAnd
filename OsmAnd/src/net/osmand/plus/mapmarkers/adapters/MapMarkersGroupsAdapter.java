@@ -403,7 +403,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				final GroupHeader groupHeader = (GroupHeader) header;
 				final MapMarkersGroup group = groupHeader.getGroup();
 				String groupName = group.getName();
-				if (groupName.equals("")) {
+				if (groupName.isEmpty()) {
 					groupName = app.getString(R.string.shared_string_favorites);
 				} else if (group.getType() == MapMarkersGroup.GPX_TYPE) {
 					groupName = groupName.replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " ");
@@ -579,7 +579,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			Iterator<String> it = categories.iterator();
 			while (it.hasNext()) {
 				String category = it.next();
-				if (category.equals("")) {
+				if (category.isEmpty()) {
 					category = app.getResources().getString(R.string.shared_string_waypoints);
 				}
 				sb.append(category);

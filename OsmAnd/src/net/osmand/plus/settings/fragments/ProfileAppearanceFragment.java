@@ -897,7 +897,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 	
 	private boolean nameIsEmpty() {
-		return changedProfile.name.trim().equals("");
+		return changedProfile.name.trim().isEmpty();
 	}
 	
 	private void disableSaveButtonWithErrorMessage(String errorMessage) {

@@ -481,7 +481,7 @@ public class ConfigureMapMenu {
 				.createItem());
 
 		String localeDescr = activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get();
-		localeDescr = localeDescr == null || localeDescr.equals("") ? activity.getString(R.string.local_map_names)
+		localeDescr = localeDescr == null || localeDescr.isEmpty() ? activity.getString(R.string.local_map_names)
 				: localeDescr;
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_locale, activity)
 				.setId(MAP_LANGUAGE_ID)
@@ -570,7 +570,7 @@ public class ConfigureMapMenu {
 										txtIds[index]);
 								refreshMapComplete(activity);
 								String localeDescr = txtIds[index];
-								localeDescr = localeDescr == null || localeDescr.equals("") ? activity
+								localeDescr = localeDescr == null || localeDescr.isEmpty() ? activity
 										.getString(R.string.local_map_names) : localeDescr;
 								adapter.getItem(pos).setDescription(localeDescr);
 								ad.notifyDataSetInvalidated();

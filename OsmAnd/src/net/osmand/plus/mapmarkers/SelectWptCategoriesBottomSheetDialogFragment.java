@@ -99,7 +99,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 					.setCompoundButtonColorId(activeColorResId)
 					.setDescription(String.valueOf(entry.getValue().size()))
 					.setIcon(getContentIcon(R.drawable.ic_action_folder))
-					.setTitle(category.equals("") ? getString(R.string.shared_string_waypoints) : category)
+					.setTitle(category.isEmpty() ? getString(R.string.shared_string_waypoints) : category)
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
 					.setTag(category)
 					.setOnClickListener(new View.OnClickListener() {

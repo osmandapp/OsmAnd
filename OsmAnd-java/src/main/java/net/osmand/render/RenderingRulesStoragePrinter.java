@@ -221,7 +221,7 @@ public class RenderingRulesStoragePrinter {
 				mp+=", ";
 			}
 		}
-		if(mp.equals("")) {
+		if(mp.isEmpty()) {
 			mp = "java.util.Collections.EMPTY_MAP";
 		} else {
 			mp = "createMap(" +mp +")";

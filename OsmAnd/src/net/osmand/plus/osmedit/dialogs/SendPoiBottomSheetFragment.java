@@ -234,7 +234,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
         if (modifiedItemsOutOfLimit != 0) {
             comment = comment.concat("; ").concat(modifiedItemsOutOfLimit + " ")
                     .concat(getString(R.string.items_modified)).concat(".");
-        } else if (!comment.equals("")) {
+        } else if (!comment.isEmpty()) {
             comment = comment.concat(".");
         }
         return comment;

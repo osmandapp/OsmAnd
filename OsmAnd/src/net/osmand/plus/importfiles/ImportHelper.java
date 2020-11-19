@@ -513,7 +513,7 @@ public class ImportHelper {
 
 	private File getFileToSave(final String fileName, final File importDir, final WptPt pt) {
 		final StringBuilder builder = new StringBuilder(fileName);
-		if ("".equals(fileName)) {
+		if (fileName != null && fileName.isEmpty()) {
 			builder.append("import_").append(new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time))).append(GPX_FILE_EXT); //$NON-NLS-1$
 		}
 		if (fileName.endsWith(KML_SUFFIX)) {
