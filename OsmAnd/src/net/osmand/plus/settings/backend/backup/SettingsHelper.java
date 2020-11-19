@@ -428,8 +428,9 @@ public class SettingsHelper {
 						duplicateItems.add(((ProfileSettingsItem) item).getModeBean());
 					}
 				} else if (item instanceof CollectionSettingsItem<?>) {
-					List<?> duplicates = ((CollectionSettingsItem<?>) item).processDuplicateItems();
-					if (!duplicates.isEmpty()) {
+					CollectionSettingsItem settingsItem = (CollectionSettingsItem) item;
+					List<?> duplicates = settingsItem.processDuplicateItems();
+					if (!duplicates.isEmpty() && settingsItem.shouldShowDuplicates()) {
 						duplicateItems.addAll(duplicates);
 					}
 				} else if (item instanceof FileSettingsItem) {

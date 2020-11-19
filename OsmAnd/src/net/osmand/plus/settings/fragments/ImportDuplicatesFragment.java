@@ -321,10 +321,6 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 			duplicates.add(getString(R.string.markers_history));
 			duplicates.addAll(markersHistoryGroups);
 		}
-		if (!historyEntries.isEmpty()) {
-			duplicates.add(getString(R.string.shared_string_search_history));
-			duplicates.addAll(historyEntries);
-		}
 		return duplicates;
 	}
 
