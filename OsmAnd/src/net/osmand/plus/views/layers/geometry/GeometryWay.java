@@ -338,8 +338,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		if (tx.size() < 2) {
 			return;
 		}
+		boolean hasPathLine = false;
 		try {
-			boolean hasPathLine = false;
 			for (GeometryWayStyle<?> style : styles) {
 				if (style.hasPathLine()) {
 					hasPathLine = true;
@@ -360,7 +360,9 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 			drawer.drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
 		} finally {
-			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+			if (hasPathLine) {
+				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+			}
 		}
 	}
 
