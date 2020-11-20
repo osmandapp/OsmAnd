@@ -3989,4 +3989,10 @@
     <string name="file_size_needed_for_import">נדרש לייבוא</string>
     <string name="export_not_enough_space_descr">במכשיר שלך יש רק %1$s פנויים. נא לפנות מקום או לבטל כמה מהפריטים לייצוא.</string>
     <string name="export_not_enough_space">אין מספיק מקום</string>
+    <string name="add_to_mapillary">הוספה ל־Mapillary</string>
+    <string name="add_to_opr">הוספה ל־OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd מציג תמונות ממגוון מקורות:
+\nOpenPlaceReviews - תמונות של נקודות עניין;
+\nMapillary - תמונות ברמת הרחוב;
+\nאינטרנט / ויקימדיה - תמונות נקודות עניין שמצוינות בנתונים של OpenStreetMap.</string>
 </resources>
