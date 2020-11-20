@@ -269,6 +269,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
+		int widthInPixels = getResources().getDimensionPixelOffset(R.dimen.gpx_group_button_width);
 
 		View view = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.fragment_measurement_tool, container, false);
@@ -356,6 +357,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		View applyMovePointButton = mainView.findViewById(R.id.apply_move_point_button);
 		UiUtilities.setupDialogButton(nightMode, applyMovePointButton, UiUtilities.DialogButtonType.PRIMARY,
 				R.string.shared_string_apply);
+		applyMovePointButton.setMinimumWidth(widthInPixels);
 		applyMovePointButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -367,6 +369,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		View applyPointBeforeAfterButton = mainView.findViewById(R.id.apply_point_before_after_point_button);
 		UiUtilities.setupDialogButton(nightMode, applyPointBeforeAfterButton, UiUtilities.DialogButtonType.PRIMARY,
 				R.string.shared_string_apply);
+		applyPointBeforeAfterButton.setMinimumWidth(widthInPixels);
 		applyPointBeforeAfterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -377,6 +380,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		View addPointBeforeAfterButton = mainView.findViewById(R.id.add_point_before_after_button);
 		UiUtilities.setupDialogButton(nightMode, addPointBeforeAfterButton, UiUtilities.DialogButtonType.PRIMARY,
 				R.string.shared_string_add);
+		addPointBeforeAfterButton.setMinimumWidth(widthInPixels);
 		addPointBeforeAfterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -432,7 +436,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				addCenterPoint();
 			}
 		});
-		int widthInPixels = getResources().getDimensionPixelOffset(R.dimen.gpx_group_button_width);
 		addPointButton.setMinimumWidth(widthInPixels);
 		measurementLayer.setOnSingleTapListener(new MeasurementToolLayer.OnSingleTapListener() {
 			@Override
