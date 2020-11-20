@@ -28,7 +28,7 @@ import static org.openplacereviews.opendb.SecUtils.*;
 public class OpenDBAPI {
 	private static final Log log = PlatformUtil.getLog(SecUtils.class);
 	private static final String checkLoginEndpoint = "api/auth/user-check-loginkey?";
-	private static final String LOGIN_SUCCESS_MESSAGE = "success";
+	private static final String LOGIN_SUCCESS_MESSAGE = "{\"result\":\"OK\"}";
 	private static final int THREAD_ID = 11200;
 
 	/*
@@ -39,7 +39,7 @@ public class OpenDBAPI {
 	 * Need to encode key
 	 * Do not call on mainThread
 	 */
-	public boolean checkPrivateKeyValid(String username, String privateKey) throws UnsupportedEncodingException {
+	public boolean checkPrivateKeyValid(String username, String privateKey) {
 		String url = null;
 		try {
 			url = BuildConfig.OPR_BASE_URL + checkLoginEndpoint +
@@ -50,7 +50,7 @@ public class OpenDBAPI {
 					//need to encode the key
 					URLEncoder.encode(privateKey, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			throw e;
+			return false;
 		}
 		StringBuilder response = new StringBuilder();
 		return (NetworkUtils.sendGetRequest(url,null,response) == null) &&
@@ -63,7 +63,7 @@ public class OpenDBAPI {
 			Security.addProvider(new BouncyCastleProvider());
 		}
 		KeyPair kp = SecUtils.getKeyPair(ALGO_EC, privateKey, null);
-		String signed = username;// + ":opr-web";
+		String signed = username + ":opr-web";
 
 		JsonFormatter formatter = new JsonFormatter();
 		OPRImage OPRImage = new GsonBuilder().create().fromJson(image, OPRImage.class);

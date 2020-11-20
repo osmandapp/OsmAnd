@@ -438,6 +438,8 @@ public abstract class ImageCard extends AbstractCard {
 		public interface GetImageCardsListener {
 			void onPostProcess(List<ImageCard> cardList);
 
+			void onPlaceIdAcquired(String[] placeId);
+
 			void onFinish(List<ImageCard> cardList);
 		}
 
@@ -464,8 +466,7 @@ public abstract class ImageCard extends AbstractCard {
 				if (response != null) {
 					getPicturesForPlace(result, response);
 					String[] id = getIdFromResponse(response);
-					//TODO perform something with image
-					//listener.onOPRPlaceIdAcquired(id);
+					listener.onPlaceIdAcquired(id);
 				}
 			}
 			try {

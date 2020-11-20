@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="select_picture">Select picture</string>
+    <string name="cannot_upload_image">Cannot upload image, please, try again later</string>
     <string name="app_mode_motorboat">Motorboat</string>
     <string name="app_mode_kayak">Kayak</string>
     <string name="shared_string_search_history">Search history</string>
