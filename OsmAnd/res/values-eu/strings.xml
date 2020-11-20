@@ -3799,4 +3799,17 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="navigation_profile">Nabigazio profila</string>
     <string name="route_between_points_add_track_desc">Hautatu zein arrasto fitxategiari gehituko zaion segmentu berria.</string>
     <string name="set_working_days_to_continue">Ezarri behar dituzu lanegunak jarraitzeko</string>
+    <string name="shared_string_add_photo">Gehitu argazkia</string>
+    <string name="register_opr_create_new_account">Sortu kontu berria</string>
+    <string name="register_opr_have_account">Kontu bat daukat dagoeneko</string>
+    <string name="shared_string_search_history">Bilaketa-historia</string>
+    <string name="app_mode_kayak">Kayak</string>
+    <string name="app_mode_motorboat">Motor itsasontzia</string>
+    <string name="add_to_mapillary">Gehitu Mapillary-ra</string>
+    <string name="shared_string_resources">Baliabideak</string>
+    <string name="approximate_file_size">Fitxategiaren tamaina gutxi gorabehera</string>
+    <string name="select_data_to_export">Hautatu fitxategira esportatuko diren datuak.</string>
+    <string name="file_size_needed_for_import">Inportatzeko beharrezkoa da</string>
+    <string name="export_not_enough_space_descr">Zure gailuak %1$s soilik ditu libre. Mesedez, askatu espazioa edo desautatu esportatzeko elementu batzuk.</string>
+    <string name="export_not_enough_space">Ez dago espazio nahikorik</string>
 </resources>
