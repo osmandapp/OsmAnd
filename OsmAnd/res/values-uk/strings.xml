@@ -3983,4 +3983,10 @@
     <string name="file_size_needed_for_import">Необхідно для імпорту</string>
     <string name="export_not_enough_space_descr">На вашому пристрої лише %1$s вільного простору. Звільніть місце або приберіть позначки з деяких елементів для експорту.</string>
     <string name="export_not_enough_space">Бракує простору</string>
+    <string name="add_to_mapillary">Додати до Mapillary</string>
+    <string name="add_to_opr">Додати до OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd демонструє світлини з кількох джерел:
+\nOpenPlaceReviews — світлини POI;
+\nMapillary - зображення вулиць;
+\nМережа / Вікімедіа — світлини POI, вказані в даних OpenStreetMap.</string>
 </resources>
