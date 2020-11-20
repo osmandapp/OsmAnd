@@ -214,6 +214,10 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	@Override
 	public void onPreferenceChanged(String prefId) {
+		if (USE_DEV_URL.equals(prefId)) {
+			osmLogout();
+			authorizationAdapter = app.getOsmOAuthHelper().updateAdapter();
+		}
 		updateAllSettings();
 	}
 
