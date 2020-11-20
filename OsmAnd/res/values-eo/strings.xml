@@ -3980,4 +3980,14 @@
     <string name="shared_string_search_history">Serĉi en historio</string>
     <string name="app_mode_kayak">Kajako</string>
     <string name="app_mode_motorboat">Motorboato</string>
+    <string name="add_photos_descr">OsmAnd montras fotojn el diversaj fontoj:
+\nOpenPlaceReviews – fotoj de interesejoj;
+\nMapillary – strat‑nivela fotaro;
+\ninterreto, Vikimedio – fotoj de interesejoj difinitaj en OpenStreetMap-datumoj.</string>
+    <string name="shared_string_resources">Rimedoj</string>
+    <string name="approximate_file_size">Proksimuma dosiergrando</string>
+    <string name="select_data_to_export">Elektu datumojn por elporti al dosiero.</string>
+    <string name="file_size_needed_for_import">Necesa por enporti</string>
+    <string name="export_not_enough_space_descr">En via aparato estas nur %1$s da libera spaco. Liberigu iom da spaco aŭ malelektu iujn elementojn de elporto.</string>
+    <string name="export_not_enough_space">Mankas spaco</string>
 </resources>
