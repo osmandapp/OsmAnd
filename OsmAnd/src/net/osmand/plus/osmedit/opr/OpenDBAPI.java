@@ -66,17 +66,17 @@ public class OpenDBAPI {
 		String signed = username + ":opr-web";
 
 		JsonFormatter formatter = new JsonFormatter();
-		OPRImage OPRImage = new GsonBuilder().create().fromJson(image, OPRImage.class);
+		OPRImage oprImage = new GsonBuilder().create().fromJson(image, OPRImage.class);
 		OpOperation opOperation = new OpOperation();
 		opOperation.setType("opr.place");
 		List<Object> edits = new ArrayList<>();
 		Map<String, Object> edit = new TreeMap<>();
 		List<Object> imageResponseList = new ArrayList<>();
 		Map<String, Object> imageMap = new TreeMap<>();
-		imageMap.put("cid", OPRImage.cid);
-		imageMap.put("hash", OPRImage.hash);
-		imageMap.put("extension", OPRImage.extension);
-		imageMap.put("type", OPRImage.type);
+		imageMap.put("cid", oprImage.cid);
+		imageMap.put("hash", oprImage.hash);
+		imageMap.put("extension", oprImage.extension);
+		imageMap.put("type", oprImage.type);
 		imageResponseList.add(imageMap);
 		List<String> ids = new ArrayList<>(Arrays.asList(placeId));
 		Map<String, Object> change = new TreeMap<>();
@@ -130,5 +130,12 @@ public class OpenDBAPI {
 			log.error(e);
 		}
 		return -1;
+	}
+
+	public class OPRImage {
+		public String type;
+		public String hash;
+		public String cid;
+		public String extension;
 	}
 }

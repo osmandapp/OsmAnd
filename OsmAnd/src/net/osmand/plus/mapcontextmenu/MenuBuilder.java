@@ -112,6 +112,32 @@ public class MenuBuilder {
 	private View view;
 	private OpenDBAPI openDBAPI = new OpenDBAPI();
 	private String[] placeId = new String[0];
+	private GetImageCardsListener imageCardListener = new GetImageCardsListener() {
+		@Override
+		public void onPostProcess(List<ImageCard> cardList) {
+			processOnlinePhotosCards(cardList);
+		}
+
+		@Override
+		public void onPlaceIdAcquired(String[] placeId) {
+			MenuBuilder.this.placeId = placeId;
+		}
+
+		@Override
+		public void onFinish(List<ImageCard> cardList) {
+			if (!isHidden()) {
+				List<AbstractCard> cards = new ArrayList<>();
+				cards.addAll(cardList);
+				if (cardList.size() == 0) {
+					cards.add(new NoImagesCard(mapActivity));
+				}
+				if (onlinePhotoCardsRow != null) {
+					onlinePhotoCardsRow.setCards(cards);
+				}
+				onlinePhotoCards = cards;
+			}
+		}
+	};
 
 	public interface CollapseExpandListener {
 		void onCollapseExpand(boolean collapsed);
@@ -445,7 +471,7 @@ public class MenuBuilder {
 								.getString(R.string.successfully_uploaded_pattern), 1, 1);
 						app.showToastMessage(str);
 						//refresh the image
-						startLoadingImagesTask();
+						execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 					}
 				} else {
 					app.showToastMessage(view.getResources().getString(R.string.cannot_upload_image));
@@ -471,39 +497,13 @@ public class MenuBuilder {
 		if (onlinePhotoCardsRow == null) {
 			return;
 		}
-		onlinePhotoCards = new ArrayList<>();
-		onlinePhotoCardsRow.setProgressCard();
 		startLoadingImagesTask();
 	}
 
 	private void startLoadingImagesTask(){
-		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(),
-				new GetImageCardsListener() {
-					@Override
-					public void onPostProcess(List<ImageCard> cardList) {
-						processOnlinePhotosCards(cardList);
-					}
-
-					@Override
-					public void onPlaceIdAcquired(String[] placeId) {
-						MenuBuilder.this.placeId = placeId;
-					}
-
-					@Override
-					public void onFinish(List<ImageCard> cardList) {
-						if (!isHidden()) {
-							List<AbstractCard> cards = new ArrayList<>();
-							cards.addAll(cardList);
-							if (cardList.size() == 0) {
-								cards.add(new NoImagesCard(mapActivity));
-							}
-							if (onlinePhotoCardsRow != null) {
-								onlinePhotoCardsRow.setCards(cards);
-							}
-							onlinePhotoCards = cards;
-						}
-					}
-				}));
+		onlinePhotoCards = new ArrayList<>();
+		onlinePhotoCardsRow.setProgressCard();
+		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 	}
 
 	protected Map<String, String> getAdditionalCardParams() {
