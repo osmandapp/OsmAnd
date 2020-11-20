@@ -3964,15 +3964,30 @@
     <string name="enter_text_separated">Inserta sas etichetas iscrobadas dae vìrgulas.</string>
     <string name="gpx_upload_public_visibility_descr">Pùblica cheret nàrrere chi sa rasta at a èssere ammustrada in manera pùblica in sas rastas GPS tuas e in sas listas de rastas GPS pùblicas. Sos datos frunidos pro mèdiu de s\'API non sunt ligados a sa pàgina de sa rasta tua. Sas datas integradas in sos puntos de rasta no ant a èssere a disponimentu pro mèdiu de s\'API GPS, e sos puntos no ant a èssere ordinados in manera cronològica. Nointames custu sos àteros impreadores ant a pòdere iscarrigare sa rasta su matessi dae sa lista pùblica de sas rastas cun totu sas datas e sas oras integradas.</string>
     <string name="gpx_upload_private_visibility_descr">Privada cheret nàrrere chi sa rasta no at a èssere ammustrada in peruna lista, ma sos puntos suos ant a èssere a disponimentu su matessi pro mèdiu de s\'API GPS pùblicu chene datas e oras ma no ant a èssere ordinados in manera cronològica.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Identificàbile cheret nàrrere chi sa rasta at a èssere ammustrada in manera pùblica in sas rastas GPS tuas e in sas listas de rastas GPS pùblicas. Est a nàrrere chi àteros impreadores ant a pòdere iscarrigare sa rasta e l\'ant a pòdere assotziare a su nùmene de impreadore tuo. Sos datos frunidos pro mèdiu de s\'API de sos puntos de sas rastas ant a èssere ligados a sa pàgina de sa rasta originale tua. Sas datas e sas oras de sos puntos ant a èssere a disponimentu pro mèdiu de s\'API GPS pùblicu.</string>
-    <string name="gpx_upload_trackable_visibility_descr">Arrastàbile cheret nàrrere chi sa rasta no at a èssere ammustrada in peruna lista pùblica ma sos puntos suos ant a èssere a disponimentu su matessi pro mèdiu de s\'API GPS pùblicu cun sas datas. Àteros impreadores ant a pòdere iscarrigare petzi puntos de rasta protzessados dae sa rasta tua chi no ant a èssere assotziados diretamente cun tie.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificàbile\" cheret nàrrere chi sa rasta at a èssere ammustrada in manera pùblica in sas rastas GPS tuas e in sas listas de rastas GPS pùblicas. Est a nàrrere chi àteros impreadores ant a pòdere iscarrigare sa rasta e l\'ant a pòdere assotziare a su nùmene de impreadore tuo. Sos puntos de rastas cun datas e oras dae s\'API GPS frunidos pro mèdiu de s\'API de sos puntos de sas rastas ant a èssere ligados a sa pàgina de sa rasta originale tua.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Arrastàbile\" cheret nàrrere chi sa rasta no at a èssere ammustrada in peruna lista pùblica, ma sos puntos suos cun sas datas (no ant a èssere assotziados diretamente cun tie) l\'ant a èssere pro mèdiu de iscarrigamentos dae s\'API GPS pùblica.</string>
     <string name="osm_edit_close_note">Serra sa nota de OSM</string>
     <string name="osm_edit_comment_note">Cummenta sa nota de OSM</string>
-    <string name="osm_login_descr">Podes intrare impreende su mètodu seguru OAuth o cun su nùmene tuo e sa crae de intrada tua.</string>
+    <string name="osm_login_descr">Intra impreende su mètodu seguru OAuth o cun su nùmene de impreadore tuo e sa crae de intrada tua.</string>
     <string name="shared_string_add_photo">Annanghe una fotografia</string>
     <string name="register_on_openplacereviews">Registra·ti in
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Sas fotografias benint frunidas dae su progetu a datos abertos OpenPlaceReviews.org. Pro pòdere carrigare sas fotografias tuas ti depes registrare in su situ.</string>
+    <string name="register_on_openplacereviews_desc">Intra in su situ de su progetu a datos abertos OpenPlaceReviews.org. pro carrigare fintzas àteras fotografias.</string>
     <string name="register_opr_create_new_account">Crea unu contu nou</string>
     <string name="register_opr_have_account">Tèngio giai unu contu</string>
+    <string name="shared_string_search_history">Cronologia de chirca</string>
+    <string name="app_mode_kayak">Kàyak</string>
+    <string name="app_mode_motorboat">Motoscafu</string>
+    <string name="add_to_mapillary">Annanghe a Mapillary</string>
+    <string name="add_to_opr">Annanghe a OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd ammustrat fotografias dae fontes medas:
+\nOpenPlaceReviews - fotografias de sos PDI;
+\nMapillary - immàgines a livellu de su caminu;
+\nWeb / Wikimedia - fotografias de sos PDI dillindadas in sos datos de OpenStreetMap.</string>
+    <string name="shared_string_resources">Risursas</string>
+    <string name="approximate_file_size">Mannària aprossimativa de su documentu</string>
+    <string name="select_data_to_export">Ischerta sos datos de esportare in su documentu.</string>
+    <string name="file_size_needed_for_import">Netzessàriu pro s\'importatzione</string>
+    <string name="export_not_enough_space_descr">Su dispositivu tuo tenet petzi %1$s a disponimentu. Lìbera unu pagu de memòria o boga s\'ischerta a unos cantos elementos de esportare.</string>
+    <string name="export_not_enough_space">Non b\'at logu bastante</string>
 </resources>
