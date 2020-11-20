@@ -3928,13 +3928,13 @@
     <string name="complex_routing_descr">Zwei-Phasen-Routenberechnung für die Autonavigation.</string>
     <string name="use_native_pt">Native ÖPNV Entwicklung</string>
     <string name="use_native_pt_desc">Wechseln zu Java (sicher) Berechnung des ÖPNV-Routings</string>
-    <string name="osm_edit_logout_success">Abmeldung erfolgreich</string>
+    <string name="osm_edit_logout_success">Abgemeldet</string>
     <string name="file_already_imported">Datei wurde bereits in OsmAnd importiert</string>
     <string name="perform_oauth_authorization">Anmelden über OAuth</string>
     <string name="clear_osm_token">OpenStreetMap OAuth-Token löschen</string>
     <string name="what_is_new">Was ist neu</string>
     <string name="snowmobile_render_descr">Für das Schneemobilfahren mit speziellen Straßen und Tracks.</string>
-    <string name="perform_oauth_authorization_description">Durchführen eines OAuth-Logins zur Nutzung der osmedit-Funktionen</string>
+    <string name="perform_oauth_authorization_description">Anmelden mit OAuth zur Nutzung der osmedit-Funktionen</string>
     <string name="use_two_phase_routing">2-Phasen-A*-Routing-Algorithmus verwenden</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s Daten sind nur auf den Straßen verfügbar, Sie müssen eine Route mit \"Route zwischen Punkten\" berechnen, um sie zu erhalten.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
@@ -3957,15 +3957,15 @@
     <string name="subscription_expired_title">OsmAnd Live Abonnement ist abgelaufen</string>
     <string name="subscription_paused_title">OsmAnd Live Abonnement wurde ausgesetzt</string>
     <string name="subscription_on_hold_title">OsmAnd Live Abonnement liegt auf Eis</string>
-    <string name="login_open_street_map">Anmeldung bei OpenStreetMap</string>
-    <string name="login_open_street_map_org">Anmeldung bei OpenStreetMap.org</string>
+    <string name="login_open_street_map">Anmeldung für OpenStreetMap</string>
+    <string name="login_open_street_map_org">Anmeldung für OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Anmelden mit OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Sie müssen sich anmelden, um Änderungen hochzuladen.
+    <string name="open_street_map_login_mode">Melden Sie sich an, um Änderungen hochzuladen,
 \n
-\nSie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Ihr Passwort verwenden.</string>
-    <string name="use_login_password">Benutzername und Passwort verwenden</string>
+\nentweder mit OAuth oder mit Ihrem Benutzernamen und Passwort.</string>
+    <string name="use_login_password">Anmelden mit Benutzername und Passwort</string>
     <string name="login_account">Konto</string>
-    <string name="user_login">Login</string>
+    <string name="user_login">Benutzername</string>
     <string name="markers_history">Historie der Marker</string>
     <string name="send_files_to_openstreetmap">GPX-Datei an OpenStreetMap senden</string>
     <string name="enter_text_separated">Geben Sie durch Komma getrennte Tags ein.</string>
@@ -3975,14 +3975,26 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Verfolgbar\" bedeutet, dass die Spur nicht in öffentlichen Auflistungen auftaucht, aber verarbeitete Trackpunkte mit Zeitstempeln davon (die nicht direkt mit Ihnen in Verbindung gebracht werden können) durch Downloads von der öffentlichen GPS API.</string>
     <string name="osm_edit_close_note">OSM Notiz schließen</string>
     <string name="osm_edit_comment_note">OSM Notiz kommentieren</string>
-    <string name="osm_login_descr">Sie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Passwort verwenden.</string>
+    <string name="osm_login_descr">Melden Sie sich mit der sicheren OAuth-Methode an oder verwenden Sie Ihren Benutzernamen und Ihr Passwort.</string>
     <string name="shared_string_add_photo">Foto hinzufügen</string>
     <string name="register_on_openplacereviews">Registrieren bei
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotos werden vom offenen Datenprojekt OpenPlaceReviews.org zur Verfügung gestellt. Um Ihre Fotos hochladen zu können, müssen Sie sich auf der Website anmelden.</string>
+    <string name="register_on_openplacereviews_desc">Melden Sie sich auf der Open Data Website OpenPlaceReviews.org an, um noch mehr Fotos hochzuladen.</string>
     <string name="register_opr_create_new_account">Neues Konto erstellen</string>
     <string name="register_opr_have_account">Ich habe bereits ein Konto</string>
     <string name="shared_string_search_history">Suchverlauf</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorboot</string>
+    <string name="add_to_mapillary">Zu Mapillary hinzufügen</string>
+    <string name="add_to_opr">Zu OpenPlaceReviews hinzufügen</string>
+    <string name="add_photos_descr">OsmAnd zeigt Fotos aus verschiedenen Quellen:
+\nOpenPlaceReviews - POI Fotos;
+\nMapillary - Bilder auf Straßenebene;
+\nWeb / Wikimedia - POI Fotos, die in OpenStreetMap Daten angegeben sind.</string>
+    <string name="shared_string_resources">Quellen</string>
+    <string name="approximate_file_size">Ungefähre Dateigröße</string>
+    <string name="select_data_to_export">Wählen Sie die Daten aus, die in die Datei exportiert werden sollen.</string>
+    <string name="file_size_needed_for_import">Benötigt für Import</string>
+    <string name="export_not_enough_space_descr">Ihr Gerät hat nur %1$s Speicherplatz frei. Bitte machen Sie etwas Platz frei oder heben Sie die Auswahl einiger zu exportierender Objekte auf.</string>
+    <string name="export_not_enough_space">Es gibt nicht genug Speicherplatz</string>
 </resources>
