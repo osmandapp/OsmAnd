@@ -546,7 +546,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return view;
 	}
 
-	private void changeAdditionalInfoType(@NonNull AdditionalInfoType type) {
+	private void changeAdditionalInfoType(@Nullable AdditionalInfoType type) {
 		if (!additionalInfoExpanded || !isCurrentAdditionalInfoType(type)) {
 			MapActivity ma = getMapActivity();
 			if (ma == null) return;
@@ -558,6 +558,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			} else if (AdditionalInfoType.GRAPH == type) {
 				visibleCard = graphsCard;
 				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, END);
+			} else if (type == null) {
+				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, null);
 			}
 			cardsContainer.removeAllViews();
 			View cardView = visibleCard.getView() != null ? visibleCard.getView() : visibleCard.build(ma);
@@ -1485,6 +1487,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			updateUpDownBtn();
 			additionalInfoContainer.setVisibility(View.GONE);
 			setDefaultMapPosition();
+			changeAdditionalInfoType(null);
 		}
 	}
 

@@ -48,12 +48,6 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		setItems(items);
 	}
 
-	public static float convertDpToPixel(float dp){
-		DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-		float px = dp * (metrics.densityDpi / 160f);
-		return Math.round(px);
-	}
-
 	public void setItems(List<HorizontalSelectionItem> items) {
 		this.items = items;
 	}
@@ -71,7 +65,7 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, final int position) {
 		final HorizontalSelectionItem item = items.get(holder.getAdapterPosition());
 		TextView textView = holder.buttonText;
-		int innerPadding = (int) convertDpToPixel(16);
+		int innerPadding = AndroidUtils.dpToPx(app.getApplicationContext(),16);
 		textView.setPadding(innerPadding, 0, innerPadding, 0);
 		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		if (item.equals(selectedItem) && item.isEnabled()) {

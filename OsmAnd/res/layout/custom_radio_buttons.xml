@@ -22,9 +22,11 @@
 			android:id="@+id/left_button"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:background="?attr/selectableItemBackground"
+			android:background="?attr/btn_radio_button_left"
 			android:gravity="center"
 			android:textSize="@dimen/default_desc_text_size"
+			android:foreground="?attr/selectableItemBackground"
+			android:textColor="@drawable/radio_flat_text_selector_light"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="@string/shared_string_left"/>
 
@@ -61,8 +63,9 @@
 			android:layout_height="match_parent"
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center"
-			android:textSize="@dimen/default_desc_text_size"
+			android:textColor="@drawable/radio_flat_text_selector_light"
 			osmand:typeface="@string/font_roboto_medium"
+			android:textSize="@dimen/default_desc_text_size"
 			tools:text="@string/shared_string_right"/>
 
 	</FrameLayout>

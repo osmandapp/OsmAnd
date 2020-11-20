@@ -478,7 +478,7 @@ public class UiUtilities {
 			endButtonText.setTextColor(activeColor);
 			startButtonContainer.setBackgroundDrawable(background);
 			startButtonText.setTextColor(textColor);
-		} else {
+		} else if (buttonType == CustomRadioButtonType.END) {
 			if (isLayoutRtl) {
 				background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
 			} else {
@@ -487,6 +487,16 @@ public class UiUtilities {
 			endButtonContainer.setBackgroundDrawable(background);
 			endButtonText.setTextColor(textColor);
 			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			startButtonText.setTextColor(activeColor);
+		} else if (buttonType == null){
+			if (isLayoutRtl) {
+				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
+			} else {
+				background.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
+			}
+			endButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			endButtonText.setTextColor(activeColor);
 			startButtonText.setTextColor(activeColor);
 		}
 	}
