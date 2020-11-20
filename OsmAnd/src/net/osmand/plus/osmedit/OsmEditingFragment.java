@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -31,15 +30,11 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
-
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginListener,
 		OsmAuthorizationListener {
-
-	private static final Log log = PlatformUtil.getLog(OsmEditingFragment.class);
 
 	private static final String OSM_LOGOUT = "osm_logout";
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
@@ -213,16 +208,19 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private void osmLogout() {
-		if (isValidToken()) {
-			settings.USER_ACCESS_TOKEN.resetToDefault();
-			settings.USER_ACCESS_TOKEN_SECRET.resetToDefault();
-			authorizationAdapter.resetToken();
-		} else {
-			settings.USER_NAME.resetToDefault();
-			settings.USER_PASSWORD.resetToDefault();
+		boolean validToken = isValidToken();
+		if (validToken || isLoginExists()) {
+			if (validToken) {
+				settings.USER_ACCESS_TOKEN.resetToDefault();
+				settings.USER_ACCESS_TOKEN_SECRET.resetToDefault();
+				authorizationAdapter.resetToken();
+			} else {
+				settings.USER_NAME.resetToDefault();
+				settings.USER_PASSWORD.resetToDefault();
+			}
+			app.showShortToastMessage(R.string.osm_edit_logout_success);
+			updateAllSettings();
 		}
-		app.showShortToastMessage(R.string.osm_edit_logout_success);
-		updateAllSettings();
 	}
 
 	@Override
