@@ -175,6 +175,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		protected int getFragmentHeight() {
 			return mainView.getHeight();
 		}
+
+		@Override
+		public boolean shouldShowXAxisPoints() {
+			return false;
+		}
 	}
 
 	private void setEditingCtx(MeasurementEditingContext editingCtx) {
