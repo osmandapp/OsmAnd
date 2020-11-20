@@ -1,9 +1,12 @@
 package net.osmand.plus.osmedit;
 
 
+import com.github.scribejava.core.model.Response;
+
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -19,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
+import java.util.concurrent.ExecutionException;
 
 public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
@@ -95,8 +99,8 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation,
 									boolean anonymous) {
-		OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
-		OsmBugResult r = new OsmBugResult();
+		OsmOAuthAuthorizationAdapter authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
+		OsmBugResult result = new OsmBugResult();
 		try {
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 			log.info("Editing poi " + url);
@@ -105,8 +109,22 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(app)); //$NON-NLS-1$
 
 			if (!anonymous) {
-				if (client.isValidToken()) {
-					connection.addRequestProperty("Authorization", "OAuth " + client.getClient().getAccessToken().getToken());
+				if (authorizationAdapter.isValidToken()) {
+					try {
+						OsmOAuthAuthorizationClient client = authorizationAdapter.getClient();
+						Response response = client.performRequest(url, requestMethod, userOperation);
+						if (response.getCode() != HttpURLConnection.HTTP_OK) {
+							result.warning = response.getMessage() + "\n" + response.getBody();
+							return result;
+						}
+					} catch (InterruptedException e) {
+						log.error(e);
+						result.warning = e.getMessage();
+					} catch (ExecutionException e) {
+						log.error(e);
+						result.warning = e.getMessage();
+					}
+					return result;
 				} else {
 					String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
 					connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -129,21 +147,20 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			log.info("Response : " + responseBody); //$NON-NLS-1$
 			connection.disconnect();
 			if (!ok) {
-				r.warning = msg + "\n" + responseBody;
+				result.warning = msg + "\n" + responseBody;
 			}
 		} catch (FileNotFoundException | NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
 			String msg = app.getString(R.string.auth_failed);
 			log.error(msg, e);
-			r.warning = app.getString(R.string.auth_failed) + "";
+			result.warning = app.getString(R.string.auth_failed) + "";
 		} catch (MalformedURLException e) {
 			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
-			r.warning = e.getMessage() + "";
+			result.warning = e.getMessage() + "";
 		} catch (IOException e) {
 			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
-			r.warning = e.getMessage() + " link unavailable";
+			result.warning = e.getMessage() + " link unavailable";
 		}
-		return r;
+		return result;
 	}
-
 }
