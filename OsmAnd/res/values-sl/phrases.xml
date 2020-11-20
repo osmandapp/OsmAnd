@@ -422,7 +422,7 @@
     <string name="poi_pump">Črpalka</string>
     <string name="poi_telescope_type">Vrsta</string>
     <string name="poi_animal_training_type">Vrsta</string>
-    <string name="poi_embassy_type">Vrsta</string>
+    <string name="poi_diplomatic_filter">Vrsta</string>
     <string name="poi_city_capital">Glavno mesto</string>
     <string name="poi_healthcare_alternative_types">Specializacija</string>
     <string name="poi_archaeological_site_type">Vrsta</string>

@@ -741,7 +741,7 @@ public class SearchUICore {
 					}
 				}
 				if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
-					for (String value : ((Amenity) object.object).getAdditionalInfo().values()) {
+					for (String value : ((Amenity) object.object).getAdditionalInfoValues(true)) {
 						if (phrase.getFirstUnknownNameStringMatcher().matches(value)) {
 							object.alternateName = value;
 							break;

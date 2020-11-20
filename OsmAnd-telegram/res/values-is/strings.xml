@@ -43,8 +43,8 @@
     <string name="si_km_m">Kílómetrar/metrar</string>
     <string name="last_update_from_telegram_duration">Síðasta uppfærsla frá Telegram: Fyrir %1$s síðan</string>
     <string name="monitoring_is_disabled">Vöktun er óvirk</string>
-    <string name="status_widget_title">Staða OsmAnd-rekjara</string>
-    <string name="app_name_short">OsmAnd-rekjari</string>
+    <string name="status_widget_title">Staða OsmAnd-rakningar</string>
+    <string name="app_name_short">OsmAnd-rakning</string>
     <string name="shared_string_group">Hópur</string>
     <string name="min_mile">mín/ml</string>
     <string name="proxy_server">Netþjónn</string>
@@ -211,12 +211,12 @@
     <string name="not_found_yet">Ekki fundist ennþá</string>
     <string name="received_gps_points">Móttók GPX-punkta: %1$s</string>
     <string name="sharing_location">Deili staðsetningu</string>
-    <string name="logout_help_desc">Hvernig á að slökkva á OsmAnd-rekjaranum úr Telegram</string>
+    <string name="logout_help_desc">Hvernig á að slökkva á OsmAnd-rakningu úr Telegram</string>
     <string name="not_sent_yet">Ekki sent ennþá</string>
     <string name="app_name">OsmAnd nettengdur GPS-rekjari</string>
-    <string name="logout_from_osmand_telegram">Skrá út úr OsmAnd-rekjara\?</string>
+    <string name="logout_from_osmand_telegram">Skrá út úr OsmAnd-rakningu\?</string>
     <string name="stop_sharing_all">Kveikt er á deilingu (slökkva)</string>
-    <string name="disconnect_from_telegram">Hvernig á að slökkva á OsmAnd-rekjaranum úr Telegram</string>
+    <string name="disconnect_from_telegram">Hvernig á að slökkva á OsmAnd-rakningu úr Telegram</string>
     <string name="gps_not_available">Virkjaðu \"Staðsetning\" í stillingunum stýrikerfisins</string>
     <string name="live_now_description">Tengiliðir og hópar sem deila staðsetningu til þín.</string>
     <string name="logout_no_internet_msg">Tengstu við internetið til að geta skráð þig til fulls út úr Telegram.</string>
@@ -234,10 +234,10 @@
     <string name="choose_osmand">Veldu hvaða útgáfu OsmAnd þú vilt nota</string>
     <string name="disable_all_sharing">Gera alla deilingu óvirka</string>
     <string name="please_update_osmand">Uppfærðu OsmAnd til að skoða gögn á kortinu</string>
-    <string name="time_zone_descr">Veldu tímabelti til birtingar í staðsetningarskilaboðum þínum</string>
+    <string name="time_zone_descr">Veldu tímabelti til birtingar í staðsetningarskilaboðum þínum.</string>
     <string name="location_service_no_gps_available">Veldu eina af staðsetningarþjónustunum til að deila staðsetningu þinni.</string>
     <string name="set_visible_time_for_all">Stilla tímabil þar sem allir eru sýnilegir</string>
-    <string name="osmand_connect_desc">Veldu þá útgáfu OsmAnd sem OsmAnd-rekjarinn notar til að birta staðsetningar.</string>
+    <string name="osmand_connect_desc">Veldu þá útgáfu OsmAnd sem OsmAnd-rakningin notar til að birta staðsetningar.</string>
     <string name="get_telegram_description_continue">Endilega settu upp Telegram og skráðu notandaaðgang.</string>
     <string name="shared_string_authorization_descr">Settu inn Telegram-símanúmerið þitt á alþjóðlegu sniði</string>
     <string name="timeline_description">Virkja vöktun til að vista allar staðsetningar í aðgerðaferli.</string>
@@ -260,4 +260,15 @@
     <string name="last_updated_location">Síðasta uppfærða staðsetning:</string>
     <string name="enter_another_device_name">Veldu nafn sem þú hefur ekki þegar notað</string>
     <string name="not_possible_to_send_to_telegram_chats">Ekki mögulegt að senda á Telegram-spjöll:</string>
+    <string name="disconnect_from_telegram_desc">Til að afturkalla heimildir til deilingar á staðsetningu, opnaðu Telegram, farðu í Stillingar → Gagnaleynd og öryggi → Setur, og bittu enda á setu OsmAnd-rakningar.</string>
+    <string name="share_location_as_description_second_line">Þú getur útbúið og skoðað auðkenningu tækis (device ID) í Telegram-biðlaraforritinu með því að nota %1$s spjallvélmennið. %2$s</string>
+    <string name="logout_from_osmand_telegram_descr">Ertu viss að þú viljir skrá þig út úr OsmAnd-rakningu þannig að þú getir ekki lengur deilt þinni staðsetningu eða séð staðsetningu annarra\?</string>
+    <string name="battery_optimization_description">Slokktu á bestun rafhlöðunýtingar fyrir OsmAnd-rakningu svo ekki slökkni á henni þegar forritið fer í bakgrunnsham (t.d. slökkt er á skjá).</string>
+    <string name="privacy_policy_telegram_client">OsmAnd-rakning er eitt af biðlaraforritunum sem nota opna Telegram-kerfið. Tengiliðirnir þínir geta notað eitthvað annað Telegram-biðlaraforrit.</string>
+    <string name="welcome_descr"><b>OsmAnd-rakning</b> gerir þér kleift að deila staðsetningu þinni og að sjá aðra í OsmAnd.<br/><br/>Forritið notar Telegram API-forritsviðmótið, þannig að þú verður að vera með Telegram-aðgang.</string>
+    <string name="share_location_as_description">Ef þú ætlar að tengja mörg tæki við einn Telegram-notandaaðgang, þarftu að nota annað tæki til að deila staðsetningunni þinni.</string>
+    <string name="shared_string_live">Rauntíma</string>
+    <string name="background_work_description">Breyta bestunarstillingum rafhlöðu til að auka stöðugleika í deilingu staðsetningar.</string>
+    <string name="set_time_description">Veldu tímann sem valdir tengiliðir og hópar munu sjá staðsetningu þína í rauntíma.</string>
+    <string name="live_now">Rauntíma núna</string>
 </resources>

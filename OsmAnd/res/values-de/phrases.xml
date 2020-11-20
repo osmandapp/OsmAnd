@@ -2795,7 +2795,7 @@
     <string name="poi_observatory_designation">Bezeichnung</string>
     <string name="poi_telescope_type">Art</string>
     <string name="poi_animal_training_type">Art</string>
-    <string name="poi_embassy_type">Art</string>
+    <string name="poi_diplomatic_filter">Art</string>
     <string name="poi_city_capital">Hauptstadt</string>
     <string name="poi_traffic_signals_sound">Signalton</string>
     <string name="poi_subway_station_filter">U-Bahnstation</string>

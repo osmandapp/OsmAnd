@@ -1928,7 +1928,7 @@
     <string name="storage_permission_restart_is_required">Die App darf nun auf den externen Speicher schreiben, dazu ist aber ein manueller Neustart nötig.</string>
     <string name="shared_string_move_up">Verschieben ↑</string>
     <string name="shared_string_move_down">Verschieben ↓</string>
-    <string name="file_name_containes_illegal_char">Dateiname beinhaltet nicht erlaubte Zeichen</string>
+    <string name="file_name_containes_illegal_char">Nicht erlaubte Zeichen im Dateinamen</string>
     <string name="no_waypoints_found">Keine Wegpunkte gefunden</string>
     <string name="no_map_markers_found">Bitte Kartenmarkierungen über die Karte hinzufügen</string>
     <string name="rendering_value_fine_name">Fein</string>
@@ -2646,7 +2646,7 @@
     <string name="copy_location_name">Ort/POI-Name kopieren</string>
     <string name="toast_empty_name_error">Unbenannter Ort</string>
     <string name="show_closed_notes">Geschlossene Notizen anzeigen</string>
-    <string name="switch_osm_notes_visibility_desc">OSM-Notizen auf der Karte ein-/ausblenden.</string>
+    <string name="switch_osm_notes_visibility_desc">OSM-Notizen auf der Karte ein- oder ausblenden.</string>
     <string name="gpx_file_desc">GPX - geeignet für den Export in JOSM oder andere OSM-Editoren.</string>
     <string name="osc_file_desc">OSC - geeignet für den Export nach OSM.</string>
     <string name="shared_string_gpx_file">GPX-Datei</string>
@@ -3104,13 +3104,13 @@
     <string name="routing_attr_allow_expert_description">Extrem schwere Routen, mit gefährlichen Hindernissen und schwieriger Umgebung.</string>
     <string name="routing_attr_allow_classic_only_name">Nur klassische Routen zulassen</string>
     <string name="routing_attr_difficulty_preference_name">Bevorzugter Schwierigkeitsgrad</string>
-    <string name="routing_attr_piste_type_downhill_name">Ski Alpin/Abfahrtslauf</string>
+    <string name="routing_attr_piste_type_downhill_name">Ski Alpin und Abfahrtslauf</string>
     <string name="routing_attr_piste_type_downhill_description">Pisten für Ski Alpin oder Abfahrtslauf und Zugang zu den Skiliften.</string>
     <string name="process_downloading_service">OsmAnd Download-Dienst</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Symbol</string>
     <string name="collected_data">Erfasste Daten</string>
-    <string name="routing_attr_piste_type_nordic_name">Skilanglauf/Nordischer Skisport</string>
+    <string name="routing_attr_piste_type_nordic_name">Skilanglauf und Nordischer Skisport</string>
     <string name="routing_attr_piste_type_nordic_description">Loipen für Skilangläufer und Nordische Skiläufer.</string>
     <string name="routing_attr_difficulty_preference_description">Routen dieser Schwierigkeit bevorzugen, obwohl bei kürzerer Routenführung schwierigere oder einfachere Pisten immer noch möglich sind.</string>
     <string name="routing_attr_freeride_policy_name">Abseits der Piste</string>
@@ -3373,7 +3373,7 @@
     <string name="route_start_point">Startpunkt</string>
     <string name="default_speed_dialog_msg">Schätzt die Ankunftszeit für unbekannte Straßentypen und begrenzt die Geschwindigkeit für alle Straßen (kann die Navigation beeinflussen)</string>
     <string name="track_saved">Track gespeichert</string>
-    <string name="empty_filename">Dateiname ist leer</string>
+    <string name="empty_filename">Leerer Dateiname</string>
     <string name="shared_string_revert">Zurücksetzen</string>
     <string name="clear_confirmation_msg">%1$s löschen\?</string>
     <string name="suggested_maps">Vorgeschlagene Karten</string>
@@ -3579,7 +3579,7 @@
     <string name="quick_action_terrain_descr">Eine Schaltfläche zum Ein- und Ausblenden der Geländeebene auf der Karte.</string>
     <string name="quick_action_terrain_show">Gelände einblenden</string>
     <string name="quick_action_terrain_hide">Gelände ausblenden</string>
-    <string name="quick_action_show_hide_terrain">Gelände ein- / ausblenden</string>
+    <string name="quick_action_show_hide_terrain">Gelände ein- oder ausblenden</string>
     <string name="shared_string_hillshade">Relief</string>
     <string name="shared_string_zoom_levels">Zoomstufen</string>
     <string name="shared_string_transparency">Transparenz</string>
@@ -3697,11 +3697,11 @@
     <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche \"%1$s\" tippen.</string>
     <string name="quick_action_transport_hide">Öffentliche Verkehrsmittel ausblenden</string>
     <string name="quick_action_transport_show">Öffentliche Verkehrsmittel anzeigen</string>
-    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen/ausblenden</string>
+    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen oder ausblenden</string>
     <string name="quick_action_transport_descr">Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
-    <string name="create_edit_poi">POI erstellen / bearbeiten</string>
+    <string name="create_edit_poi">POI erstellen oder bearbeiten</string>
     <string name="parking_positions">Parkpositionen</string>
-    <string name="add_edit_favorite">Favorit hinzufügen / bearbeiten</string>
+    <string name="add_edit_favorite">Favorit hinzufügen oder bearbeiten</string>
     <string name="reset_deafult_order">Standard-Reihenfolge der Elemente wiederherstellen</string>
     <string name="back_to_editing">Zurück zur Bearbeitung</string>
     <string name="quick_action_switch_profile_descr">Die Aktionsschaltfläche schaltet zwischen den ausgewählten Profilen um.</string>
@@ -3878,7 +3878,7 @@
     <string name="shared_string_gpx_route">Track Route</string>
     <string name="import_track_descr">Track Datei zum Folgen auswählen, oder vom Gerät importieren.</string>
     <string name="disable_recording_once_app_killed_descrp">Die GPX-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
-    <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (via Schaltfläche \'GPX\' auf dem Kartenbildschirm).</string>
+    <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (wird über die Schaltfläche \'Routenaufzeichung\' auf dem Kartenbildschirm angeschaltet).</string>
     <string name="route_between_points_warning_desc">Als nächstes können Sie Ihren Track mit einem Ihrer Navigationsprofile auf die nächstgelegene erlaubte Straße einrasten lassen, um diese Option zu nutzen.</string>
     <string name="quick_action_add_gpx">Track-Wegpunkt hinzufügen</string>
     <string name="number_of_gpx_files_selected_pattern">%s Track Dateien ausgewählt</string>
@@ -3895,7 +3895,7 @@
     <string name="shared_string_redo">Wiederholen</string>
     <string name="release_3_8">• Aktualisierte Funktion zum Planen einer Route: erlaubt die Verwendung verschiedener Navigationstypen pro Segment und die Einbeziehung von Tracks
 \n
-\n • Neues Menü zum Erscheinungsbild von Tracks: Wählen Sie Farbe, Dicke, Richtungspfeile, Start-/Ziel-Symbole
+\n • Neues Menü zum Erscheinungsbild von Tracks: Wählen Sie Farbe, Dicke, Richtungspfeile, Start- und Zielsymbole
 \n
 \n • Verbesserte Darstellung von Fahrradknotenpunkten.
 \n
@@ -3911,7 +3911,7 @@
     <string name="sort_last_modified">Zuletzt geändert</string>
     <string name="sort_name_descending">Name: Z – A</string>
     <string name="sort_name_ascending">Name: A – Z</string>
-    <string name="start_finish_icons">Start-/Ziel-Symbole</string>
+    <string name="start_finish_icons">Start- und Zielsymbole</string>
     <string name="contour_lines_thanks">Vielen Dank für den Kauf von \'Höhenlinien\'</string>
     <string name="osm_live_payment_desc_hw">Das Abonnement wird pro ausgewähltem Zeitraum berechnet. Sie können das Abonnement jederzeit über die AppGallery kündigen.</string>
     <string name="osm_live_payment_subscription_management_hw">Die Bezahlung wird Ihrem AppGallery-Konto bei der Bestätigung des Kaufs belastet.
@@ -3969,10 +3969,10 @@
     <string name="markers_history">Historie der Marker</string>
     <string name="send_files_to_openstreetmap">GPX-Datei an OpenStreetMap senden</string>
     <string name="enter_text_separated">Geben Sie durch Komma getrennte Tags ein.</string>
-    <string name="gpx_upload_public_visibility_descr">Öffentlich bedeutet, dass der Track in Ihren GPS-Tracks und in GPS-Track Verzeichnissen öffentlich angezeigt wird. Die über die API bereitgestellten Daten verweisen nicht auf Ihre Track-Seite. Die Zeitstempel der Trackpunkte sind nicht über die öffentliche GPS-API verfügbar, und die Punkte sind nicht chronologisch geordnet. Andere Benutzer können jedoch nach wie vor den Rohtrack aus der öffentlichen Trackliste und alle darin enthaltenen Zeitstempel herunterladen.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Identifizierbar bedeutet, dass der Track in Ihren GPS-Tracks und in öffentlichen GPS-Track Verzeichnissen angezeigt wird. Andere Benutzer können den Rohtrack herunterladen und mit Ihrem Benutzernamen verknüpfen. Daten, die über die Trackpunkte-API geliefert werden, verweisen auf Ihre ursprüngliche Track-Seite. Die Zeitstempel der Trackpunkte sind über die öffentliche GPS-API verfügbar.</string>
-    <string name="gpx_upload_private_visibility_descr">Privat bedeutet, dass der Track nicht in öffentlichen Verzeichnissen auftaucht. Punkte des Tracks werden weiterhin über die öffentliche GPS-API ohne Zeitstempel verfügbar sein, aber nicht chronologisch geordnet.</string>
-    <string name="gpx_upload_trackable_visibility_descr">Verfolgbar bedeutet, dass der Track in keiner öffentlichen Auflistung auftaucht, aber Trackpunkte weiterhin über die öffentliche GPS API mit Zeitstempel verfügbar sein werden. Andere Benutzer werden nur verarbeitete Trackpunkte Ihres Tracks herunterladen können, die nicht direkt mit Ihnen in Verbindung gebracht werden können.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Öffentlich\" bedeutet, dass der Track öffentlich in Ihren GPS-Tracks und in öffentlichen GPS-Track Verzeichnissen mit Zeitstempeln in Rohform angezeigt wird. Die über die API bereitgestellten Daten verweisen nicht auf Ihre Track-Seite. Die Zeitstempel der Trackpunkte sind nicht über die öffentliche GPS API verfügbar, und die Trackpunkte sind nicht chronologisch geordnet.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identifizierbar\" bedeutet, dass der Track in Ihren GPS-Tracks und in öffentlichen GPS-Track Verzeichnissen angezeigt wird, d.h. andere Benutzer können den Track herunterladen und mit Ihrem Benutzernamen verknüpfen. Öffentliche, mit Zeitstempel versehene Trackpunkt-Daten von der GPS API, die über die Trackpunkt API bereitgestellt werden, verweisen auf Ihre ursprüngliche Trackseite.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privat\" bedeutet, dass der Track nicht in öffentlichen Verzeichnissen auftaucht, aber seine Trackpunkte in nicht chronologischer Reihenfolge über die öffentliche GPS API ohne Zeitstempel verfügbar sind.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Verfolgbar\" bedeutet, dass die Spur nicht in öffentlichen Auflistungen auftaucht, aber verarbeitete Trackpunkte mit Zeitstempeln davon (die nicht direkt mit Ihnen in Verbindung gebracht werden können) durch Downloads von der öffentlichen GPS API.</string>
     <string name="osm_edit_close_note">OSM Notiz schließen</string>
     <string name="osm_edit_comment_note">OSM Notiz kommentieren</string>
     <string name="osm_login_descr">Sie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Passwort verwenden.</string>
@@ -3982,4 +3982,7 @@
     <string name="register_on_openplacereviews_desc">Fotos werden vom offenen Datenprojekt OpenPlaceReviews.org zur Verfügung gestellt. Um Ihre Fotos hochladen zu können, müssen Sie sich auf der Website anmelden.</string>
     <string name="register_opr_create_new_account">Neues Konto erstellen</string>
     <string name="register_opr_have_account">Ich habe bereits ein Konto</string>
+    <string name="shared_string_search_history">Suchverlauf</string>
+    <string name="app_mode_kayak">Kajak</string>
+    <string name="app_mode_motorboat">Motorboot</string>
 </resources>

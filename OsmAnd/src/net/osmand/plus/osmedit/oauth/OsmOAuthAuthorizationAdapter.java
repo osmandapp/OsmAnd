@@ -1,9 +1,12 @@
 package net.osmand.plus.osmedit.oauth;
 
 import android.net.TrafficStats;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+
+import androidx.annotation.NonNull;
 
 import com.github.scribejava.core.builder.api.DefaultApi10a;
 import com.github.scribejava.core.model.OAuth1AccessToken;
@@ -17,6 +20,7 @@ import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 
+import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -28,6 +32,8 @@ public class OsmOAuthAuthorizationAdapter {
     private static final int THREAD_ID = 10101;
     private static final String OSM_USER = "user";
     private static final String DISPLAY_NAME = "display_name";
+    public final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationAdapter.class);
+
     private OsmandApplication app;
     private final OsmOAuthAuthorizationClient client;
 
@@ -72,9 +78,8 @@ public class OsmOAuthAuthorizationAdapter {
         }
     }
 
-    public void startOAuth(ViewGroup rootLayout) {
-        OAuth1RequestToken requestToken = client.startOAuth();
-        loadWebView(rootLayout, client.getService().getAuthorizationUrl(requestToken));
+    public void startOAuth(final ViewGroup rootLayout) {
+        new StartOAuthAsyncTask(rootLayout).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
     }
 
     private void saveToken() {
@@ -104,31 +109,87 @@ public class OsmOAuthAuthorizationAdapter {
         return client.performRequestWithoutAuth(url, method, body);
     }
 
-    public void authorize(String oauthVerifier) {
-        client.authorize(oauthVerifier);
-        saveToken();
+    public void authorize(String oauthVerifier, OsmOAuthHelper helper) {
+        new AuthorizeAsyncTask(helper).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, oauthVerifier);
     }
 
-    public String getUserName() throws InterruptedException, ExecutionException, IOException, XmlPullParserException {
-        Response response = getOsmUserDetails();
-        return parseUserName(response);
+    private class StartOAuthAsyncTask extends AsyncTask<Void, Void, OAuth1RequestToken> {
+
+        private final ViewGroup rootLayout;
+
+        public StartOAuthAsyncTask(ViewGroup rootLayout) {
+            this.rootLayout = rootLayout;
+        }
+
+        @Override
+        protected OAuth1RequestToken doInBackground(Void... params) {
+            return client.startOAuth();
+        }
+
+        @Override
+        protected void onPostExecute(@NonNull OAuth1RequestToken requestToken) {
+            loadWebView(rootLayout, client.getService().getAuthorizationUrl(requestToken));
+        }
     }
+
+    private class AuthorizeAsyncTask extends AsyncTask<String, Void, Void> {
+
+        private final OsmOAuthHelper helper;
+
+        public AuthorizeAsyncTask(OsmOAuthHelper helper) {
+            this.helper = helper;
+        }
+
+        @Override
+        protected Void doInBackground(String... oauthVerifier) {
+            client.authorize(oauthVerifier[0]);
+            saveToken();
+            updateUserName();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            helper.notifyAndRemoveListeners();
+        }
+
+        public void updateUserName() {
+            String userName = "";
+            try {
+                userName = getUserName();
+            } catch (InterruptedException e) {
+                log.error(e);
+            } catch (ExecutionException e) {
+                log.error(e);
+            } catch (IOException e) {
+                log.error(e);
+            } catch (XmlPullParserException e) {
+                log.error(e);
+            }
+            app.getSettings().USER_DISPLAY_NAME.set(userName);
+        }
+
+        public String getUserName() throws InterruptedException, ExecutionException, IOException, XmlPullParserException {
+            Response response = getOsmUserDetails();
+            return parseUserName(response);
+        }
 
     public Response getOsmUserDetails() throws InterruptedException, ExecutionException, IOException {
         String osmUserDetailsUrl = app.getSettings().getOsmUrl() + "api/0.6/user/details";
         return performRequest(osmUserDetailsUrl, Verb.GET.name(), null);
     }
 
-    public String parseUserName(Response response) throws XmlPullParserException, IOException {
-        String userName = null;
-        XmlPullParser parser = PlatformUtil.newXMLPullParser();
-        parser.setInput(response.getStream(), "UTF-8");
-        int tok;
-        while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-            if (tok == XmlPullParser.START_TAG && OSM_USER.equals(parser.getName())) {
-                userName = parser.getAttributeValue("", DISPLAY_NAME);
+        public String parseUserName(Response response) throws XmlPullParserException, IOException {
+            String userName = null;
+            XmlPullParser parser = PlatformUtil.newXMLPullParser();
+            parser.setInput(response.getStream(), "UTF-8");
+            int tok;
+            while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+                if (tok == XmlPullParser.START_TAG && OSM_USER.equals(parser.getName())) {
+                    userName = parser.getAttributeValue("", DISPLAY_NAME);
+                }
             }
+            return userName;
         }
-        return userName;
     }
 }

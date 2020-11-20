@@ -210,6 +210,8 @@
 	<dimen name="welcome_header_text_size">23sp</dimen>
 	<dimen name="text_button_text_size">15sp</dimen>
 	<dimen name="travel_card_primary_text_size">15sp</dimen>
+	<dimen name="default_title_line_height">24sp</dimen>
+	<dimen name="default_desc_line_height">20sp</dimen>
 
 	<dimen name="default_split_segments_overview">13sp</dimen>
 	<dimen name="default_split_segments_data">13sp</dimen>
@@ -287,6 +289,7 @@
 	<dimen name="bottom_sheet_info_spacing_multiplier" format="float">1.5</dimen>
 	<dimen name="bottom_sheet_big_item_height">128dp</dimen>
 	<dimen name="bottom_sheet_top_shadow_height">8dp</dimen>
+	<dimen name="bottom_sheet_button_divider_height">28dp</dimen>
 
 	<dimen name="action_bar_image_width_land">236dp</dimen>
 	<dimen name="action_bar_image_top_margin_land">68dp</dimen>

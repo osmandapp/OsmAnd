@@ -61,7 +61,7 @@
     <string name="poi_pump">Пумпа</string>
     <string name="poi_telescope_type">Врста</string>
     <string name="poi_animal_training_type">Врста</string>
-    <string name="poi_embassy_type">ТипВрста</string>
+    <string name="poi_diplomatic_filter">ТипВрста</string>
     <string name="poi_city_capital">Главни град</string>
     <string name="poi_healthcare_alternative_types">Специјализација</string>
     <string name="poi_free_flying_characteristics">Особина</string>

@@ -875,7 +875,7 @@
 	<string name="poi_observatory_designation">പദവി</string>
 	<string name="poi_telescope_type">തരം</string>
 	<string name="poi_animal_training_type">തരം</string>
-	<string name="poi_embassy_type">തരം</string>
+	<string name="poi_diplomatic_filter">തരം</string>
 	<string name="poi_city_capital">തലസ്ഥാനം</string>
 	<string name="poi_pharmacy_dispensing">വിതരണം</string>
 	<string name="poi_healthcare_alternative_types">സ്പെഷ്യാലിറ്റി</string>

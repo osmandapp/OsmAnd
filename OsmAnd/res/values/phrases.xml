@@ -33,7 +33,7 @@
 	<string name="poi_observatory_designation">Designation</string>
 	<string name="poi_telescope_type">Type</string>
 	<string name="poi_animal_training_type">Type</string>
-	<string name="poi_embassy_type">Type</string>
+	<string name="poi_diplomatic_filter">Diplomatic institution</string>
 	<string name="poi_city_capital">Capital</string>
 	<string name="poi_pharmacy_dispensing">Dispensing</string>
 	<string name="poi_healthcare_alternative_types">Specialty</string>
@@ -138,6 +138,12 @@
 	<string name="poi_traffic_signals_arrow">Arrow</string>
 	<string name="poi_drinking_water_refill">Drinking water refill</string>
 	<string name="poi_departures_board">Departures board</string>
+	<string name="poi_embassy_filter">Embassy</string>
+	<string name="poi_consulate_filter">Consulate</string>
+	<string name="poi_liaison_filter">Liaison</string>
+	<string name="poi_diplomatic_services_non_immigrant_visas_filter">Non-immigrant visas</string>
+	<string name="poi_diplomatic_services_immigrant_visas_filter">Immigrant visas</string>
+	<string name="poi_diplomatic_services_citizen_services_filter">Citizen services</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4266,5 +4272,32 @@
 	<string name="poi_parking_layby">Layby</string>
 
 	<string name="poi_radar_tower">Radar tower</string>
+
+	<string name="poi_diplomatic_embassy">Embassy</string>
+	<string name="poi_diplomatic_liaison">Liaison</string>
+
+	<string name="poi_embassy_yes">Headed by an ambassador</string>
+	<string name="poi_embassy_branch_embassy">Branch</string>
+	<string name="poi_embassy_delegation">Delegation</string>
+	<string name="poi_embassy_high_commission">High commission</string>
+	<string name="poi_embassy_interests_section">Interests section</string>
+	<string name="poi_embassy_mission">Mission</string>
+	<string name="poi_embassy_nunciature">Nunciature</string>
+	<string name="poi_embassy_residence">Residence</string>
+	<string name="poi_consulate_yes">Headed by a consul</string>
+	<string name="poi_consulate_consular_agency">Consular agency</string>
+	<string name="poi_consulate_consular_office">Consular office</string>
+	<string name="poi_consulate_consulate_general">Consulate general</string>
+	<string name="poi_consulate_honorary_consul">Honorary consul</string>
+	<string name="poi_liaison_liaison_office">Office</string>
+	<string name="poi_liaison_representative_office">Representative office</string>
+	<string name="poi_liaison_subnational">Subnational</string>
+
+	<string name="poi_diplomatic_services_non_immigrant_visas_yes">Yes</string>
+	<string name="poi_diplomatic_services_non_immigrant_visas_no">No</string>
+	<string name="poi_diplomatic_services_immigrant_visas_yes">Yes</string>
+	<string name="poi_diplomatic_services_immigrant_visas_no">No</string>
+	<string name="poi_diplomatic_services_citizen_services_yes">Yes</string>
+	<string name="poi_diplomatic_services_citizen_services_no">No</string>
 
 </resources>

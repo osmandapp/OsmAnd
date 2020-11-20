@@ -3966,15 +3966,18 @@
     <string name="enter_text_separated">Enigu etikedojn disigitajn per komo (,).</string>
     <string name="gpx_upload_public_visibility_descr">“Publika” signifas, ke la GPX‑spuro estos publika videbla en “miaj spuroj” kaj en la publika listo de spuro (GPS‑spuroj). Datumoj liverataj per la API ne ligos al paĝo de via spuro. Tempindikoj de punktoj ne estos akireblaj per la publika API GPS, kaj la punktoj ne estos ordigitaj laŭtempe. Tamen aliaj uzantoj plue povos elŝuti la nepritraktitan spuron el la publika listo de spuroj kune kun ĉiuj ampleksitaj tempindikoj.</string>
     <string name="gpx_upload_private_visibility_descr">“Privata” signifas, ke la GPX‑spuro montriĝos en neniu publika listo, sed ĝiaj punktoj plue estos akireblaj per la publika API GPS sen tempindikoj, sed tiuj punktoj estos ordigitaj laŭtempe.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">“Identigebla” signifas, ke la GPX‑spuro estos publike videbla en “miaj spuroj” kaj en la publika listo de spuroj (GPS‑spuroj), aliaj uzantoj povos elŝuti vian nepritraktitan spuron kaj ligi ĝin al via uzantnomo. Datumoj liveritaj per la API de spuroj ligos al originala paĝo de via spuro. Tempindikoj de la spuro estos akireblaj per la publika API GPS.</string>
-    <string name="gpx_upload_trackable_visibility_descr">“Spurebla” signifas, ke la GPX‑spuro ne estos montrata en publikaj listoj, sed punktoj el ĝi plue estos akireblaj per la publika API GPS kune kun tempindikoj. Aliaj uzantoj povos elŝuti nur pritraktitajn punktojn el via spuro, kiuj ne povos esti senpere ligitaj al vi.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">“Identigebla” signifas, ke la GPX‑spuro estos publike videbla en “miaj spuroj” kaj en la publika listo de spuroj (GPS‑spuroj), aliaj uzantoj povos elŝuti vian nepritraktitan spuron kaj ligi ĝin al via uzantnomo. Publikaj datumoj kun tempindikoj el la API GPS akireblaj per la API de spur‑punktoj indikos al originala paĝo de via spuro.</string>
+    <string name="gpx_upload_trackable_visibility_descr">“Spurebla” signifas, ke la GPX‑spuro ne montriĝos en publikaj listoj, sed pritraktitaj punktoj kun tempindikoj el ĝi (kiuj ne povos esti senpere ligitaj al vi) estos elŝuteblaj per la publika API GPS.</string>
     <string name="osm_edit_close_note">Fermi OSM-rimarkon</string>
     <string name="osm_edit_comment_note">Komenti OSM-rimarkon</string>
-    <string name="osm_login_descr">Vi povas ensaluti per l sekura metodo OAuth aŭ per uzi uzantnomon kaj pasvorton.</string>
+    <string name="osm_login_descr">Vi povas ensaluti per la sekura metodo OAuth aŭ per uzi uzantnomon kaj pasvorton.</string>
     <string name="shared_string_add_photo">Aldoni foton</string>
     <string name="register_on_openplacereviews">Registri ĉe
 \nOpenPlaceReviews.org</string>
     <string name="register_on_openplacereviews_desc">Fotoj estas liverataj de la malferm‑datuma projekto OpenPlaceReviews.org. Por alŝuti viajn fotojn, vi devas registri ĉe la retejo.</string>
     <string name="register_opr_create_new_account">Krei novan konton</string>
     <string name="register_opr_have_account">Mi jam havas konton</string>
+    <string name="shared_string_search_history">Serĉi en historio</string>
+    <string name="app_mode_kayak">Kajako</string>
+    <string name="app_mode_motorboat">Motorboato</string>
 </resources>

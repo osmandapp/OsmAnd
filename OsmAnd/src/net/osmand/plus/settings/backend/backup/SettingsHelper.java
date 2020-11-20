@@ -29,10 +29,10 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
@@ -41,7 +41,9 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.fragments.ExportDataObject;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -54,6 +56,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -428,8 +431,9 @@ public class SettingsHelper {
 						duplicateItems.add(((ProfileSettingsItem) item).getModeBean());
 					}
 				} else if (item instanceof CollectionSettingsItem<?>) {
-					List<?> duplicates = ((CollectionSettingsItem<?>) item).processDuplicateItems();
-					if (!duplicates.isEmpty()) {
+					CollectionSettingsItem settingsItem = (CollectionSettingsItem) item;
+					List<?> duplicates = settingsItem.processDuplicateItems();
+					if (!duplicates.isEmpty() && settingsItem.shouldShowDuplicates()) {
 						duplicateItems.addAll(duplicates);
 					}
 				} else if (item instanceof FileSettingsItem) {
@@ -467,6 +471,17 @@ public class SettingsHelper {
 		exportSettings(fileDir, fileName, listener, new ArrayList<>(Arrays.asList(items)), exportItemsFiles);
 	}
 
+	public List<SettingsItem> getFilteredSettingsItems(List<ExportSettingsType> settingsTypes, boolean globalExport) {
+		Map<ExportSettingsCategory, List<ExportDataObject>> dataList = getAdditionalData(globalExport);
+		Map<ExportSettingsType, List<?>> typesMap = new HashMap<>();
+		for (List<ExportDataObject> objects : dataList.values()) {
+			for (ExportDataObject exportObject : objects) {
+				typesMap.put(exportObject.getType(), exportObject.getItems());
+			}
+		}
+		return getFilteredSettingsItems(typesMap, settingsTypes);
+	}
+
 	public List<SettingsItem> getFilteredSettingsItems(Map<ExportSettingsType, List<?>> additionalData,
 													   List<ExportSettingsType> settingsTypes) {
 		List<SettingsItem> settingsItems = new ArrayList<>();
@@ -484,20 +499,139 @@ public class SettingsHelper {
 		return settingsItems;
 	}
 
-	public Map<ExportSettingsType, List<?>> getAdditionalData(boolean globalExport) {
-		Map<ExportSettingsType, List<?>> dataList = new HashMap<>();
+	public Map<ExportSettingsCategory, List<ExportDataObject>> getAdditionalData(boolean globalExport) {
+		Map<ExportSettingsCategory, List<ExportDataObject>> dataList = new LinkedHashMap<>();
+
+		List<ExportDataObject> settingsItems = getSettingsItems(globalExport);
+		List<ExportDataObject> myPlacesItems = getMyPlacesItems();
+		List<ExportDataObject> resourcesItems = getResourcesItems();
+
+		if (!settingsItems.isEmpty()) {
+			sortExportSettingsObjects(settingsItems);
+			dataList.put(ExportSettingsCategory.SETTINGS, settingsItems);
+		}
+		if (!myPlacesItems.isEmpty()) {
+			sortExportSettingsObjects(myPlacesItems);
+			dataList.put(ExportSettingsCategory.MY_PLACES, myPlacesItems);
+		}
+		if (!resourcesItems.isEmpty()) {
+			sortExportSettingsObjects(resourcesItems);
+			dataList.put(ExportSettingsCategory.RESOURCES, resourcesItems);
+		}
+
+		return dataList;
+	}
+
+	private List<ExportDataObject> getSettingsItems(boolean globalExport) {
+		List<ExportDataObject> settingsItems = new ArrayList<>();
+
+		if (globalExport) {
+			List<ApplicationModeBean> appModeBeans = new ArrayList<>();
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				appModeBeans.add(mode.toModeBean());
+			}
+			settingsItems.add(new ExportDataObject(ExportSettingsType.PROFILE, appModeBeans));
+		}
+		settingsItems.add(new ExportDataObject(ExportSettingsType.GLOBAL, Collections.singletonList(new GlobalSettingsItem(app.getSettings()))));
 
 		QuickActionRegistry registry = app.getQuickActionRegistry();
 		List<QuickAction> actionsList = registry.getQuickActions();
 		if (!actionsList.isEmpty()) {
-			dataList.put(ExportSettingsType.QUICK_ACTIONS, actionsList);
+			settingsItems.add(new ExportDataObject(ExportSettingsType.QUICK_ACTIONS, actionsList));
 		}
-
 		List<PoiUIFilter> poiList = app.getPoiFilters().getUserDefinedPoiFilters(false);
 		if (!poiList.isEmpty()) {
-			dataList.put(ExportSettingsType.POI_TYPES, poiList);
+			settingsItems.add(new ExportDataObject(ExportSettingsType.POI_TYPES, poiList));
 		}
+		List<HistoryEntry> historyEntries = SearchHistoryHelper.getInstance(app).getHistoryEntries(false);
+		if (!historyEntries.isEmpty()) {
+			settingsItems.add(new ExportDataObject(ExportSettingsType.SEARCH_HISTORY, historyEntries));
+		}
+		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
+		if (!impassableRoads.isEmpty()) {
+			settingsItems.add(new ExportDataObject(ExportSettingsType.AVOID_ROADS, new ArrayList<>(impassableRoads.values())));
+		}
+		return settingsItems;
+	}
 
+	private List<ExportDataObject> getMyPlacesItems() {
+		List<ExportDataObject> myPlacesItems = new ArrayList<>();
+
+		List<FavoriteGroup> favoriteGroups = app.getFavorites().getFavoriteGroups();
+		if (!favoriteGroups.isEmpty()) {
+			myPlacesItems.add(new ExportDataObject(ExportSettingsType.FAVORITES, favoriteGroups));
+		}
+		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfo(gpxDir, null, true);
+		if (!gpxInfoList.isEmpty()) {
+			List<File> files = new ArrayList<>();
+			for (GPXInfo gpxInfo : gpxInfoList) {
+				File file = new File(gpxInfo.getFileName());
+				if (file.exists()) {
+					files.add(file);
+				}
+			}
+			if (!files.isEmpty()) {
+				myPlacesItems.add(new ExportDataObject(ExportSettingsType.TRACKS, files));
+			}
+		}
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (osmEditingPlugin != null) {
+			List<OsmNotesPoint> notesPointList = osmEditingPlugin.getDBBug().getOsmbugsPoints();
+			if (!notesPointList.isEmpty()) {
+				myPlacesItems.add(new ExportDataObject(ExportSettingsType.OSM_NOTES, notesPointList));
+			}
+			List<OpenstreetmapPoint> editsPointList = osmEditingPlugin.getDBPOI().getOpenstreetmapPoints();
+			if (!editsPointList.isEmpty()) {
+				myPlacesItems.add(new ExportDataObject(ExportSettingsType.OSM_EDITS, editsPointList));
+			}
+		}
+		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		if (plugin != null) {
+			List<File> files = new ArrayList<>();
+			for (Recording rec : plugin.getAllRecordings()) {
+				File file = rec.getFile();
+				if (file != null && file.exists()) {
+					files.add(file);
+				}
+			}
+			if (!files.isEmpty()) {
+				myPlacesItems.add(new ExportDataObject(ExportSettingsType.MULTIMEDIA_NOTES, files));
+			}
+		}
+		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkersFromDefaultGroups(false);
+		if (!mapMarkers.isEmpty()) {
+			String name = app.getString(R.string.map_markers);
+			String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
+			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
+			markersGroup.setMarkers(mapMarkers);
+			myPlacesItems.add(new ExportDataObject(ExportSettingsType.ACTIVE_MARKERS, Collections.singletonList(markersGroup)));
+		}
+		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersFromDefaultGroups(true);
+		if (!markersHistory.isEmpty()) {
+			String name = app.getString(R.string.shared_string_history);
+			String groupId = ExportSettingsType.HISTORY_MARKERS.name();
+			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
+			markersGroup.setMarkers(markersHistory);
+			myPlacesItems.add(new ExportDataObject(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup)));
+		}
+		return myPlacesItems;
+	}
+
+	private List<ExportDataObject> getResourcesItems() {
+		List<ExportDataObject> resourcesItems = new ArrayList<>();
+
+		Map<String, File> externalRenderers = app.getRendererRegistry().getExternalRenderers();
+		if (!externalRenderers.isEmpty()) {
+			resourcesItems.add(new ExportDataObject(ExportSettingsType.CUSTOM_RENDER_STYLE, new ArrayList<>(externalRenderers.values())));
+		}
+		File routingProfilesFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+		if (routingProfilesFolder.exists() && routingProfilesFolder.isDirectory()) {
+			File[] fl = routingProfilesFolder.listFiles();
+			if (fl != null && fl.length > 0) {
+				resourcesItems.add(new ExportDataObject(ExportSettingsType.CUSTOM_ROUTING, Arrays.asList(fl)));
+			}
+		}
 		List<ITileSource> iTileSources = new ArrayList<>();
 		Set<String> tileSourceNames = app.getSettings().getTileSourceEntries(true).keySet();
 		for (String name : tileSourceNames) {
@@ -515,111 +649,25 @@ public class SettingsHelper {
 			}
 		}
 		if (!iTileSources.isEmpty()) {
-			dataList.put(ExportSettingsType.MAP_SOURCES, iTileSources);
-		}
-
-		Map<String, File> externalRenderers = app.getRendererRegistry().getExternalRenderers();
-		if (!externalRenderers.isEmpty()) {
-			dataList.put(ExportSettingsType.CUSTOM_RENDER_STYLE, new ArrayList<>(externalRenderers.values()));
-		}
-
-		File routingProfilesFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-		if (routingProfilesFolder.exists() && routingProfilesFolder.isDirectory()) {
-			File[] fl = routingProfilesFolder.listFiles();
-			if (fl != null && fl.length > 0) {
-				dataList.put(ExportSettingsType.CUSTOM_ROUTING, Arrays.asList(fl));
-			}
-		}
-
-		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
-		if (!impassableRoads.isEmpty()) {
-			dataList.put(ExportSettingsType.AVOID_ROADS, new ArrayList<>(impassableRoads.values()));
-		}
-		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
-		if (plugin != null) {
-			List<File> files = new ArrayList<>();
-			for (Recording rec : plugin.getAllRecordings()) {
-				File file = rec.getFile();
-				if (file != null && file.exists()) {
-					files.add(file);
-				}
-			}
-			if (!files.isEmpty()) {
-				dataList.put(ExportSettingsType.MULTIMEDIA_NOTES, files);
-			}
-		}
-		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfo(gpxDir, null, true);
-		if (!gpxInfoList.isEmpty()) {
-			List<File> files = new ArrayList<>();
-			for (GPXInfo gpxInfo : gpxInfoList) {
-				File file = new File(gpxInfo.getFileName());
-				if (file.exists()) {
-					files.add(file);
-				}
-			}
-			if (!files.isEmpty()) {
-				dataList.put(ExportSettingsType.TRACKS, files);
-			}
-		}
-		if (globalExport) {
-			List<ApplicationModeBean> appModeBeans = new ArrayList<>();
-			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-				appModeBeans.add(mode.toModeBean());
-			}
-			dataList.put(ExportSettingsType.PROFILE, appModeBeans);
-		}
-		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-		if (osmEditingPlugin != null) {
-			List<OsmNotesPoint> notesPointList = osmEditingPlugin.getDBBug().getOsmbugsPoints();
-			if (!notesPointList.isEmpty()) {
-				dataList.put(ExportSettingsType.OSM_NOTES, notesPointList);
-			}
-			List<OpenstreetmapPoint> editsPointList = osmEditingPlugin.getDBPOI().getOpenstreetmapPoints();
-			if (!editsPointList.isEmpty()) {
-				dataList.put(ExportSettingsType.OSM_EDITS, editsPointList);
-			}
-		}
-		List<FavoriteGroup> favoriteGroups = app.getFavorites().getFavoriteGroups();
-		if (!favoriteGroups.isEmpty()) {
-			dataList.put(ExportSettingsType.FAVORITES, favoriteGroups);
+			resourcesItems.add(new ExportDataObject(ExportSettingsType.MAP_SOURCES, iTileSources));
 		}
 		List<LocalIndexInfo> localIndexInfoList = getLocalIndexData();
 		List<File> files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
 				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA);
 		if (!files.isEmpty()) {
 			sortLocalFiles(files);
-			dataList.put(ExportSettingsType.OFFLINE_MAPS, files);
+			resourcesItems.add(new ExportDataObject(ExportSettingsType.OFFLINE_MAPS, files));
 		}
 		files = getFilesByType(localIndexInfoList, LocalIndexType.TTS_VOICE_DATA);
 		if (!files.isEmpty()) {
-			dataList.put(ExportSettingsType.TTS_VOICE, files);
+			resourcesItems.add(new ExportDataObject(ExportSettingsType.TTS_VOICE, files));
 		}
 		files = getFilesByType(localIndexInfoList, LocalIndexType.VOICE_DATA);
 		if (!files.isEmpty()) {
-			dataList.put(ExportSettingsType.VOICE, files);
+			resourcesItems.add(new ExportDataObject(ExportSettingsType.VOICE, files));
 		}
-		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkersFromDefaultGroups(false);
-		if (!mapMarkers.isEmpty()) {
-			String name = app.getString(R.string.map_markers);
-			String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
-			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
-			markersGroup.setMarkers(mapMarkers);
-			dataList.put(ExportSettingsType.ACTIVE_MARKERS, Collections.singletonList(markersGroup));
-		}
-		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersFromDefaultGroups(true);
-		if (!markersHistory.isEmpty()) {
-			String name = app.getString(R.string.shared_string_history);
-			String groupId = ExportSettingsType.HISTORY_MARKERS.name();
-			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
-			markersGroup.setMarkers(markersHistory);
-			dataList.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
-		}
-		List<HistoryEntry> historyEntries = SearchHistoryHelper.getInstance(app).getHistoryEntries(false);
-		if (!historyEntries.isEmpty()) {
-			dataList.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
-		}
-		return dataList;
+
+		return resourcesItems;
 	}
 
 	private List<LocalIndexInfo> getLocalIndexData() {
@@ -743,6 +791,40 @@ public class SettingsHelper {
 			settingsItems.add(new SearchHistorySettingsItem(app, historyEntries));
 		}
 		return settingsItems;
+	}
+
+	public static Map<ExportSettingsCategory, List<ExportDataObject>> getSettingsToOperateByCategory(List<SettingsItem> items, boolean importComplete) {
+		Map<ExportSettingsCategory, List<ExportDataObject>> exportMap = new LinkedHashMap<>();
+		Map<ExportSettingsType, List<?>> settingsToOperate = getSettingsToOperate(items, importComplete);
+
+		List<ExportDataObject> settingsItems = new ArrayList<>();
+		List<ExportDataObject> myPlacesItems = new ArrayList<>();
+		List<ExportDataObject> resourcesItems = new ArrayList<>();
+
+		for (Map.Entry<ExportSettingsType, List<?>> entry : settingsToOperate.entrySet()) {
+			ExportSettingsType type = entry.getKey();
+			if (type.isSettingsCategory()) {
+				settingsItems.add(new ExportDataObject(type, entry.getValue()));
+			} else if (type.isMyPlacesCategory()) {
+				myPlacesItems.add(new ExportDataObject(type, entry.getValue()));
+			} else if (type.isResourcesCategory()) {
+				resourcesItems.add(new ExportDataObject(type, entry.getValue()));
+			}
+		}
+		if (!settingsItems.isEmpty()) {
+			sortExportSettingsObjects(settingsItems);
+			exportMap.put(ExportSettingsCategory.SETTINGS, settingsItems);
+		}
+		if (!myPlacesItems.isEmpty()) {
+			sortExportSettingsObjects(myPlacesItems);
+			exportMap.put(ExportSettingsCategory.MY_PLACES, myPlacesItems);
+		}
+		if (!resourcesItems.isEmpty()) {
+			sortExportSettingsObjects(resourcesItems);
+			exportMap.put(ExportSettingsCategory.RESOURCES, resourcesItems);
+		}
+
+		return exportMap;
 	}
 
 	public static Map<ExportSettingsType, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean importComplete) {
@@ -913,7 +995,7 @@ public class SettingsHelper {
 		if (!markersGroups.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.ACTIVE_MARKERS, markersGroups);
 		}
-		if (!markersGroups.isEmpty()) {
+		if (!markersHistoryGroups.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.HISTORY_MARKERS, markersHistoryGroups);
 		}
 		if (!historyEntries.isEmpty()) {
@@ -932,6 +1014,17 @@ public class SettingsHelper {
 
 			private String getNameToDisplay(File item) {
 				return FileNameTranslationHelper.getFileNameWithRegion(app, item.getName());
+			}
+		});
+	}
+
+	private static void sortExportSettingsObjects(List<ExportDataObject> items) {
+		Collections.sort(items, new Comparator<ExportDataObject>() {
+			@Override
+			public int compare(ExportDataObject lhs, ExportDataObject rhs) {
+				int order1 = lhs.getType().ordinal();
+				int order2 = rhs.getType().ordinal();
+				return (order1 < order2) ? -1 : ((order1 == order2) ? 0 : 1);
 			}
 		});
 	}

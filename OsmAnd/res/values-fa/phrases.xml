@@ -646,7 +646,7 @@
     <string name="poi_ferry_terminal_cargo">ترمینال باربری</string>
     <string name="poi_telescope_type">نوع تلسکوپ</string>
     <string name="poi_animal_training_type">نوع</string>
-    <string name="poi_embassy_type">نوع سفارت</string>
+    <string name="poi_diplomatic_filter">نوع سفارت</string>
     <string name="poi_city_capital">پایتخت</string>
     <string name="poi_healthcare_alternative_types">تخصص</string>
     <string name="poi_free_flying_characteristics">مشخصات</string>

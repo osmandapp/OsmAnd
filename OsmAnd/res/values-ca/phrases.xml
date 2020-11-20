@@ -2118,7 +2118,7 @@
     <string name="poi_aerialway_heating">Calefacció</string>
     <string name="poi_telescope_type">Tipus</string>
     <string name="poi_animal_training_type">Tipus</string>
-    <string name="poi_embassy_type">Tipus</string>
+    <string name="poi_diplomatic_filter">Tipus</string>
     <string name="poi_city_capital">Capital</string>
     <string name="poi_healthcare_alternative_types">Especialitat</string>
     <string name="poi_free_flying_characteristics">Característica</string>

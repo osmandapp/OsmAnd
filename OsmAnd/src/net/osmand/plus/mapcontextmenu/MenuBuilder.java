@@ -46,7 +46,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.openplacereviews.OprStartFragment;
+import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -316,7 +316,7 @@ public class MenuBuilder {
 		b.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+				AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 			}
 		});
 		b.setTypeface(FontCache.getRobotoRegular(context));
@@ -336,6 +336,8 @@ public class MenuBuilder {
 		b.setTypeface(null, Typeface.BOLD);
 		b.setText(context.getResources().getString(R.string.shared_string_add_photo));
 		b.setBackgroundResource(R.drawable.btn_border_light);
+		//TODO This feature is under development
+		b.setVisibility(View.VISIBLE);
 		b.setTextColor(ContextCompat.getColor(context, R.color.preference_category_title));
 		return b;
 	}
