@@ -436,7 +436,12 @@ public class QuickSearchHelper implements ResourceListener {
 				SearchResult sr = new SearchResult(phrase);
 				PointDescription pd = point.getName();
 				if (pd.isPoiType()) {
-					AbstractPoiType pt = MapPoiTypes.getDefault().getAnyPoiTypeByKey(pd.getName());
+					String name = pd.getName();
+					MapPoiTypes mapPoiTypes = MapPoiTypes.getDefault();
+					AbstractPoiType pt = mapPoiTypes.getAnyPoiTypeByKey(name);
+					if (pt == null) {
+						pt = mapPoiTypes.getAnyPoiAdditionalTypeByKey(name);
+					}
 					if (pt != null) {
 						sr.localeName = pt.getTranslation();
 						sr.object = pt;
