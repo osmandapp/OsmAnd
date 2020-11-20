@@ -3991,4 +3991,10 @@
     <string name="file_size_needed_for_import">Necesario para importar</string>
     <string name="export_not_enough_space_descr">El dispositivo sólo tiene %1$s libre. Por favor, libera algo de espacio o desmarca algunos elementos a exportar.</string>
     <string name="export_not_enough_space">Sin espacio suficiente</string>
+    <string name="add_to_mapillary">Añadir a Mapillary</string>
+    <string name="add_to_opr">Añadir a OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd muestra fotos de varios repositorios:
+\nOpenPlaceReviews (fotos de PDI);
+\nMapillary (imágenes a nivel de calle);
+\nWeb / Wikimedia (fotos de PDI incluidas en los datos de OpenStreetMap).</string>
 </resources>

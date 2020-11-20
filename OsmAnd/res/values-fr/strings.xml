@@ -3948,9 +3948,9 @@
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Créer un nouveau compte</string>
     <string name="register_opr_have_account">J\'ai déjà un compte</string>
-    <string name="open_street_map_login_mode">Vous devez vous connecter pour envoyer vos modifications.
+    <string name="open_street_map_login_mode">Connectez-vous pour envoyer vos modifications,
 \n
-\nVous pouvez vous connecter avec la méthode sécurisée OAuth ou utiliser votre identifiant et votre mot de passe.</string>
+\nsoit avec OAuth soit avec votre identifiant et mot de passe.</string>
     <string name="osm_login_descr">Vous pouvez vous connecter avec la méthode sécurisée OAuth ou utiliser votre identifiant et votre mot de passe.</string>
     <string name="register_on_openplacereviews_desc">Les photos sont fournies par le projet open data OpenPlaceReviews.org. Pour envoyer vos photos, vous devez au préalable être inscrit sur ce site Web.</string>
     <string name="shared_string_search_history">Historique de recherche</string>
@@ -3962,4 +3962,6 @@
     <string name="select_data_to_export">Sélectionnez les données à exporter dans le fichier.</string>
     <string name="file_size_needed_for_import">Nécessaire pour l\'import</string>
     <string name="export_not_enough_space">L\'espace disponible est insuffisant</string>
+    <string name="add_to_mapillary">Ajouter à Mapillary</string>
+    <string name="add_to_opr">Ajouter à OpenPlaceReviews</string>
 </resources>
