@@ -59,7 +59,7 @@
     <string name="gpx_visibility_txt">Видимість</string>
     <string name="gpx_tags_txt">Теги</string>
     <string name="gpx_description_txt">Опис</string>
-    <string name="validate_gpx_upload_name_pwd">Для вивантаження GPX-файлів, будь ласка, вкажіть Ваше ім\'я користувача і пароль в OSM.</string>
+    <string name="validate_gpx_upload_name_pwd">Для вивантаження GPX-файлів вкажіть ваше ім\'я користувача і пароль в OSM.</string>
     <string name="default_buttons_support">Підтримка</string>
     <string name="support_new_features">Підтримати розробку нових функцій</string>
     <string name="show_ruler_level">Відображати масштаб</string>
@@ -1946,7 +1946,7 @@
     <string name="osm_live_email_desc">Це потрібно, щоб надавати Вам відомості про зміни на мапі.</string>
     <string name="osm_live_user_public_name">Прилюдне імʼя</string>
     <string name="osm_live_support_region">Територія</string>
-    <string name="osm_live_enter_user_name">Будь ласка, введіть прилюдне ім\'я</string>
+    <string name="osm_live_enter_user_name">Введіть загальнодоступне ім\'я</string>
     <string name="osm_live_thanks">Дякуємо за підтримку OsmAnd! 
 \nЩоб задіяти усі нові можливості Вам потрібно перезапустити застосунок.</string>
     <string name="osm_live_region_desc">Частина коштів буде спрямована землеписцям OSM, що внесли зміни до мапи в цьому місці.</string>
@@ -1956,7 +1956,7 @@
 \nЯкщо Вам подобається OsmAnd та OSM, і хочете підтримати і бути підтриманими ними, це ідеальний спосіб зробити це.</string>
     <string name="upload_osm_note_description">Надішліть Вашу OSM-нотатку таємно, або скориставшись обліковим записом на OSM.org.</string>
     <string name="upload_osm_note">Надіслати нотатку в OSM</string>
-    <string name="file_name_containes_illegal_char">Ім\'я файлу містить неприпустимі знаки</string>
+    <string name="file_name_containes_illegal_char">Неприпустимі знаки в назві файлу</string>
     <string name="follow_us">Слідкуйте за нами</string>
     <string name="access_direction_audio_feedback">Звукові напрямки</string>
     <string name="access_direction_audio_feedback_descr">Індикація звуком напряму на цільову точку.</string>
@@ -2243,7 +2243,7 @@
     <string name="display_zoom_level">Рівень масштабування: %1$s</string>
     <string name="favorite_group_name">Назва групи</string>
     <string name="change_color">Зміна кольору</string>
-    <string name="edit_name">Редагувати ім\'я</string>
+    <string name="edit_name">Змінити ім\'я</string>
     <string name="shared_string_overview">Огляд</string>
     <string name="select_street">Виберіть вулицю</string>
     <string name="shared_string_in_name">у %1$s</string>
@@ -2433,7 +2433,7 @@
     <string name="shared_string_reload">Перезавантажити</string>
     <string name="mapillary_menu_descr_tile_cache">Перезавантажити тайли, щоб переглянути актуальні дані.</string>
     <string name="mapillary_menu_title_tile_cache">Тайловий кеш</string>
-    <string name="wrong_user_name">Невірне ім\'я користувача</string>
+    <string name="wrong_user_name">Неправильне ім\'я користувача</string>
     <string name="shared_string_to">до</string>
     <string name="mapillary_menu_date_from">від</string>
     <string name="mapillary_menu_descr_dates">Показувати лише додані зображення</string>
@@ -2464,7 +2464,7 @@
     <string name="measurement_tool_action_bar">Перегляньте мапу і додайте точки</string>
     <string name="measurement_tool">Вимірювання відстані</string>
     <string name="none_point_error">Необхідно додати хоча б одну точку.</string>
-    <string name="enter_gpx_name">Ім’я GPX файлу:</string>
+    <string name="enter_gpx_name">Назва GPX файлу:</string>
     <string name="show_on_map_after_saving">Показати на мапі після збереження</string>
     <string name="add_waypoint">Додати шляхову точку</string>
     <string name="save_gpx_waypoint">Зберегти GPX-точку шляху</string>
@@ -2633,7 +2633,7 @@
     <string name="first_intermediate_dest_description">Додає першу зупинку</string>
     <string name="subsequent_dest_description">Пересунути призначення далі і створити його</string>
     <string name="show_closed_notes">Показати закриті нотатки</string>
-    <string name="switch_osm_notes_visibility_desc">Показати/приховати OSM-нотатки на мапі.</string>
+    <string name="switch_osm_notes_visibility_desc">Показати чи приховати примітки OSM на мапі.</string>
     <string name="gpx_file_desc">GPX — підходить для експорту в JOSM та інші OSM-редактори.</string>
     <string name="osc_file_desc">OSC — підходить для експорту в OSM.</string>
     <string name="shared_string_gpx_file">GPX-файл</string>
@@ -2663,7 +2663,7 @@
     <string name="west_abbreviation">Зх</string>
     <string name="south_abbreviation">Пд</string>
     <string name="north_abbreviation">Пн</string>
-    <string name="optional_point_name">Необов\'язкове ім\'я точки</string>
+    <string name="optional_point_name">Необов\'язкова назва точки</string>
     <string name="transport_nearby_routes_within">Близькі маршрути в межах</string>
     <string name="transport_nearby_routes">В межах</string>
     <string name="distance_farthest">Відстань: спочатку найдальше</string>
@@ -3122,7 +3122,7 @@
     <string name="zoom_by_wunderlinq_descr">Змінюйте масштабування мапи прокручуванням колеса вгору і вниз. Клавіша Escape поверне вас до додатку WunderLINQ.</string>
     <string name="zoom_by_wunderlinq">Використовувати WunderLINQ для контролю</string>
     <string name="quick_action_need_to_add_item_to_list">Потрібно додати принаймні одну річ до списку у налаштуваннях \'Швидкої дії\'</string>
-    <string name="routing_attr_piste_type_downhill_name">Високогір\'я / гірські лижі</string>
+    <string name="routing_attr_piste_type_downhill_name">Альпійські та гірські лижі</string>
     <string name="routing_attr_piste_type_downhill_description">Траси для високогірних і гірських лиж та доступ до лижних підіймачів.</string>
     <string name="app_mode_offroad">Бездоріжжя</string>
     <string name="edit_profile_setup_title">Налаштувати профіль</string>
@@ -3132,7 +3132,7 @@
     <string name="edit_profile_nav_settings_subtitle">Оберіть налаштування навігації для профілю</string>
     <string name="routing_attr_max_num_changes_description">Вкажіть верхню межу змін</string>
     <string name="routing_attr_max_num_changes_name">Кількість змін</string>
-    <string name="routing_attr_piste_type_nordic_name">Бігові лижі / скандинавська ходьба</string>
+    <string name="routing_attr_piste_type_nordic_name">Бігові лижі та скандинавські лижі</string>
     <string name="routing_attr_piste_type_nordic_description">Траси для скандинавської ходьби або бігу на лижах.</string>
     <string name="routing_attr_piste_type_skitour_name">Лижні тури</string>
     <string name="routing_attr_piste_type_skitour_description">Маршрути для лижних турів.</string>
@@ -3364,7 +3364,7 @@
     <string name="swap_two_places">Змінити місцями %1$s та %2$s</string>
     <string name="route_start_point">Початкова точка</string>
     <string name="track_saved">Трек збережено</string>
-    <string name="empty_filename">Ім\'я файлу порожнє</string>
+    <string name="empty_filename">Порожня назва файлу</string>
     <string name="shared_string_revert">Повернутися</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Показати мережеві маршрути циклу вузлів</string>
     <string name="clear_confirmation_msg">Очистити %1$s\?</string>
@@ -3574,7 +3574,7 @@
     <string name="shared_string_hillshade">Пагорб</string>
     <string name="n_items_of_z">%1$s з %2$s</string>
     <string name="download_slope_maps">Схили</string>
-    <string name="quick_action_show_hide_terrain">Показати / приховати місцевість</string>
+    <string name="quick_action_show_hide_terrain">Показати чи приховати рельєф</string>
     <string name="quick_action_terrain_hide">Сховати місцевість</string>
     <string name="quick_action_terrain_show">Показати місцевість</string>
     <string name="quick_action_terrain_descr">Кнопка для відображення або приховування шару місцевості на мапі.</string>
@@ -3691,10 +3691,10 @@
     <string name="parking_positions">Розташування припаркованого авто</string>
     <string name="quick_action_transport_hide">Приховати громадський транспорт</string>
     <string name="quick_action_transport_show">Показати громадський транспорт</string>
-    <string name="quick_action_show_hide_transport">Показати/приховати громадський транспорт</string>
+    <string name="quick_action_show_hide_transport">Показати чи приховати громадський транспорт</string>
     <string name="quick_action_transport_descr">Кнопка показу або приховування громадського транспорту на мапі.</string>
-    <string name="create_edit_poi">Створити / змінити POI</string>
-    <string name="add_edit_favorite">Додати / правити вибране</string>
+    <string name="create_edit_poi">Створити чи змінити POI</string>
+    <string name="add_edit_favorite">Додати чи змінити вибране</string>
     <string name="reset_deafult_order">Відновити усталене впорядкування</string>
     <string name="back_to_editing">Повернутися до редагування</string>
     <string name="additional_actions_descr">Ви можете отримати доступ до цих дій, торкнувшись кнопки “%1$s”.</string>
@@ -3863,7 +3863,7 @@
     <string name="plan_route_trim_after">Обрізати після</string>
     <string name="plan_route_change_route_type_before">Змінити вид маршруту раніше</string>
     <string name="plan_route_change_route_type_after">Змінити вид маршруту після</string>
-    <string name="save_global_track_interval_descr">Вкажіть інтервал для загального запису поїздки (включається через віджет запису подорожі на мапі).</string>
+    <string name="save_global_track_interval_descr">Вкажіть інтервал для загального запису поїздки (увімкнено через віджет «Запис подорожі» на мапі).</string>
     <string name="system_default_theme">Усталена системна</string>
     <string name="all_next_segments">Всі наступні сегменти</string>
     <string name="previous_segment">Попередній сегмент</string>
@@ -3884,7 +3884,7 @@
     <string name="shared_string_redo">Повторити</string>
     <string name="release_3_8">• Оновлено функції планування маршруту: дозволено застосувати різні типи переходів для кожного сегмента і прив\'язати будь-який трек до доріг
 \n
-\n• Нове меню вигляду треків: вибір кольору, товщина, вигляд стрілки напрямку, значки початку/завершення
+\n• Нове меню вигляду треків: вибір кольору, товщина, вигляд стрілки напрямку, піктограми початку та завершення
 \n
 \n• Покращено оглядовість велосипедних вузлів
 \n
@@ -3900,7 +3900,7 @@
     <string name="sort_last_modified">Востаннє змінено</string>
     <string name="sort_name_descending">За назвою: Я — А</string>
     <string name="sort_name_ascending">За назвою: А — Я</string>
-    <string name="start_finish_icons">Значки початку/завершення</string>
+    <string name="start_finish_icons">Піктограми початку та завершення</string>
     <string name="contour_lines_thanks">Дякуємо за придбання «Горизонталей»</string>
     <string name="what_is_new">Що нового</string>
     <string name="osm_live_payment_desc_hw">Передплата стягується за вибраний період. Скасуйте її в AppGallery у будь-який час.</string>
@@ -3914,10 +3914,10 @@
     <string name="complex_routing_descr">Двофазна маршрутизація для автомобільної навігації.</string>
     <string name="use_native_pt">Розвиток власного громадського транспорту</string>
     <string name="use_native_pt_desc">Перемкнутися на розрахунок маршруту громадським транспортом за допомогою Java (безпечний)</string>
-    <string name="perform_oauth_authorization_description">Виконати вхід OAuth для користування функцією osmedit</string>
+    <string name="perform_oauth_authorization_description">Увійти за допомогою OAuth для користування функцією osmedit</string>
     <string name="perform_oauth_authorization">Увійти через OAuth</string>
     <string name="clear_osm_token">Очистити токен OAuth OpenStreetMap</string>
-    <string name="osm_edit_logout_success">Ви успішно вийшли</string>
+    <string name="osm_edit_logout_success">Ви вийшли</string>
     <string name="use_live_public_transport">OsmAnd дані в реальному часі</string>
     <string name="routing_attr_avoid_footways_description">Уникати пішохідних шляхів</string>
     <string name="routing_attr_avoid_footways_name">Уникати пішохідних шляхів</string>
@@ -3951,27 +3951,42 @@
     <string name="subscription_on_hold_title">Передплата OsmAnd Live на утриманні</string>
     <string name="login_open_street_map">Увійти до OpenStreetMap.org</string>
     <string name="login_open_street_map_org">Увійти до OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">Увійдіть, щоб вивантажити нові або внесені зміни.
+    <string name="open_street_map_login_mode">Увійдіть, щоб вивантажити нові або внесені зміни,
 \n
-\nВи можете увійти, за допомогою безпечного методу OAuth, або скористатися своїм ім\'ям та паролем.</string>
-    <string name="use_login_password">Використовувати ім\'я і пароль</string>
+\nабо за допомогою безпечного методу OAuth або свого ім\'я та паролю.</string>
+    <string name="use_login_password">Увійти за допомогою імені користувача і паролю</string>
     <string name="login_account">Обліковий запис</string>
     <string name="user_login">Ім\'я користувача</string>
     <string name="sign_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
     <string name="markers_history">Історія маркерів</string>
     <string name="send_files_to_openstreetmap">Надіслати файл GPX на OpenStreetMap</string>
     <string name="enter_text_separated">Введіть мітки через коми.</string>
-    <string name="gpx_upload_public_visibility_descr">Загальнодоступне означає, що трасування буде показано загальнодоступно у ваших GPS-трасуваннях та у загальнодоступних списках GPS-трасування. Дані, що подаються через API, не посилаються на вашу сторінку трасування. Мітки часу точок трасування недоступні через загальнодоступний API GPS і не впорядковані хронологічно. Однак інші користувачі все ще можуть завантажувати необроблену трасування із загальнодоступного списку трасування та будь-які часові позначки, що містяться всередині.</string>
-    <string name="gpx_upload_private_visibility_descr">Приватне означає, що трасування не з\'являтиметься в жодному загальнодоступному списку, але контрольні точки з нього все одно будуть доступні через загальнодоступний API GPS без позначок часу та не впорядковані за хронологією.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Ідентифікований означає, що трасування буде показано публічно у вашому трасуванні GPS і в загальнодоступних списках трасування GPS, тобто інші користувачі зможуть завантажити необроблене трасування та пов\'язати його з вашим ім\'ям користувача. Дані, подані за допомогою API точок відстеження, посилаються на вихідну сторінку трасування. Позначки часу точок трасування доступні через загальнодоступний GPS API.</string>
-    <string name="gpx_upload_trackable_visibility_descr">Відстежуваний означає, що трасування не з\'явиться в жодному загальнодоступному списку, але точки від нього все одно будуть доступні через загальнодоступний API GPS із позначками часу. Інші користувачі зможуть завантажувати лише оброблені контрольні точки з вашого трасування, які не можуть бути безпосередньо пов’язані з вами.</string>
+    <string name="gpx_upload_public_visibility_descr">«Загальнодоступне» означає, що трасування показано загальнодоступно у ваших GPS-трасуваннях та у загальнодоступних списках GPS-трасування, а також у загальнодоступному списку трасування з позначками часу в необробленому вигляді.. Дані, що подаються через API, не посилаються на вашу сторінку трасування. Мітки часу точок трасування недоступні через загальнодоступний API GPS і не впорядковані хронологічно.</string>
+    <string name="gpx_upload_private_visibility_descr">«Приватне» означає, що трасування не з\'являється в жодному загальнодоступному списку, але контрольні точки з нього в нехронологічному порядку доступні через загальнодоступний API GPS без позначок часу.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">«Ідентифікований» означає, що трасування буде показано публічно у вашому трасуванні GPS і в загальнодоступних списках трасування GPS, тобто інші користувачі зможуть завантажити необроблене трасування та пов\'язати його з вашим ім\'ям користувача. Загальнодоступні дані трасування з GPS API, що обслуговуються за допомогою API точок відстеження, посилаються на початкову сторінку трасування.</string>
+    <string name="gpx_upload_trackable_visibility_descr">«Відстежуваний» означає, що трек не з\'явиться в жодному загальнодоступному списку, але обробка точок з позначками часу від нього (які не можуть бути безпосередньо пов’язані з вами) виконується за допомогою завантажень із загальнодоступного API GPS.</string>
     <string name="osm_edit_close_note">Закрити примітку OSM</string>
     <string name="osm_edit_comment_note">Коментувати примітку OSM</string>
-    <string name="osm_login_descr">Ви можете увійти за допомогою безпечного методу OAuth або застосувавши свої ім\'я користувача й пароль.</string>
+    <string name="osm_login_descr">Увійдіть за допомогою безпечного методу OAuth або застосувавши свої ім\'я користувача й пароль.</string>
     <string name="shared_string_add_photo">Додати світлини</string>
     <string name="register_on_openplacereviews">Зареєструватися на
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Світлини надаються проєктом відкритих даних OpenPlaceReviews.org. Щоб завантажити світлини зареєструйтеся на сайті.</string>
+    <string name="register_on_openplacereviews_desc">Увійдіть на вебсайт проєкту відкритих даних OpenPlaceReviews.org, щоб завантажити ще більше світлин.</string>
     <string name="register_opr_create_new_account">Створити обліковий запис</string>
     <string name="register_opr_have_account">У мене вже є обліковий запис</string>
+    <string name="shared_string_search_history">Журнал пошуку</string>
+    <string name="app_mode_kayak">Каяк</string>
+    <string name="app_mode_motorboat">Моторний човен</string>
+    <string name="shared_string_resources">Ресурси</string>
+    <string name="approximate_file_size">Приблизний розмір файлу</string>
+    <string name="select_data_to_export">Виберіть дані, які потрібно експортувати до файлу.</string>
+    <string name="file_size_needed_for_import">Необхідно для імпорту</string>
+    <string name="export_not_enough_space_descr">На вашому пристрої лише %1$s вільного простору. Звільніть місце або приберіть позначки з деяких елементів для експорту.</string>
+    <string name="export_not_enough_space">Бракує простору</string>
+    <string name="add_to_mapillary">Додати до Mapillary</string>
+    <string name="add_to_opr">Додати до OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd демонструє світлини з кількох джерел:
+\nOpenPlaceReviews — світлини POI;
+\nMapillary - зображення вулиць;
+\nМережа / Вікімедіа — світлини POI, вказані в даних OpenStreetMap.</string>
 </resources>

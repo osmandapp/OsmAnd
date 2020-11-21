@@ -221,18 +221,13 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	@Override
 	public void onClick(View view) {
-		switch (view.getId()) {
-			case R.id.switch_compat:
-				onSwitchClick();
-				break;
-			case R.id.left_button:
-				setupTerrainMode(HILLSHADE);
-				break;
-			case R.id.right_button:
-				setupTerrainMode(SLOPE);
-				break;
-			default:
-				break;
+		int id = view.getId();
+		if (id == R.id.switch_compat) {
+			onSwitchClick();
+		} else if (id == R.id.left_button) {
+			setupTerrainMode(HILLSHADE);
+		} else if (id == R.id.right_button) {
+			setupTerrainMode(SLOPE);
 		}
 	}
 

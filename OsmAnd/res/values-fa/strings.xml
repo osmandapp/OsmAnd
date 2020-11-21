@@ -3980,4 +3980,11 @@
     <string name="gpx_upload_private_visibility_descr">خصوصی یا Private به این معنی است که رد در هیچ‌یک از لیست‌های عمومی نشان داده نمی‌شود اما نقاط رد از طریق API جی‌پی‌اس‌های عمومی بدون مهر زمان و بدون ترتیب زمانی دست‌یافتنی است.</string>
     <string name="gpx_upload_identifiable_visibility_descr">قابل‌شناسایی یا Identifiable به این معنی است که رد به‌صورت عمومی در لیست ردهای جی‌پی‌اس شما و لیست عمومی ردهای جی‌پی‌اس نمایش داده می‌شود، یعنی سایر کاربران می‌توانند رد خام را دانلود کنند و بدانند که مربوط به نام کاربری شماست. دادهٔ نقاط رد که از طریق API در دسترس قرار می‌گیرد، به صفحهٔ ردهای شما ارجاع می‌دهد. مهر زمان نقاط رد از طریق API جی‌پی‌اس‌های عمومی دست‌یافتنی است.</string>
     <string name="gpx_upload_trackable_visibility_descr">قابل‌ردیابی یا Trackable به این معنی است که رد در هیچ‌یک از لیست‌های عمومی نشان داده نمی‌شود اما نقاط رد + مهر زمان نقاط از طریق API جی‌پی‌اس‌های عمومی دست‌یافتنی است. سایر کاربران فقط می‌توانند نقاط پردازش‌شدهٔ رد شما را دانلود کنند که مستقیماً امکان ارجاع به نام کاربری شما را ندارد.</string>
+    <string name="shared_string_add_photo">افزودن عکس</string>
+    <string name="register_on_openplacereviews_desc">عکس‌ها از طریق پروژهٔ داده‌باز OpenPlaceReviews.org ارائه می‌شود. برای آپلود عکس‌های خود لازم است در این وبگاه ثبت نام کنید.</string>
+    <string name="register_on_openplacereviews">ثبت نام در
+\nOpenPlaceReviews.org</string>
+    <string name="register_opr_create_new_account">ساخت حساب جدید</string>
+    <string name="register_opr_have_account">حساب کاربری دارم</string>
+    <string name="shared_string_search_history">تاریخچهٔ جست‌وجو</string>
 </resources>

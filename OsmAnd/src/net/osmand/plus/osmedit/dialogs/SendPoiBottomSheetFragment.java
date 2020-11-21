@@ -6,10 +6,12 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
@@ -31,7 +33,10 @@ import org.apache.commons.logging.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.*;
+import static net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.OPENSTREETMAP_POINT;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
 
 public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
@@ -82,6 +87,17 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
                             isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
                 }
                 closeChangeSet.setPadding(paddingSmall, 0, paddingSmall, 0);
+            }
+        });
+        LinearLayout account = sendOsmPoiView.findViewById(R.id.account_container);
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentActivity activity = getActivity();
+                if (activity != null) {
+                    showOpenStreetMapScreen(activity);
+                }
+                dismiss();
             }
         });
         final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()

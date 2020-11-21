@@ -398,7 +398,7 @@
     <string name="use_fluorescent_overlays">Флуоресцентные цвета</string>
     <string name="use_fluorescent_overlays_descr">Использовать флуоресцентные цвета для отображения треков и маршрутов.</string>
     <string name="offline_edition">Локальное редактирование</string>
-    <string name="offline_edition_descr">Всегда использовать редактирование на устройстве.</string>
+    <string name="offline_edition_descr">Если используется редактирование на устройстве, то изменения будут сохранены локально и загружены на сервер только по запросу, иначе они будут загружаться немедленно.</string>
     <string name="update_poi_does_not_change_indexes">Изменение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл на устройстве.</string>
     <string name="local_openstreetmap_uploading">Отправка…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/заметок отправлено</string>
@@ -3107,7 +3107,7 @@
     <string name="settings_derived_routing_mode_string">Режим пользователя, полученный из: %s</string>
     <string name="profile_alert_duplicate_name_title">Повторяющееся имя</string>
     <string name="routing_profile_broutrer">BRouter (локально)</string>
-    <string name="routing_attr_piste_type_downhill_name">Горнолыжные спуски</string>
+    <string name="routing_attr_piste_type_downhill_name">Альпийские и горные лыжи</string>
     <string name="routing_attr_piste_type_downhill_description">Склоны для катания и спуска на горных лыжах и доступ к подъёмникам.</string>
     <string name="routing_attr_piste_type_skitour_name">Лыжные туры</string>
     <string name="routing_attr_piste_type_sled_name">Сани</string>
@@ -3334,7 +3334,7 @@
     <string name="layer_osm_edits">Правки OSM</string>
     <string name="swap_two_places">Поменять местами %1$s и %2$s</string>
     <string name="track_saved">Трек сохранён</string>
-    <string name="empty_filename">Не указано имя файла</string>
+    <string name="empty_filename">Пустое имя файла</string>
     <string name="clear_confirmation_msg">Очистить %1$s\?</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Узловые сети</string>
     <string name="suggested_maps">Предлагаемые карты</string>
@@ -3561,7 +3561,7 @@
     <string name="recalculate_route_in_deviation">Пересчитывать маршрут в случае отклонения</string>
     <string name="n_items_of_z">%1$s из %2$s</string>
     <string name="terrain_slider_description">Настройка минимального и максимального уровней масштабирования, при которых слой будет отображаться.</string>
-    <string name="quick_action_show_hide_terrain">Показать/скрыть рельеф</string>
+    <string name="quick_action_show_hide_terrain">Показать или скрыть рельеф</string>
     <string name="quick_action_terrain_descr">Переключатель, чтобы показать или скрыть слой рельефа местности на карте.</string>
     <string name="quick_action_terrain_show">Показать рельеф</string>
     <string name="quick_action_terrain_hide">Скрыть рельеф</string>
@@ -3691,8 +3691,8 @@
     <string name="quick_action_transport_hide">Скрыть общественный транспорт</string>
     <string name="quick_action_transport_show">Показать общественный транспорт</string>
     <string name="quick_action_show_hide_transport">Показать/скрыть общественный транспорт</string>
-    <string name="add_edit_favorite">Добавить/изменить место</string>
-    <string name="create_edit_poi">Создать/изменить POI</string>
+    <string name="add_edit_favorite">Добавить или изменить избранное</string>
+    <string name="create_edit_poi">Создать или изменить POI</string>
     <string name="back_to_editing">Возврат к редактированию</string>
     <string name="parking_positions">Парковки</string>
     <string name="quick_action_transport_descr">Переключатель, чтобы показать или скрыть общественный транспорт на карте.</string>
@@ -3961,4 +3961,24 @@
     <string name="subscription_on_hold_title">Подписка OsmAnd Live приостановлена</string>
     <string name="markers_history">История маркеров</string>
     <string name="send_files_to_openstreetmap">Отправить GPX-файл в OpenStreetMap</string>
+    <string name="osm_edit_close_note">Закрыть заметку OSM</string>
+    <string name="shared_string_add_photo">Добавить фото</string>
+    <string name="register_on_openplacereviews">Зарегистрироваться на
+\nOpenPlaceReviews.org</string>
+    <string name="register_opr_create_new_account">Создать новый аккаунт</string>
+    <string name="register_opr_have_account">У меня уже есть аккаунт</string>
+    <string name="shared_string_search_history">История поиска</string>
+    <string name="app_mode_motorboat">Моторная лодка</string>
+    <string name="add_to_opr">Добавить в OpenPlaceReviews</string>
+    <string name="add_to_mapillary">Добавить в Mapillary</string>
+    <string name="add_photos_descr">OsmAnd показывает фотографии из нескольких источников:
+\nOpenPlaceReviews — фотогорафии POI;
+\nMapillary — изображения улиц;
+\nWeb / Wikimedia — фотографии POI, указанные в данных OpenStreetMap.</string>
+    <string name="shared_string_resources">Ресурсы</string>
+    <string name="approximate_file_size">Примерный размер файла</string>
+    <string name="file_size_needed_for_import">Требуется для импорта</string>
+    <string name="select_data_to_export">Выберите данные для экспорта в файл.</string>
+    <string name="export_not_enough_space_descr">На устройстве свободно только %1$s. Освободите место в хранилище или снимите выбор с некоторых экспортируемых элементов.</string>
+    <string name="export_not_enough_space">Недостаточно места</string>
 </resources>
