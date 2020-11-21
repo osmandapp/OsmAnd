@@ -552,18 +552,25 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (ma == null) return;
 
 			OsmandApplication app = ma.getMyApplication();
+			View buttonsDivider = customRadioButton.findViewById(R.id.center_button_container);
 			if (AdditionalInfoType.POINTS == type) {
 				visibleCard = pointsCard;
+				buttonsDivider.setVisibility(View.GONE);
 				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, START);
 			} else if (AdditionalInfoType.GRAPH == type) {
 				visibleCard = graphsCard;
+				buttonsDivider.setVisibility(View.GONE);
 				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, END);
-			} else if (type == null) {
+			}
+			else if (type == null) {
+				buttonsDivider.setVisibility(View.VISIBLE);
 				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, null);
 			}
 			cardsContainer.removeAllViews();
-			View cardView = visibleCard.getView() != null ? visibleCard.getView() : visibleCard.build(ma);
-			cardsContainer.addView(cardView);
+			if (visibleCard != null) {
+				View cardView = visibleCard.getView() != null ? visibleCard.getView() : visibleCard.build(ma);
+				cardsContainer.addView(cardView);
+			}
 
 			currentAdditionalInfoType = type;
 			additionalInfoExpanded = true;
