@@ -3964,4 +3964,8 @@
     <string name="export_not_enough_space">L\'espace disponible est insuffisant</string>
     <string name="add_to_mapillary">Ajouter à Mapillary</string>
     <string name="add_to_opr">Ajouter à OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd affiche des photos de plusieurs sources :
+\nOpenPlaceReviews : photos de PI ;
+\nMapillary : photos de rue ;
+\nWeb / Wikimedia : photos de PI réféfencés dans OpenStreetMap.</string>
 </resources>
