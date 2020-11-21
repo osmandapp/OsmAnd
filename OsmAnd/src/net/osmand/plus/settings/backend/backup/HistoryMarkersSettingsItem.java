@@ -87,7 +87,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 			}
 
 			for (MapMarker marker : appliedItems) {
-				markersHelper.moveMapMarkerToHistory(marker);
+				markersHelper.addMarker(marker);
 			}
 		}
 	}
@@ -96,7 +96,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 	public boolean isDuplicate(@NonNull MapMarker mapMarker) {
 		for (MapMarker marker : existingItems) {
 			if (marker.equals(mapMarker)
-					&& Algorithms.objectEquals(marker.getOriginalPointDescription(), mapMarker.getOriginalPointDescription())) {
+					&& Algorithms.objectEquals(marker.getOnlyName(), mapMarker.getOnlyName())) {
 				return true;
 			}
 		}
@@ -114,10 +114,13 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 		int number = 0;
 		while (true) {
 			number++;
-			String name = item.getOnlyName() + "_" + number;
+			String name = item.getOnlyName() + " " + number;
 			PointDescription description = new PointDescription(PointDescription.POINT_TYPE_LOCATION, name);
-			MapMarker renamedMarker = new MapMarker(item.point, description, item.getColor(), item.selected, item.index);
+			MapMarker renamedMarker = new MapMarker(item.point, description, item.colorIndex, item.selected, item.index);
 			if (!isDuplicate(renamedMarker)) {
+				renamedMarker.history = true;
+				renamedMarker.visitedDate = item.visitedDate;
+				renamedMarker.creationDate = item.creationDate;
 				renamedMarker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
 				return renamedMarker;
 			}
