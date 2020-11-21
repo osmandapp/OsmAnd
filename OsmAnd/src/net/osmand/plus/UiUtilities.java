@@ -488,12 +488,8 @@ public class UiUtilities {
 			endButtonText.setTextColor(textColor);
 			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			startButtonText.setTextColor(activeColor);
-		} else if (buttonType == null){
-			if (isLayoutRtl) {
-				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
-			} else {
-				background.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
-			}
+		} else if (buttonType == null) {
+			background.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
 			endButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			endButtonText.setTextColor(activeColor);

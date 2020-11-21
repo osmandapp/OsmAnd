@@ -61,7 +61,7 @@
 			android:id="@+id/right_button"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:background="?attr/selectableItemBackground"
+			android:background="?attr/btn_radio_button_right"
 			android:gravity="center"
 			android:textColor="@drawable/radio_flat_text_selector_light"
 			osmand:typeface="@string/font_roboto_medium"
