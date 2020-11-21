@@ -50,7 +50,10 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -74,7 +77,9 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yy", Locale.US);
 
 	private OsmandApplication app;
-	private Map<ExportSettingsCategory, List<ExportDataObject>> dataList;
+
+	private Map<ExportSettingsType, List<?>> selectedItemsMap = new HashMap<>();
+	private Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
 
 	private ProgressDialog progress;
 	private ApplicationMode appMode;
@@ -179,7 +184,7 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 		});
 
 		adapter = new ExportSettingsAdapter(app, this, nightMode);
-		adapter.updateSettingsList(dataList);
+		adapter.updateSettingsItems(dataList, selectedItemsMap);
 		expandableList.setAdapter(adapter);
 
 		CollapsingToolbarLayout toolbarLayout = root.findViewById(R.id.toolbar_layout);
@@ -292,13 +297,30 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 	}
 
 	@Override
-	public void onCategorySelected(ExportSettingsCategory type, boolean selected) {
+	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
+		SettingsCategoryItems categoryItems = dataList.get(category);
+		for (ExportSettingsType type : categoryItems.getTypes()) {
+			List<?> selectedItems = selected ? categoryItems.getItemsForType(type) : new ArrayList<>();
+			selectedItemsMap.put(type, selectedItems);
+		}
 		updateAvailableSpace();
 	}
 
 	@Override
-	public void onTypeSelected(ExportSettingsType type, boolean selected) {
+	public void onItemsSelected(ExportSettingsType type, List<?> selectedItems) {
+		selectedItemsMap.put(type, selectedItems);
+		adapter.notifyDataSetChanged();
 		updateAvailableSpace();
+	}
+
+	@Override
+	public void onTypeClicked(ExportSettingsCategory category, ExportSettingsType type) {
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null && type != ExportSettingsType.GLOBAL && type != ExportSettingsType.SEARCH_HISTORY) {
+			List<Object> items = (List<Object>) dataList.get(category).getItemsForType(type);
+			List<Object> selectedItems = (List<Object>) selectedItemsMap.get(type);
+			ExportItemsBottomSheet.showInstance(type, selectedItems, items, fragmentManager, this);
+		}
 	}
 
 	private void prepareFile() {
