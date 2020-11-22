@@ -3264,7 +3264,7 @@
     <string name="voice_announces_info">Οι φωνητικές ανακοινώσεις να γίνονται μόνο κατά την πλοήγηση.</string>
     <string name="voice_announces_descr">Οδηγίες πλοήγησης και ανακοινώσεις</string>
     <string name="voice_announces">Φωνητικές ανακοινώσεις</string>
-    <string name="screen_alerts">Οπτικές προειδοποιήσεις</string>
+    <string name="screen_alerts">Προειδοποιήσεις οθόνης</string>
     <string name="route_parameters_descr">Ρύθμιση παραμέτρων διαδρομής</string>
     <string name="route_parameters">Παράμετροι διαδρομής</string>
     <string name="default_speed_dialog_msg">Εκτιμά τον χρόνο άφιξης αγνώστων τύπων δρόμων και περιορίζει την ταχύτητα σε όλους τους δρόμους (μπορεί να επηρεάσει τη διαδρομή)</string>
