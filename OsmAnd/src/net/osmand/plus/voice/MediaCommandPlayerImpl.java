@@ -8,7 +8,7 @@ import android.os.Build;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.routing.VoiceRouter;
 
 import org.apache.commons.logging.Log;
@@ -91,7 +91,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 			if (ctx != null) {
 				Integer stream = ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
-				OsmandSettings.OsmandPreference<Integer> pref = ctx.getSettings().VOICE_PROMPT_DELAY[stream];
+				OsmandPreference<Integer> pref = ctx.getSettings().VOICE_PROMPT_DELAY[stream];
 				if (pref.getModeValue(getApplicationMode()) > 0) {
 					try {
 						Thread.sleep(pref.getModeValue(getApplicationMode()));

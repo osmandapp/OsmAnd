@@ -3,6 +3,7 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
+	android:background="?attr/bg_color"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 

@@ -30,6 +30,7 @@ import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -42,7 +43,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.ExitActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -56,11 +56,16 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.enums.DrivingRegion;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
@@ -72,7 +77,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.router.GeneralRouter;
@@ -105,17 +110,16 @@ public class OsmandApplication extends MultiDexApplication {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
 	final AppInitializer appInitializer = new AppInitializer(this);
-	OsmandSettings osmandSettings = null;
+	Handler uiHandler;
+	OsmandSettings osmandSettings;
 	OsmAndAppCustomization appCustomization;
+	NavigationService navigationService;
+	DownloadService downloadService;
+	OsmandAidlApi aidlApi;
+
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
-	Handler uiHandler;
-
-	NavigationService navigationService;
-	DownloadService downloadService;
-
-	OsmandAidlApi aidlApi;
 
 	// start variables
 	ResourceManager resourceManager;
@@ -151,12 +155,11 @@ public class OsmandApplication extends MultiDexApplication {
 	SettingsHelper settingsHelper;
 	GpxDbHelper gpxDbHelper;
 	QuickActionRegistry quickActionRegistry;
+	OsmOAuthHelper osmOAuthHelper;
 
 	private Resources localizedResources;
-
 	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
-
-	private Locale preferredLocale = null;
+	private Locale preferredLocale;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
@@ -189,7 +192,7 @@ public class OsmandApplication extends MultiDexApplication {
 			osmandSettings.initExternalStorageDirectory();
 		}
 		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
-		if (!OsmandSettings.isWritable(externalStorageDirectory)) {
+		if (!FileUtils.isWritable(externalStorageDirectory)) {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
@@ -365,8 +368,12 @@ public class OsmandApplication extends MultiDexApplication {
 		return settingsHelper;
 	}
 
+	public OsmOAuthHelper getOsmOAuthHelper() {
+		return osmOAuthHelper;
+	}
+
 	public synchronized DownloadIndexesThread getDownloadThread() {
-		if(downloadIndexesThread == null) {
+		if (downloadIndexesThread == null) {
 			downloadIndexesThread = new DownloadIndexesThread(this);
 		}
 		return downloadIndexesThread;
@@ -587,8 +594,7 @@ public class OsmandApplication extends MultiDexApplication {
 					while (getNavigationService() != null) {
 						try {
 							Thread.sleep(100);
-						}
-							catch (InterruptedException e) {
+						} catch (InterruptedException e) {
 						}
 					}
 
@@ -778,12 +784,28 @@ public class OsmandApplication extends MultiDexApplication {
 		setLanguage(c);
 		c.setTheme(themeResId);
 	}
-	
+
+	IBRouterService reconnectToBRouter() {
+		try {
+			bRouterServiceConnection = BRouterServiceConnection.connect(this);
+			if (bRouterServiceConnection != null) {
+				return bRouterServiceConnection.getBrouterService();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public IBRouterService getBRouterService() {
-		if(bRouterServiceConnection == null) {
+		if (bRouterServiceConnection == null) {
 			return null;
 		}
-		return bRouterServiceConnection.getBrouterService();
+		IBRouterService s = bRouterServiceConnection.getBrouterService();
+		if (s != null && !s.asBinder().isBinderAlive()) {
+			s = reconnectToBRouter();
+		}
+		return s;
 	}
 	
 	public void setLanguage(Context context) {
@@ -983,15 +1005,15 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void setupDrivingRegion(WorldRegion reg) {
-		OsmandSettings.DrivingRegion drg = null;
+		DrivingRegion drg = null;
 		WorldRegion.RegionParams params = reg.getParams();
 //		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
-		OsmandSettings.MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ?
-				OsmandSettings.MetricsConstants.MILES_AND_FEET : OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS;
-		OsmandSettings.MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ?
-				OsmandSettings.MetricsConstants.MILES_AND_METERS : OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS;
-		for (OsmandSettings.DrivingRegion r : OsmandSettings.DrivingRegion.values()) {
+		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ?
+				MetricsConstants.MILES_AND_FEET : MetricsConstants.KILOMETERS_AND_METERS;
+		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ?
+				MetricsConstants.MILES_AND_METERS : MetricsConstants.KILOMETERS_AND_METERS;
+		for (DrivingRegion r : DrivingRegion.values()) {
 			if (r.leftHandDriving == leftHand && (r.defMetrics == mc1 || r.defMetrics == mc2)) {
 				drg = r;
 				break;

@@ -14,14 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.MapUtils;
@@ -32,65 +33,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.LEFT;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.RIGHT;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.BOTTOM_SHEET_HEIGHT_DP;
 
+public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBehaviourDialogFragment {
 
-
-public class RouteBetweenPointsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
-
-	@NonNull
-	private String getDescription(boolean before, boolean single) {
-		MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity == null) {
-			return "";
-		}
-
-		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
-		int pos = editingCtx.getSelectedPointPosition();
-		List<GPXUtilities.WptPt> points = editingCtx.getPoints();
-
-		int startIdx;
-		int endIdx;
-		if (before) {
-			startIdx = 1;
-			endIdx = pos;
-		} else {
-			startIdx = pos + 1;
-			endIdx = points.size() - 1;
-		}
-
-		float dist = !single ? getDistForAllSegments(points, startIdx, endIdx) : getDistForSingleSegment(editingCtx, points, startIdx, endIdx);
-
-		return OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication());
-	}
-
-	private float getDistForAllSegments(List<GPXUtilities.WptPt> points, int startIdx, int endIdx) {
-		float dist = 0;
-		for (int i = startIdx; i <= endIdx; i++) {
-			GPXUtilities.WptPt first = points.get(i - 1);
-			GPXUtilities.WptPt second = points.get(i);
-			dist += MapUtils.getDistance(first.lat, first.lon, second.lat, second.lon);
-		}
-		return dist;
-	}
-
-	private float getDistForSingleSegment(MeasurementEditingContext editingCtx, List<GPXUtilities.WptPt> points, int startIdx, int endIdx) {
-		float dist = 0;
-		Map<Pair<GPXUtilities.WptPt, GPXUtilities.WptPt>, MeasurementEditingContext.RoadSegmentData> roadSegmentDataMap = editingCtx.getRoadSegmentData();
-		if (startIdx <= endIdx) {
-			Pair<GPXUtilities.WptPt, GPXUtilities.WptPt> pair = new Pair<>(points.get(startIdx), points.get(startIdx - 1));
-			MeasurementEditingContext.RoadSegmentData data = roadSegmentDataMap.get(pair);
-			if (data == null) {
-				dist += MapUtils.getDistance(pair.first.getLatitude(), pair.first.getLongitude(),
-						pair.second.getLatitude(), pair.second.getLongitude());
-			} else {
-				dist += data.getDistance();
-			}
-		}
-		return dist;
-	}
 
 	private static final Log LOG = PlatformUtil.getLog(RouteBetweenPointsBottomSheetDialogFragment.class);
 	public static final String TAG = RouteBetweenPointsBottomSheetDialogFragment.class.getSimpleName();
@@ -148,15 +97,14 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends MenuBottomSheet
 		return "";
 	}
 
-
 	private String getButtonDescr(RouteBetweenPointsDialogMode dialogMode) {
 		switch (dialogType) {
 			case WHOLE_ROUTE_CALCULATION:
 				switch (dialogMode) {
 					case SINGLE:
-						return getString(R.string.rourte_between_points_next_segment_button_desc);
+						return getString(R.string.route_between_points_next_segment_button_desc);
 					case ALL:
-						return getString(R.string.rourte_between_points_whole_track_button_desc);
+						return getString(R.string.route_between_points_whole_track_button_desc);
 				}
 				break;
 			case NEXT_ROUTE_CALCULATION:
@@ -179,6 +127,58 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends MenuBottomSheet
 		return "";
 	}
 
+	@NonNull
+	private String getDescription(boolean before, boolean single) {
+		MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity == null) {
+			return "";
+		}
+
+		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
+		int pos = editingCtx.getSelectedPointPosition();
+		List<GPXUtilities.WptPt> points = editingCtx.getPoints();
+
+		int startIdx;
+		int endIdx;
+		if (before) {
+			startIdx = 1;
+			endIdx = pos;
+		} else {
+			startIdx = pos + 1;
+			endIdx = points.size() - 1;
+		}
+
+		float dist = !single ? getDistForAllSegments(points, startIdx, endIdx) : getDistForSingleSegment(editingCtx, points, startIdx, endIdx);
+
+		return OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication());
+	}
+
+	private float getDistForAllSegments(List<GPXUtilities.WptPt> points, int startIdx, int endIdx) {
+		float dist = 0;
+		for (int i = startIdx; i <= endIdx; i++) {
+			GPXUtilities.WptPt first = points.get(i - 1);
+			GPXUtilities.WptPt second = points.get(i);
+			dist += MapUtils.getDistance(first.lat, first.lon, second.lat, second.lon);
+		}
+		return dist;
+	}
+
+	private float getDistForSingleSegment(MeasurementEditingContext editingCtx, List<GPXUtilities.WptPt> points, int startIdx, int endIdx) {
+		float dist = 0;
+		Map<Pair<GPXUtilities.WptPt, GPXUtilities.WptPt>, MeasurementEditingContext.RoadSegmentData> roadSegmentDataMap = editingCtx.getRoadSegmentData();
+		if (startIdx <= endIdx) {
+			Pair<GPXUtilities.WptPt, GPXUtilities.WptPt> pair = new Pair<>(points.get(startIdx), points.get(startIdx - 1));
+			MeasurementEditingContext.RoadSegmentData data = roadSegmentDataMap.get(pair);
+			if (data == null) {
+				dist += MapUtils.getDistance(pair.first.getLatitude(), pair.first.getLongitude(),
+						pair.second.getLatitude(), pair.second.getLongitude());
+			} else {
+				dist += data.getDistance();
+			}
+		}
+		return dist;
+	}
+
 	private void addDelimiterView(LinearLayout container) {
 		View row = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.divider, container, false);
 		View divider = row.findViewById(R.id.divider);
@@ -195,7 +195,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends MenuBottomSheet
 
 	public void updateModeButtons() {
 		UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode,
-				defaultDialogMode == RouteBetweenPointsDialogMode.SINGLE ? LEFT : RIGHT);
+				defaultDialogMode == RouteBetweenPointsDialogMode.SINGLE ? START : END);
 		btnDescription.setText(getButtonDescr(defaultDialogMode));
 	}
 
@@ -284,6 +284,11 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends MenuBottomSheet
 		});
 		updateModeButtons();
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
+	}
+
+	@Override
+	protected int getPeekHeight() {
+		return AndroidUtils.dpToPx(getContext(), BOTTOM_SHEET_HEIGHT_DP);
 	}
 
 	@Override

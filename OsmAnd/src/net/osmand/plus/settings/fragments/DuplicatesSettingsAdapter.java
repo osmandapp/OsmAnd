@@ -13,23 +13,31 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.List;
+
+import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 
 public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -72,12 +80,11 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 		if (holder instanceof HeaderViewHolder) {
 			HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
 			headerHolder.title.setText((String) currentItem);
-			headerHolder.subTitle.setText(String.format(
-					app.getString(R.string.listed_exist),
-					(String) currentItem));
+			headerHolder.subTitle.setText(String.format(app.getString(R.string.listed_exist), currentItem));
 			headerHolder.divider.setVisibility(View.VISIBLE);
 		} else if (holder instanceof ItemViewHolder) {
 			ItemViewHolder itemHolder = (ItemViewHolder) holder;
+			itemHolder.subTitle.setVisibility(View.GONE);
 			if (currentItem instanceof ApplicationModeBean) {
 				ApplicationModeBean modeBean = (ApplicationModeBean) currentItem;
 				String profileName = modeBean.userProfileName;
@@ -113,30 +120,49 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				QuickAction action = (QuickAction) currentItem;
 				itemHolder.title.setText(action.getName(app));
 				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(action.getIconRes(), activeColorRes));
-				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof PoiUIFilter) {
 				PoiUIFilter filter = (PoiUIFilter) currentItem;
 				itemHolder.title.setText(filter.getName());
 				int iconRes = RenderingIcons.getBigIconResourceId(filter.getIconId());
 				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconRes != 0 ? iconRes : R.drawable.ic_action_user, activeColorRes));
-				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof ITileSource) {
 				itemHolder.title.setText(((ITileSource) currentItem).getName());
 				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_map, activeColorRes));
-				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof File) {
 				File file = (File) currentItem;
+				FileSubtype fileSubtype = FileSubtype.getSubtypeByPath(app, file.getPath());
 				itemHolder.title.setText(file.getName());
 				if (file.getAbsolutePath().contains(IndexConstants.RENDERERS_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_map_style, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+				} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
+					itemHolder.title.setText(GpxUiHelper.getGpxTitle(file.getName()));
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+				} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
+					int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
+					if (iconId == -1) {
+						iconId = R.drawable.ic_action_photo_dark;
+					}
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconId, activeColorRes));
+				} else if (fileSubtype.isMap()
+						|| fileSubtype == FileSubtype.TTS_VOICE
+						|| fileSubtype == FileSubtype.VOICE) {
+					itemHolder.title.setText(FileNameTranslationHelper.getFileNameWithRegion(app, file.getName()));
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(fileSubtype.getIconId(), activeColorRes));
 				}
-				itemHolder.subTitle.setVisibility(View.GONE);
 			} else if (currentItem instanceof AvoidRoadInfo) {
 				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, activeColorRes));
-				itemHolder.subTitle.setVisibility(View.GONE);
+			} else if (currentItem instanceof FavoriteGroup) {
+				itemHolder.title.setText(((FavoriteGroup) currentItem).getDisplayName(app));
+				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_favorite, activeColorRes));
+			} else if (currentItem instanceof MapMarker) {
+				MapMarker mapMarker = (MapMarker) currentItem;
+				itemHolder.title.setText(mapMarker.getName(app));
+				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_flag, activeColorRes));
+			} else if (currentItem instanceof HistoryEntry) {
+				itemHolder.title.setText(((HistoryEntry) currentItem).getName().getName());
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);
 		}
@@ -156,7 +182,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 		}
 	}
 
-	private class HeaderViewHolder extends RecyclerView.ViewHolder {
+	private static class HeaderViewHolder extends RecyclerView.ViewHolder {
 		TextView title;
 		TextView subTitle;
 		View divider;
@@ -169,7 +195,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 		}
 	}
 
-	private class ItemViewHolder extends RecyclerView.ViewHolder {
+	private static class ItemViewHolder extends RecyclerView.ViewHolder {
 		TextView title;
 		TextView subTitle;
 		ImageView icon;

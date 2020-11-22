@@ -4,7 +4,7 @@
 	android:id="@+id/import_track_card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/card_and_list_background_basic"
+	android:background="?attr/bg_color"
 	android:orientation="vertical">
 
 	<net.osmand.plus.widgets.TextViewEx

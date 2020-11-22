@@ -7,6 +7,9 @@ import androidx.preference.DialogPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
@@ -87,10 +90,13 @@ public class SizePreference extends DialogPreference {
 	public CharSequence getSummary() {
 		String summary = entries[0];
 		String persistedString = getValue();
-		if (!persistedString.equals(defaultValue)) {
+		if (StringUtils.isBlank(persistedString)) {
+			return summary;
+		}
+		if (!isPersistedStringEqualsZero(persistedString)) {
 			try {
 				final DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
-				persistedString = df.format(Float.parseFloat(persistedString) + 0.01f);
+				persistedString = df.format(Double.parseDouble(persistedString) + 0.01d);
 				summary = String.format(getContext().getString(R.string.ltr_or_rtl_combine_via_space),
 						persistedString, getContext().getString(assets.getMetricShortRes()));
 			} catch (NumberFormatException e) {
@@ -100,7 +106,11 @@ public class SizePreference extends DialogPreference {
 		return summary;
 	}
 
-	public String getValue() {
+	private boolean isPersistedStringEqualsZero(String persistedString) {
+		return BigDecimal.ZERO.compareTo(new BigDecimal(persistedString)) == 0;
+	}
+
+	public String getValue () {
 		return getPersistedString(defaultValue);
 	}
 }

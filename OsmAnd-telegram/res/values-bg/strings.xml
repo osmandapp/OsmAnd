@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="send_report">Изпращане на доклад</string>
+    <string name="last_response_date">Последен отговор: %1$s</string>
+    <string name="last_update_from_telegram_date">Последна актуализация от Telegram: %1$s</string>
+    <string name="shared_string_error_short">ГРЕШКА</string>
+    <string name="shared_string_export">Експорт</string>
+</resources>

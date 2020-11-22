@@ -62,14 +62,14 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-import net.osmand.plus.measurementtool.GpxData;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
@@ -86,6 +86,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
 
 public class TrackSegmentFragment extends OsmAndListFragment implements TrackBitmapDrawerListener {
 
@@ -425,64 +429,17 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			}
 		}
 
-		private List<ILineDataSet> getDataSets(GPXTabItemType tabType, LineChart chart) {
+		private List<ILineDataSet> getDataSets(LineChart chart,
+		                                       GPXTabItemType tabType,
+		                                       LineGraphType firstType,
+		                                       LineGraphType secondType) {
 			List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
 			if (dataSets == null && chart != null) {
-				dataSets = new ArrayList<>();
 				GPXTrackAnalysis analysis = gpxItem.analysis;
 				GpxDataItem gpxDataItem = getGpxDataItem();
 				boolean calcWithoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
-				switch (tabType) {
-					case GPX_TAB_ITEM_GENERAL: {
-						OrderedLineDataSet speedDataSet = null;
-						OrderedLineDataSet elevationDataSet = null;
-						if (analysis.hasSpeedData) {
-							speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
-									analysis, GPXDataSetAxisType.DISTANCE, true, true, calcWithoutGaps);
-						}
-						if (analysis.hasElevationData) {
-							elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
-									analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
-						}
-						if (speedDataSet != null) {
-							dataSets.add(speedDataSet);
-							if (elevationDataSet != null) {
-								dataSets.add(elevationDataSet.getPriority() < speedDataSet.getPriority()
-										? 1 : 0, elevationDataSet);
-							}
-						} else if (elevationDataSet != null) {
-							dataSets.add(elevationDataSet);
-						}
-						dataSetsMap.put(GPXTabItemType.GPX_TAB_ITEM_GENERAL, dataSets);
-						break;
-					}
-					case GPX_TAB_ITEM_ALTITUDE: {
-						OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
-								analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
-						if (elevationDataSet != null) {
-							dataSets.add(elevationDataSet);
-						}
-						if (analysis.hasElevationData) {
-							List<Entry> eleValues = elevationDataSet != null && !gpxItem.isGeneralTrack() ? elevationDataSet.getValues() : null;
-							OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
-									analysis, GPXDataSetAxisType.DISTANCE, eleValues, true, true, calcWithoutGaps);
-							if (slopeDataSet != null) {
-								dataSets.add(slopeDataSet);
-							}
-						}
-						dataSetsMap.put(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE, dataSets);
-						break;
-					}
-					case GPX_TAB_ITEM_SPEED: {
-						OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
-								analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
-						if (speedDataSet != null) {
-							dataSets.add(speedDataSet);
-						}
-						dataSetsMap.put(GPXTabItemType.GPX_TAB_ITEM_SPEED, dataSets);
-						break;
-					}
-				}
+				dataSets = GpxUiHelper.getDataSets(chart, app, analysis, firstType, secondType, calcWithoutGaps);
+				dataSetsMap.put(tabType, dataSets);
 			}
 			return dataSets;
 		}
@@ -703,7 +660,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 						if (analysis != null) {
 							if (analysis.hasElevationData || analysis.hasSpeedData) {
 								GpxUiHelper.setupGPXChart(app, chart, 4);
-								chart.setData(new LineData(getDataSets(GPXTabItemType.GPX_TAB_ITEM_GENERAL, chart)));
+								chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, ALTITUDE, SPEED)));
 								updateChart(chart);
 								chart.setVisibility(View.VISIBLE);
 							} else {
@@ -821,7 +778,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 						if (analysis != null) {
 							if (analysis.hasElevationData) {
 								GpxUiHelper.setupGPXChart(app, chart, 4);
-								chart.setData(new LineData(getDataSets(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE, chart)));
+								chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_ALTITUDE, ALTITUDE, SLOPE)));
 								updateChart(chart);
 								chart.setVisibility(View.VISIBLE);
 							} else {
@@ -923,7 +880,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 						if (analysis != null && analysis.isSpeedSpecified()) {
 							if (analysis.hasSpeedData) {
 								GpxUiHelper.setupGPXChart(app, chart, 4);
-								chart.setData(new LineData(getDataSets(GPXTabItemType.GPX_TAB_ITEM_SPEED, chart)));
+								chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_SPEED, SPEED, null)));
 								updateChart(chart);
 								chart.setVisibility(View.VISIBLE);
 							} else {
@@ -1026,7 +983,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 		private void editSegment() {
 			TrkSegment segment = getTrkSegment();
 			if (segment != null && fragmentAdapter != null) {
-				fragmentAdapter.addNewGpxData(GpxData.ActionType.EDIT_SEGMENT, segment);
+				fragmentAdapter.addNewGpxData();
 			}
 		}
 
@@ -1189,7 +1146,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			LatLon location = null;
 			WptPt wpt = null;
 			gpxItem.chartTypes = null;
-			List<ILineDataSet> ds = getDataSets(tabType, null);
+			List<ILineDataSet> ds = getDataSets(null, tabType, null, null);
 			if (ds != null && ds.size() > 0) {
 				gpxItem.chartTypes = new GPXDataSetType[ds.size()];
 				for (int i = 0; i < ds.size(); i++) {

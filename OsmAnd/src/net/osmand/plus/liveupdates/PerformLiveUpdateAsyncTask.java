@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.download.AbstractDownloadActivity;
@@ -50,7 +51,7 @@ public class PerformLiveUpdateAsyncTask
 			activity.setSupportProgressBarIndeterminateVisibility(true);
 		}
 		final OsmandApplication myApplication = getMyApplication();
-		OsmandSettings.CommonPreference<Long> lastCheckPreference =
+		CommonPreference<Long> lastCheckPreference =
 				LiveUpdatesHelper.preferenceLastCheck(localIndexFileName, myApplication.getSettings());
 		lastCheckPreference.set(System.currentTimeMillis());
 	}
@@ -148,7 +149,7 @@ public class PerformLiveUpdateAsyncTask
 	public static void tryRescheduleDownload(@NonNull Context context,
 											 @NonNull OsmandSettings settings,
 											 @NonNull String localIndexFileName) {
-		final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
+		final CommonPreference<Integer> updateFrequencyPreference =
 				preferenceUpdateFrequency(localIndexFileName, settings);
 		final Integer frequencyOrdinal = updateFrequencyPreference.get();
 		if (LiveUpdatesHelper.UpdateFrequency.values()[frequencyOrdinal]

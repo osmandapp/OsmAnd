@@ -21,8 +21,9 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
@@ -122,7 +123,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 			entity = new Node(loc.getLatitude(), loc.getLongitude(), entityId);
 		}
 		if (poiType != null) {
-			entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
+			entity.putTagNoLC(POI_TYPE_TAG, poiType.getTranslation());
 			if (poiType.getOsmTag2() != null) {
 				entity.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 			}
@@ -134,12 +135,12 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 			if (!Algorithms.isEmpty(amenity.getOpeningHours())) {
 				entity.putTagNoLC(OSMTagKey.OPENING_HOURS.getValue(), amenity.getOpeningHours());
 			}
-			for (Map.Entry<String, String> entry : amenity.getAdditionalInfo().entrySet()) {
-				AbstractPoiType abstractPoi = MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(entry.getKey());
-				if (abstractPoi != null && abstractPoi instanceof PoiType) {
+			for (String key : amenity.getAdditionalInfoKeys()) {
+				AbstractPoiType abstractPoi = MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key);
+				if (abstractPoi instanceof PoiType) {
 					PoiType p = (PoiType) abstractPoi;
 					if (!p.isNotEditableOsm() && !Algorithms.isEmpty(p.getEditOsmTag())) {
-						entity.putTagNoLC(p.getEditOsmTag(), entry.getValue());
+						entity.putTagNoLC(p.getEditOsmTag(), amenity.getAdditionalInfo(key));
 					}
 				}
 			}

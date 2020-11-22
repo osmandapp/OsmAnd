@@ -267,4 +267,8 @@
     <string name="last_response_duration">Апошні адказ: %1$s таму</string>
     <string name="duration_ago">%1$s таму</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="send_report">Даслаць справаздачу</string>
+    <string name="shared_string_export">Экспартаваць</string>
+    <string name="logcat_buffer">Буфер logcat</string>
+    <string name="logcat_buffer_descr">Праверце і падзяліцеся падрабязнымі журналамі праграмы</string>
 </resources>

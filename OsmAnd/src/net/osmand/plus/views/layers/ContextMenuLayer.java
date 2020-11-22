@@ -323,7 +323,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return false;
 		}
 
-		showContextMenu(point, tileBox, true);
+		LatLon pointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
+		menu.show(pointLatLon, null, null);
+
 		view.refreshMap();
 		return true;
 	}

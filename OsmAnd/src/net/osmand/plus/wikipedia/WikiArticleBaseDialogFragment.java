@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikiBaseDialogFragment;
 
@@ -94,7 +93,7 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 
 
 	protected void updateWebSettings() {
-		OsmandSettings.WikiArticleShowImages showImages = getSettings().WIKI_ARTICLE_SHOW_IMAGES.get();
+		WikiArticleShowImages showImages = getSettings().WIKI_ARTICLE_SHOW_IMAGES.get();
 		WebSettings webSettings = contentWebView.getSettings();
 		switch (showImages) {
 			case ON:

@@ -213,6 +213,12 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			DisconnectTelegramBottomSheet.showInstance(childFragmentManager)
 		}
 
+		mainView.findViewById<View>(R.id.logcat_row).setOnClickListener {
+			val intent = Intent(activity, TrackerLogcatActivity::class.java)
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+			app.startActivity(intent)
+		}
+
 		return mainView
 	}
 

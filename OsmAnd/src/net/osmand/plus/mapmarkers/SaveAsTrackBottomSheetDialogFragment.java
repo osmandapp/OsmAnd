@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -28,7 +29,6 @@ import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
-import java.io.File;
 import java.util.Date;
 
 import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_POINTS_NUMBER_KEY;
@@ -85,21 +85,13 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			}
 		}
 
-		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
 		Date date = new Date();
-		final String suggestedName = app.getString(R.string.markers) + "_" + DateFormat.format("yyyy-MM-dd", date).toString();
-		String displayedName = suggestedName;
-		File fout = new File(dir, suggestedName + IndexConstants.GPX_FILE_EXT);
-		int ind = 1;
-		while (fout.exists()) {
-			displayedName = suggestedName + "_" + (++ind);
-			fout = new File(dir, displayedName + IndexConstants.GPX_FILE_EXT);
-		}
-		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
-		nameEditText.setText(displayedName);
+		String dirName = IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR;
+		String suggestedName = app.getString(R.string.markers) + "_" + DateFormat.format("yyyy-MM-dd", date).toString();
+		String uniqueFileName = FileUtils.createUniqueFileName(app, suggestedName, dirName, IndexConstants.GPX_FILE_EXT);
+
+		final EditText nameEditText = mainView.findViewById(R.id.name_edit_text);
+		nameEditText.setText(uniqueFileName);
 		nameEditText.setTextColor(ContextCompat.getColor(getContext(), textPrimaryColor));
 
 		mainView.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {

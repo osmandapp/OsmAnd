@@ -4,6 +4,7 @@ import android.content.Context;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadResources;
 
@@ -18,9 +19,13 @@ import java.lang.reflect.Field;
 public class FileNameTranslationHelper {
 	private static final Log LOG = PlatformUtil.getLog(FileNameTranslationHelper.class);
 	public static final String WIKI_NAME = "_wiki";
-	public static final String HILL_SHADE = "Hillshade_";
-	public static final String SLOPE = "Slope_";
+	public static final String HILL_SHADE = "Hillshade";
+	public static final String SLOPE = "Slope";
 	public static final String SEA_DEPTH = "Depth_";
+
+	public static String getFileNameWithRegion(OsmandApplication app, String fileName) {
+		return getFileName(app, app.getResourceManager().getOsmandRegions(), fileName);
+	}
 
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
 		String basename = getBasename(fileName);
@@ -30,13 +35,15 @@ public class FileNameTranslationHelper {
 			return getVoiceName(ctx, fileName);
 		} else if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) { //otf files
 			return getFontName(ctx, basename);
-		} else if (fileName.startsWith(HILL_SHADE)){
+		} else if (fileName.startsWith(HILL_SHADE)) {
+			basename = basename.replace(HILL_SHADE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_hillshade_maps);
 		} else if (fileName.startsWith(SLOPE)) {
+			basename = basename.replace(SLOPE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_slope_maps);
 		} else if (fileName.length() == 2) { //voice recorded files
 			try {
-				Field f = R.string.class.getField("lang_"+fileName);
+				Field f = R.string.class.getField("lang_" + fileName);
 				if (f != null) {
 					Integer in = (Integer) f.get(null);
 					return ctx.getString(in);
@@ -62,9 +69,10 @@ public class FileNameTranslationHelper {
 
 	public static String getTerrainName(Context ctx, OsmandRegions regions, String basename,
 										int terrainNameRes) {
-		String terrain = ctx.getString(terrainNameRes) + " ";
+		basename = basename.replace(" ", "_");
+		String terrain = ctx.getString(terrainNameRes);
 		String locName = regions.getLocaleName(basename.trim(), true);
-		return terrain + locName;
+		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, locName, "(" + terrain + ")");
 	}
 
 	public static String getWikiName(Context ctx, String basename){
@@ -85,10 +93,10 @@ public class FileNameTranslationHelper {
 	public static String getVoiceName(Context ctx, String fileName) {
 		try {
 			String nm = fileName.replace('-', '_').replace(' ', '_');
-			if (nm.endsWith("_tts") || nm.endsWith("-tts")) {
+			if (nm.endsWith("_tts") || nm.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
 				nm = nm.substring(0, nm.length() - 4);
 			}
-			Field f = R.string.class.getField("lang_"+nm);
+			Field f = R.string.class.getField("lang_" + nm);
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
 				return ctx.getString(in);

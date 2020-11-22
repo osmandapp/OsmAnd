@@ -72,4 +72,6 @@
     <string name="shared_string_enabled">Povolen</string>
     <string name="unit_of_length">Jednotky vzdálenosti</string>
     <string name="shared_string_appearance">Vzhled</string>
+    <string name="logcat_buffer">Zásobník logcat</string>
+    <string name="logcat_buffer_descr">Zkontrolovat a sdílet podrobné záznamy aplikace</string>
 </resources>

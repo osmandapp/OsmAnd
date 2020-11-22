@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -50,10 +51,32 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		final MapActivity mapActivity = requireMapActivity();
+		menu = mapActivity.getTrackDetailsMenu();
+
+		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				if (menu.isVisible()) {
+					menu.hide(true);
+
+					MapContextMenu contextMenu = mapActivity.getContextMenu();
+					if (contextMenu.isActive() && contextMenu.getPointDescription() != null
+							&& contextMenu.getPointDescription().isGpxPoint()) {
+						contextMenu.show();
+					} else {
+						mapActivity.launchPrevActivityIntent();
+					}
+				}
+			}
+		});
+	}
+
+	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
-		menu = mapActivity.getTrackDetailsMenu();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.track_details, container, false);
 		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {

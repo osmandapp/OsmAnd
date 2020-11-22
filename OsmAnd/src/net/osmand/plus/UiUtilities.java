@@ -42,6 +42,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.TintableCompoundButton;
 
+import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -92,8 +93,8 @@ public class UiUtilities {
 	}
 
 	public enum CustomRadioButtonType {
-		LEFT,
-		RIGHT,
+		START,
+		END,
 	}
 
 	public UiUtilities(OsmandApplication app) {
@@ -140,7 +141,7 @@ public class UiUtilities {
 	}
 
 	public Drawable getLayeredIcon(@DrawableRes int bgIconId, @DrawableRes int foregroundIconId,
-	                               @ColorRes int bgColorId, @ColorRes int foregroundColorId) {
+								   @ColorRes int bgColorId, @ColorRes int foregroundColorId) {
 		Drawable background = getDrawable(bgIconId, bgColorId);
 		Drawable foreground = getDrawable(foregroundIconId, foregroundColorId);
 		return getLayeredIcon(background, foreground);
@@ -230,8 +231,12 @@ public class UiUtilities {
 	}
 
 	@ColorInt
-	public static int mixTwoColors(@ColorInt int color1, @ColorInt int color2, float amount )
-	{
+	public static int removeAlpha(@ColorInt int color) {
+		return Color.rgb(Color.red(color), Color.green(color), Color.blue(color));
+	}
+
+	@ColorInt
+	public static int mixTwoColors(@ColorInt int color1, @ColorInt int color2, float amount) {
 		final byte ALPHA_CHANNEL = 24;
 		final byte RED_CHANNEL   = 16;
 		final byte GREEN_CHANNEL =  8;
@@ -267,11 +272,11 @@ public class UiUtilities {
 	}
 
 	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
-			double toLat, double toLon) {
+								   double toLat, double toLon) {
 		updateLocationView(cache, arrow, txt, new LatLon(toLat, toLon));
 	}
 	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
-			LatLon toLoc) {
+								   LatLon toLoc) {
 		float[] mes = new float[2];
 		boolean stale = false;
 		LatLon fromLoc = cache == null ? null : cache.specialFrom;
@@ -385,7 +390,7 @@ public class UiUtilities {
 	}
 
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, @ColorRes Integer backgroundColor,
-	                                 @ColorRes Integer messageColor, @ColorRes Integer actionColor, Integer maxLines) {
+									 @ColorRes Integer messageColor, @ColorRes Integer actionColor, Integer maxLines) {
 		if (snackbar == null) {
 			return;
 		}
@@ -446,7 +451,7 @@ public class UiUtilities {
 
 
 	public static void updateCustomRadioButtons(Context app, View buttonsView, boolean nightMode,
-	                                            CustomRadioButtonType buttonType) {
+												CustomRadioButtonType buttonType) {
 		int activeColor = ContextCompat.getColor(app, nightMode
 				? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light);
@@ -454,26 +459,40 @@ public class UiUtilities {
 				? R.color.text_color_primary_dark
 				: R.color.text_color_primary_light);
 		int radius = AndroidUtils.dpToPx(app, 4);
+		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
 
-		TextView leftButtonText = buttonsView.findViewById(R.id.left_button);
-		View leftButtonContainer = buttonsView.findViewById(R.id.left_button_container);
-		TextView rightButtonText = buttonsView.findViewById(R.id.right_button);
-		View rightButtonContainer = buttonsView.findViewById(R.id.right_button_container);
+		TextView startButtonText = buttonsView.findViewById(R.id.left_button);
+		View startButtonContainer = buttonsView.findViewById(R.id.left_button_container);
+		TextView endButtonText = buttonsView.findViewById(R.id.right_button);
+		View endButtonContainer = buttonsView.findViewById(R.id.right_button_container);
 		GradientDrawable background = new GradientDrawable();
 		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
 		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
-		if (buttonType == CustomRadioButtonType.LEFT) {
-			background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
-			rightButtonContainer.setBackgroundColor(Color.TRANSPARENT);
-			rightButtonText.setTextColor(activeColor);
-			leftButtonContainer.setBackgroundDrawable(background);
-			leftButtonText.setTextColor(textColor);
-		} else {
-			background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
-			rightButtonContainer.setBackgroundDrawable(background);
-			rightButtonText.setTextColor(textColor);
-			leftButtonContainer.setBackgroundColor(Color.TRANSPARENT);
-			leftButtonText.setTextColor(activeColor);
+		if (buttonType == CustomRadioButtonType.START) {
+			if (isLayoutRtl) {
+				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
+			} else {
+				background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
+			}
+			endButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			endButtonText.setTextColor(activeColor);
+			startButtonContainer.setBackgroundDrawable(background);
+			startButtonText.setTextColor(textColor);
+		} else if (buttonType == CustomRadioButtonType.END) {
+			if (isLayoutRtl) {
+				background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
+			} else {
+				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
+			}
+			endButtonContainer.setBackgroundDrawable(background);
+			endButtonText.setTextColor(textColor);
+			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			startButtonText.setTextColor(activeColor);
+		} else if (buttonType == null) {
+			endButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			endButtonText.setTextColor(activeColor);
+			startButtonText.setTextColor(activeColor);
 		}
 	}
 
@@ -488,10 +507,10 @@ public class UiUtilities {
 	}
 
 	public static void setupCompoundButton(boolean nightMode, @ColorInt int activeColor, CompoundButton compoundButton) {
-	    if (compoundButton == null) {
-	        return;
-        }
-	    Context ctx = compoundButton.getContext();
+		if (compoundButton == null) {
+			return;
+		}
+		Context ctx = compoundButton.getContext();
 		int inactiveColorPrimary = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
 		int inactiveColorSecondary = getColorWithAlpha(inactiveColorPrimary, 0.45f);
 		setupCompoundButton(compoundButton, activeColor, inactiveColorPrimary, inactiveColorSecondary);
@@ -570,7 +589,7 @@ public class UiUtilities {
 	}
 
 	public static void setupSlider(Slider slider, boolean nightMode,
-	                               @ColorInt Integer activeColor, boolean showTicks) {
+								   @ColorInt Integer activeColor, boolean showTicks) {
 		Context ctx = slider.getContext();
 		if (ctx == null) {
 			return;
@@ -606,7 +625,7 @@ public class UiUtilities {
 		slider.setTrackHeight(ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height));
 
 		// label behavior
-		slider.setLabelBehavior(Slider.LABEL_GONE);
+		slider.setLabelBehavior(LabelFormatter.LABEL_GONE);
 	}
 
 	public static void setupSlider(RangeSlider slider, boolean nightMode,
@@ -646,7 +665,7 @@ public class UiUtilities {
 		slider.setTrackHeight(ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height));
 
 		// label behavior
-		slider.setLabelBehavior(Slider.LABEL_GONE);
+		slider.setLabelBehavior(LabelFormatter.LABEL_GONE);
 	}
 
 	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, @StringRes int buttonTextId) {
@@ -756,9 +775,9 @@ public class UiUtilities {
 	}
 
 	public static ListPopupWindow createListPopupWindow(Context themedCtx,
-	                                                    View v, int minWidth,
-	                                                    List<SimplePopUpMenuItem> items,
-	                                                    final AdapterView.OnItemClickListener listener) {
+														View v, int minWidth,
+														List<SimplePopUpMenuItem> items,
+														final AdapterView.OnItemClickListener listener) {
 		int contentPadding = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		int contentPaddingHalf = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
 		int defaultListTextSize = themedCtx.getResources().getDimensionPixelSize(R.dimen.default_list_text_size);
@@ -770,7 +789,7 @@ public class UiUtilities {
 			titles.add(String.valueOf(item.getTitle()));
 			hasIcon = hasIcon || item.getIcon() != null;
 		}
-		float itemWidth = AndroidUtils.getTextMaxWidth(defaultListTextSize, titles) + contentPadding;
+		float itemWidth = AndroidUtils.getTextMaxWidth(defaultListTextSize, titles) + contentPadding * 2;
 		float iconPartWidth = hasIcon ? standardIconSize + contentPaddingHalf : 0;
 		int totalWidth = (int) (Math.max(itemWidth, minWidth) + iconPartWidth);
 
@@ -793,5 +812,20 @@ public class UiUtilities {
 			}
 		});
 		return listPopupWindow;
+	}
+
+	public static void showPopUpMenu(View v, final List<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> items) {
+		UiUtilities.createListPopupWindow(
+				v.getContext(), v, v.getWidth(), items, new AdapterView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						if (position < items.size()) {
+							View.OnClickListener listener = items.get(position).getOnClickListener();
+							if (listener != null) {
+								listener.onClick(view);
+							}
+						}
+					}
+				}).show();
 	}
 }

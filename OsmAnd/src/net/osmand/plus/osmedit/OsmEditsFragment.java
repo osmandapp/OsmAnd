@@ -29,6 +29,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -41,7 +42,6 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
@@ -50,14 +50,20 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
 import net.osmand.plus.osmedit.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
 import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
+import net.osmand.plus.osmedit.OpenstreetmapLocalUtil.OnNodeCommittedListener;
 import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
 import net.osmand.plus.osmedit.OsmPoint.Group;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
+import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -75,8 +81,8 @@ import java.util.Map;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
-public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener,
-	FavoritesFragmentStateHolder {
+public class OsmEditsFragment extends OsmAndListFragment implements ProgressDialogPoiUploader,
+		OnNodeCommittedListener, FavoritesFragmentStateHolder, OsmAuthorizationListener {
 
 	public static final int EXPORT_TYPE_ALL = 0;
 	public static final int EXPORT_TYPE_POI = 1;
@@ -100,6 +106,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	private final static int MODE_DELETE = 100;
 	private final static int MODE_UPLOAD = 101;
 
+	private OsmandApplication app;
 	private OsmEditingPlugin plugin;
 
 	private View footerView;
@@ -140,6 +147,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		app = getMyApplication();
 		if (savedInstanceState != null) {
 			exportType = savedInstanceState.getInt(EXPORT_TYPE_KEY);
 		}
@@ -618,16 +626,52 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		return info;
 	}
 
-
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	private void uploadItems(final OsmPoint[] items) {
-		SendPoiDialogFragment.createInstance(items, PoiUploaderType.FRAGMENT)
-				.show(getChildFragmentManager(), SendPoiDialogFragment.TAG);
-//		UploadOsmEditsConfirmDialogFragment.createInstancee(items).show(getChildFragmentManager(),
-//				UploadOsmEditsConfirmDialogFragment.TAG);
+	private void uploadItems(final OsmPoint[] points) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			OsmandApplication app = getMyApplication();
+			OsmandSettings settings = app.getSettings();
+			OsmOAuthAuthorizationAdapter authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
+			boolean isLogged = authorizationAdapter.isValidToken()
+					|| !Algorithms.isEmpty(settings.USER_NAME.get())
+					&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
+			if (hasPoiGroup(points)) {
+				if (isLogged) {
+					SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), points);
+				} else {
+					LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);
+				}
+			} else {
+				SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), points);
+			}
+		}
+	}
+
+	@Override
+	public void authorizationCompleted() {
+		Bundle bundle = new Bundle();
+		bundle.putInt(TAB_ID, OSM_EDIT_TAB);
+
+		Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+		intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
+		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+		app.startActivity(intent);
+	}
+
+	boolean hasPoiGroup(OsmPoint[] points) {
+		boolean hasPoiGroup = false;
+		for (OsmPoint p : points) {
+			if (p.getGroup() == OsmPoint.Group.POI) {
+				hasPoiGroup = true;
+				break;
+			}
+		}
+		return hasPoiGroup;
 	}
 
 	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
@@ -781,7 +825,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					if (point.getGroup() == Group.POI) {
 						OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 						WptPt wpt = new WptPt();
-						wpt.name = getTagsString(p);
+						wpt.name = p.getTagsString();
 						wpt.lat = p.getLatitude();
 						wpt.lon = p.getLongitude();
 						wpt.desc = "id: " + String.valueOf(p.getId()) +
@@ -815,24 +859,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			}
 			sb.append(oscFile ? ".osc" : IndexConstants.GPX_FILE_EXT);
 			return sb.toString();
-		}
-
-		private String getTagsString(OpenstreetmapPoint point) {
-			StringBuilder sb = new StringBuilder();
-			for (String tag : point.getEntity().getTagKeySet()) {
-				String val = point.getEntity().getTag(tag);
-				if (isNotValid(tag, val)) {
-					continue;
-				}
-				sb.append(tag).append(" : ");
-				sb.append(val).append("; ");
-			}
-			return sb.toString();
-		}
-
-		private boolean isNotValid(String tag, String val) {
-			return val == null || val.length() == 0 || tag.length() == 0
-					|| tag.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || tag.equals("poi_type_tag");
 		}
 
 		private void writeContent(XmlSerializer sz, OsmPoint[] points, OsmPoint.Action a) throws IllegalArgumentException, IllegalStateException, IOException {
@@ -878,7 +904,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		private void writeTags(XmlSerializer sz, Entity p) {
 			for (String tag : p.getTagKeySet()) {
 				String val = p.getTag(tag);
-				if (isNotValid(tag, val)) {
+				if (p.isNotValid(tag)) {
 					continue;
 				}
 				try {

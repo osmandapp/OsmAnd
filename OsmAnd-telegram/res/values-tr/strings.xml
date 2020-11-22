@@ -233,7 +233,7 @@
     <string name="osmand_service_descr">OsmAnd Tracker, ekran kapalıyken arka planda çalışır.</string>
     <string name="share_location">Konumu paylaş</string>
     <string name="sharing_location">Konum paylaşılıyor</string>
-    <string name="process_service">OsmAnd Tracker servisi</string>
+    <string name="process_service">OsmAnd Tracker hizmeti</string>
     <string name="osmand_logo">OsmAnd logosu</string>
     <string name="install_osmand_dialog_message">Önce OsmAnd\'ın ücretsiz veya ücretli sürümünü yüklemeniz gerekmektedir</string>
     <string name="install_osmand">OsmAnd\'ı yükle</string>
@@ -267,4 +267,8 @@
     <string name="last_response_duration">Son cevap: %1$s önce</string>
     <string name="duration_ago">%1$s önce</string>
     <string name="shared_string_error_short">HATA</string>
+    <string name="shared_string_export">Dışa aktar</string>
+    <string name="logcat_buffer">Logcat tamponu</string>
+    <string name="logcat_buffer_descr">Uygulamanın ayrıntılı günlük kayıtlarına göz atın ve paylaşın</string>
+    <string name="send_report">Rapor gönder</string>
 </resources>

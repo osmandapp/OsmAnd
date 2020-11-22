@@ -29,7 +29,8 @@ public class ImportTrackCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		int color = ContextCompat.getColor(app, R.color.preference_category_title);
+		int color = ContextCompat.getColor(app, nightMode ?
+				R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		String importTrack = app.getString(R.string.plan_route_import_track);
 		SpannableString spannable = UiUtilities.createCustomFontSpannable(typeface, importTrack, importTrack, importTrack);

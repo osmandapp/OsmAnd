@@ -31,12 +31,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsCollectListener;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -44,6 +41,10 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsCollectListener;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
@@ -186,9 +187,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void restoreCustomModeFromFile(final File file) {
 		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
 			@Override
-			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 				if (succeed) {
-					for (SettingsHelper.SettingsItem item : items) {
+					for (SettingsItem item : items) {
 						item.setShouldReplace(true);
 					}
 					importBackupSettingsItems(file, items);
@@ -197,10 +198,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		});
 	}
 
-	private void importBackupSettingsItems(File file, List<SettingsHelper.SettingsItem> items) {
+	private void importBackupSettingsItems(File file, List<SettingsItem> items) {
 		app.getSettingsHelper().importSettings(file, items, "", 1, new SettingsHelper.SettingsImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsHelper.SettingsItem> items) {
+			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
 				app.showToastMessage(R.string.profile_prefs_reset_successful);
 				updateCopiedOrResetPrefs();
 			}
@@ -368,7 +369,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		}
 		List<OsmandPlugin> plugins = OsmandPlugin.getVisiblePlugins();
 		for (OsmandPlugin plugin : plugins) {
-			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin || plugin.getSettingsFragment() == null) {
+			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin || plugin.getSettingsScreenType() == null) {
 				continue;
 			}
 			Preference preference = new Preference(ctx);
@@ -378,7 +379,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			preference.setSummary(plugin.getPrefsDescription());
 			preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
 			preference.setLayoutResource(R.layout.preference_with_descr);
-			preference.setFragment(plugin.getSettingsFragment().getName());
+			preference.setFragment(plugin.getSettingsScreenType().fragmentName);
 
 			preferenceCategory.addPreference(preference);
 		}
@@ -432,10 +433,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		} else if (EXPORT_PROFILE.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ExportProfileBottomSheet.showInstance(
-						fragmentManager,
-						this,
-						getSelectedAppMode());
+				ExportSettingsFragment.showInstance(fragmentManager, getSelectedAppMode(), false);
 			}
 		} else if (DELETE_PROFILE.equals(prefId)) {
 			onDeleteProfileClick();

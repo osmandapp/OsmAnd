@@ -250,7 +250,7 @@
     <string name="set_time_timeline_descr">Elige la hora de visualización</string>
     <string name="start_end_date">Fecha de Inicio — Fin</string>
     <string name="saved_messages">Mensajes guardados</string>
-    <string name="time_zone_descr">Seleccione la zona horaria que desea mostrar en los mensajes de ubicación.</string>
+    <string name="time_zone_descr">Seleccione la zona horaria a mostrar en sus mensajes de ubicación.</string>
     <string name="time_zone">Zona horaria</string>
     <string name="units_and_formats">Unidades y formatos</string>
     <string name="unit_of_length_descr">Cambia las unidades de longitud.</string>
@@ -268,4 +268,8 @@
     <string name="last_response_duration">Última respuesta: hace %1$s</string>
     <string name="duration_ago">hace %1$s</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="shared_string_export">Exportar</string>
+    <string name="logcat_buffer">Búfer de Logcat</string>
+    <string name="logcat_buffer_descr">Selecciona y comparte logs detallados de la app</string>
+    <string name="send_report">Enviar informe</string>
 </resources>

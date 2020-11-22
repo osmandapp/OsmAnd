@@ -255,7 +255,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	@Override
 	public void writeToBundle(RouteDataBundle bundle) {
 		Map<RouteTypeRule, Integer> rules = bundle.getResources().getRules();
-		bundle.putInt("length", (Math.abs(endPointIndex - startPointIndex) + 1) * (endPointIndex >= startPointIndex ? 1 : -1));
+		boolean reversed = endPointIndex < startPointIndex;
+		bundle.putInt("length", Math.abs(endPointIndex - startPointIndex) + 1);
 		bundle.putFloat("segmentTime", segmentTime, 2);
 		bundle.putFloat("speed", speed, 2);
 		if (turnType != null) {
@@ -271,24 +272,29 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				bundle.putString("turnLanes", TurnType.lanesToString(turnLanes));
 			}
 		}
-		bundle.putLong("id", object.id);
+		bundle.putLong("id", object.id >> 6); // OsmAnd ID to OSM ID
 		bundle.putArray("types", convertTypes(object.types, rules));
 
 		int start = Math.min(startPointIndex, endPointIndex);
 		int end = Math.max(startPointIndex, endPointIndex) + 1;
 		if (object.pointTypes != null && start < object.pointTypes.length) {
 			int[][] types = Arrays.copyOfRange(object.pointTypes, start, Math.min(end, object.pointTypes.length));
+			if (reversed) {
+				Algorithms.reverseArray(types);
+			}
 			bundle.putArray("pointTypes", convertTypes(types, rules));
 		}
 		if (object.nameIds != null) {
 			bundle.putArray("names", convertNameIds(object.nameIds, rules));
 		}
-		if (object.pointNameTypes != null && start < object.pointNameTypes.length) {
+		if (object.pointNameTypes != null && start < object.pointNameTypes.length && object.pointNames != null) {
 			int[][] types = Arrays.copyOfRange(object.pointNameTypes, start, Math.min(end, object.pointNameTypes.length));
-			if (object.pointNames != null) {
-				String[][] names = Arrays.copyOfRange(object.pointNames, start, Math.min(end, object.pointNames.length));
-				bundle.putArray("pointNames", convertPointNames(types, names, rules));
+			String[][] names = Arrays.copyOfRange(object.pointNames, start, Math.min(end, object.pointNames.length));
+			if (reversed) {
+				Algorithms.reverseArray(types);
+				Algorithms.reverseArray(names);
 			}
+			bundle.putArray("pointNames", convertPointNames(types, names, rules));
 		}
 	}
 
@@ -327,22 +333,21 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		Location prevLocation = null;
 		for (int i = 0; i < length; i++) {
 			Location location = resources.getLocation(index);
-			if (location == null) {
-				break;
-			}
-			double dist = 0;
-			if (prevLocation != null) {
-				dist = MapUtils.getDistance(prevLocation.getLatitude(), prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());
-				distance += dist;
-			}
-			prevLocation = location;
-			object.pointsX[i] = MapUtils.get31TileNumberX(location.getLongitude());
-			object.pointsY[i] = MapUtils.get31TileNumberY(location.getLatitude());
-			if (location.hasAltitude() && object.heightDistanceArray.length > 0) {
-				object.heightDistanceArray[i * 2] = (float) dist;
-				object.heightDistanceArray[i * 2 + 1] = (float) location.getAltitude();
-			} else {
-				object.heightDistanceArray = new float[0];
+			if (location != null) {
+				double dist = 0;
+				if (prevLocation != null) {
+					dist = MapUtils.getDistance(prevLocation.getLatitude(), prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());
+					distance += dist;
+				}
+				prevLocation = location;
+				object.pointsX[i] = MapUtils.get31TileNumberX(location.getLongitude());
+				object.pointsY[i] = MapUtils.get31TileNumberY(location.getLatitude());
+				if (location.hasAltitude() && object.heightDistanceArray.length > 0) {
+					object.heightDistanceArray[i * 2] = (float) dist;
+					object.heightDistanceArray[i * 2 + 1] = (float) location.getAltitude();
+				} else {
+					object.heightDistanceArray = new float[0];
+				}
 			}
 			if (plus) {
 				index++;

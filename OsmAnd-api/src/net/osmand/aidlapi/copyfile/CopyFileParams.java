@@ -9,12 +9,21 @@ import net.osmand.aidlapi.AidlParams;
 
 public class CopyFileParams extends AidlParams {
 
+	public static final String DESTINATION_DIR_KEY = "destinationDir";
+	public static final String FILE_NAME_KEY = "fileName";
+	public static final String FILE_PART_DATA_KEY = "filePartData";
+	public static final String START_TIME_KEY = "startTime";
+	public static final String DONE_KEY = "done";
+	private String destinationDir;
 	private String fileName;
 	private byte[] filePartData;
 	private long startTime;
 	private boolean done;
 
-	public CopyFileParams(@NonNull String fileName, @NonNull byte[] filePartData, long startTime, boolean done) {
+	public CopyFileParams(@NonNull String destinationDir, @NonNull String fileName, @NonNull byte[] filePartData,
+	                      long startTime, boolean done) {
+
+		this.destinationDir = destinationDir;
 		this.fileName = fileName;
 		this.filePartData = filePartData;
 		this.startTime = startTime;
@@ -37,6 +46,10 @@ public class CopyFileParams extends AidlParams {
 		}
 	};
 
+	public String getDestinationDir() {
+		return destinationDir;
+	}
+
 	public String getFileName() {
 		return fileName;
 	}
@@ -55,23 +68,26 @@ public class CopyFileParams extends AidlParams {
 
 	@Override
 	public void writeToBundle(Bundle bundle) {
-		bundle.putString("fileName", fileName);
-		bundle.putByteArray("filePartData", filePartData);
-		bundle.putLong("startTime", startTime);
-		bundle.putBoolean("done", done);
+		bundle.putString(DESTINATION_DIR_KEY, destinationDir);
+		bundle.putString(FILE_NAME_KEY, fileName);
+		bundle.putByteArray(FILE_PART_DATA_KEY, filePartData);
+		bundle.putLong(START_TIME_KEY, startTime);
+		bundle.putBoolean(DONE_KEY, done);
 	}
 
 	@Override
 	protected void readFromBundle(Bundle bundle) {
-		fileName = bundle.getString("fileName");
-		filePartData = bundle.getByteArray("filePartData");
-		startTime = bundle.getLong("startTime");
-		done = bundle.getBoolean("done");
+		destinationDir = bundle.getString(DESTINATION_DIR_KEY);
+		fileName = bundle.getString(FILE_NAME_KEY);
+		filePartData = bundle.getByteArray(FILE_PART_DATA_KEY);
+		startTime = bundle.getLong(START_TIME_KEY);
+		done = bundle.getBoolean(DONE_KEY);
 	}
 
 	@Override
 	public String toString() {
 		return "CopyFileParams {" +
+				" destinationDir=" + destinationDir +
 				" fileName=" + fileName +
 				", filePartData size=" + filePartData.length +
 				", startTime=" + startTime +

@@ -55,6 +55,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -66,6 +67,7 @@ import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -152,14 +154,8 @@ public class AndroidUtils {
 				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
 	}
 
-	public static String trimExtension(String src) {
-		if (src != null) {
-			int index = src.lastIndexOf('.');
-			if (index != -1) {
-				return src.substring(0, index);
-			}
-		}
-		return src;
+	public static String addColon(OsmandApplication app, @StringRes int stringRes) {
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(stringRes), "").trim();
 	}
 
 	public static Uri getUriForFile(Context context, File file) {
@@ -792,6 +788,14 @@ public class AndroidUtils {
 		return result;
 	}
 
+	public static long getAvailableSpace(@Nullable File dir) {
+		if (dir != null && dir.canRead()) {
+			StatFs fs = new StatFs(dir.getAbsolutePath());
+			return fs.getAvailableBlocksLong() * fs.getBlockSize();
+		}
+		return -1;
+	}
+
 	public static float getFreeSpaceGb(File dir) {
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
@@ -888,5 +892,66 @@ public class AndroidUtils {
 			builder.append(w);
 		}
 		return builder;
+	}
+
+	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {
+		String value = getStringByProperty(ctx, "routing_attr_" + propertyName + "_name");
+		return value != null ? value : defValue;
+	}
+
+	public static String getRoutingStringPropertyDescription(Context ctx, String propertyName, String defValue) {
+		String value = getStringByProperty(ctx, "routing_attr_" + propertyName + "_description");
+		return value != null ? value : defValue;
+	}
+
+	public static String getRenderingStringPropertyName(Context ctx, String propertyName, String defValue) {
+		String value = getStringByProperty(ctx, "rendering_attr_" + propertyName + "_name");
+		return value != null ? value : defValue;
+	}
+
+	public static String getRenderingStringPropertyDescription(Context ctx, String propertyName, String defValue) {
+		String value = getStringByProperty(ctx, "rendering_attr_" + propertyName + "_description");
+		return value != null ? value : defValue;
+	}
+
+	public static String getIconStringPropertyName(Context ctx, String propertyName) {
+		String value = getStringByProperty(ctx, "icon_group_" + propertyName);
+		return value != null ? value : propertyName;
+	}
+
+	public static String getRenderingStringPropertyValue(Context ctx, String propertyValue) {
+		if (propertyValue == null) {
+			return "";
+		}
+		String propertyValueReplaced = propertyValue.replaceAll("\\s+", "_");
+		String value = getStringByProperty(ctx, "rendering_value_" + propertyValueReplaced + "_name");
+		return value != null ? value : propertyValue;
+	}
+
+	public static String getStringRouteInfoPropertyValue(Context ctx, String propertyValue) {
+		if (propertyValue == null) {
+			return "";
+		}
+		String propertyValueReplaced = propertyValue.replaceAll("\\s+", "_");
+		String value = getStringByProperty(ctx, "routeInfo_" + propertyValueReplaced + "_name");
+		return value != null ? value : propertyValue;
+	}
+
+	private static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
+		try {
+			Field field = R.string.class.getField(property);
+			return getStringForField(ctx, field);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	private static String getStringForField(@NonNull Context ctx, @Nullable Field field) throws IllegalAccessException {
+		if (field != null) {
+			Integer in = (Integer) field.get(null);
+			return ctx.getString(in);
+		}
+		return null;
 	}
 }

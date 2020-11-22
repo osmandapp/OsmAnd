@@ -183,7 +183,7 @@
     <string name="poi_observatory_designation">Tilgangur</string>
     <string name="poi_telescope_type">Tegund</string>
     <string name="poi_animal_training_type">Tegund</string>
-    <string name="poi_embassy_type">Tegund</string>
+    <string name="poi_diplomatic_filter">Tegund</string>
     <string name="poi_archaeological_site_type">Tegund</string>
     <string name="poi_star_rating">Stjörnugjöf</string>
     <string name="poi_religion_type">Trúarbrögð</string>
@@ -3783,7 +3783,7 @@
     <string name="poi_tactile_paving_incorrect">Rangt</string>
     <string name="poi_traffic_signals_sound_locate">Aðeins þegar má ganga</string>
     <string name="poi_seamark_obstruction">Hindrun</string>
-    <string name="poi_drinking_water_refill_yes">Áfylling drykkjarvatns: já</string>
+    <string name="poi_drinking_water_refill_yes">Já</string>
     <string name="poi_drinking_water_refill_no">Áfylling drykkjarvatns: nei</string>
     <string name="poi_drinking_water_refill_network">Kerfi fyrir áfyllingu drykkjarvatns</string>
     <string name="poi_tactile_paving_contrasted">Mislitt</string>
@@ -3802,7 +3802,7 @@
     <string name="poi_seamark_water_level_submerged">Vatnsyfirborð: í kafi</string>
     <string name="poi_seamark_water_level_part_submerged">Vatnsyfirborð: að hluta í kafi</string>
     <string name="poi_tactile_paving_primitive">Gróft</string>
-    <string name="poi_internet_access_fee_customers">Merki til að finna staurinn</string>
+    <string name="poi_internet_access_fee_customers">Internetaðgangur: viðskiptavinir</string>
     <string name="poi_pump_status_missing_beam">Staða dælu: vantar bita</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sog</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Undir þrýstingi</string>
@@ -3818,4 +3818,21 @@
     <string name="poi_city_block">Götureitur</string>
     <string name="poi_borough">Kaupstaður</string>
     <string name="poi_traffic_signals_arrow_no">Ör: nei</string>
+    <string name="poi_nuts">Verslun með þurrkaða ávexti</string>
+    <string name="poi_beehive">Býflugnabú</string>
+    <string name="poi_departures_board_timetable">Tímatafla</string>
+    <string name="poi_departures_board_realtime">Rauntíma</string>
+    <string name="poi_departures_board_delay">Töf</string>
+    <string name="poi_departures_board_yes">Já</string>
+    <string name="poi_elevator">Lyfta</string>
+    <string name="poi_recycling_small_electrical_appliances">Smærri raftæki</string>
+    <string name="poi_drinking_water_refill">Áfylling drykkjarvatns</string>
+    <string name="poi_fuel_lng">LNG</string>
+    <string name="poi_departures_board_no">Brottfaratafla: nei</string>
+    <string name="poi_departures_board">Brottfaratafla</string>
+    <string name="poi_parking_layby">Meðfram götu</string>
+    <string name="poi_parking_sheds">Skýli</string>
+    <string name="poi_parking_rooftop">Á þaki</string>
+    <string name="poi_gpx_point">GPX-punktur</string>
+    <string name="poi_radar_tower">Radarturn</string>
 </resources>

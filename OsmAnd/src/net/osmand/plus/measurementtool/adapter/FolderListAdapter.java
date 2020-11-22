@@ -48,7 +48,8 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 
 	private Collection<? extends String> getFolders() {
 		List<File> dirs = new ArrayList<>();
-		final File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		dirs.add(gpxDir);
 		Algorithms.collectDirs(gpxDir, dirs);
 		List<String> dirItems = new ArrayList<>();
 		for (File dir : dirs) {

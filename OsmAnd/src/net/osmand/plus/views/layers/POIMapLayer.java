@@ -200,7 +200,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				objects = data.getResults();
 				if (objects != null) {
 					float textScale = app.getSettings().TEXT_SCALE.get();
-					float iconSize = getIconSize(app) * 1.5f * textScale;
+					float iconSize = getIconSize(app);
 					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 					WaypointHelper wph = app.getWaypointHelper();
 					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(view.getContext(),
@@ -394,7 +394,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public int getTextShift(Amenity amenity, RotatedTileBox rb) {
 		int radiusPoi = getRadiusPoi(rb);
 		if (isPresentInFullObjects(amenity.getLocation())) {
-			radiusPoi += (getIconSize(app) - app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_size_small)) / 2;
+			radiusPoi += (app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size)
+					- app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_size_small)) / 2;
 		}
 		return radiusPoi;
 	}

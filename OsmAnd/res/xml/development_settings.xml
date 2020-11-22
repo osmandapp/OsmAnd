@@ -25,45 +25,10 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/safe_mode" />
 
-    <net.osmand.plus.settings.preferences.SwitchPreferenceEx
-        android:key="pt_safe_mode"
-        android:layout="@layout/preference_with_descr_dialog_and_switch"
-        android:summaryOff="@string/shared_string_disabled"
-        android:summaryOn="@string/shared_string_enabled"
-        android:title="Native PT development" />
-
 	<PreferenceCategory
 		android:key="routing"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/routing_settings" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="disable_complex_routing"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/disable_complex_routing" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="use_fast_recalculation"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/use_fast_recalculation" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="enable_osmc_routing"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/use_osm_live_routing" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="enable_osmc_public_transport"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/use_osm_live_public_transport" />
 
 	<Preference
 		android:key="simulate_your_location"

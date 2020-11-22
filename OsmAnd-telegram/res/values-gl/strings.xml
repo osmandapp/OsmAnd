@@ -268,4 +268,8 @@
     <string name="time_zone_descr">Escolle a zona horaria que desexas amosar nas mensaxes de localización.</string>
     <string name="buffer_time">Tempo de caducidade do búfer</string>
     <string name="buffer_time_descr">Tempo máximo para almacenar puntos no búfer</string>
+    <string name="shared_string_export">Exportar</string>
+    <string name="logcat_buffer">Búfer de Logcat</string>
+    <string name="logcat_buffer_descr">Verifica e comparte rexistros detallados da aplicación</string>
+    <string name="send_report">Enviar denuncia</string>
 </resources>

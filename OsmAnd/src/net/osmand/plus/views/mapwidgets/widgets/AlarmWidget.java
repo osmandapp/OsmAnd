@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -40,7 +41,7 @@ public class AlarmWidget {
 	private int imgId;
 	private String cachedText;
 	private String cachedBottomText;
-	private OsmandSettings.DrivingRegion cachedRegion;
+	private DrivingRegion cachedRegion;
 
 	public AlarmWidget(final OsmandApplication app, MapActivity ma) {
 		layout = ma.findViewById(R.id.map_alarm_warning);
@@ -81,9 +82,9 @@ public class AlarmWidget {
 				int locimgId = R.drawable.warnings_limit;
 				String text = "";
 				String bottomText = "";
-				OsmandSettings.DrivingRegion region = settings.DRIVING_REGION.get();
+				DrivingRegion region = settings.DRIVING_REGION.get();
 				boolean americanType = region.isAmericanTypeSigns();
-				boolean isCanadianRegion = region == OsmandSettings.DrivingRegion.CANADA;
+				boolean isCanadianRegion = region == DrivingRegion.CANADA;
 				if (alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT) {
 					if (isCanadianRegion) {
 						locimgId = R.drawable.warnings_speed_limit_ca;

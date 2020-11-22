@@ -27,12 +27,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.PluginsActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -81,9 +79,15 @@ public class OsmAndAppCustomization {
 	private Set<String> featuresDisabledIds = new HashSet<>();
 	private Set<String> featuresEnabledPatterns = new HashSet<>();
 	private Set<String> featuresDisabledPatterns = new HashSet<>();
+	private Set<ApplicationMode> marginAppModeUsage = new HashSet<>();
 	private Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 	private CustomOsmandSettings customOsmandSettings;
+
+	private int marginLeft;
+	private int marginTop;
+	private int marginRight;
+	private int marginBottom;
 
 	private boolean featuresCustomized;
 	private boolean widgetsCustomized;
@@ -151,6 +155,10 @@ public class OsmAndAppCustomization {
 		featuresCustomized = false;
 		widgetsCustomized = false;
 		customOsmandSettings = null;
+		marginLeft = 0;
+		marginTop = 0;
+		marginRight = 0;
+		marginBottom = 0;
 		restoreOsmandSettings();
 
 		featuresEnabledIds.clear();
@@ -159,14 +167,12 @@ public class OsmAndAppCustomization {
 		featuresDisabledPatterns.clear();
 		widgetsVisibilityMap.clear();
 		widgetsAvailabilityMap.clear();
+		marginAppModeUsage.clear();
 
 		return true;
 	}
 
 	// Activities
-	public Class<? extends Activity> getSettingsActivity() {
-		return SettingsActivity.class;
-	}
 
 	public Class<MapActivity> getMapActivity() {
 		return MapActivity.class;
@@ -182,10 +188,6 @@ public class OsmAndAppCustomization {
 
 	public Class<? extends Activity> getDownloadIndexActivity() {
 		return DownloadActivity.class;
-	}
-
-	public Class<? extends Activity> getPluginsActivity() {
-		return PluginsActivity.class;
 	}
 
 	public Class<? extends Activity> getDownloadActivity() {
@@ -366,6 +368,26 @@ public class OsmAndAppCustomization {
 		widgetsAvailabilityMap.put(widgetId, set);
 		setWidgetsCustomized();
 		return set;
+	}
+
+	public void setMapMargins(int left, int top, int right, int bottom, List<String> appModeKeys) {
+		marginLeft = left;
+		marginTop = top;
+		marginRight = right;
+		marginBottom = bottom;
+		marginAppModeUsage.addAll(getAppModesSet(appModeKeys));
+	}
+
+	public void updateMapMargins(MapActivity mapActivity) {
+		if (isMapMarginAvailable()) {
+			mapActivity.setMargins(marginLeft, marginTop, marginRight, marginBottom);
+		} else {
+			mapActivity.setMargins(0, 0, 0, 0);
+		}
+	}
+
+	boolean isMapMarginAvailable() {
+		return marginAppModeUsage.contains(app.getSettings().getApplicationMode());
 	}
 
 	public boolean isWidgetVisible(@NonNull String key, ApplicationMode appMode) {

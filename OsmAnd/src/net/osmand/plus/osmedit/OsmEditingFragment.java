@@ -9,37 +9,67 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
+import net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
-import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
-public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged {
+public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginListener,
+		OsmAuthorizationListener {
 
-	private static final String OSM_EDITING_INFO = "osm_editing_info";
+	private static final String OSM_LOGOUT = "osm_logout";
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
-	private static final String OSM_LOGIN_DATA = "osm_login_data";
+	public static final String OSM_LOGIN_DATA = "osm_login_data";
+	private static final String OSM_EDITING_INFO = "osm_editing_info";
+
+	private OsmOAuthAuthorizationAdapter authorizationAdapter;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
+
+		FragmentActivity activity = requireMyActivity();
+		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					mapActivity.launchPrevActivityIntent();
+				}
+				dismiss();
+			}
+		});
+	}
 
 	@Override
 	protected void setupPreferences() {
 		Preference osmEditingInfo = findPreference(OSM_EDITING_INFO);
 		osmEditingInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
-		setupNameAndPasswordPref();
+		setupLoginPref();
+		setupLogoutPref();
+
 		setupOfflineEditingPref();
+		setupUseDevUrlPref();
 		setupOsmEditsDescrPref();
 		setupOsmEditsPref();
 	}
@@ -62,10 +92,40 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		}
 	}
 
-	private void setupNameAndPasswordPref() {
+	@Override
+	public void loginValidationFinished(String warning) {
+		updateAllSettings();
+	}
+
+	private void setupLoginPref() {
 		Preference nameAndPasswordPref = findPreference(OSM_LOGIN_DATA);
-		nameAndPasswordPref.setSummary(settings.USER_NAME.get());
-		nameAndPasswordPref.setIcon(getContentIcon(R.drawable.ic_action_openstreetmap_logo));
+		if (!isValidToken() && !isLoginExists()) {
+			nameAndPasswordPref.setIcon(getContentIcon(R.drawable.ic_action_user_account));
+			nameAndPasswordPref.setVisible(true);
+		} else {
+			nameAndPasswordPref.setVisible(false);
+		}
+	}
+
+	private void setupLogoutPref() {
+		boolean validToken = isValidToken();
+		Preference nameAndPasswordPref = findPreference(OSM_LOGOUT);
+		if (validToken || isLoginExists()) {
+			String userName = validToken ? settings.USER_DISPLAY_NAME.get() : settings.USER_NAME.get();
+			nameAndPasswordPref.setVisible(true);
+			nameAndPasswordPref.setSummary(userName);
+			nameAndPasswordPref.setIcon(getContentIcon(R.drawable.ic_action_user_account));
+		} else {
+			nameAndPasswordPref.setVisible(false);
+		}
+	}
+
+	private boolean isValidToken() {
+		return authorizationAdapter.isValidToken();
+	}
+
+	private boolean isLoginExists() {
+		return !Algorithms.isEmpty(settings.USER_NAME.get()) && !Algorithms.isEmpty(settings.USER_PASSWORD.get());
 	}
 
 	private void setupOfflineEditingPref() {
@@ -73,9 +133,16 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		Drawable enabled = getActiveIcon(R.drawable.ic_world_globe_dark);
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
-		SwitchPreferenceEx offlineEditingPref = (SwitchPreferenceEx) findPreference(settings.OFFLINE_EDITION.getId());
+		SwitchPreferenceEx offlineEditingPref = findPreference(settings.OFFLINE_EDITION.getId());
 		offlineEditingPref.setDescription(getString(R.string.offline_edition_descr));
 		offlineEditingPref.setIcon(icon);
+	}
+
+	private void setupUseDevUrlPref() {
+		Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_laptop);
+		SwitchPreferenceEx useDevUrlPref = findPreference(settings.USE_DEV_URL.getId());
+		useDevUrlPref.setDescription(getString(R.string.use_dev_url_descr));
+		useDevUrlPref.setIcon(icon);
 	}
 
 	private void setupOsmEditsDescrPref() {
@@ -102,8 +169,21 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		String prefId = preference.getKey();
+		if (settings.USE_DEV_URL.getId().equals(prefId) && newValue instanceof Boolean) {
+			settings.USE_DEV_URL.set((Boolean) newValue);
+			osmLogout();
+			authorizationAdapter = app.getOsmOAuthHelper().updateAdapter();
+			return true;
+		}
+		return super.onPreferenceChange(preference, newValue);
+	}
+
+	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (OPEN_OSM_EDITS.equals(preference.getKey())) {
+		String prefId = preference.getKey();
+		if (OPEN_OSM_EDITS.equals(prefId)) {
 			Bundle bundle = new Bundle();
 			bundle.putInt(TAB_ID, OSM_EDIT_TAB);
 
@@ -113,21 +193,46 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 			favorites.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			startActivity(favorites);
 			return true;
-		} else if (OSM_LOGIN_DATA.equals(preference.getKey())) {
+		} else if (OSM_LOGIN_DATA.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA, this, false, getSelectedAppMode());
+				LoginBottomSheetFragment.showInstance(fragmentManager, this);
 				return true;
 			}
+		} else if (OSM_LOGOUT.equals(prefId)) {
+			osmLogout();
+			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}
 
+	private void osmLogout() {
+		boolean validToken = isValidToken();
+		if (validToken || isLoginExists()) {
+			if (validToken) {
+				settings.USER_ACCESS_TOKEN.resetToDefault();
+				settings.USER_ACCESS_TOKEN_SECRET.resetToDefault();
+				authorizationAdapter.resetToken();
+			} else {
+				settings.USER_NAME.resetToDefault();
+				settings.USER_PASSWORD.resetToDefault();
+			}
+			app.showShortToastMessage(R.string.osm_edit_logout_success);
+			updateAllSettings();
+		}
+	}
+
 	@Override
 	public void onPreferenceChanged(String prefId) {
-		if (OSM_LOGIN_DATA.equals(prefId)) {
-			Preference nameAndPasswordPref = findPreference(OSM_LOGIN_DATA);
-			nameAndPasswordPref.setSummary(settings.USER_NAME.get());
+		if (settings.USE_DEV_URL.getId().equals(prefId)) {
+			osmLogout();
+			authorizationAdapter = app.getOsmOAuthHelper().updateAdapter();
 		}
+		updateAllSettings();
+	}
+
+	@Override
+	public void authorizationCompleted() {
+		updateAllSettings();
 	}
 }

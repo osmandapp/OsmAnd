@@ -23,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -41,7 +42,8 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.profiles.LocationIcon;
@@ -151,6 +153,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			changedProfile.navigationIcon = profile.navigationIcon;
 			isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
 		}
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				showExitDialog();
+			}
+		});
 	}
 
 	public void setupAppProfileObjectFromAppMode(ApplicationMode baseModeForNewProfile) {
@@ -728,6 +735,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 						app.showToastMessage(R.string.profile_backup_failed);
 					}
 				}
+
+				@Override
+				public void onSettingsExportProgressUpdate(int value) {
+
+				}
 			};
 		}
 		return exportListener;
@@ -822,7 +834,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				tempDir.mkdirs();
 			}
 			app.getSettingsHelper().exportSettings(tempDir, mode.getStringKey(),
-					getSettingsExportListener(), true, new SettingsHelper.ProfileSettingsItem(app, mode));
+					getSettingsExportListener(), true, new ProfileSettingsItem(app, mode));
 		}
 	}
 
@@ -893,7 +905,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		profileNameOtfb.setError(errorMessage, true);
 	}
 
-	public boolean isProfileAppearanceChanged() {
+	public void showExitDialog() {
 		hideKeyboard();
 		if (isChanged()) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
@@ -906,9 +918,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				}
 			});
 			dismissDialog.show();
-			return true;
 		} else {
-			return false;
+			dismiss();
 		}
 	}
 

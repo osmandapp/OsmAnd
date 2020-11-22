@@ -143,9 +143,9 @@ public class IndexItem implements Comparable<IndexItem> {
 
 	public String getTranslatedBasename() {
 		if (type == DownloadActivityType.HILLSHADE_FILE) {
-			return (FileNameTranslationHelper.HILL_SHADE + getBasename()).replace("_", " ");
+			return (FileNameTranslationHelper.HILL_SHADE + "_" + getBasename()).replace("_", " ");
 		} else if (type == DownloadActivityType.SLOPE_FILE) {
-			return (FileNameTranslationHelper.SLOPE + getBasename()).replace('_', ' ');
+			return (FileNameTranslationHelper.SLOPE + "_" + getBasename()).replace('_', ' ');
 		} else {
 			return getBasename();
 		}

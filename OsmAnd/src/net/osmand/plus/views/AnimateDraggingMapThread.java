@@ -225,6 +225,13 @@ public class AnimateDraggingMapThread {
 
 				if (!stopped) {
 					animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener, finishAnimationCallback);
+				} else if (finishAnimationCallback != null) {
+					tileView.getApplication().runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							finishAnimationCallback.run();
+						}
+					});
 				}
 				if (!stopped) {
 					tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);

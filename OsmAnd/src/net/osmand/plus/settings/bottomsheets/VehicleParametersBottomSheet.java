@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -120,19 +121,19 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 					currentValue = 0.0f;
 				}
 				selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
-				adapter.setSelectedItem(selectedItem);
-				int itemPosition = adapter.getItemPosition(selectedItem);
+				adapter.setSelectedItemByTitle(selectedItem);
+				int itemPosition = adapter.getItemPositionByTitle(selectedItem);
 				if (itemPosition >= 0) {
 					recyclerView.smoothScrollToPosition(itemPosition);
 				}
 			}
 		});
 
-		adapter.setItems(Arrays.asList(preference.getEntries()));
+		adapter.setTitledItems(Arrays.asList(preference.getEntries()));
 		adapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
 			@Override
-			public void onItemSelected(String item) {
-				selectedItem = item;
+			public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
+				selectedItem = item.getTitle();
 				currentValue = preference.getValueFromEntries(selectedItem);
 				String currentValueStr = currentValue == 0.0f
 						? "" : df.format(currentValue + 0.01f);
@@ -144,7 +145,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 			}
 		});
 		recyclerView.setAdapter(adapter);
-		adapter.setSelectedItem(selectedItem);
+		adapter.setSelectedItemByTitle(selectedItem);
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(mainView)
 				.create();
@@ -196,13 +197,12 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 					return;
 				}
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
-					mainView.setBackgroundResource(showTopShadow ? getPortraitBgResId() : getBgColorId());
+					AndroidUtils.setBackground(mainView, showTopShadow ? getPortraitBg(activity) : getColoredBg(activity));
 					if (!showTopShadow) {
 						mainView.setPadding(0, 0, 0, 0);
 					}
 				} else {
-					mainView.setBackgroundResource(showTopShadow
-							? getLandscapeTopsidesBgResId() : getLandscapeSidesBgResId());
+					AndroidUtils.setBackground(mainView, showTopShadow ? getLandscapeTopsidesBg(activity) : getLandscapeSidesBg(activity));
 				}
 			}
 		};

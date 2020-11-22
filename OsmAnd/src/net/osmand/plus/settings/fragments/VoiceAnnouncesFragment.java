@@ -17,27 +17,29 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 
 import java.util.Set;
 
-import static net.osmand.plus.settings.backend.OsmandSettings.VOICE_PROVIDER_NOT_USE;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-import static net.osmand.plus.activities.SettingsNavigationActivity.MORE_VALUE;
+import static net.osmand.plus.settings.backend.OsmandSettings.VOICE_PROVIDER_NOT_USE;
 
 public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
+
+	private static final String MORE_VALUE = "MORE_VALUE";
 
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
@@ -104,10 +106,10 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 	private void setupSpeedLimitExceedPref() {
 		//array size must be equal!
-		Float[] valuesKmh = new Float[]{-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
-		Float[] valuesMph = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
+		Float[] valuesKmh = new Float[] {-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] valuesMph = new Float[] {-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
 		String[] names;
-		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == MetricsConstants.KILOMETERS_AND_METERS) {
 			names = new String[valuesKmh.length];
 			for (int i = 0; i < names.length; i++) {
 				names[i] = valuesKmh[i].intValue() + " " + getString(R.string.km_h);

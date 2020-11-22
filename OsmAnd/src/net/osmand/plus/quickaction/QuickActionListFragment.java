@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
@@ -38,11 +39,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
+import net.osmand.plus.views.layers.MapQuickActionLayer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -100,6 +102,26 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             }
             screenType = savedInstanceState.getInt(SCREEN_TYPE_KEY, SCREEN_TYPE_REORDER);
         }
+        requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            public void handleOnBackPressed() {
+                MapActivity mapActivity = getMapActivity();
+                if (mapActivity != null) {
+                    if (isVisible()) {
+                        if (fromDashboard()) {
+                            mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONFIGURE_SCREEN, null);
+                        } else {
+                            mapActivity.getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed();
+                        }
+                    } else if (mapActivity.getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed()) {
+                        return;
+                    }
+                    FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+                    if (!fragmentManager.isStateSaved()) {
+                        fragmentManager.popBackStackImmediate();
+                    }
+                }
+            }
+        });
     }
 
     @Nullable

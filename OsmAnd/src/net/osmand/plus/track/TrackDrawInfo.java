@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
@@ -40,7 +41,7 @@ public class TrackDrawInfo {
 		readBundle(bundle);
 	}
 
-	public TrackDrawInfo(GpxDataItem gpxDataItem, boolean currentRecording) {
+	public TrackDrawInfo(@NonNull OsmandApplication app, @NonNull GpxDataItem gpxDataItem, boolean currentRecording) {
 		filePath = gpxDataItem.getFile().getPath();
 		width = gpxDataItem.getWidth();
 		gradientScaleType = gpxDataItem.getGradientScaleType();

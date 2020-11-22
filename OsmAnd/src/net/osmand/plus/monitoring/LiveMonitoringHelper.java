@@ -131,7 +131,14 @@ public class LiveMonitoringHelper {
 	}
 
 	public void sendData(LiveMonitoringData data) {
-		String urlStr = getLiveUrl(data);
+		String baseUrl = app.getSettings().LIVE_MONITORING_URL.get();
+		String urlStr;
+		try {
+			urlStr = getLiveUrl(baseUrl, data);
+		} catch (IllegalArgumentException e) {
+			log.error("Could not construct live url from base url: " + baseUrl, e);
+			return;
+		}
 		try {
 			// Parse the URL and let the URI constructor handle proper encoding of special characters such as spaces
 			URL url = new URL(urlStr);
@@ -172,12 +179,11 @@ public class LiveMonitoringHelper {
 		}
 	}
 
-	private String getLiveUrl(LiveMonitoringData data) {
-		String st = app.getSettings().LIVE_MONITORING_URL.get();
+	private String getLiveUrl(String baseUrl, LiveMonitoringData data) {
 		List<String> prm = new ArrayList<String>();
 		int maxLen = 0;
 		for (int i = 0; i < 7; i++) {
-			boolean b = st.contains("{"+i+"}");
+			boolean b = baseUrl.contains("{"+i+"}");
 			if(b) {
 				maxLen = i;
 			}
@@ -210,6 +216,6 @@ public class LiveMonitoringHelper {
 				break;
 			}
 		}
-		return MessageFormat.format(st, prm.toArray());
+		return MessageFormat.format(baseUrl, prm.toArray());
 	}
 }

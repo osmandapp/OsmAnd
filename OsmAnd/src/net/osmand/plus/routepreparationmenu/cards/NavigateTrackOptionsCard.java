@@ -11,8 +11,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.LEFT;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.RIGHT;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
 
 public class NavigateTrackOptionsCard extends BaseCard {
 
@@ -45,7 +45,7 @@ public class NavigateTrackOptionsCard extends BaseCard {
 		TextView description = parameterView.findViewById(R.id.description);
 
 		boolean enabled = passWholeRoute.isSelected(app.getSettings());
-		CustomRadioButtonType buttonType = enabled ? LEFT : RIGHT;
+		CustomRadioButtonType buttonType = enabled ? START : END;
 		UiUtilities.updateCustomRadioButtons(app, buttonsView, nightMode, buttonType);
 
 		leftButton.setText(R.string.start_of_the_track);
@@ -56,7 +56,7 @@ public class NavigateTrackOptionsCard extends BaseCard {
 			@Override
 			public void onClick(View v) {
 				if (!passWholeRoute.isSelected(app.getSettings())) {
-					applyParameter(parameterView, passWholeRoute, LEFT, true);
+					applyParameter(parameterView, passWholeRoute, START, true);
 				}
 			}
 		});
@@ -64,7 +64,7 @@ public class NavigateTrackOptionsCard extends BaseCard {
 			@Override
 			public void onClick(View v) {
 				if (passWholeRoute.isSelected(app.getSettings())) {
-					applyParameter(parameterView, passWholeRoute, RIGHT, false);
+					applyParameter(parameterView, passWholeRoute, END, false);
 				}
 			}
 		});
@@ -81,14 +81,14 @@ public class NavigateTrackOptionsCard extends BaseCard {
 		rightButton.setText(app.getRoutingHelper().getAppMode().toHumanString());
 
 		boolean enabled = navigationType.isSelected(app.getSettings());
-		CustomRadioButtonType buttonType = enabled ? RIGHT : LEFT;
+		CustomRadioButtonType buttonType = enabled ? END : START;
 		UiUtilities.updateCustomRadioButtons(app, buttonsView, nightMode, buttonType);
 
 		leftButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (navigationType.isSelected(app.getSettings())) {
-					applyParameter(parameterView, navigationType, LEFT, false);
+					applyParameter(parameterView, navigationType, START, false);
 				}
 			}
 		});
@@ -96,7 +96,7 @@ public class NavigateTrackOptionsCard extends BaseCard {
 			@Override
 			public void onClick(View v) {
 				if (!navigationType.isSelected(app.getSettings())) {
-					applyParameter(parameterView, navigationType, RIGHT, true);
+					applyParameter(parameterView, navigationType, END, true);
 				}
 			}
 		});

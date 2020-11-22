@@ -630,7 +630,7 @@
     <string name="poi_pump">Pumpe</string>
     <string name="poi_telescope_type">Type</string>
     <string name="poi_animal_training_type">Type</string>
-    <string name="poi_embassy_type">Type</string>
+    <string name="poi_diplomatic_filter">Type</string>
     <string name="poi_healthcare_alternative_types">Spesialitet</string>
     <string name="poi_free_flying_characteristics">Kjennetegn</string>
     <string name="poi_archaeological_site_type">Type</string>
@@ -1556,7 +1556,7 @@
     <string name="poi_fire_hydrant_type_pipe">Rør</string>
     <string name="poi_drinking_water_refill_network">Nettverk for påfyll av drikkevann</string>
     <string name="poi_drinking_water_refill_no">Drikkevannspåfylling: Nei</string>
-    <string name="poi_drinking_water_refill_yes">Drikkevannspåfylling: Ja</string>
+    <string name="poi_drinking_water_refill_yes">Ja</string>
     <string name="poi_seamark_water_level_submerged">Vann-nivå: Nedsenket</string>
     <string name="poi_seamark_obstruction">Hindring</string>
     <string name="poi_seamark_water_level_below_mwl">Vann-nivå: Under vanlig vann-nivå</string>
@@ -1618,4 +1618,10 @@
     <string name="poi_direction_clockwise">Retning: med urviseren</string>
     <string name="poi_direction_nnw">Retning: nord-nordvest</string>
     <string name="poi_direction_nw">Retning: nordvest</string>
+    <string name="poi_drinking_water_refill">Drikkevannspåfylling</string>
+    <string name="poi_traffic_signals_arrow">Pil</string>
+    <string name="poi_traffic_signals_vibration">Vibrasjon</string>
+    <string name="poi_video_telephone">Video</string>
+    <string name="poi_volcano_status">Status</string>
+    <string name="poi_volcano_type">Type</string>
 </resources>

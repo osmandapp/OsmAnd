@@ -19,6 +19,7 @@
 		<attr name="expandable_list_background" format="color"/>
 		<attr name="bg_color" format="reference" />
 	    <attr name="bg_circle" format="reference"/>
+        <attr name="bg_circle_contour" format="reference" />
 	    <attr name="btn_round" format="reference" />
         <attr name="btn_round_border" format="reference" />
 		<attr name="btn_round_border_2" format="reference" />
@@ -137,6 +138,7 @@
 		<attr name="btn_radio_button_right" format="reference"/>
 		<attr name="btn_radio_button_center" format="reference"/>
 		<attr name="bg_dash_line" format="reference"/>
+		<attr name="text_input_background" format="reference"/>
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

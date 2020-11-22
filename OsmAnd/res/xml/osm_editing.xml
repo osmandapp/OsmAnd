@@ -16,9 +16,13 @@
 		android:key="osm_login_data"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
-		android:title="@string/login_and_pass"
-		tools:icon="@drawable/ic_action_openstreetmap_logo"
-		tools:summary="@string/open_street_map_login_descr" />
+		android:title="@string/login_open_street_map" />
+
+	<Preference
+		android:key="osm_logout"
+		android:layout="@layout/preference_login"
+		android:persistent="false"
+		android:title="@string/login_account" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="offline_osm_editing"
@@ -27,6 +31,14 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/offline_edition"
 		tools:icon="@drawable/ic_action_offline" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="use_dev_url"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/use_dev_url"
+		tools:icon="@drawable/ic_action_laptop" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"

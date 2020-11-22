@@ -256,7 +256,7 @@ public class RoutePlannerFrontEnd {
 						if (routeFound) {
 							// route is found - cut the end of the route and move to next iteration
 //							start.stepBackRoute = new ArrayList<RouteSegmentResult>();
-//							boolean stepBack = true; 
+//							boolean stepBack = true;
 							boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
 							if (!stepBack) {
 								// not supported case (workaround increase MAXIMUM_STEP_APPROXIMATION)
@@ -546,8 +546,10 @@ public class RoutePlannerFrontEnd {
 		if (start != null && start.pnt == null) {
 			gctx.routePointsSearched++;
 			RouteSegmentPoint rsp = findRouteSegment(start.loc.getLatitude(), start.loc.getLongitude(), gctx.ctx, null, false);
-			if (MapUtils.getDistance(rsp.getPreciseLatLon(), start.loc) < distThreshold) {
-				start.pnt = rsp;
+			if (rsp != null) {
+				if (MapUtils.getDistance(rsp.getPreciseLatLon(), start.loc) < distThreshold) {
+					start.pnt = rsp;
+				}
 			}
  		} 
 		if (start != null && start.pnt != null) {
@@ -734,7 +736,7 @@ public class RoutePlannerFrontEnd {
 			res = searchRouteImpl(ctx, points, routeDirection);
 		}
 		if (ctx.calculationProgress != null) {
-			ctx.calculationProgress.timeToCalculate += (System.nanoTime() - timeToCalculate);
+			ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
 		}
 		BinaryRoutePlanner.printDebugMemoryInformation(ctx);
 		if (res != null) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -14,32 +14,32 @@
 
 	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:background="?attr/bg_color">
 
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center_vertical"
-			android:minHeight="66dp"
+			android:minHeight="@dimen/setting_list_item_large_height"
 			android:orientation="horizontal">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/explist_indicator"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="@dimen/content_padding"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginTop="@dimen/content_padding"
-				android:layout_marginEnd="@dimen/list_content_padding_large"
-				android:layout_marginRight="@dimen/list_content_padding_large"
-				android:layout_marginBottom="@dimen/content_padding"
+				android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
+				android:layout_marginRight="@dimen/content_padding"
+				android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
 				osmand:srcCompat="@drawable/ic_action_arrow_down" />
 
 			<LinearLayout
 				android:layout_width="0dp"
-				android:layout_height="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
 				android:layout_weight="1"
 				android:gravity="center_vertical"
 				android:orientation="vertical">
@@ -48,16 +48,20 @@
 					android:id="@+id/title_tv"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
+					osmand:lineHeight="@dimen/default_title_line_height"
 					tools:text="Quick actions" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/sub_text_tv"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:letterSpacing="@dimen/description_letter_spacing"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
+					osmand:lineHeight="@dimen/default_desc_line_height"
 					tools:text="8 of 4" />
 
 			</LinearLayout>
@@ -66,22 +70,22 @@
 				android:id="@+id/vertical_divider"
 				android:layout_width="1dp"
 				android:layout_height="match_parent"
-				android:layout_marginTop="@dimen/content_padding"
-				android:layout_marginBottom="@dimen/content_padding"
+				android:layout_marginTop="@dimen/setting_profile_item_switch_margin"
+				android:layout_marginBottom="@dimen/setting_profile_item_switch_margin"
 				android:background="?attr/list_divider" />
 
 			<FrameLayout
 				android:id="@+id/check_box_container"
+				style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 				android:layout_width="@dimen/acceptable_touch_radius"
 				android:layout_height="@dimen/acceptable_touch_radius"
 				android:layout_marginEnd="@dimen/text_margin_small"
-				android:layout_marginRight="@dimen/text_margin_small"
-				android:background="?attr/selectableItemBackgroundBorderless">
+				android:layout_marginRight="@dimen/text_margin_small">
 
 				<net.osmand.view.ThreeStateCheckbox
 					android:id="@+id/check_box"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+					android:layout_width="@dimen/standard_icon_size"
+					android:layout_height="@dimen/standard_icon_size"
 					android:layout_gravity="center"
 					android:clickable="false"
 					android:enabled="false"

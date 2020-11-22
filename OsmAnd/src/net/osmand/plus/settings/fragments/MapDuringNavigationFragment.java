@@ -2,8 +2,8 @@ package net.osmand.plus.settings.fragments;
 
 import androidx.preference.Preference;
 
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.AutoZoomMap;
+import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.helpers.enums.AutoZoomMap;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -78,7 +78,7 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 		Float[] valuesKmh = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
 		Float[] valuesMph = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
 		String[] names;
-		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == MetricsConstants.KILOMETERS_AND_METERS) {
 			names = new String[valuesKmh.length];
 			for (int i = 0; i < names.length; i++) {
 				names[i] = valuesKmh[i].intValue() + " " + getString(R.string.km_h);
@@ -113,7 +113,7 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 				} else {
 					applyPreference(settings.AUTO_ZOOM_MAP.getId(), applyToAllProfiles, true);
 					applyPreference(settings.AUTO_ZOOM_MAP_SCALE.getId(),
-							applyToAllProfiles, OsmandSettings.AutoZoomMap.values()[position - 1]);
+							applyToAllProfiles, AutoZoomMap.values()[position - 1]);
 				}
 			}
 		} else {

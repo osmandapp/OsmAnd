@@ -92,6 +92,7 @@
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="bg_color">@color/list_background_color_light</item>
         <item name="bg_circle">@drawable/circle_background_light</item>
+        <item name="bg_circle_contour">@drawable/circle_contour_bg_light</item>
         <item name="btn_round">@drawable/btn_round_light</item>
         <item name="btn_round_border">@drawable/btn_round_border_light</item>
         <item name="btn_round_border_2">@drawable/btn_round_border_light_2</item>
@@ -244,6 +245,7 @@
         <item name="btn_radio_button_center">@drawable/radio_button_center_light</item>
         <item name="checkboxStyle">@style/CheckboxStyle</item>
         <item name="radioButtonStyle">@style/RadioButtonStyle</item>
+        <item name="text_input_background">@color/text_input_background_light</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -355,12 +357,12 @@
     </style>
 
     <style name="OsmandDarkTheme.NoAnimation">
-        <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert.NoAnimation</item>
+        <item name="alertDialogTheme">@style/Theme.MaterialComponents.Dialog.Alert.NoAnimation</item>
         <item name="dialog_title_color">@color/marker_red</item>
     </style>
 
     <style name="OsmandLightTheme.NoAnimation">
-        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.NoAnimation</item>
+        <item name="alertDialogTheme">@style/Theme.MaterialComponents.Light.Dialog.Alert.NoAnimation</item>
     </style>
 
     <style name="CoordinateInputEditText" parent="Widget.AppCompat.EditText">
@@ -394,6 +396,7 @@
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="bg_color">@color/list_background_color_dark</item>
         <item name="bg_circle">@drawable/circle_background_dark</item>
+        <item name="bg_circle_contour">@drawable/circle_contour_bg_dark</item>
         <item name="btn_round">@drawable/btn_round_dark</item>
         <item name="btn_round_border">@drawable/btn_round_border_dark</item>
         <item name="btn_round_border_2">@drawable/btn_round_border_dark_2</item>
@@ -537,25 +540,32 @@
         <item name="btn_radio_button_center">@drawable/radio_button_center_dark</item>
         <item name="checkboxStyle">@style/CheckboxStyle</item>
         <item name="radioButtonStyle">@style/RadioButtonStyle</item>
+        <item name="text_input_background">@color/text_input_background_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-    <style name="Theme.AppCompat.Dialog.Alert.NoAnimation">
+    <style name="Theme.MaterialComponents.Dialog.Alert.NoAnimation">
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleDark</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleDark</item>
+        <item name="buttonBarNeutralButtonStyle">@style/DialogButtonStyleDark</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="Theme.AppCompat.Light.Dialog.Alert.NoAnimation">
+    <style name="Theme.MaterialComponents.Light.Dialog.Alert.NoAnimation">
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleLight</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleLight</item>
+        <item name="buttonBarNeutralButtonStyle">@style/DialogButtonStyleLight</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="DialogButtonStyleLight" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <style name="DialogButtonStyleLight" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/active_color_primary_light</item>
     </style>
 
-    <style name="DialogButtonStyleDark" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <style name="DialogButtonStyleDark" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/active_color_primary_dark</item>
     </style>
 

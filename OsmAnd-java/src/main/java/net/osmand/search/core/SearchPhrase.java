@@ -229,12 +229,14 @@ public class SearchPhrase {
 	}
 	
 	public int countWords(String w) {
-		String[] ws = w.split(ALLDELIMITERS);
 		int cnt = 0;
-		for (int i = 0; i < ws.length; i++) {
-			String wd = ws[i].trim();
-			if (wd.length() > 0) {
-				cnt++;
+		if (!Algorithms.isEmpty(w)) {
+			String[] ws = w.split(ALLDELIMITERS);
+			for (int i = 0; i < ws.length; i++) {
+				String wd = ws[i].trim();
+				if (wd.length() > 0) {
+					cnt++;
+				}
 			}
 		}
 		return cnt;

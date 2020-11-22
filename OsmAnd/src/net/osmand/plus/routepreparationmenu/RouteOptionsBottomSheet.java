@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -47,6 +48,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.router.GeneralRouter;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.Arrays;
@@ -342,14 +344,19 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private BaseBottomSheetItem createGpxRoutingItem(final LocalRoutingParameter optionsItem) {
 		RouteProvider.GPXRouteParamsBuilder routeParamsBuilder = mapActivity.getRoutingHelper().getCurrentGPXRoute();
-		String description;
+		String description = null;
 		int descriptionColorId;
 		if (routeParamsBuilder == null) {
 			descriptionColorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 			description = mapActivity.getString(R.string.follow_track_descr);
 		} else {
 			descriptionColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-			description = new File(routeParamsBuilder.getFile().path).getName();
+			GPXFile gpxFile = routeParamsBuilder.getFile();
+			if (!Algorithms.isEmpty(gpxFile.path)) {
+				description = new File(gpxFile.path).getName();
+			} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
+				description = gpxFile.tracks.get(0).name;
+			}
 		}
 
 		return new BottomSheetItemWithDescription.Builder()

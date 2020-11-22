@@ -188,7 +188,7 @@
                             android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                             android:layout_weight="1"
                             android:ellipsize="end"
-                            android:maxLines="1"
+                            android:maxLines="2"
                             osmand:typeface="@string/font_roboto_medium"
                             tools:text="Some really long string"/>
 
@@ -248,6 +248,7 @@
                                 tools:textColor="?android:textColorSecondary"/>
 
                         </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>

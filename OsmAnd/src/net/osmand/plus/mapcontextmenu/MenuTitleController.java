@@ -25,8 +25,8 @@ public abstract class MenuTitleController {
 
 	private AddressLookupRequest addressLookupRequest;
 
-	protected String searchAddressStr;
-	protected String addressNotFoundStr;
+	protected String searchAddressStr = "";
+	protected String addressNotFoundStr = "";
 
 	@Nullable
 	public abstract MapActivity getMapActivity();

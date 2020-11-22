@@ -3,39 +3,50 @@ package net.osmand.plus.routepreparationmenu.cards;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.Collator;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TracksToFollowCard extends BaseCard {
 
+	private List<GPXInfo> gpxInfoList;
 	private Map<String, List<GPXInfo>> gpxInfoCategories;
 
-	private List<GPXInfo> gpxInfoList;
-	private String selectedCategory;
-
 	private GpxTrackAdapter tracksAdapter;
+	private TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
+
+	private String defaultCategory;
+	private String visibleCategory;
+	private String selectedCategory;
 
 	public TracksToFollowCard(MapActivity mapActivity, List<GPXInfo> gpxInfoList, String selectedCategory) {
 		super(mapActivity);
 		this.gpxInfoList = gpxInfoList;
 		this.selectedCategory = selectedCategory;
+		defaultCategory = app.getString(R.string.shared_string_all);
+		visibleCategory = app.getString(R.string.shared_string_visible);
 		gpxInfoCategories = getGpxInfoCategories();
 	}
 
-	public void setGpxInfoList(List<GPXInfo> gpxInfoList) {
-		this.gpxInfoList = gpxInfoList;
+	public void setSortByMode(TracksSortByMode sortByMode) {
+		this.sortByMode = sortByMode;
 		gpxInfoCategories = getGpxInfoCategories();
+		updateTracksAdapter();
 	}
 
 	public List<GPXInfo> getGpxInfoList() {
@@ -62,7 +73,7 @@ public class TracksToFollowCard extends BaseCard {
 		filesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 		filesRecyclerView.setNestedScrollingEnabled(false);
 
-		tracksAdapter = new GpxTrackAdapter(view.getContext(), gpxInfoList, false);
+		tracksAdapter = new GpxTrackAdapter(view.getContext(), gpxInfoList, false, showFoldersName());
 		tracksAdapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
@@ -81,16 +92,14 @@ public class TracksToFollowCard extends BaseCard {
 
 	private void setupCategoriesRow() {
 		final HorizontalSelectionAdapter selectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
-		selectionAdapter.setItems(new ArrayList<>(gpxInfoCategories.keySet()));
-		selectionAdapter.setSelectedItem(selectedCategory);
+		selectionAdapter.setTitledItems(new ArrayList<>(gpxInfoCategories.keySet()));
+		selectionAdapter.setSelectedItemByTitle(selectedCategory);
 		selectionAdapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
 			@Override
-			public void onItemSelected(String item) {
-				selectedCategory = item;
-				List<GPXInfo> items = gpxInfoCategories.get(item);
-				tracksAdapter.setGpxInfoList(items != null ? items : new ArrayList<GPXInfo>());
-				tracksAdapter.notifyDataSetChanged();
-
+			public void onItemSelected(HorizontalSelectionAdapter.HorizontalSelectionItem item) {
+				selectedCategory = item.getTitle();
+				tracksAdapter.setShowFolderName(showFoldersName());
+				updateTracksAdapter();
 				selectionAdapter.notifyDataSetChanged();
 			}
 		});
@@ -101,17 +110,26 @@ public class TracksToFollowCard extends BaseCard {
 		selectionAdapter.notifyDataSetChanged();
 	}
 
+	private void updateTracksAdapter() {
+		List<GPXInfo> items = gpxInfoCategories.get(selectedCategory);
+		tracksAdapter.setGpxInfoList(items != null ? items : new ArrayList<GPXInfo>());
+		tracksAdapter.notifyDataSetChanged();
+	}
+
+	private boolean showFoldersName() {
+		return defaultCategory.equals(selectedCategory) || visibleCategory.equals(selectedCategory);
+	}
+
 	private Map<String, List<GPXInfo>> getGpxInfoCategories() {
-		String all = app.getString(R.string.shared_string_all);
-		String visible = app.getString(R.string.shared_string_visible);
 		Map<String, List<GPXInfo>> gpxInfoCategories = new LinkedHashMap<>();
 
-		gpxInfoCategories.put(visible, new ArrayList<GPXInfo>());
-		gpxInfoCategories.put(all, new ArrayList<GPXInfo>());
+		gpxInfoCategories.put(visibleCategory, new ArrayList<GPXInfo>());
+		gpxInfoCategories.put(defaultCategory, new ArrayList<GPXInfo>());
 
+		sortGPXInfoItems(gpxInfoList);
 		for (GPXInfo info : gpxInfoList) {
 			if (info.isSelected()) {
-				addGpxInfoCategory(gpxInfoCategories, info, visible);
+				addGpxInfoCategory(gpxInfoCategories, info, visibleCategory);
 			}
 			if (!Algorithms.isEmpty(info.getFileName())) {
 				File file = new File(info.getFileName());
@@ -120,7 +138,7 @@ public class TracksToFollowCard extends BaseCard {
 					addGpxInfoCategory(gpxInfoCategories, info, dirName);
 				}
 			}
-			addGpxInfoCategory(gpxInfoCategories, info, all);
+			addGpxInfoCategory(gpxInfoCategories, info, defaultCategory);
 		}
 
 		return gpxInfoCategories;
@@ -133,5 +151,26 @@ public class TracksToFollowCard extends BaseCard {
 			data.put(category, items);
 		}
 		items.add(info);
+	}
+
+	public void sortGPXInfoItems(List<GPXInfo> gpxInfoList) {
+		final Collator collator = OsmAndCollator.primaryCollator();
+		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
+			@Override
+			public int compare(GPXInfo i1, GPXInfo i2) {
+				if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
+					return collator.compare(i1.getFileName(), i2.getFileName());
+				} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
+					return -collator.compare(i1.getFileName(), i2.getFileName());
+				} else {
+					long time1 = i1.getLastModified();
+					long time2 = i2.getLastModified();
+					if (time1 == time2) {
+						return collator.compare(i1.getFileName(), i2.getFileName());
+					}
+					return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
+				}
+			}
+		});
 	}
 }

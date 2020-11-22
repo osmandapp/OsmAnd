@@ -75,7 +75,7 @@
     <string name="by_distance">По расстоянию</string>
     <string name="by_name">По имени</string>
     <string name="by_group">По группе</string>
-    <string name="shared_string_sort">Сортировать</string>
+    <string name="shared_string_sort">Сортировка</string>
     <string name="shared_string_sort_by">Сортировать по</string>
     <string name="turn_off_all">Отстановить все</string>
     <string name="shared_string_exit">Выход</string>
@@ -267,4 +267,8 @@
     <string name="last_update_from_telegram_duration">Последнее обновление от Telegram: %1$s назад</string>
     <string name="last_response_date">Последний ответ: %1$s</string>
     <string name="last_update_from_telegram_date">Последнее обновление от Telegram: %1$s</string>
+    <string name="shared_string_export">Экспорт</string>
+    <string name="logcat_buffer">Буфер Logcat</string>
+    <string name="logcat_buffer_descr">Проверьте и поделитесь подробными журналами приложения</string>
+    <string name="send_report">Отправить отчёт</string>
 </resources>

@@ -30,8 +30,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.helpers.ImportHelper;
-import net.osmand.plus.helpers.ImportHelper.OnGpxImportCompleteListener;
+import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -60,6 +60,8 @@ public class FavoritesActivity extends TabActivity {
 	private int tabSize;
 	private ImportHelper importHelper;
 
+	private ViewPager viewPager;
+
 	private Bundle intentParams = null;
 
 	@Override
@@ -80,7 +82,7 @@ public class FavoritesActivity extends TabActivity {
 		List<TabItem> mTabs = getTabItems();
 		setTabs(mTabs);
 
-		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+		viewPager = findViewById(R.id.pager);
 		if (savedInstanceState == null) {
 			Intent intent = getIntent();
 			if (intent != null && intent.hasExtra(MapActivity.INTENT_PARAMS)) {
@@ -93,7 +95,7 @@ public class FavoritesActivity extends TabActivity {
 						break;
 					}
 				}
-				mViewPager.setCurrentItem(pagerItem, false);
+				viewPager.setCurrentItem(pagerItem, false);
 			}
 		}
 	}
@@ -189,6 +191,17 @@ public class FavoritesActivity extends TabActivity {
 		mTabs.add(getTabIndicator(GPX_TAB, AvailableGPXFragment.class));
 		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		return mTabs;
+	}
+
+	public Bundle storeCurrentState() {
+		int currentItem = viewPager.getCurrentItem();
+		if (currentItem >= 0 && currentItem < fragList.size()) {
+			FavoritesFragmentStateHolder stateHolder = fragList.get(currentItem).get();
+			if (stateHolder != null) {
+				return stateHolder.storeState();
+			}
+		}
+		return null;
 	}
 
 	@Override

@@ -14,7 +14,8 @@ public class IndexConstants {
 	public static final String TEMP_SOURCE_TO_LOAD = "temp";
 	
 	public static final String POI_INDEX_EXT = ".poi.odb"; //$NON-NLS-1$
-	
+
+	public static final String ZIP_EXT = ".zip"; //$NON-NLS-1$
 	public static final String BINARY_MAP_INDEX_EXT = ".obf"; //$NON-NLS-1$
 	public static final String BINARY_MAP_INDEX_EXT_ZIP = ".obf.zip"; //$NON-NLS-1$
 	
@@ -45,6 +46,9 @@ public class IndexConstants {
 
 	public static final String GPX_FILE_EXT = ".gpx"; //$NON-NLS-1$
 
+	public static final String WPT_CHART_FILE_EXT = ".wpt.chart";
+	public static final String SQLITE_CHART_FILE_EXT = ".3d.chart";
+
 	public final static String POI_TABLE = "poi"; //$NON-NLS-1$
 	
 	public static final String INDEX_DOWNLOAD_DOMAIN = "download.osmand.net";
@@ -68,9 +72,11 @@ public class IndexConstants {
 	public static final String FONT_INDEX_DIR = "fonts/"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_DIR = "voice/"; //$NON-NLS-1$
 	public static final String RENDERERS_DIR = "rendering/"; //$NON-NLS-1$
-	public static final String ROUTING_XML_FILE= "routing.xml";
+	public static final String ROUTING_XML_FILE = "routing.xml";
 	public static final String SETTINGS_DIR = "settings/"; //$NON-NLS-1$
 	public static final String TEMP_DIR = "temp/";
 	public static final String ROUTING_PROFILES_DIR = "routing/";
 	public static final String PLUGINS_DIR = "plugins/";
+
+	public static final String VOICE_PROVIDER_SUFFIX = "-tts";
 }

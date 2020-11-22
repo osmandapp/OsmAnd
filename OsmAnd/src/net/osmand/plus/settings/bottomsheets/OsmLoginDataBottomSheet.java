@@ -3,23 +3,26 @@ package net.osmand.plus.settings.bottomsheets;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
+import com.google.android.material.textfield.TextInputLayout;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.osmedit.SettingsOsmEditingActivity;
-import net.osmand.plus.settings.fragments.OnPreferenceChanged;
+import net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask;
+import net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
@@ -39,7 +42,8 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 		}
 		OsmandApplication app = requiredMyApplication();
 
-		View view = UiUtilities.getInflater(context, nightMode).inflate(R.layout.osm_login_data, null);
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		View view = themedInflater.inflate(R.layout.osm_login_data, null);
 
 		userNameEditText = view.findViewById(R.id.name_edit_text);
 		passwordEditText = view.findViewById(R.id.password_edit_text);
@@ -54,6 +58,14 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		userNameEditText.setText(name);
 		passwordEditText.setText(password);
+
+		TextInputLayout loginBox = view.findViewById(R.id.name_text_box);
+		TextInputLayout passwordBox = view.findViewById(R.id.password_text_box);
+
+		passwordBox.setStartIconDrawable(R.drawable.ic_action_lock);
+		loginBox.setStartIconDrawable(R.drawable.ic_action_user_account);
+		loginBox.setEndIconMode(TextInputLayout.END_ICON_CLEAR_TEXT);
+		passwordBox.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
 
 		BaseBottomSheetItem titleItem = new SimpleBottomSheetItem.Builder()
 				.setCustomView(view)
@@ -75,7 +87,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	protected int getRightBottomButtonTextId() {
-		return R.string.shared_string_apply;
+		return R.string.user_login;
 	}
 
 	@Override
@@ -84,12 +96,11 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		app.getSettings().USER_NAME.set(userNameEditText.getText().toString());
 		app.getSettings().USER_PASSWORD.set(passwordEditText.getText().toString());
-		new SettingsOsmEditingActivity.ValidateOsmLoginDetailsTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-		Fragment target = getTargetFragment();
-		Preference preference = getPreference();
-		if (target instanceof OnPreferenceChanged && preference != null) {
-			((OnPreferenceChanged) target).onPreferenceChanged(preference.getKey());
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment instanceof ValidateOsmLoginListener) {
+			ValidateOsmLoginDetailsTask validateTask = new ValidateOsmLoginDetailsTask(app, (ValidateOsmLoginListener) targetFragment);
+			validateTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 
 		dismiss();

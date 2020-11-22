@@ -131,7 +131,7 @@
     <string name="send_my_location">Envia la meva ubicació</string>
     <string name="gps_and_location">Ubicació</string>
     <string name="sharing_time">Temps de compartició</string>
-    <string name="expire_at">"Expiració: "</string>
+    <string name="expire_at">Finalitza</string>
     <string name="open_osmand">Obre l\'OsmAnd</string>
     <string name="shared_string_live">En directe</string>
     <string name="shared_string_bot">Bot</string>
@@ -267,4 +267,8 @@
     <string name="last_response_duration">Darrera resposta: fa %1$s</string>
     <string name="duration_ago">fa %1$s</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="shared_string_export">Exporta</string>
+    <string name="logcat_buffer">Memòria intermèdia del Logcat</string>
+    <string name="logcat_buffer_descr">Valida i comparteix enregistraments detallats de l\'aplicació</string>
+    <string name="send_report">Envia un informe</string>
 </resources>

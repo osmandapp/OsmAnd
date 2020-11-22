@@ -267,4 +267,8 @@
     <string name="last_response_duration">Letzte Antwort: vor %1$s</string>
     <string name="duration_ago">vor %1$s</string>
     <string name="shared_string_error_short">ERR</string>
+    <string name="shared_string_export">Export</string>
+    <string name="logcat_buffer">Logcat-Puffer</string>
+    <string name="logcat_buffer_descr">Protokolle der Anwendung einsehen und freigeben</string>
+    <string name="send_report">Bericht senden</string>
 </resources>

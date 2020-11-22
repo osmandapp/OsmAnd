@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -24,11 +24,12 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -36,11 +37,13 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
-import net.osmand.plus.settings.fragments.ConfigureMenuRootFragment.ScreenType;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
-import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
-import net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.RearrangeMenuAdapterItem;
+import net.osmand.plus.settings.fragments.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.MenuItemsAdapterListener;
+import net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.RearrangeMenuAdapterItem;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import org.apache.commons.logging.Log;
 
@@ -51,6 +54,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
 import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
@@ -83,7 +88,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private boolean nightMode;
 	private boolean wasReset = false;
 	private boolean isChanged = false;
-	private Activity activity;
+	private FragmentActivity activity;
 	private RecyclerView recyclerView;
 
 	@Override
@@ -149,7 +154,13 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		nightMode = !app.getSettings().isLightContentForMode(appMode);
 		mInflater = UiUtilities.getInflater(app, nightMode);
 		mainActionItems = new ArrayList<>();
-		activity = getActivity();
+		activity = requireActivity();
+		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				exitFragment();
+			}
+		});
 	}
 
 	private void initSavedIds(ApplicationMode appMode) {
@@ -163,9 +174,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 	private void initMainActionsIds(ApplicationMode appMode) {
 		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
-		OsmandSettings.ContextMenuItemsSettings pref = getSettingForScreen(app, screenType).getModeValue(appMode);
-		if (pref instanceof OsmandSettings.MainContextMenuItemsSettings) {
-			mainActionItems = new ArrayList<>(((OsmandSettings.MainContextMenuItemsSettings) pref).getMainIds());
+		ContextMenuItemsSettings pref = getSettingForScreen(app, screenType).getModeValue(appMode);
+		if (pref instanceof MainContextMenuItemsSettings) {
+			mainActionItems = new ArrayList<>(((MainContextMenuItemsSettings) pref).getMainIds());
 			if (mainActionItems.isEmpty()) {
 				for (int i = 0; i < MAIN_BUTTONS_QUANTITY && i < defItems.size(); i++) {
 					mainActionItems.add(defItems.get(i).getId());
@@ -177,7 +188,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	public static List<ContextMenuItem> getCustomizableDefaultItems(List<ContextMenuItem> defItems) {
 		List<ContextMenuItem> items = new ArrayList<>();
 		for (ContextMenuItem item : defItems) {
-			if (!APP_PROFILES_ID.equals(item.getId())) {
+			if (!APP_PROFILES_ID.equals(item.getId())
+					&& !DRAWER_CONFIGURE_PROFILE_ID.equals(item.getId())
+					&& !DRAWER_SWITCH_PROFILE_ID.equals(item.getId())) {
 				items.add(item);
 			}
 		}
@@ -255,11 +268,11 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					}
 				}
 				FragmentManager fm = getFragmentManager();
-				final OsmandSettings.ContextMenuItemsSettings prefToSave;
+				final ContextMenuItemsSettings prefToSave;
 				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-					prefToSave = new OsmandSettings.MainContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
+					prefToSave = new MainContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
 				} else {
-					prefToSave = new OsmandSettings.ContextMenuItemsSettings(hiddenMenuItems, ids);
+					prefToSave = new ContextMenuItemsSettings(hiddenMenuItems, ids);
 				}
 				if (fm != null) {
 					ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
@@ -523,7 +536,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	public static OsmandSettings.ContextMenuItemsPreference getSettingForScreen(OsmandApplication app, ScreenType screenType) throws IllegalArgumentException {
+	public static ContextMenuItemsPreference getSettingForScreen(OsmandApplication app, ScreenType screenType) throws IllegalArgumentException {
 		switch (screenType) {
 			case DRAWER:
 				return app.getSettings().DRAWER_ITEMS;

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -22,7 +23,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
@@ -58,8 +59,8 @@ public class DownloadIndexesThread {
 	private ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<IndexItem>();
 	private IndexItem currentDownloadingItem = null;
 	private int currentDownloadingItemProgress = 0;
-
 	private DownloadResources indexes;
+	private static final int THREAD_ID = 10103;
 
 	public interface DownloadEvents {
 		
@@ -137,10 +138,10 @@ public class DownloadIndexesThread {
 			String setTts = null;
 			for (String s : OsmandSettings.TTS_AVAILABLE_VOICES) {
 				if (lng.startsWith(s)) {
-					setTts = s + "-tts";
+					setTts = s + IndexConstants.VOICE_PROVIDER_SUFFIX;
 					break;
 				} else if (lng.contains("," + s)) {
-					setTts = s + "-tts";
+					setTts = s + IndexConstants.VOICE_PROVIDER_SUFFIX;
 				}
 			}
 			if (setTts != null) {
@@ -336,6 +337,7 @@ public class DownloadIndexesThread {
 
 		@Override
 		protected DownloadResources doInBackground(Void... params) {
+			TrafficStats.setThreadStatsTag(THREAD_ID);
 			DownloadResources result = null;
 			DownloadOsmandIndexesHelper.IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
 			if (indexFileList != null) {
@@ -542,7 +544,7 @@ public class DownloadIndexesThread {
 			// validate enough space
 			if (asz != -1 && cs > asz) {
 				String breakDownloadMessage = app.getString(R.string.download_files_not_enough_space,
-						cs, asz);
+						String.valueOf(cs), String.valueOf(asz));
 				publishProgress(breakDownloadMessage);
 				return false;
 			}

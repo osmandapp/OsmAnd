@@ -28,6 +28,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorCompat;
 import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
@@ -42,6 +44,10 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -61,16 +67,15 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -133,6 +138,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private boolean forceShowCompass;
 	private LatLon requestedLatLon;
 	private long compassPressed;
+	private Set<String> themeInfoProviderTags = new HashSet<>();
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
@@ -432,7 +438,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		} else {
 			ActivityCompat.requestPermissions(mapActivity,
-					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
 					OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 		}
 	}
@@ -477,7 +483,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void navigateButton() {
 		if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			ActivityCompat.requestPermissions(mapActivity,
-					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
 					REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION);
 		} else {
 			final MapContextMenu menu = mapActivity.getContextMenu();
@@ -503,8 +509,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 				} else {
 					AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
 					bld.setTitle(R.string.new_directions_point_dialog);
-					final int[] defaultVls = new int[] {0};
-					bld.setSingleChoiceItems(new String[] {
+					final int[] defaultVls = new int[]{0};
+					bld.setSingleChoiceItems(new String[]{
 							mapActivity.getString(R.string.clear_intermediate_points),
 							mapActivity.getString(R.string.keep_intermediate_points)
 					}, 0, new DialogInterface.OnClickListener() {
@@ -836,7 +842,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void updateControls(@NonNull RotatedTileBox tileBox, DrawSettings drawSettings) {
-		boolean isNight = drawSettings != null && drawSettings.isNightMode();
+		boolean isNight = isNightModeForMapControls(drawSettings);
 		boolean portrait = isPotrait();
 //		int shadw = isNight ? mapActivity.getResources().getColor(R.color.widgettext_shadow_night) :
 //				mapActivity.getResources().getColor(R.color.widgettext_shadow_day);
@@ -870,6 +876,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		menuControl.updateVisibility(showBottomMenuButtons);
 
 		boolean showZoomButtons = !routeDialogOpened && !contextMenuOpened && !isInTrackAppearanceMode()
+				&& (!isInGpxApproximationMode() || !isPotrait())
 				&& !isInFollowTrackMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !portrait);
 		mapZoomIn.updateVisibility(showZoomButtons);
 		mapZoomOut.updateVisibility(showZoomButtons);
@@ -913,6 +920,25 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 			mc.update(mapActivity.getMyApplication(), isNight);
 		}
+	}
+
+	private boolean isNightModeForMapControls(DrawSettings drawSettings) {
+		MapControlsThemeInfoProvider themeInfoProvider = getThemeInfoProvider();
+		if (themeInfoProvider != null) {
+			return themeInfoProvider.isNightModeForMapControls();
+		}
+		return drawSettings != null && drawSettings.isNightMode();
+	}
+
+	private MapControlsThemeInfoProvider getThemeInfoProvider() {
+		FragmentManager fm = mapActivity.getSupportFragmentManager();
+		for (String tag : themeInfoProviderTags) {
+			Fragment f = fm.findFragmentByTag(tag);
+			if (f instanceof MapControlsThemeInfoProvider) {
+				return (MapControlsThemeInfoProvider) f;
+			}
+		}
+		return null;
 	}
 
 	public void updateCompass(boolean isNight) {
@@ -993,7 +1019,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void updateMyLocationVisibility(MapHudButton backToLocationControl, RoutingHelper rh, boolean dialogOpened) {
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		boolean visible = !(tracked && rh.isFollowingMode());
+		boolean visible = !(tracked && rh.isFollowingMode()) && (!isInGpxApproximationMode() || !isPotrait());
 		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInPlanRouteMode()
 				&& !isInTrackAppearanceMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !isInFollowTrackMode() || !isPotrait()));
 	}
@@ -1043,8 +1069,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
+	public void updateTransparencySlider () {
+		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
+		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
+			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
+				transparencySlider.setValue(settings.MAP_OVERLAY_TRANSPARENCY.get());
+			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
+				transparencySlider.setValue(settings.MAP_TRANSPARENCY.get());
+			}
+		}
+	}
+
 	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
-									boolean isTransparencyBarEnabled) {
+	                                boolean isTransparencyBarEnabled) {
 		this.isTransparencyBarEnabled = isTransparencyBarEnabled;
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		if (MapControlsLayer.transparencySetting != transparenPreference) {
@@ -1303,12 +1340,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return mapActivity.getMapLayers().getGpxLayer().isInTrackAppearanceMode();
 	}
 
+	private boolean isInGpxApproximationMode() {
+		return mapActivity.getMapLayers().getMeasurementToolLayer().isTapsDisabled();
+	}
+
 	private boolean isInChoosingRoutesMode() {
 		return MapRouteInfoMenu.chooseRoutesVisible;
 	}
 
 	private boolean isInWaypointsChoosingMode() {
-		return  MapRouteInfoMenu.waypointsVisible;
+		return MapRouteInfoMenu.waypointsVisible;
 	}
 
 	private boolean isInFollowTrackMode() {
@@ -1320,7 +1361,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 			@Override
 			public boolean onLongClick(View notUseCouldBeNull) {
-				final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
+				final OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				int p = (int) (mapDensity.get() * 100);
 				final TIntArrayList tlist = new TIntArrayList(new int[]{25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
@@ -1413,5 +1454,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 		}
+	}
+
+	public void addThemeInfoProviderTag(String tag) {
+		themeInfoProviderTags.add(tag);
+	}
+
+	public void removeThemeInfoProviderTag(String tag) {
+		themeInfoProviderTags.remove(tag);
+	}
+
+	public interface MapControlsThemeInfoProvider {
+		boolean isNightModeForMapControls();
 	}
 }

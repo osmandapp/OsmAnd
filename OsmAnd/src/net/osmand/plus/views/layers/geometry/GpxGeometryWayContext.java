@@ -15,6 +15,6 @@ public class GpxGeometryWayContext extends GeometryWayContext {
 
 	@Override
 	protected int getArrowBitmapResId() {
-		return R.drawable.mm_special_arrow_up;
+		return R.drawable.ic_action_direction_arrow;
 	}
 }

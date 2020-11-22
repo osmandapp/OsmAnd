@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/bottom_sheet_content_margin"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="16dp"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:text="@string/send_files_to_openstreetmap"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_medium" />
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/message_label"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/bottom_sheet_content_margin"
+			android:hint="@string/shared_string_description"
+			app:boxBackgroundColor="?attr/text_input_background"
+			app:boxStrokeColor="@color/osmand_orange"
+			app:hintTextColor="@color/text_color_secondary_light">
+
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/message_field"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:imeOptions="actionDone" />
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/tags_label"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/bottom_sheet_content_margin"
+			android:hint="@string/gpx_tags_txt"
+			app:boxBackgroundColor="?attr/text_input_background"
+			app:boxStrokeColor="@color/osmand_orange"
+			app:helperText="@string/enter_text_separated"
+			app:helperTextEnabled="true"
+			app:hintTextColor="@color/text_color_secondary_light">
+
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/tags_field"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/subHeaderPadding"
+				android:imeOptions="actionDone"
+				android:text="osmand" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:letterSpacing="@dimen/description_letter_spacing"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingTop="@dimen/context_menu_first_line_top_margin"
+			android:paddingRight="@dimen/content_padding"
+			android:paddingBottom="@dimen/context_menu_first_line_top_margin"
+			android:text="@string/gpx_visibility_txt"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_regular" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/visibility_name"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="end"
+			android:letterSpacing="@dimen/description_letter_spacing"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingTop="@dimen/context_menu_first_line_top_margin"
+			android:paddingRight="@dimen/content_padding"
+			android:paddingBottom="@dimen/context_menu_first_line_top_margin"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_desc_text_size"
+			osmand:typeface="@string/font_roboto_medium"
+			tools:text="@string/gpx_visibility_txt" />
+
+	</LinearLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/description_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:clipToPadding="false"
+		android:orientation="horizontal"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		tools:itemCount="4"
+		tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/point_editor_icon_category_item"
+		tools:orientation="horizontal" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/visibility_description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:letterSpacing="@dimen/description_letter_spacing"
+		android:lineSpacingExtra="@dimen/map_widget_text_small_bottom_margin"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/context_menu_first_line_top_margin"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/context_menu_first_line_top_margin"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_desc_text_size"
+		osmand:typeface="@string/font_roboto_regular" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginBottom="@dimen/bottom_sheet_content_margin_small"
+		android:background="?attr/dashboard_divider" />
+
+	<include layout="@layout/account_details" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_small" />
+
+</LinearLayout>

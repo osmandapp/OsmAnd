@@ -14,7 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.Type;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 
 
 import java.util.ArrayList;
@@ -25,15 +25,15 @@ import java.util.Map;
 
 public class ImportedSettingsItemsAdapter extends
 		RecyclerView.Adapter<ImportedSettingsItemsAdapter.ItemViewHolder> {
-	private Map<Type, List<?>> itemsMap;
-	private List<Type> itemsTypes;
+	private Map<ExportSettingsType, List<?>> itemsMap;
+	private List<ExportSettingsType> itemsTypes;
 	private UiUtilities uiUtils;
 	private OsmandApplication app;
 	private boolean nightMode;
 	private OnItemClickListener listener;
 
-	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<Type, List<?>> itemsMap,
-								 boolean nightMode, OnItemClickListener listener) {
+	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<ExportSettingsType, List<?>> itemsMap,
+	                             boolean nightMode, OnItemClickListener listener) {
 		this.app = app;
 		this.itemsMap = itemsMap;
 		this.nightMode = nightMode;
@@ -53,7 +53,7 @@ public class ImportedSettingsItemsAdapter extends
 
 	@Override
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-		final Type currentItemType = itemsTypes.get(position);
+		final ExportSettingsType currentItemType = itemsTypes.get(position);
 		boolean isLastItem = itemsTypes.size() - 1 == position;
 		int activeColorRes = nightMode
 				? R.color.active_color_primary_dark
@@ -106,6 +106,54 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_alert, activeColorRes));
 				holder.title.setText(R.string.avoid_road);
 				break;
+			case MULTIMEDIA_NOTES:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_photo_dark, activeColorRes));
+				holder.title.setText(R.string.audionotes_plugin_name);
+				break;
+			case TRACKS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+				holder.title.setText(R.string.shared_string_tracks);
+				break;
+			case OSM_NOTES:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_osm_note_add, activeColorRes));
+				holder.title.setText(R.string.osm_notes);
+				break;
+			case OSM_EDITS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_info_dark, activeColorRes));
+				holder.title.setText(R.string.osm_edits);
+				break;
+			case FAVORITES:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_favorite, activeColorRes));
+				holder.title.setText(R.string.shared_string_favorites);
+				break;
+			case OFFLINE_MAPS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_map, activeColorRes));
+				holder.title.setText(R.string.shared_string_maps);
+				break;
+			case TTS_VOICE:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_volume_up, activeColorRes));
+				holder.title.setText(R.string.local_indexes_cat_tts);
+				break;
+			case VOICE:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_volume_up, activeColorRes));
+				holder.title.setText(R.string.local_indexes_cat_voice);
+				break;
+			case GLOBAL:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_settings, activeColorRes));
+				holder.title.setText(R.string.general_settings_2);
+				break;
+			case ACTIVE_MARKERS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_flag, activeColorRes));
+				holder.title.setText(R.string.map_markers);
+				break;
+			case HISTORY_MARKERS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_flag, activeColorRes));
+				holder.title.setText(R.string.markers_history);
+				break;
+			case SEARCH_HISTORY:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_history, activeColorRes));
+				holder.title.setText(R.string.shared_string_search_history);
+				break;
 		}
 	}
 
@@ -130,6 +178,6 @@ public class ImportedSettingsItemsAdapter extends
 	}
 
 	interface OnItemClickListener {
-		void onItemClick(Type type);
+		void onItemClick(ExportSettingsType type);
 	}
 }

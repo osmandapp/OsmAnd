@@ -28,8 +28,8 @@ public class JSTTSCommandPlayerImpl extends TTSCommandPlayerImpl {
         jsScope = context.initSafeStandardObjects();
         try {
             BufferedReader br = new BufferedReader(new FileReader(new File(
-                    app.getAppPath(IndexConstants.VOICE_INDEX_DIR).getAbsolutePath() +
-                            "/" + voiceProvider + "/" + voiceProvider.replace("-tts", "_tts") + ".js")));
+                    app.getAppPath(IndexConstants.VOICE_INDEX_DIR).getAbsolutePath() + "/" + voiceProvider + "/"
+                            + voiceProvider.replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "_tts") + ".js")));
             context.evaluateReader(jsScope, br, "JS", 1, null);
             br.close();
         } catch (Exception e) {

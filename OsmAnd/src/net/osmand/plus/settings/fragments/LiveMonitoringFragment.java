@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
@@ -12,11 +13,12 @@ import androidx.preference.Preference;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MAX_INTERVAL_TO_SEND_MINUTES;
@@ -58,6 +60,19 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 	protected void updateToolbar() {
 		super.updateToolbar();
 		updateToolbarSwitch();
+	}
+
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		if (preference.getKey().equals(settings.LIVE_MONITORING_URL.getId())) {
+			if (Algorithms.isValidMessageFormat((String) newValue)) {
+				return super.onPreferenceChange(preference, newValue);
+			} else {
+				Toast.makeText(app, R.string.wrong_format, Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		}
+		return super.onPreferenceChange(preference, newValue);
 	}
 
 	private void updateToolbarSwitch() {

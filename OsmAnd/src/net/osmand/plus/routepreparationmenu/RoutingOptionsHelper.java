@@ -16,23 +16,23 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -42,7 +42,6 @@ import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
 import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
@@ -54,7 +53,6 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -192,7 +190,7 @@ public class RoutingOptionsHelper {
 	public void applyVoiceProvider(MapActivity mapActivity, String provider, boolean applyAllModes) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
-		OsmandSettings.OsmandPreference<String> VP = app.getSettings().VOICE_PROVIDER;
+		OsmandPreference<String> VP = app.getSettings().VOICE_PROVIDER;
 		if (applyAllModes) {
 			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 				VP.setModeValue(mode, provider);
@@ -663,12 +661,12 @@ public class RoutingOptionsHelper {
 		}
 
 		public String getText(MapActivity mapActivity) {
-			return SettingsBaseActivity.getRoutingStringPropertyName(mapActivity, routingParameter.getId(),
+			return AndroidUtils.getRoutingStringPropertyName(mapActivity, routingParameter.getId(),
 					routingParameter.getName());
 		}
 
 		public boolean isSelected(OsmandSettings settings) {
-			final OsmandSettings.CommonPreference<Boolean> property =
+			final CommonPreference<Boolean> property =
 					settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 			if (am != null) {
 				return property.getModeValue(am);
@@ -678,7 +676,7 @@ public class RoutingOptionsHelper {
 		}
 
 		public void setSelected(OsmandSettings settings, boolean isChecked) {
-			final OsmandSettings.CommonPreference<Boolean> property =
+			final CommonPreference<Boolean> property =
 					settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 			if (am != null) {
 				property.setModeValue(am, isChecked);
@@ -727,7 +725,7 @@ public class RoutingOptionsHelper {
 
 		@Override
 		public String getText(MapActivity mapActivity) {
-			return SettingsBaseActivity.getRoutingStringPropertyName(mapActivity, groupName,
+			return AndroidUtils.getRoutingStringPropertyName(mapActivity, groupName,
 					Algorithms.capitalizeFirstLetterAndLowercase(groupName.replace('_', ' ')));
 		}
 

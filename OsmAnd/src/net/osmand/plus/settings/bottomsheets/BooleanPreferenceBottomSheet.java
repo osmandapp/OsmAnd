@@ -16,9 +16,8 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.BooleanPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.BooleanPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -57,7 +56,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		String title = switchPreference.getTitle().toString();
 		items.add(new TitleItem(title));
 
-		final OsmandSettings.BooleanPreference pref = (BooleanPreference) preference;
+		final BooleanPreference pref = (BooleanPreference) preference;
 		CharSequence summaryOn = switchPreference.getSummaryOn();
 		CharSequence summaryOff = switchPreference.getSummaryOff();
 		final String on = summaryOn == null || summaryOn.toString().equals("")

@@ -5,12 +5,15 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
 
 import java.util.Map;
+
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class EditPOIMenuBuilder extends MenuBuilder {
 
@@ -38,7 +41,7 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 			OpenstreetmapPoint point = (OpenstreetmapPoint) osmPoint;
 
 			for (Map.Entry<String, String> e : point.getEntity().getTags().entrySet()) {
-				if (EditPoiData.POI_TYPE_TAG.equals(e.getKey())) {
+				if (POI_TYPE_TAG.equals(e.getKey())) {
 					String poiTranslation = e.getValue();
 					Map<String, PoiType> poiTypeMap = app.getPoiTypes().getAllTranslatedNames(false);
 					PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
@@ -63,8 +66,8 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 			}
 
 			for (Map.Entry<String, String> e : point.getEntity().getTags().entrySet()) {
-				if (EditPoiData.POI_TYPE_TAG.equals(e.getKey()) || 
-						e.getKey().startsWith(EditPoiData.REMOVE_TAG_PREFIX)) {
+				if (POI_TYPE_TAG.equals(e.getKey()) ||
+						e.getKey().startsWith(Entity.REMOVE_TAG_PREFIX)) {
 					continue;
 				}
 				String text = e.getKey() + "=" + e.getValue();

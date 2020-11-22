@@ -968,7 +968,7 @@
     <string name="poi_recycling_waste">Poubelle (sacs noirs)</string>
     <string name="poi_recycling_cardboard">Carton</string>
     <string name="poi_recycling_magazines">Magazines</string>
-    <string name="poi_recycling_small_appliances">Petits appareils électriques</string>
+    <string name="poi_recycling_small_appliances">Petits appareils</string>
     <string name="poi_recycling_foil">Papier aluminium</string>
     <string name="poi_recycling_hardcore">Blocaille</string>
     <string name="poi_recycling_light_bulbs">Ampoules électriques</string>
@@ -1050,7 +1050,7 @@
     <string name="poi_nudism_no">Interdit</string>
     <string name="poi_nudism_obligatory">Obligatoire</string>
     <string name="poi_population">Population</string>
-    <string name="poi_parking_underground">Parking : sous-terrain</string>
+    <string name="poi_parking_underground">Parking : souterrain</string>
     <string name="poi_trees_olive">Olivier</string>
     <string name="poi_trees_apple">Pommier</string>
     <string name="poi_trees_oil">Palmier</string>
@@ -1762,7 +1762,7 @@
     <string name="poi_trade_plumbing">Fournitures de plomberie</string>
     <string name="poi_trade_wood">Fournitures de bois</string>
     <string name="poi_bicycle_parking_anchors">Ancres pour vélo</string>
-    <string name="poi_bicycle_parking_stands">Râtelier pour vélo</string>
+    <string name="poi_bicycle_parking_stands">Arceaux pour vélo</string>
     <string name="poi_information_terminal">Terminal d\'informations</string>
     <string name="poi_information_tactile_map">Carte tactile</string>
     <string name="poi_board_type_notice">Tableau d\'affichage</string>
@@ -1975,7 +1975,7 @@
     <string name="poi_ferry_terminal_cargo">Cargo</string>
     <string name="poi_telescope_type">Type</string>
     <string name="poi_animal_training_type">Type</string>
-    <string name="poi_embassy_type">Type</string>
+    <string name="poi_diplomatic_filter">Type</string>
     <string name="poi_city_capital">Capitale</string>
     <string name="poi_healthcare_alternative_types">Spécialité</string>
     <string name="poi_free_flying_characteristics">Caractéristiques</string>
@@ -3380,7 +3380,7 @@
     <string name="poi_zoo_wildlife_park">Parc animalier</string>
     <string name="poi_zoo_enclosure">Enceinte</string>
     <string name="poi_zoo_safari_park">Parc safari</string>
-    <string name="poi_stands">Râtelier pour vélo</string>
+    <string name="poi_stands">Arceaux pour vélo</string>
     <string name="poi_motorcycle_type_sportbike">Vélo de sport</string>
     <string name="poi_motorcycle_type_chopper">Hachoir</string>
     <string name="poi_motorcycle_type_offroad">Hors route</string>
@@ -3814,7 +3814,7 @@
     <string name="poi_seamark_water_level_above_mwl">Niveau d\'eau : au-dessus du niveau d\'eau moyen</string>
     <string name="poi_seamark_water_level_below_mwl">Niveau d\'eau : en-dessous du niveau d\'eau moyen</string>
     <string name="poi_seamark_obstruction">Obstacle</string>
-    <string name="poi_drinking_water_refill_yes">Remplissage d\'eau potable : oui</string>
+    <string name="poi_drinking_water_refill_yes">Oui</string>
     <string name="poi_drinking_water_refill_no">Remplissage d\'eau potable : non</string>
     <string name="poi_drinking_water_refill_network">Réseau de remplissage d\'eau potable</string>
     <string name="poi_traffic_signals_sound_locate">Uniquement si la marche est autorisée</string>
@@ -3834,4 +3834,14 @@
     <string name="poi_borough">Arrondissement</string>
     <string name="poi_traffic_signals_arrow_no">Flèche : non</string>
     <string name="poi_pump_status_missing_beam">État de la pompe : faisceau manquant</string>
+    <string name="poi_departures_board_delay">Délai</string>
+    <string name="poi_fuel_lng">GNL</string>
+    <string name="poi_beehive">Ruche</string>
+    <string name="poi_departures_board_timetable">Tableau horaire</string>
+    <string name="poi_departures_board_realtime">Temps réel</string>
+    <string name="poi_recycling_small_electrical_appliances">Petits appareils électriques</string>
+    <string name="poi_departures_board_yes">Oui</string>
+    <string name="poi_departures_board_no">Tableau des départs : non</string>
+    <string name="poi_elevator">Ascenseur</string>
+    <string name="poi_departures_board">Tableau des départs</string>
 </resources>

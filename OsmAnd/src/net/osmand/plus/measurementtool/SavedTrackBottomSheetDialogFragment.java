@@ -1,21 +1,26 @@
 package net.osmand.plus.measurementtool;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
+import net.osmand.util.Algorithms;
 
 public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -34,7 +39,7 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		View mainView = View.inflate(UiUtilities.getThemedContext(getMyApplication(), nightMode),
 				R.layout.measure_track_is_saved, null);
 		TextView fileNameView = mainView.findViewById(R.id.file_name);
-		fileNameView.setText(fileName);
+		fileNameView.setText(Algorithms.getFileWithoutDirs(fileName));
 		items.add(new SimpleBottomSheetItem.Builder()
 				.setCustomView(mainView)
 				.create());
@@ -51,10 +56,13 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Activity activity = getActivity();
-						if (activity instanceof MapActivity) {
-							MeasurementToolFragment.showInstance(((MapActivity) activity).getSupportFragmentManager(),
-									fileName);
+						FragmentActivity activity = getActivity();
+						if (activity != null && !Algorithms.isEmpty(fileName)) {
+							OsmandApplication app = ((OsmandApplication) activity.getApplication());
+							Intent newIntent = new Intent(activity, app.getAppCustomization().getTrackActivity());
+							newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, fileName);
+							newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							activity.startActivity(newIntent);
 						}
 						dismiss();
 					}

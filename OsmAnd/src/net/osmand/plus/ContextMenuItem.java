@@ -34,6 +34,7 @@ public class ContextMenuItem {
 	private boolean hidden;
 	private int order;
 	private String description;
+	private final OnUpdateCallback onUpdateCallback;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
 	private final ContextMenuAdapter.ProgressListener progressListener;
@@ -58,6 +59,7 @@ public class ContextMenuItem {
 							boolean skipPaintingWithoutColor,
 							int order,
 							String description,
+							OnUpdateCallback onUpdateCallback,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener,
 							ContextMenuAdapter.ProgressListener progressListener,
@@ -81,6 +83,7 @@ public class ContextMenuItem {
 		this.skipPaintingWithoutColor = skipPaintingWithoutColor;
 		this.order = order;
 		this.description = description;
+		this.onUpdateCallback = onUpdateCallback;
 		this.itemClickListener = itemClickListener;
 		this.integerListener = integerListener;
 		this.progressListener = progressListener;
@@ -245,6 +248,16 @@ public class ContextMenuItem {
 		return id;
 	}
 
+	public void update() {
+		if (onUpdateCallback != null) {
+			onUpdateCallback.onUpdateMenuItem(this);
+		}
+	}
+
+	public interface OnUpdateCallback {
+		void onUpdateMenuItem(ContextMenuItem item);
+	}
+
 	public static ItemBuilder createBuilder(String title) {
 		return new ItemBuilder().setTitle(title);
 	}
@@ -268,6 +281,7 @@ public class ContextMenuItem {
 		private boolean mIsClickable = true;
 		private int mOrder = 0;
 		private String mDescription = null;
+		private OnUpdateCallback mOnUpdateCallback = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
 		private ContextMenuAdapter.ProgressListener mProgressListener = null;
@@ -348,6 +362,11 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public ItemBuilder setOnUpdateCallback(OnUpdateCallback onUpdateCallback) {
+			mOnUpdateCallback = onUpdateCallback;
+			return this;
+		}
+
 		public ItemBuilder setListener(ContextMenuAdapter.ItemClickListener checkBoxListener) {
 			mItemClickListener = checkBoxListener;
 			return this;
@@ -403,10 +422,12 @@ public class ContextMenuItem {
 		}
 
 		public ContextMenuItem createItem() {
-			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
+			ContextMenuItem item = new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
-					mOrder, mDescription, mItemClickListener, mIntegerListener, mProgressListener, mItemDeleteAction,
-					mHideDivider, mHideCompoundButton, mMinHeight, mTag, mId);
+					mOrder, mDescription, mOnUpdateCallback, mItemClickListener, mIntegerListener, mProgressListener,
+					mItemDeleteAction, mHideDivider, mHideCompoundButton, mMinHeight, mTag, mId);
+			item.update();
+			return item;
 		}
 	}
 }

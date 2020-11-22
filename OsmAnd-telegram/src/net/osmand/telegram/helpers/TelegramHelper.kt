@@ -776,6 +776,7 @@ class TelegramHelper private constructor() {
 		client?.send(TdApi.CreatePrivateChat(userId, false)) { obj ->
 			when (obj.constructor) {
 				TdApi.Error.CONSTRUCTOR -> {
+					log.debug("createPrivateChatWithUser ERROR $obj")
 					val error = obj as TdApi.Error
 					if (error.code != IGNORED_ERROR_CODE) {
 						shareInfo.hasSharingError = true
@@ -839,7 +840,7 @@ class TelegramHelper private constructor() {
 	}
 
 	fun stopSendingLiveLocationToChat(shareInfo: ShareChatInfo) {
-		if (shareInfo.currentMapMessageId != -1L && shareInfo.chatId != -1L) {
+		if (!shareInfo.isMapMessageIdPresent() && shareInfo.chatId != -1L) {
 			shareInfo.lastSendMapMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			client?.send(
 				TdApi.EditMessageLiveLocation(shareInfo.chatId, shareInfo.currentMapMessageId, null, null)) { obj ->
@@ -969,7 +970,7 @@ class TelegramHelper private constructor() {
 		val messageType = if (isBot) MESSAGE_TYPE_BOT else MESSAGE_TYPE_TEXT
 		when (obj.constructor) {
 			TdApi.Error.CONSTRUCTOR -> {
-				log.debug("handleTextLocationMessageUpdate - ERROR")
+				log.debug("handleTextLocationMessageUpdate - ERROR $obj")
 				val error = obj as TdApi.Error
 				if (error.code != IGNORED_ERROR_CODE) {
 					shareInfo.hasSharingError = true

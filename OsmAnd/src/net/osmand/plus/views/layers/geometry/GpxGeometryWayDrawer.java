@@ -1,18 +1,15 @@
 package net.osmand.plus.views.layers.geometry;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.PathPoint;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay.GeometryArrowsStyle;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GpxGeometryWayDrawer extends GeometryWayDrawer<GpxGeometryWayContext> {
-
-	private static final float DIRECTION_ARROW_CIRCLE_MULTIPLIER = 1.5f;
 
 	public GpxGeometryWayDrawer(GpxGeometryWayContext context) {
 		super(context);
@@ -33,16 +30,23 @@ public class GpxGeometryWayDrawer extends GeometryWayDrawer<GpxGeometryWayContex
 		void draw(Canvas canvas, GeometryWayContext context) {
 			if (style instanceof GeometryArrowsStyle) {
 				GeometryArrowsStyle arrowsWayStyle = (GeometryArrowsStyle) style;
+				Bitmap bitmap = style.getPointBitmap();
 
-				float arrowWidth = style.getPointBitmap().getWidth();
-				if (arrowWidth > arrowsWayStyle.getTrackWidth()) {
-					Paint paint = context.getPaintIcon();
-					paint.setColor(arrowsWayStyle.getTrackColor());
-					paint.setStrokeWidth(arrowWidth * DIRECTION_ARROW_CIRCLE_MULTIPLIER);
-					canvas.drawPoint(x, y, paint);
-				}
+				float newWidth = arrowsWayStyle.getTrackWidth() / 2f;
+				float paintH2 = bitmap.getHeight() / 2f;
+				float paintW2 = newWidth / 2f;
+
+				Matrix matrix = getMatrix();
+				matrix.reset();
+				matrix.postScale(newWidth / bitmap.getWidth(), 1);
+				matrix.postRotate((float) angle, paintW2, paintH2);
+				matrix.postTranslate(x - paintW2, y - paintH2);
+
+				Paint paint = context.getPaintIconCustom();
+				Integer pointColor = style.getPointColor();
+				paint.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.SRC_IN));
+				canvas.drawBitmap(bitmap, matrix, paint);
 			}
-			super.draw(canvas, context);
 		}
 	}
 }

@@ -44,11 +44,11 @@ android {
 
 	defaultConfig {
 		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 15
-		targetSdkVersion 28
-		versionCode 370
+		targetSdkVersion 29
+		versionCode 390
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		multiDexEnabled true
-		versionName "3.7.0"
+		versionName "3.9.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 		// Stops the Gradle plugin’s automatic rasterization of vectors
@@ -107,19 +107,19 @@ android {
 		debug {
 			manifest.srcFile "AndroidManifest-debug.xml"
 		}
+		full {
+			java.srcDirs = ["src-google"]
+		}
 		free {
+			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-free.xml"
 		}
 		freedev {
+			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-freedev.xml"
 		}
-		freecustom {
-			manifest.srcFile "AndroidManifest-freecustom.xml"
-		}
-		huawei {
-			manifest.srcFile "AndroidManifest-huawei.xml"
-		}
 		freehuawei {
+			java.srcDirs = ["src-huawei"]
 			manifest.srcFile "AndroidManifest-freehuawei.xml"
 		}
 
@@ -172,43 +172,24 @@ android {
 			dimension "version"
 			applicationId "net.osmand"
 		}
-		freeres {
-			dimension "version"
-			applicationId "net.osmand"
-			resConfig "en"
-		}
-		freecustom {
-			dimension "version"
-			applicationId "net.osmand.freecustom"
-		}
 		full {
 			dimension "version"
 			applicationId "net.osmand.plus"
-		}
-        fulldev {
-            dimension "version"
-            applicationId "net.osmand.plus"
-            resConfig "en"
-            //resConfigs "xxhdpi", "nodpi"
-        }
-		huawei {
-			dimension "version"
-			applicationId "net.osmand.plus.huawei"
 		}
 		freehuawei {
 			dimension "version"
 			applicationId "net.osmand.huawei"
 		}
-
 		// CoreVersion
+        // Build that doesn't include 3D OpenGL
 		legacy {
 			dimension "coreversion"
 		}
-
+        // Build that includes 3D OpenGL release
 		qtcore {
 			dimension "coreversion"
 		}
-
+        // Build that includes 3D OpenGL debug
 		qtcoredebug {
 			dimension "coreversion"
 		}
@@ -216,9 +197,11 @@ android {
 
 	buildTypes {
 		debug {
+			buildConfigField "String", "OPR_BASE_URL", "\"https://test.openplacereviews.org/\""
 			signingConfig signingConfigs.development
 		}
 		release {
+			buildConfigField "String", "OPR_BASE_URL", "\"https://test.openplacereviews.org/\""
 			signingConfig signingConfigs.publishing
 		}
 	}
@@ -276,46 +259,6 @@ task downloadWorldMiniBasemap {
 	}
 }
 
-task downloadHuaweiDrmZip {
-	doLast {
-		ant.get(src: 'https://obs.cn-north-2.myhwclouds.com/hms-ds-wf/sdk/HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'HwDRM_SDK_2.5.2.300_ADT.zip', skipexisting: 'true')
-		ant.unzip(src: 'HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'huaweidrmlib/')
-	}
-}
-
-task copyHuaweiDrmLibs(type: Copy) {
-	dependsOn downloadHuaweiDrmZip
-	from "huaweidrmlib/HwDRM_SDK_2.5.2.300_ADT/libs"
-	into "libs"
-}
-
-task copyHuaweiDrmValues(type: Copy) {
-	dependsOn downloadHuaweiDrmZip
-	from "huaweidrmlib/HwDRM_SDK_2.5.2.300_ADT/res"
-	into "res"
-}
-
-task downloadPrebuiltHuaweiDrm {
-	dependsOn copyHuaweiDrmLibs, copyHuaweiDrmValues
-}
-
-task cleanHuaweiDrmLibs(type: Delete) {
-	delete "huaweidrmlib"
-	delete fileTree("libs").matching {
-		include "**/huawei-*.jar"
-	}
-}
-
-task cleanHuaweiDrmValues(type: Delete) {
-	delete fileTree("res").matching {
-		include "**/drm_strings.xml"
-	}
-}
-
-task cleanPrebuiltHuaweiDrm {
-	dependsOn cleanHuaweiDrmLibs, cleanHuaweiDrmValues
-}
-
 task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -351,6 +294,9 @@ task collectHelpContentsAssets(type: Copy) {
 	}
 	from("../../help/website/feature_articles") {
 		include "*.html"
+	}
+	from("../../help/website/blog_articles") {
+		include "osmand-3-8-released.html"
 	}
 	into "assets/feature_articles"
 }
@@ -397,8 +343,6 @@ task copyLargePOIIcons(type: Sync) {
 	}
 }
 
-
-
 task copyWidgetIconsXhdpi(type: Sync) {
 	from "res/drawable-xxhdpi/"
 	into "res/drawable-large-xhdpi/"
@@ -444,15 +388,6 @@ task collectExternalResources {
 			copyWidgetIconsXhdpi,
 			copyPoiCategories,
 			downloadWorldMiniBasemap
-
-	Gradle gradle = getGradle()
-	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
-	// Use Drm SDK only for huawei build
-	if (tskReqStr.contains("huawei")) {
-		dependsOn downloadPrebuiltHuaweiDrm
-	} else {
-		dependsOn cleanPrebuiltHuaweiDrm
-	}
 }
 
 // Legacy core build
@@ -503,9 +438,15 @@ task cleanupDuplicatesInCore() {
 		file("libs/x86_64/libc++_shared.so").renameTo(file("libc++/x86_64/libc++_shared.so"))
 	}
 }
+
 afterEvaluate {
 	android.applicationVariants.all { variant ->
 		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+	}
+	Gradle gradle = getGradle()
+	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
+	if (tskReqStr.contains("huawei")) {
+		apply plugin: 'com.huawei.agconnect'
 	}
 }
 
@@ -516,15 +457,14 @@ task appStart(type: Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
 }
 
-
 dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
 	implementation project(':OsmAnd-api')
 	implementation 'androidx.multidex:multidex:2.0.1'
 	implementation 'androidx.gridlayout:gridlayout:1.0.0'
 	implementation 'androidx.cardview:cardview:1.0.0'
-	implementation 'androidx.appcompat:appcompat:1.1.0'
-	implementation 'com.google.android.material:material:1.2.0-beta01'
+	implementation 'androidx.appcompat:appcompat:1.2.0'
+	implementation 'com.google.android.material:material:1.2.1'
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.1.0'
 	implementation fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
@@ -563,8 +503,10 @@ dependencies {
 	implementation ("com.github.HITGIF:TextFieldBoxes:1.4.5"){
 		exclude group: 'com.android.support'
 	}
+	implementation('com.github.scribejava:scribejava-apis:7.1.1'){
+		exclude group: "com.fasterxml.jackson.core"
+	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
 
-	huaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
-	freehuaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
+	freehuaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
 }

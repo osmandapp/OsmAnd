@@ -1,16 +1,19 @@
 package net.osmand.plus.osmedit;
 
 
+import com.github.scribejava.core.model.Response;
+
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
-
 import org.apache.commons.logging.Log;
 
 import java.io.FileNotFoundException;
@@ -19,6 +22,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutionException;
 
 public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
@@ -26,26 +31,12 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	private static final String GET = "GET";
 	private static final String POST = "POST";
 
-	static String getNotesApi() {
-		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-		String RETURN_API;
-		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
-			RETURN_API = "https://api.openstreetmap.org/api/0.6/notes";
-		} else {
-			RETURN_API = "http://api.openstreetmap.org/api/0.6/notes";
-		}
-		return RETURN_API;
+	String getNotesApi() {
+		return settings.getOsmUrl() + "api/0.6/notes";
 	}
 
-	static String getUserDetailsApi() {
-		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-		String RETURN_API;
-		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
-			RETURN_API = "https://api.openstreetmap.org/api/0.6/user/details";
-		} else {
-			RETURN_API = "http://api.openstreetmap.org/api/0.6/user/details";
-		}
-		return RETURN_API;
+	String getUserDetailsApi() {
+		return settings.getOsmUrl() + "api/0.6/user/details";
 	}
 
 	private OsmandApplication app;
@@ -107,52 +98,82 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		return editingPOI(getUserDetailsApi(), GET, "validate_login", false);
 	}
 
-	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation,
-									boolean anonymous) {
-		OsmBugResult r = new OsmBugResult();
-		try {
-			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-			log.info("Editing poi " + url);
-			connection.setConnectTimeout(15000);
-			connection.setRequestMethod(requestMethod);
-			connection.setRequestProperty("User-Agent", Version.getFullVersion(app)); //$NON-NLS-1$
-
-			if (!anonymous) {
-				String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
-				connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation, boolean anonymous) {
+		OsmOAuthAuthorizationAdapter authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
+		OsmBugResult result = new OsmBugResult();
+		if (authorizationAdapter.isValidToken() && !anonymous) {
+			try {
+				result = performOAuthRequest(url, requestMethod, userOperation, authorizationAdapter);
+			} catch (InterruptedException e) {
+				log.error(e);
+				result.warning = e.getMessage();
+			} catch (ExecutionException e) {
+				log.error(e);
+				result.warning = e.getMessage();
+			} catch (IOException e) {
+				log.error(e);
+				result.warning = e.getMessage();
 			}
-
-			connection.setDoInput(true);
-			connection.connect();
-			String msg = connection.getResponseMessage();
-			boolean ok = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
-			log.info(msg); //$NON-NLS-1$
-			// populate return fields.
-
-			StringBuilder responseBody;
-			if (connection.getResponseCode() == HttpURLConnection.HTTP_CONFLICT) {
-				responseBody = Algorithms.readFromInputStream(connection.getErrorStream());
-			} else {
-				responseBody = Algorithms.readFromInputStream(connection.getInputStream());
+		} else {
+			try {
+				result = performBasicRequest(url, requestMethod, anonymous);
+			} catch (FileNotFoundException | NullPointerException e) {
+				// that's tricky case why NPE is thrown to fix that problem httpClient could be used
+				String msg = app.getString(R.string.auth_failed);
+				log.error(msg, e);
+				result.warning = app.getString(R.string.auth_failed) + "";
+			} catch (MalformedURLException e) {
+				log.error(userOperation + " " + app.getString(R.string.failed_op), e);
+				result.warning = e.getMessage() + "";
+			} catch (IOException e) {
+				log.error(userOperation + " " + app.getString(R.string.failed_op), e);
+				result.warning = e.getMessage() + " link unavailable";
 			}
-			log.info("Response : " + responseBody); //$NON-NLS-1$
-			connection.disconnect();
-			if (!ok) {
-				r.warning = msg + "\n" + responseBody;
-			}
-		} catch (FileNotFoundException | NullPointerException e) {
-			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
-			String msg = app.getString(R.string.auth_failed);
-			log.error(msg, e);
-			r.warning = app.getString(R.string.auth_failed) + "";
-		} catch (MalformedURLException e) {
-			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
-			r.warning = e.getMessage() + "";
-		} catch (IOException e) {
-			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
-			r.warning = e.getMessage() + " link unavailable";
 		}
-		return r;
+		return result;
 	}
 
+	private OsmBugResult performBasicRequest(String url, String requestMethod, boolean anonymous) throws IOException {
+		OsmBugResult result = new OsmBugResult();
+		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
+		log.info("Editing poi " + url);
+		connection.setConnectTimeout(15000);
+		connection.setRequestMethod(requestMethod);
+		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
+		if (!anonymous) {
+			String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get();
+			connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes(StandardCharsets.UTF_8)));
+		}
+		connection.setDoInput(true);
+		connection.connect();
+		String msg = connection.getResponseMessage();
+		boolean ok = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
+		log.info(msg);
+		// populate return fields.
+
+		StringBuilder responseBody;
+		if (connection.getResponseCode() == HttpURLConnection.HTTP_CONFLICT) {
+			responseBody = Algorithms.readFromInputStream(connection.getErrorStream());
+		} else {
+			responseBody = Algorithms.readFromInputStream(connection.getInputStream());
+		}
+		log.info("Response : " + responseBody);
+		connection.disconnect();
+		if (!ok) {
+			result.warning = msg + "\n" + responseBody;
+		}
+		return result;
+	}
+
+	private OsmBugResult performOAuthRequest(String url, String requestMethod, String userOperation,
+	                                         OsmOAuthAuthorizationAdapter authorizationAdapter)
+			throws InterruptedException, ExecutionException, IOException {
+		OsmBugResult result = new OsmBugResult();
+		OsmOAuthAuthorizationClient client = authorizationAdapter.getClient();
+		Response response = client.performRequest(url, requestMethod, userOperation);
+		if (response.getCode() != HttpURLConnection.HTTP_OK) {
+			result.warning = response.getMessage() + "\n" + response.getBody();
+		}
+		return result;
+	}
 }

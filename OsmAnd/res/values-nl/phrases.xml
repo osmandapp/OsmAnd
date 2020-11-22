@@ -1418,7 +1418,7 @@
     <string name="poi_observatory_designation">Aanduiding</string>
     <string name="poi_telescope_type">Type</string>
     <string name="poi_animal_training_type">Type</string>
-    <string name="poi_embassy_type">Type</string>
+    <string name="poi_diplomatic_filter">Type</string>
     <string name="poi_city_capital">Hoofdstad</string>
     <string name="poi_pharmacy_dispensing">Apotheek</string>
     <string name="poi_healthcare_alternative_types">Gespecialiseerd</string>

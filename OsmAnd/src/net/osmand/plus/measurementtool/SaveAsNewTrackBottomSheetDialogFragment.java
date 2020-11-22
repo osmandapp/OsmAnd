@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -59,6 +60,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	private String folderName;
 	private boolean rightButtonEnabled = true;
 	private boolean showSimplifiedButton = true;
+	private TextInputLayout nameTextBox;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (app == null) {
 			return;
 		}
+
+		int highlightColorId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		if (savedInstanceState != null) {
 			showOnMap = savedInstanceState.getBoolean(SHOW_ON_MAP_KEY);
 			simplifiedTrack = savedInstanceState.getBoolean(SIMPLIFIED_TRACK_KEY);
@@ -74,16 +78,17 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			sourceFileName = savedInstanceState.getString(SOURCE_FILE_NAME_KEY);
 			sourceFolderName = savedInstanceState.getString(SOURCE_FOLDER_NAME_KEY);
 			showSimplifiedButton = savedInstanceState.getBoolean(SHOW_SIMPLIFIED_BUTTON_KEY);
+		} else {
+			folderName = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getName();
 		}
 
 		items.add(new TitleItem(getString(R.string.save_as_new_track)));
 
 		View editNameView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
 				R.layout.track_name_edit_text, null);
-		final TextInputLayout nameTextBox = editNameView.findViewById(R.id.name_text_box);
-		nameTextBox.setBoxBackgroundColorResource(R.color.material_text_input_layout_bg);
-		nameTextBox.setHint(app.getString(R.string.ltr_or_rtl_combine_via_colon,
-				app.getString(R.string.shared_string_file_name), "").trim());
+		nameTextBox = editNameView.findViewById(R.id.name_text_box);
+		nameTextBox.setBoxBackgroundColorResource(highlightColorId);
+		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_file_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
 				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
@@ -100,7 +105,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				checkEmptyName(s, nameTextBox);
+				updateFileNameFromEditText(s.toString());
 			}
 		});
 		BaseBottomSheetItem editFileName = new BaseBottomSheetItem.Builder()
@@ -186,14 +191,16 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
 					R.drawable.bg_select_group_button_outline);
 			if (background != null) {
-				int backgroundColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
-						R.attr.activity_background_color);
+				int highlightColor = ContextCompat.getColor(app,nightMode ?
+						R.color.list_background_color_dark : R.color.activity_background_color_light);
+				int strokedColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
+						R.attr.stroked_buttons_and_links_outline);
 				background = (GradientDrawable) background.mutate();
 				if (checked) {
 					background.setStroke(0, Color.TRANSPARENT);
-					background.setColor(backgroundColor);
+					background.setColor(highlightColor);
 				} else {
-					background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), backgroundColor);
+					background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), strokedColor);
 				}
 			}
 			return background;
@@ -206,6 +213,10 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			@Override
 			public void onItemSelected(String item) {
 				folderName = item;
+				EditText editText = nameTextBox.getEditText();
+				if (editText != null) {
+					updateFileNameFromEditText(editText.getText().toString());
+				}
 			}
 		};
 	}
@@ -260,17 +271,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	private void renameFile() {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-			File source = dir;
-			if (sourceFolderName != null) {
-				source = new File(dir, sourceFolderName);
-			}
-			source = new File(source, sourceFileName + IndexConstants.GPX_FILE_EXT);
-			File dest = dir;
-			if (folderName != null) {
-				dest = new File(dir, folderName);
-			}
-			dest = new File(dest, fileName + IndexConstants.GPX_FILE_EXT);
+			File source = getFile(app, sourceFolderName, sourceFileName);
+			File dest = getFile(app, folderName, fileName);
 			if (!source.equals(dest)) {
 				if (dest.exists()) {
 					Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
@@ -290,25 +292,51 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		}
 	}
 
+	private File getFile(OsmandApplication app, String folderName, String fileName) {
+		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		File source = dir;
+		if (folderName != null && !dir.getName().equals(folderName)) {
+			source = new File(dir, folderName);
+		}
+		source = new File(source, fileName + IndexConstants.GPX_FILE_EXT);
+		return source;
+	}
+
 	@Override
 	protected boolean isRightBottomButtonEnabled() {
 		return rightButtonEnabled;
 	}
 
-	private void checkEmptyName(Editable name, TextInputLayout nameCaption) {
-		String text = name.toString().trim();
+	private void updateFileNameFromEditText(String name) {
+		rightButtonEnabled = false;
+		String text = name.trim();
 		if (text.isEmpty()) {
-			nameCaption.setError(getString(R.string.empty_filename));
-			rightButtonEnabled = false;
+			nameTextBox.setError(getString(R.string.empty_filename));
+		} else if (isFileExist(name)) {
+			nameTextBox.setError(getString(R.string.file_with_name_already_exist));
 		} else {
-			nameCaption.setError(null);
+			nameTextBox.setError(null);
 			fileName = text;
 			rightButtonEnabled = true;
 		}
 		updateBottomButtons();
 	}
 
-	interface SaveAsNewTrackFragmentListener {
+	private boolean isFileExist(String name) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			File file = getFile(app, folderName, name);
+			return file.exists();
+		}
+		return false;
+	}
+
+	@Override
+	protected int getBgColorId() {
+		return nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light;
+	}
+
+	public interface SaveAsNewTrackFragmentListener {
 
 		void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack);
 

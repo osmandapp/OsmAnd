@@ -77,6 +77,10 @@ public class TrackDetailsMenu {
 	private boolean hidding;
 	private Location myLocation;
 
+	public boolean shouldShowXAxisPoints () {
+		return true;
+	}
+
 	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
@@ -125,8 +129,7 @@ public class TrackDetailsMenu {
 			hidding = true;
 			fragment.dismiss(backPressed);
 		} else {
-			segment = null;
-			trackChartPoints = null;
+			reset();
 		}
 	}
 
@@ -274,8 +277,7 @@ public class TrackDetailsMenu {
 		if (hidding) {
 			hidding = false;
 			visible = false;
-			segment = null;
-			trackChartPoints = null;
+			reset();
 		}
 	}
 
@@ -520,7 +522,9 @@ public class TrackDetailsMenu {
 		} else {
 			gpxItem.chartHighlightPos = -1;
 		}
-		trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
+		if (shouldShowXAxisPoints()) {
+			trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
+		}
 		if (gpxItem.route) {
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
 		} else {
@@ -530,6 +534,11 @@ public class TrackDetailsMenu {
 			mapActivity.refreshMap();
 		}
 		fitTrackOnMap(chart, location, forceFit);
+	}
+
+	public void reset() {
+		segment = null;
+		trackChartPoints = null;
 	}
 
 	private List<LatLon> getXAxisPoints(LineChart chart) {

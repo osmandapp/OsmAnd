@@ -8,16 +8,23 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.osmedit.OsmPoint.Action;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
+import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.util.Map;
+
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class EditPOIMenuController extends MenuController {
 
@@ -39,9 +46,25 @@ public class EditPOIMenuController extends MenuController {
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
 				if (plugin != null && activity != null) {
-					SendPoiDialogFragment sendPoiDialogFragment =
-							SendPoiDialogFragment.createInstance(new OsmPoint[]{getOsmPoint()}, SendPoiDialogFragment.PoiUploaderType.SIMPLE);
-					sendPoiDialogFragment.show(activity.getSupportFragmentManager(), SendPoiDialogFragment.TAG);
+					OsmPoint point = getOsmPoint();
+					OsmandApplication app = activity.getMyApplication();
+					OsmandSettings settings = app.getSettings();
+					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
+					boolean isLogged = client.isValidToken()
+							|| !Algorithms.isEmpty(settings.USER_NAME.get())
+							&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
+
+					if (point instanceof OpenstreetmapPoint) {
+						if (isLogged) {
+							SendPoiBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
+									new OsmPoint[]{getOsmPoint()});
+						} else {
+							LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), null);
+						}
+					} else if (point instanceof OsmNotesPoint) {
+						SendOsmNoteBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
+								new OsmPoint[]{getOsmPoint()});
+					}
 				}
 			}
 		};
@@ -160,7 +183,7 @@ public class EditPOIMenuController extends MenuController {
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
 			int iconResId = 0;
-			String poiTranslation = osmP.getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			String poiTranslation = osmP.getEntity().getTag(POI_TYPE_TAG);
 			MapActivity mapActivity = getMapActivity();
 			if (poiTranslation != null && mapActivity != null) {
 				Map<String, PoiType> poiTypeMap = mapActivity.getMyApplication().getPoiTypes().getAllTranslatedNames(false);
@@ -197,7 +220,7 @@ public class EditPOIMenuController extends MenuController {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public int getAdditionalInfoIconRes() {
 		if (osmPoint.getAction() == Action.DELETE) {

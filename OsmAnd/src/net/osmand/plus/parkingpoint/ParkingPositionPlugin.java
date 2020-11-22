@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.text.format.Time;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -27,6 +26,8 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -34,20 +35,15 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 
@@ -85,12 +81,12 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		super(app);
 		OsmandSettings set = app.getSettings();
 		ApplicationMode.regWidgetVisibility("parking", (ApplicationMode[]) null);
-		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal();
-		parkingLon = set.registerFloatPreference(PARKING_POINT_LON, 0f).makeGlobal();
-		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal();
-		parkingEvent = set.registerBooleanPreference(PARKING_EVENT_ADDED, false).makeGlobal();
-		parkingTime = set.registerLongPreference(PARKING_TIME, -1).makeGlobal();
-		parkingStartTime = set.registerLongPreference(PARKING_START_TIME, -1).makeGlobal();
+		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal().makeShared();
+		parkingLon = set.registerFloatPreference(PARKING_POINT_LON, 0f).makeGlobal().makeShared();
+		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal().makeShared();
+		parkingEvent = set.registerBooleanPreference(PARKING_EVENT_ADDED, false).makeGlobal().makeShared();
+		parkingTime = set.registerLongPreference(PARKING_TIME, -1).makeGlobal().makeShared();
+		parkingStartTime = set.registerLongPreference(PARKING_START_TIME, -1).makeGlobal().makeShared();
 		parkingPosition = constructParkingPosition();
 	}
 

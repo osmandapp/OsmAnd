@@ -16,6 +16,7 @@ import net.osmand.osm.edit.Node;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -478,7 +479,7 @@ public class TransportRoutingHelper {
 				GeneralRouter.RoutingParameter pr = e.getValue();
 				String vl;
 				if(pr.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
-					OsmandSettings.CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(key, pr.getDefaultBoolean());
+					CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(key, pr.getDefaultBoolean());
 					Boolean bool = pref.getModeValue(params.mode);
 					vl = bool ? "true" : null;
 				} else {
