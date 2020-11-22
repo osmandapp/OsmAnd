@@ -695,7 +695,7 @@
     <string name="asap">Dès que possible</string>
     <string name="gpxup_public">Public</string>
     <string name="gpxup_identifiable">Identifiable</string>
-    <string name="gpxup_trackable">Suivi</string>
+    <string name="gpxup_trackable">Traçable</string>
     <string name="gpxup_private">Privé</string>
     <string name="osmand_parking_event">Récupérer le véhicule au parking</string>
     <string name="osmand_parking_warning">Avertissement</string>
@@ -3951,8 +3951,8 @@
     <string name="open_street_map_login_mode">Connectez-vous pour envoyer vos modifications,
 \n
 \nsoit avec OAuth soit avec votre identifiant et mot de passe.</string>
-    <string name="osm_login_descr">Vous pouvez vous connecter avec la méthode sécurisée OAuth ou utiliser votre identifiant et votre mot de passe.</string>
-    <string name="register_on_openplacereviews_desc">Les photos sont fournies par le projet open data OpenPlaceReviews.org. Pour envoyer vos photos, vous devez au préalable être inscrit sur ce site Web.</string>
+    <string name="osm_login_descr">Connectez-vous avec la méthode sécurisée OAuth ou utilisez votre identifiant et votre mot de passe.</string>
+    <string name="register_on_openplacereviews_desc">Connectez-vous au site web du projet OpenPlaceReviews.org pour ajouter des photos.</string>
     <string name="shared_string_search_history">Historique de recherche</string>
     <string name="app_mode_kayak">Kayak</string>
     <string name="export_not_enough_space_descr">Votre appareil n\'a que %1$s disponible. Veuillez libérer de l\'espace ou désélectionner l\'export pour certains éléments.</string>
