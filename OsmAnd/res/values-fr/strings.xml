@@ -3968,4 +3968,5 @@
 \nOpenPlaceReviews : photos de PI ;
 \nMapillary : photos de rue ;
 \nWeb / Wikimedia : photos de PI réféfencés dans OpenStreetMap.</string>
+    <string name="gpx_upload_private_visibility_descr"></string>
 </resources>
