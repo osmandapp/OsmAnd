@@ -127,7 +127,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private Snackbar snackbar;
 	private String fileName;
 
-	private AdditionalInfoType currentAdditionalInfoType;
+	private @Nullable
+	AdditionalInfoType currentAdditionalInfoType;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean progressBarVisible;
@@ -174,6 +175,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		@Override
 		protected int getFragmentHeight() {
 			return mainView.getHeight();
+		}
+
+		@Override
+		public boolean shouldShowXAxisPoints() {
+			return false;
 		}
 	}
 
@@ -264,6 +270,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
+		int widthInPixels = getResources().getDimensionPixelOffset(R.dimen.gpx_group_button_width);
 
 		View view = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.fragment_measurement_tool, container, false);
@@ -283,6 +290,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				@Override
 				public void onClick(View v) {
 					changeAdditionalInfoType(AdditionalInfoType.POINTS);
+					int pointsCount = editingCtx.getPointsCount();
+					if (pointsCount == 0) {
+						disable(upDownBtn);
+						collapseAdditionalInfoView();
+					} else {
+						expandAdditionalInfoView();
+						additionalInfoExpanded = true;
+					}
+					updateUpDownBtn();
 				}
 			});
 
@@ -293,6 +309,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				@Override
 				public void onClick(View v) {
 					changeAdditionalInfoType(AdditionalInfoType.GRAPH);
+					expandAdditionalInfoView();
+					updateUpDownBtn();
 				}
 			});
 		}
@@ -340,6 +358,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		View applyMovePointButton = mainView.findViewById(R.id.apply_move_point_button);
 		UiUtilities.setupDialogButton(nightMode, applyMovePointButton, UiUtilities.DialogButtonType.PRIMARY,
 				R.string.shared_string_apply);
+		applyMovePointButton.setMinimumWidth(widthInPixels);
 		applyMovePointButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -351,6 +370,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		View applyPointBeforeAfterButton = mainView.findViewById(R.id.apply_point_before_after_point_button);
 		UiUtilities.setupDialogButton(nightMode, applyPointBeforeAfterButton, UiUtilities.DialogButtonType.PRIMARY,
 				R.string.shared_string_apply);
+		applyPointBeforeAfterButton.setMinimumWidth(widthInPixels);
 		applyPointBeforeAfterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -361,6 +381,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		View addPointBeforeAfterButton = mainView.findViewById(R.id.add_point_before_after_button);
 		UiUtilities.setupDialogButton(nightMode, addPointBeforeAfterButton, UiUtilities.DialogButtonType.PRIMARY,
 				R.string.shared_string_add);
+		addPointBeforeAfterButton.setMinimumWidth(widthInPixels);
 		addPointBeforeAfterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -416,7 +437,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				addCenterPoint();
 			}
 		});
-
+		addPointButton.setMinimumWidth(widthInPixels);
 		measurementLayer.setOnSingleTapListener(new MeasurementToolLayer.OnSingleTapListener() {
 			@Override
 			public void onAddPoint() {
@@ -425,9 +446,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			@Override
 			public void onSelectPoint(int selectedPointPos) {
-				if (additionalInfoExpanded) {
-					collapseAdditionalInfoView();
-				}
 				if (selectedPointPos != -1) {
 					openSelectedPointMenu(mapActivity);
 				}
@@ -529,25 +547,36 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return view;
 	}
 
-	private void changeAdditionalInfoType(@NonNull AdditionalInfoType type) {
+	private void changeAdditionalInfoType(@Nullable AdditionalInfoType type) {
 		if (!additionalInfoExpanded || !isCurrentAdditionalInfoType(type)) {
 			MapActivity ma = getMapActivity();
 			if (ma == null) return;
 
 			OsmandApplication app = ma.getMyApplication();
+			View buttonsDivider = customRadioButton.findViewById(R.id.buttons_divider);
 			if (AdditionalInfoType.POINTS == type) {
 				visibleCard = pointsCard;
+				additionalInfoExpanded = true;
+				buttonsDivider.setVisibility(View.GONE);
 				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, START);
 			} else if (AdditionalInfoType.GRAPH == type) {
 				visibleCard = graphsCard;
+				additionalInfoExpanded = true;
+				buttonsDivider.setVisibility(View.GONE);
 				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, END);
+			} else if (null == type) {
+				visibleCard = null;
+				additionalInfoExpanded = false;
+				buttonsDivider.setVisibility(View.VISIBLE);
+				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, null);
 			}
 			cardsContainer.removeAllViews();
-			View cardView = visibleCard.getView() != null ? visibleCard.getView() : visibleCard.build(ma);
-			cardsContainer.addView(cardView);
+			if (visibleCard != null) {
+				View cardView = visibleCard.getView() != null ? visibleCard.getView() : visibleCard.build(ma);
+				cardsContainer.addView(cardView);
+			}
 
 			currentAdditionalInfoType = type;
-			additionalInfoExpanded = true;
 			updateUpDownBtn();
 		}
 	}
@@ -1030,7 +1059,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onChangeApplicationMode(ApplicationMode mode, RouteBetweenPointsDialogType dialogType,
-	                                    RouteBetweenPointsDialogMode dialogMode) {
+										RouteBetweenPointsDialogMode dialogMode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			ChangeRouteType changeRouteType = ChangeRouteType.NEXT_SEGMENT;
@@ -1465,9 +1494,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void collapseAdditionalInfoView() {
 		if (portrait) {
 			additionalInfoExpanded = false;
-			updateUpDownBtn();
 			additionalInfoContainer.setVisibility(View.GONE);
 			setDefaultMapPosition();
+			changeAdditionalInfoType(null);
+			updateUpDownBtn();
 		}
 	}
 
@@ -1866,7 +1896,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
-	                                   boolean followTrackMode) {
+									   boolean followTrackMode) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
 		fragment.setMode(FOLLOW_TRACK_MODE, followTrackMode);

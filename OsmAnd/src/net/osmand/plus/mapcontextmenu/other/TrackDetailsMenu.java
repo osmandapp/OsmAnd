@@ -77,6 +77,10 @@ public class TrackDetailsMenu {
 	private boolean hidding;
 	private Location myLocation;
 
+	public boolean shouldShowXAxisPoints () {
+		return true;
+	}
+
 	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
@@ -518,7 +522,9 @@ public class TrackDetailsMenu {
 		} else {
 			gpxItem.chartHighlightPos = -1;
 		}
-		trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
+		if (shouldShowXAxisPoints()) {
+			trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
+		}
 		if (gpxItem.route) {
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
 		} else {
