@@ -3850,4 +3850,10 @@
     <string name="poi_parking_rooftop">Střešní</string>
     <string name="poi_gpx_point">Bod GPX</string>
     <string name="poi_radar_tower">Radarová věž</string>
+    <string name="poi_diplomatic_embassy">Ambasáda</string>
+    <string name="poi_diplomatic_services_citizen_services_filter">Služby občanům</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Imigrační víza</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">Neimigrační víza</string>
+    <string name="poi_consulate_filter">Konzulát</string>
+    <string name="poi_embassy_filter">Ambasáda</string>
 </resources>

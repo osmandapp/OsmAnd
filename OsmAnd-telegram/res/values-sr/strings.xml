@@ -267,4 +267,8 @@
     <string name="last_response_date">Последњи одговор: %1$</string>
     <string name="last_update_from_telegram_date">Последње ажурирање из Телеграма: %1$</string>
     <string name="shared_string_error_short">Грешка</string>
+    <string name="shared_string_export">Извези</string>
+    <string name="logcat_buffer">Logcat бафер</string>
+    <string name="logcat_buffer_descr">Проверите и поделите детаљне записе апликације</string>
+    <string name="send_report">Пошаљи извештај</string>
 </resources>

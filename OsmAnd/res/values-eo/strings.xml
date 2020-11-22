@@ -415,7 +415,7 @@
     <string name="open_street_map_login_and_pass">Uzantnomo kaj pasvorto al OSM</string>
     <string name="application_dir">Datum-konservada dosierujo</string>
     <string name="filter_poi_hint">Filtri laŭ nomo</string>
-    <string name="search_poi_category_hint">Entajpu ion por serĉi</string>
+    <string name="search_poi_category_hint">Enigu ion por serĉi</string>
     <string name="agps_info">A-GPS informoj</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Etikedoj “riparu min!”</string>
     <string name="shared_string_manage">Administri</string>
@@ -749,9 +749,9 @@
     <string name="index_item_world_altitude_correction">Korekto de altitudo</string>
     <string name="index_item_world_seamarks">Tutmondaj maraj navigadpunktoj</string>
     <string name="access_category_choice">Elektu kategorion</string>
-    <string name="access_hint_enter_name">Entajpu nomon</string>
-    <string name="access_hint_enter_category">Entajpu kategorion</string>
-    <string name="access_hint_enter_description">Entajpu priskribon.</string>
+    <string name="access_hint_enter_name">Enigu nomon</string>
+    <string name="access_hint_enter_category">Enigu kategorion</string>
+    <string name="access_hint_enter_description">Enigu priskribon.</string>
     <string name="access_default_color">Norma koloro</string>
     <string name="map_widget_magnetic_bearing">Magneta direkto</string>
     <string name="map_widget_bearing">Relativa direkto</string>
@@ -1596,7 +1596,7 @@
     <string name="renderers_descr">Elekti manieron de bildigado de vektora mapo</string>
     <string name="poi_context_menu_website">Montri retpaĝon de interesejo</string>
     <string name="poi_context_menu_call">Montri telefonon de interesejo</string>
-    <string name="download_type_to_filter">entajpu tekston por filtri</string>
+    <string name="download_type_to_filter">enigu tekston por filtri</string>
     <string name="use_high_res_maps">Alta ekrandistingivo</string>
     <string name="use_high_res_maps_descr">Ne etendi (kaj malklarigi) map‑kahelojn ĉe alt‑distingivaj ekranoj.</string>
     <string name="context_menu_item_search_transport">Serĉi transporton publikan</string>
@@ -1651,7 +1651,7 @@
     <string name="error_occurred_loading_gpx">Ne povas ŝargi GPX.</string>
     <string name="send_report">Sendi raporton</string>
     <string name="none_region_found">Ne povas trovi iujn elŝutitajn mapojn en la SD-karto.</string>
-    <string name="poi_namefinder_query_empty">Entajpu serĉatan interesejon</string>
+    <string name="poi_namefinder_query_empty">Enigu serĉatan interesejon</string>
     <string name="any_poi">Ia</string>
     <string name="thanks_yandex_traffic">Dankon al Yandex pro informoj pri trafiko.</string>
     <string name="layer_yandex_traffic">Yandex - informoj pri trafiko</string>
@@ -1805,7 +1805,7 @@
     <string name="navigate_point_format_DMS">GGG:MM:SS.S</string>
     <string name="search_address_top_text">Adreso</string>
     <string name="context_menu_item_create_poi">Krei interesejon</string>
-    <string name="add_favorite_dialog_top_text">Entajpu nomon de ŝatata ejo</string>
+    <string name="add_favorite_dialog_top_text">Enigu nomon de ŝatata ejo</string>
     <string name="add_favorite_dialog_default_favourite_name">Ŝatataj</string>
     <string name="add_favorite_dialog_favourite_added_template">Aldonis ŝatatan punkton “{0}”.</string>
     <string name="favourites_context_menu_add">Aldoni al ŝatataj</string>
@@ -1905,7 +1905,7 @@
     <string name="free_downloads_used">Senpagaj elŝutoj uzitaj</string>
     <string name="free_downloads_used_description">Montras nombron da pluaj senpagaj elŝutoj.</string>
     <string name="application_dir_description">Bonvolu elekti kie vi volas konservi mapoj kaj aliaj datum-dosieroj.</string>
-    <string name="enter_country_name">Entajpu nomon de lando</string>
+    <string name="enter_country_name">Enigu nomon de lando</string>
     <string name="new_version">Nova versio</string>
     <string name="begin_with_osmand_menu_group">Unuaj paŝoj kun OsmAnd</string>
     <string name="features_menu_group">Ebloj</string>
@@ -1947,7 +1947,7 @@
     <string name="number_of_contributors">Nombro da kontribuintoj</string>
     <string name="number_of_edits">Nombro da redaktoj</string>
     <string name="reports_for">Raportoj por</string>
-    <string name="file_name_containes_illegal_char">Dosiernomo enhavas malpermesitan signon</string>
+    <string name="file_name_containes_illegal_char">Malpermesata signo en dosiernomo</string>
     <string name="items_were_selected">{0} elemento(j) elektita(j)</string>
     <string name="coords_format">Koordinat-formo</string>
     <string name="coords_format_descr">Formo de geografiaj koordinatoj.</string>
@@ -2038,7 +2038,7 @@
     <string name="subcategories">Subkategorioj</string>
     <string name="translit_names">Transliterumi nomojn</string>
     <string name="translit_name_if_miss">Transliterumi, se nomo en %1$s mankas</string>
-    <string name="search_hint">Entajpu urbon, adreson aŭ nomon de interesejo</string>
+    <string name="search_hint">Enigu urbon, adreson aŭ nomon de interesejo</string>
     <string name="rendering_value_light_brown_name">Bronzkolora hela</string>
     <string name="rendering_value_dark_brown_name">Bronzkolora malhela</string>
     <string name="rendering_attr_contourColorScheme_name">Kolor-skemo de nivelkurboj</string>
@@ -2366,12 +2366,12 @@
     <string name="quick_action_auto_zoom_on">Aktivigi aŭtomatan map-skaladon</string>
     <string name="quick_action_auto_zoom_off">Malaktivigi aŭtomatan map-skaladon</string>
     <string name="shared_string_paused">Paŭzigita</string>
-    <string name="type_city_town">Entajpu urbon aŭ lokon</string>
-    <string name="type_postcode">Entajpu poŝtkodon</string>
+    <string name="type_city_town">Enigu urbon aŭ lokon</string>
+    <string name="type_postcode">Enigu poŝtkodon</string>
     <string name="nearest_cities">Proksimaj urboj</string>
     <string name="select_city">Elekti urbon</string>
     <string name="select_postcode">Serĉi poŝtkodon</string>
-    <string name="type_address">Entajpu adreson</string>
+    <string name="type_address">Enigu adreson</string>
     <string name="select_street">Elekti straton</string>
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Sumigo</string>
@@ -2415,7 +2415,7 @@
     <string name="no_photos_descr">Neniuj fotoj tie ĉi.</string>
     <string name="shared_string_install">Instali</string>
     <string name="improve_coverage_mapillary">Pliigi fotan atingon de Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Instalu Mapillary por aldoni fotojn al tiu ĉi loko sur la mapo.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instalu la aplikaĵon Mapillary por aldoni fotojn al tiu ĉi loko sur la mapo.</string>
     <string name="open_mapillary">Malfermi Mapillary</string>
     <string name="mapillary_image">Mapillary-foto</string>
     <string name="distance_moving">Korektita distanco</string>
@@ -2430,7 +2430,7 @@
     <string name="mapillary_menu_date_from">de</string>
     <string name="mapillary_menu_descr_dates">Montri bildojn aldonitajn nur</string>
     <string name="mapillary_menu_title_dates">Dato</string>
-    <string name="mapillary_menu_edit_text_hint">Entajpu uzantnomon</string>
+    <string name="mapillary_menu_edit_text_hint">Enigu uzantnomon</string>
     <string name="mapillary_menu_descr_username">Montri nur bildojn aldonitajn de</string>
     <string name="mapillary_menu_title_username">Uzantnomo</string>
     <string name="mapillary_menu_filter_description">Filtri bildojn laŭ alŝutinto, laŭ dato aŭ laŭ tipo; aktivaj nur je pligrandigo.</string>
@@ -2456,7 +2456,7 @@
     <string name="retry">Reprovi</string>
     <string name="measurement_tool_action_bar">Esploru mapon kaj aldonu punktojn</string>
     <string name="none_point_error">Bonvolu aldoni almenaŭ unu punkton.</string>
-    <string name="enter_gpx_name">GPX-dosiera nomo:</string>
+    <string name="enter_gpx_name">Dosiernomo de GPX:</string>
     <string name="show_on_map_after_saving">Montri sur mapo post konservi</string>
     <string name="add_waypoint">Aldoni navigadpunkton</string>
     <string name="save_gpx_waypoint">Konservi GPX‑navigadpunkton</string>
@@ -2541,7 +2541,7 @@
     <string name="plan_route_no_markers_toast">Vi devas aldoni almenaŭ unu markon por uzi tiun ĉi eblon.</string>
     <string name="wrong_format">Malĝusta formo</string>
     <string name="wrong_input">Malĝusta enigo</string>
-    <string name="enter_new_name">Entajpu novan nomon</string>
+    <string name="enter_new_name">Enigu novan nomon</string>
     <string name="shared_string_back">Reen</string>
     <string name="shared_string_view">Montri</string>
     <string name="waypoints_added_to_map_markers">Aldonis intercelojn al mapmarkoj</string>
@@ -2634,7 +2634,7 @@
     <string name="copy_location_name">Kopii nomon de punkto</string>
     <string name="toast_empty_name_error">Sennoma ejo</string>
     <string name="show_closed_notes">Montri fermitajn rimarkojn</string>
-    <string name="switch_osm_notes_visibility_desc">Montri/kaŝi OSM‑rimarkojn sur la mapo.</string>
+    <string name="switch_osm_notes_visibility_desc">Montri aŭ kaŝi OSM‑rimarkojn sur la mapo.</string>
     <string name="gpx_file_desc">GPX - taŭga por elporti al JOSM aŭ aliaj OSM-redaktiloj.</string>
     <string name="osc_file_desc">OSC - taŭga por elporti al OSM.</string>
     <string name="shared_string_gpx_file">GPX-dosiero</string>
@@ -2652,8 +2652,8 @@
     <string name="make_as_start_point">Agordi kiel komencpunkton</string>
     <string name="map_import_error">Eraro dum enporti mapon</string>
     <string name="map_imported_successfully">Enportis mapon</string>
-    <string name="enter_the_file_name">Entajpu dosiernomon.</string>
-    <string name="enter_lon">Entajpu longitudon</string>
+    <string name="enter_the_file_name">Enigu dosiernomon.</string>
+    <string name="enter_lon">Enigu longitudon</string>
     <string name="enter_lat">Entajpu latitudon</string>
     <string name="enter_lat_and_lon">Entajpu latitudon kaj longitudon</string>
     <string name="dd_mm_ss_format">GG°MM′SS″</string>
@@ -2772,7 +2772,7 @@
     <string name="coord_input_edit_point">Redakti punkton</string>
     <string name="coord_input_add_point">Aldoni punkton</string>
     <string name="coord_input_save_as_track">Konservi kiel spuron</string>
-    <string name="coord_input_save_as_track_descr">Vi aldonis %1$s punktojn. Entajpu dosiernomon kaj frapetu “konservi”.</string>
+    <string name="coord_input_save_as_track_descr">Vi aldonis %1$s punktojn. Enigu dosiernomon kaj frapetu “konservi”.</string>
     <string name="point_deleted">Forigis la punkton %1$s</string>
     <string name="shared_string_world">Mondo</string>
     <string name="send_search_query_description">Ni sendos vian serĉ-peton: “%1$s” kun via pozicio.
@@ -3050,7 +3050,7 @@
     <string name="profile_type_base_string">Ĉefa profilo</string>
     <string name="profile_alert_need_routing_type_title">Elektu specon de navigado</string>
     <string name="profile_alert_need_routing_type_msg">Bonvolu elekti specon de navigo por la nova aplikaĵa profilo</string>
-    <string name="profile_alert_need_profile_name_title">Entajpu nomon por profilo</string>
+    <string name="profile_alert_need_profile_name_title">Enigu nomon por profilo</string>
     <string name="profile_alert_need_profile_name_msg">Unue devas enigi nomon por profilo.</string>
     <string name="profile_alert_duplicate_name_title">Nomo neebla</string>
     <string name="profile_alert_duplicate_name_msg">Jam ekzistas profilo kun la sama nomo</string>
@@ -3080,9 +3080,9 @@
     <string name="zoom_by_wunderlinq_descr">Rulumu supren/malsupren por ŝanĝi pligrandigon de mapo. Eskap-klavo revenas al al aplikaĵo WunderLINQ App.</string>
     <string name="zoom_by_wunderlinq">Stiri per WunderLINQ</string>
     <string name="quick_action_need_to_add_item_to_list">Aldonu almenaŭ unu elementon al la listo en agordoj de “rapida ago”</string>
-    <string name="routing_attr_piste_type_downhill_name">Skiado alpa/malsuprenira</string>
+    <string name="routing_attr_piste_type_downhill_name">Skiado alpa kaj malsuprenira</string>
     <string name="routing_attr_piste_type_downhill_description">Skivojoj por skiado alpa (malsuprenira) kaj vojetoj al skitelferoj.</string>
-    <string name="routing_attr_piste_type_nordic_name">Skiado nordia/skikurada</string>
+    <string name="routing_attr_piste_type_nordic_name">Skiado nordia kaj skikurada</string>
     <string name="routing_attr_piste_type_nordic_description">Skivojoj por skiado nordia (skikurada).</string>
     <string name="routing_attr_piste_type_skitour_name">Skiado ekskursa</string>
     <string name="routing_attr_piste_type_skitour_description">Skivojoj ekskursaj.</string>
@@ -3261,7 +3261,7 @@
     <string name="download_detailed_map">Elŝutu la detalan mapon %s, por vidi tiun ĉi areon.</string>
     <string name="change_data_storage_full_description">Ĉu movi datum‑dosierojn OsmAnd al la nova loko\?
 \n%1$s → %2$s</string>
-    <string name="enter_path_to_folder">Entajpu dosier‑indikon</string>
+    <string name="enter_path_to_folder">Enigu dosierindikon</string>
     <string name="shared_string_select_folder">Dosierujo…</string>
     <string name="paste_Osmand_data_folder_path">Algluu dosier‑indikon por dosierujo de OsmAnd‑datumoj</string>
     <string name="change_osmand_data_folder_question">Ĉu ŝanĝi datum‑dosierujon OsmAnd\?</string>
@@ -3362,7 +3362,7 @@
     <string name="swap_start_and_destination">Anstataŭigi komencpunkton per celo</string>
     <string name="simulate_your_location_gpx_descr">Simuli vian pozicion uzante registritan GPX‑kurson.</string>
     <string name="track_saved">Konservis kurson</string>
-    <string name="empty_filename">Dosiernomo estas malplena</string>
+    <string name="empty_filename">Malplena dosiernomo</string>
     <string name="shared_string_revert">Malfari</string>
     <string name="quick_action_directions_from_desc">Butono por agordi la ekranan centron kiel komencpunkton. Sekve vi estos petita por agordi finpunkton aŭ ekos kalkulado de kurso.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Montri reton de nodoj de biciklaj kursoj</string>
@@ -3572,7 +3572,7 @@
     <string name="shared_string_legend">Mapklarigo</string>
     <string name="shared_string_hillshade">Nivelombrumo</string>
     <string name="n_items_of_z">%1$s el %2$s</string>
-    <string name="quick_action_show_hide_terrain">Montri/kaŝi teren‑formon</string>
+    <string name="quick_action_show_hide_terrain">Montri aŭ kaŝi teren‑formon</string>
     <string name="quick_action_terrain_hide">Kaŝi teren‑formon</string>
     <string name="quick_action_terrain_show">Montri teren‑formon</string>
     <string name="quick_action_terrain_descr">Butono por montri/kaŝi tavolon de formo de tereno sur la mapo.</string>
@@ -3690,10 +3690,10 @@
     <string name="additional_actions_descr">Vi povas ekigi tiujn agojn per frapeti la butonon “%1$s”.</string>
     <string name="quick_action_transport_hide">Kaŝi publikan transporton</string>
     <string name="quick_action_transport_show">Montri publikan transporton</string>
-    <string name="quick_action_show_hide_transport">Montri/kaŝi publikan transporton</string>
+    <string name="quick_action_show_hide_transport">Montri aŭ kaŝi publikan transporton</string>
     <string name="quick_action_transport_descr">Butono por montri/kaŝi publikan transporton sur la mapo.</string>
-    <string name="create_edit_poi">Krei/redakti interesejon</string>
-    <string name="add_edit_favorite">Aldoni/forigi ŝatatan ejojn</string>
+    <string name="create_edit_poi">Krei aŭ redakti interesejon</string>
+    <string name="add_edit_favorite">Aldoni aŭ forigi ŝatatan ejojn</string>
     <string name="parking_positions">Pozicioj de parkumado</string>
     <string name="reset_deafult_order">Restarigi implicitan ordigon de elementoj</string>
     <string name="back_to_editing">Reen al redaktado</string>
@@ -3876,7 +3876,7 @@
     <string name="shared_string_redo">Refari</string>
     <string name="release_3_8">• plibonigoj al “plani kurson”: eblo uzi diversajn specojn de navigo por ĉiu segmento aparte kaj ampleksi spurojn
 \n
-\n• nova menuo de aspekto por spuroj: eblo elekti koloron kaj dikecon, montri sagetojn de direkto kaj vidigi markojn de komenco/fino de la spuro
+\n• nova menuo de aspekto por spuroj: eblo elekti koloron kaj dikecon, montri sagetojn de direkto kaj vidigi markojn de komenco kaj fino de la spuro
 \n
 \n• plibonigita videblo de biciklaj nodoj
 \n
@@ -3890,7 +3890,7 @@
 \n
 \n</string>
     <string name="monitoring_control_start">Registri</string>
-    <string name="save_global_track_interval_descr">Elektu la intervalon de registrado por la ĝenerala registrado de spuro (aktivigata per la fenestraĵo “registri spuron” sur la mapo).</string>
+    <string name="save_global_track_interval_descr">Elektu la intervalon de registrado por la ĝenerala registrado de spuro (aktivigebla per la fenestraĵo “registri spuron” sur la mapo).</string>
     <string name="simplified_track">Simpligita spuro</string>
     <string name="simplified_track_description">Nur la linio de kurso estos konservita, la navigadpunktoj estos forigitaj.</string>
     <string name="shared_string_file_name">Dosiernomo</string>
@@ -3909,7 +3909,7 @@
 \n La abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
 \n
 \n Vi povas administri kaj rezigni viajn abonojn per la agordoj de AppGallery.</string>
-    <string name="start_finish_icons">Emblemoj komenco/fino</string>
+    <string name="start_finish_icons">Emblemoj de komenco kaj fino</string>
     <string name="contour_lines_thanks">Dankon al vi por aĉeti la kromprogramon “nivelkurboj”</string>
     <string name="osm_live_payment_desc_hw">Abonpago prenita por la elektita periodo. VI ĉiam povas rezigni abonon ĉe AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Eviti irejojn</string>
@@ -3921,10 +3921,10 @@
     <string name="complex_routing_descr">Du-faza difinado de kurso por aŭtomobila navigo.</string>
     <string name="use_native_pt">Indiĝena metodo de publik-transporta navigo</string>
     <string name="use_native_pt_desc">Aktivigi (sekuran) metodon por kalkuli kursojn de publika transporto uzante programlingvon Java</string>
-    <string name="perform_oauth_authorization_description">Ensaluti uzante OAuth por redakti la mapon OSM</string>
+    <string name="perform_oauth_authorization_description">Ensaluti per OAuth por redakti la mapon OSM</string>
     <string name="perform_oauth_authorization">Ensaluti per OAuth</string>
     <string name="clear_osm_token">Forigi ĵetonon OpenStreetMap OAuth</string>
-    <string name="osm_edit_logout_success">Sukcese elsalutinta</string>
+    <string name="osm_edit_logout_success">Elsalutinta</string>
     <string name="snowmobile_render_descr">Por veturi per motorsledo sur dediĉitaj vojoj.</string>
     <string name="file_already_imported">Dosiero jam estas enportita al OsmAnd</string>
     <string name="use_two_phase_routing">Uzi 2-fazan A* algoritmon de navigo</string>
@@ -3955,29 +3955,41 @@
     <string name="login_open_street_map">Ensaluti al OpenStreetMap</string>
     <string name="login_open_street_map_org">Ensaluti al OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Ensaluti per OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Vi devas ensaluti por alŝuti novajn aŭ modifitajn ŝanĝojn.
+    <string name="open_street_map_login_mode">Ensalutu por alŝuti novajn aŭ modifitajn ŝanĝojn
 \n
-\nVi povas ensaluti per la sekura metodo OAuth aŭ per enigi uzantnomon kaj pasvorton.</string>
-    <string name="use_login_password">Uzi uzantnomon kaj pasvorton</string>
+\naŭ per la sekura metodo OAuth aŭ per enigi uzantnomon kaj pasvorton.</string>
+    <string name="use_login_password">Ensaluti per uzantnomo kaj pasvorto</string>
     <string name="login_account">Konto</string>
     <string name="user_login">Uzantnomo</string>
     <string name="markers_history">Historio de markoj</string>
     <string name="send_files_to_openstreetmap">Sendi GPX‑dosieron al OpenStreetMap</string>
     <string name="enter_text_separated">Enigu etikedojn disigitajn per komo (,).</string>
-    <string name="gpx_upload_public_visibility_descr">“Publika” signifas, ke la GPX‑spuro estos publika videbla en “miaj spuroj” kaj en la publika listo de spuro (GPS‑spuroj). Datumoj liverataj per la API ne ligos al paĝo de via spuro. Tempindikoj de punktoj ne estos akireblaj per la publika API GPS, kaj la punktoj ne estos ordigitaj laŭtempe. Tamen aliaj uzantoj plue povos elŝuti la nepritraktitan spuron el la publika listo de spuroj kune kun ĉiuj ampleksitaj tempindikoj.</string>
-    <string name="gpx_upload_private_visibility_descr">“Privata” signifas, ke la GPX‑spuro montriĝos en neniu publika listo, sed ĝiaj punktoj plue estos akireblaj per la publika API GPS sen tempindikoj, sed tiuj punktoj estos ordigitaj laŭtempe.</string>
+    <string name="gpx_upload_public_visibility_descr">“Publika” signifas, ke la GPX‑spuro estos publike videbla en “miaj spuroj” kaj en la publika listo de spuroj (GPS‑spuroj) kun tempindikoj kaj en nepritraktita formo. Datumoj liverataj per la API ne ligos al paĝo de via spuro. Tempindikoj de spurpunkto ne estos akireblaj per la publika API GPS, kaj spurpunktoj ne estos laŭtempe ordigitaj.</string>
+    <string name="gpx_upload_private_visibility_descr">“Privata” signifas, ke la GPX‑spuro montriĝos en neniu publika listo, sed ĝiaj punktoj neordigitaj laŭtempe estos akireblaj per la publika API GPS sen tempindikoj.</string>
     <string name="gpx_upload_identifiable_visibility_descr">“Identigebla” signifas, ke la GPX‑spuro estos publike videbla en “miaj spuroj” kaj en la publika listo de spuroj (GPS‑spuroj), aliaj uzantoj povos elŝuti vian nepritraktitan spuron kaj ligi ĝin al via uzantnomo. Publikaj datumoj kun tempindikoj el la API GPS akireblaj per la API de spur‑punktoj indikos al originala paĝo de via spuro.</string>
     <string name="gpx_upload_trackable_visibility_descr">“Spurebla” signifas, ke la GPX‑spuro ne montriĝos en publikaj listoj, sed pritraktitaj punktoj kun tempindikoj el ĝi (kiuj ne povos esti senpere ligitaj al vi) estos elŝuteblaj per la publika API GPS.</string>
     <string name="osm_edit_close_note">Fermi OSM-rimarkon</string>
     <string name="osm_edit_comment_note">Komenti OSM-rimarkon</string>
-    <string name="osm_login_descr">Vi povas ensaluti per la sekura metodo OAuth aŭ per uzi uzantnomon kaj pasvorton.</string>
+    <string name="osm_login_descr">Ensalutii per la sekura metodo OAuth aŭ per uzi uzantnomon kaj pasvorton.</string>
     <string name="shared_string_add_photo">Aldoni foton</string>
     <string name="register_on_openplacereviews">Registri ĉe
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotoj estas liverataj de la malferm‑datuma projekto OpenPlaceReviews.org. Por alŝuti viajn fotojn, vi devas registri ĉe la retejo.</string>
+    <string name="register_on_openplacereviews_desc">Ensaluti en la paĝon de la malferm‑datuma projekto OpenPlaceReviews.org por alŝuti fotojn.</string>
     <string name="register_opr_create_new_account">Krei novan konton</string>
     <string name="register_opr_have_account">Mi jam havas konton</string>
     <string name="shared_string_search_history">Serĉi en historio</string>
     <string name="app_mode_kayak">Kajako</string>
     <string name="app_mode_motorboat">Motorboato</string>
+    <string name="add_photos_descr">OsmAnd montras fotojn el diversaj fontoj:
+\nOpenPlaceReviews – fotoj de interesejoj;
+\nMapillary – strat‑nivela fotaro;
+\ninterreto, Vikimedio – fotoj de interesejoj difinitaj en OpenStreetMap-datumoj.</string>
+    <string name="shared_string_resources">Rimedoj</string>
+    <string name="approximate_file_size">Proksimuma dosiergrando</string>
+    <string name="select_data_to_export">Elektu datumojn por elporti al dosiero.</string>
+    <string name="file_size_needed_for_import">Necesa por enporti</string>
+    <string name="export_not_enough_space_descr">En via aparato estas nur %1$s da libera spaco. Liberigu iom da spaco aŭ malelektu iujn elementojn de elporto.</string>
+    <string name="export_not_enough_space">Mankas spaco</string>
+    <string name="add_to_mapillary">Aldoni al Mapillary</string>
+    <string name="add_to_opr">Aldoni al OpenPlaceReviews</string>
 </resources>

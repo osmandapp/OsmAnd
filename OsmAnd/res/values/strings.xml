@@ -13,6 +13,8 @@
 -->
     <string name="use_dev_url">Use dev.openstreetmap.org</string>
     <string name="use_dev_url_descr">Switch to use "dev.openstreetmap.org" instead of "openstreetmap.org" to testing uploading OSM Note / POI / GPX.</string>
+    <string name="select_items_for_import">Select items that will be imported.</string>
+    <string name="select_groups_for_import">Select groups that will be imported.</string>
     <string name="export_not_enough_space">There is not enough space</string>
     <string name="export_not_enough_space_descr">Your device only has %1$s free. Please free up some space or unselect some items to export.</string>
     <string name="file_size_needed_for_import">Needed for import</string>

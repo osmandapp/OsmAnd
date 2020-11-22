@@ -3846,4 +3846,19 @@
     <string name="poi_parking_rooftop">Cobertura</string>
     <string name="poi_gpx_point">Puntu GPX</string>
     <string name="poi_radar_tower">Torre ràdar</string>
+    <string name="poi_diplomatic_services_citizen_services_no">Nono</string>
+    <string name="poi_diplomatic_services_citizen_services_yes">Eja</string>
+    <string name="poi_diplomatic_services_immigrant_visas_no">Nono</string>
+    <string name="poi_diplomatic_services_immigrant_visas_yes">Eja</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_no">Nono</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_yes">Eja</string>
+    <string name="poi_liaison_liaison_office">Ufìtziu</string>
+    <string name="poi_consulate_consulate_general">Consoladu generale</string>
+    <string name="poi_embassy_residence">Residèntzia</string>
+    <string name="poi_embassy_mission">Missione</string>
+    <string name="poi_embassy_high_commission">Commissione arta</string>
+    <string name="poi_embassy_delegation">Delegatzione</string>
+    <string name="poi_diplomatic_embassy">Ambassada</string>
+    <string name="poi_consulate_filter">Consoladu</string>
+    <string name="poi_embassy_filter">Ambassada</string>
 </resources>

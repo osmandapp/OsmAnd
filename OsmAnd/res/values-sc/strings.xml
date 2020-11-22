@@ -786,7 +786,7 @@
     <string name="use_fluorescent_overlays">Subrapositziones fluorescentes</string>
     <string name="use_fluorescent_overlays_descr">Imprea colores fluorescentes pro visualizzare rastas e àndalas.</string>
     <string name="offline_edition">Modìficas chene lìnia</string>
-    <string name="offline_edition_descr">Si sa sa modìfica chene lìnia est abilitada, sas modìficas ant a èssere sarvadas in locale, in antis, e carrigadas si benit pedidu. Si nono, ant a èssere carrigadas immediatamente.</string>
+    <string name="offline_edition_descr">Si sa modìfica chene lìnia est abilitada, sas modìficas ant a èssere sarvadas in locale, in antis, e carrigadas si benit pedidu. Si nono, ant a èssere carrigadas immediatamente.</string>
     <string name="update_poi_does_not_change_indexes">Sa modìficas de sos PDI intre s’aplicatzione non tenent efetos in sas mapas iscarrigadas, sunt imbetzes sarvadas in su dispositivu.</string>
     <string name="local_openstreetmap_were_uploaded">{0} PDI/notas carrigados/as</string>
     <string name="local_openstreetmap_upload">Càrriga sa modìfica in OSM</string>
@@ -2639,7 +2639,7 @@
     <string name="copy_location_name">Còpia sa positzione/su nùmene de su PDI</string>
     <string name="toast_empty_name_error">Logu chene nùmene</string>
     <string name="show_closed_notes">Ammustra sas notas serradas</string>
-    <string name="switch_osm_notes_visibility_desc">Ammustra/cua sas notas OSM in sa mapa.</string>
+    <string name="switch_osm_notes_visibility_desc">Ammustra o cua sas notas OSM in sa mapa.</string>
     <string name="gpx_file_desc">GPX - adatu pro s\'esportatzione a JOSM o a àteros editores OSM.</string>
     <string name="osc_file_desc">OSC - adatu pro s\'esportatzione in OpenStreetmap.</string>
     <string name="shared_string_gpx_file">Documentu GPX</string>
@@ -3084,9 +3084,9 @@
     <string name="application_profiles_descr">Ischerta sos profilos chi cheres chi siant visìbiles in s’aplicatzione.</string>
     <string name="application_profiles">Profilos de s\'aplicatzione</string>
     <string name="quick_action_need_to_add_item_to_list">Annanghe a su mancu un\'elementu a sa lista in sas impostatziones pro sas atziones lestras</string>
-    <string name="routing_attr_piste_type_downhill_name">Iscì alpinu/de achirrada</string>
+    <string name="routing_attr_piste_type_downhill_name">Iscì alpinu e de achirrada</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas pro iscì alpinu o de achirrada e atzessu a sos impiantos de artiada.</string>
-    <string name="routing_attr_piste_type_nordic_name">Iscì de fundu/nòrdicu</string>
+    <string name="routing_attr_piste_type_nordic_name">Iscì de fundu e nòrdicu</string>
     <string name="routing_attr_piste_type_nordic_description">Pistas pro s\'iscì nòrdicu o de fundu.</string>
     <string name="routing_attr_piste_type_skitour_name">Iscì-alpinismu</string>
     <string name="routing_attr_piste_type_skitour_description">Àndalas pro s\'iscì-alpinismu.</string>
@@ -3577,7 +3577,7 @@
     <string name="shared_string_hillshade">Umbraduras de sos rilievos</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pistas</string>
-    <string name="quick_action_show_hide_terrain">Ammustra / cua su terrinu</string>
+    <string name="quick_action_show_hide_terrain">Ammustra o cua su terrinu</string>
     <string name="quick_action_terrain_hide">Cua su terrinu</string>
     <string name="quick_action_terrain_show">Ammustra su terrinu</string>
     <string name="quick_action_terrain_descr">Unu butone pro ammustrare o cuare s\'istratu de su terrinu in sa mapa.</string>
@@ -3695,11 +3695,11 @@
     <string name="additional_actions_descr">Podes atzèdere a custas atziones incarchende su butone \"%1$s\".</string>
     <string name="quick_action_transport_hide">Cua sos trasportos pùblicos</string>
     <string name="quick_action_transport_show">Ammustra sos trasportos pùblicos</string>
-    <string name="quick_action_show_hide_transport">Ammustra/cua sos trasportos pùblicos</string>
+    <string name="quick_action_show_hide_transport">Ammustra o cua sos trasportos pùblicos</string>
     <string name="quick_action_transport_descr">Butone pro ammustrare o cuare sos trasportos pùblicos in sa mapa.</string>
-    <string name="create_edit_poi">Crea / Modìfica unu PDI</string>
+    <string name="create_edit_poi">Crea o modìfica unu PDI</string>
     <string name="parking_positions">Logos de parchègiu</string>
-    <string name="add_edit_favorite">Annanghe / Modìfica unu preferidu</string>
+    <string name="add_edit_favorite">Annanghe o modìfica unu preferidu</string>
     <string name="reset_deafult_order">Riprìstina s\'òrdine predefinidu de sos elementos</string>
     <string name="back_to_editing">Torra a modificare</string>
     <string name="quick_action_switch_profile_descr">Su butone de atzione faghet colare dae unu profilu ischertadu a s\'àteru.</string>
@@ -3852,7 +3852,7 @@
     <string name="gpx_monitoring_start">Sighi cun sa registratzione de su biàgiu</string>
     <string name="marker_save_as_track">Sarva comente documentu de rasta</string>
     <string name="number_of_gpx_files_selected_pattern">%s documentos de rasta ischertados</string>
-    <string name="save_global_track_interval_descr">Dislinda s’intervallu pro sa registratzione generale de sas rastas (abilitadu pro mèdiu de su widget registratzione GPX in sa mapa).</string>
+    <string name="save_global_track_interval_descr">Dislinda s’intervallu pro sa registratzione generale de sas rastas (allutu pro mèdiu de su widget \'Registratzione GPX\' in sa mapa).</string>
     <string name="monitoring_control_start">Registra</string>
     <string name="shared_string_gpx_route">Àndala de una rasta</string>
     <string name="follow_track">Sighi sa rasta</string>
@@ -3887,7 +3887,7 @@
     <string name="shared_string_redo">Torra a fàghere</string>
     <string name="release_3_8">• Funtzionalidade de pranificatione de un\'àndala agiornada: permitit de impreare castas diferentes de navigatzione pro segmentu e s\'inclusione de rastas
 \n
-\n • Menù de Aparèntzia nou pro sas rastas: ischerta su colore, grussària, visulaizatzione de sas fritzas de diretzione, iconas de incumintzu/fine
+\n • Menù de Aparèntzia nou pro sas rastas: ischerta su colore, grussària, visulaizatzione de sas fritzas de diretzione, iconas de incumintzu e fine
 \n
 \n • Visibilidade megiorada de sos nodos pro sas bitzicletas.
 \n
@@ -3903,7 +3903,7 @@
     <string name="sort_last_modified">Ùrtima modìfica</string>
     <string name="sort_name_descending">Nùmene: Z – A</string>
     <string name="sort_name_ascending">Nùmene: A – Z</string>
-    <string name="start_finish_icons">Iconas de incumintzu/fine</string>
+    <string name="start_finish_icons">Iconas de incumintzu e fine</string>
     <string name="contour_lines_thanks">Gràtzias pro àere comporadu \'Curvas de livellu\'</string>
     <string name="osm_live_payment_desc_hw">Costu periòdicu de s\'abbonamentu. Lu podes anullare in AppGallery cando boles.</string>
     <string name="osm_live_payment_subscription_management_hw">Su pagamentu at a èssere addebitadu a su contu tuo de AppGallery cando sa còmpora at a èssere cunfirmada. 
@@ -3923,7 +3923,7 @@
     <string name="perform_oauth_authorization_description">Intra cun OAuth pro impreare sas funtzionalidades osmedit</string>
     <string name="perform_oauth_authorization">Intra impreende OAuth</string>
     <string name="clear_osm_token">Iscantzella su getone OAuth de OpenStreetMap</string>
-    <string name="osm_edit_logout_success">Essida fata chene problemas</string>
+    <string name="osm_edit_logout_success">Essidu</string>
     <string name="file_already_imported">Su documentu est giai importadu in OsmAnd</string>
     <string name="use_two_phase_routing">Imprea un\'algoritmu de càrculu de s\'àndala A* a duas fases</string>
     <string name="snowmobile_render_descr">Pro sa ghia de motoislitas cun caminos e rastas dedicados.</string>
@@ -3947,13 +3947,13 @@
     <string name="message_you_need_add_two_points_to_show_graphs">Depes annànghere a su mancu duos puntos</string>
     <string name="login_open_street_map">Intra in OpenStreetMap</string>
     <string name="login_open_street_map_org">Intra in OpenStreetMap.org</string>
-    <string name="sign_in_with_open_street_map">Identìfica·ti cun OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Depes intrare pro pòdere carrigare modìficas noas o mudadas.
+    <string name="sign_in_with_open_street_map">Intra cun OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Intra pro carrigare modìficas noas o mudadas,
 \n
-\nPodes intrare impreende su mètodu seguru OAuth o cun s\'identificadore (su nùmene de impreadore) tuo e sa crae de intrada tua.</string>
-    <string name="use_login_password">Imprea un\'identificadore e una crae de intrada</string>
+\nimpreende su mètodu seguru OAuth o cun su nùmene de impreadore tuo e sa crae de intrada tua.</string>
+    <string name="use_login_password">Intra cun unu nùmene de impreadore e una crae de intrada</string>
     <string name="login_account">Contu</string>
-    <string name="user_login">Identificadore</string>
+    <string name="user_login">Nùmene impreadore</string>
     <string name="manage_subscription">Amministra s\'abbonamentu</string>
     <string name="subscription_payment_issue_title">B\'at unu problema cun s\'abbonamentu tuo. Incarca su butone pro andare a sas impostatziones de sos abbonamentos de Google Play pro acontzare sa manera de pagamentu tua.</string>
     <string name="subscription_expired_title">S\'abbonamentu de OsmAnd Live est iscadidu</string>
@@ -3962,17 +3962,32 @@
     <string name="markers_history">Cronologia de sos marcadores</string>
     <string name="send_files_to_openstreetmap">Imbia unu documentu GPX a OpenStreetMap</string>
     <string name="enter_text_separated">Inserta sas etichetas iscrobadas dae vìrgulas.</string>
-    <string name="gpx_upload_public_visibility_descr">Pùblica cheret nàrrere chi sa rasta at a èssere ammustrada in manera pùblica in sas rastas GPS tuas e in sas listas de rastas GPS pùblicas. Sos datos frunidos pro mèdiu de s\'API non sunt ligados a sa pàgina de sa rasta tua. Sas datas integradas in sos puntos de rasta no ant a èssere a disponimentu pro mèdiu de s\'API GPS, e sos puntos no ant a èssere ordinados in manera cronològica. Nointames custu sos àteros impreadores ant a pòdere iscarrigare sa rasta su matessi dae sa lista pùblica de sas rastas cun totu sas datas e sas oras integradas.</string>
-    <string name="gpx_upload_private_visibility_descr">Privada cheret nàrrere chi sa rasta no at a èssere ammustrada in peruna lista, ma sos puntos suos ant a èssere a disponimentu su matessi pro mèdiu de s\'API GPS pùblicu chene datas e oras ma no ant a èssere ordinados in manera cronològica.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Identificàbile cheret nàrrere chi sa rasta at a èssere ammustrada in manera pùblica in sas rastas GPS tuas e in sas listas de rastas GPS pùblicas. Est a nàrrere chi àteros impreadores ant a pòdere iscarrigare sa rasta e l\'ant a pòdere assotziare a su nùmene de impreadore tuo. Sos datos frunidos pro mèdiu de s\'API de sos puntos de sas rastas ant a èssere ligados a sa pàgina de sa rasta originale tua. Sas datas e sas oras de sos puntos ant a èssere a disponimentu pro mèdiu de s\'API GPS pùblicu.</string>
-    <string name="gpx_upload_trackable_visibility_descr">Arrastàbile cheret nàrrere chi sa rasta no at a èssere ammustrada in peruna lista pùblica ma sos puntos suos ant a èssere a disponimentu su matessi pro mèdiu de s\'API GPS pùblicu cun sas datas. Àteros impreadores ant a pòdere iscarrigare petzi puntos de rasta protzessados dae sa rasta tua chi no ant a èssere assotziados diretamente cun tie.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Pùblica\" cheret nàrrere chi sa rasta at a èssere ammustrada in manera pùblica in sas rastas GPS tuas, in sas listas de rastas GPS pùblicas e in sa lista de rastas pùblicas cun datas e oras in forma originale. Sos datos frunidos pro mèdiu de s\'API non sunt ligados a sa pàgina de sa rasta tua. Sas datas e sas oras integradas in sos puntos de rasta no ant a èssere a disponimentu pro mèdiu de s\'API GPS, e sos puntos no ant a èssere ordinados in manera cronològica.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privada\" cheret nàrrere chi sa rasta no at a èssere ammustrada in peruna lista, ma sos puntos suos ant a èssere a disponimentu su matessi, in òrdine cronològicu, pro mèdiu de s\'API GPS pùblica chene datas e oras.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificàbile\" cheret nàrrere chi sa rasta at a èssere ammustrada in manera pùblica in sas rastas GPS tuas e in sas listas de rastas GPS pùblicas. Est a nàrrere chi àteros impreadores ant a pòdere iscarrigare sa rasta e l\'ant a pòdere assotziare a su nùmene de impreadore tuo. Sos puntos de rastas cun datas e oras dae s\'API GPS frunidos pro mèdiu de s\'API de sos puntos de sas rastas ant a èssere ligados a sa pàgina de sa rasta originale tua.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Arrastàbile\" cheret nàrrere chi sa rasta no at a èssere ammustrada in peruna lista pùblica, ma sos puntos suos cun sas datas (no ant a èssere assotziados diretamente cun tie) l\'ant a èssere pro mèdiu de iscarrigamentos dae s\'API GPS pùblica.</string>
     <string name="osm_edit_close_note">Serra sa nota de OSM</string>
     <string name="osm_edit_comment_note">Cummenta sa nota de OSM</string>
-    <string name="osm_login_descr">Podes intrare impreende su mètodu seguru OAuth o cun su nùmene tuo e sa crae de intrada tua.</string>
+    <string name="osm_login_descr">Intra impreende su mètodu seguru OAuth o cun su nùmene de impreadore tuo e sa crae de intrada tua.</string>
     <string name="shared_string_add_photo">Annanghe una fotografia</string>
     <string name="register_on_openplacereviews">Registra·ti in
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Sas fotografias benint frunidas dae su progetu a datos abertos OpenPlaceReviews.org. Pro pòdere carrigare sas fotografias tuas ti depes registrare in su situ.</string>
+    <string name="register_on_openplacereviews_desc">Intra in su situ de su progetu a datos abertos OpenPlaceReviews.org. pro carrigare fintzas àteras fotografias.</string>
     <string name="register_opr_create_new_account">Crea unu contu nou</string>
     <string name="register_opr_have_account">Tèngio giai unu contu</string>
+    <string name="shared_string_search_history">Cronologia de chirca</string>
+    <string name="app_mode_kayak">Kàyak</string>
+    <string name="app_mode_motorboat">Motoscafu</string>
+    <string name="add_to_mapillary">Annanghe a Mapillary</string>
+    <string name="add_to_opr">Annanghe a OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd ammustrat fotografias dae fontes medas:
+\nOpenPlaceReviews - fotografias de sos PDI;
+\nMapillary - immàgines a livellu de su caminu;
+\nWeb / Wikimedia - fotografias de sos PDI dillindadas in sos datos de OpenStreetMap.</string>
+    <string name="shared_string_resources">Risursas</string>
+    <string name="approximate_file_size">Mannària aprossimativa de su documentu</string>
+    <string name="select_data_to_export">Ischerta sos datos de esportare in su documentu.</string>
+    <string name="file_size_needed_for_import">Netzessàriu pro s\'importatzione</string>
+    <string name="export_not_enough_space_descr">Su dispositivu tuo tenet petzi %1$s a disponimentu. Lìbera unu pagu de memòria o boga s\'ischerta a unos cantos elementos de esportare.</string>
+    <string name="export_not_enough_space">Non b\'at logu bastante</string>
 </resources>

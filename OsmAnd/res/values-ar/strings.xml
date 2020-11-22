@@ -471,7 +471,7 @@
     <string name="index_name_africa">إفريقيا</string>
     <string name="index_name_asia">آسيا</string>
     <string name="index_name_oceania">أستراليا و أوقيانوسيا</string>
-    <string name="routing_settings">الملاحة</string>
+    <string name="routing_settings">التوجيه مع الطرق</string>
     <string name="routing_settings_descr">ضبط خاص لكل وضع من أوضاع الملاحة.</string>
     <string name="index_settings">إدارة بيانات الخرائط</string>
     <string name="general_settings">إعدادات عامة</string>
@@ -1153,7 +1153,7 @@
     <string name="action_delete">حذف إجراء</string>
     <string name="osm_edits">التعديلات</string>
     <string name="parking_place_limited">وقت وقوف السيارات يقتصر على</string>
-    <string name="shared_string_collapse">أقل</string>
+    <string name="shared_string_collapse">تدلي</string>
     <string name="drawer">قائمة منبسطة</string>
     <string name="osm_settings">تعديل OSM</string>
     <string name="free">فارغ %1$s</string>
@@ -3329,7 +3329,7 @@
     <string name="routing_attr_piste_type_skitour_name">جولة تزلج</string>
     <string name="routing_attr_piste_type_skitour_description">طرق لجولات التزلج.</string>
     <string name="routing_attr_piste_type_sled_name">تزلج</string>
-    <string name="routing_attr_piste_type_sled_description">منحدرات للاستخدام الزلاجات.</string>
+    <string name="routing_attr_piste_type_sled_description">منحدرات لاستخدام الزلاجات.</string>
     <string name="routing_attr_allow_intermediate_name">السماح بالمسارات المتوسطة</string>
     <string name="routing_attr_allow_intermediate_description">طرق أكثر صعوبة مع أقسام أكثر حدة. بعض العقبات التي ينبغي تجنبها.</string>
     <string name="routing_attr_allow_advanced_name">السماح للطرق المتقدمة</string>
@@ -3974,4 +3974,10 @@
     <string name="select_data_to_export">حدد البيانات التي سيتم تصديرها إلى الملف.</string>
     <string name="file_size_needed_for_import">مطلوب للاستيراد</string>
     <string name="export_not_enough_space">لا يوجد مساحة كافية</string>
+    <string name="add_to_mapillary">أضف إلى مابيلاي</string>
+    <string name="add_to_opr">إضافة إلى OpenPlaceReviews</string>
+    <string name="add_photos_descr">ويعرض صورًا من عدة مصادر:
+\nOpenPlaceReviews - صور POI ؛
+\nMapillary - صور على مستوى الشارع ؛
+\nالويب / ويكيميديا - صور POI المحددة في بيانات OpenStreetMap.</string>
 </resources>
