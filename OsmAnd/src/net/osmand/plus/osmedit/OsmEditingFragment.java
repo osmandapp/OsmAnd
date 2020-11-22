@@ -40,7 +40,6 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
 	public static final String OSM_LOGIN_DATA = "osm_login_data";
 	private static final String OSM_EDITING_INFO = "osm_editing_info";
-	private static final String USE_DEV_URL = "use_dev_url";
 
 	private OsmOAuthAuthorizationAdapter authorizationAdapter;
 
@@ -172,7 +171,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
-		if (USE_DEV_URL.equals(prefId) && newValue instanceof Boolean) {
+		if (settings.USE_DEV_URL.getId().equals(prefId) && newValue instanceof Boolean) {
 			settings.USE_DEV_URL.set((Boolean) newValue);
 			osmLogout();
 			authorizationAdapter = app.getOsmOAuthHelper().updateAdapter();
@@ -225,7 +224,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	@Override
 	public void onPreferenceChanged(String prefId) {
-		if (USE_DEV_URL.equals(prefId)) {
+		if (settings.USE_DEV_URL.getId().equals(prefId)) {
 			osmLogout();
 			authorizationAdapter = app.getOsmOAuthHelper().updateAdapter();
 		}
