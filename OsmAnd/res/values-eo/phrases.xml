@@ -3865,4 +3865,12 @@
     <string name="poi_liaison_filter">Kvazaŭ‑ambasadejo</string>
     <string name="poi_consulate_filter">Konsulejo</string>
     <string name="poi_embassy_filter">Ambasadejo</string>
+    <string name="poi_diplomatic_services_citizen_services_no">ne</string>
+    <string name="poi_diplomatic_services_citizen_services_yes">jes</string>
+    <string name="poi_diplomatic_services_immigrant_visas_no">ne</string>
+    <string name="poi_diplomatic_services_immigrant_visas_yes">jes</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_no">ne</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_yes">jes</string>
+    <string name="poi_liaison_subnational">subŝtata/provinca oficejo</string>
+    <string name="poi_liaison_representative_office">reprezenta oficejo</string>
 </resources>

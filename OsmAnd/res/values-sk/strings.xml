@@ -3989,4 +3989,6 @@
     <string name="file_size_needed_for_import">Potrebné pre import</string>
     <string name="export_not_enough_space_descr">Na vašom zariadení je len %1$s voľného miesta. Prosím uvoľnite miesto alebo zrušte niektoré položky z exportu.</string>
     <string name="export_not_enough_space">Nie je dostatok miesta</string>
+    <string name="select_groups_for_import">Zvoľte skupiny, ktoré budú importované.</string>
+    <string name="select_items_for_import">Zvoľte položky, ktoré budú importované.</string>
 </resources>
