@@ -98,53 +98,52 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		return editingPOI(getUserDetailsApi(), GET, "validate_login", false);
 	}
 
-	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation,
-									boolean anonymous) {
+	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation, boolean anonymous) {
 		OsmOAuthAuthorizationAdapter authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
 		OsmBugResult result = new OsmBugResult();
-		if (!anonymous) {
-			if (authorizationAdapter.isValidToken()) {
-				try {
-					result = performOAuthRequest(url, requestMethod, userOperation, authorizationAdapter);
-				} catch (InterruptedException e) {
-					log.error(e);
-					result.warning = e.getMessage();
-				} catch (ExecutionException e) {
-					log.error(e);
-					result.warning = e.getMessage();
-				} catch (IOException e) {
-					log.error(e);
-					result.warning = e.getMessage();
-				}
-			} else {
-				try {
-					result = performBasicRequest(url, requestMethod);
-				} catch (FileNotFoundException | NullPointerException e) {
-					// that's tricky case why NPE is thrown to fix that problem httpClient could be used
-					String msg = app.getString(R.string.auth_failed);
-					log.error(msg, e);
-					result.warning = app.getString(R.string.auth_failed) + "";
-				} catch (MalformedURLException e) {
-					log.error(userOperation + " " + app.getString(R.string.failed_op), e);
-					result.warning = e.getMessage() + "";
-				} catch (IOException e) {
-					log.error(userOperation + " " + app.getString(R.string.failed_op), e);
-					result.warning = e.getMessage() + " link unavailable";
-				}
+		if (authorizationAdapter.isValidToken() && !anonymous) {
+			try {
+				result = performOAuthRequest(url, requestMethod, userOperation, authorizationAdapter);
+			} catch (InterruptedException e) {
+				log.error(e);
+				result.warning = e.getMessage();
+			} catch (ExecutionException e) {
+				log.error(e);
+				result.warning = e.getMessage();
+			} catch (IOException e) {
+				log.error(e);
+				result.warning = e.getMessage();
+			}
+		} else {
+			try {
+				result = performBasicRequest(url, requestMethod, anonymous);
+			} catch (FileNotFoundException | NullPointerException e) {
+				// that's tricky case why NPE is thrown to fix that problem httpClient could be used
+				String msg = app.getString(R.string.auth_failed);
+				log.error(msg, e);
+				result.warning = app.getString(R.string.auth_failed) + "";
+			} catch (MalformedURLException e) {
+				log.error(userOperation + " " + app.getString(R.string.failed_op), e);
+				result.warning = e.getMessage() + "";
+			} catch (IOException e) {
+				log.error(userOperation + " " + app.getString(R.string.failed_op), e);
+				result.warning = e.getMessage() + " link unavailable";
 			}
 		}
 		return result;
 	}
 
-	private OsmBugResult performBasicRequest(String url, String requestMethod) throws IOException {
+	private OsmBugResult performBasicRequest(String url, String requestMethod, boolean anonymous) throws IOException {
 		OsmBugResult result = new OsmBugResult();
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		log.info("Editing poi " + url);
 		connection.setConnectTimeout(15000);
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
-		String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get();
-		connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes(StandardCharsets.UTF_8)));
+		if (!anonymous) {
+			String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get();
+			connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes(StandardCharsets.UTF_8)));
+		}
 		connection.setDoInput(true);
 		connection.connect();
 		String msg = connection.getResponseMessage();
