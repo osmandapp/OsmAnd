@@ -3971,4 +3971,6 @@
     <string name="gpx_upload_private_visibility_descr"/>
     <string name="use_dev_url_descr">Utiliser dev.openstreetmap.org plutôt que openstreetmap.org pour tester l\'envoi des notes OSM / Points d\'intérêt / GPX.</string>
     <string name="use_dev_url">Utiliser dev.openstreetmap.org</string>
+    <string name="select_groups_for_import"></string>
+    <string name="select_items_for_import"></string>
 </resources>
