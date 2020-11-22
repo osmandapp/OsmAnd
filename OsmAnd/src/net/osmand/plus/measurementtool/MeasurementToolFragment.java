@@ -751,7 +751,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (editingCtx.getPointsCount() > 0) {
-				if (editingCtx.isNewData() || isInEditMode()) {
+				if (editingCtx.isNewData()) {
 					if (showDialog) {
 						openSaveAsNewTrackMenu(mapActivity);
 					} else {
