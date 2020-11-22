@@ -25,7 +25,6 @@
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center"
 			android:textSize="@dimen/default_desc_text_size"
-			android:foreground="?attr/selectableItemBackground"
 			android:textColor="@drawable/radio_flat_text_selector_light"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="@string/shared_string_left"/>
@@ -33,11 +32,11 @@
 	</FrameLayout>
 
 	<FrameLayout
-		android:id="@+id/center_button_container"
+		android:id="@+id/buttons_divider"
 		android:layout_width="1dp"
 		android:layout_height="match_parent"
 		android:layout_weight="0"
-		android:background="@color/divider_color">
+		android:background="?attr/divider_color">
 
 	</FrameLayout>
 

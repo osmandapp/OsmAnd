@@ -30,7 +30,8 @@
         <RelativeLayout
             android:id="@+id/up_down_row"
             android:layout_width="match_parent"
-            android:layout_height="112dp"
+            android:layout_height="wrap_content"
+            android:minHeight="112dp"
             android:background="?attr/selectableItemBackground">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -39,8 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginLeft="14dp"
+                android:layout_marginStart="@dimen/measurement_tool_text_button_padding"
+                android:layout_marginLeft="@dimen/measurement_tool_text_button_padding"
                 android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
                 android:layout_marginEnd="@dimen/measurement_tool_text_button_padding"
                 android:layout_marginRight="@dimen/measurement_tool_text_button_padding"
@@ -132,7 +133,8 @@
             <include
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/measurement_tool_button_height"
-                android:layout_alignParentBottom = "true"
+                android:layout_below="@id/distance_to_center_text_view"
+                android:layout_marginTop="@dimen/content_padding_half"
                 android:layout_marginBottom="@dimen/measurement_tool_content_padding_medium"
                 android:layout_marginStart="@dimen/content_padding"
                 android:layout_marginEnd="@dimen/content_padding"

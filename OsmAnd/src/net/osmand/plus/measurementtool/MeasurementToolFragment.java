@@ -127,7 +127,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private Snackbar snackbar;
 	private String fileName;
 
-	private @Nullable AdditionalInfoType currentAdditionalInfoType;
+	private @Nullable
+	AdditionalInfoType currentAdditionalInfoType;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean progressBarVisible;
@@ -295,8 +296,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 						collapseAdditionalInfoView();
 					} else {
 						expandAdditionalInfoView();
+						additionalInfoExpanded = true;
 					}
-					additionalInfoExpanded = true;
 					updateUpDownBtn();
 				}
 			});
@@ -309,7 +310,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				public void onClick(View v) {
 					changeAdditionalInfoType(AdditionalInfoType.GRAPH);
 					expandAdditionalInfoView();
-					additionalInfoExpanded = true;
 					updateUpDownBtn();
 				}
 			});
@@ -553,7 +553,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (ma == null) return;
 
 			OsmandApplication app = ma.getMyApplication();
-			View buttonsDivider = customRadioButton.findViewById(R.id.center_button_container);
+			View buttonsDivider = customRadioButton.findViewById(R.id.buttons_divider);
 			if (AdditionalInfoType.POINTS == type) {
 				visibleCard = pointsCard;
 				additionalInfoExpanded = true;
@@ -565,6 +565,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				buttonsDivider.setVisibility(View.GONE);
 				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, END);
 			} else if (null == type) {
+				visibleCard = null;
 				additionalInfoExpanded = false;
 				buttonsDivider.setVisibility(View.VISIBLE);
 				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, null);
@@ -1508,7 +1509,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				collapseAdditionalInfoView();
 			} else if (pointsCount < 1) {
 				disable(upDownBtn);
-				collapseAdditionalInfoView();
 				if (additionalInfoExpanded) {
 					collapseAdditionalInfoView();
 				}

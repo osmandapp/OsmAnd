@@ -76,6 +76,7 @@ public class TrackDetailsMenu {
 	private boolean visible;
 	private boolean hidding;
 	private Location myLocation;
+
 	public boolean shouldShowXAxisPoints () {
 		return true;
 	}
