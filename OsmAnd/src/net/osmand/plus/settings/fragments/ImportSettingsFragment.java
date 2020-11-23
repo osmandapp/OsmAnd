@@ -38,6 +38,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
@@ -54,7 +55,6 @@ import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
-import net.osmand.plus.settings.backend.backup.SearchHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.HistoryMarkersSettingsItem;
 import net.osmand.plus.settings.backend.backup.MapSourcesSettingsItem;
 import net.osmand.plus.settings.backend.backup.MarkersSettingsItem;
@@ -63,12 +63,12 @@ import net.osmand.plus.settings.backend.backup.OsmNotesSettingsItem;
 import net.osmand.plus.settings.backend.backup.PoiUiFiltersSettingsItem;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.QuickActionsSettingsItem;
+import net.osmand.plus.settings.backend.backup.SearchHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -135,7 +135,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 		inflater = UiUtilities.getInflater(app, nightMode);
 		View root = inflater.inflate(R.layout.fragment_import, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
-		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
+		View continueBtn = root.findViewById(R.id.continue_button);
 		toolbarLayout = root.findViewById(R.id.toolbar_layout);
 		expandableList = root.findViewById(R.id.list);
 		buttonsContainer = root.findViewById(R.id.buttons_container);
@@ -146,6 +146,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 		description = header.findViewById(R.id.description);
 		description.setText(R.string.select_data_to_import);
 		expandableList.addHeaderView(header);
+		UiUtilities.setupDialogButton(nightMode, continueBtn, DialogButtonType.PRIMARY, getString(R.string.shared_string_continue));
 		continueBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

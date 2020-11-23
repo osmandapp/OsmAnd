@@ -3212,7 +3212,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="route_recalculation">Maršruta pārrēķināšana</string>
     <string name="accessibility_announce">Paziņošana</string>
     <string name="login_and_pass">Lietotāja vārds un parole</string>
-    <string name="plugin_global_prefs_info">Šie iestatījumi darbosies visos profilos.</string>
+    <string name="plugin_global_prefs_info">Šie iestatījumi ir globāli un darbosies visos profilos</string>
     <string name="osm_editing">OSM rediģēšana</string>
     <string name="osm_edits_view_descr">Skatiet vēl neaugšupielādētos labojumus vai OSM kļūdas %1$s mapē. Augšupielādētie punkti vairs netiks rādīti.</string>
     <string name="app_mode_osm">OSM</string>
@@ -3278,13 +3278,13 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="icon_group_emergency">Ārkārtas</string>
     <string name="icon_group_travel">Ceļošana</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Nepieciešams pievienot vismaz divus punktus</string>
-    <string name="login_open_street_map">Ieiet OpenStreetMap</string>
-    <string name="login_open_street_map_org">Ieiet OpenStreetMap.org</string>
+    <string name="login_open_street_map">Pierakstīties OpenStreetMap</string>
+    <string name="login_open_street_map_org">Pierakstīties OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Pierakstīties ar OpenStreetMap</string>
     <string name="open_street_map_login_mode">Lai sūtītu labojumus vai jaunus datus, ir nepieciešams pierakstīties.
 \n
-\nJūs varat pierakstīties, lietojot drošo OAuth metodi vai ar savu lietotāja vārdu un paroli.</string>
-    <string name="use_login_password">Lietot pierakstīšanās datus</string>
+\nJūs varat pierakstīties, lietojot OAuth vai ar savu lietotāja vārdu un paroli.</string>
+    <string name="use_login_password">Pierakstīties ar lietotāja vādu un paroli</string>
     <string name="login_account">Konts</string>
     <string name="user_login">Lietotājs</string>
     <string name="manage_subscription">Pārvaldīt abonomentu</string>
@@ -3297,10 +3297,31 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="enter_text_separated">Ievadiet tagus, atdalītus ar komatu.</string>
     <string name="osm_edit_close_note">Aizvērt OSM Note</string>
     <string name="osm_edit_comment_note">Komentēt OSM Note</string>
-    <string name="osm_login_descr">Jūs varat ielogoties lietojot drošo OAuth metodi vai savu lietotāja vārdu un paroli.</string>
+    <string name="osm_login_descr">Ielogojieties lietojot drošo OAuth metodi vai savu lietotāja vārdu un paroli.</string>
     <string name="shared_string_add_photo">Pievienot foto</string>
     <string name="register_on_openplacereviews">Reģistrēties
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotogrāfijas tiek piegādātas no atvērtā koda projekta OpenPlaceReviews.org. Lai pievienotu savas fotogrāfijas, nepieciešams reģistrēties šajā interneta vietnē.</string>
+    <string name="register_on_openplacereviews_desc">Lai augšupielādētu vēl fotogrāfijas, ielogojieties atvērtā koda projekta OpenPlaceReviews.org vietnē.</string>
     <string name="register_opr_create_new_account">Izveidot jaunu kontu</string>
+    <string name="icon_group_symbols">Simboli</string>
+    <string name="icon_group_sport">Sports</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privāts\" nozīmē, ka trase neparādīsies nevienā publiskā sarakstā, bet trases punkti nehronoloģiskā secībā būs pieejami caur publisko GPS API bez laika atzīmēm.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificējams\" nozīmē, ka trase būs redzama jūsu GPS trasēs un publiskajos GPS trašu sarakstos, t.i. citi lietotāji varēs lejupielādēt trasi un asociēt to ar jūsu vārdu. Publiskie trases punktu dati ar laika atzīmēm no GPS API caur trackpoints API dos referenci uz jūsu oriģinālo trases lapu.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Izsekojams\" nozīmē, ka pati trase neparādās publiskajos sarakstos, bet tikai apstrādātie trackpointi ar laika atzīmēm (nevar tikt asociēti konkrēti ar jums) caur lejupielādēm no publiskā GPS API.</string>
+    <string name="register_opr_have_account">Man jau ir konts</string>
+    <string name="shared_string_search_history">Meklēšanas vēsture</string>
+    <string name="app_mode_kayak">Kajaks</string>
+    <string name="app_mode_motorboat">Motorlaiva</string>
+    <string name="add_to_mapillary">Pievienot Mapillary</string>
+    <string name="add_to_opr">Pievienot OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd rāda attēlus no dažādiem avotiem:
+\nOpenPlaceReviews - POI bildes;
+\nMapillary - ielas līmeņa attēli;
+\nWeb / Wikimedia - POI bildes no OpenStreetMap datiem.</string>
+    <string name="shared_string_resources">Resursi</string>
+    <string name="approximate_file_size">Aptuvenais faila izmērs</string>
+    <string name="select_data_to_export">Izvēlieties datus eksportēšanai failā.</string>
+    <string name="file_size_needed_for_import">Nepieciešams importam</string>
+    <string name="export_not_enough_space_descr">Ierīcē ir tikai %1$s brīvās vietas. Lūdzu atbrīvojiet vietu vai izvēlieties mazāk detaļu eksportam.</string>
+    <string name="export_not_enough_space">Nepietiek brīvās vietas</string>
 </resources>

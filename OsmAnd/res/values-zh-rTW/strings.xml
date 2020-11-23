@@ -3917,10 +3917,10 @@
     <string name="use_native_pt">原生公共運輸發展</string>
     <string name="use_native_pt_desc">切換到 Java（安全）公共運輸路線計算</string>
     <string name="what_is_new">有什麼新鮮事</string>
-    <string name="perform_oauth_authorization_description">執行 OAuth 登入以使用 osmedit 功能</string>
+    <string name="perform_oauth_authorization_description">以 OAuth 登入以使用 osmedit 功能</string>
     <string name="perform_oauth_authorization">透過 OAuth 登入</string>
     <string name="clear_osm_token">清除 OpenStreetMap OAuth 權杖</string>
-    <string name="osm_edit_logout_success">成功登出</string>
+    <string name="osm_edit_logout_success">已登出</string>
     <string name="snowmobile_render_descr">適用於有專用道路與軌道的雪地摩托車駕駛。</string>
     <string name="file_already_imported">檔案已在 OsmAnd 匯入</string>
     <string name="use_two_phase_routing">使用 2 相的 A* 路線演算法</string>
@@ -3948,14 +3948,14 @@
     <string name="subscription_expired_title">OsmAnd Live 訂閱已過期</string>
     <string name="subscription_paused_title">OsmAnd Live 訂閱已暫停</string>
     <string name="subscription_on_hold_title">OsmAnd Live 訂閱已暫停</string>
-    <string name="login_open_street_map">登入到 OpenStreetMap</string>
-    <string name="login_open_street_map_org">登入到 OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">您必須登入以上傳新的或修正過的變更。
+    <string name="login_open_street_map">登入 OpenStreetMap</string>
+    <string name="login_open_street_map_org">登入 OpenStreetMap.org</string>
+    <string name="open_street_map_login_mode">登入以上傳新的或修正過的變更，
 \n
-\n您可以使用安全的 OAuth 方法或使用您的登入與密碼來登入。</string>
-    <string name="use_login_password">使用登入與密碼</string>
+\n以 OAuth 或使用您的使用者名稱與密碼來登入。</string>
+    <string name="use_login_password">以使用者名稱與密碼登入</string>
     <string name="login_account">帳號</string>
-    <string name="user_login">登入</string>
+    <string name="user_login">使用者名稱</string>
     <string name="sign_in_with_open_street_map">使用 OpenStreetMap 登入</string>
     <string name="markers_history">標記歷史</string>
     <string name="send_files_to_openstreetmap">傳送 GPX 檔案到 OpenStreetMap</string>
@@ -3966,14 +3966,26 @@
     <string name="gpx_upload_trackable_visibility_descr">「可追蹤」代表軌跡不會在任何公開的清單中顯示，但帶有時間戳（這並不會與您直接相關聯）的已處理追蹤點可從公開的 GPS API 下載。</string>
     <string name="osm_edit_close_note">關閉 OSM 註記</string>
     <string name="osm_edit_comment_note">評論 OSM 註記</string>
-    <string name="osm_login_descr">您可以使用安全的 OAuth 方式或是使用您的帳號與密碼來登入。</string>
+    <string name="osm_login_descr">使用安全的 OAuth 方式或是使用您的使用者名稱與密碼來登入。</string>
     <string name="shared_string_add_photo">新增照片</string>
     <string name="register_on_openplacereviews">註冊於
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">照片由開放資料專案 OpenPlaceReviews.org 提供。為了上傳您的照片，您必須在網站上註冊。</string>
+    <string name="register_on_openplacereviews_desc">登入開放資料專案網站 OpenPlaceReviews.org 以上傳更多照片。</string>
     <string name="register_opr_create_new_account">建立新帳號</string>
     <string name="register_opr_have_account">我已經有帳號了</string>
     <string name="shared_string_search_history">搜尋歷史紀錄</string>
     <string name="app_mode_kayak">皮艇</string>
     <string name="app_mode_motorboat">快艇</string>
+    <string name="add_to_mapillary">新增到 Mapillary</string>
+    <string name="add_to_opr">新增到 OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd 從多個來源顯示照片：
+\nOpenPlaceReviews - POI 照片；
+\nMapillary - 街景；
+\n網路／維基媒體 - 特定 OpenStreetMap 資料的 POI 照片。</string>
+    <string name="shared_string_resources">資源</string>
+    <string name="approximate_file_size">大約檔案大小</string>
+    <string name="select_data_to_export">選取要匯出到檔案的資料。</string>
+    <string name="file_size_needed_for_import">匯入需要</string>
+    <string name="export_not_enough_space_descr">您的裝置僅剩 %1$s 可用空間。請釋出一些空間或取消選取要匯出的部份檔案。</string>
+    <string name="export_not_enough_space">空間不足</string>
 </resources>

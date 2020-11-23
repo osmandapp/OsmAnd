@@ -1,6 +1,7 @@
 package net.osmand.plus.openplacereviews;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -11,23 +12,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
+
 import org.apache.commons.logging.Log;
 
 public class OprStartFragment extends BaseOsmAndFragment {
-	private static final String TAG = "fragment_oprstart";
+	private static final String TAG = OprStartFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(OprStartFragment.class);
 	private static final String openPlaceReviewsUrl = "OpenPlaceReviews.org";
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		View v = inflater.inflate(R.layout.fragment_opr_login, container, false);
-		v.findViewById(R.id.register_opr_create_account).setOnClickListener(new View.OnClickListener() {
+		View createAccount = v.findViewById(R.id.register_opr_create_account);
+		v.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					activity.getSupportFragmentManager().popBackStack();
+				}
+			}
+		});
+		UiUtilities.setupDialogButton(nightMode, createAccount, UiUtilities.DialogButtonType.PRIMARY,
+				R.string.register_opr_create_new_account);
+		createAccount.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent i = new Intent(requireContext(), OPRWebviewActivity.class);
@@ -36,13 +55,10 @@ public class OprStartFragment extends BaseOsmAndFragment {
 				startActivity(i);
 			}
 		});
-		v.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				getActivity().getSupportFragmentManager().popBackStack();
-			}
-		});
-		v.findViewById(R.id.register_opr_have_account).setOnClickListener(new View.OnClickListener() {
+		View haveAccount = v.findViewById(R.id.register_opr_have_account);
+		UiUtilities.setupDialogButton(nightMode, haveAccount, UiUtilities.DialogButtonType.SECONDARY,
+				R.string.register_opr_have_account);
+		haveAccount.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent i = new Intent(requireContext(), OPRWebviewActivity.class);
@@ -71,9 +87,10 @@ public class OprStartFragment extends BaseOsmAndFragment {
 		}
 
 		@Override
-		public void updateDrawState(TextPaint ds) {
+		public void updateDrawState(@NonNull TextPaint ds) {
 			super.updateDrawState(ds);
 			ds.setUnderlineText(false);
+			ds.setTypeface(Typeface.DEFAULT_BOLD);
 		}
 	}
 

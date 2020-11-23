@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="local_index_tile_data_zooms">Deskargatutako zoomak: %1$s</string>
-    <string name="local_index_tile_data_expire">Iraungitze epea (minutuak): %1$s</string>
+    <string name="local_index_tile_data_zooms">Deskargatutako zoom mailak: %1$s</string>
+    <string name="local_index_tile_data_expire">Iraungitze denbora (minutuak): %1$s</string>
     <string name="local_index_tile_data_downloadable">Deskargagarria: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom maximoa: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom minimoa: %1$s</string>
     <string name="local_index_tile_data_name">Tesela datuak: %1$s</string>
     <string name="edit_tilesource_successfully">%1$s tesela iturburua gorde da</string>
-    <string name="edit_tilesource_elliptic_tile">Mercator eliptikoa</string>
+    <string name="edit_tilesource_elliptic_tile">Mercator eliptikoa proiekzioa</string>
     <string name="edit_tilesource_maxzoom">Gehieneko zoom-a</string>
-    <string name="edit_tilesource_expiration_time">Iraungitze epea (minutuak)</string>
+    <string name="edit_tilesource_expiration_time">Iraungitze denbora (minutuak)</string>
     <string name="edit_tilesource_minzoom">Gutxieneko zoom-a</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Aukeratu badagoena…</string>
@@ -21,12 +21,12 @@
     <string name="driving_region_us">EEBB</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa, Asia, Hego Amerika eta antzekoak</string>
-    <string name="driving_region_uk">Erresuma Batua, India edo antzekoa</string>
+    <string name="driving_region_uk">Erresuma Batua, India eta antzekoak</string>
     <string name="speak_title">Iragarri…</string>
-    <string name="speak_descr">Ezarri iragarpenak: Kaleen izenak, trafiko abisuak (geldialdi behartuak, abiadura mugak), radarren iragarpena.</string>
+    <string name="speak_descr">Ezarri iragarpenak: Kaleen izenak, trafiko abisuak (geldialdi behartuak, abiadura murriztaileak), Abiadura-kameren iragarpena, eta abiadura mugak.</string>
     <string name="speak_street_names">Kaleen izenak (TTS)</string>
     <string name="speak_speed_limit">Abiadura muga</string>
-    <string name="speak_cameras">Radarrak</string>
+    <string name="speak_cameras">Abiadura-kamerak</string>
     <string name="speak_traffic_warnings">Trafiko abisuak</string>
     <string name="osb_author_or_password_not_specified">Zehaztu OSM erabiltzailea eta pasahitza \'Ezarpenak\' atalean</string>
     <string name="clear_intermediate_points">Garbitu erdibideko puntuak</string>
@@ -228,7 +228,7 @@
     <string name="poi_filter_for_tourists">Turistentzako</string>
     <string name="poi_filter_fuel">Gasolina</string>
     <string name="show_warnings_title">Erakutsi alarmak…</string>
-    <string name="show_warnings_descr">Ezarri trafiko abisuak (abiadura mugak, geldialdi behartuak, abiadura aldaketak, tunelak), abiadura-radar abisuak eta erraien informazioa.</string>
+    <string name="show_warnings_descr">Ezarri trafiko abisuak (abiadura mugak, geldialdi behartuak, abiadura aldaketak, tunelak), abiadura-kameren abisuak eta erraien informazioa.</string>
     <string name="use_compass_navigation_descr">Erabili iparrorratza bestelako norabiderik antzematen ez denean.</string>
     <string name="use_compass_navigation">Erabili iparrorratza</string>
     <string name="avoid_motorway">Autobiderik ez</string>
@@ -238,27 +238,27 @@
     <string name="snap_to_road">Atxikitu errepidera</string>
     <string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Nabigazioa</string>
     <string name="osmand_short_description_80_chars">Mapa ikusle eta nabigatzaile mugikor globala lineaz kanpoko eta sare bidezko OSM mapetarako</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
-\n 
-\nOsmAnd kode irekiko software bidezko nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAndek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin. 
-\n 
-\nEzaugarri nagusi batzuk: 
-\n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan) 
-\n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri 
-\n- Herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean 
-\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak. 
-\n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak) 
-\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako 
-\n- Kotxea, bizikleta eta oinezkoentzat modua: 
-\n- Egun/gau ikuspegi automatizatua 
-\n- Abiaduraren araberako maparen zooma 
-\n- Maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa 
-\n- Errei gidaritza, abiadura muga bistaratzea, grabatutako edo testutik-ahotsera ahotsekin 
-\n 
-\nOsmAndeko dohaineko bertsioaren mugak 
-\n- Mapa kopuruak deskargatzeko muga 
-\n- Wikipediako POIetara lineaz kanpoko sarbiderik ez 
-\n 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
+\n
+\nOsmAnd kode irekiko software bidezko nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAndek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin.
+\n
+\nEzaugarri nagusi batzuk:
+\n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)
+\n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri
+\n- Herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean
+\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interesguneak, gogokoak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.
+\n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak)
+\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako
+\n- Kotxea, bizikleta eta oinezkoentzat modua:
+\n- Egun/gau ikuspegi automatizatua
+\n- Abiaduraren araberako maparen zooma
+\n- Maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa
+\n- Errei gidaritza, abiadura muga bistaratzea, grabatutako edo testutik-ahotsera ahotsekin
+\n
+\nOsmAndeko dohaineko bertsioaren mugak
+\n- Mapa kopuruak deskargatzeko muga
+\n- Wikipediako POIetara lineaz kanpoko sarbiderik ez
+\n
 \nOsmAnd aktiboki garatua izaten ari da eta proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapak &amp; Nabigazioa</string>
     <string name="osmand_plus_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko OSM Mapetarako Mapa Ikusle eta Nabigatzaile Mugikor Globala</string>
@@ -283,7 +283,7 @@
 \n- Aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa 
 \n- Aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo ahots bihurgailua motorra⏎ ⇥
 \n</string>
-    <string name="filterpoi_activity">Sortu POI iragazkia</string>
+    <string name="filterpoi_activity">Sortu interesguneen iragazkia</string>
     <string name="recalculate_route_to_your_location">Garraio modua:</string>
     <string name="select_navigation_mode">Garraio modua:</string>
     <string name="day_night_info_description">Egunsentia: %1$s ⏎\nIlunabarra: %2$s</string>
@@ -322,7 +322,7 @@
     <string name="bg_service_screen_unlock">Desblokeatu</string>
     <string name="bg_service_screen_lock_toast">Pantaila blokeatuta dago</string>
     <string name="bg_service_interval">Esnatze tartea ezarri:</string>
-    <string name="show_cameras">Radarrak</string>
+    <string name="show_cameras">Abiadura-kamerak</string>
     <string name="show_traffic_warnings">Trafiko abisuak</string>
     <string name="avoid_toll_roads">Bidesaririk ez</string>
     <string name="continue_follow_previous_route_auto">Jarraitu aurreko amaitu gabeko nabigazioaren jarraipena egiten? (%1$s segundo)</string>
@@ -378,7 +378,7 @@
     <string name="rendering_attr_hmRendered_name">Erakutsi xehetasun gehiago mapan</string>
     <string name="local_index_routing_data">Ibilbide datuak</string>
     <string name="navigate_point_format">Formatua</string>
-    <string name="poi_search_desc">POI (Point of interest) bilaketa</string>
+    <string name="poi_search_desc">Interesguneen (POI) bilaketa</string>
     <string name="address_search_desc">Helbide bilaketa</string>
     <string name="navpoint_search_desc">Koordenatuak</string>
     <string name="transport_search_desc">Bilatu garraio publikoa</string>
@@ -411,7 +411,7 @@
     <string name="plugins_screen">Gehigarriak</string>
     <string name="prefs_plugins_descr">Gehigarriek ezarpen aurreratuak eta funtzionalitate berriak aktibatzen dituzte.</string>
     <string name="prefs_plugins">Gehigarriak</string>
-    <string name="osm_editing_plugin_description">Egin OSM ekarpenak, esaterako POI objektuak sortzea edo eraldatzea, OSM oharrak irekitzea edo komentatzea, eta sortutako GPX fitxategiak bidaltzea, aplikazioan OSM kredentzialak zehaztuta. OpenStreetMap.org elkarlanean egindako, domeinu publikoko mapa proiektu global bat da.</string>
+    <string name="osm_editing_plugin_description">Egin OSM ekarpenak, esaterako interesgune objektuak sortzea edo eraldatzea, OSM oharrak irekitzea edo komentatzea, eta sortutako GPX fitxategiak bidaltzea, aplikazioan OSM kredentzialak zehaztuta. OpenStreetMap.org elkarlanean egindako, domeinu publikoko mapa proiektu global bat da.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Ziurrenik bektore mapak azkarrago kargatu. Baliteke gailu batzuetan ongi ez funtzionatzea.</string>
     <string name="play_commands_of_currently_selected_voice">Aukeratu ahotsa eta probatu iragarpenak erreproduzituz:</string>
     <string name="debugging_and_development">OsmAnd garapena</string>
@@ -476,15 +476,15 @@
     <string name="auto_announce_off">Gelditu iragarpen automatikoa</string>
     <string name="i_am_here">Hemen nago</string>
     <string name="zoom_by_trackball_descr">Aldatu maparen zooma trackball-aren mugimendu horizontalaren bidez.</string>
-    <string name="zoom_by_trackball">Trackball-a erabili zooma kontrolatzeko</string>
+    <string name="zoom_by_trackball">Erabili trackball-a zooma kontrolatzeko</string>
     <string name="accessibility_preferences_descr">Irisgarritasun hobespenak.</string>
     <string name="shared_string_accessibility">Irisgarritasuna</string>
     <string name="rendering_out_of_memory">Aukeratutako area erakusteko ez dago memoria nahikorik</string>
     <string name="use_fluorescent_overlays">Gain-azal fluoreszenteak</string>
     <string name="use_fluorescent_overlays_descr">Erabili kolore fluoreszenteak lorratzak eta ibilbideak bistaratzeko.</string>
     <string name="offline_edition">Lineaz kanpoko edizioa</string>
-    <string name="offline_edition_descr">Erabili beti lineaz kanpoko edizioa.</string>
-    <string name="update_poi_does_not_change_indexes">Aplikazioaren barneko POI aldaketek ez diete deskargatutako mapa-fitxategiei eragiten, aldaketak zure gailuko fitxategi batean gordetzen dira.</string>
+    <string name="offline_edition_descr">Lineaz kanpoko edizioa aktibatuta badago, aldaketak lokalean gordeko dira eta eskatutakoan igoko dira, bestela aldaketak berehala igoko dira.</string>
+    <string name="update_poi_does_not_change_indexes">Aplikazioan interesguneei egindako aldaketek ez diete deskargatutako mapa-fitxategiei eragiten, aldaketak zure gailuko fitxategi batean gordetzen dira.</string>
     <string name="local_openstreetmap_uploading">Igotzen…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/ohar igo dira</string>
     <string name="local_openstreetmap_uploadall">Guztia igo</string>
@@ -493,15 +493,15 @@
     <string name="local_openstreetmap_descr_title">OSM edizio asinkronoa:</string>
     <string name="local_openstreetmap_settings">OSM POI/oharrak gailuan gordeta</string>
     <string name="local_openstreetmap_settings_descr">Erakutsi eta kudeatu gailuko datu-baseko OSM POI/oharrak.</string>
-    <string name="live_monitoring_interval_descr">Aukeratu sare bidezko jarraipeneko tartea.</string>
-    <string name="live_monitoring_interval">Sare bidezko jarraipen tartea</string>
+    <string name="live_monitoring_interval_descr">Zehaztu sare bidezko jarraipenaren tartea.</string>
+    <string name="live_monitoring_interval">Sare bidezko jarraipenaren tartea</string>
     <string name="live_monitoring_url_descr">Zehaztu web helbidea ondorengo parametroen sintaxiarekin: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
-    <string name="live_monitoring_url">Sare bidezko jarraipeneko web helbidea</string>
+    <string name="live_monitoring_url">Sare bidezko jarraipenaren web helbidea</string>
     <string name="gpx_monitoring_disabled_warn">Gorde lorratza GPX trepeta erabiliz edo \'Bidaiaren grabaketa\' ezarpenen bidez.</string>
     <string name="show_current_gpx_title">Erakutsi uneko lorratza</string>
     <string name="free_version_message">%1$s mapa deskargatu edo eguneratu ditzakezu.</string>
     <string name="free_version_title">Doainezko bertsioa</string>
-    <string name="poi_context_menu_showdescription">Erakutsi POI-aren deskripzioa.</string>
+    <string name="poi_context_menu_showdescription">Erakutsi interesgunearen deskripzioa.</string>
     <string name="index_name_north_america">Ipar Amerika</string>
     <string name="index_name_us">Ipar Amerika - Estatu Batuak</string>
     <string name="index_name_central_america">Amerika zentrala</string>
@@ -530,7 +530,7 @@
     <string name="global_app_settings">Aplikazioaren ezarpen globalak</string>
     <string name="user_name">Zure OSM erabiltzailea</string>
     <string name="open_street_map_login_descr">Beharrezkoa openstreetmap.org-eko bidalketentzat.</string>
-    <string name="user_password">Zure OSMeko pasahitza</string>
+    <string name="user_password">Pasahitza</string>
     <string name="osmand_service">Atzeko plano modua</string>
     <string name="osmand_service_descr">OsmAnd bigarren planoan dabil pantaila itzalia dagoen bitartean.</string>
     <string name="download_files_not_enough_space">Ez dago leku nahikorik %1$s MB deskargatzeko (%2$s libre).</string>
@@ -558,11 +558,11 @@
     <string name="animate_route">Simulazioa hasiarazi</string>
     <string name="file_can_not_be_renamed">Ezin da fitxategia izenez aldatu.</string>
     <string name="file_with_name_already_exists">Badago izen berdineko beste fitxategi bat.</string>
-    <string name="poi_query_by_name_matches_categories">Lotutako hainbat POI kategoria aurkitu dira.</string>
+    <string name="poi_query_by_name_matches_categories">Erlazionatutako hainbat interesgune-kategoria aurkitu dira.</string>
     <string name="data_to_search_poi_not_available">Deskargatu lineaz kanpoko datuak interesezko puntuak bilatzeko.</string>
     <string name="poi_filter_by_name">Izenez bilatu</string>
-    <string name="old_poi_file_should_be_deleted">\'%1$s\' POI datuen fitxategia erredundantea da eta ezabatua izan daiteke.</string>
-    <string name="update_poi_file_not_found">POI aldaketak mantentzeko fitxategi lokala ez da aurkitu eta ezin izan da sortu.</string>
+    <string name="old_poi_file_should_be_deleted">\'%1$s\' interesguneen datuen fitxategia erredundantea da eta ezabatu daiteke.</string>
+    <string name="update_poi_file_not_found">Interesguneen aldaketak mantentzeko fitxategi lokala ez da aurkitu eta ezin izan da sortu.</string>
     <string name="button_upgrade_osmandplus">OsmAnd+ berritu</string>
     <string name="map_version_changed_info">Deskargatu aplikazioaren bertsio berria mapa-fitxategi berriak erabili ahal izateko.</string>
     <string name="shared_string_rename">Izenez aldatu</string>
@@ -607,14 +607,14 @@
     <string name="local_index_mi_restore">Aktibatu</string>
     <string name="local_index_mi_backup">Desaktibatu</string>
     <string name="shared_string_download">Deskargatu</string>
-    <string name="local_index_poi_data">POI datuak</string>
+    <string name="local_index_poi_data">Interesguneen datuak</string>
     <string name="local_index_address_data">Helbide datuak</string>
     <string name="local_index_transport_data">Garraio publikoaren datuak</string>
     <string name="local_index_map_data">Mapa datuak</string>
     <string name="local_indexes_cat_backup">Desaktibatuta</string>
     <string name="local_indexes_cat_tts">Ahots iragarpenak (TTS)</string>
     <string name="local_indexes_cat_voice">Ahots iragarpenak (grabatua)</string>
-    <string name="local_indexes_cat_poi">POI datuak</string>
+    <string name="local_indexes_cat_poi">Interesguneen datuak</string>
     <string name="ttsvoice">TTS ahotsa</string>
     <string name="search_offline_clear_search">Bilaketa Berria</string>
     <string name="map_text_size_descr">Mapako izenen letra-tamaina:</string>
@@ -627,12 +627,12 @@
     <string name="tts_language_not_supported">Instalatutako Android TTS (text-to-speech) motorrak ez du aukeratutako hizkuntza jasaten, lehenetsitako TTS hizkuntza erabiliko da. Beste TTS motor bat bilatu nahi duzu merkatuan\?</string>
     <string name="tts_missing_language_data_title">Falta diren datuak</string>
     <string name="tts_missing_language_data">Deskargatu hautatutako hizkuntza?</string>
-    <string name="gpx_option_reverse_route">Alderantzikatu GPXaren noranzkoa</string>
+    <string name="gpx_option_reverse_route">Alderantzikatu lorratzaren noranzkoa</string>
     <string name="gpx_option_destination_point">Erabili uneko helmuga</string>
     <string name="gpx_option_from_start_point">Pasatu lorratz osotik</string>
-    <string name="switch_to_vector_map_to_see">Lineaz kanpoko bektore mapa bat dago kokapen honentzat. ⏎
-⇥⏎
-⇥Erabiltzeko, aktibatu \'Menua\' -&gt; \'Konfiguratu mapa\' -&gt; \'Maparen Iturburua…\' -&gt; \'Lineaz kanpoko bektore mapak\'.</string>
+    <string name="switch_to_vector_map_to_see">Lineaz kanpoko bektore mapa bat dago kokapen honentzat. 
+\n
+\nErabiltzeko, aktibatu \'Menua\' -&gt; \'Konfiguratu mapa\' -&gt; \'Maparen Iturburua…\' -&gt; \'Lineaz kanpoko bektore mapak\'.</string>
     <string name="choose_audio_stream">Ahots gidaritzaren irteera</string>
     <string name="choose_audio_stream_descr">Hautatu ahots gidaritzarako bozgorailua.</string>
     <string name="voice_stream_voice_call">Ahots deiaren audioa (Kotxearen BlueTooth musika ekipoa eteteko)</string>
@@ -703,7 +703,7 @@
     <string name="amenity_type_transportation">Garraioa</string>
     <string name="indexing_address">Helbidea indexatzen…</string>
     <string name="indexing_map">Mapa indexatzen…</string>
-    <string name="indexing_poi">POI indexatzen…</string>
+    <string name="indexing_poi">Interesguneak indexatzen…</string>
     <string name="indexing_transport">Garraioa indexatzen…</string>
     <string name="shared_string_io_error">I/O errorea</string>
     <string name="km">km</string>
@@ -756,8 +756,8 @@
     <string name="renderer_load_exception">Ezin izan da marrazlea kargatu.</string>
     <string name="renderers">Bektore marrazlea</string>
     <string name="renderers_descr">Aukeratu marrazketaren itxura</string>
-    <string name="poi_context_menu_website">Erakutsi POI-aren webgunea</string>
-    <string name="poi_context_menu_call">Erakutsi POI-aren telefonoa</string>
+    <string name="poi_context_menu_website">Erakutsi interesgunearen webgunea</string>
+    <string name="poi_context_menu_call">Erakutsi interesgunearen telefonoa</string>
     <string name="download_type_to_filter">idatzi iragazteko</string>
     <string name="use_high_res_maps">Erresoluzio handiko bistaratzea</string>
     <string name="use_high_res_maps_descr">Ez luzatu (eta lausotu) mapa teselak erresoluzio handiko bistaratzetan.</string>
@@ -774,7 +774,7 @@
     <string name="poi_context_menu_modify">Aldatu POI-a</string>
     <string name="poi_context_menu_delete">Ezabatu POI-a</string>
     <string name="rotate_map_compass_opt">Ipar-orratzaren norabidean</string>
-    <string name="rotate_map_bearing_opt">Mugimenduaren noranzkoan</string>
+    <string name="rotate_map_bearing_opt">Mugimenduaren norabidea</string>
     <string name="rotate_map_none_opt">Biraketa gabe (iparra beti gorantza)</string>
     <string name="rotate_map_to_bearing_descr">Maparen lerrokatzea:</string>
     <string name="rotate_map_to_bearing">Maparen orientazioa</string>
@@ -787,19 +787,19 @@
     <string name="error_occurred_loading_gpx">Ezin izan da GPX kargatu.</string>
     <string name="send_report">Bidali informea</string>
     <string name="none_region_found">Ezin izan da deskargatutako maparik aurkitu memoria txartelean.</string>
-    <string name="poi_namefinder_query_empty">Idatzi POI bat bilatzeko</string>
+    <string name="poi_namefinder_query_empty">Idatzi interesgune bat bilatzeko</string>
     <string name="any_poi">Edozein</string>
     <string name="thanks_yandex_traffic">Eskerrik asko Yandex trafikoari buruzko informazioagatik.</string>
     <string name="layer_yandex_traffic">Yandex trafikoa</string>
     <string name="layer_route">Ibilbidea</string>
     <string name="shared_string_favorites">Gogokoak</string>
     <string name="layer_osm_bugs">OSM oharrak (sarean)</string>
-    <string name="layer_poi">POI gainazala…</string>
+    <string name="layer_poi">Interesguneen gainazala…</string>
     <string name="layer_map">Maparen iturburua…</string>
     <string name="menu_layers">Mapa geruzak</string>
     <string name="context_menu_item_search_poi">Bilatu POI-a</string>
     <string name="use_trackball_descr">Erabili trackball gailu bat mapa mugitzeko.</string>
-    <string name="use_trackball">Trackball-a erabili</string>
+    <string name="use_trackball">Erabili trackball-a</string>
     <string name="background_service_wait_int_descr">Ezarri onartutako gehieneko itxarote denbora kokapenaren irakurketa bakoitzarentzat.</string>
     <string name="background_service_wait_int">Kokapen irakurketarako gehieneko itxarote denbora</string>
     <string name="where_am_i">Non nago?</string>
@@ -865,12 +865,12 @@
     <string name="transport">Garraioa</string>
     <string name="shared_string_ok">ADOS</string>
     <string name="show_transport_over_map_description">Erakutsi garraio publikoaren geltokiak mapan.</string>
-    <string name="show_transport_over_map">Erakutsi garraioaren geltokiak</string>
+    <string name="show_transport_over_map">Erakutsi garraio geltokiak</string>
     <string name="hello">OsmAnd nabigazio aplikazioa</string>
-    <string name="update_poi_success">POI datuak eguneratuta ({0} kargatu dira)</string>
-    <string name="update_poi_error_local">Ezin izan da POI zerrenda lokala eguneratu.</string>
+    <string name="update_poi_success">Interesguneen datuak eguneratuta ({0} kargatu dira)</string>
+    <string name="update_poi_error_local">Ezin izan da interesguneen zerrenda lokala eguneratu.</string>
     <string name="update_poi_error_loading">Ezin izan dira datuak zerbitzaritik kargatu.</string>
-    <string name="update_poi_no_offline_poi_index">Ez dago lineaz kanpoko POI daturik area honentzat</string>
+    <string name="update_poi_no_offline_poi_index">Ez dago lineaz kanpoko interesguneen daturik area honentzat</string>
     <string name="update_poi_is_not_available_for_zoom">Zooma hurbiltzeak POI-ak eguneratzea ahalbidetzen dizu</string>
     <string name="context_menu_item_update_poi">Eguneratu POI-a</string>
     <string name="context_menu_item_update_map_confirm">Eguneratu datu lokalak Internet bidez?</string>
@@ -947,8 +947,8 @@
     <string name="shared_string_settings">Ezarpenak</string>
     <string name="save_current_track_descr">Gorde uneko lorratza GPX fitxategi gisa orain.</string>
     <string name="save_current_track">Gorde uneko lorratza</string>
-    <string name="save_track_interval">Erregistroen tartea nabigazioan</string>
-    <string name="save_track_interval_descr">Zehaztu erregistratze maiztasuna nabigazio bitarteko lorratz grabaketarako</string>
+    <string name="save_track_interval">Erregistro- tartea nabigazioan zehar</string>
+    <string name="save_track_interval_descr">Zehaztu erregistro-tartea nabigazio bitarteko lorratz grabaketarako</string>
     <string name="save_track_to_gpx_descrp">GPX lorratza automatikoki gordeko da lorratzen direktorioan nabigazioan zehar.</string>
     <string name="update_tile">Mapa eguneratu</string>
     <string name="reload_tile">Tesela birkargatu</string>
@@ -965,8 +965,8 @@
     <string name="show_view_angle">Erakutsi ikuspegiaren norabidea</string>
     <string name="map_view_3d_descr">Gaitu maparen 3D ikuspegia.</string>
     <string name="map_view_3d">3D Mapa Ikuspegia</string>
-    <string name="show_poi_over_map_description">Erakutsi erabilitako azken POI-a gain-azala.</string>
-    <string name="show_poi_over_map">Erakutsi POI gainazala</string>
+    <string name="show_poi_over_map_description">Erakutsi erabilitako azken interesguneen gainazala.</string>
+    <string name="show_poi_over_map">Erakutsi interesguneen gainazala</string>
     <string name="map_tile_source_descr">Aukeratu sareko edo cacheko mapa teselen iturburua.</string>
     <string name="map_tile_source">Tesela maparen iturburua</string>
     <string name="map_source">Maparen iturburua</string>
@@ -1005,7 +1005,7 @@
     <string name="search_address_building_option">Eraikina</string>
     <string name="search_address_street_option">Bidegurutzatzen den kalea</string>
     <string name="context_menu_item_update_map">Mapa eguneratu</string>
-    <string name="context_menu_item_create_poi">Sortu POI bat</string>
+    <string name="context_menu_item_create_poi">Sortu interesgune bat</string>
     <string name="shared_string_yes">Bai</string>
     <string name="shared_string_cancel">Utzi</string>
     <string name="shared_string_apply">Aplikatu</string>
@@ -1024,7 +1024,7 @@
     <string name="osb_comment_dialog_success">Iruzkina gehituta</string>
     <string name="osb_comment_dialog_error">Ezin izan da iruzkina gehitu.</string>
     <string name="poi_edit_title">Editatu POI-a</string>
-    <string name="poi_create_title">Sortu POI bat</string>
+    <string name="poi_create_title">Sortu interesgune bat</string>
     <string name="poi_error_poi_not_found">Ezin da nodoa aurkitu, edo zerbitzua hainbat nodoz osatuta dago, eta ez dago horretarako euskarririk oraindik.</string>
     <string name="poi_remove_confirm_template">{0} ezabatu (iruzkina)?</string>
     <string name="poi_remove_title">Ezabatu POI-a</string>
@@ -1038,7 +1038,7 @@
     <string name="poi_error_info_not_loaded">Nodoari buruzko informazioa ez da kargatu</string>
     <string name="poi_dialog_opening_hours">Ireki</string>
     <string name="poi_dialog_comment">Iruzkina utzi</string>
-    <string name="poi_dialog_comment_default">POI-a aldatzea</string>
+    <string name="poi_dialog_comment_default">Interesgunea aldatzea</string>
     <string name="poi_dialog_other_tags_message">Beste etiketa guztiak kontserbatu dira</string>
     <string name="default_buttons_commit">Bidali</string>
     <string name="shared_string_clear">Garbitu</string>
@@ -1176,7 +1176,7 @@
     <string name="gpx_selection_points">%1$s
 \nPuntu</string>
     <string name="gpx_selection_track">%1$s 
-Lorratza %2$s</string>
+\n%2$s lorratza</string>
     <string name="shared_string_my_favorites">Gogokoak</string>
     <string name="shared_string_my_places">Nire lekuak</string>
     <string name="rendering_value_pink_name">arrosa</string>
@@ -1456,7 +1456,7 @@ Lorratza %2$s</string>
     <string name="storage_directory">Mapen biltegiratzea</string>
     <string name="shared_string_copy">Kopiatu</string>
     <string name="filter_poi_hint">Iragazi izenez</string>
-    <string name="search_poi_category_hint">Idatzi denetarik bilatzeko</string>
+    <string name="search_poi_category_hint">Idatzi bilatzeko</string>
     <string name="shared_string_is_open">Ireki</string>
     <string name="agps_info">A-GPS informazioa</string>
     <string name="shared_string_manage">Kudeatu</string>
@@ -1548,7 +1548,7 @@ Lorratza %2$s</string>
     <string name="calculate_osmand_route_gpx">OsmAnd ibilbidearen lineaz kanpoko kalkulua</string>
     <string name="complex_route_calculation_failed">Ibilbidearen kalkulu azkarrak huts egin du (%s), kalkulu motelera aldatzen.</string>
     <string name="use_fast_recalculation">Ibilbide birkalkulatze adimentsua</string>
-    <string name="use_fast_recalculation_desc">Bidai luzeetan, birkalkulatu ibilbidearen hasierako partea besterik ez.</string>
+    <string name="use_fast_recalculation_desc">Ibilbidearen hasierako partea birkalkulatzen du soilik. Bidai luzeetan erabili daiteke.</string>
     <string name="impassable_road_desc">Hautatu nabigazioan saihestu nahi dituzun errepideak.</string>
     <string name="roads_only">Errepideak besterik ez</string>
     <string name="rendering_attr_roadStyle_name">Errepide estiloa</string>
@@ -1596,7 +1596,7 @@ Lorratza %2$s</string>
 \n{3} MB behar dira une batez, {1} MB behin betiko. ({2} MB eskuragarri.)</string>
     <string name="upload_osm_note_description">Igo zure OSM oharra era anonimoan edo zure OpenStreetMap.org profila erabiliz.</string>
     <string name="rendering_attr_showMtbRoutes_name">Bistaratu mendiko bizikletarako bideak</string>
-    <string name="rendering_attr_hideIcons_name">POI ikonoak</string>
+    <string name="rendering_attr_hideIcons_name">Interesguneen ikonoak</string>
     <string name="rec_split">Grabaketaren banatzea</string>
     <string name="rec_split_title">Erabili grabaketaren banatzea</string>
     <string name="rec_split_desc">Gainidatzi atalak erabilitako espazioa biltegiratze espazioa baino handiagoa bada.</string>
@@ -1605,7 +1605,7 @@ Lorratza %2$s</string>
     <string name="rec_split_storage_size_desc">Grabatutako atal guztiekin okupatu daitekeen espazioa.</string>
     <string name="select_voice_provider">Hautatu ahots bidezko gidaritza</string>
     <string name="select_voice_provider_descr">Hautatu zure hizkuntzaren ahots bidezko gidaritza.</string>
-    <string name="please_specify_poi_type_only_from_list">Zehaztu POI mota egokia edo saltatu.</string>
+    <string name="please_specify_poi_type_only_from_list">Zehaztu interesgune mota egokia edo saltatu.</string>
     <string name="access_from_map_description">Menu botoiak kontrol panela abiatzen du, ez menua</string>
     <string name="show_on_start_description">\'Desgaituta\' dagoenean mapa abiatzen da zuzenean.</string>
     <string name="always_center_position_on_map">Bistaratu posizioa beti erdian</string>
@@ -1626,8 +1626,8 @@ Lorratza %2$s</string>
     <string name="base_world_map">Mundu oinarri mapa</string>
     <string name="create_poi_link_to_osm_doc">
         <u>Sareko OSM</u> mapa klasifikazioa irudiekin.</string>
-    <string name="confirm_usage_speed_cameras">Herrialde askotan (Besteak beste Alemania, Frantzia Italia...) Radar abisuak jasotzea legez debekatuta dago. OsmAndek ez du erantzukizunik onartuko legea jarraitzen ez baduzu. Mesedez sakatu \'Bai\' soilik ezaugarri hau erabiltzeko eskubidea baduzu.</string>
-    <string name="traffic_warning_speed_camera">Radarra</string>
+    <string name="confirm_usage_speed_cameras">Herrialde askotan (Besteak beste Alemania, Frantzia Italia...) abiadura-kameren abisuak jasotzea legez debekatuta dago. OsmAndek ez du erantzukizunik onartuko legea jarraitzen ez baduzu. Mesedez sakatu \'Bai\' soilik ezaugarri hau erabiltzeko eskubidea baduzu.</string>
+    <string name="traffic_warning_speed_camera">Abiadura-kamera</string>
     <string name="coords_format">Koordenatuen formatua</string>
     <string name="coords_format_descr">Koordenatu geografikoen formatua.</string>
     <string name="app_mode_bus">Autobus</string>
@@ -1653,7 +1653,7 @@ Lorratza %2$s</string>
     <string name="lang_als">Albaniera (Tosk)</string>
     <string name="osm_edit_created_poi">OSM POI-a sortuta</string>
     <string name="map_downloaded_descr">%1$sko mapa erabili dezakezu orain.</string>
-    <string name="file_name_containes_illegal_char">Fitxategiaren izenak karaktere baliogaberen bat du</string>
+    <string name="file_name_containes_illegal_char">Fitxategi-izenak karaktere baliogaberen bat du</string>
     <string name="show_something_on_map">Erakutsi %1$s mapan</string>
     <string name="dist_away_from_my_location">Bilatu %1$sra</string>
     <string name="share_history_subject">OsmAnd bidez partekatua</string>
@@ -1749,7 +1749,7 @@ Lorratza %2$s</string>
     <string name="dash_download_new_one">Deskargatu mapa berria</string>
     <string name="dash_download_manage">Kudeatu</string>
     <string name="map_locale">Maparen hizkuntza</string>
-    <string name="rendering_attr_transportStops_name">Garraioaren geltokiak</string>
+    <string name="rendering_attr_transportStops_name">Garraio geltokiak</string>
     <string name="navigate_point_zone">Zonaldea</string>
     <string name="download_tab_downloads">Eskuragarri</string>
     <string name="download_tab_updates">Eguneraketak</string>
@@ -1807,7 +1807,7 @@ Lorratza %2$s</string>
     <string name="show_zoom_buttons_navigation">Erakutsi zoom botoiak</string>
     <string name="save_as_favorites_points">Gorde gogokoen talde gisa</string>
     <string name="select_destination_and_intermediate_points">Ezarri helburuak</string>
-    <string name="layer_amenity_label">POI gainazalaren etiketak</string>
+    <string name="layer_amenity_label">Interesguneen gainazalaren etiketak</string>
     <string name="lang_sh">Serbokroaziera</string>
     <string name="lang_nv">Navajoa</string>
     <string name="lang_ta">Tamilera</string>
@@ -1829,7 +1829,7 @@ Lorratza %2$s</string>
     <string name="search_radius_proximity">Erradioa</string>
     <string name="save_global_track_interval">Erregistro tarte orokorra</string>
     <string name="save_track_to_gpx_globally_descr">Kokaleku orokorra GPX fitxategian erregistratzea gaitu eta desgaitu daiteke mapako GPX erregistro trepetarekin.</string>
-    <string name="save_track_interval_globally">Erregistroaren tartea</string>
+    <string name="save_track_interval_globally">Erregistro-tartea</string>
     <string name="enable_proxy_title">Gaitu HTTP proxya</string>
     <string name="enable_proxy_descr">Konfiguratu HTTP proxya sare eskaera guztietarako.</string>
     <string name="proxy_host_title">Proxy ostalaria</string>
@@ -1867,7 +1867,7 @@ Lorratza %2$s</string>
     <string name="update">Eguneratu</string>
     <string name="use_drawer_btn">Erabili menua</string>
     <string name="map_legend">Maparen legenda</string>
-    <string name="save_poi_without_poi_type_message">Ziur POI puntua mota gabe gorde nahi duzula?</string>
+    <string name="save_poi_without_poi_type_message">Ziur interesgunea mota gabe gorde nahi duzula\?</string>
     <string name="poi_context_menu_modify_osm_change">Eraldatu OSM aldaketa</string>
     <string name="versions_item">Bertsioak</string>
     <string name="techical_articles_item">Artikulu teknikoak</string>
@@ -1937,14 +1937,14 @@ mapak eta nabigazioa</string>
     <string name="closing_at">Itxiera ordua</string>
     <string name="contact_info">Kontaktu informazioa</string>
     <string name="add_opening_hours">Gehitu irekiera orduak</string>
-    <string name="poi_dialog_poi_type">POI mota</string>
+    <string name="poi_dialog_poi_type">Interesgune mota</string>
     <string name="number_of_rows_in_dash">Paneleko errenkada kopurua %1$s</string>
-    <string name="please_specify_poi_type">Zehaztu POI mota mesedez.</string>
+    <string name="please_specify_poi_type">Zehaztu interesgune mota mesedez.</string>
     <string name="working_days">Lanegunak</string>
     <string name="recent_places">Azken tokiak</string>
     <string name="favourites">Gogokoak</string>
     <string name="saved_at_time">Orain hemen gordeta: %1$s</string>
-    <string name="poi_deleted_localy">Aldaketak igotzen dituzunean POI-a ezabatuko da</string>
+    <string name="poi_deleted_localy">Aldaketak igotzen dituzunean interesgunea ezabatuko da</string>
     <string name="count_of_lines">Lerro kopurua</string>
     <string name="are_you_sure">Ziur zaude?</string>
     <string name="unsaved_changes_will_be_lost">Gorde gabeko aldaketak galduko dira, Jarraitu?</string>
@@ -2015,7 +2015,7 @@ mapak eta nabigazioa</string>
     <string name="no_inet_connection_desc_map">Mapak deskargatzeko beharrezkoa da.</string>
     <string name="search_location">Kokalekua bilatzen…</string>
     <string name="storage_free_space">Espazio librea</string>
-    <string name="storage_place_description">OsmAnd datuen biltegiratzea (mapak, GPX fitxategiak, eta abar): %1$s.</string>
+    <string name="storage_place_description">OsmAnd datuen biltegiratzea (mapak, lorratz fitxategiak, eta abar): %1$s.</string>
     <string name="give_permission">Eman baimena</string>
     <string name="allow_access_location">Eman kokapena atzitzeko baimena</string>
     <string name="first_usage_greeting">Jaso jarraibideak eta aurkitu toki berriak Internet konexiorik gabe</string>
@@ -2044,18 +2044,18 @@ mapak eta nabigazioa</string>
     <string name="subcategories">Azpikategoriak</string>
     <string name="translit_name_if_miss">Transliteratu %1$s izena falta bada</string>
     <string name="translit_names">Transliteratu izenak</string>
-    <string name="search_hint">Idatzi hiria, helbidea, POI izena</string>
+    <string name="search_hint">Idatzi hiria, helbidea, interesgunearen izena</string>
     <string name="rendering_value_light_brown_name">Marroi argia</string>
     <string name="rendering_value_dark_brown_name">Marroi iluna</string>
     <string name="rendering_attr_contourColorScheme_name">Ingerada marren kolore eskema</string>
     <string name="rendering_attr_surfaceIntegrity_name">Errepidearen gainazalaren integritatea</string>
     <string name="rendering_attr_contourColorScheme_description">Ingerada marren kolore eskema</string>
-    <string name="save_track_min_speed">Gutxieneko abiadura erregistratzeko</string>
+    <string name="save_track_min_speed">Erregistratzeko abiadura minimoa</string>
     <string name="save_track_min_speed_descr">Iragazkia: Ez erregistratu puntuak abiadura honen azpitik.</string>
     <string name="save_track_min_distance">Erregistratzeko desplazamendu minimoa</string>
     <string name="save_track_min_distance_descr">Iragazkia: Ezarri puntu berri bat erregistratzeko gutxieneko distantzia.</string>
-    <string name="save_track_precision">Erregistratzearen gutxieneko zehaztasuna</string>
-    <string name="save_track_precision_descr">Iragazkia: Ez erregistratu zehaztasun hau ez badago.</string>
+    <string name="save_track_precision">Erregistratzeko zehaztasun minimoa</string>
+    <string name="save_track_precision_descr">Iragazkia: Ez erregistratu zehaztasun hau lortu arte.</string>
     <string name="christmas_poi">Eguberriko POI</string>
     <string name="christmas_desc">Eguberria eta urte berria datozela, zerikusia duten puntuak bistaratzea erabaki dezakezu, eguberri zuhaitzak, merkatuak, eta abar.</string>
     <string name="christmas_desc_q">Erakutsi eguberriko puntuak\?</string>
@@ -2069,10 +2069,10 @@ mapak eta nabigazioa</string>
     <string name="trip_rec_notification_settings_desc">Bistaratu bidaiaren grabaketa ahalbidetzen duen jakinarazpen bat.</string>
     <string name="shared_string_notifications">Jakinarazpenak</string>
     <string name="route_roundabout_short">Hartu %1$d. irteera eta jarraitu</string>
-    <string name="upload_poi">Igo POI bat</string>
+    <string name="upload_poi">Igo interesgune bat</string>
     <string name="route_calculation">Ibilbidearen kalkulua</string>
-    <string name="gpx_no_tracks_title">Ez duzu GPX fitxategirik oraindik</string>
-    <string name="gpx_no_tracks_title_folder">GPX fitxategiak karpetara gehitu ditzakezu ere</string>
+    <string name="gpx_no_tracks_title">Ez duzu lorratz fitxategirik oraindik</string>
+    <string name="gpx_no_tracks_title_folder">Lorratz fitxategiak karpetara gehitu ditzakezu ere</string>
     <string name="gpx_add_track">Gehitu gehiago…</string>
     <string name="shared_string_appearance">Itxura</string>
     <string name="rendering_value_fine_name">Ongi</string>
@@ -2130,7 +2130,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_take_video_note_descr">Pantailaren erdian bideo-ohar bat gehitzeko botoia.</string>
     <string name="quick_action_take_photo_note_descr">Pantailaren erdian argazki-ohar bat gehitzeko botoia.</string>
     <string name="quick_action_add_osm_bug_descr">Pantailaren erdian OSM ohar bat gehitzeko botoia.</string>
-    <string name="quick_action_add_poi_descr">Pantailaren erdian POI bat gehitzeko botoia.</string>
+    <string name="quick_action_add_poi_descr">Pantailaren erdian interesgune bat gehitzeko botoia.</string>
     <string name="quick_action_navigation_voice_descr">Nabigazioan ahots bidezko jarraibideak gaitu edo desgaitzeko botoia.</string>
     <string name="quick_action_add_parking_descr">Pantailaren erdian aparkaleku bat gehitzeko botoia.</string>
     <string name="favorite_autofill_toast_text">" hona gorde da: "</string>
@@ -2149,8 +2149,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_bug_message">Mezua</string>
     <string name="quick_action_category_descr">Gogokoa gordetzeko kategoria:</string>
     <string name="quick_action_gpx_category_descr">Aukeratu hautazko kategoria.</string>
-    <string name="quick_action_poi_list">POI zerrenda</string>
-    <string name="quick_action_sh_poi_descr">Gehitu POI kategoria bat edo gehiago mapan erakusteko.</string>
+    <string name="quick_action_poi_list">Interesguneen zerrenda</string>
+    <string name="quick_action_sh_poi_descr">Gehitu interesguneen kategoria bat edo gehiago mapan erakusteko.</string>
     <string name="quick_action_page_list_descr">Azpiko zerrendaren hurrengo orria erakusteko botoia.</string>
     <string name="quick_action_map_style_action">Gehitu mapa estilo bat</string>
     <string name="quick_action_empty_param_error">Bete parametro guztiak</string>
@@ -2174,7 +2174,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_action_name">Ekintzaren izena</string>
     <string name="quick_action_duplicates">Bikoizketa ekiditeko ekintza azkarrari %1$s izena jarri zaio.</string>
     <string name="quick_action_showhide_favorites_descr">Gogoko puntuak mapan erakutsi edo ezkutatzeko botoia.</string>
-    <string name="quick_action_showhide_poi_descr">POI puntuak mapan erakutsi edo ezkutatzeko botoia.</string>
+    <string name="quick_action_showhide_poi_descr">Interesguneak mapan erakutsi edo ezkutatzeko botoia.</string>
     <string name="quick_action_fav_name_descr">Laga hutsik helbidea edo lekuaren izena erabiltzeko.</string>
     <string name="auto_split_recording_title">Automatikoki zatitu grabaketa hutsunea eta gero</string>
     <string name="auto_split_recording_descr">Hasi segmentu berria 6 minututako hutsune bat eta gero, lorratz berria bi ordu eta gero, edo fitxategi berria hutsune luzeago bat eta gero data aldatzean.</string>
@@ -2184,7 +2184,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="points_delete_multiple_succesful">Puntuak ezabatu dira.</string>
     <string name="points_delete_multiple">Ziur %1$d puntu ezabatu nahi dituzula\?</string>
     <string name="route_points_category_name">Ibilbide honetan pasatu beharreko bide-gurutzeak</string>
-    <string name="track_points_category_name">Bide-puntuak, interesezko puntuak, izena duten ezaugarriak</string>
+    <string name="track_points_category_name">Bide-puntuak, interesguneak, izena duten ezaugarriak</string>
     <string name="shared_string_gpx_track">Lorratza</string>
     <string name="max_speed">Gehieneko abiadura</string>
     <string name="average_speed">Batezbesteko abiadura</string>
@@ -2257,9 +2257,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="restore_purchases">Berreskuratu erosketak</string>
     <string name="fonts_header">Maparen letra-tipoak</string>
     <string name="shared_string_paused">Pausatua</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da. Doako, mundu osoko eta kalitate altuko OSM mapak eskura jartzen dizkizuna. 
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da. Doako, mundu osoko eta kalitate altuko OSM mapak eskura jartzen dizkizuna.
 \n
-\nGozatu ahots bidezko nabigazioa edo nabigazio grafikoa, ikusi interesezko puntuak (POI), sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta garaiera datuak (gehigarri baten bidez), aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM, eta askoz gehiago.</string>
+\nGozatu ahots bidezko nabigazioa edo nabigazio grafikoa, ikusi interesguneak (POI), sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta garaiera datuak (gehigarri baten bidez), aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM, eta askoz gehiago.</string>
     <string name="type_address">Idatzi helbidea</string>
     <string name="osmand_extended_description_part2">GPS nabigazioa 
 \n• Lineaz kanpo (Ibiltaritza kargurik ez atzerrian zaudenean) edo konektatuta (azkarragoa) aritzea erabaki dezakezu 
@@ -2335,7 +2335,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="animate_my_location_desc">Piztu \'Nire posizioa\'-ren mugimendu animatua nabigazioan.</string>
     <string name="shared_string_in_name">%1$s barne</string>
     <string name="osmand_extended_description_part4">"Eskiatu
-\nOsmAnd eski-mapak gehigarriak eskiatzeko ibilbideak ikustea baimentzen dizu, konplexutasun mailarekin eta bestelako informazio gehigarriarekin,  arrasteak eta bestelako zerbitzuak."</string>
+\nOsmAnd eski-mapak gehigarriak eskiatzeko pistak ikustea baimentzen dizu, konplexutasun mailarekin eta bestelako informazio gehigarriarekin,  arrasteak eta bestelako zerbitzuak."</string>
     <string name="osmand_extended_description_part7">Hartu parte OSMn 
 \n• Eman datuen arazoen berri 
 \n• Igo GPX lorratzak OSMra aplikaziotik bertatik 
@@ -2362,14 +2362,15 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="ascent_descent">Gora/Behera</string>
     <string name="moving_time">Denbora mugimenduan</string>
     <string name="max_min">Max/Min</string>
-    <string name="osmand_extended_description_part3">Mapa 
-\n• Bistaratu inguruko interesezko puntuak (POI) 
-\n• Egokitu mapa zure mugimenduaren (edo iparrorratzaren) norabidera 
-\n• Non zauden eta nora begiratzen duzun erakusten du 
-\n• Partekatu zure kokalekua lagunek zu aurkitu ahal izateko 
-\n• Gorde zuretzat garrantzitsuak diren tokiak gogokoetan 
-\n• Mapan izenak nola bistaratu aukeratzen uzten dizu: zure hizkuntzan, tokiko hizkuntzan, edo ahoskera fonetikoa 
-\n• Interneteko tesela mapak erakusten ditu, satelite ikuspegia (Bingek eskainia), hainbat gainazal, esaterako turismorako edo nabigaziorako GPX lorratzak eta azal gehigarriak gardentasun aldagarriarekin</string>
+    <string name="osmand_extended_description_part3">Mapa
+\n• Bistaratu inguruko interesguneak (POI)
+\n• Egokitu mapa zure mugimenduaren (edo iparrorratzaren) norabidera
+\n• Non zauden eta nora begiratzen duzun erakusten du
+\n• Partekatu zure kokalekua lagunek zu aurkitu ahal izateko
+\n• Gorde zuretzat garrantzitsuak diren tokiak gogokoetan
+\n• Mapan izenak nola bistaratu aukeratzen uzten dizu: zure hizkuntzan, tokiko hizkuntzan, edo ahoskera fonetikoa
+\n• Interneteko tesela mapak erakusten ditu, satelite ikuspegia (Bingek eskainia), hainbat gainazal, esaterako turismorako edo nabigaziorako GPX lorratzak eta azal gehigarriak gardentasun aldagarriarekin
+\n</string>
     <string name="osmand_extended_description_part5">Bizikleta 
 \n• Bizikletentzako bideak aurki ditzakezu mapan 
 \n• Bizikletarako GPS nabigazioak ibilbideak bizikletentzako bideak erabiliz eraikiko du 
@@ -2452,14 +2453,14 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_show_navigation_finish_dialog">Erakutsi \'nabigazioa amaituta\' elkarrizketa-koadroa</string>
     <string name="quick_action_start_stop_navigation">Hasi/amaitu nabigazioa</string>
     <string name="quick_action_start_stop_navigation_descr">Nabigazioa hasi edo amaitzeko botoia.</string>
-    <string name="live_monitoring_max_interval_to_send">Lineako jarraipenaren denbora-bufferra</string>
+    <string name="live_monitoring_max_interval_to_send">Sare bidezko jarraipenaren denbora-bufferra</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zehaztu bidaltzeke dauden kokalekuak gordetzeko denbora-buffer bat</string>
     <string name="mappilary_no_internet_desc">Mapillary-ko argazkiak linean besterik ez daude eskuragarri.</string>
     <string name="retry">Saiatu berriro</string>
     <string name="measurement_tool">Neurtu distantzia</string>
     <string name="measurement_tool_action_bar">Arakatu mapa eta gehitu puntuak</string>
     <string name="none_point_error">Gehitu puntu bat gutxienez.</string>
-    <string name="enter_gpx_name">GPX fitxategiaren izena:</string>
+    <string name="enter_gpx_name">GPX fitxategi-izena:</string>
     <string name="show_on_map_after_saving">Erakutsi mapan gorde eta gero</string>
     <string name="add_waypoint">Gehitu bide-puntua</string>
     <string name="save_gpx_waypoint">Gorde GPX bide-puntua</string>
@@ -2481,7 +2482,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="do_not_use_animations_descr">Desgaitu maparen animazioak.</string>
     <string name="keep_showing_on_map">Jarraitu mapan erakusten</string>
     <string name="exit_without_saving">Irten gorde gabe?</string>
-    <string name="measurement_tool_save_as_new_track_descr">Gorde puntuak puntu ala lerro gisa.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Gorde puntuak bide-puntu ala lerro gisa.</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAndek puntuak hautatutako profilaren ibilbideekin lotuko ditu.</string>
     <string name="choose_navigation_type">Hautatu nabigazio profila</string>
     <string name="add_route_points">Gehitu ibilbide-puntuak</string>
@@ -2622,16 +2623,16 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="winter_and_ski_renderer">Negua eta eskia</string>
     <string name="touring_view_renderer">Bidaiatze ikuspegia</string>
     <string name="nautical_renderer">Nautikoa</string>
-    <string name="rendering_attr_hidePOILabels_name">POI etiketak</string>
+    <string name="rendering_attr_hidePOILabels_name">Interesguneen etiketak</string>
     <string name="will_open_tomorrow_at">Bihar irekiko du ordu honetan</string>
-    <string name="copy_location_name">Kopiatu kokaleku edo POI-aren izena</string>
+    <string name="copy_location_name">Kopiatu kokaleku edo interesgunearen izena</string>
     <string name="toast_empty_name_error">Izen gabeko kokalekua</string>
     <string name="shared_string_current">Unekoa</string>
     <string name="last_intermediate_dest_description">Tarteko geldialdia gehitzen du</string>
     <string name="first_intermediate_dest_description">Lehen geldialdia gehitzen du</string>
     <string name="subsequent_dest_description">Mugitu helburua gora, eta sortu</string>
     <string name="show_closed_notes">Erakutsi itxitako oharrak</string>
-    <string name="switch_osm_notes_visibility_desc">Erakutsi/ezkutatu OSM oharrak mapan.</string>
+    <string name="switch_osm_notes_visibility_desc">Erakutsi edo ezkutatu OSM oharrak mapan.</string>
     <string name="gpx_file_desc">GPX - JOSM edo bestelako OSM editoreentzat esportatzeko egokia.</string>
     <string name="osc_file_desc">OSC - OSM-ra esportatzeko egokia.</string>
     <string name="shared_string_gpx_file">GPX fitxategia</string>
@@ -2751,7 +2752,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_bookmark">Gogokoa</string>
     <string name="get_osmand_live">Eskuratu OsmAnd Live ezaugarri guztiak desblokeatzeko: Mapen eguneraketak egunero deskarga mugarik gabe, ordainpeko eta doako gehigarri guztiak, Wikipedia, Wikivoyage eta askoz gehiago.</string>
     <string name="unirs_render_descr">Lehenetsitako itxuraren aldaera, oinezko eta bizikleten bideen kontrastea handitzeko. Mapnik kolore zaharrak erabiltzen ditu.</string>
-    <string name="off_road_render_descr">Errepidetik kanpo gidatzeko, \'Topo\' estiloan oinarritua atzealdean sateliteko irudiekin erabiltzeko. Errepide nagusien zabalera estutua, eta bide, bidexka eta bidegorrien zabalera handitua.</string>
+    <string name="off_road_render_descr">Errepidetik kanpo gidatzeko, \'Topo\' estiloan oinarritua atzealdean sateliteko irudiekin erabiltzeko. Errepide nagusien zabalera estutua, eta pista, bidexka eta bidegorrien zabalera handitua.</string>
     <string name="nautical_render_descr">Nabigazio nautikorako. Ezaugarri nagusiak: Boiak, faroak, ibai bideak, itxas erreiak eta markak, portuak, itsas zerbitzuak, sakonera marrak.</string>
     <string name="ski_map_render_descr">Eskiatzeko. Ezaugarri nagusiak: Pistak, arrasteak eta abar. Bestelako mapako objektuak leuntzen dira.</string>
     <string name="light_rs_render_descr">Gidatzeko estilo sinplea. Begietara xamurra gau moduan, sestra-kurbak, kontraste handiko errepide laranjak, bestelako mapako objektuak leunduak.</string>
@@ -2898,7 +2899,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_swap">Aldatu</string>
     <string name="show_more">Erakutsi gehiago</string>
     <string name="tracks_on_map">Bistaratutako lorratzak</string>
-    <string name="quick_action_show_hide_gpx_tracks">Erakutsi/ezkutatu GPX lorratzak</string>
+    <string name="quick_action_show_hide_gpx_tracks">Erakutsi/ezkutatu lorratzak</string>
     <string name="add_intermediate">Gehitu tarteko puntua</string>
     <string name="transfers_size">%1$d transferentzia</string>
     <string name="add_start_and_end_points">Gehitu irteera eta helburua</string>
@@ -2936,8 +2937,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_steps_name">Eskailera</string>
     <string name="rendering_attr_highway_class_path_name">Bidea</string>
     <string name="rendering_attr_undefined_name">Zehaztu gabea</string>
-    <string name="quick_action_gpx_tracks_hide">Ezkutatu GPS lorratzak</string>
-    <string name="quick_action_gpx_tracks_show">Erakutsi GPS lorratzak</string>
+    <string name="quick_action_gpx_tracks_hide">Ezkutatu lorratzak</string>
+    <string name="quick_action_gpx_tracks_show">Erakutsi lorratzak</string>
     <string name="add_destination_query">Gehitu helburua aurretik</string>
     <string name="previous_route">Aurreko ibilbidea</string>
     <string name="shared_string_degrees">Graduak</string>
@@ -2952,7 +2953,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rendering_attr_surface_compacted_name">Trinkotua</string>
     <string name="rendering_attr_highway_class_bridleway_name">Zaldi-bidea</string>
     <string name="rendering_attr_highway_class_cycleway_name">Bizikletentzako bidea</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Hautatutako GPX lorratzak mapan erakutsi edo ezkutatzeko botoia.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Hautatutako lorratzak mapan erakutsi edo ezkutatzeko botoia.</string>
     <string name="routing_attr_avoid_tram_name">Tranbiarik ez</string>
     <string name="routing_attr_avoid_tram_description">Ekidin tranbiak</string>
     <string name="routing_attr_avoid_bus_name">Autobusik ez</string>
@@ -3234,7 +3235,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="map_during_navigation_info">Mapa nabigazioan zehar</string>
     <string name="map_during_navigation">Mapa nabigazioan zehar</string>
     <string name="shared_string_other">Beste bat</string>
-    <string name="vehicle_parameters_descr">Pisua, altuera, abiadura</string>
+    <string name="vehicle_parameters_descr">Pisua, altuera, luzera, abiadura</string>
     <string name="vehicle_parameters">Ibilgailuaren parametroak</string>
     <string name="voice_announces_info">Ahots iragarpenak nabigazioan zehar egiten dira soilik.</string>
     <string name="voice_announces_descr">Nabigazio argibideak eta iragarpenak</string>
@@ -3310,7 +3311,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s KB</string>
-    <string name="track_storage_directory">Lorratzek gordetzeko karpeta</string>
+    <string name="track_storage_directory">Lorratzak gordetzeko karpeta</string>
     <string name="track_storage_directory_descrp">Lorratzak \'rec\' karpetan edo hilabeteko zein eguneko karpetatan gorde daitezke.</string>
     <string name="store_tracks_in_rec_directory">Grabatu lorratzak \'rec\' karpetan</string>
     <string name="store_tracks_in_daily_directories">Grabatu lorratzak eguneko karpetetan</string>
@@ -3420,12 +3421,12 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="accessibility_prefs_descr">Hautatu ikonoa, kolorea eta izena</string>
     <string name="live_monitoring_descr">Kokalekua partekatzeko aukera bidai grabaketa erabiliz.</string>
     <string name="live_monitoring">Lineako jarraipena</string>
-    <string name="save_track_logging_accuracy">Egunkariaren zehaztasuna</string>
+    <string name="save_track_logging_accuracy">Erregistroaren zehaztasuna</string>
     <string name="logcat_buffer_descr">Egiaztatu eta partekatu aplikazioaren erregistro zehatzak</string>
     <string name="permission_is_required">Baimena beharrezkoa da aukera hau erabiltzeko.</string>
-    <string name="monitoring_min_speed_descr">Hau abiadura txikiko atalase iragazkia da, abiadura jakin baten azpitik puntuak ez erregistratzeko. Grabatutako ibilbideak leunagoak izan daitezke mapan ikusitakoan.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Albo-efektua: Zure ibilbidean gutxieneko abiadura irizpidea betetzen ez duten zati guztiak faltako zaizkizu (adibidez, bizikletaz aldapa bat igotzen duzunean). Gainera, ez da atsedenaldi-epeei buruzko informaziorik egongo,. Horrek edozein azterketeta edo post-prozesuri eragingo dio, adibidez, bidaiaren guztizko iraupena, denbora martxan, edo batez besteko abiadura zehazten saiatzean.</string>
-    <string name="monitoring_min_speed_descr_recommendation">Gomendioa: Saiatu lehenbizi mugimenduaren detekzioa erregistroko gutxieneko desplazamendu iragazkiaren bidez (B), emaitza hobeak sor ditzake eta datu gutxiago galduko dituzu. Zure ibilbideak abiadura baxuan zaratatsuak badira, saiatu zeroz kanpoko balioak hemen. Kontuan izan behar da neurketa batzuek ez dutela abiadura balioa emango (sarean oinarritutako metodo batzuk), kasu horretan ez zenuke ezer grabatuko.</string>
+    <string name="monitoring_min_speed_descr">Hau abiadura txikiko atalase iragazkia da, abiadura jakin baten azpitik puntuak ez erregistratzeko. Grabatutako lorratzak leunagoak izan daitezke mapan ikusitakoan.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Albo-efektua: Zure lorratzak gutxieneko abiadura irizpidea betetzen ez duten zati guztiak faltako zaizkizu (adibidez, bizikletaz aldapa bat igotzen duzunean). Gainera, ez da atsedenaldi-epeei buruzko informaziorik egongo,. Horrek edozein azterketeta edo post-prozesuri eragingo dio, adibidez, bidaiaren guztizko iraupena, denbora martxan, edo batez besteko abiadura zehazten saiatzean.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Gomendioa: Saiatu lehenbizi mugimenduaren detekzioa erregistroko gutxieneko desplazamendu iragazkiaren bidez (B), emaitza hobeak sor ditzake eta datu gutxiago galduko dituzu. Zure lorratzak abiadura baxuan zaratatsuak badira, saiatu zeroz kanpoko balioak hemen. Kontuan izan behar da neurketa batzuek ez dutela abiadura balioa emango (sarean oinarritutako metodo batzuk), kasu horretan ez zenuke ezer grabatuko.</string>
     <string name="monitoring_min_speed_descr_remark">Oharra: abiadura&gt; 0 egiaztatzea: GPS txip gehienek algoritmoak mugimenduan zaudela zehazten duenean bakarrik adierazten dute abiaduraren balioa, eta deus ez bestela. Hori dela eta, iragazki honetan &gt; 0 ezarpena erabiltzean GPS txiparen mugimendua detekzioa erabiltzen duzula esan daiteke. Baina grabaketa garaian hemen iragazi ez bada ere, funtzio hau erabiltzen dugu gure GPX azterketan zuzendutako distantzia zehazteko, hau da, eremu horretan erakutsitako balioa mugimenduan grabatutako distantzia da.</string>
     <string name="monitoring_min_accuracy_descr">Honek gutxieneko zehaztasun adierazlearekin neurtutako puntuak soilik erregistratuko ditu (metro edo oinetan, Android-ek zure txiperako jakinarazi duen moduan). Zehaztasuna neurketa eta egiazko posizioaren arteko hurbiltasuna da, ez dago prezisioarekin lotua, hori errepikatutako neurketen sakabanaketa da.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Albo-efektua: Zehaztasunaren arabera iragaztearen ondorioz, puntuak falta daitezke, adibidez, zubien azpian, zuhaitzen azpian, eraikin altuen artean, edo eguraldi jakin batzuekin.</string>
@@ -3458,9 +3459,9 @@ Area honi dagokio: %1$s x %2$s</string>
 \n
 \n• Beste profil bateko ezarpenak kopiatzeko aukera gehitu da
 \n
-\n• Ordena aldatzeko edo POI kategoriak ezkutatzeko aukera gehitu da
+\n• Ordena aldatzeko edo interesgune kategoriak ezkutatzeko aukera gehitu da
 \n
-\n• POI ikonoak mapan behar bezala lerrokatuta
+\n• Interesgune ikonoak mapan behar bezala lerrokatuta
 \n
 \n• Ilunabarra / egunsentia datuak gehitu da maparen konfigurazioan
 \n
@@ -3509,15 +3510,15 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="route_recalculation">Ibilbidearen birkalkulua</string>
     <string name="accessibility_announce">Iragarri</string>
     <string name="login_and_pass">Erabiltzaile-izena eta pasahitza</string>
-    <string name="plugin_global_prefs_info">Ezarpen hauek profil guztiei aplikatzen zaizkie.</string>
+    <string name="plugin_global_prefs_info">Ezarpen hauek orokorrak dira, eta profil guztiei aplikatzen zaizkie.</string>
     <string name="osm_editing">OSM edizioa</string>
-    <string name="osm_edits_view_descr">Ikusi zure aldaketak edo oraindik igo gabeko OSM akatsak hemen: %1$s. Igotako puntuak ez dira gehiago erakutsiko.</string>
+    <string name="osm_edits_view_descr">Oraindik igo gabeko aldaketak edo OSM akatsak hemen ikusi ditzakezu: %1$s. Igotako puntuak ez dira OsmAnd-en erakutsiko.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Nabigatu edo mugitzean erakutsitako ikonoa.</string>
     <string name="select_map_icon_descr">Atsedenean erakutsitako ikonoa.</string>
     <string name="search_offline_geo_error">Ezin izan da \'%s\' geo intent-a errendatu.</string>
     <string name="monitoring_min_accuracy_descr_remark">Oharra: Grabatzen hasi aurretik GPSa itzalita egon bada, neurtutako lehen puntuak zehaztasun txikia izan dezake. Gure kodean puntu bat grabatu aurretik segundo bat itxaron genezake (edo jarraian grabatutako hirutik onena hartu, etab.), baina oraindik ez da hau garatu.</string>
-    <string name="monitoring_min_distance_descr">Iragazki honek puntu bikoiztuak grabatzea saihesten du mugimendu txikiegia egon bada. Gero prozesatu ez diren ibilbideetan itxura hobe bat lortzen da.</string>
+    <string name="monitoring_min_distance_descr">Iragazki honek puntu bikoiztuak grabatzea saihesten du mugimendu txikiegia egon bada. Gero prozesatu ez diren lorratzetan itxura hobe bat lortzen da.</string>
     <string name="monitoring_min_distance_descr_side_effect">Albo ondorioak: Atseden aldiak ez dira batere erregistratzen edo puntu bakarrarekin erregistratzen dira. Mugimendu txikiak (adibidez, albo batera) iragazi daitezke. Zure fitxategiak informazio gutxiago dauka post-prozesatzeko eta estatistika txarragoakk ditu erregistratzeko garaian puntu erredundanteak iragazi dituelako, agian harrera txarra edo GPS txiparen efektuak eragindako akatsak mantentzen dituen bitartean.</string>
     <string name="monitoring_min_distance_descr_recommendation">Gomendioa: 5 metroko ezarpenak ondo funtziona dezake zuretzat, hori baino gehiagoko xehetasuna behar ez baduzu, eta ez badituzu esplizituki jaso nahi atseden aldiko datuak.</string>
     <string name="live_monitoring_time_buffer">Denbora-bufferra</string>
@@ -3536,7 +3537,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="sort_by_category">Ordenatu kategoriaren arabera</string>
     <string name="index_name_antarctica">Antartika</string>
     <string name="shared_string_preparing">Prestatzen</string>
-    <string name="shared_string_poi_types">POI motak</string>
+    <string name="shared_string_poi_types">Interesgune motak</string>
     <string name="shared_string_nothing_selected">Ez da ezer hautatu</string>
     <string name="shared_string_quick_actions">Ekintza azkarrak</string>
     <string name="shared_string_profiles">Profilak</string>
@@ -3578,7 +3579,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_terrain_descr">Mapako terreno geruza erakutsi edo ezkutatzeko botoia.</string>
     <string name="quick_action_terrain_show">Erakutsi terrenoa</string>
     <string name="quick_action_terrain_hide">Ezkutatu terrenoa</string>
-    <string name="quick_action_show_hide_terrain">Erakutsi / ezkutatu terrenoa</string>
+    <string name="quick_action_show_hide_terrain">Erakutsi edo ezkutatu terrenoa</string>
     <string name="download_slope_maps">Maldak</string>
     <string name="shared_string_hillshade">Erliebea</string>
     <string name="terrain_empty_state_text">Gaitu erliebea edo malda mapa ikusteko. Mapa mota hauei buruz gehiago irakur dezakezu gure gunean</string>
@@ -3611,9 +3612,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="custom_color">Kolore pertsonalizatua</string>
     <string name="extra_maps_menu_group">Mapa gehigarriak</string>
     <string name="download_unsupported_action">onartu gabeko ekintza %1$s</string>
-    <string name="create_edit_poi">Sortu / aldatu POIa</string>
+    <string name="create_edit_poi">Sortu edo aldatu interesgunea</string>
     <string name="parking_positions">Aparkaleku-posizioak</string>
-    <string name="add_edit_favorite">Gehitu / aldatu gogokoa</string>
+    <string name="add_edit_favorite">Gehitu edo aldatu gogokoa</string>
     <string name="reset_deafult_order">Berrezarri lehenetsitako ordena</string>
     <string name="back_to_editing">Itzuli ediziora</string>
     <string name="quick_action_switch_profile_descr">Ekintza botoiak hautatutako profilen artean txandakatzen du.</string>
@@ -3623,12 +3624,12 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="index_item_world_basemap_detailed">Munduaren gainbegirada mapa (xehetsua)</string>
     <string name="unsupported_type_error">Onartu gabeko mota</string>
     <string name="quick_action_transport_descr">Garraio publikoa mapan erakutsi edo ezkutatzen duen botoia.</string>
-    <string name="select_wikipedia_article_langs">Hautatu mapan agertuko diren Wikipediako artikuluen hizkuntzak. Hizkuntza eskuragarrien artean txandakatu dezakezu artikulua irakurtzean.</string>
+    <string name="select_wikipedia_article_langs">Hautatu mapako Wikipediako artikuluen hizkuntzak. Hizkuntza eskuragarrien artean txandakatu dezakezu artikulua irakurtzean.</string>
     <string name="some_articles_may_not_available_in_lang">Wikipediako artikulu batzuk agian ez daude zure hizkuntzan eskuragarri.</string>
     <string name="lang_mg">Malgaxea</string>
     <string name="lang_an">Aragonera</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="search_poi_types">Bilatu POI motak</string>
+    <string name="search_poi_types">Bilatu interesgune motak</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Ekintza azkarra</string>
     <string name="radius_ruler_item">Erradioaren erregela</string>
@@ -3642,8 +3643,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="navigation_profiles_item">Nabigazio profilak</string>
     <string name="quick_action_transport_hide">Ezkutatu garraio publikoa</string>
     <string name="quick_action_transport_show">Erakutsi garraio publikoa</string>
-    <string name="quick_action_show_hide_transport">Erakutsi/ezkutatu garraio publikoa</string>
-    <string name="tracker_item">OsmAnd Aztarnaria</string>
+    <string name="quick_action_show_hide_transport">Erakutsi edo ezkutatu garraio publikoa</string>
+    <string name="tracker_item">OsmAnd aztarnaria</string>
     <string name="shared_string_resume">Jarraitu</string>
     <string name="ui_customization_description">Pertsonalizatu \"Tiradera\", \"Konfiguratu mapa\" eta \"Laster-menua\" ataletan dauden elementu kopurua.
 \n
@@ -3695,7 +3696,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \n Harpidetza automatikoki berrituko da berritze data baino lehen bertan behera uzten ez bada. Berritze-aldian (hilabetea / hiru hilabetea / urtea) kobratuko da kontua.
 \n
 \n Zure harpidetzak kudeatu eta bertan behera utzi ditzakezu Google Play ezarpenetara joanez.</string>
-    <string name="search_poi_types_descr">Konbinatu kategoria desberdinetako POI motak. Ukitu pizgailua guztiak hautatzeko, ukitu ezkerreko aldea kategoria aukeratzeko.</string>
+    <string name="search_poi_types_descr">Konbinatu kategoria desberdinetako interesgune motak. Ukitu pizgailua guztiak hautatzeko, ukitu ezkerreko aldea kategoria aukeratzeko.</string>
     <string name="release_3_7">• Lineaz kanpoko malda-mapa berriak
 \n
 \n • Gogokoen eta GPX bide-puntuen pertsonalizazio osoa - kolore, ikono, eta forma pertsonalizatuak
@@ -3704,7 +3705,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \n
 \n • Wikipedia bereizitako geruza gisa \"Konfiguratu mapa\" atalean, hautatu behar diren hizkuntzak soilik
 \n
-\n • Sortu zure POI iragazkia / mapak malgutasun osoz
+\n • Sortu zure interesguneen iragazkia / mapak malgutasun osoz
 \n
 \n • Aukerak gehitu profil pertsonalizatuetarako ezarpenak leheneratzeko
 \n
@@ -3739,7 +3740,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="expire_time">Iraungitze ordua</string>
     <string name="mercator_projection">Mercator proiekzioa</string>
     <string name="storage_format">Biltegiratze formatua</string>
-    <string name="map_source_zoom_levels">Ezarri zoom maila minimo eta maximoa lineaz kanpoko mapa bistaratu edo kargatzeko.</string>
+    <string name="map_source_zoom_levels">Ezarri zoom maila minimo eta maximoa sareko mapa bistaratu edo kargatzeko.</string>
     <string name="map_source_zoom_levels_descr">Parametro hauek bistaratzeari eragingo diote maparen gainazal edo azpiazal gisa erabiltzean.
 \n
 \n%1$s: Mapa hautatutako zoom mailetara mugatuko da.
@@ -3761,7 +3762,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="weight_limit_description">Eman zure ibilgailuaren pisua, ibilgailu astunentzako zenbait ibilbide murriztu daitezke.</string>
     <string name="turn_screen_on_power_button_disabled">Desgaituta. \"Mantendu pantaila piztuta\" behar da \"Esnatu ondorengo denbora-muga\" atalean.</string>
     <string name="shared_string_meters">metro</string>
-    <string name="details_dialog_decr">Kontrolatu mapan agertzen diren xehetasun gehigarrien ikusgaitasuna</string>
+    <string name="details_dialog_decr">Erakutsi edo ezkutatu maparen xehetasun gehigarriak</string>
     <string name="shared_string_night_map">Gauerako mapa</string>
     <string name="quick_action_showhide_mapillary_title">Erakutsi/ezkutatu Mapillary</string>
     <string name="quick_action_mapillary_hide">Ezkutatu Mapillary</string>
@@ -3775,28 +3776,226 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="app_mode_wheelchair">Gurpil-aulkia</string>
     <string name="app_mode_go_cart">Kart</string>
     <string name="route_between_points">Puntuen arteko ibilbidea</string>
-    <string name="add_to_a_track">Gehitu arrasto batera</string>
+    <string name="add_to_a_track">Gehitu lorratz batera</string>
     <string name="select_track_width">Hautatu zabalera</string>
     <string name="gpx_split_interval_none_descr">Hautatu zatiketa aukera: denboraren arabera edo distantziaren arabera.</string>
     <string name="gpx_direction_arrows">Norabideko geziak</string>
     <string name="plan_route_create_new_route">Sortu ibilbide berria</string>
     <string name="threshold_distance">Distantzia margena</string>
-    <string name="route_between_points_warning_desc">Aukera hau erabiltzeko OsmAnd-ek zure arrastoak mapako errepideetara atxiki behar ditu.
-\n
-\nHurrengo urratsean, nabigazio profila hautatu beharko duzu baimendutako errepideak eta zure arrastoa errepideetara hurbiltzeko distantzia tartea atzemateko.</string>
+    <string name="route_between_points_warning_desc">Ondoren, lotu zure lorratza baimendutako errepiderik hurbilenera zure nabigazio profil batekin aukera hau erabiltzeko.</string>
     <string name="plan_route_last_edited">Editatutako azkena</string>
-    <string name="plan_route_import_track">Inportatu arrastoa</string>
-    <string name="plan_route_open_existing_track">Ireki dagoen arrasto bat</string>
-    <string name="plan_route_select_track_file_for_open">Hautatu irekitzeko arrasto fitxategia</string>
-    <string name="overwrite_track">Gainidatzi arrastoa</string>
-    <string name="save_as_new_track">Gorde arrasto berri gisa</string>
+    <string name="plan_route_import_track">Inportatu lorratza</string>
+    <string name="plan_route_open_existing_track">Ireki dagoen lorratz bat</string>
+    <string name="plan_route_select_track_file_for_open">Hautatu irekitzeko lorratz fitxategia.</string>
+    <string name="overwrite_track">Gainidatzi lorratza</string>
+    <string name="save_as_new_track">Gorde lorratz berri gisa</string>
     <string name="reverse_route">Alderantzizko ibilbidea</string>
-    <string name="route_between_points_whole_track_button_desc">Arrasto osoa birkalkulatuko da hautatutako profilaren bidez.</string>
-    <string name="route_between_points_next_segment_button_desc">Bakarrik hurrengo segmentua birkalkulatuko da hautatutako profilaren bidez.</string>
-    <string name="route_between_points_desc">Hautatu nola konektatu puntuak, lerro zuzen batez, edo kalkulatu horien arteko ibilbidea hautatutako profilarekin.</string>
-    <string name="whole_track">Arrasto osoa</string>
+    <string name="route_between_points_whole_track_button_desc">Lorratz osoa birkalkulatuko da hautatutako profilaren bidez.</string>
+    <string name="route_between_points_next_segment_button_desc">Bakarrik hurrengo segmentua birkalkulatuko da hautatutako profila erabiliz..</string>
+    <string name="route_between_points_desc">Aukeratu nola konektatu puntuak, lerro zuzen batez, edo kalkulatu horien arteko ibilbidea behean adierazitako moduan.</string>
+    <string name="whole_track">Lorratz osoa</string>
     <string name="next_segment">Hurrengo segmentua</string>
     <string name="navigation_profile">Nabigazio profila</string>
-    <string name="route_between_points_add_track_desc">Hautatu zein arrasto fitxategiari gehituko zaion segmentu berria.</string>
-    <string name="set_working_days_to_continue">Ezarri behar dituzu lanegunak jarraitzeko</string>
+    <string name="route_between_points_add_track_desc">Hautatu zein lorratz fitxategiari gehituko zaion segmentu berria.</string>
+    <string name="set_working_days_to_continue">Ezarri lanegunak jarraitzeko</string>
+    <string name="shared_string_add_photo">Gehitu argazkia</string>
+    <string name="register_opr_create_new_account">Sortu kontu berria</string>
+    <string name="register_opr_have_account">Kontu bat daukat dagoeneko</string>
+    <string name="shared_string_search_history">Bilaketa-historia</string>
+    <string name="app_mode_kayak">Kayak</string>
+    <string name="app_mode_motorboat">Motor itsasontzia</string>
+    <string name="add_to_mapillary">Gehitu Mapillary-ra</string>
+    <string name="shared_string_resources">Baliabideak</string>
+    <string name="approximate_file_size">Fitxategiaren tamaina gutxi gorabehera</string>
+    <string name="select_data_to_export">Hautatu fitxategira esportatuko diren datuak.</string>
+    <string name="file_size_needed_for_import">Inportatzeko beharrezkoa da</string>
+    <string name="export_not_enough_space_descr">Zure gailuak %1$s soilik ditu libre. Mesedez, askatu espazioa edo desautatu esportatzeko elementu batzuk.</string>
+    <string name="export_not_enough_space">Ez dago espazio nahikorik</string>
+    <string name="app_mode_motor_scooter">Motoa</string>
+    <string name="save_global_track_interval_descr">Zehaztu lorratz orokorreko grabazio erregistroaren tartea (mapan \'Bidaia grabaketa\' trepetaren bidez aktibatuta dago).</string>
+    <string name="open_saved_track">Ireki gordetako lorratza</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Jarraigarria\" esan nahi du lorratza ez dela inolako zerrenda publikoetan agertzen, baina prozesatutako puntuak bere denbora markekin (zurekin zuzenean lotu ezin direnak) GPS API publikoaren deskargen bidez agertzen dira.</string>
+    <string name="app_mode_wheelchair_forward"></string>
+    <string name="icon_group_amenity">Prestazioa</string>
+    <string name="login_open_street_map">OpenStreetMap-eko saio hasiera</string>
+    <string name="login_open_street_map_org">OpenStreetMap.org-eko saio hasiera</string>
+    <string name="gpx_upload_public_visibility_descr">\"Publikoa\" esan nahi du lorratza publikoki erakusten dela zure GPS lorratzen eta GPS lorratz zerrende publikoetan, eta lorratzen zerrenda publikoan denbora markak modu gordinean daudela. APIaren bidez hornitutako datuek ez dute zure lorratz orria aipatzen. Bide-puntuen denbora-zigiluak ez daude eskuragarri GPS API publikoaren bidez, eta bide-puntuak ez daude kronologikoki ordenatuta.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Pribatua\" esan nahi du lorratza ez dela inolako zerrenda publikoetan agertzen, baina ordena ez kronologikoan dauden bide-puntuak GPS API publikoaren bidez eskuragarri daude denbora-markarik gabe.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identifikagarria\" esan nahi du lorratza publikoki erakutsiko dela Zure GPS lorratzetan eta GPS lorratz zerrenda publikoetan, hau da, beste erabiltzaileek lorratz gordina deskargatu eta zure erabiltzaile izenarekin lotu ahal izango dute. Bide-puntuen APIaren bidez hornitutako GPS APIaren denbora-markadu bide-puntuak jatorrizko lorratzari egingo diote erreferentzia.</string>
+    <string name="save_track_to_gpx">Erregistratu lorratza automatikoki nabigazioan zehar</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="what_is_new">Zer dago berri</string>
+    <string name="snowmobile_render_descr">Elur-motorra gidatzeko, berezko bide eta lorratzekin.</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd-ek MGRS erabiltzen du, UTM NATO formatuaren antzekoa da.</string>
+    <string name="lenght_limit_description">Eman zure ibilgailuaren luzera, ibilbide batzuetako mugak aplika daitezke ibilgailu luzeentzat.</string>
+    <string name="speed_cameras_legal_descr">Herrialde edo eskualde batzuetan, abiadura-kamerak abisatzeko aplikazioak erabiltzea legez debekatuta dago.
+\n
+\nAukeraketa bat egin behar duzu zure herrialdeko legediaren arabera.
+\n
+\nAukeratu %1$s eta abiadura-kamerei buruzko alertak eta abisuak jasoko dituzu.
+\n
+\nAukeratu %2$s eta abiadura-kameraen inguruko datu guztiak, alertak, jakinarazpenak, interesguneak ezabatuko dira OsmAnd erabat berriro instalatu arte.</string>
+    <string name="quick_action_showhide_mapillary_descr">Mapillary geruza mapan erakutsi edo ezkutatzeko botoia.</string>
+    <string name="plan_route_trim_after">Moztu ondoren</string>
+    <string name="release_3_8">• Eguneratutako ibilbidea planifinatzeko funtzioa: Segmentu bakoitzeko nabigazio mota desberdinak erabiltzea eta lorratzak sartzea ahalbidetzen du
+\n
+\n • Lorratzen itxura menu berria: Hautatu kolorea, lodiera, bistaratzeko norabideko geziak, hasierako eta amaierako ikonoak
+\n
+\n • Bizikleta nodoen ikusgarritasuna hobetu da.
+\n
+\n • Orain lorratzetan sakatu daitezke, laster-menua dute oinarrizko informazioarekin.
+\n
+\n • Bilaketa algoritmoak hobetu dira
+\n
+\n • Lorratza jarraitzeko aukerak hobetu dira nabigazioan
+\n
+\n • Profilaren ezarpenak inportatzeko / esportatzeko arazoak konpondu dira
+\n
+\n</string>
+    <string name="sort_last_modified">Azken aldaketa</string>
+    <string name="sort_name_descending">Izena: Z - A</string>
+    <string name="sort_name_ascending">Izena: A - Z</string>
+    <string name="start_finish_icons">Hasiera eta amaiera ikonoak</string>
+    <string name="contour_lines_thanks">Eskerrik asko \"Sestra lerroak\" erosteagatik</string>
+    <string name="osm_live_payment_desc_hw">Harpidetza kobratuta hautatutako aldirako. Utzi AppGallery-n edozein unetan.</string>
+    <string name="osm_live_payment_subscription_management_hw">Ordainketa zure AppGallery kontuan kargatuko da erosketa baieztatzean.
+\n
+\nHarpidetza automatikoki berritzen da, berritze data baino lehen bertan behera utzi ezean. Berritze aldia (hilean / hiru hilean / urtean) berrituko den egunean bertan kobratuko zaizu.
+\n
+\nHarpidetzak kudeatu eta bertan behera utzi ditzakezu AppGallery-ren ezarpenetara joanda.</string>
+    <string name="perform_oauth_authorization_description">Hasi saioa OAuth-ekin osmedit funtzioak erabiltzeko</string>
+    <string name="perform_oauth_authorization">Hasi saioa OAuth bidez</string>
+    <string name="clear_osm_token">Garbitu OpenStreetMap OAuth token-a</string>
+    <string name="osm_edit_logout_success">Saioa amaitu da</string>
+    <string name="file_already_imported">Fitxategia dagoeneko OsmAnd-en inportatuta dago</string>
+    <string name="use_two_phase_routing">Erabili 2 faseko A* bideratze algoritmoa</string>
+    <string name="shared_string_graph">Grafikoa</string>
+    <string name="open_street_map_login_mode">Hasi saioa aldaketak igotzeko,
+\n
+\nbai OAuth-ekin edo zure erabiltzaile izena eta pasahitza erabiliz.</string>
+    <string name="use_login_password">Hasi saioa erabiltzaile izenarekin eta pasahitzarekin</string>
+    <string name="login_account">Kontua</string>
+    <string name="user_login">Erabiltzaile-izena</string>
+    <string name="manage_subscription">Kudeatu harpidetza</string>
+    <string name="subscription_payment_issue_title">Arazo bat dago zure harpidetzarekin. Egin klik botoian Google Play harpidetzaren ezarpenetara joateko zure ordainketa-metodoa konpontzeko.</string>
+    <string name="subscription_expired_title">OsmAnd Live harpidetza iraungi egin da</string>
+    <string name="subscription_paused_title">OsmAnd Live harpidetza pausatu da</string>
+    <string name="subscription_on_hold_title">OsmAnd Live harpidetza zain dago</string>
+    <string name="enter_text_separated">Sartu etiketak komaz bereizita.</string>
+    <string name="osm_login_descr">Hasi saioa OAuth metodo segurua erabiliz edo erabili zure erabiltzaile izena eta pasahitza.</string>
+    <string name="register_on_openplacereviews">Erregistratu hemen:
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Hasi saioa OpenPlaceReviews.org datu irekien proiektuaren webgunean, argazki gehiago igotzeko.</string>
+    <string name="add_to_opr">Gehitu OpenPlaceReviews-era</string>
+    <string name="add_photos_descr">OsmAnd-ek hainbat iturritako argazkiak erakusten ditu:
+\nOpenPlaceReviews - Interesguneen argazkiak;
+\nMapillary - Kale mailako irudiak;
+\nWeb / Wikimedia - OpenStreetMap datuetan zehaztutako interesguneen argazkiak.</string>
+    <string name="shared_string_bearing">Norabidea</string>
+    <string name="plan_route_trim_before">Moztu aurretik</string>
+    <string name="disable_recording_once_app_killed_descrp">Lorratzaren grabazioa pausatuko du aplikazioa hiltzean (azken aplikazioen bidez). (OsmAnd atzeko planoaren adierazpena Androideko jakinarazpen-barratik desagertzen da.)</string>
+    <string name="gpx_monitoring_stop">Pausatu bidaiaren grabazioa</string>
+    <string name="gpx_monitoring_start">Berrekin bidaiaren grabazioa</string>
+    <string name="system_default_theme">Sisteman lehenetsia</string>
+    <string name="all_next_segments">Ondorengo segmentu guztiak</string>
+    <string name="previous_segment">Aurreko segmentua</string>
+    <string name="all_previous_segments">Aurreko segmentu guztiak</string>
+    <string name="only_selected_segment_recalc">Aukeratutako segmentua soilik birkalkulatuko da hautatutako profila erabiliz.</string>
+    <string name="all_next_segments_will_be_recalc">Ondorengo segmentu guztiak birkalkulatuko dira hautatutako profila erabiliz.</string>
+    <string name="all_previous_segments_will_be_recalc">Aurreko segmentu guztiak berriro kalkulatuko dira hautatutako profila erabiliz.</string>
+    <string name="shared_string_is_saved">gorde da</string>
+    <string name="one_point_error">Gehitu gutxienez bi puntu.</string>
+    <string name="shared_string_redo">Berregin</string>
+    <string name="icon_group_travel">Bidaia</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Gutxienez bi puntu gehitu behar dituzu</string>
+    <string name="sign_in_with_open_street_map">Hasi saioa OpenStreetMap-ekin</string>
+    <string name="context_menu_item_add_waypoint">Gehitu lorratzaren bide-puntua</string>
+    <string name="quick_action_add_gpx">Gehitu lorratzaren bide-puntua</string>
+    <string name="map_widget_monitoring">Bidaiaren grabaketa</string>
+    <string name="marker_save_as_track">Gorde lorratz fitxategi gisa</string>
+    <string name="follow_track">Jarraitu lorratza</string>
+    <string name="follow_track_descr">Hautatu jarraituko den lorratzaren fitxategia</string>
+    <string name="import_track_descr">Aukeratu jarraituko den lorratzaren fitxategia edo inportatu zure gailutik.</string>
+    <string name="select_another_track">Aukeratu beste lorratz bat</string>
+    <string name="navigate_to_track_descr">Nabigatu nire posiziotik lorratzera</string>
+    <string name="pass_whole_track_descr">Nabigatzeko lorratzaren puntua</string>
+    <string name="start_of_the_track">Lorratzaren hasiera</string>
+    <string name="nearest_point">Puntu hurbilena</string>
+    <string name="attach_to_the_roads">Erantsi errepideetara</string>
+    <string name="delete_address">Ezabatu helbidea</string>
+    <string name="add_address">Gehitu helbidea</string>
+    <string name="access_hint_enter_address">Sartu helbidea</string>
+    <string name="plan_route_change_route_type_before">Aldatu ibilbide mota honen aurretik:</string>
+    <string name="plan_route_change_route_type_after">Aldatu ibilbide mota honen ondoren:</string>
+    <string name="simplified_track">Lorratz sinplifikatua</string>
+    <string name="simplified_track_description">Ibilbidearen lerroa bakarrik gordeko da, bide-puntuak ezabatuko dira.</string>
+    <string name="shared_string_file_name">Fitxategi-izena</string>
+    <string name="number_of_gpx_files_selected_pattern">%s lorratz fitxategi aukeratuta</string>
+    <string name="monitoring_control_start">GRABATU</string>
+    <string name="routing_attr_avoid_footways_description">Saihestu oinezkoen bideak</string>
+    <string name="routing_attr_avoid_footways_name">Saihestu oinezkoen bideak</string>
+    <string name="development">Garapena</string>
+    <string name="use_live_public_transport">OsmAnd zuzeneko datuak</string>
+    <string name="use_live_routing">OsmAnd zuzeneko datuak</string>
+    <string name="complex_routing_descr">Bi faseetako ibilbide kalkulua kotxe bidezko nabigazioarentzat.</string>
+    <string name="use_native_pt">Garraio publikoaren garapen natiboa</string>
+    <string name="use_native_pt_desc">Aldatu garraio publikoaren ibilbidearen kalkulua Javara (segurua)</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s datuak soilik errepideetan soilik daude eskuragarri, eskuratzeko ibilbidea kalkulatu behar duzu \"Puntuen arteko ibilbidea\" erabiliz.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Itxaron ibilbidea berkalkulatu arte.
+\nGrafikoa erabilgarri egongo da berkalkulatu ondoren.</string>
+    <string name="shared_string_local_maps">Tokiko mapak</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="icon_group_special">Berezia</string>
+    <string name="icon_group_transport">Garraioa</string>
+    <string name="icon_group_service">Zerbitzua</string>
+    <string name="icon_group_symbols">Sinboloak</string>
+    <string name="icon_group_sport">Kirola</string>
+    <string name="icon_group_emergency">Larrialdia</string>
+    <string name="speed_camera_pois">Abiadura-kameren interesguneak</string>
+    <string name="speed_cameras_removed_descr">Gailu honek ez du abiadura-kamerarik.</string>
+    <string name="uninstall_speed_cameras">Desinstalatu abiadura-kamerak</string>
+    <string name="shared_string_legal">Legezkoa</string>
+    <string name="keep_active">Mantendu aktibo</string>
+    <string name="shared_string_uninstall">Desinstalatu</string>
+    <string name="speed_cameras_alert">Abiadura-kameren alertak herrialde batzuetan legeak debekatuta daude.</string>
+    <string name="shared_string_tones">tonuak</string>
+    <string name="add_online_source">Gehitu sareko iturria</string>
+    <string name="clear_tiles_warning">Aldaketa hauek aplikatzean lauzen iturburu honetako cache datuak garbituko dira</string>
+    <string name="vessel_height_warning_link">Ezarri ontziaren altuera</string>
+    <string name="vessel_height_warning">Ontziaren altuera ezar dezakezu zubi baxuak ekiditeko. Gogoan izan, zubia mugikorra bada, irekita dagoeneko altuera erabiliko dugula.</string>
+    <string name="vessel_height_limit_description">Ezarri ontziaren altuera zubi baxuak ekiditeko. Gogoan izan, zubia mugikorra bada, irekita dagoeneko altuera erabiliko dugula.</string>
+    <string name="vessel_width_limit_description">Ezarri ontziaren zabalera zubi estuak ekiditeko</string>
+    <string name="routing_attr_length_description">Zehaztu ibilbideetan baimendutako ibilgailu-luzera.</string>
+    <string name="routing_attr_length_name">Luzera muga</string>
+    <string name="item_deleted">%1$s ezabatuta</string>
+    <string name="speed_cameras_restart_descr">Berrabiarazi aplikazioa abiadura-kameraren datu guztiak ezabatzeko.</string>
+    <string name="shared_string_uninstall_and_restart">Desinstalatu eta berrabiarazi</string>
+    <string name="app_mode_inline_skates">Lerroko patinak</string>
+    <string name="use_volume_buttons_as_zoom_descr">Kontrolatu maparen zoom maila gailuaren bolumen botoiekin.</string>
+    <string name="please_provide_point_name_error">Eman izena puntuari</string>
+    <string name="search_download_wikipedia_maps">Deskargatu Wikipediako mapak</string>
+    <string name="add_hidden_group_info">Gehitutako puntua ez da mapan ikusiko, hautatutako taldea ezkutatuta dagoelako, \"%s\" atalean aurkitu dezakezu.</string>
+    <string name="osm_edit_closed_note">Itxitako OSM oharra</string>
+    <string name="plan_a_route">Planifikatu ibilbidea</string>
+    <string name="track_show_start_finish_icons">Erakutsi hasierako eta amaierako ikonoak</string>
+    <string name="gpx_split_interval_descr">Aukeratu markatzaileak lorratzean bistaratzeko tartea distantzian edo denboran.</string>
+    <string name="shared_string_custom">Pertsonalizatua</string>
+    <string name="track_coloring_solid">Solidoa</string>
+    <string name="street_level_imagery">Kale mailako irudiak</string>
+    <string name="plan_route_exit_dialog_descr">Ziur al zaude aurreikusitako ibilbidean egindako aldaketa guztiak baztertu nahi dituzula eta itxi\?</string>
+    <string name="in_case_of_reverse_direction">Alderantzizko norabidearen kasuan</string>
+    <string name="shared_string_save_as_gpx">Gorde lorratz fitxategi berri gisa</string>
+    <string name="add_segment_to_the_track">Gehitu lorratz fitxategi batean</string>
+    <string name="shared_string_gpx_files">Lorratzak</string>
+    <string name="layer_gpx_layer">Lorratzak</string>
+    <string name="show_gpx">Lorratzak</string>
+    <string name="save_track_to_gpx_globally">Erregistratu lorratza GPX fitxategian</string>
+    <string name="shared_string_gpx_route">Lorratz ibilbidea</string>
+    <string name="empty_state_my_tracks">Gehitu lorratz fitxategiak</string>
+    <string name="empty_state_my_tracks_desc">Inportatu edo grabatu lorratz fitxategiak</string>
+    <string name="osm_edit_close_note">Itxi OSM oharra</string>
+    <string name="markers_history">Markatzaileen historia</string>
+    <string name="send_files_to_openstreetmap">Bidali GPX fitxategia OpenStreetMap-era</string>
+    <string name="osm_edit_comment_note">Egin iruzkina OSM oharrean</string>
 </resources>

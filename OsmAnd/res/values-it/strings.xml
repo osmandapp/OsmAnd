@@ -3979,4 +3979,18 @@
     <string name="gpx_upload_private_visibility_descr">\"Privato\" significa che la traccia non è visualizzabile in alcuna lista pubblica ma i suoi punti, in ordine non cronologico, sono disponibili attraverso le API GPS senza le informazioni temporali.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificabile\" significa che la traccia è visualizzabile nelle Mie tracce GPS e nelle liste pubbliche, es. gli altri utenti potranno scaricare la traccia grezza e associarla con il tuo nome utente. I punti della traccia, con le loro informazioni temporali, saranno riconducibili, attraverso le API GPS, alla tua traccia originale.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Tracciabile\" significa che la traccia non è visualizzabile in alcuna lista pubblica, ma solo i suoi punti, processati, con le informazioni temporali (che non possono essere direttamente associati a te) attraverso le API GPS pubbliche.</string>
+    <string name="add_to_mapillary">Aggiungi a Mapillary</string>
+    <string name="add_to_opr">Aggiungi a OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd mostra foto da più sorgenti:
+\nOpenPlaceReviews - foto PDI;
+\nMapillary - immagini stradali;
+\nWeb / Wikimedia - foto PDI OpenStreetMap.</string>
+    <string name="shared_string_resources">Risorse</string>
+    <string name="approximate_file_size">Dimesione approssimativa del file</string>
+    <string name="select_data_to_export">Seleziona i dati da esportare nel file.</string>
+    <string name="file_size_needed_for_import">Necessario per l\'importazione</string>
+    <string name="export_not_enough_space_descr">Il tuo dispositivo ha solo %1$s liberi. Libera dello spazio i deseleziona alcune voci da esportare.</string>
+    <string name="export_not_enough_space">Non c\'è abbastanza spazio</string>
+    <string name="select_groups_for_import">Seleziona i gruppi da importare.</string>
+    <string name="select_items_for_import">Seleziona gli oggetti da importare.</string>
 </resources>

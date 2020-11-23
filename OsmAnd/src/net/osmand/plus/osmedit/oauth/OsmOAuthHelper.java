@@ -12,7 +12,7 @@ import java.util.Set;
 public class OsmOAuthHelper {
 
 	private final OsmandApplication app;
-	private final OsmOAuthAuthorizationAdapter authorizationAdapter;
+	private OsmOAuthAuthorizationAdapter authorizationAdapter;
 	private final Set<OsmAuthorizationListener> listeners = new HashSet<>();
 
 	public OsmOAuthHelper(@NonNull OsmandApplication app) {
@@ -22,6 +22,11 @@ public class OsmOAuthHelper {
 
 	public void addListener(OsmAuthorizationListener listener) {
 		listeners.add(listener);
+	}
+
+	public OsmOAuthAuthorizationAdapter updateAdapter(){
+		authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
+		return authorizationAdapter;
 	}
 
 	public void removeListener(OsmAuthorizationListener listener) {

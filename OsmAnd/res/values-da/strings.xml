@@ -3488,7 +3488,7 @@
     <string name="shared_string_angle_param">Vinkel: %s°</string>
     <string name="shared_string_angle">Vinkel</string>
     <string name="shared_string_preparing">Forbereder</string>
-    <string name="shared_string_poi_types">IP typer</string>
+    <string name="shared_string_poi_types">IP-typer</string>
     <string name="shared_string_nothing_selected">Intet valgt</string>
     <string name="shared_string_quick_actions">Genveje</string>
     <string name="shared_string_profiles">Profiler</string>
@@ -3549,9 +3549,9 @@
     <string name="import_profile_dialog_description">Den importerede profil indeholder yderligere data. Klik på Importer for kun at importere profildata, eller vælg yderligere data, der skal importeres.</string>
     <string name="route_recalculation_dist_descr">Ruten vil blive genberegnet, hvis afstanden til ruten er længere end angivet parameter</string>
     <string name="route_recalculation_dist_title">Mindste afstand for at genberegne ruten</string>
-    <string name="import_duplicates_description">OsmAnd har allerede elementer med de samme navne, som dem, der importeres. 
-\n 
-\nVælg en aktion.</string>
+    <string name="import_duplicates_description">OsmAnd har allerede elementer med de samme navne som de importerede.
+\n
+\nVælg en handling.</string>
     <string name="listed_exist">Det angivne %1$s findes allerede.</string>
     <string name="recalc_angle_dialog_title">Mindste vinkel mellem placering og rute</string>
     <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem placering og den beregnede rute vises, indtil ruten genberegnes</string>
@@ -3790,4 +3790,6 @@
     <string name="start_finish_icons">Start-/slutikoner</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="app_mode_gap">Hul</string>
+    <string name="export_not_enough_space">Der er ikke plads nok</string>
+    <string name="routing_attr_length_name">Længdegrænse</string>
 </resources>

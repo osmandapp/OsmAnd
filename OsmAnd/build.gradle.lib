@@ -1,4 +1,5 @@
-apply plugin: 'com.android.application'
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 // Global Parameters accepted
 // TARGET_APP_NAME    - app name
@@ -62,6 +63,7 @@ android {
 		warningsAsErrors false
 	}
 
+	/*
 	bundle {
 		language {
 			// Specifies that the app bundle should not support
@@ -71,7 +73,7 @@ android {
 			enableSplit = false
 		}
 	}
-
+	*/
 	// related to kuromoji
 	//packagingOptions {
 	//	exclude '/META-INF/CONTRIBUTORS.md'
@@ -98,7 +100,7 @@ android {
 			jni.srcDirs = []
 			jniLibs.srcDirs = ["libs"]
 			aidl.srcDirs = ["src"]
-			java.srcDirs = ["src"]
+			java.srcDirs = ["src", "src-google"]
 			resources.srcDirs = ["src"]
 			renderscript.srcDirs = ["src"]
 			res.srcDirs = ["res"]
@@ -107,6 +109,7 @@ android {
 		debug {
 			manifest.srcFile "AndroidManifest-debug.xml"
 		}
+		/*
 		full {
 			java.srcDirs = ["src-google"]
 		}
@@ -122,13 +125,13 @@ android {
 			java.srcDirs = ["src-huawei"]
 			manifest.srcFile "AndroidManifest-freehuawei.xml"
 		}
-
+		*/
 		legacy {
 			jniLibs.srcDirs = ["libc++"]
 		}
 	}
 
-	flavorDimensions "version", "coreversion", "abi"
+	flavorDimensions "coreversion", "abi"
 	productFlavors {
 		// ABI
 		armv7 {
@@ -162,6 +165,7 @@ android {
 			}
 		}
 
+		/*
 		// Version
 		freedev {
 			dimension "version"
@@ -180,6 +184,7 @@ android {
 			dimension "version"
 			applicationId "net.osmand.huawei"
 		}
+		*/
 		// CoreVersion
         // Build that doesn't include 3D OpenGL
 		legacy {
@@ -198,10 +203,14 @@ android {
 	buildTypes {
 		debug {
 			buildConfigField "String", "OPR_BASE_URL", "\"https://test.openplacereviews.org/\""
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
 			signingConfig signingConfigs.development
 		}
 		release {
 			buildConfigField "String", "OPR_BASE_URL", "\"https://test.openplacereviews.org/\""
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
 			signingConfig signingConfigs.publishing
 		}
 	}
@@ -440,7 +449,7 @@ task cleanupDuplicatesInCore() {
 }
 
 afterEvaluate {
-	android.applicationVariants.all { variant ->
+	android.libraryVariants.all { variant ->
 		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
 	}
 	Gradle gradle = getGradle()
@@ -508,5 +517,5 @@ dependencies {
 	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
 
-	freehuaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
+	//freehuaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
 }

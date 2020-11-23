@@ -3973,11 +3973,26 @@
     <string name="gpx_upload_trackable_visibility_descr">Rastreável significa que o rastreamento não aparecerá em nenhuma lista pública, mas os pontos de rastreamento a partir dele ainda estarão disponíveis através da API pública do GPS com carimbos de tempo. Outros utilizadores só poderão descarregar pontos de rastreamento processados do seu rastreamento que não podem ser associados diretamente a si.</string>
     <string name="osm_edit_close_note">Fechar nota do OSM</string>
     <string name="osm_edit_comment_note">Comentário de nota do OSM</string>
-    <string name="osm_login_descr">Pode entrar a usar o método seguro OAuth ou usar o seu login e palavra-passe.</string>
+    <string name="osm_login_descr">Faça login a usar o método seguro OAuth ou use o seu nome de utilizador e a palavra-passe.</string>
     <string name="shared_string_add_photo">Adicionar fotos</string>
     <string name="register_on_openplacereviews">Cadastre-se em
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">As fotos são fornecidas pelo projeto de dados abertos OpenPlaceReviews.org. Para enviar as suas fotos precisa cadastrar-se no site.</string>
+    <string name="register_on_openplacereviews_desc">Faça login no site do projeto de dados abertos OpenPlaceReviews.org para enviar ainda mais fotos.</string>
     <string name="register_opr_create_new_account">Criar uma conta</string>
     <string name="register_opr_have_account">Já tenho uma conta</string>
+    <string name="shared_string_search_history">Histórico de pesquisa</string>
+    <string name="app_mode_kayak">Caiaque</string>
+    <string name="app_mode_motorboat">Barco a motor</string>
+    <string name="shared_string_resources">Recursos</string>
+    <string name="approximate_file_size">Tamanho aproximado do ficheiro</string>
+    <string name="select_data_to_export">Selecione os dados a serem exportados para o ficheiro.</string>
+    <string name="file_size_needed_for_import">Necessário para a importação</string>
+    <string name="export_not_enough_space_descr">O seu aparelho só tem %1$s livre. Por favor, libere algum espaço ou desmarque alguns itens para exportar.</string>
+    <string name="export_not_enough_space">Não há espaço suficiente</string>
+    <string name="add_to_mapillary">Adicionar ao Mapillary</string>
+    <string name="add_to_opr">Adicionar ao OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd mostra fotos de várias fontes:
+\nOpenPlaceReviews - fotos de POI;
+\nMapillary - imagens ao nível da rua;
+\nWeb / Wikimedia - fotos de POI especificadas nos dados do OpenStreetMap.</string>
 </resources>

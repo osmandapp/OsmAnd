@@ -1083,6 +1083,7 @@ public class MapMarkersHelper {
 			String creationDateStr = point.getExtensionsToRead().get(CREATION_DATE);
 			marker.visitedDate = parseTime(visitedDateStr, format);
 			marker.creationDate = parseTime(creationDateStr, format);
+			marker.history = history;
 			marker.nextKey = history ? MapMarkersDbHelper.HISTORY_NEXT_VALUE : MapMarkersDbHelper.TAIL_NEXT_VALUE;
 
 			mapMarkers.add(marker);

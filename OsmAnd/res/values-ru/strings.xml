@@ -3969,4 +3969,16 @@
     <string name="register_opr_have_account">У меня уже есть аккаунт</string>
     <string name="shared_string_search_history">История поиска</string>
     <string name="app_mode_motorboat">Моторная лодка</string>
+    <string name="add_to_opr">Добавить в OpenPlaceReviews</string>
+    <string name="add_to_mapillary">Добавить в Mapillary</string>
+    <string name="add_photos_descr">OsmAnd показывает фотографии из нескольких источников:
+\nOpenPlaceReviews — фотогорафии POI;
+\nMapillary — изображения улиц;
+\nWeb / Wikimedia — фотографии POI, указанные в данных OpenStreetMap.</string>
+    <string name="shared_string_resources">Ресурсы</string>
+    <string name="approximate_file_size">Примерный размер файла</string>
+    <string name="file_size_needed_for_import">Требуется для импорта</string>
+    <string name="select_data_to_export">Выберите данные для экспорта в файл.</string>
+    <string name="export_not_enough_space_descr">На устройстве свободно только %1$s. Освободите место в хранилище или снимите выбор с некоторых экспортируемых элементов.</string>
+    <string name="export_not_enough_space">Недостаточно места</string>
 </resources>

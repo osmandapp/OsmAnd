@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/bottom_sheet_title_height"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding"
+		android:paddingRight="@dimen/wikilink_bottom_sheet_padding"
+		android:paddingBottom="@dimen/wikilink_bottom_sheet_padding">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:minHeight="@dimen/default_title_line_height"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				app:lineHeight="@dimen/default_title_line_height"
+				app:typeface="@string/font_roboto_medium"
+				tools:text="Some title" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:letterSpacing="@dimen/description_letter_spacing"
+				android:minHeight="@dimen/default_desc_line_height"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				app:lineHeight="@dimen/default_desc_line_height"
+				app:typeface="@string/font_roboto_regular"
+				tools:text="Some description" />
+
+		</LinearLayout>
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/selected_size"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:minHeight="@dimen/default_title_line_height"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			app:lineHeight="@dimen/default_title_line_height"
+			app:typeface="@string/font_roboto_regular"
+			tools:text="5/6" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/select_all_button"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_weight="1"
+			android:ellipsize="end"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:minHeight="@dimen/default_title_line_height"
+			android:text="@string/shared_string_select_all"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			app:lineHeight="@dimen/default_title_line_height"
+			app:typeface="@string/font_roboto_medium" />
+
+		<net.osmand.view.ThreeStateCheckbox
+			android:id="@+id/check_box"
+			style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center"
+			android:clickable="false"
+			android:enabled="false"
+			android:focusable="false" />
+
+	</LinearLayout>
+
+</LinearLayout>

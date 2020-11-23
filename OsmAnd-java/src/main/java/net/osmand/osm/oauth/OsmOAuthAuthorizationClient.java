@@ -25,16 +25,16 @@ public class OsmOAuthAuthorizationClient {
     private final OsmAndJDKHttpClient httpClient;
     public final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationClient.class);
 
-    public OsmOAuthAuthorizationClient(String key, String secret) {
+    public OsmOAuthAuthorizationClient(String key, String secret, DefaultApi10a api) {
         httpClient = new OsmAndJDKHttpClient(JDKHttpClientConfig.defaultConfig());
         service = new ServiceBuilder(key)
                 .apiSecret(secret)
                 .httpClient(httpClient)
                 .callback("osmand-oauth://example.com/oauth")
-                .build(new OsmApi());
+                .build(api);
     }
 
-    static class OsmApi extends DefaultApi10a {
+    public static class OsmApi extends DefaultApi10a {
         @Override
         public OAuth1SignatureType getSignatureType() {
             return OAuth1SignatureType.QUERY_STRING;
@@ -53,6 +53,28 @@ public class OsmOAuthAuthorizationClient {
         @Override
         protected String getAuthorizationBaseUrl() {
             return "https://www.openstreetmap.org/oauth/authorize";
+        }
+    }
+
+    public static class OsmDevApi extends DefaultApi10a {
+        @Override
+        public OAuth1SignatureType getSignatureType() {
+            return OAuth1SignatureType.QUERY_STRING;
+        }
+
+        @Override
+        public String getRequestTokenEndpoint() {
+            return "https://master.apis.dev.openstreetmap.org/oauth/request_token";
+        }
+
+        @Override
+        public String getAccessTokenEndpoint() {
+            return "https://master.apis.dev.openstreetmap.org/oauth/access_token";
+        }
+
+        @Override
+        protected String getAuthorizationBaseUrl() {
+            return "https://master.apis.dev.openstreetmap.org/oauth/authorize";
         }
     }
 

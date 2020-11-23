@@ -3917,10 +3917,10 @@
     <string name="use_native_pt">Desenvolvimento de transporte público nativo</string>
     <string name="use_native_pt_desc">Mudar para cálculo de roteamento de transporte público em Java (seguro)</string>
     <string name="what_is_new">O que há de novo</string>
-    <string name="perform_oauth_authorization_description">Entre no OAuth para usar os recursos de edição do osm</string>
+    <string name="perform_oauth_authorization_description">Entrar com OAuth para usar os recursos osmedit</string>
     <string name="perform_oauth_authorization">Entrar via OAuth</string>
     <string name="clear_osm_token">Limpar token do OpenStreetMap OAuth</string>
-    <string name="osm_edit_logout_success">Saída bem sucedida</string>
+    <string name="osm_edit_logout_success">Desconectado</string>
     <string name="file_already_imported">O arquivo já foi importado para OsmAnd</string>
     <string name="use_two_phase_routing">Use o algoritmo de roteamento 2-phase A *</string>
     <string name="snowmobile_render_descr">Para dirigir em motos de neve com estradas e trilhas exclusivas.</string>
@@ -3948,14 +3948,14 @@
     <string name="subscription_paused_title">A assinatura do OsmAnd Live foi pausada</string>
     <string name="subscription_on_hold_title">A assinatura do OsmAnd Live está em espera</string>
     <string name="app_mode_gap">Diferença</string>
-    <string name="login_open_street_map">Entrar para OpenStreetMap</string>
+    <string name="login_open_street_map">Entrar com OpenStreetMap</string>
     <string name="login_open_street_map_org">Entrar com OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">Você precisa entrar para enviar alterações novas ou modificadas.
+    <string name="open_street_map_login_mode">Entrar para carregar de alterações novas ou modificadas,
 \n
-\nVocê pode entrar usando o método OAuth seguro ou usar sua entrada e senha.</string>
-    <string name="use_login_password">Usar a entrada e senha</string>
+\ncom OAuth ou usando seu nome de usuário e senha.</string>
+    <string name="use_login_password">Entrar com nome de usuário e senha</string>
     <string name="login_account">Conta</string>
-    <string name="user_login">Entrar</string>
+    <string name="user_login">Nome de usuário</string>
     <string name="sign_in_with_open_street_map">Entrar com o OpenStreetMap</string>
     <string name="markers_history">Histórico de marcadores</string>
     <string name="send_files_to_openstreetmap">Enviar arquivo GPX para OpenStreetMap</string>
@@ -3966,14 +3966,26 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Rastreável\" significa que o rastreamento não aparece em nenhuma listagem pública, mas os pontos de trilha processados com carimbos de data/hora (que não podem ser associados a você diretamente) são feitos por meio de downloads da API GPS pública.</string>
     <string name="osm_edit_close_note">Fechar nota do OSM</string>
     <string name="osm_edit_comment_note">Comentário de nota do OSM</string>
-    <string name="osm_login_descr">Você pode entrar usando o método OAuth seguro ou usar sua entrada e senha.</string>
+    <string name="osm_login_descr">Entrar usando o método OAuth seguro ou use seu nome de usuário e senha.</string>
     <string name="shared_string_add_photo">Adicionar foto</string>
     <string name="register_on_openplacereviews">Cadastre-se em
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">As fotos são fornecidas pelo projeto de dados abertos do OpenPlaceReviews.org. Para carregar suas fotos você precisa se inscrever no site.</string>
+    <string name="register_on_openplacereviews_desc">Entrar no site do projeto de dados abertos OpenPlaceReviews.org para enviar ainda mais fotos.</string>
     <string name="register_opr_create_new_account">Criar nova conta</string>
     <string name="register_opr_have_account">Eu já tenho uma conta</string>
     <string name="shared_string_search_history">Histórico de busca</string>
     <string name="app_mode_kayak">Caiaque</string>
     <string name="app_mode_motorboat">Lancha</string>
+    <string name="add_to_mapillary">Adicionar ao Mapillary</string>
+    <string name="add_to_opr">Adicionar ao OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd mostra fotos de várias fontes:
+\nOpenPlaceReviews - fotos de POI;
+\nMapillary - imagens de nível da rua;
+\nWeb / Wikimedia - fotos de POI especificadas nos dados do OpenStreetMap.</string>
+    <string name="shared_string_resources">Recursos</string>
+    <string name="approximate_file_size">Tamanho aproximado do arquivo</string>
+    <string name="select_data_to_export">Selecione os dados a serem exportados para o arquivo.</string>
+    <string name="file_size_needed_for_import">Necessário para importação</string>
+    <string name="export_not_enough_space_descr">Seu dispositivo tem apenas %1$s livre. Libere espaço ou desmarque alguns itens para exportar.</string>
+    <string name="export_not_enough_space">Não há espaço suficiente</string>
 </resources>

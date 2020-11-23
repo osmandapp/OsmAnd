@@ -11,12 +11,19 @@
 	Thx - Hardy
 
 -->
+    <string name="use_dev_url">Use dev.openstreetmap.org</string>
+    <string name="use_dev_url_descr">Switch to use "dev.openstreetmap.org" instead of "openstreetmap.org" to testing uploading OSM Note / POI / GPX.</string>
+    <string name="select_items_for_import">Select items that will be imported.</string>
+    <string name="select_groups_for_import">Select groups that will be imported.</string>
     <string name="export_not_enough_space">There is not enough space</string>
     <string name="export_not_enough_space_descr">Your device only has %1$s free. Please free up some space or unselect some items to export.</string>
     <string name="file_size_needed_for_import">Needed for import</string>
     <string name="select_data_to_export">Select the data to be exported to the file.</string>
     <string name="approximate_file_size">Approximate file size</string>
     <string name="shared_string_resources">Resources</string>
+    <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos specified in OpenStreetMap data.</string>
+    <string name="add_to_opr">Add to OpenPlaceReviews</string>
+    <string name="add_to_mapillary">Add to Mapillary</string>
     <string name="app_mode_motorboat">Motorboat</string>
     <string name="app_mode_kayak">Kayak</string>
     <string name="shared_string_search_history">Search history</string>
