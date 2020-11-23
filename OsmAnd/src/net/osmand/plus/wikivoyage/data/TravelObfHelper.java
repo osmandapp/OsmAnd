@@ -198,7 +198,9 @@ public class TravelObfHelper implements TravelHelper{
 				Iterator<Amenity> it = articles.iterator();
 				while (it.hasNext()) {
 					Amenity a = it.next();
-					popularArticles.add(readArticle(a, language));
+					if (!a.getName(language).equals("")) {
+						popularArticles.add(readArticle(a, language));
+					}
 				}
 			}
 		} catch (Exception e) {
