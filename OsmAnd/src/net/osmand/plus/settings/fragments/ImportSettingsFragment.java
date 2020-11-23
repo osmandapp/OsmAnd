@@ -76,6 +76,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -201,7 +202,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 		}
 
 		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
-		Map<ExportSettingsType, List<?>> itemsMap = new HashMap<>();
+		Map<ExportSettingsType, List<?>> itemsMap = new EnumMap<>(ExportSettingsType.class);
 		if (settingsItems != null) {
 			itemsMap = SettingsHelper.getSettingsToOperate(settingsItems, false);
 			adapter.updateSettingsList(itemsMap);

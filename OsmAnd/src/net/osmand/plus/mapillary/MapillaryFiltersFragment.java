@@ -123,7 +123,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final DelayAutoCompleteTextView textView = (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
         textView.setAdapter(new MapillaryAutoCompleteAdapter(getContext(), R.layout.auto_complete_suggestion, getMyApplication()));
         String selectedUsername = settings.MAPILLARY_FILTER_USERNAME.get();
-        if (!selectedUsername.equals("") && settings.USE_MAPILLARY_FILTER.get()) {
+        if (!selectedUsername.isEmpty() && settings.USE_MAPILLARY_FILTER.get()) {
             textView.setText(selectedUsername);
             textView.setSelection(selectedUsername.length());
         }
@@ -261,16 +261,16 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 String dateFrom = dateFromEt.getText().toString();
                 String dateTo = dateToEt.getText().toString();
 
-                if (!settings.MAPILLARY_FILTER_USERNAME.get().equals("") || !dateFrom.equals("") || !dateTo.equals("") || settings.MAPILLARY_FILTER_PANO.get()) {
+                if (!settings.MAPILLARY_FILTER_USERNAME.get().isEmpty() || !dateFrom.isEmpty() || !dateTo.isEmpty() || settings.MAPILLARY_FILTER_PANO.get()) {
                     settings.USE_MAPILLARY_FILTER.set(true);
                 }
-                if (dateFrom.equals("")) {
+                if (dateFrom.isEmpty()) {
                     settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
                 }
-                if (dateTo.equals("")) {
+                if (dateTo.isEmpty()) {
                     settings.MAPILLARY_FILTER_TO_DATE.set(0L);
                 }
-                if (!username.equals("") && settings.MAPILLARY_FILTER_USERNAME.get().equals("")) {
+                if (!username.isEmpty() && settings.MAPILLARY_FILTER_USERNAME.get().isEmpty()) {
                     view.findViewById(R.id.warning_linear_layout).setVisibility(View.VISIBLE);
                 } else {
                     mapActivity.getDashboard().hideDashboard();

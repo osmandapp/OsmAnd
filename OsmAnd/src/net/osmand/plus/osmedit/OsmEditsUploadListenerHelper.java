@@ -59,8 +59,8 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 		}
 		int uploaded = 0;
 		int pointsNum = loadErrorsMap.keySet().size();
-		for (OsmPoint point : loadErrorsMap.keySet()) {
-			if (loadErrorsMap.get(point) == null) {
+		for (String s : loadErrorsMap.values()) {
+			if (s == null) {
 				uploaded++;
 			}
 		}
@@ -200,13 +200,14 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			boolean[] hasErrors = new boolean[loadErrorsMap.keySet().size()];
 			ArrayList<OsmPoint> pointsWithErrors = new ArrayList<>();
 			int i = 0;
-			for (OsmPoint point : loadErrorsMap.keySet()) {
+			for (Map.Entry<OsmPoint, String> entry : loadErrorsMap.entrySet()) {
+				OsmPoint point = entry.getKey();
 				pointNames[i] = point.getGroup() == OsmPoint.Group.BUG ?
 						((OsmNotesPoint) point).getText() :
 						((OpenstreetmapPoint) point).getName();
 				pointNames[i] = TextUtils.isEmpty(pointNames[i]) ?
 						"id:" + point.getId() : pointNames[i];
-				hasErrors[i] = loadErrorsMap.get(point) != null;
+				hasErrors[i] = entry.getValue() != null;
 				if (hasErrors[i]) {
 					pointsWithErrors.add(point);
 				}
@@ -221,7 +222,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 					new UploadingMultipleErrorDialogFragment();
 			Bundle bundle = new Bundle();
 			bundle.putSerializable(POINTS_WITH_ERRORS,
-					pointsWithErrors.toArray(new OsmPoint[pointsWithErrors.size()]));
+					pointsWithErrors.toArray(new OsmPoint[0]));
 			bundle.putStringArray(POINT_NAMES, pointNames);
 			bundle.putBooleanArray(HAS_ERROR, hasErrors);
 			fragment.setArguments(bundle);

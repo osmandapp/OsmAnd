@@ -96,8 +96,9 @@ public abstract class MapRenderingTypes {
 		Map<String, String> common = new HashMap<String, String>();
 		String ATTACHED_KEY = "seamark:attached";
 		String type = "";
-		for (String s : tags.keySet()) {
-			String value = tags.get(s);
+		for (Entry<String, String> entry : tags.entrySet()) {
+			String s = entry.getKey();
+			String value = entry.getValue();
 			if (s.equals("seamark:type")) {
 				type = value;
 				common.put(ATTACHED_KEY, openSeaType(value));

@@ -305,8 +305,8 @@ public class AndroidNetworkUtils {
 		try {
 			boolean firstPrm = !urlText.contains("?");
 			StringBuilder sb = new StringBuilder(urlText);
-			for (String key : additionalParams.keySet()) {
-				sb.append(firstPrm ? "?" : "&").append(key).append("=").append(URLEncoder.encode(additionalParams.get(key), "UTF-8"));
+			for (Map.Entry<String, String> entry : additionalParams.entrySet()) {
+				sb.append(firstPrm ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				firstPrm = false;
 			}
 			urlText = sb.toString();

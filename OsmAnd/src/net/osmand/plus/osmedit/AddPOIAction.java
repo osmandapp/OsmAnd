@@ -222,8 +222,8 @@ public class AddPOIAction extends QuickAction {
 		}
 		addPoiToStringSet(getPoiTypes(activity).getOtherMapCategory(), tagKeys, valueKeys);
 		tagKeys.addAll(EditPoiDialogFragment.BASIC_TAGS);
-		mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
-		mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
+		mAdapter.setTagData(tagKeys.toArray(new String[0]));
+		mAdapter.setValueData(valueKeys.toArray(new String[0]));
 		Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
 		addTagButton.setOnClickListener(new View.OnClickListener() {
 			@Override

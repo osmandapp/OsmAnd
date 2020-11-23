@@ -137,9 +137,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
 		OsmandSettings settings = app.getSettings();
 		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
-		if (pref.get().equals("")) {
+		if (pref.get().isEmpty()) {
 			for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-				if (pref.getModeValue(m).equals("")) {
+				if (pref.getModeValue(m).isEmpty()) {
 					pref.setModeValue(m, "13");
 				}
 			}
@@ -456,7 +456,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		List<String> possibleValuesList = new ArrayList<>(Arrays.asList(p.getPossibleValues()));
 		possibleValuesList.remove(CONTOUR_LINES_DISABLED_VALUE);
-		final String[] possibleValues = possibleValuesList.toArray(new String[possibleValuesList.size()]);
+		final String[] possibleValues = possibleValuesList.toArray(new String[0]);
 
 		int i = possibleValuesList.indexOf(pref.get());
 		if (i >= 0) {

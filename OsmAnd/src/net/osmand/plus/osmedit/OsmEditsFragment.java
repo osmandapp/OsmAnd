@@ -296,7 +296,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						uploadItems(osmEditsSelected.toArray(new OsmPoint[osmEditsSelected.size()]));
+						uploadItems(osmEditsSelected.toArray(new OsmPoint[0]));
 						mode.finish();
 						return true;
 					}
@@ -594,7 +594,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			public void onClick(int type) {
 				List<OsmPoint> points = getPointsToExport();
 				new BackupOpenstreetmapPointAsyncTask(type, exportType).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-						points.toArray(new OsmPoint[points.size()]));
+						points.toArray(new OsmPoint[0]));
 			}
 		};
 	}
@@ -684,9 +684,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			@Override
 			public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
 				super.uploadEnded(loadErrorsMap);
-				for (OsmPoint osmPoint : loadErrorsMap.keySet()) {
-					if (loadErrorsMap.get(osmPoint) == null) {
-						osmEdits.remove(osmPoint);
+				for (Map.Entry<OsmPoint, String> entry : loadErrorsMap.entrySet()) {
+					if (entry.getValue() == null) {
+						osmEdits.remove(entry.getKey());
 					}
 				}
 				recreateAdapterData();

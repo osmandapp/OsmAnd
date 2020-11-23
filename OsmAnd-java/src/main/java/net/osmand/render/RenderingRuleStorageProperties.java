@@ -318,7 +318,7 @@ public class RenderingRuleStorageProperties {
 	}
 	
 	public RenderingRuleProperty[] getPoperties() {
-		return rules.toArray(new RenderingRuleProperty[rules.size()]);
+		return rules.toArray(new RenderingRuleProperty[0]);
 	}
 	
 	public List<RenderingRuleProperty> getCustomRules() {

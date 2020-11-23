@@ -802,7 +802,7 @@ public class RoutingContext {
 	}
 	
 	public BinaryMapIndexReader[] getMaps() {
-		return map.keySet().toArray(new BinaryMapIndexReader[map.size()]);
+		return map.keySet().toArray(new BinaryMapIndexReader[0]);
 	}
 
 	public int getVisitedSegments() {

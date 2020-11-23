@@ -222,7 +222,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	@Override
 	public List<String> execute(List<Struct> listCmd){
-		Struct list = new Struct(listCmd.toArray(new Term[listCmd.size()]));
+		Struct list = new Struct(listCmd.toArray(new Term[0]));
 		Var result = new Var("RESULT"); //$NON-NLS-1$
 		List<String> files = new ArrayList<String>();
 		if(prologSystem == null) {

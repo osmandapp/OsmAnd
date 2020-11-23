@@ -57,7 +57,7 @@ public class TracksGroupsAdapter extends GroupsAdapter {
 			Iterator<String> it = categories.iterator();
 			while (it.hasNext()) {
 				String category = it.next();
-				if (!category.equals("")) {
+				if (!category.isEmpty()) {
 					sb.append(category);
 					if (it.hasNext()) {
 						sb.append(", ");

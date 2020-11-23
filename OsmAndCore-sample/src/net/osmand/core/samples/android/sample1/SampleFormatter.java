@@ -23,7 +23,7 @@ public class SampleFormatter {
 	public final static float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
-	{
+	static {
 		fixed2.setMinimumFractionDigits(2);
 		fixed1.setMinimumFractionDigits(1);
 		fixed1.setMinimumIntegerDigits(1);

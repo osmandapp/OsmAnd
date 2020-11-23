@@ -86,7 +86,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	}
 
 	public void setTitle(String title) {
-		if (title.equals("")) {
+		if (title.isEmpty()) {
 			if (pointDescription.isWpt()) {
 				title = mapActivity.getString(R.string.waypoint_one);
 			} else if (pointDescription.isRte()) {

@@ -2501,8 +2501,9 @@ public class BinaryMapIndexReader {
 				}
 			}
 		}
-		for (MapObject e : resMap.keySet()) {
-			Street s = resMap.get(e);
+		for (Entry<MapObject, Street> entry : resMap.entrySet()) {
+			MapObject e = entry.getKey();
+			Street s = entry.getValue();
 			if (e instanceof Building && MapUtils.getDistance(e.getLocation(), lat, lon) < 40) {
 				Building b = (Building) e;
 				System.out.println(b.getName() + "   " + s);

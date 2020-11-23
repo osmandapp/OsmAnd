@@ -261,10 +261,11 @@ public class FavouritesDbHelper {
 
 	private boolean merge(Map<String, FavouritePoint> source, Map<String, FavouritePoint> destination) {
 		boolean changed = false;
-		for (String ks : source.keySet()) {
+		for (Map.Entry<String, FavouritePoint> entry : source.entrySet()) {
+			String ks = entry.getKey();
 			if (!destination.containsKey(ks)) {
 				changed = true;
-				destination.put(ks, source.get(ks));
+				destination.put(ks, entry.getValue());
 			}
 		}
 		return changed;
@@ -360,7 +361,7 @@ public class FavouritesDbHelper {
 	}
 
 	public boolean addFavourite(FavouritePoint p, boolean saveImmediately) {
-		if (p.getName().equals("") && flatGroups.containsKey(p.getCategory())) {
+		if (p.getName().isEmpty() && flatGroups.containsKey(p.getCategory())) {
 			return true;
 		}
 		if (!p.isAddressSpecified()) {
@@ -369,7 +370,7 @@ public class FavouritesDbHelper {
 		context.getSettings().SHOW_FAVORITES.set(true);
 		FavoriteGroup group = getOrCreateGroup(p, 0);
 
-		if (!p.getName().equals("")) {
+		if (!p.getName().isEmpty()) {
 			p.setVisible(group.visible);
 			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
 				p.setColor(ContextCompat.getColor(context, R.color.parking_icon_background));
@@ -712,9 +713,10 @@ public class FavouritesDbHelper {
 
 	public boolean isGroupVisible(String name) {
 		String nameLowercase = name.toLowerCase();
-		for (String groupName : flatGroups.keySet()) {
+		for (Map.Entry<String, FavoriteGroup> entry : flatGroups.entrySet()) {
+			String groupName = entry.getKey();
 			if (groupName.toLowerCase().equals(nameLowercase) || FavoriteGroup.getDisplayName(context, groupName).equals(name)) {
-				return flatGroups.get(groupName).isVisible();
+				return entry.getValue().isVisible();
 			}
 		}
 		return false;
@@ -968,7 +970,7 @@ public class FavouritesDbHelper {
 							p.setName(name);
 							p.setCategory(cat);
 							FavoriteGroup group = getOrCreateGroup(p, 0);
-							if (!name.equals("")) {
+							if (!name.isEmpty()) {
 								p.setLatitude(query.getDouble(2));
 								p.setLongitude(query.getDouble(3));
 								group.points.add(p);
@@ -1012,7 +1014,7 @@ public class FavouritesDbHelper {
 
 
 	public boolean addFavouriteDB(FavouritePoint p) {
-		if (p.getName().equals("") && flatGroups.containsKey(p.getCategory())) {
+		if (p.getName().isEmpty() && flatGroups.containsKey(p.getCategory())) {
 			return true;
 		}
 		SQLiteConnection db = openConnection(false);
@@ -1022,7 +1024,7 @@ public class FavouritesDbHelper {
 						"INSERT INTO " + FAVOURITE_TABLE_NAME + " (" + FAVOURITE_COL_NAME + ", " + FAVOURITE_COL_CATEGORY + ", "
 								+ FAVOURITE_COL_LAT + ", " + FAVOURITE_COL_LON + ")" + " VALUES (?, ?, ?, ?)", new Object[]{p.getName(), p.getCategory(), p.getLatitude(), p.getLongitude()}); //$NON-NLS-1$ //$NON-NLS-2$
 				FavoriteGroup group = getOrCreateGroup(p, 0);
-				if (!p.getName().equals("")) {
+				if (!p.getName().isEmpty()) {
 					p.setVisible(group.visible);
 					p.setColor(group.color);
 					group.points.add(p);
