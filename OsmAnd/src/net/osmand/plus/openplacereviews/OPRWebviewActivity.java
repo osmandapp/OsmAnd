@@ -53,6 +53,8 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 		boolean nightMode = !settings.isLightContent();
 		int themeId = nightMode ? R.style.OsmandDarkTheme_NoActionbar : R.style.OsmandLightTheme_NoActionbar_LightStatusBar;
 		setTheme(themeId);
+		getWindow().setStatusBarColor(ContextCompat.getColor(this, nightMode
+				? R.color.list_background_color_dark : R.color.list_background_color_light));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_opr_webview);
 		Bundle bundle = getIntent().getExtras();
