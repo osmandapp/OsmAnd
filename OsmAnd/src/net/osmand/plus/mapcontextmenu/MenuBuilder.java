@@ -414,7 +414,7 @@ public class MenuBuilder {
 			}
 		});
 		//TODO feature under development
-		//b.setVisibility(View.GONE);
+		b.setVisibility(View.GONE);
 		b.setTextColor(ContextCompat.getColor(context, R.color.preference_category_title));
 		return b;
 	}
