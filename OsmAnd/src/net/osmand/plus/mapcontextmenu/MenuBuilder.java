@@ -22,6 +22,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -313,34 +314,22 @@ public class MenuBuilder {
 
 	private View createAddPhotoButton(Context ctx) {
 		boolean nightMode = getApplication().getDaynightHelper().isNightModeForMapControls();
-		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_dialog_button, null);
-		LinearLayout buttonLayout = new LinearLayout(ctx);
-		view.setOnClickListener(new OnClickListener() {
+		View view = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.dialog_button_with_icon, null);
+		int dp6 = ctx.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
+		View button = view.findViewById(R.id.button);
+		UiUtilities.setupDialogButton(nightMode, button, UiUtilities.DialogButtonType.STROKED,
+				ctx.getString(R.string.shared_string_add_photo), R.drawable.ic_sample);
+		TextView textView = view.findViewById(R.id.button_text);
+		textView.setCompoundDrawablePadding(dp6);
+		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 			}
 		});
-		int dp6 = ctx.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
-		int dp8 = ctx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
-		int dp12 = ctx.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		int dp16 = ctx.getResources().getDimensionPixelSize(R.dimen.content_padding);
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		params.setMargins(dp16, 0, dp16, dp12);
-		buttonLayout.setLayoutParams(params);
-		LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-				ctx.getResources().getDimensionPixelSize(R.dimen.dialog_button_height));
-		view.setLayoutParams(buttonParams);
-		buttonLayout.addView(view);
-		UiUtilities.setupDialogButton(nightMode, buttonLayout, UiUtilities.DialogButtonType.STROKED,
-				ctx.getString(R.string.shared_string_add_photo), R.drawable.ic_sample);
-		TextView textView = view.findViewById(R.id.button_text);
-		textView.setPadding(dp8, 0, dp16, 0);
-		textView.setCompoundDrawablePadding(dp6);
 		//TODO This feature is under development
-		buttonLayout.setVisibility(View.VISIBLE);
-		return buttonLayout;
+		view.setVisibility(View.VISIBLE);
+		return view;
 	}
 
 	private void buildCoordinatesRow(View view) {
