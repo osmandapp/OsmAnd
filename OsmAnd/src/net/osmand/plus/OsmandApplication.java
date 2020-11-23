@@ -412,8 +412,8 @@ public class OsmandApplication extends MultiDexApplication {
 		if (defaultLocale == null) {
 			defaultLocale = Locale.getDefault();
 		}
-		if (lang != null && !lang.isEmpty()) {
-			if (country != null && !country.isEmpty()) {
+		if (!Algorithms.isEmpty(lang)) {
+			if (!Algorithms.isEmpty(country)) {
 				preferredLocale = new Locale(lang, country);
 			} else {
 				preferredLocale = new Locale(lang);
@@ -421,9 +421,9 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 		Locale selectedLocale = null;
 
-		if (lang != null && !lang.isEmpty() && !config.locale.equals(preferredLocale)) {
+		if (!Algorithms.isEmpty(lang) && !config.locale.equals(preferredLocale)) {
 			selectedLocale = preferredLocale;
-		} else if (lang != null && lang.isEmpty() && defaultLocale != null && Locale.getDefault() != defaultLocale) {
+		} else if (Algorithms.isEmpty(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
 			selectedLocale = defaultLocale;
 			preferredLocale = null;
 		}
@@ -807,17 +807,17 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 		return s;
 	}
-	
+
 	public void setLanguage(Context context) {
 		if (preferredLocale != null) {
 			Configuration config = context.getResources().getConfiguration();
 			String lang = preferredLocale.getLanguage();
-			if (!lang.isEmpty() && !config.locale.getLanguage().equals(lang)) {
+			if (!Algorithms.isEmpty(lang) && !config.locale.getLanguage().equals(lang)) {
 				preferredLocale = new Locale(lang);
 				Locale.setDefault(preferredLocale);
 				config.locale = preferredLocale;
 				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
-			} else if(lang.isEmpty() && defaultLocale != null && Locale.getDefault() != defaultLocale) {
+			} else if (Algorithms.isEmpty(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
 				Locale.setDefault(defaultLocale);
 				config.locale = defaultLocale;
 				getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
