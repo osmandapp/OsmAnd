@@ -427,8 +427,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			f.setArguments(args);
 			f.show(getChildFragmentManager(), "exceedDialog");
 		} else if (TextUtils.isEmpty(poiTypeEditText.getText())) {
-			HashSet<String> tagsCopy = new HashSet<>();
-			tagsCopy.addAll(editPoiData.getTagValues().keySet());
 			if (Algorithms.isEmpty(editPoiData.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()))) {
 				SaveExtraValidationDialogFragment f = new SaveExtraValidationDialogFragment();
 				Bundle args = new Bundle();

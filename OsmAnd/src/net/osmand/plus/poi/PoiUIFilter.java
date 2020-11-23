@@ -535,20 +535,19 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			return getName();
 		}
 		StringBuilder res = new StringBuilder();
-		for (PoiCategory p : acceptedTypes.keySet()) {
-			LinkedHashSet<String> set = acceptedTypes.get(p);
+		for (Entry<PoiCategory, LinkedHashSet<String>> entry : acceptedTypes.entrySet()) {
+			LinkedHashSet<String> set = entry.getValue();
 			if (set == null) {
 				if (res.length() > 0) {
 					res.append(", ");
 				}
-				res.append(p.getTranslation());
+				res.append(entry.getKey().getTranslation());
 			}
 			if (res.length() > chars) {
 				return res.toString();
 			}
 		}
-		for (PoiCategory p : acceptedTypes.keySet()) {
-			LinkedHashSet<String> set = acceptedTypes.get(p);
+		for (LinkedHashSet<String> set : acceptedTypes.values()) {
 			if (set != null) {
 				for (String st : set) {
 					if (res.length() > 0) {
@@ -616,8 +615,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public boolean areAllTypesAccepted() {
 		if (poiTypes.getCategories(false).size() == acceptedTypes.size()) {
-			for (PoiCategory a : acceptedTypes.keySet()) {
-				if (acceptedTypes.get(a) != null) {
+			for (LinkedHashSet<String> strings : acceptedTypes.values()) {
+				if (strings != null) {
 					return false;
 				}
 			}
@@ -711,8 +710,9 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	private void putAllAcceptedTypes(Map<PoiCategory, LinkedHashSet<String>> types) {
-		for (PoiCategory category : types.keySet()) {
-			LinkedHashSet<String> typesSet = types.get(category);
+		for (Entry<PoiCategory, LinkedHashSet<String>> entry : types.entrySet()) {
+			PoiCategory category = entry.getKey();
+			LinkedHashSet<String> typesSet = entry.getValue();
 			if (acceptedTypes.containsKey(category)) {
 				if (acceptedTypes.get(category) != null && typesSet != null) {
 					acceptedTypes.get(category).addAll(typesSet);

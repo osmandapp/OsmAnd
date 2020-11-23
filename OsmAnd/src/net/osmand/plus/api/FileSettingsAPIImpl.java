@@ -25,9 +25,9 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 			Properties props = new Properties();
 			FileInputStream fis = new FileInputStream(file);
 			props.load(fis);
-			for (Object key : props.keySet()) {
-				String k = key.toString();
-				map.put(k, props.get(key));
+			for (Entry<Object, Object> entry : props.entrySet()) {
+				String k = entry.getKey().toString();
+				map.put(k, entry.getValue());
 			}
 		}
 	}

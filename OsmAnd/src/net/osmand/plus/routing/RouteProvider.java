@@ -121,7 +121,7 @@ public class RouteProvider {
 					list.add(r);
 				}
 			}
-			return list.toArray(new RouteService[list.size()]);
+			return list.toArray(new RouteService[0]);
 		}
 	}
 

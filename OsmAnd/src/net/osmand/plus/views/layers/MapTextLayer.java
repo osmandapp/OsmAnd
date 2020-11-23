@@ -61,7 +61,8 @@ public class MapTextLayer extends OsmandMapLayer {
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		TIntHashSet set = new TIntHashSet();
-		for (OsmandMapLayer l : textObjects.keySet()) {
+		for (Map.Entry<OsmandMapLayer, Collection<?>> entry : textObjects.entrySet()) {
+			OsmandMapLayer l = entry.getKey();
 			MapTextProvider provider = (MapTextProvider) l;
 			if (!view.isLayerVisible(l) || !provider.isTextVisible()) {
 				continue;
@@ -69,7 +70,7 @@ public class MapTextLayer extends OsmandMapLayer {
 
 			updateTextSize();
 			paintTextIcon.setFakeBoldText(provider.isFakeBoldText());
-			for (Object o : textObjects.get(l)) {
+			for (Object o : entry.getValue()) {
 				LatLon loc = provider.getTextLocation(o);
 				String name = provider.getText(o);
 				if (loc == null || TextUtils.isEmpty(name)) {

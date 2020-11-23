@@ -70,7 +70,7 @@ public class RenderingRule {
 				i++;
 			}
 		}
-		properties = props.toArray(new RenderingRuleProperty[props.size()]);
+		properties = props.toArray(new RenderingRuleProperty[0]);
 	}
 	
 	private int getPropertyIndex(String property){

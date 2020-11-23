@@ -404,7 +404,7 @@ public class ConfigureMapMenu {
 						bld.setTitle(R.string.map_magnifier);
 						bld.setNegativeButton(R.string.shared_string_dismiss, null);
 						DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-								values.toArray(new String[values.size()]), nightMode, i, app, selectedProfileColor, themeRes, new View.OnClickListener() {
+								values.toArray(new String[0]), nightMode, i, app, selectedProfileColor, themeRes, new View.OnClickListener() {
 									@Override
 									public void onClick(View v) {
 										int which = (int) v.getTag();
@@ -481,7 +481,7 @@ public class ConfigureMapMenu {
 				.createItem());
 
 		String localeDescr = activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get();
-		localeDescr = localeDescr == null || localeDescr.equals("") ? activity.getString(R.string.local_map_names)
+		localeDescr = localeDescr == null || localeDescr.isEmpty() ? activity.getString(R.string.local_map_names)
 				: localeDescr;
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_locale, activity)
 				.setId(MAP_LANGUAGE_ID)
@@ -570,7 +570,7 @@ public class ConfigureMapMenu {
 										txtIds[index]);
 								refreshMapComplete(activity);
 								String localeDescr = txtIds[index];
-								localeDescr = localeDescr == null || localeDescr.equals("") ? activity
+								localeDescr = localeDescr == null || localeDescr.isEmpty() ? activity
 										.getString(R.string.local_map_names) : localeDescr;
 								adapter.getItem(pos).setDescription(localeDescr);
 								ad.notifyDataSetInvalidated();
@@ -639,7 +639,7 @@ public class ConfigureMapMenu {
 				return mp.get(lhs).compareTo(mp.get(rhs));
 			}
 		});
-		return lst.toArray(new String[lst.size()]);
+		return lst.toArray(new String[0]);
 	}
 
 	public static String[] getMapNamesValues(Context ctx, String[] ids) {

@@ -205,7 +205,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		long to = settings.MAPILLARY_FILTER_TO_DATE.get();
 		boolean pano = settings.MAPILLARY_FILTER_PANO.get();
 
-		if (!userKey.equals("")) {
+		if (!userKey.isEmpty()) {
 			String key = (String) userData.get("userkey");
 			if (!userKey.equals(key)) {
 				return true;

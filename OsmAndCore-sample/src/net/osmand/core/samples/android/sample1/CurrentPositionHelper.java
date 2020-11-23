@@ -128,7 +128,7 @@ public class CurrentPositionHelper {
 	}
 
 	private void initCtx(SampleApplication app, List<BinaryMapIndexReader> checkReaders) {
-		BinaryMapIndexReader[] rs = checkReaders.toArray(new BinaryMapIndexReader[checkReaders.size()]);
+		BinaryMapIndexReader[] rs = checkReaders.toArray(new BinaryMapIndexReader[0]);
 		if (rs.length > 0) {
 			RoutingConfiguration defCfg = RoutingConfiguration.getDefault().build("geocoding", 10,
 					new HashMap<String, String>());

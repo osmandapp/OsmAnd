@@ -190,14 +190,15 @@ class AppVersionUpgradeOnInit {
 		migrateEnumPreferences();
 		SharedPreferences globalSharedPreferences = (SharedPreferences) settings.getGlobalPreferences();
 		Map<String, ?> globalPrefsMap = globalSharedPreferences.getAll();
-		for (String key : globalPrefsMap.keySet()) {
+		for (Map.Entry<String, ?> entry : globalPrefsMap.entrySet()) {
+			String key = entry.getKey();
 			OsmandPreference<?> pref = settings.getPreference(key);
 			if (pref instanceof CommonPreference) {
 				CommonPreference<?> commonPreference = (CommonPreference<?>) pref;
 				if (!commonPreference.isGlobal()) {
 					for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 						if (!commonPreference.isSetForMode(mode) && !commonPreference.hasDefaultValueForMode(mode)) {
-							settings.setPreference(key, globalPrefsMap.get(key), mode);
+							settings.setPreference(key, entry.getValue(), mode);
 						}
 					}
 				}
@@ -205,12 +206,13 @@ class AppVersionUpgradeOnInit {
 		}
 		SharedPreferences defaultProfilePreferences = (SharedPreferences) settings.getProfilePreferences(ApplicationMode.DEFAULT);
 		Map<String, ?> defaultPrefsMap = defaultProfilePreferences.getAll();
-		for (String key : defaultPrefsMap.keySet()) {
+		for (Map.Entry<String, ?> entry : defaultPrefsMap.entrySet()) {
+			String key = entry.getKey();
 			OsmandPreference<?> pref = settings.getPreference(key);
 			if (pref instanceof CommonPreference) {
 				CommonPreference<?> commonPreference = (CommonPreference<?>) pref;
 				if (commonPreference.isGlobal() && !commonPreference.isSet()) {
-					settings.setPreference(key, defaultPrefsMap.get(key));
+					settings.setPreference(key, entry.getValue());
 				}
 			}
 		}

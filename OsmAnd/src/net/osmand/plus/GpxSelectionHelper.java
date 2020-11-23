@@ -408,10 +408,10 @@ public class GpxSelectionHelper {
 			boolean split = true;
 			if (group.splitDistance > 0) {
 				List<GPXTrackAnalysis> trackSegments = r.splitByDistance(group.splitDistance, joinSegments);
-				as = trackSegments.toArray(new GPXTrackAnalysis[trackSegments.size()]);
+				as = trackSegments.toArray(new GPXTrackAnalysis[0]);
 			} else if (group.splitTime > 0) {
 				List<GPXTrackAnalysis> trackSegments = r.splitByTime(group.splitTime, joinSegments);
-				as = trackSegments.toArray(new GPXTrackAnalysis[trackSegments.size()]);
+				as = trackSegments.toArray(new GPXTrackAnalysis[0]);
 			} else {
 				split = false;
 				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.segment(0, r)};

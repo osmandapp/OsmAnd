@@ -8,6 +8,7 @@ import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 
+import com.github.scribejava.core.builder.api.DefaultApi10a;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
@@ -16,7 +17,7 @@ import com.github.scribejava.core.model.Verb;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
-import net.osmand.plus.BuildConfig;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;
@@ -31,16 +32,27 @@ public class OsmOAuthAuthorizationAdapter {
     private static final int THREAD_ID = 10101;
     private static final String OSM_USER = "user";
     private static final String DISPLAY_NAME = "display_name";
-    private static final String OSM_USER_DETAILS_URL = "https://api.openstreetmap.org/api/0.6/user/details";
     public final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationAdapter.class);
 
     private OsmandApplication app;
-    private OsmOAuthAuthorizationClient client =
-            new OsmOAuthAuthorizationClient(BuildConfig.OSM_OAUTH_CONSUMER_KEY, BuildConfig.OSM_OAUTH_CONSUMER_SECRET);
+    private final OsmOAuthAuthorizationClient client;
 
     public OsmOAuthAuthorizationAdapter(OsmandApplication app) {
         TrafficStats.setThreadStatsTag(THREAD_ID);
         this.app = app;
+        DefaultApi10a api10a;
+        String key;
+        String secret;
+        if (app.getSettings().USE_DEV_URL.get()) {
+            api10a = new OsmOAuthAuthorizationClient.OsmDevApi();
+            key = OsmAndConstants.OSM_OAUTH_DEVELOPER_KEY;
+            secret = OsmAndConstants.OSM_OAUTH_DEVELOPER_SECRET;
+        } else {
+            api10a = new OsmOAuthAuthorizationClient.OsmApi();
+            key = OsmAndConstants.OSM_OAUTH_CONSUMER_KEY;
+            secret = OsmAndConstants.OSM_OAUTH_CONSUMER_SECRET;
+        }
+        client = new OsmOAuthAuthorizationClient(key, secret, api10a);
         restoreToken();
     }
 
@@ -162,9 +174,10 @@ public class OsmOAuthAuthorizationAdapter {
             return parseUserName(response);
         }
 
-        public Response getOsmUserDetails() throws InterruptedException, ExecutionException, IOException {
-            return performRequest(OSM_USER_DETAILS_URL, Verb.GET.name(), null);
-        }
+    public Response getOsmUserDetails() throws InterruptedException, ExecutionException, IOException {
+        String osmUserDetailsUrl = app.getSettings().getOsmUrl() + "api/0.6/user/details";
+        return performRequest(osmUserDetailsUrl, Verb.GET.name(), null);
+    }
 
         public String parseUserName(Response response) throws XmlPullParserException, IOException {
             String userName = null;

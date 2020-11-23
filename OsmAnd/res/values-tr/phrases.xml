@@ -3130,4 +3130,6 @@
     <string name="poi_fire_hydrant_type_pillar">Sütun</string>
     <string name="poi_fire_hydrant_type_pond">Gölet</string>
     <string name="poi_fire_hydrant_style_water_source_pond">Gölet</string>
+    <string name="poi_consulate_filter">Konsolosluk</string>
+    <string name="poi_embassy_filter">Büyük elçilik</string>
 </resources>

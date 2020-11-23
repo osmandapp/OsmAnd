@@ -216,7 +216,7 @@ public class TravelDbHelper {
 			}
 			query += ") ";
 			if (params.size() > 0) {
-				SQLiteCursor cursor = conn.rawQuery(query, params.toArray(new String[params.size()]));
+				SQLiteCursor cursor = conn.rawQuery(query, params.toArray(new String[0]));
 				if (cursor != null) {
 					if (cursor.moveToFirst()) {
 						do {
@@ -468,7 +468,7 @@ public class TravelDbHelper {
 					params.add(lang);
 				}
 			}
-			SQLiteCursor cursor = conn.rawQuery(query.toString(), params.toArray(new String[params.size()]));
+			SQLiteCursor cursor = conn.rawQuery(query.toString(), params.toArray(new String[0]));
 			if (cursor != null && cursor.moveToFirst()) {
 				do {
 					WikivoyageSearchResult rs = new WikivoyageSearchResult();
