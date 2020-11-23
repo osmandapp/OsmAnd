@@ -441,7 +441,7 @@
     <string name="save_track_to_gpx">Automatyczne rejestrowanie śladu podczas nawigacji</string>
     <string name="update_tile">Uaktualnij mapę</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>
-    <string name="open_street_map_login_descr">Potrzebny do zgłaszania do openstreetmap.org.</string>
+    <string name="open_street_map_login_descr">Potrzebne do przysyłania zmian do serwisu openstreetmap.org.</string>
     <string name="user_name">Nazwa użytkownika OSM</string>
     <string name="mark_point">Cel</string>
     <string name="shared_string_add_to_favorites">Dodaj do ulubionych</string>
@@ -3927,10 +3927,10 @@
     <string name="complex_routing_descr">Dwufazowe wyznaczanie tras do nawigacji samochodowej.</string>
     <string name="use_native_pt">Rozwój rodzimego transportu publicznego</string>
     <string name="use_native_pt_desc">Przejdź do (bezpiecznego) obliczania tras transportu publicznego w języku Java</string>
-    <string name="perform_oauth_authorization_description">Wykonaj logowanie OAuth, aby korzystać z funkcji osmedit</string>
+    <string name="perform_oauth_authorization_description">Zaloguj się za pomocą protokołu OAuth, aby korzystać z funkcji osmedit</string>
     <string name="perform_oauth_authorization">Zaloguj się przez OAuth</string>
     <string name="clear_osm_token">Wyczyść token OpenStreetMap OAuth</string>
-    <string name="osm_edit_logout_success">Wylogowanie powiodło się</string>
+    <string name="osm_edit_logout_success">Wylogowano</string>
     <string name="file_already_imported">Plik jest już zaimportowany do OsmAnd</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="navigate_point_mgrs">MGRS</string>
@@ -3962,9 +3962,9 @@
     <string name="login_open_street_map">Zaloguj się do OpenStreetMap</string>
     <string name="login_open_street_map_org">Zaloguj się do OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Zaloguj się za pomocą OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Musisz się zalogować, aby przesłać nowe lub zmodyfikowane zmiany.
+    <string name="open_street_map_login_mode">Zaloguj się, aby przesłać nowe lub zmodyfikowane zmiany,
 \n
-\nMożesz zalogować się za pomocą bezpiecznej metody autoryzacji OAuth lub użyć swojego loginu i hasła.</string>
+\nza pomocą protokołu OAuth lub nazwy użytkownika i hasła.</string>
     <string name="use_login_password">Zaloguj się za pomocą nazwy użytkownika i hasła</string>
     <string name="login_account">Konto</string>
     <string name="osm_edit_close_note">Zamknij uwagę OSM</string>
@@ -3977,7 +3977,26 @@
     <string name="shared_string_add_photo">Dodaj zdjęcie</string>
     <string name="register_on_openplacereviews">Zarejestruj się w
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Zdjęcia są dostarczane przez projekt OpenPlaceReviews.org. Aby przesłać swoje zdjęcia należy zarejestrować się na stronie.</string>
+    <string name="register_on_openplacereviews_desc">Zaloguj się na stronie projektu otwartych danych OpenPlaceReviews.org, aby przesłać jeszcze więcej zdjęć.</string>
     <string name="register_opr_create_new_account">Utwórz nowe konto</string>
     <string name="register_opr_have_account">Mam już konto</string>
+    <string name="select_groups_for_import">Wybierz grupy, które zostaną zaimportowane.</string>
+    <string name="select_items_for_import">Wybierz elementy, które zostaną zaimportowane.</string>
+    <string name="use_dev_url_descr">Przełącz na dev.openstreetmap.org zamiast openstreetmap.org do testowania przesyłania uwag OSM / użytecznych miejsc / GPX.</string>
+    <string name="add_photos_descr">OsmAnd pokazuje zdjęcia z kilku źródeł:
+\nOpenPlaceReviews - zdjęcia punktów użyteczności;
+\nMapillary - zdjęcia z poziomu ulicy;
+\nWeb / Wikimedia - zdjęcia określonych punktów użyteczności w danych OpenStreetMap.</string>
+    <string name="shared_string_resources">Zasoby</string>
+    <string name="approximate_file_size">Przybliżony rozmiar pliku</string>
+    <string name="select_data_to_export">Wybierz dane do wyeksportowania do pliku.</string>
+    <string name="file_size_needed_for_import">Potrzebne do importu</string>
+    <string name="export_not_enough_space_descr">Twoje urządzenie ma tylko %1$s wolnego miejsca. Zwolnij trochę miejsca lub odznacz niektóre elementy do wyeksportowania.</string>
+    <string name="export_not_enough_space">Nie ma wystarczającej ilości miejsca</string>
+    <string name="use_dev_url">Skorzystaj z dev.openstreetmap.org</string>
+    <string name="shared_string_search_history">Historia wyszukiwania</string>
+    <string name="app_mode_kayak">Kajak</string>
+    <string name="app_mode_motorboat">Motorówka</string>
+    <string name="add_to_mapillary">Dodaj do Mapillary</string>
+    <string name="add_to_opr">Dodaj do OpenPlaceReviews</string>
 </resources>
