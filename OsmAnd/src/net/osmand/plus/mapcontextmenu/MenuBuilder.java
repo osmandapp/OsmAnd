@@ -51,6 +51,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
 import net.osmand.plus.openplacereviews.OPRWebviewActivity;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
@@ -78,6 +79,8 @@ import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCa
 
 public class MenuBuilder {
 
+	private static final int PICK_IMAGE = 1231;
+	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
 	protected static final String[] arrowChars = new String[] {"=>", " - "};
@@ -107,10 +110,7 @@ public class MenuBuilder {
 	private String preferredMapAppLang;
 	private boolean transliterateNames;
 
-	private static final int PICK_IMAGE = 1231;
-	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
-	private View view;
-	private OpenDBAPI openDBAPI = new OpenDBAPI();
+	private final OpenDBAPI openDBAPI = new OpenDBAPI();
 	private String[] placeId = new String[0];
 	private GetImageCardsListener imageCardListener = new GetImageCardsListener() {
 		@Override
@@ -126,8 +126,7 @@ public class MenuBuilder {
 		@Override
 		public void onFinish(List<ImageCard> cardList) {
 			if (!isHidden()) {
-				List<AbstractCard> cards = new ArrayList<>();
-				cards.addAll(cardList);
+				List<AbstractCard> cards = new ArrayList<AbstractCard>(cardList);
 				if (cardList.size() == 0) {
 					cards.add(new NoImagesCard(mapActivity));
 				}
@@ -386,19 +385,7 @@ public class MenuBuilder {
 		b.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(final View view) {
-				mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE,
-						new ActivityResultListener.OnActivityResultListener() {
-							@Override
-							public void onResult(int resultCode, Intent resultData) {
-								InputStream inputStream = null;
-								try {
-									inputStream = mapActivity.getContentResolver().openInputStream(resultData.getData());
-								} catch (Exception e) {
-									LOG.error(e);
-								}
-								handleSelectedImage(view, inputStream);
-							}
-						}));
+				registerResultListener(view);
 				final String privateKey = OPRWebviewActivity.getPrivateKeyFromCookie();
 				final String name = OPRWebviewActivity.getUsernameFromCookie();
 				if (privateKey == null || privateKey.isEmpty()) {
@@ -408,7 +395,7 @@ public class MenuBuilder {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						if (openDBAPI.checkPrivateKeyValid(name,privateKey)){
+						if (openDBAPI.checkPrivateKeyValid(name, privateKey)) {
 							app.runInUIThread(new Runnable() {
 								@Override
 								public void run() {
@@ -419,63 +406,11 @@ public class MenuBuilder {
 											mapActivity.getString(R.string.select_picture)), PICK_IMAGE);
 								}
 							});
-						}
-						else {
+						} else {
 							OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
 						}
 					}
 				}).start();
-			}
-
-			private void handleSelectedImage(final View view, final InputStream image) {
-				Thread t = new Thread(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							uploadImageToPlace(view, image);
-						} catch (Exception e) {
-							LOG.error(e);
-						}
-					}
-				});
-				t.start();
-			}
-
-			private void uploadImageToPlace(View view, InputStream image) {
-				//compress image
-				BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
-				Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
-				ByteArrayOutputStream os = new ByteArrayOutputStream();
-				bmp.compress(Bitmap.CompressFormat.PNG, 70, os);
-				byte[] buff = os.toByteArray();
-				InputStream serverData = new ByteArrayInputStream(buff);
-				String url = BuildConfig.OPR_BASE_URL + "api/ipfs/image";
-				String response = NetworkUtils.sendPostDataRequest(url, serverData);
-				if (response != null) {
-					int res = 0;
-					try {
-						res = openDBAPI.uploadImage(
-								placeId,
-								OPRWebviewActivity.getPrivateKeyFromCookie()
-,								OPRWebviewActivity.getUsernameFromCookie(),
-								response);
-					} catch (FailedVerificationException e) {
-						LOG.error(e);
-						app.showToastMessage(view.getResources().getString(R.string.cannot_upload_image));
-					}
-					if (res != 200) {
-						//image was uploaded but not added to blockchain
-						app.showToastMessage(view.getResources().getString(R.string.cannot_upload_image));
-					} else {
-						String str = MessageFormat.format(view.getResources()
-								.getString(R.string.successfully_uploaded_pattern), 1, 1);
-						app.showToastMessage(str);
-						//refresh the image
-						execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
-					}
-				} else {
-					app.showToastMessage(view.getResources().getString(R.string.cannot_upload_image));
-				}
 			}
 		});
 		//TODO feature under development
@@ -493,6 +428,73 @@ public class MenuBuilder {
 				false, null, false);
 	}
 
+	private void registerResultListener(final View view) {
+		mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE, new ActivityResultListener.
+				OnActivityResultListener() {
+			@Override
+			public void onResult(int resultCode, Intent resultData) {
+				handleSelectedImage(view, resultData.getData());
+			}
+		}));
+	}
+
+	private void handleSelectedImage(final View view, final Uri uri) {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				InputStream inputStream = null;
+				try {
+					inputStream = app.getContentResolver().openInputStream(uri);
+					if (inputStream != null) {
+						uploadImageToPlace(view, inputStream);
+					}
+				} catch (Exception e) {
+					LOG.error(e);
+				} finally {
+					Algorithms.closeStream(inputStream);
+				}
+			}
+		});
+		t.start();
+	}
+
+	private void uploadImageToPlace(View view, InputStream image) {
+		InputStream serverData = new ByteArrayInputStream(compressImage(image));
+		String url = BuildConfig.OPR_BASE_URL + "api/ipfs/image";
+		String response = NetworkUtils.sendPostDataRequest(url, serverData);
+		if (response != null) {
+			int res = 0;
+			try {
+				res = openDBAPI.uploadImage(
+						placeId,
+						OPRWebviewActivity.getPrivateKeyFromCookie(),
+						OPRWebviewActivity.getUsernameFromCookie(),
+						response);
+			} catch (FailedVerificationException e) {
+				LOG.error(e);
+				app.showToastMessage(R.string.cannot_upload_image);
+			}
+			if (res != 200) {
+				//image was uploaded but not added to blockchain
+				app.showToastMessage(R.string.cannot_upload_image);
+			} else {
+				app.showToastMessage(R.string.successfully_uploaded_pattern, 1, 1);
+				//refresh the image
+				execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
+			}
+		} else {
+			app.showToastMessage(R.string.cannot_upload_image);
+		}
+	}
+
+	private byte[] compressImage(InputStream image) {
+		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
+		Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		bmp.compress(Bitmap.CompressFormat.PNG, 70, os);
+		return os.toByteArray();
+	}
+
 	private void startLoadingImages() {
 		if (onlinePhotoCardsRow == null) {
 			return;
@@ -500,7 +502,7 @@ public class MenuBuilder {
 		startLoadingImagesTask();
 	}
 
-	private void startLoadingImagesTask(){
+	private void startLoadingImagesTask() {
 		onlinePhotoCards = new ArrayList<>();
 		onlinePhotoCardsRow.setProgressCard();
 		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
