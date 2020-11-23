@@ -38,7 +38,7 @@ import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 
 public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
-	private static final Log LOG = PlatformUtil.getLog(ExportImportSettingsAdapter.class.getName());
+	private static final Log LOG = PlatformUtil.getLog(ExportSettingsAdapter.class.getName());
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
@@ -237,6 +237,13 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
 		this.selectedItemsMap = selectedItemsMap;
 		Collections.sort(itemsTypes);
+		notifyDataSetChanged();
+	}
+
+	public void clearSettingsList() {
+		this.itemsMap.clear();
+		this.itemsTypes.clear();
+		this.selectedItemsMap.clear();
 		notifyDataSetChanged();
 	}
 
