@@ -1,6 +1,7 @@
 package net.osmand.plus.openplacereviews;
 
 
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -10,10 +11,11 @@ import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
-import net.osmand.plus.BuildConfig;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -21,14 +23,25 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public static final String KEY_LOGIN = "LOGIN_KEY";
-	private static final String url = BuildConfig.OPR_BASE_URL;
-	private static final String cookieUrl = BuildConfig.OPR_BASE_URL + "profile";
-	private static final String loginUrl = BuildConfig.OPR_BASE_URL + "login";
-	private static final String registerUrl = BuildConfig.OPR_BASE_URL + "signup";
-	private static final String finishUrl = cookieUrl;
 	public static String KEY_TITLE = "TITLE_KEY";
 	private WebView webView;
 	private boolean isLogin = false;
+
+	public static String getCookieUrl(Context ctx) {
+		return ctx.getString(R.string.opr_base_url) + "profile";
+	}
+
+	public static String getLoginUrl(Context ctx) {
+		return ctx.getString(R.string.opr_base_url) + "login";
+	}
+
+	public static String getRegisterUrl(Context ctx) {
+		return ctx.getString(R.string.opr_base_url) + "signup";
+	}
+
+	public static String getFinishUrl(Context ctx) {
+		return getCookieUrl(ctx);
+	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		OsmandApplication app = getMyApplication();
@@ -64,9 +77,9 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 		if (bundle != null) {
 			isLogin = bundle.getBoolean(KEY_LOGIN);
 			if (isLogin) {
-				webView.loadUrl(loginUrl);
+				webView.loadUrl(getLoginUrl(this));
 			} else {
-				webView.loadUrl(registerUrl);
+				webView.loadUrl(getRegisterUrl(this));
 			}
 		}
 	}
@@ -77,18 +90,18 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 		return true;
 	}
 
-	public static String getPrivateKeyFromCookie() {
-		return returnCookieByKey("opr-token");
+	public static String getPrivateKeyFromCookie(Context ctx) {
+		return returnCookieByKey(ctx, "opr-token");
 	}
 
-	public static String getUsernameFromCookie() {
-		return returnCookieByKey("opr-nickname");
+	public static String getUsernameFromCookie(Context ctx) {
+		return returnCookieByKey(ctx, "opr-nickname");
 	}
 
-	private static String returnCookieByKey(String key) {
+	private static String returnCookieByKey(Context ctx, String key) {
 		String CookieValue = null;
 		CookieManager cookieManager = CookieManager.getInstance();
-		String cookies = cookieManager.getCookie(cookieUrl);
+		String cookies = cookieManager.getCookie(getCookieUrl(ctx));
 		if (cookies == null || cookies.isEmpty()) {
 			return "";
 		}
@@ -106,7 +119,7 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public class CloseOnSuccessWebViewClient extends WebViewClient {
 		@Override
 		public void onPageFinished(WebView view, String url) {
-			if (url.contains(finishUrl) && isLogin) {
+			if (url.contains(getFinishUrl(OPRWebviewActivity.this)) && isLogin) {
 				finish();
 			}
 			super.onPageFinished(view, url);
