@@ -325,12 +325,9 @@ public class MenuBuilder {
 		int dp8 = ctx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
 		int dp12 = ctx.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		int dp16 = ctx.getResources().getDimensionPixelSize(R.dimen.content_padding);
-		view.findViewById(R.id.button_text).setPadding(dp8, 0, dp16, 0);
-		((TextView) view.findViewById(R.id.button_text)).setCompoundDrawablePadding(0);
-		LinearLayout.LayoutParams params = new
-				LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		params.setMargins(dp16, 0, dp12, dp16);
+		params.setMargins(dp16, 0, dp16, dp12);
 		buttonLayout.setLayoutParams(params);
 		LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
 				ctx.getResources().getDimensionPixelSize(R.dimen.dialog_button_height));
@@ -338,7 +335,9 @@ public class MenuBuilder {
 		buttonLayout.addView(view);
 		UiUtilities.setupDialogButton(nightMode, buttonLayout, UiUtilities.DialogButtonType.STROKED,
 				ctx.getString(R.string.shared_string_add_photo), R.drawable.ic_sample);
-		((TextView) view.findViewById(R.id.button_text)).setCompoundDrawablePadding(dp6);
+		TextView textView = view.findViewById(R.id.button_text);
+		textView.setPadding(dp8, 0, dp16, 0);
+		textView.setCompoundDrawablePadding(dp6);
 		//TODO This feature is under development
 		buttonLayout.setVisibility(View.VISIBLE);
 		return buttonLayout;
