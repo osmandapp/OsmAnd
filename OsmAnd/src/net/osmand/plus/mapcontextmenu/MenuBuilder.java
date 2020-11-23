@@ -6,11 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.Typeface;
+import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -64,7 +60,6 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
 import org.apache.commons.logging.Log;
 import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 
@@ -72,7 +67,6 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.text.MessageFormat;
 import java.util.*;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
@@ -385,32 +379,36 @@ public class MenuBuilder {
 		b.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(final View view) {
-				registerResultListener(view);
-				final String privateKey = OPRWebviewActivity.getPrivateKeyFromCookie();
-				final String name = OPRWebviewActivity.getUsernameFromCookie();
-				if (privateKey == null || privateKey.isEmpty()) {
-					OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
-					return;
-				}
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						if (openDBAPI.checkPrivateKeyValid(name, privateKey)) {
-							app.runInUIThread(new Runnable() {
-								@Override
-								public void run() {
-									Intent intent = new Intent();
-									intent.setType("image/*");
-									intent.setAction(Intent.ACTION_GET_CONTENT);
-									mapActivity.startActivityForResult(Intent.createChooser(intent,
-											mapActivity.getString(R.string.select_picture)), PICK_IMAGE);
-								}
-							});
-						} else {
-							OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
-						}
+				if (false) {
+					AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
+				} else {
+					registerResultListener(view);
+					final String privateKey = OPRWebviewActivity.getPrivateKeyFromCookie();
+					final String name = OPRWebviewActivity.getUsernameFromCookie();
+					if (privateKey == null || privateKey.isEmpty()) {
+						OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+						return;
 					}
-				}).start();
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							if (openDBAPI.checkPrivateKeyValid(name, privateKey)) {
+								app.runInUIThread(new Runnable() {
+									@Override
+									public void run() {
+										Intent intent = new Intent();
+										intent.setType("image/*");
+										intent.setAction(Intent.ACTION_GET_CONTENT);
+										mapActivity.startActivityForResult(Intent.createChooser(intent,
+												mapActivity.getString(R.string.select_picture)), PICK_IMAGE);
+									}
+								});
+							} else {
+								OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+							}
+						}
+					}).start();
+				}
 			}
 		});
 		//TODO feature under development
