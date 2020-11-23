@@ -197,11 +197,9 @@ android {
 
 	buildTypes {
 		debug {
-			buildConfigField "String", "OPR_BASE_URL", "\"https://test.openplacereviews.org/\""
 			signingConfig signingConfigs.development
 		}
 		release {
-			buildConfigField "String", "OPR_BASE_URL", "\"https://test.openplacereviews.org/\""
 			signingConfig signingConfigs.publishing
 		}
 	}

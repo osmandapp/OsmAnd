@@ -19,6 +19,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -45,12 +46,12 @@ public class OsmOAuthAuthorizationAdapter {
         String secret;
         if (app.getSettings().USE_DEV_URL.get()) {
             api10a = new OsmOAuthAuthorizationClient.OsmDevApi();
-            key = OsmAndConstants.OSM_OAUTH_DEVELOPER_KEY;
-            secret = OsmAndConstants.OSM_OAUTH_DEVELOPER_SECRET;
+            key = app.getString(R.string.osm_oauth_developer_key);
+            secret = app.getString(R.string.osm_oauth_developer_secret);
         } else {
             api10a = new OsmOAuthAuthorizationClient.OsmApi();
-            key = OsmAndConstants.OSM_OAUTH_CONSUMER_KEY;
-            secret = OsmAndConstants.OSM_OAUTH_CONSUMER_SECRET;
+            key = app.getString(R.string.osm_oauth_consumer_key);
+            secret = app.getString(R.string.osm_oauth_consumer_secret);
         }
         client = new OsmOAuthAuthorizationClient(key, secret, api10a);
         restoreToken();
