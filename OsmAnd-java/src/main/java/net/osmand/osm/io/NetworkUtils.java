@@ -112,8 +112,8 @@ public class NetworkUtils {
 		URL url;
 		try {
 			boolean firstPrm =!urlText.contains("?");
-			for (String key : additionalMapData.keySet()) {
-				urlText += (firstPrm ? "?" : "&") + key + "=" + URLEncoder.encode(additionalMapData.get(key), "UTF-8");
+			for (Map.Entry<String, String> entry : additionalMapData.entrySet()) {
+				urlText += (firstPrm ? "?" : "&") + entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), "UTF-8");
 				firstPrm = false;
 			}
 			log.info("Start uploading file to " + urlText + " " +fileToUpload.getName());

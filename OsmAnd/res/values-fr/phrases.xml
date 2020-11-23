@@ -655,7 +655,7 @@
     <string name="poi_club">Club</string>
     <string name="poi_cafe_and_restaurant">Restaurant et café</string>
     <string name="poi_craft">Artisanat</string>
-    <string name="poi_filling_station">Station essence</string>
+    <string name="poi_filling_station">Station service</string>
     <string name="poi_personal_transport">Transport individuel</string>
     <string name="poi_water_supply">Alimentation en eau potable</string>
     <string name="poi_trash_disposal">Traitement des ordures ménagères</string>
@@ -1975,7 +1975,7 @@
     <string name="poi_ferry_terminal_cargo">Cargo</string>
     <string name="poi_telescope_type">Type</string>
     <string name="poi_animal_training_type">Type</string>
-    <string name="poi_embassy_type">Type</string>
+    <string name="poi_diplomatic_filter">Type</string>
     <string name="poi_city_capital">Capitale</string>
     <string name="poi_healthcare_alternative_types">Spécialité</string>
     <string name="poi_free_flying_characteristics">Caractéristiques</string>
@@ -3272,8 +3272,8 @@
     <string name="poi_generator_source_biomass">Source d\'énergie : biomasse</string>
     <string name="poi_rtsa_scale_nc">н/к</string>
     <string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
-    <string name="poi_rtsa_scale_1a">1А</string>
-    <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
+    <string name="poi_rtsa_scale_1a">1A</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1A*</string>
     <string name="poi_rtsa_scale_1b">1Б</string>
     <string name="poi_rtsa_scale_1b_asterisk">1Б*</string>
     <string name="poi_rtsa_scale_2a">2А</string>
@@ -3844,4 +3844,8 @@
     <string name="poi_departures_board_no">Tableau des départs : non</string>
     <string name="poi_elevator">Ascenseur</string>
     <string name="poi_departures_board">Tableau des départs</string>
+    <string name="poi_liaison_filter">Liaison</string>
+    <string name="poi_consulate_filter">Consulat</string>
+    <string name="poi_embassy_filter">Ambassade</string>
+    <string name="poi_drinking_water_refill">Point d\'eau potable</string>
 </resources>

@@ -61,9 +61,9 @@ public class Multipolygon {
 					innerLinearRings.add(innerRing.toLinearRing());
 				}
 			}
-			polygons.add(geometryFactory.createPolygon(outerRing.toLinearRing(), innerLinearRings.toArray(new LinearRing[innerLinearRings.size()])));
+			polygons.add(geometryFactory.createPolygon(outerRing.toLinearRing(), innerLinearRings.toArray(new LinearRing[0])));
 		}
-		return geometryFactory.createMultiPolygon(polygons.toArray(new Polygon[polygons.size()]));
+		return geometryFactory.createMultiPolygon(polygons.toArray(new Polygon[0]));
 	}
 
 	public long getId() {

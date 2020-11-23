@@ -66,33 +66,19 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	@Override
 	public EntityInfo getEntityInfo(long id) {
-		if(entityInfoId != null && entityInfoId.getId().longValue() == id) {
+		if (entityInfoId != null && entityInfoId.getId().longValue() == id) {
 			return entityInfo;
 		}
 		return null;
 	}
 
-	private static String getSiteApi() {
-		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-
-		String RETURN_API;
-
-		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
-			RETURN_API = "https://api.openstreetmap.org/";
-		} else {
-			RETURN_API = "http://api.openstreetmap.org/";
-		}
-
-		// RETURN_API = "http://api06.dev.openstreetmap.org/";
-
-		return RETURN_API;
+	private String getSiteApi() {
+		return settings.getOsmUrl();
 	}
-
-	private final static String URL_TO_UPLOAD_GPX = getSiteApi() + "api/0.6/gpx/create";
 
 	public String uploadGPXFile(String tagstring, String description, String visibility, File f) {
 		OsmOAuthAuthorizationAdapter adapter = new OsmOAuthAuthorizationAdapter(ctx);
-		String url = URL_TO_UPLOAD_GPX;
+		String url = getSiteApi() + "api/0.6/gpx/create";
 		Map<String, String> additionalData = new LinkedHashMap<String, String>();
 		additionalData.put("description", description);
 		additionalData.put("tags", tagstring);

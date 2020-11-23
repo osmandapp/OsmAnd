@@ -223,7 +223,7 @@ public class DashChooseAppDirFragment {
 			paths.add("");
 			types.add(OsmandSettings.EXTERNAL_STORAGE_TYPE_SPECIFIED);
 
-			editalert.setSingleChoiceItems(items.toArray(new String[items.size()]), selected,
+			editalert.setSingleChoiceItems(items.toArray(new String[0]), selected,
 					new DialogInterface.OnClickListener() {
 
 						@Override

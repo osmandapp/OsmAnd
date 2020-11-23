@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="offline_edition">Modifications hors-ligne</string>
-    <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne.</string>
+    <string name="offline_edition_descr">Si le mode d\'édition hors-ligne est activé, les modifications seront enregistrées localement puis envoyées à la demande. Sinon, les modifications seront envoyées immédiatement.</string>
     <string name="update_poi_does_not_change_indexes">Les modifications de points d\'intérêt dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier de votre appareil.</string>
     <string name="local_openstreetmap_uploading">Téléversement…</string>
     <string name="local_openstreetmap_were_uploaded">{0} Points d\'intérêt / Notes ont été téléversés</string>
@@ -695,8 +695,8 @@
     <string name="asap">Dès que possible</string>
     <string name="gpxup_public">Public</string>
     <string name="gpxup_identifiable">Identifiable</string>
-    <string name="gpxup_trackable">Suivi</string>
-    <string name="gpxup_private">Privé</string>
+    <string name="gpxup_trackable">Traçable</string>
+    <string name="gpxup_private">Privée</string>
     <string name="osmand_parking_event">Récupérer le véhicule au parking</string>
     <string name="osmand_parking_warning">Avertissement</string>
     <string name="osmand_parking_warning_text">Un rappel pour récupérer votre véhicule a été ajouté à votre agenda. Vous pouvez modifier ou supprimer ce rappel.</string>
@@ -1910,7 +1910,7 @@
     <string name="active_markers">Marques actives</string>
     <string name="map_markers">Marques</string>
     <string name="map_marker">Marque</string>
-    <string name="file_name_containes_illegal_char">Le nom de fichier contient un caractère interdit</string>
+    <string name="file_name_containes_illegal_char">Caractère interdit dans le nom de fichier</string>
     <string name="osm_live_header">Cet abonnement active les mises à jour horaires pour toutes les cartes.
 \nLes dons sont en partie reversés à la Communauté OSM.
 \nSi vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'est la meilleure façon de le faire.</string>
@@ -2629,7 +2629,7 @@
     <string name="copy_location_name">Copier l\'emplacement / le nom du point</string>
     <string name="toast_empty_name_error">Emplacement sans nom</string>
     <string name="show_closed_notes">Afficher les notes fermées</string>
-    <string name="switch_osm_notes_visibility_desc">Afficher / masquer les notes OSM sur la carte.</string>
+    <string name="switch_osm_notes_visibility_desc">Affiche ou masque les notes OSM sur la carte.</string>
     <string name="gpx_file_desc">GPX - adapté à l\'export vers JOSM et d\'autres éditeurs OSM.</string>
     <string name="osc_file_desc">OSC - adapté à l\'export vers OSM.</string>
     <string name="shared_string_gpx_file">Fichier GPX</string>
@@ -3112,7 +3112,7 @@
     <string name="application_profiles_descr">Sélectionnez les profils affichés dans l\'application.</string>
     <string name="application_profiles">Profils de l\'application</string>
     <string name="quick_action_need_to_add_item_to_list">Ajoutez au moins une action à la barre d\'Actions rapides</string>
-    <string name="routing_attr_piste_type_downhill_name">Ski alpin / ski de descente</string>
+    <string name="routing_attr_piste_type_downhill_name">Ski alpin</string>
     <string name="routing_attr_piste_type_downhill_description">Pistes de ski et accès aux remontées mécaniques.</string>
     <string name="routing_attr_piste_type_nordic_name">Ski de randonnée et ski nordique</string>
     <string name="routing_attr_piste_type_nordic_description">Pistes de ski de fond ou de ski de randonnée.</string>
@@ -3555,7 +3555,7 @@
     <string name="terrain_empty_state_text">Permet d\'afficher l\'ombrage du relief ou les pistes. Vous pouvez en apprendre plus sur ces types de cartes sur notre site.</string>
     <string name="shared_string_hillshade">Ombrage du relief</string>
     <string name="download_slope_maps">Pistes</string>
-    <string name="quick_action_show_hide_terrain">Afficher / masquer le terrain</string>
+    <string name="quick_action_show_hide_terrain">Affiche ou masque le terrain</string>
     <string name="quick_action_terrain_hide">Masquer le terrain</string>
     <string name="quick_action_terrain_show">Afficher le terrain</string>
     <string name="quick_action_terrain_descr">Un bouton pour afficher ou masquer la couche terrain sur la carte.</string>
@@ -3672,11 +3672,11 @@
     <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"%1$s\".</string>
     <string name="quick_action_transport_hide">Masquer les transports publics</string>
     <string name="quick_action_transport_show">Afficher les transports publics</string>
-    <string name="quick_action_show_hide_transport">Afficher / masquer les transports publics</string>
+    <string name="quick_action_show_hide_transport">Affiche ou masque les transports publics</string>
     <string name="quick_action_transport_descr">Bouton pour afficher ou masquer les transports publics sur la carte.</string>
-    <string name="create_edit_poi">Créer / Modifier un PI</string>
+    <string name="create_edit_poi">Créer ou modifier un PI</string>
     <string name="parking_positions">Emplacements de stationnement</string>
-    <string name="add_edit_favorite">Ajouter / Modifier un favori</string>
+    <string name="add_edit_favorite">Ajouter ou modifier un favori</string>
     <string name="reset_deafult_order">Rétablir l\'ordre par défaut des éléments</string>
     <string name="back_to_editing">Retour en modification</string>
     <string name="quick_action_switch_profile_descr">Le bouton d’action bascule entre les profils sélectionnés.</string>
@@ -3851,7 +3851,7 @@
     <string name="import_track_descr">Sélectionnez le fichier de trace à suivre ou importez-le depuis votre appareil.</string>
     <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
     <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
-    <string name="save_global_track_interval_descr">Définit la fréquence d’enregistrement du parcours (enregistrement activé depuis le gadget sur la carte).</string>
+    <string name="save_global_track_interval_descr">Définit la fréquence d’enregistrement des points du parcours (activable depuis le gadget \"Enregistrement\" sur la carte).</string>
     <string name="disable_recording_once_app_killed_descrp">Suspend l\'enregistrement du parcours lorsque l\'application est arrêtée via Applications récentes ; les indications OsmAnd ne seront plus affichées dans la barre de notifications.</string>
     <string name="all_next_segments_will_be_recalc">Tous les segments suivants seront recalculés avec le profil sélectionné.</string>
     <string name="all_previous_segments_will_be_recalc">Tous les segments précédents seront recalculés avec le profil sélectionné.</string>
@@ -3883,7 +3883,7 @@
     <string name="sort_last_modified">Dernière modification</string>
     <string name="sort_name_descending">Nom : Z – A</string>
     <string name="sort_name_ascending">Nom : A – Z</string>
-    <string name="start_finish_icons">Icônes de départ / arrivée</string>
+    <string name="start_finish_icons">Icônes de départ et d\'arrivée</string>
     <string name="contour_lines_thanks">Merci pour votre achat de \'Courbes de niveaux\'</string>
     <string name="osm_live_payment_desc_hw">Abonnement facturé pour chaque période sélectionnée. Annulation possible à tout moment sur AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Éviter les trottoirs</string>
@@ -3899,7 +3899,7 @@
     <string name="use_native_pt">Développement du transport public autochtone</string>
     <string name="perform_oauth_authorization">Connectez-vous avec OAuth</string>
     <string name="clear_osm_token">Supprimer le jeton OAuth d\'OpenStreetMap</string>
-    <string name="osm_edit_logout_success">Déconnexion réussie</string>
+    <string name="osm_edit_logout_success">Déconnecté</string>
     <string name="file_already_imported">Le fichier est déjà importé dans OsmAnd</string>
     <string name="use_two_phase_routing">Utiliser un algorithme de routage A* à 2 phases</string>
     <string name="osm_live_payment_subscription_management_hw">Le paiement sera débité de votre compte AppGallery dès confirmation de l\'achat.
@@ -3930,10 +3930,10 @@
     <string name="subscription_on_hold_title">L\'abonnement OsmAnd Live est en attente</string>
     <string name="subscription_expired_title">L’abonnement OsmAnd Live a expiré</string>
     <string name="subscription_paused_title">L\'abonnement OsmAnd Live a été suspendu</string>
-    <string name="login_open_street_map">Se connecter à OpenStreetMap</string>
-    <string name="login_open_street_map_org">Se connecter à OpenStreetMap.org</string>
+    <string name="login_open_street_map">Se connecter pour OpenStreetMap</string>
+    <string name="login_open_street_map_org">Se connecter pour OpenStreetMap.org</string>
     <string name="user_login">Identifiant</string>
-    <string name="use_login_password">Utiliser un identifiant et un mot de passe</string>
+    <string name="use_login_password">Se connecter avec un identifiant et un mot de passe</string>
     <string name="login_account">Compte</string>
     <string name="manage_subscription">Gérer l\'abonnement</string>
     <string name="sign_in_with_open_street_map">Se connecter avec OpenStreetMap</string>
@@ -3948,4 +3948,29 @@
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Créer un nouveau compte</string>
     <string name="register_opr_have_account">J\'ai déjà un compte</string>
+    <string name="open_street_map_login_mode">Connectez-vous pour envoyer vos modifications,
+\n
+\nsoit avec OAuth soit avec votre identifiant et mot de passe.</string>
+    <string name="osm_login_descr">Connectez-vous avec la méthode sécurisée OAuth ou utilisez votre identifiant et votre mot de passe.</string>
+    <string name="register_on_openplacereviews_desc">Connectez-vous au site web du projet OpenPlaceReviews.org pour ajouter des photos.</string>
+    <string name="shared_string_search_history">Historique de recherche</string>
+    <string name="app_mode_kayak">Kayak</string>
+    <string name="export_not_enough_space_descr">Votre appareil n\'a que %1$s disponible. Veuillez libérer de l\'espace ou désélectionner l\'export pour certains éléments.</string>
+    <string name="app_mode_motorboat">Bateau à moteur</string>
+    <string name="shared_string_resources">Ressources</string>
+    <string name="approximate_file_size">Taille approximative du fichier</string>
+    <string name="select_data_to_export">Sélectionnez les données à exporter dans le fichier.</string>
+    <string name="file_size_needed_for_import">Nécessaire pour l\'import</string>
+    <string name="export_not_enough_space">L\'espace disponible est insuffisant</string>
+    <string name="add_to_mapillary">Ajouter à Mapillary</string>
+    <string name="add_to_opr">Ajouter à OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd affiche des photos de plusieurs sources :
+\nOpenPlaceReviews : photos de PI ;
+\nMapillary : photos de rue ;
+\nWeb / Wikimedia : photos de PI réféfencés dans OpenStreetMap.</string>
+    <string name="gpx_upload_private_visibility_descr"/>
+    <string name="use_dev_url_descr">Utiliser dev.openstreetmap.org plutôt que openstreetmap.org pour tester l\'envoi des notes OSM / Points d\'intérêt / GPX.</string>
+    <string name="use_dev_url">Utiliser dev.openstreetmap.org</string>
+    <string name="select_groups_for_import"></string>
+    <string name="select_items_for_import"></string>
 </resources>

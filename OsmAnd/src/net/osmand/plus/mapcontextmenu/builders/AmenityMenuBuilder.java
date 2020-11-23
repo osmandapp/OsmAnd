@@ -32,11 +32,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
@@ -344,12 +344,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
 
-		for (Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
+		for (String key : amenity.getAdditionalInfoKeys()) {
 			int iconId = 0;
 			Drawable icon = null;
 			int textColor = 0;
-			String key = e.getKey();
-			String vl = e.getValue();
+			String vl = amenity.getAdditionalInfo(key);
 
 			if (key.equals("image")
 					|| key.equals("mapillary")
@@ -460,7 +459,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				isCuisine = true;
 				iconId = R.drawable.ic_action_cuisine;
 				StringBuilder sb = new StringBuilder();
-				for (String c : e.getValue().split(";")) {
+				for (String c : vl.split(";")) {
 					if (sb.length() > 0) {
 						sb.append(", ");
 						sb.append(poiTypes.getPoiTranslation("cuisine_" + c).toLowerCase());
@@ -502,7 +501,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						isText = true;
 						isDescription = iconId == R.drawable.ic_action_note_dark;
 						textPrefix = pType.getTranslation();
-						vl = amenity.unzipContent(e.getValue());
 						if (needIntFormatting) {
 							vl = getFormattedInt(vl);
 						}
@@ -519,8 +517,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				} else if (poiType != null) {
 					collectedPoiTypes.add(poiType);
 				} else {
-					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey());
-					vl = amenity.unzipContent(e.getValue());
+					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 				}
 			}
 
@@ -782,11 +779,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	@Override
 	protected Map<String, String> getAdditionalCardParams() {
 		Map<String, String> params = new HashMap<>();
-		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
-		String imageValue = additionalInfo.get("image");
-		String mapillaryValue = additionalInfo.get("mapillary");
-		String wikidataValue = additionalInfo.get(Amenity.WIKIDATA);
-		String wikimediaValue = additionalInfo.get(Amenity.WIKIMEDIA_COMMONS);
+		String imageValue = amenity.getAdditionalInfo("image");
+		String mapillaryValue = amenity.getAdditionalInfo("mapillary");
+		String wikidataValue = amenity.getAdditionalInfo(Amenity.WIKIDATA);
+		String wikimediaValue = amenity.getAdditionalInfo(Amenity.WIKIMEDIA_COMMONS);
 		if (!Algorithms.isEmpty(imageValue)) {
 			params.put("osm_image", imageValue);
 		}

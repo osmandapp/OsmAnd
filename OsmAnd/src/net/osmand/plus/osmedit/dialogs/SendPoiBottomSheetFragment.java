@@ -1,14 +1,17 @@
 package net.osmand.plus.osmedit.dialogs;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
@@ -30,7 +33,10 @@ import org.apache.commons.logging.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.*;
+import static net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.OPENSTREETMAP_POINT;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
 
 public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
@@ -60,6 +66,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
         messageEditText = sendOsmPoiView.findViewById(R.id.message_field);
         String defaultChangeSet = createDefaultChangeSet(app);
         messageEditText.setText(defaultChangeSet);
+        messageEditText.setSelection(messageEditText.getText().length());
         final TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
         OsmandSettings settings = app.getSettings();
         String userNameOAuth = settings.USER_DISPLAY_NAME.get();
@@ -80,6 +87,17 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
                             isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
                 }
                 closeChangeSet.setPadding(paddingSmall, 0, paddingSmall, 0);
+            }
+        });
+        LinearLayout account = sendOsmPoiView.findViewById(R.id.account_container);
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentActivity activity = getActivity();
+                if (activity != null) {
+                    showOpenStreetMapScreen(activity);
+                }
+                dismiss();
             }
         });
         final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
@@ -109,19 +127,25 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
     @Override
     protected void onRightBottomButtonClick() {
-        final ProgressDialogPoiUploader progressDialogPoiUploader;
-        progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) getActivity());
-
-        String comment = messageEditText.getText().toString();
-        if (comment.length() > 0) {
-            for (OsmPoint osmPoint : poi) {
-                if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-                    ((OpenstreetmapPoint) osmPoint).setComment(comment);
-                    break;
+        ProgressDialogPoiUploader progressDialogPoiUploader = null;
+        Activity activity = getActivity();
+        if (activity instanceof MapActivity) {
+            progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
+        } else if (getParentFragment() instanceof ProgressDialogPoiUploader) {
+            progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
+        }
+        if (progressDialogPoiUploader != null) {
+            String comment = messageEditText.getText().toString();
+            if (comment.length() > 0) {
+                for (OsmPoint osmPoint : poi) {
+                    if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+                        ((OpenstreetmapPoint) osmPoint).setComment(comment);
+                        break;
+                    }
                 }
             }
+            progressDialogPoiUploader.showProgressDialog(poi, closeChangeSet.isChecked(), false);
         }
-        progressDialogPoiUploader.showProgressDialog(poi, closeChangeSet.isChecked(), false);
         dismiss();
     }
 
@@ -226,7 +250,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
         if (modifiedItemsOutOfLimit != 0) {
             comment = comment.concat("; ").concat(modifiedItemsOutOfLimit + " ")
                     .concat(getString(R.string.items_modified)).concat(".");
-        } else if (!comment.equals("")) {
+        } else if (!comment.isEmpty()) {
             comment = comment.concat(".");
         }
         return comment;

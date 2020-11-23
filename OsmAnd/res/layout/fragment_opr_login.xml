@@ -86,7 +86,7 @@
 		android:gravity="bottom"
 		android:orientation="vertical">
 
-		<androidx.appcompat.widget.AppCompatButton
+		<include
 			android:id="@+id/register_opr_create_account"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
 			android:text="@string/register_opr_create_new_account"
 			android:textColor="@color/color_white" />
 
-		<androidx.appcompat.widget.AppCompatButton
+		<include
 			android:id="@+id/register_opr_have_account"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

@@ -166,12 +166,12 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						dialog.setPositiveButton(R.string.shared_string_update, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								getMyActivity().startDownload(indexItems.toArray(new IndexItem[indexItems.size()]));
+								getMyActivity().startDownload(indexItems.toArray(new IndexItem[0]));
 							}
 						});
 						dialog.create().show();
 					} else {
-						getMyActivity().startDownload(indexItems.toArray(new IndexItem[indexItems.size()]));
+						getMyActivity().startDownload(indexItems.toArray(new IndexItem[0]));
 					}
 				}
 			});

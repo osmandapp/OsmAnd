@@ -11,8 +11,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -576,13 +574,12 @@ public class BinaryMapPoiReaderAdapter {
 							}
 						}
 						if (!matches) {
-							Map<String, String> lt = am.getAdditionalInfo();
-							for (Entry<String, String> e : lt.entrySet()) {
-								if(!e.getKey().contains("_name") && 
-									!e.getKey().equals("brand")) {
+							for (String key : am.getAdditionalInfoKeys()) {
+								if(!key.contains("_name") && 
+									!key.equals("brand")) {
 									continue;
 								}
-								matches = matcher.matches(e.getValue());
+								matches = matcher.matches(am.getAdditionalInfo(key));
 								if (matches) {
 									break;
 								}
@@ -812,7 +809,6 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private boolean checkCategories(SearchRequest<Amenity> req, PoiRegion region) throws IOException {
-		StringBuilder subType = new StringBuilder();
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);

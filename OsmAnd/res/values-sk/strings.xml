@@ -1919,7 +1919,7 @@
     <string name="storage_permission_restart_is_required">Aplikácia teraz má povolenie zapisovať do externého úložiska, ale je potrebný reštart aplikácie.</string>
     <string name="full_report">Podrobný prehľad</string>
     <string name="open_street_map_login_and_pass">Meno a heslo pre OSM</string>
-    <string name="file_name_containes_illegal_char">Názov súboru obsahuje nepovolený znak</string>
+    <string name="file_name_containes_illegal_char">Nepovolený znak v názve súboru</string>
     <string name="rendering_value_thin_name">Tenké</string>
     <string name="rendering_value_medium_name">Stredné</string>
     <string name="rendering_value_bold_name">Tučné</string>
@@ -2636,7 +2636,7 @@
     <string name="copy_location_name">Kopírovať názov bodu/umiestnenia</string>
     <string name="toast_empty_name_error">Nepomenované miesto</string>
     <string name="show_closed_notes">Zobraziť uzavreté poznámky</string>
-    <string name="switch_osm_notes_visibility_desc">Zobraziť/skryť OSM poznámky na mape.</string>
+    <string name="switch_osm_notes_visibility_desc">Zobraziť alebo skryť OSM poznámky na mape.</string>
     <string name="gpx_file_desc">GPX - vhodné na export do JOSM a iných editorov OSM.</string>
     <string name="osc_file_desc">OSC - vhodné na export do OSM.</string>
     <string name="shared_string_gpx_file">Súbor GPX</string>
@@ -3080,7 +3080,7 @@
     <string name="zoom_by_wunderlinq_descr">Zmeňte priblíženie mapy pomocou posúvania kolieskom nahor a nadol. Esc vás vráti do aplikácie WunderLINQ.</string>
     <string name="zoom_by_wunderlinq">Použiť WunderLINQ na približovanie</string>
     <string name="quick_action_need_to_add_item_to_list">Pridajte aspoň jednu položku do zoznamu v nastaveniach \'Rýchlej akcie\'</string>
-    <string name="routing_attr_piste_type_downhill_name">Alpské/zjazdové lyžovanie</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpské alebo zjazdové lyžovanie</string>
     <string name="routing_attr_piste_type_downhill_description">Svahy pre alpské a zjazdové lyžovanie a prístup k vlekom.</string>
     <string name="routing_attr_piste_type_nordic_name">Bežkovanie</string>
     <string name="routing_attr_piste_type_nordic_description">Trasy pre beh na lyžiach.</string>
@@ -3346,7 +3346,7 @@
     <string name="swap_two_places">Zameniť %1$s a %2$s</string>
     <string name="route_start_point">Východzí bod</string>
     <string name="track_saved">Stopa uložená</string>
-    <string name="empty_filename">Názov súboru je prázdny</string>
+    <string name="empty_filename">Prázdny názov súboru</string>
     <string name="shared_string_revert">Vrátiť späť</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Zobraziť sieť cyklotrás</string>
     <string name="clear_confirmation_msg">Vymazať %1$s\?</string>
@@ -3427,7 +3427,7 @@
     <string name="login_and_pass">Prihlasovacie meno a heslo</string>
     <string name="plugin_global_prefs_info">Tieto nastavenia sú globálne a platia pre všetky profily</string>
     <string name="osm_editing">OSM upravovanie</string>
-    <string name="osm_edits_view_descr">Môžete zobraziť vaše neodoslané zmeny alebo chyby v OSM cez %1$s. Odoslané body sa už v OsmAnd nezobrazujú.</string>
+    <string name="osm_edits_view_descr">Môžete zobraziť vaše ešte neodoslané zmeny alebo chyby v OSM cez %1$s. Odoslané body sa už v OsmAnd nezobrazujú.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikona zobrazená pri navigácii alebo pohybe.</string>
     <string name="select_map_icon_descr">Ikona zobrazená v pokoji.</string>
@@ -3574,7 +3574,7 @@
     <string name="recalculate_route_distance_promo">Trasa bude prepočítaná ak vzdialenosť od trasy k aktuálnej polohe je väčšia ako zvolená hodnota.</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
     <string name="download_slope_maps">Sklony svahov</string>
-    <string name="quick_action_show_hide_terrain">Zobraziť / skryť terén</string>
+    <string name="quick_action_show_hide_terrain">Zobraziť alebo skryť terén</string>
     <string name="quick_action_terrain_hide">Skryť terén</string>
     <string name="quick_action_terrain_show">Zobraziť terén</string>
     <string name="quick_action_terrain_descr">Tlačidlo pre zobrazenie alebo skrytie vrstvy terénu na mape.</string>
@@ -3693,11 +3693,11 @@
 \n</string>
     <string name="quick_action_transport_hide">Skryť verejnú dopravu</string>
     <string name="quick_action_transport_show">Zobraziť verejnú dopravu</string>
-    <string name="quick_action_show_hide_transport">Zobraziť/skryť verejnú dopravu</string>
+    <string name="quick_action_show_hide_transport">Zobraziť alebo skryť verejnú dopravu</string>
     <string name="quick_action_transport_descr">Tlačidlo na zobrazenie alebo skrytie verejnej dopravy na mape.</string>
-    <string name="create_edit_poi">Vytvoriť / Upraviť bod záujmu</string>
+    <string name="create_edit_poi">Vytvoriť alebo upraviť bod záujmu</string>
     <string name="parking_positions">Parkovacie miesta</string>
-    <string name="add_edit_favorite">Pridať / Upraviť obľúbený bod</string>
+    <string name="add_edit_favorite">Pridať alebo upraviť obľúbený bod</string>
     <string name="reset_deafult_order">Obnoviť predvolené poradie položiek</string>
     <string name="back_to_editing">Naspäť k úpravám</string>
     <string name="additional_actions_descr">K týmto akciám sa dostanete stlačením tlačidla “%1$s”.</string>
@@ -3904,7 +3904,7 @@
     <string name="sort_last_modified">Naposledy zmenené</string>
     <string name="sort_name_descending">Názov: Z – A</string>
     <string name="sort_name_ascending">Názov: A – Z</string>
-    <string name="start_finish_icons">Ikony štartu/cieľa</string>
+    <string name="start_finish_icons">Ikony štartu a cieľa</string>
     <string name="contour_lines_thanks">Ďakujeme za zakúpenie modulu \'Vrstevnice\'</string>
     <string name="osm_live_payment_desc_hw">Predplatné bude spoplatnené v zvolenom intervale. Predplatné zrušte kedykoľvek na AppGallery.</string>
     <string name="osm_live_payment_subscription_management_hw">Platba bude stiahnutá z vášho účtu AppGallery po potvrdení nákupu.
@@ -3922,10 +3922,10 @@
     <string name="use_native_pt">Natívna hromadná doprava (vo vývoji)</string>
     <string name="use_native_pt_desc">Prepnúť na výpočet trasy hromadnej dopravy v Jave (bezpečné)</string>
     <string name="what_is_new">Čo je nové</string>
-    <string name="perform_oauth_authorization_description">Vykonať prihlásenie cez OAuth pre použitie funkcií upravovania OSM</string>
+    <string name="perform_oauth_authorization_description">Prihláste sa cez OAuth pre použitie funkcií upravovania OSM</string>
     <string name="perform_oauth_authorization">Prihlásiť pomocou OAuth</string>
     <string name="clear_osm_token">Vymazať token OpenStreetMap OAuth</string>
-    <string name="osm_edit_logout_success">Odhlásenie úspešné</string>
+    <string name="osm_edit_logout_success">Odhlásené</string>
     <string name="snowmobile_render_descr">Pre jazdu na snežnom vozidle po na to určených cestách.</string>
     <string name="file_already_imported">Súbor je už importovaný v OsmAnd</string>
     <string name="use_two_phase_routing">Použiť dvojfázový algoritmus A* na výpočet trasy</string>
@@ -3953,4 +3953,42 @@
     <string name="subscription_expired_title">Predplatné OsmAnd Live skončilo</string>
     <string name="subscription_paused_title">Predplatné OsmAnd Live je pozastavené</string>
     <string name="subscription_on_hold_title">Predplatné OsmAnd Live je zablokované</string>
+    <string name="login_open_street_map">Prihlásenie pre OpenStreetMap</string>
+    <string name="login_open_street_map_org">Prihlásenie pre OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Prihlásiť sa do OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Prihláste sa pre odoslanie nových alebo zmenených údajov,
+\n
+\nbuď pomocou metódy OAuth alebo pomocou mena a hesla.</string>
+    <string name="use_login_password">Prihlásiť sa menom a heslom</string>
+    <string name="login_account">Účet</string>
+    <string name="user_login">Prihlasovacie meno</string>
+    <string name="markers_history">História značiek</string>
+    <string name="send_files_to_openstreetmap">Odoslať súbor GPX do OpenStreetMap</string>
+    <string name="enter_text_separated">Zadajte značky oddelené čiarkou.</string>
+    <string name="osm_edit_close_note">Zatvoriť OSM poznámku</string>
+    <string name="osm_edit_comment_note">Komentovať OSM poznámku</string>
+    <string name="osm_login_descr">Prihláste sa bezpečnou metódou OAuth alebo použite meno a heslo.</string>
+    <string name="shared_string_add_photo">Pridať foto</string>
+    <string name="register_on_openplacereviews">Zaregistrovať na
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Prihláste sa na webstránke projektu OpenPlaceReviews.org s otvorenými dátami pre odoslanie ďalších fotografií.</string>
+    <string name="register_opr_create_new_account">Vytvoriť nový účet</string>
+    <string name="register_opr_have_account">Už mám účet</string>
+    <string name="shared_string_search_history">História hľadania</string>
+    <string name="app_mode_kayak">Kajak</string>
+    <string name="app_mode_motorboat">Motorový čln</string>
+    <string name="add_to_mapillary">Pridať do Mapillary</string>
+    <string name="add_to_opr">Pridať do OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd szobrazuje fotografie z rôznych zdrojov:
+\nOpenPlaceReviews - fotografie bodov záujmu;
+\nMapillary - fotografie z ulice;
+\nWeb / Wikimedia - fotografie bodov záujmu špeficikované v údajoch OpenStreetMap.</string>
+    <string name="shared_string_resources">Zdroje</string>
+    <string name="approximate_file_size">Približná veľkosť súboru</string>
+    <string name="select_data_to_export">Zvoľte údaje na export do súboru.</string>
+    <string name="file_size_needed_for_import">Potrebné pre import</string>
+    <string name="export_not_enough_space_descr">Na vašom zariadení je len %1$s voľného miesta. Prosím uvoľnite miesto alebo zrušte niektoré položky z exportu.</string>
+    <string name="export_not_enough_space">Nie je dostatok miesta</string>
+    <string name="select_groups_for_import">Zvoľte skupiny, ktoré budú importované.</string>
+    <string name="select_items_for_import">Zvoľte položky, ktoré budú importované.</string>
 </resources>

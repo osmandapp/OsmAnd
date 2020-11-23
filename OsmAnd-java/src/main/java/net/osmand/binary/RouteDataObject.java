@@ -329,7 +329,7 @@ public class RouteDataObject {
 	public String getDestinationName(String lang, boolean transliterate, boolean direction){
 		//Issue #3289: Treat destination:ref like a destination, not like a ref
 		String destRef = ((getDestinationRef(direction) == null) || getDestinationRef(direction).equals(getRef(lang, transliterate, direction))) ? "" : getDestinationRef(direction);
-		String destRef1 = ("".equals(destRef)) ? "" : destRef + ", ";
+		String destRef1 = Algorithms.isEmpty(destRef) ? "" : destRef + ", ";
 
 		if(names != null) {
 			int[] kt = names.keys();
@@ -373,7 +373,7 @@ public class RouteDataObject {
 				return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(destinationDefault) : destinationDefault);
 			}
 		}
-		return "".equals(destRef) ? null : destRef;
+		return Algorithms.isEmpty(destRef) ? null : destRef;
 	}
 
 	public int getPoint31XTile(int i) {

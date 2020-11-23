@@ -363,7 +363,7 @@ public class MenuBuilder {
 		b.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+				AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 			}
 		});
 		b.setTypeface(FontCache.getRobotoRegular(context));

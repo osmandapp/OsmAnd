@@ -6,6 +6,7 @@ import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -1812,7 +1813,7 @@ public class OpeningHoursParser {
 		TokenType currentParse = TokenType.TOKEN_UNKNOWN;
 		TokenType currentParseParent = TokenType.TOKEN_UNKNOWN;
 		List<Token[]> listOfPairs = new ArrayList<>();
-		Set<TokenType> presentTokens = new HashSet<>();
+		Set<TokenType> presentTokens = EnumSet.noneOf(TokenType.class);
 		Token[] currentPair = new Token[2];
 		listOfPairs.add(currentPair);
 		Token prevToken = null;

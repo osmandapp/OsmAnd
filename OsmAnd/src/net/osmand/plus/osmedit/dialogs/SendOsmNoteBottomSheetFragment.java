@@ -1,16 +1,20 @@
 package net.osmand.plus.osmedit.dialogs;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -36,8 +40,11 @@ import org.apache.commons.logging.Log;
 
 import static net.osmand.plus.UiUtilities.setupDialogButton;
 import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
-import static net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.*;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.*;
+import static net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
+import static net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.OPENSTREETMAP_POINT;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
+import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
 
 public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragment implements ValidateOsmLoginListener,
 		OsmAuthorizationListener {
@@ -71,8 +78,9 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		final View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_osm_note_fragment, null);
 
-		TextView noteText = sendOsmNoteView.findViewById(R.id.note_text);
+		EditText noteText = sendOsmNoteView.findViewById(R.id.note_text);
 		noteText.setText(((OsmNotesPoint) poi[0]).getText());
+		noteText.setSelection(noteText.getText().length());
 		TextInputLayout noteHint = sendOsmNoteView.findViewById(R.id.note_hint);
 		noteHint.setHint(AndroidUtils.addColon(app, R.string.osn_bug_name));
 		accountBlockView = sendOsmNoteView.findViewById(R.id.account_container);
@@ -86,7 +94,10 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		signInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmandApplication app = requiredMyApplication();
+				Fragment fragment = getParentFragment();
+				if (fragment instanceof OsmAuthorizationListener) {
+					app.getOsmOAuthHelper().addListener((OsmAuthorizationListener) fragment);
+				}
 				app.getOsmOAuthHelper().startOAuth((ViewGroup) v);
 			}
 		});
@@ -118,6 +129,17 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 							isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
 				}
 				uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
+			}
+		});
+		LinearLayout account = accountBlockView.findViewById(R.id.account_container);
+		account.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					showOpenStreetMapScreen(activity);
+				}
+				dismiss();
 			}
 		});
 		final SimpleBottomSheetItem bottomSheetItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
@@ -171,9 +193,16 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		ProgressDialogPoiUploader progressDialogPoiUploader;
-		progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) getActivity());
-		progressDialogPoiUploader.showProgressDialog(poi, false, uploadAnonymously.isChecked());
+		ProgressDialogPoiUploader progressDialogPoiUploader = null;
+		Activity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
+		} else if (getParentFragment() instanceof ProgressDialogPoiUploader) {
+			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
+		}
+		if (progressDialogPoiUploader != null) {
+			progressDialogPoiUploader.showProgressDialog(poi, false, uploadAnonymously.isChecked());
+		}
 		dismiss();
 	}
 

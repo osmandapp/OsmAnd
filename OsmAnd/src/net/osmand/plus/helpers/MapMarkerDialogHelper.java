@@ -101,7 +101,7 @@ public class MapMarkerDialogHelper {
 		String desc = OsmAndFormatter.getFormattedDate(app, marker.creationDate);
 		String markerGroupName = marker.groupName;
 		if (markerGroupName != null) {
-			if (markerGroupName.equals("")) {
+			if (markerGroupName.isEmpty()) {
 				markerGroupName = app.getString(R.string.shared_string_favorites);
 			}
 			desc += " • " + markerGroupName;

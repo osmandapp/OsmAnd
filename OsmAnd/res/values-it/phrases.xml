@@ -729,7 +729,7 @@
     <string name="poi_observatory_designation">Designazione</string>
     <string name="poi_telescope_type">Tipo</string>
     <string name="poi_animal_training_type">Tipo</string>
-    <string name="poi_embassy_type">Tipo</string>
+    <string name="poi_diplomatic_filter">Tipo</string>
     <string name="poi_city_capital">Capitale</string>
     <string name="poi_pharmacy_dispensing">Ricette</string>
     <string name="poi_healthcare_alternative_types">Specialità</string>

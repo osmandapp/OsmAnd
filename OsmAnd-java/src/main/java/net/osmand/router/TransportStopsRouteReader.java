@@ -325,9 +325,7 @@ public class TransportStopsRouteReader {
 			// merge first part
 			if (commonStopFirst < commonStopSecond
 					|| (commonStopFirst == commonStopSecond && firstSegment.get(0).isMissingStop())) {
-				for (int i = 0; i <= commonStopFirst; i++) {
-					firstSegment.remove(0);
-				}
+				firstSegment.subList(0, commonStopFirst + 1).clear();
 				for (int i = commonStopSecond; i >= 0; i--) {
 					firstSegment.add(0, segmentToMerge.get(i));
 				}

@@ -1,16 +1,21 @@
 package net.osmand.plus;
 
 public interface OsmAndConstants {
-	
-	
+
+
 	public int UI_HANDLER_MAP_VIEW = 3000;
-	
+
 	public int UI_HANDLER_MAP_CONTROLS = 4000;
-	
+
 	public int UI_HANDLER_LOCATION_SERVICE = 5000;
 
 	public int UI_HANDLER_PROGRESS = 6000;
 
 	public int UI_HANDLER_SEARCH = 7000;
+
+	String OSM_OAUTH_DEVELOPER_KEY = "v8G8r9NLJZGMV4he5lwbQlz620FNVARKjI9Bm5UJ";
+	String OSM_OAUTH_DEVELOPER_SECRET = "jDvM95Ne1Bq2BDTmIfB6b3ZMxvdK87WGfp6DC07J";
+	String OSM_OAUTH_CONSUMER_KEY = "Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y";
+	String OSM_OAUTH_CONSUMER_SECRET = "lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM";
 
 }

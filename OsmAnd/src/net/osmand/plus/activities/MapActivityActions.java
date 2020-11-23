@@ -1148,7 +1148,7 @@ public class MapActivityActions implements DialogProvider {
 		items.add(getString(R.string.show_location));
 		items.add(getString(R.string.shared_string_show_details));
 		AlertDialog.Builder menu = new AlertDialog.Builder(mapActivity);
-		menu.setItems(items.toArray(new String[items.size()]), new DialogInterface.OnClickListener() {
+		menu.setItems(items.toArray(new String[0]), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int item) {
 				dialog.dismiss();

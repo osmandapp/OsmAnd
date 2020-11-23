@@ -191,13 +191,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean wasZoomInMultiTouch;
 	private float elevationAngle;
 
-	public OsmandMapTileView(MapActivity activity, int w, int h) {
+	public OsmandMapTileView(Activity activity, int w, int h) {
 		this.activity = activity;
 		init(activity, w, h);
 	}
 
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
-	public void init(final MapActivity ctx, int w, int h) {
+	public void init(final Activity ctx, int w, int h) {
 		application = (OsmandApplication) ctx.getApplicationContext();
 		settings = application.getSettings();
 
@@ -256,7 +256,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				if (isZoomingAllowed(getZoom(), -1.1f)) {
 					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), false);
 					if (wasMapLinkedBeforeGesture) {
-						ctx.getMapViewTrackingUtilities().setMapLinkedToLocation(true);
+						application.getMapViewTrackingUtilities().setMapLinkedToLocation(true);
 					}
 				}
 			}
@@ -1318,7 +1318,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			angle = 90f;
 		}
 		this.elevationAngle = angle;
-		((MapActivity) activity).setMapElevation(angle);
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).setMapElevation(angle);
+		}
 	}
 
 	private boolean isZoomingAllowed(int baseZoom, float dz) {
@@ -1341,7 +1343,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public boolean onDown(MotionEvent e) {
 			// Facilitates better map re-linking for two finger tap zoom out
-			wasMapLinkedBeforeGesture = ((MapActivity) activity).getMapViewTrackingUtilities().isMapLinkedToLocation();
+			wasMapLinkedBeforeGesture = application.getMapViewTrackingUtilities().isMapLinkedToLocation();
 			return false;
 		}
 

@@ -36,7 +36,7 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 		} else {
 			addCategory(a, strings);
 		}
-		final String[] subCats = strings.toArray(new String[strings.size()]);
+		final String[] subCats = strings.toArray(new String[0]);
 		builder.setItems(subCats, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
