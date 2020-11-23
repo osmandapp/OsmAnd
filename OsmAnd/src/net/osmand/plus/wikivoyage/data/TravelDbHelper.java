@@ -14,6 +14,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -43,7 +44,7 @@ import java.util.Set;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
-public class TravelDbHelper {
+public class TravelDbHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelDbHelper.class);
 
@@ -646,7 +647,7 @@ public class TravelDbHelper {
 		return file;
 	}
 	
-	private static class PopularArticle {
+	protected static class PopularArticle {
 		long tripId;
 		String title;
 		String lang;
@@ -654,11 +655,11 @@ public class TravelDbHelper {
 		int order;
 		double lat;
 		double lon;
-		
+
 		public boolean isLocationSpecified() {
 			return !Double.isNaN(lat) && !Double.isNaN(lon);
 		}
-		
+
 		public static PopularArticle readArticle(SQLiteCursor cursor) {
 			PopularArticle res = new PopularArticle();
 			res.title = cursor.getString(0);
@@ -668,6 +669,19 @@ public class TravelDbHelper {
 			res.lang = cursor.getString(4);
 			res.order = cursor.isNull(5) ? -1 : cursor.getInt(5);
 			res.popIndex = cursor.isNull(6) ? 0 : cursor.getInt(6);
+			return res;
+		}
+
+		public static PopularArticle readArticleFromAmenity(Amenity a, String lang) {
+			Map<String,String> additional = a.getAdditionalInfo();
+			PopularArticle res = new PopularArticle();
+			res.title = a.getName(lang);
+			res.lat = a.getLocation().getLatitude();
+			res.lon = a.getLocation().getLongitude();
+			res.tripId = a.getId();
+			res.lang = lang;
+			res.order = -1;
+			res.popIndex = 0;
 			return res;
 		}
 	}

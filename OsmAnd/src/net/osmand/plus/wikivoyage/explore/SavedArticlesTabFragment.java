@@ -40,7 +40,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final OsmandApplication app = requireMyApplication();
-		dataHelper = app.getTravelDbHelper().getLocalDataHelper();
+		dataHelper = app.getTravelHelper().getLocalDataHelper();
 
 		final View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
 

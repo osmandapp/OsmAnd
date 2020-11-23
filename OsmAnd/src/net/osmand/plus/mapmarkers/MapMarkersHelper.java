@@ -27,6 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -567,11 +568,11 @@ public class MapMarkersHelper {
 	@NonNull
 	public List<MapMarkersGroup> getGroupsForSavedArticlesTravelBook() {
 		List<MapMarkersGroup> res = new ArrayList<>();
-		TravelDbHelper travelDbHelper = ctx.getTravelDbHelper();
-		if (travelDbHelper.getSelectedTravelBook() != null) {
-			List<TravelArticle> savedArticles = travelDbHelper.getLocalDataHelper().getSavedArticles();
+		TravelHelper travelHelper = ctx.getTravelHelper();
+		if (travelHelper.getSelectedTravelBook() != null) {
+			List<TravelArticle> savedArticles = travelHelper.getLocalDataHelper().getSavedArticles();
 			for (TravelArticle art : savedArticles) {
-				String gpxName = travelDbHelper.getGPXName(art);
+				String gpxName = travelHelper.getGPXName(art);
 				File path = ctx.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
 				LOG.debug("Article group " + path.getAbsolutePath() + " " + path.exists());
 				MapMarkersGroup search = getMapMarkerGroupById(getMarkerGroupId(path), MapMarkersGroup.GPX_TYPE);

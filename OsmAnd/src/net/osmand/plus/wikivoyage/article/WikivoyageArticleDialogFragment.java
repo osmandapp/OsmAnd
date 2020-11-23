@@ -42,6 +42,7 @@ import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.util.Algorithms;
 
@@ -148,8 +149,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				if (article == null || activity == null || fm == null) {
 					return;
 				}
-				TravelDbHelper dbHelper = getMyApplication().getTravelDbHelper();
-				File path = dbHelper.createGpxFile(article);
+				TravelHelper travelHelper = getMyApplication().getTravelHelper();
+				File path = travelHelper.createGpxFile(article);
 				Intent newIntent = new Intent(activity, getMyApplication().getAppCustomization().getTrackActivity());
 				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, path.getAbsolutePath());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -234,7 +235,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	private void updateSaveButton() {
 		if (article != null) {
-			final TravelLocalDataHelper helper = getMyApplication().getTravelDbHelper().getLocalDataHelper();
+			final TravelLocalDataHelper helper = getMyApplication().getTravelHelper().getLocalDataHelper();
 			final boolean saved = helper.isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark));
@@ -246,7 +247,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 						if (saved) {
 							helper.removeArticleFromSaved(article);
 						} else {
-							getMyApplication().getTravelDbHelper().createGpxFile(article);
+							getMyApplication().getTravelHelper().createGpxFile(article);
 							helper.addArticleToSaved(article);
 						}
 						updateSaveButton();
@@ -301,7 +302,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			selectedLang = langs.get(0);
 		}
 		articleToolbarText.setText("");
-		article = getMyApplication().getTravelDbHelper().getArticle(tripId, selectedLang);
+		article = getMyApplication().getTravelHelper().getArticle(tripId, selectedLang);
 		if (article == null) {
 			return;
 		}
@@ -314,7 +315,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			trackButton.setVisibility(View.GONE);
 		}
 
-		TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
+		TravelLocalDataHelper ldh = getMyApplication().getTravelHelper().getLocalDataHelper();
 		ldh.addToHistory(article);
 
 		updateSaveButton();
@@ -370,7 +371,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 									   @NonNull FragmentManager fm,
 									   @NonNull String title,
 									   @NonNull String lang) {
-		long cityId = app.getTravelDbHelper().getArticleId(title, lang);
+		long cityId = app.getTravelHelper().getArticleId(title, lang);
 		return showInstance(app, fm, cityId, lang);
 	}
 
@@ -378,7 +379,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 									   @NonNull FragmentManager fm,
 									   long cityId,
 									   @Nullable String selectedLang) {
-		ArrayList<String> langs = app.getTravelDbHelper().getArticleLangs(cityId);
+		ArrayList<String> langs = app.getTravelHelper().getArticleLangs(cityId);
 		return showInstance(fm, cityId, langs, selectedLang);
 	}
 

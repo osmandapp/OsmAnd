@@ -79,7 +79,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
@@ -148,7 +148,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
 	QuickSearchHelper searchUICore;
-	TravelDbHelper travelDbHelper;
+	TravelHelper travelHelper;
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 	LockHelper lockHelper;
@@ -481,8 +481,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return searchUICore;
 	}
 
-	public TravelDbHelper getTravelDbHelper() {
-		return travelDbHelper;
+	public TravelHelper getTravelHelper() {
+		return travelHelper;
 	}
 
 	public InAppPurchaseHelper getInAppPurchaseHelper() {

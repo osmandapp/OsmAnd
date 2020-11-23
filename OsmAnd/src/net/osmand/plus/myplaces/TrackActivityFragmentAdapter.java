@@ -486,7 +486,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		String title = metadata.getArticleTitle();
 		String lang = metadata.getArticleLang();
 		if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(lang)) {
-			return app.getTravelDbHelper().getArticle(title, lang);
+			return app.getTravelHelper().getArticle(title, lang);
 		}
 		return null;
 	}

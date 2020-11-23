@@ -37,7 +37,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
-import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 import net.osmand.util.Algorithms;
 
@@ -199,7 +199,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			String title = WikiArticleHelper.decodeTitleFromTravelUrl(data.getQueryParameter("title"));
 			String selectedLang = data.getQueryParameter("lang");
 			if (!Algorithms.isEmpty(title) && !Algorithms.isEmpty(selectedLang)) {
-				long articleId = app.getTravelDbHelper().getArticleId(title, selectedLang);
+				long articleId = app.getTravelHelper().getArticleId(title, selectedLang);
 				if (articleId != 0) {
 					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
 				}
@@ -333,7 +333,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	private void updateSearchBarVisibility() {
-		boolean show = app.getTravelDbHelper().getSelectedTravelBook() != null;
+		boolean show = app.getTravelHelper().getSelectedTravelBook() != null;
 		findViewById(R.id.search_box).setVisibility(show ? View.VISIBLE : View.GONE);
 	}
 
@@ -361,16 +361,16 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
 
 		private WeakReference<WikivoyageExploreActivity> activityRef;
-		private TravelDbHelper travelDbHelper;
+		private TravelHelper travelHelper;
 
 		LoadWikivoyageData(WikivoyageExploreActivity activity) {
-			travelDbHelper = activity.getMyApplication().getTravelDbHelper();
+			travelHelper = activity.getMyApplication().getTravelHelper();
 			activityRef = new WeakReference<>(activity);
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			travelDbHelper.loadDataForSelectedTravelBook();
+			travelHelper.loadDataForSelectedTravelBook();
 			return null;
 		}
 

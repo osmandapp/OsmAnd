@@ -73,13 +73,13 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			return;
 		}
 
-		article = getMyApplication().getTravelDbHelper().getArticle(cityId, selectedLang);
+		article = getMyApplication().getTravelHelper().getArticle(cityId, selectedLang);
 		if (article == null) {
 			return;
 		}
 		parentsList = new ArrayList<>(Arrays.asList(article.getAggregatedPartOf().split(",")));
 
-		LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap = getMyApplication().getTravelDbHelper().getNavigationMap(article);
+		LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap = getMyApplication().getTravelHelper().getNavigationMap(article);
 
 		items.add(new TitleItem(getString(R.string.shared_string_navigation)));
 
