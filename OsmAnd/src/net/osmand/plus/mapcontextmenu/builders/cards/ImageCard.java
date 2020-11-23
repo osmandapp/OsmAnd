@@ -28,6 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
+import net.osmand.plus.openplacereviews.OPRWebviewActivity;
 import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.util.Algorithms;
 
@@ -42,6 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -408,6 +410,28 @@ public abstract class ImageCard extends AbstractCard {
 		}
 	}
 
+	private static String[] getIdFromResponse(String response) {
+		try {
+			JSONArray obj = new JSONObject(response).getJSONArray("objects");
+			JSONArray images = (JSONArray) ((JSONObject) obj.get(0)).get("id");
+			return toStringArray(images);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return new String[0];
+	}
+
+	private static String[] toStringArray(JSONArray array) {
+		if (array == null)
+			return null;
+
+		String[] arr = new String[array.length()];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = array.optString(i);
+		}
+		return arr;
+	}
+
 	public static class GetImageCardsTask extends AsyncTask<Void, Void, List<ImageCard>> {
 
 		private MapActivity mapActivity;
@@ -421,11 +445,13 @@ public abstract class ImageCard extends AbstractCard {
 		public interface GetImageCardsListener {
 			void onPostProcess(List<ImageCard> cardList);
 
+			void onPlaceIdAcquired(String[] placeId);
+
 			void onFinish(List<ImageCard> cardList);
 		}
 
 		public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon,
-								 @Nullable Map<String, String> params, GetImageCardsListener listener) {
+		                         @Nullable Map<String, String> params, GetImageCardsListener listener) {
 			this.mapActivity = mapActivity;
 			this.app = mapActivity.getMyApplication();
 			this.latLon = latLon;
@@ -441,7 +467,15 @@ public abstract class ImageCard extends AbstractCard {
 			if (o instanceof Amenity) {
 				Amenity am = (Amenity) o;
 				long amenityId = am.getId() >> 1;
-				getPicturesForPlace(result, amenityId);
+				String baseUrl = OPRWebviewActivity.getBaseUrl(app);
+				String url = baseUrl + "api/objects-by-index?type=opr.place&index=osmid&key=" + amenityId;
+				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
+						"Requesting location images...", false, false);
+				if (response != null) {
+					getPicturesForPlace(result, response);
+					String[] id = getIdFromResponse(response);
+					listener.onPlaceIdAcquired(id);
+				}
 			}
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
@@ -503,26 +537,27 @@ public abstract class ImageCard extends AbstractCard {
 			return result;
 		}
 
-		private void getPicturesForPlace(List<ImageCard> result, long l) {
-			String url = "https://test.openplacereviews.org/api/objects-by-index?type=opr.place&index=osmid&limit=1&key=" + l;
-			String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
-					"Requesting location images...", false, false);
+		private void getPicturesForPlace(List<ImageCard> result, String response) {
 			try {
 				if (!Algorithms.isEmpty(response)) {
 					JSONArray obj = new JSONObject(response).getJSONArray("objects");
-					JSONArray images = ((JSONObject) ((JSONObject) obj.get(0)).get("images")).getJSONArray("outdoor");
-					if (images.length() > 0) {
-						for (int i = 0; i < images.length(); i++) {
-							try {
-								JSONObject imageObject = (JSONObject) images.get(i);
-								if (imageObject != JSONObject.NULL) {
-									ImageCard imageCard = ImageCard.createCardOpr(mapActivity, imageObject);
-									if (imageCard != null) {
-										result.add(imageCard);
+					JSONObject imagesWrapper = ((JSONObject) ((JSONObject) obj.get(0)).get("images"));
+					Iterator<String> it = imagesWrapper.keys();
+					while (it.hasNext()) {
+						JSONArray images = imagesWrapper.getJSONArray(it.next());
+						if (images.length() > 0) {
+							for (int i = 0; i < images.length(); i++) {
+								try {
+									JSONObject imageObject = (JSONObject) images.get(i);
+									if (imageObject != JSONObject.NULL) {
+										ImageCard imageCard = ImageCard.createCardOpr(mapActivity, imageObject);
+										if (imageCard != null) {
+											result.add(imageCard);
+										}
 									}
+								} catch (JSONException e) {
+									LOG.error(e);
 								}
-							} catch (JSONException e) {
-								LOG.error(e);
 							}
 						}
 					}

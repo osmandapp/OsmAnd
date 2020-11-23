@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -27,18 +29,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.*;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
@@ -48,6 +59,9 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
+import net.osmand.plus.openplacereviews.OPRWebviewActivity;
+import net.osmand.plus.openplacereviews.OprStartFragment;
+import net.osmand.plus.osmedit.opr.OpenDBAPI;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -58,12 +72,27 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.util.*;
+import org.apache.commons.logging.Log;
+import org.openplacereviews.opendb.util.exception.FailedVerificationException;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 public class MenuBuilder {
 
+	private static final int PICK_IMAGE = 1231;
+	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
 	protected static final String[] arrowChars = new String[] {"=>", " - "};
@@ -92,6 +121,34 @@ public class MenuBuilder {
 	private String preferredMapLang;
 	private String preferredMapAppLang;
 	private boolean transliterateNames;
+
+	private final OpenDBAPI openDBAPI = new OpenDBAPI();
+	private String[] placeId = new String[0];
+	private GetImageCardsListener imageCardListener = new GetImageCardsListener() {
+		@Override
+		public void onPostProcess(List<ImageCard> cardList) {
+			processOnlinePhotosCards(cardList);
+		}
+
+		@Override
+		public void onPlaceIdAcquired(String[] placeId) {
+			MenuBuilder.this.placeId = placeId;
+		}
+
+		@Override
+		public void onFinish(List<ImageCard> cardList) {
+			if (!isHidden()) {
+				List<AbstractCard> cards = new ArrayList<AbstractCard>(cardList);
+				if (cardList.size() == 0) {
+					cards.add(new NoImagesCard(mapActivity));
+				}
+				if (onlinePhotoCardsRow != null) {
+					onlinePhotoCardsRow.setCards(cards);
+				}
+				onlinePhotoCards = cards;
+			}
+		}
+	};
 
 	public interface CollapseExpandListener {
 		void onCollapseExpand(boolean collapsed);
@@ -324,7 +381,37 @@ public class MenuBuilder {
 		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
+				if (false) {
+					AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
+				} else {
+					registerResultListener(view);
+					final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
+					final String name = OPRWebviewActivity.getUsernameFromCookie(app);
+					final String privateKey = OPRWebviewActivity.getPrivateKeyFromCookie(app);
+					if (privateKey == null || privateKey.isEmpty()) {
+						OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+						return;
+					}
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							if (openDBAPI.checkPrivateKeyValid(baseUrl, name, privateKey)) {
+								app.runInUIThread(new Runnable() {
+									@Override
+									public void run() {
+										Intent intent = new Intent();
+										intent.setType("image/*");
+										intent.setAction(Intent.ACTION_GET_CONTENT);
+										mapActivity.startActivityForResult(Intent.createChooser(intent,
+												mapActivity.getString(R.string.select_picture)), PICK_IMAGE);
+									}
+								});
+							} else {
+								OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+							}
+						}
+					}).start();
+				}
 			}
 		});
 		//TODO This feature is under development
@@ -341,33 +428,86 @@ public class MenuBuilder {
 				false, null, false);
 	}
 
+	private void registerResultListener(final View view) {
+		mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE, new ActivityResultListener.
+				OnActivityResultListener() {
+			@Override
+			public void onResult(int resultCode, Intent resultData) {
+				handleSelectedImage(view, resultData.getData());
+			}
+		}));
+	}
+
+	private void handleSelectedImage(final View view, final Uri uri) {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				InputStream inputStream = null;
+				try {
+					inputStream = app.getContentResolver().openInputStream(uri);
+					if (inputStream != null) {
+						uploadImageToPlace(view, inputStream);
+					}
+				} catch (Exception e) {
+					LOG.error(e);
+				} finally {
+					Algorithms.closeStream(inputStream);
+				}
+			}
+		});
+		t.start();
+	}
+
+	private void uploadImageToPlace(View view, InputStream image) {
+		InputStream serverData = new ByteArrayInputStream(compressImage(image));
+		final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
+		String url = baseUrl + "api/ipfs/image";
+		String response = NetworkUtils.sendPostDataRequest(url, serverData);
+		if (response != null) {
+			int res = 0;
+			try {
+				res = openDBAPI.uploadImage(
+						placeId,
+						baseUrl,
+						OPRWebviewActivity.getPrivateKeyFromCookie(app),
+						OPRWebviewActivity.getUsernameFromCookie(app),
+						response);
+			} catch (FailedVerificationException e) {
+				LOG.error(e);
+				app.showToastMessage(R.string.cannot_upload_image);
+			}
+			if (res != 200) {
+				//image was uploaded but not added to blockchain
+				app.showToastMessage(R.string.cannot_upload_image);
+			} else {
+				app.showToastMessage(R.string.successfully_uploaded_pattern, 1, 1);
+				//refresh the image
+				execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
+			}
+		} else {
+			app.showToastMessage(R.string.cannot_upload_image);
+		}
+	}
+
+	private byte[] compressImage(InputStream image) {
+		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
+		Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		bmp.compress(Bitmap.CompressFormat.PNG, 70, os);
+		return os.toByteArray();
+	}
+
 	private void startLoadingImages() {
 		if (onlinePhotoCardsRow == null) {
 			return;
 		}
+		startLoadingImagesTask();
+	}
+
+	private void startLoadingImagesTask() {
 		onlinePhotoCards = new ArrayList<>();
 		onlinePhotoCardsRow.setProgressCard();
-		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(),
-				new GetImageCardsListener() {
-					@Override
-					public void onPostProcess(List<ImageCard> cardList) {
-						processOnlinePhotosCards(cardList);
-					}
-
-					@Override
-					public void onFinish(List<ImageCard> cardList) {
-						if (!isHidden()) {
-							List<AbstractCard> cards = new ArrayList<AbstractCard>(cardList);
-							if (cardList.size() == 0) {
-								cards.add(new NoImagesCard(mapActivity));
-							}
-							if (onlinePhotoCardsRow != null) {
-								onlinePhotoCardsRow.setCards(cards);
-							}
-							onlinePhotoCards = cards;
-						}
-					}
-				}));
+		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 	}
 
 	protected Map<String, String> getAdditionalCardParams() {

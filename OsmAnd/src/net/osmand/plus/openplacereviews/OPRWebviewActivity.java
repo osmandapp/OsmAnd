@@ -27,16 +27,20 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 	private WebView webView;
 	private boolean isLogin = false;
 
+	public static String getBaseUrl(Context ctx) {
+		return ctx.getString(R.string.opr_base_url);
+	}
+
 	public static String getCookieUrl(Context ctx) {
-		return ctx.getString(R.string.opr_base_url) + "profile";
+		return getBaseUrl(ctx) + "profile";
 	}
 
 	public static String getLoginUrl(Context ctx) {
-		return ctx.getString(R.string.opr_base_url) + "login";
+		return getBaseUrl(ctx) + "login";
 	}
 
 	public static String getRegisterUrl(Context ctx) {
-		return ctx.getString(R.string.opr_base_url) + "signup";
+		return getBaseUrl(ctx) + "signup";
 	}
 
 	public static String getFinishUrl(Context ctx) {

@@ -11,8 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos specified in OpenStreetMap data.</string>
     <string name="use_dev_url">Use dev.openstreetmap.org</string>
     <string name="use_dev_url_descr">Switch to use "dev.openstreetmap.org" instead of "openstreetmap.org" to testing uploading OSM Note / POI / GPX.</string>
+    <string name="add_to_opr">Add to OpenPlaceReviews</string>
+    <string name="add_to_mapillary">Add to Mapillary</string>
     <string name="select_items_for_import">Select items that will be imported.</string>
     <string name="select_groups_for_import">Select groups that will be imported.</string>
     <string name="export_not_enough_space">There is not enough space</string>
@@ -21,18 +24,17 @@
     <string name="select_data_to_export">Select the data to be exported to the file.</string>
     <string name="approximate_file_size">Approximate file size</string>
     <string name="shared_string_resources">Resources</string>
-    <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos specified in OpenStreetMap data.</string>
-    <string name="add_to_opr">Add to OpenPlaceReviews</string>
-    <string name="add_to_mapillary">Add to Mapillary</string>
+    <string name="select_picture">Select picture</string>
+    <string name="cannot_upload_image">Cannot upload image, please, try again later</string>
     <string name="app_mode_motorboat">Motorboat</string>
     <string name="app_mode_kayak">Kayak</string>
     <string name="shared_string_search_history">Search history</string>
     <string name="register_opr_have_account">I already have an account</string>
     <string name="register_opr_create_new_account">Create new account</string>
-    <string name="register_on_openplacereviews_desc">Log in on the open data project website OpenPlaceReviews.org to upload even more photos.</string>
+    <string name="register_on_openplacereviews_desc">Photos are provided by open data project OpenPlaceReviews.org. In order to upload your photos you need to sign up on website.</string>
     <string name="register_on_openplacereviews">Register on\nOpenPlaceReviews.org</string>
     <string name="shared_string_add_photo">Add photo</string>
-    <string name="osm_login_descr">Log in using the safe OAuth method or use your username and password.</string>
+    <string name="osm_login_descr">You can log in using the safe OAuth method or use your login and password.</string>
     <string name="osm_edit_comment_note">Comment OSM Note</string>
     <string name="osm_edit_close_note">Close OSM Note</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Trackable\" means the trace does not show up in any public listings, but processed trackpoints with timestamps from it (that can\'t be associated with you directly) do through downloads from the public GPS API.</string>
@@ -47,15 +49,15 @@
     <string name="subscription_expired_title">OsmAnd Live subscription has been expired</string>
     <string name="subscription_payment_issue_title">There is a problem with your subscription. Click the button to go to the Google Play subscription settings to fix your payment method.</string>
     <string name="manage_subscription">Manage subscription</string>
-    <string name="user_login">Username</string>
+    <string name="user_login">Login</string>
     <string name="user_password">Password</string>
     <string name="login_account">Account</string>
-    <string name="use_login_password">Log in with username and password</string>
-    <string name="open_street_map_login_mode">Log in to upload new or modified changes,\n\neither with OAuth or using your username and password.</string>
+    <string name="use_login_password">Use login and password</string>
+    <string name="open_street_map_login_mode">You need to login to upload new or modified changes. \n\nYou can log in using the safe OAuth method or use your login and password.</string>
     <string name="osm_edits_view_descr">You can view all your not yet uploaded edits or OSM bugs in %1$s. Uploaded points don’t show in OsmAnd.</string>
-    <string name="sign_in_with_open_street_map">Log in with OpenStreetMap</string>
-    <string name="login_open_street_map_org">Login for OpenStreetMap.org</string>
-    <string name="login_open_street_map">Login for OpenStreetMap</string>
+    <string name="sign_in_with_open_street_map">Sign in with OpenStreetMap</string>
+    <string name="login_open_street_map_org">Login to OpenStreetMap.org</string>
+    <string name="login_open_street_map">Login to OpenStreetMap</string>
     <string name="plugin_global_prefs_info">These plugin setting are global, and apply to all profiles</string>
     <string name="message_you_need_add_two_points_to_show_graphs">You need to add at least two points</string>
     <string name="icon_group_travel">Travel</string>
