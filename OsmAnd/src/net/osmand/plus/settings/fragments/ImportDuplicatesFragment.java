@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
-import static net.osmand.plus.settings.fragments.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
+import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
 
 
 public class ImportDuplicatesFragment extends BaseOsmAndFragment {
@@ -79,7 +79,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		fragment.setFile(file);
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(IMPORT_SETTINGS_TAG)
+				.addToBackStack(SETTINGS_LIST_TAG)
 				.commitAllowingStateLoss();
 	}
 
