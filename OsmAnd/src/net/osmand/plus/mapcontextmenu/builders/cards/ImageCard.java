@@ -21,7 +21,6 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.plus.BuildConfig;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -29,6 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
+import net.osmand.plus.openplacereviews.OPRWebviewActivity;
 import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.util.Algorithms;
 
@@ -40,7 +40,14 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public abstract class ImageCard extends AbstractCard {
 
@@ -460,7 +467,8 @@ public abstract class ImageCard extends AbstractCard {
 			if (o instanceof Amenity) {
 				Amenity am = (Amenity) o;
 				long amenityId = am.getId() >> 1;
-				String url = BuildConfig.OPR_BASE_URL + "api/objects-by-index?type=opr.place&index=osmid&key=" + amenityId;
+				String baseUrl = OPRWebviewActivity.getBaseUrl(app);
+				String url = baseUrl + "api/objects-by-index?type=opr.place&index=osmid&key=" + amenityId;
 				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
 						"Requesting location images...", false, false);
 				if (response != null) {

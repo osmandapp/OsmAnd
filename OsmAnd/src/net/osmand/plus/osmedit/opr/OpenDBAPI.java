@@ -2,11 +2,12 @@ package net.osmand.plus.osmedit.opr;
 
 import android.net.TrafficStats;
 import android.os.Build;
+
 import com.google.gson.GsonBuilder;
-import net.osmand.AndroidNetworkUtils;
+
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.BuildConfig;
+
 import org.apache.commons.logging.Log;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.openplacereviews.opendb.SecUtils;
@@ -14,15 +15,25 @@ import org.openplacereviews.opendb.ops.OpOperation;
 import org.openplacereviews.opendb.util.JsonFormatter;
 import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.KeyPair;
 import java.security.Security;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
-import static org.openplacereviews.opendb.SecUtils.*;
+import static org.openplacereviews.opendb.SecUtils.ALGO_EC;
+import static org.openplacereviews.opendb.SecUtils.JSON_MSG_TYPE;
+import static org.openplacereviews.opendb.SecUtils.signMessageWithKeyBase64;
 
 
 public class OpenDBAPI {
@@ -39,10 +50,10 @@ public class OpenDBAPI {
 	 * Need to encode key
 	 * Do not call on mainThread
 	 */
-	public boolean checkPrivateKeyValid(String username, String privateKey) {
+	public boolean checkPrivateKeyValid(String baseUrl, String username, String privateKey) {
 		String url = null;
 		try {
-			url = BuildConfig.OPR_BASE_URL + checkLoginEndpoint +
+			url = baseUrl + checkLoginEndpoint +
 					"name=" +
 					username +
 					"&" +
@@ -57,7 +68,7 @@ public class OpenDBAPI {
 				response.toString().contains(LOGIN_SUCCESS_MESSAGE);
 	}
 
-	public int uploadImage(String[] placeId, String privateKey, String username, String image) throws FailedVerificationException {
+	public int uploadImage(String[] placeId, String baseUrl, String privateKey, String username, String image) throws FailedVerificationException {
 		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 			Security.removeProvider("BC");
 			Security.addProvider(new BouncyCastleProvider());
@@ -100,7 +111,7 @@ public class OpenDBAPI {
 		opOperation.addOrSetStringValue("hash", hash);
 		opOperation.addOrSetStringValue("signature", signature);
 		TrafficStats.setThreadStatsTag(THREAD_ID);
-		String url = BuildConfig.OPR_BASE_URL + "api/auth/process-operation?addToQueue=true&dontSignByServer=false";
+		String url = baseUrl + "api/auth/process-operation?addToQueue=true&dontSignByServer=false";
 		String json = formatter.opToJson(opOperation);
 		System.out.println("JSON: " + json);
 		HttpURLConnection connection;
