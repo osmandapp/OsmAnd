@@ -33,7 +33,8 @@ public class OprStartFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		View v = inflater.inflate(R.layout.fragment_opr_login, container, false);
+		View v = UiUtilities.getInflater(requireMyActivity(), nightMode).inflate(R.layout.fragment_opr_login, container,
+				false);
 		View createAccount = v.findViewById(R.id.register_opr_create_account);
 		v.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
 			@Override

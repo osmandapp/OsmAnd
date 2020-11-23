@@ -311,35 +311,37 @@ public class MenuBuilder {
 		}
 	}
 
-	private View createAddPhotoButton(Context context) {
-		TextView b = new TextView(context);
-		b.setOnClickListener(new OnClickListener() {
+	private View createAddPhotoButton(Context ctx) {
+		boolean nightMode = getApplication().getDaynightHelper().isNightModeForMapControls();
+		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_dialog_button, null);
+		LinearLayout buttonLayout = new LinearLayout(ctx);
+		view.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 			}
 		});
-		b.setTypeface(FontCache.getRobotoRegular(context));
-		Drawable d = ContextCompat.getDrawable(context, R.drawable.ic_sample);
-		b.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
+		int dp6 = ctx.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
+		int dp8 = ctx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		int dp12 = ctx.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int dp16 = ctx.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		view.findViewById(R.id.button_text).setPadding(dp8, 0, dp16, 0);
+		((TextView) view.findViewById(R.id.button_text)).setCompoundDrawablePadding(0);
 		LinearLayout.LayoutParams params = new
 				LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		int dp16 = AndroidUtils.dpToPx(context, 16f);
-		int dp8 = AndroidUtils.dpToPx(context, 8f);
-		params.setMargins(dp16, 0, dp16, dp16);
-		b.setPadding(dp8, dp8, dp16, dp8);
-		b.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-		b.setLayoutParams(params);
-		b.setCompoundDrawablePadding(dp8);
-		b.setGravity(Gravity.CENTER_VERTICAL);
-		b.setTypeface(null, Typeface.BOLD);
-		b.setText(context.getResources().getString(R.string.shared_string_add_photo));
-		b.setBackgroundResource(R.drawable.btn_border_light);
+		params.setMargins(dp16, 0, dp12, dp16);
+		buttonLayout.setLayoutParams(params);
+		LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+				ctx.getResources().getDimensionPixelSize(R.dimen.dialog_button_height));
+		view.setLayoutParams(buttonParams);
+		buttonLayout.addView(view);
+		UiUtilities.setupDialogButton(nightMode, buttonLayout, UiUtilities.DialogButtonType.STROKED,
+				ctx.getString(R.string.shared_string_add_photo), R.drawable.ic_sample);
+		((TextView) view.findViewById(R.id.button_text)).setCompoundDrawablePadding(dp6);
 		//TODO This feature is under development
-		b.setVisibility(View.VISIBLE);
-		b.setTextColor(ContextCompat.getColor(context, R.color.preference_category_title));
-		return b;
+		buttonLayout.setVisibility(View.VISIBLE);
+		return buttonLayout;
 	}
 
 	private void buildCoordinatesRow(View view) {
