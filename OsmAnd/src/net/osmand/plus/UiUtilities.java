@@ -141,7 +141,7 @@ public class UiUtilities {
 	}
 
 	public Drawable getLayeredIcon(@DrawableRes int bgIconId, @DrawableRes int foregroundIconId,
-								   @ColorRes int bgColorId, @ColorRes int foregroundColorId) {
+	                               @ColorRes int bgColorId, @ColorRes int foregroundColorId) {
 		Drawable background = getDrawable(bgIconId, bgColorId);
 		Drawable foreground = getDrawable(foregroundIconId, foregroundColorId);
 		return getLayeredIcon(background, foreground);
@@ -272,11 +272,11 @@ public class UiUtilities {
 	}
 
 	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
-								   double toLat, double toLon) {
+			double toLat, double toLon) {
 		updateLocationView(cache, arrow, txt, new LatLon(toLat, toLon));
 	}
 	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
-								   LatLon toLoc) {
+			LatLon toLoc) {
 		float[] mes = new float[2];
 		boolean stale = false;
 		LatLon fromLoc = cache == null ? null : cache.specialFrom;
@@ -390,7 +390,7 @@ public class UiUtilities {
 	}
 
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, @ColorRes Integer backgroundColor,
-									 @ColorRes Integer messageColor, @ColorRes Integer actionColor, Integer maxLines) {
+	                                 @ColorRes Integer messageColor, @ColorRes Integer actionColor, Integer maxLines) {
 		if (snackbar == null) {
 			return;
 		}
@@ -451,7 +451,7 @@ public class UiUtilities {
 
 
 	public static void updateCustomRadioButtons(Context app, View buttonsView, boolean nightMode,
-												CustomRadioButtonType buttonType) {
+	                                            CustomRadioButtonType buttonType) {
 		int activeColor = ContextCompat.getColor(app, nightMode
 				? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light);
@@ -478,7 +478,7 @@ public class UiUtilities {
 			endButtonText.setTextColor(activeColor);
 			startButtonContainer.setBackgroundDrawable(background);
 			startButtonText.setTextColor(textColor);
-		} else if (buttonType == CustomRadioButtonType.END) {
+		} else {
 			if (isLayoutRtl) {
 				background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
 			} else {
@@ -487,11 +487,6 @@ public class UiUtilities {
 			endButtonContainer.setBackgroundDrawable(background);
 			endButtonText.setTextColor(textColor);
 			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
-			startButtonText.setTextColor(activeColor);
-		} else if (buttonType == null) {
-			endButtonContainer.setBackgroundColor(Color.TRANSPARENT);
-			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
-			endButtonText.setTextColor(activeColor);
 			startButtonText.setTextColor(activeColor);
 		}
 	}
@@ -507,10 +502,10 @@ public class UiUtilities {
 	}
 
 	public static void setupCompoundButton(boolean nightMode, @ColorInt int activeColor, CompoundButton compoundButton) {
-		if (compoundButton == null) {
-			return;
-		}
-		Context ctx = compoundButton.getContext();
+	    if (compoundButton == null) {
+	        return;
+        }
+	    Context ctx = compoundButton.getContext();
 		int inactiveColorPrimary = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
 		int inactiveColorSecondary = getColorWithAlpha(inactiveColorPrimary, 0.45f);
 		setupCompoundButton(compoundButton, activeColor, inactiveColorPrimary, inactiveColorSecondary);
@@ -589,7 +584,7 @@ public class UiUtilities {
 	}
 
 	public static void setupSlider(Slider slider, boolean nightMode,
-								   @ColorInt Integer activeColor, boolean showTicks) {
+	                               @ColorInt Integer activeColor, boolean showTicks) {
 		Context ctx = slider.getContext();
 		if (ctx == null) {
 			return;
@@ -775,9 +770,9 @@ public class UiUtilities {
 	}
 
 	public static ListPopupWindow createListPopupWindow(Context themedCtx,
-														View v, int minWidth,
-														List<SimplePopUpMenuItem> items,
-														final AdapterView.OnItemClickListener listener) {
+	                                                    View v, int minWidth,
+	                                                    List<SimplePopUpMenuItem> items,
+	                                                    final AdapterView.OnItemClickListener listener) {
 		int contentPadding = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		int contentPaddingHalf = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
 		int defaultListTextSize = themedCtx.getResources().getDimensionPixelSize(R.dimen.default_list_text_size);

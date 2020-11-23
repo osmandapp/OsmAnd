@@ -30,23 +30,22 @@
         <RelativeLayout
             android:id="@+id/up_down_row"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="112dp"
+            android:layout_height="@dimen/measurement_tool_up_down_row_height"
             android:background="?attr/selectableItemBackground">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginStart="@dimen/measurement_tool_text_button_padding"
-                android:layout_marginLeft="@dimen/measurement_tool_text_button_padding"
-                android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/measurement_tool_text_button_padding"
+                android:layout_marginLeft="@dimen/measurement_tool_text_button_padding"
                 android:layout_marginRight="@dimen/measurement_tool_text_button_padding"
+                android:layout_marginStart="@dimen/measurement_tool_text_button_padding"
                 android:background="@null"
-                tools:src="@drawable/ic_action_ruler" />
+                tools:src="@drawable/ic_action_ruler"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/up_down_button"
@@ -54,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
+                android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
                 android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
                 android:layout_marginRight="@dimen/bottom_sheet_content_margin"
@@ -129,17 +128,6 @@
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 android:visibility="gone"
                 tools:text="@string/add_point_after"/>
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/measurement_tool_button_height"
-                android:layout_below="@id/distance_to_center_text_view"
-                android:layout_marginTop="@dimen/content_padding_half"
-                android:layout_marginBottom="@dimen/measurement_tool_content_padding_medium"
-                android:layout_marginStart="@dimen/content_padding"
-                android:layout_marginEnd="@dimen/content_padding"
-                layout="@layout/custom_radio_buttons" />
-
         </RelativeLayout>
 
         <LinearLayout
@@ -148,6 +136,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone" >
+
+            <include layout="@layout/custom_radio_buttons" />
 
             <View
                 android:layout_width="match_parent"
@@ -159,11 +149,6 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/dashboard_divider" />
 
         <LinearLayout
             android:id="@+id/measure_mode_controls"
