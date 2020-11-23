@@ -3991,4 +3991,6 @@
 \nМережа / Вікімедіа — світлини POI, вказані в даних OpenStreetMap.</string>
     <string name="select_groups_for_import">Виберіть групи, які буде імпортовано.</string>
     <string name="select_items_for_import">Виберіть елементи, які буде імпортовано.</string>
+    <string name="use_dev_url_descr">Перейдіть на dev.openstreetmap.org замість openstreetmap.org для випробувань завантаження Приміток / POI / GPX OSM.</string>
+    <string name="use_dev_url">Використовувати dev.openstreetmap.org</string>
 </resources>
