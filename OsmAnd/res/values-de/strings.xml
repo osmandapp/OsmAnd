@@ -3997,4 +3997,8 @@
     <string name="file_size_needed_for_import">Benötigt für Import</string>
     <string name="export_not_enough_space_descr">Ihr Gerät hat nur %1$s Speicherplatz frei. Bitte machen Sie etwas Platz frei oder heben Sie die Auswahl einiger zu exportierender Objekte auf.</string>
     <string name="export_not_enough_space">Es gibt nicht genug Speicherplatz</string>
+    <string name="select_groups_for_import">Wählen Sie Gruppen aus, die importiert werden sollen.</string>
+    <string name="select_items_for_import">Wählen Sie Elemente aus, die importiert werden sollen.</string>
+    <string name="use_dev_url_descr">Wechseln Sie zu dev.openstreetmap.org anstelle von openstreetmap.org, um das Hochladen von OSM-Hinweisen / POI / GPX zu testen.</string>
+    <string name="use_dev_url">dev.openstreetmap.org verwenden</string>
 </resources>
