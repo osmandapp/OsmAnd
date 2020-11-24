@@ -12,7 +12,6 @@ import net.osmand.util.Algorithms;
 
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
-import java.util.Map.Entry;
 
 public class SampleFormatter {
 	public final static float METERS_IN_KILOMETER = 1000f;
@@ -275,10 +274,9 @@ public class SampleFormatter {
 			return "";
 		}
 		MapPoiTypes poiTypes = ctx.getPoiTypes();
-		for(Entry<String, String>  e : amenity.getAdditionalInfo().entrySet()) {
-			String key = e.getKey();
-			String vl = e.getValue();
-			if(key.startsWith("name:")) {
+		for (String key : amenity.getAdditionalInfoKeys()) {
+			String vl = amenity.getAdditionalInfo(key);
+			if (key.startsWith("name:")) {
 				continue;
 			} else if(vl.length() >= 150) {
 				if(shortDescription) {
@@ -291,16 +289,15 @@ public class SampleFormatter {
 			} else if(Amenity.WEBSITE.equals(key)) {
 				d.append(ctx.getString("website") + ": ");
 			} else {
-				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(e.getKey());
+				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
 				if (pt != null) {
 					if(pt instanceof PoiType && !((PoiType) pt).isText()) {
 						vl = pt.getTranslation();
 					} else {
-						vl = pt.getTranslation() + ": " + amenity.unzipContent(e.getValue());
+						vl = pt.getTranslation() + ": " + vl;
 					}
 				} else {
-					vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey()) +
-					 ": " + amenity.unzipContent(e.getValue());
+					vl = Algorithms.capitalizeFirstLetterAndLowercase(key) + ": " + vl;
 				}
 			}
 			d.append(vl).append('\n');

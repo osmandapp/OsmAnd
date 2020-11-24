@@ -39,7 +39,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
@@ -275,12 +274,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
 
-		for (Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
+		for (String key : amenity.getAdditionalInfoKeys()) {
+			String vl = amenity.getAdditionalInfo(key);
 			int iconId;
 			Drawable icon = null;
 			int textColor = 0;
-			String key = e.getKey();
-			String vl = e.getValue();
 
 			String textPrefix = "";
 			View collapsableView = null;
@@ -357,7 +355,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else if (Amenity.CUISINE.equals(key)) {
 				iconId = OsmandResources.getDrawableId("ic_action_cuisine");
 				StringBuilder sb = new StringBuilder();
-				for (String c : e.getValue().split(";")) {
+				for (String c : vl.split(";")) {
 					if (sb.length() > 0) {
 						sb.append(", ");
 					} else {
@@ -388,7 +386,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						isText = true;
 						isDescription = iconId == OsmandResources.getDrawableId("ic_action_note_dark");
 						textPrefix = pType.getTranslation();
-						vl = amenity.unzipContent(e.getValue());
 					}
 					if (!isDescription && icon == null) {
 						icon = getRowIcon(view.getContext(), pType.getIconKeyName());
@@ -400,8 +397,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						iconId = OsmandResources.getDrawableId("ic_action_note_dark");
 					}
 				} else {
-					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey());
-					vl = amenity.unzipContent(e.getValue());
+					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(vl);
 				}
 			}
 
