@@ -1430,7 +1430,7 @@
     <string name="notes">Hang/videó jegyzetek</string>
     <string name="online_map">Online térkép</string>
     <string name="shared_string_audio">Hang</string>
-    <string name="share_note">Megosztási megjegyzés</string>
+    <string name="share_note">Jegyzet megosztása</string>
     <string name="shared_string_export">Exportálás</string>
     <string name="plugin_touringview_name">Turistatérkép-nézet</string>
     <string name="track_segments">Nyomvonal szakaszok</string>
@@ -3984,4 +3984,8 @@
     <string name="file_size_needed_for_import">Szükséges az importáláshoz</string>
     <string name="export_not_enough_space_descr">A készülékén csak %1$s szabad hely van. Szabadítson fel valamennyi helyet, vagy szüntesse meg néhány exportálandó elem kijelölését.</string>
     <string name="export_not_enough_space">Nincs elég hely</string>
+    <string name="select_groups_for_import">Importálandó csoportok kijelölése</string>
+    <string name="select_items_for_import">Importálandó elemek kijelölése.</string>
+    <string name="use_dev_url_descr">OSM-jegyzet, POI vagy GPX-nyomvonal feltöltésének teszteléséhez az openstreetmap.org helyett kapcsoljon át a dev.openstreetmap.org-ra.</string>
+    <string name="use_dev_url">A dev.openstreetmap.org használata</string>
 </resources>

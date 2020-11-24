@@ -3995,4 +3995,8 @@
 \nOpenPlaceReviews - תמונות של נקודות עניין;
 \nMapillary - תמונות ברמת הרחוב;
 \nאינטרנט / ויקימדיה - תמונות נקודות עניין שמצוינות בנתונים של OpenStreetMap.</string>
+    <string name="select_groups_for_import">נא לבחור קבוצות שייובאו.</string>
+    <string name="select_items_for_import">נא לבחור פריטים שייובאו.</string>
+    <string name="use_dev_url_descr">לעבור להשתמש ב־dev.openstreetmap.org במקום ב־openstreetmap.org כדי לבדוק העלאות של הערות OSM / נקודות עניין / GPX.</string>
+    <string name="use_dev_url">להשתמש ב־dev.openstreetmap.org</string>
 </resources>

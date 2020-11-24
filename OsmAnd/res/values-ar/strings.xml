@@ -3980,4 +3980,8 @@
 \nOpenPlaceReviews - صور POI ؛
 \nMapillary - صور على مستوى الشارع ؛
 \nالويب / ويكيميديا - صور POI المحددة في بيانات OpenStreetMap.</string>
+    <string name="select_groups_for_import">حدد المجموعات التي سيتم استيرادها.</string>
+    <string name="select_items_for_import">حدد العناصر التي سيتم استيرادها.</string>
+    <string name="use_dev_url_descr">قم بالتبديل لاستخدام dev.openstreetmap.org بدلاً من openstreetmap.org لاختبار تحميل OSM Note / POI / GPX.</string>
+    <string name="use_dev_url">استخدم dev.openstreetmap.org</string>
 </resources>

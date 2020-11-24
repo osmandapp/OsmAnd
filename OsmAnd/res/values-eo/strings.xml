@@ -3992,4 +3992,8 @@
     <string name="export_not_enough_space">Mankas spaco</string>
     <string name="add_to_mapillary">Aldoni al Mapillary</string>
     <string name="add_to_opr">Aldoni al OpenPlaceReviews</string>
+    <string name="select_groups_for_import">Elektu grupojn por enporti.</string>
+    <string name="select_items_for_import">Elektu elementojn por enporti.</string>
+    <string name="use_dev_url_descr">Baskuli al dev.openstreetmap.org anstataŭ openstreetmap.org por testi alŝuti OSM‑rimarkojn, interesejojn, GPX‑spurojn.</string>
+    <string name="use_dev_url">Uzi dev.openstreetmap.org</string>
 </resources>

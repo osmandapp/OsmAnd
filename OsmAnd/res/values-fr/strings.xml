@@ -1467,7 +1467,7 @@
     <string name="general_settings_2">Paramètres généraux</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Désélectionner</string>
-    <string name="shared_string_deselect_all">Désélectionner tout</string>
+    <string name="shared_string_deselect_all">Tout désélectionner</string>
     <string name="shared_string_unexpected_error">Erreur inattendue</string>
     <string name="shared_string_action_template">Action {0}</string>
     <string name="shared_string_video">Vidéo</string>
@@ -1883,7 +1883,7 @@
     <string name="osm_live_email_desc">Requis pour mettre à jour vos contributions.</string>
     <string name="osm_live_user_public_name">Nom affiché</string>
     <string name="osm_live_hide_user_name">Ne pas afficher mon nom dans les rapports</string>
-    <string name="osm_live_support_region">Région supportée</string>
+    <string name="osm_live_support_region">Région du support</string>
     <string name="osm_live_enter_user_name">Veuillez indiquer votre nom public</string>
     <string name="shared_string_move_up">Déplacer ↑</string>
     <string name="shared_string_move_down">Déplacer ↓</string>
@@ -2056,7 +2056,7 @@
     <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant de démarrer l\'enregistrement de l\'itinéraire.</string>
     <string name="gpx_no_tracks_title">Vous n\'avez aucun fichier de trace pour l\'instant</string>
     <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers de trace GPX dans le dossier</string>
-    <string name="gpx_add_track">Autre trace GPX …</string>
+    <string name="gpx_add_track">Autre GPX …</string>
     <string name="shared_string_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Bien</string>
     <string name="translit_name_if_miss">Translittérer si le nom %1$s est absent</string>
@@ -2134,7 +2134,7 @@
     <string name="quick_action_map_underlay_title">Sous-couches de carte</string>
     <string name="quick_action_map_underlay_action">Ajouter une sous-couche</string>
     <string name="quick_action_map_source">Modifier la source de la carte</string>
-    <string name="quick_action_map_source_title">Sources de cartes</string>
+    <string name="quick_action_map_source_title">Sources des cartes</string>
     <string name="quick_action_map_source_action">Ajouter une source de carte</string>
     <string name="quick_action_map_source_switch">Source de la carte modifiée pour « %s ».</string>
     <string name="quick_action_btn_tutorial_title">Déplacer le bouton</string>
@@ -2709,7 +2709,7 @@
     <string name="wikivoyage_offline">Wikivoyage hors-ligne</string>
     <string name="unlimited_downloads">Téléchargements illimités</string>
     <string name="wikipedia_offline">Wikipedia hors-ligne</string>
-    <string name="unlock_all_features">Activez toutes les fonctionnalités d\'OsmAnd</string>
+    <string name="unlock_all_features">Débloquer toutes les fonctionnalités d\'OsmAnd</string>
     <string name="monthly_map_updates">Mise à jour des cartes : Tous les mois</string>
     <string name="daily_map_updates">Mise à jour des cartes : Toutes les heures</string>
     <string name="in_app_purchase_desc_ex">La validité de votre achat sera permanente.</string>
@@ -3203,7 +3203,7 @@
     <string name="appearance">Apparence</string>
     <string name="list_of_installed_plugins">Greffons installés</string>
     <string name="configure_navigation">Paramétrer la navigation</string>
-    <string name="configure_profile">Paramétrer le profil</string>
+    <string name="configure_profile">Configurer le profil</string>
     <string name="screen_alerts_descr">Afficher les alertes en bas à gauche de l\'écran pendant la navigation.</string>
     <string name="switch_profile">Basculer de profil</string>
     <string name="language_and_output">Langue et sortie</string>
@@ -3406,9 +3406,9 @@
     <string name="route_recalculation">Recalcul de l\'itinéraire</string>
     <string name="accessibility_announce">Annonce</string>
     <string name="login_and_pass">Nom d\'utilisateur et mot de passe</string>
-    <string name="plugin_global_prefs_info">Les paramètres du greffon sont globaux et s\'appliquent à tous les profils.</string>
+    <string name="plugin_global_prefs_info">Les paramètres du greffon sont globaux et s\'appliquent à tous les profils</string>
     <string name="osm_editing">Édition OSM</string>
-    <string name="osm_edits_view_descr">Vous pouvez consulter vos modifications non téléversées comme vos bugs OSM dans %1$s. Les points envoyés ne sont plus affichés dans OsmAnd.</string>
+    <string name="osm_edits_view_descr">Vous pouvez consulter vos modifications et vos bugs OSM non envoyés dans %1$s. Les points envoyés ne s\'affichentr plus dans OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icône affiché pendant la navigation ou en déplacement.</string>
     <string name="select_map_icon_descr">Icône affiché à l\'arrêt.</string>
@@ -3968,9 +3968,9 @@
 \nOpenPlaceReviews : photos de PI ;
 \nMapillary : photos de rue ;
 \nWeb / Wikimedia : photos de PI réféfencés dans OpenStreetMap.</string>
-    <string name="gpx_upload_private_visibility_descr"/>
+    <string name="gpx_upload_private_visibility_descr">\"Privée\" signifie que la trace ne sera visible dans aucune des listes publiques, mais les points de trace qu\'elle contient seront disponibles sans horodatage et dans un ordre non-chronologique au moyen de l\'API GPS publique.</string>
     <string name="use_dev_url_descr">Utiliser dev.openstreetmap.org plutôt que openstreetmap.org pour tester l\'envoi des notes OSM / Points d\'intérêt / GPX.</string>
     <string name="use_dev_url">Utiliser dev.openstreetmap.org</string>
-    <string name="select_groups_for_import"></string>
-    <string name="select_items_for_import"></string>
+    <string name="select_groups_for_import">Sélectionnez les groupes à importer.</string>
+    <string name="select_items_for_import">Sélectionnez les objets à importer.</string>
 </resources>

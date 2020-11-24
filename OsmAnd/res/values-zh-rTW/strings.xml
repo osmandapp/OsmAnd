@@ -3988,4 +3988,8 @@
     <string name="file_size_needed_for_import">匯入需要</string>
     <string name="export_not_enough_space_descr">您的裝置僅剩 %1$s 可用空間。請釋出一些空間或取消選取要匯出的部份檔案。</string>
     <string name="export_not_enough_space">空間不足</string>
+    <string name="select_groups_for_import">選取將要被匯入的群組。</string>
+    <string name="select_items_for_import">選取將要被匯入的項目。</string>
+    <string name="use_dev_url_descr">切換到 dev.openstreetmap.org 而非 openstreetmap.org 來測試 OSM 註記/POI/GPX。</string>
+    <string name="use_dev_url">使用 dev.openstreetmap.org</string>
 </resources>

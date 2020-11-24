@@ -3988,4 +3988,8 @@
     <string name="file_size_needed_for_import">Necessário para importação</string>
     <string name="export_not_enough_space_descr">Seu dispositivo tem apenas %1$s livre. Libere espaço ou desmarque alguns itens para exportar.</string>
     <string name="export_not_enough_space">Não há espaço suficiente</string>
+    <string name="select_groups_for_import">Selecione os grupos que serão importados.</string>
+    <string name="select_items_for_import">Selecione os itens que serão importados.</string>
+    <string name="use_dev_url_descr">Mudar para usar dev.openstreetmap.org em vez de openstreetmap.org para testar o carregamento de notas OSM / POI / GPX.</string>
+    <string name="use_dev_url">Usar dev.openstreetmap.org</string>
 </resources>
