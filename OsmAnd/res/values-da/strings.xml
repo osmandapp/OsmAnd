@@ -385,7 +385,7 @@
     <string name="global_app_settings">Globale programindstillinger</string>
     <string name="user_name">OSM-brugernavn</string>
     <string name="open_street_map_login_descr">Nødvendig for ændringer i openstreetmap.org.</string>
-    <string name="user_password">OSM-kodeord</string>
+    <string name="user_password">Adgangskode</string>
     <string name="osmand_service">Baggrundstilstand</string>
     <string name="osmand_service_descr">OsmAnd kører i baggrunden med skærmen slukket.</string>
     <string name="navigate_point_format">Format</string>
@@ -1544,7 +1544,7 @@
     <string name="routing_attr_height_name">Højdegrænse</string>
     <string name="routing_attr_height_description">Angiv køretøjets højde der tillades på ruter.</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
-    <string name="use_fast_recalculation_desc">For lange ture, genberegn kun den indledende del af ruten.</string>
+    <string name="use_fast_recalculation_desc">Genberegner kun den oprindelige del af ruten. Kan bruges til lange ture.</string>
     <string name="shared_string_logoff">Log af</string>
     <string name="rendering_value_disabled_name">Deaktiveret</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge netværkstilhørsforhold</string>
@@ -3433,7 +3433,7 @@
     <string name="route_recalculation">Genberegning af rute</string>
     <string name="accessibility_announce">Annoncere</string>
     <string name="login_and_pass">Brugernavn og adgangskode</string>
-    <string name="plugin_global_prefs_info">Indstillingerne gælder for alle profiler.</string>
+    <string name="plugin_global_prefs_info">Indstillinger for udvidelsen er globale, og gælder for alle profiler</string>
     <string name="osm_editing">OSM redigering</string>
     <string name="osm_edits_view_descr">Se redigeringer eller OSM-fejl, der endnu ikke er overført i %1$s. Overførte punkter vises ikke længere.</string>
     <string name="app_mode_osm">OSM</string>
@@ -3787,9 +3787,78 @@
     <string name="only_selected_segment_recalc">Kun det valgte segment genberegnes igen ved hjælp af den valgte profil.</string>
     <string name="all_next_segments_will_be_recalc">Alle efterfølgende segmenter genberegnes ved hjælp af den valgte profil.</string>
     <string name="all_previous_segments_will_be_recalc">Alle tidligere segmenter genberegnes ved hjælp af den valgte profil.</string>
-    <string name="start_finish_icons">Start-/slutikoner</string>
+    <string name="start_finish_icons">Start- og slutikoner</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="app_mode_gap">Hul</string>
     <string name="export_not_enough_space">Der er ikke plads nok</string>
     <string name="routing_attr_length_name">Længdegrænse</string>
+    <string name="contour_lines_thanks">Tak for køb af \'Konturlinjer\'</string>
+    <string name="osm_live_payment_desc_hw">Abonnement opkrævet pr. valgt periode. Annuller det til enhver tid på AppGallery.</string>
+    <string name="routing_attr_avoid_footways_description">Undgå gangstier</string>
+    <string name="routing_attr_avoid_footways_name">Undgå gangstier</string>
+    <string name="development">Udvikling</string>
+    <string name="use_live_public_transport">OsmAnd Live-data</string>
+    <string name="use_live_routing">OsmAnd Live-data</string>
+    <string name="complex_routing_descr">To-faset ruteplanlægning til bilnavigation.</string>
+    <string name="perform_oauth_authorization_description">Log på med OAuth for at bruge osmedit-funktioner</string>
+    <string name="perform_oauth_authorization">Log ind via OAuth</string>
+    <string name="clear_osm_token">Ryd OpenStreetMap OAuth-token</string>
+    <string name="osm_edit_logout_success">Logget ud</string>
+    <string name="file_already_imported">Filen er allerede importeret</string>
+    <string name="use_two_phase_routing">Brug 2-faset A* routingalgoritme</string>
+    <string name="shared_string_graph">Graf</string>
+    <string name="message_graph_will_be_available_after_recalculation">Vent på genberegningen af ruten.
+\nGrafen vil være tilgængelig efter genberegning.</string>
+    <string name="shared_string_local_maps">Lokale kort</string>
+    <string name="icon_group_special">Særlig</string>
+    <string name="icon_group_transport">Transport</string>
+    <string name="icon_group_service">Service</string>
+    <string name="icon_group_symbols">Symboler</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="icon_group_emergency">Nødsituation</string>
+    <string name="icon_group_travel">Rejse</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Tilføj mindst to punkter</string>
+    <string name="login_open_street_map">Log ind på OpenStreetMap</string>
+    <string name="login_open_street_map_org">Log ind for OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Log på med OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Log ind for at overføre nye eller ændrede ændringer,
+\n
+\nenten med OAuth eller med brugernavn og adgangskode.</string>
+    <string name="use_login_password">Log ind med brugernavn og adgangskode</string>
+    <string name="login_account">Konto</string>
+    <string name="user_login">Brugernavn</string>
+    <string name="manage_subscription">Administrer abonnement</string>
+    <string name="subscription_expired_title">OsmAnd Live-abonnementet er udløbet</string>
+    <string name="subscription_paused_title">OsmAnd Live-abonnement er sat på pause</string>
+    <string name="subscription_on_hold_title">OsmAnd Live-abonnement er i venteposition</string>
+    <string name="markers_history">Markørhistorik</string>
+    <string name="send_files_to_openstreetmap">Send GPX-fil til OpenStreetMap</string>
+    <string name="enter_text_separated">Indtast mærker adskilt af komma.</string>
+    <string name="osm_edit_close_note">Luk OSM-note</string>
+    <string name="osm_edit_comment_note">Kommenter OSM-note</string>
+    <string name="osm_login_descr">Log ind ved hjælp af den sikre OAuth metode eller mrd brugernavn og adgangskode.</string>
+    <string name="shared_string_add_photo">Tilføj fotos</string>
+    <string name="register_on_openplacereviews">Tilmeld på
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Log ind på det åbne dataprojekts webside OpenPlaceReviews.org og overfør endnu flere billeder.</string>
+    <string name="register_opr_create_new_account">Opret ny konto</string>
+    <string name="register_opr_have_account">Har allerede en konto</string>
+    <string name="shared_string_search_history">Søgehistorik</string>
+    <string name="app_mode_kayak">Kajak</string>
+    <string name="app_mode_motorboat">Motorbåd</string>
+    <string name="add_to_mapillary">Føj til Mapillary</string>
+    <string name="add_to_opr">Føj til OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd viser billeder fra flere kilder:
+\nOpenPlaceReviews - IP-billeder;
+\nMapillary - billeder på gadeniveau;
+\nWeb / Wikimedia - IP fotos angivet i OpenStreetMap data.</string>
+    <string name="shared_string_resources">Ressourcer</string>
+    <string name="approximate_file_size">Omtrentlig filstørrelse</string>
+    <string name="select_data_to_export">Vælg de data, der skal eksporteres til filen.</string>
+    <string name="file_size_needed_for_import">Nødvendig for import</string>
+    <string name="export_not_enough_space_descr">Enheden har kun %1$s fri. Frigør plads, eller fravælg nogle elementer, der skal eksporteres.</string>
+    <string name="select_groups_for_import">Vælg grupper, der skal importeres.</string>
+    <string name="select_items_for_import">Vælg emner, der skal importeres.</string>
+    <string name="use_dev_url_descr">Skift til dev.openstreetmap.org i stedet for openstreetmap.org for at teste overførelse af OSM-note / IP / GPX.</string>
+    <string name="use_dev_url">Brug dev.openstreetmap.org</string>
 </resources>
