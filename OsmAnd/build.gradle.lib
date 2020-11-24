@@ -347,7 +347,7 @@ uploadArchives {
 		//        username ""
 		//       password ""
 		//   }
-		url = "/Users/alexey/tmp/ivy";//System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
+		url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
 		layout "pattern" , {
 			artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
 		}
@@ -410,6 +410,6 @@ dependencies {
 		exclude group: "com.fasterxml.jackson.core"
 	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
-	
+
 	implementation 'org.bouncycastle:bcpkix-jdk15on:1.56'
 }
