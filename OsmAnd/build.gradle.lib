@@ -356,7 +356,7 @@ uploadArchives {
 //		def parsedGitInfo = Pattern.compile("v(\\d+\\.\\d+)-([\\d.]+)-(\\w+)").matcher(gitInfo)
 //		assert parsedGitInfo.matches()
 //		version = parsedGitInfo.group(1) + "-SNAPSHOT"
-		version = "1.0"
+		version = "1.0-SNAPSHOT"
 	}
 }
 
