@@ -15,13 +15,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
-import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -41,12 +42,12 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	public static final String OSM_LOGIN_DATA = "osm_login_data";
 	private static final String OSM_EDITING_INFO = "osm_editing_info";
 
-	private OsmOAuthAuthorizationAdapter authorizationAdapter;
+	private OsmOAuthHelper authHelper;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
+		authHelper = app.getOsmOAuthHelper();
 
 		FragmentActivity activity = requireMyActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -121,7 +122,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private boolean isValidToken() {
-		return authorizationAdapter.isValidToken();
+		return authHelper.isValidToken();
 	}
 
 	private boolean isLoginExists() {
@@ -139,10 +140,14 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private void setupUseDevUrlPref() {
-		Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_laptop);
 		SwitchPreferenceEx useDevUrlPref = findPreference(settings.USE_DEV_URL.getId());
-		useDevUrlPref.setDescription(getString(R.string.use_dev_url_descr));
-		useDevUrlPref.setIcon(icon);
+		if (OsmandPlugin.isDevelopment()) {
+			Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_laptop);
+			useDevUrlPref.setDescription(getString(R.string.use_dev_url_descr));
+			useDevUrlPref.setIcon(icon);
+		} else {
+			useDevUrlPref.setVisible(false);
+		}
 	}
 
 	private void setupOsmEditsDescrPref() {
@@ -174,7 +179,6 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		if (settings.USE_DEV_URL.getId().equals(prefId) && newValue instanceof Boolean) {
 			settings.USE_DEV_URL.set((Boolean) newValue);
 			osmLogout();
-			authorizationAdapter = app.getOsmOAuthHelper().updateAdapter();
 			return true;
 		}
 		return super.onPreferenceChange(preference, newValue);
@@ -206,33 +210,26 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		return super.onPreferenceClick(preference);
 	}
 
-	private void osmLogout() {
-		boolean validToken = isValidToken();
-		if (validToken || isLoginExists()) {
-			if (validToken) {
-				settings.USER_ACCESS_TOKEN.resetToDefault();
-				settings.USER_ACCESS_TOKEN_SECRET.resetToDefault();
-				authorizationAdapter.resetToken();
-			} else {
-				settings.USER_NAME.resetToDefault();
-				settings.USER_PASSWORD.resetToDefault();
-			}
+	public void osmLogout() {
+		if (authHelper.isValidToken() || isLoginExists()) {
 			app.showShortToastMessage(R.string.osm_edit_logout_success);
-			updateAllSettings();
 		}
+		authHelper.resetAuthorization();
+		updateAllSettings();
 	}
 
 	@Override
 	public void onPreferenceChanged(String prefId) {
 		if (settings.USE_DEV_URL.getId().equals(prefId)) {
 			osmLogout();
-			authorizationAdapter = app.getOsmOAuthHelper().updateAdapter();
 		}
 		updateAllSettings();
 	}
 
 	@Override
 	public void authorizationCompleted() {
-		updateAllSettings();
+		if (getContext() != null) {
+			updateAllSettings();
+		}
 	}
 }

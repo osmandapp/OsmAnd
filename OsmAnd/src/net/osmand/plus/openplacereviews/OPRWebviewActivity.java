@@ -3,8 +3,10 @@ package net.osmand.plus.openplacereviews;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,8 +16,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public static final String KEY_LOGIN = "LOGIN_KEY";
@@ -30,7 +34,7 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public static String getCookieUrl(Context ctx) {
 		return getBaseUrl(ctx) + "profile";
 	}
-	
+
 	public static String getLoginUrl(Context ctx) {
 		return getBaseUrl(ctx) + "login";
 	}
@@ -44,24 +48,39 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
+		OsmandApplication app = getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		boolean nightMode = !settings.isLightContent();
+		int themeId = nightMode ? R.style.OsmandDarkTheme_NoActionbar : R.style.OsmandLightTheme_NoActionbar_LightStatusBar;
+		setTheme(themeId);
+		getWindow().setStatusBarColor(ContextCompat.getColor(this, nightMode
+				? R.color.list_background_color_dark : R.color.list_background_color_light));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_opr_webview);
-		Bundle b = getIntent().getExtras();
-		setSupportActionBar(this.<Toolbar>findViewById(R.id.toolbar));
-		if (b != null) {
-			String title = b.getString(KEY_TITLE, "");
-			this.<TextView>findViewById(R.id.toolbar_text).setText(title);
+		Bundle bundle = getIntent().getExtras();
+		Toolbar toolbar = findViewById(R.id.toolbar);
+		if (bundle != null) {
+			TextView titleView = findViewById(R.id.toolbar_text);
+			String title = bundle.getString(KEY_TITLE, "");
+			titleView.setText(title);
 		}
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		final Drawable upArrow = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(this));
+		toolbar.setBackgroundDrawable(new ColorDrawable(AndroidUtils.getColorFromAttr(this, R.attr.bg_color)));
+		final Drawable upArrow = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(this));
 		upArrow.setColorFilter(ContextCompat.getColor(this, R.color.color_favorite_gray), PorterDuff.Mode.SRC_ATOP);
-		getSupportActionBar().setHomeAsUpIndicator(upArrow);
-		webView = (WebView) findViewById(R.id.printDialogWebview);
+		toolbar.setNavigationIcon(upArrow);
+		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
+		webView = findViewById(R.id.printDialogWebview);
 		webView.setWebViewClient(new CloseOnSuccessWebViewClient());
 		webView.getSettings().setJavaScriptEnabled(true);
 		WebView.setWebContentsDebuggingEnabled(true);
-		if (b != null) {
-			isLogin = b.getBoolean(KEY_LOGIN);
+		if (bundle != null) {
+			isLogin = bundle.getBoolean(KEY_LOGIN);
 			if (isLogin) {
 				webView.loadUrl(getLoginUrl(this));
 			} else {
