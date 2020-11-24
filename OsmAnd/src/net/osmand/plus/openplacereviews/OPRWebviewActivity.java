@@ -64,8 +64,7 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 			String title = bundle.getString(KEY_TITLE, "");
 			titleView.setText(title);
 		}
-		ColorDrawable colorDrawable = new ColorDrawable(AndroidUtils.getColorFromAttr(this, R.attr.bg_color));
-		toolbar.setBackgroundDrawable(colorDrawable);
+		toolbar.setBackgroundDrawable(new ColorDrawable(AndroidUtils.getColorFromAttr(this, R.attr.bg_color)));
 		final Drawable upArrow = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(this));
 		upArrow.setColorFilter(ContextCompat.getColor(this, R.color.color_favorite_gray), PorterDuff.Mode.SRC_ATOP);
 		toolbar.setNavigationIcon(upArrow);
