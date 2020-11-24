@@ -3952,18 +3952,18 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="message_you_need_add_two_points_to_show_graphs">עליך להוסיף שתי נקודות לפחות</string>
-    <string name="login_open_street_map">כניסה עבור OpenStreetMap</string>
-    <string name="login_open_street_map_org">כניסה עבור OpenStreetMap.org</string>
-    <string name="sign_in_with_open_street_map">כניסה עם OpenStreetMap</string>
-    <string name="use_login_password">להיכנס עם שם משתמש וססמה</string>
+    <string name="login_open_street_map">כניסה אל OpenStreetMap</string>
+    <string name="login_open_street_map_org">כניסה אל OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">רישום עם OpenStreetMap</string>
+    <string name="use_login_password">להיכנס עם שם כניסה וססמה</string>
     <string name="login_account">חשבון</string>
-    <string name="user_login">שם משתמש</string>
+    <string name="user_login">שם כניסה</string>
     <string name="manage_subscription">ניהול מינוי</string>
     <string name="subscription_expired_title">תוקף המינוי ל־OsmAnd Live פג</string>
     <string name="subscription_paused_title">המינוי ל־OsmAnd Live הושהה</string>
     <string name="open_street_map_login_mode">עליך להיכנס כדי להעלות שינויים חדשים או כאלו שנערכו.
 \n
-\nאו עם OAuth או באמצעות שם המשתמש והססמה שלך.</string>
+\nניתן להיכנס בשיטת OAuth המאובטחת או באמצעות שם הכניסה והססמה שלך.</string>
     <string name="subscription_payment_issue_title">יש בעיה עם המינוי שלך. יש ללחוץ על הכפתור כדי לגשת להגדרות המינוי של Google Play ולתקן את שיטת התשלום שלך.</string>
     <string name="subscription_on_hold_title">המינוי ל־OsmAnd Live מוחזק</string>
     <string name="markers_history">היסטוריית סמנים</string>
@@ -3972,17 +3972,17 @@
     <string name="gpx_upload_trackable_visibility_descr">„ניתן למעקב” משמעו שהמסלול לא מופיע ברישומים ציבוריים אך נקודות המעקב שעובדו עם חותמות זמן ממנו (שלא ניתן לשייך אליך ישירות) תהיינה דרך ההורדות מה־API הציבורי של ה־GPS.</string>
     <string name="osm_edit_close_note">סגירת הערת OSM</string>
     <string name="osm_edit_comment_note">להגיב על הערת OSM</string>
-    <string name="osm_login_descr">ניתן להיכנס באמצעות שיטת האימות המאובטחת OAuth או להיכנס עם שם המשתמש והססמה שלך.</string>
+    <string name="osm_login_descr">ניתן להיכנס באמצעות שיטת האימות המאובטחת OAuth או להיכנס עם שם הכניסה והססמה שלך.</string>
     <string name="shared_string_add_photo">הוספת תמונה</string>
     <string name="register_on_openplacereviews">יש להירשם בכתובת
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">יש להיכנס לאתר מיזם הנתונים הפתוחים OpenPlaceReviews.org כדי להעלות אף יותר תמונות.</string>
+    <string name="register_on_openplacereviews_desc">התמונות מסופקות על ידי מיזם הנתונים הפתוחים OpenPlaceReviews.org. כדי להעלות את התמונות שלך עליך להירשם באתר.</string>
     <string name="register_opr_create_new_account">יצירת חשבון חדש</string>
     <string name="register_opr_have_account">כבר יש לי חשבון</string>
     <string name="shared_string_search_history">היסטוריית חיפוש</string>
     <string name="app_mode_kayak">קיאק</string>
     <string name="app_mode_motorboat">סירת מנוע</string>
-    <string name="gpx_upload_identifiable_visibility_descr">מגדהי</string>
+    <string name="gpx_upload_identifiable_visibility_descr"></string>
     <string name="shared_string_resources">משאבים</string>
     <string name="approximate_file_size">גודל קובץ משוערך</string>
     <string name="select_data_to_export">נא לבחור את הנתונים שייוצאו לקובץ.</string>
@@ -3999,4 +3999,6 @@
     <string name="select_items_for_import">נא לבחור פריטים שייובאו.</string>
     <string name="use_dev_url_descr">לעבור להשתמש ב־dev.openstreetmap.org במקום ב־openstreetmap.org כדי לבדוק העלאות של הערות OSM / נקודות עניין / GPX.</string>
     <string name="use_dev_url">להשתמש ב־dev.openstreetmap.org</string>
+    <string name="cannot_upload_image">לא ניתן להעלות תמונה, נא לנסות שוב מאוחר יותר</string>
+    <string name="select_picture">בחירת תמונה</string>
 </resources>
