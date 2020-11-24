@@ -3168,7 +3168,7 @@
     <string name="custom_routing">Пользовательский профиль навигации</string>
     <string name="special_routing_type">Специальная навигация</string>
     <string name="third_party_routing_type">Сторонняя навигация</string>
-    <string name="routing_attr_piste_type_nordic_name">Лыжные гонки / северные дисциплины</string>
+    <string name="routing_attr_piste_type_nordic_name">"Лыжные гонки  северные дисциплины"</string>
     <string name="routing_attr_piste_type_nordic_description">Трассы для северных дисциплин или лыжных гонок.</string>
     <string name="app_mode_personal_transporter">Персональный транспортёр</string>
     <string name="routing_attr_max_num_changes_name">Количество изменений</string>
@@ -3981,4 +3981,7 @@
     <string name="select_data_to_export">Выберите данные для экспорта в файл.</string>
     <string name="export_not_enough_space_descr">На устройстве свободно только %1$s. Освободите место в хранилище или снимите выбор с некоторых экспортируемых элементов.</string>
     <string name="export_not_enough_space">Недостаточно места</string>
+    <string name="select_groups_for_import">Выберите импортируемые группы.</string>
+    <string name="select_items_for_import">Выберите импортируемые элементы.</string>
+    <string name="use_dev_url">Использовать dev.openstreetmap.org</string>
 </resources>
