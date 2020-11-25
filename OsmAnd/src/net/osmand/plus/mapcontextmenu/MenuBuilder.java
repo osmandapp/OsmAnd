@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.*;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -435,6 +434,8 @@ public class MenuBuilder {
 					}
 				} catch (Exception e) {
 					LOG.error(e);
+					String str = app.getString(R.string.cannot_upload_image);
+					app.showToastMessage(str);
 				} finally {
 					Algorithms.closeStream(inputStream);
 				}
