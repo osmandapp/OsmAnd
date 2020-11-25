@@ -430,7 +430,7 @@ public class MenuBuilder {
 				try {
 					inputStream = app.getContentResolver().openInputStream(uri);
 					if (inputStream != null) {
-						uploadImageToPlace(view, inputStream);
+						uploadImageToPlace(inputStream);
 					}
 				} catch (Exception e) {
 					LOG.error(e);
@@ -444,7 +444,7 @@ public class MenuBuilder {
 		t.start();
 	}
 
-	private void uploadImageToPlace(View view, InputStream image) {
+	private void uploadImageToPlace(InputStream image) {
 		InputStream serverData = new ByteArrayInputStream(compressImage(image));
 		final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
 		String url = baseUrl + "api/ipfs/image";
