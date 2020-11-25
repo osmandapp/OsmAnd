@@ -3168,7 +3168,7 @@
     <string name="custom_routing">Пользовательский профиль навигации</string>
     <string name="special_routing_type">Специальная навигация</string>
     <string name="third_party_routing_type">Сторонняя навигация</string>
-    <string name="routing_attr_piste_type_nordic_name">"Лыжные гонки  северные дисциплины"</string>
+    <string name="routing_attr_piste_type_nordic_name">Лыжные гонки и северные дисциплины</string>
     <string name="routing_attr_piste_type_nordic_description">Трассы для северных дисциплин или лыжных гонок.</string>
     <string name="app_mode_personal_transporter">Персональный транспортёр</string>
     <string name="routing_attr_max_num_changes_name">Количество изменений</string>
@@ -3796,7 +3796,7 @@
     <string name="search_download_wikipedia_maps">Скачать карты Википедии</string>
     <string name="app_mode_enduro_motorcycle">Эндуро мотоцикл</string>
     <string name="app_mode_motor_scooter">Мотороллер</string>
-    <string name="osm_edit_closed_note">Закрытая OSM-заметка</string>
+    <string name="osm_edit_closed_note">Закрытая заметка OSM</string>
     <string name="app_mode_wheelchair">Инвалидная коляска</string>
     <string name="app_mode_go_cart">Карт</string>
     <string name="app_mode_wheelchair_forward">Инвалидное кресло впереди</string>
@@ -3984,4 +3984,11 @@
     <string name="select_groups_for_import">Выберите импортируемые группы.</string>
     <string name="select_items_for_import">Выберите импортируемые элементы.</string>
     <string name="use_dev_url">Использовать dev.openstreetmap.org</string>
+    <string name="osm_login_descr">Можно войти в систему с помощью безопасного метода OAuth или используя свои имя пользователя и пароль.</string>
+    <string name="subscription_payment_issue_title">Возникла проблема с подпиской. Нажмите кнопку, чтобы перейти к настройкам подписки Google Play и исправить способ оплаты.</string>
+    <string name="osm_edit_comment_note">Комментировать заметку OSM</string>
+    <string name="use_dev_url_descr">Переключиться на использование dev.openstreetmap.org вместо openstreetmap.org для тестирования отправки заметок OSM / POI / GPX.</string>
+    <string name="register_on_openplacereviews_desc">Фотографии предоставлены проектом открытых данных OpenPlaceReviews.org. Чтобы отправить свои фотографии, необходимо зарегистрироваться на сайте.</string>
+    <string name="cannot_upload_image">Невозможно отправить изображение, попробуйте позже</string>
+    <string name="select_picture">Выбор изображения</string>
 </resources>
