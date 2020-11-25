@@ -3940,25 +3940,25 @@
     <string name="subscription_expired_title">انتهت صلاحية اشتراك OsmAnd Live</string>
     <string name="subscription_paused_title">تم إيقاف اشتراك OsmAnd Live مؤقتًا</string>
     <string name="subscription_on_hold_title">اشتراك OsmAnd Live معلق</string>
-    <string name="login_open_street_map">تسجيل الدخول ل OpenStreetMap</string>
-    <string name="login_open_street_map_org">تسجيل الدخول إلى OpenStreetMap.org</string>
+    <string name="login_open_street_map">تسجيل الدخول لخريطة الشارع المفتوح</string>
+    <string name="login_open_street_map_org">تسجيل الدخول إلى خريطة الشارع المفتوح</string>
     <string name="open_street_map_login_mode">قم بتسجيل الدخول لرفع التغييرات الجديدة أو المعدلة.
 \n
-\nإما باستخدام OAuth أو باستخدام اسم المستخدم وكلمة المرور.</string>
+\nإما باستخدام المصادقة أو باستخدام اسم المستخدم وكلمة المرور.</string>
     <string name="use_login_password">سجل الدخول باسم المستخدم وكلمة المرور</string>
     <string name="login_account">الحساب</string>
-    <string name="user_login">اسم المستخدم</string>
+    <string name="user_login">تسجيل الدخول</string>
     <string name="gpx_upload_trackable_visibility_descr">\"إمكانية التتبع\" تعني أن التتبع لا يظهر في أي قوائم عامة ولكن نقاط التتبع المعالجة مع طوابع زمنية صادرة عنها(التي لا يمكن أن تكون مرتبطة بك مباشرة) ستظهر خلال التنزيلات من واجهة برمجة التطبيقات GPS API العامة.</string>
     <string name="markers_history">سجل تاريخ العلامات</string>
     <string name="send_files_to_openstreetmap">أرسل ملف GPX إلى OpenStreetMap</string>
     <string name="enter_text_separated">أدخل العلامات مفصولة بفاصلة.</string>
     <string name="gpx_upload_private_visibility_descr">\"خاص\"يعني أن التتبع لن يظهر في أي قوائم عامة ، ولكن نقاط التتبع الصادرة عنه ستظل متاحة من خلال واجهة برمجة تطبيقات GPS API العامة بدون طوابع زمنية ولكن لن يتم ترتيبها ترتيبًا زمنيًا.</string>
-    <string name="sign_in_with_open_street_map">سجّل الدخول باستخدام OpenStreetMap</string>
+    <string name="sign_in_with_open_street_map">تسجيل الدخول عبر الشارع المفتوح</string>
     <string name="gpx_upload_public_visibility_descr">عام يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة. البيانات المقدمة عبر API لا تشير إلى صفحة التتبع الخاصة بك. الطوابع الزمنية لنقاط التتبع غير متاحة من خلال واجهة برمجة تطبيقات GPS API العامة، والنقاط غير مرتبة ترتيبًا زمنيًا. ومع ذلك، لا يزال المستخدمون الآخرون قادرين على تنزيل التتبع الأولي من قائمة التتبع العامة وأي طوابع زمنية مضمنة فيه.</string>
     <string name="gpx_upload_identifiable_visibility_descr">متعرف عليه يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة، أي سيتمكن المستخدمون الآخرون من تنزيل التتبع الأولي وربطه باسم المستخدم الخاص بك. ستشير البيانات التي يتم تقديمها عبر API نقاط التتبع إلى صفحة التتبع الأصلية الخاصة بك. الطوابع الزمنية لنقاط التتبع متاحة من خلال واجهة برمجة تطبيقات GPS API العامة.</string>
     <string name="osm_edit_close_note">أغلاق ملاحظة OSM</string>
     <string name="osm_edit_comment_note">تعليق ملاحظة OSM</string>
-    <string name="osm_login_descr">قم بتسجيل الدخول باستخدام طريقة OAuth الآمنة أو استخدم اسم المستخدم وكلمة المرور.</string>
+    <string name="osm_login_descr">قم بتسجيل الدخول باستخدام طريقة المصادقة الآمنة أو استخدم اسم المستخدم وكلمة المرور.</string>
     <string name="shared_string_add_photo">إضافة صورة</string>
     <string name="register_on_openplacereviews">سجل في
 \nOpenPlaceReviews.org</string>
@@ -3984,4 +3984,6 @@
     <string name="select_items_for_import">حدد العناصر التي سيتم استيرادها.</string>
     <string name="use_dev_url_descr">قم بالتبديل لاستخدام dev.openstreetmap.org بدلاً من openstreetmap.org لاختبار تحميل OSM Note / POI / GPX.</string>
     <string name="use_dev_url">استخدم dev.openstreetmap.org</string>
+    <string name="cannot_upload_image">لا يمكن تحميل الصورة، من فضلك، حاول مرة أخرى في وقت لاحق</string>
+    <string name="select_picture">تحديد صورة</string>
 </resources>
