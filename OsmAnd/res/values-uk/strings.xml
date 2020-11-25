@@ -2199,7 +2199,7 @@
     <string name="route_points_category_name">Повороти (точки для проходження) на цьому маршруті</string>
     <string name="track_points_category_name">Точки маршруту, цікаві місця та названі можливості</string>
     <string name="shared_string_gpx_track">Трек</string>
-    <string name="max_speed">Максимальна швидкість</string>
+    <string name="max_speed">Найбільша швидкість</string>
     <string name="average_speed">Середня швидкість</string>
     <string name="shared_string_time_moving">Час в русі</string>
     <string name="shared_string_time_span">Загальний час</string>
@@ -3068,7 +3068,7 @@
     <string name="collected_data">Дані зібрано</string>
     <string name="press_again_to_change_the_map_orientation">Натисніть ще раз для зміни орієнтації мапи</string>
     <string name="shared_string_min_speed">Мінімальна швидкість</string>
-    <string name="shared_string_max_speed">Максимальна швидкість</string>
+    <string name="shared_string_max_speed">Макс. швидкість</string>
     <string name="default_speed_setting_title">Усталена швидкість</string>
     <string name="default_speed_setting_descr">Змінити налаштування усталеної швидкості</string>
     <string name="minmax_speed_dialog_title">Встановити мінімальну/максимальну швидкість</string>
