@@ -539,10 +539,6 @@ public class SettingsHelper {
 		if (!poiList.isEmpty()) {
 			settingsItems.put(ExportSettingsType.POI_TYPES, poiList);
 		}
-		List<HistoryEntry> historyEntries = SearchHistoryHelper.getInstance(app).getHistoryEntries(false);
-		if (!historyEntries.isEmpty()) {
-			settingsItems.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
-		}
 		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
 		if (!impassableRoads.isEmpty()) {
 			settingsItems.put(ExportSettingsType.AVOID_ROADS, new ArrayList<>(impassableRoads.values()));
@@ -610,6 +606,10 @@ public class SettingsHelper {
 			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
 			markersGroup.setMarkers(markersHistory);
 			myPlacesItems.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
+		}
+		List<HistoryEntry> historyEntries = SearchHistoryHelper.getInstance(app).getHistoryEntries(false);
+		if (!historyEntries.isEmpty()) {
+			myPlacesItems.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
 		}
 		return myPlacesItems;
 	}

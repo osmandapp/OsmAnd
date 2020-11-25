@@ -18,6 +18,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
@@ -70,6 +71,8 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		View group = convertView;
 		if (group == null) {
 			group = themedInflater.inflate(R.layout.profile_data_list_item_group, parent, false);
+			int minHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_group_height);
+			group.findViewById(R.id.item_container).setMinimumHeight(minHeight);
 		}
 		final ExportSettingsCategory category = itemsTypes.get(groupPosition);
 		final SettingsCategoryItems items = itemsMap.get(category);
@@ -122,6 +125,8 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		View child = convertView;
 		if (child == null) {
 			child = themedInflater.inflate(R.layout.profile_data_list_item_group, parent, false);
+			int minHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_large_height);
+			child.findViewById(R.id.item_container).setMinimumHeight(minHeight);
 		}
 		final ExportSettingsCategory category = itemsTypes.get(groupPosition);
 		final SettingsCategoryItems categoryItems = itemsMap.get(category);
@@ -247,10 +252,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		notifyDataSetChanged();
 	}
 
-	public boolean hasSelectedData() {
-		return !selectedItemsMap.isEmpty();
-	}
-
 	public List<? super Object> getData() {
 		List<Object> selectedItems = new ArrayList<>();
 		for (List<?> items : selectedItemsMap.values()) {
@@ -307,6 +308,10 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 						itemsSize += ((FileSettingsItem) object).getSize();
 					} else if (object instanceof File) {
 						itemsSize += ((File) object).length();
+					} else if (object instanceof MapMarkersGroup) {
+						int selectedMarkers = ((MapMarkersGroup) object).getMarkers().size();
+						String itemsDescr = app.getString(R.string.shared_string_items);
+						return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers);
 					}
 				}
 			}

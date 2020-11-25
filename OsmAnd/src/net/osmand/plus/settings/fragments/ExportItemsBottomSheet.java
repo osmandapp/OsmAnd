@@ -153,7 +153,30 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		int checkBoxColor = checkBox.getState() == UNCHECKED ? secondaryColorRes : activeColorRes;
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
 
-		selectedSize.setText(getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems.size(), allItems.size()));
+		String description;
+		if (type == ExportSettingsType.OFFLINE_MAPS && !selectedItems.isEmpty()) {
+			String size = AndroidUtils.formatSize(app, calculateSelectedItemsSize());
+			String selected = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems.size(), allItems.size());
+			description = getString(R.string.ltr_or_rtl_combine_via_comma, selected, size);
+		} else {
+			description = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems.size(), allItems.size());
+		}
+		selectedSize.setText(description);
+	}
+
+	private long calculateSelectedItemsSize() {
+		long itemsSize = 0;
+		for (int i = 0; i < allItems.size(); i++) {
+			Object object = allItems.get(i);
+			if (selectedItems.contains(object)) {
+				if (object instanceof FileSettingsItem) {
+					itemsSize += ((FileSettingsItem) object).getSize();
+				} else if (object instanceof File) {
+					itemsSize += ((File) object).length();
+				}
+			}
+		}
+		return itemsSize;
 	}
 
 	private void updateItems(boolean checked) {
@@ -275,6 +298,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			builder.setTitle(group.getDisplayName(app));
 			int color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
 			builder.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_folder, color));
+
+			int points = group.getPoints().size();
+			String itemsDescr = app.getString(R.string.shared_string_gpx_points);
+			builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, points));
 		} else if (object instanceof GlobalSettingsItem) {
 			GlobalSettingsItem globalSettingsItem = (GlobalSettingsItem) object;
 			builder.setTitle(globalSettingsItem.getPublicName(app));
@@ -285,9 +312,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				builder.setTitle(getString(R.string.map_markers));
 				builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_flag, activeColorRes));
 			} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
-				builder.setTitle(getString(R.string.map_markers));
+				builder.setTitle(getString(R.string.markers_history));
 				builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, activeColorRes));
 			}
+			int selectedMarkers = markersGroup.getMarkers().size();
+			String itemsDescr = app.getString(R.string.shared_string_items);
+			builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers));
 		} else if (object instanceof HistoryEntry) {
 			HistoryEntry historyEntry = (HistoryEntry) object;
 			builder.setTitle(historyEntry.getName().getName());
@@ -305,6 +335,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
 			builder.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+			builder.setDescription(file.getParentFile().getName());
 		} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
 			int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
 			if (iconId == -1) {
@@ -316,6 +347,31 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				|| fileSubtype == FileSettingsItem.FileSubtype.VOICE) {
 			builder.setTitle(FileNameTranslationHelper.getFileNameWithRegion(app, file.getName()));
 			builder.setIcon(uiUtilities.getIcon(fileSubtype.getIconId(), activeColorRes));
+
+			if (fileSubtype.isMap()) {
+				String mapDescription = getMapDescription(file);
+				String size = AndroidUtils.formatSize(app, file.length());
+				if (mapDescription != null) {
+					builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_star, mapDescription, size));
+				} else {
+					builder.setDescription(size);
+				}
+			}
 		}
+	}
+
+	private String getMapDescription(File file) {
+		if (file.isDirectory() || file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
+			return getString(R.string.online_map);
+		} else if (file.getName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+			return getString(R.string.download_roads_only_item);
+		} else if (file.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+			return getString(R.string.download_wikipedia_maps);
+		} else if (file.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+			return getString(R.string.download_srtm_maps);
+		} else if (file.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+			return getString(R.string.download_regular_maps);
+		}
+		return null;
 	}
 }
