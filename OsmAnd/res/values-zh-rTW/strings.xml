@@ -3950,12 +3950,12 @@
     <string name="subscription_on_hold_title">OsmAnd Live 訂閱已暫停</string>
     <string name="login_open_street_map">登入 OpenStreetMap</string>
     <string name="login_open_street_map_org">登入 OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">登入以上傳新的或修正過的變更，
+    <string name="open_street_map_login_mode">您必須登入以上傳新的或修正的變更。
 \n
-\n以 OAuth 或使用您的使用者名稱與密碼來登入。</string>
-    <string name="use_login_password">以使用者名稱與密碼登入</string>
+\n您可以使用安全的 OAuth 方法或您的帳號密碼登入。</string>
+    <string name="use_login_password">使用帳號與密碼</string>
     <string name="login_account">帳號</string>
-    <string name="user_login">使用者名稱</string>
+    <string name="user_login">帳號</string>
     <string name="sign_in_with_open_street_map">使用 OpenStreetMap 登入</string>
     <string name="markers_history">標記歷史</string>
     <string name="send_files_to_openstreetmap">傳送 GPX 檔案到 OpenStreetMap</string>
@@ -3966,11 +3966,11 @@
     <string name="gpx_upload_trackable_visibility_descr">「可追蹤」代表軌跡不會在任何公開的清單中顯示，但帶有時間戳（這並不會與您直接相關聯）的已處理追蹤點可從公開的 GPS API 下載。</string>
     <string name="osm_edit_close_note">關閉 OSM 註記</string>
     <string name="osm_edit_comment_note">評論 OSM 註記</string>
-    <string name="osm_login_descr">使用安全的 OAuth 方式或是使用您的使用者名稱與密碼來登入。</string>
+    <string name="osm_login_descr">您可以使用安全的 OAuth 方式或是使用您的帳號與密碼來登入。</string>
     <string name="shared_string_add_photo">新增照片</string>
     <string name="register_on_openplacereviews">註冊於
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">登入開放資料專案網站 OpenPlaceReviews.org 以上傳更多照片。</string>
+    <string name="register_on_openplacereviews_desc">照片由開放資料專案 OpenPlaceReviews.org 提供。為了上傳您的照片，您需要在網站上註冊。</string>
     <string name="register_opr_create_new_account">建立新帳號</string>
     <string name="register_opr_have_account">我已經有帳號了</string>
     <string name="shared_string_search_history">搜尋歷史紀錄</string>
@@ -3992,4 +3992,6 @@
     <string name="select_items_for_import">選取將要被匯入的項目。</string>
     <string name="use_dev_url_descr">切換到 dev.openstreetmap.org 而非 openstreetmap.org 來測試 OSM 註記/POI/GPX。</string>
     <string name="use_dev_url">使用 dev.openstreetmap.org</string>
+    <string name="cannot_upload_image">無法上傳圖片，請稍後再試</string>
+    <string name="select_picture">選取圖片</string>
 </resources>

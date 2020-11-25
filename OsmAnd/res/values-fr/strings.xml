@@ -3930,10 +3930,10 @@
     <string name="subscription_on_hold_title">L\'abonnement OsmAnd Live est en attente</string>
     <string name="subscription_expired_title">L’abonnement OsmAnd Live a expiré</string>
     <string name="subscription_paused_title">L\'abonnement OsmAnd Live a été suspendu</string>
-    <string name="login_open_street_map">Se connecter pour OpenStreetMap</string>
-    <string name="login_open_street_map_org">Se connecter pour OpenStreetMap.org</string>
+    <string name="login_open_street_map">Se connecter à OpenStreetMap</string>
+    <string name="login_open_street_map_org">Se connecter à OpenStreetMap.org</string>
     <string name="user_login">Identifiant</string>
-    <string name="use_login_password">Se connecter avec un identifiant et un mot de passe</string>
+    <string name="use_login_password">Utiliser un identifiant et un mot de passe</string>
     <string name="login_account">Compte</string>
     <string name="manage_subscription">Gérer l\'abonnement</string>
     <string name="sign_in_with_open_street_map">Se connecter avec OpenStreetMap</string>
@@ -3951,7 +3951,7 @@
     <string name="open_street_map_login_mode">Connectez-vous pour envoyer vos modifications,
 \n
 \nsoit avec OAuth soit avec votre identifiant et mot de passe.</string>
-    <string name="osm_login_descr">Connectez-vous avec la méthode sécurisée OAuth ou utilisez votre identifiant et votre mot de passe.</string>
+    <string name="osm_login_descr">Vous pouvez vous connecter avec la méthode sécurisée OAuth ou avec votre identifiant et votre mot de passe.</string>
     <string name="register_on_openplacereviews_desc">Connectez-vous au site web du projet OpenPlaceReviews.org pour ajouter des photos.</string>
     <string name="shared_string_search_history">Historique de recherche</string>
     <string name="app_mode_kayak">Kayak</string>
@@ -3973,4 +3973,6 @@
     <string name="use_dev_url">Utiliser dev.openstreetmap.org</string>
     <string name="select_groups_for_import">Sélectionnez les groupes à importer.</string>
     <string name="select_items_for_import">Sélectionnez les objets à importer.</string>
+    <string name="cannot_upload_image">Impossible d\'envoyer l\'image, veuillez réessayer plus tard</string>
+    <string name="select_picture">Sélectionnez une image</string>
 </resources>

@@ -3950,12 +3950,12 @@
     <string name="app_mode_gap">Diferença</string>
     <string name="login_open_street_map">Entrar com OpenStreetMap</string>
     <string name="login_open_street_map_org">Entrar com OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">Entrar para carregar de alterações novas ou modificadas,
+    <string name="open_street_map_login_mode">Você precisaentrar para carregar de alterações novas ou modificadas.
 \n
-\ncom OAuth ou usando seu nome de usuário e senha.</string>
-    <string name="use_login_password">Entrar com nome de usuário e senha</string>
+\nVocê pode fazer login usando o método OAuth seguro ou usar sua entrada e senha.</string>
+    <string name="use_login_password">Usar entrada e senha</string>
     <string name="login_account">Conta</string>
-    <string name="user_login">Nome de usuário</string>
+    <string name="user_login">Entrar</string>
     <string name="sign_in_with_open_street_map">Entrar com o OpenStreetMap</string>
     <string name="markers_history">Histórico de marcadores</string>
     <string name="send_files_to_openstreetmap">Enviar arquivo GPX para OpenStreetMap</string>
@@ -3966,11 +3966,11 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Rastreável\" significa que o rastreamento não aparece em nenhuma listagem pública, mas os pontos de trilha processados com carimbos de data/hora (que não podem ser associados a você diretamente) são feitos por meio de downloads da API GPS pública.</string>
     <string name="osm_edit_close_note">Fechar nota do OSM</string>
     <string name="osm_edit_comment_note">Comentário de nota do OSM</string>
-    <string name="osm_login_descr">Entrar usando o método OAuth seguro ou use seu nome de usuário e senha.</string>
+    <string name="osm_login_descr">Você pode entrar usando o método OAuth seguro ou usar sua entrada e senha.</string>
     <string name="shared_string_add_photo">Adicionar foto</string>
     <string name="register_on_openplacereviews">Cadastre-se em
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Entrar no site do projeto de dados abertos OpenPlaceReviews.org para enviar ainda mais fotos.</string>
+    <string name="register_on_openplacereviews_desc">As fotos são fornecidas pelo projeto de dados abertos OpenPlaceReviews.org. Para carregar suas fotos você precisa se inscrever no site.</string>
     <string name="register_opr_create_new_account">Criar nova conta</string>
     <string name="register_opr_have_account">Eu já tenho uma conta</string>
     <string name="shared_string_search_history">Histórico de busca</string>
@@ -3992,4 +3992,6 @@
     <string name="select_items_for_import">Selecione os itens que serão importados.</string>
     <string name="use_dev_url_descr">Mudar para usar dev.openstreetmap.org em vez de openstreetmap.org para testar o carregamento de notas OSM / POI / GPX.</string>
     <string name="use_dev_url">Usar dev.openstreetmap.org</string>
+    <string name="cannot_upload_image">Não é possível carregar a imagem, por favor, tente novamente mais tarde</string>
+    <string name="select_picture">Selecione a foto</string>
 </resources>
