@@ -508,8 +508,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private void selectTrackToFollow(GPXFile gpxFile) {
 		MapActivity mapActivity = getMapActivity();
-		final ImageButton sortButton = getView().findViewById(R.id.sort_button);
-		sortButton.setVisibility(View.GONE);
 		if (mapActivity != null) {
 			this.gpxFile = gpxFile;
 			List<WptPt> points = gpxFile.getRoutePoints();
