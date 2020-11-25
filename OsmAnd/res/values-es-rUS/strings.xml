@@ -1528,7 +1528,7 @@
     <string name="av_camera_focus_hiperfocal">Enfoque hiperfocal</string>
     <string name="av_camera_focus_edof">Profundidad de campo extendido (EDOF)</string>
     <string name="av_camera_focus_infinity">Enfoque al infinito</string>
-    <string name="av_camera_focus_macro">Modo de enfoque macro (primer plano)</string>
+    <string name="av_camera_focus_macro">Enfoque macro (primer plano)</string>
     <string name="av_camera_focus_continuous">Enfoque continuo</string>
     <string name="av_photo_play_sound">Reproducir sonido al fotografiar</string>
     <string name="av_photo_play_sound_descr">Define el sonido o silencio al fotografiar.</string>
@@ -3458,7 +3458,7 @@
     <string name="monitoring_min_speed">Velocidad mínima</string>
     <string name="monitoring_min_accuracy">Precisión mínima</string>
     <string name="monitoring_min_distance">Desplazamiento mínimo</string>
-    <string name="reset_plugin_to_default">Restablecer ajustes del complemento a valores predefinidos</string>
+    <string name="reset_plugin_to_default">Restablecer complemento a valores predefinidos</string>
     <string name="multimedia_rec_split_title">División de grabación</string>
     <string name="multimedia_use_system_camera">Usar la aplicación del sistema</string>
     <string name="multimedia_photo_play_sound">Reproducir sonido al fotografiar</string>
