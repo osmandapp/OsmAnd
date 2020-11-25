@@ -156,6 +156,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (view != null) {
 			ImageButton closeButton = view.findViewById(R.id.close_button);
 			buttonsShadow = view.findViewById(R.id.buttons_shadow);
+			sortButton = view.findViewById(R.id.sort_button);
 			closeButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
 			closeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -219,6 +220,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				if (Algorithms.isEmpty(fileName)) {
 					fileName = app.getString(R.string.shared_string_gpx_track);
 				}
+				sortButton.setVisibility(View.GONE);
 				GPXInfo gpxInfo = new GPXInfo(fileName, file != null ? file.lastModified() : 0, file != null ? file.length() : 0);
 				TrackEditCard importTrackCard = new TrackEditCard(mapActivity, gpxInfo);
 				importTrackCard.setListener(this);
@@ -268,6 +270,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				tracksCard = new TracksToFollowCard(mapActivity, list, defaultCategory);
 				tracksCard.setListener(FollowTrackFragment.this);
 				getCardsContainer().addView(tracksCard.build(mapActivity));
+				sortButton.setVisibility(View.VISIBLE);
 			}
 		}
 	}
