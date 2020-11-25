@@ -2199,7 +2199,7 @@
     <string name="route_points_category_name">Повороти (точки для проходження) на цьому маршруті</string>
     <string name="track_points_category_name">Точки маршруту, цікаві місця та названі можливості</string>
     <string name="shared_string_gpx_track">Трек</string>
-    <string name="max_speed">Максимальна швидкість</string>
+    <string name="max_speed">Найбільша швидкість</string>
     <string name="average_speed">Середня швидкість</string>
     <string name="shared_string_time_moving">Час в русі</string>
     <string name="shared_string_time_span">Загальний час</string>
@@ -3068,7 +3068,7 @@
     <string name="collected_data">Дані зібрано</string>
     <string name="press_again_to_change_the_map_orientation">Натисніть ще раз для зміни орієнтації мапи</string>
     <string name="shared_string_min_speed">Мінімальна швидкість</string>
-    <string name="shared_string_max_speed">Максимальна швидкість</string>
+    <string name="shared_string_max_speed">Макс. швидкість</string>
     <string name="default_speed_setting_title">Усталена швидкість</string>
     <string name="default_speed_setting_descr">Змінити налаштування усталеної швидкості</string>
     <string name="minmax_speed_dialog_title">Встановити мінімальну/максимальну швидкість</string>
@@ -3951,10 +3951,10 @@
     <string name="subscription_on_hold_title">Передплата OsmAnd Live на утриманні</string>
     <string name="login_open_street_map">Увійти до OpenStreetMap.org</string>
     <string name="login_open_street_map_org">Увійти до OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">Увійдіть, щоб вивантажити нові або внесені зміни,
+    <string name="open_street_map_login_mode">Потрібно увійти, щоб вивантажити нові або внесені зміни.
 \n
-\nабо за допомогою безпечного методу OAuth або свого ім\'я та паролю.</string>
-    <string name="use_login_password">Увійти за допомогою імені користувача і паролю</string>
+\nВи можете увійти за допомогою безпечного методу OAuth, або скористатися своїм іменем користувача та паролем.</string>
+    <string name="use_login_password">Використовувати ім\'я користувача та пароль</string>
     <string name="login_account">Обліковий запис</string>
     <string name="user_login">Ім\'я користувача</string>
     <string name="sign_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
@@ -3967,11 +3967,11 @@
     <string name="gpx_upload_trackable_visibility_descr">«Відстежуваний» означає, що трек не з\'явиться в жодному загальнодоступному списку, але обробка точок з позначками часу від нього (які не можуть бути безпосередньо пов’язані з вами) виконується за допомогою завантажень із загальнодоступного API GPS.</string>
     <string name="osm_edit_close_note">Закрити примітку OSM</string>
     <string name="osm_edit_comment_note">Коментувати примітку OSM</string>
-    <string name="osm_login_descr">Увійдіть за допомогою безпечного методу OAuth або застосувавши свої ім\'я користувача й пароль.</string>
+    <string name="osm_login_descr">Ви можете увійти за допомогою безпечного методу OAuth або за допомогою своїх ім\'я користувача й паролю.</string>
     <string name="shared_string_add_photo">Додати світлини</string>
     <string name="register_on_openplacereviews">Зареєструватися на
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Увійдіть на вебсайт проєкту відкритих даних OpenPlaceReviews.org, щоб завантажити ще більше світлин.</string>
+    <string name="register_on_openplacereviews_desc">Світлини надаються проєктом відкритих даних OpenPlaceReviews.org. Щоб завантажити світлини зареєструйтеся на сайті.</string>
     <string name="register_opr_create_new_account">Створити обліковий запис</string>
     <string name="register_opr_have_account">У мене вже є обліковий запис</string>
     <string name="shared_string_search_history">Журнал пошуку</string>
@@ -3991,4 +3991,8 @@
 \nМережа / Вікімедіа — світлини POI, вказані в даних OpenStreetMap.</string>
     <string name="select_groups_for_import">Виберіть групи, які буде імпортовано.</string>
     <string name="select_items_for_import">Виберіть елементи, які буде імпортовано.</string>
+    <string name="use_dev_url_descr">Перейдіть на dev.openstreetmap.org замість openstreetmap.org для випробувань завантаження Приміток / POI / GPX OSM.</string>
+    <string name="use_dev_url">Використовувати dev.openstreetmap.org</string>
+    <string name="cannot_upload_image">Не вдається завантажити зображення, повторіть спробу пізніше</string>
+    <string name="select_picture">Вибрати зображення</string>
 </resources>

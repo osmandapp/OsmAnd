@@ -3919,4 +3919,8 @@
     <string name="shared_string_search_history">Søkehistorikk</string>
     <string name="app_mode_kayak">Kajakk</string>
     <string name="app_mode_motorboat">Motorbåt</string>
+    <string name="select_picture">Velg bilde</string>
+    <string name="add_to_mapillary">Legg til i Mapillary</string>
+    <string name="add_to_opr">Legg til i OpenPlaceReviews</string>
+    <string name="use_dev_url">Bruk dev.openstreetmap.org</string>
 </resources>
