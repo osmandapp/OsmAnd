@@ -267,4 +267,6 @@
     <string name="shared_string_error_short">ERR</string>
     <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
     <string name="logcat_buffer">Logcat buffer</string>
+    <string name="send_report">Invia rapporto</string>
+    <string name="shared_string_export">Esporta</string>
 </resources>

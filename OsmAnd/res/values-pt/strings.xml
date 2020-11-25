@@ -3468,7 +3468,7 @@
     <string name="shared_string_profiles">Perfis</string>
     <string name="shared_string_quick_actions">Ações rápidas</string>
     <string name="shared_string_nothing_selected">Nada selecionado</string>
-    <string name="shared_string_poi_types">Tipos de POI</string>
+    <string name="shared_string_poi_types">Tipos de PDI</string>
     <string name="shared_string_preparing">A preparar</string>
     <string name="recalc_angle_dialog_title">Ângulo mínimo entre minha localização e rota</string>
     <string name="recalc_angle_dialog_descr">Segmento reto adicional entre minha localização e a rota calculada será exibida até que a rota seja recalculada</string>
@@ -3995,4 +3995,7 @@
 \nOpenPlaceReviews - fotos de POI;
 \nMapillary - imagens ao nível da rua;
 \nWeb / Wikimedia - fotos de POI especificadas nos dados do OpenStreetMap.</string>
+    <string name="select_groups_for_import">Seleccionar os grupos que serão importados.</string>
+    <string name="select_items_for_import">Seleccionar os objectos que serão importados.</string>
+    <string name="use_dev_url">Utilizar dev.openstreetmap.org</string>
 </resources>

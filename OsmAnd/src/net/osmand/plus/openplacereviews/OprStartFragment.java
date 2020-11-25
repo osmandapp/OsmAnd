@@ -2,6 +2,7 @@ package net.osmand.plus.openplacereviews;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -26,11 +27,13 @@ public class OprStartFragment extends BaseOsmAndFragment {
 	private static final String TAG = OprStartFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(OprStartFragment.class);
 	private static final String openPlaceReviewsUrl = "OpenPlaceReviews.org";
+	private boolean nightMode;
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		View v = inflater.inflate(R.layout.fragment_opr_login, container, false);
+		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		View v = UiUtilities.getInflater(requireMyActivity(), nightMode).inflate(R.layout.fragment_opr_login, container,
+				false);
 		View createAccount = v.findViewById(R.id.register_opr_create_account);
 		v.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -77,6 +80,14 @@ public class OprStartFragment extends BaseOsmAndFragment {
 		v.<TextView>findViewById(R.id.start_opr_description).setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
+			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		}
+		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+	}
 
 	private class URLSpanNoUnderline extends URLSpan {
 		public URLSpanNoUnderline(String url) {

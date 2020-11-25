@@ -16,6 +16,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
@@ -90,7 +91,7 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment impl
 		View view = getView();
 		if (view != null) {
 			Fragment fragment = getTargetFragment();
-			if (fragment instanceof OsmAuthorizationListener) {
+			if (!(getActivity() instanceof MapActivity) && fragment instanceof OsmAuthorizationListener) {
 				osmOAuthHelper.addListener((OsmAuthorizationListener) fragment);
 			}
 			osmOAuthHelper.startOAuth((ViewGroup) view);

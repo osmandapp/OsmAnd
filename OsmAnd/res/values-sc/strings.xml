@@ -3992,4 +3992,6 @@
     <string name="export_not_enough_space">Non b\'at logu bastante</string>
     <string name="select_groups_for_import">Ischerta sos grupos de importare.</string>
     <string name="select_items_for_import">Ischerta sos elementos de importare.</string>
+    <string name="use_dev_url_descr">Cola a impreare dev.openstreetmap.org in logu de openstreetmap.org pro proare su carrigamentu de sas notas OSM / PDI / GPX.</string>
+    <string name="use_dev_url">Imprea dev.openstreetmap.org</string>
 </resources>

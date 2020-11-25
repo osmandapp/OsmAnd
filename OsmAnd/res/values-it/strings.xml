@@ -3952,7 +3952,7 @@
     <string name="shared_string_add_photo">Aggiungi foto</string>
     <string name="register_on_openplacereviews">Registrati su
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Le foto sono fornite dal progetto a sorgente aperto OpenPlaceReviews.org. Per contribuire delle tue foto devi registrarti nel sito.</string>
+    <string name="register_on_openplacereviews_desc">Per contribuire delle altre foto autenticati nel sito del progetto a sorgente aperto OpenPlaceReviews.org.</string>
     <string name="register_opr_create_new_account">Crea un nuovo account</string>
     <string name="register_opr_have_account">Ho già un account</string>
     <string name="shared_string_search_history">Cronologia di ricerca</string>
@@ -3989,8 +3989,12 @@
     <string name="approximate_file_size">Dimesione approssimativa del file</string>
     <string name="select_data_to_export">Seleziona i dati da esportare nel file.</string>
     <string name="file_size_needed_for_import">Necessario per l\'importazione</string>
-    <string name="export_not_enough_space_descr">Il tuo dispositivo ha solo %1$s liberi. Libera dello spazio i deseleziona alcune voci da esportare.</string>
+    <string name="export_not_enough_space_descr">Il tuo dispositivo ha solo %1$s liberi. Libera dello spazio o deseleziona alcune voci da esportare.</string>
     <string name="export_not_enough_space">Non c\'è abbastanza spazio</string>
     <string name="select_groups_for_import">Seleziona i gruppi da importare.</string>
     <string name="select_items_for_import">Seleziona gli oggetti da importare.</string>
+    <string name="use_dev_url_descr">Per testare l\'upload di Note OSM / PDI / GPX, invece di utilizzare invece di openstreetmap.org spostati su dev.openstreetmap.org.</string>
+    <string name="use_dev_url">Utilizza dev.openstreetmap.org</string>
+    <string name="cannot_upload_image">Impossibile caricare l\'immagine, riprovare in seguito.</string>
+    <string name="select_picture">Scegli la foto</string>
 </resources>

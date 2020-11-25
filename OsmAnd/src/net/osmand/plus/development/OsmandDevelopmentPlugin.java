@@ -140,4 +140,13 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public DashFragmentData getCardFragment() {
 		return DashSimulateFragment.FRAGMENT_DATA;
 	}
+
+	@Override
+	public void disable(OsmandApplication app) {
+		if (app.getSettings().USE_DEV_URL.get()) {
+			app.getSettings().USE_DEV_URL.set(false);
+			app.getOsmOAuthHelper().resetAuthorization();
+		}
+		super.disable(app);
+	}
 }

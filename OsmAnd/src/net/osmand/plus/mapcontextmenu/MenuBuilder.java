@@ -7,6 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -351,34 +355,17 @@ public class MenuBuilder {
 		}
 	}
 
-	private View createAddPhotoButton(Context context) {
-		TextView b = new TextView(context);
-		b.setOnClickListener(new OnClickListener() {
+	private View createAddPhotoButton(Context ctx) {
+		View view = UiUtilities.getInflater(ctx, !light).inflate(R.layout.dialog_button_with_icon, null);
+		int dp6 = ctx.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
+		View button = view.findViewById(R.id.button);
+		UiUtilities.setupDialogButton(!light, button, UiUtilities.DialogButtonType.STROKED,
+				ctx.getString(R.string.shared_string_add_photo), R.drawable.ic_sample);
+		TextView textView = view.findViewById(R.id.button_text);
+		textView.setCompoundDrawablePadding(dp6);
+		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
-			}
-		});
-		b.setTypeface(FontCache.getRobotoRegular(context));
-		Drawable d = ContextCompat.getDrawable(context, R.drawable.ic_sample);
-		b.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
-		LinearLayout.LayoutParams params = new
-				LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		int dp16 = AndroidUtils.dpToPx(context, 16f);
-		int dp8 = AndroidUtils.dpToPx(context, 8f);
-		params.setMargins(dp16, 0, dp16, dp16);
-		b.setPadding(dp8, dp8, dp16, dp8);
-		b.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-		b.setLayoutParams(params);
-		b.setCompoundDrawablePadding(dp8);
-		b.setGravity(Gravity.CENTER_VERTICAL);
-		b.setTypeface(null, Typeface.BOLD);
-		b.setText(context.getResources().getString(R.string.shared_string_add_photo));
-		b.setBackgroundResource(R.drawable.btn_border_light);
-		b.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(final View view) {
 				if (false) {
 					AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 				} else {
@@ -412,10 +399,9 @@ public class MenuBuilder {
 				}
 			}
 		});
-		//TODO feature under development
-		b.setVisibility(View.GONE);
-		b.setTextColor(ContextCompat.getColor(context, R.color.preference_category_title));
-		return b;
+		//TODO This feature is under development
+		view.setVisibility(View.VISIBLE);
+		return view;
 	}
 
 	private void buildCoordinatesRow(View view) {
