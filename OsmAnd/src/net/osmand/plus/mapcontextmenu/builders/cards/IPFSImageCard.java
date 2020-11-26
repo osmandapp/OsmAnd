@@ -1,10 +1,9 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
+
 import android.view.View;
 import androidx.core.content.ContextCompat;
-import net.osmand.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.BuildConfig;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
@@ -23,7 +22,7 @@ public class IPFSImageCard extends ImageCard {
 		} catch (JSONException e) {
 			LOG.error(e);
 		}
-		String BASE_URL = mapActivity.getString(R.string.opr_base_url);
+		String BASE_URL = mapActivity.getString(R.string.opr_base_url) + "api/ipfs/image-ipfs?cid=";
 		url = BASE_URL + cid;
 		imageHiresUrl = BASE_URL + cid;
 		imageUrl = BASE_URL + cid;
