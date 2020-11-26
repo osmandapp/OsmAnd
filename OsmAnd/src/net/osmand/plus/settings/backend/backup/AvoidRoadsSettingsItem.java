@@ -96,6 +96,11 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 		return true;
 	}
 
+	@Override
+	public boolean shouldShowDuplicates() {
+		return false;
+	}
+
 	@NonNull
 	@Override
 	public AvoidSpecificRoads.AvoidRoadInfo renameItem(@NonNull AvoidSpecificRoads.AvoidRoadInfo item) {
@@ -154,11 +159,6 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 				SettingsHelper.LOG.error("Failed write to json", e);
 			}
 		}
-	}
-
-	@Override
-	public boolean shouldShowDuplicates() {
-		return false;
 	}
 
 	@Nullable
