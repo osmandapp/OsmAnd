@@ -11,10 +11,8 @@ import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -134,7 +132,7 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public class CloseOnSuccessWebViewClient extends WebViewClient {
 		@Override
 		public void onPageFinished(WebView view, String url) {
-			for (String furl : getFinishUrls(OPRWebviewActivity.this)){
+			for (String furl : getFinishUrls(OPRWebviewActivity.this)) {
 				if (url.contains(furl) && isLogin) {
 					finish();
 				}
