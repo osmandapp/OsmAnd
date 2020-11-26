@@ -46,15 +46,20 @@ import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -436,18 +441,27 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				} else {
 					builder.setChecked(parameter.isSelected(settings));
 				}
+
 				builder.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, parameter);
-						boolean selected = !parameter.isSelected(settings);
-						routingOptionsHelper.applyRoutingParameter(parameter, selected);
-						item[0].setChecked(selected);
-						int iconId = selected ? parameter.getActiveIconId() : parameter.getDisabledIconId();
-						if (iconId != -1) {
-							item[0].setIcon(getContentIcon(iconId));
+						GeneralRouter router = app.getRouter(applicationMode);
+						List<GeneralRouter.RoutingParameter> reliefFactorParameters = new ArrayList<GeneralRouter.RoutingParameter>();
+						Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
+						for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
+							GeneralRouter.RoutingParameter routingParameter = e.getValue();
+							if (RELIEF_SMOOTHNESS_FACTOR.equals(routingParameter.getGroup())) {
+								reliefFactorParameters.add(routingParameter);
+							}
 						}
-						updateMenu();
+						if (!reliefFactorParameters.isEmpty() && parameter.getKey().equals(USE_HEIGHT_OBSTACLES)) {
+							FragmentManager fragmentManager = getFragmentManager();
+							if (fragmentManager != null) {
+								ElevationDateBottomSheet.showInstance(fragmentManager, reliefFactorParameters, applicationMode, RouteOptionsBottomSheet.this, false);
+							}
+						} else {
+							applyParameter(item[0], parameter);
+						}
 					}
 				});
 			}
@@ -457,6 +471,18 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			item[0] = builder.create();
 			items.add(item[0]);
 		}
+	}
+
+	private void applyParameter(BottomSheetItemWithCompoundButton bottomSheetItem, LocalRoutingParameter parameter) {
+		routingOptionsHelper.addNewRouteMenuParameter(applicationMode, parameter);
+		boolean selected = !parameter.isSelected(settings);
+		routingOptionsHelper.applyRoutingParameter(parameter, selected);
+		bottomSheetItem.setChecked(selected);
+		int iconId = selected ? parameter.getActiveIconId() : parameter.getDisabledIconId();
+		if (iconId != -1) {
+			bottomSheetItem.setIcon(getContentIcon(iconId));
+		}
+		updateMenu();
 	}
 
 	private void updateMenu() {

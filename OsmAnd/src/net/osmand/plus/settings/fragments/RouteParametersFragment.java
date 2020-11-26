@@ -38,6 +38,7 @@ import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -54,6 +55,8 @@ import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -63,7 +66,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private static final String PREFER_ROUTING_PARAMETER_PREFIX = "prefer_";
 	private static final String ROUTE_PARAMETERS_INFO = "route_parameters_info";
 	private static final String ROUTE_PARAMETERS_IMAGE = "route_parameters_image";
-	private static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
+	public static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 	private static final String ROUTING_SHORT_WAY = "prouting_short_way";
 	private static final String ROUTING_RECALC_DISTANCE = "routing_recalc_distance";
 	private static final String ROUTING_RECALC_WRONG_DIRECTION = "disable_wrong_direction_recalc";
@@ -275,12 +278,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					MultiSelectBooleanPreference preferRouting = createRoutingBooleanMultiSelectPref(PREFER_ROUTING_PARAMETER_PREFIX, title, "", preferParameters);
 					screen.addPreference(preferRouting);
 				}
-				if (reliefFactorParameters.size() > 0) {
-					ListPreferenceEx reliefFactorRouting = createRoutingBooleanListPreference(RELIEF_SMOOTHNESS_FACTOR, reliefFactorParameters);
-					reliefFactorRouting.setDescription(R.string.relief_smoothness_factor_descr);
-
-					screen.addPreference(reliefFactorRouting);
-				}
 				for (RoutingParameter p : otherRoutingParameters) {
 					String title = AndroidUtils.getRoutingStringPropertyName(app, p.getId(), p.getName());
 					String description = AndroidUtils.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
@@ -389,6 +386,12 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				RecalculateRouteInDeviationBottomSheet.showInstance(getFragmentManager(), preference.getKey(), this, false, getSelectedAppMode());
+			}
+		} else if (!reliefFactorParameters.isEmpty() && preference.getKey().equals(ROUTING_PREFERENCE_PREFIX + USE_HEIGHT_OBSTACLES)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ApplicationMode appMode = getSelectedAppMode();
+				ElevationDateBottomSheet.showInstance(fragmentManager, reliefFactorParameters, appMode, this, false);
 			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);
@@ -658,8 +661,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 	}
 
-	private void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode,
-											 String parameterId, boolean defaultBoolean, boolean isChecked) {
+	public static void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode,
+												   String parameterId, boolean defaultBoolean, boolean isChecked) {
 		CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(parameterId, defaultBoolean);
 		if (mode != null) {
 			property.setModeValue(mode, isChecked);
@@ -678,9 +681,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				Drawable disabled = getContentIcon(R.drawable.ic_action_avoid_motorways);
 				Drawable enabled = getActiveIcon(R.drawable.ic_action_motorways);
 				return getPersistentPrefIcon(enabled, disabled);
-			case GeneralRouter.USE_HEIGHT_OBSTACLES:
+			case USE_HEIGHT_OBSTACLES:
 			case RELIEF_SMOOTHNESS_FACTOR:
-				return getPersistentPrefIcon(R.drawable.ic_action_elevation);
+				return getPersistentPrefIcon(R.drawable.ic_action_altitude_average);
 			case AVOID_ROUTING_PARAMETER_PREFIX:
 				return getPersistentPrefIcon(R.drawable.ic_action_alert);
 			case DRIVING_STYLE:

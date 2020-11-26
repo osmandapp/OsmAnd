@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="elevation_data">You can use Elevation data for consideration of Ascent / Descent for your trip</string>
     <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos specified in OpenStreetMap data.</string>
     <string name="use_dev_url">Use dev.openstreetmap.org</string>
     <string name="use_dev_url_descr">Switch to use "dev.openstreetmap.org" instead of "openstreetmap.org" to testing uploading OSM Note / POI / GPX.</string>
