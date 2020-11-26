@@ -217,7 +217,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			String profileName = modeBean.userProfileName;
 			if (Algorithms.isEmpty(profileName)) {
 				ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
-				profileName = getString(appMode.getNameKeyResource());
+				profileName = appMode.toHumanString();
 			}
 			builder.setTitle(profileName);
 
