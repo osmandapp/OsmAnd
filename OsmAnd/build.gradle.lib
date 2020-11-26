@@ -17,6 +17,7 @@ android {
 	}
 
 	lintOptions {
+		tasks.lint.enabled = false
 		abortOnError false
 	}
 
@@ -339,17 +340,25 @@ task appStart(type: Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
 }
 
+artifacts {
+	archives(file("../OsmAnd-java/build/libs/OsmAnd-java-android-1.0.jar")) {
+		name "OsmAnd-java-android"
+		type "jar"
+	}
+}
+
 // Uploading artifacts to local path
-group = "net.osmand"
+group = 'net.osmand'
 uploadArchives {
 	repositories.ivy {
 		//    credentials {
 		//        username ""
 		//       password ""
 		//   }
+
 		url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
 		layout "pattern" , {
-			artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+			artifact "[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
 		}
 
 //		def gitInfo = "git describe --long".execute().text.trim()
