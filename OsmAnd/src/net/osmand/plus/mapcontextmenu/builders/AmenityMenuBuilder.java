@@ -48,7 +48,9 @@ import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
+import java.io.UnsupportedEncodingException;
 import java.math.RoundingMode;
+import java.net.URLDecoder;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -784,18 +786,27 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		String wikidataValue = amenity.getAdditionalInfo(Amenity.WIKIDATA);
 		String wikimediaValue = amenity.getAdditionalInfo(Amenity.WIKIMEDIA_COMMONS);
 		if (!Algorithms.isEmpty(imageValue)) {
-			params.put("osm_image", imageValue);
+			params.put("osm_image", getDecodedAdditionalInfo(imageValue));
 		}
 		if (!Algorithms.isEmpty(mapillaryValue)) {
-			params.put("osm_mapillary_key", mapillaryValue);
+			params.put("osm_mapillary_key", getDecodedAdditionalInfo(mapillaryValue));
 		}
 		if (!Algorithms.isEmpty(wikidataValue)) {
-			params.put(Amenity.WIKIDATA, wikidataValue);
+			params.put(Amenity.WIKIDATA, getDecodedAdditionalInfo(wikidataValue));
 		}
 		if (!Algorithms.isEmpty(wikimediaValue)) {
-			params.put(Amenity.WIKIMEDIA_COMMONS, wikimediaValue);
+			params.put(Amenity.WIKIMEDIA_COMMONS, getDecodedAdditionalInfo(wikimediaValue));
 		}
 		return params;
+	}
+
+	private String getDecodedAdditionalInfo(String additionalInfo) {
+		try {
+			return URLDecoder.decode(additionalInfo, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			LOG.error(e);
+		}
+		return additionalInfo;
 	}
 
 	private CollapsableView getPoiTypeCollapsableView(final Context context, boolean collapsed,
