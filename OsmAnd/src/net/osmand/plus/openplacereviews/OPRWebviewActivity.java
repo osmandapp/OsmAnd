@@ -24,8 +24,8 @@ import java.util.List;
 
 public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public static final String KEY_LOGIN = "LOGIN_KEY";
-	public static String KEY_TITLE = "TITLE_KEY";
-	private static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)";
+	public static final String KEY_TITLE = "TITLE_KEY";
+	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)";
 	private WebView webView;
 	private boolean isLogin = false;
 
