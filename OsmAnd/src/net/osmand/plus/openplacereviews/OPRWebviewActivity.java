@@ -24,6 +24,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public static final String KEY_LOGIN = "LOGIN_KEY";
 	public static String KEY_TITLE = "TITLE_KEY";
+	private static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
 	private WebView webView;
 	private boolean isLogin = false;
 
@@ -76,6 +77,7 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 			}
 		});
 		webView = findViewById(R.id.printDialogWebview);
+		webView.getSettings().setUserAgentString(USER_AGENT);
 		webView.setWebViewClient(new CloseOnSuccessWebViewClient());
 		webView.getSettings().setJavaScriptEnabled(true);
 		WebView.setWebContentsDebuggingEnabled(true);
