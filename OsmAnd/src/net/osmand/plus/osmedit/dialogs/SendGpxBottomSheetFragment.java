@@ -137,12 +137,12 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			public void onGlobalLayout() {
 				Rect visibleDisplayFrame = new Rect();
 				int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
-				int shadowHeight = getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_min_delta);
+				int shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
 				int statusBar = getStatusBarHeight();
 				final ScrollView scrollView = getView().findViewById(R.id.scroll_view);
 				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
 				int height = scrollView.getHeight();
-				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight + (statusBar + shadowHeight);
+				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight + statusBar;
 				if (contentHeightPrevious != contentHeight || contentHeight < height) {
 					if (scrollView.getHeight() + shadowHeight > contentHeight) {
 						scrollView.getLayoutParams().height = contentHeight;
