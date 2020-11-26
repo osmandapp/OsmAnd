@@ -137,11 +137,12 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			public void onGlobalLayout() {
 				Rect visibleDisplayFrame = new Rect();
 				int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
-				int shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
+				int shadowHeight = getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_min_delta);
+				int statusBar = getStatusBarHeight();
 				final ScrollView scrollView = getView().findViewById(R.id.scroll_view);
 				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
 				int height = scrollView.getHeight();
-				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
+				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight + (statusBar + shadowHeight);
 				if (contentHeightPrevious != contentHeight || contentHeight < height) {
 					if (scrollView.getHeight() + shadowHeight > contentHeight) {
 						scrollView.getLayoutParams().height = contentHeight;
@@ -152,7 +153,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 					int delay = Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP ? 300 : 1000;
 					scrollView.postDelayed(new Runnable() {
 						public void run() {
-							scrollView.scrollTo(0, scrollView.getHeight());
+							scrollView.smoothScrollTo(0, scrollView.getTop());
 						}
 					}, delay);
 					contentHeightPrevious = contentHeight;
@@ -201,6 +202,15 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			uploadGPXFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfos);
 		}
 		dismiss();
+	}
+
+	public int getStatusBarHeight() {
+		int result = 0;
+		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			result = getResources().getDimensionPixelSize(resourceId);
+		}
+		return result;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment, GpxInfo[] info) {
