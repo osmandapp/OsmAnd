@@ -122,8 +122,13 @@ public class MenuBuilder {
 		@Override
 		public void onPlaceIdAcquired(String[] placeId) {
 			MenuBuilder.this.placeId = placeId;
-			if (placeId.length < 2){
-				photoButton.setVisibility(View.GONE);
+			if (placeId.length < 2) {
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						photoButton.setVisibility(View.GONE);
+					}
+				});
 			}
 		}
 
