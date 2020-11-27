@@ -109,6 +109,7 @@ public class MenuBuilder {
 	private String preferredMapAppLang;
 	private boolean transliterateNames;
 	private View view;
+	private View photoButton;
 
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
 	private String[] placeId = new String[0];
@@ -121,6 +122,9 @@ public class MenuBuilder {
 		@Override
 		public void onPlaceIdAcquired(String[] placeId) {
 			MenuBuilder.this.placeId = placeId;
+			if (placeId.length < 2){
+				photoButton.setVisibility(View.GONE);
+			}
 		}
 
 		@Override
@@ -404,6 +408,7 @@ public class MenuBuilder {
 		});
 		//TODO This feature is under development
 		view.setVisibility(View.GONE);
+		photoButton = view;
 		return view;
 	}
 
