@@ -34,7 +34,7 @@ public interface TravelHelper {
 	@NonNull
 	List<TravelArticle> loadPopularArticles();
 
-	public LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(
+	LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(
 			final TravelArticle article);
 
 	TravelArticle getArticle(long cityId, String lang);
@@ -50,7 +50,4 @@ public interface TravelHelper {
 	String getGPXName(TravelArticle article);
 
 	File createGpxFile(TravelArticle article);
-
-
-
 }

@@ -673,7 +673,6 @@ public class TravelDbHelper implements TravelHelper {
 		}
 
 		public static PopularArticle readArticleFromAmenity(Amenity a, String lang) {
-			Map<String,String> additional = a.getAdditionalInfo();
 			PopularArticle res = new PopularArticle();
 			res.title = a.getName(lang);
 			res.lat = a.getLocation().getLatitude();
