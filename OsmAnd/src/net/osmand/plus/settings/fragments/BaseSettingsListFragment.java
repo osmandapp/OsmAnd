@@ -2,12 +2,10 @@ package net.osmand.plus.settings.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 
@@ -62,6 +60,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	protected ExpandableListView expandableList;
 	protected ExportSettingsAdapter adapter;
 
+	protected boolean exportMode;
 	protected boolean nightMode;
 	private boolean wasDrawerDisabled;
 
@@ -79,10 +78,10 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override
 			public void handleOnBackPressed() {
-				if (!hasSelectedData()) {
-					dismissFragment();
-				} else {
+				if (hasSelectedData()) {
 					showExitDialog();
+				} else {
+					dismissFragment();
 				}
 			}
 		});
@@ -117,27 +116,12 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		root.findViewById(R.id.continue_button_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (expandableList.getHeaderViewsCount() >= 2) {
-					onContinueButtonClickAction();
-				} else {
-					expandableList.smoothScrollToPositionFromTop(0, 0, 100);
-				}
-			}
-		});
-
-		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
-		treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				if (buttonsContainer != null) {
-					ViewTreeObserver vts = buttonsContainer.getViewTreeObserver();
-					int height = buttonsContainer.getMeasuredHeight();
-					expandableList.setPadding(0, 0, 0, height);
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						vts.removeOnGlobalLayoutListener(this);
-					} else {
-						vts.removeGlobalOnLayoutListener(this);
+				if (expandableList.getHeaderViewsCount() <= 1) {
+					if (hasSelectedData()) {
+						onContinueButtonClickAction();
 					}
+				} else {
+					expandableList.smoothScrollToPosition(0);
 				}
 			}
 		});
@@ -202,10 +186,10 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (!hasSelectedData()) {
-					dismissFragment();
-				} else {
+				if (hasSelectedData()) {
 					showExitDialog();
+				} else {
+					dismissFragment();
 				}
 			}
 		});
@@ -285,13 +269,24 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		updateAvailableSpace();
 	}
 
+	protected List<Object> getItemsForType(ExportSettingsType type) {
+		for (SettingsCategoryItems categoryItems : dataList.values()) {
+			if (categoryItems.getTypes().contains(type)) {
+				return (List<Object>) categoryItems.getItemsForType(type);
+			}
+		}
+		return null;
+	}
+
+	protected List<Object> getSelectedItemsForType(ExportSettingsType type) {
+		return (List<Object>) selectedItemsMap.get(type);
+	}
+
 	@Override
-	public void onTypeClicked(ExportSettingsCategory category, ExportSettingsType type) {
+	public void onTypeClicked(ExportSettingsType type) {
 		FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null && type != ExportSettingsType.GLOBAL && type != ExportSettingsType.SEARCH_HISTORY) {
-			List<Object> items = (List<Object>) dataList.get(category).getItemsForType(type);
-			List<Object> selectedItems = (List<Object>) selectedItemsMap.get(type);
-			ExportItemsBottomSheet.showInstance(type, selectedItems, items, fragmentManager, this);
+			ExportItemsBottomSheet.showInstance(fragmentManager, type, this, exportMode);
 		}
 	}
 }

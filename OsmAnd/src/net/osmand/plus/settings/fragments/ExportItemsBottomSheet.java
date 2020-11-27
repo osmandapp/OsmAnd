@@ -14,11 +14,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -28,6 +32,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton.Builder;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
@@ -47,6 +52,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.util.Algorithms;
@@ -67,18 +73,43 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = ExportItemsBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(ExportItemsBottomSheet.class);
 
+	private static final String SETTINGS_TYPE_KEY = "settings_type_key";
+	private static final String EXPORT_MODE_KEY = "export_mode_key";
+
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 
 	private ExportSettingsType type;
-	private List<Object> allItems;
-	private List<Object> selectedItems = new ArrayList<>();
+	private final List<Object> allItems = new ArrayList<>();
+	private final List<Object> selectedItems = new ArrayList<>();
 
 	private TextView selectedSize;
 	private ThreeStateCheckbox checkBox;
 
 	private int activeColorRes;
 	private int secondaryColorRes;
+	private boolean exportMode;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {
+			exportMode = savedInstanceState.getBoolean(EXPORT_MODE_KEY);
+			type = ExportSettingsType.valueOf(savedInstanceState.getString(SETTINGS_TYPE_KEY));
+		}
+		Fragment target = getTargetFragment();
+		if (target instanceof BaseSettingsListFragment) {
+			BaseSettingsListFragment fragment = (BaseSettingsListFragment) target;
+			List<Object> items = fragment.getItemsForType(type);
+			if (items != null) {
+				allItems.addAll(items);
+			}
+			List<Object> selectedItemsForType = fragment.getSelectedItemsForType(type);
+			if (selectedItemsForType != null) {
+				selectedItems.addAll(selectedItemsForType);
+			}
+		}
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -111,9 +142,16 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 					})
 					.setTag(object);
 			setupBottomSheetItem(builder, object);
-			item[0] = (BottomSheetItemWithCompoundButton) builder.create();
+			item[0] = builder.create();
 			items.add(item[0]);
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(EXPORT_MODE_KEY, exportMode);
+		outState.putString(SETTINGS_TYPE_KEY, type.name());
 	}
 
 	private BaseBottomSheetItem createTitleItem() {
@@ -207,15 +245,13 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull ExportSettingsType type, List<Object> selectedItems, List<?> allItems, @NonNull FragmentManager fm, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager fm, @NonNull ExportSettingsType type,
+									@NonNull BaseSettingsListFragment target, boolean exportMode) {
 		try {
 			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
 				ExportItemsBottomSheet fragment = new ExportItemsBottomSheet();
 				fragment.type = type;
-				fragment.allItems = (List<Object>) allItems;
-				if (selectedItems != null) {
-					fragment.selectedItems.addAll(selectedItems);
-				}
+				fragment.exportMode = exportMode;
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fm, TAG);
 			}
@@ -234,7 +270,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		return null;
 	}
 
-	private void setupBottomSheetItem(BottomSheetItemWithCompoundButton.Builder builder, Object object) {
+	private void setupBottomSheetItem(Builder builder, Object object) {
 		if (object instanceof ApplicationModeBean) {
 			ApplicationModeBean modeBean = (ApplicationModeBean) object;
 			String profileName = modeBean.userProfileName;
@@ -298,9 +334,8 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			builder.setTitle(group.getDisplayName(app));
 			int color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
 			builder.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_folder, color));
-
 			int points = group.getPoints().size();
-			String itemsDescr = app.getString(R.string.shared_string_gpx_points);
+			String itemsDescr = getString(R.string.shared_string_gpx_points);
 			builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, points));
 		} else if (object instanceof GlobalSettingsItem) {
 			GlobalSettingsItem globalSettingsItem = (GlobalSettingsItem) object;
@@ -316,7 +351,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, activeColorRes));
 			}
 			int selectedMarkers = markersGroup.getMarkers().size();
-			String itemsDescr = app.getString(R.string.shared_string_items);
+			String itemsDescr = getString(R.string.shared_string_items);
 			builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers));
 		} else if (object instanceof HistoryEntry) {
 			HistoryEntry historyEntry = (HistoryEntry) object;
@@ -326,7 +361,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void setupBottomSheetItemForFile(Builder builder, File file) {
-		FileSettingsItem.FileSubtype fileSubtype = FileSettingsItem.FileSubtype.getSubtypeByPath(app, file.getPath());
+		FileSubtype fileSubtype = FileSubtype.getSubtypeByPath(app, file.getPath());
 		builder.setTitle(file.getName());
 		if (file.getAbsolutePath().contains(IndexConstants.RENDERERS_DIR)) {
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_map_style, activeColorRes));
@@ -334,8 +369,9 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 		} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
 			builder.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
+			builder.setTag(file);
+			builder.setDescription(getTrackDescr(file));
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
-			builder.setDescription(file.getParentFile().getName());
 		} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
 			int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
 			if (iconId == -1) {
@@ -358,6 +394,60 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				}
 			}
 		}
+	}
+
+	private final GpxDataItemCallback gpxDataItemCallback = new GpxDataItemCallback() {
+		@Override
+		public boolean isCancelled() {
+			return false;
+		}
+
+		@Override
+		public void onGpxDataItemReady(GpxDataItem item) {
+			for (BaseBottomSheetItem bottomSheetItem : items) {
+				if (Algorithms.objectEquals(item.getFile(), bottomSheetItem.getTag())) {
+					((BottomSheetItemWithDescription) bottomSheetItem).setDescription(getTrackDescrForDataItem(item));
+					break;
+				}
+			}
+		}
+	};
+
+	private String getTrackDescr(@NonNull File file) {
+		String folder = "";
+		File parent = file.getParentFile();
+		if (parent != null) {
+			folder = Algorithms.capitalizeFirstLetter(parent.getName());
+		}
+		if (exportMode) {
+			GpxDataItem dataItem = getDataItem(file, gpxDataItemCallback);
+			if (dataItem != null) {
+				return getTrackDescrForDataItem(dataItem);
+			}
+		} else {
+			String date = OsmAndFormatter.getFormattedDate(app, file.lastModified());
+			String size = AndroidUtils.formatSize(app, file.length());
+			String descr = getString(R.string.ltr_or_rtl_combine_via_bold_point, folder, date);
+			return getString(R.string.ltr_or_rtl_combine_via_comma, descr, size);
+		}
+		return null;
+	}
+
+	private String getTrackDescrForDataItem(@NonNull GpxDataItem dataItem) {
+		GPXTrackAnalysis analysis = dataItem.getAnalysis();
+		if (analysis != null) {
+			File parent = dataItem.getFile().getParentFile();
+			String folder = Algorithms.capitalizeFirstLetter(parent.getName());
+			String dist = OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app);
+			String points = analysis.wptPoints + " " + getString(R.string.shared_string_gpx_points).toLowerCase();
+			String descr = getString(R.string.ltr_or_rtl_combine_via_bold_point, folder, dist);
+			return getString(R.string.ltr_or_rtl_combine_via_comma, descr, points);
+		}
+		return null;
+	}
+
+	private GpxDataItem getDataItem(File file, @Nullable GpxDataItemCallback callback) {
+		return app.getGpxDbHelper().getItem(file, callback);
 	}
 
 	private String getMapDescription(File file) {

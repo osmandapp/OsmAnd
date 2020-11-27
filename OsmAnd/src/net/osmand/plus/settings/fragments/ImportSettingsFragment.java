@@ -100,6 +100,7 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 		if (savedInstanceState != null) {
 			duplicateStartTime = savedInstanceState.getLong(DUPLICATES_START_TIME_KEY);
 		}
+		exportMode = false;
 		settingsHelper = app.getSettingsHelper();
 
 		ImportAsyncTask importTask = settingsHelper.getImportTask();

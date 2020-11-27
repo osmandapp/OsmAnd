@@ -23,16 +23,22 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:background="?attr/bg_color"
-		android:gravity="center"
-		android:minHeight="@dimen/bottom_sheet_title_height"
 		android:orientation="vertical">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/buttons_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/bottom_sheet_top_shadow_height"
+			android:layout_gravity="bottom"
+			android:src="@drawable/shadow" />
 
 		<include layout="@layout/divider" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:background="?attr/bg_color"
+			android:minHeight="@dimen/measurement_tool_controls_height"
 			android:orientation="horizontal">
 
 			<LinearLayout
@@ -105,7 +111,8 @@
 		android:id="@+id/appbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="@android:color/transparent">
+		android:background="@android:color/transparent"
+		android:stateListAnimator="@animator/appbar_always_elevated">
 
 		<com.google.android.material.appbar.CollapsingToolbarLayout
 			android:id="@+id/toolbar_layout"
