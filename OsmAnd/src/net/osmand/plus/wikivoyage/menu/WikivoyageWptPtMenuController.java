@@ -42,7 +42,7 @@ public class WikivoyageWptPtMenuController extends WptPtMenuController {
 		String title = metadata != null ? metadata.getArticleTitle() : null;
 		String lang = metadata != null ? metadata.getArticleLang() : null;
 		if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(lang)) {
-			return mapActivity.getMyApplication().getTravelDbHelper().getArticle(title, lang);
+			return mapActivity.getMyApplication().getTravelHelper().getArticle(title, lang);
 		}
 		return null;
 	}

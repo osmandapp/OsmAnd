@@ -66,6 +66,8 @@ import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
@@ -85,7 +87,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
@@ -457,11 +458,14 @@ public class AppInitializer implements IProgress {
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
-		app.travelDbHelper = new TravelDbHelper(app);
+
+		//TODO cleanup after Travel migration complete
+		app.travelHelper = TravelObfHelper.checkIfObfFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
 		if (app.getSettings().SELECTED_TRAVEL_BOOK.get() != null) {
-			app.travelDbHelper.initTravelBooks();
+			app.travelHelper.initTravelBooks();
 		}
-		app.travelDbHelper = startupInit(app.travelDbHelper, TravelDbHelper.class);
+		app.travelHelper = startupInit(app.travelHelper, TravelHelper.class);
+
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
 		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
 		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
