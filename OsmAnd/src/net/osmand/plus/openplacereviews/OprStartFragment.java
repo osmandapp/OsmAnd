@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.BuildConfig;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -74,7 +75,7 @@ public class OprStartFragment extends BaseOsmAndFragment {
 	private void setURLSpan(View v) {
 		String desc = requireContext().getString(R.string.register_on_openplacereviews_desc);
 		SpannableString ss = new SpannableString(desc);
-		ss.setSpan(new URLSpanNoUnderline("https://" + openPlaceReviewsUrl), desc.indexOf(openPlaceReviewsUrl),
+		ss.setSpan(new URLSpanNoUnderline(getActivity().getString(R.string.opr_base_url)), desc.indexOf(openPlaceReviewsUrl),
 				desc.indexOf(openPlaceReviewsUrl) + openPlaceReviewsUrl.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 		v.<TextView>findViewById(R.id.start_opr_description).setText(ss);
 		v.<TextView>findViewById(R.id.start_opr_description).setMovementMethod(LinkMovementMethod.getInstance());

@@ -27,14 +27,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -42,11 +40,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.*;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
@@ -69,7 +63,6 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
 import org.apache.commons.logging.Log;
 import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 
@@ -77,13 +70,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
@@ -443,10 +430,12 @@ public class MenuBuilder {
 				try {
 					inputStream = app.getContentResolver().openInputStream(uri);
 					if (inputStream != null) {
-						uploadImageToPlace(view, inputStream);
+						uploadImageToPlace(inputStream);
 					}
 				} catch (Exception e) {
 					LOG.error(e);
+					String str = app.getString(R.string.cannot_upload_image);
+					app.showToastMessage(str);
 				} finally {
 					Algorithms.closeStream(inputStream);
 				}
@@ -455,7 +444,7 @@ public class MenuBuilder {
 		t.start();
 	}
 
-	private void uploadImageToPlace(View view, InputStream image) {
+	private void uploadImageToPlace(InputStream image) {
 		InputStream serverData = new ByteArrayInputStream(compressImage(image));
 		final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
 		String url = baseUrl + "api/ipfs/image";
@@ -471,18 +460,35 @@ public class MenuBuilder {
 						response);
 			} catch (FailedVerificationException e) {
 				LOG.error(e);
-				app.showToastMessage(R.string.cannot_upload_image);
+				checkTokenAndShowScreen();
 			}
 			if (res != 200) {
 				//image was uploaded but not added to blockchain
-				app.showToastMessage(R.string.cannot_upload_image);
+				checkTokenAndShowScreen();
 			} else {
 				app.showToastMessage(R.string.successfully_uploaded_pattern, 1, 1);
 				//refresh the image
 				execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 			}
 		} else {
+			checkTokenAndShowScreen();
+		}
+	}
+
+	//This method runs on non main thread
+	private void checkTokenAndShowScreen() {
+		final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
+		final String name = OPRWebviewActivity.getUsernameFromCookie(app);
+		final String privateKey = OPRWebviewActivity.getPrivateKeyFromCookie(app);
+		if (openDBAPI.checkPrivateKeyValid(baseUrl, name, privateKey)) {
 			app.showToastMessage(R.string.cannot_upload_image);
+		} else {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+				}
+			});
 		}
 	}
 

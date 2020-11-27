@@ -3815,7 +3815,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="save_global_track_interval_descr">Zehaztu lorratz orokorreko grabazio erregistroaren tartea (mapan \'Bidaia grabaketa\' trepetaren bidez aktibatuta dago).</string>
     <string name="open_saved_track">Ireki gordetako lorratza</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Jarraigarria\" esan nahi du lorratza ez dela inolako zerrenda publikoetan agertzen, baina prozesatutako puntuak bere denbora markekin (zurekin zuzenean lotu ezin direnak) GPS API publikoaren deskargen bidez agertzen dira.</string>
-    <string name="app_mode_wheelchair_forward"></string>
+    <string name="app_mode_wheelchair_forward"/>
     <string name="icon_group_amenity">Prestazioa</string>
     <string name="login_open_street_map">OpenStreetMap-eko saio hasiera</string>
     <string name="login_open_street_map_org">OpenStreetMap.org-eko saio hasiera</string>
@@ -3876,7 +3876,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \nbai OAuth-ekin edo zure erabiltzaile izena eta pasahitza erabiliz.</string>
     <string name="use_login_password">Hasi saioa erabiltzaile izenarekin eta pasahitzarekin</string>
     <string name="login_account">Kontua</string>
-    <string name="user_login">Erabiltzaile-izena</string>
+    <string name="user_login">Hasi saioa</string>
     <string name="manage_subscription">Kudeatu harpidetza</string>
     <string name="subscription_payment_issue_title">Arazo bat dago zure harpidetzarekin. Egin klik botoian Google Play harpidetzaren ezarpenetara joateko zure ordainketa-metodoa konpontzeko.</string>
     <string name="subscription_expired_title">OsmAnd Live harpidetza iraungi egin da</string>
@@ -3998,4 +3998,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="markers_history">Markatzaileen historia</string>
     <string name="send_files_to_openstreetmap">Bidali GPX fitxategia OpenStreetMap-era</string>
     <string name="osm_edit_comment_note">Egin iruzkina OSM oharrean</string>
+    <string name="select_picture">Hautatu argazkia</string>
+    <string name="use_dev_url">Erabili dev.openstreetmap.org</string>
 </resources>

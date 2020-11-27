@@ -92,11 +92,9 @@ public class OpenDBAPI {
 		List<String> ids = new ArrayList<>(Arrays.asList(placeId));
 		Map<String, Object> change = new TreeMap<>();
 		Map<String, Object> images = new TreeMap<>();
-		Map<String, Object> outdoor = new TreeMap<>();
-		outdoor.put("outdoor", imageResponseList);
-		images.put("append", outdoor);
+		images.put("append", imageMap);
 		change.put("version", "increment");
-		change.put("images", images);
+		change.put("images.review", images);
 		edit.put("id", ids);
 		edit.put("change", change);
 		edit.put("current", new Object());
