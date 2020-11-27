@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 import net.osmand.Collator;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
-import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -15,34 +14,29 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.actions.OsmAndAction;
-import net.osmand.plus.api.SQLiteAPI;
-import net.osmand.plus.resources.AmenityIndexRepository;
-import net.osmand.search.core.SearchResult;
+import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+
 
 
 public class TravelObfHelper implements TravelHelper{
 
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
+
+	private static final String WIKIVOYAGE_OBF = "Wikivoyage.obf";
+	public static final String ROUTE_ARTICLE = "route_article";
 
 	private final OsmandApplication application;
 	private Collator collator;
@@ -58,14 +52,14 @@ public class TravelObfHelper implements TravelHelper{
 	public TravelObfHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
-		localDataHelper = new TravelLocalDataHelper(application); //will I need it?
+		localDataHelper = new TravelLocalDataHelper(application);
 	}
 
 	public static boolean checkIfObfFileExists(OsmandApplication app) {
 		File[] files = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
 		if (files != null) {
 			for (File f : files) {
-				if (f.getName().equals("Wikivoyage.obf")) {
+				if (f.getName().equals(WIKIVOYAGE_OBF)) {
 					return true;
 				}
 			}
@@ -79,7 +73,7 @@ public class TravelObfHelper implements TravelHelper{
 	}
 
 	/** TODO
-	 * 1.implement regional travelbooks
+	 * 1. implement regional travelbooks
 	 * 2. check settings for default?
 	 */
 	public void initTravelBooks() {
@@ -89,11 +83,11 @@ public class TravelObfHelper implements TravelHelper{
 		if (files != null && !files.isEmpty()) {
 			for (File f : files) {
 				existingTravelBooks.add(f);
-//				if (selectedTravelBook == null) {
-//					selectedTravelBook = f;
-//				} else if (Algorithms.objectEquals(travelBook, f.getName())) {
-//					selectedTravelBook = f;
-//				}
+				if (selectedTravelBook == null) {
+					selectedTravelBook = f;
+				} else if (Algorithms.objectEquals(travelBook, f.getName())) {
+					selectedTravelBook = f;
+				}
 			}
 			selectedTravelBook = files.get(0);
 		} else {
@@ -134,12 +128,12 @@ public class TravelObfHelper implements TravelHelper{
 
 	@Override
 	public List<File> getExistingTravelBooks() {
-		return null;
+		return existingTravelBooks;
 	}
 
 	@Override
 	public void selectTravelBook(File f) {
-
+		//todo
 	}
 
 	@NonNull
@@ -179,7 +173,8 @@ public class TravelObfHelper implements TravelHelper{
 
 								@Override
 								public boolean publish(Amenity object) {
-									if (object.getSubType().equals("route_article")) {
+									//TODO need more logical way to filter results
+									if (object.getSubType().equals(ROUTE_ARTICLE)) {
 										articles.add(object);
 									}
 									return false;
@@ -216,18 +211,20 @@ public class TravelObfHelper implements TravelHelper{
 
 		res.title = amenity.getName(lang).equals("") ? amenity.getName() : amenity.getName(lang);
 		res.content = amenity.getDescription(lang);
-		res.isPartOf = ""; //add to file
+		res.isPartOf = amenity.getTagContent(Amenity.IS_PART, lang) == null ? "" : amenity.getTagContent(Amenity.IS_PART, lang);
 		res.lat = amenity.getLocation().getLatitude();
 		res.lon = amenity.getLocation().getLongitude();
-		res.imageTitle = "";//add to file
-		res.tripId = amenity.getId();
-		res.originalId = amenity.getId()>>6;
+		res.imageTitle = amenity.getTagContent(Amenity.IMAGE_TITLE, lang) == null ? "" : amenity.getTagContent(Amenity.IMAGE_TITLE, lang);
+		res.tripId = amenity.getId(); //?
+		res.originalId = 0; //?
 		res.lang = lang;
-		res.contentsJson = ""; //add to file
-		res.aggregatedPartOf = ""; //add to file
+		res.contentsJson = amenity.getTagContent(Amenity.CONTENT_JSON, lang) == null ? "" : amenity.getTagContent(Amenity.CONTENT_JSON, lang);
+		res.aggregatedPartOf = amenity.getTagContent(Amenity.IS_AGGR_PART, lang) == null ? "" : amenity.getTagContent(Amenity.IS_AGGR_PART, lang);
+
+//      crash in some places, need to fix it
 //		try {
-//			String gpxContent = Algorithms.gzipToString();
-			res.gpxFile = null; //GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
+//			String gpxContent = amenity.getAdditionalInfo("gpx_info");
+//			res.gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
 //		} catch (IOException e) {
 //			LOG.error(e.getMessage(), e);
 //		}
@@ -279,16 +276,26 @@ public class TravelObfHelper implements TravelHelper{
 
 	@Override
 	public String formatTravelBookName(File tb) {
-		return null;
+		if (tb == null) {
+			return application.getString(R.string.shared_string_none);
+		}
+		String nm = tb.getName();
+		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
 	}
 
 	@Override
 	public String getGPXName(TravelArticle article) {
-		return null;
+		return article.getTitle().replace('/', '_').replace('\'', '_')
+				.replace('\"', '_') + IndexConstants.GPX_FILE_EXT;
 	}
 
 	@Override
 	public File createGpxFile(TravelArticle article) {
-		return null;
+		final GPXUtilities.GPXFile gpx = article.getGpxFile();
+		File file = application.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
+		if (!file.exists()) {
+			GPXUtilities.writeGpxFile(file, gpx);
+		}
+		return file;
 	}
 }
