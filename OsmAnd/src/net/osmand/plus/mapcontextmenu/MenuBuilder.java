@@ -14,6 +14,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -487,10 +489,10 @@ public class MenuBuilder {
 	}
 
 	private void showToastMessage(final String str) {
-		app.runInUIThread(new Runnable() {
+		new Handler(Looper.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(view.getContext(), str, Toast.LENGTH_LONG).show();
+				Toast.makeText(mapActivity.getBaseContext(), str, Toast.LENGTH_LONG).show();
 			}
 		});
 	}
