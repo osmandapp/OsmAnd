@@ -399,7 +399,7 @@ public class MenuBuilder {
 			}
 		});
 		//TODO This feature is under development
-		view.setVisibility(View.VISIBLE);
+		//view.setVisibility(View.VISIBLE);
 		return view;
 	}
 
