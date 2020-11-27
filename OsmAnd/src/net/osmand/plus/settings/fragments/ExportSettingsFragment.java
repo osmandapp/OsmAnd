@@ -4,24 +4,15 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -31,20 +22,11 @@ import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
-import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
-import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
-import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
@@ -53,11 +35,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
-public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItemSelectedListener {
+public class ExportSettingsFragment extends BaseSettingsListFragment {
 
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
@@ -73,43 +54,19 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yy", Locale.US);
 
-	private OsmandApplication app;
-	private Map<ExportSettingsCategory, List<ExportDataObject>> dataList;
-
 	private ProgressDialog progress;
 	private ApplicationMode appMode;
 	private SettingsExportListener exportListener;
 
-	private View continueBtn;
-	private View headerShadow;
-	private View headerDivider;
-	private View itemsSizeContainer;
-	private View availableSpaceContainer;
-	private TextViewEx selectedItemsSize;
-	private TextViewEx availableSpaceDescr;
-	private LinearLayout buttonsContainer;
-	private ExpandableListView expandableList;
-	private ExportSettingsAdapter adapter;
-
 	private int progressMax;
 	private int progressValue;
-
 	private long exportStartTime;
-
-	private boolean nightMode;
 	private boolean globalExport;
 	private boolean exportingStarted;
 
 	@Override
-	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
-	}
-
-	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		nightMode = !app.getSettings().isLightContent();
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			globalExport = savedInstanceState.getBoolean(GLOBAL_EXPORT_KEY);
@@ -118,77 +75,26 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 			progressMax = savedInstanceState.getInt(PROGRESS_MAX_KEY);
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
+		exportMode = true;
 		dataList = app.getSettingsHelper().getAdditionalData(globalExport);
-
-		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				showExitDialog();
-			}
-		});
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
-		View root = themedInflater.inflate(R.layout.fragment_import, container, false);
-		AndroidUtils.addStatusBarPadding21v(app, root);
+		View view = super.onCreateView(inflater, container, savedInstanceState);
 
-		selectedItemsSize = root.findViewById(R.id.file_size);
-		itemsSizeContainer = root.findViewById(R.id.file_size_container);
-		expandableList = root.findViewById(R.id.list);
-		buttonsContainer = root.findViewById(R.id.buttons_container);
-
-		Toolbar toolbar = root.findViewById(R.id.toolbar);
-		setupToolbar(toolbar);
-		ViewCompat.setNestedScrollingEnabled(expandableList, true);
-
-		View header = themedInflater.inflate(R.layout.list_item_description_header, null);
-		headerDivider = header.findViewById(R.id.divider);
-		headerShadow = header.findViewById(R.id.card_bottom_divider);
-		expandableList.addHeaderView(header);
-
-		availableSpaceContainer = themedInflater.inflate(R.layout.enough_space_warning_card, null);
-		availableSpaceDescr = availableSpaceContainer.findViewById(R.id.warning_descr);
-
-		continueBtn = root.findViewById(R.id.continue_button);
-		UiUtilities.setupDialogButton(nightMode, continueBtn, DialogButtonType.PRIMARY, getString(R.string.shared_string_continue));
-		continueBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				prepareFile();
-			}
-		});
-
-		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
-		treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				if (buttonsContainer != null) {
-					ViewTreeObserver vts = buttonsContainer.getViewTreeObserver();
-					int height = buttonsContainer.getMeasuredHeight();
-					expandableList.setPadding(0, 0, 0, height);
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						vts.removeOnGlobalLayoutListener(this);
-					} else {
-						vts.removeGlobalOnLayoutListener(this);
-					}
-				}
-			}
-		});
-
-		adapter = new ExportSettingsAdapter(app, this, nightMode);
-		adapter.updateSettingsList(dataList);
-		expandableList.setAdapter(adapter);
-
-		CollapsingToolbarLayout toolbarLayout = root.findViewById(R.id.toolbar_layout);
+		CollapsingToolbarLayout toolbarLayout = view.findViewById(R.id.toolbar_layout);
 		toolbarLayout.setTitle(getString(R.string.shared_string_export));
 		TextView description = header.findViewById(R.id.description);
 		description.setText(R.string.select_data_to_export);
-		updateAvailableSpace();
 
-		return root;
+		return view;
+	}
+
+	@Override
+	protected void onContinueButtonClickAction() {
+		prepareFile();
 	}
 
 	@Override
@@ -217,88 +123,6 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 			File file = getExportFile();
 			app.getSettingsHelper().updateExportListener(file, null);
 		}
-	}
-
-	private void dismissFragment() {
-		FragmentManager fm = getFragmentManager();
-		if (fm != null && !fm.isStateSaved()) {
-			getFragmentManager().popBackStack(EXPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		}
-	}
-
-	public void showExitDialog() {
-		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
-		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
-		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
-		dismissDialog.setMessage(getString(R.string.exit_without_saving));
-		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
-		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dismissFragment();
-			}
-		});
-		dismissDialog.show();
-	}
-
-	private void setupToolbar(Toolbar toolbar) {
-		int color = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
-		toolbar.setNavigationContentDescription(R.string.shared_string_close);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showExitDialog();
-			}
-		});
-	}
-
-	private void updateAvailableSpace() {
-		long calculatedSize = ExportSettingsAdapter.calculateItemsSize(adapter.getData());
-		if (calculatedSize != 0) {
-			selectedItemsSize.setText(AndroidUtils.formatSize(app, calculatedSize));
-
-			File dir = app.getAppPath("").getParentFile();
-			long availableSizeBytes = AndroidUtils.getAvailableSpace(dir);
-			if (calculatedSize > availableSizeBytes) {
-				String availableSize = AndroidUtils.formatSize(app, availableSizeBytes);
-				availableSpaceDescr.setText(getString(R.string.export_not_enough_space_descr, availableSize));
-				updateWarningHeaderVisibility(true);
-				continueBtn.setEnabled(false);
-			} else {
-				updateWarningHeaderVisibility(false);
-				continueBtn.setEnabled(adapter.hasSelectedData());
-			}
-			itemsSizeContainer.setVisibility(View.VISIBLE);
-		} else {
-			updateWarningHeaderVisibility(false);
-			itemsSizeContainer.setVisibility(View.INVISIBLE);
-			continueBtn.setEnabled(adapter.hasSelectedData());
-		}
-	}
-
-	private void updateWarningHeaderVisibility(boolean visible) {
-		if (visible) {
-			if (expandableList.getHeaderViewsCount() < 2) {
-				expandableList.addHeaderView(availableSpaceContainer);
-			}
-			AndroidUiHelper.updateVisibility(headerShadow, false);
-			AndroidUiHelper.updateVisibility(headerDivider, true);
-		} else {
-			expandableList.removeHeaderView(availableSpaceContainer);
-			AndroidUiHelper.updateVisibility(headerShadow, true);
-			AndroidUiHelper.updateVisibility(headerDivider, false);
-		}
-	}
-
-	@Override
-	public void onCategorySelected(ExportSettingsCategory type, boolean selected) {
-		updateAvailableSpace();
-	}
-
-	@Override
-	public void onTypeSelected(ExportSettingsType type, boolean selected) {
-		updateAvailableSpace();
 	}
 
 	private void prepareFile() {
@@ -445,7 +269,7 @@ public class ExportSettingsFragment extends BaseOsmAndFragment implements OnItem
 			fragment.globalExport = globalExport;
 			fragmentManager.beginTransaction().
 					replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(EXPORT_SETTINGS_TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (RuntimeException e) {

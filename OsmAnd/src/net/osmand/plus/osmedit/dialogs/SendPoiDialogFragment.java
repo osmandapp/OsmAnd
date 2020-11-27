@@ -84,7 +84,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 		messageLabel.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
 		messageEditText.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
 		closeChangeSetCheckBox.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
-		closeChangeSetCheckBox.setChecked(hasPOI && !defaultChangeSet.equals(""));
+		closeChangeSetCheckBox.setChecked(hasPOI && !defaultChangeSet.isEmpty());
 		view.findViewById(R.id.osm_note_header).setVisibility(hasPOI ? View.GONE : View.VISIBLE);
 		uploadAnonymously.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
@@ -233,7 +233,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 		}
 		if (modifiedItemsOutOfLimit != 0) {
 			comment = comment.concat("; ").concat(modifiedItemsOutOfLimit + " ").concat(getString(R.string.items_modified)).concat(".");
-		} else if (!comment.equals("")){
+		} else if (!comment.isEmpty()){
 			comment = comment.concat(".");
 		}
 		return comment;

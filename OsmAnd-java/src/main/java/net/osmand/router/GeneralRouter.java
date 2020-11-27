@@ -754,21 +754,21 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		
 		public RouteAttributeEvalRule[] getRules() {
-			return rules.toArray(new RouteAttributeEvalRule[rules.size()]);
+			return rules.toArray(new RouteAttributeEvalRule[0]);
 		}
 		
 		public String[] getParamKeys() {
 			if(paramContext == null) {
 				return new String[0];
 			}
-			return paramContext.vars.keySet().toArray(new String[paramContext.vars.size()]);
+			return paramContext.vars.keySet().toArray(new String[0]);
 		}
 		
 		public String[] getParamValues() {
 			if(paramContext == null) {
 				return new String[0];
 			}
-			return paramContext.vars.values().toArray(new String[paramContext.vars.size()]);
+			return paramContext.vars.values().toArray(new String[0]);
 		}
 		
 		private Object evaluate(RouteDataObject ro) {
@@ -988,19 +988,19 @@ public class GeneralRouter implements VehicleRouter {
 		
 		
 		public RouteAttributeExpression[] getExpressions() {
-			return expressions.toArray(new RouteAttributeExpression[expressions.size()]);
+			return expressions.toArray(new RouteAttributeExpression[0]);
 		}
 		
 		public String[] getParameters() {
-			return parameters.toArray(new String[parameters.size()]);
+			return parameters.toArray(new String[0]);
 		}
 		
 		public String[] getTagValueCondDefTag() {
-			return tagValueCondDefTag.toArray(new String[tagValueCondDefTag.size()]);
+			return tagValueCondDefTag.toArray(new String[0]);
 		}
 		
 		public String[] getTagValueCondDefValue() {
-			return tagValueCondDefValue.toArray(new String[tagValueCondDefValue.size()]);
+			return tagValueCondDefValue.toArray(new String[0]);
 		}
 		
 		public boolean[] getTagValueCondDefNot() {

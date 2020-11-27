@@ -12,13 +12,13 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
@@ -26,7 +26,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.List;
-import java.util.Map;
 
 public class AmenityMenuController extends MenuController {
 
@@ -160,12 +159,9 @@ public class AmenityMenuController extends MenuController {
 		String preferredLang = OsmandPlugin.onGetMapObjectPreferredLang(amenity,
 				getPreferredMapAppLang(), getPreferredMapLang());
 		String name = amenity.getName(preferredLang, isTransliterateNames());
-		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
-		if (additionalInfo != null) {
-			String ref = additionalInfo.get("ref");
-			if (!TextUtils.isEmpty(ref) && !ref.equals(name)) {
-				return name + " (" + ref + ")";
-			}
+		String ref = amenity.getAdditionalInfo("ref");
+		if (!TextUtils.isEmpty(ref) && !ref.equals(name)) {
+			return name + " (" + ref + ")";
 		}
 		if (Algorithms.isEmpty(name) && amenity.getSubType().equalsIgnoreCase("atm")) {
 			String operator = amenity.getAdditionalInfo("operator");
@@ -247,12 +243,9 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		Map<String, String> addTypes = amenity.getAdditionalInfo();
-		if (addTypes != null) {
-			String region = addTypes.get("subway_region");
-			if (region != null) {
-				return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
-			}
+		String region = amenity.getAdditionalInfo("subway_region");
+		if (region != null) {
+			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
 		}
 		return null;
 	}

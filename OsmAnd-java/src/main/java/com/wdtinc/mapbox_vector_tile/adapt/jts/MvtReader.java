@@ -322,7 +322,7 @@ public final class MvtReader {
             geoms.add(geomFactory.createLineString(nextCoordSeq));
         }
 
-        return geoms.size() == 1 ? geoms.get(0) : geomFactory.createMultiLineString(geoms.toArray(new LineString[geoms.size()]));
+        return geoms.size() == 1 ? geoms.get(0) : geomFactory.createMultiLineString(geoms.toArray(new LineString[0]));
     }
 
     /**
@@ -450,7 +450,7 @@ public final class MvtReader {
             return polygons.get(0);
 
         } else {
-            return geomFactory.createMultiPolygon(polygons.toArray(new Polygon[polygons.size()]));
+            return geomFactory.createMultiPolygon(polygons.toArray(new Polygon[0]));
         }
     }
 
@@ -512,7 +512,7 @@ public final class MvtReader {
 
                 if (area > 0d) {
                     if (outerPoly != null) {
-                        polygons.add(geomFactory.createPolygon(outerPoly, holes.toArray(new LinearRing[holes.size()])));
+                        polygons.add(geomFactory.createPolygon(outerPoly, holes.toArray(new LinearRing[0])));
                         holes.clear();
                     }
 
@@ -533,7 +533,7 @@ public final class MvtReader {
 
             if (outerPoly != null) {
                 holes.toArray();
-                polygons.add(geomFactory.createPolygon(outerPoly, holes.toArray(new LinearRing[holes.size()])));
+                polygons.add(geomFactory.createPolygon(outerPoly, holes.toArray(new LinearRing[0])));
             }
 
             return polygons;
@@ -569,7 +569,7 @@ public final class MvtReader {
 
                 if (outerPoly == null || (outerArea < 0 == area < 0)) {
                     if (outerPoly != null) {
-                        polygons.add(geomFactory.createPolygon(outerPoly, holes.toArray(new LinearRing[holes.size()])));
+                        polygons.add(geomFactory.createPolygon(outerPoly, holes.toArray(new LinearRing[0])));
                         holes.clear();
                     }
 
@@ -590,7 +590,7 @@ public final class MvtReader {
 
             if (outerPoly != null) {
                 holes.toArray();
-                polygons.add(geomFactory.createPolygon(outerPoly, holes.toArray(new LinearRing[holes.size()])));
+                polygons.add(geomFactory.createPolygon(outerPoly, holes.toArray(new LinearRing[0])));
             }
 
             return polygons;

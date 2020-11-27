@@ -1,45 +1,34 @@
 package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import net.osmand.AndroidUtils;
-import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.download.ReloadIndexesTask;
+import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -54,7 +43,6 @@ import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
-import net.osmand.plus.settings.backend.backup.SearchHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.HistoryMarkersSettingsItem;
 import net.osmand.plus.settings.backend.backup.MapSourcesSettingsItem;
 import net.osmand.plus.settings.backend.backup.MarkersSettingsItem;
@@ -63,12 +51,11 @@ import net.osmand.plus.settings.backend.backup.OsmNotesSettingsItem;
 import net.osmand.plus.settings.backend.backup.PoiUiFiltersSettingsItem;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.QuickActionsSettingsItem;
+import net.osmand.plus.settings.backend.backup.SearchHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -76,29 +63,25 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class ImportSettingsFragment extends BaseOsmAndFragment {
+public class ImportSettingsFragment extends BaseSettingsListFragment {
 
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
+
 	private static final String DUPLICATES_START_TIME_KEY = "duplicates_start_time";
 	private static final long MIN_DELAY_TIME_MS = 500;
-	static final String IMPORT_SETTINGS_TAG = "import_settings_tag";
-	private OsmandApplication app;
-	private ExportImportSettingsAdapter adapter;
-	private ExpandableListView expandableList;
-	private TextView description;
-	private List<SettingsItem> settingsItems;
+
 	private File file;
-	private boolean allSelected;
-	private boolean nightMode;
-	private LinearLayout buttonsContainer;
-	private ProgressBar progressBar;
-	private CollapsingToolbarLayout toolbarLayout;
 	private SettingsHelper settingsHelper;
+	private List<SettingsItem> settingsItems;
+
+	private TextView description;
+	private ProgressBar progressBar;
+	private LinearLayout buttonsContainer;
+	private CollapsingToolbarLayout toolbarLayout;
+
 	private long duplicateStartTime;
 
 	public static void showInstance(@NonNull FragmentManager fm, @NonNull List<SettingsItem> settingsItems, @NonNull File file) {
@@ -107,7 +90,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 		fragment.setFile(file);
 		fm.beginTransaction().
 				replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(IMPORT_SETTINGS_TAG)
+				.addToBackStack(SETTINGS_LIST_TAG)
 				.commitAllowingStateLoss();
 	}
 
@@ -117,69 +100,9 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 		if (savedInstanceState != null) {
 			duplicateStartTime = savedInstanceState.getLong(DUPLICATES_START_TIME_KEY);
 		}
-		app = requireMyApplication();
+		exportMode = false;
 		settingsHelper = app.getSettingsHelper();
-		nightMode = !app.getSettings().isLightContent();
-		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				showExitDialog();
-			}
-		});
-	}
 
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(app, nightMode);
-		View root = inflater.inflate(R.layout.fragment_import, container, false);
-		Toolbar toolbar = root.findViewById(R.id.toolbar);
-		TextViewEx continueBtn = root.findViewById(R.id.continue_button);
-		toolbarLayout = root.findViewById(R.id.toolbar_layout);
-		expandableList = root.findViewById(R.id.list);
-		buttonsContainer = root.findViewById(R.id.buttons_container);
-		progressBar = root.findViewById(R.id.progress_bar);
-		setupToolbar(toolbar);
-		ViewCompat.setNestedScrollingEnabled(expandableList, true);
-		View header = inflater.inflate(R.layout.list_item_description_header, null);
-		description = header.findViewById(R.id.description);
-		description.setText(R.string.select_data_to_import);
-		expandableList.addHeaderView(header);
-		continueBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (adapter.getData().isEmpty()) {
-					app.showShortToastMessage(getString(R.string.shared_string_nothing_selected));
-				} else {
-					importItems();
-				}
-			}
-		});
-		if (Build.VERSION.SDK_INT >= 21) {
-			AndroidUtils.addStatusBarPadding21v(app, root);
-		}
-		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
-		treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				if (buttonsContainer != null) {
-					ViewTreeObserver vts = buttonsContainer.getViewTreeObserver();
-					int height = buttonsContainer.getMeasuredHeight();
-					expandableList.setPadding(0, 0, 0, height);
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						vts.removeOnGlobalLayoutListener(this);
-					} else {
-						vts.removeGlobalOnLayoutListener(this);
-					}
-				}
-			}
-		});
-		return root;
-	}
-
-	@Override
-	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
 		ImportAsyncTask importTask = settingsHelper.getImportTask();
 		if (importTask != null) {
 			if (settingsItems == null) {
@@ -198,27 +121,24 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 				}
 			}
 		}
-
-		adapter = new ExportImportSettingsAdapter(app, nightMode, true);
-		Map<ExportSettingsType, List<?>> itemsMap = new HashMap<>();
 		if (settingsItems != null) {
-			itemsMap = SettingsHelper.getSettingsToOperate(settingsItems, false);
-			adapter.updateSettingsList(itemsMap);
+			dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false);
 		}
-		expandableList.setAdapter(adapter);
-		toolbarLayout.setTitle(getString(R.string.shared_string_import));
+	}
 
-		ImportType importTaskType = settingsHelper.getImportTaskType();
-		if (importTaskType == ImportType.CHECK_DUPLICATES && !settingsHelper.isImportDone()) {
-			updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
-		} else if (importTaskType == ImportType.IMPORT) {
-			updateUi(R.string.shared_string_importing, R.string.importing_from);
-		} else {
-			toolbarLayout.setTitle(getString(R.string.shared_string_import));
-		}
-		if (itemsMap.size() == 1 && itemsMap.containsKey(ExportSettingsType.PROFILE)) {
-			expandableList.expandGroup(0);
-		}
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+
+		toolbarLayout = view.findViewById(R.id.toolbar_layout);
+		buttonsContainer = view.findViewById(R.id.buttons_container);
+		progressBar = view.findViewById(R.id.progress_bar);
+
+		description = header.findViewById(R.id.description);
+		description.setText(R.string.select_data_to_import);
+
+		return view;
 	}
 
 	@Override
@@ -228,11 +148,11 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).closeDrawer();
+	protected void onContinueButtonClickAction() {
+		if (adapter.getData().isEmpty()) {
+			app.showShortToastMessage(getString(R.string.shared_string_nothing_selected));
+		} else {
+			importItems();
 		}
 	}
 
@@ -251,12 +171,12 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 	}
 
 	private void importItems() {
-		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
 		List<SettingsItem> selectedItems = getSettingsItemsFromData(adapter.getData());
 		if (file != null && settingsItems != null) {
 			duplicateStartTime = System.currentTimeMillis();
 			settingsHelper.checkDuplicates(file, settingsItems, selectedItems, getDuplicatesListener());
 		}
+		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
 	}
 
 	public SettingsHelper.SettingsImportListener getImportListener() {
@@ -281,34 +201,25 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 			if (item instanceof FileSettingsItem && ((FileSettingsItem) item).getSubtype().isMap()) {
 				Activity activity = getActivity();
 				if (activity instanceof MapActivity) {
-					new ReloadIndexesTack((MapActivity) activity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					final WeakReference<MapActivity> mapActivityRef = new WeakReference<>((MapActivity) activity);
+					ReloadIndexesListener listener = new ReloadIndexesListener() {
+						@Override
+						public void reloadIndexesStarted() {
+
+						}
+
+						@Override
+						public void reloadIndexesFinished(List<String> warnings) {
+							MapActivity mapActivity = mapActivityRef.get();
+							if (mapActivity != null) {
+								mapActivity.refreshMap();
+							}
+						}
+					};
+					ReloadIndexesTask reloadIndexesTask = new ReloadIndexesTask(app, listener);
+					reloadIndexesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
 				break;
-			}
-		}
-	}
-
-	private static class ReloadIndexesTack extends AsyncTask<Void, Void, Void> {
-
-		private final WeakReference<MapActivity> mapActivityRef;
-		private final OsmandApplication app;
-
-		ReloadIndexesTack(@NonNull MapActivity mapActivity) {
-			this.mapActivityRef = new WeakReference<>(mapActivity);
-			this.app = mapActivity.getMyApplication();
-		}
-
-		@Override
-		protected Void doInBackground(Void[] params) {
-			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			MapActivity mapActivity = mapActivityRef.get();
-			if (mapActivity != null) {
-				mapActivity.refreshMap();
 			}
 		}
 	}
@@ -344,13 +255,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 			} else if (fm != null && !isStateSaved()) {
 				ImportDuplicatesFragment.showInstance(fm, duplicates, items, file, this);
 			}
-		}
-	}
-
-	private void dismissFragment() {
-		FragmentManager fm = getFragmentManager();
-		if (fm != null && !fm.isStateSaved()) {
-			getFragmentManager().popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -519,39 +423,6 @@ public class ImportSettingsFragment extends BaseOsmAndFragment {
 			settingsItems.add(new SearchHistorySettingsItem(app, baseItem, historyEntries));
 		}
 		return settingsItems;
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
-	}
-
-	public void showExitDialog() {
-		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
-		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
-		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
-		dismissDialog.setMessage(getString(R.string.exit_without_saving));
-		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
-		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dismissFragment();
-			}
-		});
-		dismissDialog.show();
-	}
-
-	private void setupToolbar(Toolbar toolbar) {
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, nightMode
-				? getResources().getColor(R.color.active_buttons_and_links_text_dark)
-				: getResources().getColor(R.color.active_buttons_and_links_text_light)));
-		toolbar.setNavigationContentDescription(R.string.shared_string_close);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showExitDialog();
-			}
-		});
 	}
 
 	public void setFile(File file) {

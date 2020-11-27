@@ -376,18 +376,16 @@ public class SearchHistoryHelper {
 			SQLiteConnection db = openConnection(false);
 			if (db != null) {
 				try {
-					removeQuery(e.getSerializedName(), db);
+					db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME + " WHERE " +
+									HISTORY_COL_NAME + " = ? AND " +
+									HISTORY_COL_LAT + " = ? AND " + HISTORY_COL_LON + " = ?",
+							new Object[] {e.getSerializedName(), e.getLat(), e.getLon()});
 				} finally {
 					db.close();
 				}
 				return true;
 			}
 			return false;
-		}
-
-		private void removeQuery(String name, SQLiteConnection db) {
-			db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + " = ?",
-					new Object[]{name});
 		}
 
 		public boolean removeAll() {
@@ -411,9 +409,10 @@ public class SearchHistoryHelper {
 							"UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TIME + "= ? " +
 									", " + HISTORY_COL_FREQ_INTERVALS + " = ? " +
 									", " + HISTORY_COL_FREQ_VALUES + "= ? WHERE " +
-									HISTORY_COL_NAME + " = ?",
-							new Object[]{e.getLastAccessTime(), e.getIntervals(), e.getIntervalsValues(),
-									e.getSerializedName()});
+									HISTORY_COL_NAME + " = ? AND " +
+									HISTORY_COL_LAT + " = ? AND " + HISTORY_COL_LON + " = ?",
+							new Object[] {e.getLastAccessTime(), e.getIntervals(), e.getIntervalsValues(),
+									e.getSerializedName(), e.getLat(), e.getLon()});
 				} finally {
 					db.close();
 				}

@@ -80,11 +80,12 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.helpers.enums.TracksSortByMode;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -112,7 +113,7 @@ import static net.osmand.util.Algorithms.objectEquals;
 import static net.osmand.util.Algorithms.removeAllFiles;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
-	FavoritesFragmentStateHolder {
+		FavoritesFragmentStateHolder, OsmAuthorizationListener {
 
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 	public static final int SEARCH_ID = -1;
@@ -553,7 +554,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	public void doAction(int actionResId) {
 		if (actionResId == R.string.shared_string_delete) {
 			operationTask = new DeleteGpxTask();
-			operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, selectedItems.toArray(new GpxInfo[selectedItems.size()]));
+			operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, selectedItems.toArray(new GpxInfo[0]));
 		} else {
 			operationTask = null;
 		}
@@ -922,6 +923,18 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	public void restoreState(Bundle bundle) {
 	}
 
+	@Override
+	public void authorizationCompleted() {
+		Bundle bundle = new Bundle();
+		bundle.putInt(TAB_ID, GPX_TAB);
+
+		Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+		intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
+		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+		app.startActivity(intent);
+	}
+
 	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, List<GpxInfo>> {
 
 		private List<GpxInfo> result;
@@ -996,7 +1009,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				List<GpxInfo> progress = new ArrayList<>();
 				loadGPXFolder(mapPath, result, loadTask, progress, "");
 				if (!progress.isEmpty()) {
-					loadTask.loadFile(progress.toArray(new GpxInfo[progress.size()]));
+					loadTask.loadFile(progress.toArray(new GpxInfo[0]));
 				}
 			}
 		}
@@ -1016,7 +1029,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					result.add(info);
 					progress.add(info);
 					if (progress.size() > 7) {
-						loadTask.loadFile(progress.toArray(new GpxInfo[progress.size()]));
+						loadTask.loadFile(progress.toArray(new GpxInfo[0]));
 						progress.clear();
 					}
 				}
@@ -1462,7 +1475,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					list.add(GPXDataSetType.SLOPE);
 				}
 				if (list.size() > 0) {
-					gpxItem.chartTypes = list.toArray(new GPXDataSetType[list.size()]);
+					gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
 				}
 				final OsmandSettings settings = app.getSettings();
 				settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,

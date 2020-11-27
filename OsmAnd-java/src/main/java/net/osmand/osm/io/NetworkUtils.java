@@ -56,6 +56,55 @@ public class NetworkUtils {
 			return e.getMessage();
 		}
 	}
+
+	public static String sendPostDataRequest(String urlText, InputStream data) {
+		try {
+			log.info("POST : " + urlText);
+			HttpURLConnection conn = getHttpURLConnection(urlText);
+			conn.setDoInput(true);
+			conn.setDoOutput(false);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Accept", "*/*");
+			conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
+			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
+			OutputStream ous = conn.getOutputStream();
+			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
+			ous.write(("content-disposition: form-data; name=\"" + "file" + "\"; filename=\"" + "image1" + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+			ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
+			Algorithms.streamCopy(data, ous);
+			ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+			ous.flush();
+			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
+			if (conn.getResponseCode() != 200) {
+				return null;
+			}
+			StringBuilder responseBody = new StringBuilder();
+			InputStream is = conn.getInputStream();
+			responseBody.setLength(0);
+			if (is != null) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8")); //$NON-NLS-1$
+				String s;
+				boolean first = true;
+				while ((s = in.readLine()) != null) {
+					if (first) {
+						first = false;
+					} else {
+						responseBody.append("\n"); //$NON-NLS-1$
+					}
+					responseBody.append(s);
+				}
+				is.close();
+			}
+			Algorithms.closeStream(is);
+			Algorithms.closeStream(data);
+			Algorithms.closeStream(ous);
+			return responseBody.toString();
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+			return e.getMessage();
+		}
+	}
+
 	private static final String BOUNDARY = "CowMooCowMooCowCowCow"; //$NON-NLS-1$
 	public static String uploadFile(String urlText, File fileToUpload, String userNamePassword,
 									OsmOAuthAuthorizationClient client,
@@ -63,8 +112,8 @@ public class NetworkUtils {
 		URL url;
 		try {
 			boolean firstPrm =!urlText.contains("?");
-			for (String key : additionalMapData.keySet()) {
-				urlText += (firstPrm ? "?" : "&") + key + "=" + URLEncoder.encode(additionalMapData.get(key), "UTF-8");
+			for (Map.Entry<String, String> entry : additionalMapData.entrySet()) {
+				urlText += (firstPrm ? "?" : "&") + entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), "UTF-8");
 				firstPrm = false;
 			}
 			log.info("Start uploading file to " + urlText + " " +fileToUpload.getName());

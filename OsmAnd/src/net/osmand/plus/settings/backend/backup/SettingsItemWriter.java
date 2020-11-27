@@ -22,9 +22,13 @@ public abstract class SettingsItemWriter<T extends SettingsItem> {
 	public abstract boolean writeToStream(@NonNull OutputStream outputStream) throws IOException;
 
 	public void writeEntry(String fileName, @NonNull ZipOutputStream zos) throws IOException {
-		ZipEntry entry = new ZipEntry(fileName);
+		ZipEntry entry = createNewEntry(fileName);
 		zos.putNextEntry(entry);
 		writeToStream(zos);
 		zos.closeEntry();
+	}
+
+	public ZipEntry createNewEntry(String fileName) {
+		return new ZipEntry(fileName);
 	}
 }

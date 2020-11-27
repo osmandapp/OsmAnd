@@ -208,11 +208,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				Map<String, GPXFile> data = collectRecordedData();
 
 				// save file
-				for (final String f : data.keySet()) {
+				for (final Map.Entry<String, GPXFile> entry : data.entrySet()) {
+					final String f = entry.getKey();
+					GPXFile gpx = entry.getValue();
 					log.debug("Filename: " + f);
 					File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
-					if (!data.get(f).isEmpty()) {
-						WptPt pt = data.get(f).findPointToShow();
+					if (!gpx.isEmpty()) {
+						WptPt pt = gpx.findPointToShow();
 						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
 						Integer trackStorageDirectory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
 						if (!OsmandSettings.REC_DIRECTORY.equals(trackStorageDirectory)) {
@@ -235,13 +237,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						}
 					}
 
-					Exception warn = GPXUtilities.writeGpxFile(fout, data.get(f));
+					Exception warn = GPXUtilities.writeGpxFile(fout, gpx);
 					if (warn != null) {
 						warnings.add(warn.getMessage());
 						return new SaveGpxResult(warnings, new ArrayList<String>());
 					}
 
-					GPXFile gpx = data.get(f);
 					GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
 					GpxDataItem item = new GpxDataItem(fout, analysis);
 					ctx.getGpxDbHelper().add(item);

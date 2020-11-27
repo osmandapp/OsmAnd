@@ -513,10 +513,9 @@ public class ImportHelper {
 
 	private File getFileToSave(final String fileName, final File importDir, final WptPt pt) {
 		final StringBuilder builder = new StringBuilder(fileName);
-		if ("".equals(fileName)) {
+		if (Algorithms.isEmpty(fileName)) {
 			builder.append("import_").append(new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time))).append(GPX_FILE_EXT); //$NON-NLS-1$
-		}
-		if (fileName.endsWith(KML_SUFFIX)) {
+		} else if (fileName.endsWith(KML_SUFFIX)) {
 			builder.replace(builder.length() - KML_SUFFIX.length(), builder.length(), GPX_FILE_EXT);
 		} else if (fileName.endsWith(KMZ_SUFFIX)) {
 			builder.replace(builder.length() - KMZ_SUFFIX.length(), builder.length(), GPX_FILE_EXT);

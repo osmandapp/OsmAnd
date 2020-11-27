@@ -1692,7 +1692,7 @@
 \n 
 \n OsmAnd utvikles aktivt, og prosjektet vårt og dets videre framdrift avhenger av finansielle bidrag for å drive utviklingen og testingen av nye funksjoner. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på https://osmand.net.</string>
     <string name="upload_osm_note_description">Last opp ditt OSM-notat anonymt eller ved å bruke din profil hos OpenStreetMap.org.</string>
-    <string name="gpx_no_tracks_title">Du har ingen sporfiler ennå</string>
+    <string name="gpx_no_tracks_title">Du har ingen sporfiler enda</string>
     <string name="gpx_no_tracks_title_folder">Du kan også legge til sporfiler i mappen</string>
     <string name="gpx_add_track">Legg til flere…</string>
     <string name="trip_rec_notification_settings">Skru på hurtigopptak</string>
@@ -1792,7 +1792,7 @@
     <string name="live_monitoring_start">Start nettbasert sporing</string>
     <string name="live_monitoring_stop">Stopp nettbasert sporing</string>
     <string name="select_index_file_to_download">Fant ikke noe. Hvis du ikke finner din region, kan du lage den selv (se https://osmand.net).</string>
-    <string name="none_selected_gpx">Spesifiser først en GPX-fil med et langt trykk.</string>
+    <string name="none_selected_gpx">Spesifiser en GPX-fil med et langt trykk først.</string>
     <string name="gpx_split_interval">Oppdelingsintervall</string>
     <string name="gpx_info_asc_altitude">Nedstigning/stigning: %1$s</string>
     <string name="gpx_timespan">Tidsrom: %1$s</string>
@@ -3887,7 +3887,7 @@
     <string name="icon_group_emergency">Nødsfall</string>
     <string name="icon_group_travel">Reise</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Du må legge til minst to punkter.</string>
-    <string name="gpx_upload_trackable_visibility_descr">Sporbar betyr at sporet ikke vil vises i offentlige lister, men punkter fra det vil fremdeles ikke være tilgjengelige gjennom det offentlige GPS-API-et med tidsstempel. Andre brukere vil kun ha mulighet til å laste ned behandlede punkter fra ditt spor, noe som ikke kan tilknyttes deg direkte.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Sporbar\" betyr at sporet ikke vil vises i offentlige lister, men bearbeidede sporpunkter med tidsstempel (som ikke direkte kan knyttes til deg) vil være tilgjengelig gjennom nedlastinger fra det offentlige GPS-API-et.</string>
     <string name="sign_in_with_open_street_map">Logg inn med OpenStreetMap</string>
     <string name="use_login_password">Bruk innlogging og passord</string>
     <string name="login_account">Konto</string>
@@ -3919,4 +3919,8 @@
     <string name="shared_string_search_history">Søkehistorikk</string>
     <string name="app_mode_kayak">Kajakk</string>
     <string name="app_mode_motorboat">Motorbåt</string>
+    <string name="select_picture">Velg bilde</string>
+    <string name="add_to_mapillary">Legg til i Mapillary</string>
+    <string name="add_to_opr">Legg til i OpenPlaceReviews</string>
+    <string name="use_dev_url">Bruk dev.openstreetmap.org</string>
 </resources>

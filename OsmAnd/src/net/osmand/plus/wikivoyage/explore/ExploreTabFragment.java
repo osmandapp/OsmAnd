@@ -342,7 +342,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 				res.add(item);
 			}
 		}
-		return res.toArray(new IndexItem[res.size()]);
+		return res.toArray(new IndexItem[0]);
 	}
 
 	@NonNull

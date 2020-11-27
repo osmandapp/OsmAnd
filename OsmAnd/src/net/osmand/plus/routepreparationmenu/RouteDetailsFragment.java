@@ -27,8 +27,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.github.mikephil.charting.charts.LineChart;
-
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -41,7 +39,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.GeocodingLookupService;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -82,8 +79,8 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
-import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
+import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -371,7 +368,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	protected void calculateLayout(View view, boolean initLayout) {
 		super.calculateLayout(view, initLayout);
 		if (!initLayout && getCurrentMenuState() != MenuState.FULL_SCREEN) {
-			refreshMapCallback.refreshMap(false);
+			if (refreshMapCallback != null) {
+				refreshMapCallback.refreshMap(false);
+			}
 		}
 	}
 

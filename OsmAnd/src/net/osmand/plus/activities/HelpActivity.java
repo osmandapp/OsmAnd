@@ -176,7 +176,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 				"feature_articles/osmand-3-8-released.html"));
 
 		String releasedate = "";
-		if (!this.getString(R.string.app_edition).equals("")) {
+		if (!this.getString(R.string.app_edition).isEmpty()) {
 			releasedate = ", " + this.getString(R.string.shared_string_release).toLowerCase() + ": " + this.getString(R.string.app_edition);
 		}
 		String version = Version.getFullVersion(getMyApplication()) + releasedate;

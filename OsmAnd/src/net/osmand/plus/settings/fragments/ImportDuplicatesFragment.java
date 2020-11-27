@@ -33,13 +33,12 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportAsyncTask;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
@@ -52,7 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
-import static net.osmand.plus.settings.fragments.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
+import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
 
 
 public class ImportDuplicatesFragment extends BaseOsmAndFragment {
@@ -72,7 +71,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 	private SettingsHelper settingsHelper;
 
 	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
-	                                List<SettingsItem> settingsItems, File file, Fragment targetFragment) {
+									List<SettingsItem> settingsItems, File file, Fragment targetFragment) {
 		ImportDuplicatesFragment fragment = new ImportDuplicatesFragment();
 		fragment.setTargetFragment(targetFragment, 0);
 		fragment.setDuplicatesList(duplicatesList);
@@ -80,7 +79,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		fragment.setFile(file);
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(IMPORT_SETTINGS_TAG)
+				.addToBackStack(SETTINGS_LIST_TAG)
 				.commitAllowingStateLoss();
 	}
 
@@ -203,8 +202,8 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		List<File> ttsVoiceFilesList = new ArrayList<>();
 		List<File> voiceFilesList = new ArrayList<>();
 		List<File> mapFilesList = new ArrayList<>();
-		List<MapMarkersGroup> markersGroups = new ArrayList<>();
-		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
+		List<MapMarker> mapMarkers = new ArrayList<>();
+		List<MapMarker> mapMarkersGroups = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
@@ -242,12 +241,12 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 				osmNotesPointList.add((OsmNotesPoint) object);
 			} else if (object instanceof OpenstreetmapPoint) {
 				osmEditsPointList.add((OpenstreetmapPoint) object);
-			} else if (object instanceof MapMarkersGroup) {
-				MapMarkersGroup markersGroup = (MapMarkersGroup) object;
-				if (ExportSettingsType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
-					markersGroups.add(markersGroup);
-				} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
-					markersHistoryGroups.add(markersGroup);
+			} else if (object instanceof MapMarker) {
+				MapMarker mapMarker = (MapMarker) object;
+				if (mapMarker.history) {
+					mapMarkers.add(mapMarker);
+				} else {
+					mapMarkersGroups.add(mapMarker);
 				}
 			} else if (object instanceof HistoryEntry) {
 				historyEntries.add((HistoryEntry) object);
@@ -313,17 +312,13 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment {
 			duplicates.add(getString(R.string.local_indexes_cat_voice));
 			duplicates.addAll(voiceFilesList);
 		}
-		if (!markersGroups.isEmpty()) {
+		if (!mapMarkers.isEmpty()) {
 			duplicates.add(getString(R.string.map_markers));
-			duplicates.addAll(markersGroups);
+			duplicates.addAll(mapMarkers);
 		}
-		if (!markersHistoryGroups.isEmpty()) {
+		if (!mapMarkersGroups.isEmpty()) {
 			duplicates.add(getString(R.string.markers_history));
-			duplicates.addAll(markersHistoryGroups);
-		}
-		if (!historyEntries.isEmpty()) {
-			duplicates.add(getString(R.string.shared_string_search_history));
-			duplicates.addAll(historyEntries);
+			duplicates.addAll(mapMarkersGroups);
 		}
 		return duplicates;
 	}

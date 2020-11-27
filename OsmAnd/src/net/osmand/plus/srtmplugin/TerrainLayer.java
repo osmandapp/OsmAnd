@@ -114,12 +114,13 @@ public class TerrainLayer extends MapTileLayer {
 			}
 
 			private void indexNonCachedResources(Map<String, Long> fileModified, Map<String, SQLiteTileSource> rs) {
-				for(String filename : fileModified.keySet()) {
+				for(Map.Entry<String, Long> entry : fileModified.entrySet()) {
+					String filename = entry.getKey();
 					try {
 						log.info("Indexing " + type + " file " + filename);
 						ContentValues cv = new ContentValues();
 						cv.put("filename", filename);
-						cv.put("date_modified", fileModified.get(filename));
+						cv.put("date_modified", entry.getValue());
 						SQLiteTileSource ts = rs.get(filename);
 						QuadRect rt = ts.getRectBoundary(ZOOM_BOUNDARY, 1);
 						if (rt != null) {

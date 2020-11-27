@@ -753,7 +753,7 @@
     <string name="use_fluorescent_overlays">Sobreposicións fluorescentes</string>
     <string name="use_fluorescent_overlays_descr">Empregar cores fluorescentes para amosar as pistas e rutas.</string>
     <string name="offline_edition">Edición sen conexión</string>
-    <string name="offline_edition_descr">Empregar sempre a edición sen conexión.</string>
+    <string name="offline_edition_descr">Se se activa a edición sen conexión, as modificacións serán gardadas de xeito local primeiro e serán cargadas por solicitude, do contrario as modificacións serán cargadas de xeito inmediato.</string>
     <string name="update_poi_does_not_change_indexes">As modificacións nos puntos de interese (PDI) dentro da aplicación non afectan ós ficheiros dos mapas baixados, pois esas modificacións gárdanse coma un ficheiro no teu dispositivo.</string>
     <string name="local_openstreetmap_uploading">Estase a subir…</string>
     <string name="local_openstreetmap_were_uploaded">{0} PDI/notas subidos</string>
@@ -2063,7 +2063,7 @@ Lon %2$s</string>
     <string name="number_of_contributors">Número de colaboradores</string>
     <string name="number_of_edits">Número de edicións</string>
     <string name="reports_for">Informe para</string>
-    <string name="file_name_containes_illegal_char">O nome do ficheiro contén un carácter incorrecto</string>
+    <string name="file_name_containes_illegal_char">Caráter ilegal no nome do ficheiro</string>
     <string name="configure_screen_quick_action">Acción rápida</string>
     <string name="quick_action_item_action">Acción %d</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
@@ -2365,7 +2365,7 @@ Lon %2$s</string>
     <string name="last_intermediate_dest_description">Engade unha parada intermedia</string>
     <string name="first_intermediate_dest_description">Engade a primeira parada do percorrido</string>
     <string name="subsequent_dest_description">Move o destino cara enriba e crea un novo</string>
-    <string name="switch_osm_notes_visibility_desc">Amosar/agochar as notas do OSM no mapa.</string>
+    <string name="switch_osm_notes_visibility_desc">Amosar ou agochar as notas do OSM no mapa.</string>
     <string name="gpx_file_desc">GPX - axeitado para exportar a JOSM ou outros editores do OSM.</string>
     <string name="osc_file_desc">OSC - axeitado para exportar ó OSM.</string>
     <string name="shared_string_gpx_file">Ficheiro GPX</string>
@@ -3115,9 +3115,9 @@ Lon %2$s</string>
     <string name="zoom_by_wunderlinq_descr">Muda o achegamento do mapa desprazando a roda cara arriba e abaixo. A tecla «Esc» volta á aplicación WunderLINQ.</string>
     <string name="zoom_by_wunderlinq">Controlar co WunderLINQ</string>
     <string name="quick_action_need_to_add_item_to_list">Engadir polo menos un elemento á listaxe nos axustes de \'Acción rápida\'</string>
-    <string name="routing_attr_piste_type_downhill_name">Esquí alpino/de descendemento</string>
+    <string name="routing_attr_piste_type_downhill_name">Esquí alpino e de descendemento</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas de esquí alpino ou de descendemento e acceso a remontes mecánicos.</string>
-    <string name="routing_attr_piste_type_nordic_name">Esquí de travesía/nórdico</string>
+    <string name="routing_attr_piste_type_nordic_name">Esquí de travesía e nórdico</string>
     <string name="routing_attr_piste_type_nordic_description">Pistas para esquí nórdico ou de travesía.</string>
     <string name="routing_attr_piste_type_skitour_name">Esquí de travesía</string>
     <string name="routing_attr_piste_type_skitour_description">Roteiros para esquí de travesía.</string>
@@ -3385,7 +3385,7 @@ Lon %2$s</string>
     <string name="swap_two_places">Trocar %1$s e %2$s</string>
     <string name="route_start_point">Punto de comezo</string>
     <string name="track_saved">Pista gardada</string>
-    <string name="empty_filename">O nome do ficheiro está baleiro</string>
+    <string name="empty_filename">Nome do ficheiro baleiro</string>
     <string name="shared_string_revert">Reverter</string>
     <string name="quick_action_directions_from_desc">Un botón para facer que a pantalla se centre no punto de partida. Despois define o destino ou activa o cálculo da ruta.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Amosar os nós da rede de sendas ciclistas</string>
@@ -3450,7 +3450,7 @@ Lon %2$s</string>
     <string name="login_and_pass">Nome de usuario e contrasinal</string>
     <string name="plugin_global_prefs_info">Os axustes deste complemento son globais e aplícanse a todos os perfís</string>
     <string name="osm_editing">Edición do OSM</string>
-    <string name="osm_edits_view_descr">Podes ollar todas as túas edición non subidas ou erros do OSM en %1$s. Os puntos subidos non se amosan no OsmAnd.</string>
+    <string name="osm_edits_view_descr">Podes ollar todas as túas edicións aínda non subidas ou erros do OSM en %1$s. Os puntos subidos non se amosan no OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">A icona amósase mentres se navega ou se move pola pantalla.</string>
     <string name="select_map_icon_descr">A icona amósase en asueto.</string>
@@ -3647,7 +3647,7 @@ Lon %2$s</string>
     <string name="recalculate_route_distance_promo">A ruta será recalculada se a distancia á localización actual é maior que o valor escollido.</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pendentes</string>
-    <string name="quick_action_show_hide_terrain">Amosar / agochar terreo</string>
+    <string name="quick_action_show_hide_terrain">Amosar ou agochar terreo</string>
     <string name="quick_action_terrain_hide">Agochar terreo</string>
     <string name="quick_action_terrain_show">Amosar terreo</string>
     <string name="quick_action_terrain_descr">Un botón que amosa ou agocha a capa do terreo no mapa.</string>
@@ -3716,11 +3716,11 @@ Lon %2$s</string>
     <string name="additional_actions_descr">Podes acceder a estas accións premendo no botón “%1$s”.</string>
     <string name="quick_action_transport_hide">Agochar transporte público</string>
     <string name="quick_action_transport_show">Amosar transporte público</string>
-    <string name="quick_action_show_hide_transport">Amosar/agochar transporte público</string>
+    <string name="quick_action_show_hide_transport">Amosar ou agochar transporte público</string>
     <string name="quick_action_transport_descr">Botón que amosa ou agocha o transporte público no mapa.</string>
-    <string name="create_edit_poi">Crear / Editar PDI</string>
+    <string name="create_edit_poi">Crear ou editar PDI</string>
     <string name="parking_positions">Posicións de aparcamento</string>
-    <string name="add_edit_favorite">Engadir / Editar favorito</string>
+    <string name="add_edit_favorite">Engadir ou editar favorito</string>
     <string name="reset_deafult_order">Restabelecer a orde dos elementos predefinidos</string>
     <string name="back_to_editing">Voltar á edición</string>
     <string name="quick_action_switch_profile_descr">O botón de acción troca entre os perfís escollidos.</string>
@@ -3854,7 +3854,7 @@ Lon %2$s</string>
     <string name="shared_string_redo">Refacer</string>
     <string name="release_3_8">• Actualizouse a función \"Planificar ruta\": permite empregar diferentes tipos de navegación por segmento e o engadido de pistas
 \n
-\n • Novo menú coa aparencia das pistas: escoller a cor, o grosor, amosar as frechas de dirección e as iconas de comezo/final.
+\n • Novo menú coa aparencia das pistas: escoller a cor, o grosor, amosar as frechas de dirección e as iconas de inicio e final.
 \n
 \n • Melloras na visibilidade dos nós de bicicleta.
 \n
@@ -3924,11 +3924,11 @@ Lon %2$s</string>
     <string name="number_of_gpx_files_selected_pattern">%s ficheiros de pista seleccionados</string>
     <string name="monitoring_control_start">Gravar</string>
     <string name="disable_recording_once_app_killed_descrp">A gravación da pista deterase ó pechar a aplicación (mediante aplicacións recentes). (A indicación de fondo do OsmAnd, desaparecerá da barra de notificacións do Android.)</string>
-    <string name="save_global_track_interval_descr">Especifica o intre de gravación xeral para pistas (habilitado a través do trebello de gravación no mapa).</string>
+    <string name="save_global_track_interval_descr">Especifica o intre de gravación xeral para pistas (habilitado a través do trebello de \'Gravación no mapa\').</string>
     <string name="sort_last_modified">Última modificación</string>
     <string name="sort_name_descending">Nome: Z – A</string>
     <string name="sort_name_ascending">Nome: A – Z</string>
-    <string name="start_finish_icons">Iconas de comezo/final</string>
+    <string name="start_finish_icons">Iconas de inicio e fin</string>
     <string name="contour_lines_thanks">Grazas por mercar \'Curvas de nivel\'</string>
     <string name="osm_live_payment_desc_hw">Subscrición cobrada por período escollido. Cancélaa na AppGallery en calquera intre.</string>
     <string name="osm_live_payment_subscription_management_hw">O pagamento será cargado na túa conta da AppGallery no mesmo intre da confirmación da compra.
@@ -3946,7 +3946,7 @@ Lon %2$s</string>
     <string name="use_native_pt">Desenvolvemento do transporte público nativo</string>
     <string name="use_native_pt_desc">Activar cálculo de enrutamento de transporte público do Java (seguro)</string>
     <string name="what_is_new">Novidades</string>
-    <string name="perform_oauth_authorization_description">Inicia sesión co OAuth para empregar as funcións de edición do OSM</string>
+    <string name="perform_oauth_authorization_description">Inicia a sesión co OAuth para empregar as funcións de edición do OSM</string>
     <string name="perform_oauth_authorization">Entrar polo OAuth</string>
     <string name="clear_osm_token">Limpar token do OpenStreetMap OAuth</string>
     <string name="osm_edit_logout_success">Sesión rematada</string>
@@ -3977,20 +3977,50 @@ Lon %2$s</string>
     <string name="subscription_expired_title">A subscrición do OsmAnd Live expirou</string>
     <string name="subscription_paused_title">A subscrición do OsmAnd Live foi detida</string>
     <string name="subscription_on_hold_title">A subscrición do OsmAnd Live está en espera</string>
-    <string name="gpx_upload_public_visibility_descr">Público significa que a pista amosarase de xeito público na túa listaxe de pistas e nas listaxes de pistas GPS públicas. Os datos servidos a través da API non farán referencia á túa páxina de pistas. As marcaxes de tempo dos puntos da pista non estarán dispoñíbeis a través da API pública de GPS, aínda que os puntos ordénanse de xeito cronolóxico. Porén, outros usuarios poderán baixar a pista en bruto da listaxe de pistas públicas e as marcaxes de tempo que contén.</string>
-    <string name="login_open_street_map">Iniciar sesión no OpenStreetMap</string>
-    <string name="login_open_street_map_org">Entrar ó OpenStreetMap.org</string>
-    <string name="sign_in_with_open_street_map">Entrar co OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Precisas iniciar sesión para subir modificacións novas.
+    <string name="gpx_upload_public_visibility_descr">\"Público\" significa que a pista amosarase de xeito público na túa listaxe de pistas e nas listaxes de pistas GPS públicas con marcas de tempo en bruto. Os datos servidos a través da API no farán referencia á túa pácina de pistas. As marcaxes de tempo dos puntos da pista non estarán dispoñíbeis a través da API pública de GPS, aínda que os puntos son ordenados de xeito cronolóxico.</string>
+    <string name="login_open_street_map">Iniciar a sesión ó OpenStreetMap</string>
+    <string name="login_open_street_map_org">Iniciar a sesión ó OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Iniciar a sesión co OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Tes que iniciar sesión para subir as modificacións novas.
 \n
-\nPodes iniciar sesión empregando o método seguro de OAuth ou empregar o nome de usuario e contrasinal.</string>
-    <string name="use_login_password">Empregar nome de usuario e contrasinal</string>
+\nPodes iniciar sesión empregando o método seguro do OAuth ou co nombre de usuario e contrasinal.</string>
+    <string name="use_login_password">Iniciar a sesión co usuario e contrasinal</string>
     <string name="login_account">Conta</string>
     <string name="user_login">Iniciar sesión</string>
     <string name="markers_history">Historial de marcaxes</string>
     <string name="send_files_to_openstreetmap">Enviar ficheiro GPX ó OpenStreetMap</string>
     <string name="enter_text_separated">Insire etiquetas separadas por comas.</string>
-    <string name="gpx_upload_private_visibility_descr">Privado significa que a pista non aparecerá en ningunha listaxe pública, mais o conxunto de puntos seguirá estando dispoñíbel en orde cronolóxica a través da API pública de GPS e sen marcaxes de tempo.</string>
-    <string name="gpx_upload_trackable_visibility_descr">Rastrexábel (ou trazábel) significa que a pista non aparecerá en ningunha listaxe pública pero o conxunto de puntos estarán dispoñíbeis a través da API pública de GPS e con marcaxes de tempo. Outros usuarios só poderán baixar o conxunto de puntos procesados da túa pista que non se poden asociar directamente contigo.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Identificábel significa que a pista amosarase de xeito público na túa listaxe de pistas e na listaxe de pistas GPS públicas, é dicir que outros usuarios poderán baixar a pista en bruto e asociala co teu nome de usuario. Os datos servidos a través da API de conxunto de puntos fará referencia á páxina orixinal da pista. As marcaxes de tempo dos puntos da traza estarán dispoñíbeis a través da API pública de GPS.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privado\" significa que a pista non aparecerá en ningunha listaxe pública, pero o conxunto de puntos seguirá estando dispoñíbel en orde cronolóxica a través da API pública de GPS e sen marcas de tempo.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Rastrexábel\" (ou \"trazábel\") significa que a pista non aparece en ningunha listaxe pública, pero o conxunto de puntos procesados con marcas de tempo (non se poden asociar directamente contigo) estarán dispoñíbeis a través da API pública de GPS.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificábel\" significa que a pista amosarase de xeito público na túa listaxe de pistas e na listaxe de pistas GPS públicas, é dicir que outros usuarios poderán baixar a pista en bruto e asociala co seu nome de usuario. Os datos servidos a través da API de conxunto de puntos fará referencia á páxina orixinal da pista.</string>
+    <string name="osm_edit_close_note">Pechar nota do OSM</string>
+    <string name="osm_edit_comment_note">Comentar nota do OSM</string>
+    <string name="osm_login_descr">Podes iniciar a sesión co método seguro do OAuth ou emprega o nome de usuario e contrasinal.</string>
+    <string name="shared_string_add_photo">Engadir imaxe</string>
+    <string name="register_on_openplacereviews">Rexistrarse no
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">As imaxes son fornecidas polo proxecto de datos abertos do OpenPlaceReviews.org. Para subir a túas imaxes precisas rexistrarte no sitio web.</string>
+    <string name="register_opr_create_new_account">Crear nova conta</string>
+    <string name="register_opr_have_account">Xa teño unha conta</string>
+    <string name="shared_string_search_history">Historial de procura</string>
+    <string name="app_mode_kayak">Caiac</string>
+    <string name="app_mode_motorboat">Lancha a motor</string>
+    <string name="shared_string_resources">Recursos</string>
+    <string name="approximate_file_size">Tamaño aproximado do ficheiro</string>
+    <string name="select_data_to_export">Marca os datos que serán exportados ó ficheiro.</string>
+    <string name="file_size_needed_for_import">Necesario para importar</string>
+    <string name="export_not_enough_space_descr">O teu dispositivo só ten %1$s libre. Por favor, libera algo de espazo ou desmarca algúns elementos a exportar.</string>
+    <string name="export_not_enough_space">Sen espazo dabondo</string>
+    <string name="cannot_upload_image">Non é posíbel subir a imaxe, por favor, téntao novamente máis tarde</string>
+    <string name="select_picture">Seleccionar imaxe</string>
+    <string name="select_groups_for_import">Seleccionar os grupos que serán importados.</string>
+    <string name="select_items_for_import">Seleccionar os elementos que serán importados.</string>
+    <string name="add_to_mapillary">Engadir ó Mapillary</string>
+    <string name="add_to_opr">Engadir ó OpenPlaceReviews</string>
+    <string name="use_dev_url_descr">Mudar á versión para desenvolvedores dev.openstreetmap.org no canto do openstreetmap.org para probar a carga de PDI, notas do OSM e ficheiros GPX.</string>
+    <string name="use_dev_url">Empregar dev.openstreetmap.org</string>
+    <string name="add_photos_descr">O OsmAnd amosa imaxes de diferentes fontes:
+\nOpenPlaceReviews - imaxes POI;
+\nMapillary - maxes a nivel de rúa;
+\nWeb / Wikimedia - imaxes POI especificadas nos datos do OpenStreetMap.</string>
 </resources>

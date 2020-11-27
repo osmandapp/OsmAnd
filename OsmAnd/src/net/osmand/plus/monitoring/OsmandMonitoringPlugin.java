@@ -73,7 +73,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		super(app);
 		liveMonitoringHelper = new LiveMonitoringHelper(app);
 		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
-		ApplicationMode.regWidgetVisibility("monitoring", am.toArray(new ApplicationMode[am.size()]));
+		ApplicationMode.regWidgetVisibility("monitoring", am.toArray(new ApplicationMode[0]));
 		settings = app.getSettings();
 		pluginPreferences.add(settings.SAVE_TRACK_TO_GPX);
 		pluginPreferences.add(settings.SAVE_TRACK_INTERVAL);

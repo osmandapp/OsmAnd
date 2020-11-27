@@ -47,8 +47,6 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		userNameEditText = view.findViewById(R.id.name_edit_text);
 		passwordEditText = view.findViewById(R.id.password_edit_text);
-		userNameEditText.setBackgroundColor(getResolvedColor(R.color.background_field));
-		passwordEditText.setBackgroundColor(getResolvedColor(R.color.background_field));
 
 		String name = app.getSettings().USER_NAME.get();
 		String password = app.getSettings().USER_PASSWORD.get();
@@ -63,11 +61,6 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		TextInputLayout loginBox = view.findViewById(R.id.name_text_box);
 		TextInputLayout passwordBox = view.findViewById(R.id.password_text_box);
-
-		loginBox.setBoxStrokeColor(getResolvedColor(R.color.osmand_orange));
-		loginBox.setHintTextColor(AppCompatResources.getColorStateList(getContext(),R.color.hint_label));
-		passwordBox.setBoxStrokeColor(getResolvedColor(R.color.osmand_orange));
-		passwordBox.setHintTextColor(AppCompatResources.getColorStateList(getContext(),R.color.hint_label));
 
 		passwordBox.setStartIconDrawable(R.drawable.ic_action_lock);
 		loginBox.setStartIconDrawable(R.drawable.ic_action_user_account);

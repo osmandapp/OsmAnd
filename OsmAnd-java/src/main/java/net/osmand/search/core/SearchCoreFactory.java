@@ -602,7 +602,7 @@ public class SearchCoreFactory {
 							sr.localeName = object.getName(phrase.getSettings().getLang(),
 									phrase.getSettings().isTransliterate());
 							if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)
-									&& !nm.matches(object.getAdditionalInfo().values())) {
+									&& !nm.matches(object.getAdditionalInfoValues(false))) {
 								return false;
 							}
 							sr.object = object;
@@ -1059,7 +1059,7 @@ public class SearchCoreFactory {
 					if (!poiAdditionals.isEmpty()) {
 						boolean found = false;
 						for (String add : poiAdditionals) {
-							if(object.getAdditionalInfo().containsKey(add)) {
+							if (object.getAdditionalInfoKeys().contains(add)) {
 								found = true;
 								break;
 							}

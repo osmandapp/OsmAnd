@@ -60,7 +60,7 @@ class SettingsImporter {
 					try {
 						SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, itemsJson);
 						List<SettingsItem> settingsItemList = itemsFactory.getItems();
-						getFilesSize(file, settingsItemList);
+						updateFilesInfo(file, settingsItemList);
 						items.addAll(settingsItemList);
 					} catch (IllegalArgumentException e) {
 						SettingsHelper.LOG.error("Error parsing items: " + itemsJson, e);
@@ -81,7 +81,7 @@ class SettingsImporter {
 		return items;
 	}
 
-	private void getFilesSize(@NonNull File file, List<SettingsItem> settingsItemList) throws IOException {
+	private void updateFilesInfo(@NonNull File file, List<SettingsItem> settingsItemList) throws IOException {
 		ZipFile zipfile = new ZipFile(file.getPath());
 		Enumeration<? extends ZipEntry> zipEnum = zipfile.entries();
 		while (zipEnum.hasMoreElements()) {
@@ -90,7 +90,9 @@ class SettingsImporter {
 			for (SettingsItem settingsItem : settingsItemList) {
 				if (settingsItem instanceof FileSettingsItem
 						&& zipEntry.getName().equals(settingsItem.getFileName())) {
-					((FileSettingsItem) settingsItem).setSize(size);
+					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
+					fileSettingsItem.setSize(size);
+					fileSettingsItem.setLastModified(zipEntry.getTime());
 					break;
 				}
 			}

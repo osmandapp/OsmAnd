@@ -1,0 +1,424 @@
+apply plugin: 'com.android.library'
+
+task printc {
+	configurations.each { if(it.isCanBeResolved())  println it.name }
+}
+
+android {
+	compileSdkVersion 29
+	buildToolsVersion "29.0.3"
+	// compileNdkVersion "android-ndk-r17b"
+
+	defaultConfig {
+		minSdkVersion 15
+		targetSdkVersion 29
+		multiDexEnabled true
+		vectorDrawables.useSupportLibrary = true
+	}
+
+	lintOptions {
+		tasks.lint.enabled = false
+		abortOnError false
+	}
+
+	aaptOptions {
+		// Don't compress any embedded resources
+		noCompress "qz"
+		cruncherEnabled = false
+	}
+
+	dexOptions {
+		javaMaxHeapSize "4g"
+	}
+
+	sourceSets {
+		main {
+			manifest.srcFile "AndroidManifest-library.xml"
+			jni.srcDirs = []
+			jniLibs.srcDirs = ["libs"]
+			aidl.srcDirs = ["src"]
+			java.srcDirs = ["src", "src-google"]
+			resources.srcDirs = ["src"]
+			renderscript.srcDirs = ["src"]
+			res.srcDirs = ["res"]
+			assets.srcDirs = ["assets"]
+		}
+		debug {
+		}
+
+		legacy {
+			jniLibs.srcDirs = ["libc++"]
+		}
+	}
+
+	flavorDimensions "coreversion", "abi"
+	productFlavors {
+		// ABI
+		armv7 {
+			dimension "abi"
+			ndk {
+				abiFilter 'armeabi-v7a'
+			}
+		}
+		arm64 {
+			dimension "abi"
+			ndk {
+				abiFilter 'arm64-v8a'
+			}
+		}
+		x86 {
+			dimension "abi"
+			ndk {
+				abiFilters 'x86', 'x86_64'
+			}
+		}
+		armonly {
+			dimension "abi"
+			ndk {
+				abiFilters 'arm64-v8a', 'armeabi-v7a'
+			}
+		}
+		fat {
+			dimension "abi"
+			ndk {
+				abiFilters 'arm64-v8a', 'x86', 'x86_64', 'armeabi-v7a'
+			}
+		}
+
+		// CoreVersion
+        // Build that doesn't include 3D OpenGL
+		legacy {
+			dimension "coreversion"
+		}
+	}
+
+	buildTypes {
+		debug {
+			debuggable true
+		}
+
+		release {
+			debuggable false
+		}
+	}
+}
+
+def replaceNoTranslate(line) {
+	if (line.contains("\"versionFeatures\"")) {
+		return line.replaceAll(">[^<]*<", ">" + "" + "<")
+	}
+	return line;
+}
+
+task updateNoTranslate(type: Copy) {
+	from('.') {
+		include 'no_translate.xml'
+		filter {
+			line -> replaceNoTranslate(line);
+		}
+	}
+	into 'res/values/'
+}
+
+task validateTranslate {
+	println "Validating translations"
+
+	file("res").eachFileRecurse groovy.io.FileType.FILES, {
+		if (it.name == "strings.xml" || it.name == "phrases.xml") {
+			it.eachLine { line ->
+				if (line.contains("\$ s") || line.contains("\$ d") || line.contains("\$ f") ||
+						line.contains(" \$s") || line.contains(" \$d") || line.contains(" \$f") ||
+						line.contains("1\$ ") || line.contains("2\$ ") || line.contains("3\$ ") ||
+						line.contains("%1s") || line.contains(" 1\$s") ||
+						(line.contains("% \$") || line.contains("% 1") || line.contains("% 2") ||
+                                line.contains("% 3") || line.contains("% s"))) {
+					throw new GradleException("Incorrect translation " + it.getAbsolutePath() + " " + line);
+				}
+			}
+		}
+	}
+}
+
+task downloadWorldMiniBasemap {
+	doLast {
+		ant.get(src: 'http://builder.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
+	}
+}
+
+task collectVoiceAssets(type: Sync) {
+	from "../../resources/voice"
+	into "assets/voice"
+	include "**/*.js"
+}
+
+task cleanNoTranslate(type: Delete) {
+     delete('res/values/no_translate.xml')
+}
+
+task collectFonts(type: Copy) {
+	from "../../resources/fonts"
+	from "../../resources/rendering_styles/fonts"
+//	from "../../resources/rendering_styles/fonts/OpenSans"
+	into "assets/fonts"
+	include "*.ttf"
+}
+
+task collectHelpContentsStyle(type: Copy) {
+	from("../../help/website/help/") {
+		include "style.css"
+	}
+	into "assets"
+}
+
+task collectHelpContentsAssets(type: Copy) {
+	from("../../help/website/help") {
+		include "about.html"
+		include "changes.html"
+		include "faq.html"
+		include "technical-articles.html"
+		include "map-legend.html"
+	}
+	from("../../help/website/feature_articles") {
+		include "*.html"
+	}
+	from("../../help/website/blog_articles") {
+		include "osmand-3-8-released.html"
+	}
+	into "assets/feature_articles"
+}
+
+task copyPoiCategories(type: Copy) {
+	from("../../resources/poi") {
+		include "poi_categories.json"
+	}
+	into "assets"
+}
+
+task copyMapShaderIcons(type: Sync) {
+	// from "../../resources/rendering_styles/style-icons/map-shaders-png"
+	// into "res/"
+	from "../../resources/rendering_styles/style-icons/map-shaders-vector"
+	into "res/drawable"
+	include "**/*.png",  "**/*.xml"
+	preserve {
+		include '**/*'
+		exclude  "**/h_*"
+	}
+}
+
+task copyMapPOIIcons(type: Sync) {
+	from "../../resources/rendering_styles/style-icons/map-icons-vector"
+	into "res/drawable/"
+	// from "../../resources/rendering_styles/style-icons/map-icons-png"
+	// into "res/"
+
+	include "**/*.png",  "**/*.xml"
+	preserve {
+		include '**/*'
+		exclude "**/mm_*"
+	}
+}
+
+task copyLargePOIIcons(type: Sync) {
+	from "../../resources/rendering_styles/style-icons/poi-icons-vector"
+	into "res/drawable/"
+	include "**/*.png",  "**/*.xml"
+	preserve {
+		include '**/*'
+		exclude "**/mx_*"
+	}
+}
+
+task copyWidgetIconsXhdpi(type: Sync) {
+	from "res/drawable-xxhdpi/"
+	into "res/drawable-large-xhdpi/"
+	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	preserve {
+		include '*'
+		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	}
+}
+
+task copyWidgetIconsHdpi(type: Sync) {
+	from "res/drawable-xhdpi/"
+	into "res/drawable-large-hdpi/"
+	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	preserve {
+		include '*'
+		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	}
+}
+
+task copyWidgetIcons(type: Sync) {
+	from "res/drawable-hdpi/"
+	into "res/drawable-large/"
+	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	preserve {
+		include '*'
+		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+	}
+}
+
+task collectExternalResources {
+	dependsOn collectVoiceAssets,
+			collectFonts,
+			collectHelpContentsAssets,
+			collectHelpContentsStyle,
+			copyMapShaderIcons,
+			copyMapPOIIcons,
+			copyLargePOIIcons,
+			updateNoTranslate,
+			validateTranslate,
+			copyWidgetIcons,
+			copyWidgetIconsHdpi,
+			copyWidgetIconsXhdpi,
+			copyPoiCategories,
+			downloadWorldMiniBasemap
+}
+
+// Legacy core build
+import org.apache.tools.ant.taskdefs.condition.Os
+
+import java.util.regex.Pattern
+
+task buildOsmAndCore(type: Exec) {
+	Gradle gradle = getGradle()
+	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
+	String flavour = "";
+	if(!tskReqStr.contains("fat")) {
+		if(tskReqStr.contains("arm64")) {
+			flavour = flavour.length() == 0 ? "ARM64_ONLY" : ""
+		}
+		if(tskReqStr.contains("armv7")) {
+			flavour = flavour.length() == 0 ? "ARMV7_ONLY" : ""
+		}
+		if(tskReqStr.contains("armonly")) {
+			flavour = flavour.length() == 0 ? "ARM_ONLY" : ""
+		}
+		if(tskReqStr.contains("x86")) {
+			flavour = flavour.length() == 0 ? "X86_ONLY" : ""
+		}
+	}
+	
+	description "Build Legacy OsmAndCore"
+
+	if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
+		if(flavour.length()  > 0) {
+			environment "$flavour", "1"
+		}
+		commandLine "bash", file("./old-ndk-build.sh").getAbsolutePath()
+	} else {
+		commandLine "cmd", "/c", "echo", "Not supported"
+	}
+}
+
+task cleanupDuplicatesInCore() {
+	dependsOn buildOsmAndCore
+	// doesn't work for legacy debug builds
+	doLast {
+		file("libc++/armeabi-v7a").mkdirs()
+		file("libs/armeabi-v7a/libc++_shared.so").renameTo(file("libc++/armeabi-v7a/libc++_shared.so"))
+		file("libc++/arm64-v8a").mkdirs()
+		file("libs/arm64-v8a/libc++_shared.so").renameTo(file("libc++/arm64-v8a/libc++_shared.so"))
+		file("libc++/x86").mkdirs()
+		file("libs/x86/libc++_shared.so").renameTo(file("libc++/x86/libc++_shared.so"))
+		file("libc++/x86_64").mkdirs()
+		file("libs/x86_64/libc++_shared.so").renameTo(file("libc++/x86_64/libc++_shared.so"))
+	}
+}
+
+afterEvaluate {
+	android.libraryVariants.all { variant ->
+		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+	}
+}
+
+task appStart(type: Exec) {
+	// linux 
+	commandLine 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
+	// windows
+	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
+}
+
+artifacts {
+	archives(file("../OsmAnd-java/build/libs/OsmAnd-java-android-1.0.jar")) {
+		name "OsmAnd-java-android"
+		type "jar"
+	}
+}
+
+// Uploading artifacts to local path
+group = 'net.osmand'
+uploadArchives {
+	repositories.ivy {
+		//    credentials {
+		//        username ""
+		//       password ""
+		//   }
+
+		url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
+		layout "pattern" , {
+			artifact "[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
+		}
+
+//		def gitInfo = "git describe --long".execute().text.trim()
+//		def parsedGitInfo = Pattern.compile("v(\\d+\\.\\d+)-([\\d.]+)-(\\w+)").matcher(gitInfo)
+//		assert parsedGitInfo.matches()
+//		version = parsedGitInfo.group(1) + "-SNAPSHOT"
+		version = "1.0-SNAPSHOT"
+	}
+}
+
+dependencies {
+	implementation project(path: ':OsmAnd-java', configuration: 'android')
+	implementation project(':OsmAnd-api')
+	implementation 'androidx.multidex:multidex:2.0.1'
+	implementation 'androidx.gridlayout:gridlayout:1.0.0'
+	implementation 'androidx.cardview:cardview:1.0.0'
+	implementation 'androidx.appcompat:appcompat:1.2.0'
+	implementation 'com.google.android.material:material:1.2.1'
+	implementation 'androidx.browser:browser:1.0.0'
+	implementation 'androidx.preference:preference:1.1.0'
+	implementation fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
+
+	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
+	implementation 'commons-codec:commons-codec:1.11'
+	implementation 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
+	implementation 'org.apache.commons:commons-compress:1.17'
+	implementation 'com.moparisthebest:junidecode:0.1.1'
+	implementation 'org.immutables:gson:2.5.0'
+	implementation 'com.vividsolutions:jts-core:1.14.0'
+	implementation 'com.google.openlocationcode:openlocationcode:1.0.4'
+	implementation 'com.android.billingclient:billing:2.0.3'
+	// turn off for now
+	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
+	implementation 'com.squareup.picasso:picasso:2.71828'
+	implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
+	// JS core
+	implementation group: 'org.mozilla', name: 'rhino', version: '1.7.9'
+// size restrictions
+// implementation 'com.ibm.icu:icu4j:50.1' 
+// implementation 'net.sf.trove4j:trove4j:3.0.3'
+
+//	qtcoreImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
+//	qtcoredebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
+
+	legacyImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
+//	qtcoredebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
+//	qtcoredebugImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+//	qtcoreImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
+//	qtcoreImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+	implementation ("com.getkeepsafe.taptargetview:taptargetview:1.12.0"){
+		exclude group: 'com.android.support'
+	}
+	implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+	implementation ("com.github.HITGIF:TextFieldBoxes:1.4.5"){
+		exclude group: 'com.android.support'
+	}
+	implementation('com.github.scribejava:scribejava-apis:7.1.1'){
+		exclude group: "com.fasterxml.jackson.core"
+	}
+	implementation 'com.jaredrummler:colorpicker:1.1.0'
+
+	implementation 'org.bouncycastle:bcpkix-jdk15on:1.56'
+}

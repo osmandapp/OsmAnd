@@ -1430,7 +1430,7 @@
     <string name="notes">Hang/videó jegyzetek</string>
     <string name="online_map">Online térkép</string>
     <string name="shared_string_audio">Hang</string>
-    <string name="share_note">Megosztási megjegyzés</string>
+    <string name="share_note">Jegyzet megosztása</string>
     <string name="shared_string_export">Exportálás</string>
     <string name="plugin_touringview_name">Turistatérkép-nézet</string>
     <string name="track_segments">Nyomvonal szakaszok</string>
@@ -3917,7 +3917,7 @@
     <string name="perform_oauth_authorization_description">Az OSM-szerkesztési funkciók használatához jelentkezzék be az OAuth segítségével</string>
     <string name="perform_oauth_authorization">Bejelentkezés OAuth segítségével</string>
     <string name="clear_osm_token">OpenStreetMap OAuth token törlése</string>
-    <string name="osm_edit_logout_success">Sikeresen kijelentkezett</string>
+    <string name="osm_edit_logout_success">Kijelentkezett</string>
     <string name="use_two_phase_routing">Kétszakaszos A* útvonaltervezési algoritmus használata</string>
     <string name="file_already_imported">A fájl már importálva van az OsmAndba</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
@@ -3953,10 +3953,10 @@
     <string name="subscription_payment_issue_title">Probléma van az előfizetésével. A fizetési mód kijavítása érdekében kattintson a gombra a Google Play előfizetési beállításaihoz történő ugráshoz.</string>
     <string name="user_login">Bejelentkezés</string>
     <string name="login_account">Fiók</string>
-    <string name="use_login_password">Fióknév és jelszó használata</string>
-    <string name="open_street_map_login_mode">Az új vagy módosított szerkesztések feltöltéséhez be kell jelentkeznie.
+    <string name="use_login_password">Bejelentkezés felhasználónévvel és jelszóval</string>
+    <string name="open_street_map_login_mode">Új vagy módosított szerkesztések feltöltéséhez be kell jelentkeznie.
 \n
-\nBejelentkezhet a biztonságos OAuth-módszerrel vagy használhatja fióknevét és jelszavát.</string>
+\nBejelentkezhet a biztonságos OAuth módszerrel vagy használhatja saját felhasználónevét és jelszavát.</string>
     <string name="sign_in_with_open_street_map">Bejelentkezés OpenStreetMap-fiókkal</string>
     <string name="login_open_street_map">Bejelentkezés az OpenStreetMapre</string>
     <string name="login_open_street_map_org">Bejelentkezés az OpenStreetMap.org-ra</string>
@@ -3966,10 +3966,28 @@
     <string name="shared_string_add_photo">Fénykép hozzáadása</string>
     <string name="register_on_openplacereviews">Regisztráció az
 \nOpenPlaceReviews.org oldalon</string>
-    <string name="register_on_openplacereviews_desc">A fényképeket a OpenPlaceReviews.org nyílt adatprojekt biztosítja. Saját fényképei feltöltéséhez be kell jelentkeznie a weboldalon.</string>
+    <string name="register_on_openplacereviews_desc">A fényképeket a OpenPlaceReviews.org nyíltadat-projekt biztosítja. Saját fényképei feltöltéséhez be kell jelentkeznie a weboldalon.</string>
     <string name="register_opr_create_new_account">Új fiók létrehozása</string>
     <string name="register_opr_have_account">Már van fiókom</string>
     <string name="app_mode_motorboat">Motorcsónak</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="shared_string_search_history">Keresési előzmények</string>
+    <string name="shared_string_resources">Források</string>
+    <string name="add_to_mapillary">Hozzáadás a Mapillaryhez</string>
+    <string name="add_to_opr">Hozzáadása az OpenPlaceReviewshoz</string>
+    <string name="add_photos_descr">Az OsmAnd több forrásból jelenít meg fényképeket:
+\nOpenPlaceReviews – POI-fotók;
+\nMapillary – utcaszintű képek;
+\nWeb / Wikimedia – az OpenStreetMap-adatokban meghatározott POI-fotók.</string>
+    <string name="approximate_file_size">Hozzávetőleges fájlméret</string>
+    <string name="select_data_to_export">Jelölje ki a fájlba exportálandó adatokat.</string>
+    <string name="file_size_needed_for_import">Szükséges az importáláshoz</string>
+    <string name="export_not_enough_space_descr">A készülékén csak %1$s szabad hely van. Szabadítson fel valamennyi helyet, vagy szüntesse meg néhány exportálandó elem kijelölését.</string>
+    <string name="export_not_enough_space">Nincs elég hely</string>
+    <string name="select_groups_for_import">Importálandó csoportok kijelölése.</string>
+    <string name="select_items_for_import">Importálandó elemek kijelölése.</string>
+    <string name="use_dev_url_descr">OSM-jegyzet, POI vagy GPX-nyomvonal feltöltésének teszteléséhez az openstreetmap.org helyett kapcsoljon át a dev.openstreetmap.org-ra.</string>
+    <string name="use_dev_url">A dev.openstreetmap.org használata</string>
+    <string name="cannot_upload_image">Nem lehet feltölteni a képet, kérjük, próbálja meg később</string>
+    <string name="select_picture">Kép kijelölése</string>
 </resources>

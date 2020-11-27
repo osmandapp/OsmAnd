@@ -1247,7 +1247,7 @@ public class GPXUtilities {
 					}
 				}
 			}
-			g.prepareInformation(fileTimestamp, splitSegments.toArray(new SplitSegment[splitSegments.size()]));
+			g.prepareInformation(fileTimestamp, splitSegments.toArray(new SplitSegment[0]));
 			return g;
 		}
 

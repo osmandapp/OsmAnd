@@ -297,17 +297,26 @@ public class IntentHelper {
 			Uri uri = intent.getData();
 			if (uri.toString().startsWith("osmand-oauth")) {
 				String oauthVerifier = uri.getQueryParameter("oauth_verifier");
+				app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
 				app.getOsmOAuthHelper().authorize(oauthVerifier);
-				for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
-					if (fragment instanceof OsmAuthorizationListener) {
-						((OsmAuthorizationListener) fragment).authorizationCompleted();
-					}
-				}
 				mapActivity.setIntent(null);
 				return true;
 			}
 		}
 		return false;
+	}
+
+	private OsmAuthorizationListener getOnAuthorizeListener() {
+		return new OsmAuthorizationListener() {
+			@Override
+			public void authorizationCompleted() {
+				for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
+					if (fragment instanceof OsmAuthorizationListener) {
+						((OsmAuthorizationListener) fragment).authorizationCompleted();
+					}
+				}
+			}
+		};
 	}
 
 	private boolean handleSendText(Intent intent) {

@@ -373,7 +373,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 				dialog.cancel();
 			}
 		});
-		info.setItems(attributes.toArray(new String[attributes.size()]), new DialogInterface.OnClickListener() {
+		info.setItems(attributes.toArray(new String[0]), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 			}

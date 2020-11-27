@@ -152,9 +152,9 @@ public class RenderingRulesStoragePrinter {
 		for (int i = 0; i < 15; i++) {
 			out.println("" + indent + ti + "RenderingRule rule" + i + " = null;");
 		}
-		for (String s : storage.renderingAttributes.keySet()) {
-			generateRenderingRule(storage, out, indent + ti, "rule", 0, storage.renderingAttributes.get(s));
-			out.println("" + indent + ti + "storage.renderingAttributes.put(" + javaString(s) + ", rule0);");
+		for (Entry<String, RenderingRule> entry : storage.renderingAttributes.entrySet()) {
+			generateRenderingRule(storage, out, indent + ti, "rule", 0, entry.getValue());
+			out.println("" + indent + ti + "storage.renderingAttributes.put(" + javaString(entry.getKey()) + ", rule0);");
 		}
 		out.println(""+indent +"}");
 	}
@@ -221,7 +221,7 @@ public class RenderingRulesStoragePrinter {
 				mp+=", ";
 			}
 		}
-		if(mp.equals("")) {
+		if(mp.isEmpty()) {
 			mp = "java.util.Collections.EMPTY_MAP";
 		} else {
 			mp = "createMap(" +mp +")";
@@ -242,9 +242,9 @@ public class RenderingRulesStoragePrinter {
 
 	private void printJavaInitConstants(RenderingRulesStorage storage, PrintStream out, String indent, String ti) {
 		out.println("\n" + indent + "public void initConstants() {");
-		for (String s : storage.renderingConstants.keySet()) {
-			out.println("" + indent + ti + "storage.renderingConstants.put(" + javaString(s) + ", "
-					+ javaString(storage.renderingConstants.get(s)) + ");");
+		for (Entry<String, String> entry : storage.renderingConstants.entrySet()) {
+			out.println("" + indent + ti + "storage.renderingConstants.put(" + javaString(entry.getKey()) + ", "
+					+ javaString(entry.getValue()) + ");");
 		}
 		out.println(""+indent +"}");
 	}

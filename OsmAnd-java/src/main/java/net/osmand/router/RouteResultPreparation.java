@@ -1717,7 +1717,7 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		Integer[] array = possibleTurns.toArray(new Integer[possibleTurns.size()]);
+		Integer[] array = possibleTurns.toArray(new Integer[0]);
 		Arrays.sort(array, new Comparator<Integer>() {
 
 			@Override

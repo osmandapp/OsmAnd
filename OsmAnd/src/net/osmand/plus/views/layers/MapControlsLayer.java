@@ -1387,7 +1387,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 
 				bld.setTitle(R.string.map_magnifier);
-				bld.setSingleChoiceItems(values.toArray(new String[values.size()]), i,
+				bld.setSingleChoiceItems(values.toArray(new String[0]), i,
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {

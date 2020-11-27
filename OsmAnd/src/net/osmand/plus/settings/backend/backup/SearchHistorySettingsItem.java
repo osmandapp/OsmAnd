@@ -144,6 +144,11 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 	}
 
 	@Override
+	public boolean shouldShowDuplicates() {
+		return false;
+	}
+
+	@Override
 	public boolean shouldReadOnCollecting() {
 		return true;
 	}

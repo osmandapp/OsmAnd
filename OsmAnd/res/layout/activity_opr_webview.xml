@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
-              android:background="@color/color_white"
+              android:background="?attr/bg_color"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
 	<com.google.android.material.appbar.AppBarLayout
-		android:background="@color/color_white"
+		android:background="?attr/bg_color"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
-			android:layout_height="56dp">
+			android:layout_height="@dimen/toolbar_height">
 
 			<TextView
 				android:id="@+id/toolbar_text"
-				android:textSize="20sp"
-				tools:text="demdadao"
-				android:textColor="@color/color_black"
+				android:textSize="@dimen/dialog_header_text_size"
+				android:textColor="?android:textColorPrimary"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"/>
 

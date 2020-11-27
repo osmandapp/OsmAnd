@@ -304,9 +304,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
-		if (mapViewTrackingUtilities == null) {
-			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
-		}
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
 

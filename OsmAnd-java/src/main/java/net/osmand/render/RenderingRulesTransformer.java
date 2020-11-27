@@ -80,7 +80,7 @@ public class RenderingRulesTransformer {
 		for (int i = 0; i < nl.getLength();) {
 			Element app = (Element) nl.item(i);
 			String pt = app.getAttribute("pattern");
-			if (!pt.equals("")) {
+			if (!pt.isEmpty()) {
 				if (!patterns.containsKey(pt)) {
 					throw new IllegalStateException("Pattern '" + pt + "' is not defined");
 				}

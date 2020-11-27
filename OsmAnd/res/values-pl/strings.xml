@@ -441,7 +441,7 @@
     <string name="save_track_to_gpx">Automatyczne rejestrowanie śladu podczas nawigacji</string>
     <string name="update_tile">Uaktualnij mapę</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>
-    <string name="open_street_map_login_descr">Potrzebny do zgłaszania do openstreetmap.org.</string>
+    <string name="open_street_map_login_descr">Potrzebne do przysyłania zmian do serwisu openstreetmap.org.</string>
     <string name="user_name">Nazwa użytkownika OSM</string>
     <string name="mark_point">Cel</string>
     <string name="shared_string_add_to_favorites">Dodaj do ulubionych</string>
@@ -1922,7 +1922,7 @@
     <string name="osm_live_header">Subskrypcja umożliwia cogodzinne aktualizacje wszystkich map na całym świecie.
 \n Część dochodów wraca do społeczności OSM i jest wypłacana za każdy wkład OSM.
 \n Jeśli kochasz OsmAnd i OSM i chcesz je wspierać i wspierać, jest to idealny sposób, aby to zrobić.</string>
-    <string name="file_name_containes_illegal_char">Nazwa pliku zawiera niedozwolony znak</string>
+    <string name="file_name_containes_illegal_char">Niedozwolony znak w nazwie pliku</string>
     <string name="access_default_color">Domyślny kolor</string>
     <string name="access_category_choice">Wybierz kategorię</string>
     <string name="access_hint_enter_category">Proszę wprowadzić kategorię</string>
@@ -2526,7 +2526,7 @@
     <string name="last_intermediate_dest_description">Dodaje cel pośredni</string>
     <string name="first_intermediate_dest_description">Dodaje pierwszy cel pośredni</string>
     <string name="show_closed_notes">Wyświetl zamknięte uwagi</string>
-    <string name="switch_osm_notes_visibility_desc">Pokaż/ukryj uwagi OSM na mapie.</string>
+    <string name="switch_osm_notes_visibility_desc">Pokaż lub ukryj uwagi OSM na mapie.</string>
     <string name="gpx_file_desc">GPX - odpowiedni do eksportowania danych do JOSM i innych edytorów OSM.</string>
     <string name="osc_file_desc">OSC - odpowiedni do eksportowania danych do OSM.</string>
     <string name="shared_string_gpx_file">Plik GPX</string>
@@ -3087,7 +3087,7 @@
     <string name="zoom_by_wunderlinq">Użyj WunderLINQ do kontroli</string>
     <string name="quick_action_need_to_add_item_to_list">Dodaj co najmniej jeden element do listy w ustawieniach \"Szybkiej Akcji\"</string>
     <string name="routing_attr_piste_type_downhill_description">Stoki narciarskie do narciarstwa alpejskiego i zjazdowego oraz dostęp do wyciągów narciarskich.</string>
-    <string name="routing_attr_piste_type_nordic_name">Narty biegowe/nordic ski</string>
+    <string name="routing_attr_piste_type_nordic_name">Biegi narciarskie i narciarstwo klasyczne</string>
     <string name="routing_attr_piste_type_nordic_description">Trasy do narciarstwa klasycznego lub biegowego.</string>
     <string name="routing_attr_piste_type_skitour_name">Turystyka narciarska</string>
     <string name="routing_attr_piste_type_skitour_description">Trasy wycieczek narciarskich.</string>
@@ -3570,7 +3570,7 @@
     <string name="quick_action_terrain_descr">Przycisk do wyświetlania lub ukrywania warstwy terenu na mapie.</string>
     <string name="quick_action_terrain_show">Pokaż teren</string>
     <string name="quick_action_terrain_hide">Ukryj teren</string>
-    <string name="quick_action_show_hide_terrain">Pokaż / ukryj teren</string>
+    <string name="quick_action_show_hide_terrain">Pokaż lub ukryj teren</string>
     <string name="download_slope_maps">Nachylenie</string>
     <string name="terrain_empty_state_text">Włącz, aby wyświetlić cieniowanie wzniesień lub stoków. Możesz przeczytać więcej o tego rodzaju mapach na naszej stronie.</string>
     <string name="shared_string_legend">Legenda</string>
@@ -3700,9 +3700,9 @@
     <string name="back_to_editing">Powrót do edycji</string>
     <string name="quick_action_transport_hide">Ukryj transport publiczny</string>
     <string name="quick_action_transport_show">Pokaż transport publiczny</string>
-    <string name="quick_action_show_hide_transport">Pokaż/ukryj transport publiczny</string>
-    <string name="create_edit_poi">Utwórz / Edytuj użyteczne miejsce</string>
-    <string name="add_edit_favorite">Dodaj / Edytuj Ulubione</string>
+    <string name="quick_action_show_hide_transport">Pokaż lub ukryj transport publiczny</string>
+    <string name="create_edit_poi">Utwórz lub edytuj użyteczne miejsce</string>
+    <string name="add_edit_favorite">Dodaj lub edytuj ulubione miejsce</string>
     <string name="quick_action_switch_profile_descr">Przycisk akcji przełącza między wybranymi profilami.</string>
     <string name="shared_string_add_profile">Dodaj profil</string>
     <string name="change_application_profile">Zmiana profilu aplikacji</string>
@@ -3910,7 +3910,7 @@
     <string name="sort_name_descending">Nazwa: Z – A</string>
     <string name="sort_name_ascending">Nazwa: A – Z</string>
     <string name="what_is_new">Co nowego</string>
-    <string name="start_finish_icons">Ikony start/koniec</string>
+    <string name="start_finish_icons">Ikony startu i końca</string>
     <string name="contour_lines_thanks">Dziękujemy za zakup \"Linii konturowych\"</string>
     <string name="osm_live_payment_desc_hw">Subskrypcja naliczona za wybrany okres. Anuluj ją w AppGallery w dowolnym momencie.</string>
     <string name="osm_live_payment_subscription_management_hw">Płatność zostanie pobrana z konta AppGallery po potwierdzeniu zakupu.
@@ -3927,10 +3927,10 @@
     <string name="complex_routing_descr">Dwufazowe wyznaczanie tras do nawigacji samochodowej.</string>
     <string name="use_native_pt">Rozwój rodzimego transportu publicznego</string>
     <string name="use_native_pt_desc">Przejdź do (bezpiecznego) obliczania tras transportu publicznego w języku Java</string>
-    <string name="perform_oauth_authorization_description">Wykonaj logowanie OAuth, aby korzystać z funkcji osmedit</string>
+    <string name="perform_oauth_authorization_description">Zaloguj się za pomocą protokołu OAuth, aby korzystać z funkcji osmedit</string>
     <string name="perform_oauth_authorization">Zaloguj się przez OAuth</string>
     <string name="clear_osm_token">Wyczyść token OpenStreetMap OAuth</string>
-    <string name="osm_edit_logout_success">Wylogowanie powiodło się</string>
+    <string name="osm_edit_logout_success">Wylogowano</string>
     <string name="file_already_imported">Plik jest już zaimportowany do OsmAnd</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="navigate_point_mgrs">MGRS</string>
@@ -3958,14 +3958,14 @@
     <string name="message_you_need_add_two_points_to_show_graphs">Musisz dodać co najmniej dwa punkty</string>
     <string name="subscription_payment_issue_title">Wystąpił problem z Twoją subskrypcją. Kliknij przycisk, aby przejść do ustawień subskrypcji Google Play i naprawić metodę płatności.</string>
     <string name="subscription_on_hold_title">Subskrypcja OsmAnd Live jest wstrzymana</string>
-    <string name="user_login">Login</string>
+    <string name="user_login">Nazwa użytkownika</string>
     <string name="login_open_street_map">Zaloguj się do OpenStreetMap</string>
     <string name="login_open_street_map_org">Zaloguj się do OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Zaloguj się za pomocą OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Musisz się zalogować, aby przesłać nowe lub zmodyfikowane zmiany.
+    <string name="open_street_map_login_mode">Zaloguj się, aby przesłać nowe lub zmodyfikowane zmiany,
 \n
-\nMożesz zalogować się za pomocą bezpiecznej metody autoryzacji OAuth lub użyć swojego loginu i hasła.</string>
-    <string name="use_login_password">Użyj loginu i hasła</string>
+\nza pomocą protokołu OAuth lub nazwy użytkownika i hasła.</string>
+    <string name="use_login_password">Zaloguj się za pomocą nazwy użytkownika i hasła</string>
     <string name="login_account">Konto</string>
     <string name="osm_edit_close_note">Zamknij uwagę OSM</string>
     <string name="osm_edit_comment_note">Skomentuj uwagę OSM</string>
@@ -3973,11 +3973,30 @@
     <string name="send_files_to_openstreetmap">Wyślij plik GPX do OpenStreetMap</string>
     <string name="enter_text_separated">Wpisz tagi oddzielone przecinkami.</string>
     <string name="gpx_upload_trackable_visibility_descr">Możliwość śledzenia oznacza, że ślad nie pojawi się na żadnej publicznej liście, ale punkty śledzenia będą nadal dostępne za pośrednictwem publicznego API GPS ze znacznikami czasu. Inni użytkownicy będą mogli pobrać tylko te przetworzone punkty śledzenia z Twojego śladu, których nie można powiązać bezpośrednio z Tobą.</string>
-    <string name="osm_login_descr">Możesz zalogować się przy użyciu bezpiecznej metody OAuth lub użyć swojego loginu i hasła.</string>
+    <string name="osm_login_descr">Zaloguj się przy użyciu bezpiecznej metody autoryzacji OAuth lub użyj swojej nazwy użytkownika i hasła.</string>
     <string name="shared_string_add_photo">Dodaj zdjęcie</string>
     <string name="register_on_openplacereviews">Zarejestruj się w
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Zdjęcia są dostarczane przez projekt OpenPlaceReviews.org. Aby przesłać swoje zdjęcia należy zarejestrować się na stronie.</string>
+    <string name="register_on_openplacereviews_desc">Zaloguj się na stronie projektu otwartych danych OpenPlaceReviews.org, aby przesłać jeszcze więcej zdjęć.</string>
     <string name="register_opr_create_new_account">Utwórz nowe konto</string>
     <string name="register_opr_have_account">Mam już konto</string>
+    <string name="select_groups_for_import">Wybierz grupy, które zostaną zaimportowane.</string>
+    <string name="select_items_for_import">Wybierz elementy, które zostaną zaimportowane.</string>
+    <string name="use_dev_url_descr">Przełącz na dev.openstreetmap.org zamiast openstreetmap.org do testowania przesyłania uwag OSM / użytecznych miejsc / GPX.</string>
+    <string name="add_photos_descr">OsmAnd pokazuje zdjęcia z kilku źródeł:
+\nOpenPlaceReviews - zdjęcia punktów użyteczności;
+\nMapillary - zdjęcia z poziomu ulicy;
+\nWeb / Wikimedia - zdjęcia określonych punktów użyteczności w danych OpenStreetMap.</string>
+    <string name="shared_string_resources">Zasoby</string>
+    <string name="approximate_file_size">Przybliżony rozmiar pliku</string>
+    <string name="select_data_to_export">Wybierz dane do wyeksportowania do pliku.</string>
+    <string name="file_size_needed_for_import">Potrzebne do importu</string>
+    <string name="export_not_enough_space_descr">Twoje urządzenie ma tylko %1$s wolnego miejsca. Zwolnij trochę miejsca lub odznacz niektóre elementy do wyeksportowania.</string>
+    <string name="export_not_enough_space">Nie ma wystarczającej ilości miejsca</string>
+    <string name="use_dev_url">Skorzystaj z dev.openstreetmap.org</string>
+    <string name="shared_string_search_history">Historia wyszukiwania</string>
+    <string name="app_mode_kayak">Kajak</string>
+    <string name="app_mode_motorboat">Motorówka</string>
+    <string name="add_to_mapillary">Dodaj do Mapillary</string>
+    <string name="add_to_opr">Dodaj do OpenPlaceReviews</string>
 </resources>

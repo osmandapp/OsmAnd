@@ -432,8 +432,7 @@ public class RenderingRulesStorage {
 				for(RenderingRule ch : caseChildren) {
 					List<RenderingRule> apply = applyRules;
 					if(!renderingRule.getIfChildren().isEmpty()) {
-						apply = new ArrayList<RenderingRule>();
-						apply.addAll(renderingRule.getIfChildren());
+						apply = new ArrayList<>(renderingRule.getIfChildren());
 						if(applyRules != null) {
 							apply.addAll(applyRules);
 						}
@@ -492,10 +491,10 @@ public class RenderingRulesStorage {
 	}
 	
 	public String[] getRenderingAttributeNames() {
-		return renderingAttributes.keySet().toArray(new String[renderingAttributes.size()]);
+		return renderingAttributes.keySet().toArray(new String[0]);
 	}
 	public RenderingRule[] getRenderingAttributeValues() {
-		return renderingAttributes.values().toArray(new RenderingRule[renderingAttributes.size()]);
+		return renderingAttributes.values().toArray(new RenderingRule[0]);
 	}
 	
 	public RenderingRule[] getRules(int state){

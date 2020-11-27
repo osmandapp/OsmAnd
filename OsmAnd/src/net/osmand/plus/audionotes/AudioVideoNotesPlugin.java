@@ -819,7 +819,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					}
 				}
 			});
-			mapInfoLayer.registerSideWidget(recordControl, new AudioVideoNotesWidgetState(app), "audionotes", false, 32);
+			mapInfoLayer.registerSideWidget(recordControl, new AudioVideoNotesWidgetState(app, AV_DEFAULT_ACTION), "audionotes", false, 32);
 			mapInfoLayer.recreateControls();
 		}
 	}
@@ -931,10 +931,20 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public void mapActivityResume(MapActivity activity) {
+		this.mapActivity = activity;
+		if (Build.VERSION.SDK_INT < 29) {
+			runAction(activity);
+		}
+	}
+
+	@Override
 	public void mapActivityResumeOnTop(MapActivity activity) {
 		this.mapActivity = activity;
-//		((AudioManager) activity.getSystemService(Context.AUDIO_SERVICE)).registerMediaButtonEventReceiver(
-//				new ComponentName(activity, MediaRemoteControlReceiver.class));
+		runAction(activity);
+	}
+
+	private void runAction(MapActivity activity) {
 		if (runAction != -1) {
 			takeAction(activity, actionLon, actionLat, runAction);
 			runAction = -1;
@@ -1860,7 +1870,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	protected Recording[] getRecordingsSorted() {
 		checkRecordings();
 		Collection<Recording> allObjects = getAllRecordings();
-		Recording[] res = allObjects.toArray(new Recording[allObjects.size()]);
+		Recording[] res = allObjects.toArray(new Recording[0]);
 		Arrays.sort(res, new Comparator<Recording>() {
 
 			@Override
@@ -2153,20 +2163,23 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return DashAudioVideoNotesFragment.FRAGMENT_DATA;
 	}
 
-	public class AudioVideoNotesWidgetState extends WidgetState {
+	public static class AudioVideoNotesWidgetState extends WidgetState {
+
+		private final CommonPreference<Integer> defaultActionSetting;
 
 		private static final int AV_WIDGET_STATE_ASK = R.id.av_notes_widget_state_ask;
 		private static final int AV_WIDGET_STATE_AUDIO = R.id.av_notes_widget_state_audio;
 		private static final int AV_WIDGET_STATE_VIDEO = R.id.av_notes_widget_state_video;
 		private static final int AV_WIDGET_STATE_PHOTO = R.id.av_notes_widget_state_photo;
 
-		AudioVideoNotesWidgetState(OsmandApplication ctx) {
+		AudioVideoNotesWidgetState(OsmandApplication ctx, CommonPreference<Integer> defaultActionSetting) {
 			super(ctx);
+			this.defaultActionSetting = defaultActionSetting;
 		}
 
 		@Override
 		public int getMenuTitleId() {
-			Integer action = AV_DEFAULT_ACTION.get();
+			Integer action = defaultActionSetting.get();
 			switch (action) {
 				case AV_DEFAULT_ACTION_AUDIO:
 					return R.string.av_def_action_audio;
@@ -2181,7 +2194,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 		@Override
 		public int getMenuIconId() {
-			Integer action = AV_DEFAULT_ACTION.get();
+			Integer action = defaultActionSetting.get();
 			switch (action) {
 				case AV_DEFAULT_ACTION_AUDIO:
 					return R.drawable.ic_action_micro_dark;
@@ -2196,7 +2209,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 		@Override
 		public int getMenuItemId() {
-			Integer action = AV_DEFAULT_ACTION.get();
+			Integer action = defaultActionSetting.get();
 			switch (action) {
 				case AV_DEFAULT_ACTION_AUDIO:
 					return AV_WIDGET_STATE_AUDIO;
@@ -2226,19 +2239,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 		@Override
 		public void changeState(int stateId) {
-			switch (stateId) {
-				case AV_WIDGET_STATE_AUDIO:
-					AV_DEFAULT_ACTION.set(AV_DEFAULT_ACTION_AUDIO);
-					break;
-				case AV_WIDGET_STATE_VIDEO:
-					AV_DEFAULT_ACTION.set(AV_DEFAULT_ACTION_VIDEO);
-					break;
-				case AV_WIDGET_STATE_PHOTO:
-					AV_DEFAULT_ACTION.set(AV_DEFAULT_ACTION_TAKEPICTURE);
-					break;
-				default:
-					AV_DEFAULT_ACTION.set(AV_DEFAULT_ACTION_CHOOSE);
-					break;
+			if (stateId == AV_WIDGET_STATE_AUDIO) {
+				defaultActionSetting.set(AV_DEFAULT_ACTION_AUDIO);
+			} else if (stateId == AV_WIDGET_STATE_VIDEO) {
+				defaultActionSetting.set(AV_DEFAULT_ACTION_VIDEO);
+			} else if (stateId == AV_WIDGET_STATE_PHOTO) {
+				defaultActionSetting.set(AV_DEFAULT_ACTION_TAKEPICTURE);
+			} else {
+				defaultActionSetting.set(AV_DEFAULT_ACTION_CHOOSE);
 			}
 		}
 	}

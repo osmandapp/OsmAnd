@@ -40,7 +40,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItem;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.settings.fragments.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
+import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
 
 public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
@@ -58,7 +58,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		fragment.setRetainInstance(true);
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(IMPORT_SETTINGS_TAG)
+				.addToBackStack(SETTINGS_LIST_TAG)
 				.commitAllowingStateLoss();
 	}
 
@@ -137,7 +137,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public void dismissFragment() {
 		FragmentManager fm = getFragmentManager();
 		if (fm != null && !fm.isStateSaved()) {
-			fm.popBackStack(IMPORT_SETTINGS_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			fm.popBackStack(SETTINGS_LIST_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
