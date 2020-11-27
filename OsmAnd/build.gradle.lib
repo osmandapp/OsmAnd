@@ -43,8 +43,6 @@ android {
 			res.srcDirs = ["res"]
 			assets.srcDirs = ["assets"]
 		}
-		debug {
-		}
 
 		legacy {
 			jniLibs.srcDirs = ["libc++"]
@@ -342,8 +340,59 @@ task appStart(type: Exec) {
 
 artifacts {
 	archives(file("../OsmAnd-java/build/libs/OsmAnd-java-android-1.0.jar")) {
-		name "OsmAnd-java-android"
+		classifier "OsmAnd-java-android"
+		name 'OsmAnd'
 		type "jar"
+	}
+	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-x86-debug.aar")) {
+		classifier 'legacyX86Debug'
+		name 'OsmAnd'
+		extension 'aar'
+	}
+	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-x86-release.aar")) {
+		classifier 'legacyX86Release'
+		name 'OsmAnd'
+		extension 'aar'
+	}
+	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-arm64-debug.aar")) {
+		classifier 'legacyArm64Debug'
+		name 'OsmAnd'
+		extension 'aar'
+	}
+	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-arm64-release.aar")) {
+		classifier 'legacyArm64Release'
+		name 'OsmAnd'
+		extension 'aar'
+	}
+	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-armonly-debug.aar")) {
+		classifier 'legacyArmonlyDebug'
+		name 'OsmAnd'
+		extension 'aar'
+	}
+	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-armonly-release.aar")) {
+		classifier 'legacyArmonlyRelease'
+		name 'OsmAnd'
+		extension 'aar'
+	}
+	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-armv7-debug.aar")) {
+		classifier 'legacyArmv7Debug'
+		name 'OsmAnd'
+		extension 'aar'
+	}
+	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-armv7-release.aar")) {
+		classifier 'legacyArmv7Release'
+		name 'OsmAnd'
+		extension 'aar'
+	}
+	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-fat-debug.aar")) {
+		classifier 'legacyFatDebug'
+		name 'OsmAnd'
+		extension 'aar'
+	}
+	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-fat-release.aar")) {
+		classifier 'legacyFatRelease'
+		name 'OsmAnd'
+		extension 'aar'
 	}
 }
 
@@ -357,14 +406,6 @@ uploadArchives {
 		//   }
 
 		url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
-		layout "pattern" , {
-			artifact "[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
-		}
-
-//		def gitInfo = "git describe --long".execute().text.trim()
-//		def parsedGitInfo = Pattern.compile("v(\\d+\\.\\d+)-([\\d.]+)-(\\w+)").matcher(gitInfo)
-//		assert parsedGitInfo.matches()
-//		version = parsedGitInfo.group(1) + "-SNAPSHOT"
 		version = "1.0-SNAPSHOT"
 	}
 }
