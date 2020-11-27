@@ -306,7 +306,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 	}
 
-	boolean useVerticalButtons() {
+	protected boolean useVerticalButtons() {
 		Activity activity = requireActivity();
 		int rightBottomButtonTextId = getRightBottomButtonTextId();
 		if (getDismissButtonTextId() != DEFAULT_VALUE && rightBottomButtonTextId != DEFAULT_VALUE) {

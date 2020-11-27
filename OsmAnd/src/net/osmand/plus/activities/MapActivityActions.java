@@ -61,6 +61,7 @@ import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.RoutingProfileDataObject;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
@@ -157,6 +158,7 @@ public class MapActivityActions implements DialogProvider {
 
 	private final MapActivity mapActivity;
 	private OsmandSettings settings;
+	private DialogInterface.OnDismissListener dismissListener;
 
 	@NonNull
 	private ImageView drawerLogoHeader;
@@ -1122,26 +1124,8 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 
-	public AlertDialog stopNavigationActionConfirm() {
-		return stopNavigationActionConfirm(null);
-	}
-
-	public AlertDialog stopNavigationActionConfirm(final Runnable onStopAction) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-		// Stop the navigation
-		builder.setTitle(getString(R.string.cancel_route));
-		builder.setMessage(getString(R.string.stop_routing_confirm));
-		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				stopNavigationWithoutConfirm();
-				if (onStopAction != null) {
-					onStopAction.run();
-				}
-			}
-		});
-		builder.setNegativeButton(R.string.shared_string_no, null);
-		return builder.show();
+	public void stopNavigationActionConfirm() {
+		DismissRouteBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(), null, dismissListener);
 	}
 
 	public void whereAmIDialog() {
