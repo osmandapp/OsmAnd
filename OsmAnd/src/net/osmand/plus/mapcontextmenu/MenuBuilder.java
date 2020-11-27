@@ -14,6 +14,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -106,6 +108,7 @@ public class MenuBuilder {
 	private String preferredMapLang;
 	private String preferredMapAppLang;
 	private boolean transliterateNames;
+	private View view;
 
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
 	private String[] placeId = new String[0];
@@ -226,6 +229,7 @@ public class MenuBuilder {
 	}
 
 	public void build(View view) {
+		this.view = view;
 		firstRow = true;
 		hidden = false;
 		buildTopInternal(view);
@@ -417,7 +421,9 @@ public class MenuBuilder {
 				OnActivityResultListener() {
 			@Override
 			public void onResult(int resultCode, Intent resultData) {
-				handleSelectedImage(view, resultData.getData());
+				if (resultData != null) {
+					handleSelectedImage(view, resultData.getData());
+				}
 			}
 		}));
 	}
@@ -435,7 +441,7 @@ public class MenuBuilder {
 				} catch (Exception e) {
 					LOG.error(e);
 					String str = app.getString(R.string.cannot_upload_image);
-					app.showToastMessage(str);
+					showToastMessage(str);
 				} finally {
 					Algorithms.closeStream(inputStream);
 				}
@@ -452,12 +458,18 @@ public class MenuBuilder {
 		if (response != null) {
 			int res = 0;
 			try {
+				StringBuilder error = new StringBuilder();
 				res = openDBAPI.uploadImage(
 						placeId,
 						baseUrl,
 						OPRWebviewActivity.getPrivateKeyFromCookie(app),
 						OPRWebviewActivity.getUsernameFromCookie(app),
-						response);
+						response, error);
+				if (res != 200) {
+					showToastMessage(error.toString());
+				} else {
+					//ok, continue
+				}
 			} catch (FailedVerificationException e) {
 				LOG.error(e);
 				checkTokenAndShowScreen();
@@ -466,7 +478,8 @@ public class MenuBuilder {
 				//image was uploaded but not added to blockchain
 				checkTokenAndShowScreen();
 			} else {
-				app.showToastMessage(R.string.successfully_uploaded_pattern, 1, 1);
+				String str = app.getString(R.string.successfully_uploaded_pattern, 1, 1);
+				showToastMessage(str);
 				//refresh the image
 				execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 			}
@@ -475,13 +488,23 @@ public class MenuBuilder {
 		}
 	}
 
+	private void showToastMessage(final String str) {
+		new Handler(Looper.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(mapActivity.getBaseContext(), str, Toast.LENGTH_LONG).show();
+			}
+		});
+	}
+
 	//This method runs on non main thread
 	private void checkTokenAndShowScreen() {
 		final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
 		final String name = OPRWebviewActivity.getUsernameFromCookie(app);
 		final String privateKey = OPRWebviewActivity.getPrivateKeyFromCookie(app);
 		if (openDBAPI.checkPrivateKeyValid(baseUrl, name, privateKey)) {
-			app.showToastMessage(R.string.cannot_upload_image);
+			String str = app.getString(R.string.cannot_upload_image);
+			showToastMessage(str);
 		} else {
 			app.runInUIThread(new Runnable() {
 				@Override
