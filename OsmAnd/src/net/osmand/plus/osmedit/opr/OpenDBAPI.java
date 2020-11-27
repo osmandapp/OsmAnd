@@ -93,7 +93,7 @@ public class OpenDBAPI {
 		Map<String, Object> change = new TreeMap<>();
 		Map<String, Object> images = new TreeMap<>();
 		images.put("append", imageMap);
-		change.put("version", 25);
+		change.put("version", "increment");
 		change.put("images.review", images);
 		edit.put("id", ids);
 		edit.put("change", change);
