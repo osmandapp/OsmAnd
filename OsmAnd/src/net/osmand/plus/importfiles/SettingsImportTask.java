@@ -14,6 +14,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -133,6 +134,11 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				if (activity != null && succeed) {
 					FragmentManager fm = activity.getSupportFragmentManager();
 					app.getRendererRegistry().updateExternalRenderers();
+					app.getPoiFilters().loadSelectedPoiFilters();
+					if (activity instanceof MapActivity) {
+						((MapActivity) activity).getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
+						((MapActivity) activity).updateApplicationModeSettings();
+					}
 					AppInitializer.loadRoutingFiles(app, null);
 					if (file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());

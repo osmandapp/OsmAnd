@@ -170,6 +170,9 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 			builder = ApplicationMode.fromModeBean(app, modeBean);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		} else {
+			if (modeBean == null) {
+				modeBean = appMode.toModeBean();
+			}
 			builder = ApplicationMode.fromModeBean(app, modeBean);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		}

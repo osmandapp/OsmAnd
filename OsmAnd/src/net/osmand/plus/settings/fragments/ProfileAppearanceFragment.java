@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
@@ -873,6 +874,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private void customProfileSaved() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
+			if (activity instanceof MapActivity) {
+				((MapActivity) activity).getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
+				((MapActivity) activity).updateApplicationModeSettings();
+			}
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			if (!fragmentManager.isStateSaved()) {
 				fragmentManager.popBackStack();
