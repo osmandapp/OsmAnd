@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -76,14 +75,8 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			progressMax = savedInstanceState.getInt(PROGRESS_MAX_KEY);
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
+		exportMode = true;
 		dataList = app.getSettingsHelper().getAdditionalData(globalExport);
-
-		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				showExitDialog();
-			}
-		});
 	}
 
 	@Nullable
