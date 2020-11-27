@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateAdditionalInfoListener;
+import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
-public class PointsCard extends BaseCard implements OnUpdateAdditionalInfoListener {
+public class PointsCard extends BaseCard implements OnUpdateInfoListener {
 
 	private MeasurementToolAdapter adapter;
 	private MeasurementToolFragment fragment;
@@ -23,7 +23,7 @@ public class PointsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 	}
 
 	@Override
-	public void onUpdateAdditionalInfo() {
+	public void onUpdateInfo() {
 		if (adapter != null) {
 			adapter.notifyDataSetChanged();
 		}
@@ -31,7 +31,7 @@ public class PointsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 
 	@Override
 	public int getCardLayoutId() {
-		return R.layout.fragment_measurement_tool_points_list;
+		return R.layout.measurement_tool_points_card;
 	}
 
 	@Override

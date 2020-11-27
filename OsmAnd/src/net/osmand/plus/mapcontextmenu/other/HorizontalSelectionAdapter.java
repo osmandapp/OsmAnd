@@ -63,6 +63,8 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, final int position) {
 		final HorizontalSelectionItem item = items.get(holder.getAdapterPosition());
 		TextView textView = holder.buttonText;
+		int innerPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);//AndroidUtils.dpToPx(app, 16);
+		textView.setPadding(innerPadding, 0, innerPadding, 0);
 		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		if (item.equals(selectedItem) && item.isEnabled()) {
 			AndroidUtils.setBackground(holder.button, app.getUIUtilities().getPaintedIcon(
