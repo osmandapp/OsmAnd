@@ -3978,15 +3978,15 @@ Lon %2$s</string>
     <string name="subscription_paused_title">A subscrición do OsmAnd Live foi detida</string>
     <string name="subscription_on_hold_title">A subscrición do OsmAnd Live está en espera</string>
     <string name="gpx_upload_public_visibility_descr">\"Público\" significa que a pista amosarase de xeito público na túa listaxe de pistas e nas listaxes de pistas GPS públicas con marcas de tempo en bruto. Os datos servidos a través da API no farán referencia á túa pácina de pistas. As marcaxes de tempo dos puntos da pista non estarán dispoñíbeis a través da API pública de GPS, aínda que os puntos son ordenados de xeito cronolóxico.</string>
-    <string name="login_open_street_map">Iniciar a sesión no OpenStreetMap</string>
-    <string name="login_open_street_map_org">Iniciar a sesión no OpenStreetMap.org</string>
+    <string name="login_open_street_map">Iniciar a sesión ó OpenStreetMap</string>
+    <string name="login_open_street_map_org">Iniciar a sesión ó OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Iniciar a sesión co OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Inicia a sesión para subir as modificacións novas,
+    <string name="open_street_map_login_mode">Tes que iniciar sesión para subir as modificacións novas.
 \n
-\nxa sexa co OAuth ou empregando o teu nome de usuario e contrasinal.</string>
-    <string name="use_login_password">Iniciar a sesión co nome de usuario e contrasinal</string>
+\nPodes iniciar sesión empregando o método seguro do OAuth ou co nombre de usuario e contrasinal.</string>
+    <string name="use_login_password">Iniciar a sesión co usuario e contrasinal</string>
     <string name="login_account">Conta</string>
-    <string name="user_login">Nome de usuario</string>
+    <string name="user_login">Iniciar sesión</string>
     <string name="markers_history">Historial de marcaxes</string>
     <string name="send_files_to_openstreetmap">Enviar ficheiro GPX ó OpenStreetMap</string>
     <string name="enter_text_separated">Insire etiquetas separadas por comas.</string>
@@ -3995,11 +3995,11 @@ Lon %2$s</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificábel\" significa que a pista amosarase de xeito público na túa listaxe de pistas e na listaxe de pistas GPS públicas, é dicir que outros usuarios poderán baixar a pista en bruto e asociala co seu nome de usuario. Os datos servidos a través da API de conxunto de puntos fará referencia á páxina orixinal da pista.</string>
     <string name="osm_edit_close_note">Pechar nota do OSM</string>
     <string name="osm_edit_comment_note">Comentar nota do OSM</string>
-    <string name="osm_login_descr">Inicia a sesión co método seguro do OAuth ou emprega o nome de usuario e contrasinal.</string>
+    <string name="osm_login_descr">Podes iniciar a sesión co método seguro do OAuth ou emprega o nome de usuario e contrasinal.</string>
     <string name="shared_string_add_photo">Engadir imaxe</string>
     <string name="register_on_openplacereviews">Rexistrarse no
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Inicia a sesión no sitio web do proxecto de datos abertos do OpenPlaceReviews.org para subir máis imaxes.</string>
+    <string name="register_on_openplacereviews_desc">As imaxes son fornecidas polo proxecto de datos abertos do OpenPlaceReviews.org. Para subir a túas imaxes precisas rexistrarte no sitio web.</string>
     <string name="register_opr_create_new_account">Crear nova conta</string>
     <string name="register_opr_have_account">Xa teño unha conta</string>
     <string name="shared_string_search_history">Historial de procura</string>
@@ -4011,4 +4011,16 @@ Lon %2$s</string>
     <string name="file_size_needed_for_import">Necesario para importar</string>
     <string name="export_not_enough_space_descr">O teu dispositivo só ten %1$s libre. Por favor, libera algo de espazo ou desmarca algúns elementos a exportar.</string>
     <string name="export_not_enough_space">Sen espazo dabondo</string>
+    <string name="cannot_upload_image">Non é posíbel subir a imaxe, por favor, téntao novamente máis tarde</string>
+    <string name="select_picture">Seleccionar imaxe</string>
+    <string name="select_groups_for_import">Seleccionar os grupos que serán importados.</string>
+    <string name="select_items_for_import">Seleccionar os elementos que serán importados.</string>
+    <string name="add_to_mapillary">Engadir ó Mapillary</string>
+    <string name="add_to_opr">Engadir ó OpenPlaceReviews</string>
+    <string name="use_dev_url_descr">Mudar á versión para desenvolvedores dev.openstreetmap.org no canto do openstreetmap.org para probar a carga de PDI, notas do OSM e ficheiros GPX.</string>
+    <string name="use_dev_url">Empregar dev.openstreetmap.org</string>
+    <string name="add_photos_descr">O OsmAnd amosa imaxes de diferentes fontes:
+\nOpenPlaceReviews - imaxes POI;
+\nMapillary - maxes a nivel de rúa;
+\nWeb / Wikimedia - imaxes POI especificadas nos datos do OpenStreetMap.</string>
 </resources>

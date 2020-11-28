@@ -68,13 +68,9 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {
 			appliedItems = new ArrayList<>(newItems);
 			for (AvoidSpecificRoads.AvoidRoadInfo duplicate : duplicateItems) {
-				if (shouldReplace) {
-					LatLon latLon = new LatLon(duplicate.latitude, duplicate.longitude);
-					if (settings.removeImpassableRoad(latLon)) {
-						settings.addImpassableRoad(duplicate);
-					}
-				} else {
-					settings.addImpassableRoad(renameItem(duplicate));
+				LatLon latLon = new LatLon(duplicate.latitude, duplicate.longitude);
+				if (settings.removeImpassableRoad(latLon)) {
+					settings.addImpassableRoad(duplicate);
 				}
 			}
 			for (AvoidSpecificRoads.AvoidRoadInfo avoidRoad : appliedItems) {
@@ -87,7 +83,12 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 
 	@Override
 	public boolean isDuplicate(@NonNull AvoidSpecificRoads.AvoidRoadInfo item) {
-		return existingItems.contains(item);
+		for (AvoidSpecificRoads.AvoidRoadInfo roadInfo : existingItems) {
+			if (roadInfo.id == item.id) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -95,22 +96,15 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 		return true;
 	}
 
+	@Override
+	public boolean shouldShowDuplicates() {
+		return false;
+	}
+
 	@NonNull
 	@Override
 	public AvoidSpecificRoads.AvoidRoadInfo renameItem(@NonNull AvoidSpecificRoads.AvoidRoadInfo item) {
-		int number = 0;
-		while (true) {
-			number++;
-			AvoidSpecificRoads.AvoidRoadInfo renamedItem = new AvoidSpecificRoads.AvoidRoadInfo();
-			renamedItem.name = item.name + "_" + number;
-			if (!isDuplicate(renamedItem)) {
-				renamedItem.id = item.id;
-				renamedItem.latitude = item.latitude;
-				renamedItem.longitude = item.longitude;
-				renamedItem.appModeKey = item.appModeKey;
-				return renamedItem;
-			}
-		}
+		return item;
 	}
 
 	@Override
@@ -126,8 +120,9 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 				double longitude = object.optDouble("longitude");
 				String name = object.optString("name");
 				String appModeKey = object.optString("appModeKey");
+				long id = object.optLong("roadId");
 				AvoidSpecificRoads.AvoidRoadInfo roadInfo = new AvoidSpecificRoads.AvoidRoadInfo();
-				roadInfo.id = 0;
+				roadInfo.id = id;
 				roadInfo.latitude = latitude;
 				roadInfo.longitude = longitude;
 				roadInfo.name = name;
@@ -155,6 +150,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 					jsonObject.put("longitude", avoidRoad.longitude);
 					jsonObject.put("name", avoidRoad.name);
 					jsonObject.put("appModeKey", avoidRoad.appModeKey);
+					jsonObject.put("roadId", avoidRoad.id);
 					jsonArray.put(jsonObject);
 				}
 				json.put("items", jsonArray);

@@ -151,7 +151,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 
 	private void setAdapterItems(@Nullable List<WikivoyageSearchResult> items) {
 		if (items == null || items.isEmpty()) {
-			TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
+			TravelLocalDataHelper ldh = getMyApplication().getTravelHelper().getLocalDataHelper();
 			adapter.setHistoryItems(ldh.getAllHistory());
 		} else {
 			adapter.setItems(items);

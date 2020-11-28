@@ -931,10 +931,20 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public void mapActivityResume(MapActivity activity) {
+		this.mapActivity = activity;
+		if (Build.VERSION.SDK_INT < 29) {
+			runAction(activity);
+		}
+	}
+
+	@Override
 	public void mapActivityResumeOnTop(MapActivity activity) {
 		this.mapActivity = activity;
-//		((AudioManager) activity.getSystemService(Context.AUDIO_SERVICE)).registerMediaButtonEventReceiver(
-//				new ComponentName(activity, MediaRemoteControlReceiver.class));
+		runAction(activity);
+	}
+
+	private void runAction(MapActivity activity) {
 		if (runAction != -1) {
 			takeAction(activity, actionLon, actionLat, runAction);
 			runAction = -1;

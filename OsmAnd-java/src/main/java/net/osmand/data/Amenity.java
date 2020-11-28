@@ -39,6 +39,11 @@ public class Amenity extends MapObject {
 	public static final String REF = "ref";
 	public static final String OSM_DELETE_VALUE = "delete";
 	public static final String OSM_DELETE_TAG = "osmand_change";
+	public static final String IMAGE_TITLE = "image_title";
+	public static final String IS_PART = "is_part";
+	public static final String IS_AGGR_PART = "is_aggr_part";
+	public static final String CONTENT_JSON = "content_json";
+
 
 	private String subType;
 	private PoiCategory type;

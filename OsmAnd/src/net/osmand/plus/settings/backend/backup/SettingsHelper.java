@@ -534,10 +534,6 @@ public class SettingsHelper {
 		if (!poiList.isEmpty()) {
 			settingsItems.put(ExportSettingsType.POI_TYPES, poiList);
 		}
-		List<HistoryEntry> historyEntries = SearchHistoryHelper.getInstance(app).getHistoryEntries(false);
-		if (!historyEntries.isEmpty()) {
-			settingsItems.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
-		}
 		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
 		if (!impassableRoads.isEmpty()) {
 			settingsItems.put(ExportSettingsType.AVOID_ROADS, new ArrayList<>(impassableRoads.values()));
@@ -605,6 +601,10 @@ public class SettingsHelper {
 			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, MapMarkersGroup.ANY_TYPE);
 			markersGroup.setMarkers(markersHistory);
 			myPlacesItems.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
+		}
+		List<HistoryEntry> historyEntries = SearchHistoryHelper.getInstance(app).getHistoryEntries(false);
+		if (!historyEntries.isEmpty()) {
+			myPlacesItems.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
 		}
 		return myPlacesItems;
 	}
@@ -821,10 +821,10 @@ public class SettingsHelper {
 		List<File> routingFilesList = new ArrayList<>();
 		List<File> renderFilesList = new ArrayList<>();
 		List<File> multimediaFilesList = new ArrayList<>();
-		List<File> tracksFilesList = new ArrayList<>();
 		List<File> ttsVoiceFilesList = new ArrayList<>();
 		List<File> voiceFilesList = new ArrayList<>();
 		List<FileSettingsItem> mapFilesList = new ArrayList<>();
+		List<FileSettingsItem> tracksFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		List<GlobalSettingsItem> globalSettingsItems = new ArrayList<>();
 		List<OsmNotesPoint> notesPointList = new ArrayList<>();
@@ -848,7 +848,7 @@ public class SettingsHelper {
 					} else if (fileItem.getSubtype() == FileSubtype.MULTIMEDIA_NOTES) {
 						multimediaFilesList.add(fileItem.getFile());
 					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
-						tracksFilesList.add(fileItem.getFile());
+						tracksFilesList.add(fileItem);
 					} else if (fileItem.getSubtype().isMap()) {
 						mapFilesList.add(fileItem);
 					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {

@@ -400,7 +400,7 @@
     <string name="poi_diving">Buceo</string>
     <string name="poi_scuba_diving">Submarinismo</string>
     <string name="poi_dog_racing">Canódromo</string>
-    <string name="poi_equestrian">Equitación</string>
+    <string name="poi_equestrian">Deportes ecuestres</string>
     <string name="poi_field_hockey">Hockey sobre césped</string>
     <string name="poi_golf">Golf</string>
     <string name="poi_gymnastics">Gimnasia</string>
@@ -1234,7 +1234,7 @@
     <string name="poi_railway_crossing">Paso a nivel peatonal;Cruce peatonal ferroviario</string>
     <string name="poi_railway_level_crossing">Paso a nivel;Cruce ferroviario</string>
     <string name="poi_bird_hide">Observatorio de aves</string>
-    <string name="poi_horse_riding">Equitación</string>
+    <string name="poi_horse_riding">Centro ecuestre</string>
     <string name="poi_garden">Jardín</string>
     <string name="poi_grass">Césped</string>
     <string name="poi_grassland">Pastizal</string>

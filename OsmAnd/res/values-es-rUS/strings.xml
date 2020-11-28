@@ -1528,7 +1528,7 @@
     <string name="av_camera_focus_hiperfocal">Enfoque hiperfocal</string>
     <string name="av_camera_focus_edof">Profundidad de campo extendido (EDOF)</string>
     <string name="av_camera_focus_infinity">Enfoque al infinito</string>
-    <string name="av_camera_focus_macro">Modo de enfoque macro (primer plano)</string>
+    <string name="av_camera_focus_macro">Enfoque macro (primer plano)</string>
     <string name="av_camera_focus_continuous">Enfoque continuo</string>
     <string name="av_photo_play_sound">Reproducir sonido al fotografiar</string>
     <string name="av_photo_play_sound_descr">Define el sonido o silencio al fotografiar.</string>
@@ -3458,7 +3458,7 @@
     <string name="monitoring_min_speed">Velocidad mínima</string>
     <string name="monitoring_min_accuracy">Precisión mínima</string>
     <string name="monitoring_min_distance">Desplazamiento mínimo</string>
-    <string name="reset_plugin_to_default">Restablecer ajustes del complemento a valores predefinidos</string>
+    <string name="reset_plugin_to_default">Restablecer complemento a valores predefinidos</string>
     <string name="multimedia_rec_split_title">División de grabación</string>
     <string name="multimedia_use_system_camera">Usar la aplicación del sistema</string>
     <string name="multimedia_photo_play_sound">Reproducir sonido al fotografiar</string>
@@ -3948,17 +3948,17 @@
     <string name="icon_group_emergency">Emergencia</string>
     <string name="icon_group_amenity">Comodidad</string>
     <string name="file_already_imported">El archivo ya fue importado en OsmAnd</string>
-    <string name="user_login">Nombre de usuario</string>
-    <string name="use_login_password">Ingresar nombre de usuario y contraseña</string>
+    <string name="user_login">Ingresar</string>
+    <string name="use_login_password">Ingresar con usuario y contraseña</string>
     <string name="subscription_payment_issue_title">Hay un problema con la suscripción. Pulsa el botón para ir a los ajustes de la suscripción de Google Play y corregir el método de pago.</string>
     <string name="subscription_paused_title">La suscripción a OsmAnd Live se ha pausado</string>
     <string name="subscription_on_hold_title">La suscripción a OsmAnd Live está en espera</string>
     <string name="subscription_expired_title">La suscripción a OsmAnd Live ha caducado</string>
     <string name="sign_in_with_open_street_map">Ingresar con OpenStreetMap</string>
     <string name="send_files_to_openstreetmap">Enviar archivo GPX a OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Inicia sesión para subir los cambios nuevos o modificados,
+    <string name="open_street_map_login_mode">Debes iniciar sesión para subir los cambios nuevos o modificados.
 \n
-\nya sea con OAuth o usando el nombre de usuario y contraseña.</string>
+\nPuedes ingresar usando el método seguro de OAuth o con nombre de usuario y contraseña.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Debes añadir al menos dos puntos</string>
     <string name="markers_history">Historial de marcadores</string>
     <string name="manage_subscription">Gestionar suscripción</string>
@@ -3973,10 +3973,10 @@
     <string name="shared_string_add_photo">Añadir foto</string>
     <string name="register_opr_have_account">Ya tengo cuenta</string>
     <string name="register_opr_create_new_account">Crear nueva cuenta</string>
-    <string name="register_on_openplacereviews_desc">Ingresa en el sitio web del proyecto de datos abiertos OpenPlaceReviews.org para subir más fotos.</string>
+    <string name="register_on_openplacereviews_desc">Las fotos son provistas por el proyecto de datos abiertos OpenPlaceReviews.org. Para subir fotos debes registrarte en el sitio web.</string>
     <string name="register_on_openplacereviews">Registrarse en
 \nOpenPlaceReviews.org</string>
-    <string name="osm_login_descr">Ingresa usando el método seguro de OAuth o usa el nombre de usuario y contraseña.</string>
+    <string name="osm_login_descr">Puedes iniciar sesión con el método seguro de OAuth o usar el nombre de usuario y contraseña.</string>
     <string name="osm_edit_comment_note">Comentar nota de OSM</string>
     <string name="osm_edit_close_note">Cerrar nota de OSM</string>
     <string name="shared_string_search_history">Historial de búsqueda</string>
@@ -3994,4 +3994,11 @@
 \nOpenPlaceReviews (fotos de PDI);
 \nMapillary (imágenes a nivel de calle);
 \nWeb / Wikimedia (fotos de PDI incluidas en los datos de OpenStreetMap).</string>
+    <string name="use_dev_url_descr">Cambia a la versión para desarrolladores «dev.openstreetmap.org» en lugar de openstreetmap.org para probar la carga de PDI, notas de OSM y archivos GPX.</string>
+    <string name="use_dev_url">Usar dev.openstreetmap.org</string>
+    <string name="select_picture">Elegir imagen</string>
+    <string name="select_items_for_import">Marca los elementos que serán importados.</string>
+    <string name="select_groups_for_import">Marca los grupos que serán importados.</string>
+    <string name="cannot_upload_image">No se puede subir la imagen, inténtalo más tarde</string>
+    <string name="app_mode_gap">Separador</string>
 </resources>

@@ -14,6 +14,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -27,14 +29,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -42,11 +42,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.*;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
@@ -69,7 +65,6 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
 import org.apache.commons.logging.Log;
 import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 
@@ -77,13 +72,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
@@ -119,6 +108,8 @@ public class MenuBuilder {
 	private String preferredMapLang;
 	private String preferredMapAppLang;
 	private boolean transliterateNames;
+	private View view;
+	private View photoButton;
 
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
 	private String[] placeId = new String[0];
@@ -131,6 +122,14 @@ public class MenuBuilder {
 		@Override
 		public void onPlaceIdAcquired(String[] placeId) {
 			MenuBuilder.this.placeId = placeId;
+			if (placeId.length < 2) {
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						photoButton.setVisibility(View.GONE);
+					}
+				});
+			}
 		}
 
 		@Override
@@ -239,6 +238,7 @@ public class MenuBuilder {
 	}
 
 	public void build(View view) {
+		this.view = view;
 		firstRow = true;
 		hidden = false;
 		buildTopInternal(view);
@@ -412,7 +412,10 @@ public class MenuBuilder {
 			}
 		});
 		//TODO This feature is under development
-		view.setVisibility(View.VISIBLE);
+		if (!OsmandPlugin.isDevelopment()) {
+			view.setVisibility(View.GONE);
+		}
+		photoButton = view;
 		return view;
 	}
 
@@ -430,7 +433,9 @@ public class MenuBuilder {
 				OnActivityResultListener() {
 			@Override
 			public void onResult(int resultCode, Intent resultData) {
-				handleSelectedImage(view, resultData.getData());
+				if (resultData != null) {
+					handleSelectedImage(view, resultData.getData());
+				}
 			}
 		}));
 	}
@@ -443,10 +448,12 @@ public class MenuBuilder {
 				try {
 					inputStream = app.getContentResolver().openInputStream(uri);
 					if (inputStream != null) {
-						uploadImageToPlace(view, inputStream);
+						uploadImageToPlace(inputStream);
 					}
 				} catch (Exception e) {
 					LOG.error(e);
+					String str = app.getString(R.string.cannot_upload_image);
+					showToastMessage(str);
 				} finally {
 					Algorithms.closeStream(inputStream);
 				}
@@ -455,7 +462,7 @@ public class MenuBuilder {
 		t.start();
 	}
 
-	private void uploadImageToPlace(View view, InputStream image) {
+	private void uploadImageToPlace(InputStream image) {
 		InputStream serverData = new ByteArrayInputStream(compressImage(image));
 		final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
 		String url = baseUrl + "api/ipfs/image";
@@ -463,26 +470,60 @@ public class MenuBuilder {
 		if (response != null) {
 			int res = 0;
 			try {
+				StringBuilder error = new StringBuilder();
 				res = openDBAPI.uploadImage(
 						placeId,
 						baseUrl,
 						OPRWebviewActivity.getPrivateKeyFromCookie(app),
 						OPRWebviewActivity.getUsernameFromCookie(app),
-						response);
+						response, error);
+				if (res != 200) {
+					showToastMessage(error.toString());
+				} else {
+					//ok, continue
+				}
 			} catch (FailedVerificationException e) {
 				LOG.error(e);
-				app.showToastMessage(R.string.cannot_upload_image);
+				checkTokenAndShowScreen();
 			}
 			if (res != 200) {
 				//image was uploaded but not added to blockchain
-				app.showToastMessage(R.string.cannot_upload_image);
+				checkTokenAndShowScreen();
 			} else {
-				app.showToastMessage(R.string.successfully_uploaded_pattern, 1, 1);
+				String str = app.getString(R.string.successfully_uploaded_pattern, 1, 1);
+				showToastMessage(str);
 				//refresh the image
 				execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 			}
 		} else {
-			app.showToastMessage(R.string.cannot_upload_image);
+			checkTokenAndShowScreen();
+		}
+	}
+
+	private void showToastMessage(final String str) {
+		new Handler(Looper.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(mapActivity.getBaseContext(), str, Toast.LENGTH_LONG).show();
+			}
+		});
+	}
+
+	//This method runs on non main thread
+	private void checkTokenAndShowScreen() {
+		final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
+		final String name = OPRWebviewActivity.getUsernameFromCookie(app);
+		final String privateKey = OPRWebviewActivity.getPrivateKeyFromCookie(app);
+		if (openDBAPI.checkPrivateKeyValid(baseUrl, name, privateKey)) {
+			String str = app.getString(R.string.cannot_upload_image);
+			showToastMessage(str);
+		} else {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+				}
+			});
 		}
 	}
 

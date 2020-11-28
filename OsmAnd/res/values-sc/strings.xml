@@ -3948,12 +3948,12 @@
     <string name="login_open_street_map">Intra in OpenStreetMap</string>
     <string name="login_open_street_map_org">Intra in OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Intra cun OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Intra pro carrigare modìficas noas o mudadas,
+    <string name="open_street_map_login_mode">Depes intrare pro pòdere carrigare modìficas noas o mudadas.
 \n
-\nimpreende su mètodu seguru OAuth o cun su nùmene de impreadore tuo e sa crae de intrada tua.</string>
-    <string name="use_login_password">Intra cun unu nùmene de impreadore e una crae de intrada</string>
+\nPodes intrare impreende su mètodu seguru OAuth o cun s\'identificadore (su nùmene de impreadore) tuo e sa crae de intrada tua.</string>
+    <string name="use_login_password">Imprea un\'identificadore e una crae de intrada</string>
     <string name="login_account">Contu</string>
-    <string name="user_login">Nùmene impreadore</string>
+    <string name="user_login">Identificadore</string>
     <string name="manage_subscription">Amministra s\'abbonamentu</string>
     <string name="subscription_payment_issue_title">B\'at unu problema cun s\'abbonamentu tuo. Incarca su butone pro andare a sas impostatziones de sos abbonamentos de Google Play pro acontzare sa manera de pagamentu tua.</string>
     <string name="subscription_expired_title">S\'abbonamentu de OsmAnd Live est iscadidu</string>
@@ -3968,11 +3968,11 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Arrastàbile\" cheret nàrrere chi sa rasta no at a èssere ammustrada in peruna lista pùblica, ma sos puntos suos cun sas datas (no ant a èssere assotziados diretamente cun tie) l\'ant a èssere pro mèdiu de iscarrigamentos dae s\'API GPS pùblica.</string>
     <string name="osm_edit_close_note">Serra sa nota de OSM</string>
     <string name="osm_edit_comment_note">Cummenta sa nota de OSM</string>
-    <string name="osm_login_descr">Intra impreende su mètodu seguru OAuth o cun su nùmene de impreadore tuo e sa crae de intrada tua.</string>
+    <string name="osm_login_descr">Podes intrare impreende su mètodu seguru OAuth o cun su nùmene tuo e sa crae de intrada tua.</string>
     <string name="shared_string_add_photo">Annanghe una fotografia</string>
     <string name="register_on_openplacereviews">Registra·ti in
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Intra in su situ de su progetu a datos abertos OpenPlaceReviews.org. pro carrigare fintzas àteras fotografias.</string>
+    <string name="register_on_openplacereviews_desc">Sas fotografias benint frunidas dae su progetu a datos abertos OpenPlaceReviews.org. Pro carrigare sas fotografias tuas ti depes registrare a su situ.</string>
     <string name="register_opr_create_new_account">Crea unu contu nou</string>
     <string name="register_opr_have_account">Tèngio giai unu contu</string>
     <string name="shared_string_search_history">Cronologia de chirca</string>
@@ -3994,4 +3994,6 @@
     <string name="select_items_for_import">Ischerta sos elementos de importare.</string>
     <string name="use_dev_url_descr">Cola a impreare dev.openstreetmap.org in logu de openstreetmap.org pro proare su carrigamentu de sas notas OSM / PDI / GPX.</string>
     <string name="use_dev_url">Imprea dev.openstreetmap.org</string>
+    <string name="cannot_upload_image">Impossìbile carrigare s\'immàgine, torra a proare prus a tardu</string>
+    <string name="select_picture">Ischerta un\'immàgine</string>
 </resources>

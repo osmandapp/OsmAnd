@@ -68,7 +68,7 @@ public class OpenDBAPI {
 				response.toString().contains(LOGIN_SUCCESS_MESSAGE);
 	}
 
-	public int uploadImage(String[] placeId, String baseUrl, String privateKey, String username, String image) throws FailedVerificationException {
+	public int uploadImage(String[] placeId, String baseUrl, String privateKey, String username, String image, StringBuilder sb) throws FailedVerificationException {
 		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 			Security.removeProvider("BC");
 			Security.addProvider(new BouncyCastleProvider());
@@ -92,11 +92,9 @@ public class OpenDBAPI {
 		List<String> ids = new ArrayList<>(Arrays.asList(placeId));
 		Map<String, Object> change = new TreeMap<>();
 		Map<String, Object> images = new TreeMap<>();
-		Map<String, Object> outdoor = new TreeMap<>();
-		outdoor.put("outdoor", imageResponseList);
-		images.put("append", outdoor);
+		images.put("append", imageMap);
 		change.put("version", "increment");
-		change.put("images", images);
+		change.put("images.review", images);
 		edit.put("id", ids);
 		edit.put("change", change);
 		edit.put("current", new Object());
@@ -134,6 +132,7 @@ public class OpenDBAPI {
 				String strCurrentLine;
 				while ((strCurrentLine = br.readLine()) != null) {
 					log.error(strCurrentLine);
+					sb.append(strCurrentLine);
 				}
 			}
 			return rc;

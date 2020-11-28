@@ -18,6 +18,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
@@ -54,6 +55,9 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private final boolean nightMode;
 	private final int activeColorRes;
 	private final int secondaryColorRes;
+	private final int groupViewHeight;
+	private final int childViewHeight;
+	private final int listBottomPadding;
 
 	ExportSettingsAdapter(OsmandApplication app, OnItemSelectedListener listener, boolean nightMode) {
 		this.app = app;
@@ -63,6 +67,9 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		themedInflater = UiUtilities.getInflater(app, nightMode);
 		activeColorRes = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
 		secondaryColorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
+		groupViewHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_group_height);
+		childViewHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_large_height);
+		listBottomPadding = app.getResources().getDimensionPixelSize(R.dimen.fab_recycler_view_padding_bottom);
 	}
 
 	@Override
@@ -70,6 +77,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		View group = convertView;
 		if (group == null) {
 			group = themedInflater.inflate(R.layout.profile_data_list_item_group, parent, false);
+			group.findViewById(R.id.item_container).setMinimumHeight(groupViewHeight);
 		}
 		final ExportSettingsCategory category = itemsTypes.get(groupPosition);
 		final SettingsCategoryItems items = itemsMap.get(category);
@@ -108,6 +116,9 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			}
 		});
 
+		boolean addPadding = !isExpanded && groupPosition == getGroupCount() - 1;
+		group.setPadding(0, 0, 0, addPadding ? listBottomPadding : 0);
+
 		adjustIndicator(app, groupPosition, isExpanded, group, nightMode);
 		AndroidUiHelper.updateVisibility(group.findViewById(R.id.divider), isExpanded);
 		AndroidUiHelper.updateVisibility(group.findViewById(R.id.card_top_divider), true);
@@ -122,6 +133,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		View child = convertView;
 		if (child == null) {
 			child = themedInflater.inflate(R.layout.profile_data_list_item_group, parent, false);
+			child.findViewById(R.id.item_container).setMinimumHeight(childViewHeight);
 		}
 		final ExportSettingsCategory category = itemsTypes.get(groupPosition);
 		final SettingsCategoryItems categoryItems = itemsMap.get(category);
@@ -157,7 +169,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			@Override
 			public void onClick(View v) {
 				if (listener != null) {
-					listener.onTypeClicked(category, type);
+					listener.onTypeClicked(type);
 				}
 			}
 		});
@@ -174,7 +186,8 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				notifyDataSetChanged();
 			}
 		});
-
+		boolean addPadding = isLastChild && groupPosition == getGroupCount() - 1;
+		child.setPadding(0, 0, 0, addPadding ? listBottomPadding : 0);
 		AndroidUiHelper.updateVisibility(child.findViewById(R.id.card_bottom_divider), isLastChild);
 
 		return child;
@@ -247,17 +260,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		notifyDataSetChanged();
 	}
 
-	public boolean hasSelectedData() {
-		boolean hasSelectedData = false;
-		for (ExportSettingsType key : selectedItemsMap.keySet()) {
-			if (!selectedItemsMap.get(key).isEmpty()) {
-				hasSelectedData = true;
-				break;
-			}
-		}
-		return hasSelectedData;
-	}
-
 	public List<? super Object> getData() {
 		List<Object> selectedItems = new ArrayList<>();
 		for (List<?> items : selectedItemsMap.values()) {
@@ -314,6 +316,10 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 						itemsSize += ((FileSettingsItem) object).getSize();
 					} else if (object instanceof File) {
 						itemsSize += ((File) object).length();
+					} else if (object instanceof MapMarkersGroup) {
+						int selectedMarkers = ((MapMarkersGroup) object).getMarkers().size();
+						String itemsDescr = app.getString(R.string.shared_string_items);
+						return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers);
 					}
 				}
 			}
@@ -339,7 +345,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		void onCategorySelected(ExportSettingsCategory type, boolean selected);
 
-		void onTypeClicked(ExportSettingsCategory category, ExportSettingsType type);
+		void onTypeClicked(ExportSettingsType type);
 
 	}
 }
