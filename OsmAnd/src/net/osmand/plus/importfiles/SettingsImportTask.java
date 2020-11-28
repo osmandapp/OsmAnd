@@ -90,14 +90,16 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 						for (PluginSettingsItem pluginItem : pluginSettingsItems) {
 							handlePluginImport(pluginItem, file);
 						}
-						FragmentActivity activity = activityRef.get();
-						if (!pluginIndependentItems.isEmpty() && activity != null) {
+						if (!pluginIndependentItems.isEmpty()) {
 							if (settingsTypes == null) {
-								FragmentManager fragmentManager = activity.getSupportFragmentManager();
-								ImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
+								FragmentActivity activity = activityRef.get();
+								if (activity != null) {
+									FragmentManager fragmentManager = activity.getSupportFragmentManager();
+									ImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
+								}
 							} else {
-								Map<ExportSettingsType, List<?>> allSettingsList = getSettingsToOperate(pluginIndependentItems, false);
-								List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsList, settingsTypes);
+								Map<ExportSettingsType, List<?>> allSettingsMap = getSettingsToOperate(pluginIndependentItems, false);
+								List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsMap, settingsTypes);
 								settingsHelper.checkDuplicates(file, settingsList, settingsList, getDuplicatesListener(file, replace));
 							}
 						}
@@ -130,17 +132,17 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		return new SettingsImportListener() {
 			@Override
 			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
-				FragmentActivity activity = activityRef.get();
-				if (activity != null && succeed) {
-					FragmentManager fm = activity.getSupportFragmentManager();
+				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
 					app.getPoiFilters().loadSelectedPoiFilters();
+					AppInitializer.loadRoutingFiles(app, null);
+					FragmentActivity activity = activityRef.get();
 					if (activity instanceof MapActivity) {
 						((MapActivity) activity).getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 						((MapActivity) activity).updateApplicationModeSettings();
 					}
-					AppInitializer.loadRoutingFiles(app, null);
-					if (file != null) {
+					if (file != null && activity != null) {
+						FragmentManager fm = activity.getSupportFragmentManager();
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}
 				}

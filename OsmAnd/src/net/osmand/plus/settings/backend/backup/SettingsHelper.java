@@ -481,24 +481,19 @@ public class SettingsHelper {
 		return getFilteredSettingsItems(typesMap, settingsTypes);
 	}
 
-	public List<SettingsItem> getFilteredSettingsItems(Map<ExportSettingsType, List<?>> additionalData,
-													   List<ExportSettingsType> settingsTypes) {
+	public List<SettingsItem> getFilteredSettingsItems(Map<ExportSettingsType, List<?>> allSettingsMap,
+	                                                      List<ExportSettingsType> settingsTypes) {
 		List<SettingsItem> settingsItems = new ArrayList<>();
 		for (ExportSettingsType settingsType : settingsTypes) {
-			List<?> settingsDataObjects = additionalData.get(settingsType);
+			List<?> settingsDataObjects = allSettingsMap.get(settingsType);
 			if (settingsDataObjects != null) {
-				for (Object object : settingsDataObjects) {
-					if (object instanceof ApplicationModeBean) {
-						settingsItems.add(new ProfileSettingsItem(app, null, (ApplicationModeBean) object));
-					}
-				}
-				settingsItems.addAll(prepareAdditionalSettingsItems(new ArrayList<>(settingsDataObjects)));
+				settingsItems.addAll(prepareSettingsItems(new ArrayList<>(settingsDataObjects)));
 			}
 		}
 		return settingsItems;
 	}
 
-	public Map<ExportSettingsCategory, SettingsCategoryItems> getAdditionalData(boolean globalExport) {
+	public Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsByCategory(boolean globalExport) {
 		Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
 
 		Map<ExportSettingsType, List<?>> settingsItems = getSettingsItems(globalExport);
@@ -692,7 +687,7 @@ public class SettingsHelper {
 		return files;
 	}
 
-	public List<SettingsItem> prepareAdditionalSettingsItems(List<? super Object> data) {
+	public List<SettingsItem> prepareSettingsItems(List<? super Object> data) {
 		List<SettingsItem> settingsItems = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
@@ -754,10 +749,7 @@ public class SettingsHelper {
 		}
 		if (!appModeBeans.isEmpty()) {
 			for (ApplicationModeBean modeBean : appModeBeans) {
-				ApplicationMode mode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
-				if (mode != null) {
-					settingsItems.add(new ProfileSettingsItem(app, mode));
-				}
+				settingsItems.add(new ProfileSettingsItem(app, null, modeBean));
 			}
 		}
 		if (!osmNotesPointList.isEmpty()) {

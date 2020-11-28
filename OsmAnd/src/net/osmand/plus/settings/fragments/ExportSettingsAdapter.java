@@ -248,7 +248,14 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	}
 
 	public boolean hasSelectedData() {
-		return !selectedItemsMap.isEmpty();
+		boolean hasSelectedData = false;
+		for (ExportSettingsType key : selectedItemsMap.keySet()) {
+			if (!selectedItemsMap.get(key).isEmpty()) {
+				hasSelectedData = true;
+				break;
+			}
+		}
+		return hasSelectedData;
 	}
 
 	public List<? super Object> getData() {
