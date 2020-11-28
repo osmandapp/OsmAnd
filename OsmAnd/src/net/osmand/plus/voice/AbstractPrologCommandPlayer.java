@@ -96,7 +96,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			}
 		} else {
 			language = voiceProvider.replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "")
-					.replace("-formal", "");
+					.replace("-formal", "").replace("-casual", "");
 		}
 	}
 
