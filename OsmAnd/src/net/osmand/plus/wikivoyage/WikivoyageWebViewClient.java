@@ -67,7 +67,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		if (url.contains(WIKIVOAYAGE_DOMAIN) && isWebPage) {
 			String lang = WikiArticleHelper.getLang(url);
 			String articleName = WikiArticleHelper.getArticleNameFromUrl(url, lang);
-			long articleId = app.getTravelDbHelper().getArticleId(articleName, lang);
+			long articleId = app.getTravelHelper().getArticleId(articleName, lang);
 			if (articleId != 0) {
 				WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, articleId, lang);
 			} else {
@@ -116,7 +116,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 
 					fragmentManager.popBackStackImmediate();
 
-					File path = app.getTravelDbHelper().createGpxFile(article);
+					File path = app.getTravelHelper().createGpxFile(article);
 					GPXUtilities.GPXFile gpxFile = article.getGpxFile();
 					gpxFile.path = path.getAbsolutePath();
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);

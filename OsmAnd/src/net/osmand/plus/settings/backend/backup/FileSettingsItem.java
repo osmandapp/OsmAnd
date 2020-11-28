@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class FileSettingsItem extends StreamSettingsItem {
@@ -131,6 +132,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
+	private long lastModified;
 
 	public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
 		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
@@ -222,6 +224,14 @@ public class FileSettingsItem extends StreamSettingsItem {
 		this.size = size;
 	}
 
+	public long getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(long lastModified) {
+		this.lastModified = lastModified;
+	}
+
 	@NonNull
 	public File getFile() {
 		return file;
@@ -292,6 +302,9 @@ public class FileSettingsItem extends StreamSettingsItem {
 				} finally {
 					Algorithms.closeStream(output);
 				}
+				if (lastModified != -1) {
+					dest.setLastModified(lastModified);
+				}
 			}
 		};
 	}
@@ -306,7 +319,14 @@ public class FileSettingsItem extends StreamSettingsItem {
 				warnings.add(app.getString(R.string.settings_item_read_error, file.getName()));
 				SettingsHelper.LOG.error("Failed to set input stream from file: " + file.getName(), e);
 			}
-			return super.getWriter();
+			return new StreamSettingsItemWriter(this) {
+				@Override
+				public ZipEntry createNewEntry(String fileName) {
+					ZipEntry entry = super.createNewEntry(fileName);
+					entry.setTime(file.lastModified());
+					return entry;
+				}
+			};
 		} else {
 			return new StreamSettingsItemWriter(this) {
 

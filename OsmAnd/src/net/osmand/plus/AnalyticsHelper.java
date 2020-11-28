@@ -27,7 +27,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 
 	private final static Log LOG = PlatformUtil.getLog(AnalyticsHelper.class);
 
-	private final static String ANALYTICS_UPLOAD_URL = "https://test.osmand.net/api/submit_analytics";
+	private final static String ANALYTICS_UPLOAD_URL = "https://osmand.net/api/submit_analytics";
 	private final static String ANALYTICS_FILE_NAME = "analytics.json";
 
 	private final static int DATA_PARCEL_SIZE = 500; // 500 events

@@ -117,7 +117,7 @@
     <string name="poi_police">شرطة</string>
     <string name="poi_artwork_type_fountain">نوع العمل الفني : نافورة</string>
     <string name="poi_craft_carpenter">نجار</string>
-    <string name="poi_craft_plumber">سباك</string>
+    <string name="poi_craft_plumber">سباكة</string>
     <string name="poi_car">معرض سيارات</string>
     <string name="poi_car_repair">ورشة تصليح السيارات</string>
     <string name="poi_recycling_printer_cartridges">خراطيش الطابعة</string>
@@ -702,7 +702,7 @@
     <string name="poi_beauty_salon_nails">تجميل الاظافر</string>
     <string name="poi_massage">صالون تدليك</string>
     <string name="poi_tattoo">صالون وشم</string>
-    <string name="poi_dry_cleaning">التنظيف الجاف</string>
+    <string name="poi_dry_cleaning">مغسلة ملابس</string>
     <string name="poi_laundry">غسيل الملابس</string>
     <string name="poi_car_rental">تأجير سيارات</string>
     <string name="poi_car_sharing">مشاركة السيارات</string>
@@ -1369,7 +1369,7 @@
     <string name="poi_health_specialty_social_paediatrics_yes">طب الأطفال الاجتماعي</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_yes">طب التوليد (القيصرية)</string>
     <string name="poi_health_specialty_addiction_medicine_yes">طب الإدمان</string>
-    <string name="poi_health_specialty_optometry_yes">بصريات</string>
+    <string name="poi_health_specialty_optometry_yes">نظارات/بصريات</string>
     <string name="poi_health_specialty_speech_therapy_yes">علاج النطق</string>
     <string name="poi_health_specialty_sports_medicine_yes">الطب الرياضي</string>
     <string name="poi_health_specialty_acupuncture_yes">الوخز بالإبر</string>
@@ -1739,7 +1739,7 @@
     <string name="poi_craft_plasterer">جصاص</string>
     <string name="poi_craft_parquet_layer">طبقة الباركيه</string>
     <string name="poi_craft_painter">دهان</string>
-    <string name="poi_craft_optician">أخصائي بصريات</string>
+    <string name="poi_craft_optician">محل نظارات/بصريات</string>
     <string name="poi_craft_metal_construction">حرفة الصناعات المعدنية</string>
     <string name="poi_craft_key_cutter">ناسخ مفاتيح</string>
     <string name="poi_craft_locksmith">صانع ومصلح المفاتيح</string>
@@ -2116,7 +2116,7 @@
     <string name="poi_piste_difficulty_easy">سهل</string>
     <string name="poi_rtsa_scale">مقياس RTSA</string>
     <string name="poi_windfall">متضرره من الرياح</string>
-    <string name="poi_scrub">فيضة/شجيرات ربيعية</string>
+    <string name="poi_scrub">فيضة/روضة</string>
     <string name="poi_heath">براح</string>
     <string name="poi_railway_level_crossing">مستوى العبور</string>
     <string name="poi_railway_crossing">معبر خط القطار</string>

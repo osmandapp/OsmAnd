@@ -1,8 +1,8 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
+
 import android.view.View;
 import androidx.core.content.ContextCompat;
-import net.osmand.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -12,7 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class IPFSImageCard extends ImageCard {
-	private static final String BASE_URL = "https://test.openplacereviews.org/api/ipfs/image-ipfs?cid=";
 	private static final Log LOG = PlatformUtil.getLog(IPFSImageCard.class);
 
 	public IPFSImageCard(MapActivity mapActivity, JSONObject imageObject) {
@@ -23,6 +22,7 @@ public class IPFSImageCard extends ImageCard {
 		} catch (JSONException e) {
 			LOG.error(e);
 		}
+		String BASE_URL = mapActivity.getString(R.string.opr_base_url) + "api/ipfs/image-ipfs?cid=";
 		url = BASE_URL + cid;
 		imageHiresUrl = BASE_URL + cid;
 		imageUrl = BASE_URL + cid;

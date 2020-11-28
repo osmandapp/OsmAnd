@@ -3955,12 +3955,12 @@
     <string name="login_open_street_map">Ensaluti al OpenStreetMap</string>
     <string name="login_open_street_map_org">Ensaluti al OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Ensaluti per OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Ensalutu por alŝuti novajn aŭ modifitajn ŝanĝojn
+    <string name="open_street_map_login_mode">Vi devas ensaluti por alŝuti novajn aŭ modifitajn ŝanĝojn.
 \n
-\naŭ per la sekura metodo OAuth aŭ per enigi uzantnomon kaj pasvorton.</string>
-    <string name="use_login_password">Ensaluti per uzantnomo kaj pasvorto</string>
+\nVi povas ensaluti per la sekura metodo OAuth aŭ per enigi salutnomon kaj pasvorton.</string>
+    <string name="use_login_password">Ensaluti per salutnomo kaj pasvorto</string>
     <string name="login_account">Konto</string>
-    <string name="user_login">Uzantnomo</string>
+    <string name="user_login">Salutnomo</string>
     <string name="markers_history">Historio de markoj</string>
     <string name="send_files_to_openstreetmap">Sendi GPX‑dosieron al OpenStreetMap</string>
     <string name="enter_text_separated">Enigu etikedojn disigitajn per komo (,).</string>
@@ -3970,11 +3970,11 @@
     <string name="gpx_upload_trackable_visibility_descr">“Spurebla” signifas, ke la GPX‑spuro ne montriĝos en publikaj listoj, sed pritraktitaj punktoj kun tempindikoj el ĝi (kiuj ne povos esti senpere ligitaj al vi) estos elŝuteblaj per la publika API GPS.</string>
     <string name="osm_edit_close_note">Fermi OSM-rimarkon</string>
     <string name="osm_edit_comment_note">Komenti OSM-rimarkon</string>
-    <string name="osm_login_descr">Ensalutii per la sekura metodo OAuth aŭ per uzi uzantnomon kaj pasvorton.</string>
+    <string name="osm_login_descr">Vi povas ensalutii per la sekura metodo OAuth aŭ per uzi salutnomon kaj pasvorton.</string>
     <string name="shared_string_add_photo">Aldoni foton</string>
     <string name="register_on_openplacereviews">Registri ĉe
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Ensaluti en la paĝon de la malferm‑datuma projekto OpenPlaceReviews.org por alŝuti fotojn.</string>
+    <string name="register_on_openplacereviews_desc">Fotoj estas liverataj de la malferm‑datuma projekto OpenPlaceReviews.org. Por alŝuti viajn fotojn, vi devas enlasaluti en la retejon.</string>
     <string name="register_opr_create_new_account">Krei novan konton</string>
     <string name="register_opr_have_account">Mi jam havas konton</string>
     <string name="shared_string_search_history">Serĉi en historio</string>
@@ -3996,4 +3996,6 @@
     <string name="select_items_for_import">Elektu elementojn por enporti.</string>
     <string name="use_dev_url_descr">Baskuli al dev.openstreetmap.org anstataŭ openstreetmap.org por testi alŝuti OSM‑rimarkojn, interesejojn, GPX‑spurojn.</string>
     <string name="use_dev_url">Uzi dev.openstreetmap.org</string>
+    <string name="cannot_upload_image">Ne povas alŝuti la bildon, reprovu poste</string>
+    <string name="select_picture">Elektu bildon</string>
 </resources>

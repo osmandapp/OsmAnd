@@ -25,6 +25,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 import java.io.File;
@@ -45,13 +46,13 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 			return;
 		}
 		final CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
-		final TravelDbHelper dbHelper = app.getTravelDbHelper();
+		final TravelHelper travelHelper = app.getTravelHelper();
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
-		if (dbHelper.getExistingTravelBooks().size() > 1) {
+		if (travelHelper.getExistingTravelBooks().size() > 1) {
 			BaseBottomSheetItem selectTravelBook = new BottomSheetItemWithDescription.Builder()
-					.setDescription(dbHelper.formatTravelBookName(dbHelper.getSelectedTravelBook()))
+					.setDescription(travelHelper.formatTravelBookName(travelHelper.getSelectedTravelBook()))
 					.setDescriptionColorId(nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light)
 					.setIcon(getContentIcon(R.drawable.ic_action_travel))
 					.setTitle(getString(R.string.shared_string_travel_book))
@@ -125,7 +126,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 					public void onClick(View v) {
 						OsmandApplication app = getMyApplication();
 						if (app != null) {
-							TravelLocalDataHelper ldh = app.getTravelDbHelper().getLocalDataHelper();
+							TravelLocalDataHelper ldh = app.getTravelHelper().getLocalDataHelper();
 							ldh.clearHistory();
 						}
 						dismiss();
@@ -149,11 +150,11 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 			return;
 		}
 
-		final TravelDbHelper dbHelper = app.getTravelDbHelper();
-		final List<File> list = dbHelper.getExistingTravelBooks();
+		final TravelHelper travelHelper = app.getTravelHelper();
+		final List<File> list = travelHelper.getExistingTravelBooks();
 		String[] ls = new String[list.size()];
 		for (int i = 0; i < ls.length; i++) {
-			ls[i] = dbHelper.formatTravelBookName(list.get(i));
+			ls[i] = travelHelper.formatTravelBookName(list.get(i));
 		}
 
 		new AlertDialog.Builder(ctx)
@@ -161,7 +162,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 				.setItems(ls, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						dbHelper.selectTravelBook(list.get(which));
+						travelHelper.selectTravelBook(list.get(which));
 						sendResult(TRAVEL_BOOK_CHANGED);
 					}
 				})

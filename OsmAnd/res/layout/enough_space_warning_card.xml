@@ -36,6 +36,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:paddingBottom="@dimen/measurement_tool_menu_title_padding_bottom"
 				android:text="@string/export_not_enough_space"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
