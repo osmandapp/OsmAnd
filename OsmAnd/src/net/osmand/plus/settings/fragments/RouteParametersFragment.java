@@ -90,13 +90,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		booleanRoutingPrefListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				recalculateRoute();
+				recalculateRoute(app, getSelectedAppMode());
 			}
 		};
 		customRoutingPrefListener = new StateChangedListener<String>() {
 			@Override
 			public void stateChanged(String change) {
-				recalculateRoute();
+				recalculateRoute(app, getSelectedAppMode());
 			}
 		};
 	}
@@ -391,7 +391,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				ApplicationMode appMode = getSelectedAppMode();
-				ElevationDateBottomSheet.showInstance(fragmentManager, reliefFactorParameters, appMode, this, false);
+				ElevationDateBottomSheet.showInstance(fragmentManager, appMode, this, false);
 			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);
@@ -534,14 +534,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if ((RELIEF_SMOOTHNESS_FACTOR.equals(prefId) || DRIVING_STYLE.equals(prefId)) && newValue instanceof String) {
-			ApplicationMode appMode = getSelectedAppMode();
-			String selectedParameterId = (String) newValue;
 			List<RoutingParameter> routingParameters = DRIVING_STYLE.equals(prefId) ? drivingStyleParameters : reliefFactorParameters;
-			for (RoutingParameter p : routingParameters) {
-				String parameterId = p.getId();
-				setRoutingParameterSelected(settings, appMode, parameterId, p.getDefaultBoolean(), parameterId.equals(selectedParameterId));
-			}
-			recalculateRoute();
+			updateSelectedParameters(app, getSelectedAppMode(), routingParameters, (String) newValue);
 		} else if (ROUTING_SHORT_WAY.equals(prefId) && newValue instanceof Boolean) {
 			applyPreference(ROUTING_SHORT_WAY, applyToAllProfiles, newValue);
 			applyPreference(settings.FAST_ROUTE_MODE.getId(), applyToAllProfiles, !(Boolean) newValue);
@@ -568,7 +562,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	@Override
 	public void onPreferenceChanged(String prefId) {
 		if (AVOID_ROUTING_PARAMETER_PREFIX.equals(prefId) || PREFER_ROUTING_PARAMETER_PREFIX.equals(prefId)) {
-			recalculateRoute();
+			recalculateRoute(app, getSelectedAppMode());
 		}
 	}
 
@@ -632,9 +626,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		return multiSelectPref;
 	}
 
-	private void recalculateRoute() {
+	private static void recalculateRoute(OsmandApplication app, ApplicationMode mode) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (getSelectedAppMode().equals(routingHelper.getAppMode())
+		if (mode.equals(routingHelper.getAppMode())
 				&& (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
 			routingHelper.recalculateRouteDueToSettingsChange();
 		}
@@ -648,11 +642,11 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		otherRoutingParameters.clear();
 	}
 
-	private String getRoutingParameterTitle(Context context, RoutingParameter parameter) {
+	public static String getRoutingParameterTitle(Context context, RoutingParameter parameter) {
 		return AndroidUtils.getRoutingStringPropertyName(context, parameter.getId(), parameter.getName());
 	}
 
-	private boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode, RoutingParameter parameter) {
+	public static boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode, RoutingParameter parameter) {
 		CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 		if (mode != null) {
 			return property.getModeValue(mode);
@@ -661,8 +655,17 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 	}
 
-	public static void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode,
-												   String parameterId, boolean defaultBoolean, boolean isChecked) {
+	public static void updateSelectedParameters(OsmandApplication app, ApplicationMode mode,
+												List<RoutingParameter> parameters, String selectedParameterId) {
+		for (RoutingParameter p : parameters) {
+			String parameterId = p.getId();
+			setRoutingParameterSelected(app.getSettings(), mode, parameterId, p.getDefaultBoolean(), parameterId.equals(selectedParameterId));
+		}
+		recalculateRoute(app, mode);
+	}
+
+	private static void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode,
+													String parameterId, boolean defaultBoolean, boolean isChecked) {
 		CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(parameterId, defaultBoolean);
 		if (mode != null) {
 			property.setModeValue(mode, isChecked);

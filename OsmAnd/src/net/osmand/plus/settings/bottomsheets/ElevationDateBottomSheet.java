@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -18,172 +19,210 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.BooleanPreference;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.OnPreferenceChanged;
+import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import static net.osmand.AndroidUtils.createCheckedColorStateList;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.setRoutingParameterSelected;
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.updateSelectedParameters;
 import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = ElevationDateBottomSheet.class.getSimpleName();
-
 	private static final Log LOG = PlatformUtil.getLog(ElevationDateBottomSheet.class);
 
 	private OsmandApplication app;
 	private ApplicationMode appMode;
-	private List<RoutingParameter> reliefFactorParameters = new ArrayList<RoutingParameter>();
-	private static final String SELECTED_ENTRY_INDEX_KEY = "selected_entry_index_key";
+	private List<RoutingParameter> parameters;
+	private CommonPreference<Boolean> useHeightPref;
 
-	private final List<BottomSheetItemWithCompoundButton> reliefFactorButtons = new ArrayList<>();
+	private BottomSheetItemWithCompoundButton useHeightButton;
+	private List<BottomSheetItemWithCompoundButton> reliefFactorButtons = new ArrayList<>();
+
 	private int selectedEntryIndex = -1;
 
-	public void setAppMode(ApplicationMode appMode) {
-		this.appMode = appMode;
-	}
+	private String on;
+	private String off;
+	private int activeColor;
+	private int disabledColor;
+	private int appModeColor;
 
-	public ApplicationMode getAppMode() {
-		return appMode != null ? appMode : app.getSettings().getApplicationMode();
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		app = requiredMyApplication();
+		if (savedInstanceState != null) {
+			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
+		}
+		super.onCreate(savedInstanceState);
+
+		Map<String, RoutingParameter> routingParameterMap = app.getRouter(appMode).getParameters();
+		RoutingParameter parameter = routingParameterMap.get(USE_HEIGHT_OBSTACLES);
+		if (parameter != null) {
+			useHeightPref = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+		} else {
+			useHeightPref = app.getSettings().getCustomRoutingBooleanProperty(USE_HEIGHT_OBSTACLES, false);
+		}
+		parameters = getReliefParametersForMode(routingParameterMap);
+		for (int i = 0; i < parameters.size(); i++) {
+			if (isRoutingParameterSelected(app.getSettings(), appMode, parameters.get(i))) {
+				selectedEntryIndex = i;
+			}
+		}
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		Context ctx = requireContext();
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
+
+		on = getString(R.string.shared_string_enable);
+		off = getString(R.string.shared_string_disable);
+		appModeColor = appMode.getIconColorInfo().getColor(nightMode);
+		activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
+		disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
+
+		items.add(new TitleItem(getString(R.string.routing_attr_height_obstacles_name)));
+
+		createUseHeightButton(themedCtx);
+
 		int contentPaddingSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		items.add(new DividerSpaceItem(app, contentPaddingSmall));
+		items.add(new LongDescriptionItem(getString(R.string.elevation_data)));
+		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 
-		final BooleanPreference pref = (BooleanPreference) app.getSettings().getCustomRoutingBooleanProperty(USE_HEIGHT_OBSTACLES, false);
+		createReliefFactorButtons(themedCtx);
+	}
 
-		Context themedCtx = UiUtilities.getThemedContext(ctx, nightMode);
-
-		final String on = getString(R.string.shared_string_enable);
-		final String off = getString(R.string.shared_string_disable);
-		final int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
-		final int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
-		if (savedInstanceState != null) {
-			selectedEntryIndex = savedInstanceState.getInt(SELECTED_ENTRY_INDEX_KEY);
-		}
-		boolean checked = pref.getModeValue(getAppMode());
-		final BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
-		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+	private void createUseHeightButton(Context context) {
+		boolean checked = useHeightPref.getModeValue(appMode);
+		useHeightButton = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setCompoundButtonColorId(appModeColor)
 				.setChecked(checked)
 				.setTitle(checked ? on : off)
 				.setTitleColorId(checked ? activeColor : disabledColor)
-				.setCustomView(getCustomButtonView(app, getAppMode(), checked, nightMode))
+				.setCustomView(getCustomButtonView(app, appMode, checked, nightMode))
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						boolean newValue = !pref.getModeValue(getAppMode());
-						enableItems(newValue);
-						Fragment targetFragment = getTargetFragment();
-						pref.setModeValue(getAppMode(), newValue);
+						boolean newValue = !useHeightPref.getModeValue(appMode);
+						Fragment target = getTargetFragment();
+						if (target instanceof OnConfirmPreferenceChange) {
+							OnConfirmPreferenceChange confirmInterface = (OnConfirmPreferenceChange) target;
+							if (confirmInterface.onConfirmPreferenceChange(useHeightPref.getId(), newValue, ApplyQueryType.NONE)) {
+								updateUseHeightButton(useHeightButton, newValue);
 
-						preferenceBtn[0].setTitle(newValue ? on : off);
-						preferenceBtn[0].setChecked(newValue);
-						preferenceBtn[0].setTitleColorId(newValue ? activeColor : disabledColor);
-						updateCustomButtonView(app, getAppMode(), v, newValue, nightMode);
-
-						if (targetFragment instanceof OnPreferenceChanged) {
-							((OnPreferenceChanged) targetFragment).onPreferenceChanged(pref.getId());
-						}
-						if (targetFragment instanceof BaseSettingsFragment) {
-							((BaseSettingsFragment) targetFragment).updateSetting(pref.getId());
+								if (target instanceof BaseSettingsFragment) {
+									((BaseSettingsFragment) target).updateSetting(useHeightPref.getId());
+								}
+							}
+						} else {
+							useHeightPref.setModeValue(appMode, newValue);
+							updateUseHeightButton(useHeightButton, newValue);
 						}
 					}
-				})
-				.create();
-		preferenceBtn[0].setCompoundButtonColorId(getAppMode().getIconColorInfo().getColor(nightMode));
-		items.add(new TitleItem(getString(R.string.routing_attr_height_obstacles_name)));
-		items.add(preferenceBtn[0]);
-		items.add(new DividerSpaceItem(getMyApplication(), contentPaddingSmall));
-		items.add(new LongDescriptionItem(getString(R.string.elevation_data)));
-		items.add(new DividerSpaceItem(getMyApplication(), contentPaddingSmall));
+				}).create();
+		items.add(useHeightButton);
+	}
 
-		for (int i = 0; i < reliefFactorParameters.size(); i++) {
-			RoutingParameter parameter = reliefFactorParameters.get(i);
+	private void updateUseHeightButton(BottomSheetItemWithCompoundButton button, boolean newValue) {
+		enableDisableReliefButtons(newValue);
+		button.setTitle(newValue ? on : off);
+		button.setChecked(newValue);
+		button.setTitleColorId(newValue ? activeColor : disabledColor);
+		updateCustomButtonView(app, appMode, button.getView(), newValue, nightMode);
+	}
+
+	private void createReliefFactorButtons(Context context) {
+		for (int i = 0; i < parameters.size(); i++) {
+			RoutingParameter parameter = parameters.get(i);
 			final BottomSheetItemWithCompoundButton[] preferenceItem = new BottomSheetItemWithCompoundButton[1];
 			preferenceItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(i == selectedEntryIndex)
-					.setButtonTintList(AndroidUtils.createCheckedColorStateList(ctx, R.color.icon_color_default_light, getAppMode().getIconColorInfo().getColor(nightMode)))
+					.setButtonTintList(createCheckedColorStateList(context, R.color.icon_color_default_light, appModeColor))
 					.setTitle(getRoutingParameterTitle(app, parameter))
-					.setTag(i)
 					.setLayoutId(R.layout.bottom_sheet_item_with_radio_btn_left)
+					.setTag(i)
 					.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							selectedEntryIndex = (int) preferenceItem[0].getTag();
 							if (selectedEntryIndex >= 0) {
-								RoutingParameter parameter = reliefFactorParameters.get(selectedEntryIndex);
-
-								String selectedParameterId = parameter.getId();
-								for (RoutingParameter p : reliefFactorParameters) {
-									String parameterId = p.getId();
-									setRoutingParameterSelected(app.getSettings(), appMode, parameterId, p.getDefaultBoolean(), parameterId.equals(selectedParameterId));
-								}
-								recalculateRoute();
-
-								Fragment targetFragment = getTargetFragment();
-								if (targetFragment instanceof OnPreferenceChanged) {
-									((OnPreferenceChanged) targetFragment).onPreferenceChanged(pref.getId());
-								}
+								RoutingParameter parameter = parameters.get(selectedEntryIndex);
+								updateSelectedParameters(app, appMode, parameters, parameter.getId());
 							}
-							updateItems();
+							updateReliefButtons();
 						}
-					})
-					.create();
-			reliefFactorButtons.add(preferenceItem[0]);
+					}).create();
 			items.add(preferenceItem[0]);
+			reliefFactorButtons.add(preferenceItem[0]);
 		}
 	}
 
-	private void recalculateRoute() {
-		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (getAppMode().equals(routingHelper.getAppMode())
-				&& (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
-			routingHelper.recalculateRouteDueToSettingsChange();
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(APP_MODE_KEY, appMode.getStringKey());
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateReliefButtons();
+		enableDisableReliefButtons(useHeightButton.isChecked());
+	}
+
+	@Override
+	protected boolean isNightMode(@NonNull OsmandApplication app) {
+		if (usedOnMap) {
+			return app.getDaynightHelper().isNightModeForMapControlsForProfile(appMode);
+		} else {
+			return !app.getSettings().isLightContentForMode(appMode);
 		}
 	}
 
-	private String getRoutingParameterTitle(Context context, RoutingParameter parameter) {
-		return AndroidUtils.getRoutingStringPropertyName(context, parameter.getId(), parameter.getName());
-	}
-
-	private void updateItems() {
-		for (BaseBottomSheetItem item : reliefFactorButtons) {
-			if (item instanceof BottomSheetItemWithCompoundButton) {
-				boolean checked = item.getTag().equals(selectedEntryIndex);
-				((BottomSheetItemWithCompoundButton) item).setChecked(checked);
+	private List<RoutingParameter> getReliefParametersForMode(Map<String, RoutingParameter> parameters) {
+		List<RoutingParameter> reliefParameters = new ArrayList<>();
+		for (RoutingParameter routingParameter : parameters.values()) {
+			if (RELIEF_SMOOTHNESS_FACTOR.equals(routingParameter.getGroup())) {
+				reliefParameters.add(routingParameter);
 			}
 		}
+		return reliefParameters;
 	}
 
-	private void enableItems(boolean enable) {
-		for (BaseBottomSheetItem item : reliefFactorButtons) {
-			if (item instanceof BottomSheetItemWithCompoundButton) {
-				item.getView().setEnabled(enable);
-			}
+	private void updateReliefButtons() {
+		for (BottomSheetItemWithCompoundButton item : reliefFactorButtons) {
+			item.setChecked(item.getTag().equals(selectedEntryIndex));
 		}
 	}
 
-	public static void showInstance(FragmentManager fm, List<RoutingParameter> reliefFactorParameters,
-									ApplicationMode appMode, Fragment target, boolean usedOnMap) {
+	private void enableDisableReliefButtons(boolean enable) {
+		for (BaseBottomSheetItem item : reliefFactorButtons) {
+			item.getView().setEnabled(enable);
+		}
+	}
+
+	public static void showInstance(FragmentManager fm, ApplicationMode appMode, Fragment target, boolean usedOnMap) {
 		try {
-			if (fm.findFragmentByTag(ElevationDateBottomSheet.TAG) == null) {
+			if (!fm.isStateSaved() && fm.findFragmentByTag(ElevationDateBottomSheet.TAG) == null) {
 				ElevationDateBottomSheet fragment = new ElevationDateBottomSheet();
-				fragment.setAppMode(appMode);
+				fragment.appMode = appMode;
 				fragment.setUsedOnMap(usedOnMap);
-				fragment.reliefFactorParameters.addAll(reliefFactorParameters);
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fm, ScreenTimeoutBottomSheet.TAG);
 			}
@@ -192,4 +231,3 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 }
-

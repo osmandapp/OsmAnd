@@ -45,14 +45,15 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.TimeConditional
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -73,13 +74,16 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	@ColorRes
 	private int selectedModeColorId;
 	private boolean currentMuteState;
+	private boolean currentUseHeightState;
 	private MapActivity mapActivity;
-	StateChangedListener<Boolean> voiceMuteChangeListener;
+	private CommonPreference<Boolean> useHeightPref;
+	private StateChangedListener<Boolean> voiceMuteChangeListener;
+	private StateChangedListener<Boolean> useHeightChangeListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
+		app = requiredMyApplication();
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
 		routingOptionsHelper = app.getRoutingOptionsHelper();
@@ -92,16 +96,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				updateWhenMuteChanged();
 			}
 		};
-	}
-
-	public void updateWhenMuteChanged() {
-		if (app != null) {
-			boolean changedState = app.getSettings().VOICE_MUTE.getModeValue(applicationMode);
-			if (changedState != currentMuteState) {
-				currentMuteState = changedState;
-				updateParameters();
+		useHeightChangeListener = new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				updateWhenUseHeightChanged();
 			}
-		}
+		};
+		useHeightPref = settings.getCustomRoutingBooleanProperty(USE_HEIGHT_OBSTACLES, false);
 	}
 
 	@Override
@@ -144,12 +145,17 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				itemWithCompoundButton.setChecked(itemWithCompoundButton.isChecked());
 			}
 		}
+		currentUseHeightState = useHeightPref.getModeValue(applicationMode);
+		currentMuteState = app.getSettings().VOICE_MUTE.getModeValue(applicationMode);
+
+		useHeightPref.addListener(useHeightChangeListener);
 		app.getSettings().VOICE_MUTE.addListener(voiceMuteChangeListener);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		useHeightPref.removeListener(useHeightChangeListener);
 		app.getSettings().VOICE_MUTE.removeListener(voiceMuteChangeListener);
 	}
 
@@ -169,6 +175,24 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				&& resultCode == ShowAlongTheRouteBottomSheet.SHOW_CONTENT_ITEM_REQUEST_CODE) {
 			mapActivity.getMapRouteInfoMenu().hide();
 			dismiss();
+		}
+	}
+
+	public void updateWhenMuteChanged() {
+		boolean changedState = app.getSettings().VOICE_MUTE.getModeValue(applicationMode);
+		if (changedState != currentMuteState) {
+			currentMuteState = changedState;
+			updateParameters();
+			updateMenu();
+		}
+	}
+
+	public void updateWhenUseHeightChanged() {
+		boolean changedState = useHeightPref.getModeValue(applicationMode);
+		if (changedState != currentUseHeightState) {
+			currentUseHeightState = changedState;
+			updateParameters();
+			updateMenu();
 		}
 	}
 
@@ -437,27 +461,17 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				builder.setLayoutId(R.layout.bottom_sheet_item_with_switch_56dp);
 				if (parameter.routingParameter != null && parameter.routingParameter.getId().equals(GeneralRouter.USE_SHORTEST_WAY)) {
 					// if short route settings - it should be inverse of fast_route_mode
-					builder.setChecked(!settings.FAST_ROUTE_MODE.getModeValue(routingHelper.getAppMode()));
+					builder.setChecked(!settings.FAST_ROUTE_MODE.getModeValue(applicationMode));
 				} else {
 					builder.setChecked(parameter.isSelected(settings));
 				}
-
 				builder.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						GeneralRouter router = app.getRouter(applicationMode);
-						List<GeneralRouter.RoutingParameter> reliefFactorParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-						Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
-						for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
-							GeneralRouter.RoutingParameter routingParameter = e.getValue();
-							if (RELIEF_SMOOTHNESS_FACTOR.equals(routingParameter.getGroup())) {
-								reliefFactorParameters.add(routingParameter);
-							}
-						}
-						if (!reliefFactorParameters.isEmpty() && parameter.getKey().equals(USE_HEIGHT_OBSTACLES)) {
-							FragmentManager fragmentManager = getFragmentManager();
-							if (fragmentManager != null) {
-								ElevationDateBottomSheet.showInstance(fragmentManager, reliefFactorParameters, applicationMode, RouteOptionsBottomSheet.this, false);
+						if (USE_HEIGHT_OBSTACLES.equals(parameter.getKey()) && hasReliefParameters()) {
+							FragmentManager fm = getFragmentManager();
+							if (fm != null) {
+								ElevationDateBottomSheet.showInstance(fm, applicationMode, RouteOptionsBottomSheet.this, false);
 							}
 						} else {
 							applyParameter(item[0], parameter);
@@ -471,6 +485,17 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			item[0] = builder.create();
 			items.add(item[0]);
 		}
+	}
+
+	private boolean hasReliefParameters() {
+		Map<String, RoutingParameter> parameters = app.getRouter(applicationMode).getParameters();
+		for (Map.Entry<String, RoutingParameter> e : parameters.entrySet()) {
+			RoutingParameter routingParameter = e.getValue();
+			if (RELIEF_SMOOTHNESS_FACTOR.equals(routingParameter.getGroup())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void applyParameter(BottomSheetItemWithCompoundButton bottomSheetItem, LocalRoutingParameter parameter) {
