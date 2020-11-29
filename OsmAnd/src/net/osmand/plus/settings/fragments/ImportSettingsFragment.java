@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
@@ -101,13 +100,8 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 		if (savedInstanceState != null) {
 			duplicateStartTime = savedInstanceState.getLong(DUPLICATES_START_TIME_KEY);
 		}
+		exportMode = false;
 		settingsHelper = app.getSettingsHelper();
-		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				showExitDialog();
-			}
-		});
 
 		ImportAsyncTask importTask = settingsHelper.getImportTask();
 		if (importTask != null) {

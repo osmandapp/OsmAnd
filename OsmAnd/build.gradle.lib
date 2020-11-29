@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'ivy-publish'
 
 task printc {
 	configurations.each { if(it.isCanBeResolved())  println it.name }
@@ -17,6 +18,7 @@ android {
 	}
 
 	lintOptions {
+		tasks.lint.enabled = false
 		abortOnError false
 	}
 
@@ -41,8 +43,6 @@ android {
 			renderscript.srcDirs = ["src"]
 			res.srcDirs = ["res"]
 			assets.srcDirs = ["assets"]
-		}
-		debug {
 		}
 
 		legacy {
@@ -339,24 +339,47 @@ task appStart(type: Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
 }
 
-// Uploading artifacts to local path
-group = "net.osmand"
-uploadArchives {
-	repositories.ivy {
-		//    credentials {
-		//        username ""
-		//       password ""
-		//   }
-		url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
-		layout "pattern" , {
-			artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+project.afterEvaluate {
+	publishing {
+		repositories {
+			ivy {
+				url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
+			}
 		}
-
-//		def gitInfo = "git describe --long".execute().text.trim()
-//		def parsedGitInfo = Pattern.compile("v(\\d+\\.\\d+)-([\\d.]+)-(\\w+)").matcher(gitInfo)
-//		assert parsedGitInfo.matches()
-//		version = parsedGitInfo.group(1) + "-SNAPSHOT"
-		version = "1.0-SNAPSHOT"
+		publications {
+			aar(IvyPublication) {
+				artifact bundleLegacyX86DebugAar {
+					classifier 'legacyX86Debug'
+				}
+				artifact bundleLegacyX86ReleaseAar {
+					classifier 'legacyX86Release'
+				}
+				artifact bundleLegacyArm64DebugAar {
+					classifier 'legacyArm64Debug'
+				}
+				artifact bundleLegacyArm64ReleaseAar {
+					classifier 'legacyArm64Release'
+				}
+				artifact bundleLegacyArmonlyDebugAar {
+					classifier 'legacyArmonlyDebug'
+				}
+				artifact bundleLegacyArmonlyReleaseAar {
+					classifier 'legacyArmonlyRelease'
+				}
+				artifact bundleLegacyArmv7DebugAar {
+					classifier 'legacyArmv7Debug'
+				}
+				artifact bundleLegacyArmv7ReleaseAar {
+					classifier 'legacyArmv7Release'
+				}
+				artifact bundleLegacyFatDebugAar {
+					classifier 'legacyFatDebug'
+				}
+				artifact bundleLegacyFatReleaseAar {
+					classifier 'legacyFatRelease'
+				}
+			}
+		}
 	}
 }
 
@@ -370,7 +393,7 @@ dependencies {
 	implementation 'com.google.android.material:material:1.2.1'
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.1.0'
-	implementation fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
+	compileOnly fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
 
 	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
 	implementation 'commons-codec:commons-codec:1.11'

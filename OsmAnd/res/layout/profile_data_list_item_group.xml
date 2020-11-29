@@ -18,6 +18,7 @@
 		android:background="?attr/bg_color">
 
 		<LinearLayout
+			android:id="@+id/item_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:background="?attr/selectableItemBackground"
@@ -30,9 +31,7 @@
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
 				android:layout_marginRight="@dimen/content_padding"
-				android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
 				osmand:srcCompat="@drawable/ic_action_arrow_down" />
 
 			<LinearLayout
@@ -48,6 +47,7 @@
 					android:id="@+id/title_tv"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginBottom="@dimen/subHeaderPadding"
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
@@ -69,9 +69,7 @@
 			<View
 				android:id="@+id/vertical_divider"
 				android:layout_width="1dp"
-				android:layout_height="match_parent"
-				android:layout_marginTop="@dimen/setting_profile_item_switch_margin"
-				android:layout_marginBottom="@dimen/setting_profile_item_switch_margin"
+				android:layout_height="@dimen/dialog_button_height"
 				android:background="?attr/list_divider" />
 
 			<FrameLayout
@@ -79,6 +77,8 @@
 				style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 				android:layout_width="@dimen/acceptable_touch_radius"
 				android:layout_height="@dimen/acceptable_touch_radius"
+				android:layout_marginStart="@dimen/content_padding_small"
+				android:layout_marginLeft="@dimen/content_padding_small"
 				android:layout_marginEnd="@dimen/text_margin_small"
 				android:layout_marginRight="@dimen/text_margin_small">
 

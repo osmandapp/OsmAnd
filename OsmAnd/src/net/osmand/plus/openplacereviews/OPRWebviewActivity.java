@@ -11,19 +11,21 @@ import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public static final String KEY_LOGIN = "LOGIN_KEY";
-	public static String KEY_TITLE = "TITLE_KEY";
+	public static final String KEY_TITLE = "TITLE_KEY";
+	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)";
 	private WebView webView;
 	private boolean isLogin = false;
 
@@ -43,8 +45,13 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 		return getBaseUrl(ctx) + "signup";
 	}
 
-	public static String getFinishUrl(Context ctx) {
-		return getCookieUrl(ctx);
+	public static List<String> getFinishUrls(Context ctx) {
+		String googleOAuthFinishUrl = getBaseUrl(ctx) + "auth?code=4";
+		String profileUrl = getCookieUrl(ctx);
+		List<String> urls = new ArrayList<>();
+		urls.add(googleOAuthFinishUrl);
+		urls.add(profileUrl);
+		return urls;
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,6 +83,7 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 			}
 		});
 		webView = findViewById(R.id.printDialogWebview);
+		webView.getSettings().setUserAgentString(USER_AGENT);
 		webView.setWebViewClient(new CloseOnSuccessWebViewClient());
 		webView.getSettings().setJavaScriptEnabled(true);
 		WebView.setWebContentsDebuggingEnabled(true);
@@ -124,8 +132,10 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public class CloseOnSuccessWebViewClient extends WebViewClient {
 		@Override
 		public void onPageFinished(WebView view, String url) {
-			if (url.contains(getFinishUrl(OPRWebviewActivity.this)) && isLogin) {
-				finish();
+			for (String furl : getFinishUrls(OPRWebviewActivity.this)) {
+				if (url.contains(furl) && isLogin) {
+					finish();
+				}
 			}
 			super.onPageFinished(view, url);
 		}

@@ -3480,7 +3480,7 @@
     <string name="replace_all">Заменить все</string>
     <string name="keep_both">Оставить оба</string>
     <string name="keep_both_desc">Импортированные элементы будут добавлены с префиксом</string>
-    <string name="import_duplicates_description">В OsmAnd уже есть элементы с теми же именами, что и импортированные.
+    <string name="import_duplicates_description">В OsmAnd уже есть элементы с такими же именами, как у импортированных.
 \n
 \nВыберите действие.</string>
     <string name="import_duplicates_title">Некоторые элементы уже существуют</string>
@@ -3991,4 +3991,6 @@
     <string name="register_on_openplacereviews_desc">Фотографии предоставлены проектом открытых данных OpenPlaceReviews.org. Чтобы отправить свои фотографии, необходимо зарегистрироваться на сайте.</string>
     <string name="cannot_upload_image">Невозможно отправить изображение, попробуйте позже</string>
     <string name="select_picture">Выбор изображения</string>
+    <string name="app_mode_kayak">Каяк</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>
