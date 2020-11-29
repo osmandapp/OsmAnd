@@ -339,11 +339,6 @@ task appStart(type: Exec) {
 }
 
 artifacts {
-	archives(file("../OsmAnd-java/build/libs/OsmAnd-java-android-1.0.jar")) {
-		classifier "OsmAnd-java-android"
-		name 'OsmAnd'
-		type "jar"
-	}
 	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-x86-debug.aar")) {
 		classifier 'legacyX86Debug'
 		name 'OsmAnd'
@@ -396,8 +391,6 @@ artifacts {
 	}
 }
 
-// Uploading artifacts to local path
-group = 'net.osmand'
 uploadArchives {
 	repositories.ivy {
 		//    credentials {
@@ -406,7 +399,6 @@ uploadArchives {
 		//   }
 
 		url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
-		version = "1.0-SNAPSHOT"
 	}
 }
 
