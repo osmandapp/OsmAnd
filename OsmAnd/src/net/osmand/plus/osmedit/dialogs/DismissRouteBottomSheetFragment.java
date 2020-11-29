@@ -115,6 +115,10 @@ public class DismissRouteBottomSheetFragment extends MenuBottomSheetDialogFragme
 
 	}
 
+	public void setOnDismissListener(DialogInterface.OnDismissListener dismissListener) {
+		this.dismissListener = dismissListener;
+	}
+
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment, DialogInterface.OnDismissListener dismissListener) {
 		if (!fragmentManager.isStateSaved()) {
 			DismissRouteBottomSheetFragment fragment = new DismissRouteBottomSheetFragment();
