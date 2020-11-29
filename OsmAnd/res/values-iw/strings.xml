@@ -3982,7 +3982,7 @@
     <string name="shared_string_search_history">היסטוריית חיפוש</string>
     <string name="app_mode_kayak">קיאק</string>
     <string name="app_mode_motorboat">סירת מנוע</string>
-    <string name="gpx_upload_identifiable_visibility_descr"></string>
+    <string name="gpx_upload_identifiable_visibility_descr"/>
     <string name="shared_string_resources">משאבים</string>
     <string name="approximate_file_size">גודל קובץ משוערך</string>
     <string name="select_data_to_export">נא לבחור את הנתונים שייוצאו לקובץ.</string>
@@ -4001,4 +4001,6 @@
     <string name="use_dev_url">להשתמש ב־dev.openstreetmap.org</string>
     <string name="cannot_upload_image">לא ניתן להעלות תמונה, נא לנסות שוב מאוחר יותר</string>
     <string name="select_picture">בחירת תמונה</string>
+    <string name="lang_de_casual">גרמנית (עממית)</string>
+    <string name="ltr_or_rtl_combine_via_star">‏%1$s‏ * %2$s</string>
 </resources>
