@@ -233,7 +233,7 @@
     <string name="select_animate_speedup">Velocitat de simulació de la ruta:</string>
     <string name="select_navigation_mode">Mitjà de transport:</string>
     <string name="offline_edition">Edició fora de línia</string>
-    <string name="offline_edition_descr">Utilitza sempre l\'edició fora de línia.</string>
+    <string name="offline_edition_descr">"En desconnexió la edició està activada però llavors els canvis es desen d\'entrada localment i es pujaran quan es demani; altrament els canvis s\'actualitzen  immediatament."</string>
     <string name="local_openstreetmap_descr_title">Edició asincrònica de l\'OSM:</string>
     <string name="accessibility_mode_descr">Activa les funcions per a usuaris amb discapacitats.</string>
     <string name="update_poi_does_not_change_indexes">Els canvis realitzats en els PDI a l\'aplicació no afecten els fitxers de mapa baixats, els canvis es desen en un fitxer local.</string>
@@ -393,7 +393,7 @@
 \n- Indicacions de carril, velocitat màxima permesa, veus enregistrades i sintetitzades
 \n</string>
     <string name="rendering_attr_contourLines_description">Seleccioneu el nivell mínim de zoom per mostrar el mapa si està disponible. Caldrà el fitxer SRTM separat:</string>
-    <string name="osmand_development_plugin_description">Aquest connector mostra la configuració de característiques per al desenvolupament i depuració com la verificació o simulació de rutes, el rendiment del renderitzat o les indicacions de veu. Aquestes configuracions s\'adrecen a desenvolupadors i no són d\'utilitat per a un usuari normal.</string>
+    <string name="osmand_development_plugin_description">Configuració de característiques per al desenvolupament i depuració, com simulació de navegació, rendiment de renderitzat o les indicacions de veu. Adreçat a desenvolupadorsimés que a usuaris normals de l\'aplicació.</string>
     <string name="accessibility_default">En consonància amb la configuració del sistema Android</string>
     <string name="zoomIs">El nivell de zoom és</string>
     <string name="settings_direction_style_descr">Trieu l\'estil per indicar direccions relatives mentre s\'està en moviment</string>
@@ -1872,8 +1872,8 @@
     <string name="download_files_error_not_enough_space">No hi ha prou espai! 
 \nCalen {3} MB temporalment i {1} MB de permanents. 
 \n(Només es disposa de {2} MB).</string>
-    <string name="download_files_question_space_with_temp">Voleu baixar {0} fitxer(s)\? 
-\nS\'utilitzen {3} MB temporalment i {1} MB permanentment. (De {2} MB).</string>
+    <string name="download_files_question_space_with_temp">Voleu baixar {0} fitxer(s)\?
+\nS\'utilitzaran {3} MB temporalment i {1} MB permanentment. (De {2} MB).</string>
     <string name="shared_string_move_up">Puja ↑</string>
     <string name="shared_string_move_down">Baixa ↓</string>
     <string name="avoid_road">Evita la via</string>
@@ -2151,7 +2151,7 @@
     <string name="quick_action_map_source">Canvia l\'origen del mapa</string>
     <string name="quick_action_map_source_title">Orígens de mapa</string>
     <string name="quick_action_map_source_action">Afegeix origen del mapa</string>
-    <string name="quick_action_map_source_switch">L\'origen del mapa s\'ha canviat al de \"%s\".</string>
+    <string name="quick_action_map_source_switch">L\'origen del mapa s\'ha canviat a \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Modifica la posició del botó</string>
     <string name="quick_action_btn_tutorial_descr">Si premeu i arrossegueu alhora, el botó canvia la seva posició a la pantalla.</string>
     <string name="quick_action_interim_dialog">Mostra un diàleg provisional</string>
@@ -2364,7 +2364,8 @@
 \n• Representació i navegació a mida per ciclistes i vianants
 \n• Indicació opcional de les parades del transport públic (autobús, tramvia, tren), incloent-hi noms de línia
 \n• Enregistrament opcional del trajecte en un fitxer GPX local o a un servei a la xarxa
-\n• Indicació opcional de la velocitat i l\'altitud • Visualització de corbes de nivell i ombrejat de relleu (requereix connector)</string>
+\n• Indicació opcional de la velocitat i l\'altitud 
+\n• Visualització de corbes de nivell i ombrejat de relleu (requereix connector addicional)</string>
     <string name="osmand_plus_extended_description_part7">Col·laboreu directament a OSM
 \n• Notifiqueu errors en les dades
 \n• Pugeu traces GPX directament a OSM des de l\'aplicació
@@ -3163,7 +3164,7 @@
     <string name="rendering_attr_highway_class_track_grade4_name">Grau 4</string>
     <string name="rendering_attr_highway_class_track_grade5_name">Grau 5</string>
     <string name="external_input_device">Dispositius d\'entrada externs</string>
-    <string name="external_input_device_descr">Seleccioneu un aparell com a teclat genèric o WunderLINQ per a controls externs.</string>
+    <string name="external_input_device_descr">Seleccioneu un aparell de control extern, com un teclat o un WunderLINQ.</string>
     <string name="sett_no_ext_input">Cap</string>
     <string name="sett_generic_ext_input">Teclat</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
@@ -3869,4 +3870,37 @@
     <string name="lenght_limit_description">Proporcioneu la llargada del vostre vehicle, pot haver-hi rutes restringides als vehicles llargs.</string>
     <string name="gpx_parse_error">No s\'ha generat correctament l\'arxiu GPX. Indiqueu-ho a l\'equip de suport per continuar investigant.</string>
     <string name="save_track_to_gpx">Enregistra automàticament la traça durant la navegació</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Cal afegir almenys dos punts</string>
+    <string name="use_dev_url_descr">Canvieu per utilitzar dev.openstreetmap.org en lloc d\'openstreetmap.org en provar la pujada de nota OSM / PDI / GPX.</string>
+    <string name="osm_edit_close_note">Tanca la nota d\'OSM</string>
+    <string name="osm_edit_comment_note">Comentari de la nota d\'OSM</string>
+    <string name="osm_login_descr">Podeu iniciar la sessió mitjançant el mètode segur OAuth o fer servir el vostre usuari i contrasenya.</string>
+    <string name="shared_string_add_photo">Afegeix foto</string>
+    <string name="register_on_openplacereviews">Registreu-vos a
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Les fotos les proporciona el projecte OpenPlaceReviews.org de dades obertes. Per poder pujar les vostres fotos, cal que us registreu al lloc web.</string>
+    <string name="register_opr_create_new_account">Crea un compte nou</string>
+    <string name="register_opr_have_account">ja tinc un compte</string>
+    <string name="shared_string_search_history">Historial de cerques</string>
+    <string name="app_mode_kayak">Caiac</string>
+    <string name="app_mode_motorboat">Llanxa motora</string>
+    <string name="cannot_upload_image">No es pot carregar la imatge, torneu-ho a provar més tard</string>
+    <string name="select_picture">Seleccioneu la imatge</string>
+    <string name="shared_string_resources">Recursos</string>
+    <string name="approximate_file_size">Mida aproximada del fitxer</string>
+    <string name="select_data_to_export">Seleccioneu les dades a exportar cap el fitxer.</string>
+    <string name="file_size_needed_for_import">Necessari per a la importació</string>
+    <string name="export_not_enough_space_descr">El vostre dispositiu només té %1$s lliures. Allibereu espai o desseleccioneu alguns articles per exportar.</string>
+    <string name="export_not_enough_space">No hi ha prou espai</string>
+    <string name="select_groups_for_import">Seleccioneu els grups que s\'importaran.</string>
+    <string name="select_items_for_import">Seleccioneu els elements que s\'importaran.</string>
+    <string name="add_to_mapillary">Afegeix a Mapillary</string>
+    <string name="add_to_opr">Afegeix-ho a OpenPlaceReviews</string>
+    <string name="use_dev_url">Utilitza dev.openstreetmap.org</string>
+    <string name="add_photos_descr">OsmAnd mostra fotos de diverses fonts:
+\nOpenPlaceReviews - fotos de PDIs;
+\nMapillary: imatges a nivell de carrer;
+\nWeb / Wikimedia: fotos dels PDIs especificats a les dades d\'OpenStreetMap.</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="icon_group_amenity">Equipament</string>
 </resources>
