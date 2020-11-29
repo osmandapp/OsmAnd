@@ -85,7 +85,8 @@ public class ZipImportTask extends BaseLoadAsyncTask<Void, Void, ImportType> {
 			importHelper.handleKmzImport(uri, name + GPX_FILE_EXT, save, useImportDir);
 		} else if (importType == ImportType.SETTINGS) {
 			String name = createUniqueFileName(app, "settings", TEMP_DIR, OSMAND_SETTINGS_FILE_EXT);
-			importHelper.handleOsmAndSettingsImport(uri, name + OSMAND_SETTINGS_FILE_EXT, null, -1, null);
+			importHelper.handleOsmAndSettingsImport(uri, name + OSMAND_SETTINGS_FILE_EXT,
+					null, false, null, -1, null);
 		}
 	}
 }
