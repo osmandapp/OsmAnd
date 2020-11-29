@@ -2799,8 +2799,9 @@
 \n• Andre feilrettinger 
 \n</string>
     <string name="commiting_way">Sender inn vei…</string>
-    <string name="send_search_query_description">Vi kommer til å sende inn ditt søk \"%1$s\", sammen med din plassering. 
-\nIngen personlig informasjon samles inn, søkedata brukes kun for å forbedre søkealgoritmen.</string>
+    <string name="send_search_query_description">Vi kommer til å sende inn ditt søk «%1$s», sammen med din plassering.
+\n
+\nIngen personlig info samles inn, søkedata brukes kun for å forbedre søkealgoritmen.</string>
     <string name="test_voice_desrc">Trykk på en knapp og lytt til den tilhørende talemeldingen for å høre om den mangler eller er feil</string>
     <string name="release_3_2_pre">• Fikset krasj ved oppstart som skjedde på noen enheter
 \n
