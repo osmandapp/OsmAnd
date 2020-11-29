@@ -3972,12 +3972,12 @@
     <string name="markers_history">Historia znaczników</string>
     <string name="send_files_to_openstreetmap">Wyślij plik GPX do OpenStreetMap</string>
     <string name="enter_text_separated">Wpisz tagi oddzielone przecinkami.</string>
-    <string name="gpx_upload_trackable_visibility_descr">Możliwość śledzenia oznacza, że ślad nie pojawi się na żadnej publicznej liście, ale punkty śledzenia będą nadal dostępne za pośrednictwem publicznego API GPS ze znacznikami czasu. Inni użytkownicy będą mogli pobrać tylko te przetworzone punkty śledzenia z Twojego śladu, których nie można powiązać bezpośrednio z Tobą.</string>
+    <string name="gpx_upload_trackable_visibility_descr">„Śledzenie” oznacza, że ślad nie pojawia się w żadnych publicznych wykazach, ale przetworzone punkty śledzenia z sygnaturami czasowymi (których nie można bezpośrednio powiązać z Tobą) są pobierane z publicznego interfejsu GPS API.</string>
     <string name="osm_login_descr">Zaloguj się przy użyciu bezpiecznej metody autoryzacji OAuth lub użyj swojej nazwy użytkownika i hasła.</string>
     <string name="shared_string_add_photo">Dodaj zdjęcie</string>
     <string name="register_on_openplacereviews">Zarejestruj się w
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Zaloguj się na stronie projektu otwartych danych OpenPlaceReviews.org, aby przesłać jeszcze więcej zdjęć.</string>
+    <string name="register_on_openplacereviews_desc">Zdjęcia są dostarczane przez otwarty projekt OpenPlaceReviews.org. Aby przesłać swoje zdjęcia, musisz zarejestrować się na stronie.</string>
     <string name="register_opr_create_new_account">Utwórz nowe konto</string>
     <string name="register_opr_have_account">Mam już konto</string>
     <string name="select_groups_for_import">Wybierz grupy, które zostaną zaimportowane.</string>
@@ -3999,4 +3999,6 @@
     <string name="app_mode_motorboat">Motorówka</string>
     <string name="add_to_mapillary">Dodaj do Mapillary</string>
     <string name="add_to_opr">Dodaj do OpenPlaceReviews</string>
+    <string name="gpx_upload_private_visibility_descr">„Prywatny” oznacza, że ślad nie pojawia się w żadnych publicznych wykazach, ale punkty śledzenia z niego w kolejności niechronologicznej są dostępne za pośrednictwem publicznego interfejsu API GPS bez sygnatur czasowych.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Możliwe do zidentyfikowania\" oznacza, że ślad zostanie podany publicznie w śladach GPS i w publicznych wykazach śledzenia GPS, czyli inni użytkownicy będą mogli pobrać surowy ślad i skojarzyć go z twoją nazwą użytkownika. Publiczne dane śledzenia sygnatury czasowej z interfejsu API GPS obsługiwane za pośrednictwem interfejsu API punktów śladowych będą odwoływać się do oryginalnej strony śledzenia.</string>
 </resources>
