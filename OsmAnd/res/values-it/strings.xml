@@ -3952,7 +3952,7 @@
     <string name="shared_string_add_photo">Aggiungi foto</string>
     <string name="register_on_openplacereviews">Registrati su
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Per contribuire delle altre foto autenticati nel sito del progetto a sorgente aperto OpenPlaceReviews.org.</string>
+    <string name="register_on_openplacereviews_desc">Le foto sono fornite dal progetto open data OpenPlaceReviews.org. Per caricare le tue foto devi registrarti sul sito web.</string>
     <string name="register_opr_create_new_account">Crea un nuovo account</string>
     <string name="register_opr_have_account">Ho già un account</string>
     <string name="shared_string_search_history">Cronologia di ricerca</string>
@@ -3960,7 +3960,7 @@
     <string name="app_mode_motorboat">Motoscafo</string>
     <string name="login_open_street_map">Connettiti a OpenStreetMap</string>
     <string name="login_open_street_map_org">Connettiti a OpenStreetMap.org</string>
-    <string name="sign_in_with_open_street_map">Registrati con OpenStreetMap</string>
+    <string name="sign_in_with_open_street_map">Accedi con OpenStreetMap</string>
     <string name="open_street_map_login_mode">Devi fare il login per inviare nuove modifiche o dei cambiamenti.
 \n
 \nPuoi fare login utilizzando il metodo sicuro OAuth o il nomeutente e password.</string>
