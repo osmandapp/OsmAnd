@@ -328,9 +328,9 @@ public class AndroidUtils {
 						new int[] {}
 				},
 				new int[] {
-						Color.GRAY,
+						ContextCompat.getColor(ctx, night? R.color.text_color_secondary_dark : R.color.text_color_secondary_light),
 						ContextCompat.getColor(ctx, night? R.color.active_color_primary_dark : R.color.active_color_primary_light),
-						Color.GRAY}
+						ContextCompat.getColor(ctx, night? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)}
 		);
 	}
 
