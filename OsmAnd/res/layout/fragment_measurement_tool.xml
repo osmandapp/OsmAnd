@@ -130,25 +130,32 @@
                 tools:text="@string/add_point_after"/>
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/additional_info_container"
+        <FrameLayout
+            android:id="@+id/info_type_buttons_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone" >
+            android:layout_height="wrap_content">
 
-            <include layout="@layout/custom_radio_buttons" />
-
-            <View
+            <include
+                layout="@layout/custom_radio_buttons"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/content_padding_small" />
+                android:layout_height="@dimen/measurement_tool_button_height"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginBottom="@dimen/measurement_tool_content_padding_medium" />
 
-            <FrameLayout
-                android:id="@+id/cards_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        </FrameLayout>
 
-        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/cards_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/measurement_tool_info_cards_container_height"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/bottom_panel_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider" />
 
         <LinearLayout
             android:id="@+id/measure_mode_controls"

@@ -75,6 +75,9 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
+import net.osmand.plus.widgets.MultiStateToggleButton;
+import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.Algorithms;
 
@@ -88,8 +91,6 @@ import java.util.Locale;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
 import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
@@ -113,25 +114,25 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private TextView pointsTv;
 	private TextView distanceToCenterTv;
 	private String pointsSt;
-	private View additionalInfoContainer;
 	private ViewGroup cardsContainer;
 	private BaseCard visibleCard;
 	private PointsCard pointsCard;
 	private GraphsCard graphsCard;
-	private LinearLayout customRadioButton;
+	private MultiStateToggleButton infoTypeBtn;
+	private RadioItem pointsBtn;
+	private RadioItem graphBtn;
 	private View mainView;
 	private ImageView upDownBtn;
 	private ImageView undoBtn;
 	private ImageView redoBtn;
 	private ImageView mainIcon;
-	private Snackbar snackbar;
 	private String fileName;
 
-	private AdditionalInfoType currentAdditionalInfoType;
+	private InfoType currentInfoType;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean progressBarVisible;
-	private boolean additionalInfoExpanded;
+	private boolean infoExpanded;
 
 	private static final int PLAN_ROUTE_MODE = 0x1;
 	private static final int DIRECTION_MODE = 0x2;
@@ -148,18 +149,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private LatLon initialPoint;
 
-	enum SaveType {
-		ROUTE,
-		LINE
-	}
-
 	enum FinalSaveAction {
 		SHOW_SNACK_BAR_AND_CLOSE,
 		SHOW_TOAST,
 		SHOW_IS_SAVED_FRAGMENT
 	}
 
-	private enum AdditionalInfoType {
+	private enum InfoType {
 		POINTS,
 		GRAPH
 	}
@@ -174,6 +170,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		@Override
 		protected int getFragmentHeight() {
 			return mainView.getHeight();
+		}
+
+		public boolean shouldShowXAxisPoints () {
+			return false;
 		}
 	}
 
@@ -230,13 +230,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			return null;
 		}
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
+		OsmandApplication app = mapActivity.getMyApplication();
 
 		editingCtx.setApplication(mapActivity.getMyApplication());
 		editingCtx.setProgressListener(new SnapToRoadProgressListener() {
 			@Override
 			public void showProgressBar() {
 				MeasurementToolFragment.this.showProgressBar();
-				updateAdditionalInfoView();
+				updateInfoView();
 			}
 
 			@Override
@@ -248,7 +249,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void hideProgressBar() {
 				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setVisibility(View.GONE);
 				progressBarVisible = false;
-				updateAdditionalInfoView();
+				updateInfoView();
 			}
 
 			@Override
@@ -262,6 +263,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		int btnWidth = getResources().getDimensionPixelOffset(R.dimen.gpx_group_button_width);
 
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
 
@@ -271,30 +273,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		mainView = view.findViewById(R.id.main_view);
 		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		detailsMenu = new GraphDetailsMenu();
-		additionalInfoContainer = mainView.findViewById(R.id.additional_info_container);
 		cardsContainer = mainView.findViewById(R.id.cards_container);
 		if (portrait) {
-			customRadioButton = mainView.findViewById(R.id.custom_radio_buttons);
+			String pointsBtnTitle = getString(R.string.shared_string_gpx_points);
+			pointsBtn = new RadioItem(pointsBtnTitle);
+			pointsBtn.setOnClickListener(getInfoTypeBtnListener(InfoType.POINTS));
 
-			View pointListBtn = customRadioButton.findViewById(R.id.left_button_container);
-			TextView tvPointListBtn = customRadioButton.findViewById(R.id.left_button);
-			tvPointListBtn.setText(R.string.shared_string_gpx_points);
-			pointListBtn.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					changeAdditionalInfoType(AdditionalInfoType.POINTS);
-				}
-			});
+			String graphBtnTitle = getString(R.string.shared_string_graph);
+			graphBtn = new RadioItem(graphBtnTitle);
+			graphBtn.setOnClickListener(getInfoTypeBtnListener(InfoType.GRAPH));
 
-			View graphBtn = customRadioButton.findViewById(R.id.right_button_container);
-			TextView tvGraphBtn = customRadioButton.findViewById(R.id.right_button);
-			tvGraphBtn.setText(R.string.shared_string_graph);
-			graphBtn.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					changeAdditionalInfoType(AdditionalInfoType.GRAPH);
-				}
-			});
+			LinearLayout infoButtonsContainer = mainView.findViewById(R.id.custom_radio_buttons);
+			infoTypeBtn = new MultiStateToggleButton(app, infoButtonsContainer, nightMode);
+			infoTypeBtn.setItems(pointsBtn, graphBtn);
 		}
 		pointsCard = new PointsCard(mapActivity, this);
 		graphsCard = new GraphsCard(mapActivity, detailsMenu, this);
@@ -328,18 +319,21 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		View upDownRow = mainView.findViewById(R.id.up_down_row);
 		upDownRow.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View view) {
-				if (!additionalInfoExpanded && editingCtx.getPointsCount() > 0 && editingCtx.getSelectedPointPosition() == -1) {
-					expandAdditionalInfoView();
-				} else {
-					collapseAdditionalInfoView();
+			public void onClick(View v) {
+				if (portrait) {
+					if (infoExpanded) {
+						collapseInfoView();
+					} else if (setInfoType(InfoType.POINTS)) {
+						infoTypeBtn.setSelectedItem(pointsBtn);
+					}
 				}
 			}
 		});
 
 		View applyMovePointButton = mainView.findViewById(R.id.apply_move_point_button);
-		UiUtilities.setupDialogButton(nightMode, applyMovePointButton, UiUtilities.DialogButtonType.PRIMARY,
-				R.string.shared_string_apply);
+		UiUtilities.setupDialogButton(nightMode, applyMovePointButton,
+				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
+		applyMovePointButton.setMinimumWidth(btnWidth);
 		applyMovePointButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -349,8 +343,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 
 		View applyPointBeforeAfterButton = mainView.findViewById(R.id.apply_point_before_after_point_button);
-		UiUtilities.setupDialogButton(nightMode, applyPointBeforeAfterButton, UiUtilities.DialogButtonType.PRIMARY,
-				R.string.shared_string_apply);
+		UiUtilities.setupDialogButton(nightMode, applyPointBeforeAfterButton,
+				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
+		applyPointBeforeAfterButton.setMinimumWidth(btnWidth);
 		applyPointBeforeAfterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -359,8 +354,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		});
 
 		View addPointBeforeAfterButton = mainView.findViewById(R.id.add_point_before_after_button);
-		UiUtilities.setupDialogButton(nightMode, addPointBeforeAfterButton, UiUtilities.DialogButtonType.PRIMARY,
-				R.string.shared_string_add);
+		UiUtilities.setupDialogButton(nightMode, addPointBeforeAfterButton,
+				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_add);
+		addPointBeforeAfterButton.setMinimumWidth(btnWidth);
 		addPointBeforeAfterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -408,8 +404,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		});
 
 		View addPointButton = mainView.findViewById(R.id.add_point_button);
-		UiUtilities.setupDialogButton(nightMode, addPointButton, UiUtilities.DialogButtonType.PRIMARY,
-				R.string.shared_string_add);
+		UiUtilities.setupDialogButton(nightMode, addPointButton,
+				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_add);
+		addPointButton.setMinimumWidth(btnWidth);
 		addPointButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -425,9 +422,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			@Override
 			public void onSelectPoint(int selectedPointPos) {
-				if (additionalInfoExpanded) {
-					collapseAdditionalInfoView();
-				}
 				if (selectedPointPos != -1) {
 					openSelectedPointMenu(mapActivity);
 				}
@@ -449,9 +443,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		measurementLayer.setOnEnterMovePointModeListener(new MeasurementToolLayer.OnEnterMovePointModeListener() {
 			@Override
 			public void onEnterMovePointMode() {
-				if (additionalInfoExpanded) {
-					collapseAdditionalInfoView();
-				}
+				collapseInfoViewIfExpanded();
 				switchMovePointMode(true);
 			}
 		});
@@ -529,37 +521,90 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return view;
 	}
 
-	private void changeAdditionalInfoType(@NonNull AdditionalInfoType type) {
-		if (!additionalInfoExpanded || !isCurrentAdditionalInfoType(type)) {
-			MapActivity ma = getMapActivity();
-			if (ma == null) return;
-
-			OsmandApplication app = ma.getMyApplication();
-			if (AdditionalInfoType.POINTS == type) {
-				visibleCard = pointsCard;
-				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, START);
-			} else if (AdditionalInfoType.GRAPH == type) {
-				visibleCard = graphsCard;
-				UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, END);
+	private OnRadioItemClickListener getInfoTypeBtnListener(@NonNull final InfoType type) {
+		return new OnRadioItemClickListener() {
+			@Override
+			public boolean onRadioItemClick(RadioItem radioItem, View view) {
+				if (isCurrentInfoType(type)) {
+					collapseInfoView();
+					return false;
+				}
+				return setInfoType(type);
 			}
-			cardsContainer.removeAllViews();
-			View cardView = visibleCard.getView() != null ? visibleCard.getView() : visibleCard.build(ma);
-			cardsContainer.addView(cardView);
+		};
+	}
 
-			currentAdditionalInfoType = type;
-			additionalInfoExpanded = true;
+	private boolean setInfoType(@NonNull InfoType type) {
+		OsmandApplication app = getMyApplication();
+		if ((!infoExpanded || !isCurrentInfoType(type)) && app != null) {
+			if (editingCtx.getPointsCount() > 0 && editingCtx.getSelectedPointPosition() == -1) {
+				expandInfoView();
+				currentInfoType = type;
+				if (InfoType.POINTS == type) {
+					visibleCard = pointsCard;
+				} else if (InfoType.GRAPH == type) {
+					visibleCard = graphsCard;
+				}
+				cardsContainer.removeAllViews();
+				View cardView = visibleCard.getView() != null ? visibleCard.getView() : visibleCard.build(app);
+				cardsContainer.addView(cardView);
+				return true;
+			} else {
+				collapseInfoView();
+			}
+		}
+		return false;
+	}
+
+	private void expandInfoView() {
+		if (portrait) {
+			infoExpanded = true;
+			cardsContainer.setVisibility(View.VISIBLE);
+			setMapPosition(portrait
+					? OsmandSettings.MIDDLE_TOP_CONSTANT
+					: OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
 			updateUpDownBtn();
 		}
 	}
 
-	private void updateAdditionalInfoView() {
-		updateAdditionalInfoView(pointsCard);
-		updateAdditionalInfoView(graphsCard);
+	private void collapseInfoViewIfExpanded() {
+		if (infoExpanded) {
+			collapseInfoView();
+		}
 	}
 
-	private void updateAdditionalInfoView(OnUpdateAdditionalInfoListener listener) {
+	private void collapseInfoView() {
+		if (portrait) {
+			infoExpanded = false;
+			currentInfoType = null;
+			infoTypeBtn.setSelectedItem(null);
+			cardsContainer.setVisibility(View.GONE);
+			setDefaultMapPosition();
+			updateUpDownBtn();
+		}
+	}
+
+	private void collapseInfoIfNotEnoughPoints() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			int pointsCount = editingCtx.getPointsCount();
+			if (isCurrentInfoType(InfoType.GRAPH) && pointsCount < 2) {
+				collapseInfoView();
+			} else if (pointsCount < 1) {
+				disable(upDownBtn);
+				collapseInfoViewIfExpanded();
+			}
+		}
+	}
+
+	private void updateInfoView() {
+		updateInfoView(pointsCard);
+		updateInfoView(graphsCard);
+	}
+
+	private void updateInfoView(OnUpdateInfoListener listener) {
 		if (listener != null) {
-			listener.onUpdateAdditionalInfo();
+			listener.onUpdateInfo();
 		}
 	}
 
@@ -576,11 +621,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void updateUndoRedoCommonStuff() {
-		collapseAdditionalInfoIfNoPointsEnough();
+		collapseInfoIfNotEnoughPoints();
 		if (editingCtx.getPointsCount() > 0) {
 			enable(upDownBtn);
 		}
-		updateAdditionalInfoView();
+		updateInfoView();
 		updateDistancePointsText();
 		updateSnapToRoadControls();
 	}
@@ -638,9 +683,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		super.onDestroyView();
 		cancelModes();
 		exitMeasurementMode();
-		if (additionalInfoExpanded) {
-			collapseAdditionalInfoView();
-		}
+		collapseInfoViewIfExpanded();
 		MeasurementToolLayer layer = getMeasurementLayer();
 		if (layer != null) {
 			layer.setOnSingleTapListener(null);
@@ -891,9 +934,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		editingCtx.getCommandManager().execute(new ClearPointsCommand(measurementLayer, ALL));
 		editingCtx.cancelSnapToRoad();
-		if (additionalInfoExpanded) {
-			collapseAdditionalInfoView();
-		}
+		collapseInfoViewIfExpanded();
 		updateUndoRedoButton(false, redoBtn);
 		disable(upDownBtn);
 		updateDistancePointsText();
@@ -907,9 +948,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (points.size() > 1) {
 				MeasurementToolLayer measurementLayer = getMeasurementLayer();
 				editingCtx.getCommandManager().execute(new ReversePointsCommand(measurementLayer));
-				if (additionalInfoExpanded) {
-					collapseAdditionalInfoView();
-				}
+				collapseInfoViewIfExpanded();
 				updateUndoRedoButton(false, redoBtn);
 				updateUndoRedoButton(true, undoBtn);
 				updateDistancePointsText();
@@ -976,9 +1015,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void trimRoute(ClearCommandMode before) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		editingCtx.getCommandManager().execute(new ClearPointsCommand(measurementLayer, before));
-		if (additionalInfoExpanded) {
-			collapseAdditionalInfoView();
-		}
+		collapseInfoViewIfExpanded();
 		editingCtx.setSelectedPointPosition(-1);
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		updateUndoRedoButton(false, redoBtn);
@@ -1130,11 +1167,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void removePoint(MeasurementToolLayer measurementLayer, int position) {
 		if (measurementLayer != null) {
 			editingCtx.getCommandManager().execute(new RemovePointCommand(measurementLayer, position));
-			updateAdditionalInfoView();
+			updateInfoView();
 			updateUndoRedoButton(true, undoBtn);
 			updateUndoRedoButton(false, redoBtn);
 			updateDistancePointsText();
-			collapseAdditionalInfoIfNoPointsEnough();
+			collapseInfoIfNotEnoughPoints();
 		}
 	}
 
@@ -1159,9 +1196,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			@Override
 			public void onItemClick(int position) {
 				if (mapActivity != null && measurementLayer != null) {
-					if (additionalInfoExpanded) {
-						collapseAdditionalInfoView();
-					}
+					collapseInfoViewIfExpanded();
 					if (portrait) {
 						setMapPosition(OsmandSettings.MIDDLE_TOP_CONSTANT);
 					}
@@ -1182,7 +1217,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					toPosition = holder.getAdapterPosition();
 					if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 						editingCtx.getCommandManager().execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
-						updateAdditionalInfoView();
+						updateInfoView();
 						updateUndoRedoButton(false, redoBtn);
 						updateDistancePointsText();
 						mapActivity.refreshMap();
@@ -1248,7 +1283,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (!isUndoMode()) {
 				editingCtx.addPoints();
 			}
-			updateAdditionalInfoView();
+			updateInfoView();
 			updateDistancePointsText();
 		}
 	}
@@ -1406,7 +1441,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					R.id.measurement_points_text_view,
 					R.id.distance_to_center_text_view,
 					R.id.up_down_button,
-					R.id.measure_mode_controls);
+					R.id.measure_mode_controls,
+					R.id.info_type_buttons_container,
+					R.id.bottom_panel_divider);
 		}
 	}
 
@@ -1444,46 +1481,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		updateUndoRedoButton(true, undoBtn);
 		updateUndoRedoButton(false, redoBtn);
 		updateDistancePointsText();
-		updateAdditionalInfoView();
-	}
-
-	private void expandAdditionalInfoView() {
-		if (portrait) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				additionalInfoContainer.setVisibility(View.VISIBLE);
-				AdditionalInfoType typeToShow = currentAdditionalInfoType == null
-						? AdditionalInfoType.POINTS : currentAdditionalInfoType;
-				changeAdditionalInfoType(typeToShow);
-				setMapPosition(portrait
-						? OsmandSettings.MIDDLE_TOP_CONSTANT
-						: OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
-			}
-		}
-	}
-
-	private void collapseAdditionalInfoView() {
-		if (portrait) {
-			additionalInfoExpanded = false;
-			updateUpDownBtn();
-			additionalInfoContainer.setVisibility(View.GONE);
-			setDefaultMapPosition();
-		}
-	}
-
-	private void collapseAdditionalInfoIfNoPointsEnough() {
-		MeasurementToolLayer measurementLayer = getMeasurementLayer();
-		if (measurementLayer != null) {
-			int pointsCount = editingCtx.getPointsCount();
-			if (isCurrentAdditionalInfoType(AdditionalInfoType.GRAPH) && pointsCount < 2) {
-				collapseAdditionalInfoView();
-			} else if (pointsCount < 1) {
-				disable(upDownBtn);
-				if (additionalInfoExpanded) {
-					collapseAdditionalInfoView();
-				}
-			}
-		}
+		updateInfoView();
 	}
 
 	private void setDefaultMapPosition() {
@@ -1510,13 +1508,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void updateUpDownBtn() {
-		Drawable icon = getContentIcon(additionalInfoExpanded
+		Drawable icon = getContentIcon(infoExpanded
 				? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
 		upDownBtn.setImageDrawable(icon);
 	}
 
-	private boolean isCurrentAdditionalInfoType(@NonNull AdditionalInfoType type) {
-		return type.equals(currentAdditionalInfoType);
+	private boolean isCurrentInfoType(@NonNull InfoType type) {
+		return Algorithms.objectEquals(currentInfoType, type);
 	}
 
 	public boolean hasVisibleGraph() {
@@ -1600,7 +1598,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				switch (finalSaveAction) {
 					case SHOW_SNACK_BAR_AND_CLOSE:
 						final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-						snackbar = Snackbar.make(mapActivity.getLayout(),
+						Snackbar snackbar = Snackbar.make(mapActivity.getLayout(),
 								MessageFormat.format(getString(R.string.gpx_saved_sucessfully), outFile.getName()),
 								Snackbar.LENGTH_LONG)
 								.setAction(R.string.shared_string_undo, new OnClickListener() {
@@ -1778,7 +1776,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	public void quit(boolean hidePointsListFirst) {
+	public void quit(boolean hideInfoViewFirst) {
 		if (editingCtx.getOriginalPointToMove() != null) {
 			cancelMovePointMode();
 			return;
@@ -1793,16 +1791,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				dismiss(mapActivity);
 			}
 		} else {
-			showQuitDialog(hidePointsListFirst);
+			showQuitDialog(hideInfoViewFirst);
 		}
 	}
 
-	private void showQuitDialog(boolean hidePointsListFirst) {
+	private void showQuitDialog(boolean hideInfoViewFirst) {
 		final MapActivity mapActivity = getMapActivity();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (mapActivity != null && measurementLayer != null) {
-			if (additionalInfoExpanded && hidePointsListFirst) {
-				collapseAdditionalInfoView();
+			if (infoExpanded && hideInfoViewFirst) {
+				collapseInfoView();
 				return;
 			}
 			if (!editingCtx.hasChanges()) {
@@ -1822,9 +1820,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (clearContext) {
 				editingCtx.clearSegments();
 			}
-			if (additionalInfoExpanded) {
-				collapseAdditionalInfoView();
-			}
+			collapseInfoViewIfExpanded();
 			resetAppMode();
 			hideSnapToRoadIcon();
 			if (isInEditMode()) {
@@ -1961,9 +1957,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (!approximationMode || !editingCtx.getCommandManager().update(command)) {
 				editingCtx.getCommandManager().execute(command);
 			}
-			if (additionalInfoExpanded) {
-				collapseAdditionalInfoView();
-			}
+			collapseInfoViewIfExpanded();
 			updateSnapToRoadControls();
 		}
 	}
@@ -2036,7 +2030,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return nightMode;
 	}
 
-	public interface OnUpdateAdditionalInfoListener {
-		void onUpdateAdditionalInfo();
+	public interface OnUpdateInfoListener {
+		void onUpdateInfo();
 	}
 }
