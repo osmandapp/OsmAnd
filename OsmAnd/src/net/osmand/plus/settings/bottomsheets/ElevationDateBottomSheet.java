@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.AndroidUtils.createCheckedColorStateList;
+import static net.osmand.AndroidUtils.createColorStateList;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
@@ -150,10 +150,11 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	private void createReliefFactorButtons(Context context) {
 		for (int i = 0; i < parameters.size(); i++) {
 			RoutingParameter parameter = parameters.get(i);
+			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			final BottomSheetItemWithCompoundButton[] preferenceItem = new BottomSheetItemWithCompoundButton[1];
 			preferenceItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(i == selectedEntryIndex)
-					.setButtonTintList(createCheckedColorStateList(context, R.color.icon_color_default_light, appModeColor))
+					.setButtonTintList(createColorStateList(context, nightMode))
 					.setTitle(getRoutingParameterTitle(app, parameter))
 					.setLayoutId(R.layout.bottom_sheet_item_with_radio_btn_left)
 					.setTag(i)
@@ -214,6 +215,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	private void enableDisableReliefButtons(boolean enable) {
 		for (BaseBottomSheetItem item : reliefFactorButtons) {
 			item.getView().setEnabled(enable);
+			item.getView().findViewById(R.id.compound_button).setEnabled(enable);
 		}
 	}
 
