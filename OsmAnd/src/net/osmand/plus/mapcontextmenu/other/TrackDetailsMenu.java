@@ -518,7 +518,9 @@ public class TrackDetailsMenu {
 		} else {
 			gpxItem.chartHighlightPos = -1;
 		}
-		trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
+		if (shouldShowXAxisPoints()) {
+			trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
+		}
 		if (gpxItem.route) {
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
 		} else {
@@ -528,6 +530,10 @@ public class TrackDetailsMenu {
 			mapActivity.refreshMap();
 		}
 		fitTrackOnMap(chart, location, forceFit);
+	}
+
+	public boolean shouldShowXAxisPoints () {
+		return true;
 	}
 
 	public void reset() {

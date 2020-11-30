@@ -29,7 +29,7 @@ import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateAdditionalInfoListener;
+import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CustomGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CustomGraphAdapter.LegendViewType;
@@ -53,7 +53,7 @@ import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
 import static net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
-public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListener {
+public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 
 	private static String GRAPH_DATA_GPX_FILE_NAME = "graph_data_tmp";
 	private static int INVALID_ID = -1;
@@ -114,11 +114,11 @@ public class GraphsCard extends BaseCard implements OnUpdateAdditionalInfoListen
 
 	@Override
 	public int getCardLayoutId() {
-		return R.layout.fragment_measurement_tool_graph;
+		return R.layout.measurement_tool_graph_card;
 	}
 
 	@Override
-	public void onUpdateAdditionalInfo() {
+	public void onUpdateInfo() {
 		if (editingCtx != null) {
 			fullUpdate();
 		}

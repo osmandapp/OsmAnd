@@ -3994,4 +3994,5 @@
     <string name="use_dev_url">Usar dev.openstreetmap.org</string>
     <string name="cannot_upload_image">Não é possível carregar a imagem, por favor, tente novamente mais tarde</string>
     <string name="select_picture">Selecione a foto</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>

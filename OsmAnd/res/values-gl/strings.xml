@@ -4023,4 +4023,5 @@ Lon %2$s</string>
 \nOpenPlaceReviews - imaxes POI;
 \nMapillary - maxes a nivel de rúa;
 \nWeb / Wikimedia - imaxes POI especificadas nos datos do OpenStreetMap.</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>

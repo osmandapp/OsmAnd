@@ -1682,7 +1682,7 @@
     <string name="osm_live_user_public_name">Nome público</string>
     <string name="osm_live_hide_user_name">Não mostrar o meu nome nos relatórios</string>
     <string name="osm_live_support_region">Região de suporte</string>
-    <string name="file_name_containes_illegal_char">O nome do ficheiro contém um carácter inválido</string>
+    <string name="file_name_containes_illegal_char">Carácter inválido no nome do ficheiro</string>
     <string name="reports_for">Relatório para</string>
     <string name="number_of_contributors">Número de colaboradores</string>
     <string name="number_of_edits">Número de edições</string>
@@ -2301,7 +2301,7 @@
     <string name="first_intermediate_dest_description">Adiciona paragem inicial</string>
     <string name="subsequent_dest_description">Mover o destino para cima e criá-lo</string>
     <string name="show_closed_notes">Mostrar anotações fechadas</string>
-    <string name="switch_osm_notes_visibility_desc">Mostrar/esconder anotações do OSM no mapa.</string>
+    <string name="switch_osm_notes_visibility_desc">Mostrar ou ocultar anotações do OSM no mapa.</string>
     <string name="gpx_file_desc">GPX - adequado para exportar para o JOSM ou outros editores do OSM.</string>
     <string name="osc_file_desc">OSC - adequado para exportar para o OSM.</string>
     <string name="shared_string_gpx_file">Ficheiro GPX</string>
@@ -3084,9 +3084,9 @@
     <string name="zoom_by_wunderlinq_descr">Alterar o zoom do mapa deslocando a roda para cima e para baixo. Escapar devolve-o à aplicação WunderLINQ.</string>
     <string name="zoom_by_wunderlinq">Usar WunderLINQ para controle</string>
     <string name="quick_action_need_to_add_item_to_list">Adicione pelo menos um item à lista nas configurações de \'Ação rápida\'</string>
-    <string name="routing_attr_piste_type_downhill_name">Esqui alpino/downhill</string>
+    <string name="routing_attr_piste_type_downhill_name">Esqui alpino e downhill</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas para esqui alpino ou downhill e acesso a teleféricos de esqui.</string>
-    <string name="routing_attr_piste_type_nordic_name">Cross Country/esqui nórdico</string>
+    <string name="routing_attr_piste_type_nordic_name">Cross Country e esqui nórdico</string>
     <string name="routing_attr_piste_type_nordic_description">Trilhas para esqui nórdico ou cross-country.</string>
     <string name="routing_attr_piste_type_skitour_name">Passeios de esqui</string>
     <string name="routing_attr_piste_type_skitour_description">Rotas para excursões de esqui.</string>
@@ -3425,7 +3425,7 @@
     <string name="shared_string_hillshade">Sombras de relevo</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pistas</string>
-    <string name="quick_action_show_hide_terrain">Mostrar / ocultar terreno</string>
+    <string name="quick_action_show_hide_terrain">Mostrar ou ocultar terrenos</string>
     <string name="quick_action_terrain_hide">Ocultar terreno</string>
     <string name="quick_action_terrain_show">Mostrar terreno</string>
     <string name="quick_action_terrain_descr">Um botão para mostrar ou esconder a camada do terreno no mapa.</string>
@@ -3676,11 +3676,11 @@
     <string name="search_poi_types_descr">Combinar categorias de POI de categorias diferentes. Toque em trocar para selecionar tudo, toque no lado esquerdo para seleção da categoria.</string>
     <string name="quick_action_transport_hide">Ocultar o transporte público</string>
     <string name="quick_action_transport_show">Mostrar transporte público</string>
-    <string name="quick_action_show_hide_transport">Mostrar/ocultar transporte público</string>
+    <string name="quick_action_show_hide_transport">Mostrar ou ocultar transportes públicos</string>
     <string name="quick_action_transport_descr">Botão que mostra ou oculta o transporte público no mapa.</string>
-    <string name="create_edit_poi">Criar / Editar POI</string>
+    <string name="create_edit_poi">Criar ou editar um POI</string>
     <string name="parking_positions">Posições de estacionamento</string>
-    <string name="add_edit_favorite">Adicionar / Editar Favorito</string>
+    <string name="add_edit_favorite">Adicionar ou editar um favorito</string>
     <string name="reset_deafult_order">Restaurar ordem de itens padrão</string>
     <string name="back_to_editing">Voltar à edição</string>
     <string name="quick_action_switch_profile_descr">O botão de ação alterna entre os perfis selecionados.</string>
@@ -3869,7 +3869,7 @@
     <string name="context_menu_item_add_waypoint">Adicionar ponto de passagem de trilha</string>
     <string name="map_widget_monitoring">Gravação de viagem</string>
     <string name="monitoring_control_start">REC</string>
-    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral da faixa (ativado através do widget de gravação Trip no mapa).</string>
+    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral do trilho (ligado através do widget de \'gravação de viagem\' no mapa).</string>
     <string name="gpx_monitoring_stop">Pausar a gravação da viagem</string>
     <string name="gpx_monitoring_start">Retomar a gravação da viagem</string>
     <string name="system_default_theme">Predefinição do sistema</string>
@@ -3890,7 +3890,7 @@
     <string name="disable_recording_once_app_killed_descrp">Vai pausar o registo de faixas quando a app for morta (através de apps recentes). (indicação de fundo de OsmAnd desaparece da barra de notificação do Android.)</string>
     <string name="release_3_8">- Função atualizada de Planear uma rota: permite utilizar diferentes tipos de navegação por segmento e a inclusão de faixas
 \n
-\n - Novo menu Aparência para trilhos: selecionar cor, espessura, setas de direção de visualização, ícones de início/fim
+\n - Novo menu Aparência para trilhos: selecionar cor, espessura, setas de direção de visualização, ícones de início e fim
 \n
 \n - Melhoria da visibilidade dos nós da bicicleta.
 \n
@@ -3906,7 +3906,7 @@
     <string name="sort_last_modified">Última modificação</string>
     <string name="sort_name_descending">Nome: Z – A</string>
     <string name="sort_name_ascending">Nome: A – Z</string>
-    <string name="start_finish_icons">Ícones de início/fim</string>
+    <string name="start_finish_icons">Ícones de início e fim</string>
     <string name="contour_lines_thanks">Obrigado por comprar \'Curvas de nível\'</string>
     <string name="osm_live_payment_desc_hw">Assinatura cobrada por período selecionado. Cancele-a na AppGallery a qualquer momento.</string>
     <string name="osm_live_payment_subscription_management_hw">O pagamento será debitado na sua conta AppGallery no momento da confirmação da compra.
@@ -3924,10 +3924,10 @@
     <string name="complex_routing_descr">Roteamento em duas fases para a navegação automotiva.</string>
     <string name="use_native_pt">Desenvolvimento nativos de transportes públicos</string>
     <string name="use_native_pt_desc">Mudar para Cálculo de rotas de transporte público Java (seguro)</string>
-    <string name="perform_oauth_authorization_description">Realize um login OAuth para usar as funcionalidades do osmedit</string>
+    <string name="perform_oauth_authorization_description">Entre com o OAuth para usar os recursos do osmedit</string>
     <string name="perform_oauth_authorization">Fazer login via OAuth</string>
     <string name="clear_osm_token">Limpar token do OpenStreetMap OAuth</string>
-    <string name="osm_edit_logout_success">Logout bem sucedido</string>
+    <string name="osm_edit_logout_success">Saiu</string>
     <string name="file_already_imported">O ficheiro já é importado em OsmAnd</string>
     <string name="use_two_phase_routing">Usar algoritmo de roteamento de 2 fases A*</string>
     <string name="snowmobile_render_descr">Para a condução de motos de neve com estradas e pistas dedicadas.</string>
@@ -3961,15 +3961,15 @@
     <string name="login_open_street_map">Fazer login ao OpenStreetMap</string>
     <string name="login_open_street_map_org">Entrar com OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Entrar com OpenStreetMap</string>
-    <string name="use_login_password">Usar nome do utilizador e palavra-passe</string>
+    <string name="use_login_password">Usar o nome do utilizador e palavra-passe</string>
     <string name="login_account">Conta</string>
     <string name="user_login">Entrar</string>
     <string name="markers_history">Histórico de marcadores</string>
     <string name="send_files_to_openstreetmap">Enviar ficherio de GPX ao OpenStreetMap</string>
     <string name="enter_text_separated">Insira etiquetas separadas por vírgula.</string>
-    <string name="gpx_upload_public_visibility_descr">Público significa que o rastreamento será mostrado publicamente nos Seus traços de GPS e em listas públicas de rastreamento de GPS. Os dados servidos através da API não fazem referência à sua página de rastreamento. As marcas temporais dos pontos de rastreamento não estão disponíveis através da API pública do GPS e os pontos não estão ordenados cronologicamente. No entanto, outros utilizadores ainda são capazes de descarregar o rastreamento bruto da lista pública de rastreamento e de quaisquer carimbos de tempo contidos nela.</string>
-    <string name="gpx_upload_private_visibility_descr">Privado significa que o rastreamento não aparecerá em nenhuma listagem pública, mas os pontos de rastreamento dele ainda estarão disponíveis através da API pública do GPS sem carimbos de tempo, mas não serão ordenados cronologicamente.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Identificável significa que o rastreamento será mostrado publicamente nos Seus traços de GPS e em listas públicas de rastreamento de GPS, ou seja, outros utilizadores serão capazes de descarregar o rastreamento bruto e associá-lo ao seu nome de utilizador. Os dados servidos através da API dos pontos de rastreamento referenciarão à sua página de rastreamento original. As marcas de tempo dos pontos de rastreamento estão disponíveis através da API pública do GPS.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Público\" significa que o rastreamento é mostrado publicamente em Seus traços de GPS e em listas públicas de rastreamento de GPS, e na lista pública de rastreamento com carimbos de data e hora na forma bruta. Os dados servidos através da API não fazem referência à sua página de rastreamento. Os marcadores de ponto de rastreamento não estão disponíveis através da API de GPS pública, e os pontos de rastreamento não estão ordenados cronologicamente.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privado\" significa que o rastreamento não aparece em nenhuma listagem pública, mas os pontos de rastreamento dela em ordem não cronológica estão disponíveis através da API pública do GPS sem carimbos de tempo.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificável\" significa que o rastreamento será mostrado publicamente em Seus traços de GPS e em listas públicas de rastreamento de GPS, ou seja, outros utilizadoes serão capazes de descarregar o rastreamento bruto e associá-lo ao seu nome de utilizador. Os dados públicos de pontos de rastreamento marcados com a hora da API do GPS servidos através da API de pontos de rastreamento farão referência à sua página de rastreamento original.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Rastreável\" significa que o rastreamento não aparece em nenhuma listagem pública, mas pontos de rastreamento processados com carimbos de tempo a partir dele (que não podem ser associados diretamente a si) fazem através de descarregadas da API pública do GPS.</string>
     <string name="osm_edit_close_note">Fechar nota do OSM</string>
     <string name="osm_edit_comment_note">Comentário de nota do OSM</string>
@@ -4001,4 +4001,5 @@
     <string name="cannot_upload_image">Não é possível enviar a imagem, por favor, tente novamente mais tarde</string>
     <string name="select_picture">Selecione a imagem</string>
     <string name="use_dev_url_descr">Mude para usar dev.openstreetmap.org ao invés de openstreetmap.org para testar enviar uma OSM Nota / POI / GPX.</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>

@@ -136,11 +136,11 @@
             <View
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="@dimen/standard_icon_size"
-                android:layout_marginLeft="@dimen/content_padding"
                 android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginLeft="@dimen/content_padding"
                 android:layout_marginEnd="@dimen/content_padding"
                 android:layout_marginRight="@dimen/content_padding"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -172,13 +172,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_gravity="bottom"
-        android:alpha="0.5"
-        android:scaleType="fitXY"
-        osmand:srcCompat="@drawable/bg_shadow_onmap" />
 
 </LinearLayout>

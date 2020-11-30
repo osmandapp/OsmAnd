@@ -43,12 +43,9 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
 
-	private static final String EXPORT_SETTINGS_TAG = "import_settings_tag";
 	private static final String GLOBAL_EXPORT_KEY = "global_export_key";
 	private static final String EXPORT_START_TIME_KEY = "export_start_time_key";
 	private static final String EXPORTING_STARTED_KEY = "exporting_started_key";
-	private static final String INCLUDE_ADDITIONAL_DATA_KEY = "include_additional_data_key";
-	private static final String INCLUDE_GLOBAL_SETTINGS_KEY = "include_global_settings_key";
 	private static final String PROGRESS_MAX_KEY = "progress_max_key";
 	private static final String PROGRESS_VALUE_KEY = "progress_value_key";
 
@@ -76,7 +73,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
 		exportMode = true;
-		dataList = app.getSettingsHelper().getAdditionalData(globalExport);
+		dataList = app.getSettingsHelper().getSettingsByCategory(globalExport);
 	}
 
 	@Nullable
@@ -132,7 +129,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			showExportProgressDialog();
 			File tempDir = FileUtils.getTempDir(app);
 			String fileName = getFileName();
-			List<SettingsItem> items = app.getSettingsHelper().prepareAdditionalSettingsItems(adapter.getData());
+			List<SettingsItem> items = app.getSettingsHelper().prepareSettingsItems(adapter.getData());
 			progress.setMax(getMaxProgress(items));
 			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
 		}

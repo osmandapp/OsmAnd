@@ -287,20 +287,17 @@ public class OsmAndAppCustomization {
 					if (!connectedAppDir.exists()) {
 						connectedAppDir.mkdirs();
 					}
-					OutputStream fout = new FileOutputStream(new File(connectedAppDir, iconName));
+					OutputStream fout = null;
+					if (!Algorithms.isEmpty(iconName)) {
+						fout = new FileOutputStream(new File(connectedAppDir, iconName));
+					}
 					try {
-						Algorithms.streamCopy(is, fout);
+						if (fout != null) {
+							Algorithms.streamCopy(is, fout);
+						}
 					} finally {
-						try {
-							is.close();
-						} catch (IOException e) {
-							LOG.error(e);
-						}
-						try {
-							fout.close();
-						} catch (IOException e) {
-							LOG.error(e);
-						}
+						Algorithms.closeStream(is);
+						Algorithms.closeStream(fout);
 					}
 					JSONObject json = new JSONObject();
 					json.put("", connectedAppDirPath + "/" + iconName);
@@ -406,8 +403,7 @@ public class OsmAndAppCustomization {
 		return set.contains(appMode);
 	}
 
-	public boolean setNavDrawerLogoWithParams(String imageUri, @Nullable String packageName,
-	                                          @Nullable String intent) {
+	public boolean setNavDrawerLogoWithParams(String imageUri, @Nullable String packageName, @Nullable String intent) {
 		return setNavDrawerLogo(imageUri, packageName, intent);
 	}
 
