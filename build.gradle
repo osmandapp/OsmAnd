@@ -27,7 +27,7 @@ allprojects {
     repositories {
         ivy {
             name = "OsmAndBinariesIvy"
-            url = "http://builder.osmand.net"
+            url = "https://builder.osmand.net"
             layout "pattern", {
                 artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
             }
