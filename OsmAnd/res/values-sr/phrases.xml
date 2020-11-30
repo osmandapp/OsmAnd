@@ -3329,7 +3329,7 @@
     <string name="poi_glacier_ele_top">Највиша тачка</string>
     <string name="poi_glacier_type_ice_tongue">Ледени језик</string>
     <string name="poi_glacier_type_remnant">Остатак</string>
-    <string name="poi_glacier_type_shelf">Полица</string>
+    <string name="poi_glacier_type_shelf">Плато</string>
     <string name="poi_glacier_type_rock">Стена</string>
     <string name="poi_glacier_type_icefall">Ледопад</string>
     <string name="poi_glacier_type_hanging">Висећи</string>
@@ -3421,8 +3421,8 @@
     <string name="poi_diameter_crown">Пречник круне</string>
     <string name="poi_circumference">Обим</string>
     <string name="poi_climbing_routes">Пењачке руте</string>
-    <string name="poi_climbing_summit_log_no">Дневник врха пењања: не</string>
-    <string name="poi_climbing_summit_log_yes">Дневник врха пењања: да</string>
+    <string name="poi_climbing_summit_log_no">Брвно врха пењања: не</string>
+    <string name="poi_climbing_summit_log_yes">Брвно врха пењања: да</string>
     <string name="poi_climbing_orientation_nw">Оријентација зида: СЗ</string>
     <string name="poi_climbing_orientation_w">Оријентација зида: З</string>
     <string name="poi_climbing_orientation_sw">Оријентација зида: ЈЗ</string>
@@ -3774,7 +3774,7 @@
     <string name="poi_fire_hydrant_type_pipe">Цев</string>
     <string name="poi_drinking_water_refill_network">Мрежа за поновно доливање питке воде</string>
     <string name="poi_drinking_water_refill_no">Доливање воде за пиће: не</string>
-    <string name="poi_drinking_water_refill_yes">Доливање воде за пиће: да</string>
+    <string name="poi_drinking_water_refill_yes">Да</string>
     <string name="poi_seamark_obstruction">Опструкција</string>
     <string name="poi_seamark_water_level_below_mwl">Ниво воде: испод средњег нивоа</string>
     <string name="poi_seamark_water_level_above_mwl">Ниво воде: изнад средњег нивоа</string>
@@ -3789,7 +3789,7 @@
     <string name="poi_tactile_paving_primitive">Примитивно</string>
     <string name="poi_tactile_paving_contrasted">Контрастно</string>
     <string name="poi_traffic_signals_sound_locate">Дозвољено је само при ходању</string>
-    <string name="poi_internet_access_fee_customers">Сигнал за проналазак пола</string>
+    <string name="poi_internet_access_fee_customers">Приступ интернету: купци</string>
     <string name="poi_video_no">Не</string>
     <string name="poi_video_yes">Да</string>
     <string name="poi_booth">Тип кабине</string>
