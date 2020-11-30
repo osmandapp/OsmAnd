@@ -1648,7 +1648,7 @@
     <string name="lang_nl">Холандски</string>
     <string name="lang_ka">Грузијски</string>
     <string name="lang_iw">Хебрејски</string>
-    <string name="lang_hi">Хинди</string>
+    <string name="lang_hi">Индијски</string>
     <string name="lang_hu_formal">Мађарски (званични)</string>
     <string name="lang_kn">Канада</string>
     <string name="lang_lv">Летонски</string>
@@ -3993,4 +3993,5 @@
     <string name="use_dev_url_descr">Пређите на употребу dev.openstreetmap.org уместо на openstreetmap.org да бисте тестирали отпремање ОСМ белешке / ПОИ / ГПКС.</string>
     <string name="use_dev_url">Употреби dev.openstreetmap.org</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Немачки (говорни)</string>
 </resources>

@@ -4004,4 +4004,6 @@
     <string name="use_dev_url">Usar dev.openstreetmap.org</string>
     <string name="cannot_upload_image">No se puede subir la imagen, inténtalo más tarde</string>
     <string name="select_picture">Elegir imagen</string>
+    <string name="lang_de_casual">Alemán (casual)</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>

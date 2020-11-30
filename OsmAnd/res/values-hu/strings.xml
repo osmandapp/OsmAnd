@@ -3990,4 +3990,6 @@
     <string name="use_dev_url">A dev.openstreetmap.org használata</string>
     <string name="cannot_upload_image">Nem lehet feltölteni a képet, kérjük, próbálja meg később</string>
     <string name="select_picture">Kép kijelölése</string>
+    <string name="lang_de_casual">német (tegeződő)</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>

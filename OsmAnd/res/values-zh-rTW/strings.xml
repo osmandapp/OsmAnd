@@ -3994,4 +3994,6 @@
     <string name="use_dev_url">使用 dev.openstreetmap.org</string>
     <string name="cannot_upload_image">無法上傳圖片，請稍後再試</string>
     <string name="select_picture">選取圖片</string>
+    <string name="lang_de_casual">德語（非正式）</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>

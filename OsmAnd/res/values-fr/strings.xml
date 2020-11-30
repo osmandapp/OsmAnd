@@ -3976,4 +3976,5 @@
     <string name="cannot_upload_image">Impossible d\'envoyer l\'image, veuillez réessayer plus tard</string>
     <string name="select_picture">Sélectionnez une image</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Allemand (courant)</string>
 </resources>

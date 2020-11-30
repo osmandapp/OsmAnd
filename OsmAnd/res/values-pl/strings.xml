@@ -3369,7 +3369,7 @@
     <string name="default_speed_dialog_msg">Szacuje czas przyjazdu dla nieznanego rodzaju dróg i ograniczenia prędkości na wszystkich drogach (może zmienić trasę)</string>
     <string name="swap_start_and_destination">Odwróć początek i cel</string>
     <string name="track_saved">Zapisano ślad</string>
-    <string name="empty_filename">Nazwa pliku jest pusta</string>
+    <string name="empty_filename">Pusta nazwa pliku</string>
     <string name="shared_string_revert">Przywróć</string>
     <string name="quick_action_directions_from_desc">Przycisk umożliwiający wyśrodkowanie ekranu w punkcie wyjścia. Następnie poprosi o ustawienie miejsca docelowego lub uruchomi obliczanie trasy.</string>
     <string name="clear_confirmation_msg">Wyczyścić %1$s\?</string>
@@ -3958,26 +3958,26 @@
     <string name="message_you_need_add_two_points_to_show_graphs">Musisz dodać co najmniej dwa punkty</string>
     <string name="subscription_payment_issue_title">Wystąpił problem z Twoją subskrypcją. Kliknij przycisk, aby przejść do ustawień subskrypcji Google Play i naprawić metodę płatności.</string>
     <string name="subscription_on_hold_title">Subskrypcja OsmAnd Live jest wstrzymana</string>
-    <string name="user_login">Nazwa użytkownika</string>
+    <string name="user_login">Login</string>
     <string name="login_open_street_map">Zaloguj się do OpenStreetMap</string>
     <string name="login_open_street_map_org">Zaloguj się do OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Zaloguj się za pomocą OpenStreetMap</string>
     <string name="open_street_map_login_mode">Zaloguj się, aby przesłać nowe lub zmodyfikowane zmiany,
 \n
 \nza pomocą protokołu OAuth lub nazwy użytkownika i hasła.</string>
-    <string name="use_login_password">Zaloguj się za pomocą nazwy użytkownika i hasła</string>
+    <string name="use_login_password">Użyj loginu i hasła</string>
     <string name="login_account">Konto</string>
     <string name="osm_edit_close_note">Zamknij uwagę OSM</string>
     <string name="osm_edit_comment_note">Skomentuj uwagę OSM</string>
     <string name="markers_history">Historia znaczników</string>
     <string name="send_files_to_openstreetmap">Wyślij plik GPX do OpenStreetMap</string>
     <string name="enter_text_separated">Wpisz tagi oddzielone przecinkami.</string>
-    <string name="gpx_upload_trackable_visibility_descr">Możliwość śledzenia oznacza, że ślad nie pojawi się na żadnej publicznej liście, ale punkty śledzenia będą nadal dostępne za pośrednictwem publicznego API GPS ze znacznikami czasu. Inni użytkownicy będą mogli pobrać tylko te przetworzone punkty śledzenia z Twojego śladu, których nie można powiązać bezpośrednio z Tobą.</string>
-    <string name="osm_login_descr">Zaloguj się przy użyciu bezpiecznej metody autoryzacji OAuth lub użyj swojej nazwy użytkownika i hasła.</string>
+    <string name="gpx_upload_trackable_visibility_descr">„Śledzenie” oznacza, że ślad nie pojawia się w żadnych publicznych wykazach, ale przetworzone punkty śledzenia z sygnaturami czasowymi (których nie można bezpośrednio powiązać z Tobą) są pobierane z publicznego interfejsu GPS API.</string>
+    <string name="osm_login_descr">Możesz zalogować się za pomocą bezpiecznej metody autoryzacji OAuth lub przy użyciu swojego loginu i hasła.</string>
     <string name="shared_string_add_photo">Dodaj zdjęcie</string>
     <string name="register_on_openplacereviews">Zarejestruj się w
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Zaloguj się na stronie projektu otwartych danych OpenPlaceReviews.org, aby przesłać jeszcze więcej zdjęć.</string>
+    <string name="register_on_openplacereviews_desc">Zdjęcia są dostarczane przez otwarty projekt OpenPlaceReviews.org. Aby przesłać swoje zdjęcia, musisz zarejestrować się na stronie.</string>
     <string name="register_opr_create_new_account">Utwórz nowe konto</string>
     <string name="register_opr_have_account">Mam już konto</string>
     <string name="select_groups_for_import">Wybierz grupy, które zostaną zaimportowane.</string>
@@ -3999,4 +3999,9 @@
     <string name="app_mode_motorboat">Motorówka</string>
     <string name="add_to_mapillary">Dodaj do Mapillary</string>
     <string name="add_to_opr">Dodaj do OpenPlaceReviews</string>
+    <string name="gpx_upload_private_visibility_descr">„Prywatny” oznacza, że ślad nie pojawia się w żadnych publicznych wykazach, ale punkty śledzenia z niego w kolejności niechronologicznej są dostępne za pośrednictwem publicznego interfejsu API GPS bez sygnatur czasowych.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Możliwe do zidentyfikowania\" oznacza, że ślad zostanie podany publicznie w śladach GPS i w publicznych wykazach śledzenia GPS, czyli inni użytkownicy będą mogli pobrać surowy ślad i skojarzyć go z twoją nazwą użytkownika. Publiczne dane śledzenia sygnatury czasowej z interfejsu API GPS obsługiwane za pośrednictwem interfejsu API punktów śladowych będą odwoływać się do oryginalnej strony śledzenia.</string>
+    <string name="select_picture">Wybierz zdjęcie</string>
+    <string name="cannot_upload_image">Nie można przesłać obrazu, spróbuj ponownie później</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>
