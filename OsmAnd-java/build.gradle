@@ -89,7 +89,6 @@ publishing {
 	repositories {
 		ivy {
 			url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
-			version = "0.1-SNAPSHOT"
 		}
 	}
     publications {
