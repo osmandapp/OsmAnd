@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'maven-publish'
-apply plugin: 'ivy-publish'
 
 configurations {
 	android
@@ -86,21 +85,11 @@ artifacts {
 }
 
 publishing {
-	repositories {
-		ivy {
-			url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
-		}
-	}
     publications {
         maven(MavenPublication) {
 			artifactId "osmand-base"
             from components.java
         }
-		ivyJava(IvyPublication) {
-			artifact androidJar {
-				classifier 'android'
-			}
-		}
 	}
 }
 
