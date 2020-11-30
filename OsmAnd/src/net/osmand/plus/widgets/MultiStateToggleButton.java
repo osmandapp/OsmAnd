@@ -1,6 +1,5 @@
 package net.osmand.plus.widgets;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
@@ -21,9 +20,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HorizontalRadioGroup {
+public class MultiStateToggleButton {
 
 	private List<RadioItem> items = new ArrayList<>();
+	private OsmandApplication app;
 	private List<ViewGroup> buttons = new ArrayList<>();
 	private List<View> dividers = new ArrayList<>();
 	private RadioItem selectedItem;
@@ -31,7 +31,8 @@ public class HorizontalRadioGroup {
 	private LinearLayout container;
 	private boolean nightMode;
 
-	public HorizontalRadioGroup(LinearLayout container, boolean nightMode) {
+	public MultiStateToggleButton(OsmandApplication app, LinearLayout container, boolean nightMode) {
+		this.app = app;
 		this.container = container;
 		this.nightMode = nightMode;
 	}
@@ -51,27 +52,25 @@ public class HorizontalRadioGroup {
 		dividers.clear();
 		container.removeAllViews();
 		for (int i = 0; i < items.size(); i++) {
-			RadioItem item = items.get(i);
-
-			ViewGroup button = createBtn();
-			TextView title = button.findViewById(R.id.title);
-			title.setText(item.getTitle());
-			button.setOnClickListener(getSelectClickListener(item));
-			buttons.add(button);
-			container.addView(button);
-
-			boolean lastItem = i == items.size() - 1;
-			if (!lastItem) {
-				View divider = createDivider();
-				dividers.add(divider);
-				container.addView(divider);
+			createBtn(items.get(i));
+			if (!isLastItem(i)) {
+				createDivider();
 			}
 		}
 		updateView();
 	}
 
-	private View.OnClickListener getSelectClickListener(final RadioItem item) {
-		return new View.OnClickListener() {
+	private boolean isLastItem(int index) {
+		return index == items.size() - 1;
+	}
+
+	private void createBtn(@NonNull final RadioItem item) {
+		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		ViewGroup button = (ViewGroup) inflater.inflate(
+				R.layout.custom_radio_btn_text_item, container, false);
+		TextView title = button.findViewById(R.id.title);
+		title.setText(item.getTitle());
+		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				OnRadioItemClickListener l = item.getListener();
@@ -79,27 +78,21 @@ public class HorizontalRadioGroup {
 					setSelectedItem(item);
 				}
 			}
-		};
+		});
+		buttons.add(button);
+		container.addView(button);
 	}
 
-	@NonNull
-	private ViewGroup createBtn() {
-		Context ctx = getThemedCtx();
-		LayoutInflater inflater = LayoutInflater.from(ctx);
-		return (ViewGroup) inflater.inflate(R.layout.custom_radio_btn_text_item, container, false);
-	}
-
-	@NonNull
-	private View createDivider() {
-		Context ctx = getThemedCtx();
+	private void createDivider() {
 		int dividerColor = nightMode ?
 				R.color.stroked_buttons_and_links_outline_dark :
 				R.color.stroked_buttons_and_links_outline_light;
-		int width = AndroidUtils.dpToPx(ctx, 1.0f);
-		View divider = new View(ctx);
+		int width = AndroidUtils.dpToPx(app, 1.0f);
+		View divider = new View(app);
 		divider.setLayoutParams(new ViewGroup.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT));
-		divider.setBackgroundColor(ContextCompat.getColor(ctx, dividerColor));
-		return divider;
+		divider.setBackgroundColor(ContextCompat.getColor(app, dividerColor));
+		dividers.add(divider);
+		container.addView(divider);
 	}
 
 	public void setSelectedItem(RadioItem selectedItem) {
@@ -108,10 +101,6 @@ public class HorizontalRadioGroup {
 	}
 
 	private void updateView() {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
 		int activeColor = ContextCompat.getColor(app, nightMode
 				? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light);
@@ -165,18 +154,6 @@ public class HorizontalRadioGroup {
 				dividers.get(dividerIndex).setVisibility(View.GONE);
 			}
 		}
-	}
-
-	private Context getThemedCtx() {
-		Context ctx = container.getContext();
-		return UiUtilities.getThemedContext(ctx, nightMode);
-	}
-
-	private OsmandApplication getMyApplication() {
-		if (container != null) {
-			return (OsmandApplication) container.getContext().getApplicationContext();
-		}
-		return null;
 	}
 
 	public static class RadioItem {

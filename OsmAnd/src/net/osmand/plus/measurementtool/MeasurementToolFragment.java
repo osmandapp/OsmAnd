@@ -75,9 +75,9 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
-import net.osmand.plus.widgets.HorizontalRadioGroup;
-import net.osmand.plus.widgets.HorizontalRadioGroup.RadioItem;
-import net.osmand.plus.widgets.HorizontalRadioGroup.OnRadioItemClickListener;
+import net.osmand.plus.widgets.MultiStateToggleButton;
+import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
+import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.Algorithms;
 
@@ -118,7 +118,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private BaseCard visibleCard;
 	private PointsCard pointsCard;
 	private GraphsCard graphsCard;
-	private HorizontalRadioGroup infoTypeBtn;
+	private MultiStateToggleButton infoTypeBtn;
 	private RadioItem pointsBtn;
 	private RadioItem graphBtn;
 	private View mainView;
@@ -140,7 +140,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private static final int UNDO_MODE = 0x8;
 	private int modes = 0x0;
 
-	private boolean isPortrait;
+	private boolean portrait;
 	private boolean nightMode;
 	private int cachedMapPosition;
 
@@ -230,6 +230,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			return null;
 		}
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
+		OsmandApplication app = mapActivity.getMyApplication();
 
 		editingCtx.setApplication(mapActivity.getMyApplication());
 		editingCtx.setProgressListener(new SnapToRoadProgressListener() {
@@ -261,7 +262,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		measurementLayer.setEditingCtx(editingCtx);
 
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		isPortrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		int btnWidth = getResources().getDimensionPixelOffset(R.dimen.gpx_group_button_width);
 
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
@@ -273,7 +274,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		detailsMenu = new GraphDetailsMenu();
 		cardsContainer = mainView.findViewById(R.id.cards_container);
-		if (isPortrait) {
+		if (portrait) {
 			String pointsBtnTitle = getString(R.string.shared_string_gpx_points);
 			pointsBtn = new RadioItem(pointsBtnTitle);
 			pointsBtn.setOnClickListener(getInfoTypeBtnListener(InfoType.POINTS));
@@ -282,8 +283,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			graphBtn = new RadioItem(graphBtnTitle);
 			graphBtn.setOnClickListener(getInfoTypeBtnListener(InfoType.GRAPH));
 
-			LinearLayout customRadioButtons = mainView.findViewById(R.id.custom_radio_buttons);
-			infoTypeBtn = new HorizontalRadioGroup(customRadioButtons, nightMode);
+			LinearLayout infoButtonsContainer = mainView.findViewById(R.id.custom_radio_buttons);
+			infoTypeBtn = new MultiStateToggleButton(app, infoButtonsContainer, nightMode);
 			infoTypeBtn.setItems(pointsBtn, graphBtn);
 		}
 		pointsCard = new PointsCard(mapActivity, this);
@@ -319,7 +320,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		upDownRow.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (isPortrait) {
+				if (portrait) {
 					if (infoExpanded) {
 						collapseInfoView();
 					} else if (setInfoType(InfoType.POINTS)) {
@@ -556,10 +557,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void expandInfoView() {
-		if (isPortrait) {
+		if (portrait) {
 			infoExpanded = true;
 			cardsContainer.setVisibility(View.VISIBLE);
-			setMapPosition(isPortrait
+			setMapPosition(portrait
 					? OsmandSettings.MIDDLE_TOP_CONSTANT
 					: OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
 			updateUpDownBtn();
@@ -573,7 +574,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void collapseInfoView() {
-		if (isPortrait) {
+		if (portrait) {
 			infoExpanded = false;
 			currentInfoType = null;
 			infoTypeBtn.setSelectedItem(null);
@@ -1196,7 +1197,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void onItemClick(int position) {
 				if (mapActivity != null && measurementLayer != null) {
 					collapseInfoViewIfExpanded();
-					if (isPortrait) {
+					if (portrait) {
 						setMapPosition(OsmandSettings.MIDDLE_TOP_CONSTANT);
 					}
 					measurementLayer.moveMapToPoint(position);
@@ -1690,7 +1691,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (measurementLayer != null) {
 			String distanceStr = OsmAndFormatter.getFormattedDistance((float) editingCtx.getRouteDistance(), requireMyApplication());
 			distanceTv.setText(distanceStr + ",");
-			pointsTv.setText((isPortrait ? pointsSt + ": " : "") + editingCtx.getPointsCount());
+			pointsTv.setText((portrait ? pointsSt + ": " : "") + editingCtx.getPointsCount());
 		}
 		updateToolbar();
 	}
@@ -1721,7 +1722,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			mapActivity.refreshMap();
 			mapActivity.disableDrawer();
 
-			AndroidUiHelper.setVisibility(mapActivity, isPortrait ? View.INVISIBLE : View.GONE,
+			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info);
