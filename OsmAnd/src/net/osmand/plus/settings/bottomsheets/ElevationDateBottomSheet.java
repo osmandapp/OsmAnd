@@ -219,14 +219,12 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void enableDisableReliefButtons(boolean enable) {
 		for (BaseBottomSheetItem item : reliefFactorButtons) {
-			item.getView().setEnabled(enable);
-			TextView titleField = (TextView) item.getView().findViewById(R.id.title);
-			if (enable) {
-				titleField.setTextColor(checkedColor);
-			} else {
-				titleField.setTextColor(uncheckedColor);
-			}
-			item.getView().findViewById(R.id.compound_button).setEnabled(enable);
+			View view = item.getView();
+			view.setEnabled(enable);
+			view.findViewById(R.id.compound_button).setEnabled(enable);
+
+			TextView titleField = view.findViewById(R.id.title);
+			titleField.setTextColor(enable ? checkedColor : uncheckedColor);
 		}
 	}
 
