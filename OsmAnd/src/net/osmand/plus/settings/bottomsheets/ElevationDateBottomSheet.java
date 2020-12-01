@@ -2,6 +2,7 @@ package net.osmand.plus.settings.bottomsheets;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
@@ -73,6 +74,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
 		super.onCreate(savedInstanceState);
+		setDismissButtonTextId(R.string.shared_string_close);
 
 		Map<String, RoutingParameter> routingParameterMap = app.getRouter(appMode).getParameters();
 		RoutingParameter parameter = routingParameterMap.get(USE_HEIGHT_OBSTACLES);
@@ -93,8 +95,8 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 
-		on = getString(R.string.shared_string_enable);
-		off = getString(R.string.shared_string_disable);
+		on = getString(R.string.shared_string_enabled);
+		off = getString(R.string.shared_string_disabled);
 		appModeColor = appMode.getIconColorInfo().getColor(nightMode);
 		activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
@@ -171,7 +173,17 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 								RoutingParameter parameter = parameters.get(selectedEntryIndex);
 								updateSelectedParameters(app, appMode, parameters, parameter.getId());
 							}
+							Fragment target = getTargetFragment();
+							if (target instanceof BaseSettingsFragment) {
+								((BaseSettingsFragment) target).updateSetting(useHeightPref.getId());
+							}
 							updateReliefButtons();
+							new Handler().postDelayed(new Runnable() {
+								@Override
+								public void run() {
+									dismiss();
+								}
+							}, 500);
 						}
 					}).create();
 			items.add(preferenceItem[0]);

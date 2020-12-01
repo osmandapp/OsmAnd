@@ -285,12 +285,24 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					if (p.getType() == RoutingParameterType.BOOLEAN) {
 						OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 
-						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
+						SwitchPreferenceEx switchPreferenceEx = createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
 						switchPreferenceEx.setDescription(description);
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
-						switchPreferenceEx.setSummaryOn(R.string.shared_string_on);
-						switchPreferenceEx.setSummaryOff(R.string.shared_string_off);
 						screen.addPreference(switchPreferenceEx);
+
+						if (USE_HEIGHT_OBSTACLES.equals(p.getId()) && !Algorithms.isEmpty(reliefFactorParameters))  {
+							String summaryOn = getString(R.string.shared_string_enabled);
+							for (RoutingParameter parameter : reliefFactorParameters) {
+								if (isRoutingParameterSelected(settings, am, parameter)) {
+									summaryOn = getString(R.string.ltr_or_rtl_combine_via_comma, summaryOn, getRoutingParameterTitle(app, parameter));
+								}
+							}
+							switchPreferenceEx.setSummaryOn(summaryOn);
+							switchPreferenceEx.setSummaryOff(R.string.shared_string_disabled);
+						} else {
+							switchPreferenceEx.setSummaryOn(R.string.shared_string_on);
+							switchPreferenceEx.setSummaryOff(R.string.shared_string_off);
+						}
 					} else {
 						Object[] vls = p.getPossibleValues();
 						String[] svlss = new String[vls.length];
@@ -403,7 +415,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			return;
 		}
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final float[] angleValue = new float[] {mode.getStrAngle()};
+		final float[] angleValue = new float[]{mode.getStrAngle()};
 		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
