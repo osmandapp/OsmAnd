@@ -3999,4 +3999,5 @@
     <string name="cannot_upload_image">Ne povas alŝuti la bildon, reprovu poste</string>
     <string name="select_picture">Elektu bildon</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Germana (ordinara)</string>
 </resources>

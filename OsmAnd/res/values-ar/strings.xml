@@ -3987,4 +3987,5 @@
     <string name="cannot_upload_image">لا يمكن تحميل الصورة، من فضلك، حاول مرة أخرى في وقت لاحق</string>
     <string name="select_picture">تحديد صورة</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">الألمانية (تقليدية)</string>
 </resources>

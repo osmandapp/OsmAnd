@@ -3953,13 +3953,13 @@
     <string name="subscription_expired_title">Predplatné OsmAnd Live skončilo</string>
     <string name="subscription_paused_title">Predplatné OsmAnd Live je pozastavené</string>
     <string name="subscription_on_hold_title">Predplatné OsmAnd Live je zablokované</string>
-    <string name="login_open_street_map">Prihlásenie pre OpenStreetMap</string>
-    <string name="login_open_street_map_org">Prihlásenie pre OpenStreetMap.org</string>
-    <string name="sign_in_with_open_street_map">Prihlásiť sa do OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Prihláste sa pre odoslanie nových alebo zmenených údajov,
+    <string name="login_open_street_map">Prihlásiť sa do OpenStreetMap</string>
+    <string name="login_open_street_map_org">Prihlásiť sa do OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Zaregistrovať sa do OpenStreetMap</string>
+    <string name="open_street_map_login_mode">Musíte sa prihlásiť pre odoslanie nových alebo zmenených údajov.
 \n
-\nbuď pomocou metódy OAuth alebo pomocou mena a hesla.</string>
-    <string name="use_login_password">Prihlásiť sa menom a heslom</string>
+\nMôžete sa prihlásiť pomocou bezpečnej metódy OAuth alebo pomocou mena a hesla.</string>
+    <string name="use_login_password">Použiť meno a heslo</string>
     <string name="login_account">Účet</string>
     <string name="user_login">Prihlasovacie meno</string>
     <string name="markers_history">História značiek</string>
@@ -3967,11 +3967,11 @@
     <string name="enter_text_separated">Zadajte značky oddelené čiarkou.</string>
     <string name="osm_edit_close_note">Zatvoriť OSM poznámku</string>
     <string name="osm_edit_comment_note">Komentovať OSM poznámku</string>
-    <string name="osm_login_descr">Prihláste sa bezpečnou metódou OAuth alebo použite meno a heslo.</string>
+    <string name="osm_login_descr">Môžete sa prihlásiť bezpečnou metódou OAuth alebo použite meno a heslo.</string>
     <string name="shared_string_add_photo">Pridať foto</string>
     <string name="register_on_openplacereviews">Zaregistrovať na
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Prihláste sa na webstránke projektu OpenPlaceReviews.org s otvorenými dátami pre odoslanie ďalších fotografií.</string>
+    <string name="register_on_openplacereviews_desc">Fotografie sú poskytované projektom OpenPlaceReviews.org s otvorenými dátami. Na odoslanie vašich fotiek sa musíte zaregistrovať na webovej stránke.</string>
     <string name="register_opr_create_new_account">Vytvoriť nový účet</string>
     <string name="register_opr_have_account">Už mám účet</string>
     <string name="shared_string_search_history">História hľadania</string>
@@ -3993,6 +3993,8 @@
     <string name="select_items_for_import">Zvoľte položky, ktoré budú importované.</string>
     <string name="use_dev_url_descr">Prepnúť na dev.openstreetmap.org namiesto openstreetmap.org pre otestovanie odosielania OSM poznámok / bodov záujmu / GPX stôp.</string>
     <string name="use_dev_url">Použiť dev.openstreetmap.org</string>
-    <string name="cannot_upload_image"></string>
-    <string name="select_picture"></string>
+    <string name="cannot_upload_image">Nedá sa odoslať obrázok, prosím skúste neskôr</string>
+    <string name="select_picture">Zvoľte obrázok</string>
+    <string name="lang_de_casual">Nemecky (Deutsch) úsporne</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>
