@@ -4003,4 +4003,6 @@
     <string name="select_picture">בחירת תמונה</string>
     <string name="lang_de_casual">גרמנית (עממית)</string>
     <string name="ltr_or_rtl_combine_via_star">‏%1$s‏ * %2$s</string>
+    <string name="elevation_data">אפשר להשתמש בנתוני רום לצורך התחשבות בעליה / ירידה במהלך הטיול</string>
+    <string name="app_mode_light_aircraft">כלי טיס קל</string>
 </resources>
