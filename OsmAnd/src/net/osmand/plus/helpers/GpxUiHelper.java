@@ -808,11 +808,9 @@ public class GpxUiHelper {
 											  View apprTitleView,
 											  String prefWidthValue,
 											  String prefColorValue) {
-		TextView widthTextView = (TextView) apprTitleView.findViewById(R.id.widthTitle);
-		ImageView colorImageView = (ImageView) apprTitleView.findViewById(R.id.colorImage);
-		if (Algorithms.isEmpty(prefWidthValue)) {
-			widthTextView.setText(AndroidUtils.getRenderingStringPropertyValue(activity, trackWidthProp.getDefaultValueDescription()));
-		} else {
+		TextView widthTextView = apprTitleView.findViewById(R.id.widthTitle);
+		ImageView colorImageView = apprTitleView.findViewById(R.id.colorImage);
+		if (!Algorithms.isEmpty(prefWidthValue)) {
 			widthTextView.setText(AndroidUtils.getRenderingStringPropertyValue(activity, prefWidthValue));
 		}
 		int color = GpxAppearanceAdapter.parseTrackColor(renderer, prefColorValue);

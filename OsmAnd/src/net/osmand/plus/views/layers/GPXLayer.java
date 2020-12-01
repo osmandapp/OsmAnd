@@ -303,6 +303,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
 					rc.setDensityValue((float) tileBox.getMapDensity());
 					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
+					defaultTrackWidth = rc.getComplexValue(req, req.ALL.R_STROKE_WIDTH);
 					osmandRenderer.updatePaint(req, paint, 0, false, rc);
 
 					if (req.isSpecified(rrs.PROPS.R_SHADOW_RADIUS)) {
@@ -428,7 +429,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				boolean showArrows = isShowArrowsForTrack(selectedGpxFile.getGpxFile());
 				if (showArrows) {
 					QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
-					String width = getTrackWidthName(selectedGpxFile.getGpxFile(), "");
+					String width = getTrackWidthName(selectedGpxFile.getGpxFile(), defaultTrackWidthPref.get());
 					float trackWidth = getTrackWidth(width, defaultTrackWidth);
 					int trackColor = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
 					int arrowColor = UiUtilities.getContrastColor(view.getApplication(), trackColor, false);
@@ -637,7 +638,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 										   List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		SelectedGpxFile currentTrack = null;
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
-			String width = getTrackWidthName(selectedGpxFile.getGpxFile(), "");
+			String width = getTrackWidthName(selectedGpxFile.getGpxFile(), defaultTrackWidthPref.get());
 			if (!cachedTrackWidth.containsKey(width)) {
 				cachedTrackWidth.put(width, null);
 			}
@@ -656,7 +657,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 										  RotatedTileBox tileBox, DrawSettings settings) {
 		List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 		for (TrkSegment ts : segments) {
-			String width = getTrackWidthName(selectedGpxFile.getGpxFile(), "");
+			String width = getTrackWidthName(selectedGpxFile.getGpxFile(), defaultTrackWidthPref.get());
 			int color = getTrackColor(selectedGpxFile.getGpxFile(), ts.getColor(cachedColor));
 			if (ts.renderer == null && !ts.points.isEmpty()) {
 				Renderable.RenderableSegment renderer;
