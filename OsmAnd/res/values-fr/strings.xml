@@ -3977,4 +3977,5 @@
     <string name="select_picture">Sélectionnez une image</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Allemand (courant)</string>
+    <string name="app_mode_light_aircraft">Aviation légère</string>
 </resources>

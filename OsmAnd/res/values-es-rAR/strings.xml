@@ -4006,4 +4006,6 @@
     <string name="select_picture">Elegir imagen</string>
     <string name="lang_de_casual">Alemán (casual)</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="elevation_data">Puedes usar los datos de elevación para considerar el ascenso o descenso de su viaje</string>
+    <string name="app_mode_light_aircraft">Avión ligero</string>
 </resources>
