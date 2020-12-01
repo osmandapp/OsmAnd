@@ -205,9 +205,8 @@ public class TravelObfHelper implements TravelHelper{
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
-
 		return popularArticles;
 	}
 
@@ -220,16 +219,7 @@ public class TravelObfHelper implements TravelHelper{
 		res.lat = amenity.getLocation().getLatitude();
 		res.lon = amenity.getLocation().getLongitude();
 		res.imageTitle = amenity.getTagContent(Amenity.IMAGE_TITLE, lang) == null ? "" : amenity.getTagContent(Amenity.IMAGE_TITLE, lang);
-		long tripId = -1;
-		String val = amenity.getTagContent(Amenity.ROUTE_ID, null);
-		if (val != null && val.startsWith("Q")) {
-			try {
-				tripId = Long.parseLong(val.substring(1));
-			} catch (NumberFormatException nfe) {
-				LOG.error(nfe.getMessage());
-			}
-		}
-		res.tripId = tripId;
+		res.tripId = getTripId(amenity);
 		res.originalId = 0; //?
 		res.lang = lang;
 		res.contentsJson = amenity.getTagContent(Amenity.CONTENT_JSON, lang) == null ? "" : amenity.getTagContent(Amenity.CONTENT_JSON, lang);
@@ -244,6 +234,19 @@ public class TravelObfHelper implements TravelHelper{
 //		}
 
 		return res;
+	}
+
+	private long getTripId(Amenity amenity) {
+		long tripId = -1;
+		String val = amenity.getTagContent(Amenity.ROUTE_ID, null);
+		if (val != null && val.startsWith("Q")) {
+			try {
+				tripId = Long.parseLong(val.substring(1));
+			} catch (NumberFormatException nfe) {
+				LOG.error(nfe.getMessage());
+			}
+		}
+		return tripId;
 	}
 
 	private BinaryMapIndexReader getBookBinaryIndex() throws IOException {
@@ -302,10 +305,7 @@ public class TravelObfHelper implements TravelHelper{
 				int top = 0;
 				int right = Integer.MAX_VALUE;
 				int bottom = Integer.MAX_VALUE;
-				final List<Amenity> results = new ArrayList<>();
-
 				LatLon ll = application.getMapViewTrackingUtilities().getMapLocation();
-
 				BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 						MapUtils.get31TileNumberX(ll.getLongitude()),
 						MapUtils.get31TileNumberY(ll.getLatitude()), title,
@@ -314,7 +314,6 @@ public class TravelObfHelper implements TravelHelper{
 							@Override
 							public boolean publish(Amenity object) {
 								if (object.getName(lang).equals(title)) {
-									results.add(object);
 									return true;
 								}
 								return false;
