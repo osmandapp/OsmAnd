@@ -31,8 +31,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -41,6 +39,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -160,14 +160,6 @@ public class ExternalApiHelper {
 	public static final String PARAM_QUICK_ACTION_PARAMS = "quick_action_params";
 	public static final String PARAM_QUICK_ACTION_NUMBER = "quick_action_number";
 
-	public static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
-			ApplicationMode.CAR,
-			ApplicationMode.BICYCLE,
-			ApplicationMode.PEDESTRIAN
-	};
-
-	public static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
-
 	// RESULT_OK == -1
 	// RESULT_CANCELED == 0
 	// RESULT_FIRST_USER == 1
@@ -258,15 +250,8 @@ public class ExternalApiHelper {
 
 			} else if (API_CMD_NAVIGATE.equals(cmd)) {
 				String profileStr = uri.getQueryParameter(PARAM_PROFILE);
-				final ApplicationMode profile = ApplicationMode.valueOfStringKey(profileStr, DEFAULT_PROFILE);
-				boolean validProfile = false;
-				for (ApplicationMode mode : VALID_PROFILES) {
-					if (mode == profile) {
-						validProfile = true;
-						break;
-					}
-				}
-				if (!validProfile) {
+				final ApplicationMode profile = findNavigationProfile(app, profileStr);
+				if (profile == null) {
 					resultCode = RESULT_CODE_ERROR_INVALID_PROFILE;
 				} else {
 					String startName = uri.getQueryParameter(PARAM_START_NAME);
@@ -325,19 +310,12 @@ public class ExternalApiHelper {
 
 			} else if (API_CMD_NAVIGATE_SEARCH.equals(cmd)) {
 				String profileStr = uri.getQueryParameter(PARAM_PROFILE);
-				final ApplicationMode profile = ApplicationMode.valueOfStringKey(profileStr, DEFAULT_PROFILE);
-				boolean validProfile = false;
-				for (ApplicationMode mode : VALID_PROFILES) {
-					if (mode == profile) {
-						validProfile = true;
-						break;
-					}
-				}
+				final ApplicationMode profile = findNavigationProfile(app, profileStr);
 				final boolean showSearchResults = uri.getBooleanQueryParameter(PARAM_SHOW_SEARCH_RESULTS, false);
 				final String searchQuery = uri.getQueryParameter(PARAM_DEST_SEARCH_QUERY);
 				if (Algorithms.isEmpty(searchQuery)) {
 					resultCode = RESULT_CODE_ERROR_EMPTY_SEARCH_QUERY;
-				} else if (!validProfile) {
+				} else if (profile == null) {
 					resultCode = RESULT_CODE_ERROR_INVALID_PROFILE;
 				} else {
 					String startName = uri.getQueryParameter(PARAM_START_NAME);
@@ -642,6 +620,18 @@ public class ExternalApiHelper {
 		return result;
 	}
 
+	private ApplicationMode findNavigationProfile(@NonNull OsmandApplication app, @Nullable String profileStr) {
+		if (!ApplicationMode.DEFAULT.getStringKey().equals(profileStr)) {
+			ApplicationMode profile = ApplicationMode.valueOfStringKey(profileStr, ApplicationMode.CAR);
+			for (ApplicationMode mode : ApplicationMode.values(app)) {
+				if (mode == profile && !Algorithms.isEmpty(mode.getRoutingProfile())) {
+					return mode;
+				}
+			}
+		}
+		return null;
+	}
+
 	public static void saveAndNavigateGpx(MapActivity mapActivity, final GPXFile gpxFile, final boolean force) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 
@@ -732,10 +722,10 @@ public class ExternalApiHelper {
 	}
 
 	static private void startNavigation(MapActivity mapActivity,
-									   GPXFile gpx,
-									   LatLon from, PointDescription fromDesc,
-									   LatLon to, PointDescription toDesc,
-									   ApplicationMode mode) {
+										GPXFile gpx,
+										LatLon from, PointDescription fromDesc,
+										LatLon to, PointDescription toDesc,
+										ApplicationMode mode) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (gpx == null) {
