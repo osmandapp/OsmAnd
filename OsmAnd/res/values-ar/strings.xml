@@ -3988,4 +3988,6 @@
     <string name="select_picture">تحديد صورة</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">الألمانية (تقليدية)</string>
+    <string name="elevation_data">يمكنك استخدام بيانات الارتفاع للنظر في الصعود / الهبوط لرحلتك</string>
+    <string name="app_mode_light_aircraft">طائرة</string>
 </resources>
