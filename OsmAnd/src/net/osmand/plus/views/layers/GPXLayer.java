@@ -33,6 +33,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -69,6 +71,7 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -106,8 +109,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private TrackDrawInfo trackDrawInfo;
 	private TrackChartPoints trackChartPoints;
 
-	private GpxSelectionHelper selectedGpxHelper;
+	private GpxDbHelper gpxDbHelper;
 	private MapMarkersHelper mapMarkersHelper;
+	private GpxSelectionHelper selectedGpxHelper;
+
 	private List<WptPt> cache = new ArrayList<>();
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 	private MapTextLayer textLayer;
@@ -144,6 +149,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		gpxDbHelper = view.getApplication().getGpxDbHelper();
 		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
 		mapMarkersHelper = view.getApplication().getMapMarkersHelper();
 		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
@@ -694,13 +700,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private String getTrackWidthName(GPXFile gpxFile, String defaultWidth) {
-		String width;
+		String width = null;
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			width = trackDrawInfo.getWidth();
 		} else if (gpxFile.showCurrentTrack) {
 			width = currentTrackWidthPref.get();
 		} else {
-			width = gpxFile.getWidth(defaultWidth);
+			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
+			if (dataItem != null) {
+				width = dataItem.getWidth();
+			}
 		}
 		return width != null ? width : defaultWidth;
 	}
@@ -711,7 +720,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (gpxFile.showCurrentTrack) {
 			return currentTrackShowArrowsPref.get();
 		} else {
-			return gpxFile.isShowArrows();
+			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
+			if (dataItem != null) {
+				return dataItem.isShowArrows();
+			}
+			return false;
 		}
 	}
 

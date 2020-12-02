@@ -36,13 +36,14 @@ public enum GpxSplitType {
 		return ctx.getString(resId);
 	}
 
+	@NonNull
 	public static GpxSplitType getSplitTypeByName(@NonNull String name) {
 		for (GpxSplitType splitType : GpxSplitType.values()) {
 			if (splitType.name().equalsIgnoreCase(name)) {
 				return splitType;
 			}
 		}
-		return null;
+		return NO_SPLIT;
 	}
 
 	public static GpxSplitType getSplitTypeByTypeId(int typeId) {
@@ -51,6 +52,6 @@ public enum GpxSplitType {
 				return splitType;
 			}
 		}
-		return null;
+		return NO_SPLIT;
 	}
 }
