@@ -41,8 +41,8 @@ public class OsmOAuthHelper {
 		return authorizationAdapter;
 	}
 
-	public void startOAuth(@NonNull ViewGroup view) {
-		authorizationAdapter.startOAuth(view);
+	public void startOAuth(@NonNull ViewGroup view, boolean nightMode) {
+		authorizationAdapter.startOAuth(view, nightMode);
 	}
 
 	public void authorize(@NonNull String oauthVerifier) {

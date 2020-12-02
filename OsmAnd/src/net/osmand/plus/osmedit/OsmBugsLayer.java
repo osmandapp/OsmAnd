@@ -1,7 +1,6 @@
 package net.osmand.plus.osmedit;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.util.Xml;
@@ -10,10 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
@@ -25,6 +22,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.osmedit.dialogs.BugBottomSheetDialog;
+import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -32,7 +30,6 @@ import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -370,29 +367,13 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					titleTextId, posButtonTextId, action, bug, point, getHandleBugListener());
 			return;
 		} else {
-			((EditText) view.findViewById(R.id.user_name_field)).setText(getUserName());
-			((EditText) view.findViewById(R.id.password_field)).setText(
-					activity.getMyApplication().getSettings().USER_PASSWORD.get());
+			OsmNotesPoint pnt = new OsmNotesPoint();
+			pnt.setAction(action);
+			pnt.setId(bug.getId());
+			pnt.setLatitude(bug.getLatitude());
+			pnt.setLongitude(bug.getLongitude());
+			SendOsmNoteBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), new OsmPoint[]{pnt});
 		}
-		if (!Algorithms.isEmpty(text)) {
-			((EditText) view.findViewById(R.id.message_field)).setText(text);
-		}
-		view.findViewById(R.id.message_field).requestFocus();
-		AndroidUtils.softKeyboardDelayed(activity, view.findViewById(R.id.message_field));
-
-		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setTitle(R.string.shared_string_commit);
-		builder.setView(view);
-		builder.setPositiveButton(posButtonTextId, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				String text = offline ? getMessageText(view) : getTextAndUpdateUserPwd(view);
-				activity.getContextMenu().close();
-				handleBug(text, bug, action, point);
-			}
-		});
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.create().show();
 	}
 
 	private void handleBug(String text, OpenStreetNote bug, Action action, OsmNotesPoint point) {

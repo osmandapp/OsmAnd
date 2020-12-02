@@ -36,6 +36,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SendPoiDialogFragment extends DialogFragment {
+
+
 	public static final String TAG = "SendPoiDialogFragment";
 	public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
 	public static final String POI_UPLOADER_TYPE = "poi_uploader_type";

@@ -59,6 +59,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	private LinearLayout signInView;
 	private SwitchCompat uploadAnonymously;
 	private OsmandApplication app;
+	private EditText noteText;
 
 	private boolean isLoginOAuth() {
 		return !Algorithms.isEmpty(settings.USER_DISPLAY_NAME.get());
@@ -78,7 +79,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		final View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_osm_note_fragment, null);
 
-		EditText noteText = sendOsmNoteView.findViewById(R.id.note_text);
+		noteText = sendOsmNoteView.findViewById(R.id.note_text);
 		noteText.setText(((OsmNotesPoint) poi[0]).getText());
 		noteText.setSelection(noteText.getText().length());
 		TextInputLayout noteHint = sendOsmNoteView.findViewById(R.id.note_hint);
@@ -98,7 +99,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 				if (fragment instanceof OsmAuthorizationListener) {
 					app.getOsmOAuthHelper().addListener((OsmAuthorizationListener) fragment);
 				}
-				app.getOsmOAuthHelper().startOAuth((ViewGroup) v);
+				app.getOsmOAuthHelper().startOAuth((ViewGroup) getView(), nightMode);
 			}
 		});
 		View loginButton = sendOsmNoteView.findViewById(R.id.login_button);
@@ -201,6 +202,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
 		}
 		if (progressDialogPoiUploader != null) {
+			((OsmNotesPoint) poi[0]).setText(noteText.getText().toString());
 			progressDialogPoiUploader.showProgressDialog(poi, false, uploadAnonymously.isChecked());
 		}
 		dismiss();
