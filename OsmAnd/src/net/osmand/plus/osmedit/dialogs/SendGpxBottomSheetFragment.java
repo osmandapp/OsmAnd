@@ -30,6 +30,7 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
@@ -56,7 +57,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
-	private final int contentHeightPrevious = 0;
+	private int contentHeightPrevious = 0;
 
 	public void setGpxInfos(GpxInfo[] gpxInfos) {
 		this.gpxInfos = gpxInfos;
@@ -139,17 +140,32 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 				Activity activity = getActivity();
 				int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
 				int shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
+				boolean showTopShadow;
 				final ScrollView scrollView = getView().findViewById(R.id.scroll_view);
 				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
 				int viewHeight = scrollView.getHeight();
 				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
 				if (contentHeightPrevious != contentHeight && activity != null) {
-					if (viewHeight + shadowHeight < contentHeight) {
-						AndroidUtils.setBackground(getView(), getPortraitBg(activity));
-					} else {
-						AndroidUtils.setBackground(getView(), getColoredBg(activity));
-					}
+					showTopShadow = viewHeight + shadowHeight < contentHeight;
 					scrollView.requestLayout();
+					contentHeightPrevious = contentHeight;
+					drawTopShadow(showTopShadow);
+				}
+			}
+
+			private void drawTopShadow(boolean showTopShadow) {
+				final Activity activity = getActivity();
+				View mainView = getView();
+				if (activity == null || mainView == null) {
+					return;
+				}
+				if (AndroidUiHelper.isOrientationPortrait(activity)) {
+					AndroidUtils.setBackground(mainView, showTopShadow ? getPortraitBg(activity) : getColoredBg(activity));
+					if (!showTopShadow) {
+						mainView.setPadding(0, 0, 0, 0);
+					}
+				} else {
+					AndroidUtils.setBackground(mainView, showTopShadow ? getLandscapeTopsidesBg(activity) : getLandscapeSidesBg(activity));
 				}
 			}
 		};
