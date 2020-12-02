@@ -3861,4 +3861,6 @@
     <string name="select_items_for_import">Vælg emner, der skal importeres.</string>
     <string name="use_dev_url_descr">Skift til dev.openstreetmap.org i stedet for openstreetmap.org for at teste overførelse af OSM-note / IP / GPX.</string>
     <string name="use_dev_url">Brug dev.openstreetmap.org</string>
+    <string name="cannot_upload_image">Kan ikke overføre billedet, prøv igen senere</string>
+    <string name="select_picture">Vælg billede</string>
 </resources>
