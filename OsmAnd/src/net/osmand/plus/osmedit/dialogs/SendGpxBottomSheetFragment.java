@@ -69,7 +69,6 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View sendOsmPoiView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
-		sendOsmPoiView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 
 		tagsField = sendOsmPoiView.findViewById(R.id.tags_field);
 		messageField = sendOsmPoiView.findViewById(R.id.message_field);
@@ -129,36 +128,6 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 				.setCustomView(sendOsmPoiView)
 				.create();
 		items.add(titleItem);
-	}
-
-	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				Rect visibleDisplayFrame = new Rect();
-				int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
-				int shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
-				final ScrollView scrollView = getView().findViewById(R.id.scroll_view);
-				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-				int height = scrollView.getHeight();
-				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
-				if (contentHeightPrevious != contentHeight || contentHeight < height) {
-					if (scrollView.getHeight() + shadowHeight > contentHeight) {
-						scrollView.getLayoutParams().height = contentHeight;
-					} else {
-						scrollView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-					}
-					scrollView.requestLayout();
-					int delay = Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP ? 300 : 1000;
-					scrollView.postDelayed(new Runnable() {
-						public void run() {
-							scrollView.scrollTo(0, scrollView.getHeight());
-						}
-					}, delay);
-					contentHeightPrevious = contentHeight;
-				}
-			}
-		};
 	}
 
 	protected static void showOpenStreetMapScreen(@NonNull FragmentActivity activity) {
