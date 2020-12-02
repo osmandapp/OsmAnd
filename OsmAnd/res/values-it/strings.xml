@@ -3981,10 +3981,10 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Tracciabile\" significa che la traccia non è visualizzabile in alcuna lista pubblica, ma solo i suoi punti, processati, con le informazioni temporali (che non possono essere direttamente associati a te) attraverso le API GPS pubbliche.</string>
     <string name="add_to_mapillary">Aggiungi a Mapillary</string>
     <string name="add_to_opr">Aggiungi a OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd mostra foto da più sorgenti:
-\nOpenPlaceReviews - foto PDI;
+    <string name="add_photos_descr">OsmAnd mostra foto da diverse fonti:
+\nOpenPlaceReviews - foto POI;
 \nMapillary - immagini stradali;
-\nWeb / Wikimedia - foto PDI OpenStreetMap.</string>
+\nWeb / Wikimedia - foto POI specificate nei dati di OpenStreetMap.</string>
     <string name="shared_string_resources">Risorse</string>
     <string name="approximate_file_size">Dimesione approssimativa del file</string>
     <string name="select_data_to_export">Seleziona i dati da esportare nel file.</string>
@@ -3998,5 +3998,7 @@
     <string name="cannot_upload_image">Impossibile caricare l\'immagine, riprovare in seguito</string>
     <string name="select_picture">Scegli la foto</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="lang_de_casual">German (casual)</string>
+    <string name="lang_de_casual">Tedesco (informale)</string>
+    <string name="elevation_data">Puoi utililizzare i dati dell\'altitudine per valutare la Salita/Discesa del tuo percorso</string>
+    <string name="app_mode_light_aircraft">Ultraleggeri</string>
 </resources>

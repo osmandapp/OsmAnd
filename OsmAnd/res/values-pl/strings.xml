@@ -3028,7 +3028,7 @@
     <string name="downloaded_maps">Pobrane mapy</string>
     <string name="visited_screens">Odwiedzane ekrany</string>
     <string name="colleted_data">Zebrane Informacje</string>
-    <string name="routing_attr_piste_type_downhill_name">Narciarstwo alpejskie/zjazdowe</string>
+    <string name="routing_attr_piste_type_downhill_name">Narciarstwo alpejskie i zjazdowe</string>
     <string name="collected_data_descr">Określ, które dane pozwalasz OsmAnd udostępniać.</string>
     <string name="downloaded_maps_collect_descr">Pomóż nam poznać popularność map krajów i regionów.</string>
     <string name="visited_screens_collect_descr">Pomóż nam poznać popularność funkcji OsmAnd.</string>
@@ -3962,9 +3962,9 @@
     <string name="login_open_street_map">Zaloguj się do OpenStreetMap</string>
     <string name="login_open_street_map_org">Zaloguj się do OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Zaloguj się za pomocą OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Zaloguj się, aby przesłać nowe lub zmodyfikowane zmiany,
+    <string name="open_street_map_login_mode">Musisz zalogować się, aby przesłać nowe lub zmodyfikowane zmiany,
 \n
-\nza pomocą protokołu OAuth lub nazwy użytkownika i hasła.</string>
+\nMożesz zalogować się za pomocą protokołu OAuth lub loginu i hasła.</string>
     <string name="use_login_password">Użyj loginu i hasła</string>
     <string name="login_account">Konto</string>
     <string name="osm_edit_close_note">Zamknij uwagę OSM</string>
@@ -4004,4 +4004,5 @@
     <string name="select_picture">Wybierz zdjęcie</string>
     <string name="cannot_upload_image">Nie można przesłać obrazu, spróbuj ponownie później</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Niemiecki (styl potoczny)</string>
 </resources>
