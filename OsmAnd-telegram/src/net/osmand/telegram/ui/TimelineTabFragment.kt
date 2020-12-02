@@ -53,7 +53,7 @@ class TimelineTabFragment : Fragment() {
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
+	): View {
 		mainView = inflater.inflate(R.layout.fragment_timeline_tab, container, false)
 		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
 
@@ -139,22 +139,24 @@ class TimelineTabFragment : Fragment() {
 	fun tabClosed() {}
 
 	private fun selectDate() {
-		val dateSetListener =
-			DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-				calendar = Calendar.getInstance()
-				calendar.set(Calendar.YEAR, year)
-				calendar.set(Calendar.MONTH, monthOfYear)
-				calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+		context?.let {
+			val dateSetListener =
+				DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+					calendar = Calendar.getInstance()
+					calendar.set(Calendar.YEAR, year)
+					calendar.set(Calendar.MONTH, monthOfYear)
+					calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-				updateList()
-				updateDateButton()
-			}
-		DatePickerDialog(
-			context, dateSetListener,
-			calendar.get(Calendar.YEAR),
-			calendar.get(Calendar.MONTH),
-			calendar.get(Calendar.DAY_OF_MONTH)
-		).show()
+					updateList()
+					updateDateButton()
+				}
+			DatePickerDialog(
+				it, dateSetListener,
+				calendar.get(Calendar.YEAR),
+				calendar.get(Calendar.MONTH),
+				calendar.get(Calendar.DAY_OF_MONTH)
+			).show()
+		}
 	}
 
 	private fun getStartOfDay(calendar: Calendar): Long {

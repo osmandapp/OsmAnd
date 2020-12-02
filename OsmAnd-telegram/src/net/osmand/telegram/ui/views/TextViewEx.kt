@@ -40,7 +40,7 @@ class TextViewEx : AppCompatTextView {
 		}
 
 		val typefaceName = resolvedAttrs.getString(R.styleable.TextViewEx_typeface)
-		val typeface = FontCache.getFont(context, typefaceName)
+		val typeface = FontCache.getFont(context, typefaceName!!)
 		if (typeface != null) {
 			val style = getTypeface()?.style ?: 0
 			setTypeface(typeface, style)
