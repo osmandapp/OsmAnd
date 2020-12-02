@@ -3543,7 +3543,7 @@
     <string name="shared_string_circle">Daire</string>
     <string name="shared_string_octagon">Sekizgen</string>
     <string name="shared_string_square">Kare</string>
-    <string name="shared_string_min">Min</string>
+    <string name="shared_string_min">Asgari</string>
     <string name="replace_point_descr">Başka bir noktayı bununla değiştirin.</string>
     <string name="app_mode_ski_touring">Kayak turu</string>
     <string name="app_mode_ski_snowmobile">Kar arabası</string>
@@ -3903,13 +3903,13 @@
     <string name="icon_group_emergency">Acil</string>
     <string name="icon_group_travel">Seyahat</string>
     <string name="message_you_need_add_two_points_to_show_graphs">En az iki nokta eklemelisiniz</string>
-    <string name="login_open_street_map">OpenStreetMap için oturum aç</string>
-    <string name="login_open_street_map_org">OpenStreetMap.org için oturum aç</string>
-    <string name="open_street_map_login_mode">Yenilikleri veya değişiklikleri karşıya yüklemek için oturum açın,
+    <string name="login_open_street_map">OpenStreetMap\'te oturum aç</string>
+    <string name="login_open_street_map_org">OpenStreetMap.org\'da oturum aç</string>
+    <string name="open_street_map_login_mode">Yenilikleri veya değişiklikleri karşıya yüklemek için oturum açmanız gerekir.
 \n
-\nOAuth ile oturum açabilir veya kullanıcı adı ve parolanızı kullanabilirsiniz.</string>
-    <string name="use_login_password">Kullanıcı adı ve parola ile oturum aç</string>
-    <string name="user_login">Kullanıcı adı</string>
+\nGüvenli OAuth yöntemini kullanarak oturum açabilir veya giriş bilgilerinizi ve parolanızı kullanabilirsiniz.</string>
+    <string name="use_login_password">Giriş bilgisi ve parola kullan</string>
+    <string name="user_login">Giriş bilgisi</string>
     <string name="login_account">Hesap</string>
     <string name="manage_subscription">Aboneliği yönet</string>
     <string name="subscription_payment_issue_title">Aboneliğinizle ilgili bir sorun var. Ödeme yönteminizi düzeltmek üzere Google Play abonelik ayarlarına gitmek için düğmeye tıklayın.</string>
@@ -3926,11 +3926,11 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Takip edilebilir\", izlemenin herkese açık herhangi bir listede gösterilmediği, ancak (sizinle doğrudan ilişkilendirilemeyen) zaman damgaları olan işlenen izleme noktalarının herkese açık GPS API\'sinden indirmeler yoluyla göründüğü anlamına gelir.</string>
     <string name="osm_edit_close_note">OSM Notunu Kapat</string>
     <string name="osm_edit_comment_note">OSM Notuna Yorum Yap</string>
-    <string name="osm_login_descr">Güvenli OAuth yöntemini kullanarak oturum açın veya kullanıcı adınızı ve parolanızı kullanın.</string>
+    <string name="osm_login_descr">Güvenli OAuth yöntemini kullanarak oturum açabilir veya giriş bilgilerinizi ve parolanızı kullanabilirsiniz.</string>
     <string name="shared_string_add_photo">Fotoğraf ekle</string>
     <string name="register_on_openplacereviews">OpenPlaceReviews.org\'a
 \nkaydolun</string>
-    <string name="register_on_openplacereviews_desc">Daha da fazla fotoğraf yüklemek için açık veri projesi web sitesi OpenPlaceReviews.org\'da oturum açın.</string>
+    <string name="register_on_openplacereviews_desc">Fotoğraflar açık veri projesi OpenPlaceReviews.org tarafından sağlanmaktadır. Fotoğraflarınızı yüklemek için web sitesine kaydolmanız gerekir.</string>
     <string name="register_opr_create_new_account">Yeni hesap oluştur</string>
     <string name="register_opr_have_account">Zaten bir hesabım var</string>
     <string name="shared_string_search_history">Arama geçmişi</string>
@@ -3952,4 +3952,10 @@
     <string name="select_items_for_import">İçe aktarılacak ögeleri seçin.</string>
     <string name="use_dev_url_descr">OSM Notu/POI/GPX yüklemeyi test etmek için openstreetmap.org yerine dev.openstreetmap.org kullanmaya geçin.</string>
     <string name="use_dev_url">dev.openstreetmap.org\'u kullan</string>
+    <string name="lang_de_casual">Almanca (gündelik)</string>
+    <string name="cannot_upload_image">Resim yüklenemiyor, lütfen daha sonra tekrar deneyin</string>
+    <string name="select_picture">Resim seç</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="elevation_data">Yolculuğunuzun Çıkış / İniş değerleri için Yükseklik verilerini kullanabilirsiniz</string>
+    <string name="app_mode_light_aircraft">Hafif uçak</string>
 </resources>
