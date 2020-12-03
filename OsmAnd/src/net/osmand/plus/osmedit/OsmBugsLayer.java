@@ -376,13 +376,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 	}
 
-	private void handleBug(String text, OpenStreetNote bug, Action action, OsmNotesPoint point) {
-		if (bug != null || point != null) {
-			executeTaskInBackground(new HandleOsmNoteAsyncTask(getOsmbugsUtil(bug), local, bug, point, text, action,
-					getHandleBugListener()));
-		}
-	}
-
 	HandleOsmNoteAsyncTask.HandleBugListener getHandleBugListener() {
 		return new HandleOsmNoteAsyncTask.HandleBugListener() {
 			@Override

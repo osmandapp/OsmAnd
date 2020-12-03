@@ -28,6 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.osmedit.DashOsmEditsFragment;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
@@ -42,9 +43,7 @@ import static net.osmand.plus.UiUtilities.setupDialogButton;
 import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
 import static net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import static net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.OPENSTREETMAP_POINT;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
+import static net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment.OPENSTREETMAP_POINT;
 
 public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragment implements ValidateOsmLoginListener,
 		OsmAuthorizationListener {
@@ -197,7 +196,11 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		ProgressDialogPoiUploader progressDialogPoiUploader = null;
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
-			progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
+			if (getParentFragment() instanceof DashOsmEditsFragment) {
+				progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
+			} else {
+				progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
+			}
 		} else if (getParentFragment() instanceof ProgressDialogPoiUploader) {
 			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
 		}

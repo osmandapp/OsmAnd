@@ -58,9 +58,9 @@ import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmen
 import net.osmand.plus.osmedit.OpenstreetmapLocalUtil.OnNodeCommittedListener;
 import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
 import net.osmand.plus.osmedit.OsmPoint.Group;
+import net.osmand.plus.osmedit.dialogs.ProgressDialogPoiUploader;
 import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -633,13 +633,13 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	private void uploadItems(final OsmPoint[] points) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			OsmandApplication app = getMyApplication();
-			OsmandSettings settings = app.getSettings();
-			OsmOAuthAuthorizationAdapter authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
-			boolean isLogged = authorizationAdapter.isValidToken()
-					|| !Algorithms.isEmpty(settings.USER_NAME.get())
-					&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
 			if (hasPoiGroup(points)) {
+				OsmandApplication app = getMyApplication();
+				OsmandSettings settings = app.getSettings();
+				OsmOAuthAuthorizationAdapter authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
+				boolean isLogged = authorizationAdapter.isValidToken()
+						|| !Algorithms.isEmpty(settings.USER_NAME.get())
+						&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
 				if (isLogged) {
 					SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), points);
 				} else {
