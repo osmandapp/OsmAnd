@@ -3872,4 +3872,7 @@
     <string name="poi_liaison_filter">Összekötő iroda</string>
     <string name="poi_embassy_filter">Külképviselet</string>
     <string name="poi_consulate_filter">Konzulátus</string>
+    <string name="poi_nurse">Ápoló</string>
+    <string name="poi_siren">Sziréna</string>
+    <string name="poi_mobile_money_agent">Mobilpénzfizetési iroda</string>
 </resources>
