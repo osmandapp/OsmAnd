@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -316,6 +317,20 @@ public class AndroidUtils {
 						ContextCompat.getColor(ctx, night ? darkState : lightState),
 						ContextCompat.getColor(ctx, night ? darkNormal : lightNormal)
 				}
+		);
+	}
+
+	public static ColorStateList createColorStateList(Context ctx, boolean night) {
+		return new ColorStateList(
+				new int[][] {
+						new int[] {-android.R.attr.state_enabled}, // disabled
+						new int[] {android.R.attr.state_checked},
+						new int[] {}
+				},
+				new int[] {
+						ContextCompat.getColor(ctx, night? R.color.text_color_secondary_dark : R.color.text_color_secondary_light),
+						ContextCompat.getColor(ctx, night? R.color.active_color_primary_dark : R.color.active_color_primary_light),
+						ContextCompat.getColor(ctx, night? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)}
 		);
 	}
 

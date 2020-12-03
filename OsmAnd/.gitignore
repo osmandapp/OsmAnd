@@ -2,7 +2,7 @@ gradle
 gradlew
 gradlew.bat
 
-
+/net.osmand
 aarDependencies 
 libs/android*.jar
 libs/com.*.jar

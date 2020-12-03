@@ -3864,4 +3864,10 @@
     <string name="poi_diplomatic_services_non_immigrant_visas_filter">Неиммиграционные визы</string>
     <string name="poi_liaison_filter">Связь</string>
     <string name="poi_embassy_filter">Посольство</string>
+    <string name="poi_liaison_subnational">Субнациональный</string>
+    <string name="poi_consulate_consular_agency">Консульское агентство</string>
+    <string name="poi_embassy_interests_section">Раздел интересов</string>
+    <string name="poi_consulate_filter">Консульство</string>
+    <string name="poi_siren">Сирена</string>
+
 </resources>

@@ -32,11 +32,11 @@ class BottomSheetDialog(ctx: Context) : Dialog(ctx, R.style.AppTheme_BottomSheet
 		super.setContentView(wrapInContainer(layoutResID, null, null))
 	}
 
-	override fun setContentView(view: View?) {
+	override fun setContentView(view: View) {
 		super.setContentView(wrapInContainer(0, view, null))
 	}
 
-	override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
+	override fun setContentView(view: View, params: ViewGroup.LayoutParams?) {
 		super.setContentView(wrapInContainer(0, view, params))
 	}
 

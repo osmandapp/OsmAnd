@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'ivy-publish'
 
 task printc {
 	configurations.each { if(it.isCanBeResolved())  println it.name }
@@ -338,75 +339,24 @@ task appStart(type: Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
 }
 
-artifacts {
-	archives(file("../OsmAnd-java/build/libs/OsmAnd-java-android-1.0.jar")) {
-		classifier "OsmAnd-java-android"
-		name 'OsmAnd'
-		type "jar"
-	}
-	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-x86-debug.aar")) {
-		classifier 'legacyX86Debug'
-		name 'OsmAnd'
-		extension 'aar'
-	}
-	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-x86-release.aar")) {
-		classifier 'legacyX86Release'
-		name 'OsmAnd'
-		extension 'aar'
-	}
-	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-arm64-debug.aar")) {
-		classifier 'legacyArm64Debug'
-		name 'OsmAnd'
-		extension 'aar'
-	}
-	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-arm64-release.aar")) {
-		classifier 'legacyArm64Release'
-		name 'OsmAnd'
-		extension 'aar'
-	}
-	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-armonly-debug.aar")) {
-		classifier 'legacyArmonlyDebug'
-		name 'OsmAnd'
-		extension 'aar'
-	}
-	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-armonly-release.aar")) {
-		classifier 'legacyArmonlyRelease'
-		name 'OsmAnd'
-		extension 'aar'
-	}
-	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-armv7-debug.aar")) {
-		classifier 'legacyArmv7Debug'
-		name 'OsmAnd'
-		extension 'aar'
-	}
-	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-armv7-release.aar")) {
-		classifier 'legacyArmv7Release'
-		name 'OsmAnd'
-		extension 'aar'
-	}
-	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-fat-debug.aar")) {
-		classifier 'legacyFatDebug'
-		name 'OsmAnd'
-		extension 'aar'
-	}
-	archives(file("$buildDir/outputs/aar/OsmAnd-legacy-fat-release.aar")) {
-		classifier 'legacyFatRelease'
-		name 'OsmAnd'
-		extension 'aar'
-	}
-}
-
-// Uploading artifacts to local path
-group = 'net.osmand'
-uploadArchives {
-	repositories.ivy {
-		//    credentials {
-		//        username ""
-		//       password ""
-		//   }
-
-		url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
-		version = "1.0-SNAPSHOT"
+project.afterEvaluate {
+	publishing {
+		repositories {
+			ivy {
+				url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
+				version = "0.1-SNAPSHOT"
+			}
+		}
+		publications {
+			aar(IvyPublication) {
+				artifact bundleLegacyFatDebugAar {
+					classifier 'debug'
+				}
+				artifact bundleLegacyFatReleaseAar {
+					classifier 'release'
+				}
+			}
+		}
 	}
 }
 

@@ -295,7 +295,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	private fun getStatusWidgetIntent(): Intent {
 		val startIntent = app.packageManager.getLaunchIntentForPackage(app.packageName)
-		startIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+		startIntent!!.addCategory(Intent.CATEGORY_LAUNCHER)
 		startIntent.putExtra(OPEN_MY_LOCATION_TAB_KEY,true)
 		return startIntent
 	}

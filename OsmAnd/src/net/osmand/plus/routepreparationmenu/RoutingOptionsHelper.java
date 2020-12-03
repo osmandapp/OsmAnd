@@ -542,8 +542,8 @@ public class RoutingOptionsHelper {
 				rp.disabledIconId = R.drawable.ic_action_fuel;
 				break;
 			case GeneralRouter.USE_HEIGHT_OBSTACLES:
-				rp.activeIconId = R.drawable.ic_action_elevation;
-				rp.disabledIconId = R.drawable.ic_action_elevation;
+				rp.activeIconId = R.drawable.ic_action_altitude_average;
+				rp.disabledIconId = R.drawable.ic_action_altitude_average;
 				break;
 			case GeneralRouter.AVOID_FERRIES:
 				rp.activeIconId = R.drawable.ic_action_fuel;

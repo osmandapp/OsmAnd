@@ -187,7 +187,7 @@
     <string name="lang_zh_cn">Chinés sinxelo</string>
     <string name="lang_sk">Eslovaco</string>
     <string name="lang_sl">Esloveno</string>
-    <string name="lang_es">Español ou castelán</string>
+    <string name="lang_es">Español</string>
     <string name="lang_sv">Sueco</string>
     <string name="lang_zh_tw">Chinés tradicional</string>
     <string name="lang_tr">Turco</string>
@@ -1420,7 +1420,7 @@
     <string name="lang_bn">Bengalí</string>
     <string name="lang_tl">Tagalo</string>
     <string name="lang_sh">Serbo-croata</string>
-    <string name="lang_az">Azarí ou acerbaixano</string>
+    <string name="lang_az">Azarí</string>
     <string name="lang_br">Bretón</string>
     <string name="lang_sq">Albanés</string>
     <string name="lang_is">Islandés</string>
@@ -4023,4 +4023,8 @@ Lon %2$s</string>
 \nOpenPlaceReviews - imaxes POI;
 \nMapillary - maxes a nivel de rúa;
 \nWeb / Wikimedia - imaxes POI especificadas nos datos do OpenStreetMap.</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Alemán casual</string>
+    <string name="elevation_data">Podes empregar os datos de elevación para considerar o ascenso ou descenso da túa viaxe</string>
+    <string name="app_mode_light_aircraft">Avión lixeiro</string>
 </resources>

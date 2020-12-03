@@ -3952,7 +3952,7 @@
 \n
 \nsoit avec OAuth soit avec votre identifiant et mot de passe.</string>
     <string name="osm_login_descr">Vous pouvez vous connecter avec la méthode sécurisée OAuth ou avec votre identifiant et votre mot de passe.</string>
-    <string name="register_on_openplacereviews_desc">Connectez-vous au site web du projet OpenPlaceReviews.org pour ajouter des photos.</string>
+    <string name="register_on_openplacereviews_desc">Les photos sont fournies par le projet OpenPlaceReviews.org. Vous devez vous connecter au site web pour envoyer vos photos.</string>
     <string name="shared_string_search_history">Historique de recherche</string>
     <string name="app_mode_kayak">Kayak</string>
     <string name="export_not_enough_space_descr">Votre appareil n\'a que %1$s disponible. Veuillez libérer de l\'espace ou désélectionner l\'export pour certains éléments.</string>
@@ -3975,4 +3975,7 @@
     <string name="select_items_for_import">Sélectionnez les objets à importer.</string>
     <string name="cannot_upload_image">Impossible d\'envoyer l\'image, veuillez réessayer plus tard</string>
     <string name="select_picture">Sélectionnez une image</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Allemand (courant)</string>
+    <string name="app_mode_light_aircraft">Aviation légère</string>
 </resources>

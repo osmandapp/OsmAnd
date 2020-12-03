@@ -26,7 +26,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 
 	public static final String TAG = SingleSelectPreferenceBottomSheet.class.getSimpleName();
 
-	private static final String SELECTED_ENTRY_INDEX_KEY = "selected_entry_index_key";
+	public static final String SELECTED_ENTRY_INDEX_KEY = "selected_entry_index_key";
 	private static final String USE_COLLAPSIBLE_DESCRIPTION = "use_collapsible_description";
 	private static final int COLLAPSED_DESCRIPTION_LINES = 4;
 

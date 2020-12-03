@@ -3995,4 +3995,8 @@
     <string name="use_dev_url">Використовувати dev.openstreetmap.org</string>
     <string name="cannot_upload_image">Не вдається завантажити зображення, повторіть спробу пізніше</string>
     <string name="select_picture">Вибрати зображення</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Німецька (неформальна)</string>
+    <string name="elevation_data">Ви можете використовувати дані про висоту для розгляду сходження / спуску для вашої подорожі</string>
+    <string name="app_mode_light_aircraft">Легкий літак</string>
 </resources>

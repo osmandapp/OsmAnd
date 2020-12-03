@@ -3994,4 +3994,8 @@
     <string name="use_dev_url">使用 dev.openstreetmap.org</string>
     <string name="cannot_upload_image">無法上傳圖片，請稍後再試</string>
     <string name="select_picture">選取圖片</string>
+    <string name="lang_de_casual">德語（非正式）</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="elevation_data">您可以將海拔資料用於您旅程的上升與下降</string>
+    <string name="app_mode_light_aircraft">輕型飛機</string>
 </resources>

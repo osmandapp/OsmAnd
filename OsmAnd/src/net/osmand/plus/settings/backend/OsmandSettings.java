@@ -97,7 +97,7 @@ public class OsmandSettings {
 	private static String CUSTOM_SHARED_PREFERENCES_NAME;
 
 	private static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
-	private static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
+	public static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
 
 	/// Settings variables
 	private final OsmandApplication ctx;

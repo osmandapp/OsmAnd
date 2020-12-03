@@ -111,7 +111,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 				.setCompoundButtonColorId(appModeColorId)
 				.setTitle(enabled ? on : off)
 				.setTitleColorId(enabled ? activeColor : disabledColor)
-				.setCustomView(getCustomButtonView(enabled))
+				.setCustomView(getCustomButtonView(app, getAppMode(), enabled, nightMode))
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -123,7 +123,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 						preferenceBtn[0].setChecked(enabled);
 						getDefaultValue();
 						updateSliderView();
-						updateCustomButtonView(v, enabled);
+						updateCustomButtonView(app, getAppMode(), v, enabled, nightMode);
 						Fragment target = getTargetFragment();
 						float newValue = enabled ? DEFAULT_MODE : DISABLE_MODE;
 						if (target instanceof OnConfirmPreferenceChange) {

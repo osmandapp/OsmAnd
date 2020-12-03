@@ -3957,13 +3957,13 @@
     <string name="subscription_expired_title">OsmAnd Live Abonnement ist abgelaufen</string>
     <string name="subscription_paused_title">OsmAnd Live Abonnement wurde ausgesetzt</string>
     <string name="subscription_on_hold_title">OsmAnd Live Abonnement liegt auf Eis</string>
-    <string name="login_open_street_map">Anmeldung für OpenStreetMap</string>
-    <string name="login_open_street_map_org">Anmeldung für OpenStreetMap.org</string>
+    <string name="login_open_street_map">Bei OpenStreetMap anmelden</string>
+    <string name="login_open_street_map_org">Bei OpenStreetMap.org anmelden</string>
     <string name="sign_in_with_open_street_map">Anmelden mit OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Melden Sie sich an, um Änderungen hochzuladen,
+    <string name="open_street_map_login_mode">Sie müssen sich anmelden, um Änderungen hochzuladen.
 \n
-\nentweder mit OAuth oder mit Ihrem Benutzernamen und Passwort.</string>
-    <string name="use_login_password">Anmelden mit Benutzername und Passwort</string>
+\nSie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Ihr Passwort verwenden.</string>
+    <string name="use_login_password">Benutzername und Passwort verwenden</string>
     <string name="login_account">Konto</string>
     <string name="user_login">Benutzername</string>
     <string name="markers_history">Historie der Marker</string>
@@ -3975,11 +3975,11 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Verfolgbar\" bedeutet, dass die Spur nicht in öffentlichen Auflistungen auftaucht, aber verarbeitete Trackpunkte mit Zeitstempeln davon (die nicht direkt mit Ihnen in Verbindung gebracht werden können) durch Downloads von der öffentlichen GPS API.</string>
     <string name="osm_edit_close_note">OSM Notiz schließen</string>
     <string name="osm_edit_comment_note">OSM Notiz kommentieren</string>
-    <string name="osm_login_descr">Melden Sie sich mit der sicheren OAuth-Methode an oder verwenden Sie Ihren Benutzernamen und Ihr Passwort.</string>
+    <string name="osm_login_descr">Sie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Ihr Passwort verwenden.</string>
     <string name="shared_string_add_photo">Foto hinzufügen</string>
     <string name="register_on_openplacereviews">Registrieren bei
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Melden Sie sich auf der Open Data Website OpenPlaceReviews.org an, um noch mehr Fotos hochzuladen.</string>
+    <string name="register_on_openplacereviews_desc">Fotos werden vom offenen Datenprojekt OpenPlaceReviews.org zur Verfügung gestellt. Um Ihre Fotos hochladen zu können, müssen Sie sich auf der Website anmelden.</string>
     <string name="register_opr_create_new_account">Neues Konto erstellen</string>
     <string name="register_opr_have_account">Ich habe bereits ein Konto</string>
     <string name="shared_string_search_history">Suchverlauf</string>
@@ -4001,4 +4001,9 @@
     <string name="select_items_for_import">Wählen Sie Elemente aus, die importiert werden sollen.</string>
     <string name="use_dev_url_descr">Wechseln Sie zu dev.openstreetmap.org anstelle von openstreetmap.org, um das Hochladen von OSM-Hinweisen / POI / GPX zu testen.</string>
     <string name="use_dev_url">dev.openstreetmap.org verwenden</string>
+    <string name="cannot_upload_image">Bild kann nicht hochgeladen werden, bitte versuchen Sie es später erneut</string>
+    <string name="select_picture">Bild auswählen</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="elevation_data">Sie können Höhendaten für die Berücksichtigung von Aufstieg / Abstieg auf Ihrer Strecke verwenden</string>
+    <string name="app_mode_light_aircraft">Kleinflugzeug</string>
 </resources>

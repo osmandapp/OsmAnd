@@ -269,4 +269,8 @@
     <string name="logcat_buffer">Logcat buffer</string>
     <string name="send_report">Invia rapporto</string>
     <string name="shared_string_export">Esporta</string>
+    <string name="unit_of_speed_system_descr">Specifica l\'unità di misura della velocità.</string>
+    <string name="time_zone_descr">Seleziona il fuso orario da mostrare nei messaggi sulla posizione.</string>
+    <string name="buffer_time">Tempo di scadenza del buffer</string>
+    <string name="buffer_time_descr">Tempo massimo per memorizzare i punti nel buffer</string>
 </resources>

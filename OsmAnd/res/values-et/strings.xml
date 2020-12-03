@@ -459,7 +459,7 @@
     <string name="rendering_attr_hidePOILabels_name">POI sildid</string>
     <string name="will_open_tomorrow_at">Avaneb homme kell</string>
     <string name="show_closed_notes">Kuva suletud teated</string>
-    <string name="switch_osm_notes_visibility_desc">Kuva/peida OSM teated kaardil.</string>
+    <string name="switch_osm_notes_visibility_desc">Kuva või peida OSM teated kaardil.</string>
     <string name="osc_file_desc">OSC - sobib andmete laadimiseks OpenStreetMap\'i andmebaasi.</string>
     <string name="osc_file">OSC fail</string>
     <string name="choose_file_type">Vali faililiik</string>
@@ -1012,7 +1012,7 @@
     <string name="swap_two_places">Vaheta %1$s ja %2$s</string>
     <string name="route_start_point">Lähtepunkt</string>
     <string name="track_saved">Rada salvestatud</string>
-    <string name="empty_filename">Faili nimi on tühi</string>
+    <string name="empty_filename">Faili nimi on puudu</string>
     <string name="shared_string_revert">Ennista</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Kuva sõlmevõrgu rattateekonnad</string>
     <string name="clear_confirmation_msg">Tühjenda %1$s\?</string>
@@ -2653,9 +2653,9 @@
     <string name="keep_passed_markers_descr">Lemmikute või GPX-teekonnapunktide grupina lisatud markerid, mis on märgitud läbituks, jäävad kaardile. Kui grupp pole aktiivne, kaovad markerid kaardilt.</string>
     <string name="shared_string_launch">Käivita</string>
     <string name="lang_gn_py">Guaraani</string>
-    <string name="routing_attr_piste_type_downhill_name">Alpisuusatamine/laskumine</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpisuusatamine ja mäesuusatamine</string>
     <string name="routing_attr_piste_type_downhill_description">Nõlvad alpisuusatamisks või laskumiseks ja ligipääs suusatõstukitele.</string>
-    <string name="routing_attr_piste_type_nordic_name">Murdmaa/põhjamaa suusatamine</string>
+    <string name="routing_attr_piste_type_nordic_name">Murdmaasuusatamine ja põhja suusaalad</string>
     <string name="routing_attr_piste_type_nordic_description">Murdmaa või põhjamaa suusatamise rajad.</string>
     <string name="routing_attr_piste_type_skitour_name">Suusamatkad</string>
     <string name="routing_attr_piste_type_skitour_description">Suusamatkarajad.</string>
@@ -3774,7 +3774,7 @@
 \nTellimust saad hallata ja tühistada AppGallery seadistustest.</string>
     <string name="osm_live_payment_desc_hw">Arveldame tellimuse eest valitud ajavahemiku alusel. Seda saad sa vabalt valitud ajal tühistada AppGallery\'s.</string>
     <string name="use_complex_routing">Keeruka teekonna koostamine</string>
-    <string name="osm_edit_logout_success">Väljalogimine õnnestus</string>
+    <string name="osm_edit_logout_success">Väljalogitud</string>
     <string name="development">Arendus</string>
     <string name="clear_osm_token">Kustuta OpenStreetMap\'i OAuth\'i pääsuluba</string>
     <string name="perform_oauth_authorization">Logi sisse OAuth abil</string>
@@ -3809,7 +3809,7 @@
     <string name="use_login_password">Pruugi kasutajanime ja salasõna</string>
     <string name="open_street_map_login_mode">Täienduste või muudatuste üleslaadimiseks pead sisse logima.
 \n
-\nSa võid selleks kasutada mõnd turvalust OAuth võimalust või oma kasutajanime ning salasõna.</string>
+\nSa võid selleks kasutada mõnd turvalist OAuth võimalust või oma kasutajanime ning salasõna.</string>
     <string name="login_account">Kasutajakonto</string>
     <string name="send_files_to_openstreetmap">Saada GPX fail OpenStreetMappi</string>
     <string name="osm_edit_close_note">Sulge OSM märkus</string>
@@ -3821,4 +3821,25 @@
     <string name="register_on_openplacereviews_desc">Fotode allikaks on OpenPlaceReviews.org veebisait. Oma fotode üleslaadimiseks peaksid liituma selle veebisaidi kasutajaks.</string>
     <string name="register_opr_create_new_account">Loo uus kasutajakonto</string>
     <string name="register_opr_have_account">Mul juba on kasutajakonto olemas</string>
+    <string name="shared_string_search_history">Otsinguajalugu</string>
+    <string name="app_mode_kayak">Süst (merekajak)</string>
+    <string name="app_mode_motorboat">Mootorpaat</string>
+    <string name="cannot_upload_image">Pildi üleslaadimine ei õnnestunud, palun proovi hiljem uuesti</string>
+    <string name="select_picture">Vali pilt</string>
+    <string name="shared_string_resources">Ressursid</string>
+    <string name="approximate_file_size">Faili ligikaudne suurus</string>
+    <string name="select_data_to_export">Vali faili eksporditavad andmed.</string>
+    <string name="file_size_needed_for_import">Importimiseks vajalik</string>
+    <string name="export_not_enough_space_descr">Sinu nutiseadmes on vaba ruumi vaid %1$s. Palun tee ruumi juurde või jäta osa kirjetest eksportimata.</string>
+    <string name="export_not_enough_space">Pole piisavalt ruumi</string>
+    <string name="select_groups_for_import">Vali imporditavad grupid.</string>
+    <string name="select_items_for_import">Vali imporditavad kirjed.</string>
+    <string name="add_to_mapillary">Lisa Mapillary saiti</string>
+    <string name="add_to_opr">Lisa OpenPlaceReviews saiti</string>
+    <string name="use_dev_url_descr">Tavasaidi openstreetmap.org asemel kasuta OSM märkuste, huvipunktide või GPX-failide üleslaadimise katsetamiseks arendussaiti dev.openstreetmap.org.</string>
+    <string name="use_dev_url">Kasuta dev.openstreetmap.org saiti</string>
+    <string name="add_photos_descr">OsmAnd kuvam fotosid mitmetest allikatest:
+\nOpenPlaceReviews - huvipunkti fotod;
+\nMapillary - tänavavaated;
+\nWikimedia või veeb - OpenStreetMap\'i andmetes kirjeldatud fotod.</string>
 </resources>

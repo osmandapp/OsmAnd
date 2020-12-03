@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/graph_types_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/content_padding_small"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/content_padding"
+        android:paddingLeft="@dimen/content_padding"
+        android:paddingEnd="@dimen/content_padding"
+        android:paddingRight="@dimen/content_padding"
+        tools:itemCount="3"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/point_editor_icon_category_item"
+        tools:orientation="horizontal" />
+
+    <LinearLayout
+        android:id="@+id/common_graphs_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/line_chart"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/route_info_line_chart_height"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/custom_graphs_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/horizontal_chart"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/route_info_chart_height" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/list_divider" />
+
+        <FrameLayout
+            android:id="@+id/route_legend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/route_info_legend_padding"
+            android:paddingBottom="@dimen/route_info_legend_padding" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/message_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/content_padding_small"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_padding"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginTop="@dimen/content_padding_small"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/message_icon"
+                android:layout_width="@dimen/standard_icon_size"
+                android:layout_height="@dimen/standard_icon_size"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
+                android:tint="?attr/default_icon_color"
+                tools:src="@drawable/ic_action_info_dark" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="@dimen/card_button_progress_size"
+                android:layout_height="@dimen/card_button_progress_size"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/message_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:letterSpacing="@dimen/description_letter_spacing"
+                    android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_desc_text_size"
+                    osmand:typeface="@string/font_roboto_regular"
+                    tools:text="Altitude data available only on the roads, you need to calculate a route using “Route between points” to get it." />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/content_padding"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="@dimen/standard_icon_size"
+                android:layout_height="@dimen/standard_icon_size"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/divider_color_basic" />
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/btn_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+                    android:textColor="@color/preference_category_title"
+                    android:textSize="@dimen/default_list_text_size"
+                    osmand:typeface="@string/font_roboto_medium"
+                    tools:text="@string/route_between_points" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
