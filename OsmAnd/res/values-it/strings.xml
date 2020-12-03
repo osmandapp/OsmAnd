@@ -3342,7 +3342,7 @@
     <string name="tts_initialization_error">Impossibile avviare il motore dal-testo-alla-voce.</string>
     <string name="simulate_your_location_gpx_descr">Simula la mia posizione utilizzando una traccia GPX registrata.</string>
     <string name="default_speed_dialog_msg">Utilizzata per stimare l\'orario d\'arrivo per le strade di tipo sconosciute e come limite di velocità per tutte le strade (può influenzare il calcolo del percorso)</string>
-    <string name="export_profile">Esporta il profilo</string>
+    <string name="export_profile">Esporta profilo</string>
     <string name="exported_osmand_profile">Profilo OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Il profilo \'%1$s\' c\'è già. Sovrascriverlo\?</string>
     <string name="export_profile_failed">Esportazione del profilo non riuscita.</string>
@@ -3389,7 +3389,7 @@
     <string name="select_color">Seleziona il colore</string>
     <string name="edit_profiles_descr">Non puoi cancellare i profili preimpostati di OsmAnd, ma puoi disabilitarli nello schermo precedente o spostarli in basso.</string>
     <string name="edit_profiles">Modifica il profilo</string>
-    <string name="select_nav_profile_dialog_message">Il tipo di navigazione influenza le regole di calcolo dei percorsi.</string>
+    <string name="select_nav_profile_dialog_message">Il \'Tipo di navigazione\' determina il modo in cui vengono calcolati i percorsi.</string>
     <string name="profile_appearance">Aspetto del profilo</string>
     <string name="choose_icon_color_name">Scegli l\'icona, il colore e il nome</string>
     <string name="reorder_profiles">Modifica la lista dei profili</string>
@@ -3633,7 +3633,7 @@
     <string name="legend_item_description">La guida ai simboli della mappa.</string>
     <string name="navigation_profiles_item">Profili di navigazione</string>
     <string name="unsupported_type_error">Tipo non supportato</string>
-    <string name="gpx_parse_error">Il GPX OsmAnd non è ben formattato, per favore contatta il supporto per ulteriori informazioni.</string>
+    <string name="gpx_parse_error">OsmAnd GPX non è ben formato, contatta il team di supporto per approfondire.</string>
     <string name="shared_string_always">Sempre</string>
     <string name="screen_control">Controllo dello schermo</string>
     <string name="system_screen_timeout_descr">Spegni lo schermo dopo il tempo di spegnimento di sistema dello schermo.</string>
@@ -3977,7 +3977,7 @@
     <string name="enter_text_separated">Immetti le etichette separate dalla virgola.</string>
     <string name="gpx_upload_public_visibility_descr">\"Pubblico\" significa che la traccia è visualizzata pubblicamente nelle tue tracce GPS, nelle liste pubbliche di tracce GPS con le informazioni temporali in forma grezza. I dati forniti attraverso le API non conducono alla tua pagina delle tracce. Le informazioni temporali dei punti traccia non sono disponibili attraverso le API GPS pubbliche, e i punti della traccia non sono ordinati cronologicamente.</string>
     <string name="gpx_upload_private_visibility_descr">\"Privato\" significa che la traccia non è visualizzabile in alcuna lista pubblica ma i suoi punti, in ordine non cronologico, sono disponibili attraverso le API GPS senza le informazioni temporali.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">\"Identificabile\" significa che la traccia è visualizzabile nelle Mie tracce GPS e nelle liste pubbliche, es. gli altri utenti potranno scaricare la traccia grezza e associarla con il tuo nome utente. I punti della traccia, con le loro informazioni temporali, saranno riconducibili, attraverso le API GPS, alla tua traccia originale.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificabile\" significa che la traccia è visualizzabile nelle Mie tracce GPS e nelle liste pubbliche, ad es. gli altri utenti potranno scaricare la traccia grezza e associarla con il tuo nome utente. I punti della traccia, con le loro informazioni temporali, saranno riconducibili, attraverso le API GPS, alla tua traccia originale.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Tracciabile\" significa che la traccia non è visualizzabile in alcuna lista pubblica, ma solo i suoi punti, processati, con le informazioni temporali (che non possono essere direttamente associati a te) attraverso le API GPS pubbliche.</string>
     <string name="add_to_mapillary">Aggiungi a Mapillary</string>
     <string name="add_to_opr">Aggiungi a OpenPlaceReviews</string>

@@ -4004,4 +4004,6 @@
     <string name="cannot_upload_image">Bild kann nicht hochgeladen werden, bitte versuchen Sie es später erneut</string>
     <string name="select_picture">Bild auswählen</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="elevation_data">Sie können Höhendaten für die Berücksichtigung von Aufstieg / Abstieg auf Ihrer Strecke verwenden</string>
+    <string name="app_mode_light_aircraft">Kleinflugzeug</string>
 </resources>

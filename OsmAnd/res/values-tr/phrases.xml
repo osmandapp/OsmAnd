@@ -3132,4 +3132,7 @@
     <string name="poi_fire_hydrant_style_water_source_pond">Gölet</string>
     <string name="poi_consulate_filter">Konsolosluk</string>
     <string name="poi_embassy_filter">Büyük elçilik</string>
+    <string name="poi_diplomatic_services_citizen_services_filter">Vatandaş hizmetleri</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Göçmen vizeleri</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">Göçmen olmayan vizeleri</string>
 </resources>
