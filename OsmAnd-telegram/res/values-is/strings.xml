@@ -155,7 +155,7 @@
     <string name="shared_string_later">Síðar</string>
     <string name="bearing">Stefna</string>
     <string name="unit_of_speed_system">Hraðaeining</string>
-    <string name="shared_string_map">Landakort</string>
+    <string name="shared_string_map">Kort</string>
     <string name="min_logging_speed_descr">Sía: Engin skráning punkta fyrir neðan valinn hraða</string>
     <string name="in_time">í %1$s</string>
     <string name="my_location_search_hint">Leit: Hópur eða tengiliður</string>
