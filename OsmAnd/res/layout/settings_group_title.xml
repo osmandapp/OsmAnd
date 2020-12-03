@@ -13,7 +13,9 @@
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingTop="@dimen/content_padding"
 		android:paddingRight="@dimen/wikilink_bottom_sheet_padding"
-		android:paddingBottom="@dimen/wikilink_bottom_sheet_padding">
+		android:paddingBottom="@dimen/wikilink_bottom_sheet_padding"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/wikilink_bottom_sheet_padding">
 
 		<LinearLayout
 			android:id="@+id/first_title"
@@ -74,7 +76,8 @@
 			android:textSize="@dimen/default_list_text_size"
 			app:lineHeight="@dimen/default_title_line_height"
 			app:typeface="@string/font_roboto_regular"
-			tools:text="5/6" />
+			tools:text="5/6"
+			android:layout_alignParentEnd="true" />
 
 	</RelativeLayout>
 
