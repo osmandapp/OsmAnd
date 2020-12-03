@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
@@ -49,6 +50,7 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
@@ -130,6 +132,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				items.add(createTimeConditionalRoutingItem(optionsItem));
 			} else if (optionsItem instanceof OtherSettingsRoutingParameter) {
 				items.add(createOtherSettingsRoutingItem(optionsItem));
+			} else if (USE_HEIGHT_OBSTACLES.equals(optionsItem.getKey()) && hasReliefParameters()) {
+				items.add(inflateElevationParameter(optionsItem));
 			} else {
 				inflateRoutingParameter(optionsItem);
 			}
@@ -254,6 +258,49 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(itemView)
 				.create();
+	}
+
+	private BaseBottomSheetItem inflateElevationParameter(final LocalRoutingParameter optionsItem) {
+		final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+		final boolean active = !useHeightPref.getModeValue(applicationMode);
+		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+				R.layout.elevation_preference, null, false);
+		final ImageView iconView = itemView.findViewById(R.id.icon_elevation);
+		final SwitchCompat switchButton = itemView.findViewById(R.id.switchWidget);
+		int selectedModeColor = ContextCompat.getColor(app, selectedModeColorId);
+		iconView.setImageDrawable(getContentIcon(active ?
+				optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+		TextView title = itemView.findViewById(android.R.id.title);
+		title.setText(getString(R.string.routing_attr_height_obstacles_name));
+		final TextView description = itemView.findViewById(android.R.id.summary);
+		description.setText(getString(R.string.routing_attr_height_obstacles_name));
+		View itemsContainer = itemView.findViewById(R.id.selectable_list_item);
+		switchButton.setChecked(!active);
+		switchButton.setFocusable(false);
+		UiUtilities.setupCompoundButton(nightMode, selectedModeColor, switchButton);
+		itemsContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (USE_HEIGHT_OBSTACLES.equals(optionsItem.getKey()) && hasReliefParameters()) {
+					FragmentManager fm = getFragmentManager();
+					if (fm != null) {
+						ElevationDateBottomSheet.showInstance(fm, applicationMode, RouteOptionsBottomSheet.this, false);
+					}
+				}
+			}
+		});
+
+		switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				applyParameter(item[0], optionsItem);
+			}
+		});
+
+		item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setCustomView(itemView)
+				.create();
+
+		return item[0];
 	}
 
 	private BaseBottomSheetItem createTimeConditionalRoutingItem(final LocalRoutingParameter optionsItem) {
