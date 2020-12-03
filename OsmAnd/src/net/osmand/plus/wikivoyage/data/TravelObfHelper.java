@@ -34,7 +34,7 @@ import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 
-public class TravelObfHelper implements TravelHelper{
+public class TravelObfHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
 
@@ -76,7 +76,8 @@ public class TravelObfHelper implements TravelHelper{
 		return localDataHelper;
 	}
 
-	/** TODO
+	/**
+	 * TODO
 	 * 1. implement regional travelbooks
 	 * 2. check settings for default?
 	 */
@@ -97,7 +98,7 @@ public class TravelObfHelper implements TravelHelper{
 		} else {
 			selectedTravelBook = null;
 		}
-		
+
 	}
 
 	/**
@@ -143,7 +144,19 @@ public class TravelObfHelper implements TravelHelper{
 	@NonNull
 	@Override
 	public List<WikivoyageSearchResult> search(String searchQuery) {
-		return null;
+		List<WikivoyageSearchResult> res = new ArrayList<>();
+		for (TravelArticle article : popularArticles) {
+			if (article.title.toLowerCase().contains(searchQuery.toLowerCase())) {
+				WikivoyageSearchResult searchResult = new WikivoyageSearchResult();
+				searchResult.articleTitles = Collections.singletonList(article.title);
+				searchResult.isPartOf = Collections.singletonList(article.isPartOf);
+				searchResult.imageTitle = article.imageTitle;
+				searchResult.langs = Collections.singletonList(article.lang);
+				searchResult.tripId = article.tripId;
+				res.add(searchResult);
+			}
+		}
+		return res;
 	}
 
 	@NonNull
@@ -281,14 +294,14 @@ public class TravelObfHelper implements TravelHelper{
 //		if (aa != null) {
 //			article = readArticle(aa, lang);
 //		}
-		return  article;
+		return article;
 	}
 
 	@Override
 	public TravelArticle getArticle(long resId, String lang) {
 		TravelArticle article = getArticleFromCache(resId, lang);
 		if (article != null) {
-			return  article;
+			return article;
 		}
 		String name = ""; //???
 		return getArticle(name, lang);
@@ -344,7 +357,7 @@ public class TravelObfHelper implements TravelHelper{
 	}
 
 
-    //TODO finish stub
+	//TODO finish stub
 	@Override
 	public ArrayList<String> getArticleLangs(long cityId) {
 		ArrayList<String> res = new ArrayList<>();
