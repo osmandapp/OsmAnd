@@ -1,6 +1,5 @@
 package net.osmand.plus.osmedit.dialogs;
 
-import android.app.Activity;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -30,7 +28,6 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
@@ -58,6 +55,9 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
 	private int contentHeightPrevious = 0;
+	private int buttonsHeight;
+	private int shadowHeight;
+	private ScrollView scrollView;
 
 	public void setGpxInfos(GpxInfo[] gpxInfos) {
 		this.gpxInfos = gpxInfos;
@@ -137,35 +137,18 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			@Override
 			public void onGlobalLayout() {
 				Rect visibleDisplayFrame = new Rect();
-				Activity activity = getActivity();
-				int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
-				int shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
-				boolean showTopShadow;
-				final ScrollView scrollView = getView().findViewById(R.id.scroll_view);
+				buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
+				shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
+				scrollView = getView().findViewById(R.id.scroll_view);
 				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
 				int viewHeight = scrollView.getHeight();
 				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
-				if (contentHeightPrevious != contentHeight && activity != null) {
+				if (contentHeightPrevious != contentHeight) {
+					boolean showTopShadow;
 					showTopShadow = viewHeight + shadowHeight < contentHeight;
 					scrollView.requestLayout();
 					contentHeightPrevious = contentHeight;
 					drawTopShadow(showTopShadow);
-				}
-			}
-
-			private void drawTopShadow(boolean showTopShadow) {
-				final Activity activity = getActivity();
-				View mainView = getView();
-				if (activity == null || mainView == null) {
-					return;
-				}
-				if (AndroidUiHelper.isOrientationPortrait(activity)) {
-					AndroidUtils.setBackground(mainView, showTopShadow ? getPortraitBg(activity) : getColoredBg(activity));
-					if (!showTopShadow) {
-						mainView.setPadding(0, 0, 0, 0);
-					}
-				} else {
-					AndroidUtils.setBackground(mainView, showTopShadow ? getLandscapeTopsidesBg(activity) : getLandscapeSidesBg(activity));
 				}
 			}
 		};
