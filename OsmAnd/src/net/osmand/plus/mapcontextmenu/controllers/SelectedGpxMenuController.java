@@ -1,10 +1,8 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -39,7 +37,7 @@ public class SelectedGpxMenuController extends MenuController {
 	private SelectedGpxPoint selectedGpxPoint;
 
 	public SelectedGpxMenuController(@NonNull final MapActivity mapActivity, @NonNull PointDescription pointDescription,
-	                                 @NonNull final SelectedGpxPoint selectedGpxPoint) {
+									 @NonNull final SelectedGpxPoint selectedGpxPoint) {
 		super(new SelectedGpxMenuBuilder(mapActivity, selectedGpxPoint), pointDescription, mapActivity);
 		this.selectedGpxPoint = selectedGpxPoint;
 		builder.setShowOnlinePhotos(false);
@@ -209,24 +207,11 @@ public class SelectedGpxMenuController extends MenuController {
 		if (mapActivity != null && selectedGpxPoint != null) {
 			final GPXFile gpxFile = selectedGpxPoint.getSelectedGpxFile().getGpxFile();
 			if (gpxFile != null) {
+				OsmandApplication app = mapActivity.getMyApplication();
 				if (Algorithms.isEmpty(gpxFile.path)) {
-					SaveGpxListener saveGpxListener = new SaveGpxListener() {
-						@Override
-						public void gpxSavingStarted() {
-
-						}
-
-						@Override
-						public void gpxSavingFinished(Exception errorMessage) {
-							MapActivity mapActivity = getMapActivity();
-							if (mapActivity != null) {
-								shareGpx(mapActivity, gpxFile.path);
-							}
-						}
-					};
-					new SaveCurrentTrackTask(mapActivity.getMyApplication(), gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					saveAndShareCurrentGpx(app, gpxFile);
 				} else {
-					shareGpx(mapActivity, gpxFile.path);
+					AndroidUtils.shareGpx(app, new File(gpxFile.path));
 				}
 			}
 		} else {
@@ -234,15 +219,21 @@ public class SelectedGpxMenuController extends MenuController {
 		}
 	}
 
-	private void shareGpx(@NonNull Context context, @NonNull String path) {
-		final Uri fileUri = AndroidUtils.getUriForFile(context, new File(path));
-		final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-		sendIntent.setType("application/gpx+xml");
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		if (AndroidUtils.isIntentSafe(context, sendIntent)) {
-			context.startActivity(sendIntent);
-		}
+	public void saveAndShareCurrentGpx(@NonNull final OsmandApplication app, @NonNull final GPXFile gpxFile) {
+		SaveGpxListener saveGpxListener = new SaveGpxListener() {
+			@Override
+			public void gpxSavingStarted() {
+
+			}
+
+			@Override
+			public void gpxSavingFinished(Exception errorMessage) {
+				if (errorMessage == null) {
+					AndroidUtils.shareGpx(app, new File(gpxFile.path));
+				}
+			}
+		};
+		new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public static class SelectedGpxPoint {

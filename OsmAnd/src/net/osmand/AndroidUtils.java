@@ -10,7 +10,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -169,6 +168,20 @@ public class AndroidUtils {
 
 	public static boolean isIntentSafe(Context context, Intent intent) {
 		return intent.resolveActivity(context.getPackageManager()) != null;
+	}
+
+	public static void shareGpx(@NonNull Context context, @NonNull File file) {
+		Uri fileUri = AndroidUtils.getUriForFile(context, file);
+		Intent sendIntent = new Intent(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+		sendIntent.setType("application/gpx+xml");
+		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		if (context instanceof OsmandApplication) {
+			sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		}
+		if (AndroidUtils.isIntentSafe(context, sendIntent)) {
+			context.startActivity(sendIntent);
+		}
 	}
 
 	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {

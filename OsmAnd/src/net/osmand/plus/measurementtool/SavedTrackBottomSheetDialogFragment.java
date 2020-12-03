@@ -2,7 +2,6 @@ package net.osmand.plus.measurementtool;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -80,13 +79,10 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	@Override
 	protected void onThirdBottomButtonClick() {
-		final Intent sendIntent = new Intent();
-		sendIntent.setAction(Intent.ACTION_SEND);
-		final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(fileName));
-		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-		sendIntent.setType("application/gpx+xml");
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		startActivity(sendIntent);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			AndroidUtils.shareGpx(activity, new File(fileName));
+		}
 		dismiss();
 	}
 

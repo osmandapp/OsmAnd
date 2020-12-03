@@ -3,11 +3,9 @@ package net.osmand.plus.myplaces;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.SparseArray;
@@ -28,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -62,9 +61,9 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -163,12 +162,11 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 						.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
-								final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(getGpx().path));
-								final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-								sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-								sendIntent.setType("application/gpx+xml");
-								sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-								startActivity(sendIntent);
+								GPXFile gpx = getGpx();
+								FragmentActivity activity = getActivity();
+								if (activity != null && gpx != null) {
+									AndroidUtils.shareGpx(activity, new File(gpx.path));
+								}
 								return true;
 							}
 						});
