@@ -2,8 +2,6 @@ package net.osmand.plus.osmedit;
 
 import net.osmand.data.LatLon;
 
-import java.util.Objects;
-
 public class OsmNotesPoint extends OsmPoint {
 	private static final long serialVersionUID = 729654300829771468L;
 
