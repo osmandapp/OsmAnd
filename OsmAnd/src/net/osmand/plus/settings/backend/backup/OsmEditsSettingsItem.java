@@ -74,22 +74,25 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {
 			appliedItems = new ArrayList<>(newItems);
 
-			for (OpenstreetmapPoint duplicate : duplicateItems) {
-				appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
+			OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+			if (osmEditingPlugin != null) {
+				OpenstreetmapsDbHelper db = osmEditingPlugin.getDBPOI();
+				for (OpenstreetmapPoint duplicate : duplicateItems) {
+					db.deletePOI(duplicate);
+					db.addOpenstreetmap(duplicate);
+				}
+				for (OpenstreetmapPoint point : appliedItems) {
+					db.addOpenstreetmap(point);
+				}
 			}
-		}
-		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-		if (osmEditingPlugin != null) {
-			OpenstreetmapsDbHelper db = osmEditingPlugin.getDBPOI();
-			for (OpenstreetmapPoint point : appliedItems) {
-				db.addOpenstreetmap(point);
-			}
+
+
 		}
 	}
 
 	@Override
 	public boolean isDuplicate(@NonNull OpenstreetmapPoint item) {
-		return false;
+		return existingItems.contains(item);
 	}
 
 	@NonNull
@@ -113,6 +116,11 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 	@Override
 	public boolean shouldReadOnCollecting() {
 		return true;
+	}
+
+	@Override
+	public boolean shouldShowDuplicates() {
+		return false;
 	}
 
 	@Override
