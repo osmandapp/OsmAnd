@@ -6,7 +6,7 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<LinearLayout
+	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:minHeight="@dimen/bottom_sheet_title_height"
@@ -16,13 +16,13 @@
 		android:paddingBottom="@dimen/wikilink_bottom_sheet_padding">
 
 		<LinearLayout
-			android:layout_width="0dp"
+			android:id="@+id/first_title"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
-			android:layout_weight="1"
-			android:orientation="vertical">
+			android:orientation="horizontal">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/title"
@@ -36,6 +36,17 @@
 				app:lineHeight="@dimen/default_title_line_height"
 				app:typeface="@string/font_roboto_medium"
 				tools:text="Some title" />
+
+		</LinearLayout>
+		<LinearLayout
+			android:id="@+id/second_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_below="@+id/first_title"
+			android:orientation="horizontal">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/description"
@@ -56,6 +67,7 @@
 			android:id="@+id/selected_size"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:minHeight="@dimen/default_title_line_height"
 			android:textColor="?android:textColorSecondary"
@@ -64,7 +76,7 @@
 			app:typeface="@string/font_roboto_regular"
 			tools:text="5/6" />
 
-	</LinearLayout>
+	</RelativeLayout>
 
 	<LinearLayout
 		android:id="@+id/select_all_button"

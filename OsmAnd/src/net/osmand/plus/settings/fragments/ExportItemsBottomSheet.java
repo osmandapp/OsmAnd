@@ -375,10 +375,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 		} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
 			int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
+			String formattedSize = AndroidUtils.formatSize(app, size);
 			if (iconId == -1) {
 				iconId = R.drawable.ic_action_photo_dark;
 			}
 			builder.setIcon(uiUtilities.getIcon(iconId, activeColorRes));
+			builder.setDescription(formattedSize);
 		} else if (fileSubtype.isMap()
 				|| fileSubtype == FileSettingsItem.FileSubtype.TTS_VOICE
 				|| fileSubtype == FileSettingsItem.FileSubtype.VOICE) {
@@ -389,7 +391,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				String mapDescription = getMapDescription(file);
 				String formattedSize = AndroidUtils.formatSize(app, size);
 				if (mapDescription != null) {
-					builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_star, mapDescription, formattedSize));
+					builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_bold_point, mapDescription, formattedSize));
 				} else {
 					builder.setDescription(formattedSize);
 				}
