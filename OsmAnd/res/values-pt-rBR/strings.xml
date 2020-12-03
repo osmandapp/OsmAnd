@@ -3996,4 +3996,6 @@
     <string name="select_picture">Selecione a foto</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemão (casual)</string>
+    <string name="elevation_data">Você pode usar os dados de elevação para consideração de subida / descida para sua viagem</string>
+    <string name="app_mode_light_aircraft">Avião leve</string>
 </resources>

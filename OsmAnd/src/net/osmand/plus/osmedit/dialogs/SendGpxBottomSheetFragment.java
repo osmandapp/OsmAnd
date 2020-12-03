@@ -2,12 +2,10 @@ package net.osmand.plus.osmedit.dialogs;
 
 import android.graphics.Rect;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -57,6 +55,9 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
 	private int contentHeightPrevious = 0;
+	private int buttonsHeight;
+	private int shadowHeight;
+	private ScrollView scrollView;
 
 	public void setGpxInfos(GpxInfo[] gpxInfos) {
 		this.gpxInfos = gpxInfos;
@@ -136,26 +137,18 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			@Override
 			public void onGlobalLayout() {
 				Rect visibleDisplayFrame = new Rect();
-				int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
-				int shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
-				final ScrollView scrollView = getView().findViewById(R.id.scroll_view);
+				buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
+				shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
+				scrollView = getView().findViewById(R.id.scroll_view);
 				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-				int height = scrollView.getHeight();
+				int viewHeight = scrollView.getHeight();
 				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
-				if (contentHeightPrevious != contentHeight || contentHeight < height) {
-					if (scrollView.getHeight() + shadowHeight > contentHeight) {
-						scrollView.getLayoutParams().height = contentHeight;
-					} else {
-						scrollView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-					}
+				if (contentHeightPrevious != contentHeight) {
+					boolean showTopShadow;
+					showTopShadow = viewHeight + shadowHeight < contentHeight;
 					scrollView.requestLayout();
-					int delay = Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP ? 300 : 1000;
-					scrollView.postDelayed(new Runnable() {
-						public void run() {
-							scrollView.scrollTo(0, scrollView.getHeight());
-						}
-					}, delay);
 					contentHeightPrevious = contentHeight;
+					drawTopShadow(showTopShadow);
 				}
 			}
 		};

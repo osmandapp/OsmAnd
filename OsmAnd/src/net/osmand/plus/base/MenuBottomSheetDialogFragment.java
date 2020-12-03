@@ -187,16 +187,25 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 				// 8dp is the shadow height
 				boolean showTopShadow = screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
-				if (AndroidUiHelper.isOrientationPortrait(activity)) {
-					AndroidUtils.setBackground(mainView, showTopShadow ? getPortraitBg(activity) : getColoredBg(activity));
-					if (!showTopShadow) {
-						mainView.setPadding(0, 0, 0, 0);
-					}
-				} else {
-					AndroidUtils.setBackground(mainView, showTopShadow ? getLandscapeTopsidesBg(activity) : getLandscapeSidesBg(activity));
-				}
+				drawTopShadow(showTopShadow);
 			}
 		});
+	}
+
+	protected void drawTopShadow(boolean showTopShadow) {
+		final Activity activity = getActivity();
+		View mainView = getView();
+		if (activity == null || mainView == null) {
+			return;
+		}
+		if (AndroidUiHelper.isOrientationPortrait(activity)) {
+			AndroidUtils.setBackground(mainView, showTopShadow ? getPortraitBg(activity) : getColoredBg(activity));
+			if (!showTopShadow) {
+				mainView.setPadding(0, 0, 0, 0);
+			}
+		} else {
+			AndroidUtils.setBackground(mainView, showTopShadow ? getLandscapeTopsidesBg(activity) : getLandscapeSidesBg(activity));
+		}
 	}
 
 	private int getContentHeight(int availableScreenHeight) {

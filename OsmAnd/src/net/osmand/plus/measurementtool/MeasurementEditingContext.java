@@ -281,24 +281,23 @@ public class MeasurementEditingContext {
 	}
 
 	public boolean isApproximationNeeded() {
-		boolean hasDefaultPoints = false;
+		boolean hasDefaultPointsOnly = false;
 		boolean newData = isNewData();
 		if (!newData) {
 			List<WptPt> points = getPoints();
-			WptPt prevPoint = null;
+			hasDefaultPointsOnly = true;
 			for (WptPt point : points) {
-				if (!point.hasProfile() && (prevPoint == null || !prevPoint.hasProfile())) {
-					hasDefaultPoints = true;
+				if (point.hasProfile()) {
+					hasDefaultPointsOnly = false;
 					break;
 				}
-				prevPoint = point;
 			}
 		}
-		return !newData && hasDefaultPoints && getPoints().size() > 2;
+		return !newData && hasDefaultPointsOnly && getPoints().size() > 2;
 	}
 
 	public boolean isSelectionNeedApproximation() {
-		boolean hasDefaultPoints = false;
+		boolean hasDefaultPointsOnly = false;
 		boolean newData = isNewData();
 		if (!newData && selectedPointPosition != -1) {
 			WptPt selectedPoint = getPoints().get(selectedPointPosition);
@@ -309,18 +308,17 @@ public class MeasurementEditingContext {
 					points = segment.points;
 				}
 			}
-			WptPt prevPoint = null;
-			if (points != null) {
+			if (!Algorithms.isEmpty(points)) {
+				hasDefaultPointsOnly = true;
 				for (WptPt point : points) {
-					if (!point.hasProfile() && (prevPoint == null || !prevPoint.hasProfile())) {
-						hasDefaultPoints = true;
+					if (point.hasProfile()) {
+						hasDefaultPointsOnly = false;
 						break;
 					}
-					prevPoint = point;
 				}
 			}
 		}
-		return !newData && hasDefaultPoints && getPoints().size() > 2;
+		return !newData && hasDefaultPointsOnly && getPoints().size() > 2;
 	}
 
 	public void clearSnappedToRoadPoints() {
@@ -625,7 +623,7 @@ public class MeasurementEditingContext {
 				WptPt startPoint = points.get(i);
 				WptPt endPoint = points.get(i + 1);
 				Pair<WptPt, WptPt> pair = new Pair<>(startPoint, endPoint);
-				if (roadSegmentData.get(pair) == null && startPoint.hasProfile()) {
+				if (roadSegmentData.get(pair) == null && (startPoint.hasProfile() || hasRoute())) {
 					res.add(pair);
 				}
 			}
