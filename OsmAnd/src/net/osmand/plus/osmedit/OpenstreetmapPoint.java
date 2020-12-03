@@ -1,7 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import com.google.protobuf.Message;
-
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
