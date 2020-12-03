@@ -688,13 +688,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private int getTrackColor(GPXFile gpxFile, int defaultColor) {
-		int color;
+		int color = 0;
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			color = trackDrawInfo.getColor();
 		} else if (gpxFile.showCurrentTrack) {
 			color = currentTrackColorPref.get();
 		} else {
-			color = gpxFile.getColor(defaultColor);
+			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
+			if (dataItem != null) {
+				color = dataItem.getColor();
+			}
 		}
 		return color != 0 ? color : defaultColor;
 	}

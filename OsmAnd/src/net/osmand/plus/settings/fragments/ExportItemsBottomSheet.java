@@ -54,6 +54,7 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
@@ -314,10 +315,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_map, activeColorRes));
 		} else if (object instanceof File) {
 			File file = (File) object;
-			setupBottomSheetItemForFile(builder, file, file.lastModified(), file.length());
+			setupBottomSheetItemForFile(builder, file, file.lastModified(), file.length(), null);
 		} else if (object instanceof FileSettingsItem) {
 			FileSettingsItem item = (FileSettingsItem) object;
-			setupBottomSheetItemForFile(builder, item.getFile(), item.getLastModified(), item.getSize());
+			setupBottomSheetItemForFile(builder, item.getFile(), item.getLastModified(), item.getSize(), item.getAppearanceInfo());
 		} else if (object instanceof AvoidRoadInfo) {
 			AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) object;
 			builder.setTitle(avoidRoadInfo.name);
@@ -361,7 +362,8 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private void setupBottomSheetItemForFile(Builder builder, File file, long lastModified, long size) {
+	private void setupBottomSheetItemForFile(Builder builder, File file, long lastModified, long size,
+											 GpxAppearanceInfo appearanceInfo) {
 		FileSubtype fileSubtype = FileSubtype.getSubtypeByPath(app, file.getPath());
 		builder.setTitle(file.getName());
 		if (file.getAbsolutePath().contains(IndexConstants.RENDERERS_DIR)) {
@@ -370,8 +372,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 		} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
 			builder.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
-			builder.setTag(file);
-			builder.setDescription(getTrackDescr(file, lastModified, size));
+			builder.setDescription(getTrackDescr(file, lastModified, size, appearanceInfo));
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 		} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
 			int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
@@ -406,15 +407,18 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		@Override
 		public void onGpxDataItemReady(GpxDataItem item) {
 			for (BaseBottomSheetItem bottomSheetItem : items) {
-				if (Algorithms.objectEquals(item.getFile(), bottomSheetItem.getTag())) {
-					((BottomSheetItemWithDescription) bottomSheetItem).setDescription(getTrackDescrForDataItem(item));
-					break;
+				Object tag = bottomSheetItem.getTag();
+				if (tag instanceof FileSettingsItem) {
+					if (Algorithms.objectEquals(item.getFile(), ((FileSettingsItem) tag).getFile())) {
+						((BottomSheetItemWithDescription) bottomSheetItem).setDescription(getTrackDescrForDataItem(item));
+						break;
+					}
 				}
 			}
 		}
 	};
 
-	private String getTrackDescr(@NonNull File file, long lastModified, long size) {
+	private String getTrackDescr(@NonNull File file, long lastModified, long size, GpxAppearanceInfo appearanceInfo) {
 		String folder = "";
 		File parent = file.getParentFile();
 		if (parent != null) {
@@ -425,6 +429,11 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			if (dataItem != null) {
 				return getTrackDescrForDataItem(dataItem);
 			}
+		} else if (appearanceInfo != null) {
+			String dist = OsmAndFormatter.getFormattedDistance(appearanceInfo.totalDistance, app);
+			String points = appearanceInfo.wptPoints + " " + getString(R.string.shared_string_gpx_points).toLowerCase();
+			String descr = getString(R.string.ltr_or_rtl_combine_via_bold_point, folder, dist);
+			return getString(R.string.ltr_or_rtl_combine_via_comma, descr, points);
 		} else {
 			String date = OsmAndFormatter.getFormattedDate(app, lastModified);
 			String formattedSize = AndroidUtils.formatSize(app, size);

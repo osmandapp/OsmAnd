@@ -5,8 +5,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxDbHelper;
+import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.track.GpxSplitType;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -129,10 +133,13 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	protected File file;
+	protected File savedFile;
 	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
 	private long lastModified;
+
+	private GpxAppearanceInfo appearanceInfo;
 
 	public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
 		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
@@ -144,6 +151,9 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 		if (subtype == FileSubtype.UNKNOWN || subtype == null) {
 			throw new IllegalArgumentException("Unknown file subtype: " + fileName);
+		}
+		if (FileSubtype.GPX == subtype) {
+			createGpxAppearanceInfo();
 		}
 	}
 
@@ -201,6 +211,9 @@ public class FileSettingsItem extends StreamSettingsItem {
 				name = Algorithms.getFileWithoutDirs(fileName);
 			}
 		}
+		if (FileSubtype.GPX == subtype) {
+			appearanceInfo = GpxAppearanceInfo.fromJson(json);
+		}
 	}
 
 	@Override
@@ -208,6 +221,9 @@ public class FileSettingsItem extends StreamSettingsItem {
 		super.writeToJson(json);
 		if (subtype != null) {
 			json.put("subtype", subtype.getSubtypeName());
+		}
+		if (FileSubtype.GPX == subtype && appearanceInfo != null) {
+			appearanceInfo.toJson(json);
 		}
 	}
 
@@ -242,6 +258,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 		return subtype;
 	}
 
+	@Nullable
+	public GpxAppearanceInfo getAppearanceInfo() {
+		return appearanceInfo;
+	}
+
 	@Override
 	public boolean exists() {
 		return file.exists();
@@ -273,6 +294,54 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 	}
 
+	@Override
+	public void applyAdditionalParams() {
+		if (appearanceInfo != null) {
+			GpxDataItem dataItem = app.getGpxDbHelper().getItem(savedFile, new GpxDataItemCallback() {
+				@Override
+				public boolean isCancelled() {
+					return false;
+				}
+
+				@Override
+				public void onGpxDataItemReady(GpxDataItem item) {
+					updateGpxParams(item);
+				}
+			});
+			if (dataItem != null) {
+				updateGpxParams(dataItem);
+			}
+		}
+	}
+
+	private void updateGpxParams(@NonNull GpxDataItem dataItem) {
+		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
+		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType);
+		gpxDbHelper.updateColor(dataItem, appearanceInfo.color);
+		gpxDbHelper.updateWidth(dataItem, appearanceInfo.width);
+		gpxDbHelper.updateShowArrows(dataItem, appearanceInfo.showArrows);
+		gpxDbHelper.updateShowStartFinish(dataItem, appearanceInfo.showStartFinish);
+		gpxDbHelper.updateSplit(dataItem, splitType, appearanceInfo.splitInterval);
+		gpxDbHelper.updateGradientScaleType(dataItem, appearanceInfo.scaleType);
+	}
+
+	private void createGpxAppearanceInfo() {
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, new GpxDataItemCallback() {
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+
+			@Override
+			public void onGpxDataItemReady(GpxDataItem item) {
+				appearanceInfo = new GpxAppearanceInfo(item);
+			}
+		});
+		if (dataItem != null) {
+			appearanceInfo = new GpxAppearanceInfo(dataItem);
+		}
+	}
+
 	@Nullable
 	@Override
 	SettingsItemReader<? extends SettingsItem> getReader() {
@@ -280,18 +349,18 @@ public class FileSettingsItem extends StreamSettingsItem {
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
 				OutputStream output;
-				File dest = FileSettingsItem.this.getFile();
-				if (dest.isDirectory()) {
-					dest = new File(dest, entryName.substring(fileName.length()));
+				savedFile = FileSettingsItem.this.getFile();
+				if (savedFile.isDirectory()) {
+					savedFile = new File(savedFile, entryName.substring(fileName.length()));
 				}
-				if (dest.exists() && !shouldReplace) {
-					dest = renameFile(dest);
+				if (savedFile.exists() && !shouldReplace) {
+					savedFile = renameFile(savedFile);
 				}
-				if (dest.getParentFile() != null && !dest.getParentFile().exists()) {
+				if (savedFile.getParentFile() != null && !savedFile.getParentFile().exists()) {
 					//noinspection ResultOfMethodCallIgnored
-					dest.getParentFile().mkdirs();
+					savedFile.getParentFile().mkdirs();
 				}
-				output = new FileOutputStream(dest);
+				output = new FileOutputStream(savedFile);
 				byte[] buffer = new byte[SettingsHelper.BUFFER];
 				int count;
 				try {
@@ -303,7 +372,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 					Algorithms.closeStream(output);
 				}
 				if (lastModified != -1) {
-					dest.setLastModified(lastModified);
+					savedFile.setLastModified(lastModified);
 				}
 			}
 		};

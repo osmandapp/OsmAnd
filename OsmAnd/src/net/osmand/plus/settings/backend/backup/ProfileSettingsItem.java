@@ -176,7 +176,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 		ApplicationMode.changeProfileAvailability(appMode, true, app);
 	}
 
-	public void applyAdditionalPrefs() {
+	public void applyAdditionalParams() {
 		if (additionalPrefsJson != null) {
 			updatePluginResPrefs();
 
