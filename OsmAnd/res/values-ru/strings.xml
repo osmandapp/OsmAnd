@@ -3993,4 +3993,5 @@
     <string name="select_picture">Выбор изображения</string>
     <string name="app_mode_kayak">Каяк</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Немецкий (повседневный)</string>
 </resources>
