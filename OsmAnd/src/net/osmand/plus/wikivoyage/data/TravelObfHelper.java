@@ -20,7 +20,6 @@ import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.compress.utils.Lists;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -159,17 +158,17 @@ public class TravelObfHelper implements TravelHelper {
 				res.add(searchResult);
 			}
 		}
-		res = Lists.newArrayList(groupSearchResultsByCityId(res).iterator());
+		res = new ArrayList<>(groupSearchResultsByCityId(res));
 		sortSearchResults(searchQuery, res);
 		return res;
 	}
 
 	private WikivoyageSearchResult convertArticleToSearchResult(TravelArticle article) {
 		WikivoyageSearchResult searchResult = new WikivoyageSearchResult();
-		searchResult.articleTitles = Collections.singletonList(article.title);
-		searchResult.isPartOf = Collections.singletonList(article.isPartOf);
+		searchResult.articleTitles = new ArrayList<>(Collections.singletonList(article.title));
+		searchResult.isPartOf = new ArrayList<>(Collections.singletonList(article.isPartOf));
 		searchResult.imageTitle = article.imageTitle;
-		searchResult.langs = Collections.singletonList(article.lang);
+		searchResult.langs = new ArrayList<>(Collections.singletonList(article.lang));
 		searchResult.tripId = article.tripId;
 		return searchResult;
 	}
