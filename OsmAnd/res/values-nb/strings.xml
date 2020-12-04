@@ -3930,4 +3930,5 @@
 \nWeb / Wikimedia - interessepunktbilder spesifisert i OpenStreetMap-data.</string>
     <string name="elevation_data">Du kan bruke høydedata for å ta i betraktning stigning/nedstigning på turen din</string>
     <string name="app_mode_light_aircraft">Småfly</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>
