@@ -6,18 +6,13 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -25,17 +20,15 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
-import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -48,11 +41,10 @@ import java.util.List;
 
 import static net.osmand.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
-public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
-
-	public static final String TAG = "OnSaveCurrentTrackBottomSheetFragment";
+public class SaveGPXBottomSheetFragment extends MenuBottomSheetDialogFragment {
+	public static final String TAG = "SaveGPXBottomSheetFragment";
 	public static final String SAVED_TRACKS_KEY = "saved_track_filename";
-	private static final Log LOG = PlatformUtil.getLog(OnSaveCurrentTrackFragment.class);
+	private static final Log LOG = PlatformUtil.getLog(SaveGPXBottomSheetFragment.class);
 
 	private boolean openTrack = false;
 	private File file;
@@ -60,9 +52,8 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 	private String savedGpxName = "";
 	private String newGpxName = "";
 
-	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = requiredMyApplication();
 		Bundle args = getArguments();
 		if (args != null && args.containsKey(SAVED_TRACKS_KEY)) {
@@ -81,7 +72,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		file = new File(app.getAppCustomization().getTracksDir(), savedGpxName + IndexConstants.GPX_FILE_EXT);
 		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final int textPrimaryColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
-		View mainView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.fragment_on_save_current_track, container);
+		View mainView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.save_gpx_fragment, null);
 
 		OsmandTextFieldBoxes textBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.name_text_box);
 		if (nightMode) {
@@ -131,25 +122,11 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 				app.getSettings().SHOW_SAVED_TRACK_REMEMBER.set(isChecked);
 			}
 		});
-		View openTrackBtn = mainView.findViewById(R.id.open_track_button);
-		UiUtilities.setupDialogButton(nightMode, openTrackBtn, DialogButtonType.SECONDARY, R.string.shared_string_open_track);
-		final View showOnMapBtn = mainView.findViewById(R.id.close_button);
-		UiUtilities.setupDialogButton(nightMode, showOnMapBtn, DialogButtonType.SECONDARY, R.string.shared_string_close);
 
-		openTrackBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				doRename(true);
-			}
-		});
-
-		showOnMapBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				doRename(false);
-			}
-		});
-		return mainView;
+		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+				.setCustomView(mainView)
+				.create();
+		items.add(titleItem);
 	}
 
 	private void doRename(boolean openTrack) {
@@ -158,6 +135,21 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 			this.openTrack = openTrack;
 			dismiss();
 		}
+	}
+
+	@Override
+	protected UiUtilities.DialogButtonType getRightBottomButtonType() {
+		return UiUtilities.DialogButtonType.SECONDARY;
+	}
+
+	@Override
+	protected int getRightBottomButtonTextId() {
+		return R.string.shared_string_open_track;
+	}
+
+	@Override
+	protected void onRightBottomButtonClick() {
+		doRename(true);
 	}
 
 	@Override
@@ -199,10 +191,10 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		}
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 
-		GpxInfo gpxInfo = new GpxInfo();
+		AvailableGPXFragment.GpxInfo gpxInfo = new AvailableGPXFragment.GpxInfo();
 		gpxInfo.setGpx(GPXUtilities.loadGPXFile(f));
 		if (gpxInfo.gpx != null) {
-			WptPt loc = gpxInfo.gpx.findPointToShow();
+			GPXUtilities.WptPt loc = gpxInfo.gpx.findPointToShow();
 			if (loc != null) {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxInfo.gpx);
 				if (activity instanceof MapActivity) {
@@ -223,7 +215,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		if (fragmentManager.isStateSaved()) {
 			return;
 		}
-		OnSaveCurrentTrackFragment f = new OnSaveCurrentTrackFragment();
+		SaveGPXBottomSheetFragment f = new SaveGPXBottomSheetFragment();
 		Bundle b = new Bundle();
 		b.putStringArrayList(SAVED_TRACKS_KEY, new ArrayList<>(filenames));
 		f.setArguments(b);
@@ -234,3 +226,4 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		}
 	}
 }
+
