@@ -1,11 +1,14 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +36,11 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 	private EditText userNameEditText;
 	private EditText passwordEditText;
+
+	private int contentHeightPrevious = 0;
+	private int buttonsHeight;
+	private int shadowHeight;
+	private ScrollView scrollView;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -73,6 +81,28 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 		items.add(titleItem);
 	}
 
+	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
+		return new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				Rect visibleDisplayFrame = new Rect();
+				buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
+				shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
+				scrollView = getView().findViewById(R.id.scroll_view);
+				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
+				int viewHeight = scrollView.getHeight();
+				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
+				if (contentHeightPrevious != contentHeight) {
+					boolean showTopShadow;
+					showTopShadow = viewHeight + shadowHeight < contentHeight;
+					scrollView.requestLayout();
+					contentHeightPrevious = contentHeight;
+					drawTopShadow(showTopShadow);
+				}
+			}
+		};
+	}
+
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -107,7 +137,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
-	                                   boolean usedOnMap, @Nullable ApplicationMode appMode) {
+									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);

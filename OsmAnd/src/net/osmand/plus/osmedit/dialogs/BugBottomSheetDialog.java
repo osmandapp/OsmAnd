@@ -1,9 +1,12 @@
 package net.osmand.plus.osmedit.dialogs;
 
 import android.content.res.ColorStateList;
+import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -44,6 +47,10 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private OsmNotesPoint point;
 	private HandleOsmNoteAsyncTask.HandleBugListener handleBugListener;
 	private TextInputEditText noteText;
+	private int contentHeightPrevious = 0;
+	private int buttonsHeight;
+	private int shadowHeight;
+	private ScrollView scrollView;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -56,6 +63,7 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		View osmNoteView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
 				R.layout.open_osm_note_text, null);
+		osmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		TextInputLayout textBox = osmNoteView.findViewById(R.id.name_text_box);
 		int highlightColorId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		textBox.setBoxBackgroundColorResource(highlightColorId);
@@ -72,6 +80,28 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		items.add(editOsmNote);
 
 		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
+	}
+
+	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
+		return new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				Rect visibleDisplayFrame = new Rect();
+				buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
+				shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
+				scrollView = getView().findViewById(R.id.scroll_view);
+				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
+				int viewHeight = scrollView.getHeight();
+				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
+				if (contentHeightPrevious != contentHeight) {
+					boolean showTopShadow;
+					showTopShadow = viewHeight + shadowHeight < contentHeight;
+					scrollView.requestLayout();
+					contentHeightPrevious = contentHeight;
+					drawTopShadow(showTopShadow);
+				}
+			}
+		};
 	}
 
 	@Override
