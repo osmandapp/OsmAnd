@@ -602,7 +602,7 @@
     <string name="files_limit">Quedan %1$d archivos</string>
     <string name="available_downloads_left">Faltan descargar %1$d archivos</string>
     <string name="install_paid">Versión completa</string>
-    <string name="cancel_route">Descartar ruta</string>
+    <string name="cancel_route">¿Descartar ruta\?</string>
     <string name="cancel_navigation">Parar navegación</string>
     <string name="clear_destination">Limpiar destino</string>
     <string name="download_using_mobile_internet">No está conectado a una red Wi-Fi. ¿Usar la conexión actual a Internet para descargar?</string>
