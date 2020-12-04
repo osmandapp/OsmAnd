@@ -3879,4 +3879,7 @@
     <string name="poi_liaison_filter">聯絡處</string>
     <string name="poi_consulate_filter">領事館</string>
     <string name="poi_embassy_filter">大使館</string>
+    <string name="poi_siren">警報器</string>
+    <string name="poi_nurse">護理師</string>
+    <string name="poi_mobile_money_agent">行動貨幣代理商</string>
 </resources>

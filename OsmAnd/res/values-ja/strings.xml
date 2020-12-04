@@ -3928,7 +3928,7 @@ POIの更新は利用できません</string>
     <string name="message_you_need_add_two_points_to_show_graphs">少なくとも2つの地点を追加する必要があります</string>
     <string name="login_open_street_map">OpenStreetMapにログイン</string>
     <string name="login_open_street_map_org">OpenStreetMap.orgにログイン</string>
-    <string name="sign_in_with_open_street_map">OpenStreetMapに登録</string>
+    <string name="sign_in_with_open_street_map">OpenStreetMapにOAuthログイン</string>
     <string name="open_street_map_login_mode">変更をアップロードするには、ログインする必要があります。
 \n
 \n安全なOAuth方式を使用してログイン、または通常のユーザー名とパスワード方式が選択できます。</string>
@@ -3949,4 +3949,6 @@ POIの更新は利用できません</string>
     <string name="login_account">アカウント</string>
     <string name="message_graph_will_be_available_after_recalculation">ルートが再計算されるのを待ちます。
 \nグラフは再計算後に利用できるようになります。</string>
+    <string name="use_dev_url_descr">OSM通知/ POI / GPXのアップロードをテストする場合、openstreetmap.orgではなくdev.openstreetmap.orgを使用するよう切り替えます。</string>
+    <string name="use_dev_url">dev.openstreetmap.orgを使用</string>
 </resources>
