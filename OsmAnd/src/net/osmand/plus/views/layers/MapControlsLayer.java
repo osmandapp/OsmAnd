@@ -339,7 +339,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void stopNavigation() {
 		mapRouteInfoMenu.hide();
 		if (mapActivity.getRoutingHelper().isFollowingMode()) {
-			mapActivity.getMapActions().stopNavigationActionConfirm();
+			mapActivity.getMapActions().stopNavigationActionConfirm(null);
 		} else {
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		}

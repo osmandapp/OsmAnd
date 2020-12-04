@@ -2,55 +2,41 @@ package net.osmand.plus.osmedit.dialogs;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.router.GeneralRouter;
-
-import java.util.List;
 
 public class DismissRouteBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
-	public static final int REQUEST_CODE = 1001;
-
 	public static final String TAG = DismissRouteBottomSheetFragment.class.getSimpleName();
-	private DialogInterface.OnDismissListener dismissListener;
 
-	public DismissRouteBottomSheetFragment() {
-	}
+	private Runnable onStopAction;
+	private OnDismissListener dismissListener;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = getMyApplication();
-		if (app != null) {
-			settings = app.getSettings();
-		}
-
-		items.add(new ShortDescriptionItem.Builder()
+		BaseBottomSheetItem descriptionItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.stop_routing_confirm))
 				.setTitle(getString(R.string.cancel_route))
 				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
-				.create());
+				.create();
 
-		items.add(new DividerSpaceItem(getContext(),
-				getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
+		items.add(descriptionItem);
 
+		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		items.add(new DividerSpaceItem(requireContext(), padding));
 	}
 
 	@Override
@@ -69,8 +55,8 @@ public class DismissRouteBottomSheetFragment extends MenuBottomSheetDialogFragme
 	}
 
 	@Override
-	protected UiUtilities.DialogButtonType getRightBottomButtonType() {
-		return (UiUtilities.DialogButtonType.PRIMARY);
+	protected DialogButtonType getRightBottomButtonType() {
+		return DialogButtonType.PRIMARY;
 	}
 
 	@Override
@@ -80,27 +66,21 @@ public class DismissRouteBottomSheetFragment extends MenuBottomSheetDialogFragme
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		stopNavigationWithoutConfirm();
-		dismiss();
-	}
-
-	public void stopNavigationWithoutConfirm() {
-		app.stopNavigation();
-		getMapActivity().updateApplicationModeSettings();
-		getMapActivity().getDashboard().clearDeletedPoints();
-		List<ApplicationMode> modes = ApplicationMode.values(app);
-		for (ApplicationMode mode : modes) {
-			if (settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(mode)) {
-				settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, false);
-				settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false).setModeValue(mode, false);
-			}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		}
+		if (onStopAction != null) {
+			onStopAction.run();
+		}
+		dismiss();
 	}
 
 	@Override
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
-		if (dismissListener != null) {
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations() && dismissListener != null) {
 			dismissListener.onDismiss(dialog);
 		}
 	}
@@ -112,20 +92,15 @@ public class DismissRouteBottomSheetFragment extends MenuBottomSheetDialogFragme
 			return (MapActivity) activity;
 		}
 		return null;
-
 	}
 
-	public void setOnDismissListener(DialogInterface.OnDismissListener dismissListener) {
-		this.dismissListener = dismissListener;
-	}
-
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment, DialogInterface.OnDismissListener dismissListener) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable OnDismissListener listener, @Nullable Runnable onStopAction) {
 		if (!fragmentManager.isStateSaved()) {
 			DismissRouteBottomSheetFragment fragment = new DismissRouteBottomSheetFragment();
-			fragment.dismissListener = dismissListener;
-			fragment.setTargetFragment(targetFragment, REQUEST_CODE);
+			fragment.dismissListener = listener;
+			fragment.onStopAction = onStopAction;
+			fragment.setRetainInstance(true);
 			fragment.show(fragmentManager, TAG);
 		}
 	}
 }
-

@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
@@ -85,14 +84,13 @@ public class DashNavigationFragment extends DashBaseFragment {
 			
 			@Override
 			public void onClick(View v) {
-				AlertDialog dlg = map.getMapActions().stopNavigationActionConfirm();
-				dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
-					
+				map.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
+
 					@Override
 					public void onDismiss(DialogInterface dialog) {
 						setupNavigation();
 						DashWaypointsFragment f = dashboard.getFragmentByClass(DashWaypointsFragment.class);
-						if(f != null) {
+						if (f != null) {
 							f.onOpenDash();
 						}
 					}
