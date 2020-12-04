@@ -74,7 +74,6 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
 		super.onCreate(savedInstanceState);
-		setDismissButtonTextId(R.string.shared_string_close);
 
 		Map<String, RoutingParameter> routingParameterMap = app.getRouter(appMode).getParameters();
 		RoutingParameter parameter = routingParameterMap.get(USE_HEIGHT_OBSTACLES);
@@ -89,6 +88,11 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 				selectedEntryIndex = i;
 			}
 		}
+	}
+
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
 	}
 
 	@Override
@@ -178,7 +182,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 								((BaseSettingsFragment) target).updateSetting(useHeightPref.getId());
 							}
 							updateReliefButtons();
-							new Handler().postDelayed(new Runnable() {
+							app.runInUIThread(new Runnable() {
 								@Override
 								public void run() {
 									dismiss();

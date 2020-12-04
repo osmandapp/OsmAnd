@@ -290,19 +290,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 						screen.addPreference(switchPreferenceEx);
 
-						if (USE_HEIGHT_OBSTACLES.equals(p.getId()) && !Algorithms.isEmpty(reliefFactorParameters))  {
-							String summaryOn = getString(R.string.shared_string_enabled);
-							for (RoutingParameter parameter : reliefFactorParameters) {
-								if (isRoutingParameterSelected(settings, am, parameter)) {
-									summaryOn = getString(R.string.ltr_or_rtl_combine_via_comma, summaryOn, getRoutingParameterTitle(app, parameter));
-								}
-							}
-							switchPreferenceEx.setSummaryOn(summaryOn);
-							switchPreferenceEx.setSummaryOff(R.string.shared_string_disabled);
-						} else {
-							switchPreferenceEx.setSummaryOn(R.string.shared_string_on);
-							switchPreferenceEx.setSummaryOff(R.string.shared_string_off);
-						}
+						setupOtherBooleanParameterSummary(app, am, p, switchPreferenceEx);
 					} else {
 						Object[] vls = p.getPossibleValues();
 						String[] svlss = new String[vls.length];
@@ -350,6 +338,22 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			setupDisableComplexRoutingPref();
 		}
 		setupFastRecalculationPref();
+	}
+
+	private void setupOtherBooleanParameterSummary(OsmandApplication app, ApplicationMode am, RoutingParameter p, SwitchPreferenceEx switchPreferenceEx) {
+		if (USE_HEIGHT_OBSTACLES.equals(p.getId()) && !Algorithms.isEmpty(reliefFactorParameters)) {
+			String summaryOn = getString(R.string.shared_string_enabled);
+			for (RoutingParameter parameter : reliefFactorParameters) {
+				if (isRoutingParameterSelected(settings, am, parameter)) {
+					summaryOn = getString(R.string.ltr_or_rtl_combine_via_comma, summaryOn, getRoutingParameterTitle(app, parameter));
+				}
+			}
+			switchPreferenceEx.setSummaryOn(summaryOn);
+			switchPreferenceEx.setSummaryOff(R.string.shared_string_disabled);
+		} else {
+			switchPreferenceEx.setSummaryOn(R.string.shared_string_on);
+			switchPreferenceEx.setSummaryOff(R.string.shared_string_off);
+		}
 	}
 
 	private void addDivider(PreferenceScreen screen) {

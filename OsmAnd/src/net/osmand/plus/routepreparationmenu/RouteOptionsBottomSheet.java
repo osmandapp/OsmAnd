@@ -50,7 +50,6 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
@@ -264,16 +263,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 		final boolean active = !useHeightPref.getModeValue(applicationMode);
 		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
-				R.layout.elevation_preference, null, false);
-		final ImageView iconView = itemView.findViewById(R.id.icon_elevation);
+				R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
 		final SwitchCompat switchButton = itemView.findViewById(R.id.switchWidget);
 		int selectedModeColor = ContextCompat.getColor(app, selectedModeColorId);
-		iconView.setImageDrawable(getContentIcon(active ?
-				optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
-		TextView title = itemView.findViewById(android.R.id.title);
-		title.setText(getString(R.string.routing_attr_height_obstacles_name));
-		final TextView description = itemView.findViewById(android.R.id.summary);
-		description.setText(getString(R.string.routing_attr_height_obstacles_name));
 		View itemsContainer = itemView.findViewById(R.id.selectable_list_item);
 		switchButton.setChecked(!active);
 		switchButton.setFocusable(false);
@@ -297,6 +289,10 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 
 		item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setCompoundButtonColorId(selectedModeColorId)
+				.setDescription(getString(R.string.routing_attr_height_obstacles_name))
+				.setIcon(getContentIcon(active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()))
+				.setTitle(getString(R.string.routing_attr_height_obstacles_name))
 				.setCustomView(itemView)
 				.create();
 
