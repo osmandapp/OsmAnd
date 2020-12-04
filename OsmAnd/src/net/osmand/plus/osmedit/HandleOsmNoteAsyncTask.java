@@ -35,11 +35,11 @@ public class HandleOsmNoteAsyncTask extends AsyncTask<Void, Void, OsmBugResult> 
 	@Override
 	protected OsmBugResult doInBackground(Void... params) {
 		if (bug != null) {
-			OsmNotesPoint pnt = new OsmNotesPoint();
-			pnt.setId(bug.getId());
-			pnt.setLatitude(bug.getLatitude());
-			pnt.setLongitude(bug.getLongitude());
-			return osmbugsUtil.commit(pnt, text, action);
+			OsmNotesPoint point = new OsmNotesPoint();
+			point.setId(bug.getId());
+			point.setLatitude(bug.getLatitude());
+			point.setLongitude(bug.getLongitude());
+			return osmbugsUtil.commit(point, text, action);
 		} else if (point != null) {
 			osmbugsUtil = local;
 			return osmbugsUtil.modify(point, text);

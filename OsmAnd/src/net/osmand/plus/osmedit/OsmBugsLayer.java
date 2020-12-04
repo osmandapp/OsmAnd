@@ -1,19 +1,14 @@
 package net.osmand.plus.osmedit;
 
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.util.Xml;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
@@ -25,6 +20,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.osmedit.dialogs.BugBottomSheetDialog;
+import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -32,7 +28,6 @@ import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -362,43 +357,18 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	private void createBugDialog(final boolean offline, String text, int titleTextId, int posButtonTextId,
-	                             final Action action, final OpenStreetNote bug, final OsmNotesPoint point) {
-		@SuppressLint("InflateParams") final View view = LayoutInflater.from(activity).inflate(R.layout.open_bug, null);
+	                             final Action action, final OpenStreetNote bug, OsmNotesPoint point) {
 		if (offline) {
 			activity.getContextMenu().close();
 			BugBottomSheetDialog.showInstance(activity.getSupportFragmentManager(), getOsmbugsUtil(bug), local, text,
 					titleTextId, posButtonTextId, action, bug, point, getHandleBugListener());
-			return;
 		} else {
-			((EditText) view.findViewById(R.id.user_name_field)).setText(getUserName());
-			((EditText) view.findViewById(R.id.password_field)).setText(
-					activity.getMyApplication().getSettings().USER_PASSWORD.get());
-		}
-		if (!Algorithms.isEmpty(text)) {
-			((EditText) view.findViewById(R.id.message_field)).setText(text);
-		}
-		view.findViewById(R.id.message_field).requestFocus();
-		AndroidUtils.softKeyboardDelayed(activity, view.findViewById(R.id.message_field));
-
-		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setTitle(R.string.shared_string_commit);
-		builder.setView(view);
-		builder.setPositiveButton(posButtonTextId, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				String text = offline ? getMessageText(view) : getTextAndUpdateUserPwd(view);
-				activity.getContextMenu().close();
-				handleBug(text, bug, action, point);
-			}
-		});
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.create().show();
-	}
-
-	private void handleBug(String text, OpenStreetNote bug, Action action, OsmNotesPoint point) {
-		if (bug != null || point != null) {
-			executeTaskInBackground(new HandleOsmNoteAsyncTask(getOsmbugsUtil(bug), local, bug, point, text, action,
-					getHandleBugListener()));
+			OsmNotesPoint notesPoint = new OsmNotesPoint();
+			notesPoint.setAction(action);
+			notesPoint.setId(bug.getId());
+			notesPoint.setLatitude(bug.getLatitude());
+			notesPoint.setLongitude(bug.getLongitude());
+			SendOsmNoteBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), new OsmPoint[]{notesPoint});
 		}
 	}
 
@@ -451,19 +421,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				}
 			}
 		};
-	}
-
-	private String getUserName() {
-		return ((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get();
-	}
-
-	private String getTextAndUpdateUserPwd(final View view) {
-		String text = getMessageText(view);
-		String author = ((EditText) view.findViewById(R.id.user_name_field)).getText().toString();
-		String pwd = ((EditText) view.findViewById(R.id.password_field)).getText().toString();
-		((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_NAME.set(author);
-		((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_PASSWORD.set(pwd);
-		return text;
 	}
 
 	private String getMessageText(final View view) {

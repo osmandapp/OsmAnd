@@ -28,9 +28,8 @@ public class OsmOAuthHelper {
 		listeners.add(listener);
 	}
 
-	public OsmOAuthAuthorizationAdapter updateAdapter(){
+	public void updateAdapter() {
 		authorizationAdapter = new OsmOAuthAuthorizationAdapter(app);
-		return authorizationAdapter;
 	}
 
 	public void removeListener(OsmAuthorizationListener listener) {
@@ -41,8 +40,8 @@ public class OsmOAuthHelper {
 		return authorizationAdapter;
 	}
 
-	public void startOAuth(@NonNull ViewGroup view) {
-		authorizationAdapter.startOAuth(view);
+	public void startOAuth(@NonNull ViewGroup view, boolean nightMode) {
+		authorizationAdapter.startOAuth(view, nightMode);
 	}
 
 	public void authorize(@NonNull String oauthVerifier) {
@@ -74,6 +73,10 @@ public class OsmOAuthHelper {
 
 	public boolean isValidToken() {
 		return authorizationAdapter.isValidToken();
+	}
+
+	public boolean isLogged() {
+		return isValidToken() || isLoginExists();
 	}
 
 	public interface OsmAuthorizationListener {
