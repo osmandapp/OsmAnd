@@ -28,10 +28,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
+import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -74,13 +72,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			OsmPoint point = loadErrorsMap.keySet().iterator().next();
 			String message = loadErrorsMap.get(point);
 			if (message.equals(activity.getString(R.string.auth_failed))) {
-				SendPoiDialogFragment dialogFragment;
-				if (activity instanceof MapActivity) {
-					dialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{point}, PoiUploaderType.SIMPLE);
-				} else {
-					dialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{point}, PoiUploaderType.FRAGMENT);
-				}
-				dialogFragment.show(activity.getSupportFragmentManager(), "error_loading");
+				LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), null);
 			} else {
 				DialogFragment dialogFragment =
 						UploadingErrorDialogFragment.getInstance(message, point);
