@@ -211,7 +211,7 @@ public class SelectedGpxMenuController extends MenuController {
 				if (Algorithms.isEmpty(gpxFile.path)) {
 					saveAndShareCurrentGpx(app, gpxFile);
 				} else {
-					AndroidUtils.shareGpx(app, new File(gpxFile.path));
+					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 				}
 			}
 		} else {
@@ -229,7 +229,7 @@ public class SelectedGpxMenuController extends MenuController {
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (errorMessage == null) {
-					AndroidUtils.shareGpx(app, new File(gpxFile.path));
+					GpxUiHelper.shareGpx(app, new File(gpxFile.path));
 				}
 			}
 		};

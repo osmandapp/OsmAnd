@@ -63,6 +63,7 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -302,7 +303,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 	private void shareItems() {
 		final GPXFile gpxFile = getGpx();
-		if (gpxFile != null && getTrackActivity() != null) {
+		FragmentActivity activity = getActivity();
+		if (gpxFile != null && activity != null) {
 			if (Algorithms.isEmpty(gpxFile.path)) {
 				SaveGpxListener saveGpxListener = new SaveGpxListener() {
 					@Override
@@ -314,21 +316,17 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					public void gpxSavingFinished(Exception errorMessage) {
 						if (isResumed()) {
 							hideProgressBar();
-							shareGpx(gpxFile.path);
+							FragmentActivity activity = getActivity();
+							if (activity != null) {
+								GpxUiHelper.shareGpx(activity, new File(gpxFile.path));
+							}
 						}
 					}
 				};
 				new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else {
-				shareGpx(gpxFile.path);
+				GpxUiHelper.saveAndShareGpxWithAppearance(activity, gpxFile);
 			}
-		}
-	}
-
-	private void shareGpx(String path) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			AndroidUtils.shareGpx(activity, new File(path));
 		}
 	}
 

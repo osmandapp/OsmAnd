@@ -1044,7 +1044,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						callback.onApplyMovedObject(true, objectInMotion);
 					}
 				} else {
-					new SaveGpxAsyncTask(gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
+					new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
 
 						@Override
 						public void gpxSavingStarted() {

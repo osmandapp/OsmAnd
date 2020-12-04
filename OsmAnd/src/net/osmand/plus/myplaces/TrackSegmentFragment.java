@@ -165,7 +165,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 								GPXFile gpx = getGpx();
 								FragmentActivity activity = getActivity();
 								if (activity != null && gpx != null) {
-									AndroidUtils.shareGpx(activity, new File(gpx.path));
+									GpxUiHelper.shareGpx(activity, new File(gpx.path));
 								}
 								return true;
 							}
@@ -1207,7 +1207,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 	}
 
 	private void saveGpx(final SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
-		new SaveGpxAsyncTask(gpxFile, new SaveGpxListener() {
+		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
 				TrackActivity activity = getTrackActivity();

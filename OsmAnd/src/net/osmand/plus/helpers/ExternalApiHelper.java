@@ -647,7 +647,7 @@ public class ExternalApiHelper {
 			gpxFile.path = destFile.getAbsolutePath();
 		}
 
-		new SaveGpxAsyncTask(gpxFile, new SaveGpxListener() {
+		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
 

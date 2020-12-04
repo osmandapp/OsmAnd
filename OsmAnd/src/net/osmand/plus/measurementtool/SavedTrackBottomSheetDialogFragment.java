@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -20,6 +19,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -81,7 +81,7 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	protected void onThirdBottomButtonClick() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			AndroidUtils.shareGpx(activity, new File(fileName));
+			GpxUiHelper.shareGpx(activity, new File(fileName));
 		}
 		dismiss();
 	}
