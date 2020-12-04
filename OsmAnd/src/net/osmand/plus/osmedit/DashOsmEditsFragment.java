@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -24,9 +23,6 @@ import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.osmedit.dialogs.ProgressDialogPoiUploader;
 import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
-import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +74,6 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		return view;
 	}
 
-
 	@Override
 	public void onOpenDash() {
 		if (plugin == null) {
@@ -121,13 +116,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 				public void onClick(View v) {
 					if (point.getGroup() == OsmPoint.Group.POI) {
 						selectedPoint = point;
-						OsmandApplication app = getMyApplication();
-						OsmandSettings settings = app.getSettings();
-						OsmOAuthAuthorizationAdapter authorizationAdapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
-						boolean isLogged = authorizationAdapter.isValidToken()
-								|| !Algorithms.isEmpty(settings.USER_NAME.get())
-								&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
-						if (isLogged) {
+						if (getMyApplication().getOsmOAuthHelper().isLogged()) {
 							SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
 						} else {
 							LoginBottomSheetFragment.showInstance(getActivity().getSupportFragmentManager(),
