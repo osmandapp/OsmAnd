@@ -20,13 +20,16 @@ import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.compress.utils.Lists;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -156,6 +159,8 @@ public class TravelObfHelper implements TravelHelper {
 				res.add(searchResult);
 			}
 		}
+		res = Lists.newArrayList(groupSearchResultsByCityId(res).iterator());
+		sortSearchResults(searchQuery, res);
 		return res;
 	}
 
@@ -167,6 +172,52 @@ public class TravelObfHelper implements TravelHelper {
 		searchResult.langs = Collections.singletonList(article.lang);
 		searchResult.tripId = article.tripId;
 		return searchResult;
+	}
+
+	private Collection<WikivoyageSearchResult> groupSearchResultsByCityId(List<WikivoyageSearchResult> res) {
+		String baseLng = application.getLanguage();
+		TLongObjectHashMap<WikivoyageSearchResult> wikivoyage = new TLongObjectHashMap<>();
+		for (WikivoyageSearchResult rs : res) {
+			WikivoyageSearchResult prev = wikivoyage.get(rs.tripId);
+			if (prev != null) {
+				int insInd = prev.langs.size();
+				if (rs.langs.get(0).equals(baseLng)) {
+					insInd = 0;
+				} else if (rs.langs.get(0).equals("en")) {
+					if (!prev.langs.get(0).equals(baseLng)) {
+						insInd = 0;
+					} else {
+						insInd = 1;
+					}
+				}
+				prev.articleTitles.add(insInd, rs.articleTitles.get(0));
+				prev.langs.add(insInd, rs.langs.get(0));
+				prev.isPartOf.add(insInd, rs.isPartOf.get(0));
+			} else {
+				wikivoyage.put(rs.tripId, rs);
+			}
+		}
+		return wikivoyage.valueCollection();
+	}
+
+	private void sortSearchResults(final String searchQuery, List<WikivoyageSearchResult> list) {
+		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
+			@Override
+			public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
+				boolean c1 = CollatorStringMatcher.cmatches(collator, searchQuery, o1.articleTitles.get(0),
+						CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+				boolean c2 = CollatorStringMatcher.cmatches(collator, searchQuery, o2.articleTitles.get(0),
+						CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+				if (c1 == c2) {
+					return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
+				} else if (c1) {
+					return -1;
+				} else if (c2) {
+					return 1;
+				}
+				return 0;
+			}
+		});
 	}
 
 	private boolean checkArticleMatches(CollatorStringMatcher matcher, TravelArticle article) {
