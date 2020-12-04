@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
@@ -145,18 +146,33 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public List<WikivoyageSearchResult> search(String searchQuery) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
+		CollatorStringMatcher matcher = new CollatorStringMatcher(searchQuery,
+				CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+
 		for (TravelArticle article : popularArticles) {
-			if (article.title.toLowerCase().contains(searchQuery.toLowerCase())) {
-				WikivoyageSearchResult searchResult = new WikivoyageSearchResult();
-				searchResult.articleTitles = Collections.singletonList(article.title);
-				searchResult.isPartOf = Collections.singletonList(article.isPartOf);
-				searchResult.imageTitle = article.imageTitle;
-				searchResult.langs = Collections.singletonList(article.lang);
-				searchResult.tripId = article.tripId;
+			if (checkArticleMatches(matcher, article)) {
+
+				WikivoyageSearchResult searchResult = convertArticleToSearchResult(article);
 				res.add(searchResult);
 			}
 		}
 		return res;
+	}
+
+	private WikivoyageSearchResult convertArticleToSearchResult(TravelArticle article) {
+		WikivoyageSearchResult searchResult = new WikivoyageSearchResult();
+		searchResult.articleTitles = Collections.singletonList(article.title);
+		searchResult.isPartOf = Collections.singletonList(article.isPartOf);
+		searchResult.imageTitle = article.imageTitle;
+		searchResult.langs = Collections.singletonList(article.lang);
+		searchResult.tripId = article.tripId;
+		return searchResult;
+	}
+
+	private boolean checkArticleMatches(CollatorStringMatcher matcher, TravelArticle article) {
+		return matcher.matches(article.getTitle())
+				|| matcher.matches(article.getContent())
+				|| matcher.matches(article.getContentsJson());
 	}
 
 	@NonNull
