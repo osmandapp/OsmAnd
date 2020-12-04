@@ -11,7 +11,6 @@ import android.os.ParcelFileDescriptor;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -293,8 +292,7 @@ public class ExternalApiHelper {
 
 					final RoutingHelper routingHelper = app.getRoutingHelper();
 					if (routingHelper.isFollowingMode() && !force) {
-						AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
-						dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+						mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
 
 							@Override
 							public void onDismiss(DialogInterface dialog) {
@@ -353,8 +351,7 @@ public class ExternalApiHelper {
 
 						final RoutingHelper routingHelper = app.getRoutingHelper();
 						if (routingHelper.isFollowingMode() && !force) {
-							AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
-							dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+							mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
 
 								@Override
 								public void onDismiss(DialogInterface dialog) {
@@ -667,8 +664,7 @@ public class ExternalApiHelper {
 					}
 					final RoutingHelper routingHelper = app.getRoutingHelper();
 					if (routingHelper.isFollowingMode() && !force) {
-						AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
-						dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+						mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
 
 							@Override
 							public void onDismiss(DialogInterface dialog) {
