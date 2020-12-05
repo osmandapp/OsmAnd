@@ -290,7 +290,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 						screen.addPreference(switchPreferenceEx);
 
-						setupOtherBooleanParameterSummary(app, am, p, switchPreferenceEx);
+						setupOtherBooleanParameterSummary(am, p, switchPreferenceEx);
 					} else {
 						Object[] vls = p.getPossibleValues();
 						String[] svlss = new String[vls.length];
@@ -340,7 +340,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		setupFastRecalculationPref();
 	}
 
-	private void setupOtherBooleanParameterSummary(OsmandApplication app, ApplicationMode am, RoutingParameter p, SwitchPreferenceEx switchPreferenceEx) {
+	private void setupOtherBooleanParameterSummary(ApplicationMode am, RoutingParameter p, SwitchPreferenceEx switchPreferenceEx) {
 		if (USE_HEIGHT_OBSTACLES.equals(p.getId()) && !Algorithms.isEmpty(reliefFactorParameters)) {
 			String summaryOn = getString(R.string.shared_string_enabled);
 			for (RoutingParameter parameter : reliefFactorParameters) {
