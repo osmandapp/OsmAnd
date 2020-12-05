@@ -972,7 +972,7 @@
     <string name="download_using_mobile_internet">Brak połączenia z Wi-Fi. Użyć do pobierania obecnego połączenia z Internetem?</string>
     <string name="clear_destination">Usuń cel trasy</string>
     <string name="cancel_navigation">Zakończ nawigację</string>
-    <string name="cancel_route">Odrzucenie trasy</string>
+    <string name="cancel_route">Odrzucić trasę\?</string>
     <string name="install_paid">Pełna wersja</string>
     <string name="other_location">Inna</string>
     <string name="files_limit">Pozostało %1$d plików</string>
@@ -4005,4 +4005,6 @@
     <string name="cannot_upload_image">Nie można przesłać obrazu, spróbuj ponownie później</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Niemiecki (styl potoczny)</string>
+    <string name="gpx_upload_public_visibility_descr">\"Publiczny\" oznacza, że ślad jest pokazywany publicznie w śladach GPS i na publicznych listach śladów GPS oraz na publicznej liście śladów z surowymi znacznikami czasowymi. Dane obsługiwane przez API nie odnoszą się do strony śladów. Znaczniki czasu punktów śladowych nie są dostępne za pośrednictwem publicznego API GPS, a punkty śladowe nie są uporządkowane chronologicznie.</string>
+    <string name="app_mode_light_aircraft">Lekki samolot</string>
 </resources>
