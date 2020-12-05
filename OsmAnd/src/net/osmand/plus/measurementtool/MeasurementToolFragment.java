@@ -888,7 +888,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					app.getTargetPointsHelper().updateRouteAndRefresh(true);
 					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
 				} else {
-					mapActivity.getMapActions().stopNavigationActionConfirm(new Runnable() {
+					mapActivity.getMapActions().stopNavigationActionConfirm(null , new Runnable() {
 						@Override
 						public void run() {
 							MapActivity mapActivity = getMapActivity();

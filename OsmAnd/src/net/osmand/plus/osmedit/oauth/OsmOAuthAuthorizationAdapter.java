@@ -1,12 +1,19 @@
 package net.osmand.plus.osmedit.oauth;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.TrafficStats;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
 
 import com.github.scribejava.core.builder.api.DefaultApi10a;
 import com.github.scribejava.core.model.OAuth1AccessToken;
@@ -20,6 +27,7 @@ import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -79,8 +87,8 @@ public class OsmOAuthAuthorizationAdapter {
         }
     }
 
-    public void startOAuth(final ViewGroup rootLayout) {
-        new StartOAuthAsyncTask(rootLayout).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+    public void startOAuth(final ViewGroup rootLayout, boolean nightMode) {
+        new StartOAuthAsyncTask(rootLayout, nightMode).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
     }
 
     private void saveToken() {
@@ -89,11 +97,10 @@ public class OsmOAuthAuthorizationAdapter {
         app.getSettings().USER_ACCESS_TOKEN_SECRET.set(accessToken.getTokenSecret());
     }
 
-    private void loadWebView(ViewGroup root, String url) {
-        WebView webView = new WebView(root.getContext());
-        webView.requestFocus(View.FOCUS_DOWN);
-        webView.loadUrl(url);
-        root.addView(webView);
+    private void loadWebView(ViewGroup root, boolean nightMode, String url) {
+        Uri uri = Uri.parse(url);
+        Context context = root.getContext();
+        WikipediaDialogFragment.showFullArticle(context, uri, nightMode);
     }
 
     public void performGetRequest(String url, OAuthAsyncRequestCallback<Response> callback) {
@@ -117,9 +124,11 @@ public class OsmOAuthAuthorizationAdapter {
     private class StartOAuthAsyncTask extends AsyncTask<Void, Void, OAuth1RequestToken> {
 
         private final ViewGroup rootLayout;
+        boolean nightMode;
 
-        public StartOAuthAsyncTask(ViewGroup rootLayout) {
+        public StartOAuthAsyncTask(ViewGroup rootLayout, boolean nightMode) {
             this.rootLayout = rootLayout;
+            this.nightMode = nightMode;
         }
 
         @Override
@@ -129,7 +138,7 @@ public class OsmOAuthAuthorizationAdapter {
 
         @Override
         protected void onPostExecute(@NonNull OAuth1RequestToken requestToken) {
-            loadWebView(rootLayout, client.getService().getAuthorizationUrl(requestToken));
+            loadWebView(rootLayout, nightMode, client.getService().getAuthorizationUrl(requestToken));
         }
     }
 
