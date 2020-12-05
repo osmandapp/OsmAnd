@@ -41,6 +41,8 @@ public abstract class MeasurementModeCommand implements Command {
 		SNAP_TO_ROAD,
 		CHANGE_ROUTE_MODE,
 		APPROXIMATE_POINTS,
-		REVERSE_POINTS
+		REVERSE_POINTS,
+		SPLIT_POINTS,
+		JOIN_POINTS
 	}
 }
