@@ -3998,7 +3998,7 @@
 	<string name="poi_vehicle_delivery">Vehicle access: delivery</string>
 	<string name="poi_vehicle_forestry">Vehicle access: forestry</string>
 
-	<string name="poi_motorcar_yes">Motorcar access: </string>
+	<string name="poi_motorcar_yes">Motorcar access: yes</string>
 	<string name="poi_motorcar_private">Motorcar access: private</string>
 	<string name="poi_motorcar_no">Motorcar access: no</string>
 	<string name="poi_motorcar_destination">Motorcar access: destination</string>
