@@ -65,8 +65,6 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				R.layout.open_osm_note_text, null);
 		osmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		TextInputLayout textBox = osmNoteView.findViewById(R.id.name_text_box);
-		int highlightColorId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
-		textBox.setBoxBackgroundColorResource(highlightColorId);
 		textBox.setHint(AndroidUtils.addColon(app, R.string.osn_bug_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
 				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
@@ -114,11 +112,6 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		new HandleOsmNoteAsyncTask(osmBugsUtil, local, bug, point, noteText.getText().toString(), action,
 				handleBugListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		dismiss();
-	}
-
-	@Override
-	protected int getBgColorId() {
-		return nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, OsmBugsUtil osmBugsUtil, OsmBugsUtil local,

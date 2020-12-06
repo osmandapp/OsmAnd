@@ -1,7 +1,6 @@
 package net.osmand.plus.osmedit;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -22,19 +19,23 @@ import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
+import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.ProgressDialogPoiUploader;
+import net.osmand.plus.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.*;
 
 /**
  * Created by Denis
  * on 20.01.2015.
  */
 public class DashOsmEditsFragment extends DashBaseFragment
-		implements SendPoiDialogFragment.ProgressDialogPoiUploader {
+		implements ProgressDialogPoiUploader, OsmAuthorizationListener {
 	public static final String TAG = "DASH_OSM_EDITS_FRAGMENT";
 	public static final int TITLE_ID = R.string.osm_settings;
 
@@ -51,6 +52,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			new DashFragmentData(TAG, DashOsmEditsFragment.class, SHOULD_SHOW_FUNCTION, 130, ROW_NUMBER_TAG);
 
 	OsmEditingPlugin plugin;
+	private OsmPoint selectedPoint;
 
 	@Override
 	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,7 +73,6 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 		return view;
 	}
-
 
 	@Override
 	public void onOpenDash() {
@@ -114,10 +115,15 @@ public class DashOsmEditsFragment extends DashBaseFragment
 				@Override
 				public void onClick(View v) {
 					if (point.getGroup() == OsmPoint.Group.POI) {
-						SendPoiDialogFragment.createInstance(new OsmPoint[] {point}, PoiUploaderType.FRAGMENT)
-								.show(getChildFragmentManager(), "SendPoiDialogFragment");
+						selectedPoint = point;
+						if (getMyApplication().getOsmOAuthHelper().isLogged()) {
+							SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
+						} else {
+							LoginBottomSheetFragment.showInstance(getActivity().getSupportFragmentManager(),
+									DashOsmEditsFragment.this);
+						}
 					} else {
-						uploadItem(point);
+						SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
 					}
 				}
 			});
@@ -141,18 +147,9 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		}
 	}
 
-	// TODO: 9/7/15 Redesign osm notes.
-	private void uploadItem(final OsmPoint point) {
-		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
-		b.setMessage(getString(R.string.local_osm_changes_upload_all_confirm, 1));
-		b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				showProgressDialog(new OsmPoint[] {point}, false, false);
-			}
-		});
-		b.setNegativeButton(R.string.shared_string_cancel, null);
-		b.show();
+	@Override
+	public void authorizationCompleted() {
+		SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{selectedPoint});
 	}
 
 	@Override
@@ -215,5 +212,4 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			}
 		}
 	}
-
 }

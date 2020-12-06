@@ -328,7 +328,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					hasPointsBefore = true;
 					WptPt pt = segment.points.get(segment.points.size() - 1);
 					hasGapBefore = pt.isGap();
-					if (!pt.isGap() || !editingCtx.isInAddPointBeforeMode()) {
+					if (!pt.isGap() || (editingCtx.isInAddPointMode() && !editingCtx.isInAddPointBeforeMode())) {
 						float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 						float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 						tx.add(locX);
@@ -345,7 +345,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 						tx.add((float) tb.getCenterPixelX());
 						ty.add((float) tb.getCenterPixelY());
 					}
-					if (!hasGapBefore || editingCtx.isInAddPointBeforeMode()) {
+					if (!hasGapBefore || (editingCtx.isInAddPointMode() && editingCtx.isInAddPointBeforeMode())) {
 						WptPt pt = segment.points.get(0);
 						float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 						float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
