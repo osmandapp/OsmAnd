@@ -58,7 +58,7 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		View osmNoteView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
 				R.layout.open_osm_note_text, null);
-		osmNoteView.getViewTreeObserver().addOnScrollChangedListener(getOnGlobalLayoutListener());
+		osmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		TextInputLayout textBox = osmNoteView.findViewById(R.id.name_text_box);
 		textBox.setHint(AndroidUtils.addColon(app, R.string.osn_bug_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
@@ -75,10 +75,9 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
 	}
 
-	private ViewTreeObserver.OnScrollChangedListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnScrollChangedListener() {
-			@Override
-			public void onScrollChanged() {
+	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
+		return new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override public void onGlobalLayout() {
 				setShadowOnScrollableView();
 			}
 		};

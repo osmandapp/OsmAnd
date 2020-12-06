@@ -66,7 +66,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View sendGpxView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
-		sendGpxView.getViewTreeObserver().addOnScrollChangedListener(getOnGlobalLayoutListener());
+		sendGpxView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 
 		tagsField = sendGpxView.findViewById(R.id.tags_field);
 		messageField = sendGpxView.findViewById(R.id.message_field);
@@ -128,10 +128,10 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		items.add(titleItem);
 	}
 
-	private ViewTreeObserver.OnScrollChangedListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnScrollChangedListener() {
+	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
+		return new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
-			public void onScrollChanged() {
+			public void onGlobalLayout() {
 				scrollView = getView().findViewById(R.id.scroll_view);
 				if (scrollView.canScrollVertically(1) || scrollView.canScrollVertically(-1)) {
 					drawTopShadow(false);

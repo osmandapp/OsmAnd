@@ -78,7 +78,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 
 		final View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_osm_note_fragment, null);
-		sendOsmNoteView.getViewTreeObserver().addOnScrollChangedListener(getOnGlobalLayoutListener());
+		sendOsmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 
 		noteText = sendOsmNoteView.findViewById(R.id.note_text);
 		noteText.setText(((OsmNotesPoint) poi[0]).getText());
@@ -150,10 +150,9 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		items.add(bottomSheetItem);
 	}
 
-	private ViewTreeObserver.OnScrollChangedListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnScrollChangedListener() {
-			@Override
-			public void onScrollChanged() {
+	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
+		return new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override public void onGlobalLayout() {
 				setShadowOnScrollableView();
 			}
 		};
