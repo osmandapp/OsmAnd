@@ -934,7 +934,7 @@
     <string name="favourites_list_activity">Vybrať Obľúbený bod</string>
     <string name="local_openstreetmap_act_title">OSM úpravy</string>
     <string name="download_using_mobile_internet">Nie je pripojenie na Wi-Fi. Použiť aktuálne pripojenie na Internet pre sťahovanie?</string>
-    <string name="cancel_route">Zrušiť cestu</string>
+    <string name="cancel_route">Zrušiť cestu\?</string>
     <string name="cancel_navigation">Zastaviť navigáciu</string>
     <string name="clear_destination">Zmazať cieľ</string>
     <string name="other_location">Iné</string>
@@ -3997,4 +3997,10 @@
     <string name="select_picture">Zvoľte obrázok</string>
     <string name="lang_de_casual">Nemecky (Deutsch) úsporne</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="gpx_upload_public_visibility_descr">\"Identifikovateľná\" znamená, že trasa sa zobrazí verejne vo vašich GPS stopách, vo verejných zoznamoch GPS stôp a v zozname verejných trás s časovými pečiatkami v nespracovanej forme. Údaje poskytované cez rozhranie (API) nebudú odkazovať na vašu pôvodnú stránku s trasou. Časové pečiatky bodov trasy nebudú dostupné cez verejné GPS rozhranie (API) a body trasy nebudú v chronologickom poradí.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Súkromná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale body trasy z nej v budú dostupné v neusporiadanom poradí cez verejné GPS rozhranie (API) bez časových pečiatok.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identifikovateľná\" znamená, že trasa sa zobrazí verejne vo vašich GPS stopách a vo verejných zoznamoch GPS stôp, tzn. iní používatelia budú môcť stiahnuť nespracovanú trasu a prepojiť su s vašim používateľkým menom. Verejné body trasy s časovými pečiatkami poskytované cez GPS rozhranie (API) budú odkazovať na vašu pôvodnú stránku s trasou.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Sledovateľná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale spracované body trasy s časovými pečiatkami (ktoré nie je možné spojiť s vami), budú dostupné na stiahnutie cez verejné GPS rozhranie (API).</string>
+    <string name="elevation_data">Môžete použiť údaje nadmorskej výšky pre zohľadnenie výstupu / zostupu na vašom výlete</string>
+    <string name="app_mode_light_aircraft">Ľahké lietadlo</string>
 </resources>
