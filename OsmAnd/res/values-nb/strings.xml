@@ -2159,7 +2159,7 @@
     <string name="audionotes_plugin_description">Lag audio/foto/video-notater på en tur, enten ved bruk av en knapp på kartet eller posisjon-kontekstmeny.</string>
     <string name="average">Gjennomsnitt</string>
     <string name="of">%1$d av %2$d</string>
-    <string name="ascent_descent">Stigning/fall</string>
+    <string name="ascent_descent">Stigning/nedstigning</string>
     <string name="moving_time">Tid i bevegelse</string>
     <string name="max_min">Maks./min.</string>
     <string name="min_max">Min./maks.</string>
@@ -3856,7 +3856,7 @@
     <string name="delete_all_actions_message_q">Er du sikker på at du vil slette %d hurtighandlinger for godt\?</string>
     <string name="screen_timeout">Skjermtidsavbrudd</string>
     <string name="default_screen_timeout">Forvalgt skjermtidsavbrudd</string>
-    <string name="street_level_imagery">Gatenivåbildedata</string>
+    <string name="street_level_imagery">Bilder på gatenivå</string>
     <string name="plan_route_trim_before">Beskjær før</string>
     <string name="plan_route_trim_after">Beskjær før</string>
     <string name="development">Utvikling</string>
@@ -3924,4 +3924,10 @@
     <string name="add_to_mapillary">Legg til i Mapillary</string>
     <string name="add_to_opr">Legg til i OpenPlaceReviews</string>
     <string name="use_dev_url">Bruk dev.openstreetmap.org</string>
+    <string name="add_photos_descr">OsmAnd viser bilder fra flere kilder:
+\nOpenPlaceReviews - interessepunktbilder;
+\nMapillary - bilder på gatenivå;
+\nWeb / Wikimedia - interessepunktbilder spesifisert i OpenStreetMap-data.</string>
+    <string name="elevation_data">Du kan bruke høydedata for å ta i betraktning stigning/nedstigning på turen din</string>
+    <string name="app_mode_light_aircraft">Småfly</string>
 </resources>
