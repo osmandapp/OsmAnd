@@ -55,6 +55,7 @@ import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
+import net.osmand.plus.settings.backend.backup.GpxSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
@@ -316,9 +317,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		} else if (object instanceof File) {
 			File file = (File) object;
 			setupBottomSheetItemForFile(builder, file, file.lastModified(), file.length(), null);
+		} else if (object instanceof GpxSettingsItem) {
+			GpxSettingsItem item = (GpxSettingsItem) object;
+			setupBottomSheetItemForFile(builder, item.getFile(), item.getLastModified(), item.getSize(), item.getAppearanceInfo());
 		} else if (object instanceof FileSettingsItem) {
 			FileSettingsItem item = (FileSettingsItem) object;
-			setupBottomSheetItemForFile(builder, item.getFile(), item.getLastModified(), item.getSize(), item.getAppearanceInfo());
+			setupBottomSheetItemForFile(builder, item.getFile(), item.getLastModified(), item.getSize(), null);
 		} else if (object instanceof AvoidRoadInfo) {
 			AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) object;
 			builder.setTitle(avoidRoadInfo.name);

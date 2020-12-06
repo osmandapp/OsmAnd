@@ -111,7 +111,7 @@ public class GpxAppearanceInfo {
 				json.putOpt(name, value);
 			}
 		} else if (value instanceof Double) {
-			if ((Double) value != 0.0) {
+			if ((Double) value != 0.0 && !Double.isNaN((Double) value)) {
 				json.putOpt(name, value);
 			}
 		} else if (value instanceof String) {

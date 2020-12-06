@@ -5,12 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxDbHelper;
-import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.GpxSplitType;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -139,8 +135,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 	private long size;
 	private long lastModified;
 
-	private GpxAppearanceInfo appearanceInfo;
-
 	public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
 		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
 		this.file = file;
@@ -151,9 +145,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 		if (subtype == FileSubtype.UNKNOWN || subtype == null) {
 			throw new IllegalArgumentException("Unknown file subtype: " + fileName);
-		}
-		if (FileSubtype.GPX == subtype) {
-			createGpxAppearanceInfo();
 		}
 	}
 
@@ -211,9 +202,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 				name = Algorithms.getFileWithoutDirs(fileName);
 			}
 		}
-		if (FileSubtype.GPX == subtype) {
-			appearanceInfo = GpxAppearanceInfo.fromJson(json);
-		}
 	}
 
 	@Override
@@ -221,9 +209,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 		super.writeToJson(json);
 		if (subtype != null) {
 			json.put("subtype", subtype.getSubtypeName());
-		}
-		if (FileSubtype.GPX == subtype && appearanceInfo != null) {
-			appearanceInfo.toJson(json);
 		}
 	}
 
@@ -258,11 +243,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 		return subtype;
 	}
 
-	@Nullable
-	public GpxAppearanceInfo getAppearanceInfo() {
-		return appearanceInfo;
-	}
-
 	@Override
 	public boolean exists() {
 		return file.exists();
@@ -291,54 +271,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 			if (!newFile.exists()) {
 				return newFile;
 			}
-		}
-	}
-
-	@Override
-	public void applyAdditionalParams() {
-		if (appearanceInfo != null) {
-			GpxDataItem dataItem = app.getGpxDbHelper().getItem(savedFile, new GpxDataItemCallback() {
-				@Override
-				public boolean isCancelled() {
-					return false;
-				}
-
-				@Override
-				public void onGpxDataItemReady(GpxDataItem item) {
-					updateGpxParams(item);
-				}
-			});
-			if (dataItem != null) {
-				updateGpxParams(dataItem);
-			}
-		}
-	}
-
-	private void updateGpxParams(@NonNull GpxDataItem dataItem) {
-		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType);
-		gpxDbHelper.updateColor(dataItem, appearanceInfo.color);
-		gpxDbHelper.updateWidth(dataItem, appearanceInfo.width);
-		gpxDbHelper.updateShowArrows(dataItem, appearanceInfo.showArrows);
-		gpxDbHelper.updateShowStartFinish(dataItem, appearanceInfo.showStartFinish);
-		gpxDbHelper.updateSplit(dataItem, splitType, appearanceInfo.splitInterval);
-		gpxDbHelper.updateGradientScaleType(dataItem, appearanceInfo.scaleType);
-	}
-
-	private void createGpxAppearanceInfo() {
-		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, new GpxDataItemCallback() {
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-
-			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
-				appearanceInfo = new GpxAppearanceInfo(item);
-			}
-		});
-		if (dataItem != null) {
-			appearanceInfo = new GpxAppearanceInfo(dataItem);
 		}
 	}
 

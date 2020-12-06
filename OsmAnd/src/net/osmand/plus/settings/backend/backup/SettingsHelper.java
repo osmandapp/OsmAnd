@@ -482,7 +482,7 @@ public class SettingsHelper {
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(Map<ExportSettingsType, List<?>> allSettingsMap,
-	                                                      List<ExportSettingsType> settingsTypes) {
+													   List<ExportSettingsType> settingsTypes) {
 		List<SettingsItem> settingsItems = new ArrayList<>();
 		for (ExportSettingsType settingsType : settingsTypes) {
 			List<?> settingsDataObjects = allSettingsMap.get(settingsType);
@@ -710,7 +710,12 @@ public class SettingsHelper {
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
 				try {
-					settingsItems.add(new FileSettingsItem(app, (File) object));
+					File file = (File) object;
+					if (file.getName().endsWith(IndexConstants.GPX_FILE_EXT)) {
+						settingsItems.add(new GpxSettingsItem(app, file));
+					} else {
+						settingsItems.add(new FileSettingsItem(app, file));
+					}
 				} catch (IllegalArgumentException e) {
 					LOG.warn("Trying to export unsuported file type", e);
 				}
@@ -923,6 +928,9 @@ public class SettingsHelper {
 				case SEARCH_HISTORY:
 					SearchHistorySettingsItem searchHistorySettingsItem = (SearchHistorySettingsItem) item;
 					historyEntries.addAll(searchHistorySettingsItem.getItems());
+					break;
+				case GPX:
+					tracksFilesList.add((GpxSettingsItem) item);
 					break;
 				default:
 					break;

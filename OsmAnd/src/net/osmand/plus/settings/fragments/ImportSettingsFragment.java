@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -43,6 +44,7 @@ import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.HistoryMarkersSettingsItem;
 import net.osmand.plus.settings.backend.backup.MapSourcesSettingsItem;
 import net.osmand.plus.settings.backend.backup.MarkersSettingsItem;
@@ -349,7 +351,12 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 			} else if (object instanceof TileSourceTemplate || object instanceof SQLiteTileSource) {
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
-				settingsItems.add(new FileSettingsItem(app, (File) object));
+				File file = (File) object;
+				if (file.getName().endsWith(IndexConstants.GPX_FILE_EXT)) {
+					settingsItems.add(new GpxSettingsItem(app, file));
+				} else {
+					settingsItems.add(new FileSettingsItem(app, file));
+				}
 			} else if (object instanceof FileSettingsItem) {
 				settingsItems.add((FileSettingsItem) object);
 			} else if (object instanceof AvoidRoadInfo) {
