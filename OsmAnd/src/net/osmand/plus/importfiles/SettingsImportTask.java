@@ -17,10 +17,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.PluginSettingsItem;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsCollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
@@ -42,19 +42,21 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	private String name;
 	private List<ExportSettingsType> settingsTypes;
 	private boolean replace;
+	private boolean silentImport;
 	private String latestChanges;
 	private int version;
 	private CallbackWithObject<List<SettingsItem>> callback;
 
 	public SettingsImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
-	                          @NonNull String name, List<ExportSettingsType> settingsTypes,
-	                          boolean replace, String latestChanges, int version,
-	                          CallbackWithObject<List<SettingsItem>> callback) {
+							  @NonNull String name, List<ExportSettingsType> settingsTypes,
+							  boolean replace, boolean silentImport, String latestChanges, int version,
+							  CallbackWithObject<List<SettingsItem>> callback) {
 		super(activity);
 		this.uri = uri;
 		this.name = name;
 		this.settingsTypes = settingsTypes;
 		this.replace = replace;
+		this.silentImport = silentImport;
 		this.latestChanges = latestChanges;
 		this.version = version;
 		this.callback = callback;
@@ -93,7 +95,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 						if (!pluginIndependentItems.isEmpty()) {
 							if (settingsTypes == null) {
 								FragmentActivity activity = activityRef.get();
-								if (activity != null) {
+								if (!silentImport && activity != null) {
 									FragmentManager fragmentManager = activity.getSupportFragmentManager();
 									ImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
 								}
@@ -141,7 +143,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 						((MapActivity) activity).getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 						((MapActivity) activity).updateApplicationModeSettings();
 					}
-					if (file != null && activity != null) {
+					if (!silentImport && file != null && activity != null) {
 						FragmentManager fm = activity.getSupportFragmentManager();
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}
@@ -188,11 +190,14 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				if (!Algorithms.isEmpty(plugin.getRouterNames())) {
 					loadRoutingFiles(app, null);
 				}
-				if (activity != null) {
+				if (!silentImport && activity != null) {
 					plugin.onInstall(app, activity);
 				}
 				String pluginId = pluginItem.getPluginId();
-				File pluginDir = new File(app.getAppPath(null), IndexConstants.PLUGINS_DIR + pluginId);
+				File pluginDir = app.getAppPath(IndexConstants.PLUGINS_DIR + pluginId);
+				if (!pluginDir.exists()) {
+					pluginDir.mkdirs();
+				}
 				app.getSettingsHelper().exportSettings(pluginDir, "items", null, items, false);
 			}
 		};

@@ -22,9 +22,9 @@ import net.osmand.aidlapi.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.RemoveContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.UpdateContextMenuButtonsParams;
 import net.osmand.aidlapi.copyfile.CopyFileParams;
-import net.osmand.aidlapi.customization.MapMarginsParams;
-import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.customization.CustomPluginParams;
 import net.osmand.aidlapi.customization.CustomizationInfoParams;
+import net.osmand.aidlapi.customization.MapMarginsParams;
 import net.osmand.aidlapi.customization.OsmandSettingsInfoParams;
 import net.osmand.aidlapi.customization.OsmandSettingsParams;
 import net.osmand.aidlapi.customization.ProfileSettingsParams;
@@ -48,6 +48,7 @@ import net.osmand.aidlapi.gpx.RemoveGpxParams;
 import net.osmand.aidlapi.gpx.ShowGpxParams;
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams;
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams;
+import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.lock.SetLockStateParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.SetMapLocationParams;
@@ -1122,6 +1123,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				return UNKNOWN_API_ERROR;
 			}
 		}
+
 		@Override
 		public long registerForKeyEvents(AKeyEventsParams params, final IOsmAndAidlCallback callback) {
 			try {
@@ -1355,6 +1357,20 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				handleException(e);
 				return false;
 			}
+		}
+
+		@Override
+		public int getPluginVersion(CustomPluginParams params) {
+			try {
+				OsmandAidlApi api = getApi("getPluginVersion");
+				if (api != null) {
+					return api.getPluginVersion(params.getPluginId());
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
+			return CANNOT_ACCESS_API_ERROR;
 		}
 	};
 
