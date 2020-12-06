@@ -93,6 +93,7 @@
 								android:paddingRight="@dimen/content_padding_small"
 								android:scrollHorizontally="false"
 								android:textSize="@dimen/default_list_text_size"
+								android:imeOptions="actionDone"
 								tools:text="@string/lorem_ipsum" />
 
 						</com.google.android.material.textfield.TextInputLayout>
@@ -143,6 +144,7 @@
 							android:paddingEnd="@dimen/content_padding_small"
 							android:paddingRight="@dimen/content_padding_small"
 							android:textSize="@dimen/default_list_text_size"
+							android:imeOptions="actionDone"
 							tools:text="@string/lorem_ipsum" />
 
 					</com.google.android.material.textfield.TextInputLayout>
@@ -253,6 +255,7 @@
 					android:text="@string/add_description"
 					android:textSize="@dimen/default_desc_text_size"
 					osmand:typeface="@string/font_roboto_medium"
+					android:imeOptions="actionDone"
 					tools:text="@string/add_description" />
 
 				<View

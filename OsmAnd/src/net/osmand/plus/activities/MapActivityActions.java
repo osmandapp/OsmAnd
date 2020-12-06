@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -39,8 +40,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.ContextMenuItem.ItemBuilder;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -56,11 +55,14 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.RoutingProfileDataObject;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
@@ -75,7 +77,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
-import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.router.GeneralRouter;
@@ -1122,26 +1123,12 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 
-	public AlertDialog stopNavigationActionConfirm() {
-		return stopNavigationActionConfirm(null);
+	public void stopNavigationActionConfirm(@Nullable OnDismissListener listener) {
+		stopNavigationActionConfirm(listener, null);
 	}
 
-	public AlertDialog stopNavigationActionConfirm(final Runnable onStopAction) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-		// Stop the navigation
-		builder.setTitle(getString(R.string.cancel_route));
-		builder.setMessage(getString(R.string.stop_routing_confirm));
-		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				stopNavigationWithoutConfirm();
-				if (onStopAction != null) {
-					onStopAction.run();
-				}
-			}
-		});
-		builder.setNegativeButton(R.string.shared_string_no, null);
-		return builder.show();
+	public void stopNavigationActionConfirm(@Nullable OnDismissListener listener, @Nullable Runnable onStopAction) {
+		DismissRouteBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(), listener, onStopAction);
 	}
 
 	public void whereAmIDialog() {

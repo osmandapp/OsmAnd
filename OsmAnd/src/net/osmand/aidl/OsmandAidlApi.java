@@ -19,7 +19,6 @@ import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -51,12 +50,11 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
@@ -68,6 +66,8 @@ import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.quickaction.QuickAction;
@@ -79,11 +79,11 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -126,6 +126,7 @@ import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
 import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
 import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
 import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
@@ -141,6 +142,7 @@ import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DISTANCE;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_IMMINENT;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
 public class OsmandAidlApi {
 
@@ -598,8 +600,7 @@ public class OsmandAidlApi {
 					final RoutingHelper routingHelper = app.getRoutingHelper();
 					boolean force = intent.getBooleanExtra(AIDL_FORCE, true);
 					if (routingHelper.isFollowingMode() && !force) {
-						AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
-						dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+						mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
 
 							@Override
 							public void onDismiss(DialogInterface dialog) {
@@ -665,8 +666,7 @@ public class OsmandAidlApi {
 						final RoutingHelper routingHelper = app.getRoutingHelper();
 						boolean force = intent.getBooleanExtra(AIDL_FORCE, true);
 						if (routingHelper.isFollowingMode() && !force) {
-							AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
-							dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+							mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
 
 								@Override
 								public void onDismiss(DialogInterface dialog) {
@@ -2236,11 +2236,12 @@ public class OsmandAidlApi {
 	}
 
 	public boolean importProfileV2(final Uri profileUri, ArrayList<String> settingsTypeKeys, boolean replace,
-	                               String latestChanges, int version) {
+								   String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
 			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, settingsTypeKeys);
 			bundle.putBoolean(REPLACE_KEY, replace);
+			bundle.putBoolean(SILENT_IMPORT_KEY, true);
 			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
 			bundle.putInt(SettingsHelper.SETTINGS_VERSION_KEY, version);
 
@@ -2325,6 +2326,15 @@ public class OsmandAidlApi {
 
 	public boolean isMenuOpen() {
 		return mapActivity.getContextMenu().isVisible();
+	}
+
+	public int getPluginVersion(String pluginName) {
+		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginName);
+		if (plugin instanceof CustomOsmandPlugin) {
+			CustomOsmandPlugin customPlugin = (CustomOsmandPlugin) plugin;
+			return customPlugin.getVersion();
+		}
+		return CANNOT_ACCESS_API_ERROR;
 	}
 
 	private static class FileCopyInfo {

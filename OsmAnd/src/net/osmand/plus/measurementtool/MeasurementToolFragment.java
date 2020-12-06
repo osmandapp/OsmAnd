@@ -64,10 +64,12 @@ import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand;
 import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand.ChangeRouteType;
 import net.osmand.plus.measurementtool.command.ClearPointsCommand;
+import net.osmand.plus.measurementtool.command.JoinPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.measurementtool.command.ReversePointsCommand;
+import net.osmand.plus.measurementtool.command.SplitPointsCommand;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -76,8 +78,8 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.widgets.MultiStateToggleButton;
-import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
 import net.osmand.plus.widgets.MultiStateToggleButton.OnRadioItemClickListener;
+import net.osmand.plus.widgets.MultiStateToggleButton.RadioItem;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.Algorithms;
 
@@ -368,9 +370,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			@Override
 			public void onClick(View view) {
 				boolean trackSnappedToRoad = !editingCtx.isApproximationNeeded();
+				boolean addNewSegmentAllowed = editingCtx.isAddNewSegmentAllowed();
 				OptionsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						MeasurementToolFragment.this,
-						trackSnappedToRoad,
+						trackSnappedToRoad, addNewSegmentAllowed,
 						editingCtx.getAppMode().getStringKey()
 				);
 			}
@@ -830,6 +833,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
+	public void addNewSegmentOnClick() {
+		onSplitPointsAfter();
+	}
+
+	@Override
 	public void directionsOnClick() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -886,7 +894,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					app.getTargetPointsHelper().updateRouteAndRefresh(true);
 					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
 				} else {
-					mapActivity.getMapActions().stopNavigationActionConfirm(new Runnable() {
+					mapActivity.getMapActions().stopNavigationActionConfirm(null , new Runnable() {
 						@Override
 						public void run() {
 							MapActivity mapActivity = getMapActivity();
@@ -1010,6 +1018,39 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onTrimRouteAfter() {
 		trimRoute(AFTER);
+	}
+
+	@Override
+	public void onSplitPointsAfter() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		editingCtx.getCommandManager().execute(new SplitPointsCommand(measurementLayer, true));
+		collapseInfoViewIfExpanded();
+		editingCtx.setSelectedPointPosition(-1);
+		updateUndoRedoButton(false, redoBtn);
+		updateUndoRedoButton(true, undoBtn);
+		updateDistancePointsText();
+	}
+
+	@Override
+	public void onSplitPointsBefore() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		editingCtx.getCommandManager().execute(new SplitPointsCommand(measurementLayer, false));
+		collapseInfoViewIfExpanded();
+		editingCtx.setSelectedPointPosition(-1);
+		updateUndoRedoButton(false, redoBtn);
+		updateUndoRedoButton(true, undoBtn);
+		updateDistancePointsText();
+	}
+
+	@Override
+	public void onJoinPoints() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		editingCtx.getCommandManager().execute(new JoinPointsCommand(measurementLayer));
+		collapseInfoViewIfExpanded();
+		editingCtx.setSelectedPointPosition(-1);
+		updateUndoRedoButton(false, redoBtn);
+		updateUndoRedoButton(true, undoBtn);
+		updateDistancePointsText();
 	}
 
 	private void trimRoute(ClearCommandMode before) {

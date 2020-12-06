@@ -1,5 +1,7 @@
 package net.osmand.plus.osmedit;
 
+import net.osmand.data.LatLon;
+
 public class OsmNotesPoint extends OsmPoint {
 	private static final long serialVersionUID = 729654300829771468L;
 
@@ -67,5 +69,30 @@ public class OsmNotesPoint extends OsmPoint {
 			.append(" (").append(this.getId()).append("): [")
 			.append(" (").append(this.getLatitude()).append(", ").append(this.getLongitude())
 			.append(")]").toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OsmNotesPoint)) return false;
+		OsmNotesPoint that = (OsmNotesPoint) o;
+		LatLon thisPos = new LatLon(latitude, longitude);
+		LatLon thatPos = new LatLon(that.latitude, that.longitude);
+		boolean res = thisPos.equals(thatPos);
+		res = res || text != null && text.equals(that.text);
+		return res;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 0;
+		int temp;
+		temp = (int) Math.floor(latitude * 10000);
+		result = prime * result + temp;
+		temp = (int) Math.floor(longitude * 10000);
+		result = prime * result + temp;
+		result = prime * result + (text != null ? text.hashCode() : 0);
+		return result;
 	}
 }

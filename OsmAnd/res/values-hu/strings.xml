@@ -3992,4 +3992,6 @@
     <string name="select_picture">Kép kijelölése</string>
     <string name="lang_de_casual">német (tegeződő)</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="elevation_data">A magassági adatokat az utazás során előforduló emelkedés/lejtés megfontolásához használhatja</string>
+    <string name="app_mode_light_aircraft">Könnyű légi jármű</string>
 </resources>

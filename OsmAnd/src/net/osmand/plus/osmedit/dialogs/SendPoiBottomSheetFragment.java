@@ -34,14 +34,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.OPENSTREETMAP_POINT;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
 
 public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
     public static final String TAG = SendPoiBottomSheetFragment.class.getSimpleName();
     private static final Log LOG = PlatformUtil.getLog(SendPoiBottomSheetFragment.class);
+    public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
     private OsmPoint[] poi;
 
     private SwitchCompat closeChangeSet;

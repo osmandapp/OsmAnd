@@ -380,6 +380,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				iconId = R.drawable.ic_action_photo_dark;
 			}
 			builder.setIcon(uiUtilities.getIcon(iconId, activeColorRes));
+			builder.setDescription(AndroidUtils.formatSize(app, size));
 		} else if (fileSubtype.isMap()
 				|| fileSubtype == FileSettingsItem.FileSubtype.TTS_VOICE
 				|| fileSubtype == FileSettingsItem.FileSubtype.VOICE) {
@@ -390,7 +391,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				String mapDescription = getMapDescription(file);
 				String formattedSize = AndroidUtils.formatSize(app, file.length());
 				if (mapDescription != null) {
-					builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_star, mapDescription, formattedSize));
+					builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_bold_point, mapDescription, formattedSize));
 				} else {
 					builder.setDescription(formattedSize);
 				}

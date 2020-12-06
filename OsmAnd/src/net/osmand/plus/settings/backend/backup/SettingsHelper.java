@@ -95,6 +95,7 @@ public class SettingsHelper {
 
 	public static final String SETTINGS_TYPE_LIST_KEY = "settings_type_list_key";
 	public static final String REPLACE_KEY = "replace";
+	public static final String SILENT_IMPORT_KEY = "silent_import";
 	public static final String SETTINGS_LATEST_CHANGES_KEY = "settings_latest_changes";
 	public static final String SETTINGS_VERSION_KEY = "settings_version";
 

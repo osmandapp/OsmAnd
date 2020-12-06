@@ -315,7 +315,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			int[] turnLanes = TurnType.lanesFromString(bundle.getString("turnLanes", null));
 			turnType.setLanes(turnLanes);
 		}
-		object.id = bundle.getLong("id", object.id);
+		object.id = bundle.getLong("id", object.id) << 6;
 		object.types = bundle.getIntArray("types", null);
 		object.pointTypes = bundle.getIntIntArray("pointTypes", null);
 		object.nameIds = bundle.getIntArray("names", null);

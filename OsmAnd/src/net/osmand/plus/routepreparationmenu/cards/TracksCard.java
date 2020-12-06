@@ -62,10 +62,12 @@ public class TracksCard extends BaseCard {
 	@SuppressLint("DefaultLocale")
 	@Override
 	protected void updateContent() {
+		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
 		final List<GpxItem> list = new ArrayList<>();
 		for (GPXFile gpx : gpxFiles) {
 			File f = new File(gpx.path);
-			list.add(new GpxItem(GpxUiHelper.getGpxTitle(f.getName()), gpx, new GPXInfo(f.getName(), f.lastModified(), f.length())));
+			String fileName = gpx.path.startsWith(gpxDir) ? gpx.path.substring(gpxDir.length() + 1) : f.getName();
+			list.add(new GpxItem(GpxUiHelper.getGpxTitle(f.getName()), gpx, new GPXInfo(fileName, f.lastModified(), f.length())));
 		}
 		Collections.sort(list, new Comparator<GpxItem>() {
 			@Override

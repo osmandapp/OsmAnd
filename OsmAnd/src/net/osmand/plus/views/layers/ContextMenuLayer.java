@@ -703,9 +703,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			RenderingContext rc = maps.getVisibleRenderingContext();
 			RenderedObject[] renderedObjects = null;
 			if (rc != null && rc.zoom == tileBox.getZoom()) {
+				double sinRotate = Math.sin(Math.toRadians(rc.rotate - tileBox.getRotate()));
+				double cosRotate = Math.cos(Math.toRadians(rc.rotate - tileBox.getRotate()));
 				float x = tileBox.getPixXFrom31((int) (rc.leftX * rc.tileDivisor), (int) (rc.topY * rc.tileDivisor));
 				float y = tileBox.getPixYFrom31((int) (rc.leftX * rc.tileDivisor), (int) (rc.topY * rc.tileDivisor));
-				renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, (int) (point.x - x), (int) (point.y - y));
+				float dx = point.x - x;
+				float dy = point.y - y;
+				int coordX = (int) (dx * cosRotate - dy * sinRotate);
+				int coordY = (int) (dy * cosRotate + dx * sinRotate);
+
+				renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, coordX, coordY);
 			}
 			if (renderedObjects != null) {
 				int TILE_SIZE = 256;

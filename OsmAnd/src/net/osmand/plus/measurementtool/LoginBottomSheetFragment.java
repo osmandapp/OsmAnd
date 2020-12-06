@@ -94,7 +94,7 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment impl
 			if (!(getActivity() instanceof MapActivity) && fragment instanceof OsmAuthorizationListener) {
 				osmOAuthHelper.addListener((OsmAuthorizationListener) fragment);
 			}
-			osmOAuthHelper.startOAuth((ViewGroup) view);
+			osmOAuthHelper.startOAuth((ViewGroup) view, nightMode);
 		}
 	}
 

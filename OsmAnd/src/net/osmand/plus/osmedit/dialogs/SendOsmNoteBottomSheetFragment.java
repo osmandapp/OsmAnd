@@ -28,6 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.osmedit.DashOsmEditsFragment;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
@@ -42,9 +43,7 @@ import static net.osmand.plus.UiUtilities.setupDialogButton;
 import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
 import static net.osmand.plus.osmedit.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import static net.osmand.plus.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.OPENSTREETMAP_POINT;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
-import static net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.SimpleProgressDialogPoiUploader;
+import static net.osmand.plus.osmedit.dialogs.SendPoiBottomSheetFragment.OPENSTREETMAP_POINT;
 
 public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragment implements ValidateOsmLoginListener,
 		OsmAuthorizationListener {
@@ -59,6 +58,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	private LinearLayout signInView;
 	private SwitchCompat uploadAnonymously;
 	private OsmandApplication app;
+	private EditText noteText;
 
 	private boolean isLoginOAuth() {
 		return !Algorithms.isEmpty(settings.USER_DISPLAY_NAME.get());
@@ -78,7 +78,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		final View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_osm_note_fragment, null);
 
-		EditText noteText = sendOsmNoteView.findViewById(R.id.note_text);
+		noteText = sendOsmNoteView.findViewById(R.id.note_text);
 		noteText.setText(((OsmNotesPoint) poi[0]).getText());
 		noteText.setSelection(noteText.getText().length());
 		TextInputLayout noteHint = sendOsmNoteView.findViewById(R.id.note_hint);
@@ -98,7 +98,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 				if (fragment instanceof OsmAuthorizationListener) {
 					app.getOsmOAuthHelper().addListener((OsmAuthorizationListener) fragment);
 				}
-				app.getOsmOAuthHelper().startOAuth((ViewGroup) v);
+				app.getOsmOAuthHelper().startOAuth((ViewGroup) getView(), nightMode);
 			}
 		});
 		View loginButton = sendOsmNoteView.findViewById(R.id.login_button);
@@ -196,11 +196,16 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		ProgressDialogPoiUploader progressDialogPoiUploader = null;
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
-			progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
+			if (getParentFragment() instanceof DashOsmEditsFragment) {
+				progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
+			} else {
+				progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
+			}
 		} else if (getParentFragment() instanceof ProgressDialogPoiUploader) {
 			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
 		}
 		if (progressDialogPoiUploader != null) {
+			((OsmNotesPoint) poi[0]).setText(noteText.getText().toString());
 			progressDialogPoiUploader.showProgressDialog(poi, false, uploadAnonymously.isChecked());
 		}
 		dismiss();
