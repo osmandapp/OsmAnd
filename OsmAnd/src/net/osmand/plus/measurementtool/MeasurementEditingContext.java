@@ -296,6 +296,10 @@ public class MeasurementEditingContext {
 		return !newData && hasDefaultPointsOnly && getPoints().size() > 2;
 	}
 
+	public boolean isAddNewSegmentAllowed() {
+		return beforeSegments.size() > 0 && beforeSegments.get(beforeSegments.size() - 1).points.size() >= 2;
+	}
+
 	public void clearSnappedToRoadPoints() {
 		roadSegmentData.clear();
 	}
@@ -523,15 +527,17 @@ public class MeasurementEditingContext {
 
 	public void splitPoints(int selectedPointPosition, boolean after) {
 		int pointIndex = after ? selectedPointPosition : selectedPointPosition - 1;
-		if (pointIndex >= 0 && pointIndex + 1 < before.points.size()) {
+		if (pointIndex >= 0 && pointIndex < before.points.size()) {
 			WptPt point = before.points.get(pointIndex);
-			WptPt nextPoint = before.points.get(pointIndex + 1);
+			WptPt nextPoint = before.points.size() > pointIndex + 1 ? before.points.get(pointIndex + 1) : null;
 			WptPt newPoint = new WptPt(point);
 			newPoint.copyExtensions(point);
 			newPoint.setGap();
 			before.points.remove(pointIndex);
 			before.points.add(pointIndex, newPoint);
-			roadSegmentData.remove(new Pair<>(point, nextPoint));
+			if (newPoint != null) {
+				roadSegmentData.remove(new Pair<>(point, nextPoint));
+			}
 			updateSegmentsForSnap(false);
 		}
 	}

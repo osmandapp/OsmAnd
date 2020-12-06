@@ -2,6 +2,8 @@ package net.osmand.plus.measurementtool.command;
 
 import android.util.Pair;
 
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.RoadSegmentData;
@@ -21,11 +23,16 @@ public class SplitPointsCommand extends MeasurementModeCommand {
 	public SplitPointsCommand(MeasurementToolLayer measurementLayer, boolean after) {
 		super(measurementLayer);
 		this.after = after;
+		MeasurementEditingContext editingCtx = getEditingCtx();
+		this.pointPosition = editingCtx.getSelectedPointPosition();
+		if (this.pointPosition == -1) {
+			this.after = true;
+			this.pointPosition = editingCtx.getPoints().size() - 1;
+		}
 	}
 
 	@Override
 	public boolean execute() {
-		pointPosition = getEditingCtx().getSelectedPointPosition();
 		executeCommand();
 		return true;
 	}

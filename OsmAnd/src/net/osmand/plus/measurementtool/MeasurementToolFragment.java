@@ -370,9 +370,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			@Override
 			public void onClick(View view) {
 				boolean trackSnappedToRoad = !editingCtx.isApproximationNeeded();
+				boolean addNewSegmentAllowed = editingCtx.isAddNewSegmentAllowed();
 				OptionsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						MeasurementToolFragment.this,
-						trackSnappedToRoad,
+						trackSnappedToRoad, addNewSegmentAllowed,
 						editingCtx.getAppMode().getStringKey()
 				);
 			}
@@ -829,6 +830,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void snapToRoadOnCLick() {
 		startSnapToRoad(true);
+	}
+
+	@Override
+	public void addNewSegmentOnClick() {
+		onSplitPointsAfter();
 	}
 
 	@Override
