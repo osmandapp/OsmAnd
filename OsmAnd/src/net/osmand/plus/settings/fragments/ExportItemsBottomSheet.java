@@ -315,14 +315,13 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			builder.setTitle(tileSource.getName());
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_map, activeColorRes));
 		} else if (object instanceof File) {
-			File file = (File) object;
-			setupBottomSheetItemForFile(builder, file, file.lastModified(), file.length(), null);
+			setupBottomSheetItemForFile(builder, (File) object);
 		} else if (object instanceof GpxSettingsItem) {
 			GpxSettingsItem item = (GpxSettingsItem) object;
-			setupBottomSheetItemForFile(builder, item.getFile(), item.getLastModified(), item.getSize(), item.getAppearanceInfo());
+			setupBottomSheetItemForGpx(builder, item.getFile(), item.getAppearanceInfo());
 		} else if (object instanceof FileSettingsItem) {
 			FileSettingsItem item = (FileSettingsItem) object;
-			setupBottomSheetItemForFile(builder, item.getFile(), item.getLastModified(), item.getSize(), null);
+			setupBottomSheetItemForFile(builder, item.getFile());
 		} else if (object instanceof AvoidRoadInfo) {
 			AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) object;
 			builder.setTitle(avoidRoadInfo.name);
@@ -366,8 +365,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private void setupBottomSheetItemForFile(Builder builder, File file, long lastModified, long size,
-											 GpxAppearanceInfo appearanceInfo) {
+	private void setupBottomSheetItemForFile(Builder builder, File file) {
 		FileSubtype fileSubtype = FileSubtype.getSubtypeByPath(app, file.getPath());
 		builder.setTitle(file.getName());
 		if (file.getAbsolutePath().contains(IndexConstants.RENDERERS_DIR)) {
@@ -375,9 +373,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 		} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
-			builder.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
-			builder.setDescription(getTrackDescr(file, lastModified, size, appearanceInfo));
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+			setupBottomSheetItemForGpx(builder, file, null);
 		} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
 			int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
 			if (iconId == -1) {
@@ -392,7 +388,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 
 			if (fileSubtype.isMap()) {
 				String mapDescription = getMapDescription(file);
-				String formattedSize = AndroidUtils.formatSize(app, size);
+				String formattedSize = AndroidUtils.formatSize(app, file.length());
 				if (mapDescription != null) {
 					builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_star, mapDescription, formattedSize));
 				} else {
@@ -400,6 +396,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				}
 			}
 		}
+	}
+
+	private void setupBottomSheetItemForGpx(Builder builder, File file, @Nullable GpxAppearanceInfo appearanceInfo) {
+		builder.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
+		builder.setDescription(getTrackDescr(file, file.lastModified(), file.length(), appearanceInfo));
+		builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 	}
 
 	private final GpxDataItemCallback gpxDataItemCallback = new GpxDataItemCallback() {
