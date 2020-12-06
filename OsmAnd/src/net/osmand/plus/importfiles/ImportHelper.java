@@ -70,6 +70,7 @@ import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_TYPE_LIST_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
 /**
  * @author Koen Rabaey
@@ -210,7 +211,7 @@ public class ImportHelper {
 	public static String getNameFromContentUri(OsmandApplication app, Uri contentUri) {
 		try {
 			String name;
-			Cursor returnCursor = app.getContentResolver().query(contentUri, new String[]{OpenableColumns.DISPLAY_NAME}, null, null, null);
+			Cursor returnCursor = app.getContentResolver().query(contentUri, new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null);
 			if (returnCursor != null && returnCursor.moveToFirst()) {
 				int columnIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
 				if (columnIndex != -1) {
@@ -267,6 +268,7 @@ public class ImportHelper {
 			int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
 			String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
 			boolean replace = extras.getBoolean(REPLACE_KEY);
+			boolean silentImport = extras.getBoolean(SILENT_IMPORT_KEY);
 			ArrayList<String> settingsTypeKeys = extras.getStringArrayList(SETTINGS_TYPE_LIST_KEY);
 			List<ExportSettingsType> settingsTypes = null;
 			if (settingsTypeKeys != null) {
@@ -275,18 +277,18 @@ public class ImportHelper {
 					settingsTypes.add(ExportSettingsType.valueOf(key));
 				}
 			}
-			handleOsmAndSettingsImport(intentUri, fileName, settingsTypes, replace, latestChanges, version, callback);
+			handleOsmAndSettingsImport(intentUri, fileName, settingsTypes, replace, silentImport, latestChanges, version, callback);
 		} else {
-			handleOsmAndSettingsImport(intentUri, fileName, null, false, null, -1,
+			handleOsmAndSettingsImport(intentUri, fileName, null, false, false, null, -1,
 					callback);
 		}
 	}
 
 	protected void handleOsmAndSettingsImport(Uri uri, String name, final List<ExportSettingsType> settingsTypes,
-	                                          final boolean replace, String latestChanges, int version,
-	                                          CallbackWithObject<List<SettingsItem>> callback) {
-		executeImportTask(new SettingsImportTask(activity, uri, name, settingsTypes, replace, latestChanges, version,
-				callback));
+											  final boolean replace, boolean silentImport, String latestChanges, int version,
+											  CallbackWithObject<List<SettingsItem>> callback) {
+		executeImportTask(new SettingsImportTask(activity, uri, name, settingsTypes, replace, silentImport,
+				latestChanges, version, callback));
 	}
 
 	protected void handleXmlFileImport(Uri intentUri, String fileName, CallbackWithObject routingCallback) {

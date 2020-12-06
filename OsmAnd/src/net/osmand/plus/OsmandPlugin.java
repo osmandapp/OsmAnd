@@ -123,8 +123,8 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	public String getVersion() {
-		return "";
+	public int getVersion() {
+		return -1;
 	}
 
 	/**
@@ -340,6 +340,7 @@ public abstract class OsmandPlugin {
 			try {
 				JSONObject json = new JSONObject();
 				json.put("pluginId", plugin.getId());
+				json.put("version", plugin.getVersion());
 				plugin.writeAdditionalDataToJson(json);
 				plugin.writeDependentFilesJson(json);
 				itemsJson.put(json);
