@@ -16,6 +16,7 @@ import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -478,4 +479,15 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			}
 		});
 	}
+
+	protected void setShadowOnScrollableView() {
+		ScrollView scrollView = getView().findViewById(R.id.scroll_view);
+		if (scrollView.canScrollVertically(1) || scrollView.canScrollVertically(-1)) {
+			drawTopShadow(false);
+			scrollView.getChildAt(0).setPadding(0, 8, 0, 0);
+		} else {
+			drawTopShadow(true);
+		}
+	}
+
 }

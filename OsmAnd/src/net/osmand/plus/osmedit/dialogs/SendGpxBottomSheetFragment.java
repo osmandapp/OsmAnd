@@ -1,6 +1,5 @@
 package net.osmand.plus.osmedit.dialogs;
 
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -54,9 +53,6 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
-	private int contentHeightPrevious = 0;
-	private int buttonsHeight;
-	private int shadowHeight;
 	private ScrollView scrollView;
 
 	public void setGpxInfos(GpxInfo[] gpxInfos) {
@@ -70,7 +66,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View sendGpxView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
-		sendGpxView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		sendGpxView.getViewTreeObserver().addOnScrollChangedListener(getOnGlobalLayoutListener());
 
 		tagsField = sendGpxView.findViewById(R.id.tags_field);
 		messageField = sendGpxView.findViewById(R.id.message_field);
@@ -132,23 +128,16 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		items.add(titleItem);
 	}
 
-	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnGlobalLayoutListener() {
+	private ViewTreeObserver.OnScrollChangedListener getOnGlobalLayoutListener() {
+		return new ViewTreeObserver.OnScrollChangedListener() {
 			@Override
-			public void onGlobalLayout() {
-				Rect visibleDisplayFrame = new Rect();
-				buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
-				shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
+			public void onScrollChanged() {
 				scrollView = getView().findViewById(R.id.scroll_view);
-				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-				int viewHeight = scrollView.getHeight();
-				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
-				if (contentHeightPrevious != contentHeight) {
-					boolean showTopShadow;
-					showTopShadow = viewHeight + shadowHeight < contentHeight;
-					scrollView.requestLayout();
-					contentHeightPrevious = contentHeight;
-					drawTopShadow(showTopShadow);
+				if (scrollView.canScrollVertically(1) || scrollView.canScrollVertically(-1)) {
+					drawTopShadow(false);
+					scrollView.getChildAt(0).setPadding(0, 8, 0, 0);
+				} else {
+					drawTopShadow(true);
 				}
 			}
 		};

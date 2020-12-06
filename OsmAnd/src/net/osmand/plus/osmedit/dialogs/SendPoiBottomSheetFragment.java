@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -60,6 +61,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
         final boolean isNightMode = app.getDaynightHelper().isNightModeForMapControls();
         final View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
                 R.layout.send_poi_fragment, null);
+        sendOsmPoiView.getViewTreeObserver().addOnScrollChangedListener(getOnGlobalLayoutListener());
         closeChangeSet = sendOsmPoiView.findViewById(R.id.close_change_set_checkbox);
         messageEditText = sendOsmPoiView.findViewById(R.id.message_field);
         String defaultChangeSet = createDefaultChangeSet(app);
@@ -102,6 +104,15 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
                 .setCustomView(sendOsmPoiView)
                 .create();
         items.add(titleItem);
+    }
+
+    private ViewTreeObserver.OnScrollChangedListener getOnGlobalLayoutListener() {
+        return new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                setShadowOnScrollableView();
+            }
+        };
     }
 
     public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points) {

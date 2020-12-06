@@ -1,7 +1,6 @@
 package net.osmand.plus.osmedit.dialogs;
 
 import android.content.res.ColorStateList;
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -47,10 +46,6 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private OsmNotesPoint point;
 	private HandleOsmNoteAsyncTask.HandleBugListener handleBugListener;
 	private TextInputEditText noteText;
-	private int contentHeightPrevious = 0;
-	private int buttonsHeight;
-	private int shadowHeight;
-	private ScrollView scrollView;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -63,7 +58,7 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		View osmNoteView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
 				R.layout.open_osm_note_text, null);
-		osmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		osmNoteView.getViewTreeObserver().addOnScrollChangedListener(getOnGlobalLayoutListener());
 		TextInputLayout textBox = osmNoteView.findViewById(R.id.name_text_box);
 		textBox.setHint(AndroidUtils.addColon(app, R.string.osn_bug_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
@@ -80,24 +75,11 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
 	}
 
-	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnGlobalLayoutListener() {
+	private ViewTreeObserver.OnScrollChangedListener getOnGlobalLayoutListener() {
+		return new ViewTreeObserver.OnScrollChangedListener() {
 			@Override
-			public void onGlobalLayout() {
-				Rect visibleDisplayFrame = new Rect();
-				buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
-				shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
-				scrollView = getView().findViewById(R.id.scroll_view);
-				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-				int viewHeight = scrollView.getHeight();
-				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
-				if (contentHeightPrevious != contentHeight) {
-					boolean showTopShadow;
-					showTopShadow = viewHeight + shadowHeight < contentHeight;
-					scrollView.requestLayout();
-					contentHeightPrevious = contentHeight;
-					drawTopShadow(showTopShadow);
-				}
+			public void onScrollChanged() {
+				setShadowOnScrollableView();
 			}
 		};
 	}
@@ -115,9 +97,9 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, OsmBugsUtil osmBugsUtil, OsmBugsUtil local,
-	                                String text, int titleTextId, int posButtonTextId, final OsmPoint.Action action,
-	                                final OsmBugsLayer.OpenStreetNote bug, final OsmNotesPoint point,
-	                                HandleOsmNoteAsyncTask.HandleBugListener handleBugListener) {
+									String text, int titleTextId, int posButtonTextId, final OsmPoint.Action action,
+									final OsmBugsLayer.OpenStreetNote bug, final OsmNotesPoint point,
+									HandleOsmNoteAsyncTask.HandleBugListener handleBugListener) {
 		try {
 			if (!fm.isStateSaved()) {
 				BugBottomSheetDialog fragment = new BugBottomSheetDialog();
