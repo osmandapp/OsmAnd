@@ -18,7 +18,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.PluginSettingsItem;
-import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsCollectListener;
@@ -176,11 +175,6 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				CustomOsmandPlugin plugin = pluginItem.getPlugin();
 				plugin.loadResources();
 
-				for (SettingsItem item : items) {
-					if (item instanceof ProfileSettingsItem) {
-						((ProfileSettingsItem) item).applyAdditionalPrefs();
-					}
-				}
 				if (!Algorithms.isEmpty(plugin.getDownloadMaps())) {
 					app.getDownloadThread().runReloadIndexFilesSilent();
 				}

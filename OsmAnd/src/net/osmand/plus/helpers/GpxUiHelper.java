@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -63,6 +64,7 @@ import com.github.mikephil.charting.utils.MPPointF;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.Elevation;
 import net.osmand.GPXUtilities.GPXFile;
@@ -76,29 +78,33 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.activities.PluginsFragment;
-import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.helpers.enums.SpeedConstants;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
+import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.GradientScaleType;
+import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
@@ -245,7 +251,7 @@ public class GpxUiHelper {
 	}
 
 	public static AlertDialog selectGPXFile(final Activity activity,
-											final boolean showCurrentGpx, final boolean multipleChoice, 
+											final boolean showCurrentGpx, final boolean multipleChoice,
 											final CallbackWithObject<GPXFile[]> callbackWithObject, boolean nightMode) {
 		int dialogThemeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
@@ -808,11 +814,9 @@ public class GpxUiHelper {
 											  View apprTitleView,
 											  String prefWidthValue,
 											  String prefColorValue) {
-		TextView widthTextView = (TextView) apprTitleView.findViewById(R.id.widthTitle);
-		ImageView colorImageView = (ImageView) apprTitleView.findViewById(R.id.colorImage);
-		if (Algorithms.isEmpty(prefWidthValue)) {
-			widthTextView.setText(AndroidUtils.getRenderingStringPropertyValue(activity, trackWidthProp.getDefaultValueDescription()));
-		} else {
+		TextView widthTextView = apprTitleView.findViewById(R.id.widthTitle);
+		ImageView colorImageView = apprTitleView.findViewById(R.id.colorImage);
+		if (!Algorithms.isEmpty(prefWidthValue)) {
 			widthTextView.setText(AndroidUtils.getRenderingStringPropertyValue(activity, prefWidthValue));
 		}
 		int color = GpxAppearanceAdapter.parseTrackColor(renderer, prefColorValue);
@@ -2133,6 +2137,90 @@ public class GpxUiHelper {
 		return gpxItem;
 	}
 
+	public static void saveAndShareGpx(@NonNull final Context context, @NonNull final GPXFile gpxFile) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		File tempDir = FileUtils.getTempDir(app);
+		String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
+		final File file = new File(tempDir, fileName);
+		SaveGpxListener listener = new SaveGpxListener() {
+			@Override
+			public void gpxSavingStarted() {
+
+			}
+
+			@Override
+			public void gpxSavingFinished(Exception errorMessage) {
+				if (errorMessage == null) {
+					shareGpx(context, file);
+				}
+			}
+		};
+		new SaveGpxAsyncTask(file, gpxFile, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public static void saveAndShareGpxWithAppearance(@NonNull final Context context, @NonNull final GPXFile gpxFile) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		GpxDataItem dataItem = getDataItem(app, gpxFile);
+		if (dataItem != null) {
+			addAppearanceToGpx(gpxFile, dataItem);
+			saveAndShareGpx(app, gpxFile);
+		}
+	}
+
+	private static GpxDataItem getDataItem(@NonNull final OsmandApplication app, @NonNull final GPXFile gpxFile) {
+		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+
+			@Override
+			public void onGpxDataItemReady(GpxDataItem item) {
+				addAppearanceToGpx(gpxFile, item);
+				saveAndShareGpx(app, gpxFile);
+			}
+		};
+		return app.getGpxDbHelper().getItem(new File(gpxFile.path), itemCallback);
+	}
+
+	private static void addAppearanceToGpx(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {
+		gpxFile.setShowArrows(dataItem.isShowArrows());
+		gpxFile.setShowStartFinish(dataItem.isShowStartFinish());
+		gpxFile.setSplitInterval(dataItem.getSplitInterval());
+		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(dataItem.getSplitType()).getTypeName());
+		if (dataItem.getColor() != 0) {
+			gpxFile.setColor(dataItem.getColor());
+		}
+		if (dataItem.getWidth() != null) {
+			gpxFile.setWidth(dataItem.getWidth());
+		}
+		if (dataItem.getGradientSpeedColor() != 0) {
+			gpxFile.setGradientScaleColor(GradientScaleType.SPEED.getColorTypeName(), dataItem.getGradientSpeedColor());
+		}
+		if (dataItem.getGradientSlopeColor() != 0) {
+			gpxFile.setGradientScaleColor(GradientScaleType.SLOPE.getColorTypeName(), dataItem.getGradientSlopeColor());
+		}
+		if (dataItem.getGradientAltitudeColor() != 0) {
+			gpxFile.setGradientScaleColor(GradientScaleType.ALTITUDE.getColorTypeName(), dataItem.getGradientAltitudeColor());
+		}
+		if (dataItem.getGradientScaleType() != null) {
+			gpxFile.setGradientScaleType(dataItem.getGradientScaleType().name());
+		}
+	}
+
+	public static void shareGpx(@NonNull Context context, @NonNull File file) {
+		Uri fileUri = AndroidUtils.getUriForFile(context, file);
+		Intent sendIntent = new Intent(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+		sendIntent.setType("application/gpx+xml");
+		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		if (context instanceof OsmandApplication) {
+			sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		}
+		if (AndroidUtils.isIntentSafe(context, sendIntent)) {
+			context.startActivity(sendIntent);
+		}
+	}
 
 	public static class GPXInfo {
 		private String fileName;
