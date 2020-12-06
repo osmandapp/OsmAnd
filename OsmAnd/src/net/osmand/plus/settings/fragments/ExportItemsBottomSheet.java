@@ -380,7 +380,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				iconId = R.drawable.ic_action_photo_dark;
 			}
 			builder.setIcon(uiUtilities.getIcon(iconId, activeColorRes));
-			builder.setDescription(AndroidUtils.formatSize(app, size));
+			builder.setDescription(AndroidUtils.formatSize(app, file.length()));
 		} else if (fileSubtype.isMap()
 				|| fileSubtype == FileSettingsItem.FileSubtype.TTS_VOICE
 				|| fileSubtype == FileSettingsItem.FileSubtype.VOICE) {
