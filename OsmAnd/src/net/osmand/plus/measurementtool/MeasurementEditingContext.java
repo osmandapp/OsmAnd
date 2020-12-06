@@ -523,15 +523,15 @@ public class MeasurementEditingContext {
 
 	public void splitPoints(int selectedPointPosition, boolean after) {
 		int pointIndex = after ? selectedPointPosition : selectedPointPosition - 1;
-		if (pointIndex >= 0 && pointIndex < before.points.size()) {
+		if (pointIndex >= 0 && pointIndex + 1 < before.points.size()) {
 			WptPt point = before.points.get(pointIndex);
-			WptPt newPoint = new WptPt();
-			newPoint.lat = point.lat;
-			newPoint.lon = point.lon;
+			WptPt nextPoint = before.points.get(pointIndex + 1);
+			WptPt newPoint = new WptPt(point);
 			newPoint.copyExtensions(point);
 			newPoint.setGap();
 			before.points.remove(pointIndex);
 			before.points.add(pointIndex, newPoint);
+			roadSegmentData.remove(new Pair<>(point, nextPoint));
 			updateSegmentsForSnap(false);
 		}
 	}
@@ -549,9 +549,7 @@ public class MeasurementEditingContext {
 			gapIndex = selectedPointPosition;
 		}
 		if (gapPoint != null) {
-			WptPt newPoint = new WptPt();
-			newPoint.lat = gapPoint.lat;
-			newPoint.lon = gapPoint.lon;
+			WptPt newPoint = new WptPt(gapPoint);
 			newPoint.copyExtensions(gapPoint);
 			newPoint.removeProfileType();
 			before.points.remove(gapIndex);
@@ -786,7 +784,7 @@ public class MeasurementEditingContext {
 							pairPoints.add(points.get(j));
 							prevPointIndex = j;
 						}
-						if (points.size() > prevPointIndex + 1) {
+						if (points.size() > prevPointIndex + 1 && i == routePoints.size() - 2) {
 							pairPoints.add(points.get(prevPointIndex + 1));
 						}
 						Iterator<RouteSegmentResult> it = routeSegments.iterator();
