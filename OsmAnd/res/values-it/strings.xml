@@ -931,7 +931,7 @@
     <string name="favourites_list_activity">Seleziona Preferito</string>
     <string name="local_openstreetmap_act_title">Modifiche OSM</string>
     <string name="download_using_mobile_internet">Non connesso al Wi-Fi. Usare la connessione a Internet attuale per il download\?</string>
-    <string name="cancel_route">Cancella il percorso</string>
+    <string name="cancel_route">Cancellare il percorso\?</string>
     <string name="cancel_navigation">Interrompere la navigazione</string>
     <string name="clear_destination">Cancella la destinazione</string>
     <string name="other_location">Altra</string>
