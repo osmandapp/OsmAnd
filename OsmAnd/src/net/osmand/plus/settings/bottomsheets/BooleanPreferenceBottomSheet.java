@@ -119,7 +119,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	protected int getDismissButtonTextId() {
-		return R.string.shared_string_cancel;
+		return R.string.shared_string_close;
 	}
 
 	protected static View getCustomButtonView(OsmandApplication app, ApplicationMode mode, boolean checked, boolean nightMode) {

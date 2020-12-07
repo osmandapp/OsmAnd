@@ -59,31 +59,4 @@
 			android:padding="@dimen/content_padding" />
 
 	</LinearLayout>
-
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingTop="@dimen/content_padding_small"
-		android:paddingRight="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding_small"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingStart="@dimen/content_padding">
-
-		<include
-			android:id="@+id/open_track_button"
-			layout="@layout/bottom_sheet_dialog_button" />
-
-		<View
-			android:id="@+id/buttons_divider"
-			android:layout_width="@dimen/content_padding"
-			android:layout_height="match_parent" />
-
-		<include
-			android:id="@+id/close_button"
-			layout="@layout/bottom_sheet_dialog_button" />
-
-	</LinearLayout>
-
 </LinearLayout>

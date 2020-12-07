@@ -1,14 +1,11 @@
 package net.osmand.plus.osmedit.dialogs;
 
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,10 +51,6 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
-	private int contentHeightPrevious = 0;
-	private int buttonsHeight;
-	private int shadowHeight;
-	private ScrollView scrollView;
 
 	public void setGpxInfos(GpxInfo[] gpxInfos) {
 		this.gpxInfos = gpxInfos;
@@ -69,13 +62,13 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		OsmandSettings settings = app.getSettings();
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
-		View sendOsmPoiView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
-		sendOsmPoiView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		View sendGpxView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
+		sendGpxView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 
-		tagsField = sendOsmPoiView.findViewById(R.id.tags_field);
-		messageField = sendOsmPoiView.findViewById(R.id.message_field);
+		tagsField = sendGpxView.findViewById(R.id.tags_field);
+		messageField = sendGpxView.findViewById(R.id.message_field);
 
-		TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
+		TextView accountName = sendGpxView.findViewById(R.id.user_name);
 		if (!Algorithms.isEmpty(settings.USER_DISPLAY_NAME.get())) {
 			accountName.setText(settings.USER_DISPLAY_NAME.get());
 		} else {
@@ -86,8 +79,8 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		messageField.setText(Algorithms.getFileNameWithoutExtension(fileName));
 		messageField.setSelection(messageField.getText().length());
 
-		final TextView visibilityName = sendOsmPoiView.findViewById(R.id.visibility_name);
-		final TextView visibilityDescription = sendOsmPoiView.findViewById(R.id.visibility_description);
+		final TextView visibilityName = sendGpxView.findViewById(R.id.visibility_name);
+		final TextView visibilityDescription = sendGpxView.findViewById(R.id.visibility_description);
 		visibilityName.setText(selectedUploadVisibility.getTitleId());
 		visibilityDescription.setText(selectedUploadVisibility.getDescriptionId());
 
@@ -110,7 +103,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 				horizontalSelectionAdapter.notifyDataSetChanged();
 			}
 		});
-		LinearLayout account = sendOsmPoiView.findViewById(R.id.account_container);
+		LinearLayout account = sendGpxView.findViewById(R.id.account_container);
 		account.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -121,37 +114,15 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 				dismiss();
 			}
 		});
-		RecyclerView iconCategoriesRecyclerView = sendOsmPoiView.findViewById(R.id.description_view);
+		RecyclerView iconCategoriesRecyclerView = sendGpxView.findViewById(R.id.description_view);
 		iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
 		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 		horizontalSelectionAdapter.notifyDataSetChanged();
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(sendOsmPoiView)
+				.setCustomView(sendGpxView)
 				.create();
 		items.add(titleItem);
-	}
-
-	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				Rect visibleDisplayFrame = new Rect();
-				buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
-				shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
-				scrollView = getView().findViewById(R.id.scroll_view);
-				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-				int viewHeight = scrollView.getHeight();
-				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
-				if (contentHeightPrevious != contentHeight) {
-					boolean showTopShadow;
-					showTopShadow = viewHeight + shadowHeight < contentHeight;
-					scrollView.requestLayout();
-					contentHeightPrevious = contentHeight;
-					drawTopShadow(showTopShadow);
-				}
-			}
-		};
 	}
 
 	protected static void showOpenStreetMapScreen(@NonNull FragmentActivity activity) {
