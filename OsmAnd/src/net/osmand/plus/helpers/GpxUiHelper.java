@@ -77,6 +77,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -603,15 +604,16 @@ public class GpxUiHelper {
 					if (app != null && showCurrentGpx && adapter.getItem(0).getSelected()) {
 						currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 					}
-					List<String> s = new ArrayList<>();
+					List<String> fileNames = new ArrayList<>();
 					for (int i = (showCurrentGpx ? 1 : 0); i < adapter.length(); i++) {
 						if (adapter.getItem(i).getSelected()) {
-							s.add(list.get(i).getFileName());
+							fileNames.add(list.get(i).getFileName());
 						}
 					}
 					dialog.dismiss();
+					updateSelectedTracksAppearance(app, fileNames);
 					loadGPXFileInDifferentThread(activity, callbackWithObject, dir, currentGPX,
-							s.toArray(new String[0]));
+							fileNames.toArray(new String[0]));
 				}
 			});
 			builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -714,6 +716,38 @@ public class GpxUiHelper {
 			// Unknown reason but on some devices fail
 		}
 		return dlg;
+	}
+
+	private static void updateSelectedTracksAppearance(OsmandApplication app, List<String> fileNames) {
+		final GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
+		final boolean showStartFinish = app.getSettings().SHOW_START_FINISH_ICONS.get();
+		final String savedWidth = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
+		String savedColor = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get();
+		final int color = GpxAppearanceAdapter.parseTrackColor(app.getRendererRegistry().getCurrentSelectedRenderer(), savedColor);
+
+		GpxDataItemCallback callback = new GpxDataItemCallback() {
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+
+			@Override
+			public void onGpxDataItemReady(GpxDataItem item) {
+				updateTrackAppearance(gpxDbHelper, item, savedWidth, color, showStartFinish);
+			}
+		};
+		for (String name : fileNames) {
+			GpxDataItem item = gpxDbHelper.getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), name), callback);
+			if (item != null) {
+				updateTrackAppearance(gpxDbHelper, item, savedWidth, color, showStartFinish);
+			}
+		}
+	}
+
+	private static void updateTrackAppearance(GpxDbHelper gpxDbHelper, GpxDataItem item, String width, int color, boolean showStartFinish) {
+		gpxDbHelper.updateColor(item, color);
+		gpxDbHelper.updateWidth(item, width);
+		gpxDbHelper.updateShowStartFinish(item, showStartFinish);
 	}
 
 	public static void updateGpxInfoView(View v, String itemTitle, GPXInfo info, GpxDataItem dataItem, boolean currentlyRecordingTrack, OsmandApplication app) {
