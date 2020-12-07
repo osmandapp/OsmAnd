@@ -270,11 +270,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
 				R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
 		final SwitchCompat switchButton = itemView.findViewById(R.id.switchWidget);
-		int selectedModeColor = ContextCompat.getColor(app, selectedModeColorId);
 		View itemsContainer = itemView.findViewById(R.id.selectable_list_item);
-		switchButton.setChecked(!active);
 		switchButton.setFocusable(false);
-		UiUtilities.setupCompoundButton(nightMode, selectedModeColor, switchButton);
 		itemsContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -295,6 +292,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 
 		item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(!active)
 				.setCompoundButtonColorId(selectedModeColorId)
 				.setDescription(getElevationDescription(parameter))
 				.setIcon(getContentIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId()))
@@ -533,15 +531,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				builder.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (USE_HEIGHT_OBSTACLES.equals(parameter.getKey()) && hasReliefParameters()) {
-							FragmentManager fm = getFragmentManager();
-							if (fm != null) {
-								ElevationDateBottomSheet.showInstance(fm, applicationMode, RouteOptionsBottomSheet.this, false);
-							}
-						} else {
 							applyParameter(item[0], parameter);
 						}
-					}
 				});
 			}
 			if (iconId != -1) {
