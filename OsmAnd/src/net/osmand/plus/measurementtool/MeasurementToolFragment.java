@@ -62,6 +62,7 @@ import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.Se
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter.MeasurementAdapterListener;
 import net.osmand.plus.measurementtool.command.AddPointCommand;
 import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
+import net.osmand.plus.measurementtool.command.ChangeProfileConfigCommand;
 import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand;
 import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand.ChangeRouteType;
 import net.osmand.plus.measurementtool.command.ClearPointsCommand;
@@ -131,6 +132,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private ImageView redoBtn;
 	private ImageView mainIcon;
 	private String fileName;
+	private OnBackPressedCallback onBackPressedCallback;
 
 	private InfoType currentInfoType;
 
@@ -218,17 +220,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+		onBackPressedCallback = new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				quit(true);
 			}
-		});
+		};
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-							 @Nullable Bundle savedInstanceState) {
+	                         @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity == null) {
 			return null;
@@ -551,6 +554,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return view;
 	}
 
+	public OnBackPressedCallback getOnBackPressedCallback() {
+		return onBackPressedCallback;
+	}
+
 	private OnRadioItemClickListener getInfoTypeBtnListener(@NonNull final InfoType type) {
 		return new OnRadioItemClickListener() {
 			@Override
@@ -687,6 +694,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			onBackPressedCallback.setEnabled(true);
 			detailsMenu.setMapActivity(mapActivity);
 			mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
@@ -1086,6 +1094,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		collapseInfoViewIfExpanded();
 		editingCtx.setSelectedPointPosition(-1);
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
+		updateUndoRedoButton(false, redoBtn);
+		updateUndoRedoButton(true, undoBtn);
+		updateDistancePointsText();
+	}
+
+	public void onConfigureProfileChange() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		editingCtx.getCommandManager().execute(new ChangeProfileConfigCommand(measurementLayer));
 		updateUndoRedoButton(false, redoBtn);
 		updateUndoRedoButton(true, undoBtn);
 		updateDistancePointsText();

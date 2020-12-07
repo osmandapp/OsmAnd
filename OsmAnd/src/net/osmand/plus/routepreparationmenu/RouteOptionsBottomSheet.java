@@ -139,13 +139,19 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(new TitleItem(app.getString(R.string.shared_string_settings), nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 
 		List<LocalRoutingParameter> list = getRoutingParameters(applicationMode);
-
+		boolean skipNextDivider = false;
 		for (final LocalRoutingParameter optionsItem : list) {
 			if (optionsItem instanceof DividerItem) {
-				items.add(new DividerStartItem(app));
+				if (!skipNextDivider) {
+					items.add(new DividerStartItem(app));
+				}
+				skipNextDivider = false;
 			} else if (optionsItem instanceof MuteSoundRoutingParameter) {
 				if (!planRouteMode) {
 					items.add(createMuteSoundItem(optionsItem));
+				} else if (!applicationMode.equals(ApplicationMode.BICYCLE)
+						|| !applicationMode.equals(ApplicationMode.PEDESTRIAN)) {
+					skipNextDivider = true;
 				}
 			} else if (optionsItem instanceof ShowAlongTheRouteItem) {
 				items.add(createShowAlongTheRouteItem(optionsItem));
@@ -160,6 +166,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			} else if (optionsItem instanceof GpxLocalRoutingParameter) {
 				if (!planRouteMode) {
 					items.add(createGpxRoutingItem(optionsItem));
+				} else if (applicationMode.equals(ApplicationMode.CAR)) {
+					skipNextDivider = true;
 				}
 			} else if (optionsItem instanceof TimeConditionalRoutingItem) {
 				items.add(createTimeConditionalRoutingItem(optionsItem));
@@ -509,6 +517,14 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						dismiss();
 						Bundle args = new Bundle();
 						args.putBoolean(PLANE_ROUTE, planRouteMode);
+						MapActivity mapActivity = getMapActivity();
+						if (mapActivity != null) {
+							Fragment fragment = mapActivity.getSupportFragmentManager()
+									.findFragmentByTag(MeasurementToolFragment.TAG);
+							if (fragment != null) {
+								((MeasurementToolFragment) fragment).getOnBackPressedCallback().setEnabled(false);
+							}
+						}
 						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.NAVIGATION,
 								applicationMode, args);
 					}
@@ -621,7 +637,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		if (mapActivity != null) {
 			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MeasurementToolFragment.TAG);
 			if (fragment != null) {
-				((MeasurementToolFragment) fragment).onChangeApplicationMode(applicationMode, WHOLE_ROUTE_CALCULATION, ALL);
+				((MeasurementToolFragment) fragment).onConfigureProfileChange();
 			}
 		}
 	}

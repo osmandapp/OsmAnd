@@ -4,9 +4,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -57,6 +59,14 @@ public class NavigationFragment extends BaseSettingsFragment {
 				if (args != null && args.getBoolean(PLANE_ROUTE, false)) {
 					RouteOptionsBottomSheet.showInstance(getMapActivity().getSupportFragmentManager(),
 							getSelectedAppMode().getStringKey());
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						Fragment fragment = mapActivity.getSupportFragmentManager()
+								.findFragmentByTag(MeasurementToolFragment.TAG);
+						if (fragment != null) {
+							((MeasurementToolFragment) fragment).getOnBackPressedCallback().setEnabled(true);
+						}
+					}
 				}
 				dismiss();
 			}
