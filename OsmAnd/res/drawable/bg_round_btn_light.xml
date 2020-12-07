@@ -1,0 +1,10 @@
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+	android:insetLeft="@dimen/map_button_inset_shadow"
+	android:insetTop="@dimen/map_button_inset_shadow"
+	android:insetRight="@dimen/map_button_inset_shadow"
+	android:insetBottom="@dimen/map_button_inset_shadow">
+	<shape android:shape="rectangle">
+		<solid android:color="@color/map_widget_light" />
+		<corners android:radius="48dp" />
+	</shape>
+</inset>

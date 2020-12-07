@@ -22,6 +22,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.FragmentManager;
@@ -69,6 +70,7 @@ import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.measurementtool.command.ReversePointsCommand;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.measurementtool.command.SplitPointsCommand;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -232,7 +234,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			return null;
 		}
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
-		OsmandApplication app = mapActivity.getMyApplication();
+		final OsmandApplication app = mapActivity.getMyApplication();
 
 		editingCtx.setApplication(mapActivity.getMyApplication());
 		editingCtx.setProgressListener(new SnapToRoadProgressListener() {
@@ -435,7 +437,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			@Override
 			public void onMeasure(float distance, float bearing) {
 				String distStr = OsmAndFormatter.getFormattedDistance(distance, mapActivity.getMyApplication());
-				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, getMyApplication());
+				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, app);
 				distanceToCenterTv.setText(String.format("%1$s • %2$s", distStr, azimuthStr));
 				TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
 						distanceToCenterTv, 14, 18, 2,
@@ -499,7 +501,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		final GpxData gpxData = editingCtx.getGpxData();
 
-		ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
+		ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
 		snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
 		snapToRoadBtn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -508,6 +510,31 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 		snapToRoadBtn.setVisibility(View.VISIBLE);
+		LinearLayout profileWithConfig = mapActivity.findViewById(R.id.profile_with_config_btn);
+
+		View background = profileWithConfig.findViewById(R.id.btn_background);
+		AndroidUtils.setBackground(background, AppCompatResources.getDrawable(view.getContext(),
+				AndroidUtils.resolveAttribute(view.getContext(), R.attr.bg_round_btn)));
+		View divider = profileWithConfig.findViewById(R.id.divider);
+		divider.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), R.attr.divider_color));
+		ImageButton profileBtn = profileWithConfig.findViewById(R.id.profile);
+		profileBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night_no_shadow : R.drawable.btn_circle_no_shadow);
+		profileBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startSnapToRoad(false);
+			}
+		});
+		ImageButton configBtn = profileWithConfig.findViewById(R.id.profile_config);
+		configBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night_no_shadow : R.drawable.btn_circle_no_shadow);
+		configBtn.setImageDrawable(getContentIcon(R.drawable.ic_action_settings));
+		configBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				RouteOptionsBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
+						editingCtx.getAppMode().getStringKey());
+			}
+		});
 
 		initMeasurementMode(gpxData, savedInstanceState == null);
 
@@ -1292,17 +1319,24 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		final ApplicationMode appMode = editingCtx.getAppMode();
 		if (mapActivity != null) {
 			Drawable icon;
+			ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
+			LinearLayout profileWithConfig = mapActivity.findViewById(R.id.profile_with_config_btn);
+			ImageButton configBtn = profileWithConfig.findViewById(R.id.profile);
 			if (isTrackReadyToCalculate()) {
 				if (appMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
 					icon = getActiveIcon(R.drawable.ic_action_split_interval);
+					snapToRoadBtn.setVisibility(View.VISIBLE);
+					profileWithConfig.setVisibility(View.GONE);
 				} else {
 					icon = getIcon(appMode.getIconRes(), appMode.getIconColorInfo().getColor(nightMode));
+					snapToRoadBtn.setVisibility(View.GONE);
+					profileWithConfig.setVisibility(View.VISIBLE);
 				}
 			} else {
 				icon = getContentIcon(R.drawable.ic_action_help);
 			}
-			ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
 			snapToRoadBtn.setImageDrawable(icon);
+			configBtn.setImageDrawable(icon);
 			mapActivity.refreshMap();
 		}
 	}
@@ -1315,6 +1349,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
+			mapActivity.findViewById(R.id.profile_with_config_btn).setVisibility(View.GONE);
 		}
 	}
 

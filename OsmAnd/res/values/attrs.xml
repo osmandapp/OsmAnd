@@ -23,6 +23,7 @@
 	    <attr name="btn_round" format="reference" />
         <attr name="btn_round_border" format="reference" />
 		<attr name="btn_round_border_2" format="reference" />
+	    <attr name="bg_round_btn" format="reference" />
 		<attr name="bg_card" format="reference" />
         <attr name="context_menu_card" format="reference" />
         <attr name="ctx_menu_card_btn" format="reference" />
