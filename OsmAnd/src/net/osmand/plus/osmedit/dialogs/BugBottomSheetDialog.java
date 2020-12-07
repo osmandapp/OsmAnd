@@ -56,7 +56,7 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		View osmNoteView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
 				R.layout.open_osm_note_text, null);
-		osmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
+		osmNoteView.getViewTreeObserver().addOnScrollChangedListener(getShadowLayoutListener());
 		TextInputLayout textBox = osmNoteView.findViewById(R.id.name_text_box);
 		textBox.setHint(AndroidUtils.addColon(app, R.string.osn_bug_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat

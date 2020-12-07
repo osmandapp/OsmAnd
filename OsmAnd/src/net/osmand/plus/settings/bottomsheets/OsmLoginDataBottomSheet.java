@@ -44,7 +44,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.osm_login_data, null);
-		view.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
+		view.getViewTreeObserver().addOnScrollChangedListener(getShadowLayoutListener());
 
 		userNameEditText = view.findViewById(R.id.name_edit_text);
 		passwordEditText = view.findViewById(R.id.password_edit_text);

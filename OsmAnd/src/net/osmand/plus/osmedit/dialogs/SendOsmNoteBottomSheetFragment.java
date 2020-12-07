@@ -77,7 +77,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 
 		final View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_osm_note_fragment, null);
-		sendOsmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
+		sendOsmNoteView.getViewTreeObserver().addOnScrollChangedListener(getShadowLayoutListener());
 
 		noteText = sendOsmNoteView.findViewById(R.id.note_text);
 		noteText.setText(((OsmNotesPoint) poi[0]).getText());

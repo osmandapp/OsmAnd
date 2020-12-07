@@ -192,11 +192,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			}
 		});
 	}
-
-	protected ViewTreeObserver.OnGlobalLayoutListener getShadowLayoutListener(){
-		return new ViewTreeObserver.OnGlobalLayoutListener() {
+	protected ViewTreeObserver.OnScrollChangedListener getShadowLayoutListener() {
+		return new ViewTreeObserver.OnScrollChangedListener() {
 			@Override
-			public void onGlobalLayout() {
+			public void onScrollChanged() {
 				setShadowOnScrollableView();
 			}
 		};
@@ -491,8 +490,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected void setShadowOnScrollableView() {
 		ScrollView scrollView = getView().findViewById(R.id.scroll_view);
-		boolean isScrollable = scrollView.getChildAt(0).getHeight() >= scrollView.getHeight();;
-		if (isScrollable) {
+		if (scrollView.canScrollVertically(1) || scrollView.canScrollVertically(-1)) {
 			drawTopShadow(false);
 			scrollView.getChildAt(0).setPadding(0,8,0,0);
 		} else {

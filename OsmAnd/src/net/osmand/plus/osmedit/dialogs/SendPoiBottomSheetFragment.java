@@ -60,7 +60,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		final boolean isNightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_poi_fragment, null);
-		sendOsmPoiView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
+		sendOsmPoiView.getViewTreeObserver().addOnScrollChangedListener(getShadowLayoutListener());
 		closeChangeSet = sendOsmPoiView.findViewById(R.id.close_change_set_checkbox);
 		messageEditText = sendOsmPoiView.findViewById(R.id.message_field);
 		String defaultChangeSet = createDefaultChangeSet(app);
