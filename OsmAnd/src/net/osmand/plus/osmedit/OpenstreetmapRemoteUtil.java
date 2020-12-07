@@ -2,8 +2,9 @@ package net.osmand.plus.osmedit;
 
 import android.util.Xml;
 import android.widget.Toast;
+
 import com.github.scribejava.core.model.Response;
-import gnu.trove.list.array.TLongArrayList;
+
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -27,11 +28,21 @@ import net.osmand.plus.Version;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.text.MessageFormat;
@@ -39,6 +50,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+
+import gnu.trove.list.array.TLongArrayList;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
@@ -417,8 +430,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 							}
 						}
 					}
-				} else if (MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10) {
-					// avoid shifting due to round error
+				} else {
 					n.setLatitude(entity.getLatitude());
 					n.setLongitude(entity.getLongitude());
 				}

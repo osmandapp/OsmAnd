@@ -230,7 +230,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 
 	@Override
 	public boolean isObjectMovable(Object o) {
-		return o instanceof OsmPoint;
+		return false;
 	}
 
 	@Override
