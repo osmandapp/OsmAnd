@@ -129,6 +129,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	protected File file;
+	protected File savedFile;
 	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
@@ -280,18 +281,18 @@ public class FileSettingsItem extends StreamSettingsItem {
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
 				OutputStream output;
-				File dest = FileSettingsItem.this.getFile();
-				if (dest.isDirectory()) {
-					dest = new File(dest, entryName.substring(fileName.length()));
+				savedFile = FileSettingsItem.this.getFile();
+				if (savedFile.isDirectory()) {
+					savedFile = new File(savedFile, entryName.substring(fileName.length()));
 				}
-				if (dest.exists() && !shouldReplace) {
-					dest = renameFile(dest);
+				if (savedFile.exists() && !shouldReplace) {
+					savedFile = renameFile(savedFile);
 				}
-				if (dest.getParentFile() != null && !dest.getParentFile().exists()) {
+				if (savedFile.getParentFile() != null && !savedFile.getParentFile().exists()) {
 					//noinspection ResultOfMethodCallIgnored
-					dest.getParentFile().mkdirs();
+					savedFile.getParentFile().mkdirs();
 				}
-				output = new FileOutputStream(dest);
+				output = new FileOutputStream(savedFile);
 				byte[] buffer = new byte[SettingsHelper.BUFFER];
 				int count;
 				try {
@@ -303,7 +304,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 					Algorithms.closeStream(output);
 				}
 				if (lastModified != -1) {
-					dest.setLastModified(lastModified);
+					savedFile.setLastModified(lastModified);
 				}
 			}
 		};

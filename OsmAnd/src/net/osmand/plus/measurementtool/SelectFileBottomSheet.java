@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +21,7 @@ import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxTrackAdapter.OnItemClickListener;
@@ -38,11 +39,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.SimplePopUpMenuItemAdapter.*;
+import static net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 import static net.osmand.util.Algorithms.collectDirs;
 
-public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
+public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private List<File> folders;
 	private HorizontalSelectionAdapter folderAdapter;
@@ -301,8 +302,27 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 	}
 
 	@Override
-	protected int getPeekHeight() {
-		return AndroidUtils.dpToPx(getContext(), BOTTOM_SHEET_HEIGHT_DP);
+	protected boolean useScrollableItemsContainer() {
+		return false;
+	}
+
+	@Override
+	protected boolean useExpandableList() {
+		return true;
+	}
+
+	@Override
+	protected int getCustomHeight() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			int screenHeight = AndroidUtils.getScreenHeight(activity);
+			int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
+			int navBarHeight = AndroidUtils.getNavBarHeight(activity);
+			int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
+
+			return screenHeight - statusBarHeight - buttonsHeight - navBarHeight - getResources().getDimensionPixelSize(R.dimen.toolbar_height);
+		}
+		return super.getCustomHeight();
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, SelectFileListener listener, Mode mode) {

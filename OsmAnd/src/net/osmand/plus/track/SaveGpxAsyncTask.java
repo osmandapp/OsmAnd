@@ -12,12 +12,14 @@ import java.io.File;
 
 public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 
+	private final File file;
 	private final GPXFile gpx;
 	private final SaveGpxListener saveGpxListener;
 
-	public SaveGpxAsyncTask(@NonNull GPXFile gpx,
-	                        @Nullable SaveGpxListener saveGpxListener) {
+	public SaveGpxAsyncTask(@NonNull File file, @NonNull GPXFile gpx,
+							@Nullable SaveGpxListener saveGpxListener) {
 		this.gpx = gpx;
+		this.file = file;
 		this.saveGpxListener = saveGpxListener;
 	}
 
@@ -30,7 +32,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 
 	@Override
 	protected Exception doInBackground(Void... params) {
-		return GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
+		return GPXUtilities.writeGpxFile(file, gpx);
 	}
 
 	@Override

@@ -50,6 +50,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -125,6 +126,7 @@ import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
 import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
 import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
 import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
@@ -140,6 +142,7 @@ import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DISTANCE;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_IMMINENT;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
 public class OsmandAidlApi {
 
@@ -2233,11 +2236,12 @@ public class OsmandAidlApi {
 	}
 
 	public boolean importProfileV2(final Uri profileUri, ArrayList<String> settingsTypeKeys, boolean replace,
-	                               String latestChanges, int version) {
+								   String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
 			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, settingsTypeKeys);
 			bundle.putBoolean(REPLACE_KEY, replace);
+			bundle.putBoolean(SILENT_IMPORT_KEY, true);
 			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
 			bundle.putInt(SettingsHelper.SETTINGS_VERSION_KEY, version);
 
@@ -2309,7 +2313,7 @@ public class OsmandAidlApi {
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			SettingsHelper settingsHelper = app.getSettingsHelper();
-			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, false));
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, false, true));
 			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
 			return true;
 		}
@@ -2322,6 +2326,15 @@ public class OsmandAidlApi {
 
 	public boolean isMenuOpen() {
 		return mapActivity.getContextMenu().isVisible();
+	}
+
+	public int getPluginVersion(String pluginName) {
+		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginName);
+		if (plugin instanceof CustomOsmandPlugin) {
+			CustomOsmandPlugin customPlugin = (CustomOsmandPlugin) plugin;
+			return customPlugin.getVersion();
+		}
+		return CANNOT_ACCESS_API_ERROR;
 	}
 
 	private static class FileCopyInfo {

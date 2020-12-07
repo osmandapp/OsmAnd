@@ -54,6 +54,8 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
+import net.osmand.plus.settings.backend.backup.GpxSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
@@ -313,11 +315,13 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			builder.setTitle(tileSource.getName());
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_map, activeColorRes));
 		} else if (object instanceof File) {
-			File file = (File) object;
-			setupBottomSheetItemForFile(builder, file, file.lastModified(), file.length());
+			setupBottomSheetItemForFile(builder, (File) object);
+		} else if (object instanceof GpxSettingsItem) {
+			GpxSettingsItem item = (GpxSettingsItem) object;
+			setupBottomSheetItemForGpx(builder, item.getFile(), item.getAppearanceInfo());
 		} else if (object instanceof FileSettingsItem) {
 			FileSettingsItem item = (FileSettingsItem) object;
-			setupBottomSheetItemForFile(builder, item.getFile(), item.getLastModified(), item.getSize());
+			setupBottomSheetItemForFile(builder, item.getFile());
 		} else if (object instanceof AvoidRoadInfo) {
 			AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) object;
 			builder.setTitle(avoidRoadInfo.name);
@@ -361,7 +365,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private void setupBottomSheetItemForFile(Builder builder, File file, long lastModified, long size) {
+	private void setupBottomSheetItemForFile(Builder builder, File file) {
 		FileSubtype fileSubtype = FileSubtype.getSubtypeByPath(app, file.getPath());
 		builder.setTitle(file.getName());
 		if (file.getAbsolutePath().contains(IndexConstants.RENDERERS_DIR)) {
@@ -369,17 +373,14 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 		} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
-			builder.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
-			builder.setTag(file);
-			builder.setDescription(getTrackDescr(file, lastModified, size));
-			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
+			setupBottomSheetItemForGpx(builder, file, null);
 		} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
 			int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
 			if (iconId == -1) {
 				iconId = R.drawable.ic_action_photo_dark;
 			}
 			builder.setIcon(uiUtilities.getIcon(iconId, activeColorRes));
-			builder.setDescription(AndroidUtils.formatSize(app, size));
+			builder.setDescription(AndroidUtils.formatSize(app, file.length()));
 		} else if (fileSubtype.isMap()
 				|| fileSubtype == FileSettingsItem.FileSubtype.TTS_VOICE
 				|| fileSubtype == FileSettingsItem.FileSubtype.VOICE) {
@@ -388,7 +389,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 
 			if (fileSubtype.isMap()) {
 				String mapDescription = getMapDescription(file);
-				String formattedSize = AndroidUtils.formatSize(app, size);
+				String formattedSize = AndroidUtils.formatSize(app, file.length());
 				if (mapDescription != null) {
 					builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_bold_point, mapDescription, formattedSize));
 				} else {
@@ -396,6 +397,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				}
 			}
 		}
+	}
+
+	private void setupBottomSheetItemForGpx(Builder builder, File file, @Nullable GpxAppearanceInfo appearanceInfo) {
+		builder.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
+		builder.setDescription(getTrackDescr(file, file.lastModified(), file.length(), appearanceInfo));
+		builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 	}
 
 	private final GpxDataItemCallback gpxDataItemCallback = new GpxDataItemCallback() {
@@ -407,15 +414,18 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		@Override
 		public void onGpxDataItemReady(GpxDataItem item) {
 			for (BaseBottomSheetItem bottomSheetItem : items) {
-				if (Algorithms.objectEquals(item.getFile(), bottomSheetItem.getTag())) {
-					((BottomSheetItemWithDescription) bottomSheetItem).setDescription(getTrackDescrForDataItem(item));
-					break;
+				Object tag = bottomSheetItem.getTag();
+				if (tag instanceof FileSettingsItem) {
+					if (Algorithms.objectEquals(item.getFile(), ((FileSettingsItem) tag).getFile())) {
+						((BottomSheetItemWithDescription) bottomSheetItem).setDescription(getTrackDescrForDataItem(item));
+						break;
+					}
 				}
 			}
 		}
 	};
 
-	private String getTrackDescr(@NonNull File file, long lastModified, long size) {
+	private String getTrackDescr(@NonNull File file, long lastModified, long size, GpxAppearanceInfo appearanceInfo) {
 		String folder = "";
 		File parent = file.getParentFile();
 		if (parent != null) {
@@ -426,6 +436,11 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			if (dataItem != null) {
 				return getTrackDescrForDataItem(dataItem);
 			}
+		} else if (appearanceInfo != null) {
+			String dist = OsmAndFormatter.getFormattedDistance(appearanceInfo.totalDistance, app);
+			String points = appearanceInfo.wptPoints + " " + getString(R.string.shared_string_gpx_points).toLowerCase();
+			String descr = getString(R.string.ltr_or_rtl_combine_via_bold_point, folder, dist);
+			return getString(R.string.ltr_or_rtl_combine_via_comma, descr, points);
 		} else {
 			String date = OsmAndFormatter.getFormattedDate(app, lastModified);
 			String formattedSize = AndroidUtils.formatSize(app, size);

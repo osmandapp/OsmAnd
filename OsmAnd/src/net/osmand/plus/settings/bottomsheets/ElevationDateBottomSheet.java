@@ -2,6 +2,7 @@ package net.osmand.plus.settings.bottomsheets;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
@@ -90,11 +92,16 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
+	}
+
+	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 
-		on = getString(R.string.shared_string_enable);
-		off = getString(R.string.shared_string_disable);
+		on = getString(R.string.shared_string_enabled);
+		off = getString(R.string.shared_string_disabled);
 		appModeColor = appMode.getIconColorInfo().getColor(nightMode);
 		activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
@@ -171,7 +178,20 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 								RoutingParameter parameter = parameters.get(selectedEntryIndex);
 								updateSelectedParameters(app, appMode, parameters, parameter.getId());
 							}
+							Fragment target = getTargetFragment();
+							if (target instanceof BaseSettingsFragment) {
+								((BaseSettingsFragment) target).updateSetting(useHeightPref.getId());
+							}
+							if (target instanceof RouteOptionsBottomSheet) {
+								((RouteOptionsBottomSheet) target).updateParameters();
+							}
 							updateReliefButtons();
+							app.runInUIThread(new Runnable() {
+								@Override
+								public void run() {
+									dismiss();
+								}
+							}, 500);
 						}
 					}).create();
 			items.add(preferenceItem[0]);

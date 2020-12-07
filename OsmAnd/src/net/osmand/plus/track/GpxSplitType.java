@@ -3,6 +3,7 @@ package net.osmand.plus.track;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -36,21 +37,23 @@ public enum GpxSplitType {
 		return ctx.getString(resId);
 	}
 
-	public static GpxSplitType getSplitTypeByName(@NonNull String name) {
+	@NonNull
+	public static GpxSplitType getSplitTypeByName(@Nullable String name) {
 		for (GpxSplitType splitType : GpxSplitType.values()) {
 			if (splitType.name().equalsIgnoreCase(name)) {
 				return splitType;
 			}
 		}
-		return null;
+		return NO_SPLIT;
 	}
 
+	@NonNull
 	public static GpxSplitType getSplitTypeByTypeId(int typeId) {
 		for (GpxSplitType splitType : GpxSplitType.values()) {
 			if (splitType.getType() == typeId) {
 				return splitType;
 			}
 		}
-		return null;
+		return NO_SPLIT;
 	}
 }

@@ -95,6 +95,7 @@ public class SettingsHelper {
 
 	public static final String SETTINGS_TYPE_LIST_KEY = "settings_type_list_key";
 	public static final String REPLACE_KEY = "replace";
+	public static final String SILENT_IMPORT_KEY = "silent_import";
 	public static final String SETTINGS_LATEST_CHANGES_KEY = "settings_latest_changes";
 	public static final String SETTINGS_VERSION_KEY = "settings_version";
 
@@ -472,31 +473,31 @@ public class SettingsHelper {
 		exportSettings(fileDir, fileName, listener, new ArrayList<>(Arrays.asList(items)), exportItemsFiles);
 	}
 
-	public List<SettingsItem> getFilteredSettingsItems(List<ExportSettingsType> settingsTypes, boolean globalExport) {
+	public List<SettingsItem> getFilteredSettingsItems(List<ExportSettingsType> settingsTypes, boolean addProfiles, boolean export) {
 		Map<ExportSettingsType, List<?>> typesMap = new HashMap<>();
-		typesMap.putAll(getSettingsItems(globalExport));
+		typesMap.putAll(getSettingsItems(addProfiles));
 		typesMap.putAll(getMyPlacesItems());
 		typesMap.putAll(getResourcesItems());
 
-		return getFilteredSettingsItems(typesMap, settingsTypes);
+		return getFilteredSettingsItems(typesMap, settingsTypes, export);
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(Map<ExportSettingsType, List<?>> allSettingsMap,
-	                                                      List<ExportSettingsType> settingsTypes) {
+													   List<ExportSettingsType> settingsTypes, boolean export) {
 		List<SettingsItem> settingsItems = new ArrayList<>();
 		for (ExportSettingsType settingsType : settingsTypes) {
 			List<?> settingsDataObjects = allSettingsMap.get(settingsType);
 			if (settingsDataObjects != null) {
-				settingsItems.addAll(prepareSettingsItems(new ArrayList<>(settingsDataObjects)));
+				settingsItems.addAll(prepareSettingsItems(settingsDataObjects, export));
 			}
 		}
 		return settingsItems;
 	}
 
-	public Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsByCategory(boolean globalExport) {
+	public Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsByCategory(boolean addProfiles) {
 		Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
 
-		Map<ExportSettingsType, List<?>> settingsItems = getSettingsItems(globalExport);
+		Map<ExportSettingsType, List<?>> settingsItems = getSettingsItems(addProfiles);
 		Map<ExportSettingsType, List<?>> myPlacesItems = getMyPlacesItems();
 		Map<ExportSettingsType, List<?>> resourcesItems = getResourcesItems();
 
@@ -513,10 +514,10 @@ public class SettingsHelper {
 		return dataList;
 	}
 
-	private Map<ExportSettingsType, List<?>> getSettingsItems(boolean globalExport) {
+	private Map<ExportSettingsType, List<?>> getSettingsItems(boolean addProfiles) {
 		Map<ExportSettingsType, List<?>> settingsItems = new LinkedHashMap<>();
 
-		if (globalExport) {
+		if (addProfiles) {
 			List<ApplicationModeBean> appModeBeans = new ArrayList<>();
 			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 				appModeBeans.add(mode.toModeBean());
@@ -687,7 +688,7 @@ public class SettingsHelper {
 		return files;
 	}
 
-	public List<SettingsItem> prepareSettingsItems(List<? super Object> data) {
+	public List<SettingsItem> prepareSettingsItems(List<?> data, boolean export) {
 		List<SettingsItem> settingsItems = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
@@ -710,7 +711,12 @@ public class SettingsHelper {
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
 				try {
-					settingsItems.add(new FileSettingsItem(app, (File) object));
+					File file = (File) object;
+					if (file.getName().endsWith(IndexConstants.GPX_FILE_EXT)) {
+						settingsItems.add(new GpxSettingsItem(app, file));
+					} else {
+						settingsItems.add(new FileSettingsItem(app, file));
+					}
 				} catch (IllegalArgumentException e) {
 					LOG.warn("Trying to export unsuported file type", e);
 				}
@@ -749,7 +755,14 @@ public class SettingsHelper {
 		}
 		if (!appModeBeans.isEmpty()) {
 			for (ApplicationModeBean modeBean : appModeBeans) {
-				settingsItems.add(new ProfileSettingsItem(app, null, modeBean));
+				if (export) {
+					ApplicationMode mode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
+					if (mode != null) {
+						settingsItems.add(new ProfileSettingsItem(app, mode));
+					}
+				} else {
+					settingsItems.add(new ProfileSettingsItem(app, null, modeBean));
+				}
 			}
 		}
 		if (!osmNotesPointList.isEmpty()) {
@@ -923,6 +936,9 @@ public class SettingsHelper {
 				case SEARCH_HISTORY:
 					SearchHistorySettingsItem searchHistorySettingsItem = (SearchHistorySettingsItem) item;
 					historyEntries.addAll(searchHistorySettingsItem.getItems());
+					break;
+				case GPX:
+					tracksFilesList.add((GpxSettingsItem) item);
 					break;
 				default:
 					break;

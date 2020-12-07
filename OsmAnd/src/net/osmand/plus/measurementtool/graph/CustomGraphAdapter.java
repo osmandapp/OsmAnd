@@ -61,10 +61,13 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 			public void onValueSelected(Entry e, Highlight h) {
 				if (getStatistics() == null) return;
 
-				List<RouteStatisticsHelper.RouteSegmentAttribute> elems = getStatistics().elements;
+				List<RouteSegmentAttribute> elems = getStatistics().elements;
 				int i = h.getStackIndex();
 				if (i >= 0 && elems.size() > i) {
 					selectedPropertyName = elems.get(i).getPropertyName();
+					updateLegend();
+				} else if (LegendViewType.ONE_ELEMENT == legendViewType && elems.size() == 1) {
+					selectedPropertyName = elems.get(0).getPropertyName();
 					updateLegend();
 				}
 			}
@@ -116,19 +119,20 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 	}
 
 	private void attachLegend() {
-		if (getSegmentsList() == null) return;
+		List<RouteSegmentAttribute> attributes = getSegmentsList();
+		if (attributes == null) return;
 
 		switch (legendViewType) {
 			case ONE_ELEMENT:
-				for (RouteSegmentAttribute segment : getSegmentsList()) {
-					if (segment.getPropertyName().equals(selectedPropertyName)) {
-						attachLegend(Collections.singletonList(segment), null);
+				for (RouteSegmentAttribute attribute : attributes) {
+					if (attribute.getPropertyName().equals(selectedPropertyName)) {
+						attachLegend(Collections.singletonList(attribute), null);
 						break;
 					}
 				}
 				break;
 			case ALL_AS_LIST:
-				attachLegend(getSegmentsList(), selectedPropertyName);
+				attachLegend(attributes, selectedPropertyName);
 				break;
 		}
 	}
@@ -137,7 +141,7 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 	                          String propertyNameToFullSpan) {
 		OsmandApplication app = getMyApplication();
 		LayoutInflater inflater = LayoutInflater.from(app);
-		for (RouteStatisticsHelper.RouteSegmentAttribute segment : list) {
+		for (RouteSegmentAttribute segment : list) {
 			View view = inflater.inflate(R.layout.route_details_legend, legendContainer, false);
 			int segmentColor = segment.getColor();
 			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, segmentColor);

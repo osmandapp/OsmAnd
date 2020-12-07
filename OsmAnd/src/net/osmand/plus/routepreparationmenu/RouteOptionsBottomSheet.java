@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -12,11 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -31,6 +36,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerStartItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DividerItem;
@@ -53,18 +59,28 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogMode.ALL;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION;
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
 import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "RouteOptionsBottomSheet";
+	public static final String TAG = RouteOptionsBottomSheet.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(RouteOptionsBottomSheet.class);
+	public static final String APP_MODE_KEY = "APP_MODE_KEY";
+	public static final String PLANE_ROUTE = "PLANE_ROUTE";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -79,16 +95,28 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private CommonPreference<Boolean> useHeightPref;
 	private StateChangedListener<Boolean> voiceMuteChangeListener;
 	private StateChangedListener<Boolean> useHeightChangeListener;
+	private boolean planRouteMode;
+	private List<RoutingParameter> reliefParameters = new ArrayList<>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Bundle args = getArguments();
+		if (args != null) {
+			String appMode = args.getString(APP_MODE_KEY, null);
+			if (appMode != null) {
+				applicationMode = ApplicationMode.valueOfStringKey(appMode, null);
+				planRouteMode = true;
+			}
+		}
 		app = requiredMyApplication();
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
 		routingOptionsHelper = app.getRoutingOptionsHelper();
 		mapActivity = getMapActivity();
-		applicationMode = routingHelper.getAppMode();
+		if (applicationMode == null) {
+			applicationMode = routingHelper.getAppMode();
+		}
 		selectedModeColorId = applicationMode.getIconColorInfo().getColor(nightMode);
 		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
 			@Override
@@ -103,6 +131,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		};
 		useHeightPref = settings.getCustomRoutingBooleanProperty(USE_HEIGHT_OBSTACLES, false);
+		reliefParameters = getReliefParameters();
 	}
 
 	@Override
@@ -115,21 +144,29 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			if (optionsItem instanceof DividerItem) {
 				items.add(new DividerStartItem(app));
 			} else if (optionsItem instanceof MuteSoundRoutingParameter) {
-				items.add(createMuteSoundItem(optionsItem));
+				if (!planRouteMode) {
+					items.add(createMuteSoundItem(optionsItem));
+				}
 			} else if (optionsItem instanceof ShowAlongTheRouteItem) {
 				items.add(createShowAlongTheRouteItem(optionsItem));
 			} else if (optionsItem instanceof RouteSimulationItem) {
-				items.add(createRouteSimulationItem(optionsItem));
+				if (!planRouteMode) {
+					items.add(createRouteSimulationItem(optionsItem));
+				}
 			} else if (optionsItem instanceof AvoidPTTypesRoutingParameter) {
 				items.add(createAvoidPTTypesItem(optionsItem));
 			} else if (optionsItem instanceof AvoidRoadsRoutingParameter) {
 				items.add(createAvoidRoadsItem(optionsItem));
 			} else if (optionsItem instanceof GpxLocalRoutingParameter) {
-				items.add(createGpxRoutingItem(optionsItem));
+				if (!planRouteMode) {
+					items.add(createGpxRoutingItem(optionsItem));
+				}
 			} else if (optionsItem instanceof TimeConditionalRoutingItem) {
 				items.add(createTimeConditionalRoutingItem(optionsItem));
 			} else if (optionsItem instanceof OtherSettingsRoutingParameter) {
 				items.add(createOtherSettingsRoutingItem(optionsItem));
+			} else if (USE_HEIGHT_OBSTACLES.equals(optionsItem.getKey()) && hasReliefParameters()) {
+				items.add(inflateElevationParameter(optionsItem));
 			} else {
 				inflateRoutingParameter(optionsItem);
 			}
@@ -254,6 +291,62 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(itemView)
 				.create();
+	}
+
+	private BaseBottomSheetItem inflateElevationParameter(final LocalRoutingParameter parameter) {
+		final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+		final boolean active = !useHeightPref.getModeValue(applicationMode);
+		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+				R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
+		final SwitchCompat switchButton = itemView.findViewById(R.id.compound_button);
+		View itemsContainer = itemView.findViewById(R.id.selectable_list_item);
+		itemsContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (USE_HEIGHT_OBSTACLES.equals(parameter.getKey()) && hasReliefParameters()) {
+					FragmentManager fm = getFragmentManager();
+					if (fm != null) {
+						ElevationDateBottomSheet.showInstance(fm, applicationMode, RouteOptionsBottomSheet.this, false);
+					}
+				}
+			}
+		});
+
+		switchButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				applyParameter(item[0], parameter);
+				item[0].setDescription(getElevationDescription(parameter));
+				switchButton.setChecked(parameter.isSelected(settings));
+			}
+		});
+
+		item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(!active)
+				.setCompoundButtonColorId(selectedModeColorId)
+				.setDescription(getElevationDescription(parameter))
+				.setIcon(getContentIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId()))
+				.setTitle(getString(R.string.routing_attr_height_obstacles_name))
+				.setCustomView(itemView)
+				.create();
+
+		return item[0];
+	}
+
+	private String getElevationDescription(LocalRoutingParameter parameter) {
+		String description;
+		if (parameter.isSelected(settings)) {
+			description = getString(R.string.shared_string_enabled);
+			for (RoutingParameter routingParameter : reliefParameters) {
+				if (isRoutingParameterSelected(settings, applicationMode, routingParameter)) {
+					description = getString(R.string.ltr_or_rtl_combine_via_comma, description,
+							getRoutingParameterTitle(app, routingParameter));
+				}
+			}
+		} else {
+			description = getString(R.string.shared_string_disabled);
+		}
+		return description;
 	}
 
 	private BaseBottomSheetItem createTimeConditionalRoutingItem(final LocalRoutingParameter optionsItem) {
@@ -415,8 +508,10 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					@Override
 					public void onClick(View view) {
 						dismiss();
+						Bundle args = new Bundle();
+						args.putBoolean(PLANE_ROUTE, planRouteMode);
 						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.NAVIGATION,
-								mapActivity.getRoutingHelper().getAppMode());
+								applicationMode, args);
 					}
 				})
 				.create();
@@ -468,14 +563,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				builder.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (USE_HEIGHT_OBSTACLES.equals(parameter.getKey()) && hasReliefParameters()) {
-							FragmentManager fm = getFragmentManager();
-							if (fm != null) {
-								ElevationDateBottomSheet.showInstance(fm, applicationMode, RouteOptionsBottomSheet.this, false);
-							}
-						} else {
-							applyParameter(item[0], parameter);
-						}
+						applyParameter(item[0], parameter);
 					}
 				});
 			}
@@ -488,14 +576,19 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private boolean hasReliefParameters() {
+		return !Algorithms.isEmpty(reliefParameters);
+	}
+
+	private List<RoutingParameter> getReliefParameters() {
+		List<RoutingParameter> reliefFactorParameters = new ArrayList<>();
 		Map<String, RoutingParameter> parameters = app.getRouter(applicationMode).getParameters();
-		for (Map.Entry<String, RoutingParameter> e : parameters.entrySet()) {
-			RoutingParameter routingParameter = e.getValue();
+		for (Map.Entry<String, RoutingParameter> entry : parameters.entrySet()) {
+			RoutingParameter routingParameter = entry.getValue();
 			if (RELIEF_SMOOTHNESS_FACTOR.equals(routingParameter.getGroup())) {
-				return true;
+				reliefFactorParameters.add(routingParameter);
 			}
 		}
-		return false;
+		return reliefFactorParameters;
 	}
 
 	private void applyParameter(BottomSheetItemWithCompoundButton bottomSheetItem, LocalRoutingParameter parameter) {
@@ -514,6 +607,23 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapRouteInfoMenu().updateMenu();
+		}
+
+	}
+
+	@Override
+	public void onDismiss(@NonNull DialogInterface dialog) {
+		super.onDismiss(dialog);
+		updatePlanRoute();
+	}
+
+	private void updatePlanRoute() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MeasurementToolFragment.TAG);
+			if (fragment != null) {
+				((MeasurementToolFragment) fragment).onChangeApplicationMode(applicationMode, WHOLE_ROUTE_CALCULATION, ALL);
+			}
 		}
 	}
 
@@ -549,8 +659,21 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(FragmentManager fragmentManager) {
-		RouteOptionsBottomSheet f = new RouteOptionsBottomSheet();
-		f.show(fragmentManager, RouteOptionsBottomSheet.TAG);
+		showInstance(fragmentManager, null);
+	}
+
+	public static void showInstance(FragmentManager fm, String appModeKey) {
+		try {
+			if (!fm.isStateSaved()) {
+				RouteOptionsBottomSheet fragment = new RouteOptionsBottomSheet();
+				Bundle args = new Bundle();
+				args.putString(APP_MODE_KEY, appModeKey);
+				fragment.setArguments(args);
+				fragment.show(fm, TAG);
+			}
+		} catch (RuntimeException e) {
+			LOG.error("showInstance", e);
+		}
 	}
 
 	public void updateParameters() {

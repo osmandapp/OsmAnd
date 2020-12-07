@@ -412,7 +412,7 @@ public class MenuBuilder {
 			}
 		});
 		//TODO This feature is under development
-		if (!OsmandPlugin.isDevelopment()) {
+		if (!Version.isDeveloperVersion(app)) {
 			view.setVisibility(View.GONE);
 		}
 		photoButton = view;

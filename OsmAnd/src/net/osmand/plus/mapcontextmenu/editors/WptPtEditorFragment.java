@@ -30,6 +30,7 @@ import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.Map;
 
 public class WptPtEditorFragment extends PointEditorFragment {
@@ -379,7 +380,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	private void saveGpx(final OsmandApplication app, final GPXFile gpxFile, final boolean gpxSelected) {
-		new SaveGpxAsyncTask(gpxFile, new SaveGpxListener() {
+		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
 
