@@ -65,12 +65,12 @@
 			android:background="?attr/divider_color_basic" />
 
 		<androidx.appcompat.widget.SwitchCompat
-			android:id="@+id/switchWidget"
+			android:id="@+id/compound_button"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:background="@null"
-			android:clickable="true"
-			android:focusable="true"
+			android:clickable="false"
+			android:focusable="false"
 			android:paddingStart="@dimen/content_padding"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingEnd="@dimen/content_padding"
