@@ -473,6 +473,10 @@ public class TrackDetailsMenu {
 	}
 
 	public void refreshChart(LineChart chart, boolean forceFit) {
+		refreshChart(chart, true, forceFit);
+	}
+
+	public void refreshChart(LineChart chart, boolean fitTrackOnMap, boolean forceFit) {
 		MapActivity mapActivity = getMapActivity();
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity == null || gpxItem == null) {
@@ -529,7 +533,9 @@ public class TrackDetailsMenu {
 		if (location != null) {
 			mapActivity.refreshMap();
 		}
-		fitTrackOnMap(chart, location, forceFit);
+		if (fitTrackOnMap) {
+			fitTrackOnMap(chart, location, forceFit);
+		}
 	}
 
 	public boolean shouldShowXAxisPoints () {

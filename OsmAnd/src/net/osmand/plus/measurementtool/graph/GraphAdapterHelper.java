@@ -105,11 +105,11 @@ public class GraphAdapterHelper {
 	                                           @NonNull final TrackDetailsMenu detailsMenu) {
 		final RefreshMapCallback refreshMapCallback = new RefreshMapCallback() {
 			@Override
-			public void refreshMap(boolean forceFit) {
+			public void refreshMap(boolean fitTrackOnMap, boolean forceFit) {
 				LineChart chart = graphAdapter.getChart();
 				OsmandApplication app = mapActivity.getMyApplication();
 				if (!app.getRoutingHelper().isFollowingMode()) {
-					detailsMenu.refreshChart(chart, forceFit);
+					detailsMenu.refreshChart(chart, fitTrackOnMap, forceFit);
 					mapActivity.refreshMap();
 				}
 			}
@@ -120,7 +120,7 @@ public class GraphAdapterHelper {
 
 					@Override
 					public void onValueSelected(Entry e, Highlight h) {
-						refreshMapCallback.refreshMap(false);
+						refreshMapCallback.refreshMap(true, false);
 					}
 
 					@Override
@@ -141,7 +141,7 @@ public class GraphAdapterHelper {
 						lastPerformedGesture == ChartTouchListener.ChartGesture.PINCH_ZOOM ||
 						lastPerformedGesture == ChartTouchListener.ChartGesture.DOUBLE_TAP ||
 						lastPerformedGesture == ChartTouchListener.ChartGesture.ROTATE) {
-					refreshMapCallback.refreshMap(true);
+					refreshMapCallback.refreshMap(true, true);
 				}
 			}
 		});
@@ -150,6 +150,6 @@ public class GraphAdapterHelper {
 	}
 
 	public interface RefreshMapCallback {
-		void refreshMap(boolean forceFit);
+		void refreshMap(boolean fitTrackOnMap, boolean forceFit);
 	}
 }
