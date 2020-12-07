@@ -57,10 +57,8 @@ public class NavigationFragment extends BaseSettingsFragment {
 				if (args != null && args.getBoolean(PLANE_ROUTE, false)) {
 					RouteOptionsBottomSheet.showInstance(getMapActivity().getSupportFragmentManager(),
 							getSelectedAppMode().getStringKey());
-					dismiss();
-				} else {
-					getActivity().onBackPressed();
 				}
+				dismiss();
 			}
 		});
 	}

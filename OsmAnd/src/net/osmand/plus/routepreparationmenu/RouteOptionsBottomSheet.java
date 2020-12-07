@@ -91,7 +91,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private CommonPreference<Boolean> useHeightPref;
 	private StateChangedListener<Boolean> voiceMuteChangeListener;
 	private StateChangedListener<Boolean> useHeightChangeListener;
-	private boolean planeRouteMode;
+	private boolean planRouteMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			String appMode = args.getString(APP_MODE_KEY, null);
 			if (appMode != null) {
 				applicationMode = ApplicationMode.valueOfStringKey(appMode, null);
-				planeRouteMode = true;
+				planRouteMode = true;
 			}
 		}
 		app = requiredMyApplication();
@@ -138,28 +138,22 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			if (optionsItem instanceof DividerItem) {
 				items.add(new DividerStartItem(app));
 			} else if (optionsItem instanceof MuteSoundRoutingParameter) {
-				if (!planeRouteMode) {
+				if (!planRouteMode) {
 					items.add(createMuteSoundItem(optionsItem));
-				} else {
-					continue;
 				}
 			} else if (optionsItem instanceof ShowAlongTheRouteItem) {
 				items.add(createShowAlongTheRouteItem(optionsItem));
 			} else if (optionsItem instanceof RouteSimulationItem) {
-				if (!planeRouteMode) {
+				if (!planRouteMode) {
 					items.add(createRouteSimulationItem(optionsItem));
-				} else {
-					continue;
 				}
 			} else if (optionsItem instanceof AvoidPTTypesRoutingParameter) {
 				items.add(createAvoidPTTypesItem(optionsItem));
 			} else if (optionsItem instanceof AvoidRoadsRoutingParameter) {
 				items.add(createAvoidRoadsItem(optionsItem));
 			} else if (optionsItem instanceof GpxLocalRoutingParameter) {
-				if (!planeRouteMode) {
+				if (!planRouteMode) {
 					items.add(createGpxRoutingItem(optionsItem));
-				} else {
-					continue;
 				}
 			} else if (optionsItem instanceof TimeConditionalRoutingItem) {
 				items.add(createTimeConditionalRoutingItem(optionsItem));
@@ -451,7 +445,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					public void onClick(View view) {
 						dismiss();
 						Bundle args = new Bundle();
-						args.putBoolean(PLANE_ROUTE, true);
+						args.putBoolean(PLANE_ROUTE, planRouteMode);
 						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.NAVIGATION,
 								applicationMode, args);
 					}
@@ -565,7 +559,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MeasurementToolFragment.TAG);
-			((MeasurementToolFragment) fragment).onChangeApplicationMode(applicationMode, WHOLE_ROUTE_CALCULATION, ALL);
+			if (fragment != null) {
+				((MeasurementToolFragment) fragment).onChangeApplicationMode(applicationMode, WHOLE_ROUTE_CALCULATION, ALL);
+			}
 		}
 	}
 
