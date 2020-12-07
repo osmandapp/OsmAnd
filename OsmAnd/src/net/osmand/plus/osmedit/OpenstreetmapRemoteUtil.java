@@ -417,8 +417,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 							}
 						}
 					}
-				} else if (MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10) {
-					// avoid shifting due to round error
+				} else if (MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10 || 
+					  MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) > 10000) {
+					// avoid shifting due to round error and avoid moving to more than 10 km
 					n.setLatitude(entity.getLatitude());
 					n.setLongitude(entity.getLongitude());
 				}
