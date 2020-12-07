@@ -193,6 +193,15 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 	}
 
+	protected ViewTreeObserver.OnGlobalLayoutListener getShadowLayoutListener(){
+		return new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				setShadowOnScrollableView();
+			}
+		};
+	}
+
 	protected void drawTopShadow(boolean showTopShadow) {
 		final Activity activity = getActivity();
 		View mainView = getView();

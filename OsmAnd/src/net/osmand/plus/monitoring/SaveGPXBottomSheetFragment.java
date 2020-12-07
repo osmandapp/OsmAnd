@@ -153,6 +153,11 @@ public class SaveGPXBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
+	protected void onDismissButtonClickAction() {
+		doRename(false);
+	}
+
+	@Override
 	public void onDismiss(DialogInterface dialog) {
 		super.onDismiss(dialog);
 		if (file != null) {

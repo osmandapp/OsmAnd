@@ -1,18 +1,15 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -52,6 +49,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.osm_login_data, null);
+		view.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 
 		userNameEditText = view.findViewById(R.id.name_edit_text);
 		passwordEditText = view.findViewById(R.id.password_edit_text);
@@ -81,27 +79,6 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 		items.add(titleItem);
 	}
 
-	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				Rect visibleDisplayFrame = new Rect();
-				buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_max_width);
-				shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
-				scrollView = getView().findViewById(R.id.scroll_view);
-				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-				int viewHeight = scrollView.getHeight();
-				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
-				if (contentHeightPrevious != contentHeight) {
-					boolean showTopShadow;
-					showTopShadow = viewHeight + shadowHeight < contentHeight;
-					scrollView.requestLayout();
-					contentHeightPrevious = contentHeight;
-					drawTopShadow(showTopShadow);
-				}
-			}
-		};
-	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {

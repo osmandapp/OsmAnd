@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,7 +51,6 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
-	private ScrollView scrollView;
 
 	public void setGpxInfos(GpxInfo[] gpxInfos) {
 		this.gpxInfos = gpxInfos;
@@ -66,7 +63,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View sendGpxView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
-		sendGpxView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		sendGpxView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 
 		tagsField = sendGpxView.findViewById(R.id.tags_field);
 		messageField = sendGpxView.findViewById(R.id.message_field);
@@ -126,21 +123,6 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 				.setCustomView(sendGpxView)
 				.create();
 		items.add(titleItem);
-	}
-
-	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				scrollView = getView().findViewById(R.id.scroll_view);
-				if (scrollView.canScrollVertically(1) || scrollView.canScrollVertically(-1)) {
-					drawTopShadow(false);
-					scrollView.getChildAt(0).setPadding(0, 8, 0, 0);
-				} else {
-					drawTopShadow(true);
-				}
-			}
-		};
 	}
 
 	protected static void showOpenStreetMapScreen(@NonNull FragmentActivity activity) {

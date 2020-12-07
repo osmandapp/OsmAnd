@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -78,7 +77,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 
 		final View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_osm_note_fragment, null);
-		sendOsmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		sendOsmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 
 		noteText = sendOsmNoteView.findViewById(R.id.note_text);
 		noteText.setText(((OsmNotesPoint) poi[0]).getText());
@@ -148,14 +147,6 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 				.setCustomView(sendOsmNoteView)
 				.create();
 		items.add(bottomSheetItem);
-	}
-
-	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override public void onGlobalLayout() {
-				setShadowOnScrollableView();
-			}
-		};
 	}
 
 	private void updateAccountName() {
