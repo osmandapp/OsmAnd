@@ -289,7 +289,7 @@
     <string name="intermediate_items_sort_by_distance">فرز من الباب إلى الباب</string>
     <string name="wait_current_task_finished">الرجاء الانتظار حتى انتهاء المهمة الحالية</string>
     <string name="available_downloads_left">توفر %1$d ملفات للتحميل</string>
-    <string name="cancel_route">إلغاء مسار</string>
+    <string name="cancel_route">رفض المسار؟</string>
     <string name="monitoring_settings">تسجيل المسار</string>
     <string name="monitoring_settings_descr">قم بضبط كيفية تسجيل الرحلات.</string>
     <string name="choose_osmand_theme_descr">تحديد سمة للتطبيق: ليلي، نهاري.</string>

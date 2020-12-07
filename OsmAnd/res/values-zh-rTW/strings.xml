@@ -863,7 +863,7 @@
     <string name="use_magnetic_sensor">使用磁性感應器</string>
     <string name="other_location">其它</string>
     <string name="install_paid">完整版</string>
-    <string name="cancel_route">排除路線</string>
+    <string name="cancel_route">排除路線？</string>
     <string name="cancel_navigation">停止導航</string>
     <string name="clear_destination">清除目的地</string>
     <string name="download_using_mobile_internet">並未連線至 Wi-Fi。使用目前的連線進行下載嗎？</string>

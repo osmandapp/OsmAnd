@@ -641,7 +641,7 @@
     <string name="files_limit">Restando %1$d arquivos</string>
     <string name="available_downloads_left">%1$d arquivos restantes para download</string>
     <string name="install_paid">Versão completa</string>
-    <string name="cancel_route">Descartar rota</string>
+    <string name="cancel_route">Descartar rota\?</string>
     <string name="cancel_navigation">Parar navegação</string>
     <string name="clear_destination">Apagar destino</string>
     <string name="download_using_mobile_internet">Não conectado ao Wi-Fi. Use a conexão atual com a Internet para baixar\?</string>

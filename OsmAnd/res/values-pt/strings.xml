@@ -949,7 +949,7 @@
     <string name="files_limit">Restando %1$d ficheiros</string>
     <string name="available_downloads_left">Faltam %1$d ficheiros para descarregar</string>
     <string name="install_paid">Versão completa</string>
-    <string name="cancel_route">Descartar rota</string>
+    <string name="cancel_route">Descartar a rota\?</string>
     <string name="cancel_navigation">Parar navegação</string>
     <string name="local_osm_changes_backup_successful">Ficheiro de alterações OSM gerado %1$s</string>
     <string name="local_osm_changes_backup_failed">Não foi possível fazer backup das alterações do OSM.</string>

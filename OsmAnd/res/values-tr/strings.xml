@@ -700,7 +700,7 @@
     <string name="use_magnetic_sensor">Manyetik sensörü kullan</string>
     <string name="other_location">Diğer</string>
     <string name="install_paid">Tam sürüm</string>
-    <string name="cancel_route">Rotaya son ver</string>
+    <string name="cancel_route">Rotaya son verilsin mi\?</string>
     <string name="cancel_navigation">Navigasyonu durdur</string>
     <string name="clear_destination">Varış noktasını temizle</string>
     <string name="download_using_mobile_internet">Kablosuz ağa bağlı değil. İndirmek için şimdiki İnternet bağlantısı kullanılsın mı\?</string>
