@@ -298,10 +298,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		final boolean active = !useHeightPref.getModeValue(applicationMode);
 		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
 				R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
-		final SwitchCompat switchButton = itemView.findViewById(R.id.switchWidget);
+		final SwitchCompat switchButton = itemView.findViewById(R.id.compound_button);
 		View itemsContainer = itemView.findViewById(R.id.selectable_list_item);
-		switchButton.setChecked(!active);
-		switchButton.setFocusable(false);
 		itemsContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -314,14 +312,17 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		});
 
-		switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		switchButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 				applyParameter(item[0], parameter);
 				item[0].setDescription(getElevationDescription(parameter));
+				switchButton.setChecked(parameter.isSelected(settings));
 			}
 		});
 
 		item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(!active)
 				.setCompoundButtonColorId(selectedModeColorId)
 				.setDescription(getElevationDescription(parameter))
 				.setIcon(getContentIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId()))
@@ -562,8 +563,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				builder.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-							applyParameter(item[0], parameter);
-						}
+						applyParameter(item[0], parameter);
+					}
 				});
 			}
 			if (iconId != -1) {
