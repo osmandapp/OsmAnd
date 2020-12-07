@@ -21,6 +21,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
@@ -180,6 +181,9 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 							Fragment target = getTargetFragment();
 							if (target instanceof BaseSettingsFragment) {
 								((BaseSettingsFragment) target).updateSetting(useHeightPref.getId());
+							}
+							if (target instanceof RouteOptionsBottomSheet) {
+								((RouteOptionsBottomSheet) target).updateParameters();
 							}
 							updateReliefButtons();
 							app.runInUIThread(new Runnable() {

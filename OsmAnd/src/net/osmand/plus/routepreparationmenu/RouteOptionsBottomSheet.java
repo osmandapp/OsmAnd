@@ -300,6 +300,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
 		final SwitchCompat switchButton = itemView.findViewById(R.id.switchWidget);
 		View itemsContainer = itemView.findViewById(R.id.selectable_list_item);
+		switchButton.setChecked(!active);
 		switchButton.setFocusable(false);
 		itemsContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -321,7 +322,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 
 		item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(!active)
 				.setCompoundButtonColorId(selectedModeColorId)
 				.setDescription(getElevationDescription(parameter))
 				.setIcon(getContentIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId()))
