@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -44,6 +44,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.osm_login_data, null);
+		view.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 
 		userNameEditText = view.findViewById(R.id.name_edit_text);
 		passwordEditText = view.findViewById(R.id.password_edit_text);
@@ -72,6 +73,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 				.create();
 		items.add(titleItem);
 	}
+
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -107,7 +109,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
-	                                   boolean usedOnMap, @Nullable ApplicationMode appMode) {
+									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
