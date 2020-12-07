@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -12,11 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -31,6 +35,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerStartItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DividerItem;
@@ -53,18 +58,25 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogMode.ALL;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION;
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
 import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "RouteOptionsBottomSheet";
+	public static final String TAG = RouteOptionsBottomSheet.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(RouteOptionsBottomSheet.class);
+	public static final String APP_MODE_KEY = "APP_MODE_KEY";
+	public static final String PLANE_ROUTE = "PLANE_ROUTE";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -79,16 +91,27 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private CommonPreference<Boolean> useHeightPref;
 	private StateChangedListener<Boolean> voiceMuteChangeListener;
 	private StateChangedListener<Boolean> useHeightChangeListener;
+	private boolean planeRouteMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Bundle args = getArguments();
+		if (args != null) {
+			String appMode = args.getString(APP_MODE_KEY, null);
+			if (appMode != null) {
+				applicationMode = ApplicationMode.valueOfStringKey(appMode, null);
+				planeRouteMode = true;
+			}
+		}
 		app = requiredMyApplication();
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
 		routingOptionsHelper = app.getRoutingOptionsHelper();
 		mapActivity = getMapActivity();
-		applicationMode = routingHelper.getAppMode();
+		if (applicationMode == null) {
+			applicationMode = routingHelper.getAppMode();
+		}
 		selectedModeColorId = applicationMode.getIconColorInfo().getColor(nightMode);
 		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
 			@Override
@@ -115,17 +138,29 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			if (optionsItem instanceof DividerItem) {
 				items.add(new DividerStartItem(app));
 			} else if (optionsItem instanceof MuteSoundRoutingParameter) {
-				items.add(createMuteSoundItem(optionsItem));
+				if (!planeRouteMode) {
+					items.add(createMuteSoundItem(optionsItem));
+				} else {
+					continue;
+				}
 			} else if (optionsItem instanceof ShowAlongTheRouteItem) {
 				items.add(createShowAlongTheRouteItem(optionsItem));
 			} else if (optionsItem instanceof RouteSimulationItem) {
-				items.add(createRouteSimulationItem(optionsItem));
+				if (!planeRouteMode) {
+					items.add(createRouteSimulationItem(optionsItem));
+				} else {
+					continue;
+				}
 			} else if (optionsItem instanceof AvoidPTTypesRoutingParameter) {
 				items.add(createAvoidPTTypesItem(optionsItem));
 			} else if (optionsItem instanceof AvoidRoadsRoutingParameter) {
 				items.add(createAvoidRoadsItem(optionsItem));
 			} else if (optionsItem instanceof GpxLocalRoutingParameter) {
-				items.add(createGpxRoutingItem(optionsItem));
+				if (!planeRouteMode) {
+					items.add(createGpxRoutingItem(optionsItem));
+				} else {
+					continue;
+				}
 			} else if (optionsItem instanceof TimeConditionalRoutingItem) {
 				items.add(createTimeConditionalRoutingItem(optionsItem));
 			} else if (optionsItem instanceof OtherSettingsRoutingParameter) {
@@ -415,8 +450,10 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					@Override
 					public void onClick(View view) {
 						dismiss();
+						Bundle args = new Bundle();
+						args.putBoolean(PLANE_ROUTE, true);
 						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.NAVIGATION,
-								mapActivity.getRoutingHelper().getAppMode());
+								applicationMode, args);
 					}
 				})
 				.create();
@@ -515,6 +552,21 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		if (mapActivity != null) {
 			mapActivity.getMapRouteInfoMenu().updateMenu();
 		}
+
+	}
+
+	@Override
+	public void onDismiss(@NonNull DialogInterface dialog) {
+		super.onDismiss(dialog);
+		updatePlanRoute();
+	}
+
+	private void updatePlanRoute() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MeasurementToolFragment.TAG);
+			((MeasurementToolFragment) fragment).onChangeApplicationMode(applicationMode, WHOLE_ROUTE_CALCULATION, ALL);
+		}
 	}
 
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode applicationMode) {
@@ -549,8 +601,21 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(FragmentManager fragmentManager) {
-		RouteOptionsBottomSheet f = new RouteOptionsBottomSheet();
-		f.show(fragmentManager, RouteOptionsBottomSheet.TAG);
+		showInstance(fragmentManager, null);
+	}
+
+	public static void showInstance(FragmentManager fm, String appModeKey) {
+		try {
+			if (!fm.isStateSaved()) {
+				RouteOptionsBottomSheet fragment = new RouteOptionsBottomSheet();
+				Bundle args = new Bundle();
+				args.putString(APP_MODE_KEY, appModeKey);
+				fragment.setArguments(args);
+				fragment.show(fm, TAG);
+			}
+		} catch (RuntimeException e) {
+			LOG.error("showInstance", e);
+		}
 	}
 
 	public void updateParameters() {

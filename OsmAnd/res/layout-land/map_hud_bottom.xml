@@ -110,16 +110,31 @@
                         android:layout_marginStart="@dimen/map_button_spacing_land"
                         android:background="@drawable/btn_round"
                         android:contentDescription="@string/layer_route"
-                        tools:src="@drawable/ic_action_remove_dark"/>
+                        tools:src="@drawable/ic_action_remove_dark" />
 
-                    <ImageButton
-                        android:id="@+id/snap_to_road_image_button"
-                        android:layout_width="@dimen/map_button_size"
-                        android:layout_height="@dimen/map_button_size"
-                        android:layout_gravity="bottom"
-                        android:background="@drawable/btn_circle"
-                        android:visibility="gone"
-                        tools:src="@drawable/ic_action_remove_dark"/>
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/snap_to_road_image_button"
+                            android:layout_width="@dimen/map_button_size"
+                            android:layout_height="@dimen/map_button_size"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/btn_circle"
+                            android:visibility="gone"
+                            tools:src="@drawable/ic_action_remove_dark"
+                            android:contentDescription="@string/snap_to_road" />
+
+                        <include
+                            android:id="@+id/profile_with_config_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/map_button_size"
+                            android:layout_gravity="bottom"
+                            layout="@layout/profile_with_config_btn_layout"
+                            android:visibility="gone" />
+                    </FrameLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>

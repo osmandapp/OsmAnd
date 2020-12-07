@@ -3,9 +3,11 @@ package net.osmand.plus.settings.fragments;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -33,6 +35,7 @@ import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.IS
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
+import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.PLANE_ROUTE;
 
 public class NavigationFragment extends BaseSettingsFragment {
 
@@ -48,6 +51,18 @@ public class NavigationFragment extends BaseSettingsFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		routingProfileDataObjects = getRoutingProfiles(app);
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				Bundle args = getArguments();
+				if (args != null && args.getBoolean(PLANE_ROUTE, false)) {
+					RouteOptionsBottomSheet.showInstance(getMapActivity().getSupportFragmentManager(),
+							getSelectedAppMode().getStringKey());
+					dismiss();
+				} else {
+					getActivity().onBackPressed();
+				}
+			}
+		});
 	}
 
 	@Override
