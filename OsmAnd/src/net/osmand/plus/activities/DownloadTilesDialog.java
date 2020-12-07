@@ -36,18 +36,16 @@ import java.util.List;
 
 public class DownloadTilesDialog {
 
-	
-	private final static Log log = PlatformUtil.getLog(DownloadTilesDialog.class); 
+	private final static Log log = PlatformUtil.getLog(DownloadTilesDialog.class);
 	private final Context ctx;
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
 
-	public DownloadTilesDialog(Context ctx, OsmandApplication app, OsmandMapTileView mapView){
+	public DownloadTilesDialog(Context ctx, OsmandApplication app, OsmandMapTileView mapView) {
 		this.ctx = ctx;
 		this.app = app;
 		this.mapView = mapView;
 	}
-	
 	
 	public void openDialog(){
 		BaseMapLayer mainLayer = mapView.getMainLayer();
@@ -77,7 +75,8 @@ public class DownloadTilesDialog {
 		final TextView downloadText = ((TextView) view.findViewById(R.id.DownloadDescription));
 		final String template = ctx.getString(R.string.tiles_to_download_estimated_size);
 
-		updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, (int) slider.getValue());
+		final boolean ellipticYTile = mapSource.isEllipticYTile();
+		updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, (int) slider.getValue(), ellipticYTile);
 		if (max > zoom) {
 			slider.setValueTo(max - zoom);
 			int progress = (max - zoom) / 2;
@@ -85,7 +84,7 @@ public class DownloadTilesDialog {
 			slider.addOnChangeListener(new Slider.OnChangeListener() {
 				@Override
 				public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-					updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, (int) value);
+					updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, (int) value, ellipticYTile);
 				}
 			});
 		}
@@ -105,22 +104,16 @@ public class DownloadTilesDialog {
 	private volatile boolean cancel = false;
 	private IMapDownloaderCallback callback;
 	
-	public void run(final int zoom, final int progress, final QuadRect latlonRect, final ITileSource map){
+	public void run(final int zoom, final int progress, final QuadRect latlonRect, final ITileSource map) {
 		cancel = false;
-		int numberTiles = 0;
-		for (int z = zoom; z <= progress + zoom; z++) {
-			int x1 = (int) MapUtils.getTileNumberX(z, latlonRect.left);
-			int x2 = (int) MapUtils.getTileNumberX(z, latlonRect.right);
-			int y1 = (int) MapUtils.getTileNumberY(z, latlonRect.top);
-			int y2 = (int) MapUtils.getTileNumberY(z, latlonRect.bottom);
-			numberTiles += (x2 - x1 + 1) * (y2 - y1 + 1);
-		}
+		final boolean ellipticYTile = map.isEllipticYTile();
+		int numberTiles = getNumberTiles(zoom, progress, latlonRect, ellipticYTile);
 		final ProgressDialog progressDlg = new ProgressDialog(ctx);
 		progressDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		progressDlg.setMessage(ctx.getString(R.string.shared_string_downloading));
 		progressDlg.setCancelable(true);
 		progressDlg.setMax(numberTiles);
-		progressDlg.setOnCancelListener(new DialogInterface.OnCancelListener(){
+		progressDlg.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
 			@Override
 			public void onCancel(DialogInterface dialog) {
@@ -152,8 +145,15 @@ public class DownloadTilesDialog {
 					for (int z = zoom; z <= zoom + progress && !cancel; z++) {
 						int x1 = (int) MapUtils.getTileNumberX(z, latlonRect.left);
 						int x2 = (int) MapUtils.getTileNumberX(z, latlonRect.right);
-						int y1 = (int) MapUtils.getTileNumberY(z, latlonRect.top);
-						int y2 = (int) MapUtils.getTileNumberY(z, latlonRect.bottom);
+						int y1;
+						int y2;
+						if (ellipticYTile) {
+							y1 = (int) MapUtils.getTileEllipsoidNumberY(z, latlonRect.top);
+							y2 = (int) MapUtils.getTileEllipsoidNumberY(z, latlonRect.bottom);
+						} else {
+							y1 = (int) MapUtils.getTileNumberY(z, latlonRect.top);
+							y2 = (int) MapUtils.getTileNumberY(z, latlonRect.bottom);
+						}
 						for (int x = x1; x <= x2 && !cancel; x++) {
 							for (int y = y1; y <= y2 && !cancel; y++) {
 								String tileId = rm.calculateTileId(map, x, y, z);
@@ -178,7 +178,6 @@ public class DownloadTilesDialog {
 								}
 							}
 						}
-						
 					}
 					if(cancel){
 						instance.refuseAllPreviousRequests();
@@ -205,26 +204,34 @@ public class DownloadTilesDialog {
 				}
 				progressDlg.dismiss();
 			}
-			
 		};
-		
-		
-		
 		new Thread(r, "Downloading tiles").start(); //$NON-NLS-1$
 		progressDlg.show();
 	}
 
+	private void updateLabel(final int zoom, final QuadRect latlonRect, final TextView downloadText,
+	                         final String template, int progress, boolean ellipticYTile) {
+		int numberTiles = getNumberTiles(zoom, progress, latlonRect, ellipticYTile);
+		downloadText.setText(MessageFormat.format(template, (progress + zoom) + "",
+				numberTiles, (double) numberTiles * 12 / 1000));
+	}
 
-	private void updateLabel(final int zoom, final QuadRect latlonRect, final TextView downloadText, final String template, int progress) {
+	private int getNumberTiles(int zoom, int progress, QuadRect latlonRect, boolean ellipticYTile) {
 		int numberTiles = 0;
 		for (int z = zoom; z <= progress + zoom; z++) {
 			int x1 = (int) MapUtils.getTileNumberX(z, latlonRect.left);
 			int x2 = (int) MapUtils.getTileNumberX(z, latlonRect.right);
-			int y1 = (int) MapUtils.getTileNumberY(z, latlonRect.top);
-			int y2 = (int) MapUtils.getTileNumberY(z, latlonRect.bottom);
+			int y1;
+			int y2;
+			if (ellipticYTile) {
+				y1 = (int) MapUtils.getTileEllipsoidNumberY(z, latlonRect.top);
+				y2 = (int) MapUtils.getTileEllipsoidNumberY(z, latlonRect.bottom);
+			} else {
+				y1 = (int) MapUtils.getTileNumberY(z, latlonRect.top);
+				y2 = (int) MapUtils.getTileNumberY(z, latlonRect.bottom);
+			}
 			numberTiles += (x2 - x1 + 1) * (y2 - y1 + 1);
 		}
-		downloadText.setText(MessageFormat.format(template, (progress + zoom)+"", //$NON-NLS-1$ 
-				numberTiles, (double)numberTiles*12/1000));
+		return numberTiles;
 	}
 }

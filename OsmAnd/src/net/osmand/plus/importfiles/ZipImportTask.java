@@ -86,7 +86,7 @@ public class ZipImportTask extends BaseLoadAsyncTask<Void, Void, ImportType> {
 		} else if (importType == ImportType.SETTINGS) {
 			String name = createUniqueFileName(app, "settings", TEMP_DIR, OSMAND_SETTINGS_FILE_EXT);
 			importHelper.handleOsmAndSettingsImport(uri, name + OSMAND_SETTINGS_FILE_EXT,
-					null, false, null, -1, null);
+					null, false, false, null, -1, null);
 		}
 	}
 }

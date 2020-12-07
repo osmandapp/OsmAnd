@@ -3998,7 +3998,7 @@
 	<string name="poi_vehicle_delivery">Vehicle access: delivery</string>
 	<string name="poi_vehicle_forestry">Vehicle access: forestry</string>
 
-	<string name="poi_motorcar_yes">Motorcar access: </string>
+	<string name="poi_motorcar_yes">Motorcar access: yes</string>
 	<string name="poi_motorcar_private">Motorcar access: private</string>
 	<string name="poi_motorcar_no">Motorcar access: no</string>
 	<string name="poi_motorcar_destination">Motorcar access: destination</string>
@@ -4299,5 +4299,13 @@
 	<string name="poi_diplomatic_services_immigrant_visas_no">No</string>
 	<string name="poi_diplomatic_services_citizen_services_yes">Yes</string>
 	<string name="poi_diplomatic_services_citizen_services_no">No</string>
+
+	<string name="poi_mobile_money_agent">Mobile money agent</string>
+
+	<string name="poi_nurse">Nurse</string>
+
+	<string name="poi_siren">Siren</string>
+
+	<string name="poi_lifeguard_base">Lifeguard base</string>
 
 </resources>

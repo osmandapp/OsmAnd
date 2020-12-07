@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,8 +53,6 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -66,7 +63,10 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
@@ -303,7 +303,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 	private void shareItems() {
 		final GPXFile gpxFile = getGpx();
-		if (gpxFile != null && getTrackActivity() != null) {
+		FragmentActivity activity = getActivity();
+		if (gpxFile != null && activity != null) {
 			if (Algorithms.isEmpty(gpxFile.path)) {
 				SaveGpxListener saveGpxListener = new SaveGpxListener() {
 					@Override
@@ -315,24 +316,18 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					public void gpxSavingFinished(Exception errorMessage) {
 						if (isResumed()) {
 							hideProgressBar();
-							shareGpx(gpxFile.path);
+							FragmentActivity activity = getActivity();
+							if (activity != null) {
+								GpxUiHelper.shareGpx(activity, new File(gpxFile.path));
+							}
 						}
 					}
 				};
 				new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else {
-				shareGpx(gpxFile.path);
+				GpxUiHelper.saveAndShareGpxWithAppearance(activity, gpxFile);
 			}
 		}
-	}
-
-	private void shareGpx(String path) {
-		final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(path));
-		final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-		sendIntent.setType("application/gpx+xml");
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		startActivity(sendIntent);
 	}
 
 	private void openCoordinatesInput() {
@@ -412,7 +407,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 				final boolean synced = markersHelper.getMarkersGroup(getGpx()) != null;
 				createMenuItem(menu, SELECT_MAP_MARKERS_ID, synced ? R.string.remove_from_map_markers
-								: R.string.shared_string_add_to_map_markers, R.drawable.ic_action_flag, MenuItem.SHOW_AS_ACTION_NEVER);
+						: R.string.shared_string_add_to_map_markers, R.drawable.ic_action_flag, MenuItem.SHOW_AS_ACTION_NEVER);
 			}
 			createMenuItem(menu, SELECT_FAVORITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_favorite, MenuItem.SHOW_AS_ACTION_NEVER);
 			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark, MenuItem.SHOW_AS_ACTION_NEVER);

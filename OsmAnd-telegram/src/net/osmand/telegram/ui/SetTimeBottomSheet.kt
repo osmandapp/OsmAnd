@@ -106,18 +106,20 @@ class SetTimeBottomSheet : DialogFragment() {
 	}
 
 	private fun selectStartDate() {
-		val dateFromDialog = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-				startCalendar.set(Calendar.YEAR, year)
-				startCalendar.set(Calendar.MONTH, monthOfYear)
-				startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-				updateDateAndTimeButtons()
-			}
-		DatePickerDialog(
-			context, dateFromDialog,
-			startCalendar.get(Calendar.YEAR),
-			startCalendar.get(Calendar.MONTH),
-			startCalendar.get(Calendar.DAY_OF_MONTH)
-		).show()
+		context?.let {
+			val dateFromDialog = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+					startCalendar.set(Calendar.YEAR, year)
+					startCalendar.set(Calendar.MONTH, monthOfYear)
+					startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+					updateDateAndTimeButtons()
+				}
+			DatePickerDialog(
+				it, dateFromDialog,
+				startCalendar.get(Calendar.YEAR),
+				startCalendar.get(Calendar.MONTH),
+				startCalendar.get(Calendar.DAY_OF_MONTH)
+			).show()
+		}
 	}
 
 	private fun selectStartTime() {
@@ -132,18 +134,20 @@ class SetTimeBottomSheet : DialogFragment() {
 	}
 
 	private fun selectEndDate() {
-		val dateFromDialog = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-				endCalendar.set(Calendar.YEAR, year)
-				endCalendar.set(Calendar.MONTH, monthOfYear)
-				endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-				updateDateAndTimeButtons()
-			}
-		DatePickerDialog(
-			context, dateFromDialog,
-			endCalendar.get(Calendar.YEAR),
-			endCalendar.get(Calendar.MONTH),
-			endCalendar.get(Calendar.DAY_OF_MONTH)
-		).show()
+		context?.let {
+			val dateFromDialog = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+					endCalendar.set(Calendar.YEAR, year)
+					endCalendar.set(Calendar.MONTH, monthOfYear)
+					endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+					updateDateAndTimeButtons()
+				}
+			DatePickerDialog(
+				it, dateFromDialog,
+				endCalendar.get(Calendar.YEAR),
+				endCalendar.get(Calendar.MONTH),
+				endCalendar.get(Calendar.DAY_OF_MONTH)
+			).show()
+		}
 	}
 
 	private fun selectEndTime() {

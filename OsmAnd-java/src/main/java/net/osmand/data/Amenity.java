@@ -43,6 +43,7 @@ public class Amenity extends MapObject {
 	public static final String IS_PART = "is_part";
 	public static final String IS_AGGR_PART = "is_aggr_part";
 	public static final String CONTENT_JSON = "content_json";
+	public static final String ROUTE_ID = "route_id";
 
 
 	private String subType;

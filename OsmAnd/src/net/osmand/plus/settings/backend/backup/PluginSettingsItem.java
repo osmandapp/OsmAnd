@@ -99,6 +99,7 @@ public class PluginSettingsItem extends SettingsItem {
 	@Override
 	void writeToJson(@NonNull JSONObject json) throws JSONException {
 		super.writeToJson(json);
+		json.put("version", plugin.getVersion());
 		plugin.writeAdditionalDataToJson(json);
 	}
 

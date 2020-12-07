@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="plan_route_add_new_segment">Add new segment</string>
+    <string name="plan_route_split_after">Split after</string>
+    <string name="plan_route_split_before">Split before</string>
+    <string name="plan_route_join_segments">Join segments</string>
+    <string name="app_mode_light_aircraft">Light aircraft</string>
     <string name="elevation_data">You can use Elevation data for consideration of Ascent / Descent for your trip</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos specified in OpenStreetMap data.</string>
@@ -2654,7 +2659,7 @@
     <string name="files_limit">%1$d files left</string>
     <string name="available_downloads_left">%1$d files left to download</string>
     <string name="install_paid">Full version</string>
-    <string name="cancel_route">Dismiss route</string>
+    <string name="cancel_route">Dismiss route?</string>
     <string name="cancel_navigation">Stop navigation</string>
     <string name="clear_destination">Clear destination</string>
     <string name="download_using_mobile_internet">Not connected to Wi-Fi. Use current connection to the Internet to download?</string>

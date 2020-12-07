@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
@@ -25,13 +26,18 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import gnu.trove.map.TLongObjectMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 
-public class TravelObfHelper implements TravelHelper{
+public class TravelObfHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
 
@@ -46,13 +52,14 @@ public class TravelObfHelper implements TravelHelper{
 	private List<File> existingTravelBooks = new ArrayList<>();
 	private List<TravelArticle> popularArticles = new ArrayList<TravelArticle>();
 
-	private BinaryMapIndexReader index = null;
+	private TLongObjectMap<TravelArticle> cachedArticles;
 
 
 	public TravelObfHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
 		localDataHelper = new TravelLocalDataHelper(application);
+		cachedArticles = new TLongObjectHashMap<>();
 	}
 
 	public static boolean checkIfObfFileExists(OsmandApplication app) {
@@ -72,7 +79,8 @@ public class TravelObfHelper implements TravelHelper{
 		return localDataHelper;
 	}
 
-	/** TODO
+	/**
+	 * TODO
 	 * 1. implement regional travelbooks
 	 * 2. check settings for default?
 	 */
@@ -93,7 +101,7 @@ public class TravelObfHelper implements TravelHelper{
 		} else {
 			selectedTravelBook = null;
 		}
-		
+
 	}
 
 	/**
@@ -139,7 +147,82 @@ public class TravelObfHelper implements TravelHelper{
 	@NonNull
 	@Override
 	public List<WikivoyageSearchResult> search(String searchQuery) {
-		return null;
+		List<WikivoyageSearchResult> res = new ArrayList<>();
+		CollatorStringMatcher matcher = new CollatorStringMatcher(searchQuery,
+				CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+
+		for (TravelArticle article : popularArticles) {
+			if (checkArticleMatches(matcher, article)) {
+
+				WikivoyageSearchResult searchResult = convertArticleToSearchResult(article);
+				res.add(searchResult);
+			}
+		}
+		res = new ArrayList<>(groupSearchResultsByCityId(res));
+		sortSearchResults(searchQuery, res);
+		return res;
+	}
+
+	private WikivoyageSearchResult convertArticleToSearchResult(TravelArticle article) {
+		WikivoyageSearchResult searchResult = new WikivoyageSearchResult();
+		searchResult.articleTitles = new ArrayList<>(Collections.singletonList(article.title));
+		searchResult.isPartOf = new ArrayList<>(Collections.singletonList(article.isPartOf));
+		searchResult.imageTitle = article.imageTitle;
+		searchResult.langs = new ArrayList<>(Collections.singletonList(article.lang));
+		searchResult.tripId = article.tripId;
+		return searchResult;
+	}
+
+	private Collection<WikivoyageSearchResult> groupSearchResultsByCityId(List<WikivoyageSearchResult> res) {
+		String baseLng = application.getLanguage();
+		TLongObjectHashMap<WikivoyageSearchResult> wikivoyage = new TLongObjectHashMap<>();
+		for (WikivoyageSearchResult rs : res) {
+			WikivoyageSearchResult prev = wikivoyage.get(rs.tripId);
+			if (prev != null) {
+				int insInd = prev.langs.size();
+				if (rs.langs.get(0).equals(baseLng)) {
+					insInd = 0;
+				} else if (rs.langs.get(0).equals("en")) {
+					if (!prev.langs.get(0).equals(baseLng)) {
+						insInd = 0;
+					} else {
+						insInd = 1;
+					}
+				}
+				prev.articleTitles.add(insInd, rs.articleTitles.get(0));
+				prev.langs.add(insInd, rs.langs.get(0));
+				prev.isPartOf.add(insInd, rs.isPartOf.get(0));
+			} else {
+				wikivoyage.put(rs.tripId, rs);
+			}
+		}
+		return wikivoyage.valueCollection();
+	}
+
+	private void sortSearchResults(final String searchQuery, List<WikivoyageSearchResult> list) {
+		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
+			@Override
+			public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
+				boolean c1 = CollatorStringMatcher.cmatches(collator, searchQuery, o1.articleTitles.get(0),
+						CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+				boolean c2 = CollatorStringMatcher.cmatches(collator, searchQuery, o2.articleTitles.get(0),
+						CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+				if (c1 == c2) {
+					return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
+				} else if (c1) {
+					return -1;
+				} else if (c2) {
+					return 1;
+				}
+				return 0;
+			}
+		});
+	}
+
+	private boolean checkArticleMatches(CollatorStringMatcher matcher, TravelArticle article) {
+		return matcher.matches(article.getTitle())
+				|| matcher.matches(article.getContent())
+				|| matcher.matches(article.getContentsJson());
 	}
 
 	@NonNull
@@ -194,17 +277,17 @@ public class TravelObfHelper implements TravelHelper{
 				while (it.hasNext()) {
 					Amenity a = it.next();
 					if (!a.getName(language).equals("")) {
-						popularArticles.add(readArticle(a, language));
+						TravelArticle article = readArticle(a, language);
+						popularArticles.add(article);
+						writeToCache(article);
 					}
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
-
 		return popularArticles;
 	}
-
 
 	private TravelArticle readArticle(Amenity amenity, String lang) {
 		TravelArticle res = new TravelArticle();
@@ -215,13 +298,13 @@ public class TravelObfHelper implements TravelHelper{
 		res.lat = amenity.getLocation().getLatitude();
 		res.lon = amenity.getLocation().getLongitude();
 		res.imageTitle = amenity.getTagContent(Amenity.IMAGE_TITLE, lang) == null ? "" : amenity.getTagContent(Amenity.IMAGE_TITLE, lang);
-		res.tripId = amenity.getId(); //?
+		res.tripId = getTripId(amenity);
 		res.originalId = 0; //?
 		res.lang = lang;
 		res.contentsJson = amenity.getTagContent(Amenity.CONTENT_JSON, lang) == null ? "" : amenity.getTagContent(Amenity.CONTENT_JSON, lang);
 		res.aggregatedPartOf = amenity.getTagContent(Amenity.IS_AGGR_PART, lang) == null ? "" : amenity.getTagContent(Amenity.IS_AGGR_PART, lang);
 
-//      crash in some places, need to fix it
+//      occasional crashes
 //		try {
 //			String gpxContent = amenity.getAdditionalInfo("gpx_info");
 //			res.gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
@@ -230,6 +313,19 @@ public class TravelObfHelper implements TravelHelper{
 //		}
 
 		return res;
+	}
+
+	private long getTripId(Amenity amenity) {
+		long tripId = -1;
+		String val = amenity.getTagContent(Amenity.ROUTE_ID, null);
+		if (val != null && val.startsWith("Q")) {
+			try {
+				tripId = Long.parseLong(val.substring(1));
+			} catch (NumberFormatException nfe) {
+				LOG.error(nfe.getMessage());
+			}
+		}
+		return tripId;
 	}
 
 	private BinaryMapIndexReader getBookBinaryIndex() throws IOException {
@@ -254,14 +350,71 @@ public class TravelObfHelper implements TravelHelper{
 		return null;
 	}
 
-	@Override
-	public TravelArticle getArticle(long cityId, String lang) {
-		return null;
+	private void writeToCache(TravelArticle article) {
+		cachedArticles.put(article.tripId, article);
+	}
+
+	private TravelArticle getArticleFromCache(long tripId, String lang) {
+
+		TravelArticle article = cachedArticles.get(tripId);
+//		if (aa != null) {
+//			article = readArticle(aa, lang);
+//		}
+		return article;
 	}
 
 	@Override
-	public TravelArticle getArticle(String title, String lang) {
-		return null;
+	public TravelArticle getArticle(long resId, String lang) {
+		TravelArticle article = getArticleFromCache(resId, lang);
+		if (article != null) {
+			return article;
+		}
+		String name = ""; //???
+		return getArticle(name, lang);
+	}
+
+	@Override
+	public TravelArticle getArticle(final String title, final String lang) {
+		TravelArticle res = null;
+		List<Amenity> amenities = Collections.emptyList();
+		try {
+			BinaryMapIndexReader indexReader = getBookBinaryIndex();
+			if (indexReader != null) {
+				int left = 0;
+				int top = 0;
+				int right = Integer.MAX_VALUE;
+				int bottom = Integer.MAX_VALUE;
+				LatLon ll = application.getMapViewTrackingUtilities().getMapLocation();
+				BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+						MapUtils.get31TileNumberX(ll.getLongitude()),
+						MapUtils.get31TileNumberY(ll.getLatitude()), title,
+						left, top, right, bottom,
+						new ResultMatcher<Amenity>() {
+							@Override
+							public boolean publish(Amenity object) {
+								if (object.getName(lang).equals(title)) {
+									return true;
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
+
+				amenities = indexReader.searchPoiByName(req);
+			}
+		} catch (IOException e) {
+			//todo
+		}
+		if (!amenities.isEmpty()) {
+			for (Amenity a : amenities) {
+				LOG.debug("searched article: " + a);
+			}
+		}
+		return res;
 	}
 
 	@Override
@@ -269,9 +422,19 @@ public class TravelObfHelper implements TravelHelper{
 		return 0;
 	}
 
+
+	//TODO finish stub
 	@Override
 	public ArrayList<String> getArticleLangs(long cityId) {
-		return null;
+		ArrayList<String> res = new ArrayList<>();
+		res.add("en");
+
+		for (TravelArticle article : popularArticles) {
+			if (article.getTripId() == cityId) {
+				res.add(article.getLang());
+			}
+		}
+		return res;
 	}
 
 	@Override

@@ -45,7 +45,8 @@ public enum ProfileIcons {
 	GO_CART(R.drawable.ic_action_go_cart, R.string.app_mode_go_cart, "ic_action_go_cart"),
 	OSM(R.drawable.ic_action_openstreetmap_logo, R.string.app_mode_osm, "ic_action_openstreetmap_logo"),
 	MOTORBOAT(R.drawable.ic_action_motorboat, R.string.app_mode_motorboat, "ic_action_motorboat"),
-	KAYAK(R.drawable.ic_action_kayak, R.string.app_mode_kayak, "ic_action_kayak");
+	KAYAK(R.drawable.ic_action_kayak, R.string.app_mode_kayak, "ic_action_kayak"),
+	LIGHT_AIRCRAFT(R.drawable.ic_action_light_aircraft, R.string.app_mode_light_aircraft, "ic_action_light_aircraft");
 
 	@DrawableRes
 	private int resId;

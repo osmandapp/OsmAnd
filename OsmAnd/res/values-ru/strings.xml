@@ -3954,7 +3954,7 @@
     <string name="login_open_street_map_org">Вход в OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Войти через OpenStreetMap</string>
     <string name="login_account">Аккаунт</string>
-    <string name="user_login">Пользователь</string>
+    <string name="user_login">Авторизоваться</string>
     <string name="manage_subscription">Управление подпиской</string>
     <string name="subscription_expired_title">Срок действия подписки OsmAnd Live истёк</string>
     <string name="subscription_paused_title">Подписка OsmAnd Live была приостановлена</string>
@@ -3993,4 +3993,5 @@
     <string name="select_picture">Выбор изображения</string>
     <string name="app_mode_kayak">Каяк</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Немецкий (повседневный)</string>
 </resources>

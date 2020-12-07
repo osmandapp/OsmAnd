@@ -344,39 +344,16 @@ project.afterEvaluate {
 		repositories {
 			ivy {
 				url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
+				version = "0.1-SNAPSHOT"
 			}
 		}
 		publications {
 			aar(IvyPublication) {
-				artifact bundleLegacyX86DebugAar {
-					classifier 'legacyX86Debug'
-				}
-				artifact bundleLegacyX86ReleaseAar {
-					classifier 'legacyX86Release'
-				}
-				artifact bundleLegacyArm64DebugAar {
-					classifier 'legacyArm64Debug'
-				}
-				artifact bundleLegacyArm64ReleaseAar {
-					classifier 'legacyArm64Release'
-				}
-				artifact bundleLegacyArmonlyDebugAar {
-					classifier 'legacyArmonlyDebug'
-				}
-				artifact bundleLegacyArmonlyReleaseAar {
-					classifier 'legacyArmonlyRelease'
-				}
-				artifact bundleLegacyArmv7DebugAar {
-					classifier 'legacyArmv7Debug'
-				}
-				artifact bundleLegacyArmv7ReleaseAar {
-					classifier 'legacyArmv7Release'
-				}
 				artifact bundleLegacyFatDebugAar {
-					classifier 'legacyFatDebug'
+					classifier 'debug'
 				}
 				artifact bundleLegacyFatReleaseAar {
-					classifier 'legacyFatRelease'
+					classifier 'release'
 				}
 			}
 		}

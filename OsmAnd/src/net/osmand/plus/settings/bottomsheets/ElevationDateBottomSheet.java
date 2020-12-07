@@ -3,6 +3,7 @@ package net.osmand.plus.settings.bottomsheets;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -60,6 +61,8 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	private String on;
 	private String off;
 	private int activeColor;
+	private int checkedColor;
+	private int uncheckedColor;
 	private int disabledColor;
 	private int appModeColor;
 
@@ -95,6 +98,9 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		appModeColor = appMode.getIconColorInfo().getColor(nightMode);
 		activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
+		checkedColor = (nightMode ? app.getResources().getColor(R.color.text_color_primary_dark) : app.getResources().getColor(R.color.text_color_primary_light));
+		uncheckedColor = (nightMode ? app.getResources().getColor(R.color.text_color_secondary_dark) : app.getResources().getColor(R.color.text_color_secondary_light));
+
 
 		items.add(new TitleItem(getString(R.string.routing_attr_height_obstacles_name)));
 
@@ -213,8 +219,12 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void enableDisableReliefButtons(boolean enable) {
 		for (BaseBottomSheetItem item : reliefFactorButtons) {
-			item.getView().setEnabled(enable);
-			item.getView().findViewById(R.id.compound_button).setEnabled(enable);
+			View view = item.getView();
+			view.setEnabled(enable);
+			view.findViewById(R.id.compound_button).setEnabled(enable);
+
+			TextView titleField = view.findViewById(R.id.title);
+			titleField.setTextColor(enable ? checkedColor : uncheckedColor);
 		}
 	}
 

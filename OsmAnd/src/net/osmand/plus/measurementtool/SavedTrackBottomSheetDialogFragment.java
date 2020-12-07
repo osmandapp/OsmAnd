@@ -2,7 +2,6 @@ package net.osmand.plus.measurementtool;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -21,6 +19,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -80,13 +79,10 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	@Override
 	protected void onThirdBottomButtonClick() {
-		final Intent sendIntent = new Intent();
-		sendIntent.setAction(Intent.ACTION_SEND);
-		final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(fileName));
-		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-		sendIntent.setType("application/gpx+xml");
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		startActivity(sendIntent);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			GpxUiHelper.shareGpx(activity, new File(fileName));
+		}
 		dismiss();
 	}
 

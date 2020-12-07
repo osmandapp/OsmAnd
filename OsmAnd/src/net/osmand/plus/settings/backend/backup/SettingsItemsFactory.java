@@ -143,6 +143,9 @@ class SettingsItemsFactory {
 			case SEARCH_HISTORY:
 				item = new SearchHistorySettingsItem(app, json);
 				break;
+			case GPX:
+				item = new GpxSettingsItem(app, json);
+				break;
 		}
 		return item;
 	}

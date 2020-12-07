@@ -133,7 +133,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
-				.setDisabled(editingCtx.isFirstPointSelected())
+				.setDisabled(editingCtx.isFirstPointSelected(false))
 				.create();
 		items.add(trimRouteBefore);
 
@@ -152,9 +152,92 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
-				.setDisabled(editingCtx.isLastPointSelected())
+				.setDisabled(editingCtx.isLastPointSelected(false))
 				.create();
 		items.add(trimRouteAfter);
+
+		if (editingCtx.isFirstPointSelected(true)) {
+			// skip
+		} else if (editingCtx.isLastPointSelected(true)) {
+			items.add(new OptionsDividerItem(getContext()));
+
+			// new segment
+			BaseBottomSheetItem addNewSegment = new BottomSheetItemWithDescription.Builder()
+					//.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
+					.setTitle(getString(R.string.plan_route_add_new_segment))
+					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Fragment targetFragment = getTargetFragment();
+							if (targetFragment instanceof SelectedPointFragmentListener) {
+								((SelectedPointFragmentListener) targetFragment).onSplitPointsAfter();
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(addNewSegment);
+		} else if (editingCtx.isFirstPointSelected(false) || editingCtx.isLastPointSelected(false)) {
+			items.add(new OptionsDividerItem(getContext()));
+
+			// join
+			BaseBottomSheetItem joinSegments = new BottomSheetItemWithDescription.Builder()
+					//.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
+					.setTitle(getString(R.string.plan_route_join_segments))
+					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Fragment targetFragment = getTargetFragment();
+							if (targetFragment instanceof SelectedPointFragmentListener) {
+								((SelectedPointFragmentListener) targetFragment).onJoinPoints();
+							}
+							dismiss();
+						}
+					})
+					.create();
+			items.add(joinSegments);
+		} else {
+			items.add(new OptionsDividerItem(getContext()));
+
+			// split
+			BaseBottomSheetItem splitAfter = new BottomSheetItemWithDescription.Builder()
+					//.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
+					.setTitle(getString(R.string.plan_route_split_after))
+					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Fragment targetFragment = getTargetFragment();
+							if (targetFragment instanceof SelectedPointFragmentListener) {
+								((SelectedPointFragmentListener) targetFragment).onSplitPointsAfter();
+							}
+							dismiss();
+						}
+					})
+					.setDisabled(!editingCtx.canSplit(true))
+					.create();
+			items.add(splitAfter);
+
+			BaseBottomSheetItem splitBefore = new BottomSheetItemWithDescription.Builder()
+					//.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
+					.setTitle(getString(R.string.plan_route_split_before))
+					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Fragment targetFragment = getTargetFragment();
+							if (targetFragment instanceof SelectedPointFragmentListener) {
+								((SelectedPointFragmentListener) targetFragment).onSplitPointsBefore();
+							}
+							dismiss();
+						}
+					})
+					.setDisabled(!editingCtx.canSplit(false))
+					.create();
+			items.add(splitBefore);
+		}
 
 		items.add(new OptionsDividerItem(getContext()));
 
@@ -172,7 +255,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
-				.setDisabled(editingCtx.isFirstPointSelected() || editingCtx.isSelectionNeedApproximation())
+				.setDisabled(editingCtx.isFirstPointSelected(false) || editingCtx.isApproximationNeeded())
 				.create();
 		items.add(changeRouteTypeBefore);
 
@@ -190,7 +273,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
-				.setDisabled(editingCtx.isLastPointSelected() || editingCtx.isSelectionNeedApproximation())
+				.setDisabled(editingCtx.isLastPointSelected(false) || editingCtx.isApproximationNeeded())
 				.create();
 		items.add(changeRouteTypeAfter);
 
@@ -351,6 +434,12 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		void onTrimRouteBefore();
 
 		void onTrimRouteAfter();
+
+		void onSplitPointsAfter();
+
+		void onSplitPointsBefore();
+
+		void onJoinPoints();
 
 		void onChangeRouteTypeBefore();
 

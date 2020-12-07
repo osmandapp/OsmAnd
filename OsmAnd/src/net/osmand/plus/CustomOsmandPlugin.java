@@ -17,16 +17,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
-import net.osmand.plus.settings.backend.backup.MapSourcesSettingsItem;
-import net.osmand.plus.settings.backend.backup.PluginSettingsItem;
-import net.osmand.plus.settings.backend.backup.PoiUiFiltersSettingsItem;
-import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.backup.QuickActionsSettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsCollectListener;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
@@ -35,6 +25,16 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
+import net.osmand.plus.settings.backend.backup.MapSourcesSettingsItem;
+import net.osmand.plus.settings.backend.backup.PluginSettingsItem;
+import net.osmand.plus.settings.backend.backup.PoiUiFiltersSettingsItem;
+import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.QuickActionsSettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsCollectListener;
+import net.osmand.plus.settings.backend.backup.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -73,9 +73,12 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	private List<SuggestedDownloadItem> suggestedDownloadItems = new ArrayList<>();
 	private List<WorldRegion> customRegions = new ArrayList<>();
 
+	private int version;
+
 	public CustomOsmandPlugin(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app);
 		pluginId = json.getString("pluginId");
+		version = json.optInt("version", -1);
 		readAdditionalDataFromJson(json);
 		readDependentFilesFromJson(json);
 		loadResources();
@@ -84,6 +87,11 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	@Override
 	public String getId() {
 		return pluginId;
+	}
+
+	@Override
+	public int getVersion() {
+		return version;
 	}
 
 	@Override

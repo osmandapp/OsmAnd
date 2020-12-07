@@ -3997,4 +3997,7 @@
     <string name="cannot_upload_image">Impossìbile carrigare s\'immàgine, torra a proare prus a tardu</string>
     <string name="select_picture">Ischerta un\'immàgine</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Tedescu (informale)</string>
+    <string name="elevation_data">Podes impreare sos datos de s\'artària pro pigare in cunsideru s\'Artziada / Achirrada pro su biàgiu tuo</string>
+    <string name="app_mode_light_aircraft">Aèreu lèbiu</string>
 </resources>
