@@ -34,11 +34,6 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 	private EditText userNameEditText;
 	private EditText passwordEditText;
 
-	private int contentHeightPrevious = 0;
-	private int buttonsHeight;
-	private int shadowHeight;
-	private ScrollView scrollView;
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = getContext();
