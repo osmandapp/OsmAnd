@@ -11,6 +11,12 @@
 	Thx - Hardy
 
 -->
+    <string name="release_3_9">
+    • Added option to export and import all data including settings, resources, my places\n\n
+    • Plan Route: graphs for segments with the route, added the ability to create and edit multiply segment tracks\n\n
+    • Added OAuth authentication method for OpenStreetMap, improved UI of OSM dialogs \n\n
+    • Custom colors for favorites and tracks waypoints\n\n
+    </string>
     <string name="plan_route_add_new_segment">Add new segment</string>
     <string name="plan_route_split_after">Split after</string>
     <string name="plan_route_split_before">Split before</string>
