@@ -2313,7 +2313,7 @@ public class OsmandAidlApi {
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			SettingsHelper settingsHelper = app.getSettingsHelper();
-			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, false));
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, false, true));
 			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
 			return true;
 		}

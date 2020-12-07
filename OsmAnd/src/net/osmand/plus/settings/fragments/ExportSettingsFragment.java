@@ -24,14 +24,18 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -73,7 +77,10 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
 		exportMode = true;
-		dataList = app.getSettingsHelper().getSettingsByCategory(globalExport);
+		dataList = app.getSettingsHelper().getSettingsByCategory(true);
+		if (!globalExport && savedInstanceState == null) {
+			updateSelectedProfile();
+		}
 	}
 
 	@Nullable
@@ -122,6 +129,20 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		}
 	}
 
+	private void updateSelectedProfile() {
+		List<Object> profileItems = getItemsForType(ExportSettingsType.PROFILE);
+		if (!Algorithms.isEmpty(profileItems)) {
+			for (Object item : profileItems) {
+				if (item instanceof ApplicationModeBean && appMode.getStringKey().equals(((ApplicationModeBean) item).stringKey)) {
+					List<Object> selectedProfiles = new ArrayList<>();
+					selectedProfiles.add(item);
+					selectedItemsMap.put(ExportSettingsType.PROFILE, selectedProfiles);
+					break;
+				}
+			}
+		}
+	}
+
 	private void prepareFile() {
 		if (app != null) {
 			exportingStarted = true;
@@ -129,7 +150,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			showExportProgressDialog();
 			File tempDir = FileUtils.getTempDir(app);
 			String fileName = getFileName();
-			List<SettingsItem> items = app.getSettingsHelper().prepareSettingsItems(adapter.getData());
+			List<SettingsItem> items = app.getSettingsHelper().prepareSettingsItems(adapter.getData(), true);
 			progress.setMax(getMaxProgress(items));
 			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
 		}
