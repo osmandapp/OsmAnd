@@ -2883,4 +2883,9 @@
     <string name="poi_access_bus">Accés d\'autobús</string>
     <string name="poi_access_caravan">Accés de caravana</string>
     <string name="poi_access_motorhome">Accés per a autocaravanes</string>
+    <string name="poi_locksmith">Serralleria</string>
+    <string name="poi_electrical">Material elèctric</string>
+    <string name="poi_cuisine_cajun">Cajun</string>
+    <string name="poi_cuisine_burrito">Burritos</string>
+    <string name="poi_cuisine_waffle">Gofres</string>
 </resources>
