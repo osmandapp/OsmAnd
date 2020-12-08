@@ -18,7 +18,7 @@
 			android:background="@color/color_transparent"
 			android:contentDescription="@string/app_modes_choose"/>
 
-        <View
+		<View
 			android:id="@+id/divider"
 			android:layout_width="1dp"
 			android:layout_height="24dp"
