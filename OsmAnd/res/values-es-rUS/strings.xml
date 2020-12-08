@@ -602,7 +602,7 @@
     <string name="files_limit">Quedan %1$d archivos</string>
     <string name="available_downloads_left">Faltan descargar %1$d archivos</string>
     <string name="install_paid">Versión completa</string>
-    <string name="cancel_route">Descartar ruta</string>
+    <string name="cancel_route">¿Descartar ruta\?</string>
     <string name="cancel_navigation">Parar navegación</string>
     <string name="clear_destination">Limpiar destino</string>
     <string name="download_using_mobile_internet">No está conectado a una red Wi-Fi. ¿Usar la conexión actual a Internet para descargar?</string>
@@ -4001,4 +4001,21 @@
     <string name="select_groups_for_import">Marca los grupos que serán importados.</string>
     <string name="cannot_upload_image">No se puede subir la imagen, inténtalo más tarde</string>
     <string name="app_mode_gap">Separador</string>
+    <string name="release_3_9">• Se ha añadido la opción de exportar e importar todos los datos, incluyendo los ajustes, los recursos y «Mis sitios»
+\n
+\n • Planificar ruta: se añadieron gráficos para los segmentos con la ruta y capacidad de crear o editar trazas de segmentos múltiples
+\n
+\n • Se ha añadido el método de autenticación OAuth para OpenStreetMap y se ha mejorado la interfaz de usuario de los diálogos de OSM
+\n
+\n • Se añadieron colores personalizados para los favoritos y los puntos de referencia de la traza
+\n
+\n</string>
+    <string name="plan_route_split_before">Dividir antes</string>
+    <string name="plan_route_split_after">Dividir después</string>
+    <string name="plan_route_join_segments">Unir segmentos</string>
+    <string name="plan_route_add_new_segment">Añadir nuevo segmento</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="lang_de_casual">Alemán (casual)</string>
+    <string name="elevation_data">Puedes usar los datos de elevación para considerar el ascenso o descenso del viaje</string>
+    <string name="app_mode_light_aircraft">Avión ligero</string>
 </resources>
