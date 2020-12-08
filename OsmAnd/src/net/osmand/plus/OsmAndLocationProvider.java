@@ -791,19 +791,17 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			}
 		}
 	}
-	
-	
-	public void setLocationFromService(net.osmand.Location location, boolean continuous) {
+
+	public void setLocationFromService(net.osmand.Location location) {
 		if (locationSimulation.isRouteAnimating()) {
 			return;
 		}
 		if (location != null) {
 			notifyGpsLocationRecovered();
 		}
-		// if continuous notify about lost location
-		if (continuous) {
-			scheduleCheckIfGpsLost(location);
-		}
+		// notify about lost location
+		scheduleCheckIfGpsLost(location);
+
 		app.getSavingTrackHelper().updateLocation(location, heading);
 		OsmandPlugin.updateLocationPlugins(location);
 		app.getRoutingHelper().updateLocation(location);

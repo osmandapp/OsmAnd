@@ -1,9 +1,6 @@
 package net.osmand.plus;
 
-import android.annotation.SuppressLint;
-import android.app.AlarmManager;
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -11,13 +8,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Binder;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
-import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,26 +20,17 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 public class NavigationService extends Service implements LocationListener {
 
 	public static class NavigationServiceBinder extends Binder {
-
 	}
 
 	// global id don't conflict with others
 	public static int USED_BY_NAVIGATION = 1;
 	public static int USED_BY_GPX = 2;
 	public final static String USAGE_INTENT = "SERVICE_USED_BY";
-	public final static String USAGE_OFF_INTERVAL = "SERVICE_OFF_INTERVAL";
 
 	private final NavigationServiceBinder binder = new NavigationServiceBinder();
 
-	private int serviceOffInterval;
 	private String serviceOffProvider;
-	private int serviceErrorTimeout;
-	private long nextManualWakeup;
 	private OsmandSettings settings;
-	private Handler handler;
-
-	private static WakeLock lockStatic;
-	private PendingIntent pendingIntent;
 
 	protected int usedBy = 0;
 	private OsmAndLocationProvider locationProvider;
@@ -55,26 +38,6 @@ public class NavigationService extends Service implements LocationListener {
 	@Override
 	public IBinder onBind(Intent intent) {
 		return binder;
-	}
-
-	protected synchronized static PowerManager.WakeLock getLock(Context context) {
-		if (lockStatic == null) {
-			PowerManager mgr = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-			lockStatic = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "OsmAnd:NavigationServiceLock");
-		}
-		return lockStatic;
-	}
-
-	public long getNextManualWakeup() {
-		return nextManualWakeup;
-	}
-
-	public void setNextManualWakeup(long value) {
-		nextManualWakeup = value;
-	}
-
-	public int getServiceOffInterval() {
-		return serviceOffInterval;
 	}
 
 	public int getUsedBy() {
@@ -97,24 +60,7 @@ public class NavigationService extends Service implements LocationListener {
 			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
 		} else {
-			// Issue #3604
 			final OsmandApplication app = (OsmandApplication) getApplication();
-			if ((usedBy == USED_BY_GPX) && (app.navigationServiceGpsInterval(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get()) != 0) && (serviceOffInterval == 0)) {
-				serviceOffInterval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
-				setupServiceErrorTimeout();
-				app.setNavigationService(this);
-				AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-				pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
-				nextManualWakeup = SystemClock.elapsedRealtime() + serviceOffInterval;
-				if (Build.VERSION.SDK_INT >= 23) {
-					alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
-				} else if (Build.VERSION.SDK_INT >= 19) {
-					// setRepeating() became inexact starting with SDK 19
-					alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
-				} else {
-					alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);
-				}
-			}
 			app.getNotificationHelper().updateTopNotification();
 			app.getNotificationHelper().refreshNotifications();
 		}
@@ -122,46 +68,25 @@ public class NavigationService extends Service implements LocationListener {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		handler = new Handler();
 		final OsmandApplication app = (OsmandApplication) getApplication();
 		settings = app.getSettings();
 		usedBy = intent.getIntExtra(USAGE_INTENT, 0);
-		serviceOffInterval = intent.getIntExtra(USAGE_OFF_INTERVAL, 0);
-		if ((usedBy & USED_BY_NAVIGATION) != 0) {
-			serviceOffInterval = 0;
-		}
+
 		// use only gps provider
 		serviceOffProvider = LocationManager.GPS_PROVIDER;
-		setupServiceErrorTimeout();
-
 		locationProvider = app.getLocationProvider();
 		app.setNavigationService(this);
 
-		// requesting
-		if (isContinuous()) {
-			// request location updates
-			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-			try {
-				locationManager.requestLocationUpdates(serviceOffProvider, 0, 0, NavigationService.this);
-			} catch (SecurityException e) {
-				Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show();
-				Log.d(PlatformUtil.TAG, "Location service permission not granted"); //$NON-NLS-1$
-			} catch (IllegalArgumentException e) {
-				Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show();
-				Log.d(PlatformUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
-			}
-		} else {
-			AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-			pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
-			nextManualWakeup = SystemClock.elapsedRealtime() + serviceOffInterval;
-			if (Build.VERSION.SDK_INT >= 23) {
-				alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
-			} else if (Build.VERSION.SDK_INT >= 19) {
-				// setRepeating() became inexact starting with SDK 19
-				alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
-			} else {
-				alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);
-			}
+		// request location updates
+		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+		try {
+			locationManager.requestLocationUpdates(serviceOffProvider, 0, 0, NavigationService.this);
+		} catch (SecurityException e) {
+			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show();
+			Log.d(PlatformUtil.TAG, "Location service permission not granted"); //$NON-NLS-1$
+		} catch (IllegalArgumentException e) {
+			Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show();
+			Log.d(PlatformUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
 		}
 
 		// registering icon at top level
@@ -185,20 +110,6 @@ public class NavigationService extends Service implements LocationListener {
 		// initializing variables
 	}
 
-	private boolean isContinuous() {
-		return serviceOffInterval == 0;
-	}
-
-	private void setupServiceErrorTimeout() {
-		serviceErrorTimeout = serviceOffInterval / 5;
-		// 1. not more than 12 mins
-		serviceErrorTimeout = Math.min(serviceErrorTimeout, 12 * 60 * 1000);
-		// 2. not less than 30 seconds
-		serviceErrorTimeout = Math.max(serviceErrorTimeout, 30 * 1000);
-		// 3. not more than serviceOffInterval
-		serviceErrorTimeout = Math.min(serviceErrorTimeout, serviceOffInterval);
-	}
-
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -212,20 +123,6 @@ public class NavigationService extends Service implements LocationListener {
 		} catch (SecurityException e) {
 			Log.d(PlatformUtil.TAG, "Location service permission not granted"); //$NON-NLS-1$
 		}
-
-		if (!isContinuous()) {
-			WakeLock lock = getLock(this);
-			if (lock.isHeld()) {
-				lock.release();
-			}
-		}
-
-		if (pendingIntent != null) {
-			// remove alarm
-			AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-			alarmManager.cancel(pendingIntent);
-		}
-
 		// remove notification
 		stopForeground(Boolean.TRUE);
 		app.getNotificationHelper().updateTopNotification();
@@ -237,47 +134,11 @@ public class NavigationService extends Service implements LocationListener {
 		}, 500);
 	}
 
-	@SuppressLint("MissingPermission")
-	public void onWakeUp() {
-		// request location updates
-		final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-		try {
-			locationManager.requestLocationUpdates(serviceOffProvider, 0, 0, this);
-			if (serviceOffInterval > serviceErrorTimeout) {
-				handler.postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						WakeLock lock = getLock(NavigationService.this);
-						if (lock.isHeld()) {
-							lock.release();
-							locationManager.removeUpdates(NavigationService.this);
-						}
-					}
-				}, serviceErrorTimeout);
-			}
-		} catch (RuntimeException e) {
-			// ignore
-		}
-	}
-
 	@Override
 	public void onLocationChanged(Location l) {
 		if (l != null && !settings.MAP_ACTIVITY_ENABLED.get()) {
 			net.osmand.Location location = OsmAndLocationProvider.convertLocation(l, (OsmandApplication) getApplication());
-			if (!isContinuous()) {
-				// unregister listener and wait next time
-				LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-				try {
-					locationManager.removeUpdates(this);
-				} catch (SecurityException e) {
-					Log.d(PlatformUtil.TAG, "Location service permission not granted"); //$NON-NLS-1$
-				}
-				WakeLock lock = getLock(this);
-				if (lock.isHeld()) {
-					lock.release();
-				}
-			}
-			locationProvider.setLocationFromService(location, isContinuous());
+			locationProvider.setLocationFromService(location);
 		}
 	}
 
