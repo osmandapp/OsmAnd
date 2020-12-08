@@ -443,7 +443,7 @@ class TelegramHelper private constructor() {
 				var offsetChatId: Long = 0
 				if (!chatList.isEmpty()) {
 					val last = chatList.last()
-					offsetOrder = last.order
+					offsetOrder = last.position.order
 					offsetChatId = last.chatId
 				}
 				client?.send(TdApi.GetChats(TdApi.ChatListMain(), offsetOrder, offsetChatId, CHATS_LIMIT - chatList.size)) { obj ->
@@ -533,8 +533,8 @@ class TelegramHelper private constructor() {
 			}
 			resultArticles.forEach {
 				shareInfo.lastTextMessageHandled = false
-				val sendOptions = TdApi.SendMessageOptions(true, true, null)
-				client?.send(TdApi.SendInlineQueryResultMessage(shareInfo.chatId, 0, sendOptions,
+				val sendOptions = TdApi.MessageSendOptions(true, true, null)
+				client?.send(TdApi.SendInlineQueryResultMessage(shareInfo.chatId, 0, 0, sendOptions,
 					inlineQueryResults.inlineQueryId, it.id, false)) { obj ->
 					handleTextLocationMessageUpdate(obj, shareInfo, true)
 				}
@@ -843,7 +843,12 @@ class TelegramHelper private constructor() {
 		if (!shareInfo.isMapMessageIdPresent() && shareInfo.chatId != -1L) {
 			shareInfo.lastSendMapMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			client?.send(
-				TdApi.EditMessageLiveLocation(shareInfo.chatId, shareInfo.currentMapMessageId, null, null)) { obj ->
+				TdApi.EditMessageLiveLocation(
+					shareInfo.chatId, shareInfo.currentMapMessageId,
+					null, null, 0, 0
+				)
+			)
+			{ obj ->
 				handleMapLocationMessageUpdate(obj, shareInfo, false)
 			}
 		}
@@ -863,8 +868,8 @@ class TelegramHelper private constructor() {
 			shareInfo.pendingTdLibText++
 			shareInfo.lastSendTextMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			log.error("sendNewTextLocation ${shareInfo.pendingTdLibText}")
-			val sendOptions = TdApi.SendMessageOptions(false, true, null)
-			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, sendOptions, null, content)) { obj ->
+			val sendOptions = TdApi.MessageSendOptions(false, true, null)
+			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, 0, sendOptions, null, content)) { obj ->
 				handleTextLocationMessageUpdate(obj, shareInfo, false)
 			}
 		}
@@ -883,21 +888,21 @@ class TelegramHelper private constructor() {
 
 	fun sendNewMapLocation(shareInfo: ShareChatInfo, locationMessage: LocationMessages.BufferMessage) {
 		needRefreshActiveLiveLocationMessages = true
-		val location = TdApi.Location(locationMessage.lat, locationMessage.lon)
+		val location = TdApi.Location(locationMessage.lat, locationMessage.lon, locationMessage.hdop)
 		val livePeriod =
 			if (shareInfo.currentMessageLimit > (shareInfo.start + MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC)) {
 				MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
 			} else {
 				shareInfo.livePeriod.toInt()
 			}
-		val content = TdApi.InputMessageLocation(location, livePeriod)
+		val content = TdApi.InputMessageLocation(location, livePeriod, locationMessage.bearing.toInt(), 0)
 		if (!shareInfo.pendingMapMessage) {
 			shareInfo.pendingMapMessage = true
 			shareInfo.pendingTdLibMap++
 			shareInfo.lastSendMapMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			log.error("sendNewMapLocation ${shareInfo.pendingTdLibMap}")
-			val sendOptions = TdApi.SendMessageOptions(false, true, null)
-			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, sendOptions, null, content)) { obj ->
+			val sendOptions = TdApi.MessageSendOptions(false, true, null)
+			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, 0, sendOptions, null, content)) { obj ->
 				handleMapLocationMessageUpdate(obj, shareInfo, false)
 			}
 		}
@@ -905,12 +910,13 @@ class TelegramHelper private constructor() {
 
 	fun editMapLocation(shareInfo: ShareChatInfo, locationMessage: LocationMessages.BufferMessage) {
 		needRefreshActiveLiveLocationMessages = true
-		val location = TdApi.Location(locationMessage.lat, locationMessage.lon)
+		val location = TdApi.Location(locationMessage.lat, locationMessage.lon, locationMessage.hdop)
 		if (shareInfo.currentMapMessageId!=-1L) {
 			shareInfo.pendingTdLibMap++
 			shareInfo.lastSendMapMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			log.info("editMapLocation ${shareInfo.currentMapMessageId} pendingTdLibMap: ${shareInfo.pendingTdLibMap}")
-			client?.send(TdApi.EditMessageLiveLocation(shareInfo.chatId, shareInfo.currentMapMessageId, null, location)) { obj ->
+			client?.send(TdApi.EditMessageLiveLocation(shareInfo.chatId, shareInfo.currentMapMessageId,
+				null, location, locationMessage.bearing.toInt(), 0)) { obj ->
 				handleMapLocationMessageUpdate(obj, shareInfo, false)
 			}
 		}
@@ -1080,18 +1086,21 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun setChatOrder(chat: TdApi.Chat, order: Long) {
+	private fun setChatPositions(chat: TdApi.Chat, positions: Array<TdApi.ChatPosition>) {
 		synchronized(chatList) {
-			val isChannel = isChannel(chat)
-
-			if (chat.order != 0L) {
-				chatList.remove(OrderedChat(chat.order, chat.id, isChannel))
-			}
-
-			chat.order = order
-
-			if (chat.order != 0L) {
-				chatList.add(OrderedChat(chat.order, chat.id, isChannel))
+			synchronized(chat) {
+				val isChannel = isChannel(chat)
+				for (position in chat.positions) {
+					if (position.list.constructor == TdApi.ChatListMain.CONSTRUCTOR) {
+						chatList.remove(OrderedChat(chat.id, position, isChannel))
+					}
+				}
+				chat.positions = positions
+				for (position in chat.positions) {
+					if (position.list.constructor == TdApi.ChatListMain.CONSTRUCTOR) {
+						chatList.add(OrderedChat(chat.id, position, isChannel))
+					}
+				}
 			}
 		}
 	}
@@ -1188,11 +1197,15 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	class OrderedChat internal constructor(internal val order: Long, internal val chatId: Long, internal val isChannel: Boolean) : Comparable<OrderedChat> {
+	class OrderedChat internal constructor(
+		internal val chatId: Long,
+		internal val position: TdApi.ChatPosition,
+		internal val isChannel: Boolean
+	) : Comparable<OrderedChat> {
 
 		override fun compareTo(other: OrderedChat): Int {
-			if (this.order != other.order) {
-				return if (other.order < this.order) -1 else 1
+			if (this.position.order != other.position.order) {
+				return if (other.position.order < this.position.order) -1 else 1
 			}
 			return if (this.chatId != other.chatId) {
 				if (other.chatId < this.chatId) -1 else 1
@@ -1206,12 +1219,11 @@ class TelegramHelper private constructor() {
 			if (other !is OrderedChat) {
 				return false
 			}
-			val o = other as OrderedChat?
-			return this.order == o!!.order && this.chatId == o.chatId
+			return this.chatId == other.chatId && this.position.order == other.position.order;
 		}
 
 		override fun hashCode(): Int {
-			return (order + chatId).hashCode()
+			return (position.order + chatId).hashCode()
 		}
 	}
 
@@ -1288,9 +1300,9 @@ class TelegramHelper private constructor() {
 								}
 							}
 						}
-						val order = chat.order
-						chat.order = 0
-						setChatOrder(chat, order)
+						val positions = chat.positions
+						chat.positions = arrayOfNulls(0)
+						setChatPositions(chat, positions)
 					}
 					listener?.onTelegramChatsChanged()
 				}
@@ -1320,7 +1332,7 @@ class TelegramHelper private constructor() {
 					if (chat != null) {
 						synchronized(chat) {
 							chat.lastMessage = updateChat.lastMessage
-							setChatOrder(chat, updateChat.order)
+							setChatPositions(chat, updateChat.positions);
 						}
 						//listener?.onTelegramChatsChanged()
 					}
@@ -1453,7 +1465,7 @@ class TelegramHelper private constructor() {
 					if (chat != null) {
 						synchronized(chat) {
 							chat.draftMessage = updateChat.draftMessage
-							setChatOrder(chat, updateChat.order)
+							setChatPositions(chat, updateChat.positions)
 						}
 						//listener?.onTelegramChatsChanged()
 					}
