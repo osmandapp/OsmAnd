@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,12 +38,14 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.widgets.NoScrollTextView;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class PluginsFragment extends BaseOsmAndFragment implements PluginStateListener {
 
@@ -193,7 +195,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 			ImageButton pluginLogo = view.findViewById(R.id.plugin_logo);
 			ImageView pluginOptions = view.findViewById(R.id.plugin_options);
-			TextView pluginDescription = view.findViewById(R.id.plugin_description);
+			NoScrollTextView pluginDescription = view.findViewById(R.id.plugin_description);
 
 			Object item = getItem(position);
 			if (item instanceof ConnectedApp) {
@@ -222,14 +224,17 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 							? R.string.access_shared_string_not_installed : R.string.shared_string_enable;
 				}
 				name = plugin.getName();
-				pluginDescription.setText(plugin.getDescription());
+
 
 				int linkTextColorId = nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light;
 				int linkTextColor = ContextCompat.getColor(context, linkTextColorId);
 
+				pluginDescription.setText(plugin.getDescription());
 				pluginDescription.setLinkTextColor(linkTextColor);
-				pluginDescription.setMovementMethod(LinkMovementMethod.getInstance());
-				AndroidUtils.removeLinkUnderline(pluginDescription);
+
+				Pattern pattern = Pattern.compile("@([A-Za-z0-9_]+)");
+				Linkify.addLinks(pluginDescription, Linkify.ALL);
+				Linkify.addLinks(pluginDescription, pattern, "https://t.me/");
 
 				int color = AndroidUtils.getColorFromAttr(context, R.attr.list_background_color);
 				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(plugin.getLogoResource(), color));
@@ -256,7 +261,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 			if (active) {
 				pluginLogo.setBackgroundResource(nightMode ? R.drawable.bg_plugin_logo_enabled_dark : R.drawable.bg_plugin_logo_enabled_light);
 			} else {
-				TypedArray attributes = context.getTheme().obtainStyledAttributes(new int[] {R.attr.bg_plugin_logo_disabled});
+				TypedArray attributes = context.getTheme().obtainStyledAttributes(new int[]{R.attr.bg_plugin_logo_disabled});
 				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));
 				attributes.recycle();
 			}
