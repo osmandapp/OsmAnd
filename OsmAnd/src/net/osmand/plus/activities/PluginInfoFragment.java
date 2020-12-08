@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +37,6 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import org.apache.commons.logging.Log;
-
-import java.util.regex.Pattern;
 
 public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStateListener {
 
@@ -128,9 +125,8 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		int linkTextColor = ContextCompat.getColor(context, linkTextColorId);
 
 		descriptionView.setLinkTextColor(linkTextColor);
-		Pattern pattern = Pattern.compile("@([A-Za-z0-9_]+)");
-		Linkify.addLinks(descriptionView, Linkify.ALL);
-		Linkify.addLinks(descriptionView, pattern, "https://t.me/");
+		descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+		AndroidUtils.removeLinkUnderline(descriptionView);
 
 		Button settingsButton = mainView.findViewById(R.id.plugin_settings);
 		settingsButton.setOnClickListener(new View.OnClickListener() {

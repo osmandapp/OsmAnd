@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.text.util.Linkify;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,7 +45,6 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class PluginsFragment extends BaseOsmAndFragment implements PluginStateListener {
 
@@ -231,10 +230,24 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 				pluginDescription.setText(plugin.getDescription());
 				pluginDescription.setLinkTextColor(linkTextColor);
+				pluginDescription.setMovementMethod(LinkMovementMethod.getInstance());
+				AndroidUtils.removeLinkUnderline(pluginDescription);
 
-				Pattern pattern = Pattern.compile("@([A-Za-z0-9_]+)");
-				Linkify.addLinks(pluginDescription, Linkify.ALL);
-				Linkify.addLinks(pluginDescription, pattern, "https://t.me/");
+				final View finalView = view;
+				pluginDescription.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Object tag = finalView.getTag();
+						if (tag instanceof OsmandPlugin) {
+							FragmentActivity activity = getActivity();
+							if (activity != null) {
+								PluginInfoFragment.showInstance(activity.getSupportFragmentManager(), (OsmandPlugin) tag);
+							}
+						} else if (tag instanceof ConnectedApp) {
+							switchEnabled((ConnectedApp) tag);
+						}
+					}
+				});
 
 				int color = AndroidUtils.getColorFromAttr(context, R.attr.list_background_color);
 				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(plugin.getLogoResource(), color));
