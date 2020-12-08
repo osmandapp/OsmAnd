@@ -3998,4 +3998,17 @@
     <string name="lang_de_casual">Alemão (casual)</string>
     <string name="elevation_data">Você pode usar os dados de elevação para consideração de subida / descida para sua viagem</string>
     <string name="app_mode_light_aircraft">Avião leve</string>
+    <string name="release_3_9">"• Adicionada opção para exportar e importar todos os dados, incluindo configurações, recursos, meus lugares
+\n
+\n • Planejar rota: gráficos para segmentos com a rota, adicionada a capacidade de criar e editar faixas de múltiplos segmentos
+\n
+\n • Método de autenticação OAuth adicionado para OpenStreetMap, interface de usuário aprimorada de caixas de diálogo OSM
+\n
+\n  • Cores personalizadas para favoritos e rastreia pontos de referência
+\n
+\n"</string>
+    <string name="plan_route_join_segments">Unir segmentos</string>
+    <string name="plan_route_split_before">Dividir antes</string>
+    <string name="plan_route_split_after">Dividir depois</string>
+    <string name="plan_route_add_new_segment">Adicionar novo segmento</string>
 </resources>
