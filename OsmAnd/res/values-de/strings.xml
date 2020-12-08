@@ -1048,7 +1048,7 @@
     <string name="available_downloads_left">Es können noch %1$d Dateien heruntergeladen werden</string>
     <string name="install_paid">Vollversion</string>
     <string name="cancel_navigation">Navigation stoppen</string>
-    <string name="cancel_route">Route verwerfen</string>
+    <string name="cancel_route">Route verwerfen\?</string>
     <string name="use_kalman_filter_compass_descr">Kompass-Rauschreduzierung (erhöht die Kompassträgheit etwas).</string>
     <string name="use_kalman_filter_compass">Kalman-Filter verwenden</string>
     <string name="use_magnetic_sensor_descr">Für den Kompass Magnetsensor statt Lagesensor verwenden.</string>
