@@ -1086,7 +1086,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun setChatPositions(chat: TdApi.Chat, positions: Array<TdApi.ChatPosition>) {
+	private fun setChatPositions(chat: TdApi.Chat, positions: Array<TdApi.ChatPosition?>) {
 		synchronized(chatList) {
 			synchronized(chat) {
 				val isChannel = isChannel(chat)
@@ -1337,23 +1337,33 @@ class TelegramHelper private constructor() {
 						//listener?.onTelegramChatsChanged()
 					}
 				}
-				TdApi.UpdateChatOrder.CONSTRUCTOR -> {
-					val updateChat = obj as TdApi.UpdateChatOrder
-					val chat = chats[updateChat.chatId]
-					if (chat != null) {
-						synchronized(chat) {
-							setChatOrder(chat, updateChat.order)
-						}
-						listener?.onTelegramChatsChanged()
-					}
-				}
-				TdApi.UpdateChatIsPinned.CONSTRUCTOR -> {
-					val updateChat = obj as TdApi.UpdateChatIsPinned
-					val chat = chats[updateChat.chatId]
-					if (chat != null) {
-						synchronized(chat) {
-							chat.isPinned = updateChat.isPinned
-							setChatOrder(chat, updateChat.order)
+				TdApi.UpdateChatPosition.CONSTRUCTOR -> {
+					val updateChat = obj as TdApi.UpdateChatPosition
+					if (updateChat.position.list.constructor == TdApi.ChatListMain.CONSTRUCTOR) {
+						val chat = chats[updateChat.chatId]
+						if (chat != null) {
+							synchronized(chat) {
+								var index = 0
+								for (i in chat.positions.indices) {
+									if (chat.positions[i].list.constructor == TdApi.ChatListMain.CONSTRUCTOR) {
+										index = i
+										break
+									}
+								}
+								val length = chat.positions.size + (if (updateChat.position.order == 0L) 0 else 1) - if (index < chat.positions.size) 1 else 0
+								val newPositions = arrayOfNulls<TdApi.ChatPosition>(length)
+
+								var pos = 0
+								if (updateChat.position.order != 0L) {
+									newPositions[pos++] = updateChat.position
+								}
+								for (j in chat.positions.indices) {
+									if (j != index) {
+										newPositions[pos++] = chat.positions[j];
+									}
+								}
+								setChatPositions(chat, newPositions)
+							}
 						}
 						//listener?.onTelegramChatsChanged()
 					}
