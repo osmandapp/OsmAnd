@@ -3990,4 +3990,17 @@
     <string name="lang_de_casual">الألمانية (تقليدية)</string>
     <string name="elevation_data">يمكنك استخدام بيانات الارتفاع للنظر في الصعود / الهبوط لرحلتك</string>
     <string name="app_mode_light_aircraft">طائرة</string>
+    <string name="plan_route_join_segments">ربط الأجزاء</string>
+    <string name="plan_route_split_before">تقسيم قبل</string>
+    <string name="plan_route_split_after">تقسيم بعد</string>
+    <string name="plan_route_add_new_segment">إضافة شريحة جديدة</string>
+    <string name="release_3_9">• خيار مضاف لتصدير واستيراد جميع البيانات بما في ذلك الإعدادات والموارد والأماكن الخاصة بي
+\n
+\n • مخطط الطريق: الرسوم البيانية للأجزاء مع المسار ، إضافة القدرة على إنشاء وتحرير مسارات مقطع مضاعفة
+\n
+\n • تمت إضافة طريقة مصادقة OAuth لـ OpenStreetMap ، واجهة مستخدم محسنة لمربعات حوار OSM
+\n
+\n • ألوان مخصصة للمفضلة والمسارات نقاط الطريق
+\n
+\n</string>
 </resources>
