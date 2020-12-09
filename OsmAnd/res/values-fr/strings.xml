@@ -3993,5 +3993,5 @@
     <string name="plan_route_split_before">Couper avant</string>
     <string name="plan_route_split_after">Couper après</string>
     <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
-    <string name="gpx_upload_identifiable_visibility_descr">\"Identifiable\" siginifie que la trace sera affichée publiquement dans \"Vos traces GPS\" ainsi que dans les listes de traces GPS publiques. Celà signifie que les autres utilisateurs peuvent télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Quand ils sont servis par l\'API de point de cheminement (trackpoints API), les données de points de trace horodatés provenant de l\'API GPS publique feront référence à la page de votre trace originelle.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » siginifie que la trace sera affichée publiquement dans « Vos traces GPS » ainsi que dans les listes de traces GPS publiques. Ceci signifie que les autres utilisateurs peuvent télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Quand ils sont servis par l\'API de point de cheminement, les données de points de trace horodatés provenant de l\'API GPS publique feront référence à la page de votre trace originelle.</string>
 </resources>
