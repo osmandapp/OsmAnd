@@ -42,8 +42,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import gnu.trove.map.hash.TLongObjectHashMap;
-
 public class TravelDbHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelDbHelper.class);
@@ -116,11 +114,16 @@ public class TravelDbHelper implements TravelHelper {
 		localDataHelper = new TravelLocalDataHelper(application);
 	}
 
-	public TravelLocalDataHelper getLocalDataHelper() {
+	public TravelLocalDataHelper getBookmarksHelper() {
 		return localDataHelper;
 	}
 
-	public void initTravelBooks() {
+	@Override
+	public boolean isAnyTravelBookPresent() {
+		return selectedTravelBook != null;
+	}
+
+	public void initializeDataOnAppStartup() {
 		List<File> files = getPossibleFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
 		existingTravelBooks.clear();
@@ -153,13 +156,17 @@ public class TravelDbHelper implements TravelHelper {
 		return null;
 	}
 
-	public void loadDataForSelectedTravelBook() {
+	public void initializeDataToDisplay() {
 		localDataHelper.refreshCachedData();
 		loadPopularArticles();
 	}
 
-	public File getSelectedTravelBook() {
-		return selectedTravelBook;
+
+	public String getSelectedTravelBookName() {
+		if (selectedTravelBook != null) {
+			return selectedTravelBook.getName();
+		}
+		return null;
 	}
 
 	public List<File> getExistingTravelBooks() {
@@ -222,7 +229,7 @@ public class TravelDbHelper implements TravelHelper {
 					if (cursor.moveToFirst()) {
 						do {
 							WikivoyageSearchResult rs = new WikivoyageSearchResult();
-							rs.tripId = cursor.getLong(0);
+							rs.routeId = cursor.getLong(0) + "";
 							rs.articleTitles.add(cursor.getString(1));
 							rs.langs.add(cursor.getString(2));
 							rs.isPartOf.add(cursor.getString(3));
@@ -235,7 +242,7 @@ public class TravelDbHelper implements TravelHelper {
 			}
 		}
 
-		List<WikivoyageSearchResult> list = new ArrayList<>(groupSearchResultsByCityId(res));
+		List<WikivoyageSearchResult> list = new ArrayList<>(groupSearchResultsByRouteId(res));
 		sortSearchResults(searchQuery, list);
 
 		return list;
@@ -288,7 +295,7 @@ public class TravelDbHelper implements TravelHelper {
 			}
 		});
 		sortPopArticlesByDistance(popReadArticlesLocation);
-		List<Long> resArticleOrder = new ArrayList<Long>();
+		List<String> resArticleOrder = new ArrayList<String>();
 		Iterator<PopularArticle> orderIterator = popReadArticlesOrder.iterator();
 		Iterator<PopularArticle> locIterator = popReadArticlesLocation.iterator();
 		Iterator<PopularArticle> otherIterator = popReadArticles.iterator();
@@ -314,13 +321,13 @@ public class TravelDbHelper implements TravelHelper {
 		}
 		
 		
-		Map<Long, TravelArticle> ts = readTravelArticles(conn, LANG_WHERE, resArticleOrder);
+		Map<String, TravelArticle> ts = readTravelArticles(conn, LANG_WHERE, resArticleOrder);
 		popularArticles = sortArticlesToInitialOrder(resArticleOrder, ts);
 		return popularArticles;
 	}
 
-	private Map<Long, TravelArticle> readTravelArticles(SQLiteConnection conn, String whereCondition,
-			List<Long> articleIds) {
+	private Map<String, TravelArticle> readTravelArticles(SQLiteConnection conn, String whereCondition,
+			List<String> articleIds) {
 		SQLiteCursor cursor;
 		StringBuilder bld = new StringBuilder();
 		bld.append(ARTICLES_TABLE_SELECT).append(whereCondition)
@@ -333,12 +340,12 @@ public class TravelDbHelper implements TravelHelper {
 		}
 		bld.append(")");
 		cursor = conn.rawQuery(bld.toString(), null);
-		Map<Long, TravelArticle> ts = new HashMap<Long, TravelArticle>();
+		Map<String, TravelArticle> ts = new HashMap<String, TravelArticle>();
 		if (cursor != null) {
 			if (cursor.moveToFirst()) {
 				do {
 					TravelArticle travelArticle = readArticle(cursor);
-					ts.put(travelArticle.tripId, travelArticle);
+					ts.put(travelArticle.routeId, travelArticle);
 				} while (cursor.moveToNext());
 			}
 			cursor.close();
@@ -346,7 +353,7 @@ public class TravelDbHelper implements TravelHelper {
 		return ts;
 	}
 
-	private List<TravelArticle> sortArticlesToInitialOrder(List<Long> resArticleOrder, Map<Long, TravelArticle> ts) {
+	private List<TravelArticle> sortArticlesToInitialOrder(List<String> resArticleOrder, Map<String, TravelArticle> ts) {
 		List<TravelArticle> res = new ArrayList<>();
 		for (int i = 0; i < resArticleOrder.size(); i++) {
 			TravelArticle ta = ts.get(resArticleOrder.get(i));
@@ -398,11 +405,11 @@ public class TravelDbHelper implements TravelHelper {
 	}
 	
 
-	private Collection<WikivoyageSearchResult> groupSearchResultsByCityId(List<WikivoyageSearchResult> res) {
+	private Collection<WikivoyageSearchResult> groupSearchResultsByRouteId(List<WikivoyageSearchResult> res) {
 		String baseLng = application.getLanguage();
-		TLongObjectHashMap<WikivoyageSearchResult> wikivoyage = new TLongObjectHashMap<>();
+		Map<String, WikivoyageSearchResult> wikivoyage = new HashMap<>();
 		for (WikivoyageSearchResult rs : res) {
-			WikivoyageSearchResult prev = wikivoyage.get(rs.tripId);
+			WikivoyageSearchResult prev = wikivoyage.get(rs.routeId);
 			if (prev != null) {
 				int insInd = prev.langs.size();
 				if (rs.langs.get(0).equals(baseLng)) {
@@ -418,10 +425,10 @@ public class TravelDbHelper implements TravelHelper {
 				prev.langs.add(insInd, rs.langs.get(0));
 				prev.isPartOf.add(insInd, rs.isPartOf.get(0));
 			} else {
-				wikivoyage.put(rs.tripId, rs);
+				wikivoyage.put(rs.routeId, rs);
 			}
 		}
-		return wikivoyage.valueCollection();
+		return wikivoyage.values();
 	}
 
 	@NonNull
@@ -473,7 +480,7 @@ public class TravelDbHelper implements TravelHelper {
 			if (cursor != null && cursor.moveToFirst()) {
 				do {
 					WikivoyageSearchResult rs = new WikivoyageSearchResult();
-					rs.tripId = cursor.getLong(0);
+					rs.routeId = cursor.getLong(0) + "";
 					rs.articleTitles.add(cursor.getString(1));
 					rs.langs.add(cursor.getString(2));
 					rs.isPartOf.add(cursor.getString(3));
@@ -506,7 +513,7 @@ public class TravelDbHelper implements TravelHelper {
 				});
 				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult();
 				emptyResult.articleTitles.add(header);
-				emptyResult.tripId = -1;
+				emptyResult.routeId = "";
 				searchResult = searchResult != null ? searchResult : emptyResult;
 				res.put(searchResult, results);
 			}
@@ -515,12 +522,12 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@Nullable
-	public TravelArticle getArticle(long cityId, String lang) {
+	public TravelArticle getArticleById(String routeId, String lang) {
 		TravelArticle res = null;
 		SQLiteConnection conn = openConnection();
-		if (conn != null) {
+		if (conn != null && !Algorithms.isEmpty(routeId)) {
 			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_TRIP_ID + " = ? AND "
-					+ ARTICLES_COL_LANG + " = ?", new String[] { String.valueOf(cityId), lang });
+					+ ARTICLES_COL_LANG + " = ?", new String[] { routeId, lang });
 			if (cursor != null) {
 				if (cursor.moveToFirst()) {
 					res = readArticle(cursor);
@@ -532,7 +539,7 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@Nullable
-	public TravelArticle getArticle(String title, String lang) {
+	public TravelArticle getArticleByTitle(String title, String lang) {
 		TravelArticle res = null;
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
@@ -548,8 +555,8 @@ public class TravelDbHelper implements TravelHelper {
 		return res;
 	}
 
-	public long getArticleId(String title, String lang) {
-		long res = 0;
+	public String getArticleId(String title, String lang) {
+		String res = "";
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_TRIP_ID + " FROM "
@@ -557,7 +564,7 @@ public class TravelDbHelper implements TravelHelper {
 					+ ARTICLES_COL_LANG + " = ?", new String[]{title, lang});
 			if (cursor != null) {
 				if (cursor.moveToFirst()) {
-					res = cursor.getLong(0);
+					res = cursor.getLong(0) + "";
 				}
 				cursor.close();
 			}
@@ -566,12 +573,12 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@NonNull
-	public ArrayList<String> getArticleLangs(long cityId) {
+	public ArrayList<String> getArticleLangs(String routeId) {
 		ArrayList<String> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_LANG + " FROM " + ARTICLES_TABLE_NAME
-					+ " WHERE " + ARTICLES_COL_TRIP_ID + " = ?", new String[]{String.valueOf(cityId)});
+					+ " WHERE " + ARTICLES_COL_TRIP_ID + " = ?", new String[]{routeId});
 			if (cursor != null) {
 				if (cursor.moveToFirst()) {
 					String baseLang = application.getLanguage();
@@ -610,7 +617,7 @@ public class TravelDbHelper implements TravelHelper {
 		res.lat = cursor.isNull(3) ? Double.NaN : cursor.getDouble(3);
 		res.lon = cursor.isNull(4) ? Double.NaN : cursor.getDouble(4);
 		res.imageTitle = cursor.getString(5);
-		res.tripId = cursor.getLong(7);
+		res.routeId = cursor.getLong(7) + "";
 		res.originalId = cursor.isNull(8) ? 0 : cursor.getLong(8);
 		res.lang = cursor.getString(9);
 		res.contentsJson = cursor.getString(10);
@@ -648,7 +655,7 @@ public class TravelDbHelper implements TravelHelper {
 	}
 	
 	protected static class PopularArticle {
-		long tripId;
+		String tripId;
 		String title;
 		String lang;
 		int popIndex;
@@ -665,7 +672,7 @@ public class TravelDbHelper implements TravelHelper {
 			res.title = cursor.getString(0);
 			res.lat = cursor.isNull(1) ? Double.NaN : cursor.getDouble(1);
 			res.lon = cursor.isNull(2) ? Double.NaN : cursor.getDouble(2);
-			res.tripId = cursor.getLong(3);
+			res.tripId = cursor.getLong(3) + "";
 			res.lang = cursor.getString(4);
 			res.order = cursor.isNull(5) ? -1 : cursor.getInt(5);
 			res.popIndex = cursor.isNull(6) ? 0 : cursor.getInt(6);
@@ -677,7 +684,7 @@ public class TravelDbHelper implements TravelHelper {
 			res.title = a.getName(lang);
 			res.lat = a.getLocation().getLatitude();
 			res.lon = a.getLocation().getLongitude();
-			res.tripId = a.getId();
+			res.tripId = a.getId() + "";
 			res.lang = lang;
 			res.order = -1;
 			res.popIndex = 0;

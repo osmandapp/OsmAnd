@@ -48,7 +48,7 @@ import java.util.List;
 public class WikivoyageExploreActivity extends TabActivity implements DownloadEvents, OnDialogFragmentResultListener {
 
 	private static final String TAB_SELECTED = "tab_selected";
-	private static final String CITY_ID_KEY = "city_id_key";
+	private static final String ROUTE_ID_KEY = "route_id_key";
 	private static final String SELECTED_LANG_KEY = "selected_lang_key";
 
 	private static final int EXPLORE_POSITION = 0;
@@ -181,9 +181,9 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 					BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 					bottomNav.setSelectedItemId(R.id.action_saved_articles);
 				}
-				long articleId = intent.getLongExtra(CITY_ID_KEY, -1);
+				String articleId = intent.getStringExtra(ROUTE_ID_KEY);
 				String selectedLang = intent.getStringExtra(SELECTED_LANG_KEY);
-				if (articleId != -1) {
+				if (!Algorithms.isEmpty(articleId)) {
 					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
 				}
 			}
@@ -199,8 +199,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			String title = WikiArticleHelper.decodeTitleFromTravelUrl(data.getQueryParameter("title"));
 			String selectedLang = data.getQueryParameter("lang");
 			if (!Algorithms.isEmpty(title) && !Algorithms.isEmpty(selectedLang)) {
-				long articleId = app.getTravelHelper().getArticleId(title, selectedLang);
-				if (articleId != 0) {
+				String articleId = app.getTravelHelper().getArticleId(title, selectedLang);
+				if (!articleId.isEmpty()) {
 					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
 				}
 			}
@@ -276,7 +276,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 	private void applyIntentParameters(Intent intent, TravelArticle article) {
 		intent.putExtra(TAB_SELECTED, viewPager.getCurrentItem());
-		intent.putExtra(CITY_ID_KEY, article.getTripId());
+		intent.putExtra(ROUTE_ID_KEY, article.getRouteId());
 		intent.putExtra(SELECTED_LANG_KEY, article.getLang());
 	}
 
@@ -333,7 +333,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	private void updateSearchBarVisibility() {
-		boolean show = app.getTravelHelper().getSelectedTravelBook() != null;
+		boolean show = app.getTravelHelper().isAnyTravelBookPresent();
 		findViewById(R.id.search_box).setVisibility(show ? View.VISIBLE : View.GONE);
 	}
 
@@ -370,7 +370,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			travelHelper.loadDataForSelectedTravelBook();
+			travelHelper.initializeDataToDisplay();
 			return null;
 		}
 

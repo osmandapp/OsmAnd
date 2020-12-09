@@ -67,8 +67,8 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		if (url.contains(WIKIVOAYAGE_DOMAIN) && isWebPage) {
 			String lang = WikiArticleHelper.getLang(url);
 			String articleName = WikiArticleHelper.getArticleNameFromUrl(url, lang);
-			long articleId = app.getTravelHelper().getArticleId(articleName, lang);
-			if (articleId != 0) {
+			String articleId = app.getTravelHelper().getArticleId(articleName, lang);
+			if (articleId.isEmpty()) {
 				WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, articleId, lang);
 			} else {
 				WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);

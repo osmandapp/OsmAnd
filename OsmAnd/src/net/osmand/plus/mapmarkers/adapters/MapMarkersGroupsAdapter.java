@@ -36,7 +36,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
-import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 
 import java.io.File;
@@ -165,8 +164,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						items.add(categoriesSubHeader);
 					}
 					TravelHelper travelHelper = mapActivity.getMyApplication().getTravelHelper();
-					if (travelHelper.getSelectedTravelBook() != null) {
-						List<TravelArticle> savedArticles = travelHelper.getLocalDataHelper().getSavedArticles();
+					if (travelHelper.isAnyTravelBookPresent()) {
+						List<TravelArticle> savedArticles = travelHelper.getBookmarksHelper().getSavedArticles();
 						for (TravelArticle art : savedArticles) {
 							String gpxName = travelHelper.getGPXName(art);
 							File path = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
@@ -428,7 +427,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						@Override
 						public void onClick(View v) {
 							if (mapActivity.getSupportFragmentManager() != null) {
-								WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), article.getTitle(), article.getLang());
+								WikivoyageArticleDialogFragment.showInstanceByTitle(app, mapActivity.getSupportFragmentManager(), article.getTitle(), article.getLang());
 							}
 						}
 					};
