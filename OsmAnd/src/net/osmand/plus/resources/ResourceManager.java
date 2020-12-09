@@ -1138,7 +1138,7 @@ public class ResourceManager {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource res : fileReaders) {
-			if (!res.filename.toString().toLowerCase().contains("wiki")) {
+			if (!res.filename.toString().toLowerCase().contains("travel.obf")) {
 				continue;
 			}
 			BinaryMapIndexReader index = res.getReader(BinaryMapReaderResourceType.POI);

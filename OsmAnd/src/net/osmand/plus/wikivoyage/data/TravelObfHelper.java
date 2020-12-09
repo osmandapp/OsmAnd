@@ -1,7 +1,6 @@
 package net.osmand.plus.wikivoyage.data;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -66,7 +65,7 @@ public class TravelObfHelper implements TravelHelper {
 		File[] files = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
 		if (files != null) {
 			for (File f : files) {
-				if (f.getName().equals(WIKIVOYAGE_OBF)) {
+				if (f.getName().equals(WIKIVOYAGE_OBF) || f.getName().contains("travel.obf")) {
 					return true;
 				}
 			}
@@ -127,7 +126,6 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public List<WikivoyageSearchResult> search(String searchQuery) {
-
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		CollatorStringMatcher matcher = new CollatorStringMatcher(searchQuery,
 				CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
