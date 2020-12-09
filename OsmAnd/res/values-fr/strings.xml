@@ -3979,4 +3979,5 @@
     <string name="lang_de_casual">Allemand (courant)</string>
     <string name="app_mode_light_aircraft">Aviation légère</string>
     <string name="elevation_data">Vous pouvez utiliser l\'altitude pour prendre en compte les dénivellés sur votre itinéraire</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Traçable\" signifie que la trace ne s\'affichera pas dans les listes publiques, mais que les points de cheminement horodatés qu\'elle contient seront téléchargeables depuis l\'API GPS publique (ces points sont traîtés afin de n\'avoir aucun lien direct avec vous).</string>
 </resources>
