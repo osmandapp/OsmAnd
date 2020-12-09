@@ -104,26 +104,6 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
-	/**
-	 * todo: get all obf files from folder, may be we should add some suffix like 'wikivoyage'
-	 * to filenames to distinguish from other maps? Or add some checks right there.
-	 */
-	@Nullable
-	private List<File> getPossibleFiles() {
-		File[] files = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
-		if (files != null) {
-			List<File> res = new ArrayList<>();
-			for (File file : files) {
-				if (file.getName().equals("Wikivoyage.obf")) {
-					res.add(file);
-					LOG.debug(String.format("FIle name: %s", file.getAbsolutePath()));
-				}
-			}
-			return res;
-		}
-		return null;
-	}
-
 	public void loadDataForSelectedTravelBook() {
 		localDataHelper.refreshCachedData();
 		loadPopularArticles();
