@@ -3621,7 +3621,7 @@
     <string name="poi_vehicle_military">Atzessu pro sos veìculos: militares</string>
     <string name="poi_vehicle_delivery">Atzessu pro sos veìculos: intregas</string>
     <string name="poi_vehicle_forestry">Atzessu pro sos veìculos: foresteria</string>
-    <string name="poi_motorcar_yes">Atzessu pro sas automòbiles:</string>
+    <string name="poi_motorcar_yes">Atzessu pro sas automòbiles: eja</string>
     <string name="poi_motorcar_private">Atzessu pro sas automòbiles: privadu</string>
     <string name="poi_motorcar_no">Atzessu pro sas automòbiles: nono</string>
     <string name="poi_motorcar_destination">Atzessu pro sas automòbiles: destinatzione</string>
@@ -3879,4 +3879,5 @@
     <string name="poi_siren">Sirena</string>
     <string name="poi_nurse">Infermieri</string>
     <string name="poi_mobile_money_agent">Agente de denaru mòbile</string>
+    <string name="poi_lifeguard_base">Base de sos bagninos</string>
 </resources>
