@@ -386,7 +386,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 							}
 							app.locationMessages.removeBufferedMessage(locationMessage)
 							if ((shareInfo.shouldSendViaBotTextMessage || shareInfo.shouldSendViaBotMapMessage) && osmandBotId != -1 && device != null) {
-								app.telegramHelper.sendViaBotLocationMessage(osmandBotId, shareInfo, TdApi.Location(locationMessage.lat, locationMessage.lon), device, shareType)
+								app.telegramHelper.sendViaBotLocationMessage(osmandBotId, shareInfo, TdApi.Location(locationMessage.lat, locationMessage.lon, locationMessage.hdop), device, shareType)
 								shareInfo.shouldSendViaBotTextMessage = false
 								shareInfo.shouldSendViaBotMapMessage = false
 							}
