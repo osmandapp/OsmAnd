@@ -163,7 +163,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 			// new segment
 			BaseBottomSheetItem addNewSegment = new BottomSheetItemWithDescription.Builder()
-					//.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
+					.setIcon(getContentIcon(R.drawable.ic_action_new_segment))
 					.setTitle(getString(R.string.plan_route_add_new_segment))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 					.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +183,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 			// join
 			BaseBottomSheetItem joinSegments = new BottomSheetItemWithDescription.Builder()
-					//.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
+					.setIcon(getContentIcon(R.drawable.ic_action_join_segments))
 					.setTitle(getString(R.string.plan_route_join_segments))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 					.setOnClickListener(new View.OnClickListener() {
