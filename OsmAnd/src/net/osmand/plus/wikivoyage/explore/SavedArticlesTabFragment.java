@@ -40,7 +40,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final OsmandApplication app = requireMyApplication();
-		dataHelper = app.getTravelHelper().getLocalDataHelper();
+		dataHelper = app.getTravelHelper().getBookmarksHelper();
 
 		final View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
 
@@ -50,7 +50,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 			public void openArticle(TravelArticle article) {
 				FragmentManager fm = getFragmentManager();
 				if (fm != null) {
-					WikivoyageArticleDialogFragment.showInstance(app, fm, article.getTitle(), article.getLang());
+					WikivoyageArticleDialogFragment.showInstanceByTitle(app, fm, article.getTitle(), article.getLang());
 				}
 			}
 		});
@@ -161,7 +161,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 				}
 				TravelArticle oldArticle = (TravelArticle) oldItem;
 				TravelArticle newArticle = (TravelArticle) newItem;
-				return oldArticle.getTripId() == newArticle.getTripId()
+				return oldArticle.getRouteId().equals(newArticle.getRouteId())
 						&& oldArticle.getLang().equals(newArticle.getLang());
 			}
 			return false;

@@ -28,7 +28,7 @@ public class TravelArticle {
 	double lon;
 	String imageTitle;
 	GPXFile gpxFile;
-	long tripId;
+	String routeId;
 	long originalId;
 	String lang;
 	String contentsJson;
@@ -63,8 +63,8 @@ public class TravelArticle {
 		return gpxFile;
 	}
 
-	public long getTripId() {
-		return tripId;
+	public String getRouteId() {
+		return routeId;
 	}
 
 	public long getOriginalId() {

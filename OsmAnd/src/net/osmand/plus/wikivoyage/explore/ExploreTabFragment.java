@@ -28,7 +28,6 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
-import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
@@ -39,7 +38,6 @@ import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -93,7 +91,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		super.onResume();
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			app.getTravelHelper().getLocalDataHelper().addListener(this);
+			app.getTravelHelper().getBookmarksHelper().addListener(this);
 		}
 		WikivoyageExploreActivity exploreActivity = getExploreActivity();
 		if (exploreActivity != null) {
@@ -106,7 +104,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		super.onPause();
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			app.getTravelHelper().getLocalDataHelper().removeListener(this);
+			app.getTravelHelper().getBookmarksHelper().removeListener(this);
 		}
 	}
 
@@ -137,8 +135,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			TravelHelper travelHelper = app.getTravelHelper();
-			if (travelHelper.getSelectedTravelBook() == null) {
-				app.getTravelHelper().initTravelBooks();
+			if (travelHelper.isAnyTravelBookPresent()) {
+				app.getTravelHelper().initializeDataOnAppStartup();
 				WikivoyageExploreActivity exploreActivity = getExploreActivity();
 				if (exploreActivity != null) {
 					exploreActivity.populateData();
@@ -182,7 +180,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 					if (!Version.isPaidVersion(app)) {
 						items.add(new OpenBetaTravelCard(app, nightMode, fm));
 					}
-					if (app.getTravelHelper().getSelectedTravelBook() != null) {
+					if (app.getTravelHelper().isAnyTravelBookPresent()) {
 						items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
 
 						List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
@@ -239,9 +237,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 			boolean outdated = mainIndexItem != null && mainIndexItem.isOutdated();
 			boolean needsDownloading = mainIndexItem != null && !mainIndexItem.isDownloaded();
-			File selectedTravelBook = app.getTravelHelper().getSelectedTravelBook();
 
-			if (selectedTravelBook == null || needsDownloading || (outdated && SHOW_TRAVEL_UPDATE_CARD)) {
+			if (!app.getTravelHelper().isAnyTravelBookPresent() || needsDownloading || (outdated && SHOW_TRAVEL_UPDATE_CARD)) {
 				boolean showOtherMaps = false;
 				if (needsDownloading) {
 					List<IndexItem> items = downloadThread.getIndexes().getWikivoyageItems();
@@ -390,7 +387,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			IndexItem mainItem = app.getDownloadThread().getIndexes().getWikivoyageItem(fileName);
 
 			List<IndexItem> neededItems = new ArrayList<>();
-			for (TravelArticle article : app.getTravelHelper().getLocalDataHelper().getSavedArticles()) {
+			for (TravelArticle article : app.getTravelHelper().getBookmarksHelper().getSavedArticles()) {
 				LatLon latLon = new LatLon(article.getLat(), article.getLon());
 				try {
 					for (DownloadActivityType type : types) {

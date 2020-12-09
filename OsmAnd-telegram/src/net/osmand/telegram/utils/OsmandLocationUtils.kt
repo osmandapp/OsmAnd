@@ -99,15 +99,15 @@ object OsmandLocationUtils {
 
 	fun getSenderMessageId(message: TdApi.Message): Int {
 		val forwardInfo = message.forwardInfo
-		return if (forwardInfo != null) {
-			val origin: TdApi.MessageForwardOrigin? = forwardInfo.origin
-			if (origin != null && origin is TdApi.MessageForwardOriginUser) {
-				origin.senderUserId
-			} else {
-				message.senderUserId
-			}
+		return if (forwardInfo != null && forwardInfo.origin is TdApi.MessageForwardOriginUser) {
+			(forwardInfo.origin as TdApi.MessageForwardOriginUser).senderUserId
 		} else {
-			message.senderUserId
+			val sender = message.sender
+			if (sender is TdApi.MessageSenderUser) {
+				sender.userId
+			} else {
+				0
+			}
 		}
 	}
 
