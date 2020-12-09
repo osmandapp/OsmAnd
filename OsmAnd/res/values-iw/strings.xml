@@ -4005,4 +4005,8 @@
     <string name="ltr_or_rtl_combine_via_star">‏%1$s‏ * %2$s</string>
     <string name="elevation_data">אפשר להשתמש בנתוני רום לצורך התחשבות בעליה / ירידה במהלך הטיול</string>
     <string name="app_mode_light_aircraft">כלי טיס קל</string>
+    <string name="plan_route_join_segments">צירוף מקטעים</string>
+    <string name="plan_route_split_before">לפצל לפני</string>
+    <string name="plan_route_split_after">לפצל אחרי</string>
+    <string name="plan_route_add_new_segment">הוספת מקטע חדש</string>
 </resources>

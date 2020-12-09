@@ -4002,4 +4002,17 @@
     <string name="lang_de_casual">Germana (ordinara)</string>
     <string name="elevation_data">Vi povas uzi datumojn pri altitudo por kalkuli suprenirojn/malsuprenirojn de via kurso</string>
     <string name="app_mode_light_aircraft">Malpeza aviadilo</string>
+    <string name="plan_route_join_segments">Kunigi segmentojn</string>
+    <string name="plan_route_split_before">Dividi antaŭ</string>
+    <string name="plan_route_split_after">Dividi post</string>
+    <string name="plan_route_add_new_segment">Aldoni novan segmenton</string>
+    <string name="release_3_9">• aldonita agordo por el-/en-porti ĉiujn datumojn, inkluzivante agordojn, map‑datumojn kaj miajn lokojn
+\n
+\n • plani kurson: diagramoj por segmentoj kun la kurso, aldonita eblo por krei kaj redakti plurajn segmentojn de kurso
+\n 
+\n • aldonita aŭtentiga metodo OAuth por OpenStreetMap, plibonigita fasado de OSM‑rilataj dialogujoj
+\n 
+\n • propraj koloroj por ŝatataj ejoj kaj navigadpunktoj de spuro
+\n
+\n</string>
 </resources>

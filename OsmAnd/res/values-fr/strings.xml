@@ -3979,4 +3979,18 @@
     <string name="lang_de_casual">Allemand (courant)</string>
     <string name="app_mode_light_aircraft">Aviation légère</string>
     <string name="elevation_data">Vous pouvez utiliser l\'altitude pour prendre en compte les dénivellés sur votre itinéraire</string>
+    <string name="gpx_upload_trackable_visibility_descr">« Traçable » signifie que la trace ne s\'affichera pas dans les listes publiques, mais que les points de cheminement horodatés qu\'elle contient seront téléchargeables depuis l\'API GPS publique (ces points sont traités afin de n\'avoir aucun lien direct avec vous).</string>
+    <string name="release_3_9">• Ajout d\'une option pour exporter et importer toutes les données, y compris les paramètres, les ressources, mes lieux
+\n
+\n • Planifier l\'itinéraire : graphiques pour les segments avec l\'itinéraire, ajout de la possibilité de créer et de modifier des pistes à segments multiples
+\n
+\n • Ajout de la méthode d\'authentification OAuth pour OpenStreetMap, amélioration de l\'interface utilisateur des boîtes de dialogue OSM
+\n
+\n • Couleurs personnalisées pour les favoris et les points de passage
+\n
+\n</string>
+    <string name="plan_route_join_segments">Joindre les segments</string>
+    <string name="plan_route_split_before">Couper avant</string>
+    <string name="plan_route_split_after">Couper après</string>
+    <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
 </resources>

@@ -3998,4 +3998,17 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="elevation_data">您可以將海拔資料用於您旅程的上升與下降</string>
     <string name="app_mode_light_aircraft">輕型飛機</string>
+    <string name="plan_route_join_segments">加入線段</string>
+    <string name="plan_route_split_before">分離前</string>
+    <string name="plan_route_split_after">分離後</string>
+    <string name="plan_route_add_new_segment">加入新線段</string>
+    <string name="release_3_9">• 新增匯出與匯入所有資料（包含設定、資源與我的位置）的選項
+\n
+\n • 路線計畫：有路線的線段圖，並有建立與編輯多個線段軌跡的功能
+\n
+\n • 加入 OpenStreetMap 的 OAuth 驗證方式，改善 OSM 對話框的使用者介面
+\n
+\n • 自訂最愛與軌跡航點的顏色
+\n
+\n</string>
 </resources>
