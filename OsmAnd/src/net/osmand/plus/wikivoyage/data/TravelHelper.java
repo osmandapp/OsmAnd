@@ -13,17 +13,13 @@ import java.util.Map;
 
 public interface TravelHelper {
 
-	TravelLocalDataHelper getLocalDataHelper();
+	TravelLocalDataHelper getBookmarksHelper();
 
-	void initTravelBooks();
+	void initializeDataOnAppStartup();
 
-	void loadDataForSelectedTravelBook();
+	void initializeDataToDisplay();
 
-	File getSelectedTravelBook();
-
-	List<File> getExistingTravelBooks();
-
-	void selectTravelBook(File f);
+	boolean isAnyTravelBookPresent();
 
 	@NonNull
 	List<WikivoyageSearchResult> search(final String searchQuery);
@@ -31,23 +27,23 @@ public interface TravelHelper {
 	@NonNull
 	List<TravelArticle> getPopularArticles();
 
-	@NonNull
-	List<TravelArticle> loadPopularArticles();
-
-	LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(
+	Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(
 			final TravelArticle article);
 
-	TravelArticle getArticle(long cityId, String lang);
+	TravelArticle getArticleById(String routeId, String lang);
 
-	TravelArticle getArticle(String title, String lang);
+	TravelArticle getArticleByTitle(String title, String lang);
 
-	long getArticleId(String title, String lang);
+	String getArticleId(String title, String lang);
 
-	ArrayList<String> getArticleLangs(long cityId);
-
-	String formatTravelBookName(File tb);
+	ArrayList<String> getArticleLangs(String articleId);
 
 	String getGPXName(TravelArticle article);
 
 	File createGpxFile(TravelArticle article);
+
+	// TODO: this method should be deleted once TravelDBHelper is deleted
+	// For TravelOBFHelper it could always return "" and should be no problem
+	// Bookmarks should be refactored properly to support multiple files
+	String getSelectedTravelBookName();
 }

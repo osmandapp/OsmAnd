@@ -67,7 +67,6 @@ import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
@@ -459,11 +458,9 @@ public class AppInitializer implements IProgress {
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
 
-		//TODO cleanup after Travel migration complete
-		app.travelHelper = TravelObfHelper.checkIfObfFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
-		if (app.getSettings().SELECTED_TRAVEL_BOOK.get() != null) {
-			app.travelHelper.initTravelBooks();
-		}
+		// TODOTRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
+		app.travelHelper = new TravelDbHelper(app);
+		app.travelHelper.initializeDataOnAppStartup();
 		app.travelHelper = startupInit(app.travelHelper, TravelHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
