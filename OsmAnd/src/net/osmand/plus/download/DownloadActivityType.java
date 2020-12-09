@@ -49,6 +49,8 @@ public class DownloadActivityType {
 			new DownloadActivityType(R.string.download_wikipedia_maps, R.drawable.ic_plugin_wikipedia, "wikimap", 60);
 	public static final DownloadActivityType WIKIVOYAGE_FILE =
 			new DownloadActivityType(R.string.shared_string_wikivoyage, R.drawable.ic_plugin_wikipedia, "wikivoyage", 65);
+	public static final DownloadActivityType TRAVEL_FILE =
+			new DownloadActivityType(R.string.shared_string_wikivoyage, R.drawable.ic_plugin_wikipedia, "travel", 66);
 	public static final DownloadActivityType LIVE_UPDATES_FILE =
 			new DownloadActivityType(R.string.download_live_updates, "live_updates", 70);
 	public static final DownloadActivityType GPX_FILE =
@@ -131,7 +133,10 @@ public class DownloadActivityType {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT_ZIP,
 					IndexConstants.BINARY_MAP_VERSION));
 		} else if (WIKIVOYAGE_FILE == this) {
-			return fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);	
+			return fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);
+		} else if (TRAVEL_FILE == this) {
+			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT_ZIP,
+					IndexConstants.BINARY_MAP_VERSION));
 		} else if (SRTM_COUNTRY_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP,
 					IndexConstants.BINARY_MAP_VERSION));
@@ -165,7 +170,7 @@ public class DownloadActivityType {
 			return ctx.getAppPath(IndexConstants.SRTM_INDEX_DIR);
 		} else if (WIKIPEDIA_FILE == this) {
 			return ctx.getAppPath(IndexConstants.WIKI_INDEX_DIR);
-		} else if (WIKIVOYAGE_FILE == this) {
+		} else if (WIKIVOYAGE_FILE == this || TRAVEL_FILE == this) {
 			return ctx.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
 		} else if (LIVE_UPDATES_FILE == this) {
 			return ctx.getAppPath(IndexConstants.LIVE_INDEX_DIR);
@@ -220,6 +225,8 @@ public class DownloadActivityType {
 			return IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
 		} else if (WIKIVOYAGE_FILE == this) {
 			return IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
+		} else if (TRAVEL_FILE == this) {
+			return IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 		} else if (LIVE_UPDATES_FILE == this) {
 			return BINARY_MAP_INDEX_EXT;
 		} else if (HILLSHADE_FILE == this) {
@@ -246,6 +253,8 @@ public class DownloadActivityType {
 		} else if (this == WIKIPEDIA_FILE) {
 			return "&wiki=yes";
 		} else if (this == WIKIVOYAGE_FILE) {
+			return "&wikivoyage=yes";
+		} else if (this == TRAVEL_FILE) {
 			return "&wikivoyage=yes";
 		} else if (this == HILLSHADE_FILE) {
 			return "&hillshade=yes";
@@ -282,9 +291,13 @@ public class DownloadActivityType {
 	}
 
 
-	public IndexItem parseIndexItem(Context ctx, XmlPullParser parser) {
+	public IndexItem parseIndexItem(OsmandApplication ctx, XmlPullParser parser) {
+		if (TRAVEL_FILE == this && !Version.isDeveloperVersion(ctx)) {
+			//todo remove "if" when .travel.obf will be used in production
+			return null;
+		}
 		String name = parser.getAttributeValue(null, "name"); //$NON-NLS-1$
-		if(!isAccepted(name)) {
+		if (!isAccepted(name)) {
 			return null;
 		}
 		String size = parser.getAttributeValue(null, "size"); //$NON-NLS-1$
@@ -415,7 +428,9 @@ public class DownloadActivityType {
 			if (this == WIKIVOYAGE_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
 			}
-			
+			if (this == TRAVEL_FILE) {
+				return baseNameWithoutVersion + IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
+			}
 			if (this == ROADS_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 			}
