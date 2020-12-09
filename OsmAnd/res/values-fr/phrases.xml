@@ -3882,7 +3882,7 @@
     <string name="poi_embassy_branch_embassy">Succursale</string>
     <string name="poi_nuts">Magasin de noix</string>
     <string name="poi_diplomatic_services_citizen_services_filter">Services aux citoyens</string>
-    <string name="poi_diplomatic_services_immigrant_visas_filter">Visas d\'immigrant</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Visas pour immigrants</string>
     <string name="poi_diplomatic_services_non_immigrant_visas_filter">Visas pour non-immigrants</string>
     <string name="poi_diplomatic_liaison">Liaison diplomatique</string>
 </resources>
