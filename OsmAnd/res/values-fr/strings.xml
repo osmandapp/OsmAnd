@@ -3989,4 +3989,8 @@
 \n • Couleurs personnalisées pour les favoris et les points de passage
 \n
 \n</string>
+    <string name="plan_route_join_segments">Joindre les segments</string>
+    <string name="plan_route_split_before">Couper avant</string>
+    <string name="plan_route_split_after">Couper après</string>
+    <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
 </resources>
