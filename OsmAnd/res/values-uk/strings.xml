@@ -994,7 +994,7 @@
     <string name="distance_measurement_finish_editing">Завершити редагування</string>
     <string name="distance_measurement_clear_route">Очистити всі точки</string>
     <string name="distance_measurement_load_gpx">Відкрити збережений GPX-файл</string>
-    <string name="cancel_route">Відхилити маршрут</string>
+    <string name="cancel_route">Відхилити маршрут\?</string>
     <string name="search_street_in_neighborhood_cities">Шукати вулицю в навколишніх містах</string>
     <string name="intermediate_items_sort_return">Оптимальний порядок проміжних точок на шляху до пункту призначення.</string>
     <string name="intermediate_items_sort_by_distance">Впорядкувати від дверей до дверей</string>
@@ -2045,7 +2045,7 @@
     <string name="skip_map_downloading_desc">У Вас немає завантажених мап. Ви можете вибрати мапу зі списку або завантажити її пізніше за допомогою меню — %1$s.</string>
     <string name="search_another_country">Виберіть інший регіон</string>
     <string name="search_map">Пошук мапи…</string>
-    <string name="first_usage_wizard_desc">OsmAnd визначить ваше місце розташування і запропонує завантажити мапи для цього регіону.</string>
+    <string name="first_usage_wizard_desc">OsmAnd визначить ваше розташування і запропонує завантажити мапи для цього регіону.</string>
     <string name="location_not_found">Неможливо визначити місце розташування</string>
     <string name="no_inet_connection">З’єднання з Інтернетом відсутнє</string>
     <string name="no_inet_connection_desc_map">Необхідно завантажити мапи.</string>

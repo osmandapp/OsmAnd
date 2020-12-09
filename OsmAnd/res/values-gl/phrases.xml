@@ -3873,4 +3873,7 @@
     <string name="poi_liaison_filter">Ligazón</string>
     <string name="poi_consulate_filter">Consulado</string>
     <string name="poi_embassy_filter">Embaixada</string>
+    <string name="poi_siren">Serea</string>
+    <string name="poi_nurse">Enfermeira</string>
+    <string name="poi_mobile_money_agent">Axente de diñeiro móbil</string>
 </resources>

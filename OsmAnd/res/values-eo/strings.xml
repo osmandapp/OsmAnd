@@ -915,7 +915,7 @@
     <string name="files_limit">Ankoraŭ %1$d dosieroj</string>
     <string name="available_downloads_left">%1$d dosieroj pli por elŝuti</string>
     <string name="install_paid">Plena versio</string>
-    <string name="cancel_route">Forĵeti kurson</string>
+    <string name="cancel_route">Ĉu rezigni kurson\?</string>
     <string name="cancel_navigation">Ĉesigi navigadon</string>
     <string name="clear_destination">Forviŝi celpunkton</string>
     <string name="street_name">Strat-nomo</string>
@@ -4000,4 +4000,19 @@
     <string name="select_picture">Elektu bildon</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Germana (ordinara)</string>
+    <string name="elevation_data">Vi povas uzi datumojn pri altitudo por kalkuli suprenirojn/malsuprenirojn de via kurso</string>
+    <string name="app_mode_light_aircraft">Malpeza aviadilo</string>
+    <string name="plan_route_join_segments">Kunigi segmentojn</string>
+    <string name="plan_route_split_before">Dividi antaŭ</string>
+    <string name="plan_route_split_after">Dividi post</string>
+    <string name="plan_route_add_new_segment">Aldoni novan segmenton</string>
+    <string name="release_3_9">• aldonita agordo por el-/en-porti ĉiujn datumojn, inkluzivante agordojn, map‑datumojn kaj miajn lokojn
+\n
+\n • plani kurson: diagramoj por segmentoj kun la kurso, aldonita eblo por krei kaj redakti plurajn segmentojn de kurso
+\n 
+\n • aldonita aŭtentiga metodo OAuth por OpenStreetMap, plibonigita fasado de OSM‑rilataj dialogujoj
+\n 
+\n • propraj koloroj por ŝatataj ejoj kaj navigadpunktoj de spuro
+\n
+\n</string>
 </resources>

@@ -3572,7 +3572,7 @@
     <string name="poi_vehicle_military">Доступ для транспортных средств: военные</string>
     <string name="poi_vehicle_delivery">Доступ для транспортных средств: курьеры/доставка</string>
     <string name="poi_vehicle_forestry">Доступ для транспортных средств: лесное хозяйство</string>
-    <string name="poi_motorcar_yes">Доступ для автомобилей:</string>
+    <string name="poi_motorcar_yes">Доступ для автомобилей: да</string>
     <string name="poi_motorcar_private">Доступ для автомобилей: частный</string>
     <string name="poi_motorcar_no">Доступ для автомобилей: нет</string>
     <string name="poi_motorcar_destination">Доступ для автомобилей: пункт назначения</string>
@@ -3869,5 +3869,4 @@
     <string name="poi_embassy_interests_section">Раздел интересов</string>
     <string name="poi_consulate_filter">Консульство</string>
     <string name="poi_siren">Сирена</string>
-
 </resources>

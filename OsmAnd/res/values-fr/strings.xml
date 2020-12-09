@@ -964,7 +964,7 @@
     <string name="local_openstreetmap_act_title">Modifications OSM</string>
     <string name="shared_string_more_actions">Autres actions</string>
     <string name="download_using_mobile_internet">Le WiFi n\'est pas activé. Voulez-vous effectuer le téléchargement avec la connexion Internet actuelle ?</string>
-    <string name="cancel_route">Arrêter la navigation</string>
+    <string name="cancel_route">Arrêter la navigation \?</string>
     <string name="cancel_navigation">Arrêter la navigation</string>
     <string name="clear_destination">Supprimer l\'arrivée</string>
     <string name="other_location">Autre</string>
@@ -3408,7 +3408,7 @@
     <string name="login_and_pass">Nom d\'utilisateur et mot de passe</string>
     <string name="plugin_global_prefs_info">Les paramètres du greffon sont globaux et s\'appliquent à tous les profils</string>
     <string name="osm_editing">Édition OSM</string>
-    <string name="osm_edits_view_descr">Vous pouvez consulter vos modifications et vos bugs OSM non envoyés dans %1$s. Les points envoyés ne s\'affichentr plus dans OsmAnd.</string>
+    <string name="osm_edits_view_descr">Vous pouvez consulter vos modifications et vos bugs OSM non envoyés dans %1$s. Les points envoyés ne sont plus affichés dans OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icône affiché pendant la navigation ou en déplacement.</string>
     <string name="select_map_icon_descr">Icône affiché à l\'arrêt.</string>
@@ -3978,4 +3978,20 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Allemand (courant)</string>
     <string name="app_mode_light_aircraft">Aviation légère</string>
+    <string name="elevation_data">Vous pouvez utiliser l\'altitude pour prendre en compte les dénivellés sur votre itinéraire</string>
+    <string name="gpx_upload_trackable_visibility_descr">« Traçable » signifie que la trace ne s\'affichera pas dans les listes publiques, mais que les points de cheminement horodatés qu\'elle contient seront téléchargeables depuis l\'API GPS publique (ces points sont traités afin de n\'avoir aucun lien direct avec vous).</string>
+    <string name="release_3_9">• Ajout d\'une option pour exporter et importer toutes les données, y compris les paramètres, les ressources, mes lieux
+\n
+\n • Planifier l\'itinéraire : graphiques pour les segments avec l\'itinéraire, ajout de la possibilité de créer et de modifier des pistes à segments multiples
+\n
+\n • Ajout de la méthode d\'authentification OAuth pour OpenStreetMap, amélioration de l\'interface utilisateur des boîtes de dialogue OSM
+\n
+\n • Couleurs personnalisées pour les favoris et les points de passage
+\n
+\n</string>
+    <string name="plan_route_join_segments">Joindre les segments</string>
+    <string name="plan_route_split_before">Couper avant</string>
+    <string name="plan_route_split_after">Couper après</string>
+    <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
+    <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » siginifie que la trace sera affichée publiquement dans « Vos traces GPS » ainsi que dans les listes de traces GPS publiques. Ceci signifie que les autres utilisateurs peuvent télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Quand ils sont servis par l\'API de point de cheminement, les données de points de trace horodatés provenant de l\'API GPS publique feront référence à la page de votre trace originelle.</string>
 </resources>

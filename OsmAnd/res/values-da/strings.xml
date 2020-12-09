@@ -3146,7 +3146,7 @@
 \n
 \n</string>
     <string name="app_mode_personal_transporter">Person transport</string>
-    <string name="app_mode_monowheel">Monowheel</string>
+    <string name="app_mode_monowheel">Monohjul</string>
     <string name="app_mode_scooter">Scooter</string>
     <string name="precision_hdop_and_vdop">Vandret nøjagtighed: %1$s, lodret: %2$s</string>
     <string name="precision_hdop">Vandret præcision: %s</string>
@@ -3863,4 +3863,10 @@
     <string name="use_dev_url">Brug dev.openstreetmap.org</string>
     <string name="cannot_upload_image">Kan ikke overføre billedet, prøv igen senere</string>
     <string name="select_picture">Vælg billede</string>
+    <string name="lang_de_casual">Tysk (uformel)</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="what_is_new">Hvad er nyt</string>
+    <string name="snowmobile_render_descr">Til kørsel med snescooter med dedikerede veje og spor.</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd bruger MGRS, som svarer til UTM NATO-formatet.</string>
 </resources>

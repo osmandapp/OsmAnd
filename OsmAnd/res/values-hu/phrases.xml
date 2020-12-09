@@ -3660,7 +3660,7 @@
     <string name="poi_vehicle_military">Járművel katonai célra használható</string>
     <string name="poi_vehicle_delivery">Járművel áruszállításra használható</string>
     <string name="poi_vehicle_forestry">Járművel erdészeti célra használható</string>
-    <string name="poi_motorcar_yes">Személyautóval használható:</string>
+    <string name="poi_motorcar_yes">Személyautóval használható</string>
     <string name="poi_motorcar_private">Személyautóval a tulajdonos engedélyével használható</string>
     <string name="poi_motorcar_no">Személyautóval nem használható</string>
     <string name="poi_motorcar_destination">Személyautóval célforgalomra használható</string>
@@ -3875,4 +3875,5 @@
     <string name="poi_nurse">Ápoló</string>
     <string name="poi_siren">Sziréna</string>
     <string name="poi_mobile_money_agent">Mobilpénzfizetési iroda</string>
+    <string name="poi_lifeguard_base">Vízimentő-támaszpont</string>
 </resources>

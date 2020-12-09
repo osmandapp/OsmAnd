@@ -164,7 +164,7 @@ public class RoutingHelper {
 				app.getNotificationHelper().refreshNotifications();
 			}
 		} else {
-			app.startNavigationService(NavigationService.USED_BY_NAVIGATION, 0);
+			app.startNavigationService(NavigationService.USED_BY_NAVIGATION);
 		}
 	}
 
@@ -183,7 +183,7 @@ public class RoutingHelper {
 				app.getNotificationHelper().refreshNotifications();
 			}
 		} else {
-			app.startNavigationService(NavigationService.USED_BY_NAVIGATION, 0);
+			app.startNavigationService(NavigationService.USED_BY_NAVIGATION);
 		}
 	}
 

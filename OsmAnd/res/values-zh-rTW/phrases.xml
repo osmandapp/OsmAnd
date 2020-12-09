@@ -3624,7 +3624,7 @@
     <string name="poi_vehicle_military">車輛進入：軍事</string>
     <string name="poi_vehicle_delivery">車輛進入：送貨</string>
     <string name="poi_vehicle_forestry">車輛進入：林業</string>
-    <string name="poi_motorcar_yes">汽車進入：</string>
+    <string name="poi_motorcar_yes">汽車進入：是</string>
     <string name="poi_motorcar_private">汽車進入：私人</string>
     <string name="poi_motorcar_no">汽車進入：否</string>
     <string name="poi_motorcar_destination">汽車進入：目的地</string>
@@ -3882,4 +3882,5 @@
     <string name="poi_siren">警報器</string>
     <string name="poi_nurse">護理師</string>
     <string name="poi_mobile_money_agent">行動貨幣代理商</string>
+    <string name="poi_lifeguard_base">救生員基地</string>
 </resources>

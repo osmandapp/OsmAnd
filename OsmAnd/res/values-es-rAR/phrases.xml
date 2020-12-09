@@ -3632,7 +3632,7 @@
     <string name="poi_vehicle_military">Acceso para vehículos: militar</string>
     <string name="poi_vehicle_delivery">Acceso para vehículos: entregas</string>
     <string name="poi_vehicle_forestry">Acceso para vehículos: forestal</string>
-    <string name="poi_motorcar_yes">Acceso para automóviles:</string>
+    <string name="poi_motorcar_yes">Acceso para automóviles: sí</string>
     <string name="poi_motorcar_private">Acceso para automóviles: privado</string>
     <string name="poi_motorcar_no">Acceso para automóviles: no</string>
     <string name="poi_motorcar_destination">Acceso para automóviles: destino</string>
@@ -3890,4 +3890,5 @@
     <string name="poi_siren">Sirena</string>
     <string name="poi_nurse">Enfermera</string>
     <string name="poi_mobile_money_agent">Agente de dinero móvil</string>
+    <string name="poi_lifeguard_base">Base de salvavidas</string>
 </resources>

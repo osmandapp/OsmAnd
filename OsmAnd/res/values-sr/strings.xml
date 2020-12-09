@@ -888,7 +888,7 @@
     <string name="rendering_attr_hideIcons_name">Сличице тачака од интереса</string>
     <string name="select_month_and_country">Месец и држава:</string>
     <string name="weekly">Седмично</string>
-    <string name="cancel_route">Откажи путању</string>
+    <string name="cancel_route">Одбаци путању\?</string>
     <string name="accessibility_options">Опције приступачности</string>
     <string name="map_widget_gps_info">GPS подаци</string>
     <string name="index_name_openmaps">Отворене карте ЕУ-а</string>
@@ -3994,4 +3994,19 @@
     <string name="use_dev_url">Употреби dev.openstreetmap.org</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Немачки (говорни)</string>
+    <string name="elevation_data">Податке о надморској висини можете користити за разматрање успона / спуштања за ваше путовање</string>
+    <string name="app_mode_light_aircraft">Лака летелица</string>
+    <string name="plan_route_join_segments">Споји сегменте</string>
+    <string name="plan_route_split_before">Подели пре</string>
+    <string name="plan_route_split_after">После подели</string>
+    <string name="plan_route_add_new_segment">Додајте нови сегмент</string>
+    <string name="release_3_9">• Додата је опција за извоз и увоз свих података, укључујући подешавања, ресурсе, моја места
+\n
+\n • Планирање руте: графикони за сегменте са рутом, додата је могућност креирања и уређивања вишеструких сегмената стаза
+\n
+\n • Додан је метод аутентификације ОАут за ОпенСтритМап, побољшан кориснички интерфејс ОСМ дијалога
+\n
+\n • Прилагођене боје за омиљене и путне тачаке стаза
+\n
+\n</string>
 </resources>
