@@ -31,10 +31,8 @@
   <path
       android:strokeWidth="1"
       android:pathData="M4.5,10.5V7.5H5.5V10.5H4.5Z"
-      android:strokeAlpha="0.5"
       android:fillColor="#ffffff"
-      android:strokeColor="#ffffff"
-      android:fillAlpha="0.5"/>
+      android:strokeColor="#ffffff"/>
   <path
       android:strokeWidth="1"
       android:pathData="M4.5,7.5V4.5H6.7929L8.2929,6L6.7929,7.5H4.5Z"
