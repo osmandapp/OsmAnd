@@ -108,6 +108,10 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_skiing)
 			.description(R.string.base_profile_descr_ski).reg();
 
+	public static final ApplicationMode TRUCK = createBase(R.string.app_mode_truck, "ic_action_truck_dark")
+			.icon(R.drawable.ic_action_truck_dark)
+			.description(R.string.app_mode_truck).reg();
+
 	public static List<ApplicationMode> values(OsmandApplication app) {
 		if (customizationListener == null) {
 			customizationListener = new OsmAndAppCustomization.OsmAndAppCustomizationListener() {
@@ -179,13 +183,13 @@ public class ApplicationMode {
 	}
 
 	private static void initRegVisibility() {
-		// DEFAULT, CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI
-		ApplicationMode[] exceptDefault = new ApplicationMode[] {CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI};
+		// DEFAULT, CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK
+		ApplicationMode[] exceptDefault = new ApplicationMode[] {CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK};
 		ApplicationMode[] all = null;
 		ApplicationMode[] none = new ApplicationMode[] {};
 
 		// left
-		ApplicationMode[] navigationSet1 = new ApplicationMode[] {CAR, BICYCLE, BOAT, SKI};
+		ApplicationMode[] navigationSet1 = new ApplicationMode[] {CAR, BICYCLE, BOAT, SKI, TRUCK};
 		ApplicationMode[] navigationSet2 = new ApplicationMode[] {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
 		regWidgetVisibility(WIDGET_NEXT_TURN, navigationSet1);
@@ -200,8 +204,8 @@ public class ApplicationMode {
 		regWidgetVisibility(WIDGET_DISTANCE, all);
 		regWidgetVisibility(WIDGET_TIME, all);
 		regWidgetVisibility(WIDGET_INTERMEDIATE_TIME, all);
-		regWidgetVisibility(WIDGET_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT);
-		regWidgetVisibility(WIDGET_MAX_SPEED, CAR);
+		regWidgetVisibility(WIDGET_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK);
+		regWidgetVisibility(WIDGET_MAX_SPEED, CAR, TRUCK);
 		regWidgetVisibility(WIDGET_ALTITUDE, PEDESTRIAN, BICYCLE);
 		regWidgetAvailability(WIDGET_INTERMEDIATE_DISTANCE, all);
 		regWidgetAvailability(WIDGET_DISTANCE, all);
