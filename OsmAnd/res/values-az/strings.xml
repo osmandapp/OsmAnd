@@ -1699,7 +1699,7 @@
     <string name="move_to_history">Tarixçəyə daşı</string>
     <string name="group_will_be_removed_after_restart">Proqramı növbəti dəfə başlatdığınızda qrup yox olacaq.</string>
     <string name="show_arrows_on_the_map">Xəritədə oxları göstər</string>
-    <string name="remove_from_map_markers">Xəritə işarələrindən sil</string>
+    <string name="remove_from_map_markers">“Xəritə işarələri”ndən sil</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
     <string name="date_added">Əlavə edildi</string>
@@ -2170,4 +2170,5 @@
     <string name="osm_edit_closed_note">Bağlanmış OSM qeydi</string>
     <string name="shared_string_custom">Xüsusi</string>
     <string name="plan_route_last_edited">Son düzəliş</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
 </resources>
