@@ -3408,7 +3408,7 @@
     <string name="login_and_pass">Nom d\'utilisateur et mot de passe</string>
     <string name="plugin_global_prefs_info">Les paramètres du greffon sont globaux et s\'appliquent à tous les profils</string>
     <string name="osm_editing">Édition OSM</string>
-    <string name="osm_edits_view_descr">Vous pouvez consulter vos modifications et vos bugs OSM non envoyés dans %1$s. Les points envoyés ne s\'affichentr plus dans OsmAnd.</string>
+    <string name="osm_edits_view_descr">Vous pouvez consulter vos modifications et vos bugs OSM non envoyés dans %1$s. Les points envoyés ne sont plus affichés dans OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icône affiché pendant la navigation ou en déplacement.</string>
     <string name="select_map_icon_descr">Icône affiché à l\'arrêt.</string>
