@@ -224,13 +224,6 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				name = plugin.getName();
 				pluginDescription.setText(plugin.getDescription());
 
-				int linkTextColorId = nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light;
-				int linkTextColor = ContextCompat.getColor(context, linkTextColorId);
-
-				pluginDescription.setLinkTextColor(linkTextColor);
-				pluginDescription.setMovementMethod(LinkMovementMethod.getInstance());
-				AndroidUtils.removeLinkUnderline(pluginDescription);
-
 				int color = AndroidUtils.getColorFromAttr(context, R.attr.list_background_color);
 				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(plugin.getLogoResource(), color));
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
