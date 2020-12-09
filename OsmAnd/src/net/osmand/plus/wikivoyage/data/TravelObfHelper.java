@@ -85,23 +85,23 @@ public class TravelObfHelper implements TravelHelper {
 	 * 2. check settings for default?
 	 */
 	public void initTravelBooks() {
-		List<File> files = getPossibleFiles();
+		BinaryMapIndexReader[] readers = application.getResourceManager().getTravelFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
 		existingTravelBooks.clear();
-		if (files != null && !files.isEmpty()) {
-			for (File f : files) {
+		if (readers != null) {
+			for (BinaryMapIndexReader reader : readers) {
+				File f = reader.getFile();
 				existingTravelBooks.add(f);
 				if (selectedTravelBook == null) {
 					selectedTravelBook = f;
 				} else if (Algorithms.objectEquals(travelBook, f.getName())) {
 					selectedTravelBook = f;
 				}
+				selectedTravelBook = reader.getFile();
 			}
-			selectedTravelBook = files.get(0);
 		} else {
 			selectedTravelBook = null;
 		}
-
 	}
 
 	/**
@@ -147,6 +147,7 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public List<WikivoyageSearchResult> search(String searchQuery) {
+
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		CollatorStringMatcher matcher = new CollatorStringMatcher(searchQuery,
 				CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
