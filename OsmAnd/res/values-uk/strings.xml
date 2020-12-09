@@ -1116,7 +1116,7 @@
     <string name="show_zoom_buttons_navigation">Показувати кнопки зміни масштабу</string>
     <string name="save_as_favorites_points">Зберегти як групу Закладок</string>
     <string name="select_destination_and_intermediate_points">Виберіть призначення</string>
-    <string name="layer_amenity_label">Підписи до цікавих точок</string>
+    <string name="layer_amenity_label">Підписи до цікавих місць</string>
     <string name="loading_smth">Завантаження %1$s…</string>
     <string name="map_widget_plain_time">Поточний час</string>
     <string name="shared_string_waypoint">Маршрутна точка</string>
@@ -2641,7 +2641,7 @@
     <string name="choose_file_type">Виберіть тип файлу</string>
     <string name="osm_edits_export_desc">Виберіть вид експорту: OSM-нотатки, POI чи і те і те.</string>
     <string name="all_data">Усі дані</string>
-    <string name="osm_notes">OSM-нотатки</string>
+    <string name="osm_notes">Примітки OSM</string>
     <string name="will_open_tomorrow_at">Відкриється завтра о</string>
     <string name="rendering_attr_hidePOILabels_name">Підписи до цікавих точок</string>
     <string name="shared_string_without_name">Без назви</string>
@@ -3999,4 +3999,17 @@
     <string name="lang_de_casual">Німецька (неформальна)</string>
     <string name="elevation_data">Ви можете використовувати дані про висоту для розгляду сходження / спуску для вашої подорожі</string>
     <string name="app_mode_light_aircraft">Легкий літак</string>
+    <string name="plan_route_join_segments">Об’єднати сегменти</string>
+    <string name="plan_route_split_before">Розділити перед</string>
+    <string name="plan_route_split_after">Розділити після</string>
+    <string name="plan_route_add_new_segment">Додати новий сегмент</string>
+    <string name="release_3_9">• Додано можливість експортувати та імпортувати всі дані, включно з налаштуваннями, ресурсами, моїми місцями
+\n
+\n• План маршруту: графіки для сегментів з маршрутом, додано можливість створення і зміни кількох сегментів треків
+\n
+\n• Додано метод автентифікації OAuth для OpenStreetMap, покращено вигляд діалогів OSM
+\n
+\n• Власні кольори закладок та маршрутних точок треків
+\n
+\n</string>
 </resources>

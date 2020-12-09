@@ -3408,7 +3408,7 @@
     <string name="login_and_pass">Nom d\'utilisateur et mot de passe</string>
     <string name="plugin_global_prefs_info">Les paramètres du greffon sont globaux et s\'appliquent à tous les profils</string>
     <string name="osm_editing">Édition OSM</string>
-    <string name="osm_edits_view_descr">Vous pouvez consulter vos modifications et vos bugs OSM non envoyés dans %1$s. Les points envoyés ne sont plus affichés dans OsmAnd.</string>
+    <string name="osm_edits_view_descr">Vous pouvez consulter vos modifications et vos bugs OSM non envoyés dans %1$s. Les points téléversés ne sont plus affichés dans OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icône affiché pendant la navigation ou en déplacement.</string>
     <string name="select_map_icon_descr">Icône affiché à l\'arrêt.</string>
@@ -3994,4 +3994,5 @@
     <string name="plan_route_split_after">Couper après</string>
     <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
     <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » siginifie que la trace sera affichée publiquement dans « Vos traces GPS » ainsi que dans les listes de traces GPS publiques. Ceci signifie que les autres utilisateurs peuvent télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Quand ils sont servis par l\'API de point de cheminement, les données de points de trace horodatés provenant de l\'API GPS publique feront référence à la page de votre trace originelle.</string>
+    <string name="gpx_upload_public_visibility_descr">« Public » signifie que la trace est affichée publiquement dans vos traces GPS et dans les listes de traces GPS publiques, et dans la liste publique de traces avec des horodatages sous forme brute. Les données diffusées via l\'API ne font pas référence à votre page de trace. Les horodatages des points de trace ne sont pas disponibles via l\'API GPS publique et les points de trace ne sont pas classés par ordre chronologique.</string>
 </resources>
