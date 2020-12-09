@@ -739,6 +739,8 @@ public class SettingsHelper {
 				}
 			} else if (object instanceof HistoryEntry) {
 				historyEntries.add((HistoryEntry) object);
+			} else if (object instanceof GlobalSettingsItem) {
+				settingsItems.add((GlobalSettingsItem) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
