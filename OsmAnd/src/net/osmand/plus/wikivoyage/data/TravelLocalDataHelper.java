@@ -260,9 +260,9 @@ public class TravelLocalDataHelper {
 			if (oldVersion < 3) {
 				conn.execSQL("ALTER TABLE " + HISTORY_TABLE_NAME + " ADD " + HISTORY_COL_TRAVEL_BOOK + " TEXT");
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_TRAVEL_BOOK + " TEXT");
-				File selectedTravelBook = context.getTravelHelper().getSelectedTravelBook();
-				if (selectedTravelBook != null) {
-					Object[] args = new Object[]{selectedTravelBook.getName()};
+				String selectedTravelBookName = getSelectedTravelBookName();
+				if (selectedTravelBookName != null) {
+					Object[] args = new Object[]{selectedTravelBookName};
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
 					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);
 				}
@@ -452,11 +452,7 @@ public class TravelLocalDataHelper {
 
 		@Nullable
 		private String getSelectedTravelBookName() {
-			File selectedTravelBook = context.getTravelHelper().getSelectedTravelBook();
-			if (selectedTravelBook != null) {
-				return selectedTravelBook.getName();
-			}
-			return null;
+			return context.getTravelHelper().getSelectedTravelBookName();
 		}
 
 		private WikivoyageSearchHistoryItem readHistoryItem(SQLiteCursor cursor) {

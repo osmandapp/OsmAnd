@@ -20,6 +20,8 @@ public class IndexConstants {
 	public static final String BINARY_MAP_INDEX_EXT_ZIP = ".obf.zip"; //$NON-NLS-1$
 	
 	public static final String BINARY_WIKIVOYAGE_MAP_INDEX_EXT = ".sqlite"; //$NON-NLS-1$
+	public static final String BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT = ".travel.obf"; //$NON-NLS-1$
+	public static final String BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT_ZIP = ".travel.obf.zip"; //$NON-NLS-1$
 	public static final String BINARY_WIKI_MAP_INDEX_EXT = ".wiki.obf"; //$NON-NLS-1$
 	public static final String BINARY_WIKI_MAP_INDEX_EXT_ZIP = ".wiki.obf.zip"; //$NON-NLS-1$
 	public static final String BINARY_ROAD_MAP_INDEX_EXT = ".road.obf"; //$NON-NLS-1$

@@ -19,7 +19,7 @@ public class WikivoyageWptPtMenuController extends WptPtMenuController {
 
 	private WikivoyageWptPtMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull WptPt wpt, @NonNull TravelArticle article) {
 		super(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
-		final long tripId = article.getTripId();
+		final String tripId = article.getRouteId();
 		final String lang = article.getLang();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
@@ -42,7 +42,7 @@ public class WikivoyageWptPtMenuController extends WptPtMenuController {
 		String title = metadata != null ? metadata.getArticleTitle() : null;
 		String lang = metadata != null ? metadata.getArticleLang() : null;
 		if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(lang)) {
-			return mapActivity.getMyApplication().getTravelHelper().getArticle(title, lang);
+			return mapActivity.getMyApplication().getTravelHelper().getArticleByTitle(title, lang);
 		}
 		return null;
 	}
