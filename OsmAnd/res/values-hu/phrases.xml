@@ -3876,4 +3876,6 @@
     <string name="poi_siren">Sziréna</string>
     <string name="poi_mobile_money_agent">Mobilpénzfizetési iroda</string>
     <string name="poi_lifeguard_base">Vízimentő-támaszpont</string>
+    <string name="poi_vaccination_covid19">Oltóközpont: Covid19</string>
+    <string name="poi_health_specialty_vaccination_yes">Oltóközpont</string>
 </resources>
