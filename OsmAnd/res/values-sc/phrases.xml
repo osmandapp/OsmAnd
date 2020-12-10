@@ -3880,4 +3880,6 @@
     <string name="poi_nurse">Infermieri</string>
     <string name="poi_mobile_money_agent">Agente de denaru mòbile</string>
     <string name="poi_lifeguard_base">Base de sos bagninos</string>
+    <string name="poi_vaccination_covid19">Vatzinamentu: COVID19</string>
+    <string name="poi_health_specialty_vaccination_yes">Vatzinamentu</string>
 </resources>
