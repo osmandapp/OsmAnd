@@ -936,7 +936,8 @@ public class OsmandSettings {
 		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.BOAT, 1.38f);
 		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.AIRCRAFT, 40f);
 		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.SKI, 1.38f);
-		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.TRUCK, 10.5f);
+		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.TRUCK, 12.5f);
+		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.MOTORCYCLE, 12.5f);
 	}
 
 	public final OsmandPreference<Float> MIN_SPEED = new FloatPreference(this,
@@ -957,6 +958,7 @@ public class OsmandSettings {
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.AIRCRAFT, "ic_action_aircraft");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.SKI, "ic_action_skiing");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.TRUCK, "ic_action_truck_dark");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.MOTORCYCLE, "ic_action_motorcycle_dark");
 	}
 
 	public final CommonPreference<ProfileIconColors> ICON_COLOR = new EnumStringPreference<>(this,
@@ -977,6 +979,7 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.AIRCRAFT, "STRAIGHT_LINE_MODE");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.TRUCK, "truck");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.MOTORCYCLE, "motorcycle");
 	}
 
 	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<>(this, "route_service", RouteService.OSMAND, RouteService.values()).makeProfile().cache();
@@ -996,6 +999,7 @@ public class OsmandSettings {
 		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, NavigationIcon.DEFAULT);
 		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.SKI, NavigationIcon.DEFAULT);
 		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.TRUCK,NavigationIcon.DEFAULT);
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.MOTORCYCLE,NavigationIcon.DEFAULT);
 	}
 
 	public final CommonPreference<LocationIcon> LOCATION_ICON = new EnumStringPreference<>(this, "location_icon", LocationIcon.DEFAULT, LocationIcon.values()).makeProfile().cache();
@@ -1008,6 +1012,7 @@ public class OsmandSettings {
 		LOCATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, LocationIcon.CAR);
 		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.BICYCLE);
 		LOCATION_ICON.setModeDefaultValue(ApplicationMode.TRUCK, LocationIcon.CAR);
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.MOTORCYCLE, LocationIcon.CAR);
 	}
 
 	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference(this, "app_mode_order", 0).makeProfile().cache();

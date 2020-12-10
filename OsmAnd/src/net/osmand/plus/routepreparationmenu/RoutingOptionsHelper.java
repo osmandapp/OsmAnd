@@ -1051,6 +1051,7 @@ public class RoutingOptionsHelper {
 		AIRCRAFT(MuteSoundRoutingParameter.KEY),
 		SKI(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
 		TRUCK(MuteSoundRoutingParameter.KEY, AvoidRoadsRoutingParameter.KEY),
+		MOTORCYCLE(MuteSoundRoutingParameter.KEY, AvoidRoadsRoutingParameter.KEY),
 		OTHER(MuteSoundRoutingParameter.KEY);
 
 		List<String> routingParameters;
@@ -1081,6 +1082,8 @@ public class RoutingOptionsHelper {
 				return PermanentAppModeOptions.SKI.routingParameters;
 			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.TRUCK)) {
 				return PermanentAppModeOptions.TRUCK.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.MOTORCYCLE)) {
+				return PermanentAppModeOptions.MOTORCYCLE.routingParameters;
 			} else {
 				return PermanentAppModeOptions.OTHER.routingParameters;
 			}
