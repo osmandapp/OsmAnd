@@ -636,6 +636,7 @@ public class ResourceManager {
 		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		if (Version.isPaidVersion(context)) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isSubscribedToLiveUpdates(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
@@ -1134,7 +1135,7 @@ public class ResourceManager {
 		return readers.toArray(new BinaryMapIndexReader[0]);
 	}
 
-	public BinaryMapIndexReader[] getTravelFiles() {
+	public List<BinaryMapIndexReader> getTravelFiles() {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource res : fileReaders) {
@@ -1148,7 +1149,7 @@ public class ResourceManager {
 				}
 			}
 		}
-		return readers.toArray(new BinaryMapIndexReader[0]);
+		return readers;
 	}
 
 
