@@ -3407,7 +3407,7 @@
     <string name="route_recalculation">إعادة حساب الطريق</string>
     <string name="accessibility_announce">أعلن</string>
     <string name="login_and_pass">اسم المستخدم و كلمة السر</string>
-    <string name="plugin_global_prefs_info">إعدادات plugin هذه شاملة، وتنطبق على جميع الأوضاع</string>
+    <string name="plugin_global_prefs_info">إعدادات الملحق هذه شاملة، وتنطبق على جميع الأوضاع</string>
     <string name="osm_editing">تعديل OpenStreetMap</string>
     <string name="app_mode_osm">Osm</string>
     <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
@@ -3908,7 +3908,7 @@
     <string name="use_complex_routing">التوجيه المركب</string>
     <string name="complex_routing_descr">التوجيه على مرحلتين لملاحة السيارة.</string>
     <string name="use_native_pt">تطوير النقل العام المحلي</string>
-    <string name="use_native_pt_desc">قم بالتبديل إلى Java (الآمن) حساب توجيه النقل العام</string>
+    <string name="use_native_pt_desc">قم بالتبديل إلى جافا (الآمن) حساب توجيه النقل العام</string>
     <string name="perform_oauth_authorization_description">سجّل الدخول باستخدام OAuth لاستخدام ميزات osmedit</string>
     <string name="perform_oauth_authorization">تسجيل الدخول عبر OAuth</string>
     <string name="clear_osm_token">مسح رمز OpenStreetMap OAuth</string>
@@ -3936,7 +3936,7 @@
     <string name="mgrs_format_descr">OsmAnd يستخدم MGRS، وهو مشابه لتنسيق UTM NATO .</string>
     <string name="message_you_need_add_two_points_to_show_graphs">تحتاج إلى إضافة نقطتين على الأقل</string>
     <string name="manage_subscription">إدارة الاشتراك</string>
-    <string name="subscription_payment_issue_title">هناك مشكلة في اشتراكك. انقر الزر للانتقال إلى إعدادات اشتراك Google Play لإصلاح طريقة الدفع الخاصة بك.</string>
+    <string name="subscription_payment_issue_title">هناك مشكلة في اشتراكك. انتقل إلى إعدادات اشتراك Google Play لإصلاح طريقة الدفع الخاصة بك.</string>
     <string name="subscription_expired_title">انتهت صلاحية اشتراك OsmAnd Live</string>
     <string name="subscription_paused_title">تم إيقاف اشتراك OsmAnd Live مؤقتًا</string>
     <string name="subscription_on_hold_title">اشتراك OsmAnd Live معلق</string>
@@ -3955,7 +3955,7 @@
     <string name="gpx_upload_private_visibility_descr">\"خاص\"يعني أن التتبع لن يظهر في أي قوائم عامة ، ولكن نقاط التتبع الصادرة عنه ستظل متاحة من خلال واجهة برمجة تطبيقات GPS API العامة بدون طوابع زمنية ولكن لن يتم ترتيبها ترتيبًا زمنيًا.</string>
     <string name="sign_in_with_open_street_map">تسجيل الدخول عبر الشارع المفتوح</string>
     <string name="gpx_upload_public_visibility_descr">عام يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة. البيانات المقدمة عبر API لا تشير إلى صفحة التتبع الخاصة بك. الطوابع الزمنية لنقاط التتبع غير متاحة من خلال واجهة برمجة تطبيقات GPS API العامة، والنقاط غير مرتبة ترتيبًا زمنيًا. ومع ذلك، لا يزال المستخدمون الآخرون قادرين على تنزيل التتبع الأولي من قائمة التتبع العامة وأي طوابع زمنية مضمنة فيه.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">متعرف عليه يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة، أي سيتمكن المستخدمون الآخرون من تنزيل التتبع الأولي وربطه باسم المستخدم الخاص بك. ستشير البيانات التي يتم تقديمها عبر API نقاط التتبع إلى صفحة التتبع الأصلية الخاصة بك. الطوابع الزمنية لنقاط التتبع متاحة من خلال واجهة برمجة تطبيقات GPS API العامة.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">سيتم عرض التتبع بشكل عام في تتبع GPS الخاصة بك وفي قوائم تتبع GPS العامة، أي سيتمكن المستخدمون الآخرون من تنزيل التتبع الأولي وربطه باسم المستخدم الخاص بك. ستشير البيانات التي يتم تقديمها عبر API نقاط التتبع إلى صفحة التتبع الأصلية الخاصة بك. الطوابع الزمنية لنقاط التتبع متاحة من خلال واجهة برمجة تطبيقات GPS API العامة.</string>
     <string name="osm_edit_close_note">أغلاق ملاحظة OSM</string>
     <string name="osm_edit_comment_note">تعليق ملاحظة OSM</string>
     <string name="osm_login_descr">قم بتسجيل الدخول باستخدام طريقة المصادقة الآمنة أو استخدم اسم المستخدم وكلمة المرور.</string>
@@ -3968,7 +3968,7 @@
     <string name="app_mode_kayak">كاياك (قوارب صغيرة فردية)</string>
     <string name="app_mode_motorboat">زورق</string>
     <string name="shared_string_search_history">سجل البحث</string>
-    <string name="export_not_enough_space_descr">جهازك يحتوي على %1$s فقط متاحة . الرجاء إخلاء بعض المساحة أو إلغاء تحديد بعض العناصر للتصدير.</string>
+    <string name="export_not_enough_space_descr">مساحة جهازك %1$s الخالية فقط. يرجى تحرير بعض المساحة أو إلغاء تحديد بعض العناصر للتصدير.</string>
     <string name="shared_string_resources">المصادر</string>
     <string name="approximate_file_size">حجم الملف التقريبي</string>
     <string name="select_data_to_export">حدد البيانات التي سيتم تصديرها إلى الملف.</string>
@@ -3976,7 +3976,7 @@
     <string name="export_not_enough_space">لا يوجد مساحة كافية</string>
     <string name="add_to_mapillary">أضف إلى مابيلاي</string>
     <string name="add_to_opr">إضافة إلى OpenPlaceReviews</string>
-    <string name="add_photos_descr">ويعرض صورًا من عدة مصادر:
+    <string name="add_photos_descr">يعرض صورا من عدة مصادر:
 \nOpenPlaceReviews - صور POI ؛
 \nMapillary - صور على مستوى الشارع ؛
 \nالويب / ويكيميديا - صور POI المحددة في بيانات OpenStreetMap.</string>
@@ -3988,7 +3988,7 @@
     <string name="select_picture">تحديد صورة</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">الألمانية (تقليدية)</string>
-    <string name="elevation_data">يمكنك استخدام بيانات الارتفاع للنظر في الصعود / الهبوط لرحلتك</string>
+    <string name="elevation_data">يمكنك استخدام بيانات الارتفاع للنظر في الارتفاع / النزول لرحلتك</string>
     <string name="app_mode_light_aircraft">طائرة</string>
     <string name="plan_route_join_segments">ربط الأجزاء</string>
     <string name="plan_route_split_before">تقسيم قبل</string>
@@ -3998,7 +3998,7 @@
 \n
 \n • مخطط الطريق: الرسوم البيانية للأجزاء مع المسار ، إضافة القدرة على إنشاء وتحرير مسارات مقطع مضاعفة
 \n
-\n • تمت إضافة طريقة مصادقة OAuth لـ OpenStreetMap ، واجهة مستخدم محسنة لمربعات حوار OSM
+\n • تمت إضافة طريقة مصادقة آلية لـ OpenStreetMap ، واجهة مستخدم محسنة لمربعات حوار OSM
 \n
 \n • ألوان مخصصة للمفضلة والمسارات نقاط الطريق
 \n
