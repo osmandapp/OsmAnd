@@ -1393,7 +1393,7 @@
     <string name="plugin_install_needs_network">Bu eklentiyi yüklemek için çevrim içi olmanız gerekmektedir.</string>
     <string name="get_plugin">Al</string>
     <string name="use_fast_recalculation">Akıllı rota yeniden hesaplama</string>
-    <string name="use_fast_recalculation_desc">Güzergahın yalnızca ilk bölümünü yeniden hesaplar. Uzun yolculuklar için kullanılabilir.</string>
+    <string name="use_fast_recalculation_desc">Güzergahın yalnızca ilk bölümünü yeniden hesaplar, uzun yolculuklar için kullanışlıdır.</string>
     <string name="do_you_like_osmand">OsmAnd\'ı Sevdinizmi?</string>
     <string name="we_really_care_about_your_opinion">Fikir ve geri bildirimleriniz değerlidir.</string>
     <string name="rate_this_app">Bu Uygulamayı Oyla</string>
@@ -3875,7 +3875,7 @@
     <string name="use_complex_routing">Karmaşık yönlendirme</string>
     <string name="complex_routing_descr">Araç navigasyonu için iki aşamalı yönlendirme.</string>
     <string name="use_native_pt">Yerel Toplu Taşıma geliştirme</string>
-    <string name="use_native_pt_desc">Java (güvenli) Toplu Taşıma yönlendirme hesaplamasına geçin</string>
+    <string name="use_native_pt_desc">Java (güvenli) Toplu Taşıma güzergah hesaplamasına geçin</string>
     <string name="what_is_new">Yenilikler</string>
     <string name="perform_oauth_authorization_description">osmedit özelliklerini kullanmak için OAuth ile oturum açın</string>
     <string name="perform_oauth_authorization">OAuth ile oturum aç</string>
@@ -3885,9 +3885,9 @@
     <string name="use_two_phase_routing">2 aşamalı A* yönlendirme algoritması kullan</string>
     <string name="snowmobile_render_descr">Ayrılmış yollar ve parkurlarla kar arabası sürüşü için.</string>
     <string name="shared_string_graph">Grafik</string>
-    <string name="message_need_calculate_route_before_show_graph">%1$s verileri yalnızca yollarda kullanılabilir, elde etmek için “Noktalar arasındaki güzergah” kullanarak bir rota hesaplamanız gerekir.</string>
-    <string name="message_graph_will_be_available_after_recalculation">Güzergahın yeniden hesaplanmasını bekleyin.
-\nGrafik yeniden hesaplandıktan sonra kullanılabilir olacak.</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s verileri yalnızca yollarda kullanılabilir, grafikleri görmek için “Noktalar arasındaki güzergah” kullanarak bir rota hesaplayın.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Lütfen bekleyin.
+\nGüzergah yeniden hesaplandıktan sonra grafik kullanılabilir olacak.</string>
     <string name="app_mode_gap">Boşluk</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
@@ -3902,7 +3902,7 @@
     <string name="icon_group_sport">Spor</string>
     <string name="icon_group_emergency">Acil</string>
     <string name="icon_group_travel">Seyahat</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">En az iki nokta eklemelisiniz</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">En az iki nokta ekleyin</string>
     <string name="login_open_street_map">OpenStreetMap\'te oturum aç</string>
     <string name="login_open_street_map_org">OpenStreetMap.org\'da oturum aç</string>
     <string name="open_street_map_login_mode">Yenilikleri veya değişiklikleri karşıya yüklemek için oturum açmanız gerekir.
@@ -3912,7 +3912,7 @@
     <string name="user_login">Giriş bilgisi</string>
     <string name="login_account">Hesap</string>
     <string name="manage_subscription">Aboneliği yönet</string>
-    <string name="subscription_payment_issue_title">Aboneliğinizle ilgili bir sorun var. Ödeme yönteminizi düzeltmek üzere Google Play abonelik ayarlarına gitmek için düğmeye tıklayın.</string>
+    <string name="subscription_payment_issue_title">Aboneliğinizle ilgili bir sorun var. Ödeme yönteminizi düzeltmek üzere Google Play abonelik ayarlarına gitmek için düğmeye dokunun.</string>
     <string name="subscription_expired_title">OsmAnd Live aboneliğinin süresi doldu</string>
     <string name="subscription_paused_title">OsmAnd Live aboneliği duraklatıldı</string>
     <string name="subscription_on_hold_title">OsmAnd Live aboneliği beklemede</string>
@@ -3930,7 +3930,7 @@
     <string name="shared_string_add_photo">Fotoğraf ekle</string>
     <string name="register_on_openplacereviews">OpenPlaceReviews.org\'a
 \nkaydolun</string>
-    <string name="register_on_openplacereviews_desc">Fotoğraflar açık veri projesi OpenPlaceReviews.org tarafından sağlanmaktadır. Fotoğraflarınızı yüklemek için web sitesine kaydolmanız gerekir.</string>
+    <string name="register_on_openplacereviews_desc">Fotoğraflar OpenPlaceReviews.org açık veri projesi tarafından sağlanmaktadır. Fotoğraflarınızı yüklemek için web sitelerine kaydolmanız gerekir.</string>
     <string name="register_opr_create_new_account">Yeni hesap oluştur</string>
     <string name="register_opr_have_account">Zaten bir hesabım var</string>
     <string name="shared_string_search_history">Arama geçmişi</string>
@@ -3941,7 +3941,7 @@
     <string name="add_photos_descr">OsmAnd çeşitli kaynaklardan fotoğraflar gösterir:
 \nOpenPlaceReviews - POI fotoğrafları;
 \nMapillary - sokak seviyesi görüntüleri;
-\nİnternet / Wikimedia - OpenStreetMap verilerinde belirtilen POI fotoğrafları.</string>
+\nİnternet / Wikimedia - OpenStreetMap verilerine göre POI fotoğrafları.</string>
     <string name="shared_string_resources">Kaynaklar</string>
     <string name="approximate_file_size">Yaklaşık dosya boyutu</string>
     <string name="select_data_to_export">Dosyaya aktarılacak verileri seçin.</string>
@@ -3956,19 +3956,19 @@
     <string name="cannot_upload_image">Resim yüklenemiyor, lütfen daha sonra tekrar deneyin</string>
     <string name="select_picture">Resim seç</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="elevation_data">Yolculuğunuzun Çıkış / İniş değerleri için Yükseklik verilerini kullanabilirsiniz</string>
+    <string name="elevation_data">Yolculuğunuzun yükselme/alçalma değerlerini hesaplamak için yükseklik verilerini kullanabilirsiniz</string>
     <string name="app_mode_light_aircraft">Hafif uçak</string>
     <string name="plan_route_join_segments">Bölümleri birleştir</string>
     <string name="plan_route_split_before">Önce böl</string>
     <string name="plan_route_split_after">Sonra böl</string>
-    <string name="plan_route_add_new_segment">Yeni bölüm ekle</string>
+    <string name="plan_route_add_new_segment">Yeni bir bölüm ekle</string>
     <string name="release_3_9">• Ayarlar, kaynaklar, yerlerim dahil tüm verileri dışa ve içe aktarma seçeneği eklendi
 \n
-\n • Güzergah Planla: güzergahla birlikte bölümler için grafikler, birden çok bölüm izi oluşturma ve düzenleme yeteneği eklendi
+\n • Güzergah Planla: güzergahla birlikte izleme bölümleri için grafikler, ve birden çok izleme bölümü oluşturma ve düzenleme yeteneği eklendi
 \n
 \n • OpenStreetMap için OAuth kimlik doğrulama yöntemi eklendi, OSM iletişim kutularının kullanıcı arayüzü iyileştirildi
 \n
-\n • Sık kullanılanlar ve yol ara noktaları için özel renkler
+\n • Sık kullanılanlar ve yol ara noktaları için özel renk desteği
 \n
 \n</string>
 </resources>
