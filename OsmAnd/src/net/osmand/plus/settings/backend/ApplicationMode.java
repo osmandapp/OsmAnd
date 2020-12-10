@@ -58,7 +58,7 @@ public class ApplicationMode {
 	private static StateChangedListener<String> iconNameListener;
 	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
 
-	private OsmandApplication app;
+	private static OsmandApplication app;
 
 	private final int keyName;
 	private final String stringKey;
@@ -108,11 +108,11 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_skiing)
 			.description(R.string.base_profile_descr_ski).reg();
 
-	public static final ApplicationMode TRUCK = createBase(R.string.app_mode_truck, "truck")
+	public static final ApplicationMode TRUCK = createCustomBase(ApplicationMode.CAR, R.string.app_mode_truck, "truck", app)
 			.icon(R.drawable.ic_action_truck_dark)
 			.description(R.string.app_mode_truck).reg();
 
-	public static final ApplicationMode MOTORCYCLE = createBase(R.string.app_mode_truck, "motorcycle")
+	public static final ApplicationMode MOTORCYCLE = createCustomBase(ApplicationMode.CAR, R.string.app_mode_motorcycle, "truck", app)
 			.icon(R.drawable.ic_action_motorcycle_dark)
 			.description(R.string.app_mode_motorcycle).reg();
 
@@ -674,6 +674,12 @@ public class ApplicationMode {
 
 	public static ApplicationModeBuilder createCustomMode(ApplicationMode parent, String stringKey, OsmandApplication app) {
 		ApplicationModeBuilder builder = create(parent, -1, stringKey);
+		builder.getApplicationMode().app = app;
+		return builder;
+	}
+
+	public static ApplicationModeBuilder createCustomBase(ApplicationMode parent, int key, String stringKey, OsmandApplication app) {
+		ApplicationModeBuilder builder = create(parent, key, stringKey);
 		builder.getApplicationMode().app = app;
 		return builder;
 	}

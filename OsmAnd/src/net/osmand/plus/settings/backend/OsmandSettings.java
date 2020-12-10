@@ -936,8 +936,6 @@ public class OsmandSettings {
 		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.BOAT, 1.38f);
 		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.AIRCRAFT, 40f);
 		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.SKI, 1.38f);
-		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.TRUCK, 12.5f);
-		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.MOTORCYCLE, 12.5f);
 	}
 
 	public final OsmandPreference<Float> MIN_SPEED = new FloatPreference(this,
