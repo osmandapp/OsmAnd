@@ -203,7 +203,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 			// split
 			BaseBottomSheetItem splitAfter = new BottomSheetItemWithDescription.Builder()
-					//.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
+					.setIcon(getContentIcon(R.drawable.ic_action_split_after))
 					.setTitle(getString(R.string.plan_route_split_after))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 					.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +221,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			items.add(splitAfter);
 
 			BaseBottomSheetItem splitBefore = new BottomSheetItemWithDescription.Builder()
-					//.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
+					.setIcon(getContentIcon(R.drawable.ic_action_split_after))
 					.setTitle(getString(R.string.plan_route_split_before))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 					.setOnClickListener(new View.OnClickListener() {
