@@ -4001,4 +4001,15 @@
     <string name="lang_de_casual">Tedesco (informale)</string>
     <string name="elevation_data">Puoi utililizzare i dati dell\'altitudine per valutare la Salita/Discesa del tuo percorso</string>
     <string name="app_mode_light_aircraft">Ultraleggeri</string>
+    <string name="plan_route_split_after">Spezza dopo</string>
+    <string name="plan_route_add_new_segment">Aggiungi un nuovo segmento</string>
+    <string name="release_3_9">"• Aggiunta l\'opzione per esportare e importare tutti i dati incluse le impostazioni, le risorse e i preferiti
+\n
+\n • Creazione del percorso: grafici per parti del percorso, aggiunta anche la possibilità di creare e modificare tracce composte da più segmenti
+\n
+\n • Aggiunto il metodi di autenticazione OAuth per  OpenStreetMap, migliorata la UI dei dialoghi OSM
+\n
+\n • Supporto alla personalizzazione dei colori per i preferiti e i punti intermedi delle tracce
+\n
+\n"</string>
 </resources>
