@@ -2337,6 +2337,16 @@ public class OsmandAidlApi {
 		return CANNOT_ACCESS_API_ERROR;
 	}
 
+	public boolean selectProfile(String appModeKey) {
+		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
+		if (appMode != null) {
+//			ApplicationMode.changeProfileAvailability(appMode, true, app);
+			app.getSettings().APPLICATION_MODE.set(appMode);
+			return true;
+		}
+		return false;
+	}
+
 	private static class FileCopyInfo {
 		long startTime;
 		long lastAccessTime;

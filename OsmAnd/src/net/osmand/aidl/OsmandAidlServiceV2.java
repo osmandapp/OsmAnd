@@ -28,6 +28,7 @@ import net.osmand.aidlapi.customization.MapMarginsParams;
 import net.osmand.aidlapi.customization.OsmandSettingsInfoParams;
 import net.osmand.aidlapi.customization.OsmandSettingsParams;
 import net.osmand.aidlapi.customization.ProfileSettingsParams;
+import net.osmand.aidlapi.customization.SelectProfileParams;
 import net.osmand.aidlapi.customization.SetWidgetsParams;
 import net.osmand.aidlapi.events.AKeyEventsParams;
 import net.osmand.aidlapi.favorite.AFavorite;
@@ -1371,6 +1372,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				return UNKNOWN_API_ERROR;
 			}
 			return CANNOT_ACCESS_API_ERROR;
+		}
+
+		@Override
+		public boolean selectProfile(SelectProfileParams params) {
+			try {
+				OsmandAidlApi api = getApi("selectProfile");
+				return api != null && api.selectProfile(params.getAppModeKey());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
 		}
 	};
 
