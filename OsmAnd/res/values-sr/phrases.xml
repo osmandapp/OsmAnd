@@ -2525,7 +2525,7 @@
     <string name="poi_vehicle_military">Приступ возилом: војни</string>
     <string name="poi_vehicle_delivery">Приступ возилом: достава</string>
     <string name="poi_vehicle_forestry">Приступ возилом: шумски саобраћај</string>
-    <string name="poi_motorcar_yes">Приступ моторним аутом:</string>
+    <string name="poi_motorcar_yes">Приступ моторним аутом: да</string>
     <string name="poi_motorcar_private">Приступ моторним аутом: приватни</string>
     <string name="poi_motorcar_no">Приступ моторним аутом: не</string>
     <string name="poi_motorcar_destination">Приступ моторним аутом: само до одредишта</string>
@@ -3862,4 +3862,8 @@
     <string name="poi_embassy_filter">Амбасада</string>
     <string name="poi_departures_board">Табла</string>
     <string name="poi_drinking_water_refill">Доливање воде за пиће</string>
+    <string name="poi_lifeguard_base">База спасиоца</string>
+    <string name="poi_siren">Сирена</string>
+    <string name="poi_nurse">Медицинска сестра</string>
+    <string name="poi_mobile_money_agent">Мобилни агент за новац</string>
 </resources>

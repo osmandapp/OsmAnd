@@ -116,7 +116,9 @@ public class AlarmWidget {
 				} else if (alarm.getType() == AlarmInfo.AlarmInfoType.STOP) {
 					locimgId = R.drawable.warnings_stop;
 				} else if (alarm.getType() == AlarmInfo.AlarmInfoType.RAILWAY) {
-					if (americanType) {
+					if (isCanadianRegion) {
+						locimgId = R.drawable.warnings_railways_ca;
+					} else if (americanType) {
 						locimgId = R.drawable.warnings_railways_us;
 					} else {
 						locimgId = R.drawable.warnings_railways;

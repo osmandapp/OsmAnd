@@ -863,7 +863,7 @@
     <string name="use_magnetic_sensor">使用磁性感應器</string>
     <string name="other_location">其它</string>
     <string name="install_paid">完整版</string>
-    <string name="cancel_route">排除路線</string>
+    <string name="cancel_route">排除路線？</string>
     <string name="cancel_navigation">停止導航</string>
     <string name="clear_destination">清除目的地</string>
     <string name="download_using_mobile_internet">並未連線至 Wi-Fi。使用目前的連線進行下載嗎？</string>
@@ -1534,7 +1534,7 @@
     <string name="routing_attr_height_name">高度限制</string>
     <string name="routing_attr_height_description">指定被許可在道路上行駛的車輛高度。</string>
     <string name="use_fast_recalculation">智慧路線重新計算</string>
-    <string name="use_fast_recalculation_desc">僅重新計算路線的初始部份。可用於長途旅程。</string>
+    <string name="use_fast_recalculation_desc">僅重新計算路線的初始部份，對長途旅行很有用。</string>
     <string name="shared_string_logoff">登出</string>
     <string name="rendering_value_disabled_name">已停用</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">依網絡從屬著色</string>
@@ -3925,9 +3925,9 @@
     <string name="file_already_imported">檔案已在 OsmAnd 匯入</string>
     <string name="use_two_phase_routing">使用 2 相的 A* 路線演算法</string>
     <string name="shared_string_graph">圖表</string>
-    <string name="message_need_calculate_route_before_show_graph">%1$s 資料僅供道路使用，您需要使用「兩點間的路線」來計算路線。</string>
-    <string name="message_graph_will_be_available_after_recalculation">等待路線重新計算。
-\n重新計算後即可使用圖表。</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s 資料僅供道路使用，請使用「兩點間的路線」計算路線以檢視圖表。</string>
+    <string name="message_graph_will_be_available_after_recalculation">請稍候。
+\n重新計算路線後即可使用圖表。</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="app_mode_gap">分隔</string>
     <string name="shared_string_local_maps">本機地圖</string>
@@ -3942,7 +3942,7 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd 使用 MGRS，其類似於 UTM NATO 格式。</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">您必須新增至少兩個點</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">新增至少兩個點</string>
     <string name="manage_subscription">管理訂閱</string>
     <string name="subscription_payment_issue_title">您的訂閱似乎有點問題。點擊按鈕以跳到 Google Play 訂閱設定以修復您的付款方式。</string>
     <string name="subscription_expired_title">OsmAnd Live 訂閱已過期</string>
@@ -3970,7 +3970,7 @@
     <string name="shared_string_add_photo">新增照片</string>
     <string name="register_on_openplacereviews">註冊於
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">照片由開放資料專案 OpenPlaceReviews.org 提供。為了上傳您的照片，您需要在網站上註冊。</string>
+    <string name="register_on_openplacereviews_desc">照片由 OpenPlaceReviews.org 開放資料專案提供。為了上傳您的照片，您需要在他們的網站上註冊。</string>
     <string name="register_opr_create_new_account">建立新帳號</string>
     <string name="register_opr_have_account">我已經有帳號了</string>
     <string name="shared_string_search_history">搜尋歷史紀錄</string>
@@ -3981,7 +3981,7 @@
     <string name="add_photos_descr">OsmAnd 從多個來源顯示照片：
 \nOpenPlaceReviews - POI 照片；
 \nMapillary - 街景；
-\n網路／維基媒體 - 特定 OpenStreetMap 資料的 POI 照片。</string>
+\n網路／維基媒體 - 根據 OpenStreetMap 資料的 POI 照片。</string>
     <string name="shared_string_resources">資源</string>
     <string name="approximate_file_size">大約檔案大小</string>
     <string name="select_data_to_export">選取要匯出到檔案的資料。</string>
@@ -3996,6 +3996,19 @@
     <string name="select_picture">選取圖片</string>
     <string name="lang_de_casual">德語（非正式）</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="elevation_data">您可以將海拔資料用於您旅程的上升與下降</string>
+    <string name="elevation_data">您可以將海拔資料用來說明您旅程的上升與下降</string>
     <string name="app_mode_light_aircraft">輕型飛機</string>
+    <string name="plan_route_join_segments">加入線段</string>
+    <string name="plan_route_split_before">分離前</string>
+    <string name="plan_route_split_after">分離後</string>
+    <string name="plan_route_add_new_segment">加入新線段</string>
+    <string name="release_3_9">• 新增匯出與匯入所有資料（包含設定、資源與我的位置）的選項
+\n
+\n • 路線計畫：有路線的軌跡線段圖，並有建立與編輯多個軌跡線段的功能
+\n
+\n • 加入 OpenStreetMap 的 OAuth 驗證方式，改善 OSM 對話框的使用者介面
+\n
+\n • 支援自訂最愛與軌跡航點的顏色
+\n
+\n</string>
 </resources>

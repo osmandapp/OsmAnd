@@ -199,7 +199,7 @@
     <string name="files_limit">tenes galu %1$d documentos</string>
     <string name="available_downloads_left">%1$d documentos galu de iscarrigare</string>
     <string name="install_paid">Versione cumprida</string>
-    <string name="cancel_route">Iscantzella s’àndala</string>
+    <string name="cancel_route">Iscantzellare s’àndala\?</string>
     <string name="cancel_navigation">Firma sa navigatzione</string>
     <string name="clear_destination">Iscantzella sa destinatzione</string>
     <string name="download_using_mobile_internet">Non ses connessu a su WiFi. Boles sighire a iscarrigare impreende sa connessione a ìnternet atuale?</string>
@@ -3998,6 +3998,19 @@
     <string name="select_picture">Ischerta un\'immàgine</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Tedescu (informale)</string>
-    <string name="elevation_data">Podes impreare sos datos de s\'artària pro pigare in cunsideru s\'Artziada / Achirrada pro su biàgiu tuo</string>
+    <string name="elevation_data">Podes impreare sos datos de s\'artària pro valutare s\'Artziada / Achirrada pro su biàgiu tuo</string>
     <string name="app_mode_light_aircraft">Aèreu lèbiu</string>
+    <string name="plan_route_join_segments">Auni sos segmentos</string>
+    <string name="plan_route_split_before">Iscroba in antis de</string>
+    <string name="plan_route_split_after">Iscroba a pustis de</string>
+    <string name="plan_route_add_new_segment">Annanghe unu segmentu nou</string>
+    <string name="release_3_9">• Annanghidura de un\'optzione pro esportare e importare totu sos datos incluende sas impostatziones, sas risursas, e sos \"logos meos\"
+\n
+\n • Pranificatzione de s\'àndala: gràficos pro segmentos cun s\'àndala e annanghidura de s\'abilidade de creare e modificare segmentos de rastas mùltiplos
+\n
+\n • Annanghidura de su mètodu de autenticatzione OAuth pro OpenStreetMap, IU de sas ventaneddas de diàlogu de OSM megiorada
+\n
+\n • Colores personalizados pro sos preferidos e sos puntos de coladòrgiu de sas rastas
+\n
+\n</string>
 </resources>

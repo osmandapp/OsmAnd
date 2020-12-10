@@ -339,7 +339,7 @@
     <string name="files_limit">Faltan %1$d ficheiros</string>
     <string name="available_downloads_left">Aínda faltan %1$d ficheiros para baixar</string>
     <string name="install_paid">Versión completa</string>
-    <string name="cancel_route">Rexeitar rota</string>
+    <string name="cancel_route">Rexeitar rota\?</string>
     <string name="cancel_navigation">Deter a navegación</string>
     <string name="clear_destination">Limpar o destino</string>
     <string name="download_using_mobile_internet">Non estás conectado a unha rede Wi-Fi. Empregar a conexión actual á Internet para baixar\?</string>

@@ -486,7 +486,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		String title = metadata.getArticleTitle();
 		String lang = metadata.getArticleLang();
 		if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(lang)) {
-			return app.getTravelHelper().getArticle(title, lang);
+			return app.getTravelHelper().getArticleByTitle(title, lang);
 		}
 		return null;
 	}
@@ -507,7 +507,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				TrackActivity activity = getTrackActivity();
 				if (activity != null) {
 					WikivoyageArticleDialogFragment.showInstance(app,
-							activity.getSupportFragmentManager(), article.getTripId(), article.getLang());
+							activity.getSupportFragmentManager(), article.getRouteId(), article.getLang());
 				}
 			}
 		};

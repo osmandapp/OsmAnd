@@ -911,7 +911,7 @@
     <string name="poi_recycling_cars">Automobiles</string>
     <string name="poi_recycling_bicycles">Vélos</string>
     <string name="poi_shower">Douche</string>
-    <string name="poi_email">Email</string>
+    <string name="poi_email">Courriel</string>
     <string name="poi_fax">Fax</string>
     <string name="facebook">Facebook</string>
     <string name="poi_drinking_water_yes">Oui</string>
@@ -3633,7 +3633,7 @@
     <string name="poi_goods_designated">Indiqué</string>
     <string name="poi_disabled_yes">Oui</string>
     <string name="poi_glacier_type_hanging">suspendu</string>
-    <string name="poi_motorcar_yes">accès-voiture :</string>
+    <string name="poi_motorcar_yes">Accès véhicules : oui</string>
     <string name="poi_motorcar_private">accès-voiture : privé</string>
     <string name="poi_motorcar_no">accès-voiture : impossible</string>
     <string name="poi_motorcar_permissive">accès-voiture : possible</string>
@@ -3873,4 +3873,16 @@
     <string name="poi_parking_sheds">Parking couvert</string>
     <string name="poi_parking_rooftop">Parking en terrasse</string>
     <string name="poi_gpx_point">Point GPX</string>
+    <string name="poi_lifeguard_base">Base de sauveteur</string>
+    <string name="poi_siren">Sirène</string>
+    <string name="poi_nurse">Infirmier</string>
+    <string name="poi_mobile_money_agent">Agent de monnaie mobile</string>
+    <string name="poi_liaison_subnational">Infranational</string>
+    <string name="poi_embassy_interests_section">Section intérêts</string>
+    <string name="poi_embassy_branch_embassy">Succursale</string>
+    <string name="poi_nuts">Magasin de noix</string>
+    <string name="poi_diplomatic_services_citizen_services_filter">Services aux citoyens</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Visas pour immigrants</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">Visas pour non-immigrants</string>
+    <string name="poi_diplomatic_liaison">Liaison diplomatique</string>
 </resources>

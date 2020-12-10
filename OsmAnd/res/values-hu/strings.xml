@@ -966,7 +966,7 @@
     <string name="local_openstreetmap_act_title">OSM-módosítások</string>
     <string name="shared_string_more_actions">További műveletek</string>
     <string name="download_using_mobile_internet">Jelenleg nincs Wi-Fi kapcsolat. Szeretnéd a jelenlegi internetkapcsolatot használni a letöltéshez?</string>
-    <string name="cancel_route">Útvonal elvetése</string>
+    <string name="cancel_route">Elveti az útvonalat\?</string>
     <string name="cancel_navigation">Navigáció megállítása</string>
     <string name="clear_destination">Célpont törlése</string>
     <string name="other_location">Egyéb</string>
@@ -3994,4 +3994,17 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="elevation_data">A magassági adatokat az utazás során előforduló emelkedés/lejtés megfontolásához használhatja</string>
     <string name="app_mode_light_aircraft">Könnyű légi jármű</string>
+    <string name="plan_route_split_before">Elvágás előtte</string>
+    <string name="plan_route_split_after">Elvágás utána</string>
+    <string name="plan_route_join_segments">Szakaszok egyesítése</string>
+    <string name="plan_route_add_new_segment">Új szakasz hozzáadása</string>
+    <string name="release_3_9">"• Lehetőség az összes adat – többek között beállítások, erőforrások és helyek – exportálására és importálására
+\n
+\n  • Útvonaltervezés: grafikonok az útvonalat tartalmazó szegmensekhez, útszakasznyomvonalak létrehozása és szerkesztése
+\n
+\n  • OAuth hitelesítési módszer az OpenStreetMap-hez, javított felhasználói felület az OSM-párbeszédpanelekhez
+\n
+\n  • Egyéni színek a kedvencekhez és az útvonalak útpontjaihoz
+\n
+\n"</string>
 </resources>

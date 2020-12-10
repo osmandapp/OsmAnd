@@ -927,8 +927,8 @@ public class MapActivityActions implements DialogProvider {
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						MapActivity.clearPrevActivityIntent();
 						TravelHelper travelHelper = getMyApplication().getTravelHelper();
-						travelHelper.initTravelBooks();
-						if (travelHelper.getSelectedTravelBook() == null) {
+						travelHelper.initializeDataOnAppStartup();
+						if (!travelHelper.isAnyTravelBookPresent()) {
 							WikivoyageWelcomeDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 						} else {
 							Intent intent = new Intent(mapActivity, WikivoyageExploreActivity.class);

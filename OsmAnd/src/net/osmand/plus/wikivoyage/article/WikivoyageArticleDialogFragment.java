@@ -41,7 +41,6 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
-import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.util.Algorithms;
@@ -58,9 +57,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	public static final String TAG = "WikivoyageArticleDialogFragment";
 
-	private static final long NO_VALUE = -1;
 
-	private static final String CITY_ID_KEY = "city_id_key";
+	private static final String ROUTE_ID_KEY = "route_id_key";
 	private static final String LANGS_KEY = "langs_key";
 	private static final String SELECTED_LANG_KEY = "selected_lang_key";
 
@@ -68,7 +66,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	
 	private static final int MENU_ITEM_SHARE = 0;
 	
-	private long tripId = NO_VALUE;
+	private String routeId = "";
 	private ArrayList<String> langs;
 	private String selectedLang;
 	private TravelArticle article;
@@ -199,10 +197,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			updateWebSettings();
 			populateArticle();
 		} else if (requestCode == WikivoyageArticleNavigationFragment.OPEN_ARTICLE_REQUEST_CODE) {
-			long tripId = data.getLongExtra(WikivoyageArticleNavigationFragment.TRIP_ID_KEY, -1);
+			String tripId = data.getStringExtra(WikivoyageArticleNavigationFragment.ROUTE_ID_KEY);
 			String selectedLang = data.getStringExtra(WikivoyageArticleNavigationFragment.SELECTED_LANG_KEY);
-			if (tripId != -1 && !TextUtils.isEmpty(selectedLang)) {
-				this.tripId = tripId;
+			if (!Algorithms.isEmpty(tripId) && !TextUtils.isEmpty(selectedLang)) {
+				this.routeId = tripId;
 				this.selectedLang = selectedLang;
 				populateArticle();
 			}
@@ -235,7 +233,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	private void updateSaveButton() {
 		if (article != null) {
-			final TravelLocalDataHelper helper = getMyApplication().getTravelHelper().getLocalDataHelper();
+			final TravelLocalDataHelper helper = getMyApplication().getTravelHelper().getBookmarksHelper();
 			final boolean saved = helper.isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark));
@@ -288,21 +286,21 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	@Override
 	protected void populateArticle() {
-		if (tripId == NO_VALUE || langs == null) {
+		if (Algorithms.isEmpty(routeId) || langs == null) {
 			Bundle args = getArguments();
 			if (args != null) {
-				tripId = args.getLong(CITY_ID_KEY);
+				routeId = args.getString(ROUTE_ID_KEY);
 				langs = args.getStringArrayList(LANGS_KEY);
 			}
 		}
-		if (tripId == NO_VALUE || langs == null || langs.isEmpty()) {
+		if (Algorithms.isEmpty(routeId) || langs == null || langs.isEmpty()) {
 			return;
 		}
 		if (selectedLang == null) {
 			selectedLang = langs.get(0);
 		}
 		articleToolbarText.setText("");
-		article = getMyApplication().getTravelHelper().getArticle(tripId, selectedLang);
+		article = getMyApplication().getTravelHelper().getArticleById(routeId, selectedLang);
 		if (article == null) {
 			return;
 		}
@@ -315,7 +313,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			trackButton.setVisibility(View.GONE);
 		}
 
-		TravelLocalDataHelper ldh = getMyApplication().getTravelHelper().getLocalDataHelper();
+		TravelLocalDataHelper ldh = getMyApplication().getTravelHelper().getBookmarksHelper();
 		ldh.addToHistory(article);
 
 		updateSaveButton();
@@ -367,35 +365,35 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		return sb.toString();
 	}
 
-	public static boolean showInstance(@NonNull OsmandApplication app,
+	public static boolean showInstanceByTitle(@NonNull OsmandApplication app,
 									   @NonNull FragmentManager fm,
 									   @NonNull String title,
 									   @NonNull String lang) {
-		long cityId = app.getTravelHelper().getArticleId(title, lang);
-		return showInstance(app, fm, cityId, lang);
+		String articleId = app.getTravelHelper().getArticleId(title, lang);
+		return showInstance(app, fm, articleId, lang);
 	}
 
 	public static boolean showInstance(@NonNull OsmandApplication app,
 									   @NonNull FragmentManager fm,
-									   long cityId,
+									   @NonNull String routeId,
 									   @Nullable String selectedLang) {
-		ArrayList<String> langs = app.getTravelHelper().getArticleLangs(cityId);
-		return showInstance(fm, cityId, langs, selectedLang);
+		ArrayList<String> langs = app.getTravelHelper().getArticleLangs(routeId);
+		return showInstance(fm, routeId, langs, selectedLang);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fm,
-									   long cityId,
+									   String routeId,
 									   @NonNull ArrayList<String> langs) {
-		return showInstance(fm, cityId, langs, null);
+		return showInstance(fm, routeId, langs, null);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fm,
-									   long cityId,
+									   String routeId,
 									   @NonNull ArrayList<String> langs,
 									   @Nullable String selectedLang) {
 		try {
 			Bundle args = new Bundle();
-			args.putLong(CITY_ID_KEY, cityId);
+			args.putString(ROUTE_ID_KEY, routeId);
 			args.putStringArrayList(LANGS_KEY, langs);
 			if (langs.contains(selectedLang)) {
 				args.putString(SELECTED_LANG_KEY, selectedLang);
@@ -418,7 +416,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				return;
 			}
 			WikivoyageArticleNavigationFragment.showInstance(fm,
-					WikivoyageArticleDialogFragment.this, tripId, selectedLang);
+					WikivoyageArticleDialogFragment.this, routeId, selectedLang);
 		}
 	}
 

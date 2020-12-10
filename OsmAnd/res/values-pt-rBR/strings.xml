@@ -641,7 +641,7 @@
     <string name="files_limit">Restando %1$d arquivos</string>
     <string name="available_downloads_left">%1$d arquivos restantes para download</string>
     <string name="install_paid">Versão completa</string>
-    <string name="cancel_route">Descartar rota</string>
+    <string name="cancel_route">Descartar rota\?</string>
     <string name="cancel_navigation">Parar navegação</string>
     <string name="clear_destination">Apagar destino</string>
     <string name="download_using_mobile_internet">Não conectado ao Wi-Fi. Use a conexão atual com a Internet para baixar\?</string>
@@ -1538,7 +1538,7 @@
     <string name="routing_attr_height_name">Limite de altura</string>
     <string name="routing_attr_height_description">Especifique a altura permitida do veículo nas rotas.</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
-    <string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota. Pode ser usado para viagens longas.</string>
+    <string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota, útil para viagens longas.</string>
     <string name="rendering_value_disabled_name">Desativado</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Cor por afiliação de rede</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Cor por símbolo de caminhada OSMC</string>
@@ -3915,7 +3915,7 @@
     <string name="use_complex_routing">Roteamento complexo</string>
     <string name="complex_routing_descr">Roteamento de duas fases para navegação automotiva.</string>
     <string name="use_native_pt">Desenvolvimento de transporte público nativo</string>
-    <string name="use_native_pt_desc">Mudar para cálculo de roteamento de transporte público em Java (seguro)</string>
+    <string name="use_native_pt_desc">Mudar para cálculo de rota de transporte público em Java (seguro)</string>
     <string name="what_is_new">O que há de novo</string>
     <string name="perform_oauth_authorization_description">Entrar com OAuth para usar os recursos osmedit</string>
     <string name="perform_oauth_authorization">Entrar via OAuth</string>
@@ -3925,9 +3925,9 @@
     <string name="use_two_phase_routing">Use o algoritmo de roteamento 2-phase A *</string>
     <string name="snowmobile_render_descr">Para dirigir em motos de neve com estradas e trilhas exclusivas.</string>
     <string name="shared_string_graph">Gráfico</string>
-    <string name="message_need_calculate_route_before_show_graph">Dados de %1$s disponíveis apenas nas estradas, você precisa calcular uma rota usando “Rota entre pontos” para obtê-la.</string>
-    <string name="message_graph_will_be_available_after_recalculation">Aguarde o recálculo da rota.
-\nO gráfico estará disponível após o recálculo.</string>
+    <string name="message_need_calculate_route_before_show_graph">Dados de %1$s disponíveis apenas em estradas, calcule uma rota usando “Rota entre pontos” para ver os gráficos.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Por favor, espere.
+\nO gráfico estará disponível após o recálculo da rota.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Mapas locais</string>
     <string name="icon_group_amenity">Amenidade</string>
@@ -3941,9 +3941,9 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd usa MGRS, que é semelhante ao formato UTM NATO.</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Você precisa adicionar pelo menos dois pontos</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Adicione pelo menos dois pontos</string>
     <string name="manage_subscription">Gerenciar assinatura</string>
-    <string name="subscription_payment_issue_title">Há um problema com sua assinatura. Clique no botão para ir para as configurações de assinatura do Google Play para corrigir sua forma de pagamento.</string>
+    <string name="subscription_payment_issue_title">Há um problema com sua assinatura. Toque no botão para ir para as configurações de assinatura do Google Play para corrigir sua forma de pagamento.</string>
     <string name="subscription_expired_title">A assinatura do OsmAnd Live expirou</string>
     <string name="subscription_paused_title">A assinatura do OsmAnd Live foi pausada</string>
     <string name="subscription_on_hold_title">A assinatura do OsmAnd Live está em espera</string>
@@ -3962,7 +3962,7 @@
     <string name="enter_text_separated">Insira as etiquetas separadas por vírgula.</string>
     <string name="gpx_upload_public_visibility_descr">\"Público\" significa que o traçado é mostrado publicamente em seus traços GPS e em listagens públicas de traços GPS e na lista pública de traços com carimbos de data/hora em formato bruto. Os dados fornecidos por meio da API não fazem referência à sua página de rastreamento. Os carimbos de data/hora do ponto de rastreamento não estão disponíveis por meio da API GPS pública e os pontos de rastreamento não são ordenados cronologicamente.</string>
     <string name="gpx_upload_private_visibility_descr">\"Privado\" significa que o rastreamento não aparece em nenhuma listagem pública, mas os pontos de trilha dele em ordem não sincronizada estão disponíveis por meio da API GPS pública sem carimbos de data/hora.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">\"Identificável\" significa que o traço será mostrado publicamente em Seus traços de GPS e em listas públicas de traços de GPS, ou seja, outros usuários poderão fazer download do traço bruto e associá-lo ao seu nome de usuário. Os dados de pontos de rastreamento com carimbo de data/hora públicos da API GPS servidos por meio da API de pontos de rastreamento farão referência à sua página de rastreamento original.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificável\" significa que o traço será mostrado publicamente em seus traços de GPS e em listas públicas de traços de GPS, ou seja, outros usuários poderão fazer download do traço bruto e associá-lo ao seu nome de usuário. Os dados de pontos de rastreamento com carimbo de data/hora públicos da API GPS servidos por meio da API de pontos de rastreamento farão referência à sua página de rastreamento original.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Rastreável\" significa que o rastreamento não aparece em nenhuma listagem pública, mas os pontos de trilha processados com carimbos de data/hora (que não podem ser associados a você diretamente) são feitos por meio de downloads da API GPS pública.</string>
     <string name="osm_edit_close_note">Fechar nota do OSM</string>
     <string name="osm_edit_comment_note">Comentário de nota do OSM</string>
@@ -3970,7 +3970,7 @@
     <string name="shared_string_add_photo">Adicionar foto</string>
     <string name="register_on_openplacereviews">Cadastre-se em
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">As fotos são fornecidas pelo projeto de dados abertos OpenPlaceReviews.org. Para carregar suas fotos você precisa se inscrever no site.</string>
+    <string name="register_on_openplacereviews_desc">As fotos são fornecidas pelo projeto de dados abertos OpenPlaceReviews.org. Para enviar suas fotos, você precisa se inscrever em seu site.</string>
     <string name="register_opr_create_new_account">Criar nova conta</string>
     <string name="register_opr_have_account">Eu já tenho uma conta</string>
     <string name="shared_string_search_history">Histórico de busca</string>
@@ -3981,7 +3981,7 @@
     <string name="add_photos_descr">OsmAnd mostra fotos de várias fontes:
 \nOpenPlaceReviews - fotos de POI;
 \nMapillary - imagens de nível da rua;
-\nWeb / Wikimedia - fotos de POI especificadas nos dados do OpenStreetMap.</string>
+\nWeb / Wikimedia - fotos de POI especificadas de acordo com os dados do OpenStreetMap.</string>
     <string name="shared_string_resources">Recursos</string>
     <string name="approximate_file_size">Tamanho aproximado do arquivo</string>
     <string name="select_data_to_export">Selecione os dados a serem exportados para o arquivo.</string>
@@ -3996,6 +3996,19 @@
     <string name="select_picture">Selecione a foto</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemão (casual)</string>
-    <string name="elevation_data">Você pode usar os dados de elevação para consideração de subida / descida para sua viagem</string>
+    <string name="elevation_data">Você pode usar dados de elevação para contabilizar a subida/descida de sua viagem</string>
     <string name="app_mode_light_aircraft">Avião leve</string>
+    <string name="release_3_9">"• Adicionada opção para exportar e importar todos os dados, incluindo configurações, recursos, meus lugares
+\n
+\n  • Plano de rota: gráficos para segmentos de trilha com rota, e adicionou a capacidade de criar e editar vários segmentos de trilha
+\n
+\n  • Método de autenticação OAuth adicionado para OpenStreetMap, interface de usuário aprimorada de caixas de diálogo OSM
+\n
+\n  • Suporta cores personalizadas para favoritos e rastreia pontos de referência
+\n
+\n"</string>
+    <string name="plan_route_join_segments">Unir segmentos</string>
+    <string name="plan_route_split_before">Dividir antes</string>
+    <string name="plan_route_split_after">Dividir depois</string>
+    <string name="plan_route_add_new_segment">Adicionar novo segmento</string>
 </resources>

@@ -32,8 +32,22 @@ public class ReversePointsCommand extends MeasurementModeCommand {
 		MeasurementEditingContext editingCtx = getEditingCtx();
 		oldPoints = new ArrayList<>(editingCtx.getPoints());
 		oldRoadSegmentData = editingCtx.getRoadSegmentData();
-		newPoints = new ArrayList<>(oldPoints);
-		Collections.reverse(newPoints);
+		newPoints = new ArrayList<>(oldPoints.size());
+		for (int i = oldPoints.size() - 1; i >= 0; i--) {
+			WptPt point = oldPoints.get(i);
+			WptPt prevPoint = i > 0 ? oldPoints.get(i - 1) : null;
+			WptPt newPoint = new WptPt(point);
+			newPoint.copyExtensions(point);
+			if (prevPoint != null) {
+				String profileType = prevPoint.getProfileType();
+				if (profileType != null) {
+					newPoint.setProfileType(profileType);
+				} else {
+					newPoint.removeProfileType();
+				}
+			}
+			newPoints.add(newPoint);
+		}
 		executeCommand();
 		return true;
 	}
