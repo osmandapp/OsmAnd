@@ -175,7 +175,7 @@ class AppVersionUpgradeOnInit {
 	}
 
 	private void addCustomProfile() {
-		ApplicationMode parent = ApplicationMode.valueOfStringKey(null, ApplicationMode.DEFAULT);
+		ApplicationMode parent = ApplicationMode.valueOfStringKey(null, ApplicationMode.CAR);
 
 		ApplicationMode.ApplicationModeBuilder builderTruck = ApplicationMode
 				.createCustomMode(parent, "truck", app)
@@ -183,7 +183,6 @@ class AppVersionUpgradeOnInit {
 				.setIconResName(ProfileIcons.getResStringByResId(R.drawable.ic_action_truck_dark))
 				.setLocationIcon(LocationIcon.DEFAULT)
 				.setNavigationIcon(NavigationIcon.DEFAULT)
-				.setRoutingProfile("Truck")
 				.setOrder(10);
 
 		saveCustomProfile(builderTruck);
@@ -194,7 +193,6 @@ class AppVersionUpgradeOnInit {
 				.setIconResName(ProfileIcons.getResStringByResId(R.drawable.ic_action_motorcycle_dark))
 				.setLocationIcon(LocationIcon.DEFAULT)
 				.setNavigationIcon(NavigationIcon.DEFAULT)
-				.setRoutingProfile("Motorcycle")
 				.setOrder(11);
 
 		saveCustomProfile(builderMotorcycle);

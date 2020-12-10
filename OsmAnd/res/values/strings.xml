@@ -433,7 +433,7 @@
     <string name="hillshade_description">Hillshade map using dark shades to show slopes, peaks and lowlands.</string>
     <string name="shared_string_terrain">Terrain</string>
     <string name="import_rendering_file">Import rendering file</string>
-    <string name="profile_type_custom_string">Custom profile</string>
+    <string name="profile_type_custom_string">User profile</string>
     <string name="shared_string_angle_param">Angle: %s°</string>
     <string name="shared_string_angle">Angle</string>
     <string name="recalc_angle_dialog_descr">Extra straight segment between my location and calculated route will be displayed until the route is recalculated</string>
@@ -848,7 +848,7 @@
     <string name="settings_derived_routing_mode_string">User-mode, derived from: %s</string>
     <string name="routing_profile_ski">Ski</string>
     <string name="profile_type_descr_string">Type: %s</string>
-    <string name="profile_type_base_string">Base profile</string>
+    <string name="profile_type_base_string">OsmAnd profile</string>
     <string name="profile_alert_need_routing_type_title">Select navigation type</string>
     <string name="profile_alert_need_routing_type_msg">Please select a navigation type for the new app profile</string>
     <string name="profile_alert_need_profile_name_title">Enter profile name</string>
