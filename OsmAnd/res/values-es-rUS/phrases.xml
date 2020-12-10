@@ -3891,4 +3891,6 @@
     <string name="poi_siren">Sirena</string>
     <string name="poi_nurse">Enfermera</string>
     <string name="poi_mobile_money_agent">Agente de dinero móvil</string>
+    <string name="poi_vaccination_covid19">Vacunación: COVID19</string>
+    <string name="poi_health_specialty_vaccination_yes">Vacunación</string>
 </resources>
