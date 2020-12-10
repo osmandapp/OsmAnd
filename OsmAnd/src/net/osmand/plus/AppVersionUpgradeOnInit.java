@@ -12,6 +12,9 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.profiles.NavigationIcon;
+import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.EnumStringPreference;
@@ -50,6 +53,7 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_3_7_01 = 3701;
 	// 3800 - 3.8-00
 	public static final int VERSION_3_8_00 = 3800;
+	public static final int VERSION_3_9_00 = 3900;
 
 	public static final int LAST_APP_VERSION = VERSION_3_8_00;
 
@@ -79,6 +83,7 @@ class AppVersionUpgradeOnInit {
 			startPrefs.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
+			addCustomProfile();
 		} else {
 			prevAppVersion = startPrefs.getInt(VERSION_INSTALLED_NUMBER, 0);
 			if (needsUpgrade(startPrefs, lastVersion)) {
@@ -140,6 +145,10 @@ class AppVersionUpgradeOnInit {
 					migrateQuickActionStates();
 					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_8_00).commit();
 				}
+				if (prevAppVersion < VERSION_3_9_00) {
+					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_9_00).commit();
+					addCustomProfile();
+				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 				appVersionChanged = true;
@@ -162,6 +171,39 @@ class AppVersionUpgradeOnInit {
 	public void resetFirstTimeRun(SharedPreferences startPrefs) {
 		if (startPrefs != null) {
 			startPrefs.edit().remove(FIRST_TIME_APP_RUN).commit();
+		}
+	}
+
+	private void addCustomProfile() {
+		ApplicationMode parent = ApplicationMode.valueOfStringKey(null, ApplicationMode.DEFAULT);
+
+		ApplicationMode.ApplicationModeBuilder builderTruck = ApplicationMode
+				.createCustomMode(parent, "truck", app)
+				.setUserProfileName("Truck")
+				.setIconResName(ProfileIcons.getResStringByResId(R.drawable.ic_action_truck_dark))
+				.setLocationIcon(LocationIcon.DEFAULT)
+				.setNavigationIcon(NavigationIcon.DEFAULT)
+				.setRoutingProfile("Truck")
+				.setOrder(10);
+
+		saveCustomProfile(builderTruck);
+
+		ApplicationMode.ApplicationModeBuilder builderMotorcycle = ApplicationMode
+				.createCustomMode(parent, "motorcycle", app)
+				.setUserProfileName("Motorcycle")
+				.setIconResName(ProfileIcons.getResStringByResId(R.drawable.ic_action_motorcycle_dark))
+				.setLocationIcon(LocationIcon.DEFAULT)
+				.setNavigationIcon(NavigationIcon.DEFAULT)
+				.setRoutingProfile("Motorcycle")
+				.setOrder(11);
+
+		saveCustomProfile(builderMotorcycle);
+	}
+
+	private void saveCustomProfile(ApplicationMode.ApplicationModeBuilder builderMotorcycle) {
+		ApplicationMode modeMotorcycle = ApplicationMode.saveProfile(builderMotorcycle, app);
+		if (!ApplicationMode.values(app).contains(modeMotorcycle)) {
+			ApplicationMode.changeProfileAvailability(modeMotorcycle, false, app);
 		}
 	}
 
@@ -314,7 +356,7 @@ class AppVersionUpgradeOnInit {
 
 	public OsmandPreference<?>[] getGeneralPrefs() {
 		OsmandSettings settings = app.getSettings();
-		return new OsmandPreference[] {
+		return new OsmandPreference[]{
 				settings.EXTERNAL_INPUT_DEVICE,
 				settings.CENTER_POSITION_ON_MAP,
 				settings.ROTATE_MAP,
