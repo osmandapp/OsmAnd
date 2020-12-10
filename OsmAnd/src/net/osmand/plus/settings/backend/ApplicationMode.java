@@ -112,7 +112,7 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_truck_dark)
 			.description(R.string.app_mode_truck).reg();
 
-	public static final ApplicationMode MOTORCYCLE = createCustomBase(ApplicationMode.CAR, R.string.app_mode_motorcycle, "truck", app)
+	public static final ApplicationMode MOTORCYCLE = createCustomBase(ApplicationMode.CAR, R.string.app_mode_motorcycle, "motorcycle", app)
 			.icon(R.drawable.ic_action_motorcycle_dark)
 			.description(R.string.app_mode_motorcycle).reg();
 
