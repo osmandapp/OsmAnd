@@ -2340,12 +2340,17 @@ public class OsmandAidlApi {
 	}
 
 	public boolean selectProfile(String appModeKey) {
-		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
+		final ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 		if (appMode != null) {
-			if (!ApplicationMode.values(app).contains(appMode)) {
-				ApplicationMode.changeProfileAvailability(appMode, true, app);
-			}
-			app.getSettings().APPLICATION_MODE.set(appMode);
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					if (!ApplicationMode.values(app).contains(appMode)) {
+						ApplicationMode.changeProfileAvailability(appMode, true, app);
+					}
+					app.getSettings().APPLICATION_MODE.set(appMode);
+				}
+			});
 			return true;
 		}
 		return false;
