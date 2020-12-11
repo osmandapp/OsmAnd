@@ -12,7 +12,7 @@
     <string name="poi_shoes_type">Τύπος</string>
     <string name="poi_fire_hydrant_type">Τύπος</string>
     <string name="poi_fire_hydrant_position">Θέση</string>
-    <string name="poi_fire_hydrant_water_source">Πηγή νερού</string>
+    <string name="poi_water_source">Πηγή νερού</string>
     <string name="poi_payment_toll_type">Τύπος πληρωμής</string>
     <string name="poi_traffic_signals_sound">Ήχος</string>
     <string name="poi_highway_crossing_type">Τύπος</string>
@@ -2741,9 +2741,9 @@
     <string name="poi_fire_hydrant_position_street">Οδός</string>
     <string name="poi_fire_hydrant_position_underground">Υπόγειος</string>
     <string name="poi_fire_hydrant_style_wsh">Μορφή κρουνού: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Κύριο</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Δεξαμενή</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Ροή</string>
+    <string name="poi_water_source_main">Κύριο</string>
+    <string name="poi_water_source_pond">Δεξαμενή</string>
+    <string name="poi_water_source_stream">Ροή</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Δεξαμενή</string>
     <string name="poi_in_service_yes">Εν ενεργεία: ναι</string>
     <string name="poi_street_cabinet_power">Τύπος ερμαρίου: ρεύμα</string>
@@ -3785,7 +3785,7 @@
     <string name="poi_pump_status_missing_beam">Κατάσταση αντλίας: ελλείπων βραχίονας</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Αναρρόφηση</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Πιεσμένο</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Υπόγεια ύδατα</string>
+    <string name="poi_water_source_groundwater">Υπόγεια ύδατα</string>
     <string name="poi_fire_hydrant_type_pipe">Σωλήνας</string>
     <string name="poi_drinking_water_refill_network">Δίκτυο ξαναγεμίσματος πόσιμου νερού</string>
     <string name="poi_drinking_water_refill_no">Ξαναγέμισμα πόσιμου νερού: όχι</string>

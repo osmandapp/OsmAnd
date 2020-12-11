@@ -2452,9 +2452,9 @@
     <string name="poi_fire_hydrant_position_street">strato</string>
     <string name="poi_fire_hydrant_position_underground">subtero</string>
     <string name="poi_fire_hydrant_style_wsh">Tipo de hidranto: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">akvokondukilo</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">lageto</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">rivereto</string>
+    <string name="poi_water_source_main">akvokondukilo</string>
+    <string name="poi_water_source_pond">lageto</string>
+    <string name="poi_water_source_stream">rivereto</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">cisterno</string>
     <string name="poi_in_service_yes">Funkcias: jes</string>
     <string name="poi_street_cabinet_power">Speco de ŝranko: elektra</string>
@@ -2766,7 +2766,7 @@
     <string name="poi_shoes_type">Ŝuoj</string>
     <string name="poi_fire_hydrant_type">Speco de hidranto</string>
     <string name="poi_fire_hydrant_position">Pozicio de hidranto</string>
-    <string name="poi_fire_hydrant_water_source">Fonto de akvo</string>
+    <string name="poi_water_source">Fonto de akvo</string>
     <string name="poi_payment_toll_type">Pagmaniero</string>
     <string name="poi_traffic_signals_sound">Sono</string>
     <string name="poi_highway_crossing_type">Speco de stratpasejo</string>
@@ -3813,7 +3813,7 @@
     <string name="poi_drinking_water_refill_network">Plenigi per trinkebla akvo: reto</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">senprema</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">prema</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">grundakvo</string>
+    <string name="poi_water_source_groundwater">grundakvo</string>
     <string name="poi_fire_hydrant_type_pipe">tubo</string>
     <string name="poi_fire_hydrant_pressure_filter">Premo de hidranto</string>
     <string name="poi_pump_status_missing_beam">Stato de pumpilo: levilo mankas</string>

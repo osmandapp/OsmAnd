@@ -40,6 +40,7 @@ import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.navigation.OnVoiceNavigationParams;
 import net.osmand.aidl.quickaction.QuickActionInfoParams;
 import net.osmand.aidl.tiles.ASqliteDbFile;
+import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.data.FavouritePoint;
@@ -79,6 +80,7 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -2335,6 +2337,35 @@ public class OsmandAidlApi {
 			return customPlugin.getVersion();
 		}
 		return CANNOT_ACCESS_API_ERROR;
+	}
+
+	public boolean selectProfile(String appModeKey) {
+		final ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
+		if (appMode != null) {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					if (!ApplicationMode.values(app).contains(appMode)) {
+						ApplicationMode.changeProfileAvailability(appMode, true, app);
+					}
+					app.getSettings().APPLICATION_MODE.set(appMode);
+				}
+			});
+			return true;
+		}
+		return false;
+	}
+
+	public boolean getProfiles(List<AProfile> profiles) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			ApplicationModeBean bean = mode.toModeBean();
+			AProfile aProfile = new AProfile(bean.stringKey, bean.userProfileName, bean.parent, bean.iconName,
+					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon.name(),
+					bean.navIcon.name(), bean.order);
+
+			profiles.add(aProfile);
+		}
+		return true;
 	}
 
 	private static class FileCopyInfo {

@@ -297,7 +297,7 @@ task collectHelpContentsAssets(type: Copy) {
 		include "*.html"
 	}
 	from("../../help/website/blog_articles") {
-		include "osmand-3-8-released.html"
+		include "osmand-3-9-released.html"
 	}
 	into "assets/feature_articles"
 }

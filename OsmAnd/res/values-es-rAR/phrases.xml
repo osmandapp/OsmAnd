@@ -2626,9 +2626,9 @@
     <string name="poi_fire_hydrant_position_parking_lot">En estacionamiento;En aparcamiento</string>
     <string name="poi_fire_hydrant_position_street">En la calle</string>
     <string name="poi_fire_hydrant_position_underground">Subterráneo</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Principal</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Estanque</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Arroyo</string>
+    <string name="poi_water_source_main">Principal</string>
+    <string name="poi_water_source_pond">Estanque</string>
+    <string name="poi_water_source_stream">Arroyo</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_in_service_yes">En servicio: sí</string>
     <string name="poi_fire_hydrant_style_wsh">Estilo de hidrante: wsh</string>
@@ -2785,7 +2785,7 @@
     <string name="poi_shoes_type">Tipo de calzado</string>
     <string name="poi_fire_hydrant_type">Tipo de hidrante</string>
     <string name="poi_fire_hydrant_position">Ubicación del hidrante</string>
-    <string name="poi_fire_hydrant_water_source">Origen del agua</string>
+    <string name="poi_water_source">Origen del agua</string>
     <string name="poi_payment_toll_type">Forma de pago (peaje)</string>
     <string name="poi_traffic_signals_sound">Sonido</string>
     <string name="poi_highway_crossing_type">Tipo de cruce</string>
@@ -3827,7 +3827,7 @@
     <string name="poi_drinking_water_refill_network">Red de recarga de agua potable</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Succión</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizado</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Agua subterránea</string>
+    <string name="poi_water_source_groundwater">Agua subterránea</string>
     <string name="poi_fire_hydrant_type_pipe">Tubería</string>
     <string name="poi_fire_hydrant_pressure_filter">Presión</string>
     <string name="poi_pump_status_missing_beam">Estado de la bomba: sin palanca</string>

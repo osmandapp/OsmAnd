@@ -528,7 +528,7 @@
     <string name="poi_shoes_type">Вид взуття</string>
     <string name="poi_fire_hydrant_type">Вид</string>
     <string name="poi_fire_hydrant_position">Розміщення</string>
-    <string name="poi_fire_hydrant_water_source">Джерело води</string>
+    <string name="poi_water_source">Джерело води</string>
     <string name="poi_payment_toll_type">Вид оплати</string>
     <string name="poi_traffic_signals_sound">Звуковий сигнал</string>
     <string name="poi_highway_crossing_type">Вид</string>
@@ -1873,15 +1873,15 @@
     <string name="poi_fire_hydrant_style_wsh">Дизайн гідранта: wsh</string>
     <string name="poi_shelter_type_abandoned">Вид укриття: занедбане</string>
     <string name="poi_dog_yes">Вхід з собаками дозволений</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Основний</string>
+    <string name="poi_water_source_main">Основний</string>
     <string name="poi_payment_ep_quick_no">Карти Quick не приймаються</string>
     <string name="poi_internet_access_type_wlan">Бездротовий (Wi-Fi)</string>
     <string name="poi_dog_no">Вхід з собаками заборонений</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Ставок</string>
+    <string name="poi_water_source_pond">Ставок</string>
     <string name="poi_payment_eurowag_yes">Eurowag</string>
     <string name="poi_internet_access_type_terminal">Термінал</string>
     <string name="poi_refugee_yes">Зручності, призначені для біженців</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Потік</string>
+    <string name="poi_water_source_stream">Потік</string>
     <string name="poi_internet_access_type_wired">Провідний</string>
     <string name="poi_refugee_no">Біженці: немає</string>
     <string name="poi_payment_eurowag_no">Картки Eurowag не приймаються</string>
@@ -3631,7 +3631,7 @@
     <string name="poi_bath_type">Вид</string>
     <string name="poi_bath_open_air">На відкритому повітрі</string>
     <string name="poi_vehicle_forestry">Доступ на автомобілі: лісове господарство</string>
-    <string name="poi_motorcar_yes">Доступ на автомобілі:</string>
+    <string name="poi_motorcar_yes">Доступ на автомобілі: так</string>
     <string name="poi_motorcar_private">Доступ на автомобілі: приватний</string>
     <string name="poi_motorcar_no">Доступ на автомобілі: немає</string>
     <string name="poi_motorcar_destination">Доступ на автомобілі: пункт призначення</string>
@@ -3811,7 +3811,7 @@
     <string name="poi_fire_hydrant_type_pipe">Труба</string>
     <string name="poi_fire_hydrant_pressure_filter">Тиск</string>
     <string name="poi_pump_status_missing_beam">Стан насосу: відсутній важіль</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Підземні води</string>
+    <string name="poi_water_source_groundwater">Підземні води</string>
     <string name="poi_traffic_signals_arrow_yes">Увімкнено</string>
     <string name="poi_traffic_signals_vibration_yes">Увімкнено</string>
     <string name="poi_traffic_signals_vibration_no">Вібрація: вимкнено</string>
@@ -3871,4 +3871,5 @@
     <string name="poi_siren">Сирена</string>
     <string name="poi_nurse">Медсестра</string>
     <string name="poi_mobile_money_agent">Мобільний грошовий агент</string>
+    <string name="poi_lifeguard_base">Рятувальна станція</string>
 </resources>

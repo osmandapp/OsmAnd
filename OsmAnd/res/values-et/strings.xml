@@ -232,7 +232,7 @@
     <string name="route_via">Läbi:</string>
     <string name="route_from">Kust:</string>
     <string name="distance_measurement_clear_route">Eemalda kõik punktid</string>
-    <string name="cancel_route">Katkesta teekond</string>
+    <string name="cancel_route">Katkestame teekonna\?</string>
     <string name="layer_hillshade">Künkavarjutuse kiht</string>
     <string name="download_hillshade_maps">Künkavarjutused</string>
     <string name="precise_routing_mode_descr">Arvuta täpsed teekonnad ilma tõrgeteta. Ikka kaugusega piiratud ja aeglane.</string>
@@ -464,7 +464,7 @@
     <string name="osc_file">OSC fail</string>
     <string name="choose_file_type">Vali faililiik</string>
     <string name="all_data">Kõik andmed</string>
-    <string name="osm_notes">OSM teated</string>
+    <string name="osm_notes">OSM märked</string>
     <string name="shared_string_current">Praegune</string>
     <string name="last_intermediate_dest_description">Lisab vahepeatuse</string>
     <string name="first_intermediate_dest_description">Lisab algpeatuse</string>
@@ -3842,4 +3842,12 @@
 \nOpenPlaceReviews - huvipunkti fotod;
 \nMapillary - tänavavaated;
 \nWikimedia või veeb - OpenStreetMap\'i andmetes kirjeldatud fotod.</string>
+    <string name="markers_history">Markerite ajalugu</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="app_mode_light_aircraft">Kerglennukid</string>
+    <string name="elevation_data">Võid kasutada kõugusandmeid teekonna tõusu ja laskumise arvutamisel</string>
+    <string name="plan_route_add_new_segment">Lisa uus lõik</string>
+    <string name="plan_route_split_after">Tükelda pärast</string>
+    <string name="plan_route_split_before">Tükelda enne</string>
+    <string name="plan_route_join_segments">Liida lõigud</string>
 </resources>

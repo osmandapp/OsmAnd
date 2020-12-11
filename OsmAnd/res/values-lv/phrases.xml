@@ -11,7 +11,7 @@
     <string name="poi_shoes_type">Kurpes</string>
     <string name="poi_fire_hydrant_type">Ugunsdzēsības hidranti</string>
     <string name="poi_fire_hydrant_position">Vieta</string>
-    <string name="poi_fire_hydrant_water_source">Ūdens ņemšanas vieta</string>
+    <string name="poi_water_source">Ūdens ņemšanas vieta</string>
     <string name="poi_payment_toll_type">Apmaksas veids</string>
     <string name="poi_traffic_signals_sound">Skaņa</string>
     <string name="poi_highway_crossing_type">Veids</string>
@@ -2700,9 +2700,9 @@
     <string name="poi_fire_hydrant_position_street">Hidranta atrašanās vieta: iela</string>
     <string name="poi_fire_hydrant_position_underground">"Hidranta atrašanās vieta:  zemē"</string>
     <string name="poi_fire_hydrant_style_wsh">Hidranta stils: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Galvenais</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Dīķis</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Caurplūde</string>
+    <string name="poi_water_source_main">Galvenais</string>
+    <string name="poi_water_source_pond">Dīķis</string>
+    <string name="poi_water_source_stream">Caurplūde</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_in_service_yes">Lietošanā: jā</string>
     <string name="poi_street_cabinet_power">Skapja tips: elektrība</string>

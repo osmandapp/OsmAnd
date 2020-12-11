@@ -84,7 +84,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		if (addNewSegmentAllowed) {
 			BaseBottomSheetItem addNewSegment = new BottomSheetItemWithDescription.Builder()
-					//.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
+					.setIcon(getContentIcon(R.drawable.ic_action_new_segment))
 					.setTitle(getString(R.string.plan_route_add_new_segment))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 					.setOnClickListener(new View.OnClickListener() {

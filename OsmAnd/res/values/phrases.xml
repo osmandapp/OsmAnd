@@ -13,7 +13,7 @@
 	<string name="poi_shoes_type">Type</string>
 	<string name="poi_fire_hydrant_type">Type</string>
 	<string name="poi_fire_hydrant_position">Position</string>
-	<string name="poi_fire_hydrant_water_source">Water source</string>
+	<string name="poi_water_source">Water source</string>
 	<string name="poi_payment_toll_type">Payment type</string>
 	<string name="poi_traffic_signals_sound">Sound</string>
 	<string name="poi_highway_crossing_type">Type</string>
@@ -3011,10 +3011,9 @@
 	<string name="poi_fire_hydrant_position_street">Street</string>
 	<string name="poi_fire_hydrant_position_underground">Underground</string>
 	<string name="poi_fire_hydrant_style_wsh">Hydrant style: wsh</string>
-	<string name="poi_fire_hydrant_style_water_source_main">Main</string>
-	<string name="poi_fire_hydrant_style_water_source_pond">Pond</string>
-	<string name="poi_fire_hydrant_style_water_source_stream">Stream</string>
-	<string name="poi_fire_hydrant_style_water_source_cistern">Cistern</string>
+	<string name="poi_water_source_main">Main</string>
+	<string name="poi_water_source_pond">Pond</string>
+	<string name="poi_water_source_stream">Stream</string>
 	<string name="poi_in_service_yes">In service: yes</string>
 
 	<string name="poi_street_cabinet_power">Cabinet type: power</string>
@@ -4234,7 +4233,7 @@
 	<string name="poi_drinking_water_refill_network">Drinking water refill network</string>
 
 	<string name="poi_fire_hydrant_type_pipe">Pipe</string>
-	<string name="poi_fire_hydrant_style_water_source_groundwater">Groundwater</string>
+	<string name="poi_water_source_groundwater">Groundwater</string>
 
 	<string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurized</string>
 	<string name="poi_osmand_fire_hydrant_pressure_suction">Suction</string>
@@ -4308,4 +4307,15 @@
 
 	<string name="poi_lifeguard_base">Lifeguard base</string>
 
+	<string name="poi_health_specialty_vaccination_yes">Vaccination</string>
+	<string name="poi_vaccination_covid19">Vaccination: COVID19</string>
+
+	<string name="poi_water_source_tube_well">Tube well</string>
+	<string name="poi_water_source_water_works">Water works</string>
+	<string name="poi_water_source_tap">Tap</string>
+	<string name="poi_water_source_water_tank">Water tank</string>
+	<string name="poi_water_source_powered_pump">Powered pump</string>
+	<string name="poi_water_source_well">Well</string>
+	<string name="poi_water_source_river">River</string>
+	<string name="poi_water_source_lake">Lake</string>
 </resources>

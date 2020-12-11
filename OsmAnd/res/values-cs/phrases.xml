@@ -2584,9 +2584,9 @@
     <string name="poi_fire_hydrant_position_street">Ulice</string>
     <string name="poi_fire_hydrant_position_underground">Podzemní</string>
     <string name="poi_fire_hydrant_style_wsh">Styl hydrantu: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Hlavní</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Rybník</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Potok</string>
+    <string name="poi_water_source_main">Hlavní</string>
+    <string name="poi_water_source_pond">Rybník</string>
+    <string name="poi_water_source_stream">Potok</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_in_service_yes">V provozu: ano</string>
     <string name="poi_street_cabinet_power">Typ skříně: energie</string>
@@ -2705,7 +2705,7 @@
     <string name="poi_vending_type">Způsob prodeje</string>
     <string name="poi_bicycle_service">Cykloservis</string>
     <string name="poi_fire_hydrant_position">Umístění</string>
-    <string name="poi_fire_hydrant_water_source">Zdroj vody</string>
+    <string name="poi_water_source">Zdroj vody</string>
     <string name="poi_traffic_signals_sound">Zvuk</string>
     <string name="poi_tactile_paving">Dlažba pro slabozraké</string>
     <string name="poi_service_general">Servis</string>
@@ -3825,7 +3825,7 @@
     <string name="poi_pump_status_missing_beam">Stav pumpy: chybí rukojeť</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sání</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pod tlakem</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Podzemní voda</string>
+    <string name="poi_water_source_groundwater">Podzemní voda</string>
     <string name="poi_fire_hydrant_type_pipe">Roura</string>
     <string name="poi_internet_access_fee_customers">Internetový přístup: zákazníci</string>
     <string name="poi_monastery_type_clerks_regular">Typ klášteru: řeholnický</string>

@@ -1763,7 +1763,7 @@
     <string name="poi_shoes_type">Casta</string>
     <string name="poi_fire_hydrant_type">Casta</string>
     <string name="poi_fire_hydrant_position">Positzione</string>
-    <string name="poi_fire_hydrant_water_source">Mitza de abba</string>
+    <string name="poi_water_source">Mitza de abba</string>
     <string name="poi_payment_toll_type">Casta de pagamentu</string>
     <string name="poi_traffic_signals_sound">Sonu</string>
     <string name="poi_highway_crossing_type">Casta</string>
@@ -2806,9 +2806,9 @@
     <string name="poi_fire_hydrant_position_street">In sa carrera</string>
     <string name="poi_fire_hydrant_position_underground">Suta terra</string>
     <string name="poi_fire_hydrant_style_wsh">Istile de s\'idrante: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Printzipale</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Poju</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Trainu</string>
+    <string name="poi_water_source_main">Printzipale</string>
+    <string name="poi_water_source_pond">Poju</string>
+    <string name="poi_water_source_stream">Trainu</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Tzisterna</string>
     <string name="poi_in_service_yes">In servìtziu: eja</string>
     <string name="poi_street_cabinet_power">Casta de cabina: eletritzidade</string>
@@ -3621,7 +3621,7 @@
     <string name="poi_vehicle_military">Atzessu pro sos veìculos: militares</string>
     <string name="poi_vehicle_delivery">Atzessu pro sos veìculos: intregas</string>
     <string name="poi_vehicle_forestry">Atzessu pro sos veìculos: foresteria</string>
-    <string name="poi_motorcar_yes">Atzessu pro sas automòbiles:</string>
+    <string name="poi_motorcar_yes">Atzessu pro sas automòbiles: eja</string>
     <string name="poi_motorcar_private">Atzessu pro sas automòbiles: privadu</string>
     <string name="poi_motorcar_no">Atzessu pro sas automòbiles: nono</string>
     <string name="poi_motorcar_destination">Atzessu pro sas automòbiles: destinatzione</string>
@@ -3816,7 +3816,7 @@
     <string name="poi_drinking_water_refill_network">Retza de ricàrriga de abba potàbile</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sutzione</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizada</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Abba suta de terra</string>
+    <string name="poi_water_source_groundwater">Abba suta de terra</string>
     <string name="poi_fire_hydrant_type_pipe">Pompa</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressione</string>
     <string name="poi_pump_status_missing_beam">Istadu de sa pompa: mancat sa trave</string>
@@ -3879,4 +3879,5 @@
     <string name="poi_siren">Sirena</string>
     <string name="poi_nurse">Infermieri</string>
     <string name="poi_mobile_money_agent">Agente de denaru mòbile</string>
+    <string name="poi_lifeguard_base">Base de sos bagninos</string>
 </resources>

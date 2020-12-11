@@ -177,7 +177,7 @@
     <string name="plugins_screen">Erweiterungen</string>
     <string name="prefs_plugins_descr">Erweiterungen aktivieren weitere Einstellungen und zusätzliche Funktionen.</string>
     <string name="prefs_plugins">Erweiterungen</string>
-    <string name="osm_editing_plugin_description">Machen Sie OSM-Beiträge wie das Erstellen oder Ändern von OSM-POI-Objekten, das Eröffnen oder Kommentieren von OSM-Notizen und das Einreichen aufgezeichneter GPX-Dateien in OsmAnd, indem Sie Ihren Benutzernamen und Ihr Passwort angeben. OpenStreetMap.org ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungsprojekt.</string>
+    <string name="osm_editing_plugin_description">Machen Sie OSM-Beiträge wie das Erstellen oder Ändern von OSM-POI-Objekten, das Eröffnen oder Kommentieren von OSM-Hinweisen und das Einreichen aufgezeichneter GPX-Dateien in OsmAnd, indem Sie Ihren Benutzernamen und Ihr Passwort angeben. OpenStreetMap.org ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungsprojekt.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden wahrscheinlich schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
     <string name="play_commands_of_currently_selected_voice">Eine Stimme auswählen und mittels Abspielen von Ansagen testen:</string>
     <string name="debugging_and_development">OsmAnd-Entwicklung</string>
@@ -249,13 +249,13 @@
     <string name="offline_edition_descr">Wenn die Offline-Bearbeitung aktiviert ist, werden Änderungen zunächst lokal gespeichert und auf Anforderung hochgeladen, andernfalls werden Änderungen sofort hochgeladen.</string>
     <string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb von OsmAnd beeinflusst nicht die heruntergeladenen Offline-Karten, sondern wird in einer Datei auf Ihrem Gerät gespeichert.</string>
     <string name="local_openstreetmap_uploading">Hochladen …</string>
-    <string name="local_openstreetmap_were_uploaded">{0} POI/Notizen wurden hochgeladen</string>
+    <string name="local_openstreetmap_were_uploaded">{0} POI/Hinweise wurden hochgeladen</string>
     <string name="local_openstreetmap_uploadall">Alle hochladen</string>
     <string name="local_openstreetmap_upload">Änderung zu OSM hochladen</string>
     <string name="local_openstreetmap_delete">Änderung löschen</string>
     <string name="local_openstreetmap_descr_title">Asynchrone OSM-Bearbeitung:</string>
-    <string name="local_openstreetmap_settings">OSM-POIs/-Notizen auf dem Gerät gespeichert</string>
-    <string name="local_openstreetmap_settings_descr">Anzeigen und Verwalten von OSM-POIs/-Notizen in Ihrer Gerätedatenbank.</string>
+    <string name="local_openstreetmap_settings">OSM-POIs/-Hinweise auf dem Gerät gespeichert</string>
+    <string name="local_openstreetmap_settings_descr">Anzeigen und Verwalten von OSM-POIs/-Hinweisen in Ihrer Gerätedatenbank.</string>
     <string name="live_monitoring_m">Online-Aufzeichnung (benötigt GPX)</string>
     <string name="live_monitoring_m_descr">Track-Daten zu einem festgelegten Internetdienst senden, wenn die GPX-Aufzeichnung aktiviert ist.</string>
     <string name="live_monitoring_url">Webadresse zur Aufzeichnung</string>
@@ -587,7 +587,7 @@
     <string name="layer_yandex_traffic">Yandex-Verkehr</string>
     <string name="layer_route">Route</string>
     <string name="shared_string_favorites">Favoriten</string>
-    <string name="layer_osm_bugs">OSM-Notizen (online)</string>
+    <string name="layer_osm_bugs">OSM-Hinweise (online)</string>
     <string name="layer_poi">POI-Overlay …</string>
     <string name="layer_amenity_label">POI-Overlay-Bezeichnungen</string>
     <string name="layer_map">Kartenquelle …</string>
@@ -1571,7 +1571,7 @@
     <string name="routing_attr_height_description">Höhe des Fahrzeugs für Routenberechnung angeben.</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="use_fast_recalculation">Schnelle Routenneuberechnung</string>
-    <string name="use_fast_recalculation_desc">Nur den Anfangsteil neu berechnen. Kann bei längeren Routen benutzt werden.</string>
+    <string name="use_fast_recalculation_desc">Berechnet nur den Anfangsteil der Route neu, was bei langen Reisen nützlich ist.</string>
     <string name="lang_es_ar">Spanisch (Argentinien)</string>
     <string name="lang_th">Thailändisch</string>
     <string name="lang_ms">Malaysisch</string>
@@ -2395,10 +2395,10 @@
     <string name="routing_attr_allow_private_name">Privatzugang erlauben</string>
     <string name="routing_attr_allow_private_description">Zugang zu Privatgrund erlauben.</string>
     <string name="srtm_color_scheme">Farbschema</string>
-    <string name="quick_action_showhide_osmbugs_title">OSM-Notizen ein- oder ausblenden</string>
-    <string name="quick_action_osmbugs_show">OSM-Notizen einblenden</string>
-    <string name="quick_action_osmbugs_hide">OSM-Notizen ausblenden</string>
-    <string name="quick_action_showhide_osmbugs_descr">Schaltfläche zum Ein- oder Ausblenden von OSM-Notizen auf der Karte.</string>
+    <string name="quick_action_showhide_osmbugs_title">OSM-Hinweise ein- oder ausblenden</string>
+    <string name="quick_action_osmbugs_show">OSM-Hinweise einblenden</string>
+    <string name="quick_action_osmbugs_hide">OSM-Hinweise ausblenden</string>
+    <string name="quick_action_showhide_osmbugs_descr">Schaltfläche zum Ein- oder Ausblenden von OSM-Hinweisen auf der Karte.</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
     <string name="search_favorites">In Favoriten suchen</string>
     <string name="hillshade_menu_download_descr">Laden Sie die Reliefkarte herunter, um vertikale Schattierungen anzuzeigen.</string>
@@ -2583,7 +2583,7 @@
     <string name="shared_string_gpx_waypoints">Track-Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
     <string name="empty_state_osm_edits">OSM-Objekte erstellen oder ändern</string>
-    <string name="empty_state_osm_edits_descr">OSM-POIs erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten und aufgezeichnete GPX-Dateien hinzufügen.</string>
+    <string name="empty_state_osm_edits_descr">OSM-POIs erstellen oder verändern, OSM-Hinweise erstellen oder bearbeiten und aufgezeichnete GPX-Dateien hinzufügen.</string>
     <string name="shared_string_deleted">Gelöscht</string>
     <string name="shared_string_edited">Bearbeitet</string>
     <string name="shared_string_added">Hinzugefügt</string>
@@ -2645,16 +2645,16 @@
     <string name="nautical_renderer">Nautisch</string>
     <string name="copy_location_name">Ort/POI-Name kopieren</string>
     <string name="toast_empty_name_error">Unbenannter Ort</string>
-    <string name="show_closed_notes">Geschlossene Notizen anzeigen</string>
-    <string name="switch_osm_notes_visibility_desc">OSM-Notizen auf der Karte ein- oder ausblenden.</string>
+    <string name="show_closed_notes">Geschlossene Hinweise anzeigen</string>
+    <string name="switch_osm_notes_visibility_desc">OSM-Hinweise auf der Karte ein- oder ausblenden.</string>
     <string name="gpx_file_desc">GPX - geeignet für den Export in JOSM oder andere OSM-Editoren.</string>
     <string name="osc_file_desc">OSC - geeignet für den Export nach OSM.</string>
     <string name="shared_string_gpx_file">GPX-Datei</string>
     <string name="osc_file">OSC-Datei</string>
     <string name="choose_file_type">Dateityp auswählen</string>
-    <string name="osm_edits_export_desc">Als OSM-Notizen, POIs oder beides exportieren.</string>
+    <string name="osm_edits_export_desc">Als OSM-Hinweise, POIs oder beides exportieren.</string>
     <string name="all_data">Alle Daten</string>
-    <string name="osm_notes">OSM-Notizen</string>
+    <string name="osm_notes">OSM-Hinweise</string>
     <string name="tunnel_warning">Tunnel voraus</string>
     <string name="show_tunnels">Tunnel</string>
     <string name="shared_string_current">Aktuell</string>
@@ -3432,7 +3432,7 @@
     <string name="osm_editing">OSM-Bearbeitung</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Symbol, das beim Navigieren oder Bewegen angezeigt wird.</string>
-    <string name="multimedia_notes_view_descr">Ihre OSM-Notizen sind in %1$s.</string>
+    <string name="multimedia_notes_view_descr">Ihre OSM-Hinweise sind in %1$s.</string>
     <string name="button_rate">Bewerten</string>
     <string name="logcat_buffer_descr">Protokolle der Anwendung einsehen und freigeben</string>
     <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
@@ -3927,7 +3927,7 @@
     <string name="use_complex_routing">Komplexe Routenberechnung</string>
     <string name="complex_routing_descr">Zwei-Phasen-Routenberechnung für die Autonavigation.</string>
     <string name="use_native_pt">Native ÖPNV Entwicklung</string>
-    <string name="use_native_pt_desc">Wechseln zu Java (sicher) Berechnung des ÖPNV-Routings</string>
+    <string name="use_native_pt_desc">Wechseln zur Java (sicher) Berechnung des ÖPNV-Routings</string>
     <string name="osm_edit_logout_success">Abgemeldet</string>
     <string name="file_already_imported">Datei wurde bereits in OsmAnd importiert</string>
     <string name="perform_oauth_authorization">Anmelden über OAuth</string>
@@ -3936,11 +3936,11 @@
     <string name="snowmobile_render_descr">Für das Schneemobilfahren mit speziellen Straßen und Tracks.</string>
     <string name="perform_oauth_authorization_description">Anmelden mit OAuth zur Nutzung der osmedit-Funktionen</string>
     <string name="use_two_phase_routing">2-Phasen-A*-Routing-Algorithmus verwenden</string>
-    <string name="message_need_calculate_route_before_show_graph">%1$s Daten sind nur auf den Straßen verfügbar, Sie müssen eine Route mit \"Route zwischen Punkten\" berechnen, um sie zu erhalten.</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s Daten sind nur auf Straßen verfügbar, Sie müssen eine Route mit \"Route zwischen Punkten\" berechnen, um eine grafische Darstellung zu erhalten.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="navigate_point_mgrs">MGRS</string>
-    <string name="message_graph_will_be_available_after_recalculation">Warte auf die Neuberechnung der Route.
-\nDie Graphik wird nach der Neuberechnung verfügbar sein.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Bitte warten Sie.
+\nDie Grafik wird nach der Neuberechnung der Route verfügbar sein.</string>
     <string name="icon_group_amenity">Einrichtung</string>
     <string name="icon_group_transport">ÖPNV</string>
     <string name="icon_group_service">Dienstleistung</string>
@@ -3951,9 +3951,9 @@
     <string name="icon_group_symbols">Symbole</string>
     <string name="shared_string_local_maps">Lokale Karten</string>
     <string name="icon_group_special">Spezial</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Sie müssen mindestens zwei Punkte hinzufügen</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Fügen Sie mindestens zwei Punkte hinzu</string>
     <string name="manage_subscription">Abonnement verwalten</string>
-    <string name="subscription_payment_issue_title">Es gibt ein Problem mit Ihrem Abonnement. Klicken Sie auf die Schaltfläche, um zu den Einstellungen des Google Play Abonnements zu gelangen und Ihre Zahlungsmethode zu überprüfen.</string>
+    <string name="subscription_payment_issue_title">Es gibt ein Problem mit Ihrem Abonnement. Tippen Sie auf die Schaltfläche, um zu den Einstellungen des Google Play Abonnements zu gelangen und Ihre Zahlungsmethode zu überprüfen.</string>
     <string name="subscription_expired_title">OsmAnd Live Abonnement ist abgelaufen</string>
     <string name="subscription_paused_title">OsmAnd Live Abonnement wurde ausgesetzt</string>
     <string name="subscription_on_hold_title">OsmAnd Live Abonnement liegt auf Eis</string>
@@ -3990,7 +3990,7 @@
     <string name="add_photos_descr">OsmAnd zeigt Fotos aus verschiedenen Quellen:
 \nOpenPlaceReviews - POI Fotos;
 \nMapillary - Bilder auf Straßenebene;
-\nWeb / Wikimedia - POI Fotos, die in OpenStreetMap Daten angegeben sind.</string>
+\nWeb / Wikimedia - POI-Fotos gemäß OpenStreetMap-Daten.</string>
     <string name="shared_string_resources">Quellen</string>
     <string name="approximate_file_size">Ungefähre Dateigröße</string>
     <string name="select_data_to_export">Wählen Sie die Daten aus, die in die Datei exportiert werden sollen.</string>
@@ -4004,6 +4004,20 @@
     <string name="cannot_upload_image">Bild kann nicht hochgeladen werden, bitte versuchen Sie es später erneut</string>
     <string name="select_picture">Bild auswählen</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="elevation_data">Sie können Höhendaten für die Berücksichtigung von Aufstieg / Abstieg auf Ihrer Strecke verwenden</string>
+    <string name="elevation_data">Sie können Höhendaten verwenden, um Steigungen und Gefälle auf Ihrer Reise zu berücksichtigen</string>
     <string name="app_mode_light_aircraft">Kleinflugzeug</string>
+    <string name="plan_route_split_before">Teilen vor</string>
+    <string name="plan_route_split_after">Teilen nach</string>
+    <string name="release_3_9">• Option zum Exportieren und Importieren aller Daten einschließlich Einstellungen, Ressourcen, meine Orte hinzugefügt
+\n
+\n• Route planen: Diagramme für Streckenabschnitte mit Route, und es wurde die Möglichkeit hinzugefügt, mehrere Streckenabschnitte zu erstellen und zu bearbeiten
+\n
+\n • OAuth-Authentifizierungsverfahren für OpenStreetMap hinzugefügt, verbesserte Benutzeroberfläche der OSM-Dialoge
+\n
+\n • Unterstützung benutzerdefinierter Farben für Favoriten und Track-Wegpunkte
+\n
+\n</string>
+    <string name="app_mode_gap">Lücke</string>
+    <string name="plan_route_join_segments">Segmente verbinden</string>
+    <string name="plan_route_add_new_segment">Neues Segment hinzufügen</string>
 </resources>

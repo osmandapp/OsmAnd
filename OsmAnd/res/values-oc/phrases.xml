@@ -13,7 +13,7 @@
     <string name="poi_fire_hydrant_position">Localizacion de la bòrna</string>
     <string name="poi_traffic_signals_sound">Senhau de circulacion sonòr</string>
     <string name="poi_tactile_paving">Marca d\'assisténcia au sòu</string>
-    <string name="poi_fire_hydrant_water_source">Sorgent</string>
+    <string name="poi_water_source">Sorgent</string>
     <string name="poi_payment_toll_type">Tipe de pagament</string>
     <string name="poi_highway_crossing_type">Tipe</string>
     <string name="poi_service_general">Servici</string>

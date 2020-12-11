@@ -1713,7 +1713,7 @@
     <string name="poi_brushless">Kefétlen</string>
     <string name="poi_internet_access_type">Internetcsatlakozás típusa</string>
     <string name="poi_fire_hydrant_position">Hely</string>
-    <string name="poi_fire_hydrant_water_source">Vízforrás</string>
+    <string name="poi_water_source">Vízforrás</string>
     <string name="poi_payment_toll_type">Fizetési mód</string>
     <string name="poi_traffic_signals_sound">Hangjelzés</string>
     <string name="poi_highway_crossing_type">Típus</string>
@@ -2565,9 +2565,9 @@
     <string name="poi_fire_hydrant_position_parking_lot">Parkolóhely</string>
     <string name="poi_fire_hydrant_position_street">Utca</string>
     <string name="poi_fire_hydrant_position_underground">Föld alatt</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Fő</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Tó</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Patak</string>
+    <string name="poi_water_source_main">Fő</string>
+    <string name="poi_water_source_pond">Tó</string>
+    <string name="poi_water_source_stream">Patak</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Ciszterna</string>
     <string name="poi_street_cabinet_power">Közműszekrény típusa: villamos energia</string>
     <string name="poi_street_cabinet_telecom">Közműszekrény típusa: távközlés</string>
@@ -3804,7 +3804,7 @@
     <string name="poi_borough">Kerület</string>
     <string name="poi_city_block">Háztömb</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Nyomás alatti</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Talajvíz</string>
+    <string name="poi_water_source_groundwater">Talajvíz</string>
     <string name="poi_fire_hydrant_type_pipe">Cső</string>
     <string name="poi_drinking_water_refill_network">Ivóvíz-utántöltő hálózat</string>
     <string name="poi_drinking_water_refill_no">Ivóvíz-utántöltés nincs</string>

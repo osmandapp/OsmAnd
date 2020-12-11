@@ -60,7 +60,7 @@
     <string name="poi_shoes_type">ধরণ</string>
     <string name="poi_fire_hydrant_type">ধরণ</string>
     <string name="poi_fire_hydrant_position">অবস্থান</string>
-    <string name="poi_fire_hydrant_water_source">পানির উৎস</string>
+    <string name="poi_water_source">পানির উৎস</string>
     <string name="poi_payment_toll_type">অর্থ প্রদানের ধরণ</string>
     <string name="poi_traffic_signals_sound">শব্দ</string>
     <string name="poi_highway_crossing_type">ধরণ</string>
