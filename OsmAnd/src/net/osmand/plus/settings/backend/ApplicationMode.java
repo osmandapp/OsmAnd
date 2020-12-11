@@ -786,6 +786,6 @@ public class ApplicationMode {
 		@Expose
 		public NavigationIcon navIcon = null;
 		@Expose
-		int order = -1;
+		public int order = -1;
 	}
 }

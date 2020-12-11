@@ -22,6 +22,7 @@ import net.osmand.aidlapi.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.RemoveContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.UpdateContextMenuButtonsParams;
 import net.osmand.aidlapi.copyfile.CopyFileParams;
+import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.customization.CustomPluginParams;
 import net.osmand.aidlapi.customization.CustomizationInfoParams;
 import net.osmand.aidlapi.customization.MapMarginsParams;
@@ -1379,6 +1380,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("selectProfile");
 				return api != null && api.selectProfile(params.getAppModeKey());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getProfiles(List<AProfile> profiles) {
+			try {
+				OsmandAidlApi api = getApi("getProfiles");
+				return api != null && api.getProfiles(profiles);
 			} catch (Exception e) {
 				handleException(e);
 				return false;
