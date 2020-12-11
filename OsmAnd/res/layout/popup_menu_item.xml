@@ -12,8 +12,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/content_padding_half"
         android:layout_marginStart="@dimen/content_padding_half"
-        tools:src="@drawable/ic_action_info_dark"
-        android:tint="?attr/primary_icon_color"/>
+        tools:src="@drawable/ic_action_info_dark" />
 
     <TextView
         android:id="@+id/title"

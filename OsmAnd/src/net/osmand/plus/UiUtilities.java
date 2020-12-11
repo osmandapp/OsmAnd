@@ -809,7 +809,7 @@ public class UiUtilities {
 		return listPopupWindow;
 	}
 
-	public static void showPopUpMenu(View v, final List<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> items) {
+	public static void showPopUpMenu(View v, final List<SimplePopUpMenuItem> items) {
 		UiUtilities.createListPopupWindow(
 				v.getContext(), v, v.getWidth(), items, new AdapterView.OnItemClickListener() {
 					@Override

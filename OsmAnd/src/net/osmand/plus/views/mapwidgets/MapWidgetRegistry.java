@@ -1,9 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -12,6 +10,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -29,12 +28,13 @@ import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
-import net.osmand.plus.widgets.IconPopupMenu;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -530,14 +530,8 @@ public class MapWidgetRegistry {
 								return false;
 							}
 							View textWrapper = view.findViewById(R.id.text_wrapper);
-							IconPopupMenu popup = new IconPopupMenu(view.getContext(), textWrapper);
-							MenuInflater inflater = popup.getMenuInflater();
-							final Menu menu = popup.getMenu();
-							inflater.inflate(R.menu.widget_visibility_menu, menu);
+							List<SimplePopUpMenuItem> items = new ArrayList<>();
 							UiUtilities ic = app.getUIUtilities();
-							menu.findItem(R.id.action_show).setIcon(ic.getThemedIcon(R.drawable.ic_action_view));
-							menu.findItem(R.id.action_hide).setIcon(ic.getThemedIcon(R.drawable.ic_action_hide));
-							menu.findItem(R.id.action_collapse).setIcon(ic.getThemedIcon(R.drawable.ic_action_widget_collapse));
 
 							final int[] menuIconIds = r.getDrawableMenuIds();
 							final int[] menuTitleIds = r.getMessageIds();
@@ -549,57 +543,64 @@ public class MapWidgetRegistry {
 								for (int i = 0; i < menuIconIds.length; i++) {
 									int iconId = menuIconIds[i];
 									int titleId = menuTitleIds[i];
-									int id = menuItemIds[i];
-									MenuItem menuItem = menu.add(R.id.single_selection_group, id, i, titleId)
-											.setChecked(id == checkedId);
-									menuItem.setIcon(menuItem.isChecked() && selected
-											? ic.getIcon(iconId, currentModeColorRes) : ic.getThemedIcon(iconId));
+									final int id = menuItemIds[i];
+									boolean isChecked = id == checkedId;
+									String title = app.getString(titleId);
+									Drawable icon = isChecked && selected ? ic.getIcon(iconId, currentModeColorRes) : ic.getThemedIcon(iconId);
+									items.add(new SimplePopUpMenuItem(title, icon, new View.OnClickListener() {
+										@Override
+										public void onClick(View v) {
+											r.changeState(id);
+											MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+											if (mil != null) {
+												mil.recreateControls();
+											}
+											ContextMenuItem item = adapter.getItem(pos);
+											item.setIcon(r.getDrawableMenu());
+											if (r.getMessage() != null) {
+												item.setTitle(r.getMessage());
+											} else {
+												item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
+											}
+											adapter.notifyDataSetChanged();
+										}
+									}, isChecked));
 								}
-								menu.setGroupCheckable(R.id.single_selection_group, true, true);
-								menu.setGroupVisible(R.id.single_selection_group, true);
 							}
 
-							popup.setOnMenuItemClickListener(
-									new IconPopupMenu.OnMenuItemClickListener() {
+							// show
+							items.add(new SimplePopUpMenuItem(
+									app.getString(R.string.shared_string_show),
+									ic.getThemedIcon(R.drawable.ic_action_view),
+									new View.OnClickListener() {
 										@Override
-										public boolean onMenuItemClick(MenuItem menuItem) {
-
-											int i = menuItem.getItemId();
-											if (i == R.id.action_show) {
-												setVisibility(adapter, pos, true, false);
-												return true;
-											} else if (i == R.id.action_hide) {
-												setVisibility(adapter, pos, false, false);
-												return true;
-											} else if (i == R.id.action_collapse) {
-												setVisibility(adapter, pos, true, true);
-												return true;
-											} else {
-												if (menuItemIds != null) {
-													for (int menuItemId : menuItemIds) {
-														if (menuItem.getItemId() == menuItemId) {
-															r.changeState(menuItemId);
-															MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-															if (mil != null) {
-																mil.recreateControls();
-															}
-															ContextMenuItem item = adapter.getItem(pos);
-															item.setIcon(r.getDrawableMenu());
-															if (r.getMessage() != null) {
-																item.setTitle(r.getMessage());
-															} else {
-																item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
-															}
-															adapter.notifyDataSetChanged();
-															return true;
-														}
-													}
-												}
-											}
-											return false;
+										public void onClick(View v) {
+											setVisibility(adapter, pos, true, false);
 										}
-									});
-							popup.show();
+									}));
+
+							// hide
+							items.add(new SimplePopUpMenuItem(
+									app.getString(R.string.shared_string_hide),
+									ic.getThemedIcon(R.drawable.ic_action_hide),
+									new View.OnClickListener() {
+										@Override
+										public void onClick(View v) {
+											setVisibility(adapter, pos, false, false);
+										}
+									}));
+
+							// collapse
+							items.add(new SimplePopUpMenuItem(
+									app.getString(R.string.shared_string_collapse),
+									ic.getThemedIcon(R.drawable.ic_action_widget_collapse),
+									new View.OnClickListener() {
+										@Override
+										public void onClick(View v) {
+											setVisibility(adapter, pos, true, true);
+										}
+									}));
+							UiUtilities.showPopUpMenu(textWrapper, items);
 							return false;
 						}
 
