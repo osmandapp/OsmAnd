@@ -72,6 +72,7 @@ import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.measurementtool.command.ReversePointsCommand;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.measurementtool.command.SplitPointsCommand;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -108,7 +109,8 @@ import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCo
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
-		SaveAsNewTrackFragmentListener, MapControlsLayer.MapControlsThemeInfoProvider {
+		SaveAsNewTrackFragmentListener, MapControlsLayer.MapControlsThemeInfoProvider,
+		RouteOptionsBottomSheet.OnAppModeConfiguredCallback {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -534,7 +536,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		configBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				RouteOptionsBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
+				RouteOptionsBottomSheet.showInstance(
+						mapActivity, MeasurementToolFragment.this, DialogMode.PLAN_ROUTE,
 						editingCtx.getAppMode().getStringKey());
 			}
 		});
@@ -1099,7 +1102,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		updateDistancePointsText();
 	}
 
-	public void onConfigureProfileChange() {
+	@Override
+	public void onAppModeConfigured() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		editingCtx.getCommandManager().execute(new ChangeProfileConfigCommand(measurementLayer));
 		updateUndoRedoButton(false, redoBtn);

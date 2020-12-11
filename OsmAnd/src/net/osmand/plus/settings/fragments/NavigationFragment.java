@@ -5,11 +5,13 @@ import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -37,7 +39,7 @@ import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.IS
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
-import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.PLANE_ROUTE;
+import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DIALOG_MODE_KEY;
 
 public class NavigationFragment extends BaseSettingsFragment {
 
@@ -53,24 +55,31 @@ public class NavigationFragment extends BaseSettingsFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		routingProfileDataObjects = getRoutingProfiles(app);
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+		setupOnBackPressedCallback();
+	}
+
+	private void setupOnBackPressedCallback() {
+		OnBackPressedCallback callback = new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
+				MapActivity mapActivity = getMapActivity();
 				Bundle args = getArguments();
-				if (args != null && args.getBoolean(PLANE_ROUTE, false)) {
-					RouteOptionsBottomSheet.showInstance(getMapActivity().getSupportFragmentManager(),
-							getSelectedAppMode().getStringKey());
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						Fragment fragment = mapActivity.getSupportFragmentManager()
-								.findFragmentByTag(MeasurementToolFragment.TAG);
+				if (mapActivity != null && args != null) {
+					String dialogModeName = args.getString(DIALOG_MODE_KEY, null);
+					if (DialogMode.getModeByName(dialogModeName) == DialogMode.PLAN_ROUTE) {
+						FragmentManager fm = mapActivity.getSupportFragmentManager();
+						Fragment fragment = fm.findFragmentByTag(MeasurementToolFragment.TAG);
 						if (fragment != null) {
+							RouteOptionsBottomSheet.showInstance(
+									mapActivity, fragment, DialogMode.PLAN_ROUTE,
+									getSelectedAppMode().getStringKey());
 							((MeasurementToolFragment) fragment).getOnBackPressedCallback().setEnabled(true);
 						}
 					}
 				}
 				dismiss();
 			}
-		});
+		};
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 	}
 
 	@Override
