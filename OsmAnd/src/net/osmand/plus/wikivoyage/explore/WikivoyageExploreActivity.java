@@ -225,7 +225,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	@Nullable
-	private SavedArticlesTabFragment getSavedArticlesTabFragment() {
+	public SavedArticlesTabFragment getSavedArticlesTabFragment() {
 		for (WeakReference<Fragment> ref : fragments) {
 			Fragment f = ref.get();
 			if (f instanceof SavedArticlesTabFragment) {
@@ -355,6 +355,13 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	public void onTabFragmentResume(Fragment fragment) {
 		if (updateNeeded) {
 			updateFragments();
+		}
+	}
+
+	public void updateSavedArticles() {
+		SavedArticlesTabFragment fragment = getSavedArticlesTabFragment();
+		if(fragment!=null){
+			fragment.savedArticlesUpdated();
 		}
 	}
 

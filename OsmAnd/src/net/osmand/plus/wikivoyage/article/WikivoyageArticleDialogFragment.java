@@ -1,6 +1,7 @@
 package net.osmand.plus.wikivoyage.article;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -43,6 +44,7 @@ import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -247,6 +249,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 						} else {
 							getMyApplication().getTravelHelper().createGpxFile(article);
 							helper.addArticleToSaved(article);
+						}
+						Activity activity = getActivity();
+						if (activity instanceof WikivoyageExploreActivity) {
+							((WikivoyageExploreActivity) activity).updateSavedArticles();
 						}
 						updateSaveButton();
 					}

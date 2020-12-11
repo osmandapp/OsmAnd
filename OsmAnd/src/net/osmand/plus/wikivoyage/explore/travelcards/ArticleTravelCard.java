@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+import net.osmand.plus.wikivoyage.explore.SavedArticlesTabFragment;
 
 public class ArticleTravelCard extends BaseTravelCard {
 
@@ -106,10 +108,19 @@ public class ArticleTravelCard extends BaseTravelCard {
 							app.getTravelHelper().createGpxFile(article);
 							helper.addArticleToSaved(article);
 						}
+						updateSavedArticles();
 						updateSaveButton(holder);
 					}
 				}
 			});
+		}
+	}
+
+	void updateSavedArticles() {
+		for (Fragment fragment : fragmentManager.getFragments()) {
+			if (fragment instanceof SavedArticlesTabFragment) {
+				((SavedArticlesTabFragment) fragment).savedArticlesUpdated();
+			}
 		}
 	}
 
