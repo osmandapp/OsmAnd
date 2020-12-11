@@ -138,7 +138,7 @@
     <string name="poi_additional_type">נוסף</string>
     <string name="poi_payment_type">סוג תשלום</string>
     <string name="poi_bicycle_service">שירות אופניים</string>
-    <string name="poi_fire_hydrant_water_source">מקור מים</string>
+    <string name="poi_water_source">מקור מים</string>
     <string name="poi_service_general">שירות</string>
     <string name="poi_subway_station_filter">תחנת רכבת תחתית</string>
     <string name="poi_pump">משאבה</string>

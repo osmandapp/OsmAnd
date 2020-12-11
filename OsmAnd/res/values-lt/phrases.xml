@@ -119,7 +119,7 @@
     <string name="poi_bicycle_service">Dviračių aptarnavimas</string>
     <string name="poi_shoes_type">Tipas</string>
     <string name="poi_fire_hydrant_type">Tipas</string>
-    <string name="poi_fire_hydrant_water_source">Vandens šaltinis</string>
+    <string name="poi_water_source">Vandens šaltinis</string>
     <string name="poi_payment_toll_type">Mokėjimo tipas</string>
     <string name="poi_highway_crossing_type">Tipas</string>
     <string name="poi_service_general">Paslauga</string>

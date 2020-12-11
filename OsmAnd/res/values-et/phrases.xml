@@ -145,7 +145,7 @@
     <string name="poi_shoes_type">Liik</string>
     <string name="poi_fire_hydrant_type">Liik</string>
     <string name="poi_fire_hydrant_position">Asukoht</string>
-    <string name="poi_fire_hydrant_water_source">Vee allikas</string>
+    <string name="poi_water_source">Vee allikas</string>
     <string name="poi_payment_toll_type">Makseviis</string>
     <string name="poi_traffic_signals_sound">Heli</string>
     <string name="poi_highway_crossing_type">Liik</string>
@@ -2725,9 +2725,9 @@
     <string name="poi_fire_hydrant_position_street">Tänav</string>
     <string name="poi_fire_hydrant_position_underground">Maa-alune</string>
     <string name="poi_fire_hydrant_style_wsh">Hüdrandi liik: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Veetrassil</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Tiik</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Oja</string>
+    <string name="poi_water_source_main">Veetrassil</string>
+    <string name="poi_water_source_pond">Tiik</string>
+    <string name="poi_water_source_stream">Oja</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Veemahuti</string>
     <string name="poi_in_service_yes">Kasutuses: jah</string>
     <string name="poi_street_cabinet_power">Kapi liik: toide</string>
@@ -3810,7 +3810,7 @@
     <string name="poi_pump_status_missing_beam">Pumba olek: kiir puudub</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Imatav</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Hüdrant</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Pinnavesi</string>
+    <string name="poi_water_source_groundwater">Pinnavesi</string>
     <string name="poi_fire_hydrant_type_pipe">Toru</string>
     <string name="poi_traffic_signals_vibration">Värin</string>
     <string name="poi_fire_hydrant_pressure_filter">Surve</string>

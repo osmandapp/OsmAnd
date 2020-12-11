@@ -12,7 +12,7 @@
     <string name="poi_shoes_type">Tipu de calzáu</string>
     <string name="poi_fire_hydrant_type">Tipu</string>
     <string name="poi_fire_hydrant_position">Posición</string>
-    <string name="poi_fire_hydrant_water_source">Orixe del agua</string>
+    <string name="poi_water_source">Orixe del agua</string>
     <string name="poi_payment_toll_type">Tipu de pagu</string>
     <string name="poi_traffic_signals_sound">Soníu</string>
     <string name="poi_highway_crossing_type">Tipu</string>

@@ -2624,9 +2624,9 @@
     <string name="poi_fire_hydrant_position_street">Straße</string>
     <string name="poi_fire_hydrant_position_underground">Unterflur</string>
     <string name="poi_fire_hydrant_style_wsh">Hydrantart: Schacht</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Haupt</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Teich</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Wasserlauf</string>
+    <string name="poi_water_source_main">Haupt</string>
+    <string name="poi_water_source_pond">Teich</string>
+    <string name="poi_water_source_stream">Wasserlauf</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Zisterne</string>
     <string name="poi_in_service_yes">Im Dienst: ja</string>
     <string name="poi_street_cabinet_power">Kasten-Typ: Strom</string>
@@ -2779,7 +2779,7 @@
     <string name="poi_shoes_type">Art</string>
     <string name="poi_fire_hydrant_type">Art</string>
     <string name="poi_fire_hydrant_position">Position</string>
-    <string name="poi_fire_hydrant_water_source">Wasserquelle</string>
+    <string name="poi_water_source">Wasserquelle</string>
     <string name="poi_payment_toll_type">Zahlungsart</string>
     <string name="poi_highway_crossing_type">Art</string>
     <string name="poi_tactile_paving">Ertastbares Pflaster</string>
@@ -3823,7 +3823,7 @@
     <string name="poi_internet_access_fee_customers">Internetzugang: Kunden</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Ansaugung</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Unter Druck</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Grundwasser</string>
+    <string name="poi_water_source_groundwater">Grundwasser</string>
     <string name="poi_fire_hydrant_type_pipe">Rohr</string>
     <string name="poi_fire_hydrant_pressure_filter">Druck</string>
     <string name="poi_pump_status_missing_beam">Pumpenzustand: fehlender Arm</string>

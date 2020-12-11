@@ -1754,9 +1754,9 @@
     <string name="poi_fire_hydrant_position_street">Na ulici</string>
     <string name="poi_fire_hydrant_position_underground">Pod zemou</string>
     <string name="poi_fire_hydrant_style_wsh">Vzhľad hydrantu: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Vodovod</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Rybník</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Potok</string>
+    <string name="poi_water_source_main">Vodovod</string>
+    <string name="poi_water_source_pond">Rybník</string>
+    <string name="poi_water_source_stream">Potok</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_material_wood">Materiál: drevo</string>
     <string name="poi_material_metal">Materiál: kov</string>
@@ -1914,7 +1914,7 @@
     <string name="poi_shoes_type">Typ</string>
     <string name="poi_fire_hydrant_type">Typ</string>
     <string name="poi_fire_hydrant_position">Umiestnenie</string>
-    <string name="poi_fire_hydrant_water_source">Zdroj vody</string>
+    <string name="poi_water_source">Zdroj vody</string>
     <string name="poi_payment_toll_type">Spôsob platby</string>
     <string name="poi_traffic_signals_sound">Zvuk</string>
     <string name="poi_highway_crossing_type">Typ</string>
@@ -3630,7 +3630,7 @@
     <string name="poi_drinking_water_refill">Doplnenie pitnej vody</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Nasávanie</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pod tlakom</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Spodná voda</string>
+    <string name="poi_water_source_groundwater">Spodná voda</string>
     <string name="poi_fire_hydrant_type_pipe">Potrubie</string>
     <string name="poi_drinking_water_refill_network">Sieť doplnenia pitnej vody</string>
     <string name="poi_drinking_water_refill_no">Doplnenie pitnej vody: nie</string>

@@ -2301,9 +2301,9 @@
     <string name="poi_fire_hydrant_position_street">Ulica</string>
     <string name="poi_fire_hydrant_position_underground">Pod ziemią</string>
     <string name="poi_fire_hydrant_style_wsh">Typ hydrantu: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Sieć</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Staw</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Strumień</string>
+    <string name="poi_water_source_main">Sieć</string>
+    <string name="poi_water_source_pond">Staw</string>
+    <string name="poi_water_source_stream">Strumień</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Cysterna</string>
     <string name="poi_in_service_yes">Działa: tak</string>
     <string name="poi_military_checkpoint">Wojskowy punkt kontroli</string>
@@ -2775,7 +2775,7 @@
     <string name="poi_shoes_type">Obuwie</string>
     <string name="poi_fire_hydrant_type">Rodzaj</string>
     <string name="poi_fire_hydrant_position">Położenie</string>
-    <string name="poi_fire_hydrant_water_source">Źródło wody</string>
+    <string name="poi_water_source">Źródło wody</string>
     <string name="poi_payment_toll_type">Metoda płatności</string>
     <string name="poi_traffic_signals_sound">Sygnał dźwiękowy</string>
     <string name="poi_highway_crossing_type">Rodzaj</string>
@@ -3820,7 +3820,7 @@
     <string name="poi_internet_access_fee_customers">Dostęp do Internetu: klienci</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Ssanie</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pod ciśnieniem</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Woda podziemna</string>
+    <string name="poi_water_source_groundwater">Woda podziemna</string>
     <string name="poi_fire_hydrant_type_pipe">Rura</string>
     <string name="poi_fire_hydrant_pressure_filter">Ciśnienie</string>
     <string name="poi_traffic_signals_arrow">Strzałka</string>

@@ -1007,7 +1007,7 @@
     <string name="poi_shoes_type">Tür</string>
     <string name="poi_fire_hydrant_type">Tür</string>
     <string name="poi_fire_hydrant_position">Konum</string>
-    <string name="poi_fire_hydrant_water_source">Su kaynağı</string>
+    <string name="poi_water_source">Su kaynağı</string>
     <string name="poi_payment_toll_type">Ödeme türü</string>
     <string name="poi_traffic_signals_sound">Ses</string>
     <string name="poi_highway_crossing_type">Tür</string>
@@ -2999,7 +2999,7 @@
     <string name="poi_bandy">Bandy</string>
     <string name="poi_street_cabinet">Sokak dolabı</string>
     <string name="poi_firepit">Ateş çukuru</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Ana</string>
+    <string name="poi_water_source_main">Ana</string>
     <string name="poi_fire_hydrant_style_wsh">Musluk tarzı: wsh</string>
     <string name="poi_fire_hydrant_position_underground">Yer altı</string>
     <string name="poi_fire_hydrant_position_street">Sokak</string>
@@ -3125,11 +3125,11 @@
     <string name="poi_display_yes">Ekran: evet</string>
     <string name="poi_dispensing_yes">Evet</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Su deposu</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Dere</string>
+    <string name="poi_water_source_stream">Dere</string>
     <string name="poi_fire_hydrant_type_dry_barrel">Kuru varil</string>
     <string name="poi_fire_hydrant_type_pillar">Sütun</string>
     <string name="poi_fire_hydrant_type_pond">Gölet</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Gölet</string>
+    <string name="poi_water_source_pond">Gölet</string>
     <string name="poi_consulate_filter">Konsolosluk</string>
     <string name="poi_embassy_filter">Büyük elçilik</string>
     <string name="poi_diplomatic_services_citizen_services_filter">Vatandaş hizmetleri</string>
