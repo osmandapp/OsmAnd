@@ -506,6 +506,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					mainActionItems.clear();
 				}
 				instantiateContextMenuAdapter();
+				initSavedIds(appMode);
 				initMainActionsIds(appMode);
 				rearrangeAdapter.updateItems(getAdapterItems());
 			}

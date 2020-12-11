@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
+
 public class ContextMenuItemsSettings implements Serializable {
 
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuItemsSettings.class.getName());
@@ -98,5 +100,11 @@ public class ContextMenuItemsSettings implements Serializable {
 
 	public List<String> getOrderIds() {
 		return Collections.unmodifiableList(orderIds);
+	}
+
+	public static ContextMenuItemsSettings getDefaultInstanceForDrawer() {
+		ArrayList<String> hiddenByDefault = new ArrayList<>();
+		hiddenByDefault.add(DRAWER_DASHBOARD_ID);
+		return new ContextMenuItemsSettings(hiddenByDefault, new ArrayList<String>());
 	}
 }
