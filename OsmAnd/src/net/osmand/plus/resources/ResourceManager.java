@@ -19,8 +19,10 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
 import net.osmand.data.RotatedTileBox;
@@ -634,6 +636,8 @@ public class ResourceManager {
 		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		if (Version.isPaidVersion(context)) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
+					IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, files);
 		}
 		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isSubscribedToLiveUpdates(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
@@ -1155,6 +1159,27 @@ public class ResourceManager {
 			}
 		});
 		return maps != null && maps.length > 0;
+	}
+
+	public BinaryMapIndexReader[] getTravelFiles() {
+		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
+		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
+		for (BinaryMapReaderResource res : fileReaders) {
+			if (!res.filename.toString().toLowerCase().contains(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+				continue;
+			}
+			BinaryMapIndexReader index = res.getReader(BinaryMapReaderResourceType.POI);
+			for (BinaryIndexPart p : index.getIndexes()) {
+				if (p instanceof BinaryMapPoiReaderAdapter.PoiRegion) {
+					readers.add(index);
+				}
+			}
+		}
+		return readers.toArray(new BinaryMapIndexReader[0]);
+	}
+
+	public boolean hasTravelObfFile() {
+		return isMapsPresentInDirectory(IndexConstants.WIKIVOYAGE_INDEX_DIR);
 	}
 
 	public Map<String, String> getBackupIndexes(Map<String, String> map) {
