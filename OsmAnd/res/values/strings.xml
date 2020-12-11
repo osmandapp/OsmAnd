@@ -1696,7 +1696,7 @@
     <string name="access_direction_haptic_feedback_descr">Indicate target point direction by vibration.</string>
     <string name="use_osm_live_routing_description">Enable navigation for OsmAnd Live changes.</string>
     <string name="use_osm_live_routing">OsmAnd Live navigation</string>
-    <string name="access_no_destination">Destination not set</string>
+    <string name="access_no_destination">Accessibility plugin: Destination not set</string>
     <string name="map_widget_magnetic_bearing">Magnetic bearing</string>
     <string name="map_widget_bearing">Relative bearing</string>
     <string name="access_disable_offroute_recalc">No route recalculation after leaving it</string>
