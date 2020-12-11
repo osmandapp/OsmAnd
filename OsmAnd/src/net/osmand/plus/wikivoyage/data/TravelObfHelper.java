@@ -35,10 +35,10 @@ public class TravelObfHelper implements TravelHelper {
 	private final OsmandApplication app;
 
 	private File selectedTravelBook = null;
-	private List<File> existingTravelBooks = new ArrayList<>();
+	private final List<File> existingTravelBooks = new ArrayList<>();
 	private List<TravelArticle> popularArticles = new ArrayList<>();
-	private Map<String, TravelArticle> cachedArticles;
-	private TravelLocalDataHelper localDataHelper;
+	private final Map<String, TravelArticle> cachedArticles;
+	private final TravelLocalDataHelper localDataHelper;
 
 	public TravelObfHelper(OsmandApplication app) {
 		this.app = app;
@@ -264,16 +264,20 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public String getArticleId(String title, String lang) {
+		for (TravelArticle article : popularArticles) {
+			if (article.getTitle().equals(title)) {
+				return article.getRouteId();
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public ArrayList<String> getArticleLangs(String articleId) {
+	public ArrayList<String> getArticleLangs(String routeId) {
 		ArrayList<String> res = new ArrayList<>();
 		res.add("en");
-
 		for (TravelArticle article : popularArticles) {
-			if (article.getRouteId() == articleId) {
+			if (article.getRouteId().equals(routeId)) {
 				res.add(article.getLang());
 			}
 		}

@@ -36,7 +36,7 @@ public interface TravelHelper {
 
 	String getArticleId(String title, String lang);
 
-	ArrayList<String> getArticleLangs(String articleId);
+	ArrayList<String> getArticleLangs(String routeId);
 
 	String getGPXName(TravelArticle article);
 
