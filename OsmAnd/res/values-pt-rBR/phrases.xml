@@ -3884,4 +3884,6 @@
     <string name="poi_nurse">Enfermaria</string>
     <string name="poi_mobile_money_agent">Agente de dinheiro móvel</string>
     <string name="poi_lifeguard_base">Base do salva-vidas</string>
+    <string name="poi_vaccination_covid19">Vacinação: COVID19</string>
+    <string name="poi_health_specialty_vaccination_yes">Vacinação</string>
 </resources>
