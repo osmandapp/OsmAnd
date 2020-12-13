@@ -2272,7 +2272,7 @@
     <string name="quick_action_fav_name_descr">La stå tomt for å bruke adressen eller stedsnavnet.</string>
     <string name="quick_action_bug_descr">Denne meldingen inkluderes i kommentarfeltet.</string>
     <string name="mappilary_no_internet_desc">Bilder fra Mapillary er kun tilgjengelig når tilkoblet internett.</string>
-    <string name="hillshade_menu_download_descr">Last ned kart for \'Relieffskyggeoverlegg\' for å vise vertikal skyggelegging.</string>
+    <string name="hillshade_menu_download_descr">Last ned overleggskartet for \'Relieffskygge\' for å vise vertikal skyggelegging.</string>
     <string name="hillshade_purchase_header">Installer programtillegget \'Koter\' for å vise graderte vertikale områder.</string>
     <string name="enter_new_name">Oppfør nytt navn</string>
     <string name="shared_string_back">Tilbake</string>
@@ -3840,7 +3840,7 @@
     <string name="screen_timeout_descr">Hvis «%1$s» er på, vil aktivitetstiden avhenge av den.</string>
     <string name="routing_attr_length_description">Angi kjøretøylengde som tillates på rutene.</string>
     <string name="routing_attr_length_name">Lengdebegrensning</string>
-    <string name="plan_route_exit_dialog_descr">Er du sikker på at du ønsker å forkaste alle endringer i planlagt rute ved å lukke den\?</string>
+    <string name="plan_route_exit_dialog_descr">Er du sikker på at du vil forkaste alle endringer i den planlagte ruten\?</string>
     <string name="navigate_to_track_descr">Naviger fra min posisjon til sporet</string>
     <string name="use_native_pt">Innebygd utvikling for offentlig transport</string>
     <string name="use_native_pt_desc">Bytt til Java (sikker) ruteberegning for offentlig transport</string>
@@ -3895,7 +3895,7 @@
     <string name="send_files_to_openstreetmap">Send GPX-fil til OpenStreetMap</string>
     <string name="icon_group_amenity">Fasilitet</string>
     <string name="markers_history">Markørhistorikk</string>
-    <string name="disable_recording_once_app_killed_descrp">Pauser spor-logging når programmet drepes (via nylige programmer). (OsmAnd-bakgrunnsindikatoren forsvinner fra Android-merknadsfeltet.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Sporlogging vil settes i pausemodus når appen blir avsluttet (via nylige apper). (OsmAnd-bakgrunnsindikasjonen forsvinner fra Android-varslingslinjen.)</string>
     <string name="monitoring_control_start">START</string>
     <string name="osm_edit_close_note">Lukk OSM-notat</string>
     <string name="osm_edit_comment_note">Kommenter OSM-notat</string>
