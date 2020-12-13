@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,7 +33,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -60,12 +58,7 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import gnu.trove.map.hash.TLongObjectHashMap;
-
-import static net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 
 public class UiUtilities {
 
@@ -767,60 +760,5 @@ public class UiUtilities {
 			setSpan(spannable, new CustomTypefaceSpan(typeface), text, s);
 		}
 		return spannable;
-	}
-
-	public static ListPopupWindow createListPopupWindow(Context themedCtx,
-	                                                    View v, int minWidth,
-	                                                    List<SimplePopUpMenuItem> items,
-	                                                    final AdapterView.OnItemClickListener listener) {
-		int contentPadding = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding);
-		int contentPaddingHalf = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
-		int defaultListTextSize = themedCtx.getResources().getDimensionPixelSize(R.dimen.default_list_text_size);
-		int standardIconSize = themedCtx.getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
-		boolean hasIcon = false;
-
-		List<String> titles = new ArrayList<>();
-		for (SimplePopUpMenuItem item : items) {
-			titles.add(String.valueOf(item.getTitle()));
-			hasIcon = hasIcon || item.getIcon() != null;
-		}
-		float itemWidth = AndroidUtils.getTextMaxWidth(defaultListTextSize, titles) + contentPadding * 2;
-		float iconPartWidth = hasIcon ? standardIconSize + contentPaddingHalf : 0;
-		int totalWidth = (int) (Math.max(itemWidth, minWidth) + iconPartWidth);
-
-		SimplePopUpMenuItemAdapter adapter =
-				new SimplePopUpMenuItemAdapter(themedCtx, R.layout.popup_menu_item, items);
-		final ListPopupWindow listPopupWindow = new ListPopupWindow(themedCtx);
-		listPopupWindow.setAnchorView(v);
-		listPopupWindow.setContentWidth((int) (totalWidth));
-		listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
-		listPopupWindow.setVerticalOffset(-v.getHeight() + contentPaddingHalf);
-		listPopupWindow.setModal(true);
-		listPopupWindow.setAdapter(adapter);
-		listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (listener != null) {
-					listener.onItemClick(parent, view, position, id);
-				}
-				listPopupWindow.dismiss();
-			}
-		});
-		return listPopupWindow;
-	}
-
-	public static void showPopUpMenu(View v, final List<SimplePopUpMenuItem> items) {
-		UiUtilities.createListPopupWindow(
-				v.getContext(), v, v.getWidth(), items, new AdapterView.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						if (position < items.size()) {
-							View.OnClickListener listener = items.get(position).getOnClickListener();
-							if (listener != null) {
-								listener.onClick(view);
-							}
-						}
-					}
-				}).show();
 	}
 }

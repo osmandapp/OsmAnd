@@ -9,8 +9,8 @@ import android.widget.LinearLayout;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -28,6 +28,9 @@ import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuHelper.PopUpMenuWidthType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -513,6 +516,7 @@ public class MapWidgetRegistry {
 			final String desc = mapActivity.getString(R.string.shared_string_collapse);
 			final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			final int currentModeColorRes = mode.getIconColorInfo().getColor(nightMode);
+			final int currentModeColor = ContextCompat.getColor(app, currentModeColorRes);
 			ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 					.setIcon(r.getDrawableMenu())
 					.setSelected(selected)
@@ -530,7 +534,7 @@ public class MapWidgetRegistry {
 								return false;
 							}
 							View textWrapper = view.findViewById(R.id.text_wrapper);
-							List<SimplePopUpMenuItem> items = new ArrayList<>();
+							List<PopUpMenuItem> items = new ArrayList<>();
 							UiUtilities ic = app.getUIUtilities();
 
 							final int[] menuIconIds = r.getDrawableMenuIds();
@@ -547,60 +551,73 @@ public class MapWidgetRegistry {
 									boolean isChecked = id == checkedId;
 									String title = app.getString(titleId);
 									Drawable icon = isChecked && selected ? ic.getIcon(iconId, currentModeColorRes) : ic.getThemedIcon(iconId);
-									items.add(new SimplePopUpMenuItem(title, icon, new View.OnClickListener() {
-										@Override
-										public void onClick(View v) {
-											r.changeState(id);
-											MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-											if (mil != null) {
-												mil.recreateControls();
-											}
-											ContextMenuItem item = adapter.getItem(pos);
-											item.setIcon(r.getDrawableMenu());
-											if (r.getMessage() != null) {
-												item.setTitle(r.getMessage());
-											} else {
-												item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
-											}
-											adapter.notifyDataSetChanged();
-										}
-									}, isChecked));
+									items.add(new PopUpMenuItem.Builder(app)
+											.setTitle(title)
+											.setIcon(icon)
+											.setOnClickListener(new View.OnClickListener() {
+												@Override
+												public void onClick(View v) {
+													r.changeState(id);
+													MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+													if (mil != null) {
+														mil.recreateControls();
+													}
+													ContextMenuItem item = adapter.getItem(pos);
+													item.setIcon(r.getDrawableMenu());
+													if (r.getMessage() != null) {
+														item.setTitle(r.getMessage());
+													} else {
+														item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
+													}
+													adapter.notifyDataSetChanged();
+												}
+											})
+											.showCompoundBtn(currentModeColor)
+											.setSelected(isChecked)
+											.create());
 								}
 							}
 
 							// show
-							items.add(new SimplePopUpMenuItem(
-									app.getString(R.string.shared_string_show),
-									ic.getThemedIcon(R.drawable.ic_action_view),
-									new View.OnClickListener() {
+							items.add(new PopUpMenuItem.Builder(app)
+									.setTitleId(R.string.shared_string_show)
+									.setIcon(ic.getThemedIcon(R.drawable.ic_action_view))
+									.setOnClickListener(new View.OnClickListener() {
 										@Override
 										public void onClick(View v) {
 											setVisibility(adapter, pos, true, false);
 										}
-									}));
+									})
+									.create());
 
 							// hide
-							items.add(new SimplePopUpMenuItem(
-									app.getString(R.string.shared_string_hide),
-									ic.getThemedIcon(R.drawable.ic_action_hide),
-									new View.OnClickListener() {
+							items.add(new PopUpMenuItem.Builder(app)
+									.setTitleId(R.string.shared_string_hide)
+									.setIcon(ic.getThemedIcon(R.drawable.ic_action_hide))
+									.setOnClickListener(new View.OnClickListener() {
 										@Override
 										public void onClick(View v) {
 											setVisibility(adapter, pos, false, false);
 										}
-									}));
+									})
+									.create());
 
 							// collapse
-							items.add(new SimplePopUpMenuItem(
-									app.getString(R.string.shared_string_collapse),
-									ic.getThemedIcon(R.drawable.ic_action_widget_collapse),
-									new View.OnClickListener() {
+							items.add(new PopUpMenuItem.Builder(app)
+									.setTitleId(R.string.shared_string_collapse)
+									.setIcon(ic.getThemedIcon(R.drawable.ic_action_widget_collapse))
+									.setOnClickListener(new View.OnClickListener() {
 										@Override
 										public void onClick(View v) {
 											setVisibility(adapter, pos, true, true);
 										}
-									}));
-							UiUtilities.showPopUpMenu(textWrapper, items);
+									})
+									.create());
+
+							new PopUpMenuHelper.Builder(textWrapper, items, nightMode)
+									.setWidthType(PopUpMenuWidthType.STANDARD)
+									.show();
+
 							return false;
 						}
 
