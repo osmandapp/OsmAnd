@@ -3419,7 +3419,7 @@
     <string name="monitoring_min_speed_descr_side_effect">اعراض جانبية: سيفقد المسار الخاص بك جميع الأقسام التي لم يتحقق فيها معيار الحد الأدنى للسرعة (على سبيل المثال ، حيث تدفع دراجتك أعلى تل شديد الانحدار). أيضا ، لن تكون هناك معلومات حول فترات الراحة ، مثل الاستراحات. هذا له تأثيرات على أي تحليل أو مرحلة ما بعد المعالجة ، مثل عند محاولة تحديد المدة الإجمالية لرحلتك ، أو وقت الحركة ، أو متوسط سرعتك.</string>
     <string name="tracks_view_descr">المسارات المسجلة الخاصة بك هي في %1$s، أو مجلد أوسماند.</string>
     <string name="multimedia_notes_view_descr">ملاحظات OSM موجودة في%1$s.</string>
-    <string name="osm_edits_view_descr">يمكنك عرض جميع التعديلات التي لم يتم رفعها بعد أو أخطاء OSM في %1$s. النقاط التي تم رفعها لا تظهر في OsmAnd.</string>
+    <string name="osm_edits_view_descr">عرض كل التعديلات التي لم يتم تحميلها أو أخطاء OSM في %1$s. التغييرات التي تم رفعها فعلا لن تظهر بعد الآن.</string>
     <string name="monitoring_min_speed_descr">مرشح قطع سرعة منخفضة لعدم تسجيل نقاط أقل من سرعة معينة. وهذا قد يجعل المسارات المسجلة تبدو أكثر سلاسة عند عرضها على الخريطة.</string>
     <string name="monitoring_min_speed_descr_recommendation">التوصية: حاول استخدام كشف الحركة عبر مرشح الحد الأدنى للإزاحة للتسجيل (B) أولاً ، فقد ينتج عنه نتائج أفضل ، ويستهلك بيانات أقل. إذا استمرت المسارات الخاصة بك مزعجة عند السرعات المنخفضة ، فجرب القيم غير الصفرية هنا. يرجى ملاحظة أن بعض القياسات قد لا تبلغ عن أي قيمة سرعة على الإطلاق (بعض الطرق المستندة إلى الشبكة) ، وفي هذه الحالة لن تسجل أي شيء.</string>
     <string name="monitoring_min_speed_descr_remark">ملاحظة: سرعة &gt; 0 الاختيار: معظم شرائح GPS تبلغ عن قيمة السرعة فقط إذا كانت الخوارزمية تحدد الحركة أوالسكون. وبالتالي باستخدام إعدادات&gt; 0 في هذا المرشح يتم كشف عن الحركة من شرائح GPS. ولكن حتى لو لم تتم تصفيتها هنا في وقت التسجيل ، فإننا لا نزال نستخدم هذه الميزة في تحليل GPX لتحديد المسافة المصححة ، أي أن القيمة المعروضة في هذا الحقل هي المسافة المسجلة أثناء الحركة.</string>
@@ -3893,12 +3893,12 @@
     <string name="sort_name_ascending">الاسم: أ – ي</string>
     <string name="start_finish_icons">أيقونات البدء والانتهاء</string>
     <string name="contour_lines_thanks">شكرا لشرائك \"خطوط الكنتور\"</string>
-    <string name="osm_live_payment_desc_hw">رسوم الاشتراك ستفرض كل شهر. يمكنك إلغاء اشتراكك متى أردت عبر Google play.</string>
-    <string name="osm_live_payment_subscription_management_hw">سيتم تحصيل المبلغ على حساب AppGallery الخاص بك عند تأكيد الشراء.
+    <string name="osm_live_payment_desc_hw">يتم احتساب الاشتراك للفترة المحددة. قم بإلغائه في AppGallery في أي وقت تريد.</string>
+    <string name="osm_live_payment_subscription_management_hw">يتم الخصم من حساب AppGallery الخاص بك عند تأكيد الشراء.
 \n
-\nيتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل تاريخ التجديد. سيتم خصم حسابك على فترة التجديد (شهر/ثلاثة أشهر/سنة) فقط في تاريخ التجديد.
+\nيتم تمديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل تاريخ التجديد. سيتم الخصم من الحساب على فترة التجديد (شهر/ ثلاثة أشهر/ سنة) فقط عند تاريخ التجديد.
 \n
-\nيمكنك إدارة وإلغاء الاشتراكات الخاصة بك عن طريق الانتقال إلى إعدادات AppGallery.</string>
+\nيمكنك إدارة وإلغاء الاشتراكات الخاصة بك في إعدادات AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">تجنب الممرات</string>
     <string name="routing_attr_avoid_footways_name">تجنب الممرات</string>
     <string name="what_is_new">ما الجديد</string>
@@ -3936,7 +3936,7 @@
     <string name="mgrs_format_descr">OsmAnd يستخدم MGRS، وهو مشابه لتنسيق UTM NATO .</string>
     <string name="message_you_need_add_two_points_to_show_graphs">تحتاج إلى إضافة نقطتين على الأقل</string>
     <string name="manage_subscription">إدارة الاشتراك</string>
-    <string name="subscription_payment_issue_title">هناك مشكلة في اشتراكك. انتقل إلى إعدادات اشتراك Google Play لإصلاح طريقة الدفع الخاصة بك.</string>
+    <string name="subscription_payment_issue_title">اضغط على الزر لإعداد طريقة دفع على Google Play لإصلاح اشتراكك.</string>
     <string name="subscription_expired_title">انتهت صلاحية اشتراك OsmAnd Live</string>
     <string name="subscription_paused_title">تم إيقاف اشتراك OsmAnd Live مؤقتًا</string>
     <string name="subscription_on_hold_title">اشتراك OsmAnd Live معلق</string>

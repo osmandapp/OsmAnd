@@ -3885,4 +3885,14 @@
     <string name="poi_diplomatic_services_immigrant_visas_filter">Visas pour immigrants</string>
     <string name="poi_diplomatic_services_non_immigrant_visas_filter">Visas pour non-immigrants</string>
     <string name="poi_diplomatic_liaison">Liaison diplomatique</string>
+    <string name="poi_water_source_lake">Lac</string>
+    <string name="poi_water_source_tube_well">Puits tubulaire</string>
+    <string name="poi_water_source_river">Rivière</string>
+    <string name="poi_water_source_well">Puits</string>
+    <string name="poi_water_source_powered_pump">Pompe à eau</string>
+    <string name="poi_water_source_water_works">Ouvrages hydrauliques</string>
+    <string name="poi_water_source_water_tank">Réservoir d\'eau</string>
+    <string name="poi_water_source_tap">Robinet</string>
+    <string name="poi_vaccination_covid19">Vaccination : covid19</string>
+    <string name="poi_health_specialty_vaccination_yes">Vaccination</string>
 </resources>
