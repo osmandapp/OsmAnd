@@ -1541,7 +1541,7 @@
     <string name="routing_attr_height_name">Límite de altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas.</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
-    <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta. Puede usarse para viajes largos.</string>
+    <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta, útil para viajes largos.</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Color por red de afiliación</string>
@@ -3935,9 +3935,9 @@
     <string name="file_already_imported">El archivo ya fue importado en OsmAnd</string>
     <string name="use_two_phase_routing">Usar el algoritmo de navegación A* bifásica</string>
     <string name="shared_string_graph">Gráfico</string>
-    <string name="message_need_calculate_route_before_show_graph">Hay %1$s datos disponibles sólo en los caminos, debes calcular una ruta usando «Ruta entre puntos» para obtenerla.</string>
-    <string name="message_graph_will_be_available_after_recalculation">Espera el recálculo de la ruta.
-\nEl gráfico estará disponible después del recálculo.</string>
+    <string name="message_need_calculate_route_before_show_graph">Hay %1$s datos disponibles sólo en los caminos, calcular una ruta usando «Ruta entre puntos» para ver los gráficos.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Ten paciencia.
+\nEl gráfico estará disponible al recalcular la ruta.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Mapas locales</string>
     <string name="icon_group_amenity">Comodidad</string>
@@ -3951,7 +3951,7 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd usa MGRS, similar al formato UTM de la OTAN.</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Debes añadir al menos dos puntos</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Añadir al menos dos puntos</string>
     <string name="manage_subscription">Gestionar suscripción</string>
     <string name="subscription_payment_issue_title">Hay un problema con la suscripción. Pulsa el botón para ir a los ajustes de la suscripción de Google Play y corregir el método de pago.</string>
     <string name="subscription_expired_title">La suscripción a OsmAnd Live ha caducado</string>
@@ -3996,7 +3996,7 @@
     <string name="add_photos_descr">OsmAnd muestra fotos de varios repositorios:
 \nOpenPlaceReviews (fotos de PDI);
 \nMapillary (imágenes a nivel de calle);
-\nWeb / Wikimedia (fotos de PDI incluidas en los datos de OpenStreetMap).</string>
+\nWeb / Wikimedia (fotos de PDI según datos de OpenStreetMap).</string>
     <string name="app_mode_gap">Separador</string>
     <string name="select_groups_for_import">Marca los grupos que serán importados.</string>
     <string name="select_items_for_import">Marca los elementos que serán importados.</string>
@@ -4006,7 +4006,7 @@
     <string name="select_picture">Elegir imagen</string>
     <string name="lang_de_casual">Alemán (casual)</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="elevation_data">Puedes usar los datos de elevación para considerar el ascenso o descenso de su viaje</string>
+    <string name="elevation_data">Puedes usar los datos de elevación para tener en cuenta el ascenso y descenso del viaje</string>
     <string name="app_mode_light_aircraft">Avión ligero</string>
     <string name="plan_route_join_segments">Unir segmentos</string>
     <string name="plan_route_split_before">Dividir antes</string>
@@ -4014,7 +4014,7 @@
     <string name="plan_route_add_new_segment">Añadir nuevo segmento</string>
     <string name="release_3_9">• Se ha añadido la opción de exportar e importar todos los datos, incluyendo los ajustes, los recursos y «Mis sitios»
 \n
-\n • Planificar ruta: se añadieron gráficos para los segmentos con la ruta y capacidad de crear o editar trazas de segmentos múltiples
+\n • Planificar ruta: se añadieron gráficos para los segmentos de trazas con la ruta y capacidad de crear o editar trazas de segmentos múltiples
 \n
 \n • Se ha añadido el método de autenticación OAuth para OpenStreetMap y se ha mejorado la interfaz de usuario de los diálogos de OSM
 \n

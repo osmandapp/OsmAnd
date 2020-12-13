@@ -4012,4 +4012,6 @@
 \n • Supporto alla personalizzazione dei colori per i preferiti e i punti intermedi delle tracce
 \n
 \n"</string>
+    <string name="plan_route_join_segments">Unisci segmenti</string>
+    <string name="plan_route_split_before">Spezza</string>
 </resources>

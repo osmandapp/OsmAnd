@@ -3883,4 +3883,6 @@
     <string name="poi_nurse">護理師</string>
     <string name="poi_mobile_money_agent">行動貨幣代理商</string>
     <string name="poi_lifeguard_base">救生員基地</string>
+    <string name="poi_vaccination_covid19">預防接種：COVID-19</string>
+    <string name="poi_health_specialty_vaccination_yes">預防接種</string>
 </resources>
