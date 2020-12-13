@@ -33,7 +33,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:minHeight="60dp"
-			app:labelText="@string/profile_type_base_string"
+			app:labelText="@string/profile_type_osmand_string"
 			app:primaryColor="@color/active_color_primary_dark"
 			app:secondaryColor="?android:textColorSecondary">
 

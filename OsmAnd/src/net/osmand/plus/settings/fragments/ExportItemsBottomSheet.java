@@ -296,7 +296,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			if (!Algorithms.isEmpty(routingProfile)) {
 				builder.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.nav_type_hint), routingProfile));
 			} else {
-				builder.setDescription(getString(R.string.profile_type_base_string));
+				builder.setDescription(getString(R.string.profile_type_osmand_string));
 			}
 			int profileIconRes = AndroidUtils.getDrawableId(app, modeBean.iconName);
 			ProfileIconColors iconColor = modeBean.iconColor;
