@@ -33,7 +33,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
@@ -64,6 +63,8 @@ import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -613,11 +614,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		sortButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				List<SimplePopUpMenuItem> items = new ArrayList<>();
+				List<PopUpMenuItem> items = new ArrayList<>();
 				for (final TracksSortByMode mode : TracksSortByMode.values()) {
-					items.add(new SimplePopUpMenuItem(getString(mode.getNameId()),
-							app.getUIUtilities().getThemedIcon(mode.getIconId()),
-							new View.OnClickListener() {
+					items.add(new PopUpMenuItem.Builder(app)
+							.setTitleId(mode.getNameId())
+							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
+							.setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
 									sortByMode = mode;
@@ -626,10 +628,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 										tracksCard.setSortByMode(mode);
 									}
 								}
-							}, sortByMode == mode
-					));
+							})
+							.setSelected(sortByMode == mode)
+							.create()
+					);
 				}
-				UiUtilities.showPopUpMenu(v, items);
+				new PopUpMenuHelper.Builder(v, items, isNightMode()).show();
 			}
 		});
 	}
