@@ -1897,7 +1897,7 @@
     <string name="report">Звіт</string>
     <string name="use_osm_live_routing_description">Увімкнути навігацію з урахуванням автооновлень OsmAnd Live.</string>
     <string name="use_osm_live_routing">Навігація OsmAnd Live</string>
-    <string name="access_no_destination">Пункт призначення не заданий</string>
+    <string name="access_no_destination">Втулок доступності: призначення не встановлено</string>
     <string name="map_widget_magnetic_bearing">Магнітний пеленг</string>
     <string name="map_widget_bearing">Курсовий кут</string>
     <string name="access_disable_offroute_recalc">Не перераховувати маршрут при сході з нього</string>
@@ -2230,7 +2230,7 @@
     <string name="quick_action_showhide_osmbugs_descr">Натискання на кнопку дії покаже чи приховає OSM-нотатки на мапі.</string>
     <string name="sorted_by_distance">Відсортоване за відстанню</string>
     <string name="search_favorites">Пошук у закладках</string>
-    <string name="hillshade_menu_download_descr">Для того, щоб відобразити затінення рельєфу, потрібно завантажити спеціальну мапу для цієї області.</string>
+    <string name="hillshade_menu_download_descr">Завантажте шар мапи «Пагорби», щоб показати вертикальне затінення.</string>
     <string name="hillshade_purchase_header">Щоб побачити рельєф місцевості на мапі, вам потрібно придбати та встановити втулок \'Горизонталі\' (\'Contour Lines\').</string>
     <string name="hide_from_zoom_level">Приховати від рівня масштабування</string>
     <string name="srtm_menu_download_descr">Завантажте мапу \'Горизонталі\' (\'Contour Line\') для використання у цій області.</string>
@@ -2750,7 +2750,7 @@
     <string name="wikivoyage_offline">Вікімандри в автономному режимі</string>
     <string name="unlimited_downloads">Необмежені завантаження</string>
     <string name="wikipedia_offline">Вікіпедія в автономному режимі</string>
-    <string name="contour_lines_hillshade_maps">Горизонталі і Мапи рельєфу місцевості</string>
+    <string name="contour_lines_hillshade_maps">Горизонталі і мапи рельєфу місцевості</string>
     <string name="unlock_all_features">Розблокувати усі можливості OsmAnd</string>
     <string name="purchase_dialog_title">Оберіть план</string>
     <string name="purchase_dialog_travel_description">Придбайте одне з наведеного нижче, щоб отримати функціональність автономного туристичного путівника:</string>
@@ -3427,7 +3427,7 @@
     <string name="login_and_pass">Ім\'я користувача і пароль</string>
     <string name="plugin_global_prefs_info">Ці налаштування втулка стосуються всіх профілів</string>
     <string name="osm_editing">OSM-правлення</string>
-    <string name="osm_edits_view_descr">Ви можете переглянути всі ще не вивантажені зміни або вади OSM у %1$s. Вивантажені точки не показано в OsmAnd.</string>
+    <string name="osm_edits_view_descr">Перегляньте всі свої ще не завантажені зміни чи помилки OSM у %1$s. Вже завантажені зміни більше не показуватимуться.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок відображається під час навігації чи переміщення.</string>
     <string name="select_map_icon_descr">Значок показано в спокої.</string>
@@ -3791,9 +3791,9 @@
     <string name="lenght_limit_description">Вкажіть довжину вашого автомобіля, для довгих транспортних засобів можуть застосовуватися деякі обмеження на маршрутах.</string>
     <string name="quick_action_remove_next_destination">Видалити найближчу точку призначення</string>
     <string name="please_provide_point_name_error">Вкажіть назву пункту</string>
-    <string name="quick_action_remove_next_destination_descr">Поточну точку призначення на маршруті буде видалено. Якщо це буде місце призначення, навігація припиниться.</string>
+    <string name="quick_action_remove_next_destination_descr">Видаляє наступний пункт призначення з маршруту. Якщо це кінцевий пункт призначення, навігація зупиниться.</string>
     <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
-    <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця у Вікіпедії. Це ваш автономний кишеньковий посібник - просто ввімкніть втулок \"Вікіпедія\" і насолоджуйтеся статтями про об\'єкти довкола вас.</string>
+    <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця з Вікіпедії, кишенькового автономного путівника, що містить статті про місця та пункти призначення.</string>
     <string name="app_mode_motor_scooter">Моторолер</string>
     <string name="app_mode_enduro_motorcycle">Спортивний мотоцикл</string>
     <string name="app_mode_wheelchair">Інвалідне крісло</string>
@@ -3831,7 +3831,7 @@
     <string name="route_between_points_next_segment_button_desc">Лише наступний сегмент буде перераховано за допомогою обраного профілю.</string>
     <string name="route_between_points_desc">Виберіть спосіб з\'єднання точок: прямою лінією чи обчислити маршрут між ними за, як зазначено далі.</string>
     <string name="street_level_imagery">Зображення вулиць</string>
-    <string name="plan_route_exit_dialog_descr">Ви дійсно бажаєте відхилити всі зміни у запланованому маршруті, закривши його\?</string>
+    <string name="plan_route_exit_dialog_descr">Ви дійсно бажаєте відхилити всі зміни у запланованому маршруті\?</string>
     <string name="in_case_of_reverse_direction">Для зворотного напрямку</string>
     <string name="shared_string_save_as_gpx">Зберегти як новий файл треку</string>
     <string name="add_segment_to_the_track">Додати у файл треку</string>
@@ -3903,12 +3903,12 @@
     <string name="start_finish_icons">Піктограми початку та завершення</string>
     <string name="contour_lines_thanks">Дякуємо за придбання «Горизонталей»</string>
     <string name="what_is_new">Що нового</string>
-    <string name="osm_live_payment_desc_hw">Передплата стягується за вибраний період. Скасуйте її в AppGallery у будь-який час.</string>
-    <string name="osm_live_payment_subscription_management_hw">Оплату буде стягнено з вашого рахунку AppGallery за підтвердження покупки.
+    <string name="osm_live_payment_desc_hw">Передплата стягується раз на вибраний період. Скасуйте її в AppGallery у будь-який час.</string>
+    <string name="osm_live_payment_subscription_management_hw">З вашого рахунку AppGallery буде стягнено плату за підтвердження покупки.
 \n
-\nПередплата автоматично поновлюється, якщо її скасувати до дати поновлення. З вашого рахунку буде стягнено плату за період поновлення (місяць/три місяці/рік) лише на дату поновлення.
+\nПередплата автоматично поновлюється, якщо її не скасувати до дати поновлення. З вашого рахунку буде стягнено плату за період поновлення (місяць/три місяці/рік) лише на дату поновлення.
 \n
-\nВи можете керувати та скасовувати передплати, переходячи до налаштувань AppGallery.</string>
+\nВи можете керувати та скасовувати передплати у налаштуваннях AppGallery.</string>
     <string name="use_live_routing">OsmAnd дані в реальному часі</string>
     <string name="use_complex_routing">Комплексна маршрутизація</string>
     <string name="complex_routing_descr">Двофазна маршрутизація для автомобільної навігації.</string>
@@ -3945,7 +3945,7 @@
     <string name="mgrs_format_descr">OsmAnd використовує MGRS, який подібний формату UTM NATO.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Додайте принаймні дві точки</string>
     <string name="manage_subscription">Керувати передплатою</string>
-    <string name="subscription_payment_issue_title">Виникла проблема з передплатою. Торкнітся кнопки, щоб перейти до налаштувань передплати у Google Play, щоб виправити спосіб оплати.</string>
+    <string name="subscription_payment_issue_title">Торкніться кнопки, щоб налаштувати спосіб оплати в Google Play для виправлення передплати.</string>
     <string name="subscription_expired_title">Термін дії передплати OsmAnd Live закінчився</string>
     <string name="subscription_paused_title">Передплату OsmAnd Live зупинено</string>
     <string name="subscription_on_hold_title">Передплата OsmAnd Live на утриманні</string>
