@@ -58,7 +58,7 @@ public class ApplicationMode {
 	private static StateChangedListener<String> iconNameListener;
 	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
 
-	private static OsmandApplication app;
+	private OsmandApplication app;
 
 	private final int keyName;
 	private final String stringKey;
@@ -108,11 +108,11 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_skiing)
 			.description(R.string.base_profile_descr_ski).reg();
 
-	public static final ApplicationMode TRUCK = createCustomBase(ApplicationMode.CAR, R.string.app_mode_truck, "truck", app)
+	public static final ApplicationMode TRUCK = create(ApplicationMode.CAR, R.string.app_mode_truck, "truck")
 			.icon(R.drawable.ic_action_truck_dark)
 			.description(R.string.app_mode_truck).reg();
 
-	public static final ApplicationMode MOTORCYCLE = createCustomBase(ApplicationMode.CAR, R.string.app_mode_motorcycle, "motorcycle", app)
+	public static final ApplicationMode MOTORCYCLE = create(ApplicationMode.CAR, R.string.app_mode_motorcycle, "motorcycle")
 			.icon(R.drawable.ic_action_motorcycle_dark)
 			.description(R.string.app_mode_motorcycle).reg();
 
@@ -301,7 +301,7 @@ public class ApplicationMode {
 	}
 
 	public boolean isCustomProfile() {
-		return parentAppMode != null;
+		return !defaultValues.contains(this);
 	}
 
 	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
@@ -674,12 +674,6 @@ public class ApplicationMode {
 
 	public static ApplicationModeBuilder createCustomMode(ApplicationMode parent, String stringKey, OsmandApplication app) {
 		ApplicationModeBuilder builder = create(parent, -1, stringKey);
-		builder.getApplicationMode().app = app;
-		return builder;
-	}
-
-	public static ApplicationModeBuilder createCustomBase(ApplicationMode parent, int key, String stringKey, OsmandApplication app) {
-		ApplicationModeBuilder builder = create(parent, key, stringKey);
 		builder.getApplicationMode().app = app;
 		return builder;
 	}
