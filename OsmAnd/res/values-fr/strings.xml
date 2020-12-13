@@ -1934,7 +1934,7 @@
     <string name="access_smart_autoannounce_descr">Annoncer uniquement lorsque la direction de la destination est modifiée.</string>
     <string name="access_autoannounce_period">Fréquence des annonces</string>
     <string name="access_autoannounce_period_descr">Durée minimum entre deux annonces.</string>
-    <string name="access_no_destination">Aucune destination définie</string>
+    <string name="access_no_destination">Greffon d\'accessibilité : Aucune destination n\'est définie</string>
     <string name="map_widget_magnetic_bearing">Cap magnétique</string>
     <string name="map_widget_bearing">Cap relatif</string>
     <string name="access_disable_offroute_recalc">Ne pas recalculer l\'itinéraire après l\'avoir quitté</string>
@@ -3770,7 +3770,7 @@
     <string name="app_mode_inline_skates">Patins à roulettes en ligne</string>
     <string name="use_volume_buttons_as_zoom">Zoomer avec les boutons de volume</string>
     <string name="use_volume_buttons_as_zoom_descr">Contrôler le niveau de zoom de la carte avec les boutons de réglage du volume sonore.</string>
-    <string name="quick_action_remove_next_destination_descr">Le prochain point sur la route va être supprimé. S\'il s\'agit de la destination finale, la navigation s\'arrêtera.</string>
+    <string name="quick_action_remove_next_destination_descr">Supprime la prochaine étape de votre route. S\'il s\'agit de la destination finale, la navigation s\'arrêtera.</string>
     <string name="lenght_limit_description">Indiquez la longueur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules longs.</string>
     <string name="quick_action_remove_next_destination">Supprimer le prochain point</string>
     <string name="please_provide_point_name_error">Merci de renseigner un nom pour le point</string>
