@@ -36,6 +36,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
@@ -345,6 +346,12 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (mode.isCustomProfile() && !getBackupFileForCustomMode(app, mode.getStringKey()).exists()) {
 			resetToDefault.setVisible(false);
 		} else {
+			OsmandDevelopmentPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+			if (plugin != null && mode.getParent() != null) {
+				String baseProfile = "(" + mode.getParent().toHumanString() + ")";
+				String title = getString(R.string.ltr_or_rtl_combine_via_space, getString(R.string.reset_to_default), baseProfile);
+				resetToDefault.setTitle(title);
+			}
 			resetToDefault.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,
 					isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 		}
