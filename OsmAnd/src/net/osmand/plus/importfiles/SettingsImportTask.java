@@ -13,8 +13,10 @@ import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.CustomOsmandPlugin;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.PluginSettingsItem;
@@ -138,6 +140,10 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 					app.getPoiFilters().loadSelectedPoiFilters();
 					AppInitializer.loadRoutingFiles(app, null);
 					FragmentActivity activity = activityRef.get();
+					AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+					if (plugin != null) {
+						plugin.indexingFiles(null, true, true);
+					}
 					if (activity instanceof MapActivity) {
 						((MapActivity) activity).getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 						((MapActivity) activity).updateApplicationModeSettings();
@@ -150,6 +156,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 			}
 		};
 	}
+
 
 	private void handlePluginImport(final PluginSettingsItem pluginItem, final File file) {
 		FragmentActivity activity = activityRef.get();
@@ -171,6 +178,10 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				FragmentActivity activity = activityRef.get();
 				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
+				}
+				AudioVideoNotesPlugin pluginAudioVideo = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+				if (pluginAudioVideo != null) {
+					pluginAudioVideo.indexingFiles(null, true, true);
 				}
 				CustomOsmandPlugin plugin = pluginItem.getPlugin();
 				plugin.loadResources();
