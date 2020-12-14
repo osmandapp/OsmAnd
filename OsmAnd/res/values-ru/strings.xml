@@ -3996,4 +3996,7 @@
     <string name="lang_de_casual">Немецкий (повседневный)</string>
     <string name="app_mode_light_aircraft">Легкий самолет</string>
     <string name="plan_route_add_new_segment">Добавить новый сегмент</string>
+    <string name="plan_route_join_segments">Объединить сегменты</string>
+    <string name="plan_route_split_before">Разделить до</string>
+    <string name="plan_route_split_after">Разделить после</string>
 </resources>

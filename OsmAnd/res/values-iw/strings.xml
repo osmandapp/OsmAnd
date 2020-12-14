@@ -1339,7 +1339,7 @@
     <string name="group_will_be_removed_after_restart">הקבוצה תוסר לאחר ההפעלה הבאה של היישומון.</string>
     <string name="show_guide_line">הצגת קווי כיוון</string>
     <string name="use_osm_live_routing">ניווט חי של OsmAnd</string>
-    <string name="access_no_destination">לא הוגדר יעד</string>
+    <string name="access_no_destination">תוסף נגישות: לא הוגדר יעד</string>
     <string name="shared_string_widgets">וידג׳טים</string>
     <string name="add_points_to_map_markers_q">להוסיף את כל הנקודות כסמני מפה?</string>
     <string name="shared_string_add_to_map_markers">הוספת לסמני מפה</string>
@@ -1728,7 +1728,7 @@
     <string name="show_on_map_after_saving">הצגה על המפה לאחר השמירה</string>
     <string name="measurement_tool_action_bar">עיון במפה והוספת נקודות</string>
     <string name="measurement_tool">מדידת מרחק</string>
-    <string name="hillshade_menu_download_descr">יש להוריד את מפת ‚שכבת ההצללות’ כדי להציג הצללה אנכית.</string>
+    <string name="hillshade_menu_download_descr">יש להוריד את מפת שכבת ‚הצללות’ כדי להציג הצללה אנכית.</string>
     <string name="hillshade_purchase_header">יש להתקין את התוסף ‚קווי מתאר’ (Contour lines) כדי להציג אזורים מדורגים אנכית.</string>
     <string name="hide_from_zoom_level">הסתרה החל מרמת תקריב</string>
     <string name="srtm_menu_download_descr">נא להוריד את מפת ‚קווי המתאר’ של האזור הזה.</string>
@@ -3840,7 +3840,7 @@
     <string name="route_between_points_desc">נא לבחור כיצד לחבר את הנקודות, בקו ישר, או לחבר מסלול ביניהן כפי שצוין להלן.</string>
     <string name="route_between_points_warning_desc">בשלב הבא עליך להצמיד את הדרך המורשית הקרובה ביותר לאחד מפרופילי הניווט שלך כדי להשתמש באפשרות הזו.</string>
     <string name="street_level_imagery">תמונות ברמת רחוב</string>
-    <string name="plan_route_exit_dialog_descr">להתעלם מהשינויים במסלול המתוכנן על ידי סגירתו\?</string>
+    <string name="plan_route_exit_dialog_descr">להתעלם מכל השינויים במסלול המתוכנן על ידי סגירתו\?</string>
     <string name="in_case_of_reverse_direction">במקרה של כיוון הפוך</string>
     <string name="shared_string_save_as_gpx">שמירה כקובץ מסלול חדש</string>
     <string name="add_segment_to_the_track">הוספה לקובץ מסלול</string>
@@ -3934,10 +3934,10 @@
     <string name="file_already_imported">הקובץ כבר ייובא אל OsmAnd</string>
     <string name="use_two_phase_routing">להשתמש באלגוריתם חישוב מסלול דו־שלבי A*‎</string>
     <string name="snowmobile_render_descr">לנהיגה ברכבי שלג עם דרכים ומסלולים יעודיים.</string>
-    <string name="message_need_calculate_route_before_show_graph">הנתונים של %1$s זמינים בדרכים בלבד, עליך לחשב מסלול באמצעות „מסלול בין נקודות” כדי לקבל אותם.</string>
+    <string name="message_need_calculate_route_before_show_graph">הנתונים של %1$s זמינים על דרכים בלבד, ניתן לחשב מסלול באמצעות „מסלול בין נקודות” כדי לראות תרשימים.</string>
     <string name="shared_string_graph">תרשים</string>
-    <string name="message_graph_will_be_available_after_recalculation">"נא להמתין.
-\nהתרשים יהיה זמין לאחר חישוב  מחדש."</string>
+    <string name="message_graph_will_be_available_after_recalculation">נא להמתין.
+\nהתרשים יהיה זמין לאחר חישוב מחדש.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s ‏— %2$s</string>
     <string name="shared_string_local_maps">מפות מקומיות</string>
     <string name="icon_group_amenity">שירות לציבור</string>
@@ -3964,7 +3964,7 @@
     <string name="open_street_map_login_mode">עליך להיכנס כדי להעלות שינויים חדשים או כאלו שנערכו.
 \n
 \nניתן להיכנס בשיטת OAuth המאובטחת או באמצעות שם הכניסה והססמה שלך.</string>
-    <string name="subscription_payment_issue_title">יש בעיה עם המינוי שלך. יש לגעת כפתור כדי לגשת להגדרות המינוי של Google Play ולתקן את שיטת התשלום שלך.</string>
+    <string name="subscription_payment_issue_title">יש לגעת בכפתור כדי להגדיר שיטת תשלום ב־Google Play ולתקן את המינוי שלך.</string>
     <string name="subscription_on_hold_title">המינוי ל־OsmAnd Live מוחזק</string>
     <string name="markers_history">היסטוריית סמנים</string>
     <string name="send_files_to_openstreetmap">שליחת קובץ GPX ל־OpenStreetMap</string>
