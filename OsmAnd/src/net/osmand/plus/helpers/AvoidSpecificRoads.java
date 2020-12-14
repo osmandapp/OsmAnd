@@ -26,6 +26,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -87,7 +88,7 @@ public class AvoidSpecificRoads {
 		}
 	}
 
-	private ArrayAdapter<AvoidRoadInfo> createAdapter(MapActivity mapActivity, boolean nightMode) {
+	private ArrayAdapter<AvoidRoadInfo> createAdapter(final MapActivity mapActivity, boolean nightMode) {
 		final ArrayList<AvoidRoadInfo> points = new ArrayList<>(impassableRoads.values());
 		final LatLon mapLocation = mapActivity.getMapLocation();
 		final LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
@@ -119,7 +120,7 @@ public class AvoidSpecificRoads {
 						remove(item);
 						removeImpassableRoad(item);
 						notifyDataSetChanged();
-						recalculateRoute();
+						recalculateRoute(mapActivity);
 					}
 				});
 				return v;
@@ -163,10 +164,16 @@ public class AvoidSpecificRoads {
 		return app.getString(R.string.shared_string_road);
 	}
 
-	private void recalculateRoute() {
+	private void recalculateRoute(MapActivity mapActivity) {
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
 			rh.recalculateRouteDueToSettingsChange();
+		}
+		if (mapActivity != null) {
+			MeasurementToolFragment measurementToolFragment = mapActivity.getMeasurementToolFragment();
+			if (measurementToolFragment != null) {
+				measurementToolFragment.onAppModeConfigured();
+			}
 		}
 	}
 
@@ -349,7 +356,7 @@ public class AvoidSpecificRoads {
 				app.getSettings().removeImpassableRoad(location);
 			}
 		}
-		recalculateRoute();
+		recalculateRoute(activity);
 		if (activity != null) {
 			if (showDialog) {
 				showDialog(activity);
