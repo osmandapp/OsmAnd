@@ -3872,4 +3872,14 @@
     <string name="poi_nurse">Медсестра</string>
     <string name="poi_mobile_money_agent">Мобільний грошовий агент</string>
     <string name="poi_lifeguard_base">Рятувальна станція</string>
+    <string name="poi_vaccination_covid19">Щеплення: COVID19</string>
+    <string name="poi_health_specialty_vaccination_yes">Щеплення</string>
+    <string name="poi_water_source_powered_pump">Привідний насос</string>
+    <string name="poi_water_source_well">Криниця</string>
+    <string name="poi_water_source_tube_well">Трубна свердловина</string>
+    <string name="poi_water_source_tap">Торкніться</string>
+    <string name="poi_water_source_water_works">Водозабір</string>
+    <string name="poi_water_source_water_tank">Резервуар для води</string>
+    <string name="poi_water_source_lake">Озеро</string>
+    <string name="poi_water_source_river">Річка</string>
 </resources>

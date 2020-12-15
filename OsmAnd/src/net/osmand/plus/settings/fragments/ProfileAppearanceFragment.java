@@ -393,7 +393,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					? changedProfile.parent.toHumanString()
 					: getSelectedAppMode().toHumanString());
 			OsmandTextFieldBoxes baseProfileNameHint = (OsmandTextFieldBoxes) holder.findViewById(R.id.master_profile_otfb);
-			baseProfileNameHint.setLabelText(getString(R.string.profile_type_base_string));
+			baseProfileNameHint.setLabelText(getString(R.string.profile_type_osmand_string));
 			FrameLayout selectNavTypeBtn = (FrameLayout) holder.findViewById(R.id.select_nav_type_btn);
 			selectNavTypeBtn.setOnClickListener(new View.OnClickListener() {
 				@Override

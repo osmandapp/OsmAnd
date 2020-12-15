@@ -1853,7 +1853,7 @@
     <string name="navigation_intent_invalid">Erara formo: %s</string>
     <string name="plugin_install_needs_network">Vi devas esti konektita al la interreto por instali tiun ĉi kromprogramon.</string>
     <string name="use_fast_recalculation">Inteligenta rekalkulado de kurso</string>
-    <string name="use_fast_recalculation_desc">Rekalkuli nur komencan parton de kurso. Uzebla por longaj kursoj.</string>
+    <string name="use_fast_recalculation_desc">Rekalkuli nur komencan parton de kurso, utila por longaj kursoj.</string>
     <string name="rate_this_app">Taksi tiun ĉi aplikaĵon</string>
     <string name="we_really_care_about_your_opinion">Via opinio estas grava por ni.</string>
     <string name="rate_this_app_long">Bonvolu taksi OsmAnd ĉe Google Play</string>
@@ -3426,7 +3426,7 @@
     <string name="login_and_pass">Uzantnomo kaj pasvorto</string>
     <string name="plugin_global_prefs_info">Tiuj ĉi agordoj pri kromprogramoj aplikos al ĉiuj profiloj</string>
     <string name="osm_editing">OSM‑redaktilo</string>
-    <string name="osm_edits_view_descr">Vi povas vidigi ĉiujn viajn jam nepublikigitajn redaktojn aŭ rimarkojn ĉe %1$s. Punktoj alŝutitaj al OSM ne estos videblaj en OsmAnd.</string>
+    <string name="osm_edits_view_descr">Ĉiuj viaj jam nepublikigitaj redaktoj aŭ rimarkoj OSM estos videblaj ĉe %1$s. Punktoj alŝutitaj al OSM ne estos videblaj en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Emblemo montrata dum navigi aŭ moviĝi.</string>
     <string name="select_map_icon_descr">Montri emblemon dum restado.</string>
@@ -3833,7 +3833,7 @@
     <string name="navigation_profile">Profilo de navigo</string>
     <string name="route_between_points_add_track_desc">Elektu dosieron de spuro al kiu nova segmento estos aldonita.</string>
     <string name="street_level_imagery">Strat-nivela fotaro</string>
-    <string name="plan_route_exit_dialog_descr">Ĉu vi certe volas forĵeti ĉiujn ŝanĝojn en la planita kurso per fermi ĝin\?</string>
+    <string name="plan_route_exit_dialog_descr">Ĉu vi certe volas forĵeti ĉiujn ŝanĝojn en la planita kurso\?</string>
     <string name="in_case_of_reverse_direction">Kiam en inversa direkto</string>
     <string name="save_track_to_gpx">Aŭtomate registri spuron dum navigi</string>
     <string name="shared_string_save_as_gpx">Konservi kiel novan dosieron de spuro</string>
@@ -3895,7 +3895,7 @@
     <string name="simplified_track_description">Nur la linio de kurso estos konservita, la navigadpunktoj estos forigitaj.</string>
     <string name="shared_string_file_name">Dosiernomo</string>
     <string name="number_of_gpx_files_selected_pattern">%s dosieroj de spuroj elektitaj</string>
-    <string name="disable_recording_once_app_killed_descrp">Paŭzigos registri spuron je halto de la aplikaĵo (per la menuo de lastaj aplikaĵoj). (Fona emblemo de OsmAnd malaperos de la androida sciiga zono.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Paŭzigi registri spuron je halto de la aplikaĵo (per la menuo de lastaj aplikaĵoj). (La fona emblemo de OsmAnd malaperos de la androida sciiga zono.)</string>
     <string name="gpx_monitoring_stop">Paŭzigi registri spuron</string>
     <string name="gpx_monitoring_start">Daŭrigi registri spuron</string>
     <string name="system_default_theme">Sistema</string>
@@ -3911,7 +3911,7 @@
 \n Vi povas administri kaj rezigni viajn abonojn per la agordoj de AppGallery.</string>
     <string name="start_finish_icons">Emblemoj de komenco kaj fino</string>
     <string name="contour_lines_thanks">Dankon al vi por aĉeti la kromprogramon “nivelkurboj”</string>
-    <string name="osm_live_payment_desc_hw">Abonpago prenita por la elektita periodo. VI ĉiam povas rezigni abonon ĉe AppGallery.</string>
+    <string name="osm_live_payment_desc_hw">La abonpago estas prenita por la elektita periodo. VI ĉiam povas rezigni abonon ĉe AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Eviti irejojn</string>
     <string name="routing_attr_avoid_footways_name">Sen trotuaroj</string>
     <string name="development">Programado</string>
@@ -3929,9 +3929,9 @@
     <string name="file_already_imported">Dosiero jam estas enportita al OsmAnd</string>
     <string name="use_two_phase_routing">Uzi 2-fazan A* algoritmon de navigo</string>
     <string name="shared_string_graph">Diagramo</string>
-    <string name="message_need_calculate_route_before_show_graph">Datumoj de %1$s estas disponeblaj nur por vojoj, vi devas kalkuli la kurson uzante “kalkuli kurson inter punktoj” por akiri ĝin.</string>
-    <string name="message_graph_will_be_available_after_recalculation">Atendado ĝis la kurso estos rekalkulita.
-\nDiagramo estos videbla post rekalkulado.</string>
+    <string name="message_need_calculate_route_before_show_graph">Datumoj de %1$s estas disponeblaj nur por vojoj, kalkulu la kurson uzante “kalkuli kurson inter punktoj” por montri diagramon.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Bonvolu atendi.
+\nDiagramo estos videbla post rekalkuli kurson.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="app_mode_gap">Manko</string>
     <string name="shared_string_local_maps">Lokaj mapoj</string>
@@ -3948,7 +3948,7 @@
     <string name="mgrs_format_descr">OsmAnd uzas MGRS, kiu estas simila al la formo UTM NATO.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Aldonu almenaŭ du punktojn</string>
     <string name="manage_subscription">Administri abonon</string>
-    <string name="subscription_payment_issue_title">Okazis problemo pri via abono. Premu la butonon por iri al agordoj pri abonoj ĉe Google Play por korekti vian pagmanieron.</string>
+    <string name="subscription_payment_issue_title">Frapetu la butonon por agordi pagmanieron ĉe Google Play por korekti vian abonon.</string>
     <string name="subscription_expired_title">Abono OsmAnd Live senvalidiĝis</string>
     <string name="subscription_paused_title">Abono OsmAnd Live estas paŭziigita</string>
     <string name="subscription_on_hold_title">Abono OsmAnd Live estas ĉesigita</string>
@@ -3983,7 +3983,7 @@
     <string name="add_photos_descr">OsmAnd montras fotojn el diversaj fontoj:
 \nOpenPlaceReviews – fotoj de interesejoj;
 \nMapillary – strat‑nivela fotaro;
-\ninterreto, Vikimedio – fotoj de interesejoj difinitaj en OpenStreetMap-datumoj.</string>
+\ninterreto, Vikimedio – fotoj de interesejoj difinitaj en OSM-datumoj.</string>
     <string name="shared_string_resources">Rimedoj</string>
     <string name="approximate_file_size">Proksimuma dosiergrando</string>
     <string name="select_data_to_export">Elektu datumojn por elporti al dosiero.</string>
@@ -4015,4 +4015,6 @@
 \n • propraj koloroj por ŝatataj ejoj kaj navigadpunktoj de spuro
 \n
 \n</string>
+    <string name="profile_type_osmand_string">OsmAnd‑profilo</string>
+    <string name="profile_type_user_string">Profilo de uzanto</string>
 </resources>

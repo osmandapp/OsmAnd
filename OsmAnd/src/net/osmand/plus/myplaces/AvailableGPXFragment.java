@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -71,7 +70,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
@@ -86,6 +84,8 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -576,13 +576,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		if (itemId == R.id.action_sort) {
 			Activity activity = getActivity();
 			if (activity != null) {
+				boolean nightMode = app.getSettings().isLightContent();
 				View menuSortItemView = getActivity().findViewById(R.id.action_sort);
-				final List<SimplePopUpMenuItem> items = new ArrayList<>();
+				final List<PopUpMenuItem> items = new ArrayList<>();
 				for (final TracksSortByMode mode : TracksSortByMode.values()) {
-					items.add(new SimplePopUpMenuItem(
-							getString(mode.getNameId()),
-							app.getUIUtilities().getThemedIcon(mode.getIconId()),
-							new View.OnClickListener() {
+					items.add(new PopUpMenuItem.Builder(app)
+							.setTitleId(mode.getNameId())
+							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
+							.setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
 									updateTracksSort(mode);
@@ -590,10 +591,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 											: R.color.active_buttons_and_links_text_dark;
 									item.setIcon(getIcon(mode.getIconId(), iconColorId));
 								}
-							}, sortByMode == mode
-					));
+							})
+							.setSelected(sortByMode == mode)
+							.create()
+					);
 				}
-				UiUtilities.showPopUpMenu(menuSortItemView, items);
+				new PopUpMenuHelper.Builder(menuSortItemView, items, nightMode).show();
 			}
 		}
 		return super.onOptionsItemSelected(item);
@@ -1489,51 +1492,55 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	private void openPopUpMenu(View v, final GpxInfo gpxInfo) {
-		final List<SimplePopUpMenuItem> items = new ArrayList<>();
+		boolean nightMode = app.getSettings().isLightContent();
+		final List<PopUpMenuItem> items = new ArrayList<>();
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 
-		items.add(new SimplePopUpMenuItem(
-				getString(R.string.shared_string_show_on_map),
-				iconsCache.getThemedIcon(R.drawable.ic_show_on_map),
-				new View.OnClickListener() {
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_show_on_map)
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_show_on_map))
+				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						showGpxOnMap(gpxInfo);
 					}
-				}
-		));
+				})
+				.create()
+		);
 
 		GPXTrackAnalysis analysis;
 		if ((analysis = getGpxTrackAnalysis(gpxInfo, app, null)) != null) {
 			if (analysis.totalDistance != 0 && !gpxInfo.currentlyRecordingTrack) {
-				items.add(new SimplePopUpMenuItem(
-						getString(R.string.analyze_on_map),
-						iconsCache.getThemedIcon(R.drawable.ic_action_info_dark),
-						new View.OnClickListener() {
+				items.add(new PopUpMenuItem.Builder(app)
+						.setTitleId(R.string.analyze_on_map)
+						.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_info_dark))
+						.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
 								new OpenGpxDetailsTask(gpxInfo).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 							}
-						}
-				));
+						})
+						.create()
+				);
 			}
 		}
 
-		items.add(new SimplePopUpMenuItem(
-				getString(R.string.shared_string_move),
-				iconsCache.getThemedIcon(R.drawable.ic_action_folder_stroke),
-				new View.OnClickListener() {
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_move)
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_folder_stroke))
+				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						moveGpx(gpxInfo);
 					}
-				}
-		));
+				})
+				.create()
+		);
 
-		items.add(new SimplePopUpMenuItem(
-				getString(R.string.shared_string_rename),
-				iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark),
-				new View.OnClickListener() {
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_rename)
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark))
+				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						FileUtils.renameFile(getActivity(), gpxInfo.file, new RenameCallback() {
@@ -1544,14 +1551,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 							}
 						});
 					}
-				}
-		));
+				})
+				.create()
+		);
 
 		Drawable shareIcon = iconsCache.getThemedIcon((R.drawable.ic_action_gshare_dark));
-		items.add(new SimplePopUpMenuItem(
-				getString(R.string.shared_string_share),
-				AndroidUtils.getDrawableForDirection(app, shareIcon),
-				new View.OnClickListener() {
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_share)
+				.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon))
+				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), gpxInfo.file);
@@ -1561,27 +1569,29 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 						startActivity(sendIntent);
 					}
-				}
-		));
+				})
+				.create()
+		);
 
 		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null && osmEditingPlugin.isActive()) {
-			items.add(new SimplePopUpMenuItem(
-					getString(R.string.shared_string_export),
-					iconsCache.getThemedIcon(R.drawable.ic_action_export),
-					new View.OnClickListener() {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(R.string.shared_string_export)
+					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_export))
+					.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							osmEditingPlugin.sendGPXFiles(getActivity(), AvailableGPXFragment.this, gpxInfo);
 						}
-					}
-			));
+					})
+					.create()
+			);
 		}
 
-		items.add(new SimplePopUpMenuItem(
-				getString(R.string.shared_string_delete),
-				iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark),
-				new View.OnClickListener() {
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_delete)
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark))
+				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -1596,21 +1606,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 						builder.setNegativeButton(R.string.shared_string_cancel, null);
 						builder.show();
 					}
-				}
-		));
-
-		UiUtilities.createListPopupWindow(
-				getContext(), v, v.getWidth(), items, new AdapterView.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						if (position < items.size()) {
-							View.OnClickListener listener = items.get(position).getOnClickListener();
-							if (listener != null) {
-								listener.onClick(view);
-							}
-						}
-					}
-				}).show();
+				})
+				.create()
+		);
+		new PopUpMenuHelper.Builder(v, items, nightMode).show();
 	}
 
 	public class DeleteGpxTask extends AsyncTask<GpxInfo, GpxInfo, String> {

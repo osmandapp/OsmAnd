@@ -164,17 +164,26 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	}
 
 	private void initSavedIds(ApplicationMode appMode) {
-		hiddenMenuItems = new ArrayList<>(getSettingForScreen(app, screenType).getModeValue(appMode).getHiddenIds());
+		initSavedIds(appMode, false);
+	}
+
+	private void initSavedIds(ApplicationMode appMode, boolean useDefaultValue) {
+		ContextMenuItemsSettings settings = getMenuItemsSettings(appMode, useDefaultValue);
+		hiddenMenuItems = new ArrayList<>(settings.getHiddenIds());
 		menuItemsOrder = new HashMap<>();
-		List<String> orderIds = getSettingForScreen(app, screenType).getModeValue(appMode).getOrderIds();
+		List<String> orderIds = settings.getOrderIds();
 		for (int i = 0; i < orderIds.size(); i++) {
 			menuItemsOrder.put(orderIds.get(i), i);
 		}
 	}
 
 	private void initMainActionsIds(ApplicationMode appMode) {
+		initMainActionsIds(appMode, false);
+	}
+
+	private void initMainActionsIds(ApplicationMode appMode, boolean useDefaultValue) {
 		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
-		ContextMenuItemsSettings pref = getSettingForScreen(app, screenType).getModeValue(appMode);
+		ContextMenuItemsSettings pref = getMenuItemsSettings(appMode, useDefaultValue);
 		if (pref instanceof MainContextMenuItemsSettings) {
 			mainActionItems = new ArrayList<>(((MainContextMenuItemsSettings) pref).getMainIds());
 			if (mainActionItems.isEmpty()) {
@@ -276,7 +285,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				}
 				if (fm != null) {
 					ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
-							getSettingForScreen(app, screenType).getId(),
+							getSettingForScreen().getId(),
 							prefToSave,
 							getTargetFragment(),
 							false,
@@ -501,12 +510,12 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				menuItemsOrder.clear();
 				wasReset = true;
 				isChanged = true;
-				getSettingForScreen(app, screenType).resetModeToDefault(appMode);
 				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
 					mainActionItems.clear();
 				}
 				instantiateContextMenuAdapter();
-				initMainActionsIds(appMode);
+				initSavedIds(appMode, true);
+				initMainActionsIds(appMode, true);
 				rearrangeAdapter.updateItems(getAdapterItems());
 			}
 		});
@@ -534,6 +543,20 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 			}
 			rearrangeAdapter.updateItems(getAdapterItems());
 		}
+	}
+
+	public ContextMenuItemsSettings getMenuItemsSettings(ApplicationMode appMode,
+	                                                     boolean useDefaultValue) {
+		ContextMenuItemsPreference preference = getSettingForScreen();
+		if (useDefaultValue) {
+			return preference.getProfileDefaultValue(appMode);
+		} else {
+			return preference.getModeValue(appMode);
+		}
+	}
+
+	public ContextMenuItemsPreference getSettingForScreen() {
+		return getSettingForScreen(app, screenType);
 	}
 
 	public static ContextMenuItemsPreference getSettingForScreen(OsmandApplication app, ScreenType screenType) throws IllegalArgumentException {

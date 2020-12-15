@@ -1340,4 +1340,6 @@
     <string name="route_between_points_add_track_desc">Fren afaylu n uḍfar iɣer ara yernu uḥric amaynut.</string>
     <string name="plan_route_exit_dialog_descr">Tebɣiḍ s tidet ad tmedleḍ abrid n uɣawas war asekles\? Ad tesruḥeḍ akk ibeddilen.</string>
     <string name="shared_string_is_saved">Ittwasekles</string>
+    <string name="profile_type_osmand_string">Amaɣnu OsmAnd</string>
+    <string name="profile_type_user_string">Amaɣnu n useqdac</string>
 </resources>
