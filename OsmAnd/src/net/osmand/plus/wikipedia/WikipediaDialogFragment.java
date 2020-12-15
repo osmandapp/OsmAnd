@@ -38,6 +38,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.widgets.ObservableWebView;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -120,7 +121,18 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		selectedLangTv.setBackgroundResource(nightMode
 				? R.drawable.wikipedia_select_lang_bg_dark_n : R.drawable.wikipedia_select_lang_bg_light_n);
 
-		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
+		contentWebView = (ObservableWebView) mainView.findViewById(R.id.content_web_view);
+		((ObservableWebView) contentWebView).setOnScrollChangeListener(new ObservableWebView.OnScrollChangeListener() {
+			@Override
+			public void onScrollChange(WebView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+				if (v.canScrollVertically(1) && v.canScrollVertically(-1)) {
+					readFullArticleButton.setVisibility(View.GONE);
+				} else {
+					readFullArticleButton.setVisibility(View.VISIBLE);
+				}
+			}
+		});
+
 		WebSettings webSettings = contentWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 		webSettings.setTextZoom((int) (getResources().getConfiguration().fontScale * 100f));
