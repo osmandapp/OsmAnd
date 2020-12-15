@@ -75,7 +75,6 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 
 /**
@@ -634,7 +633,7 @@ public class ResourceManager {
 		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		if (Version.isPaidVersion(context)) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
-			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, files);
+			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, files);
 		}
 		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isSubscribedToLiveUpdates(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
@@ -833,7 +832,7 @@ public class ResourceManager {
 	}
 
 	private boolean collectTravelFiles(BinaryMapReaderResource resource) {
-		if (resource.getFileName().contains(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)){
+		if (resource.getFileName().contains(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)){
 			travelRepositories.put(resource.getFileName(), resource);
 			return true;
 		}
