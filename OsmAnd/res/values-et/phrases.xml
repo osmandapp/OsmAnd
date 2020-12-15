@@ -3843,4 +3843,15 @@
     <string name="poi_diplomatic_services_citizen_services_no">Ei</string>
     <string name="poi_siren">Sireen</string>
     <string name="poi_lifeguard_base">Vetelpäästejaam</string>
+    <string name="poi_nurse">Õde</string>
+    <string name="poi_health_specialty_vaccination_yes">Vaktsineerimine</string>
+    <string name="poi_vaccination_covid19">Vaktsineerimine: COVID19</string>
+    <string name="poi_water_source_tube_well">Puurkaev</string>
+    <string name="poi_water_source_water_works">Veevärgi ettevõte</string>
+    <string name="poi_water_source_tap">Veekraan</string>
+    <string name="poi_water_source_water_tank">Veepaak</string>
+    <string name="poi_water_source_powered_pump">Mootoriga veepump</string>
+    <string name="poi_water_source_well">Kaev</string>
+    <string name="poi_water_source_river">Jõgi</string>
+    <string name="poi_water_source_lake">Järv</string>
 </resources>
