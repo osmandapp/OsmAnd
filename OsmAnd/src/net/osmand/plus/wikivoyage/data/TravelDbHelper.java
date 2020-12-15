@@ -114,6 +114,18 @@ public class TravelDbHelper implements TravelHelper {
 		localDataHelper = new TravelLocalDataHelper(application);
 	}
 
+	public static boolean checkIfDbFileExists(OsmandApplication app) {
+		File[] files = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
+		if (files != null) {
+			for (File file : files) {
+				if (file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public TravelLocalDataHelper getBookmarksHelper() {
 		return localDataHelper;
 	}
