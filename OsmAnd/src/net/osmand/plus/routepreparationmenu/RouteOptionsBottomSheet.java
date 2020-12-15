@@ -545,9 +545,11 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					public void onClick(View view) {
 						dismiss();
 
-						Fragment fragment = getTargetFragment();
-						if (fragment instanceof MeasurementToolFragment) {
-							((MeasurementToolFragment) fragment).getOnBackPressedCallback().setEnabled(false);
+						if (dialogMode == DialogMode.PLAN_ROUTE) {
+							Fragment fragment = getTargetFragment();
+							if (fragment instanceof MeasurementToolFragment) {
+								((MeasurementToolFragment) fragment).getOnBackPressedCallback().setEnabled(false);
+							}
 						}
 
 						Bundle args = new Bundle();
