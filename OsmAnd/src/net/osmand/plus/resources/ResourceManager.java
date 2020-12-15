@@ -19,8 +19,10 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
 import net.osmand.data.RotatedTileBox;
@@ -210,7 +212,7 @@ public class ResourceManager {
 	protected final Map<String, AmenityIndexRepository> amenityRepositories =  new ConcurrentHashMap<String, AmenityIndexRepository>();
 //	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<String, BinaryMapIndexReader>();
 	protected final Map<String, BinaryMapReaderResource> transportRepositories = new ConcurrentHashMap<String, BinaryMapReaderResource>();
-	
+	protected final Map<String, BinaryMapReaderResource> travelRepositories = new ConcurrentHashMap<String, BinaryMapReaderResource>();
 	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<String, String>();
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<String, String>();
 	
@@ -735,6 +737,7 @@ public class ResourceManager {
 					if (mapReader.hasTransportData()) {
 						transportRepositories.put(f.getName(), resource);
 					}
+					collectTravelFiles(mapReader, resource);
 					// disable osmc for routing temporarily due to some bugs
 					if (mapReader.containsRouteData() && (!f.getParentFile().equals(liveDir) || 
 							context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get())) {
@@ -798,7 +801,29 @@ public class ResourceManager {
 		return warnings;
 	}
 
-	
+	private void collectTravelFiles(BinaryMapIndexReader mapReader, BinaryMapReaderResource resource) {
+		BinaryMapIndexReader index = mapReader;
+		for (BinaryIndexPart p : index.getIndexes()) {
+			if (p instanceof BinaryMapPoiReaderAdapter.PoiRegion) {
+				transportRepositories.put(index.getFile().getName(), resource);
+			}
+		}
+	}
+
+	private List<BinaryMapIndexReader> getTravelRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
+		List<String> fileNames = new ArrayList<>(travelRepositories.keySet());
+		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
+		List<BinaryMapIndexReader> res = new ArrayList<>();
+		for (String fileName : fileNames) {
+			BinaryMapReaderResource r = travelRepositories.get(fileName);
+			if (r != null && r.isUseForPublicTransport() &&
+					r.getShallowReader().containTransportData(topLat, leftLon, bottomLat, rightLon)) {
+				res.add(r.getReader(BinaryMapReaderResourceType.POI));
+			}
+		}
+		return res;
+	}
+
 
 	public void initMapBoundariesCacheNative() {
 		File indCache = context.getAppPath(INDEXES_CACHE);
@@ -1065,6 +1090,7 @@ public class ResourceManager {
 		addressMap.remove(fileName);
 		transportRepositories.remove(fileName);
 		indexFileNames.remove(fileName);
+		travelRepositories.remove(fileName);
 		renderer.closeConnection(fileName);
 		BinaryMapReaderResource resource = fileReaders.remove(fileName);
 		if(resource != null) {
@@ -1080,6 +1106,7 @@ public class ResourceManager {
 		basemapFileNames.clear();
 		renderer.clearAllResources();
 		transportRepositories.clear();
+		travelRepositories.clear();
 		addressMap.clear();
 		amenityRepositories.clear();
 		for(BinaryMapReaderResource res : fileReaders.values()) {
@@ -1087,7 +1114,24 @@ public class ResourceManager {
 		}
 		fileReaders.clear();
 	}
-	
+
+	public List<BinaryMapIndexReader> getTravelFiles() {
+		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
+		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
+		for (BinaryMapReaderResource res : fileReaders) {
+			if (!res.filename.toString().toLowerCase()
+					.contains(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+				continue;
+			}
+			BinaryMapIndexReader index = res.getReader(BinaryMapReaderResourceType.POI);
+			for (BinaryIndexPart p : index.getIndexes()) {
+				if (p instanceof BinaryMapPoiReaderAdapter.PoiRegion) {
+					readers.add(index);
+				}
+			}
+		}
+		return readers;
+	}
 	
 	public BinaryMapIndexReader[] getRoutingMapFiles() {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
