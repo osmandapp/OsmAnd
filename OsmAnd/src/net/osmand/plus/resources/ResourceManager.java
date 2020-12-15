@@ -75,7 +75,6 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 
@@ -817,18 +816,17 @@ public class ResourceManager {
 	}
 
 	private List<BinaryMapIndexReader> getTravelRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
-		List<String> fileNames = new ArrayList<>(transportRepositories.keySet());
+		List<String> fileNames = new ArrayList<>(travelRepositories.keySet());
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
+		int leftX31 = MapUtils.get31TileNumberX(leftLon);
+		int topX31 = MapUtils.get31TileNumberY(topLat);
+		int rightX31 = MapUtils.get31TileNumberX(rightLon);
+		int bottomX31 = MapUtils.get31TileNumberY(bottomLat);
 		List<BinaryMapIndexReader> res = new ArrayList<>();
 		for (String fileName : fileNames) {
-			int topx31 = MapUtils.get31TileNumberX(topLat);
-			int leftx31 = MapUtils.get31TileNumberY(leftLon);
-			int bottomx31 = MapUtils.get31TileNumberX(bottomLat);
-			int rightx31 = MapUtils.get31TileNumberY(rightLon);
-			BinaryMapReaderResource r = transportRepositories.get(fileName);
-			if (r != null &&
-					r.getShallowReader().containsPoiData(topx31, leftx31, bottomx31, rightx31)) {
-				res.add(r.getReader(BinaryMapReaderResourceType.TRANSPORT));
+			BinaryMapReaderResource r = travelRepositories.get(fileName);
+			if (r != null && r.getShallowReader().containsPoiData(leftX31, topX31, rightX31, bottomX31)) {
+				res.add(r.getReader(BinaryMapReaderResourceType.POI));
 			}
 		}
 		return res;
