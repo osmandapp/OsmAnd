@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.BigTextStyle;
 import androidx.core.app.NotificationCompat.Builder;
 
+import net.osmand.Location;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -77,7 +78,7 @@ public class NavigationNotification extends OsmandNotification {
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				routingHelper.setRoutePlanningMode(false);
 				routingHelper.setFollowingMode(true);
-				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+				routingHelper.setCurrentLocation(getLastKnownLocation(), false);
 			}
 		}, new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION));
 
@@ -133,13 +134,15 @@ public class NavigationNotification extends OsmandNotification {
 		turnBitmap = null;
 		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
+		Location location = getLastKnownLocation();
 		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {
 			color = app.getResources().getColor(R.color.osmand_orange);
 
-			String distanceStr = OsmAndFormatter.getFormattedDistance(app.getRoutingHelper().getLeftDistance(), app);
-			String timeStr = OsmAndFormatter.getFormattedDuration(app.getRoutingHelper().getLeftTime(), app);
+			String distanceStr = OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app);
+			String timeStr = OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app);
 			String etaStr = SimpleDateFormat.getTimeInstance(DateFormat.SHORT)
-					.format(new Date(System.currentTimeMillis() + app.getRoutingHelper().getLeftTime() * 1000));
+					.format(new Date(System.currentTimeMillis() + routingHelper.getLeftTime() * 1000));
+			String speedStr = OsmAndFormatter.getFormattedSpeed(location.getSpeed(), app);
 
 			TurnType turnType = null;
 			boolean deviatedFromRoute;
@@ -200,7 +203,10 @@ public class NavigationNotification extends OsmandNotification {
 					}
 				}
 
-				notificationText.append(distanceStr).append(" • ").append(timeStr).append(" • ").append(etaStr);
+				notificationText.append(distanceStr)
+						.append(" • ").append(timeStr)
+						.append(" • ").append(etaStr)
+						.append(" • ").append(speedStr);
 
 			} else {
 				notificationTitle = app.getString(R.string.shared_string_navigation);
@@ -264,6 +270,10 @@ public class NavigationNotification extends OsmandNotification {
 					notification.bigContentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
 			}
 		}
+	}
+
+	private Location getLastKnownLocation() {
+		return app.getLocationProvider().getLastKnownLocation();
 	}
 
 	public Bitmap drawableToBitmap(Drawable drawable) {
