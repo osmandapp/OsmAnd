@@ -81,11 +81,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 
 /**
- * Resource manager is responsible to work with all resources 
+ * Resource manager is responsible to work with all resources
  * that could consume memory (especially with file resources).
  * Such as indexes, tiles.
  * Also it is responsible to create cache for that resources if they
- *  can't be loaded fully into memory & clear them on request. 
+ *  can't be loaded fully into memory & clear them on request.
  */
 public class ResourceManager {
 
@@ -93,7 +93,7 @@ public class ResourceManager {
 	private static final String INDEXES_CACHE = "ind.cache";
 
 	private static final Log log = PlatformUtil.getLog(ResourceManager.class);
-	
+
 	protected static ResourceManager manager = null;
 
 	protected File dirWithTiles ;
@@ -117,11 +117,11 @@ public class ResourceManager {
 		STREET_LOOKUP,
 		TRANSPORT,
 		ADDRESS,
-		QUICK_SEARCH, 
+		QUICK_SEARCH,
 		ROUTING,
 		TRANSPORT_ROUTING
 	}
-	
+
 	public static class BinaryMapReaderResource {
 		private BinaryMapIndexReader initialReader;
 		private File filename;
@@ -175,7 +175,7 @@ public class ResourceManager {
 			}
 			initialReader = null;
 		}
-		
+
 		public boolean isClosed() {
 			return initialReader == null;
 		}
@@ -191,7 +191,7 @@ public class ResourceManager {
 		public void setUseForRouting(boolean useForRouting) {
 			this.useForRouting = useForRouting;
 		}
-		
+
 		public boolean isUseForRouting() {
 			return useForRouting;
 		}
@@ -204,34 +204,35 @@ public class ResourceManager {
 			this.useForPublicTransport = useForPublicTransport;
 		}
 	}
-	
+
 	protected final Map<String, BinaryMapReaderResource> fileReaders = new ConcurrentHashMap<String, BinaryMapReaderResource>();
-	
-	
+
+
 	private final Map<String, RegionAddressRepository> addressMap = new ConcurrentHashMap<String, RegionAddressRepository>();
 	protected final Map<String, AmenityIndexRepository> amenityRepositories =  new ConcurrentHashMap<String, AmenityIndexRepository>();
 //	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<String, BinaryMapIndexReader>();
 	protected final Map<String, BinaryMapReaderResource> transportRepositories = new ConcurrentHashMap<String, BinaryMapReaderResource>();
-	
+	protected final Map<String, BinaryMapReaderResource> travelRepositories = new ConcurrentHashMap<String, BinaryMapReaderResource>();
+
 	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<String, String>();
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<String, String>();
-	
-	
+
+
 	protected final IncrementalChangesManager changesManager = new IncrementalChangesManager(this);
-	
+
 	protected final MapRenderRepositories renderer;
 
 	protected final MapTileDownloader tileDownloader;
-	
+
 	public final AsyncLoadingThread asyncLoadingThread = new AsyncLoadingThread(this);
-	
+
 	private HandlerThread renderingBufferImageThread;
-	
+
 	protected boolean internetIsNotAccessible = false;
 	private boolean depthContours;
-	
+
 	public ResourceManager(OsmandApplication context) {
-		
+
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
 
@@ -273,7 +274,7 @@ public class ResourceManager {
 	public MapTileDownloader getMapTileDownloader() {
 		return tileDownloader;
 	}
-	
+
 	public HandlerThread getRenderingBufferImageThread() {
 		return renderingBufferImageThread;
 	}
@@ -301,11 +302,11 @@ public class ResourceManager {
 			tilesCache.setDirWithTiles(dirWithTiles);
 		}
 	}
-	
+
 	public java.text.DateFormat getDateFormat() {
 		return DateFormat.getDateFormat(context);
 	}
-	
+
 	public OsmandApplication getContext() {
 		return context;
 	}
@@ -334,12 +335,12 @@ public class ResourceManager {
 			}
 		}
 	}
-	
+
 	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom) {
 		TilesCache cache = getTilesCache(map);
 		return cache != null && cache.tileExistOnFileSystem(file, map, x, y, zoom);
 	}
-	
+
 	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom){
 		TilesCache cache = getTilesCache(map);
 		if (cache != null) {
@@ -475,7 +476,7 @@ public class ResourceManager {
 			log.error("Error while loading tts files from assets", e);
 		}
 	}
-	
+
 	public List<String> checkAssets(IProgress progress, boolean forceUpdate) {
 		String fv = Version.getFullVersion(context);
 		if(context.getAppInitializer().isAppVersionChanged()) {
@@ -511,7 +512,7 @@ public class ResourceManager {
 		}
 		return Collections.emptyList();
 	}
-	
+
 	private void copyRegionsBoundaries() {
 		try {
 			File file = context.getAppPath("regions.ocbf");
@@ -524,7 +525,7 @@ public class ResourceManager {
 			log.error(e.getMessage(), e);
 		}
 	}
-	
+
 	private void copyPoiTypes() {
 		try {
 			File file = context.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml");
@@ -608,9 +609,9 @@ public class ResourceManager {
 		}
 		return files;
 	}
-	
-	
-	
+
+
+
 	private void renameRoadsFiles(ArrayList<File> files, File roadsPath) {
 		Iterator<File> it = files.iterator();
 		while(it.hasNext()) {
@@ -630,18 +631,17 @@ public class ResourceManager {
 		File appPath = context.getAppPath(null);
 		File roadsPath = context.getAppPath(IndexConstants.ROADS_INDEX_DIR);
 		roadsPath.mkdirs();
-		
+
 		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		renameRoadsFiles(files, roadsPath);
 		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		if (Version.isPaidVersion(context)) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
-			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isSubscribedToLiveUpdates(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
-		
+
 		changesManager.collectChangesFiles(context.getAppPath(IndexConstants.LIVE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 
 		Collections.sort(files, Algorithms.getFileVersionComparator());
@@ -729,7 +729,7 @@ public class ResourceManager {
 					}
 					renderer.initializeNewResource(progress, f, mapReader);
 					BinaryMapReaderResource resource = new BinaryMapReaderResource(f, mapReader);
-					
+
 					fileReaders.put(f.getName(), resource);
 					if (!mapReader.getRegionNames().isEmpty()) {
 						RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(this, resource);
@@ -738,8 +738,9 @@ public class ResourceManager {
 					if (mapReader.hasTransportData()) {
 						transportRepositories.put(f.getName(), resource);
 					}
+					collectTravelFiles(mapReader, resource);
 					// disable osmc for routing temporarily due to some bugs
-					if (mapReader.containsRouteData() && (!f.getParentFile().equals(liveDir) || 
+					if (mapReader.containsRouteData() && (!f.getParentFile().equals(liveDir) ||
 							context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get())) {
 						resource.setUseForRouting(true);
 					}
@@ -801,7 +802,15 @@ public class ResourceManager {
 		return warnings;
 	}
 
-	
+	private void collectTravelFiles(BinaryMapIndexReader mapReader, BinaryMapReaderResource resource) {
+		BinaryMapIndexReader index = mapReader;
+		for (BinaryIndexPart p : index.getIndexes()) {
+			if (p instanceof BinaryMapPoiReaderAdapter.PoiRegion) {
+				transportRepositories.put(index.getFile().getName(), resource);
+			}
+		}
+	}
+
 
 	public void initMapBoundariesCacheNative() {
 		File indCache = context.getAppPath(INDEXES_CACHE);
@@ -812,7 +821,7 @@ public class ResourceManager {
 			}
 		}
 	}
-	
+
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 
 	public List<AmenityIndexRepository> getAmenityRepositories() {
@@ -878,9 +887,9 @@ public class ResourceManager {
 				if (!filter.isEmpty()) {
 					for (AmenityIndexRepository index : getAmenityRepositories()) {
 						if (index.checkContainsInt(
-								MapUtils.get31TileNumberY(topLatitude), 
-								MapUtils.get31TileNumberX(leftLongitude), 
-								MapUtils.get31TileNumberY(bottomLatitude), 
+								MapUtils.get31TileNumberY(topLatitude),
+								MapUtils.get31TileNumberX(leftLongitude),
+								MapUtils.get31TileNumberY(bottomLatitude),
 								MapUtils.get31TileNumberX(rightLongitude))) {
 							repos.add(index);
 						}
@@ -900,8 +909,8 @@ public class ResourceManager {
 		}
 		return amenities;
 	}
-	
-	
+
+
 	public boolean containsAmenityRepositoryToSearch(boolean searchByName){
 		for (AmenityIndexRepository index : getAmenityRepositories()) {
 			if(searchByName){
@@ -914,9 +923,9 @@ public class ResourceManager {
 		}
 		return false;
 	}
-	
+
 	public List<Amenity> searchAmenitiesByName(String searchQuery,
-			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
+			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
 			double lat, double lon, ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<Amenity>();
 		List<AmenityIndexRepositoryBinary> list = new ArrayList<AmenityIndexRepositoryBinary>();
@@ -935,11 +944,11 @@ public class ResourceManager {
 					} else {
 						list.add((AmenityIndexRepositoryBinary) index);
 					}
-					
+
 				}
 			}
 		}
-		
+
 		// Not using boundares results in very slow initial search if user has many maps installed
 //		int left = 0;
 //		int top = 0;
@@ -957,7 +966,7 @@ public class ResourceManager {
 
 		return amenities;
 	}
-	
+
 	public Map<PoiCategory, List<String>> searchAmenityCategoriesByName(String searchQuery, double lat, double lon) {
 		Map<PoiCategory, List<String>> map = new LinkedHashMap<PoiCategory, List<String>>();
 		for (AmenityIndexRepository index : getAmenityRepositories()) {
@@ -973,17 +982,17 @@ public class ResourceManager {
 	public AmenityIndexRepositoryBinary getAmenityRepositoryByFileName(String filename) {
 		return (AmenityIndexRepositoryBinary) amenityRepositories.get(filename);
 	}
-	
+
 	////////////////////////////////////////////// Working with address ///////////////////////////////////////////
-	
+
 	public RegionAddressRepository getRegionRepository(String name){
 		return addressMap.get(name);
 	}
-	
+
 	public Collection<RegionAddressRepository> getAddressRepositories(){
 		return addressMap.values();
 	}
-	
+
 	public Collection<BinaryMapReaderResource> getFileReaders() {
 		List<String> fileNames = new ArrayList<>(fileReaders.keySet());
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
@@ -996,8 +1005,8 @@ public class ResourceManager {
 		}
 		return res;
 	}
-	
-	
+
+
 	////////////////////////////////////////////// Working with transport ////////////////////////////////////////////////
 
 	private List<BinaryMapIndexReader> getTransportRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
@@ -1009,6 +1018,20 @@ public class ResourceManager {
 			if (r != null && r.isUseForPublicTransport() &&
 					r.getShallowReader().containTransportData(topLat, leftLon, bottomLat, rightLon)) {
 				res.add(r.getReader(BinaryMapReaderResourceType.TRANSPORT));
+			}
+		}
+		return res;
+	}
+
+	private List<BinaryMapIndexReader> getTravelRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
+		List<String> fileNames = new ArrayList<>(travelRepositories.keySet());
+		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
+		List<BinaryMapIndexReader> res = new ArrayList<>();
+		for (String fileName : fileNames) {
+			BinaryMapReaderResource r = travelRepositories.get(fileName);
+			if (r != null && r.isUseForPublicTransport() &&
+					r.getShallowReader().containTransportData(topLat, leftLon, bottomLat, rightLon)) {
+				res.add(r.getReader(BinaryMapReaderResourceType.POI));
 			}
 		}
 		return res;
@@ -1043,37 +1066,38 @@ public class ResourceManager {
 	public boolean updateRenderedMapNeeded(RotatedTileBox rotatedTileBox, DrawSettings drawSettings) {
 		return renderer.updateMapIsNeeded(rotatedTileBox, drawSettings);
 	}
-	
+
 	public void updateRendererMap(RotatedTileBox rotatedTileBox, OnMapLoadedListener mapLoadedListener){
 		renderer.interruptLoadingMap();
 		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(rotatedTileBox, mapLoadedListener));
 	}
-	
+
 	public void interruptRendering(){
 		renderer.interruptLoadingMap();
 	}
-	
+
 	public boolean isSearchAmenitiesInProgress() {
 		return searchAmenitiesInProgress;
 	}
-	
+
 	public MapRenderRepositories getRenderer() {
 		return renderer;
 	}
-	
+
 	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
-	
+
 	public void closeFile(String fileName) {
 		amenityRepositories.remove(fileName);
 		addressMap.remove(fileName);
 		transportRepositories.remove(fileName);
+		travelRepositories.remove(fileName);
 		indexFileNames.remove(fileName);
 		renderer.closeConnection(fileName);
 		BinaryMapReaderResource resource = fileReaders.remove(fileName);
 		if(resource != null) {
 			resource.close();
 		}
-	}	
+	}
 
 	public synchronized void close(){
 		for (TilesCache tc : tilesCacheList) {
@@ -1083,6 +1107,7 @@ public class ResourceManager {
 		basemapFileNames.clear();
 		renderer.clearAllResources();
 		transportRepositories.clear();
+		travelRepositories.clear();
 		addressMap.clear();
 		amenityRepositories.clear();
 		for(BinaryMapReaderResource res : fileReaders.values()) {
@@ -1090,8 +1115,8 @@ public class ResourceManager {
 		}
 		fileReaders.clear();
 	}
-	
-	
+
+
 	public BinaryMapIndexReader[] getRoutingMapFiles() {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
@@ -1139,7 +1164,8 @@ public class ResourceManager {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource res : fileReaders) {
-			if (!res.filename.toString().toLowerCase().contains("travel.obf")) {
+			if (!res.filename.toString().toLowerCase()
+					.contains(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
 				continue;
 			}
 			BinaryMapIndexReader index = res.getReader(BinaryMapReaderResourceType.POI);
@@ -1156,8 +1182,8 @@ public class ResourceManager {
 	public Map<String, String> getIndexFileNames() {
 		return new LinkedHashMap<String, String>(indexFileNames);
 	}
-	
-	
+
+
 	public boolean containsBasemap(){
 		return !basemapFileNames.isEmpty();
 	}
@@ -1192,13 +1218,13 @@ public class ResourceManager {
 		}
 		return map;
 	}
-	
+
 	public synchronized void reloadTilesFromFS() {
 		for (TilesCache tc : tilesCacheList) {
 			tc.tilesOnFS.clear();
 		}
 	}
-	
+
 	/// On low memory method ///
 	public void onLowMemory() {
 		log.info("On low memory");
@@ -1207,10 +1233,10 @@ public class ResourceManager {
 			r.clearCache();
 		}
 		renderer.clearCache();
-		
+
 		System.gc();
 	}
-	
+
 	public GeoidAltitudeCorrection getGeoidAltitudeCorrection() {
 		return geoidAltitudeCorrection;
 	}
@@ -1225,7 +1251,7 @@ public class ResourceManager {
 			tc.clearTiles();
 		}
 	}
-	
+
 	public IncrementalChangesManager getChangesManager() {
 		return changesManager;
 	}

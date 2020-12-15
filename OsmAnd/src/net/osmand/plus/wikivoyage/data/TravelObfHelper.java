@@ -34,9 +34,7 @@ public class TravelObfHelper implements TravelHelper {
 	private final OsmandApplication application;
 
 	private TravelLocalDataHelper localDataHelper;
-	private SQLiteAPI.SQLiteConnection connection = null;
 
-	private File selectedTravelBook = null;
 	private List<BinaryMapIndexReader> files;
 	private List<File> existingTravelBooks = new ArrayList<>();
 	private List<TravelArticle> popularArticles = new ArrayList<TravelArticle>();
@@ -52,59 +50,21 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Override
-	public boolean isAnyTravelBookPresent() {
-		return selectedTravelBook != null;
-	}
-
 	public void initializeDataOnAppStartup() {
-		List<File> files = getPossibleFiles();
-		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
-		existingTravelBooks.clear();
-		if (files != null && !files.isEmpty()) {
-			for (File f : files) {
-				existingTravelBooks.add(f);
-				if (selectedTravelBook == null) {
-					selectedTravelBook = f;
-				} else if (Algorithms.objectEquals(travelBook, f.getName())) {
-					selectedTravelBook = f;
-				}
-			}
-		} else {
-			selectedTravelBook = null;
-		}
+
 	}
 
-	@Nullable
-	private List<File> getPossibleFiles() {
-		File[] files = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
-		if (files != null) {
-			List<File> res = new ArrayList<>();
-			for (File file : files) {
-				if (file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
-					res.add(file);
-				}
-			}
-			return res;
-		}
-		return null;
+	@Override
+	public boolean isAnyTravelBookPresent() {
+		return checkIfObfFileExists(application);
 	}
+
 
 	public void initializeDataToDisplay() {
 		localDataHelper.refreshCachedData();
 		loadPopularArticles();
 	}
 
-
-	public String getSelectedTravelBookName() {
-		if (selectedTravelBook != null) {
-			return selectedTravelBook.getName();
-		}
-		return null;
-	}
-
-	public List<File> getExistingTravelBooks() {
-		return existingTravelBooks;
-	}
 
 	@NonNull
 	public List<WikivoyageSearchResult> search(final String searchQuery) {
@@ -192,6 +152,24 @@ public class TravelObfHelper implements TravelHelper {
 			GPXUtilities.writeGpxFile(file, gpx);
 		}
 		return file;
+	}
+
+	@Override
+	public String getSelectedTravelBookName() {
+		//TODO REPLACE
+		return "OBF TRAVEL BOOK";
+	}
+
+	public static boolean checkIfObfFileExists(OsmandApplication app) {
+		File[] files = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
+		if (files != null) {
+			for (File f : files) {
+				if (f.getName().contains(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	// might use in future
