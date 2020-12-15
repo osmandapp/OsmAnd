@@ -3885,4 +3885,12 @@
     <string name="poi_lifeguard_base">救生員基地</string>
     <string name="poi_vaccination_covid19">預防接種：COVID-19</string>
     <string name="poi_health_specialty_vaccination_yes">預防接種</string>
+    <string name="poi_water_source_lake">湖</string>
+    <string name="poi_water_source_river">河流</string>
+    <string name="poi_water_source_well">井</string>
+    <string name="poi_water_source_powered_pump">動力幫浦</string>
+    <string name="poi_water_source_water_tank">水箱</string>
+    <string name="poi_water_source_tap">點擊</string>
+    <string name="poi_water_source_water_works">自來水廠</string>
+    <string name="poi_water_source_tube_well">管井</string>
 </resources>
