@@ -102,7 +102,7 @@ public class ContextMenuItemsSettings implements Serializable {
 		return Collections.unmodifiableList(orderIds);
 	}
 
-	public static ContextMenuItemsSettings getDefaultInstanceForDrawer() {
+	public static ContextMenuItemsSettings getDrawerDefaultInstance() {
 		ArrayList<String> hiddenByDefault = new ArrayList<>();
 		hiddenByDefault.add(DRAWER_DASHBOARD_ID);
 		return new ContextMenuItemsSettings(hiddenByDefault, new ArrayList<String>());
