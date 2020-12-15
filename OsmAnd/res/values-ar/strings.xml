@@ -3781,7 +3781,7 @@
     <string name="lenght_limit_description">إعطاء معلومات وزن مركبتك ،قد يتم تطبيق بعض القيود على المركبات الثقيلة.</string>
     <string name="quick_action_remove_next_destination">حذف نقطة الوجهة التالية</string>
     <string name="please_provide_point_name_error">يرجى إعطاء اسم للنقطة</string>
-    <string name="quick_action_remove_next_destination_descr">سيتم حذف نقطة الوجهة الحالية على المسار. إذا كانت هي الوجهة، سوف تتوقف الملاحة.</string>
+    <string name="quick_action_remove_next_destination_descr">سيتم حذف نقطة الوجهة الحالية على المسار. إذا كانت هي الوجهة الرئيسية، سوف تتوقف الملاحة.</string>
     <string name="search_download_wikipedia_maps">تنزيل بيانات ويكيبيديا</string>
     <string name="plugin_wikipedia_description">الحصول على معلومات حول النقاط المثيرة للاهتمام من ويكيبيديا. إنه دليلك غير المتصل بجيبك - ما عليك سوى تمكين المكون الإضافي ويكبيديا والاستمتاع بمقالات حول الكائنات من حولك.</string>
     <string name="app_mode_enduro_motorcycle">دراجة نارية</string>
@@ -3821,7 +3821,7 @@
     <string name="route_between_points_warning_desc">بعد ذلك ، ألقط مسارك بأقرب طريق مسموح به باستخدام أحد أوضاع التنقل الخاصة بك لاستخدام هذا الخيار.</string>
     <string name="threshold_distance">بداية المسافة</string>
     <string name="street_level_imagery">صور للشارع</string>
-    <string name="plan_route_exit_dialog_descr">هل أنت متأكد أنك تريد إغلاق مسار الخطة دون حفظ؟ سوف تفقد كل التغييرات؟</string>
+    <string name="plan_route_exit_dialog_descr">هل أنت متأكد أنك تريد إغلاق مسار الرحلة دون حفظ؟ سوف تفقد كل التغييرات؟</string>
     <string name="in_case_of_reverse_direction">في حالة الاتجاه المعاكس</string>
     <string name="save_track_to_gpx">تسجيل المسار أثناء الملاحة</string>
     <string name="shared_string_save_as_gpx">حفظ كملف مسار جديد</string>
@@ -3855,7 +3855,7 @@
     <string name="plan_route_change_route_type_before">تغيير نوع المسار قبل</string>
     <string name="plan_route_change_route_type_after">تغيير نوع المسار بعد</string>
     <string name="number_of_gpx_files_selected_pattern">%s ملفات مسارات محددة</string>
-    <string name="disable_recording_once_app_killed_descrp">سيتم إيقاف تسجيل المسار مؤقتًا عند غلق التطبيق (عبر نافذة التطبيقات المستخدمة مؤخرا). (إشارة تشغيل التطبيق في الخلفية ستختفي من الشريط العلوي.)</string>
+    <string name="disable_recording_once_app_killed_descrp">سيتم إيقاف تسجيل المسار مؤقتًا عند إغلاق التطبيق (عبر نافذة التطبيقات المستخدمة مؤخرا). (إشارة تشغيل التطبيق في الخلفية ستختفي من الشريط العلوي.)</string>
     <string name="save_global_track_interval_descr">حدد الفاصل الزمني للادخال الخاص بالتسجيل العام للمسار (مفعل من خلال ودجت \"تسجيل الرحلة\" على الخريطة).</string>
     <string name="gpx_monitoring_stop">إيقاف تسجيل الرحلة مؤقتًا</string>
     <string name="gpx_monitoring_start">استئناف تسجيل الرحلة</string>
@@ -4003,4 +4003,6 @@
 \n • دعم ألوان مخصصة للمفضلة ونقاط لمسار الطريق
 \n
 \n</string>
+    <string name="profile_type_osmand_string">ملف تعريف أوسماند</string>
+    <string name="profile_type_user_string">ملف تعريف المستخدم</string>
 </resources>

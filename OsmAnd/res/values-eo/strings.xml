@@ -4015,4 +4015,6 @@
 \n • propraj koloroj por ŝatataj ejoj kaj navigadpunktoj de spuro
 \n
 \n</string>
+    <string name="profile_type_osmand_string">OsmAnd‑profilo</string>
+    <string name="profile_type_user_string">Profilo de uzanto</string>
 </resources>

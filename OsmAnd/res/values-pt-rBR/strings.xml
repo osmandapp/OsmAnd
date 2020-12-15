@@ -1874,7 +1874,7 @@
     <string name="move_marker_bottom_sheet_title">Mova o mapa para reposicionar o marcador</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="use_osm_live_routing">Navegação OsmAnd Live</string>
-    <string name="access_no_destination">Destino não definido</string>
+    <string name="access_no_destination">Plug-in de acessibilidade: sem destino definido</string>
     <string name="access_disable_offroute_recalc_descr">Desabilitar recálculo de rota depois de ter saído de rota.</string>
     <string name="access_disable_wrong_direction_recalc_descr">Desabilitar recálculo de rota se só estiver se movendo na direção oposta.</string>
     <string name="follow_us">Siga-nos</string>
@@ -2062,7 +2062,7 @@
     <string name="quick_action_showhide_osmbugs_descr">Botão para mostrar ou ocultar notas do OSM no mapa.</string>
     <string name="sorted_by_distance">Classificado por distância</string>
     <string name="search_favorites">Pesquisar Favoritos</string>
-    <string name="hillshade_menu_download_descr">Baixe o mapa \'Hillshade Overlay\' para mostrar o sombreamento vertical.</string>
+    <string name="hillshade_menu_download_descr">Baixe o mapa de sombreado para mostrar o sombreamento vertical.</string>
     <string name="hillshade_purchase_header">Instale o plugin \'Curvas de nível\' para mostrar declividades.</string>
     <string name="hide_from_zoom_level">Ocultar a partir do nível de zoom</string>
     <string name="srtm_menu_download_descr">Baixe o mapa \'Curvas de nível\' para usar nesta região.</string>
@@ -3423,7 +3423,7 @@
     <string name="login_and_pass">Usuário e senha</string>
     <string name="plugin_global_prefs_info">Essas configurações de plug-in são globais e se aplicam a todos os perfis</string>
     <string name="osm_editing">Edição OSM</string>
-    <string name="osm_edits_view_descr">Você pode ver todas as suas edições ainda não carregadas ou erros de OSM em %1$s. Os pontos carregados não aparecem no OsmAnd.</string>
+    <string name="osm_edits_view_descr">Veja todas as suas edições ainda não carregadas ou erros de OSM em %1$s. As alterações já enviadas não aparecerão mais.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ícone mostrado ao navegar ou mover.</string>
     <string name="select_map_icon_descr">Ícone mostrado em repouso.</string>
@@ -3787,9 +3787,9 @@
     <string name="lenght_limit_description">Forneça o comprimento do seu veículo. Algumas restrições de rotas podem ser aplicadas a veículos longos.</string>
     <string name="quick_action_remove_next_destination">Apagar o ponto de destino mais próximo</string>
     <string name="please_provide_point_name_error">Forneça um nome para o ponto</string>
-    <string name="quick_action_remove_next_destination_descr">O ponto de destino atual na rota será excluído. Se for o destino, a navegação será interrompida.</string>
+    <string name="quick_action_remove_next_destination_descr">Exclui o próximo destino da sua rota. Se esse for o destino final, a navegação será interrompida.</string>
     <string name="search_download_wikipedia_maps">Baixar mapas da Wikipédia</string>
-    <string name="plugin_wikipedia_description">Obtenha informações sobre pontos de interesse na Wikipédia. É o seu guia offline de bolso - basta ativar o plug-in da Wikipédia e desfrutar dos artigos sobre os objetos ao seu redor.</string>
+    <string name="plugin_wikipedia_description">Obtenha informações sobre pontos de interesse na Wikipédia, um guia off-line de bolso com artigos sobre lugares e destinos.</string>
     <string name="app_mode_enduro_motorcycle">Motocicleta enduro</string>
     <string name="app_mode_motor_scooter">Motoneta</string>
     <string name="app_mode_wheelchair">Cadeira de rodas</string>
@@ -3829,7 +3829,7 @@
     <string name="navigation_profile">Perfil de navegação</string>
     <string name="route_between_points_add_track_desc">Selecione um arquivo de trilha para o qual um novo segmento será adicionado.</string>
     <string name="street_level_imagery">Imagens de rua</string>
-    <string name="plan_route_exit_dialog_descr">Tem certeza de que deseja descartar todas as alterações no percurso planejado, fechando-o\?</string>
+    <string name="plan_route_exit_dialog_descr">Tem certeza de que deseja descartar todas as alterações no percurso planejado\?</string>
     <string name="in_case_of_reverse_direction">Em caso de direção reversa</string>
     <string name="shared_string_save_as_gpx">Salvar como novo arquivo de trilha</string>
     <string name="shared_string_gpx_files">Trilhas</string>
@@ -3866,7 +3866,7 @@
     <string name="simplified_track_description">Apenas a linha da rota será salva, os waypoints serão excluídos.</string>
     <string name="shared_string_file_name">Nome do arquivo</string>
     <string name="number_of_gpx_files_selected_pattern">%s arquivos de trilha selecionados</string>
-    <string name="disable_recording_once_app_killed_descrp">Pausará o registro de rastreamento quando o aplicativo for encerrado (por meio de aplicativos recentes). (A indicação de uso em segundo plano do OsmAnd desaparece da barra de notificação do Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">O registro de trilhas fará uma pausa quando o aplicativo for encerrado (por meio de aplicativos recentes). (A indicação de segundo plano do OsmAnd desaparece da barra de notificação do Android.)</string>
     <string name="save_global_track_interval_descr">Especifique o intervalo de registro para a gravação geral da trilha (ligado por meio do widget de \'gravação de viagem\' no mapa).</string>
     <string name="gpx_monitoring_stop">Pausar gravação de viagem</string>
     <string name="gpx_monitoring_start">Retomar a gravação da viagem</string>
@@ -3901,12 +3901,12 @@
     <string name="sort_name_ascending">Nome: A – Z</string>
     <string name="start_finish_icons">Ícones de início e término</string>
     <string name="contour_lines_thanks">Obrigado por adquirir \'curvas de nível\'</string>
-    <string name="osm_live_payment_desc_hw">Assinatura cobrada por período selecionado. Cancele no AppGallery a qualquer momento.</string>
-    <string name="osm_live_payment_subscription_management_hw">O pagamento será cobrado em sua conta AppGallery na confirmação da compra.
+    <string name="osm_live_payment_desc_hw">A assinatura é cobrada de acordo com o período selecionado. Cancele em seu AppGallery a qualquer momento.</string>
+    <string name="osm_live_payment_subscription_management_hw">Sua conta AppGallery é cobrada após a confirmação da compra.
 \n
-\nA assinatura é renovada automaticamente, a menos que seja cancelada antes da data de renovação. Sua conta será cobrada pelo período de renovação (mês/três meses/ano) apenas na data de renovação.
+\nA assinatura se prolonga automaticamente, a menos que seja cancelada antes da data de renovação. Sua conta será cobrada pelo período de renovação (mês/três meses/ano) apenas na data de renovação.
 \n
-\nVocê pode gerenciar e cancelar suas assinaturas acessando as configurações do AppGallery.</string>
+\nVocê pode gerenciar e cancelar suas assinaturas nas configurações do AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Evite passarelas</string>
     <string name="routing_attr_avoid_footways_name">Evite passarelas</string>
     <string name="development">Desenvolvimento</string>
@@ -3943,7 +3943,7 @@
     <string name="mgrs_format_descr">OsmAnd usa MGRS, que é semelhante ao formato UTM NATO.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Adicione pelo menos dois pontos</string>
     <string name="manage_subscription">Gerenciar assinatura</string>
-    <string name="subscription_payment_issue_title">Há um problema com sua assinatura. Toque no botão para ir para as configurações de assinatura do Google Play para corrigir sua forma de pagamento.</string>
+    <string name="subscription_payment_issue_title">Toque no botão para configurar um método de pagamento no Google Play para corrigir sua assinatura.</string>
     <string name="subscription_expired_title">A assinatura do OsmAnd Live expirou</string>
     <string name="subscription_paused_title">A assinatura do OsmAnd Live foi pausada</string>
     <string name="subscription_on_hold_title">A assinatura do OsmAnd Live está em espera</string>
@@ -4011,4 +4011,6 @@
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir depois</string>
     <string name="plan_route_add_new_segment">Adicionar novo segmento</string>
+    <string name="profile_type_osmand_string">Perfil do OsmAnd</string>
+    <string name="profile_type_user_string">Perfil de usuário</string>
 </resources>
