@@ -2904,7 +2904,7 @@
     <string name="routeInfo_road_types_name">Veityper</string>
     <string name="exit_at">Gå av på</string>
     <string name="sit_on_the_stop">Sitt på stoppet</string>
-    <string name="quick_action_show_hide_gpx_tracks">Vis/skjul GPX-spor</string>
+    <string name="quick_action_show_hide_gpx_tracks">Vis/skjul spor</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Knapp for å vise eller skjule valgte spor på kartet.</string>
     <string name="quick_action_gpx_tracks_hide">Skjul spor</string>
     <string name="quick_action_gpx_tracks_show">Vis spor</string>
@@ -2945,9 +2945,9 @@
     <string name="rendering_attr_surface_paved_name">Fast dekke</string>
     <string name="rendering_attr_surface_concrete_name">Betong</string>
     <string name="rendering_attr_surface_sett_name">Brostein</string>
-    <string name="rendering_attr_surface_cobblestone_name">Rustikk brostein</string>
+    <string name="rendering_attr_surface_cobblestone_name">Naturlig brostein</string>
     <string name="rendering_attr_surface_paving_stones_name">Steinbelagt</string>
-    <string name="rendering_attr_surface_pebblestone_name">Småstein</string>
+    <string name="rendering_attr_surface_pebblestone_name">Rullestein</string>
     <string name="rendering_attr_surface_stone_name">Stein</string>
     <string name="rendering_attr_surface_metal_name">Metall</string>
     <string name="rendering_attr_surface_wood_name">Tre</string>
@@ -3031,7 +3031,7 @@
     <string name="make_osmand_better_descr">Tillat OsmAnd å samle inn og behandle anonym programbruksdata. Ingen data om din plassering, eller om plasseringer du ser på kartet blir samlet inn. 
 \n 
 \nDu kan alltid endre ditt valg i \"Innstillinger\" → \"Personvern og sikkerhet\".</string>
-    <string name="choose_data_to_share">Velg hvilken data du ønsker å dele:</string>
+    <string name="choose_data_to_share">Velg typen data du vil dele:</string>
     <string name="downloaded_maps">Nedlastede kart</string>
     <string name="visited_screens">Besøkte skjermer</string>
     <string name="collected_data_descr">Definer hvilken data du ønsker å dele med OsmAnd.</string>
@@ -3039,7 +3039,7 @@
     <string name="visited_screens_collect_descr">Hjelp oss å fastslå popularitet for OsmAnd-funksjoner.</string>
     <string name="privacy_and_security_change_descr">Trykk \"Tillat\" hvis du samtykker du til vår %1$s</string>
     <string name="settings_privacy_and_security">Personvern og sikkerhet</string>
-    <string name="settings_privacy_and_security_desc">Velg data til deling</string>
+    <string name="settings_privacy_and_security_desc">Velg hvilke data du deler</string>
     <string name="shared_string_no_thank_you">Nei takk</string>
     <string name="shared_string_allow">Tillat</string>
     <string name="profile_name_hint">Profilnavn</string>
@@ -3048,8 +3048,8 @@
     <string name="app_mode_horse">Hest</string>
     <string name="app_mode_helicopter">Helikopter</string>
     <string name="osmand_routing_promo">Du kan legge til din egen endrede versjon av filen routing.xml til i ..osmand/routing</string>
-    <string name="app_mode_skiing">Skikjøring</string>
-    <string name="base_profile_descr_ski">Skikjøring</string>
+    <string name="app_mode_skiing">Stå på ski</string>
+    <string name="base_profile_descr_ski">Ski</string>
     <string name="show_compass_ruler">Vis kompasslinjal</string>
     <string name="hide_compass_ruler">Skjul kompasslinjal</string>
     <string name="select_icon_profile_dialog_title">Velg ikon</string>
@@ -3103,10 +3103,10 @@
     <string name="app_mode_offroad">Terreng</string>
     <string name="edit_profile_setup_title">Sett opp profil</string>
     <string name="routing_attr_max_num_changes_name">Antall overganger</string>
-    <string name="app_mode_shuttle_bus">Pendlebuss</string>
-    <string name="app_mode_subway">Tunnelbane</string>
+    <string name="app_mode_shuttle_bus">Skyttelbuss</string>
+    <string name="app_mode_subway">T-bane</string>
     <string name="select_base_profile_dialog_message">Baser din egendefinerte profil på en av de forvalgte programprofilene, dette definerer grunnleggende oppsett, som forvalg synliget for miniprogrammer, enheter for hastighet og distanse. Dette er de forvalgte programprofilene, sammen med eksempler på egentilpassede profiler de kan utvides til:</string>
-    <string name="base_profile_descr_public_transport">Alle typer offentlig transport</string>
+    <string name="base_profile_descr_public_transport">Offentlige transporttyper</string>
     <string name="zoom_by_wunderlinq_descr">Endre kartforstørrelse ved å rulle hjulet opp og ned. Escape tar deg tilbake til WunderLINQ-programmet.</string>
     <string name="quick_action_need_to_add_item_to_list">Legg til minst ett element i listen i hurtighandlingsinnstillingene</string>
     <string name="routing_attr_piste_type_downhill_description">Bakker for alpin skisport og tilgang til skiheiser.</string>
@@ -3125,8 +3125,8 @@
     <string name="shared_string_min_speed">Minimumshastighet</string>
     <string name="shared_string_max_speed">Maksimumshastighet</string>
     <string name="default_speed_setting_title">Standardhastighet</string>
-    <string name="default_speed_setting_descr">Endre forvalgte hastighetsinnstillinger</string>
-    <string name="minmax_speed_dialog_title">Sett min/maks -hastighet</string>
+    <string name="default_speed_setting_descr">Endre standardhastighetsinnstillinger</string>
+    <string name="minmax_speed_dialog_title">Still inn min/maks-hastighet</string>
     <string name="new_profile">Ny profil</string>
     <string name="shared_string_crash">Krasj</string>
     <string name="last_launch_crashed">OsmAnd krasjet tidligere. Hjelp til å forbedre OsmAnd ved å dele feilmeldingen.</string>
@@ -3157,11 +3157,11 @@
     <string name="app_mode_scooter">Scooter</string>
     <string name="precision_hdop_and_vdop">Vannrett nøyaktighet: %1$s, loddrett: %2$s</string>
     <string name="precision_hdop">Vannrett nøyaktighet: %s</string>
-    <string name="edit_profile_setup_subtitle">Profil beholder sine egne innstillinger</string>
-    <string name="edit_profile_setup_map_subtitle">Velg kartinnstillinger for profilen</string>
-    <string name="edit_profile_screen_options_subtitle">Velg skjerminnstillinger for profilen</string>
+    <string name="edit_profile_setup_subtitle">Profilen beholder sine egne innstillinger</string>
+    <string name="edit_profile_setup_map_subtitle">Velg kartalternativer for profilen</string>
+    <string name="edit_profile_screen_options_subtitle">Velg skjermalternativer for profilen</string>
     <string name="edit_profile_nav_settings_subtitle">Velg navigeringsinnstillinger for profilen</string>
-    <string name="routing_attr_max_num_changes_description">Angi øvre grense for endringer</string>
+    <string name="routing_attr_max_num_changes_description">Bestem det maksimale antall overganger</string>
     <string name="external_input_device">Eksterne inndataenheter</string>
     <string name="external_input_device_descr">Velg en enhet for ekstern kontroll, som f.eks. tastatur eller WunderLINQ.</string>
     <string name="sett_generic_ext_input">Tastatur</string>
@@ -3309,10 +3309,10 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Overgang</string>
     <string name="track_saved">Spor lagret</string>
     <string name="empty_filename">Tomt filnavn</string>
-    <string name="turn_screen_on_router">Vekk for sving</string>
+    <string name="turn_screen_on_router">Slå på skjermen ved sving</string>
     <string name="turn_screen_on_time_descr">Juster hvor lenge skjermen skal forbli påslått.</string>
     <string name="turn_screen_on_sensor">Bruk nærhetssensor</string>
-    <string name="turn_screen_on_sensor_descr">Vift hånden din over toppen av skjermen for å skru den på under navigasjon.</string>
+    <string name="turn_screen_on_sensor_descr">Å bevege hånden over skjermen vil slå den på.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Klasse 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Klasse 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Klasse 3</string>
