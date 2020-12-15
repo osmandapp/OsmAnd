@@ -19,10 +19,8 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
-import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
 import net.osmand.data.RotatedTileBox;
@@ -78,6 +76,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 
+import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 
 /**
@@ -636,6 +635,7 @@ public class ResourceManager {
 		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		if (Version.isPaidVersion(context)) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isSubscribedToLiveUpdates(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
@@ -728,7 +728,10 @@ public class ResourceManager {
 					}
 					renderer.initializeNewResource(progress, f, mapReader);
 					BinaryMapReaderResource resource = new BinaryMapReaderResource(f, mapReader);
-					
+					if (collectTravelFiles(resource)){
+						//travel files are indexed
+						continue;
+					}
 					fileReaders.put(f.getName(), resource);
 					if (!mapReader.getRegionNames().isEmpty()) {
 						RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(this, resource);
@@ -737,7 +740,6 @@ public class ResourceManager {
 					if (mapReader.hasTransportData()) {
 						transportRepositories.put(f.getName(), resource);
 					}
-					collectTravelFiles(mapReader, resource);
 					// disable osmc for routing temporarily due to some bugs
 					if (mapReader.containsRouteData() && (!f.getParentFile().equals(liveDir) || 
 							context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get())) {
@@ -814,10 +816,30 @@ public class ResourceManager {
 		return res;
 	}
 
-	private void collectTravelFiles(BinaryMapReaderResource resource) {
-		for (BinaryMapIndexReader index : getTravelRepositories()){
-			travelRepositories.put(index.getFile().getName(), resource);
+	private List<BinaryMapIndexReader> getTravelRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
+		List<String> fileNames = new ArrayList<>(transportRepositories.keySet());
+		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
+		List<BinaryMapIndexReader> res = new ArrayList<>();
+		for (String fileName : fileNames) {
+			int topx31 = MapUtils.get31TileNumberX(topLat);
+			int leftx31 = MapUtils.get31TileNumberY(leftLon);
+			int bottomx31 = MapUtils.get31TileNumberX(bottomLat);
+			int rightx31 = MapUtils.get31TileNumberY(rightLon);
+			BinaryMapReaderResource r = transportRepositories.get(fileName);
+			if (r != null &&
+					r.getShallowReader().containsPoiData(topx31, leftx31, bottomx31, rightx31)) {
+				res.add(r.getReader(BinaryMapReaderResourceType.TRANSPORT));
+			}
 		}
+		return res;
+	}
+
+	private boolean collectTravelFiles(BinaryMapReaderResource resource) {
+		if (resource.getFileName().contains(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)){
+			travelRepositories.put(resource.getFileName(), resource);
+			return true;
+		}
+		return false;
 	}
 
 	public void initMapBoundariesCacheNative() {
