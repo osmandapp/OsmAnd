@@ -803,27 +803,10 @@ public class ResourceManager {
 
 	private void collectTravelFiles(BinaryMapIndexReader mapReader, BinaryMapReaderResource resource) {
 		BinaryMapIndexReader index = mapReader;
-		for (BinaryIndexPart p : index.getIndexes()) {
-			if (p instanceof BinaryMapPoiReaderAdapter.PoiRegion) {
-				transportRepositories.put(index.getFile().getName(), resource);
-			}
+		for (BinaryIndexPart p : index.getPoiIndexes()) {
+			travelRepositories.put(index.getFile().getName(), resource);
 		}
 	}
-
-	private List<BinaryMapIndexReader> getTravelRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
-		List<String> fileNames = new ArrayList<>(travelRepositories.keySet());
-		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
-		List<BinaryMapIndexReader> res = new ArrayList<>();
-		for (String fileName : fileNames) {
-			BinaryMapReaderResource r = travelRepositories.get(fileName);
-			if (r != null && r.isUseForPublicTransport() &&
-					r.getShallowReader().containTransportData(topLat, leftLon, bottomLat, rightLon)) {
-				res.add(r.getReader(BinaryMapReaderResourceType.POI));
-			}
-		}
-		return res;
-	}
-
 
 	public void initMapBoundariesCacheNative() {
 		File indCache = context.getAppPath(INDEXES_CACHE);
@@ -1115,24 +1098,6 @@ public class ResourceManager {
 		fileReaders.clear();
 	}
 
-	public List<BinaryMapIndexReader> getTravelFiles() {
-		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
-		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
-		for (BinaryMapReaderResource res : fileReaders) {
-			if (!res.filename.toString().toLowerCase()
-					.contains(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-				continue;
-			}
-			BinaryMapIndexReader index = res.getReader(BinaryMapReaderResourceType.POI);
-			for (BinaryIndexPart p : index.getIndexes()) {
-				if (p instanceof BinaryMapPoiReaderAdapter.PoiRegion) {
-					readers.add(index);
-				}
-			}
-		}
-		return readers;
-	}
-	
 	public BinaryMapIndexReader[] getRoutingMapFiles() {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());

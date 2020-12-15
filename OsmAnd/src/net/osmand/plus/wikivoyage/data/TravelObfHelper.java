@@ -69,30 +69,30 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	public List<WikivoyageSearchResult> search(final String searchQuery) {
 		// TODO remove
-		this.files = application.getResourceManager().getTravelFiles();
+		//this.files = application.getResourceManager().getTravelFiles();
 		List<WikivoyageSearchResult> res = new ArrayList<>();
-		List<Amenity> searchObjects = new ArrayList<>();
-		for (BinaryMapIndexReader reader : files) {
-			try {
-				BinaryMapIndexReader.SearchRequest<Amenity> searchRequest = BinaryMapIndexReader.
-						buildSearchPoiRequest(0, 0, searchQuery,
-								0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
-
-				searchObjects = reader.searchPoiByName(searchRequest);
-			} catch (IOException e) {
-				LOG.error(e);
-			}
-		}
-		for (MapObject obj : searchObjects) {
-			//TODO map
-			WikivoyageSearchResult r = new WikivoyageSearchResult();
-			r.articleTitles = Collections.singletonList(obj.getName());
-			r.langs = Collections.singletonList(obj.getName());
-			r.imageTitle = (obj.getName());
-			r.isPartOf = Collections.singletonList(obj.getName());
-			r.routeId = "routeid";//obj.getId();
-			res.add(r);
-		}
+//		List<Amenity> searchObjects = new ArrayList<>();
+//		for (BinaryMapIndexReader reader : files) {
+//			try {
+//				BinaryMapIndexReader.SearchRequest<Amenity> searchRequest = BinaryMapIndexReader.
+//						buildSearchPoiRequest(0, 0, searchQuery,
+//								0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
+//
+//				searchObjects = reader.searchPoiByName(searchRequest);
+//			} catch (IOException e) {
+//				LOG.error(e);
+//			}
+//		}
+//		for (MapObject obj : searchObjects) {
+//			//TODO map
+//			WikivoyageSearchResult r = new WikivoyageSearchResult();
+//			r.articleTitles = Collections.singletonList(obj.getName());
+//			r.langs = Collections.singletonList(obj.getName());
+//			r.imageTitle = (obj.getName());
+//			r.isPartOf = Collections.singletonList(obj.getName());
+//			r.routeId = "routeid";//obj.getId();
+//			res.add(r);
+//		}
 		return res;
 	}
 
