@@ -801,9 +801,21 @@ public class ResourceManager {
 		return warnings;
 	}
 
-	private void collectTravelFiles(BinaryMapIndexReader mapReader, BinaryMapReaderResource resource) {
-		BinaryMapIndexReader index = mapReader;
-		for (BinaryIndexPart p : index.getPoiIndexes()) {
+	private List<BinaryMapIndexReader> getTravelRepositories() {
+		List<String> fileNames = new ArrayList<>(travelRepositories.keySet());
+		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
+		List<BinaryMapIndexReader> res = new ArrayList<>();
+		for (String fileName : fileNames) {
+			BinaryMapReaderResource r = travelRepositories.get(fileName);
+			if (r != null) {
+				res.add(r.getReader(BinaryMapReaderResourceType.POI));
+			}
+		}
+		return res;
+	}
+
+	private void collectTravelFiles(BinaryMapReaderResource resource) {
+		for (BinaryMapIndexReader index : getTravelRepositories()){
 			travelRepositories.put(index.getFile().getName(), resource);
 		}
 	}
