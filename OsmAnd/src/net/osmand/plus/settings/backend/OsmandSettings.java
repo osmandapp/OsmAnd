@@ -2520,7 +2520,7 @@ public class OsmandSettings {
 			new ListStringPreference(this, "inactive_poi_filters", null, ",,").makeProfile().cache();
 
 	public final ContextMenuItemsPreference DRAWER_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "drawer_items", DRAWER_ITEM_ID_SCHEME, ContextMenuItemsSettings.getDefaultInstanceForDrawer())
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "drawer_items", DRAWER_ITEM_ID_SCHEME, ContextMenuItemsSettings.getDrawerDefaultInstance())
 					.makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONFIGURE_MAP_ITEMS =
