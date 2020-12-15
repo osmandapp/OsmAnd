@@ -3781,8 +3781,8 @@
     <string name="route_between_points_warning_desc">Ardından, bu seçeneği kullanmak için navigasyon profillerinizden biriyle izlenen yolunuzu izin verilen en yakın yola tutturun.</string>
     <string name="save_as_new_track">Yeni bir izleme olarak kaydet</string>
     <string name="reverse_route">Ters güzergah</string>
-    <string name="route_between_points_whole_track_button_desc">Tüm yol, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
-    <string name="route_between_points_next_segment_button_desc">Sadece sonraki bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="route_between_points_whole_track_button_desc">Tüm yol, seçilen profil kullanılarak yeniden hesaplanacak.</string>
+    <string name="route_between_points_next_segment_button_desc">Yalnızca sonraki bölüm, seçilen profil kullanılarak yeniden hesaplanacak.</string>
     <string name="route_between_points_desc">Düz bir çizgi ile noktaların nasıl birleştirileceğini veya aşağıda belirtildiği gibi aralarında nasıl güzergah hesaplanacağını seçin.</string>
     <string name="whole_track">Tüm yol</string>
     <string name="next_segment">Sonraki bölüm</string>
@@ -3818,15 +3818,15 @@
     <string name="delete_address">Adres sil</string>
     <string name="add_address">Adres ekle</string>
     <string name="access_hint_enter_address">Adres girin</string>
-    <string name="simplified_track_description">Sadece güzergah hattı kaydedilecek, ara noktalar silinecektir.</string>
+    <string name="simplified_track_description">Yalnızca güzergah hattı kaydedilecek, ara noktalar silinecek.</string>
     <string name="shared_string_file_name">Dosya adı</string>
     <string name="system_default_theme">Sistem öntanımlı değeri</string>
     <string name="all_next_segments">Sonraki tüm bölümler</string>
     <string name="previous_segment">Önceki bölüm</string>
     <string name="all_previous_segments">Önceki tüm bölümler</string>
-    <string name="only_selected_segment_recalc">Sadece seçili bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
-    <string name="all_next_segments_will_be_recalc">Sonraki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
-    <string name="all_previous_segments_will_be_recalc">Önceki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="only_selected_segment_recalc">Yalnızca seçilen bölüm, seçilen profil kullanılarak yeniden hesaplanacak.</string>
+    <string name="all_next_segments_will_be_recalc">Sonraki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacak.</string>
+    <string name="all_previous_segments_will_be_recalc">Önceki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacak.</string>
     <string name="shared_string_gpx_route">Yol güzergahı</string>
     <string name="follow_track">Yolu takip et</string>
     <string name="follow_track_descr">Takip edilecek yol dosyasını seçin</string>
@@ -3971,4 +3971,6 @@
 \n • Sık kullanılanlar ve yol ara noktaları için özel renk desteği
 \n
 \n</string>
+    <string name="profile_type_osmand_string">OsmAnd profili</string>
+    <string name="profile_type_user_string">Kullanıcı profili</string>
 </resources>
