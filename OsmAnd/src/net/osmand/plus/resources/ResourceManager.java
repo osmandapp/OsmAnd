@@ -1161,7 +1161,7 @@ public class ResourceManager {
 		return maps != null && maps.length > 0;
 	}
 
-	public BinaryMapIndexReader[] getTravelFiles() {
+	public List<BinaryMapIndexReader> getTravelRepositories() {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource res : fileReaders) {
@@ -1175,11 +1175,7 @@ public class ResourceManager {
 				}
 			}
 		}
-		return readers.toArray(new BinaryMapIndexReader[0]);
-	}
-
-	public boolean hasTravelObfFile() {
-		return isMapsPresentInDirectory(IndexConstants.WIKIVOYAGE_INDEX_DIR);
+		return readers;
 	}
 
 	public Map<String, String> getBackupIndexes(Map<String, String> map) {
