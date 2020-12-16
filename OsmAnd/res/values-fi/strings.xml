@@ -390,7 +390,7 @@
     <string name="poi_error_unexpected_template">Tapahtui odottamaton virhe suoritettaessa toimintoa {0}.</string>
     <string name="poi_dialog_opening_hours">Avoinna</string>
     <string name="edit_filter_save_as_menu_item">Tallenna nimellä</string>
-    <string name="rendering_attr_roadColors_description">Valitse tien väriteema:</string>
+    <string name="rendering_attr_roadColors_description">Valitse tien värimaailma:</string>
     <string name="gps_not_available">Salli GPS:n käyttö asetuksista</string>
     <string name="poi_filter_car_aid">Autotuki</string>
     <string name="layer_map_appearance">Muokkaa näyttöä</string>
@@ -488,7 +488,7 @@
     <string name="accessibility_mode">Esteettömyys moodi</string>
     <string name="accessibility_default">Globaalien systeemiasetusten mukaan</string>
     <string name="zxing_barcode_scanner_not_found">ZXing viivakoodinlukusovellusta ei ole asennettuna. Etsitäänkö se Google Playstä?</string>
-    <string name="rendering_attr_roadColors_name">Tien väriteema</string>
+    <string name="rendering_attr_roadColors_name">Tien värimaailma</string>
     <string name="map_widget_show_destination_arrow">Näytä kohteen suunta</string>
     <string name="non_optimal_route_calculation">Laske mahdollisesti epäoptimaalinen reitti pitkille matkoille</string>
     <string name="offline_edition_descr">Käytä aina offline editointia</string>
@@ -836,7 +836,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="shared_string_recorded">Nauhoitettu</string>
     <string name="shared_string_record">Nauhoita</string>
     <string name="gpx_logging_no_data">Ei dataa</string>
-    <string name="rendering_attr_contourColorScheme_description">Korkeuskäyräviivojen väripaletti</string>
+    <string name="rendering_attr_contourColorScheme_description">Korkeuskäyräviivojen värimaailma</string>
     <string name="save_track_min_speed">Miniminopeuden kirjaaminen</string>
     <string name="save_track_min_speed_descr">Aseta miniminopeus kirjattavalle pisteelle.</string>
     <string name="save_track_min_distance">Liikkeen tunnistuksen kirjaus</string>
@@ -847,7 +847,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="christmas_desc_q">Näytä Joulupyhän KP:t\?</string>
     <string name="rendering_value_light_brown_name">Vaaleanruskea</string>
     <string name="rendering_value_dark_brown_name">Tummanruskea</string>
-    <string name="rendering_attr_contourColorScheme_name">Korkeuskäyrien väripaletti</string>
+    <string name="rendering_attr_contourColorScheme_name">Korkeuskäyrien värimaailma</string>
     <string name="rendering_attr_surfaceIntegrity_name">Tienpinnan eheys</string>
     <string name="search_hint">Kirjoita kaupunki, osoite, KP:n nimi</string>
     <string name="edit_filter">Muokkaa luokkia</string>
@@ -2208,7 +2208,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="increase_search_radius">Kasvata haun laajuutta</string>
     <string name="nothing_found_descr">Muokkaa hakusanoja tai lisää haun laajuutta.</string>
     <string name="quick_action_showhide_osmbugs_descr">Tämän toimintonappulan tökkääminen näyttää tai piilottaa OSM-huomautukset kartalla.</string>
-    <string name="srtm_color_scheme">Väriskeema</string>
+    <string name="srtm_color_scheme">Värimaailma</string>
     <string name="routing_attr_allow_private_name">Salli yksityisalueet</string>
     <string name="routing_attr_allow_private_description">Salli pääsy yksityisalueille.</string>
     <string name="animate_my_location_desc">Ota käyttöön animoitu sijaintini kartan vieritys navigaation aikana.</string>
@@ -2587,4 +2587,8 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="all_previous_segments_will_be_recalc">Kaikki edelliset segmentit lasketaan uudelleen käyttämällä valittua profiilia.</string>
     <string name="plan_route_join_segments">Yhdistä segmentit</string>
     <string name="plan_route_add_new_segment">Lisää uusi segmentti</string>
+    <string name="shared_string_octagon">Kahdeksankulmio</string>
+    <string name="shared_string_square">Neliö</string>
+    <string name="shared_string_circle">Ympyrä</string>
+    <string name="select_shape">Valitse muoto</string>
 </resources>
