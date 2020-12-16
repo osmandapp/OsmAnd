@@ -460,7 +460,8 @@ public class AppInitializer implements IProgress {
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
 
 		// TODOTRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
-		app.travelHelper = !TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
+		// tODO add !
+		app.travelHelper = TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
 		app.travelHelper.initializeDataOnAppStartup();
 		app.travelHelper = startupInit(app.travelHelper, TravelHelper.class);
 
