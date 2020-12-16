@@ -801,7 +801,7 @@ public class ResourceManager {
 		return warnings;
 	}
 
-	private List<BinaryMapIndexReader> getTravelRepositories() {
+	public List<BinaryMapIndexReader> getTravelRepositories() {
 		List<String> fileNames = new ArrayList<>(travelRepositories.keySet());
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
 		List<BinaryMapIndexReader> res = new ArrayList<>();
@@ -814,7 +814,7 @@ public class ResourceManager {
 		return res;
 	}
 
-	private List<BinaryMapIndexReader> getTravelRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
+	public List<BinaryMapIndexReader> getTravelRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
 		List<String> fileNames = new ArrayList<>(travelRepositories.keySet());
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
 		int leftX31 = MapUtils.get31TileNumberX(leftLon);

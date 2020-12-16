@@ -461,7 +461,6 @@ public class AppInitializer implements IProgress {
 
 		// TODOTRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
 		app.travelHelper = !TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
-		app.travelHelper.initializeDataOnAppStartup();
 		app.travelHelper = startupInit(app.travelHelper, TravelHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);

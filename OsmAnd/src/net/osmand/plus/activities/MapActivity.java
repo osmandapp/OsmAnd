@@ -450,6 +450,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					if (dashboardOnMap != null) {
 						dashboardOnMap.updateLocation(true, true, false);
 					}
+					app.getTravelHelper().initializeDataOnAppStartup();
 					findViewById(R.id.init_progress).setVisibility(View.GONE);
 					findViewById(R.id.drawer_layout).invalidate();
 				}
