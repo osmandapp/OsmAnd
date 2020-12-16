@@ -412,7 +412,7 @@
     <string name="osmand_parking_time_limit">Aikarajoitettu pysäköinti</string>
     <string name="osmand_parking_time_no_limit">Aika rajoittamaton pysäköinti</string>
     <string name="osmand_parking_position_description">Pysäköidyn autosi sijainti. %1$s</string>
-    <string name="osmand_parking_position_description_add">Nouda auto kello:</string>
+    <string name="osmand_parking_position_description_add">Nouda ajoneuvo kello:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="asap">U-Käännös</string>
@@ -1728,7 +1728,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
 
 Paina ja pidä nähdäksesi kartalla</string>
     <string name="gpx_info_asc_altitude">Alas/Ylös: %1$s</string>
-    <string name="calculate_osmand_route_without_internet">Laske OsmAnd reitin segmentti ilman internettiä</string>
+    <string name="calculate_osmand_route_without_internet">OsmAnd reittisegmentin laskeminen ilman internettiä</string>
     <string name="gpx_option_calculate_first_last_segment">Laske OsmAnd reitti ensimmäiselle ja viimeiselle reitin segmentille</string>
     <string name="use_displayed_track_for_navigation">Käytetäänkö näytettävää jälkeä suunnistuksessa\?</string>
     <string name="keep_and_add_destination_point">Lisää myöhemmäksi päämääräksi</string>
@@ -2573,4 +2573,18 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="plan_a_route">Suunnittele reitti</string>
     <string name="plan_route_last_edited">Viimeksi muokattu</string>
     <string name="plan_route_create_new_route">Luo uusi reitti</string>
+    <string name="select_color">Valitse väri</string>
+    <string name="select_icon_profile_dialog_title">Valitse kuvake</string>
+    <string name="select_group">Valitse ryhmä</string>
+    <string name="add_description">Lisää kuvaus</string>
+    <string name="route_between_points_next_segment_button_desc">Vain seuraava segmentti lasketaan uudelleen valitulla profiililla.</string>
+    <string name="next_segment">Seuraava segmentti</string>
+    <string name="all_next_segments">Kaikki seuraavat segmentit</string>
+    <string name="previous_segment">Edellinen segmentti</string>
+    <string name="all_previous_segments">Kaikki edelliset segmentit</string>
+    <string name="only_selected_segment_recalc">Vain valittu segmentti lasketaan uudelleen käyttämällä valittua profiilia.</string>
+    <string name="all_next_segments_will_be_recalc">Kaikki seuraavat segmentit lasketaan uudelleen käyttämällä valittua profiilia.</string>
+    <string name="all_previous_segments_will_be_recalc">Kaikki edelliset segmentit lasketaan uudelleen käyttämällä valittua profiilia.</string>
+    <string name="plan_route_join_segments">Yhdistä segmentit</string>
+    <string name="plan_route_add_new_segment">Lisää uusi segmentti</string>
 </resources>
