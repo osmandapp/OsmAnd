@@ -3364,8 +3364,8 @@
     <string name="poi_url">الرابط</string>
     <string name="poi_parking_space">أماكن لوقوف السيارات</string>
     <string name="poi_grave">قبر</string>
-    <string name="poi_community_gender_male">جنس المجتمع: ذكر</string>
-    <string name="poi_community_gender_female">جنس المجتمع: أنثى</string>
+    <string name="poi_community_gender_male">نوع المجتمع: ذكر</string>
+    <string name="poi_community_gender_female">نوع المجتمع: أنثى</string>
     <string name="poi_bath_open_air_no">لا</string>
     <string name="poi_bath_open_air_yes">نعم</string>
     <string name="poi_bath_type_foot_bath">حمام القدم</string>
@@ -3659,4 +3659,17 @@
     <string name="poi_wreck">حطام سفينة</string>
     <string name="poi_rune_stone">حجر الشاهد القائم الروني</string>
     <string name="poi_historic_tank">دبابة تاريخية</string>
+    <string name="poi_water_source_lake">بحيرة</string>
+    <string name="poi_water_source_river">نهر</string>
+    <string name="poi_water_source_well">بئر</string>
+    <string name="poi_water_source_powered_pump">مضخة</string>
+    <string name="poi_water_source_water_tank">خزان مياه</string>
+    <string name="poi_water_source_tap">حنفية</string>
+    <string name="poi_water_source_water_works">أعمال مياه</string>
+    <string name="poi_water_source_tube_well">شيب مياه</string>
+    <string name="poi_vaccination_covid19">لقاح كورونا COVID19</string>
+    <string name="poi_health_specialty_vaccination_yes">يتوفر لدهم لقاح</string>
+    <string name="poi_lifeguard_base">منصة الانقاذ</string>
+    <string name="poi_siren">صفارت إنذار</string>
+    <string name="poi_community_gender_mixed">نوع المجتمع: مختلط</string>
 </resources>
