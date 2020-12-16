@@ -1960,7 +1960,7 @@
     <string name="map_widget_bearing">Relative Peilung</string>
     <string name="access_autoannounce_period">Zeit zwischen automatischen Ansagen</string>
     <string name="map_widget_magnetic_bearing">Magnetische Peilung</string>
-    <string name="access_no_destination">Ziel ist nicht festgelegt</string>
+    <string name="access_no_destination">Modul für Bedienungshilfen: Ziel ist nicht festgelegt</string>
     <string name="use_osm_live_routing">OsmAnd-Live-Navigation</string>
     <string name="map_widget_battery">Akkustand</string>
     <string name="move_marker_bottom_sheet_title">Karte bewegen, um die Position der Markierung zu verändern</string>
@@ -3520,7 +3520,7 @@
     <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf \"Importieren\", um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten aus.</string>
     <string name="export_profile_dialog_description">Sie können zusätzliche Daten zum Exportieren zusammen mit dem Profil auswählen.</string>
     <string name="index_name_antarctica">Antarktis</string>
-    <string name="osm_edits_view_descr">Sie können alle Ihre noch nicht hochgeladenen Bearbeitungen oder OSM-Fehlermeldungen in %1$s anzeigen. Hochgeladene Punkte werden in OsmAnd nicht angezeigt.</string>
+    <string name="osm_edits_view_descr">Betrachten Sie alle Ihre noch nicht hochgeladenen Bearbeitungen oder OSM-Hinweise in %1$s. Bereits hochgeladene Änderungen werden nicht mehr angezeigt.</string>
     <string name="monitoring_min_speed_descr_recommendation">Empfehlung: Versuchen Sie zunächst, die Bewegungserkennung über den Filter zur Mindestabstandsmessung (B) zu verwenden. Das kann zu besseren Ergebnissen führen und Sie werden weniger Daten verlieren. Sollten Ihre Tracks bei niedrigen Geschwindigkeiten ungenau bleiben, versuchen Sie hier Werte ungleich Null. Bitte beachten Sie, dass einige Messungen (einige netzwerkbasierte Methoden) möglicherweise überhaupt keine Geschwindigkeitswerte anzeigen. In diesem Fall wird nichts aufgezeichnet.</string>
     <string name="monitoring_min_accuracy_descr">Es werden nur Punkte aufgezeichnet, die mit der gewählten Mindestgenauigkeit bestimmt wurden (in Metern/Fuß, wie von Android je nach Chipsatz bereitgestellt). Die Genauigkeit beschreibt die Nähe der Messungen zur wahren Position und steht nicht unmittelbar in Bezug zur Präzision, der Streuung wiederholter Messungen.</string>
     <string name="monitoring_min_accuracy_descr_remark">Bemerkung: Wenn das GPS unmittelbar vor einer Aufzeichnung ausgeschaltet war, kann der erste gemessene Punkt eine verminderte Genauigkeit haben, sodass wir in unserem Code vielleicht eine Sekunde oder so warten wollen, bevor ein Punkt (oder der beste von 3 aufeinanderfolgenden Punkten usw.) aufgezeichnet wird. Das ist aber noch nicht implementiert.</string>
@@ -3801,9 +3801,9 @@
     <string name="lenght_limit_description">Bitte geben Sie Ihre Fahrzeuglänge an. Für lange Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
     <string name="quick_action_remove_next_destination">Nächstgelegenen Zielpunkt löschen</string>
     <string name="please_provide_point_name_error">Bitte geben Sie einen Namen für das Profil an</string>
-    <string name="quick_action_remove_next_destination_descr">Der aktuelle Punkt auf der Route wird gelöscht. Wenn es das Ziel ist, wird die Navigation gestoppt.</string>
+    <string name="quick_action_remove_next_destination_descr">Löscht das nächste Ziel auf Ihrer Route. Wenn dies das endgültige Ziel ist, wird die Navigation gestoppt.</string>
     <string name="search_download_wikipedia_maps">Wikipedia-Karten herunterladen</string>
-    <string name="plugin_wikipedia_description">Info über Sehenswürdigkeiten erhalten Sie bei Wikipedia. Es ist Ihr Offline-Wegweiser für die Hosentasche - aktivieren Sie einfach das Wikipedia-Modul und genießen Sie Artikel über Objekte in Ihrer Umgebung.</string>
+    <string name="plugin_wikipedia_description">Holen Sie sich Informationen über Sehenswürdigkeiten aus Wikipedia, einem Offline-Reiseführer für die Hosentasche mit Artikeln über Orte und Ziele.</string>
     <string name="app_mode_enduro_motorcycle">Enduro</string>
     <string name="app_mode_motor_scooter">Motorroller</string>
     <string name="app_mode_wheelchair">Rollstuhl</string>
@@ -3844,7 +3844,7 @@
     <string name="add_address">Adresse hinzufügen</string>
     <string name="access_hint_enter_address">Adresse eingeben</string>
     <string name="street_level_imagery">Bilder auf Straßenebene</string>
-    <string name="plan_route_exit_dialog_descr">Sind Sie sicher, dass Sie alle Änderungen an der geplanten Route verwerfen wollen, indem Sie sie schließen\?</string>
+    <string name="plan_route_exit_dialog_descr">Sind Sie sicher, dass Sie alle Änderungen an der geplanten Route verwerfen wollen\?</string>
     <string name="plan_route_change_route_type_before">Routentyp davor ändern</string>
     <string name="plan_route_change_route_type_after">Routentyp danach ändern</string>
     <string name="plan_route_trim_before">Davor trimmen</string>
@@ -3877,7 +3877,7 @@
     <string name="save_track_to_gpx">Während der Navigation automatisch Track aufzeichnen</string>
     <string name="shared_string_gpx_route">Track Route</string>
     <string name="import_track_descr">Track Datei zum Folgen auswählen, oder vom Gerät importieren.</string>
-    <string name="disable_recording_once_app_killed_descrp">Die GPX-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Die Track-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
     <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (wird über die Schaltfläche \'Routenaufzeichung\' auf dem Kartenbildschirm angeschaltet).</string>
     <string name="route_between_points_warning_desc">Als nächstes können Sie Ihren Track mit einem Ihrer Navigationsprofile auf die nächstgelegene erlaubte Straße einrasten lassen, um diese Option zu nutzen.</string>
     <string name="quick_action_add_gpx">Track-Wegpunkt hinzufügen</string>
@@ -3913,12 +3913,12 @@
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="start_finish_icons">Start- und Zielsymbole</string>
     <string name="contour_lines_thanks">Vielen Dank für den Kauf von \'Höhenlinien\'</string>
-    <string name="osm_live_payment_desc_hw">Das Abonnement wird pro ausgewähltem Zeitraum berechnet. Sie können das Abonnement jederzeit über die AppGallery kündigen.</string>
-    <string name="osm_live_payment_subscription_management_hw">Die Bezahlung wird Ihrem AppGallery-Konto bei der Bestätigung des Kaufs belastet.
+    <string name="osm_live_payment_desc_hw">Das Abonnement wird für den gewählten Zeitraum berechnet. Sie können es jederzeit in Ihrer AppGallery kündigen.</string>
+    <string name="osm_live_payment_subscription_management_hw">Ihr AppGallery-Konto wird mit der Kaufbestätigung belastet.
 \n
-\nDas Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
+\nDas Abonnement verlängert sich automatisch, wenn es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird erst am Verlängerungsdatum für den Verlängerungszeitraum (Monat/drei Monate/Jahr) belastet.
 \n
-\nSie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren AppGallery-Einstellungen gehen.</string>
+\nSie können Ihre Abonnements in Ihren AppGallery-Einstellungen verwalten und kündigen.</string>
     <string name="routing_attr_avoid_footways_description">Vermeidet Fußwege</string>
     <string name="routing_attr_avoid_footways_name">Keine Fußwege</string>
     <string name="development">Entwicklung</string>
@@ -3953,7 +3953,7 @@
     <string name="icon_group_special">Spezial</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Fügen Sie mindestens zwei Punkte hinzu</string>
     <string name="manage_subscription">Abonnement verwalten</string>
-    <string name="subscription_payment_issue_title">Es gibt ein Problem mit Ihrem Abonnement. Tippen Sie auf die Schaltfläche, um zu den Einstellungen des Google Play Abonnements zu gelangen und Ihre Zahlungsmethode zu überprüfen.</string>
+    <string name="subscription_payment_issue_title">Tippen Sie auf die Schaltfläche, um eine Zahlungsmethode auf Google Play einzurichten und Ihr Abonnement zu bestätigen.</string>
     <string name="subscription_expired_title">OsmAnd Live Abonnement ist abgelaufen</string>
     <string name="subscription_paused_title">OsmAnd Live Abonnement wurde ausgesetzt</string>
     <string name="subscription_on_hold_title">OsmAnd Live Abonnement liegt auf Eis</string>
@@ -4020,4 +4020,6 @@
     <string name="app_mode_gap">Lücke</string>
     <string name="plan_route_join_segments">Segmente verbinden</string>
     <string name="plan_route_add_new_segment">Neues Segment hinzufügen</string>
+    <string name="profile_type_osmand_string">OsmAnd-Profil</string>
+    <string name="profile_type_user_string">Benutzerprofil</string>
 </resources>
