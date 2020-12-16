@@ -1195,6 +1195,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 					getMapLayers().getContextMenuLayer().enterAddGpxPointMode(newGpxPoint);
 				} else if (toShow instanceof GpxData) {
+					hideContextAndRouteInfoMenues();
+
 					GpxData gpxData = (GpxData) toShow;
 					QuadRect qr = gpxData.getRect();
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
