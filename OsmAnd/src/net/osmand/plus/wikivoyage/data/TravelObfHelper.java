@@ -75,7 +75,6 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		for (Amenity obj : searchObjects) {
-			//TODO map
 			WikivoyageSearchResult r = new WikivoyageSearchResult();
 			TravelArticle article = readArticle(obj, "en");
 			r.articleTitles = new ArrayList<>(Collections.singletonList(article.title));
