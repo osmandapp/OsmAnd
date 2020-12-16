@@ -3942,7 +3942,7 @@
     <string name="message_graph_will_be_available_after_recalculation">Bitte warten Sie.
 \nDie Grafik wird nach der Neuberechnung der Route verfügbar sein.</string>
     <string name="icon_group_amenity">Einrichtung</string>
-    <string name="icon_group_transport">ÖPNV</string>
+    <string name="icon_group_transport">Verkehr</string>
     <string name="icon_group_service">Dienstleistung</string>
     <string name="icon_group_travel">Reisen</string>
     <string name="icon_group_sport">Sport</string>
