@@ -3890,4 +3890,11 @@
     <string name="poi_vaccination_covid19">Impfung: COVID19</string>
     <string name="poi_health_specialty_vaccination_yes">Impfung</string>
     <string name="poi_water_source_tube_well">Rammbrunnen</string>
+    <string name="poi_water_source_lake">See</string>
+    <string name="poi_water_source_river">Fluss</string>
+    <string name="poi_water_source_well">Brunnen</string>
+    <string name="poi_water_source_powered_pump">Angetriebene Pumpe</string>
+    <string name="poi_water_source_water_tank">Wassertank</string>
+    <string name="poi_water_source_tap">Wasserhahn</string>
+    <string name="poi_water_source_water_works">Wasserwerk</string>
 </resources>
