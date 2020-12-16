@@ -1958,7 +1958,7 @@
     <string name="poi_shoes_type">Type</string>
     <string name="poi_fire_hydrant_type">Type</string>
     <string name="poi_fire_hydrant_position">Position</string>
-    <string name="poi_fire_hydrant_water_source">Alimentation en eau</string>
+    <string name="poi_water_source">Alimentation en eau</string>
     <string name="poi_payment_toll_type">Type de paiement</string>
     <string name="poi_highway_crossing_type">Type</string>
     <string name="poi_service_general">Service</string>
@@ -3032,9 +3032,9 @@
     <string name="poi_protection_title">Titre de la protection</string>
     <string name="poi_fire_hydrant_pressure">Pression</string>
     <string name="poi_fire_hydrant_flow_capacity">Débit</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Réseau de distribution</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Étang</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Ruisseau</string>
+    <string name="poi_water_source_main">Réseau de distribution</string>
+    <string name="poi_water_source_pond">Étang</string>
+    <string name="poi_water_source_stream">Ruisseau</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Citerne</string>
     <string name="poi_crossing_activation_automatic">Activation du passage : automatique</string>
     <string name="poi_crossing_activation_local">Activation du passage : local</string>
@@ -3822,7 +3822,7 @@
     <string name="poi_fire_hydrant_pressure_filter">Pression</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Aspiration</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurisé</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Eaux souterraines</string>
+    <string name="poi_water_source_groundwater">Eaux souterraines</string>
     <string name="poi_fire_hydrant_type_pipe">Tuyau</string>
     <string name="poi_traffic_signals_arrow_yes">Oui</string>
     <string name="poi_traffic_signals_vibration_yes">Oui</string>
@@ -3885,4 +3885,14 @@
     <string name="poi_diplomatic_services_immigrant_visas_filter">Visas pour immigrants</string>
     <string name="poi_diplomatic_services_non_immigrant_visas_filter">Visas pour non-immigrants</string>
     <string name="poi_diplomatic_liaison">Liaison diplomatique</string>
+    <string name="poi_water_source_lake">Lac</string>
+    <string name="poi_water_source_tube_well">Puits tubulaire</string>
+    <string name="poi_water_source_river">Rivière</string>
+    <string name="poi_water_source_well">Puits</string>
+    <string name="poi_water_source_powered_pump">Pompe à eau</string>
+    <string name="poi_water_source_water_works">Ouvrages hydrauliques</string>
+    <string name="poi_water_source_water_tank">Réservoir d\'eau</string>
+    <string name="poi_water_source_tap">Robinet</string>
+    <string name="poi_vaccination_covid19">Vaccination : covid19</string>
+    <string name="poi_health_specialty_vaccination_yes">Vaccination</string>
 </resources>

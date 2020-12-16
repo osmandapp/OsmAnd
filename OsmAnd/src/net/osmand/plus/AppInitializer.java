@@ -459,9 +459,9 @@ public class AppInitializer implements IProgress {
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
 
-		app.travelHelper = true
-				? new TravelObfHelper(app)
-				: new TravelDbHelper(app);
+		// TODOTRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
+		app.travelHelper = !TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
+		app.travelHelper.initializeDataOnAppStartup();
 		app.travelHelper = startupInit(app.travelHelper, TravelHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);

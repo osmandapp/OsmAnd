@@ -3869,4 +3869,8 @@
     <string name="snowmobile_render_descr">Til kørsel med snescooter med dedikerede veje og spor.</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd bruger MGRS, som svarer til UTM NATO-formatet.</string>
+    <string name="plan_route_join_segments">Forbind segmenter</string>
+    <string name="plan_route_split_before">Opdel før</string>
+    <string name="plan_route_split_after">Opdel efter</string>
+    <string name="plan_route_add_new_segment">Tilføj et nyt segment</string>
 </resources>

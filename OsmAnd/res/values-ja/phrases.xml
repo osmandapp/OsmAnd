@@ -1075,7 +1075,7 @@
     <string name="poi_internet_access_type">インターネット接続の種類</string>
     <string name="poi_vending_type">自動販売機の種類</string>
     <string name="poi_bicycle_service">自転車関連サービス</string>
-    <string name="poi_fire_hydrant_water_source">水源</string>
+    <string name="poi_water_source">水源</string>
     <string name="poi_payment_toll_type">支払いの種類</string>
     <string name="poi_traffic_signals_sound">視覚障害者用信号機音声</string>
     <string name="poi_tactile_paving">視覚障害者誘導用ブロック</string>
@@ -1893,10 +1893,10 @@
     <string name="poi_fire_hydrant_type_dry_barrel">消火栓</string>
     <string name="poi_fire_hydrant_type_pond">貯水池</string>
     <string name="poi_fire_hydrant_type_wall">壁面</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">貯水池</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">川・流水</string>
+    <string name="poi_water_source_pond">貯水池</string>
+    <string name="poi_water_source_stream">川・流水</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">水槽</string>
-    <string name="poi_fire_hydrant_style_water_source_main">配管</string>
+    <string name="poi_water_source_main">配管</string>
     <string name="poi_highway_crossing_type">交差点タイプ</string>
     <string name="poi_crossing_bell_yes">踏切警告音:有り</string>
     <string name="poi_crossing_bell_no">踏切警告音:無し</string>
@@ -3821,7 +3821,7 @@
     <string name="poi_pump_status_missing_beam">状態:釣瓶・管がない</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">吸引</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">加圧</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">地下水</string>
+    <string name="poi_water_source_groundwater">地下水</string>
     <string name="poi_nuts">ナッツ専門店</string>
     <string name="poi_beehive">養蜂箱</string>
     <string name="poi_departures_board_realtime">リアルタイム時刻表</string>

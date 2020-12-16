@@ -24,7 +24,7 @@
 	<string name="poi_shoes_type">Növ</string>
 	<string name="poi_fire_hydrant_type">Növ</string>
 	<string name="poi_fire_hydrant_position">Mövqe</string>
-	<string name="poi_fire_hydrant_water_source">Su mənbəyi</string>
+	<string name="poi_water_source">Su mənbəyi</string>
 	<string name="poi_payment_toll_type">Ödəniş növü</string>
 	<string name="poi_traffic_signals_sound">Səs</string>
 	<string name="poi_highway_crossing_type">Növ</string>

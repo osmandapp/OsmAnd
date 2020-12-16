@@ -2458,7 +2458,7 @@
     <string name="poi_shoes_type">Tipo</string>
     <string name="poi_fire_hydrant_type">Tipo</string>
     <string name="poi_fire_hydrant_position">Posição</string>
-    <string name="poi_fire_hydrant_water_source">Fonte de água</string>
+    <string name="poi_water_source">Fonte de água</string>
     <string name="poi_payment_toll_type">Tipo de pagamento</string>
     <string name="poi_traffic_signals_sound">Som</string>
     <string name="poi_highway_crossing_type">Tipo</string>
@@ -2783,9 +2783,9 @@
     <string name="poi_fire_hydrant_position_street">Rua</string>
     <string name="poi_fire_hydrant_position_underground">Subterrâneo</string>
     <string name="poi_fire_hydrant_style_wsh">Estilo de hidrante: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Rede de água</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Lagoa</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Ribeirão/Rio</string>
+    <string name="poi_water_source_main">Rede de água</string>
+    <string name="poi_water_source_pond">Lagoa</string>
+    <string name="poi_water_source_stream">Ribeirão/Rio</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_in_service_yes">Em serviço: sim</string>
     <string name="poi_street_cabinet_power">Tipo de gabinete: força</string>
@@ -3820,7 +3820,7 @@
     <string name="poi_drinking_water_refill_network">Rede de recarga de água potável</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sucção</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurizado</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Água subterrânea</string>
+    <string name="poi_water_source_groundwater">Água subterrânea</string>
     <string name="poi_fire_hydrant_type_pipe">Tubo</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressão</string>
     <string name="poi_pump_status_missing_beam">Status da bomba: falta de feixe</string>
@@ -3884,4 +3884,14 @@
     <string name="poi_nurse">Enfermaria</string>
     <string name="poi_mobile_money_agent">Agente de dinheiro móvel</string>
     <string name="poi_lifeguard_base">Base do salva-vidas</string>
+    <string name="poi_vaccination_covid19">Vacinação: COVID19</string>
+    <string name="poi_health_specialty_vaccination_yes">Vacinação</string>
+    <string name="poi_water_source_lake">Lago</string>
+    <string name="poi_water_source_river">Rio</string>
+    <string name="poi_water_source_well">Poço de água</string>
+    <string name="poi_water_source_powered_pump">Bomba motorizada</string>
+    <string name="poi_water_source_water_tank">Tanque de água</string>
+    <string name="poi_water_source_tap">Toque</string>
+    <string name="poi_water_source_water_works">Estação de tratamento de água</string>
+    <string name="poi_water_source_tube_well">Bem embalado</string>
 </resources>

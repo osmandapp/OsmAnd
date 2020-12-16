@@ -385,6 +385,22 @@ public class MeasurementEditingContext {
 		return allSegments.size() > 0 ? allSegments : null;
 	}
 
+	public void recalculateRouteSegmentsForAppMode() {
+		clearRouteSegmentsByAppMode();
+		updateSegmentsForSnap();
+	}
+
+	public void clearRouteSegmentsByAppMode() {
+		for (Pair<WptPt, WptPt> key : getOrderedRoadSegmentDataKeys()) {
+			if(key.first.getProfileType().equals(appMode.getStringKey())) {
+				RoadSegmentData data = roadSegmentData.get(key);
+				if (data != null) {
+					roadSegmentData.remove(key);
+				}
+			}
+		}
+	}
+
 	void splitSegments(int position) {
 		List<WptPt> points = new ArrayList<>();
 		points.addAll(before.points);

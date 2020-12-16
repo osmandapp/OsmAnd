@@ -1874,7 +1874,7 @@
     <string name="poi_aerialway_transport">powětrowy transport</string>
     <string name="poi_payment_fuel_type">tankowanske karty</string>
     <string name="poi_fire_hydrant_position">městno</string>
-    <string name="poi_fire_hydrant_water_source">wodowa žórła</string>
+    <string name="poi_water_source">wodowa žórła</string>
     <string name="poi_car_yes">awto: haj</string>
     <string name="poi_car_no">awto: ně</string>
     <string name="poi_scooter_yes">motorske: haj</string>

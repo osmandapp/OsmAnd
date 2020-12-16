@@ -2236,7 +2236,7 @@
     <string name="poi_shoes_type">類型</string>
     <string name="poi_fire_hydrant_type">類型</string>
     <string name="poi_fire_hydrant_position">位置</string>
-    <string name="poi_fire_hydrant_water_source">水源</string>
+    <string name="poi_water_source">水源</string>
     <string name="poi_payment_toll_type">支付型式</string>
     <string name="poi_traffic_signals_sound">聲音</string>
     <string name="poi_highway_crossing_type">類型</string>
@@ -2780,9 +2780,9 @@
     <string name="poi_fire_hydrant_position_street">街道</string>
     <string name="poi_fire_hydrant_position_underground">地下</string>
     <string name="poi_fire_hydrant_style_wsh">消防栓型式︰wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">主要管道</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">池塘</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">河流</string>
+    <string name="poi_water_source_main">主要管道</string>
+    <string name="poi_water_source_pond">池塘</string>
+    <string name="poi_water_source_stream">河流</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">水槽</string>
     <string name="poi_in_service_yes">在職︰是的</string>
     <string name="poi_military_checkpoint">軍事檢查哨</string>
@@ -3819,7 +3819,7 @@
     <string name="poi_drinking_water_refill_network">飲用水填充網路</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">吸力</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">加壓</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">地下水</string>
+    <string name="poi_water_source_groundwater">地下水</string>
     <string name="poi_fire_hydrant_type_pipe">管線</string>
     <string name="poi_fire_hydrant_pressure_filter">壓力</string>
     <string name="poi_pump_status_missing_beam">幫浦狀態：無桿</string>
@@ -3883,4 +3883,14 @@
     <string name="poi_nurse">護理師</string>
     <string name="poi_mobile_money_agent">行動貨幣代理商</string>
     <string name="poi_lifeguard_base">救生員基地</string>
+    <string name="poi_vaccination_covid19">預防接種：COVID-19</string>
+    <string name="poi_health_specialty_vaccination_yes">預防接種</string>
+    <string name="poi_water_source_lake">湖</string>
+    <string name="poi_water_source_river">河流</string>
+    <string name="poi_water_source_well">井</string>
+    <string name="poi_water_source_powered_pump">動力幫浦</string>
+    <string name="poi_water_source_water_tank">水箱</string>
+    <string name="poi_water_source_tap">點擊</string>
+    <string name="poi_water_source_water_works">自來水廠</string>
+    <string name="poi_water_source_tube_well">管井</string>
 </resources>

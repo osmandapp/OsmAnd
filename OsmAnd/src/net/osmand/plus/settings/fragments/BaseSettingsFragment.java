@@ -886,9 +886,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public static String getAppModeDescription(Context ctx, ApplicationMode mode) {
 		String description;
 		if (mode.isCustomProfile()) {
-			description = ctx.getString(R.string.profile_type_custom_string);
+			description = ctx.getString(R.string.profile_type_user_string);
 		} else {
-			description = ctx.getString(R.string.profile_type_base_string);
+			description = ctx.getString(R.string.profile_type_osmand_string);
 		}
 
 		return description;

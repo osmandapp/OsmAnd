@@ -3943,7 +3943,7 @@
     <string name="export_not_enough_space">No hay espacio suficiente</string>
     <string name="release_3_9">• Se ha añadido la opción de exportar e importar todos los datos, incluyendo los ajustes, los recursos y «Mis sitios»
 \n
-\n • Planificar ruta: se añadieron gráficos para los segmentos con la ruta y capacidad de crear o editar trazas de segmentos múltiples
+\n • Planificar ruta: se añadieron gráficos para los segmentos de trazas con la ruta y capacidad de crear o editar trazas de segmentos múltiples
 \n
 \n • Se ha añadido el método de autenticación OAuth para OpenStreetMap y se ha mejorado la interfaz de usuario de los diálogos de OSM
 \n

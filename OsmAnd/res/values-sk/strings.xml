@@ -1947,7 +1947,7 @@
     <string name="access_smart_autoannounce_descr">Oznamovať len ak sa smer k cieľu zmení.</string>
     <string name="access_autoannounce_period">Interval šikovného oznamovania</string>
     <string name="access_autoannounce_period_descr">Minimálny čas medzi oznamami.</string>
-    <string name="access_no_destination">Cieľ nie je určený</string>
+    <string name="access_no_destination">Modul uľahčenia prístupu: Cieľ nie je určený</string>
     <string name="map_widget_magnetic_bearing">Magnetické smerovanie</string>
     <string name="use_osm_live_routing_description">Povoliť navigácii použiť zmeny z OsmAnd Live.</string>
     <string name="use_osm_live_routing">Navigácia OsmAnd Live</string>
@@ -2389,7 +2389,7 @@
     <string name="display_zoom_level">Priblíženie zobrazenia: %1$s</string>
     <string name="route_is_too_long_v2">Pre veľké vzdialenosti: Ak sa nenájde výsledok do 10 minút, vložte prosím tranzitné ciele.</string>
     <string name="save_poi_too_many_uppercase">Názov obsahuje príliš veľa veľkých písmen. Pokračovať?</string>
-    <string name="hillshade_menu_download_descr">Pre zobrazenie tieňovaných svahov si stiahnite prekrývaciu mapu tieňovaných svahov (Hillshade).</string>
+    <string name="hillshade_menu_download_descr">Pre zobrazenie tieňovaných svahov si stiahnite prekrývaciu mapu \"tieňovaných svahov\" (Hillshade).</string>
     <string name="hillshade_purchase_header">Pre zobrazenie výškových stupňov si musíte nainštalovať zásuvný modul \"Vrstevnice\".</string>
     <string name="hide_from_zoom_level">Skryť od úrovne priblíženia</string>
     <string name="shared_string_plugin">Zásuvný modul</string>
@@ -2755,7 +2755,7 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Neobmedzené sťahovania</string>
     <string name="wikipedia_offline">Wikipédia offline</string>
-    <string name="contour_lines_hillshade_maps">Vrstevnice &amp; Tieňované svahy</string>
+    <string name="contour_lines_hillshade_maps">Vrstevnice &amp; tieňované svahy</string>
     <string name="unlock_all_features">Odomknite všetky funkcie OsmAnd</string>
     <string name="download_wikipedia_description">Stiahnite články Wikipédie pre %1$s pre ich čítanie offline.</string>
     <string name="download_wikipedia_label">Stiahnuť údaje Wikipédie</string>
@@ -3427,7 +3427,7 @@
     <string name="login_and_pass">Prihlasovacie meno a heslo</string>
     <string name="plugin_global_prefs_info">Tieto nastavenia sú globálne a platia pre všetky profily</string>
     <string name="osm_editing">OSM upravovanie</string>
-    <string name="osm_edits_view_descr">Môžete zobraziť vaše ešte neodoslané zmeny alebo chyby v OSM cez %1$s. Odoslané body sa už v OsmAnd nezobrazujú.</string>
+    <string name="osm_edits_view_descr">Zobrazte vaše ešte neodoslané zmeny alebo chyby v OSM cez %1$s. Odoslané zmeny sa už v OsmAnd nezobrazujú.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikona zobrazená pri navigácii alebo pohybe.</string>
     <string name="select_map_icon_descr">Ikona zobrazená v pokoji.</string>
@@ -3794,9 +3794,9 @@
     <string name="lenght_limit_description">Zadajte dĺžku vášho vozidla, pretože na trase môžu byť obmedzenia pre dlhé vozidlá.</string>
     <string name="quick_action_remove_next_destination">Vymazať najbližší cieľový bod</string>
     <string name="please_provide_point_name_error">Prosím zadajte názov pre bod</string>
-    <string name="quick_action_remove_next_destination_descr">Aktuálny cieľový bod na trase bude vymazaný. Ak je to posledný cieľ, navigácia sa zastaví.</string>
+    <string name="quick_action_remove_next_destination_descr">Vymaže nasledujúci cieľ vašej trasy. Ak je to posledný cieľ, navigácia sa zastaví.</string>
     <string name="search_download_wikipedia_maps">Stiahnuť mapy Wikipédia</string>
-    <string name="plugin_wikipedia_description">Získajte informácie o bodoch záujmu z Wikipédie. Je to váš vreckový sprievodca - zapnite modul Wikipédia a užívajte si články o objektoch okolo vás.</string>
+    <string name="plugin_wikipedia_description">Získajte informácie o bodoch záujmu z Wikipédie, vreckového sprievodcu obsahujúceho články o miestach a cieľoch.</string>
     <string name="app_mode_enduro_motorcycle">Enduro motorka</string>
     <string name="app_mode_motor_scooter">Skúter</string>
     <string name="app_mode_wheelchair">Invalidný vozík</string>
@@ -3834,7 +3834,7 @@
     <string name="navigation_profile">Navigačný profil</string>
     <string name="route_between_points_add_track_desc">Zvoľte súbor stopy, pre ktorú bude pridaný nový úsek.</string>
     <string name="street_level_imagery">Snímky z úrovne ulice</string>
-    <string name="plan_route_exit_dialog_descr">Naozaj chcete zahodiť všetky zmeny v plánovanej trasy jej zatvorením\?</string>
+    <string name="plan_route_exit_dialog_descr">Naozaj chcete zahodiť všetky zmeny v plánovanej trase\?</string>
     <string name="in_case_of_reverse_direction">V prípade opačného smeru</string>
     <string name="shared_string_gpx_route">Trasa zo stopy</string>
     <string name="context_menu_item_add_waypoint">Pridať prechodný bod stopy</string>
@@ -3879,7 +3879,7 @@
     <string name="all_previous_segments_will_be_recalc">Všetky predchádzajúce úseky budú prepočítané pomocou zvoleného profilu.</string>
     <string name="open_saved_track">Otvoriť uloženú stopu</string>
     <string name="shared_string_is_saved">je uložený</string>
-    <string name="disable_recording_once_app_killed_descrp">Zastaví záznam stopy, keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu na pozadí zmizne z notifikačnej oblasti Androidu.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Záznam stopy bude pozastavený, keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu na pozadí zmizne z notifikačnej oblasti Androidu.)</string>
     <string name="number_of_gpx_files_selected_pattern">%s vybraných súborov stôp</string>
     <string name="save_global_track_interval_descr">Zadaj interval pre všeobecné zaznamenávanie výletu (zapínané cez tlačidlo Záznamu výletu na mape).</string>
     <string name="gpx_monitoring_stop">Pozastaviť nahrávanie výletu</string>
@@ -3909,7 +3909,7 @@
     <string name="osm_live_payment_desc_hw">Predplatné bude spoplatnené v zvolenom intervale. Predplatné zrušte kedykoľvek na AppGallery.</string>
     <string name="osm_live_payment_subscription_management_hw">Platba bude stiahnutá z vášho účtu AppGallery po potvrdení nákupu.
 \n
-\nPredplatné sa automaticky obnovuje, ak nie je zrušené pred dátumom jeho obnovenia. Ďalšia platba za obdobie predplatného (mesiac/štvrťrok/rok) bude stiahnutá v deň obnovenia.
+\nPredplatné sa automaticky predlžuje, pokiaľ ho nezrušíte pred dátumom jeho obnovenia. Ďalšia platba za obdobie predplatného (mesiac/štvrťrok/rok) bude stiahnutá v deň obnovenia.
 \n
 \n Vaše predplatné môžete spravovať a zrušiť v nastaveniach AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Vyhnúť sa chodníkom pre chodcov</string>
@@ -3949,7 +3949,7 @@
     <string name="mgrs_format_descr">OsmAnd používa MGSR, ktorý je podobný ako formát UTM NATO.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Musíte pridať aspoň dva body</string>
     <string name="manage_subscription">Spravovať predplatné</string>
-    <string name="subscription_payment_issue_title">S vaším predplatným je problém. Stlačte tlačidlo pre prechod do nastavení predplatného v Google Play a opravte váš spôsob platby.</string>
+    <string name="subscription_payment_issue_title">Pre opravu vášho predplatného stlačte tlačidlo pre nastavenie spôsobu platby v Google Play.</string>
     <string name="subscription_expired_title">Predplatné OsmAnd Live skončilo</string>
     <string name="subscription_paused_title">Predplatné OsmAnd Live je pozastavené</string>
     <string name="subscription_on_hold_title">Predplatné OsmAnd Live je zablokované</string>
@@ -3979,7 +3979,7 @@
     <string name="app_mode_motorboat">Motorový čln</string>
     <string name="add_to_mapillary">Pridať do Mapillary</string>
     <string name="add_to_opr">Pridať do OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd szobrazuje fotografie z rôznych zdrojov:
+    <string name="add_photos_descr">OsmAnd zobrazuje fotografie z rôznych zdrojov:
 \nOpenPlaceReviews - fotografie bodov záujmu;
 \nMapillary - fotografie z ulice;
 \nWeb / Wikimedia - fotografie bodov záujmu špeficikované v údajoch OpenStreetMap.</string>
@@ -4001,6 +4001,19 @@
     <string name="gpx_upload_private_visibility_descr">\"Súkromná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale body trasy z nej v budú dostupné v neusporiadanom poradí cez verejné GPS rozhranie (API) bez časových pečiatok.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identifikovateľná\" znamená, že trasa sa zobrazí verejne vo vašich GPS stopách a vo verejných zoznamoch GPS stôp, tzn. iní používatelia budú môcť stiahnuť nespracovanú trasu a prepojiť su s vašim používateľkým menom. Verejné body trasy s časovými pečiatkami poskytované cez GPS rozhranie (API) budú odkazovať na vašu pôvodnú stránku s trasou.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Sledovateľná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale spracované body trasy s časovými pečiatkami (ktoré nie je možné spojiť s vami), budú dostupné na stiahnutie cez verejné GPS rozhranie (API).</string>
-    <string name="elevation_data">Môžete použiť údaje nadmorskej výšky pre zohľadnenie výstupu / zostupu na vašom výlete</string>
+    <string name="elevation_data">Údaje o nadmorskej výške môžete použiť na zaznamenanie stúpania / klesania vašej cesty</string>
     <string name="app_mode_light_aircraft">Ľahké lietadlo</string>
+    <string name="plan_route_join_segments">Prepojte segmenty</string>
+    <string name="plan_route_split_before">Rozdeliť predtým</string>
+    <string name="plan_route_split_after">Rozdeliť po</string>
+    <string name="plan_route_add_new_segment">Pridať nový segment</string>
+    <string name="release_3_9">• Pridaná možnosť exportu a importu všetkých údajov vrátane nastavení, zdrojov, mojich miest
+\n
+\n• Plánovanie trasy: grafy pre segmenty trasy s trasou a pridaná možnosť vytvárať a upravovať viac segmentov trasy
+\n
+\n• Pridaná metóda autentifikácie OAuth pre OpenStreetMap, vylepšené užívateľské rozhranie dialógov OSM
+\n
+\n• Podpora vlastných farieb pre obľúbené položky a sledovanie trasových bodov
+\n
+\n</string>
 </resources>

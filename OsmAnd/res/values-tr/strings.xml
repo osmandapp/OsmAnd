@@ -1920,7 +1920,7 @@
     <string name="shared_string_topbar">Üst menü</string>
     <string name="recalculate_route">Güzergahı yeniden hesapla</string>
     <string name="report">Rapor</string>
-    <string name="access_no_destination">Hedef ayarlanmadı</string>
+    <string name="access_no_destination">Erişilebilirlik eklentisi: Hedef belirlenmedi</string>
     <string name="access_disable_offroute_recalc">Rota terkedildiğinde yeniden hesaplanmasın</string>
     <string name="access_disable_offroute_recalc_descr">Rotadan çıkıldıktan sonra rota yeniden hesaplanmaz.</string>
     <string name="access_disable_wrong_direction_recalc">Aksi yönde iken rota yeniden-hesaplanmasın</string>
@@ -1997,7 +1997,7 @@
     <string name="nothing_found">Hiçbir şey bulunamadı</string>
     <string name="nothing_found_descr">Arama sorgusunu değiştir veya yarıçapını arttır.</string>
     <string name="search_favorites">Sık Kullanılanlarda ara</string>
-    <string name="hillshade_menu_download_descr">Dikey gölgelendirmeyi göstermek için \'Hillshade Overlay\' haritasını indirin.</string>
+    <string name="hillshade_menu_download_descr">Dikey gölgelendirmeyi göstermek için \'Tepe gölgesi\' üst katman haritasını indirin.</string>
     <string name="hillshade_purchase_header">Kademeli dikey alanları göstermek için \'Eş yükselti eğrileri\' eklentisini yükleyin.</string>
     <string name="hide_from_zoom_level">Yakınlaştırma seviyesinden başlayarak gizle</string>
     <string name="srtm_menu_download_descr">Bu bölgede kullanmak için \'Eş yükselti eğrisi\' haritasını indirin.</string>
@@ -2849,7 +2849,7 @@
     <string name="start_editing_card_description">Wikivoyage üzerindeki herhangi bir makaleyi düzenleyebilirsiniz. Bilgi, deneyim, yetenek ve dikkatinizi paylaşın.</string>
     <string name="start_editing">Düzenlemeye başla</string>
     <string name="welcome_to_open_beta">Açık betaya hoş geldiniz</string>
-    <string name="contour_lines_hillshade_maps">Eş yükselti eğrileri ve Tepe gölgeleri haritaları</string>
+    <string name="contour_lines_hillshade_maps">Eş yükselti eğrileri ve tepe gölgeleri haritaları</string>
     <string name="paid_app">Ücretli uygulama</string>
     <string name="paid_plugin">Ücretli eklenti</string>
     <string name="popular_destinations">Popüler yerler</string>
@@ -3384,7 +3384,7 @@
     <string name="login_and_pass">Kullanıcı adı ve parola</string>
     <string name="plugin_global_prefs_info">Bu eklenti ayarları geneldir ve tüm profiller için geçerlidir</string>
     <string name="osm_editing">OSM düzenleme</string>
-    <string name="osm_edits_view_descr">Henüz karşıya yüklenmemiş tüm düzenlemelerinizi veya OSM hatalarınızı %1$s\'de görüntüleyebilirsiniz. Karşıya yüklenen noktalar OsmAnd\'da gösterilmez.</string>
+    <string name="osm_edits_view_descr">Henüz karşıya yüklenmemiş tüm düzenlemelerinizi veya OSM hatalarınızı %1$s\'de görüntüleyin. Zaten yüklenen değişiklikler artık gösterilmeyecek.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Navigasyon sırasında veya harekete halindeyken gösterilen simge.</string>
     <string name="select_map_icon_descr">Dinlenme anında gösterilen simge.</string>
@@ -3745,14 +3745,14 @@
     <string name="app_mode_inline_skates">Paten</string>
     <string name="routing_attr_length_description">Rotalarda izin verilecek araç uzunluğunu belirtin.</string>
     <string name="routing_attr_length_name">Uzunluk sınırı</string>
-    <string name="quick_action_remove_next_destination_descr">Güzergahdaki geçerli hedef noktası silinecektir. Eğer bu varış noktası olacaksa, navigasyon duracaktır.</string>
+    <string name="quick_action_remove_next_destination_descr">Güzergahınızdaki bir sonraki hedefi siler. Bu son hedefse, navigasyon duracaktır.</string>
     <string name="please_provide_point_name_error">Lütfen nokta için bir ad belirtin</string>
     <string name="lenght_limit_description">Aracınızın uzunluğunu belirtin, uzun araçlar için bazı güzergah kısıtlamaları geçerli olabilir.</string>
     <string name="quick_action_remove_next_destination">En yakın varış noktasını sil</string>
     <string name="use_volume_buttons_as_zoom_descr">Harita yakınlaştırma seviyesini cihaz ses seviyesi düğmelerini kullanarak denetleyin.</string>
     <string name="use_volume_buttons_as_zoom">Yakınlaştırma için ses seviyesi düğmeleri</string>
     <string name="search_download_wikipedia_maps">Wikipedia haritalarını indir</string>
-    <string name="plugin_wikipedia_description">Wikipedia\'dan ilgi çekici yerler hakkında bilgi alın. Bu sizin çevrim dışı cep rehberinizdir - sadece Wikipedia eklentisini etkinleştirin ve etrafınızdaki nesneler hakkında makalelerin tadını çıkarın.</string>
+    <string name="plugin_wikipedia_description">Yerler ve varış noktaları hakkında makaleler içeren çevrim dışı cep kılavuzu Wikipedia\'dan ilgi çekici noktalar hakkında bilgi alın.</string>
     <string name="app_mode_enduro_motorcycle">Enduro motosiklet</string>
     <string name="app_mode_motor_scooter">Küçük motosiklet</string>
     <string name="app_mode_wheelchair">Tekerlekli sandalye</string>
@@ -3781,8 +3781,8 @@
     <string name="route_between_points_warning_desc">Ardından, bu seçeneği kullanmak için navigasyon profillerinizden biriyle izlenen yolunuzu izin verilen en yakın yola tutturun.</string>
     <string name="save_as_new_track">Yeni bir izleme olarak kaydet</string>
     <string name="reverse_route">Ters güzergah</string>
-    <string name="route_between_points_whole_track_button_desc">Tüm yol, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
-    <string name="route_between_points_next_segment_button_desc">Sadece sonraki bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="route_between_points_whole_track_button_desc">Tüm yol, seçilen profil kullanılarak yeniden hesaplanacak.</string>
+    <string name="route_between_points_next_segment_button_desc">Yalnızca sonraki bölüm, seçilen profil kullanılarak yeniden hesaplanacak.</string>
     <string name="route_between_points_desc">Düz bir çizgi ile noktaların nasıl birleştirileceğini veya aşağıda belirtildiği gibi aralarında nasıl güzergah hesaplanacağını seçin.</string>
     <string name="whole_track">Tüm yol</string>
     <string name="next_segment">Sonraki bölüm</string>
@@ -3790,7 +3790,7 @@
     <string name="navigation_profile">Navigasyon profili</string>
     <string name="route_between_points_add_track_desc">Kendisine yeni bir bölümün ekleneceği bir yol dosyası seçin.</string>
     <string name="street_level_imagery">Sokak seviyesi görüntüleri</string>
-    <string name="plan_route_exit_dialog_descr">Planlanan güzergahtaki tüm değişiklikleri kapatarak atmak istediğinizden emin misiniz\?</string>
+    <string name="plan_route_exit_dialog_descr">Planlanan güzergahtaki tüm değişiklikleri atmak istediğinizden emin misiniz\?</string>
     <string name="in_case_of_reverse_direction">Ters yön durumunda</string>
     <string name="monitoring_control_start">REC</string>
     <string name="open_saved_track">Kaydedilen yolu aç</string>
@@ -3810,7 +3810,7 @@
     <string name="map_widget_monitoring">Seyahat kaydetme</string>
     <string name="marker_save_as_track">Yol dosyası olarak kaydet</string>
     <string name="number_of_gpx_files_selected_pattern">%s yol dosyası seçildi</string>
-    <string name="disable_recording_once_app_killed_descrp">(Son uygulamalar aracılığıyla) uygulama kapatıldığında yol kaydını duraklatacaktır. (OsmAnd arka plan göstergesi Android bildirim çubuğundan kaybolur.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Yol kaydı, uygulama (son uygulamalar aracılığıyla) kapatıldığında duraklatılacaktır. (OsmAnd arka plan göstergesi Android bildirim çubuğundan kaybolur.)</string>
     <string name="save_global_track_interval_descr">Genel yol kaydı için kayıt aralığını belirtin (haritadaki \'Seyahat kaydetme\' widget\'ı aracılığıyla açıldı).</string>
     <string name="gpx_monitoring_stop">Seyahat kaydetmeyi duraklat</string>
     <string name="gpx_monitoring_start">Seyahat kaydetmeyi devam ettir</string>
@@ -3818,15 +3818,15 @@
     <string name="delete_address">Adres sil</string>
     <string name="add_address">Adres ekle</string>
     <string name="access_hint_enter_address">Adres girin</string>
-    <string name="simplified_track_description">Sadece güzergah hattı kaydedilecek, ara noktalar silinecektir.</string>
+    <string name="simplified_track_description">Yalnızca güzergah hattı kaydedilecek, ara noktalar silinecek.</string>
     <string name="shared_string_file_name">Dosya adı</string>
     <string name="system_default_theme">Sistem öntanımlı değeri</string>
     <string name="all_next_segments">Sonraki tüm bölümler</string>
     <string name="previous_segment">Önceki bölüm</string>
     <string name="all_previous_segments">Önceki tüm bölümler</string>
-    <string name="only_selected_segment_recalc">Sadece seçili bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
-    <string name="all_next_segments_will_be_recalc">Sonraki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
-    <string name="all_previous_segments_will_be_recalc">Önceki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="only_selected_segment_recalc">Yalnızca seçilen bölüm, seçilen profil kullanılarak yeniden hesaplanacak.</string>
+    <string name="all_next_segments_will_be_recalc">Sonraki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacak.</string>
+    <string name="all_previous_segments_will_be_recalc">Önceki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacak.</string>
     <string name="shared_string_gpx_route">Yol güzergahı</string>
     <string name="follow_track">Yolu takip et</string>
     <string name="follow_track_descr">Takip edilecek yol dosyasını seçin</string>
@@ -3862,11 +3862,11 @@
     <string name="start_finish_icons">Başlangıç ve bitiş simgeleri</string>
     <string name="contour_lines_thanks">\'Eş yükselti eğrileri\'ni satın aldığınız için teşekkürler</string>
     <string name="osm_live_payment_desc_hw">Abonelik seçilen dönem başına ücretlendirilir. İstediğiniz zaman AppGallery\'den iptal edin.</string>
-    <string name="osm_live_payment_subscription_management_hw">Ödeme, satın alma onaylandığında AppGallery hesabınızdan alınacaktır.
+    <string name="osm_live_payment_subscription_management_hw">Satın alma onayının ardından AppGallery hesabınızdan ücret alınır.
 \n
-\nYenileme tarihinden önce iptal edilmedikçe abonelik otomatik olarak yenilenir. Hesabınızdan yenileme süresi (ay/üç ay/yıl) için yalnızca yenileme tarihinde ücret alınacaktır.
+\nYenileme tarihinden önce iptal edilmediği sürece abonelik otomatik olarak uzatılır. Hesabınızdan yenileme süresi (ay/üç ay/yıl) için yalnızca yenileme tarihinde ücret alınacaktır.
 \n
-\n AppGallery ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
+\n AppGallery ayarlarınızda aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
     <string name="routing_attr_avoid_footways_description">Yaya yollarından kaçın</string>
     <string name="routing_attr_avoid_footways_name">Yaya yollarından kaçın</string>
     <string name="development">Geliştirme</string>
@@ -3912,7 +3912,7 @@
     <string name="user_login">Giriş bilgisi</string>
     <string name="login_account">Hesap</string>
     <string name="manage_subscription">Aboneliği yönet</string>
-    <string name="subscription_payment_issue_title">Aboneliğinizle ilgili bir sorun var. Ödeme yönteminizi düzeltmek üzere Google Play abonelik ayarlarına gitmek için düğmeye dokunun.</string>
+    <string name="subscription_payment_issue_title">Aboneliğinizi düzeltmek üzere Google Play\'de bir ödeme yöntemi ayarlamak için düğmeye dokunun.</string>
     <string name="subscription_expired_title">OsmAnd Live aboneliğinin süresi doldu</string>
     <string name="subscription_paused_title">OsmAnd Live aboneliği duraklatıldı</string>
     <string name="subscription_on_hold_title">OsmAnd Live aboneliği beklemede</string>
@@ -3971,4 +3971,6 @@
 \n • Sık kullanılanlar ve yol ara noktaları için özel renk desteği
 \n
 \n</string>
+    <string name="profile_type_osmand_string">OsmAnd profili</string>
+    <string name="profile_type_user_string">Kullanıcı profili</string>
 </resources>

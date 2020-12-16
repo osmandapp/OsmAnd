@@ -530,9 +530,9 @@
     <string name="poi_dispensing_yes">Ih</string>
     <string name="poi_summer_camp">Camp d\'Ã©tÃ©</string>
     <string name="poi_depth">Profondeur du framebuffer</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Flux</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Pond</string>
-    <string name="poi_fire_hydrant_style_water_source_main">MAIN</string>
+    <string name="poi_water_source_stream">Flux</string>
+    <string name="poi_water_source_pond">Pond</string>
+    <string name="poi_water_source_main">MAIN</string>
     <string name="poi_fire_hydrant_position_street">Abrid</string>
     <string name="poi_fire_hydrant_position_green">Adal</string>
     <string name="poi_disease_aids_no">Tallalin timeẓranin</string>
@@ -618,7 +618,7 @@
     <string name="poi_brushless">War imeṣleḥ</string>
     <string name="poi_tactile_paving">Anasiw annalan</string>
     <string name="poi_payment_toll_type">Tawsit n lexlaṣ</string>
-    <string name="poi_fire_hydrant_water_source">Tala</string>
+    <string name="poi_water_source">Tala</string>
     <string name="poi_fire_hydrant_position">Adig</string>
     <string name="poi_bicycle_service">Ameẓlu n uvilu</string>
     <string name="poi_vending_type">Anaw n uznuzu</string>

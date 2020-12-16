@@ -400,7 +400,7 @@
     <string name="poi_clothes_type">Vrsta</string>
     <string name="poi_shoes_type">Vrsta</string>
     <string name="poi_fire_hydrant_type">Vrsta</string>
-    <string name="poi_fire_hydrant_water_source">Vodni vir</string>
+    <string name="poi_water_source">Vodni vir</string>
     <string name="poi_payment_toll_type">Vrsta plačila</string>
     <string name="poi_traffic_signals_sound">Zvok</string>
     <string name="poi_highway_crossing_type">Vrsta</string>

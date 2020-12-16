@@ -1535,7 +1535,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void clickRouteParams() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RouteOptionsBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+			RouteOptionsBottomSheet.showInstance(mapActivity);
 		}
 	}
 

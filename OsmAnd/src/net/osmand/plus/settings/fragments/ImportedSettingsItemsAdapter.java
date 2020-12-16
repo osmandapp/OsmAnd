@@ -87,7 +87,7 @@ public class ImportedSettingsItemsAdapter extends
 				holder.title.setText(R.string.configure_screen_quick_action);
 				break;
 			case POI_TYPES:
-				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_search_dark, activeColorRes));
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_info_dark, activeColorRes));
 				holder.title.setText(R.string.search_activity);
 				break;
 			case MAP_SOURCES:
@@ -108,7 +108,7 @@ public class ImportedSettingsItemsAdapter extends
 				break;
 			case MULTIMEDIA_NOTES:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_photo_dark, activeColorRes));
-				holder.title.setText(R.string.audionotes_plugin_name);
+				holder.title.setText(R.string.notes);
 				break;
 			case TRACKS:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
@@ -119,7 +119,7 @@ public class ImportedSettingsItemsAdapter extends
 				holder.title.setText(R.string.osm_notes);
 				break;
 			case OSM_EDITS:
-				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_info_dark, activeColorRes));
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_openstreetmap_logo, activeColorRes));
 				holder.title.setText(R.string.osm_edits);
 				break;
 			case FAVORITES:
