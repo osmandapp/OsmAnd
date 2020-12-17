@@ -1,7 +1,6 @@
 package net.osmand.plus.wikivoyage.article;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -44,7 +43,6 @@ import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
-import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -55,7 +53,7 @@ import java.util.Map;
 import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
 
 
-public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment implements TravelLocalDataHelper.Listener {
+public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment {
 
 	public static final String TAG = "WikivoyageArticleDialogFragment";
 
@@ -212,7 +210,6 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMyApplication().getTravelHelper().getBookmarksHelper().removeListener(this);
 		if (webViewClient != null) {
 			webViewClient.stopRunningAsyncTasks();
 		}
@@ -221,7 +218,6 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMyApplication().getTravelHelper().getBookmarksHelper().addListener(this);
 		OsmandSettings settings = getMyApplication().getSettings();
 		if (!settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.get()) {
 			FragmentActivity activity = getActivity();
@@ -408,24 +404,6 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			return true;
 		} catch (RuntimeException e) {
 			return false;
-		}
-	}
-
-	@Override
-	public void savedArticlesUpdated() {
-		WikivoyageExploreActivity activity = getExploreActivity();
-		if (activity != null) {
-			activity.updateFragments();
-		}
-	}
-
-	@Nullable
-	private WikivoyageExploreActivity getExploreActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof WikivoyageExploreActivity) {
-			return (WikivoyageExploreActivity) activity;
-		} else {
-			return null;
 		}
 	}
 
