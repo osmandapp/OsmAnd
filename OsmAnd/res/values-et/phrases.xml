@@ -3854,4 +3854,7 @@
     <string name="poi_water_source_well">Kaev</string>
     <string name="poi_water_source_river">Jõgi</string>
     <string name="poi_water_source_lake">Järv</string>
+    <string name="poi_mobile_money_agent">Mobiiliraha müügikoht</string>
+    <string name="poi_ranger_station">Pargivahi maja</string>
+    <string name="poi_weightbridge">Autokaal</string>
 </resources>
