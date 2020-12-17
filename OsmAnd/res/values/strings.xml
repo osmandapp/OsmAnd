@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="switch_all_points">Reverse all points</string>
     <string name="release_3_9">
     • Added option to export and import all data including settings, resources, my places\n\n
     • Plan Route: graphs for track segments with route, and added the ability to create and edit multiple track segments\n\n

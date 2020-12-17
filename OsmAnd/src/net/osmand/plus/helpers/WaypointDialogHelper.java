@@ -42,12 +42,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  */
 public class WaypointDialogHelper {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private WaypointHelper waypointHelper;
-	private List<WaypointDialogHelperCallback> helperCallbacks= new ArrayList<>();
+	private List<WaypointDialogHelperCallback> helperCallbacks = new ArrayList<>();
 
 	private boolean flat;
 	private List<LocationPointWrapper> deletedPoints;
@@ -242,8 +243,8 @@ public class WaypointDialogHelper {
 
 	// switch start & finish
 	public static void switchStartAndFinish(TargetPointsHelper targetPointsHelper, TargetPoint finish,
-											 Activity ctx, TargetPoint start, OsmandApplication app,
-											 WaypointDialogHelper helper) {
+											Activity ctx, TargetPoint start, OsmandApplication app,
+											WaypointDialogHelper helper) {
 		if (finish == null) {
 			app.showShortToastMessage(R.string.mark_final_location_first);
 		} else {
@@ -263,6 +264,22 @@ public class WaypointDialogHelper {
 		}
 	}
 
+	public static void switchAllPoint(final OsmandApplication app, final Activity ctx,
+									  final WaypointDialogHelper helper) {
+		List<TargetPoint> all;
+		TargetPointsHelper targets = app.getTargetPointsHelper();
+		all = targets.getIntermediatePointsWithTarget();
+
+		List<TargetPoint> cur = targets.getIntermediatePointsWithTarget();
+		for (int j = 0; j < cur.size() && j < all.size(); j++) {
+			if (cur.get(j) != all.get(j)) {
+				break;
+			}
+		}
+		targets.reorderAllTargetPoints(all, true);
+		updateControls(ctx, helper);
+	}
+
 	public static void updateControls(Activity ctx, WaypointDialogHelper helper) {
 		if (helper != null && helper.helperCallbacks != null) {
 			for (WaypointDialogHelperCallback callback : helper.helperCallbacks) {
@@ -278,7 +295,7 @@ public class WaypointDialogHelper {
 	}
 
 	public static void replaceStartWithFirstIntermediate(TargetPointsHelper targetPointsHelper, Activity ctx,
-														  WaypointDialogHelper helper) {
+														 WaypointDialogHelper helper) {
 		List<TargetPoint> intermediatePoints = targetPointsHelper.getIntermediatePointsWithTarget();
 		TargetPoint firstIntermediate = intermediatePoints.remove(0);
 		targetPointsHelper.setStartPoint(new LatLon(firstIntermediate.getLatitude(),
@@ -492,6 +509,32 @@ public class WaypointDialogHelper {
 			items.add(reorderStartAndFinishItem);
 
 			items.add(new DividerHalfItem(getContext()));
+
+			BaseBottomSheetItem reorderAllItems = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_sort_reverse_order))
+					.setTitle(getString(R.string.switch_all_points))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							MapActivity mapActivity = getMapActivity();
+							if (mapActivity != null) {
+								WaypointDialogHelper.switchAllPoint(
+										mapActivity.getMyApplication(),
+										mapActivity,
+										mapActivity.getDashboard().getWaypointDialogHelper()
+								);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			if (getMyApplication() != null) {
+				int intermediateSize = getMyApplication().getTargetPointsHelper().getAllPoints().size();
+				if (intermediateSize > 2) {
+					items.add(reorderAllItems);
+				}
+			}
 
 			final BaseBottomSheetItem[] addWaypointItem = new BaseBottomSheetItem[1];
 			addWaypointItem[0] = new SimpleBottomSheetItem.Builder()
