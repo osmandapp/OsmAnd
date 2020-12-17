@@ -887,6 +887,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		String description;
 		if (mode.isCustomProfile()) {
 			description = ctx.getString(R.string.profile_type_user_string);
+		} else if (mode.equals(ApplicationMode.SKI)) {
+			description = ctx.getString(R.string.plugin_ski_name);
+		} else if (mode.equals(ApplicationMode.BOAT)) {
+			description = ctx.getString(R.string.plugin_nautical_name);
 		} else {
 			description = ctx.getString(R.string.profile_type_osmand_string);
 		}

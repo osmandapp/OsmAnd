@@ -741,6 +741,10 @@ public class MapActivityActions implements DialogProvider {
 		for (final ApplicationMode appMode : activeModes) {
 			if (appMode.isCustomProfile()) {
 				modeDescription = getProfileDescription(app, appMode, profilesObjects, getString(R.string.profile_type_user_string));
+			} else if (appMode.equals(ApplicationMode.SKI)) {
+				modeDescription = getProfileDescription(app, appMode, profilesObjects, getString(R.string.plugin_ski_name));
+			} else if (appMode.equals(ApplicationMode.BOAT)) {
+				modeDescription = getProfileDescription(app, appMode, profilesObjects, getString(R.string.plugin_nautical_name));
 			} else {
 				modeDescription = getProfileDescription(app, appMode, profilesObjects, getString(R.string.profile_type_osmand_string));
 			}
@@ -1049,6 +1053,10 @@ public class MapActivityActions implements DialogProvider {
 		Map<String, RoutingProfileDataObject> profilesObjects = getRoutingProfiles(app);
 		if (currentMode.isCustomProfile()) {
 			modeDescription = getProfileDescription(app, currentMode, profilesObjects, getString(R.string.profile_type_user_string));
+		} else if (currentMode.equals(ApplicationMode.SKI)) {
+			modeDescription = getProfileDescription(app, currentMode, profilesObjects, getString(R.string.plugin_ski_name));
+		} else if (currentMode.equals(ApplicationMode.BOAT)) {
+			modeDescription = getProfileDescription(app, currentMode, profilesObjects, getString(R.string.plugin_nautical_name));
 		} else {
 			modeDescription = getProfileDescription(app, currentMode, profilesObjects, getString(R.string.profile_type_osmand_string));
 		}
