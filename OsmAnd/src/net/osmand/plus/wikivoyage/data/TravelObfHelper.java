@@ -2,8 +2,11 @@ package net.osmand.plus.wikivoyage.data;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -23,6 +26,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.*;
+import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 
 public class TravelObfHelper implements TravelHelper {
 
@@ -71,7 +77,7 @@ public class TravelObfHelper implements TravelHelper {
 				final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
 				BinaryMapIndexReader.SearchRequest<Amenity> req =
 						BinaryMapIndexReader.buildSearchPoiRequest(location, SEARCH_RADIUS, -1,
-								BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER,
+								ACCEPT_ALL_POI_TYPE_FILTER,
 								new ResultMatcher<Amenity>() {
 									@Override
 									public boolean publish(Amenity amenity) {
@@ -150,7 +156,8 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public List<WikivoyageSearchResult> search(String searchQuery) {
-		return null;
+		List<WikivoyageSearchResult> res = new ArrayList<>();
+		return res;
 	}
 
 	@NonNull
@@ -166,7 +173,51 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public TravelArticle getArticleById(String routeId, String lang) {
-		return cachedArticles.get(routeId);
+		TravelArticle article = cachedArticles.get(routeId);
+		if (article != null) {
+			return article;
+		} else {
+			return getArticleByIdFromTravelBooks(routeId, lang);
+		}
+	}
+
+	public TravelArticle getArticleByIdFromTravelBooks(final String routeId, final String lang) {
+		TravelArticle article = null;
+		final List<Amenity> amenities = new ArrayList<>();
+		for (BinaryMapIndexReader travelBookReader : getTravelBookReaders()) {
+			try {
+				int left = 0;
+				int right = Integer.MAX_VALUE;
+				int top = 0;
+				int bottom = Integer.MAX_VALUE;
+				BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+						left, right, top, bottom, -1, ACCEPT_ALL_POI_TYPE_FILTER,
+						new ResultMatcher<Amenity>() {
+							@Override
+							public boolean publish(Amenity amenity) {
+								if (amenity.getSubType().equals(ROUTE_ARTICLE)
+										&& getRouteId(amenity).equals(routeId)) {
+									amenities.add(amenity);
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
+
+				travelBookReader.searchPoiByName(req);
+			} catch (IOException e) {
+				LOG.error(e.getMessage());
+			}
+			if (!amenities.isEmpty()) {
+				article = readArticle(amenities.get(0), lang);
+				cachedArticles.put(article.routeId, article);
+			}
+		}
+		return article;
 	}
 
 	@Override
@@ -184,8 +235,9 @@ public class TravelObfHelper implements TravelHelper {
 						new ResultMatcher<Amenity>() {
 							@Override
 							public boolean publish(Amenity amenity) {
-								if (title.equalsIgnoreCase(amenity.getName(lang))
-										&& amenity.getSubType().equals(ROUTE_ARTICLE)) {
+								Collator collator = OsmAndCollator.primaryCollator();
+								if (CollatorStringMatcher.cmatches(collator, title, amenity.getName(lang),
+										CHECK_EQUALS_FROM_SPACE) && amenity.getSubType().equals(ROUTE_ARTICLE)) {
 									amenities.add(amenity);
 								}
 								return false;
