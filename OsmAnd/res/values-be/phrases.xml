@@ -2603,9 +2603,9 @@
     <string name="poi_fire_hydrant_position_parking_lot">Паркоўка</string>
     <string name="poi_fire_hydrant_position_street">Вуліца</string>
     <string name="poi_fire_hydrant_position_underground">Падземны</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Асноўная</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Сажалка</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Струмень</string>
+    <string name="poi_water_source_main">Асноўная</string>
+    <string name="poi_water_source_pond">Сажалка</string>
+    <string name="poi_water_source_stream">Струмень</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Ёмістасць</string>
     <string name="poi_in_service_yes">Выкарыстоўваецца: так</string>
     <string name="poi_street_cabinet_power">Тып шафы: электрычная</string>
@@ -2772,7 +2772,7 @@
     <string name="poi_shoes_type">Тып абутку</string>
     <string name="poi_fire_hydrant_type">Тып</string>
     <string name="poi_fire_hydrant_position">Размяшчэнне</string>
-    <string name="poi_fire_hydrant_water_source">Крыніца вады</string>
+    <string name="poi_water_source">Крыніца вады</string>
     <string name="poi_payment_toll_type">Тып аплаты</string>
     <string name="poi_traffic_signals_sound">Гукавы сігнал</string>
     <string name="poi_highway_crossing_type">Тып</string>
@@ -3806,7 +3806,7 @@
     <string name="poi_pump_status_missing_beam">Стан помпы: адсутнічае рычаг</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Усмоктванне</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Пад ціскам</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Падземныя воды</string>
+    <string name="poi_water_source_groundwater">Падземныя воды</string>
     <string name="poi_fire_hydrant_type_pipe">Труба</string>
     <string name="poi_drinking_water_refill_network">Сетка папаўнення пітной вадой</string>
     <string name="poi_drinking_water_refill_no">Папаўненне пітной вадой: не</string>

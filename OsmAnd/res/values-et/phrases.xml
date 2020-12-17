@@ -145,7 +145,7 @@
     <string name="poi_shoes_type">Liik</string>
     <string name="poi_fire_hydrant_type">Liik</string>
     <string name="poi_fire_hydrant_position">Asukoht</string>
-    <string name="poi_fire_hydrant_water_source">Vee allikas</string>
+    <string name="poi_water_source">Vee allikas</string>
     <string name="poi_payment_toll_type">Makseviis</string>
     <string name="poi_traffic_signals_sound">Heli</string>
     <string name="poi_highway_crossing_type">Liik</string>
@@ -2725,9 +2725,9 @@
     <string name="poi_fire_hydrant_position_street">Tänav</string>
     <string name="poi_fire_hydrant_position_underground">Maa-alune</string>
     <string name="poi_fire_hydrant_style_wsh">Hüdrandi liik: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Veetrassil</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Tiik</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Oja</string>
+    <string name="poi_water_source_main">Veetrassil</string>
+    <string name="poi_water_source_pond">Tiik</string>
+    <string name="poi_water_source_stream">Oja</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Veemahuti</string>
     <string name="poi_in_service_yes">Kasutuses: jah</string>
     <string name="poi_street_cabinet_power">Kapi liik: toide</string>
@@ -3610,9 +3610,9 @@
     <string name="poi_vehicle_military">Sõidukiga ligipääs: sõjaväeline</string>
     <string name="poi_vehicle_delivery">Sõidukiga ligipääs: kohaletoimetamine</string>
     <string name="poi_vehicle_forestry">Sõidukiga ligipääs: metsandus</string>
-    <string name="poi_motorcar_yes">Auto ligipääs:</string>
+    <string name="poi_motorcar_yes">Ligipääs autole: jah</string>
     <string name="poi_motorcar_private">Auto ligipääs: privaatne</string>
-    <string name="poi_motorcar_no">Auto ligipääs: ei</string>
+    <string name="poi_motorcar_no">Ligipääs autole: ei</string>
     <string name="poi_motorcar_destination">Auto ligipääs: sihtkoht</string>
     <string name="poi_motorcar_permissive">Auto ligipääs: lubatav</string>
     <string name="poi_motorcar_customers">Auto ligipääs: kliendid</string>
@@ -3810,7 +3810,7 @@
     <string name="poi_pump_status_missing_beam">Pumba olek: kiir puudub</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Imatav</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Hüdrant</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Pinnavesi</string>
+    <string name="poi_water_source_groundwater">Pinnavesi</string>
     <string name="poi_fire_hydrant_type_pipe">Toru</string>
     <string name="poi_traffic_signals_vibration">Värin</string>
     <string name="poi_fire_hydrant_pressure_filter">Surve</string>
@@ -3837,4 +3837,21 @@
     <string name="poi_diplomatic_embassy">Saatkond</string>
     <string name="poi_consulate_filter">Konsulaat</string>
     <string name="poi_embassy_filter">Saatkond</string>
+    <string name="poi_diplomatic_services_immigrant_visas_yes">Jah</string>
+    <string name="poi_diplomatic_services_immigrant_visas_no">Ei</string>
+    <string name="poi_diplomatic_services_citizen_services_yes">Jah</string>
+    <string name="poi_diplomatic_services_citizen_services_no">Ei</string>
+    <string name="poi_siren">Sireen</string>
+    <string name="poi_lifeguard_base">Vetelpäästejaam</string>
+    <string name="poi_nurse">Õde</string>
+    <string name="poi_health_specialty_vaccination_yes">Vaktsineerimine</string>
+    <string name="poi_vaccination_covid19">Vaktsineerimine: COVID19</string>
+    <string name="poi_water_source_tube_well">Puurkaev</string>
+    <string name="poi_water_source_water_works">Veevärgi ettevõte</string>
+    <string name="poi_water_source_tap">Veekraan</string>
+    <string name="poi_water_source_water_tank">Veepaak</string>
+    <string name="poi_water_source_powered_pump">Mootoriga veepump</string>
+    <string name="poi_water_source_well">Kaev</string>
+    <string name="poi_water_source_river">Jõgi</string>
+    <string name="poi_water_source_lake">Järv</string>
 </resources>

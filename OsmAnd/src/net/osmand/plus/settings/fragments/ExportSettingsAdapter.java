@@ -43,6 +43,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
+	private final boolean exportMode;
 
 	private List<ExportSettingsCategory> itemsTypes;
 	private Map<ExportSettingsType, List<?>> selectedItemsMap;
@@ -59,8 +60,9 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private final int childViewHeight;
 	private final int listBottomPadding;
 
-	ExportSettingsAdapter(OsmandApplication app, OnItemSelectedListener listener, boolean nightMode) {
+	ExportSettingsAdapter(OsmandApplication app, boolean exportMode, OnItemSelectedListener listener, boolean nightMode) {
 		this.app = app;
+		this.exportMode = exportMode;
 		this.listener = listener;
 		this.nightMode = nightMode;
 		uiUtilities = app.getUIUtilities();
@@ -279,7 +281,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			}
 		}
 		String description;
-		if (selectedTypes == 0) {
+		if (selectedTypes == 0 && exportMode) {
 			description = app.getString(R.string.shared_string_none);
 		} else if (selectedTypes == items.getTypes().size()) {
 			description = app.getString(R.string.shared_string_all);

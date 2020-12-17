@@ -129,7 +129,7 @@
     <string name="poi_social_facility_shelter">Skýli</string>
     <string name="poi_social_facility_for_disabled">Fatlaðir</string>
     <string name="poi_site_type_city">Borg</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Lækur</string>
+    <string name="poi_water_source_stream">Lækur</string>
     <string name="poi_aerodrome_type_public">Opinbert</string>
     <string name="poi_aerodrome_type_military">Hernaðar</string>
     <string name="poi_aerodrome_type_private">Einka</string>
@@ -1367,8 +1367,8 @@
     <string name="poi_free_flying_official_no">Opinbert: nei</string>
     <string name="poi_emergency_yes">Neyðartilfelli: já</string>
     <string name="poi_emergency_no">Neyðartilfelli: nei</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Aðal</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Tjörn</string>
+    <string name="poi_water_source_main">Aðal</string>
+    <string name="poi_water_source_pond">Tjörn</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Tankur</string>
     <string name="poi_street_cabinet_power">Tegund skáps: rafmagn</string>
     <string name="poi_street_cabinet_telecom">Tegund skáps: samskipti</string>
@@ -1398,7 +1398,7 @@
     <string name="poi_xmas_tree">Jólatré</string>
     <string name="poi_additional_type">Aukalegt</string>
     <string name="poi_bicycle_service">Reiðhjólaþjónusta</string>
-    <string name="poi_fire_hydrant_water_source">Vatnsuppspretta</string>
+    <string name="poi_water_source">Vatnsuppspretta</string>
     <string name="poi_automated">Sjálfvirk</string>
     <string name="poi_theatre_genre_shadow_play">Skuggaleikhús</string>
     <string name="poi_bandstand">Hljómsveitarpallur</string>
@@ -3806,7 +3806,7 @@
     <string name="poi_pump_status_missing_beam">Staða dælu: vantar bita</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sog</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Undir þrýstingi</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Grunnvatn</string>
+    <string name="poi_water_source_groundwater">Grunnvatn</string>
     <string name="poi_fire_hydrant_type_pipe">Leiðsla</string>
     <string name="poi_fire_hydrant_pressure_filter">Þrýstingur</string>
     <string name="poi_traffic_signals_arrow_yes">Já</string>

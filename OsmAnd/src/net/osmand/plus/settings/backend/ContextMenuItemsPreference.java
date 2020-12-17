@@ -13,7 +13,7 @@ public class ContextMenuItemsPreference extends CommonPreference<ContextMenuItem
 
 	@Override
 	protected ContextMenuItemsSettings getValue(Object prefs, ContextMenuItemsSettings defaultValue) {
-		String s = getSettingsAPI().getString(prefs, getId(), "");
+		String s = getSettingsAPI().getString(prefs, getId(), defaultValue.writeToJsonString(idScheme));
 		return readValue(s);
 	}
 

@@ -12,13 +12,13 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/content_padding_half"
         android:layout_marginStart="@dimen/content_padding_half"
-        tools:src="@drawable/ic_action_info_dark"
-        android:tint="?attr/primary_icon_color"/>
+        tools:src="@drawable/ic_action_info_dark" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:textColor="?android:textColorPrimary"
         android:layout_gravity="center_vertical"
         android:paddingLeft="@dimen/content_padding"
@@ -29,5 +29,15 @@
         android:paddingBottom="@dimen/content_padding_small"
         android:textSize="@dimen/default_list_text_size"
         tools:text="Title" />
+
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:id="@+id/radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/content_padding"
+        android:layout_marginEnd="@dimen/content_padding"
+        android:focusable="false"
+        android:clickable="false" />
 
 </LinearLayout>

@@ -12,7 +12,7 @@
     <string name="poi_shoes_type">Seurt</string>
     <string name="poi_fire_hydrant_type">Seurt</string>
     <string name="poi_fire_hydrant_position">Lec\'hiadur</string>
-    <string name="poi_fire_hydrant_water_source">Pourvezañ dour</string>
+    <string name="poi_water_source">Pourvezañ dour</string>
     <string name="poi_payment_toll_type">Doare paeamant</string>
     <string name="poi_traffic_signals_sound">Son</string>
     <string name="poi_highway_crossing_type">Seurt</string>

@@ -2628,9 +2628,9 @@
     <string name="poi_fire_hydrant_position_street">Gaden</string>
     <string name="poi_fire_hydrant_position_underground">Under jorden</string>
     <string name="poi_fire_hydrant_style_wsh">Brandhanetype: wsh</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Primær</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Dam</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Vandløb</string>
+    <string name="poi_water_source_main">Primær</string>
+    <string name="poi_water_source_pond">Dam</string>
+    <string name="poi_water_source_stream">Vandløb</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">Cisterne</string>
     <string name="poi_in_service_yes">I tjeneste: ja</string>
     <string name="poi_street_cabinet_power">Gadeskabstype: eldistribution</string>
@@ -2785,7 +2785,7 @@
     <string name="poi_shoes_type">Type</string>
     <string name="poi_fire_hydrant_type">Type</string>
     <string name="poi_fire_hydrant_position">Position</string>
-    <string name="poi_fire_hydrant_water_source">Vandkilde</string>
+    <string name="poi_water_source">Vandkilde</string>
     <string name="poi_payment_toll_type">Betalingstype</string>
     <string name="poi_traffic_signals_sound">Lyd</string>
     <string name="poi_highway_crossing_type">Type</string>
@@ -3828,7 +3828,7 @@
     <string name="poi_drinking_water_refill_yes">Påfyldning af drikkevand: ja</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sugning</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Under tryk</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">Grundvand</string>
+    <string name="poi_water_source_groundwater">Grundvand</string>
     <string name="poi_fire_hydrant_type_pipe">Rør</string>
     <string name="poi_fire_hydrant_pressure_filter">Tryk</string>
     <string name="poi_pump_status_missing_beam">Pumpe tilstand: ingen stråle</string>
@@ -3885,4 +3885,9 @@
     <string name="poi_fuel_lng">LNG</string>
     <string name="poi_siren">Sirene</string>
     <string name="poi_nurse">Sygeplejerske</string>
+    <string name="poi_water_source_lake">Sø</string>
+    <string name="poi_water_source_river">Flod</string>
+    <string name="poi_water_source_water_tank">Vandtank</string>
+    <string name="poi_vaccination_covid19">Vaccination: COVID19</string>
+    <string name="poi_health_specialty_vaccination_yes">Vaccination</string>
 </resources>

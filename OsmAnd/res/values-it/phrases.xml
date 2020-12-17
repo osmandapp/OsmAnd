@@ -709,7 +709,7 @@
     <string name="poi_shoes_type">Tipo</string>
     <string name="poi_fire_hydrant_type">Tipo</string>
     <string name="poi_fire_hydrant_position">Posizione</string>
-    <string name="poi_fire_hydrant_water_source">Fonte d\'acqua</string>
+    <string name="poi_water_source">Fonte d\'acqua</string>
     <string name="poi_payment_toll_type">Tipo di pagamento</string>
     <string name="poi_traffic_signals_sound">Suono</string>
     <string name="poi_highway_crossing_type">Tipo</string>
@@ -2286,9 +2286,9 @@
     <string name="poi_payment_mtsmoney_yes">MTS-Money</string>
     <string name="poi_payment_mtsmoney_no">MTS-Money non accettato</string>
     <string name="poi_brewery_additional">Nome della birreria</string>
-    <string name="poi_fire_hydrant_style_water_source_main">Principale</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">Stagno</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">Ruscello</string>
+    <string name="poi_water_source_main">Principale</string>
+    <string name="poi_water_source_pond">Stagno</string>
+    <string name="poi_water_source_stream">Ruscello</string>
     <string name="poi_valley_balka">Balka</string>
     <string name="poi_display_yes">Display: sì</string>
     <string name="poi_display_no">Display: no</string>

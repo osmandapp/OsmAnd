@@ -11,6 +11,6 @@
     <string name="poi_recycling_type">ⴰⵙⵔⵜⵓ</string>
     <string name="poi_covered">ⵉⵜⵜⵡⴰⴷⵍ</string>
     <string name="poi_traffic_signals_sound">ⴰⵎⵙⵍⴰⵢ</string>
-    <string name="poi_fire_hydrant_water_source">ⴰⵖⴱⴰⵍⵓ ⵏ ⵡⴰⵎⴰⵏ</string>
+    <string name="poi_water_source">ⴰⵖⴱⴰⵍⵓ ⵏ ⵡⴰⵎⴰⵏ</string>
     <string name="poi_fire_hydrant_position">ⴰⵏⵙⴰ</string>
 </resources>

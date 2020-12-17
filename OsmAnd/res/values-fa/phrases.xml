@@ -619,7 +619,7 @@
     <string name="poi_clothes_type">نوع</string>
     <string name="poi_shoes_type">نوع</string>
     <string name="poi_fire_hydrant_position">موقعیت</string>
-    <string name="poi_fire_hydrant_water_source">منبع آب</string>
+    <string name="poi_water_source">منبع آب</string>
     <string name="poi_payment_toll_type">شیوهٔ پرداخت</string>
     <string name="poi_traffic_signals_sound">صدا</string>
     <string name="poi_wheelchair_accessibility">دسترسی ویلچر</string>

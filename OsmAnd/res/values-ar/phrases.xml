@@ -423,7 +423,7 @@
     <string name="poi_internet_access_type">نوع الوصول إلى الإنترنت</string>
     <string name="poi_bicycle_service">خدمة الدراجات</string>
     <string name="poi_fire_hydrant_type">نوع</string>
-    <string name="poi_fire_hydrant_water_source">مصدر المياه</string>
+    <string name="poi_water_source">مصدر المياه</string>
     <string name="poi_payment_toll_type">طريقة الدفع</string>
     <string name="poi_traffic_signals_sound">الصوت</string>
     <string name="poi_highway_crossing_type">النوع</string>
@@ -2377,9 +2377,9 @@
     <string name="poi_street_cabinet_power">نوع الكبينة/الخزانة: طاقة</string>
     <string name="poi_in_service_yes">في الخدمة: نعم</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">صهريج</string>
-    <string name="poi_fire_hydrant_style_water_source_stream">مجرى</string>
-    <string name="poi_fire_hydrant_style_water_source_pond">بركه</string>
-    <string name="poi_fire_hydrant_style_water_source_main">رئيسي</string>
+    <string name="poi_water_source_stream">مجرى</string>
+    <string name="poi_water_source_pond">بركه</string>
+    <string name="poi_water_source_main">رئيسي</string>
     <string name="poi_health_service_child_care_no">الخدمة الصحية: رعاية الأطفال: لا</string>
     <string name="poi_health_service_child_care_yes">الخدمة الصحية: رعاية الأطفال: نعم</string>
     <string name="poi_health_service_examination_no">الخدمة الصحية: الفحص: لا</string>
@@ -3316,7 +3316,7 @@
     <string name="poi_pump_status_missing_beam">حالة المضخة: شعاع مفقود</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">شفط</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">مضغوط</string>
-    <string name="poi_fire_hydrant_style_water_source_groundwater">مياه جوفية</string>
+    <string name="poi_water_source_groundwater">مياه جوفية</string>
     <string name="poi_fire_hydrant_type_pipe">أنابيب</string>
     <string name="poi_drinking_water_refill_network">شبكة تعبئة مياه الشرب</string>
     <string name="poi_drinking_water_refill_no">إعادة تعبئة مياه الشرب:لا</string>
@@ -3364,8 +3364,8 @@
     <string name="poi_url">الرابط</string>
     <string name="poi_parking_space">أماكن لوقوف السيارات</string>
     <string name="poi_grave">قبر</string>
-    <string name="poi_community_gender_male">جنس المجتمع: ذكر</string>
-    <string name="poi_community_gender_female">جنس المجتمع: أنثى</string>
+    <string name="poi_community_gender_male">نوع المجتمع: ذكر</string>
+    <string name="poi_community_gender_female">نوع المجتمع: أنثى</string>
     <string name="poi_bath_open_air_no">لا</string>
     <string name="poi_bath_open_air_yes">نعم</string>
     <string name="poi_bath_type_foot_bath">حمام القدم</string>
@@ -3659,4 +3659,17 @@
     <string name="poi_wreck">حطام سفينة</string>
     <string name="poi_rune_stone">حجر الشاهد القائم الروني</string>
     <string name="poi_historic_tank">دبابة تاريخية</string>
+    <string name="poi_water_source_lake">بحيرة</string>
+    <string name="poi_water_source_river">نهر</string>
+    <string name="poi_water_source_well">بئر</string>
+    <string name="poi_water_source_powered_pump">مضخة</string>
+    <string name="poi_water_source_water_tank">خزان مياه</string>
+    <string name="poi_water_source_tap">حنفية</string>
+    <string name="poi_water_source_water_works">أعمال مياه</string>
+    <string name="poi_water_source_tube_well">شيب مياه</string>
+    <string name="poi_vaccination_covid19">لقاح كورونا COVID19</string>
+    <string name="poi_health_specialty_vaccination_yes">يتوفر لدهم لقاح</string>
+    <string name="poi_lifeguard_base">منصة الانقاذ</string>
+    <string name="poi_siren">صفارت إنذار</string>
+    <string name="poi_community_gender_mixed">نوع المجتمع: مختلط</string>
 </resources>

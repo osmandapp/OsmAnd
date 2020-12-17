@@ -70,12 +70,14 @@ import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.measurementtool.command.ReversePointsCommand;
-import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.measurementtool.command.SplitPointsCommand;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.OnAppModeConfiguredCallback;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
@@ -107,7 +109,8 @@ import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCo
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
-		SaveAsNewTrackFragmentListener, MapControlsLayer.MapControlsThemeInfoProvider {
+		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider,
+		OnAppModeConfiguredCallback {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -131,6 +134,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private ImageView redoBtn;
 	private ImageView mainIcon;
 	private String fileName;
+	private OnBackPressedCallback onBackPressedCallback;
 
 	private InfoType currentInfoType;
 
@@ -176,7 +180,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			return mainView.getHeight();
 		}
 
-		public boolean shouldShowXAxisPoints () {
+		public boolean shouldShowXAxisPoints() {
 			return false;
 		}
 	}
@@ -218,11 +222,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+		onBackPressedCallback = new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				quit(true);
 			}
-		});
+		};
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
 	}
 
 	@Nullable
@@ -531,7 +536,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		configBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				RouteOptionsBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
+				RouteOptionsBottomSheet.showInstance(
+						mapActivity, MeasurementToolFragment.this, DialogMode.PLAN_ROUTE,
 						editingCtx.getAppMode().getStringKey());
 			}
 		});
@@ -541,7 +547,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (savedInstanceState == null) {
 			if (fileName != null) {
 				addNewGpxData(getGpxFile(fileName));
-			} else if (editingCtx.isApproximationNeeded()) {
+			} else if (editingCtx.isApproximationNeeded() && isFollowTrackMode()) {
 				enterApproximationMode(mapActivity);
 			}
 		} else {
@@ -549,6 +555,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 
 		return view;
+	}
+
+	public OnBackPressedCallback getOnBackPressedCallback() {
+		return onBackPressedCallback;
 	}
 
 	private OnRadioItemClickListener getInfoTypeBtnListener(@NonNull final InfoType type) {
@@ -687,6 +697,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			onBackPressedCallback.setEnabled(true);
 			detailsMenu.setMapActivity(mapActivity);
 			mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
@@ -1088,6 +1099,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		updateUndoRedoButton(false, redoBtn);
 		updateUndoRedoButton(true, undoBtn);
+		updateDistancePointsText();
+	}
+
+	@Override
+	public void onAppModeConfigured() {
+		editingCtx.recalculateRouteSegmentsForAppMode();
 		updateDistancePointsText();
 	}
 

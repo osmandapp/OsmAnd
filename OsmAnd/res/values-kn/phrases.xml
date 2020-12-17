@@ -11,7 +11,7 @@
     <string name="poi_shoes_type">ಮಾದರಿ</string>
     <string name="poi_fire_hydrant_type">ಮಾದರಿ</string>
     <string name="poi_fire_hydrant_position">ಸ್ಥಾನ</string>
-    <string name="poi_fire_hydrant_water_source">ನೀರಿನ ಮೂಲ</string>
+    <string name="poi_water_source">ನೀರಿನ ಮೂಲ</string>
     <string name="poi_payment_toll_type">ಪಾವತಿಸುವ ವಿಧಾನ</string>
     <string name="poi_traffic_signals_sound">ಧ್ವನಿ</string>
     <string name="poi_highway_crossing_type">ಮಾದರಿ</string>

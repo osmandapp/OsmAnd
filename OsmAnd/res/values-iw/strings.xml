@@ -1339,7 +1339,7 @@
     <string name="group_will_be_removed_after_restart">הקבוצה תוסר לאחר ההפעלה הבאה של היישומון.</string>
     <string name="show_guide_line">הצגת קווי כיוון</string>
     <string name="use_osm_live_routing">ניווט חי של OsmAnd</string>
-    <string name="access_no_destination">לא הוגדר יעד</string>
+    <string name="access_no_destination">תוסף נגישות: לא הוגדר יעד</string>
     <string name="shared_string_widgets">וידג׳טים</string>
     <string name="add_points_to_map_markers_q">להוסיף את כל הנקודות כסמני מפה?</string>
     <string name="shared_string_add_to_map_markers">הוספת לסמני מפה</string>
@@ -1728,7 +1728,7 @@
     <string name="show_on_map_after_saving">הצגה על המפה לאחר השמירה</string>
     <string name="measurement_tool_action_bar">עיון במפה והוספת נקודות</string>
     <string name="measurement_tool">מדידת מרחק</string>
-    <string name="hillshade_menu_download_descr">יש להוריד את מפת ‚שכבת ההצללות’ כדי להציג הצללה אנכית.</string>
+    <string name="hillshade_menu_download_descr">יש להוריד את מפת שכבת ‚הצללות’ כדי להציג הצללה אנכית.</string>
     <string name="hillshade_purchase_header">יש להתקין את התוסף ‚קווי מתאר’ (Contour lines) כדי להציג אזורים מדורגים אנכית.</string>
     <string name="hide_from_zoom_level">הסתרה החל מרמת תקריב</string>
     <string name="srtm_menu_download_descr">נא להוריד את מפת ‚קווי המתאר’ של האזור הזה.</string>
@@ -2171,7 +2171,7 @@
     <string name="plugin_install_needs_network">צריך חיבור לאינטרנט כדי להתקין את התוסף הזה.</string>
     <string name="get_plugin">קבלה</string>
     <string name="use_fast_recalculation">חישוב חכם לנתיב מחדש</string>
-    <string name="use_fast_recalculation_desc">לחשב מחדש רק את החלק ההתחלתי של המסלול, יכול לשמש לטיולים ארוכים.</string>
+    <string name="use_fast_recalculation_desc">לחשב מחדש רק את החלק ההתחלתי של המסלול, שימושי לטיולים ארוכים.</string>
     <string name="do_you_like_osmand">OsmAnd נושא חן בעיניך?</string>
     <string name="we_really_care_about_your_opinion">הדעה והמשוב שלך יקרים לנו.</string>
     <string name="rate_this_app">דירוג היישומון הזה</string>
@@ -3840,7 +3840,7 @@
     <string name="route_between_points_desc">נא לבחור כיצד לחבר את הנקודות, בקו ישר, או לחבר מסלול ביניהן כפי שצוין להלן.</string>
     <string name="route_between_points_warning_desc">בשלב הבא עליך להצמיד את הדרך המורשית הקרובה ביותר לאחד מפרופילי הניווט שלך כדי להשתמש באפשרות הזו.</string>
     <string name="street_level_imagery">תמונות ברמת רחוב</string>
-    <string name="plan_route_exit_dialog_descr">להתעלם מהשינויים במסלול המתוכנן על ידי סגירתו\?</string>
+    <string name="plan_route_exit_dialog_descr">להתעלם מכל השינויים במסלול המתוכנן על ידי סגירתו\?</string>
     <string name="in_case_of_reverse_direction">במקרה של כיוון הפוך</string>
     <string name="shared_string_save_as_gpx">שמירה כקובץ מסלול חדש</string>
     <string name="add_segment_to_the_track">הוספה לקובץ מסלול</string>
@@ -3926,7 +3926,7 @@
     <string name="use_complex_routing">חישוב מורכב של מסלול</string>
     <string name="complex_routing_descr">חישוב מסלול דו־שלבי לניווט במכונית.</string>
     <string name="use_native_pt">פיתוח עצמי לתחבורה ציבורית</string>
-    <string name="use_native_pt_desc">מעבר לחישוב ניווט בתחבורה ציבורית ב־Java (בטוח)</string>
+    <string name="use_native_pt_desc">מעבר לחישוב מסלול בתחבורה ציבורית ב־Java (בטוח)</string>
     <string name="perform_oauth_authorization_description">יש להיכנס עם OAuth כדי להשתמש ביכולות של osmedit</string>
     <string name="perform_oauth_authorization">להיכנס דרך OAuth</string>
     <string name="clear_osm_token">למחוק את אסימון ה־OAuth של OpenStreetMap</string>
@@ -3934,10 +3934,10 @@
     <string name="file_already_imported">הקובץ כבר ייובא אל OsmAnd</string>
     <string name="use_two_phase_routing">להשתמש באלגוריתם חישוב מסלול דו־שלבי A*‎</string>
     <string name="snowmobile_render_descr">לנהיגה ברכבי שלג עם דרכים ומסלולים יעודיים.</string>
-    <string name="message_need_calculate_route_before_show_graph">הנתונים של %1$s זמינים בדרכים בלבד, עליך לחשב מסלול באמצעות „מסלול בין נקודות” כדי לקבל אותם.</string>
+    <string name="message_need_calculate_route_before_show_graph">הנתונים של %1$s זמינים על דרכים בלבד, ניתן לחשב מסלול באמצעות „מסלול בין נקודות” כדי לראות תרשימים.</string>
     <string name="shared_string_graph">תרשים</string>
-    <string name="message_graph_will_be_available_after_recalculation">נא להמתין לחישוב המסלול מחדש.
-\nהתרשים יהיה זמין לאחר החישוב מחדש.</string>
+    <string name="message_graph_will_be_available_after_recalculation">נא להמתין.
+\nהתרשים יהיה זמין לאחר חישוב מחדש.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s ‏— %2$s</string>
     <string name="shared_string_local_maps">מפות מקומיות</string>
     <string name="icon_group_amenity">שירות לציבור</string>
@@ -3964,7 +3964,7 @@
     <string name="open_street_map_login_mode">עליך להיכנס כדי להעלות שינויים חדשים או כאלו שנערכו.
 \n
 \nניתן להיכנס בשיטת OAuth המאובטחת או באמצעות שם הכניסה והססמה שלך.</string>
-    <string name="subscription_payment_issue_title">יש בעיה עם המינוי שלך. יש ללחוץ על הכפתור כדי לגשת להגדרות המינוי של Google Play ולתקן את שיטת התשלום שלך.</string>
+    <string name="subscription_payment_issue_title">יש לגעת בכפתור כדי להגדיר שיטת תשלום ב־Google Play ולתקן את המינוי שלך.</string>
     <string name="subscription_on_hold_title">המינוי ל־OsmAnd Live מוחזק</string>
     <string name="markers_history">היסטוריית סמנים</string>
     <string name="send_files_to_openstreetmap">שליחת קובץ GPX ל־OpenStreetMap</string>
@@ -3976,7 +3976,7 @@
     <string name="shared_string_add_photo">הוספת תמונה</string>
     <string name="register_on_openplacereviews">יש להירשם בכתובת
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">התמונות מסופקות על ידי מיזם הנתונים הפתוחים OpenPlaceReviews.org. כדי להעלות את התמונות שלך עליך להירשם באתר.</string>
+    <string name="register_on_openplacereviews_desc">התמונות מסופקות על ידי מיזם הנתונים הפתוחים OpenPlaceReviews.org. כדי להעלות את התמונות שלך עליך להירשם באתר .</string>
     <string name="register_opr_create_new_account">יצירת חשבון חדש</string>
     <string name="register_opr_have_account">כבר יש לי חשבון</string>
     <string name="shared_string_search_history">היסטוריית חיפוש</string>
@@ -3994,7 +3994,7 @@
     <string name="add_photos_descr">OsmAnd מציג תמונות ממגוון מקורות:
 \nOpenPlaceReviews - תמונות של נקודות עניין;
 \nMapillary - תמונות ברמת הרחוב;
-\nאינטרנט / ויקימדיה - תמונות נקודות עניין שמצוינות בנתונים של OpenStreetMap.</string>
+\nאינטרנט / ויקימדיה - תמונות נקודות עניין בהתאם לנתונים של OpenStreetMap.</string>
     <string name="select_groups_for_import">נא לבחור קבוצות שייובאו.</string>
     <string name="select_items_for_import">נא לבחור פריטים שייובאו.</string>
     <string name="use_dev_url_descr">לעבור להשתמש ב־dev.openstreetmap.org במקום ב־openstreetmap.org כדי לבדוק העלאות של הערות OSM / נקודות עניין / GPX.</string>
@@ -4003,10 +4003,19 @@
     <string name="select_picture">בחירת תמונה</string>
     <string name="lang_de_casual">גרמנית (עממית)</string>
     <string name="ltr_or_rtl_combine_via_star">‏%1$s‏ * %2$s</string>
-    <string name="elevation_data">אפשר להשתמש בנתוני רום לצורך התחשבות בעליה / ירידה במהלך הטיול</string>
+    <string name="elevation_data">אפשר להשתמש בנתוני רום לצורך חישוב עליה/ירידה במהלך הטיול</string>
     <string name="app_mode_light_aircraft">כלי טיס קל</string>
     <string name="plan_route_join_segments">צירוף מקטעים</string>
     <string name="plan_route_split_before">לפצל לפני</string>
     <string name="plan_route_split_after">לפצל אחרי</string>
     <string name="plan_route_add_new_segment">הוספת מקטע חדש</string>
+    <string name="release_3_9">• נוספה אפשרות לייצר ולייבא את כל הנתונים לרבות הגדרות, משאבים והמיקומים שלי
+\n
+\n • תכנון מסלול: תרשימים למקטעי דרך עם המסלול ונוספה האפשרות ליצור ולערוך מגוון מקטעי מסלול
+\n
+\n • נוספה שיטת אימות OAuth עבור OpenStreetMap, מנשק משתמש משופר לתיבות הדו־שיח של OSM
+\n
+\n • תמיכה בצבעים מותאמים אישית למועדפים ולנקודות דרך במסלול
+\n
+\n</string>
 </resources>

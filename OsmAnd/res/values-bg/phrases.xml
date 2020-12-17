@@ -410,7 +410,7 @@
     <string name="poi_shoes_type">Тип обувки</string>
     <string name="poi_fire_hydrant_type">Тип</string>
     <string name="poi_fire_hydrant_position">Позиция</string>
-    <string name="poi_fire_hydrant_water_source">Източник на вода</string>
+    <string name="poi_water_source">Източник на вода</string>
     <string name="poi_payment_toll_type">Тип плащане</string>
     <string name="poi_traffic_signals_sound">Звуков сигнал</string>
     <string name="poi_highway_crossing_type">Тип</string>

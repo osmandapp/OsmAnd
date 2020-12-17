@@ -856,7 +856,7 @@
 	<string name="poi_shoes_type">തരം [ഷൂ]</string>
 	<string name="poi_fire_hydrant_type">തരം [അഗ്നിശമനി]</string>
 	<string name="poi_fire_hydrant_position">സ്ഥാനം [അഗ്നിശമനി]</string>
-	<string name="poi_fire_hydrant_water_source">ജലസ്രോ‌തസ് [അഗ്നിശമനം]</string>
+	<string name="poi_water_source">ജലസ്രോ‌തസ് [അഗ്നിശമനം]</string>
 	<string name="poi_payment_toll_type">പേയ്മെന്റ് ടൈപ്പ്</string>
 	<string name="poi_traffic_signals_sound">ശബ്ദമുണ്ടാക്കുന്ന ട്രാ‌ഫിക് സിഗ്നല്‍</string>
 	<string name="poi_highway_crossing_type">തരം [ക്രോ‌സിങ്ങ്]</string>
@@ -2474,9 +2474,9 @@
 	<string name="poi_office_physician">ഫിസിഷ്യന്റെ ഓഫീസ്</string>
 	<string name="poi_office_therapist">തെറാപിസ്റ്റ് ഓഫീസ്</string>
 	<string name="poi_office_podologist">പൊഡൊളജിസ്ട് ഓഫീസ്</string>
-	<string name="poi_fire_hydrant_style_water_source_main">പ്രധാന</string>
-	<string name="poi_fire_hydrant_style_water_source_pond">കുളം</string>
-	<string name="poi_fire_hydrant_style_water_source_stream">അരുവി</string>
+	<string name="poi_water_source_main">പ്രധാന</string>
+	<string name="poi_water_source_pond">കുളം</string>
+	<string name="poi_water_source_stream">അരുവി</string>
 	<string name="poi_salt_yes">"ഉപ്പ് "</string>
 	<string name="poi_crossing_activation_automatic">തനിയെ പ്രവര്‍ത്തിക്കുന്ന ക്രോസിങ്ങ്</string>
 	<string name="poi_crossing_activation_local">ക്രോസ്സിങ്ങ് പ്രവര്‍ത്തനം ലോക്കല്‍</string>

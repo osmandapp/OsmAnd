@@ -1255,7 +1255,7 @@
     <string name="distance_measurement_finish_editing">Закончить редактирование</string>
     <string name="distance_measurement_clear_route">Очистить все точки</string>
     <string name="install_paid">Полная версия</string>
-    <string name="cancel_route">Отменить маршрут</string>
+    <string name="cancel_route">Отменить маршрут\?</string>
     <string name="clear_destination">Очистить пункт назначения</string>
     <string name="search_street_in_neighborhood_cities">Искать улицу в ближайших населённых пунктах</string>
     <string name="intermediate_items_sort_by_distance">Расположить в оптимальном порядке</string>
@@ -2680,7 +2680,7 @@
     <string name="choose_file_type">Выберите тип файла</string>
     <string name="osm_edits_export_desc">Экспортировать в виде POI, заметок OSM или обоих вариантов.</string>
     <string name="all_data">Все данные</string>
-    <string name="osm_notes">OSM-заметки</string>
+    <string name="osm_notes">Заметки OSM</string>
     <string name="tunnel_warning">Впереди туннель</string>
     <string name="show_tunnels">Туннели</string>
     <string name="make_as_start_point">Сделать пунктом отправления</string>
@@ -3994,4 +3994,9 @@
     <string name="app_mode_kayak">Каяк</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Немецкий (повседневный)</string>
+    <string name="app_mode_light_aircraft">Легкий самолет</string>
+    <string name="plan_route_add_new_segment">Добавить новый сегмент</string>
+    <string name="plan_route_join_segments">Объединить сегменты</string>
+    <string name="plan_route_split_before">Разделить до</string>
+    <string name="plan_route_split_after">Разделить после</string>
 </resources>
