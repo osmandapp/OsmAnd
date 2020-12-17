@@ -134,7 +134,6 @@ public class NavigationNotification extends OsmandNotification {
 		turnBitmap = null;
 		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		Location location = getLastKnownLocation();
 		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {
 			color = app.getResources().getColor(R.color.osmand_orange);
 
@@ -142,7 +141,11 @@ public class NavigationNotification extends OsmandNotification {
 			String timeStr = OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app);
 			String etaStr = SimpleDateFormat.getTimeInstance(DateFormat.SHORT)
 					.format(new Date(System.currentTimeMillis() + routingHelper.getLeftTime() * 1000));
-			String speedStr = OsmAndFormatter.getFormattedSpeed(location.getSpeed(), app);
+			String speedStr = null;
+			Location location = getLastKnownLocation();
+			if (location != null && location.hasSpeed()) {
+				speedStr = OsmAndFormatter.getFormattedSpeed(location.getSpeed(), app);
+			}
 
 			TurnType turnType = null;
 			boolean deviatedFromRoute;
@@ -202,12 +205,12 @@ public class NavigationNotification extends OsmandNotification {
 						notificationText.append("\n");
 					}
 				}
-
 				notificationText.append(distanceStr)
 						.append(" • ").append(timeStr)
-						.append(" • ").append(etaStr)
-						.append(" • ").append(speedStr);
-
+						.append(" • ").append(etaStr);
+				if (speedStr != null) {
+					notificationText.append(" • ").append(speedStr);
+				}
 			} else {
 				notificationTitle = app.getString(R.string.shared_string_navigation);
 				String error = routingHelper.getLastRouteCalcErrorShort();
@@ -217,7 +220,6 @@ public class NavigationNotification extends OsmandNotification {
 					notificationText.append(error);
 				}
 			}
-
 		} else if (routingHelper.isRoutePlanningMode() && routingHelper.isPauseNavigation()) {
 			ongoing = false;
 			notificationTitle = app.getString(R.string.shared_string_navigation);
