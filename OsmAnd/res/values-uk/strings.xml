@@ -4012,4 +4012,6 @@
 \n• Підтримка власних кольорів закладок та маршрутних точок треку
 \n
 \n</string>
+    <string name="profile_type_osmand_string">Профіль OsmAnd</string>
+    <string name="profile_type_user_string">Профіль користувача</string>
 </resources>

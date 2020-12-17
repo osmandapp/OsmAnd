@@ -305,7 +305,7 @@
     <string name="only_show">Näytä vain</string>
     <string name="follow">Seuraa</string>
     <string name="mark_final_location_first">Valitse päämäärä ensin</string>
-    <string name="get_directions">Ohjeet</string>
+    <string name="get_directions">Reittiohjeet</string>
     <string name="opening_hours">Avoinna</string>
     <string name="loading_streets_buildings">Ladataan katuja/rakennuksia…</string>
     <string name="loading_postcodes">Ladataan postinumeroita…</string>
@@ -2571,7 +2571,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="week">Viikko</string>
     <string name="shared_string_bearing">Suuntima</string>
     <string name="plan_a_route">Suunnittele reitti</string>
-    <string name="plan_route_last_edited">Viimeksi muokattu</string>
+    <string name="plan_route_last_edited">Viimeksi muokatut</string>
     <string name="plan_route_create_new_route">Luo uusi reitti</string>
     <string name="select_color">Valitse väri</string>
     <string name="select_icon_profile_dialog_title">Valitse kuvake</string>
@@ -2591,4 +2591,27 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_square">Neliö</string>
     <string name="shared_string_circle">Ympyrä</string>
     <string name="select_shape">Valitse muoto</string>
+    <string name="reset_to_default">Palauta oletusarvot</string>
+    <string name="profile_prefs_reset_successful">Kaikki profiiliasetukset palautettu oletusarvoihin.</string>
+    <string name="plugin_prefs_reset_successful">Kaikki laajennuksen asetukset palautettu oletusarvoihin.</string>
+    <string name="shared_string_app_default_w_val">Sovelluksen oletus (%s)</string>
+    <string name="reset_deafult_order">Palauta oletus kohteiden järjestys</string>
+    <string name="default_screen_timeout">Näytön oletusaikakatkaisu</string>
+    <string name="system_default_theme">Järjestelmän oletus</string>
+    <string name="reorder_profiles">Muokkaa profiililuetteloa</string>
+    <string name="edit_profiles">Muokkaa profiileja</string>
+    <string name="import_profile">Tuo profiili</string>
+    <string name="selected_profile">Valittu profiili</string>
+    <string name="icon_group_amenity">Mukavuus</string>
+    <string name="icon_group_travel">Matkailu</string>
+    <string name="icon_group_special">Erityinen</string>
+    <string name="icon_group_sport">Urheilu</string>
+    <string name="process_downloading_service">OsmAnd-latauspalvelu</string>
+    <string name="icon_group_service">Palvelu</string>
+    <string name="icon_group_emergency">Hätätapaus</string>
+    <string name="icon_group_transport">Liikenne</string>
+    <string name="quick_action_transport_show">Näytä julkinen liikenne</string>
+    <string name="quick_action_transport_hide">Piilota julkinen liikenne</string>
+    <string name="icon_group_symbols">Symbolit</string>
+    <string name="replace_point_descr">Korvaa toinen kohde tällä.</string>
 </resources>
