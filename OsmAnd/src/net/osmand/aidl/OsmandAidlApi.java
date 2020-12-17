@@ -43,7 +43,7 @@ import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.map.ALatLon;
-import net.osmand.aidlapi.navigation.ABlockedRoadParams;
+import net.osmand.aidlapi.navigation.ABlockedRoad;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -2376,11 +2376,22 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public boolean getBlockedRoads(List<ABlockedRoadParams> blockedRoads) {
+	public boolean getBlockedRoads(List<ABlockedRoad> blockedRoads) {
 		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
 		for (AvoidRoadInfo info : impassableRoads.values()) {
-			blockedRoads.add(new ABlockedRoadParams(info.id, info.latitude, info.longitude, info.direction, info.name, info.appModeKey));
+			blockedRoads.add(new ABlockedRoad(info.id, info.latitude, info.longitude, info.direction, info.name, info.appModeKey));
 		}
+		return true;
+	}
+
+	public boolean addRoadBlock(ABlockedRoad road) {
+		LatLon latLon = new LatLon(road.getLatitude(), road.getLongitude());
+		app.getAvoidSpecificRoads().addImpassableRoad(null, latLon, false, false, null);
+		return true;
+	}
+
+	public boolean removeRoadBlock(ABlockedRoad road) {
+		app.getAvoidSpecificRoads().removeImpassableRoad(new LatLon(road.getLatitude(), road.getLongitude()));
 		return true;
 	}
 

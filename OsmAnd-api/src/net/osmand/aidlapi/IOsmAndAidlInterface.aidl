@@ -92,7 +92,9 @@ import net.osmand.aidlapi.copyfile.CopyFileParams;
 
 import net.osmand.aidlapi.navigation.ANavigationUpdateParams;
 import net.osmand.aidlapi.navigation.ANavigationVoiceRouterMessageParams;
-import net.osmand.aidlapi.navigation.ABlockedRoadParams;
+import net.osmand.aidlapi.navigation.ABlockedRoad;
+import net.osmand.aidlapi.navigation.AddBlockedRoadParams;
+import net.osmand.aidlapi.navigation.RemoveBlockedRoadParams;
 
 import net.osmand.aidlapi.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.UpdateContextMenuButtonsParams;
@@ -894,5 +896,9 @@ interface IOsmAndAidlInterface {
 
     boolean getProfiles(out List<AProfile> profiles);
 
-    boolean getBlockedRoads(out List<ABlockedRoadParams> blockedRoads);
+    boolean getBlockedRoads(out List<ABlockedRoad> blockedRoads);
+
+    boolean addRoadBlock(in AddBlockedRoadParams params);
+
+    boolean removeRoadBlock(in RemoveBlockedRoadParams params);
 }

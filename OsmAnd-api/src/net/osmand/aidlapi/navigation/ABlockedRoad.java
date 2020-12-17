@@ -5,7 +5,7 @@ import android.os.Parcel;
 
 import net.osmand.aidlapi.AidlParams;
 
-public class ABlockedRoadParams extends AidlParams {
+public class ABlockedRoad extends AidlParams {
 
 	private long roadId;
 	private double latitude;
@@ -14,7 +14,7 @@ public class ABlockedRoadParams extends AidlParams {
 	private String name;
 	private String appModeKey;
 
-	public ABlockedRoadParams(long roadId, double latitude, double longitude, double direction, String name, String appModeKey) {
+	public ABlockedRoad(long roadId, double latitude, double longitude, double direction, String name, String appModeKey) {
 		this.roadId = roadId;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -23,19 +23,19 @@ public class ABlockedRoadParams extends AidlParams {
 		this.appModeKey = appModeKey;
 	}
 
-	protected ABlockedRoadParams(Parcel in) {
+	protected ABlockedRoad(Parcel in) {
 		readFromParcel(in);
 	}
 
-	public static final Creator<ABlockedRoadParams> CREATOR = new Creator<ABlockedRoadParams>() {
+	public static final Creator<ABlockedRoad> CREATOR = new Creator<ABlockedRoad>() {
 		@Override
-		public ABlockedRoadParams createFromParcel(Parcel in) {
-			return new ABlockedRoadParams(in);
+		public ABlockedRoad createFromParcel(Parcel in) {
+			return new ABlockedRoad(in);
 		}
 
 		@Override
-		public ABlockedRoadParams[] newArray(int size) {
-			return new ABlockedRoadParams[size];
+		public ABlockedRoad[] newArray(int size) {
+			return new ABlockedRoad[size];
 		}
 	};
 

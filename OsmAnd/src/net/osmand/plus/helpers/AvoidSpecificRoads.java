@@ -393,6 +393,7 @@ public class AvoidSpecificRoads {
 		if (object != null) {
 			avoidRoadInfo.id = object.id;
 //			avoidRoadInfo.direction = object.directionRoute(0, true);
+			avoidRoadInfo.direction = Double.NaN;
 		} else {
 			avoidRoadInfo.id = 0;
 			avoidRoadInfo.direction = Double.NaN;
@@ -406,7 +407,7 @@ public class AvoidSpecificRoads {
 
 	public static class AvoidRoadInfo {
 		public long id;
-		public double direction;
+		public double direction = Double.NaN;
 		public double latitude;
 		public double longitude;
 		public String name;

@@ -1,3 +1,3 @@
 package net.osmand.aidlapi.navigation;
 
-parcelable ABlockedRoadParams;
+parcelable RemoveBlockedRoadParams;
