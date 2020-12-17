@@ -151,6 +151,9 @@ public class ExternalApiHelper {
 	public static final String PARAM_NT_DIRECTION_NAME = "turn_name";
 	public static final String PARAM_NT_DIRECTION_TURN = "turn_type";
 	public static final String PARAM_NT_DIRECTION_LANES = "turn_lanes";
+	public static final String PARAM_NT_DIRECTION_ANGLE = "turn_angle";
+	public static final String PARAM_NT_DIRECTION_POSSIBLY_LEFT = "turn_possibly_left";
+	public static final String PARAM_NT_DIRECTION_POSSIBLY_RIGHT = "turn_possibly_right";
 
 	public static final String PARAM_CLOSE_AFTER_COMMAND = "close_after_command";
 
@@ -690,6 +693,9 @@ public class ExternalApiHelper {
 			RouteDirectionInfo a = ni.directionInfo;
 			result.putExtra(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelper.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
 			result.putExtra(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
+			result.putExtra(prefix + PARAM_NT_DIRECTION_ANGLE, tt.getTurnAngle());
+			result.putExtra(prefix + PARAM_NT_DIRECTION_POSSIBLY_LEFT, tt.isPossibleLeftTurn());
+			result.putExtra(prefix + PARAM_NT_DIRECTION_POSSIBLY_RIGHT, tt.isPossibleRightTurn());
 			if (tt.getLanes() != null) {
 				result.putExtra(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
 			}

@@ -2106,6 +2106,7 @@ public class OsmandSettings {
 	public static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
 	public static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
 	public static final String IMPASSABLE_ROADS_IDS = "impassable_roads_ids";
+	public static final String IMPASSABLE_ROADS_DIRECTIONS = "impassable_roads_directions";
 	public static final String IMPASSABLE_ROADS_APP_MODE_KEYS = "impassable_roads_app_mode_keys";
 
 	public void backupPointToStart() {
