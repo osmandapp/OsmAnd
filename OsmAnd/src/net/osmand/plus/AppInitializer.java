@@ -660,7 +660,7 @@ public class AppInitializer implements IProgress {
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
-
+			app.travelHelper.initializeDataOnAppStartup();
 			// native depends on renderers
 			initNativeCore();
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);

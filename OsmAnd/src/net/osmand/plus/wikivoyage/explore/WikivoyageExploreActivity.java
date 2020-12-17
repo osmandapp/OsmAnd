@@ -59,7 +59,6 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	protected List<WeakReference<Fragment>> fragments = new ArrayList<>();
 
 	private LockableViewPager viewPager;
-	private boolean updateNeeded;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -319,16 +318,13 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		updateFragments();
 	}
 
-	private void updateFragments() {
+	public void updateFragments() {
 		ExploreTabFragment exploreTabFragment = getExploreTabFragment();
 		SavedArticlesTabFragment savedArticlesTabFragment = getSavedArticlesTabFragment();
 		if (exploreTabFragment != null && savedArticlesTabFragment != null
 				&& exploreTabFragment.isAdded() && savedArticlesTabFragment.isAdded()) {
 			exploreTabFragment.populateData();
 			savedArticlesTabFragment.savedArticlesUpdated();
-			updateNeeded = false;
-		} else {
-			updateNeeded = true;
 		}
 	}
 
@@ -353,16 +349,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	public void onTabFragmentResume(Fragment fragment) {
-		if (updateNeeded) {
 			updateFragments();
-		}
-	}
-
-	public void updateSavedArticles() {
-		SavedArticlesTabFragment fragment = getSavedArticlesTabFragment();
-		if(fragment!=null){
-			fragment.savedArticlesUpdated();
-		}
 	}
 
 	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {

@@ -35,7 +35,6 @@ public class TravelObfHelper implements TravelHelper {
 	private List<TravelArticle> popularArticles = new ArrayList<>();
 	private final Map<String, TravelArticle> cachedArticles;
 	private final TravelLocalDataHelper localDataHelper;
-	private List<BinaryMapIndexReader> travelBookReaders;
 
 	public TravelObfHelper(OsmandApplication app) {
 		this.app = app;
@@ -50,7 +49,6 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public void initializeDataOnAppStartup() {
-		travelBookReaders = app.getResourceManager().getTravelRepositories();
 	}
 
 	@Override
@@ -64,7 +62,7 @@ public class TravelObfHelper implements TravelHelper {
 		String language = app.getLanguage();
 		popularArticles.clear();
 		final List<Amenity> amenities = new ArrayList<>();
-		for (BinaryMapIndexReader travelBookReader : travelBookReaders) {
+		for (BinaryMapIndexReader travelBookReader : getTravelBookReaders()) {
 			try {
 				if (travelBookReader == null) {
 					popularArticles = new ArrayList<>();
@@ -92,7 +90,7 @@ public class TravelObfHelper implements TravelHelper {
 
 				if (amenities.size() > 0) {
 					for (Amenity a : amenities) {
-						if (!a.getName(language).equals("")) {
+						if (!Algorithms.isEmpty(a.getName(language))) {
 							TravelArticle article = readArticle(a, language);
 							popularArticles.add(article);
 							cachedArticles.put(article.routeId, article);
@@ -122,22 +120,22 @@ public class TravelObfHelper implements TravelHelper {
 
 	private TravelArticle readArticle(Amenity amenity, String lang) {
 		TravelArticle res = new TravelArticle();
-		res.title = amenity.getName(lang).equals("") ? amenity.getName() : amenity.getName(lang);
+		res.title = Algorithms.isEmpty(amenity.getName(lang)) ? amenity.getName() : amenity.getName(lang);
 		res.content = amenity.getDescription(lang);
-		res.isPartOf = checkNull(amenity.getTagContent(Amenity.IS_PART, lang));
+		res.isPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_PART, lang));
 		res.lat = amenity.getLocation().getLatitude();
 		res.lon = amenity.getLocation().getLongitude();
-		res.imageTitle = checkNull(amenity.getTagContent(Amenity.IMAGE_TITLE, lang));
+		res.imageTitle = emptyIfNull(amenity.getTagContent(Amenity.IMAGE_TITLE, lang));
 		res.routeId = getRouteId(amenity);
 		res.originalId = 0; //?
 		res.lang = lang;
-		res.contentsJson = checkNull(amenity.getTagContent(Amenity.CONTENT_JSON, lang));
-		res.aggregatedPartOf = checkNull(amenity.getTagContent(Amenity.IS_AGGR_PART, lang));
+		res.contentsJson = emptyIfNull(amenity.getTagContent(Amenity.CONTENT_JSON, lang));
+		res.aggregatedPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_AGGR_PART, lang));
 		return res;
 	}
 
-	String checkNull(String tagContent) {
-		return tagContent == null ? "" : tagContent;
+	private String emptyIfNull(String text) {
+		return text == null ? "" : text;
 	}
 
 	private String getRouteId(Amenity amenity) {
@@ -146,7 +144,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public boolean isAnyTravelBookPresent() {
-		return !Algorithms.isEmpty(travelBookReaders);
+		return !Algorithms.isEmpty(getTravelBookReaders());
 	}
 
 	@NonNull
@@ -175,35 +173,31 @@ public class TravelObfHelper implements TravelHelper {
 	public TravelArticle getArticleByTitle(final String title, final String lang) {
 		TravelArticle article = null;
 		final List<Amenity> amenities = new ArrayList<>();
-		for (BinaryMapIndexReader travelBookReader : travelBookReaders) {
+		for (BinaryMapIndexReader travelBookReader : getTravelBookReaders()) {
 			try {
-				if (travelBookReader != null) {
-					int left = Integer.MIN_VALUE;
-					int right = Integer.MAX_VALUE;
-					int top = Integer.MIN_VALUE;
-					int bottom = Integer.MAX_VALUE;
-					LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
-					BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
-							MapUtils.get31TileNumberX(location.getLongitude()),
-							MapUtils.get31TileNumberY(location.getLatitude()), title, left, right, top, bottom,
-							new ResultMatcher<Amenity>() {
-								@Override
-								public boolean publish(Amenity amenity) {
-									if (title.equalsIgnoreCase(amenity.getName(lang))
-											&& amenity.getSubType().equals(ROUTE_ARTICLE)) {
-										amenities.add(amenity);
-									}
-									return false;
+				int left = 0;
+				int right = Integer.MAX_VALUE;
+				int top = 0;
+				int bottom = Integer.MAX_VALUE;
+				BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+						0, 0, title, left, right, top, bottom,
+						new ResultMatcher<Amenity>() {
+							@Override
+							public boolean publish(Amenity amenity) {
+								if (title.equalsIgnoreCase(amenity.getName(lang))
+										&& amenity.getSubType().equals(ROUTE_ARTICLE)) {
+									amenities.add(amenity);
 								}
+								return false;
+							}
 
-								@Override
-								public boolean isCancelled() {
-									return false;
-								}
-							});
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
 
-					travelBookReader.searchPoiByName(req);
-				}
+				travelBookReader.searchPoiByName(req);
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
@@ -213,6 +207,14 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		return article;
+	}
+
+	private List<BinaryMapIndexReader> getTravelBookReaders() {
+		if (!app.isApplicationInitializing()) {
+			return app.getResourceManager().getTravelRepositories();
+		} else {
+			return new ArrayList<>();
+		}
 	}
 
 	@Override

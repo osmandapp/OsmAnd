@@ -55,7 +55,7 @@ import java.util.Map;
 import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
 
 
-public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment {
+public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment implements TravelLocalDataHelper.Listener {
 
 	public static final String TAG = "WikivoyageArticleDialogFragment";
 
@@ -212,6 +212,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	@Override
 	public void onPause() {
 		super.onPause();
+		getMyApplication().getTravelHelper().getBookmarksHelper().removeListener(this);
 		if (webViewClient != null) {
 			webViewClient.stopRunningAsyncTasks();
 		}
@@ -220,6 +221,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	@Override
 	public void onResume() {
 		super.onResume();
+		getMyApplication().getTravelHelper().getBookmarksHelper().addListener(this);
 		OsmandSettings settings = getMyApplication().getSettings();
 		if (!settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.get()) {
 			FragmentActivity activity = getActivity();
@@ -249,10 +251,6 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 						} else {
 							getMyApplication().getTravelHelper().createGpxFile(article);
 							helper.addArticleToSaved(article);
-						}
-						Activity activity = getActivity();
-						if (activity instanceof WikivoyageExploreActivity) {
-							((WikivoyageExploreActivity) activity).updateSavedArticles();
 						}
 						updateSaveButton();
 					}
@@ -410,6 +408,24 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			return true;
 		} catch (RuntimeException e) {
 			return false;
+		}
+	}
+
+	@Override
+	public void savedArticlesUpdated() {
+		WikivoyageExploreActivity activity = getExploreActivity();
+		if (activity != null) {
+			activity.updateFragments();
+		}
+	}
+
+	@Nullable
+	private WikivoyageExploreActivity getExploreActivity() {
+		Activity activity = getActivity();
+		if (activity instanceof WikivoyageExploreActivity) {
+			return (WikivoyageExploreActivity) activity;
+		} else {
+			return null;
 		}
 	}
 
