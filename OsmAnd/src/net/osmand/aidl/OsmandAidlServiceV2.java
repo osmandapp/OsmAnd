@@ -73,6 +73,7 @@ import net.osmand.aidlapi.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidlapi.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidlapi.navdrawer.NavDrawerItem;
 import net.osmand.aidlapi.navdrawer.SetNavDrawerItemsParams;
+import net.osmand.aidlapi.navigation.ABlockedRoadParams;
 import net.osmand.aidlapi.navigation.ANavigationUpdateParams;
 import net.osmand.aidlapi.navigation.ANavigationVoiceRouterMessageParams;
 import net.osmand.aidlapi.navigation.MuteNavigationParams;
@@ -1391,6 +1392,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("getProfiles");
 				return api != null && api.getProfiles(profiles);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getBlockedRoads(List<ABlockedRoadParams> blockedRoads) {
+			try {
+				OsmandAidlApi api = getApi("getBlockedRoads");
+				return api != null && api.getBlockedRoads(blockedRoads);
 			} catch (Exception e) {
 				handleException(e);
 				return false;

@@ -43,6 +43,7 @@ import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.map.ALatLon;
+import net.osmand.aidlapi.navigation.ABlockedRoadParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -62,6 +63,7 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
@@ -208,7 +210,7 @@ public class OsmandAidlApi {
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
-	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
+	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[] {
 			ApplicationMode.CAR,
 			ApplicationMode.BICYCLE,
 			ApplicationMode.PEDESTRIAN
@@ -287,7 +289,7 @@ public class OsmandAidlApi {
 	}
 
 	private void initOsmandTelegram() {
-		String[] packages = new String[]{"net.osmand.telegram", "net.osmand.telegram.debug"};
+		String[] packages = new String[] {"net.osmand.telegram", "net.osmand.telegram.debug"};
 		Intent intent = new Intent("net.osmand.telegram.InitApp");
 		for (String pack : packages) {
 			intent.setComponent(new ComponentName(pack, "net.osmand.telegram.InitAppBroadcastReceiver"));
@@ -2167,7 +2169,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels,
-	                        final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+							final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
@@ -2364,6 +2366,14 @@ public class OsmandAidlApi {
 					bean.navIcon.name(), bean.order);
 
 			profiles.add(aProfile);
+		}
+		return true;
+	}
+
+	public boolean getBlockedRoads(List<ABlockedRoadParams> blockedRoads) {
+		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
+		for (AvoidRoadInfo info : impassableRoads.values()) {
+			blockedRoads.add(new ABlockedRoadParams(info.id, info.latitude, info.longitude, info.name, info.appModeKey));
 		}
 		return true;
 	}

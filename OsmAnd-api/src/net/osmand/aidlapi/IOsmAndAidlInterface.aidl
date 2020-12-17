@@ -92,6 +92,7 @@ import net.osmand.aidlapi.copyfile.CopyFileParams;
 
 import net.osmand.aidlapi.navigation.ANavigationUpdateParams;
 import net.osmand.aidlapi.navigation.ANavigationVoiceRouterMessageParams;
+import net.osmand.aidlapi.navigation.ABlockedRoadParams;
 
 import net.osmand.aidlapi.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.UpdateContextMenuButtonsParams;
@@ -892,4 +893,6 @@ interface IOsmAndAidlInterface {
     boolean selectProfile(in SelectProfileParams params);
 
     boolean getProfiles(out List<AProfile> profiles);
+
+    boolean getBlockedRoads(out List<ABlockedRoadParams> blockedRoads);
 }
