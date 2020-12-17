@@ -7,16 +7,18 @@ import net.osmand.aidlapi.AidlParams;
 
 public class ABlockedRoadParams extends AidlParams {
 
-	public long roadId;
-	public double latitude;
-	public double longitude;
-	public String name;
-	public String appModeKey;
+	private long roadId;
+	private double latitude;
+	private double longitude;
+	private double direction;
+	private String name;
+	private String appModeKey;
 
-	public ABlockedRoadParams(long roadId, double latitude, double longitude, String name, String appModeKey) {
+	public ABlockedRoadParams(long roadId, double latitude, double longitude, double direction, String name, String appModeKey) {
 		this.roadId = roadId;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.direction = direction;
 		this.name = name;
 		this.appModeKey = appModeKey;
 	}
@@ -37,11 +39,36 @@ public class ABlockedRoadParams extends AidlParams {
 		}
 	};
 
+	public long getRoadId() {
+		return roadId;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public double getDirection() {
+		return direction;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getAppModeKey() {
+		return appModeKey;
+	}
+
 	@Override
 	protected void readFromBundle(Bundle bundle) {
 		roadId = bundle.getLong("roadId");
 		latitude = bundle.getDouble("latitude");
 		longitude = bundle.getDouble("longitude");
+		direction = bundle.getDouble("direction");
 		name = bundle.getString("name");
 		appModeKey = bundle.getString("appModeKey");
 	}
@@ -51,6 +78,7 @@ public class ABlockedRoadParams extends AidlParams {
 		bundle.putLong("roadId", roadId);
 		bundle.putDouble("latitude", latitude);
 		bundle.putDouble("longitude", longitude);
+		bundle.putDouble("direction", direction);
 		bundle.putString("name", name);
 		bundle.putString("appModeKey", appModeKey);
 	}

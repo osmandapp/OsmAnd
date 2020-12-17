@@ -2379,7 +2379,7 @@ public class OsmandAidlApi {
 	public boolean getBlockedRoads(List<ABlockedRoadParams> blockedRoads) {
 		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
 		for (AvoidRoadInfo info : impassableRoads.values()) {
-			blockedRoads.add(new ABlockedRoadParams(info.id, info.latitude, info.longitude, info.name, info.appModeKey));
+			blockedRoads.add(new ABlockedRoadParams(info.id, info.latitude, info.longitude, info.direction, info.name, info.appModeKey));
 		}
 		return true;
 	}
