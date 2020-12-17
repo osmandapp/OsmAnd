@@ -140,8 +140,11 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
 import static net.osmand.plus.FavouritesDbHelper.FILE_TO_SAVE;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_ANGLE;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_LANES;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_NAME;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_POSSIBLY_LEFT;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_POSSIBLY_RIGHT;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DISTANCE;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_IMMINENT;
@@ -1793,6 +1796,9 @@ public class OsmandAidlApi {
 			RouteDirectionInfo a = ni.directionInfo;
 			bundle.putString(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelper.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
 			bundle.putString(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
+			bundle.putFloat(prefix + PARAM_NT_DIRECTION_ANGLE, tt.getTurnAngle());
+			bundle.putBoolean(prefix + PARAM_NT_DIRECTION_POSSIBLY_LEFT, tt.isPossibleLeftTurn());
+			bundle.putBoolean(prefix + PARAM_NT_DIRECTION_POSSIBLY_RIGHT, tt.isPossibleRightTurn());
 			if (tt.getLanes() != null) {
 				bundle.putString(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
 			}
@@ -1800,7 +1806,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
-	               final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
+				   final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
 		if (Algorithms.isEmpty(searchQuery) || latitude == 0 || longitude == 0 || callback == null) {
 			return false;
 		}
