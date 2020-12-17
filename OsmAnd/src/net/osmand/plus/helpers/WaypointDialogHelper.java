@@ -268,13 +268,15 @@ public class WaypointDialogHelper {
 	public static void reverseAllPoints(OsmandApplication app, Activity ctx,
 										WaypointDialogHelper helper) {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
-		List<TargetPoint> points = targets.getAllPoints();
-		Collections.reverse(points);
-		TargetPoint start = points.get(0);
-		targets.setStartPoint(start.point, false, start.getOriginalPointDescription());
-		points.remove(start);
-		targets.reorderAllTargetPoints(points, true);
-		updateControls(ctx, helper);
+		if (!targets.getAllPoints().isEmpty()) {
+			List<TargetPoint> points = targets.getAllPoints();
+			Collections.reverse(points);
+			TargetPoint start = points.get(0);
+			targets.setStartPoint(start.point, false, start.getOriginalPointDescription());
+			points.remove(start);
+			targets.reorderAllTargetPoints(points, true);
+			updateControls(ctx, helper);
+		}
 	}
 
 	public static void updateControls(Activity ctx, WaypointDialogHelper helper) {
@@ -508,7 +510,7 @@ public class WaypointDialogHelper {
 
 			BaseBottomSheetItem reorderAllItems = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_sort_reverse_order))
-					.setTitle(getString(R.string.reverce_all_points))
+					.setTitle(getString(R.string.reverse_all_points))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -526,7 +528,7 @@ public class WaypointDialogHelper {
 					})
 					.create();
 			int intermediateSize = targetsHelper.getIntermediatePoints().size();
-			if (intermediateSize > 2 && !targetsHelper.getAllPoints().isEmpty()) {
+			if (intermediateSize > 2) {
 				items.add(reorderAllItems);
 			}
 
