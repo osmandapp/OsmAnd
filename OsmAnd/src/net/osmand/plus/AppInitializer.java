@@ -138,7 +138,7 @@ public class AppInitializer implements IProgress {
 
 		void onFinish(AppInitializer init);
 	}
-	
+
 	public interface LoadRoutingFilesCallback {
 		void onRoutingFilesLoaded();
 	}
@@ -685,7 +685,7 @@ public class AppInitializer implements IProgress {
 			app.searchUICore.initSearchUICore();
 
 			checkLiveUpdatesAlerts();
-			
+
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			warnings.add(e.getMessage());

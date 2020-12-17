@@ -74,14 +74,15 @@ public class TravelObfHelper implements TravelHelper {
 				LOG.error(e);
 			}
 		}
+		String baseLng = application.getLanguage();
 		for (Amenity obj : searchObjects) {
 			WikivoyageSearchResult r = new WikivoyageSearchResult();
-			TravelArticle article = readArticle(obj, "en");
+			TravelArticle article = readArticle(obj, baseLng);
 			r.articleTitles = new ArrayList<>(Collections.singletonList(article.title));
 			r.imageTitle = article.imageTitle;
 			r.routeId = article.routeId;
 			r.isPartOf = new ArrayList<>(Collections.singletonList(article.isPartOf));
-			r.langs = new ArrayList<>(Collections.singletonList("en"));
+			r.langs = new ArrayList<>(Collections.singletonList(baseLng));
 			res.add(r);
 		}
 		res = new ArrayList(groupSearchResultsByRouteId(res));
