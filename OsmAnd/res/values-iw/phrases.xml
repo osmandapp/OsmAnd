@@ -2174,4 +2174,20 @@
     <string name="poi_departures_board_timetable">לוח זמנים</string>
     <string name="poi_beehive">כוורת דבורים</string>
     <string name="poi_nuts">חנות אגוזים</string>
+    <string name="poi_fire_hydrant_position_underground">תת־קרקעי</string>
+    <string name="poi_fire_hydrant_position_street">רחוב</string>
+    <string name="poi_fire_hydrant_position_parking_lot">חנייה</string>
+    <string name="poi_fire_hydrant_position_lane">נתיב</string>
+    <string name="poi_fire_hydrant_position_green">ירוק</string>
+    <string name="poi_fire_hydrant_position_sidewalk">מדרכה</string>
+    <string name="poi_fire_hydrant_flow_capacity">קיבולת זרימה של ברז כיבוי</string>
+    <string name="poi_diplomatic_services_citizen_services_filter">שירותים לאזרח</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">ויזות למהגרים</string>
+    <string name="poi_consulate_filter">קונסוליה</string>
+    <string name="poi_embassy_filter">שגרירות</string>
+    <string name="poi_departures_board">לוח זמנים</string>
+    <string name="poi_drinking_water_refill">מילוי מי שתייה</string>
+    <string name="poi_traffic_signals_arrow">חץ</string>
+    <string name="poi_traffic_signals_vibration">רטט</string>
+    <string name="poi_fire_hydrant_pressure_filter">לחץ</string>
 </resources>
