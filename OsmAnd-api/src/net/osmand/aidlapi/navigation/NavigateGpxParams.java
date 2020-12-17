@@ -11,15 +11,18 @@ public class NavigateGpxParams extends AidlParams {
 	private String data;
 	private Uri uri;
 	private boolean force;
+	private boolean needLocationPermission;
 
-	public NavigateGpxParams(String data, boolean force) {
+	public NavigateGpxParams(String data, boolean force, boolean needLocationPermission) {
 		this.data = data;
 		this.force = force;
+		this.needLocationPermission = needLocationPermission;
 	}
 
-	public NavigateGpxParams(Uri uri, boolean force) {
+	public NavigateGpxParams(Uri uri, boolean force, boolean needLocationPermission) {
 		this.uri = uri;
 		this.force = force;
+		this.needLocationPermission = needLocationPermission;
 	}
 
 	public NavigateGpxParams(Parcel in) {
@@ -50,11 +53,16 @@ public class NavigateGpxParams extends AidlParams {
 		return force;
 	}
 
+	public boolean isNeedLocationPermission() {
+		return needLocationPermission;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putString("data", data);
 		bundle.putParcelable("uri", uri);
 		bundle.putBoolean("force", force);
+		bundle.putBoolean("needLocationPermission", needLocationPermission);
 	}
 
 	@Override
@@ -62,5 +70,6 @@ public class NavigateGpxParams extends AidlParams {
 		data = bundle.getString("data");
 		uri = bundle.getParcelable("uri");
 		force = bundle.getBoolean("force");
+		needLocationPermission = bundle.getBoolean("needLocationPermission");
 	}
 }

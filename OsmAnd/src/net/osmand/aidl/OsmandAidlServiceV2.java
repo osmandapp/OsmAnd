@@ -693,7 +693,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				return params != null && api != null && api.navigate(
 						params.getStartName(), params.getStartLat(), params.getStartLon(),
 						params.getDestName(), params.getDestLat(), params.getDestLon(),
-						params.getProfile(), params.isForce());
+						params.getProfile(), params.isForce(), params.isNeedLocationPermission());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -704,7 +704,8 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		public boolean navigateGpx(NavigateGpxParams params) {
 			try {
 				OsmandAidlApi api = getApi("navigateGpx");
-				return params != null && api != null && api.navigateGpx(params.getData(), params.getUri(), params.isForce());
+				return params != null && api != null && api.navigateGpx(params.getData(), params.getUri(),
+						params.isForce(), params.isNeedLocationPermission());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -814,7 +815,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				return params != null && api != null && api.navigateSearch(
 						params.getStartName(), params.getStartLat(), params.getStartLon(),
 						params.getSearchQuery(), params.getSearchLat(), params.getSearchLon(),
-						params.getProfile(), params.isForce());
+						params.getProfile(), params.isForce(), params.isNeedLocationPermission());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

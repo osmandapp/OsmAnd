@@ -17,8 +17,10 @@ public class NavigateParams extends AidlParams {
 	private double destLon;
 
 	private boolean force;
+	private boolean needLocationPermission;
 
-	public NavigateParams(String startName, double startLat, double startLon, String destName, double destLat, double destLon, String profile, boolean force) {
+	public NavigateParams(String startName, double startLat, double startLon, String destName, double destLat,
+						  double destLon, String profile, boolean force, boolean needLocationPermission) {
 		this.startName = startName;
 		this.startLat = startLat;
 		this.startLon = startLon;
@@ -27,6 +29,7 @@ public class NavigateParams extends AidlParams {
 		this.destLon = destLon;
 		this.profile = profile;
 		this.force = force;
+		this.needLocationPermission = needLocationPermission;
 	}
 
 	public NavigateParams(Parcel in) {
@@ -77,6 +80,10 @@ public class NavigateParams extends AidlParams {
 		return force;
 	}
 
+	public boolean isNeedLocationPermission() {
+		return needLocationPermission;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putString("startName", startName);
@@ -87,6 +94,7 @@ public class NavigateParams extends AidlParams {
 		bundle.putDouble("destLon", destLon);
 		bundle.putString("profile", profile);
 		bundle.putBoolean("force", force);
+		bundle.putBoolean("needLocationPermission", needLocationPermission);
 	}
 
 	@Override
@@ -99,5 +107,6 @@ public class NavigateParams extends AidlParams {
 		destLon = bundle.getDouble("destLon");
 		profile = bundle.getString("profile");
 		force = bundle.getBoolean("force");
+		needLocationPermission = bundle.getBoolean("needLocationPermission");
 	}
 }

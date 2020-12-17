@@ -177,6 +177,7 @@ public class OsmandAidlApi {
 	private static final String AIDL_DATA = "aidl_data";
 	private static final String AIDL_URI = "aidl_uri";
 	private static final String AIDL_FORCE = "aidl_force";
+	private static final String AIDL_LOCATION_PERMISSION = "aidl_location_permission";
 	private static final String AIDL_SEARCH_QUERY = "aidl_search_query";
 	private static final String AIDL_SEARCH_LAT = "aidl_search_lat";
 	private static final String AIDL_SEARCH_LON = "aidl_search_lon";
@@ -208,7 +209,7 @@ public class OsmandAidlApi {
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
-	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
+	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[] {
 			ApplicationMode.CAR,
 			ApplicationMode.BICYCLE,
 			ApplicationMode.PEDESTRIAN
@@ -287,7 +288,7 @@ public class OsmandAidlApi {
 	}
 
 	private void initOsmandTelegram() {
-		String[] packages = new String[]{"net.osmand.telegram", "net.osmand.telegram.debug"};
+		String[] packages = new String[] {"net.osmand.telegram", "net.osmand.telegram.debug"};
 		Intent intent = new Intent("net.osmand.telegram.InitApp");
 		for (String pack : packages) {
 			intent.setComponent(new ComponentName(pack, "net.osmand.telegram.InitAppBroadcastReceiver"));
@@ -601,6 +602,7 @@ public class OsmandAidlApi {
 
 					final RoutingHelper routingHelper = app.getRoutingHelper();
 					boolean force = intent.getBooleanExtra(AIDL_FORCE, true);
+					final boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
 					if (routingHelper.isFollowingMode() && !force) {
 						mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
 
@@ -608,12 +610,12 @@ public class OsmandAidlApi {
 							public void onDismiss(DialogInterface dialog) {
 								MapActivity mapActivity = mapActivityRef.get();
 								if (mapActivity != null && !routingHelper.isFollowingMode()) {
-									ExternalApiHelper.startNavigation(mapActivity, start, startDesc, dest, destDesc, profile);
+									ExternalApiHelper.startNavigation(mapActivity, start, startDesc, dest, destDesc, profile, locationPermission);
 								}
 							}
 						});
 					} else {
-						ExternalApiHelper.startNavigation(mapActivity, start, startDesc, dest, destDesc, profile);
+						ExternalApiHelper.startNavigation(mapActivity, start, startDesc, dest, destDesc, profile, locationPermission);
 					}
 				}
 			}
@@ -667,6 +669,7 @@ public class OsmandAidlApi {
 					if (searchLocation != null) {
 						final RoutingHelper routingHelper = app.getRoutingHelper();
 						boolean force = intent.getBooleanExtra(AIDL_FORCE, true);
+						final boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
 						if (routingHelper.isFollowingMode() && !force) {
 							mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
 
@@ -674,12 +677,14 @@ public class OsmandAidlApi {
 								public void onDismiss(DialogInterface dialog) {
 									MapActivity mapActivity = mapActivityRef.get();
 									if (mapActivity != null && !routingHelper.isFollowingMode()) {
-										ExternalApiHelper.searchAndNavigate(mapActivity, searchLocation, start, startDesc, profile, searchQuery, false);
+										ExternalApiHelper.searchAndNavigate(mapActivity, searchLocation, start,
+												startDesc, profile, searchQuery, false, locationPermission);
 									}
 								}
 							});
 						} else {
-							ExternalApiHelper.searchAndNavigate(mapActivity, searchLocation, start, startDesc, profile, searchQuery, false);
+							ExternalApiHelper.searchAndNavigate(mapActivity, searchLocation, start,
+									startDesc, profile, searchQuery, false, locationPermission);
 						}
 					}
 				}
@@ -698,7 +703,8 @@ public class OsmandAidlApi {
 					GPXFile gpx = loadGpxFileFromIntent(mapActivity, intent);
 					if (gpx != null) {
 						boolean force = intent.getBooleanExtra(AIDL_FORCE, false);
-						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, force);
+						boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
+						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, force, locationPermission);
 					}
 				}
 			}
@@ -1652,8 +1658,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigate(String startName, double startLat, double startLon,
-	                 String destName, double destLat, double destLon,
-	                 String profile, boolean force) {
+					 String destName, double destLat, double destLon,
+					 String profile, boolean force, boolean requestLocationPermission) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1664,13 +1670,14 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_DEST_LON, destLon);
 		intent.putExtra(AIDL_PROFILE, profile);
 		intent.putExtra(AIDL_FORCE, force);
+		intent.putExtra(AIDL_LOCATION_PERMISSION, requestLocationPermission);
 		app.sendBroadcast(intent);
 		return true;
 	}
 
 	boolean navigateSearch(String startName, double startLat, double startLon,
-	                       String searchQuery, double searchLat, double searchLon,
-	                       String profile, boolean force) {
+						   String searchQuery, double searchLat, double searchLon,
+						   String profile, boolean force, boolean requestLocationPermission) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE_SEARCH);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1681,6 +1688,7 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_SEARCH_LON, searchLon);
 		intent.putExtra(AIDL_PROFILE, profile);
 		intent.putExtra(AIDL_FORCE, force);
+		intent.putExtra(AIDL_LOCATION_PERMISSION, requestLocationPermission);
 		app.sendBroadcast(intent);
 		return true;
 	}
@@ -1720,12 +1728,13 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean navigateGpx(String data, Uri uri, boolean force) {
+	boolean navigateGpx(String data, Uri uri, boolean force, boolean requestLocationPermission) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE_GPX);
 		intent.putExtra(AIDL_DATA, data);
 		intent.putExtra(AIDL_URI, uri);
 		intent.putExtra(AIDL_FORCE, force);
+		intent.putExtra(AIDL_LOCATION_PERMISSION, requestLocationPermission);
 		app.sendBroadcast(intent);
 		return true;
 	}
