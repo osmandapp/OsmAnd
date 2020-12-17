@@ -265,8 +265,8 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	public static void switchAllPoint(final OsmandApplication app, final Activity ctx,
-									  final WaypointDialogHelper helper) {
+	public static void reverseAllPoints(OsmandApplication app, Activity ctx,
+										WaypointDialogHelper helper) {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		List<TargetPoint> points = targets.getAllPoints();
 		Collections.reverse(points);
@@ -457,7 +457,8 @@ public class WaypointDialogHelper {
 		@Override
 		public void createMenuItems(Bundle savedInstanceState) {
 			items.add(new TitleItem(getString(R.string.shared_string_options)));
-
+			final OsmandApplication app = requiredMyApplication();
+			final TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 			BaseBottomSheetItem sortDoorToDoorItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_sort_door_to_door))
 					.setTitle(getString(R.string.intermediate_items_sort_by_distance))
@@ -507,15 +508,15 @@ public class WaypointDialogHelper {
 
 			BaseBottomSheetItem reorderAllItems = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_sort_reverse_order))
-					.setTitle(getString(R.string.switch_all_points))
+					.setTitle(getString(R.string.reverce_all_points))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							MapActivity mapActivity = getMapActivity();
 							if (mapActivity != null) {
-								WaypointDialogHelper.switchAllPoint(
-										mapActivity.getMyApplication(),
+								WaypointDialogHelper.reverseAllPoints(
+										app,
 										mapActivity,
 										mapActivity.getDashboard().getWaypointDialogHelper()
 								);
@@ -524,11 +525,9 @@ public class WaypointDialogHelper {
 						}
 					})
 					.create();
-			if (getMyApplication() != null) {
-				int intermediateSize = getMyApplication().getTargetPointsHelper().getIntermediatePoints().size();
-				if (intermediateSize > 2) {
-					items.add(reorderAllItems);
-				}
+			int intermediateSize = targetsHelper.getIntermediatePoints().size();
+			if (intermediateSize > 2 && !targetsHelper.getAllPoints().isEmpty()) {
+				items.add(reorderAllItems);
 			}
 
 			items.add(new DividerHalfItem(getContext()));
