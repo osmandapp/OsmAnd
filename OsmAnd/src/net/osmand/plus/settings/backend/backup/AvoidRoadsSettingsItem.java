@@ -154,7 +154,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 					jsonObject.put("name", avoidRoad.name);
 					jsonObject.put("appModeKey", avoidRoad.appModeKey);
 					jsonObject.put("roadId", avoidRoad.id);
-					if (Double.isNaN(avoidRoad.direction)) {
+					if (!Double.isNaN(avoidRoad.direction)) {
 						jsonObject.put("direction", avoidRoad.direction);
 					}
 					jsonArray.put(jsonObject);
