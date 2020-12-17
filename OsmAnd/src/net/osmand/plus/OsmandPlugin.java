@@ -94,7 +94,7 @@ public abstract class OsmandPlugin {
 
 	public abstract String getName();
 
-	public abstract CharSequence getDescription();
+	public abstract String getDescription();
 
 	@Nullable
 	public Drawable getAssetResourceImage() {
