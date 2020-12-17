@@ -89,7 +89,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getDescription() {
+	public CharSequence getDescription() {
 		return app.getString(R.string.osmand_rastermaps_plugin_description);
 	}
 

@@ -581,7 +581,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getDescription() {
+	public CharSequence getDescription() {
 		return app.getString(R.string.audionotes_plugin_description);
 	}
 
