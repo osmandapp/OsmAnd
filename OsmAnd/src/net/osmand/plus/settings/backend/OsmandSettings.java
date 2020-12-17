@@ -978,7 +978,16 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
 	}
 
-	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<>(this, "route_service", RouteService.OSMAND, RouteService.values()).makeProfile().cache();
+	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<RouteService>(this, "route_service", RouteService.OSMAND, RouteService.values()) {
+		@Override
+		public RouteService getModeValue(ApplicationMode mode) {
+			if (mode == ApplicationMode.DEFAULT) {
+				return RouteService.STRAIGHT;
+			} else {
+				return super.getModeValue(mode);
+			}
+		}
+	}.makeProfile().cache();
 
 	{
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.DEFAULT, RouteService.STRAIGHT);
