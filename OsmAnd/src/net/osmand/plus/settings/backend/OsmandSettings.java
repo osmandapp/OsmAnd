@@ -983,8 +983,6 @@ public class OsmandSettings {
 	{
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.DEFAULT, RouteService.STRAIGHT);
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
-		ROUTE_SERVICE.setModeValue(ApplicationMode.DEFAULT, RouteService.STRAIGHT);
-		ROUTE_SERVICE.setModeValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
 	}
 
 	public final CommonPreference<NavigationIcon> NAVIGATION_ICON = new EnumStringPreference<>(this, "navigation_icon", NavigationIcon.DEFAULT, NavigationIcon.values()).makeProfile().cache();
