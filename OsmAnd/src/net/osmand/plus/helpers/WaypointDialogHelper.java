@@ -39,6 +39,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -266,17 +267,13 @@ public class WaypointDialogHelper {
 
 	public static void switchAllPoint(final OsmandApplication app, final Activity ctx,
 									  final WaypointDialogHelper helper) {
-		List<TargetPoint> all;
 		TargetPointsHelper targets = app.getTargetPointsHelper();
-		all = targets.getIntermediatePointsWithTarget();
-
-		List<TargetPoint> cur = targets.getIntermediatePointsWithTarget();
-		for (int j = 0; j < cur.size() && j < all.size(); j++) {
-			if (cur.get(j) != all.get(j)) {
-				break;
-			}
-		}
-		targets.reorderAllTargetPoints(all, true);
+		List<TargetPoint> points = targets.getAllPoints();
+		Collections.reverse(points);
+		TargetPoint start = points.get(0);
+		targets.setStartPoint(start.point, false, start.getOriginalPointDescription());
+		points.remove(start);
+		targets.reorderAllTargetPoints(points, true);
 		updateControls(ctx, helper);
 	}
 
@@ -508,8 +505,6 @@ public class WaypointDialogHelper {
 					.create();
 			items.add(reorderStartAndFinishItem);
 
-			items.add(new DividerHalfItem(getContext()));
-
 			BaseBottomSheetItem reorderAllItems = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_sort_reverse_order))
 					.setTitle(getString(R.string.switch_all_points))
@@ -530,11 +525,13 @@ public class WaypointDialogHelper {
 					})
 					.create();
 			if (getMyApplication() != null) {
-				int intermediateSize = getMyApplication().getTargetPointsHelper().getAllPoints().size();
+				int intermediateSize = getMyApplication().getTargetPointsHelper().getIntermediatePoints().size();
 				if (intermediateSize > 2) {
 					items.add(reorderAllItems);
 				}
 			}
+
+			items.add(new DividerHalfItem(getContext()));
 
 			final BaseBottomSheetItem[] addWaypointItem = new BaseBottomSheetItem[1];
 			addWaypointItem[0] = new SimpleBottomSheetItem.Builder()
