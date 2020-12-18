@@ -4018,4 +4018,7 @@
 \n • תמיכה בצבעים מותאמים אישית למועדפים ולנקודות דרך במסלול
 \n
 \n</string>
+    <string name="profile_type_osmand_string">פרופיל</string>
+    <string name="profile_type_user_string">פרופיל</string>
+    <string name="reverse_all_points">להפוך את כל</string>
 </resources>
