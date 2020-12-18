@@ -3035,9 +3035,9 @@
     <string name="downloaded_maps">Nedlastede kart</string>
     <string name="visited_screens">Besøkte skjermer</string>
     <string name="collected_data_descr">Definer hvilken data du ønsker å dele med OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Hjelp oss å forstå hvilke kart over hvilke regioner og land som er mest populære.</string>
-    <string name="visited_screens_collect_descr">Hjelp oss å fastslå popularitet for OsmAnd-funksjoner.</string>
-    <string name="privacy_and_security_change_descr">Trykk \"Tillat\" hvis du samtykker du til vår %1$s</string>
+    <string name="downloaded_maps_collect_descr">Hjelp oss å forstå hvilke land- og regionkart som er mest populære.</string>
+    <string name="visited_screens_collect_descr">Hjelp oss å forstå hvilke OsmAnd-funksjoner som er mest populære.</string>
+    <string name="privacy_and_security_change_descr">Trykk \"Tillat\" hvis du er enig med vår %1$s</string>
     <string name="settings_privacy_and_security">Personvern og sikkerhet</string>
     <string name="settings_privacy_and_security_desc">Velg hvilke data du deler</string>
     <string name="shared_string_no_thank_you">Nei takk</string>
@@ -3939,4 +3939,5 @@
     <string name="login_open_street_map_org">Logg inn på OpenStreetMap.org</string>
     <string name="profile_type_osmand_string">OsmAnd-profil</string>
     <string name="profile_type_user_string">Brukerprofil</string>
+    <string name="button_rate">Bedøm</string>
 </resources>
