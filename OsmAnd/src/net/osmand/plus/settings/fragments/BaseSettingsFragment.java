@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -881,17 +880,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 
 		return listPreference;
-	}
-
-	public static String getAppModeDescription(Context ctx, ApplicationMode mode) {
-		String description;
-		if (mode.isCustomProfile()) {
-			description = ctx.getString(R.string.profile_type_user_string);
-		} else {
-			description = ctx.getString(R.string.profile_type_osmand_string);
-		}
-
-		return description;
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType) {

@@ -19,7 +19,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -99,7 +98,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			holder.menuIcon.setVisibility(View.GONE);
 			final ApplicationMode item = (ApplicationMode) obj;
 			holder.title.setText(item.toHumanString());
-			holder.descr.setText(BaseSettingsFragment.getAppModeDescription(app, item));
+			holder.descr.setText(ProfileDataObject.getAppModeDescription(app, item));
 
 			int profileColorResId = item.getIconColorInfo().getColor(nightMode);
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(profileColorResId, selectedIconColorRes));

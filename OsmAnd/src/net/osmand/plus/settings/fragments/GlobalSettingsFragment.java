@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Pair;
 import android.widget.ImageView;
 
@@ -16,14 +17,20 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
+import net.osmand.plus.profiles.SelectProfileBottomSheet;
+import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
+import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
+
 
 public class GlobalSettingsFragment extends BaseSettingsFragment
-		implements OnSendAnalyticsPrefsUpdate, OnPreferenceChanged {
+		implements OnSendAnalyticsPrefsUpdate, OnPreferenceChanged, OnSelectProfileCallback {
 
 	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
@@ -94,9 +101,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	@Override
 	public void onPreferenceChanged(String prefId) {
-		if (prefId.equals(settings.DEFAULT_APPLICATION_MODE.getId())) {
-			setupDefaultAppModePref();
-		} else if (prefId.equals(settings.PREFERRED_LOCALE.getId())) {
+		if (prefId.equals(settings.PREFERRED_LOCALE.getId())) {
 			// recreate activity to update locale
 			Activity activity = getActivity();
 			OsmandApplication app = getMyApplication();
@@ -117,7 +122,13 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
+		if (prefId.equals(settings.DEFAULT_APPLICATION_MODE.getId())) {
+			if (getActivity() != null) {
+				String defaultModeKey = settings.DEFAULT_APPLICATION_MODE.get().getStringKey();
+				SelectProfileBottomSheet.showInstance(getActivity(),
+						DialogMode.DEFAULT_PROFILE, this, defaultModeKey, false);
+			}
+		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			FragmentManager fm = getFragmentManager();
 			if (fm != null) {
 				SpeedCamerasBottomSheet.showInstance(fm, this);
@@ -127,23 +138,20 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupDefaultAppModePref() {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
+		Preference defaultApplicationMode = (Preference) findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
+		int iconColor = settings.getApplicationMode().getIconColorInfo().getColor(isNightMode());
+		String summary;
+		int iconId;
+		if (settings.USE_LAST_APPLICATION_MODE_BY_DEFAULT.get()) {
+			summary = getString(R.string.shared_string_last_used);
+			iconId = R.drawable.ic_action_manage_profiles;
+		} else {
+			ApplicationMode appMode = settings.DEFAULT_APPLICATION_MODE.get();
+			summary = appMode.toHumanString();
+			iconId = appMode.getIconRes();
 		}
-		ApplicationMode[] appModes = ApplicationMode.values(app).toArray(new ApplicationMode[0]);
-		String[] entries = new String[appModes.length];
-		String[] entryValues = new String[appModes.length];
-		for (int i = 0; i < entries.length; i++) {
-			entries[i] = appModes[i].toHumanString();
-			entryValues[i] = appModes[i].getStringKey();
-		}
-
-		ListPreferenceEx defaultApplicationMode = (ListPreferenceEx) findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
-		defaultApplicationMode.setIcon(getIcon(settings.DEFAULT_APPLICATION_MODE.get().getIconRes(),
-				settings.getApplicationMode().getIconColorInfo().getColor(isNightMode())));
-		defaultApplicationMode.setEntries(entries);
-		defaultApplicationMode.setEntryValues(entryValues);
+		defaultApplicationMode.setIcon(getIcon(iconId, iconColor));
+		defaultApplicationMode.setSummary(summary);
 	}
 
 	private void setupPreferredLocalePref() {
@@ -217,6 +225,18 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			uninstallSpeedCameras.setIcon(getActiveIcon(R.drawable.ic_speed_camera_disabled));
 		}
 		uninstallSpeedCameras.setTitle(uninstalled ? R.string.speed_cameras_removed_descr : R.string.uninstall_speed_cameras);
+	}
+
+	@Override
+	public void onProfileSelected(Bundle args) {
+		if (args.getBoolean(USE_LAST_PROFILE_ARG)) {
+			settings.USE_LAST_APPLICATION_MODE_BY_DEFAULT.set(true);
+		} else {
+			settings.USE_LAST_APPLICATION_MODE_BY_DEFAULT.set(false);
+			String value = args.getString(PROFILE_KEY_ARG);
+			settings.setPreference(settings.DEFAULT_APPLICATION_MODE.getId(), value);
+		}
+		setupDefaultAppModePref();
 	}
 
 	public static Pair<String[], String[]> getPreferredLocaleIdsAndValues(Context ctx) {

@@ -20,7 +20,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.RoutingProfileDataObject;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
-import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
+import net.osmand.plus.profiles.SelectProfileBottomSheet;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.router.GeneralRouter;
@@ -34,20 +34,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.IS_PROFILE_IMPORTED_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.PROFILE_KEY_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.IS_PROFILE_IMPORTED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DIALOG_MODE_KEY;
 
-public class NavigationFragment extends BaseSettingsFragment {
+public class NavigationFragment extends BaseSettingsFragment
+		implements SelectProfileBottomSheet.OnSelectProfileCallback {
 
 	public static final String TAG = NavigationFragment.class.getSimpleName();
 	public static final String NAVIGATION_TYPE = "navigation_type";
 	public static final String OSMAND_NAVIGATION = "osmand_navigation";
 
-	private SelectProfileBottomSheetDialogFragment.SelectProfileListener navTypeListener;
 	private Map<String, RoutingProfileDataObject> routingProfileDataObjects;
 	private Preference navigationType;
 
@@ -134,36 +131,15 @@ public class NavigationFragment extends BaseSettingsFragment {
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(NAVIGATION_TYPE)) {
-			final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
-			Bundle bundle = new Bundle();
-			if (getSelectedAppMode() != null) {
-				bundle.putString(SELECTED_KEY, getSelectedAppMode().getRoutingProfile());
-			}
-			bundle.putString(DIALOG_TYPE, TYPE_NAV_PROFILE);
-			dialog.setArguments(bundle);
-			dialog.setUsedOnMap(false);
-			dialog.setAppMode(getSelectedAppMode());
+			String routingProfileKey =
+					getSelectedAppMode() != null ? getSelectedAppMode().getRoutingProfile() : null;
 			if (getActivity() != null) {
-				getActivity().getSupportFragmentManager().beginTransaction()
-						.add(dialog, "select_nav_type").commitAllowingStateLoss();
+				SelectProfileBottomSheet.showInstance(
+						getActivity(), SelectProfileBottomSheet.DialogMode.NAVIGATION_PROFILE,
+						this, routingProfileKey, false);
 			}
 		}
 		return false;
-	}
-
-	public SelectProfileBottomSheetDialogFragment.SelectProfileListener getNavProfileListener() {
-		if (navTypeListener == null) {
-			navTypeListener = new SelectProfileBottomSheetDialogFragment.SelectProfileListener() {
-				@Override
-				public void onSelectedType(Bundle args) {
-					if (args.getBoolean(IS_PROFILE_IMPORTED_ARG)) {
-						routingProfileDataObjects = getRoutingProfiles(app);
-					}
-					updateRoutingProfile(args.getString(PROFILE_KEY_ARG));
-				}
-			};
-		}
-		return navTypeListener;
 	}
 
 	void updateRoutingProfile(String profileKey) {
@@ -285,18 +261,9 @@ public class NavigationFragment extends BaseSettingsFragment {
 	}
 
 	public static List<ProfileDataObject> getBaseProfiles(OsmandApplication app, boolean includeBrowseMap) {
-		List<ProfileDataObject> profiles = new ArrayList<>();
-		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			if (mode != ApplicationMode.DEFAULT || includeBrowseMap) {
-				String description = mode.getDescription();
-				if (Algorithms.isEmpty(description)) {
-					description = getAppModeDescription(app, mode);
-				}
-				profiles.add(new ProfileDataObject(mode.toHumanString(), description,
-						mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
-			}
-		}
-		return profiles;
+		List<ApplicationMode> appModes =
+				ApplicationMode.values(app, false, includeBrowseMap ? null : ApplicationMode.DEFAULT);
+		return ProfileDataObject.getDataObjects(app, appModes);
 	}
 
 	private void setupVehicleParametersPref() {
@@ -310,5 +277,13 @@ public class NavigationFragment extends BaseSettingsFragment {
 		if (mapActivity != null) {
 			mapActivity.getMapRouteInfoMenu().updateMenu();
 		}
+	}
+
+	@Override
+	public void onProfileSelected(Bundle args) {
+		if (args.getBoolean(IS_PROFILE_IMPORTED_ARG)) {
+			routingProfileDataObjects = getRoutingProfiles(app);
+		}
+		updateRoutingProfile(args.getString(PROFILE_KEY_ARG));
 	}
 }

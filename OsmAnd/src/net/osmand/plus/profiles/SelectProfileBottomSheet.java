@@ -2,8 +2,12 @@ package net.osmand.plus.profiles;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -15,6 +19,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -28,10 +34,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.fragments.MainSettingsFragment;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.NavigationFragment;
-import net.osmand.plus.settings.fragments.ProfileAppearanceFragment;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.router.RoutingConfiguration;
 
@@ -42,27 +49,27 @@ import java.util.List;
 
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
 
-public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottomSheet {
+public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 
-	private static final Log LOG = PlatformUtil
-		.getLog(SelectProfileBottomSheetDialogFragment.class);
-	public static final String TAG = "SelectProfileBottomSheetDialogFragment";
+	private static final Log LOG = PlatformUtil.getLog(SelectProfileBottomSheet.class);
+	public static final String TAG = "SelectProfileBottomSheet";
 
 	public final static String DIALOG_TYPE = "dialog_type";
-	public final static String TYPE_BASE_APP_PROFILE = "base_profiles";
-	public final static String TYPE_NAV_PROFILE = "routing_profiles";
 	public final static String SELECTED_KEY = "selected_base";
 
 	public final static String PROFILE_KEY_ARG = "profile_key_arg";
+	public final static String USE_LAST_PROFILE_ARG = "use_last_profile_arg";
 	public final static String IS_PROFILE_IMPORTED_ARG = "is_profile_imported_arg";
 
-	String type;
-
-	private SelectProfileListener listener;
-
+	private DialogMode dialogMode;
 	private final List<ProfileDataObject> profiles = new ArrayList<>();
-
 	private String selectedItemKey;
+
+	public enum DialogMode {
+		BASE_PROFILE,
+		NAVIGATION_PROFILE,
+		DEFAULT_PROFILE
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +77,8 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 		OsmandApplication app = getMyApplication();
 		Bundle args = getArguments();
 		if (args != null && args.get(DIALOG_TYPE) != null) {
-			type = args.getString(DIALOG_TYPE);
+			String dialogModeName = args.getString(DIALOG_TYPE);
+			dialogMode = DialogMode.valueOf(dialogModeName);
 			selectedItemKey = args.getString(SELECTED_KEY, null);
 			refreshProfiles(app);
 		}
@@ -91,12 +99,12 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		OsmandApplication app = requiredMyApplication();
-		
+
 		View bottomSpaceView = new View(app);
 		int space = (int) getResources().getDimension(R.dimen.empty_state_text_button_padding_top);
 		bottomSpaceView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, space));
-		
-		if (type.equals(TYPE_BASE_APP_PROFILE)) {
+
+		if (dialogMode == DialogMode.BASE_PROFILE) {
 			items.add(new TitleItem(getString(R.string.select_base_profile_dialog_title)));
 			items.add(new LongDescriptionItem(getString(R.string.select_base_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
@@ -138,7 +146,7 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 					.setCustomView(bottomSpaceView)
 					.create());*/
 
-		} else if (type.equals(TYPE_NAV_PROFILE)) {
+		} else if (dialogMode == DialogMode.NAVIGATION_PROFILE) {
 			items.add(new TitleItem(getString(R.string.select_nav_profile_dialog_title)));
 			items.add(new LongDescriptionItem(getString(R.string.select_nav_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
@@ -146,11 +154,11 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 				boolean showBottomDivider = false;
 				if (i < profiles.size() - 1) {
 					RoutingProfileDataObject nextProfile = (RoutingProfileDataObject) profiles.get(i + 1);
-					if (profile.getFileName() == null) { 
-						showBottomDivider = nextProfile.getFileName() != null; 
-					} else { 
-						showBottomDivider = !profile.getFileName().equals(nextProfile.getFileName()); 
-					} 
+					if (profile.getFileName() == null) {
+						showBottomDivider = nextProfile.getFileName() != null;
+					} else {
+						showBottomDivider = !profile.getFileName().equals(nextProfile.getFileName());
+					}
 				}
 				addProfileItem(profile, showBottomDivider);
 			}
@@ -175,15 +183,44 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 			items.add(new BaseBottomSheetItem.Builder()
 					.setCustomView(bottomSpaceView)
 					.create());
+		} else if (dialogMode == DialogMode.DEFAULT_PROFILE) {
+			items.add(new TitleItem(getString(R.string.settings_preset)));
+			items.add(new LongDescriptionItem(getString(R.string.profile_by_default_description)));
+
+			boolean useLastAppModeByDefault = app.getSettings().USE_LAST_APPLICATION_MODE_BY_DEFAULT.get();
+			addCheckableItem(R.string.shared_string_last_used, useLastAppModeByDefault, new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Bundle args = new Bundle();
+					args.putBoolean(USE_LAST_PROFILE_ARG, true);
+					Fragment target = getTargetFragment();
+					if (target instanceof OnSelectProfileCallback) {
+						((OnSelectProfileCallback) target).onProfileSelected(args);
+					}
+					dismiss();
+				}
+			});
+
+			items.add(new SimpleDividerItem(app));
+			for (int i = 0; i < profiles.size(); i++) {
+				ProfileDataObject profile = profiles.get(i);
+				addProfileItem(profile, false, !useLastAppModeByDefault);
+			}
 		}
 	}
-	
+
 	private void addProfileItem(final ProfileDataObject profile, boolean showBottomDivider) {
+		addProfileItem(profile, showBottomDivider, true);
+	}
+
+	private void addProfileItem(final ProfileDataObject profile,
+	                            boolean showBottomDivider,
+	                            boolean setupSelected) {
 		OsmandApplication app = requiredMyApplication();
-		
+
 		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		int iconDefaultColorResId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
-		
+
 		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		TextView tvDescription = itemView.findViewById(R.id.description);
@@ -193,13 +230,13 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 
 		tvTitle.setText(profile.getName());
 		tvDescription.setText(profile.getDescription());
-		
-		boolean isSelected = profile.getStringKey().equals(selectedItemKey);
+
+		boolean isSelected = setupSelected && profile.getStringKey().equals(selectedItemKey);
 		int iconColor;
-		if (type.equals(TYPE_BASE_APP_PROFILE)) {
-			iconColor = profile.getIconColor(nightMode);
-		} else {
+		if (dialogMode == DialogMode.NAVIGATION_PROFILE) {
 			iconColor = isSelected ? activeColorResId : iconDefaultColorResId;
+		} else {
+			iconColor = profile.getIconColor(nightMode);
 		}
 
 		Drawable drawableIcon = app.getUIUtilities().getIcon(profile.getIconRes(), iconColor);
@@ -213,28 +250,56 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 				.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						if (listener == null) {
-							getListener();
-						}
 						Bundle args = new Bundle();
 						args.putString(PROFILE_KEY_ARG, profile.getStringKey());
-						listener.onSelectedType(args);
+						Fragment target = getTargetFragment();
+						if (target instanceof OnSelectProfileCallback) {
+							((OnSelectProfileCallback) target).onProfileSelected(args);
+						}
 						dismiss();
 					}
 				})
 				.create());
 	}
-	
+
+	private void addCheckableItem(int titleId,
+	                              boolean isSelected,
+	                              OnClickListener listener) {
+		OsmandApplication app = requiredMyApplication();
+		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
+
+		itemView.findViewById(R.id.icon).setVisibility(View.GONE);
+		itemView.findViewById(R.id.description).setVisibility(View.GONE);
+		itemView.findViewById(R.id.divider_bottom).setVisibility(View.GONE);
+
+		Typeface typeface = FontCache.getRobotoMedium(app);
+		String title = getString(titleId);
+		SpannableString spannable = UiUtilities.createCustomFontSpannable(typeface, title, title, title);
+		int activeColor = ContextCompat.getColor(app, getActiveColorId());
+		ForegroundColorSpan colorSpan = new ForegroundColorSpan(activeColor);
+		spannable.setSpan(colorSpan, 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		((TextView) itemView.findViewById(R.id.title)).setText(spannable);
+
+		CompoundButton compoundButton = itemView.findViewById(R.id.compound_button);
+		compoundButton.setChecked(isSelected);
+		UiUtilities.setupCompoundButton(compoundButton, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
+
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(itemView)
+				.setOnClickListener(listener)
+				.create());
+	}
+
 	private void addButtonItem(int titleId, int iconId, OnClickListener listener) {
 		OsmandApplication app = requiredMyApplication();
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
-		
+
 		int activeColorResId = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
-		
+
 		View buttonView = View.inflate(themedCtx, R.layout.bottom_sheet_item_preference_btn, null);
 		TextView tvTitle = buttonView.findViewById(R.id.title);
-		tvTitle.setText(app.getString(titleId));
-		
+		tvTitle.setText(getString(titleId));
+
 		ImageView ivIcon = buttonView.findViewById(R.id.icon);
 		ivIcon.setImageDrawable(app.getUIUtilities().getIcon(iconId, activeColorResId));
 
@@ -242,18 +307,6 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 				.setCustomView(buttonView)
 				.setOnClickListener(listener)
 				.create());
-	}
-
-	private void refreshProfiles(OsmandApplication app) {
-		profiles.clear();
-		if (type.equals(TYPE_NAV_PROFILE)) {
-			profiles.addAll(NavigationFragment.getSortedRoutingProfiles(app));
-		} else if (type.equals(TYPE_BASE_APP_PROFILE)) {
-			profiles.addAll(NavigationFragment.getBaseProfiles(app));
-		} else {
-			LOG.error("Check data type!");
-			dismiss();
-		}
 	}
 
 	private void refreshView() {
@@ -275,26 +328,21 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 		}
 	}
 
-	private void getListener() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			NavigationFragment navigationFragment = (NavigationFragment) fragmentManager.findFragmentByTag(NavigationFragment.class.getName());
-			ProfileAppearanceFragment profileAppearanceFragment = (ProfileAppearanceFragment) fragmentManager.findFragmentByTag(ProfileAppearanceFragment.TAG);
-			MainSettingsFragment mainSettingsFragment = (MainSettingsFragment) fragmentManager.findFragmentByTag(MainSettingsFragment.TAG);
+	private void refreshProfiles(OsmandApplication app) {
+		profiles.clear();
+		switch (dialogMode) {
+			case BASE_PROFILE:
+				profiles.addAll(NavigationFragment.getBaseProfiles(app));
+				break;
 
-			if (navigationFragment != null) {
-				listener = navigationFragment.getNavProfileListener();
-			} else if (profileAppearanceFragment != null) {
-				listener = profileAppearanceFragment.getParentProfileListener();
-			} else if (mainSettingsFragment != null) {
-				listener = mainSettingsFragment.getParentProfileListener();
-			}
+			case NAVIGATION_PROFILE:
+				profiles.addAll(NavigationFragment.getSortedRoutingProfiles(app));
+				break;
+
+			case DEFAULT_PROFILE:
+				profiles.addAll(ProfileDataObject.getDataObjects(app, ApplicationMode.values(app)));
+				break;
 		}
-	}
-
-	public interface SelectProfileListener {
-		void onSelectedType(Bundle args);
 	}
 
 	@Nullable
@@ -304,5 +352,25 @@ public class SelectProfileBottomSheetDialogFragment extends BasePreferenceBottom
 			return (MapActivity) activity;
 		}
 		return null;
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull DialogMode dialogMode,
+	                                @Nullable Fragment target,
+	                                String selectedItemKey,
+	                                boolean usedOnMap) {
+		SelectProfileBottomSheet fragment = new SelectProfileBottomSheet();
+		Bundle args = new Bundle();
+		args.putString(DIALOG_TYPE, dialogMode.name());
+		args.putString(SELECTED_KEY, selectedItemKey);
+		fragment.setArguments(args);
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setTargetFragment(target, 0);
+		FragmentManager fm = activity.getSupportFragmentManager();
+		fm.beginTransaction().add(fragment, TAG).commitAllowingStateLoss();
+	}
+
+	public interface OnSelectProfileCallback {
+		void onProfileSelected(Bundle args);
 	}
 }

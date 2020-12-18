@@ -16,7 +16,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -105,7 +104,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 			holder.menuIcon.setVisibility(View.VISIBLE);
 			final ApplicationMode item = (ApplicationMode) obj;
 			holder.title.setText(item.toHumanString());
-			holder.descr.setText(BaseSettingsFragment.getAppModeDescription(app, item));
+			holder.descr.setText(ProfileDataObject.getAppModeDescription(app, item));
 
 			holder.initSwitcher = true;
 			holder.compoundButton.setChecked(selectedItems.contains(item));

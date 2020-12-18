@@ -4,9 +4,10 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:title="@string/osmand_settings">
 
-	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:icon="@drawable/ic_world_globe_dark"
+	<Preference
 		android:key="default_application_mode_string"
+		android:icon="@drawable/ic_world_globe_dark"
+		android:persistent="false"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/settings_preset" />
 
