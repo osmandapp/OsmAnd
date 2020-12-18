@@ -126,7 +126,7 @@ public class TravelObfHelper implements TravelHelper {
 		res.lon = amenity.getLocation().getLongitude();
 		res.imageTitle = emptyIfNull(amenity.getTagContent(Amenity.IMAGE_TITLE, lang));
 		res.routeId = getRouteId(amenity);
-		res.originalId = 0; //?
+		res.originalId = 0;
 		res.lang = lang;
 		res.contentsJson = emptyIfNull(amenity.getTagContent(Amenity.CONTENT_JSON, lang));
 		res.aggregatedPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_AGGR_PART, lang));
@@ -149,8 +149,7 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public List<WikivoyageSearchResult> search(String searchQuery) {
-		List<WikivoyageSearchResult> res = new ArrayList<>();
-		return res;
+		return Collections.emptyList();
 	}
 
 	@NonNull
@@ -179,24 +178,23 @@ public class TravelObfHelper implements TravelHelper {
 		final List<Amenity> amenities = new ArrayList<>();
 		for (BinaryMapIndexReader travelBookReader : getTravelBookReaders()) {
 			try {
-				int left = 0;
-				int right = Integer.MAX_VALUE;
-				int top = 0;
-				int bottom = Integer.MAX_VALUE;
 				BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
-						left, right, top, bottom, -1, getSearchRouteArticleFilter(),
+						0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, -1, getSearchRouteArticleFilter(),
 						new ResultMatcher<Amenity>() {
+							boolean done = false;
+
 							@Override
 							public boolean publish(Amenity amenity) {
 								if (getRouteId(amenity).equals(routeId)) {
 									amenities.add(amenity);
+									done = true;
 								}
 								return false;
 							}
 
 							@Override
 							public boolean isCancelled() {
-								return false;
+								return done;
 							}
 						});
 
@@ -218,28 +216,26 @@ public class TravelObfHelper implements TravelHelper {
 		final List<Amenity> amenities = new ArrayList<>();
 		for (BinaryMapIndexReader travelBookReader : getTravelBookReaders()) {
 			try {
-				int left = 0;
-				int right = Integer.MAX_VALUE;
-				int top = 0;
-				int bottom = Integer.MAX_VALUE;
 				BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
-						0, 0, title, left, right, top, bottom,
+						0, 0, title, 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, getSearchRouteArticleFilter(),
 						new ResultMatcher<Amenity>() {
+							boolean done = false;
+							final Collator collator = OsmAndCollator.primaryCollator();
+
 							@Override
 							public boolean publish(Amenity amenity) {
-								Collator collator = OsmAndCollator.primaryCollator();
-								if (CollatorStringMatcher.cmatches(collator, title, amenity.getName(lang),
-										CHECK_EQUALS_FROM_SPACE) && amenity.getSubType().equals(ROUTE_ARTICLE)) {
+								if (CollatorStringMatcher.cmatches(collator, title, amenity.getName(lang), CHECK_EQUALS_FROM_SPACE)) {
 									amenities.add(amenity);
+									done = true;
 								}
 								return false;
 							}
 
 							@Override
 							public boolean isCancelled() {
-								return false;
+								return done;
 							}
-						});
+						}, null);
 
 				travelBookReader.searchPoiByName(req);
 			} catch (IOException e) {
