@@ -1538,9 +1538,20 @@ public class BinaryMapIndexReader {
 
 		return request;
 	}
-	
-	public static SearchRequest<RouteDataObject> buildSearchRouteRequest(int sleft, int sright, int stop, int sbottom,  
-			ResultMatcher<RouteDataObject> matcher){
+
+	public static SearchRequest<Amenity> buildSearchPoiRequest(LatLon latLon, int radius, int zoom,
+	                                                           SearchPoiTypeFilter poiTypeFilter,
+	                                                           ResultMatcher<Amenity> matcher) {
+		SearchRequest<Amenity> request = new SearchRequest<>();
+		request.setBBoxRadius(latLon.getLatitude(), latLon.getLongitude(), radius);
+		request.zoom = zoom;
+		request.poiTypeFilter = poiTypeFilter;
+		request.resultMatcher = matcher;
+		return request;
+	}
+
+	public static SearchRequest<RouteDataObject> buildSearchRouteRequest(int sleft, int sright, int stop, int sbottom,
+	                                                                     ResultMatcher<RouteDataObject> matcher) {
 		SearchRequest<RouteDataObject> request = new SearchRequest<RouteDataObject>();
 		request.left = sleft;
 		request.right = sright;
