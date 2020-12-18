@@ -123,9 +123,17 @@ public class TravelObfHelper implements TravelHelper {
 		};
 	}
 
-	private TravelArticle readArticle(Amenity amenity, String lang) {
+	private TravelArticle readArticle(@NonNull Amenity amenity, @Nullable String lang) {
 		TravelArticle res = new TravelArticle();
-		res.title = Algorithms.isEmpty(amenity.getName(lang)) ? amenity.getName() : amenity.getName(lang);
+		String title = Algorithms.isEmpty(amenity.getName(lang)) ? amenity.getName() : amenity.getName(lang);
+		if (Algorithms.isEmpty(title)) {
+			Map<String, String> namesMap = amenity.getNamesMap(true);
+			if (!namesMap.isEmpty()) {
+				lang = namesMap.keySet().iterator().next();
+				title = amenity.getName(lang);
+			}
+		}
+		res.title = title;
 		res.content = amenity.getDescription(lang);
 		res.isPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_PART, lang));
 		res.lat = amenity.getLocation().getLatitude();
