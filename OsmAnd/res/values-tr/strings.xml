@@ -3973,4 +3973,5 @@
 \n</string>
     <string name="profile_type_osmand_string">OsmAnd profili</string>
     <string name="profile_type_user_string">Kullanıcı profili</string>
+    <string name="reverse_all_points">Tüm noktaları tersine çevir</string>
 </resources>

@@ -3850,4 +3850,6 @@
     <string name="plan_route_split_after">Tükelda pärast</string>
     <string name="plan_route_split_before">Tükelda enne</string>
     <string name="plan_route_join_segments">Liida lõigud</string>
+    <string name="profile_type_user_string">Kasutajaprofiil</string>
+    <string name="profile_type_osmand_string">OsmAnd profiil</string>
 </resources>

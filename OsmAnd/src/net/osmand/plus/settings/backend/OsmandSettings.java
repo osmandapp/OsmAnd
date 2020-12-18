@@ -978,7 +978,16 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
 	}
 
-	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<>(this, "route_service", RouteService.OSMAND, RouteService.values()).makeProfile().cache();
+	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<RouteService>(this, "route_service", RouteService.OSMAND, RouteService.values()) {
+		@Override
+		public RouteService getModeValue(ApplicationMode mode) {
+			if (mode == ApplicationMode.DEFAULT) {
+				return RouteService.STRAIGHT;
+			} else {
+				return super.getModeValue(mode);
+			}
+		}
+	}.makeProfile().cache();
 
 	{
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.DEFAULT, RouteService.STRAIGHT);
@@ -2097,6 +2106,7 @@ public class OsmandSettings {
 	public static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
 	public static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
 	public static final String IMPASSABLE_ROADS_IDS = "impassable_roads_ids";
+	public static final String IMPASSABLE_ROADS_DIRECTIONS = "impassable_roads_directions";
 	public static final String IMPASSABLE_ROADS_APP_MODE_KEYS = "impassable_roads_app_mode_keys";
 
 	public void backupPointToStart() {

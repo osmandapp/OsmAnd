@@ -1528,8 +1528,8 @@
     <string name="poi_bathing_yes">Baden: ja</string>
     <string name="poi_bathing_no">Baden: nein</string>
     <string name="poi_boat_storage">Bootslager</string>
-    <string name="poi_bridge_ref">Brücke Nr.</string>
-    <string name="poi_tunnel_ref">Tunnel Nr.</string>
+    <string name="poi_bridge_ref">Bauwerksnummer</string>
+    <string name="poi_tunnel_ref">Bauwerksnummer</string>
     <string name="poi_ref">Nr.</string>
     <string name="poi_cargo_passengers">Passagiere</string>
     <string name="poi_cargo_vehicle">Fahrzeuge</string>
@@ -3889,4 +3889,16 @@
     <string name="poi_lifeguard_base">Rettungsschwimmerbasis</string>
     <string name="poi_vaccination_covid19">Impfung: COVID19</string>
     <string name="poi_health_specialty_vaccination_yes">Impfung</string>
+    <string name="poi_water_source_tube_well">Rammbrunnen</string>
+    <string name="poi_water_source_lake">See</string>
+    <string name="poi_water_source_river">Fluss</string>
+    <string name="poi_water_source_well">Brunnen</string>
+    <string name="poi_water_source_powered_pump">Angetriebene Pumpe</string>
+    <string name="poi_water_source_water_tank">Wassertank</string>
+    <string name="poi_water_source_tap">Wasserhahn</string>
+    <string name="poi_water_source_water_works">Wasserwerk</string>
+    <string name="poi_lavoir">Waschplatz für Wäsche</string>
+    <string name="poi_waste_transfer_station">Müllumladestation</string>
+    <string name="poi_weightbridge">Fahrzeugwaage</string>
+    <string name="poi_ranger_station">Rangerstation</string>
 </resources>

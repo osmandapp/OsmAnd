@@ -9,15 +9,18 @@ public class NavigateGpxParams implements Parcelable {
 	private String data;
 	private Uri uri;
 	private boolean force;
+	private boolean needLocationPermission;
 
-	public NavigateGpxParams(String data, boolean force) {
+	public NavigateGpxParams(String data, boolean force, boolean needLocationPermission) {
 		this.data = data;
 		this.force = force;
+		this.needLocationPermission = needLocationPermission;
 	}
 
-	public NavigateGpxParams(Uri uri, boolean force) {
+	public NavigateGpxParams(Uri uri, boolean force, boolean needLocationPermission) {
 		this.uri = uri;
 		this.force = force;
+		this.needLocationPermission = needLocationPermission;
 	}
 
 	public NavigateGpxParams(Parcel in) {
@@ -48,22 +51,27 @@ public class NavigateGpxParams implements Parcelable {
 		return force;
 	}
 
+	public boolean isNeedLocationPermission() {
+		return needLocationPermission;
+	}
+
 	@Override
 	public void writeToParcel(Parcel out, int flags) {
 		out.writeString(data);
 		out.writeParcelable(uri, flags);
 		out.writeByte((byte) (force ? 1 : 0));
+		out.writeByte((byte) (needLocationPermission ? 1 : 0));
 	}
 
 	private void readFromParcel(Parcel in) {
 		data = in.readString();
 		uri = in.readParcelable(Uri.class.getClassLoader());
 		force = in.readByte() != 0;
+		needLocationPermission = in.readByte() != 0;
 	}
 
 	@Override
 	public int describeContents() {
 		return 0;
 	}
-
 }

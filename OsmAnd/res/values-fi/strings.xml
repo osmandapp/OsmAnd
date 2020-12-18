@@ -305,7 +305,7 @@
     <string name="only_show">Näytä vain</string>
     <string name="follow">Seuraa</string>
     <string name="mark_final_location_first">Valitse päämäärä ensin</string>
-    <string name="get_directions">Ohjeet</string>
+    <string name="get_directions">Reittiohjeet</string>
     <string name="opening_hours">Avoinna</string>
     <string name="loading_streets_buildings">Ladataan katuja/rakennuksia…</string>
     <string name="loading_postcodes">Ladataan postinumeroita…</string>
@@ -390,7 +390,7 @@
     <string name="poi_error_unexpected_template">Tapahtui odottamaton virhe suoritettaessa toimintoa {0}.</string>
     <string name="poi_dialog_opening_hours">Avoinna</string>
     <string name="edit_filter_save_as_menu_item">Tallenna nimellä</string>
-    <string name="rendering_attr_roadColors_description">Valitse tien väriteema:</string>
+    <string name="rendering_attr_roadColors_description">Valitse tien värimaailma:</string>
     <string name="gps_not_available">Salli GPS:n käyttö asetuksista</string>
     <string name="poi_filter_car_aid">Autotuki</string>
     <string name="layer_map_appearance">Muokkaa näyttöä</string>
@@ -412,7 +412,7 @@
     <string name="osmand_parking_time_limit">Aikarajoitettu pysäköinti</string>
     <string name="osmand_parking_time_no_limit">Aika rajoittamaton pysäköinti</string>
     <string name="osmand_parking_position_description">Pysäköidyn autosi sijainti. %1$s</string>
-    <string name="osmand_parking_position_description_add">Nouda auto kello:</string>
+    <string name="osmand_parking_position_description_add">Nouda ajoneuvo kello:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="asap">U-Käännös</string>
@@ -488,7 +488,7 @@
     <string name="accessibility_mode">Esteettömyys moodi</string>
     <string name="accessibility_default">Globaalien systeemiasetusten mukaan</string>
     <string name="zxing_barcode_scanner_not_found">ZXing viivakoodinlukusovellusta ei ole asennettuna. Etsitäänkö se Google Playstä?</string>
-    <string name="rendering_attr_roadColors_name">Tien väriteema</string>
+    <string name="rendering_attr_roadColors_name">Tien värimaailma</string>
     <string name="map_widget_show_destination_arrow">Näytä kohteen suunta</string>
     <string name="non_optimal_route_calculation">Laske mahdollisesti epäoptimaalinen reitti pitkille matkoille</string>
     <string name="offline_edition_descr">Käytä aina offline editointia</string>
@@ -836,7 +836,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="shared_string_recorded">Nauhoitettu</string>
     <string name="shared_string_record">Nauhoita</string>
     <string name="gpx_logging_no_data">Ei dataa</string>
-    <string name="rendering_attr_contourColorScheme_description">Korkeuskäyräviivojen väripaletti</string>
+    <string name="rendering_attr_contourColorScheme_description">Korkeuskäyräviivojen värimaailma</string>
     <string name="save_track_min_speed">Miniminopeuden kirjaaminen</string>
     <string name="save_track_min_speed_descr">Aseta miniminopeus kirjattavalle pisteelle.</string>
     <string name="save_track_min_distance">Liikkeen tunnistuksen kirjaus</string>
@@ -847,7 +847,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="christmas_desc_q">Näytä Joulupyhän KP:t\?</string>
     <string name="rendering_value_light_brown_name">Vaaleanruskea</string>
     <string name="rendering_value_dark_brown_name">Tummanruskea</string>
-    <string name="rendering_attr_contourColorScheme_name">Korkeuskäyrien väripaletti</string>
+    <string name="rendering_attr_contourColorScheme_name">Korkeuskäyrien värimaailma</string>
     <string name="rendering_attr_surfaceIntegrity_name">Tienpinnan eheys</string>
     <string name="search_hint">Kirjoita kaupunki, osoite, KP:n nimi</string>
     <string name="edit_filter">Muokkaa luokkia</string>
@@ -1728,7 +1728,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
 
 Paina ja pidä nähdäksesi kartalla</string>
     <string name="gpx_info_asc_altitude">Alas/Ylös: %1$s</string>
-    <string name="calculate_osmand_route_without_internet">Laske OsmAnd reitin segmentti ilman internettiä</string>
+    <string name="calculate_osmand_route_without_internet">OsmAnd reittisegmentin laskeminen ilman internettiä</string>
     <string name="gpx_option_calculate_first_last_segment">Laske OsmAnd reitti ensimmäiselle ja viimeiselle reitin segmentille</string>
     <string name="use_displayed_track_for_navigation">Käytetäänkö näytettävää jälkeä suunnistuksessa\?</string>
     <string name="keep_and_add_destination_point">Lisää myöhemmäksi päämääräksi</string>
@@ -2208,7 +2208,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="increase_search_radius">Kasvata haun laajuutta</string>
     <string name="nothing_found_descr">Muokkaa hakusanoja tai lisää haun laajuutta.</string>
     <string name="quick_action_showhide_osmbugs_descr">Tämän toimintonappulan tökkääminen näyttää tai piilottaa OSM-huomautukset kartalla.</string>
-    <string name="srtm_color_scheme">Väriskeema</string>
+    <string name="srtm_color_scheme">Värimaailma</string>
     <string name="routing_attr_allow_private_name">Salli yksityisalueet</string>
     <string name="routing_attr_allow_private_description">Salli pääsy yksityisalueille.</string>
     <string name="animate_my_location_desc">Ota käyttöön animoitu sijaintini kartan vieritys navigaation aikana.</string>
@@ -2571,6 +2571,47 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="week">Viikko</string>
     <string name="shared_string_bearing">Suuntima</string>
     <string name="plan_a_route">Suunnittele reitti</string>
-    <string name="plan_route_last_edited">Viimeksi muokattu</string>
+    <string name="plan_route_last_edited">Viimeksi muokatut</string>
     <string name="plan_route_create_new_route">Luo uusi reitti</string>
+    <string name="select_color">Valitse väri</string>
+    <string name="select_icon_profile_dialog_title">Valitse kuvake</string>
+    <string name="select_group">Valitse ryhmä</string>
+    <string name="add_description">Lisää kuvaus</string>
+    <string name="route_between_points_next_segment_button_desc">Vain seuraava segmentti lasketaan uudelleen valitulla profiililla.</string>
+    <string name="next_segment">Seuraava segmentti</string>
+    <string name="all_next_segments">Kaikki seuraavat segmentit</string>
+    <string name="previous_segment">Edellinen segmentti</string>
+    <string name="all_previous_segments">Kaikki edelliset segmentit</string>
+    <string name="only_selected_segment_recalc">Vain valittu segmentti lasketaan uudelleen käyttämällä valittua profiilia.</string>
+    <string name="all_next_segments_will_be_recalc">Kaikki seuraavat segmentit lasketaan uudelleen käyttämällä valittua profiilia.</string>
+    <string name="all_previous_segments_will_be_recalc">Kaikki edelliset segmentit lasketaan uudelleen käyttämällä valittua profiilia.</string>
+    <string name="plan_route_join_segments">Yhdistä segmentit</string>
+    <string name="plan_route_add_new_segment">Lisää uusi segmentti</string>
+    <string name="shared_string_octagon">Kahdeksankulmio</string>
+    <string name="shared_string_square">Neliö</string>
+    <string name="shared_string_circle">Ympyrä</string>
+    <string name="select_shape">Valitse muoto</string>
+    <string name="reset_to_default">Palauta oletusarvot</string>
+    <string name="profile_prefs_reset_successful">Kaikki profiiliasetukset palautettu oletusarvoihin.</string>
+    <string name="plugin_prefs_reset_successful">Kaikki laajennuksen asetukset palautettu oletusarvoihin.</string>
+    <string name="shared_string_app_default_w_val">Sovelluksen oletus (%s)</string>
+    <string name="reset_deafult_order">Palauta oletus kohteiden järjestys</string>
+    <string name="default_screen_timeout">Näytön oletusaikakatkaisu</string>
+    <string name="system_default_theme">Järjestelmän oletus</string>
+    <string name="reorder_profiles">Muokkaa profiililuetteloa</string>
+    <string name="edit_profiles">Muokkaa profiileja</string>
+    <string name="import_profile">Tuo profiili</string>
+    <string name="selected_profile">Valittu profiili</string>
+    <string name="icon_group_amenity">Mukavuus</string>
+    <string name="icon_group_travel">Matkailu</string>
+    <string name="icon_group_special">Erityinen</string>
+    <string name="icon_group_sport">Urheilu</string>
+    <string name="process_downloading_service">OsmAnd-latauspalvelu</string>
+    <string name="icon_group_service">Palvelu</string>
+    <string name="icon_group_emergency">Hätätapaus</string>
+    <string name="icon_group_transport">Liikenne</string>
+    <string name="quick_action_transport_show">Näytä julkinen liikenne</string>
+    <string name="quick_action_transport_hide">Piilota julkinen liikenne</string>
+    <string name="icon_group_symbols">Symbolit</string>
+    <string name="replace_point_descr">Korvaa toinen kohde tällä.</string>
 </resources>

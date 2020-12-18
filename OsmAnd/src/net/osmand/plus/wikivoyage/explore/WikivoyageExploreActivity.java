@@ -38,6 +38,7 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 import net.osmand.util.Algorithms;
 
@@ -45,7 +46,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WikivoyageExploreActivity extends TabActivity implements DownloadEvents, OnDialogFragmentResultListener {
+public class WikivoyageExploreActivity extends TabActivity implements DownloadEvents, OnDialogFragmentResultListener,
+		TravelLocalDataHelper.Listener {
 
 	private static final String TAB_SELECTED = "tab_selected";
 	private static final String ROUTE_ID_KEY = "route_id_key";
@@ -59,7 +61,6 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	protected List<WeakReference<Fragment>> fragments = new ArrayList<>();
 
 	private LockableViewPager viewPager;
-	private boolean updateNeeded;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -190,6 +191,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			setIntent(null);
 		}
 		getMyApplication().getDownloadThread().setUiActivity(this);
+		app.getTravelHelper().getBookmarksHelper().addListener(this);
 	}
 
 	protected void parseLaunchIntentLink(Uri data) {
@@ -211,6 +213,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	protected void onPause() {
 		super.onPause();
 		getMyApplication().getDownloadThread().resetUiActivity(this);
+		app.getTravelHelper().getBookmarksHelper().removeListener(this);
 	}
 
 	@Nullable
@@ -225,7 +228,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	@Nullable
-	private SavedArticlesTabFragment getSavedArticlesTabFragment() {
+	public SavedArticlesTabFragment getSavedArticlesTabFragment() {
 		for (WeakReference<Fragment> ref : fragments) {
 			Fragment f = ref.get();
 			if (f instanceof SavedArticlesTabFragment) {
@@ -319,16 +322,13 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		updateFragments();
 	}
 
-	private void updateFragments() {
+	public void updateFragments() {
 		ExploreTabFragment exploreTabFragment = getExploreTabFragment();
 		SavedArticlesTabFragment savedArticlesTabFragment = getSavedArticlesTabFragment();
 		if (exploreTabFragment != null && savedArticlesTabFragment != null
 				&& exploreTabFragment.isAdded() && savedArticlesTabFragment.isAdded()) {
 			exploreTabFragment.populateData();
 			savedArticlesTabFragment.savedArticlesUpdated();
-			updateNeeded = false;
-		} else {
-			updateNeeded = true;
 		}
 	}
 
@@ -353,9 +353,12 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	public void onTabFragmentResume(Fragment fragment) {
-		if (updateNeeded) {
-			updateFragments();
-		}
+		updateFragments();
+	}
+
+	@Override
+	public void savedArticlesUpdated() {
+		updateFragments();
 	}
 
 	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {

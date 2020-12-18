@@ -4016,4 +4016,6 @@
 \n• Podpora vlastných farieb pre obľúbené položky a sledovanie trasových bodov
 \n
 \n</string>
+    <string name="profile_type_osmand_string">Profil OsmAnd</string>
+    <string name="profile_type_user_string">Profil používateľa</string>
 </resources>

@@ -73,13 +73,16 @@ import net.osmand.aidlapi.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidlapi.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidlapi.navdrawer.NavDrawerItem;
 import net.osmand.aidlapi.navdrawer.SetNavDrawerItemsParams;
+import net.osmand.aidlapi.navigation.ABlockedRoad;
 import net.osmand.aidlapi.navigation.ANavigationUpdateParams;
 import net.osmand.aidlapi.navigation.ANavigationVoiceRouterMessageParams;
+import net.osmand.aidlapi.navigation.AddBlockedRoadParams;
 import net.osmand.aidlapi.navigation.MuteNavigationParams;
 import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.aidlapi.navigation.NavigateParams;
 import net.osmand.aidlapi.navigation.NavigateSearchParams;
 import net.osmand.aidlapi.navigation.PauseNavigationParams;
+import net.osmand.aidlapi.navigation.RemoveBlockedRoadParams;
 import net.osmand.aidlapi.navigation.ResumeNavigationParams;
 import net.osmand.aidlapi.navigation.StopNavigationParams;
 import net.osmand.aidlapi.navigation.UnmuteNavigationParams;
@@ -693,7 +696,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				return params != null && api != null && api.navigate(
 						params.getStartName(), params.getStartLat(), params.getStartLon(),
 						params.getDestName(), params.getDestLat(), params.getDestLon(),
-						params.getProfile(), params.isForce());
+						params.getProfile(), params.isForce(), params.isNeedLocationPermission());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -704,7 +707,8 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		public boolean navigateGpx(NavigateGpxParams params) {
 			try {
 				OsmandAidlApi api = getApi("navigateGpx");
-				return params != null && api != null && api.navigateGpx(params.getData(), params.getUri(), params.isForce());
+				return params != null && api != null && api.navigateGpx(params.getData(), params.getUri(),
+						params.isForce(), params.isNeedLocationPermission());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -814,7 +818,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				return params != null && api != null && api.navigateSearch(
 						params.getStartName(), params.getStartLat(), params.getStartLon(),
 						params.getSearchQuery(), params.getSearchLat(), params.getSearchLon(),
-						params.getProfile(), params.isForce());
+						params.getProfile(), params.isForce(), params.isNeedLocationPermission());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1395,6 +1399,49 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				handleException(e);
 				return false;
 			}
+		}
+
+		@Override
+		public boolean getBlockedRoads(List<ABlockedRoad> blockedRoads) {
+			try {
+				OsmandAidlApi api = getApi("getBlockedRoads");
+				return api != null && api.getBlockedRoads(blockedRoads);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean addRoadBlock(AddBlockedRoadParams params) {
+			try {
+				OsmandAidlApi api = getApi("addRoadBlock");
+				if (params != null && api != null) {
+					ABlockedRoad road = params.getBlockedRoad();
+					if (road != null) {
+						return api.addRoadBlock(road);
+					}
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return false;
+		}
+
+		@Override
+		public boolean removeRoadBlock(RemoveBlockedRoadParams params) {
+			try {
+				OsmandAidlApi api = getApi("removeRoadBlock");
+				if (params != null && api != null) {
+					ABlockedRoad road = params.getBlockedRoad();
+					if (road != null) {
+						return api.removeRoadBlock(road);
+					}
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return false;
 		}
 	};
 

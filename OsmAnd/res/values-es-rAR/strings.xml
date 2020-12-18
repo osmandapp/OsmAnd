@@ -4023,4 +4023,5 @@
 \n</string>
     <string name="profile_type_osmand_string">Perfil de OsmAnd</string>
     <string name="profile_type_user_string">Perfil de usuario</string>
+    <string name="reverse_all_points">Invertir todos los puntos</string>
 </resources>
