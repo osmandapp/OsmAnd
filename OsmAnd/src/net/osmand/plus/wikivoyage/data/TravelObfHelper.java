@@ -12,6 +12,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -28,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.*;
-import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 
 public class TravelObfHelper implements TravelHelper {
 
@@ -67,33 +67,13 @@ public class TravelObfHelper implements TravelHelper {
 	public List<TravelArticle> loadPopularArticles() {
 		String language = app.getLanguage();
 		popularArticles.clear();
-		final List<Amenity> amenities = new ArrayList<>();
+		List<Amenity> amenities;
 		for (BinaryMapIndexReader travelBookReader : getTravelBookReaders()) {
 			try {
-				if (travelBookReader == null) {
-					popularArticles = new ArrayList<>();
-					return popularArticles;
-				}
 				final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
-				BinaryMapIndexReader.SearchRequest<Amenity> req =
-						BinaryMapIndexReader.buildSearchPoiRequest(location, SEARCH_RADIUS, -1,
-								ACCEPT_ALL_POI_TYPE_FILTER,
-								new ResultMatcher<Amenity>() {
-									@Override
-									public boolean publish(Amenity amenity) {
-										if (amenity.getSubType().equals(ROUTE_ARTICLE)) {
-											amenities.add(amenity);
-										}
-										return false;
-									}
-
-									@Override
-									public boolean isCancelled() {
-										return false;
-									}
-								});
-				travelBookReader.searchPoi(req);
-
+				BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+						location, SEARCH_RADIUS, -1, getSearchRouteArticleFilter(), null);
+				amenities = travelBookReader.searchPoi(req);
 				if (amenities.size() > 0) {
 					for (Amenity a : amenities) {
 						if (!Algorithms.isEmpty(a.getName(language))) {
@@ -116,12 +96,25 @@ public class TravelObfHelper implements TravelHelper {
 						}
 					});
 				}
-
 			} catch (Exception e) {
 				LOG.error(e.getMessage());
 			}
 		}
 		return popularArticles;
+	}
+
+	BinaryMapIndexReader.SearchPoiTypeFilter getSearchRouteArticleFilter() {
+		return new BinaryMapIndexReader.SearchPoiTypeFilter() {
+			@Override
+			public boolean accept(PoiCategory type, String subcategory) {
+				return subcategory.equals(ROUTE_ARTICLE);
+			}
+
+			@Override
+			public boolean isEmpty() {
+				return false;
+			}
+		};
 	}
 
 	private TravelArticle readArticle(Amenity amenity, String lang) {
@@ -191,12 +184,11 @@ public class TravelObfHelper implements TravelHelper {
 				int top = 0;
 				int bottom = Integer.MAX_VALUE;
 				BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
-						left, right, top, bottom, -1, ACCEPT_ALL_POI_TYPE_FILTER,
+						left, right, top, bottom, -1, getSearchRouteArticleFilter(),
 						new ResultMatcher<Amenity>() {
 							@Override
 							public boolean publish(Amenity amenity) {
-								if (amenity.getSubType().equals(ROUTE_ARTICLE)
-										&& getRouteId(amenity).equals(routeId)) {
+								if (getRouteId(amenity).equals(routeId)) {
 									amenities.add(amenity);
 								}
 								return false;
@@ -208,7 +200,7 @@ public class TravelObfHelper implements TravelHelper {
 							}
 						});
 
-				travelBookReader.searchPoiByName(req);
+				travelBookReader.searchPoi(req);
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
