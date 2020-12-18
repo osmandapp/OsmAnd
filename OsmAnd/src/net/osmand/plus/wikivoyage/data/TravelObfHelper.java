@@ -76,7 +76,11 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		String baseLng = application.getLanguage();
+		final String ROUTE_ARTICLE = "route_article";
 		for (Amenity obj : searchObjects) {
+			if (!obj.getSubType().equals(ROUTE_ARTICLE)) {
+				continue;
+			}
 			WikivoyageSearchResult r = new WikivoyageSearchResult();
 			TravelArticle article = readArticle(obj, baseLng);
 			r.articleTitles = new ArrayList<>(Collections.singletonList(article.title));
