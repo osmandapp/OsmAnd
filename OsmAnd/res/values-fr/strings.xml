@@ -3852,7 +3852,7 @@
     <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
     <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
     <string name="save_global_track_interval_descr">Définit la fréquence d’enregistrement des points du parcours (activable depuis le gadget \"Enregistrement\" sur la carte).</string>
-    <string name="disable_recording_once_app_killed_descrp">Suspend l\'enregistrement du parcours lorsque l\'application est arrêtée via Applications récentes ; les indications OsmAnd ne seront plus affichées dans la barre de notifications.</string>
+    <string name="disable_recording_once_app_killed_descrp">L\'enregistrement de l\'itinéraire sera suspendu si l\'application est arrêtée via Applications récentes (les indications OsmAnd ne seront plus affichées dans la barre de notifications).</string>
     <string name="all_next_segments_will_be_recalc">Tous les segments suivants seront recalculés avec le profil sélectionné.</string>
     <string name="all_previous_segments_will_be_recalc">Tous les segments précédents seront recalculés avec le profil sélectionné.</string>
     <string name="all_next_segments">Tous les segments suivants</string>
@@ -3885,7 +3885,7 @@
     <string name="sort_name_ascending">Nom : A – Z</string>
     <string name="start_finish_icons">Icônes de départ et d\'arrivée</string>
     <string name="contour_lines_thanks">Merci pour votre achat de \'Courbes de niveaux\'</string>
-    <string name="osm_live_payment_desc_hw">Abonnement facturé pour chaque période sélectionnée. Annulation possible à tout moment sur AppGallery.</string>
+    <string name="osm_live_payment_desc_hw">L\'abonnement est facturé pour la période sélectionnée. Annulation possible à tout moment sur AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Éviter les trottoirs</string>
     <string name="routing_attr_avoid_footways_name">Éviter les trottoirs</string>
     <string name="development">Développement</string>
