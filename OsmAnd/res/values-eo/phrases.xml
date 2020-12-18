@@ -3887,4 +3887,6 @@
     <string name="poi_water_source_tap">krano</string>
     <string name="poi_water_source_water_works">akvokondukilo</string>
     <string name="poi_water_source_tube_well">puto tuba (abisena)</string>
+    <string name="poi_weightbridge">Pezilo por aŭtomobiloj</string>
+    <string name="poi_ranger_station">Oficejo de naturrezervejo</string>
 </resources>
