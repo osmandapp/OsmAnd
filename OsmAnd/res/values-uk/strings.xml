@@ -4014,4 +4014,5 @@
 \n</string>
     <string name="profile_type_osmand_string">Профіль OsmAnd</string>
     <string name="profile_type_user_string">Профіль користувача</string>
+    <string name="reverse_all_points">Повернути назад всі точки</string>
 </resources>
