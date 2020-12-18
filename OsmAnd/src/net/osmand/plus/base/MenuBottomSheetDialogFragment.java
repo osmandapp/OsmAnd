@@ -3,11 +3,14 @@ package net.osmand.plus.base;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -490,13 +493,18 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	protected void setShadowOnScrollableView() {
+		Display display = getActivity().getWindowManager().getDefaultDisplay();
 		ScrollView scrollView = getView().findViewById(R.id.scroll_view);
-		boolean isScrollable = scrollView.getChildAt(0).getHeight() >= scrollView.getHeight();;
-		if (isScrollable) {
-			drawTopShadow(false);
-			scrollView.getChildAt(0).setPadding(0,8,0,0);
-		} else {
-			drawTopShadow(true);
-		}
+		Rect r = new Rect();
+		View rootView = getActivity().getWindow().getDecorView();
+		rootView.getWindowVisibleDisplayFrame(r);
+		Point size = new Point();
+		display.getSize(size);
+		int heightScreen = size.y;
+		int scrollViewHeight = scrollView.getChildAt(0).getHeight();
+		int screenHeight = rootView.getRootView().getHeight();
+		int heightDifference = screenHeight - (r.bottom - r.top);
+		boolean isScrollable = scrollViewHeight + heightDifference > heightScreen;
+		drawTopShadow(!isScrollable);
 	}
 }
