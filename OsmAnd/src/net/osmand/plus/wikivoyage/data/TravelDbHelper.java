@@ -99,7 +99,7 @@ public class TravelDbHelper implements TravelHelper {
 	private final OsmandApplication application;
 
 	private TravelLocalDataHelper localDataHelper;
-	private Collator collator;
+	private final Collator collator;
 
 	private SQLiteConnection connection = null;
 
@@ -382,7 +382,7 @@ public class TravelDbHelper implements TravelHelper {
 		return res;
 	}
 
-	private void sortSearchResults(final String searchQuery, List<WikivoyageSearchResult> list) {
+	private void sortSearchResults(@NonNull final String searchQuery, @NonNull List<WikivoyageSearchResult> list) {
 		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 			@Override
 			public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
