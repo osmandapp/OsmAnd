@@ -562,7 +562,7 @@
     <string name="voices">Sprachansagen</string>
     <string name="voice">Sprachansage</string>
     <string name="no_vector_map_loaded">Vektorkarten wurden nicht geladen</string>
-    <string name="error_reading_gpx">GPX-Daten konnten nicht gelesen werden</string>
+    <string name="error_reading_gpx">GPX-Daten konnten nicht gelesen werden.</string>
     <string name="vector_data">Offline-Vektorkarten</string>
     <string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
     <string name="poi_context_menu_modify">Bearbeite POI</string>
@@ -2170,7 +2170,7 @@
     <string name="quick_action_map_overlay_switch">Karten-Overlay wurde in „%s“ geändert.</string>
     <string name="quick_action_map_underlay_switch">Karten-Underlay wurde in „%s“ geändert.</string>
     <string name="navigate_point_olc_info_invalid">Ungültiger OLC
-</string>
+\n</string>
     <string name="navigate_point_olc_info_short">Kurzer OLC
 \nBitte geben Sie einen vollständigen Code ein</string>
     <string name="navigate_point_olc_info_area">Gültiger vollständiger OLC
@@ -4022,4 +4022,5 @@
     <string name="plan_route_add_new_segment">Neues Segment hinzufügen</string>
     <string name="profile_type_osmand_string">OsmAnd-Profil</string>
     <string name="profile_type_user_string">Benutzerprofil</string>
+    <string name="reverse_all_points">Alle Punkte umkehren</string>
 </resources>
