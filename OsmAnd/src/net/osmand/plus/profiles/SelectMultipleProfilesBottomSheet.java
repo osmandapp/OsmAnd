@@ -19,7 +19,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.fragments.NavigationFragment;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
 import java.util.ArrayList;
@@ -54,7 +54,8 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 
 	private void refreshProfiles(OsmandApplication app) {
 		profiles.clear();
-		profiles.addAll(NavigationFragment.getBaseProfiles(app, true));
+		List<ApplicationMode> appModes = ApplicationMode.allPossibleValues();
+		profiles.addAll(ProfileDataObject.getDataObjects(app, appModes));
 		for (ProfileDataObject profile : profiles) {
 			String key = profile.getStringKey();
 			profile.setSelected(selectedProfiles.contains(key));

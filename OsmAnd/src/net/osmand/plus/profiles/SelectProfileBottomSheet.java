@@ -38,7 +38,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.fragments.NavigationFragment;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.router.RoutingConfiguration;
 
@@ -332,11 +331,12 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 		profiles.clear();
 		switch (dialogMode) {
 			case BASE_PROFILE:
-				profiles.addAll(NavigationFragment.getBaseProfiles(app));
+				List<ApplicationMode> appModes = ApplicationMode.values(app, false, ApplicationMode.DEFAULT);
+				profiles.addAll(ProfileDataObject.getDataObjects(app, appModes));
 				break;
 
 			case NAVIGATION_PROFILE:
-				profiles.addAll(NavigationFragment.getSortedRoutingProfiles(app));
+				profiles.addAll(RoutingProfileDataObject.getSortedRoutingProfiles(app));
 				break;
 
 			case DEFAULT_PROFILE:

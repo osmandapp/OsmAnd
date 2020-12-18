@@ -117,11 +117,9 @@ public class ApplicationMode {
 			.description(R.string.base_profile_descr_ski).reg();
 
 	public static List<ApplicationMode> values(OsmandApplication app,
-	                                           boolean onlyActiveValues,
+	                                           boolean onlyActive,
 	                                           ApplicationMode ... exclude) {
-		List<ApplicationMode> appModes =
-				new ArrayList<>(onlyActiveValues ? values(app) : allPossibleValues());
-
+		List<ApplicationMode> appModes = new ArrayList<>(onlyActive ? values(app) : allPossibleValues());
 		if (exclude != null && exclude.length > 0) {
 			for (ApplicationMode m : exclude) {
 				appModes.remove(m);
