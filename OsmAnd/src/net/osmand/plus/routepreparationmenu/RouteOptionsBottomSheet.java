@@ -101,7 +101,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		DIRECTIONS(),
 		PLAN_ROUTE(MuteSoundRoutingParameter.class,
 				RouteSimulationItem.class,
-				GpxLocalRoutingParameter.class);
+				GpxLocalRoutingParameter.class,
+				ShowAlongTheRouteItem.class);
 
 		private final Class<? extends LocalRoutingParameter>[] excludeParameters;
 
