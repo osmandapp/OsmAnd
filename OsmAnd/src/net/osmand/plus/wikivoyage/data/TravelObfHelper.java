@@ -8,6 +8,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -127,19 +128,26 @@ public class TravelObfHelper implements TravelHelper {
 
 	private TravelArticle readArticle(Amenity amenity, String lang) {
 		TravelArticle res = new TravelArticle();
-		res.title = amenity.getName(lang).equals("") ? amenity.getName() : amenity.getName(lang);
+		res.title = Algorithms.isEmpty(amenity.getName(lang)) ? amenity.getName() : amenity.getName(lang);
 		res.content = amenity.getDescription(lang);
-		res.isPartOf = amenity.getTagContent(Amenity.IS_PART, lang) == null ? "" : amenity.getTagContent(Amenity.IS_PART, lang);
+		res.isPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_PART, lang));
 		res.lat = amenity.getLocation().getLatitude();
 		res.lon = amenity.getLocation().getLongitude();
-		res.imageTitle = amenity.getTagContent(Amenity.IMAGE_TITLE, lang) == null ? "" : amenity.getTagContent(Amenity.IMAGE_TITLE, lang);
-		String routeId = amenity.getAdditionalInfo("route_id");
-		res.routeId = routeId == null || routeId.equals("") ? "" : routeId;
+		res.imageTitle = emptyIfNull(amenity.getTagContent(Amenity.IMAGE_TITLE, lang));
+		res.routeId = getRouteId(amenity);
 		res.originalId = amenity.getId();
 		res.lang = lang;
-		res.contentsJson = amenity.getTagContent(Amenity.CONTENT_JSON, lang) == null ? "" : amenity.getTagContent(Amenity.CONTENT_JSON, lang);
-		res.aggregatedPartOf = amenity.getTagContent(Amenity.IS_AGGR_PART, lang) == null ? "" : amenity.getTagContent(Amenity.IS_AGGR_PART, lang);
+		res.contentsJson = emptyIfNull(amenity.getTagContent(Amenity.CONTENT_JSON, lang));
+		res.aggregatedPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_AGGR_PART, lang));
 		return res;
+	}
+
+	private String emptyIfNull(String text) {
+		return text == null ? "" : text;
+	}
+
+	private String getRouteId(Amenity amenity) {
+		return amenity.getTagContent(Amenity.ROUTE_ID, null);
 	}
 
 	@NonNull
