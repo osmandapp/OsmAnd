@@ -4018,4 +4018,5 @@
 \n</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil používateľa</string>
+    <string name="reverse_all_points">Otočiť všetky body</string>
 </resources>
