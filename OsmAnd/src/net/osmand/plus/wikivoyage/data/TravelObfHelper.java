@@ -169,9 +169,12 @@ public class TravelObfHelper implements TravelHelper {
 		TravelArticle article = cachedArticles.get(routeId);
 		if (article != null) {
 			return article;
-		} else {
+		}
+		article = getArticleByIdFromTravelBooks(routeId, lang);
+		if (article != null) {
 			return getArticleByIdFromTravelBooks(routeId, lang);
 		}
+		return localDataHelper.getSavedArticle(routeId);
 	}
 
 	public TravelArticle getArticleByIdFromTravelBooks(final String routeId, final String lang) {
