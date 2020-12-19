@@ -3610,7 +3610,7 @@
     <string name="poi_vehicle_military">Aðgangur farartækja: hernaðarlegur</string>
     <string name="poi_vehicle_delivery">Aðgangur farartækja: vöruafhending</string>
     <string name="poi_vehicle_forestry">Aðgangur farartækja: skógrækt</string>
-    <string name="poi_motorcar_yes">Aðgangur bifreiða:</string>
+    <string name="poi_motorcar_yes">Aðgangur bifreiða: já</string>
     <string name="poi_motorcar_private">Aðgangur bifreiða: einka</string>
     <string name="poi_motorcar_no">Aðgangur bifreiða: nei</string>
     <string name="poi_motorcar_destination">Aðgangur bifreiða: áfangastaður</string>
@@ -3868,4 +3868,19 @@
     <string name="poi_consulate_consular_agency">Ræðismannastofnun</string>
     <string name="poi_embassy_branch_embassy">Útibú</string>
     <string name="poi_consulate_consular_office">Ræðisskrifstofa</string>
+    <string name="poi_waste_transfer_station">Millifærslustöð fyrir úrgang</string>
+    <string name="poi_water_source_powered_pump">Aflknúin dæla</string>
+    <string name="poi_water_source_water_tank">Vatnstankur</string>
+    <string name="poi_water_source_tap">Vatnshani</string>
+    <string name="poi_health_specialty_vaccination_yes">Bólusetning</string>
+    <string name="poi_ranger_station">Landvarðastöð</string>
+    <string name="poi_water_source_tube_well">Pípubrunnur</string>
+    <string name="poi_water_source_water_works">Vatnsvinnsla</string>
+    <string name="poi_vaccination_covid19">Bólusetning: COVID19</string>
+    <string name="poi_water_source_well">Brunnur</string>
+    <string name="poi_weightbridge">Vogarbrú</string>
+    <string name="poi_water_source_lake">Stöðuvatn</string>
+    <string name="poi_lavoir">Þvottaþró (þvottaaðstaða)</string>
+    <string name="poi_water_source_river">Á</string>
+    <string name="poi_lifeguard_base">Bækistöð öryggisvarða</string>
 </resources>
