@@ -4013,4 +4013,5 @@
 \n</string>
     <string name="profile_type_osmand_string">OsmAnd 設定檔</string>
     <string name="profile_type_user_string">使用者設定檔</string>
+    <string name="reverse_all_points">反轉所有點</string>
 </resources>

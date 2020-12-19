@@ -4013,4 +4013,5 @@
     <string name="plan_route_add_new_segment">Adicionar novo segmento</string>
     <string name="profile_type_osmand_string">Perfil do OsmAnd</string>
     <string name="profile_type_user_string">Perfil de usuário</string>
+    <string name="reverse_all_points">Reverter todos os pontos</string>
 </resources>
