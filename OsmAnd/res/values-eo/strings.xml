@@ -4017,4 +4017,5 @@
 \n</string>
     <string name="profile_type_osmand_string">OsmAnd‑profilo</string>
     <string name="profile_type_user_string">Profilo de uzanto</string>
+    <string name="reverse_all_points">Inversigi ĉiujn punktojn</string>
 </resources>
