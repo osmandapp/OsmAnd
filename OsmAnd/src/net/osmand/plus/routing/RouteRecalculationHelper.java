@@ -10,11 +10,19 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteCalculationProgress;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
-class RouteRecalculationThreadHelper {
+class RouteRecalculationHelper {
 
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2 * 60 * 1000;
@@ -22,17 +30,19 @@ class RouteRecalculationThreadHelper {
 	private final OsmandApplication app;
 	private final RoutingHelper routingHelper;
 
-	private Thread currentRunningJob;
+	private final ExecutorService executor = new RouteRecalculationExecutor();
+	private final Map<Future<?>, RouteRecalculationTask> tasksMap = new LinkedHashMap<>();
+	private RouteRecalculationTask lastTask;
+
 	private long lastTimeEvaluatedRoute = 0;
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
 	private long recalculateCountInInterval = 0;
 	private int evalWaitInterval = 0;
-	private boolean waitingNextJob;
 
 	private RouteCalculationProgressCallback progressRoute;
 
-	RouteRecalculationThreadHelper(@NonNull RoutingHelper routingHelper) {
+	RouteRecalculationHelper(@NonNull RoutingHelper routingHelper) {
 		this.routingHelper = routingHelper;
 		this.app = routingHelper.getApplication();
 	}
@@ -50,7 +60,14 @@ class RouteRecalculationThreadHelper {
 	}
 
 	boolean isRouteBeingCalculated() {
-		return currentRunningJob instanceof RouteRecalculationThread || waitingNextJob;
+		synchronized (routingHelper) {
+			for (Future<?> future : tasksMap.keySet()) {
+				if (!future.isDone()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	void resetEvalWaitInterval() {
@@ -58,21 +75,28 @@ class RouteRecalculationThreadHelper {
 	}
 
 	void stopCalculation() {
-		Thread job = currentRunningJob;
-		if (job instanceof RouteRecalculationThread) {
-			((RouteRecalculationThread) job).stopCalculation();
+		synchronized (routingHelper) {
+			for (Entry<Future<?>, RouteRecalculationTask> taskFuture : tasksMap.entrySet()) {
+				taskFuture.getValue().stopCalculation();
+				taskFuture.getKey().cancel(false);
+			}
 		}
 	}
 
-	void stopCalculationIfParamsChanged() {
-		Thread job = currentRunningJob;
-		if (job instanceof RouteRecalculationThread) {
-			RouteRecalculationThread thread = (RouteRecalculationThread) job;
-			if (!thread.isParamsChanged()) {
-				thread.stopCalculation();
+	void stopCalculationIfParamsNotChanged() {
+		synchronized (routingHelper) {
+			boolean hasPendingTasks = tasksMap.isEmpty();
+			for (Entry<Future<?>, RouteRecalculationTask> taskFuture : tasksMap.entrySet()) {
+				RouteRecalculationTask task = taskFuture.getValue();
+				if (!task.isParamsChanged()) {
+					taskFuture.getKey().cancel(false);
+					task.stopCalculation();
+				}
 			}
-			if (isFollowingMode()) {
-				getVoiceRouter().announceBackOnRoute();
+			if (hasPendingTasks) {
+				if (isFollowingMode()) {
+					getVoiceRouter().announceBackOnRoute();
+				}
 			}
 		}
 	}
@@ -130,8 +154,6 @@ class RouteRecalculationThreadHelper {
 
 				}
 			}
-
-
 			// trigger voice prompt only if new route is in forward direction
 			// If route is in wrong direction after one more setLocation it will be recalculated
 			if (!wrongMovementDirection || newRoute) {
@@ -144,18 +166,15 @@ class RouteRecalculationThreadHelper {
 
 	void startRouteCalculationThread(RouteCalculationParams params, boolean paramsChanged, boolean updateProgress) {
 		synchronized (routingHelper) {
-			final Thread prevRunningJob = currentRunningJob;
 			getSettings().LAST_ROUTE_APPLICATION_MODE.set(getAppMode());
-			RouteRecalculationThread newThread = new RouteRecalculationThread("Calculating route", params, paramsChanged);
-			currentRunningJob = newThread;
+			RouteRecalculationTask newTask = new RouteRecalculationTask(this, params, paramsChanged);
+			lastTask = newTask;
 			startProgress(params);
 			if (updateProgress) {
 				updateProgress(params);
 			}
-			if (prevRunningJob != null) {
-				newThread.setWaitPrevJob(prevRunningJob);
-			}
-			currentRunningJob.start();
+			Future<?> future = executor.submit(newTask);
+			tasksMap.put(future, newTask);
 		}
 	}
 
@@ -165,7 +184,7 @@ class RouteRecalculationThreadHelper {
 			return;
 		}
 		// do not evaluate very often
-		if ((currentRunningJob == null && System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval)
+		if ((!isRouteBeingCalculated() && System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval)
 				|| paramsChanged || !onlyStartPointChanged) {
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute < RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL) {
 				recalculateCountInInterval++;
@@ -234,11 +253,7 @@ class RouteRecalculationThreadHelper {
 				public void run() {
 					RouteCalculationProgress calculationProgress = params.calculationProgress;
 					if (isRouteBeingCalculated()) {
-						Thread t = currentRunningJob;
-						if (t instanceof RouteRecalculationThread && ((RouteRecalculationThread) t).params != params) {
-							// different calculation started
-							return;
-						} else {
+						if (lastTask != null && lastTask.params == params) {
 							progressRoute.updateProgress((int) calculationProgress.getLinearProgress());
 							if (calculationProgress.requestPrivateAccessRouting) {
 								progressRoute.requestPrivateAccessRouting();
@@ -268,23 +283,21 @@ class RouteRecalculationThreadHelper {
 		}
 	}
 
-	private void showMessage(final String msg) {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				app.showToastMessage(msg);
-			}
-		});
-	}
+	private static class RouteRecalculationTask implements Runnable {
 
-	class RouteRecalculationThread extends Thread {
-
+		private final RouteRecalculationHelper routingThreadHelper;
+		private final RoutingHelper routingHelper;
 		private final RouteCalculationParams params;
 		private final boolean paramsChanged;
-		private Thread prevRunningJob;
 
-		public RouteRecalculationThread(String name, RouteCalculationParams params, boolean paramsChanged) {
-			super(name);
+		String routeCalcError;
+		String routeCalcErrorShort;
+		int evalWaitInterval = 0;
+
+		public RouteRecalculationTask(@NonNull RouteRecalculationHelper routingThreadHelper,
+									  @NonNull RouteCalculationParams params, boolean paramsChanged) {
+			this.routingThreadHelper = routingThreadHelper;
+			this.routingHelper = routingThreadHelper.routingHelper;
 			this.params = params;
 			this.paramsChanged = paramsChanged;
 			if (params.calculationProgress == null) {
@@ -300,39 +313,26 @@ class RouteRecalculationThreadHelper {
 			params.calculationProgress.isCancelled = true;
 		}
 
+		private OsmandSettings getSettings() {
+			return routingHelper.getSettings();
+		}
+
+		private void showMessage(final String msg) {
+			final OsmandApplication app = routingHelper.getApplication();
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					app.showToastMessage(msg);
+				}
+			});
+		}
 
 		@Override
 		public void run() {
-			synchronized (routingHelper) {
-				routingHelper.resetRouteWasFinished();
-				currentRunningJob = this;
-				waitingNextJob = prevRunningJob != null;
-			}
-			if (prevRunningJob != null) {
-				while (prevRunningJob.isAlive()) {
-					try {
-						Thread.sleep(50);
-					} catch (InterruptedException e) {
-						// ignore
-					}
-				}
-				synchronized (routingHelper) {
-					if (params.calculationProgress.isCancelled) {
-						return;
-					}
-					currentRunningJob = this;
-					waitingNextJob = false;
-				}
-			}
-			lastRouteCalcError = null;
-			lastRouteCalcErrorShort = null;
 			RouteProvider provider = routingHelper.getProvider();
 			OsmandSettings settings = getSettings();
 			RouteCalculationResult res = provider.calculateRouteImpl(params);
 			if (params.calculationProgress.isCancelled) {
-				synchronized (routingHelper) {
-					currentRunningJob = null;
-				}
 				return;
 			}
 			final boolean onlineSourceWithoutInternet = !res.isCalculated() &&
@@ -353,37 +353,54 @@ class RouteRecalculationThreadHelper {
 						params.resultListener.onRouteCalculated(res);
 					}
 				} else {
-					evalWaitInterval = Math.max(3000, evalWaitInterval * 3 / 2); // for Issue #3899
+					evalWaitInterval = Math.max(3000, routingThreadHelper.evalWaitInterval * 3 / 2); // for Issue #3899
 					evalWaitInterval = Math.min(evalWaitInterval, 120000);
 				}
-				currentRunningJob = null;
 			}
+			OsmandApplication app = routingHelper.getApplication();
 			if (res.isCalculated()) {
 				if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
-					setNewRoute(prev, res, params.start);
+					routingThreadHelper.setNewRoute(prev, res, params.start);
 				}
 			} else if (onlineSourceWithoutInternet) {
-				lastRouteCalcError = app.getString(R.string.error_calculating_route)
+				routeCalcError = app.getString(R.string.error_calculating_route)
 						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route);
-				lastRouteCalcErrorShort = app.getString(R.string.error_calculating_route);
-				showMessage(lastRouteCalcError); //$NON-NLS-1$
+				routeCalcErrorShort = app.getString(R.string.error_calculating_route);
+				showMessage(routeCalcError);
 			} else {
 				if (res.getErrorMessage() != null) {
-					lastRouteCalcError = app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage();
-					lastRouteCalcErrorShort = app.getString(R.string.error_calculating_route);
-					showMessage(lastRouteCalcError); //$NON-NLS-1$
+					routeCalcError = app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage();
+					routeCalcErrorShort = app.getString(R.string.error_calculating_route);
 				} else {
-					lastRouteCalcError = app.getString(R.string.empty_route_calculated);
-					lastRouteCalcErrorShort = app.getString(R.string.empty_route_calculated);
-					showMessage(lastRouteCalcError);
+					routeCalcError = app.getString(R.string.empty_route_calculated);
+					routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
 				}
+				showMessage(routeCalcError);
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
-			lastTimeEvaluatedRoute = System.currentTimeMillis();
+		}
+	}
+
+	private class RouteRecalculationExecutor extends ThreadPoolExecutor {
+
+		public RouteRecalculationExecutor() {
+			super(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 		}
 
-		public void setWaitPrevJob(Thread prevRunningJob) {
-			this.prevRunningJob = prevRunningJob;
+		protected void afterExecute(Runnable r, Throwable t) {
+			super.afterExecute(r, t);
+			RouteRecalculationTask task = null;
+			synchronized (routingHelper) {
+				if (r instanceof Future<?>) {
+					task = tasksMap.remove(r);
+				}
+			}
+			if (t == null && task != null) {
+				evalWaitInterval = task.evalWaitInterval;
+				lastRouteCalcError = task.routeCalcError;
+				lastRouteCalcErrorShort = task.routeCalcErrorShort;
+			}
+			lastTimeEvaluatedRoute = System.currentTimeMillis();
 		}
 	}
 }

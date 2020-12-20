@@ -54,7 +54,7 @@ public class RoutingHelper {
 	private OsmandSettings settings;
 	private final RouteProvider provider;
 	private final VoiceRouter voiceRouter;
-	private final RouteRecalculationThreadHelper routeRecalculationHelper;
+	private final RouteRecalculationHelper routeRecalculationHelper;
 	private final TransportRoutingHelper transportRoutingHelper;
 
 	private boolean isFollowingMode = false;
@@ -94,7 +94,7 @@ public class RoutingHelper {
 		settings = context.getSettings();
 		voiceRouter = new VoiceRouter(this);
 		provider = new RouteProvider();
-		routeRecalculationHelper = new RouteRecalculationThreadHelper(this);
+		routeRecalculationHelper = new RouteRecalculationHelper(this);
 		transportRoutingHelper = context.getTransportRoutingHelper();
 		transportRoutingHelper.setRoutingHelper(this);
 		setAppMode(settings.APPLICATION_MODE.get());
@@ -505,7 +505,7 @@ public class RoutingHelper {
 			routeRecalculationHelper.recalculateRouteInBackground(currentLocation, finalLocation, intermediatePoints, currentGPXRoute,
 					previousRoute.isCalculated() ? previousRoute : null, false, !targetPointsChanged);
 		} else {
-			routeRecalculationHelper.stopCalculationIfParamsChanged();
+			routeRecalculationHelper.stopCalculationIfParamsNotChanged();
 		}
 
 		double projectDist = mode != null && mode.hasFastSpeed() ? posTolerance : posTolerance / 2;
