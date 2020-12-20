@@ -930,7 +930,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				if (isFollowTrackMode()) {
 					mapActivity.getMapActions().setGPXRouteParams(gpx);
 					app.getTargetPointsHelper().updateRouteAndRefresh(true);
-					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+					app.getRoutingHelper().onSettingsChanged(true);
 				} else {
 					mapActivity.getMapActions().stopNavigationActionConfirm(null , new Runnable() {
 						@Override

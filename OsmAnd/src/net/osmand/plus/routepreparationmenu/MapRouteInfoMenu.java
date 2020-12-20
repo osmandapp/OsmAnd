@@ -54,6 +54,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -862,7 +863,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 			routingHelper.setAppMode(next);
 			app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false, true);
-			routingHelper.recalculateRouteDueToSettingsChange();
+			routingHelper.onSettingsChanged(true);
 		}
 	}
 
@@ -1279,7 +1280,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					if (mapActivity != null) {
 						OsmandApplication app = mapActivity.getMyApplication();
 						app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoadInfo);
-						app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+						app.getRoutingHelper().onSettingsChanged(true);
 						if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && getAvoidedParameters(app).isEmpty()) {
 							mode.parameters.remove(parameter);
 						}
@@ -1312,7 +1313,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 					preference.setModeValue(app.getRoutingHelper().getAppMode(), false);
 					avoidedParameters.remove(routingParameter);
-					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+					app.getRoutingHelper().onSettingsChanged(true);
 					if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && avoidedParameters.isEmpty()) {
 						mode.parameters.remove(parameter);
 					}
@@ -2411,7 +2412,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		} else if (routingHelper.isRouteCalculated()) {
 			RouteCalculationResult result = routingHelper.getRoute();
-			QuadRect routeRect = routingHelper.getRouteRect(result);
+			QuadRect routeRect = RoutingHelperUtils.getRouteRect(app, result);
 			if (routeRect != null) {
 				rect = routeRect;
 			}

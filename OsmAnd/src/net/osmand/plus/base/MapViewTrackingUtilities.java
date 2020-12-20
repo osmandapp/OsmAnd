@@ -25,6 +25,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -175,7 +176,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			locationProvider = location.getProvider();
 			if (settings.DRIVING_REGION_AUTOMATIC.get() && !drivingRegionUpdated && !app.isApplicationInitializing()) {
 				drivingRegionUpdated = true;
-				app.getRoutingHelper().checkAndUpdateStartLocation(location);
+				RoutingHelperUtils.checkAndUpdateStartLocation(app, location);
 			}
 		}
 		if (mapView != null) {

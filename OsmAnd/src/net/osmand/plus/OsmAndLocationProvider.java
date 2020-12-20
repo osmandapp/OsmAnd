@@ -39,7 +39,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.RouteSegmentSearchResult;
+import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteSegmentResult;
@@ -154,7 +154,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				startLocation.setTime(ms);
 			}
 			RouteSegmentSearchResult searchResult =
-					RoutingHelper.searchRouteSegment(currentLocation.getLatitude(), currentLocation.getLongitude(), -1, roads);
+					RouteSegmentSearchResult.searchRouteSegment(currentLocation.getLatitude(), currentLocation.getLongitude(), -1, roads);
 			if (searchResult != null) {
 				currentRoad = searchResult.getRoadIndex();
 				currentSegment = searchResult.getSegmentIndex();

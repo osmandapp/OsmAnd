@@ -20,7 +20,7 @@ import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
+import net.osmand.plus.routing.RouteCalculationProgressCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
@@ -673,7 +673,7 @@ public class MeasurementEditingContext {
 		if (progressListener != null && !routingHelper.isRouteBeingCalculated()) {
 			RouteCalculationParams params = getParams(true);
 			if (params != null) {
-				routingHelper.startRouteCalculationThread(params, true, true);
+				routingHelper.startRouteCalculationThread(params);
 				application.runInUIThread(new Runnable() {
 					@Override
 					public void run() {
@@ -1063,7 +1063,7 @@ public class MeasurementEditingContext {
 						progressListener.refresh();
 						RouteCalculationParams params = getParams(false);
 						if (params != null) {
-							application.getRoutingHelper().startRouteCalculationThread(params, true, true);
+							application.getRoutingHelper().startRouteCalculationThread(params);
 						} else {
 							progressListener.hideProgressBar();
 						}

@@ -15,6 +15,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -28,7 +29,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -207,8 +207,8 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private void getDefaultValue() {
-		currentValue = RoutingHelper.getDefaultAllowedDeviation(settings, appMode,
-				RoutingHelper.getPosTolerance(0));
+		currentValue = RoutingHelperUtils.getDefaultAllowedDeviation(settings, appMode,
+				RoutingHelperUtils.getPosTolerance(0));
 	}
 
 	private int findIndexOfValue(float allowedValue) {

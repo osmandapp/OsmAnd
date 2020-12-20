@@ -33,6 +33,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -432,8 +433,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				mode.setStrAngle(angleValue[0]);
 				updateAllSettings();
 				RoutingHelper routingHelper = app.getRoutingHelper();
-				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
-					routingHelper.recalculateRouteDueToSettingsChange();
+				if (mode.equals(routingHelper.getAppMode())) {
+					routingHelper.onSettingsChanged();
 				}
 			}
 		});
@@ -481,7 +482,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		float allowedValue = settings.ROUTE_RECALCULATION_DISTANCE.getModeValue(appMode);
 		boolean enabled = allowedValue != DISABLE_MODE;
 		if (allowedValue <= 0) {
-			allowedValue = RoutingHelper.getDefaultAllowedDeviation(settings, appMode, RoutingHelper.getPosTolerance(0));
+			allowedValue = RoutingHelperUtils.getDefaultAllowedDeviation(settings, appMode, RoutingHelperUtils.getPosTolerance(0));
 		}
 		String summary = String.format(getString(R.string.ltr_or_rtl_combine_via_bold_point),
 				enabled ? getString(R.string.shared_string_enabled) : getString(R.string.shared_string_disabled),
@@ -644,9 +645,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	private static void recalculateRoute(OsmandApplication app, ApplicationMode mode) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (mode.equals(routingHelper.getAppMode())
-				&& (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
-			routingHelper.recalculateRouteDueToSettingsChange();
+		if (mode.equals(routingHelper.getAppMode())) {
+			routingHelper.onSettingsChanged();
 		}
 	}
 

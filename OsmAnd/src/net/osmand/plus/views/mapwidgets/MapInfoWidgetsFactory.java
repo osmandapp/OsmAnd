@@ -49,6 +49,8 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.CurrentStreetName;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -933,7 +935,7 @@ public class MapInfoWidgetsFactory {
 
 
 		public boolean updateInfo(DrawSettings d) {
-			RoutingHelper.CurrentStreetName streetName = null;
+			CurrentStreetName streetName = null;
 			boolean showClosestWaypointFirstInAddress = true;
 			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
 				if (routingHelper.isFollowingMode()) {
@@ -953,11 +955,11 @@ public class MapInfoWidgetsFactory {
 				}
 			} else if (map.getMapViewTrackingUtilities().isMapLinkedToLocation() &&
 					settings.SHOW_STREET_NAME.get()) {
-				streetName = new RoutingHelper.CurrentStreetName();
+				streetName = new CurrentStreetName();
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
 					Location lastKnownLocation = locationProvider.getLastKnownLocation();
-					streetName.text = RoutingHelper.formatStreetName(
+					streetName.text = RoutingHelperUtils.formatStreetName(
 							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()),
 							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
 							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),

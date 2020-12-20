@@ -194,9 +194,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 
 	private void recalculateRoute() {
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (getSelectedAppMode().equals(routingHelper.getAppMode())
-				&& (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
-			routingHelper.recalculateRouteDueToSettingsChange();
+		if (getSelectedAppMode().equals(routingHelper.getAppMode())) {
+			routingHelper.onSettingsChanged();
 		}
 	}
 
@@ -269,8 +268,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 					mode.setMaxSpeed(maxValue[0] / ratio[0]);
 				}
 				RoutingHelper routingHelper = app.getRoutingHelper();
-				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
-					routingHelper.recalculateRouteDueToSettingsChange();
+				if (mode.equals(routingHelper.getAppMode())) {
+					routingHelper.onSettingsChanged();
 				}
 			}
 		});
@@ -284,8 +283,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 					mode.setMaxSpeed(0f);
 				}
 				RoutingHelper routingHelper = app.getRoutingHelper();
-				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
-					routingHelper.recalculateRouteDueToSettingsChange();
+				if (mode.equals(routingHelper.getAppMode())) {
+					routingHelper.onSettingsChanged();
 				}
 			}
 		});

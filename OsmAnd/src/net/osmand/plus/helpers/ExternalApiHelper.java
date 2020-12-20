@@ -47,6 +47,7 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.SaveGpxAsyncTask;
@@ -697,7 +698,7 @@ public class ExternalApiHelper {
 		if (ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
 			TurnType tt = ni.directionInfo.getTurnType();
 			RouteDirectionInfo a = ni.directionInfo;
-			result.putExtra(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelper.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
+			result.putExtra(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelperUtils.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
 			result.putExtra(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
 			result.putExtra(prefix + PARAM_NT_DIRECTION_ANGLE, tt.getTurnAngle());
 			result.putExtra(prefix + PARAM_NT_DIRECTION_POSSIBLY_LEFT, tt.isPossibleLeftTurn());

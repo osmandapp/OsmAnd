@@ -22,7 +22,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.router.GeneralRouter;
 
 import net.osmand.router.RouteCalculationProgress;
@@ -564,7 +563,7 @@ public class TransportRoutingHelper {
 						updateProgress(0);
 						RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
 						if (walkingRouteParams != null) {
-							routingHelper.startRouteCalculationThread(walkingRouteParams, true, true);
+							routingHelper.startRouteCalculationThread(walkingRouteParams);
 						}
 					}
 				}
@@ -603,7 +602,7 @@ public class TransportRoutingHelper {
 				}
 				RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
 				if (walkingRouteParams != null) {
-					routingHelper.startRouteCalculationThread(walkingRouteParams, true, true);
+					routingHelper.startRouteCalculationThread(walkingRouteParams);
 					// wait until all segments calculated
 					while (!walkingSegmentsCalculated) {
 						try {
