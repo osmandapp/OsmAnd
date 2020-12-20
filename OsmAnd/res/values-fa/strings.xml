@@ -2063,7 +2063,7 @@
     <string name="poi_dialog_reopen">بازگشایی</string>
     <string name="get_plugin">دریافت</string>
     <string name="use_fast_recalculation">محاسبهٔ مجدد هوشمند</string>
-    <string name="use_fast_recalculation_desc">فقط بخش ابتدایی مسیر را مجدداً محاسبه می‌کند. برای سفرهای طولانی مفید است.</string>
+    <string name="use_fast_recalculation_desc">فقط بخش ابتدایی مسیر را مجدداً محاسبه می‌کند. سودمند برای سفرهای طولانی.</string>
     <string name="do_you_like_osmand">آیا از OsmAnd راضی هستید؟</string>
     <string name="we_really_care_about_your_opinion">دیدگاه و بازخورد شما ارزشمند است.</string>
     <string name="rate_this_app">به این برنامه امتیاز بدهید</string>
@@ -3481,7 +3481,7 @@
     <string name="live_monitoring_descr">اجازه می‌دهد موقعیت کنونی با استفاده از ضبط سفر هم‌رسانی شود.</string>
     <string name="tracks_view_descr">ردهای ضبط‌شدهٔ شما در %1$s یا در پوشهٔ OsmAnd قرار دارند.</string>
     <string name="multimedia_notes_view_descr">یادداشت‌های OSMای شما در %1$s قرار دارند.</string>
-    <string name="osm_edits_view_descr">می‌توانید همهٔ ویرایش‌ها یا یادداشت‌های OSMای خود را که آپلود نکرده‌اید در %1$s ببینید. نقاط آپلودشده را دیگر در OsmAnd نمی‌بینید.</string>
+    <string name="osm_edits_view_descr">همهٔ ویرایش‌ها یا یادداشت‌های OSMای آپلودنشدهٔ خود را در %1$s ببینید. تغییرات آپلودشده را دیگر نمی‌بینید.</string>
     <string name="logcat_buffer_descr">لاگ‌های جزئی برنامه را بررسی و هم‌رسانی کنید</string>
     <string name="multimedia_use_system_camera">استفاده از برنامهٔ سیستم</string>
     <string name="multimedia_photo_play_sound">صدای شاتر دوربین</string>
@@ -3925,7 +3925,7 @@
     <string name="number_of_gpx_files_selected_pattern">%s فایل رد انتخاب شده است</string>
     <string name="monitoring_control_start">ضبط</string>
     <string name="disable_recording_once_app_killed_descrp">هنگامی که برنامه را از طریق برنامه‌های اخیر ببندید ضبط رد به‌طور موقت می‌ایستد. (نشانگر اجرای پس‌زمینه از نوار اعلان حذف می‌شود.)</string>
-    <string name="save_global_track_interval_descr">بازهٔ زمانی برای ضبط رد را انتخاب کنید (که از طریق ابزار ضبط سفر روی نقشه فعال می‌شود).</string>
+    <string name="save_global_track_interval_descr">بازهٔ زمانی برای ضبط رد را انتخاب کنید (که از طریق ابزارک ضبط سفر روی نقشه روشن می‌شود).</string>
     <string name="gpx_monitoring_stop">نگه‌داشتن ضبط سفر</string>
     <string name="gpx_monitoring_start">ازسرگیری ضبط سفر</string>
     <string name="app_mode_inline_skates">اسکیت این‌لاین</string>
@@ -3933,7 +3933,7 @@
     <string name="app_mode_motor_scooter">اسکوتر موتوری</string>
     <string name="app_mode_wheelchair_forward">ویلچر رو به جلو</string>
     <string name="threshold_distance">فاصله آستانه</string>
-    <string name="start_finish_icons">نمادهای ابتدا/انتها</string>
+    <string name="start_finish_icons">نمادهای ابتدا و انتها</string>
     <string name="routing_attr_avoid_footways_name">راه‌های پیاده</string>
     <string name="routing_attr_avoid_footways_description">از راه‌های پیاده پرهیز می‌کند</string>
     <string name="development">توسعه</string>
@@ -3954,15 +3954,15 @@
     <string name="perform_oauth_authorization_description">برای استفاده از قابلیت‌های ویرایشی، از طریق OAuth ثبت ورود کنید</string>
     <string name="perform_oauth_authorization">ثبت ورود از طریق OAuth</string>
     <string name="clear_osm_token">پاک‌سازی توکن OAuth اوپن‌استریت‌مپ</string>
-    <string name="osm_edit_logout_success">ثبت خروج موفقیت‌آمیز بود</string>
+    <string name="osm_edit_logout_success">خروج ثبت شد</string>
     <string name="file_already_imported">فایل قبلاً در OsmAnd درون‌برد شده است</string>
     <string name="use_two_phase_routing">استفاده از الگوریتم مسیریابی دومرحله‌ای A*‎</string>
     <string name="shared_string_graph">نمودار</string>
-    <string name="message_need_calculate_route_before_show_graph">دادهٔ %1$s فقط در جاده ارائه می‌شود. برای اینکه آن را داشته باشید با استفاده از «مسیریابی بین نقطه‌ها» مسیری محاسبه کنید.</string>
-    <string name="message_graph_will_be_available_after_recalculation">منتظر بمانید تا مسیر دوباره محاسبه شود.
-\nنمودار پس از بازمحاسبه در دسترس قرار خواهد گرفت.</string>
+    <string name="message_need_calculate_route_before_show_graph">دادهٔ %1$s فقط در جاده‌ها ارائه می‌شود. با استفاده از «مسیریابی بین نقطه‌ها» مسیری محاسبه کنید تا نمودارها را ببینید.</string>
+    <string name="message_graph_will_be_available_after_recalculation">لطفاً منتظر بمانید.
+\nنمودار پس از بازمحاسبهٔ مسیر فراهم می‌شود.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">دست‌کم باید دو نقطه اضافه کنید</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">دست‌کم دو نقطه اضافه کنید</string>
     <string name="login_open_street_map">ثبت ورود در اوپن‌استریت‌مپ</string>
     <string name="login_open_street_map_org">ثبت ورود در OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">ثبت ورود از طریق اوپن‌استریت‌مپ</string>
@@ -3973,7 +3973,7 @@
     <string name="login_account">حساب</string>
     <string name="user_login">ثبت ورود</string>
     <string name="manage_subscription">مدیریت اشتراک</string>
-    <string name="subscription_payment_issue_title">در رابطه با اشتراک شما مشکلی وجود دارد. روی دکمه کلیک کنید تا به تنظیمات اشتراک گوگل‌پلی بروید و شیوهٔ پرداخت خود را اصلاح نمایید.</string>
+    <string name="subscription_payment_issue_title">روی دکمه بزنید و یک شیوهٔ پرداخت در گوگل‌پلی تنظیم کنید تا اشتراک خود را اصلاح نمایید.</string>
     <string name="markers_history">تاریخچهٔ نشانه‌ها</string>
     <string name="send_files_to_openstreetmap">ارسال فایل GPX به اوپن‌استریت‌مپ</string>
     <string name="gpx_upload_public_visibility_descr">«عمومی» یا Public به این معنی است که رد به‌صورت عمومی در ردهای جی‌پی‌اس شما و لیست ردهای عمومی جی‌پی‌اس در قالب خام نمایش داده می‌شود. دادهٔ نقاط رد که از طریق API در دسترس قرار می‌گیرد، به صفحهٔ ردهای شما ارجاع نمی‌دهد. مهر زمان نقاط رد از طریق API جی‌پی‌اس‌های عمومی دست‌یافتنی نیست و نقاط رد بر اساس زمان مرتب نیستند.</string>
