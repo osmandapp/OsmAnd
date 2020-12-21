@@ -425,6 +425,7 @@ public class OsmandSettings {
 			if (valueSaved) {
 				currentMode = val;
 				profilePreferences = getProfilePreferences(currentMode);
+				LAST_USED_APPLICATION_MODE.set(currentMode.getStringKey());
 
 				fireEvent(oldMode);
 			}
@@ -735,11 +736,20 @@ public class OsmandSettings {
 
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference(this, "last_fav_category", "").makeGlobal();
 
+	public final OsmandPreference<Boolean> USE_LAST_APPLICATION_MODE_BY_DEFAULT = new BooleanPreference(this, "use_last_application_mode_by_default", false).makeGlobal().makeShared();
+
+	public final OsmandPreference<String> LAST_USED_APPLICATION_MODE = new StringPreference(this, "last_used_application_mode", ApplicationMode.DEFAULT.getStringKey()).makeGlobal().makeShared();
+
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "default_application_mode_string", ApplicationMode.DEFAULT) {
 
 		@Override
 		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
-			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
+			String key;
+			if (USE_LAST_APPLICATION_MODE_BY_DEFAULT.get()) {
+				key = LAST_USED_APPLICATION_MODE.get();
+			} else {
+				key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
+			}
 			return ApplicationMode.valueOfStringKey(key, defaultValue);
 		}
 

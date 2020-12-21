@@ -3,6 +3,7 @@ package net.osmand.plus.profiles;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 
+
 public class ProfileDataObject implements Comparable<ProfileDataObject> {
 
 	private String name;
@@ -62,4 +63,5 @@ public class ProfileDataObject implements Comparable<ProfileDataObject> {
 	public int compareTo(@NonNull ProfileDataObject another) {
 		return this.name.compareToIgnoreCase(another.name);
 	}
+
 }

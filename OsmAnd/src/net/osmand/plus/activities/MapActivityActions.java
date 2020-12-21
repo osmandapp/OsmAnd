@@ -63,6 +63,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
+import net.osmand.plus.profiles.ProfileDataUtils;
 import net.osmand.plus.profiles.RoutingProfileDataObject;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
@@ -121,7 +122,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_S
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CHOSEN_PROFILE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CONTROL_BUTTON_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_NORMAL_PROFILE_TAG;
-import static net.osmand.plus.settings.fragments.NavigationFragment.getRoutingProfiles;
 
 
 public class MapActivityActions implements DialogProvider {
@@ -737,7 +737,7 @@ public class MapActivityActions implements DialogProvider {
 
 		String modeDescription;
 
-		Map<String, RoutingProfileDataObject> profilesObjects = getRoutingProfiles(app);
+		Map<String, RoutingProfileDataObject> profilesObjects = ProfileDataUtils.getRoutingProfiles(app);
 		for (final ApplicationMode appMode : activeModes) {
 			if (appMode.isCustomProfile()) {
 				modeDescription = getProfileDescription(app, appMode, profilesObjects, getString(R.string.profile_type_user_string));
@@ -1046,7 +1046,7 @@ public class MapActivityActions implements DialogProvider {
 		//switch profile button
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
 		String modeDescription;
-		Map<String, RoutingProfileDataObject> profilesObjects = getRoutingProfiles(app);
+		Map<String, RoutingProfileDataObject> profilesObjects = ProfileDataUtils.getRoutingProfiles(app);
 		if (currentMode.isCustomProfile()) {
 			modeDescription = getProfileDescription(app, currentMode, profilesObjects, getString(R.string.profile_type_user_string));
 		} else {
