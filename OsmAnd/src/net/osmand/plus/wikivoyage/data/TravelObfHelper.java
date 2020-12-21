@@ -29,6 +29,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -125,12 +126,24 @@ public class TravelObfHelper implements TravelHelper {
 
 	private TravelArticle readArticle(@NonNull Amenity amenity, @Nullable String lang) {
 		TravelArticle res = new TravelArticle();
+		StringBuilder langs = new StringBuilder("");
 		String title = Algorithms.isEmpty(amenity.getName(lang)) ? amenity.getName() : amenity.getName(lang);
-		if (Algorithms.isEmpty(title)) {
-			Map<String, String> namesMap = amenity.getNamesMap(true);
-			if (!namesMap.isEmpty()) {
-				lang = namesMap.keySet().iterator().next();
-				title = amenity.getName(lang);
+		Map<String, String> namesMap = amenity.getNamesMap(true);
+		if (!namesMap.isEmpty()) {
+			Iterator<String> it = namesMap.keySet().iterator();
+			boolean first = true;
+			while (it.hasNext()) {
+				if (first) {
+					first = false;
+					lang = it.next();
+					langs.append(lang);
+					if (Algorithms.isEmpty(title)) {
+						title = amenity.getName(lang);
+					}
+				} else {
+					langs.append(", ");
+					langs.append(it.next());
+				}
 			}
 		}
 		res.title = title;
@@ -141,7 +154,7 @@ public class TravelObfHelper implements TravelHelper {
 		res.imageTitle = emptyIfNull(amenity.getTagContent(Amenity.IMAGE_TITLE, lang));
 		res.routeId = getRouteId(amenity);
 		res.originalId = 0;
-		res.lang = lang;
+		res.lang = langs.toString();
 		res.contentsJson = emptyIfNull(amenity.getTagContent(Amenity.CONTENT_JSON, lang));
 		res.aggregatedPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_AGGR_PART, lang));
 		return res;
@@ -185,7 +198,7 @@ public class TravelObfHelper implements TravelHelper {
 				r.imageTitle = article.imageTitle;
 				r.routeId = article.routeId;
 				r.isPartOf = new ArrayList<>(Collections.singletonList(article.isPartOf));
-				r.langs = new ArrayList<>(Collections.singletonList(baseLng));
+				r.langs = new ArrayList<>(Collections.singletonList(article.lang));
 				res.add(r);
 				cachedArticles.put(article.routeId, article);
 			}
