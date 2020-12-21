@@ -3710,7 +3710,7 @@
     <string name="reverse_route">Ruta inversa</string>
     <string name="route_between_points_whole_track_button_desc">La ruta sencera serà recalculada fent ús del perfil seleccionat.</string>
     <string name="route_between_points_next_segment_button_desc">Només el següent segment serà recalculat fent ús del perfil seleccionat.</string>
-    <string name="whole_track">Ruta sencera</string>
+    <string name="whole_track">Pista sencera</string>
     <string name="next_segment">Següent segment</string>
     <string name="threshold_distance">Llindar de distància</string>
     <string name="navigation_profile">Perfil de navegació</string>
