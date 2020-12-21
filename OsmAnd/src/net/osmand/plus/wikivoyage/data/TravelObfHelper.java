@@ -174,7 +174,7 @@ public class TravelObfHelper implements TravelHelper {
 		if (article != null) {
 			return getArticleByIdFromTravelBooks(routeId, lang);
 		}
-		return localDataHelper.getSavedArticle(routeId);
+		return localDataHelper.getSavedArticle(routeId, lang);
 	}
 
 	public TravelArticle getArticleByIdFromTravelBooks(final String routeId, final String lang) {

@@ -163,9 +163,10 @@ public class TravelLocalDataHelper {
 	}
 
 	@Nullable
-	public TravelArticle getSavedArticle(String routeId) {
+	public TravelArticle getSavedArticle(String routeId, String lang) {
 		for (TravelArticle article : savedArticles) {
-			if (article.routeId != null && article.routeId.equals(routeId)) {
+			if (article.routeId != null && article.routeId.equals(routeId)
+					&& article.lang != null && article.lang.equals(lang)) {
 				article.content = article.fullContent;
 				return article;
 			}
