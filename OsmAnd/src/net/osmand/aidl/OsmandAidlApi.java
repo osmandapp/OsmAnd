@@ -2396,7 +2396,7 @@ public class OsmandAidlApi {
 
 	public boolean addRoadBlock(ABlockedRoad road) {
 		LatLon latLon = new LatLon(road.getLatitude(), road.getLongitude());
-		app.getAvoidSpecificRoads().addImpassableRoad(null, latLon, false, false, null);
+		app.getAvoidSpecificRoads().addImpassableRoad(null, latLon, false, false, road.getAppModeKey());
 		return true;
 	}
 
