@@ -953,7 +953,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (navigateInPedestrianMode()) {
-				mapActivity.getMyApplication().getSettings().APPLICATION_MODE.set(ApplicationMode.PEDESTRIAN);
+				mapActivity.getMyApplication().getSettings().setApplicationMode(ApplicationMode.PEDESTRIAN, false);
 			}
 			mapActivity.getMapLayers().getMapControlsLayer().navigateButton();
 		}

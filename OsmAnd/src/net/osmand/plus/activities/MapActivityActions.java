@@ -555,7 +555,7 @@ public class MapActivityActions implements DialogProvider {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
 		ApplicationMode mode = appMode != null ? appMode : getRouteMode(from);
-		//app.getSettings().APPLICATION_MODE.set(mode);
+		//app.getSettings().setApplicationMode(mode);
 		app.getRoutingHelper().setAppMode(mode);
 		app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, showMenu);
 		// save application mode controls
@@ -588,7 +588,7 @@ public class MapActivityActions implements DialogProvider {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
 		ApplicationMode mode = getRouteMode(null);
-		//app.getSettings().APPLICATION_MODE.set(mode);
+		//app.getSettings().setApplicationMode(mode, false);
 		app.getRoutingHelper().setAppMode(mode);
 		//Test for #2810: No need to init player here?
 		//app.initVoiceCommandPlayer(mapActivity, true, null, false, false);
@@ -756,7 +756,7 @@ public class MapActivityActions implements DialogProvider {
 					.setListener(new ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-							app.getSettings().APPLICATION_MODE.set(appMode);
+							app.getSettings().setApplicationMode(appMode);
 							updateDrawerMenu();
 							return false;
 						}

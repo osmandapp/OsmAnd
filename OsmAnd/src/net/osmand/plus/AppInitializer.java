@@ -419,10 +419,10 @@ public class AppInitializer implements IProgress {
 		if (osmandSettings.FOLLOW_THE_ROUTE.get()) {
 			ApplicationMode savedMode = osmandSettings.readApplicationMode();
 			if (!osmandSettings.APPLICATION_MODE.get().getStringKey().equals(savedMode.getStringKey())) {
-				osmandSettings.APPLICATION_MODE.set(savedMode);
+				osmandSettings.setApplicationMode(savedMode);
 			}
 		} else {
-			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
+			osmandSettings.setApplicationMode(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		}
 		startTime = System.currentTimeMillis();
 		getLazyRoutingConfig();

@@ -88,7 +88,7 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 		OsmandSettings settings = getMyApplication().getSettings();
 		if (appMode != this.appMode) {
 			if (appModeChangeable) {
-				settings.APPLICATION_MODE.set(appMode);
+				settings.setApplicationMode(appMode);
 			}
 			Fragment targetFragment = getTargetFragment();
 			if (targetFragment instanceof AppModeChangedListener) {

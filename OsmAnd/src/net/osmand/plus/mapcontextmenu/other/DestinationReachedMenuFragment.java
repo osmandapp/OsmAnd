@@ -178,7 +178,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 				}
 			}
 			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-			settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+			settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 			dismissMenu();
 		}
