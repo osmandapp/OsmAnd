@@ -28,6 +28,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -123,20 +124,33 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 		contentWebView = mainView.findViewById(R.id.content_web_view);
 		contentWebView.setOnTouchListener(new View.OnTouchListener() {
+			float initialY, finalY;
+			boolean isScrollingUp;
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				switch (event.getAction()) {
-					case MotionEvent.ACTION_SCROLL:
-					case MotionEvent.ACTION_MOVE:
-						readFullArticleButton.setVisibility(View.GONE);
-						break;
-					case MotionEvent.ACTION_CANCEL:
-					case MotionEvent.ACTION_DOWN:
-					case MotionEvent.ACTION_UP:
-						readFullArticleButton.setVisibility(View.VISIBLE);
-						break;
+				int action = MotionEventCompat.getActionMasked(event);
+
+				switch(action) {
+					case (MotionEvent.ACTION_DOWN):
+						initialY = event.getY();
+					case (MotionEvent.ACTION_UP):
+						finalY = event.getY();
+						if (initialY < finalY) {
+							isScrollingUp = true;
+						} else if (initialY > finalY) {
+							isScrollingUp = false;
+						}
+					default:
 				}
-				return false;
+
+				if (isScrollingUp) {
+					readFullArticleButton.setVisibility(View.VISIBLE);
+				} else {
+					readFullArticleButton.setVisibility(View.GONE);
+				}
+
+				return false; 
 			}
 		});
 
