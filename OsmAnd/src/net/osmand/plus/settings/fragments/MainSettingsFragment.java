@@ -20,7 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.profiles.ProfileDataObject;
+import net.osmand.plus.profiles.ProfileDataUtils;
 import net.osmand.plus.profiles.SelectProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
@@ -155,7 +155,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	private void setupConfigureProfilePref() {
 		ApplicationMode selectedMode = app.getSettings().APPLICATION_MODE.get();
 		String title = selectedMode.toHumanString();
-		String profileType = ProfileDataObject.getAppModeDescription(getContext(), selectedMode);
+		String profileType = ProfileDataUtils.getAppModeDescription(getContext(), selectedMode);
 		Preference configureProfile = findPreference(CONFIGURE_PROFILE);
 		configureProfile.setIcon(getAppProfilesIcon(selectedMode, true));
 		configureProfile.setTitle(title);
@@ -193,7 +193,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 			pref.setIcon(getAppProfilesIcon(applicationMode, isAppProfileEnabled));
 			pref.setTitle(applicationMode.toHumanString());
-			pref.setSummary(ProfileDataObject.getAppModeDescription(getContext(), applicationMode));
+			pref.setSummary(ProfileDataUtils.getAppModeDescription(getContext(), applicationMode));
 			pref.setChecked(isAppProfileEnabled);
 			pref.setLayoutResource(R.layout.preference_with_descr_dialog_and_switch);
 			pref.setFragment(ConfigureProfileFragment.class.getName());

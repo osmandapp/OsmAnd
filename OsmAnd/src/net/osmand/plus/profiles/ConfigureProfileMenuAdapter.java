@@ -104,7 +104,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 			holder.menuIcon.setVisibility(View.VISIBLE);
 			final ApplicationMode item = (ApplicationMode) obj;
 			holder.title.setText(item.toHumanString());
-			holder.descr.setText(ProfileDataObject.getAppModeDescription(app, item));
+			holder.descr.setText(ProfileDataUtils.getAppModeDescription(app, item));
 
 			holder.initSwitcher = true;
 			holder.compoundButton.setChecked(selectedItems.contains(item));

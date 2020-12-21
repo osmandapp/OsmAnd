@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.profiles.ProfileDataObject;
+import net.osmand.plus.profiles.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -48,7 +48,7 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 				.setChecked(true)
 				.setCompoundButtonColorId(profileColor)
 				.setButtonTintList(ColorStateList.valueOf(getResolvedColor(profileColor)))
-				.setDescription(ProfileDataObject.getAppModeDescription(ctx, mode))
+				.setDescription(ProfileDataUtils.getAppModeDescription(ctx, mode))
 				.setIcon(getIcon(mode.getIconRes(), profileColor))
 				.setTitle(mode.toHumanString())
 				.setBackground(new LayerDrawable(layers))

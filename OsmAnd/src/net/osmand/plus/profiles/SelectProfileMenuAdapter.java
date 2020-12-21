@@ -98,7 +98,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			holder.menuIcon.setVisibility(View.GONE);
 			final ApplicationMode item = (ApplicationMode) obj;
 			holder.title.setText(item.toHumanString());
-			holder.descr.setText(ProfileDataObject.getAppModeDescription(app, item));
+			holder.descr.setText(ProfileDataUtils.getAppModeDescription(app, item));
 
 			int profileColorResId = item.getIconColorInfo().getColor(nightMode);
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(profileColorResId, selectedIconColorRes));

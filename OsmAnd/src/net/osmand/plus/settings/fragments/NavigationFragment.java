@@ -10,6 +10,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.profiles.ProfileDataUtils;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -40,7 +41,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		routingProfileDataObjects = RoutingProfileDataObject.getRoutingProfiles(app);
+		routingProfileDataObjects = ProfileDataUtils.getRoutingProfiles(app);
 		setupOnBackPressedCallback();
 	}
 
@@ -174,7 +175,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	@Override
 	public void onProfileSelected(Bundle args) {
 		if (args.getBoolean(IS_PROFILE_IMPORTED_ARG)) {
-			routingProfileDataObjects = RoutingProfileDataObject.getRoutingProfiles(app);
+			routingProfileDataObjects = ProfileDataUtils.getRoutingProfiles(app);
 		}
 		updateRoutingProfile(args.getString(PROFILE_KEY_ARG));
 	}

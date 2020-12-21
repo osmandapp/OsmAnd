@@ -331,16 +331,17 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 		profiles.clear();
 		switch (dialogMode) {
 			case BASE_PROFILE:
-				List<ApplicationMode> appModes = ApplicationMode.values(app, false, ApplicationMode.DEFAULT);
-				profiles.addAll(ProfileDataObject.getDataObjects(app, appModes));
+				List<ApplicationMode> appModes = new ArrayList<>(ApplicationMode.allPossibleValues());
+				appModes.remove(ApplicationMode.DEFAULT);
+				profiles.addAll(ProfileDataUtils.getDataObjects(app, appModes));
 				break;
 
 			case NAVIGATION_PROFILE:
-				profiles.addAll(RoutingProfileDataObject.getSortedRoutingProfiles(app));
+				profiles.addAll(ProfileDataUtils.getSortedRoutingProfiles(app));
 				break;
 
 			case DEFAULT_PROFILE:
-				profiles.addAll(ProfileDataObject.getDataObjects(app, ApplicationMode.values(app)));
+				profiles.addAll(ProfileDataUtils.getDataObjects(app, ApplicationMode.values(app)));
 				break;
 		}
 	}
@@ -366,8 +367,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 		fragment.setArguments(args);
 		fragment.setUsedOnMap(usedOnMap);
 		fragment.setTargetFragment(target, 0);
-		FragmentManager fm = activity.getSupportFragmentManager();
-		fm.beginTransaction().add(fragment, TAG).commitAllowingStateLoss();
+		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
 
 	public interface OnSelectProfileCallback {

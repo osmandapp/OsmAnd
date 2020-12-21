@@ -55,7 +55,7 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 	private void refreshProfiles(OsmandApplication app) {
 		profiles.clear();
 		List<ApplicationMode> appModes = ApplicationMode.allPossibleValues();
-		profiles.addAll(ProfileDataObject.getDataObjects(app, appModes));
+		profiles.addAll(ProfileDataUtils.getDataObjects(app, appModes));
 		for (ProfileDataObject profile : profiles) {
 			String key = profile.getStringKey();
 			profile.setSelected(selectedProfiles.contains(key));

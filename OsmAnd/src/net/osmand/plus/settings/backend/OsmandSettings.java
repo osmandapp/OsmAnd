@@ -736,7 +736,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference(this, "last_fav_category", "").makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_LAST_APPLICATION_MODE_BY_DEFAULT = new BooleanPreference(this, "use_last_application_mode_by_default", false).makeGlobal();
+	public final OsmandPreference<Boolean> USE_LAST_APPLICATION_MODE_BY_DEFAULT = new BooleanPreference(this, "use_last_application_mode_by_default", false).makeGlobal().makeShared();
 
 	public final OsmandPreference<String> LAST_USED_APPLICATION_MODE = new StringPreference(this, "last_used_application_mode", ApplicationMode.DEFAULT.getStringKey()).makeGlobal().makeShared();
 

@@ -240,7 +240,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 				if (order == null) {
 					order = mode.getOrder();
 				}
-				profiles.add(new EditProfileDataObject(modeKey, mode.toHumanString(), ProfileDataObject.getAppModeDescription(getContext(), mode),
+				profiles.add(new EditProfileDataObject(modeKey, mode.toHumanString(), ProfileDataUtils.getAppModeDescription(getContext(), mode),
 						mode.getIconRes(), false, mode.isCustomProfile(), deleted, mode.getIconColorInfo(), order));
 			}
 		}

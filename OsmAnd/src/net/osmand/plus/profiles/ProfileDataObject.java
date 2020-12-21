@@ -1,17 +1,8 @@
 package net.osmand.plus.profiles;
 
-import android.content.Context;
-
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileDataObject implements Comparable<ProfileDataObject> {
 
@@ -73,28 +64,4 @@ public class ProfileDataObject implements Comparable<ProfileDataObject> {
 		return this.name.compareToIgnoreCase(another.name);
 	}
 
-	public static List<ProfileDataObject> getDataObjects(OsmandApplication app,
-	                                                     List<ApplicationMode> appModes) {
-		List<ProfileDataObject> profiles = new ArrayList<>();
-		for (ApplicationMode mode : appModes) {
-			String description = mode.getDescription();
-			if (Algorithms.isEmpty(description)) {
-				description = getAppModeDescription(app, mode);
-			}
-			profiles.add(new ProfileDataObject(mode.toHumanString(), description,
-					mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
-		}
-		return profiles;
-	}
-
-	public static String getAppModeDescription(Context ctx, ApplicationMode mode) {
-		String description;
-		if (mode.isCustomProfile()) {
-			description = ctx.getString(R.string.profile_type_user_string);
-		} else {
-			description = ctx.getString(R.string.profile_type_osmand_string);
-		}
-
-		return description;
-	}
 }
