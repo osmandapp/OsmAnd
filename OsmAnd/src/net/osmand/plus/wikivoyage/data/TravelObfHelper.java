@@ -84,7 +84,7 @@ public class TravelObfHelper implements TravelHelper {
 						if (!Algorithms.isEmpty(a.getName(language))) {
 							TravelArticle article = readArticle(a, language);
 							popularArticles.add(article);
-							cachedArticles.put(article.routeId, article);
+							cachedArticles.put(getCachedKeyForArticle(article.routeId, article.lang), article);
 							if (popularArticles.size() >= 100) {
 								break;
 							}
@@ -185,13 +185,17 @@ public class TravelObfHelper implements TravelHelper {
 					r.imageTitle = emptyIfNull(obj.getTagContent(Amenity.IMAGE_TITLE, currLang));
 				}
 				if (article != null) {
-					cachedArticles.put(article.routeId, article);
+					cachedArticles.put(getCachedKeyForArticle(article.routeId, article.lang), article);
 					res.add(r);
 				}
 			}
 			sortSearchResults(res);
 		}
 		return res;
+	}
+
+	private String getCachedKeyForArticle(String routeId, String lang) {
+		return routeId + lang;
 	}
 
 	private void sortSearchResults(@NonNull List<WikivoyageSearchResult> list) {
@@ -218,7 +222,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public TravelArticle getArticleById(@NonNull String routeId, @NonNull String lang) {
-		TravelArticle article = cachedArticles.get(routeId);
+		TravelArticle article = cachedArticles.get(getCachedKeyForArticle(routeId, lang));
 		if (article != null) {
 			return article;
 		} else {
@@ -257,7 +261,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			if (!amenities.isEmpty()) {
 				article = readArticle(amenities.get(0), lang);
-				cachedArticles.put(article.routeId, article);
+				cachedArticles.put(getCachedKeyForArticle(article.routeId, article.lang), article);
 			}
 		}
 		return article;
@@ -296,7 +300,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			if (!amenities.isEmpty()) {
 				article = readArticle(amenities.get(0), lang);
-				cachedArticles.put(article.routeId, article);
+				cachedArticles.put(getCachedKeyForArticle(article.routeId, article.lang), article);
 			}
 		}
 		return article;
