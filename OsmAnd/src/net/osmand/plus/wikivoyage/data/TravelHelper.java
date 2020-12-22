@@ -49,4 +49,6 @@ public interface TravelHelper {
 	// For TravelOBFHelper it could always return "" and should be no problem
 	// Bookmarks should be refactored properly to support multiple files
 	String getSelectedTravelBookName();
+
+	String getWikivoyageFileName();
 }

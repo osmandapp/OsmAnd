@@ -301,7 +301,7 @@ public class WikiArticleHelper {
 			return null;
 		}
 		String firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + P_CLOSED.length());
-		while (firstParagraphHtml.length() == (P_OPENED.length() + P_CLOSED.length())
+		while (firstParagraphHtml.substring(P_OPENED.length(), firstParagraphHtml.length() - P_CLOSED.length()).trim().isEmpty()
 				&& (firstParagraphEnd + P_CLOSED.length()) < content.length()) {
 			firstParagraphStart = content.indexOf(P_OPENED, firstParagraphEnd);
 			firstParagraphEnd = firstParagraphStart == -1 ? -1 : content.indexOf(P_CLOSED, firstParagraphStart);
