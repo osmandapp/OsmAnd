@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -285,9 +286,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (selectFromMapTouch) {
 				selectFromMapTouch = false;
 				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
-				LatLon objectLatLon = getObjectLocation(mapActivity.getMapView(), point, tileBox);
-				LatLon selectedPoint = objectLatLon != null ? objectLatLon : latLon;
-				choosePointTypeAction(mapActivity, selectedPoint, selectFromMapPointType, null, null);
+				Pair<LatLon, PointDescription> pair = getObjectLocation(mapActivity.getMapView(), point, tileBox);
+				LatLon selectedPoint = pair != null ? pair.first : latLon;
+				PointDescription name = pair != null ? pair.second : null;
+				choosePointTypeAction(mapActivity, selectedPoint, selectFromMapPointType, name, null);
 				if (selectFromMapWaypoints) {
 					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 				} else {
@@ -299,8 +301,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return false;
 	}
 
-	private LatLon getObjectLocation(OsmandMapTileView mapView, PointF point, RotatedTileBox tileBox) {
-		LatLon latLon = null;
+	private Pair<LatLon, PointDescription> getObjectLocation(OsmandMapTileView mapView, PointF point, RotatedTileBox tileBox) {
 		List<Object> objects = new ArrayList<>();
 		for (OsmandMapLayer layer : mapView.getLayers()) {
 			if (layer instanceof IContextMenuProvider) {
@@ -309,12 +310,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				provider.collectObjectsFromPoint(point, tileBox, objects, true);
 				for (Object o : objects) {
 					if (provider.isObjectClickable(o)) {
-						latLon = provider.getObjectLocation(o);
+						LatLon latLon = provider.getObjectLocation(o);
+						PointDescription name = null;
+						if (o instanceof FavouritePoint) {
+							name = ((FavouritePoint) o).getPointDescription(mapView.getApplication());
+						}
+						return new Pair<>(latLon, name);
 					}
 				}
 			}
 		}
-		return latLon;
+		return null;
 	}
 
 	private void choosePointTypeAction(MapActivity mapActivity, LatLon latLon, PointType pointType, PointDescription pd, String address) {
