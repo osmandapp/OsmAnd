@@ -172,7 +172,6 @@ public class TravelObfHelper implements TravelHelper {
 		if (!Algorithms.isEmpty(searchObjects)) {
 			String appLang = app.getLanguage();
 			for (Amenity obj : searchObjects) {
-				System.out.println(" ROUTE ID " + getRouteId(obj));
 				WikivoyageSearchResult r = new WikivoyageSearchResult();
 				r.articleTitles = new ArrayList<>();
 				r.isPartOf = new ArrayList<>();
