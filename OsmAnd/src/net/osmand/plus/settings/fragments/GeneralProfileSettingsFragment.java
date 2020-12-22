@@ -344,7 +344,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 						TextView desc = (TextView) v.findViewById(R.id.description);
 						if (item instanceof DrivingRegion) {
 							DrivingRegion drivingRegion = (DrivingRegion) item;
-							title.setText(getString(drivingRegion.name));
+							title.setText(app.getString(drivingRegion.name));
 							desc.setVisibility(View.VISIBLE);
 							desc.setText(drivingRegion.getDescription(v.getContext()));
 						} else if (item instanceof String) {
