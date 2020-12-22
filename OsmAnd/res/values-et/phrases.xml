@@ -3857,4 +3857,23 @@
     <string name="poi_mobile_money_agent">Mobiiliraha müügikoht</string>
     <string name="poi_ranger_station">Pargivahi maja</string>
     <string name="poi_weightbridge">Autokaal</string>
+    <string name="poi_liaison_subnational">Riigiülesed</string>
+    <string name="poi_liaison_representative_office">Esindus</string>
+    <string name="poi_liaison_liaison_office">Kontor</string>
+    <string name="poi_consulate_honorary_consul">Aukonsulaat</string>
+    <string name="poi_consulate_consulate_general">Peakonsulaat</string>
+    <string name="poi_consulate_consular_office">Konsulaaresindus</string>
+    <string name="poi_consulate_consular_agency">Konsulaarasutus</string>
+    <string name="poi_consulate_yes">Juhib konsul</string>
+    <string name="poi_embassy_mission">Missioon</string>
+    <string name="poi_embassy_interests_section">Huvide jaotis</string>
+    <string name="poi_embassy_high_commission">Kõrge komisjonitasu</string>
+    <string name="poi_embassy_delegation">Delegatsioon</string>
+    <string name="poi_embassy_branch_embassy">Filiaal</string>
+    <string name="poi_embassy_yes">Juhib suursaadik</string>
+    <string name="poi_diplomatic_liaison">Sidepidamine</string>
+    <string name="poi_diplomatic_services_citizen_services_filter">Kodanike teenused</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Immigrandi viisad</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">Mitteimmigrandi viisad</string>
+    <string name="poi_liaison_filter">Sidepidamine</string>
 </resources>
