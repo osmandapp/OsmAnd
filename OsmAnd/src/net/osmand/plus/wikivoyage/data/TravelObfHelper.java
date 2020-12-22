@@ -25,7 +25,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -126,26 +125,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	private TravelArticle readArticle(@NonNull Amenity amenity, @Nullable String lang) {
 		TravelArticle res = new TravelArticle();
-		StringBuilder langs = new StringBuilder("");
 		String title = Algorithms.isEmpty(amenity.getName(lang)) ? amenity.getName() : amenity.getName(lang);
-		Map<String, String> namesMap = amenity.getNamesMap(true);
-		if (!namesMap.isEmpty()) {
-			Iterator<String> it = namesMap.keySet().iterator();
-			boolean first = true;
-			while (it.hasNext()) {
-				if (first) {
-					first = false;
-					lang = it.next();
-					langs.append(lang);
-					if (Algorithms.isEmpty(title)) {
-						title = amenity.getName(lang);
-					}
-				} else {
-					langs.append(", ");
-					langs.append(it.next());
-				}
-			}
-		}
 		res.title = title;
 		res.content = amenity.getDescription(lang);
 		res.isPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_PART, lang));
@@ -154,7 +134,7 @@ public class TravelObfHelper implements TravelHelper {
 		res.imageTitle = emptyIfNull(amenity.getTagContent(Amenity.IMAGE_TITLE, lang));
 		res.routeId = getRouteId(amenity);
 		res.originalId = 0;
-		res.lang = langs.toString();
+		res.lang = lang;
 		res.contentsJson = emptyIfNull(amenity.getTagContent(Amenity.CONTENT_JSON, lang));
 		res.aggregatedPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_AGGR_PART, lang));
 		return res;
@@ -190,19 +170,43 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		if (!Algorithms.isEmpty(searchObjects)) {
-			String baseLng = app.getLanguage();
+			String appLang = app.getLanguage();
 			for (Amenity obj : searchObjects) {
+				System.out.println(" ROUTE ID " + getRouteId(obj));
 				WikivoyageSearchResult r = new WikivoyageSearchResult();
-				TravelArticle article = readArticle(obj, baseLng);
-				r.articleTitles = new ArrayList<>(Collections.singletonList(article.title));
-				r.imageTitle = article.imageTitle;
-				r.routeId = article.routeId;
-				r.isPartOf = new ArrayList<>(Collections.singletonList(article.isPartOf));
-				r.langs = new ArrayList<>(Collections.singletonList(article.lang));
-				res.add(r);
-				cachedArticles.put(article.routeId, article);
+				r.articleTitles = new ArrayList<>();
+				r.isPartOf = new ArrayList<>();
+				r.langs = new ArrayList<>();
+				r.routeId = getRouteId(obj);
+				r.imageTitle = emptyIfNull(obj.getTagContent(Amenity.IMAGE_TITLE, appLang));
+				if (r.imageTitle.isEmpty()) {
+					TravelArticle article = readArticle(obj, "en");
+					r.articleTitles.add(article.title);
+					r.isPartOf.add(article.isPartOf);
+					r.langs.add(article.lang);
+					r.imageTitle = emptyIfNull(obj.getTagContent(Amenity.IMAGE_TITLE, "en"));
+				}
+				Map<String, String> namesMap = obj.getNamesMap(true);
+				if (!namesMap.isEmpty()) {
+					Iterator<String> it = namesMap.keySet().iterator();
+					TravelArticle article = null;
+					while (it.hasNext()) {
+						String currLang = it.next();
+						article = readArticle(obj, currLang);
+						r.articleTitles.add(article.title);
+						r.isPartOf.add(article.isPartOf);
+						r.langs.add(article.lang);
+						r.routeId = getRouteId(obj);
+						r.imageTitle = emptyIfNull(obj.getTagContent(Amenity.IMAGE_TITLE, currLang));
+					}
+					if (article != null) {
+						cachedArticles.put(article.routeId, article);
+						res.add(r);
+					}
+				} else {
+					res.add(r);
+				}
 			}
-			res = new ArrayList<>(groupSearchResultsByRouteId(res));
 			sortSearchResults(res);
 		}
 		return res;
@@ -216,33 +220,6 @@ public class TravelObfHelper implements TravelHelper {
 				return collator.compare(res1.articleTitles.get(0), res2.articleTitles.get(0));
 			}
 		});
-	}
-
-	@NonNull
-	private Collection<WikivoyageSearchResult> groupSearchResultsByRouteId(@NonNull List<WikivoyageSearchResult> res) {
-		String baseLng = app.getLanguage();
-		Map<String, WikivoyageSearchResult> wikivoyage = new HashMap<>();
-		for (WikivoyageSearchResult rs : res) {
-			WikivoyageSearchResult prev = wikivoyage.get(rs.routeId);
-			if (prev != null) {
-				int insInd = prev.langs.size();
-				if (rs.langs.get(0).equals(baseLng)) {
-					insInd = 0;
-				} else if (rs.langs.get(0).equals("en")) {
-					if (!prev.langs.get(0).equals(baseLng)) {
-						insInd = 0;
-					} else {
-						insInd = 1;
-					}
-				}
-				prev.articleTitles.add(insInd, rs.articleTitles.get(0));
-				prev.langs.add(insInd, rs.langs.get(0));
-				prev.isPartOf.add(insInd, rs.isPartOf.get(0));
-			} else {
-				wikivoyage.put(rs.routeId, rs);
-			}
-		}
-		return wikivoyage.values();
 	}
 
 	@NonNull
