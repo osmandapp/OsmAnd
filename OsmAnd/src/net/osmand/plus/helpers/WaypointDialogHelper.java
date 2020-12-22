@@ -268,15 +268,22 @@ public class WaypointDialogHelper {
 	public static void reverseAllPoints(OsmandApplication app, Activity ctx,
 										WaypointDialogHelper helper) {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
-		if (!targets.getAllPoints().isEmpty()) {
-			List<TargetPoint> points = targets.getAllPoints();
-			Collections.reverse(points);
-			TargetPoint start = points.get(0);
-			targets.setStartPoint(start.point, false, start.getOriginalPointDescription());
-			points.remove(start);
-			targets.reorderAllTargetPoints(points, true);
-			updateControls(ctx, helper);
+		TargetPoint startPoint = targets.getPointToStart();
+		Location loc = app.getLocationProvider().getLastKnownLocation();
+		if (startPoint == null && loc != null) {
+			startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
+					new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, app.getString(R.string.shared_string_my_location)));
 		}
+		if (startPoint != null) {
+			targets.setStartPoint(startPoint.point, false, startPoint.getPointDescription(app));
+		}
+		List<TargetPoint> points = targets.getAllPoints();
+		Collections.reverse(points);
+		TargetPoint start = points.get(0);
+		targets.setStartPoint(start.point, false, start.getOriginalPointDescription());
+		points.remove(start);
+		targets.reorderAllTargetPoints(points, true);
+		updateControls(ctx, helper);
 	}
 
 	public static void updateControls(Activity ctx, WaypointDialogHelper helper) {
@@ -528,7 +535,7 @@ public class WaypointDialogHelper {
 					})
 					.create();
 			int intermediateSize = targetsHelper.getIntermediatePoints().size();
-			if (intermediateSize > 2) {
+			if (intermediateSize > 1) {
 				items.add(reorderAllItems);
 			}
 

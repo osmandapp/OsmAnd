@@ -123,6 +123,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -1292,7 +1293,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createImpassableRoadsItems(MapActivity mapActivity, Map<LatLon, AvoidRoadInfo> impassableRoads,
-	                                        final LocalRoutingParameter parameter, final RouteMenuAppModes mode, final LinearLayout item) {
+											final LocalRoutingParameter parameter, final RouteMenuAppModes mode, final LinearLayout item) {
 		Iterator<AvoidRoadInfo> it = impassableRoads.values().iterator();
 		while (it.hasNext()) {
 			final AvoidRoadInfo avoidRoadInfo = it.next();
@@ -1437,7 +1438,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	@Nullable
 	private LinearLayout createToolbarOptionView(boolean active, String title, @DrawableRes int activeIconId,
-	                                             @DrawableRes int disabledIconId, OnClickListener listener) {
+												 @DrawableRes int disabledIconId, OnClickListener listener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return null;
@@ -1489,7 +1490,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	@Nullable
 	private View createToolbarSubOptionView(boolean hideTextLine, String title, @DrawableRes int iconId,
-	                                        boolean lastItem, OnClickListener listener) {
+											boolean lastItem, OnClickListener listener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return null;
@@ -1831,6 +1832,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					TargetPoint startPoint = targetPointsHelper.getPointToStart();
 					TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
 					Location loc = app.getLocationProvider().getLastKnownLocation();
+					int intermediateSize = targetPointsHelper.getIntermediatePoints().size();
 					if (loc == null && startPoint == null && endPoint == null) {
 						app.showShortToastMessage(R.string.add_start_and_end_points);
 					} else if (endPoint == null) {
@@ -1846,9 +1848,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 								startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
 										new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location)));
 							}
-							if (startPoint != null) {
+							if (startPoint != null && intermediateSize < 2) {
 								targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
 								targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
+								targetPointsHelper.updateRouteAndRefresh(true);
+							}
+							if (startPoint != null && intermediateSize > 1) {
+								targetPointsHelper.setStartPoint(startPoint.point, false, startPoint.getPointDescription(app));
+								List<TargetPoint> points = targetPointsHelper.getAllPoints();
+								Collections.reverse(points);
+								TargetPoint start = points.get(0);
+								targetPointsHelper.setStartPoint(start.point, false, start.getOriginalPointDescription());
+								points.remove(start);
+								targetPointsHelper.reorderAllTargetPoints(points, true);
 								targetPointsHelper.updateRouteAndRefresh(true);
 							} else {
 								app.showShortToastMessage(R.string.route_add_start_point);
@@ -1888,7 +1900,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(AppCompatResources.getDrawable(mapActivity,
 					mapActivity.getMyApplication().getTargetPointsHelper().getPointToStart() == null
-						? locationIconResByStatus : R.drawable.list_startpoint));
+							? locationIconResByStatus : R.drawable.list_startpoint));
 		}
 	}
 
