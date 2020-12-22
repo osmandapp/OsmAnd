@@ -170,39 +170,22 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		if (!Algorithms.isEmpty(searchObjects)) {
-			String appLang = app.getLanguage();
 			for (Amenity obj : searchObjects) {
 				WikivoyageSearchResult r = new WikivoyageSearchResult();
-				r.articleTitles = new ArrayList<>();
-				r.isPartOf = new ArrayList<>();
-				r.langs = new ArrayList<>();
-				r.routeId = getRouteId(obj);
-				r.imageTitle = emptyIfNull(obj.getTagContent(Amenity.IMAGE_TITLE, appLang));
-				if (r.imageTitle.isEmpty()) {
-					TravelArticle article = readArticle(obj, "en");
+				Map<String, String> namesMap = obj.getNamesMap(true);
+				Iterator<String> it = namesMap.keySet().iterator();
+				TravelArticle article = null;
+				while (it.hasNext()) {
+					String currLang = it.next();
+					article = readArticle(obj, currLang);
 					r.articleTitles.add(article.title);
 					r.isPartOf.add(article.isPartOf);
 					r.langs.add(article.lang);
-					r.imageTitle = emptyIfNull(obj.getTagContent(Amenity.IMAGE_TITLE, "en"));
+					r.routeId = getRouteId(obj);
+					r.imageTitle = emptyIfNull(obj.getTagContent(Amenity.IMAGE_TITLE, currLang));
 				}
-				Map<String, String> namesMap = obj.getNamesMap(true);
-				if (!namesMap.isEmpty()) {
-					Iterator<String> it = namesMap.keySet().iterator();
-					TravelArticle article = null;
-					while (it.hasNext()) {
-						String currLang = it.next();
-						article = readArticle(obj, currLang);
-						r.articleTitles.add(article.title);
-						r.isPartOf.add(article.isPartOf);
-						r.langs.add(article.lang);
-						r.routeId = getRouteId(obj);
-						r.imageTitle = emptyIfNull(obj.getTagContent(Amenity.IMAGE_TITLE, currLang));
-					}
-					if (article != null) {
-						cachedArticles.put(article.routeId, article);
-						res.add(r);
-					}
-				} else {
+				if (article != null) {
+					cachedArticles.put(article.routeId, article);
 					res.add(r);
 				}
 			}
