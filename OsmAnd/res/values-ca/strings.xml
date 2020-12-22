@@ -1044,7 +1044,7 @@
     <string name="shared_string_about">Quant a</string>
     <string name="about_settings_descr">Informació de la versió, llicències, membres del projecte</string>
     <string name="local_index_tile_data_zooms">Escalats baixats: %1$s</string>
-    <string name="local_index_tile_data_expire">Expira (minuts): %1$s</string>
+    <string name="local_index_tile_data_expire">Marge de caducitat (minuts): %1$s</string>
     <string name="local_index_tile_data_downloadable">Baixable: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Escalat màxim: %1$s</string>
     <string name="local_index_tile_data_minzoom">Escalat mínim: %1$s</string>
@@ -1069,7 +1069,7 @@
     <string name="complex_route_calculation_failed">El càlcul ràpid de ruta ha fallat (%s), retorn al mètode lent.</string>
     <string name="disable_complex_routing_descr">Desactiva el càlcul de ruta en dues fases per navegació amb cotxe.</string>
     <string name="disable_complex_routing">Desactiva el càlcul complex de la ruta</string>
-    <string name="edit_tilesource_successfully">El proveïdor de tessel·les %1$s estava desat</string>
+    <string name="edit_tilesource_successfully">Proveïdor de tessel·les %1$s desat</string>
     <string name="edit_tilesource_choose_existing">Selecciona existent…</string>
     <string name="map_widget_fps_info">Info depuració FPS</string>
     <string name="intermediate_items_sort_return">Ordre optimitzat de les fites de la ruta fins a la destinació.</string>
@@ -1728,7 +1728,7 @@
     <string name="faq_item">PMF</string>
     <string name="faq_item_description">Preguntes més freqüents</string>
     <string name="map_viewing_item">Visualització del mapa</string>
-    <string name="search_on_the_map_item">Buscant el mapa</string>
+    <string name="search_on_the_map_item">Buscant al mapa</string>
     <string name="instalation_troubleshooting_item">Instal·lació i solució de problemes</string>
     <string name="techical_articles_item">Articles tècnics</string>
     <string name="versions_item">Versions</string>
@@ -1944,7 +1944,7 @@
     <string name="access_autoannounce_period">Freqüència dels recordatoris</string>
     <string name="access_autoannounce_period_descr">Interval mínim de temps entre anuncis.</string>
     <string name="map_widget_bearing">Desviació relativa</string>
-    <string name="access_no_destination">No s\'ha fixat la destinació</string>
+    <string name="access_no_destination">Connector d\'accessibilitat: No s\'ha establert destinació</string>
     <string name="map_widget_magnetic_bearing">Desviació respecte el Nord magnètic</string>
     <string name="use_osm_live_routing_description">Activa la navegació pels canvis a OsmAnd Live.</string>
     <string name="use_osm_live_routing">Navegació OsmAnd Live</string>
@@ -2386,7 +2386,7 @@
     <string name="show_from_zoom_level">Mostra començant pel nivell d\'escala</string>
     <string name="routing_attr_allow_private_name">Permet l\'accés privat</string>
     <string name="routing_attr_allow_private_description">Permet l\'accés a zones privades.</string>
-    <string name="hillshade_menu_download_descr">Baixeu el mapa \'Ombrejat de relleu\' per veure ombrejat segons alçada.</string>
+    <string name="hillshade_menu_download_descr">Baixeu el mapa de superposició \'Ombrejat de relleu\' per veure ombrejat segons alçada.</string>
     <string name="hillshade_purchase_header">Instal·leu el connector \'Corbes de nivell\' per veure àrees graduades verticalment.</string>
     <string name="shared_string_plugin">Connector</string>
     <string name="srtm_purchase_header">Compreu i instal·leu el connector \'Corbes de nivell\' per visualitzar una gradació vertical d\'àrees.</string>
@@ -3171,7 +3171,7 @@
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="routing_attr_piste_type_skitour_name">Esquí de ruta</string>
     <string name="routing_attr_piste_type_skitour_description">Itineraris d\'esquí de ruta.</string>
-    <string name="routing_attr_freeride_policy_description">Camp a través i fora pistes són vies no oficials. Normalment so estan condicionades ni mantingudes per treballadors ni revisades per la nit. Si hi entreu en sereu responsables del que passi.</string>
+    <string name="routing_attr_freeride_policy_description">\'Camp a través\' i \'Fora pistes\' són vies no oficials. Normalment no estan regulades ni mantingudes ni revisades de nit. Entrant-hi, sereu responsables del que passi.</string>
     <string name="turn_screen_on_router">Activa pantalla si cal maniobrar</string>
     <string name="turn_on_profile_desc">Per utilitzar aquest paràmetre heu d\'activar almenys un perfil d\'aplicació.</string>
     <string name="rendering_attr_winter_road_name">Carretera sobre la neu</string>
@@ -3676,7 +3676,7 @@
     <string name="shared_string_meters">metres</string>
     <string name="quick_action_remove_next_destination">Suprimeix la fita més propera</string>
     <string name="please_provide_point_name_error">Proporcioneu un nom per al punt</string>
-    <string name="quick_action_remove_next_destination_descr">La propera fita de la ruta s\'esborrarà. Si es tractés de la Destinació final, la navegació s\'aturaria.</string>
+    <string name="quick_action_remove_next_destination_descr">Esborra la propera fita de la vostra ruta. Si aquesta fos la Destinació, la navegació s\'aturaria.</string>
     <string name="search_download_wikipedia_maps">Baixa mapes de la Viquipèdia</string>
     <string name="plugin_wikipedia_description">Obteniu informació de punts d\'interès des la Viquipèdia. Serà la vostra guia de butxaca en desconnexió - només cal que activeu el connector Viquipèdia i fruireu dels articles que tracten de les coses que us rodegen.</string>
     <string name="gpx_split_interval_none_descr">Seleccioneu el criteri limitant desitjat: temps o distància.</string>
@@ -3788,7 +3788,7 @@
     <string name="shared_string_redo">Torna a fer</string>
     <string name="keep_screen_off">Manté la pantalla desactivada</string>
     <string name="app_mode_enduro_motorcycle">Moto enduro</string>
-    <string name="plan_route_exit_dialog_descr">Esteu segur que voleu descartar totes les modificacions de la ruta planificada en tancar-la\?</string>
+    <string name="plan_route_exit_dialog_descr">Segur que voleu descartar totes les modificacions de la ruta planificada\?</string>
     <string name="add_segment_to_the_track">Afegeix a un fitxer de traces</string>
     <string name="layer_gpx_layer">Traces</string>
     <string name="save_track_to_gpx_globally">Enregistra el trajecte a un fitxer GPX</string>
@@ -3796,7 +3796,7 @@
     <string name="add_address">Afegeix una adreça</string>
     <string name="shared_string_file_name">Nom del fitxer</string>
     <string name="monitoring_control_start">REC</string>
-    <string name="disable_recording_once_app_killed_descrp">Aturarà l\'enregistrament de traces quan es mati l\'aplicació (mitjançant aplicacions recents). (La indicació de fons OsmAnd desapareix de la barra de notificacions d\'Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">L\'enregistrament de traces s\'aturarà quan es mati l\'aplicació (mitjançant aplicacions recents). (Les indicacions en segon pla d\'OsmAnd desapareixeran de la barra de notificacions Android.)</string>
     <string name="save_global_track_interval_descr">Trieu l\'interval d\'enregistrament general dels desplaçaments (s\'activa mitjançant el giny del mapa \'Enregistrament de ruta\').</string>
     <string name="simplified_track">Traça simplificada</string>
     <string name="simplified_track_description">Només es desarà la línia del trajecte, les fites s\'esborraran.</string>
@@ -3878,7 +3878,7 @@
     <string name="shared_string_add_photo">Afegeix foto</string>
     <string name="register_on_openplacereviews">Registreu-vos a
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Les fotos les proporciona el projecte OpenPlaceReviews.org de dades obertes. Per poder pujar les vostres fotos, cal que us registreu al lloc web.</string>
+    <string name="register_on_openplacereviews_desc">Les fotos les proporciona el projecte de dades obertes OpenPlaceReviews.org. Per poder pujar les vostres fotos, cal que us registreu al lloc web.</string>
     <string name="register_opr_create_new_account">Crea un compte nou</string>
     <string name="register_opr_have_account">ja tinc un compte</string>
     <string name="shared_string_search_history">Historial de cerques</string>
@@ -3900,10 +3900,10 @@
     <string name="add_photos_descr">OsmAnd mostra fotos de diverses fonts:
 \nOpenPlaceReviews - fotos de PDIs;
 \nMapillary: imatges a nivell de carrer;
-\nWeb / Wikimedia: fotos dels PDIs especificats a les dades d\'OpenStreetMap.</string>
+\nWeb / Wikimedia: fotos dels PDIs d\'OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="icon_group_amenity">Equipament</string>
-    <string name="elevation_data">Podeu utilitzar les dades d’elevació per tenir en compte l\'ascens / descens de la vostra ruta</string>
+    <string name="elevation_data">Podeu utilitzar les dades d’elevació per acumular l\'ascens/descens de la vostra ruta</string>
     <string name="app_mode_light_aircraft">Avioneta</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificable\" vol dir que la traça es mostrarà públicament a les vostres traces GPS i als llistats públics de traces GPS, és a dir, els altres usuaris la podran baixar en brut i associada al vostre usuari. Les dades cronològiques de pas per les fites de l’API GPS que es publiquen mitjançant l’API de fites faran referència a la pàgina de la vostra traça original.</string>
     <string name="gpx_upload_private_visibility_descr">\"Privada\" vol dir que la traça no es mostra a cap llistat públic, però les fites que conté estan disponibles a través de l\'API pública GPS, desordenades i sense enregistraments temporals.</string>
@@ -3911,4 +3911,18 @@
     <string name="plan_route_split_before">Separa abans</string>
     <string name="plan_route_split_after">Separa després</string>
     <string name="plan_route_add_new_segment">Afegeix un segment nou</string>
+    <string name="lang_de_casual">Alemany (col·loquial)</string>
+    <string name="what_is_new">Novetats</string>
+    <string name="profile_type_osmand_string">Perfil OsmAnd</string>
+    <string name="profile_type_user_string">Perfil d\'usuari</string>
+    <string name="release_3_9">• S\'ha afegit una opció per exportar i importar totes les dades, incloent configuracions, recursos i preferits
+\n
+\n • Planificació de la ruta: gràfics per segments de traçat de la ruta i s\'afegeix la possibilitat de crear i editar diversos segments de la traça alhora
+\n
+\n • S\'ha afegit el mètode d\'autenticació OAuth per a OpenStreetMap i s\'ha millorat la interfície d\'usuari dels diàlegs OSM
+\n
+\n • S\'admeten colors personalitzats per a llocs preferits i fites
+\n
+\n</string>
+    <string name="reverse_all_points">Revertir tots els punts</string>
 </resources>
