@@ -136,6 +136,17 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return l;
 	}
 
+	public Set<String> getNameLanguages() {
+		Set<String> langs = new HashSet<>();
+		if (Algorithms.isEmpty(enName)) {
+			if (names == null) {
+				return Collections.emptySet();
+			}
+			return new HashSet<>(names.keySet());
+		}
+		return langs;
+	}
+
 	public void copyNames(String otherName, String otherEnName, Map<String, String> otherNames, boolean overwrite) {
 		if (!Algorithms.isEmpty(otherName) && (overwrite || Algorithms.isEmpty(name))) {
 			name = otherName;
@@ -242,11 +253,6 @@ public abstract class MapObject implements Comparable<MapObject> {
 
 	public String toStringEn() {
 		return getClass().getSimpleName() + ":" + getEnName(true);
-	}
-
-	public Set<String> getAllLanguages() {
-		Map<String, String> namesMap = this.getNamesMap(true);
-		return new HashSet<>(namesMap.keySet());
 	}
 
 	@Override

@@ -172,7 +172,7 @@ public class TravelObfHelper implements TravelHelper {
 			for (Amenity obj : searchObjects) {
 				WikivoyageSearchResult r = new WikivoyageSearchResult();
 				TravelArticle article = null;
-				for (String currLang : obj.getAllLanguages()) {
+				for (String currLang : obj.getNameLanguages()) {
 					article = readArticle(obj, currLang);
 					r.articleTitles.add(article.title);
 					r.isPartOf.add(article.isPartOf);
