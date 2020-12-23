@@ -4020,5 +4020,7 @@
 \n</string>
     <string name="profile_type_osmand_string">פרופיל</string>
     <string name="profile_type_user_string">פרופיל</string>
-    <string name="reverse_all_points">להפוך את כל</string>
+    <string name="reverse_all_points">להפוך את כל הנקודות</string>
+    <string name="profile_by_default_description">נא לבחור את הפרופיל בו יעשה שימוש עם הפעלת היישומון.</string>
+    <string name="shared_string_last_used">שימוש אחרון</string>
 </resources>
