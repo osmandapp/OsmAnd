@@ -417,7 +417,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 						if (!ApplicationMode.values(app).contains(selectedMode)) {
 							ApplicationMode.changeProfileAvailability(selectedMode, true, app);
 						}
-						settings.APPLICATION_MODE.set(selectedMode);
+						settings.setApplicationMode(selectedMode);
 						fragmentManager.beginTransaction()
 								.remove(this)
 								.addToBackStack(TAG)

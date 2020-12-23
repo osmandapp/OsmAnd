@@ -737,7 +737,7 @@ public class ExternalApiHelper {
 		OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (gpx == null) {
-			app.getSettings().APPLICATION_MODE.set(mode);
+			app.getSettings().setApplicationMode(mode);
 			final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 			targets.removeAllWayPoints(false, true);
 			targets.navigateToPoint(to, true, -1, toDesc);
@@ -747,7 +747,7 @@ public class ExternalApiHelper {
 			mapActivity.getMapRouteInfoMenu().show();
 		} else {
 			if (app.getSettings().APPLICATION_MODE.get() != routingHelper.getAppMode()) {
-				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());
+				app.getSettings().setApplicationMode(routingHelper.getAppMode(), false);
 			}
 			mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 			app.getSettings().FOLLOW_THE_ROUTE.set(true);

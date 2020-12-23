@@ -621,7 +621,7 @@ public class RoutingHelper {
 					@Override
 					public void run() {
 						settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
-						//settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+						//settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 					}
 				});
 				finishCurrentRoute();

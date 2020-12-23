@@ -2366,7 +2366,7 @@ public class OsmandAidlApi {
 					if (!ApplicationMode.values(app).contains(appMode)) {
 						ApplicationMode.changeProfileAvailability(appMode, true, app);
 					}
-					app.getSettings().APPLICATION_MODE.set(appMode);
+					app.getSettings().setApplicationMode(appMode);
 				}
 			});
 			return true;

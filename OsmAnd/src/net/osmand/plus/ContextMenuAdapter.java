@@ -258,7 +258,7 @@ public class ContextMenuAdapter {
 							@Override
 							public void onClick(View view) {
 								if (selected.size() > 0) {
-									app.getSettings().APPLICATION_MODE.set(selected.iterator().next());
+									app.getSettings().setApplicationMode(selected.iterator().next());
 									notifyDataSetChanged();
 								}
 								if (changeAppModeListener != null) {

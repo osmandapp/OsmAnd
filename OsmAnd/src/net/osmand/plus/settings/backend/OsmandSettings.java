@@ -238,7 +238,7 @@ public class OsmandSettings {
 					String appModeKey = (String) value;
 					ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 					if (appMode != null) {
-						APPLICATION_MODE.set(appMode);
+						setApplicationMode(appMode);
 						return true;
 					}
 				}
@@ -380,6 +380,18 @@ public class OsmandSettings {
 
 	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
 
+	public boolean setApplicationMode(ApplicationMode appMode) {
+		return setApplicationMode(appMode, true);
+	}
+
+	public boolean setApplicationMode(ApplicationMode appMode, boolean markAsLastUsed) {
+		boolean valueSaved = APPLICATION_MODE.set(appMode);
+		if (markAsLastUsed && valueSaved) {
+			LAST_USED_APPLICATION_MODE.set(appMode.getStringKey());
+		}
+		return valueSaved;
+	}
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new PreferenceWithListener<ApplicationMode>() {
 
@@ -425,7 +437,6 @@ public class OsmandSettings {
 			if (valueSaved) {
 				currentMode = val;
 				profilePreferences = getProfilePreferences(currentMode);
-				LAST_USED_APPLICATION_MODE.set(currentMode.getStringKey());
 
 				fireEvent(oldMode);
 			}
@@ -757,7 +768,7 @@ public class OsmandSettings {
 		protected boolean setValue(Object prefs, ApplicationMode val) {
 			boolean valueSaved = settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
 			if (valueSaved) {
-				APPLICATION_MODE.set(val);
+				setApplicationMode(val);
 			}
 
 			return valueSaved;
