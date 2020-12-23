@@ -230,7 +230,7 @@ public class RoutingOptionsHelper {
 		if (rp instanceof OtherLocalRoutingParameter) {
 			updateGpxRoutingParameter((OtherLocalRoutingParameter) rp);
 		}
-		routingHelper.recalculateRouteDueToSettingsChange();
+		routingHelper.onSettingsChanged(true);
 	}
 
 	public void updateGpxRoutingParameter(OtherLocalRoutingParameter gpxParam) {
@@ -377,7 +377,7 @@ public class RoutingOptionsHelper {
 								LocalRoutingParameter rp = group.getRoutingParameters().get(i);
 								rp.setSelected(settings, i == position);
 							}
-							mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+							mapActivity.getRoutingHelper().onSettingsChanged(true);
 							if (listener != null) {
 								listener.onClick();
 							}

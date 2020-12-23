@@ -9,6 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
@@ -19,16 +20,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecificRoads.AvoidRoadInfo> {
+public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo> {
 
 	private OsmandSettings settings;
 	private AvoidSpecificRoads specificRoads;
 
-	public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull List<AvoidSpecificRoads.AvoidRoadInfo> items) {
+	public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull List<AvoidRoadInfo> items) {
 		super(app, null, items);
 	}
 
-	public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @Nullable AvoidRoadsSettingsItem baseItem, @NonNull List<AvoidSpecificRoads.AvoidRoadInfo> items) {
+	public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @Nullable AvoidRoadsSettingsItem baseItem, @NonNull List<AvoidRoadInfo> items) {
 		super(app, baseItem, items);
 	}
 
@@ -64,16 +65,16 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 
 	@Override
 	public void apply() {
-		List<AvoidSpecificRoads.AvoidRoadInfo> newItems = getNewItems();
+		List<AvoidRoadInfo> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {
 			appliedItems = new ArrayList<>(newItems);
-			for (AvoidSpecificRoads.AvoidRoadInfo duplicate : duplicateItems) {
+			for (AvoidRoadInfo duplicate : duplicateItems) {
 				LatLon latLon = new LatLon(duplicate.latitude, duplicate.longitude);
 				if (settings.removeImpassableRoad(latLon)) {
 					settings.addImpassableRoad(duplicate);
 				}
 			}
-			for (AvoidSpecificRoads.AvoidRoadInfo avoidRoad : appliedItems) {
+			for (AvoidRoadInfo avoidRoad : appliedItems) {
 				settings.addImpassableRoad(avoidRoad);
 			}
 			specificRoads.loadImpassableRoads();
@@ -82,8 +83,8 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 	}
 
 	@Override
-	public boolean isDuplicate(@NonNull AvoidSpecificRoads.AvoidRoadInfo item) {
-		for (AvoidSpecificRoads.AvoidRoadInfo roadInfo : existingItems) {
+	public boolean isDuplicate(@NonNull AvoidRoadInfo item) {
+		for (AvoidRoadInfo roadInfo : existingItems) {
 			if (roadInfo.id == item.id) {
 				return true;
 			}
@@ -103,7 +104,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 
 	@NonNull
 	@Override
-	public AvoidSpecificRoads.AvoidRoadInfo renameItem(@NonNull AvoidSpecificRoads.AvoidRoadInfo item) {
+	public AvoidRoadInfo renameItem(@NonNull AvoidRoadInfo item) {
 		return item;
 	}
 
@@ -118,13 +119,15 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 				JSONObject object = jsonArray.getJSONObject(i);
 				double latitude = object.optDouble("latitude");
 				double longitude = object.optDouble("longitude");
+				double direction = object.optDouble("direction");
 				String name = object.optString("name");
 				String appModeKey = object.optString("appModeKey");
 				long id = object.optLong("roadId");
-				AvoidSpecificRoads.AvoidRoadInfo roadInfo = new AvoidSpecificRoads.AvoidRoadInfo();
+				AvoidRoadInfo roadInfo = new AvoidRoadInfo();
 				roadInfo.id = id;
 				roadInfo.latitude = latitude;
 				roadInfo.longitude = longitude;
+				roadInfo.direction = direction;
 				roadInfo.name = name;
 				if (ApplicationMode.valueOfStringKey(appModeKey, null) != null) {
 					roadInfo.appModeKey = appModeKey;
@@ -144,13 +147,16 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidSpecific
 		JSONArray jsonArray = new JSONArray();
 		if (!items.isEmpty()) {
 			try {
-				for (AvoidSpecificRoads.AvoidRoadInfo avoidRoad : items) {
+				for (AvoidRoadInfo avoidRoad : items) {
 					JSONObject jsonObject = new JSONObject();
 					jsonObject.put("latitude", avoidRoad.latitude);
 					jsonObject.put("longitude", avoidRoad.longitude);
 					jsonObject.put("name", avoidRoad.name);
 					jsonObject.put("appModeKey", avoidRoad.appModeKey);
 					jsonObject.put("roadId", avoidRoad.id);
+					if (!Double.isNaN(avoidRoad.direction)) {
+						jsonObject.put("direction", avoidRoad.direction);
+					}
 					jsonArray.put(jsonObject);
 				}
 				json.put("items", jsonArray);

@@ -70,13 +70,14 @@ import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.measurementtool.command.ReversePointsCommand;
-import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
-import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.measurementtool.command.SplitPointsCommand;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.OnAppModeConfiguredCallback;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
@@ -108,8 +109,8 @@ import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCo
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
-		SaveAsNewTrackFragmentListener, MapControlsLayer.MapControlsThemeInfoProvider,
-		RouteOptionsBottomSheet.OnAppModeConfiguredCallback{
+		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider,
+		OnAppModeConfiguredCallback {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -179,7 +180,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			return mainView.getHeight();
 		}
 
-		public boolean shouldShowXAxisPoints () {
+		public boolean shouldShowXAxisPoints() {
 			return false;
 		}
 	}
@@ -546,7 +547,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (savedInstanceState == null) {
 			if (fileName != null) {
 				addNewGpxData(getGpxFile(fileName));
-			} else if (editingCtx.isApproximationNeeded()) {
+			} else if (editingCtx.isApproximationNeeded() && isFollowTrackMode()) {
 				enterApproximationMode(mapActivity);
 			}
 		} else {
@@ -929,7 +930,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				if (isFollowTrackMode()) {
 					mapActivity.getMapActions().setGPXRouteParams(gpx);
 					app.getTargetPointsHelper().updateRouteAndRefresh(true);
-					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+					app.getRoutingHelper().onSettingsChanged(true);
 				} else {
 					mapActivity.getMapActions().stopNavigationActionConfirm(null , new Runnable() {
 						@Override

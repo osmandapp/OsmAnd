@@ -3561,7 +3561,7 @@
     <string name="shared_string_rhomb">מעויני</string>
     <string name="shared_string_square">ריבועי</string>
     <string name="shared_string_min">מזערי</string>
-    <string name="osm_edits_view_descr">ניתן לצפות בכל העריכות או בתקלות ב־OSM שטרם הועלו תחת %1$s. נקודות שהועלו לא מופיעות ב־OsmAnd.</string>
+    <string name="osm_edits_view_descr">ניתן לצפות בכל העריכות או בתקלות ב־OSM שטרם הועלו תחת %1$s. שינויים שהועלו לא יופיעו עוד.</string>
     <string name="hillshade_description">מפת הצללה עם צבעי הצללה כהים כדי להדגיש מדרונות, פסגות ועמקים.</string>
     <string name="shared_string_octagon">מתומן</string>
     <string name="multimedia_notes_view_descr">הערות ה־OSM שלך הן תחת %1$s.</string>
@@ -3800,7 +3800,7 @@
     <string name="lenght_limit_description">נא לספק את אורך כלי הרכב שלך, מגבלות מסלול מסוימות עשויות לחול על כלי רכב ארוכים.</string>
     <string name="quick_action_remove_next_destination">מחיקת נקודת היעד הקרובה ביותר</string>
     <string name="please_provide_point_name_error">נא לספק שם לנקודה</string>
-    <string name="quick_action_remove_next_destination_descr">נקודת היעד הנוכחית במסלול תימחק. אם זה יהיה היעד, הניווט ייעצר.</string>
+    <string name="quick_action_remove_next_destination_descr">מוחק את נקודת היעד הבאה במסלול שלך. אם זו נקודת היעד, הניווט ייפסק.</string>
     <string name="search_download_wikipedia_maps">הורדת מפות ויקיפדיה</string>
     <string name="plugin_wikipedia_description">קבלת מידע על נקודות עניין מוויקיפדיה. מדריך הכיס הפרטי שלך - עליך פשוט להפעיל את התוסף של ויקיפדיה וליהנות מערכים על מה שסביבך.</string>
     <string name="app_mode_enduro_motorcycle">אופנוע שטח</string>
@@ -3877,7 +3877,7 @@
     <string name="simplified_track_description">רק קו המסלול יישמר, נקודות הדרך תימחקנה.</string>
     <string name="shared_string_file_name">שם קובץ</string>
     <string name="number_of_gpx_files_selected_pattern">%s קובצי מסלול נבחרו</string>
-    <string name="disable_recording_once_app_killed_descrp">רישום ה־GPX יושהה כאשר היישומון ייסגר (דרך היישומונים האחרונים). (התראות הרקע של OsmAnd תיעלמנה מסרגל ההודעות של Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">תיעוד המסלול יושהה כאשר היישומון ייסגר (דרך היישומונים האחרונים). (התראות הרקע של OsmAnd תיעלמנה מסרגל ההודעות של Android.)</string>
     <string name="gpx_monitoring_stop">להשהות הקלטת מסלול</string>
     <string name="gpx_monitoring_start">להמשיך בהקלטת המסלול</string>
     <string name="system_default_theme">בררת המחדל של המערכת</string>
@@ -3914,11 +3914,11 @@
     <string name="routing_attr_avoid_footways_description">הימנעות משבילי הולכי רגל</string>
     <string name="routing_attr_avoid_footways_name">הימנעות משבילי הולכי רגל</string>
     <string name="osm_live_payment_desc_hw">המינוי חויב לתקופה הנבחרת. ניתן לבטל דרך ה־AppGallery בכל עת.</string>
-    <string name="osm_live_payment_subscription_management_hw">התשלום יחויב דרך חשבון ה־AppGallery שלך עם אישור הרכישה.
+    <string name="osm_live_payment_subscription_management_hw">חשבון ה־AppGallery שלך יחויב עם אישור הרכישה.
 \n
-\nהמינוי מתחדש אוטומטי אלא אם כן בוטל בטרם תאריך החידוש. החשבון שלך יחויב על תקופת החידוש (חודש/שלושה חודשים/שנה) רק בתאריך החידוש.
+\nתוקף המינוי מתארך אוטומטי אלא אם כן בוטל בטרם תאריך החידוש. החשבון שלך יחויב על תקופת החידוש (חודש/שלושה חודשים/שנה) רק בתאריך החידוש.
 \n
-\nניתן לנהל ולבטל את המינויים שלך דרך ההגדרות ב־AppGallery שלך.</string>
+\nניתן לנהל ולבטל את המינויים שלך בהגדרות ב־AppGallery שלך.</string>
     <string name="what_is_new">מה חדש</string>
     <string name="development">פיתוח</string>
     <string name="use_live_public_transport">נתוני זמן אמת של OsmAnd</string>
@@ -4018,4 +4018,7 @@
 \n • תמיכה בצבעים מותאמים אישית למועדפים ולנקודות דרך במסלול
 \n
 \n</string>
+    <string name="profile_type_osmand_string">פרופיל</string>
+    <string name="profile_type_user_string">פרופיל</string>
+    <string name="reverse_all_points">להפוך את כל</string>
 </resources>

@@ -13,8 +13,10 @@ public class NavigateParams implements Parcelable {
 	private double destLon;
 	private String profile;
 	private boolean force;
+	private boolean needLocationPermission;
 
-	public NavigateParams(String startName, double startLat, double startLon, String destName, double destLat, double destLon, String profile, boolean force) {
+	public NavigateParams(String startName, double startLat, double startLon, String destName, double destLat,
+						  double destLon, String profile, boolean force, boolean needLocationPermission) {
 		this.startName = startName;
 		this.startLat = startLat;
 		this.startLon = startLon;
@@ -23,6 +25,7 @@ public class NavigateParams implements Parcelable {
 		this.destLon = destLon;
 		this.profile = profile;
 		this.force = force;
+		this.needLocationPermission = needLocationPermission;
 	}
 
 	public NavigateParams(Parcel in) {
@@ -73,6 +76,10 @@ public class NavigateParams implements Parcelable {
 		return force;
 	}
 
+	public boolean isNeedLocationPermission() {
+		return needLocationPermission;
+	}
+
 	@Override
 	public void writeToParcel(Parcel out, int flags) {
 		out.writeString(startName);
@@ -83,6 +90,7 @@ public class NavigateParams implements Parcelable {
 		out.writeDouble(destLon);
 		out.writeString(profile);
 		out.writeByte((byte) (force ? 1 : 0));
+		out.writeByte((byte) (needLocationPermission ? 1 : 0));
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -94,11 +102,11 @@ public class NavigateParams implements Parcelable {
 		destLon = in.readDouble();
 		profile = in.readString();
 		force = in.readByte() != 0;
+		needLocationPermission = in.readByte() != 0;
 	}
 
 	@Override
 	public int describeContents() {
 		return 0;
 	}
-
 }

@@ -301,7 +301,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			avoidSpecificRoads.removeImpassableRoad(routeLocation);
 		}
 
-		app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+		app.getRoutingHelper().onSettingsChanged(true);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			final MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();

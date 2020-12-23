@@ -425,6 +425,7 @@ public class OsmandSettings {
 			if (valueSaved) {
 				currentMode = val;
 				profilePreferences = getProfilePreferences(currentMode);
+				LAST_USED_APPLICATION_MODE.set(currentMode.getStringKey());
 
 				fireEvent(oldMode);
 			}
@@ -735,11 +736,20 @@ public class OsmandSettings {
 
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference(this, "last_fav_category", "").makeGlobal();
 
+	public final OsmandPreference<Boolean> USE_LAST_APPLICATION_MODE_BY_DEFAULT = new BooleanPreference(this, "use_last_application_mode_by_default", false).makeGlobal().makeShared();
+
+	public final OsmandPreference<String> LAST_USED_APPLICATION_MODE = new StringPreference(this, "last_used_application_mode", ApplicationMode.DEFAULT.getStringKey()).makeGlobal().makeShared();
+
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "default_application_mode_string", ApplicationMode.DEFAULT) {
 
 		@Override
 		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
-			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
+			String key;
+			if (USE_LAST_APPLICATION_MODE_BY_DEFAULT.get()) {
+				key = LAST_USED_APPLICATION_MODE.get();
+			} else {
+				key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
+			}
 			return ApplicationMode.valueOfStringKey(key, defaultValue);
 		}
 
@@ -978,7 +988,16 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
 	}
 
-	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<>(this, "route_service", RouteService.OSMAND, RouteService.values()).makeProfile().cache();
+	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<RouteService>(this, "route_service", RouteService.OSMAND, RouteService.values()) {
+		@Override
+		public RouteService getModeValue(ApplicationMode mode) {
+			if (mode == ApplicationMode.DEFAULT) {
+				return RouteService.STRAIGHT;
+			} else {
+				return super.getModeValue(mode);
+			}
+		}
+	}.makeProfile().cache();
 
 	{
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.DEFAULT, RouteService.STRAIGHT);
@@ -2097,6 +2116,7 @@ public class OsmandSettings {
 	public static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
 	public static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
 	public static final String IMPASSABLE_ROADS_IDS = "impassable_roads_ids";
+	public static final String IMPASSABLE_ROADS_DIRECTIONS = "impassable_roads_directions";
 	public static final String IMPASSABLE_ROADS_APP_MODE_KEYS = "impassable_roads_app_mode_keys";
 
 	public void backupPointToStart() {

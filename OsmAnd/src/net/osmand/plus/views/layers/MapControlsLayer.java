@@ -497,7 +497,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			if (object instanceof SelectedGpxPoint && !((SelectedGpxPoint) object).getSelectedGpxFile().isShowCurrentTrack()) {
 				GPXFile gpxFile = ((SelectedGpxPoint) object).getSelectedGpxFile().getGpxFile();
 				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpxFile, null, null, true, true, MenuState.HEADER_ONLY);
-				routingHelper.recalculateRouteDueToSettingsChange();
+				routingHelper.onSettingsChanged(true);
 				menu.close();
 			} else {
 				if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {

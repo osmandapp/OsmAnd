@@ -37,7 +37,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getDescription() {
+	public CharSequence getDescription() {
 		return app.getString(R.string.osmand_development_plugin_description);
 	}
 

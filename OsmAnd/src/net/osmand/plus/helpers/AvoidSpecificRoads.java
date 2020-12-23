@@ -26,15 +26,15 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.RouteSegmentSearchResult;
+import net.osmand.plus.routing.RouteSegmentSearchResult;
+import net.osmand.plus.routing.RoutingHelperUtils;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
@@ -59,7 +59,7 @@ public class AvoidSpecificRoads {
 		loadImpassableRoads();
 	}
 
-	public void loadImpassableRoads(){
+	public void loadImpassableRoads() {
 		for (AvoidRoadInfo avoidRoadInfo : app.getSettings().getImpassableRoadPoints()) {
 			impassableRoads.put(new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude), avoidRoadInfo);
 		}
@@ -150,7 +150,7 @@ public class AvoidSpecificRoads {
 		if (obj != null) {
 			String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
 			boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-			String name = RoutingHelper.formatStreetName(
+			String name = RoutingHelperUtils.formatStreetName(
 					obj.getName(locale, transliterate),
 					obj.getRef(locale, transliterate, true),
 					obj.getDestinationName(locale, transliterate, true),
@@ -164,10 +164,7 @@ public class AvoidSpecificRoads {
 	}
 
 	private void recalculateRoute() {
-		RoutingHelper rh = app.getRoutingHelper();
-		if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
-			rh.recalculateRouteDueToSettingsChange();
-		}
+		app.getRoutingHelper().onSettingsChanged();
 	}
 
 	public void removeImpassableRoad(LatLon latLon) {
@@ -244,7 +241,7 @@ public class AvoidSpecificRoads {
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 			float maxDistPx = MAX_AVOID_ROUTE_SEARCH_RADIUS_DP * tb.getDensity();
 			RouteSegmentSearchResult searchResult =
-					RoutingHelper.searchRouteSegment(loc.getLatitude(), loc.getLongitude(), maxDistPx / tb.getPixDensity(), roads);
+					RouteSegmentSearchResult.searchRouteSegment(loc.getLatitude(), loc.getLongitude(), maxDistPx / tb.getPixDensity(), roads);
 			if (searchResult != null) {
 				QuadPoint point = searchResult.getPoint();
 				LatLon newLoc = new LatLon(MapUtils.get31LatitudeY((int) point.y), MapUtils.get31LongitudeX((int) point.x));
@@ -390,7 +387,14 @@ public class AvoidSpecificRoads {
 		if (avoidRoadInfo == null) {
 			avoidRoadInfo = new AvoidRoadInfo();
 		}
-		avoidRoadInfo.id = object != null ? object.id : 0;
+		if (object != null) {
+			avoidRoadInfo.id = object.id;
+//			avoidRoadInfo.direction = object.directionRoute(0, true);
+			avoidRoadInfo.direction = Double.NaN;
+		} else {
+			avoidRoadInfo.id = 0;
+			avoidRoadInfo.direction = Double.NaN;
+		}
 		avoidRoadInfo.latitude = lat;
 		avoidRoadInfo.longitude = lon;
 		avoidRoadInfo.appModeKey = appModeKey;
@@ -400,6 +404,7 @@ public class AvoidSpecificRoads {
 
 	public static class AvoidRoadInfo {
 		public long id;
+		public double direction = Double.NaN;
 		public double latitude;
 		public double longitude;
 		public String name;

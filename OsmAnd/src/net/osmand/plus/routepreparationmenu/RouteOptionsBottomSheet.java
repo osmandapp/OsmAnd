@@ -101,7 +101,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		DIRECTIONS(),
 		PLAN_ROUTE(MuteSoundRoutingParameter.class,
 				RouteSimulationItem.class,
-				GpxLocalRoutingParameter.class);
+				GpxLocalRoutingParameter.class,
+				ShowAlongTheRouteItem.class);
 
 		private final Class<? extends LocalRoutingParameter>[] excludeParameters;
 
@@ -399,7 +400,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						boolean enabled = !settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(applicationMode);
 						settings.ENABLE_TIME_CONDITIONAL_ROUTING.setModeValue(applicationMode, enabled);
 						timeConditionalRoutingItem[0].setChecked(enabled);
-						app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+						app.getRoutingHelper().onSettingsChanged(true);
 					}
 				})
 				.create();

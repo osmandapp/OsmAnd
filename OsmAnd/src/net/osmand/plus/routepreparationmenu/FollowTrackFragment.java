@@ -521,7 +521,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			}
 			mapActivity.getMapActions().setGPXRouteParams(gpxFile);
 			app.getTargetPointsHelper().updateRouteAndRefresh(true);
-			app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+			app.getRoutingHelper().onSettingsChanged(true);
 		}
 	}
 

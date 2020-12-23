@@ -39,15 +39,17 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
+ *
  */
 public class WaypointDialogHelper {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private WaypointHelper waypointHelper;
-	private List<WaypointDialogHelperCallback> helperCallbacks= new ArrayList<>();
+	private List<WaypointDialogHelperCallback> helperCallbacks = new ArrayList<>();
 
 	private boolean flat;
 	private List<LocationPointWrapper> deletedPoints;
@@ -242,8 +244,8 @@ public class WaypointDialogHelper {
 
 	// switch start & finish
 	public static void switchStartAndFinish(TargetPointsHelper targetPointsHelper, TargetPoint finish,
-											 Activity ctx, TargetPoint start, OsmandApplication app,
-											 WaypointDialogHelper helper) {
+											Activity ctx, TargetPoint start, OsmandApplication app,
+											WaypointDialogHelper helper) {
 		if (finish == null) {
 			app.showShortToastMessage(R.string.mark_final_location_first);
 		} else {
@@ -263,6 +265,20 @@ public class WaypointDialogHelper {
 		}
 	}
 
+	public static void reverseAllPoints(OsmandApplication app, Activity ctx,
+										WaypointDialogHelper helper) {
+		TargetPointsHelper targets = app.getTargetPointsHelper();
+		if (!targets.getAllPoints().isEmpty()) {
+			List<TargetPoint> points = targets.getAllPoints();
+			Collections.reverse(points);
+			TargetPoint start = points.get(0);
+			targets.setStartPoint(start.point, false, start.getOriginalPointDescription());
+			points.remove(start);
+			targets.reorderAllTargetPoints(points, true);
+			updateControls(ctx, helper);
+		}
+	}
+
 	public static void updateControls(Activity ctx, WaypointDialogHelper helper) {
 		if (helper != null && helper.helperCallbacks != null) {
 			for (WaypointDialogHelperCallback callback : helper.helperCallbacks) {
@@ -278,7 +294,7 @@ public class WaypointDialogHelper {
 	}
 
 	public static void replaceStartWithFirstIntermediate(TargetPointsHelper targetPointsHelper, Activity ctx,
-														  WaypointDialogHelper helper) {
+														 WaypointDialogHelper helper) {
 		List<TargetPoint> intermediatePoints = targetPointsHelper.getIntermediatePointsWithTarget();
 		TargetPoint firstIntermediate = intermediatePoints.remove(0);
 		targetPointsHelper.setStartPoint(new LatLon(firstIntermediate.getLatitude(),
@@ -443,7 +459,8 @@ public class WaypointDialogHelper {
 		@Override
 		public void createMenuItems(Bundle savedInstanceState) {
 			items.add(new TitleItem(getString(R.string.shared_string_options)));
-
+			final OsmandApplication app = requiredMyApplication();
+			final TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 			BaseBottomSheetItem sortDoorToDoorItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_sort_door_to_door))
 					.setTitle(getString(R.string.intermediate_items_sort_by_distance))
@@ -490,6 +507,30 @@ public class WaypointDialogHelper {
 					})
 					.create();
 			items.add(reorderStartAndFinishItem);
+
+			BaseBottomSheetItem reorderAllItems = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_sort_reverse_order))
+					.setTitle(getString(R.string.reverse_all_points))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							MapActivity mapActivity = getMapActivity();
+							if (mapActivity != null) {
+								WaypointDialogHelper.reverseAllPoints(
+										app,
+										mapActivity,
+										mapActivity.getDashboard().getWaypointDialogHelper()
+								);
+							}
+							dismiss();
+						}
+					})
+					.create();
+			int intermediateSize = targetsHelper.getIntermediatePoints().size();
+			if (intermediateSize > 2) {
+				items.add(reorderAllItems);
+			}
 
 			items.add(new DividerHalfItem(getContext()));
 

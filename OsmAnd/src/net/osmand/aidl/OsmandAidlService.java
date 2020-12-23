@@ -44,6 +44,7 @@ import net.osmand.aidl.gpx.RemoveGpxParams;
 import net.osmand.aidl.gpx.ShowGpxParams;
 import net.osmand.aidl.gpx.StartGpxRecordingParams;
 import net.osmand.aidl.gpx.StopGpxRecordingParams;
+import net.osmand.aidl.lock.SetLockStateParams;
 import net.osmand.aidl.map.ALatLon;
 import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.maplayer.AddMapLayerParams;
@@ -85,10 +86,9 @@ import net.osmand.aidl.quickaction.QuickActionParams;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
-import net.osmand.aidl.lock.SetLockStateParams;
 import net.osmand.data.LatLon;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -736,7 +736,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				return params != null && api != null && api.navigate(
 						params.getStartName(), params.getStartLat(), params.getStartLon(),
 						params.getDestName(), params.getDestLat(), params.getDestLon(),
-						params.getProfile(), params.isForce());
+						params.getProfile(), params.isForce(), params.isNeedLocationPermission());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -747,7 +747,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean navigateGpx(NavigateGpxParams params) {
 			try {
 				OsmandAidlApi api = getApi("navigateGpx");
-				return params != null && api != null && api.navigateGpx(params.getData(), params.getUri(), params.isForce());
+				return params != null && api != null && api.navigateGpx(params.getData(), params.getUri(),
+						params.isForce(), params.isNeedLocationPermission());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -857,7 +858,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				return params != null && api != null && api.navigateSearch(
 						params.getStartName(), params.getStartLat(), params.getStartLon(),
 						params.getSearchQuery(), params.getSearchLat(), params.getSearchLon(),
-						params.getProfile(), params.isForce());
+						params.getProfile(), params.isForce(), params.isNeedLocationPermission());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1328,6 +1329,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				return false;
 			}
 		}
+
 		@Override
 		public boolean setLockState(SetLockStateParams params) {
 			try {

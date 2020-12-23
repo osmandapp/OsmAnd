@@ -4005,4 +4005,5 @@
 \n</string>
     <string name="profile_type_osmand_string">ملف تعريف أوسماند</string>
     <string name="profile_type_user_string">ملف تعريف المستخدم</string>
+    <string name="reverse_all_points">عكس جميع النقاط</string>
 </resources>

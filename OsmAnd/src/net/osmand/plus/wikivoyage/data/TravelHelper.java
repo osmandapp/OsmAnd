@@ -19,26 +19,31 @@ public interface TravelHelper {
 	boolean isAnyTravelBookPresent();
 
 	@NonNull
-	List<WikivoyageSearchResult> search(final String searchQuery);
+	List<WikivoyageSearchResult> search(@NonNull String searchQuery);
 
 	@NonNull
 	List<TravelArticle> getPopularArticles();
 
-	Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(
-			final TravelArticle article);
+	@NonNull
+	Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(@NonNull final TravelArticle article);
 
 	@Nullable
-	TravelArticle getArticleById(String routeId, String lang);
+	TravelArticle getArticleById(@NonNull String routeId, @NonNull String lang);
 
-	TravelArticle getArticleByTitle(String title, String lang);
+	@Nullable
+	TravelArticle getArticleByTitle(@NonNull String title, @NonNull String lang);
 
-	String getArticleId(String title, String lang);
+	@NonNull
+	String getArticleId(@NonNull String title, @NonNull String lang);
 
-	ArrayList<String> getArticleLangs(String routeId);
+	@NonNull
+	ArrayList<String> getArticleLangs(@NonNull String routeId);
 
-	String getGPXName(TravelArticle article);
+	@NonNull
+	String getGPXName(@NonNull final TravelArticle article);
 
-	File createGpxFile(TravelArticle article);
+	@NonNull
+	File createGpxFile(@NonNull final TravelArticle article);
 
 	// TODO: this method should be deleted once TravelDBHelper is deleted
 	// For TravelOBFHelper it could always return "" and should be no problem

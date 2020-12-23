@@ -117,7 +117,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getDescription() {
+	public CharSequence getDescription() {
 		return app.getString(R.string.record_plugin_description);
 	}
 

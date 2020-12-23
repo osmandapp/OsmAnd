@@ -4013,4 +4013,7 @@
 \n • Suportu pro colores personalizados pro sos preferidos e sos puntos de coladòrgiu de sas rastas
 \n
 \n</string>
+    <string name="profile_type_osmand_string">Profilu de OsmAnd</string>
+    <string name="profile_type_user_string">Profilu de s\'impreadore</string>
+    <string name="reverse_all_points">Fùrria totu sos puntos</string>
 </resources>

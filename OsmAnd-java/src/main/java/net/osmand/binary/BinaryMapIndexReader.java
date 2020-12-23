@@ -1568,6 +1568,10 @@ public class BinaryMapIndexReader {
 	}
 
 	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, ResultMatcher<Amenity> resultMatcher, ResultMatcher<Amenity> rawDataCollector) {
+		return buildSearchPoiRequest(x, y, nameFilter, sleft, sright, stop, sbottom, null, resultMatcher, null);
+	}
+
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> resultMatcher, ResultMatcher<Amenity> rawDataCollector) {
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.x = x;
 		request.y = y;
@@ -1575,6 +1579,7 @@ public class BinaryMapIndexReader {
 		request.right = sright;
 		request.top = stop;
 		request.bottom = sbottom;
+		request.poiTypeFilter = poiTypeFilter;
 		request.resultMatcher = resultMatcher;
 		request.rawDataCollector = rawDataCollector;
 		request.nameQuery = nameFilter.trim();

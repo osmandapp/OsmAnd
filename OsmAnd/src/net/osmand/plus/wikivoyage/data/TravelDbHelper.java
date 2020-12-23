@@ -99,13 +99,13 @@ public class TravelDbHelper implements TravelHelper {
 	private final OsmandApplication application;
 
 	private TravelLocalDataHelper localDataHelper;
-	private Collator collator;
+	private final Collator collator;
 
 	private SQLiteConnection connection = null;
 
 	private File selectedTravelBook = null;
 	private List<File> existingTravelBooks = new ArrayList<>();
-	private List<TravelArticle> popularArticles = new ArrayList<TravelArticle>();
+	private List<TravelArticle> popularArticles = new ArrayList<>();
 	
 	
 	public TravelDbHelper(OsmandApplication application) {
@@ -126,6 +126,7 @@ public class TravelDbHelper implements TravelHelper {
 		return false;
 	}
 
+	@Override
 	public TravelLocalDataHelper getBookmarksHelper() {
 		return localDataHelper;
 	}
@@ -135,6 +136,7 @@ public class TravelDbHelper implements TravelHelper {
 		return selectedTravelBook != null;
 	}
 
+	@Override
 	public void initializeDataOnAppStartup() {
 		List<File> files = getPossibleFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
@@ -168,12 +170,14 @@ public class TravelDbHelper implements TravelHelper {
 		return null;
 	}
 
+	@Override
 	public void initializeDataToDisplay() {
 		localDataHelper.refreshCachedData();
 		loadPopularArticles();
 	}
 
 
+	@Override
 	public String getSelectedTravelBookName() {
 		if (selectedTravelBook != null) {
 			return selectedTravelBook.getName();
@@ -210,8 +214,9 @@ public class TravelDbHelper implements TravelHelper {
 		}
 	}
 
+	@Override
 	@NonNull
-	public List<WikivoyageSearchResult> search(final String searchQuery) {
+	public List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		String[] queries = searchQuery.replace('_', ' ').replace('/', ' ').split(" ");
@@ -260,6 +265,7 @@ public class TravelDbHelper implements TravelHelper {
 		return list;
 	}
 
+	@Override
 	@NonNull
 	public List<TravelArticle> getPopularArticles() {
 		return popularArticles;
@@ -270,7 +276,7 @@ public class TravelDbHelper implements TravelHelper {
 		String language = application.getLanguage();
 		SQLiteConnection conn = openConnection();
 		if (conn == null) {
-			popularArticles = new ArrayList<TravelArticle>();
+			popularArticles = new ArrayList<>();
 			return popularArticles;
 		}
 		String LANG_WHERE = " WHERE " + ARTICLES_COL_LANG + " = '" + language + "'";
@@ -376,7 +382,7 @@ public class TravelDbHelper implements TravelHelper {
 		return res;
 	}
 
-	private void sortSearchResults(final String searchQuery, List<WikivoyageSearchResult> list) {
+	private void sortSearchResults(@NonNull final String searchQuery, @NonNull List<WikivoyageSearchResult> list) {
 		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 			@Override
 			public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
@@ -444,8 +450,9 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@NonNull
+	@Override
 	public LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(
-			final TravelArticle article) {
+			@NonNull final TravelArticle article) {
 		String lang = article.getLang();
 		String title = article.getTitle();
 		if (TextUtils.isEmpty(lang) || TextUtils.isEmpty(title)) {
@@ -533,8 +540,9 @@ public class TravelDbHelper implements TravelHelper {
 		return res;
 	}
 
+	@Override
 	@Nullable
-	public TravelArticle getArticleById(String routeId, String lang) {
+	public TravelArticle getArticleById(@NonNull String routeId, @NonNull String lang) {
 		TravelArticle res = null;
 		SQLiteConnection conn = openConnection();
 		if (conn != null && !Algorithms.isEmpty(routeId)) {
@@ -550,8 +558,9 @@ public class TravelDbHelper implements TravelHelper {
 		return res;
 	}
 
+	@Override
 	@Nullable
-	public TravelArticle getArticleByTitle(String title, String lang) {
+	public TravelArticle getArticleByTitle(@NonNull String title, @NonNull String lang) {
 		TravelArticle res = null;
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
@@ -567,7 +576,9 @@ public class TravelDbHelper implements TravelHelper {
 		return res;
 	}
 
-	public String getArticleId(String title, String lang) {
+	@NonNull
+	@Override
+	public String getArticleId(@NonNull String title, @NonNull String lang) {
 		String res = "";
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
@@ -585,7 +596,8 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@NonNull
-	public ArrayList<String> getArticleLangs(String routeId) {
+	@Override
+	public ArrayList<String> getArticleLangs(@NonNull String routeId) {
 		ArrayList<String> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
@@ -652,12 +664,16 @@ public class TravelDbHelper implements TravelHelper {
 		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
 	}
 
-	public String getGPXName(TravelArticle article) {
+	@NonNull
+	@Override
+	public String getGPXName(@NonNull final TravelArticle article) {
 		return article.getTitle().replace('/', '_').replace('\'', '_')
 				.replace('\"', '_') + IndexConstants.GPX_FILE_EXT;
 	}
 
-	public File createGpxFile(TravelArticle article) {
+	@NonNull
+	@Override
+	public File createGpxFile(@NonNull final TravelArticle article) {
 		final GPXFile gpx = article.getGpxFile();
 		File file = application.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
 		if (!file.exists()) {

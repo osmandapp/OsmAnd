@@ -119,7 +119,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getDescription() {
+	public CharSequence getDescription() {
 		return app.getString(R.string.srtm_plugin_description);
 	}
 

@@ -3813,7 +3813,7 @@
     <string name="threshold_distance">Seuil de distance</string>
     <string name="navigation_profile">Profil de navigation</string>
     <string name="street_level_imagery">Photos des rues</string>
-    <string name="plan_route_exit_dialog_descr">Voulez-vous vraiment fermer l\'itinéraire planifié sans enregistrer \? (vous perdrez vos modifications)</string>
+    <string name="plan_route_exit_dialog_descr">Souhaitez-vous vraiment ignorer toutes les modifications apportées à l\'itinéraire planifié \?</string>
     <string name="in_case_of_reverse_direction">Si inversion du sens</string>
     <string name="pass_whole_track_descr">Point de la trace vers lequel naviguer</string>
     <string name="shared_string_gpx_route">Enregistrer le parcours</string>
@@ -3852,7 +3852,7 @@
     <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
     <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
     <string name="save_global_track_interval_descr">Définit la fréquence d’enregistrement des points du parcours (activable depuis le gadget \"Enregistrement\" sur la carte).</string>
-    <string name="disable_recording_once_app_killed_descrp">Suspend l\'enregistrement du parcours lorsque l\'application est arrêtée via Applications récentes ; les indications OsmAnd ne seront plus affichées dans la barre de notifications.</string>
+    <string name="disable_recording_once_app_killed_descrp">L\'enregistrement de l\'itinéraire sera suspendu si l\'application est arrêtée via Applications récentes (les indications OsmAnd ne seront plus affichées dans la barre de notifications).</string>
     <string name="all_next_segments_will_be_recalc">Tous les segments suivants seront recalculés avec le profil sélectionné.</string>
     <string name="all_previous_segments_will_be_recalc">Tous les segments précédents seront recalculés avec le profil sélectionné.</string>
     <string name="all_next_segments">Tous les segments suivants</string>
@@ -3885,7 +3885,7 @@
     <string name="sort_name_ascending">Nom : A – Z</string>
     <string name="start_finish_icons">Icônes de départ et d\'arrivée</string>
     <string name="contour_lines_thanks">Merci pour votre achat de \'Courbes de niveaux\'</string>
-    <string name="osm_live_payment_desc_hw">Abonnement facturé pour chaque période sélectionnée. Annulation possible à tout moment sur AppGallery.</string>
+    <string name="osm_live_payment_desc_hw">L\'abonnement est facturé pour la période sélectionnée. Annulation possible à tout moment sur AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Éviter les trottoirs</string>
     <string name="routing_attr_avoid_footways_name">Éviter les trottoirs</string>
     <string name="development">Développement</string>
@@ -3995,4 +3995,7 @@
     <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
     <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » siginifie que la trace sera affichée publiquement dans « Mes traces GPS » ainsi que dans les listes de traces GPS publiques. Ainsi les autres utilisateurs peuvent télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Les données de points de passage horodatés fournis par l\'API GPS publique feront référence à la page d\'origine de votre trace.</string>
     <string name="gpx_upload_public_visibility_descr">« Public » signifie que la trace est affichée publiquement dans vos traces GPS et dans les listes de traces GPS publiques. Les données diffusées via l\'API ne font pas référence à votre page de traces. Les horodatages des points de trace ne sont pas disponibles via l\'API GPS publique et les points de trace ne sont pas classés par ordre chronologique.</string>
+    <string name="profile_type_osmand_string">Profil OsmAnd</string>
+    <string name="profile_type_user_string">Profil utilisateur</string>
+    <string name="reverse_all_points">Inverser tous les points</string>
 </resources>

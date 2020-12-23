@@ -13,38 +13,42 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.edit.Node;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
-
+import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.TransportRoutePlanner;
-import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
-import net.osmand.router.TransportRoutingContext;
+import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutingConfiguration;
-import net.osmand.router.NativeTransportRoutingResult;
+import net.osmand.router.TransportRoutingContext;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
@@ -54,9 +58,13 @@ public class TransportRoutingHelper {
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private ApplicationMode applicationMode = ApplicationMode.PUBLIC_TRANSPORT;
 	private RoutingHelper routingHelper;
+
+	private final ExecutorService executor = new RouteRecalculationExecutor();
+	private final Map<Future<?>, RouteRecalculationTask> tasksMap = new LinkedHashMap<>();
+	private RouteRecalculationTask lastTask;
 
 	private List<TransportRouteResult> routes;
 	private Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments;
@@ -65,11 +73,9 @@ public class TransportRoutingHelper {
 	private LatLon startLocation;
 	private LatLon endLocation;
 
-	private Thread currentRunningJob;
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
 	private long lastTimeEvaluatedRoute = 0;
-	private boolean waitingNextJob;
 
 	private TransportRouteCalculationProgressCallback progressRoute;
 
@@ -171,16 +177,16 @@ public class TransportRoutingHelper {
 		this.currentRoute = currentRoute;
 	}
 
-	public void addListener(IRouteInformationListener l){
+	public void addListener(IRouteInformationListener l) {
 		listeners.add(new WeakReference<>(l));
 	}
 
-	public boolean removeListener(IRouteInformationListener lt){
+	public boolean removeListener(IRouteInformationListener lt) {
 		Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			WeakReference<IRouteInformationListener> ref = it.next();
 			IRouteInformationListener l = ref.get();
-			if(l == null || lt == l) {
+			if (l == null || lt == l) {
 				it.remove();
 				return true;
 			}
@@ -213,18 +219,14 @@ public class TransportRoutingHelper {
 
 	private void startRouteCalculationThread(TransportRouteCalculationParams params) {
 		synchronized (this) {
-			final Thread prevRunningJob = currentRunningJob;
 			app.getSettings().LAST_ROUTE_APPLICATION_MODE.set(routingHelper.getAppMode());
-			RouteRecalculationThread newThread =
-					new RouteRecalculationThread("Calculating public transport route", params,
-							app.getSettings().SAFE_MODE.get() ? null : NativeOsmandLibrary.getLoadedLibrary());
-			currentRunningJob = newThread;
+			RouteRecalculationTask newTask = new RouteRecalculationTask(this, params,
+					app.getSettings().SAFE_MODE.get() ? null : NativeOsmandLibrary.getLoadedLibrary());
+			lastTask = newTask;
 			startProgress(params);
 			updateProgress(params);
-			if (prevRunningJob != null) {
-				newThread.setWaitPrevJob(prevRunningJob);
-			}
-			currentRunningJob.start();
+			Future<?> future = executor.submit(newTask);
+			tasksMap.put(future, newTask);
 		}
 	}
 
@@ -251,10 +253,7 @@ public class TransportRoutingHelper {
 					if (isRouteBeingCalculated()) {
 						float pr = calculationProgress.getLinearProgress();
 						progressRoute.updateProgress((int) pr);
-						Thread t = currentRunningJob;
-						if (t instanceof RouteRecalculationThread && ((RouteRecalculationThread) t).params != params) {
-							// different calculation started
-						} else {
+						if (lastTask != null && lastTask.params == params) {
 							updateProgress(params);
 						}
 					} else {
@@ -269,7 +268,23 @@ public class TransportRoutingHelper {
 	}
 
 	public boolean isRouteBeingCalculated() {
-		return currentRunningJob instanceof RouteRecalculationThread || waitingNextJob;
+		synchronized (this) {
+			for (Future<?> future : tasksMap.keySet()) {
+				if (!future.isDone()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private void stopCalculation() {
+		synchronized (this) {
+			for (Map.Entry<Future<?>, RouteRecalculationTask> taskFuture : tasksMap.entrySet()) {
+				taskFuture.getValue().stopCalculation();
+				taskFuture.getKey().cancel(false);
+			}
+		}
 	}
 
 	private void setNewRoute(final List<TransportRouteResult> res) {
@@ -323,9 +338,7 @@ public class TransportRoutingHelper {
 			}
 		});
 		this.endLocation = newFinalLocation;
-		if (currentRunningJob instanceof RouteRecalculationThread) {
-			((RouteRecalculationThread) currentRunningJob).stopCalculation();
-		}
+		stopCalculation();
 	}
 
 	private void setCurrentLocation(LatLon currentLocation) {
@@ -334,15 +347,6 @@ public class TransportRoutingHelper {
 		}
 		startLocation = currentLocation;
 		recalculateRouteInBackground(currentLocation, endLocation);
-	}
-
-	private void showMessage(final String msg) {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				app.showToastMessage(msg);
-			}
-		});
 	}
 
 	@Nullable
@@ -404,7 +408,7 @@ public class TransportRoutingHelper {
 		}
 	}
 
-	private class WalkingRouteSegment {
+	private static class WalkingRouteSegment {
 		TransportRouteResultSegment s1;
 		TransportRouteResultSegment s2;
 		LatLon start;
@@ -437,18 +441,24 @@ public class TransportRoutingHelper {
 		}
 	}
 
-	private class RouteRecalculationThread extends Thread {
+	private static class RouteRecalculationTask implements Runnable {
 
+		private final TransportRoutingHelper transportRoutingHelper;
+		private final RoutingHelper routingHelper;
 		private final TransportRouteCalculationParams params;
-		private Thread prevRunningJob;
 
 		private final Queue<WalkingRouteSegment> walkingSegmentsToCalculate = new ConcurrentLinkedQueue<>();
 		private Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
 		private boolean walkingSegmentsCalculated;
-		private NativeLibrary lib;
+		private final NativeLibrary lib;
 
-		public RouteRecalculationThread(String name, TransportRouteCalculationParams params, NativeLibrary library) {
-			super(name);
+		String routeCalcError;
+		String routeCalcErrorShort;
+
+		public RouteRecalculationTask(@NonNull TransportRoutingHelper transportRoutingHelper,
+									  @NonNull TransportRouteCalculationParams params, @Nullable NativeLibrary library) {
+			this.transportRoutingHelper = transportRoutingHelper;
+			this.routingHelper = transportRoutingHelper.routingHelper;
 			this.params = params;
 			this.lib = library;
 			if (params.calculationProgress == null) {
@@ -460,9 +470,9 @@ public class TransportRoutingHelper {
 			params.calculationProgress.isCancelled = true;
 		}
 
-
 		/**
 		 * TODO Check if native lib available and calculate route there.
+		 *
 		 * @param params
 		 * @return
 		 * @throws IOException
@@ -474,18 +484,18 @@ public class TransportRoutingHelper {
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
 			params.params.clear();
 			OsmandSettings settings = params.ctx.getSettings();
-			for(Map.Entry<String, GeneralRouter.RoutingParameter> e : config.getRouter(params.mode.getRoutingProfile()).getParameters().entrySet()){
+			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : config.getRouter(params.mode.getRoutingProfile()).getParameters().entrySet()) {
 				String key = e.getKey();
 				GeneralRouter.RoutingParameter pr = e.getValue();
 				String vl;
-				if(pr.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
+				if (pr.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
 					CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(key, pr.getDefaultBoolean());
 					Boolean bool = pref.getModeValue(params.mode);
 					vl = bool ? "true" : null;
 				} else {
 					vl = settings.getCustomRoutingProperty(key, "").getModeValue(params.mode);
 				}
-				if(vl != null && vl.length() > 0) {
+				if (vl != null && vl.length() > 0) {
 					params.params.put(key, vl);
 				}
 			}
@@ -493,7 +503,7 @@ public class TransportRoutingHelper {
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
 
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
-			ctx.calculationProgress =  params.calculationProgress;
+			ctx.calculationProgress = params.calculationProgress;
 			if (ctx.library != null && !settings.PT_SAFE_MODE.get()) {
 				NativeTransportRoutingResult[] nativeRes = library.runNativePTRouting(
 						MapUtils.get31TileNumberX(params.start.getLongitude()),
@@ -510,7 +520,6 @@ public class TransportRoutingHelper {
 
 		@Nullable
 		private RouteCalculationParams getWalkingRouteParams() {
-
 			ApplicationMode walkingMode = ApplicationMode.PEDESTRIAN;
 
 			final WalkingRouteSegment walkingRouteSegment = walkingSegmentsToCalculate.poll();
@@ -518,13 +527,14 @@ public class TransportRoutingHelper {
 				return null;
 			}
 
+			OsmandApplication app = routingHelper.getApplication();
 			Location start = new Location("");
 			start.setLatitude(walkingRouteSegment.start.getLatitude());
 			start.setLongitude(walkingRouteSegment.start.getLongitude());
 			LatLon end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
 
 			final float currentDistanceFromBegin =
-					RouteRecalculationThread.this.params.calculationProgress.distanceFromBegin +
+					RouteRecalculationTask.this.params.calculationProgress.distanceFromBegin +
 							(walkingRouteSegment.s1 != null ? (float) walkingRouteSegment.s1.getTravelDist() : 0);
 
 			final RouteCalculationParams params = new RouteCalculationParams();
@@ -548,8 +558,8 @@ public class TransportRoutingHelper {
 					float p = Math.max(params.calculationProgress.distanceFromBegin,
 							params.calculationProgress.distanceFromEnd);
 
-					RouteRecalculationThread.this.params.calculationProgress.distanceFromBegin =
-							Math.max(RouteRecalculationThread.this.params.calculationProgress.distanceFromBegin, currentDistanceFromBegin + p);
+					RouteRecalculationTask.this.params.calculationProgress.distanceFromBegin =
+							Math.max(RouteRecalculationTask.this.params.calculationProgress.distanceFromBegin, currentDistanceFromBegin + p);
 				}
 
 				@Override
@@ -564,7 +574,7 @@ public class TransportRoutingHelper {
 						updateProgress(0);
 						RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
 						if (walkingRouteParams != null) {
-							routingHelper.startRouteCalculationThread(walkingRouteParams, true, true);
+							routingHelper.startRouteCalculationThread(walkingRouteParams);
 						}
 					}
 				}
@@ -572,7 +582,7 @@ public class TransportRoutingHelper {
 			params.resultListener = new RouteCalculationResultListener() {
 				@Override
 				public void onRouteCalculated(RouteCalculationResult route) {
-					RouteRecalculationThread.this.walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);
+					RouteRecalculationTask.this.walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);
 				}
 			};
 
@@ -603,7 +613,7 @@ public class TransportRoutingHelper {
 				}
 				RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
 				if (walkingRouteParams != null) {
-					routingHelper.startRouteCalculationThread(walkingRouteParams, true, true);
+					routingHelper.startRouteCalculationThread(walkingRouteParams);
 					// wait until all segments calculated
 					while (!walkingSegmentsCalculated) {
 						try {
@@ -620,26 +630,18 @@ public class TransportRoutingHelper {
 			}
 		}
 
+		private void showMessage(final String msg) {
+			final OsmandApplication app = routingHelper.getApplication();
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					app.showToastMessage(msg);
+				}
+			});
+		}
+
 		@Override
 		public void run() {
-			synchronized (TransportRoutingHelper.this) {
-				currentRunningJob = this;
-				waitingNextJob = prevRunningJob != null;
-			}
-			if (prevRunningJob != null) {
-				while (prevRunningJob.isAlive()) {
-					try {
-						Thread.sleep(50);
-					} catch (InterruptedException e) {
-						// ignore
-					}
-				}
-				synchronized (TransportRoutingHelper.this) {
-					currentRunningJob = this;
-					waitingNextJob = false;
-				}
-			}
-
 			List<TransportRouteResult> res = null;
 			String error = null;
 			try {
@@ -652,38 +654,52 @@ public class TransportRoutingHelper {
 				log.error(e);
 			}
 			if (params.calculationProgress.isCancelled) {
-				synchronized (TransportRoutingHelper.this) {
-					currentRunningJob = null;
-				}
 				return;
 			}
-			synchronized (TransportRoutingHelper.this) {
-				routes = res;
-				TransportRoutingHelper.this.walkingRouteSegments = walkingRouteSegments;
+			synchronized (transportRoutingHelper) {
+				transportRoutingHelper.routes = res;
+				transportRoutingHelper.walkingRouteSegments = walkingRouteSegments;
 				if (res != null) {
 					if (params.resultListener != null) {
 						params.resultListener.onRouteCalculated(res);
 					}
 				}
-				currentRunningJob = null;
 			}
+			OsmandApplication app = routingHelper.getApplication();
 			if (res != null) {
-				setNewRoute(res);
+				transportRoutingHelper.setNewRoute(res);
 			} else if (error != null) {
-				lastRouteCalcError = app.getString(R.string.error_calculating_route) + ":\n" + error;
-				lastRouteCalcErrorShort = app.getString(R.string.error_calculating_route);
-				showMessage(lastRouteCalcError);
+				routeCalcError = app.getString(R.string.error_calculating_route) + ":\n" + error;
+				routeCalcErrorShort = app.getString(R.string.error_calculating_route);
+				showMessage(routeCalcError);
 			} else {
-				lastRouteCalcError = app.getString(R.string.empty_route_calculated);
-				lastRouteCalcErrorShort = app.getString(R.string.empty_route_calculated);
-				showMessage(lastRouteCalcError);
+				routeCalcError = app.getString(R.string.empty_route_calculated);
+				routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
+				showMessage(routeCalcError);
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
-			lastTimeEvaluatedRoute = System.currentTimeMillis();
+		}
+	}
+
+	private class RouteRecalculationExecutor extends ThreadPoolExecutor {
+
+		public RouteRecalculationExecutor() {
+			super(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 		}
 
-		public void setWaitPrevJob(Thread prevRunningJob) {
-			this.prevRunningJob = prevRunningJob;
+		protected void afterExecute(Runnable r, Throwable t) {
+			super.afterExecute(r, t);
+			RouteRecalculationTask task = null;
+			synchronized (TransportRoutingHelper.this) {
+				if (r instanceof Future<?>) {
+					task = tasksMap.remove(r);
+				}
+			}
+			if (t == null && task != null) {
+				lastRouteCalcError = task.routeCalcError;
+				lastRouteCalcErrorShort = task.routeCalcErrorShort;
+			}
+			lastTimeEvaluatedRoute = System.currentTimeMillis();
 		}
 	}
 }

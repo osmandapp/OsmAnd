@@ -51,12 +51,8 @@ import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -70,6 +66,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment;
@@ -101,9 +98,16 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -281,7 +285,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (selectFromMapTouch) {
 				selectFromMapTouch = false;
 				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
-				choosePointTypeAction(mapActivity, latLon, selectFromMapPointType, null, null);
+				LatLon objectLatLon = getObjectLocation(mapActivity.getMapView(), point, tileBox);
+				LatLon selectedPoint = objectLatLon != null ? objectLatLon : latLon;
+				choosePointTypeAction(mapActivity, selectedPoint, selectFromMapPointType, null, null);
 				if (selectFromMapWaypoints) {
 					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 				} else {
@@ -291,6 +297,24 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		}
 		return false;
+	}
+
+	private LatLon getObjectLocation(OsmandMapTileView mapView, PointF point, RotatedTileBox tileBox) {
+		LatLon latLon = null;
+		List<Object> objects = new ArrayList<>();
+		for (OsmandMapLayer layer : mapView.getLayers()) {
+			if (layer instanceof IContextMenuProvider) {
+				objects.clear();
+				IContextMenuProvider provider = (IContextMenuProvider) layer;
+				provider.collectObjectsFromPoint(point, tileBox, objects, true);
+				for (Object o : objects) {
+					if (provider.isObjectClickable(o)) {
+						latLon = provider.getObjectLocation(o);
+					}
+				}
+			}
+		}
+		return latLon;
 	}
 
 	private void choosePointTypeAction(MapActivity mapActivity, LatLon latLon, PointType pointType, PointDescription pd, String address) {
@@ -862,7 +886,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 			routingHelper.setAppMode(next);
 			app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false, true);
-			routingHelper.recalculateRouteDueToSettingsChange();
+			routingHelper.onSettingsChanged(true);
 		}
 	}
 
@@ -1279,7 +1303,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					if (mapActivity != null) {
 						OsmandApplication app = mapActivity.getMyApplication();
 						app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoadInfo);
-						app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+						app.getRoutingHelper().onSettingsChanged(true);
 						if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && getAvoidedParameters(app).isEmpty()) {
 							mode.parameters.remove(parameter);
 						}
@@ -1312,7 +1336,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 					preference.setModeValue(app.getRoutingHelper().getAppMode(), false);
 					avoidedParameters.remove(routingParameter);
-					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+					app.getRoutingHelper().onSettingsChanged(true);
 					if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && avoidedParameters.isEmpty()) {
 						mode.parameters.remove(parameter);
 					}
@@ -2411,7 +2435,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		} else if (routingHelper.isRouteCalculated()) {
 			RouteCalculationResult result = routingHelper.getRoute();
-			QuadRect routeRect = routingHelper.getRouteRect(result);
+			QuadRect routeRect = RoutingHelperUtils.getRouteRect(app, result);
 			if (routeRect != null) {
 				rect = routeRect;
 			}

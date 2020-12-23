@@ -1085,7 +1085,7 @@
     <string name="use_kalman_filter_compass">Nota Kalman-síu</string>
     <string name="use_magnetic_sensor">Nota segulskynjara</string>
     <string name="install_paid">Full útgáfa</string>
-    <string name="cancel_route">Hafna leið</string>
+    <string name="cancel_route">Hafna leið\?</string>
     <string name="cancel_navigation">Stöðva leiðsögn</string>
     <string name="clear_destination">Hreinsa út áfangastað</string>
     <string name="choose_osmand_theme_descr">Sérsníddu hvernig forritið lítur út.</string>
@@ -1384,7 +1384,7 @@
     <string name="replace_favorite_confirmation">Ertu viss að þú viljir skipta út eftirlætinu %1$s?</string>
     <string name="confirmation_to_delete_history_items">Fjarlægja valin atriði úr breytingaskránni?</string>
     <string name="change_markers_position">Breyta staðsetningu kortamerkis</string>
-    <string name="access_no_destination">Áfangastaður er ekki stilltur</string>
+    <string name="access_no_destination">Stillingaviðbót fyrir altækan aðgang: Áfangastaður er ekki stilltur</string>
     <string name="map_widget_bearing">Hlutfallsleg stefna</string>
     <string name="no_map_markers_found">Bættu við kortamerkjum á kortinu</string>
     <string name="anonymous_user_hint">Nafnlausir notendur geta ekki: 
@@ -1746,7 +1746,7 @@
     <string name="incremental_search_building">Stigvaxandi leit byggingar</string>
     <string name="poi_error_info_not_loaded">Upplýsingum um hnút var ekki hlaðið inn</string>
     <string name="use_fast_recalculation">Snjöll endurreiknun leiðar</string>
-    <string name="use_fast_recalculation_desc">Endurreiknar aðeins upphafshluta leiðar. Má nota fyrir langar ferðir.</string>
+    <string name="use_fast_recalculation_desc">Endurreiknar aðeins upphafshluta leiðar, má nota fyrir langar ferðir.</string>
     <string name="confirm_download_roadmaps">Kortið sem eingöngu er með vegum er ekki nauðsynlegt, þar sem þú ert þegar með staðlaða (fulla útgáfu) kortsins. Sækja það samt?</string>
     <string name="rendering_attr_depthContours_description">Birta dýptarlínur og punkta.</string>
     <string name="rendering_attr_depthContours_name">Dýptarlínur sjávar</string>
@@ -3429,7 +3429,7 @@
     <string name="live_monitoring">Rakning með netstuðningi</string>
     <string name="save_track_logging_accuracy">Nákvæmni skráninga</string>
     <string name="route_recalculation">Endurreikningur leiðar</string>
-    <string name="plugin_global_prefs_info">Þessar stillingar eru víðværar og eiga við um öll snið</string>
+    <string name="plugin_global_prefs_info">Þessar stillingar viðbótarinnar eru víðværar og eiga við um öll snið</string>
     <string name="osm_editing">OSM-breytingar</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Táknið birtist þegar leiðsögn er í gangi eða á meðan verið er á ferðinni.</string>
@@ -3459,7 +3459,7 @@
     <string name="multimedia_photo_play_sound">Hljóð við myndatöku</string>
     <string name="osm_authorization_success">Heimild fékkst</string>
     <string name="not_support_file_type_with_ext">Veljið studda %1$s kerfisviðaukaskrá í staðinn.</string>
-    <string name="osm_edits_view_descr">Þú getur skoðað allar óinnsendar breytingar þínar eða villur í OSM í %1$s. Innsendir punktar eru ekki birtir í OsmAnd.</string>
+    <string name="osm_edits_view_descr">Þú getur skoðað allar óinnsendar breytingar þínar eða villur í OSM í %1$s. Áður innsendir punktar eru ekki lengur birtir.</string>
     <string name="monitoring_min_speed_descr_side_effect">Aukaverkanir: Ferilinn þinn mun vanta alla þá hluta þar sem kröfur um lágmarkshraða voru ekki uppfylltar (t.d. þar sem þú ert að ýta hjólinu þínu upp bratta brekku). Að auki verða engar upplýsingar um kyrrstöður, eins og t.d. hvíldarstaði. Þetta hefur áhrif á alla greiningu eða eftirvinnslu, eins og þegar verið er að skilgreina heildarlengd ferðar, tíma á ferðinni eða meðalhraða þinn.</string>
     <string name="monitoring_min_speed_descr_recommendation">Ábending: Reyndu fyrst að nota hreyfiskynjun í gegnum síuna sem mælis skráða lágmarkshliðrun (B), hún gæti gefið betri niðurstöður og þú tapar minna af gögnum. Ef ferlarnir þínir eru áfram loðnir við lágan hraða, skaltu prófa hér gildi sem ekki eru núll. Athugaðu að sumar mælingar gætu gefið gildi án hraða (sumar mæliaðferðir sem byggjast á netkerfum), í þeim tilfellum myndi ekkert vera skráð.</string>
     <string name="monitoring_min_speed_descr_remark">Athugaðu: ef hraði &gt; 0 skoðaðu: Flest GPS kubbasett gefa aðeins upp hraðagildi ef reikniritið ákvarðar að tækið sé á hreyfingu, en gefa ekki neitt gildi ef svo er ekki. Þar af leiðir að sé notuð stillingin &gt; 0 í þessari síu má segja að sé verið að nota hreyfiskynjunina í GPS kubbasettinu. En jafnvel þó þetta sé ekki síað á meðan skráningu stendur, þá notum við samt þennan eiginleika í greiningu okkar á GPX-ferlinum til að ákvarða leiðrétta vegalengd, þ.e.a.s. gildið sem birtist í þeim reit er einmitt skráð vegalengd á meðan verið er á ferðinni.</string>
@@ -3788,7 +3788,7 @@
     <string name="quick_action_remove_next_destination">Eyða næsta markpunkti</string>
     <string name="navigation_profile">Leiðsagnarsnið</string>
     <string name="app_mode_wheelchair_forward">Hjólastóll áfram</string>
-    <string name="plugin_wikipedia_description">Náðu í upplýsingar um merka staði frá Wikipedia. Þetta er þá orðið að vasaleiðsögn án nettengingar - bara virkjaðu Wikipedia-viðbótina og njóttu þess að geta lesið um hlutina í kringum þig.</string>
+    <string name="plugin_wikipedia_description">Náðu í upplýsingar um merka staði frá Wikipedia, þetta er þá orðið að vasaleiðsögn án nettengingar.</string>
     <string name="use_volume_buttons_as_zoom_descr">Stýrðu aðdráttarstigi korts með hljóðstyrkshnöppum tækisins.</string>
     <string name="routing_attr_length_description">Tilgreindu lengd farartækis sem leyfð er á leiðum.</string>
     <string name="in_case_of_reverse_direction">Ef stefna er öfug</string>
@@ -3840,7 +3840,7 @@
 \n</string>
     <string name="gpx_split_interval_descr">Veldu bilið þar sem merki með tíma eða vegalengd á ferlinum verða birt.</string>
     <string name="attach_to_the_roads">Tengja við vegina</string>
-    <string name="plan_route_exit_dialog_descr">Ertu viss um að þú viljir loka leiðaskipulagningu án þess að vista\?</string>
+    <string name="plan_route_exit_dialog_descr">Ertu viss um að þú viljir henda öllum óvistuðum breytingum í skipulögðu leiðinni\?</string>
     <string name="marker_save_as_track">Vista sem ferilskrá</string>
     <string name="threshold_distance">Þolvik vegalengdar</string>
     <string name="save_track_to_gpx_globally">Skrifa feril í GPX-skrá</string>
@@ -3850,7 +3850,7 @@
     <string name="gpx_split_interval_none_descr">Veldu hvernig þú vilt skipta upp: eftir tíma eða vegalengd.</string>
     <string name="shared_string_save_as_gpx">Vista sem nýja ferilskrá</string>
     <string name="follow_track_descr">Veldu ferilskrá til að fylgja</string>
-    <string name="quick_action_remove_next_destination_descr">Puntinum á núverandi áfangastað leiðarinnar verður eytt. Ef þetta er sjálfur áfangastaðurinn, mun leiðsögn stöðvast.</string>
+    <string name="quick_action_remove_next_destination_descr">Eyðir næsta áfangastað leiðarinnar. Ef þetta er sjálfur áfangastaðurinn, mun leiðsögn stöðvast.</string>
     <string name="delete_address">Eyða heimilisfangi</string>
     <string name="layer_gpx_layer">Ferlar</string>
     <string name="start_of_the_track">Upphaf ferils</string>
@@ -3910,7 +3910,7 @@
     <string name="clear_osm_token">Hreinsa OAuth-teikn OpenStreetMap</string>
     <string name="osm_edit_logout_success">Skráð út</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX-skrár valdar</string>
-    <string name="disable_recording_once_app_killed_descrp">Mun setja GPX-skráningu í bið þegar forritið er drepið (slökkt á því í gegnum skjáinn fyrir nýleg forrit - bakgrunnsvísir OsmAnd hverfur þar með úr tilkynningastiku Android-kerfisins.)</string>
+    <string name="disable_recording_once_app_killed_descrp">GPX-skráning er sett í bið þegar forritið er drepið (slökkt á því í gegnum skjáinn fyrir nýleg forrit - bakgrunnsvísir OsmAnd hverfur þar með úr tilkynningastiku Android-kerfisins.)</string>
     <string name="save_global_track_interval_descr">Veldu millibil skráninga í almenna leiðarskráningu (virkjað með viðmótshlutanum \'Skráning ferðar\' á kortinu).</string>
     <string name="gpx_monitoring_stop">Setja skráningu í bið</string>
     <string name="gpx_monitoring_start">Halda áfram með skráningu</string>
@@ -3929,10 +3929,10 @@
 \n • Lagfærð vandamál við inn/útflutning á stillingum sniða
 \n
 \n</string>
-    <string name="message_graph_will_be_available_after_recalculation">Bíddu eftir endurútreikningi leiðar.
+    <string name="message_graph_will_be_available_after_recalculation">Bíddu aðeins.
 \nGrafið verður tiltækt eftir endurútreikning.</string>
     <string name="snowmobile_render_descr">Fyrir akstur vélsleða á sérstökum vegum og slóðum.</string>
-    <string name="message_need_calculate_route_before_show_graph">%1$s gögn aðeins tiltæk á vegunum, þú þarft að reikna leið með “Leið milli punkta” til að fá hana.</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s gögn aðeins tiltæk á vegunum, þú þarft að reikna leið með “Leið milli punkta” til að sjá gröf.</string>
     <string name="file_already_imported">Skrá hefur þegar verið flutt inn í OsmAnd</string>
     <string name="app_mode_gap">Bil</string>
     <string name="contour_lines_thanks">Takk fyrir að kaupa \'Hæðarlínur\'</string>
@@ -3957,7 +3957,7 @@
     <string name="open_street_map_login_mode">Þú þarft að skrá þig inn til að geta sent inn ný atriði eða breytingar.
 \n
 \nÞú getur skráð þig inn með öruggu OAuth-aðferðinni eða notað notandanafn og lykilorð innskráningar.</string>
-    <string name="subscription_payment_issue_title">Það er vandamál með áskriftina þína. Smelltu á hnappinn til að fara í stillingar Google Play áskriftarinnar og laga þar greiðslumátann.</string>
+    <string name="subscription_payment_issue_title">Smelltu á hnappinn til að setja upp greiðslumáta á Google Play áskriftarinnar og laga þar áskriftina þína.</string>
     <string name="use_login_password">Nota notandanafn og lykilorð</string>
     <string name="login_open_street_map">Skrá inn á OpenStreetMap</string>
     <string name="user_login">Skrá inn</string>
@@ -3969,7 +3969,7 @@
     <string name="login_account">Notandaaðgangur</string>
     <string name="login_open_street_map_org">Skrá inn á OpenStreetMap.org</string>
     <string name="markers_history">Vinnsluferill kortamerkja</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Þú þarft að bæta við a.m.k. tveimur punktum</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Bættu við a.m.k. tveimur punktum</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="subscription_paused_title">Áskrift að OsmAnd Live hefur verið sett í bið</string>
     <string name="mgrs_format_descr">OsmAnd notar MGRS, sem er svipað og UTM-snið NATO.</string>
@@ -3988,7 +3988,7 @@
     <string name="register_opr_create_new_account">Búa til nýjan notandaaðgang</string>
     <string name="osm_login_descr">Þú getur skráð þig inn með öruggu OAuth-aðferðinni eða notað notandanafn og lykilorð innskráningar.</string>
     <string name="app_mode_motorboat">Vélbátar</string>
-    <string name="register_on_openplacereviews_desc">Ljósmyndir eru í boði frá opna gagnaverkefninu OpenPlaceReviews.org. Til að geta sent inn myndir þarftu að skrá þig á vefsvæðinu.</string>
+    <string name="register_on_openplacereviews_desc">Ljósmyndir eru í boði frá opna gagnaverkefninu OpenPlaceReviews.org. Til að geta sent inn myndir þarftu að skrá þig á vefsvæðinu þeirra.</string>
     <string name="osm_edit_comment_note">Gera athugasemd við OSM-minnispunkt</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Rekjanlegt\" þýðir að ferillinn birtist ekki á neinum opinberum listum, en meðhöndlaðir ferilpunktar með tímamerkjum úr ferlinum (sem ekki er hægt að tengja beint við þig) munu birtast í gögnum sem eru sótt í gegnum opinbert GPS API-forritsviðmót.</string>
     <string name="elevation_data">Þú getur notað hæðargögn til útreikninga á hækkun/lækkun í ferðunum þínum</string>
@@ -4013,4 +4013,20 @@
     <string name="select_data_to_export">Veldu þau gögn sem á að flytja út í skrána.</string>
     <string name="select_picture">Veldu mynd</string>
     <string name="cannot_upload_image">Mistókst að senda inn mynd, reyndu aftur síðar</string>
+    <string name="release_3_9">• Bætt við möguleika á að flytja út og inn öll gögn, þar með talið stillingar, tilföng, staðir
+\n
+\n • Skipulagning leiða: gröf ferilbúta með leið, bætt við möguleika á að búa til og breyta mörgum ferilbútum
+\n
+\n • Bætt við OAuth-auðkenningarleið fyrir OpenStreetMap, endurbætt viðmót valglugga í OSM
+\n
+\n • Stuðningur við sérsniðna liti í eftirlætum og ferilpunktum
+\n
+\n</string>
+    <string name="plan_route_join_segments">Sameina búta</string>
+    <string name="plan_route_split_after">Skipta upp á eftir</string>
+    <string name="plan_route_add_new_segment">Bæta við nýjum bút</string>
+    <string name="plan_route_split_before">Skipta upp á undan</string>
+    <string name="profile_type_user_string">Notandasnið</string>
+    <string name="reverse_all_points">Snúa við öllum punktum</string>
+    <string name="profile_type_osmand_string">OsmAnd-snið</string>
 </resources>
