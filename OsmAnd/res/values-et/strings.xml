@@ -109,7 +109,7 @@
     <string name="current_track">Valitud lugu</string>
     <string name="use_osm_live_routing_description">Aktiveeri OsmAnd Live muutuste navigeerimine.</string>
     <string name="use_osm_live_routing">OsmAnd Live navigeerimine</string>
-    <string name="access_no_destination">Sihtkoht määramata</string>
+    <string name="access_no_destination">Juurdepääsetavuse pistikprogramm: sihtkoht määramata</string>
     <string name="map_widget_magnetic_bearing">Asimuut</string>
     <string name="map_widget_bearing">Suhteline kurss</string>
     <string name="access_disable_offroute_recalc">Ära otsi uut teekonda kui eelmiselt lahkuti</string>
@@ -271,7 +271,7 @@
     <string name="empty_route_calculated">Arvutatud teekond on tühi.</string>
     <string name="use_online_routing_descr">Kasuta internetti teekonna arvutamiseks.</string>
     <string name="use_fast_recalculation">Tark teekonna arvutamine</string>
-    <string name="use_fast_recalculation_desc">Arvuta uuesti ainult teekonna algusosa. Seda võid kasutada pikemate vahemaade korral.</string>
+    <string name="use_fast_recalculation_desc">Arvutab ümber ainult teekonna algosa, mis on kasulik pikkade reiside korral.</string>
     <string name="simulate_your_location_descr">Simuleeri arvutatud või salvestatud GPX teekonda.</string>
     <string name="hillshade_layer_disabled">Künkavarjutuse kiht keelatud</string>
     <string name="rendering_attr_horseRoutes_name">Ratsutamisteed</string>
@@ -531,7 +531,7 @@
     <string name="travel_card_download_descr">Laadi alla Wikivoyage reisijuhid, et vaadata artikleid kohtadest üle maailma ilma internetiühenduseta.</string>
     <string name="start_editing_card_image_text">Tasuta ülemaailmne kõigi poolt täiendatav reisijuht.</string>
     <string name="welcome_to_open_beta">Tere tulemast avatud beetasse</string>
-    <string name="contour_lines_hillshade_maps">Kõrgusjooned &amp; künkavarjutusega kaardid</string>
+    <string name="contour_lines_hillshade_maps">Kõrgusjooned ja künkavarjutusega kaardid</string>
     <string name="maps_you_need_descr">Sinu järjehoidjatesse lisatud artiklite alusel on soovitame alla laadida järgmised kaardid:</string>
     <string name="purchase_cancelled_dialog_title">Oled tühistanud oma OsmAnd Live tellimuse</string>
     <string name="purchase_cancelled_dialog_descr">Uuenda tellimust kõigi funktsioonide kasutamise jätkamiseks:</string>
@@ -3358,7 +3358,7 @@
     <string name="route_recalculation">Teekonna ümberarvutamine</string>
     <string name="accessibility_announce">Teata</string>
     <string name="login_and_pass">Kasutajanimi ja salasõna</string>
-    <string name="plugin_global_prefs_info">Need seaded on üldised ja rakenduvad kõikidele profiilidele</string>
+    <string name="plugin_global_prefs_info">Need pistikprogrammi seaded on üldised ja rakenduvad kõikidele profiilidele</string>
     <string name="osm_editing">OSM\'i andmete muutmine</string>
     <string name="osm_edits_view_descr">Vaata kõiki üleslaadimata muudatusi või OSM vigu saad menüüs %1$s. Juba üleslaaditud muudatusi OsmAnd ei kuva.</string>
     <string name="app_mode_osm">OSM</string>
@@ -3420,7 +3420,7 @@
     <string name="hillshade_description">Kõrgusreljeefi kaart tumedate varjunditega nõlvade, tippude ja tasandike kirjeldamiseks.</string>
     <string name="slope_description">Raja nõlva kallet visualiseeritakse värvidega.</string>
     <string name="terrain_slider_description">Määra vähima ja suurima suurenduse kaardikihi kuvamisel.</string>
-    <string name="hillshade_download_description">Kõrgusreljeefi kuvamiseks on vaja täiendavaid kaarte.</string>
+    <string name="hillshade_download_description">Mäevarjude kaardil vaatamiseks on vaja täiendavaid kaarte.</string>
     <string name="slope_download_description">Nõlvade kuvamiseks on vaja täiendavaid kaarte.</string>
     <string name="slope_read_more">Nõlvadest saab rohkem lugeda %1$s-s.</string>
     <string name="shared_string_transparency">Läbipaistvus</string>
@@ -3557,7 +3557,7 @@
     <string name="use_volume_buttons_as_zoom">Helitugevuse nupud toimivad suumina</string>
     <string name="please_provide_point_name_error">Palun sisestage punkti nimi</string>
     <string name="search_download_wikipedia_maps">Laadi alla Vikipeedia kaardid</string>
-    <string name="plugin_wikipedia_description">Hangi huviväärsuste kohta teavet Vikipeediast. See on sinu võrguühenduseta reisiraamat - lihtsalt võta kasutusele Vikipeedia lisaprogramm ja loe artikleid enda ümber asuvate objektide kohta.</string>
+    <string name="plugin_wikipedia_description">Hankige teavet huvipunktide kohta Wikipediast, taskukohasest võrguühenduseta juhendist, mis sisaldab artikleid kohtade ja sihtkohtade kohta.</string>
     <string name="add_hidden_group_info">Kuna valitud grupp on peidetud, siis lisatud punkt ei ole kaardil nähtav. Vajadusel leiad ta „%s“ alt.</string>
     <string name="app_mode_go_cart">Kartauto</string>
     <string name="parking_positions">Parkimiskohad</string>
@@ -3646,7 +3646,7 @@
     <string name="navigation_profile">Navigeerimisprofiil</string>
     <string name="route_between_points_add_track_desc">Vali rajafail, millele lisame uue segmendi.</string>
     <string name="street_level_imagery">Tänavataseme vaated</string>
-    <string name="plan_route_exit_dialog_descr">Kas sa oled kindel et soovid sulgeda teekonna planeerija ilma seda salvestamata\?</string>
+    <string name="plan_route_exit_dialog_descr">Kas oled kindel, et soovid loobuda kõikidest tehtud muudatustest planeeritud teekonnal\?</string>
     <string name="in_case_of_reverse_direction">Vastupidise suuna korral</string>
     <string name="reorder_or_hide_from">Muuda järjekorda või peida kirjed %1$s\'st.</string>
     <string name="hidden_items_descr">Need kirjed on menüüs peidetuna, kuid tehtud valikud või lisaprogrammid on jätkuvalt kasutatavad.</string>
@@ -3695,7 +3695,7 @@
     <string name="simplified_track_description">Salvestatakse ainult üldine marsruut, teekonnapunktid kustutatakse.</string>
     <string name="shared_string_file_name">Faili nimi</string>
     <string name="number_of_gpx_files_selected_pattern">%s rajafaili valitud</string>
-    <string name="disable_recording_once_app_killed_descrp">Peatab raja logimise rakenduse jõuga sulgemise korral (hiljutiste rakenduste kaudu). (OsmAndi taustnäit kaob Androidi teavitusribalt.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Raja logimine peatub, kui rakendus tapetakse (viimaste rakenduste kaudu). (OsmAnd-i tausttähis kaob Androidi teateribalt.)</string>
     <string name="save_global_track_interval_descr">Määra üldisel raja salvestamisel kasutatav logimisvälp (lülitatakse sisse kaardil asuvast teekonna salvestamise vidinast).</string>
     <string name="system_default_theme">Süsteemi vaikeseadistused</string>
     <string name="all_next_segments">Kõik järgnevad segmendid</string>
@@ -3721,7 +3721,7 @@
 \nValides %1$s sa saad kiiruskaamerate-kohaseid teateid ja hoiatusi.
 \n
 \nValides %2$s kustutatakse kõik kiiruskaameratega seotud andmed, nagu hoiatused, teated ja huvipunktid seniks, kuni sa OsmAnd\'ile ei tee täiesti uut paigaldust.</string>
-    <string name="quick_action_remove_next_destination_descr">Praegune teekonna vahepunkt saab kustutatud. Kui ta osutub sihtkohaks, siis navigatsioon lõppeb.</string>
+    <string name="quick_action_remove_next_destination_descr">Kustutab järgmise marsruudi sihtkoha. Kui see on lõppsihtkoht, siis navigeerimine peatub.</string>
     <string name="plan_route_change_route_type_after">Muuda teekonna tüüpi pärast</string>
     <string name="plan_route_change_route_type_before">Muuda teekonna tüüpi enne</string>
     <string name="plan_route_trim_after">Kärbi pärast</string>
@@ -3767,12 +3767,12 @@
     <string name="routing_attr_avoid_footways_description">Väldi jalgteid</string>
     <string name="routing_attr_avoid_footways_name">Väldi jalgteid</string>
     <string name="contour_lines_thanks">Täname „Kõrgusjoonte“ ostu eest</string>
-    <string name="osm_live_payment_subscription_management_hw">Ostukinnituse saabumisel arveldame tellimuse eest sinu AppGallery konto alusel.
+    <string name="osm_live_payment_subscription_management_hw">Teie AppGallery konto eest võetakse tasu ostu kinnitamisel.
 \n
-\nKui sa ei tühista tellimust enne uue perioodi algust, siis tellimus pikeneb automaatselt ning arveldame järgmise ajavahemiku eest (kuu/kvartal/aasta) selle alguses.
+\nTellimus pikeneb automaatselt, kui seda ei tühistata enne uuendamise kuupäeva. Teie kontolt võetakse pikendamisperioodi (kuu / kolm kuud / aasta) eest tasu ainult pikendamise kuupäeval.
 \n
-\nTellimust saad hallata ja tühistada AppGallery seadistustest.</string>
-    <string name="osm_live_payment_desc_hw">Arveldame tellimuse eest valitud ajavahemiku alusel. Seda saad sa vabalt valitud ajal tühistada AppGallery\'s.</string>
+\nTellimusi saate hallata ja tühistada oma AppGallery seadetes.</string>
+    <string name="osm_live_payment_desc_hw">Tellimuse eest võetakse tasu valitud perioodi kohta. Tühistage see igal ajal oma AppGallery\'s.</string>
     <string name="use_complex_routing">Keeruka teekonna koostamine</string>
     <string name="osm_edit_logout_success">Väljalogitud</string>
     <string name="development">Arendus</string>
@@ -3798,11 +3798,11 @@
     <string name="mgrs_format_descr">OsmAnd kasutab MGRS-vormingut, mis on sarnane NATO UTM-vormingule.</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_mgrs">MGRS</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Graafiku joonistamiseks peaksid lisama vähemalt kaks punkti</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Lisa vähemalt kaks punkti</string>
     <string name="subscription_on_hold_title">OsmAnd Live tellimus on ootel</string>
     <string name="subscription_paused_title">OsmAnd Live tellimus on peatatud</string>
     <string name="subscription_expired_title">OsmAnd Live tellimus on aegunud</string>
-    <string name="subscription_payment_issue_title">Sinu tellimusega on üks pisikene segadus. Selleks et Google Play seadistuses makseviisi parandada, palun klõpsi seda nuppu.</string>
+    <string name="subscription_payment_issue_title">Tellimuse parandamiseks puudutage nuppu Google Play makseviisi seadistamiseks.</string>
     <string name="manage_subscription">Halda tellimusi</string>
     <string name="sign_in_with_open_street_map">Logi sisse OpenStreetMapi kasutajakontoga</string>
     <string name="user_login">Kasutajanimi</string>
@@ -3852,4 +3852,100 @@
     <string name="plan_route_join_segments">Liida lõigud</string>
     <string name="profile_type_user_string">Kasutajaprofiil</string>
     <string name="profile_type_osmand_string">OsmAnd profiil</string>
+    <string name="use_system_screen_timeout_promo">Vaikimisi keelatud: kui esiplaanil töötab OsmAnd, ei aegu ekraan läbi.
+\n
+\nKui see on lubatud, kasutab OsmAnd süsteemi ajalõpu sätet.</string>
+    <string name="use_system_screen_timeout">Kasutage süsteemi ekraani ajalõppu</string>
+    <string name="release_3_6">"• Profiilid: nüüd saate muuta järjestust, määrata kaardi ikooni, muuta kõiki põhiprofiilide sätteid ja taastada need vaikeseadetesse
+\n
+\n • Navigatsioonis on lisatud väljumisnumber
+\n
+\n  • Ümber töötatud pistikprogrammi seaded
+\n
+\n  • Kõigile profiilidele kiireks juurdepääsuks kuvatakse ümbertöödeldud seadete ekraan
+\n
+\n  • Lisatud võimalus seadete kopeerimiseks teiselt profiililt
+\n
+\n  • Lisatud võime muuta järjestust või peita HP kategooriaid otsingus
+\n
+\n  • POI ikoonid kaardil õigesti joondatud
+\n
+\n  • Kaardi seadistamiseks on lisatud päikeseloojangu / päikesetõusu andmed
+\n
+\n  • Lisatud kaardil kodu / töökoha ikoonid
+\n
+\n  • Lisatud seadetes mitmerealise kirjelduse tugi
+\n
+\n  • Lisas Jaapani kaardile õige transliteratsiooni
+\n
+\n  • Lisatud Antarktika kaart
+\n
+\n"</string>
+    <string name="route_recalculation_dist_descr">Teekond arvutatakse ümber, kui vahemaa teekonnani on suurem kui määratud parameeter</string>
+    <string name="plugin_disabled_descr">See pistikprogramm on eraldi rakendus, peate selle eraldi eemaldama, kui te ei kavatse seda enam kasutada.
+\n
+\nPistikprogramm jääb seadmesse pärast OsmAnd eemaldamist.</string>
+    <string name="plugin_disabled">Pistikprogramm välja lülitatud</string>
+    <string name="ui_customization_description">Kohandage üksuste hulka jaotistes \"Sahtel\", \"Kaardi seadistamine\" ja \"Kontekstimenüü\".
+\n
+\nKõigi nende juhtnuppude peitmiseks lülitage kasutamata pistikprogrammid välja. %1$s.</string>
+    <string name="ui_customization_short_descr">Sahtli osad, kontekstimenüü</string>
+    <string name="shared_string_drawer">Sahtel</string>
+    <string name="search_poi_types_descr">Ühendage erinevate kategooriate HP-de tüübid. Kõigi valimiseks puudutage lülitit, kategooria valimiseks puudutage vasakut serva.</string>
+    <string name="release_3_7">"• Uued võrguühenduseta nõlvakaardid
+\n
+\n • Lemmikute ja GPX-teekonnapunktide täielik kohandamine - kohandatud värvid, ikoonid, kujundid
+\n
+\n  • Kohandatud üksuste järjekorda jaotistes \"Kontekstimenüü\", \"Kaardi seadistamine\" ja \"Sahtel\"
+\n
+\n  • Vikipeedia eraldi kihina jaotises Kaardi seadistamine valige ainult vajalikud keeled
+\n
+\n  • Loodud oma HP-de filter / kaardid täieliku paindlikkusega
+\n
+\n  • Lisatud valikud kohandatud profiilide sätete taastamiseks
+\n
+\n  • Täielikud GPX-marsruudid navigeerimisest toetavad liiklusradasid ja täitke pööramisjuhised
+\n
+\n  • Parandatud tahvelarvutite kasutajaliidese suurused
+\n
+\n  • Parandatud vead RTL-iga
+\n
+\n"</string>
+    <string name="system_screen_timeout_descr">Lülitab ekraani välja vastavalt süsteemi ekraani aegumisele.</string>
+    <string name="system_screen_timeout">Kasuta süsteemi ekraani ajalõppu</string>
+    <string name="turn_screen_on_descr">Valige ekraani äratussuvandid (veenduge, et seadme lukustamisel oleks esiplaanil OsmAnd):</string>
+    <string name="turn_screen_on_power_button_disabled">Keelatud. Nõuab jaotises „Aegumise aeg pärast ärkamist” valikut „Hoia ekraan sisse lülitatud”.</string>
+    <string name="turn_screen_on_wake_time_descr">Valige pärast ärkamist ekraani ajalõpp. (\"%1$s\" ei kasuta ajalõppu.)</string>
+    <string name="map_source_zoom_levels_descr">Mõjutab ekraani, kui seda kasutatakse kaardi või ülekatte / aluskattena.
+\n
+\n%1$s: kaart on piiratud valitud suurendustaseme vahemikuga.
+\n
+\n%2$s on tasemed, kus algsed paanid on nähtavad, suurem või suurem vähendamine toimub väljaspool neid väärtusi.</string>
+    <string name="start_finish_icons">Alguse ja lõpu ikoonid</string>
+    <string name="complex_routing_descr">Kahefaasiline marsruut autoga navigeerimiseks.</string>
+    <string name="lang_de_casual">Saksa (harilik)</string>
+    <string name="use_native_pt">Kohaliku ühistranspordi arendamine</string>
+    <string name="use_native_pt_desc">Lülita ümber Java (turvaline) ühistranspordi teekonna arvutamisele</string>
+    <string name="shared_string_graph">Graafik</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s andmed on saadaval ainult teedel. Graafikute nägemiseks arvutage marsruut, kasutades \"Punktidevaheline marsruut\".</string>
+    <string name="message_graph_will_be_available_after_recalculation">Palun oota.
+\nGraafik on saadaval peale teekonna ümberarvutust.</string>
+    <string name="app_mode_gap">Vahe</string>
+    <string name="login_open_street_map">Logi OpenStreetMap-i sisse</string>
+    <string name="login_open_street_map_org">Logi sisse OpenStreetMap.org keskkonda</string>
+    <string name="enter_text_separated">Sisesta komadega eraldatud sildid.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Avalik\" tähendab, et jälge kuvatakse avalikult teie GPS-i jälgedes ja avalikes GPS-i jälgede loendites ning avalikus jäljendite loendis koos ajatemplitega toores vormis. API kaudu edastatud andmed ei viita teie jälgimislehele. Jälgimispunkti ajatemplid pole avaliku GPS-i API kaudu saadaval ja jälgimispunktid pole kronoloogiliselt järjestatud.</string>
+    <string name="gpx_upload_private_visibility_descr">„Privaatne” tähendab, et jälge ei kuvata üheski avalikus loendis, kuid selle sünkroniseerimata järjekorras olevad jälgimispunktid on avaliku GPS-i API kaudu saadaval ilma ajatempliteta.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">„Tuvastatav” tähendab, et jälg kuvatakse avalikult teie GPS-i jälgedes ja avalikes GPS-i jälgede loendites, st teised kasutajad saavad toore jälje alla laadida ja seostada teie kasutajanimega. Avalikud ajatempliga jäljepunkti andmed GPS-i API-st, mida teenindatakse rajapunktide API kaudu, viitavad teie algsele jälgimislehele.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Jälgitav\" tähendab, et jälg ei ilmu ühteski avalikus loetelus, kuid töödeldud teekonnapunktid koos ajatemplitega sellest (mida ei saa seostada teiega otse) ilmuvad avaliku GPS API allalaadimiste kaudu.</string>
+    <string name="release_3_9">• Lisatud võimalus eksportida ja importida kõiki andmeid, sealhulgas seadeid, ressursse, oma kohti
+\n
+\n• Marsruudi planeerimine: graafikud rööbastee segmentide marsruudiga ja lisaks võime luua ja muuta mitut raja segmenti
+\n
+\n• Lisatud OAuth autentimise meetod OpenStreetMap, täiustatud UI OSM dialooge
+\n
+\n• Kohandatud lemmikvärvide ja asukohapunktide jälgimise toetus
+\n
+\n</string>
+    <string name="reverse_all_points">Pööra kõik punktid ümber</string>
 </resources>
