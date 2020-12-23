@@ -89,23 +89,22 @@ public abstract class MapObject implements Comparable<MapObject> {
 			names.putAll(name);
 		}
 	}
-
+	
 	public Map<String, String> getNamesMap(boolean includeEn) {
-		if (!includeEn || Algorithms.isEmpty(enName)) {
-			if (names == null) {
-				return Collections.emptyMap();
-			}
-			return names;
+		if ((!includeEn || Algorithms.isEmpty(enName)) && names == null) {
+			return Collections.emptyMap();
 		}
 		Map<String, String> mp = new HashMap<String, String>();
 		if (names != null) {
-			Iterator<Entry<String, String>> it = mp.entrySet().iterator();
-			while(it.hasNext()) {
+			Iterator<Entry<String, String>> it = names.entrySet().iterator();
+			while (it.hasNext()) {
 				Entry<String, String> e = it.next();
 				mp.put(e.getKey(), unzipContent(e.getValue()));
 			}
 		}
-		mp.put("en", unzipContent(enName));
+		if (includeEn && !Algorithms.isEmpty(enName)) {
+			mp.put("en", unzipContent(enName));
+		}
 		return mp;
 	}
 
@@ -115,7 +114,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 			l.add(unzipContent(enName));
 		}
 		if (names != null) {
-			for(String nm : names.values()) { 
+			for (String nm : names.values()) {
 				l.add(unzipContent(nm));
 			}
 		}
