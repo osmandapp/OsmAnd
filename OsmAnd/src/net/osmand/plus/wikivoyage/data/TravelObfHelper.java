@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -173,7 +172,7 @@ public class TravelObfHelper implements TravelHelper {
 			for (Amenity obj : searchObjects) {
 				WikivoyageSearchResult r = new WikivoyageSearchResult();
 				TravelArticle article = null;
-				for (String currLang : obj.getLangs()) {
+				for (String currLang : obj.getAllLanguages()) {
 					article = readArticle(obj, currLang);
 					r.articleTitles.add(article.title);
 					r.isPartOf.add(article.isPartOf);

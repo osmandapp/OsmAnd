@@ -243,7 +243,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return getClass().getSimpleName() + ":" + getEnName(true);
 	}
 
-	public Set<String> getLangs() {
+	public Set<String> getAllLanguages() {
 		Map<String, String> namesMap = this.getNamesMap(true);
 		return namesMap.keySet();
 	}
