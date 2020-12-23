@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
 
@@ -240,6 +241,11 @@ public abstract class MapObject implements Comparable<MapObject> {
 
 	public String toStringEn() {
 		return getClass().getSimpleName() + ":" + getEnName(true);
+	}
+
+	public Set<String> getLangs() {
+		Map<String, String> namesMap = this.getNamesMap(true);
+		return namesMap.keySet();
 	}
 
 	@Override

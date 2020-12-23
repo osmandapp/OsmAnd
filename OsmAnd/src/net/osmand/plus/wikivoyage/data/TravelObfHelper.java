@@ -172,11 +172,8 @@ public class TravelObfHelper implements TravelHelper {
 		if (!Algorithms.isEmpty(searchObjects)) {
 			for (Amenity obj : searchObjects) {
 				WikivoyageSearchResult r = new WikivoyageSearchResult();
-				Map<String, String> namesMap = obj.getNamesMap(true);
-				Iterator<String> it = namesMap.keySet().iterator();
 				TravelArticle article = null;
-				while (it.hasNext()) {
-					String currLang = it.next();
+				for (String currLang : obj.getLangs()) {
 					article = readArticle(obj, currLang);
 					r.articleTitles.add(article.title);
 					r.isPartOf.add(article.isPartOf);
