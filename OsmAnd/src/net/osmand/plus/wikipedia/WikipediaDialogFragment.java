@@ -129,7 +129,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				int action = MotionEventCompat.getActionMasked(event);
+				int action = event.getAction();
 
 				switch(action) {
 					case (MotionEvent.ACTION_DOWN):
