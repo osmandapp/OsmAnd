@@ -553,7 +553,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 										allowPrivate.setModeValue(mode, true);
 									}
 								}
-								getRoutingHelper().onSettingsChanged(true);
+								getRoutingHelper().onSettingsChanged(null, true);
 							}
 						});
 						dlg.setNegativeButton(R.string.shared_string_no, null);

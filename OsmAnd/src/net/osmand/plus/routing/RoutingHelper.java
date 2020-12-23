@@ -1,6 +1,7 @@
 package net.osmand.plus.routing;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -28,6 +29,7 @@ import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -50,6 +52,8 @@ public class RoutingHelper {
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
+	private List<WeakReference<IRouteSettingsListener>> settingsListeners = new LinkedList<>();
+
 	private final OsmandApplication app;
 	private OsmandSettings settings;
 	private final RouteProvider provider;
@@ -328,58 +332,46 @@ public class RoutingHelper {
 		return lastFixedLocation;
 	}
 
-	public void addRouteDataListener(IRoutingDataUpdateListener listener) {
-		updateListeners = updateListenersList(new ArrayList<>(updateListeners), listener, true);
+	public void addRouteDataListener(@NonNull IRoutingDataUpdateListener listener) {
+		updateListeners = updateListeners(new ArrayList<>(updateListeners), listener, true);
 	}
 
-	public void removeRouteDataListener(IRoutingDataUpdateListener listener) {
-		updateListeners = updateListenersList(new ArrayList<>(updateListeners), listener, false);
+	public void removeRouteDataListener(@NonNull IRoutingDataUpdateListener listener) {
+		updateListeners = updateListeners(new ArrayList<>(updateListeners), listener, false);
 	}
 
-	private List<WeakReference<IRoutingDataUpdateListener>> updateListenersList(
-			List<WeakReference<IRoutingDataUpdateListener>> copyList,
-			IRoutingDataUpdateListener listener, boolean isNewListener) {
-		Iterator<WeakReference<IRoutingDataUpdateListener>> it = copyList.iterator();
-		while (it.hasNext()) {
-			WeakReference<IRoutingDataUpdateListener> ref = it.next();
-			IRoutingDataUpdateListener l = ref.get();
-			if (l == null || l == listener) {
-				it.remove();
-			}
-		}
-		if (isNewListener) {
-			copyList.add(new WeakReference<>(listener));
-		}
-		return copyList;
+	public void addRouteSettingsListener(@NonNull IRouteSettingsListener listener) {
+		settingsListeners = updateListeners(new ArrayList<>(settingsListeners), listener, true);
 	}
 
-	public void addListener(IRouteInformationListener l) {
-		listeners = updateInformationListeners(new ArrayList<>(listeners), l, true);
+	public void removeRouteSettingsListener(@NonNull IRouteSettingsListener listener) {
+		settingsListeners = updateListeners(new ArrayList<>(settingsListeners), listener, false);
+	}
+
+	public void addListener(@NonNull IRouteInformationListener l) {
+		listeners = updateListeners(new ArrayList<>(listeners), l, true);
 		transportRoutingHelper.addListener(l);
 	}
 
-	public void removeListener(IRouteInformationListener lt) {
-		listeners = updateInformationListeners(new ArrayList<>(listeners), lt, false);
+	public void removeListener(@NonNull IRouteInformationListener lt) {
+		listeners = updateListeners(new ArrayList<>(listeners), lt, false);
 	}
 
-	private List<WeakReference<IRouteInformationListener>> updateInformationListeners(
-			List<WeakReference<IRouteInformationListener>> copyList,
-			IRouteInformationListener listener, boolean isNewListener) {
-		Iterator<WeakReference<IRouteInformationListener>> it = copyList.iterator();
+	private <T> List<WeakReference<T>> updateListeners(List<WeakReference<T>> copyList,
+													   T listener, boolean isNewListener) {
+		Iterator<WeakReference<T>> it = copyList.iterator();
 		while (it.hasNext()) {
-			WeakReference<IRouteInformationListener> ref = it.next();
-			IRouteInformationListener l = ref.get();
+			WeakReference<T> ref = it.next();
+			T l = ref.get();
 			if (l == null || l == listener) {
 				it.remove();
 			}
 		}
-
 		if (isNewListener) {
 			copyList.add(new WeakReference<>(listener));
 		}
 		return copyList;
 	}
-
 
 	public void updateLocation(Location currentLocation) {
 		if (settings.getPointToStart() == null && settings.getMyLocationToStart() == null && currentLocation != null) {
@@ -571,15 +563,7 @@ public class RoutingHelper {
 				route.updateCurrentRoute(newCurrentRoute + 1);
 				currentRoute = newCurrentRoute + 1;
 				app.getNotificationHelper().refreshNotification(NotificationType.NAVIGATION);
-				if (!updateListeners.isEmpty()) {
-					ArrayList<WeakReference<IRoutingDataUpdateListener>> tmp = new ArrayList<>(updateListeners);
-					for (WeakReference<IRoutingDataUpdateListener> ref : tmp) {
-						IRoutingDataUpdateListener l = ref.get();
-						if (l != null) {
-							l.onRoutingDataUpdate();
-						}
-					}
-				}
+				fireRoutingDataUpdateEvent();
 			} else {
 				break;
 			}
@@ -688,6 +672,30 @@ public class RoutingHelper {
 		return false;
 	}
 
+	private void fireRoutingDataUpdateEvent() {
+		if (!updateListeners.isEmpty()) {
+			ArrayList<WeakReference<IRoutingDataUpdateListener>> tmp = new ArrayList<>(updateListeners);
+			for (WeakReference<IRoutingDataUpdateListener> ref : tmp) {
+				IRoutingDataUpdateListener l = ref.get();
+				if (l != null) {
+					l.onRoutingDataUpdate();
+				}
+			}
+		}
+	}
+
+	private void fireRouteSettingsChangedEvent(@Nullable ApplicationMode mode) {
+		if (!settingsListeners.isEmpty()) {
+			ArrayList<WeakReference<IRouteSettingsListener>> tmp = new ArrayList<>(settingsListeners);
+			for (WeakReference<IRouteSettingsListener> ref : tmp) {
+				IRouteSettingsListener l = ref.get();
+				if (l != null) {
+					l.onRouteSettingsChanged(mode);
+				}
+			}
+		}
+	}
+
 	public int getLeftDistance() {
 		return route.getDistanceToFinish(lastFixedLocation);
 	}
@@ -766,9 +774,19 @@ public class RoutingHelper {
 	}
 
 	public void onSettingsChanged(boolean forceRouteRecalculation) {
-		if (forceRouteRecalculation || isRouteCalculated() || isRouteBeingCalculated()) {
+		onSettingsChanged(mode, forceRouteRecalculation);
+	}
+
+	public void onSettingsChanged(@Nullable ApplicationMode mode) {
+		onSettingsChanged(mode, false);
+	}
+
+	public void onSettingsChanged(@Nullable ApplicationMode mode, boolean forceRouteRecalculation) {
+		if (forceRouteRecalculation ||
+				((mode == null || mode.equals(this.mode)) && (isRouteCalculated() || isRouteBeingCalculated()))) {
 			recalculateRouteDueToSettingsChange();
 		}
+		fireRouteSettingsChangedEvent(mode);
 	}
 
 	private void recalculateRouteDueToSettingsChange() {

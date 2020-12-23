@@ -193,10 +193,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 	}
 
 	private void recalculateRoute() {
-		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (getSelectedAppMode().equals(routingHelper.getAppMode())) {
-			routingHelper.onSettingsChanged();
-		}
+		app.getRoutingHelper().onSettingsChanged(getSelectedAppMode());
 	}
 
 	private void showSeekbarSettingsDialog(@NonNull Activity activity, final boolean defaultSpeedOnly) {
@@ -267,10 +264,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 					mode.setMinSpeed(minValue[0] / ratio[0]);
 					mode.setMaxSpeed(maxValue[0] / ratio[0]);
 				}
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				if (mode.equals(routingHelper.getAppMode())) {
-					routingHelper.onSettingsChanged();
-				}
+				app.getRoutingHelper().onSettingsChanged(mode);
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -282,10 +276,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 					mode.setMinSpeed(0f);
 					mode.setMaxSpeed(0f);
 				}
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				if (mode.equals(routingHelper.getAppMode())) {
-					routingHelper.onSettingsChanged();
-				}
+				app.getRoutingHelper().onSettingsChanged(mode);
 			}
 		});
 

@@ -119,7 +119,7 @@ public class AvoidSpecificRoads {
 						remove(item);
 						removeImpassableRoad(item);
 						notifyDataSetChanged();
-						recalculateRoute();
+						recalculateRoute(item != null ? item.appModeKey : null);
 					}
 				});
 				return v;
@@ -163,8 +163,9 @@ public class AvoidSpecificRoads {
 		return app.getString(R.string.shared_string_road);
 	}
 
-	private void recalculateRoute() {
-		app.getRoutingHelper().onSettingsChanged();
+	private void recalculateRoute(@Nullable String appModeKey) {
+		ApplicationMode mode = ApplicationMode.valueOfStringKey(appModeKey, null);
+		app.getRoutingHelper().onSettingsChanged(mode);
 	}
 
 	public void removeImpassableRoad(LatLon latLon) {
@@ -181,7 +182,7 @@ public class AvoidSpecificRoads {
 		removeImpassableRoad(getLocation(obj));
 	}
 
-	public void showDialog(@NonNull final MapActivity mapActivity) {
+	public void showDialog(@NonNull final MapActivity mapActivity, final @Nullable ApplicationMode mode) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 
@@ -206,19 +207,30 @@ public class AvoidSpecificRoads {
 		bld.setPositiveButton(R.string.shared_string_select_on_map, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
-				selectFromMap(mapActivity);
+				selectFromMap(mapActivity, mode);
 			}
 		});
 		bld.setNegativeButton(R.string.shared_string_close, null);
 		bld.show();
 	}
 
-	public void selectFromMap(final MapActivity mapActivity) {
+	public void selectFromMap(@NonNull final MapActivity mapActivity) {
 		ContextMenuLayer cm = mapActivity.getMapLayers().getContextMenuLayer();
 		cm.setSelectOnMap(new CallbackWithObject<LatLon>() {
 			@Override
 			public boolean processResult(LatLon result) {
 				addImpassableRoad(mapActivity, result, true, false, null);
+				return true;
+			}
+		});
+	}
+
+	public void selectFromMap(@NonNull final MapActivity mapActivity, @Nullable final ApplicationMode mode) {
+		ContextMenuLayer cm = mapActivity.getMapLayers().getContextMenuLayer();
+		cm.setSelectOnMap(new CallbackWithObject<LatLon>() {
+			@Override
+			public boolean processResult(LatLon result) {
+				addImpassableRoad(mapActivity, result, true, false, mode != null ? mode.getStringKey() : null);
 				return true;
 			}
 		});
@@ -236,7 +248,9 @@ public class AvoidSpecificRoads {
 		ApplicationMode defaultAppMode = app.getRoutingHelper().getAppMode();
 		final ApplicationMode appMode = appModeKey != null ? ApplicationMode.valueOfStringKey(appModeKey, defaultAppMode) : defaultAppMode;
 
-		List<RouteSegmentResult> roads = app.getRoutingHelper().getRoute().getOriginalRoute();
+		List<RouteSegmentResult> roads = app.getMeasurementEditingContext() != null
+				? app.getMeasurementEditingContext().getRoadSegmentData(appMode)
+				: app.getRoutingHelper().getRoute().getOriginalRoute();
 		if (mapActivity != null && roads != null) {
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 			float maxDistPx = MAX_AVOID_ROUTE_SEARCH_RADIUS_DP * tb.getDensity();
@@ -346,10 +360,10 @@ public class AvoidSpecificRoads {
 				app.getSettings().removeImpassableRoad(location);
 			}
 		}
-		recalculateRoute();
+		recalculateRoute(avoidRoadInfo.appModeKey);
 		if (activity != null) {
 			if (showDialog) {
-				showDialog(activity);
+				showDialog(activity, ApplicationMode.valueOfStringKey(avoidRoadInfo.appModeKey, null));
 			}
 			MapContextMenu menu = activity.getContextMenu();
 			if (menu.isActive()) {

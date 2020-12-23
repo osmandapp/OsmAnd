@@ -432,10 +432,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			public void onClick(DialogInterface dialog, int which) {
 				mode.setStrAngle(angleValue[0]);
 				updateAllSettings();
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				if (mode.equals(routingHelper.getAppMode())) {
-					routingHelper.onSettingsChanged();
-				}
+				app.getRoutingHelper().onSettingsChanged(mode);
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -643,11 +640,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		return multiSelectPref;
 	}
 
-	private static void recalculateRoute(OsmandApplication app, ApplicationMode mode) {
-		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (mode.equals(routingHelper.getAppMode())) {
-			routingHelper.onSettingsChanged();
-		}
+	private static void recalculateRoute(@NonNull OsmandApplication app, ApplicationMode mode) {
+		app.getRoutingHelper().onSettingsChanged(mode);
 	}
 
 	private void clearParameters() {

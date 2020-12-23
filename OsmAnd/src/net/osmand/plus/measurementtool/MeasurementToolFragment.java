@@ -72,7 +72,6 @@ import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.measurementtool.command.ReversePointsCommand;
 import net.osmand.plus.measurementtool.command.SplitPointsCommand;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
-import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.OnAppModeConfiguredCallback;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -98,7 +97,6 @@ import java.util.Locale;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
 import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
@@ -109,8 +107,7 @@ import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCo
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
-		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider,
-		OnAppModeConfiguredCallback {
+		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -241,7 +238,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		final OsmandApplication app = mapActivity.getMyApplication();
 
-		editingCtx.setApplication(mapActivity.getMyApplication());
+		app.setMeasurementEditingContext(editingCtx);
+		editingCtx.setApplication(app);
 		editingCtx.setProgressListener(new SnapToRoadProgressListener() {
 			@Override
 			public void showProgressBar() {
@@ -267,6 +265,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				updateDistancePointsText();
 			}
 		});
+		editingCtx.setupRouteSettingsListener();
 
 		measurementLayer.setEditingCtx(editingCtx);
 
@@ -1103,12 +1102,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onAppModeConfigured() {
-		editingCtx.recalculateRouteSegmentsForAppMode();
-		updateDistancePointsText();
-	}
-
-	@Override
 	public void onChangeRouteTypeBefore() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -1910,6 +1903,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void dismiss(@NonNull MapActivity mapActivity, boolean clearContext) {
 		try {
+			OsmandApplication app = mapActivity.getMyApplication();
 			if (clearContext) {
 				editingCtx.clearSegments();
 			}
@@ -1920,13 +1914,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				GpxData gpxData = editingCtx.getGpxData();
 				GPXFile gpx = gpxData != null ? gpxData.getGpxFile() : null;
 				if (gpx != null) {
-					Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
+					Intent newIntent = new Intent(mapActivity, app.getAppCustomization().getTrackActivity());
 					newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
 					newIntent.putExtra(TrackActivity.OPEN_TRACKS_LIST, true);
 					newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(newIntent);
 				}
 			}
+			editingCtx.resetRouteSettingsListener();
+			app.setMeasurementEditingContext(null);
 			mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
 		} catch (Exception e) {
 			// ignore

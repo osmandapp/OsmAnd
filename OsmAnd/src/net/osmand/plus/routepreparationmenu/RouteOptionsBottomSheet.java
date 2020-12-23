@@ -1,7 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -13,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -400,7 +398,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						boolean enabled = !settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(applicationMode);
 						settings.ENABLE_TIME_CONDITIONAL_ROUTING.setModeValue(applicationMode, enabled);
 						timeConditionalRoutingItem[0].setChecked(enabled);
-						app.getRoutingHelper().onSettingsChanged(true);
+						app.getRoutingHelper().onSettingsChanged(applicationMode, true);
 					}
 				})
 				.create();
@@ -473,6 +471,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
 						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
 						avoidRoadsFragment.setCompoundButtonColorId(selectedModeColorId);
+						avoidRoadsFragment.setApplicationMode(applicationMode);
 						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 						updateMenu();
 					}
@@ -656,19 +655,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	}
 
-	@Override
-	public void onDismiss(@NonNull DialogInterface dialog) {
-		super.onDismiss(dialog);
-		notifyAppModeConfigurationChanged();
-	}
-
-	private void notifyAppModeConfigurationChanged() {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnAppModeConfiguredCallback) {
-			((OnAppModeConfiguredCallback) fragment).onAppModeConfigured();
-		}
-	}
-
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode applicationMode) {
 		List<String> routingParameters;
 
@@ -740,10 +726,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			setupHeightAndBackground(mainView);
 		}
-	}
-
-	public interface OnAppModeConfiguredCallback {
-		void onAppModeConfigured();
 	}
 
 	public enum AppModeOptions {
