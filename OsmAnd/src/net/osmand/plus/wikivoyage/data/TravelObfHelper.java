@@ -183,7 +183,7 @@ public class TravelObfHelper implements TravelHelper {
 					r.langs.add(article.lang);
 					r.routeId = getRouteId(obj);
 					r.imageTitle = emptyIfNull(obj.getTagContent(Amenity.IMAGE_TITLE, currLang));
-					cachedArticles.put(getCachedKeyForArticle(article.routeId, article.lang), article);
+					//cachedArticles.put(getCachedKeyForArticle(article.routeId, article.lang), article);
 				}
 				if (article != null) {
 					res.add(r);
