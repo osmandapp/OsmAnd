@@ -183,9 +183,9 @@ public class TravelObfHelper implements TravelHelper {
 					r.langs.add(article.lang);
 					r.routeId = getRouteId(obj);
 					r.imageTitle = emptyIfNull(obj.getTagContent(Amenity.IMAGE_TITLE, currLang));
+					cachedArticles.put(getCachedKeyForArticle(article.routeId, article.lang), article);
 				}
 				if (article != null) {
-					cachedArticles.put(getCachedKeyForArticle(article.routeId, article.lang), article);
 					res.add(r);
 				}
 			}
@@ -330,7 +330,7 @@ public class TravelObfHelper implements TravelHelper {
 				a = article;
 			}
 		}
-		return a != null && a.getRouteId() != null ? a.getRouteId() : "";
+		return a != null && a.getRouteId() != null ? getCachedKeyForArticle(a.routeId, a.lang) : "";
 	}
 
 	@NonNull
@@ -339,6 +339,11 @@ public class TravelObfHelper implements TravelHelper {
 		ArrayList<String> res = new ArrayList<>();
 		res.add("en");
 		for (TravelArticle article : popularArticles) {
+			if (article.getRouteId().equals(routeId)) {
+				res.add(article.getLang());
+			}
+		}
+		for (TravelArticle article : cachedArticles.values()) {
 			if (article.getRouteId().equals(routeId)) {
 				res.add(article.getLang());
 			}
