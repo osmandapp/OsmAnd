@@ -315,9 +315,9 @@ public class IntentHelper {
 		if (intent != null && intent.getData() != null) {
 			Uri uri = intent.getData();
 			if (uri.toString().startsWith(OPRWebviewActivity.OPR_OAUTH_PREFIX)) {
+				//android.util.Log.d("TAG", "parseOprOAuthIntent: " + uri.toString());
+				//D/TAG: parseOprOAuthIntent: opr-oauth://osmand_opr_auth
 				String oauthVerifier = uri.getQueryParameter("oauth_verifier");
-				app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
-				app.getOsmOAuthHelper().authorize(oauthVerifier);
 				mapActivity.setIntent(null);
 				return true;
 			}
