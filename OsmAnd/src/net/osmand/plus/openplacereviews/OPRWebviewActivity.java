@@ -11,8 +11,10 @@ import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -25,7 +27,10 @@ import java.util.List;
 public class OPRWebviewActivity extends OsmandActionBarActivity {
 	public static final String KEY_LOGIN = "LOGIN_KEY";
 	public static final String KEY_TITLE = "TITLE_KEY";
+	public static final String OPR_OAUTH_PREFIX = "opr-oauth";
 	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)";
+	private static final String PURPOSE = "opr-android";
+	private static final String CALLBACK_URL = OPR_OAUTH_PREFIX + "://osmand_opr_auth";
 	private WebView webView;
 	private boolean isLogin = false;
 
@@ -38,11 +43,23 @@ public class OPRWebviewActivity extends OsmandActionBarActivity {
 	}
 
 	public static String getLoginUrl(Context ctx) {
-		return getBaseUrl(ctx) + "login";
+		return getBaseUrl(ctx) + "login" + getQueryString(ctx);
 	}
 
 	public static String getRegisterUrl(Context ctx) {
-		return getBaseUrl(ctx) + "signup";
+		return getBaseUrl(ctx) + "signup" + getQueryString(ctx);
+	}
+
+	public static String getQueryString(Context ctx) {
+		return "?" + getPurposeParam(ctx) + "&" + getCallbackParam(ctx);
+	}
+
+	public static String getPurposeParam(Context ctx) {
+		return "purpose=" + PURPOSE;
+	}
+
+	public static String getCallbackParam(Context ctx) {
+		return "callback=" + CALLBACK_URL;
 	}
 
 	public static List<String> getFinishUrls(Context ctx) {

@@ -24,6 +24,7 @@
 		</androidx.appcompat.widget.Toolbar>
 
 	</com.google.android.material.appbar.AppBarLayout>
+
 	<WebView
 		android:id="@+id/printDialogWebview"
 		android:layout_width="match_parent"

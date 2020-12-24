@@ -13,14 +13,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
+import net.osmand.plus.openplacereviews.OPRWebviewActivity;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -36,7 +37,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.*;
+import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 
 public class IntentHelper {
 
@@ -65,6 +66,9 @@ public class IntentHelper {
 		}
 		if (!applied) {
 			applied = parseOAuthIntent();
+		}
+		if (!applied) {
+			applied = parseOprOAuthIntent();
 		}
 		return applied;
 	}
@@ -296,6 +300,21 @@ public class IntentHelper {
 		if (intent != null && intent.getData() != null) {
 			Uri uri = intent.getData();
 			if (uri.toString().startsWith("osmand-oauth")) {
+				String oauthVerifier = uri.getQueryParameter("oauth_verifier");
+				app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
+				app.getOsmOAuthHelper().authorize(oauthVerifier);
+				mapActivity.setIntent(null);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean parseOprOAuthIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri uri = intent.getData();
+			if (uri.toString().startsWith(OPRWebviewActivity.OPR_OAUTH_PREFIX)) {
 				String oauthVerifier = uri.getQueryParameter("oauth_verifier");
 				app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
 				app.getOsmOAuthHelper().authorize(oauthVerifier);
