@@ -27,6 +27,7 @@ import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import java.io.File;
 import java.util.List;
 
+import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKIVOYAGE_DOMAIN;
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
 
 
@@ -48,7 +49,6 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	private static final String PREFIX_GEO = "geo:";
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
-	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.org/wiki/";
 	private WikiArticleHelper wikiArticleHelper;
 
 
@@ -64,11 +64,11 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	public boolean shouldOverrideUrlLoading(WebView view, String url) {
 		url = WikiArticleHelper.normalizeFileUrl(url);
 		boolean isWebPage = url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS);
-		if (url.contains(WIKIVOAYAGE_DOMAIN) && isWebPage) {
+		if (url.contains(WIKIVOYAGE_DOMAIN) && isWebPage) {
 			String lang = WikiArticleHelper.getLang(url);
 			String articleName = WikiArticleHelper.getArticleNameFromUrl(url, lang);
 			String articleId = app.getTravelHelper().getArticleId(articleName, lang);
-			if (articleId.isEmpty()) {
+			if (!articleId.isEmpty()) {
 				WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, articleId, lang);
 			} else {
 				WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
