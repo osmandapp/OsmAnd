@@ -123,7 +123,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 		ApplicationMode appMode = getModeForKey(params);
 		if (appMode != null) {
 			OsmandApplication app = activity.getMyApplication();
-			app.getSettings().APPLICATION_MODE.set(appMode);
+			app.getSettings().setApplicationMode(appMode);
 			app.getQuickActionRegistry().setQuickActionFabState(true);
 
 			String message = String.format(activity.getString(

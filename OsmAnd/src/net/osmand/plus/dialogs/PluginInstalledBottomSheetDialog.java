@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.profiles.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -33,7 +34,6 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
@@ -221,7 +221,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 			final BottomSheetItemWithCompoundButton[] appModeItem = new BottomSheetItemWithCompoundButton[1];
 			appModeItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(ApplicationMode.values(app).contains(mode))
-					.setDescription(BaseSettingsFragment.getAppModeDescription(app, mode))
+					.setDescription(ProfileDataUtils.getAppModeDescription(app, mode))
 					.setTitle(mode.toHumanString())
 					.setIcon(getActiveIcon(mode.getIconRes()))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)

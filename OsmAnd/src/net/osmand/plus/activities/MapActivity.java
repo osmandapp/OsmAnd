@@ -126,7 +126,7 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
+import net.osmand.plus.routing.RouteCalculationProgressCallback;
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
@@ -553,7 +553,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 										allowPrivate.setModeValue(mode, true);
 									}
 								}
-								getRoutingHelper().recalculateRouteDueToSettingsChange();
+								getRoutingHelper().onSettingsChanged(null, true);
 							}
 						});
 						dlg.setNegativeButton(R.string.shared_string_no, null);

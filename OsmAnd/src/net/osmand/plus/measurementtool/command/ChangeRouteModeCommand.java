@@ -4,7 +4,7 @@ import android.util.Pair;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
-import net.osmand.plus.measurementtool.MeasurementEditingContext.RoadSegmentData;
+import net.osmand.plus.measurementtool.RoadSegmentData;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.settings.backend.ApplicationMode;
 

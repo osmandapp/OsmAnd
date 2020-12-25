@@ -3878,4 +3878,16 @@
     <string name="poi_lifeguard_base">Vízimentő-támaszpont</string>
     <string name="poi_vaccination_covid19">Oltóközpont: Covid19</string>
     <string name="poi_health_specialty_vaccination_yes">Oltóközpont</string>
+    <string name="poi_ranger_station">Ranger station</string>
+    <string name="poi_lavoir">Ruhamosó hely</string>
+    <string name="poi_waste_transfer_station">Hulladékátrakodó</string>
+    <string name="poi_weightbridge">Hídmérleg</string>
+    <string name="poi_water_source_lake">Tó</string>
+    <string name="poi_water_source_river">Folyó</string>
+    <string name="poi_water_source_well">Kút</string>
+    <string name="poi_water_source_powered_pump">Motoros szivattyú</string>
+    <string name="poi_water_source_water_tank">Víztartály</string>
+    <string name="poi_water_source_tap">Csap</string>
+    <string name="poi_water_source_water_works">Vízmű</string>
+    <string name="poi_water_source_tube_well">Csöves kút</string>
 </resources>

@@ -33,6 +33,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -431,10 +432,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			public void onClick(DialogInterface dialog, int which) {
 				mode.setStrAngle(angleValue[0]);
 				updateAllSettings();
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
-					routingHelper.recalculateRouteDueToSettingsChange();
-				}
+				app.getRoutingHelper().onSettingsChanged(mode);
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -481,7 +479,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		float allowedValue = settings.ROUTE_RECALCULATION_DISTANCE.getModeValue(appMode);
 		boolean enabled = allowedValue != DISABLE_MODE;
 		if (allowedValue <= 0) {
-			allowedValue = RoutingHelper.getDefaultAllowedDeviation(settings, appMode, RoutingHelper.getPosTolerance(0));
+			allowedValue = RoutingHelperUtils.getDefaultAllowedDeviation(settings, appMode, RoutingHelperUtils.getPosTolerance(0));
 		}
 		String summary = String.format(getString(R.string.ltr_or_rtl_combine_via_bold_point),
 				enabled ? getString(R.string.shared_string_enabled) : getString(R.string.shared_string_disabled),
@@ -642,12 +640,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		return multiSelectPref;
 	}
 
-	private static void recalculateRoute(OsmandApplication app, ApplicationMode mode) {
-		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (mode.equals(routingHelper.getAppMode())
-				&& (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
-			routingHelper.recalculateRouteDueToSettingsChange();
-		}
+	private static void recalculateRoute(@NonNull OsmandApplication app, ApplicationMode mode) {
+		app.getRoutingHelper().onSettingsChanged(mode);
 	}
 
 	private void clearParameters() {

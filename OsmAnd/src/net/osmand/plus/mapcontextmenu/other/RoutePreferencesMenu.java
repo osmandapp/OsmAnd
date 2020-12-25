@@ -137,7 +137,7 @@ public class RoutePreferencesMenu {
 											LocalRoutingParameter rp = group.getRoutingParameters().get(i);
 											rp.setSelected(settings, i == position);
 										}
-										mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+										mapActivity.getRoutingHelper().onSettingsChanged(true);
 										updateParameters();
 									}
 								}
@@ -366,7 +366,7 @@ public class RoutePreferencesMenu {
 				app.getTargetPointsHelper().updateRouteAndRefresh(true);
 				updateSpinnerItems(gpxSpinner);
 				updateParameters();
-				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+				mapActivity.getRoutingHelper().onSettingsChanged(true);
 				return true;
 			}
 		}, app.getDaynightHelper().isNightModeForMapControls());
@@ -389,7 +389,7 @@ public class RoutePreferencesMenu {
 				if (mapActivity.getRoutingHelper().getCurrentGPXRoute() != null) {
 					mapActivity.getRoutingHelper().setGpxParams(null);
 					settings.FOLLOW_THE_GPX_ROUTE.set(null);
-					mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+					mapActivity.getRoutingHelper().onSettingsChanged(true);
 				}
 				updateParameters();
 				return true;

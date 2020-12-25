@@ -3889,4 +3889,6 @@
     <string name="poi_water_source_tube_well">puto tuba (abisena)</string>
     <string name="poi_weightbridge">Pezilo por aŭtomobiloj</string>
     <string name="poi_ranger_station">Oficejo de naturrezervejo</string>
+    <string name="poi_lavoir">Vestaĵ-lavejo (ĉe rivero)</string>
+    <string name="poi_waste_transfer_station">Stacio de rubmastrumado</string>
 </resources>

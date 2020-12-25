@@ -59,4 +59,5 @@ public class RoutingProfileDataObject extends ProfileDataObject {
 			return rpValues.contains(value);
 		}
 	}
+
 }

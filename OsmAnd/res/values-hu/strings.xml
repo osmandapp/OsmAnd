@@ -1559,7 +1559,7 @@
     <string name="lang_gl">galiciai</string>
     <string name="lang_et">észt</string>
     <string name="lang_ceb">szebuano</string>
-    <string name="archive_wikipedia_data">Régi, összeférhetetlen Wikipédia adataid vannak. Archiválod őket?</string>
+    <string name="archive_wikipedia_data">A Wikipédia-adatok régiek és inkompatbilisek. Archiválja őket\?</string>
     <string name="download_wikipedia_files">Letölt további Wikipédia-adatokat (%1$s MB)\?</string>
     <string name="lang_es_ar">spanyol (argentín)</string>
     <string name="lang_nb">norvég bokmål</string>
@@ -1943,7 +1943,7 @@
     <string name="map_widget_magnetic_bearing">Mágneses irány</string>
     <string name="access_disable_offroute_recalc">Ne tervezzen újra, ha letérsz az útvonalról</string>
     <string name="access_disable_wrong_direction_recalc">Ne tervezzen újra, ha ellenkező irányba mész</string>
-    <string name="access_no_destination">Nincs beállítva célpont</string>
+    <string name="access_no_destination">Kisegítő lehetőségek bővítmény: nincs beállítva célpont</string>
     <string name="map_widget_battery">Akkumulátor töltöttsége</string>
     <string name="move_marker_bottom_sheet_title">A jelölő helyének módosításához mozgasd a térképet</string>
     <!-- string name="lat_lon_pattern">Szél.: %1$.5f Hossz.: %2$.5f</string -->
@@ -2566,7 +2566,7 @@
     <string name="shared_string_bookmark">Könyvjelző</string>
     <string name="hide_full_description">Teljes leírás elrejtése</string>
     <string name="show_full_description">Teljes leírás megjelenítése</string>
-    <string name="open_wikipedia_link_online">Wikipédia hivatkozás megnyitása online</string>
+    <string name="open_wikipedia_link_online">Wikipédia-link megnyitása online</string>
     <string name="open_wikipedia_link_online_description">A hivatkozás a böngészőben fog megnyílni.</string>
     <string name="read_wikipedia_offline">Wikipédia olvasása offline</string>
     <string name="download_all">Összes letöltése</string>
@@ -2603,7 +2603,7 @@
     <string name="images_cache">Kép gyorsítótár</string>
     <string name="delete_search_history">Keresési előzmények törlése</string>
     <string name="download_images">Képek letöltése</string>
-    <string name="read_wikipedia_offline_description">Szerezz OsmAnd Live előfizetést, hogy Wikipédia és Wikivoyage cikkeket olvashass offline.</string>
+    <string name="read_wikipedia_offline_description">Szerezzen OsmAnd Live előfizetést, hogy offline módon is olvashasson Wikipédia- és Wikivoyage-szócikkeket.</string>
     <string name="how_to_open_link">Hogyan nyisd meg a linket?</string>
     <string name="purchase_cancelled_dialog_title">Lemondtad az OsmAnd Live előfizetésedet</string>
     <string name="purchase_cancelled_dialog_descr">Előfizetés megújítása az alábbi funkciók használatának folytatásához:</string>
@@ -2640,14 +2640,14 @@
     <string name="index_item_world_wikivoyage">Wikivoyage szócikkek</string>
     <string name="access_intermediate_arrival_time">Köztes érkezési idő</string>
     <string name="map_widget_intermediate_time">Köztes idő</string>
-    <string name="download_wikipedia_description">Töltsd le %1$s Wikipédia szócikkeit offline olvasásra.</string>
+    <string name="download_wikipedia_description">Töltse le %1$s Wikipédia szócikkeit offline olvasásra.</string>
     <string name="download_wikipedia_label">Wikipédia adatok letöltése</string>
     <string name="open_in_browser_wiki">Szócikk megnyitása online</string>
     <string name="open_in_browser_wiki_description">Szócikk megtekintése böngészőben.</string>
-    <string name="download_wiki_region_placeholder">ez a régió</string>
+    <string name="download_wiki_region_placeholder">ezen régió</string>
     <string name="wiki_article_search_text">Megfelelő szócikk keresése</string>
     <string name="wiki_article_not_found">Szócikk nem található</string>
-    <string name="how_to_open_wiki_title">Hogyan nyiss meg Wikipédia szócikkeket?</string>
+    <string name="how_to_open_wiki_title">Hogyan lehet Wikipédia szócikkeket megnyitni\?</string>
     <string name="get_osmand_live">Az összes funkció feloldásához szerezze be az OsmAnd Live-ot: Napi térképfrissítés korlátlan számú letöltéssel, az összes fizetős és ingyenes bővítmény, Wikipédia, Wikivoyage és sok más.</string>
     <string name="unirs_render_descr">Az alapértelmezett stílus módosítása a gyalogos és kerékpáros utak kontrasztosabb megjelenítése érdekében. Mapnik színeket használ.</string>
     <string name="off_road_render_descr">Topo stílus alapján terepen történő vezetéshez és alátétként zöld műholdképekkel történő használathoz. Vékonyabb főutak, vastagabb mezőgazdasági és erdészeti utak, ösvények, kerékpár- és más útvonalak.</string>
@@ -3422,7 +3422,7 @@
     <string name="login_and_pass">Felhasználónév és jelszó</string>
     <string name="plugin_global_prefs_info">Ezek a bővítménybeállítások globálisak, és minden profilra vonatkoznak</string>
     <string name="osm_editing">OSM-szerkesztés</string>
-    <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtekinthető itt: %1$s. A már feltöltött pontok nem láthatók az OsmAndban.</string>
+    <string name="osm_edits_view_descr">"A még fel nem töltött szerkesztéseket vagy OSM-hibákat megtekintheti  itt: %1$s. A már feltöltött módosítások nem jelennek meg."</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Navigáció vagy haladás közben megjelenő ikon.</string>
     <string name="select_map_icon_descr">Álló helyzetben megjelenő ikon.</string>
@@ -3481,7 +3481,7 @@
     <string name="hillshade_description">A domborzatárnyékolás réteg sötét árnyalattal emeli ki a lejtőket, csúcsokat és a síkságokat.</string>
     <string name="slope_description">A lejtő réteg színezéssel jeleníti meg a terep meredekségét.</string>
     <string name="terrain_slider_description">Állítsa be a legkisebb és legnagyobb nagyítási szintet, amelyen a réteg megjelenjen.</string>
-    <string name="hillshade_download_description">További térképek szükségesek a domborzatárnyékolás térképen való megjelenítéséhez.</string>
+    <string name="hillshade_download_description">A domborzatárnyékolás térképen való megjelenítéséhez további térképek szükségesek.</string>
     <string name="slope_download_description">További térképek szükségesek a lejtők térképen való megjelenítéséhez.</string>
     <string name="shared_string_transparency">Áttetszőség</string>
     <string name="shared_string_zoom_levels">Nagyítási szintek</string>
@@ -3543,8 +3543,8 @@
 \n 
 \nA használaton kívüli bővítmények kikapcsolásával elrejtheti őket a %1$s menüből.</string>
     <string name="ui_customization_short_descr">Menü elemek, Opciók</string>
-    <string name="select_wikipedia_article_langs">Jelölje ki a térképen megjelenő Wikipédia szócikkek nyelvét. A szócikk olvasása közben válthat valamennyi elérhető nyelv között.</string>
-    <string name="some_articles_may_not_available_in_lang">Előfordulhat, hogy néhány Wikipédia szócikk nem érhető el az ön nyelvén.</string>
+    <string name="select_wikipedia_article_langs">Jelölje ki a térképen megjelenő Wikipédia-szócikkek nyelvét. A szócikk olvasása közben válthat valamennyi elérhető nyelv között.</string>
+    <string name="some_articles_may_not_available_in_lang">Előfordulhat, hogy néhány Wikipédia-szócikk nem érhető el az ön nyelvén.</string>
     <string name="select_track_file">Nyomvonalfájl kijelölése</string>
     <string name="lang_zhyue">kantoni</string>
     <string name="lang_zhminnan">déli min</string>
@@ -3734,7 +3734,7 @@
     <string name="please_provide_point_name_error">Kérem, adjon nevet a pontnak</string>
     <string name="lenght_limit_description">Adja meg a járműve hosszát (a hosszú járművekre útvonalkorlátozások vonatkozhatnak).</string>
     <string name="quick_action_remove_next_destination">Legközelebbi célpont törlése</string>
-    <string name="search_download_wikipedia_maps">Wikipédia térképek letöltése</string>
+    <string name="search_download_wikipedia_maps">Wikipédia-térképek letöltése</string>
     <string name="export_profile_dialog_description">További adatokat is kijelölhet exportálásra a profillal együtt.</string>
     <string name="shared_string_include_data">Kiegészítő adatok átvétele</string>
     <string name="import_profile_dialog_description">Az importált profil kiegészítő adatokat is tartalmaz. Koppintson az \"Importál\" gombra kizálólag a profiladatok importálásához vagy válassza a kiegészítő adatokat.</string>
@@ -3744,8 +3744,8 @@
 \nAz előfizetés automatikusan megújul, kivéve, ha azt a megújítási dátum előtt lemondja. A megújítási időszakra (hónap / 3 hónap / év) vonatkozóan a számláját csak a megújítás napján terheljük meg.
 \n
 \nAz előfizetéseket a Google Play beállításai között kezelheti és törölheti.</string>
-    <string name="quick_action_remove_next_destination_descr">Törli az útvonal soron következő célpontját. Amennyiben ez a végző célpont, a navigáció megáll.</string>
-    <string name="plugin_wikipedia_description">Tudjon meg többet az érdekes pontokról a Wikipédiából. Ez az Ön offline zsebútikönyve – egyszerűen kapcsolja be a Wikipédia-bővítményt, és élvezze az Ön körüli objektumokról szóló cikkeket.</string>
+    <string name="quick_action_remove_next_destination_descr">Törli az útvonala következő célpontját. Ha ez a végső cél, akkor a navigáció leáll.</string>
+    <string name="plugin_wikipedia_description">Az érdekes helyekről a Wikipédia segítségével tájékozódhat. Ez olyan, mint egy zsebútikönyv: helyekről és úti célokról olvashat benne.</string>
     <string name="app_mode_enduro_motorcycle">Salakmotor</string>
     <string name="app_mode_motor_scooter">Robogó</string>
     <string name="app_mode_wheelchair">Kerekesszék</string>
@@ -3785,7 +3785,7 @@
     <string name="gpx_split_interval_descr">Válassza ki, hogy a nyomvonalon milyen távolság- vagy időintervallumok jelzései jelenjenek meg.</string>
     <string name="monitoring_min_distance_descr">Ez a szűrő kiküszöböli az ismétlődő pontok rögzítését ott, ahol túl kevés tényleges mozgás történhetett, így szebb lesz a később utólag fel nem dolgozott nyomvonalak térbeli megjelenése.</string>
     <string name="multimedia_rec_split_title">Felvétel vágása</string>
-    <string name="disable_recording_once_app_killed_descrp">Szünetelteti a nyomvonal naplózását, amikor az alkalmazást bezárják (a \'mostanában használt alkalmazások\' felületen). (Az OsmAnd háttérjelzése eltűnik az Android értesítési sávjáról.)</string>
+    <string name="disable_recording_once_app_killed_descrp">A nyomvonal naplózása szünetelni fog, amikor az alkalmazást (újabb alkalmazásokkal) kilövik. (Ilyenkor az OsmAnd háttérjelzése is eltűnik az Android értesítési sávjáról.)</string>
     <string name="monitoring_min_speed_descr_recommendation">Javaslat: Először próbálja meg a mozgásérzékelést használni a legkisebb elmozdulást naplózó szűrővel (B). Ez jobb eredményeket hozhat, és kevesebb adatot veszít. Ha a nyomvonalak alacsony sebességnél továbbra is zajosak, próbálkozzon itt nullától eltérő értékekkel. Felhívjuk figyelmét, hogy egyes (hálózatalapú módszereket használó) mérőeszközök egyáltalán nem adnak sebességértéket, így ebben az esetben semmi sem fog rögzülni.</string>
     <string name="street_level_imagery">Utcaszintű képek</string>
     <string name="simplified_track_description">Csak az út vonala lesz elmentve, az útpontok törlődnek.</string>
@@ -3859,7 +3859,7 @@
     <string name="navigation_profile">Navigációs profil</string>
     <string name="monitoring_min_speed_descr_remark">Megjegyzés a „sebesség &gt; 0” ellenőrzéséhez: A legtöbb GPS lapkakészlet (chipset) csak akkor mutat sebességértéket, ha az algoritmus megállapítja, hogy mozgásban van. Ha nincs mozgás, akkor nem mutatnak sebességet. Ezért ebben a szűrőben a „&gt; 0” beállítás bizonyos értelemben a GPS lapkakészlet mozgásérzékelését használja. De – még ha a rögzítés ideje alatt itt nem is szűrjük – a GPX elemzése során mégis használjuk ezt a funkciót a korrigált távolság meghatározásához, vagyis az abban a mezőben megjelenített érték a mozgás közben rögzített távolság.</string>
     <string name="only_selected_segment_recalc">Csak a kijelölt szakasz lesz újraszámítva a kiválasztott profilnak megfelelően.</string>
-    <string name="plan_route_exit_dialog_descr">Biztos, hogy mentés nélkül bezárja az útvonaltervezőt\? Minden változást elvész.</string>
+    <string name="plan_route_exit_dialog_descr">Biztosan elveti az összes módosítást a tervezett útvonalon\?</string>
     <string name="follow_track_descr">Válassza ki a követendő nyomvonalfájlt</string>
     <string name="listed_exist">A felsorolt %1$s már létezik az OsmAndban.</string>
     <string name="all_previous_segments">Minden korábbi szakasz</string>
@@ -3898,12 +3898,12 @@
     <string name="sort_name_ascending">Név: A–Z</string>
     <string name="start_finish_icons">Kiindulás és érkezés ikonjai</string>
     <string name="contour_lines_thanks">Köszönjük, hogy megvásárolta a szintvonalbővítményt (Contour lines)</string>
-    <string name="osm_live_payment_desc_hw">Az előfizetés díja a kiválasztott időszakonként lesz kiszámítva. Bármikor törölheti az AppGallery webhelyen.</string>
-    <string name="osm_live_payment_subscription_management_hw">A fizetést a vásárlás visszaigazolásakor az AppGallery számlájára terheljük.
+    <string name="osm_live_payment_desc_hw">Az előfizetés a kiválasztott időszakonként kerül felszámolásra. Bármikor törölheti az AppGallery alkalmazásban.</string>
+    <string name="osm_live_payment_subscription_management_hw">AppGallery-fiókját a vásárlás visszaigazolása után terheljük meg.
 \n
-\nAz előfizetés automatikusan megújul, kivéve, ha azt a megújítási dátum előtt lemondja. A megújítási időszakra (hónap / 3 hónap / év) vonatkozóan a számláját csak a megújítás napján terheljük meg.
+\nAz előfizetés automatikusan meghosszabbodik, kivéve, ha a megújítási dátum előtt lemondják. A megújítási időszakra (hónap / három hónap / év) az Ön számláját csak a megújítás napján terheljük meg.
 \n
-\nAz előfizetéseket az AppGallery beállításai között kezelheti és törölheti.</string>
+\nAz előfizetéseket az AppGallery beállításaiban kezelheti és törölheti.</string>
     <string name="routing_attr_avoid_footways_description">Gyalogutak elkerülése</string>
     <string name="routing_attr_avoid_footways_name">Gyalogutak elkerülése</string>
     <string name="development">Fejlesztés</string>
@@ -3950,7 +3950,7 @@
     <string name="subscription_on_hold_title">Az OsmAnd-előfizetés fel van függesztve</string>
     <string name="subscription_paused_title">Az OsmAnd Live-előfizetés szünetel</string>
     <string name="subscription_expired_title">Az OsmAnd Live-előfizetés lejárt</string>
-    <string name="subscription_payment_issue_title">Probléma van az előfizetésével. A fizetési mód kijavítása érdekében koppintson a gombra a Google Play előfizetési beállításaihoz történő ugráshoz.</string>
+    <string name="subscription_payment_issue_title">Előfizetése kijavítása érdekében koppintson a gombra, és állítsa be a fizetési módot a Google Playen.</string>
     <string name="user_login">Bejelentkezés</string>
     <string name="login_account">Fiók</string>
     <string name="use_login_password">Bejelentkezés felhasználónévvel és jelszóval</string>
@@ -4007,4 +4007,7 @@
 \n  • Egyéni színek támogatása a kedvenceknél és a nyomvonalak útpontjainál
 \n
 \n"</string>
+    <string name="profile_type_osmand_string">OsmAnd profil</string>
+    <string name="profile_type_user_string">Felhasználói profil</string>
+    <string name="reverse_all_points">Összes pont megfordítása</string>
 </resources>

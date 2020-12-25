@@ -108,7 +108,7 @@ public class MapMarkersCard extends BaseCard {
 				public void onClick(View v) {
 					LatLon point = new LatLon(marker.getLatitude(), marker.getLongitude());
 					app.getTargetPointsHelper().navigateToPoint(point, true, -1, marker.getPointDescription(mapActivity));
-					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+					app.getRoutingHelper().onSettingsChanged(true);
 				}
 			});
 			if (i > 0) {

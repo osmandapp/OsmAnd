@@ -497,7 +497,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			if (object instanceof SelectedGpxPoint && !((SelectedGpxPoint) object).getSelectedGpxFile().isShowCurrentTrack()) {
 				GPXFile gpxFile = ((SelectedGpxPoint) object).getSelectedGpxFile().getGpxFile();
 				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpxFile, null, null, true, true, MenuState.HEADER_ONLY);
-				routingHelper.recalculateRouteDueToSettingsChange();
+				routingHelper.onSettingsChanged(true);
 				menu.close();
 			} else {
 				if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
@@ -800,7 +800,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
 			if (app.getSettings().APPLICATION_MODE.get() != routingHelper.getAppMode()) {
-				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());
+				app.getSettings().setApplicationMode(routingHelper.getAppMode(), false);
 			}
 		} else {
 			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
@@ -808,7 +808,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			} else {
 				touchEvent = 0;
 				app.logEvent("start_navigation");
-				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());
+				app.getSettings().setApplicationMode(routingHelper.getAppMode(), false);
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl(17, true);
 				app.getSettings().FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);

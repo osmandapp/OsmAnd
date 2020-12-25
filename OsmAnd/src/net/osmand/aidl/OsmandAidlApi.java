@@ -80,6 +80,7 @@ import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
@@ -1803,7 +1804,7 @@ public class OsmandAidlApi {
 		if (ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
 			TurnType tt = ni.directionInfo.getTurnType();
 			RouteDirectionInfo a = ni.directionInfo;
-			bundle.putString(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelper.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
+			bundle.putString(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelperUtils.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
 			bundle.putString(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
 			bundle.putFloat(prefix + PARAM_NT_DIRECTION_ANGLE, tt.getTurnAngle());
 			bundle.putBoolean(prefix + PARAM_NT_DIRECTION_POSSIBLY_LEFT, tt.isPossibleLeftTurn());
@@ -2365,7 +2366,7 @@ public class OsmandAidlApi {
 					if (!ApplicationMode.values(app).contains(appMode)) {
 						ApplicationMode.changeProfileAvailability(appMode, true, app);
 					}
-					app.getSettings().APPLICATION_MODE.set(appMode);
+					app.getSettings().setApplicationMode(appMode);
 				}
 			});
 			return true;
@@ -2395,7 +2396,7 @@ public class OsmandAidlApi {
 
 	public boolean addRoadBlock(ABlockedRoad road) {
 		LatLon latLon = new LatLon(road.getLatitude(), road.getLongitude());
-		app.getAvoidSpecificRoads().addImpassableRoad(null, latLon, false, false, null);
+		app.getAvoidSpecificRoads().addImpassableRoad(null, latLon, false, false, road.getAppModeKey());
 		return true;
 	}
 

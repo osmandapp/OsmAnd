@@ -2,11 +2,9 @@ package net.osmand.plus.measurementtool.command;
 
 import android.util.Pair;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
-import net.osmand.plus.measurementtool.MeasurementEditingContext.RoadSegmentData;
+import net.osmand.plus.measurementtool.RoadSegmentData;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
 import java.util.ArrayList;

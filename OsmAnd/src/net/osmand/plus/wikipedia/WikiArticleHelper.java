@@ -46,7 +46,7 @@ public class WikiArticleHelper {
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
 	private static final String PAGE_PREFIX_FILE = "file://";
-	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.org/wiki/";
+	public static final String WIKIVOYAGE_DOMAIN = ".wikivoyage.org/wiki/";
 
 	public static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
 	public static final String WIKI_DOMAIN_COM = ".wikipedia.com/wiki/";
@@ -245,7 +245,7 @@ public class WikiArticleHelper {
 	}
 
 	public static String getArticleNameFromUrl(String url, String lang) {
-		String domain = url.contains(WIKIVOAYAGE_DOMAIN) ? WIKIVOAYAGE_DOMAIN :
+		String domain = url.contains(WIKIVOYAGE_DOMAIN) ? WIKIVOYAGE_DOMAIN :
 				url.contains(WIKI_DOMAIN) ? WIKI_DOMAIN : WIKI_DOMAIN_COM;
 		String articleName = "";
 

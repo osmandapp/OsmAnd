@@ -31,10 +31,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 				if (activity != null) {
 					app.getAvoidSpecificRoads().removeImpassableRoad(
 							ImpassibleRoadsMenuController.this.avoidRoadInfo);
-					RoutingHelper rh = app.getRoutingHelper();
-					if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
-						rh.recalculateRouteDueToSettingsChange();
-					}
+					app.getRoutingHelper().onSettingsChanged();
 					activity.getContextMenu().close();
 				}
 			}

@@ -1819,7 +1819,7 @@
     <string name="routing_attr_height_name">Предельная высота</string>
     <string name="routing_attr_height_description">Укажите высоту транспортного средства для учёта при построении маршрута.</string>
     <string name="use_fast_recalculation">Умный пересчёт маршрута</string>
-    <string name="use_fast_recalculation_desc">Пересчитывается только начальная часть маршрута. Может использоваться для дальних поездок.</string>
+    <string name="use_fast_recalculation_desc">Пересчитывается только начальная часть маршрута. Полезно для дальних поездок.</string>
     <string name="osm_edit_context_menu_delete">Удалить правки OSM</string>
     <string name="rendering_value_disabled_name">Выключено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Раскраска по сетевой принадлежности</string>
@@ -2169,7 +2169,7 @@
     <string name="access_disable_offroute_recalc_descr">Предотвращает пересчёт маршрута после того, как вы из него вышли.</string>
     <string name="access_disable_wrong_direction_recalc">Не пересчитывать маршрут при обратном направлении движения</string>
     <string name="access_disable_wrong_direction_recalc_descr">Предотвращает автоматический пересчёт маршрута при обратном направлении движения.</string>
-    <string name="access_no_destination">Пункт назначения не задан</string>
+    <string name="access_no_destination">Плагин специальных возможностей: пункт назначения не задан</string>
     <string name="access_direction_audio_feedback">Озвучивать направление</string>
     <string name="access_direction_audio_feedback_descr">Индицировать звуком направление на целевую точку.</string>
     <string name="access_direction_haptic_feedback">Тактильная индикация направления</string>
@@ -3505,7 +3505,7 @@
     <string name="login_and_pass">Имя пользователя и пароль</string>
     <string name="plugin_global_prefs_info">Эти настройки плагина применяются ко всем профилям</string>
     <string name="osm_editing">Редактирование OSM</string>
-    <string name="osm_edits_view_descr">Здесь отображаются ваши правки и ошибки OSM, ещё не отправленные в %1$s. Отправленные точки не будут отображаться.</string>
+    <string name="osm_edits_view_descr">Здесь отображаются ваши правки и ошибки OSM, ещё не отправленные в %1$s. Отправленные изменения не отображаются.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок, отображаемый во время навигации или движения.</string>
     <string name="select_map_icon_descr">Значок, отображаемый в состоянии покоя.</string>
@@ -3905,7 +3905,7 @@
     <string name="contour_lines_thanks">Спасибо за покупку \'Контурных линий\'</string>
     <string name="routing_attr_avoid_footways_description">Избегать пешеходных дорожек</string>
     <string name="routing_attr_avoid_footways_name">Избегать пешеходных дорожек</string>
-    <string name="osm_live_payment_desc_hw">Подписка взимается за выбранный период. Отмените её в AppGallery в любое время.</string>
+    <string name="osm_live_payment_desc_hw">Подписка оплачивается за выбранный период. Отмените её в AppGallery в любое время.</string>
     <string name="osm_live_payment_subscription_management_hw">Оплата будет снята с вашей учётной записи AppGallery при подтверждении покупки.
 \n
 \nПодписка продлевается автоматически, если она не будет отменена до даты продления. С вашего счёта будет взиматься плата за период продления (месяц/три месяца/год) только в дату продления.
@@ -3941,7 +3941,7 @@
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd использует MGRS, который похож на формат UTM NATO.</string>
     <string name="use_native_pt">Развитие местного общественного транспорта</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Нужно добавить не менее двух точек</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Добавьте не менее двух точек</string>
     <string name="message_need_calculate_route_before_show_graph">Данные %1$s доступны только для дорог, нужно рассчитать маршрут с помощью «Маршрут между точками».</string>
     <string name="enter_text_separated">Вводите теги через запятую.</string>
     <string name="use_native_pt_desc">Перейти на расчёт маршрутов общественного транспорта с помощью Java (safe)</string>
@@ -3974,7 +3974,7 @@
     <string name="add_photos_descr">OsmAnd показывает фотографии из нескольких источников:
 \nOpenPlaceReviews — фотогорафии POI;
 \nMapillary — изображения улиц;
-\nWeb / Wikimedia — фотографии POI, указанные в данных OpenStreetMap.</string>
+\nWeb / Wikimedia — фотографии POI по данным OpenStreetMap.</string>
     <string name="shared_string_resources">Ресурсы</string>
     <string name="approximate_file_size">Примерный размер файла</string>
     <string name="file_size_needed_for_import">Требуется для импорта</string>
@@ -3985,10 +3985,10 @@
     <string name="select_items_for_import">Выберите импортируемые элементы.</string>
     <string name="use_dev_url">Использовать dev.openstreetmap.org</string>
     <string name="osm_login_descr">Можно войти в систему с помощью безопасного метода OAuth или используя свои имя пользователя и пароль.</string>
-    <string name="subscription_payment_issue_title">Возникла проблема с подпиской. Нажмите кнопку, чтобы перейти к настройкам подписки Google Play и исправить способ оплаты.</string>
+    <string name="subscription_payment_issue_title">Нажмите кнопку, чтобы перейти к настройкам подписки Google Play и исправить способ оплаты.</string>
     <string name="osm_edit_comment_note">Комментировать заметку OSM</string>
     <string name="use_dev_url_descr">Переключиться на использование dev.openstreetmap.org вместо openstreetmap.org для тестирования отправки заметок OSM / POI / GPX.</string>
-    <string name="register_on_openplacereviews_desc">Фотографии предоставлены проектом открытых данных OpenPlaceReviews.org. Чтобы отправить свои фотографии, необходимо зарегистрироваться на сайте.</string>
+    <string name="register_on_openplacereviews_desc">Фотографии предоставлены проектом открытых данных OpenPlaceReviews.org. Чтобы отправить свои фотографии, необходимо зарегистрироваться на этом сайте.</string>
     <string name="cannot_upload_image">Невозможно отправить изображение, попробуйте позже</string>
     <string name="select_picture">Выбор изображения</string>
     <string name="app_mode_kayak">Каяк</string>
@@ -3999,4 +3999,6 @@
     <string name="plan_route_join_segments">Объединить сегменты</string>
     <string name="plan_route_split_before">Разделить до</string>
     <string name="plan_route_split_after">Разделить после</string>
+    <string name="profile_type_user_string">Профиль пользователя</string>
+    <string name="profile_type_osmand_string">Профиль OsmAnd</string>
 </resources>

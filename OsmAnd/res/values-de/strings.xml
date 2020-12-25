@@ -4023,4 +4023,6 @@
     <string name="profile_type_osmand_string">OsmAnd-Profil</string>
     <string name="profile_type_user_string">Benutzerprofil</string>
     <string name="reverse_all_points">Alle Punkte umkehren</string>
+    <string name="profile_by_default_description">Wählen Sie das Profil, das beim Start der Anwendung verwendet werden soll.</string>
+    <string name="shared_string_last_used">Zuletzt verwendet</string>
 </resources>

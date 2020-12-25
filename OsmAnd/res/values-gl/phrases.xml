@@ -3618,7 +3618,7 @@
     <string name="poi_vehicle_military">Acceso para vehículos: militar</string>
     <string name="poi_vehicle_delivery">Acceso para vehículos: entregas</string>
     <string name="poi_vehicle_forestry">Acceso para vehículos: forestal</string>
-    <string name="poi_motorcar_yes">Acceso para automóbiles:</string>
+    <string name="poi_motorcar_yes">Acceso para automóbiles: si</string>
     <string name="poi_motorcar_private">Acceso para automóbiles: privado</string>
     <string name="poi_motorcar_no">Acceso para automóbiles: non</string>
     <string name="poi_motorcar_destination">Acceso para automóbiles: destino</string>
@@ -3876,4 +3876,19 @@
     <string name="poi_siren">Serea</string>
     <string name="poi_nurse">Enfermeira</string>
     <string name="poi_mobile_money_agent">Axente de diñeiro móbil</string>
+    <string name="poi_lavoir">Lavadoiro</string>
+    <string name="poi_waste_transfer_station">Estación de transferencia de residuos</string>
+    <string name="poi_weightbridge">Balanza</string>
+    <string name="poi_ranger_station">Posto de garda forestal</string>
+    <string name="poi_water_source_lake">Lago</string>
+    <string name="poi_water_source_river">Río</string>
+    <string name="poi_water_source_well">Pozo</string>
+    <string name="poi_water_source_powered_pump">Bomba motorizada</string>
+    <string name="poi_water_source_water_tank">Tanque de auga</string>
+    <string name="poi_water_source_tap">Billa</string>
+    <string name="poi_water_source_water_works">Tratamento de augas</string>
+    <string name="poi_water_source_tube_well">Ben intubado</string>
+    <string name="poi_vaccination_covid19">Vacinación: COVID19</string>
+    <string name="poi_health_specialty_vaccination_yes">Vacinación</string>
+    <string name="poi_lifeguard_base">Base de salvavidas</string>
 </resources>

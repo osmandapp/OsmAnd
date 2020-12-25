@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="routing_attr_prefer_hiking_routes_name">Prefer hiking routes</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Prefer hiking routes</string>
+    <string name="shared_string_last_used">Last used</string>
+    <string name="profile_by_default_description">Select the profile, that will be used on application start.</string>
     <string name="reverse_all_points">Reverse all points</string>
     <string name="release_3_9">
     • Added option to export and import all data including settings, resources, my places\n\n

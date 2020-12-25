@@ -5,7 +5,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
-import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.router.RouteCalculationProgress;
 
 import java.util.List;

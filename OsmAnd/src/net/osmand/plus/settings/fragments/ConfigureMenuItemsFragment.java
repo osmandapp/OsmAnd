@@ -38,7 +38,6 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.fragments.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.MenuItemsAdapterListener;
@@ -451,7 +450,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						showResetDialog();
+						resetToDefault();
 					}
 				})));
 		items.add(new RearrangeMenuAdapterItem(BUTTON, new RearrangeMenuItemsAdapter.ButtonItem(
@@ -497,29 +496,18 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		dismissDialog.show();
 	}
 
-	public void showResetDialog() {
-		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
-		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
-		dismissDialog.setTitle(getString(R.string.shared_string_reset));
-		dismissDialog.setMessage(getString(R.string.reset_deafult_order));
-		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
-		dismissDialog.setPositiveButton(R.string.shared_string_reset, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				hiddenMenuItems.clear();
-				menuItemsOrder.clear();
-				wasReset = true;
-				isChanged = true;
-				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-					mainActionItems.clear();
-				}
-				instantiateContextMenuAdapter();
-				initSavedIds(appMode, true);
-				initMainActionsIds(appMode, true);
-				rearrangeAdapter.updateItems(getAdapterItems());
-			}
-		});
-		dismissDialog.show();
+	public void resetToDefault() {
+		hiddenMenuItems.clear();
+		menuItemsOrder.clear();
+		wasReset = true;
+		isChanged = true;
+		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+			mainActionItems.clear();
+		}
+		instantiateContextMenuAdapter();
+		initSavedIds(appMode, true);
+		initMainActionsIds(appMode, true);
+		rearrangeAdapter.updateItems(getAdapterItems());
 	}
 
 	private void dismissFragment() {

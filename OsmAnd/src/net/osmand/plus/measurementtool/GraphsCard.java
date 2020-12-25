@@ -135,12 +135,12 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 	}
 
 	private void updateMenu() {
-		if (!editingCtx.isPointsEnoughToCalculateRoute()) {
-			graphTypesMenu.setVisibility(View.GONE);
-		} else {
+		if (editingCtx.isPointsEnoughToCalculateRoute()) {
 			graphTypesMenu.setVisibility(View.VISIBLE);
 			graphTypesMenu.removeAllViews();
 			fillInMenu();
+		} else {
+			graphTypesMenu.setVisibility(View.GONE);
 		}
 	}
 
@@ -349,7 +349,7 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 
 	private List<RouteStatistics> calculateRouteStatistics() {
 		OsmandApplication app = getMyApplication();
-		List<RouteSegmentResult> route = editingCtx.getAllRouteSegments();
+		List<RouteSegmentResult> route = editingCtx.getOrderedRoadSegmentData();
 		if (route != null && app != null) {
 			return RouteDetailsFragment.calculateRouteStatistics(app, route, nightMode);
 		}
