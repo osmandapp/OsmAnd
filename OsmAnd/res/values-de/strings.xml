@@ -4025,4 +4025,10 @@
     <string name="reverse_all_points">Alle Punkte umkehren</string>
     <string name="profile_by_default_description">Wählen Sie das Profil, das beim Start der Anwendung verwendet werden soll.</string>
     <string name="shared_string_last_used">Zuletzt verwendet</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Wanderwege bevorzugen</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Wanderwege bevorzugen</string>
+    <string name="routing_attr_allow_streams_description">Bäche und Entwässerungsgräben erlauben</string>
+    <string name="routing_attr_allow_streams_name">Bäche und Entwässerungsgräben erlauben</string>
+    <string name="routing_attr_allow_intermittent_description">Gewässer erlauben, die nicht ständig Wasser führen</string>
+    <string name="routing_attr_allow_intermittent_name">Gewässer erlauben, die nicht ständig Wasser führen</string>
 </resources>
