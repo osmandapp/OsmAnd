@@ -4016,4 +4016,10 @@
     <string name="reverse_all_points">Reverter todos os pontos</string>
     <string name="profile_by_default_description">Selecione o perfil que será utilizado na inicialização do aplicativo.</string>
     <string name="shared_string_last_used">Usado por último</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Percursos de caminhada preferidos</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Percursos de caminhada preferidos</string>
+    <string name="routing_attr_allow_streams_description">Permitir riachos e drenos</string>
+    <string name="routing_attr_allow_streams_name">Permitir riachos e drenos</string>
+    <string name="routing_attr_allow_intermittent_description">Permitir vias de água intermitentes</string>
+    <string name="routing_attr_allow_intermittent_name">Permitir vias de água intermitentes</string>
 </resources>
