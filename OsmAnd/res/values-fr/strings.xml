@@ -4000,4 +4000,6 @@
     <string name="reverse_all_points">Inverser tous les points</string>
     <string name="profile_by_default_description">Sélectionnez le profil utilisé au démarrage de l\'application.</string>
     <string name="shared_string_last_used">Dernier utilisé</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Pirivilégier les itinéraires de randonnée</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Pirivilégier les itinéraires de randonnée</string>
 </resources>
