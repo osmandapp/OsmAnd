@@ -4021,4 +4021,10 @@
     <string name="reverse_all_points">Inversigi ĉiujn punktojn</string>
     <string name="profile_by_default_description">Elekti profolin, kiu estos uzita je starto de la aplikaĵo.</string>
     <string name="shared_string_last_used">Antaŭe uzita</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Preferi piediradajn kursojn</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Preferi piediradajn kursojn</string>
+    <string name="routing_attr_allow_streams_description">Permesi navigi per riveretoj kaj fosaĵoj defluigaj</string>
+    <string name="routing_attr_allow_streams_name">Permesi riveretojn kaj fosaĵojn</string>
+    <string name="routing_attr_allow_intermittent_description">Permesi navigi per periode sekiĝantaj akvovojoj</string>
+    <string name="routing_attr_allow_intermittent_name">Permesi sezonajn akvovojojn</string>
 </resources>
