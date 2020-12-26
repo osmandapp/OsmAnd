@@ -4016,4 +4016,12 @@
     <string name="profile_type_osmand_string">Profilu de OsmAnd</string>
     <string name="profile_type_user_string">Profilu de s\'impreadore</string>
     <string name="reverse_all_points">Fùrria totu sos puntos</string>
+    <string name="profile_by_default_description">Ischerta su profilu de impreare a s\'allughìngiu de s\'aplicatzione.</string>
+    <string name="shared_string_last_used">Ùrtimu impreu</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Preferi sas àndalas pro s\'escursionismu</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Preferi sas àndalas pro s\'escursionismu</string>
+    <string name="routing_attr_allow_streams_description">Permite flussos e iscàrrigos</string>
+    <string name="routing_attr_allow_streams_name">Permite flussos e iscàrrigos</string>
+    <string name="routing_attr_allow_intermittent_description">Permite caminos de abba intermitentes</string>
+    <string name="routing_attr_allow_intermittent_name">Permite caminos de abba intermitentes</string>
 </resources>
