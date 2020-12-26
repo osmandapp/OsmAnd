@@ -4019,4 +4019,6 @@
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil používateľa</string>
     <string name="reverse_all_points">Otočiť všetky body</string>
+    <string name="profile_by_default_description">Zvoľte profil, ktorý bude použitý pri štarte aplikácie.</string>
+    <string name="shared_string_last_used">Naposledy použité</string>
 </resources>

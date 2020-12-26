@@ -4006,4 +4006,6 @@
     <string name="profile_type_osmand_string">ملف تعريف أوسماند</string>
     <string name="profile_type_user_string">ملف تعريف المستخدم</string>
     <string name="reverse_all_points">عكس جميع النقاط</string>
+    <string name="profile_by_default_description">حدد ملف التعريف، الذي سيتم استخدامه في بدء التطبيق.</string>
+    <string name="shared_string_last_used">آخر استخدام</string>
 </resources>

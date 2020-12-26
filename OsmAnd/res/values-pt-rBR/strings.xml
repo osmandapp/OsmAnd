@@ -4014,4 +4014,6 @@
     <string name="profile_type_osmand_string">Perfil do OsmAnd</string>
     <string name="profile_type_user_string">Perfil de usuário</string>
     <string name="reverse_all_points">Reverter todos os pontos</string>
+    <string name="profile_by_default_description">Selecione o perfil que será utilizado na inicialização do aplicativo.</string>
+    <string name="shared_string_last_used">Usado por último</string>
 </resources>

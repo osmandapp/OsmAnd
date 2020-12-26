@@ -3672,4 +3672,8 @@
     <string name="poi_lifeguard_base">منصة الانقاذ</string>
     <string name="poi_siren">صفارت إنذار</string>
     <string name="poi_community_gender_mixed">نوع المجتمع: مختلط</string>
+    <string name="poi_lavoir">مكان لغسل الملابس يدويا</string>
+    <string name="poi_waste_transfer_station">محطة نقل نفايات</string>
+    <string name="poi_weightbridge">ميزان المركبات</string>
+    <string name="poi_ranger_station">مكتب الحارس</string>
 </resources>

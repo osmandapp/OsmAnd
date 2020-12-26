@@ -3271,7 +3271,7 @@
     <string name="rendering_attr_piste_difficulty_intermediate_name">Middelmatig</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">Gevorderd</string>
     <string name="rendering_attr_piste_difficulty_expert_name">Expert</string>
-    <string name="rendering_attr_piste_difficulty_freeride_name">Gratische rit</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Gratis rit</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Extreem</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Ongedefinieerd</string>
     <string name="routeInfo_piste_difficulty_name">Moeilijkheidsgraad piste</string>

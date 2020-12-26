@@ -3774,7 +3774,7 @@
     <string name="lenght_limit_description">Indiquez la longueur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules longs.</string>
     <string name="quick_action_remove_next_destination">Supprimer le prochain point</string>
     <string name="please_provide_point_name_error">Merci de renseigner un nom pour le point</string>
-    <string name="plugin_wikipedia_description">Utilisez le guide Wikipédia hors ligne. Activez le plugin Wikipédia : des points d\'intérêt seront affichés, ils vous permettrons d\'obtenir des informations sur les lieux qui vous entourent.</string>
+    <string name="plugin_wikipedia_description">Obtenez des informations sur les points d\'intérêt avec les articles Wikipédia, un guide disponible hors-ligne.</string>
     <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
     <string name="app_mode_motor_scooter">Scooter</string>
     <string name="app_mode_enduro_motorcycle">Moto enduro</string>
@@ -3998,4 +3998,6 @@
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil utilisateur</string>
     <string name="reverse_all_points">Inverser tous les points</string>
+    <string name="profile_by_default_description">Sélectionnez le profil utilisé au démarrage de l\'application.</string>
+    <string name="shared_string_last_used">Dernier utilisé</string>
 </resources>
