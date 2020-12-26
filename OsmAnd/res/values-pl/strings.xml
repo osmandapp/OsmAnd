@@ -3549,7 +3549,7 @@
     <string name="shared_string_quick_actions">Szybka czynność</string>
     <string name="keep_both">Zatrzymaj oba</string>
     <string name="shared_string_rendering_style">Styl renderowania</string>
-    <string name="osm_edits_view_descr">Możesz wyświetlić wszystkie swoje jeszcze nie przesłane edycje lub błędy OSM w %1$s. Przesłane punkty nie są wyświetlane w OsmAnd.</string>
+    <string name="osm_edits_view_descr">Wyświetl wszystkie jeszcze nie przesłane swoje edycje lub błędy OSM w %1$s. Przesłane już zmiany nie będą wyświetlane.</string>
     <string name="import_rendering_file">Importowanie pliku renderowania</string>
     <string name="restore_all_profile_settings">Przywrócić wszystkie ustawienia profilu\?</string>
     <string name="saving_new_profile">Zapisywanie nowego profilu</string>
@@ -3926,7 +3926,7 @@
     <string name="use_complex_routing">Routing złożony</string>
     <string name="complex_routing_descr">Dwufazowe wyznaczanie tras do nawigacji samochodowej.</string>
     <string name="use_native_pt">Rozwój rodzimego transportu publicznego</string>
-    <string name="use_native_pt_desc">Przejdź do (bezpiecznego) obliczania tras transportu publicznego w języku Java</string>
+    <string name="use_native_pt_desc">Przejdź do (bezpiecznego) obliczania trasy transportu publicznego w języku Java</string>
     <string name="perform_oauth_authorization_description">Zaloguj się za pomocą protokołu OAuth, aby korzystać z funkcji osmedit</string>
     <string name="perform_oauth_authorization">Zaloguj się przez OAuth</string>
     <string name="clear_osm_token">Wyczyść token OpenStreetMap OAuth</string>
