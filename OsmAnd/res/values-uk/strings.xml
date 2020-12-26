@@ -4017,4 +4017,6 @@
     <string name="reverse_all_points">Повернути назад всі точки</string>
     <string name="profile_by_default_description">Виберіть профіль, який застосовуватиметься під час запуску.</string>
     <string name="shared_string_last_used">Востаннє використовувалось</string>
+    <string name="routing_attr_allow_intermittent_description">Дозволити переривчасті водні шляхи</string>
+    <string name="routing_attr_allow_intermittent_name">Дозволити переривчасті водні шляхи</string>
 </resources>
