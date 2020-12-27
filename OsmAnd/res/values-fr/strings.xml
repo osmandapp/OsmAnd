@@ -4002,4 +4002,6 @@
     <string name="shared_string_last_used">Dernier utilisé</string>
     <string name="routing_attr_prefer_hiking_routes_name">Pirivilégier les itinéraires de randonnée</string>
     <string name="routing_attr_prefer_hiking_routes_description">Pirivilégier les itinéraires de randonnée</string>
+    <string name="routing_attr_allow_intermittent_description">Autoriser les voies navigables intermittentes</string>
+    <string name="routing_attr_allow_intermittent_name">Autoriser les voies navigables intermittentes</string>
 </resources>
