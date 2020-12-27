@@ -556,6 +556,22 @@ public class TargetPointsHelper {
 		updateRouteAndRefresh(updateRoute);
 	}
 
+	public void reorderIntermediatePoints(List<TargetPoint> points, boolean updateRoute) {
+		cancelAllIntermediatePointsAddressRequests();
+		if (points.size() > 0) {
+			ArrayList<String> names = new ArrayList<>(points.size());
+			ArrayList<LatLon> ls = new ArrayList<>(points.size());
+			for (int i = 0; i < points.size(); i++) {
+				names.add(PointDescription.serializeToString(points.get(i).pointDescription));
+				ls.add(points.get(i).point);
+			}
+			settings.saveIntermediatePoints(ls, names);
+		} else {
+			settings.clearIntermediatePoints();
+		}
+		readFromSettings();
+		updateRouteAndRefresh(updateRoute);
+	}
 
 	public boolean hasTooLongDistanceToNavigate() {
 		if (routingHelper.getAppMode().getRouteService() != RouteService.OSMAND) {
