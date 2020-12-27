@@ -1621,7 +1621,7 @@
     <string name="shared_string_skip">Kihagyás</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Offline térképek\nés navigáció</string>
-    <string name="next_proceed">Tovább</string>
+    <string name="next_proceed">Következő</string>
     <string name="dahboard_options_dialog_title">Műszerfal beállításai</string>
     <string name="traffic_warning_hazard">Veszély</string>
     <string name="poi_action_delete">törlés</string>
@@ -4015,8 +4015,8 @@
     <string name="shared_string_last_used">Utoljára használt</string>
     <string name="routing_attr_prefer_hiking_routes_description">Túraútvonalak előnyben részesítése</string>
     <string name="routing_attr_prefer_hiking_routes_name">Túraútvonalak előnyben részesítése</string>
-    <string name="routing_attr_allow_streams_description">Patakok és csatornák engedélyezése</string>
-    <string name="routing_attr_allow_streams_name">Patakok és csatornák engedélyezése</string>
+    <string name="routing_attr_allow_streams_description">Patakok és vízelvezető árkok engedélyezése</string>
+    <string name="routing_attr_allow_streams_name">Patakok és vízelvezető árkok engedélyezése</string>
     <string name="routing_attr_allow_intermittent_description">Időszakos vízfolyások engedélyezése</string>
     <string name="routing_attr_allow_intermittent_name">Időszakos vízfolyások engedélyezése</string>
 </resources>
