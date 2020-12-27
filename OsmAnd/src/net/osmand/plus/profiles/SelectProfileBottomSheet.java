@@ -22,7 +22,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -39,6 +38,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.settings.fragments.OnlineRoutingEngineFragment;
 import net.osmand.router.RoutingConfiguration;
 
 import org.apache.commons.logging.Log;
@@ -177,6 +177,15 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 							return false;
 						}
 					});
+				}
+			});
+			addButtonItem(R.string.add_online_routing_engine, R.drawable.ic_world_globe_dark, new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (getActivity() != null) {
+						OnlineRoutingEngineFragment.showInstance(getActivity(), false);
+					}
+					dismiss();
 				}
 			});
 			items.add(new BaseBottomSheetItem.Builder()
