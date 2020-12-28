@@ -1,7 +1,6 @@
 package net.osmand.plus.myplaces;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -432,24 +431,6 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public void dismiss() {
-		TrackActivity trackActivity = getTrackActivity();
-		if (trackActivity != null) {
-			trackActivity.updateSplitView();
-		}
-		super.dismiss();
-	}
-
-	@Override
-	public void onCancel(DialogInterface dialog) {
-		TrackActivity trackActivity = getTrackActivity();
-		if (trackActivity != null) {
-			trackActivity.updateSplitView();
-		}
-		super.onCancel(dialog);
 	}
 
 	private class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {

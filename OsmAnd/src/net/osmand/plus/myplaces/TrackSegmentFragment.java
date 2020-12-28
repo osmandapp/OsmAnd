@@ -219,9 +219,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			altitudePopupMenu.dismiss();
 		}
 		if (fragmentAdapter != null) {
-			if (fragmentAdapter.splitListPopupWindow != null) {
-				fragmentAdapter.splitListPopupWindow.dismiss();
-			}
 			if (fragmentAdapter.colorListPopupWindow != null) {
 				fragmentAdapter.colorListPopupWindow.dismiss();
 			}
@@ -266,12 +263,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 	public void updateHeader() {
 		if (fragmentAdapter != null) {
 			fragmentAdapter.updateHeader(adapter.getCount());
-		}
-	}
-
-	public void updateSplitView() {
-		if (fragmentAdapter != null) {
-			fragmentAdapter.updateSplitView();
 		}
 	}
 
@@ -807,7 +798,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 								public void onClick(View v) {
 									TrackActivity activity = getTrackActivity();
 									if (activity != null && activity.setJoinSegments(!activity.isJoinSegments())) {
-										updateSplitView();
 										for (int i = 0; i < getCount(); i++) {
 											View view = getViewAtPosition(i);
 											updateJoinGapsInfo(view, i);
@@ -904,7 +894,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 								public void onClick(View v) {
 									TrackActivity activity = getTrackActivity();
 									if (activity != null && activity.setJoinSegments(!activity.isJoinSegments())) {
-										updateSplitView();
 										for (int i = 0; i < getCount(); i++) {
 											View view = getViewAtPosition(i);
 											updateJoinGapsInfo(view, i);

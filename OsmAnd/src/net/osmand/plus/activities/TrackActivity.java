@@ -266,15 +266,6 @@ public class TrackActivity extends TabActivity {
 		return false;
 	}
 
-	public void updateSplitView() {
-		for (WeakReference<Fragment> f : fragList) {
-			Fragment frag = f.get();
-			if (frag instanceof TrackSegmentFragment) {
-				((TrackSegmentFragment) frag).updateSplitView();
-			}
-		}
-	}
-
 	public void updateHeader(Fragment sender) {
 		for (WeakReference<Fragment> f : fragList) {
 			Fragment frag = f.get();
