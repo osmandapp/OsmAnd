@@ -234,11 +234,11 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 		view.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 
-		View applyButton = view.findViewById(R.id.right_bottom_button);
-		UiUtilities.setupDialogButton(nightMode, applyButton,
+		View saveButton = view.findViewById(R.id.right_bottom_button);
+		UiUtilities.setupDialogButton(nightMode, saveButton,
 				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_save);
-		applyButton.setVisibility(View.VISIBLE);
-		applyButton.setOnClickListener(new OnClickListener() {
+		saveButton.setVisibility(View.VISIBLE);
+		saveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// save engine to settings
