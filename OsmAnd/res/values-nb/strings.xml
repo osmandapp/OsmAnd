@@ -3940,4 +3940,7 @@
     <string name="profile_type_osmand_string">OsmAnd-profil</string>
     <string name="profile_type_user_string">Brukerprofil</string>
     <string name="button_rate">Bedøm</string>
+    <string name="shared_string_resources">Ressurser</string>
+    <string name="profile_by_default_description">Velg profilen som skal brukes når programmet starter.</string>
+    <string name="shared_string_last_used">Sist brukt</string>
 </resources>

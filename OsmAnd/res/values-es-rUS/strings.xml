@@ -1952,7 +1952,7 @@
     <string name="access_autoannounce_period_descr">Lapso de tiempo mínimo entre avisos.</string>
     <string name="map_widget_bearing">Rumbo relativo</string>
     <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
-    <string name="access_no_destination">Destino indefinido</string>
+    <string name="access_no_destination">Complemento de accesibilidad: Destino indefinido</string>
     <string name="use_osm_live_routing_description">Activa la navegación para cambios en vivo de OsmAnd.</string>
     <string name="use_osm_live_routing">Navegación con OsmAnd Live</string>
     <string name="follow_us">Síguenos</string>
@@ -2396,7 +2396,7 @@
     <string name="srtm_menu_download_descr">Descarga el mapa de «Curvas de nivel» para usarlas en esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
     <string name="srtm_purchase_header">Compra e instala el complemento «Curvas de nivel» para mostrar áreas verticales graduadas.</string>
-    <string name="hillshade_menu_download_descr">Descarga el mapa «Superposición de sombreado» para mostrar el sombreado vertical.</string>
+    <string name="hillshade_menu_download_descr">Descarga la capa superpuesta del mapa «Sombreado» para mostrar el sombreado vertical.</string>
     <string name="hillshade_purchase_header">Instala el complemento «Curvas de nivel» para mostrar las áreas verticales graduadas.</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de zoom</string>
     <string name="quick_action_showhide_osmbugs_title">Mostrar u ocultar notas de OSM</string>
@@ -3432,7 +3432,7 @@
     <string name="login_and_pass">Nombre de usuario y contraseña</string>
     <string name="plugin_global_prefs_info">Los ajustes de este complemento son globales y se aplican a todos los perfiles</string>
     <string name="osm_editing">Edición de OSM</string>
-    <string name="osm_edits_view_descr">Puedes ver todas tus ediciones aún no subidas o errores de OSM en «%1$s». Los puntos subidos no se muestran en OsmAnd.</string>
+    <string name="osm_edits_view_descr">Vea todas las ediciones aún no subidas o errores de OSM en «%1$s». Los cambios ya cargados no se mostrarán más.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">El icono se muestra mientras se navega o se mueve.</string>
     <string name="select_map_icon_descr">El icono se muestra en reposo.</string>
@@ -3794,9 +3794,9 @@
     <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zoom del mapa usando los botones de volumen del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zoom</string>
     <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
-    <string name="quick_action_remove_next_destination_descr">El punto de destino actual de la ruta será borrado. Si será el destino, la navegación se detendrá.</string>
+    <string name="quick_action_remove_next_destination_descr">Quita el siguiente destino de la ruta. Si es el destino final, la navegación se detendrá.</string>
     <string name="quick_action_remove_next_destination">Borrar el punto de destino más cercano</string>
-    <string name="plugin_wikipedia_description">Obtén información sobre los puntos de interés de Wikipedia. Es tu guía de bolsillo sin conexión - sólo activa el complemento de Wikipedia y disfruta los artículos sobre los objetos de alrededor.</string>
+    <string name="plugin_wikipedia_description">Obtén información sobre los puntos de interés de Wikipedia, una guía de bolsillo sin conexión que incluye artículos sobre objetos y destinos.</string>
     <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
     <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
     <string name="app_mode_motor_scooter">Motoneta (motor)</string>
@@ -3851,7 +3851,7 @@
     <string name="plan_route_open_existing_track">Abrir traza existente</string>
     <string name="plan_route_last_edited">Última edición</string>
     <string name="plan_route_import_track">Importar traza</string>
-    <string name="plan_route_exit_dialog_descr">¿Cerrar el plan de ruta sin guardar\?, se descartarán todos los cambios.</string>
+    <string name="plan_route_exit_dialog_descr">¿Descartar todos los cambios en la ruta planificada\?</string>
     <string name="plan_route_create_new_route">Crear nueva ruta</string>
     <string name="plan_route_change_route_type_before">Cambiar el tipo de ruta anterior</string>
     <string name="plan_route_change_route_type_after">Cambiar el tipo de ruta posterior</string>
@@ -3908,12 +3908,12 @@
     <string name="sort_last_modified">Último modificado</string>
     <string name="start_finish_icons">Iconos de inicio y fin</string>
     <string name="contour_lines_thanks">Gracias por comprar las «Curvas de nivel»</string>
-    <string name="osm_live_payment_desc_hw">La suscripción se cobra por el período elegido. Puedes cancelarlo en cualquier momento en AppGallery.</string>
+    <string name="osm_live_payment_desc_hw">La suscripción se cobra por el período elegido. Puedes cancelarlo en AppGallery en cualquier momento.</string>
     <string name="osm_live_payment_subscription_management_hw">El pago será cargado a la cuenta de AppGallery al confirmar la compra.
 \n
 \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. La cuenta será cargada por el período de renovación (mes/trimestre/año) sólo en la fecha de renovación.
 \n
-\nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de AppGallery.</string>
+\nPuedes administrar y cancelar las suscripciones en los ajustes de AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Evita pasar por aceras o veredas</string>
     <string name="routing_attr_avoid_footways_name">Evitar aceras</string>
     <string name="what_is_new">Novedades</string>
@@ -3935,8 +3935,8 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd usa MGRS, similar al formato UTM de la OTAN.</string>
-    <string name="message_need_calculate_route_before_show_graph">Hay %1$s datos disponibles sólo en los caminos, calcular una ruta usando «Ruta entre puntos» para ver los gráficos.</string>
-    <string name="message_graph_will_be_available_after_recalculation">Ten paciencia
+    <string name="message_need_calculate_route_before_show_graph">Los datos de «%1$s» sólo están disponibles con los caminos, calcula una ruta usando «Ruta entre puntos» para ver los gráficos.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Ten paciencia.
 \nEl gráfico estará disponible al recalcular la ruta.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_travel">Viaje</string>
@@ -4018,4 +4018,15 @@
     <string name="lang_de_casual">Alemán (casual)</string>
     <string name="elevation_data">Puedes usar los datos de elevación para tener en cuenta el ascenso y descenso del viaje</string>
     <string name="app_mode_light_aircraft">Avión ligero</string>
+    <string name="shared_string_last_used">Usado por última vez</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Preferir rutas de senderismo</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Prefiere rutas de senderismo</string>
+    <string name="routing_attr_allow_streams_name">Permitir arroyos y desagües</string>
+    <string name="routing_attr_allow_streams_description">Permite arroyos y desagües</string>
+    <string name="routing_attr_allow_intermittent_name">Permitir cursos de agua intermitentes</string>
+    <string name="routing_attr_allow_intermittent_description">Permite cursos de agua intermitentes</string>
+    <string name="reverse_all_points">Invertir todos los puntos</string>
+    <string name="profile_type_user_string">Perfil de usuario</string>
+    <string name="profile_type_osmand_string">Perfil de OsmAnd</string>
+    <string name="profile_by_default_description">Elige el perfil que será usado al iniciar la aplicación.</string>
 </resources>

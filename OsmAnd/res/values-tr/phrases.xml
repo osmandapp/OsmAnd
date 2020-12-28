@@ -13,7 +13,7 @@
     <string name="poi_bicycle_transport">Bisiklet taşıma</string>
     <string name="poi_aerialway_transport">Askılı taşıma</string>
     <string name="poi_node_networks">Yürüyüş/bisiklet ağ noktaları</string>
-    <string name="poi_hiking_routes">Yürüyüş rotaları</string>
+    <string name="poi_hiking_routes">Yürüyüş güzergahları</string>
     <string name="poi_traffic_enforcement">Trafik uygulama</string>
     <string name="poi_man_made">İnsan yapımı</string>
     <string name="poi_transport_construction">Ulaştırma inşaatı</string>
@@ -938,10 +938,10 @@
     <string name="poi_nwn_ref">Ulusal giden ağ düğümü</string>
     <string name="poi_rwn_ref">Bölgesel giden ağ düğümü</string>
     <string name="poi_lwn_ref">Yerel yürüyüş ağ düğümü</string>
-    <string name="poi_route_hiking_iwn_poi">Uluslararası yürüyüş izleği</string>
-    <string name="poi_route_hiking_nwn_poi">Ulusal yürüyüş izleği</string>
-    <string name="poi_route_hiking_rwn_poi">Bölgesel yürüyüş izleği</string>
-    <string name="poi_route_hiking_lwn_poi">Yerel yürüyüş izleği</string>
+    <string name="poi_route_hiking_iwn_poi">Uluslararası yürüyüş güzergahı</string>
+    <string name="poi_route_hiking_nwn_poi">Ulusal yürüyüş güzergahı</string>
+    <string name="poi_route_hiking_rwn_poi">Bölgesel yürüyüş güzergahı</string>
+    <string name="poi_route_hiking_lwn_poi">Yerel yürüyüş güzergahı</string>
     <string name="poi_route_hiking_ref_poi">Yürüyüş yolu başvurusu</string>
     <string name="poi_opening_hours">Çalışma saatleri</string>
     <string name="poi_collection_times">Koleksiyon kez</string>
@@ -3135,4 +3135,6 @@
     <string name="poi_diplomatic_services_citizen_services_filter">Vatandaş hizmetleri</string>
     <string name="poi_diplomatic_services_immigrant_visas_filter">Göçmen vizeleri</string>
     <string name="poi_diplomatic_services_non_immigrant_visas_filter">Göçmen olmayan vizeleri</string>
+    <string name="poi_military_checkpoint">Askeri denetim noktası</string>
+    <string name="poi_checkpoint_hiking">Yürüyüş denetim noktası</string>
 </resources>

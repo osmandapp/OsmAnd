@@ -11,6 +11,13 @@
 	Thx - Hardy
 
 -->
+
+    <string name="routing_attr_allow_intermittent_name">Allow intermittent water ways</string>
+    <string name="routing_attr_allow_intermittent_description">Allow intermittent water ways</string>
+    <string name="routing_attr_allow_streams_name">Allow streams and drains</string>
+    <string name="routing_attr_allow_streams_description">Allow streams and drains</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Prefer hiking routes</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Prefer hiking routes</string>
     <string name="shared_string_last_used">Last used</string>
     <string name="profile_by_default_description">Select the profile, that will be used on application start.</string>
     <string name="reverse_all_points">Reverse all points</string>
