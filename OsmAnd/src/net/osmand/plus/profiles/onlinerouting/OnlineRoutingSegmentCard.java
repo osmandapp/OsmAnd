@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
@@ -41,9 +42,9 @@ public class OnlineRoutingSegmentCard extends BaseCard {
 	private View resultContainer;
 	private OnTextChangedListener onTextChangedListener;
 
-	public OnlineRoutingSegmentCard(@NonNull MapActivity mapActivity) {
+	public OnlineRoutingSegmentCard(@NonNull MapActivity mapActivity, boolean nightMode) {
 		super(mapActivity);
-		build(mapActivity);
+		this.nightMode = nightMode;
 	}
 
 	@Override
@@ -157,19 +158,11 @@ public class OnlineRoutingSegmentCard extends BaseCard {
 	}
 
 	private void showElements(View... views) {
-		changeVisibility(View.VISIBLE, views);
+		AndroidUiHelper.setVisibility(View.VISIBLE, views);
 	}
 
 	private void hideElements(View... views) {
-		changeVisibility(View.GONE, views);
-	}
-
-	private void changeVisibility(int visibility, View... views) {
-		for (View v : views) {
-			if (visibility != v.getVisibility()) {
-				v.setVisibility(visibility);
-			}
-		}
+		AndroidUiHelper.setVisibility(View.GONE, views);
 	}
 
 	public void setOnTextChangedListener(OnTextChangedListener onTextChangedListener) {

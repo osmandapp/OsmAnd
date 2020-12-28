@@ -31,6 +31,7 @@ import net.osmand.plus.profiles.onlinerouting.ServerType;
 import net.osmand.plus.profiles.onlinerouting.ExampleLocation;
 import net.osmand.plus.profiles.onlinerouting.VehicleType;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private static final String ENGINE_API_KEY_KEY = "engine_api_key";
 	private static final String ENGINE_NAME_CHANGED_BY_USER_KEY = "engine_name_changed_by_user_key";
 	private static final String EXAMPLE_LOCATION_KEY = "example_location";
+	private static final String APP_MODE_KEY = "app_mode";
 
 	private OnlineRoutingSegmentCard nameCard;
 	private OnlineRoutingSegmentCard serverCard;
@@ -56,7 +58,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private OnlineRoutingSegmentCard exampleCard;
 
 	private boolean isEditingMode;
-	private boolean nightMode;
+	private ApplicationMode appMode;
 
 	private OnlineRoutingEngineObject engine;
 	private ExampleLocation selectedLocation;
@@ -82,7 +84,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		if (mapActivity == null) {
 			return null;
 		}
-		nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = isNightMode(app);
 
 		View view = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.online_routing_engine_preference, container, false);
@@ -95,7 +97,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		ViewGroup segmentsContainer = (ViewGroup) view.findViewById(R.id.segments_container);
 
 		// create name card
-		nameCard = new OnlineRoutingSegmentCard(mapActivity);
+		nameCard = new OnlineRoutingSegmentCard(mapActivity, nightMode);
+		nameCard.build(mapActivity);
 		nameCard.setDescription(getString(R.string.select_nav_profile_dialog_message));
 		nameCard.setFieldBoxLabelText(getString(R.string.shared_string_name));
 		nameCard.setOnTextChangedListener(new OnTextChangedListener() {
@@ -111,7 +114,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		segmentsContainer.addView(nameCard.getView());
 
 		// create server card
-		serverCard = new OnlineRoutingSegmentCard(mapActivity);
+		serverCard = new OnlineRoutingSegmentCard(mapActivity, nightMode);
+		serverCard.build(mapActivity);
 		serverCard.setHeaderTitle(getString(R.string.shared_string_type));
 		List<HorizontalSelectionItem> serverItems = new ArrayList<>();
 		for (ServerType server : ServerType.values()) {
@@ -141,7 +145,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		segmentsContainer.addView(serverCard.getView());
 
 		// create vehicle card
-		vehicleCard = new OnlineRoutingSegmentCard(mapActivity);
+		vehicleCard = new OnlineRoutingSegmentCard(mapActivity, nightMode);
+		vehicleCard.build(mapActivity);
 		vehicleCard.setHeaderTitle(getString(R.string.shared_string_vehicle));
 		List<HorizontalSelectionItem> vehicleItems = new ArrayList<>();
 		for (VehicleType vehicle : VehicleType.values()) {
@@ -173,7 +178,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		segmentsContainer.addView(vehicleCard.getView());
 
 		// create api key card
-		apiKeyCard = new OnlineRoutingSegmentCard(mapActivity);
+		apiKeyCard = new OnlineRoutingSegmentCard(mapActivity, nightMode);
+		apiKeyCard.build(mapActivity);
 		apiKeyCard.setHeaderTitle(getString(R.string.shared_string_api_key));
 		apiKeyCard.setFieldBoxLabelText(getString(R.string.keep_it_empty_if_not));
 		apiKeyCard.setEditedText(engine.apiKey);
@@ -188,7 +194,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		segmentsContainer.addView(apiKeyCard.getView());
 
 		// create example card
-		exampleCard = new OnlineRoutingSegmentCard(mapActivity);
+		exampleCard = new OnlineRoutingSegmentCard(mapActivity, nightMode);
+		exampleCard.build(mapActivity);
 		exampleCard.setHeaderTitle(getString(R.string.shared_string_example));
 		List<HorizontalSelectionItem> locationItems = new ArrayList<>();
 		for (ExampleLocation location : ExampleLocation.values()) {
@@ -330,14 +337,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	public static void showInstance(FragmentActivity activity, boolean isEditingMode) {
-		OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();
-		fragment.isEditingMode = isEditingMode;
-		activity.getSupportFragmentManager().beginTransaction()
-				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commitAllowingStateLoss();
-	}
-
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -353,6 +352,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		outState.putString(ENGINE_API_KEY_KEY, engine.apiKey);
 		outState.putBoolean(ENGINE_NAME_CHANGED_BY_USER_KEY, engine.wasNameChangedByUser);
 		outState.putString(EXAMPLE_LOCATION_KEY, selectedLocation.name());
+		if (appMode != null) {
+			outState.putString(APP_MODE_KEY, appMode.getStringKey());
+		}
 	}
 
 	private void restoreState(Bundle savedState) {
@@ -364,8 +366,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		engine.apiKey = savedState.getString(ENGINE_API_KEY_KEY);
 		engine.wasNameChangedByUser = savedState.getBoolean(ENGINE_NAME_CHANGED_BY_USER_KEY);
 		selectedLocation = ExampleLocation.valueOf(savedState.getString(EXAMPLE_LOCATION_KEY));
+		appMode = ApplicationMode.valueOfStringKey(savedState.getString(APP_MODE_KEY), null);
 	}
-
 
 	private void initEngineState() {
 		engine.serverType = ServerType.values()[0];
@@ -380,6 +382,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	protected boolean isNightMode(@NonNull OsmandApplication app) {
+		return !app.getSettings().isLightContentForMode(appMode);
+	}
+
 	@Nullable
 	private MapActivity getMapActivity() {
 		FragmentActivity activity = getActivity();
@@ -388,6 +394,17 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		} else {
 			return null;
 		}
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull ApplicationMode appMode,
+	                                boolean isEditingMode) {
+		OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();
+		fragment.isEditingMode = isEditingMode;
+		fragment.appMode = appMode;
+		activity.getSupportFragmentManager().beginTransaction()
+				.add(R.id.fragmentContainer, fragment, TAG)
+				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
 	private static class OnlineRoutingEngineObject {

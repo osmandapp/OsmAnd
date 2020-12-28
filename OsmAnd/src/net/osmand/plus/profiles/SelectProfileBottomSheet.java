@@ -183,7 +183,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 				@Override
 				public void onClick(View v) {
 					if (getActivity() != null) {
-						OnlineRoutingEngineFragment.showInstance(getActivity(), false);
+						OnlineRoutingEngineFragment.showInstance(getActivity(), getAppMode(), false);
 					}
 					dismiss();
 				}
@@ -367,6 +367,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @NonNull DialogMode dialogMode,
 	                                @Nullable Fragment target,
+	                                ApplicationMode appMode,
 	                                String selectedItemKey,
 	                                boolean usedOnMap) {
 		SelectProfileBottomSheet fragment = new SelectProfileBottomSheet();
@@ -375,6 +376,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 		args.putString(SELECTED_KEY, selectedItemKey);
 		fragment.setArguments(args);
 		fragment.setUsedOnMap(usedOnMap);
+		fragment.setAppMode(appMode);
 		fragment.setTargetFragment(target, 0);
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
