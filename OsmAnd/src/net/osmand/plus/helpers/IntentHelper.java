@@ -315,8 +315,8 @@ public class IntentHelper {
 		if (intent != null && intent.getData() != null) {
 			Uri uri = intent.getData();
 			if (uri.toString().startsWith(OPRWebviewActivity.OPR_OAUTH_PREFIX)) {
-				String token = uri.getQueryParameter("token");
-				String username = uri.getQueryParameter("username");
+				String token = uri.getQueryParameter("opr-token");
+				String username = uri.getQueryParameter("opr-nickname");
 				//TODO
 				android.util.Log.d("TAG", "parseOprOAuthIntent: " + uri.toString());
 				android.util.Log.d("TAG", "parseOprOAuthIntent: " + token);
