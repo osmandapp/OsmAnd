@@ -50,7 +50,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 			public void openArticle(TravelArticle article) {
 				FragmentManager fm = getFragmentManager();
 				if (fm != null) {
-					WikivoyageArticleDialogFragment.showInstanceByTitle(app, fm, article.getTitle(), article.getLang());
+					WikivoyageArticleDialogFragment.showInstance(app, fm, article.getRouteId(), article.getLang());
 				}
 			}
 		});
@@ -161,7 +161,8 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 				}
 				TravelArticle oldArticle = (TravelArticle) oldItem;
 				TravelArticle newArticle = (TravelArticle) newItem;
-				return oldArticle.getRouteId().equals(newArticle.getRouteId())
+				return oldArticle.getRouteId() != null && oldArticle.getLang() != null &&
+						oldArticle.getRouteId().equals(newArticle.getRouteId())
 						&& oldArticle.getLang().equals(newArticle.getLang());
 			}
 			return false;

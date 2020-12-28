@@ -33,6 +33,7 @@ public class TravelArticle {
 	String lang;
 	String contentsJson;
 	String aggregatedPartOf;
+	String fullContent;
 
 
 	public String getTitle() {
