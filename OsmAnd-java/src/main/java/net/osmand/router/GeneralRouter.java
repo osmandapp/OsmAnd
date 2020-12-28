@@ -63,9 +63,9 @@ public class GeneralRouter implements VehicleRouter {
 	
 	// cached values
 	private boolean restrictionsAware = true;
-	private float leftTurn;
+	private float sharpTurn;
 	private float roundaboutTurn;
-	private float rightTurn;
+	private float slightTurn;
 	// speed in m/s
 	private float minSpeed = 0.28f;
 	// speed in m/s
@@ -222,10 +222,10 @@ public class GeneralRouter implements VehicleRouter {
 		attributes.put(k, v);
 		if(k.equals("restrictionsAware")) {
 			restrictionsAware = parseSilentBoolean(v, restrictionsAware);
-		} else if(k.equals("leftTurn")) {
-			leftTurn = parseSilentFloat(v, leftTurn);
-		} else if(k.equals("rightTurn")) {
-			rightTurn = parseSilentFloat(v, rightTurn);
+		} else if(k.equals("sharpTurn")) {
+			sharpTurn = parseSilentFloat(v, sharpTurn);
+		} else if(k.equals("slightTurn")) {
+			slightTurn = parseSilentFloat(v, slightTurn);
 		} else if(k.equals("roundaboutTurn")) {
 			roundaboutTurn = parseSilentFloat(v, roundaboutTurn);
 		} else if(k.equals("minDefaultSpeed") || k.equals("defaultSpeed")) {
@@ -605,11 +605,11 @@ public class GeneralRouter implements VehicleRouter {
 	}
 
 	public double getLeftTurn() {
-		return leftTurn;
+		return sharpTurn;
 	}
 	
 	public double getRightTurn() {
-		return rightTurn;
+		return slightTurn;
 	}
 	
 	public double getRoundaboutTurn() {
@@ -620,9 +620,7 @@ public class GeneralRouter implements VehicleRouter {
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd) {
 		float ts = getPenaltyTransition(segment.getRoad());
 		float prevTs = getPenaltyTransition(prev.getRoad());
-		if(prevTs != ts) {
-			return Math.abs(ts - prevTs) / 2;
-		}
+		
 //		int[] pt = prev.getRoad().getPointTypes(prevSegmentEnd);
 //		if(pt != null) {
 //			RouteRegion reg = prev.getRoad().region;
@@ -653,6 +651,11 @@ public class GeneralRouter implements VehicleRouter {
 				return getRightTurn();
 			}
 			return 0;
+		}
+		
+		if (ts != prevTs) {
+			return prevTs + ts;
+
 		}
 		return 0;
 	}
