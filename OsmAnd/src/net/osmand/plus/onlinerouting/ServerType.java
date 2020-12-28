@@ -1,7 +1,7 @@
-package net.osmand.plus.profiles.onlinerouting;
+package net.osmand.plus.onlinerouting;
 
 public enum ServerType {
-	GRAPHHOPER("Graphhoper", "https://graphhopper.com/api/1/route?"),
+	GRAPHHOPER("Graphhoper", "https://graphhopper.com/api/1/route"),
 	OSRM("OSRM", "https://zlzk.biz/route/v1/");
 
 	ServerType(String title, String baseUrl) {

@@ -38,7 +38,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
-import net.osmand.plus.settings.fragments.OnlineRoutingEngineFragment;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngineFragment;
 import net.osmand.router.RoutingConfiguration;
 
 import org.apache.commons.logging.Log;

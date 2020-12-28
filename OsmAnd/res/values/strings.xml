@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="routing_engine_vehicle_type_car">Car</string>
+    <string name="routing_engine_vehicle_type_bike">Bike</string>
+    <string name="routing_engine_vehicle_type_foot">Foot</string>
+    <string name="routing_engine_vehicle_type_driving">Driving</string>
     <string name="test_route_calculation">Test route calculation</string>
     <string name="online_routing_example_hint">URL with all parameters will look like this:</string>
     <string name="keep_it_empty_if_not">Keep it empty if not</string>

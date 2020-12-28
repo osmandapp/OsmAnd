@@ -1,4 +1,4 @@
-package net.osmand.plus.profiles.onlinerouting;
+package net.osmand.plus.onlinerouting;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,7 +25,7 @@ import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
 import java.util.List;
 
-public class OnlineRoutingSegmentCard extends BaseCard {
+public class OnlineRoutingCard extends BaseCard {
 
 	private View headerContainer;
 	private TextView tvHeaderTitle;
@@ -42,7 +42,7 @@ public class OnlineRoutingSegmentCard extends BaseCard {
 	private View resultContainer;
 	private OnTextChangedListener onTextChangedListener;
 
-	public OnlineRoutingSegmentCard(@NonNull MapActivity mapActivity, boolean nightMode) {
+	public OnlineRoutingCard(@NonNull MapActivity mapActivity, boolean nightMode) {
 		super(mapActivity);
 		this.nightMode = nightMode;
 	}
@@ -147,6 +147,14 @@ public class OnlineRoutingSegmentCard extends BaseCard {
 		button.setOnClickListener(listener);
 		UiUtilities.setupDialogButton(nightMode, button,
 				DialogButtonType.PRIMARY, R.string.test_route_calculation);
+	}
+
+	public void show() {
+		showElements(view);
+	}
+
+	public void hide() {
+		hideElements(view);
 	}
 
 	public void showFieldBox() {
