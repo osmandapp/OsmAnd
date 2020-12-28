@@ -315,9 +315,13 @@ public class IntentHelper {
 		if (intent != null && intent.getData() != null) {
 			Uri uri = intent.getData();
 			if (uri.toString().startsWith(OPRWebviewActivity.OPR_OAUTH_PREFIX)) {
-				//android.util.Log.d("TAG", "parseOprOAuthIntent: " + uri.toString());
-				//D/TAG: parseOprOAuthIntent: opr-oauth://osmand_opr_auth
-				String oauthVerifier = uri.getQueryParameter("oauth_verifier");
+				String token = uri.getQueryParameter("token");
+				String username = uri.getQueryParameter("username");
+				//TODO
+				android.util.Log.d("TAG", "parseOprOAuthIntent: " + uri.toString());
+				android.util.Log.d("TAG", "parseOprOAuthIntent: " + token);
+				android.util.Log.d("TAG", "parseOprOAuthIntent: " + username);
+				app.getSettings().OPR_ACCESS_TOKEN.set(token);
 				mapActivity.setIntent(null);
 				return true;
 			}
