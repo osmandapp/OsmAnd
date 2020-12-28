@@ -502,26 +502,26 @@ public class WaypointDialogHelper {
 					.create();
 			items.add(reorderStartAndFinishItem);
 
-			BaseBottomSheetItem reorderAllItems = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_sort_reverse_order))
-					.setTitle(getString(R.string.reverse_all_points))
-					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							MapActivity mapActivity = getMapActivity();
-							if (mapActivity != null) {
-								WaypointDialogHelper.reverseAllPoints(
-										app,
-										mapActivity,
-										mapActivity.getDashboard().getWaypointDialogHelper()
-								);
-							}
-							dismiss();
-						}
-					})
-					.create();
 			if (!Algorithms.isEmpty(targetsHelper.getIntermediatePoints())) {
+				BaseBottomSheetItem reorderAllItems = new SimpleBottomSheetItem.Builder()
+						.setIcon(getContentIcon(R.drawable.ic_action_sort_reverse_order))
+						.setTitle(getString(R.string.reverse_all_points))
+						.setLayoutId(R.layout.bottom_sheet_item_simple)
+						.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								MapActivity mapActivity = getMapActivity();
+								if (mapActivity != null) {
+									WaypointDialogHelper.reverseAllPoints(
+											app,
+											mapActivity,
+											mapActivity.getDashboard().getWaypointDialogHelper()
+									);
+								}
+								dismiss();
+							}
+						})
+						.create();
 				items.add(reorderAllItems);
 			}
 
