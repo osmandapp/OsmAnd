@@ -522,7 +522,7 @@ public class WaypointDialogHelper {
 					})
 					.create();
 			int intermediateSize = targetsHelper.getIntermediatePoints().size();
-			if (intermediateSize > 1) {
+			if (intermediateSize >= 1) {
 				items.add(reorderAllItems);
 			}
 
