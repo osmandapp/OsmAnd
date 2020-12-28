@@ -54,6 +54,7 @@ public class OpenDBAPI {
 		String url = null;
 		try {
 			url = baseUrl + checkLoginEndpoint +
+					"purpose=opr-android&" +
 					"name=" +
 					username +
 					"&" +

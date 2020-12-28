@@ -317,11 +317,8 @@ public class IntentHelper {
 			if (uri.toString().startsWith(OPRWebviewActivity.OPR_OAUTH_PREFIX)) {
 				String token = uri.getQueryParameter("opr-token");
 				String username = uri.getQueryParameter("opr-nickname");
-				//TODO
-				android.util.Log.d("TAG", "parseOprOAuthIntent: " + uri.toString());
-				android.util.Log.d("TAG", "parseOprOAuthIntent: " + token);
-				android.util.Log.d("TAG", "parseOprOAuthIntent: " + username);
 				app.getSettings().OPR_ACCESS_TOKEN.set(token);
+				app.getSettings().OPR_USERNAME.set(username);
 				mapActivity.setIntent(null);
 				return true;
 			}

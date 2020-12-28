@@ -383,9 +383,9 @@ public class MenuBuilder {
 				} else {
 					registerResultListener(view);
 					final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
-					final String name = OPRWebviewActivity.getUsernameFromCookie(app);
-					final String privateKey = OPRWebviewActivity.getPrivateKeyFromCookie(app);
-					if (privateKey == null || privateKey.isEmpty()) {
+					final String name = app.getSettings().OPR_USERNAME.get();
+					final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
+					if (Algorithms.isBlank(privateKey) || Algorithms.isBlank(name)) {
 						OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
 						return;
 					}
