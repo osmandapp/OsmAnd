@@ -61,7 +61,6 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	protected List<WeakReference<Fragment>> fragments = new ArrayList<>();
 
 	private LockableViewPager viewPager;
-	private boolean finishDownloading = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -314,12 +313,10 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 	public void populateData() {
 		switchProgressBarVisibility(true);
-		finishDownloading = false;
 		new LoadWikivoyageData(this).execute();
 	}
 
 	private void onDataLoaded() {
-		finishDownloading = true;
 		switchProgressBarVisibility(false);
 		updateSearchBarVisibility();
 		updateFragments();
@@ -356,9 +353,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	public void onTabFragmentResume(Fragment fragment) {
-		if(finishDownloading) {
-			updateFragments();
-		}
+		updateFragments();
 	}
 
 	@Override

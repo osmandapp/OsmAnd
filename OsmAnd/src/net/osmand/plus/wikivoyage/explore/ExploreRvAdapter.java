@@ -182,6 +182,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	}
 
 	public void addDownloadUpdateCard(TravelDownloadUpdateCard card) {
+		removeDownloadUpdateCard();
 		this.downloadCard = card;
 		if (addItem(getDownloadUpdateCardPosition(), card)) {
 			notifyDataSetChanged();
