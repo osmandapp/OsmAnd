@@ -3181,7 +3181,7 @@
     <string name="shared_string_file_is_saved">%s ist gespeichert</string>
     <string name="shared_string_open_track">Track öffnen</string>
     <string name="shared_string_track_is_saved">Track %s ist gespeichert</string>
-    <string name="sett_no_ext_input">Keine</string>
+    <string name="sett_no_ext_input">Keines</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="external_input_device_descr">Ein externes Steuergerät, wie beispielsweise eine Tastatur oder ein WunderLINQ, wählen.</string>
