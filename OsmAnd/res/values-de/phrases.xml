@@ -3832,7 +3832,7 @@
     <string name="poi_traffic_signals_vibration_no">kein Vibrieren</string>
     <string name="poi_traffic_signals_arrow">Pfeil</string>
     <string name="poi_traffic_signals_vibration">Vibrieren</string>
-    <string name="poi_give_box">Give box</string>
+    <string name="poi_give_box">Tauschbox</string>
     <string name="poi_city_block">Stadtteil</string>
     <string name="poi_borough">Bezirk</string>
     <string name="poi_elevator">Aufzug</string>
@@ -3848,7 +3848,7 @@
     <string name="poi_recycling_small_electrical_appliances">Kleine Elektrogeräte</string>
     <string name="poi_nuts">Nussladen</string>
     <string name="poi_fuel_lng">Flüssigerdgas</string>
-    <string name="poi_parking_layby">Rastplatz</string>
+    <string name="poi_parking_layby">Parkbucht</string>
     <string name="poi_parking_sheds">Überdachter Parkplatz</string>
     <string name="poi_parking_rooftop">Dachparkplätze</string>
     <string name="poi_gpx_point">GPX-Wegpunkt</string>

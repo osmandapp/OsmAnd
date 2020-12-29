@@ -2510,7 +2510,7 @@
     <string name="poi_site_type_petroglyph">بتروجليف</string>
     <string name="poi_site_type_necropolis">مقبرة كبيرة قديمة</string>
     <string name="poi_site_type_hut_circle">دائرة الكوخ</string>
-    <string name="poi_site_type_settlement">مستعمرة</string>
+    <string name="poi_site_type_settlement">مستوطنة/هجرة</string>
     <string name="poi_site_type_fortification">حصن</string>
     <string name="poi_site_type_tumulus">تومولوس</string>
     <string name="poi_site_type_megalith">المغليث حجر ضخم</string>
