@@ -72,20 +72,13 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		String userNameOpenID = settings.USER_NAME.get();
 		String userName = isLoginOAuth(settings) ? userNameOAuth : userNameOpenID;
 		accountName.setText(userName);
-		closeChangeSet.setBackgroundResource(isNightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
 		final int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		closeChangeSet.setPadding(paddingSmall, 0, paddingSmall, 0);
+		closeChangeSet.setChecked(true);
+		setCloseChangeSet(isNightMode, paddingSmall);
 		closeChangeSet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isNightMode) {
-					closeChangeSet.setBackgroundResource(
-							isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
-				} else {
-					closeChangeSet.setBackgroundResource(
-							isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
-				}
-				closeChangeSet.setPadding(paddingSmall, 0, paddingSmall, 0);
+				setCloseChangeSet(isNightMode, paddingSmall);
 			}
 		});
 		LinearLayout account = sendOsmPoiView.findViewById(R.id.account_container);
@@ -253,6 +246,17 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			comment = comment.concat(".");
 		}
 		return comment;
+	}
+
+	private void setCloseChangeSet(boolean isNightMode, int paddingSmall) {
+		if (isNightMode) {
+			closeChangeSet.setBackgroundResource(
+					closeChangeSet.isChecked() ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
+		} else {
+			closeChangeSet.setBackgroundResource(
+					closeChangeSet.isChecked() ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
+		}
+		closeChangeSet.setPadding(paddingSmall, 0, paddingSmall, 0);
 	}
 }
 
