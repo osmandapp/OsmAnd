@@ -236,7 +236,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		String sfName = item.getTargetFileName();
 		String indexActivatedDate = indexActivatedFileNames.get(sfName);
 		String indexFilesDate = indexFileNames.get(sfName);
-		LOG.info("timestamp " + item.timestamp + " localTimestamp " + item.localTimestamp + " date " + date
+		LOG.info("name " + item.getFileName() + " timestamp " + item.timestamp + " localTimestamp " + item.localTimestamp + " date " + date
 				+ " indexActivatedDate " + indexActivatedDate + " indexFilesDate " + indexFilesDate
 				+ " itemSize " + itemSize + " oldItemSize " + oldItemSize);
 	}
