@@ -37,8 +37,10 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FR
 public class TravelObfHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
-	public static final String ROUTE_ARTICLE = "route_article";
-	public static final int SEARCH_RADIUS = 100000;
+
+	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.travel.obf";
+	private static final String ROUTE_ARTICLE = "route_article";
+	private static final int SEARCH_RADIUS = 100000;
 
 	private final OsmandApplication app;
 	private final Collator collator;
@@ -249,9 +251,12 @@ public class TravelObfHelper implements TravelHelper {
 		TravelArticle article = cachedArticles.get(routeId);
 		if (article != null) {
 			return article;
-		} else {
+		}
+		article = getArticleByIdFromTravelBooks(routeId, lang);
+		if (article != null) {
 			return getArticleByIdFromTravelBooks(routeId, lang);
 		}
+		return localDataHelper.getSavedArticle(routeId, lang);
 	}
 
 	private TravelArticle getArticleByIdFromTravelBooks(final String routeId, final String lang) {
@@ -391,5 +396,10 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public String getSelectedTravelBookName() {
 		return "";
+	}
+
+	@Override
+	public String getWikivoyageFileName() {
+		return WORLD_WIKIVOYAGE_FILE_NAME;
 	}
 }

@@ -4014,4 +4014,12 @@
     <string name="profile_type_osmand_string">OsmAnd 設定檔</string>
     <string name="profile_type_user_string">使用者設定檔</string>
     <string name="reverse_all_points">反轉所有點</string>
+    <string name="profile_by_default_description">選取要在應用程式啟動時使用的設定檔。</string>
+    <string name="shared_string_last_used">最後使用</string>
+    <string name="routing_attr_prefer_hiking_routes_description">偏好遠足路線</string>
+    <string name="routing_attr_prefer_hiking_routes_name">偏好遠足路線</string>
+    <string name="routing_attr_allow_streams_description">允許溪流與水溝</string>
+    <string name="routing_attr_allow_streams_name">允許溪流與水溝</string>
+    <string name="routing_attr_allow_intermittent_description">允許間歇水路</string>
+    <string name="routing_attr_allow_intermittent_name">允許間歇水路</string>
 </resources>

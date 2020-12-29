@@ -27,8 +27,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -46,6 +44,8 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.FavouritesBottomSheetMenuFragment;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -348,9 +348,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 								mapActivity.getMyApplication().showShortToastMessage(R.string.route_add_start_point);
 								return;
 							}
-							WaypointDialogHelper.switchStartAndFinish(targetsHelper, targetsHelper.getPointToNavigate(),
-									mapActivity, targetsHelper.getPointToStart(), mapActivity.getMyApplication(),
-									mapActivity.getDashboard().getWaypointDialogHelper());
+							WaypointDialogHelper.switchStartAndFinish(mapActivity.getMyApplication(), mapActivity,
+									mapActivity.getDashboard().getWaypointDialogHelper(), true);
 						}
 						dismiss();
 					}

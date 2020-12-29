@@ -63,9 +63,9 @@ public class GeneralRouter implements VehicleRouter {
 	
 	// cached values
 	private boolean restrictionsAware = true;
-	private float leftTurn;
+	private float sharpTurn;
 	private float roundaboutTurn;
-	private float rightTurn;
+	private float slightTurn;
 	// speed in m/s
 	private float minSpeed = 0.28f;
 	// speed in m/s
@@ -220,19 +220,19 @@ public class GeneralRouter implements VehicleRouter {
 
 	public void addAttribute(String k, String v) {
 		attributes.put(k, v);
-		if(k.equals("restrictionsAware")) {
+		if (k.equals("restrictionsAware")) {
 			restrictionsAware = parseSilentBoolean(v, restrictionsAware);
-		} else if(k.equals("leftTurn")) {
-			leftTurn = parseSilentFloat(v, leftTurn);
-		} else if(k.equals("rightTurn")) {
-			rightTurn = parseSilentFloat(v, rightTurn);
-		} else if(k.equals("roundaboutTurn")) {
+		} else if (k.equals("sharpTurn") || k.equals("leftTurn")) {
+			sharpTurn = parseSilentFloat(v, sharpTurn);
+		} else if (k.equals("slightTurn") || k.equals("rightTurn")) {
+			slightTurn = parseSilentFloat(v, slightTurn);
+		} else if (k.equals("roundaboutTurn")) {
 			roundaboutTurn = parseSilentFloat(v, roundaboutTurn);
-		} else if(k.equals("minDefaultSpeed") || k.equals("defaultSpeed")) {
+		} else if (k.equals("minDefaultSpeed") || k.equals("defaultSpeed")) {
 			defaultSpeed = parseSilentFloat(v, defaultSpeed * 3.6f) / 3.6f;
-		} else if( k.equals("minSpeed")) {
+		} else if (k.equals("minSpeed")) {
 			minSpeed = parseSilentFloat(v, minSpeed * 3.6f) / 3.6f;
-		} else if(k.equals("maxDefaultSpeed") || k.equals("maxSpeed")) {
+		} else if (k.equals("maxDefaultSpeed") || k.equals("maxSpeed")) {
 			maxSpeed = parseSilentFloat(v, maxSpeed * 3.6f) / 3.6f;
 		}
 	}
@@ -605,11 +605,11 @@ public class GeneralRouter implements VehicleRouter {
 	}
 
 	public double getLeftTurn() {
-		return leftTurn;
+		return sharpTurn;
 	}
 	
 	public double getRightTurn() {
-		return rightTurn;
+		return slightTurn;
 	}
 	
 	public double getRoundaboutTurn() {
@@ -620,9 +620,13 @@ public class GeneralRouter implements VehicleRouter {
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd) {
 		float ts = getPenaltyTransition(segment.getRoad());
 		float prevTs = getPenaltyTransition(prev.getRoad());
-		if(prevTs != ts) {
-			return Math.abs(ts - prevTs) / 2;
+		
+		float totalPenalty = 0;
+
+		if (prevTs != ts) {
+			totalPenalty += Math.abs(ts - prevTs) / 2;
 		}
+		
 //		int[] pt = prev.getRoad().getPointTypes(prevSegmentEnd);
 //		if(pt != null) {
 //			RouteRegion reg = prev.getRoad().region;
@@ -635,26 +639,25 @@ public class GeneralRouter implements VehicleRouter {
 //			}
 //		}
 		
-		
 		if(segment.getRoad().roundabout() && !prev.getRoad().roundabout()) {
 			double rt = getRoundaboutTurn();
 			if(rt > 0) {
-				return rt;
+				totalPenalty += rt;
 			}
-		}
-		if (getLeftTurn() > 0 || getRightTurn() > 0) {
-			double a1 = segment.getRoad().directionRoute(segment.getSegmentStart(), segment.getSegmentStart() < segmentEnd);
+		} else if (getLeftTurn() > 0 || getRightTurn() > 0) {
+			double a1 = segment.getRoad().directionRoute(segment.getSegmentStart(),
+					segment.getSegmentStart() < segmentEnd);
 			double a2 = prev.getRoad().directionRoute(prevSegmentEnd, prevSegmentEnd < prev.getSegmentStart());
 			double diff = Math.abs(MapUtils.alignAngleDifference(a1 - a2 - Math.PI));
 			// more like UT
 			if (diff > 2 * Math.PI / 3) {
-				return getLeftTurn();
+				totalPenalty += getLeftTurn();
 			} else if (diff > Math.PI / 3) {
-				return getRightTurn();
+				totalPenalty += getRightTurn();
 			}
-			return 0;
 		}
-		return 0;
+		
+		return totalPenalty;
 	}
 	
 
