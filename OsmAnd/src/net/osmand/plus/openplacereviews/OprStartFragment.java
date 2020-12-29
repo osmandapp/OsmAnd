@@ -70,14 +70,14 @@ public class OprStartFragment extends BaseOsmAndFragment {
 	}
 
 	private void handleHaveAccount() {
-		String url = OPRWebviewActivity.getLoginUrl(requireContext());
+		String url = OPRConstants.getLoginUrl(requireContext());
 		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 		CustomTabsIntent customTabsIntent = builder.build();
 		customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
 	}
 
 	private void handleCreateAccount() {
-		String url = OPRWebviewActivity.getRegisterUrl(requireContext());
+		String url = OPRConstants.getRegisterUrl(requireContext());
 		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 		CustomTabsIntent customTabsIntent = builder.build();
 		customTabsIntent.launchUrl(requireContext(), Uri.parse(url));

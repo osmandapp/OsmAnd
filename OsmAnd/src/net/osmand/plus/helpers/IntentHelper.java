@@ -21,7 +21,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
-import net.osmand.plus.openplacereviews.OPRWebviewActivity;
+import net.osmand.plus.openplacereviews.OPRConstants;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -314,7 +314,7 @@ public class IntentHelper {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri uri = intent.getData();
-			if (uri.toString().startsWith(OPRWebviewActivity.OPR_OAUTH_PREFIX)) {
+			if (uri.toString().startsWith(OPRConstants.OPR_OAUTH_PREFIX)) {
 				String token = uri.getQueryParameter("opr-token");
 				String username = uri.getQueryParameter("opr-nickname");
 				app.getSettings().OPR_ACCESS_TOKEN.set(token);

@@ -37,16 +37,16 @@ import static org.openplacereviews.opendb.SecUtils.signMessageWithKeyBase64;
 
 
 public class OpenDBAPI {
+	public static final String PURPOSE = "opr-android";
 	private static final Log log = PlatformUtil.getLog(SecUtils.class);
 	private static final String checkLoginEndpoint = "api/auth/user-check-loginkey?";
 	private static final String LOGIN_SUCCESS_MESSAGE = "{\"result\":\"OK\"}";
-	private static final String PURPOSE = "opr-android";
 	private static final int THREAD_ID = 11200;
 
 	/*
 	 * method for check if user is loggined in blockchain
 	 * params
-	 *  - username: blockchain username in format "openplacereviews:test_1"
+	 *  - username: blockchain username in format "openplacereviews"
 	 *  - privatekey: "base64:PKCS#8:actualKey"
 	 * Need to encode key
 	 * Do not call on mainThread
@@ -54,8 +54,8 @@ public class OpenDBAPI {
 	public boolean checkPrivateKeyValid(String baseUrl, String username, String privateKey) {
 		String url = null;
 		try {
-			url = baseUrl + checkLoginEndpoint +
-					"purpose=" + PURPOSE + "&" +
+			String purposeParam = "purpose=" + PURPOSE;
+			url = baseUrl + checkLoginEndpoint + purposeParam + "&" +
 					"name=" +
 					username +
 					"&" +
