@@ -40,6 +40,7 @@ public class OpenDBAPI {
 	private static final Log log = PlatformUtil.getLog(SecUtils.class);
 	private static final String checkLoginEndpoint = "api/auth/user-check-loginkey?";
 	private static final String LOGIN_SUCCESS_MESSAGE = "{\"result\":\"OK\"}";
+	private static final String PURPOSE = "opr-android";
 	private static final int THREAD_ID = 11200;
 
 	/*
@@ -54,7 +55,7 @@ public class OpenDBAPI {
 		String url = null;
 		try {
 			url = baseUrl + checkLoginEndpoint +
-					"purpose=opr-android&" +
+					"purpose=" + PURPOSE + "&" +
 					"name=" +
 					username +
 					"&" +
@@ -75,7 +76,7 @@ public class OpenDBAPI {
 			Security.addProvider(new BouncyCastleProvider());
 		}
 		KeyPair kp = SecUtils.getKeyPair(ALGO_EC, privateKey, null);
-		String signed = username + ":opr-web";
+		String signed = username + ":" + PURPOSE;
 
 		JsonFormatter formatter = new JsonFormatter();
 		OPRImage oprImage = new GsonBuilder().create().fromJson(image, OPRImage.class);
