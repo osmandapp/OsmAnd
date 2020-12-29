@@ -319,7 +319,6 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	private void onDataLoaded() {
 		switchProgressBarVisibility(false);
 		updateSearchBarVisibility();
-		updateFragments();
 	}
 
 	public void updateFragments() {
