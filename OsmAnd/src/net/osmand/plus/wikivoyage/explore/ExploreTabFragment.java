@@ -45,8 +45,6 @@ import java.util.List;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
 
-	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.sqlite";
-
 	private static boolean SHOW_TRAVEL_UPDATE_CARD = true;
 	private static boolean SHOW_TRAVEL_NEEDED_MAPS_CARD = true;
 
@@ -342,14 +340,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		return res.toArray(new IndexItem[0]);
 	}
 
-	@NonNull
-	private String getWikivoyageFileName() {
-//		OsmandApplication app = getMyApplication();
-//		File selectedTravelBook = app != null ? app.getTravelDbHelper().getSelectedTravelBook() : null;
-//		return selectedTravelBook == null ? WORLD_WIKIVOYAGE_FILE_NAME : selectedTravelBook.getName();
-		return WORLD_WIKIVOYAGE_FILE_NAME;
-	}
-
 	private void removeDownloadUpdateCard() {
 		if (adapter != null) {
 			adapter.removeDownloadUpdateCard();
@@ -379,7 +369,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		ProcessIndexItemsTask(ExploreTabFragment fragment) {
 			app = fragment.getMyApplication();
 			weakFragment = new WeakReference<>(fragment);
-			fileName = fragment.getWikivoyageFileName();
+			fileName = app.getTravelHelper().getWikivoyageFileName();
 		}
 
 		@Override

@@ -81,7 +81,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		List<IndexItem> items = getWikivoyageItems();
 		if (items != null) {
 			for (IndexItem ii : items) {
-				if (ii.getFileName().equals(fileName)) {
+				if (ii.getTargetFile(app).getName().equals(fileName)) {
 					return ii;
 				}
 			}
