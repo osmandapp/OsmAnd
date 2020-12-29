@@ -37,7 +37,7 @@ import static org.openplacereviews.opendb.SecUtils.signMessageWithKeyBase64;
 
 
 public class OpenDBAPI {
-	public static final String PURPOSE = "opr-android";
+	public static final String PURPOSE = "osmand-android";
 	private static final Log log = PlatformUtil.getLog(SecUtils.class);
 	private static final String checkLoginEndpoint = "api/auth/user-check-loginkey?";
 	private static final String LOGIN_SUCCESS_MESSAGE = "{\"result\":\"OK\"}";
