@@ -70,7 +70,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 	private OnLayoutChangeListener containerLayoutListener;
 	private View topShadow;
 	private ViewGroup topView;
-	private View bottomScrollView;
+	private ViewGroup bottomScrollView;
 	private LinearLayout cardsContainer;
 	private FrameLayout bottomContainer;
 
@@ -259,7 +259,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 		return bottomContainer;
 	}
 
-	public View getBottomScrollView() {
+	public ViewGroup getBottomScrollView() {
 		return bottomScrollView;
 	}
 

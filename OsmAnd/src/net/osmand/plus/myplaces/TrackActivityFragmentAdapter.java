@@ -39,10 +39,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PicassoUtils;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -52,6 +49,7 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.TrackDisplayHelper;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
@@ -59,8 +57,6 @@ import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.render.RenderingRulesStorage;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
@@ -71,6 +67,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	private Fragment fragment;
 	private ListView listView;
 	private GpxDisplayItemType[] filterTypes;
+	private TrackDisplayHelper displayHelper;
 
 	private boolean updateEnable;
 	private View headerView;
@@ -99,11 +96,13 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	TrackActivityFragmentAdapter(@NonNull OsmandApplication app,
 								 @NonNull Fragment fragment,
 								 @NonNull ListView listView,
+								 @NonNull TrackDisplayHelper displayHelper,
 								 @NonNull GpxDisplayItemType... filterTypes) {
 		this.app = app;
 		this.fragment = fragment;
 		this.listView = listView;
 		this.filterTypes = filterTypes;
+		this.displayHelper = displayHelper;
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -191,14 +190,12 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	private GPXFile getGpx() {
-		TrackActivity activity = getTrackActivity();
-		return activity != null ? activity.getGpx() : null;
+		return displayHelper.getGpx();
 	}
 
 	@Nullable
 	private GpxDataItem getGpxDataItem() {
-		TrackActivity activity = getTrackActivity();
-		return activity != null ? activity.getGpxDataItem() : null;
+		return displayHelper.getGpxDataItem();
 	}
 
 	private void showTrackBitmapProgress() {
@@ -250,7 +247,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		imageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				showTemporaryObjectOnMap(getRect());
+				showTemporaryObjectOnMap(displayHelper.getRect());
 			}
 		});
 		final View appearanceView = headerView.findViewById(R.id.appearance_view);
@@ -258,7 +255,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
 		final View bottomDivider = headerView.findViewById(R.id.bottom_divider);
 		GPXFile gpxFile = getGpx();
-		boolean gpxFileSelected = isGpxFileSelected(gpxFile);
+		boolean gpxFileSelected = isGpxFileSelected(app, gpxFile);
 
 		boolean hasPath = gpxFile != null && (gpxFile.tracks.size() > 0 || gpxFile.routes.size() > 0);
 		TrackActivity activity = getTrackActivity();
@@ -318,7 +315,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		GPXFile gpx = getGpx();
 		WptPt pointToShow = gpx != null ? gpx.findPointToShow() : null;
 		if (activity != null && pointToShow != null) {
-			boolean gpxFileSelected = isGpxFileSelected(gpx);
+			boolean gpxFileSelected = isGpxFileSelected(app, gpx);
 			if (!gpxFileSelected) {
 				Intent intent = activity.getIntent();
 				if (intent != null) {
@@ -530,7 +527,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 	}
 
-	public boolean isGpxFileSelected(GPXFile gpxFile) {
+	public static boolean isGpxFileSelected(OsmandApplication app, GPXFile gpxFile) {
 		return gpxFile != null &&
 				((gpxFile.showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
 						(gpxFile.path != null && app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null));
@@ -541,12 +538,6 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		if (gpxFile != null) {
 			app.getSelectedGpxHelper().selectGpxFile(gpxFile, visible, false);
 		}
-	}
-
-	@Nullable
-	private QuadRect getRect() {
-		TrackActivity activity = getTrackActivity();
-		return activity != null ? activity.getRect() : null;
 	}
 
 	public boolean isShowOnMap() {
@@ -562,42 +553,6 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
 	public void updateMenuFabVisibility(boolean visible) {
 		menuFab.setVisibility(visible ? View.VISIBLE : View.GONE);
-	}
-
-	@NonNull
-	public List<GpxDisplayGroup> getOriginalGroups() {
-		return filterGroups(false);
-	}
-
-	@NonNull
-	public List<GpxDisplayGroup> getDisplayGroups() {
-		return filterGroups(true);
-	}
-
-	private boolean hasFilterType(GpxDisplayItemType filterType) {
-		for (GpxDisplayItemType type : filterTypes) {
-			if (type == filterType) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@NonNull
-	private List<GpxDisplayGroup> filterGroups(boolean useDisplayGroups) {
-		List<GpxDisplayGroup> groups = new ArrayList<>();
-		TrackActivity activity = getTrackActivity();
-		if (activity != null) {
-			List<GpxDisplayGroup> result = activity.getGpxFile(useDisplayGroups);
-			for (GpxDisplayGroup group : result) {
-				boolean add = hasFilterType(group.getType());
-				if (add) {
-					groups.add(group);
-				}
-
-			}
-		}
-		return groups;
 	}
 
 	private void updateTrackColor() {
@@ -619,14 +574,6 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		if (trackDrawer != null) {
 			trackDrawer.setTrackColor(color);
 		}
-	}
-
-	public List<GpxSelectionHelper.GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
-		ArrayList<GpxSelectionHelper.GpxDisplayItem> list = new ArrayList<>();
-		for (GpxDisplayGroup g : groups) {
-			list.addAll(g.getModifiableList());
-		}
-		return list;
 	}
 
 	public void hideTransparentOverlay() {
