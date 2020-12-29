@@ -2374,7 +2374,7 @@
     <string name="poi_street_cabinet_postal_service">نوع الكبينة/الخزانة: خدمة بريدية</string>
     <string name="poi_street_cabinet_gas">نوع الكبينة/الخزانة: غاز</string>
     <string name="poi_street_cabinet_telecom">نوع الكبينة/الخزانة: اتصالات</string>
-    <string name="poi_street_cabinet_power">نوع الكبينة/الخزانة: طاقة</string>
+    <string name="poi_street_cabinet_power">نوع الكبينة/الخزانة: كهرباء</string>
     <string name="poi_in_service_yes">في الخدمة: نعم</string>
     <string name="poi_fire_hydrant_style_water_source_cistern">صهريج</string>
     <string name="poi_water_source_stream">مجرى</string>
