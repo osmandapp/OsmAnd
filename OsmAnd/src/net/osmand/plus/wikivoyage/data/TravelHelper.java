@@ -51,4 +51,7 @@ public interface TravelHelper {
 	String getSelectedTravelBookName();
 
 	String getWikivoyageFileName();
+
+	@NonNull
+	TravelArticle getUpdatedArticle(@NonNull TravelArticle article);
 }

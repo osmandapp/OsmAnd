@@ -687,7 +687,13 @@ public class TravelDbHelper implements TravelHelper {
 		}
 		return file;
 	}
-	
+
+	@NonNull
+	@Override
+	public TravelArticle getUpdatedArticle(@NonNull TravelArticle article) {
+		return article;
+	}
+
 	protected static class PopularArticle {
 		String tripId;
 		String title;

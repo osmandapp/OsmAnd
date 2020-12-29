@@ -34,7 +34,24 @@ public class TravelArticle {
 	String contentsJson;
 	String aggregatedPartOf;
 	String fullContent;
+	private String travelBook;
+	private long lastModified;
 
+	public String getTravelBook() {
+		return travelBook;
+	}
+
+	public void setTravelBook(String travelBook) {
+		this.travelBook = travelBook;
+	}
+
+	public long getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(long lastModified) {
+		this.lastModified = lastModified;
+	}
 
 	public String getTitle() {
 		return title;

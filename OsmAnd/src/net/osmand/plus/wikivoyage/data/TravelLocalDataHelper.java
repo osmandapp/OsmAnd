@@ -120,6 +120,8 @@ public class TravelLocalDataHelper {
 			saved.routeId = article.routeId;
 			saved.fullContent = article.getContent();
 			saved.contentsJson = article.contentsJson;
+			saved.setTravelBook(article.getTravelBook());
+			saved.setLastModified(article.getLastModified());
 			savedArticles.add(saved);
 			dbHelper.addSavedArticle(saved);
 			notifySavedUpdated();
@@ -182,7 +184,7 @@ public class TravelLocalDataHelper {
 
 	private static class WikivoyageLocalDataDbHelper {
 
-		private static final int DB_VERSION = 6;
+		private static final int DB_VERSION = 7;
 		private static final String DB_NAME = "wikivoyage_local_data";
 
 		private static final String HISTORY_TABLE_NAME = "wikivoyage_search_history";
@@ -219,6 +221,8 @@ public class TravelLocalDataHelper {
 		private static final String BOOKMARKS_COL_ROUTE_ID = "route_id";
 		private static final String BOOKMARKS_COL_CONTENT_JSON = "content_json";
 		private static final String BOOKMARKS_COL_CONTENT = "content";
+		private static final String BOOKMARKS_COL_TRAVEL_BOOK_NAME = "travel_book_name";
+		private static final String BOOKMARKS_COL_LAST_MODIFIED = "last_modified";
 
 		private static final String BOOKMARKS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 				BOOKMARKS_TABLE_NAME + " (" +
@@ -232,7 +236,9 @@ public class TravelLocalDataHelper {
 				BOOKMARKS_COL_LON + " double, " +
 				BOOKMARKS_COL_ROUTE_ID + " TEXT, " +
 				BOOKMARKS_COL_CONTENT_JSON + " TEXT, " +
-				BOOKMARKS_COL_CONTENT + " TEXT" + ");";
+				BOOKMARKS_COL_CONTENT + " TEXT, " +
+				BOOKMARKS_COL_TRAVEL_BOOK_NAME + " TEXT, " +
+				BOOKMARKS_COL_LAST_MODIFIED + " long" + ");";
 
 		private static final String BOOKMARKS_TABLE_SELECT = "SELECT " +
 				BOOKMARKS_COL_ARTICLE_TITLE + ", " +
@@ -244,21 +250,23 @@ public class TravelLocalDataHelper {
 				BOOKMARKS_COL_LON + ", " +
 				BOOKMARKS_COL_ROUTE_ID + ", " +
 				BOOKMARKS_COL_CONTENT_JSON + ", " +
-				BOOKMARKS_COL_CONTENT +
+				BOOKMARKS_COL_CONTENT + ", " +
+				BOOKMARKS_COL_TRAVEL_BOOK_NAME + ", " +
+				BOOKMARKS_COL_LAST_MODIFIED +
 				" FROM " + BOOKMARKS_TABLE_NAME;
 
-		private final OsmandApplication context;
+		private final OsmandApplication app;
 
-		WikivoyageLocalDataDbHelper(OsmandApplication context) {
-			this.context = context;
+		WikivoyageLocalDataDbHelper(OsmandApplication app) {
+			this.app = app;
 		}
 
 		private SQLiteConnection openConnection(boolean readonly) {
-			SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+			SQLiteConnection conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
 			if (conn.getVersion() < DB_VERSION) {
 				if (readonly) {
 					conn.close();
-					conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
+					conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
 				}
 				int version = conn.getVersion();
 				conn.setVersion(DB_VERSION);
@@ -300,6 +308,10 @@ public class TravelLocalDataHelper {
 			if (oldVersion < 6) {
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_CONTENT_JSON + " TEXT");
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_CONTENT + " TEXT");
+			}
+			if (oldVersion < 7) {
+				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_TRAVEL_BOOK_NAME + " TEXT");
+				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_LAST_MODIFIED + " long");
 			}
 		}
 
@@ -422,7 +434,14 @@ public class TravelLocalDataHelper {
 					if (cursor != null) {
 						if (cursor.moveToFirst()) {
 							do {
-								res.add(readSavedArticle(cursor));
+								TravelArticle article = readSavedArticle(cursor);
+								TravelArticle newArticle = app.getTravelHelper().getUpdatedArticle(article);
+								if (newArticle.getLastModified() > article.getLastModified()) {
+									updateSavedArticle(article, newArticle);
+									res.add(newArticle);
+								} else {
+									res.add(article);
+								}
 							} while (cursor.moveToNext());
 						}
 						cursor.close();
@@ -432,6 +451,13 @@ public class TravelLocalDataHelper {
 				}
 			}
 			return res;
+		}
+
+		public void updateSavedArticle(TravelArticle article, TravelArticle newArticle) {
+			removeSavedArticle(article);
+			newArticle.fullContent = newArticle.content;
+			newArticle.content = WikiArticleHelper.getPartialContent(newArticle.fullContent);
+			addSavedArticle(newArticle);
 		}
 
 		void addSavedArticle(TravelArticle article) {
@@ -453,12 +479,14 @@ public class TravelLocalDataHelper {
 							BOOKMARKS_COL_LON + ", " +
 							BOOKMARKS_COL_ROUTE_ID + ", " +
 							BOOKMARKS_COL_CONTENT_JSON + ", " +
-							BOOKMARKS_COL_CONTENT +
-							") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+							BOOKMARKS_COL_CONTENT + ", " +
+							BOOKMARKS_COL_TRAVEL_BOOK_NAME + ", " +
+							BOOKMARKS_COL_LAST_MODIFIED +
+							") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 					conn.execSQL(query, new Object[]{article.title, article.lang,
 							article.aggregatedPartOf, article.imageTitle, article.content,
 							travelBook, article.lat, article.lon, article.routeId, article.contentsJson,
-							article.fullContent});
+							article.fullContent, article.getTravelBook(), article.getLastModified()});
 				} finally {
 					conn.close();
 				}
@@ -486,7 +514,7 @@ public class TravelLocalDataHelper {
 
 		@Nullable
 		private String getSelectedTravelBookName() {
-			return context.getTravelHelper().getSelectedTravelBookName();
+			return app.getTravelHelper().getSelectedTravelBookName();
 		}
 
 		private WikivoyageSearchHistoryItem readHistoryItem(SQLiteCursor cursor) {
@@ -512,7 +540,8 @@ public class TravelLocalDataHelper {
 			res.routeId = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_ROUTE_ID));
 			res.contentsJson = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_CONTENT_JSON));
 			res.fullContent = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_CONTENT));
-
+			res.setTravelBook(cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_TRAVEL_BOOK_NAME)));
+			res.setLastModified(cursor.getLong(cursor.getColumnIndex(BOOKMARKS_COL_LAST_MODIFIED)));
 			return res;
 		}
 	}
