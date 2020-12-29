@@ -53,7 +53,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
-import net.osmand.plus.openplacereviews.OPRWebviewActivity;
+import net.osmand.plus.openplacereviews.OPRConstants;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -382,10 +382,10 @@ public class MenuBuilder {
 					AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 				} else {
 					registerResultListener(view);
-					final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
-					final String name = OPRWebviewActivity.getUsernameFromCookie(app);
-					final String privateKey = OPRWebviewActivity.getPrivateKeyFromCookie(app);
-					if (privateKey == null || privateKey.isEmpty()) {
+					final String baseUrl = OPRConstants.getBaseUrl(app);
+					final String name = app.getSettings().OPR_USERNAME.get();
+					final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
+					if (Algorithms.isBlank(privateKey) || Algorithms.isBlank(name)) {
 						OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
 						return;
 					}
@@ -464,18 +464,20 @@ public class MenuBuilder {
 
 	private void uploadImageToPlace(InputStream image) {
 		InputStream serverData = new ByteArrayInputStream(compressImage(image));
-		final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
+		final String baseUrl = OPRConstants.getBaseUrl(app);
 		String url = baseUrl + "api/ipfs/image";
 		String response = NetworkUtils.sendPostDataRequest(url, serverData);
 		if (response != null) {
 			int res = 0;
 			try {
 				StringBuilder error = new StringBuilder();
+				String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
+				String username = app.getSettings().OPR_USERNAME.get();
 				res = openDBAPI.uploadImage(
 						placeId,
 						baseUrl,
-						OPRWebviewActivity.getPrivateKeyFromCookie(app),
-						OPRWebviewActivity.getUsernameFromCookie(app),
+						privateKey,
+						username,
 						response, error);
 				if (res != 200) {
 					showToastMessage(error.toString());
@@ -511,9 +513,9 @@ public class MenuBuilder {
 
 	//This method runs on non main thread
 	private void checkTokenAndShowScreen() {
-		final String baseUrl = OPRWebviewActivity.getBaseUrl(app);
-		final String name = OPRWebviewActivity.getUsernameFromCookie(app);
-		final String privateKey = OPRWebviewActivity.getPrivateKeyFromCookie(app);
+		final String baseUrl = OPRConstants.getBaseUrl(app);
+		final String name = app.getSettings().OPR_USERNAME.get();
+		final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
 		if (openDBAPI.checkPrivateKeyValid(baseUrl, name, privateKey)) {
 			String str = app.getString(R.string.cannot_upload_image);
 			showToastMessage(str);
