@@ -764,7 +764,7 @@ public class CommonWords {
 		addFrequentlyUsed("martiri");
 		addFrequentlyUsed("verdi");
 		addFrequentlyUsed("augusta");
-		addFrequentlyUsed("neuberger");
+		addFrequentlyUsed("neuburger");
 
 
 
