@@ -1,4 +1,3 @@
-
 package net.osmand;
 
 
@@ -47,7 +46,9 @@ import java.util.TimeZone;
 public class GPXUtilities {
 
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
-
+	
+	private static final String XML_NAMESPACE_HEADER = "osmand";
+	private static final String XML_NAMESPACE = XML_NAMESPACE_HEADER + ":";
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String DEFAULT_ICON_NAME = "special_star";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
@@ -128,6 +129,7 @@ public class GPXUtilities {
 			if (extensions == null) {
 				extensions = new LinkedHashMap<>();
 			}
+
 			return extensions;
 		}
 
@@ -146,10 +148,47 @@ public class GPXUtilities {
 			this.extensionsWriter = extensionsWriter;
 		}
 
+		public String putExtensionsToWriteWithNamespace(String key, String value) {
+			String result = getExtensionsToWrite().put(XML_NAMESPACE + key, value);
+			return result;
+		}
+
+		public String removeExtensionsToWritebyKey(String key) {
+			String value = getExtensionsToWrite().remove(XML_NAMESPACE + key);
+			if (value == null) {
+				value = getExtensionsToWrite().remove(key);
+			}
+			return value;
+		}
+		
+		public String getExtensionToReadByKey(String key) {
+			String value = getExtensionsToRead().get(XML_NAMESPACE + key);
+			if (value == null) {
+				value = getExtensionsToRead().get(key);
+			}
+			return value;
+		}
+		
+		public String getExtensionValueByKey(Map<String, String> extensions, String key) {
+			String value = extensions.get(XML_NAMESPACE + key);
+			if (value == null) {
+				value = extensions.get(key);
+			}
+			return value;
+		}
+
+		public String removeExtensionByKey(Map<String, String> extensions, String key) {
+			String value = extensions.remove(XML_NAMESPACE + key);
+			if (value == null) {
+				value = extensions.remove(key);
+			}
+			return value;
+		}
+
 		public int getColor(int defColor) {
 			String clrValue = null;
 			if (extensions != null) {
-				clrValue = extensions.get("color");
+				clrValue = getExtensionValueByKey(extensions, "color");
 				if (clrValue == null) {
 					clrValue = extensions.get("colour");
 				}
@@ -164,11 +203,11 @@ public class GPXUtilities {
 		}
 
 		public void setColor(int color) {
-			getExtensionsToWrite().put("color", Algorithms.colorToString(color));
+			putExtensionsToWriteWithNamespace("color", Algorithms.colorToString(color));
 		}
 
 		public void removeColor() {
-			getExtensionsToWrite().remove("color");
+			removeExtensionsToWritebyKey("color");
 		}
 
 		protected int parseColor(String colorString, int defColor) {
@@ -295,11 +334,11 @@ public class GPXUtilities {
 		}
 
 		public String getIconName() {
-			return getExtensionsToRead().get(ICON_NAME_EXTENSION);
+			return getExtensionToReadByKey(ICON_NAME_EXTENSION);
 		}
 
 		public String getIconNameOrDefault() {
-			String iconName = getExtensionsToRead().get(ICON_NAME_EXTENSION);
+			String iconName = getExtensionToReadByKey(ICON_NAME_EXTENSION);
 			if (iconName == null) {
 				iconName = DEFAULT_ICON_NAME;
 			}
@@ -307,23 +346,23 @@ public class GPXUtilities {
 		}
 
 		public void setIconName(String iconName) {
-			getExtensionsToWrite().put(ICON_NAME_EXTENSION, iconName);
+			putExtensionsToWriteWithNamespace(ICON_NAME_EXTENSION, iconName);
 		}
 
 		public String getBackgroundType() {
-			return getExtensionsToRead().get(BACKGROUND_TYPE_EXTENSION);
+			return getExtensionToReadByKey(BACKGROUND_TYPE_EXTENSION);
 		}
 
 		public void setBackgroundType(String backType) {
-			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, backType);
+			putExtensionsToWriteWithNamespace(BACKGROUND_TYPE_EXTENSION, backType);
 		}
 
 		public String getProfileType() {
-			return getExtensionsToRead().get(PROFILE_TYPE_EXTENSION);
+			return getExtensionToReadByKey(PROFILE_TYPE_EXTENSION);
 		}
 
 		public void setProfileType(String profileType) {
-			getExtensionsToWrite().put(PROFILE_TYPE_EXTENSION, profileType);
+			putExtensionsToWriteWithNamespace(PROFILE_TYPE_EXTENSION, profileType);
 		}
 
 		public boolean hasProfile() {
@@ -341,19 +380,19 @@ public class GPXUtilities {
 		}
 
 		public void removeProfileType() {
-			getExtensionsToWrite().remove(PROFILE_TYPE_EXTENSION);
+			removeExtensionsToWritebyKey(PROFILE_TYPE_EXTENSION);
 		}
 
 		public int getTrkPtIndex() {
 			try {
-				return Integer.parseInt(getExtensionsToRead().get(TRKPT_INDEX_EXTENSION));
+				return Integer.parseInt(getExtensionToReadByKey(TRKPT_INDEX_EXTENSION));
 			} catch (NumberFormatException e) {
 				return -1;
 			}
 		}
 
 		public void setTrkPtIndex(int index) {
-			getExtensionsToWrite().put(TRKPT_INDEX_EXTENSION, String.valueOf(index));
+			putExtensionsToWriteWithNamespace(TRKPT_INDEX_EXTENSION, String.valueOf(index));
 		}
 
 		@Override
@@ -443,11 +482,11 @@ public class GPXUtilities {
 		public Bounds bounds = null;
 
 		public String getArticleTitle() {
-			return getExtensionsToRead().get("article_title");
+			return getExtensionToReadByKey("article_title");
 		}
 
 		public String getArticleLang() {
-			return getExtensionsToRead().get("article_lang");
+			return getExtensionToReadByKey("article_lang");
 		}
 	}
 
@@ -1114,13 +1153,13 @@ public class GPXUtilities {
 		public GPXFile(String title, String lang, String description) {
 			this.metadata = new Metadata();
 			if(description != null) {
-				metadata.getExtensionsToWrite().put("desc", description);
+				metadata.putExtensionsToWriteWithNamespace("desc", description);
 			}
 			if(lang != null) {
-				metadata.getExtensionsToWrite().put("article_lang", lang);
+				metadata.putExtensionsToWriteWithNamespace("article_lang", lang);
 			}
 			if(title != null) {
-				metadata.getExtensionsToWrite().put("article_title", title);
+				metadata.putExtensionsToWriteWithNamespace("article_title", title);
 			}
 		}
 
@@ -1656,44 +1695,44 @@ public class GPXUtilities {
 		public int getGradientScaleColor(String gradientScaleType, int defColor) {
 			String clrValue = null;
 			if (extensions != null) {
-				clrValue = extensions.get(gradientScaleType);
+				clrValue = getExtensionValueByKey(extensions, gradientScaleType);
 			}
 			return parseColor(clrValue, defColor);
 		}
 
 		public void setGradientScaleColor(String gradientScaleType, int gradientScaleColor) {
-			getExtensionsToWrite().put(gradientScaleType, Algorithms.colorToString(gradientScaleColor));
+			putExtensionsToWriteWithNamespace(gradientScaleType, Algorithms.colorToString(gradientScaleColor));
 		}
 
 		public String getGradientScaleType() {
 			if (extensions != null) {
-				return extensions.get("gradient_scale_type");
+				return getExtensionValueByKey(extensions, "gradient_scale_type");
 			}
 			return null;
 		}
 
 		public void setGradientScaleType(String gradientScaleType) {
-			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType);
+			putExtensionsToWriteWithNamespace("gradient_scale_type", gradientScaleType);
 		}
 
 		public void removeGradientScaleType() {
-			getExtensionsToWrite().remove("gradient_scale_type");
+			removeExtensionsToWritebyKey("gradient_scale_type");
 		}
 
 		public String getSplitType() {
 			if (extensions != null) {
-				return extensions.get("split_type");
+				return getExtensionValueByKey(extensions,"split_type");
 			}
 			return null;
 		}
 
 		public void setSplitType(String gpxSplitType) {
-			getExtensionsToWrite().put("split_type", gpxSplitType);
+			putExtensionsToWriteWithNamespace("split_type", gpxSplitType);
 		}
 
 		public double getSplitInterval() {
 			if (extensions != null) {
-				String splitIntervalStr = extensions.get("split_interval");
+				String splitIntervalStr = getExtensionValueByKey(extensions,"split_interval");
 				if (!Algorithms.isEmpty(splitIntervalStr)) {
 					try {
 						return Double.parseDouble(splitIntervalStr);
@@ -1706,42 +1745,42 @@ public class GPXUtilities {
 		}
 
 		public void setSplitInterval(double splitInterval) {
-			getExtensionsToWrite().put("split_interval", String.valueOf(splitInterval));
+			putExtensionsToWriteWithNamespace("split_interval", String.valueOf(splitInterval));
 		}
 
 		public String getWidth(String defWidth) {
 			String widthValue = null;
 			if (extensions != null) {
-				widthValue = extensions.get("width");
+				widthValue = getExtensionValueByKey(extensions,"width");
 			}
 			return widthValue != null ? widthValue : defWidth;
 		}
 
 		public void setWidth(String width) {
-			getExtensionsToWrite().put("width", width);
+			putExtensionsToWriteWithNamespace("width", width);
 		}
 
 		public boolean isShowArrows() {
 			String showArrows = null;
 			if (extensions != null) {
-				showArrows = extensions.get("show_arrows");
+				showArrows = getExtensionValueByKey(extensions,"show_arrows");
 			}
 			return Boolean.parseBoolean(showArrows);
 		}
 
 		public void setShowArrows(boolean showArrows) {
-			getExtensionsToWrite().put("show_arrows", String.valueOf(showArrows));
+			putExtensionsToWriteWithNamespace("show_arrows", String.valueOf(showArrows));
 		}
 
 		public boolean isShowStartFinish() {
-			if (extensions != null && extensions.containsKey("show_start_finish")) {
-				return Boolean.parseBoolean(extensions.get("show_start_finish"));
+			if (extensions != null && (extensions.containsKey(XML_NAMESPACE + "show_start_finish") || extensions.containsKey("show_start_finish"))) {
+				return Boolean.parseBoolean(getExtensionValueByKey(extensions,"show_start_finish"));
 			}
 			return true;
 		}
 
 		public void setShowStartFinish(boolean showStartFinish) {
-			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
+			putExtensionsToWriteWithNamespace("show_start_finish", String.valueOf(showStartFinish));
 		}
 	}
 
@@ -1790,9 +1829,10 @@ public class GPXUtilities {
 				serializer.attribute(null, "creator", file.author); //$NON-NLS-1$
 			}
 			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
+			serializer.attribute(null, "xmlns:" + XML_NAMESPACE_HEADER, "https://osmand.net"); //$NON-NLS-1$ //$NON-NLS-2$
 			serializer.attribute(null, "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			serializer.attribute(null, "xsi:schemaLocation",
-					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
+					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://osmand.net https://github.com/jensMF/Osmand/raw/fix_gpx_xml_schema/OsmAnd/res/gpx/osmand.xsd");
 
 			String trackName = file.metadata != null ? file.metadata.name : getFilename(file.path);
 			serializer.startTag(null, "metadata");
@@ -1958,7 +1998,7 @@ public class GPXUtilities {
 		if (p.time != 0) {
 			writeNotNullText(serializer, "time", format.format(new Date(p.time)));
 		}
-		writeNotNullText(serializer, "name", p.name);
+		writeNotNullText(serializer, "name", p.name);//$NON-NLS-1$ //$NON-NLS-2$
 		writeNotNullText(serializer, "desc", p.desc);
 		writeNotNullTextWithAttribute(serializer, "link", "href", p.link);
 		writeNotNullText(serializer, "type", p.category);
@@ -1969,22 +2009,22 @@ public class GPXUtilities {
 			writeNotNullText(serializer, "hdop", decimalFormat.format(p.hdop));
 		}
 		if (p.speed > 0) {
-			p.getExtensionsToWrite().put("speed", decimalFormat.format(p.speed));
+			p.putExtensionsToWriteWithNamespace("speed", decimalFormat.format(p.speed));
 		}
 		if (!Float.isNaN(p.heading)) {
-			p.getExtensionsToWrite().put("heading", String.valueOf(Math.round(p.heading)));
+			p.putExtensionsToWriteWithNamespace("heading", String.valueOf(Math.round(p.heading)));
 		}
 		Map<String, String> extensions = p.getExtensionsToRead();
 		if (!"rtept".equals(serializer.getName())) {
 			// Leave "profile" and "trkpt" tags for rtept only
-			extensions.remove(PROFILE_TYPE_EXTENSION);
-			extensions.remove(TRKPT_INDEX_EXTENSION);
+			p.removeExtensionByKey(extensions, PROFILE_TYPE_EXTENSION);
+			p.removeExtensionByKey(extensions, TRKPT_INDEX_EXTENSION);
 			writeExtensions(serializer, extensions, p);
 		} else {
 			// Remove "gap" profile
-			String profile = extensions.get(PROFILE_TYPE_EXTENSION);
+			String profile = p.getExtensionValueByKey(extensions, PROFILE_TYPE_EXTENSION);
 			if (GAP_PROFILE_TYPE.equals(profile)) {
-				extensions.remove(PROFILE_TYPE_EXTENSION);
+				p.removeExtensionByKey(extensions, PROFILE_TYPE_EXTENSION);
 			}
 			writeExtensions(serializer, p);
 		}
@@ -2173,7 +2213,7 @@ public class GPXUtilities {
 							case "routepointextension":
 								routePointExtension = true;
 								if (parse instanceof WptPt) {
-									parse.getExtensionsToWrite().put("offset", routeTrackSegment.points.size() + "");
+									parse.putExtensionsToWriteWithNamespace("offset", routeTrackSegment.points.size() + "");
 								}
 								break;
 
@@ -2191,7 +2231,7 @@ public class GPXUtilities {
 									for (Entry<String, String> entry : values.entrySet()) {
 										String t = entry.getKey().toLowerCase();
 										String value = entry.getValue();
-										parse.getExtensionsToWrite().put(t, value);
+										parse.putExtensionsToWriteWithNamespace(t, value);
 										if (tag.equals("speed") && parse instanceof WptPt) {
 											try {
 												((WptPt) parse).speed = Float.parseFloat(value);
@@ -2362,7 +2402,7 @@ public class GPXUtilities {
 									String value = readText(parser, "speed");
 									if (!Algorithms.isEmpty(value)) {
 										((WptPt) parse).speed = Float.parseFloat(value);
-										parse.getExtensionsToWrite().put("speed", value);
+										parse.putExtensionsToWriteWithNamespace("speed", value);
 									}
 								} catch (NumberFormatException e) {
 								}

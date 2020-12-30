@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema
+  xmlns="http://www.topografix.com/GPX/1/1"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:osmand="https://osmand.net"
+  targetNamespace="https://osmand.net"
+  elementFormDefault="qualified">
+	<xsd:annotation>
+		<xsd:documentation>
+	This schema defines additional properties OsmAnd uses to save information in gpx files.
+	</xsd:documentation></xsd:annotation>
+	<xsd:element name="show_arrows" type="xsd:boolean" />
+	<xsd:element name="show_start_finish" type="xsd:boolean" />
+	<xsd:element name="split_interval" type="xsd:decimal" />
+	<xsd:element name="split_type" type="xsd:string" />
+	<xsd:element name="color" type="xsd:string" />
+	<xsd:element name="width" type="xsd:positiveInteger" />
+	<xsd:element name="speed" type="xsd:decimal" />
+</xsd:schema>
