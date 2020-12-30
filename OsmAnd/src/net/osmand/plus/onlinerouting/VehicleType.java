@@ -3,6 +3,7 @@ package net.osmand.plus.onlinerouting;
 import android.content.Context;
 
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 public enum VehicleType {
 	CAR("car", R.string.routing_engine_vehicle_type_car),
@@ -25,5 +26,14 @@ public enum VehicleType {
 
 	public String toHumanString(Context ctx) {
 		return ctx.getString(titleId);
+	}
+
+	public static VehicleType getVehicleByKey(String key) {
+		for (VehicleType v : values()) {
+			if (Algorithms.objectEquals(v.getKey(), key)) {
+				return v;
+			}
+		}
+		return CUSTOM;
 	}
 }

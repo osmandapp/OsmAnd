@@ -29,6 +29,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.onlinerouting.OnlineRoutingCard.OnTextChangedListener;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngine.EngineParameterType;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
@@ -52,8 +53,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private static final String ENGINE_NAME_CHANGED_BY_USER_KEY = "engine_name_changed_by_user_key";
 	private static final String EXAMPLE_LOCATION_KEY = "example_location";
 	private static final String APP_MODE_KEY = "app_mode";
+	private static final String EDITED_ENGINE_KEY = "edited_engine_key";
 
 	private OsmandApplication app;
+	private OnlineRoutingHelper helper;
 
 	private OnlineRoutingCard nameCard;
 	private OnlineRoutingCard serverCard;
@@ -62,17 +65,17 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private OnlineRoutingCard exampleCard;
 	private View testResultsContainer;
 
-	private boolean isEditingMode;
 	private ApplicationMode appMode;
 
 	private OnlineRoutingEngineObject engine;
 	private ExampleLocation selectedLocation;
+	private String editedEngineKey;
 
 	private enum ExampleLocation {
 
 		AMSTERDAM("Amsterdam",
 				new LatLon(52.379189, 4.899431),
-				new LatLon(	52.308056, 4.764167)),
+				new LatLon(52.308056, 4.764167)),
 
 		BERLIN("Berlin",
 				new LatLon(52.520008, 13.404954),
@@ -80,11 +83,11 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 		NEW_YORK("New York",
 				new LatLon(43.000000, -75.000000),
-				new LatLon(	40.641766, 	-73.780968)),
+				new LatLon(40.641766, -73.780968)),
 
 		PARIS("Paris",
 				new LatLon(48.864716, 2.349014),
-				new LatLon(48.948437, 	2.434931));
+				new LatLon(48.948437, 2.434931));
 
 		ExampleLocation(String name, LatLon cityCenterLatLon, LatLon cityAirportLatLon) {
 			this.name = name;
@@ -113,11 +116,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
+		helper = app.getOnlineRoutingHelper();
 		engine = new OnlineRoutingEngineObject();
 		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
 		} else {
-			initEngineState();
+			initState();
 		}
 	}
 
@@ -150,7 +154,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		nameCard.setOnTextChangedListener(new OnTextChangedListener() {
 			@Override
 			public void onTextChanged(boolean changedByUser, String text) {
-				if (!isEditingMode && !engine.wasNameChangedByUser && changedByUser) {
+				if (!isEditingMode() && !engine.wasNameChangedByUser && changedByUser) {
 					engine.wasNameChangedByUser = true;
 				}
 				engine.name = text;
@@ -183,7 +187,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		serverCard.setOnTextChangedListener(new OnTextChangedListener() {
 			@Override
 			public void onTextChanged(boolean editedByUser, String text) {
-				engine.serverBaseUrl = text;
+				if (editedByUser) {
+					engine.customServerUrl = text;
+				}
 			}
 		});
 		serverCard.setFieldBoxLabelText(getString(R.string.shared_string_server_url));
@@ -299,7 +305,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		saveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// save engine to settings
+				saveChanges();
+				dismiss();
 			}
 		});
 
@@ -320,7 +327,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
 		toolbar.findViewById(R.id.toolbar_subtitle).setVisibility(View.GONE);
 		View actionBtn = toolbar.findViewById(R.id.action_button);
-		if (isEditingMode) {
+		if (isEditingMode()) {
 			title.setText(getString(R.string.edit_online_routing_engine));
 			ImageView ivBtn = toolbar.findViewById(R.id.action_button_icon);
 			ivBtn.setImageDrawable(
@@ -328,7 +335,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			actionBtn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// delete engine from settings
+					deleteEngine();
+					dismiss();
 				}
 			});
 		} else {
@@ -337,7 +345,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void updateCardViews(BaseCard ... cardsToUpdate) {
+	private void updateCardViews(BaseCard... cardsToUpdate) {
 		for (BaseCard card : cardsToUpdate) {
 			if (nameCard.equals(card)) {
 				if (!engine.wasNameChangedByUser) {
@@ -349,7 +357,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 			} else if (serverCard.equals(card)) {
 				serverCard.setHeaderSubtitle(engine.serverType.getTitle());
-				serverCard.setEditedText(engine.serverType.getBaseUrl());
+				serverCard.setEditedText(engine.getBaseUrl());
 				if (engine.serverType == ServerType.GRAPHHOPER) {
 					apiKeyCard.show();
 				} else {
@@ -360,6 +368,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				vehicleCard.setHeaderSubtitle(engine.vehicleType.toHumanString(app));
 				if (engine.vehicleType == VehicleType.CUSTOM) {
 					vehicleCard.showFieldBox();
+					vehicleCard.setEditedText(engine.getVehicleKey());
 				} else {
 					vehicleCard.hideFieldBox();
 				}
@@ -368,6 +377,22 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				exampleCard.setEditedText(getTestUrl());
 			}
 		}
+	}
+
+	private void saveChanges() {
+		OnlineRoutingEngine engineToSave = new OnlineRoutingEngine(editedEngineKey, engine.name,
+						engine.serverType, engine.getVehicleKey(), null);
+
+		engineToSave.putParameter(EngineParameterType.CUSTOM_SERVER_URL, engine.customServerUrl);
+		if (engine.serverType == ServerType.GRAPHHOPER) {
+			engineToSave.putParameter(EngineParameterType.API_KEY, engine.apiKey);
+		}
+
+		helper.saveEngine(engineToSave);
+	}
+
+	private void deleteEngine() {
+		helper.deleteEngine(editedEngineKey);
 	}
 
 	private String getTestUrl() {
@@ -434,6 +459,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		tvDescription.setText(location.getName());
 	}
 
+	private boolean isEditingMode() {
+		return editedEngineKey != null;
+	}
+
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -443,7 +472,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private void saveState(Bundle outState) {
 		outState.putString(ENGINE_NAME_KEY, engine.name);
 		outState.putString(ENGINE_SERVER_KEY, engine.serverType.name());
-		outState.putString(ENGINE_SERVER_URL_KEY, engine.serverBaseUrl);
+		outState.putString(ENGINE_SERVER_URL_KEY, engine.customServerUrl);
 		outState.putString(ENGINE_VEHICLE_TYPE_KEY, engine.vehicleType.name());
 		outState.putString(ENGINE_CUSTOM_VEHICLE_KEY, engine.customVehicleKey);
 		outState.putString(ENGINE_API_KEY_KEY, engine.apiKey);
@@ -452,24 +481,45 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		if (appMode != null) {
 			outState.putString(APP_MODE_KEY, appMode.getStringKey());
 		}
+		outState.putString(EDITED_ENGINE_KEY, editedEngineKey);
 	}
 
 	private void restoreState(Bundle savedState) {
 		engine.name = savedState.getString(ENGINE_NAME_KEY);
 		engine.serverType = ServerType.valueOf(savedState.getString(ENGINE_SERVER_KEY));
-		engine.serverBaseUrl = savedState.getString(ENGINE_SERVER_URL_KEY);
+		engine.customServerUrl = savedState.getString(ENGINE_SERVER_URL_KEY);
 		engine.vehicleType = VehicleType.valueOf(savedState.getString(ENGINE_VEHICLE_TYPE_KEY));
 		engine.customVehicleKey = savedState.getString(ENGINE_CUSTOM_VEHICLE_KEY);
 		engine.apiKey = savedState.getString(ENGINE_API_KEY_KEY);
 		engine.wasNameChangedByUser = savedState.getBoolean(ENGINE_NAME_CHANGED_BY_USER_KEY);
 		selectedLocation = ExampleLocation.valueOf(savedState.getString(EXAMPLE_LOCATION_KEY));
 		appMode = ApplicationMode.valueOfStringKey(savedState.getString(APP_MODE_KEY), null);
+		editedEngineKey = savedState.getString(EDITED_ENGINE_KEY);
 	}
 
-	private void initEngineState() {
+	private void initState() {
 		engine.serverType = ServerType.values()[0];
 		engine.vehicleType = VehicleType.values()[0];
 		selectedLocation = ExampleLocation.values()[0];
+
+		if (isEditingMode()) {
+			OnlineRoutingEngine editedEngine = helper.getEngineByKey(editedEngineKey);
+			if (editedEngine != null) {
+				engine.name = editedEngine.getName();
+				engine.wasNameChangedByUser = true;
+				engine.serverType = editedEngine.getServerType();
+				engine.customServerUrl = editedEngine.getParameter(EngineParameterType.CUSTOM_SERVER_URL);
+				String vehicleKey = editedEngine.getVehicleKey();
+				if (vehicleKey != null) {
+					VehicleType vehicleType = VehicleType.getVehicleByKey(vehicleKey);
+					if (vehicleType == VehicleType.CUSTOM) {
+						engine.customVehicleKey = vehicleKey;
+					}
+					engine.vehicleType = vehicleType;
+				}
+				engine.apiKey = editedEngine.getParameter(EngineParameterType.API_KEY);
+			}
+		}
 	}
 
 	private void dismiss() {
@@ -495,12 +545,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @NonNull ApplicationMode appMode,
-	                                boolean isEditingMode) {
+	                                String editedEngineKey) {
 		FragmentManager fm = activity.getSupportFragmentManager();
 		if (!fm.isStateSaved() && fm.findFragmentByTag(OnlineRoutingEngineFragment.TAG) == null) {
 			OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();
-			fragment.isEditingMode = isEditingMode;
 			fragment.appMode = appMode;
+			fragment.editedEngineKey = editedEngineKey;
 			fm.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG).commitAllowingStateLoss();
@@ -510,7 +560,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private static class OnlineRoutingEngineObject {
 		private String name;
 		private ServerType serverType;
-		private String serverBaseUrl;
+		private String customServerUrl;
 		private VehicleType vehicleType;
 		private String customVehicleKey;
 		private String apiKey;
@@ -521,6 +571,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				return customVehicleKey;
 			}
 			return vehicleType.getKey();
+		}
+
+		public String getBaseUrl() {
+			return customServerUrl != null ? customServerUrl : serverType.getBaseUrl();
 		}
 	}
 }

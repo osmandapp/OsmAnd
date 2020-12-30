@@ -66,6 +66,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
+import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -158,6 +159,7 @@ public class OsmandApplication extends MultiDexApplication {
 	QuickActionRegistry quickActionRegistry;
 	OsmOAuthHelper osmOAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
+	OnlineRoutingHelper onlineRoutingHelper;
 
 	private Resources localizedResources;
 	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
@@ -473,6 +475,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setMeasurementEditingContext(MeasurementEditingContext context) {
 		this.measurementEditingContext = context;
+	}
+
+	public OnlineRoutingHelper getOnlineRoutingHelper() {
+		return onlineRoutingHelper;
 	}
 
 	public TransportRoutingHelper getTransportRoutingHelper() {
