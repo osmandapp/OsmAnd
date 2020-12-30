@@ -39,7 +39,6 @@ public class OnlineRoutingCard extends BaseCard {
 	private TextView tvHelperText;
 	private View bottomDivider;
 	private View button;
-	private View resultContainer;
 	private OnTextChangedListener onTextChangedListener;
 
 	public OnlineRoutingCard(@NonNull MapActivity mapActivity, boolean nightMode) {
@@ -65,7 +64,6 @@ public class OnlineRoutingCard extends BaseCard {
 		tvHelperText = view.findViewById(R.id.helper_text);
 		bottomDivider = view.findViewById(R.id.bottom_divider);
 		button = view.findViewById(R.id.button);
-		resultContainer = view.findViewById(R.id.result_container);
 
 		editText.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -138,15 +136,18 @@ public class OnlineRoutingCard extends BaseCard {
 		editText.setTag(null);
 	}
 
+	public String getEditedText() {
+		return editText.getText().toString();
+	}
+
 	public void showDivider() {
 		showElements(bottomDivider);
 	}
 
-	public void setButton(OnClickListener listener) {
+	public void setButton(String title, OnClickListener listener) {
 		showElements(button);
 		button.setOnClickListener(listener);
-		UiUtilities.setupDialogButton(nightMode, button,
-				DialogButtonType.PRIMARY, R.string.test_route_calculation);
+		UiUtilities.setupDialogButton(nightMode, button, DialogButtonType.PRIMARY, title);
 	}
 
 	public void show() {

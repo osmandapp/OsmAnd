@@ -16,6 +16,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
@@ -30,6 +32,9 @@ import net.osmand.plus.onlinerouting.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +60,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private OnlineRoutingCard vehicleCard;
 	private OnlineRoutingCard apiKeyCard;
 	private OnlineRoutingCard exampleCard;
+	private View testResultsContainer;
 
 	private boolean isEditingMode;
 	private ApplicationMode appMode;
@@ -125,10 +131,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			return null;
 		}
 		boolean nightMode = isNightMode();
-
-		View view = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.online_routing_engine_fragment, container, false);
-
+		inflater = UiUtilities.getInflater(getContext(), nightMode);
+		View view = inflater.inflate(
+				R.layout.online_routing_engine_fragment, container, false);
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 		}
@@ -256,13 +261,18 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 					}
 				});
 		exampleCard.setFieldBoxHelperText(getString(R.string.online_routing_example_hint));
-		exampleCard.setButton(new View.OnClickListener() {
+		exampleCard.setButton(getString(R.string.test_route_calculation), new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// make request to the server
+				testEngineWork();
 			}
 		});
 		segmentsContainer.addView(exampleCard.getView());
+
+		testResultsContainer = inflater.inflate(
+				R.layout.bottom_sheet_item_with_descr_64dp, segmentsContainer, false);
+		testResultsContainer.setVisibility(View.GONE);
+		segmentsContainer.addView(testResultsContainer);
 
 		View bottomSpaceView = new View(app);
 		int space = (int) getResources().getDimension(R.dimen.empty_state_text_button_padding_top);
@@ -381,6 +391,47 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 					+ "," + endPoint.getLongitude()
 					+ "?" + "geometries=geojson";
 		}
+	}
+
+	private void testEngineWork() {
+		final ServerType server = engine.serverType;
+		final ExampleLocation location = selectedLocation;
+		AndroidNetworkUtils.sendRequestAsync(app, exampleCard.getEditedText(), null,
+				null, false, false, new OnRequestResultListener() {
+					@Override
+					public void onResult(String response) {
+						boolean resultOk = false;
+						if (response != null) {
+							try {
+								JSONObject obj = new JSONObject(response);
+
+								if (server == ServerType.GRAPHHOPER) {
+									resultOk = obj.has("paths");
+								} else if (server == ServerType.OSRM) {
+									resultOk = obj.has("routes");
+								}
+							} catch (JSONException e) {
+
+							}
+						}
+						showTestResults(resultOk, location);
+					}
+				});
+	}
+
+	private void showTestResults(boolean resultOk, ExampleLocation location) {
+		testResultsContainer.setVisibility(View.VISIBLE);
+		ImageView ivImage = testResultsContainer.findViewById(R.id.icon);
+		TextView tvTitle = testResultsContainer.findViewById(R.id.title);
+		TextView tvDescription = testResultsContainer.findViewById(R.id.description);
+		if (resultOk) {
+			ivImage.setImageDrawable(getContentIcon(R.drawable.ic_action_gdirections_dark));
+			tvTitle.setText(getString(R.string.shared_string_ok));
+		} else {
+			ivImage.setImageDrawable(getContentIcon(R.drawable.ic_action_alert));
+			tvTitle.setText(getString(R.string.message_error_recheck_parameters));
+		}
+		tvDescription.setText(location.getName());
 	}
 
 	@Override

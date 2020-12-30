@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="message_error_recheck_parameters">Error, recheck parameters</string>
     <string name="routing_engine_vehicle_type_car">Car</string>
     <string name="routing_engine_vehicle_type_bike">Bike</string>
     <string name="routing_engine_vehicle_type_foot">Foot</string>
