@@ -1,7 +1,7 @@
 package net.osmand.plus.openplacereviews;
 
-import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -13,15 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
 import net.osmand.PlatformUtil;
-import net.osmand.plus.BuildConfig;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
+
 import org.apache.commons.logging.Log;
 
 public class OprStartFragment extends BaseOsmAndFragment {
@@ -50,10 +53,7 @@ public class OprStartFragment extends BaseOsmAndFragment {
 		createAccount.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent i = new Intent(requireContext(), OPRWebviewActivity.class);
-				i.putExtra(OPRWebviewActivity.KEY_TITLE, getString(R.string.register_opr_create_new_account));
-				i.putExtra(OPRWebviewActivity.KEY_LOGIN, false);
-				startActivity(i);
+				handleCreateAccount();
 			}
 		});
 		View haveAccount = v.findViewById(R.id.register_opr_have_account);
@@ -62,14 +62,25 @@ public class OprStartFragment extends BaseOsmAndFragment {
 		haveAccount.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent i = new Intent(requireContext(), OPRWebviewActivity.class);
-				i.putExtra(OPRWebviewActivity.KEY_TITLE, getString(R.string.user_login));
-				i.putExtra(OPRWebviewActivity.KEY_LOGIN, true);
-				startActivity(i);
+				handleHaveAccount();
 			}
 		});
 		setURLSpan(v);
 		return v;
+	}
+
+	private void handleHaveAccount() {
+		String url = OPRConstants.getLoginUrl(requireContext());
+		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+		CustomTabsIntent customTabsIntent = builder.build();
+		customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
+	}
+
+	private void handleCreateAccount() {
+		String url = OPRConstants.getRegisterUrl(requireContext());
+		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+		CustomTabsIntent customTabsIntent = builder.build();
+		customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
 	}
 
 	private void setURLSpan(View v) {

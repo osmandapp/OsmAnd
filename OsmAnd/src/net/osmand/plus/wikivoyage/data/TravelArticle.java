@@ -45,6 +45,7 @@ public class TravelArticle {
 	String lang;
 	String contentsJson;
 	String aggregatedPartOf;
+	String fullContent;
 
 	@NonNull
 	public TravelArticleIdentifier generateIdentifier() {

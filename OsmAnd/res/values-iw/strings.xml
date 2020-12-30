@@ -3913,7 +3913,7 @@
     <string name="contour_lines_thanks">תודה לך על רכישת ‚קווי מתאר’</string>
     <string name="routing_attr_avoid_footways_description">הימנעות משבילי הולכי רגל</string>
     <string name="routing_attr_avoid_footways_name">הימנעות משבילי הולכי רגל</string>
-    <string name="osm_live_payment_desc_hw">המינוי חויב לתקופה הנבחרת. ניתן לבטל דרך ה־AppGallery בכל עת.</string>
+    <string name="osm_live_payment_desc_hw">המינוי מחויב לפי התקופה הנבחרת. ניתן לבטל אותו דרך ה־AppGallery בכל עת.</string>
     <string name="osm_live_payment_subscription_management_hw">חשבון ה־AppGallery שלך יחויב עם אישור הרכישה.
 \n
 \nתוקף המינוי מתארך אוטומטי אלא אם כן בוטל בטרם תאריך החידוש. החשבון שלך יחויב על תקופת החידוש (חודש/שלושה חודשים/שנה) רק בתאריך החידוש.
@@ -4023,4 +4023,10 @@
     <string name="reverse_all_points">להפוך את כל הנקודות</string>
     <string name="profile_by_default_description">נא לבחור את הפרופיל בו יעשה שימוש עם הפעלת היישומון.</string>
     <string name="shared_string_last_used">שימוש אחרון</string>
+    <string name="routing_attr_prefer_hiking_routes_description">להעדיף מסלולי הליכה</string>
+    <string name="routing_attr_prefer_hiking_routes_name">להעדיף מסלולי הליכה</string>
+    <string name="routing_attr_allow_streams_description">לאפשר נחלים וניקוזים</string>
+    <string name="routing_attr_allow_streams_name">לאפשר נחלים וניקוזים</string>
+    <string name="routing_attr_allow_intermittent_description">לאפשר מקטעים עם דרכי מים עונתיים</string>
+    <string name="routing_attr_allow_intermittent_name">לאפשר מקטעים עם דרכי מים עונתיים</string>
 </resources>

@@ -65,6 +65,7 @@ import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -1853,9 +1854,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 										new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location)));
 							}
 							if (startPoint != null) {
-								targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
-								targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
-								targetPointsHelper.updateRouteAndRefresh(true);
+								int intermediateSize = targetPointsHelper.getIntermediatePoints().size();
+								if (intermediateSize > 1) {
+									WaypointDialogHelper.reverseAllPoints(app, mapActivity, mapActivity.getDashboard().getWaypointDialogHelper());
+								} else {
+									WaypointDialogHelper.switchStartAndFinish(mapActivity.getMyApplication(),
+											mapActivity, mapActivity.getDashboard().getWaypointDialogHelper(), true);
+								}
 							} else {
 								app.showShortToastMessage(R.string.route_add_start_point);
 							}

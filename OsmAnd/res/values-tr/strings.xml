@@ -3976,4 +3976,10 @@
     <string name="reverse_all_points">Tüm noktaları tersine çevir</string>
     <string name="profile_by_default_description">Uygulama başlangıcında kullanılacak profili seçin.</string>
     <string name="shared_string_last_used">Son kullanılan</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Yürüyüş güzergahlarını tercih edin</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Yürüyüş güzergahlarını tercih et</string>
+    <string name="routing_attr_allow_streams_description">Dere ve kanalizasyonlara izin verin</string>
+    <string name="routing_attr_allow_streams_name">Dere ve kanalizasyonlara izin ver</string>
+    <string name="routing_attr_allow_intermittent_description">Aralıklı su yollarına izin verin</string>
+    <string name="routing_attr_allow_intermittent_name">Aralıklı su yollarına izin ver</string>
 </resources>

@@ -161,7 +161,8 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 				}
 				TravelArticle oldArticle = (TravelArticle) oldItem;
 				TravelArticle newArticle = (TravelArticle) newItem;
-				return oldArticle.getRouteId().equals(newArticle.getRouteId())
+				return oldArticle.getRouteId() != null && oldArticle.getLang() != null &&
+						oldArticle.getRouteId().equals(newArticle.getRouteId())
 						&& oldArticle.getLang().equals(newArticle.getLang());
 			}
 			return false;

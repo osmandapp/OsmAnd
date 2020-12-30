@@ -46,6 +46,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TravelObfHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
+	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.travel.obf";
 	public static final String ROUTE_ARTICLE = "route_article";
 	public static final int POPULAR_ARTICLES_SEARCH_RADIUS = 100000;
 	public static final int ARTICLE_SEARCH_RADIUS = 50000;
@@ -547,5 +548,10 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public String getSelectedTravelBookName() {
 		return "";
+	}
+
+	@Override
+	public String getWikivoyageFileName() {
+		return WORLD_WIKIVOYAGE_FILE_NAME;
 	}
 }

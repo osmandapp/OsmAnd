@@ -142,7 +142,9 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 	public void addNeededMapsCard(TravelNeededMapsCard card) {
 		this.neededMapsCard = card;
-		if (addItem(getNeededMapsCardPosition(), card)) {
+		if (neededMapsCardExists(getNeededMapsCardPosition())) {
+			updateNeededMapsCard(false);
+		} else if (addItem(getNeededMapsCardPosition(), card)) {
 			notifyDataSetChanged();
 		}
 	}
@@ -183,7 +185,9 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 	public void addDownloadUpdateCard(TravelDownloadUpdateCard card) {
 		this.downloadCard = card;
-		if (addItem(getDownloadUpdateCardPosition(), card)) {
+		if (downloadUpdateCardExists(getDownloadUpdateCardPosition())) {
+			updateDownloadUpdateCard(false);
+		} else if (addItem(getDownloadUpdateCardPosition(), card)) {
 			notifyDataSetChanged();
 		}
 	}

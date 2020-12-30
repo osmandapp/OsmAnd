@@ -242,41 +242,43 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	// switch start & finish
-	public static void switchStartAndFinish(TargetPointsHelper targetPointsHelper, TargetPoint finish,
-											Activity ctx, TargetPoint start, OsmandApplication app,
-											WaypointDialogHelper helper) {
+	public static void switchStartAndFinish(OsmandApplication app, Activity ctx, WaypointDialogHelper helper, boolean updateRoute) {
+		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
+		TargetPoint finish = targetsHelper.getPointToNavigate();
+		TargetPoint start = targetsHelper.getPointToStart();
 		if (finish == null) {
 			app.showShortToastMessage(R.string.mark_final_location_first);
 		} else {
-			targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),
-					finish.getLongitude()), false, finish.getPointDescription(ctx));
-			if (start == null) {
-				Location loc = app.getLocationProvider().getLastKnownLocation();
-				if (loc != null) {
-					targetPointsHelper.navigateToPoint(new LatLon(loc.getLatitude(),
-							loc.getLongitude()), true, -1);
-				}
-			} else {
-				targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(),
-						start.getLongitude()), true, -1, start.getPointDescription(ctx));
-			}
+			switchStartAndFinish(app, start, finish, updateRoute);
 			updateControls(ctx, helper);
 		}
 	}
 
-	public static void reverseAllPoints(OsmandApplication app, Activity ctx,
-										WaypointDialogHelper helper) {
-		TargetPointsHelper targets = app.getTargetPointsHelper();
-		if (!targets.getAllPoints().isEmpty()) {
-			List<TargetPoint> points = targets.getAllPoints();
-			Collections.reverse(points);
-			TargetPoint start = points.get(0);
-			targets.setStartPoint(start.point, false, start.getOriginalPointDescription());
-			points.remove(start);
-			targets.reorderAllTargetPoints(points, true);
-			updateControls(ctx, helper);
+	private static void switchStartAndFinish(OsmandApplication app, TargetPoint start, TargetPoint finish, boolean updateRoute) {
+		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
+		targetsHelper.setStartPoint(new LatLon(finish.getLatitude(), finish.getLongitude()),
+				false, finish.getPointDescription(app));
+		if (start == null) {
+			Location loc = app.getLocationProvider().getLastKnownLocation();
+			if (loc != null) {
+				targetsHelper.navigateToPoint(new LatLon(loc.getLatitude(),
+						loc.getLongitude()), updateRoute, -1);
+			}
+		} else {
+			targetsHelper.navigateToPoint(new LatLon(start.getLatitude(),
+					start.getLongitude()), updateRoute, -1, start.getPointDescription(app));
 		}
+	}
+
+	public static void reverseAllPoints(OsmandApplication app, Activity ctx, WaypointDialogHelper helper) {
+		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
+		TargetPoint finish = targetsHelper.getPointToNavigate();
+		TargetPoint start = targetsHelper.getPointToStart();
+		switchStartAndFinish(app, start, finish, false);
+		List<TargetPoint> points = targetsHelper.getIntermediatePoints();
+		Collections.reverse(points);
+		targetsHelper.reorderIntermediatePoints(points, true);
+		updateControls(ctx, helper);
 	}
 
 	public static void updateControls(Activity ctx, WaypointDialogHelper helper) {
@@ -492,15 +494,7 @@ public class WaypointDialogHelper {
 							MapActivity mapActivity = getMapActivity();
 							if (mapActivity != null) {
 								OsmandApplication app = mapActivity.getMyApplication();
-								TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
-								WaypointDialogHelper.switchStartAndFinish(
-										targetsHelper,
-										targetsHelper.getPointToNavigate(),
-										mapActivity,
-										targetsHelper.getPointToStart(),
-										app,
-										mapActivity.getDashboard().getWaypointDialogHelper()
-								);
+								switchStartAndFinish(app, mapActivity, mapActivity.getDashboard().getWaypointDialogHelper(), true);
 							}
 							dismiss();
 						}
@@ -508,27 +502,26 @@ public class WaypointDialogHelper {
 					.create();
 			items.add(reorderStartAndFinishItem);
 
-			BaseBottomSheetItem reorderAllItems = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_sort_reverse_order))
-					.setTitle(getString(R.string.reverse_all_points))
-					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							MapActivity mapActivity = getMapActivity();
-							if (mapActivity != null) {
-								WaypointDialogHelper.reverseAllPoints(
-										app,
-										mapActivity,
-										mapActivity.getDashboard().getWaypointDialogHelper()
-								);
+			if (!Algorithms.isEmpty(targetsHelper.getIntermediatePoints())) {
+				BaseBottomSheetItem reorderAllItems = new SimpleBottomSheetItem.Builder()
+						.setIcon(getContentIcon(R.drawable.ic_action_sort_reverse_order))
+						.setTitle(getString(R.string.reverse_all_points))
+						.setLayoutId(R.layout.bottom_sheet_item_simple)
+						.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								MapActivity mapActivity = getMapActivity();
+								if (mapActivity != null) {
+									WaypointDialogHelper.reverseAllPoints(
+											app,
+											mapActivity,
+											mapActivity.getDashboard().getWaypointDialogHelper()
+									);
+								}
+								dismiss();
 							}
-							dismiss();
-						}
-					})
-					.create();
-			int intermediateSize = targetsHelper.getIntermediatePoints().size();
-			if (intermediateSize > 2) {
+						})
+						.create();
 				items.add(reorderAllItems);
 			}
 

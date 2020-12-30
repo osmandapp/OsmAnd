@@ -48,6 +48,7 @@ public class TravelDbHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelDbHelper.class);
 
+	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.sqlite";
 	private static final String ARTICLES_TABLE_NAME = "travel_articles";
 	private static final String POPULAR_TABLE_NAME = "popular_articles";
 	private static final String ARTICLES_POP_INDEX = "popularity_index";
@@ -185,6 +186,11 @@ public class TravelDbHelper implements TravelHelper {
 			return selectedTravelBook.getName();
 		}
 		return null;
+	}
+
+	@Override
+	public String getWikivoyageFileName() {
+		return WORLD_WIKIVOYAGE_FILE_NAME;
 	}
 
 	public List<File> getExistingTravelBooks() {

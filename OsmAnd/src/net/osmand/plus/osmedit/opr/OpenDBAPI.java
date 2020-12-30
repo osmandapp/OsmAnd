@@ -37,6 +37,7 @@ import static org.openplacereviews.opendb.SecUtils.signMessageWithKeyBase64;
 
 
 public class OpenDBAPI {
+	public static final String PURPOSE = "osmand-android";
 	private static final Log log = PlatformUtil.getLog(SecUtils.class);
 	private static final String checkLoginEndpoint = "api/auth/user-check-loginkey?";
 	private static final String LOGIN_SUCCESS_MESSAGE = "{\"result\":\"OK\"}";
@@ -45,7 +46,7 @@ public class OpenDBAPI {
 	/*
 	 * method for check if user is loggined in blockchain
 	 * params
-	 *  - username: blockchain username in format "openplacereviews:test_1"
+	 *  - username: blockchain username in format "openplacereviews"
 	 *  - privatekey: "base64:PKCS#8:actualKey"
 	 * Need to encode key
 	 * Do not call on mainThread
@@ -53,7 +54,8 @@ public class OpenDBAPI {
 	public boolean checkPrivateKeyValid(String baseUrl, String username, String privateKey) {
 		String url = null;
 		try {
-			url = baseUrl + checkLoginEndpoint +
+			String purposeParam = "purpose=" + PURPOSE;
+			url = baseUrl + checkLoginEndpoint + purposeParam + "&" +
 					"name=" +
 					username +
 					"&" +
@@ -74,7 +76,7 @@ public class OpenDBAPI {
 			Security.addProvider(new BouncyCastleProvider());
 		}
 		KeyPair kp = SecUtils.getKeyPair(ALGO_EC, privateKey, null);
-		String signed = username + ":opr-web";
+		String signed = username + ":" + PURPOSE;
 
 		JsonFormatter formatter = new JsonFormatter();
 		OPRImage oprImage = new GsonBuilder().create().fromJson(image, OPRImage.class);

@@ -9,7 +9,6 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -119,6 +118,8 @@ public class TravelLocalDataHelper {
 			saved.lat = article.lat;
 			saved.lon = article.lon;
 			saved.routeId = article.routeId;
+			saved.fullContent = article.getContent();
+			saved.contentsJson = article.contentsJson;
 			savedArticles.add(saved);
 			dbHelper.addSavedArticle(saved);
 			notifySavedUpdated();
@@ -162,6 +163,18 @@ public class TravelLocalDataHelper {
 		return null;
 	}
 
+	@Nullable
+	public TravelArticle getSavedArticle(String routeId, String lang) {
+		for (TravelArticle article : savedArticles) {
+			if (article.routeId != null && article.routeId.equals(routeId)
+					&& article.lang != null && article.lang.equals(lang)) {
+				article.content = article.fullContent;
+				return article;
+			}
+		}
+		return null;
+	}
+
 	public interface Listener {
 
 		void savedArticlesUpdated();
@@ -169,7 +182,7 @@ public class TravelLocalDataHelper {
 
 	private static class WikivoyageLocalDataDbHelper {
 
-		private static final int DB_VERSION = 5;
+		private static final int DB_VERSION = 6;
 		private static final String DB_NAME = "wikivoyage_local_data";
 
 		private static final String HISTORY_TABLE_NAME = "wikivoyage_search_history";
@@ -204,6 +217,8 @@ public class TravelLocalDataHelper {
 		private static final String BOOKMARKS_COL_LAT = "lat";
 		private static final String BOOKMARKS_COL_LON = "lon";
 		private static final String BOOKMARKS_COL_ROUTE_ID = "route_id";
+		private static final String BOOKMARKS_COL_CONTENT_JSON = "content_json";
+		private static final String BOOKMARKS_COL_CONTENT = "content";
 
 		private static final String BOOKMARKS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 				BOOKMARKS_TABLE_NAME + " (" +
@@ -215,7 +230,9 @@ public class TravelLocalDataHelper {
 				BOOKMARKS_COL_TRAVEL_BOOK + " TEXT, " +
 				BOOKMARKS_COL_LAT + " double, " +
 				BOOKMARKS_COL_LON + " double, " +
-				BOOKMARKS_COL_ROUTE_ID + " TEXT" + ");";
+				BOOKMARKS_COL_ROUTE_ID + " TEXT, " +
+				BOOKMARKS_COL_CONTENT_JSON + " TEXT, " +
+				BOOKMARKS_COL_CONTENT + " TEXT" + ");";
 
 		private static final String BOOKMARKS_TABLE_SELECT = "SELECT " +
 				BOOKMARKS_COL_ARTICLE_TITLE + ", " +
@@ -225,7 +242,9 @@ public class TravelLocalDataHelper {
 				BOOKMARKS_COL_PARTIAL_CONTENT + ", " +
 				BOOKMARKS_COL_LAT + ", " +
 				BOOKMARKS_COL_LON + ", " +
-				BOOKMARKS_COL_ROUTE_ID +
+				BOOKMARKS_COL_ROUTE_ID + ", " +
+				BOOKMARKS_COL_CONTENT_JSON + ", " +
+				BOOKMARKS_COL_CONTENT +
 				" FROM " + BOOKMARKS_TABLE_NAME;
 
 		private final OsmandApplication context;
@@ -277,6 +296,10 @@ public class TravelLocalDataHelper {
 			}
 			if (oldVersion < 5) {
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_ROUTE_ID + " TEXT");
+			}
+			if (oldVersion < 6) {
+				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_CONTENT_JSON + " TEXT");
+				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_CONTENT + " TEXT");
 			}
 		}
 
@@ -428,11 +451,14 @@ public class TravelLocalDataHelper {
 							BOOKMARKS_COL_TRAVEL_BOOK + ", " +
 							BOOKMARKS_COL_LAT + ", " +
 							BOOKMARKS_COL_LON + ", " +
-							BOOKMARKS_COL_ROUTE_ID +
-							") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+							BOOKMARKS_COL_ROUTE_ID + ", " +
+							BOOKMARKS_COL_CONTENT_JSON + ", " +
+							BOOKMARKS_COL_CONTENT +
+							") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 					conn.execSQL(query, new Object[]{article.title, article.lang,
 							article.aggregatedPartOf, article.imageTitle, article.content,
-							travelBook, article.lat, article.lon, article.routeId});
+							travelBook, article.lat, article.lon, article.routeId, article.contentsJson,
+							article.fullContent});
 				} finally {
 					conn.close();
 				}
@@ -484,6 +510,8 @@ public class TravelLocalDataHelper {
 			res.lat = cursor.getDouble(cursor.getColumnIndex(BOOKMARKS_COL_LAT));
 			res.lon = cursor.getDouble(cursor.getColumnIndex(BOOKMARKS_COL_LON));
 			res.routeId = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_ROUTE_ID));
+			res.contentsJson = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_CONTENT_JSON));
+			res.fullContent = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_CONTENT));
 
 			return res;
 		}

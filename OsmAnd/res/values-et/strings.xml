@@ -3856,31 +3856,31 @@
 \n
 \nKui see on lubatud, kasutab OsmAnd süsteemi ajalõpu sätet.</string>
     <string name="use_system_screen_timeout">Kasutage süsteemi ekraani ajalõppu</string>
-    <string name="release_3_6">"• Profiilid: nüüd saate muuta järjestust, määrata kaardi ikooni, muuta kõiki põhiprofiilide sätteid ja taastada need vaikeseadetesse
+    <string name="release_3_6">• Profiilid: nüüd saate muuta järjestust, määrata kaardi ikooni, muuta kõiki põhiprofiilide sätteid ja taastada need vaikeseadetesse
 \n
 \n • Navigatsioonis on lisatud väljumisnumber
 \n
-\n  • Ümber töötatud pistikprogrammi seaded
+\n • Ümber töötatud pistikprogrammi seaded
 \n
-\n  • Kõigile profiilidele kiireks juurdepääsuks kuvatakse ümbertöödeldud seadete ekraan
+\n • Kõigile profiilidele kiireks juurdepääsuks kuvatakse ümbertöödeldud seadete ekraan
 \n
-\n  • Lisatud võimalus seadete kopeerimiseks teiselt profiililt
+\n • Lisatud võimalus seadete kopeerimiseks teisest profiilist
 \n
-\n  • Lisatud võime muuta järjestust või peita HP kategooriaid otsingus
+\n • Lisatud võime muuta järjestust või peita HP kategooriaid otsingus
 \n
-\n  • POI ikoonid kaardil õigesti joondatud
+\n • POI ikoonid on kaardil õigesti joondatud
 \n
-\n  • Kaardi seadistamiseks on lisatud päikeseloojangu / päikesetõusu andmed
+\n • Kaardi seadistamiseks on lisatud päikeseloojangu / päikesetõusu andmed
 \n
-\n  • Lisatud kaardil kodu / töökoha ikoonid
+\n • Kaardile on lisatud kodu / töökoha ikoonid
 \n
-\n  • Lisatud seadetes mitmerealise kirjelduse tugi
+\n • Seadetesse on lisatud mitmerealise kirjelduse tugi
 \n
-\n  • Lisas Jaapani kaardile õige transliteratsiooni
+\n • Jaapani kaardile on lisatud õige transliteratsioon
 \n
-\n  • Lisatud Antarktika kaart
+\n • Lisatud on Antarktika kaart
 \n
-\n"</string>
+\n</string>
     <string name="route_recalculation_dist_descr">Teekond arvutatakse ümber, kui vahemaa teekonnani on suurem kui määratud parameeter</string>
     <string name="plugin_disabled_descr">See pistikprogramm on eraldi rakendus, peate selle eraldi eemaldama, kui te ei kavatse seda enam kasutada.
 \n
@@ -3892,25 +3892,25 @@
     <string name="ui_customization_short_descr">Sahtli osad, kontekstimenüü</string>
     <string name="shared_string_drawer">Sahtel</string>
     <string name="search_poi_types_descr">Ühendage erinevate kategooriate HP-de tüübid. Kõigi valimiseks puudutage lülitit, kategooria valimiseks puudutage vasakut serva.</string>
-    <string name="release_3_7">"• Uued võrguühenduseta nõlvakaardid
+    <string name="release_3_7">• Uued võrguühenduseta nõlvakaardid
 \n
 \n • Lemmikute ja GPX-teekonnapunktide täielik kohandamine - kohandatud värvid, ikoonid, kujundid
 \n
-\n  • Kohandatud üksuste järjekorda jaotistes \"Kontekstimenüü\", \"Kaardi seadistamine\" ja \"Sahtel\"
+\n • Kohandatud üksuste järjekorda jaotistes \"Kontekstimenüü\", \"Kaardi seadistamine\" ja \"Sahtel\"
 \n
-\n  • Vikipeedia eraldi kihina jaotises Kaardi seadistamine valige ainult vajalikud keeled
+\n • Vikipeedia eraldi kihina jaotises Kaardi seadistamine valige ainult vajalikud keeled
 \n
-\n  • Loodud oma HP-de filter / kaardid täieliku paindlikkusega
+\n • Loodud oma HP-de filter / kaardid täieliku paindlikkusega
 \n
-\n  • Lisatud valikud kohandatud profiilide sätete taastamiseks
+\n • Lisatud valikud kohandatud profiilide sätete taastamiseks
 \n
-\n  • Täielikud GPX-marsruudid navigeerimisest toetavad liiklusradasid ja täitke pööramisjuhised
+\n • Täielikud GPX-marsruudid navigeerimisest toetavad liiklusradasid ja täitke pööramisjuhised
 \n
-\n  • Parandatud tahvelarvutite kasutajaliidese suurused
+\n • Parandatud tahvelarvutite kasutajaliidese suurused
 \n
-\n  • Parandatud vead RTL-iga
+\n • Parandatud vead RTL-iga
 \n
-\n"</string>
+\n</string>
     <string name="system_screen_timeout_descr">Lülitab ekraani välja vastavalt süsteemi ekraani aegumisele.</string>
     <string name="system_screen_timeout">Kasuta süsteemi ekraani ajalõppu</string>
     <string name="turn_screen_on_descr">Valige ekraani äratussuvandid (veenduge, et seadme lukustamisel oleks esiplaanil OsmAnd):</string>
@@ -3948,4 +3948,6 @@
 \n
 \n</string>
     <string name="reverse_all_points">Pööra kõik punktid ümber</string>
+    <string name="profile_by_default_description">Vali rakenduse käivitamisel kasutatav profiil.</string>
+    <string name="shared_string_last_used">Viimati kasutatud</string>
 </resources>

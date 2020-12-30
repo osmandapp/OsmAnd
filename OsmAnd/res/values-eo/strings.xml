@@ -517,7 +517,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Usona voja maparo</string>
     <string name="routing_attr_no_new_routing_name">Sen v1.9 kursaj reguloj</string>
     <string name="routing_attr_no_new_routing_description">Ne uzi regulojn por difini kurson enkondukitajn en v1.9.</string>
-    <string name="dash_download_msg_none">Ĉu elŝuti eksterretajn mapojn?</string>
+    <string name="dash_download_msg_none">Ĉu elŝuti malkonektajn mapojn\?</string>
     <string name="dash_download_msg">Vi elŝutis %1$s mapojn</string>
     <string name="dash_download_new_one">Elŝuti novan mapon</string>
     <string name="dash_download_manage">Administri</string>
@@ -1606,7 +1606,7 @@
     <string name="voice">Registrita voĉo</string>
     <string name="voices">Voĉaj anoncoj</string>
     <string name="no_vector_map_loaded">Ne ŝargis vektorajn mapojn</string>
-    <string name="vector_data">Eksterretaj vektoraj mapoj</string>
+    <string name="vector_data">Malkonektaj vektoraj mapoj</string>
     <string name="transport_context_menu">Serĉi transporton ĉe haltejo</string>
     <string name="poi_context_menu_modify">Modifi interesejon</string>
     <string name="poi_context_menu_delete">Forigi interesejon</string>
@@ -1867,7 +1867,8 @@
     <string name="shared_string_card_was_hidden">Langeto kaŝita</string>
     <string name="shared_string_undo">Malfari</string>
     <string name="shared_string_skip">Transsalti</string>
-    <string name="offline_maps_and_navigation">Mapoj eksterretaj\nkaj navigado</string>
+    <string name="offline_maps_and_navigation">Malkonektaj mapoj
+\nkaj navigado</string>
     <string name="commit_poi">Enmeti interesejon</string>
     <string name="tab_title_basic">Bazaj</string>
     <string name="tab_title_advanced">Altnivelaj</string>
@@ -4006,16 +4007,24 @@
     <string name="plan_route_split_before">Dividi antaŭ</string>
     <string name="plan_route_split_after">Dividi post</string>
     <string name="plan_route_add_new_segment">Aldoni novan segmenton</string>
-    <string name="release_3_9">• aldonita agordo por el-/en-porti ĉiujn datumojn, inkluzivante agordojn, map‑datumojn kaj miajn lokojn
+    <string name="release_3_9">• eblo el-/en-porti ĉiujn datumojn, inkluzivante agordojn, map‑datumojn kaj miajn lokojn
 \n
 \n • plani kurson: diagramoj por segmentoj kun la kurso, aldonita eblo por krei kaj redakti plurajn segmentojn de kurso
-\n 
+\n
 \n • aldonita aŭtentiga metodo OAuth por OpenStreetMap, plibonigita fasado de OSM‑rilataj dialogujoj
-\n 
+\n
 \n • propraj koloroj por ŝatataj ejoj kaj navigadpunktoj de spuro
 \n
 \n</string>
     <string name="profile_type_osmand_string">OsmAnd‑profilo</string>
     <string name="profile_type_user_string">Profilo de uzanto</string>
     <string name="reverse_all_points">Inversigi ĉiujn punktojn</string>
+    <string name="profile_by_default_description">Elekti profolin, kiu estos uzita je starto de la aplikaĵo.</string>
+    <string name="shared_string_last_used">Antaŭe uzita</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Preferi piediradajn kursojn</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Preferi piediradajn kursojn</string>
+    <string name="routing_attr_allow_streams_description">Permesi navigi per riveretoj kaj fosaĵoj defluigaj</string>
+    <string name="routing_attr_allow_streams_name">Permesi riveretojn kaj fosaĵojn</string>
+    <string name="routing_attr_allow_intermittent_description">Permesi navigi per periode sekiĝantaj akvovojoj</string>
+    <string name="routing_attr_allow_intermittent_name">Permesi sezonajn akvovojojn</string>
 </resources>
