@@ -4004,4 +4004,6 @@
     <string name="routing_attr_prefer_hiking_routes_description">Pirivilégier les itinéraires de randonnée</string>
     <string name="routing_attr_allow_intermittent_description">Autoriser les voies navigables intermittentes</string>
     <string name="routing_attr_allow_intermittent_name">Autoriser les voies navigables intermittentes</string>
+    <string name="routing_attr_allow_streams_description">Autoriser les cours d’eau et les drains</string>
+    <string name="routing_attr_allow_streams_name">Autoriser les cours d’eau et les drains</string>
 </resources>

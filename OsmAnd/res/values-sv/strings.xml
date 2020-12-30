@@ -2915,4 +2915,22 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_languages">Språk</string>
     <string name="shared_string_language">Språk</string>
     <string name="shared_string_all_languages">Alla språk</string>
+    <string name="release_3_9">• La till inställning för att exportera och importera all data, inklusive inställningar, resurser, mina platser
+\n
+\n • Planera rutt: Grafer för seggraphs for track segments with route, and added the ability to create and edit multiple track segments
+\n
+\n • Added OAuth authentication method for OpenStreetMap, improved UI of OSM dialogs
+\n
+\n • Support custom colors for favorites and track waypoints
+\n
+\n</string>
+    <string name="reverse_all_points">Vänd alla punkter</string>
+    <string name="profile_by_default_description">Välj den profil som ska användas när appen startas.</string>
+    <string name="shared_string_last_used">Senast använd</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Föredra vandringsleder</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Föredra vandringsleder</string>
+    <string name="routing_attr_allow_streams_description">Tillåt strömmar och torrläggningar</string>
+    <string name="routing_attr_allow_streams_name">Tillåt strömmar och torrläggningar</string>
+    <string name="routing_attr_allow_intermittent_description">Tillåt vägar över vatten</string>
+    <string name="routing_attr_allow_intermittent_name">Tillåt vägar över vatten</string>
 </resources>

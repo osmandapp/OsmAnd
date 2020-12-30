@@ -37,6 +37,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
@@ -50,8 +51,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		TravelLocalDataHelper.Listener {
 
 	private static final String TAB_SELECTED = "tab_selected";
-	private static final String ROUTE_ID_KEY = "route_id_key";
-	private static final String SELECTED_LANG_KEY = "selected_lang_key";
+	private static final String ARTICLE_ID_KEY = "article_id";
+	private static final String SELECTED_LANG_KEY = "selected_lang";
 
 	private static final int EXPLORE_POSITION = 0;
 	private static final int SAVED_ARTICLES_POSITION = 1;
@@ -182,9 +183,9 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 					BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 					bottomNav.setSelectedItemId(R.id.action_saved_articles);
 				}
-				String articleId = intent.getStringExtra(ROUTE_ID_KEY);
+				TravelArticleIdentifier articleId = intent.getParcelableExtra(ARTICLE_ID_KEY);
 				String selectedLang = intent.getStringExtra(SELECTED_LANG_KEY);
-				if (!Algorithms.isEmpty(articleId)) {
+				if (articleId != null) {
 					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
 				}
 			}
@@ -201,8 +202,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			String title = WikiArticleHelper.decodeTitleFromTravelUrl(data.getQueryParameter("title"));
 			String selectedLang = data.getQueryParameter("lang");
 			if (!Algorithms.isEmpty(title) && !Algorithms.isEmpty(selectedLang)) {
-				String articleId = app.getTravelHelper().getArticleId(title, selectedLang);
-				if (!articleId.isEmpty()) {
+				TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(title, selectedLang);
+				if (articleId != null) {
 					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
 				}
 			}
@@ -279,7 +280,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 	private void applyIntentParameters(Intent intent, TravelArticle article) {
 		intent.putExtra(TAB_SELECTED, viewPager.getCurrentItem());
-		intent.putExtra(ROUTE_ID_KEY, article.getRouteId());
+		intent.putExtra(ARTICLE_ID_KEY, article.generateIdentifier());
 		intent.putExtra(SELECTED_LANG_KEY, article.getLang());
 	}
 
