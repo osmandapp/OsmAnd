@@ -43,7 +43,7 @@ public class CurrentStreetName {
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
 			isSet = !(Algorithms.isEmpty(nm) && Algorithms.isEmpty(rf) && Algorithms.isEmpty(dn));
-			streetName.text = RoutingHelperUtils.formatStreetName(nm, null, dn, "»");
+			streetName.text = RoutingHelperUtils.formatStreetName(nm, rf, dn, "»");
 			streetName.turnType = n.directionInfo.getTurnType();
 			streetName.shieldObject = n.directionInfo.getRouteDataObject();
 			if (streetName.turnType == null) {
@@ -62,7 +62,8 @@ public class CurrentStreetName {
 			if (rs != null) {
 				streetName.text = getRouteSegmentStreetName(routingHelper, rs, false);
 				if (Algorithms.isEmpty(streetName.text)) {
-					isSet = !Algorithms.isEmpty(getRouteSegmentStreetName(routingHelper, rs, true));
+					streetName.text = getRouteSegmentStreetName(routingHelper, rs, true);
+					isSet = !Algorithms.isEmpty(streetName.text);
 				} else {
 					isSet = true;
 				}
