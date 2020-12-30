@@ -15,10 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -65,6 +61,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
@@ -86,18 +87,20 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected void buildNearestWikiRow(View view) {
 	}
 
-	private void buildRow(View view, int iconId, String text, String textPrefix,
+	private void buildRow(View view, int iconId, String text, String textPrefix, String baseSocialMediaUrl,
 						  boolean collapsable, final CollapsableView collapsableView,
 						  int textColor, boolean isWiki, boolean isText, boolean needLinks,
 						  boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
-		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, collapsable, collapsableView, textColor,
+		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, baseSocialMediaUrl,
+				collapsable, collapsableView, textColor,
 				isWiki, isText, needLinks, isPhoneNumber, isUrl, matchWidthDivider, textLinesLimit);
 	}
 
 	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix,
-							boolean collapsable, final CollapsableView collapsableView,
-							int textColor, boolean isWiki, boolean isText, boolean needLinks,
-							boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
+							final String baseSocialMediaUrl, boolean collapsable,
+							final CollapsableView collapsableView, int textColor, boolean isWiki,
+							boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
+							boolean matchWidthDivider, int textLinesLimit) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -305,8 +308,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
 						}
 					} else {
+						String fullSocialMediaUrl;
+						if (baseSocialMediaUrl == null) {
+							fullSocialMediaUrl = text;
+						} else {
+							fullSocialMediaUrl = baseSocialMediaUrl + text;
+						}
+
 						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse(text));
+						intent.setData(Uri.parse(fullSocialMediaUrl));
 						v.getContext().startActivity(intent);
 					}
 				}
@@ -359,6 +369,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				continue;
 			}
 
+			String baseSocialMediaUrl = null;
 			String textPrefix = "";
 			CollapsableView collapsableView = null;
 			boolean collapsable = false;
@@ -390,6 +401,80 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			if (vl.startsWith("http://") || vl.startsWith("https://") || vl.startsWith("HTTP://") || vl.startsWith("HTTPS://")) {
 				isUrl = true;
+			}
+
+			if (!isUrl) {
+				isUrl = true;
+				baseSocialMediaUrl = "https://";
+
+				switch (key) {
+					case "facebook":
+						if (!vl.contains("facebook.com")) {
+							baseSocialMediaUrl = baseSocialMediaUrl + "www.facebook.com/";
+						}
+						break;
+
+					case "vk":
+						if (!vl.startsWith("vk.com")) {
+							baseSocialMediaUrl = baseSocialMediaUrl + "vk.com/";
+						}
+						break;
+
+					case "instagram":
+						if (!vl.contains("instagram.com")) {
+							baseSocialMediaUrl = baseSocialMediaUrl + "www.instagram.com/";
+						}
+						break;
+
+					case "twitter":
+						if (!vl.startsWith("twitter.com")) {
+							baseSocialMediaUrl = baseSocialMediaUrl + "twitter.com/";
+						}
+						break;
+
+					case "youtube":
+						// Only can process URL with domains and without HTTP,
+						// because account may be channel and user
+						if (!vl.contains("youtube.com")) {
+							baseSocialMediaUrl = null;
+							isUrl = false;
+						}
+						break;
+
+					case "ok":
+						if (!vl.startsWith("ok.ru")) {
+							baseSocialMediaUrl = baseSocialMediaUrl + "ok.ru";
+						}
+						break;
+
+					case "telegram":
+						// Telegram can have different domens (t.me, tgme.pro,..)
+						String telegramUrlWithoutHttp = "[a-zA-Z0-9-]+\\.[a-zA-Z0-9-]+/[a-zA-Z0-9_]+";
+						if (Pattern.matches(telegramUrlWithoutHttp, vl)) {
+							baseSocialMediaUrl = baseSocialMediaUrl + vl;
+						} else {
+							baseSocialMediaUrl = baseSocialMediaUrl + "t.me/";
+						}
+						break;
+
+					case "flickr":
+						if (!vl.contains("flickr.com")) {
+							baseSocialMediaUrl = baseSocialMediaUrl + "www.flickr.com/photos/";
+						}
+						break;
+
+					case "linkedin":
+						if (!vl.contains("linkedin.com")) {
+							baseSocialMediaUrl = null;
+							isUrl = false;
+						}
+						break;
+
+					default:
+						isUrl = false;
+						baseSocialMediaUrl = null;
+						break;
+				}
 			}
 
 			if (pType != null && !pType.isText()) {
@@ -553,13 +638,13 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						vl, collapsable, collapsableView, 0, false, true,
 						true, 0, "", false, false, matchWidthDivider, 0);
 			} else if (icon != null) {
-				row = new AmenityInfoRow(key, icon, textPrefix, vl, collapsable, collapsableView,
-						textColor, isWiki, isText, needLinks, poiTypeOrder, poiTypeKeyName,
-						isPhoneNumber, isUrl, matchWidthDivider, 0);
+				row = new AmenityInfoRow(key, icon, textPrefix, vl, baseSocialMediaUrl, collapsable,
+						collapsableView, textColor, isWiki, isText, needLinks, poiTypeOrder,
+						poiTypeKeyName, isPhoneNumber, isUrl, matchWidthDivider, 0);
 			} else {
-				row = new AmenityInfoRow(key, iconId, textPrefix, vl, collapsable, collapsableView,
-						textColor, isWiki, isText, needLinks, poiTypeOrder, poiTypeKeyName,
-						isPhoneNumber, isUrl, matchWidthDivider, 0);
+				row = new AmenityInfoRow(key, iconId, textPrefix, vl, baseSocialMediaUrl, collapsable,
+						collapsableView, textColor, isWiki, isText, needLinks, poiTypeOrder,
+						poiTypeKeyName, isPhoneNumber, isUrl, matchWidthDivider, 0);
 			}
 			if (isDescription) {
 				descriptions.add(row);
@@ -768,12 +853,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
 		if (info.icon != null) {
-			buildRow(view, info.icon, info.text, info.textPrefix, info.collapsable, info.collapsableView,
-					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber,
+			buildRow(view, info.icon, info.text, info.textPrefix, info.baseSocialMediaUrl,
+					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
+					info.needLinks, info.isPhoneNumber,
 					info.isUrl, info.matchWidthDivider, info.textLinesLimit);
 		} else {
-			buildRow(view, info.iconId, info.text, info.textPrefix, info.collapsable, info.collapsableView,
-					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber,
+			buildRow(view, info.iconId, info.text, info.textPrefix, info.baseSocialMediaUrl,
+					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
+					info.needLinks, info.isPhoneNumber,
 					info.isUrl, info.matchWidthDivider, info.textLinesLimit);
 		}
 	}
@@ -883,6 +970,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		private int iconId;
 		private String textPrefix;
 		private String text;
+		private String baseSocialMediaUrl;
 		private CollapsableView collapsableView;
 		private boolean collapsable;
 		private int textColor;
@@ -928,6 +1016,56 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			this.iconId = iconId;
 			this.textPrefix = textPrefix;
 			this.text = text;
+			this.collapsable = collapsable;
+			this.collapsableView = collapsableView;
+			this.textColor = textColor;
+			this.isWiki = isWiki;
+			this.isText = isText;
+			this.needLinks = needLinks;
+			this.order = order;
+			this.name = name;
+			this.isPhoneNumber = isPhoneNumber;
+			this.isUrl = isUrl;
+			this.matchWidthDivider = matchWidthDivider;
+			this.textLinesLimit = textLinesLimit;
+		}
+
+		public AmenityInfoRow(String key, Drawable icon, String textPrefix, String text,
+							  String baseSocialMediaUrl, boolean collapsable,
+							  CollapsableView collapsableView, int textColor, boolean isWiki,
+							  boolean isText, boolean needLinks, int order, String name,
+							  boolean isPhoneNumber, boolean isUrl,
+							  boolean matchWidthDivider, int textLinesLimit) {
+			this.key = key;
+			this.icon = icon;
+			this.textPrefix = textPrefix;
+			this.text = text;
+			this.baseSocialMediaUrl = baseSocialMediaUrl;
+			this.collapsable = collapsable;
+			this.collapsableView = collapsableView;
+			this.textColor = textColor;
+			this.isWiki = isWiki;
+			this.isText = isText;
+			this.needLinks = needLinks;
+			this.order = order;
+			this.name = name;
+			this.isPhoneNumber = isPhoneNumber;
+			this.isUrl = isUrl;
+			this.matchWidthDivider = matchWidthDivider;
+			this.textLinesLimit = textLinesLimit;
+		}
+
+		public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
+							  String baseSocialMediaUrl, boolean collapsable,
+							  CollapsableView collapsableView, int textColor, boolean isWiki,
+							  boolean isText, boolean needLinks, int order, String name,
+							  boolean isPhoneNumber, boolean isUrl,
+							  boolean matchWidthDivider, int textLinesLimit) {
+			this.key = key;
+			this.iconId = iconId;
+			this.textPrefix = textPrefix;
+			this.text = text;
+			this.baseSocialMediaUrl = baseSocialMediaUrl;
 			this.collapsable = collapsable;
 			this.collapsableView = collapsableView;
 			this.textColor = textColor;
