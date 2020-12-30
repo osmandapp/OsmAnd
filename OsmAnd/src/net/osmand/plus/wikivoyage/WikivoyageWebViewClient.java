@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -22,6 +23,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 
 import java.io.File;
@@ -67,8 +69,8 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		if (url.contains(WIKIVOYAGE_DOMAIN) && isWebPage) {
 			String lang = WikiArticleHelper.getLang(url);
 			String articleName = WikiArticleHelper.getArticleNameFromUrl(url, lang);
-			String articleId = app.getTravelHelper().getArticleId(articleName, lang);
-			if (!articleId.isEmpty()) {
+			TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(articleName, lang);
+			if (articleId != null) {
 				WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, articleId, lang);
 			} else {
 				WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
@@ -83,8 +85,8 @@ public class WikivoyageWebViewClient extends WebViewClient {
 			WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
 			if (article != null) {
-				List<GPXUtilities.WptPt> points = article.getGpxFile().getPoints();
-				GPXUtilities.WptPt gpxPoint = null;
+				List<WptPt> points = article.getGpxFile().getPoints();
+				WptPt gpxPoint = null;
 				String coordinates = url.replace(PREFIX_GEO, "");
 				double lat;
 				double lon;
@@ -96,7 +98,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 					Log.w(TAG, e.getMessage(), e);
 					return true;
 				}
-				for (GPXUtilities.WptPt point : points) {
+				for (WptPt point : points) {
 					if (point.getLatitude() == lat && point.getLongitude() == lon) {
 						gpxPoint = point;
 						break;

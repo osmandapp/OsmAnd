@@ -39,6 +39,7 @@ import com.squareup.picasso.RequestCreator;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Metadata;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PicassoUtils;
 import net.osmand.data.PointDescription;
@@ -422,7 +423,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			return null;
 		}
 
-		TravelArticle article = getTravelArticle(gpx.metadata);
+		TravelArticle article = getTravelArticle(gpx);
 		if (article != null) {
 			return createTravelArticleCard(context, article);
 		}
@@ -448,7 +449,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	@Nullable
-	private String getMetadataDescription(@NonNull GPXUtilities.Metadata metadata) {
+	private String getMetadataDescription(@NonNull Metadata metadata) {
 		String descHtml = metadata.desc;
 		if (TextUtils.isEmpty(descHtml)) {
 			Map<String, String> extensions = metadata.getExtensionsToRead();
@@ -466,7 +467,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	@Nullable
-	private String getMetadataImageLink(@NonNull GPXUtilities.Metadata metadata) {
+	private String getMetadataImageLink(@NonNull Metadata metadata) {
 		String link = metadata.link;
 		if (!TextUtils.isEmpty(link)) {
 			String lowerCaseLink = link.toLowerCase();
@@ -482,11 +483,12 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	@Nullable
-	private TravelArticle getTravelArticle(@NonNull GPXUtilities.Metadata metadata) {
+	private TravelArticle getTravelArticle(@NonNull GPXFile gpx) {
+		Metadata metadata = gpx.metadata;
 		String title = metadata.getArticleTitle();
 		String lang = metadata.getArticleLang();
 		if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(lang)) {
-			return app.getTravelHelper().getArticleByTitle(title, lang);
+			return app.getTravelHelper().getArticleByTitle(title, gpx.getRect(), lang);
 		}
 		return null;
 	}
@@ -506,8 +508,8 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			public void onClick(View v) {
 				TrackActivity activity = getTrackActivity();
 				if (activity != null) {
-					WikivoyageArticleDialogFragment.showInstance(app,
-							activity.getSupportFragmentManager(), article.getRouteId(), article.getLang());
+					WikivoyageArticleDialogFragment.showInstance(app, activity.getSupportFragmentManager(),
+							article.generateIdentifier(), article.getLang());
 				}
 			}
 		};

@@ -112,8 +112,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 					Object item = adapter.getItem(pos);
 					if (item instanceof WikivoyageSearchResult) {
 						WikivoyageSearchResult res = (WikivoyageSearchResult) item;
-						WikivoyageArticleDialogFragment
-								.showInstance(fm, res.getRouteId(), new ArrayList<>(res.getLangs()));
+						WikivoyageArticleDialogFragment.showInstance(fm, res.getArticleId(), new ArrayList<>(res.getLangs()));
 					} else if (item instanceof WikivoyageSearchHistoryItem) {
 						WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
 						WikivoyageArticleDialogFragment
