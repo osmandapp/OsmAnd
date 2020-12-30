@@ -17,6 +17,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -25,6 +26,7 @@ import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -45,15 +47,21 @@ public class SelectedGpxMenuController extends MenuController {
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
+				OsmandApplication app = mapActivity.getMyApplication();
 				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-				if (selectedGpxFile.isShowCurrentTrack()) {
-					intent.putExtra(TrackActivity.CURRENT_RECORDING, true);
+				if (Version.isDeveloperVersion(app)) {
+					mapActivity.getContextMenu().hide(false);
+					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile.getGpxFile().path, selectedGpxFile.isShowCurrentTrack());
 				} else {
-					intent.putExtra(TrackActivity.TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
+					Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
+					if (selectedGpxFile.isShowCurrentTrack()) {
+						intent.putExtra(TrackActivity.CURRENT_RECORDING, true);
+					} else {
+						intent.putExtra(TrackActivity.TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
+					}
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					mapActivity.startActivity(intent);
 				}
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				mapActivity.startActivity(intent);
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
