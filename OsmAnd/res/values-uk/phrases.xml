@@ -3887,4 +3887,7 @@
     <string name="poi_lavoir">Громадська пральня</string>
     <string name="poi_waste_transfer_station">Станція перевезення відходів</string>
     <string name="poi_swimming_area">Плавальний майданчик</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Тунель кажанів</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Міст кажанів</string>
+    <string name="poi_wildlife_crossing">Переправа диких тварин</string>
 </resources>
