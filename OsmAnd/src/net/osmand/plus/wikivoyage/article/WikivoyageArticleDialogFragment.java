@@ -48,6 +48,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -381,6 +382,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 									   @NonNull TravelArticleIdentifier articleId,
 									   @Nullable String selectedLang) {
 		ArrayList<String> langs = app.getTravelHelper().getArticleLangs(articleId);
+		if (langs.isEmpty()) {
+			langs = new ArrayList<>(Collections.singletonList(selectedLang));
+		}
 		return showInstance(fm, articleId, langs, selectedLang);
 	}
 

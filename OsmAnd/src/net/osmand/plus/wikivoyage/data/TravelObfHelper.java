@@ -365,7 +365,8 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @NonNull String lang) {
 		TravelArticle article = getCachedArticle(articleId, lang);
-		return article == null ? findArticleById(articleId, lang) : article;
+		article = article == null ? findArticleById(articleId, lang) : article;
+		return article == null ? localDataHelper.getSavedArticle(articleId.routeId, lang) : article;
 	}
 
 	@Nullable
@@ -553,5 +554,16 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public String getWikivoyageFileName() {
 		return WORLD_WIKIVOYAGE_FILE_NAME;
+	}
+
+	@NonNull
+	@Override
+	public TravelArticle getUpdatedArticle(@NonNull TravelArticle article) {
+		TravelArticleIdentifier identifier = article.generateIdentifier();
+		TravelArticle newArticle = getArticleById(identifier, article.lang);
+		if (newArticle == null) {
+			newArticle = article;
+		}
+		return newArticle;
 	}
 }

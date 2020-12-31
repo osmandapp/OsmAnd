@@ -9,6 +9,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -120,8 +121,7 @@ public class TravelLocalDataHelper {
 			saved.routeId = article.routeId;
 			saved.fullContent = article.getContent();
 			saved.contentsJson = article.contentsJson;
-			saved.setTravelBook(article.getTravelBook());
-			saved.setLastModified(article.getLastModified());
+			saved.file = article.getFile();
 			savedArticles.add(saved);
 			dbHelper.addSavedArticle(saved);
 			notifySavedUpdated();
@@ -436,7 +436,7 @@ public class TravelLocalDataHelper {
 							do {
 								TravelArticle article = readSavedArticle(cursor);
 								TravelArticle newArticle = app.getTravelHelper().getUpdatedArticle(article);
-								if (newArticle.getLastModified() > article.getLastModified()) {
+								if (newArticle.getFile().lastModified() > article.getFile().lastModified()) {
 									updateSavedArticle(article, newArticle);
 									res.add(newArticle);
 								} else {
@@ -486,7 +486,7 @@ public class TravelLocalDataHelper {
 					conn.execSQL(query, new Object[]{article.title, article.lang,
 							article.aggregatedPartOf, article.imageTitle, article.content,
 							travelBook, article.lat, article.lon, article.routeId, article.contentsJson,
-							article.fullContent, article.getTravelBook(), article.getLastModified()});
+							article.fullContent, article.getFile().getName(), article.getFile().lastModified()});
 				} finally {
 					conn.close();
 				}
@@ -540,8 +540,9 @@ public class TravelLocalDataHelper {
 			res.routeId = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_ROUTE_ID));
 			res.contentsJson = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_CONTENT_JSON));
 			res.fullContent = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_CONTENT));
-			res.setTravelBook(cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_TRAVEL_BOOK_NAME)));
-			res.setLastModified(cursor.getLong(cursor.getColumnIndex(BOOKMARKS_COL_LAST_MODIFIED)));
+			File file = new File(cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_TRAVEL_BOOK_NAME)));
+			file.setLastModified(cursor.getLong(cursor.getColumnIndex(BOOKMARKS_COL_LAST_MODIFIED)));
+			res.file = file;
 			return res;
 		}
 	}
