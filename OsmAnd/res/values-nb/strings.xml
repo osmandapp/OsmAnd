@@ -3945,4 +3945,5 @@
     <string name="shared_string_last_used">Sist brukt</string>
     <string name="routing_attr_allow_streams_name">Tillat bekker og avløp</string>
     <string name="routing_attr_allow_intermittent_name">Tillat periodiske vannveier</string>
+    <string name="routing_attr_allow_intermittent_description">Tillat periodiske vannveier</string>
 </resources>
