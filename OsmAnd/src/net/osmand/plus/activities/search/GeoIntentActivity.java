@@ -1,12 +1,9 @@
 package net.osmand.plus.activities.search;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,9 +25,6 @@ import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
-
-import java.io.IOException;
-import java.util.Locale;
 
 public class GeoIntentActivity extends OsmandListActivity {
 
@@ -59,7 +53,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		if (intent != null) {
 			final ProgressDialog progress = ProgressDialog.show(GeoIntentActivity.this, getString(R.string.searching),
 					getString(R.string.searching_address));
-			final GeoIntentTask task = new GeoIntentTask(progress, intent, this);
+			final GeoIntentTask task = new GeoIntentTask(progress, intent);
 
 			progress.setOnCancelListener(new OnCancelListener() {
 				@Override
@@ -90,12 +84,10 @@ public class GeoIntentActivity extends OsmandListActivity {
 	private class GeoIntentTask extends AsyncTask<Void, Void, GeoParsedPoint> {
 		private final ProgressDialog progress;
 		private final Intent intent;
-		private Context context;
 
-		private GeoIntentTask(final ProgressDialog progress, final Intent intent, Context context) {
+		private GeoIntentTask(final ProgressDialog progress, final Intent intent) {
 			this.progress = progress;
 			this.intent = intent;
-			this.context = context;
 		}
 
 		@Override
@@ -121,21 +113,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 					Thread.sleep(200);
 				}
 				Uri uri = intent.getData();
-				GeoParsedPoint gpp;
-				Address address = null;
-				try {
-					address = new Geocoder(context, Locale.getDefault())
-							.getFromLocationName(uri.toString(), 1)
-							.get(0);
-				} catch (IndexOutOfBoundsException | IOException e) {
-					e.printStackTrace();
-				}
-				if (address != null) {
-					gpp = new GeoParsedPoint(address.getLatitude(), address.getLongitude(), GeoParsedPoint.NO_ZOOM);
-				} else {
-					gpp = GeoPointParserUtil.parse(uri.toString());
-				}
-				return gpp;
+				return GeoPointParserUtil.parse(uri.toString());
 			} catch (Exception e) {
 				return null;
 			}

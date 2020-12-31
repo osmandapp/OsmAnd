@@ -558,6 +558,10 @@ public class GeoPointParserUtil {
 				if (lat == 0.0 && lon == 0.0 && positionInSearchRequestMatcher.find()) {
 					lat = Double.valueOf(positionInSearchRequestMatcher.group(1));
 					lon = Double.valueOf(positionInSearchRequestMatcher.group(2));
+					if (lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+						lat = 0.0;
+						lon = 0.0;
+					}
 				}
 			}
 
