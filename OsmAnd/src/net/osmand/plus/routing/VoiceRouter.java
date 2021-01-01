@@ -230,7 +230,8 @@ public class VoiceRouter {
 		// 1 kmh - 1 m, 4 kmh - 4 m (pedestrian), 10 kmh - 10 m (bicycle), 50 kmh - 50 m (car)
 		// TURN_NOW_DISTANCE = (int) (DEFAULT_SPEED * 3.6); // 3.6 sec
 		// 50 kmh - 48 m (car), 10 kmh - 20 m, 4 kmh - 15 m, 1 kmh - 12 m
-		TURN_NOW_DISTANCE = (int) (RoutingHelper.GPS_TOLERANCE + DEFAULT_SPEED * 2.5 * RoutingHelper.ARRIVAL_DISTANCE_FACTOR); // 3.6 sec
+		float factor = Math.max(settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(appMode), 0.1f);
+		TURN_NOW_DISTANCE = (int) ((RoutingHelper.DEFAULT_GPS_TOLERANCE + DEFAULT_SPEED * 2.5) * factor); // 3.6 sec
 		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 	}
 

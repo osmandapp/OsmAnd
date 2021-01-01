@@ -51,10 +51,9 @@ public class RoutingHelper {
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
 
 	// This should be correlated with RoutingHelper.updateCurrentRouteStatus ( when processed turn now is not announced)
-	private static final int DEFAULT_GPS_TOLERANCE = 12;
-	// TODO make private
-	public static int GPS_TOLERANCE = DEFAULT_GPS_TOLERANCE;
-	public static float ARRIVAL_DISTANCE_FACTOR = 1;
+	public  static final int DEFAULT_GPS_TOLERANCE = 12;
+	private static int GPS_TOLERANCE = DEFAULT_GPS_TOLERANCE;
+	private static float ARRIVAL_DISTANCE_FACTOR = 1;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -306,7 +305,6 @@ public class RoutingHelper {
 	public void setAppMode(ApplicationMode mode) {
 		this.mode = mode;
 		ARRIVAL_DISTANCE_FACTOR = Math.max(settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(mode), 0.1f);
-		GPS_TOLERANCE = (int) (DEFAULT_GPS_TOLERANCE * ARRIVAL_DISTANCE_FACTOR);
 		voiceRouter.updateAppMode();
 	}
 
@@ -569,7 +567,7 @@ public class RoutingHelper {
 
 		// 2. check if intermediate found
 		if (route.getIntermediatePointsToPass() > 0
-				&& route.getDistanceToNextIntermediate(lastFixedLocation) < getArrivalDistance(mode, settings) * 2f && !isRoutePlanningMode) {
+				&& route.getDistanceToNextIntermediate(lastFixedLocation) < getArrivalDistance(mode, settings) && !isRoutePlanningMode) {
 			showMessage(app.getString(R.string.arrived_at_intermediate_point));
 			route.passIntermediatePoint();
 			TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -610,8 +608,7 @@ public class RoutingHelper {
 			if (isFollowingMode) {
 				voiceRouter.arrivedDestinationPoint(description);
 			}
-			boolean onDestinationReached = OsmandPlugin.onDestinationReached();
-			onDestinationReached &= app.getAppCustomization().onDestinationReached();
+			boolean onDestinationReached = true;
 			if (onDestinationReached) {
 				clearCurrentRoute(null, null);
 				setRoutePlanningMode(false);
@@ -678,7 +675,7 @@ public class RoutingHelper {
 		// return ((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(m);
 		// GPS_TOLERANCE - 12 m
 		// 5 seconds: car - 80 m @ 50 kmh, bicycle - 45 m @ 25 km/h, bicycle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
-		return RoutingHelper.GPS_TOLERANCE + defaultSpeed * 5 * RoutingHelper.ARRIVAL_DISTANCE_FACTOR;
+		return (DEFAULT_GPS_TOLERANCE + defaultSpeed * 5) * RoutingHelper.ARRIVAL_DISTANCE_FACTOR;
 	}
 
 	private static float getPosTolerance(float accuracy) {
