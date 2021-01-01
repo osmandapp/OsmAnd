@@ -16,7 +16,6 @@ import com.google.android.material.slider.Slider;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -208,7 +207,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private void getDefaultValue() {
-		currentValue = RoutingHelper.getDefaultAllowedDeviationAccuracy(settings, appMode);
+		currentValue = RoutingHelper.getDefaultAllowedDeviation(settings, appMode);
 	}
 
 	private int findIndexOfValue(float allowedValue) {

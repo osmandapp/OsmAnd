@@ -43,11 +43,12 @@ public class RoutingHelper {
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RoutingHelper.class);
 
-	// Used to 1) calculate current closest segment of the route during navigation
-	//         2) calculate max allowed deviation before route recalculation
-	private static final float POSITION_TOLERANCE = 60;
+	// POS_TOLERANCE
+	// 1) calculate current closest segment of the route during navigation
+	// 2) identify u-turn, projected distance
+	// 3) calculate max allowed deviation before route recalculation * multiplier
+	private static final float POS_TOLERANCE = 60; // 60m or 30m + accuracy
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
-
 
 	// This should be correlated with RoutingHelper.updateCurrentRouteStatus ( when processed turn now is not announced)
 	private static final int DEFAULT_GPS_TOLERANCE = 12;
@@ -682,9 +683,9 @@ public class RoutingHelper {
 
 	private static float getPosTolerance(float accuracy) {
 		if (accuracy > 0) {
-			return POSITION_TOLERANCE / 2 + accuracy;
+			return POS_TOLERANCE / 2 + accuracy;
 		}
-		return POSITION_TOLERANCE;
+		return POS_TOLERANCE;
 	}
 
 	private static float getDefaultAllowedDeviation(OsmandSettings settings, ApplicationMode mode, float posTolerance) {
@@ -704,7 +705,7 @@ public class RoutingHelper {
 		return posTolerance * POS_TOLERANCE_DEVIATION_MULTIPLIER;
 	}
 
-	public static float getDefaultAllowedDeviationAccuracy(OsmandSettings settings, ApplicationMode mode) {
+	public static float getDefaultAllowedDeviation(OsmandSettings settings, ApplicationMode mode) {
 		return getDefaultAllowedDeviation(settings, mode, getPosTolerance(0));
 	}
 

@@ -72,7 +72,9 @@ public class VoiceRouter {
 	private  long lastAnnouncement = 0;
 
 	// Default speed to have comfortable announcements (Speed in m/s)
-	private float DEFAULT_SPEED = 12;
+	// initial value is updated from default speed settings anyway
+	private float DEFAULT_SPEED = 10;  
+	// TODO review turn now speed
 	private float TURN_NOW_SPEED;
 		
 	private int PREPARE_LONG_DISTANCE;
@@ -181,13 +183,8 @@ public class VoiceRouter {
 	public void updateAppMode() {
 		ApplicationMode appMode = router.getAppMode() == null ? settings.getApplicationMode() : router.getAppMode();
 		if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
-			// could be changed in future as others by default in settings is 45 kmh
-			DEFAULT_SPEED = 14;                       //   ~50 km/h
-			//DEFAULT speed is configurable
-//		} else if (router.getAppMode().isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
-//			DEFAULT_SPEED = 2.77f;   //   10 km/h
-//		} else if (router.getAppMode().isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
-//			DEFAULT_SPEED = 1.11f; //4 km/h 2f;     // 7,2 km/h
+			// keep it as minimum 30 kmh for voice announcement
+			DEFAULT_SPEED = (float) Math.max(8, appMode.getDefaultSpeed());
 		} else {
 			// minimal is 1 meter for turn now
 			DEFAULT_SPEED = (float) Math.max(0.3, appMode.getDefaultSpeed());
