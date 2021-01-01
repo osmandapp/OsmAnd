@@ -52,7 +52,6 @@ public class RoutingHelper {
 
 	// This should be correlated with RoutingHelper.updateCurrentRouteStatus ( when processed turn now is not announced)
 	public  static final int DEFAULT_GPS_TOLERANCE = 12;
-	private static int GPS_TOLERANCE = DEFAULT_GPS_TOLERANCE;
 	private static float ARRIVAL_DISTANCE_FACTOR = 1;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
@@ -528,8 +527,8 @@ public class RoutingHelper {
 					}
 					processed = true;
 				}
-			} else if (newDist < dist || newDist < GPS_TOLERANCE / 2) {
-				// newDist < GPS_TOLERANCE (avoid distance 0 till next turn)
+			} else if (newDist < dist || newDist < posTolerance / 8) {
+				// newDist < posTolerance / 8 - 4-8 m (avoid distance 0 till next turn)
 				if (dist > posTolerance) {
 					processed = true;
 					if (log.isDebugEnabled()) {
