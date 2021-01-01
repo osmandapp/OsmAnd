@@ -52,11 +52,16 @@ public class VoiceRouter {
 	public static final String FROM_STREET_NAME = "fromStreetName";
 	public static final String FROM_DEST = "fromDest";
 
+	// TODO combine into helper class
+	private static final int DEFAULT_GPS_TOLERANCE = 12;
+	private static float ARRIVAL_DISTANCE_FACTOR = 1;
+
 	protected CommandPlayer player;
 
 	protected final OsmandApplication app;
 	protected final RoutingHelper router;
 	protected OsmandSettings settings;
+	private ApplicationMode appMode;
 
 	private int currentStatus = STATUS_UNKNOWN;
 	private boolean playedAndArriveAtTarget = false;
@@ -89,6 +94,7 @@ public class VoiceRouter {
 
 	private VoiceCommandPending pendingCommand = null;
 	private RouteDirectionInfo nextRouteDirection;
+
 
 	public interface VoiceMessageListener {
 		void onVoiceMessage(List<String> listCommands, List<String> played);
@@ -180,7 +186,8 @@ public class VoiceRouter {
 
 
 	public void updateAppMode() {
-		ApplicationMode appMode = router.getAppMode() == null ? settings.getApplicationMode() : router.getAppMode();
+		appMode = router.getAppMode() == null ? settings.getApplicationMode() : router.getAppMode();
+		ARRIVAL_DISTANCE_FACTOR = Math.max(settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(appMode), 0.1f);
 		if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			// keep it as minimum 30 kmh for voice announcement
 			DEFAULT_SPEED = (float) Math.max(8, appMode.getDefaultSpeed());
@@ -231,7 +238,7 @@ public class VoiceRouter {
 		// TURN_NOW_DISTANCE = (int) (DEFAULT_SPEED * 3.6); // 3.6 sec
 		// 50 kmh - 48 m (car), 10 kmh - 20 m, 4 kmh - 15 m, 1 kmh - 12 m
 		float factor = Math.max(settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(appMode), 0.1f);
-		TURN_NOW_DISTANCE = (int) ((RoutingHelper.DEFAULT_GPS_TOLERANCE + DEFAULT_SPEED * 2.5) * factor); // 3.6 sec
+		TURN_NOW_DISTANCE = (int) ((DEFAULT_GPS_TOLERANCE + DEFAULT_SPEED * 2.5) * factor); // 3.6 sec
 		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 	}
 
@@ -289,22 +296,35 @@ public class VoiceRouter {
 	private boolean statusNotPassed(int statusToCheck) {
 		return currentStatus <= statusToCheck;
 	}
-	
+
+	public float getArrivalDistance() {
+		ApplicationMode m = appMode;
+		float defaultSpeed = Math.max(0.3f, m.getDefaultSpeed());
+
+		/// Used to be: car - 90 m, bicycle - 50 m, pedestrian - 20 m
+		// return ((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(m);
+		// GPS_TOLERANCE - 12 m
+		// 5 seconds: car - 80 m @ 50 kmh, bicycle - 45 m @ 25 km/h, bicycle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
+		return (DEFAULT_GPS_TOLERANCE + defaultSpeed * 5) * ARRIVAL_DISTANCE_FACTOR;
+	}
+
 	public void announceOffRoute(double dist) {
-		long ms = System.currentTimeMillis();
-		if (waitAnnouncedOffRoute == 0 || ms - lastAnnouncedOffRoute > waitAnnouncedOffRoute) {
-			CommandBuilder p = getNewCommandPlayerToPlay();
-			if (p != null) {
-				p.offRoute(dist);
-				announceBackOnRoute = true;
+		if (dist > appMode.getOffRouteDistance() * ARRIVAL_DISTANCE_FACTOR && !settings.DISABLE_OFFROUTE_RECALC.get()) {
+			long ms = System.currentTimeMillis();
+			if (waitAnnouncedOffRoute == 0 || ms - lastAnnouncedOffRoute > waitAnnouncedOffRoute) {
+				CommandBuilder p = getNewCommandPlayerToPlay();
+				if (p != null) {
+					p.offRoute(dist);
+					announceBackOnRoute = true;
+				}
+				play(p);
+				if (waitAnnouncedOffRoute == 0) {
+					waitAnnouncedOffRoute = 60000;
+				} else {
+					waitAnnouncedOffRoute *= 2.5;
+				}
+				lastAnnouncedOffRoute = ms;
 			}
-			play(p);
-			if (waitAnnouncedOffRoute == 0) {
-				waitAnnouncedOffRoute = 60000;	
-			} else {
-				waitAnnouncedOffRoute *= 2.5;
-			}
-			lastAnnouncedOffRoute = ms;
 		}
 	}
 

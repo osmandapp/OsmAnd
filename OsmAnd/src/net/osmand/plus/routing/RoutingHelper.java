@@ -50,10 +50,6 @@ public class RoutingHelper {
 	private static final float POS_TOLERANCE = 60; // 60m or 30m + accuracy
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
 
-	// This should be correlated with RoutingHelper.updateCurrentRouteStatus ( when processed turn now is not announced)
-	public  static final int DEFAULT_GPS_TOLERANCE = 12;
-	private static float ARRIVAL_DISTANCE_FACTOR = 1;
-
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
 	private List<WeakReference<IRouteSettingsListener>> settingsListeners = new LinkedList<>();
@@ -303,7 +299,6 @@ public class RoutingHelper {
 
 	public void setAppMode(ApplicationMode mode) {
 		this.mode = mode;
-		ARRIVAL_DISTANCE_FACTOR = Math.max(settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(mode), 0.1f);
 		voiceRouter.updateAppMode();
 	}
 
@@ -474,9 +469,7 @@ public class RoutingHelper {
 						voiceRouter.interruptRouteCommands();
 						voiceRouterStopped = true; // Prevents excessive execution of stop() code
 					}
-					if (distOrth > mode.getOffRouteDistance() * ARRIVAL_DISTANCE_FACTOR && !settings.DISABLE_OFFROUTE_RECALC.get()) {
-						voiceRouter.announceOffRoute(distOrth);
-					}
+					voiceRouter.announceOffRoute(distOrth);
 				}
 
 				// calculate projection of current location
@@ -566,7 +559,7 @@ public class RoutingHelper {
 
 		// 2. check if intermediate found
 		if (route.getIntermediatePointsToPass() > 0
-				&& route.getDistanceToNextIntermediate(lastFixedLocation) < getArrivalDistance(mode, settings) && !isRoutePlanningMode) {
+				&& route.getDistanceToNextIntermediate(lastFixedLocation) < voiceRouter.getArrivalDistance() && !isRoutePlanningMode) {
 			showMessage(app.getString(R.string.arrived_at_intermediate_point));
 			route.passIntermediatePoint();
 			TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -598,7 +591,7 @@ public class RoutingHelper {
 		// 3. check if destination found
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if (currentRoute > routeNodes.size() - 3
-				&& currentLocation.distanceTo(lastPoint) < getArrivalDistance(mode, settings)
+				&& currentLocation.distanceTo(lastPoint) < voiceRouter.getArrivalDistance()
 				&& !isRoutePlanningMode) {
 			//showMessage(app.getString(R.string.arrived_at_destination));
 			TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -666,16 +659,6 @@ public class RoutingHelper {
 		return false;
 	}
 
-	float getArrivalDistance(ApplicationMode mode, OsmandSettings settings) {
-		ApplicationMode m = mode == null ? settings.getApplicationMode() : mode;
-		float defaultSpeed = Math.max(0.3f, m.getDefaultSpeed());
-
-		/// Used to be: car - 90 m, bicycle - 50 m, pedestrian - 20 m
-		// return ((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(m);
-		// GPS_TOLERANCE - 12 m
-		// 5 seconds: car - 80 m @ 50 kmh, bicycle - 45 m @ 25 km/h, bicycle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
-		return (DEFAULT_GPS_TOLERANCE + defaultSpeed * 5) * RoutingHelper.ARRIVAL_DISTANCE_FACTOR;
-	}
 
 	private static float getPosTolerance(float accuracy) {
 		if (accuracy > 0) {
