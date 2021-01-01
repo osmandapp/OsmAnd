@@ -1211,7 +1211,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper()
 							.getSelectedFileByPath(gpxFile.path);
 					boolean showOnMap = selectedGpxFile != null;
-					saveExistingGpx(gpxFile, showOnMap, false, true, FinalSaveAction.SHOW_TOAST);
+					saveExistingGpx(gpxFile, showOnMap, false, true, FinalSaveAction.SHOW_IS_SAVED_FRAGMENT);
 				}
 			}
 

@@ -3925,4 +3925,12 @@
 \n
 \n</string>
     <string name="reverse_all_points">Revertir tots els punts</string>
+    <string name="profile_by_default_description">Seleccioneu el perfil que s\'utilitzarà en iniciar l\'aplicació.</string>
+    <string name="shared_string_last_used">Darrera utilització</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Prioritza les rutes de senderisme</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Prioritza les rutes de senderisme</string>
+    <string name="routing_attr_allow_streams_description">Permet rierols i torrents</string>
+    <string name="routing_attr_allow_streams_name">Permet rierols i torrents</string>
+    <string name="routing_attr_allow_intermittent_description">Permet les vies navegables no permanents</string>
+    <string name="routing_attr_allow_intermittent_name">Permet les vies navegables no permanents</string>
 </resources>

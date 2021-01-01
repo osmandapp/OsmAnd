@@ -2915,4 +2915,63 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_languages">Språk</string>
     <string name="shared_string_language">Språk</string>
     <string name="shared_string_all_languages">Alla språk</string>
+    <string name="release_3_9">• La till inställning för att exportera och importera all data, inklusive inställningar, resurser, mina platser
+\n
+\n • Planera rutt: Grafer för seggraphs for track segments with route, and added the ability to create and edit multiple track segments
+\n
+\n • Added OAuth authentication method for OpenStreetMap, improved UI of OSM dialogs
+\n
+\n • Support custom colors for favorites and track waypoints
+\n
+\n</string>
+    <string name="reverse_all_points">Vänd alla punkter</string>
+    <string name="profile_by_default_description">Välj den profil som ska användas när appen startas.</string>
+    <string name="shared_string_last_used">Senast använd</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Föredra vandringsleder</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Föredra vandringsleder</string>
+    <string name="routing_attr_allow_streams_description">Tillåt strömmar och torrläggningar</string>
+    <string name="routing_attr_allow_streams_name">Tillåt strömmar och torrläggningar</string>
+    <string name="routing_attr_allow_intermittent_description">Tillåt vägar över vatten</string>
+    <string name="routing_attr_allow_intermittent_name">Tillåt vägar över vatten</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privat\" betyder att spåret inte visas i några offentliga listor, men spårpunkter från det i okronologisk ordning är tillgängliga via det offentliga GPS-API utan tidsstämplar.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identifierbart\" betyder att spårningen kommer att visas offentligt i dina GPS-spår och i offentliga GPS-spårningar, dvs. andra användare kommer att kunna komma åt grundata kring spårningen och associera den med ditt användarnamn. Offentliga tidsstämplade tracepoint-data från GPS-API som serveras via trackpoints API refererar till din ursprungliga spårningssida.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Spårbar\" betyder att spåret inte visas i några offentliga listor, men bearbetade spårpunkter tillsammans med respektive tidsstämplar (som inte kan kopplas direkt till dig) görs genom nedladdningar från det offentliga GPS-API: et.</string>
+    <string name="osm_edit_close_note">Stäng OSM Anteckningar</string>
+    <string name="osm_edit_comment_note">Kommentera OSM Anteckningar</string>
+    <string name="osm_login_descr">Du kan logga in antingen med OAuth metoden (högre säkerhet) eller genom att använda ditt användarnamn och lösenord.</string>
+    <string name="shared_string_add_photo">Lägg till bild</string>
+    <string name="register_on_openplacereviews">Registrera dig hos
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Bilder tillhandahålls av OpenPlaceReviews.org\'s öppen data projekt. För att kunna ladda upp dina bilder behöver du registrera dig på deras webbsida.</string>
+    <string name="register_opr_create_new_account">Registrera ett nytt konto</string>
+    <string name="register_opr_have_account">Jag har redan ett konto</string>
+    <string name="shared_string_search_history">Sökhistorik</string>
+    <string name="app_mode_kayak">Kajak</string>
+    <string name="app_mode_motorboat">Motorbåt</string>
+    <string name="cannot_upload_image">Uppladdning av bild misslyckades, vänligen försök igen senare</string>
+    <string name="select_picture">Välj bild</string>
+    <string name="shared_string_resources">Resurser</string>
+    <string name="approximate_file_size">Uppskattad filstorlek</string>
+    <string name="select_data_to_export">Vänligen välj vilken data som önskas exporteras till filen.</string>
+    <string name="file_size_needed_for_import">Erfordras för importering</string>
+    <string name="export_not_enough_space_descr">Din enhet har bara %1$s ledigt lagringsutrymme. Vänligen frigör utrymme alternativt avmarkera några föremål som skall exporteras.</string>
+    <string name="export_not_enough_space">Det finns inte tillräckligt med lagringsutrymme</string>
+    <string name="select_items_for_import">Välj vilka föremål som skall importeras.</string>
+    <string name="select_groups_for_import">Välj vilka grupper som skall importeras.</string>
+    <string name="add_to_mapillary">Lägg till Mapillary</string>
+    <string name="add_to_opr">Lägg till ÖppnaPlattsRecensioner (OPR)</string>
+    <string name="use_dev_url_descr">Byt till att använda dev.openstreetmap.org istället för openstreetmap.org för att testa uppladdning av OSM Anteckningar / Sevärdheter / GPX.</string>
+    <string name="use_dev_url">Använd dev.openstreetmap.org</string>
+    <string name="app_mode_light_aircraft">Mindre flyplan</string>
+    <string name="add_photos_descr">OsmAnd visar bilder från flertalet källor:
+\nOpenPlaceReviews - Foton av sevärdheter;
+\nMapillary - Bilder på gatunivå;
+\nWeb/Wikimedia - Foton av sevärdheter enligt OpenStreetMap-data.</string>
+    <string name="elevation_data">Du kan använda höjddata för att ta hänsyn till upp- / nedstigning på din resa</string>
+    <string name="plan_route_join_segments">Sammanslå segment</string>
+    <string name="plan_route_split_before">Dela innan</string>
+    <string name="plan_route_split_after">Dela efter</string>
+    <string name="plan_route_add_new_segment">Lägg till ett nytt segment</string>
+    <string name="profile_type_osmand_string">OsmAnd profil</string>
+    <string name="profile_type_user_string">Användarprofil</string>
 </resources>
