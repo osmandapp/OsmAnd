@@ -2531,7 +2531,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="mapnik_render_descr">Gamla \"Mapnik\'-stil standardrendering. Viktiga funktioner: Färger som liknar \"Mapnik\" stil.</string>
     <string name="touring_view_render_descr">Högsdetaljsstil för turiständamål. Innehåller alla konfigurationsinställningar av standardstilen, dessutom: Visar så mycket detaljer som möjligt, i synnerhet alla vägar, stigar och andra sätt att resa. Tydliga visuella skillnader mellan olika vägtyper som påminner om många turistatlaser. Högkontrastfärger för utomhusbruk, dag- och nattläge.</string>
     <string name="default_render_descr">Stil för allmänna ändamål. Förenklad återgivning i tätbefolkade städer. Viktiga funktioner: höjdkurvor, rutter, ytkvalitet, tillträdeskontroll, farthinder, stigrendering enligt SAC-skala, vattensporter.</string>
-    <string name="open_wikipedia_link_online">Öppna Wikipedia-länk på nätet</string>
+    <string name="open_wikipedia_link_online">Öppna Wikipedia-länk online</string>
     <string name="open_wikipedia_link_online_description">Länken kommer att öppnas i en webbläsare.</string>
     <string name="read_wikipedia_offline_description">Skaffa OsmAnd Live-prenumeration för att läsa Wikipedia och Wikivoyage-artiklar frånkopplad.</string>
     <string name="how_to_open_link">Hur öppnar man länken?</string>
