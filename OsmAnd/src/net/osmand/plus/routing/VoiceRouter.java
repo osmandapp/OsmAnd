@@ -73,8 +73,7 @@ public class VoiceRouter {
 
 	// Default speed to have comfortable announcements (Speed in m/s)
 	// initial value is updated from default speed settings anyway
-	private float DEFAULT_SPEED = 10;  
-	// TODO review turn now speed
+	private float DEFAULT_SPEED = 10;
 	private float TURN_NOW_SPEED;
 		
 	private int PREPARE_LONG_DISTANCE;
@@ -189,20 +188,18 @@ public class VoiceRouter {
 			// minimal is 1 meter for turn now
 			DEFAULT_SPEED = (float) Math.max(0.3, appMode.getDefaultSpeed());
 		}
+		// Calculate minimal distance / time to announce turns, so time to turn is always >= ETALON_TIME
+		// Distance < ETALON_DIST or TIME_WITH_CURRENT_SPEED < ETALON_TIME_DEFAULT_SPEED
 
-
-		// Do not play [issue 1411]: prepare_long_distance warning not needed, used only for goAhead prompt
 		// 300 sec: 4 200 - 3 500 m - car [ 115 - 95 sec @ 120 km/h]
 		PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 300);
 		PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 250) ;
-
 		if (DEFAULT_SPEED < 30) {
-//		if (PREPARE_LONG_DISTANCE_END - PREPARE_DISTANCE < 4000) {
 			// Play only for high speed vehicle with speed > 110 km/h
-			PREPARE_DISTANCE_END = PREPARE_DISTANCE * 2;
+			// [issue 1411] - used only for goAhead prompt
+			PREPARE_LONG_DISTANCE_END = PREPARE_LONG_DISTANCE * 2;
 		}
 
-		// *#8749: Here the change for bicycle: 40-30 sec, 200-150 m -> 115-90 sec, 320-250m [ need to be tested ]
 		// 115 sec: 1 500 m - car [45 sec @ 120 km/h], 320 m - bicycle [45 sec @ 25 km/h], 230 m - pedestrian
 		PREPARE_DISTANCE = (int) (DEFAULT_SPEED * 115);
 		// 90  sec: 1 200 m - car, 250 m - bicycle [36 sec @ 25 km/h],
@@ -213,9 +210,10 @@ public class VoiceRouter {
 		// 15 sec: 210 m - car, 40 m - bicycle, 30 m - pedestrian
 		TURN_IN_DISTANCE_END = (int) (DEFAULT_SPEED * 15);
 
-		// same as speed < 150/(90-22) m/s = 2.2 m/s = 8 km/h
+		// Do not play prepare: for pedestrian and slow transport
+		// same check as speed < 150/(90-22) m/s = 2.2 m/s = 8 km/h
+		// if (DEFAULT_SPEED < 2.3) {
 		if (PREPARE_DISTANCE_END - TURN_IN_DISTANCE < 150) {
-			// Do not play: for pedestrian and slow transport
 			PREPARE_DISTANCE_END = PREPARE_DISTANCE * 2;
 		}
 
@@ -223,13 +221,16 @@ public class VoiceRouter {
 		// float TURN_NOW_TIME = 7;
 
 		// ** #8749 to keep 1m / 1 sec precision (GPS_TOLERANCE - 12 m)
+		// 1 kmh - 1 sec, 4 kmh - 2 sec (pedestrian), 10 kmh - 3 sec (*bicycle), 50 kmh - 7 sec (car)
+		float TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
+
+		// test new: 50 kmh - 50 m (car), 10 kmh - 10 m (bike), 4 kmh - 4 m
+		// TURN_NOW_DISTANCE = (int) (TURN_NOW_TIME * DEFAULT_SPEED / 2);
+		// old value
 		// 1 kmh - 1 m, 4 kmh - 4 m (pedestrian), 10 kmh - 10 m (bicycle), 50 kmh - 50 m (car)
 		// TURN_NOW_DISTANCE = (int) (DEFAULT_SPEED * 3.6); // 3.6 sec
 		// 50 kmh - 48 m (car), 10 kmh - 20 m, 4 kmh - 15 m, 1 kmh - 12 m
 		TURN_NOW_DISTANCE = (int) (RoutingHelper.GPS_TOLERANCE + DEFAULT_SPEED * 2.5 * RoutingHelper.ARRIVAL_DISTANCE_FACTOR); // 3.6 sec
-		// 1 kmh - 1 sec, 4 kmh - 2 sec (pedestrian), 10 kmh - 3 sec (*bicycle), 50 kmh - 7 sec (car)
-		float TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
-
 		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 	}
 

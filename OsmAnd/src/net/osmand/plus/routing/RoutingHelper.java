@@ -677,7 +677,7 @@ public class RoutingHelper {
 		/// Used to be: car - 90 m, bicycle - 50 m, pedestrian - 20 m
 		// return ((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(m);
 		// GPS_TOLERANCE - 12 m
-		// 5 seconds: car - 80 m @ 50 kmh, bicyle - 45 m @ 25 km/h, bicyle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
+		// 5 seconds: car - 80 m @ 50 kmh, bicycle - 45 m @ 25 km/h, bicycle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
 		return RoutingHelper.GPS_TOLERANCE + defaultSpeed * 5 * RoutingHelper.ARRIVAL_DISTANCE_FACTOR;
 	}
 
