@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
@@ -29,7 +30,6 @@ import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -43,10 +43,15 @@ public class RoutingHelper {
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RoutingHelper.class);
 
-	public static final float ALLOWED_DEVIATION = 2;
+	// Used to 1) calculate current closest segment of the route during navigation
+	//         2) calculate max allowed deviation before route recalculation
+	private static final float POSITION_TOLERANCE = 60;
+	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
+
 
 	// This should be correlated with RoutingHelper.updateCurrentRouteStatus ( when processed turn now is not announced)
 	private static final int DEFAULT_GPS_TOLERANCE = 12;
+	// TODO make private
 	public static int GPS_TOLERANCE = DEFAULT_GPS_TOLERANCE;
 	public static float ARRIVAL_DISTANCE_FACTOR = 1;
 
@@ -413,7 +418,7 @@ public class RoutingHelper {
 			isDeviatedFromRoute = false;
 			return locationProjection;
 		}
-		float posTolerance = RoutingHelperUtils.getPosTolerance(currentLocation.hasAccuracy() ? currentLocation.getAccuracy() : 0);
+		float posTolerance = getPosTolerance(currentLocation.hasAccuracy() ? currentLocation.getAccuracy() : 0);
 		boolean calculateRoute = false;
 		synchronized (this) {
 			isDeviatedFromRoute = false;
@@ -432,7 +437,7 @@ public class RoutingHelper {
 				int currentRoute = route.currentRoute;
 				double allowableDeviation = route.getRouteRecalcDistance();
 				if (allowableDeviation == 0) {
-					allowableDeviation = RoutingHelperUtils.getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
+					allowableDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
 
 				// 2. Analyze if we need to recalculate route
@@ -478,15 +483,7 @@ public class RoutingHelper {
 
 				// calculate projection of current location
 				if (currentRoute > 0) {
-					locationProjection = new Location(currentLocation);
-					Location nextLocation = routeNodes.get(currentRoute);
-					LatLon project = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
-
-					locationProjection.setLatitude(project.getLatitude());
-					locationProjection.setLongitude(project.getLongitude());
-					// we need to update bearing too
-					float bearingTo = locationProjection.bearingTo(nextLocation);
-					locationProjection.setBearing(bearingTo);
+					locationProjection = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
 				}
 			}
 			lastFixedLocation = currentLocation;
@@ -571,7 +568,7 @@ public class RoutingHelper {
 
 		// 2. check if intermediate found
 		if (route.getIntermediatePointsToPass() > 0
-				&& route.getDistanceToNextIntermediate(lastFixedLocation) < RoutingHelperUtils.getArrivalDistance(mode, settings) * 2f && !isRoutePlanningMode) {
+				&& route.getDistanceToNextIntermediate(lastFixedLocation) < getArrivalDistance(mode, settings) * 2f && !isRoutePlanningMode) {
 			showMessage(app.getString(R.string.arrived_at_intermediate_point));
 			route.passIntermediatePoint();
 			TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -603,7 +600,7 @@ public class RoutingHelper {
 		// 3. check if destination found
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if (currentRoute > routeNodes.size() - 3
-				&& currentLocation.distanceTo(lastPoint) < RoutingHelperUtils.getArrivalDistance(mode, settings)
+				&& currentLocation.distanceTo(lastPoint) < getArrivalDistance(mode, settings)
 				&& !isRoutePlanningMode) {
 			//showMessage(app.getString(R.string.arrived_at_destination));
 			TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -671,6 +668,47 @@ public class RoutingHelper {
 		}
 		return false;
 	}
+
+	float getArrivalDistance(ApplicationMode mode, OsmandSettings settings) {
+		ApplicationMode m = mode == null ? settings.getApplicationMode() : mode;
+		float defaultSpeed = Math.max(0.3f, m.getDefaultSpeed());
+
+		/// Used to be: car - 90 m, bicycle - 50 m, pedestrian - 20 m
+		// return ((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(m);
+		// GPS_TOLERANCE - 12 m
+		// 5 seconds: car - 80 m @ 50 kmh, bicyle - 45 m @ 25 km/h, bicyle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
+		return RoutingHelper.GPS_TOLERANCE + defaultSpeed * 5 * RoutingHelper.ARRIVAL_DISTANCE_FACTOR;
+	}
+
+	private static float getPosTolerance(float accuracy) {
+		if (accuracy > 0) {
+			return POSITION_TOLERANCE / 2 + accuracy;
+		}
+		return POSITION_TOLERANCE;
+	}
+
+	private static float getDefaultAllowedDeviation(OsmandSettings settings, ApplicationMode mode, float posTolerance) {
+		if (settings.DISABLE_OFFROUTE_RECALC.getModeValue(mode)) {
+			return -1.0f;
+		} else if (mode.getRouteService() == RouteProvider.RouteService.DIRECT_TO) {
+			return -1.0f;
+		} else if (mode.getRouteService() == RouteProvider.RouteService.STRAIGHT) {
+			MetricsConstants mc = settings.METRIC_SYSTEM.getModeValue(mode);
+			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
+				return 500.f;
+			} else {
+				// 1/4 mile
+				return 482.f;
+			}
+		}
+		return posTolerance * POS_TOLERANCE_DEVIATION_MULTIPLIER;
+	}
+
+	public static float getDefaultAllowedDeviationAccuracy(OsmandSettings settings, ApplicationMode mode) {
+		return getDefaultAllowedDeviation(settings, mode, getPosTolerance(0));
+	}
+
+
 
 	private void fireRoutingDataUpdateEvent() {
 		if (!updateListeners.isEmpty()) {

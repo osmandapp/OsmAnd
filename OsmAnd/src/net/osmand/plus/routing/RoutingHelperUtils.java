@@ -17,7 +17,6 @@ import java.util.List;
 
 public class RoutingHelperUtils {
 
-	private static final float POSITION_TOLERANCE = 60;
 	private static final int CACHE_RADIUS = 100000;
 
 	@NonNull
@@ -66,10 +65,17 @@ public class RoutingHelperUtils {
 		return rect.left == 0 && rect.right == 0 ? null : rect;
 	}
 
-	static LatLon getProject(Location loc, Location from, Location to) {
-		return MapUtils.getProjection(loc.getLatitude(),
+	static Location getProject(Location loc, Location from, Location to) {
+		LatLon project = MapUtils.getProjection(loc.getLatitude(),
 				loc.getLongitude(), from.getLatitude(), from.getLongitude(),
 				to.getLatitude(), to.getLongitude());
+		Location locationProjection = new Location(loc);
+		locationProjection.setLatitude(project.getLatitude());
+		locationProjection.setLongitude(project.getLongitude());
+		// we need to update bearing too
+		float bearingTo = locationProjection.bearingTo(to);
+		locationProjection.setBearing(bearingTo);
+		return locationProjection;
 	}
 
 	static double getOrthogonalDistance(Location loc, Location from, Location to) {
@@ -92,30 +98,6 @@ public class RoutingHelperUtils {
 			iterations--;
 		}
 		return index;
-	}
-
-	public static float getPosTolerance(float accuracy) {
-		if (accuracy > 0) {
-			return POSITION_TOLERANCE / 2 + accuracy;
-		}
-		return POSITION_TOLERANCE;
-	}
-
-	public static float getDefaultAllowedDeviation(OsmandSettings settings, ApplicationMode mode, float posTolerance) {
-		if (settings.DISABLE_OFFROUTE_RECALC.getModeValue(mode)) {
-			return -1.0f;
-		} else if (mode.getRouteService() == RouteProvider.RouteService.DIRECT_TO) {
-			return -1.0f;
-		} else if (mode.getRouteService() == RouteProvider.RouteService.STRAIGHT) {
-			MetricsConstants mc = settings.METRIC_SYSTEM.getModeValue(mode);
-			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
-				return 500.f;
-			} else {
-				// 1/4 mile
-				return 482.f;
-			}
-		}
-		return posTolerance * RoutingHelper.ALLOWED_DEVIATION;
 	}
 
 	/**
@@ -181,16 +163,6 @@ public class RoutingHelperUtils {
 		return isOffRoute;
 	}
 
-	static float getArrivalDistance(ApplicationMode mode, OsmandSettings settings) {
-		ApplicationMode m = mode == null ? settings.getApplicationMode() : mode;
-		float defaultSpeed = Math.max(0.3f, m.getDefaultSpeed());
-
-		/// Used to be: car - 90 m, bicycle - 50 m, pedestrian - 20 m
-		// return ((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(m);
-		// GPS_TOLERANCE - 12 m
-		// 5 seconds: car - 80 m @ 50 kmh, bicyle - 45 m @ 25 km/h, bicyle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
-		return RoutingHelper.GPS_TOLERANCE + defaultSpeed * 5 * RoutingHelper.ARRIVAL_DISTANCE_FACTOR;
-	}
 
 	public static void checkAndUpdateStartLocation(@NonNull OsmandApplication app, LatLon newStartLocation) {
 		if (newStartLocation != null) {
