@@ -2176,7 +2176,7 @@
     <string name="poi_wheelchair_description">Leírás kerekesszékeseknek</string>
     <string name="poi_blind_description">Leírás vakoknak</string>
     <string name="poi_highway_steps">Lépcső</string>
-    <string name="poi_handrail_yes">Korlát</string>
+    <string name="poi_handrail_yes">Korlát van</string>
     <string name="poi_handrail_no">Korlát nincs</string>
     <string name="poi_ramp_yes">Rámpa</string>
     <string name="poi_ramp_no">Rámpa nincs</string>
@@ -2832,7 +2832,7 @@
     <string name="poi_free_flying_hanggliding_yes">Sárkányrepülés</string>
     <string name="poi_medical_system_ayurveeda_yes">Hagyományos indiai (ájurvéda)</string>
     <string name="poi_treat_inpatient_yes">Fekvőbeteg-ellátás</string>
-    <string name="poi_emergency_yes">Vészhelyzet</string>
+    <string name="poi_emergency_yes">Sürgősségi ellátás</string>
     <string name="poi_dispensing_yes">beváltható</string>
     <string name="poi_hygrometer_yes">Páratartalom-mérő</string>
     <string name="poi_water_heater_no">Vízforraló nincs</string>
@@ -2865,7 +2865,7 @@
     <string name="poi_free_flying_no_flight_time">Repüléstilalmi idő (siklórepüléshez)</string>
     <string name="poi_free_flying_guest_guidelines_yes">Vendégeknek szóló iránymutatás</string>
     <string name="poi_free_flying_guest_guidelines_no">Vendégeknek szóló iránymutatás nincs</string>
-    <string name="poi_emergency_no">Vészhelyzet nincs</string>
+    <string name="poi_emergency_no">Sürgősségi ellátás nincs</string>
     <string name="poi_bridge_ref">Híd száma</string>
     <string name="poi_cafeteria">Menza</string>
     <string name="poi_forestry_compartment">Útirányjelző tábla: erdőtag (RU)</string>
@@ -3317,7 +3317,7 @@
     <string name="poi_scooter_yes">Roller</string>
     <string name="poi_scooter_no">Roller nem</string>
     <string name="poi_truck_yes">Teherautó</string>
-    <string name="poi_truck_no">Teherautó nem</string>
+    <string name="poi_truck_no">Teherautóval nem használható</string>
     <string name="poi_parking_fee_yes">Parkolási díj</string>
     <string name="poi_parking_fee_no">Parkolási díj nincs</string>
     <string name="poi_parking_fee">Parkolási díj</string>
@@ -3891,4 +3891,7 @@
     <string name="poi_water_source_water_works">Vízmű</string>
     <string name="poi_water_source_tube_well">Csöves kút</string>
     <string name="poi_swimming_area">Fürdésre kijelölt terület</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Denevéralagút</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Denevérhíd</string>
+    <string name="poi_wildlife_crossing">Vadátjáró</string>
 </resources>

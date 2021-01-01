@@ -1237,4 +1237,12 @@
     <string name="shared_string_min">წთ</string>
     <string name="app_mode_ski_touring">სასრიალო ტურიზმი</string>
     <string name="app_mode_ski_snowmobile">სნოუმობილი</string>
+    <string name="shared_string_add_photo">სურათის დამატება</string>
+    <string name="register_opr_create_new_account">ახალი ანგარიშის შექმნა</string>
+    <string name="select_picture">სურათის არჩევა</string>
+    <string name="shared_string_resources">რესურსები</string>
+    <string name="approximate_file_size">ფაილის დაახლოებითი ზომაა</string>
+    <string name="plan_route_add_new_segment">სეგმენტის დამატება</string>
+    <string name="profile_type_osmand_string">OsmAnd-ის პროფილი</string>
+    <string name="profile_type_user_string">პროფილი</string>
 </resources>
