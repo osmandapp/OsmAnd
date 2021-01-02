@@ -6,7 +6,11 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 
 public class AnnounceTimeDistances {
+	// Avoids false negatives: Pre-pone close announcements by this distance to allow for the possible over-estimation of the 'true' lead distance due to positioning error.
+	// A smaller value will increase the timing precision, but at the risk of missing prompts which do not meet the precision limit.
+	// We can research if a flexible value like min(12, x * gps-hdop) has advantages over a constant (x could be 2 or so).
 	private static final int DEFAULT_GPS_TOLERANCE = 12;
+
 	public final static int STATE_TURN_NOW = 0;
 	public final static int STATE_PREPARE_TURN = 1;
 	public final static int STATE_LONG_PREPARE_TURN = 2;
