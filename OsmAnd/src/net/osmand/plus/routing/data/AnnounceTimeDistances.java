@@ -199,35 +199,38 @@ public class AnnounceTimeDistances {
 		return (int) (dist - voicePromptDelayTimeSec * speed);
 	}
 
+	private void appendTurnDesc(StringBuilder s, String name, int dist) {
+		appendTurnDesc(s, name, dist, DEFAULT_SPEED);
+	}
+
+	private void appendTurnDesc(StringBuilder s, String name, int dist, float speed) {
+		int minDist = (dist / 5) * 5;
+		int time = (int) (dist / speed);
+		if(time > 15) {
+			// round to 5
+			time = (time / 5) * 5;
+		}
+		s.append(String.format("%s: %d - %d m, %d sec\n", name, minDist, minDist + 5, time));
+	}
+
 	public String getTurnsDescription() {
 		StringBuilder turnDescriptions = new StringBuilder();
-		turnDescriptions.append(String.format("Turn (now): %d m, %d seconds\n", TURN_NOW_DISTANCE,
-				(int) (TURN_NOW_DISTANCE / TURN_NOW_SPEED)));
-		turnDescriptions.append(String.format("Turn (approach): %d m, %d seconds\n", TURN_IN_DISTANCE,
-				(int) (TURN_IN_DISTANCE / DEFAULT_SPEED)));
+		appendTurnDesc(turnDescriptions, "Turn (now)", TURN_NOW_DISTANCE, TURN_NOW_SPEED);
+		appendTurnDesc(turnDescriptions, "Turn (approach)", TURN_IN_DISTANCE);
 		if (PREPARE_DISTANCE_END <= PREPARE_DISTANCE) {
-			turnDescriptions.append(String.format("Turn (prepare): %d m, %d seconds\n", PREPARE_DISTANCE,
-					(int) (PREPARE_DISTANCE / DEFAULT_SPEED)));
+			appendTurnDesc(turnDescriptions, "Turn (prepare)", PREPARE_DISTANCE);
 		}
 		if (PREPARE_LONG_DISTANCE_END <= PREPARE_LONG_DISTANCE) {
-			turnDescriptions.append(String.format("Turn (early prepare): %d m, %d seconds\n", PREPARE_LONG_DISTANCE,
-					(int) (PREPARE_LONG_DISTANCE / DEFAULT_SPEED)));
+			appendTurnDesc(turnDescriptions, "Turn (early prepare)", PREPARE_LONG_DISTANCE);
 		}
-		turnDescriptions.append(String.format("Finish: %d m, %d seconds\n", (int) getArrivalDistance(),
-				(int) (getArrivalDistance() / DEFAULT_SPEED)));
-		if(getOffRouteDistance() > 0) {
-			turnDescriptions.append(String.format("Off-route (prepare): %d m, %d seconds\n", (int) getOffRouteDistance(),
-					(int) (getOffRouteDistance() / DEFAULT_SPEED)));
+		appendTurnDesc(turnDescriptions, "Finish",  (int) getArrivalDistance());
+		if (getOffRouteDistance() > 0) {
+			appendTurnDesc(turnDescriptions, "Off-route", (int) getOffRouteDistance());
 		}
-		turnDescriptions.append(String.format("Alarm (now): %d m, %d seconds\n", SHORT_ALARM_ANNOUNCE_RADIUS,
-				(int) (SHORT_ALARM_ANNOUNCE_RADIUS / DEFAULT_SPEED)));
-		turnDescriptions.append(String.format("Alarm (prepare): %d m, %d seconds\n", LONG_ALARM_ANNOUNCE_RADIUS,
-				(int) (LONG_ALARM_ANNOUNCE_RADIUS / DEFAULT_SPEED)));
-		turnDescriptions.append(String.format("POI/Waypoint (now): %d m, %d seconds\n", SHORT_PNT_ANNOUNCE_RADIUS,
-				(int) (SHORT_PNT_ANNOUNCE_RADIUS / DEFAULT_SPEED)));
-		turnDescriptions.append(String.format("POI/Waypoint (prepare): %d m, %d seconds\n", LONG_PNT_ANNOUNCE_RADIUS,
-				(int) (LONG_PNT_ANNOUNCE_RADIUS / DEFAULT_SPEED)));
-
+		appendTurnDesc(turnDescriptions, "Alarm (now)",  SHORT_ALARM_ANNOUNCE_RADIUS);
+		appendTurnDesc(turnDescriptions, "Alarm (prepare)",  LONG_ALARM_ANNOUNCE_RADIUS);
+		appendTurnDesc(turnDescriptions, "POI/Waypoint (now)",  SHORT_PNT_ANNOUNCE_RADIUS);
+		appendTurnDesc(turnDescriptions, "POI/Waypoint (prepare)",  LONG_PNT_ANNOUNCE_RADIUS);
 		return turnDescriptions.toString();
 	}
 }
