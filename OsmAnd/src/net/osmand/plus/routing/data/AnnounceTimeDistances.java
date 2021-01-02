@@ -9,16 +9,16 @@ public class AnnounceTimeDistances {
 	// Avoids false negatives: Pre-pone close announcements by this distance to allow for the possible over-estimation of the 'true' lead distance due to positioning error.
 	// A smaller value will increase the timing precision, but at the risk of missing prompts which do not meet the precision limit.
 	// We can research if a flexible value like min(12, x * gps-hdop) has advantages over a constant (x could be 2 or so).
-	private static final int DEFAULT_GPS_TOLERANCE = 12;
+	private static final int POSITIONING_TOLERANCE = 12;
 
 	public final static int STATE_TURN_NOW = 0;
-	public final static int STATE_PREPARE_TURN = 1;
-	public final static int STATE_LONG_PREPARE_TURN = 2;
-	public final static int STATE_TURN_IN_TURN = 3;
-	public final static int STATE_LONG_PNT_ANNOUNCE = 4;
-	public final static int STATE_SHORT_PNT_ANNOUNCE = 5;
-	public final static int STATE_LONG_ALARM_ANNOUNCE = 6;
-	public final static int STATE_SHORT_ALARM_ANNOUNCE = 7;
+	public final static int STATE_TURN_IN = 1;
+	public final static int STATE_PREPARE_TURN = 2;
+	public final static int STATE_LONG_PREPARE_TURN = 3;
+	public final static int STATE_SHORT_ALARM_ANNOUNCE = 4;
+	public final static int STATE_LONG_ALARM_ANNOUNCE = 5;
+	public final static int STATE_SHORT_PNT_APPROACH = 6;
+	public final static int STATE_LONG_PNT_APPROACH = 7;
 
 	public final static int STATE_ARRIVAL_DISTANCE  = 10;
 	public final static int STATE_OFF_ROUTE_DISTANCE  = 11;
@@ -91,11 +91,11 @@ public class AnnounceTimeDistances {
 		float ARRIVAL_DISTANCE_FACTOR = Math.max(settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(appMode), 0.1f);
 		// TURN_NOW_DISTANCE = (int) (DEFAULT_SPEED * 3.6); // 3.6 sec
 		// 50 kmh - 48 m (car), 10 kmh - 20 m, 4 kmh - 15 m, 1 kmh - 12 m
-		TURN_NOW_DISTANCE = (int) ((DEFAULT_GPS_TOLERANCE + DEFAULT_SPEED * 2.5) * ARRIVAL_DISTANCE_FACTOR); // 3.6 sec
+		TURN_NOW_DISTANCE = (int) ((POSITIONING_TOLERANCE + DEFAULT_SPEED * 2.5) * ARRIVAL_DISTANCE_FACTOR); // 3.6 sec
 		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 
 		// 5 seconds: car - 80 m @ 50 kmh, bicycle - 45 m @ 25 km/h, bicycle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
-		ARRIVAL_DISTANCE =  (DEFAULT_GPS_TOLERANCE + DEFAULT_SPEED * 5) * ARRIVAL_DISTANCE_FACTOR;
+		ARRIVAL_DISTANCE =  (POSITIONING_TOLERANCE + DEFAULT_SPEED * 5) * ARRIVAL_DISTANCE_FACTOR;
 		// 50 kmh - 280 m, 10 kmh - 55 m, 4 kmh - 22 m
 		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * ARRIVAL_DISTANCE_FACTOR; // 20 seconds
 		// assume for backward compatibility speed - 10 m/s
@@ -118,7 +118,7 @@ public class AnnounceTimeDistances {
 		if (isTurnStateActive(speed, dist, STATE_TURN_NOW)) {
 			return 0;
 		} else if (isTurnStateActive(speed, dist, STATE_PREPARE_TURN)) {
-			// STATE_TURN_IN_TURN included
+			// STATE_TURN_IN included
 			return 1;
 		} else {
 			return -1;
@@ -127,7 +127,7 @@ public class AnnounceTimeDistances {
 
 	public boolean isTurnStateActive(float currentSpeed, double dist, int turnType) {
 		switch (turnType) {
-			case STATE_TURN_IN_TURN:
+			case STATE_TURN_IN:
 				return isDistanceLess(currentSpeed, dist, TURN_IN_DISTANCE);
 			case STATE_PREPARE_TURN:
 				return isDistanceLess(currentSpeed, dist, PREPARE_DISTANCE);
@@ -135,9 +135,9 @@ public class AnnounceTimeDistances {
 				return isDistanceLess(currentSpeed, dist, PREPARE_LONG_DISTANCE);
 			case STATE_TURN_NOW:
 				return isDistanceLess(currentSpeed, dist, TURN_NOW_DISTANCE, TURN_NOW_SPEED);
-			case STATE_LONG_PNT_ANNOUNCE:
+			case STATE_LONG_PNT_APPROACH:
 				return isDistanceLess(currentSpeed, dist, LONG_PNT_ANNOUNCE_RADIUS);
-			case STATE_SHORT_PNT_ANNOUNCE:
+			case STATE_SHORT_PNT_APPROACH:
 				return isDistanceLess(currentSpeed, dist, SHORT_PNT_ANNOUNCE_RADIUS);
 			case STATE_LONG_ALARM_ANNOUNCE:
 				return isDistanceLess(currentSpeed, dist, LONG_ALARM_ANNOUNCE_RADIUS);
@@ -149,13 +149,13 @@ public class AnnounceTimeDistances {
 
 	public boolean isTurnStateNotPassed(float currentSpeed, double dist, int turnType) {
 		switch (turnType) {
-			case STATE_TURN_IN_TURN:
+			case STATE_TURN_IN:
 				return !isDistanceLess(currentSpeed, dist, TURN_IN_DISTANCE_END);
 			case STATE_PREPARE_TURN:
 				return !isDistanceLess(currentSpeed, dist, PREPARE_DISTANCE_END);
 			case STATE_LONG_PREPARE_TURN:
 				return !isDistanceLess(currentSpeed, dist, PREPARE_LONG_DISTANCE_END);
-			case STATE_LONG_PNT_ANNOUNCE:
+			case STATE_LONG_PNT_APPROACH:
 				return !isDistanceLess(currentSpeed, dist, LONG_PNT_ANNOUNCE_RADIUS * 0.5);
 			case STATE_LONG_ALARM_ANNOUNCE:
 				return !isDistanceLess(currentSpeed, dist, LONG_ALARM_ANNOUNCE_RADIUS * 0.5);

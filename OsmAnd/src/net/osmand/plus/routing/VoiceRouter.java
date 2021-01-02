@@ -38,7 +38,7 @@ import java.util.Map;
 
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PREPARE_TURN;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_TURN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN_TURN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
 
 
@@ -450,14 +450,14 @@ public class VoiceRouter {
 		// Note: getNextRouteDirectionInfoAfter(nextInfo, x, y).distanceTo is distance from nextInfo, not from current position!
 		// STATUS_TURN = "Turn (now)"
 		if ((repeat || statusNotPassed(STATUS_TURN)) && atd.isTurnStateActive(speed, dist, STATE_TURN_NOW)) {
-			if (nextNextInfo != null && !atd.isTurnStateNotPassed(0, nextNextInfo.distanceTo, STATE_TURN_IN_TURN )) {
+			if (nextNextInfo != null && !atd.isTurnStateNotPassed(0, nextNextInfo.distanceTo, STATE_TURN_IN )) {
 				playMakeTurn(currentSegment, next, nextNextInfo);
 			} else {
 				playMakeTurn(currentSegment, next, null);
 			}
 			if (!next.getTurnType().goAhead() && isTargetPoint(nextNextInfo) && nextNextInfo != null) {
 				// !goAhead() avoids isolated "and arrive.." prompt, as goAhead() is not pronounced
-				if (!atd.isTurnStateNotPassed(0, nextNextInfo.distanceTo, STATE_TURN_IN_TURN )) {
+				if (!atd.isTurnStateNotPassed(0, nextNextInfo.distanceTo, STATE_TURN_IN )) {
 					// Issue #2865: Ensure a distance associated with the destination arrival is always announced, either here, or in subsequent "Turn in" prompt
 					// Distance fon non-straights already announced in "Turn (now)"'s nextnext  code above
 					if ((nextNextInfo != null) && (nextNextInfo.directionInfo != null) && nextNextInfo.directionInfo.getTurnType().goAhead()) {
@@ -465,7 +465,7 @@ public class VoiceRouter {
 						playGoAhead(nextNextInfo.distanceTo, new StreetName());
 					}
 					playAndArriveAtDestination(nextNextInfo);
-				} else if (!atd.isTurnStateNotPassed(0, nextNextInfo.distanceTo / 1.2f, STATE_TURN_IN_TURN )) {
+				} else if (!atd.isTurnStateNotPassed(0, nextNextInfo.distanceTo / 1.2f, STATE_TURN_IN )) {
 					// 1.2 is safety margin should the subsequent "Turn in" prompt not fit in amy more
 					playThen();
 					playGoAhead(nextNextInfo.distanceTo, new StreetName());
@@ -475,10 +475,10 @@ public class VoiceRouter {
 			nextStatusAfter(STATUS_TURN);
 
 		// STATUS_TURN_IN = "Turn in ..."
-		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && atd.isTurnStateActive(speed, dist, STATE_TURN_IN_TURN)) {
-			if (repeat || atd.isTurnStateNotPassed(0, dist, STATE_TURN_IN_TURN)) {
+		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && atd.isTurnStateActive(speed, dist, STATE_TURN_IN)) {
+			if (repeat || atd.isTurnStateNotPassed(0, dist, STATE_TURN_IN)) {
 				if (nextNextInfo != null && (atd.isTurnStateActive(speed, nextNextInfo.distanceTo, STATE_TURN_NOW)
-						|| !atd.isTurnStateNotPassed(speed, nextNextInfo.distanceTo, STATE_TURN_IN_TURN))) {
+						|| !atd.isTurnStateNotPassed(speed, nextNextInfo.distanceTo, STATE_TURN_IN))) {
 					playMakeTurnIn(currentSegment, next, atd.calcDistanceWithoutDelay(speed, dist), nextNextInfo.directionInfo);
 				} else {
 					playMakeTurnIn(currentSegment, next, atd.calcDistanceWithoutDelay(speed, dist), null);
@@ -746,7 +746,7 @@ public class VoiceRouter {
 				playAndArriveAtDestination(nextInfo);
 				playedAndArriveAtTarget = true;
 			} else if (nextInfo != null &&
-					atd.isTurnStateActive(0, nextInfo.distanceTo / 2, STATE_TURN_IN_TURN)) {
+					atd.isTurnStateActive(0, nextInfo.distanceTo / 2, STATE_TURN_IN)) {
 				playAndArriveAtDestination(nextInfo);
 				playedAndArriveAtTarget = true;
 			}

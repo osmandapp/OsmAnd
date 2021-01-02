@@ -48,9 +48,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
 
 //	import android.widget.Toast;
 
@@ -182,7 +182,7 @@ public class WaypointHelper {
 					// skip
 				} else {
 					if (atd.isTurnStateActive(0,
-							route.getDistanceToPoint(lwp.routeIndex), STATE_LONG_PNT_ANNOUNCE)) {
+							route.getDistanceToPoint(lwp.routeIndex), STATE_LONG_PNT_APPROACH)) {
 						if (found == null || found.routeIndex < lwp.routeIndex) {
 							found = lwp;
 							if (list != null) {
@@ -226,7 +226,7 @@ public class WaypointHelper {
 						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
 					}
 					int d = route.getDistanceToPoint(inf.getLocationIndex());
-					if (!atd.isTurnStateActive(0, d, STATE_LONG_PNT_ANNOUNCE)) {
+					if (!atd.isTurnStateActive(0, d, STATE_LONG_PNT_APPROACH)) {
 						break;
 					}
 					float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
@@ -386,7 +386,7 @@ public class WaypointHelper {
 						}
 						if (lwp.announce) {
 							if (!atd.isTurnStateActive(atdSpeed,
-									route.getDistanceToPoint(lwp.routeIndex) / 2, STATE_LONG_PNT_ANNOUNCE)) {
+									route.getDistanceToPoint(lwp.routeIndex) / 2, STATE_LONG_PNT_APPROACH)) {
 								break;
 							}
 							LocationPoint point = lwp.point;
@@ -394,11 +394,11 @@ public class WaypointHelper {
 									point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
 							Integer state = locationPointsStates.get(point);
 							if (state != null && state == ANNOUNCED_ONCE
-									&& atd.isTurnStateActive(atdSpeed, d1, STATE_SHORT_PNT_ANNOUNCE)) {
+									&& atd.isTurnStateActive(atdSpeed, d1, STATE_SHORT_PNT_APPROACH)) {
 								locationPointsStates.put(point, ANNOUNCED_DONE);
 								announcePoints.add(lwp);
 							} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
-									&& atd.isTurnStateActive(atdSpeed, d1, STATE_LONG_PNT_ANNOUNCE)) {
+									&& atd.isTurnStateActive(atdSpeed, d1, STATE_LONG_PNT_APPROACH)) {
 								locationPointsStates.put(point, ANNOUNCED_ONCE);
 								approachPoints.add(lwp);
 							} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)) {
