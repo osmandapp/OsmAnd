@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
@@ -43,6 +42,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
 
 	private static final String MORE_VALUE = "MORE_VALUE";
+	private static final String VOICE_PROMPTS_TIMETABLE = "voice_prompts_timetable";
 
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
@@ -109,18 +109,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	}
 
 	private void updateVoicePromptsTimes() {
-		Preference pref = findPreference("voice_prompts_timetable");
+		Preference pref = findPreference(VOICE_PROMPTS_TIMETABLE);
 		if (OsmandPlugin.isDevelopment()) {
-			final AnnounceTimeDistances atd = new AnnounceTimeDistances(getSelectedAppMode(), settings);
+			AnnounceTimeDistances atd = new AnnounceTimeDistances(getSelectedAppMode(), settings);
 			pref.setSummary(atd.getTurnsDescription().trim());
-			pref.setEnabled(true);
-			pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-				@Override
-				public boolean onPreferenceClick(Preference preference) {
-					app.showToastMessage(atd.getTurnsDescription().trim());
-					return true;
-				}
-			});
+			pref.setVisible(true);
 		} else {
 			pref.setVisible(false);
 		}
@@ -318,8 +311,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
+		String prefId = preference.getKey();
+		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
 			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
+		} else if (VOICE_PROMPTS_TIMETABLE.equals(prefId)) {
+			app.showToastMessage(String.valueOf(preference.getSummary()));
 		}
 		return super.onPreferenceClick(preference);
 	}
