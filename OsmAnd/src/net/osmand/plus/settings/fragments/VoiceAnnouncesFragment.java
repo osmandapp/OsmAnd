@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
@@ -110,8 +111,16 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	private void updateVoicePromptsTimes() {
 		Preference pref = findPreference("voice_prompts_timetable");
 		if (OsmandPlugin.isDevelopment()) {
-			AnnounceTimeDistances atd = new AnnounceTimeDistances(getSelectedAppMode(), settings);
+			final AnnounceTimeDistances atd = new AnnounceTimeDistances(getSelectedAppMode(), settings);
 			pref.setSummary(atd.getTurnsDescription().trim());
+			pref.setEnabled(true);
+			pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					app.showToastMessage(atd.getTurnsDescription().trim());
+					return true;
+				}
+			});
 		} else {
 			pref.setVisible(false);
 		}
