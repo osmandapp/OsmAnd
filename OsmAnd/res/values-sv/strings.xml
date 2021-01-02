@@ -805,7 +805,7 @@ Nyttjat utrymme är {1} MB.
     <string name="error_calculating_route_occured">Ett fel uppstod vid ruttberäkningen</string>
     <string name="empty_route_calculated">Fel: Den beräknade rutten är tom</string>
     <string name="new_route_calculated_dist">Ny rutt beräknad, avstånd</string>
-    <string name="invalid_locations">Koordinaterna är ogiltiga!</string>
+    <string name="invalid_locations">Ogiltiga koordinater</string>
     <string name="go_back_to_osmand">Tillbaka till OsmAnd-kartan</string>
     <string name="previous_run_crashed">Den senaste körningen av OsmAnd kraschade. Loggen finns i {0}. Rapportera felet och bifoga gärna loggfilen.</string>
     <string name="saving_gpx_tracks">Sparar GPX-spår till SD-kortet …</string>
@@ -857,8 +857,8 @@ Nyttjat utrymme är {1} MB.
     <string name="navigate_point_latitude">Latitud</string>
     <string name="navigate_point_longitude">Longitud</string>
     <string name="navigate_point_format_D">DDD.DD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_DM">DDD MM.MMM</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="get_directions">Vägvisning</string>
     <string name="precise_routing_mode_descr">Aktivera exakt ruttning för beräkning utan småfel. Mycket begränsad av avståndet samt långsam.</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, long %2$.3f</string>
@@ -902,7 +902,7 @@ Nyttjat utrymme är {1} MB.
     <string name="street_name">Gatunamn</string>
     <string name="hno">Husnummer</string>
     <string name="monitoring_settings_descr">Konfigurera inspelningen av dina resor.</string>
-    <string name="monitoring_settings">Trippinspelning</string>
+    <string name="monitoring_settings">Inspelning av resa</string>
     <string name="use_kalman_filter_compass_descr">Minskar kompassmissvisningen men blir trögare.</string>
     <string name="use_kalman_filter_compass">Använd Kalman-filter</string>
     <string name="choose_osmand_theme">App-tema</string>
@@ -1153,8 +1153,7 @@ Nyttjat utrymme är {1} MB.
     <string name="sort_by_name">Sortera efter namn</string>
     <string name="arrival_distance">Ankomstmeddelande</string>
     <string name="arrival_distance_descr">Hur tidigt vill du höra ankomstmeddelandet?</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>Online OSM</u>-kartklassificering med bilder.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-kartklassificering med bilder.</string>
     <string name="import_file_favourites">Spara data som GPX-fil eller importera waypoints till \"Favoriter\"?</string>
     <string name="share_fav_subject">Favoriter utdelade via OsmAnd</string>
     <string name="commiting_node">Skickar nod…</string>
@@ -1225,7 +1224,7 @@ Nyttjat utrymme är {1} MB.
     <string name="record_plugin_description">"Denna modul aktiverar funktionen att antingen spela in och spara dina spår genom att du trycker på widgeten GPX-loggning på kartskärmen eller att alla dina rutter sparas automatiskt i en GPX-fil. 
 \n
 \nInspelade spår kan delas ut till vänner eller användas som bidrag till OSM. Idrottsmän kan använda inspelade spår för att följa sin träning. Viss grundläggande spåranalys kan göras direkt i OsmAnd, såsom varvtider, genomsnittshastighet o.s.v. och spår kan givetvis också analyseras i efterhand i speciella analysverktyg från tredje part. "</string>
-    <string name="record_plugin_name">Inspelning av resor</string>
+    <string name="record_plugin_name">Inspelning av resa</string>
     <string name="int_hour">h</string>
     <string name="duration">Längd</string>
     <string name="distance">Sträcka</string>
@@ -1402,7 +1401,7 @@ Nyttjat utrymme är {1} MB.
     <string name="shared_string_remember_my_choice">Kom ihåg mitt val</string>
     <string name="shared_string_refresh">Uppdatera</string>
     <string name="shared_string_download">Hämta</string>
-    <string name="shared_string_downloading">Laddar ner</string>
+    <string name="shared_string_downloading">Laddar ner…</string>
     <string name="shared_string_download_successful">Hämtningen lyckades</string>
     <string name="shared_string_unexpected_error">Ett oväntat fel uppstod</string>
     <string name="shared_string_action_template">Åtgärd {0}</string>
@@ -1616,7 +1615,7 @@ Long %2$s</string>
     <string name="si_min_km">Minuter per kilometer</string>
     <string name="si_min_m">Minuter per engelsk mil</string>
     <string name="si_nm_h">Sjömil i timmen (knop)</string>
-    <string name="shared_string_trip_recording">Trippinspelning</string>
+    <string name="shared_string_trip_recording">Inspelning av resa</string>
     <string name="shared_string_navigation">Navigering</string>
     <string name="osmand_running_in_background">Körs i bakgrunden</string>
     <string name="favorite_category_add_new">Lägg till ny</string>
@@ -1835,7 +1834,8 @@ Tillgängligt utrymme är blott {2} MB.</string>
     <string name="osm_live_not_active">Inaktiv</string>
     <string name="osm_live_enter_email">Ange en giltig e-postadress</string>
     <string name="osm_live_enter_user_name">Ange publikt namn</string>
-    <string name="osm_live_thanks">Tack för att du prenumererar på live-uppdateringar!</string>
+    <string name="osm_live_thanks">Tack för att du stödjer OsmAnd!
+\nFör att aktivera alla nya funktioner behöver du starta om OsmAnd.</string>
     <string name="osm_live_region_desc">Delar av din donation kommer att skickas till OSM-användare som skickar in kartändringar i det området.</string>
     <string name="osm_live_subscription_settings">Prenumerationsinställningar</string>
     <string name="osm_live_ask_for_purchase">Köp en OsmAnd Live-prenumeration först</string>
@@ -2055,7 +2055,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="rendering_value_fine_name">Fin</string>
     <string name="navigate_point_olc">Öppna platskod</string>
     <string name="navigate_point_olc_info_invalid">Ogiltig OLC
-</string>
+\n</string>
     <string name="navigate_point_olc_info_short">Kort OLC
 Vänligen tillhandahåll fullständig kod</string>
     <string name="file_can_not_be_moved">Filen kan inte flyttas.</string>
@@ -2439,7 +2439,18 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="min_max">Min/Max</string>
     <string name="route_is_too_long_v2">Denna väg kan vara för lång tid att beräkna. Lägg till mellanliggande destinationer om inget resultat finns inom 10 minuter.</string>
     <string name="osmand_extended_description_part1">"OsmAnd (OSM Automated Navigation Directions) är en kartnavigationsapp med tillgång till gratis, världsomfattande OpenStreetMap (OSM)-data av hög kvalitet. Njut av röstnavigation eller visuell navigation, visning av POI (points of interest - nyttoplatser), att skapa och hantera GPX-spår, visa höjdkurvor  och höjdinfo (via plugin), val mellan bil-, cykel-, fotgängar-lägen, OSM-redigering och mycket mer."</string>
-    <string name="osmand_extended_description_part2">GPS-navigering • Du kan välja mellan offline (inga roaming-avgifter när du är utomlands) eller på online(snabbare)-läge • Turn-by-Turn röstguidning leder dig längs vägen (inspelade och genererade röster) • Rutten uppdateras om du avviker från den. • Filval och beräknad ankomsttid hjälper dig längs vägen • För att göra din resa säkrare, dag/natt-läge växlar automatiskt • Du kan välja att visa hastighetsbegränsningar och få påminnelser om du överskrider den • Kartzoomen anpassar sig till din hastighet. • Du kan söka destinationer efter adress eller efter typ (t.ex.: parkering, restaurang, hotell, bensinstation, museum), eller av geografiska koordinater • Stödjer mellanliggande punkter på din rutt • Du kan spela in dina egna eller ladda upp en GPX-spår och följa dem</string>
+    <string name="osmand_extended_description_part2">GPS-navigering
+\n• Välj mellan offline- (inga roaming-avgifter när du är utomlands) eller online-läge a(snabbare)
+\n• Steg-för-steg röstguidning leder dig längs vägen (inspelade och genererade röster)
+\n• Färdvägen uppdateras närhellst du avviker från den.
+\n• Guidning vid val av filer, gatunamn och beräknad ankomsttid hjälper dig längs vägen
+\n• Dag-/natt-läge för appen växlas automatiskt för att göra din resa säkrare
+\n• Visa hastighetsbegränsningar och få påminnelser om du överskrider den
+\n• Kartzoomen anpassar sig till din hastighet
+\n• Sök destinationer genom adress, typ (t.ex.: parkering, restaurang, hotell, bensinstation, museum), eller geografiska koordinater
+\n• Stödjer användande av delmål på din resväg
+\n• Spela in dina egna, eller ladda upp en GPX-spår och följa dem
+\n</string>
     <string name="osmand_extended_description_part3">Karta
 \n • Visar Poi (point of interests) runt omkring dig
 \n • Justera kartan baserat på riktning (eller kompass)
@@ -2601,7 +2612,12 @@ Vänligen tillhandahåll fullständig kod</string>
 \n• Kompakta offline vektorkartor som uppdateras minst en gång i månaden 
 \n 
 \n• Val mellan data för hela regionen och bara vägnätet (Exempel: Hela Japan är 700 MB eller endast vägnätet för 200 MB)</string>
-    <string name="osmand_plus_extended_description_part5">Säkerhetsfunktioner • Valfri växling mellan dag-/nattläge • Valfri visning av hastighet, med en påminnelse om du överskrider den • Valfri hastighetsbaserad zoomning • Dela din position så att dina vänner kan hitta dig</string>
+    <string name="osmand_plus_extended_description_part5">Säkerhetsfunktioner
+\n• Valfri växling mellan dag-/nattläge
+\n• Valfri visning av hastighet, med en påminnelse om du överskrider den
+\n• Valfri hastighetsbaserad zoomning
+\n• Dela din position så att dina vänner kan hitta dig
+\n</string>
     <string name="osmand_plus_extended_description_part6">Funktioner för cykel och gående • Se vägar för gående och cyklande samt vandringsstigar, utmärkta för utomhusaktiviteter • Speciella ruttval och visningsläge för cykel och gående • Valfria kollektivtrafiksplatser (buss, spårvagn, tåg) inklusive linjenamn • Valfri reseinspelning till lokal GPX-fil eller onlinetjänst • Valfri visning av hastighet och höjd • Visa konturlinjer och höjdreliefer (via separat plugin)</string>
     <string name="osmand_plus_extended_description_part7">Bidra direkt till OSM
 \n• Rapportera databuggar
@@ -3038,4 +3054,48 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="subscription_on_hold_title">Prenumerationen på OsmAnd Live är</string>
     <string name="send_files_to_openstreetmap">Skicka GPX fil till OpenStreetMap</string>
     <string name="enter_text_separated">Ange taggar sepparerade med komma (,).</string>
+    <string name="select_track_width">Välj</string>
+    <string name="shared_string_custom">Anpassad</string>
+    <string name="gpx_direction_arrows">Dirigeringspilar</string>
+    <string name="plan_route_last_edited">Senast ändrad</string>
+    <string name="shared_string_done">Klar</string>
+    <string name="next_segment">Nästa segment</string>
+    <string name="navigation_profile">Navigationsprofil</string>
+    <string name="street_level_imagery">Bilder på gatunivå</string>
+    <string name="plan_route_exit_dialog_descr">Är du säker på att du vill avfärda alla ändringar i den plannerade färdvägen\?</string>
+    <string name="map_widget_monitoring">Inspelning av resa</string>
+    <string name="follow_track">Följ färdväg</string>
+    <string name="select_another_track">välj en annan färdväg</string>
+    <string name="start_of_the_track">Början på färdvägen</string>
+    <string name="nearest_point">Närmaste punkt</string>
+    <string name="delete_address">Ta bort adress</string>
+    <string name="add_address">Lägg till adress</string>
+    <string name="access_hint_enter_address">Ange adress</string>
+    <string name="plan_route_trim_before">Korta ner innan</string>
+    <string name="plan_route_trim_after">Korta ner efter</string>
+    <string name="plan_route_change_route_type_before">Ändra typ av färdväg innan</string>
+    <string name="plan_route_change_route_type_after">Ändra typ av färdväg efter</string>
+    <string name="simplified_track">Förenklad färdväg</string>
+    <string name="simplified_track_description">Bara färdvägens linje kommer sparas, delmålen tas bort.</string>
+    <string name="number_of_gpx_files_selected_pattern">%s GPX filer valda</string>
+    <string name="shared_string_file_name">Filnamn</string>
+    <string name="monitoring_control_start">Spela in</string>
+    <string name="system_default_theme">Systemstandard</string>
+    <string name="all_next_segments">Alla efterföljande delar</string>
+    <string name="previous_segment">Tidigare delar</string>
+    <string name="all_previous_segments">Alla tidigare delar</string>
+    <string name="only_selected_segment_recalc">Bara valda delar kommer bli omräknad med vald profil.</string>
+    <string name="all_next_segments_will_be_recalc">Alla kommande delar kommer bli omräknad med den valda profilen.</string>
+    <string name="all_previous_segments_will_be_recalc">Alla tidigare delar kommer bli omräknade med den valda profilen.</string>
+    <string name="open_saved_track">Öppna sparad färdväg</string>
+    <string name="shared_string_is_saved">är sparad</string>
+    <string name="shared_string_redo">Upprepa</string>
+    <string name="one_point_error">Vänligen lägg till minst två punkter.</string>
+    <string name="sort_last_modified">Senast ändrad</string>
+    <string name="sort_name_ascending">Namn: A – Ö</string>
+    <string name="sort_name_descending">Namn: Ö – A</string>
+    <string name="start_finish_icons">Ikoner för start och mål</string>
+    <string name="osm_live_payment_desc_hw">Betalningen för prenumerationen är i enlighet med vad som valts. Du kan avbryta den i AppGallery när som hellst.</string>
+    <string name="routing_attr_avoid_footways_description">Undvik resor till fots</string>
+    <string name="routing_attr_avoid_footways_name">Undvik resor till</string>
 </resources>
