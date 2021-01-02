@@ -33,6 +33,7 @@ import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.MapUtils;
 
@@ -46,6 +47,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_ANNOUNCE;
+
 //	import android.widget.Toast;
 
 /**
@@ -57,10 +63,6 @@ public class WaypointHelper {
 
 	private int searchDeviationRadius = 500;
 	private int poiSearchDeviationRadius = 100;
-	private static final int LONG_ANNOUNCE_RADIUS = 700;
-	private static final int SHORT_ANNOUNCE_RADIUS = 150;
-	private static final int ALARMS_ANNOUNCE_RADIUS = 150;
-	private static final int ALARMS_SHORT_ANNOUNCE_RADIUS = 100;
 
 	// don't annoy users by lots of announcements
 	private static final int APPROACH_POI_LIMIT = 1;
@@ -167,6 +169,7 @@ public class WaypointHelper {
 			list.clear();
 		}
 		LocationPointWrapper found = null;
+		AnnounceTimeDistances atd = getVoiceRouter().getAnnounceTimeDistances();
 		for (int type = 0; type < locationPoints.size(); type++) {
 			if (type == ALARMS || type == TARGETS) {
 				continue;
@@ -178,7 +181,8 @@ public class WaypointHelper {
 				if (lp.get(kIterator).routeIndex < route.getCurrentRoute()) {
 					// skip
 				} else {
-					if (route.getDistanceToPoint(lwp.routeIndex) <= LONG_ANNOUNCE_RADIUS) {
+					if (atd.isTurnStateActive(0,
+							route.getDistanceToPoint(lwp.routeIndex), STATE_LONG_PNT_ANNOUNCE)) {
 						if (found == null || found.routeIndex < lwp.routeIndex) {
 							found = lwp;
 							if (list != null) {
@@ -205,6 +209,7 @@ public class WaypointHelper {
 		AlarmInfo mostImportant = speedAlarm;
 		int value = speedAlarm != null ? speedAlarm.updateDistanceAndGetPriority(0, 0) : Integer.MAX_VALUE;
 		float speed = lastProjection != null && lastProjection.hasSpeed() ? lastProjection.getSpeed() : 0;
+		AnnounceTimeDistances atd = getVoiceRouter().getAnnounceTimeDistances();
 		if (ALARMS < pointsProgress.size()) {
 			int kIterator = pointsProgress.get(ALARMS);
 			List<LocationPointWrapper> lp = locationPoints.get(ALARMS);
@@ -221,7 +226,7 @@ public class WaypointHelper {
 						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
 					}
 					int d = route.getDistanceToPoint(inf.getLocationIndex());
-					if (d > LONG_ANNOUNCE_RADIUS) {
+					if (!atd.isTurnStateActive(0, d, STATE_LONG_PNT_ANNOUNCE)) {
 						break;
 					}
 					float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
@@ -371,6 +376,8 @@ public class WaypointHelper {
 					pointsProgress.set(type, kIterator);
 
 					VoiceRouter voiceRouter = getVoiceRouter();
+					AnnounceTimeDistances atd = voiceRouter.getAnnounceTimeDistances();
+					float atdSpeed = atd.getSpeed(lastKnownLocation);
 					while (kIterator < lp.size()) {
 						LocationPointWrapper lwp = lp.get(kIterator);
 						if (type == ALARMS && lwp.routeIndex < currentRoute) {
@@ -378,7 +385,8 @@ public class WaypointHelper {
 							continue;
 						}
 						if (lwp.announce) {
-							if (route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS * 2) {
+							if (!atd.isTurnStateActive(atdSpeed,
+									route.getDistanceToPoint(lwp.routeIndex) / 2, STATE_LONG_PNT_ANNOUNCE)) {
 								break;
 							}
 							LocationPoint point = lwp.point;
@@ -386,33 +394,33 @@ public class WaypointHelper {
 									point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
 							Integer state = locationPointsStates.get(point);
 							if (state != null && state == ANNOUNCED_ONCE
-									&& voiceRouter.isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
+									&& atd.isTurnStateActive(atdSpeed, d1, STATE_SHORT_PNT_ANNOUNCE)) {
 								locationPointsStates.put(point, ANNOUNCED_DONE);
 								announcePoints.add(lwp);
 							} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
-									&& voiceRouter.isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
+									&& atd.isTurnStateActive(atdSpeed, d1, STATE_LONG_PNT_ANNOUNCE)) {
 								locationPointsStates.put(point, ANNOUNCED_ONCE);
 								approachPoints.add(lwp);
 							} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)) {
 								AlarmInfo alarm = (AlarmInfo) point;
 								AlarmInfoType t = alarm.getType();
 								int announceRadius;
-								boolean filter = false;
+								boolean filterCloseAlarms = false;
 								switch (t) {
 									case TRAFFIC_CALMING:
-										announceRadius = ALARMS_SHORT_ANNOUNCE_RADIUS;
-										filter = true;
+										announceRadius = STATE_SHORT_ALARM_ANNOUNCE;
+										filterCloseAlarms = true;
 										break;
 									default:
-										announceRadius = ALARMS_ANNOUNCE_RADIUS;
+										announceRadius = STATE_LONG_ALARM_ANNOUNCE;
 										break;
 								}
-								boolean proceed = voiceRouter.isDistanceLess(lastKnownLocation.getSpeed(), d1, announceRadius);
-								if (proceed && filter) {
+								boolean proceed = atd.isTurnStateActive(atdSpeed, d1, announceRadius);
+								if (proceed && filterCloseAlarms) {
 									AlarmInfo lastAlarm = lastAnnouncedAlarms.get(t);
 									if (lastAlarm != null) {
 										double dist = MapUtils.getDistance(lastAlarm.getLatitude(), lastAlarm.getLongitude(), alarm.getLatitude(), alarm.getLongitude());
-										if (dist < ALARMS_SHORT_ANNOUNCE_RADIUS) {
+										if (atd.isTurnStateActive(atdSpeed, dist, STATE_SHORT_ALARM_ANNOUNCE)) {
 											locationPointsStates.put(point, ANNOUNCED_DONE);
 											proceed = false;
 										}

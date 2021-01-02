@@ -374,13 +374,6 @@ public class ApplicationMode {
 	}
 
 
-	public int getOffRouteDistance() {
-		// used to be: 50/14 - 350 m, 10/2.7 - 50 m, 4/1.11 - 20 m
-		float speed = Math.max(getDefaultSpeed(), 0.3f);
-		// become: 50 kmh - 280 m, 10 kmh - 55 m, 4 kmh - 22 m
-		return (int) (speed * 20);
-	}
-
 	public boolean hasFastSpeed() {
 		return getDefaultSpeed() > 10;
 	}
