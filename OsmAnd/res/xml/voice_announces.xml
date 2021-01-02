@@ -91,12 +91,10 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/arrival_distance" />
 
-
     <Preference
         android:key="voice_prompts_timetable"
         android:layout="@layout/preference_with_descr"
         android:persistent="false"
-        android:selectable="false"
         android:title="@string/voice_prompts_timetable" />
 
 	<Preference
