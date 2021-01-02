@@ -3054,7 +3054,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="subscription_on_hold_title">Prenumerationen på OsmAnd Live är</string>
     <string name="send_files_to_openstreetmap">Skicka GPX fil till OpenStreetMap</string>
     <string name="enter_text_separated">Ange taggar sepparerade med komma (,).</string>
-    <string name="select_track_width">Välj</string>
+    <string name="select_track_width">Välj bredd</string>
     <string name="shared_string_custom">Anpassad</string>
     <string name="gpx_direction_arrows">Dirigeringspilar</string>
     <string name="plan_route_last_edited">Senast ändrad</string>
