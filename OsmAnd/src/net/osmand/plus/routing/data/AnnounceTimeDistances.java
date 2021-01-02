@@ -92,11 +92,11 @@ public class AnnounceTimeDistances {
 		// TURN_NOW_DISTANCE = (int) (DEFAULT_SPEED * 3.6); // 3.6 sec
 		// 50 kmh - 48 m (car), 10 kmh - 20 m, 4 kmh - 15 m, 1 kmh - 12 m
 		// 3.6 sec: 43 m (car), 18 m (bicycle), 12 m (walking, capped by POSITIONING_TOLERANCE)
-		TURN_NOW_DISTANCE = (int) ((POSITIONING_TOLERANCE + Math.max(0., DEFAULT_SPEED * (3.6 - POSITIONING_TOLERANCE / DEFAULT_SPEED))) * ARRIVAL_DISTANCE_FACTOR);
+		TURN_NOW_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 3.6) * ARRIVAL_DISTANCE_FACTOR);
 		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 
 		// 5 sec:   60 m (car), 25 m (bicycle), 12 m (walking)
-		ARRIVAL_DISTANCE =  (int) ((POSITIONING_TOLERANCE + Math.max(0., DEFAULT_SPEED * (5. - POSITIONING_TOLERANCE / DEFAULT_SPEED))) * ARRIVAL_DISTANCE_FACTOR);
+		ARRIVAL_DISTANCE =  (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * ARRIVAL_DISTANCE_FACTOR);
 		// 50 kmh - 280 m, 10 kmh - 55 m, 4 kmh - 22 m
 		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * ARRIVAL_DISTANCE_FACTOR; // 20 seconds
 		// assume for backward compatibility speed - 10 m/s
