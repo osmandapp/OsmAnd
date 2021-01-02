@@ -1,6 +1,7 @@
 package net.osmand.plus.routing.data;
 
 import net.osmand.Location;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
@@ -20,8 +21,6 @@ public class AnnounceTimeDistances {
 	public final static int STATE_SHORT_PNT_APPROACH = 6;
 	public final static int STATE_LONG_PNT_APPROACH = 7;
 
-	public final static int STATE_ARRIVAL_DISTANCE  = 10;
-	public final static int STATE_OFF_ROUTE_DISTANCE  = 11;
 
 	// Default speed to have comfortable announcements (Speed in m/s)
 	// initial value is updated from default speed settings anyway
@@ -198,5 +197,37 @@ public class AnnounceTimeDistances {
 
 	public int calcDistanceWithoutDelay(float speed, int dist) {
 		return (int) (dist - voicePromptDelayTimeSec * speed);
+	}
+
+	public String getTurnsDescription() {
+		StringBuilder turnDescriptions = new StringBuilder();
+		turnDescriptions.append(String.format("Turn (now): %d m, %d seconds\n", TURN_NOW_DISTANCE,
+				(int) (TURN_NOW_DISTANCE / TURN_NOW_SPEED)));
+		turnDescriptions.append(String.format("Turn (approach): %d m, %d seconds\n", TURN_IN_DISTANCE,
+				(int) (TURN_IN_DISTANCE / DEFAULT_SPEED)));
+		if (PREPARE_DISTANCE_END <= PREPARE_DISTANCE) {
+			turnDescriptions.append(String.format("Turn (prepare): %d m, %d seconds\n", PREPARE_DISTANCE,
+					(int) (PREPARE_DISTANCE / DEFAULT_SPEED)));
+		}
+		if (PREPARE_LONG_DISTANCE_END <= PREPARE_LONG_DISTANCE) {
+			turnDescriptions.append(String.format("Turn (early prepare): %d m, %d seconds\n", PREPARE_LONG_DISTANCE,
+					(int) (PREPARE_LONG_DISTANCE / DEFAULT_SPEED)));
+		}
+		turnDescriptions.append(String.format("Finish: %d m, %d seconds\n", (int) getArrivalDistance(),
+				(int) (getArrivalDistance() / DEFAULT_SPEED)));
+		if(getOffRouteDistance() > 0) {
+			turnDescriptions.append(String.format("Off-route (prepare): %d m, %d seconds\n", (int) getOffRouteDistance(),
+					(int) (getOffRouteDistance() / DEFAULT_SPEED)));
+		}
+		turnDescriptions.append(String.format("Alarm (now): %d m, %d seconds\n", SHORT_ALARM_ANNOUNCE_RADIUS,
+				(int) (SHORT_ALARM_ANNOUNCE_RADIUS / DEFAULT_SPEED)));
+		turnDescriptions.append(String.format("Alarm (prepare): %d m, %d seconds\n", LONG_ALARM_ANNOUNCE_RADIUS,
+				(int) (LONG_ALARM_ANNOUNCE_RADIUS / DEFAULT_SPEED)));
+		turnDescriptions.append(String.format("POI/Waypoint (now): %d m, %d seconds\n", SHORT_PNT_ANNOUNCE_RADIUS,
+				(int) (SHORT_PNT_ANNOUNCE_RADIUS / DEFAULT_SPEED)));
+		turnDescriptions.append(String.format("POI/Waypoint (prepare): %d m, %d seconds\n", LONG_PNT_ANNOUNCE_RADIUS,
+				(int) (LONG_PNT_ANNOUNCE_RADIUS / DEFAULT_SPEED)));
+
+		return turnDescriptions.toString();
 	}
 }
