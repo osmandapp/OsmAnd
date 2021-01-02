@@ -156,7 +156,7 @@ public class DownloadOsmandIndexesHelper {
 			}
 			List<AssetEntry> mapping = getBundledAssets(amanager);
 			for (AssetEntry asset : mapping) {
-				String target = asset.destination;
+				String target = asset.source;
 				if (target.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)
 						&& target.startsWith(IndexConstants.VOICE_INDEX_DIR)
 						&& target.contains(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
@@ -165,7 +165,7 @@ public class DownloadOsmandIndexesHelper {
 					File destFile = new File(voicePath, target.substring(IndexConstants.VOICE_INDEX_DIR.length(),
 							target.indexOf("/", IndexConstants.VOICE_INDEX_DIR.length())) + "/" + lang + "_tts.js");
 					result.add(new AssetIndexItem(lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS,
-							"voice", date, dateModified, "0.1", destFile.length(), asset.source,
+							"voice", date, dateModified, "0.1", destFile.length(), asset.destination,
 							destFile.getPath(), DownloadActivityType.VOICE_FILE));
 				}
 			}
