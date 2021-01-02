@@ -84,18 +84,20 @@ public class AnnounceTimeDistances {
 		// Turn now: 3.5 sec normal speed, 7 second for halfspeed (default)
 		// float TURN_NOW_TIME = 7;
 
-		// ** #8749 to keep 1m / 1 sec precision (GPS_TOLERANCE - 12 m)
+		// ** #8749 to keep 1m / 1 sec precision (POSITIONING_TOLERANCE = 12 m)
 		// 1 kmh - 1 sec, 4 kmh - 2 sec (pedestrian), 10 kmh - 3 sec (*bicycle), 50 kmh - 7 sec (car)
 		float TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
 
 		float ARRIVAL_DISTANCE_FACTOR = Math.max(settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(appMode), 0.1f);
+
 		// TURN_NOW_DISTANCE = (int) (DEFAULT_SPEED * 3.6); // 3.6 sec
 		// 50 kmh - 48 m (car), 10 kmh - 20 m, 4 kmh - 15 m, 1 kmh - 12 m
-		TURN_NOW_DISTANCE = (int) ((POSITIONING_TOLERANCE + DEFAULT_SPEED * 2.5) * ARRIVAL_DISTANCE_FACTOR); // 3.6 sec
+		// 3.6 sec: 43 m (car), 18 m (bicycle), 12 m (walking, capped by POSITIONING_TOLERANCE)
+		TURN_NOW_DISTANCE = (int) ((POSITIONING_TOLERANCE + Math.max(0., DEFAULT_SPEED * (3.6 - POSITIONING_TOLERANCE / DEFAULT_SPEED))) * ARRIVAL_DISTANCE_FACTOR);
 		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 
-		// 5 seconds: car - 80 m @ 50 kmh, bicycle - 45 m @ 25 km/h, bicycle - 25 m @ 10 km/h, pedestrian - 18 m @ 4 km/h,
-		ARRIVAL_DISTANCE =  (POSITIONING_TOLERANCE + DEFAULT_SPEED * 5) * ARRIVAL_DISTANCE_FACTOR;
+		// 5 sec:   60 m (car), 25 m (bicycle), 12 m (walking)
+		ARRIVAL_DISTANCE =  (int) ((POSITIONING_TOLERANCE + Math.max(0., DEFAULT_SPEED * (5. - POSITIONING_TOLERANCE / DEFAULT_SPEED))) * ARRIVAL_DISTANCE_FACTOR);
 		// 50 kmh - 280 m, 10 kmh - 55 m, 4 kmh - 22 m
 		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * ARRIVAL_DISTANCE_FACTOR; // 20 seconds
 		// assume for backward compatibility speed - 10 m/s
