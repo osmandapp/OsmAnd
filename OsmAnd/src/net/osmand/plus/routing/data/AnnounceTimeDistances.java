@@ -166,10 +166,12 @@ public class AnnounceTimeDistances {
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed) {
-		// Check triggers: distance < etalon, or time_with_current_speed < etalon_time_with_default_speed
+	// Check triggers:
+		// (1) distance < etalon?
 		if (dist - voicePromptDelayTimeSec * currentSpeed <= etalon) {
 			return true;
 		}
+		// (2) time_with_current_speed < etalon_time_with_default_speed?
 		// check only if speed > 0
 		if (currentSpeed > 0 && (dist / currentSpeed - voicePromptDelayTimeSec) <= etalon / defSpeed) {
 			return true;
