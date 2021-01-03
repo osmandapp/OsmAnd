@@ -3891,4 +3891,8 @@
     <string name="poi_vaccination_covid19">Vacinación: COVID19</string>
     <string name="poi_health_specialty_vaccination_yes">Vacinación</string>
     <string name="poi_lifeguard_base">Base de salvavidas</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Túnel para morcegos</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Ponte para morcegos</string>
+    <string name="poi_wildlife_crossing">Paso de fauna</string>
+    <string name="poi_swimming_area">Área de natación</string>
 </resources>

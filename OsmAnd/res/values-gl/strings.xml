@@ -3998,7 +3998,7 @@ Lon %2$s</string>
     <string name="shared_string_add_photo">Engadir imaxe</string>
     <string name="register_on_openplacereviews">Rexistrarse no
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">As imaxes son fornecidas polo proxecto de datos abertos do OpenPlaceReviews.org. Para subir a túas imaxes precisas rexistrarte no sitio web.</string>
+    <string name="register_on_openplacereviews_desc">As imaxes son fornecidas polo proxecto de datos abertos do OpenPlaceReviews.org. Para subir a túas imaxes precisas rexistrarte no seu sitio web.</string>
     <string name="register_opr_create_new_account">Crear nova conta</string>
     <string name="register_opr_have_account">Xa teño unha conta</string>
     <string name="shared_string_search_history">Historial de procura</string>
@@ -4042,4 +4042,12 @@ Lon %2$s</string>
 \n
 \n</string>
     <string name="reverse_all_points">Inverter todos os puntos</string>
+    <string name="profile_by_default_description">Escolle o perfil que será empregado ao iniciar a aplicación.</string>
+    <string name="shared_string_last_used">Usado por última vez</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Preferir rutas de sendeirismo</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Preferir rutas de sendeirismo</string>
+    <string name="routing_attr_allow_streams_description">Permitir regatos e cunetas</string>
+    <string name="routing_attr_allow_streams_name">Permitir regatos e cunetas</string>
+    <string name="routing_attr_allow_intermittent_description">Permitir canles de auga intermitentes</string>
+    <string name="routing_attr_allow_intermittent_name">Permitir canles de auga intermitentes</string>
 </resources>

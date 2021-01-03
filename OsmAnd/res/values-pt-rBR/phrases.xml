@@ -3899,4 +3899,7 @@
     <string name="poi_waste_transfer_station">Estação de transferência de resíduos</string>
     <string name="poi_lavoir">Lavandaria pública</string>
     <string name="poi_swimming_area">Área de natação</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Túnel para morcego</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Ponte para morcego</string>
+    <string name="poi_wildlife_crossing">Travessia de vida selvagem</string>
 </resources>

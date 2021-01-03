@@ -3902,4 +3902,7 @@
     <string name="poi_weightbridge">Fahrzeugwaage</string>
     <string name="poi_ranger_station">Rangerstation</string>
     <string name="poi_swimming_area">Schwimmbereich</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Fledermaustunnel</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Fledermausbrücke</string>
+    <string name="poi_wildlife_crossing">Wildwechsel</string>
 </resources>
