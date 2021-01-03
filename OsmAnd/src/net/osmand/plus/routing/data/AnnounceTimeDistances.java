@@ -97,10 +97,10 @@ public class AnnounceTimeDistances {
 		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * ARRIVAL_DISTANCE_FACTOR; // 20 seconds
 
 		// assume for backward compatibility speed - 10 m/s
-		LONG_PNT_ANNOUNCE_RADIUS = (int) (60 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 600 m
-		SHORT_PNT_ANNOUNCE_RADIUS = (int) (15 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 150 m
-		LONG_ALARM_ANNOUNCE_RADIUS = (int) (12 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 120 m
 		SHORT_ALARM_ANNOUNCE_RADIUS = (int) (7 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 70 m
+		LONG_ALARM_ANNOUNCE_RADIUS = (int) (12 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 120 m
+		SHORT_PNT_ANNOUNCE_RADIUS = (int) (15 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 150 m
+		LONG_PNT_ANNOUNCE_RADIUS = (int) (60 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 600 m
 
 		// Trigger close prompts earlier to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 		int ams = settings.AUDIO_MANAGER_STREAM.getModeValue(appMode);
@@ -125,22 +125,22 @@ public class AnnounceTimeDistances {
 
 	public boolean isTurnStateActive(float currentSpeed, double dist, int turnType) {
 		switch (turnType) {
+			case STATE_TURN_NOW:
+				return isDistanceLess(currentSpeed, dist, TURN_NOW_DISTANCE, TURN_NOW_SPEED);
 			case STATE_TURN_IN:
 				return isDistanceLess(currentSpeed, dist, TURN_IN_DISTANCE);
 			case STATE_PREPARE_TURN:
 				return isDistanceLess(currentSpeed, dist, PREPARE_DISTANCE);
 			case STATE_LONG_PREPARE_TURN:
 				return isDistanceLess(currentSpeed, dist, PREPARE_LONG_DISTANCE);
-			case STATE_TURN_NOW:
-				return isDistanceLess(currentSpeed, dist, TURN_NOW_DISTANCE, TURN_NOW_SPEED);
-			case STATE_LONG_PNT_APPROACH:
-				return isDistanceLess(currentSpeed, dist, LONG_PNT_ANNOUNCE_RADIUS);
-			case STATE_SHORT_PNT_APPROACH:
-				return isDistanceLess(currentSpeed, dist, SHORT_PNT_ANNOUNCE_RADIUS);
-			case STATE_LONG_ALARM_ANNOUNCE:
-				return isDistanceLess(currentSpeed, dist, LONG_ALARM_ANNOUNCE_RADIUS);
 			case STATE_SHORT_ALARM_ANNOUNCE:
 				return isDistanceLess(currentSpeed, dist, SHORT_ALARM_ANNOUNCE_RADIUS);
+			case STATE_LONG_ALARM_ANNOUNCE:
+				return isDistanceLess(currentSpeed, dist, LONG_ALARM_ANNOUNCE_RADIUS);
+			case STATE_SHORT_PNT_APPROACH:
+				return isDistanceLess(currentSpeed, dist, SHORT_PNT_ANNOUNCE_RADIUS);
+			case STATE_LONG_PNT_APPROACH:
+				return isDistanceLess(currentSpeed, dist, LONG_PNT_ANNOUNCE_RADIUS);
 		}
 		return false;
 	}
