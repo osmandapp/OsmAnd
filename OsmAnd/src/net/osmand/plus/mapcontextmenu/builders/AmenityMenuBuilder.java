@@ -61,7 +61,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -897,14 +896,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	private String getSocialMediaUrl(String key, String value) {
-		// Regex for url without protocol, with at least 2 valid domains, slash and at least one
-		// char after it (e.g. a-c.com/a)
-		String urlMask = "[a-zA-Z0-9]+[-]*[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+[-]*[a-zA-Z0-9]+)+\\/.+";
-
-		if (Pattern.matches(urlMask, value)) {
-			return "https://" + value;
-		}
-
 		// Remove leading and closing slashes
 		StringBuilder sb = new StringBuilder(value.trim());
 		if (sb.charAt(0) == '/') {
@@ -916,8 +907,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 		
 		// It cannot be username
-		if (sb.indexOf("/") != -1  || sb.indexOf(" ") != -1) {
-			return null;
+		if (sb.indexOf("/") != -1) {
+			return "https://" + value;
 		}
 
 		Map<String, String> urls = new HashMap<>(7);
