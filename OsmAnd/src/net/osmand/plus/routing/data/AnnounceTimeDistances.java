@@ -223,14 +223,14 @@ public class AnnounceTimeDistances {
 		if (PREPARE_LONG_DISTANCE_END <= PREPARE_LONG_DISTANCE) {
 			appendTurnDesc(turnDescriptions, "Turn (early prepare)", PREPARE_LONG_DISTANCE);
 		}
-		appendTurnDesc(turnDescriptions, "Finish",  (int) getArrivalDistance());
+		appendTurnDesc(turnDescriptions, "Arrival",  (int) getArrivalDistance());
 		if (getOffRouteDistance() > 0) {
 			appendTurnDesc(turnDescriptions, "Off-route", (int) getOffRouteDistance());
 		}
-		appendTurnDesc(turnDescriptions, "Alarm (now)",  SHORT_ALARM_ANNOUNCE_RADIUS);
-		appendTurnDesc(turnDescriptions, "Alarm (prepare)",  LONG_ALARM_ANNOUNCE_RADIUS);
-		appendTurnDesc(turnDescriptions, "POI/Waypoint (now)",  SHORT_PNT_ANNOUNCE_RADIUS);
-		appendTurnDesc(turnDescriptions, "POI/Waypoint (prepare)",  LONG_PNT_ANNOUNCE_RADIUS);
+		appendTurnDesc(turnDescriptions, "Alarm (close)",  SHORT_ALARM_ANNOUNCE_RADIUS);
+		appendTurnDesc(turnDescriptions, "Alarm (standard)",  LONG_ALARM_ANNOUNCE_RADIUS);
+		appendTurnDesc(turnDescriptions, "Waypoint / fav / POI (approach)",  SHORT_PNT_ANNOUNCE_RADIUS);
+		appendTurnDesc(turnDescriptions, "Waypoint / fav / POI (approach)",  LONG_PNT_ANNOUNCE_RADIUS);
 		return turnDescriptions.toString();
 	}
 }
