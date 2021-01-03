@@ -229,8 +229,8 @@ public class AnnounceTimeDistances {
 		}
 		appendTurnDesc(turnDescriptions, "Alarm (close)",  SHORT_ALARM_ANNOUNCE_RADIUS);
 		appendTurnDesc(turnDescriptions, "Alarm (standard)",  LONG_ALARM_ANNOUNCE_RADIUS);
-		appendTurnDesc(turnDescriptions, "Waypoint / fav / POI (approach)",  SHORT_PNT_ANNOUNCE_RADIUS);
-		appendTurnDesc(turnDescriptions, "Waypoint / fav / POI (approach)",  LONG_PNT_ANNOUNCE_RADIUS);
+		appendTurnDesc(turnDescriptions, "Waypoint / fav / POI (passing)",  SHORT_PNT_ANNOUNCE_RADIUS);
+		appendTurnDesc(turnDescriptions, "Waypoint / fav / POI (approaching)",  LONG_PNT_ANNOUNCE_RADIUS);
 		return turnDescriptions.toString();
 	}
 }
