@@ -237,7 +237,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 
 		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(
 				profile instanceof OnlineRoutingEngineDataObject ?
-						R.layout.bottom_sheet_item_with_descr_and_radio_and_eng_btn :
+						R.layout.bottom_sheet_item_with_descr_radio_and_icon_btn :
 						R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		TextView tvDescription = itemView.findViewById(R.id.description);

@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -80,6 +82,16 @@ public class OnlineRoutingCard extends BaseCard {
 					boolean editedByUser = editText.getTag() == null;
 					String text = editText.getText().toString();
 					onTextChangedListener.onTextChanged(editedByUser, text);
+				}
+			}
+		});
+
+		editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					editText.setSelection(editText.getText().length());
+					AndroidUtils.showSoftKeyboard(getMapActivity(), editText);
 				}
 			}
 		});

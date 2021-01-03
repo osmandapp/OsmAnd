@@ -91,7 +91,7 @@ public class OnlineRoutingHelper {
 				JSONObject json = new JSONObject(jsonString);
 				readFromJson(json, engines);
 			} catch (JSONException e) {
-				LOG.debug("Error when read setting from JSON");
+				LOG.debug("Error when create a new JSONObject: " + e.toString());
 			}
 		}
 		return engines;
@@ -108,7 +108,7 @@ public class OnlineRoutingHelper {
 		}
 	}
 
-	private void readFromJson(JSONObject json, List<OnlineRoutingEngine> engines) {
+	private static void readFromJson(JSONObject json, List<OnlineRoutingEngine> engines) {
 		try {
 			if (!json.has("items")) {
 				return;
@@ -120,19 +120,18 @@ public class OnlineRoutingHelper {
 			for (int i = 0; i < itemsJson.length(); i++) {
 				JSONObject object = itemsJson.getJSONObject(i);
 				String key = object.getString("key");
-				String name = object.getString("name");
 				String vehicleKey = object.getString("vehicle");
 				ServerType serverType = ServerType.valueOf(object.getString("serverType"));
 				String paramsString = object.getString("params");
 				HashMap<String, String> params = gson.fromJson(paramsString, type);
-				engines.add(new OnlineRoutingEngine(key, name, serverType, vehicleKey, params));
+				engines.add(new OnlineRoutingEngine(key, serverType, vehicleKey, params));
 			}
 		} catch (JSONException e) {
-			LOG.debug("Error when read setting from JSON internal");
+			LOG.debug("Error when reading engines from JSON: " + e.toString());
 		}
 	}
 
-	private boolean writeToJson(JSONObject json, List<OnlineRoutingEngine> engines) {
+	private static boolean writeToJson(JSONObject json, List<OnlineRoutingEngine> engines) {
 		JSONArray jsonArray = new JSONArray();
 		Gson gson = new Gson();
 		Type type = new TypeToken<HashMap<String, String>>() {
@@ -141,7 +140,6 @@ public class OnlineRoutingHelper {
 			for (OnlineRoutingEngine engine : engines) {
 				JSONObject jsonObject = new JSONObject();
 				jsonObject.put("key", engine.getStringKey());
-				jsonObject.put("name", engine.getName());
 				jsonObject.put("serverType", engine.getServerType().name());
 				jsonObject.put("vehicle", engine.getVehicleKey());
 				jsonObject.put("params", gson.toJson(engine.getParams(), type));
@@ -150,7 +148,7 @@ public class OnlineRoutingHelper {
 			json.put("items", jsonArray);
 			return true;
 		} catch (JSONException e) {
-			LOG.debug("Error when write engines to JSON");
+			LOG.debug("Error when writing engines to JSON: " + e.toString());
 			return false;
 		}
 	}

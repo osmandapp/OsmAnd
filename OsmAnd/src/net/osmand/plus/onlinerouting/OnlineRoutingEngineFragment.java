@@ -1,5 +1,6 @@
 package net.osmand.plus.onlinerouting;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,14 +51,16 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private static final String ENGINE_VEHICLE_TYPE_KEY = "engine_vehicle_type";
 	private static final String ENGINE_CUSTOM_VEHICLE_KEY = "engine_custom_vehicle";
 	private static final String ENGINE_API_KEY_KEY = "engine_api_key";
-	private static final String ENGINE_NAME_CHANGED_BY_USER_KEY = "engine_name_changed_by_user_key";
 	private static final String EXAMPLE_LOCATION_KEY = "example_location";
 	private static final String APP_MODE_KEY = "app_mode";
 	private static final String EDITED_ENGINE_KEY = "edited_engine_key";
 
 	private OsmandApplication app;
+	private MapActivity mapActivity;
 	private OnlineRoutingHelper helper;
 
+	private View view;
+	private ViewGroup segmentsContainer;
 	private OnlineRoutingCard nameCard;
 	private OnlineRoutingCard serverCard;
 	private OnlineRoutingCard vehicleCard;
@@ -116,6 +119,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
+		mapActivity = getMapActivity();
 		helper = app.getOnlineRoutingHelper();
 		engine = new OnlineRoutingEngineObject();
 		if (savedInstanceState != null) {
@@ -130,41 +134,48 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater,
 	                         @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return null;
-		}
-		boolean nightMode = isNightMode();
-		inflater = UiUtilities.getInflater(getContext(), nightMode);
-		View view = inflater.inflate(
+		view = getInflater().inflate(
 				R.layout.online_routing_engine_fragment, container, false);
+		segmentsContainer = (ViewGroup) view.findViewById(R.id.segments_container);
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 		}
-		setupToolbar(view);
+		setupToolbar((Toolbar) view.findViewById(R.id.toolbar));
 
-		ViewGroup segmentsContainer = (ViewGroup) view.findViewById(R.id.segments_container);
+		setupNameCard();
+		setupServerCard();
+		setupVehicleCard();
+		setupApiKeyCard();
+		setupExampleCard();
+		setupResultsContainer();
+		addSpaceSegment();
 
-		// create name card
-		nameCard = new OnlineRoutingCard(mapActivity, nightMode);
+		setupButtons();
+
+		updateCardViews(nameCard, serverCard, vehicleCard, exampleCard);
+		return view;
+	}
+
+	private void setupNameCard() {
+		nameCard = new OnlineRoutingCard(mapActivity, isNightMode());
 		nameCard.build(mapActivity);
 		nameCard.setDescription(getString(R.string.select_nav_profile_dialog_message));
-		nameCard.setEditedText(engine.name);
+		nameCard.setEditedText(engine.getName(app));
 		nameCard.setFieldBoxLabelText(getString(R.string.shared_string_name));
 		nameCard.setOnTextChangedListener(new OnTextChangedListener() {
 			@Override
 			public void onTextChanged(boolean changedByUser, String text) {
-				if (!isEditingMode() && !engine.wasNameChangedByUser && changedByUser) {
-					engine.wasNameChangedByUser = true;
+				if (changedByUser) {
+					engine.customName = text;
 				}
-				engine.name = text;
 			}
 		});
 		nameCard.showDivider();
 		segmentsContainer.addView(nameCard.getView());
+	}
 
-		// create server card
-		serverCard = new OnlineRoutingCard(mapActivity, nightMode);
+	private void setupServerCard() {
+		serverCard = new OnlineRoutingCard(mapActivity, isNightMode());
 		serverCard.build(mapActivity);
 		serverCard.setHeaderTitle(getString(R.string.shared_string_type));
 		List<HorizontalSelectionItem> serverItems = new ArrayList<>();
@@ -195,16 +206,17 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		serverCard.setFieldBoxLabelText(getString(R.string.shared_string_server_url));
 		serverCard.showDivider();
 		segmentsContainer.addView(serverCard.getView());
+	}
 
-		// create vehicle card
-		vehicleCard = new OnlineRoutingCard(mapActivity, nightMode);
+	private void setupVehicleCard() {
+		vehicleCard = new OnlineRoutingCard(mapActivity, isNightMode());
 		vehicleCard.build(mapActivity);
 		vehicleCard.setHeaderTitle(getString(R.string.shared_string_vehicle));
 		List<HorizontalSelectionItem> vehicleItems = new ArrayList<>();
 		for (VehicleType vehicle : VehicleType.values()) {
-			vehicleItems.add(new HorizontalSelectionItem(vehicle.toHumanString(app), vehicle));
+			vehicleItems.add(new HorizontalSelectionItem(vehicle.getTitle(app), vehicle));
 		}
-		vehicleCard.setSelectionMenu(vehicleItems, engine.vehicleType.toHumanString(app),
+		vehicleCard.setSelectionMenu(vehicleItems, engine.vehicleType.getTitle(app),
 				new CallbackWithObject<HorizontalSelectionItem>() {
 					@Override
 					public boolean processResult(HorizontalSelectionItem result) {
@@ -221,16 +233,20 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		vehicleCard.setOnTextChangedListener(new OnTextChangedListener() {
 			@Override
 			public void onTextChanged(boolean editedByUser, String text) {
-				engine.customVehicleKey = text;
+				if (editedByUser) {
+					engine.customVehicleKey = text;
+					updateCardViews(nameCard, exampleCard);
+				}
 			}
 		});
 		vehicleCard.setEditedText(engine.customVehicleKey);
 		vehicleCard.setFieldBoxHelperText(getString(R.string.shared_string_enter_param));
 		vehicleCard.showDivider();
 		segmentsContainer.addView(vehicleCard.getView());
+	}
 
-		// create api key card
-		apiKeyCard = new OnlineRoutingCard(mapActivity, nightMode);
+	private void setupApiKeyCard() {
+		apiKeyCard = new OnlineRoutingCard(mapActivity, isNightMode());
 		apiKeyCard.build(mapActivity);
 		apiKeyCard.setHeaderTitle(getString(R.string.shared_string_api_key));
 		apiKeyCard.setFieldBoxLabelText(getString(R.string.keep_it_empty_if_not));
@@ -244,9 +260,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			}
 		});
 		segmentsContainer.addView(apiKeyCard.getView());
+	}
 
-		// create example card
-		exampleCard = new OnlineRoutingCard(mapActivity, nightMode);
+	private void setupExampleCard() {
+		exampleCard = new OnlineRoutingCard(mapActivity, isNightMode());
 		exampleCard.build(mapActivity);
 		exampleCard.setHeaderTitle(getString(R.string.shared_string_example));
 		List<HorizontalSelectionItem> locationItems = new ArrayList<>();
@@ -274,48 +291,24 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			}
 		});
 		segmentsContainer.addView(exampleCard.getView());
+	}
 
-		testResultsContainer = inflater.inflate(
+	private void setupResultsContainer() {
+		testResultsContainer = getInflater().inflate(
 				R.layout.bottom_sheet_item_with_descr_64dp, segmentsContainer, false);
 		testResultsContainer.setVisibility(View.GONE);
 		segmentsContainer.addView(testResultsContainer);
+	}
 
-		View bottomSpaceView = new View(app);
+	private void addSpaceSegment() {
 		int space = (int) getResources().getDimension(R.dimen.empty_state_text_button_padding_top);
+		View bottomSpaceView = new View(app);
 		bottomSpaceView.setLayoutParams(
 				new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, space));
 		segmentsContainer.addView(bottomSpaceView);
-
-		View cancelButton = view.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, cancelButton,
-				DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
-
-		view.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
-
-		View saveButton = view.findViewById(R.id.right_bottom_button);
-		UiUtilities.setupDialogButton(nightMode, saveButton,
-				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_save);
-		saveButton.setVisibility(View.VISIBLE);
-		saveButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				saveChanges();
-				dismiss();
-			}
-		});
-
-		updateCardViews(nameCard, serverCard, vehicleCard, exampleCard);
-		return view;
 	}
 
-	private void setupToolbar(View mainView) {
-		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
+	private void setupToolbar(Toolbar toolbar) {
 		ImageView navigationIcon = toolbar.findViewById(R.id.close_button);
 		navigationIcon.setImageResource(R.drawable.ic_action_close);
 		navigationIcon.setOnClickListener(new OnClickListener() {
@@ -348,10 +341,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private void updateCardViews(BaseCard... cardsToUpdate) {
 		for (BaseCard card : cardsToUpdate) {
 			if (nameCard.equals(card)) {
-				if (!engine.wasNameChangedByUser) {
-					String name = String.format(
-							getString(R.string.ltr_or_rtl_combine_via_dash),
-							engine.serverType.getTitle(), engine.vehicleType.toHumanString(app));
+				if (Algorithms.isEmpty(engine.customName)) {
+					String name = OnlineRoutingEngine.getStandardName(app, engine.serverType, engine.getVehicleKey());
 					nameCard.setEditedText(name);
 				}
 
@@ -365,7 +356,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				}
 
 			} else if (vehicleCard.equals(card)) {
-				vehicleCard.setHeaderSubtitle(engine.vehicleType.toHumanString(app));
+				vehicleCard.setHeaderSubtitle(engine.vehicleType.getTitle(app));
 				if (engine.vehicleType == VehicleType.CUSTOM) {
 					vehicleCard.showFieldBox();
 					vehicleCard.setEditedText(engine.getVehicleKey());
@@ -379,11 +370,43 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	private void setupButtons() {
+		boolean nightMode = isNightMode();
+		View cancelButton = view.findViewById(R.id.dismiss_button);
+		UiUtilities.setupDialogButton(nightMode, cancelButton,
+				DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+		cancelButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+
+		view.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
+
+		View saveButton = view.findViewById(R.id.right_bottom_button);
+		UiUtilities.setupDialogButton(nightMode, saveButton,
+				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_save);
+		saveButton.setVisibility(View.VISIBLE);
+		saveButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				saveChanges();
+				dismiss();
+			}
+		});
+	}
+
 	private void saveChanges() {
-		OnlineRoutingEngine engineToSave = new OnlineRoutingEngine(editedEngineKey, engine.name,
-						engine.serverType, engine.getVehicleKey(), null);
+		OnlineRoutingEngine engineToSave;
+		if (isEditingMode()) {
+			engineToSave = new OnlineRoutingEngine(editedEngineKey, engine.serverType, engine.getVehicleKey());
+		} else {
+			engineToSave = OnlineRoutingEngine.createNewEngine(engine.serverType, engine.getVehicleKey());
+		}
 
 		engineToSave.putParameter(EngineParameterType.CUSTOM_SERVER_URL, engine.customServerUrl);
+		engineToSave.putParameter(EngineParameterType.CUSTOM_NAME, engine.customName);
 		if (engine.serverType == ServerType.GRAPHHOPER) {
 			engineToSave.putParameter(EngineParameterType.API_KEY, engine.apiKey);
 		}
@@ -470,13 +493,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void saveState(Bundle outState) {
-		outState.putString(ENGINE_NAME_KEY, engine.name);
+		outState.putString(ENGINE_NAME_KEY, engine.customName);
 		outState.putString(ENGINE_SERVER_KEY, engine.serverType.name());
 		outState.putString(ENGINE_SERVER_URL_KEY, engine.customServerUrl);
 		outState.putString(ENGINE_VEHICLE_TYPE_KEY, engine.vehicleType.name());
 		outState.putString(ENGINE_CUSTOM_VEHICLE_KEY, engine.customVehicleKey);
 		outState.putString(ENGINE_API_KEY_KEY, engine.apiKey);
-		outState.putBoolean(ENGINE_NAME_CHANGED_BY_USER_KEY, engine.wasNameChangedByUser);
 		outState.putString(EXAMPLE_LOCATION_KEY, selectedLocation.name());
 		if (appMode != null) {
 			outState.putString(APP_MODE_KEY, appMode.getStringKey());
@@ -485,13 +507,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void restoreState(Bundle savedState) {
-		engine.name = savedState.getString(ENGINE_NAME_KEY);
+		engine.customName = savedState.getString(ENGINE_NAME_KEY);
 		engine.serverType = ServerType.valueOf(savedState.getString(ENGINE_SERVER_KEY));
 		engine.customServerUrl = savedState.getString(ENGINE_SERVER_URL_KEY);
 		engine.vehicleType = VehicleType.valueOf(savedState.getString(ENGINE_VEHICLE_TYPE_KEY));
 		engine.customVehicleKey = savedState.getString(ENGINE_CUSTOM_VEHICLE_KEY);
 		engine.apiKey = savedState.getString(ENGINE_API_KEY_KEY);
-		engine.wasNameChangedByUser = savedState.getBoolean(ENGINE_NAME_CHANGED_BY_USER_KEY);
 		selectedLocation = ExampleLocation.valueOf(savedState.getString(EXAMPLE_LOCATION_KEY));
 		appMode = ApplicationMode.valueOfStringKey(savedState.getString(APP_MODE_KEY), null);
 		editedEngineKey = savedState.getString(EDITED_ENGINE_KEY);
@@ -505,8 +526,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		if (isEditingMode()) {
 			OnlineRoutingEngine editedEngine = helper.getEngineByKey(editedEngineKey);
 			if (editedEngine != null) {
-				engine.name = editedEngine.getName();
-				engine.wasNameChangedByUser = true;
+				engine.customName = editedEngine.getParameter(EngineParameterType.CUSTOM_NAME);
 				engine.serverType = editedEngine.getServerType();
 				engine.customServerUrl = editedEngine.getParameter(EngineParameterType.CUSTOM_SERVER_URL);
 				String vehicleKey = editedEngine.getVehicleKey();
@@ -543,6 +563,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	private LayoutInflater getInflater() {
+		return UiUtilities.getInflater(mapActivity, isNightMode());
+	}
+
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @NonNull ApplicationMode appMode,
 	                                String editedEngineKey) {
@@ -558,13 +582,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private static class OnlineRoutingEngineObject {
-		private String name;
+		private String customName;
 		private ServerType serverType;
 		private String customServerUrl;
 		private VehicleType vehicleType;
 		private String customVehicleKey;
 		private String apiKey;
-		private boolean wasNameChangedByUser;
 
 		public String getVehicleKey() {
 			if (vehicleType == VehicleType.CUSTOM) {
@@ -575,6 +598,13 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 		public String getBaseUrl() {
 			return customServerUrl != null ? customServerUrl : serverType.getBaseUrl();
+		}
+
+		public String getName(Context ctx) {
+			if (customName != null) {
+				return customName;
+			}
+			return OnlineRoutingEngine.getStandardName(ctx, serverType, getVehicleKey());
 		}
 	}
 }

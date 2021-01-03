@@ -2,6 +2,8 @@ package net.osmand.plus.onlinerouting;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
@@ -10,7 +12,7 @@ public enum VehicleType {
 	BIKE("bike", R.string.routing_engine_vehicle_type_bike),
 	FOOT("foot", R.string.routing_engine_vehicle_type_foot),
 	DRIVING("driving", R.string.routing_engine_vehicle_type_driving),
-	CUSTOM("-", R.string.shared_string_custom);
+	CUSTOM("", R.string.shared_string_custom);
 
 	VehicleType(String key, int titleId) {
 		this.key = key;
@@ -24,8 +26,17 @@ public enum VehicleType {
 		return key;
 	}
 
-	public String toHumanString(Context ctx) {
+	public String getTitle(Context ctx) {
 		return ctx.getString(titleId);
+	}
+
+	public static String toHumanString(@NonNull Context ctx,
+	                                   @NonNull String key) {
+		VehicleType vehicleType = getVehicleByKey(key);
+		if (vehicleType == CUSTOM) {
+			return Algorithms.capitalizeFirstLetter(key);
+		}
+		return vehicleType.getTitle(ctx);
 	}
 
 	public static VehicleType getVehicleByKey(String key) {

@@ -71,8 +71,8 @@ public class ProfileDataUtils {
 	public static List<OnlineRoutingEngineDataObject> getOnlineRoutingProfiles(OsmandApplication app) {
 		List<OnlineRoutingEngineDataObject> objects = new ArrayList<>();
 		for (OnlineRoutingEngine engine : app.getOnlineRoutingHelper().getEngines()) {
-			objects.add(new OnlineRoutingEngineDataObject(engine.getName(),
-					engine.getBaseUrl(), engine.getStringKey(), R.drawable.ic_world_globe_dark, false, null));
+			objects.add(new OnlineRoutingEngineDataObject(
+					engine.getName(app), engine.getBaseUrl(), engine.getStringKey()));
 		}
 		return objects;
 	}

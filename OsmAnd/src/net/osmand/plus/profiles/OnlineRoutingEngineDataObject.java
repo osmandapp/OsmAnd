@@ -1,13 +1,12 @@
 package net.osmand.plus.profiles;
 
+import net.osmand.plus.R;
+
 public class OnlineRoutingEngineDataObject extends ProfileDataObject {
 
 	public OnlineRoutingEngineDataObject(String name,
 	                                     String description,
-	                                     String stringKey,
-	                                     int iconRes,
-	                                     boolean isSelected,
-	                                     ProfileIconColors iconColor) {
-		super(name, description, stringKey, iconRes, isSelected, iconColor);
+	                                     String stringKey) {
+		super(name, description, stringKey, R.drawable.ic_world_globe_dark, false, null);
 	}
 }
