@@ -4031,4 +4031,5 @@
     <string name="routing_attr_allow_streams_name">Bäche und Entwässerungsgräben erlauben</string>
     <string name="routing_attr_allow_intermittent_description">Gewässer erlauben, die nicht ständig Wasser führen</string>
     <string name="routing_attr_allow_intermittent_name">Gewässer erlauben, die nicht ständig Wasser führen</string>
+    <string name="voice_prompts_timetable">Zeiten der Sprachansagen</string>
 </resources>
