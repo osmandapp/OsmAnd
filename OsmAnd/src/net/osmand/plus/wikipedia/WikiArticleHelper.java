@@ -55,7 +55,7 @@ public class WikiArticleHelper {
 	private FragmentActivity activity;
 
 	private boolean nightMode;
-	private static final String P_OPENED = "<p>";
+	public static final String P_OPENED = "<p>";
 	private static final String P_CLOSED = "</p>";
 
 	public WikiArticleHelper(FragmentActivity activity, boolean nightMode) {

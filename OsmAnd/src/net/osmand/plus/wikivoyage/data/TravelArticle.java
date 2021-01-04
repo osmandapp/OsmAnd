@@ -9,11 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Size;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.Location;
-import net.osmand.aidl.search.SearchResult;
-import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -22,8 +18,6 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.Objects;
 
 public class TravelArticle {
 
@@ -45,7 +39,6 @@ public class TravelArticle {
 	String lang;
 	String contentsJson;
 	String aggregatedPartOf;
-	String fullContent;
 
 	@NonNull
 	public TravelArticleIdentifier generateIdentifier() {

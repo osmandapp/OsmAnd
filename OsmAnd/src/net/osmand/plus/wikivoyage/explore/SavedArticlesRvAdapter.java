@@ -22,12 +22,15 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.wikipedia.WikiArticleHelper.P_OPENED;
 
 public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -102,7 +105,9 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 			holder.icon.setVisibility(loaded == null || loaded.booleanValue() ? View.VISIBLE : View.GONE);
 			holder.title.setText(article.getTitle());
-			holder.content.setText(article.getContent());
+			String content = article.getContent();
+			content = content.contains(P_OPENED) ? WikiArticleHelper.getPartialContent(content) : content;
+			holder.content.setText(content);
 			holder.partOf.setText(article.getGeoDescription());
 			holder.leftButton.setText(app.getString(R.string.shared_string_read));
 			holder.leftButton.setCompoundDrawablesWithIntrinsicBounds(readIcon, null, null, null);
