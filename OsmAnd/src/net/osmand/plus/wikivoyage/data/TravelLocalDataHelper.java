@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
-import net.osmand.plus.wikipedia.WikiArticleHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -115,7 +114,7 @@ public class TravelLocalDataHelper {
 			saved.lang = article.lang;
 			saved.aggregatedPartOf = article.aggregatedPartOf;
 			saved.imageTitle = article.imageTitle;
-			saved.content = WikiArticleHelper.getPartialContent(article.getContent());
+			saved.content = article.getContent();
 			saved.lat = article.lat;
 			saved.lon = article.lon;
 			saved.routeId = article.routeId;
@@ -425,8 +424,8 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(true);
 			if (conn != null) {
 				try {
-					String query = BOOKMARKS_TABLE_SELECT + " WHERE " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
-					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
+					String query = BOOKMARKS_TABLE_SELECT;
+					SQLiteCursor cursor = conn.rawQuery(query, null);
 					if (cursor != null) {
 						if (cursor.moveToFirst()) {
 							do {
@@ -487,6 +486,9 @@ public class TravelLocalDataHelper {
 			String travelBook = getSelectedTravelBookName();
 			if (travelBook == null) {
 				return;
+			}
+			if (article.getFile() != null) {
+				travelBook = article.getFile().getName();
 			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
