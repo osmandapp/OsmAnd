@@ -4027,4 +4027,5 @@
     <string name="routing_attr_allow_streams_name">Permesi riveretojn kaj fosaĵojn</string>
     <string name="routing_attr_allow_intermittent_description">Permesi navigi per periode sekiĝantaj akvovojoj</string>
     <string name="routing_attr_allow_intermittent_name">Permesi sezonajn akvovojojn</string>
+    <string name="voice_prompts_timetable">Tempoj de voĉaj anoncoj</string>
 </resources>

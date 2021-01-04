@@ -4032,4 +4032,5 @@
     <string name="routing_attr_allow_streams_name">Permitir arroyos y desagües</string>
     <string name="routing_attr_allow_intermittent_description">Permite cursos de agua intermitentes</string>
     <string name="routing_attr_allow_intermittent_name">Permitir cursos de agua intermitentes</string>
+    <string name="voice_prompts_timetable">Tiempo de los avisos por voz</string>
 </resources>

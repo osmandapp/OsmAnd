@@ -4027,4 +4027,5 @@
     <string name="routing_attr_allow_streams_name">Povoliť potoky a odtokové kanály</string>
     <string name="routing_attr_allow_intermittent_description">Povoliť dočasné vodné toky</string>
     <string name="routing_attr_allow_intermittent_name">Povoliť dočasné vodné toky</string>
+    <string name="voice_prompts_timetable">Časy hlasových pokynov</string>
 </resources>
