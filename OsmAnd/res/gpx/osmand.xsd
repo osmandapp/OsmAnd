@@ -7,8 +7,9 @@
   elementFormDefault="qualified">
 	<xsd:annotation>
 		<xsd:documentation>
-	This schema defines additional properties OsmAnd uses to save information in gpx files.
-	</xsd:documentation></xsd:annotation>
+			This schema defines additional properties OsmAnd uses to save information in gpx files.
+		</xsd:documentation>
+	</xsd:annotation>
 	<xsd:element name="show_arrows" type="xsd:boolean" />
 	<xsd:element name="show_start_finish" type="xsd:boolean" />
 	<xsd:element name="split_interval" type="xsd:decimal" />
