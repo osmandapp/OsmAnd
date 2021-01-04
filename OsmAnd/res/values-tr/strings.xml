@@ -3982,4 +3982,5 @@
     <string name="routing_attr_allow_streams_name">Dere ve kanalizasyonlara izin ver</string>
     <string name="routing_attr_allow_intermittent_description">Aralıklı su yollarına izin verin</string>
     <string name="routing_attr_allow_intermittent_name">Aralıklı su yollarına izin ver</string>
+    <string name="voice_prompts_timetable">Sesli uyarı zamanı</string>
 </resources>
