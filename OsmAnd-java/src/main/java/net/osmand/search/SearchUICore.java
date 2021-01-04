@@ -204,6 +204,7 @@ public class SearchUICore {
 				for (SearchResult rs : lstUnique) {
 					same = sameSearchResult(rs, r);
 					if (same) {
+						filterPoiByType(rs, r, lst);
 						break;
 					}
 				}
@@ -213,6 +214,24 @@ public class SearchUICore {
 					lstUnique.add(r);
 					if (lstUnique.size() > DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
 						lstUnique.remove(0);
+					}
+				}
+			}
+		}
+		
+		private void filterPoiByType(SearchResult r1, SearchResult r2, List<SearchResult> list) {
+			if (r1.object instanceof Amenity) {
+
+				Amenity a1 = (Amenity) r1.object;
+				Amenity a2 = (Amenity) r2.object;
+
+				if (!(a2.getSubType().equals("building") || a2.getSubType().contains("internet"))
+						&& (a1.getSubType().equals("building") || a1.getSubType().contains("internet"))) {
+
+					int index = list.indexOf(r1);
+
+					if (list.contains(r1)) {
+						list.set(index, r2);
 					}
 				}
 			}
@@ -244,10 +263,16 @@ public class SearchUICore {
 						String type2 = a2.getType().getKeyName();
 						String subType1 = a1.getSubType();
 						String subType2 = a2.getSubType();
-						if(a1.getId().longValue() == a2.getId().longValue() && (subType1.equals("building") || subType2.equals("building"))) {
+
+						if (a1.getId().longValue() == a2.getId().longValue()
+								&& ((subType1.equals("building") || subType2.equals("building")))) {
 							return true;
 						}
 						if (!type1.equals(type2)) {
+							if (a1.getId().longValue() == a2.getId().longValue() && subType1.contains("internet")
+									|| subType2.contains("internet")) {
+								return true;
+							}
 							return false;
 						}
 						if (type1.equals("natural")) {
