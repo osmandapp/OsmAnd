@@ -9,7 +9,7 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="63dp"
+		android:layout_height="@dimen/bottom_sheet_large_list_item_height"
 		android:gravity="center_vertical"
 		android:orientation="horizontal"
 		android:paddingStart="@dimen/list_content_padding"
@@ -71,8 +71,8 @@
 		android:id="@+id/divider_bottom"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:layout_marginStart="64dp"
-		android:layout_marginLeft="64dp"
+		android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+		android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
 		android:background="?attr/divider_color" />
 
 </LinearLayout>
