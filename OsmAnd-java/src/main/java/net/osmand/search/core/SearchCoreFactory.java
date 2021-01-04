@@ -542,7 +542,7 @@ public class SearchCoreFactory {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 500 * 1000;
 		private static final int BBOX_RADIUS_INSIDE = 10000 * 1000; // to support city search for basemap
-		private static final int FIRST_WORD_MIN_LENGTH = 3;
+		private static final int FIRST_WORD_MIN_LENGTH = 2;
 
 		public SearchAmenityByNameAPI() {
 			super(ObjectType.POI);
