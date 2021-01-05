@@ -4014,4 +4014,5 @@
     <string name="routing_attr_allow_streams_name">السماح بالتيارات والمصارف</string>
     <string name="routing_attr_allow_intermittent_description">السماح بالممرات المائية المتقطعة</string>
     <string name="routing_attr_allow_intermittent_name">السماح بالممرات المائية المتقطعة</string>
+    <string name="voice_prompts_timetable">مطالبة صوتية</string>
 </resources>

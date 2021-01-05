@@ -4029,4 +4029,5 @@
     <string name="profile_type_user_string">Perfil de usuario</string>
     <string name="profile_type_osmand_string">Perfil de OsmAnd</string>
     <string name="profile_by_default_description">Elige el perfil que será usado al iniciar la aplicación.</string>
+    <string name="voice_prompts_timetable">Tiempo de indicaciones por voz</string>
 </resources>

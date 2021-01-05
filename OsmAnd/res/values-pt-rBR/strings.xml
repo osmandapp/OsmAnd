@@ -4022,4 +4022,5 @@
     <string name="routing_attr_allow_streams_name">Permitir riachos e drenos</string>
     <string name="routing_attr_allow_intermittent_description">Permitir vias de água intermitentes</string>
     <string name="routing_attr_allow_intermittent_name">Permitir vias de água intermitentes</string>
+    <string name="voice_prompts_timetable">Horários de avisos de voz</string>
 </resources>
