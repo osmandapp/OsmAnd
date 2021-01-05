@@ -4007,4 +4007,5 @@
     <string name="routing_attr_allow_streams_description">Autoriser les cours d’eau et les drains</string>
     <string name="routing_attr_allow_streams_name">Autoriser les cours d’eau et les drains</string>
     <string name="voice_prompts_timetable">Nombre d\'annonces vocales</string>
+    <string name="keep_it_empty_if_not">Laisser vide sinon</string>
 </resources>
