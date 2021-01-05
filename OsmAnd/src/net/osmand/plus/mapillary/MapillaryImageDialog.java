@@ -220,6 +220,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
 	private View getWebView() {
 		View view = getMapActivity().getLayoutInflater().inflate(R.layout.mapillary_web_view, null);
+		AndroidUtils.fixWebViewResetsLocaleToUserDefault(getMapActivity());
 		final WebView webView = view.findViewById(R.id.webView);
 		webView.setBackgroundColor(Color.argb(1, 0, 0, 0));
 		final View noInternetView = view.findViewById(R.id.mapillaryNoInternetLayout);

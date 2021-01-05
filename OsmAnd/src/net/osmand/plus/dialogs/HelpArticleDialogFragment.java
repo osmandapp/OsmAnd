@@ -54,6 +54,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.fragment_help_article, container, false);
+		AndroidUtils.fixWebViewResetsLocaleToUserDefault(getActivity());
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(getContext()));

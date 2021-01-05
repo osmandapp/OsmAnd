@@ -91,6 +91,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		}
 
 		final View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
+		AndroidUtils.fixWebViewResetsLocaleToUserDefault(getActivity());
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
