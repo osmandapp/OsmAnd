@@ -90,7 +90,7 @@ public class IntentHelper {
 						String zoom = data.getQueryParameter("z");
 						int z = settings.getLastKnownMapZoom();
 						if (zoom != null) {
-							z = Integer.parseInt(zoom);
+							z = (int) Double.parseDouble(zoom);
 						}
 						settings.setMapLocationToShow(lt, ln, z, new PointDescription(lt, ln));
 					} catch (NumberFormatException e) {
