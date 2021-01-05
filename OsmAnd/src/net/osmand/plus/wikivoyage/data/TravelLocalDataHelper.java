@@ -4,11 +4,13 @@ package net.osmand.plus.wikivoyage.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
-import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,12 +26,12 @@ public class TravelLocalDataHelper {
 
 	private static final int HISTORY_ITEMS_LIMIT = 300;
 
-	private WikivoyageLocalDataDbHelper dbHelper;
+	private final WikivoyageLocalDataDbHelper dbHelper;
 
 	private Map<String, WikivoyageSearchHistoryItem> historyMap = new HashMap<>();
 	private List<TravelArticle> savedArticles = new ArrayList<>();
 
-	private Set<Listener> listeners = new HashSet<>();
+	private final Set<Listener> listeners = new HashSet<>();
 
 	public void addListener(Listener listener) {
 		listeners.add(listener);
@@ -70,21 +72,21 @@ public class TravelLocalDataHelper {
 	}
 
 	public void addToHistory(@NonNull TravelArticle article) {
-		addToHistory(article.getTitle(), article.getLang(), article.getIsPartOf());
-	}
+		File file = article.getFile();
+		String title = article.getTitle();
+		String lang = article.getLang();
+		String isPartOf = article.getIsPartOf();
 
-	public void addToHistory(String title, String lang, String isPartOf) {
-		String key = getHistoryKey(lang, title);
-		WikivoyageSearchHistoryItem item = historyMap.get(key);
-		boolean newItem = item == null;
-		if (newItem) {
-			item = new WikivoyageSearchHistoryItem();
-		}
+		WikivoyageSearchHistoryItem item = new WikivoyageSearchHistoryItem();
+		item.articleFile = file;
 		item.articleTitle = title;
 		item.lang = lang;
 		item.isPartOf = isPartOf;
 		item.lastAccessed = System.currentTimeMillis();
-		if (newItem) {
+
+		String key = item.getKey();
+		boolean exists = historyMap.containsKey(key);
+		if (!exists) {
 			dbHelper.addHistoryItem(item);
 			historyMap.put(key, item);
 		} else {
@@ -98,10 +100,6 @@ public class TravelLocalDataHelper {
 		}
 	}
 
-	static String getHistoryKey(String lang, String title) {
-		return lang + ":"+title;
-	}
-
 	@NonNull
 	public List<TravelArticle> getSavedArticles() {
 		return new ArrayList<>(savedArticles);
@@ -109,19 +107,8 @@ public class TravelLocalDataHelper {
 
 	public void addArticleToSaved(@NonNull TravelArticle article) {
 		if (!isArticleSaved(article)) {
-			TravelArticle saved = new TravelArticle();
-			saved.title = article.title;
-			saved.lang = article.lang;
-			saved.aggregatedPartOf = article.aggregatedPartOf;
-			saved.imageTitle = article.imageTitle;
-			saved.content = WikiArticleHelper.getPartialContent(article.getContent());
-			saved.lat = article.lat;
-			saved.lon = article.lon;
-			saved.routeId = article.routeId;
-			saved.fullContent = article.getContent();
-			saved.contentsJson = article.contentsJson;
-			savedArticles.add(saved);
-			dbHelper.addSavedArticle(saved);
+			savedArticles.add(article);
+			dbHelper.addSavedArticle(article);
 			notifySavedUpdated();
 		}
 	}
@@ -164,15 +151,27 @@ public class TravelLocalDataHelper {
 	}
 
 	@Nullable
-	public TravelArticle getSavedArticle(String routeId, String lang) {
+	public TravelArticle getSavedArticle(File file, String routeId, String lang) {
 		for (TravelArticle article : savedArticles) {
-			if (article.routeId != null && article.routeId.equals(routeId)
-					&& article.lang != null && article.lang.equals(lang)) {
-				article.content = article.fullContent;
+			if (Algorithms.objectEquals(article.file, file)
+					&& Algorithms.stringsEqual(article.routeId, routeId)
+					&& Algorithms.stringsEqual(article.lang, lang)) {
 				return article;
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	public List<TravelArticle> getSavedArticles(File file, String routeId) {
+		List<TravelArticle> articles = new ArrayList<>();
+		for (TravelArticle article : savedArticles) {
+			if (Algorithms.objectEquals(article.file, file)
+					&& Algorithms.stringsEqual(article.routeId, routeId)) {
+				articles.add(article);
+			}
+		}
+		return articles;
 	}
 
 	public interface Listener {
@@ -182,7 +181,7 @@ public class TravelLocalDataHelper {
 
 	private static class WikivoyageLocalDataDbHelper {
 
-		private static final int DB_VERSION = 6;
+		private static final int DB_VERSION = 7;
 		private static final String DB_NAME = "wikivoyage_local_data";
 
 		private static final String HISTORY_TABLE_NAME = "wikivoyage_search_history";
@@ -219,6 +218,7 @@ public class TravelLocalDataHelper {
 		private static final String BOOKMARKS_COL_ROUTE_ID = "route_id";
 		private static final String BOOKMARKS_COL_CONTENT_JSON = "content_json";
 		private static final String BOOKMARKS_COL_CONTENT = "content";
+		private static final String BOOKMARKS_COL_LAST_MODIFIED = "last_modified";
 
 		private static final String BOOKMARKS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 				BOOKMARKS_TABLE_NAME + " (" +
@@ -226,25 +226,26 @@ public class TravelLocalDataHelper {
 				BOOKMARKS_COL_LANG + " TEXT, " +
 				BOOKMARKS_COL_IS_PART_OF + " TEXT, " +
 				BOOKMARKS_COL_IMAGE_TITLE + " TEXT, " +
-				BOOKMARKS_COL_PARTIAL_CONTENT + " TEXT, " +
 				BOOKMARKS_COL_TRAVEL_BOOK + " TEXT, " +
 				BOOKMARKS_COL_LAT + " double, " +
 				BOOKMARKS_COL_LON + " double, " +
 				BOOKMARKS_COL_ROUTE_ID + " TEXT, " +
 				BOOKMARKS_COL_CONTENT_JSON + " TEXT, " +
-				BOOKMARKS_COL_CONTENT + " TEXT" + ");";
+				BOOKMARKS_COL_CONTENT + " TEXT, " +
+				BOOKMARKS_COL_LAST_MODIFIED + " long" + ");";
 
 		private static final String BOOKMARKS_TABLE_SELECT = "SELECT " +
 				BOOKMARKS_COL_ARTICLE_TITLE + ", " +
 				BOOKMARKS_COL_LANG + ", " +
 				BOOKMARKS_COL_IS_PART_OF + ", " +
 				BOOKMARKS_COL_IMAGE_TITLE + ", " +
-				BOOKMARKS_COL_PARTIAL_CONTENT + ", " +
+				BOOKMARKS_COL_TRAVEL_BOOK + ", " +
 				BOOKMARKS_COL_LAT + ", " +
 				BOOKMARKS_COL_LON + ", " +
 				BOOKMARKS_COL_ROUTE_ID + ", " +
 				BOOKMARKS_COL_CONTENT_JSON + ", " +
-				BOOKMARKS_COL_CONTENT +
+				BOOKMARKS_COL_CONTENT + ", " +
+				BOOKMARKS_COL_LAST_MODIFIED +
 				" FROM " + BOOKMARKS_TABLE_NAME;
 
 		private final OsmandApplication context;
@@ -253,8 +254,12 @@ public class TravelLocalDataHelper {
 			this.context = context;
 		}
 
+		@Nullable
 		private SQLiteConnection openConnection(boolean readonly) {
 			SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+			if (conn == null) {
+				return null;
+			}
 			if (conn.getVersion() < DB_VERSION) {
 				if (readonly) {
 					conn.close();
@@ -283,7 +288,7 @@ public class TravelLocalDataHelper {
 			if (oldVersion < 3) {
 				conn.execSQL("ALTER TABLE " + HISTORY_TABLE_NAME + " ADD " + HISTORY_COL_TRAVEL_BOOK + " TEXT");
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_TRAVEL_BOOK + " TEXT");
-				String selectedTravelBookName = getSelectedTravelBookName();
+				String selectedTravelBookName = context.getTravelHelper().getSelectedTravelBookName();
 				if (selectedTravelBookName != null) {
 					Object[] args = new Object[]{selectedTravelBookName};
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
@@ -301,20 +306,23 @@ public class TravelLocalDataHelper {
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_CONTENT_JSON + " TEXT");
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_CONTENT + " TEXT");
 			}
+			if (oldVersion < 7) {
+				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_LAST_MODIFIED + " long");
+				conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME +
+						" SET " + BOOKMARKS_COL_CONTENT + " = " + BOOKMARKS_COL_PARTIAL_CONTENT +
+						" WHERE " + BOOKMARKS_COL_CONTENT + " is null");
+				conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME +
+						" SET " + BOOKMARKS_COL_PARTIAL_CONTENT + " = null");
+			}
 		}
 
 		@NonNull
 		Map<String, WikivoyageSearchHistoryItem> getAllHistoryMap() {
 			Map<String, WikivoyageSearchHistoryItem> res = new LinkedHashMap<>();
-			String travelBook = getSelectedTravelBookName();
-			if (travelBook == null) {
-				return res;
-			}
 			SQLiteConnection conn = openConnection(true);
 			if (conn != null) {
 				try {
-					String query = HISTORY_TABLE_SELECT + " WHERE " + HISTORY_COL_TRAVEL_BOOK + " = ?";
-					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
+					SQLiteCursor cursor = conn.rawQuery(HISTORY_TABLE_SELECT, null);
 					if (cursor != null) {
 						if (cursor.moveToFirst()) {
 							do {
@@ -322,8 +330,8 @@ public class TravelLocalDataHelper {
 								res.put(item.getKey(), item);
 							} while (cursor.moveToNext());
 						}
+						cursor.close();
 					}
-					cursor.close();
 				} finally {
 					conn.close();
 				}
@@ -331,8 +339,8 @@ public class TravelLocalDataHelper {
 			return res;
 		}
 
-		void addHistoryItem(WikivoyageSearchHistoryItem item) {
-			String travelBook = getSelectedTravelBookName();
+		void addHistoryItem(@NonNull WikivoyageSearchHistoryItem item) {
+			String travelBook = item.getTravelBook(context);
 			if (travelBook == null) {
 				return;
 			}
@@ -349,8 +357,8 @@ public class TravelLocalDataHelper {
 			}
 		}
 
-		void updateHistoryItem(WikivoyageSearchHistoryItem item) {
-			String travelBook = getSelectedTravelBookName();
+		void updateHistoryItem(@NonNull WikivoyageSearchHistoryItem item) {
+			String travelBook = item.getTravelBook(context);
 			if (travelBook == null) {
 				return;
 			}
@@ -371,8 +379,8 @@ public class TravelLocalDataHelper {
 			}
 		}
 
-		void removeHistoryItem(WikivoyageSearchHistoryItem item) {
-			String travelBook = getSelectedTravelBookName();
+		void removeHistoryItem(@NonNull WikivoyageSearchHistoryItem item) {
+			String travelBook = item.getTravelBook(context);
 			if (travelBook == null) {
 				return;
 			}
@@ -391,16 +399,10 @@ public class TravelLocalDataHelper {
 		}
 
 		void clearAllHistory() {
-			String travelBook = getSelectedTravelBookName();
-			if (travelBook == null) {
-				return;
-			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME +
-									" WHERE " + HISTORY_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{travelBook});
+					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME);
 				} finally {
 					conn.close();
 				}
@@ -410,19 +412,21 @@ public class TravelLocalDataHelper {
 		@NonNull
 		List<TravelArticle> readSavedArticles() {
 			List<TravelArticle> res = new ArrayList<>();
-			String travelBook = getSelectedTravelBookName();
-			if (travelBook == null) {
-				return res;
-			}
 			SQLiteConnection conn = openConnection(true);
 			if (conn != null) {
 				try {
-					String query = BOOKMARKS_TABLE_SELECT + " WHERE " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
-					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
+					SQLiteCursor cursor = conn.rawQuery(BOOKMARKS_TABLE_SELECT, null);
 					if (cursor != null) {
 						if (cursor.moveToFirst()) {
 							do {
-								res.add(readSavedArticle(cursor));
+								TravelArticle dbArticle = readSavedArticle(cursor);
+								TravelArticle article = context.getTravelHelper().getArticleById(dbArticle.generateIdentifier(), dbArticle.lang);
+								if (article != null && article.getLastModified() > dbArticle.getLastModified()) {
+									updateSavedArticle(dbArticle, article);
+									res.add(article);
+								} else {
+									res.add(dbArticle);
+								}
 							} while (cursor.moveToNext());
 						}
 						cursor.close();
@@ -434,8 +438,8 @@ public class TravelLocalDataHelper {
 			return res;
 		}
 
-		void addSavedArticle(TravelArticle article) {
-			String travelBook = getSelectedTravelBookName();
+		void addSavedArticle(@NonNull TravelArticle article) {
+			String travelBook = article.getTravelBook(context);
 			if (travelBook == null) {
 				return;
 			}
@@ -447,26 +451,26 @@ public class TravelLocalDataHelper {
 							BOOKMARKS_COL_LANG + ", " +
 							BOOKMARKS_COL_IS_PART_OF + ", " +
 							BOOKMARKS_COL_IMAGE_TITLE + ", " +
-							BOOKMARKS_COL_PARTIAL_CONTENT + ", " +
 							BOOKMARKS_COL_TRAVEL_BOOK + ", " +
 							BOOKMARKS_COL_LAT + ", " +
 							BOOKMARKS_COL_LON + ", " +
 							BOOKMARKS_COL_ROUTE_ID + ", " +
 							BOOKMARKS_COL_CONTENT_JSON + ", " +
-							BOOKMARKS_COL_CONTENT +
+							BOOKMARKS_COL_CONTENT + ", " +
+							BOOKMARKS_COL_LAST_MODIFIED +
 							") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 					conn.execSQL(query, new Object[]{article.title, article.lang,
-							article.aggregatedPartOf, article.imageTitle, article.content,
+							article.aggregatedPartOf, article.imageTitle,
 							travelBook, article.lat, article.lon, article.routeId, article.contentsJson,
-							article.fullContent});
+							article.content, article.getFile().lastModified()});
 				} finally {
 					conn.close();
 				}
 			}
 		}
 
-		void removeSavedArticle(TravelArticle article) {
-			String travelBook = getSelectedTravelBookName();
+		void removeSavedArticle(@NonNull TravelArticle article) {
+			String travelBook = article.getTravelBook(context);
 			if (travelBook == null) {
 				return;
 			}
@@ -475,44 +479,78 @@ public class TravelLocalDataHelper {
 				try {
 					conn.execSQL("DELETE FROM " + BOOKMARKS_TABLE_NAME +
 									" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
+									" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
 									" AND " + BOOKMARKS_COL_LANG + " = ?" +
 									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{article.title, article.lang, travelBook});
+							new Object[]{article.title, article.routeId, article.lang, travelBook});
 				} finally {
 					conn.close();
 				}
 			}
 		}
 
-		@Nullable
-		private String getSelectedTravelBookName() {
-			return context.getTravelHelper().getSelectedTravelBookName();
+		void updateSavedArticle(@NonNull TravelArticle odlArticle, @NonNull TravelArticle newArticle) {
+			String travelBook = odlArticle.getTravelBook(context);
+			if (travelBook == null) {
+				return;
+			}
+			SQLiteConnection conn = openConnection(false);
+			if (conn != null) {
+				try {
+					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " +
+									BOOKMARKS_COL_ARTICLE_TITLE + " = ?, " +
+									BOOKMARKS_COL_LANG + " = ?, " +
+									BOOKMARKS_COL_IS_PART_OF + " = ?, " +
+									BOOKMARKS_COL_IMAGE_TITLE + " = ?, " +
+									BOOKMARKS_COL_TRAVEL_BOOK + " = ?, " +
+									BOOKMARKS_COL_LAT + " = ?, " +
+									BOOKMARKS_COL_LON + " = ?, " +
+									BOOKMARKS_COL_ROUTE_ID + " = ?, " +
+									BOOKMARKS_COL_CONTENT_JSON + " = ?, " +
+									BOOKMARKS_COL_CONTENT + " = ?, " +
+									BOOKMARKS_COL_LAST_MODIFIED + " = ?, " +
+									"WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ? " +
+									" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
+									" AND " + BOOKMARKS_COL_LANG + " = ?" +
+									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?",
+							new Object[]{newArticle.title, newArticle.lang, newArticle.aggregatedPartOf,
+									newArticle.imageTitle, travelBook, newArticle.lat, newArticle.lon,
+									newArticle.routeId, newArticle.content, newArticle.contentsJson,
+									odlArticle.title, odlArticle.routeId, odlArticle.lang, travelBook});
+
+				} finally {
+					conn.close();
+				}
+			}
 		}
 
+		@NonNull
 		private WikivoyageSearchHistoryItem readHistoryItem(SQLiteCursor cursor) {
 			WikivoyageSearchHistoryItem res = new WikivoyageSearchHistoryItem();
 			res.articleTitle = cursor.getString(cursor.getColumnIndex(HISTORY_COL_ARTICLE_TITLE));
 			res.lang = cursor.getString(cursor.getColumnIndex(HISTORY_COL_LANG));
 			res.isPartOf = cursor.getString(cursor.getColumnIndex(HISTORY_COL_IS_PART_OF));
 			res.lastAccessed = cursor.getLong(cursor.getColumnIndex(HISTORY_COL_LAST_ACCESSED));
-
 			return res;
 		}
 
+		@NonNull
 		private TravelArticle readSavedArticle(SQLiteCursor cursor) {
 			TravelArticle res = new TravelArticle();
-
 			res.title = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_ARTICLE_TITLE));
 			res.lang = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_LANG));
 			res.aggregatedPartOf = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_IS_PART_OF));
 			res.imageTitle = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_IMAGE_TITLE));
-			res.content = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_PARTIAL_CONTENT));
+			res.content = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_CONTENT));
 			res.lat = cursor.getDouble(cursor.getColumnIndex(BOOKMARKS_COL_LAT));
 			res.lon = cursor.getDouble(cursor.getColumnIndex(BOOKMARKS_COL_LON));
 			res.routeId = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_ROUTE_ID));
 			res.contentsJson = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_CONTENT_JSON));
-			res.fullContent = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_CONTENT));
-
+			String travelBook = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_TRAVEL_BOOK));
+			if (!Algorithms.isEmpty(travelBook)) {
+				res.file = context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR + travelBook);
+				res.lastModified = cursor.getLong(cursor.getColumnIndex(BOOKMARKS_COL_LAST_MODIFIED));
+			}
 			return res;
 		}
 	}

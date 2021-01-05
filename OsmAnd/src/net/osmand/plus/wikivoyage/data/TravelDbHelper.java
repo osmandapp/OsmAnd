@@ -563,6 +563,9 @@ public class TravelDbHelper implements TravelHelper {
 				cursor.close();
 			}
 		}
+		if (res == null) {
+			res = localDataHelper.getSavedArticle(articleId.file, articleId.routeId, lang);
+		}
 		return res;
 	}
 
@@ -643,13 +646,19 @@ public class TravelDbHelper implements TravelHelper {
 				cursor.close();
 			}
 		}
+		if (res.isEmpty()) {
+			List<TravelArticle> articles = localDataHelper.getSavedArticles(articleId.file, articleId.routeId);
+			for (TravelArticle a : articles) {
+				res.add(a.getLang());
+			}
+		}
 		return res;
 	}
 
 	@NonNull
 	private TravelArticle readArticle(SQLiteCursor cursor) {
 		TravelArticle res = new TravelArticle();
-
+		res.file = selectedTravelBook;
 		res.title = cursor.getString(0);
 		try {
 			res.content = Algorithms.gzipToString(cursor.getBlob(1)).trim();
@@ -671,7 +680,6 @@ public class TravelDbHelper implements TravelHelper {
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 		}
-
 		return res;
 	}
 

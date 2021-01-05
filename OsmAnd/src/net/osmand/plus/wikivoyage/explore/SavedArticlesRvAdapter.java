@@ -22,6 +22,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
@@ -102,7 +103,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 			holder.icon.setVisibility(loaded == null || loaded.booleanValue() ? View.VISIBLE : View.GONE);
 			holder.title.setText(article.getTitle());
-			holder.content.setText(article.getContent());
+			holder.content.setText(WikiArticleHelper.getPartialContent(article.getContent()));
 			holder.partOf.setText(article.getGeoDescription());
 			holder.leftButton.setText(app.getString(R.string.shared_string_read));
 			holder.leftButton.setCompoundDrawablesWithIntrinsicBounds(readIcon, null, null, null);
@@ -178,7 +179,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				@Override
 				public void onClick(View view) {
 					Object item = getItemByPosition();
-					if (item != null && item instanceof TravelArticle) {
+					if (item instanceof TravelArticle) {
 						if (listener != null) {
 							listener.openArticle((TravelArticle) item);
 						}
@@ -193,7 +194,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				@Override
 				public void onClick(View view) {
 					Object item = getItemByPosition();
-					if (item != null && item instanceof TravelArticle) {
+					if (item instanceof TravelArticle) {
 						final TravelArticle article = (TravelArticle) item;
 						final TravelLocalDataHelper ldh = app.getTravelHelper().getBookmarksHelper();
 						ldh.removeArticleFromSaved(article);

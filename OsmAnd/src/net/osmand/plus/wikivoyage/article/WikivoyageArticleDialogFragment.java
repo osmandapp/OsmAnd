@@ -373,7 +373,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 											  @NonNull String title,
 											  @NonNull String lang) {
 		TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(title, lang);
-		return showInstance(app, fm, articleId, lang);
+		return articleId != null && showInstance(app, fm, articleId, lang);
 	}
 
 	public static boolean showInstance(@NonNull OsmandApplication app,

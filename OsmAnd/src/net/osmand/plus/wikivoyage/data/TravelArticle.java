@@ -9,11 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Size;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.Location;
-import net.osmand.aidl.search.SearchResult;
-import net.osmand.data.LatLon;
+import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -22,8 +20,6 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.Objects;
 
 public class TravelArticle {
 
@@ -40,20 +36,38 @@ public class TravelArticle {
 	String imageTitle;
 	GPXFile gpxFile;
 	String routeId;
-	String routeSource;
+	String routeSource = "";
 	long originalId;
 	String lang;
 	String contentsJson;
 	String aggregatedPartOf;
-	String fullContent;
+
+	long lastModified;
 
 	@NonNull
 	public TravelArticleIdentifier generateIdentifier() {
 		return new TravelArticleIdentifier(this);
 	}
 
+	@NonNull
+	public static String getTravelBook(@NonNull OsmandApplication app, @NonNull File file) {
+		return file.getPath().replace(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).getPath() + "/", "");
+	}
+
+	@Nullable
+	public String getTravelBook(@NonNull OsmandApplication app) {
+		return file != null ? getTravelBook(app, file) : null;
+	}
+
 	public File getFile() {
 		return file;
+	}
+
+	public long getLastModified() {
+		if (lastModified > 0) {
+			return lastModified;
+		}
+		return file != null ? file.lastModified() : 0;
 	}
 
 	public String getTitle() {
