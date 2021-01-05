@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -71,7 +72,7 @@ public class SearchUICore {
 
 	private static boolean debugMode = false;
 	
-	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = Stream.of("building").collect((Collectors.toCollection(TreeSet::new)));
+	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(Arrays.asList("building", "internet_access_yes"));
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
@@ -249,16 +250,17 @@ public class SearchUICore {
 						String type2 = a2.getType().getKeyName();
 						String subType1 = a1.getSubType();
 						String subType2 = a2.getSubType();
-						
-						boolean isEqualId = a1.getId().longValue() == a2.getId().longValue();
 
+						boolean isEqualId = a1.getId().longValue() == a2.getId().longValue();
+						
 						if (isEqualId && (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)
 								|| FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2))) {
 							return true;
 
 						}
 						if (!type1.equals(type2)) {
-							if (isEqualId && (subType1.contains("internet") || subType2.contains("internet"))) {
+							if (isEqualId && (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)
+									|| FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2))) {
 								return true;
 							}
 							return false;
@@ -1001,20 +1003,20 @@ public class SearchUICore {
 					// here 2 points are amenity
 					Amenity a1 = (Amenity) o1.object;
 					Amenity a2 = (Amenity) o2.object;
-					
+
 					String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
 					String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
-					
+
 					int cmp;
-					
-					if(FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1) || subType1.contains("internet")) {
+
+					if (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)) {
 						cmp = 1;
-					} else if(FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2) || subType2.contains("internet")) {
+					} else if (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2)) {
 						cmp = -1;
 					} else {
 						cmp = c.collator.compare(subType1, subType2);
 					}
-					
+
 					if (cmp != 0) {
 						return cmp;
 					}
