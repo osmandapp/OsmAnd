@@ -204,7 +204,6 @@ public class SearchUICore {
 				for (SearchResult rs : lstUnique) {
 					same = sameSearchResult(rs, r);
 					if (same) {
-						filterPoiByType(rs, r, lst);
 						break;
 					}
 				}
@@ -214,24 +213,6 @@ public class SearchUICore {
 					lstUnique.add(r);
 					if (lstUnique.size() > DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
 						lstUnique.remove(0);
-					}
-				}
-			}
-		}
-		
-		private void filterPoiByType(SearchResult r1, SearchResult r2, List<SearchResult> list) {
-			if (r1.object instanceof Amenity) {
-
-				Amenity a1 = (Amenity) r1.object;
-				Amenity a2 = (Amenity) r2.object;
-
-				if (!(a2.getSubType().equals("building") || a2.getSubType().contains("internet"))
-						&& (a1.getSubType().equals("building") || a1.getSubType().contains("internet"))) {
-
-					int index = list.indexOf(r1);
-
-					if (list.contains(r1)) {
-						list.set(index, r2);
 					}
 				}
 			}
@@ -263,7 +244,7 @@ public class SearchUICore {
 						String type2 = a2.getType().getKeyName();
 						String subType1 = a1.getSubType();
 						String subType2 = a2.getSubType();
-
+						
 						if (a1.getId().longValue() == a2.getId().longValue()
 								&& ((subType1.equals("building") || subType2.equals("building")))) {
 							return true;
@@ -275,6 +256,7 @@ public class SearchUICore {
 							}
 							return false;
 						}
+						
 						if (type1.equals("natural")) {
 							similarityRadius = 50000;
 						} else if (subType1.equals(subType2)) {
@@ -1012,16 +994,20 @@ public class SearchUICore {
 					// here 2 points are amenity
 					Amenity a1 = (Amenity) o1.object;
 					Amenity a2 = (Amenity) o2.object;
-					String type1 = a1.getType().getKeyName();
-					String type2 = a2.getType().getKeyName();
-					int cmp = c.collator.compare(type1, type2);
-					if (cmp != 0) {
-						return cmp;
-					}
-
+					
 					String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
 					String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
-					cmp = c.collator.compare(subType1, subType2);
+					
+					int cmp;
+					
+					if(subType1.equals("building") || subType1.contains("internet")) {
+						cmp = 1;
+					} else if(subType2.equals("building") || subType2.contains("internet")) {
+						cmp = -1;
+					} else {
+						cmp = c.collator.compare(subType1, subType2);
+					}
+					
 					if (cmp != 0) {
 						return cmp;
 					}
