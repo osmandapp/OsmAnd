@@ -47,8 +47,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class SearchUICore {
 
@@ -72,7 +70,8 @@ public class SearchUICore {
 
 	private static boolean debugMode = false;
 	
-	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(Arrays.asList("building", "internet_access_yes"));
+	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
+			Arrays.asList("building", "internet_access_yes"));
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
@@ -252,17 +251,12 @@ public class SearchUICore {
 						String subType2 = a2.getSubType();
 
 						boolean isEqualId = a1.getId().longValue() == a2.getId().longValue();
-						
+
 						if (isEqualId && (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)
 								|| FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2))) {
 							return true;
 
-						}
-						if (!type1.equals(type2)) {
-							if (isEqualId && (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)
-									|| FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2))) {
-								return true;
-							}
+						} else if (!type1.equals(type2)) {
 							return false;
 						}
 
@@ -1004,19 +998,29 @@ public class SearchUICore {
 					Amenity a1 = (Amenity) o1.object;
 					Amenity a2 = (Amenity) o2.object;
 
+					String type1 = a1.getType().getKeyName();
+					String type2 = a2.getType().getKeyName();
 					String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
 					String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
 
-					int cmp;
+					int cmp = 0;
 
 					if (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)) {
 						cmp = 1;
 					} else if (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2)) {
 						cmp = -1;
-					} else {
-						cmp = c.collator.compare(subType1, subType2);
+					} 
+					
+					if (cmp != 0) {
+						return cmp;
 					}
 
+					cmp = c.collator.compare(type1, type2);
+					if (cmp != 0) {
+						return cmp;
+					}
+
+					cmp = c.collator.compare(subType1, subType2);
 					if (cmp != 0) {
 						return cmp;
 					}
