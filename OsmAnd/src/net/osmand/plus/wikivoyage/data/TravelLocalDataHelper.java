@@ -4,6 +4,7 @@ package net.osmand.plus.wikivoyage.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -454,7 +455,7 @@ public class TravelLocalDataHelper {
 				return;
 			}
 			if (article.getFile() != null) {
-				travelBook = article.getFile().getName();
+				travelBook = getBookName(article);
 			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
@@ -488,7 +489,7 @@ public class TravelLocalDataHelper {
 				return;
 			}
 			if (article.getFile() != null) {
-				travelBook = article.getFile().getName();
+				travelBook = getBookName(article);
 			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
@@ -504,13 +505,18 @@ public class TravelLocalDataHelper {
 			}
 		}
 
+		private String getBookName(TravelArticle article) {
+			return article.getFile().getPath().replace(
+					app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).getPath() + "/", "");
+		}
+
 		void updateSavedArticle(TravelArticle odlArticle, TravelArticle newArticle) {
 			String travelBook = getSelectedTravelBookName();
 			if (travelBook == null) {
 				return;
 			}
 			if (odlArticle.getFile() != null) {
-				travelBook = odlArticle.getFile().getName();
+				travelBook = getBookName(odlArticle);
 			}
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
@@ -568,7 +574,8 @@ public class TravelLocalDataHelper {
 			res.lon = cursor.getDouble(cursor.getColumnIndex(BOOKMARKS_COL_LON));
 			res.routeId = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_ROUTE_ID));
 			res.contentsJson = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_CONTENT_JSON));
-			File file = new File(cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_TRAVEL_BOOK)));
+			File file = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR
+					+ cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_TRAVEL_BOOK)));
 			file.setLastModified(cursor.getLong(cursor.getColumnIndex(BOOKMARKS_COL_LAST_MODIFIED)));
 			res.file = file;
 			return res;
