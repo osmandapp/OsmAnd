@@ -41,10 +41,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SearchUICore {
 
@@ -67,6 +70,8 @@ public class SearchUICore {
 	private MapPoiTypes poiTypes;
 
 	private static boolean debugMode = false;
+	
+	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = Stream.of("building").collect((Collectors.toCollection(TreeSet::new)));
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
@@ -245,18 +250,20 @@ public class SearchUICore {
 						String subType1 = a1.getSubType();
 						String subType2 = a2.getSubType();
 						
-						if (a1.getId().longValue() == a2.getId().longValue()
-								&& ((subType1.equals("building") || subType2.equals("building")))) {
+						boolean isEqualId = a1.getId().longValue() == a2.getId().longValue();
+
+						if (isEqualId && (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)
+								|| FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2))) {
 							return true;
+
 						}
 						if (!type1.equals(type2)) {
-							if (a1.getId().longValue() == a2.getId().longValue() && subType1.contains("internet")
-									|| subType2.contains("internet")) {
+							if (isEqualId && (subType1.contains("internet") || subType2.contains("internet"))) {
 								return true;
 							}
 							return false;
 						}
-						
+
 						if (type1.equals("natural")) {
 							similarityRadius = 50000;
 						} else if (subType1.equals(subType2)) {
@@ -1000,9 +1007,9 @@ public class SearchUICore {
 					
 					int cmp;
 					
-					if(subType1.equals("building") || subType1.contains("internet")) {
+					if(FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1) || subType1.contains("internet")) {
 						cmp = 1;
-					} else if(subType2.equals("building") || subType2.contains("internet")) {
+					} else if(FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2) || subType2.contains("internet")) {
 						cmp = -1;
 					} else {
 						cmp = c.collator.compare(subType1, subType2);
