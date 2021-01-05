@@ -1,11 +1,5 @@
 package net.osmand.binary;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
@@ -28,6 +22,12 @@ import net.osmand.binary.OsmandIndex.RoutingSubregion;
 import net.osmand.binary.OsmandIndex.TransportPart;
 
 import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 public class CachedOsmandIndexes {
 
@@ -174,10 +174,10 @@ public class CachedOsmandIndexes {
 		routing.addSubregions(rpart);
 	}
 
-	public BinaryMapIndexReader getReader(File f) throws IOException {
+	public BinaryMapIndexReader getReader(File f, boolean useStoredIndex) throws IOException {
 		RandomAccessFile mf = new RandomAccessFile(f.getPath(), "r");
 		FileIndex found = null;
-		if (storedIndex != null) {
+		if (storedIndex != null && useStoredIndex) {
 			for (int i = 0; i < storedIndex.getFileIndexCount(); i++) {
 				FileIndex fi = storedIndex.getFileIndex(i);
 				if (f.length() == fi.getSize() && f.getName().equals(fi.getFileName())) {
