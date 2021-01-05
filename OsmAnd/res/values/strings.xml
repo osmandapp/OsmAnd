@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="copy_address">Copy address</string>
     <string name="routing_attr_allow_intermittent_name">Allow intermittent water ways</string>
     <string name="routing_attr_allow_intermittent_description">Allow intermittent water ways</string>
     <string name="routing_attr_allow_streams_name">Allow streams and drains</string>

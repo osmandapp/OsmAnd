@@ -36,6 +36,7 @@ public class ShareMenu extends BaseMenuController {
 	public enum ShareItem {
 		MESSAGE(R.drawable.ic_action_message, R.string.shared_string_send),
 		CLIPBOARD(R.drawable.ic_action_copy, R.string.shared_string_copy),
+		ADDRESS(R.drawable.ic_action_copy, R.string.copy_address),
 		NAME(R.drawable.ic_action_copy, R.string.copy_location_name),
 		COORDINATES(R.drawable.ic_action_copy, R.string.copy_coordinates),
 		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
@@ -66,6 +67,7 @@ public class ShareMenu extends BaseMenuController {
 		List<ShareItem> list = new LinkedList<>();
 		list.add(ShareItem.MESSAGE);
 		list.add(ShareItem.CLIPBOARD);
+		list.add(ShareItem.ADDRESS);
 		list.add(ShareItem.NAME);
 		list.add(ShareItem.COORDINATES);
 		list.add(ShareItem.GEO);
@@ -120,6 +122,15 @@ public class ShareMenu extends BaseMenuController {
 				break;
 			case CLIPBOARD:
 				ShareDialog.sendToClipboard(mapActivity, sms);
+				break;
+			case ADDRESS:
+				if (!Algorithms.isEmpty(address)) {
+					ShareDialog.sendToClipboard(mapActivity, address);
+				} else {
+					Toast.makeText(mapActivity,
+							R.string.no_address_found,
+							Toast.LENGTH_LONG).show();
+				}
 				break;
 			case NAME:
 				if (!Algorithms.isEmpty(title)) {
