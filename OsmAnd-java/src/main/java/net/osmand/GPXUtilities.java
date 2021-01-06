@@ -2544,7 +2544,7 @@ public class GPXUtilities {
 			if (maxlat == null) {
 				maxlat = parser.getAttributeValue("", "maxLat");
 			}
-			if (maxlat == null) {
+			if (maxlon == null) {
 				maxlon = parser.getAttributeValue("", "maxLon");
 			}
 
