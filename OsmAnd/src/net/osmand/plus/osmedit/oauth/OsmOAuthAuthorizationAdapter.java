@@ -138,7 +138,11 @@ public class OsmOAuthAuthorizationAdapter {
 
         @Override
         protected void onPostExecute(@NonNull OAuth1RequestToken requestToken) {
-            loadWebView(rootLayout, nightMode, client.getService().getAuthorizationUrl(requestToken));
+            if (requestToken != null) {
+                loadWebView(rootLayout, nightMode, client.getService().getAuthorizationUrl(requestToken));
+            } else {
+                app.showShortToastMessage(app.getString(R.string.internet_not_available));
+            }
         }
     }
 
