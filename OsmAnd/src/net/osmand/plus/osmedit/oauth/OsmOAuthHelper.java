@@ -45,7 +45,11 @@ public class OsmOAuthHelper {
 	}
 
 	public void authorize(@NonNull String oauthVerifier) {
-		authorizationAdapter.authorize(oauthVerifier, this);
+		if (oauthVerifier != null) {
+			authorizationAdapter.authorize(oauthVerifier, this);
+		} else {
+			updateAdapter();
+		}
 	}
 
 	public void resetAuthorization() {
