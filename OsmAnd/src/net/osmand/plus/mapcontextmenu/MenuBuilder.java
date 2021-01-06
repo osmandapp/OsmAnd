@@ -41,6 +41,8 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.ActivityResultListener;
@@ -51,6 +53,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
+import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
 import net.osmand.plus.openplacereviews.OPRConstants;
@@ -92,12 +95,15 @@ public class MenuBuilder {
 	protected boolean matchWidthDivider;
 	protected boolean light;
 	private long objectId;
+	private String objectType;
 	private LatLon latLon;
 	private boolean hidden;
 	private boolean showTitleIfTruncated = true;
 	private boolean showNearestWiki = false;
+	private boolean showNearestPoi = false;
 	private boolean showOnlinePhotos = true;
 	protected List<Amenity> nearestWiki = new ArrayList<>();
+	protected List<Amenity> nearestPoi = new ArrayList<>();
 	private List<OsmandPlugin> menuPlugins = new ArrayList<>();
 	@Nullable
 	private CardsRowBuilder onlinePhotoCardsRow;
@@ -208,8 +214,16 @@ public class MenuBuilder {
 		return showNearestWiki;
 	}
 
+	public boolean isShowNearestPoi() {
+        return showNearestPoi;
+    }
+
 	public void setShowNearestWiki(boolean showNearestWiki) {
 		this.showNearestWiki = showNearestWiki;
+	}
+
+	public void setShowNearestPoi(boolean showNearestPoi) {
+		this.showNearestPoi = showNearestPoi;
 	}
 
 	public void setShowTitleIfTruncated(boolean showTitleIfTruncated) {
@@ -229,6 +243,11 @@ public class MenuBuilder {
 		this.showNearestWiki = showNearestWiki;
 	}
 
+	public void setShowNearestPoi(boolean showNearestPoi, String objectType) {
+		this.objectType = objectType;
+		this.showNearestPoi = showNearestPoi;
+	}
+
 	public void addMenuPlugin(OsmandPlugin plugin) {
 		menuPlugins.add(plugin);
 	}
@@ -246,6 +265,7 @@ public class MenuBuilder {
 			buildTitleRow(view);
 		}
 		buildNearestWikiRow(view);
+		buildNearestPoiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
@@ -325,10 +345,20 @@ public class MenuBuilder {
 	}
 
 	protected void buildNearestWikiRow(View view) {
-		if (processNearestWiki() && nearestWiki.size() > 0) {
-			buildRow(view, R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")", 0,
-					true, getCollapsableWikiView(view.getContext(), true),
-					false, 0, false, null, false);
+		buildNearestRow(view, nearestWiki, processNearestWiki(),
+				R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around));
+	}
+
+	protected void buildNearestPoiRow(View view) {
+		buildNearestRow(view, nearestPoi, processNearestPoi(),
+				nearestPoi.isEmpty() ? 0 : AmenityMenuController.getRightIconId(nearestPoi.get(0)),
+				app.getString(R.string.poi_around));
+	}
+
+	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, boolean process, int iconId, String text) {
+		if (process && nearestAmenities.size() > 0) {
+			buildRow(view, iconId, null, text + " (" + nearestAmenities.size() + ")", 0, true,
+					getCollapsableView(view.getContext(), true, nearestAmenities), false, 0, false, null, false);
 		}
 	}
 
@@ -1118,20 +1148,25 @@ public class MenuBuilder {
 		return new CollapsableView(textView, this, collapsed);
 	}
 
-	protected CollapsableView getCollapsableWikiView(Context context, boolean collapsed) {
+	protected CollapsableView getCollapsableView(Context context, boolean collapsed, List<Amenity> nearestAmenities) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
 
-		for (final Amenity wiki : nearestWiki) {
+		for (final Amenity poi : nearestAmenities) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
-			String name = wiki.getName(preferredMapAppLang, transliterateNames);
+			String name = poi.getName(preferredMapAppLang, transliterateNames);
+			if (Algorithms.isBlank(name)) {
+				PoiCategory pc = poi.getType();
+				PoiType pt = pc.getPoiTypeByKeyName(poi.getSubType());
+				name = pt.getTranslation();
+			}
 			button.setText(name);
 
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					LatLon latLon = new LatLon(wiki.getLocation().getLatitude(), wiki.getLocation().getLongitude());
-					PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(wiki);
-					mapActivity.getContextMenu().show(latLon, pointDescription, wiki);
+					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
+					PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(poi);
+					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
 				}
 			});
 			view.addView(button);
@@ -1192,21 +1227,7 @@ public class MenuBuilder {
 
 	protected boolean processNearestWiki() {
 		if (showNearestWiki && latLon != null) {
-			QuadRect rect = MapUtils.calculateLatLonBbox(
-					latLon.getLatitude(), latLon.getLongitude(), 250);
-			PoiUIFilter wikiPoiFilter = app.getPoiFilters().getTopWikiPoiFilter();
-
-			nearestWiki = getAmenities(rect, wikiPoiFilter);
-
-			Collections.sort(nearestWiki, new Comparator<Amenity>() {
-
-				@Override
-				public int compare(Amenity o1, Amenity o2) {
-					double d1 = MapUtils.getDistance(latLon, o1.getLocation());
-					double d2 = MapUtils.getDistance(latLon, o2.getLocation());
-					return Double.compare(d1, d2);
-				}
-			});
+			nearestWiki = getSortedAmenities(app.getPoiFilters().getTopWikiPoiFilter());
 			Long id = objectId;
 			List<Amenity> wikiList = new ArrayList<>();
 			for (Amenity wiki : nearestWiki) {
@@ -1218,6 +1239,43 @@ public class MenuBuilder {
 			return true;
 		}
 		return false;
+	}
+
+	protected boolean processNearestPoi() {
+		if (showNearestPoi && latLon != null) {
+			nearestPoi = getSortedAmenities(app.getPoiFilters().getShowAllPOIFilter());
+			Long id = objectId;
+			String type = objectType;
+			List<Amenity> poiList = new ArrayList<>();
+			for (Amenity poi : nearestPoi) {
+				if (poi.getId().equals(id) || !Algorithms.stringsEqual(poi.getSubType(), type)) {
+					poiList.add(poi);
+				}
+			}
+			nearestPoi.removeAll(poiList);
+			return true;
+		}
+		return false;
+	}
+
+	private List<Amenity> getSortedAmenities(PoiUIFilter filter) {
+        final LatLon latLon = getLatLon();
+	    QuadRect rect = MapUtils.calculateLatLonBbox(
+				latLon.getLatitude(), latLon.getLongitude(), 250);
+
+		List<Amenity> nearestAmenities = getAmenities(rect, filter);
+
+		Collections.sort(nearestAmenities, new Comparator<Amenity>() {
+
+			@Override
+			public int compare(Amenity o1, Amenity o2) {
+				double d1 = MapUtils.getDistance(latLon, o1.getLocation());
+				double d2 = MapUtils.getDistance(latLon, o2.getLocation());
+				return Double.compare(d1, d2);
+			}
+		});
+
+		return nearestAmenities;
 	}
 
 	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter wikiPoiFilter) {

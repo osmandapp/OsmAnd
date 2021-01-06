@@ -116,7 +116,7 @@ public class AmenityMenuController extends MenuController {
 		return getRightIconId(amenity);
 	}
 
-	private static int getRightIconId(Amenity amenity) {
+	public static int getRightIconId(Amenity amenity) {
 		String id = null;
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
