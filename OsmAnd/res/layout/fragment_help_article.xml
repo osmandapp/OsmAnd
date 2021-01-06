@@ -14,7 +14,7 @@
         app:theme="?attr/toolbar_theme"
         android:background="?attr/pstsTabBackground"/>
 
-    <WebView
+    <net.osmand.plus.widgets.WebViewEx
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

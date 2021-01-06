@@ -3098,4 +3098,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="osm_live_payment_desc_hw">Betalningen för prenumerationen är i enlighet med vad som valts. Du kan avbryta den i AppGallery när som hellst.</string>
     <string name="routing_attr_avoid_footways_description">Undvik resor till fots</string>
     <string name="routing_attr_avoid_footways_name">Undvik resor till</string>
+    <string name="search_download_wikipedia_maps">Ladda ner Wikipedia kartor</string>
+    <string name="plugin_wikipedia_description">Få information om sevärdheter från Wikipedia, en inbunden samling av offline artiklar om ställen och destinationer.</string>
+    <string name="track_show_start_finish_icons"></string>
 </resources>

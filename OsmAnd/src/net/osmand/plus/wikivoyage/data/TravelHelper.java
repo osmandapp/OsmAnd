@@ -56,8 +56,7 @@ public interface TravelHelper {
 	File createGpxFile(@NonNull final TravelArticle article);
 
 	// TODO: this method should be deleted once TravelDBHelper is deleted
-	// For TravelOBFHelper it could always return "" and should be no problem
-	// Bookmarks should be refactored properly to support multiple files
+	@Nullable
 	String getSelectedTravelBookName();
 
 	String getWikivoyageFileName();

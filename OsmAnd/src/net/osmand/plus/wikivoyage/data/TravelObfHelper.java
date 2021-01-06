@@ -278,7 +278,7 @@ public class TravelObfHelper implements TravelHelper {
 			parts = null;
 		}
 		Map<String, List<WikivoyageSearchResult>> navMap = new HashMap<>();
-		Set<String> headers = new LinkedHashSet<String>();
+		Set<String> headers = new LinkedHashSet<>();
 		Map<String, WikivoyageSearchResult> headerObjs = new HashMap<>();
 		Map<File, List<Amenity>> amenityMap = new HashMap<>();
 		for (BinaryMapIndexReader reader : getReaders()) {
@@ -335,7 +335,7 @@ public class TravelObfHelper implements TravelHelper {
 							navMap.put(rs.isPartOf, l);
 						}
 						l.add(rs);
-						if (headers != null && headers.contains(a.getTitle())) {
+						if (headers.contains(a.getTitle())) {
 							headerObjs.put(a.getTitle(), rs);
 						}
 					}
@@ -365,7 +365,7 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @NonNull String lang) {
 		TravelArticle article = getCachedArticle(articleId, lang);
-		return article == null ? findArticleById(articleId, lang) : article;
+		return article == null ? localDataHelper.getSavedArticle(articleId.file, articleId.routeId, lang) : article;
 	}
 
 	@Nullable
@@ -390,10 +390,11 @@ public class TravelObfHelper implements TravelHelper {
 
 	private TravelArticle findArticleById(@NonNull final TravelArticleIdentifier articleId, final String lang) {
 		TravelArticle article = null;
+		final boolean isDbArticle = articleId.file != null && articleId.file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);
 		final List<Amenity> amenities = new ArrayList<>();
 		for (BinaryMapIndexReader reader : getReaders()) {
 			try {
-				if (articleId.file != null && !articleId.file.equals(reader.getFile())) {
+				if (articleId.file != null && !articleId.file.equals(reader.getFile()) && !isDbArticle) {
 					continue;
 				}
 				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
@@ -404,7 +405,7 @@ public class TravelObfHelper implements TravelHelper {
 							@Override
 							public boolean publish(Amenity amenity) {
 								if (Algorithms.stringsEqual(articleId.routeId, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID, null)))
-										&& Algorithms.stringsEqual(articleId.routeSource, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE, null)))) {
+										&& Algorithms.stringsEqual(articleId.routeSource, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE, null))) || isDbArticle) {
 									amenities.add(amenity);
 									done = true;
 								}
@@ -519,9 +520,14 @@ public class TravelObfHelper implements TravelHelper {
 		ArrayList<String> res = new ArrayList<>();
 		TravelArticle article = getArticleById(articleId, "");
 		if (article != null) {
-			Map<String, TravelArticle> articles = cachedArticles.get(articleId);
+			Map<String, TravelArticle> articles = cachedArticles.get(article.generateIdentifier());
 			if (articles != null) {
 				res.addAll(articles.keySet());
+			}
+		} else {
+			List<TravelArticle> articles = localDataHelper.getSavedArticles(articleId.file, articleId.routeId);
+			for (TravelArticle a : articles) {
+				res.add(a.getLang());
 			}
 		}
 		return res;
@@ -547,7 +553,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public String getSelectedTravelBookName() {
-		return "";
+		return null;
 	}
 
 	@Override

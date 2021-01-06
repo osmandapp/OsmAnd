@@ -44,6 +44,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -467,6 +468,7 @@ public class AppInitializer implements IProgress {
 		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
 		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
+		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
 
 		initOpeningHoursParser();
 	}

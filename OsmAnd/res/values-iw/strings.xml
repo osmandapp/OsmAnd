@@ -4031,4 +4031,20 @@
     <string name="routing_attr_allow_intermittent_name">לאפשר מקטעים עם דרכי מים עונתיים</string>
     <string name="gpx_upload_public_visibility_descr">„ציבורי” משמעו שהעקבות מופיעים באופן ציבורי בעקבות ה־GPS שלך וברישומי עקבות GPS ציבוריים וברישומי מעקב ציבוריים עם חותמות זמן בתצורה גולמית. הנתונים שמוגשים דרך ה־API אינם מפנים אל עמוד העקבות שלך. חותמות הזמן של נקודות המעקב אינן זמינות דרך ה־API של ה־GPS ונקודות המעקב אינן מסודרות בהתאם לזמן שתועדו.</string>
     <string name="gpx_upload_private_visibility_descr">„פרטי” משמעות שהעקבות לא תופענה ברישומים ציבוריים אך נקודות מעקב ממתוכן תהיינה זמינות בסדר אקראי דרך ה־API הציבורי של ה־GPS ללא חותמות זמן.</string>
+    <string name="voice_prompts_timetable">זמני הכרזות</string>
+    <string name="add_online_routing_engine">הוספת מנוע ניווט מקוון</string>
+    <string name="edit_online_routing_engine">עריכת מנוע הניווט המקוון</string>
+    <string name="shared_string_subtype">תת־סוג</string>
+    <string name="shared_string_vehicle">כלי רכב</string>
+    <string name="shared_string_api_key">מפתח API</string>
+    <string name="shared_string_server_url">כתובת השרת</string>
+    <string name="shared_string_enter_param">נא למלא משתנים</string>
+    <string name="keep_it_empty_if_not">להשאיר ריק אם לא</string>
+    <string name="online_routing_example_hint">כתובת עם כל המשתנים נראית כך:</string>
+    <string name="test_route_calculation">בדיקת חישוב מסלול</string>
+    <string name="routing_engine_vehicle_type_driving">נהיגה</string>
+    <string name="routing_engine_vehicle_type_foot">ברגל</string>
+    <string name="routing_engine_vehicle_type_bike">אופנוע</string>
+    <string name="routing_engine_vehicle_type_car">מכונית</string>
+    <string name="message_error_recheck_parameters">שגיאה, נא לבדוק את המשתנים מחדש</string>
 </resources>

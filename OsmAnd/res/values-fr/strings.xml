@@ -4006,4 +4006,17 @@
     <string name="routing_attr_allow_intermittent_name">Autoriser les voies navigables intermittentes</string>
     <string name="routing_attr_allow_streams_description">Autoriser les cours d’eau et les drains</string>
     <string name="routing_attr_allow_streams_name">Autoriser les cours d’eau et les drains</string>
+    <string name="voice_prompts_timetable">Nombre d\'annonces vocales</string>
+    <string name="keep_it_empty_if_not">Si non, laissez vide</string>
+    <string name="shared_string_subtype">Sous-type</string>
+    <string name="shared_string_vehicle">Véhicule</string>
+    <string name="shared_string_api_key">Clé d\'API</string>
+    <string name="shared_string_server_url">URL du serveur</string>
+    <string name="shared_string_enter_param">Saisissez le paramètre</string>
+    <string name="test_route_calculation">Calculer un itinéraire d’essai</string>
+    <string name="routing_engine_vehicle_type_driving">En voiture</string>
+    <string name="routing_engine_vehicle_type_foot">A pieds</string>
+    <string name="routing_engine_vehicle_type_bike">Vélo</string>
+    <string name="routing_engine_vehicle_type_car">Automobile</string>
+    <string name="message_error_recheck_parameters">Erreur, vérifiez les paramètres</string>
 </resources>

@@ -4,12 +4,12 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <WebView
+    <net.osmand.plus.widgets.WebViewEx
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </WebView>
+    </net.osmand.plus.widgets.WebViewEx>
 
     <include layout="@layout/mapillary_no_internet"
              android:id="@+id/mapillaryNoInternetLayout"
