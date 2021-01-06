@@ -22,7 +22,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -39,6 +38,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngineFragment;
 import net.osmand.router.RoutingConfiguration;
 
 import org.apache.commons.logging.Log;
@@ -149,17 +149,23 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 			items.add(new TitleItem(getString(R.string.select_nav_profile_dialog_title)));
 			items.add(new LongDescriptionItem(getString(R.string.select_nav_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
-				final RoutingProfileDataObject profile = (RoutingProfileDataObject) profiles.get(i);
 				boolean showBottomDivider = false;
-				if (i < profiles.size() - 1) {
-					RoutingProfileDataObject nextProfile = (RoutingProfileDataObject) profiles.get(i + 1);
-					if (profile.getFileName() == null) {
-						showBottomDivider = nextProfile.getFileName() != null;
-					} else {
-						showBottomDivider = !profile.getFileName().equals(nextProfile.getFileName());
+				if (profiles.get(i) instanceof RoutingProfileDataObject) {
+					final RoutingProfileDataObject profile = (RoutingProfileDataObject) profiles.get(i);
+					if (i < profiles.size() - 1) {
+						if (profiles.get(i + 1) instanceof RoutingProfileDataObject) {
+							RoutingProfileDataObject nextProfile = (RoutingProfileDataObject) profiles.get(i + 1);
+							if (profile.getFileName() == null) {
+								showBottomDivider = nextProfile.getFileName() != null;
+							} else {
+								showBottomDivider = !profile.getFileName().equals(nextProfile.getFileName());
+							}
+						} else {
+							showBottomDivider = true;
+						}
 					}
 				}
-				addProfileItem(profile, showBottomDivider);
+				addProfileItem(profiles.get(i), showBottomDivider);
 			}
 			items.add(new DividerItem(app));
 			items.add(new LongDescriptionItem(app.getString(R.string.osmand_routing_promo)));
@@ -177,6 +183,15 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 							return false;
 						}
 					});
+				}
+			});
+			addButtonItem(R.string.add_online_routing_engine, R.drawable.ic_world_globe_dark, new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (getActivity() != null) {
+						OnlineRoutingEngineFragment.showInstance(getActivity(), getAppMode(), null);
+					}
+					dismiss();
 				}
 			});
 			items.add(new BaseBottomSheetItem.Builder()
@@ -220,7 +235,10 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		int iconDefaultColorResId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 
-		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
+		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(
+				profile instanceof OnlineRoutingEngineDataObject ?
+						R.layout.bottom_sheet_item_with_descr_radio_and_icon_btn :
+						R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		TextView tvDescription = itemView.findViewById(R.id.description);
 		ImageView ivIcon = itemView.findViewById(R.id.icon);
@@ -253,7 +271,14 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 						args.putString(PROFILE_KEY_ARG, profile.getStringKey());
 						Fragment target = getTargetFragment();
 						if (target instanceof OnSelectProfileCallback) {
-							((OnSelectProfileCallback) target).onProfileSelected(args);
+							if (profile instanceof OnlineRoutingEngineDataObject) {
+								if (getActivity() != null) {
+									OnlineRoutingEngineFragment.showInstance(getActivity(), getAppMode(), profile.getStringKey());
+								}
+								dismiss();
+							} else {
+								((OnSelectProfileCallback) target).onProfileSelected(args);
+							}
 						}
 						dismiss();
 					}
@@ -338,6 +363,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 
 			case NAVIGATION_PROFILE:
 				profiles.addAll(ProfileDataUtils.getSortedRoutingProfiles(app));
+				profiles.addAll(ProfileDataUtils.getOnlineRoutingProfiles(app));
 				break;
 
 			case DEFAULT_PROFILE:
@@ -358,6 +384,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @NonNull DialogMode dialogMode,
 	                                @Nullable Fragment target,
+	                                ApplicationMode appMode,
 	                                String selectedItemKey,
 	                                boolean usedOnMap) {
 		SelectProfileBottomSheet fragment = new SelectProfileBottomSheet();
@@ -366,6 +393,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 		args.putString(SELECTED_KEY, selectedItemKey);
 		fragment.setArguments(args);
 		fragment.setUsedOnMap(usedOnMap);
+		fragment.setAppMode(appMode);
 		fragment.setTargetFragment(target, 0);
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}

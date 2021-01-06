@@ -30,17 +30,18 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.wikipedia.WikiArticleBaseDialogFragment;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.util.Algorithms;
@@ -58,15 +59,15 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	public static final String TAG = "WikivoyageArticleDialogFragment";
 
 
-	private static final String ROUTE_ID_KEY = "route_id_key";
-	private static final String LANGS_KEY = "langs_key";
-	private static final String SELECTED_LANG_KEY = "selected_lang_key";
+	private static final String ARTICLE_ID_KEY = "article_id";
+	private static final String LANGS_KEY = "langs";
+	private static final String SELECTED_LANG_KEY = "selected_lang";
 
 	private static final String EMPTY_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4//";
 	
 	private static final int MENU_ITEM_SHARE = 0;
 	
-	private String routeId = "";
+	private TravelArticleIdentifier articleId;
 	private ArrayList<String> langs;
 	private String selectedLang;
 	private TravelArticle article;
@@ -192,15 +193,17 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		if (requestCode == WikivoyageArticleContentsFragment.SHOW_CONTENT_ITEM_REQUEST_CODE) {
 			String link = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENT_ITEM_LINK_KEY);
 			String title = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENT_ITEM_TITLE_KEY);
-			moveToAnchor(link, title);
+			if (title != null) {
+				moveToAnchor(link, title);
+			}
 		} else if (requestCode == WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE) {
 			updateWebSettings();
 			populateArticle();
 		} else if (requestCode == WikivoyageArticleNavigationFragment.OPEN_ARTICLE_REQUEST_CODE) {
-			String tripId = data.getStringExtra(WikivoyageArticleNavigationFragment.ROUTE_ID_KEY);
+			TravelArticleIdentifier articleId = data.getParcelableExtra(WikivoyageArticleNavigationFragment.ARTICLE_ID_KEY);
 			String selectedLang = data.getStringExtra(WikivoyageArticleNavigationFragment.SELECTED_LANG_KEY);
-			if (!Algorithms.isEmpty(tripId) && !TextUtils.isEmpty(selectedLang)) {
-				this.routeId = tripId;
+			if (articleId != null && !TextUtils.isEmpty(selectedLang)) {
+				this.articleId = articleId;
 				this.selectedLang = selectedLang;
 				populateArticle();
 			}
@@ -286,21 +289,21 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	@Override
 	protected void populateArticle() {
-		if (Algorithms.isEmpty(routeId) || langs == null) {
+		if (articleId == null || langs == null) {
 			Bundle args = getArguments();
 			if (args != null) {
-				routeId = args.getString(ROUTE_ID_KEY);
+				articleId = args.getParcelable(ARTICLE_ID_KEY);
 				langs = args.getStringArrayList(LANGS_KEY);
 			}
 		}
-		if (Algorithms.isEmpty(routeId) || langs == null || langs.isEmpty()) {
+		if (articleId == null || langs == null || langs.isEmpty()) {
 			return;
 		}
 		if (selectedLang == null) {
 			selectedLang = langs.get(0);
 		}
 		articleToolbarText.setText("");
-		article = getMyApplication().getTravelHelper().getArticleById(routeId, selectedLang);
+		article = getMyApplication().getTravelHelper().getArticleById(articleId, selectedLang);
 		if (article == null) {
 			return;
 		}
@@ -366,34 +369,34 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	}
 
 	public static boolean showInstanceByTitle(@NonNull OsmandApplication app,
-									   @NonNull FragmentManager fm,
-									   @NonNull String title,
-									   @NonNull String lang) {
-		String articleId = app.getTravelHelper().getArticleId(title, lang);
-		return showInstance(app, fm, articleId, lang);
+											  @NonNull FragmentManager fm,
+											  @NonNull String title,
+											  @NonNull String lang) {
+		TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(title, lang);
+		return articleId != null && showInstance(app, fm, articleId, lang);
 	}
 
 	public static boolean showInstance(@NonNull OsmandApplication app,
 									   @NonNull FragmentManager fm,
-									   @NonNull String routeId,
+									   @NonNull TravelArticleIdentifier articleId,
 									   @Nullable String selectedLang) {
-		ArrayList<String> langs = app.getTravelHelper().getArticleLangs(routeId);
-		return showInstance(fm, routeId, langs, selectedLang);
+		ArrayList<String> langs = app.getTravelHelper().getArticleLangs(articleId);
+		return showInstance(fm, articleId, langs, selectedLang);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fm,
-									   String routeId,
+									   @NonNull TravelArticleIdentifier articleId,
 									   @NonNull ArrayList<String> langs) {
-		return showInstance(fm, routeId, langs, null);
+		return showInstance(fm, articleId, langs, null);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fm,
-									   String routeId,
-									   @NonNull ArrayList<String> langs,
-									   @Nullable String selectedLang) {
+	private static boolean showInstance(@NonNull FragmentManager fm,
+										@NonNull TravelArticleIdentifier articleId,
+										@NonNull ArrayList<String> langs,
+										@Nullable String selectedLang) {
 		try {
 			Bundle args = new Bundle();
-			args.putString(ROUTE_ID_KEY, routeId);
+			args.putParcelable(ARTICLE_ID_KEY, articleId);
 			args.putStringArrayList(LANGS_KEY, langs);
 			if (langs.contains(selectedLang)) {
 				args.putString(SELECTED_LANG_KEY, selectedLang);
@@ -416,7 +419,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				return;
 			}
 			WikivoyageArticleNavigationFragment.showInstance(fm,
-					WikivoyageArticleDialogFragment.this, routeId, selectedLang);
+					WikivoyageArticleDialogFragment.this, articleId, selectedLang);
 		}
 	}
 

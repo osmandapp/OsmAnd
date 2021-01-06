@@ -194,7 +194,7 @@
     <string name="poi_fuel_biogas">Biogás</string>
     <string name="poi_fuel_lh2">Hidrogênio líquido</string>
     <string name="poi_fuel_electricity">Eletricidade</string>
-    <string name="poi_electricity_combined_charging">Eletroposto</string>
+    <string name="poi_electricity_combined_charging">Eletroposto;Estação de carregamento de veículos elétricos; Estação de carregamento de VE; Ponto de recarga elétrica; Ponto de carga; Estação de recarga eletrônica; Equipamento de abastecimento de veículos elétricos</string>
     <string name="poi_vehicle_ramp">Rampa de veículo</string>
     <string name="poi_compressed_air">Ar comprimido</string>
     <string name="poi_parking">Estacionamento</string>
@@ -3898,4 +3898,8 @@
     <string name="poi_ranger_station">Posto de guarda florestal</string>
     <string name="poi_waste_transfer_station">Estação de transferência de resíduos</string>
     <string name="poi_lavoir">Lavandaria pública</string>
+    <string name="poi_swimming_area">Área de natação</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Túnel para morcego</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Ponte para morcego</string>
+    <string name="poi_wildlife_crossing">Travessia de vida selvagem</string>
 </resources>

@@ -67,8 +67,9 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		textView.setPadding(innerPadding, 0, innerPadding, 0);
 		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		if (item.equals(selectedItem) && item.isEnabled()) {
-			AndroidUtils.setBackground(holder.button, app.getUIUtilities().getPaintedIcon(
-					R.drawable.bg_select_icon_group_button, ContextCompat.getColor(app, activeColorResId)));
+			AndroidUtils.setBackground(holder.button, UiUtilities.createTintedDrawable(app,
+							R.drawable.bg_select_icon_group_button,
+							ContextCompat.getColor(app, activeColorResId)));
 			textView.setTextColor(ContextCompat.getColor(app, R.color.color_white));
 		} else {
 			if (!item.isEnabled()) {

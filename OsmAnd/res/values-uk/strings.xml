@@ -4023,4 +4023,20 @@
     <string name="routing_attr_prefer_hiking_routes_name">Надавати перевагу пішохідним маршрутам</string>
     <string name="routing_attr_allow_streams_description">Дозволити потоки та стічні канали</string>
     <string name="routing_attr_allow_streams_name">Дозволити потоки та стічні канали</string>
+    <string name="voice_prompts_timetable">Голосові підказки</string>
+    <string name="add_online_routing_engine">Додати мережний рушій маршрутизації</string>
+    <string name="edit_online_routing_engine">Змінити мережний рушій маршрутизації</string>
+    <string name="shared_string_subtype">Підтип</string>
+    <string name="shared_string_vehicle">Транспортний засіб</string>
+    <string name="shared_string_api_key">Ключ API</string>
+    <string name="shared_string_server_url">URL-адреса сервера</string>
+    <string name="shared_string_enter_param">Введіть параметр</string>
+    <string name="keep_it_empty_if_not">Залиште порожнім, якщо ні</string>
+    <string name="online_routing_example_hint">URL-адреса з усіма параметрами виглядатиме так:</string>
+    <string name="test_route_calculation">Тестове обчислення маршруту</string>
+    <string name="routing_engine_vehicle_type_driving">Водіння</string>
+    <string name="routing_engine_vehicle_type_foot">Пішки</string>
+    <string name="routing_engine_vehicle_type_bike">Велосипед</string>
+    <string name="routing_engine_vehicle_type_car">Автомобіль</string>
+    <string name="message_error_recheck_parameters">Помилка, повторно перевірте параметри</string>
 </resources>

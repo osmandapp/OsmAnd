@@ -76,7 +76,8 @@ public class ArticleTravelCard extends BaseTravelCard {
 				@Override
 				public void onClick(View v) {
 					if (fragmentManager != null) {
-						WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, article.getRouteId(), article.getLang());
+						WikivoyageArticleDialogFragment.showInstance(app, fragmentManager,
+								article.generateIdentifier(), article.getLang());
 					}
 				}
 			};

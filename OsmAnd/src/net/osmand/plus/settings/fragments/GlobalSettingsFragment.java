@@ -125,8 +125,9 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		if (prefId.equals(settings.DEFAULT_APPLICATION_MODE.getId())) {
 			if (getActivity() != null) {
 				String defaultModeKey = settings.DEFAULT_APPLICATION_MODE.get().getStringKey();
-				SelectProfileBottomSheet.showInstance(getActivity(),
-						DialogMode.DEFAULT_PROFILE, this, defaultModeKey, false);
+				SelectProfileBottomSheet.showInstance(
+						getActivity(), DialogMode.DEFAULT_PROFILE, this,
+						getSelectedAppMode(), defaultModeKey, false);
 			}
 		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			FragmentManager fm = getFragmentManager();

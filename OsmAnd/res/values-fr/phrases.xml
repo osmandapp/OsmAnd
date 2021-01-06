@@ -3895,4 +3895,9 @@
     <string name="poi_water_source_tap">Robinet</string>
     <string name="poi_vaccination_covid19">Vaccination : covid19</string>
     <string name="poi_health_specialty_vaccination_yes">Vaccination</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Tunnel à chauve-souris</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Pont à chauve-</string>
+    <string name="poi_wildlife_crossing">Passage à faune</string>
+    <string name="poi_swimming_area">Zone de</string>
+    <string name="poi_lavoir">Lavoir</string>
 </resources>

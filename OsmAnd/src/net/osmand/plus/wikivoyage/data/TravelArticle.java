@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -7,10 +9,14 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Size;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -21,20 +27,48 @@ public class TravelArticle {
 	private static final String THUMB_PREFIX = "320px-";
 	private static final String REGULAR_PREFIX = "1280px-";//1280, 1024, 800
 
+	File file;
 	String title;
 	String content;
 	String isPartOf;
-	double lat;
-	double lon;
+	double lat = Double.NaN;
+	double lon = Double.NaN;
 	String imageTitle;
 	GPXFile gpxFile;
 	String routeId;
+	String routeSource = "";
 	long originalId;
 	String lang;
 	String contentsJson;
 	String aggregatedPartOf;
-	String fullContent;
 
+	long lastModified;
+
+	@NonNull
+	public TravelArticleIdentifier generateIdentifier() {
+		return new TravelArticleIdentifier(this);
+	}
+
+	@NonNull
+	public static String getTravelBook(@NonNull OsmandApplication app, @NonNull File file) {
+		return file.getPath().replace(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).getPath() + "/", "");
+	}
+
+	@Nullable
+	public String getTravelBook(@NonNull OsmandApplication app) {
+		return file != null ? getTravelBook(app, file) : null;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public long getLastModified() {
+		if (lastModified > 0) {
+			return lastModified;
+		}
+		return file != null ? file.lastModified() : 0;
+	}
 
 	public String getTitle() {
 		return title;
@@ -66,6 +100,10 @@ public class TravelArticle {
 
 	public String getRouteId() {
 		return routeId;
+	}
+
+	public String getRouteSource() {
+		return routeSource;
 	}
 
 	public long getOriginalId() {
@@ -126,5 +164,93 @@ public class TravelArticle {
 	private static String[] getHash(@NonNull String s) {
 		String md5 = new String(Hex.encodeHex(DigestUtils.md5(s)));
 		return new String[]{md5.substring(0, 1), md5.substring(0, 2)};
+	}
+
+	public static class TravelArticleIdentifier implements Parcelable {
+		@Nullable File file;
+		double lat;
+		double lon;
+		@Nullable String title;
+		@Nullable String routeId;
+		@Nullable String routeSource;
+
+		public static final Creator<TravelArticleIdentifier> CREATOR = new Creator<TravelArticleIdentifier>() {
+			@Override
+			public TravelArticleIdentifier createFromParcel(Parcel in) {
+				return new TravelArticleIdentifier(in);
+			}
+
+			@Override
+			public TravelArticleIdentifier[] newArray(int size) {
+				return new TravelArticleIdentifier[size];
+			}
+		};
+
+		private TravelArticleIdentifier(@NonNull Parcel in) {
+			readFromParcel(in);
+		}
+
+		private TravelArticleIdentifier(@NonNull TravelArticle article) {
+			file = article.file;
+			lat = article.lat;
+			lon = article.lon;
+			title = article.title;
+			routeId = article.routeId;
+			routeSource = article.routeSource;
+		}
+
+		@Override
+		public void writeToParcel(Parcel out, int flags) {
+			out.writeDouble(lat);
+			out.writeDouble(lon);
+			out.writeString(title);
+			out.writeString(routeId);
+			out.writeString(routeSource);
+			out.writeString(file != null ? file.getAbsolutePath() : null);
+		}
+
+		private void readFromParcel(Parcel in) {
+			lat = in.readDouble();
+			lon = in.readDouble();
+			title = in.readString();
+			routeId = in.readString();
+			routeSource = in.readString();
+			String filePath = in.readString();
+			if (!Algorithms.isEmpty(filePath)) {
+				file = new File(filePath);
+			}
+		}
+
+		@Override
+		public int describeContents() {
+			return 0;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			TravelArticleIdentifier that = (TravelArticleIdentifier) o;
+			return areLatLonEqual(that.lat, that.lon, lat, lon) &&
+					Algorithms.objectEquals(file, that.file) &&
+					Algorithms.stringsEqual(title, that.title) &&
+					Algorithms.stringsEqual(routeId, that.routeId) &&
+					Algorithms.stringsEqual(routeSource, that.routeSource);
+		}
+
+		@Override
+		public int hashCode() {
+			return Algorithms.hash(file, lat, lon, title, routeId, routeSource);
+		}
+
+		private static boolean areLatLonEqual(double lat1, double lon1, double lat2, double lon2) {
+			boolean latEqual = (Double.isNaN(lat1) && Double.isNaN(lat2)) || Math.abs(lat1 - lat2) < 0.00001;
+			boolean lonEqual = (Double.isNaN(lon1) && Double.isNaN(lon2)) || Math.abs(lon1 - lon2) < 0.00001;
+			return latEqual && lonEqual;
+		}
 	}
 }

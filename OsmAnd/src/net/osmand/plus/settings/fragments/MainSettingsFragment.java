@@ -119,8 +119,9 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			return true;
 		} else if (CREATE_PROFILE.equals(prefId)) {
 			if (getActivity() != null) {
-				SelectProfileBottomSheet.showInstance(getActivity(),
-						DialogMode.BASE_PROFILE, this, null, false);
+				SelectProfileBottomSheet.showInstance(
+						getActivity(), DialogMode.BASE_PROFILE, this,
+						getSelectedAppMode(), null, false);
 			}
 		} else if (IMPORT_PROFILE.equals(prefId)) {
 			final MapActivity mapActivity = getMapActivity();

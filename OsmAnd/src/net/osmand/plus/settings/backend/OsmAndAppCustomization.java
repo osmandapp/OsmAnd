@@ -227,9 +227,6 @@ public class OsmAndAppCustomization {
 		return true;
 	}
 
-	public boolean onDestinationReached() {
-		return true;
-	}
 
 	@Nullable
 	public Bitmap getNavDrawerLogo() {

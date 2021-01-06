@@ -198,7 +198,7 @@
     <string name="poi_fuel_e85">85% Етанолу (Е85)</string>
     <string name="poi_fuel_lh2">Рідкий водень</string>
     <string name="poi_fuel_electricity">Електроенергія</string>
-    <string name="poi_electricity_combined_charging">Станція зарядки</string>
+    <string name="poi_electricity_combined_charging">Зарядна станція;Зарядна станція для електромобіля;Зарядна станція для електромобілів;точка підзарядки електроенергією;Точка зарядки; Електронна зарядна станція;Обладнання для електромобілів</string>
     <string name="poi_vehicle_ramp">Рампа для огляду/перевірки машин</string>
     <string name="poi_compressed_air">Стиснене повітря</string>
     <string name="poi_parking">Стоянка</string>
@@ -3886,4 +3886,8 @@
     <string name="poi_weightbridge">Автомобільні ваги</string>
     <string name="poi_lavoir">Громадська пральня</string>
     <string name="poi_waste_transfer_station">Станція перевезення відходів</string>
+    <string name="poi_swimming_area">Плавальний майданчик</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Тунель кажанів</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Міст кажанів</string>
+    <string name="poi_wildlife_crossing">Переправа диких тварин</string>
 </resources>

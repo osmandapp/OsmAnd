@@ -83,8 +83,8 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 				rc.transform(new CropCircleTransformation())
 						.placeholder(placeholder)
 						.into(holder.icon);
-				holder.title.setText(searchRes.getArticleTitles().get(0));
-				holder.leftDescr.setText(searchRes.getIsPartOf().get(0));
+				holder.title.setText(searchRes.getArticleTitle());
+				holder.leftDescr.setText(searchRes.getIsPartOf());
 				holder.rightDescr.setText(searchRes.getFirstLangsString());
 			} else {
 				WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;

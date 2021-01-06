@@ -222,7 +222,7 @@
     <string name="poi_craft_gardener">Gärtner</string>
     <string name="poi_gas">Flüssiggasspeicher</string>
     <string name="poi_gate">Tor</string>
-    <string name="poi_shop_yes">Gemischtwarenhandlung</string>
+    <string name="poi_shop_yes">Allgemeines Geschäft</string>
     <string name="poi_geyser">Geysir</string>
     <string name="poi_gift">Geschenkeladen</string>
     <string name="poi_glacier">Gletscher</string>
@@ -3901,4 +3901,8 @@
     <string name="poi_waste_transfer_station">Müllumladestation</string>
     <string name="poi_weightbridge">Fahrzeugwaage</string>
     <string name="poi_ranger_station">Rangerstation</string>
+    <string name="poi_swimming_area">Schwimmbereich</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Fledermaustunnel</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Fledermausbrücke</string>
+    <string name="poi_wildlife_crossing">Wildwechsel</string>
 </resources>
