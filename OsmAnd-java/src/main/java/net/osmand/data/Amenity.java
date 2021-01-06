@@ -45,6 +45,8 @@ public class Amenity extends MapObject {
 	public static final String CONTENT_JSON = "content_json";
 	public static final String ROUTE_ID = "route_id";
 	public static final String ROUTE_SOURCE = "route_source";
+	public static final String COLOR = "color";
+	public static final String LANG_YES = "lang_yes";
 
 
 	private String subType;
@@ -250,6 +252,19 @@ public class Amenity extends MapObject {
 		return l;
 	}
 
+	public String getTagSuffix(String tagBegin) {
+		String tagSuffix = null;
+		for (String infoTag : getAdditionalInfoKeys()) {
+			if (infoTag.startsWith(tagBegin)) {
+				if (infoTag.length() > tagBegin.length()) {
+					tagSuffix = infoTag.substring(tagBegin.length());
+					break;
+				}
+			}
+		}
+		return tagSuffix;
+	}
+
 	public String getTagContent(String tag, String lang) {
 		if (lang != null) {
 			String translateName = getAdditionalInfo(tag + ":" + lang);
@@ -381,6 +396,4 @@ public class Amenity extends MapObject {
 		}
 		return a;
 	}
-
-	
 }

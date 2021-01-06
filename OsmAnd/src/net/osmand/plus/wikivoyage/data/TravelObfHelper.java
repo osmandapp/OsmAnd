@@ -20,6 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -48,6 +49,7 @@ public class TravelObfHelper implements TravelHelper {
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.travel.obf";
 	public static final String ROUTE_ARTICLE = "route_article";
+	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
 	public static final int POPULAR_ARTICLES_SEARCH_RADIUS = 100000;
 	public static final int ARTICLE_SEARCH_RADIUS = 50000;
 	public static final int MAX_POPULAR_ARTICLES_COUNT = 100;
@@ -92,9 +94,10 @@ public class TravelObfHelper implements TravelHelper {
 				List<Amenity> amenities = reader.searchPoi(req);
 				if (amenities.size() > 0) {
 					for (Amenity amenity : amenities) {
-						if (!Algorithms.isEmpty(amenity.getName(lang))) {
+						if (amenity.getSubType().equals(ROUTE_ARTICLE) && !Algorithms.isEmpty(amenity.getName(lang))) {
 							TravelArticle article = cacheTravelArticles(reader.getFile(), amenity, lang);
 							if (article != null) {
+								article.gpxFile = getGpxFile(article, amenities, lang);
 								popularArticles.add(article);
 								if (popularArticles.size() >= MAX_POPULAR_ARTICLES_COUNT) {
 									break;
@@ -121,6 +124,48 @@ public class TravelObfHelper implements TravelHelper {
 		return popularArticles;
 	}
 
+	private GPXFile getGpxFile(TravelArticle article, List<Amenity> amenities, String lang) {
+		List<Amenity> list = new ArrayList<>();
+		for (Amenity amenity : amenities) {
+			String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
+			if (!lang.equals(amenityLang)) {
+				continue;
+			}
+			if (amenity.getAdditionalInfo(Amenity.ROUTE_ID) != null &&
+					amenity.getAdditionalInfo(Amenity.ROUTE_ID).equals(article.routeId)) {
+				list.add(amenity);
+			}
+		}
+		GPXFile gpxFile = new GPXFile(null);
+		for (Amenity a : list) {
+			GPXUtilities.WptPt wptPt = createWptPt(lang, a);
+			gpxFile.addPoint(wptPt);
+		}
+		return gpxFile;
+	}
+
+	private GPXUtilities.WptPt createWptPt(String lang, Amenity a) {
+		GPXUtilities.WptPt wptPt = new GPXUtilities.WptPt();
+		wptPt.name = a.getName();
+		wptPt.lat = a.getLocation().getLatitude();
+		wptPt.lon = a.getLocation().getLongitude();
+		wptPt.desc = a.getDescription(lang);
+		wptPt.link = a.getSite();
+		String color = a.getAdditionalInfo("color");
+		if (color != null) {
+			wptPt.setColor(ColorDialogs.getColorByTag(color));
+		}
+		String iconName = a.getAdditionalInfo("gpx_icon");
+		if (iconName != null) {
+			wptPt.setIconName(iconName);
+		}
+		String category = a.getTagSuffix("category_");
+		if (category != null) {
+			wptPt.category = Algorithms.capitalizeFirstLetter(category);
+		}
+		return wptPt;
+	}
+
 	@Nullable
 	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang) {
 		TravelArticle article = null;
@@ -137,7 +182,8 @@ public class TravelObfHelper implements TravelHelper {
 		return new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
-				return subcategory.equals(ROUTE_ARTICLE);
+				return subcategory.equals(ROUTE_ARTICLE)
+						|| subcategory.equals(ROUTE_ARTICLE_POINT);
 			}
 
 			@Override
