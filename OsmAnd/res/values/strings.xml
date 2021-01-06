@@ -12,7 +12,6 @@
 
 -->
 
-    <string name="poi_around">Nearby POI</string>
     <string name="copy_address">Copy address</string>
     <string name="message_error_recheck_parameters">Error, recheck parameters</string>
     <string name="routing_engine_vehicle_type_car">Car</string>

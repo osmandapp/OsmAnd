@@ -94,8 +94,7 @@ public class MenuBuilder {
 	private boolean firstRow;
 	protected boolean matchWidthDivider;
 	protected boolean light;
-	private long objectId;
-	private String objectType;
+	private Amenity amenity;
 	private LatLon latLon;
 	private boolean hidden;
 	private boolean showTitleIfTruncated = true;
@@ -238,14 +237,8 @@ public class MenuBuilder {
 		this.showOnlinePhotos = showOnlinePhotos;
 	}
 
-	public void setShowNearestWiki(boolean showNearestWiki, long objectId) {
-		this.objectId = objectId;
-		this.showNearestWiki = showNearestWiki;
-	}
-
-	public void setShowNearestPoi(boolean showNearestPoi, String objectType) {
-		this.objectType = objectType;
-		this.showNearestPoi = showNearestPoi;
+	public void setAmenity(Amenity amenity) {
+		this.amenity = amenity;
 	}
 
 	public void addMenuPlugin(OsmandPlugin plugin) {
@@ -352,7 +345,7 @@ public class MenuBuilder {
 	protected void buildNearestPoiRow(View view) {
 		buildNearestRow(view, nearestPoi, processNearestPoi(),
 				nearestPoi.isEmpty() ? 0 : AmenityMenuController.getRightIconId(nearestPoi.get(0)),
-				app.getString(R.string.poi_around));
+				app.getString(R.string.speak_poi));
 	}
 
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, boolean process, int iconId, String text) {
@@ -1155,9 +1148,7 @@ public class MenuBuilder {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
 			String name = poi.getName(preferredMapAppLang, transliterateNames);
 			if (Algorithms.isBlank(name)) {
-				PoiCategory pc = poi.getType();
-				PoiType pt = pc.getPoiTypeByKeyName(poi.getSubType());
-				name = pt.getTranslation();
+				name = AmenityMenuController.getTypeStr(poi);
 			}
 			button.setText(name);
 
@@ -1228,14 +1219,6 @@ public class MenuBuilder {
 	protected boolean processNearestWiki() {
 		if (showNearestWiki && latLon != null) {
 			nearestWiki = getSortedAmenities(app.getPoiFilters().getTopWikiPoiFilter());
-			Long id = objectId;
-			List<Amenity> wikiList = new ArrayList<>();
-			for (Amenity wiki : nearestWiki) {
-				if (wiki.getId().equals(id)) {
-					wikiList.add(wiki);
-				}
-			}
-			nearestWiki.removeAll(wikiList);
 			return true;
 		}
 		return false;
@@ -1243,16 +1226,9 @@ public class MenuBuilder {
 
 	protected boolean processNearestPoi() {
 		if (showNearestPoi && latLon != null) {
-			nearestPoi = getSortedAmenities(app.getPoiFilters().getShowAllPOIFilter());
-			Long id = objectId;
-			String type = objectType;
-			List<Amenity> poiList = new ArrayList<>();
-			for (Amenity poi : nearestPoi) {
-				if (poi.getId().equals(id) || !Algorithms.stringsEqual(poi.getSubType(), type)) {
-					poiList.add(poi);
-				}
-			}
-			nearestPoi.removeAll(poiList);
+			PoiCategory pc = amenity.getType();
+			PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
+			nearestPoi = getSortedAmenities(app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + pt.getKeyName()));
 			return true;
 		}
 		return false;
@@ -1264,6 +1240,7 @@ public class MenuBuilder {
 				latLon.getLatitude(), latLon.getLongitude(), 250);
 
 		List<Amenity> nearestAmenities = getAmenities(rect, filter);
+		nearestAmenities.remove(amenity);
 
 		Collections.sort(nearestAmenities, new Comparator<Amenity>() {
 

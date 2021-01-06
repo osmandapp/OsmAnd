@@ -79,8 +79,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Amenity amenity) {
 		super(mapActivity);
 		this.amenity = amenity;
-		setShowNearestWiki(true, amenity.getId());
-		setShowNearestPoi(true, amenity.getSubType());
+		setAmenity(amenity);
+		setShowNearestWiki(true);
+		setShowNearestPoi(true);
 		metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
 	}
 
@@ -677,7 +678,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		if (processNearestPoi() && nearestPoi.size() > 0) {
 			AmenityInfoRow poiInfo = new AmenityInfoRow(
-					"nearest_poi", AmenityMenuController.getRightIconId(amenity), null, app.getString(R.string.poi_around) + " (" + nearestPoi.size() + ")", true,
+					"nearest_poi", AmenityMenuController.getRightIconId(amenity), null, app.getString(R.string.speak_poi) + " (" + nearestPoi.size() + ")", true,
 					getCollapsableView(view.getContext(), true, nearestPoi),
 					0, false, false, false, 1000, null, false, false, false, 0);
 			buildAmenityRow(view, poiInfo);
