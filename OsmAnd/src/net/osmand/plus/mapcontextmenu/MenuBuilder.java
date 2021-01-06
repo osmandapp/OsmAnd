@@ -29,12 +29,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -44,7 +46,12 @@ import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.*;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
@@ -68,6 +75,7 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
 import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 
@@ -75,7 +83,13 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
@@ -214,8 +228,8 @@ public class MenuBuilder {
 	}
 
 	public boolean isShowNearestPoi() {
-        return showNearestPoi;
-    }
+		return showNearestPoi;
+	}
 
 	public void setShowNearestWiki(boolean showNearestWiki) {
 		this.showNearestWiki = showNearestWiki;
@@ -1217,27 +1231,31 @@ public class MenuBuilder {
 	}
 
 	protected boolean processNearestWiki() {
-		if (showNearestWiki && latLon != null) {
-			nearestWiki = getSortedAmenities(app.getPoiFilters().getTopWikiPoiFilter());
-			return true;
+		if (showNearestWiki && latLon != null && amenity != null) {
+			PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
+			if (filter != null) {
+				nearestWiki = getSortedAmenities(filter, latLon);
+				return true;
+			}
 		}
 		return false;
 	}
 
 	protected boolean processNearestPoi() {
-		if (showNearestPoi && latLon != null) {
+		if (showNearestPoi && latLon != null && amenity != null) {
 			PoiCategory pc = amenity.getType();
 			PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-			nearestPoi = getSortedAmenities(app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + pt.getKeyName()));
-			return true;
+			PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + pt.getKeyName());
+			if (filter != null) {
+				nearestPoi = getSortedAmenities(filter, latLon);
+				return true;
+			}
 		}
 		return false;
 	}
 
-	private List<Amenity> getSortedAmenities(PoiUIFilter filter) {
-        final LatLon latLon = getLatLon();
-	    QuadRect rect = MapUtils.calculateLatLonBbox(
-				latLon.getLatitude(), latLon.getLongitude(), 250);
+	private List<Amenity> getSortedAmenities(PoiUIFilter filter, final LatLon latLon) {
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), 250);
 
 		List<Amenity> nearestAmenities = getAmenities(rect, filter);
 		nearestAmenities.remove(amenity);

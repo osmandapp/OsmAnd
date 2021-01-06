@@ -81,7 +81,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		this.amenity = amenity;
 		setAmenity(amenity);
 		setShowNearestWiki(true);
-		setShowNearestPoi(true);
+		setShowNearestPoi(!amenity.getType().isWiki());
 		metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
 	}
 
