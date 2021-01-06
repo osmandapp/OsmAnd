@@ -968,16 +968,4 @@ public class AndroidUtils {
 		}
 		return null;
 	}
-
-	public static void fixWebViewResetsLocaleToUserDefault(Activity activity) {
-		// issue details: https://issuetracker.google.com/issues/37113860
-		// also see: https://gist.github.com/amake/0ac7724681ac1c178c6f95a5b09f03ce
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-			app.checkPreferredLocale();
-			activity.getResources().updateConfiguration(
-					new Configuration(app.getResources().getConfiguration()),
-					activity.getResources().getDisplayMetrics());
-		}
-	}
 }

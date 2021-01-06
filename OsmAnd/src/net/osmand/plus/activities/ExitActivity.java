@@ -1,6 +1,5 @@
 package net.osmand.plus.activities;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.app.Activity;
@@ -15,7 +14,6 @@ public class ExitActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help_activity);
-		AndroidUtils.fixWebViewResetsLocaleToUserDefault(this);
 		dis = getIntent().getBooleanExtra(DISABLE_SERVICE, true);
 		
 	}

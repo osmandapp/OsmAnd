@@ -3,7 +3,6 @@
  */
 package net.osmand.plus.activities;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.annotation.SuppressLint;
@@ -43,7 +42,6 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 		getSupportActionBar().setTitle(R.string.print_route);
 
 		setContentView(R.layout.print_dialog);
-		AndroidUtils.fixWebViewResetsLocaleToUserDefault(this);
 		webView = (WebView) findViewById(R.id.printDialogWebview);
 
 		Intent intent = getIntent();

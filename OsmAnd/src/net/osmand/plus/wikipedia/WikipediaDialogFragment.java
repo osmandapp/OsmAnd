@@ -72,7 +72,6 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View mainView = inflater.inflate(R.layout.wikipedia_dialog_fragment, container, false);
-		AndroidUtils.fixWebViewResetsLocaleToUserDefault(getActivity());
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
