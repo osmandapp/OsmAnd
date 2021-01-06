@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -41,6 +42,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -67,6 +69,9 @@ public class SearchUICore {
 	private MapPoiTypes poiTypes;
 
 	private static boolean debugMode = false;
+	
+	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
+			Arrays.asList("building", "internet_access_yes"));
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
@@ -244,12 +249,17 @@ public class SearchUICore {
 						String type2 = a2.getType().getKeyName();
 						String subType1 = a1.getSubType();
 						String subType2 = a2.getSubType();
-						if(a1.getId().longValue() == a2.getId().longValue() && (subType1.equals("building") || subType2.equals("building"))) {
+
+						boolean isEqualId = a1.getId().longValue() == a2.getId().longValue();
+
+						if (isEqualId && (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)
+								|| FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2))) {
 							return true;
-						}
-						if (!type1.equals(type2)) {
+
+						} else if (!type1.equals(type2)) {
 							return false;
 						}
+
 						if (type1.equals("natural")) {
 							similarityRadius = 50000;
 						} else if (subType1.equals(subType2)) {
@@ -987,15 +997,29 @@ public class SearchUICore {
 					// here 2 points are amenity
 					Amenity a1 = (Amenity) o1.object;
 					Amenity a2 = (Amenity) o2.object;
+
 					String type1 = a1.getType().getKeyName();
 					String type2 = a2.getType().getKeyName();
-					int cmp = c.collator.compare(type1, type2);
+					String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
+					String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
+
+					int cmp = 0;
+
+					if (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)) {
+						cmp = 1;
+					} else if (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2)) {
+						cmp = -1;
+					} 
+					
 					if (cmp != 0) {
 						return cmp;
 					}
 
-					String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
-					String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
+					cmp = c.collator.compare(type1, type2);
+					if (cmp != 0) {
+						return cmp;
+					}
+
 					cmp = c.collator.compare(subType1, subType2);
 					if (cmp != 0) {
 						return cmp;
