@@ -23,12 +23,13 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
+
+import net.osmand.plus.widgets.WebViewEx;
 
 /**
  * WebView that its scroll position can be observed.
  */
-public class ObservableWebView extends WebView implements Scrollable {
+public class ObservableWebView extends WebViewEx implements Scrollable {
 
     // Fields that should be saved onSaveInstanceState
     private int mPrevScrollY;

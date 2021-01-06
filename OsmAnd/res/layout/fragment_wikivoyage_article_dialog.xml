@@ -63,7 +63,8 @@
 		    android:layout_width="match_parent"
 			android:layout_weight="1"
 			android:layout_height="0dp">
-		<WebView
+
+		<net.osmand.plus.widgets.WebViewEx
 				android:id="@+id/content_web_view"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"/>
