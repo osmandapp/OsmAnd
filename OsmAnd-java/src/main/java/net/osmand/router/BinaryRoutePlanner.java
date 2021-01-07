@@ -29,7 +29,7 @@ public class BinaryRoutePlanner {
 	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlanner.class);
 
 	private static final int ROUTE_POINTS = 11;
-	private static final boolean TRACE_ROUTING = true;
+	private static final boolean TRACE_ROUTING = false;
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
@@ -678,8 +678,7 @@ public class BinaryRoutePlanner {
 					}
 
 					// Check if there is restriction only to the other than current road
-					if (rt == MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN
-							|| rt == MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN
+					if (rt == MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN || rt == MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN
 							|| rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
 						// check if that restriction applies to considered junk
 						RouteSegment foundNext = inputNext;
@@ -687,8 +686,6 @@ public class BinaryRoutePlanner {
 							if (foundNext.getRoad().id == restrictedTo) {
 								break;
 							}
-							
-							
 							foundNext = foundNext.next;
 						}
 						if (foundNext != null) {
@@ -697,7 +694,7 @@ public class BinaryRoutePlanner {
 					}
 				}
 			}
-			if (type == REVERSE_WAY_RESTRICTION_ONLY) {		
+			if (type == REVERSE_WAY_RESTRICTION_ONLY) {
 				// next = next.next; continue;
 			} else if (type == -1 && exclusiveRestriction) {
 				// next = next.next; continue;
