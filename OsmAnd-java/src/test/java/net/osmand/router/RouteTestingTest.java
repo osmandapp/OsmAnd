@@ -76,8 +76,8 @@ public class RouteTestingTest {
 		}
 		
 		for (int planRoadDirection = -1; planRoadDirection <= 1; planRoadDirection++) {
-			if (params.containsKey("onlyPlanRoadDirection")) {
-				if (!params.get("onlyPlanRoadDirection").equals(planRoadDirection + "")) {
+			if (params.containsKey("wrongPlanRoadDirection")) {
+				if (params.get("wrongPlanRoadDirection").equals(planRoadDirection + "")) {
 					continue;
 				}
 			}
