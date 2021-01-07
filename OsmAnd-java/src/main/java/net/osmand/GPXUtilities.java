@@ -1790,6 +1790,7 @@ public class GPXUtilities {
 				serializer.attribute(null, "creator", file.author); //$NON-NLS-1$
 			}
 			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
+			serializer.attribute(null, "xmlns:osmand", "https://osmand.net");
 			serializer.attribute(null, "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			serializer.attribute(null, "xsi:schemaLocation",
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
@@ -1938,7 +1939,7 @@ public class GPXUtilities {
 			serializer.startTag(null, "extensions");
 			if (!extensions.isEmpty()) {
 				for (Entry<String, String> s : extensions.entrySet()) {
-					writeNotNullText(serializer, s.getKey(), s.getValue());
+					writeNotNullText(serializer,"osmand:" + s.getKey(), s.getValue());
 				}
 			}
 			if (extensionsWriter != null) {
