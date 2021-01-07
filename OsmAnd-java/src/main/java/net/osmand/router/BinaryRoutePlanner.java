@@ -533,18 +533,17 @@ public class BinaryRoutePlanner {
 			long fid = to.getRoad().getId();
 			for (int i = 0; i < from.getRoad().getRestrictionLength(); i++) {
 				long id = from.getRoad().getRestrictionId(i);
+				int tp = from.getRoad().getRestrictionType(i);
 				if (fid == id) {
-					int tp = from.getRoad().getRestrictionType(i);
-					if (tp == MapRenderingTypes.RESTRICTION_NO_LEFT_TURN ||
-							tp == MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN ||
-							tp == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON ||
-							tp == MapRenderingTypes.RESTRICTION_NO_U_TURN) {
+					if (tp == MapRenderingTypes.RESTRICTION_NO_LEFT_TURN
+							|| tp == MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN
+							|| tp == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON
+							|| tp == MapRenderingTypes.RESTRICTION_NO_U_TURN) {
 						return false;
 					}
 					break;
 				}
-				
-				if (from.getRoad().getRestrictionType(i) == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+				if (tp == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
 					return false;
 				}
 			}
