@@ -647,22 +647,34 @@ public class BinaryRoutePlanner {
 			int type = -1;
 			if (!reverseWay) {
 				for (int i = 0; i < road.getRestrictionLength(); i++) {
+					int rt = road.getRestrictionType(i);
+					long rv = road.getRestrictionVia(i);
 					if (road.getRestrictionId(i) == next.road.id) {
-						if(!via || road.getRestrictionVia(i) == viaId) {
-							type = road.getRestrictionType(i);
+						if (!via || rv == viaId) {
+							type = rt;
 							break;
 						}
+					}
+					if (rv == viaId && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
+						break;
 					}
 				}
 			} else {
 				for (int i = 0; i < next.road.getRestrictionLength(); i++) {
 					int rt = next.road.getRestrictionType(i);
+					long rv = next.road.getRestrictionVia(i);
 					long restrictedTo = next.road.getRestrictionId(i);
 					if (restrictedTo == road.id) {
-						if(!via || next.road.getRestrictionVia(i) == viaId) {
+						if (!via || rv == viaId) {
 							type = rt;
 							break;
 						}
+					}
+
+					if (rv == viaId && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
+						break;
 					}
 
 					// Check if there is restriction only to the other than current road
