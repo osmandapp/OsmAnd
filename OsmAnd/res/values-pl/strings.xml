@@ -4032,4 +4032,17 @@
     <string name="routing_attr_allow_streams_name">Zezwalaj na strumienie i dreny</string>
     <string name="routing_attr_allow_intermittent_description">Zezwalaj na przerywane drogi wodne</string>
     <string name="routing_attr_allow_intermittent_name">Zezwalaj na przerywane drogi wodne</string>
+    <string name="voice_prompts_timetable">Czas monitów głosowych</string>
+    <string name="shared_string_subtype">Podtyp</string>
+    <string name="shared_string_vehicle">Pojazd</string>
+    <string name="shared_string_api_key">Klucz API</string>
+    <string name="shared_string_server_url">Adres URL serwera</string>
+    <string name="shared_string_enter_param">Wpisz param</string>
+    <string name="keep_it_empty_if_not">Jeśli nie, zostaw to puste</string>
+    <string name="online_routing_example_hint">Adres URL ze wszystkimi parametrami będzie wyglądał następująco:</string>
+    <string name="test_route_calculation">Obliczanie trasy testowej</string>
+    <string name="routing_engine_vehicle_type_bike">Rower</string>
+    <string name="routing_engine_vehicle_type_car">Samochód</string>
+    <string name="message_error_recheck_parameters">Błąd, ponownie sprawdź parametry</string>
+    <string name="copy_address">Skopiuj adres</string>
 </resources>
