@@ -72,6 +72,11 @@ public abstract class CollectionSettingsItem<T> extends SettingsItem {
 		return true;
 	}
 
+	@Override
+	public boolean shouldReadOnCollecting() {
+		return true;
+	}
+
 	public abstract boolean isDuplicate(@NonNull T item);
 
 	@NonNull

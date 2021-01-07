@@ -87,11 +87,6 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 		return false;
 	}
 
-	@Override
-	public boolean shouldReadOnCollecting() {
-		return true;
-	}
-
 	@NonNull
 	@Override
 	public OnlineRoutingEngine renameItem(@NonNull OnlineRoutingEngine item) {
