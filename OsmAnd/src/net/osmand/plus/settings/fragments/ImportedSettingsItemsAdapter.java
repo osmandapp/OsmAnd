@@ -16,7 +16,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +32,7 @@ public class ImportedSettingsItemsAdapter extends
 	private OnItemClickListener listener;
 
 	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<ExportSettingsType, List<?>> itemsMap,
-	                             boolean nightMode, OnItemClickListener listener) {
+								 boolean nightMode, OnItemClickListener listener) {
 		this.app = app;
 		this.itemsMap = itemsMap;
 		this.nightMode = nightMode;
@@ -153,6 +152,10 @@ public class ImportedSettingsItemsAdapter extends
 			case SEARCH_HISTORY:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_history, activeColorRes));
 				holder.title.setText(R.string.shared_string_search_history);
+				break;
+			case ONLINE_ROUTING_ENGINES:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_world_globe_dark, activeColorRes));
+				holder.title.setText(R.string.online_routing_engines);
 				break;
 		}
 	}

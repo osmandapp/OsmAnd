@@ -132,8 +132,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
-	                         @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
+							 @Nullable ViewGroup container,
+							 @Nullable Bundle savedInstanceState) {
 		view = getInflater().inflate(
 				R.layout.online_routing_engine_fragment, container, false);
 		segmentsContainer = (ViewGroup) view.findViewById(R.id.segments_container);
@@ -402,7 +402,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		if (isEditingMode()) {
 			engineToSave = new OnlineRoutingEngine(editedEngineKey, engine.serverType, engine.getVehicleKey());
 		} else {
-			engineToSave = OnlineRoutingEngine.createNewEngine(engine.serverType, engine.getVehicleKey());
+			engineToSave = OnlineRoutingEngine.createNewEngine(engine.serverType, engine.getVehicleKey(), null);
 		}
 
 		engineToSave.putParameter(EngineParameterType.CUSTOM_SERVER_URL, engine.customServerUrl);
@@ -568,8 +568,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @NonNull ApplicationMode appMode,
-	                                String editedEngineKey) {
+									@NonNull ApplicationMode appMode,
+									String editedEngineKey) {
 		FragmentManager fm = activity.getSupportFragmentManager();
 		if (!fm.isStateSaved() && fm.findFragmentByTag(OnlineRoutingEngineFragment.TAG) == null) {
 			OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();

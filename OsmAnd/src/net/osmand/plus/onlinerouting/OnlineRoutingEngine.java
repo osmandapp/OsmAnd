@@ -3,6 +3,7 @@ package net.osmand.plus.onlinerouting;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
@@ -26,11 +27,13 @@ public class OnlineRoutingEngine {
 	private Map<String, String> params = new HashMap<>();
 
 	public OnlineRoutingEngine(@NonNull String stringKey,
-	                           @NonNull ServerType serverType,
-	                           @NonNull String vehicleKey,
-	                           Map<String, String> params) {
+							   @NonNull ServerType serverType,
+							   @NonNull String vehicleKey,
+							   @Nullable Map<String, String> params) {
 		this(stringKey, serverType, vehicleKey);
-		this.params = params;
+		if (!Algorithms.isEmpty(params)) {
+			this.params.putAll(params);
+		}
 	}
 
 	public OnlineRoutingEngine(@NonNull String stringKey,
@@ -96,8 +99,9 @@ public class OnlineRoutingEngine {
 	}
 
 	public static OnlineRoutingEngine createNewEngine(@NonNull ServerType serverType,
-	                                                  @NonNull String vehicleKey) {
-		return new OnlineRoutingEngine(generateKey(), serverType, vehicleKey);
+													  @NonNull String vehicleKey,
+													  @Nullable Map<String, String> params) {
+		return new OnlineRoutingEngine(generateKey(), serverType, vehicleKey, params);
 	}
 
 	private static String generateKey() {
