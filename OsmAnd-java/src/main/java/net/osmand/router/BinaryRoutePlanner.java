@@ -29,7 +29,7 @@ public class BinaryRoutePlanner {
 	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlanner.class);
 
 	private static final int ROUTE_POINTS = 11;
-	private static final boolean TRACE_ROUTING = false;
+	private static final boolean TRACE_ROUTING = true;
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
@@ -647,26 +647,39 @@ public class BinaryRoutePlanner {
 			int type = -1;
 			if (!reverseWay) {
 				for (int i = 0; i < road.getRestrictionLength(); i++) {
+					int rt = road.getRestrictionType(i);
+					long rv = road.getRestrictionVia(i);
 					if (road.getRestrictionId(i) == next.road.id) {
-						if(!via || road.getRestrictionVia(i) == viaId) {
-							type = road.getRestrictionType(i);
+						if (!via || rv == viaId) {
+							type = rt;
 							break;
 						}
+					}
+					if (rv == viaId && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
+						break;
 					}
 				}
 			} else {
 				for (int i = 0; i < next.road.getRestrictionLength(); i++) {
 					int rt = next.road.getRestrictionType(i);
+					long rv = next.road.getRestrictionVia(i);
 					long restrictedTo = next.road.getRestrictionId(i);
 					if (restrictedTo == road.id) {
-						if(!via || next.road.getRestrictionVia(i) == viaId) {
+						if (!via || rv == viaId) {
 							type = rt;
 							break;
 						}
 					}
 
+					if (rv == viaId && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
+						break;
+					}
+
 					// Check if there is restriction only to the other than current road
-					if (rt == MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN || rt == MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN
+					if (rt == MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN
+							|| rt == MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN
 							|| rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
 						// check if that restriction applies to considered junk
 						RouteSegment foundNext = inputNext;
@@ -674,6 +687,8 @@ public class BinaryRoutePlanner {
 							if (foundNext.getRoad().id == restrictedTo) {
 								break;
 							}
+							
+							
 							foundNext = foundNext.next;
 						}
 						if (foundNext != null) {
@@ -682,7 +697,7 @@ public class BinaryRoutePlanner {
 					}
 				}
 			}
-			if (type == REVERSE_WAY_RESTRICTION_ONLY) {
+			if (type == REVERSE_WAY_RESTRICTION_ONLY) {		
 				// next = next.next; continue;
 			} else if (type == -1 && exclusiveRestriction) {
 				// next = next.next; continue;
