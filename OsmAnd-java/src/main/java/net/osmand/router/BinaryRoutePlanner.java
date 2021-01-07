@@ -543,6 +543,10 @@ public class BinaryRoutePlanner {
 					}
 					break;
 				}
+				
+				if (from.getRoad().getRestrictionType(i) == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+					return false;
+				}
 			}
 		}
 		return true;
