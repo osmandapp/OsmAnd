@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
@@ -11,6 +12,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.GPXUtilities.*;
 
 public interface TravelHelper {
 
@@ -48,6 +51,9 @@ public interface TravelHelper {
 
 	@NonNull
 	ArrayList<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId);
+
+	@Nullable
+	GPXFile getGpxFile(@NonNull TravelArticle article, @Nullable String lang);
 
 	@NonNull
 	String getGPXName(@NonNull final TravelArticle article);

@@ -309,6 +309,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		}
 		webViewClient.setArticle(article);
 		articleToolbarText.setText(article.getTitle());
+		article.setGpxFile(getMyApplication().getTravelHelper().getGpxFile(article, selectedLang));
 		if (article.getGpxFile() != null && article.getGpxFile().getPointsSize() > 0) {
 			trackButton.setVisibility(View.VISIBLE);
 			trackButton.setText(getString(R.string.shared_string_gpx_points) + " (" + article.getGpxFile().getPointsSize() + ")");

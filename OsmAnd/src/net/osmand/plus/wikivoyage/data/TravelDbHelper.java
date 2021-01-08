@@ -683,6 +683,11 @@ public class TravelDbHelper implements TravelHelper {
 		return res;
 	}
 
+	@Override
+	public GPXFile getGpxFile(@NonNull TravelArticle article, @Nullable String lang) {
+		return article.getGpxFile();
+	}
+
 	public String formatTravelBookName(File tb) {
 		if (tb == null) {
 			return application.getString(R.string.shared_string_none);

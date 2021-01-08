@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
@@ -98,8 +97,8 @@ public class TravelObfHelper implements TravelHelper {
 				List<Amenity> amenities = reader.searchPoi(req);
 				if (amenities.size() > 0) {
 					for (Amenity amenity : amenities) {
-						if (ROUTE_ARTICLE.equals(amenity.getSubType()) && !Algorithms.isEmpty(amenity.getName(lang))) {
-							TravelArticle article = cacheTravelArticles(reader.getFile(), amenity, lang, amenities);
+						if (!Algorithms.isEmpty(amenity.getName(lang))) {
+							TravelArticle article = cacheTravelArticles(reader.getFile(), amenity, lang);
 							if (article != null) {
 								popularArticles.add(article);
 								if (popularArticles.size() >= MAX_POPULAR_ARTICLES_COUNT) {
@@ -128,9 +127,9 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Nullable
-	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang, List<Amenity> amenityList) {
+	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang) {
 		TravelArticle article = null;
-		Map<String, TravelArticle> articles = readArticles(file, amenity, amenityList);
+		Map<String, TravelArticle> articles = readArticles(file, amenity);
 		if (!Algorithms.isEmpty(articles)) {
 			TravelArticleIdentifier newArticleId = articles.values().iterator().next().generateIdentifier();
 			cachedArticles.put(newArticleId, articles);
@@ -139,11 +138,12 @@ public class TravelObfHelper implements TravelHelper {
 		return article;
 	}
 
-	SearchPoiTypeFilter getSearchRouteArticleFilter() {
+	@NonNull
+	private SearchPoiTypeFilter getSearchRouteArticleFilter() {
 		return new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
-				return subcategory.equals(ROUTE_ARTICLE) || subcategory.equals(ROUTE_ARTICLE_POINT);
+				return subcategory.equals(ROUTE_ARTICLE);
 			}
 
 			@Override
@@ -154,19 +154,32 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@NonNull
-	private Map<String, TravelArticle> readArticles(@NonNull File file, @NonNull Amenity amenity,
-	                                                @NonNull List<Amenity> amenityList) {
+	private SearchPoiTypeFilter getSearchRouteArticlePointsFilter() {
+		return new SearchPoiTypeFilter() {
+			@Override
+			public boolean accept(PoiCategory type, String subcategory) {
+				return subcategory.equals(ROUTE_ARTICLE_POINT);
+			}
+
+			@Override
+			public boolean isEmpty() {
+				return false;
+			}
+		};
+	}
+
+	@NonNull
+	private Map<String, TravelArticle> readArticles(@NonNull File file, @NonNull Amenity amenity) {
 		Map<String, TravelArticle> articles = new HashMap<>();
 		Set<String> langs = getLanguages(amenity);
 		for (String lang : langs) {
-			articles.put(lang, readArticle(file, amenity, lang, amenityList));
+			articles.put(lang, readArticle(file, amenity, lang));
 		}
 		return articles;
 	}
 
 	@NonNull
-	private TravelArticle readArticle(@NonNull File file, @NonNull Amenity amenity, @Nullable String lang,
-	                                  @NonNull List<Amenity> amenityList) {
+	private TravelArticle readArticle(@NonNull File file, @NonNull Amenity amenity, @Nullable String lang) {
 		TravelArticle res = new TravelArticle();
 		res.file = file;
 		String title = amenity.getName(lang);
@@ -182,25 +195,55 @@ public class TravelObfHelper implements TravelHelper {
 		res.lang = lang;
 		res.contentsJson = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.CONTENT_JSON, lang));
 		res.aggregatedPartOf = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.IS_AGGR_PART, lang));
-		res.gpxFile = getGpxFile(amenity, lang, amenityList);
 		return res;
 	}
 
-	@NonNull
-	private GPXFile getGpxFile(@NonNull Amenity article, @Nullable String lang, @NonNull List<Amenity> amenityList) {
-		GPXFile gpxFile = new GPXFile(article.getName(), lang, "");
-		for (Amenity amenity : amenityList) {
-			String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-			if (!lang.equals(amenityLang)) {
-				continue;
-			}
-			if (amenity.getAdditionalInfo(Amenity.ROUTE_ID) != null &&
-					amenity.getAdditionalInfo(Amenity.ROUTE_ID).equals(article.getAdditionalInfo(Amenity.ROUTE_ID))) {
+
+	@Override
+	public GPXFile getGpxFile(@NonNull TravelArticle article, @Nullable String lang) {
+		GPXFile gpxFile = null;
+		List<Amenity> pointList = getPointList(article, lang);
+		if (!Algorithms.isEmpty(pointList)) {
+			gpxFile = new GPXFile(article.getTitle(), lang, "");
+			for (Amenity amenity : pointList) {
 				WptPt wptPt = createWptPt(amenity, lang);
 				gpxFile.addPoint(wptPt);
 			}
 		}
 		return gpxFile;
+	}
+
+	@Nullable
+	private List<Amenity> getPointList(@NonNull final TravelArticle article, @Nullable final String lang) {
+		final List<Amenity> pointList = new ArrayList<>();
+		for (BinaryMapIndexReader reader : getReaders()) {
+			try {
+				final LatLon location = new LatLon(article.getLat(), article.getLon());
+				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+						location, POPULAR_ARTICLES_SEARCH_RADIUS, -1, getSearchRouteArticlePointsFilter(),
+						new ResultMatcher<Amenity>() {
+							@Override
+							public boolean publish(Amenity point) {
+								String amenityLang = point.getTagSuffix(Amenity.LANG_YES + ":");
+								if (lang != null && lang.equals(amenityLang)
+										&& point.getAdditionalInfo(Amenity.ROUTE_ID) != null
+										&& point.getAdditionalInfo(Amenity.ROUTE_ID).equals(article.getRouteId())) {
+									pointList.add(point);
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
+				reader.searchPoi(req);
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+			}
+		}
+		return pointList;
 	}
 
 	@NonNull
@@ -270,7 +313,7 @@ public class TravelObfHelper implements TravelHelper {
 				for (Amenity amenity : entry.getValue()) {
 					Set<String> nameLangs = getLanguages(amenity);
 					if (nameLangs.contains(appLang)) {
-						TravelArticle article = readArticle(file, amenity, appLang, entry.getValue());
+						TravelArticle article = readArticle(file, amenity, appLang);
 						ArrayList<String> langs = new ArrayList<>(nameLangs);
 						Collections.sort(langs, new Comparator<String>() {
 							@Override
@@ -407,7 +450,7 @@ public class TravelObfHelper implements TravelHelper {
 				for (Amenity amenity : entry.getValue()) {
 					Set<String> nameLangs = getLanguages(amenity);
 					if (nameLangs.contains(lang)) {
-						TravelArticle a = readArticle(file, amenity, lang, entry.getValue());
+						TravelArticle a = readArticle(file, amenity, lang);
 						WikivoyageSearchResult rs = new WikivoyageSearchResult(a, new ArrayList<>(nameLangs));
 						List<WikivoyageSearchResult> l = navMap.get(rs.isPartOf);
 						if (l == null) {
@@ -511,7 +554,9 @@ public class TravelObfHelper implements TravelHelper {
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
-			article = getFirstTravelArticle(lang, article, amenities, reader.getFile());
+			if (!Algorithms.isEmpty(amenities)) {
+				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang);
+			}
 		}
 		return article;
 	}
@@ -556,19 +601,8 @@ public class TravelObfHelper implements TravelHelper {
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
-			article = getFirstTravelArticle(lang, article, amenities, reader.getFile());
-		}
-		return article;
-	}
-
-	private TravelArticle getFirstTravelArticle(@NonNull String lang, TravelArticle article, List<Amenity> amenities,
-	                                            File file) {
-		if (!Algorithms.isEmpty(amenities)) {
-			for (Amenity amenity : amenities) {
-				if (ROUTE_ARTICLE.equals(amenity.getSubType())) {
-					article = cacheTravelArticles(file, amenity, lang, amenities);
-					break;
-				}
+			if (!amenities.isEmpty()) {
+				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang);
 			}
 		}
 		return article;

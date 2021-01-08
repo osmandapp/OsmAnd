@@ -98,6 +98,10 @@ public class TravelArticle {
 		return gpxFile;
 	}
 
+	public void setGpxFile(GPXFile gpxFile) {
+		this.gpxFile = gpxFile;
+	}
+
 	public String getRouteId() {
 		return routeId;
 	}
