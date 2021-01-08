@@ -4023,4 +4023,6 @@
     <string name="edit_online_routing_engine">Modifier le moteur de routage en ligne</string>
     <string name="online_routing_example_hint">L\'URL avec tous les paramètres sera de la forme :</string>
     <string name="copy_address">Copier l\'adresse</string>
+    <string name="online_routing_engine">Moteur de routage en ligne</string>
+    <string name="online_routing_engines">Moteurs de routage en ligne</string>
 </resources>
