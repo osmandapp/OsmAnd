@@ -33,6 +33,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
@@ -624,6 +625,10 @@ public class SettingsHelper {
 				resourcesItems.put(ExportSettingsType.CUSTOM_ROUTING, Arrays.asList(fl));
 			}
 		}
+		List<OnlineRoutingEngine> onlineRoutingEngines = app.getOnlineRoutingHelper().getEngines();
+		if (!Algorithms.isEmpty(onlineRoutingEngines)) {
+			resourcesItems.put(ExportSettingsType.ONLINE_ROUTING_ENGINES, onlineRoutingEngines);
+		}
 		List<ITileSource> iTileSources = new ArrayList<>();
 		Set<String> tileSourceNames = app.getSettings().getTileSourceEntries(true).keySet();
 		for (String name : tileSourceNames) {
@@ -701,6 +706,7 @@ public class SettingsHelper {
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
+		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
 
 		for (Object object : data) {
 			if (object instanceof QuickAction) {
@@ -741,6 +747,8 @@ public class SettingsHelper {
 				historyEntries.add((HistoryEntry) object);
 			} else if (object instanceof GlobalSettingsItem) {
 				settingsItems.add((GlobalSettingsItem) object);
+			} else if (object instanceof OnlineRoutingEngine) {
+				onlineRoutingEngines.add((OnlineRoutingEngine) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
@@ -792,6 +800,9 @@ public class SettingsHelper {
 		}
 		if (!historyEntries.isEmpty()) {
 			settingsItems.add(new SearchHistorySettingsItem(app, historyEntries));
+		}
+		if (!onlineRoutingEngines.isEmpty()) {
+			settingsItems.add(new OnlineRoutingSettingsItem(app, onlineRoutingEngines));
 		}
 		return settingsItems;
 	}
@@ -848,6 +859,7 @@ public class SettingsHelper {
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
+		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
 
 		for (SettingsItem item : settingsItems) {
 			switch (item.getType()) {
@@ -942,6 +954,10 @@ public class SettingsHelper {
 				case GPX:
 					tracksFilesList.add((GpxSettingsItem) item);
 					break;
+				case ONLINE_ROUTING_ENGINES:
+					OnlineRoutingSettingsItem onlineRoutingSettingsItem = (OnlineRoutingSettingsItem) item;
+					onlineRoutingEngines.addAll(onlineRoutingSettingsItem.getItems());
+					break;
 				default:
 					break;
 			}
@@ -1003,6 +1019,9 @@ public class SettingsHelper {
 		}
 		if (!historyEntries.isEmpty()) {
 			settingsToOperate.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
+		}
+		if (!onlineRoutingEngines.isEmpty()) {
+			settingsToOperate.put(ExportSettingsType.ONLINE_ROUTING_ENGINES, onlineRoutingEngines);
 		}
 		return settingsToOperate;
 	}

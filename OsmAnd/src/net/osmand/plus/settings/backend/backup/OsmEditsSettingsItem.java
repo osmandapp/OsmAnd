@@ -114,11 +114,6 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 	}
 
 	@Override
-	public boolean shouldReadOnCollecting() {
-		return true;
-	}
-
-	@Override
 	public boolean shouldShowDuplicates() {
 		return false;
 	}

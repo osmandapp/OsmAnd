@@ -23,6 +23,7 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
@@ -163,6 +164,9 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_flag, activeColorRes));
 			} else if (currentItem instanceof HistoryEntry) {
 				itemHolder.title.setText(((HistoryEntry) currentItem).getName().getName());
+			} else if (currentItem instanceof OnlineRoutingEngine) {
+				itemHolder.title.setText(((OnlineRoutingEngine) currentItem).getName(app));
+				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_world_globe_dark, activeColorRes));
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);
 		}

@@ -3998,4 +3998,5 @@
     <string name="routing_engine_vehicle_type_bike">Bisiklet</string>
     <string name="routing_engine_vehicle_type_car">Araba</string>
     <string name="message_error_recheck_parameters">Hata, parametreleri tekrar gözden geçirin</string>
+    <string name="copy_address">Adresi kopyala</string>
 </resources>

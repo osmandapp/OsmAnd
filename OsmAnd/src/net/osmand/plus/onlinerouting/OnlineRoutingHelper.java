@@ -91,7 +91,7 @@ public class OnlineRoutingHelper {
 				JSONObject json = new JSONObject(jsonString);
 				readFromJson(json, engines);
 			} catch (JSONException e) {
-				LOG.debug("Error when create a new JSONObject: " + e.toString());
+				LOG.debug("Error when reading engines from JSON ", e);
 			}
 		}
 		return engines;
@@ -99,57 +99,50 @@ public class OnlineRoutingHelper {
 
 	private void saveToSettings() {
 		if (!Algorithms.isEmpty(cachedEngines)) {
-			JSONObject json = new JSONObject();
-			if (writeToJson(json, cachedEngines)) {
+			try {
+				JSONObject json = new JSONObject();
+				writeToJson(json, cachedEngines);
 				settings.ONLINE_ROUTING_ENGINES.set(json.toString());
+			} catch (JSONException e) {
+				LOG.debug("Error when writing engines to JSON ", e);
 			}
 		} else {
 			settings.ONLINE_ROUTING_ENGINES.set(null);
 		}
 	}
 
-	private static void readFromJson(JSONObject json, List<OnlineRoutingEngine> engines) {
-		try {
-			if (!json.has("items")) {
-				return;
-			}
-			Gson gson = new Gson();
-			Type type = new TypeToken<HashMap<String, String>>() {
-			}.getType();
-			JSONArray itemsJson = json.getJSONArray("items");
-			for (int i = 0; i < itemsJson.length(); i++) {
-				JSONObject object = itemsJson.getJSONObject(i);
-				String key = object.getString("key");
-				String vehicleKey = object.getString("vehicle");
-				ServerType serverType = ServerType.valueOf(object.getString("serverType"));
-				String paramsString = object.getString("params");
-				HashMap<String, String> params = gson.fromJson(paramsString, type);
-				engines.add(new OnlineRoutingEngine(key, serverType, vehicleKey, params));
-			}
-		} catch (JSONException e) {
-			LOG.debug("Error when reading engines from JSON: " + e.toString());
+	public static void readFromJson(JSONObject json, List<OnlineRoutingEngine> engines) throws JSONException {
+		if (!json.has("items")) {
+			return;
+		}
+		Gson gson = new Gson();
+		Type type = new TypeToken<HashMap<String, String>>() {
+		}.getType();
+		JSONArray itemsJson = json.getJSONArray("items");
+		for (int i = 0; i < itemsJson.length(); i++) {
+			JSONObject object = itemsJson.getJSONObject(i);
+			String key = object.getString("key");
+			String vehicleKey = object.getString("vehicle");
+			ServerType serverType = ServerType.valueOf(object.getString("serverType"));
+			String paramsString = object.getString("params");
+			HashMap<String, String> params = gson.fromJson(paramsString, type);
+			engines.add(new OnlineRoutingEngine(key, serverType, vehicleKey, params));
 		}
 	}
 
-	private static boolean writeToJson(JSONObject json, List<OnlineRoutingEngine> engines) {
+	public static void writeToJson(JSONObject json, List<OnlineRoutingEngine> engines) throws JSONException {
 		JSONArray jsonArray = new JSONArray();
 		Gson gson = new Gson();
 		Type type = new TypeToken<HashMap<String, String>>() {
 		}.getType();
-		try {
-			for (OnlineRoutingEngine engine : engines) {
-				JSONObject jsonObject = new JSONObject();
-				jsonObject.put("key", engine.getStringKey());
-				jsonObject.put("serverType", engine.getServerType().name());
-				jsonObject.put("vehicle", engine.getVehicleKey());
-				jsonObject.put("params", gson.toJson(engine.getParams(), type));
-				jsonArray.put(jsonObject);
-			}
-			json.put("items", jsonArray);
-			return true;
-		} catch (JSONException e) {
-			LOG.debug("Error when writing engines to JSON: " + e.toString());
-			return false;
+		for (OnlineRoutingEngine engine : engines) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("key", engine.getStringKey());
+			jsonObject.put("serverType", engine.getServerType().name());
+			jsonObject.put("vehicle", engine.getVehicleKey());
+			jsonObject.put("params", gson.toJson(engine.getParams(), type));
+			jsonArray.put(jsonObject);
 		}
+		json.put("items", jsonArray);
 	}
 }

@@ -24,7 +24,8 @@ public enum ExportSettingsType {
 	MAP_SOURCES(R.string.quick_action_map_source_title, R.drawable.ic_map),
 	OFFLINE_MAPS(R.string.shared_string_maps, R.drawable.ic_map),
 	TTS_VOICE(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up),
-	VOICE(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up);
+	VOICE(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
+	ONLINE_ROUTING_ENGINES(R.string.online_routing_engines, R.drawable.ic_world_globe_dark);
 
 	@StringRes
 	private final int titleId;
@@ -59,6 +60,6 @@ public enum ExportSettingsType {
 
 	public boolean isResourcesCategory() {
 		return this == CUSTOM_RENDER_STYLE || this == CUSTOM_ROUTING || this == MAP_SOURCES
-				|| this == OFFLINE_MAPS || this == VOICE || this == TTS_VOICE;
+				|| this == OFFLINE_MAPS || this == VOICE || this == TTS_VOICE || this == ONLINE_ROUTING_ENGINES;
 	}
 }

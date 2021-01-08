@@ -4047,4 +4047,5 @@
     <string name="routing_engine_vehicle_type_bike">אופנוע</string>
     <string name="routing_engine_vehicle_type_car">מכונית</string>
     <string name="message_error_recheck_parameters">שגיאה, נא לבדוק את המשתנים מחדש</string>
+    <string name="copy_address">העתקת כתובת</string>
 </resources>

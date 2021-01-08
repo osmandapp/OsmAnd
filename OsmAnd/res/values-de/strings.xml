@@ -4032,4 +4032,19 @@
     <string name="routing_attr_allow_intermittent_description">Gewässer erlauben, die nicht ständig Wasser führen</string>
     <string name="routing_attr_allow_intermittent_name">Gewässer erlauben, die nicht ständig Wasser führen</string>
     <string name="voice_prompts_timetable">Zeiten der Sprachansagen</string>
+    <string name="add_online_routing_engine">Online Routenplaner hinzufügen</string>
+    <string name="edit_online_routing_engine">Online Routenplaner bearbeiten</string>
+    <string name="shared_string_vehicle">Fahrzeug</string>
+    <string name="shared_string_api_key">API Schlüssel</string>
+    <string name="shared_string_server_url">Server URL</string>
+    <string name="shared_string_enter_param">Parameter eingeben</string>
+    <string name="online_routing_example_hint">Die URL mit allen Parametern wird so aussehen:</string>
+    <string name="test_route_calculation">Routenberechnung testen</string>
+    <string name="routing_engine_vehicle_type_foot">Zu Fuß</string>
+    <string name="routing_engine_vehicle_type_bike">Fahrrad</string>
+    <string name="routing_engine_vehicle_type_car">Auto</string>
+    <string name="message_error_recheck_parameters">Fehler, Parameter erneut prüfen</string>
+    <string name="shared_string_subtype">Subtyp</string>
+    <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
+    <string name="copy_address">Adresse kopieren</string>
 </resources>

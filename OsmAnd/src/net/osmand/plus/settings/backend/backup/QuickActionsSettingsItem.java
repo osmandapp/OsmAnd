@@ -89,11 +89,6 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 		}
 	}
 
-	@Override
-	public boolean shouldReadOnCollecting() {
-		return true;
-	}
-
 	@NonNull
 	@Override
 	public String getName() {

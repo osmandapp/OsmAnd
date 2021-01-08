@@ -107,11 +107,6 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 	}
 
 	@Override
-	public boolean shouldReadOnCollecting() {
-		return true;
-	}
-
-	@Override
 	public boolean shouldShowDuplicates() {
 		return false;
 	}

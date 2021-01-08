@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="online_routing_engines">Online routing engines</string>
+    <string name="online_routing_engine">Online routing engine</string>
     <string name="copy_address">Copy address</string>
     <string name="message_error_recheck_parameters">Error, recheck parameters</string>
     <string name="routing_engine_vehicle_type_car">Car</string>
