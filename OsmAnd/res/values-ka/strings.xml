@@ -2350,4 +2350,10 @@
     <string name="profile_type_base_string">ბაზური პროფილი</string>
     <string name="profile_type_descr_string">ტიპი: %s</string>
     <string name="settings_routing_mode_string">რეჟიმი: %s</string>
+    <string name="routing_attr_avoid_footways_description">საცალფეხო გზების არიდება</string>
+    <string name="routing_attr_avoid_footways_name">საცალფეხო ფზების არიდება</string>
+    <string name="shared_string_is_saved">შენახულია</string>
+    <string name="sort_last_modified">ბოლო ცვლილება</string>
+    <string name="sort_name_descending">სახელი: ჰ-ა</string>
+    <string name="sort_name_ascending">სახელი: ა-ჰ</string>
 </resources>

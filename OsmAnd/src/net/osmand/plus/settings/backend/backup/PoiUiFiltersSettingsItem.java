@@ -106,11 +106,6 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 	}
 
 	@Override
-	public boolean shouldReadOnCollecting() {
-		return true;
-	}
-
-	@Override
 	void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 		try {
 			if (!json.has("items")) {

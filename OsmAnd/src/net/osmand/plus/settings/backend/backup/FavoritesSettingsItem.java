@@ -109,11 +109,6 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		return false;
 	}
 
-	@Override
-	public boolean shouldReadOnCollecting() {
-		return true;
-	}
-
 	@NonNull
 	@Override
 	public FavoriteGroup renameItem(@NonNull FavoriteGroup item) {

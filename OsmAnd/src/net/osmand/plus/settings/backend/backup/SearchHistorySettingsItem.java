@@ -148,11 +148,6 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 		return false;
 	}
 
-	@Override
-	public boolean shouldReadOnCollecting() {
-		return true;
-	}
-
 	@NonNull
 	@Override
 	public HistoryEntry renameItem(@NonNull HistoryEntry item) {

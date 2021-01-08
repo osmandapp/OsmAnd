@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+
+    <string name="online_routing_engines">Online routing engines</string>
+    <string name="online_routing_engine">Online routing engine</string>
+    <string name="copy_address">Copy address</string>
     <string name="message_error_recheck_parameters">Error, recheck parameters</string>
     <string name="routing_engine_vehicle_type_car">Car</string>
     <string name="routing_engine_vehicle_type_bike">Bike</string>
@@ -4025,6 +4029,5 @@
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
-
 
 </resources>

@@ -1701,7 +1701,7 @@
     <string name="remove_the_tag">Etiketi Kaldır</string>
     <string name="version_settings_descr">Gecelik derlemeleri indir.</string>
     <string name="version_settings">kurar</string>
-    <string name="rendering_attr_streetLighting_name">Sokak Aydınlatma</string>
+    <string name="rendering_attr_streetLighting_name">Sokak aydınlatma</string>
     <string name="proxy_pref_title">Vekil sunucu</string>
     <string name="proxy_pref_descr">Bir proxy sunucusu belirtin.</string>
     <string name="settings_privacy">Gizlilik</string>
@@ -3982,5 +3982,21 @@
     <string name="routing_attr_allow_streams_name">Dere ve kanalizasyonlara izin ver</string>
     <string name="routing_attr_allow_intermittent_description">Aralıklı su yollarına izin verin</string>
     <string name="routing_attr_allow_intermittent_name">Aralıklı su yollarına izin ver</string>
-    <string name="voice_prompts_timetable">Sesli uyarı zamanı</string>
+    <string name="voice_prompts_timetable">Sesli uyarı zamanları</string>
+    <string name="add_online_routing_engine">Çevrim içi yönlendirme motoru ekle</string>
+    <string name="edit_online_routing_engine">Çevrim içi yönlendirme motorunu düzenle</string>
+    <string name="shared_string_subtype">Alt tür</string>
+    <string name="shared_string_vehicle">Araç</string>
+    <string name="shared_string_api_key">API anahtarı</string>
+    <string name="shared_string_server_url">Sunucu URL\'si</string>
+    <string name="shared_string_enter_param">Parametre gir</string>
+    <string name="keep_it_empty_if_not">Değilse boş tut</string>
+    <string name="online_routing_example_hint">Tüm parametreleri ile URL şu şekilde görünecektir:</string>
+    <string name="test_route_calculation">Güzergah hesaplamayı test et</string>
+    <string name="routing_engine_vehicle_type_driving">Araba sürme</string>
+    <string name="routing_engine_vehicle_type_foot">Yürüme</string>
+    <string name="routing_engine_vehicle_type_bike">Bisiklet</string>
+    <string name="routing_engine_vehicle_type_car">Araba</string>
+    <string name="message_error_recheck_parameters">Hata, parametreleri tekrar gözden geçirin</string>
+    <string name="copy_address">Adresi kopyala</string>
 </resources>

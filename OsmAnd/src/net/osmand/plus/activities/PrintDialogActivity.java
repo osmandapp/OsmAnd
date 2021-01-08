@@ -3,7 +3,6 @@
  */
 package net.osmand.plus.activities;
 
-import android.view.Window;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.annotation.SuppressLint;

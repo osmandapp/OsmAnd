@@ -673,15 +673,15 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private void stopLocationRequests() {
 		LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
-		if(gpsStatusListener != null) {
-			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+		if (gpsStatusListener != null) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 				service.unregisterGnssStatusCallback((GnssStatus.Callback) gpsStatusListener);
 			} else {
 				service.removeGpsStatusListener((Listener) gpsStatusListener);
 			}
 		}
 		service.removeUpdates(gpsListener);
-		while(!networkListeners.isEmpty()) {
+		while (!networkListeners.isEmpty()) {
 			service.removeUpdates(networkListeners.poll());
 		}
 	}
@@ -812,8 +812,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		setLocation(location);
 	}
 
-	private void setLocation(net.osmand.Location location) {
-		if (location == null) {
+	private void setLocation(net.osmand.Location location) { if (location == null) {
 			updateGPSInfo(null);
 		}
 

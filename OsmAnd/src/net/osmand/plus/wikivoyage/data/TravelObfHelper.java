@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
@@ -21,6 +23,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -84,7 +87,7 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@NonNull
-	public List<TravelArticle> loadPopularArticles() {
+	public synchronized List<TravelArticle> loadPopularArticles() {
 		String lang = app.getLanguage();
 		List<TravelArticle> popularArticles = new ArrayList<>();
 		for (BinaryMapIndexReader reader : getReaders()) {
@@ -230,13 +233,27 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
+	public synchronized List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		Map<File, List<Amenity>> amenityMap = new HashMap<>();
+		final String appLang = app.getLanguage();
+		final NameStringMatcher nm = new NameStringMatcher(searchQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 		for (BinaryMapIndexReader reader : getReaders()) {
 			try {
 				SearchRequest<Amenity> searchRequest = BinaryMapIndexReader.buildSearchPoiRequest(0, 0, searchQuery,
-								0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, getSearchRouteArticleFilter(), null, null);
+						0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, getSearchRouteArticleFilter(), new ResultMatcher<Amenity>() {
+							@Override
+							public boolean publish(Amenity object) {
+								List<String> otherNames = object.getAllNames(false);
+								String localeName = object.getName(appLang);
+								return nm.matches(localeName) || nm.matches(otherNames);
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						}, null);
 
 				List<Amenity> amenities = reader.searchPoiByName(searchRequest);
 				if (!Algorithms.isEmpty(amenities)) {
@@ -247,14 +264,35 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		if (!Algorithms.isEmpty(amenityMap)) {
-			String appLang = app.getLanguage();
+			final boolean appLangEn = "en".equals(appLang);
 			for (Entry<File, List<Amenity>> entry : amenityMap.entrySet()) {
 				File file = entry.getKey();
 				for (Amenity amenity : entry.getValue()) {
 					Set<String> nameLangs = getLanguages(amenity);
 					if (nameLangs.contains(appLang)) {
 						TravelArticle article = readArticle(file, amenity, appLang, entry.getValue());
-						WikivoyageSearchResult r = new WikivoyageSearchResult(article, new ArrayList<>(nameLangs));
+						ArrayList<String> langs = new ArrayList<>(nameLangs);
+						Collections.sort(langs, new Comparator<String>() {
+							@Override
+							public int compare(String l1, String l2) {
+								if (l1.equals(appLang)) {
+									l1 = "1";
+								}
+								if (l2.equals(appLang)) {
+									l2 = "1";
+								}
+								if (!appLangEn) {
+									if (l1.equals("en")) {
+										l1 = "2";
+									}
+									if (l2.equals("en")) {
+										l2 = "2";
+									}
+								}
+								return l1.compareTo(l2);
+							}
+						});
+						WikivoyageSearchResult r = new WikivoyageSearchResult(article, langs);
 						res.add(r);
 					}
 				}
