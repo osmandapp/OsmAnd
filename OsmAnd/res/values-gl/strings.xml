@@ -4050,4 +4050,20 @@ Lon %2$s</string>
     <string name="routing_attr_allow_streams_name">Permitir regatos e cunetas</string>
     <string name="routing_attr_allow_intermittent_description">Permitir canles de auga intermitentes</string>
     <string name="routing_attr_allow_intermittent_name">Permitir canles de auga intermitentes</string>
+    <string name="add_online_routing_engine">Engadir motor de navegación en liña</string>
+    <string name="edit_online_routing_engine">Editar motor de navegación en liña</string>
+    <string name="shared_string_subtype">Subtipo</string>
+    <string name="shared_string_vehicle">Vehículo</string>
+    <string name="shared_string_api_key">Chave da API</string>
+    <string name="shared_string_server_url">URL do servidor</string>
+    <string name="shared_string_enter_param">Insire parámetro</string>
+    <string name="keep_it_empty_if_not">Mantenlo baleiro se non</string>
+    <string name="online_routing_example_hint">A URL con todos os parámetros será así:</string>
+    <string name="test_route_calculation">Cálculo da ruta de proba</string>
+    <string name="routing_engine_vehicle_type_driving">Conducindo</string>
+    <string name="routing_engine_vehicle_type_foot">Pé</string>
+    <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
+    <string name="routing_engine_vehicle_type_car">Coche</string>
+    <string name="message_error_recheck_parameters">Erro, verifica novamente os parámetros</string>
+    <string name="copy_address">Copiar enderezo</string>
 </resources>

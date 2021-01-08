@@ -4039,4 +4039,5 @@
     <string name="routing_engine_vehicle_type_bike">Велосипед</string>
     <string name="routing_engine_vehicle_type_car">Автомобіль</string>
     <string name="message_error_recheck_parameters">Помилка, повторно перевірте параметри</string>
+    <string name="copy_address">Копіювати адресу</string>
 </resources>

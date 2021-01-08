@@ -4047,4 +4047,5 @@
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
     <string name="copy_address">Adresse kopieren</string>
+    <string name="routing_engine_vehicle_type_driving">Fahren</string>
 </resources>
