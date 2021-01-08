@@ -601,7 +601,7 @@ public class TravelObfHelper implements TravelHelper {
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
-			if (!amenities.isEmpty()) {
+			if (!Algorithms.isEmpty(amenities)) {
 				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang);
 			}
 		}
