@@ -38,12 +38,12 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			applyQueryType = ApplyQueryType.valueOf(savedInstanceState.getString(APPLY_QUERY_TYPE));
 			profileDependent = savedInstanceState.getBoolean(PROFILE_DEPENDENT, false);
 		}
+		super.onCreate(savedInstanceState);
 	}
 
 	@Override

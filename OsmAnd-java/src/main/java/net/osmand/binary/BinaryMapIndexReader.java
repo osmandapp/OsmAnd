@@ -1727,13 +1727,12 @@ public class BinaryMapIndexReader {
 			double half16t = MapUtils.getDistance(lat, MapUtils.getLongitudeFromTile(16, ((int) dx) + 0.5), 
 					lat, MapUtils.getLongitudeFromTile(16, (int) dx));
 			double cf31 = ((double) radiusMeters / (half16t * 2)) * (1 << 15);
-			int y31 = MapUtils.get31TileNumberY(lat);
-			int x31 = MapUtils.get31TileNumberX(lon);
-			left = (int) (x31 - cf31);
-			right = (int) (x31 + cf31);
-			top = (int) (y31 - cf31);
-			bottom = (int) (y31 + cf31);
-			
+			y = MapUtils.get31TileNumberY(lat);
+			x = MapUtils.get31TileNumberX(lon);
+			left = (int) (x - cf31);
+			right = (int) (x + cf31);
+			top = (int) (y - cf31);
+			bottom = (int) (y + cf31);
 		}
 
 		public boolean publish(T obj) {

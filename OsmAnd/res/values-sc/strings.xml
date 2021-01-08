@@ -4024,4 +4024,5 @@
     <string name="routing_attr_allow_streams_name">Permite flussos e iscàrrigos</string>
     <string name="routing_attr_allow_intermittent_description">Permite caminos de abba intermitentes</string>
     <string name="routing_attr_allow_intermittent_name">Permite caminos de abba intermitentes</string>
+    <string name="voice_prompts_timetable">Nùmeru de annùntzios vocales</string>
 </resources>

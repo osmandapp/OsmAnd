@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/color_transparent">
+
+	<LinearLayout
+		android:id="@+id/main_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<include layout="@layout/context_menu_top_shadow" />
+
+		<LinearLayout
+			android:id="@+id/route_menu_top_shadow_all"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
+			android:orientation="vertical">
+
+			<View
+				android:layout_width="@dimen/content_padding"
+				android:layout_height="2dp"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+				android:layout_marginBottom="@dimen/list_item_button_padding"
+				android:background="?attr/bg_dash_line" />
+
+			<LinearLayout
+				android:id="@+id/context_menu_top_shadow_all"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:id="@+id/context_menu_top_view"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:paddingStart="@dimen/context_menu_padding_margin_default"
+					android:paddingLeft="@dimen/context_menu_padding_margin_default"
+					android:paddingEnd="@dimen/context_menu_padding_margin_default"
+					android:paddingRight="@dimen/context_menu_padding_margin_default">
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/context_menu_first_line_top_margin"
+						android:layout_marginEnd="@dimen/context_menu_padding_margin_default"
+						android:layout_marginRight="@dimen/context_menu_padding_margin_default"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:id="@+id/title"
+							style="@style/TextAppearance.ContextMenuTitle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							tools:text="@string/search_address_building" />
+
+						<TextView
+							android:id="@+id/description"
+							style="@style/TextAppearance.ContextMenuSubtitle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							tools:text="@string/amenity_type_finance" />
+
+					</LinearLayout>
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/context_menu_icon_view"
+						android:layout_width="@dimen/map_widget_icon"
+						android:layout_height="@dimen/map_widget_icon"
+						android:layout_marginTop="@dimen/context_menu_padding_margin_default"
+						android:tint="?attr/default_icon_color"
+						osmand:srcCompat="@drawable/ic_action_polygom_dark" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<FrameLayout
+			android:id="@+id/bottom_container"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/activity_background_basic"
+			android:foreground="@drawable/bg_contextmenu_shadow"
+			android:foregroundGravity="top|fill_horizontal">
+
+			<net.osmand.plus.LockableScrollView
+				android:id="@+id/route_menu_bottom_scroll"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:fillViewport="true">
+
+				<LinearLayout
+					android:id="@+id/route_menu_cards_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:paddingBottom="@dimen/context_menu_action_buttons_height" />
+
+			</net.osmand.plus.LockableScrollView>
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<com.google.android.material.bottomnavigation.BottomNavigationView
+		android:id="@+id/bottom_navigation"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/context_menu_action_buttons_height"
+		android:layout_gravity="bottom"
+		android:background="?attr/wikivoyage_card_bg_color"
+		osmand:itemBackground="?attr/wikivoyage_card_bg_color"
+		osmand:itemIconTint="@color/bottom_navigation_color_selector_light"
+		osmand:itemTextColor="@color/bottom_navigation_color_selector_light"
+		osmand:labelVisibilityMode="labeled"
+		osmand:menu="@menu/track_menu_bottom_navigation" />
+
+</FrameLayout>

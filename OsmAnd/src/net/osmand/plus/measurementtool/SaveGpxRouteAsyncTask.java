@@ -14,6 +14,7 @@ import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.Metadata;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -91,6 +92,10 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
             backupFile = FileUtils.backupFile(app, outFile);
             String trackName = Algorithms.getFileNameWithoutExtension(outFile);
             GPXFile gpx = generateGpxFile(measurementLayer, editingCtx, trackName, gpxFile);
+            if (gpxFile.metadata != null) {
+                gpx.metadata = new Metadata();
+                gpx.metadata.getExtensionsToWrite().putAll(gpxFile.metadata.getExtensionsToRead());
+            }
             if (!gpx.showCurrentTrack) {
                 res = GPXUtilities.writeGpxFile(outFile, gpx);
             }

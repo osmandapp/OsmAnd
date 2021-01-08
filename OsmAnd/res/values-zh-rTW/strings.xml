@@ -4022,4 +4022,5 @@
     <string name="routing_attr_allow_streams_name">允許溪流與水溝</string>
     <string name="routing_attr_allow_intermittent_description">允許間歇水路</string>
     <string name="routing_attr_allow_intermittent_name">允許間歇水路</string>
+    <string name="voice_prompts_timetable">語音提示時間</string>
 </resources>

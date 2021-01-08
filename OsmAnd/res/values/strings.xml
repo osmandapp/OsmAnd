@@ -11,7 +11,21 @@
 	Thx - Hardy
 
 -->
-
+    <string name="message_error_recheck_parameters">Error, recheck parameters</string>
+    <string name="routing_engine_vehicle_type_car">Car</string>
+    <string name="routing_engine_vehicle_type_bike">Bike</string>
+    <string name="routing_engine_vehicle_type_foot">Foot</string>
+    <string name="routing_engine_vehicle_type_driving">Driving</string>
+    <string name="test_route_calculation">Test route calculation</string>
+    <string name="online_routing_example_hint">URL with all parameters will look like this:</string>
+    <string name="keep_it_empty_if_not">Keep it empty if not</string>
+    <string name="shared_string_enter_param">Enter param</string>
+    <string name="shared_string_server_url">Server URL</string>
+    <string name="shared_string_api_key">API key</string>
+    <string name="shared_string_vehicle">Vehicle</string>
+    <string name="shared_string_subtype">Subtype</string>
+    <string name="edit_online_routing_engine">Edit online routing engine</string>
+    <string name="add_online_routing_engine">Add online routing engine</string>
     <string name="routing_attr_allow_intermittent_name">Allow intermittent water ways</string>
     <string name="routing_attr_allow_intermittent_description">Allow intermittent water ways</string>
     <string name="routing_attr_allow_streams_name">Allow streams and drains</string>
@@ -4010,6 +4024,7 @@
     <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
+    <string name="voice_prompts_timetable">Voice prompts times</string>
 
 
 </resources>

@@ -289,33 +289,39 @@ public class WikiArticleHelper {
 
 	@Nullable
 	public static String getPartialContent(String source) {
-		if (source == null) {
+		if (Algorithms.isEmpty(source)) {
 			return null;
 		}
 		String content = source.replaceAll("\\n", "");
 		int firstParagraphStart = content.indexOf(P_OPENED);
 		int firstParagraphEnd = content.indexOf(P_CLOSED);
 		firstParagraphEnd = firstParagraphEnd < firstParagraphStart ? content.indexOf(P_CLOSED, firstParagraphStart) : firstParagraphEnd;
-		if (firstParagraphStart == -1 || firstParagraphEnd == -1
-				|| firstParagraphEnd < firstParagraphStart) {
-			return null;
-		}
-		String firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + P_CLOSED.length());
-		while (firstParagraphHtml.substring(P_OPENED.length(), firstParagraphHtml.length() - P_CLOSED.length()).trim().isEmpty()
-				&& (firstParagraphEnd + P_CLOSED.length()) < content.length()) {
-			firstParagraphStart = content.indexOf(P_OPENED, firstParagraphEnd);
-			firstParagraphEnd = firstParagraphStart == -1 ? -1 : content.indexOf(P_CLOSED, firstParagraphStart);
-			if (firstParagraphStart != -1 && firstParagraphEnd != -1) {
-				firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + P_CLOSED.length());
-			} else {
-				break;
+		String firstParagraphHtml = null;
+		if (firstParagraphStart != -1 && firstParagraphEnd != -1
+				&& firstParagraphEnd >= firstParagraphStart) {
+			firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + P_CLOSED.length());
+			while (firstParagraphHtml.substring(P_OPENED.length(), firstParagraphHtml.length() - P_CLOSED.length()).trim().isEmpty()
+					&& (firstParagraphEnd + P_CLOSED.length()) < content.length()) {
+				firstParagraphStart = content.indexOf(P_OPENED, firstParagraphEnd);
+				firstParagraphEnd = firstParagraphStart == -1 ? -1 : content.indexOf(P_CLOSED, firstParagraphStart);
+				if (firstParagraphStart != -1 && firstParagraphEnd != -1) {
+					firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + P_CLOSED.length());
+				} else {
+					break;
+				}
 			}
+		}
+
+		if (Algorithms.isEmpty(firstParagraphHtml)) {
+			firstParagraphHtml = source;
+		}
+		if (Algorithms.isEmpty(firstParagraphHtml)) {
+			return null;
 		}
 
 		String firstParagraphText = Html.fromHtml(firstParagraphHtml.replaceAll("(<(/)(a|img)>)|(<(a|img).+?>)|(<div.+?/div>)", ""))
 				.toString().trim();
 		String[] phrases = firstParagraphText.split("\\. ");
-
 		StringBuilder res = new StringBuilder();
 		int limit = Math.min(phrases.length, PARTIAL_CONTENT_PHRASES);
 		for (int i = 0; i < limit; i++) {
@@ -324,7 +330,6 @@ public class WikiArticleHelper {
 				res.append(". ");
 			}
 		}
-
 		return res.toString();
 	}
 

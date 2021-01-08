@@ -126,7 +126,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 			if (getActivity() != null) {
 				SelectProfileBottomSheet.showInstance(
 						getActivity(), SelectProfileBottomSheet.DialogMode.NAVIGATION_PROFILE,
-						this, routingProfileKey, false);
+						this, getSelectedAppMode(), routingProfileKey, false);
 			}
 		}
 		return false;

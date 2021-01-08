@@ -102,6 +102,14 @@ public class AndroidUiHelper {
 			}
 		}
 	}
+
+	public static void setVisibility(int visibility, View ... views) {
+		for (View view : views) {
+			if (view != null && view.getVisibility() != visibility) {
+				view.setVisibility(visibility);
+			}
+		}
+	}
     
 	public static boolean isXLargeDevice(@NonNull Activity ctx) {
 		int lt = (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);

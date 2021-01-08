@@ -944,7 +944,7 @@
     <string name="poi_route_hiking_lwn_poi">Yerel yürüyüş güzergahı</string>
     <string name="poi_route_hiking_ref_poi">Yürüyüş yolu başvurusu</string>
     <string name="poi_opening_hours">Çalışma saatleri</string>
-    <string name="poi_collection_times">Koleksiyon kez</string>
+    <string name="poi_collection_times">Toplama zamanları</string>
     <string name="poi_description">Açıklama</string>
     <string name="poi_phone">Telefon</string>
     <string name="poi_website">İnternet sitesi</string>
@@ -3137,4 +3137,12 @@
     <string name="poi_diplomatic_services_non_immigrant_visas_filter">Göçmen olmayan vizeleri</string>
     <string name="poi_military_checkpoint">Askeri denetim noktası</string>
     <string name="poi_checkpoint_hiking">Yürüyüş denetim noktası</string>
+    <string name="poi_street_cabinet_street_lighting">Dolap türü: sokak aydınlatması</string>
+    <string name="poi_street_cabinet_water_management">Dolap türü: su yönetimi</string>
+    <string name="poi_street_cabinet_waste">Dolap türü: atık</string>
+    <string name="poi_street_cabinet_postal_service">Dolap türü: posta hizmeti</string>
+    <string name="poi_street_cabinet_gas">Dolap türü: gaz</string>
+    <string name="poi_street_cabinet_cable_tv">Dolap türü: kablo tv</string>
+    <string name="poi_street_cabinet_telecom">Dolap türü: telefon</string>
+    <string name="poi_street_cabinet_power">Dolap türü: elektrik</string>
 </resources>

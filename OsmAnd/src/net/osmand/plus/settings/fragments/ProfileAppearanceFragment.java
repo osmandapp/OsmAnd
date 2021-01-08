@@ -403,7 +403,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 						if (getActivity() != null) {
 							SelectProfileBottomSheet.showInstance(
 									getActivity(), DialogMode.BASE_PROFILE, ProfileAppearanceFragment.this,
-									selectedAppModeKey, false);
+									getSelectedAppMode(), selectedAppModeKey, false);
 						}
 					}
 				}

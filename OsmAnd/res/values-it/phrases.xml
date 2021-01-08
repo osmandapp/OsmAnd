@@ -2992,4 +2992,24 @@
     <string name="poi_traffic_signals_arrow">Freccia</string>
     <string name="poi_traffic_signals_vibration">Vibrazione</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressione</string>
+    <string name="poi_vending_elongated_coin">Moneta souvenir</string>
+    <string name="poi_drive_through_no">Drive-through: no</string>
+    <string name="poi_piste_grooming_mogul">Gobba</string>
+    <string name="poi_piste_grooming_backcountry">Fuoripista</string>
+    <string name="poi_piste_difficulty_freeride">Fuoripista</string>
+    <string name="poi_board_type_notice">Bacheca</string>
+    <string name="poi_information_trail_blaze">Segnaletica sentiero</string>
+    <string name="poi_wiki_lang_gu">Wiki gujarati</string>
+    <string name="poi_wiki_lang_yo">Wiki yoruba</string>
+    <string name="poi_wiki_lang_cv">Wiki ciuvascio</string>
+    <string name="poi_wiki_lang_ba">Wiki baschiro</string>
+    <string name="poi_wiki_lang_tg">wiki tagico</string>
+    <string name="poi_wiki_lang_ast">Wiki asturiano-leonese</string>
+    <string name="poi_wiki_lang_ky">Wiki chirghisa</string>
+    <string name="poi_wiki_lang_zhminnan">Wiki min meridionale</string>
+    <string name="poi_wiki_lang_min">Wiki minangkabau</string>
+    <string name="poi_wiki_lang_war">Wiki waray</string>
+    <string name="poi_wiki_lang_mr">Wiki maratino</string>
+    <string name="poi_wiki_lang_ml">Wiki malayalam</string>
+    <string name="poi_wiki_lang_fy">Wiki frisone occidentale</string>
 </resources>

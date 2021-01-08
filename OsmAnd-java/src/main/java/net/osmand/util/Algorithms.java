@@ -78,12 +78,20 @@ public class Algorithms {
 		return map == null || map.size() == 0;
 	}
 
+	public static String emptyIfNull(String s) {
+		return s == null ? "" : s;
+	}
+
 	public static boolean isEmpty(CharSequence s) {
 		return s == null || s.length() == 0;
 	}
 
 	public static boolean isBlank(String s) {
 		return s == null || s.trim().length() == 0;
+	}
+
+	public static int hash(Object... values) {
+		return Arrays.hashCode(values);
 	}
 
 	public static boolean stringsEqual(String s1, String s2) {

@@ -650,7 +650,7 @@ public class SearchCoreFactory {
 			if (p.hasObjectType(ObjectType.POI_TYPE)) {
 				return -1;
 			}
-			if (p.getUnknownWordToSearch().length() >= FIRST_WORD_MIN_LENGTH || p.getRadiusLevel() > 1) {
+			if (p.getUnknownWordToSearch().length() >= FIRST_WORD_MIN_LENGTH || p.isFirstUnknownSearchWordComplete()) {
 				return SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR;
 			}
 			return -1;
