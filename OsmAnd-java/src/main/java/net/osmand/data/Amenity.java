@@ -47,6 +47,7 @@ public class Amenity extends MapObject {
 	public static final String ROUTE_SOURCE = "route_source";
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
+	public static final String GPX_ICON = "gpx_icon";
 
 
 	private String subType;
@@ -202,6 +203,15 @@ public class Amenity extends MapObject {
 	public void setPhone(String phone) {
 		setAdditionalInfo(PHONE, phone);
 	}
+
+	public String getColor() {
+		return getAdditionalInfo(COLOR);
+	}
+
+	public String getIcon() {
+		return getAdditionalInfo(GPX_ICON);
+	}
+
 
 	public String getContentLanguage(String tag, String lang, String defLang) {
 		if (lang != null) {

@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
@@ -43,6 +42,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static net.osmand.GPXUtilities.*;
 
 public class TravelObfHelper implements TravelHelper {
 
@@ -94,10 +95,9 @@ public class TravelObfHelper implements TravelHelper {
 				List<Amenity> amenities = reader.searchPoi(req);
 				if (amenities.size() > 0) {
 					for (Amenity amenity : amenities) {
-						if (amenity.getSubType().equals(ROUTE_ARTICLE) && !Algorithms.isEmpty(amenity.getName(lang))) {
-							TravelArticle article = cacheTravelArticles(reader.getFile(), amenity, lang);
+						if (ROUTE_ARTICLE.equals(amenity.getSubType()) && !Algorithms.isEmpty(amenity.getName(lang))) {
+							TravelArticle article = cacheTravelArticles(reader.getFile(), amenity, lang, amenities);
 							if (article != null) {
-								article.gpxFile = getGpxFile(article, amenities, lang);
 								popularArticles.add(article);
 								if (popularArticles.size() >= MAX_POPULAR_ARTICLES_COUNT) {
 									break;
@@ -124,52 +124,10 @@ public class TravelObfHelper implements TravelHelper {
 		return popularArticles;
 	}
 
-	private GPXFile getGpxFile(TravelArticle article, List<Amenity> amenities, String lang) {
-		List<Amenity> list = new ArrayList<>();
-		for (Amenity amenity : amenities) {
-			String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-			if (!lang.equals(amenityLang)) {
-				continue;
-			}
-			if (amenity.getAdditionalInfo(Amenity.ROUTE_ID) != null &&
-					amenity.getAdditionalInfo(Amenity.ROUTE_ID).equals(article.routeId)) {
-				list.add(amenity);
-			}
-		}
-		GPXFile gpxFile = new GPXFile(null);
-		for (Amenity a : list) {
-			GPXUtilities.WptPt wptPt = createWptPt(lang, a);
-			gpxFile.addPoint(wptPt);
-		}
-		return gpxFile;
-	}
-
-	private GPXUtilities.WptPt createWptPt(String lang, Amenity a) {
-		GPXUtilities.WptPt wptPt = new GPXUtilities.WptPt();
-		wptPt.name = a.getName();
-		wptPt.lat = a.getLocation().getLatitude();
-		wptPt.lon = a.getLocation().getLongitude();
-		wptPt.desc = a.getDescription(lang);
-		wptPt.link = a.getSite();
-		String color = a.getAdditionalInfo("color");
-		if (color != null) {
-			wptPt.setColor(ColorDialogs.getColorByTag(color));
-		}
-		String iconName = a.getAdditionalInfo("gpx_icon");
-		if (iconName != null) {
-			wptPt.setIconName(iconName);
-		}
-		String category = a.getTagSuffix("category_");
-		if (category != null) {
-			wptPt.category = Algorithms.capitalizeFirstLetter(category);
-		}
-		return wptPt;
-	}
-
 	@Nullable
-	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang) {
+	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang, List<Amenity> amenityList) {
 		TravelArticle article = null;
-		Map<String, TravelArticle> articles = readArticles(file, amenity);
+		Map<String, TravelArticle> articles = readArticles(file, amenity, amenityList);
 		if (!Algorithms.isEmpty(articles)) {
 			TravelArticleIdentifier newArticleId = articles.values().iterator().next().generateIdentifier();
 			cachedArticles.put(newArticleId, articles);
@@ -182,8 +140,7 @@ public class TravelObfHelper implements TravelHelper {
 		return new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
-				return subcategory.equals(ROUTE_ARTICLE)
-						|| subcategory.equals(ROUTE_ARTICLE_POINT);
+				return subcategory.equals(ROUTE_ARTICLE) || subcategory.equals(ROUTE_ARTICLE_POINT);
 			}
 
 			@Override
@@ -194,37 +151,76 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@NonNull
-	private Map<String, TravelArticle> readArticles(@NonNull File file, @NonNull Amenity amenity) {
+	private Map<String, TravelArticle> readArticles(@NonNull File file, @NonNull Amenity amenity,
+	                                                @NonNull List<Amenity> amenityList) {
 		Map<String, TravelArticle> articles = new HashMap<>();
 		Set<String> langs = getLanguages(amenity);
 		for (String lang : langs) {
-			articles.put(lang, readArticle(file, amenity, lang));
+			articles.put(lang, readArticle(file, amenity, lang, amenityList));
 		}
 		return articles;
 	}
 
 	@NonNull
-	private TravelArticle readArticle(@NonNull File file, @NonNull Amenity amenity, @Nullable String lang) {
+	private TravelArticle readArticle(@NonNull File file, @NonNull Amenity amenity, @Nullable String lang,
+	                                  @NonNull List<Amenity> amenityList) {
 		TravelArticle res = new TravelArticle();
 		res.file = file;
 		String title = amenity.getName(lang);
 		res.title = Algorithms.isEmpty(title) ? amenity.getName() : title;
 		res.content = amenity.getDescription(lang);
-		res.isPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_PART, lang));
+		res.isPartOf = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.IS_PART, lang));
 		res.lat = amenity.getLocation().getLatitude();
 		res.lon = amenity.getLocation().getLongitude();
-		res.imageTitle = emptyIfNull(amenity.getTagContent(Amenity.IMAGE_TITLE, null));
-		res.routeId = emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID, null));
-		res.routeSource = emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE, null));
+		res.imageTitle = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.IMAGE_TITLE, null));
+		res.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID, null));
+		res.routeSource = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE, null));
 		res.originalId = 0;
 		res.lang = lang;
-		res.contentsJson = emptyIfNull(amenity.getTagContent(Amenity.CONTENT_JSON, lang));
-		res.aggregatedPartOf = emptyIfNull(amenity.getTagContent(Amenity.IS_AGGR_PART, lang));
+		res.contentsJson = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.CONTENT_JSON, lang));
+		res.aggregatedPartOf = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.IS_AGGR_PART, lang));
+		res.gpxFile = getGpxFile(amenity, lang, amenityList);
 		return res;
 	}
 
-	private String emptyIfNull(String text) {
-		return text == null ? "" : text;
+	@NonNull
+	private GPXFile getGpxFile(@NonNull Amenity article, @Nullable String lang, @NonNull List<Amenity> amenityList) {
+		GPXFile gpxFile = new GPXFile(article.getName(), lang, "");
+		for (Amenity amenity : amenityList) {
+			String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
+			if (!lang.equals(amenityLang)) {
+				continue;
+			}
+			if (amenity.getAdditionalInfo(Amenity.ROUTE_ID) != null &&
+					amenity.getAdditionalInfo(Amenity.ROUTE_ID).equals(article.getAdditionalInfo(Amenity.ROUTE_ID))) {
+				WptPt wptPt = createWptPt(amenity, lang);
+				gpxFile.addPoint(wptPt);
+			}
+		}
+		return gpxFile;
+	}
+
+	@NonNull
+	private WptPt createWptPt(@NonNull Amenity amenity, @Nullable String lang) {
+		WptPt wptPt = new WptPt();
+		wptPt.name = amenity.getName();
+		wptPt.lat = amenity.getLocation().getLatitude();
+		wptPt.lon = amenity.getLocation().getLongitude();
+		wptPt.desc = amenity.getDescription(lang);
+		wptPt.link = amenity.getSite();
+		String color = amenity.getColor();
+		if (color != null) {
+			wptPt.setColor(ColorDialogs.getColorByTag(color));
+		}
+		String iconName = amenity.getIcon();
+		if (iconName != null) {
+			wptPt.setIconName(iconName);
+		}
+		String category = amenity.getTagSuffix("category_");
+		if (category != null) {
+			wptPt.category = Algorithms.capitalizeFirstLetter(category);
+		}
+		return wptPt;
 	}
 
 	@Override
@@ -257,7 +253,7 @@ public class TravelObfHelper implements TravelHelper {
 				for (Amenity amenity : entry.getValue()) {
 					Set<String> nameLangs = getLanguages(amenity);
 					if (nameLangs.contains(appLang)) {
-						TravelArticle article = readArticle(file, amenity, appLang);
+						TravelArticle article = readArticle(file, amenity, appLang, entry.getValue());
 						WikivoyageSearchResult r = new WikivoyageSearchResult(article, new ArrayList<>(nameLangs));
 						res.add(r);
 					}
@@ -373,7 +369,7 @@ public class TravelObfHelper implements TravelHelper {
 				for (Amenity amenity : entry.getValue()) {
 					Set<String> nameLangs = getLanguages(amenity);
 					if (nameLangs.contains(lang)) {
-						TravelArticle a = readArticle(file, amenity, lang);
+						TravelArticle a = readArticle(file, amenity, lang, entry.getValue());
 						WikivoyageSearchResult rs = new WikivoyageSearchResult(a, new ArrayList<>(nameLangs));
 						List<WikivoyageSearchResult> l = navMap.get(rs.isPartOf);
 						if (l == null) {
@@ -477,9 +473,7 @@ public class TravelObfHelper implements TravelHelper {
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
-			if (!amenities.isEmpty()) {
-				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang);
-			}
+			article = getFirstTravelArticle(lang, article, amenities, reader.getFile());
 		}
 		return article;
 	}
@@ -524,8 +518,19 @@ public class TravelObfHelper implements TravelHelper {
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
-			if (!Algorithms.isEmpty(amenities)) {
-				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang);
+			article = getFirstTravelArticle(lang, article, amenities, reader.getFile());
+		}
+		return article;
+	}
+
+	private TravelArticle getFirstTravelArticle(@NonNull String lang, TravelArticle article, List<Amenity> amenities,
+	                                            File file) {
+		if (!Algorithms.isEmpty(amenities)) {
+			for (Amenity amenity : amenities) {
+				if (ROUTE_ARTICLE.equals(amenity.getSubType())) {
+					article = cacheTravelArticles(file, amenity, lang, amenities);
+					break;
+				}
 			}
 		}
 		return article;
@@ -591,9 +596,7 @@ public class TravelObfHelper implements TravelHelper {
 	public File createGpxFile(@NonNull final TravelArticle article) {
 		final GPXFile gpx = article.getGpxFile();
 		File file = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
-		if (!file.exists()) {
-			GPXUtilities.writeGpxFile(file, gpx);
-		}
+		writeGpxFile(file, gpx);
 		return file;
 	}
 
