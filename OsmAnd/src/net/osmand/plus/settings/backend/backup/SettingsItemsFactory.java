@@ -146,6 +146,9 @@ class SettingsItemsFactory {
 			case GPX:
 				item = new GpxSettingsItem(app, json);
 				break;
+			case ONLINE_ROUTING_ENGINES:
+				item = new OnlineRoutingSettingsItem(app, json);
+				break;
 		}
 		return item;
 	}

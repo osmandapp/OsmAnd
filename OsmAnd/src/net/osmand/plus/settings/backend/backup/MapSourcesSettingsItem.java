@@ -131,11 +131,6 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	}
 
 	@Override
-	public boolean shouldReadOnCollecting() {
-		return true;
-	}
-
-	@Override
 	void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 		try {
 			if (!json.has("items")) {
