@@ -83,7 +83,7 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@NonNull
-	public List<TravelArticle> loadPopularArticles() {
+	public synchronized List<TravelArticle> loadPopularArticles() {
 		String lang = app.getLanguage();
 		List<TravelArticle> popularArticles = new ArrayList<>();
 		for (BinaryMapIndexReader reader : getReaders()) {
@@ -190,7 +190,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
+	public synchronized List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		Map<File, List<Amenity>> amenityMap = new HashMap<>();
 		final String appLang = app.getLanguage();
