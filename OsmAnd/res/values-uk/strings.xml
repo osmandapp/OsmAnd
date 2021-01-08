@@ -4040,4 +4040,6 @@
     <string name="routing_engine_vehicle_type_car">Автомобіль</string>
     <string name="message_error_recheck_parameters">Помилка, повторно перевірте параметри</string>
     <string name="copy_address">Копіювати адресу</string>
+    <string name="online_routing_engine">Мережний рушій маршрутизації</string>
+    <string name="online_routing_engines">Мережні рушії маршрутизації</string>
 </resources>
