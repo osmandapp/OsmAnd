@@ -4044,4 +4044,6 @@
     <string name="routing_engine_vehicle_type_car">Aŭtomobilo</string>
     <string name="message_error_recheck_parameters">Eraro, rekontrolu parametrojn</string>
     <string name="copy_address">Kopii adreson</string>
+    <string name="online_routing_engine">Enreta navigilo</string>
+    <string name="online_routing_engines">Enretaj navigiloj</string>
 </resources>
