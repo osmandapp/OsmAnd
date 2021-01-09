@@ -4039,4 +4039,6 @@
     <string name="routing_engine_vehicle_type_car">Carro</string>
     <string name="message_error_recheck_parameters">Erro, verifique novamente os parâmetros</string>
     <string name="copy_address">Copiar endereço</string>
+    <string name="online_routing_engine">Motor de encaminhamento online</string>
+    <string name="online_routing_engines">Mecanismos de roteamento online</string>
 </resources>
