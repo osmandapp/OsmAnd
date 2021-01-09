@@ -3999,4 +3999,6 @@
     <string name="routing_engine_vehicle_type_car">Araba</string>
     <string name="message_error_recheck_parameters">Hata, parametreleri tekrar gözden geçirin</string>
     <string name="copy_address">Adresi kopyala</string>
+    <string name="online_routing_engine">Çevrim içi yönlendirme motoru</string>
+    <string name="online_routing_engines">Çevrim içi yönlendirme motorları</string>
 </resources>
