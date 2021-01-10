@@ -492,7 +492,7 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull QuadRect rect, @NonNull final String lang) {
 		TravelArticle article = null;
-		List<Amenity> amenities = null;
+		final List<Amenity> amenities = new ArrayList<>();
 		int x = 0;
 		int y = 0;
 		int left = 0;
@@ -510,8 +510,25 @@ public class TravelObfHelper implements TravelHelper {
 		for (BinaryMapIndexReader reader : getReaders()) {
 			try {
 				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
-						x, y, title, left, right, top, bottom, getSearchRouteArticleFilter(), null, null);
-				amenities = reader.searchPoiByName(req);
+						x, y, title, left, right, top, bottom, getSearchRouteArticleFilter(),
+						new ResultMatcher<Amenity>() {
+							boolean done = false;
+
+							@Override
+							public boolean publish(Amenity amenity) {
+								if (Algorithms.stringsEqual(title, Algorithms.emptyIfNull(amenity.getName(lang)))) {
+									amenities.add(amenity);
+									done = true;
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return done;
+							}
+						}, null);
+				reader.searchPoiByName(req);
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
