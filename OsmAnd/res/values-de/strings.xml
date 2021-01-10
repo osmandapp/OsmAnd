@@ -738,7 +738,7 @@
     <string name="osm_settings">OpenStreetMap-Bearbeitung</string>
     <string name="additional_settings">Weitere Einstellungen</string>
     <string name="shared_string_settings">Einstellungen</string>
-    <string name="update_tile">Karte aktualisieren</string>
+    <string name="update_tile">Aktualisieren</string>
     <string name="reload_tile">Kartenteile aktualisieren</string>
     <string name="mark_point">Ziel</string>
     <string name="shared_string_add_to_favorites">Zu \'Favoriten\' hinzufügen</string>
