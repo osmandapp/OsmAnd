@@ -352,11 +352,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 				}
 			};
 		}
-		StringBuilder nmFilter = new StringBuilder();
 		String[] items = filter.split(" ");
 		boolean allTime = false;
 		boolean open = false;
 		List<PoiType> poiAdditionalsFilter = null;
+		List<String> unknownFilters = null;
 		for (String s : items) {
 			s = s.trim();
 			if (!Algorithms.isEmpty(s)) {
@@ -373,21 +373,37 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 						poiAdditionalsFilter.add(pt);
 					}
 				} else {
-					nmFilter.append(s).append(" ");
+					if (unknownFilters == null) {
+						unknownFilters = new ArrayList<>();
+					}
+					unknownFilters.add(s);
 				}
 			}
 		}
-		return getNameFilterInternal(nmFilter, allTime, open, poiAdditionalsFilter);
+		return getNameFilterInternal(unknownFilters, allTime, open, poiAdditionalsFilter);
 	}
 
-	private AmenityNameFilter getNameFilterInternal(StringBuilder nmFilter,
+	private AmenityNameFilter getNameFilterInternal(final List<String> unknownFilters,
 													final boolean allTime, final boolean open, final List<PoiType> poiAdditionals) {
-		final CollatorStringMatcher sm = nmFilter.length() > 0 ?
-				new CollatorStringMatcher(nmFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS) : null;
 		return new AmenityNameFilter() {
 
 			@Override
 			public boolean accept(Amenity a) {
+				CollatorStringMatcher sm = null;
+
+				if (unknownFilters != null) {
+					StringBuilder nameFilter = new StringBuilder();
+					for (String filter : unknownFilters) {
+						String formattedFilter = filter.replace(':', '_').toLowerCase();
+						if (a.getAdditionalInfo(formattedFilter) == null) {
+							nameFilter.append(filter).append(" ");
+						}
+					}
+					if (nameFilter.length() > 0) {
+						sm = new CollatorStringMatcher(nameFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS);
+					}
+				}
+				
 				if (sm != null) {
 					List<String> names = OsmAndFormatter.getPoiStringsWithoutType(a,
 							app.getSettings().MAP_PREFERRED_LOCALE.get(), app.getSettings().MAP_TRANSLITERATE_NAMES.get());
