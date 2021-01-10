@@ -48,7 +48,6 @@ import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.MapMarkersMode;
-import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;

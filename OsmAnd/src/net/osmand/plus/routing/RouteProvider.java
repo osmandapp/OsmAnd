@@ -22,6 +22,8 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
+import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
@@ -91,7 +93,8 @@ public class RouteProvider {
 		OSMAND("OsmAnd (offline)"),
 		BROUTER("BRouter (offline)"),
 		STRAIGHT("Straight line"),
-		DIRECT_TO("Direct To");
+		DIRECT_TO("Direct To"),
+		ONLINE("Online engine");
 
 		private final String name;
 
@@ -363,6 +366,8 @@ public class RouteProvider {
 					res = findVectorMapsRoute(params, calcGPXRoute);
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
+				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
+					res = findOnlineRoute(params);
 //				} else if (params.type == RouteService.ORS) {
 //					res = findORSRoute(params);
 //				} else if (params.type == RouteService.OSRM) {
@@ -382,6 +387,8 @@ public class RouteProvider {
 			} catch (ParserConfigurationException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (SAXException e) {
+				log.error("Failed to find route ", e); //$NON-NLS-1$
+			} catch (JSONException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			}
 		}
@@ -1202,6 +1209,35 @@ public class RouteProvider {
 		List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 		RouteExporter exporter = new RouteExporter(name, originalRoute, locations, points);
 		return exporter.exportRoute();
+	}
+
+	private RouteCalculationResult findOnlineRoute(RouteCalculationParams params) throws IOException, JSONException {
+		OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
+		String stringKey = params.mode.getRoutingProfile();
+		List<LatLon> route = helper.calculateRouteOnline(helper.getEngineByKey(stringKey), getFullPathFromParams(params));
+		if (!route.isEmpty()) {
+			List<Location> res = new ArrayList<>();
+			for (LatLon pt : route) {
+				WptPt wpt = new WptPt();
+				wpt.lat = pt.getLatitude();
+				wpt.lon = pt.getLongitude();
+				res.add(createLocation(wpt));
+			}
+			params.intermediates = null;
+			return new RouteCalculationResult(res, null, params, null, true);
+		} else {
+			return new RouteCalculationResult("Route is empty");
+		}
+	}
+
+	private static List<LatLon> getFullPathFromParams(RouteCalculationParams params) {
+		List<LatLon> points = new ArrayList<>();
+		points.add(new LatLon(params.start.getLatitude(), params.start.getLongitude()));
+		if (Algorithms.isEmpty(params.intermediates)) {
+			points.addAll(params.intermediates);
+		}
+		points.add(params.end);
+		return points;
 	}
 
 	private void appendOSRMLoc(StringBuilder uri, LatLon il) {

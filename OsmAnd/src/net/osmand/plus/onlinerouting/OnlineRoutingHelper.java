@@ -6,7 +6,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.Version;
+import net.osmand.plus.onlinerouting.type.EngineType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -15,9 +19,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +36,7 @@ public class OnlineRoutingHelper {
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	private List<OnlineRoutingEngine> cachedEngines;
-	private Map<String, OnlineRoutingEngine> cachedEnginesMap;
+	private Map<String, OnlineRoutingEngine> cachedEngines;
 
 	public OnlineRoutingHelper(OsmandApplication app) {
 		this.app = app;
@@ -38,23 +46,39 @@ public class OnlineRoutingHelper {
 
 	@NonNull
 	public List<OnlineRoutingEngine> getEngines() {
-		return cachedEngines;
+		return new ArrayList<>(cachedEngines.values());
 	}
 
 	public OnlineRoutingEngine getEngineByKey(String stringKey) {
-		return cachedEnginesMap.get(stringKey);
+		return cachedEngines.get(stringKey);
+	}
+
+	public List<LatLon> calculateRouteOnline(@NonNull OnlineRoutingEngine engine,
+	                                         @NonNull List<LatLon> path) throws IOException, JSONException {
+		String fullUrl = engine.createFullUrl(path);
+		String content = makeRequest(fullUrl);
+		return engine.getType().parseResponse(content);
+	}
+
+	private String makeRequest(String url) throws IOException {
+		URLConnection connection = NetworkUtils.getHttpURLConnection(url);
+		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
+		StringBuilder content = new StringBuilder();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		String s;
+		while ((s = reader.readLine()) != null) {
+			content.append(s);
+		}
+		try {
+			reader.close();
+		} catch (IOException ignored) {
+		}
+		return content.toString();
 	}
 
 	public void saveEngine(@NonNull OnlineRoutingEngine engine) {
 		String stringKey = engine.getStringKey();
-		OnlineRoutingEngine existedEngine = cachedEnginesMap.get(stringKey);
-		if (existedEngine != null) {
-			int index = cachedEngines.indexOf(existedEngine);
-			cachedEngines.set(index, engine);
-		} else {
-			cachedEngines.add(engine);
-		}
-		cachedEnginesMap.put(stringKey, engine);
+		cachedEngines.put(stringKey, engine);
 		saveToSettings();
 	}
 
@@ -67,19 +91,18 @@ public class OnlineRoutingHelper {
 
 	public void deleteEngine(@NonNull OnlineRoutingEngine engine) {
 		String stringKey = engine.getStringKey();
-		if (cachedEnginesMap.containsKey(stringKey)) {
-			OnlineRoutingEngine existedEngine = cachedEnginesMap.remove(stringKey);
-			cachedEngines.remove(existedEngine);
+		if (cachedEngines.containsKey(stringKey)) {
+			cachedEngines.remove(stringKey);
 			saveToSettings();
 		}
 	}
 
 	private void loadFromSettings() {
-		cachedEngines = readFromSettings();
-		cachedEnginesMap = new HashMap<>();
-		for (OnlineRoutingEngine engine : cachedEngines) {
-			cachedEnginesMap.put(engine.getStringKey(), engine);
+		Map<String, OnlineRoutingEngine> cachedEngines = new LinkedHashMap<>();
+		for (OnlineRoutingEngine engine : readFromSettings()) {
+			cachedEngines.put(engine.getStringKey(), engine);
 		}
+		this.cachedEngines = cachedEngines;
 	}
 
 	@NonNull
@@ -100,7 +123,7 @@ public class OnlineRoutingHelper {
 	private void saveToSettings() {
 		if (!Algorithms.isEmpty(cachedEngines)) {
 			JSONObject json = new JSONObject();
-			if (writeToJson(json, cachedEngines)) {
+			if (writeToJson(json, getEngines())) {
 				settings.ONLINE_ROUTING_ENGINES.set(json.toString());
 			}
 		} else {
@@ -121,10 +144,10 @@ public class OnlineRoutingHelper {
 				JSONObject object = itemsJson.getJSONObject(i);
 				String key = object.getString("key");
 				String vehicleKey = object.getString("vehicle");
-				ServerType serverType = ServerType.valueOf(object.getString("serverType"));
+				EngineType engineType = EngineType.valueOf(object.getString("type"));
 				String paramsString = object.getString("params");
 				HashMap<String, String> params = gson.fromJson(paramsString, type);
-				engines.add(new OnlineRoutingEngine(key, serverType, vehicleKey, params));
+				engines.add(new OnlineRoutingEngine(key, engineType, vehicleKey, params));
 			}
 		} catch (JSONException e) {
 			LOG.debug("Error when reading engines from JSON: " + e.toString());
@@ -140,7 +163,7 @@ public class OnlineRoutingHelper {
 			for (OnlineRoutingEngine engine : engines) {
 				JSONObject jsonObject = new JSONObject();
 				jsonObject.put("key", engine.getStringKey());
-				jsonObject.put("serverType", engine.getServerType().name());
+				jsonObject.put("type", engine.getType().getStringKey());
 				jsonObject.put("vehicle", engine.getVehicleKey());
 				jsonObject.put("params", gson.toJson(engine.getParams(), type));
 				jsonArray.put(jsonObject);
