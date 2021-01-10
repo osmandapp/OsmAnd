@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.Location;
+import net.osmand.StateChangedListener;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -13,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -49,11 +51,18 @@ public class LanesControl {
 		lanesDrawable = new LanesDrawable(mapActivity, mapActivity.getMapView().getScaleCoefficient());
 		lanesView.setImageDrawable(lanesDrawable);
 		trackingUtilities = mapActivity.getMapViewTrackingUtilities();
-		locationProvider = mapActivity.getMyApplication().getLocationProvider();
-		settings = mapActivity.getMyApplication().getSettings();
 		mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
-		rh = mapActivity.getMyApplication().getRoutingHelper();
 		app = mapActivity.getMyApplication();
+		rh = app.getRoutingHelper();
+		settings = app.getSettings();
+		locationProvider = app.getLocationProvider();
+
+		settings.DRIVING_REGION.addListener(new StateChangedListener<DrivingRegion>() {
+			@Override
+			public void stateChanged(DrivingRegion change) {
+				lanesDrawable.setLeftSide(settings.DRIVING_REGION.get().leftHandDriving);
+			}
+		});
 	}
 
 	public void updateTextSize(boolean isNight, int textColor, int textShadowColor, boolean textBold, int shadowRadius) {

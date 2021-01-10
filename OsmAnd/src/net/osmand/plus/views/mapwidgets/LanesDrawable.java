@@ -36,7 +36,7 @@ public class LanesDrawable extends Drawable {
 	private float delta;
 	private float laneHalfSize;
 	private static final float miniCoeff = 2f;
-	private final boolean leftSide;
+	private boolean leftSide;
 	private int imgMinDelta;
 	private int imgMargin;
 
@@ -62,6 +62,10 @@ public class LanesDrawable extends Drawable {
 		paintSecondTurn = new Paint(Paint.ANTI_ALIAS_FLAG);
 		paintSecondTurn.setStyle(Paint.Style.FILL);
 		paintSecondTurn.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
+	}
+
+	public void setLeftSide(boolean leftSide) {
+		this.leftSide = leftSide;
 	}
 
 	public void updateBounds() {

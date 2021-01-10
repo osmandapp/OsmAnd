@@ -51,7 +51,6 @@ public class NavigationNotification extends OsmandNotification {
 
 	private Map<TurnPathHelper.TurnResource, Bitmap> bitmapCache = new HashMap<>();
 	private Bitmap turnBitmap;
-	private boolean leftSide;
 
 	public NavigationNotification(OsmandApplication app) {
 		super(app, GROUP_NAME);
@@ -59,7 +58,6 @@ public class NavigationNotification extends OsmandNotification {
 
 	@Override
 	public void init() {
-		leftSide = app.getSettings().DRIVING_REGION.get().leftHandDriving;
 		app.registerReceiver(new BroadcastReceiver() {
 
 			@Override
@@ -158,7 +156,7 @@ public class NavigationNotification extends OsmandNotification {
 
 				if (deviatedFromRoute) {
 					turnImminent = 0;
-					turnType = TurnType.valueOf(TurnType.OFFR, leftSide);
+					turnType = TurnType.valueOf(TurnType.OFFR, app.getSettings().DRIVING_REGION.get().leftHandDriving);
 					nextTurnDistance = (int) routingHelper.getRouteDeviation();
 				} else {
 					NextDirectionInfo calc1 = new NextDirectionInfo();
