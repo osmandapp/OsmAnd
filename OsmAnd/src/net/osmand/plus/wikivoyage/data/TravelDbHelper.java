@@ -448,7 +448,7 @@ public class TravelDbHelper implements TravelHelper {
 					}
 				}
 				if (matchLang) {
-					prev.articleTitle = rs.getArticleTitle();
+					prev.articleId.title = rs.getArticleTitle();
 					prev.isPartOf = rs.getIsPartOf();
 				}
 				prev.langs.add(matchLang ? 0 : 1, rs.langs.get(0));

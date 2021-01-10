@@ -15,7 +15,6 @@ public class WikivoyageSearchResult {
 
 	TravelArticleIdentifier articleId;
 
-	String articleTitle;
 	String imageTitle;
 	String isPartOf;
 
