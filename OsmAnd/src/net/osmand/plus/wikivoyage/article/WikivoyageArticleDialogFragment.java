@@ -27,6 +27,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -309,10 +311,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		}
 		webViewClient.setArticle(article);
 		articleToolbarText.setText(article.getTitle());
-		article.setGpxFile(getMyApplication().getTravelHelper().getGpxFile(article, selectedLang));
-		if (article.getGpxFile() != null && article.getGpxFile().getPointsSize() > 0) {
+		GPXFile gpxFile = article.getGpxFile();
+		if (gpxFile != null && gpxFile.getPointsSize() > 0) {
 			trackButton.setVisibility(View.VISIBLE);
-			trackButton.setText(getString(R.string.shared_string_gpx_points) + " (" + article.getGpxFile().getPointsSize() + ")");
+			trackButton.setText(getString(R.string.shared_string_gpx_points) + " (" + gpxFile.getPointsSize() + ")");
 		} else {
 			trackButton.setVisibility(View.GONE);
 		}

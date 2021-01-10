@@ -43,6 +43,7 @@ public class TravelArticle {
 	String aggregatedPartOf;
 
 	long lastModified;
+	boolean gpxFileRead;
 
 	@NonNull
 	public TravelArticleIdentifier generateIdentifier() {
@@ -96,10 +97,6 @@ public class TravelArticle {
 
 	public GPXFile getGpxFile() {
 		return gpxFile;
-	}
-
-	public void setGpxFile(GPXFile gpxFile) {
-		this.gpxFile = gpxFile;
 	}
 
 	public String getRouteId() {
@@ -174,7 +171,6 @@ public class TravelArticle {
 		@Nullable File file;
 		double lat;
 		double lon;
-		@Nullable String title;
 		@Nullable String routeId;
 		@Nullable String routeSource;
 
@@ -198,7 +194,6 @@ public class TravelArticle {
 			file = article.file;
 			lat = article.lat;
 			lon = article.lon;
-			title = article.title;
 			routeId = article.routeId;
 			routeSource = article.routeSource;
 		}
@@ -207,7 +202,6 @@ public class TravelArticle {
 		public void writeToParcel(Parcel out, int flags) {
 			out.writeDouble(lat);
 			out.writeDouble(lon);
-			out.writeString(title);
 			out.writeString(routeId);
 			out.writeString(routeSource);
 			out.writeString(file != null ? file.getAbsolutePath() : null);
@@ -216,7 +210,6 @@ public class TravelArticle {
 		private void readFromParcel(Parcel in) {
 			lat = in.readDouble();
 			lon = in.readDouble();
-			title = in.readString();
 			routeId = in.readString();
 			routeSource = in.readString();
 			String filePath = in.readString();
@@ -241,14 +234,13 @@ public class TravelArticle {
 			TravelArticleIdentifier that = (TravelArticleIdentifier) o;
 			return areLatLonEqual(that.lat, that.lon, lat, lon) &&
 					Algorithms.objectEquals(file, that.file) &&
-					Algorithms.stringsEqual(title, that.title) &&
 					Algorithms.stringsEqual(routeId, that.routeId) &&
 					Algorithms.stringsEqual(routeSource, that.routeSource);
 		}
 
 		@Override
 		public int hashCode() {
-			return Algorithms.hash(file, lat, lon, title, routeId, routeSource);
+			return Algorithms.hash(file, lat, lon, routeId, routeSource);
 		}
 
 		private static boolean areLatLonEqual(double lat1, double lon1, double lat2, double lon2) {

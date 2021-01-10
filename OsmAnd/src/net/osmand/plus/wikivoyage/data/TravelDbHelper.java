@@ -448,7 +448,7 @@ public class TravelDbHelper implements TravelHelper {
 					}
 				}
 				if (matchLang) {
-					prev.articleId.title = rs.getArticleTitle();
+					prev.articleTitle = rs.getArticleTitle();
 					prev.isPartOf = rs.getIsPartOf();
 				}
 				prev.langs.add(matchLang ? 0 : 1, rs.langs.get(0));
@@ -681,11 +681,6 @@ public class TravelDbHelper implements TravelHelper {
 			LOG.error(e.getMessage(), e);
 		}
 		return res;
-	}
-
-	@Override
-	public GPXFile getGpxFile(@NonNull TravelArticle article, @Nullable String lang) {
-		return article.getGpxFile();
 	}
 
 	public String formatTravelBookName(File tb) {

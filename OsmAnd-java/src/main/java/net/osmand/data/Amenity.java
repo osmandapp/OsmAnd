@@ -208,7 +208,7 @@ public class Amenity extends MapObject {
 		return getAdditionalInfo(COLOR);
 	}
 
-	public String getIcon() {
+	public String getGpxIcon() {
 		return getAdditionalInfo(GPX_ICON);
 	}
 
@@ -262,17 +262,15 @@ public class Amenity extends MapObject {
 		return l;
 	}
 
-	public String getTagSuffix(String tagBegin) {
-		String tagSuffix = null;
+	public String getTagSuffix(String tagPrefix) {
 		for (String infoTag : getAdditionalInfoKeys()) {
-			if (infoTag.startsWith(tagBegin)) {
-				if (infoTag.length() > tagBegin.length()) {
-					tagSuffix = infoTag.substring(tagBegin.length());
-					break;
+			if (infoTag.startsWith(tagPrefix)) {
+				if (infoTag.length() > tagPrefix.length()) {
+					return infoTag.substring(tagPrefix.length());
 				}
 			}
 		}
-		return tagSuffix;
+		return null;
 	}
 
 	public String getTagContent(String tag, String lang) {
