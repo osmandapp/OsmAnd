@@ -33,7 +33,7 @@ public class WikivoyageSearchResult {
 	public WikivoyageSearchResult(String routeId, String articleTitle, String isPartOf, String imageTitle, @Nullable List<String> langs) {
 		TravelArticle article = new TravelArticle();
 		article.routeId = routeId;
-		this.articleTitle = articleTitle;
+		article.title = articleTitle;
 		this.articleId = article.generateIdentifier();
 		this.imageTitle = imageTitle;
 		this.isPartOf = isPartOf;
@@ -47,7 +47,7 @@ public class WikivoyageSearchResult {
 	}
 
 	public String getArticleTitle() {
-		return articleTitle;
+		return articleId.title;
 	}
 
 	public String getArticleRouteId() {

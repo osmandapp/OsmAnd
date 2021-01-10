@@ -171,6 +171,7 @@ public class TravelArticle {
 		@Nullable File file;
 		double lat;
 		double lon;
+		@Nullable String title;
 		@Nullable String routeId;
 		@Nullable String routeSource;
 
@@ -194,6 +195,7 @@ public class TravelArticle {
 			file = article.file;
 			lat = article.lat;
 			lon = article.lon;
+			title = article.title;
 			routeId = article.routeId;
 			routeSource = article.routeSource;
 		}
@@ -202,6 +204,7 @@ public class TravelArticle {
 		public void writeToParcel(Parcel out, int flags) {
 			out.writeDouble(lat);
 			out.writeDouble(lon);
+			out.writeString(title);
 			out.writeString(routeId);
 			out.writeString(routeSource);
 			out.writeString(file != null ? file.getAbsolutePath() : null);
@@ -210,6 +213,7 @@ public class TravelArticle {
 		private void readFromParcel(Parcel in) {
 			lat = in.readDouble();
 			lon = in.readDouble();
+			title = in.readString();
 			routeId = in.readString();
 			routeSource = in.readString();
 			String filePath = in.readString();

@@ -62,7 +62,7 @@ public class TravelObfHelper implements TravelHelper {
 	private final Collator collator;
 
 	private List<TravelArticle> popularArticles = new ArrayList<>();
-	private Map<TravelArticleIdentifier, Map<String, TravelArticle>> cachedArticles = new ConcurrentHashMap<>();
+	private final Map<TravelArticleIdentifier, Map<String, TravelArticle>> cachedArticles = new ConcurrentHashMap<>();
 	private final TravelLocalDataHelper localDataHelper;
 
 	public TravelObfHelper(OsmandApplication app) {
@@ -211,13 +211,15 @@ public class TravelObfHelper implements TravelHelper {
 					continue;
 				}
 				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
-						Algorithms.emptyIfNull(article.routeId), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-						getSearchFilter(false), new ResultMatcher<Amenity>() {
+						Algorithms.emptyIfNull(article.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+						getSearchFilter(true), new ResultMatcher<Amenity>() {
 
 							@Override
 							public boolean publish(Amenity amenity) {
 								String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-								if (lang.equals(amenityLang)) {
+								if (lang != null && lang.equals(amenityLang)
+										&& Algorithms.stringsEqual(article.routeId, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID, null)))
+										&& Algorithms.stringsEqual(article.routeSource, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE, null)))) {
 									pointList.add(amenity);
 								}
 								return false;
@@ -367,7 +369,7 @@ public class TravelObfHelper implements TravelHelper {
 		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 			@Override
 			public int compare(WikivoyageSearchResult res1, WikivoyageSearchResult res2) {
-				return collator.compare(res1.articleTitle, res2.articleTitle);
+				return collator.compare(res1.getArticleTitle(), res2.getArticleTitle());
 			}
 		});
 	}
@@ -520,27 +522,43 @@ public class TravelObfHelper implements TravelHelper {
 
 	private TravelArticle findArticleById(@NonNull final TravelArticleIdentifier articleId, final String lang) {
 		TravelArticle article = null;
-		boolean isDbArticle = articleId.file != null && articleId.file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);
-		List<Amenity> amenities = null;
+		final boolean isDbArticle = articleId.file != null && articleId.file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);
+		final List<Amenity> amenities = new ArrayList<>();
 		for (BinaryMapIndexReader reader : getReaders()) {
 			try {
 				if (articleId.file != null && !articleId.file.equals(reader.getFile()) && !isDbArticle) {
 					continue;
 				}
 				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
-						Algorithms.emptyIfNull(articleId.routeId), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-						getSearchFilter(false), null, null);
+						Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+						getSearchFilter(false), new ResultMatcher<Amenity>() {
+							boolean done = false;
 
-				req.setLimit(1);
+							@Override
+							public boolean publish(Amenity amenity) {
+								if (Algorithms.stringsEqual(articleId.routeId, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID, null)))
+										&& Algorithms.stringsEqual(articleId.routeSource, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE, null))) || isDbArticle) {
+									amenities.add(amenity);
+									done = true;
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return done;
+							}
+						}, null);
+
 				if (!Double.isNaN(articleId.lat)) {
 					req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS);
 					if (!Algorithms.isEmpty(articleId.routeId)) {
-						amenities = reader.searchPoiByName(req);
+						reader.searchPoiByName(req);
 					} else {
-						amenities = reader.searchPoi(req);
+						reader.searchPoi(req);
 					}
 				} else {
-					amenities = reader.searchPoi(req);
+					reader.searchPoi(req);
 				}
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
