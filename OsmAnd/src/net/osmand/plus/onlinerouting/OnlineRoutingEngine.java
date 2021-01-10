@@ -25,7 +25,6 @@ public class OnlineRoutingEngine {
 
 	private String stringKey;
 	private EngineType type;
-	private String customUrl;
 	private String vehicleKey;
 	private Map<String, String> params = new HashMap<>();
 
@@ -61,6 +60,7 @@ public class OnlineRoutingEngine {
 	}
 
 	public String getBaseUrl() {
+		String customUrl = getParameter(EngineParameter.CUSTOM_URL);
 		if (Algorithms.isEmpty(customUrl)) {
 			return type.getStandardUrl();
 		}

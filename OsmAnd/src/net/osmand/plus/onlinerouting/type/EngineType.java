@@ -29,11 +29,7 @@ public abstract class EngineType {
 	                                      OnlineRoutingEngine engine,
 	                                      List<LatLon> path);
 
-	public List<LatLon> parseResponse(@NonNull String content) throws JSONException {
-		return parseResponse(new JSONObject(content), content);
-	}
-
-	protected abstract List<LatLon> parseResponse(JSONObject obj, @NonNull String content) throws JSONException;
+	public abstract List<LatLon> parseResponse(@NonNull String content) throws JSONException;
 
 	public static EngineType[] values() {
 		EngineType[] types = new EngineType[] {

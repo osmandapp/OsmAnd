@@ -51,7 +51,8 @@ public class GraphhoperEngine extends EngineType {
 	}
 
 	@Override
-	protected List<LatLon> parseResponse(JSONObject obj, @NonNull String content) throws JSONException {
+	public List<LatLon> parseResponse(@NonNull String content) throws JSONException {
+		JSONObject obj = new JSONObject(content);
 		return GeoPolylineParserUtil.parse(
 				obj.getJSONArray("routes").getJSONObject(0).getString("geometry"),
 				GeoPolylineParserUtil.PRECISION_5);
