@@ -553,11 +553,20 @@ public class GeoPointParserUtil {
 			}
 
 			if (searchRequest != null) {
+				String searchPattern = Pattern.compile("(?:\\.|,|\\s+|\\+|[+-]?\\d+(?:\\.\\d+)?)").pattern();
+				String[] search = searchRequest.split(searchPattern);
+				if (search.length > 0) {
+					return new GeoParsedPoint(searchRequest);
+				}
 				final Matcher positionInSearchRequestMatcher =
 						positionPattern.matcher(searchRequest);
 				if (lat == 0.0 && lon == 0.0 && positionInSearchRequestMatcher.find()) {
-					lat = Double.valueOf(positionInSearchRequestMatcher.group(1));
-					lon = Double.valueOf(positionInSearchRequestMatcher.group(2));
+					double tempLat = Double.valueOf(positionInSearchRequestMatcher.group(1));
+					double tempLon = Double.valueOf(positionInSearchRequestMatcher.group(2));
+					if (tempLat >= -90 && tempLat <= 90 && tempLon >= -180 && tempLon <= 180) {
+						lat = tempLat;
+						lon = tempLon;
+					}
 				}
 			}
 
