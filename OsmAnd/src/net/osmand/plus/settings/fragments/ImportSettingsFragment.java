@@ -36,6 +36,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -50,6 +51,7 @@ import net.osmand.plus.settings.backend.backup.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.HistoryMarkersSettingsItem;
 import net.osmand.plus.settings.backend.backup.MapSourcesSettingsItem;
 import net.osmand.plus.settings.backend.backup.MarkersSettingsItem;
+import net.osmand.plus.settings.backend.backup.OnlineRoutingSettingsItem;
 import net.osmand.plus.settings.backend.backup.OsmEditsSettingsItem;
 import net.osmand.plus.settings.backend.backup.OsmNotesSettingsItem;
 import net.osmand.plus.settings.backend.backup.PoiUiFiltersSettingsItem;
@@ -347,6 +349,7 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
+		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
 		for (Object object : data) {
 			if (object instanceof ApplicationModeBean) {
 				appModeBeans.add((ApplicationModeBean) object);
@@ -384,6 +387,8 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 				}
 			} else if (object instanceof HistoryEntry) {
 				historyEntries.add((HistoryEntry) object);
+			} else if (object instanceof OnlineRoutingEngine) {
+				onlineRoutingEngines.add((OnlineRoutingEngine) object);
 			}
 		}
 		if (!appModeBeans.isEmpty()) {
@@ -434,6 +439,10 @@ public class ImportSettingsFragment extends BaseSettingsListFragment {
 		if (!historyEntries.isEmpty()) {
 			SearchHistorySettingsItem baseItem = getBaseItem(SettingsItemType.SEARCH_HISTORY, SearchHistorySettingsItem.class);
 			settingsItems.add(new SearchHistorySettingsItem(app, baseItem, historyEntries));
+		}
+		if (!onlineRoutingEngines.isEmpty()) {
+			OnlineRoutingSettingsItem baseItem = getBaseItem(SettingsItemType.ONLINE_ROUTING_ENGINES, OnlineRoutingSettingsItem.class);
+			settingsItems.add(new OnlineRoutingSettingsItem(app, baseItem, onlineRoutingEngines));
 		}
 		return settingsItems;
 	}

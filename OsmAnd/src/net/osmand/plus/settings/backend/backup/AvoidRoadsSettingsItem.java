@@ -93,11 +93,6 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	}
 
 	@Override
-	public boolean shouldReadOnCollecting() {
-		return true;
-	}
-
-	@Override
 	public boolean shouldShowDuplicates() {
 		return false;
 	}

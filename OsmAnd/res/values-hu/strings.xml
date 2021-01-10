@@ -4035,4 +4035,7 @@
     <string name="online_routing_example_hint">Az összes paraméterrel rendelkező URL így néz ki:</string>
     <string name="test_route_calculation">Útvonaltervezés kipróbálása</string>
     <string name="message_error_recheck_parameters">Hiba, ellenőrizze újra a paramétereket</string>
+    <string name="copy_address">Cím másolása</string>
+    <string name="online_routing_engine">Online útvonaltervező</string>
+    <string name="online_routing_engines">Online útvonaltervezők</string>
 </resources>

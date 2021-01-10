@@ -73,7 +73,7 @@ public class AnnounceTimeDistances {
 
 		// Do not play prepare: for pedestrian and slow transport
 		// same check as speed < 150/(90-22) m/s = 2.2 m/s = 8 km/h
-		// if (DEFAULT_SPEED < 2.3) {
+			// if (DEFAULT_SPEED < 2.3) {
 		if (PREPARE_DISTANCE_END - TURN_IN_DISTANCE < 150) {
 			PREPARE_DISTANCE_END = PREPARE_DISTANCE * 2;
 		}

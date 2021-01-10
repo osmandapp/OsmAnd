@@ -103,11 +103,6 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 		return false;
 	}
 
-	@Override
-	public boolean shouldReadOnCollecting() {
-		return true;
-	}
-
 	@NonNull
 	@Override
 	public MapMarker renameItem(@NonNull MapMarker item) {

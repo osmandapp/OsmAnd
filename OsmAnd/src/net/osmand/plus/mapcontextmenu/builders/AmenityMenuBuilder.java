@@ -35,6 +35,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.layers.POIMapLayer;
@@ -78,12 +79,18 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Amenity amenity) {
 		super(mapActivity);
 		this.amenity = amenity;
-		setShowNearestWiki(true, amenity.getId());
+		setAmenity(amenity);
+		setShowNearestWiki(true);
+		setShowNearestPoi(!amenity.getType().isWiki());
 		metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
 	}
 
 	@Override
 	protected void buildNearestWikiRow(View view) {
+	}
+
+	@Override
+	protected void buildNearestPoiRow(View view) {
 	}
 
 	private void buildRow(View view, int iconId, String text, String textPrefix,
@@ -664,9 +671,17 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if (processNearestWiki() && nearestWiki.size() > 0) {
 			AmenityInfoRow wikiInfo = new AmenityInfoRow(
 					"nearest_wiki", R.drawable.ic_plugin_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")", true,
-					getCollapsableWikiView(view.getContext(), true),
+					getCollapsableView(view.getContext(), true, nearestWiki),
 					0, false, false, false, 1000, null, false, false, false, 0);
 			buildAmenityRow(view, wikiInfo);
+		}
+
+		if (processNearestPoi() && nearestPoi.size() > 0) {
+			AmenityInfoRow poiInfo = new AmenityInfoRow(
+					"nearest_poi", AmenityMenuController.getRightIconId(amenity), null, app.getString(R.string.speak_poi) + " (" + nearestPoi.size() + ")", true,
+					getCollapsableView(view.getContext(), true, nearestPoi),
+					0, false, false, false, 1000, null, false, false, false, 0);
+			buildAmenityRow(view, poiInfo);
 		}
 
 		if (osmEditingEnabled && amenity.getId() != null

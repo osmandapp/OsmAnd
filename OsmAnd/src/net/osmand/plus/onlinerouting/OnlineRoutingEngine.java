@@ -3,6 +3,7 @@ package net.osmand.plus.onlinerouting;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -33,9 +34,11 @@ public class OnlineRoutingEngine {
 	public OnlineRoutingEngine(@NonNull String stringKey,
 	                           @NonNull EngineType type,
 	                           @NonNull String vehicleKey,
-	                           Map<String, String> params) {
+	                           @Nullable Map<String, String> params) {
 		this(stringKey, type, vehicleKey);
-		this.params = params;
+		if (!Algorithms.isEmpty(params)) {
+			this.params.putAll(params);
+		}
 	}
 
 	public OnlineRoutingEngine(@NonNull String stringKey,
@@ -109,8 +112,9 @@ public class OnlineRoutingEngine {
 	}
 
 	public static OnlineRoutingEngine createNewEngine(@NonNull EngineType type,
-	                                                  @NonNull String vehicleKey) {
-		return new OnlineRoutingEngine(generateKey(), type, vehicleKey);
+	                                                  @NonNull String vehicleKey,
+	                                                  @Nullable Map<String, String> params) {
+		return new OnlineRoutingEngine(generateKey(), type, vehicleKey, params);
 	}
 
 	public static OnlineRoutingEngine createTmpEngine(@NonNull EngineType type,

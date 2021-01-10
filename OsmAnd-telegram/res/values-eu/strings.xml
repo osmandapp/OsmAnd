@@ -267,4 +267,7 @@
     <string name="privacy_policy_agree">\"Jarraitu\" sakatuz, Telegram eta OsmAnd pribatutasun-politiken baldintzak onartzen dituzu.</string>
     <string name="privacy_policy_telegram_client">OsmAnd aztarnariak Telegram plataforma irekia erabiltzen duten bezeroetako bat da. Zure kontaktuek Telegram-eko beste edozein bezero erabil dezakete.</string>
     <string name="last_update_from_telegram_date">Telegram-eko azken eguneratzea: %1$s</string>
+    <string name="shared_string_export">Esportatu</string>
+    <string name="logcat_buffer">Logcat bufferra</string>
+    <string name="send_report">Bidali txostena</string>
 </resources>

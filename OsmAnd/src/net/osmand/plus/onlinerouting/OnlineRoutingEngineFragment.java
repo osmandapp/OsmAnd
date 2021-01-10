@@ -412,7 +412,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		if (isEditingMode()) {
 			engineToSave = new OnlineRoutingEngine(editedEngineKey, engine.type, engine.getVehicleKey());
 		} else {
-			engineToSave = OnlineRoutingEngine.createNewEngine(engine.type, engine.getVehicleKey());
+			engineToSave = OnlineRoutingEngine.createNewEngine(engine.type, engine.getVehicleKey(), null);
 		}
 
 		engineToSave.putParameter(EngineParameter.CUSTOM_NAME, engine.customName);

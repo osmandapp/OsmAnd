@@ -4031,7 +4031,7 @@
     <string name="shared_string_api_key">Ключ API</string>
     <string name="shared_string_server_url">URL-адреса сервера</string>
     <string name="shared_string_enter_param">Введіть параметр</string>
-    <string name="keep_it_empty_if_not">Залиште порожнім, якщо ні</string>
+    <string name="keep_it_empty_if_not">Залиште порожнім, якщо не маєте ключа API</string>
     <string name="online_routing_example_hint">URL-адреса з усіма параметрами виглядатиме так:</string>
     <string name="test_route_calculation">Тестове обчислення маршруту</string>
     <string name="routing_engine_vehicle_type_driving">Водіння</string>
@@ -4039,4 +4039,7 @@
     <string name="routing_engine_vehicle_type_bike">Велосипед</string>
     <string name="routing_engine_vehicle_type_car">Автомобіль</string>
     <string name="message_error_recheck_parameters">Помилка, повторно перевірте параметри</string>
+    <string name="copy_address">Копіювати адресу</string>
+    <string name="online_routing_engine">Мережний рушій маршрутизації</string>
+    <string name="online_routing_engines">Мережні рушії маршрутизації</string>
 </resources>
