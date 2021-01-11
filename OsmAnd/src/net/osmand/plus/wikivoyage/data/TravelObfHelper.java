@@ -217,9 +217,9 @@ public class TravelObfHelper implements TravelHelper {
 							@Override
 							public boolean publish(Amenity amenity) {
 								String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-								if (lang != null && lang.equals(amenityLang)
-										&& Algorithms.stringsEqual(article.routeId, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID, null)))
-										&& Algorithms.stringsEqual(article.routeSource, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE, null)))) {
+								if (Algorithms.stringsEqual(lang, amenityLang)
+										&& Algorithms.stringsEqual(article.routeId,
+										Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID, null)))) {
 									pointList.add(amenity);
 								}
 								return false;
@@ -231,16 +231,11 @@ public class TravelObfHelper implements TravelHelper {
 							}
 						}, null);
 
-				if (!Double.isNaN(article.lat)) {
-					req.setBBoxRadius(article.lat, article.lon, ARTICLE_SEARCH_RADIUS);
 					if (!Algorithms.isEmpty(article.title)) {
 						reader.searchPoiByName(req);
 					} else {
 						reader.searchPoi(req);
 					}
-				} else {
-					reader.searchPoi(req);
-				}
 			} catch (Exception e) {
 				LOG.error(e.getMessage(), e);
 			}
