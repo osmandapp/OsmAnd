@@ -4005,4 +4005,14 @@
     <string name="shared_string_last_used">Последний раз использовалось</string>
     <string name="routing_attr_allow_intermittent_description">Разрешить прерывистые водные пути</string>
     <string name="routing_attr_allow_intermittent_name">Разрешить прерывистые водные пути</string>
+    <string name="release_3_9">• Добавлена возможность экспорта и импорта всех данных, включая настройки, ресурсы, мои места.
+\n
+\n• Планирование маршрута: графики для сегментов трека с маршрутом, добавлена возможность создавать и редактировать несколько сегментов трека.
+\n
+\n• Добавлен OAuth метод аутентификации для OpenStreetMap, улучшен интерфейс диалоговых OSM.
+\n
+\n • Поддержка пользовательских цветов для избранного и путевых точек трека.
+\n
+\n</string>
+    <string name="copy_address">Скопировать адрес</string>
 </resources>
