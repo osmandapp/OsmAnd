@@ -117,6 +117,7 @@ public class OnlineRoutingHelper {
 		JSONObject obj = new JSONObject(content);
 
 		switch (engine.getType()) {
+
 			case GRAPHHOPER:
 				return GeoPolylineParserUtil.parse(
 						obj.getJSONArray("paths").getJSONObject(0).getString("points"),
