@@ -2,7 +2,7 @@ package net.osmand.plus.onlinerouting;
 
 public enum EngineType {
 
-	GRAPHHOPER("Graphhoper", "https://graphhopper.com/api/1/route"),
+	GRAPHHOPPER("Graphhopper", "https://graphhopper.com/api/1/route"),
 	OSRM("OSRM", "https://router.project-osrm.org/route/v1/"),
 	ORS("Openroute Service", "https://api.openrouteservice.org/v2/directions/");
 

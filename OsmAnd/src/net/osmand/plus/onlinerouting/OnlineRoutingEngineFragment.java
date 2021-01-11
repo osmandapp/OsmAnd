@@ -355,7 +355,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			} else if (typeCard.equals(card)) {
 				typeCard.setHeaderSubtitle(engine.type.getTitle());
 				typeCard.setEditedText(engine.getBaseUrl());
-				if (engine.type == EngineType.GRAPHHOPER || engine.type == EngineType.ORS) {
+				if (engine.type == EngineType.GRAPHHOPPER || engine.type == EngineType.ORS) {
 					apiKeyCard.show();
 				} else {
 					apiKeyCard.hide();
@@ -414,7 +414,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 		engineToSave.putParameter(EngineParameter.CUSTOM_NAME, engine.customName);
 		engineToSave.putParameter(EngineParameter.CUSTOM_URL, engine.customServerUrl);
-		if (engine.type == EngineType.GRAPHHOPER || engine.type == EngineType.ORS) {
+		if (engine.type == EngineType.GRAPHHOPPER || engine.type == EngineType.ORS) {
 			engineToSave.putParameter(EngineParameter.API_KEY, engine.apiKey);
 		}
 
@@ -448,7 +448,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 							try {
 								JSONObject obj = new JSONObject(response);
 
-								if (type == EngineType.GRAPHHOPER) {
+								if (type == EngineType.GRAPHHOPPER) {
 									resultOk = obj.has("paths");
 								} else if (type == EngineType.OSRM) {
 									resultOk = obj.has("routes");
