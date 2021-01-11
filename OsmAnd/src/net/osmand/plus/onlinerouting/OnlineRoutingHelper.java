@@ -67,7 +67,7 @@ public class OnlineRoutingHelper {
 		String apiKey = engine.getParameter(EngineParameter.API_KEY);
 		switch (engine.getType()) {
 
-			case GRAPHHOPER:
+			case GRAPHHOPPER:
 				sb.append("?");
 				for (LatLon point : path) {
 					sb.append("point=")
@@ -118,7 +118,7 @@ public class OnlineRoutingHelper {
 
 		switch (engine.getType()) {
 
-			case GRAPHHOPER:
+			case GRAPHHOPPER:
 				return GeoPolylineParserUtil.parse(
 						obj.getJSONArray("paths").getJSONObject(0).getString("points"),
 						GeoPolylineParserUtil.PRECISION_5);
