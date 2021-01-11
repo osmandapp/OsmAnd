@@ -8,12 +8,13 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
 import android.os.Handler
+import androidx.core.content.ContextCompat
 import net.osmand.PlatformUtil
-import net.osmand.telegram.ui.TrackerLogcatActivity
 import net.osmand.telegram.helpers.*
 import net.osmand.telegram.helpers.OsmandAidlHelper.OsmandHelperListener
 import net.osmand.telegram.helpers.OsmandAidlHelper.UpdatesListener
 import net.osmand.telegram.notifications.NotificationHelper
+import net.osmand.telegram.ui.TrackerLogcatActivity
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.UiUtils
 import java.io.File
@@ -146,35 +147,21 @@ class TelegramApplication : Application() {
 		return internetConnectionAvailable
 	}
 
-	private fun startTelegramService(intent: Int, serviceOffInterval: Long = 0) {
+	private fun startTelegramService(intent: Int) {
 		var i = intent
-		var interval = serviceOffInterval
 		val serviceIntent = Intent(this, TelegramService::class.java)
-
 		val telegramService = telegramService
 		if (telegramService != null) {
 			i = intent or telegramService.usedBy
-			interval = if (TelegramService.isOffIntervalDepended(intent)) {
-				Math.min(telegramService.serviceOffInterval, interval)
-			} else {
-				telegramService.serviceOffInterval
-			}
 			telegramService.stopSelf()
 		}
-
 		serviceIntent.putExtra(TelegramService.USAGE_INTENT, i)
-		serviceIntent.putExtra(TelegramService.USAGE_OFF_INTERVAL, interval)
 		serviceIntent.putExtra(TelegramService.SEND_LOCATION_INTERVAL, settings.sendMyLocInterval)
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			startForegroundService(serviceIntent)
-		} else {
-			startService(serviceIntent)
-		}
+		ContextCompat.startForegroundService(this, serviceIntent)
 	}
 
 	fun startMyLocationService() {
-		val interval = settings.sendMyLocInterval
-		startTelegramService(TelegramService.USED_BY_MY_LOCATION, TelegramService.normalizeOffInterval(interval))
+		startTelegramService(TelegramService.USED_BY_MY_LOCATION)
 	}
 
 	fun stopMyLocationService() {
