@@ -31,9 +31,6 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.onlinerouting.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.onlinerouting.OnlineRoutingEngine.EngineParameter;
-import net.osmand.plus.onlinerouting.type.EngineType;
-import net.osmand.plus.onlinerouting.type.GraphhoperEngine;
-import net.osmand.plus.onlinerouting.type.OsrmEngine;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
@@ -190,7 +187,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 					@Override
 					public boolean processResult(HorizontalSelectionItem result) {
 						EngineType type = (EngineType) result.getObject();
-						if (!Algorithms.objectEquals(engine.type.getStringKey(), type.getStringKey())) {
+						if (engine.type != type) {
 							engine.type = type;
 							updateCardViews(nameCard, typeCard, exampleCard);
 							return true;
@@ -358,7 +355,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			} else if (typeCard.equals(card)) {
 				typeCard.setHeaderSubtitle(engine.type.getTitle());
 				typeCard.setEditedText(engine.getBaseUrl());
-				if (engine.type instanceof GraphhoperEngine) {
+				if (engine.type == EngineType.GRAPHHOPER || engine.type == EngineType.ORS) {
 					apiKeyCard.show();
 				} else {
 					apiKeyCard.hide();
@@ -417,7 +414,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 		engineToSave.putParameter(EngineParameter.CUSTOM_NAME, engine.customName);
 		engineToSave.putParameter(EngineParameter.CUSTOM_URL, engine.customServerUrl);
-		if (engine.type instanceof GraphhoperEngine) {
+		if (engine.type == EngineType.GRAPHHOPER || engine.type == EngineType.ORS) {
 			engineToSave.putParameter(EngineParameter.API_KEY, engine.apiKey);
 		}
 
@@ -433,10 +430,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		path.add(selectedLocation.getCityCenterLatLon());
 		path.add(selectedLocation.getCityAirportLatLon());
 		OnlineRoutingEngine tmpEngine =
-				OnlineRoutingEngine.createTmpEngine(engine.type, engine.getVehicleKey());
+				OnlineRoutingEngine.createNewEngine(engine.type, engine.getVehicleKey(), null);
 		tmpEngine.putParameter(EngineParameter.CUSTOM_URL, engine.customServerUrl);
 		tmpEngine.putParameter(EngineParameter.API_KEY, engine.apiKey);
-		return tmpEngine.createFullUrl(path);
+		return helper.createFullUrl(tmpEngine, path);
 	}
 
 	private void testEngineWork() {
@@ -451,10 +448,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 							try {
 								JSONObject obj = new JSONObject(response);
 
-								if (type instanceof GraphhoperEngine) {
+								if (type == EngineType.GRAPHHOPER) {
 									resultOk = obj.has("paths");
-								} else if (type instanceof OsrmEngine) {
+								} else if (type == EngineType.OSRM) {
 									resultOk = obj.has("routes");
+								} else if (type == EngineType.ORS) {
+									resultOk = obj.has("features");
 								}
 							} catch (JSONException e) {
 
@@ -492,7 +491,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 	private void saveState(Bundle outState) {
 		outState.putString(ENGINE_NAME_KEY, engine.customName);
-		outState.putString(ENGINE_SERVER_KEY, engine.type.getStringKey());
+		outState.putString(ENGINE_SERVER_KEY, engine.type.name());
 		outState.putString(ENGINE_SERVER_URL_KEY, engine.customServerUrl);
 		outState.putString(ENGINE_VEHICLE_TYPE_KEY, engine.vehicleType.name());
 		outState.putString(ENGINE_CUSTOM_VEHICLE_KEY, engine.customVehicleKey);

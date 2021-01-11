@@ -5,13 +5,10 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.data.LatLon;
 import net.osmand.plus.R;
-import net.osmand.plus.onlinerouting.type.EngineType;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class OnlineRoutingEngine {
@@ -29,8 +26,6 @@ public class OnlineRoutingEngine {
 	private String vehicleKey;
 	private Map<String, String> params = new HashMap<>();
 
-	private OnlineRoutingEngine() {};
-
 	public OnlineRoutingEngine(@NonNull String stringKey,
 	                           @NonNull EngineType type,
 	                           @NonNull String vehicleKey,
@@ -44,12 +39,7 @@ public class OnlineRoutingEngine {
 	public OnlineRoutingEngine(@NonNull String stringKey,
 	                           @NonNull EngineType type,
 	                           @NonNull String vehicleKey) {
-		this(type, vehicleKey);
 		this.stringKey = stringKey;
-	}
-
-	private OnlineRoutingEngine(@NonNull EngineType type,
-	                            @NonNull String vehicleKey) {
 		this.type = type;
 		this.vehicleKey = vehicleKey;
 	}
@@ -95,10 +85,6 @@ public class OnlineRoutingEngine {
 		}
 	}
 
-	public String createFullUrl(@NonNull List<LatLon> path) {
-		return type.createFullUrl(this, path);
-	}
-
 	private String getStandardName(@NonNull Context ctx) {
 		return getStandardName(ctx, type, vehicleKey);
 	}
@@ -115,11 +101,6 @@ public class OnlineRoutingEngine {
 	                                                  @NonNull String vehicleKey,
 	                                                  @Nullable Map<String, String> params) {
 		return new OnlineRoutingEngine(generateKey(), type, vehicleKey, params);
-	}
-
-	public static OnlineRoutingEngine createTmpEngine(@NonNull EngineType type,
-	                                                  @NonNull String vehicleKey) {
-		return new OnlineRoutingEngine(type, vehicleKey);
 	}
 
 	private static String generateKey() {
