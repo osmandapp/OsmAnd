@@ -4046,4 +4046,8 @@
     <string name="copy_address">Kopii adreson</string>
     <string name="online_routing_engine">Enreta navigilo</string>
     <string name="online_routing_engines">Enretaj navigiloj</string>
+    <string name="shared_string_folders">Dosierujoj</string>
+    <string name="select_folder">Elekti dosierujon</string>
+    <string name="select_folder_descr">Elekti dosierujon aŭ krei novan</string>
+    <string name="shared_string_empty">Malplena</string>
 </resources>
