@@ -10,13 +10,14 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.profiles.RoutingProfileDataObject;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.profiles.SelectProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
@@ -26,7 +27,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.IS_PROFILE_IMPORTED_ARG;
+import static net.osmand.plus.onlinerouting.OnlineRoutingEngine.ONLINE_ROUTING_ENGINE_PREFIX;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DIALOG_MODE_KEY;
 
@@ -35,13 +37,13 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	public static final String TAG = NavigationFragment.class.getSimpleName();
 	public static final String NAVIGATION_TYPE = "navigation_type";
 
-	private Map<String, RoutingProfileDataObject> routingProfileDataObjects;
+	private Map<String, ProfileDataObject> routingProfileDataObjects;
 	private Preference navigationType;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		routingProfileDataObjects = ProfileDataUtils.getRoutingProfiles(app);
+		updateRoutingProfilesDataObjects();
 		setupOnBackPressedCallback();
 	}
 
@@ -90,7 +92,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	private void setupNavigationTypePref() {
 		String routingProfileKey = getSelectedAppMode().getRoutingProfile();
 		if (!Algorithms.isEmpty(routingProfileKey)) {
-			RoutingProfileDataObject routingProfileDataObject = routingProfileDataObjects.get(routingProfileKey);
+			ProfileDataObject routingProfileDataObject = routingProfileDataObjects.get(routingProfileKey);
 			if (routingProfileDataObject != null) {
 				navigationType.setSummary(routingProfileDataObject.getName());
 				navigationType.setIcon(getActiveIcon(routingProfileDataObject.getIconRes()));
@@ -132,12 +134,16 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		return false;
 	}
 
+	private void updateRoutingProfilesDataObjects() {
+		routingProfileDataObjects = ProfileDataUtils.getRoutingProfiles(app);
+	}
+
 	void updateRoutingProfile(String profileKey) {
-		RoutingProfileDataObject selectedRoutingProfileDataObject = routingProfileDataObjects.get(profileKey);
+		ProfileDataObject selectedRoutingProfileDataObject = routingProfileDataObjects.get(profileKey);
 		if (profileKey == null || selectedRoutingProfileDataObject == null) {
 			return;
 		}
-		for (Map.Entry<String, RoutingProfileDataObject> rp : routingProfileDataObjects.entrySet()) {
+		for (Map.Entry<String, ProfileDataObject> rp : routingProfileDataObjects.entrySet()) {
 			boolean selected = profileKey.equals(rp.getKey());
 			rp.getValue().setSelected(selected);
 		}
@@ -152,6 +158,8 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 			routeService = RouteProvider.RouteService.DIRECT_TO;
 		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
 			routeService = RouteProvider.RouteService.BROUTER;
+		} else if (profileKey.startsWith(ONLINE_ROUTING_ENGINE_PREFIX)) {
+			routeService = RouteService.ONLINE;
 		} else {
 			routeService = RouteProvider.RouteService.OSMAND;
 		}
@@ -174,8 +182,8 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 
 	@Override
 	public void onProfileSelected(Bundle args) {
-		if (args.getBoolean(IS_PROFILE_IMPORTED_ARG)) {
-			routingProfileDataObjects = ProfileDataUtils.getRoutingProfiles(app);
+		if (args.getBoolean(PROFILES_LIST_UPDATED_ARG)) {
+			updateRoutingProfilesDataObjects();
 		}
 		updateRoutingProfile(args.getString(PROFILE_KEY_ARG));
 	}

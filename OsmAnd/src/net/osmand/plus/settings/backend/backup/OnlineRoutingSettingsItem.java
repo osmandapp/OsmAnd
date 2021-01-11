@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
-import net.osmand.plus.onlinerouting.OnlineRoutingEngine.EngineParameterType;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngine.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 
 import org.json.JSONException;
@@ -93,8 +93,8 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 		int number = 0;
 		while (true) {
 			number++;
-			OnlineRoutingEngine renamedItem = OnlineRoutingEngine.createNewEngine(item.getServerType(), item.getVehicleKey(), item.getParams());
-			renamedItem.putParameter(EngineParameterType.CUSTOM_NAME, renamedItem.getName(app) + "_" + number);
+			OnlineRoutingEngine renamedItem = OnlineRoutingEngine.createNewEngine(item.getType(), item.getVehicleKey(), item.getParams());
+			renamedItem.putParameter(EngineParameter.CUSTOM_NAME, renamedItem.getName(app) + "_" + number);
 			if (!isDuplicate(renamedItem)) {
 				return renamedItem;
 			}

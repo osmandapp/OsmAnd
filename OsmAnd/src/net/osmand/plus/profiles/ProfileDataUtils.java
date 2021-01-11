@@ -22,6 +22,7 @@ import java.util.Map;
 public class ProfileDataUtils {
 
 	public static final String OSMAND_NAVIGATION = "osmand_navigation";
+	public static final String ONLINE_NAVIGATION = "online_navigation";
 
 	public static List<ProfileDataObject> getDataObjects(OsmandApplication app,
 	                                                     List<ApplicationMode> appModes) {
@@ -48,9 +49,9 @@ public class ProfileDataUtils {
 		return description;
 	}
 
-	public static List<RoutingProfileDataObject> getSortedRoutingProfiles(OsmandApplication app) {
-		List<RoutingProfileDataObject> result = new ArrayList<>();
-		Map<String, List<RoutingProfileDataObject>> routingProfilesByFileNames = getRoutingProfilesByFileNames(app);
+	public static List<ProfileDataObject> getSortedRoutingProfiles(OsmandApplication app) {
+		List<ProfileDataObject> result = new ArrayList<>();
+		Map<String, List<ProfileDataObject>> routingProfilesByFileNames = getRoutingProfilesByFileNames(app);
 		List<String> fileNames = new ArrayList<>(routingProfilesByFileNames.keySet());
 		Collections.sort(fileNames, new Comparator<String>() {
 			@Override
@@ -59,7 +60,7 @@ public class ProfileDataUtils {
 			}
 		});
 		for (String fileName : fileNames) {
-			List<RoutingProfileDataObject> routingProfilesFromFile = routingProfilesByFileNames.get(fileName);
+			List<ProfileDataObject> routingProfilesFromFile = routingProfilesByFileNames.get(fileName);
 			if (routingProfilesFromFile != null) {
 				Collections.sort(routingProfilesFromFile);
 				result.addAll(routingProfilesFromFile);
@@ -77,14 +78,20 @@ public class ProfileDataUtils {
 		return objects;
 	}
 
-	public static Map<String, List<RoutingProfileDataObject>> getRoutingProfilesByFileNames(OsmandApplication app) {
-		Map<String, List<RoutingProfileDataObject>> result = new HashMap<>();
-		for (final RoutingProfileDataObject profile : getRoutingProfiles(app).values()) {
-			String fileName = profile.getFileName() != null ? profile.getFileName() : OSMAND_NAVIGATION;
+	public static Map<String, List<ProfileDataObject>> getRoutingProfilesByFileNames(OsmandApplication app) {
+		Map<String, List<ProfileDataObject>> result = new HashMap<>();
+		for (final ProfileDataObject profile : getRoutingProfiles(app).values()) {
+			String fileName = null;
+			if (profile instanceof RoutingProfileDataObject) {
+				fileName = ((RoutingProfileDataObject) profile).getFileName();
+			} else if (profile instanceof OnlineRoutingEngineDataObject) {
+				fileName = ONLINE_NAVIGATION;
+			}
+			fileName = fileName != null ? fileName : OSMAND_NAVIGATION;
 			if (result.containsKey(fileName)) {
 				result.get(fileName).add(profile);
 			} else {
-				result.put(fileName, new ArrayList<RoutingProfileDataObject>() {
+				result.put(fileName, new ArrayList<ProfileDataObject>() {
 					{ add(profile); }
 				});
 			}
@@ -92,8 +99,8 @@ public class ProfileDataUtils {
 		return result;
 	}
 
-	public static Map<String, RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
-		Map<String, RoutingProfileDataObject> profilesObjects = new HashMap<>();
+	public static Map<String, ProfileDataObject> getRoutingProfiles(OsmandApplication context) {
+		Map<String, ProfileDataObject> profilesObjects = new HashMap<>();
 		profilesObjects.put(RoutingProfilesResources.STRAIGHT_LINE_MODE.name(), new RoutingProfileDataObject(
 				RoutingProfilesResources.STRAIGHT_LINE_MODE.name(),
 				context.getString(RoutingProfilesResources.STRAIGHT_LINE_MODE.getStringRes()),
@@ -119,11 +126,14 @@ public class ProfileDataUtils {
 		for (RoutingConfiguration.Builder builder : context.getAllRoutingConfigs()) {
 			collectRoutingProfilesFromConfig(context, builder, profilesObjects, disabledRouterNames);
 		}
+		for (OnlineRoutingEngineDataObject onlineEngine : getOnlineRoutingProfiles(context)) {
+			profilesObjects.put(onlineEngine.getStringKey(), onlineEngine);
+		}
 		return profilesObjects;
 	}
 
 	private static void collectRoutingProfilesFromConfig(OsmandApplication app, RoutingConfiguration.Builder builder,
-	                                                     Map<String, RoutingProfileDataObject> profilesObjects, List<String> disabledRouterNames) {
+	                                                     Map<String, ProfileDataObject> profilesObjects, List<String> disabledRouterNames) {
 		for (Map.Entry<String, GeneralRouter> entry : builder.getAllRouters().entrySet()) {
 			String routerKey = entry.getKey();
 			GeneralRouter router = entry.getValue();
