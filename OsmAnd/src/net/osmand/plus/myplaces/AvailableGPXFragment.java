@@ -13,8 +13,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +25,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -82,6 +79,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -102,22 +100,20 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.OPEN_GPX_REQUEST;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-import static net.osmand.util.Algorithms.collectDirs;
 import static net.osmand.util.Algorithms.formatDuration;
 import static net.osmand.util.Algorithms.objectEquals;
 import static net.osmand.util.Algorithms.removeAllFiles;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
+		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback {
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, RenameCallback {
 
-	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 	public static final int SEARCH_ID = -1;
 	// public static final int ACTION_ID = 0;
 	// protected static final int DELETE_ACTION_ID = 1;
@@ -796,29 +792,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	private void moveGpx(final GpxInfo info) {
-
-		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(app);
-		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
-
-		final List<File> dirs = new ArrayList<>();
-		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs, info.file.getParentFile());
-		if (!info.file.getParentFile().equals(app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
-			dirs.add(0, app.getAppPath(IndexConstants.GPX_INDEX_DIR));
-		}
-		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getPath();
-		int i = 0;
-		for (File dir : dirs) {
-			String dirName = dir.getPath();
-			if (dirName.startsWith(gpxDir)) {
-				if (dirName.length() == gpxDir.length()) {
-					dirName = dir.getName();
-				} else {
-					dirName = dirName.substring(gpxDir.length() + 1);
-				}
-			}
-			menuAdapter.addItem(itemBuilder.setTitle(capitalizeFirstLetter(dirName))
-					.setIcon(R.drawable.ic_action_folder_stroke).setTag(i).createItem());
-			i++;
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			MoveGpxFileBottomSheet.showInstance(activity.getSupportFragmentManager(), this, info.file.getAbsolutePath(), false);
 		}
 		menuAdapter.addItem(itemBuilder.setTitleId(R.string.add_new_folder, app)
 				.setIcon(R.drawable.ic_zoom_in).setTag(-1).createItem());
@@ -917,6 +893,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.create().show();
+
 	}
 
 	@Override
@@ -943,6 +920,21 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
+	public void onFileMove(@NonNull File src, @NonNull File dest) {
+		File destFolder = dest.getParentFile();
+		if (destFolder != null && !destFolder.exists() && !destFolder.mkdirs()) {
+			app.showToastMessage(R.string.file_can_not_be_moved);
+		} else if (dest.exists()) {
+			app.showToastMessage(R.string.file_with_name_already_exists);
+		} else if (src.renameTo(dest)) {
+			app.getGpxDbHelper().rename(src, dest);
+			asyncLoader = new LoadGpxTask();
+			asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
+		} else {
+			app.showToastMessage(R.string.file_can_not_be_moved);
+		}
+  }
+      
 	public void renamedTo(File file) {
 		reloadTracks();
 	}

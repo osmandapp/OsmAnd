@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,13 +17,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -35,12 +39,17 @@ import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.measurementtool.adapter.FolderListAdapter;
+import net.osmand.plus.myplaces.MoveGpxFileBottomSheet;
+import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment implements OnTrackFileMoveListener {
 
 	public static final String TAG = SaveAsNewTrackBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SaveAsNewTrackBottomSheetDialogFragment.class);
@@ -52,19 +61,24 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	public static final String SOURCE_FOLDER_NAME_KEY = "source_folder_name_key";
 	public static final String SHOW_SIMPLIFIED_BUTTON_KEY = "show_simplified_button_key";
 
-	private boolean showOnMap;
-	private boolean simplifiedTrack;
+	private OsmandApplication app;
+
+	private FolderListAdapter adapter;
+	private TextInputLayout nameTextBox;
+	private RecyclerView recyclerView;
+
 	private String fileName;
 	private String sourceFileName;
 	private String sourceFolderName;
 	private String folderName;
+	private boolean showOnMap;
+	private boolean simplifiedTrack;
 	private boolean rightButtonEnabled = true;
 	private boolean showSimplifiedButton = true;
-	private TextInputLayout nameTextBox;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
+		app = getMyApplication();
 		if (app == null) {
 			return;
 		}
@@ -118,12 +132,30 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 
-		FolderListAdapter adapter = new FolderListAdapter(app, nightMode, folderName);
+		View selectFolderView = View.inflate(UiUtilities.getThemedContext(app, nightMode), R.layout.select_folder_row, null);
+		selectFolderView.findViewById(R.id.select_folder_button).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					File dest = getFile(app, folderName, fileName);
+					MoveGpxFileBottomSheet.showInstance(activity.getSupportFragmentManager(),
+							SaveAsNewTrackBottomSheetDialogFragment.this, dest.getAbsolutePath(), usedOnMap);
+				}
+			}
+		});
+		BaseBottomSheetItem selectFolderItem = new BaseBottomSheetItem.Builder()
+				.setCustomView(selectFolderView)
+				.create();
+		items.add(selectFolderItem);
+
+		adapter = new FolderListAdapter(app, nightMode, folderName);
+		adapter.setFolders(getFolders());
 		if (adapter.getItemCount() > 0) {
 			adapter.setListener(createFolderSelectListener());
 			View view = View.inflate(UiUtilities.getThemedContext(app, nightMode), R.layout.bottom_sheet_item_recyclerview,
 					null);
-			View recyclerView = view.findViewById(R.id.recycler_view);
+			recyclerView = view.findViewById(R.id.recycler_view);
 			recyclerView.setPadding(contentPaddingHalf, 0, contentPaddingHalf, 0);
 			BaseBottomSheetItem scrollItem = new HorizontalRecyclerBottomSheetItem.Builder()
 					.setAdapter(adapter)
@@ -191,7 +223,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
 					R.drawable.bg_select_group_button_outline);
 			if (background != null) {
-				int highlightColor = ContextCompat.getColor(app,nightMode ?
+				int highlightColor = ContextCompat.getColor(app, nightMode ?
 						R.color.list_background_color_dark : R.color.activity_background_color_light);
 				int strokedColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
 						R.attr.stroked_buttons_and_links_outline);
@@ -234,7 +266,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment, String folderName,
-	                                String fileName, boolean showSimplifiedButton, boolean showOnMap) {
+									String fileName, boolean showSimplifiedButton, boolean showOnMap) {
 		try {
 			if (!fm.isStateSaved()) {
 				SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
@@ -284,7 +316,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					}
 				}
 			}
-			GPXUtilities.GPXFile gpxFile = GPXUtilities.loadGPXFile(dest);
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(dest);
 			if (gpxFile.error != null) {
 				return;
 			}
@@ -329,6 +361,38 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			return file.exists();
 		}
 		return false;
+	}
+
+	private List<String> getFolders() {
+		List<File> dirs = new ArrayList<>();
+		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		dirs.add(gpxDir);
+		Algorithms.collectDirs(gpxDir, dirs);
+		List<String> dirItems = new ArrayList<>();
+		for (File dir : dirs) {
+			dirItems.add(dir.getName());
+		}
+		return dirItems;
+	}
+
+	@Override
+	public void onFileMove(@NonNull File src, @NonNull File dest) {
+		File destFolder = dest.getParentFile();
+		if (destFolder != null) {
+			folderName = destFolder.getName();
+			boolean newFolder = destFolder.mkdirs();
+			List<String> folders = getFolders();
+			if (newFolder) {
+				adapter.setFolders(folders);
+			}
+			adapter.setSelectedFolderName(folderName);
+			adapter.notifyDataSetChanged();
+
+			int position = folders.indexOf(folderName);
+			if (position != -1) {
+				recyclerView.scrollToPosition(position);
+			}
+		}
 	}
 
 	@Override
