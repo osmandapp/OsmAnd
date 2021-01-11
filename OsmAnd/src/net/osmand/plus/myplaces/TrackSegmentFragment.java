@@ -1,6 +1,8 @@
 package net.osmand.plus.myplaces;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -23,6 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -54,6 +57,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrackSegmentFragment extends OsmAndListFragment implements TrackBitmapDrawerListener, SegmentActionsListener {
+
+	public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
 	private OsmandApplication app;
 	private TrackDisplayHelper displayHelper;
@@ -134,8 +139,26 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							}
 						});
 				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-			}
-			if (gpxFile.showCurrentTrack) {
+				MenuItem deleteItem = menu.add(R.string.shared_string_delete)
+						.setIcon(app.getUIUtilities().getIcon((R.drawable.ic_action_delete_dark)))
+						.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								GPXFile gpx = displayHelper.getGpx();
+								FragmentActivity activity = getActivity();
+								if (activity != null && gpx != null) {
+									if (FileUtils.removeGpxFile(app, new File((gpx.path)))) {
+										Intent intent = new Intent();
+										intent.putExtra(TRACK_DELETED_KEY, true);
+										activity.setResult(Activity.RESULT_OK, intent);
+										activity.onBackPressed();
+									}
+								}
+								return true;
+							}
+						});
+				deleteItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+			} else if (gpxFile.showCurrentTrack) {
 				MenuItem item = menu.add(R.string.shared_string_refresh).setIcon(R.drawable.ic_action_refresh_dark)
 						.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override

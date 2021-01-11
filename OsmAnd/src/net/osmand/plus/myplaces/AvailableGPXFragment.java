@@ -84,8 +84,8 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -105,6 +105,7 @@ import java.util.regex.Pattern;
 
 import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.OPEN_GPX_REQUEST;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 import static net.osmand.util.Algorithms.collectDirs;
@@ -426,12 +427,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, f.getAbsolutePath());
 		}
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		a.startActivity(newIntent);
+		a.startActivityForResult(newIntent, OPEN_GPX_REQUEST);
 	}
 
 	public void reloadTracks() {
 		asyncLoader = new LoadGpxTask();
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
+	}
+
+	public void resetTracksLoader() {
+		asyncLoader = null;
 	}
 
 	@Override
@@ -1711,20 +1716,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		GpxInfo item = allGpxAdapter.getChild(groupPosition, childPosition);
 
 		if (!selectionMode) {
-			Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
-			// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			if (item.currentlyRecordingTrack) {
-				newIntent.putExtra(TrackActivity.CURRENT_RECORDING, true);
-			} else {
-				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, item.file.getAbsolutePath());
-			}
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(newIntent);
-			// item.setExpanded(!item.isExpanded());
-			// if (item.isExpanded()) {
-			// descriptionLoader = new LoadLocalIndexDescriptionTask();
-			// descriptionLoader.execute(item);
-			// }
+			openTrack(getActivity(), item.file);
 		} else {
 			if (!selectedItems.contains(item)) {
 				selectedItems.add(item);
