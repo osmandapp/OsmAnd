@@ -4041,4 +4041,8 @@
     <string name="copy_address">Copiar endereço</string>
     <string name="online_routing_engine">Motor de encaminhamento online</string>
     <string name="online_routing_engines">Mecanismos de roteamento online</string>
+    <string name="shared_string_folders">Pastas</string>
+    <string name="select_folder">Selecione a pasta</string>
+    <string name="select_folder_descr">Selecione a pasta ou adicione uma nova</string>
+    <string name="shared_string_empty">Vazio</string>
 </resources>
