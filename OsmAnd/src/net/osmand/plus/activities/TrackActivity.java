@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
@@ -45,6 +46,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.TrackDisplayHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -83,10 +85,35 @@ public class TrackActivity extends TabActivity {
 			return;
 		}
 		displayHelper = new TrackDisplayHelper(app);
-		if (intent.hasExtra(TRACK_FILE_NAME)) {
+		if (savedInstanceState != null) {
+			String path = savedInstanceState.getString(TRACK_FILE_NAME);
+			if (!Algorithms.isEmpty(path)) {
+				displayHelper.setFile(new File(path));
+			}
+		} else if (intent.hasExtra(TRACK_FILE_NAME)) {
 			displayHelper.setFile(new File(intent.getStringExtra(TRACK_FILE_NAME)));
 		}
 
+		setupActionBar();
+		if (intent.hasExtra(OPEN_POINTS_TAB)
+				|| (savedInstanceState != null && savedInstanceState.getBoolean(OPEN_POINTS_TAB, false))) {
+			openPointsTab = true;
+		}
+		if (intent.hasExtra(OPEN_TRACKS_LIST)) {
+			openTracksList = true;
+		}
+		setContentView(R.layout.track_content);
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+		File file = getFile();
+		outState.putString(TRACK_FILE_NAME, file != null ? file.getAbsolutePath() : null);
+		outState.putBoolean(CURRENT_RECORDING, file == null);
+		super.onSaveInstanceState(outState, outPersistentState);
+	}
+
+	public void setupActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			if (getFile() != null) {
@@ -97,14 +124,6 @@ public class TrackActivity extends TabActivity {
 			}
 			actionBar.setElevation(AndroidUtils.dpToPx(app, 4f));
 		}
-		if (intent.hasExtra(OPEN_POINTS_TAB)
-				|| (savedInstanceState != null && savedInstanceState.getBoolean(OPEN_POINTS_TAB, false))) {
-			openPointsTab = true;
-		}
-		if (intent.hasExtra(OPEN_TRACKS_LIST)) {
-			openTracksList = true;
-		}
-		setContentView(R.layout.track_content);
 	}
 
 	public TrackDisplayHelper getDisplayHelper() {
