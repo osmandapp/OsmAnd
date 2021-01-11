@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Set;
 
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.IS_PROFILE_IMPORTED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
 public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback{
@@ -119,8 +119,9 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			return true;
 		} else if (CREATE_PROFILE.equals(prefId)) {
 			if (getActivity() != null) {
-				SelectProfileBottomSheet.showInstance(getActivity(),
-						DialogMode.BASE_PROFILE, this, null, false);
+				SelectProfileBottomSheet.showInstance(
+						getActivity(), DialogMode.BASE_PROFILE, this,
+						getSelectedAppMode(), null, false);
 			}
 		} else if (IMPORT_PROFILE.equals(prefId)) {
 			final MapActivity mapActivity = getMapActivity();
@@ -228,7 +229,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			if (fragmentManager != null) {
 				String profileKey = args.getString(PROFILE_KEY_ARG);
-				boolean imported = args.getBoolean(IS_PROFILE_IMPORTED_ARG);
+				boolean imported = args.getBoolean(PROFILES_LIST_UPDATED_ARG);
 				ProfileAppearanceFragment.showInstance(activity, SettingsScreenType.PROFILE_APPEARANCE,
 						profileKey, imported);
 			}

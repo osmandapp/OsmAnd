@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Metadata;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
@@ -14,12 +15,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 
 public class WikivoyageWptPtMenuController extends WptPtMenuController {
 
 	private WikivoyageWptPtMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull WptPt wpt, @NonNull TravelArticle article) {
 		super(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
-		final String tripId = article.getRouteId();
+		final TravelArticleIdentifier articleId = article.generateIdentifier();
 		final String lang = article.getLang();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
@@ -27,7 +29,7 @@ public class WikivoyageWptPtMenuController extends WptPtMenuController {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
 					WikivoyageArticleDialogFragment.showInstance(mapActivity.getMyApplication(),
-							mapActivity.getSupportFragmentManager(), tripId, lang);
+							mapActivity.getSupportFragmentManager(), articleId, lang);
 				}
 			}
 		};
@@ -42,7 +44,7 @@ public class WikivoyageWptPtMenuController extends WptPtMenuController {
 		String title = metadata != null ? metadata.getArticleTitle() : null;
 		String lang = metadata != null ? metadata.getArticleLang() : null;
 		if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(lang)) {
-			return mapActivity.getMyApplication().getTravelHelper().getArticleByTitle(title, lang);
+			return mapActivity.getMyApplication().getTravelHelper().getArticleByTitle(title, new LatLon(wpt.lat, wpt.lon), lang);
 		}
 		return null;
 	}

@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
@@ -35,15 +36,16 @@ public class CurrentStreetName {
 		if (l != null && l.hasSpeed()) {
 			speed = l.getSpeed();
 		}
+		AnnounceTimeDistances adt = routingHelper.getVoiceRouter().getAnnounceTimeDistances();
 		boolean isSet = false;
 		// 1. turn is imminent
 		if (n.distanceTo > 0 && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
-				routingHelper.getVoiceRouter().isDistanceLess(speed, n.distanceTo, routingHelper.getVoiceRouter().PREPARE_DISTANCE * 0.75f)) {
+				adt.isTurnStateActive(adt.getSpeed(l), n.distanceTo * 1.3, AnnounceTimeDistances.STATE_PREPARE_TURN)) {
 			String nm = n.directionInfo.getStreetName();
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
 			isSet = !(Algorithms.isEmpty(nm) && Algorithms.isEmpty(rf) && Algorithms.isEmpty(dn));
-			streetName.text = RoutingHelperUtils.formatStreetName(nm, null, dn, "»");
+			streetName.text = RoutingHelperUtils.formatStreetName(nm, rf, dn, "»");
 			streetName.turnType = n.directionInfo.getTurnType();
 			streetName.shieldObject = n.directionInfo.getRouteDataObject();
 			if (streetName.turnType == null) {
@@ -62,7 +64,8 @@ public class CurrentStreetName {
 			if (rs != null) {
 				streetName.text = getRouteSegmentStreetName(routingHelper, rs, false);
 				if (Algorithms.isEmpty(streetName.text)) {
-					isSet = !Algorithms.isEmpty(getRouteSegmentStreetName(routingHelper, rs, true));
+					streetName.text = getRouteSegmentStreetName(routingHelper, rs, true);
+					isSet = !Algorithms.isEmpty(streetName.text);
 				} else {
 					isSet = true;
 				}

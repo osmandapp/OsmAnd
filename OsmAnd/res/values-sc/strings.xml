@@ -618,7 +618,7 @@
     <string name="map_online_data_descr">Imprea sas mapas in lìnia (iscàrriga e archìvia sos tasseddos in s’ischeda de memòria).</string>
     <string name="shared_string_online_maps">Mapas in lìnia</string>
     <string name="online_map_settings_descr">Ischerta sas mitzas de sas mapas in lìnia o de sos tasseddos in cache.</string>
-    <string name="osmand_accessibility_description">Permitit de impreare sas funtzionalidades pro s\'atzessibilidade de su dispositivu ditetamente in OsmAnd, e fatzilitat, pro nàrrere, sa modìfica de sa lestresa de sas boghes de sìntesi vocale, sa cunfiguratzione de su movimentu de s\'ischermu, s’impreu de una trackball pro s\'ismanniamentu o de un’interfàtzia vocale pro cosas che s\'annùntziu de sa positzione tua.</string>
+    <string name="osmand_accessibility_description">Permitit de impreare sas funtzionalidades pro s\'atzessibilidade de su dispositivu diretamente in OsmAnd, e fatzìlitat, pro nàrrere, sa modìfica de sa lestresa de sas boghes de sìntesi vocale, sa cunfiguratzione de su movimentu de s\'ischermu, s’impreu de una trackball pro s\'ismanniamentu o de un’interfache vocale pro cosas che s\'annùntziu de sa positzione tua.</string>
     <string name="plugins_screen">Estensiones</string>
     <string name="prefs_plugins_descr">Sas estensiones abìlitant funtzionalidades agiuntivas e impostatziones avantzadas.</string>
     <string name="prefs_plugins">Estensiones</string>
@@ -909,7 +909,7 @@
     <string name="search_osm_offline">Chirca impreende sa positzione geogràfica</string>
     <string name="system_locale">Sistema</string>
     <string name="preferred_locale_descr">Limba de interfache de s\'aplicatzione (impreada a pustis chi as a torrare a allùghere OsmAnd).</string>
-    <string name="preferred_locale">Limba interfàtzia</string>
+    <string name="preferred_locale">Limba de interfache</string>
     <string name="incomplete_locale">non cumpridu</string>
     <string name="shared_string_next">Imbeniente</string>
     <string name="shared_string_previous">Antepostu</string>
@@ -4024,4 +4024,5 @@
     <string name="routing_attr_allow_streams_name">Permite flussos e iscàrrigos</string>
     <string name="routing_attr_allow_intermittent_description">Permite caminos de abba intermitentes</string>
     <string name="routing_attr_allow_intermittent_name">Permite caminos de abba intermitentes</string>
+    <string name="voice_prompts_timetable">Nùmeru de annùntzios vocales</string>
 </resources>

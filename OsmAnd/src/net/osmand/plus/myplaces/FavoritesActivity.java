@@ -42,6 +42,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.myplaces.TrackSegmentFragment.TRACK_DELETED_KEY;
+
 /**
  *
  */
@@ -50,6 +52,7 @@ public class FavoritesActivity extends TabActivity {
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
 	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
+	protected static final int OPEN_GPX_REQUEST = 1008;
 
 	public static final String TAB_ID = "selected_tab_id";
 
@@ -151,6 +154,13 @@ public class FavoritesActivity extends TabActivity {
 		} else if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null && data.getData() != null) {
 				importHelper.handleGpxOrFavouritesImport(data.getData());
+			}
+		} else if (requestCode == OPEN_GPX_REQUEST && resultCode == Activity.RESULT_OK) {
+			if (data != null && data.getBooleanExtra(TRACK_DELETED_KEY, false)) {
+				AvailableGPXFragment gpxFragment = getGpxFragment();
+				if (gpxFragment != null) {
+					gpxFragment.resetTracksLoader();
+				}
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);

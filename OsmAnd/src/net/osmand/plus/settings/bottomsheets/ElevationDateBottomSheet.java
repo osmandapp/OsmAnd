@@ -2,7 +2,6 @@ package net.osmand.plus.settings.bottomsheets;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
@@ -255,7 +254,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 				fragment.appMode = appMode;
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, ScreenTimeoutBottomSheet.TAG);
+				fragment.show(fm, ElevationDateBottomSheet.TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

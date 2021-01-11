@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.widgets.WebViewEx;
 
 public abstract class AbstractCard {
 
@@ -55,7 +57,7 @@ public abstract class AbstractCard {
 
 	@SuppressLint("SetJavaScriptEnabled")
 	@SuppressWarnings("deprecation")
-	protected static void openUrl(@NonNull Context ctx,
+	protected static void openUrl(@NonNull Activity ctx,
 								  @NonNull OsmandApplication app,
 								  @Nullable String title,
 								  @NonNull String url,
@@ -90,7 +92,7 @@ public abstract class AbstractCard {
 			}
 		});
 
-		final WebView wv = new WebView(ctx);
+		final WebView wv = new WebViewEx(ctx);
 		wv.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {

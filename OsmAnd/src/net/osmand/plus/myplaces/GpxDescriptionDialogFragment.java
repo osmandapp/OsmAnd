@@ -19,6 +19,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.widgets.WebViewEx;
 
 public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
@@ -48,7 +49,7 @@ public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		AppBarLayout appBar = new AppBarLayout(ctx);
 		appBar.addView(topBar);
 
-		WebView webView = new WebView(ctx);
+		WebView webView = new WebViewEx(ctx);
 		webView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 		webView.getSettings().setTextZoom((int) (getResources().getConfiguration().fontScale * 100f));
 		Bundle args = getArguments();

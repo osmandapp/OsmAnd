@@ -576,7 +576,7 @@ public class DownloadIndexesThread {
 			manager.indexVoiceFiles(this);
 			manager.indexFontFiles(this);
 			if (vectorMapsToReindex) {
-				warnings = manager.indexingMaps(this);
+				warnings = manager.indexingMaps(this, filesToReindex);
 			}
 			List<String> wns = manager.indexAdditionalMaps(this);
 			if (wns != null) {

@@ -66,7 +66,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.IS_PROFILE_IMPORTED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
 public class ProfileAppearanceFragment extends BaseSettingsFragment implements OnSelectProfileCallback {
@@ -403,7 +403,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 						if (getActivity() != null) {
 							SelectProfileBottomSheet.showInstance(
 									getActivity(), DialogMode.BASE_PROFILE, ProfileAppearanceFragment.this,
-									selectedAppModeKey, false);
+									getSelectedAppMode(), selectedAppModeKey, false);
 						}
 					}
 				}
@@ -934,7 +934,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	@Override
 	public void onProfileSelected(Bundle args) {
 		String profileKey = args.getString(PROFILE_KEY_ARG);
-		boolean imported = args.getBoolean(IS_PROFILE_IMPORTED_ARG);
+		boolean imported = args.getBoolean(PROFILES_LIST_UPDATED_ARG);
 		updateParentProfile(profileKey, imported);
 	}
 

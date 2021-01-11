@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -22,7 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -39,6 +39,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngineFragment;
 import net.osmand.router.RoutingConfiguration;
 
 import org.apache.commons.logging.Log;
@@ -58,7 +59,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	public final static String PROFILE_KEY_ARG = "profile_key_arg";
 	public final static String USE_LAST_PROFILE_ARG = "use_last_profile_arg";
-	public final static String IS_PROFILE_IMPORTED_ARG = "is_profile_imported_arg";
+	public final static String PROFILES_LIST_UPDATED_ARG = "is_profiles_list_updated";
 
 	private DialogMode dialogMode;
 	private final List<ProfileDataObject> profiles = new ArrayList<>();
@@ -130,7 +131,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 												}
 												Bundle args = new Bundle();
 												args.putString(PROFILE_KEY_ARG, item.getName());
-												args.putBoolean(IS_PROFILE_IMPORTED_ARG, true);
+												args.putBoolean(PROFILES_LIST_UPDATED_ARG, true);
 												listener.onSelectedType(args);
 												dismiss();
 												break;
@@ -149,17 +150,23 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 			items.add(new TitleItem(getString(R.string.select_nav_profile_dialog_title)));
 			items.add(new LongDescriptionItem(getString(R.string.select_nav_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
-				final RoutingProfileDataObject profile = (RoutingProfileDataObject) profiles.get(i);
 				boolean showBottomDivider = false;
-				if (i < profiles.size() - 1) {
-					RoutingProfileDataObject nextProfile = (RoutingProfileDataObject) profiles.get(i + 1);
-					if (profile.getFileName() == null) {
-						showBottomDivider = nextProfile.getFileName() != null;
-					} else {
-						showBottomDivider = !profile.getFileName().equals(nextProfile.getFileName());
+				if (profiles.get(i) instanceof RoutingProfileDataObject) {
+					final RoutingProfileDataObject profile = (RoutingProfileDataObject) profiles.get(i);
+					if (i < profiles.size() - 1) {
+						if (profiles.get(i + 1) instanceof RoutingProfileDataObject) {
+							RoutingProfileDataObject nextProfile = (RoutingProfileDataObject) profiles.get(i + 1);
+							if (profile.getFileName() == null) {
+								showBottomDivider = nextProfile.getFileName() != null;
+							} else {
+								showBottomDivider = !profile.getFileName().equals(nextProfile.getFileName());
+							}
+						} else {
+							showBottomDivider = true;
+						}
 					}
 				}
-				addProfileItem(profile, showBottomDivider);
+				addProfileItem(profiles.get(i), showBottomDivider);
 			}
 			items.add(new DividerItem(app));
 			items.add(new LongDescriptionItem(app.getString(R.string.osmand_routing_promo)));
@@ -177,6 +184,15 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 							return false;
 						}
 					});
+				}
+			});
+			addButtonItem(R.string.add_online_routing_engine, R.drawable.ic_world_globe_dark, new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (getActivity() != null) {
+						OnlineRoutingEngineFragment.showInstance(getActivity(), getAppMode(), null);
+					}
+					dismiss();
 				}
 			});
 			items.add(new BaseBottomSheetItem.Builder()
@@ -219,8 +235,12 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 
 		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		int iconDefaultColorResId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		final boolean onlineRoutingProfile = profile instanceof OnlineRoutingEngineDataObject;
 
-		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
+		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(
+				onlineRoutingProfile ?
+						R.layout.bottom_sheet_item_with_descr_radio_and_icon_btn :
+						R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		TextView tvDescription = itemView.findViewById(R.id.description);
 		ImageView ivIcon = itemView.findViewById(R.id.icon);
@@ -244,21 +264,52 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
 		bottomDivider.setVisibility(showBottomDivider ? View.VISIBLE : View.INVISIBLE);
 
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(itemView)
-				.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						Bundle args = new Bundle();
-						args.putString(PROFILE_KEY_ARG, profile.getStringKey());
-						Fragment target = getTargetFragment();
-						if (target instanceof OnSelectProfileCallback) {
-							((OnSelectProfileCallback) target).onProfileSelected(args);
-						}
-						dismiss();
+		BaseBottomSheetItem.Builder builder =
+				new BaseBottomSheetItem.Builder().setCustomView(itemView);
+
+		OnClickListener listener = new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Bundle args = new Bundle();
+				args.putString(PROFILE_KEY_ARG, profile.getStringKey());
+				args.putBoolean(PROFILES_LIST_UPDATED_ARG, onlineRoutingProfile);
+				Fragment target = getTargetFragment();
+				if (target instanceof OnSelectProfileCallback) {
+					((OnSelectProfileCallback) target).onProfileSelected(args);
+				}
+				dismiss();
+			}
+		};
+
+		if (onlineRoutingProfile) {
+			View basePart = itemView.findViewById(R.id.basic_item_body);
+			View endBtn = itemView.findViewById(R.id.end_button);
+			ImageView ivEndBtnIcon = itemView.findViewById(R.id.end_button_icon);
+
+			Drawable drawable = getIcon(R.drawable.ic_action_settings,
+					nightMode ?
+							R.color.route_info_control_icon_color_dark :
+							R.color.route_info_control_icon_color_light);
+			if (Build.VERSION.SDK_INT >= 21) {
+				Drawable activeDrawable = getIcon(R.drawable.ic_action_settings, activeColorResId);
+				drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
+			}
+			ivEndBtnIcon.setImageDrawable(drawable);
+
+			basePart.setOnClickListener(listener);
+			endBtn.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (getActivity() != null) {
+						OnlineRoutingEngineFragment.showInstance(getActivity(), getAppMode(), profile.getStringKey());
 					}
-				})
-				.create());
+					dismiss();
+				}
+			});
+		} else {
+			builder.setOnClickListener(listener);
+		}
+		items.add(builder.create());
 	}
 
 	private void addCheckableItem(int titleId,
@@ -358,6 +409,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @NonNull DialogMode dialogMode,
 	                                @Nullable Fragment target,
+	                                ApplicationMode appMode,
 	                                String selectedItemKey,
 	                                boolean usedOnMap) {
 		SelectProfileBottomSheet fragment = new SelectProfileBottomSheet();
@@ -366,6 +418,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 		args.putString(SELECTED_KEY, selectedItemKey);
 		fragment.setArguments(args);
 		fragment.setUsedOnMap(usedOnMap);
+		fragment.setAppMode(appMode);
 		fragment.setTargetFragment(target, 0);
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}

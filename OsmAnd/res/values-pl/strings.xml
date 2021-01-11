@@ -3793,7 +3793,7 @@
     <string name="please_provide_point_name_error">Podaj nazwę punktu</string>
     <string name="quick_action_remove_next_destination_descr">Usuwa następny cel na trasie. Jeśli jest to miejsce docelowe, nawigacja zostanie zatrzymana.</string>
     <string name="search_download_wikipedia_maps">Pobierz mapy Wikipedii</string>
-    <string name="plugin_wikipedia_description">Uzyskaj informacje o ciekawych miejscach z Wikipedii, kieszonkowego przewodnika offline zawierającego artykuły o miejscach i celach.</string>
+    <string name="plugin_wikipedia_description">Uzyskaj informacje o ciekawych miejscach z Wikipedii, kieszonkowego przewodnika offline zawierającego artykuły o miejscach i celach podróży.</string>
     <string name="app_mode_enduro_motorcycle">Motocykl Enduro</string>
     <string name="app_mode_motor_scooter">Skuter</string>
     <string name="routing_attr_length_description">Określ długość pojazdu dozwoloną na trasach.</string>
@@ -3913,11 +3913,11 @@
     <string name="start_finish_icons">Ikony startu i końca</string>
     <string name="contour_lines_thanks">Dziękujemy za zakup \"Linii konturowych\"</string>
     <string name="osm_live_payment_desc_hw">Subskrypcja jest naliczana za wybrany okres. Anuluj go w AppGallery w dowolnym momencie.</string>
-    <string name="osm_live_payment_subscription_management_hw">Płatność zostanie pobrana z konta AppGallery po potwierdzeniu zakupu.
+    <string name="osm_live_payment_subscription_management_hw">Twoje konto AppGallery jest obciążane po potwierdzeniu zakupu.
 \n
-\nSubskrypcja jest automatycznie odnawiana, chyba że zostanie anulowana przed datą odnowienia. Twoje konto zostanie obciążone opłatą za okres odnowienia (miesiąc/trzy miesiące/rok) tylko w dniu odnowienia.
+\nSubskrypcja przedłuża się automatycznie, chyba że zostanie anulowana przed datą odnowienia. Twoje konto zostanie obciążone za okres odnowienia (miesiąc/trzy miesiące/rok) tylko w dniu odnowienia.
 \n
-\nMożesz zarządzać subskrypcjami i anulować je, przechodząc do ustawień Galerii aplikacji.</string>
+\nMożesz zarządzać swoimi subskrypcjami i anulować je w ustawieniach AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Unikaj chodników</string>
     <string name="routing_attr_avoid_footways_name">Unikaj chodników</string>
     <string name="development">Rozwój</string>
@@ -4024,4 +4024,25 @@
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil użytkownika</string>
     <string name="reverse_all_points">Odwróć wszystkie punkty</string>
+    <string name="profile_by_default_description">Wybierz profil, który będzie używany przy uruchomieniu aplikacji.</string>
+    <string name="shared_string_last_used">Ostatnio używane</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Preferowane szlaki turystyczne</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Preferuj szlaki turystyczne</string>
+    <string name="routing_attr_allow_streams_description">Zezwalaj na strumienie i dreny</string>
+    <string name="routing_attr_allow_streams_name">Zezwalaj na strumienie i dreny</string>
+    <string name="routing_attr_allow_intermittent_description">Zezwalaj na przerywane drogi wodne</string>
+    <string name="routing_attr_allow_intermittent_name">Zezwalaj na przerywane drogi wodne</string>
+    <string name="voice_prompts_timetable">Czas monitów głosowych</string>
+    <string name="shared_string_subtype">Podtyp</string>
+    <string name="shared_string_vehicle">Pojazd</string>
+    <string name="shared_string_api_key">Klucz API</string>
+    <string name="shared_string_server_url">Adres URL serwera</string>
+    <string name="shared_string_enter_param">Wpisz param</string>
+    <string name="keep_it_empty_if_not">Jeśli nie, zostaw to puste</string>
+    <string name="online_routing_example_hint">Adres URL ze wszystkimi parametrami będzie wyglądał następująco:</string>
+    <string name="test_route_calculation">Obliczanie trasy testowej</string>
+    <string name="routing_engine_vehicle_type_bike">Rower</string>
+    <string name="routing_engine_vehicle_type_car">Samochód</string>
+    <string name="message_error_recheck_parameters">Błąd, ponownie sprawdź parametry</string>
+    <string name="copy_address">Skopiuj adres</string>
 </resources>

@@ -4001,4 +4001,8 @@
     <string name="plan_route_split_after">Разделить после</string>
     <string name="profile_type_user_string">Профиль пользователя</string>
     <string name="profile_type_osmand_string">Профиль OsmAnd</string>
+    <string name="profile_by_default_description">Выберите профиль, который будет использоваться при запуске приложения.</string>
+    <string name="shared_string_last_used">Последний раз использовалось</string>
+    <string name="routing_attr_allow_intermittent_description">Разрешить прерывистые водные пути</string>
+    <string name="routing_attr_allow_intermittent_name">Разрешить прерывистые водные пути</string>
 </resources>

@@ -1,11 +1,5 @@
 package net.osmand.binary;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
@@ -29,42 +23,50 @@ import net.osmand.binary.OsmandIndex.TransportPart;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
 public class CachedOsmandIndexes {
-	
+
 	private OsmAndStoredIndex storedIndex;
 	private OsmAndStoredIndex.Builder storedIndexBuilder;
 	private Log log = PlatformUtil.getLog(CachedOsmandIndexes.class);
 	private boolean hasChanged = true;
-	
+
 	public static final int VERSION = 2;
 
 	public void addToCache(BinaryMapIndexReader reader, File f) {
 		hasChanged = true;
-		if(storedIndexBuilder == null) {
+		if (storedIndexBuilder == null) {
 			storedIndexBuilder = OsmandIndex.OsmAndStoredIndex.newBuilder();
 			storedIndexBuilder.setVersion(VERSION);
 			storedIndexBuilder.setDateCreated(System.currentTimeMillis());
-			if(storedIndex != null) {
-				for(FileIndex ex : storedIndex.getFileIndexList()) {
-					storedIndexBuilder.addFileIndex(ex);
+			if (storedIndex != null) {
+				for (FileIndex ex : storedIndex.getFileIndexList()) {
+					if (!ex.getFileName().equals(f.getName())) {
+						storedIndexBuilder.addFileIndex(ex);
+					}
 				}
 			}
 		}
-		
+
 		FileIndex.Builder fileIndex = OsmandIndex.FileIndex.newBuilder();
 		long d = reader.getDateCreated();
-		fileIndex.setDateModified(d== 0?f.lastModified() : d);
+		fileIndex.setDateModified(d == 0 ? f.lastModified() : d);
 		fileIndex.setSize(f.length());
 		fileIndex.setVersion(reader.getVersion());
 		fileIndex.setFileName(f.getName());
-		for(MapIndex index : reader.getMapIndexes()) {
+		for (MapIndex index : reader.getMapIndexes()) {
 			MapPart.Builder map = OsmandIndex.MapPart.newBuilder();
 			map.setSize(index.getLength());
 			map.setOffset(index.getFilePointer());
-			if(index.getName() != null) {
+			if (index.getName() != null) {
 				map.setName(index.getName());
 			}
-			for(MapRoot mr : index.getRoots() ) {
+			for (MapRoot mr : index.getRoots()) {
 				MapLevel.Builder lev = OsmandIndex.MapLevel.newBuilder();
 				lev.setSize(mr.length);
 				lev.setOffset(mr.filePointer);
@@ -78,36 +80,36 @@ public class CachedOsmandIndexes {
 			}
 			fileIndex.addMapIndex(map);
 		}
-		
-		for(AddressRegion index : reader.getAddressIndexes()) {
+
+		for (AddressRegion index : reader.getAddressIndexes()) {
 			AddressPart.Builder addr = OsmandIndex.AddressPart.newBuilder();
 			addr.setSize(index.getLength());
 			addr.setOffset(index.getFilePointer());
-			if(index.getName() != null) {
+			if (index.getName() != null) {
 				addr.setName(index.getName());
 			}
-			if(index.getEnName() != null) {
+			if (index.getEnName() != null) {
 				addr.setNameEn(index.getEnName());
 			}
 			addr.setIndexNameOffset(index.getIndexNameOffset());
-			for(CitiesBlock mr : index.getCities() ) {
+			for (CitiesBlock mr : index.getCities()) {
 				CityBlock.Builder cblock = OsmandIndex.CityBlock.newBuilder();
 				cblock.setSize(mr.length);
 				cblock.setOffset(mr.filePointer);
 				cblock.setType(mr.type);
 				addr.addCities(cblock);
 			}
-			for(String s : index.getAttributeTagsTable()) {
+			for (String s : index.getAttributeTagsTable()) {
 				addr.addAdditionalTags(s);
 			}
 			fileIndex.addAddressIndex(addr);
 		}
-		
-		for(PoiRegion index : reader.getPoiIndexes()) {
+
+		for (PoiRegion index : reader.getPoiIndexes()) {
 			PoiPart.Builder poi = OsmandIndex.PoiPart.newBuilder();
 			poi.setSize(index.getLength());
 			poi.setOffset(index.getFilePointer());
-			if(index.getName() != null) {
+			if (index.getName() != null) {
 				poi.setName(index.getName());
 			}
 			poi.setLeft(index.left31);
@@ -116,12 +118,12 @@ public class CachedOsmandIndexes {
 			poi.setBottom(index.bottom31);
 			fileIndex.addPoiIndex(poi.build());
 		}
-		
-		for(TransportIndex index : reader.getTransportIndexes()) {
+
+		for (TransportIndex index : reader.getTransportIndexes()) {
 			TransportPart.Builder transport = OsmandIndex.TransportPart.newBuilder();
 			transport.setSize(index.getLength());
 			transport.setOffset(index.getFilePointer());
-			if(index.getName() != null) {
+			if (index.getName() != null) {
 				transport.setName(index.getName());
 			}
 			transport.setLeft(index.getLeft());
@@ -130,33 +132,33 @@ public class CachedOsmandIndexes {
 			transport.setBottom(index.getBottom());
 			transport.setStopsTableLength(index.stopsFileLength);
 			transport.setStopsTableOffset(index.stopsFileOffset);
-//			if(index.incompleteRoutesLength > 0) {
+			// if(index.incompleteRoutesLength > 0) {
 			transport.setIncompleteRoutesLength(index.incompleteRoutesLength);
 			transport.setIncompleteRoutesOffset(index.incompleteRoutesOffset);
-//			}
+			// }
 			transport.setStringTableLength(index.stringTable.length);
 			transport.setStringTableOffset(index.stringTable.fileOffset);
 			fileIndex.addTransportIndex(transport);
 		}
-		
-		for(RouteRegion index : reader.getRoutingIndexes()) {
+
+		for (RouteRegion index : reader.getRoutingIndexes()) {
 			RoutingPart.Builder routing = OsmandIndex.RoutingPart.newBuilder();
 			routing.setSize(index.getLength());
 			routing.setOffset(index.getFilePointer());
-			if(index.getName() != null) {
+			if (index.getName() != null) {
 				routing.setName(index.getName());
 			}
-			for(RouteSubregion sub : index.getSubregions()) {
+			for (RouteSubregion sub : index.getSubregions()) {
 				addRouteSubregion(routing, sub, false);
 			}
-			for(RouteSubregion sub : index.getBaseSubregions()) {
+			for (RouteSubregion sub : index.getBaseSubregions()) {
 				addRouteSubregion(routing, sub, true);
 			}
 			fileIndex.addRoutingIndex(routing);
 		}
-		
+
 		storedIndexBuilder.addFileIndex(fileIndex);
-		
+
 	}
 
 	private void addRouteSubregion(RoutingPart.Builder routing, RouteSubregion sub, boolean base) {
@@ -171,11 +173,11 @@ public class CachedOsmandIndexes {
 		rpart.setShifToData(sub.shiftToData);
 		routing.addSubregions(rpart);
 	}
-	
-	public BinaryMapIndexReader getReader(File f) throws IOException {
+
+	public BinaryMapIndexReader getReader(File f, boolean useStoredIndex) throws IOException {
 		RandomAccessFile mf = new RandomAccessFile(f.getPath(), "r");
 		FileIndex found = null;
-		if (storedIndex != null) {
+		if (storedIndex != null && useStoredIndex) {
 			for (int i = 0; i < storedIndex.getFileIndexCount(); i++) {
 				FileIndex fi = storedIndex.getFileIndex(i);
 				if (f.length() == fi.getSize() && f.getName().equals(fi.getFileName())) {
@@ -191,26 +193,26 @@ public class CachedOsmandIndexes {
 			reader = new BinaryMapIndexReader(mf, f);
 			addToCache(reader, f);
 			if (log.isDebugEnabled()) {
-				log.debug("Initializing db " + f.getAbsolutePath() + " " + (System.currentTimeMillis() - val ) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				log.debug("Initializing db " + f.getAbsolutePath() + " " + (System.currentTimeMillis() - val) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 		} else {
 			reader = initFileIndex(found, mf, f);
 		}
 		return reader;
 	}
-	
+
 	private BinaryMapIndexReader initFileIndex(FileIndex found, RandomAccessFile mf, File f) throws IOException {
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(mf, f, false);
 		reader.version = found.getVersion();
 		reader.dateCreated = found.getDateModified();
-		
-		for(MapPart index : found.getMapIndexList()) {
+
+		for (MapPart index : found.getMapIndexList()) {
 			MapIndex mi = new MapIndex();
 			mi.length = (int) index.getSize();
 			mi.filePointer = (int) index.getOffset();
 			mi.name = index.getName();
-			
-			for(MapLevel mr : index.getLevelsList()) {
+
+			for (MapLevel mr : index.getLevelsList()) {
 				MapRoot root = new MapRoot();
 				root.length = (int) mr.getSize();
 				root.filePointer = (int) mr.getOffset();
@@ -226,15 +228,15 @@ public class CachedOsmandIndexes {
 			reader.indexes.add(mi);
 			reader.basemap = reader.basemap || mi.isBaseMap();
 		}
-		
-		for(AddressPart index : found.getAddressIndexList()) {
+
+		for (AddressPart index : found.getAddressIndexList()) {
 			AddressRegion mi = new AddressRegion();
 			mi.length = (int) index.getSize();
 			mi.filePointer = (int) index.getOffset();
 			mi.name = index.getName();
 			mi.enName = index.getNameEn();
 			mi.indexNameOffset = index.getIndexNameOffset();
-			for(CityBlock mr : index.getCitiesList() ) {
+			for (CityBlock mr : index.getCitiesList()) {
 				CitiesBlock cblock = new CitiesBlock();
 				cblock.length = (int) mr.getSize();
 				cblock.filePointer = (int) mr.getOffset();
@@ -245,8 +247,8 @@ public class CachedOsmandIndexes {
 			reader.addressIndexes.add(mi);
 			reader.indexes.add(mi);
 		}
-		
-		for(PoiPart index : found.getPoiIndexList()) {
+
+		for (PoiPart index : found.getPoiIndexList()) {
 			PoiRegion mi = new PoiRegion();
 			mi.length = (int) index.getSize();
 			mi.filePointer = (int) index.getOffset();
@@ -258,14 +260,14 @@ public class CachedOsmandIndexes {
 			reader.poiIndexes.add(mi);
 			reader.indexes.add(mi);
 		}
-		
-		for(TransportPart index : found.getTransportIndexList()) {
+
+		for (TransportPart index : found.getTransportIndexList()) {
 			TransportIndex mi = new TransportIndex();
 			mi.length = (int) index.getSize();
 			mi.filePointer = (int) index.getOffset();
 			mi.name = index.getName();
 			mi.left = index.getLeft();
-			mi.right =index.getRight();
+			mi.right = index.getRight();
 			mi.top = index.getTop();
 			mi.bottom = index.getBottom();
 			mi.stopsFileLength = index.getStopsTableLength();
@@ -278,14 +280,14 @@ public class CachedOsmandIndexes {
 			reader.transportIndexes.add(mi);
 			reader.indexes.add(mi);
 		}
-		
-		for(RoutingPart  index : found.getRoutingIndexList()) {
+
+		for (RoutingPart index : found.getRoutingIndexList()) {
 			RouteRegion mi = new RouteRegion();
 			mi.length = (int) index.getSize();
 			mi.filePointer = (int) index.getOffset();
 			mi.name = index.getName();
-			
-			for(RoutingSubregion mr : index.getSubregionsList()) {
+
+			for (RoutingSubregion mr : index.getSubregionsList()) {
 				RouteSubregion sub = new RouteSubregion(mi);
 				sub.length = (int) mr.getSize();
 				sub.filePointer = (int) mr.getOffset();
@@ -294,7 +296,7 @@ public class CachedOsmandIndexes {
 				sub.top = mr.getTop();
 				sub.bottom = mr.getBottom();
 				sub.shiftToData = mr.getShifToData();
-				if(mr.getBasemap()) {
+				if (mr.getBasemap()) {
 					mi.basesubregions.add(sub);
 				} else {
 					mi.subregions.add(sub);
@@ -303,7 +305,7 @@ public class CachedOsmandIndexes {
 			reader.routingIndexes.add(mi);
 			reader.indexes.add(mi);
 		}
-		
+
 		return reader;
 	}
 
@@ -313,7 +315,7 @@ public class CachedOsmandIndexes {
 		try {
 			storedIndex = OsmandIndex.OsmAndStoredIndex.newBuilder().mergeFrom(is).build();
 			hasChanged = false;
-			if(storedIndex.getVersion() != version){
+			if (storedIndex.getVersion() != version) {
 				storedIndex = null;
 			}
 		} finally {
@@ -321,7 +323,7 @@ public class CachedOsmandIndexes {
 		}
 		log.info("Initialize cache " + (System.currentTimeMillis() - time));
 	}
-	
+
 	public void writeToFile(File f) throws IOException {
 		if (hasChanged) {
 			FileOutputStream outputStream = new FileOutputStream(f);

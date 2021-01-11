@@ -28,7 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
-import net.osmand.plus.openplacereviews.OPRWebviewActivity;
+import net.osmand.plus.openplacereviews.OPRConstants;
 import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.util.Algorithms;
 
@@ -467,7 +467,7 @@ public abstract class ImageCard extends AbstractCard {
 			if (o instanceof Amenity) {
 				Amenity am = (Amenity) o;
 				long amenityId = am.getId() >> 1;
-				String baseUrl = OPRWebviewActivity.getBaseUrl(app);
+				String baseUrl = OPRConstants.getBaseUrl(app);
 				String url = baseUrl + "api/objects-by-index?type=opr.place&index=osmid&key=" + amenityId;
 				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
 						"Requesting location images...", false, false);

@@ -15,13 +15,11 @@ import java.util.TreeSet;
 
 import net.osmand.binary.BinaryMapIndexReader;
 
-import net.osmand.data.LatLon;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -76,41 +74,52 @@ public class RouteTestingTest {
 		} else {
 			binaryMapIndexReaders = new BinaryMapIndexReader[]{new BinaryMapIndexReader(raf, new File(fl))};
 		}
-		RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
-				RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, params);
-		RoutingContext ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
-				RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
-		ctx.leftSideNavigation = false;
-		List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(), te.getTransitPoint());
-		Set<Long> reachedSegments = new TreeSet<Long>();
-		Assert.assertNotNull(routeSegments);
-		int prevSegment = -1;
-		for (int i = 0; i <= routeSegments.size(); i++) {
-			if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
-				if (prevSegment >= 0) {
-					String name = routeSegments.get(prevSegment).getDescription();
-					long segmentId = routeSegments.get(prevSegment).getObject().getId() >> (RouteResultPreparation.SHIFT_ID);
-					System.out.println("segmentId: " + segmentId + " description: " + name);
+		
+		for (int planRoadDirection = -1; planRoadDirection <= 1; planRoadDirection++) {
+			if (params.containsKey("wrongPlanRoadDirection")) {
+				if (params.get("wrongPlanRoadDirection").equals(planRoadDirection + "")) {
+					continue;
 				}
-				prevSegment = i;
 			}
-			if (i < routeSegments.size()) {
-				reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID));
-			}
-		}
-		Map<Long, String> expectedResults = te.getExpectedResults();
-		Iterator<Entry<Long, String>> it = expectedResults.entrySet().iterator();
-		while (it.hasNext()) {
-			Entry<Long, String> es = it.next();
-			if (es.getValue().equals("false")) {
-				Assert.assertTrue("Expected segment " + (es.getKey()) + " was wrongly reached in route segments "
-						+ reachedSegments.toString(), !reachedSegments.contains(es.getKey()));
-			} else {
-				Assert.assertTrue("Expected segment " + (es.getKey()) + " weren't reached in route segments "
-						+ reachedSegments.toString(), reachedSegments.contains(es.getKey()));
-			}
-		}
+			RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
+					RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, params);
 
+			config.planRoadDirection = planRoadDirection;
+			RoutingContext ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
+					RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+			ctx.leftSideNavigation = false;
+			List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(),
+					te.getTransitPoint());
+			Set<Long> reachedSegments = new TreeSet<Long>();
+			Assert.assertNotNull(routeSegments);
+			int prevSegment = -1;
+			for (int i = 0; i <= routeSegments.size(); i++) {
+				if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
+					if (prevSegment >= 0) {
+						String name = routeSegments.get(prevSegment).getDescription();
+						long segmentId = routeSegments.get(prevSegment).getObject()
+								.getId() >> (RouteResultPreparation.SHIFT_ID);
+						System.out.println("segmentId: " + segmentId + " description: " + name);
+					}
+					prevSegment = i;
+				}
+				if (i < routeSegments.size()) {
+					reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID));
+				}
+			}
+			Map<Long, String> expectedResults = te.getExpectedResults();
+			Iterator<Entry<Long, String>> it = expectedResults.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<Long, String> es = it.next();
+				if (es.getValue().equals("false")) {
+					Assert.assertTrue("Expected segment " + (es.getKey()) + " was wrongly reached in route segments "
+							+ reachedSegments.toString(), !reachedSegments.contains(es.getKey()));
+				} else {
+					Assert.assertTrue("Expected segment " + (es.getKey()) + " weren't reached in route segments "
+							+ reachedSegments.toString(), reachedSegments.contains(es.getKey()));
+				}
+			}
+		}
 	}
 
 }

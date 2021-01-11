@@ -17,6 +17,7 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -26,6 +27,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -40,6 +42,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
 
 	private static final String MORE_VALUE = "MORE_VALUE";
+	private static final String VOICE_PROMPTS_TIMETABLE = "voice_prompts_timetable";
 
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
@@ -93,6 +96,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 		setupKeepInformingPref();
 		setupArrivalAnnouncementPref();
+		updateVoicePromptsTimes();
 		setupVoiceProviderPref();
 
 		if (!Version.isBlackberry(app)) {
@@ -102,6 +106,17 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
 		setupSpeakCamerasPref();
 		setupSpeedCamerasAlert();
+	}
+
+	private void updateVoicePromptsTimes() {
+		Preference pref = findPreference(VOICE_PROMPTS_TIMETABLE);
+		if (OsmandPlugin.isDevelopment()) {
+			AnnounceTimeDistances atd = new AnnounceTimeDistances(getSelectedAppMode(), settings);
+			pref.setSummary(atd.getTurnsDescription().trim());
+			pref.setVisible(true);
+		} else {
+			pref.setVisible(false);
+		}
 	}
 
 	private void setupSpeedLimitExceedPref() {
@@ -259,6 +274,9 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 						settings.SPEAK_SPEED_CAMERA.getId(), false, ApplyQueryType.SNACK_BAR);
 			}
 		}
+		if (prefId.equals(settings.ARRIVAL_DISTANCE_FACTOR.getId())) {
+			updateVoicePromptsTimes();
+		}
 		if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
 			return onConfirmPreferenceChange(
 					settings.AUDIO_MANAGER_STREAM.getId(), newValue, ApplyQueryType.SNACK_BAR);
@@ -293,8 +311,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
+		String prefId = preference.getKey();
+		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
 			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
+		} else if (VOICE_PROMPTS_TIMETABLE.equals(prefId)) {
+			app.showToastMessage(String.valueOf(preference.getSummary()));
 		}
 		return super.onPreferenceClick(preference);
 	}

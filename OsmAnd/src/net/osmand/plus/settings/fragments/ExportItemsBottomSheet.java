@@ -40,6 +40,7 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
@@ -362,6 +363,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			HistoryEntry historyEntry = (HistoryEntry) object;
 			builder.setTitle(historyEntry.getName().getName());
 			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, activeColorRes));
+		} else if (object instanceof OnlineRoutingEngine) {
+			OnlineRoutingEngine onlineRoutingEngine = (OnlineRoutingEngine) object;
+			builder.setTitle(onlineRoutingEngine.getName(app));
+			builder.setIcon(uiUtilities.getIcon(R.drawable.ic_world_globe_dark, activeColorRes));
 		}
 	}
 

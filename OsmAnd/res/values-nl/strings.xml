@@ -3745,8 +3745,8 @@
     <string name="route_between_points_add_track_desc">Selecteer een track waaraan je een nieuw segment wil toevoegen.</string>
     <string name="plan_route_select_track_file_for_open">Selecteer een trackbestand om te openen.</string>
     <string name="plan_route_exit_dialog_descr">Weet u zeker dat u alle wijzigingen in de geplande route wilt annuleren door deze te sluiten\?</string>
-    <string name="plan_route_trim_before">Opsmukken voor</string>
-    <string name="plan_route_trim_after">Opsmukken na</string>
+    <string name="plan_route_trim_before">"Alles wegknippen  voor dit punt"</string>
+    <string name="plan_route_trim_after">Alles wegknippen na dit punt</string>
     <string name="plan_route_change_route_type_before">Wijzig het routetype voor</string>
     <string name="plan_route_change_route_type_after">Wijzig het routetype na</string>
     <string name="release_3_8">• Bijgewerkt Plan een route functie: maakt het mogelijk om verschillende navigatietypes per segment te gebruiken en tracks op te nemen
@@ -3925,4 +3925,19 @@
     <string name="register_on_openplacereviews_desc">Foto\'s zijn afkomstig van het open data-project OpenPlaceReviews.org. Om uw foto\'s te uploaden, moet u zich aanmelden op deze website.</string>
     <string name="register_opr_create_new_account">Maak een nieuw account aan</string>
     <string name="register_opr_have_account">Ik heb al een account</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="app_mode_light_aircraft">Licht vliegtuig</string>
+    <string name="plan_route_join_segments">Segmenten samenvoegen</string>
+    <string name="plan_route_split_before">Hiervoor splitsen</string>
+    <string name="plan_route_split_after">Hierna splitsen</string>
+    <string name="plan_route_add_new_segment">Nieuw segment toevoegen</string>
+    <string name="profile_type_osmand_string">OsmAnd-profiel</string>
+    <string name="profile_type_user_string">Gebruikersprofiel</string>
+    <string name="reverse_all_points">Volgorde van alle punten omdraaien</string>
+    <string name="shared_string_last_used">Laatst gebruikt</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Voorkeur voor ongebaande wandelwegen</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Voorkeur voor Hike-routes</string>
+    <string name="routing_attr_allow_streams_description">Beken en sloten gebruiken</string>
+    <string name="routing_attr_allow_streams_name">Beken en sloten gebruiken</string>
+    <string name="routing_attr_allow_intermittent_description">Waterwegen die periodiek water voeren gebruiken</string>
 </resources>

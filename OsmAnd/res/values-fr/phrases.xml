@@ -512,7 +512,7 @@
     <string name="poi_canadian_football">Football canadien</string>
     <string name="poi_cycling">Cyclisme</string>
     <string name="poi_shooting">Tir</string>
-    <string name="poi_physiotherapist">Psychothérapeute</string>
+    <string name="poi_physiotherapist">Kinésithérapeute</string>
     <string name="poi_occupational_therapist">Ergothérapeute</string>
     <string name="poi_place_farm">Ferme</string>
     <string name="poi_place_allotments">Jardins familiaux</string>
@@ -3895,4 +3895,12 @@
     <string name="poi_water_source_tap">Robinet</string>
     <string name="poi_vaccination_covid19">Vaccination : covid19</string>
     <string name="poi_health_specialty_vaccination_yes">Vaccination</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Tunnel à chauve-souris</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Pont à chauve-souris</string>
+    <string name="poi_wildlife_crossing">Passage de faune</string>
+    <string name="poi_swimming_area">Zone de baignade</string>
+    <string name="poi_lavoir">Lavoir</string>
+    <string name="poi_waste_transfer_station">Station de traitement des déchets</string>
+    <string name="poi_weightbridge">Pont de levage</string>
+    <string name="poi_ranger_station">Poste de garde forestier</string>
 </resources>

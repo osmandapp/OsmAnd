@@ -5,6 +5,8 @@ import android.content.Context;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
+import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class ProfileDataUtils {
 
 	public static final String OSMAND_NAVIGATION = "osmand_navigation";
+	public static final String ONLINE_NAVIGATION = "online_navigation";
 
 	public static List<ProfileDataObject> getDataObjects(OsmandApplication app,
 	                                                     List<ApplicationMode> appModes) {
@@ -46,9 +49,9 @@ public class ProfileDataUtils {
 		return description;
 	}
 
-	public static List<RoutingProfileDataObject> getSortedRoutingProfiles(OsmandApplication app) {
-		List<RoutingProfileDataObject> result = new ArrayList<>();
-		Map<String, List<RoutingProfileDataObject>> routingProfilesByFileNames = getRoutingProfilesByFileNames(app);
+	public static List<ProfileDataObject> getSortedRoutingProfiles(OsmandApplication app) {
+		List<ProfileDataObject> result = new ArrayList<>();
+		Map<String, List<ProfileDataObject>> routingProfilesByFileNames = getRoutingProfilesByFileNames(app);
 		List<String> fileNames = new ArrayList<>(routingProfilesByFileNames.keySet());
 		Collections.sort(fileNames, new Comparator<String>() {
 			@Override
@@ -57,7 +60,7 @@ public class ProfileDataUtils {
 			}
 		});
 		for (String fileName : fileNames) {
-			List<RoutingProfileDataObject> routingProfilesFromFile = routingProfilesByFileNames.get(fileName);
+			List<ProfileDataObject> routingProfilesFromFile = routingProfilesByFileNames.get(fileName);
 			if (routingProfilesFromFile != null) {
 				Collections.sort(routingProfilesFromFile);
 				result.addAll(routingProfilesFromFile);
@@ -66,14 +69,29 @@ public class ProfileDataUtils {
 		return result;
 	}
 
-	public static Map<String, List<RoutingProfileDataObject>> getRoutingProfilesByFileNames(OsmandApplication app) {
-		Map<String, List<RoutingProfileDataObject>> result = new HashMap<>();
-		for (final RoutingProfileDataObject profile : getRoutingProfiles(app).values()) {
-			String fileName = profile.getFileName() != null ? profile.getFileName() : OSMAND_NAVIGATION;
+	public static List<OnlineRoutingEngineDataObject> getOnlineRoutingProfiles(OsmandApplication app) {
+		List<OnlineRoutingEngineDataObject> objects = new ArrayList<>();
+		for (OnlineRoutingEngine engine : app.getOnlineRoutingHelper().getEngines()) {
+			objects.add(new OnlineRoutingEngineDataObject(
+					engine.getName(app), engine.getBaseUrl(), engine.getStringKey()));
+		}
+		return objects;
+	}
+
+	public static Map<String, List<ProfileDataObject>> getRoutingProfilesByFileNames(OsmandApplication app) {
+		Map<String, List<ProfileDataObject>> result = new HashMap<>();
+		for (final ProfileDataObject profile : getRoutingProfiles(app).values()) {
+			String fileName = null;
+			if (profile instanceof RoutingProfileDataObject) {
+				fileName = ((RoutingProfileDataObject) profile).getFileName();
+			} else if (profile instanceof OnlineRoutingEngineDataObject) {
+				fileName = ONLINE_NAVIGATION;
+			}
+			fileName = fileName != null ? fileName : OSMAND_NAVIGATION;
 			if (result.containsKey(fileName)) {
 				result.get(fileName).add(profile);
 			} else {
-				result.put(fileName, new ArrayList<RoutingProfileDataObject>() {
+				result.put(fileName, new ArrayList<ProfileDataObject>() {
 					{ add(profile); }
 				});
 			}
@@ -81,26 +99,26 @@ public class ProfileDataUtils {
 		return result;
 	}
 
-	public static Map<String, RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
-		Map<String, RoutingProfileDataObject> profilesObjects = new HashMap<>();
-		profilesObjects.put(RoutingProfileDataObject.RoutingProfilesResources.STRAIGHT_LINE_MODE.name(), new RoutingProfileDataObject(
-				RoutingProfileDataObject.RoutingProfilesResources.STRAIGHT_LINE_MODE.name(),
-				context.getString(RoutingProfileDataObject.RoutingProfilesResources.STRAIGHT_LINE_MODE.getStringRes()),
+	public static Map<String, ProfileDataObject> getRoutingProfiles(OsmandApplication context) {
+		Map<String, ProfileDataObject> profilesObjects = new HashMap<>();
+		profilesObjects.put(RoutingProfilesResources.STRAIGHT_LINE_MODE.name(), new RoutingProfileDataObject(
+				RoutingProfilesResources.STRAIGHT_LINE_MODE.name(),
+				context.getString(RoutingProfilesResources.STRAIGHT_LINE_MODE.getStringRes()),
 				context.getString(R.string.special_routing_type),
-				RoutingProfileDataObject.RoutingProfilesResources.STRAIGHT_LINE_MODE.getIconRes(),
+				RoutingProfilesResources.STRAIGHT_LINE_MODE.getIconRes(),
 				false, null));
-		profilesObjects.put(RoutingProfileDataObject.RoutingProfilesResources.DIRECT_TO_MODE.name(), new RoutingProfileDataObject(
-				RoutingProfileDataObject.RoutingProfilesResources.DIRECT_TO_MODE.name(),
-				context.getString(RoutingProfileDataObject.RoutingProfilesResources.DIRECT_TO_MODE.getStringRes()),
+		profilesObjects.put(RoutingProfilesResources.DIRECT_TO_MODE.name(), new RoutingProfileDataObject(
+				RoutingProfilesResources.DIRECT_TO_MODE.name(),
+				context.getString(RoutingProfilesResources.DIRECT_TO_MODE.getStringRes()),
 				context.getString(R.string.special_routing_type),
-				RoutingProfileDataObject.RoutingProfilesResources.DIRECT_TO_MODE.getIconRes(),
+				RoutingProfilesResources.DIRECT_TO_MODE.getIconRes(),
 				false, null));
 		if (context.getBRouterService() != null) {
-			profilesObjects.put(RoutingProfileDataObject.RoutingProfilesResources.BROUTER_MODE.name(), new RoutingProfileDataObject(
-					RoutingProfileDataObject.RoutingProfilesResources.BROUTER_MODE.name(),
-					context.getString(RoutingProfileDataObject.RoutingProfilesResources.BROUTER_MODE.getStringRes()),
+			profilesObjects.put(RoutingProfilesResources.BROUTER_MODE.name(), new RoutingProfileDataObject(
+					RoutingProfilesResources.BROUTER_MODE.name(),
+					context.getString(RoutingProfilesResources.BROUTER_MODE.getStringRes()),
 					context.getString(R.string.third_party_routing_type),
-					RoutingProfileDataObject.RoutingProfilesResources.BROUTER_MODE.getIconRes(),
+					RoutingProfilesResources.BROUTER_MODE.getIconRes(),
 					false, null));
 		}
 
@@ -108,11 +126,14 @@ public class ProfileDataUtils {
 		for (RoutingConfiguration.Builder builder : context.getAllRoutingConfigs()) {
 			collectRoutingProfilesFromConfig(context, builder, profilesObjects, disabledRouterNames);
 		}
+		for (OnlineRoutingEngineDataObject onlineEngine : getOnlineRoutingProfiles(context)) {
+			profilesObjects.put(onlineEngine.getStringKey(), onlineEngine);
+		}
 		return profilesObjects;
 	}
 
 	private static void collectRoutingProfilesFromConfig(OsmandApplication app, RoutingConfiguration.Builder builder,
-	                                                     Map<String, RoutingProfileDataObject> profilesObjects, List<String> disabledRouterNames) {
+	                                                     Map<String, ProfileDataObject> profilesObjects, List<String> disabledRouterNames) {
 		for (Map.Entry<String, GeneralRouter> entry : builder.getAllRouters().entrySet()) {
 			String routerKey = entry.getKey();
 			GeneralRouter router = entry.getValue();
@@ -123,9 +144,9 @@ public class ProfileDataUtils {
 				String fileName = router.getFilename();
 				if (!Algorithms.isEmpty(fileName)) {
 					description = fileName;
-				} else if (RoutingProfileDataObject.RoutingProfilesResources.isRpValue(name.toUpperCase())) {
-					iconRes = RoutingProfileDataObject.RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
-					name = app.getString(RoutingProfileDataObject.RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
+				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())) {
+					iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
+					name = app.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
 				}
 				profilesObjects.put(routerKey, new RoutingProfileDataObject(routerKey, name, description,
 						iconRes, false, fileName));

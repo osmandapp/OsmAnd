@@ -621,7 +621,11 @@ public class ResourceManager {
 		}
 	}
 
-	public List<String> indexingMaps(final IProgress progress) {
+	public List<String> indexingMaps(IProgress progress) {
+		return indexingMaps(progress, Collections.<File>emptyList());
+	}
+
+	public List<String> indexingMaps(final IProgress progress, List<File> filesToReindex) {
 		long val = System.currentTimeMillis();
 		ArrayList<File> files = new ArrayList<File>();
 		File appPath = context.getAppPath(null);
@@ -688,7 +692,7 @@ public class ResourceManager {
 			try {
 				BinaryMapIndexReader mapReader = null;
 				try {
-					mapReader = cachedOsmandIndexes.getReader(f);
+					mapReader = cachedOsmandIndexes.getReader(f, !filesToReindex.contains(f));
 					if (mapReader.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
 						mapReader = null;
 					}

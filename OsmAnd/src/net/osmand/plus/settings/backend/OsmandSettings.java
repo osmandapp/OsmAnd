@@ -1015,6 +1015,8 @@ public class OsmandSettings {
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
 	}
 
+	public final CommonPreference<String> ONLINE_ROUTING_ENGINES = new StringPreference(this, "online_routing_engines", null).makeGlobal();
+
 	public final CommonPreference<NavigationIcon> NAVIGATION_ICON = new EnumStringPreference<>(this, "navigation_icon", NavigationIcon.DEFAULT, NavigationIcon.values()).makeProfile().cache();
 
 	{
@@ -1162,6 +1164,12 @@ public class OsmandSettings {
 
 	public final OsmandPreference<String> USER_ACCESS_TOKEN_SECRET =
 			new StringPreference(this, "user_access_token_secret", "").makeGlobal();
+
+	public final OsmandPreference<String> OPR_ACCESS_TOKEN =
+			new StringPreference(this, "opr_user_access_token_secret", "").makeGlobal();
+
+	public final OsmandPreference<String> OPR_USERNAME =
+			new StringPreference(this, "opr_username_secret", "").makeGlobal();
 
 	// this value boolean is synchronized with settings_pref.xml preference offline POI/Bugs edition
 	public final OsmandPreference<Boolean> OFFLINE_EDITION = new BooleanPreference(this, "offline_osm_editing", true).makeGlobal().makeShared();
