@@ -63,9 +63,9 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
 				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
-		TextInputEditText nameText = view.findViewById(R.id.name_edit_text);
-		nameText.setText(folderName);
-		nameText.addTextChangedListener(new TextWatcher() {
+		editText = view.findViewById(R.id.name_edit_text);
+		editText.setText(folderName);
+		editText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 			}
