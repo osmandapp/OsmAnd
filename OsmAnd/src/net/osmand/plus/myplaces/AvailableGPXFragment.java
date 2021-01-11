@@ -42,6 +42,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
@@ -114,7 +115,7 @@ import static net.osmand.util.Algorithms.objectEquals;
 import static net.osmand.util.Algorithms.removeAllFiles;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
-		FavoritesFragmentStateHolder, OsmAuthorizationListener {
+		FavoritesFragmentStateHolder, OsmAuthorizationListener, RenameCallback {
 
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 	public static final int SEARCH_ID = -1;
@@ -884,8 +885,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 												File dest = new File(destFolder, info.fileName);
 												if (info.file.renameTo(dest)) {
 													app.getGpxDbHelper().rename(info.file, dest);
-													asyncLoader = new LoadGpxTask();
-													asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
+													reloadTracks();
 												} else {
 													Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
 												}
@@ -907,8 +907,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					} else {
 						if (info.file.renameTo(dest)) {
 							app.getGpxDbHelper().rename(info.file, dest);
-							asyncLoader = new LoadGpxTask();
-							asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
+							reloadTracks();
 						} else {
 							Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
 						}
@@ -941,6 +940,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		app.startActivity(intent);
+	}
+
+	@Override
+	public void renamedTo(File file) {
+		reloadTracks();
 	}
 
 	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, List<GpxInfo>> {
@@ -1548,13 +1552,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						FileUtils.renameFile(getActivity(), gpxInfo.file, new RenameCallback() {
-							@Override
-							public void renamedTo(File file) {
-								asyncLoader = new LoadGpxTask();
-								asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
-							}
-						});
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							FileUtils.renameFile(activity, gpxInfo.file, AvailableGPXFragment.this, false);
+						}
 					}
 				})
 				.create()

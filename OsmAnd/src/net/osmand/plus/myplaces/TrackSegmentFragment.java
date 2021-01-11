@@ -26,6 +26,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
+import net.osmand.FileUtils.RenameCallback;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -56,7 +57,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackSegmentFragment extends OsmAndListFragment implements TrackBitmapDrawerListener, SegmentActionsListener {
+public class TrackSegmentFragment extends OsmAndListFragment implements TrackBitmapDrawerListener,
+		SegmentActionsListener, RenameCallback {
 
 	public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
@@ -139,6 +141,20 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							}
 						});
 				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				MenuItem renameItem = menu.add(R.string.shared_string_rename)
+						.setIcon(app.getUIUtilities().getIcon((R.drawable.ic_action_edit_dark)))
+						.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								GPXFile gpx = displayHelper.getGpx();
+								FragmentActivity activity = getActivity();
+								if (activity != null && gpx != null) {
+									FileUtils.renameFile(activity, new File(gpx.path), TrackSegmentFragment.this, false);
+								}
+								return true;
+							}
+						});
+				renameItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 				MenuItem deleteItem = menu.add(R.string.shared_string_delete)
 						.setIcon(app.getUIUtilities().getIcon((R.drawable.ic_action_delete_dark)))
 						.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -437,5 +453,15 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 				}
 			}
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	@Override
+	public void renamedTo(File file) {
+		displayHelper.setFile(file);
+		TrackActivity activity = getTrackActivity();
+		if (activity != null) {
+			activity.setupActionBar();
+			activity.loadGpx();
+		}
 	}
 }

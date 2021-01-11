@@ -29,6 +29,7 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
@@ -74,7 +75,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
-		OnMapSourceUpdateListener {
+		OnMapSourceUpdateListener, RenameCallback {
 	private LoadLocalIndexTask asyncLoader;
 	private Map<String, IndexItem> filesToUpdate = new HashMap<>();
 	private LocalIndexesAdapter listAdapter;
@@ -141,13 +142,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {
 		if (resId == R.string.shared_string_rename) {
-			FileUtils.renameFile(getActivity(), new File(info.getPathToData()), new RenameCallback() {
-
-				@Override
-				public void renamedTo(File file) {
-					getDownloadActivity().reloadLocalIndexes();
-				}
-			});
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				File file = new File(info.getPathToData());
+				FileUtils.renameFile(activity, file, this, false);
+			}
 		} else if (resId == R.string.clear_tile_data) {
 			AlertDialog.Builder confirm = new AlertDialog.Builder(getActivity());
 			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
@@ -188,7 +187,19 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	@Override
 	public void onMapSourceUpdated() {
-		getDownloadActivity().reloadLocalIndexes();
+		reloadLocalIndexes();
+	}
+
+	@Override
+	public void renamedTo(File file) {
+		reloadLocalIndexes();
+	}
+
+	private void reloadLocalIndexes() {
+		DownloadActivity activity = getDownloadActivity();
+		if (activity != null) {
+			activity.reloadLocalIndexes();
+		}
 	}
 
 	public class LoadLocalIndexTask extends AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>>
@@ -666,7 +677,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	public void localOptionsMenu(final int itemId) {
 		if (itemId == R.string.shared_string_refresh) {
-			getDownloadActivity().reloadLocalIndexes();
+			reloadLocalIndexes();
 		} else if (itemId == R.string.shared_string_delete) {
 			openSelectionMode(itemId, R.drawable.ic_action_delete_dark,
 					new DialogInterface.OnClickListener() {

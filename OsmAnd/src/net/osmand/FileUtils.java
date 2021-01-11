@@ -1,27 +1,22 @@
 package net.osmand;
 
-import android.app.Activity;
-import android.content.DialogInterface;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.dialogs.RenameFileBottomSheet;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.regex.Pattern;
 
 public class FileUtils {
@@ -29,70 +24,11 @@ public class FileUtils {
 	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
-	public static void renameFile(Activity a, final File f, final RenameCallback callback) {
-		final WeakReference<Activity> weakActivity = new WeakReference<>(a);
-		AlertDialog.Builder b = new AlertDialog.Builder(a);
-		if (f.exists()) {
-			int xt = f.getName().lastIndexOf('.');
-			final String ext = xt == -1 ? "" : f.getName().substring(xt);
-			final String originalName = xt == -1 ? f.getName() : f.getName().substring(0, xt);
-			final EditText editText = new EditText(a);
-			editText.setText(originalName);
-			editText.addTextChangedListener(new TextWatcher() {
-				@Override
-				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start, int before, int count) {
-				}
-
-				@Override
-				public void afterTextChanged(Editable s) {
-					Editable text = editText.getText();
-					if (text.length() >= 1) {
-						Activity activity = weakActivity.get();
-						if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(text).find() && activity != null) {
-							editText.setError(activity.getString(R.string.file_name_containes_illegal_char));
-						}
-					}
-				}
-			});
-			b.setTitle(R.string.shared_string_rename);
-			int leftPadding = AndroidUtils.dpToPx(a, 24f);
-			int topPadding = AndroidUtils.dpToPx(a, 4f);
-			b.setView(editText, leftPadding, topPadding, leftPadding, topPadding);
-			// Behaviour will be overwritten later;
-			b.setPositiveButton(R.string.shared_string_save, null);
-			b.setNegativeButton(R.string.shared_string_cancel, null);
-			final AlertDialog alertDialog = b.create();
-			alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-				@Override
-				public void onShow(DialogInterface dialog) {
-					alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
-							new View.OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									Activity activity = weakActivity.get();
-									if (activity != null) {
-										OsmandApplication app = (OsmandApplication) activity.getApplication();
-										if (ext.equals(SQLiteTileSource.EXT)) {
-											if (renameSQLiteFile(app, f, editText.getText().toString() + ext,
-													callback) != null) {
-												alertDialog.dismiss();
-											}
-										} else {
-											if (renameGpxFile(app, f, editText.getText().toString() + ext,
-													false, callback) != null) {
-												alertDialog.dismiss();
-											}
-										}
-									}
-								}
-							});
-				}
-			});
-			alertDialog.show();
+	public static void renameFile(@NonNull FragmentActivity activity, @NonNull File file,
+								  @Nullable Fragment target, boolean usedOnMap) {
+		if (file.exists()) {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			RenameFileBottomSheet.showInstance(fragmentManager, target, file, usedOnMap);
 		}
 	}
 
