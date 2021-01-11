@@ -14,12 +14,13 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.util.Algorithms;
 
@@ -53,13 +54,20 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		final File file = new File(filePath);
 		final File fileDir = file.getParentFile();
 
-		items.add(new TitleItem(getString(R.string.shared_string_folders)));
-		items.add(new SubtitleItem(getString(R.string.select_folder_descr)));
+		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.select_folder_descr))
+				.setTitle(getString(R.string.shared_string_folders))
+				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
+				.create();
+		items.add(titleItem);
 
+		View addNewFolderView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_with_descr_64dp, null);
+		addNewFolderView.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
+		AndroidUiHelper.updateVisibility(addNewFolderView.findViewById(R.id.description), false);
 		BaseBottomSheetItem addNewFolderItem = new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.add_new_folder))
 				.setIcon(getActiveIcon(R.drawable.ic_action_folder_add))
-				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)
 				.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -70,9 +78,13 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 						}
 					}
 				})
+				.setCustomView(addNewFolderView)
 				.create();
 		items.add(addNewFolderItem);
-		items.add(new DividerItem(app));
+
+		DividerItem dividerItem = new DividerItem(app);
+		dividerItem.setMargins(0, 0, 0, 0);
+		items.add(dividerItem);
 
 		final List<File> dirs = new ArrayList<>();
 		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs, fileDir);
@@ -89,12 +101,19 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 					dirName = dirName.substring(gpxDir.length() + 1);
 				}
 			}
-
+			String description;
+			List<File> files = collectFiles(dir);
+			if (Algorithms.isEmpty(files)) {
+				description = getString(R.string.shared_string_empty);
+			} else {
+				description = String.valueOf(files.size());
+			}
 			final BaseBottomSheetItem[] folderItem = new BaseBottomSheetItem[1];
-			folderItem[0] = new SimpleBottomSheetItem.Builder()
+			folderItem[0] = new BottomSheetItemWithDescription.Builder()
+					.setDescription(description)
 					.setTitle(capitalizeFirstLetter(dirName))
 					.setIcon(getActiveIcon(R.drawable.ic_action_folder))
-					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)
 					.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -128,6 +147,19 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 			listener.onFileMove(file, new File(destFolder, file.getName()));
 		}
 		dismiss();
+	}
+
+	public List<File> collectFiles(File parentDir) {
+		List<File> files = new ArrayList<>();
+		File[] listFiles = parentDir.listFiles();
+		if (listFiles != null) {
+			for (File file : listFiles) {
+				if (!file.isDirectory()) {
+					files.add(file);
+				}
+			}
+		}
+		return files;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,

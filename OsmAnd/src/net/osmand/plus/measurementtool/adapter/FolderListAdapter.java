@@ -15,14 +15,11 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.GroupsViewHolder> {
@@ -38,24 +35,15 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 		this.app = app;
 		this.nightMode = nightMode;
 		selectedItemName = folderName;
-		fillGroups();
 	}
 
-	private void fillGroups() {
+	public void setSelectedFolderName(String folderName) {
+		this.selectedItemName = folderName;
+	}
+
+	public void setFolders(List<String> folders) {
 		items.clear();
-		items.addAll(getFolders());
-	}
-
-	private Collection<? extends String> getFolders() {
-		List<File> dirs = new ArrayList<>();
-		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		dirs.add(gpxDir);
-		Algorithms.collectDirs(gpxDir, dirs);
-		List<String> dirItems = new ArrayList<>();
-		for (File dir : dirs) {
-			dirItems.add(dir.getName());
-		}
-		return dirItems;
+		items.addAll(folders);
 	}
 
 	@NonNull

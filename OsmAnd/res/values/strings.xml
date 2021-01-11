@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="shared_string_empty">Empty</string>
     <string name="select_folder_descr">Select folder or add new one</string>
     <string name="select_folder">Select folder</string>
     <string name="shared_string_folders">Folders</string>
