@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils.RenameCallback;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -33,6 +34,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 
 import static net.osmand.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
+import static net.osmand.FileUtils.renameFile;
 import static net.osmand.FileUtils.renameGpxFile;
 import static net.osmand.FileUtils.renameSQLiteFile;
 
@@ -127,8 +129,10 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		String ext = index == -1 ? "" : file.getName().substring(index);
 		if (SQLiteTileSource.EXT.equals(ext)) {
 			dest = renameSQLiteFile(app, file, selectedFileName + ext, null);
-		} else {
+		} else if (IndexConstants.GPX_FILE_EXT.equals(ext)) {
 			dest = renameGpxFile(app, file, selectedFileName + ext, false, null);
+		} else {
+			dest = renameFile(app, file, selectedFileName + ext, false, null);
 		}
 		if (dest != null) {
 			Fragment fragment = getTargetFragment();

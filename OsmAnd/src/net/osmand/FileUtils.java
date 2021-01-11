@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Metadata;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -42,7 +44,7 @@ public class FileUtils {
 			dest.getParentFile().mkdirs();
 		}
 		if (source.renameTo(dest)) {
-			final String[] suffixes = new String[]{"-journal", "-wal", "-shm"};
+			final String[] suffixes = new String[] {"-journal", "-wal", "-shm"};
 			for (String s : suffixes) {
 				File file = new File(ctx.getDatabasePath(source + s).toString());
 				if (file.exists()) {
@@ -66,6 +68,26 @@ public class FileUtils {
 			return null;
 		}
 		File res = renameGpxFile(app, source, dest);
+		if (res != null) {
+			if (callback != null) {
+				callback.renamedTo(res);
+			}
+		} else {
+			Toast.makeText(app, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+		}
+		return res;
+	}
+
+	public static File renameFile(@NonNull OsmandApplication app, @NonNull File source,
+								  @NonNull String newName, boolean dirAllowed, RenameCallback callback) {
+		File dest = checkRenamePossibility(app, source, newName, dirAllowed);
+		if (dest == null) {
+			return null;
+		}
+		if (!dest.getParentFile().exists()) {
+			dest.getParentFile().mkdirs();
+		}
+		File res = source.renameTo(dest) ? dest : null;
 		if (res != null) {
 			if (callback != null) {
 				callback.renamedTo(res);
