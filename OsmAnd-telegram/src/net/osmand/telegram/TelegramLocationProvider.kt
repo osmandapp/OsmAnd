@@ -166,7 +166,7 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 		registerOrUnregisterCompassListener(true)
 	}
 
-	fun redownloadAGPS() {
+	private fun redownloadAGPS() {
 		try {
 			val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 			service.sendExtraCommand(LocationManager.GPS_PROVIDER, "delete_aiding_data", null)

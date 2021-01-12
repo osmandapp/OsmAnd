@@ -4025,4 +4025,26 @@
     <string name="routing_attr_allow_intermittent_description">Permite caminos de abba intermitentes</string>
     <string name="routing_attr_allow_intermittent_name">Permite caminos de abba intermitentes</string>
     <string name="voice_prompts_timetable">Nùmeru de annùntzios vocales</string>
+    <string name="add_online_routing_engine">Annanghe unu motore de càrculu de s\'àndala in lìnia</string>
+    <string name="edit_online_routing_engine">Modìfica su motore de càrculu de s\'àndala in lìnia</string>
+    <string name="shared_string_subtype">Suta-casta</string>
+    <string name="shared_string_vehicle">Veìculu</string>
+    <string name="shared_string_api_key">Crae de s\'API</string>
+    <string name="shared_string_server_url">URL de su serbidore</string>
+    <string name="shared_string_enter_param">Inserta su paràmetru</string>
+    <string name="keep_it_empty_if_not">Si nono, mantene·lu bòidu</string>
+    <string name="online_routing_example_hint">S\'URL cun totu sos paràmetros at a apàrrere gasi:</string>
+    <string name="test_route_calculation">Proa a carculare un\'àndala</string>
+    <string name="routing_engine_vehicle_type_driving">In vetura</string>
+    <string name="routing_engine_vehicle_type_foot">A pee</string>
+    <string name="routing_engine_vehicle_type_bike">Bitzicleta</string>
+    <string name="routing_engine_vehicle_type_car">Màchina</string>
+    <string name="message_error_recheck_parameters">Errore, torra a verificare sos paràmetros</string>
+    <string name="copy_address">Còpia s\'indiritzu</string>
+    <string name="online_routing_engine">Motore de càrculu in lìnia</string>
+    <string name="online_routing_engines">Motores de càrculu in lìnia</string>
+    <string name="shared_string_folders">Cartellas</string>
+    <string name="select_folder">Ischerta sa cartella</string>
+    <string name="select_folder_descr">Ischerta una cartella o crea·nde una noa</string>
+    <string name="shared_string_empty">Bòidu</string>
 </resources>

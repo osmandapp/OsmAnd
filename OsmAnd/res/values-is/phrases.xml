@@ -286,7 +286,7 @@
     <string name="poi_fuel_biogas">Lífgas</string>
     <string name="poi_fuel_lh2">Fljótandi vetni</string>
     <string name="poi_fuel_electricity">Rafmagn</string>
-    <string name="poi_electricity_combined_charging">Hleðslustöð</string>
+    <string name="poi_electricity_combined_charging">Hleðslustöð;Hleðslustöð fyrir rafknúin farartæki;EV-hleðslustöð;Hleðslustæði;Rafhleðslustæði;Þjónustustöð fyrir rafknúin farartæki</string>
     <string name="poi_compressed_air">Loftdæla</string>
     <string name="poi_motorcycle_parking">Mótorhjólastæði</string>
     <string name="poi_parking_entrance">Aðgangur að bílastæði</string>
@@ -3883,4 +3883,8 @@
     <string name="poi_lavoir">Þvottaþró (þvottaaðstaða)</string>
     <string name="poi_water_source_river">Á</string>
     <string name="poi_lifeguard_base">Bækistöð öryggisvarða</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Göng fyrir leðurblökur</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Brú fyrir leðurblökur</string>
+    <string name="poi_wildlife_crossing">Þverun villtra dýra</string>
+    <string name="poi_swimming_area">Sundsvæði</string>
 </resources>

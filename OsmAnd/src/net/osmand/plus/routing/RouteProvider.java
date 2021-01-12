@@ -22,6 +22,8 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
+import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
@@ -91,7 +93,8 @@ public class RouteProvider {
 		OSMAND("OsmAnd (offline)"),
 		BROUTER("BRouter (offline)"),
 		STRAIGHT("Straight line"),
-		DIRECT_TO("Direct To");
+		DIRECT_TO("Direct To"),
+		ONLINE("Online engine");
 
 		private final String name;
 
@@ -363,10 +366,8 @@ public class RouteProvider {
 					res = findVectorMapsRoute(params, calcGPXRoute);
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
-//				} else if (params.type == RouteService.ORS) {
-//					res = findORSRoute(params);
-//				} else if (params.type == RouteService.OSRM) {
-//					res = findOSRMRoute(params);
+				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
+					res = findOnlineRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.STRAIGHT ||
 						params.mode.getRouteService() == RouteService.DIRECT_TO) {
 					res = findStraightRoute(params);
@@ -382,6 +383,8 @@ public class RouteProvider {
 			} catch (ParserConfigurationException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (SAXException e) {
+				log.error("Failed to find route ", e); //$NON-NLS-1$
+			} catch (JSONException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			}
 		}
@@ -1204,64 +1207,33 @@ public class RouteProvider {
 		return exporter.exportRoute();
 	}
 
-	private void appendOSRMLoc(StringBuilder uri, LatLon il) {
-		uri.append(";").append(il.getLongitude());
-		uri.append(",").append(il.getLatitude());
-	}
-
-	protected RouteCalculationResult findOSRMRoute(RouteCalculationParams params)
-			throws MalformedURLException, IOException, JSONException {
-		// http://router.project-osrm.org/route/v1/driving/4.83,52.28;4.95,52.28
-		List<Location> res = new ArrayList<Location>();
-		StringBuilder uri = new StringBuilder();
-		// possibly hide that API key because it is privacy of osmand
-		// A6421860EBB04234AB5EF2D049F2CD8F key is compromised
-		String scheme = "";
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-			scheme = "https";
-		} else {
-			scheme = "http";
-		}
-		uri.append(scheme + "://router.project-osrm.org/route/v1/driving/"); //$NON-NLS-1$
-		uri.append(String.valueOf(params.start.getLongitude()));
-		uri.append(",").append(String.valueOf(params.start.getLatitude()));
-		if(params.intermediates != null && params.intermediates.size() > 0) {
-			for(LatLon il : params.intermediates) {
-				appendOSRMLoc(uri, il);
+	private RouteCalculationResult findOnlineRoute(RouteCalculationParams params) throws IOException, JSONException {
+		OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
+		String stringKey = params.mode.getRoutingProfile();
+		List<LatLon> route = helper.calculateRouteOnline(helper.getEngineByKey(stringKey), getFullPathFromParams(params));
+		if (!route.isEmpty()) {
+			List<Location> res = new ArrayList<>();
+			for (LatLon pt : route) {
+				WptPt wpt = new WptPt();
+				wpt.lat = pt.getLatitude();
+				wpt.lon = pt.getLongitude();
+				res.add(createLocation(wpt));
 			}
-		}
-		appendOSRMLoc(uri, params.end);
-// to get more waypoints, add overview=full option
-//		uri.append("?overview=full")
-
-		log.info("URL route " + uri);
-
-		URLConnection connection = NetworkUtils.getHttpURLConnection(uri.toString());
-		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
-		StringBuilder content = new StringBuilder();
-		BufferedReader rs = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-		String s;
-		while((s = rs.readLine()) != null) {
-			content.append(s);
-		}
-		JSONObject obj = new JSONObject(content.toString());
-		try {
-			rs.close();
-		} catch(IOException e){
-		}
-		List<LatLon> route = GeoPolylineParserUtil.parse(obj.getJSONArray("routes").getJSONObject(0).getString("geometry"),
-				GeoPolylineParserUtil.PRECISION_5);
-		if (route.isEmpty()) {
+			params.intermediates = null;
+			return new RouteCalculationResult(res, null, params, null, true);
+		} else {
 			return new RouteCalculationResult("Route is empty");
 		}
-		for (LatLon pt : route) {
-			WptPt wpt = new WptPt();
-			wpt.lat = pt.getLatitude();
-			wpt.lon = pt.getLongitude();
-			res.add(createLocation(wpt));
+	}
+
+	private static List<LatLon> getFullPathFromParams(RouteCalculationParams params) {
+		List<LatLon> points = new ArrayList<>();
+		points.add(new LatLon(params.start.getLatitude(), params.start.getLongitude()));
+		if (Algorithms.isEmpty(params.intermediates)) {
+			points.addAll(params.intermediates);
 		}
-		params.intermediates = null;
-		return new RouteCalculationResult(res, null, params, null, true);
+		points.add(params.end);
+		return points;
 	}
 
 	protected RouteCalculationResult findBROUTERRoute(RouteCalculationParams params) throws MalformedURLException,

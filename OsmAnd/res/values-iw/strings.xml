@@ -4048,4 +4048,10 @@
     <string name="routing_engine_vehicle_type_car">מכונית</string>
     <string name="message_error_recheck_parameters">שגיאה, נא לבדוק את המשתנים מחדש</string>
     <string name="copy_address">העתקת כתובת</string>
+    <string name="online_routing_engine">מנוע ניווט מקוון</string>
+    <string name="online_routing_engines">מנועי ניווט מקוונים</string>
+    <string name="shared_string_folders">תיקיות</string>
+    <string name="select_folder">בחירת תקינה</string>
+    <string name="select_folder_descr">נא לבחור תיקייה או להוסיף אחת חדשה</string>
+    <string name="shared_string_empty">ריק</string>
 </resources>

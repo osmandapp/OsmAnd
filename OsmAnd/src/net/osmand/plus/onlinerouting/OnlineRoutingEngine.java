@@ -15,32 +15,32 @@ public class OnlineRoutingEngine {
 
 	public final static String ONLINE_ROUTING_ENGINE_PREFIX = "online_routing_engine_";
 
-	public enum EngineParameterType {
-		CUSTOM_SERVER_URL,
+	public enum EngineParameter {
 		CUSTOM_NAME,
+		CUSTOM_URL,
 		API_KEY
 	}
 
 	private String stringKey;
-	private ServerType serverType;
+	private EngineType type;
 	private String vehicleKey;
 	private Map<String, String> params = new HashMap<>();
 
 	public OnlineRoutingEngine(@NonNull String stringKey,
-							   @NonNull ServerType serverType,
-							   @NonNull String vehicleKey,
-							   @Nullable Map<String, String> params) {
-		this(stringKey, serverType, vehicleKey);
+	                           @NonNull EngineType type,
+	                           @NonNull String vehicleKey,
+	                           @Nullable Map<String, String> params) {
+		this(stringKey, type, vehicleKey);
 		if (!Algorithms.isEmpty(params)) {
 			this.params.putAll(params);
 		}
 	}
 
 	public OnlineRoutingEngine(@NonNull String stringKey,
-	                           @NonNull ServerType serverType,
+	                           @NonNull EngineType type,
 	                           @NonNull String vehicleKey) {
 		this.stringKey = stringKey;
-		this.serverType = serverType;
+		this.type = type;
 		this.vehicleKey = vehicleKey;
 	}
 
@@ -48,8 +48,16 @@ public class OnlineRoutingEngine {
 		return stringKey;
 	}
 
-	public ServerType getServerType() {
-		return serverType;
+	public EngineType getType() {
+		return type;
+	}
+
+	public String getBaseUrl() {
+		String customUrl = getParameter(EngineParameter.CUSTOM_URL);
+		if (Algorithms.isEmpty(customUrl)) {
+			return type.getStandardUrl();
+		}
+		return customUrl;
 	}
 
 	public String getVehicleKey() {
@@ -60,25 +68,16 @@ public class OnlineRoutingEngine {
 		return params;
 	}
 
-	public String getBaseUrl() {
-		String customServerUrl = getParameter(EngineParameterType.CUSTOM_SERVER_URL);
-		if (!Algorithms.isEmpty(customServerUrl)) {
-			return customServerUrl;
-		} else {
-			return serverType.getBaseUrl();
-		}
+	public String getParameter(EngineParameter paramKey) {
+		return params.get(paramKey.name());
 	}
 
-	public String getParameter(EngineParameterType paramType) {
-		return params.get(paramType.name());
-	}
-
-	public void putParameter(EngineParameterType paramType, String paramValue) {
-		params.put(paramType.name(), paramValue);
+	public void putParameter(EngineParameter paramKey, String paramValue) {
+		params.put(paramKey.name(), paramValue);
 	}
 
 	public String getName(@NonNull Context ctx) {
-		String customName = getParameter(EngineParameterType.CUSTOM_NAME);
+		String customName = getParameter(EngineParameter.CUSTOM_NAME);
 		if (customName != null) {
 			return customName;
 		} else {
@@ -87,21 +86,21 @@ public class OnlineRoutingEngine {
 	}
 
 	private String getStandardName(@NonNull Context ctx) {
-		return getStandardName(ctx, serverType, vehicleKey);
+		return getStandardName(ctx, type, vehicleKey);
 	}
 
 	public static String getStandardName(@NonNull Context ctx,
-	                                     @NonNull ServerType serverType,
+	                                     @NonNull EngineType type,
 	                                     @NonNull String vehicleKey) {
 		String vehicleTitle = VehicleType.toHumanString(ctx, vehicleKey);
 		String pattern = ctx.getString(R.string.ltr_or_rtl_combine_via_dash);
-		return String.format(pattern, serverType.getTitle(), vehicleTitle);
+		return String.format(pattern, type.getTitle(), vehicleTitle);
 	}
 
-	public static OnlineRoutingEngine createNewEngine(@NonNull ServerType serverType,
-													  @NonNull String vehicleKey,
-													  @Nullable Map<String, String> params) {
-		return new OnlineRoutingEngine(generateKey(), serverType, vehicleKey, params);
+	public static OnlineRoutingEngine createNewEngine(@NonNull EngineType type,
+	                                                  @NonNull String vehicleKey,
+	                                                  @Nullable Map<String, String> params) {
+		return new OnlineRoutingEngine(generateKey(), type, vehicleKey, params);
 	}
 
 	private static String generateKey() {

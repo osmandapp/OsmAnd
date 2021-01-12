@@ -3879,4 +3879,7 @@
     <string name="poi_water_source_tap">Torneira</string>
     <string name="poi_water_source_water_works">Estação de tratamento de água</string>
     <string name="poi_ranger_station">Posto de guarda florestal</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Túnel de morcegos</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Ponte de morcegos</string>
+    <string name="poi_swimming_area">Área de natação</string>
 </resources>

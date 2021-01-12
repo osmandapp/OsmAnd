@@ -14,10 +14,11 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/main_item_part"
+            android:id="@+id/basic_item_body"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
             android:paddingLeft="@dimen/content_padding"
             android:paddingStart="@dimen/content_padding"
             android:paddingRight="0dp"
@@ -79,22 +80,24 @@
 
         <View
             android:layout_width="1dp"
-            android:layout_height="36dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/content_padding"
+            android:layout_marginBottom="@dimen/content_padding"
             android:background="?attr/divider_color_basic"/>
 
         <LinearLayout
-            android:id="@+id/eng_button"
+            android:id="@+id/end_button"
             android:paddingLeft="@dimen/content_padding"
             android:paddingRight="@dimen/content_padding"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/end_button_icon"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="@dimen/standard_icon_size"
                 android:layout_gravity="center_vertical"
-                app:srcCompat="@drawable/ic_action_settings"
-                android:tint="?attr/default_icon_color" />
+                app:srcCompat="@drawable/ic_action_settings" />
 
         </LinearLayout>
 
