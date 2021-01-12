@@ -4042,4 +4042,8 @@
     <string name="copy_address">Копіювати адресу</string>
     <string name="online_routing_engine">Мережний рушій маршрутизації</string>
     <string name="online_routing_engines">Мережні рушії маршрутизації</string>
+    <string name="shared_string_folders">Теки</string>
+    <string name="select_folder">Вибрати теку</string>
+    <string name="select_folder_descr">Виберіть теку або додайте нову</string>
+    <string name="shared_string_empty">Порожньо</string>
 </resources>

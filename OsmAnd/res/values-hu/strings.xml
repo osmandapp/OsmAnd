@@ -4038,4 +4038,8 @@
     <string name="copy_address">Cím másolása</string>
     <string name="online_routing_engine">Online útvonaltervező</string>
     <string name="online_routing_engines">Online útvonaltervezők</string>
+    <string name="shared_string_folders">Mappák</string>
+    <string name="select_folder">Mappa kijelölése</string>
+    <string name="select_folder_descr">Mappa kijelölése vagy új hozzáadása</string>
+    <string name="shared_string_empty">Üres</string>
 </resources>

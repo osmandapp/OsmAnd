@@ -4050,4 +4050,8 @@
     <string name="routing_engine_vehicle_type_driving">Fahren</string>
     <string name="online_routing_engine">Online Navigationssystem</string>
     <string name="online_routing_engines">Online Navigationssysteme</string>
+    <string name="shared_string_folders">Ordner</string>
+    <string name="select_folder">Ordner auswählen</string>
+    <string name="select_folder_descr">Ordner auswählen oder neuen hinzufügen</string>
+    <string name="shared_string_empty">Leer</string>
 </resources>

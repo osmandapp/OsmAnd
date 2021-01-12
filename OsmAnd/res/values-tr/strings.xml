@@ -4001,4 +4001,8 @@
     <string name="copy_address">Adresi kopyala</string>
     <string name="online_routing_engine">Çevrim içi yönlendirme motoru</string>
     <string name="online_routing_engines">Çevrim içi yönlendirme motorları</string>
+    <string name="shared_string_folders">Klasörler</string>
+    <string name="select_folder">Klasör seç</string>
+    <string name="select_folder_descr">Klasör seçin veya yeni bir tane ekleyin</string>
+    <string name="shared_string_empty">Boş</string>
 </resources>

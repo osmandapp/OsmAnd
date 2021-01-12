@@ -4025,4 +4025,8 @@
     <string name="copy_address">Copier l\'adresse</string>
     <string name="online_routing_engine">Moteur de routage en ligne</string>
     <string name="online_routing_engines">Moteurs de routage en ligne</string>
+    <string name="shared_string_folders">Dossiers</string>
+    <string name="select_folder">Sélectionnez le dossier</string>
+    <string name="select_folder_descr">Sélectionnez un dossier ou créez-en un nouveau</string>
+    <string name="shared_string_empty">Vide</string>
 </resources>
