@@ -106,25 +106,32 @@ public class Building extends MapObject {
 	
 
 	public float interpolation(String hno) {
-		if(getInterpolationType() != null || getInterpolationInterval() > 0 
-				//|| checkNameAsInterpolation() // disable due to situation in NL #4284 
-				) {
+		if (getInterpolationType() != null || getInterpolationInterval() > 0
+		// || checkNameAsInterpolation() // disable due to situation in NL #4284
+		) {
 			int num = Algorithms.extractFirstIntegerNumber(hno);
 			String fname = super.getName();
 			int numB = Algorithms.extractFirstIntegerNumber(fname);
-			int numT = numB; 
+			int numT = numB;
 			if (num >= numB) {
 				String sname = getName2();
-				if(fname.contains("-") && sname == null){
+				if (getInterpolationType() == BuildingInterpolation.ALPHABETIC) {
+					char ch = hno.charAt(hno.length() - 1);
+					char chF = fname.charAt(fname.length() - 1);
+					if (chF < ch) {
+						return -1;
+					}
+				}
+				if (fname.contains("-") && sname == null) {
 					int l = fname.indexOf('-');
 					sname = fname.substring(l + 1, fname.length());
 				}
 				if (sname != null) {
 					numT = Algorithms.extractFirstIntegerNumber(sname);
-					if(numT < num) {
+					if (numT < num) {
 						return -1;
 					}
-				} 
+				}
 				if (getInterpolationType() == BuildingInterpolation.EVEN && num % 2 == 1) {
 					return -1;
 				}
@@ -137,8 +144,8 @@ public class Building extends MapObject {
 			} else {
 				return -1;
 			}
-			if(numT > numB){
-				return ((float)num - numB) / (((float)numT - numB));
+			if (numT > numB) {
+				return ((float) num - numB) / (((float) numT - numB));
 			}
 			return 0;
 		}
