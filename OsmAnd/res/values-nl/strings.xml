@@ -3745,7 +3745,7 @@
     <string name="route_between_points_add_track_desc">Selecteer een track waaraan je een nieuw segment wil toevoegen.</string>
     <string name="plan_route_select_track_file_for_open">Selecteer een trackbestand om te openen.</string>
     <string name="plan_route_exit_dialog_descr">Weet u zeker dat u alle wijzigingen in de geplande route wilt annuleren door deze te sluiten\?</string>
-    <string name="plan_route_trim_before">"Alles wegknippen  voor dit punt"</string>
+    <string name="plan_route_trim_before">Alles wegknippen voor dit punt</string>
     <string name="plan_route_trim_after">Alles wegknippen na dit punt</string>
     <string name="plan_route_change_route_type_before">Wijzig het routetype voor</string>
     <string name="plan_route_change_route_type_after">Wijzig het routetype na</string>
@@ -3917,7 +3917,7 @@
     <string name="gpx_upload_identifiable_visibility_descr">Identificeerbaar betekent dat de trace openbaar wordt getoond in uw GPS-sporen en in openbare GPS-trace-lijsten, dat wil zeggen dat andere gebruikers de onbewerkte trace kunnen downloaden en deze aan uw gebruikersnaam kunnen koppelen. Gegevens die via de trackpoints-API worden aangeboden, verwijzen naar uw oorspronkelijke tracepagina. Tijdaanduidingen van de traceerpunten zijn beschikbaar via de openbare GPS-API.</string>
     <string name="gpx_upload_trackable_visibility_descr">Trackbaar betekent dat de trace niet in openbare vermeldingen zal verschijnen, maar trackpoints ervan zullen nog steeds beschikbaar zijn via de openbare GPS API met tijdaanduiding. Andere gebruikers kunnen alleen verwerkte trackpoints downloaden van uw trace die niet rechtstreeks aan u kunnen worden gekoppeld.</string>
     <string name="osm_edit_close_note">Sluit OSM Note</string>
-    <string name="osm_edit_comment_note">Opmerking OSM Note</string>
+    <string name="osm_edit_comment_note">Opmerking maken bij OSM-nota</string>
     <string name="osm_login_descr">U kunt inloggen met de veilige OAuth-methode of uw login en wachtwoord gebruiken.</string>
     <string name="shared_string_add_photo">Een foto toevoegen</string>
     <string name="register_on_openplacereviews">Registreer u op
@@ -3943,8 +3943,8 @@
     <string name="select_folder">Selecteer een map</string>
     <string name="select_folder_descr">Selecteer een map of maak een nieuwe</string>
     <string name="shared_string_empty">Leeg</string>
-    <string name="select_groups_for_import">Selecteer de groepen om deze te importeren.</string>
-    <string name="select_items_for_import">Selecteer de items om deze te importeren.</string>
+    <string name="select_groups_for_import">Selecteer de groepen om te importeren.</string>
+    <string name="select_items_for_import">Selecteer de items om te importeren.</string>
     <string name="add_to_mapillary">Voeg toe aan Mapillary</string>
     <string name="add_to_opr">Voeg toe aan OpenPlaceReviews</string>
     <string name="use_dev_url">Gebruik dev.openstreetmap.org</string>
@@ -3966,4 +3966,38 @@
     <string name="online_routing_engine">Online routeplanningssysteem</string>
     <string name="online_routing_engines">Online routeplanningssystemen</string>
     <string name="shared_string_folders">Mappen</string>
+    <string name="voice_prompts_timetable">Timing van gesproken instructies</string>
+    <string name="lang_de_casual">Duits (spreektaal)</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">OsmAnd gebruikt MGRS, die sterk lijkt op het UTM-NATO-formaat.</string>
+    <string name="shared_string_resources">Resources</string>
+    <string name="shared_string_search_history">Zoekgeschiedenis</string>
+    <string name="app_mode_kayak">Kajak</string>
+    <string name="app_mode_motorboat">Motorboot</string>
+    <string name="cannot_upload_image">Het uploaden van de afbeelding is mislukt - probeer later opnieuw</string>
+    <string name="select_picture">Selecteer een afbeelding</string>
+    <string name="approximate_file_size">Benaderde bestandsgrootte</string>
+    <string name="select_data_to_export">Selecteer de gegevens om naar het bestand te exporteren.</string>
+    <string name="file_size_needed_for_import">Noodzakelijk om te importeren</string>
+    <string name="export_not_enough_space_descr">Je apparaat heeft slechts %1$s beschikbaar. Maak plaats of deselecteer enkele items.</string>
+    <string name="export_not_enough_space">Er is niet genoeg ruimte</string>
+    <string name="use_dev_url_descr">Gebruik dev.openstreetmap.org in plaats van openstreetmap.org om het uploaden van OSM-nota\'s, interessepunten of GPX-tracks uit te testen.</string>
+    <string name="add_photos_descr">OsmAnd toon foto\'s van verschillende bronnen:
+\nOpenPlaceReviews - foto\'s van interessepunten;
+\nMapillary - foto\'s vanop straatniveau;
+\nWikimedia / het Web - foto\'s van interessepunten zoals gelinkt in OpenStreetMap.</string>
+    <string name="elevation_data">Je kan hoogtedata gebruiken om het hoogteverschil van je route te berekenen</string>
+    <string name="release_3_9">• Een optie is toegevoegd om alle data te exporten, waaronder instellingen, andere bronnen en mijn plaatsen
+\n
+\n • Plan een route: diagram met individuele segmenten is toegevoegd, verschillende segmenten kunnen nu gemaakt en aangepast worden
+\n
+\n • Inloggen in OpenStreetMap kan nu met OAuth, de UI van de dialogen is verbeterd
+\n
+\n • Voor favorieten en GPX-track-tussenpunten kan een eigen kleur gegeven worden
+\n
+\n</string>
+    <string name="routing_attr_allow_intermittent_name">Laat regelmatig droogvallende waterwegen toe</string>
+    <string name="shared_string_enter_param">Geef een parameter</string>
+    <string name="keep_it_empty_if_not">Laat leeg indien niet</string>
 </resources>
