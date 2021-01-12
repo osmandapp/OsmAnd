@@ -93,18 +93,20 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected void buildNearestPoiRow(View view) {
 	}
 
-	private void buildRow(View view, int iconId, String text, String textPrefix,
+	private void buildRow(View view, int iconId, String text, String textPrefix, String socialMediaUrl,
 						  boolean collapsable, final CollapsableView collapsableView,
 						  int textColor, boolean isWiki, boolean isText, boolean needLinks,
 						  boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
-		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, collapsable, collapsableView, textColor,
+		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, socialMediaUrl,
+				collapsable, collapsableView, textColor,
 				isWiki, isText, needLinks, isPhoneNumber, isUrl, matchWidthDivider, textLinesLimit);
 	}
 
 	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix,
-							boolean collapsable, final CollapsableView collapsableView,
-							int textColor, boolean isWiki, boolean isText, boolean needLinks,
-							boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
+							final String socialMediaUrl, boolean collapsable,
+							final CollapsableView collapsableView, int textColor, boolean isWiki,
+							boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
+							boolean matchWidthDivider, int textLinesLimit) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -312,8 +314,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
 						}
 					} else {
+						String uri = socialMediaUrl == null ? text : socialMediaUrl;
 						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse(text));
+						intent.setData(Uri.parse(uri));
 						v.getContext().startActivity(intent);
 					}
 				}
@@ -366,6 +369,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				continue;
 			}
 
+			String socialMediaUrl = null;
 			String textPrefix = "";
 			CollapsableView collapsableView = null;
 			boolean collapsable = false;
@@ -397,6 +401,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			if (vl.startsWith("http://") || vl.startsWith("https://") || vl.startsWith("HTTP://") || vl.startsWith("HTTPS://")) {
 				isUrl = true;
+			} else {
+				socialMediaUrl = getSocialMediaUrl(key, vl);
+				if (socialMediaUrl != null) {
+					isUrl = true;
+				}
 			}
 
 			if (pType != null && !pType.isText()) {
@@ -557,16 +566,16 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			AmenityInfoRow row;
 			if (isDescription) {
 				row = new AmenityInfoRow(key, R.drawable.ic_action_note_dark, textPrefix,
-						vl, collapsable, collapsableView, 0, false, true,
-						true, 0, "", false, false, matchWidthDivider, 0);
+						vl, null, collapsable, collapsableView, 0, false,
+						true, true, 0, "", false, false, matchWidthDivider, 0);
 			} else if (icon != null) {
-				row = new AmenityInfoRow(key, icon, textPrefix, vl, collapsable, collapsableView,
-						textColor, isWiki, isText, needLinks, poiTypeOrder, poiTypeKeyName,
-						isPhoneNumber, isUrl, matchWidthDivider, 0);
+				row = new AmenityInfoRow(key, icon, textPrefix, vl, socialMediaUrl, collapsable,
+						collapsableView, textColor, isWiki, isText, needLinks, poiTypeOrder,
+						poiTypeKeyName, isPhoneNumber, isUrl, matchWidthDivider, 0);
 			} else {
-				row = new AmenityInfoRow(key, iconId, textPrefix, vl, collapsable, collapsableView,
-						textColor, isWiki, isText, needLinks, poiTypeOrder, poiTypeKeyName,
-						isPhoneNumber, isUrl, matchWidthDivider, 0);
+				row = new AmenityInfoRow(key, iconId, textPrefix, vl, socialMediaUrl, collapsable,
+						collapsableView, textColor, isWiki, isText, needLinks, poiTypeOrder,
+						poiTypeKeyName, isPhoneNumber, isUrl, matchWidthDivider, 0);
 			}
 			if (isDescription) {
 				descriptions.add(row);
@@ -613,8 +622,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				boolean cuisineOrDish = categoryName.equals(Amenity.CUISINE) || categoryName.equals(Amenity.DISH);
 				CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true, categoryTypes, true, cuisineOrDish ? cuisineRow : null);
-				infoRows.add(new AmenityInfoRow(poiAdditionalCategoryName, icon, pType.getPoiAdditionalCategoryTranslation(), sb.toString(), true, collapsableView,
-						0, false, false, false, pType.getOrder(), pType.getKeyName(), false, false, false, 1));
+				infoRows.add(new AmenityInfoRow(poiAdditionalCategoryName, icon,
+						pType.getPoiAdditionalCategoryTranslation(), sb.toString(), null,
+						true, collapsableView, 0, false, false,
+						false, pType.getOrder(), pType.getKeyName(), false,
+						false, false, 1));
 			}
 		}
 
@@ -629,8 +641,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				sb.append(pt.getTranslation());
 			}
-			infoRows.add(new AmenityInfoRow(poiCategory.getKeyName(), icon, poiCategory.getTranslation(), sb.toString(), true, collapsableView,
-					0, false, false, false, 40, poiCategory.getKeyName(), false, false, false, 1));
+			infoRows.add(new AmenityInfoRow(poiCategory.getKeyName(), icon,
+					poiCategory.getTranslation(), sb.toString(), null, true,
+					collapsableView, 0, false, false, false, 40,
+					poiCategory.getKeyName(), false, false, false, 1));
 		}
 
 		Collections.sort(infoRows, new Comparator<AmenityInfoRow>() {
@@ -670,7 +684,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		if (processNearestWiki() && nearestWiki.size() > 0) {
 			AmenityInfoRow wikiInfo = new AmenityInfoRow(
-					"nearest_wiki", R.drawable.ic_plugin_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")", true,
+					"nearest_wiki", R.drawable.ic_plugin_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")",
+					null, true,
 					getCollapsableView(view.getContext(), true, nearestWiki),
 					0, false, false, false, 1000, null, false, false, false, 0);
 			buildAmenityRow(view, wikiInfo);
@@ -678,8 +693,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		if (processNearestPoi() && nearestPoi.size() > 0) {
 			AmenityInfoRow poiInfo = new AmenityInfoRow(
-					"nearest_poi", AmenityMenuController.getRightIconId(amenity), null,
-					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")", true,
+					"nearest_poi", AmenityMenuController.getRightIconId(amenity), null, app.getString(R.string.speak_poi) + " (" + nearestPoi.size() + ")",
+					null, true,
 					getCollapsableView(view.getContext(), true, nearestPoi),
 					0, false, false, false, 1000, null, false, false, false, 0);
 			buildAmenityRow(view, poiInfo);
@@ -784,12 +799,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
 		if (info.icon != null) {
-			buildRow(view, info.icon, info.text, info.textPrefix, info.collapsable, info.collapsableView,
-					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber,
+			buildRow(view, info.icon, info.text, info.textPrefix, info.socialMediaUrl,
+					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
+					info.needLinks, info.isPhoneNumber,
 					info.isUrl, info.matchWidthDivider, info.textLinesLimit);
 		} else {
-			buildRow(view, info.iconId, info.text, info.textPrefix, info.collapsable, info.collapsableView,
-					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber,
+			buildRow(view, info.iconId, info.text, info.textPrefix, info.socialMediaUrl,
+					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
+					info.needLinks, info.isPhoneNumber,
 					info.isUrl, info.matchWidthDivider, info.textLinesLimit);
 		}
 	}
@@ -893,12 +910,45 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		return new CollapsableView(view, this, collapsed);
 	}
 
+	private String getSocialMediaUrl(String key, String value) {
+		// Remove leading and closing slashes
+		StringBuilder sb = new StringBuilder(value.trim());
+		if (sb.charAt(0) == '/') {
+			sb.deleteCharAt(0);
+		}
+		int lastIdx = sb.length() - 1;
+		if (sb.charAt(lastIdx) == '/') {
+			sb.deleteCharAt(lastIdx);
+		}
+
+		// It cannot be username
+		if (sb.indexOf("/") != -1) {
+			return "https://" + value;
+		}
+
+		Map<String, String> urls = new HashMap<>(7);
+		urls.put("facebook", "https://facebook.com/%s");
+		urls.put("vk", "https://vk.com/%s");
+		urls.put("instagram", "https://instagram.com/%s");
+		urls.put("twitter", "https://twitter.com/%s");
+		urls.put("ok", "https://ok.ru/%s");
+		urls.put("telegram", "https://t.me/%s");
+		urls.put("flickr", "https://flickr.com/%s");
+
+		if (urls.containsKey(key)) {
+			return String.format(urls.get(key), value);
+		} else {
+			return null;
+		}
+	}
+
 	private static class AmenityInfoRow {
 		private String key;
 		private Drawable icon;
 		private int iconId;
 		private String textPrefix;
 		private String text;
+		private String socialMediaUrl;
 		private CollapsableView collapsableView;
 		private boolean collapsable;
 		private int textColor;
@@ -913,14 +963,16 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		private int textLinesLimit;
 
 		public AmenityInfoRow(String key, Drawable icon, String textPrefix, String text,
-							  boolean collapsable, CollapsableView collapsableView,
-							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
-							  int order, String name, boolean isPhoneNumber, boolean isUrl,
+							  String socialMediaUrl, boolean collapsable,
+							  CollapsableView collapsableView, int textColor, boolean isWiki,
+							  boolean isText, boolean needLinks, int order, String name,
+							  boolean isPhoneNumber, boolean isUrl,
 							  boolean matchWidthDivider, int textLinesLimit) {
 			this.key = key;
 			this.icon = icon;
 			this.textPrefix = textPrefix;
 			this.text = text;
+			this.socialMediaUrl = socialMediaUrl;
 			this.collapsable = collapsable;
 			this.collapsableView = collapsableView;
 			this.textColor = textColor;
@@ -936,14 +988,16 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 
 		public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
-							  boolean collapsable, CollapsableView collapsableView,
-							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
-							  int order, String name, boolean isPhoneNumber, boolean isUrl,
+							  String socialMediaUrl, boolean collapsable,
+							  CollapsableView collapsableView, int textColor, boolean isWiki,
+							  boolean isText, boolean needLinks, int order, String name,
+							  boolean isPhoneNumber, boolean isUrl,
 							  boolean matchWidthDivider, int textLinesLimit) {
 			this.key = key;
 			this.iconId = iconId;
 			this.textPrefix = textPrefix;
 			this.text = text;
+			this.socialMediaUrl = socialMediaUrl;
 			this.collapsable = collapsable;
 			this.collapsableView = collapsableView;
 			this.textColor = textColor;
