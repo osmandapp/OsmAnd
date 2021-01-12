@@ -678,7 +678,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		if (processNearestPoi() && nearestPoi.size() > 0) {
 			AmenityInfoRow poiInfo = new AmenityInfoRow(
-					"nearest_poi", AmenityMenuController.getRightIconId(amenity), null, app.getString(R.string.speak_poi) + " (" + nearestPoi.size() + ")", true,
+					"nearest_poi", AmenityMenuController.getRightIconId(amenity), null,
+					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")", true,
 					getCollapsableView(view.getContext(), true, nearestPoi),
 					0, false, false, false, 1000, null, false, false, false, 0);
 			buildAmenityRow(view, poiInfo);

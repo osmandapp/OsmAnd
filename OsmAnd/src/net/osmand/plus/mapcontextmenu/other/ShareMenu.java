@@ -36,7 +36,7 @@ public class ShareMenu extends BaseMenuController {
 	public enum ShareItem {
 		MESSAGE(R.drawable.ic_action_message, R.string.shared_string_send),
 		CLIPBOARD(R.drawable.ic_action_copy, R.string.shared_string_copy),
-		ADDRESS(R.drawable.ic_action_copy, R.string.copy_address),
+		ADDRESS(R.drawable.ic_action_street_name, R.string.copy_address),
 		NAME(R.drawable.ic_action_copy, R.string.copy_location_name),
 		COORDINATES(R.drawable.ic_action_copy, R.string.copy_coordinates),
 		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),

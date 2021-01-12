@@ -357,9 +357,10 @@ public class MenuBuilder {
 	}
 
 	protected void buildNearestPoiRow(View view) {
-		buildNearestRow(view, nearestPoi, processNearestPoi(),
-				nearestPoi.isEmpty() ? 0 : AmenityMenuController.getRightIconId(nearestPoi.get(0)),
-				app.getString(R.string.speak_poi));
+		if (amenity != null) {
+			buildNearestRow(view, nearestPoi, processNearestPoi(), AmenityMenuController.getRightIconId(amenity),
+					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")");
+		}
 	}
 
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, boolean process, int iconId, String text) {
@@ -1164,6 +1165,8 @@ public class MenuBuilder {
 			if (Algorithms.isBlank(name)) {
 				name = AmenityMenuController.getTypeStr(poi);
 			}
+			float dist = (float) MapUtils.getDistance(latLon, poi.getLocation());
+			name += " (" + OsmAndFormatter.getFormattedDistance(dist, app) + ")";
 			button.setText(name);
 
 			button.setOnClickListener(new View.OnClickListener() {
