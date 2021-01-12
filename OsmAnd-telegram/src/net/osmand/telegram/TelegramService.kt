@@ -153,6 +153,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		app().shareLocationHelper.updateLocation(firstLocation)
 
 		// request location updates
+		/*
 		val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 		try {
 			locationManager.requestLocationUpdates(serviceOffProvider, 0, 0f, this@TelegramService)
@@ -163,6 +164,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show()
 			log.debug("GPS location provider not available")
 		}
+		*/
 	}
 
 	private fun startShareInfoUpdates() {
@@ -222,6 +224,8 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		if (!AndroidUtils.isLocationPermissionAvailable(app)) {
 			return null
 		}
+		var location: net.osmand.Location? = null
+		/*
 		val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 		val ps = service.getProviders(true) ?: return null
 		val providers = ArrayList(ps)
@@ -233,24 +237,26 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			providers.add(0, providers.removeAt(passiveFirst))
 		}
 		// find location
-		var location: net.osmand.Location? = null
 		for (provider in providers) {
 			val loc = convertLocation(service.getLastKnownLocation(provider))
 			if (loc != null && (location == null || loc.hasAccuracy() && loc.accuracy < location.accuracy)) {
 				location = loc
 			}
 		}
+		*/
 		return location
 	}
 
 	private fun removeLocationUpdates() {
 		// remove updates
+		/*
 		val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 		try {
 			locationManager.removeUpdates(this)
 		} catch (e: SecurityException) {
 			log.debug("Location service permission not granted")
 		}
+		*/
 	}
 
 	override fun onLocationChanged(l: Location?) {
