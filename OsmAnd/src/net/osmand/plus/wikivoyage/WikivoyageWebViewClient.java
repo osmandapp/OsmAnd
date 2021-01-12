@@ -12,8 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.jwetherell.openmap.common.MoreMath;
+
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -29,6 +31,7 @@ import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import java.io.File;
 import java.util.List;
 
+import static com.jwetherell.openmap.common.LatLonPoint.EQUIVALENT_TOLERANCE;
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKIVOYAGE_DOMAIN;
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
 
@@ -91,15 +94,15 @@ public class WikivoyageWebViewClient extends WebViewClient {
 				double lat;
 				double lon;
 				try {
-					lat = Double.valueOf(coordinates.substring(0, coordinates.indexOf(",")));
-					lon = Double.valueOf(coordinates.substring(coordinates.indexOf(",") + 1,
-							coordinates.length()));
+					lat = Double.parseDouble(coordinates.substring(0, coordinates.indexOf(",")));
+					lon = Double.parseDouble(coordinates.substring(coordinates.indexOf(",") + 1));
 				} catch (NumberFormatException e) {
 					Log.w(TAG, e.getMessage(), e);
 					return true;
 				}
 				for (WptPt point : points) {
-					if (point.getLatitude() == lat && point.getLongitude() == lon) {
+					if (MoreMath.approximately_equal(point.getLatitude(), lat, EQUIVALENT_TOLERANCE * 2)
+							&& MoreMath.approximately_equal(point.getLongitude(), lon, EQUIVALENT_TOLERANCE * 2)) {
 						gpxPoint = point;
 						break;
 					}
