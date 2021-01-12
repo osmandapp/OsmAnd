@@ -3963,7 +3963,7 @@
     <string name="routing_engine_vehicle_type_car">Auto</string>
     <string name="message_error_recheck_parameters">Fout, controleer parameters opnieuw</string>
     <string name="copy_address">Kopieer adres</string>
-    <string name="online_routing_engine">Online navigatiesysteem</string>
-    <string name="online_routing_engines">Online navigatiesystemen</string>
+    <string name="online_routing_engine">Online routeplanningssysteem</string>
+    <string name="online_routing_engines">Online routeplanningssystemen</string>
     <string name="shared_string_folders">Mappen</string>
 </resources>
