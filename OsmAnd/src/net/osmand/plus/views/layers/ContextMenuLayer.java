@@ -805,6 +805,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 
 		} else if (selectedObjects.size() > 1) {
+			hideVisibleMenues();
 			selectedObjectContextMenuProvider = null;
 			showContextMenuForSelectedObjects(pointLatLon, selectedObjects);
 			return true;
@@ -1036,6 +1037,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private boolean hideVisibleMenues() {
+		if (activity.getTrackMenuFragment() != null) {
+			activity.getTrackMenuFragment().dismiss();
+			return true;
+		}
 		if (multiSelectionMenu.isVisible()) {
 			multiSelectionMenu.hide();
 			return true;
