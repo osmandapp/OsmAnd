@@ -219,6 +219,7 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 
 	@Synchronized
 	fun registerOrUnregisterCompassListener(register: Boolean) {
+		/*
 		if (sensorRegistered && !register) {
 			Log.d(PlatformUtil.TAG, "Disable sensor") //$NON-NLS-1$
 			(app.getSystemService(Context.SENSOR_SERVICE) as SensorManager).unregisterListener(this)
@@ -259,6 +260,7 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 			}
 			sensorRegistered = true
 		}
+		*/
 	}
 
 	override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
