@@ -4041,4 +4041,8 @@
     <string name="copy_address">複製地址</string>
     <string name="online_routing_engine">線上路線計算引擎</string>
     <string name="online_routing_engines">線上路線計算引擎</string>
+    <string name="shared_string_folders">資料夾</string>
+    <string name="select_folder">選取資料夾</string>
+    <string name="select_folder_descr">選取資料夾或新增</string>
+    <string name="shared_string_empty">空</string>
 </resources>

@@ -4039,4 +4039,8 @@
     <string name="copy_address">Kopírovat adresu</string>
     <string name="online_routing_engine">Online navigační služba</string>
     <string name="online_routing_engines">Online navigační služby</string>
+    <string name="shared_string_folders">Složky</string>
+    <string name="select_folder">Zvolte složku</string>
+    <string name="select_folder_descr">Zvolte složku nebo vytvořte novou</string>
+    <string name="shared_string_empty">Prázdné</string>
 </resources>
