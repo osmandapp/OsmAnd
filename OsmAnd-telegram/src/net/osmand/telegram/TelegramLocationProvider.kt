@@ -87,6 +87,7 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 
 	@SuppressLint("MissingPermission")
 	fun resumeAllUpdates() {
+		/*
 		val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 		if (app.isInternetConnectionAvailable) {
 			if (System.currentTimeMillis() - agpsDataLastTimeDownloaded > AGPS_TO_REDOWNLOAD) {
@@ -134,7 +135,7 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 
 			}
 		}
-
+		*/
 		registerOrUnregisterCompassListener(true)
 	}
 
@@ -391,12 +392,14 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	}
 
 	private fun stopLocationRequests() {
+		/*
 		val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 		service.removeGpsStatusListener(gpsStatusListener)
 		service.removeUpdates(gpsListener)
 		while (!networkListeners.isEmpty()) {
 			service.removeUpdates(networkListeners.poll())
 		}
+		*/
 	}
 
 	fun pauseAllUpdates() {
