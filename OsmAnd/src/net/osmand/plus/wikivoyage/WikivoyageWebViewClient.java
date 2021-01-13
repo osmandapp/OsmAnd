@@ -87,7 +87,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		} else if (isWebPage) {
 			WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
-			if (article != null) {
+			if (article != null && article.getGpxFile() != null) {
 				List<WptPt> points = article.getGpxFile().getPoints();
 				WptPt gpxPoint = null;
 				String coordinates = url.replace(PREFIX_GEO, "");
