@@ -113,15 +113,20 @@ public class Building extends MapObject {
 			String fname = super.getName();
 			int numB = Algorithms.extractFirstIntegerNumber(fname);
 			int numT = numB;
-			if (num >= numB) {
-				String sname = getName2();
-				if (getInterpolationType() == BuildingInterpolation.ALPHABETIC) {
-					char ch = hno.charAt(hno.length() - 1);
-					char chF = fname.charAt(fname.length() - 1);
-					if (chF < ch) {
-						return -1;
-					}
+			String sname = getName2();
+
+			if (getInterpolationType() == BuildingInterpolation.ALPHABETIC && num == numB) {
+				char ch = hno.charAt(hno.length() - 1);
+				char chF = fname.charAt(fname.length() - 1);
+				char chS = sname.charAt(sname.length() - 1);
+				if (chS < chF && chF < ch) {
+					return -1;
 				}
+				if (chS > chF && ch < chF) {
+					return -1;
+				}
+			}
+			if (num >= numB) {
 				if (fname.contains("-") && sname == null) {
 					int l = fname.indexOf('-');
 					sname = fname.substring(l + 1, fname.length());
