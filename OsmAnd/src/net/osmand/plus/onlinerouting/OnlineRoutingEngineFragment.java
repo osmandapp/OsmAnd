@@ -284,7 +284,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 						return false;
 					}
 				});
-		exampleCard.setFieldBoxHelperText(getString(R.string.online_routing_example_hint));
+		exampleCard.setFieldBoxLabelText(getString(R.string.online_routing_example_hint));
 		exampleCard.setButton(getString(R.string.test_route_calculation), new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
