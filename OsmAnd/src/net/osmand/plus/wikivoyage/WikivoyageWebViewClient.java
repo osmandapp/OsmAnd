@@ -122,7 +122,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 					fragmentManager.popBackStackImmediate();
 
 					File path = app.getTravelHelper().createGpxFile(article);
-					GPXUtilities.GPXFile gpxFile = article.getGpxFile();
+					GPXFile gpxFile = article.getGpxFile();
 					gpxFile.path = path.getAbsolutePath();
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 					MapActivity.launchMapActivityMoveToTop(activity);
