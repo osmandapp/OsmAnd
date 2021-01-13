@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name="net.osmand.telegram.TelegramApplication"
@@ -47,16 +46,6 @@
             </intent-filter>
 
         </activity>
-
-        <service
-            android:name=".TelegramService"
-            android:label="@string/process_service"
-            android:foregroundServiceType="location"
-            android:stopWithTask="false">
-            <intent-filter>
-                <action android:name="net.osmand.telegram.TelegramService" />
-            </intent-filter>
-        </service>
 
         <receiver
             android:name=".InitAppBroadcastReceiver"
