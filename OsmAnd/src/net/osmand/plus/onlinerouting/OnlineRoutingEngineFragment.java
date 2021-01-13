@@ -230,6 +230,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 						return false;
 					}
 				});
+		vehicleCard.removeBottomMarginSelectionMenu();
 		vehicleCard.setFieldBoxLabelText(getString(R.string.shared_string_custom));
 		vehicleCard.setOnTextChangedListener(new OnTextChangedListener() {
 			@Override
@@ -284,7 +285,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 						return false;
 					}
 				});
-		exampleCard.setFieldBoxLabelText(getString(R.string.online_routing_example_hint));
+		exampleCard.setDescription(getString(R.string.online_routing_example_hint));
+		exampleCard.showFieldBox();
 		exampleCard.setButton(getString(R.string.test_route_calculation), new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

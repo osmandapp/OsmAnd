@@ -5,6 +5,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -125,6 +126,11 @@ public class OnlineRoutingCard extends BaseCard {
 			}
 		});
 		rvSelectionMenu.setAdapter(adapter);
+	}
+
+	public void removeBottomMarginSelectionMenu() {
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rvSelectionMenu.getLayoutParams();
+		params.bottomMargin = 0;
 	}
 
 	public void setDescription(@NonNull String description) {
