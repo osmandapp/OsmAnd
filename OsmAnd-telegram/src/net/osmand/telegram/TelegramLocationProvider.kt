@@ -87,13 +87,12 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 
 	@SuppressLint("MissingPermission")
 	fun resumeAllUpdates() {
-		/*
 		val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 		if (app.isInternetConnectionAvailable) {
 			if (System.currentTimeMillis() - agpsDataLastTimeDownloaded > AGPS_TO_REDOWNLOAD) {
 				//force an updated check for internet connectivity here before destroying A-GPS-data
 				if (app.isInternetConnectionAvailable(true)) {
-					redownloadAGPS()
+					//redownloadAGPS()
 				}
 			}
 		}
@@ -135,12 +134,11 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 
 			}
 		}
-		*/
+
 		registerOrUnregisterCompassListener(true)
 	}
 
 	private fun redownloadAGPS() {
-		/*
 		try {
 			val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 			service.sendExtraCommand(LocationManager.GPS_PROVIDER, "delete_aiding_data", null)
@@ -152,7 +150,6 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 			agpsDataLastTimeDownloaded = 0L
 			e.printStackTrace()
 		}
-		*/
 	}
 
 	private fun getGpsStatusListener(service: LocationManager): GpsStatus.Listener {
@@ -219,7 +216,6 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 
 	@Synchronized
 	fun registerOrUnregisterCompassListener(register: Boolean) {
-		/*
 		if (sensorRegistered && !register) {
 			Log.d(PlatformUtil.TAG, "Disable sensor") //$NON-NLS-1$
 			(app.getSystemService(Context.SENSOR_SERVICE) as SensorManager).unregisterListener(this)
@@ -260,7 +256,6 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 			}
 			sensorRegistered = true
 		}
-		*/
 	}
 
 	override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
@@ -394,14 +389,12 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	}
 
 	private fun stopLocationRequests() {
-		/*
 		val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 		service.removeGpsStatusListener(gpsStatusListener)
 		service.removeUpdates(gpsListener)
 		while (!networkListeners.isEmpty()) {
 			service.removeUpdates(networkListeners.poll())
 		}
-		*/
 	}
 
 	fun pauseAllUpdates() {

@@ -505,7 +505,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val currentTimeMillis = System.currentTimeMillis()
 			val currentTime = currentTimeMillis / 1000
 			statusChangeTime = currentTimeMillis
-			val gpsEnabled = false
 			/*
 			val lm = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 			val gpsEnabled = try {
@@ -521,6 +520,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 				false
 			}
 			*/
+			val gpsEnabled = try {
+					val loc = app.locationProvider.lastKnownLocation
+					val gpsActive = loc != null && ((currentTimeMillis - loc.time) / 1000) < GPS_UPDATE_EXPIRED_TIME
+					val lastSentLocationExpired = ((currentTimeMillis - app.shareLocationHelper.lastLocationUpdateTime) / 1000) > GPS_UPDATE_EXPIRED_TIME
+					(gpsActive || !lastSentLocationExpired)
+			} catch (ex: Exception) {
+				false
+			}
 
 			var initializing = false
 			var sendChatsErrors = false
