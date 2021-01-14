@@ -68,6 +68,10 @@ public class OnlineRoutingCard extends BaseCard {
 		bottomDivider = view.findViewById(R.id.bottom_divider);
 		button = view.findViewById(R.id.button);
 
+		textFieldBoxes.setPrimaryColor(nightMode
+				? view.getContext().getResources().getColor(R.color.active_color_primary_dark)
+				: view.getContext().getResources().getColor(R.color.active_color_primary_light));
+
 		editText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {

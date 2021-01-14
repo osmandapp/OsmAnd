@@ -1,6 +1,8 @@
 package net.osmand.plus.onlinerouting;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,8 +14,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -74,6 +78,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private ApplicationMode appMode;
 
 	private OnlineRoutingEngineObject engine;
+	private OnlineRoutingEngineObject initEngine;
 	private ExampleLocation selectedLocation;
 	private String editedEngineKey;
 
@@ -125,11 +130,20 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		mapActivity = getMapActivity();
 		helper = app.getOnlineRoutingHelper();
 		engine = new OnlineRoutingEngineObject();
+		initEngine = new OnlineRoutingEngineObject();
 		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
 		} else {
 			initState();
 		}
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					showExitDialog();
+				}
+			}
+		});
 	}
 
 	@Nullable
@@ -143,13 +157,14 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		scrollView = (ViewGroup) segmentsContainer.getParent();
 		onScroll = new ViewTreeObserver.OnScrollChangedListener() {
 			int pastY = 0;
+
 			@Override
 			public void onScrollChanged() {
 				int y = scrollView.getScrollY();
 				if (pastY != y) {
 					pastY = y;
-					View vieww = view.findFocus();
-					AndroidUtils.hideSoftKeyboard(requireActivity(), vieww);
+					View focus = view.findFocus();
+					AndroidUtils.hideSoftKeyboard(requireActivity(), focus);
 				}
 			}
 		};
@@ -166,6 +181,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		setupExampleCard();
 		setupResultsContainer();
 		addSpaceSegment();
+		engine.cloneIn(initEngine);
 
 		setupButtons();
 
@@ -345,7 +361,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		navigationIcon.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				showExitDialog();
 			}
 		});
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
@@ -415,7 +431,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				showExitDialog();
 			}
 		});
 
@@ -571,9 +587,40 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private void dismiss() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			activity.onBackPressed();
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
 		}
 	}
+
+	public void showExitDialog() {
+		View focus = view.findFocus();
+		AndroidUtils.hideSoftKeyboard(requireMyActivity(), focus);
+
+		if (!engine.equals(initEngine)) {
+			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
+					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
+			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dismiss();
+				}
+			});
+			dismissDialog.show();
+		} else {
+			dismiss();
+		}
+	}
+
+    private AlertDialog.Builder createWarningDialog(Activity activity, int title, int message, int negButton) {
+        Context themedContext = UiUtilities.getThemedContext(activity, isNightMode());
+        AlertDialog.Builder warningDialog = new AlertDialog.Builder(themedContext);
+        warningDialog.setTitle(getString(title));
+        warningDialog.setMessage(getString(message));
+        warningDialog.setNegativeButton(negButton, null);
+        return warningDialog;
+    }
 
 	private boolean isNightMode() {
 		return !app.getSettings().isLightContentForMode(appMode);
@@ -634,6 +681,29 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				return type.getStandardUrl();
 			}
 			return customServerUrl;
+		}
+
+		public void cloneIn(OnlineRoutingEngineObject clone) {
+			clone.customName = customName;
+			clone.type = type;
+			clone.customServerUrl = customServerUrl;
+			clone.vehicleType = vehicleType;
+			clone.customVehicleKey = customVehicleKey;
+			clone.apiKey = apiKey;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) return true;
+			if (obj == null || getClass() != obj.getClass()) return false;
+
+			OnlineRoutingEngineObject engine = (OnlineRoutingEngineObject) obj;
+			if (customName != engine.customName) return false;
+			if (type != engine.type) return false;
+			if (customServerUrl != engine.customServerUrl) return false;
+			if (vehicleType != engine.vehicleType) return false;
+			if (customVehicleKey != engine.customVehicleKey) return false;
+			return apiKey == engine.apiKey;
 		}
 	}
 }
