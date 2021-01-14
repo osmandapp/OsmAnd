@@ -513,7 +513,6 @@
     <string name="error_calculating_route">Fout bij routeberekening.</string>
     <string name="error_calculating_route_occured">Fout bij routeberekening.</string>
     <string name="empty_route_calculated">Fout: berekende route is leeg.</string>
-    <string name="new_route_calculated_dist">Nieuwe route berekend, afstand</string>
     <string name="arrived_at_destination">De bestemming is bereikt.</string>
     <string name="invalid_locations">Coördinaten zijn ongeldig</string>
     <string name="go_back_to_osmand">Ga terug naar de kaart</string>
@@ -605,7 +604,6 @@
     <string name="osb_comment_dialog_error">Kon geen commentaar toevoegen.</string>
     <string name="poi_edit_title">POI wijzigen</string>
     <string name="poi_create_title">POI aanmaken</string>
-    <string name="poi_error_poi_not_found">Punt niet gevonden of voorziening bestaat uit meerdere punten, wat nog niet ondersteund wordt.</string>
     <string name="poi_remove_confirm_template">Verwijderen {0} (geef commentaar)?</string>
     <string name="poi_remove_title">POI verwijderen</string>
     <string name="poi_remove_success">Verwijderd</string>
@@ -1790,7 +1788,6 @@
     <string name="av_audio_bitrate_descr">Kies audio bitrate.</string>
     <string name="looking_up_address">Adres wordt gezocht</string>
     <string name="rendering_attr_horseRoutes_name">Ruiterpaden</string>
-    <string name="update">Bijwerken</string>
     <string name="only_download_over_wifi">Alleen downloaden via WiFi</string>
     <string name="live_update">Automatisch controleren</string>
     <string name="update_now">Nu Controleren</string>
@@ -2001,7 +1998,6 @@
     <string name="allow_access_location">Toegang tot locatie toestaan</string>
     <string name="first_usage_greeting">Krijg routeaanwijzingen en ontdek nieuwe plaatsen, zonder Internetverbinding</string>
     <string name="search_my_location">Vind mijn positie</string>
-    <string name="no_update_info">Geen updates tonen</string>
     <string name="clear_tile_data">Alle opgeslagen kaarttegels wissen</string>
     <string name="osm_live_payment_desc">Het abonnementsgeld wordt volgens de gekozen abonnementsvorm geïncasseerd. Het abonnement kan op elk moment via Google Play worden gestopt.</string>
     <string name="donation_to_osm">Gift aan de OSM-gemeenschap</string>
@@ -2014,7 +2010,6 @@
     <string name="skip_map_downloading_desc">Er is geen kaart geïnstalleerd. Kies een kaart uit de lijst, of download later kaarten via \'Menu - %1$s\'.</string>
     <string name="first_usage_wizard_desc">Laat OsmAnd kaarten kiezen om te downloaden aan de hand van uw huidige locatie.</string>
     <string name="storage_place_description">OsmAnd bewaart gegevens (kaarten, GPX-tracks, enz.) in: %1$s.</string>
-    <string name="no_update_info_desc">Controleer niet op nieuwe versies en aanbiedingen van OsmAnd.</string>
     <string name="driving_region_australia">Australië</string>
     <string name="lang_kab">Kabylisch</string>
     <string name="selected_categories">Gekozen categorieën</string>
@@ -2064,9 +2059,6 @@
     <string name="route_roundabout_short">Neem %1$de afslag</string>
     <string name="upload_poi">POI Uploaden</string>
     <string name="wiki_around">Wikipedia artikelen in de buurt</string>
-    <string name="legacy_search">Zoeken (oude manier 2.4)</string>
-    <string name="show_legacy_search">Zoeken (oude manier 2.4) weergeven</string>
-    <string name="show_legacy_search_desc">Oude zoekmethode in het zijmenu weergeven.</string>
     <string name="routing_attr_allow_motorway_name">Autosnelwegen gebruiken</string>
     <string name="routing_attr_allow_motorway_description">Staat autosnelwegen toe.</string>
     <string name="lang_sr_latn">Servisch (Latijns schrift)</string>
@@ -2746,7 +2738,6 @@
 \nWe verzamelen geen persoonlijke informatie, enkel zoekgegevens om het zoeken te verbeteren.</string>
     <string name="send_search_query">Zoekterm versturen\?</string>
     <string name="shared_string_world">Wereld</string>
-    <string name="commiting_way">"Weg vastleggen.. ik "</string>
     <string name="coord_input_save_as_track">Als GPX-track opslaan</string>
     <string name="get_osmand_live">Neem OsmAnd Live en krijg alle mogelijkheden: Dagelijkse kaartupdates en onbeperkte downloads, alle betaalde en gratis plugins, Wikipedia, Wikivoyage en veel meer.</string>
     <string name="unirs_render_descr">Wijziging van de standaard Kaartstijl met meer constrast voor wandel-en fietspaden. Gebruikt de Mapnik-kleuren.</string>
@@ -2766,12 +2757,6 @@
     <string name="waypoints_added_to_map_markers">Routepunten toegevoegd aan Markeervlaggetjes</string>
     <string name="access_intermediate_arrival_time">Aankomsttijd tussenpunt</string>
     <string name="map_widget_intermediate_time">Tijd tot tussenpunt</string>
-    <string name="release_3_2_pre">• Crash bij starten opgelost die zich voordeed bij non-latin kaarten
-\n
-\n • Verbeterde weergavesnelheid op Android 8.0 apparaten
-\n
-\n • Ondersteuning voor het wijzigen van polygon-(non-faciliteits)voorwerpen
-\n</string>
     <string name="test_voice_desrc">Tik op een knop en luister naar de bijbehorende gesproken prompt om te horen of deze ontbreekt of incorrect is</string>
     <string name="osm_live_subscriptions">Abonnementen</string>
     <string name="powered_by_osmand">Mogelijk gemaakt door OsmAnd</string>
@@ -2915,38 +2900,12 @@
     <string name="routeInfo_steepness_name">Steilte</string>
     <string name="run_full_osmand_msg">U gebruikt {0} kaart geleverd door OsmAnd. Wilt u de \"OsmAnd full\" versie openen\?</string>
     <string name="run_full_osmand_header">Open OsmAnd\?</string>
-    <string name="release_3_3_7">• Toon de overstaptijden in Openbaar Vervoer
-\n
-\n• UI gecorrigeerd voor Route Details
-\n
-\n•Fix: donker thema in het Routebeschijvings menu en in Route Details
-\n
-\n • Toon de azimuth in Afstands Meting
-\n
-\n</string>
     <string name="angular_measeurement">Eenheid hoeken</string>
     <string name="transfers_size">%1$d keer overstappen</string>
     <string name="rendering_attr_surface_grass_paver_name">Gras oppervlak</string>
     <string name="rendering_attr_surface_ground_name">Aarde</string>
     <string name="rendering_attr_surface_dirt_name">Onverhard</string>
     <string name="rendering_attr_surface_sett_name">Kasseien</string>
-    <string name="release_3_3">• Nieuw \'Routebeschrijving\' scherm: Toont Thuis en Werk bestemming knoppen, \'vorige route\' snellink, lijst van actieve GPX tracks en markeringen, zoekgeschiedenis
-\n
-\n • Additionele info onder \'Route details\': weg types, wegoppervlak, steilte, wegdek kwaliteit
-\n
-\n • Openbaar vervoer navigatie ondersteunt alle vervoer mogelijkheden: metro, bus, tram, etc.
-\n
-\n • Nieuwe Sneloptie om trackes te tonen/verbergen en schakelen tussen dag/nacht modus
-\n
-\n • Fix: oppervlakken die als \'overstroomd\' getoond werden in Duitsland, Zuid-Afrika, Quebec
-\n
-\n • Additionele ondersteuning voor KML en KMZ import
-\n
-\n • Crashes herstelt bij het openen van sommige openbaar vervoer haltes
-\n
-\n • Facebook en Firebase analytics verwijderd uit de \"free version\" (OsmAnd+ bevat dit niet)
-\n
-\n</string>
     <string name="by_transport_type">Per %1$s</string>
     <string name="sit_on_the_stop">Instappen bij halte</string>
     <string name="transfers">Aantal overstappen</string>
@@ -3123,7 +3082,6 @@
     <string name="rendering_value_white_name">Wit</string>
     <string name="swap_two_places">Verwissel %1$s en %2$s</string>
     <string name="route_start_point">Vertrekpunt</string>
-    <string name="swap_start_and_destination">Begin- en eindpunt omwisselen</string>
     <string name="public_transport_type">Transporttype</string>
     <string name="coordinates_widget">Coördinaten widget</string>
     <string name="osmand_routing_promo">Je kunt je eigen, aangepaste versie van routing.xml in ..osmand/routing toevoegen</string>
@@ -3239,8 +3197,7 @@
     <string name="routeInfo_roadClass_name">Wegtype</string>
     <string name="shared_string_open_track">Track openen</string>
     <string name="gpx_join_gaps">Verbind onderbrekingen</string>
-    <string name="new_route_calculated_dist_dbg">Route: afstand %s, reistijd %s
-\nBerekening: %.1f sec, %d wegen, %d tegels)</string>
+    <string name="new_route_calculated_dist_dbg">Route: afstand %1$s, reistijd %2$s \nBerekening: %3$.1f sec, %4$d wegen, %5$d tegels)</string>
     <string name="lang_oc">Occitaans</string>
     <string name="app_mode_wagon">Stationwagon</string>
     <string name="app_mode_pickup_truck">Pick-up truck</string>
@@ -3252,7 +3209,6 @@
     <string name="price_and_discount">%1$s • Bespaar %2$s</string>
     <string name="analytics_pref_title">Analyse</string>
     <string name="wake_time">Timeout na ontwaken</string>
-    <string name="appearance">Uiterlijk</string>
     <string name="map_look">Kaart weergave</string>
     <string name="paste_Osmand_data_folder_path">Kopieer pad naar de OsmAnd data folder</string>
     <string name="change_osmand_data_folder_question">Wijzig OsmAnd data folder\?</string>
@@ -3463,7 +3419,6 @@
     <string name="select_group">Groep kiezen</string>
     <string name="select_shape">Vorm kiezen</string>
     <string name="shared_string_circle">Cirkel</string>
-    <string name="shared_string_rhomb">Ruit</string>
     <string name="shared_string_min">Min</string>
     <string name="search_poi_types_descr">Combineer POI-types uit verschillende categorieën. Tik op \"Selecteer alles\" om alles binnen een categorie te selecteren, of kies individuele types.</string>
     <string name="extra_maps_menu_group">Extra kaarten</string>

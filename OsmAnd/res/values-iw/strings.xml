@@ -704,7 +704,6 @@
     <string name="error_calculating_route">לא ניתן לחשב מסלול.</string>
     <string name="error_calculating_route_occured">לא ניתן לחשב מסלול.</string>
     <string name="empty_route_calculated">המסלול שחושב ריק.</string>
-    <string name="new_route_calculated_dist">המסלול החדש חושב, מרחק</string>
     <string name="arrived_at_destination">הגעת ליעד.</string>
     <string name="invalid_locations">נקודות ציון שגויות</string>
     <string name="go_back_to_osmand">חזרה למפה</string>
@@ -802,7 +801,6 @@
     <string name="osb_comment_dialog_error">לא ניתן להוסיף תגובה.</string>
     <string name="poi_edit_title">עריכת נ״ע</string>
     <string name="poi_create_title">יצירת נ״ע</string>
-    <string name="poi_error_poi_not_found">לא ניתן למצוא את המפרק או שהמתחם מורכב ממספר מפרקים, מצב שלא נתמך עדיין.</string>
     <string name="poi_remove_confirm_template">למחוק את {0} (תגובה)?</string>
     <string name="poi_remove_title">מחיקת נ״ע</string>
     <string name="shared_string_delete">מחיקה</string>
@@ -1606,7 +1604,6 @@
     <string name="use_dashboard_btn">שימוש בלוח בקרה</string>
     <string name="use_drawer_btn">שימוש בתפריט</string>
     <string name="dashboard_or_drawer_title">בקרה דרך תפריט או לוח בקרה</string>
-    <string name="update">עדכון</string>
     <string name="only_download_over_wifi">הורדה רק באמצעות אינטרנט אלחוטי</string>
     <string name="live_update">עדכון חי</string>
     <string name="missing_write_external_storage_permission">ל־OsmAnd חסרות הרשאות לשימוש בכרטיס הזיכרון</string>
@@ -2023,8 +2020,6 @@
     <string name="allow_access_location">לאפשר גישה למיקום</string>
     <string name="first_usage_greeting">קבלת הנחיות ואיתור מקומות חדשים ללא חיבור לאינטרנט</string>
     <string name="search_my_location">איתור המיקום שלי</string>
-    <string name="no_update_info_desc">לא לחפש גרסאות חדשות או מבצעים שקשורים ב־OsmAnd.</string>
-    <string name="no_update_info">לא להציג גרסאות חדשות</string>
     <string name="update_all_maps_now">לעדכן את כל המפות כעת?</string>
     <string name="clear_tile_data">מחיקת כל האריחים</string>
     <string name="routing_attr_short_way_name">דרך חסכונית בדלק</string>
@@ -2219,9 +2214,6 @@
     <string name="rendering_attr_contourWidth_name">עובי קו מתאר</string>
     <string name="rendering_attr_hideWaterPolygons_description">מים</string>
     <string name="rendering_attr_hideWaterPolygons_name">הסתרת מים</string>
-    <string name="legacy_search">חיפוש מיושן</string>
-    <string name="show_legacy_search">הצגת חיפוש מיושן</string>
-    <string name="show_legacy_search_desc">הוספת החיפוש המיושן לרשימת המגירות.</string>
     <string name="routing_attr_allow_motorway_name">להשתמש בדרכים סלולות</string>
     <string name="routing_attr_allow_motorway_description">מאפשר דרכים סלולות.</string>
     <string name="wiki_around">ערכי ויקיפדיה בקרבת מקום</string>
@@ -2270,17 +2262,6 @@
     <string name="animate_my_location_desc">הפעלת הנפשת גלישת מפה של ה‚מיקום שלי’ במהלך ניווט.</string>
     <string name="shared_string_in_name">ב־%1$s</string>
     <string name="one_tap_active_descr">ניתן לגעת בסמן על המפה כדי להעביר אותו לראש הסמנים הפעילים מבלי לפתוח את תפריט ההקשר.</string>
-    <string name="release_3_0">• חדש: תמיכה במדריכי תיירות מוויקימסע ללא שימוש באינטרנט. המיקומים שבהפניות מקושרים למפה. נתונים התחלתיים מוויקימסע.
-\n 
-\n • ויקיפדיה: מראה חדש, קישורים פעילים, תמונות 
-\n 
-\n • Open Track UI: הצגת קבוצות נקודות דרך 
-\n 
-\n • סמני מפה: ייבוא הקבוצות הנבחרות מקובצי GPX, מראה חדש לקלט נקודות ציון 
-\n 
-\n • המינוי ל־OsmAnd חי כולל את כל התכונות של OsmAnd 
-\n 
-\n</string>
     <string name="one_tap_active">הפעלה ב‚נגיעה אחת’</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">ניתן לבחור באיזו מהירות כיוון המפה יתחלף ממצב ‚כיוון התנועה’ למצב ‚כיוון מצפן’ להלן.</string>
     <string name="index_item_depth_points_southern_hemisphere">נקודות עומק ימיות בחצי הכדור הדרומי</string>
@@ -2782,42 +2763,13 @@
     <string name="coord_input_save_as_track_descr">הוספת %1$s נקודות. נא להקליד שם קובץ וללחוץ על ‚שמירה’.</string>
     <string name="point_deleted">הנקודה %1$s נמחקה</string>
     <string name="shared_string_world">עולם</string>
-    <string name="search_no_results_description">אין תוצאות?
-\nנשמח לקבל דיווח על כך.</string>
     <string name="send_search_query">לשלוח את שאילתת החיפוש?</string>
     <string name="increase_search_radius_to">הרחבת רדיוס החיפוש ל־%1$s</string>
-    <string name="commiting_way">הדרך נשלחת…</string>
-    <string name="release_3_1">• ניווט: תיקון סרגל ההתקדמות, החלפה מהירה בין נקודות ההתחלה והסיום של המסלול
-\n
-\n • סמני מפה: תיקון כיבוי/הפעלה של קבוצות, אפשרות להסתיר סמנים במפה
-\n
-\n • עריכת OSM: היכולת לערוך תגיות לפריטים שאינם נקודה, תיקון תגובות חסרות על הערות, גיבוי עריכות
-\n
-\n • שיפור פענוח של ויקיפדיה ושל ויקימסע, קבצים מעודכנים כבר זמינים 
-\n
-\n • תפריט הקשר: תיקון צבעי סימול כבישים במצב לילה, תיקון גדלי תפריט נוספים 
-\n
-\n • תיקון תקלות נוספות
-\n</string>
     <string name="thank_you_for_feedback">תודה לך על המשוב שלך</string>
     <string name="poi_cannot_be_found">לא ניתן למצוא את הצומת או הדרך.</string>
     <string name="search_no_results_feedback">אין תוצאות חיפוש?
 \nנשמח לקבל משוב</string>
     <string name="test_voice_desrc">יש ללחוץ על הכפתור ולהאזין להנחיה הקולית המתאימה כדי לשמוע אם ההנחיות חסרות או שגויות</string>
-    <string name="release_3_2_pre">"• תוקנה קריסה בהפעלה שקרתה בחלק מהמכשירים 
-\n 
-\n • תכונת סמנים חדשה: הצגת הסמנים שכבר נחצו 
-\n 
-\n • היסטוריית החיפוש מציגה כעת את הקטגוריות אחריהן חיפשת בעבר 
-\n 
-\n • תוקנה קריסה בהפעלה שקרתה עקב מפות עם סוגי כתב שאינם לטיניים 
-\n 
-\n • שיפור מהירות העיבוד במכשירי Android  בגרסה 8.0 
-\n 
-\n • תמיכה בעריכת עצמים מצולעים (שאינם מבני קהילה) 
-\n 
-\n • מדידת מרחק: הוספת כפתור „מדידה” לפעולות בתפריט ההקשר 
-\n"</string>
     <string name="ask_for_location_permission">נא להעניק ל־OsmAnd גישה למיקום כדי להמשיך.</string>
     <string name="rendering_value_black_name">שחור</string>
     <string name="more_transport_on_stop_hint">תחבורה נוספת עוברת בתחנה הזו.</string>
@@ -2954,23 +2906,6 @@
     <string name="rendering_attr_highway_class_path_name">נתיב</string>
     <string name="rendering_attr_highway_class_cycleway_name">דרך לאופניים</string>
     <string name="rendering_attr_undefined_name">ללא הגדרה</string>
-    <string name="release_3_3">"• מסך ‚הכוונה’ חדש: מציג כפתורי יעדי בית ועבודה, קיצור דרך ‚מסלול קודם’, רשימה של מסלולי וסמני  GPX, היסטוריית חיפוש
-\n
-\n • ניתן למצוא מידע נוסף תחת ‚פרטי מסלול’: סוגי כבישים, משטח, תלילות, חלקלקות
-\n
-\n • ניווט עם תחבורה ציבורית תומך בכל אמצעי התחבורה הציבורית: רכבת תחתית, אוטובוס, חשמלית וכו׳.
-\n
-\n • פעולה מהירה חדשה להצגה/הסתרה של מסלולים ומצבי יום/לילה.
-\n
-\n • אזורים קבועים מסומנים כמוצפים בגרמניה, דרום אפריקה וקוויבק
-\n
-\n • תמיכה נוספת בייבוא של KML ו־KMZ
-\n
-\n • תוקנו קריסות בפתיחה של תחנות תחבורה ציבורית כלשהן
-\n
-\n • הוסרו ניתוח התנהגות לקוח של פייסבוק ו־Firebase בגרסה החופשית של OsmAnd‏ (אין את זה ב־OsmAnd+‎)
-\n
-\n"</string>
     <string name="quick_action_day_night_mode">מצב %s</string>
     <string name="shared_string_degrees">מעלות</string>
     <string name="shared_string_milliradians">מילי־רדיאנים</string>
@@ -2990,14 +2925,6 @@
     <string name="routing_attr_avoid_subway_description">נמנע מרכבות תחתיות ומרכבות קלות</string>
     <string name="routing_attr_avoid_ferry_name">ללא מעבורות</string>
     <string name="routing_attr_avoid_ferry_description">נמנע ממעבורות</string>
-    <string name="release_3_3_7">• הצגת הזמן בין ההחלפות בתחבורה הציבורית
-\n
-\n • מנשק המשתמש תוקן עבור פרטי המסלול
-\n
-\n • תוקנה ערכת העיצוב הכהה בתפריט הכיוון ובפרטי המסלול
-\n
-\n • הצגת אזימוט במדידת מרחק
-\n</string>
     <string name="send_log">שליחת יומן</string>
     <string name="files_moved">הועברו %1$d קבצים (%2$s).</string>
     <string name="files_copied">הועתקו %1$d קבצים (%2$s).</string>
@@ -3150,9 +3077,9 @@
     <string name="routing_profile_geocoding">גאוקודינג</string>
     <string name="routing_attr_piste_type_skitour_name">טיול סקי</string>
     <string name="routing_attr_piste_type_skitour_description">מסלולי טיולי סקי.</string>
-    <string name="new_route_calculated_dist_dbg">מסלול: מרחק %s, זמן מנתב מסלול %s 
-\nחישוב: %.1f שנ׳, %d מסלולים, %d אריחים)</string>
-    <string name="make_osmand_better_descr">לאפשר ל־OsmAnd לאסוף ולעבד נתונים אלמוניים בנוגע לשימוש ביישומון. לא נאספים נתונים על המיקום שלך או המקומות בהם צפית במפה. 
+    <string name="new_route_calculated_dist_dbg">מסלול: מרחק %2$s, זמן מנתב מסלול %1$s
+\nחישוב: %3$.1f שנ׳, %4$d מסלולים, %5$d אריחים)</string>
+    <string name="make_osmand_better_descr">לאפשר ל־OsmAnd לאסוף ולעבד נתונים אלמוניים בנוגע לשימוש ביישומון. לא נאספים נתונים על המיקום שלך או המקומות בהם צפית במפה.
 \n 
 \nניתן להגדיר זאת בכל עת דרך ‚הגדרות’ ← ‚פרטיות ואבטחה’.</string>
     <string name="routing_attr_piste_type_nordic_name">סקי למרחקים ונורדי</string>
@@ -3203,7 +3130,6 @@
     <string name="route_parameters_info">הגדרות לניווט בפרופיל הנבחר: „%1$s”.</string>
     <string name="wake_time">תפוגת זמן לאחר התעוררות</string>
     <string name="units_and_formats">יחידות ותבניות</string>
-    <string name="appearance">מראה</string>
     <string name="map_look_descr">מראה המפה</string>
     <string name="map_look">מראה המפה</string>
     <string name="list_of_installed_plugins">תוספים מותקנים</string>
@@ -3251,7 +3177,6 @@
     <string name="logcat_buffer">מכלא Logcat</string>
     <string name="shared_string_by_default">כבררת מחדל</string>
     <string name="plugins_settings">הגדרות תוסף</string>
-    <string name="download_detaile_map">הורדת המפה המפורטת %s, כדי לצפות באזור זה.</string>
     <string name="download_detailed_map">הורדת מפת %s מפורטת כדי לצפות באזור הזה.</string>
     <string name="routing_attr_freeride_policy_name">ללא מסלול</string>
     <string name="change_data_storage_full_description">להעביר את קובצי הנתונים של OsmAnd ליעד החדש\?
@@ -3455,8 +3380,6 @@
     <string name="no_recalculation_setting">ללא חישוב מחדש</string>
     <string name="route_recalculation_dist_title">מרחק מזערי לחישוב המסלול מחדש</string>
     <string name="route_recalculation_dist_descr">המסלול יחושב מחדש אם המרחק למסלול הוא ארוך מהמשתנה שצוין</string>
-    <string name="navigation_notification_desc">להציג את התראות המערכת בזמן הניווט עם הנחיות ניווט.</string>
-    <string name="navigation_notification">התראות ניווט</string>
     <string name="shared_string_app_default_w_val">בררת המחדל של היישומון (%s)</string>
     <string name="profile_type_custom_string">פרופיל בהתאמה אישית</string>
     <string name="shared_string_angle_param">זווית: ‎%s°‎</string>
@@ -3558,7 +3481,6 @@
     <string name="select_group">בחירת קבוצה</string>
     <string name="select_shape">נא לבחור צורה</string>
     <string name="shared_string_circle">עיגולי</string>
-    <string name="shared_string_rhomb">מעויני</string>
     <string name="shared_string_square">ריבועי</string>
     <string name="shared_string_min">מזערי</string>
     <string name="osm_edits_view_descr">ניתן לצפות בכל העריכות או בתקלות ב־OSM שטרם הועלו תחת %1$s. שינויים שהועלו לא יופיעו עוד.</string>
@@ -3598,8 +3520,6 @@
     <string name="monitoring_min_accuracy_descr_side_effect">תופעת לוואי: כתוצאה מסינון לפי דיוק, ייתכן שכמה נקודות תיעלמנה עבור למשל מתחת לגשרים, מתחת לעצים, בין בניינים גבוהים או בתנאי מזג אוויר מסוימים.</string>
     <string name="monitoring_min_accuracy_descr">פעולה זו תקליט רק נקודות שנמדדו עם חיווי של דיוק מזערי (במטרים/רגל כפי שדווח על ידי Android עבור ערכת השבבים שלך). דיוק מתייחס למרחק המדידות שלך מהמיקום האמתי שלך ואינו קשור ישירות לדיוק שהוא פיזור של מדידות חוזרות ונשנות.</string>
     <string name="monitoring_min_speed_descr_recommendation">המלצה: כדאי לנסות להשתמש בזיהוי תנועה דרך המסנן לסף תנועה תחתון (B) קודם לכן, הוא עשוי להביא לתוצאות טובות יותר ופחות מידע ילך לאיבוד. אם המסלולים שלך עדיין רועשים במהירויות נמוכות, כדי לנסות כאן ערכים שונים מאפס. נא לשים לב שחלק מהמדידות לא תדווחנה נתוני מהירות כלל (שיטות מבוססות רשת), שבמקרים כאלה לא יוקלט שום דבר.</string>
-    <string name="wikipedia_poi_languages_promo">חלק מהערכים בוויקיפדיה לא יהיו זמינים בשם שצוין, יש לבחור את השפות בהן יופיעו הערכים של ויקיפדיה במפה.
-\nניתן יהיה להחליף בין כל השפות הזמינות בזמן קריאת הערך.</string>
     <string name="shared_string_items">פריטים</string>
     <string name="developer_plugin">תוסף מפתח</string>
     <string name="ui_customization_description">התאמת כמות הפריטים ב„מגירה”, „הגדרת המפה” ו„תפריט ההקשר”. 
@@ -3739,7 +3659,6 @@
     <string name="screen_control">בקרת מסך</string>
     <string name="system_screen_timeout_descr">לכבות את המסך בהתאם לתפוגת שומר המסך של המערכת.</string>
     <string name="system_screen_timeout">להשתמש בתפוגת שומר המסך של המערכת</string>
-    <string name="turn_screen_on_options_descr">אפשרות יקיצת מסך:</string>
     <string name="turn_screen_on_descr">נא לבחור את אפשרויות יקיצת המסך (נא לוודא ש־OsmAnd בחזית כאשר המכשיר ננעל):</string>
     <string name="turn_screen_on_navigation_instructions_descr">כל הנחיית ניווט תפעיל את המסך.</string>
     <string name="turn_screen_on_navigation_instructions">הנחיות ניווט</string>
@@ -3762,7 +3681,6 @@
     <string name="shared_string_meters">מטרים</string>
     <string name="details_dialog_decr">הצגה או הסתרה של פירוט נוסף על המפה</string>
     <string name="shared_string_night_map">מפת לילה</string>
-    <string name="shared_string_all_time">כל הזמן</string>
     <string name="turn_screen_on_power_button_disabled">מושבת. נדרשת ההגדרה ‚להשאיר את המסך פעיל’ תחת ‚תפוגת זמן לאחר התעוררות’.</string>
     <string name="add_online_source">הוספת מקור מקוון</string>
     <string name="clear_tiles_warning">החלת השינויים האלו תפנה את הנתונים שנשמרו עבור מקור אריחים זה</string>
@@ -3923,7 +3841,6 @@
     <string name="development">פיתוח</string>
     <string name="use_live_public_transport">נתוני זמן אמת של OsmAnd</string>
     <string name="use_live_routing">נתוני זמן אמת של OsmAnd</string>
-    <string name="use_complex_routing">חישוב מורכב של מסלול</string>
     <string name="complex_routing_descr">חישוב מסלול דו־שלבי לניווט במכונית.</string>
     <string name="use_native_pt">פיתוח עצמי לתחבורה ציבורית</string>
     <string name="use_native_pt_desc">מעבר לחישוב מסלול בתחבורה ציבורית ב־Java (בטוח)</string>

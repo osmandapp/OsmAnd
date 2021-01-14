@@ -34,7 +34,6 @@
     <string name="poi_copyshop">Kopicenter</string>
     <string name="poi_curtain">Gardinbutik</string>
     <string name="poi_fabric">Stofbutik</string>
-    <string name="poi_bedding">Sengetøj</string>
     <string name="poi_dive">Dykkerudstyr</string>
     <string name="poi_doityourself">Byggemarked</string>
     <string name="poi_erotic">Erotisk butik</string>
@@ -340,7 +339,6 @@
     <string name="poi_religion_shinto">Shinto</string>
     <string name="poi_religion_taoist">Taoisme</string>
     <string name="poi_monastery">Kloster</string>
-    <string name="poi_historic_monastery">Historisk kloster</string>
     <string name="poi_wayside_cross">Vejside kors</string>
     <string name="poi_wayside_shrine">Vejkantsalter</string>
     <string name="poi_information">Information</string>
@@ -477,7 +475,6 @@
     <string name="poi_crematorium">Krematorium</string>
     <string name="poi_internet_cafe">Internet cafe</string>
     <string name="poi_bank">Bank</string>
-    <string name="poi_amenity_atm">Hæveautomat</string>
     <string name="poi_money_lender">Pengeudlåner</string>
     <string name="poi_pawnbroker">Pantelåner</string>
     <string name="poi_bureau_de_change">Vekselkontor</string>
@@ -561,7 +558,6 @@
     <string name="poi_healthcare_alternative">Alternativ medicin</string>
     <string name="poi_audiologist">Audiolog</string>
     <string name="poi_blood_bank">Blodbank</string>
-    <string name="poi_healthcare_centre">Medicinsk center</string>
     <string name="poi_midwife">Jordemoder</string>
     <string name="poi_occupational_therapist">Ergoterapeut</string>
     <string name="poi_optometrist">Optiker</string>
@@ -609,7 +605,6 @@
     <string name="poi_aquarium">Akvarie</string>
     <string name="poi_mast">Mast</string>
     <string name="poi_radar">Radar</string>
-    <string name="poi_team_handball">Håndbold</string>
     <string name="poi_shop">Butik</string>
     <string name="poi_emergency">Nødsituation</string>
     <string name="poi_transportation">Transport</string>
@@ -730,7 +725,6 @@
     <string name="poi_bell_tower">Klokketårn</string>
     <string name="poi_ski_rental">Skiudlejning</string>
     <string name="poi_ski_resort">Skisportssted</string>
-    <string name="poi_general_tourist_attraction_yes">Generel turistattraktion</string>
     <string name="poi_cabin">Hytte</string>
     <string name="poi_hunting_lodge">Jagthytte</string>
     <string name="poi_picnic_table">Bordbænkesæt</string>
@@ -830,7 +824,6 @@
     <string name="poi_video_games">Videospil</string>
     <string name="poi_pyrotechnics">Pyroteknik</string>
     <string name="poi_weapons">Våbenbutik</string>
-    <string name="poi_furnace">Varmeapparater</string>
     <string name="poi_free_flying">Freeflying udstyr</string>
     <string name="poi_kent_carriage_gap">Kent carriage gap</string>
     <string name="poi_scuba_diving_shop">Scuba dykning udstyr</string>
@@ -839,8 +832,6 @@
     <string name="poi_groyne">Høfde</string>
     <string name="poi_power_cable_distribution_cabinet">Elskab</string>
     <string name="poi_basin">Basin</string>
-    <string name="poi_conservation">Beskyttet område</string>
-    <string name="poi_building_poi">Bygning</string>
     <string name="poi_crane">Kran</string>
     <string name="poi_cutline">Brandbælte</string>
     <string name="poi_tree">Træ</string>
@@ -850,7 +841,6 @@
     <string name="poi_lcn_ref">Lokal netværk af cykelruter</string>
     <string name="poi_abandoned">Forladt</string>
     <string name="poi_disused">Nedlagt</string>
-    <string name="poi_tourism_attraction">Turistattraktion</string>
     <string name="poi_operator">Operatør</string>
     <string name="poi_maxweight">Max vægt</string>
     <string name="poi_maxheight">Max højde</string>
@@ -984,7 +974,6 @@
     <string name="poi_crossing_traffic_signals">Med stoplys</string>
     <string name="poi_crossing_uncontrolled">Ikke kontrolleret</string>
     <string name="poi_crossing_unmarked">Ikke markeret</string>
-    <string name="poi_mill_pond">Mølledam</string>
     <string name="twitter">Twitter</string>
     <string name="poi_skype">Skype</string>
     <string name="poi_youtube">YouTube</string>
@@ -1164,7 +1153,6 @@
     <string name="poi_power_pole">Elmast</string>
     <string name="poi_lighting_tower">Lysmast</string>
     <string name="poi_urban">Bymæssig</string>
-    <string name="poi_car_wash_self_service">Selvbetjening</string>
     <string name="poi_int_name">International navn</string>
     <string name="poi_nat_name">National navn</string>
     <string name="poi_reg_name">Regional navn</string>
@@ -1190,7 +1178,6 @@
     <string name="poi_information_route_marker">Ruteskilte</string>
     <string name="poi_information_hikingmap">Vandrekort</string>
     <string name="poi_information_nature">Natur</string>
-    <string name="poi_information_wildlife">Informationsmarkør: dyreliv</string>
     <string name="poi_information_history">Historie</string>
     <string name="poi_information_sign">Skilt</string>
     <string name="poi_information_audioguide">Audioguide</string>
@@ -1312,8 +1299,6 @@
     <string name="poi_stars_4s">4S (Superior Førsteklasse)</string>
     <string name="poi_stars_5">5 (Luksus)</string>
     <string name="poi_stars_5s">5S (Superior Luksus)</string>
-    <string name="poi_stars_6">Stjerner: 6</string>
-    <string name="poi_stars_7">Stjerner: 7</string>
     <string name="poi_rooms">Værelser</string>
     <string name="poi_love_hotel">Kærlighedshotel</string>
     <string name="poi_payment_coins_yes">Mønter</string>
@@ -1338,7 +1323,6 @@
     <string name="poi_payment_visa_no">Visakort accepteres ikke</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">MasterCard accepteres ikke</string>
-    <string name="poi_payment_none">Vederlagsfrit</string>
     <string name="poi_payment_account_cards_yes">Kontokort</string>
     <string name="poi_payment_account_cards_no">Kontokort accepteres ikke</string>
     <string name="poi_payment_maestro_yes">Maestro kort</string>
@@ -1972,7 +1956,6 @@
     <string name="poi_impromptu_no">Improviseret: nej</string>
     <string name="poi_sanitary_dump_station_yes">Sanitær tømmestation: ja</string>
     <string name="poi_sanitary_dump_station_no">Sanitær tømmestation: nej</string>
-    <string name="poi_sanitary_dump_station_customers">Sanitær tømmestation: kun for kunder</string>
     <string name="poi_power_supply_yes">Ja</string>
     <string name="poi_power_supply_no">Strømforsyning: nej</string>
     <string name="poi_power_supply_cee_17_blue">Strømforsyning (stik): CEE 17 blå</string>
@@ -2384,7 +2367,6 @@
     <string name="poi_inscription_e">Inskription: Ø</string>
     <string name="poi_inscription_ne">Inskription: NØ</string>
     <string name="poi_construction_yes">Under opførelse</string>
-    <string name="poi_additional_atm_yes">Hæveautomat: ja</string>
     <string name="poi_atm_no">Hæveautomat: nej</string>
     <string name="poi_firepit">Bålplads</string>
     <string name="poi_street_cabinet">Gadeskab</string>
@@ -2480,7 +2462,6 @@
     <string name="poi_sanitary_dump_station">Sanitær tømmestation</string>
     <string name="poi_medical_system_western_yes">Vestlig</string>
     <string name="poi_medical_system_chinese_yes">Traditionel Kinesisk</string>
-    <string name="poi_medical_system_unknown_yes">Medicinsk system: ukendt traditionel</string>
     <string name="poi_medical_system_ayurveeda_yes">Ayurveeda</string>
     <string name="poi_medical_system_kampo_yes">Kampo</string>
     <string name="poi_medical_system_mongolian_yes">Traditionelt Mongolsk</string>
@@ -2504,17 +2485,12 @@
     <string name="poi_health_service_test_yes">Sundhedsvæsen: test: ja</string>
     <string name="poi_health_service_test_no">Sundhedsvæsen: test: nej</string>
     <string name="poi_health_facility_type_office">Medicinskkontor</string>
-    <string name="poi_health_facility_type_hospital">Sundhed facilitetstype: hospital</string>
     <string name="poi_health_facility_type_field_hospital">Sundhedsfacilitetstype: felthospital</string>
-    <string name="poi_health_facility_type_clinic">Sundhed facilitetstype: klinik</string>
-    <string name="poi_health_facility_type_health_centre">Sundhed facilitetstype: sundhedscenter</string>
     <string name="poi_health_facility_type_counselling_centre">Sundhedsfacilitetstype: rådgivningscenter</string>
-    <string name="poi_health_facility_type_rehabilitation">Sundhed facilitetstype: rehabilitering</string>
     <string name="poi_health_facility_type_laboratory">Sundhedsfacilitetstype: laboratorium</string>
     <string name="poi_health_facility_type_therapy">Sundhedsfacilitetstype: terapi</string>
     <string name="poi_health_facility_type_department">Sundhedsfacilitetstype: institut</string>
     <string name="poi_health_facility_type_dispensary">Sundhedsfacilitetstype: udlevering af lægemidler</string>
-    <string name="poi_health_facility_type_pharmacy">Sundhed facilitetstype: apotek</string>
     <string name="poi_health_facility_type_first_aid">Sundhedsfacilitetstype: førstehjælp</string>
     <string name="poi_health_facility_type_nursing_home">Sundhedsfacilitetstype: plejehjem</string>
     <string name="poi_health_facility_type_support_group_home">Sundhedsfacilitetstype: bofællesskab</string>
@@ -2562,7 +2538,6 @@
     <string name="poi_counselling_type_marriage_yes">Rådgivning (ægteskab): ja</string>
     <string name="poi_counselling_type_marriage_no">Rådgivning (ægteskab): nej</string>
     <string name="poi_counselling_type_nutrition_yes">Rådgivning (ernæring): ja</string>
-    <string name="poi_counselling_type_nutrition_no">Rådgivning (ernæring): nej</string>
     <string name="poi_counselling_type_rehabilitation_yes">Rådgivning (rehabilitering): ja</string>
     <string name="poi_counselling_type_rehabilitation_no">Rådgivning (rehabilitering): nej</string>
     <string name="poi_counselling_type_sexual_yes">Rådgivning (seksuel): ja</string>
@@ -2631,7 +2606,6 @@
     <string name="poi_water_source_main">Primær</string>
     <string name="poi_water_source_pond">Dam</string>
     <string name="poi_water_source_stream">Vandløb</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cisterne</string>
     <string name="poi_in_service_yes">I tjeneste: ja</string>
     <string name="poi_street_cabinet_power">Gadeskabstype: eldistribution</string>
     <string name="poi_street_cabinet_telecom">Gadeskabstype: tele</string>
@@ -2869,7 +2843,6 @@
     <string name="poi_power_supply">Strømforsyning</string>
     <string name="poi_medical_system">Medicinsystem</string>
     <string name="poi_home_visit">Hjemmebesøg</string>
-    <string name="poi_dishes">Retter</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Burger</string>
     <string name="poi_cuisine_coffee">Kaffe</string>
@@ -3563,8 +3536,6 @@
     <string name="poi_park_ride_tram">Sporvogn</string>
     <string name="poi_park_ride_ferry">Færge</string>
     <string name="poi_denotation">Betegnelse</string>
-    <string name="poi_generator_source_biomass">Energikilde: biomasse</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Strålebehandling</string>
     <string name="poi_hazard">Fare</string>
     <string name="poi_rtsa_scale_filter">Sværhedsgrad</string>
     <string name="poi_toll_gantry">Vejafgift anlæg</string>

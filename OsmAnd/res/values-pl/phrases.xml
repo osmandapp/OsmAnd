@@ -35,7 +35,6 @@
     <string name="poi_computer">Sklep komputerowy</string>
     <string name="poi_curtain">Sklep z zasłonami</string>
     <string name="poi_fabric">Sklep z tkaninami</string>
-    <string name="poi_bedding">Sklep z pościelą</string>
     <string name="poi_dive">Sprzęt do nurkowania</string>
     <string name="poi_copyshop">Punkt ksero i drukowania</string>
     <string name="poi_doityourself">Sklep dla majsterkowiczów</string>
@@ -240,7 +239,6 @@
     <string name="poi_healthcare_alternative">Medycyna alternatywna</string>
     <string name="poi_audiologist">Audiolog</string>
     <string name="poi_blood_bank">Bank krwi</string>
-    <string name="poi_healthcare_centre">Centrum medyczne</string>
     <string name="poi_optometrist">Okulista</string>
     <string name="poi_physiotherapist">Fizjoterapeuta</string>
     <string name="poi_psychotherapist">Psychoterapeuta</string>
@@ -324,7 +322,6 @@
     <string name="poi_motel">Motel</string>
     <string name="poi_place_of_worship">Miejsce kultu</string>
     <string name="poi_monastery">Klasztor</string>
-    <string name="poi_historic_monastery">Zabytkowy klasztor</string>
     <string name="poi_wayside_cross">Przydrożny krzyż</string>
     <string name="poi_wayside_shrine">Przydrożna kapliczka</string>
     <string name="poi_information">Informacja</string>
@@ -398,7 +395,6 @@
     <string name="poi_crematorium">Krematorium</string>
     <string name="poi_internet_cafe">Kawiarenka internetowa</string>
     <string name="poi_bank">Bank</string>
-    <string name="poi_amenity_atm">Bankomat</string>
     <string name="poi_bureau_de_change">Kantor</string>
     <string name="poi_accountant">Księgowy</string>
     <string name="poi_bitcoin_yes">Płatność bitcoinami</string>
@@ -638,8 +634,6 @@
     <string name="poi_racquet">Rakieta</string>
     <string name="poi_roller_skating">Jazda na rolkach</string>
     <string name="poi_skateboard">Skate park</string>
-    <string name="poi_team_handball">Drużyna piłki ręcznej</string>
-    <string name="poi_general_tourist_attraction_yes">Ogólne atrakcje turystyczne</string>
     <string name="poi_attraction_slide">Ślizgawka</string>
     <string name="poi_attraction_summer_toboggan">Letni tor saneczkowy</string>
     <string name="poi_picnic_table">Stół piknikowy</string>
@@ -795,7 +789,6 @@
     <string name="poi_pastry">Ciastkarnia</string>
     <string name="poi_camera">Aparaty i obiektywy</string>
     <string name="poi_candles">Sklep ze świecami</string>
-    <string name="poi_furnace">Sklep z urządzeniami grzewczymi</string>
     <string name="poi_garden_furniture">Sklep z meblami ogrodowymi</string>
     <string name="poi_music">Sklep muzyczny</string>
     <string name="poi_tyres">Sklep z oponami</string>
@@ -840,10 +833,8 @@
     <string name="poi_breakwater">Falochron</string>
     <string name="poi_groyne">Ostroga brzegowa</string>
     <string name="poi_basin">Zbiornik wodny</string>
-    <string name="poi_conservation">Obszar chroniony</string>
     <string name="poi_crane">Dźwig</string>
     <string name="poi_country">Kraj</string>
-    <string name="poi_tourism_attraction">Atrakcja turystyczna</string>
     <string name="poi_cutline">Przecinka leśna</string>
     <string name="poi_tree">Drzewo</string>
     <string name="poi_kent_carriage_gap">Bramka (szerokość powozu)</string>
@@ -1036,7 +1027,6 @@
     <string name="poi_generator_source_geothermal">Źródło energii: geotermalne</string>
     <string name="poi_generator_source_oil">Źródło energii: olej</string>
     <string name="poi_generator_source_diesel">Źródło energii: olej napędowy</string>
-    <string name="poi_car_wash_self_service">Samoobsługa</string>
     <string name="poi_int_name">Nazwa międzynarodowa</string>
     <string name="poi_reg_name">Nazwa regionalna</string>
     <string name="poi_loc_name">Nazwa lokalna</string>
@@ -1362,7 +1352,6 @@
     <string name="poi_thermometer_no">Termometr: nie</string>
     <string name="poi_hygrometer_yes">Higrometr</string>
     <string name="poi_hygrometer_no">Higrometr: nie</string>
-    <string name="poi_additional_atm_yes">Bankomat: Tak</string>
     <string name="poi_atm_no">Bankomat: nie</string>
     <string name="poi_pump_powered">Maszynowa</string>
     <string name="poi_information_hikingmap">Mapa piesza</string>
@@ -1486,7 +1475,6 @@
     <string name="poi_information_trail_blaze">Drogowskaz</string>
     <string name="poi_information_terminal">Terminal</string>
     <string name="poi_information_nature">Natura</string>
-    <string name="poi_information_wildlife">Informacja: fauna</string>
     <string name="poi_information_history">Historia</string>
     <string name="poi_information_tactile_model">Model dla niewidomych</string>
     <string name="poi_information_tactile_map">Mapa dla niewidomych</string>
@@ -1565,8 +1553,6 @@
     <string name="poi_stars_4s">4S (pierwsza klasa plus)</string>
     <string name="poi_stars_5">5 (deluxe)</string>
     <string name="poi_stars_5s">5S (deluxe plus)</string>
-    <string name="poi_stars_6">Gwiazdek: 6</string>
-    <string name="poi_stars_7">Gwiazdek: 7</string>
     <string name="poi_rooms">Pokoje</string>
     <string name="poi_payment_coins_yes">Monety</string>
     <string name="poi_payment_coins_no">Monety nieakceptowane</string>
@@ -1590,7 +1576,6 @@
     <string name="poi_payment_visa_no">Karty Visa nieakceptowane</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">Karty MasterCard nieakceptowane</string>
-    <string name="poi_payment_none">Bezpłatny</string>
     <string name="poi_payment_account_cards_yes">Karty płatnicze</string>
     <string name="poi_payment_account_cards_no">Brak płatności kartą</string>
     <string name="poi_payment_maestro_yes">Maestro</string>
@@ -2106,7 +2091,6 @@
     <string name="poi_impromptu_no">Nieformalne: nie</string>
     <string name="poi_sanitary_dump_station_yes">Miejsce zrzutu nieczystości: tak</string>
     <string name="poi_sanitary_dump_station_no">Miejsce zrzutu nieczystości: nie</string>
-    <string name="poi_sanitary_dump_station_customers">Miejsce zrzutu nieczystości: tylko dla gości</string>
     <string name="poi_power_supply_yes">Tak</string>
     <string name="poi_power_supply_no">Prąd: nie</string>
     <string name="poi_power_supply_cee_17_blue">Prąd (wtyczka): CEE 17 niebieska (IEC 60309)</string>
@@ -2304,7 +2288,6 @@
     <string name="poi_water_source_main">Sieć</string>
     <string name="poi_water_source_pond">Staw</string>
     <string name="poi_water_source_stream">Strumień</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cysterna</string>
     <string name="poi_in_service_yes">Działa: tak</string>
     <string name="poi_military_checkpoint">Wojskowy punkt kontroli</string>
     <string name="poi_bicycle_parking_lockers">Szafki</string>
@@ -2595,7 +2578,6 @@
     <string name="poi_health_specialty_behavior_yes">Behawioryzm</string>
     <string name="poi_medical_system_western_yes">Zachodni</string>
     <string name="poi_medical_system_chinese_yes">Paramedycyna chińska</string>
-    <string name="poi_medical_system_unknown_yes">System medyczny: tradycyjny</string>
     <string name="poi_medical_system_ayurveeda_yes">Ajurweda (paramedycyna indyjska)</string>
     <string name="poi_medical_system_kampo_yes">Kampō (paramedycyna chińska)</string>
     <string name="poi_medical_system_mongolian_yes">Paramedycyna mongolska</string>
@@ -3556,9 +3538,7 @@
     <string name="poi_park_ride_hov">Pojazdy z wieloma pasażerami</string>
     <string name="poi_park_ride_tram">Tramwaj</string>
     <string name="poi_park_ride_ferry">Prom</string>
-    <string name="poi_generator_source_biomass">Źródło energii: biomasa</string>
     <string name="poi_rtsa_scale_filter">Kategoria trudności</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Zagrożenie</string>
     <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
     <string name="poi_change_delete">Usunięty obiekt</string>
@@ -3782,7 +3762,6 @@
     <string name="poi_volcano_status_inactive">Nieaktywny</string>
     <string name="poi_volcano_number_of_eruptions">Liczba erupcji</string>
     <string name="poi_memorial_ghost_bike">Duch roweru</string>
-    <string name="poi_volcano_type_dirt">Wulkan błotny</string>
     <string name="poi_paintball">Paintball</string>
     <string name="poi_volcano_type_mud">Błotny</string>
     <string name="poi_shop_security">Sklep BHP</string>

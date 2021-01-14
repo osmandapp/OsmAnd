@@ -129,7 +129,6 @@
     <string name="poi_florist">Florvendejo</string>
     <string name="poi_frame">Kadroj-de-pentraĵoj-vendejo</string>
     <string name="poi_free_flying">Paraŝutiloj-vendejo</string>
-    <string name="poi_furnace">Hejtil-vendejo</string>
     <string name="poi_furniture">Mebl-vendejo</string>
     <string name="poi_garden_centre">Ĝarden-vendejo</string>
     <string name="poi_garden_furniture">Ĝarden-mebl-vendejo</string>
@@ -227,7 +226,6 @@
     <string name="poi_car">Aŭtomobil-vendejo</string>
     <string name="poi_car_parts">Aŭtomobil-parta vendejo</string>
     <string name="poi_shelter">Ŝirmejo</string>
-    <string name="poi_amenity_atm">Bankaŭtomato</string>
     <string name="poi_bureau_de_change">Monŝanĝejo</string>
     <string name="poi_volcano">Vulkano</string>
     <string name="poi_tree">Arbo</string>
@@ -474,7 +472,6 @@
     <string name="poi_casino">Monludejo</string>
     <string name="poi_population">Loĝantaro</string>
     <string name="poi_landuse_railway">Fervoja tereno</string>
-    <string name="poi_conservation">Naturrezervejo</string>
     <string name="poi_canal">Akvovojo</string>
     <string name="poi_pier">Marponto</string>
     <string name="poi_surveillance">Supergardo</string>
@@ -545,7 +542,6 @@
     <string name="poi_sanatorium">kuracdomo</string>
     <string name="poi_healthcare_alternative">Kontraŭmedicino</string>
     <string name="poi_blood_bank">Sangobanko</string>
-    <string name="poi_healthcare_centre">Medicina centro</string>
     <string name="poi_midwife">Akuŝisto</string>
     <string name="poi_occupational_therapist">Okup-terapiisto</string>
     <string name="poi_optometrist">Okulisto</string>
@@ -1204,7 +1200,6 @@
     <string name="poi_information_route_marker">vojsigno</string>
     <string name="poi_information_hikingmap">mapo piedirada</string>
     <string name="poi_information_nature">naturo</string>
-    <string name="poi_information_wildlife">Informoj pli: bestaro</string>
     <string name="poi_information_history">historio</string>
     <string name="poi_information_sign">signo</string>
     <string name="poi_information_audioguide">son-gvidilo</string>
@@ -1316,8 +1311,6 @@
     <string name="poi_stars_4s">4S (pli-bona unua klaso)</string>
     <string name="poi_stars_5">5 (luksa)</string>
     <string name="poi_stars_5s">5S (pli-bona luksa)</string>
-    <string name="poi_stars_6">Steloj: 6</string>
-    <string name="poi_stars_7">Steloj: 7</string>
     <string name="poi_love_hotel">Amor-hotelo</string>
     <string name="poi_payment_coins_yes">moneroj</string>
     <string name="poi_payment_coins_no">Moneroj malakceptataj</string>
@@ -1341,7 +1334,6 @@
     <string name="poi_payment_visa_no">Visa kartoj malakceptataj</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">MasterCard kartoj malakceptataj</string>
-    <string name="poi_payment_none">Senpaga</string>
     <string name="poi_payment_maestro_yes">Maestro</string>
     <string name="poi_payment_maestro_no">Maestro kartoj malakceptataj</string>
     <string name="poi_payment_american_express_yes">American Express (AMEX)</string>
@@ -1962,7 +1954,6 @@
     <string name="poi_impromptu_no">Neformala: ne</string>
     <string name="poi_sanitary_dump_station_yes">Stacio de forigo de fekaĵoj: jes</string>
     <string name="poi_sanitary_dump_station_no">Stacio de forigo de fekaĵoj: ne</string>
-    <string name="poi_sanitary_dump_station_customers">Ejo por forigado de fekaĵoj: nur por klientoj</string>
     <string name="poi_power_supply_yes">jes</string>
     <string name="poi_power_supply_no">Energifonto: ne</string>
     <string name="poi_power_supply_cee_17_blue">Energifonto (ŝtopilo): CEE 17 blua (IEC 60309)</string>
@@ -2289,7 +2280,6 @@
     <string name="poi_forestry_compartment">Vojmontrilo: arbara sekcio</string>
     <string name="poi_forestry_allotment">Vojmontrilo: arbara parcelo</string>
     <string name="poi_construction_yes">Dum konstruado</string>
-    <string name="poi_additional_atm_yes">Bankaŭtomato: jes</string>
     <string name="poi_atm_no">Bankaŭtomato: ne</string>
     <string name="poi_firepit">Lignofajrejo</string>
     <string name="poi_street_cabinet">Ŝranko distribua</string>
@@ -2365,7 +2355,6 @@
     <string name="poi_sanitary_dump_station">Stacio de forigo de fekaĵoj</string>
     <string name="poi_medical_system_western_yes">Okcidenta</string>
     <string name="poi_medical_system_chinese_yes">Ĉina kontraŭ-medicino</string>
-    <string name="poi_medical_system_unknown_yes">Medicina sistemo: tradicia</string>
     <string name="poi_medical_system_ayurveeda_yes">Ajurvedo</string>
     <string name="poi_medical_system_kampo_yes">Kampō (ĉina kontraŭ-medicino)</string>
     <string name="poi_medical_system_mongolian_yes">Mongola kontraŭ-medicino</string>
@@ -2455,7 +2444,6 @@
     <string name="poi_water_source_main">akvokondukilo</string>
     <string name="poi_water_source_pond">lageto</string>
     <string name="poi_water_source_stream">rivereto</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">cisterno</string>
     <string name="poi_in_service_yes">Funkcias: jes</string>
     <string name="poi_street_cabinet_power">Speco de ŝranko: elektra</string>
     <string name="poi_street_cabinet_telecom">Speco de ŝranko: telefona</string>
@@ -3550,8 +3538,6 @@
     <string name="poi_park_ride_hov">veturiloj kun ≥2 homoj</string>
     <string name="poi_park_ride_tram">tramo</string>
     <string name="poi_park_ride_ferry">pramo</string>
-    <string name="poi_generator_source_biomass">Energifonto: biomaso</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">per-radiad-kuracado (radioterapio)</string>
     <string name="poi_hazard">Danĝerejo</string>
     <string name="poi_rtsa_scale_filter">Malfacilo de montpasejo (RTSA-skalo)</string>
     <string name="poi_rtsa_scale_nc">н/к (sen malfacilo)</string>

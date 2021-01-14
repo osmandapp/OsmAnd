@@ -1200,7 +1200,6 @@
     <string name="error_calculating_route">Non foi posíbel calcular a ruta.</string>
     <string name="error_calculating_route_occured">Non foi posíbel calcular a ruta.</string>
     <string name="empty_route_calculated">A ruta calculada está baleira.</string>
-    <string name="new_route_calculated_dist">Calculouse unha rota nova, distancia</string>
     <string name="arrived_at_destination">Chegaches.</string>
     <string name="invalid_locations">As coordenadas non che son válidas</string>
     <string name="go_back_to_osmand">Voltar ao mapa</string>
@@ -1293,7 +1292,6 @@
     <string name="osb_comment_dialog_error">Non foi posíbel engadir o comentario.</string>
     <string name="poi_edit_title">Editar o PDI</string>
     <string name="poi_create_title">Crear un PDI</string>
-    <string name="poi_error_poi_not_found">Non é posíbel atopar o nodo ou esta instalación non é un nodo único</string>
     <string name="poi_remove_confirm_template">Eliminar {0} (comentario)\?</string>
     <string name="poi_remove_title">Eliminar PDI</string>
     <string name="shared_string_delete">Eliminar</string>
@@ -1794,7 +1792,6 @@ Lon %2$s</string>
     <string name="use_drawer_btn">Empregar o menú</string>
     <string name="dashboard_or_drawer_title">Taboleiro de control ou menú de control</string>
     <string name="dashboard_or_drawer_description">Hai unha opción nova para controlar a aplicación principalmente mediante o flexíbel taboleiro de control ou mediante un menú estático. O que escollas pode ser mudado en calquera intre na configuración do taboleiro de control.</string>
-    <string name="update">Actualizar</string>
     <string name="only_download_over_wifi">Baixar só co Wi-Fi</string>
     <string name="live_update">Actualización ao vivo</string>
     <string name="update_now">Actualizar agora</string>
@@ -1868,8 +1865,6 @@ Lon %2$s</string>
     <string name="rendering_value_bold_name">Gordo</string>
     <string name="no_map_markers_found">Engade marcaxes do mapa a través do mapa</string>
     <string name="no_waypoints_found">Non se atoparon puntos de pasaxe</string>
-    <string name="show_legacy_search">Mostrar as buscas á antiga</string>
-    <string name="show_legacy_search_desc">Activar as buscas á antiga na lista de gabetas</string>
     <string name="routing_attr_allow_motorway_name">Empregar autoestradas</string>
     <string name="routing_attr_allow_motorway_description">Permite autoestradas.</string>
     <string name="upload_osm_note_description">Subir notas do OSM de xeito anónimo ou empregando o teu perfil do OpenStreetMap.org.</string>
@@ -1936,8 +1931,6 @@ Lon %2$s</string>
     <string name="allow_access_location">Permitir acceso á localización</string>
     <string name="first_usage_greeting">Obtén indicacións e descobre lugares novos sen conexión á Internet</string>
     <string name="search_my_location">Procurar na miña posición</string>
-    <string name="no_update_info_desc">Non comprobar as actualizacións de versións novas nin descontos relacionados co OsmAnd</string>
-    <string name="no_update_info">Non mostrar as actualizacións</string>
     <string name="update_all_maps_now">Desexa actualizar tódolos mapas agora\?</string>
     <string name="clear_tile_data">Limpar tódalas teselas</string>
     <string name="replace_favorite_confirmation">Tes a certeza de querer substituír o favorito \"%1$s\"\?</string>
@@ -2014,7 +2007,6 @@ Lon %2$s</string>
     <string name="rendering_attr_contourWidth_name">Amplitude da curva do nivel</string>
     <string name="rendering_attr_hideWaterPolygons_description">Auga</string>
     <string name="rendering_attr_hideWaterPolygons_name">Agochar a auga</string>
-    <string name="legacy_search">Busca á antiga</string>
     <string name="access_map_linked_to_location">O mapa está ligado á localización</string>
     <string name="access_sort">Ordenar</string>
     <string name="storage_directory_readonly_desc">Mudouse cara a memoria interna, porque o cartafol de almacenamento dos datos escollida está protexida contra a escritura. Escolle un cartafol de almacenamento válido.</string>
@@ -2436,7 +2428,6 @@ Lon %2$s</string>
     <string name="poi_cannot_be_found">Non foi posíbel atopar o nó ou a vía.</string>
     <string name="search_no_results_feedback">Sen resultados de procura\?
 \nMándanos a túa opinión</string>
-    <string name="commiting_way">Estase a envíar camiño…</string>
     <string name="increase_search_radius_to">Aumentar o raio de procura para %1$s</string>
     <string name="shared_string_world">Mundo</string>
     <string name="coord_input_save_as_track">Gardar coma pista</string>
@@ -2469,35 +2460,7 @@ Lon %2$s</string>
     <string name="import_track_desc">O ficheiro %1$s non contén puntos de pasaxe, queres importalo coma unha pista\?</string>
     <string name="copy_location_name">Copiar nome da localización/PDI</string>
     <string name="keep_passed_markers_descr">As marcaxes engadidas coma un grupo de Favoritos ou puntos de ruta GPX desbotados ficarán no mapa. Se o grupo non está dispoñíbel, as marcaxes agocharanse do mapa.</string>
-    <string name="release_3_2_pre">• Corrixido o erro no inicio que se producía nalgúns dispositivos 
-\n 
-\n • Nova función das marcaxes: amosa as marcaxes que xa foran atravesadas. 
-\n 
-\n • No historial da procura amosa agora as categorías procuradas anteriormente 
-\n 
-\n • Corrixido o fallo no inicio que se producía cos mapas non latinos 
-\n 
-\n • Mellora nos problemas da velocidade do renderizado nos dispositivos Android 8.0 
-\n 
-\n • Suporte para a edición de obxectos poligonais (non servizos) 
-\n 
-\n • Medir distancia: Engadi-lo botón de «Medir distancia» ás accións no menú contextual 
-\n</string>
-    <string name="release_3_1">• Navigación: Corrección na barra do progreso, intercambio axiña do punto inicial e final da rota 
-\n 
-\n • Marcaxes do mapa: Corrixido o des/activar grupos, capacidade para agochar marcaxes do mapa 
-\n 
-\n • Edición do OSM: Capacidade de edición das etiquetas para obxectos que non sexan puntos e vías, corrección dos comentarios baleiros nas notas, copia de seguridade das edicións 
-\n 
-\n • Mellor análise da Wikipedia e Wikiviaxes, os ficheiros actualizados xa están dispoñíbeis 
-\n 
-\n • Menú contextual: Corrixida a cor dos escudos do transporte no modo noite e os tamaños do menú adicionais 
-\n 
-\n • Navigación fluvial: Suporte á navegación fluvial 
-\n 
-\n • Outras correccións de erros 
-\n</string>
-    <string name="send_search_query_description">Mandaremos a consulta de procura: \"%1$s\", así coma a localización. 
+    <string name="send_search_query_description">Mandaremos a consulta de procura: \"%1$s\", así coma a localización.
 \n 
 \n Non se recompilan datos persoais, os datos de procura só son empregados para mellorar o algoritmo de procura.</string>
     <string name="send_search_query">Enviar consulta de procura\?</string>
@@ -2718,16 +2681,7 @@ Lon %2$s</string>
     <string name="wiki_article_not_found">Artigo non atopado</string>
     <string name="how_to_open_wiki_title">De que xeito abrir artigos da Wikipedia\?</string>
     <string name="test_voice_desrc">Preme un botón e escoita o seu correspondente aviso por voz para saber se falla algo ou está defectuoso</string>
-    <string name="release_3_0">"• Novo: Suporte para guieiros de viaxes globais sen conexión á Internet. As ubicacións de referencia, están ligadas ó mapa. Datos iniciais do Wikiviaxes 
-\n 
-\n • Wikipedia: Novo aspecto, ligazóns activas, agora con suporte de imaxes 
-\n 
-\n • Interface do usuario do Open Tracks: Suporte para grupos de puntos de rota 
-\n 
-\n • Marcaxes do mapa: Importación de grupos elixidos dende ficheiros GPX, ingreso de coordenadas, novo aspecto 
-\n 
-\n • A subscrición do OsmAnd Live, suporta agora tódalas características do OsmAnd "</string>
-    <string name="osmand_extended_description_part2">Navegación GPS 
+    <string name="osmand_extended_description_part2">Navegación GPS
 \n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) 
 \n • A guía por voz xiro-a-xiro ou guía ó longo do camiño (voces gravadas e sintetizadas) 
 \n • A rota recalcúlase ó saírse da mesma 
@@ -2952,36 +2906,6 @@ Lon %2$s</string>
     <string name="rendering_attr_highway_class_path_name">Camiño</string>
     <string name="rendering_attr_highway_class_cycleway_name">Senda ciclista</string>
     <string name="rendering_attr_undefined_name">Sen definir</string>
-    <string name="release_3_3">• Nova lapela «Direccións»: Amosa os botóns de destino «Casa» e «Traballo», o atallo da «rota anterior», a listaxe de pistas, marcaxes GPX activos e o historial de procura. 
-\n
-\n 
-\n
-\n • Información adicional en «Detalles da rota»: Tipos de camiños, superficie, pendente e suavidade 
-\n 
-\n
-\n • Suporte na navegación de transporte público: Metro, bus, tranvía, etc. 
-\n
-\n 
-\n
-\n • Novas accións axiñas: «Amosar/agochar pistas» e «Modo día/noite» 
-\n
-\n 
-\n
-\n • Áreas fixas amosadas coma inundadas en Alemaña, Suráfrica e Quebec 
-\n
-\n 
-\n
-\n • Suporte adicional para a importación de KML e KMZ 
-\n
-\n 
-\n
-\n • Corrixidos os erros na apertura de algunhas paraxes de transporte público 
-\n
-\n 
-\n
-\n • Eliminada a análise do Facebook e Firebase da versión de balde (o OsmAnd+ non o inclúe)
-\n
-\n</string>
     <string name="use_osm_live_public_transport_description">Activar o transporte público para as modificacións do OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transporte público no OsmAnd Live</string>
     <string name="shared_string_walk">A pé</string>
@@ -3002,15 +2926,6 @@ Lon %2$s</string>
     <string name="routing_attr_avoid_subway_description">Evitar metros e tranvías/metros lixeiros</string>
     <string name="routing_attr_avoid_ferry_name">Sen ferris</string>
     <string name="routing_attr_avoid_ferry_description">Evitar ferris</string>
-    <string name="release_3_3_7">• Amosar o tempo entre transbordos no transporte público 
-\n 
-\n • Interface de usuario corrixida para «Detalles da rota» 
-\n 
-\n • Tema escuro solucionado no menú «Dirección» e «Detalles da rota» 
-\n 
-\n • Visualización de medida «azimut» en «Medir distancia»
-\n
-\n</string>
     <string name="shared_string_degrees">Graos</string>
     <string name="shared_string_milliradians">Milirradiáns</string>
     <string name="angular_measeurement">Unidade angular</string>
@@ -3112,8 +3027,6 @@ Lon %2$s</string>
     <string name="third_party_routing_type">Enrutamento de terceiros</string>
     <string name="application_profiles_descr">Escolle os perfís que serán visíbeis na aplicación.</string>
     <string name="application_profiles">Perfís de aplicación</string>
-    <string name="zoom_by_wunderlinq_descr">Muda o achegamento do mapa desprazando a roda cara arriba e abaixo. A tecla «Esc» volta á aplicación WunderLINQ.</string>
-    <string name="zoom_by_wunderlinq">Controlar co WunderLINQ</string>
     <string name="quick_action_need_to_add_item_to_list">Engadir polo menos un elemento á listaxe nos axustes de \'Acción rápida\'</string>
     <string name="routing_attr_piste_type_downhill_name">Esquí alpino e de descendemento</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas de esquí alpino ou de descendemento e acceso a remontes mecánicos.</string>
@@ -3207,8 +3120,7 @@ Lon %2$s</string>
     <string name="rendering_attr_showLez_name">Amosar zonas de baixas emisións</string>
     <string name="temporary_conditional_routing">Considerar limitacións temporais</string>
     <string name="shared_string_default">Predefinido</string>
-    <string name="new_route_calculated_dist_dbg">Rota: distancia %s, tempo de navegación %s 
-\nCálculo: %.1f seg, %d estradas, %d teselas)</string>
+    <string name="new_route_calculated_dist_dbg">Rota: distancia %1$s, tempo de navegación %2$s \nCálculo: %3$.1f seg, %4$d estradas, %5$d teselas)</string>
     <string name="lang_oc">Occitano</string>
     <string name="app_mode_wagon">Vagón</string>
     <string name="app_mode_pickup_truck">Camioneta (pickup)</string>
@@ -3249,7 +3161,6 @@ Lon %2$s</string>
     <string name="route_parameters_info">Axustes para a navegación do perfil escollido \"%1$s\".</string>
     <string name="wake_time">Tempo de espera da pantalla após acender</string>
     <string name="units_and_formats">Unidades e formatos</string>
-    <string name="appearance">Aparencia</string>
     <string name="map_look_descr">Aparencia do mapa</string>
     <string name="map_look">Aparencia do mapa</string>
     <string name="list_of_installed_plugins">Plugins instalados</string>
@@ -3281,7 +3192,6 @@ Lon %2$s</string>
     <string name="logcat_buffer">Búfer de Logcat</string>
     <string name="shared_string_by_default">Predefinido</string>
     <string name="plugins_settings">Axustes do plugin</string>
-    <string name="download_detaile_map">Baixa o mapa detallado de %s, para poder ollar esta área.</string>
     <string name="download_detailed_map">Baixa o mapa detallado de %s para ollar esta área.</string>
     <string name="change_data_storage_full_description">Mover os ficheiros de datos do OsmAnd ó novo destino\? 
 \n%1$s &gt; %2$s</string>
@@ -3361,7 +3271,6 @@ Lon %2$s</string>
     <string name="shared_preference">Compartido</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas sen pavimentar</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir as estradas sen pavimentar aos pavimentados para o trazado de rutas.</string>
-    <string name="swap_start_and_destination">Trocar comezo e destino</string>
     <string name="layer_osm_edits">Edicións do OSM</string>
     <string name="quick_action_contour_lines_descr">Un botón que amosa ou agocha as curvas de nivel no mapa.</string>
     <string name="quick_action_contour_lines_show">Amosar curvas de nivel</string>
@@ -3540,8 +3449,6 @@ Lon %2$s</string>
     <string name="import_profile_dialog_description">O perfil importado contén datos adicionais. Preme en \"Importar\" para importar só datos de perfil ou marca datos adicionais.</string>
     <string name="export_profile_dialog_description">Podes marcar datos adicionais para exportar ó carón do perfil.</string>
     <string name="index_name_antarctica">Antártida</string>
-    <string name="navigation_notification_desc">Amosar notificación do sistema durante a navegación con instrucións de navegación.</string>
-    <string name="navigation_notification">Notificación de navegación</string>
     <string name="shared_string_app_default_w_val">Aplicación por defecto (%s)</string>
     <string name="no_recalculation_setting">Sen recálculo</string>
     <string name="route_recalculation_dist_title">Distancia mínima para recalcular a ruta</string>
@@ -3741,7 +3648,6 @@ Lon %2$s</string>
     <string name="sqlite_db_file">Ficheiro SQLiteDB</string>
     <string name="shared_string_always">Sempre</string>
     <string name="system_screen_timeout_descr">Apaga a apantalla segundo o tempo de espera da pantalla do sistema.</string>
-    <string name="turn_screen_on_options_descr">Opcións de acendido da pantalla:</string>
     <string name="turn_screen_on_navigation_instructions_descr">A pantalla acenderase de xeito automático uns segundos antes das instrucións de navegación durante un tempo específico na opción \"Tempo de activación\".
 \n
 \n Traballa só mentres navegas.</string>
@@ -3780,7 +3686,6 @@ Lon %2$s</string>
     <string name="shared_string_meters">metros</string>
     <string name="details_dialog_decr">Amosar ou agochar detalles adicionais do mapa</string>
     <string name="shared_string_night_map">Mapa de noite</string>
-    <string name="shared_string_all_time">Todo o tempo</string>
     <string name="turn_screen_on_power_button_disabled">Desactivado. Require \'manter a pantalla acendida\' en \'tempo de espera após o acendido\'.</string>
     <string name="add_online_source">Engadir fonte en liña</string>
     <string name="clear_tiles_warning">Aplicando estas modificacións eliminarás os datos almacenados na caché para esta fonte de teselas</string>
@@ -3941,7 +3846,6 @@ Lon %2$s</string>
     <string name="development">Desenvolvemento</string>
     <string name="use_live_public_transport">Datos do OsmAnd Live</string>
     <string name="use_live_routing">Datos do OsmAnd Live</string>
-    <string name="use_complex_routing">Enrutamento complexo</string>
     <string name="complex_routing_descr">Enrutamento de dúas fases para a navegación de automóbil</string>
     <string name="use_native_pt">Desenvolvemento do transporte público nativo</string>
     <string name="use_native_pt_desc">Activar cálculo da ruta de transporte público do Java (seguro)</string>
