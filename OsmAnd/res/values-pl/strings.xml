@@ -4045,4 +4045,10 @@
     <string name="routing_engine_vehicle_type_car">Samochód</string>
     <string name="message_error_recheck_parameters">Błąd, ponownie sprawdź parametry</string>
     <string name="copy_address">Skopiuj adres</string>
+    <string name="routing_engine_vehicle_type_driving">Jazda</string>
+    <string name="routing_engine_vehicle_type_foot">Stopa</string>
+    <string name="shared_string_folders">Foldery</string>
+    <string name="select_folder">Wybierz folder</string>
+    <string name="select_folder_descr">Wybierz folder lub dodaj nowy</string>
+    <string name="shared_string_empty">Opróżnij</string>
 </resources>
