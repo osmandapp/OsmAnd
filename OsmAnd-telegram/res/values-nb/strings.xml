@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="background_work_description">Endre batterioptimiseringsinnstillinger for mer stabil posisjonsdeling.</string>
+    <string name="background_work_description">Endre batterioptimaliseringsinnstillinger for mer stabil posisjonsdeling.</string>
     <string name="background_work">Bakgrunnsarbeid</string>
-    <string name="battery_optimization_description">Skru av batterioptimisering for OsmAnd-sporeren slik at det ikke plutselig skrur seg av når det er i bakgrunnen.</string>
+    <string name="battery_optimization_description">Skru av batterioptimalisering for OsmAnd-sporeren slik at det ikke plutselig skrur seg av når det er i bakgrunnen.</string>
     <string name="sharing_in_background">Deling i bakgrunnen</string>
     <string name="go_to_settings">Gå til innstillinger</string>
     <string name="shared_string_later">Senere</string>

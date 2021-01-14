@@ -108,7 +108,7 @@
     <string name="poi_cave_entrance">Höhleneingang</string>
     <string name="poi_cemetery">Friedhof</string>
     <string name="poi_chalet">Ferienhaus</string>
-    <string name="poi_electricity_combined_charging">Ladestation</string>
+    <string name="poi_electricity_combined_charging">Ladestation;Ladestation für elektische Fahrzeuge;Aufladestation</string>
     <string name="poi_chemist">Drogerie</string>
     <string name="poi_chess">Schach</string>
     <string name="poi_clothes_children">Kinderbekleidungsgeschäft</string>

@@ -505,6 +505,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val currentTimeMillis = System.currentTimeMillis()
 			val currentTime = currentTimeMillis / 1000
 			statusChangeTime = currentTimeMillis
+			val gpsEnabled = false
+			/*
 			val lm = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 			val gpsEnabled = try {
 				if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -518,6 +520,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			} catch (ex: Exception) {
 				false
 			}
+			*/
 
 			var initializing = false
 			var sendChatsErrors = false

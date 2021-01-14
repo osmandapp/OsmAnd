@@ -4039,4 +4039,11 @@
     <string name="routing_engine_vehicle_type_bike">Велосипед</string>
     <string name="routing_engine_vehicle_type_car">Автомобіль</string>
     <string name="message_error_recheck_parameters">Помилка, повторно перевірте параметри</string>
+    <string name="copy_address">Копіювати адресу</string>
+    <string name="online_routing_engine">Мережний рушій маршрутизації</string>
+    <string name="online_routing_engines">Мережні рушії маршрутизації</string>
+    <string name="shared_string_folders">Теки</string>
+    <string name="select_folder">Вибрати теку</string>
+    <string name="select_folder_descr">Виберіть теку або додайте нову</string>
+    <string name="shared_string_empty">Порожньо</string>
 </resources>
