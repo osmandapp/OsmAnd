@@ -67,10 +67,12 @@ public class OptionsCard extends BaseCard {
 		itemsContainer.removeAllViews();
 		items.clear();
 
+		boolean fileAvailable = gpxFile.path != null && !gpxFile.showCurrentTrack;
 		items.add(createShowOnMapItem());
 		items.add(createAppearanceItem());
-		items.add(createDirectionsItem());
-
+		if (fileAvailable) {
+			items.add(createDirectionsItem());
+		}
 		items.add(createDividerItem());
 		items.add(createJoinGapsItem());
 		items.add(createAnalyzeOnMapItem());
@@ -78,18 +80,15 @@ public class OptionsCard extends BaseCard {
 
 		items.add(createDividerItem());
 		items.add(createShareItem());
-		items.add(createUploadOsmItem());
 
-		items.add(createDividerItem());
-		items.add(createEditItem());
-		items.add(createRenameItem());
-		items.add(createChangeFolderItem());
-
-		items.add(createDividerItem());
-		items.add(createDeleteItem());
-
-		if (gpxFile.path != null && !gpxFile.showCurrentTrack) {
-
+		if (fileAvailable) {
+			items.add(createUploadOsmItem());
+			items.add(createDividerItem());
+			items.add(createEditItem());
+			items.add(createRenameItem());
+			items.add(createChangeFolderItem());
+			items.add(createDividerItem());
+			items.add(createDeleteItem());
 		}
 		items.add(new DividerSpaceItem(mapActivity, AndroidUtils.dpToPx(app, 6)));
 

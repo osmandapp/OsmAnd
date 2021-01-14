@@ -420,16 +420,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				app.getSelectedGpxHelper().selectGpxFile(gpxFile, gpxFileSelected, false);
 				mapActivity.refreshMap();
 			} else if (buttonIndex == APPEARANCE_BUTTON_INDEX) {
-				app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-
-				Bundle args = new Bundle();
-				args.putString(TRACK_FILE_NAME, gpxFile.path);
-				args.putBoolean(CURRENT_RECORDING, gpxFile.showCurrentTrack);
-				args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HALF_SCREEN);
-
-				TrackAppearanceFragment fragment = new TrackAppearanceFragment();
-				fragment.setArguments(args);
-				TrackAppearanceFragment.showInstance(mapActivity, fragment);
+				TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile);
 			} else if (buttonIndex == DIRECTIONS_BUTTON_INDEX) {
 				MapActivityActions mapActions = mapActivity.getMapActions();
 				if (app.getRoutingHelper().isFollowingMode()) {
@@ -469,7 +460,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, items.get(0), segment);
 				}
 			} else if (buttonIndex == SHARE_BUTTON_INDEX) {
-				GpxUiHelper.shareGpx(mapActivity, new File(gpxFile.path));
+				OsmandApplication app = mapActivity.getMyApplication();
+				if (gpxFile.showCurrentTrack) {
+					GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
+				} else if (!Algorithms.isEmpty(gpxFile.path)) {
+					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
+				}
 			} else if (buttonIndex == UPLOAD_OSM_BUTTON_INDEX) {
 				OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
