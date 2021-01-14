@@ -77,7 +77,7 @@ public class SelectedGpxMenuController extends MenuController {
 		rightTitleButtonController.startIconId = R.drawable.ic_action_analyze_intervals;
 	}
 
-	private static class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxSelectionHelper.GpxDisplayItem> {
+	public static class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxSelectionHelper.GpxDisplayItem> {
 
 		private OsmandApplication app;
 
@@ -87,7 +87,7 @@ public class SelectedGpxMenuController extends MenuController {
 		private ProgressDialog progressDialog;
 		private WeakReference<MapActivity> activityRef;
 
-		OpenGpxDetailsTask(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, MapActivity mapActivity) {
+		public OpenGpxDetailsTask(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, MapActivity mapActivity) {
 			app = mapActivity.getMyApplication();
 			this.activityRef = new WeakReference<>(mapActivity);
 			this.selectedGpxFile = selectedGpxFile;

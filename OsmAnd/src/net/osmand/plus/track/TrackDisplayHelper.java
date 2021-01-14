@@ -101,24 +101,28 @@ public class TrackDisplayHelper {
 			return new ArrayList<>();
 		}
 		if (gpxFile.modifiedTime != modifiedTime) {
-			modifiedTime = gpxFile.modifiedTime;
-			GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
-			displayGroups = selectedGpxHelper.collectDisplayGroups(gpxFile);
-			originalGroups.clear();
-			for (GpxSelectionHelper.GpxDisplayGroup g : displayGroups) {
-				originalGroups.add(g.cloneInstance());
-			}
-			if (file != null) {
-				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
-				if (sf != null && file != null && sf.getDisplayGroups(app) != null) {
-					displayGroups = sf.getDisplayGroups(app);
-				}
-			}
+			updateDisplayGroups();
 		}
 		if (useDisplayGroups) {
 			return displayGroups;
 		} else {
 			return originalGroups;
+		}
+	}
+
+	public void updateDisplayGroups() {
+		modifiedTime = gpxFile.modifiedTime;
+		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
+		displayGroups = selectedGpxHelper.collectDisplayGroups(gpxFile);
+		originalGroups.clear();
+		for (GpxDisplayGroup g : displayGroups) {
+			originalGroups.add(g.cloneInstance());
+		}
+		if (file != null) {
+			SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+			if (sf != null && file != null && sf.getDisplayGroups(app) != null) {
+				displayGroups = sf.getDisplayGroups(app);
+			}
 		}
 	}
 
