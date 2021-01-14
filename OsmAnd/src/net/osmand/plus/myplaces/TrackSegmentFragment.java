@@ -284,7 +284,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 	}
 
 	@Override
-	public void onPointSelected(double lat, double lon) {
+	public void onPointSelected(TrkSegment segment, double lat, double lon) {
 		if (fragmentAdapter != null) {
 			fragmentAdapter.updateSelectedPoint(lat, lon);
 		}

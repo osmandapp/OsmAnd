@@ -861,6 +861,10 @@ public class GpxSelectionHelper {
 			return color;
 		}
 
+		public void resetSplitProcessed() {
+			splitProcessed = false;
+		}
+
 		public List<GpxDisplayGroup> getDisplayGroups(OsmandApplication app) {
 			if (modifiedTime != gpxFile.modifiedTime || !splitProcessed) {
 				update(app);

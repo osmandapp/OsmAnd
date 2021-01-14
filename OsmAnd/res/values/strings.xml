@@ -12,6 +12,11 @@
 
 -->
 
+    <string name="change_folder">Change folder</string>
+    <string name="rename_track">Rename track</string>
+    <string name="edit_track">Edit track</string>
+    <string name="upload_to_openstreetmap">Upload to OpenStreetMap</string>
+    <string name="analyze_by_intervals">Analyze by intervals (split interval)</string>
     <string name="shared_string_empty">Empty</string>
     <string name="select_folder_descr">Select folder or add new one</string>
     <string name="select_folder">Select folder</string>
