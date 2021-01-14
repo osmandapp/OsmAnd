@@ -881,7 +881,6 @@
     <string name="route_parameters_info">Marsruutimise seaded valitud profiilis \"%1$s\".</string>
     <string name="wake_time">Aegumine peale ärkamist</string>
     <string name="units_and_formats">Ühikud ja formaadid</string>
-    <string name="appearance">Välimus</string>
     <string name="map_look_descr">Kaardi välimus</string>
     <string name="map_look">Kaardi välimus</string>
     <string name="list_of_installed_plugins">Paigaldatud laiendused</string>
@@ -2301,7 +2300,6 @@
     <string name="rec_split_storage_size">Salvestusruumi suurus</string>
     <string name="rec_split_storage_size_desc">Kõikide klippide poolt hõlmata lubatav andmemaht.</string>
     <string name="shared_string_not_selected">Valimata</string>
-    <string name="update">Uuenda</string>
     <string name="updates_size">Uuenduse maht</string>
     <string name="shared_string_type">Liik</string>
     <string name="starting_point">Lähtekoht</string>
@@ -3772,7 +3770,6 @@
 \n
 \nTellimusi saate hallata ja tühistada oma AppGallery seadetes.</string>
     <string name="osm_live_payment_desc_hw">Tellimuse eest võetakse tasu valitud perioodi kohta. Tühistage see igal ajal oma AppGallery\'s.</string>
-    <string name="use_complex_routing">Keeruka teekonna koostamine</string>
     <string name="osm_edit_logout_success">Väljalogitud</string>
     <string name="development">Arendus</string>
     <string name="clear_osm_token">Kustuta OpenStreetMap\'i OAuth\'i pääsuluba</string>

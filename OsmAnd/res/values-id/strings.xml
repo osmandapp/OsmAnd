@@ -64,13 +64,6 @@
     <string name="osm_live_subscription_settings">Pengaturan berlangganan</string>
     <string name="osm_live_ask_for_purchase">Harap beli berlangganan OSM Live terlebih dahulu</string>
     <string name="sort_by">Urutkan menurut</string>
-    <string name="release_3_0"> mendeteksi tanda Berhenti sekarang dan beranggapan itu arah mengemudi.
-\n
-\n• algoritma baru memberikan nilai pendakian/turunan yang bermakna trek GPX.
-\n
-\n• Terrain (pendakian) sadar waktu hiking (aturan Naismith)
-\n
-\n</string>
     <string name="modify_the_search_query">Ubah kata penelusuran.</string>
     <string name="empty_state_osm_edits">Buat atau ubah objek OSM</string>
     <string name="empty_state_osm_edits_descr">Buat atau ubah OSM POI, buka atau komentari Catatan OSM, dan kontribusi berkas GPX yang direkam.</string>
@@ -354,9 +347,6 @@
     <string name="rendering_attr_contourWidth_name">Lebar Garis kontur</string>
     <string name="rendering_attr_hideWaterPolygons_description">Air</string>
     <string name="rendering_attr_hideWaterPolygons_name">Sembunyikan air</string>
-    <string name="legacy_search">Pencarian lawas</string>
-    <string name="show_legacy_search">Tampilkan Pencarian lama</string>
-    <string name="show_legacy_search_desc">Tambahkan pencarian lama ke daftar laci.</string>
     <string name="routing_attr_allow_motorway_name">Izinkan jalan raya</string>
     <string name="routing_attr_allow_motorway_description">Izinkan jalan raya.</string>
     <string name="upload_osm_note_description">Anda dapat mengunggah Catatan OSM Anda secara anonim atau menggunakan profil OpenStreetMap.org Anda.</string>
@@ -431,8 +421,6 @@
     <string name="allow_access_location">Izinkan akses untuk lokasi</string>
     <string name="first_usage_greeting">Dapatkan petunjuk arah dan temukan tempat baru tanpa koneksi internet</string>
     <string name="search_my_location">Temukan Posisi saya</string>
-    <string name="no_update_info_desc">Jangan cek untuk update versi atau diskon terkait OsmAnd.</string>
-    <string name="no_update_info">Jangan Tampilkan Pembaruan</string>
     <string name="update_all_maps_now">Apakah anda ingin memperbahurui semua peta sekarang?</string>
     <string name="clear_tile_data">Bersihkan Semua ubin</string>
     <string name="routing_attr_short_way_name">Cara hemat bahan bakar</string>

@@ -528,7 +528,6 @@
     <string name="error_calculating_route">Kļūda, aprēķinot maršrutu</string>
     <string name="error_calculating_route_occured">Kļūda pie maršruta aprēķināšanas</string>
     <string name="empty_route_calculated">Aprēķinātais maršruts ir tukšs</string>
-    <string name="new_route_calculated_dist">Aprēķināts jauns ceļš, attālums</string>
     <string name="arrived_at_destination">Jūs esat ieradies galapunktā</string>
     <string name="invalid_locations">Koordinātas nav derīgas!</string>
     <string name="go_back_to_osmand">Atpakaļ uz OsmAnd</string>
@@ -630,7 +629,6 @@
     <string name="osb_comment_dialog_error">Komentārs netika pievienots</string>
     <string name="poi_edit_title">Labot POI</string>
     <string name="poi_create_title">Izveidot POI</string>
-    <string name="poi_error_poi_not_found">Nevar atrast nodi, vai arī serviss nav atzīmēts kā viena node.</string>
     <string name="poi_remove_confirm_template">Dzēst {0} (ievadiet komentāru)?</string>
     <string name="poi_remove_title">Dzēst POI</string>
     <string name="shared_string_delete">Dzēst</string>
@@ -1822,7 +1820,6 @@ failu(s)?
     <string name="use_drawer_btn">Lietot izvēlni</string>
     <string name="dashboard_or_drawer_title">Mana Izvēlne vai standarta izvēlne</string>
     <string name="dashboard_or_drawer_description">Ir iespējams pārvaldīt aplikāciju caur statisko vai pielāgoto izvēlni. To var mainīt Manas Izvēlnes iestatījumos.</string>
-    <string name="update">Atjaunināt</string>
     <string name="only_download_over_wifi">Lejupielādēt tikai WiFi tīklā</string>
     <string name="live_update">Live atjauninājumi</string>
     <string name="update_now">Atjaunināt tagad</string>
@@ -1948,8 +1945,6 @@ failu(s)?
     <string name="allow_access_location">Atļaut noteikt vietu</string>
     <string name="first_usage_greeting">Veidojiet maršrutus un atklājiet jaunas vietas bez interneta savienojuma</string>
     <string name="search_my_location">Meklēt manu vietu</string>
-    <string name="no_update_info_desc">Nepārbaudīt jauninājumus par jaunām versijām un akcijām no OsmAnd</string>
-    <string name="no_update_info">Nerādīt jauninājumus</string>
     <string name="update_all_maps_now">Vai vēlaties atjaunot visas kartes?</string>
     <string name="clear_tile_data">Iztīrīt bilžu kešatmiņu</string>
     <string name="routing_attr_short_way_name">Ekonomiskais maršruts</string>
@@ -2033,9 +2028,6 @@ kas tiks pievienots jūsu Kategorijas sadaļai.</string>
     <string name="rendering_attr_contourWidth_description">Kontūrlīniju platums</string>
     <string name="rendering_attr_contourWidth_name">Kontūrlīniju platums</string>
     <string name="rendering_attr_hideWaterPolygons_description">Ūdens</string>
-    <string name="legacy_search">Meklēšanas vēsture</string>
-    <string name="show_legacy_search">Rādīt vēsturi</string>
-    <string name="show_legacy_search_desc">Rādīt vecā tipa meklēšanu izvēlnē.</string>
     <string name="routing_attr_allow_motorway_name">Atļaut automağistrāles</string>
     <string name="routing_attr_allow_motorway_description">Atļaut automağistrāles.</string>
     <string name="wiki_around">Tuvākie Wikipēdijas raksti</string>
@@ -3111,15 +3103,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="routing_attr_difficulty_preference_description">Dot priekšroku izvēlētajai grūtības pakāpei, lai arī vieglāki un grūtāki maršruti joprojām ir iespējami, ja tie ir pietiekami īsi.</string>
     <string name="routing_attr_freeride_policy_name">Beztrases</string>
     <string name="routing_attr_freeride_policy_description">Brīvā stila un beztrases ir neoficiālie maršruti un pārejas. Parasti neiebraukti un oficiāli netiek neuzturēti. Brauciet tikai uz savu risku.</string>
-    <string name="release_3_3_7">• Rāda laiku starp pārsēšanām sabiedriskajā transportā
-\n
-\n • Izlabota lietotāja saskarsme maršruta detaļās
-\n
-\n • Salabota tumšā tēma Norādījumu izvēlnē un Maršruta Detaļās
-\n
-\n • Rāda azimutu iekš Mērīt Attālumu
-\n
-\n</string>
     <string name="release_3_4">• Lietotnes profili: veidojiet personisku profilu savām vajadzībām, izvēlieties ikonu un krāsu
 \n
 \n • Tagad mainiet katra profila noklusējumus un min/max ātrumus
@@ -3158,7 +3141,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="route_parameters_info">Šie parametri ietekmēs maršruta izveidošanu. Tiks piemēroti tikai izvēlētajam profilam: %1$s.</string>
     <string name="wake_time">Pamošanās laiks</string>
     <string name="units_and_formats">Mērvienības un formāti</string>
-    <string name="appearance">Izskats</string>
     <string name="map_look_descr">Ikonas, logrīki</string>
     <string name="map_look">Kartes skats</string>
     <string name="list_of_installed_plugins">Instalēto spraudņu saraksts</string>

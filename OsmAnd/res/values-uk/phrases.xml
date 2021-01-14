@@ -36,7 +36,6 @@
     <string name="poi_copyshop">Копіювальні послуги, поліграфія</string>
     <string name="poi_curtain">Штори, портьєри</string>
     <string name="poi_fabric">Тканини</string>
-    <string name="poi_bedding">Постільна білизна</string>
     <string name="poi_dive">Спорядження для пірнання</string>
     <string name="poi_doityourself">Інструменти та будматеріали</string>
     <string name="poi_erotic">Секс-шоп</string>
@@ -226,7 +225,6 @@
     <string name="poi_candles">Крамниця свічок</string>
     <string name="poi_fashion">Модний одяг</string>
     <string name="poi_free_flying">Крамниця для стрибків з парашутом</string>
-    <string name="poi_furnace">Магазин обігрівачів</string>
     <string name="poi_garden_furniture">Крамниця садових меблів</string>
     <string name="poi_fuel_biogas">Біогаз</string>
     <string name="poi_halt">Залізнична зупинка</string>
@@ -402,7 +400,6 @@
     <string name="poi_allotments">Горо́ди/дачі</string>
     <string name="poi_meadow">Левада</string>
     <string name="poi_landuse_railway">Територія залізниці</string>
-    <string name="poi_conservation">Природоохоронна територія</string>
     <string name="poi_monitoring_station">Станція спостереження</string>
     <string name="poi_brownfield">Місце очищене під забудову</string>
     <string name="poi_greenfield">Місце під забудову</string>
@@ -435,7 +432,6 @@
     <string name="poi_healthcare_alternative">Альтернативна медицина</string>
     <string name="poi_audiologist">Отоларинголог</string>
     <string name="poi_blood_bank">Банк крові</string>
-    <string name="poi_healthcare_centre">Медичний центр</string>
     <string name="poi_midwife">Акушерка</string>
     <string name="poi_optometrist">Окуліст</string>
     <string name="poi_physiotherapist">Фізіотерапевт</string>
@@ -975,7 +971,6 @@
     <string name="poi_crematorium">Крематорій</string>
     <string name="poi_internet_cafe">Інтернет-кафе</string>
     <string name="poi_bank">Банк</string>
-    <string name="poi_amenity_atm">Банкомат</string>
     <string name="poi_payment_terminal">Платіжний термінал</string>
     <string name="poi_money_lender">Лихвар, позичайло</string>
     <string name="poi_pawnbroker">Ломбард</string>
@@ -1887,7 +1882,6 @@
     <string name="poi_payment_eurowag_no">Картки Eurowag не приймаються</string>
     <string name="poi_internet_access_type_public">Публічний доступ в інтернет</string>
     <string name="poi_social_facility_group_home">Групове проживання</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Цистерна</string>
     <string name="poi_payment_e_zpass_yes">E‑ZPass</string>
     <string name="poi_internet_access_type_service">Вид доступу в Інтернет: службовий</string>
     <string name="poi_ramp_no">Пандус: немає</string>
@@ -2357,7 +2351,6 @@
     <string name="poi_resource_zinc">Цинк</string>
     <string name="poi_training_hairdressing">Навчання: перукар</string>
     <string name="poi_shoes_children">Дитяча</string>
-    <string name="poi_additional_atm_yes">З банкоматом</string>
     <string name="poi_counselling_type_education_no">Консультація освітня: немає</string>
     <string name="poi_mdf">Головний крос</string>
     <string name="poi_cuisine_udon">Удон (японська локшина)</string>
@@ -3523,7 +3516,6 @@
     <string name="poi_substation_field_gathering">Збиральна</string>
     <string name="poi_books_type">Книги</string>
     <string name="poi_denotation">Значення</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Променева терапія</string>
     <string name="poi_craft_confectionery">Кондитерська фабрика</string>
     <string name="poi_shop_wholesale">Гуртовий магазин</string>
     <string name="poi_laboratory">Медична лабораторія</string>
@@ -3541,7 +3533,6 @@
     <string name="poi_park_ride_metro">Метро</string>
     <string name="poi_park_ride_tram">Трамвай</string>
     <string name="poi_park_ride_ferry">Паром</string>
-    <string name="poi_generator_source_biomass">Джерело енергії: біомаса</string>
     <string name="poi_rtsa_scale_filter">Категорія складності</string>
     <string name="poi_park_ride">Перехоплююча автостоянка</string>
     <string name="poi_hazard">Небезпека</string>

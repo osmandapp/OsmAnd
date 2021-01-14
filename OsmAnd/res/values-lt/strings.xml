@@ -596,7 +596,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="error_calculating_route">Įvyko klaida skaičiuojant maršrutą</string>
     <string name="error_calculating_route_occured">Įvyko klaida skaičiuojant maršrutą</string>
     <string name="empty_route_calculated">Klaida: Sudarytas maršrutas yra tuščias</string>
-    <string name="new_route_calculated_dist">Apskaičiuotas naujas maršrutas, atstumas</string>
     <string name="arrived_at_destination">Jūs pasiekėte savo kelionės tikslą</string>
     <string name="invalid_locations">Koordinatės yra neteisingos!</string>
     <string name="go_back_to_osmand">Grįžti į OsmAnd žemėlapį</string>
@@ -698,7 +697,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="osb_comment_dialog_error">Komentaras pridėti nepavyko</string>
     <string name="poi_edit_title">Redaguoti LV</string>
     <string name="poi_create_title">Sukurti LV</string>
-    <string name="poi_error_poi_not_found">LV neina rasti arba LV sudaryta iš kelių elementų kurie kolkas dar nepalaikomi.</string>
     <string name="poi_remove_confirm_template">Ištrinti {0} (įveskite komentarą)?</string>
     <string name="poi_remove_title">Ištrinti LV</string>
     <string name="shared_string_delete">Ištrinti</string>
@@ -1725,7 +1723,6 @@ Ilguma %2$s</string>
     <string name="routing_attr_avoid_stairs_description">Vengti laiptų</string>
     <string name="poi_dialog_reopen">Atidaryti iš naujo</string>
     <string name="poi_context_menu_modify_osm_change">Redaguoti LV</string>
-    <string name="update">Atnaujinti kas</string>
     <string name="only_download_over_wifi">Atsisiųsti tik naudojant Wi-Fi</string>
     <string name="update_now">Atnaujinti tuoj pat</string>
     <string name="missing_write_external_storage_permission">Programėlė neturi teisių įrašyti į atminties kortelę</string>
@@ -1935,7 +1932,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="search_map">Ieškomi žemėlapiai…</string>
     <string name="search_location">Nustatoma vietos padėtis…</string>
     <string name="storage_free_space">Laisva vieta</string>
-    <string name="no_update_info">Nerodyti naujų versijų</string>
     <string name="edit_filter">Redaguoti kategorijas</string>
     <string name="subcategories">Subkategorijos</string>
     <string name="selected_categories">Pasirinktos kategorijos</string>
@@ -1967,7 +1963,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="allow_access_location">Suteikti prieigą prie vietos nustatymo</string>
     <string name="first_usage_greeting">Gaukite maršruto nurodymus ir atraskite naujas vietas be interneto ryšio</string>
     <string name="search_my_location">Ieškoti mano vietos</string>
-    <string name="no_update_info_desc">Netikrinti informacijos apie atnaujinimus ar OsmAnd siūlomas nuolaidas.</string>
     <string name="clear_tile_data">Išvalyti visus lakštus</string>
     <string name="replace_favorite_confirmation">Ar tikrai norite pakeisti išsaugotą vietą %1$s?</string>
     <string name="shared_string_widgets">Valdikliai</string>
@@ -2092,8 +2087,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="routing_attr_driving_style_name">Vairavimo stilius</string>
     <string name="altitude_range">Aukščio diapazonas</string>
     <string name="average_altitude">Vidutinis aukštis virš jūros lygio</string>
-    <string name="legacy_search">Senoji paieška</string>
-    <string name="show_legacy_search">Rodyti senąją paiešką</string>
     <string name="routing_attr_allow_motorway_name">Leisti greitkelius</string>
     <string name="trip_rec_notification_settings">Įjungti įrašymo sparčiąją paleistį</string>
     <string name="shared_string_paused">Pristabdyta</string>
@@ -2223,7 +2216,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="rendering_attr_contourDensity_name">Kontūrų linijos tankis</string>
     <string name="rendering_attr_contourWidth_description">Kontūrų linijos plotis</string>
     <string name="rendering_attr_contourWidth_name">Kontūrų linijos plotis</string>
-    <string name="show_legacy_search_desc">Priedėti senąją paiešką prie stalčiaus sąrašo.</string>
     <string name="routing_attr_allow_motorway_description">Leisti greitkelius.</string>
     <string name="wiki_around">Šalia esantys Vikipedijos straipsniai</string>
     <string name="route_roundabout_short">Sukite į %1$d išvažiavimą ir keliaukite</string>
@@ -2398,12 +2390,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="additional_actions">Papildomi veiksmai</string>
     <string name="av_locations_selected_desc">GPX failas su koordinačių ir pasirinktų pastabų duomenimis.</string>
     <string name="av_locations_all_desc">GPX failas su koordinačių ir visų pastabų duomenimis.</string>
-    <string name="release_3_0">Stop ženklo nutatymas atliekamas atsižvelgiant į judėjimo kryptį
-\n
-\n• Naujas algoritmas, pateikiantis prasmingas pakilimo/nusileidimo vertes GPX trekams
-\n
-\n• Vaikšiojimo trukmė atsižvelgiant į reljefą (pakilimą) (Naismith taisyklė)
-\n</string>
     <string name="shared_string_actions">Veiksmai</string>
     <string name="shared_string_marker">Žymeklis</string>
     <string name="empty_state_osm_edits_descr">Kurkite arba keiskite OSM LV-as, užrašykite arba komentuokite OSM pastabas bei dalinkitės įrašytais GPX failais.</string>
@@ -2551,15 +2537,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="routing_attr_avoid_subway_description">Vengti metro ir lengvojo geležinkelio</string>
     <string name="routing_attr_avoid_ferry_name">Be keltų</string>
     <string name="routing_attr_avoid_ferry_description">Vengti keltų</string>
-    <string name="release_3_3_7">• Rodyti laiką tarp persėdimų viešajame transporte
-\n
-\n • Pataisyta maršruto detalių naudotojo sąsaja
-\n
-\n • Pataisyta nuorodų meniu ir maršruto detalių tamsi tema
-\n
-\n • Atstumo matavime rodyti azimutą
-\n
-\n</string>
     <string name="shared_string_degrees">Laipsniai</string>
     <string name="shared_string_milliradians">Miliradianai</string>
     <string name="angular_measeurement">Kampiniai matavimo vienetai</string>

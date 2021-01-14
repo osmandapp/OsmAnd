@@ -78,7 +78,6 @@
     <string name="poi_copyshop">Копирен център</string>
     <string name="poi_curtain">Магазин за завеси и покривки</string>
     <string name="poi_fabric">Магазин за пердета</string>
-    <string name="poi_bedding">Магазин за чаршафи и завивки</string>
     <string name="poi_dive">Екипировка за гмуркане</string>
     <string name="poi_fishing">Рибарски принадлежности</string>
     <string name="poi_florist">Магазин за цветя</string>
@@ -201,7 +200,6 @@
     <string name="poi_pasta">Магазин за паста</string>
     <string name="poi_camera">Камери и лещи</string>
     <string name="poi_candles">Магазин за свещи</string>
-    <string name="poi_furnace">Магазин за нагревателни елементи</string>
     <string name="poi_garden_furniture">Магазин за градински мебели</string>
     <string name="poi_houseware">Магазин за домашни потреби</string>
     <string name="poi_leather">Магазин за кожи</string>
@@ -299,7 +297,6 @@
     <string name="poi_sanatorium">Санаториум</string>
     <string name="poi_healthcare_alternative">Алтернативна медицина</string>
     <string name="poi_blood_bank">Кръвна банка</string>
-    <string name="poi_healthcare_centre">Медицински център</string>
     <string name="poi_physiotherapist">Физиотерапевт</string>
     <string name="poi_podiatrist">Педиатър</string>
     <string name="poi_psychotherapist">Психотерапевт</string>
@@ -341,7 +338,6 @@
     <string name="poi_aquarium">Аквариум</string>
     <string name="poi_theme_park">Тематичен парк</string>
     <string name="poi_attraction">Туристическа атракция</string>
-    <string name="poi_tourism_attraction">Туристическа атракция</string>
     <string name="poi_hotel">Хотел</string>
     <string name="poi_guest_house">Къща за гости</string>
     <string name="poi_hostel">Хостел</string>

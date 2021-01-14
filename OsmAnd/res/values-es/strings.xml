@@ -475,7 +475,6 @@
     <string name="error_calculating_route">No se pudo calcular la ruta.</string>
     <string name="error_calculating_route_occured">No se pudo calcular la ruta.</string>
     <string name="empty_route_calculated">La ruta calculada está vacía.</string>
-    <string name="new_route_calculated_dist">Nueva ruta calculada, distancia</string>
     <string name="arrived_at_destination">Has llegado.</string>
     <string name="invalid_locations">Coordenadas inválidas</string>
     <string name="go_back_to_osmand">Volver al mapa</string>
@@ -576,7 +575,6 @@
     <string name="osb_comment_dialog_error">No se pudo añadir el comentario.</string>
     <string name="poi_edit_title">Editar PDI</string>
     <string name="poi_create_title">Crear PDI</string>
-    <string name="poi_error_poi_not_found">No se encontró el nodo, o el PDI se compone de varios nodos, lo cuál todavía no está soportado.</string>
     <string name="poi_remove_confirm_template">¿Borrar {0} (comentario)?</string>
     <string name="poi_remove_title">Borrar PDI</string>
     <string name="shared_string_delete">Borrar</string>
@@ -1797,7 +1795,6 @@
     <string name="no_address_found">Dirección indeterminada</string>
     <string name="looking_up_address">Buscando dirección</string>
     <string name="rendering_attr_horseRoutes_name">Rutas a caballo</string>
-    <string name="update">Actualizar</string>
     <string name="only_download_over_wifi">Descargar sólo con Wi-Fi</string>
     <string name="live_update">Actualización en vivo</string>
     <string name="update_now">Actualizar</string>
@@ -2011,8 +2008,6 @@
     <string name="allow_access_location">Permitir el acceso a la ubicación</string>
     <string name="first_usage_greeting">Obtenga direcciones y descubra lugares nuevos, sin una conexión a Internet</string>
     <string name="search_my_location">Encontrar mi ubicación</string>
-    <string name="no_update_info_desc">Omite la búsqueda de nuevas versiones o descuentos relacionados con OsmAnd.</string>
-    <string name="no_update_info">Ocultar nuevas versiones</string>
     <string name="osm_live_payment_desc">Suscripción mensual. Puedes cancelarla en cualquier momento en Google Play.</string>
     <string name="donation_to_osm">Donación a la comunidad de OSM</string>
     <string name="donation_to_osm_desc">Parte de tu donación se envía a los contribuidores a OSM. El coste de la suscripción sigue siendo el mismo.</string>
@@ -2038,9 +2033,6 @@
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_pause">Pausar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
-    <string name="legacy_search">Búsqueda clásica</string>
-    <string name="show_legacy_search">Mostrar la búsqueda clásica</string>
-    <string name="show_legacy_search_desc">Añade el modo de búsqueda clásica a la lista del panel lateral.</string>
     <string name="routing_attr_allow_motorway_name">Usar autopistas</string>
     <string name="routing_attr_allow_motorway_description">Permite usar autopistas.</string>
     <string name="trip_rec_notification_settings">Activar la grabación rápida</string>
@@ -2581,16 +2573,6 @@
     <string name="active_markers_descr">Define el número de indicadores de dirección.</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
-    <string name="release_3_0">• Nuevo: Soporte para guías turísticas globales sin conexión a Internet. Las ubicaciones de referencia, están vinculadas al mapa. Datos iniciales de Wikiviajes 
-\n 
-\n • Wikipedia: Nuevo aspecto, enlaces activos, ahora con soporte de imágenes 
-\n 
-\n • Interfaz de usuario de Open Tracks: Soporte para grupos de puntos de ruta 
-\n 
-\n • Marcadores del mapa: Importación de grupos elegidos desde archivos GPX, ingreso de coordenadas, nuevo aspecto 
-\n 
-\n • La suscripción de OsmAnd Live, soporta ahora todas las características de OsmAnd 
-\n</string>
     <string name="modify_the_search_query">Cambiar la búsqueda.</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
     <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta notas de OSM y contribuye con grabaciones GPX.</string>
@@ -2780,44 +2762,13 @@
     <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación. 
 \n
 \nNo se recopilan datos personales, los datos de búsqueda sólo se utilizan para mejorar el algoritmo de búsqueda.</string>
-    <string name="search_no_results_description">¿Sin resultados?
-\nCuéntanos sobre esto.</string>
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
-    <string name="release_3_1">• Navegación: Corrección en la barra de progreso, intercambio rápido del punto inicial y final de la ruta 
-\n 
-\n • Marcadores del mapa: Corregido el des/activar grupos, capacidad para ocultar marcadores del mapa 
-\n 
-\n • Edición de OSM: Capacidad de edición de etiquetas para objetos que no sean puntos y de vías, corrección de los comentarios vacíos en las notas, copia de seguridad de ediciones 
-\n 
-\n • Mejor análisis de Wikipedia y Wikiviajes, los archivos actualizados ya están disponibles 
-\n 
-\n • Menú contextual: Corregido el color de los escudos de transporte en el modo nocturno y los tamaños de menú adicionales 
-\n 
-\n • Navegación fluvial: Soporte a la navegación fluvial 
-\n 
-\n • Otras correcciones de errores 
-\n</string>
     <string name="increase_search_radius_to">Ampliar el radio de búsqueda a %1$s</string>
     <string name="thank_you_for_feedback">Gracias por sus comentarios</string>
     <string name="poi_cannot_be_found">No se pudo encontrar el nodo o la vía.</string>
     <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
 \nDenos su opinión</string>
-    <string name="commiting_way">Enviando vía…</string>
     <string name="test_voice_desrc">Pulsa un botón y escucha su correspondiente aviso por voz para saber si falta o está defectuoso</string>
-    <string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía en algunos dispositivos 
-\n 
-\n • Nueva función de marcadores: Mostrar los marcadores ya atravesados. 
-\n 
-\n • El historial de búsqueda muestra ahora las categorías buscadas anteriormente 
-\n 
-\n • Corregido el fallo en el inicio que se producía con los mapas no latinos 
-\n 
-\n • Mejora en los problemas de velocidad de renderizado en dispositivos Android 8.0 
-\n 
-\n • Soporte para la edición de objetos poligonales (no servicios) 
-\n 
-\n • Medir distancia: Añadir el botón de «Medir distancia» a las acciones en el menú contextual 
-\n</string>
     <string name="ask_for_location_permission">Para continuar, permite a OsmAnd acceder a la ubicación.</string>
     <string name="rendering_value_black_name">Negro</string>
     <string name="search_street">Buscar la calle</string>
@@ -2898,22 +2849,6 @@
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que muestra u oculta las trazas elegidas en el mapa.</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar trazas</string>
     <string name="quick_action_gpx_tracks_show">Mostrar trazas</string>
-    <string name="release_3_3">• Nueva pantalla «Direcciones»: Muestra los botones de destino «Casa» y «Trabajo», el atajo de la «ruta anterior», la lista de trazas, marcadores GPX activos y el historial de búsqueda.
-\n
-\n • Información adicional en «Detalles de la ruta»: Tipos de caminos, superficie, pendiente y suavidad
-\n
-\n • Soporte en la navegación de transporte público: Metro, autobús, tranvía, etc.
-\n
-\n • Nuevas acciones rápidas: «Mostrar/ocultar trazas» y «Modo diurno/nocturno»
-\n
-\n • Áreas fijas mostradas como inundadas en Alemania, Sudáfrica y Quebec
-\n
-\n • Soporte adicional para la importación de KML y KMZ
-\n
-\n • Corregidos los fallos en la apertura de algunas paradas de transporte público
-\n
-\n • Quitado el análisis de Facebook y Firebase de la versión gratuita (OsmAnd+ no lo incluye)
-\n</string>
     <string name="use_osm_live_public_transport_description">Activar el transporte público para los cambios de OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transporte público en OsmAnd Live</string>
     <string name="transfers_size">%1$d transbordo(s)</string>
@@ -2990,14 +2925,6 @@
     <string name="routing_attr_avoid_subway_description">Evitar metros y trenes ligeros</string>
     <string name="routing_attr_avoid_ferry_name">Sin ferris/transbordadores</string>
     <string name="routing_attr_avoid_ferry_description">Evitar ferris o transbordadores</string>
-    <string name="release_3_3_7">• Mostrar el tiempo entre transbordos en transporte público
-\n
-\n • Interfaz de usuario corregida para «Detalles de la ruta»
-\n
-\n • Tema oscuro solucionado en el menú «Dirección» y «Detalles de la ruta»
-\n
-\n • Visualización de medida «azimut» en «Medir distancia»
-\n</string>
     <string name="send_log">Enviar registro del problema</string>
     <string name="files_moved">Se movieron %1$d archivos (%2$s).</string>
     <string name="files_copied">Se copiaron %1$d archivos (%2$s).</string>
@@ -3115,8 +3042,6 @@
     <string name="third_party_routing_type">Enrutamiento de terceros</string>
     <string name="application_profiles_descr">Perfiles que serán visibles en la aplicación.</string>
     <string name="application_profiles">Perfiles de la aplicación</string>
-    <string name="zoom_by_wunderlinq_descr">Cambia el zoom del mapa desplazando la rueda hacia arriba y hacia abajo. Salir te devuelve a la aplicación WunderLINQ.</string>
-    <string name="zoom_by_wunderlinq">Usa WunderLINQ para controlar</string>
     <string name="quick_action_need_to_add_item_to_list">Añadir al menos un elemento a la lista en los ajustes de «Acción rápida»</string>
     <string name="routing_attr_piste_type_downhill_name">Esquí alpino y de descenso</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas de esquí alpino o de descenso y acceso a remontes mecánicos.</string>
@@ -3227,7 +3152,6 @@
     <string name="route_parameters_info">Ajustes para la navegación del perfil elegido «%1$s».</string>
     <string name="wake_time">Tiempo de espera después de despertar</string>
     <string name="units_and_formats">Unidades y formatos</string>
-    <string name="appearance">Aspecto</string>
     <string name="map_look_descr">Apariencia del mapa</string>
     <string name="map_look">Aspecto del mapa</string>
     <string name="list_of_installed_plugins">Complementos instalados</string>

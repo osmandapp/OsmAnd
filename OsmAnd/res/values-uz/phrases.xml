@@ -42,9 +42,9 @@
 	<string name="poi_osmwiki">Википедия</string>
 	<string name="poi_user_defined_other">Фойдаланувчи белгилаган</string>
 
-	<string name="poi_palaeontological_site">Палеонтология жойи</string>
+    <string name="poi_palaeontological_site">Палеонтология жойи</string>
 
-	<string name="poi_bakery">Новвойхона</string>
+    <string name="poi_bakery">Новвойхона</string>
 	<string name="poi_alcohol">Спиртли ичимлик дўкони</string>
 	<string name="poi_cheese">Пишлоқ дўкони</string>
 	<string name="poi_chocolate">Шоколад дўкони</string>
@@ -96,8 +96,7 @@
 	<string name="poi_florist">Гул дўкони</string>
 	<string name="poi_frame">Сурат роми дўкони</string>
 	<string name="poi_free_flying">Эркин учиш учун маҳсулот дўкони</string>
-	<string name="poi_furnace">Иситиш системаси дўкони</string>
-	<string name="poi_furniture">Мебель дўкони</string>
+    <string name="poi_furniture">Мебель дўкони</string>
 	<string name="poi_garden_centre">Боғ ва полиз дўкони</string>
 	<string name="poi_garden_furniture">Боғ мебели дўкони</string>
 	<string name="poi_gas">Суюқ газ дўкони</string>
@@ -162,7 +161,7 @@
 	<string name="poi_weapons">Қурол дўкони</string>
 	<string name="poi_perfumery">Атир дўкони</string>
 
-	<string name="poi_police">Милиция</string>
+    <string name="poi_police">Милиция</string>
 	<string name="poi_fire_station">Ўт ўчириш маркази</string>
 	<string name="poi_emergency_phone">Фавқулотда телефон</string>
 	<string name="poi_fire_hydrant">Ўт ўчириш гидранти</string>

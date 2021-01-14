@@ -94,7 +94,6 @@
     <string name="poi_fishing">ציוד דייג</string>
     <string name="poi_florist">חנות פרחים</string>
     <string name="poi_frame">חנות מסגרות</string>
-    <string name="poi_furnace">חנות תנורים</string>
     <string name="poi_furniture">חנות רהיטים</string>
     <string name="poi_garden_centre">מרכז גינון</string>
     <string name="poi_garden_furniture">רהיטי גן</string>
@@ -582,7 +581,6 @@
     <string name="poi_sanatorium">סנטוריום</string>
     <string name="poi_audiologist">אודיולוג</string>
     <string name="poi_blood_bank">בנק דם</string>
-    <string name="poi_healthcare_centre">מרכז רפואי</string>
     <string name="poi_midwife">מילדת</string>
     <string name="poi_occupational_therapist">ריפוי בעיסוק</string>
     <string name="poi_optometrist">אופטומטריה</string>
@@ -1399,7 +1397,6 @@
     <string name="poi_crematorium">משרפה</string>
     <string name="poi_internet_cafe">אינטרנט קפה</string>
     <string name="poi_bank">בנק</string>
-    <string name="poi_amenity_atm">כספומט</string>
     <string name="poi_payment_terminal">מסוף תשלום</string>
     <string name="poi_money_lender">הלוואה בריבית</string>
     <string name="poi_pawnbroker">עבוט</string>

@@ -957,8 +957,6 @@
     <string name="rendering_attr_contourWidth_name">Дебљина линије изохипси</string>
     <string name="rendering_attr_hideWaterPolygons_description">Воде</string>
     <string name="rendering_attr_hideWaterPolygons_name">Сакриј воду</string>
-    <string name="legacy_search">Стара претрага</string>
-    <string name="show_legacy_search">Приказуј стару претрагу</string>
     <string name="wiki_around">Чланци Википедије о околини</string>
     <string name="search_map_hint">Град или регија</string>
     <string name="route_roundabout_short">Одреди %1$d излаз и иди</string>
@@ -1029,8 +1027,6 @@
     <string name="allow_access_location">Омогућите приступ одређивању положаја</string>
     <string name="first_usage_greeting">Узми упутства и откриј нова места, и без интернета</string>
     <string name="search_my_location">Пронађи мој положај</string>
-    <string name="no_update_info_desc">Не проверавај да ли постоје нове верзије нити за OsmAnd попусте.</string>
-    <string name="no_update_info">Не приказуј нове верзије</string>
     <string name="update_all_maps_now">Освежити све карте сада?</string>
     <string name="clear_tile_data">Очисти све плочице</string>
     <string name="routing_attr_short_way_name">Пут који штеди гориво</string>
@@ -1141,7 +1137,6 @@
     <string name="shared_string_toolbar">Трака прибора</string>
     <string name="shared_string_widgets">Справице</string>
     <string name="upload_osm_note_description">Отпремајте своју белешку ОСМ-а анонимно или коришћењем свог налога на OpenStreetMap.org-у.</string>
-    <string name="show_legacy_search_desc">Дозволи стару претрагу у списку полице.</string>
     <string name="routing_attr_allow_motorway_name">Користи аутопутеве</string>
     <string name="routing_attr_allow_motorway_description">Дозволи аутопутеве.</string>
     <string name="map_widget_magnetic_bearing">Магнетно вретено</string>
@@ -1581,16 +1576,6 @@
     <string name="first_intermediate_dest_description">Додаје прво стајање</string>
     <string name="switch_osm_notes_visibility_desc">Прикажи или сакриј ОСМ белешке на карти.</string>
     <string name="shared_string_gpx_file">GPX фајл</string>
-    <string name="release_3_0">• Ново: Подршка за глобалне туристичке водиче без потребе за интернет конекцијом. Референтни положаји су повезани на карти. Иницијални подаци са сајта Wikivoyage. 
-\n 
-\n • Википедија: нови изглед, активне везе, слике 
-\n 
-\n • Open Track UI: приказ група пролазних тачака 
-\n 
-\n • Маркери на карти: увезите означене групе из GPX фајлова 
-\n 
-\n • OsmAnd Live претплата сада укључује све OsmAnd функционалности 
-\n</string>
     <string name="gpx_file_desc">GPX - погодно за извоз у ЈОСМ и друге ОСМ уређиваче.</string>
     <string name="osc_file_desc">ОСЦ - погодно за извоз у OSM.</string>
     <string name="osc_file">ОСЦ фајл</string>
@@ -2118,7 +2103,6 @@
     <string name="error_calculating_route">Израчунавања пута није успело.</string>
     <string name="error_calculating_route_occured">Израчунавања пута није успело.</string>
     <string name="empty_route_calculated">Израчунати пут је празан.</string>
-    <string name="new_route_calculated_dist">Израчунат нови пут, удаљеност</string>
     <string name="go_back_to_osmand">Врати се на карту</string>
     <string name="saving_gpx_tracks">Чувам GPX фајл…</string>
     <string name="use_online_routing_descr">Користите интернет да израчунате пут.</string>
@@ -2203,7 +2187,6 @@
     <string name="save_poi_too_many_uppercase">Име садржи превише великих слова. Ипак наставити?</string>
     <string name="save_poi_without_poi_type_message">Да ли стварно желите да сачувате тачку од интереса без типа?</string>
     <string name="use_drawer_btn">Користи мени</string>
-    <string name="update">Ажурирај</string>
     <string name="only_download_over_wifi">Скидај само на бежичној мрежи</string>
     <string name="live_update">Уживо ажурирање</string>
     <string name="update_now">Ажурирај сада</string>
@@ -2594,7 +2577,6 @@
     <string name="commiting_node">Предајем чвор…</string>
     <string name="previous_run_crashed">OsmAnd се срушио на прошлом покретању. Записник је у {0}. Молимо пријавите проблем и закачите овај фајл.</string>
     <string name="osm_settings_descr">Одредите OpenStreetMap.org (OSM) поставке потребне за слање на ОСМ.</string>
-    <string name="poi_error_poi_not_found">Чвор не може да се нађе, или се објекат састоји од више чворова што још увел није подржано.</string>
     <string name="reports_for">Извештај за</string>
     <string name="quick_favorites_name_preset">Унапред постављено име</string>
     <string name="import_track_desc">Фајл %1$s не садржи пролазне тачке, да га увезем као путању?</string>
@@ -2779,46 +2761,13 @@
     <string name="send_search_query_description">Послаћемо упит Ваше претраге: „%1$s“, као и Вашу локацију.
 \n 
 \n Не сакупљамо личне податке, само нам требају подаци о претрагама да бисмо побољшавали алгоритам претраге.</string>
-    <string name="search_no_results_description">Нема резултата?
-\nРеците нам о овоме.</string>
     <string name="send_search_query">Пошаљи упит претраге?</string>
     <string name="increase_search_radius_to">Повећај полупречник претраге на %1$s</string>
     <string name="thank_you_for_feedback">Хвала за повратну информацију</string>
     <string name="poi_cannot_be_found">Не могу да нађем чвор или пут.</string>
     <string name="search_no_results_feedback">Нема резултата у претрази?
 \nЈавите нам</string>
-    <string name="release_3_1">• Навођење: Исправка у траци прогреса, брза замена почетне и крајње тачке пута
-\n
-\n • Ознаке на карти: исправи укључење/искључење група, способност скривања маркера са мапе
-\n
-\n • OSM измене: Могућност измена ознака за објекте и путеве који нису обичне тачке, исправка недостајућих коментара на белешкама, прављење резервне копије измена
-\n
-\n • Побољшано парсирање Википедије и Wikivoyage-а, ажурирани фајлови су већ доступни
-\n
-\n • Контекстни мени: исправка боје превоза у ноћном режиму, исправка величине додатних менија
-\n
-\n • Бродско навођење: подршка за пловне канале
-\n
-\n • Остале исправке грешака
-\n
-\n</string>
-    <string name="commiting_way">Предајем пут…</string>
     <string name="test_voice_desrc">Кликните дугме и слушајте одговарајуће гласовно навођење да чујете да ли је му нешто недостаје или је погрешно</string>
-    <string name="release_3_2_pre">• Исправљени рушење по стартовању које се дешавало на неким уређајима
-\n
-\n• Нова могућност на ознакама: приказ ознака које се већ прођене
-\n
-\n• Историјате претраге сада приказује категорије које сте тражили раније
-\n
-\n• Исправљено рушење апликације при стартовању које се дешавало са не-латиничним картама 
-\n 
-\n • Убрзано исцртавање на Андроид 8.0 уређајима 
-\n 
-\n • Подршка за измену полигонских објеката 
-\n 
-\n • Мерење растојања: додај Измери дугме Акцијама у помоћном менију 
-\n 
-\n</string>
     <string name="ask_for_location_permission">Одобрите OsmAnd-у приступ локацији да наставите.</string>
     <string name="rendering_value_black_name">Црна</string>
     <string name="more_transport_on_stop_hint">Постоје још превоза на овој станици.</string>
@@ -2975,15 +2924,6 @@
     <string name="rendering_attr_highway_class_cycleway_name">Бициклистичка стаза</string>
     <string name="routing_attr_avoid_sett_name">Без калдрма</string>
     <string name="routing_attr_avoid_sett_description">Избегавај калдрме</string>
-    <string name="release_3_3_7">• Приказује се време између преседања код јавних превоза
-\n
-\n • Поправљен кориснички интерфејс за детаље пута
-\n
-\n • Исправљена тамна тема код менија правца и код детаља пута
-\n
-\n • Приказује се азимут код мерења удаљености
-\n
-\n</string>
     <string name="send_log">Пошаљи дневник</string>
     <string name="files_moved">Померено %1$d фајлова (%2$s).</string>
     <string name="files_copied">Копирано %1$d фајлова (%2$s).</string>
@@ -3110,23 +3050,6 @@
     <string name="rendering_attr_showLez_description">Прикажи зоне ниске емисије загађења. Не утиче на рутирање.</string>
     <string name="rendering_attr_showLez_name">Прикажи зоне ниске емисије загађења</string>
     <string name="temporary_conditional_routing">Укључи у обзир и привремена ограничења</string>
-    <string name="release_3_3">• Нови екран за \'Упутства\': Приказује дугмиће за одредиште Кућа и Посао, \'претходна стаза\' пречицу, списак активних GPX стаза и маркера, историјат претраге
-\n
-\n • Додатне информације испод \'Детаљи пута\': тип пута, подлога, нагиб, углачаност
-\n
-\n • Навођење јавним превозом са подршком за свакакве типове превоза: метро, аутобус, трамвај, итд.
-\n
-\n • Нова брза радња за приказивање/скривање путања и дневног/ноћног режима
-\n
-\n • Исправљене области приказане као поплављене у Немачкој, Јужној Африци и Квебеку
-\n
-\n • Додатна подршка за увоз KML и KMZ фајлова
-\n
-\n • Исправке рушења приликом отварања некиј станица јавног превоза
-\n
-\n • Уклоњена Facebook и Firebase аналитика из бесплатне верзије (OsmAnd+ је не укључује)
-\n
-\n</string>
     <string name="rate_dialog_descr">Поделити Ваше искуство са нама и оценити наш рад на Google Play продавници.</string>
     <string name="make_osmand_better_descr">Дозволи OsmAnd апликацији да сакупља и обрађује анонимне податке о коришћењу апликације. Не сакупљамо податке о ниједној локацији на карти коју посетите или погледате.
 \n 
@@ -3228,7 +3151,6 @@
     <string name="route_parameters_info">Поставке за креирање пута у означеном профилу „%1$s”.</string>
     <string name="wake_time">Тајмаут после буђења</string>
     <string name="units_and_formats">Мерне јединице &amp; форматирања</string>
-    <string name="appearance">Изглед</string>
     <string name="map_look_descr">Изглед карте</string>
     <string name="map_look">Изглед карте</string>
     <string name="list_of_installed_plugins">Инсталирани додаци</string>

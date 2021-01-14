@@ -901,7 +901,6 @@
     <string name="error_calculating_route">Rota hesaplanamadı.</string>
     <string name="error_calculating_route_occured">Rota hesaplanamadı.</string>
     <string name="empty_route_calculated">Hesaplanan rota boş.</string>
-    <string name="new_route_calculated_dist">Yeni güzergah hesaplandı, mesafe</string>
     <string name="reading_indexes">Yerel veri okunuyor…</string>
     <string name="saving_gpx_tracks">GPX dosyası kaydediliyor…</string>
     <string name="data_settings_descr">Dili belirtin, verileri indirin/yeniden yükleyin.</string>
@@ -1422,7 +1421,6 @@
     <string name="favourites_context_menu_edit">Sık Kullanılanı düzenle</string>
     <string name="favourites_remove_dialog_msg">Sık Kullanılan \'%s\' noktasını sil\?</string>
     <string name="favourites_remove_dialog_success">Sık Kullanılan {0} noktası silindi.</string>
-    <string name="poi_error_poi_not_found">Düğüm bulunamadı ya da başlıca tek bir düğüm değil, olabilir</string>
     <string name="poi_remove_confirm_template">{0} sil (yorum)\?</string>
     <string name="poi_action_delete">Sil</string>
     <string name="poi_error_unexpected_template">{0} eylemi gerçekleştirilemedi.</string>
@@ -1803,7 +1801,6 @@
     <string name="rendering_attr_showAccess_name">Geçiş hakkındaki kısıtlamaları ve geçiş ücretlerini göster</string>
     <string name="rendering_attr_showSurfaces_name">Yol yüzeyi göster</string>
     <string name="rendering_attr_showCycleRoutes_name">Döngüsü yolları göster</string>
-    <string name="update">Bütün Güncellemler</string>
     <string name="only_download_over_wifi">Sadece Wi-Fi üzerinden indir</string>
     <string name="live_update">Canlı güncelleştirme</string>
     <string name="route_distance">Mesafe:</string>
@@ -2208,7 +2205,6 @@
     <string name="give_permission">İzin ver</string>
     <string name="allow_access_location">Konum erişimine izin ver</string>
     <string name="search_my_location">Konumumu bul</string>
-    <string name="no_update_info">Güncelleme göstertme</string>
     <string name="update_all_maps_now">Tüm haritaları şimdi güncelle\?</string>
     <string name="replace_favorite_confirmation">Sık kullanılanlardan %1$s\'ı yenisiyle değiştirmek istediğinizden emin misiniz\?</string>
     <string name="back_to_search">Aramaya geri dön</string>
@@ -2251,7 +2247,6 @@
     <string name="shared_string_trip">Seyahat</string>
     <string name="shared_string_recorded">Kaydedildi</string>
     <string name="create_custom_poi">Özel süzgeç oluştur</string>
-    <string name="no_update_info_desc">Sürüm güncelleştirmeler veya OsmAnd ile ilgili indirimler kontrol edilmesin.</string>
     <string name="route_stops_before">öncesinde %1$s durak(lar)</string>
     <string name="move_marker_bottom_sheet_title">İşaretleyici konumunu değiştirmek için haritayı hareket ettirin</string>
     <string name="access_direction_audio_feedback_descr">Hedef nokta yönünü sesle belirt.</string>
@@ -2592,7 +2587,6 @@
     <string name="route_parameters_info">Seçili profildeki yönlendirme ayarları \"%1$s\".</string>
     <string name="wake_time">Uyandıktan sonra zaman aşımı</string>
     <string name="units_and_formats">Birimler ve biçimler</string>
-    <string name="appearance">Görünüm</string>
     <string name="map_look_descr">Harita görünümü</string>
     <string name="map_look">Harita görünümü</string>
     <string name="list_of_installed_plugins">Yüklü eklentiler</string>
@@ -2922,23 +2916,6 @@
     <string name="sit_on_the_stop">Durakta bin</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Seçilen yolları haritada göstermek veya gizlemek için bir düğme.</string>
     <string name="add_destination_query">Lütfen önce hedefi ayarlayın</string>
-    <string name="release_3_3">• Yeni \'Yol Tarifleri\' ekranı: Ev ve İş hedefi düğmelerini, \'önceki rota\' kısayolunu, etkin GPX yol-izlerinin ve işaretleyicilerin listesini, arama geçmişini görüntüler
-\n
-\n • \'Rota detayları\' altındaki ilave bilgiler: yol tipleri, yüzey, diklik, pürüzsüzlük
-\n
-\n • Her türlü taşımayı destekleyen toplu taşıma navigasyonu: metro, otobüs, tramvay vb.
-\n
-\n • Yol-izi gösterme/gizleme ve gündüz/gece modları için yeni Hızlı eylem
-\n
-\n • Almanya, Güney Afrika ve Quebec’te sular altında gösterilen alanlar düzeltildi
-\n
-\n • KML ve KMZ içe aktarma için ek destek
-\n
-\n • Bazı toplu taşıma duraklarını açarken meydana gelen çökmeler düzeltildi
-\n
-\n • Ücretsiz sürümden Facebook ve Firebase analizleri kaldırıldı (OsmAnd+ bunu içermez)
-\n
-\n</string>
     <string name="use_osm_live_public_transport_description">OsmAnd Live değişiklikleri için toplu taşıma araçlarını etkinleştirin.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live toplu taşıma</string>
     <string name="transfers_size">%1$d transfer</string>
@@ -2955,15 +2932,6 @@
     <string name="shared_string_milliradians">Miliradyan</string>
     <string name="angular_measeurement">Açısal birim</string>
     <string name="angular_measeurement_descr">Azimut\'un ölçüm birimini değiştirin.</string>
-    <string name="release_3_3_7">• Toplu taşıma araçlarında aktarmalar arasındaki süreyi göster
-\n
-\n • Rota Ayrıntıları için kullanıcı arayüzü düzeltildi
-\n
-\n • Yön menüsünde ve Rota Ayrıntılarında koyu tema düzeltildi
-\n
-\n • Mesafe Ölçümünde azimutu göster
-\n
-\n</string>
     <string name="files_present">%1$d dosya (%2$s) önceki \'%3$s\' konumunda mevcut.</string>
     <string name="public_transport_ped_route_title">Yürüme rotası yaklaşık %1$s, ve toplu taşıma araçlarına göre daha hızlı olabilir</string>
     <string name="public_transport_no_route_title">Ne yazık ki, OsmAnd ayarlarınıza uygun bir rota bulamadı.</string>
@@ -3667,7 +3635,6 @@
     <string name="screen_control">Ekran denetimi</string>
     <string name="system_screen_timeout_descr">Sistemin ekran zaman aşımına göre ekranı kapatır.</string>
     <string name="system_screen_timeout">Sistemin ekran zaman aşımını kullan</string>
-    <string name="turn_screen_on_options_descr">Ekran uyandırma seçenekleri:</string>
     <string name="turn_screen_on_descr">Ekran uyandırma seçeneklerini seçin (aygıt kilitlenirken OsmAnd\'ın ön planda olduğundan emin olun):</string>
     <string name="turn_screen_on_navigation_instructions_descr">Her navigasyon talimatı ekranı açacaktır.</string>
     <string name="turn_screen_on_navigation_instructions">Navigasyon talimatları</string>
@@ -3710,7 +3677,6 @@
     <string name="shared_string_meters">metre</string>
     <string name="details_dialog_decr">Ek harita ayrıntılarını göster veya gizle</string>
     <string name="shared_string_night_map">Gece haritası</string>
-    <string name="shared_string_all_time">Her zaman</string>
     <string name="shared_string_tones">ton</string>
     <string name="turn_screen_on_power_button_disabled">Devre dışı. \'Uyandıktan sonra zaman aşımı\' altındaki \'Ekranı açık tut\' seçeneği gerekir.</string>
     <string name="add_online_source">Çevrim içi kaynak ekle</string>
@@ -3871,7 +3837,6 @@
     <string name="development">Geliştirme</string>
     <string name="use_live_public_transport">OsmAnd Live verileri</string>
     <string name="use_live_routing">OsmAnd Live verileri</string>
-    <string name="use_complex_routing">Karmaşık yönlendirme</string>
     <string name="complex_routing_descr">Araç navigasyonu için iki aşamalı yönlendirme.</string>
     <string name="use_native_pt">Yerel Toplu Taşıma geliştirme</string>
     <string name="use_native_pt_desc">Java (güvenli) Toplu Taşıma güzergah hesaplamasına geçin</string>

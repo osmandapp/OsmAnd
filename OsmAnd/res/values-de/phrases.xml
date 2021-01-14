@@ -35,7 +35,6 @@
     <string name="poi_artwork">Kunstwerk</string>
     <string name="poi_astronomical_observatory">Astronomisch</string>
     <string name="poi_athletics">Sport</string>
-    <string name="poi_amenity_atm">Geldautomat</string>
     <string name="poi_attraction">Touristische Attraktion</string>
     <string name="poi_atv">Quad-Geschäft</string>
     <string name="poi_audiologist">Gehörspezialist</string>
@@ -60,7 +59,6 @@
     <string name="poi_beauty">Schönheitssalon</string>
     <string name="poi_beauty_salon_nails">Maniküre</string>
     <string name="poi_bed">Schlafzimmereinrichtung</string>
-    <string name="poi_bedding">Bettwarengeschäft</string>
     <string name="poi_craft_beekeeper">Bienenzüchter</string>
     <string name="poi_beverages">Getränkegeschäft</string>
     <string name="poi_bicycle_parking">Fahrradabstellplatz</string>
@@ -242,14 +240,12 @@
     <string name="poi_craft_handicraft">Kunsthandwerk</string>
     <string name="poi_hardware">Eisenwarenhandlung</string>
     <string name="poi_healthcare_alternative">Alternativmedizin</string>
-    <string name="poi_healthcare_centre">Gesundheitszentrum</string>
     <string name="poi_healthcare_rehabilitation">Rehabilitation</string>
     <string name="poi_healthcare_yes">Medizinische Einrichtung</string>
     <string name="poi_hearing_aids">Hörgeräte</string>
     <string name="poi_helipad">Hubschrauberlandeplatz</string>
     <string name="poi_herbalist">Kräuterladen</string>
     <string name="poi_hifi">Hi-Fi-Geschäft</string>
-    <string name="poi_historic_monastery">Historisches Kloster</string>
     <string name="poi_hockey">Hockey</string>
     <string name="poi_horse_racing">Pferderennen</string>
     <string name="poi_horse_track">Pferdestrecke</string>
@@ -611,7 +607,6 @@
     <string name="poi_mast">Mast</string>
     <string name="poi_radar">Radar</string>
     <string name="poi_aquarium">Aquarium</string>
-    <string name="poi_team_handball">Handball</string>
     <string name="poi_shop">Geschäft</string>
     <string name="poi_shop_food">Lebensmittelgeschäft und Supermarkt</string>
     <string name="poi_emergency">Notfall</string>
@@ -712,7 +707,6 @@
     <string name="poi_military_landuse">Militärgebiet</string>
     <string name="poi_forest">Forstwald</string>
     <string name="poi_reservoir">Reservoir</string>
-    <string name="poi_general_tourist_attraction_yes">Allgemeine Sehenswürdigkeit</string>
     <string name="poi_fuel_svo">Pflanzenölkraftstoff</string>
     <string name="poi_training">Übungsgelände</string>
     <string name="poi_quarter">Quartier</string>
@@ -804,7 +798,6 @@
     <string name="poi_pastry">Konditorei</string>
     <string name="poi_candles">Kerzengeschäft</string>
     <string name="poi_fashion">Modegeschäft</string>
-    <string name="poi_furnace">Heizungsgeschäft</string>
     <string name="poi_garden_furniture">Gartenmöbelladen</string>
     <string name="poi_leather">Ledergeschäft</string>
     <string name="poi_music">Musikgeschäft</string>
@@ -822,10 +815,8 @@
     <string name="poi_groyne">Buhne</string>
     <string name="poi_power_cable_distribution_cabinet">Verteilerkasten</string>
     <string name="poi_basin">Wasserbecken</string>
-    <string name="poi_conservation">Schutzgebiet</string>
     <string name="poi_crane">Kran</string>
     <string name="poi_country">Land</string>
-    <string name="poi_tourism_attraction">Sehenswürdigkeit</string>
     <string name="poi_lodging">Unterkunft</string>
     <string name="poi_religious">Heilige Stätte</string>
     <string name="poi_hanami">Kirschblütenfest</string>
@@ -981,7 +972,6 @@
     <string name="poi_animal_shelter_cat">Katzen</string>
     <string name="poi_animal_shelter_dog_cat">Hunde, Katzen</string>
     <string name="poi_animal_shelter_bird">Vögel</string>
-    <string name="poi_mill_pond">Mühlenteich</string>
     <string name="twitter">Twitter</string>
     <string name="poi_skype">Skype</string>
     <string name="poi_youtube">Youtube</string>
@@ -1313,7 +1303,6 @@
     <string name="poi_information_route_marker">Streckenmarkierung</string>
     <string name="poi_information_hikingmap">Wanderkarte</string>
     <string name="poi_information_nature">Natur</string>
-    <string name="poi_information_wildlife">Informationszeichen: Wildleben</string>
     <string name="poi_information_history">Geschichte</string>
     <string name="poi_information_sign">Schild</string>
     <string name="poi_information_audioguide">Sprachführer</string>
@@ -1398,8 +1387,6 @@
     <string name="poi_stars_4s">4S (gehobene Erste Klasse)</string>
     <string name="poi_stars_5">5 (Luxus)</string>
     <string name="poi_stars_5s">5S (gehobener Luxus)</string>
-    <string name="poi_stars_6">Sterne: 6</string>
-    <string name="poi_stars_7">Sterne: 7</string>
     <string name="poi_rooms">Zimmer</string>
     <string name="poi_payment_coins_yes">Münzen</string>
     <string name="poi_payment_coins_no">Münzen nicht akzeptiert</string>
@@ -1421,7 +1408,6 @@
     <string name="poi_payment_visa_no">Visa-Karten nicht akzeptiert</string>
     <string name="poi_payment_mastercard_yes">Mastercard</string>
     <string name="poi_payment_mastercard_no">Mastercard nicht akzeptiert</string>
-    <string name="poi_payment_none">Kostenlos</string>
     <string name="poi_payment_maestro_yes">Maestro-Karten</string>
     <string name="poi_payment_maestro_no">Maestro-Karten nicht akzeptiert</string>
     <string name="poi_payment_american_express_yes">American Express (AMEX)</string>
@@ -2122,7 +2108,6 @@
     <string name="poi_impromptu_no">Improvisiert: nein</string>
     <string name="poi_sanitary_dump_station_yes">Sanitäre Entsorgungsstation: ja</string>
     <string name="poi_sanitary_dump_station_no">Sanitäre Entsorgungsstation: nein</string>
-    <string name="poi_sanitary_dump_station_customers">Sanitäre Entsorgungsstation: Kunden</string>
     <string name="poi_refugee_yes">Flüchtlingsunterkunft</string>
     <string name="poi_social_facility_group_home">Wohngruppe</string>
     <string name="poi_social_facility_assisted_living">Betreutes Wohnen</string>
@@ -2381,7 +2366,6 @@
     <string name="poi_inscription_e">Beschriftung: O</string>
     <string name="poi_inscription_ne">Beschriftung: NO</string>
     <string name="poi_construction_yes">Im Bau</string>
-    <string name="poi_additional_atm_yes">Geldautomat: ja</string>
     <string name="poi_atm_no">Geldautomat: nein</string>
     <string name="poi_firepit">Feuergrube</string>
     <string name="poi_street_cabinet">Verteilerkasten</string>
@@ -2477,7 +2461,6 @@
     <string name="poi_sanitary_dump_station">Sanitäre Entsorgungsstation</string>
     <string name="poi_medical_system_western_yes">Westlich</string>
     <string name="poi_medical_system_chinese_yes">Chinesisch (traditionell)</string>
-    <string name="poi_medical_system_unknown_yes">Medizinisches System: Unbekannt traditionelle</string>
     <string name="poi_medical_system_ayurveeda_yes">Ayurveda</string>
     <string name="poi_medical_system_kampo_yes">Kampo</string>
     <string name="poi_medical_system_mongolian_yes">Traditionell mongolisch</string>
@@ -2493,16 +2476,12 @@
     <string name="poi_health_service_prevention_vaccination_yes">Gesundheitswesen: Impfung: ja</string>
     <string name="poi_health_service_prevention_vaccination_no">Gesundheitswesen: Impfung: nein</string>
     <string name="poi_health_facility_type_office">Arztpraxis</string>
-    <string name="poi_health_facility_type_hospital">Gesundheit-Einrichtungstyp: Krankenhaus</string>
     <string name="poi_health_facility_type_field_hospital">Gesundheitseinrichtung: Feldlazarett</string>
-    <string name="poi_health_facility_type_clinic">Gesundheit-Einrichtungstyp: Klinik</string>
-    <string name="poi_health_facility_type_health_centre">Gesundheit-Einrichtungstyp: Gesundheitszentrum</string>
     <string name="poi_health_facility_type_counselling_centre">Gesundheitseinrichtung: Beratungsstelle</string>
     <string name="poi_health_facility_type_laboratory">Gesundheitseinrichtung: Labor</string>
     <string name="poi_health_facility_type_therapy">Gesundheitseinrichtung: Therapie</string>
     <string name="poi_health_facility_type_department">Gesundheitseinrichtung: Fachabteilung</string>
     <string name="poi_health_facility_type_dispensary">Gesundheitseinrichtung: Ambulanz</string>
-    <string name="poi_health_facility_type_pharmacy">Gesundheit-Einrichtungstyp: Apotheke</string>
     <string name="poi_health_facility_type_first_aid">Gesundheitseinrichtung: Erste Hilfe</string>
     <string name="poi_health_facility_type_nursing_home">Gesundheitseinrichtung: Pflegeheim</string>
     <string name="poi_health_facility_type_support_group_home">Gesundheitseinrichtung: Selbsthilfegruppe</string>
@@ -2627,7 +2606,6 @@
     <string name="poi_water_source_main">Haupt</string>
     <string name="poi_water_source_pond">Teich</string>
     <string name="poi_water_source_stream">Wasserlauf</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Zisterne</string>
     <string name="poi_in_service_yes">Im Dienst: ja</string>
     <string name="poi_street_cabinet_power">Kasten-Typ: Strom</string>
     <string name="poi_street_cabinet_telecom">Kasten-Typ: Telekom</string>
@@ -3560,8 +3538,6 @@
     <string name="poi_park_ride_hov">Fahrgemeinschaft</string>
     <string name="poi_park_ride_tram">Straßenbahn</string>
     <string name="poi_park_ride_ferry">Fähre</string>
-    <string name="poi_generator_source_biomass">Energiequelle: Biomasse</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Strahlentherapie</string>
     <string name="poi_hazard">Gefahr</string>
     <string name="poi_rtsa_scale_filter">Schwierigkeitsklasse</string>
     <string name="poi_rtsa_scale_nc">k. A.</string>

@@ -46,7 +46,6 @@
     <string name="favourites_remove_dialog_success">Priljubljena točka {0} je izbrisana.</string>
     <string name="poi_edit_title">Uredi točko POI</string>
     <string name="poi_create_title">Ustvari točko POI</string>
-    <string name="poi_error_poi_not_found">Točke ni mogoče najti, ali pa ta združuje več vozlišč, kar trenutno še ni podprto.</string>
     <string name="poi_remove_confirm_template">Ali želite izbrisati {0} (opomba)\?</string>
     <string name="poi_remove_title">Izbriši točko POI</string>
     <string name="shared_string_delete">Izbriši</string>
@@ -855,7 +854,6 @@
     <string name="error_calculating_route">Poti ni mogoče določiti.</string>
     <string name="error_calculating_route_occured">Poti ni mogoče določiti.</string>
     <string name="empty_route_calculated">Določena pot je brez podatkov.</string>
-    <string name="new_route_calculated_dist">Izračunana nova pot, razdalja</string>
     <string name="arrived_at_destination">Prispeli ste.</string>
     <string name="invalid_locations">Koordinate niso veljavne!</string>
     <string name="go_back_to_osmand">Pojdi nazaj na zemljevid OsmAnd</string>
@@ -1797,7 +1795,6 @@
     <string name="looking_up_address">Iskanje naslova</string>
     <string name="route_distance">Razdalja:</string>
     <string name="route_duration">Čas:</string>
-    <string name="update">Posodobi vsakih</string>
     <string name="only_download_over_wifi">Prejmi le prek WiFi</string>
     <string name="live_update">Posodobitev v živo</string>
     <string name="update_now">Posodobi takoj</string>
@@ -2005,12 +2002,10 @@
     <string name="allow_access_location">Dovoli dostop do mesta</string>
     <string name="first_usage_greeting">Navigacija in spoznavanje novih krajev tudi brez internetne povezave</string>
     <string name="search_my_location">Najdi moje mesto</string>
-    <string name="no_update_info">Ne pokaži posodobitev</string>
     <string name="update_all_maps_now">Ali želite posodobiti vse zemljevide?</string>
     <string name="clear_tile_data">Počisti vse sličice</string>
     <string name="skip_map_downloading_desc">Nameščenega ni nobenega zemljevida za delo brez povezave. Izbrati je mogoče zemljevid s seznama, ali pa ga prejeti preko menija »%1$s«.</string>
     <string name="first_usage_wizard_desc">Zemljevidi za prejem so predlagani po podatkih trenutnega mesta.</string>
-    <string name="no_update_info_desc">Ne preverjaj za posodobitve programa OsmAnd in drugih ugodnosti.</string>
     <string name="donation_to_osm">Donacija skupnosti OpenStreetMap</string>
     <string name="get_it">Pridobi</string>
     <string name="get_for">Pridobi za %1$s</string>
@@ -2069,9 +2064,6 @@
     <string name="route_roundabout_short">Pojdite na %1$d izhod in nadaljujte</string>
     <string name="search_map_hint">Poišči mesto ali območje</string>
     <string name="wiki_around">Bližnja mesta s članki Wikipedije</string>
-    <string name="legacy_search">Opuščeno iskanje</string>
-    <string name="show_legacy_search">Pokaži možnosti opuščenega načina iskanja</string>
-    <string name="show_legacy_search_desc">Dodaj opuščeno iskanje v seznamu predala.</string>
     <string name="lang_sr_latn">Srbščina (latinica)</string>
     <string name="lang_zh_hk">Kitajščina (Hong Kong)</string>
     <string name="routing_attr_allow_motorway_name">Vodenje po avtocestah</string>
@@ -2711,16 +2703,6 @@
     <string name="show_full_description">Pokaži polni opis</string>
     <string name="quick_action_edit_actions">Uredi dejanja</string>
     <string name="purchase_dialog_title">Izbor načrta</string>
-    <string name="release_3_0">• Novo: podpora za popotniške vodnike – vodniki mest so povezani z zemljevidom, začetni podatki pa s spletiščem Wikivoyage. 
-\n 
-\n• Wikipedija: nov videz, dejavne povezave, podpora za prikaz slik 
-\n 
-\n• Vmesnik Open Track: podpora za skupine vmesnih točk 
-\n 
-\n• Označbe zemljevida: možnost uvoza izbranih skupin iz datotek GPX, vpis koordinat, spremenjen vmesnik 
-\n 
-\n• Naročnine na storitev OsmAnd Live podpirajo vse možnosti programa OsmAnd 
-\n</string>
     <string name="download_wikipedia_label">Prejmi podatke Wikipedije</string>
     <string name="open_in_browser_wiki">Odpri prispevek na spletni strani</string>
     <string name="open_in_browser_wiki_description">Pregledovanje prispevkov v spletnem brskalniku.</string>
@@ -2765,35 +2747,6 @@
     <string name="keep_passed_markers">Ohrani prevožene označbe na zemljevidu</string>
     <string name="more_transport_on_stop_hint">Na tej postaji ustavlja več različnih prevozov.</string>
     <string name="poi_cannot_be_found">Vozlišča ali poti ni mogoče najti.</string>
-    <string name="release_3_2_pre">• Odpravljena je napaka, ki je lahko povzročila sesutje programa
-\n
-\n• Nova zmožnost označb: prikaz že prepotovanih točk
-\n
-\n• Zgodovina iskanja po novem vključuje tudi že iskane kategorije
-\n
-\n• Odpravljena je napaka odpiranja zemljevidov z nelatinskimi črkami
-\n
-\n• Izboljšana hitrost izrisovanja na napravah s sistemom Android 8.0
-\n
-\n• Podpora za urejanje večkotnih predmetov (neoznačnih)
-\n
-\n• Merjenje razdalje: v meni dejanj je mogoče dodati gumb za merjenje
-\n</string>
-    <string name="release_3_1">• Navigacija: popravki vrstice napredovanja poti, možnost hitre menjave začetne in končne točke poti
-\n
-\n• Označbe na zemljevidih: skrivanje in prikaz skupin, možnost shrivanja označb
-\n
-\n• Urejanje OSM: možnost urejanja oznak za netočkovne predmete in poti, popravki opomb in varnostnih kopij urejanj
-\n
-\n• Izboljšano razčlenjevanje vsebin Wikipedije in Wikivoyage, posodobljene datoteke so že na voljo
-\n
-\n• Vsebinski meni: popravek prikaza oznak v nočnem načinu in popravki velikosti menijev
-\n
-\n• Navigacija za plovila: podpora za plovne poti v vodnem prometu
-\n
-\n• Številni drugi popravki hroščev
-\n</string>
-    <string name="commiting_way">Poteka objavljanje poti …</string>
     <string name="increase_search_radius_to">Povečaj območje iskanja na %1$s</string>
     <string name="coord_input_save_as_track_descr">Dodanih je %1$s točk. Vpisati je treba še ime datoteke in potrditi shranjevanje.</string>
     <string name="error_notification_desc">Pošljite zaslonsko sliko obvestila na elektronski naslov support@osmand.net</string>
@@ -2937,21 +2890,6 @@
     <string name="shared_string_width">Širina</string>
     <string name="shared_string_height">Višina</string>
     <string name="transfers_size">%1$d prestopov</string>
-    <string name="release_3_3">• Nov pogled »Smeri«: pokaže gumb za cilja Dom in Služba, bližnjico do »zadnje poti«, seznam dejavnih sledi GPX in oznak, zgodovino iskanja
-\n
-\n• Dodane so podrobnosti poti: vrste cest, površina, strmina, gladkost
-\n
-\n• Navigacija z javnimi sredstvi podpira vse vrste prevoza: metro, avtobus, tramvaj itd.
-\n
-\n• Omogočeno je novo hitro dejanje za prikaz/skrivanje sledi in dnevno-nočni prikaz
-\n
-\n• Popravljena je napaka prikaza območji kot poplavljena v Nemčiji, Južni Afriki, Quebecu
-\n
-\n• Posodobljena je podpora za uvoz datotek KML in KMZ
-\n
-\n• Odpravljena je napaka pri odpiranju nekaterih postajališč javnega prevoza
-\n
-\n• Odstranjena je analitika Facebook in Firebase iz brezplačne različice (OsmAnd + je ne vključuje)</string>
     <string name="exit_at">Izstopi na postaji</string>
     <string name="sit_on_the_stop">Vstopi na postaji</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Gumb za prikaz ali skritje izbrane sledi GPX na zemljevidu.</string>
@@ -2983,12 +2921,6 @@
     <string name="routing_attr_avoid_subway_description">Načrtovanje poti brez potovanja s podzemno železnico</string>
     <string name="routing_attr_avoid_ferry_name">Izogni se trajektom</string>
     <string name="routing_attr_avoid_ferry_description">Načrtovanje poti brez potovanja s trajektom</string>
-    <string name="release_3_3_7">• Dodan je prikaz časa med prevozi javnega potniškega prometa 
-\n• Popravljen je vmesnik za prikaz podrobnosti poti 
-\n• Popravljena je temna tema v meniju smeri in pri izrisu podrobnosti poti 
-\n• Omogočen je prikaz azimuta pri merjenju razdalje
-\n
-\n</string>
     <string name="send_log">Pošlji dnevnik</string>
     <string name="files_moved">Premaknjenih je %1$d datotek (%2$s).</string>
     <string name="files_copied">Kopiranih je %1$d datotek (%2$s).</string>
@@ -3203,7 +3135,6 @@
     <string name="start_up_message_pref">Začetno sporočilo</string>
     <string name="analytics_pref_title">Programska analitika</string>
     <string name="units_and_formats">Enote in zapisi</string>
-    <string name="appearance">Videz</string>
     <string name="map_look_descr">Videz zemljevida</string>
     <string name="map_look">Videz zemljevida</string>
     <string name="list_of_installed_plugins">Nameščeni vstavki</string>

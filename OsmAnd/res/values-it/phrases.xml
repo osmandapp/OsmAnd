@@ -34,7 +34,6 @@
     <string name="poi_copyshop">Copisteria</string>
     <string name="poi_curtain">Negozio tendaggi</string>
     <string name="poi_fabric">Negozio drappeggi</string>
-    <string name="poi_bedding">Negozio materassi</string>
     <string name="poi_dive">Negozio articoli per immersione</string>
     <string name="poi_doityourself">Negozio per fai-da-te</string>
     <string name="poi_erotic">Negozio erotica</string>
@@ -191,7 +190,6 @@
     <string name="poi_healthcare_alternative">Medicina alternativa</string>
     <string name="poi_audiologist">Audiologo</string>
     <string name="poi_blood_bank">Banca del sangue</string>
-    <string name="poi_healthcare_centre">Centro medico</string>
     <string name="poi_midwife">Levatrice</string>
     <string name="poi_optometrist">Optometrista</string>
     <string name="poi_physiotherapist">Fisioterapista</string>
@@ -249,7 +247,6 @@
     <string name="poi_peak">Picco montuoso</string>
     <string name="poi_cave_entrance">Entrata grotta/caverna</string>
     <string name="poi_bitcoin_yes">Pagamento Bitcoin</string>
-    <string name="poi_amenity_atm">Bancomat</string>
     <string name="poi_bank">Banca</string>
     <string name="poi_internet_cafe">Internet caffè</string>
     <string name="poi_crematorium">Crematorio</string>
@@ -377,7 +374,6 @@
     <string name="poi_religion_shinto">Shintoismo</string>
     <string name="poi_religion_taoist">Taoismo</string>
     <string name="poi_monastery">Monastero</string>
-    <string name="poi_historic_monastery">Monastero storico</string>
     <string name="poi_wayside_cross">Croce storica</string>
     <string name="poi_wayside_shrine">Tabernacolo storico</string>
     <string name="poi_information">Informazioni turistiche</string>
@@ -615,8 +611,6 @@
     <string name="poi_field_hockey">Hockey su prato</string>
     <string name="poi_sport_motor">Sport motoristici</string>
     <string name="poi_sailing">Vela</string>
-    <string name="poi_team_handball">Pallamano</string>
-    <string name="poi_tourism_attraction">Attrazione turistica</string>
     <string name="poi_religious">Luogo di culto</string>
     <string name="poi_internet_access_service">Accesso a Internet: servizio</string>
     <string name="poi_internet_access_wlan">Accesso a Internet: WLAN</string>
@@ -854,7 +848,6 @@
     <string name="poi_forest">Foresta di tenute umano</string>
     <string name="poi_farmyard">Fattoria</string>
     <string name="poi_meadow">Prato</string>
-    <string name="poi_conservation">Terra di conservazione</string>
     <string name="poi_canal">Canale</string>
     <string name="poi_mast">Palo</string>
     <string name="poi_reservoir">Serbatoio</string>
@@ -1768,7 +1761,6 @@
     <string name="poi_official_name">Nome ufficiale</string>
     <string name="poi_dolphin">Delfino</string>
     <string name="poi_construction_yes">In costruzione</string>
-    <string name="poi_additional_atm_yes">Bancomat: sì</string>
     <string name="poi_atm_no">Bancomat: no</string>
     <string name="poi_protected_area">Area protetta</string>
     <string name="poi_protection_title">Titolo di protezione</string>
@@ -1796,7 +1788,6 @@
     <string name="poi_fire_hydrant_diameter">Diametro idrante</string>
     <string name="poi_fire_hydrant_position_sidewalk">Marciapiede</string>
     <string name="poi_fire_hydrant_position_street">Strada</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_in_service_yes">In servizio: sì</string>
     <string name="poi_depth">Profondità</string>
     <string name="poi_salt_yes">Sale</string>

@@ -346,7 +346,6 @@ POIの更新は利用できません</string>
     <string name="error_calculating_route">ルートを計算できませんでした。</string>
     <string name="error_calculating_route_occured">ルートを計算できませんでした。</string>
     <string name="empty_route_calculated">空のルートが計算されました</string>
-    <string name="new_route_calculated_dist">新しいルートが計算されました、距離</string>
     <string name="arrived_at_destination">目的地に到着しました。</string>
     <string name="invalid_locations">入力された座標の形式が間違っています！</string>
     <string name="go_back_to_osmand">マップに戻る</string>
@@ -456,7 +455,6 @@ POIの更新は利用できません</string>
     <string name="osb_comment_dialog_error">コメントを追加できませんでした。</string>
     <string name="poi_edit_title">POIの編集</string>
     <string name="poi_create_title">POIを作成</string>
-    <string name="poi_error_poi_not_found">ノードが見つからない、または未サポートの複数ノードで構成されています。</string>
     <string name="poi_remove_confirm_template">{0} を削除しますか(コメントを入力) ?</string>
     <string name="poi_remove_title">POIを削除</string>
     <string name="shared_string_delete">削除</string>
@@ -1903,7 +1901,6 @@ POIの更新は利用できません</string>
     <string name="looking_up_address">住所検索</string>
     <string name="begin_with_osmand_menu_group">OsmAndを初めて使う方へ</string>
     <string name="first_usage_item">使用方法の簡易説明</string>
-    <string name="update">更新</string>
     <string name="only_download_over_wifi">Wi-Fi接続時のみダウンロード</string>
     <string name="live_update">ライブ更新</string>
     <string name="update_now">今すぐ更新</string>
@@ -1996,9 +1993,6 @@ POIの更新は利用できません</string>
     <string name="lang_hu_formal">ハンガリー語(フォーマル)</string>
     <string name="map_widget_bearing">相対方位</string>
     <string name="map_widget_magnetic_bearing">磁方位</string>
-    <string name="legacy_search">レガシー検索</string>
-    <string name="show_legacy_search">レガシー検索を表示</string>
-    <string name="show_legacy_search_desc">メニューリストで旧型検索も使用できるようにします</string>
     <string name="routing_attr_allow_motorway_name">高速道路を使う</string>
     <string name="routing_attr_allow_motorway_description">高速道路を利用可能とみなします。</string>
     <string name="auto_split_recording_title">空白検知で自動分割記録</string>
@@ -2057,8 +2051,6 @@ POIの更新は利用できません</string>
     <string name="location_not_found">現在地が特定できませんでした</string>
     <string name="no_inet_connection_desc_map">マップのダウンロードが必要です。</string>
     <string name="search_my_location">現在地取得</string>
-    <string name="no_update_info_desc">OsmAndのバージョン更新や、割引に関しての情報をチェックしません</string>
-    <string name="no_update_info">更新情報を非表示</string>
     <string name="update_all_maps_now">すべてのマップを今すぐ更新しますか？</string>
     <string name="replace_favorite_confirmation">お気に入り %1$sを置き換えてよろしいですか？</string>
     <string name="rendering_attr_hideOverground_name">地上建造物</string>
@@ -2567,16 +2559,6 @@ POIの更新は利用できません</string>
     <string name="tap_on_map_to_hide_interface">フルスクリーンモード</string>
     <string name="live_monitoring_max_interval_to_send">オンライン追跡用のバッファ指定</string>
     <string name="live_monitoring_max_interval_to_send_desrc">送信用現在地データをネット接続せずにどのくらいの時間記録するか、バッファを指定します</string>
-    <string name="release_3_0">• 新しい旅行メニュー:インターネットに接続しなくてもWikiVoyage(ウィキボヤージュ)の旅行ガイドを見られるように変更 
-\n 
-\n• Wikipedia:新しい外見、アクティブリンク、画像の参照 
-\n 
-\n• 経路の参照UI:経由地点グループの表示 
-\n 
-\n• マップマーカー:選択した複数GPXファイルからの取り込みに対応、新しい外見の採用 
-\n 
-\n• OsmAnd LiveサブスクリプションでOsmAndの全ての機能を利用可能に 
-\n</string>
     <string name="rendering_attr_hidePOILabels_name">POIのラベル</string>
     <string name="context_menu_read_article">記事を読む</string>
     <string name="context_menu_points_of_group">同じグループのお気に入り地点</string>
@@ -2666,21 +2648,6 @@ POIの更新は利用できません</string>
     <string name="poi_cannot_be_found">ノードまたは通じる道が見つかりませんでした。</string>
     <string name="search_no_results_feedback">検索結果が出ませんでしたか？
 \nよければフィードバックをお願いします</string>
-    <string name="release_3_1">• ナビゲーション:進捗バー(プログレスバー)の修正、ルートの出発地点と目的地点の高速入れ替え
-\n
-\n• マップマーカー:グループに関するオン/オフの修正、マップ上のマーカーの非表示機能の追加
-\n
-\n• OSM編集:地点に寄らないオブジェクトや道に含まれるタグを編集する機能、メモからコメントが欠落する現象の修正、編集のバックアップ機能
-\n
-\n• WikipediaとWikivoyageの解析方法の改善、更新されたファイルは現段階から利用可能
-\n
-\n• コンテキストメニュー:夜間モード時の乗換標識を修正、追加メニューのサイズを修正
-\n
-\n• ボートナビゲーション:ブイなどで指示された人工航路のサポート
-\n
-\n• その他バグ修正
-\n</string>
-    <string name="commiting_way">コミットする方法…</string>
     <string name="increase_search_radius_to">検索半径を%1$sに拡大</string>
     <string name="send_search_query_description">
         \"%1$s\"とあなたの現在地を検索クエリとして送信します。\n
@@ -2757,20 +2724,6 @@ POIの更新は利用できません</string>
     <string name="osm_notes">OSMメモ</string>
     <string name="will_open_tomorrow_at">明日以降の次の時間に営業</string>
     <string name="shared_string_without_name">名無し</string>
-    <string name="release_3_2_pre">• 一部の機種で起動時にクラッシュしていた問題を修正 
-\n 
-\n• マーカーの新機能:通過済みマーカーの表示 
-\n 
-\n• 検索履歴は以前選択したカテゴリが表示される仕様へ変更 
-\n 
-\n• 非ラテン文字を使用したマップを開いた場合にクラッシュしていた問題を修正 
-\n 
-\n• Android 8.0デバイスでのレンダリング速度を改善 
-\n 
-\n• ポリゴン(トイレや給水所など公共施設を除く)オブジェクトの編集をサポート 
-\n 
-\n• 距離測定:コンテキストメニューに\"距離測定\"ボタンを追加 
-\n</string>
     <string name="what_is_here">近隣にあるもの一覧:</string>
     <string name="parked_at">駐車開始時刻</string>
     <string name="pick_up_till">駐車上限時刻</string>
@@ -2833,21 +2786,6 @@ POIの更新は利用できません</string>
     <string name="test_voice_desrc">ボタンをタップし対応する音声プロンプトを聞いて、欠落しているかなど問題の有無を確かめます</string>
     <string name="shared_string_restore">通過前に戻す</string>
     <string name="map_widget_intermediate_time">-経由地点時間</string>
-    <string name="release_3_3">• 新しい案内画面の採用: 事前に設定した自宅と職場をワンタップで目的地とするボタンの追加、「前回のルート」ショートカット、アクティブなGPX経路とマーカーのリスト、検索履歴など
-\n
-\n• 道路種別、路面素材、勾配、滑らかさの各種情報をルートの詳細下に各種情報に追加 
-\n
-\n• 地下鉄、バス、路面電車など、あらゆる種類の交通機関を使用する場合のナビゲーションをサポート
-\n
-\n• 経路の表示/非表示および表示モードで昼/夜を切り替えられるクイックアクションの追加
-\n
-\n• ドイツ、南アフリカ、ケベックで浸水したと表示されていたエリアの修正
-\n
-\n• KMLおよびKMZ形式のインポートを可能に
-\n
-\n• いくつかの公共交通機関の停留所を開く際のクラッシュを修正
-\n
-\n• 無料版からFacebookとFirebaseの分析を削除 (有料版のOsmAnd+は変更ありません)</string>
     <string name="use_osm_live_public_transport_description">OsmAnd Liveの更新データを利用した公共交通機関向け機能を有効にします。</string>
     <string name="use_osm_live_public_transport">OsmAnd Live公共交通機関用機能</string>
     <string name="time_of_day">時刻</string>
@@ -2934,13 +2872,6 @@ POIの更新は利用できません</string>
     <string name="routing_attr_avoid_subway_description">移動手段に地下鉄や軽量軌道交通(LRT)などを使いません</string>
     <string name="routing_attr_avoid_ferry_name">フェリーを使わない</string>
     <string name="routing_attr_avoid_ferry_description">移動手段にフェリーを使いません</string>
-    <string name="release_3_3_7">• 公共交通機関で移動している間の時間表示を実装
-\n
-\n• ルート詳細に関するユーザーインターフェイスの修正
-\n
-\n• 案内メニューとルート詳細の暗色テーマ時の表示を修正
-\n
-\n• 距離測定時に方位を表示</string>
     <string name="shared_string_degrees">角度(°)</string>
     <string name="shared_string_milliradians">ミリラジアン</string>
     <string name="angular_measeurement">角度の単位</string>
@@ -3202,7 +3133,6 @@ POIの更新は利用できません</string>
     <string name="route_parameters_info">選択したプロファイル『%1$s』用のルーティングの設定です。</string>
     <string name="wake_time">画面を表示する時間</string>
     <string name="units_and_formats">単位と形式</string>
-    <string name="appearance">外観</string>
     <string name="map_look_descr">マップの見た目に関する設定</string>
     <string name="map_look">マップ外観</string>
     <string name="list_of_installed_plugins">インストール済みプラグインリスト</string>
@@ -3516,8 +3446,6 @@ POIの更新は利用できません</string>
     <string name="import_profile_dialog_description">インポートされたプロファイルには追加データが含まれています。 \"インポート\"をタップしてプロファイルデータのみをインポートするか、インポートする追加データを選択してください。</string>
     <string name="export_profile_dialog_description">プロファイルとともにエクスポートする追加データを選択できます。</string>
     <string name="index_name_antarctica">南極大陸</string>
-    <string name="navigation_notification_desc">ナビゲーション稼働中にもシステム通知を表示します。</string>
-    <string name="navigation_notification">ナビゲーション通知</string>
     <string name="profile_type_custom_string">カスタムプロファイル</string>
     <string name="shared_string_angle_param">角度: %s°</string>
     <string name="shared_string_angle">角度</string>
@@ -3581,7 +3509,6 @@ POIの更新は利用できません</string>
     <string name="select_shape">形状を選択</string>
     <string name="shared_string_circle">円形</string>
     <string name="shared_string_square">四角形</string>
-    <string name="shared_string_rhomb">ひし形</string>
     <string name="shared_string_min">最小</string>
     <string name="quick_action_transport_hide">公共交通機関を非表示</string>
     <string name="quick_action_transport_show">公共交通機関を表示</string>
@@ -3910,7 +3837,6 @@ POIの更新は利用できません</string>
     <string name="development">開発</string>
     <string name="use_live_public_transport">OsmAnd Liveデータ</string>
     <string name="use_live_routing">OsmAnd Liveデータ</string>
-    <string name="use_complex_routing">複雑なルート計算</string>
     <string name="complex_routing_descr">カーナビゲーション向けの2段階ルート計算です。</string>
     <string name="use_two_phase_routing">2段階 A*ルーティングアルゴリズムを使用</string>
     <string name="file_already_imported">ファイルはすでにOsmAndにインポートされています</string>
