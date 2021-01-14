@@ -3150,9 +3150,9 @@
     <string name="routing_profile_geocoding">גאוקודינג</string>
     <string name="routing_attr_piste_type_skitour_name">טיול סקי</string>
     <string name="routing_attr_piste_type_skitour_description">מסלולי טיולי סקי.</string>
-    <string name="new_route_calculated_dist_dbg">מסלול: מרחק %s, זמן מנתב מסלול %s 
-\nחישוב: %.1f שנ׳, %d מסלולים, %d אריחים)</string>
-    <string name="make_osmand_better_descr">לאפשר ל־OsmAnd לאסוף ולעבד נתונים אלמוניים בנוגע לשימוש ביישומון. לא נאספים נתונים על המיקום שלך או המקומות בהם צפית במפה. 
+    <string name="new_route_calculated_dist_dbg">מסלול: מרחק %2$s, זמן מנתב מסלול %1$s
+\nחישוב: %3$.1f שנ׳, %4$d מסלולים, %5$d אריחים)</string>
+    <string name="make_osmand_better_descr">לאפשר ל־OsmAnd לאסוף ולעבד נתונים אלמוניים בנוגע לשימוש ביישומון. לא נאספים נתונים על המיקום שלך או המקומות בהם צפית במפה.
 \n 
 \nניתן להגדיר זאת בכל עת דרך ‚הגדרות’ ← ‚פרטיות ואבטחה’.</string>
     <string name="routing_attr_piste_type_nordic_name">סקי למרחקים ונורדי</string>

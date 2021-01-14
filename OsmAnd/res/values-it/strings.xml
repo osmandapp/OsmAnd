@@ -3195,8 +3195,7 @@
     <string name="cancel_subscription">Cancella la sottoscrizione</string>
     <string name="price_and_discount">%1$s • Risparmi %2$s</string>
     <string name="routing_attr_allow_classic_only_name">Permetti solo i percorsi classici</string>
-    <string name="new_route_calculated_dist_dbg">Percorso: distanza %s, durata %s 
-\nCalcolo: %.1f sec, %d strade, %d mattonelle)</string>
+    <string name="new_route_calculated_dist_dbg">Percorso: distanza %1$s, durata %2$s \nCalcolo: %3$.1f sec, %4$d strade, %5$d mattonelle)</string>
     <string name="lang_oc">Occitano</string>
     <string name="day">Giorno</string>
     <string name="days_2_4">Giorni</string>

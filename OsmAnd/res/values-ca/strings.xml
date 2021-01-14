@@ -3195,8 +3195,8 @@
     <string name="shared_string_default">Per defecte</string>
     <string name="lang_oc">Occità</string>
     <string name="app_mode_pickup_truck">Camioneta descoberta</string>
-    <string name="new_route_calculated_dist_dbg">Ruta: distància %s, durada %s
-\nCàlcul: %.1f s, %d vies, %d tessel·les)</string>
+    <string name="new_route_calculated_dist_dbg">Ruta: distància %1$s, durada %2$s
+\nCàlcul: %3$.1f s, %4$d vies, %5$d tessel·les)</string>
     <string name="day">Dia</string>
     <string name="days_2_4">Dies</string>
     <string name="days_5">Dies</string>

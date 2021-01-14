@@ -3186,8 +3186,7 @@
     <string name="rendering_attr_showLez_name">Mostrar zonas de baixa emissão</string>
     <string name="temporary_conditional_routing">Considerar limitações temporárias</string>
     <string name="shared_string_default">Padrão</string>
-    <string name="new_route_calculated_dist_dbg">Rota: distância %s, tempo do roteador %s
-\nCálculo: %.1f seg, %d estradas, %d telhas)</string>
+    <string name="new_route_calculated_dist_dbg">Rota: distância %1$s, tempo do roteador %2$s \nCálculo: %3$.1f seg, %4$d estradas, %5$d telhas)</string>
     <string name="lang_oc">Occitano</string>
     <string name="app_mode_wagon">Vagão</string>
     <string name="app_mode_pickup_truck">Caminhonete</string>

@@ -3185,8 +3185,7 @@
     <string name="rendering_attr_showLez_name">Zobraziť Zóny s nízkymi emisiami</string>
     <string name="temporary_conditional_routing">Zohľadniť dočasné obmedzenia</string>
     <string name="shared_string_default">Predvolené</string>
-    <string name="new_route_calculated_dist_dbg">Trasa: vzdialenosť %s, potrebný čas %s 
-\nVýpočet: %.1f sekúnd, %d ciest, %d dlaždíc)</string>
+    <string name="new_route_calculated_dist_dbg">Trasa: vzdialenosť %1$s, potrebný čas %2$s \nVýpočet: %3$.1f sekúnd, %4$d ciest, %5$d dlaždíc)</string>
     <string name="lang_oc">Okcitánsky</string>
     <string name="app_mode_wagon">Dodávkové auto</string>
     <string name="app_mode_pickup_truck">Pickup auto</string>

@@ -3193,8 +3193,8 @@
     <string name="rendering_attr_showLez_name">Vis Miljøzoner</string>
     <string name="temporary_conditional_routing">Overvej midlertidige begrænsninger</string>
     <string name="shared_string_default">Standard</string>
-    <string name="new_route_calculated_dist_dbg">Rute: afstand %s, rute tid %s 
-\nBeregning: %.1f s., %d veje, %d fliser</string>
+    <string name="new_route_calculated_dist_dbg">Rute: afstand %1$s, rute tid %2$s
+\nBeregning: %3$.1f s., %4$d veje, %5$d fliser</string>
     <string name="lang_oc">Occitansk</string>
     <string name="app_mode_wagon">Vogn</string>
     <string name="app_mode_pickup_truck">Pickup</string>

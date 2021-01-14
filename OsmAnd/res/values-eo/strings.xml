@@ -3185,8 +3185,8 @@
     <string name="rendering_attr_showLez_name">Zonoj de restrikta emisio (LEZ)</string>
     <string name="temporary_conditional_routing">Konsideri portempajn limigojn</string>
     <string name="shared_string_default">Implicita</string>
-    <string name="new_route_calculated_dist_dbg">Kurso: distanco %s, tempo: %s 
-\n(kalkulita en %.1f s, %d vojoj, %d kaheloj)</string>
+    <string name="new_route_calculated_dist_dbg">Kurso: distanco %1$s, tempo: %2$s
+\n(kalkulita en %3$.1f s, %4$d vojoj, %5$d kaheloj)</string>
     <string name="lang_oc">Okcitana</string>
     <string name="app_mode_wagon">Aŭto (kombino)</string>
     <string name="app_mode_pickup_truck">Aŭto (pickup)</string>

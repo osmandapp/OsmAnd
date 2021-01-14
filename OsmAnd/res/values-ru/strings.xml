@@ -3183,8 +3183,7 @@
     <string name="shared_string_track_is_saved">Трек %s сохранён</string>
     <string name="rendering_attr_showLez_name">Зоны с низким уровнем выбросов</string>
     <string name="temporary_conditional_routing">Учитывать временные ограничения</string>
-    <string name="new_route_calculated_dist_dbg">Маршрут: расстояние %s, время навигации %s 
-\nРасчёт: %.1f с, %d дорог, %d тайлов)</string>
+    <string name="new_route_calculated_dist_dbg">Маршрут: расстояние %1$s, время навигации %2$s \nРасчёт: %3$.1f с, %4$d дорог, %5$d тайлов)</string>
     <string name="quick_action_need_to_add_item_to_list">Добавьте хотя бы один элемент в список «Быстрые действия» в настройках</string>
     <string name="routing_attr_piste_type_skitour_description">Маршруты для горнолыжного туризма.</string>
     <string name="routing_attr_freeride_policy_name">Вне трассы</string>

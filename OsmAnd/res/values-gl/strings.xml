@@ -3207,8 +3207,7 @@ Lon %2$s</string>
     <string name="rendering_attr_showLez_name">Amosar zonas de baixas emisións</string>
     <string name="temporary_conditional_routing">Considerar limitacións temporais</string>
     <string name="shared_string_default">Predefinido</string>
-    <string name="new_route_calculated_dist_dbg">Rota: distancia %s, tempo de navegación %s 
-\nCálculo: %.1f seg, %d estradas, %d teselas)</string>
+    <string name="new_route_calculated_dist_dbg">Rota: distancia %1$s, tempo de navegación %2$s \nCálculo: %3$.1f seg, %4$d estradas, %5$d teselas)</string>
     <string name="lang_oc">Occitano</string>
     <string name="app_mode_wagon">Vagón</string>
     <string name="app_mode_pickup_truck">Camioneta (pickup)</string>

@@ -3218,8 +3218,7 @@
     <string name="routeInfo_surface_name">Yüzey</string>
     <string name="routeInfo_smoothness_name">Pürüzsüzlük</string>
     <string name="routeInfo_steepness_name">Diklik</string>
-    <string name="new_route_calculated_dist_dbg">Rota: mesafe %s, yönlendirici zamanı %s 
-\nHesaplama: %.1f sn, %d yol, %d döşeme)</string>
+    <string name="new_route_calculated_dist_dbg">Rota: mesafe %1$s, yönlendirici zamanı %2$s \nHesaplama: %3$.1f sn, %4$d yol, %5$d döşeme)</string>
     <string name="change_data_storage_full_description">OsmAnd veri dosyaları yeni hedefe taşınsın mı\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Klasörün yolunu girin</string>

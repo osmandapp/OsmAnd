@@ -3083,8 +3083,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="routeInfo_surface_name">Segums</string>
     <string name="routeInfo_smoothness_name">Caurbraucamība</string>
     <string name="routeInfo_steepness_name">Stāvums</string>
-    <string name="new_route_calculated_dist_dbg">Maršruts: distance %s, navigācijas laiks %s 
-\nKopējais: %.1f sek, %d ceļi, %d flīzes)</string>
+    <string name="new_route_calculated_dist_dbg">Maršruts: distance %1$s, navigācijas laiks %2$s \nKopējais: %3$.1f sek, %4$d ceļi, %5$d flīzes)</string>
     <string name="lang_oc">Oksitāņu</string>
     <string name="app_mode_wagon">Wagon</string>
     <string name="routing_attr_avoid_sett_name">Izvairīties no bruģa un bruģakmens</string>

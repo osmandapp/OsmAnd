@@ -3176,8 +3176,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \n • Arazo konponketa gehiago
 \n
 \n</string>
-    <string name="new_route_calculated_dist_dbg">Ibilbidea: distantzia %s, iraupena %s 
-\nKalkulua: %.1f s, %d errepide, %d lauza)</string>
+    <string name="new_route_calculated_dist_dbg">Ibilbidea: distantzia %1$s, iraupena %2$s \nKalkulua: %3$.1f s, %4$d errepide, %5$d lauza)</string>
     <string name="lang_oc">Okzitaniera</string>
     <string name="app_mode_wagon">Bagoia</string>
     <string name="days_5">Egun</string>

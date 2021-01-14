@@ -3215,8 +3215,7 @@
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Személyes</string>
     <string name="shared_string_downloading_formatted">%s letöltése</string>
-    <string name="new_route_calculated_dist_dbg">Útvonal: távolság %s, menetidő %s
-\nSzámítás: %.1f mp, %d útszakasz, %d csempe</string>
+    <string name="new_route_calculated_dist_dbg">Útvonal: távolság %1$s, menetidő %2$s \nSzámítás: %3$.1f mp, %4$d útszakasz, %5$d csempe</string>
     <string name="rendering_attr_piste_type_downhill_name">Lesikló</string>
     <string name="routeInfo_piste_type_name">Sípálya típusa</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">Haladó</string>

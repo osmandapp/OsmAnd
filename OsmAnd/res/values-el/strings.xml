@@ -3212,8 +3212,8 @@
     <string name="sett_generic_ext_input">Πληκτρολόγιο</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
-    <string name="new_route_calculated_dist_dbg">Διαδρομή: απόσταση %s, χρόνος δρομολογητή %s 
-\nΥπολογισμός: %.1f sec, %d δρόμοι, %d πλακάκια)</string>
+    <string name="new_route_calculated_dist_dbg">Διαδρομή: απόσταση %1$s, χρόνος δρομολογητή %2$s
+\nΥπολογισμός: %3$.1f sec, %4$d δρόμοι, %5$d πλακάκια)</string>
     <string name="lang_oc">Οξιτανικά</string>
     <string name="app_mode_wagon">Οικογενειακό αυτοκίνητο</string>
     <string name="get_discount_title">Αποκτήστε το %1$d %2$s με έκπτωση %3$s.</string>

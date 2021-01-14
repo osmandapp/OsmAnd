@@ -3281,8 +3281,8 @@
 \n</string>
     <string name="turn_screen_on_router">Абуджаць на паваротах</string>
     <string name="app_mode_campervan">Дом на колах</string>
-    <string name="new_route_calculated_dist_dbg">Маршрут: адлегласць %s, час навігацыі %s 
-\nРазлік: %.1f с, %d дарог, %d фрагментаў)</string>
+    <string name="new_route_calculated_dist_dbg">Маршрут: адлегласць %1$s, час навігацыі %2$s
+\nРазлік: %3$.1f с, %4$d дарог, %5$d фрагментаў)</string>
     <string name="lang_oc">Аксітанская</string>
     <string name="app_mode_pickup_truck">Пікап</string>
     <string name="turn_screen_on_info">Паказваць мапу падчас навігацыі на заблакаваным экране.</string>

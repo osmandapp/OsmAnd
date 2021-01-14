@@ -3201,8 +3201,8 @@
     <string name="lang_oc">Okzitanisch</string>
     <string name="app_mode_wagon">Wagen</string>
     <string name="app_mode_pickup_truck">Kleintransporter</string>
-    <string name="new_route_calculated_dist_dbg">Route: Entfernung %s, Fahrzeit %s 
-\nBerechnung: %.1f Sek., %d Straßen, %d Kacheln)</string>
+    <string name="new_route_calculated_dist_dbg">Route: Entfernung %1$s, Fahrzeit %2$s
+\nBerechnung: %3$.1f Sek., %4$d Straßen, %5$d Kacheln)</string>
     <string name="day">Tag</string>
     <string name="days_2_4">Tage</string>
     <string name="days_5">Tage</string>

@@ -3186,8 +3186,8 @@
     <string name="shared_string_track_is_saved">Путања %s сачувана</string>
     <string name="gpx_join_gaps">Спој размаке</string>
     <string name="shared_string_default">Подразумевано</string>
-    <string name="new_route_calculated_dist_dbg">Пут: удаљеност %s, време пута %s 
-\nРачуница: %.1f сек %d пута, %d сличица)</string>
+    <string name="new_route_calculated_dist_dbg">Пут: удаљеност %1$s, време пута %2$s
+\nРачуница: %3$.1f сек %4$d пута, %5$d сличица)</string>
     <string name="lang_oc">Окситански</string>
     <string name="app_mode_wagon">Вагон</string>
     <string name="app_mode_pickup_truck">Камион доставе</string>

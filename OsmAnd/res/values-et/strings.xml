@@ -3331,8 +3331,7 @@
     <string name="routing_attr_allow_classic_only_description">Klassikalises stiilis hooldatud marsruudid ainult ilma uisuradadeta. See hõlmab väiksema mootorsaaniga hooldatud marsruute ja suusatajate käsitsi tehtud radu.</string>
     <string name="routing_attr_difficulty_preference_name">Eelistatud raskusaste</string>
     <string name="routing_attr_difficulty_preference_description">Eelista selle raskusastmega marsruute, ehkki lühema marsruudi korral võib siiski esineda nii raskemaid kui lihtsamaid lõike.</string>
-    <string name="new_route_calculated_dist_dbg">Teekond: vahemaa %s, marsruuteri aeg %s 
-\nArvutamine: %.1f sek, %d teed, %d paani)</string>
+    <string name="new_route_calculated_dist_dbg">Teekond: vahemaa %1$s, marsruuteri aeg %2$s \nArvutamine: %3$.1f sek, %4$d teed, %5$d paani)</string>
     <string name="reset_confirmation_descr">Vajutades nupul %1$s kaovad kõik muudatused.</string>
     <string name="reset_all_profile_settings_descr">Lähtesta kõik profiiliseaded paigaldusjärgsesse olekusse.</string>
     <string name="reset_all_profile_settings">Kas asendame kõik profiiliseaded vaikeväärtustega\?</string>

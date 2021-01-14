@@ -3241,8 +3241,7 @@
     <string name="route_parameters">Parametry trasy</string>
     <string name="manage_profiles_descr">Tworzy, importuje, modyfikuje profile</string>
     <string name="manage_profiles">Zarządzaj profilami aplikacji…</string>
-    <string name="new_route_calculated_dist_dbg">Trasa: dystans %s, czas routera %s 
-\nObliczanie: %.1f sek., %d dróg, %d płytek)</string>
+    <string name="new_route_calculated_dist_dbg">Trasa: dystans %1$s, czas routera %2$s \nObliczanie: %3$.1f sek., %4$d dróg, %5$d płytek)</string>
     <string name="get_discount_first_few_part">%1$s dla pierwszych %2$s</string>
     <string name="get_discount_second_part">następnie %1$s</string>
     <string name="navigate_point_format_olc">Otwórz kod lokalizacji</string>

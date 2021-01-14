@@ -3189,8 +3189,7 @@
     <string name="shared_string_default">Predefinidu</string>
     <string name="gpx_join_gaps">Liga sas separatziones</string>
     <string name="app_mode_campervan">Camper (RV)</string>
-    <string name="new_route_calculated_dist_dbg">Àndala: distàntzia %s, tempus %s 
-\nCàrculu: %.1f seg, %d caminos, %d tasseddos)</string>
+    <string name="new_route_calculated_dist_dbg">Àndala: distàntzia %1$s, tempus %2$s \nCàrculu: %3$.1f seg, %4$d caminos, %5$d tasseddos)</string>
     <string name="lang_oc">Otzitanu</string>
     <string name="app_mode_wagon">Vagone pro sas mertzes</string>
     <string name="app_mode_pickup_truck">Camieddu</string>

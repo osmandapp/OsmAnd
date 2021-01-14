@@ -3238,8 +3238,7 @@
     <string name="shared_string_other">Annet</string>
     <string name="shared_preference">Delt</string>
     <string name="layer_osm_edits">OSM-redigeringer</string>
-    <string name="new_route_calculated_dist_dbg">Rute: Distanse %s, rutingstid %s 
-\nUtregning: %.1f sec, %d veier, %d flis)</string>
+    <string name="new_route_calculated_dist_dbg">Rute: Distanse %1$s, rutingstid %2$s \nUtregning: %3$.1f sec, %4$d veier, %5$d flis)</string>
     <string name="contour_lines_and_hillshade">Koter og relieffskygge</string>
     <string name="update_all_maps">Oppdater alle kart</string>
     <string name="update_all_maps_q">Er du sikker på at du vil oppdatere alle (%1$d) kart\?</string>

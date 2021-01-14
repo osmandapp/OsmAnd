@@ -3239,8 +3239,7 @@
     <string name="routeInfo_roadClass_name">Wegtype</string>
     <string name="shared_string_open_track">Track openen</string>
     <string name="gpx_join_gaps">Verbind onderbrekingen</string>
-    <string name="new_route_calculated_dist_dbg">Route: afstand %s, reistijd %s
-\nBerekening: %.1f sec, %d wegen, %d tegels)</string>
+    <string name="new_route_calculated_dist_dbg">Route: afstand %1$s, reistijd %2$s \nBerekening: %3$.1f sec, %4$d wegen, %5$d tegels)</string>
     <string name="lang_oc">Occitaans</string>
     <string name="app_mode_wagon">Stationwagon</string>
     <string name="app_mode_pickup_truck">Pick-up truck</string>
