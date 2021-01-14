@@ -1,7 +1,13 @@
 package net.osmand.plus.routing.data;
 
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
+
 import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
@@ -42,6 +48,10 @@ public class AnnounceTimeDistances {
 	private int LONG_ALARM_ANNOUNCE_RADIUS;
 	private int SHORT_ALARM_ANNOUNCE_RADIUS;
 
+	private String format;
+	private String meter;
+	private String second;
+
 	public AnnounceTimeDistances(ApplicationMode appMode, OsmandSettings settings) {
 		if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			// keep it as minimum 30 km/h for voice announcement
@@ -50,6 +60,7 @@ public class AnnounceTimeDistances {
 			// minimal is 1 meter for turn now
 			DEFAULT_SPEED = (float) Math.max(0.3, appMode.getDefaultSpeed());
 		}
+
 
 		// 300 s: car 3750 m (113 s @ 120 km/h)
 		PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 300);
@@ -79,28 +90,7 @@ public class AnnounceTimeDistances {
 		}
 
 		float ARRIVAL_DISTANCE_FACTOR = Math.max(settings.ARRIVAL_DISTANCE_FACTOR.getModeValue(appMode), 0.1f);
-
-		// Turn now: 3.5 s normal speed, 7 s for half speed (default)
-		// float TURN_NOW_TIME = 7;
-		// ** #8749 to keep 1m / 1 sec precision (POSITIONING_TOLERANCE = 12 m)
-		// car 50 km/h - 7 s, bicycle 10 km/h - 3 s, pedestrian 4 km/h - 2 s, 1 km/h - 1 s
-		float TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
-
-		// 3.6 s: car 45 m, bicycle 10 m -> 12 m, pedestrian 4 m -> 12 m (capped by POSITIONING_TOLERANCE)
-		TURN_NOW_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 3.6) * ARRIVAL_DISTANCE_FACTOR);
-		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
-
-		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (capped by POSITIONING_TOLERANCE)
-		ARRIVAL_DISTANCE =  (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * ARRIVAL_DISTANCE_FACTOR);
-
-		// 20 s: car 250 m, bicycle 56 m, pedestrian 22 m
-		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * ARRIVAL_DISTANCE_FACTOR; // 20 seconds
-
-		// assume for backward compatibility speed - 10 m/s
-		SHORT_ALARM_ANNOUNCE_RADIUS = (int) (7 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 70 m
-		LONG_ALARM_ANNOUNCE_RADIUS = (int) (12 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 120 m
-		SHORT_PNT_ANNOUNCE_RADIUS = (int) (15 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 150 m
-		LONG_PNT_ANNOUNCE_RADIUS = (int) (60 * DEFAULT_SPEED * ARRIVAL_DISTANCE_FACTOR); // 600 m
+		setArrivalDistances(ARRIVAL_DISTANCE_FACTOR);
 
 		// Trigger close prompts earlier to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 		int ams = settings.AUDIO_MANAGER_STREAM.getModeValue(appMode);
@@ -109,6 +99,31 @@ public class AnnounceTimeDistances {
 				voicePromptDelayTimeSec = (double) settings.VOICE_PROMPT_DELAY[ams].get() / 1000;
 			}
 		}
+	}
+
+	public void setArrivalDistances(float arrivalDistanceFactor) {
+		arrivalDistanceFactor = Math.max(arrivalDistanceFactor, 0.1f);
+		// Turn now: 3.5 s normal speed, 7 s for half speed (default)
+		// float TURN_NOW_TIME = 7;
+		// ** #8749 to keep 1m / 1 sec precision (POSITIONING_TOLERANCE = 12 m)
+		// car 50 km/h - 7 s, bicycle 10 km/h - 3 s, pedestrian 4 km/h - 2 s, 1 km/h - 1 s
+		float TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
+
+		// 3.6 s: car 45 m, bicycle 10 m -> 12 m, pedestrian 4 m -> 12 m (capped by POSITIONING_TOLERANCE)
+		TURN_NOW_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 3.6) * arrivalDistanceFactor);
+		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
+
+		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (capped by POSITIONING_TOLERANCE)
+		ARRIVAL_DISTANCE =  (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
+
+		// 20 s: car 250 m, bicycle 56 m, pedestrian 22 m
+		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * arrivalDistanceFactor; // 20 seconds
+
+		// assume for backward compatibility speed - 10 m/s
+		SHORT_ALARM_ANNOUNCE_RADIUS = (int) (7 * DEFAULT_SPEED * arrivalDistanceFactor); // 70 m
+		LONG_ALARM_ANNOUNCE_RADIUS = (int) (12 * DEFAULT_SPEED * arrivalDistanceFactor); // 120 m
+		SHORT_PNT_ANNOUNCE_RADIUS = (int) (15 * DEFAULT_SPEED * arrivalDistanceFactor); // 150 m
+		LONG_PNT_ANNOUNCE_RADIUS = (int) (60 * DEFAULT_SPEED * arrivalDistanceFactor); // 600 m
 	}
 
 	public int getImminentTurnStatus(float dist, Location loc) {
@@ -199,38 +214,90 @@ public class AnnounceTimeDistances {
 		return (int) (dist - voicePromptDelayTimeSec * speed);
 	}
 
-	private void appendTurnDesc(StringBuilder s, String name, int dist) {
-		appendTurnDesc(s, name, dist, DEFAULT_SPEED);
+	public Spannable getIntervalsDescription(OsmandApplication app) {
+		format = "\n%s: %d - %d %s, %d %s.";
+		meter = app.getString(R.string.m);
+		second = app.getString(R.string.shared_string_sec);
+
+		String turn = app.getString(R.string.announcement_time_turn);
+		String arrive = app.getString(R.string.announcement_time_arrive);
+		String offRoute = app.getString(R.string.announcement_time_off_route);
+		String traffic = "\n" + app.getString(R.string.way_alarms);
+		String point = "\n" + String.format(
+				"%s / %s / %s", app.getString(R.string.shared_string_waypoint),
+				app.getString(R.string.favorite), app.getString(R.string.poi)
+		);
+
+		String prepare = "   • " + app.getString(R.string.announcement_time_prepare);
+		String longPrepare = "   • " + app.getString(R.string.announcement_time_prepare_long);
+		String approach = "   • " + app.getString(R.string.announcement_time_approach);
+		String passing = "   • " + app.getString(R.string.announcement_time_passing);
+
+		SpannableStringBuilder builder = new SpannableStringBuilder();
+
+		// Turn
+		builder.append(turn);
+		makeBold(builder, turn);
+		if (PREPARE_DISTANCE_END <= PREPARE_DISTANCE) {
+			appendDescr(builder, prepare, PREPARE_DISTANCE);;
+		}
+		if (PREPARE_LONG_DISTANCE_END <= PREPARE_LONG_DISTANCE) {
+			appendDescr(builder, longPrepare, PREPARE_LONG_DISTANCE);
+		}
+		appendDescr(builder, approach, TURN_IN_DISTANCE);
+		appendDescr(builder, passing, TURN_NOW_DISTANCE, TURN_NOW_SPEED);
+
+		// Arrive at destination
+		appendDescr(builder, arrive, (int) (getArrivalDistance()));
+		makeBoldFormatted(builder, arrive);
+
+		// Off-route
+		if (getOffRouteDistance() > 0) {
+			appendDescr(builder, offRoute, (int) getOffRouteDistance());
+			makeBoldFormatted(builder, offRoute);
+		}
+
+		// Traffic warnings
+		builder.append(traffic);
+		makeBold(builder, traffic);
+		appendDescr(builder, approach, LONG_ALARM_ANNOUNCE_RADIUS);
+		appendDescr(builder, passing, SHORT_ALARM_ANNOUNCE_RADIUS);
+
+		// Waypoint / Favorite / POI
+		builder.append(point);
+		makeBold(builder, point);
+		appendDescr(builder, approach, LONG_PNT_ANNOUNCE_RADIUS);
+		appendDescr(builder, passing, SHORT_PNT_ANNOUNCE_RADIUS);
+
+		return builder;
 	}
 
-	private void appendTurnDesc(StringBuilder s, String name, int dist, float speed) {
+	private void appendDescr(SpannableStringBuilder b, String word, int dist) {
+		appendDescr(b, word, dist, DEFAULT_SPEED);
+	}
+
+	private void appendDescr(SpannableStringBuilder b, String word, int dist, float speed) {
 		int minDist = (dist / 5) * 5;
 		int time = (int) (dist / speed);
 		if(time > 15) {
 			// round to 5
 			time = (time / 5) * 5;
 		}
-		s.append(String.format("%s: %d - %d m, %d sec\n", name, minDist, minDist + 5, time));
+		b.append(String.format(format, word, minDist, minDist + 5, meter, time, second));
 	}
 
-	public String getTurnsDescription() {
-		StringBuilder turnDescriptions = new StringBuilder();
-		appendTurnDesc(turnDescriptions, "Turn (now)", TURN_NOW_DISTANCE, TURN_NOW_SPEED);
-		appendTurnDesc(turnDescriptions, "Turn (approach)", TURN_IN_DISTANCE);
-		if (PREPARE_DISTANCE_END <= PREPARE_DISTANCE) {
-			appendTurnDesc(turnDescriptions, "Turn (prepare)", PREPARE_DISTANCE);
-		}
-		if (PREPARE_LONG_DISTANCE_END <= PREPARE_LONG_DISTANCE) {
-			appendTurnDesc(turnDescriptions, "Turn (early prepare)", PREPARE_LONG_DISTANCE);
-		}
-		appendTurnDesc(turnDescriptions, "Arrival",  (int) getArrivalDistance());
-		if (getOffRouteDistance() > 0) {
-			appendTurnDesc(turnDescriptions, "Off-route", (int) getOffRouteDistance());
-		}
-		appendTurnDesc(turnDescriptions, "Alarm (close)",  SHORT_ALARM_ANNOUNCE_RADIUS);
-		appendTurnDesc(turnDescriptions, "Alarm (standard)",  LONG_ALARM_ANNOUNCE_RADIUS);
-		appendTurnDesc(turnDescriptions, "Waypoint / fav / POI (passing)",  SHORT_PNT_ANNOUNCE_RADIUS);
-		appendTurnDesc(turnDescriptions, "Waypoint / fav / POI (approaching)",  LONG_PNT_ANNOUNCE_RADIUS);
-		return turnDescriptions.toString();
+	private void makeBold(SpannableStringBuilder b, String word) {
+		int end = b.length();
+		int start = end - word.length();
+		b.setSpan(new StyleSpan(Typeface.BOLD), start, end,
+				SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE);
 	}
+
+	private void makeBoldFormatted(SpannableStringBuilder b, String word) {
+		int start = b.toString().indexOf(word);
+		int end = start + word.length() + 1;
+		b.setSpan(new StyleSpan(Typeface.BOLD), start, end,
+				SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE);
+	}
+
 }

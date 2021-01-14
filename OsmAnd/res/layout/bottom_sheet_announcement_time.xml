@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/bottom_sheet_exit_button_margin">
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/announcement_time_title"
+        android:gravity="center_vertical"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/default_list_text_size"
+        android:textStyle="bold"
+        osmand:typeface="@string/font_roboto_medium"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_marginTop="@dimen/content_padding_small"
+        android:layout_marginRight="@dimen/content_padding"
+        android:layout_marginStart="@dimen/content_padding"
+        android:layout_marginEnd="@dimen/content_padding"/>
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/announcement_time_descr"
+        android:textSize="@dimen/default_desc_text_size"
+        android:textColor="?android:textColorSecondary"
+        android:lineSpacingMultiplier="1.1"
+        osmand:typeface="@string/font_roboto_regular"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_marginRight="@dimen/content_padding"
+        android:layout_marginStart="@dimen/content_padding"
+        android:layout_marginEnd="@dimen/content_padding"/>
+
+    <ImageView
+        android:id="@+id/iv_illustration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_marginTop="@dimen/content_padding_small"
+        android:layout_marginRight="@dimen/content_padding"
+        android:layout_marginStart="@dimen/content_padding"
+        android:layout_marginEnd="@dimen/content_padding"
+        tools:srcCompat="@drawable/img_help_announcement_time_day"/>
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:id="@+id/tv_seek_bar_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/default_list_text_size"
+        android:textColor="@color/active_color_primary_light"
+        osmand:typeface="@string/font_roboto_medium"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_marginTop="@dimen/content_padding_small"
+        android:layout_marginRight="@dimen/content_padding"
+        android:layout_marginStart="@dimen/content_padding"
+        android:layout_marginEnd="@dimen/content_padding"
+        tools:text="Normal" />
+
+    <SeekBar
+        android:id="@+id/seek_bar_arrival"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="3"
+        android:maxHeight="2dp"
+        android:progressDrawable="@drawable/seekbar_progress_announcement_time"
+        android:thumb="@drawable/seekbar_thumb_announcement_time"
+        osmand:tickMark="@drawable/seekbar_tickmark_announcement_time"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        android:layout_marginTop="@dimen/pages_item_margin"
+        tools:progress="1" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/content_padding_small"
+        tools:background="@color/divider_color" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_marginTop="@dimen/content_padding_small"
+        android:layout_marginRight="@dimen/content_padding"
+        android:layout_marginStart="@dimen/content_padding"
+        android:layout_marginEnd="@dimen/content_padding">
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/announcement_time_intervals"
+            android:textSize="@dimen/default_list_text_size"
+            android:textColor="?android:textColorPrimary"
+            osmand:typeface="@string/font_roboto_regular" />
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            app:srcCompat="@drawable/ic_action_arrow_down"
+            app:tint="@color/icon_color_default_dark" />
+    </FrameLayout>
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:id="@+id/tv_interval_descr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textSize="@dimen/default_list_text_size"
+        android:lineSpacingMultiplier="1.2"
+        osmand:typeface="@string/font_roboto_regular"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_marginTop="@dimen/content_padding_small"
+        android:layout_marginRight="@dimen/content_padding"
+        android:layout_marginStart="@dimen/content_padding"
+        android:layout_marginEnd="@dimen/content_padding"
+        tools:visibility="visible"
+        tools:text="Turn
+        \n   • Prepare: 315 - 320 m, 110 sec.
+        \n   • Approach: 60 - 65 m, 20 sec.
+        \n   • Passing: 5 - 10 m, 3 sec.
+        \nArrive at destination: 5 - 10 m, 2 sec.
+        \nOff-route: 25 - 30 m, 9 sec.
+        \nTraffic warnings
+        \n   • Approach: 5 - 10 m, 3 sec.
+        \n   • Passing: 15 - 20 m, 4 sec.
+        \nWaypoint / Favourite / POI
+        \n   • Approach: 80 - 85 m, 25 sec
+        \n   • Passing: 20 - 25 m, 7 sec. "/>
+
+</LinearLayout>

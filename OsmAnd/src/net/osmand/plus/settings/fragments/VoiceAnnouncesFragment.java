@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
@@ -30,6 +31,7 @@ import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 
 import java.util.Set;
@@ -42,7 +44,24 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
 
 	private static final String MORE_VALUE = "MORE_VALUE";
+	private static final String ARRIVAL_DISTANCE_FACTOR = "arrival_distance_factor";
 	private static final String VOICE_PROMPTS_TIMETABLE = "voice_prompts_timetable";
+
+	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		String prefId = preference.getKey();
+
+		if (prefId.equals(ARRIVAL_DISTANCE_FACTOR)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				AnnouncementTimeBottomSheet.showInstance(
+						fragmentManager, preference.getKey(), this, getSelectedAppMode()
+				);
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
+	}
 
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
@@ -110,13 +129,14 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 	private void updateVoicePromptsTimes() {
 		Preference pref = findPreference(VOICE_PROMPTS_TIMETABLE);
-		if (OsmandPlugin.isDevelopment()) {
-			AnnounceTimeDistances atd = new AnnounceTimeDistances(getSelectedAppMode(), settings);
-			pref.setSummary(atd.getTurnsDescription().trim());
-			pref.setVisible(true);
-		} else {
-			pref.setVisible(false);
-		}
+//		if (OsmandPlugin.isDevelopment()) {
+//			AnnounceTimeDistances atd = new AnnounceTimeDistances(getSelectedAppMode(), settings);
+//			pref.setSummary(atd.getTurnsDescription().trim());
+//			pref.setVisible(true);
+//		} else {
+//			pref.setVisible(false);
+//		}
+		pref.setVisible(false);
 	}
 
 	private void setupSpeedLimitExceedPref() {
