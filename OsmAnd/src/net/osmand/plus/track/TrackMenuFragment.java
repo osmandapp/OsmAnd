@@ -454,6 +454,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == ANALYZE_BY_INTERVALS_BUTTON_INDEX) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				TrkSegment segment = gpxFile.getGeneralSegment();
+				if (segment == null) {
+					List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+					if (!Algorithms.isEmpty(segments)) {
+						segment = segments.get(0);
+					}
+				}
 				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
 				List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 				if (segment != null && !Algorithms.isEmpty(items)) {
