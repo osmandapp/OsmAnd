@@ -248,12 +248,17 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 						if (engine.vehicleType != vehicle) {
 							engine.vehicleType = vehicle;
 							updateCardViews(nameCard, vehicleCard, exampleCard);
+							if (vehicle == VehicleType.CUSTOM) {
+								vehicleCard.updateBottomMarginSelectionMenu((int) getResources().getDimension(R.dimen.content_padding));
+							}  else {
+								vehicleCard.updateBottomMarginSelectionMenu(0);
+							}
 							return true;
 						}
 						return false;
 					}
 				});
-		vehicleCard.removeBottomMarginSelectionMenu();
+		vehicleCard.updateBottomMarginSelectionMenu(0);
 		vehicleCard.setFieldBoxLabelText(getString(R.string.shared_string_custom));
 		vehicleCard.setOnTextChangedListener(new OnTextChangedListener() {
 			@Override

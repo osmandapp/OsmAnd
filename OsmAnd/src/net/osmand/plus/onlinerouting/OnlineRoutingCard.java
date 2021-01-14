@@ -128,9 +128,9 @@ public class OnlineRoutingCard extends BaseCard {
 		rvSelectionMenu.setAdapter(adapter);
 	}
 
-	public void removeBottomMarginSelectionMenu() {
+	public void updateBottomMarginSelectionMenu(int bottomMargin) {
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rvSelectionMenu.getLayoutParams();
-		params.bottomMargin = 0;
+		params.bottomMargin = bottomMargin;
 	}
 
 	public void setDescription(@NonNull String description) {
