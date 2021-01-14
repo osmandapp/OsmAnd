@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,12 +62,14 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 	private View view;
 	private ViewGroup segmentsContainer;
+	private ViewGroup scrollView;
 	private OnlineRoutingCard nameCard;
 	private OnlineRoutingCard typeCard;
 	private OnlineRoutingCard vehicleCard;
 	private OnlineRoutingCard apiKeyCard;
 	private OnlineRoutingCard exampleCard;
 	private View testResultsContainer;
+	private ViewTreeObserver.OnScrollChangedListener onScroll;
 
 	private ApplicationMode appMode;
 
@@ -137,6 +140,20 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		view = getInflater().inflate(
 				R.layout.online_routing_engine_fragment, container, false);
 		segmentsContainer = (ViewGroup) view.findViewById(R.id.segments_container);
+		scrollView = (ViewGroup) segmentsContainer.getParent();
+		onScroll = new ViewTreeObserver.OnScrollChangedListener() {
+			int pastY = 0;
+			@Override
+			public void onScrollChanged() {
+				int y = scrollView.getScrollY();
+				if (pastY != y) {
+					pastY = y;
+					View vieww = view.findFocus();
+					AndroidUtils.hideSoftKeyboard(requireActivity(), vieww);
+				}
+			}
+		};
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(onScroll);
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 		}
@@ -154,6 +171,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 		updateCardViews(nameCard, typeCard, vehicleCard, exampleCard);
 		return view;
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		scrollView.getViewTreeObserver().removeOnScrollChangedListener(onScroll);
 	}
 
 	private void setupNameCard() {
