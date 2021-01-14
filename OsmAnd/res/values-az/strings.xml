@@ -45,7 +45,6 @@
     <string name="no_inet_connection">İnternet bağlantısı yoxdur</string>
     <string name="search_location">Məkan axtarılır…</string>
     <string name="storage_free_space">Boş yaddaş</string>
-    <string name="no_update_info">Yeni versiyaları göstərmə</string>
     <string name="int_continuosly">Davam et</string>
     <string name="shared_string_change">Dəyiş</string>
     <string name="get_started">Başla</string>
@@ -725,7 +724,6 @@
     <string name="versions_item">Versiyalar</string>
     <string name="contact_us">Əlaqə</string>
     <string name="use_drawer_btn">Menyu istifadə et</string>
-    <string name="update">Yenilə</string>
     <string name="only_download_over_wifi">Yalnız Wi-Fi ilə endir</string>
     <string name="update_now">İndi yenilə</string>
     <string name="last_update">Son yeniləmə: %s</string>
@@ -788,8 +786,6 @@
     <string name="rendering_attr_contourDensity_name">Kontur xəttinin sıxlığı</string>
     <string name="rendering_attr_contourWidth_description">Kontur xəttinin genişliyi</string>
     <string name="rendering_attr_contourWidth_name">Kontur xəttinin genişliyi</string>
-    <string name="legacy_search">Köhnə axtarış</string>
-    <string name="show_legacy_search">Köhnə axtarışı göstər</string>
     <string name="upload_osm_note_description">OSM qeydinizi anonim və ya OpenStreetMap.org profilinizi istifadə edərək yükləyin.</string>
     <string name="wiki_around">Yaxındakı Vikipediya məqalələri</string>
     <string name="search_map_hint">Şəhər və ya ölkə axtarın</string>
@@ -1099,7 +1095,6 @@
     <string name="error_calculating_route">Marşrut hesablana bilmədi.</string>
     <string name="error_calculating_route_occured">Marşrut hesablana bilmədi.</string>
     <string name="empty_route_calculated">Hesablanan marşrut boşdur.</string>
-    <string name="new_route_calculated_dist">Yeni marşrut hesablandı, məsafə</string>
     <string name="arrived_at_destination">Təyinat nöqtənizə gəlib çatdınız</string>
     <string name="invalid_locations">Yanlış koordinatlar</string>
     <string name="use_online_routing_descr">Marşrutu hesablamaq üçün internet istifadə et.</string>
@@ -1268,7 +1263,6 @@
     <string name="first_usage_wizard_desc">OsmAnd-a məkanınızı müəyyənləşdirmək və həmin region üçün xəritə endirməsi təklif etmək icazəsi verin.</string>
     <string name="give_permission">İcazə ver</string>
     <string name="first_usage_greeting">İnternet bağlantısı olmadan istiqamətlər alın və yeni yerlər kəşf edin</string>
-    <string name="no_update_info_desc">Yeni versiyaları və ya OsmAnd ilə bağlı endirimləri yoxlama.</string>
     <string name="access_disable_offroute_recalc">Çıxanda marşrut yenidən hesablanmasın</string>
     <string name="access_disable_wrong_direction_recalc">Əks istiqamət üçün marşrut yenidən hesablanmasın</string>
     <string name="recalculate_route">Marşrutu yenidən hesabla</string>
@@ -1967,7 +1961,6 @@
     <string name="access_smart_autoannounce_descr">Yalnız hədəf nöqtəyə istiqamət dəyişilən zaman bildir.</string>
     <string name="plugin_mapillary_descr">Hər kəs üçün küçə səviyyəli şəkillər. Yerləri kəşf edin, əməkdaşlıq edin, dünyanı çəkin.</string>
     <string name="auto_split_recording_descr">6 dəqiqə fasilədən sonra yeni seqment, 2 saat fasilədən sonra yeni iz, ya da tarix dəyişdiyində uzun fasilədən sonra yeni fayl başlat.</string>
-    <string name="show_legacy_search_desc">Menyuya köhnə axtarışı əlavə et.</string>
     <string name="save_track_min_distance">Qeydiyyatın minimum yerdəyişməsi</string>
     <string name="save_track_min_distance_descr">Filtr: Nöqtənin qeydiyyatı üçün son mövqedən minimum məsafəni seçin.</string>
     <string name="save_track_precision">Qeydiyyatın minimum dəqiqliyi</string>

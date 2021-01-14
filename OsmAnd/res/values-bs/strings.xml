@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   <string name="asap">Što prije</string>
-  
-  <string name="route_roundabout">Kružni tok : idite %1$d izlaz i idite</string>
+    <string name="route_roundabout">Kružni tok : idite %1$d izlaz i idite</string>
   <string name="route_kl">Držite se lijeve strane i idite</string>
   <string name="route_kr">Držite se desne strane i idite</string>
   <string name="rendering_attr_noPolygons_description">Sve prave slike zemljišta učinite providnim</string>
@@ -17,12 +16,10 @@
   <string name="navpoint_search_desc">Koordinate</string>
   <string name="transport_search_desc">Pretraga transporta</string>
   <string name="favourites_search_desc">Pretraga omiljenih</string>
-  
-  <string name="offline_navigation_not_available">OsmAnd navigacija van mreže trenutno nije dostupna.</string>
+    <string name="offline_navigation_not_available">OsmAnd navigacija van mreže trenutno nije dostupna.</string>
   <string name="left_side_navigation">Vožnja sa lijeve strane</string>
   <string name="left_side_navigation_descr">Izaberite za zemlje gdje se vozi lijevom stranom</string>
-  
-  <string name="unknown_from_location">Početna tačka još uvijek nije određena</string>
+    <string name="unknown_from_location">Početna tačka još uvijek nije određena</string>
   <string name="unknown_location">Pozicija je još uvijek nepoznata</string>
   <string name="modify_transparency">Odredite providnost (0 - providno, 255 - vidljivo)</string>
   <string name="confirm_interrupt_download">Da li ste sigurni da želite prekinuti preuzimanje datoteke?</string>
@@ -31,16 +28,13 @@
   <string name="select_index_file_to_download">Ništa nije pronađeno. Ako ne možete pronaći svoju regiju, možete ju sami napraviti (opširnije na http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Mape van mreže (u sličicama)</string>
   <string name="local_indexes_cat_map">Mape van mreže (vektori)</string>
-  
-  <string name="index_settings_descr">Preuzmite, pogledajte detalje i uredite mape van mreže</string>
+    <string name="index_settings_descr">Preuzmite, pogledajte detalje i uredite mape van mreže</string>
   <string name="map_online_plugin_is_not_installed">Omogući nadogradnju za izbor drugačijih izvora javnih mapa</string>
   <string name="map_online_data">Javne mape (u sličicama)</string>
   <string name="map_online_data_descr">Koristi javne mape (preuzmi i keširaj sličice na memorijsku karticu)</string>
   <string name="shared_string_online_maps">Javne mape</string>
   <string name="online_map_settings_descr">Podesi izvor sličica javnih ili keširanih mapa</string>
-  
-  
-  <string name="osmand_parking_hours">Sati</string>
+    <string name="osmand_parking_hours">Sati</string>
   <string name="osmand_parking_minutes">Minuta</string>
   <string name="osmand_parking_position_description_add_time">Automobil je parkiran od:</string>
   <string name="use_compass_navigation">Koristi kompas</string>
@@ -49,16 +43,12 @@
   <string name="show_cameras">Prikaži kamere za mjerenje brzine</string>
   <string name="show_traffic_warnings">Prikaži saobraćajna upozorenja</string>
   <string name="avoid_toll_roads">Izbjegavaj ceste sa naplatom</string>
-  
-  <string name="map_widget_top_text">Naziv ulice</string>
+    <string name="map_widget_top_text">Naziv ulice</string>
   <string name="map_widget_back_to_loc">Gdje sam</string>
   <string name="map_widget_lock_screen">Zaključaj ekran</string>
   <string name="map_widget_compass">Kompas</string>
-  
-  <string name="map_widget_reset">Resetuj na zadano</string>
-  
-  
-  <string name="map_widget_parking">Parkiralište</string>
+    <string name="map_widget_reset">Resetuj na zadano</string>
+    <string name="map_widget_parking">Parkiralište</string>
   <string name="map_widget_speed">Brzina</string>
   <string name="map_widget_distance">Target</string>
   <string name="map_widget_altitude">Visina</string>
@@ -78,7 +68,6 @@
 <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
     <string name="shared_string_map">Karta</string>
-    
     <string name="stop_routing_confirm">Jeste li sigurni da želite zaustaviti navigaciju?</string>
     <string name="clear_dest_confirm">Jeste li sigurni da želite ukloniti tačku odredišta?</string>
     <string name="recording_context_menu_show">Prikaži</string>
@@ -95,8 +84,6 @@
     <string name="recording_default_name">Snimanje</string>
     <string name="shared_string_control_stop">stani</string>
     <string name="shared_string_control_start">pokreni</string>
-    
-    
     <string name="index_srtm_parts">dijelovi</string>
     <string name="download_roads_only_item">Samo ceste</string>
     <string name="rendering_attr_noAdminboundaries_name">Sakrij granice</string>
@@ -120,8 +107,7 @@
     <string name="prefer_in_routing_title">Preferiraj…</string>
 	<string name="prefer_in_routing_descr">Preferiraj autocestu</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    
-	<string name="map_widget_gps_info">GPS status</string>
+    <string name="map_widget_gps_info">GPS status</string>
     <string name="shared_string_no">Ne</string>
 	<string name="shared_string_yes">Da</string>
 	</resources>

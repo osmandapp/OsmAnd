@@ -720,7 +720,6 @@
     <string name="error_calculating_route">Route konnte nicht berechnet werden.</string>
     <string name="error_calculating_route_occured">Route konnte nicht berechnet werden.</string>
     <string name="empty_route_calculated">Berechnete Route ist leer.</string>
-    <string name="new_route_calculated_dist">Route neu berechnet, Entfernung</string>
     <string name="arrived_at_destination">Sie sind angekommen.</string>
     <string name="invalid_locations">Koordinaten sind ungültig</string>
     <string name="go_back_to_osmand">Zurück zur Karte</string>
@@ -814,7 +813,6 @@
     <string name="osb_comment_dialog_error">Kommentar konnte nicht hinzugefügt werden.</string>
     <string name="poi_edit_title">POI bearbeiten</string>
     <string name="poi_create_title">POI erstellen</string>
-    <string name="poi_error_poi_not_found">Punkt wurde nicht gefunden oder das Objekt besteht aus mehreren Punkten, was noch nicht unterstützt wird.</string>
     <string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar)?</string>
     <string name="poi_remove_title">POI löschen</string>
     <string name="shared_string_delete">Löschen</string>
@@ -2021,9 +2019,7 @@
     <string name="allow_access_location">Standortbestimmung zulassen</string>
     <string name="first_usage_greeting">Erhalten Sie Wegbeschreibungen und entdecken Sie neue Orte ohne Internetverbindung</string>
     <string name="search_my_location">Meinen Standort bestimmen</string>
-    <string name="no_update_info">Keine Aktualisierungen anzeigen</string>
     <string name="skip_map_downloading">Herunterladen der Karten überspringen</string>
-    <string name="no_update_info_desc">Keine Versionsaktualisierungen oder OsmAnd-Angebote abfragen.</string>
     <string name="si_mi_meters">Meilen/Meter</string>
     <string name="osm_live_banner_desc">Erhalten Sie unbegrenzte Kartendownloads, fügt wöchentliche, tägliche oder sogar stündliche Updates hinzu.</string>
     <string name="osmand_plus_banner_desc">Unbegrenzte Karten-Downloads, -Aktualisierungen und die Wikipedia-Erweiterung.</string>
@@ -2079,9 +2075,6 @@
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
     <string name="search_map_hint">Stadt oder Region</string>
-    <string name="legacy_search">Alte Suche</string>
-    <string name="show_legacy_search">Alte Suche einblenden</string>
-    <string name="show_legacy_search_desc">Alte Suche im Seitenmenü hinzufügen.</string>
     <string name="routing_attr_allow_motorway_name">Autobahnen benutzen</string>
     <string name="routing_attr_allow_motorway_description">Erlaubt Autobahnen.</string>
     <string name="lang_sr_latn">Serbisch (lateinisch)</string>
@@ -2596,15 +2589,6 @@
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu einem beliebigen Punkt auf der Karte hinzufügen, indem Sie die Widgets oder Kontextmenüs verwenden.</string>
     <string name="notes_by_date">Audio-/Video-Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
-    <string name="release_3_0">• Neu: Unterstützung weltweiter Offline-Reiseführer. Verknüpfung beschriebener Sehenswürdigkeiten zur Landkarte. Die Inhalte basieren derzeit auf Wikivoyage.
-\n
-\n • Wikipedia: Neues Layout, anklickbare Links, Bilder
-\n
-\n • Unterstützung der Gruppierung von GPX Wegpunkten
-\n
-\n • Kartenmarkierungen: Import auswählbarer Gruppen aus GPX-Dateien, Koordinateneingabe, neues Layout
-\n
-\n • OsmAnd Live-Abonnement unterstützt nun alle OsmAnd Funktionen</string>
     <string name="one_tap_active">\'Ein Klick\' aktiv</string>
     <string name="what_is_here">Was ist hier:</string>
     <string name="without_time_limit">Ohne Zeitbegrenzung</string>
@@ -2789,45 +2773,14 @@
     <string name="send_search_query_description">Ihre Suchanfrage wird an: \"%1$s\" gesendet, zusammen mit Ihrem Standort.
 \n
 \nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
-    <string name="search_no_results_description">Keine Ergebnisse?
-\nNehmen Sie Kontakt mit uns auf.</string>
     <string name="send_search_query">Suchanfrage senden?</string>
     <string name="shared_string_world">Welt</string>
     <string name="increase_search_radius_to">Vergrößerung des Suchradius auf %1$s</string>
-    <string name="release_3_1">• Navigation Fix: Fortschrittsbalken, schneller Wechsel des Start- und Endpunkts der Route 
-\n 
-\n • Map-Marker Fix: Gruppen An-/Ausschalten, Möglichkeit Marker auf der Karte zu verstecken 
-\n 
-\n • OSM-Bearbeitung: Bearbeitung für Nicht-Punkt-Objekte und Wege, Behebung fehlender Kommentare zu Notizen, Sicherung von Änderungen 
-\n 
-\n • Verbessere Wikipedia und Wikivoyage Parsing, aktualisierte Dateien sind bereits verfügbar 
-\n 
-\n • Kontextmenü: fix Transportschilderfarbe im Nachtmodus, fix zusätzliche Menügrößen 
-\n
-\n • Bootnavigation: Unterstützung für Fahrrinnen
-\n 
-\n • Andere Fehlerbehebungen</string>
     <string name="thank_you_for_feedback">Danke für Ihr Feedback</string>
     <string name="poi_cannot_be_found">Knoten oder Weg kann nicht gefunden werden.</string>
     <string name="search_no_results_feedback">Keine Suchergebnisse?
 \nGeben Sie uns eine Rückmeldung</string>
-    <string name="commiting_way">Übertrage Weg…</string>
     <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachausgabe an, um fehlende oder fehlerhafte Anweisungen zu erkennen</string>
-    <string name="release_3_2_pre">• Absturz beim Start behoben, der bei manchen Geräten auftrat 
-\n 
-\n• Neue Funktion für Markierungen: Anzeigen bereits passierter Markierungen
-\n 
-\n• Suchverlauf zeigt nun zuvor gesuchte Kategorien 
-\n 
-\n• Absturz beim Start von nicht-lateinischen Karten behoben 
-\n 
-\n• Verbesserte Rendering-Geschwindigkeit auf Android 8.0-Geräten 
-\n 
-\n• Unterstützung für die Bearbeitung von Flächen-POI 
-\n 
-\n• Distanz Messen: Schaltfläche \"Messen\" zu Aktionen im Kontextmenü hinzugefügt 
-\n 
-\n</string>
     <string name="ask_for_location_permission">Bitte gewähren Sie OsmAnd den Zugriff auf den Standort, um fortzufahren.</string>
     <string name="rendering_value_black_name">Schwarz</string>
     <string name="search_street">Straße suchen</string>
@@ -2960,23 +2913,6 @@
     <string name="rendering_attr_highway_class_path_name">Weg</string>
     <string name="rendering_attr_highway_class_cycleway_name">Radweg</string>
     <string name="rendering_attr_undefined_name">Undefiniert</string>
-    <string name="release_3_3">• Neuer Bildschirm \'Navigation\': Zeigt Tasten mit den Zielen \'Zuhause\' und \'Arbeit\', eine \'Vorherige Route\'-Verknüpfung, eine Liste aktiver GPX-Tracks und Markierungen, den Suchverlauf. 
-\n 
-\n• Weitere Informationen unter \'Routendetails\': Straßentypen, -oberfläche, Steilheit, Oberflächenbeschaffenheit 
-\n 
-\n• Navigation im öffentlichen Verkehr mit Unterstützung aller Verkehrsmittelarten: U-Bahn, Bus, Straßenbahn, etc. 
-\n 
-\n• Neue Schnellaktion, um Tracks ein-/auszublenden, und für die Tag/Nacht-Modi 
-\n 
-\n• Fix: Gebiete, die in Deutschland, Südafrika, Quebec und anderen Ländern als überflutet angezeigt wurden 
-\n 
-\n• Zusätzliche Unterstützung für den KML- und KMZ-Import 
-\n 
-\n• Abstürze nach Öffnen bestimmter Haltestellen des öffentlichen Verkehrs beseitigt 
-\n 
-\n• Facebook- und Firebase-Analysen aus der kostenlosen Version entfernt (OsmAnd+ enthält sie nicht mehr)
-\n
-\n</string>
     <string name="avoid_pt_types_descr">Wählen Sie öffentliche Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
     <string name="avoid_pt_types">Verkehrsmittel ausschließen …</string>
     <string name="shared_string_walk">Gehen</string>
@@ -3001,15 +2937,6 @@
     <string name="routing_attr_avoid_subway_description">Vermeidet U-Bahnen und leichten Schienenverkehr</string>
     <string name="routing_attr_avoid_ferry_name">Keine Fähren</string>
     <string name="routing_attr_avoid_ferry_description">Vermeidet Fähren</string>
-    <string name="release_3_3_7">• Anzeige der Umsteigezeiten in öffentlichen Verkehrsmitteln 
-\n 
-\n• Korrigierte Benutzeroberfläche für die Routendetails 
-\n 
-\n• Korrektur des dunklen Designs im Navigationsmenü und in den Routendetails 
-\n 
-\n• Azimut-Anzeige bei der Entfernungsmessung
-\n
-\n</string>
     <string name="send_log">Log senden</string>
     <string name="files_copied">%1$d Dateien kopiert (%2$s).</string>
     <string name="files_failed">%1$d Dateien (%2$s) konnten nicht kopiert werden.</string>
@@ -3071,7 +2998,6 @@
     <string name="base_profile_descr_public_transport">ÖPNV-Arten</string>
     <string name="base_profile_descr_boat">Schiff, Rudern, Segeln</string>
     <string name="base_profile_descr_aircraft">Flugzeug, Segelflugzeug</string>
-    <string name="colleted_data">Gesammelte Daten</string>
     <string name="base_profile_descr_ski">Skifahren</string>
     <string name="show_compass_ruler">Kompasslineal anzeigen</string>
     <string name="hide_compass_ruler">Kompasslineal ausblenden</string>
@@ -3090,8 +3016,6 @@
     <string name="third_party_routing_type">Routing von Drittanbietern</string>
     <string name="application_profiles_descr">Wählen Sie die Profile aus, die in der App sichtbar sein sollen.</string>
     <string name="application_profiles">App-Profile</string>
-    <string name="zoom_by_wunderlinq_descr">Ändern Sie den Kartenzoom, indem Sie mit dem Rad nach oben und unten scrollen. Escape bringt Sie zurück zur WunderLINQ App.</string>
-    <string name="zoom_by_wunderlinq">WunderLINQ zur Kontrolle verwenden</string>
     <string name="routing_attr_piste_type_skitour_name">Skitouren</string>
     <string name="routing_attr_piste_type_skitour_description">Routen für Skitouren.</string>
     <string name="routing_attr_piste_type_sled_name">Schlitten</string>
@@ -3201,8 +3125,8 @@
     <string name="lang_oc">Okzitanisch</string>
     <string name="app_mode_wagon">Wagen</string>
     <string name="app_mode_pickup_truck">Kleintransporter</string>
-    <string name="new_route_calculated_dist_dbg">Route: Entfernung %s, Fahrzeit %s 
-\nBerechnung: %.1f Sek., %d Straßen, %d Kacheln)</string>
+    <string name="new_route_calculated_dist_dbg">Route: Entfernung %1$s, Fahrzeit %2$s
+\nBerechnung: %3$.1f Sek., %4$d Straßen, %5$d Kacheln)</string>
     <string name="day">Tag</string>
     <string name="days_2_4">Tage</string>
     <string name="days_5">Tage</string>
@@ -3240,7 +3164,6 @@
     <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
     <string name="wake_time">Zeitüberschreitung nach dem Aufwachen</string>
     <string name="units_and_formats">Einheiten und Formate</string>
-    <string name="appearance">Aussehen</string>
     <string name="map_look_descr">Kartendarstellung</string>
     <string name="map_look">Kartendarstellung</string>
     <string name="list_of_installed_plugins">Installierte Erweiterungen</string>
@@ -3274,7 +3197,6 @@
     <string name="logcat_buffer">Logcat-Puffer</string>
     <string name="plugins_settings">Plugin-Einstellungen</string>
     <string name="shared_string_by_default">Standardmäßig</string>
-    <string name="download_detaile_map">"Detaillierte Karte %s  herunterladen, um diesen Bereich zu sehen."</string>
     <string name="download_detailed_map">Laden Sie die detaillierte %s-Karte herunter, um diesen Bereich zu sehen.</string>
     <string name="change_data_storage_full_description">OsmAnd-Datendateien an das neue Ziel verschieben\?
 \n%1$s &gt; %2$s</string>
@@ -3570,7 +3492,6 @@
     <string name="recalculate_route_distance_promo">Die Route wird neu berechnet, wenn die Entfernung von der Route zur aktuellen Position größer als der ausgewählte Wert ist.</string>
     <string name="import_complete_description">Alle Daten aus %1$s werden importiert. Sie können die Schaltflächen unten verwenden, um den benötigten Teil der Anwendung zu öffnen und sie zu verwalten.</string>
     <string name="shared_string_square">Quadrat</string>
-    <string name="shared_string_rhomb">Raute</string>
     <string name="shared_string_circle">Kreis</string>
     <string name="select_shape">Form auswählen</string>
     <string name="select_group">Gruppe auswählen</string>
@@ -3726,7 +3647,6 @@
     <string name="screen_control">Bildschirmsteuerung</string>
     <string name="system_screen_timeout_descr">Schaltet den Bildschirm entsprechend dem Bildschirm-Timeout des Systems aus.</string>
     <string name="system_screen_timeout">Systembildschirm-Timeout verwenden</string>
-    <string name="turn_screen_on_options_descr">Optionen zum Aktivieren des Bildschirms:</string>
     <string name="turn_screen_on_descr">Wählen Sie Optionen zum Aufwecken des Bildschirms (stellen Sie sicher, dass OsmAnd im Vordergrund ist, wenn das Gerät gesperrt wird):</string>
     <string name="turn_screen_on_navigation_instructions_descr">Für jede Navigationsanweisung wird der Bildschirm eingeschaltet.</string>
     <string name="turn_screen_on_navigation_instructions">Navigationsanweisungen</string>
@@ -3924,7 +3844,6 @@
     <string name="development">Entwicklung</string>
     <string name="use_live_public_transport">OsmAnd Live Daten</string>
     <string name="use_live_routing">OsmAnd Live Daten</string>
-    <string name="use_complex_routing">Komplexe Routenberechnung</string>
     <string name="complex_routing_descr">Zwei-Phasen-Routenberechnung für die Autonavigation.</string>
     <string name="use_native_pt">Native ÖPNV Entwicklung</string>
     <string name="use_native_pt_desc">Wechseln zur Java (sicher) Berechnung des ÖPNV-Routings</string>
@@ -4050,4 +3969,8 @@
     <string name="routing_engine_vehicle_type_driving">Fahren</string>
     <string name="online_routing_engine">Online Navigationssystem</string>
     <string name="online_routing_engines">Online Navigationssysteme</string>
+    <string name="shared_string_folders">Ordner</string>
+    <string name="select_folder">Ordner auswählen</string>
+    <string name="select_folder_descr">Ordner auswählen oder neuen hinzufügen</string>
+    <string name="shared_string_empty">Leer</string>
 </resources>

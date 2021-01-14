@@ -410,7 +410,6 @@
     <string name="error_calculating_route">Błąd wyznaczania trasy.</string>
     <string name="error_calculating_route_occured">Nie wyznaczono trasy.</string>
     <string name="empty_route_calculated">Wyznaczono pustą trasę.</string>
-    <string name="new_route_calculated_dist">Obliczono nową trasę, odległość</string>
     <string name="arrived_at_destination">Osiągnięto cel.</string>
     <string name="invalid_locations">Nieprawidłowe współrzędne</string>
     <string name="go_back_to_osmand">Wróć do mapy</string>
@@ -517,7 +516,6 @@
     <string name="osb_comment_dialog_error">Nie dodano komentarza.</string>
     <string name="poi_edit_title">Edytowanie użytecznego miejsca</string>
     <string name="poi_create_title">Dodawanie użytecznego miejsca</string>
-    <string name="poi_error_poi_not_found">Nie można odnaleźć węzła lub też udogodnienie (amenity) składa się z kilku węzłów, co nie jest jeszcze wspierane.</string>
     <string name="poi_remove_confirm_template">Usunąć {0} (komentarz)?</string>
     <string name="poi_remove_title">Usuń użyteczne miejsce</string>
     <string name="shared_string_delete">Usuń</string>
@@ -1802,7 +1800,6 @@
     <string name="only_download_over_wifi">Pobieranie tylko przez WiFi</string>
     <string name="live_update">Uaktualnianie na bieżąco</string>
     <string name="update_now">Uaktualnij</string>
-    <string name="update">Zaktualizuj</string>
     <string name="route_distance">Odległość:</string>
     <string name="route_duration">Czas:</string>
     <string name="looking_up_address">Wyszukiwanie adresu</string>
@@ -2018,8 +2015,6 @@
     <string name="give_permission">Zezwól</string>
     <string name="allow_access_location">Zezwól na dostęp do położenia</string>
     <string name="search_my_location">Wyszukaj aktualne położenie</string>
-    <string name="no_update_info_desc">Nie sprawdza aktualizacji dotyczących nowych wersji i rabatów związanych z OsmAnd.</string>
-    <string name="no_update_info">Pomijanie aktualizacji</string>
     <string name="update_all_maps_now">Uaktualnić wszystkie mapy?</string>
     <string name="clear_tile_data">Wyczyść wszystkie kafelki</string>
     <string name="osm_live_payment_desc">Subskrypcja naliczona za wybrany okres. Anuluj go w Google Play w dowolnym momencie.</string>
@@ -2076,9 +2071,6 @@
     <string name="route_roundabout_short">Zjedź %1$d zjazdem</string>
     <string name="search_map_hint">Miasto lub region</string>
     <string name="wiki_around">Artykuły Wikipedii w pobliżu</string>
-    <string name="legacy_search">Przestarzała wyszukiwarka</string>
-    <string name="show_legacy_search">Przestarzała wyszukiwarka</string>
-    <string name="show_legacy_search_desc">Dodaj starą wyszukiwarkę do menu rozwijanego.</string>
     <string name="routing_attr_allow_motorway_name">Używanie autostrad</string>
     <string name="routing_attr_allow_motorway_description">Zezwala na autostrady.</string>
     <string name="lang_sr_latn">Serbski (łaciński)</string>
@@ -2693,16 +2685,6 @@
     <string name="show_full_description">Wyświetl pełny opis</string>
     <string name="open_wikipedia_link_online_description">Odnośnik zostanie otwarty w przeglądarce internetowej.</string>
     <string name="how_to_open_link">Jak otwierać odnośniki?</string>
-    <string name="release_3_0">• Nowość: Obsługiwanie światowych przewodników turystycznych offline. Opisane miejsca są powiązane z mapą. Wstępne dane z Wikipodróży
-\n 
-\n • Wikipedia: Nowy wygląd, obsługiwanie aktywnych odnośników i obrazów
-\n 
-\n • Open Track UI: Obsługiwanie grup punktów trasy
-\n 
-\n • Znaczniki mapy: Importowanie wybranych grup z plików GPX, wprowadzanie współrzędnych, nowy wygląd
-\n 
-\n • Subskrypcja OsmAnd Live obsługuje teraz wszystkie funkcje OsmAnd
-\n</string>
     <string name="import_gpx_file_description">można zaimportować jako Ulubione lub plik GPX.</string>
     <string name="import_as_favorites">Importuj jako Ulubione</string>
     <string name="import_file">Zapisz plik</string>
@@ -2729,26 +2711,10 @@
     <string name="coord_input_add_point">Dodaj punkt</string>
     <string name="coord_input_save_as_track_descr">Dodano %1$s punktów. Proszę wprowadzić nazwę pliku i nacisnąć „Zapisz”.</string>
     <string name="coord_input_save_as_track">Zapisz jako ślad</string>
-    <string name="release_3_1">• Nawigacja: naprawiono pasek postępu, szybka zamiana punktu początkowego i końcowego trasy
-\n 
-\n• Znaczniki mapy: naprawiono włączanie/wyłączanie grup, możliwość ukrycia znaczników na mapie
-\n 
-\n• Edytowanie OSM: umożliwiono edycję tagów dla niepunktowych obiektów, naprawiono brakujące komentarze do uwag, tworzenie kopii zapasowej edycji
-\n 
-\n• Ulepszono analizowanie Wikipedii i Wikipodróży, zaktualizowane pliki są już dostępne
-\n 
-\n• Menu kontekstowe: poprawiono kolor tarcz transportowych w trybie nocnym, naprawiono dodatkowe rozmiary menu
-\n
-\n• Nawigacja łodzią: wsparcie dla toru wodnego
-\n 
-\n• Inne poprawki błędów
-\n</string>
     <string name="increase_search_radius_to">Zwiększ promień wyszukiwania do %1$s</string>
     <string name="send_search_query_description">Twoje zapytanie wraz z położeniem będzie wysłane do: „%1$s”. 
 \n
 \n Informacje osobiste nie są gromadzone, dane wyszukiwania są używane tylko do poprawienia algorytmu wyszukiwania.</string>
-    <string name="search_no_results_description">Brak wyników?
-\nPowiedz nam o tym.</string>
     <string name="send_search_query">Wysłać zapytanie?</string>
     <string name="shared_string_world">Świat</string>
     <string name="point_deleted">Usunięto punkt %1$s</string>
@@ -2756,8 +2722,7 @@
     <string name="poi_cannot_be_found">Nie można odnaleźć węzła lub drogi.</string>
     <string name="search_no_results_feedback">Brak wyników wyszukiwania\?
 \nPrześlij opinię</string>
-    <string name="commiting_way">Zatwierdzanie drogi…</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (Automatyczna nawigacja OSM) to aplikacja do map i nawigacji z dostępem do darmowych, światowych i wysokiej jakości danych OSM. 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (Automatyczna nawigacja OSM) to aplikacja do map i nawigacji z dostępem do darmowych, światowych i wysokiej jakości danych OSM.
 \nCiesz się nawigacją głosową i optyczną, przeglądaniem POI (punktów użyteczności publicznej), tworzeniem ścieżek GPX i zarządzaniem nimi, z wykorzystaniem wizualizacji linii konturu i wysokości, wyboru między trybem jazdy samochodem, jazdy na rowerze, poruszania się pieszo, edycji OSM i wielu innych. 
 \n 
 \nOsmAnd+ to płatna wersja aplikacji. Kupując ją, wspierasz projekt, finansujesz rozwój nowych funkcji i otrzymujesz najnowsze aktualizacje. 
@@ -2809,20 +2774,6 @@
 \n</string>
     <string name="test_voice_desrc">Naciśnij przycisk i słuchaj odpowiedniego komunikatu głosowego, aby zidentyfikować brakujące lub błędne monity</string>
     <string name="ask_for_location_permission">Proszę przyznać uprawnienia udostępniania położenia, aby kontynuować.</string>
-    <string name="release_3_2_pre">• Naprawiono awarię podczas uruchamiania, która wystąpiła na niektórych urządzeniach 
-\n 
-\n• Nowa funkcja Markery: wyświetlaj minięte znaczniki
-\n 
-\n• Historia wyszukiwania pokazuje teraz wcześniej wyszukiwane kategorie
-\n 
-\n• Naprawiono awarię podczas uruchamiania, która miała miejsce w przypadku map innych niż łacińskie 
-\n 
-\n• Naprawiono problemy z renderowaniem na urządzeniach z Androidem 8.0 
-\n 
-\n• Obsługa edycji obiektów wielokątnych (nieoryginalnych) 
-\n 
-\n• Pomiar odległości: dodaj przycisk pomiaru do akcji w menu kontekstowym 
-\n</string>
     <string name="rendering_value_black_name">Czarny</string>
     <string name="shared_string_restore">Przywróć</string>
     <string name="keep_passed_markers">Pokazuj na mapie odwiedzone znaczniki</string>
@@ -2954,22 +2905,6 @@
     <string name="rendering_attr_highway_class_path_name">Ścieżka</string>
     <string name="rendering_attr_highway_class_cycleway_name">Droga rowerowa</string>
     <string name="rendering_attr_undefined_name">Niezdefiniowana</string>
-    <string name="release_3_3">• Nowy ekran \"Kierunki\": Pokazuje przyciski kierunku domu i pracy, skrót do \"poprzednich tras\", listę aktywnych śladów GPX i znaczników, historię wyszukiwania
-\n
-\n • Dodatkowe informacje w \"Szczegółach drogi\": typy dróg, nawierzchnia, stromość, gładkość
-\n
-\n • Nawigacja transportu publicznego wspiera wszystkie typy transportu: metro, autobusy, tramwaje itp.
-\n
-\n • Nowe Szybkie czynności dla pokazywania/ukrywania tras i trybu dzień/noc
-\n
-\n • Naprawione obszary wyświetlane jako zalane w Niemczech, Południowej Afryce, Quebec
-\n
-\n • Dodatkowe wpieranie importów z KML i KMZ
-\n
-\n • Naprawione awarie przy otwieraniu niektórych przystanków transportu publicznego
-\n
-\n • Usunięcie Facebooka i analiz Firebase z darmowej wersji (OsmAnd+ tego nie zawiera)
-\n</string>
     <string name="shared_string_degrees">Stopnie</string>
     <string name="shared_string_milliradians">Miliradiany</string>
     <string name="quick_action_day_night_mode">Tryb %s</string>
@@ -2983,15 +2918,6 @@
     <string name="routing_attr_avoid_subway_description">Unikaj metra i lekkiego transportu kolejowego</string>
     <string name="routing_attr_avoid_ferry_name">Unikanie promów</string>
     <string name="routing_attr_avoid_ferry_description">Unikanie promów</string>
-    <string name="release_3_3_7">• Wyświetl czas między transferami w transporcie publicznym
-\n
-\n • Poprawiony interfejs użytkownika dla szczegółów trasy
-\n
-\n • Naprawiono ciemny motyw w menu Kierunek i Szczegóły trasy
-\n
-\n • Wyświetl azymut w Pomiar Odległości
-\n
-\n</string>
     <string name="angular_measeurement">Jednostka kąta</string>
     <string name="angular_measeurement_descr">Określa jednostki miary azymutu.</string>
     <string name="avoid_pt_types_descr">Wybierz rodzaje transportu publicznego, które pomijać w nawigacji:</string>
@@ -3027,7 +2953,6 @@
     <string name="choose_data_to_share">Wybierz typ danych, które chcesz udostępnić:</string>
     <string name="downloaded_maps">Pobrane mapy</string>
     <string name="visited_screens">Odwiedzane ekrany</string>
-    <string name="colleted_data">Zebrane Informacje</string>
     <string name="routing_attr_piste_type_downhill_name">Narciarstwo alpejskie i zjazdowe</string>
     <string name="collected_data_descr">Określ, które dane pozwalasz OsmAnd udostępniać.</string>
     <string name="downloaded_maps_collect_descr">Pomóż nam poznać popularność map krajów i regionów.</string>
@@ -3083,8 +3008,6 @@
     <string name="special_routing_type">Wyznacza trasy specjalne</string>
     <string name="application_profiles_descr">Wybiera profile widoczne w aplikacji.</string>
     <string name="application_profiles">Profile aplikacji</string>
-    <string name="zoom_by_wunderlinq_descr">Zmień powiększenie mapy, pokręć kółkiem w górę i w dół. Escape powraca do aplikacji WunderLINQ.</string>
-    <string name="zoom_by_wunderlinq">Użyj WunderLINQ do kontroli</string>
     <string name="quick_action_need_to_add_item_to_list">Dodaj co najmniej jeden element do listy w ustawieniach \"Szybkiej Akcji\"</string>
     <string name="routing_attr_piste_type_downhill_description">Stoki narciarskie do narciarstwa alpejskiego i zjazdowego oraz dostęp do wyciągów narciarskich.</string>
     <string name="routing_attr_piste_type_nordic_name">Biegi narciarskie i narciarstwo klasyczne</string>
@@ -3226,7 +3149,6 @@
     <string name="apply_to_current_profile">Zastosuj tylko do %1$s</string>
     <string name="apply_to_all_profiles">Zastosuj we wszystkich profilach</string>
     <string name="units_and_formats">Jednostki i formaty</string>
-    <string name="appearance">Wygląd</string>
     <string name="map_look_descr">Konfiguruje wygląd mapy</string>
     <string name="map_look">Wygląd mapy</string>
     <string name="list_of_installed_plugins">Zainstalowane wtyczki</string>
@@ -3241,8 +3163,7 @@
     <string name="route_parameters">Parametry trasy</string>
     <string name="manage_profiles_descr">Tworzy, importuje, modyfikuje profile</string>
     <string name="manage_profiles">Zarządzaj profilami aplikacji…</string>
-    <string name="new_route_calculated_dist_dbg">Trasa: dystans %s, czas routera %s 
-\nObliczanie: %.1f sek., %d dróg, %d płytek)</string>
+    <string name="new_route_calculated_dist_dbg">Trasa: dystans %1$s, czas routera %2$s \nObliczanie: %3$.1f sek., %4$d dróg, %5$d płytek)</string>
     <string name="get_discount_first_few_part">%1$s dla pierwszych %2$s</string>
     <string name="get_discount_second_part">następnie %1$s</string>
     <string name="navigate_point_format_olc">Otwórz kod lokalizacji</string>
@@ -3367,7 +3288,6 @@
     <string name="swap_two_places">Zamień %1$s i %2$s</string>
     <string name="route_start_point">Początek trasy</string>
     <string name="default_speed_dialog_msg">Szacuje czas przyjazdu dla nieznanego rodzaju dróg i ograniczenia prędkości na wszystkich drogach (może zmienić trasę)</string>
-    <string name="swap_start_and_destination">Odwróć początek i cel</string>
     <string name="track_saved">Zapisano ślad</string>
     <string name="empty_filename">Pusta nazwa pliku</string>
     <string name="shared_string_revert">Przywróć</string>
@@ -3502,8 +3422,6 @@
     <string name="import_profile_dialog_description">Zaimportowany profil zawiera dodatkowe dane. Kliknij \"Importuj\", aby zaimportować tylko dane profilu, lub wybierz dodatkowe dane.</string>
     <string name="export_profile_dialog_description">Można wybrać dodatkowe dane do wyeksportowania wraz z profilem.</string>
     <string name="routing_profile_direct_to">Bezpośrednio do punktu</string>
-    <string name="navigation_notification_desc">Pokaż powiadomienia systemowe podczas nawigacji z instrukcjami nawigacji.</string>
-    <string name="navigation_notification">Powiadomienie nawigacyjne</string>
     <string name="shared_string_app_default_w_val">Domyślnie (%s)</string>
     <string name="no_recalculation_setting">Bez ponownego obliczania</string>
     <string name="route_recalculation_dist_title">Minimalna odległość do ponownego wyznaczenia trasy</string>
@@ -3584,7 +3502,6 @@
     <string name="shared_string_terrain">Teren</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
     <string name="shared_string_square">Kwadrat</string>
-    <string name="shared_string_rhomb">Romb</string>
     <string name="shared_string_circle">Okrąg</string>
     <string name="select_shape">Wybierz kształt</string>
     <string name="hillshade_download_description">Cieniowanie wzniesień wymaga dodatkowych map.</string>
@@ -3621,8 +3538,6 @@
     <string name="shared_string_languages">Języki</string>
     <string name="shared_string_language">Język</string>
     <string name="shared_string_all_languages">Wszystkie języki</string>
-    <string name="wikipedia_poi_languages_promo">Niektóre artykuły Wikipiedii mogą nie być dostępne w twoim języku, wybierz w których językach artykuły Wikipedii mogą pojawiać się na mapie.
-\nBędziesz mógł zmieniać pomiędzy wszystkimi możliwymi językami podczas czytania artykułu.</string>
     <string name="wiki_menu_download_descr">Potrzebne są dodatkowe mapy, żeby przeglądać UM Wikipedii na mapie.</string>
     <string name="some_articles_may_not_available_in_lang">Pewne artykuły Wikipedii mogą być nie dostępne w wybranym języku.</string>
     <string name="custom_color">Dostosowany kolor</string>
@@ -3748,7 +3663,6 @@
     <string name="shared_string_meters">metry</string>
     <string name="details_dialog_decr">Pokaż lub ukryj dodatkowe szczegóły mapy</string>
     <string name="shared_string_night_map">Mapa nocna</string>
-    <string name="shared_string_all_time">Cały czas</string>
     <string name="vessel_height_warning">Możesz ustawić wysokość statku, aby unikać niskich mostów. Uwaga: dla mostów zwodzonych liczymy wysokość podniesionego mostu.</string>
     <string name="vessel_height_limit_description">Ustaw wysokość statku, by unikać niskich mostów. Uwaga: dla mostów zwodzonych liczymy wysokość podniesionego mostu.</string>
     <string name="vessel_height_warning_link">Ustaw wysokość statku</string>
@@ -3923,7 +3837,6 @@
     <string name="development">Rozwój</string>
     <string name="use_live_public_transport">Dane na żywo z OsmAnd</string>
     <string name="use_live_routing">Dane na żywo z OsmAnd</string>
-    <string name="use_complex_routing">Routing złożony</string>
     <string name="complex_routing_descr">Dwufazowe wyznaczanie tras do nawigacji samochodowej.</string>
     <string name="use_native_pt">Rozwój rodzimego transportu publicznego</string>
     <string name="use_native_pt_desc">Przejdź do (bezpiecznego) obliczania trasy transportu publicznego w języku Java</string>

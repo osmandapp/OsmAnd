@@ -575,7 +575,6 @@
     <string name="poi_healthcare_alternative">Εναλλακτική ιατρική</string>
     <string name="poi_audiologist">ακουολόγος</string>
     <string name="poi_blood_bank">Τράπεζα αίματος</string>
-    <string name="poi_healthcare_centre">Ιατρικό κέντρο</string>
     <string name="poi_midwife">Μαία</string>
     <string name="poi_occupational_therapist">Εργασιοθεραπευτής</string>
     <string name="poi_optometrist">Οπτικός</string>
@@ -977,7 +976,6 @@
     <string name="poi_crematorium">Κρεματόριο</string>
     <string name="poi_internet_cafe">Καφενείο με διαδίκτυο</string>
     <string name="poi_bank">Τράπεζα</string>
-    <string name="poi_amenity_atm">Μηχάνημα αναλήψεων (ΑΤΜ)</string>
     <string name="poi_payment_terminal">Τερματικό πληρωμών</string>
     <string name="poi_money_lender">Δάνεια</string>
     <string name="poi_pawnbroker">Ενεχυροδανειστής</string>
@@ -2508,7 +2506,6 @@
     <string name="poi_inscription_e">Επιγραφή: Α</string>
     <string name="poi_inscription_ne">Επιγραφή: ΒΑ</string>
     <string name="poi_construction_yes">Υπό κατασκευή</string>
-    <string name="poi_additional_atm_yes">ΑΤΜ: ναι</string>
     <string name="poi_atm_no">ΑΤΜ: όχι</string>
     <string name="poi_firepit">Εστία φωτιάς</string>
     <string name="poi_street_cabinet">Ερμάριο δρόμου</string>
@@ -2744,7 +2741,6 @@
     <string name="poi_water_source_main">Κύριο</string>
     <string name="poi_water_source_pond">Δεξαμενή</string>
     <string name="poi_water_source_stream">Ροή</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Δεξαμενή</string>
     <string name="poi_in_service_yes">Εν ενεργεία: ναι</string>
     <string name="poi_street_cabinet_power">Τύπος ερμαρίου: ρεύμα</string>
     <string name="poi_street_cabinet_telecom">Τύπος ερμαρίου: τηλεπικοινωνίες</string>

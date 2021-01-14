@@ -287,7 +287,6 @@ task collectHelpContentsAssets(type: Copy) {
 		include "about.html"
 		include "changes.html"
 		include "faq.html"
-		include "technical-articles.html"
 		include "map-legend.html"
 	}
 	from("../../help/website/feature_articles") {

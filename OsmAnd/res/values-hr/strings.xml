@@ -322,7 +322,6 @@
     <string name="empty_route_calculated">Pogreška: Izračunata ruta je prazna</string>
     <string name="error_calculating_route">Dogodila se greška pri izračunu rute</string>
     <string name="error_occurred_saving_gpx">Dogodila se greška pri spremanju GPX datoteke</string>
-    <string name="new_route_calculated_dist">Nova ruta je izračunata, udaljenost</string>
     <string name="arrived_at_destination">Stigli ste na odredište</string>
     <string name="loading_postcodes">Učitavanje poštanskih brojeva…</string>
     <string name="loading_streets">Učitavanje ulica…</string>

@@ -694,7 +694,6 @@
     <string name="contact_us">Hafa samband</string>
     <string name="use_dashboard_btn">Nota stjórnborð</string>
     <string name="use_drawer_btn">Nota valmynd</string>
-    <string name="update">Uppfæra</string>
     <string name="live_update">Síuppfærsla</string>
     <string name="update_now">Uppfæra núna</string>
     <string name="last_update">Síðasta uppfærsla: %s</string>
@@ -725,7 +724,6 @@
     <string name="search_location">Leita að stað…</string>
     <string name="storage_place_description">Gagnageymsla OsmAnd (fyrir kort, ferilskrár, o.s.frv.): %1$s.</string>
     <string name="give_permission">Gefa heimild</string>
-    <string name="no_update_info">Ekki sýna nýjar útgáfur</string>
     <string name="get_started">Komast í gang</string>
     <string name="back_to_search">Til baka í leit</string>
     <string name="show_something_on_map">Birta %1$s á korti</string>
@@ -1151,9 +1149,6 @@
     <string name="plugin_install_needs_network">Þú þarft internettengingu til að setja upp þessa viðbót..</string>
     <string name="activate_seamarks_plugin">Virkjaðu Sjómerkja-viðbótina</string>
     <string name="activate_srtm_plugin">Virkjaðu hæðarlínu-viðbótina</string>
-    <string name="legacy_search">Gamaldags leit</string>
-    <string name="show_legacy_search">Birta gamaldags leit</string>
-    <string name="show_legacy_search_desc">Virkja gamaldags leit í skúffulistanum.</string>
     <string name="route_roundabout_short">Beygðu útaf við %1$d afrein og haltu áfram</string>
     <string name="upload_poi">Senda inn merkisstað</string>
     <string name="christmas_desc_q">Birta jólastaðina?</string>
@@ -1367,7 +1362,6 @@
     <string name="error_calculating_route">Gat ekki reiknað leið.</string>
     <string name="error_calculating_route_occured">Gat ekki reiknað leið.</string>
     <string name="empty_route_calculated">Reiknuð leið er tóm.</string>
-    <string name="new_route_calculated_dist">Reiknaði nýja leið, vegalengd</string>
     <string name="previous_run_crashed">Síðasta keyrsla OsmAnd hrundi. Annálsskrá er í {0}. Tilkynntu um vandamálið og sendu annálsskrána inn með skýrslunni.</string>
     <string name="data_settings_descr">Tilgreindu tungumál, síðan sækja/endurhlaða gögn.</string>
     <string name="use_english_names_descr">Veldu á milli staðarheita og enskra heita.</string>
@@ -2153,7 +2147,6 @@
     <string name="save_track_min_distance_descr">Sía: Stilltu lágmarksfjarlægð frá síðustu staðsetningu þar sem punktur er tekinn í skráningu.</string>
     <string name="save_track_precision_descr">Sía: Stilltu lágmarksnákvæmni punkts til að hann sé tekinn í skráningu.</string>
     <string name="christmas_desc">Til að undirbúa jóla- og árámótahátíðir, geturðu valið að birta árstíðabundna merkisstaði: jólatré, jólamarkaði, flugeldasölur, o.fl.</string>
-    <string name="no_update_info_desc">Ekki athuga með uppfærslur eða afslætti tengda OsmAnd.</string>
     <string name="access_direction_audio_feedback">Stefna tilkynnt með hljóði</string>
     <string name="access_direction_audio_feedback_descr">Gefa stefnu að markpunkti til kynna með hljóði.</string>
     <string name="access_direction_haptic_feedback">Stefna tilkynnt með titringi</string>
@@ -2439,17 +2432,6 @@
     <string name="non_optimal_route_calculation">Reikna leiðir yfir langar fjarlægðir sem hugsanlega eru ekki þær bestu</string>
     <string name="av_locations_selected_desc">GPX-skrá með hnitum og gögnum valinna minnispunkta.</string>
     <string name="av_locations_all_desc">GPX-skrá með hnitum og gögnum allra minnispunkta.</string>
-    <string name="release_3_0">Ný ferðavalmynd: skoða WikiVoyage-greinar án internet-tengingar. Tilvísaðir staðir eru tengdir við kort. Upprunaleg gögn drá Wikivoyage.
-\n 
-\n • Wikipedia: nýtt útlit, virkir tenglar, myndir 
-\n 
-\n • Open Track viðmót: birta hópa af ferilpunktum 
-\n 
-\n • Kortamerki: innflutningur valinna hópa úr GPX-skrám, nýtt útlit fyrir innsetningu hnita 
-\n 
-\n • Áskrift að OsmAnd Live er núna með alla eiginleika OsmAnd 
-\n 
-\n</string>
     <string name="empty_state_osm_edits_descr">Búðu til eða breyttu merkisstöðum í OSM (POI), opnaðu eða gerðu athugasemdir á OSM-minnispunkta og sendu inn skráða ferla í GPX-skrám.</string>
     <string name="one_tap_active_descr">Ýttu á merki á kortinu til að færa það efst í virk kortamerki án þess að opna samhengisvalmyndina.</string>
     <string name="empty_state_av_notes_desc">Bættu minnispunkti með hljóði, ljósmynd eða myndskeiði á punkta á kortinu, með hjálp viðmótshluta eða samhengisvalmyndar.</string>
@@ -2543,7 +2525,6 @@
     <string name="osmand_routing_experimental">Ónettengd OsmAnd-leiðsögn er eiginleiki á tilraunastigi og virkar ekki fyrir vegalengdir sem eru lengri en u.þ.b. 20 km.
 \n
 \nLeiðsagnarþjónustu hefur verið skipt tímabundið yfir á hina netlægu CloudMade.</string>
-    <string name="poi_error_poi_not_found">Hnútur fannst ekki, eða að aðstaðan samanstendur af mörgum hnútum, sem er ekki ennþá stutt.</string>
     <string name="dashboard_or_drawer_description">Nú er nýtt val um að stýra forritinu með sveigjanlegu stjórnborði eða með fastri valmynd. Þú getur alltaf breytt þessu vali í stillingum stjórnborðsins.</string>
     <string name="make_as_start_point">Gera að þetta að upphafspunkti</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er landakorta- og leiðsagnarforrit með aðgangi að gögnum frjálsa, hágæða, OpenStreetMap (OSM) heimskortins. 
@@ -2786,49 +2767,16 @@
     <string name="coord_input_save_as_track_descr">Þú bættir við %1$s punktum. Settu inn heitið á skránni og vistaðu.</string>
     <string name="shared_string_world">Heimurinn</string>
     <string name="point_deleted">Punkti %1$s eytt</string>
-    <string name="release_3_1">"• Leiðsögn: Framvindustika lagfærð, hraðari víxl á upphafi og enda leiða 
-\n
-\n • Kortamerki: lagfæring á að kveikja/slökkva á hópum, hægt að fela merki á korti 
-\n
-\n • OSM-breytingar: Hægt að breyta merkjum á atriðum sem ekki eru punktar, lagfæring á þegar athugasemdir vantar á minnispunkta, öryggisafritun breytinga 
-\n
-\n • Bæting á þáttun Wikipedia og Wikivoyage, uppfærðar skrár eru þegar tiltækar 
-\n
-\n • Samhengisvalmynd: lagfæring á samgöngumerkingum í næturham, lagfæring á stærðum viðbótarvalmynda 
-\n
-\n •  Siglingaleiðsögn: stuðningur við merktar siglingaleiðir 
-\n 
-\n • Lagfæringar á öðrum göllum 
-\n
-\n"</string>
     <string name="increase_search_radius_to">Auka leitarradíus í %1$s</string>
     <string name="send_search_query_description">Leitarfyrirspurn þín verður send til: \"%1$s\", ásamt staðsetningu þinni.\n
         \n Persónulegum upplýsingum er ekki safnað, þessi gögn eru notuð til að bæta útreikninga leitarinnar.</string>
-    <string name="search_no_results_description">Engar niðurstöður?
-\nSegðu okkur meira um þetta.</string>
     <string name="send_search_query">Senda leitarfyrirspurn?</string>
     <string name="thank_you_for_feedback">Takk fyrir umsögn þína</string>
     <string name="poi_cannot_be_found">Hnútur eða leið fannst ekki.</string>
     <string name="search_no_results_feedback">Engar leitarniðurstöður?
 \nLáttu okkur vita</string>
-    <string name="commiting_way">Sendi leið inn…</string>
     <string name="test_voice_desrc">Ýttu á hnapp og hlustaðu á samsvarandi raddskipun til að bera kennsl á fyrirmæli sem vantar eða sem eru skemmd</string>
     <string name="ask_for_location_permission">Gefðu OsmAnd heimild til að sjá staðsetningar til að halda áfram.</string>
-    <string name="release_3_2_pre">• Lagað hrun í ræsingu sem kom fyrir á sumum tækjum
-\n
-\n • Nýr kortamerkjaeiginleiki: birting merkja sem þegar hefur verið farið um
-\n
-\n • Leitarferilsskrá sýnir núna flokkana sem áður hefur verið leitað að
-\n
-\n • Lagað hrun í ræsingu sem til kom á ekki-latneskt kóðuðum kortum 
-\n 
-\n • Bættur hraði við myndgerð á Android 8.0 tækjum 
-\n 
-\n • Stuðningur við breytingar á flákahlutum (ekki-aðstaða) 
-\n 
-\n• Mæling vegalengda: \'Mæla\' færslu bætt víð aðgerðir í samhengisvalmynd 
-\n 
-\n</string>
     <string name="rendering_value_black_name">Svart</string>
     <string name="search_street">Leita að götu</string>
     <string name="start_search_from_city">Veldu fyrst borg/bæ/sveitarfélag</string>
@@ -2908,22 +2856,6 @@
     <string name="quick_action_show_hide_gpx_tracks_descr">Hnappur til að birta eða fela valda ferla á kortinu.</string>
     <string name="quick_action_gpx_tracks_hide">Fela ferla</string>
     <string name="quick_action_gpx_tracks_show">Birta ferla</string>
-    <string name="release_3_3">• Nýr skjár fyrir \'Leiðir\': Birtir leiðarhnappa fyrir \'Heim\' og \'Vinna\', flýtileið á fyrri leið, listi yfir virka GPX-ferla og merki, leitarferill
-\n
-\n • Viðbótarupplýsingar undir \'Nánar um leið\': gerð vegar, yfirborð, bratti, áferð
-\n
-\n • Leiðsögn fyrir allar gerðir almenningssamgangna: neðanjarðarlestir, strætó, sporvagnar, o.s.frv.
-\n
-\n • Ný flýtiaðgerð til að birta/fela leiðir og fyrir dags-/næturham
-\n
-\n • Ákveðin svæði sýnd sem flóðasvæði í Þýskalandi, Suður-Afríku, Quebec
-\n
-\n • Viðbótarstuðningur við innflutning KML og KMZ
-\n
-\n • Lagfært hrun við opnun ýmissa biðstöðva
-\n
-\n • Fjarlæging greiningarvinnslu Facebook og Firebase úr frjálsu/ókeypis útgáfunni (OsmAnd+ innifelur þetta ekki)
-\n</string>
     <string name="use_osm_live_public_transport_description">Virkja breytingar á almenningssamgöngum í OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Almenningssamgöngur OsmAnd Live</string>
     <string name="public_transport_warning_descr_blog">Lestu meira á blogginu okkar um hvernig OsmAnd reiknar leiðir.</string>
@@ -3000,15 +2932,6 @@
     <string name="routing_attr_avoid_subway_description">Forðast neðanjarðarlestir og léttlestasamgöngur</string>
     <string name="routing_attr_avoid_ferry_name">Forðast ferjur</string>
     <string name="routing_attr_avoid_ferry_description">Forðast ferjur</string>
-    <string name="release_3_3_7">• Birting á biðtíma í almenningssamgöngum
-\n
-\n • Leiðrétting viðmóts \'Nánar um leið\'
-\n
-\n • Ýmsar lagfæringar á dökku þema
-\n
-\n • Birting áttarhorns við mælingu vegalengda
-\n
-\n</string>
     <string name="send_log">Senda atvikaskrá</string>
     <string name="files_moved">Færði %1$d skrár (%2$s).</string>
     <string name="files_copied">Afritaði %1$d skrár (%2$s).</string>
@@ -3085,7 +3008,6 @@
     <string name="third_party_routing_type">Leiðagerð frá utanaðkomandi aðila</string>
     <string name="application_profiles_descr">Veldu notkunarsnið sem eiga að vera sýnileg í forriti.</string>
     <string name="application_profiles">Forritssnið</string>
-    <string name="zoom_by_wunderlinq">Nota WunderLINQ við stýringu</string>
     <string name="routing_attr_piste_type_downhill_name">Brun og svigskíði</string>
     <string name="routing_attr_piste_type_skitour_description">Ferðaleiðir á skíðum.</string>
     <string name="routing_attr_piste_type_sled_description">Brekkur notaðar fyrir sleða.</string>
@@ -3102,7 +3024,6 @@
     <string name="process_downloading_service">OsmAnd niðurhalsþjónusta</string>
     <string name="rate_dialog_descr">Deildu reynslu þinni og gefðu okkur einkunn á Google Play.</string>
     <string name="routing_profile_geocoding">Landkóðun</string>
-    <string name="zoom_by_wunderlinq_descr">Breyttu aðdrætti á kort með skruni músarhjóls upp og niður. Escape fer aftur með þig inn í WunderLINQ forritið.</string>
     <string name="quick_action_need_to_add_item_to_list">Þú verður að skilgreina a.m.k. eitt atriði í listanum í stillingum flýtiaðgerða</string>
     <string name="routing_attr_piste_type_downhill_description">Brekkur fyrir svigskíði eða brun og aðgangur að skíðalyftum.</string>
     <string name="routing_attr_piste_type_nordic_name">Gönguskíði og norræn fjallaskíði</string>
@@ -3196,8 +3117,7 @@
     <string name="rendering_attr_showLez_name">Birta svæði með takmörkunum á útblæstri</string>
     <string name="temporary_conditional_routing">Taka tillit til tímabundinna takmarkana</string>
     <string name="shared_string_default">Sjálfgefið</string>
-    <string name="new_route_calculated_dist_dbg">Leið: vegalengd %s, tími leiðsagnar %s 
-\nÚtreikningur: %.1f sek, %d vegir, %d kortaflísar)</string>
+    <string name="new_route_calculated_dist_dbg">Leið: vegalengd %1$s, tími leiðsagnar %2$s \nÚtreikningur: %3$.1f sek, %4$d vegir, %5$d kortaflísar)</string>
     <string name="lang_oc">Occitanska</string>
     <string name="app_mode_wagon">Dráttarvagn</string>
     <string name="app_mode_pickup_truck">Pallbíll</string>
@@ -3238,7 +3158,6 @@
     <string name="route_parameters_info">Stillingar leiðarvals í valda sniðinu \"%1$s\".</string>
     <string name="wake_time">Tímamörk eftir vöknun</string>
     <string name="units_and_formats">Einingar og snið</string>
-    <string name="appearance">Útlit</string>
     <string name="map_look_descr">Útlit landakorts</string>
     <string name="map_look">Útlit korts</string>
     <string name="list_of_installed_plugins">Uppsettar viðbætur</string>
@@ -3270,7 +3189,6 @@
     <string name="logcat_buffer">Logcat biðminni</string>
     <string name="plugins_settings">Stillingar á forritsviðbót</string>
     <string name="shared_string_by_default">Sjálfgefið</string>
-    <string name="download_detaile_map">Sæktu nákvæma %s kortið til að skoða þetta svæði.</string>
     <string name="download_detailed_map">Sæktu nákvæma %s kortið til að skoða þetta svæði.</string>
     <string name="change_data_storage_full_description">Færa gagnaskrár OsmAnd á nýjan stað\?
 \n%1$s &gt; %2$s</string>
@@ -3414,7 +3332,6 @@
     <string name="reset_confirmation_descr">Með því að ýta á %1$s taparðu öllum breytingunum þínum.</string>
     <string name="reset_all_profile_settings_descr">Endurstilla allar sniðstillingar á upphaflegar sjálfgefnar stillingar.</string>
     <string name="reset_all_profile_settings">Endurstilla allar sniðstillingar\?</string>
-    <string name="ltr_or_rtl_combine">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="button_rate">Einkunn</string>
@@ -3594,7 +3511,6 @@
     <string name="select_group">Veldu hóp</string>
     <string name="select_shape">Veldu lögun</string>
     <string name="shared_string_circle">Hringur</string>
-    <string name="shared_string_rhomb">Tígull</string>
     <string name="shared_string_square">Ferningur</string>
     <string name="replace_point_descr">Skipta út öðrum punkti með þessum.</string>
     <string name="changes_applied_to_profile">Breytingum beitt á \'%1$s\' sniðið.</string>
@@ -3612,9 +3528,7 @@
     <string name="shared_string_all_languages">Öll tungumál</string>
     <string name="move_inside_category">Þú getur aðeins fært atriði innan þessa flokks.</string>
     <string name="hidden_items_descr">Þessi atriði eru falin á valmyndinni, en valkostirnir eða viðbæturnar sem þau standa fyrir munu virka áfram.</string>
-    <string name="wikipedia_poi_languages_promo">Sumar Wikipedia-greinar gætu verið ekki tiltækar í þínu nafni, veldu það tungumál sem Wikipedia-greinarnar ættu að birtast á á kortinu.
-\nÞú munt geta skipt á milli allra tiltækra tungumála á meðan þú lest greinar.</string>
-    <string name="ui_customization_description">Sérsníddu fjölda atriða í sleðanum, í uppsetningu landakorts og í samhengisvalmynd. 
+    <string name="ui_customization_description">Sérsníddu fjölda atriða í sleðanum, í uppsetningu landakorts og í samhengisvalmynd.
 \n 
 \nÞú getur gert ónotaðar forritsviðbætur óvirkar til að fela stýringar þeirra. %1$s.</string>
     <string name="ui_customization_short_descr">Atriði á sleða, samhengisvalmynd</string>
@@ -3901,7 +3815,6 @@
     <string name="development">Þróun</string>
     <string name="use_live_public_transport">OsmAnd Live gögn</string>
     <string name="use_live_routing">OsmAnd Live gögn</string>
-    <string name="use_complex_routing">Flókin leiðagerð</string>
     <string name="complex_routing_descr">Tveggja-þátta leiðagerð fyrir bílaleiðsögn.</string>
     <string name="use_native_pt">Innbyggð þróun almenningssamgangna</string>
     <string name="use_native_pt_desc">Skipta yfir í Java (öruggt) útreikning fyrir almenningssamgöngur</string>

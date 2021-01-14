@@ -1554,7 +1554,6 @@
     <string name="contact_us">اتصل بنا</string>
     <string name="poi_context_menu_modify_osm_change">تعديل OSM</string>
     <string name="dashboard_or_drawer_title">لوحة التحكم أو شريط المراقبة</string>
-    <string name="update">التحديث</string>
     <string name="only_download_over_wifi">Wi-Fi فقط</string>
     <string name="live_update">تحديث مباشر</string>
     <string name="last_update">آخر تحديث: %s</string>
@@ -3128,7 +3127,6 @@
     <string name="turn_screen_on_info">إظهار الخريطة على شاشة القفل أثناء التنقل.</string>
     <string name="wake_time">المهلة بعد الاستيقاظ</string>
     <string name="units_and_formats">الوحدات والأشكال</string>
-    <string name="appearance">المظهر</string>
     <string name="map_look_descr">مظهر الخريطة</string>
     <string name="map_look">نظرة علي الخريطة</string>
     <string name="list_of_installed_plugins">الإضافات المثبتة</string>
@@ -3357,8 +3355,8 @@
     <string name="sett_generic_ext_input">لوحة المفاتيح</string>
     <string name="sett_wunderlinq_ext_input">وندرلينك</string>
     <string name="sett_parrot_ext_input">ببغاء</string>
-    <string name="new_route_calculated_dist_dbg">المسار: المسافة%s، وقت التوجيه %s.
-\nالحساب: %.1f ث، %d طريق، %d تجانب)</string>
+    <string name="new_route_calculated_dist_dbg">المسار: المسافة%2$s، وقت التوجيه %1$s.
+\nالحساب: %3$.1f ث، %4$d طريق، %5$d تجانب)</string>
     <string name="lang_oc">الأوكيتانية</string>
     <string name="get_discount_second_part">ثم %1$s</string>
     <string name="apply_to_current_profile">تطبيق فقط على \"%1$s\"</string>
@@ -3549,7 +3547,6 @@
     <string name="select_distance_route_will_recalc">حدد المسافة التي سيتم بعدها إعادة حساب المسار.</string>
     <string name="recalculate_route_in_deviation">إعادة حساب المسار في حالة الانحراف</string>
     <string name="shared_string_square">مربع</string>
-    <string name="shared_string_rhomb">معين</string>
     <string name="shared_string_circle">دائرة</string>
     <string name="select_shape">تحديد الشكل</string>
     <string name="select_group">تحديد المجموعة</string>
@@ -3699,7 +3696,6 @@
     <string name="screen_control">التحكم في الشاشة</string>
     <string name="system_screen_timeout_descr">إيقاف تشغيل الشاشة بعد انتهاء مهلة شاشة النظام.</string>
     <string name="system_screen_timeout">استخدام مهلة انطفاء شاشة النظام</string>
-    <string name="turn_screen_on_options_descr">خيارات تنبيه الشاشة:</string>
     <string name="turn_screen_on_descr">حدد خيارات تنبيه الشاشة (تأكد من وجود أوسماند في المقدمة عند قفل الجهاز):</string>
     <string name="turn_screen_on_navigation_instructions_descr">ستقوم كل تعليمات تنقل بتشغيل الشاشة.</string>
     <string name="turn_screen_on_navigation_instructions">تعليمات الملاحة</string>
@@ -3743,7 +3739,6 @@
     <string name="shared_string_meters">أمتار</string>
     <string name="details_dialog_decr">إظهار أو إخفاء التفاصيل الإضافية للخريطة</string>
     <string name="shared_string_night_map">خريطة ليلية</string>
-    <string name="shared_string_all_time">كل الوقت</string>
     <string name="turn_screen_on_power_button_disabled">ذوي الاحتياجات الخاصه. يتطلب \"إبقاء الشاشة قيد تشغيل\" تحت \"المهلة بعد الاستيقاظ\".</string>
     <string name="vessel_height_limit_description">ضبط الارتفاع لتجنب الجسور المنخفضة. ضع في اعتبارك أنه إذا كان الجسر متحركاً ، فسوف نستخدم ارتفاعه في الحالة المفتوحة.</string>
     <string name="add_online_source">إضافة مصدر عبر الإنترنت</string>
@@ -3905,7 +3900,6 @@
     <string name="development">تطوير</string>
     <string name="use_live_public_transport">بيانات أوسماند لايف</string>
     <string name="use_live_routing">بيانات أوسماند لايف</string>
-    <string name="use_complex_routing">التوجيه المركب</string>
     <string name="complex_routing_descr">التوجيه على مرحلتين لملاحة السيارة.</string>
     <string name="use_native_pt">تطوير النقل العام المحلي</string>
     <string name="use_native_pt_desc">قم بالتبديل إلى جافا (الآمن) حساب توجيه النقل العام</string>

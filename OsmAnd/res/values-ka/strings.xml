@@ -542,7 +542,6 @@
     <string name="error_calculating_route">შეცდომა გზის დათვლისას.</string>
     <string name="error_calculating_route_occured">გზის დათვლის შეცდომა.</string>
     <string name="empty_route_calculated">დათვლილი გზა ცარიელია.</string>
-    <string name="new_route_calculated_dist">ახალი გზა დათვლილია. დაშორება</string>
     <string name="arrived_at_destination">მიხვედით.</string>
     <string name="invalid_locations">კოორდინატები არასწორია!</string>
     <string name="go_back_to_osmand">რუკაზე დაბრუნება</string>
@@ -644,7 +643,6 @@
     <string name="osb_comment_dialog_error">კომენტარი არ დაემატა.</string>
     <string name="poi_edit_title">POI-ის ჩასწორება</string>
     <string name="poi_create_title">POI-ის შექმნა</string>
-    <string name="poi_error_poi_not_found">POI ვერ მოიძებნა</string>
     <string name="poi_remove_confirm_template">წავშალო {0} (კომენტარი)?</string>
     <string name="poi_remove_title">POI-ს წაშლა</string>
     <string name="shared_string_delete">წაშლა</string>
@@ -1195,7 +1193,6 @@
     <string name="search_street">ქუჩის ძებნა</string>
     <string name="start_search_from_city">გთხოვთ აირჩიოთ დასახლებული პუნქტი</string>
     <string name="shared_string_restore">აღდგენა</string>
-    <string name="commiting_way">გზის ატვირთვა…</string>
     <string name="increase_search_radius_to">ძებნის რადიუსის გაზრდა %1$s-მდე</string>
     <string name="shared_string_world">სამყარო</string>
     <string name="point_deleted">წერტილი %1$s წაშლილია</string>

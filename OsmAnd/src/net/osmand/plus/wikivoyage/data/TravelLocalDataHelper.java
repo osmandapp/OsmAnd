@@ -514,8 +514,9 @@ public class TravelLocalDataHelper {
 									" AND " + BOOKMARKS_COL_LANG + " = ?" +
 									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?",
 							new Object[]{newArticle.title, newArticle.lang, newArticle.aggregatedPartOf,
-									newArticle.imageTitle, travelBook, newArticle.lat, newArticle.lon,
-									newArticle.routeId, newArticle.content, newArticle.contentsJson,
+									newArticle.imageTitle, newArticle.getTravelBook(context), newArticle.lat,
+									newArticle.lon, newArticle.routeId, newArticle.contentsJson, newArticle.content,
+									newArticle.getLastModified(),
 									odlArticle.title, odlArticle.routeId, odlArticle.lang, travelBook});
 
 				} finally {
