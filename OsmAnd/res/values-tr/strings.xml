@@ -3969,4 +3969,9 @@
     <string name="select_folder">Klasör seç</string>
     <string name="select_folder_descr">Klasör seçin veya yeni bir tane ekleyin</string>
     <string name="shared_string_empty">Boş</string>
+    <string name="analyze_by_intervals">Aralıklara göre analiz et (bölme aralığı)</string>
+    <string name="upload_to_openstreetmap">OpenStreetMap\'e yükle</string>
+    <string name="edit_track">Yolu düzenle</string>
+    <string name="rename_track">Yolu yeniden adlandır</string>
+    <string name="change_folder">Klasörü değiştir</string>
 </resources>
