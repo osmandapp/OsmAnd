@@ -27,6 +27,12 @@ android {
 
 afterEvaluate {
     publishing {
+        repositories {    
+            ivy {
+                url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
+            }
+        }
+
         publications {
              release(IvyPublication) {
                 // Applies the component for the release build variant.
