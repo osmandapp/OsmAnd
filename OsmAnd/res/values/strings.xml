@@ -11,7 +11,7 @@
 	Thx - Hardy
 
 -->
-
+    <string name="confirm_setting_description">The time interval after which OsmAnd will request the current location.</string>
     <string name="change_folder">Change folder</string>
     <string name="rename_track">Rename track</string>
     <string name="edit_track">Edit track</string>
