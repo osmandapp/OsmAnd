@@ -126,7 +126,7 @@ public class Building extends MapObject {
 					return -1;
 				}
 				float res = ((float) hint - fch) / (((float) sch - fch));
-				if (res > 1 || res < -1) {
+				if (res > 1 || res < 0) {
 					return -1;
 				} 
 				return res;
