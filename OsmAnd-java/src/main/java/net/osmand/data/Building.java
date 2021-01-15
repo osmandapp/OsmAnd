@@ -114,8 +114,11 @@ public class Building extends MapObject {
 			int numB = Algorithms.extractFirstIntegerNumber(fname);
 			int numT = numB;
 			String sname = getName2();
-
-			if (getInterpolationType() == BuildingInterpolation.ALPHABETIC && num == numB) {
+			if (getInterpolationType() == BuildingInterpolation.ALPHABETIC) {
+				if (num != numB) {
+					// currently not supported
+					return -1;
+				}
 				int hint = (int) hno.charAt(hno.length() - 1);
 				int fch = (int) fname.charAt(fname.length() - 1);
 				int sch = sname.charAt(sname.length() - 1);
