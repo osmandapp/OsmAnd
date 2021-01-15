@@ -128,7 +128,8 @@ public class Building extends MapObject {
 				float res = ((float) hint - fch) / (((float) sch - fch));
 				if (res > 1 || res < -1) {
 					return -1;
-				}
+				} 
+				return res;
 			}
 			if (num >= numB) {
 				if (fname.contains("-") && sname == null) {
