@@ -3959,4 +3959,8 @@
     <string name="copy_address">Kopírovať adresu</string>
     <string name="online_routing_engine">Online navigačná služba</string>
     <string name="online_routing_engines">Online navigačné služby</string>
+    <string name="shared_string_folders">Priečinky</string>
+    <string name="select_folder">Zvoľte priečinok</string>
+    <string name="select_folder_descr">Zvoľte priečinok alebo pridajte nový</string>
+    <string name="shared_string_empty">Prázdne</string>
 </resources>

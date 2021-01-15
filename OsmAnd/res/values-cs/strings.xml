@@ -1187,7 +1187,7 @@
     <string name="share_route_as_gpx">Sdílet trasu jako GPX soubor</string>
     <string name="share_route_subject">Trasa sdílena pomocí OsmAnd</string>
     <string name="arrival_distance">Oznámení příjezdu</string>
-    <string name="arrival_distance_descr">Jak brzo oznamovat příjezd do cíle?</string>
+    <string name="arrival_distance_descr">Jak brzy oznamovat příjezd do cíle\?</string>
     <string name="keep_informing_never">Pouze manuálně (ťuknout na šipku)</string>
     <string name="keep_informing_descr">Znovu opakovat navigační pokyny v pravidelných intervalech.</string>
     <string name="keep_informing">Opakovat navigační pokyny</string>
@@ -3254,7 +3254,7 @@
     <string name="clear_recorded_data_warning">Opravdu chcete vymazat zaznamenané údaje\?</string>
     <string name="recalculate_route_in_deviation">Přepočítat trasu v případě odchýlení</string>
     <string name="select_distance_route_will_recalc">Zvolte vzdálenost, při které bude trasa přepočítána.</string>
-    <string name="recalculate_route_distance_promo">Trasa bude přepočítaná pokud vzdálenost od trasy k aktuální poloze je větší než zvolená hodnota.</string>
+    <string name="recalculate_route_distance_promo">Trasa bude přepočítána, pokud vzdálenost od trasy k aktuální poloze je větší než zvolená hodnota.</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
     <string name="download_slope_maps">Svahy</string>
     <string name="quick_action_show_hide_terrain">Zobrazit nebo skrýt terén</string>
