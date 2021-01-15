@@ -3967,4 +3967,9 @@
     <string name="select_folder">Вибрати теку</string>
     <string name="select_folder_descr">Виберіть теку або додайте нову</string>
     <string name="shared_string_empty">Порожньо</string>
+    <string name="analyze_by_intervals">Аналіз за інтервалами (розділений інтервал)</string>
+    <string name="upload_to_openstreetmap">Відвантажити на OpenStreetMap</string>
+    <string name="edit_track">Редагувати трек</string>
+    <string name="rename_track">Перейменувати трек</string>
+    <string name="change_folder">Змінити теку</string>
 </resources>
