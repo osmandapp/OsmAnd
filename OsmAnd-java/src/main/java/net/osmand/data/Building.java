@@ -116,14 +116,17 @@ public class Building extends MapObject {
 			String sname = getName2();
 
 			if (getInterpolationType() == BuildingInterpolation.ALPHABETIC && num == numB) {
-				char ch = hno.charAt(hno.length() - 1);
-				char chF = fname.charAt(fname.length() - 1);
-				char chS = sname.charAt(sname.length() - 1);
-				if (chS < chF && chF < ch) {
-					return -1;
+				char hCh = hno.charAt(hno.length() - 1);
+				char fCh = fname.charAt(fname.length() - 1);
+				char sCh = sname.charAt(sname.length() - 1);
+				int h = Character.getNumericValue(hCh);
+				int f = Character.getNumericValue(fCh);
+				int s = Character.getNumericValue(sCh);
+				if (sCh > fCh) {
+					return ((float) h - f) / (((float) s - f));
 				}
-				if (chS > chF && ch < chF) {
-					return -1;
+				if (sCh < fCh) {
+					return ((float) f - h) / (((float) f - s));
 				}
 			}
 			if (num >= numB) {
