@@ -31,16 +31,16 @@ afterEvaluate {
              release(IvyPublication) {
                 // Applies the component for the release build variant.
                 from components.release
-                groupId = 'net.osmand'
-                artifactId = 'android-aidl-lib'
-                version = 'master-snapshot'
+                organisation = 'net.osmand'
+                module = 'android-aidl-lib'
+                revision = 'master-snapshot'
              }
              debug(IvyPublication) {
                 // Applies the component for the release build variant.
                 from components.debug
-                groupId = 'net.osmand'
-                artifactId = 'android-aidl-lib'
-                version = 'master-snapshot'
+                organisation = 'net.osmand'
+                module = 'android-aidl-lib'
+                revision = 'master-snapshot'
              }
         }
     }
