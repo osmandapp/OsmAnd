@@ -102,6 +102,8 @@ public class MenuBuilder {
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
 	protected static final String[] arrowChars = new String[] {"=>", " - "};
+	protected final String NEAREST_WIKI_KEY = "nearest_wiki_key";
+	protected final String NEAREST_POI_KEY = "nearest_poi_key";
 
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
@@ -119,9 +121,6 @@ public class MenuBuilder {
 	private boolean showOnlinePhotos = true;
 	protected List<Amenity> nearestWiki = new ArrayList<>();
 	protected List<Amenity> nearestPoi = new ArrayList<>();
-	protected final String keyWiki = "nearest_wiki";
-	protected final String keyPoi = "nearest_poi";
-	private PoiUIFilter poiFilter;
 	private List<OsmandPlugin> menuPlugins = new ArrayList<>();
 	@Nullable
 	private CardsRowBuilder onlinePhotoCardsRow;
@@ -358,13 +357,13 @@ public class MenuBuilder {
 
 	protected void buildNearestWikiRow(View view) {
 		buildNearestRow(view, nearestWiki, processNearestWiki(),
-				R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), keyWiki);
+				R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), NEAREST_WIKI_KEY);
 	}
 
 	protected void buildNearestPoiRow(View view) {
 		if (amenity != null) {
 			buildNearestRow(view, nearestPoi, processNearestPoi(), AmenityMenuController.getRightIconId(amenity),
-					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")", keyPoi);
+					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")", NEAREST_POI_KEY);
 		}
 	}
 
@@ -1161,8 +1160,8 @@ public class MenuBuilder {
 		return new CollapsableView(textView, this, collapsed);
 	}
 
-	protected CollapsableView getCollapsableView(Context context, boolean collapsed, List<Amenity> nearestAmenities, final String amenityKey) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+	protected CollapsableView getCollapsableView(Context context, boolean collapsed, List<Amenity> nearestAmenities, String nearestPoiType) {
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		for (final Amenity poi : nearestAmenities) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
@@ -1184,56 +1183,50 @@ public class MenuBuilder {
 			});
 			view.addView(button);
 		}
-
-		final PoiUIFilter filter;
-		if (amenityKey.equals(keyPoi)) {
-			filter = poiFilter;
-		} else if (amenityKey.equals(keyWiki)) {
-			filter = app.getPoiFilters().getTopWikiPoiFilter();
-		} else {
-			filter = null;
-		}
+		PoiUIFilter filter = getPoiFilterForType(nearestPoiType);
 		if (filter != null) {
-			TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
-			buttonShowAll.setText(app.getString(R.string.shared_string_show_on_map));
-			buttonShowAll.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					final PoiFiltersHelper ph = app.getPoiFilters();
-					ph.clearSelectedPoiFilters();
-					ph.addSelectedPoiFilter(filter);
-					final QuickSearchToolbarController controller = new QuickSearchToolbarController();
-					controller.setTitle(filter.getName());
-					controller.setOnBackButtonClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							mapActivity.showQuickSearch(filter);
-						}
-					});
-					controller.setOnTitleClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							mapActivity.showQuickSearch(filter);
-						}
-					});
-					controller.setOnCloseButtonClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							ph.clearSelectedPoiFilters();
-							mapActivity.hideTopToolbar(controller);
-							mapActivity.refreshMap();
-						}
-					});
-					mapContextMenu.hideMenues();
-					mapActivity.showTopToolbar(controller);
-					mapActivity.refreshMap();
-				}
-			});
-
-			view.addView(buttonShowAll);
+			view.addView(createShowAllButton(context, filter));
 		}
-
 		return new CollapsableView(view, this, collapsed);
+	}
+
+	private View createShowAllButton(Context context, final PoiUIFilter filter) {
+		TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
+		buttonShowAll.setText(app.getString(R.string.shared_string_show_on_map));
+		buttonShowAll.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
+				poiFiltersHelper.clearSelectedPoiFilters();
+				poiFiltersHelper.addSelectedPoiFilter(filter);
+				final QuickSearchToolbarController controller = new QuickSearchToolbarController();
+				controller.setTitle(filter.getName());
+				controller.setOnBackButtonClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						mapContextMenu.show();
+					}
+				});
+				controller.setOnTitleClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						mapActivity.showQuickSearch(filter);
+					}
+				});
+				controller.setOnCloseButtonClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						poiFiltersHelper.clearSelectedPoiFilters();
+						mapActivity.hideTopToolbar(controller);
+						mapActivity.refreshMap();
+					}
+				});
+				mapContextMenu.hideMenues();
+				mapActivity.showTopToolbar(controller);
+				mapActivity.refreshMap();
+			}
+		});
+		return buttonShowAll;
 	}
 
 	protected LinearLayout buildCollapsableContentView(Context context, boolean collapsed, boolean needMargin) {
@@ -1299,15 +1292,31 @@ public class MenuBuilder {
 
 	protected boolean processNearestPoi() {
 		if (showNearestPoi && latLon != null && amenity != null) {
-			PoiCategory pc = amenity.getType();
-			PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-			poiFilter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + pt.getKeyName());
-			if (poiFilter != null) {
-				nearestPoi = getSortedAmenities(poiFilter, latLon);
+			PoiUIFilter filter = getPoiFilterForAmenity(amenity);
+			if (filter != null) {
+				nearestPoi = getSortedAmenities(filter, latLon);
 				return true;
 			}
 		}
 		return false;
+	}
+
+	private PoiUIFilter getPoiFilterForType(String nearestPoiType) {
+		if (NEAREST_POI_KEY.equals(nearestPoiType)) {
+			return getPoiFilterForAmenity(amenity);
+		} else if (NEAREST_WIKI_KEY.equals(nearestPoiType)) {
+			return app.getPoiFilters().getTopWikiPoiFilter();
+		}
+		return null;
+	}
+
+	private PoiUIFilter getPoiFilterForAmenity(Amenity amenity) {
+		if (amenity != null) {
+			PoiCategory category = amenity.getType();
+			PoiType poiType = category.getPoiTypeByKeyName(amenity.getSubType());
+			return app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + poiType.getKeyName());
+		}
+		return null;
 	}
 
 	private List<Amenity> getSortedAmenities(PoiUIFilter filter, final LatLon latLon) {
