@@ -90,7 +90,6 @@
     <string name="osm_live_not_active">Neçalak e</string>
     <string name="reports_for">Ji bo raporkirina</string>
 <string name="update_now">Niha rojane bike</string>
-    <string name="update">Rojanekirin</string>
     <string name="sort_by">Tesnîfkirina gorî</string>
     <string name="do_not_use_animations">Ti anîmasyon tine ye</string>
     <string name="do_not_use_animations_descr">Di sepanê de anîmasyonan disekinîne.</string>
@@ -121,7 +120,6 @@
     <string name="osn_modify_dialog_title">Notê biguherîne</string>
     <string name="context_menu_item_modify_note">Nota OSM\'ê biguherîne</string>
     <string name="make_round_trip_descr">Cihê destpêkê bike cihê amanc.</string>
-    
     <string name="shared_string_sort">Tesnîf bike</string>
     <string name="enter_new_name">Navê nû binivîse</string>
 	<string name="shared_string_back">Paşve</string>

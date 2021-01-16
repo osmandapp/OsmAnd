@@ -44,7 +44,6 @@
     <string name="poi_copyshop">Капіравальныя паслугі</string>
     <string name="poi_curtain">Салон штор</string>
     <string name="poi_fabric">Тканіны</string>
-    <string name="poi_bedding">Пасьцельная бялізна</string>
     <string name="poi_dive">Абсталяванне для дайвінгу</string>
     <string name="poi_doityourself">Інструменты і будматэрыялы</string>
     <string name="poi_erotic">Сэкс-шоп</string>
@@ -250,7 +249,6 @@
     <string name="poi_healthcare_alternative">Альтэрнатыўная медыцына</string>
     <string name="poi_audiologist">Оталарынголаг</string>
     <string name="poi_blood_bank">Банк крыві</string>
-    <string name="poi_healthcare_centre">Медыцынскі цэнтр</string>
     <string name="poi_midwife">Акушэрка</string>
     <string name="poi_occupational_therapist">Прафесійны лекар</string>
     <string name="poi_optometrist">Оптаметрыст</string>
@@ -381,7 +379,6 @@
     <string name="poi_religion_shinto">Сінтаізм</string>
     <string name="poi_religion_taoist">Даасізм</string>
     <string name="poi_monastery">Кляштар</string>
-    <string name="poi_historic_monastery">Гістарычны кляштар</string>
     <string name="poi_wayside_cross">Прыдарожны крыж</string>
     <string name="poi_wayside_shrine">Прыдарожная святыня</string>
     <string name="poi_information">Інфармацыйны стэнд</string>
@@ -521,7 +518,6 @@
     <string name="poi_crematorium">Крэматорый</string>
     <string name="poi_internet_cafe">Інтэрнэт-кафэ</string>
     <string name="poi_bank">Банк</string>
-    <string name="poi_amenity_atm">Банкамат</string>
     <string name="poi_money_lender">Ліхвяр</string>
     <string name="poi_pawnbroker">Ламбард</string>
     <string name="poi_bureau_de_change">Абмен валют</string>
@@ -610,7 +606,6 @@
     <string name="poi_distance_mark">Пазнака дальнасці</string>
     <string name="poi_seamark_light_vessel">Агонь плывучага маяка (судна)</string>
     <string name="poi_small_craft_facility">Лодкавая станцыя</string>
-    <string name="poi_team_handball">Гандбол</string>
     <string name="poi_shop">Крама</string>
     <string name="poi_transportation">Транспарт</string>
     <string name="poi_education">Адукацыя</string>
@@ -738,7 +733,6 @@
     <string name="poi_craft_winery">Вінны завод</string>
     <string name="poi_gallery">Галерэя мастацтваў</string>
     <string name="poi_lean_to">Лабаз</string>
-    <string name="poi_general_tourist_attraction_yes">Турыстычная славутасьць</string>
     <string name="poi_trail_riding_station">Станцыя для вершнікаў</string>
     <string name="poi_wiki_place">Вікіпедыя</string>
     <string name="poi_wiki_lang_en">Вікіпедыя на англійскай мове</string>
@@ -808,7 +802,6 @@
     <string name="poi_swimming_pool_shop">Тавары для басейна</string>
     <string name="poi_model">Мадэлістам</string>
     <string name="poi_fashion">Крама моды</string>
-    <string name="poi_furnace">Крама абагравальнікаў</string>
     <string name="poi_scuba_diving_shop">Крама тавараў для дайвінгу</string>
     <string name="poi_trophy">Узнагароды, прызы</string>
     <string name="poi_height_restrictor">Абмежавальнік вышыні</string>
@@ -837,7 +830,6 @@
     <string name="poi_energy">Энэргетыка</string>
     <string name="poi_breakwater">Хвалялом</string>
     <string name="poi_groyne">Хвалярэз</string>
-    <string name="poi_tourism_attraction">Турыстычная славутасьць</string>
     <string name="poi_tree">Дрэва</string>
     <string name="poi_opening_hours">Гадзіны працы</string>
     <string name="poi_description">Апісанне</string>
@@ -876,7 +868,6 @@
     <string name="poi_route_hiking_nwn_poi">Нацыянальны пешы маршрут</string>
     <string name="poi_route_hiking_rwn_poi">Рэгіянальны пешы маршрут</string>
     <string name="poi_route_hiking_lwn_poi">Мясцовы пешы маршрут</string>
-    <string name="poi_conservation">Абароненая вобласьць</string>
     <string name="poi_node_networks">Вузлы пешаходнай ці рованай сеткі</string>
     <string name="poi_hiking_routes">Пешыя маршруты</string>
     <string name="poi_traffic_enforcement">Кантроль руху</string>
@@ -990,7 +981,6 @@
     <string name="poi_instagram">Instagram</string>
     <string name="vk">УКантакце</string>
     <string name="poi_google_plus">Google+</string>
-    <string name="poi_mill_pond">Млынавая сажалка</string>
     <string name="poi_building">Будынак</string>
     <string name="poi_military_office">Ваенкамат</string>
     <string name="poi_notary">Натарыус</string>
@@ -1106,7 +1096,6 @@
     <string name="poi_generator_source_geothermal">Крыніца энэргіі: геатэрмальны</string>
     <string name="poi_generator_source_oil">Крыніца энэргіі: мазут</string>
     <string name="poi_generator_source_diesel">Крыніца энэргіі: дызельнае паліва</string>
-    <string name="poi_car_wash_self_service">Самаабслугоўваньне</string>
     <string name="poi_int_name">Міжнародная назва</string>
     <string name="poi_nat_name">Агульнанацыянальная назва</string>
     <string name="poi_reg_name">Рэгіянальная назва</string>
@@ -1127,7 +1116,6 @@
     <string name="poi_information_office">Офіс</string>
     <string name="poi_information_terminal">Тэрмінал</string>
     <string name="poi_information_nature">Прырода</string>
-    <string name="poi_information_wildlife">Інфармацыя: пра дзікую прыроду</string>
     <string name="poi_information_history">Гісторыя</string>
     <string name="poi_information_sign">Знак</string>
     <string name="poi_information_audioguide">Аўдыягід</string>
@@ -1159,8 +1147,6 @@
     <string name="poi_stars_4s">4S (палепшаны першы клас)</string>
     <string name="poi_stars_5">5 (катэгорыя люкс)</string>
     <string name="poi_stars_5s">5S (катэгорыя люкс +)</string>
-    <string name="poi_stars_6">Колькасьць зорак: 6</string>
-    <string name="poi_stars_7">Колькасьць зорак: 7</string>
     <string name="poi_rooms">Колькасць нумароў</string>
     <string name="poi_love_hotel">Love-гатэль</string>
     <string name="poi_takeaway_no">На вынас: не</string>
@@ -1381,7 +1367,6 @@
     <string name="poi_payment_visa_no">Карткі Visa не прымаюцца</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">Карткі MasterCard не прымаюцца</string>
-    <string name="poi_payment_none">Бясплатна</string>
     <string name="poi_payment_maestro_yes">Maestro</string>
     <string name="poi_payment_maestro_no">Карткі Maestro не прымаюцца</string>
     <string name="poi_payment_american_express_yes">American Express (AMEX)</string>
@@ -1969,7 +1954,6 @@
     <string name="poi_impromptu_no">Імправізаваны: не</string>
     <string name="poi_sanitary_dump_station_yes">Асенізацыйная зліўная станцыя: ёсць</string>
     <string name="poi_sanitary_dump_station_no">Асенізацыйная зліўная станцыя: адсутнічае</string>
-    <string name="poi_sanitary_dump_station_customers">Асенізацыйная зьліўная станцыя: толькі для наведвальнікаў</string>
     <string name="poi_power_supply_yes">Так</string>
     <string name="poi_power_supply_no">Крыніца сілкавання: адсутнічае</string>
     <string name="poi_power_supply_cee_17_blue">Крыніца сілкавання (штэкер): CEE 17 blue</string>
@@ -2373,7 +2357,6 @@
     <string name="poi_inscription_e">Надпіс:E</string>
     <string name="poi_inscription_ne">Надпіс:NE</string>
     <string name="poi_construction_yes">Падчас будаўніцтва</string>
-    <string name="poi_additional_atm_yes">З банкаматам</string>
     <string name="poi_atm_no">Без банкамата</string>
     <string name="poi_firepit">Кастрышча</string>
     <string name="poi_street_cabinet">Размеркавальная шафа</string>
@@ -2466,7 +2449,6 @@
     <string name="poi_sanitary_dump_station">Асенізацыйная зліўная станцыя</string>
     <string name="poi_medical_system_western_yes">Заходняя</string>
     <string name="poi_medical_system_chinese_yes">Традыцыйная кітайская</string>
-    <string name="poi_medical_system_unknown_yes">Мэдыцынская сістэма: традыцыйная невядома</string>
     <string name="poi_medical_system_ayurveeda_yes">Аюрведа</string>
     <string name="poi_medical_system_kampo_yes">Традыцыйная японская</string>
     <string name="poi_medical_system_mongolian_yes">Традыцыйная мангольская</string>
@@ -2606,7 +2588,6 @@
     <string name="poi_water_source_main">Асноўная</string>
     <string name="poi_water_source_pond">Сажалка</string>
     <string name="poi_water_source_stream">Струмень</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Ёмістасць</string>
     <string name="poi_in_service_yes">Выкарыстоўваецца: так</string>
     <string name="poi_street_cabinet_power">Тып шафы: электрычная</string>
     <string name="poi_street_cabinet_telecom">Тып шафы: тэлекамунікацыі</string>
@@ -3557,8 +3538,6 @@
     <string name="poi_park_ride_ferry">Паром</string>
     <string name="poi_park_ride">Перахопліваючая паркоўка</string>
     <string name="poi_park_ride_hov">Аўта з некалькімі пасажырамі</string>
-    <string name="poi_generator_source_biomass">Крыніца энергіі: біямаса</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Радыятэрапія</string>
     <string name="poi_hazard">Небяспека</string>
     <string name="poi_rtsa_scale_filter">Катэгорыя цяжкасці</string>
     <string name="poi_rtsa_scale_nc">н/к</string>

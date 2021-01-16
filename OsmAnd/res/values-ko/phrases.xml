@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="poi_palaeontological_site">Palaeontological 사이트</string>
 
-	<string name="poi_bakery">베이커리</string>
+    <string name="poi_bakery">베이커리</string>
 	<string name="poi_alcohol">술집</string>
 	<string name="poi_convenience">편의점</string>
 	<string name="poi_mall">쇼핑몰</string>
@@ -18,7 +18,7 @@
 	<string name="poi_dairy">낙농장 상점</string>
 	<string name="poi_vending_machine">자동 판매기</string>
 
-	<string name="poi_books">서점</string>
+    <string name="poi_books">서점</string>
 	<string name="poi_bicycle">자전거 가게</string>
 	<string name="poi_anime">애니메이션 상점</string>
 	<string name="poi_antiques">골동품 가게</string>
@@ -37,8 +37,7 @@
 	<string name="poi_copyshop">복사 가게</string>
 	<string name="poi_curtain">커튼 가게</string>
 	<string name="poi_fabric">휘장 상점</string>
-	<string name="poi_bedding">침구 가게</string>
-	<string name="poi_dive">다이빙 장비</string>
+    <string name="poi_dive">다이빙 장비</string>
 	<string name="poi_doityourself">주택 개선 가게</string>
 	<string name="poi_erotic">에로틱 가게</string>
 	<string name="poi_fishing">낚시 도구</string>
@@ -92,7 +91,7 @@
 	<string name="poi_marketplace">마켓 플레이스</string>
 	<string name="poi_sewing">건조 용품 가게</string>
 
-	<string name="poi_police">경찰</string>
+    <string name="poi_police">경찰</string>
 	<string name="poi_fire_station">소방서</string>
 	<string name="poi_emergency_phone">긴급 전화</string>
 	<string name="poi_fire_hydrant">소화</string>
@@ -101,7 +100,7 @@
 	<string name="poi_ambulance_station">구급차 역</string>
 	<string name="poi_emergency_access_point">긴급 액세스 포인트</string>
 
-	<string name="poi_ford">포드</string>
+    <string name="poi_ford">포드</string>
 	<string name="poi_mountain_pass">마운틴 패스</string>
 	<string name="poi_gate">게이트</string>
 	<string name="poi_city_wall">도시 벽</string>
@@ -116,7 +115,7 @@
 	<string name="poi_traffic_calming_choker">초커</string>
 	<string name="poi_traffic_signals">빛을 중지</string>
 
-	<string name="poi_car_repair">자동차 수리</string>
+    <string name="poi_car_repair">자동차 수리</string>
 	<string name="poi_service_tyres">타이어</string>
 	<string name="poi_vehicle_inspection">차량 검사</string>
 	<string name="poi_car_wash">세차장</string>
@@ -131,7 +130,7 @@
 	<string name="poi_fire_water_pond">불 물 연못</string>
 	<string name="poi_garages">차고</string>
 
-	<string name="poi_public_transport_platform">대중 교통 정류장</string>
+    <string name="poi_public_transport_platform">대중 교통 정류장</string>
 	<string name="poi_public_transport_platform_bus">버스 정류장</string>
 	<string name="poi_public_transport_platform_trolleybus">무궤도 전차 정류장</string>
 	<string name="poi_bus_stop">버스 정류장</string>
@@ -145,20 +144,20 @@
 	<string name="poi_subway_station">지하철 역</string>
 	<string name="poi_taxi">택시 승차장</string>
 
-	<string name="poi_aerodrome">공항</string>
+    <string name="poi_aerodrome">공항</string>
 	<string name="poi_helipad">헬리콥터 이착륙지</string>
 	<string name="poi_runway">활주로</string>
 	<string name="poi_aeroway_terminal">Aeroway 터미널</string>
 	<string name="poi_aeroway_gate">Aeroway 게이트</string>
 
-	<string name="poi_slipway">슬립웨이</string>
+    <string name="poi_slipway">슬립웨이</string>
 	<string name="poi_ferry_terminal">페리 터미널</string>
 	<string name="poi_lighthouse">등대</string>
 
-	<string name="poi_bicycle_rental">자전거 대여</string>
+    <string name="poi_bicycle_rental">자전거 대여</string>
 	<string name="poi_bicycle_parking">자전거 주차장</string>
 
-	<string name="poi_aerialway_cable_car">케이블 카</string>
+    <string name="poi_aerialway_cable_car">케이블 카</string>
 	<string name="poi_aerialway_gondola">곤돌라</string>
 	<string name="poi_aerialway_chair_lift">의자 리프트</string>
 	<string name="poi_aerialway_t_bar">T-바 리프트</string>
@@ -169,14 +168,14 @@
 	<string name="poi_aerialway_goods">상품 엘리베이터</string>
 	<string name="poi_aerialway_magic_carpet">카펫 리프트</string>
 
-	<string name="poi_tunnel">터널</string>
+    <string name="poi_tunnel">터널</string>
 	<string name="poi_bridge">다리</string>
 
-	<string name="poi_speed_camera">속도 경고 카메라</string>
+    <string name="poi_speed_camera">속도 경고 카메라</string>
 	<string name="poi_turning_circle">터닝 서클</string>
 	<string name="poi_motorway_junction">고속도로 분기점</string>
 
-	<string name="poi_boatyard">보트야드</string>
+    <string name="poi_boatyard">보트야드</string>
 	<string name="poi_wastewater_plant">폐수 공장</string>
 	<string name="poi_water_tower">급수 탑</string>
 	<string name="poi_lock_gate">게이트 잠금</string>
@@ -184,23 +183,23 @@
 	<string name="poi_dam">댐</string>
 	<string name="poi_watermill">물방앗간</string>
 
-	<string name="poi_power_substation">변전소</string>
+    <string name="poi_power_substation">변전소</string>
 	<string name="poi_power_transformer">변압기</string>
 	<string name="poi_power_plant">발전소</string>
 	<string name="poi_power_generator">전원 생성기</string>
 
-	<string name="poi_post_office">우체국</string>
+    <string name="poi_post_office">우체국</string>
 	<string name="poi_post_box">우체통</string>
 	<string name="poi_telephone">전화</string>
 	<string name="poi_communication_tower">통신 타워</string>
 	<string name="poi_telephone_exchange">전화 교환</string>
 
-	<string name="poi_recycling">재활용</string>
+    <string name="poi_recycling">재활용</string>
 	<string name="poi_landfill">매립지</string>
 	<string name="poi_waste_disposal">폐기물 처리</string>
 	<string name="poi_waste_basket">폐기물 바구니</string>
 
-	<string name="poi_pier">부두</string>
+    <string name="poi_pier">부두</string>
 	<string name="poi_surveillance">감시</string>
 	<string name="poi_observatory">전망대</string>
 	<string name="poi_astronomical_observatory">천문대</string>
@@ -217,13 +216,13 @@
 	<string name="poi_salt_pond">염전</string>
 	<string name="poi_cricket_nets">귀뚜라미 그물</string>
 
-	<string name="poi_driving_school">운전 학교</string>
+    <string name="poi_driving_school">운전 학교</string>
 	<string name="poi_school">학교</string>
 	<string name="poi_kindergarten">유치원</string>
 	<string name="poi_college">대학</string>
 	<string name="poi_university">대학</string>
 
-	<string name="poi_social_facility">사회 시설</string>
+    <string name="poi_social_facility">사회 시설</string>
 	<string name="poi_courthouse">법원</string>
 	<string name="poi_prison">감옥</string>
 	<string name="poi_register_office">민사 레지스트리 사무소</string>
@@ -247,7 +246,7 @@
 	<string name="poi_place_allotments">부담금</string>
 	<string name="poi_place_farm">농장</string>
 
-	<string name="poi_pharmacy">약국</string>
+    <string name="poi_pharmacy">약국</string>
 	<string name="poi_hospital">병원</string>
 	<string name="poi_doctors">의사</string>
 	<string name="poi_clinic">클리닉</string>
@@ -260,8 +259,7 @@
 	<string name="poi_healthcare_alternative">대체 의학</string>
 	<string name="poi_audiologist">음향학자</string>
 	<string name="poi_blood_bank">혈액 은행</string>
-	<string name="poi_healthcare_centre">의료 센터</string>
-	<string name="poi_midwife">산파</string>
+    <string name="poi_midwife">산파</string>
 	<string name="poi_occupational_therapist">직업 치료사</string>
 	<string name="poi_optometrist">검안</string>
 	<string name="poi_physiotherapist">물리 요법가</string>
@@ -271,7 +269,7 @@
 	<string name="poi_speech_therapist">음성 치료사</string>
 	<string name="poi_healthcare_yes">의료 시설</string>
 
-	<string name="poi_company">회사</string>
+    <string name="poi_company">회사</string>
 	<string name="poi_insurance">보험</string>
 	<string name="poi_estate_agent">부동산 중개인</string>
 	<string name="poi_lawyer">변호사</string>
@@ -288,7 +286,7 @@
 	<string name="poi_studio">스튜디오</string>
 	<string name="poi_bookmaker">북 마커</string>
 
-	<string name="poi_stadium">경기장</string>
+    <string name="poi_stadium">경기장</string>
 	<string name="poi_sports_centre">스포츠 센터</string>
 	<string name="poi_golf_course">골프 코스</string>
 	<string name="poi_ice_rink">아이스 링크</string>
@@ -355,7 +353,7 @@
 	<string name="poi_toboggan">토보간</string>
 	<string name="poi_volleyball">배구</string>
 
-	<string name="poi_museum">박물관</string>
+    <string name="poi_museum">박물관</string>
 	<string name="poi_attraction">관광 명소</string>
 	<string name="poi_memorial">기념관</string>
 	<string name="poi_artwork">아트 워크</string>
@@ -375,14 +373,14 @@
 	<string name="poi_zoo">동물원</string>
 	<string name="poi_theme_park">테마 파크</string>
 
-	<string name="poi_hotel">호텔</string>
+    <string name="poi_hotel">호텔</string>
 	<string name="poi_guest_house">게스트 하우스</string>
 	<string name="poi_hostel">호스텔</string>
 	<string name="poi_motel">모텔</string>
 	<string name="poi_alpine_hut">알파인 헛</string>
 	<string name="poi_chalet">샬레</string>
 
-	<string name="poi_place_of_worship">예배 장소</string>
+    <string name="poi_place_of_worship">예배 장소</string>
 	<string name="poi_religion_christian">예배 장소: 기독교</string>
 	<string name="poi_religion_jewish">예배 장소: 유대인</string>
 	<string name="poi_religion_muslim">예배 장소: 이슬람</string>
@@ -392,8 +390,7 @@
 	<string name="poi_religion_shinto">예배 장소: 신도교</string>
 	<string name="poi_religion_taoist">예배 장소: 도교</string>
 	<string name="poi_monastery">수도원</string>
-	<string name="poi_historic_monastery">유서깊은 수도원</string>
-	<string name="poi_wayside_cross">크로스 길가</string>
+    <string name="poi_wayside_cross">크로스 길가</string>
 	<string name="poi_wayside_shrine">길가의 신사</string>
 	<string name="poi_information">도교 정보</string>
 	<string name="poi_clock">시계</string>
@@ -417,7 +414,7 @@
 	<string name="poi_funicular">케이블 카</string>
 	<string name="poi_resort">리조트</string>
 
-	<string name="poi_club_art">아트 클럽</string>
+    <string name="poi_club_art">아트 클럽</string>
 	<string name="poi_club_astronomy">천문학 클럽</string>
 	<string name="poi_club_computer">컴퓨터 클럽</string>
 	<string name="poi_club_board_games">보드 게임 클럽</string>
@@ -442,7 +439,7 @@
 	<string name="poi_club_tourism">관광 클럽</string>
 	<string name="poi_club_charity">자선 클럽</string>
 
-	<string name="poi_library">라이브러리</string>
+    <string name="poi_library">라이브러리</string>
 	<string name="poi_arts_centre">예술 센터</string>
 	<string name="poi_cinema">시네마</string>
 	<string name="poi_casino">카지노</string>
@@ -464,7 +461,7 @@
 	<string name="poi_water_park">워터 파크</string>
 	<string name="poi_park">공원</string>
 
-	<string name="poi_cafe">카페</string>
+    <string name="poi_cafe">카페</string>
 	<string name="poi_biergarten">비어 가든</string>
 	<string name="poi_restaurant">레스토랑</string>
 	<string name="poi_fast_food">패스트 푸드</string>
@@ -474,7 +471,7 @@
 	<string name="poi_drinking_water">식 수</string>
 	<string name="poi_barbecue">바베큐</string>
 
-	<string name="poi_craft_agricultural_engines">농업 엔진</string>
+    <string name="poi_craft_agricultural_engines">농업 엔진</string>
 	<string name="poi_craft_basket_maker">바구니 메이커</string>
 	<string name="poi_craft_beekeeper">양봉가</string>
 	<string name="poi_craft_blacksmith">대장장이</string>
@@ -526,7 +523,7 @@
 	<string name="poi_craft_watchmaker">시계공</string>
 	<string name="poi_craft_window_construction">창문 건설</string>
 
-	<string name="poi_funeral_directors">장례 감독</string>
+    <string name="poi_funeral_directors">장례 감독</string>
 	<string name="poi_craft_computer">컴퓨터 기술</string>
 	<string name="poi_beauty">뷰티 살롱</string>
 	<string name="poi_beauty_salon_nails">네일 살롱</string>
@@ -546,15 +543,14 @@
 	<string name="poi_crematorium">화장 하는 곳</string>
 	<string name="poi_internet_cafe">인터넷 카페</string>
 
-	<string name="poi_bank">은행</string>
-	<string name="poi_amenity_atm">현금 지급기</string>
-	<string name="poi_money_lender">대부업자</string>
+    <string name="poi_bank">은행</string>
+    <string name="poi_money_lender">대부업자</string>
 	<string name="poi_pawnbroker">전당포</string>
 	<string name="poi_bureau_de_change">변경소</string>
 	<string name="poi_accountant">회계사</string>
 	<string name="poi_bitcoin_yes">Bitcoin 지불</string>
 
-	<string name="poi_cave_entrance">동굴 입구</string>
+    <string name="poi_cave_entrance">동굴 입구</string>
 	<string name="poi_peak">봉우리</string>
 	<string name="poi_saddle">안장</string>
 	<string name="poi_volcano">화산</string>
@@ -578,7 +574,7 @@
 	<string name="poi_island">섬</string>
 	<string name="poi_islet">작은 섬</string>
 
-	<string name="poi_anchorage">앵커리지</string>
+    <string name="poi_anchorage">앵커리지</string>
 	<string name="poi_anchor_berth">앵커 정박</string>
 	<string name="poi_beacon">신호</string>
 	<string name="poi_beacon_cardinal">심장 표지</string>
@@ -620,7 +616,7 @@
 	<string name="poi_seamark_rock">바위, seamark</string>
 	<string name="poi_seamark_wreck">난파선, seamark</string>
 
-	<string name="poi_military">군대</string>
+    <string name="poi_military">군대</string>
 	<string name="poi_military_airfield">군 비행장</string>
 	<string name="poi_military_bunker">군사 벙커</string>
 	<string name="poi_military_barracks">병영</string>
@@ -640,12 +636,11 @@
 	<string name="poi_attraction_train">기차 (명소)</string>
 	<string name="poi_attraction_water_slide">워터 슬라이드</string>
 
-	<string name="poi_tower">타워</string>
+    <string name="poi_tower">타워</string>
 	<string name="poi_aquarium">아쿠아리움</string>
 	<string name="poi_mast">돛대</string>
 	<string name="poi_radar">레이더</string>
-	<string name="poi_team_handball">핸드볼</string>
-	<string name="poi_shop">가게</string>
+    <string name="poi_shop">가게</string>
 	<string name="poi_emergency">응급기관</string>
 	<string name="poi_transportation">대중교통</string>
 	<string name="poi_man_made">인공물</string>
@@ -663,12 +658,12 @@
 	<string name="poi_seamark">항해</string>
 	<string name="poi_osmwiki">위키백과</string>
 	<string name="poi_user_defined_other">사용자 정의</string>
-	
-	<string name="poi_apartment">아파트</string>
 
-	<string name="poi_military_landuse">군사 지역</string>
-	
-	<string name="poi_public_transport_stop_position">대중 교통 정류장 위치</string>
+    <string name="poi_apartment">아파트</string>
+
+    <string name="poi_military_landuse">군사 지역</string>
+
+    <string name="poi_public_transport_stop_position">대중 교통 정류장 위치</string>
 	<string name="poi_halt">철도 정거장</string>
 	<string name="poi_railway_buffer_stop">철도 버퍼 정거장</string>
 	<string name="poi_lodging">숙박</string>
@@ -677,10 +672,10 @@
 	<string name="poi_internet_access_wired">인터넷 접속: 유선</string>
 	<string name="poi_internet_access_public">인터넷 접속: 공용</string>
 	<string name="poi_internet_access_service">인터넷 접속: 서비스</string>
-	
-	<string name="poi_wine">와인 삽</string>
 
-	<string name="poi_shop_food">식품점</string>
+    <string name="poi_wine">와인 삽</string>
+
+    <string name="poi_shop_food">식품점</string>
 	<string name="poi_road_obstacle">도로 장애물</string>
 		<string name="poi_filling_station">주유소</string>
 		<string name="poi_personal_transport">개인 수송</string>
@@ -707,12 +702,12 @@
 	<string name="poi_quarter">쿼터</string>
 	<string name="poi_rest_area">미삭 영역</string>
 
-	<string name="poi_reservoir">저수지</string>
+    <string name="poi_reservoir">저수지</string>
 	<string name="poi_gasometer">가스 계량기</string>
 	<string name="poi_silo">실로</string>
 	<string name="poi_storage_tank">저장 탱크</string>
 
-	<string name="poi_piste_downhill">내리막</string>
+    <string name="poi_piste_downhill">내리막</string>
 	<string name="poi_piste_nordic">노르딕</string>
 	<string name="poi_piste_skitour">스키여행</string>
 	<string name="poi_piste_hike">하이킹</string>
@@ -722,10 +717,10 @@
 	<string name="poi_piste_playground">놀이터</string>
 	<string name="poi_piste_ice_skate">아이스 스케이트</string>
 
-	<string name="poi_allotments">부담금</string>
+    <string name="poi_allotments">부담금</string>
 	<string name="poi_forest">국립공원</string>
 
-	<string name="poi_canal">운하</string>
+    <string name="poi_canal">운하</string>
 	<string name="poi_bench">벤치</string>
 	<string name="poi_valley">계곡</string>
 	<string name="poi_water">수로</string>
@@ -760,38 +755,37 @@
 	<string name="poi_meadow">초원</string>
 	<string name="poi_landuse_railway">철도 지역</string>
 
-	<string name="poi_residential">주거 지역</string>
+    <string name="poi_residential">주거 지역</string>
 
-	<string name="poi_recreation_ground">레크리에이션 지역</string>
+    <string name="poi_recreation_ground">레크리에이션 지역</string>
 	<string name="poi_village_green">녹색 마을</string>
 
-	<string name="poi_charity">자선 가게</string>
+    <string name="poi_charity">자선 가게</string>
 	<string name="poi_photo">사진관</string>
 	<string name="poi_sailing">항해</string>
 	<string name="poi_wilderness_hut">황야의 오두막</string>
 
-	<string name="poi_tomb">무덤</string>
+    <string name="poi_tomb">무덤</string>
 	<string name="poi_payment_terminal">지불 단말기</string>
 	<string name="poi_observation_tower">관측 탑</string>
 	<string name="poi_bell_tower">종각</string>
-	<string name="poi_general_tourist_attraction_yes">일반 관광 명소</string>
-	<string name="poi_cabin">오두막</string>
+    <string name="poi_cabin">오두막</string>
 	<string name="poi_lean_to">임대한 방</string>
 	<string name="poi_hunting_lodge">사냥 별장</string>
 
-	<string name="poi_picnic_table">피크닉 테이블</string>
+    <string name="poi_picnic_table">피크닉 테이블</string>
 	<string name="poi_hanami">꽃을 볼 수 있는 명소</string>
 	<string name="poi_wine_cellar">와인 저장고</string>
 	<string name="poi_craft_winery">와이너리</string>
 
-	<string name="poi_piste">피스트</string>
+    <string name="poi_piste">피스트</string>
 	<string name="poi_ski_rental">스키 렌탈</string>
 
-	<string name="poi_gallery">아트 갤러리</string>
+    <string name="poi_gallery">아트 갤러리</string>
 	<string name="poi_ski_resort">스키 리조트</string>
 	<string name="poi_trail_riding_station">트레일 라이딩 역</string>
 
-	<string name="poi_cheese">치즈 가게</string>
+    <string name="poi_cheese">치즈 가게</string>
 	<string name="poi_chocolate">초콜릿 가게</string>
 	<string name="poi_coffee">커피숍</string>
 	<string name="poi_pasta">파스타 가게</string>
@@ -800,8 +794,7 @@
 	<string name="poi_candles">양초 가게</string>
 	<string name="poi_fashion">패션 상점</string>
 	<string name="poi_free_flying">무료 비행 용품 가게</string>
-	<string name="poi_furnace">난방 장치 상점</string>
-	<string name="poi_garden_furniture">정원 가구점</string>
+    <string name="poi_garden_furniture">정원 가구점</string>
 	<string name="poi_leather">가죽 상점</string>
 	<string name="poi_music">음악 상점</string>
 	<string name="poi_scuba_diving_shop">스쿠버 다이빙 용품 가게</string>
@@ -816,17 +809,14 @@
 	<string name="poi_pyrotechnics">불꽃</string>
 	<string name="poi_weapons">무기 상점</string>
 
-	<string name="poi_breakwater">방파제</string>
+    <string name="poi_breakwater">방파제</string>
 	<string name="poi_groyne">방사제</string>
 
-	<string name="poi_power_cable_distribution_cabinet">케이블 분배 캐비닛</string>
+    <string name="poi_power_cable_distribution_cabinet">케이블 분배 캐비닛</string>
 	<string name="poi_basin">분지</string>
-	<string name="poi_conservation">보존 땅</string>
-
-	<string name="poi_crane">크레인</string>
+    <string name="poi_crane">크레인</string>
 	<string name="poi_country">국가</string>
-	<string name="poi_tourism_attraction">관광 명소</string>
-	<string name="poi_religious">종교적인 영역</string>
+    <string name="poi_religious">종교적인 영역</string>
 	<string name="poi_cutline">가공선</string>
 	<string name="poi_tree">나무</string>
 	<string name="poi_wiki_place">위키백과</string>

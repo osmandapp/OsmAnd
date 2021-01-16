@@ -321,8 +321,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="install_more">Įdiegti daugiau…</string>
     <string name="level_to_switch_vector_raster_descr">Mažiausias dydis, kuriuo rodyti vektorinius žemėlapius.</string>
     <string name="level_to_switch_vector_raster">Mažiausias vektorinių žemėl. dydis</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>Online OSM</u> žemėlapis su nuotraukomis.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> žemėlapis su nuotraukomis.</string>
     <string name="error_doing_search">Įvyko klaida vykdant paiešką be interneto.</string>
     <string name="search_osm_offline">Ieškoti adreso parsiųstuose žemėlapiuose</string>
     <string name="system_locale">Sistemos</string>
@@ -596,9 +595,8 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="error_calculating_route">Įvyko klaida skaičiuojant maršrutą</string>
     <string name="error_calculating_route_occured">Įvyko klaida skaičiuojant maršrutą</string>
     <string name="empty_route_calculated">Klaida: Sudarytas maršrutas yra tuščias</string>
-    <string name="new_route_calculated_dist">Apskaičiuotas naujas maršrutas, atstumas</string>
     <string name="arrived_at_destination">Jūs pasiekėte savo kelionės tikslą</string>
-    <string name="invalid_locations">Koordinatės yra neteisingos!</string>
+    <string name="invalid_locations">Neteisingos koordinatės</string>
     <string name="go_back_to_osmand">Grįžti į OsmAnd žemėlapį</string>
     <string name="shared_string_close">Uždaryti</string>
     <string name="loading_data">Įkeliami duomenys…</string>
@@ -698,7 +696,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="osb_comment_dialog_error">Komentaras pridėti nepavyko</string>
     <string name="poi_edit_title">Redaguoti LV</string>
     <string name="poi_create_title">Sukurti LV</string>
-    <string name="poi_error_poi_not_found">LV neina rasti arba LV sudaryta iš kelių elementų kurie kolkas dar nepalaikomi.</string>
     <string name="poi_remove_confirm_template">Ištrinti {0} (įveskite komentarą)?</string>
     <string name="poi_remove_title">Ištrinti LV</string>
     <string name="shared_string_delete">Ištrinti</string>
@@ -784,7 +781,16 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
 \nOsmAnd yra atviro kodo programa naudojanti įvairius OpenStreetMap (OSM) duomenis. Visi žemėlapių duomenys (vektoriniai ar lakštiniai) gali būti išsaugoti telefone ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kelionei apskaičiuotu maršrutu. Dalis pagrindinių savybių: - Veikia be interneto (išsaugokite parsiųstus žemėlapius ar jų lakštus įrenginyje) - Kompaktiški vektoriniai viso pasaulio žemėlapiai - Parsisųskite šalies ar regiono žemėlapius tiesiai iš pačios propgramos - Galima sulieti kelis žemėlapop sluoksnius, tokius kaip GPX ar judėjimo istoriją, Lankytinas Vietas, mėgiamas vietas, kontūrų linijas, viešojo transporto stoteles, papildomus žemėlapius su pasirinktinai nustatomu permatomumo lygiu - Adresų ir LV paieška nenaudojant interneto - Vidutinio ilgio maršruto apskaičiavimas be interneto paslaugų - Automobilio, dviračio ir pėsčiojo režimai su: - pasirinktiniu dineos/nakties rodinio perjungimu - pasirinktiniu pagal judėjimo greitį automatiškai nustatomu mąsteliu - pasirinktine žemėlapio orientacija pagal kompaso arba judėjimo kryptį - pasirinktinis eismo juostų nurodymas, greičio ribojimų rodymas, įrašyti ar generuojami balsai Šios nemokamos OsmAnd versijos apribojimai: - Ribojamas žemėlapių parsiuntimų skaičius - Nėra prieigos prie iš Wikipedia parsiunčiamų LV OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas priklauso nuo finansinės paramos, kuri įgalina tolesnį vystymą ir naujų funkcijų kūrimą. Norime paskatinti jus nusipirkti OsmAnd+ programą arba finansiškai prisidėti prie specifinių funkcijų kūrimo arba šiaip paremti programą osmand.net svetainėje.</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd - atviro kodo navigacijos programa su žemėlapiais</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ yra atviro kodo programa naudojanti visą spektrą OpenStreetMap (OSM) duomenų. Visi žemėlapiai (vektoriniai ar lakštiniai) gali būti išsaugoti telefono atmintyje ar atminties kortelėje ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kelionei apskaičiuotu maršrutu. OsmAnd+ yra mokama programos versiją, kurią pirkdami jūs remiate šį projektą, skiriate lėšas naujų funkcijų kūrimui ir tuo pačiu gaunate naujausius atnaujinimus. Savybės: - Veikia visiškai be interneto (išsaugokite parsiųstus žemėlapius ar jų lakštus įrenginyje)  - Kompaktiški vektoriniai viso pasaulio žemėlapiai - Neribota galimybė parsisiųsti šalies ar regiono žemėlapius pačioje programoje - Parsiųstos Vikpedijos funkcionalumas (parsisiųskite LV iš Vikipedijos) puikiai tinkantis lankytinų objektų pažinimui - Galimybė sudėti kelis žemėlapių sluoksnius, pvz. GPX ar kelionės istoriją, Lankytinas, Išsaugotas vietas, kontūrų linijas, viešo transporto sustojimus, papildomus žemėlapius pasirenkant jų permatomumą - Adresų ir LV paieška nenaudojant interneto - Vidutinio ilgio maršrutų skaičiavimas nenaudojant interneto - Automobilio, dviračio ir pėsčiojo režimai su: - pasirenkamu automatiniu dienos/nakties vaizdo perjungimu - pasirenkamas prie judėjimo greičio priderinamas žemėlapio didinimas - pasirenkamas žemėlapio pasukimas pagal kompasą arba judėjimo kryptį - pasirenkamas eismo juostų keitimo nurodymų įjungimas, greičių apribojimo rodymas, įrašyti arba sintetiniai (TTS) balsai"</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
+\n
+\nOsmAnd+ yra atviro kodo programa naudojanti visą spektrą OpenStreetMap (OSM) duomenų. Visi žemėlapiai (vektoriniai ar lakštiniai) gali būti išsaugoti telefono atmintyje ar atminties kortelėje ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kelionei apskaičiuotu maršrutu.
+\n
+\nOsmAnd+ yra mokama programos versiją, kurią pirkdami jūs remiate šį projektą, skiriate lėšas naujų funkcijų kūrimui ir tuo pačiu gaunate naujausius atnaujinimus. 
+\n
+\nKeletas pagrindinių savybių: 
+\n- Veikia visiškai be interneto (išsaugokite parsiųstus žemėlapius ar jų lakštus įrenginyje)
+\n- Kompaktiški vektoriniai viso pasaulio žemėlapiai - Neribota galimybė parsisiųsti šalies ar regiono žemėlapius pačioje programoje - Parsiųstos Vikpedijos funkcionalumas (parsisiųskite LV iš Vikipedijos) puikiai tinkantis lankytinų objektų pažinimui - Galimybė sudėti kelis žemėlapių sluoksnius, pvz. GPX ar kelionės istoriją, Lankytinas, Išsaugotas vietas, kontūrų linijas, viešo transporto sustojimus, papildomus žemėlapius pasirenkant jų permatomumą - Adresų ir LV paieška nenaudojant interneto - Vidutinio ilgio maršrutų skaičiavimas nenaudojant interneto - Automobilio, dviračio ir pėsčiojo režimai su: - pasirenkamu automatiniu dienos/nakties vaizdo perjungimu - pasirenkamas prie judėjimo greičio priderinamas žemėlapio didinimas - pasirenkamas žemėlapio pasukimas pagal kompasą arba judėjimo kryptį - pasirenkamas eismo juostų keitimo nurodymų įjungimas, greičių apribojimo rodymas, įrašyti arba sintetiniai (TTS) balsai
+\n</string>
     <string name="osmand_parking_event">Pasiimti automobilį iš stovėjimo vietos</string>
     <string name="context_menu_item_last_intermediate_point">Pridėti paskutinį tarpinį tikslą</string>
     <string name="context_menu_item_first_intermediate_point">Nustatyti pirmą tarpinį tikslą</string>
@@ -860,7 +866,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="av_video_format_descr">Pasirinkti vaizdo įrašo formatą.</string>
     <string name="av_video_format">Vaizdo įrašo formatas</string>
     <string name="av_use_external_recorder_descr">Naudoti sistemos vaizdo įrašymo įrankį.</string>
-    <string name="av_use_external_recorder">Nuadoti kitą įrašymo įrankį</string>
+    <string name="av_use_external_recorder">Naudoti sisteminį įrašymo įrankį</string>
     <string name="av_settings_descr">Konfigūruoti vaizdo ir garso parametrus.</string>
     <string name="av_settings">Garso/vaizdo nustatymai </string>
     <string name="recording_error">Įrašymo klaida</string>
@@ -876,7 +882,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="recording_can_not_be_played">Įrašo neina pagroti</string>
     <string name="recording_context_menu_delete">Ištrinti įrašą</string>
     <string name="recording_context_menu_play">Groti</string>
-    <string name="recording_description">"Įrašas %1$s  %3$s %2$s"</string>
+    <string name="recording_description">Įrašas %1$s %3$s %2$s</string>
     <string name="recording_default_name">Įrašas</string>
     <string name="shared_string_control_start">Įrašyti</string>
     <string name="map_widget_av_notes">Audio užrašai</string>
@@ -907,7 +913,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="item_checked">patikrinta</string>
     <string name="item_unchecked">nepatikrinta</string>
     <string name="shared_string_map">Žemėlapis</string>
-    <string name="av_def_action_choose">Pasirinkti paprašius</string>
+    <string name="av_def_action_choose">Pasirinkti paprašius\?</string>
     <string name="access_arrival_time">Atvykimo laikas</string>
     <string name="map_widget_gps_info">GPS informacija</string>
     <string name="layer_hillshade">Kalnų šešėlių sluoksnis</string>
@@ -928,7 +934,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="files_limit">liko %1$d failų(-ai)</string>
     <string name="available_downloads_left">Liko parsiųsti %1$d failus(-ų)</string>
     <string name="install_paid">Pilna versija</string>
-    <string name="cancel_route">Atšaukti maršrutą</string>
+    <string name="cancel_route">Atšaukti maršrutą\?</string>
     <string name="cancel_navigation">Stabdyti navigaciją</string>
     <string name="clear_destination">Išvalyti tikslą</string>
     <string name="download_using_mobile_internet">Šiuo metu Wi-Fi neprijungta. Ar norite tęsti siuntimąsį interneto ryšiu?</string>
@@ -938,7 +944,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="use_kalman_filter_compass">Naudoti Kalmano filtrą</string>
     <string name="local_indexes_cat_srtm">Kontūrinės linijos</string>
     <string name="wait_current_task_finished">Palaukite kol dabartinė užduotis bus baigta</string>
-    <string name="shared_string_downloading">Parsiunčiama</string>
+    <string name="shared_string_downloading">Parsiunčiama…</string>
     <string name="local_osm_changes_backup_successful">OSM pakeitimų failas sėkmingai sugeneruotas %1$s</string>
     <string name="local_osm_changes_backup_failed">OSM pakeitimų atsarginės kopijos išsaugoti nepavyko</string>
     <string name="local_osm_changes_backup">Išsaugoti vietinę OSM pakeitimų kopiją</string>
@@ -1367,7 +1373,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="proxy_host_descr">Nurodykite jūsų proksi serverio pavadinimą (pvz., 127.0.0.1).</string>
     <string name="proxy_port_title">Proksi serverio portas</string>
     <string name="proxy_port_descr">Nurodykite jūsų proksi serverio porto numerį (pvz., 8118).</string>
-    <string name="enable_proxy_descr">"Konfigūruoti  HTTP proksi serverį visoms tinklo užklausoms."</string>
+    <string name="enable_proxy_descr">Konfigūruoti HTTP proksi serverį visoms tinklo užklausoms.</string>
     <string name="shared_string_disabled">Išjungta</string>
     <string name="shared_string_enabled">Įjungta</string>
     <string name="edit_group">Redaguoti grupę</string>
@@ -1420,7 +1426,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="waypoint_visit_after">Aplankyti po</string>
     <string name="waypoint_visit_before">Aplankyti iki</string>
     <string name="short_location_on_map">Platuma %1$s
-Ilguma %2$s</string>
+\nIlguma %2$s</string>
     <string name="tips_and_tricks_descr">Dažni klausimai, paskutiniai keitimai ir kita.</string>
     <string name="routing_settings_2">Navigacijos nustatymai</string>
     <string name="general_settings_2">Pagrindiniai nutatymai</string>
@@ -1561,7 +1567,7 @@ Ilguma %2$s</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX plotis</string>
     <string name="rendering_value_default13_name">Numatytoji (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Numatytoji (skaidri žalsvai mėlyna)</string>
-    <string name="do_you_like_osmand">"Ar jums  patinka OsmAnd?"</string>
+    <string name="do_you_like_osmand">Ar jums patinka OsmAnd\?</string>
     <string name="rate_this_app">Įvertinkite programėlę</string>
     <string name="rate_this_app_long">Įvertinkite OsmAnd Google Play puslapyje</string>
     <string name="user_hates_app_get_feedback">Pasakykite, kodėl.</string>
@@ -1725,7 +1731,6 @@ Ilguma %2$s</string>
     <string name="routing_attr_avoid_stairs_description">Vengti laiptų</string>
     <string name="poi_dialog_reopen">Atidaryti iš naujo</string>
     <string name="poi_context_menu_modify_osm_change">Redaguoti LV</string>
-    <string name="update">Atnaujinti kas</string>
     <string name="only_download_over_wifi">Atsisiųsti tik naudojant Wi-Fi</string>
     <string name="update_now">Atnaujinti tuoj pat</string>
     <string name="missing_write_external_storage_permission">Programėlė neturi teisių įrašyti į atminties kortelę</string>
@@ -1935,7 +1940,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="search_map">Ieškomi žemėlapiai…</string>
     <string name="search_location">Nustatoma vietos padėtis…</string>
     <string name="storage_free_space">Laisva vieta</string>
-    <string name="no_update_info">Nerodyti naujų versijų</string>
     <string name="edit_filter">Redaguoti kategorijas</string>
     <string name="subcategories">Subkategorijos</string>
     <string name="selected_categories">Pasirinktos kategorijos</string>
@@ -1967,7 +1971,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="allow_access_location">Suteikti prieigą prie vietos nustatymo</string>
     <string name="first_usage_greeting">Gaukite maršruto nurodymus ir atraskite naujas vietas be interneto ryšio</string>
     <string name="search_my_location">Ieškoti mano vietos</string>
-    <string name="no_update_info_desc">Netikrinti informacijos apie atnaujinimus ar OsmAnd siūlomas nuolaidas.</string>
     <string name="clear_tile_data">Išvalyti visus lakštus</string>
     <string name="replace_favorite_confirmation">Ar tikrai norite pakeisti išsaugotą vietą %1$s?</string>
     <string name="shared_string_widgets">Valdikliai</string>
@@ -2092,8 +2095,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="routing_attr_driving_style_name">Vairavimo stilius</string>
     <string name="altitude_range">Aukščio diapazonas</string>
     <string name="average_altitude">Vidutinis aukštis virš jūros lygio</string>
-    <string name="legacy_search">Senoji paieška</string>
-    <string name="show_legacy_search">Rodyti senąją paiešką</string>
     <string name="routing_attr_allow_motorway_name">Leisti greitkelius</string>
     <string name="trip_rec_notification_settings">Įjungti įrašymo sparčiąją paleistį</string>
     <string name="shared_string_paused">Pristabdyta</string>
@@ -2193,7 +2194,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="no_underlay">Jokio apatnio sluoksnio</string>
     <string name="subscribe_email_desc">Prenumeruokite mūsų naujienlaiškį apie programėlės nuolaidas ir gaukite dar 3 žemėlapio parsiuntimus!</string>
     <string name="depth_contour_descr">Jūrlapių komplektas su gylio kontūrų linijomis ir jūriniais taškais.</string>
-    <string name="sea_depth_thanks">Ačiū kad pirkote jūrlapius su gylio kontūrais!</string>
+    <string name="sea_depth_thanks">Ačiū kad pirkote jūrlapius su gylio kontūrais</string>
     <string name="index_item_depth_contours_osmand_ext">Jūrlapiai su gylio kontūrais</string>
     <string name="index_item_depth_points_southern_hemisphere">Pietų pusrutulio jūrlapiai su gylių taškais</string>
     <string name="index_item_depth_points_northern_hemisphere">Šiaurės pusrutulio jūrlapiai su gylių taškais</string>
@@ -2223,7 +2224,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="rendering_attr_contourDensity_name">Kontūrų linijos tankis</string>
     <string name="rendering_attr_contourWidth_description">Kontūrų linijos plotis</string>
     <string name="rendering_attr_contourWidth_name">Kontūrų linijos plotis</string>
-    <string name="show_legacy_search_desc">Priedėti senąją paiešką prie stalčiaus sąrašo.</string>
     <string name="routing_attr_allow_motorway_description">Leisti greitkelius.</string>
     <string name="wiki_around">Šalia esantys Vikipedijos straipsniai</string>
     <string name="route_roundabout_short">Sukite į %1$d išvažiavimą ir keliaukite</string>
@@ -2398,12 +2398,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="additional_actions">Papildomi veiksmai</string>
     <string name="av_locations_selected_desc">GPX failas su koordinačių ir pasirinktų pastabų duomenimis.</string>
     <string name="av_locations_all_desc">GPX failas su koordinačių ir visų pastabų duomenimis.</string>
-    <string name="release_3_0">Stop ženklo nutatymas atliekamas atsižvelgiant į judėjimo kryptį
-\n
-\n• Naujas algoritmas, pateikiantis prasmingas pakilimo/nusileidimo vertes GPX trekams
-\n
-\n• Vaikšiojimo trukmė atsižvelgiant į reljefą (pakilimą) (Naismith taisyklė)
-\n</string>
     <string name="shared_string_actions">Veiksmai</string>
     <string name="shared_string_marker">Žymeklis</string>
     <string name="empty_state_osm_edits_descr">Kurkite arba keiskite OSM LV-as, užrašykite arba komentuokite OSM pastabas bei dalinkitės įrašytais GPX failais.</string>
@@ -2551,15 +2545,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="routing_attr_avoid_subway_description">Vengti metro ir lengvojo geležinkelio</string>
     <string name="routing_attr_avoid_ferry_name">Be keltų</string>
     <string name="routing_attr_avoid_ferry_description">Vengti keltų</string>
-    <string name="release_3_3_7">• Rodyti laiką tarp persėdimų viešajame transporte
-\n
-\n • Pataisyta maršruto detalių naudotojo sąsaja
-\n
-\n • Pataisyta nuorodų meniu ir maršruto detalių tamsi tema
-\n
-\n • Atstumo matavime rodyti azimutą
-\n
-\n</string>
     <string name="shared_string_degrees">Laipsniai</string>
     <string name="shared_string_milliradians">Miliradianai</string>
     <string name="angular_measeurement">Kampiniai matavimo vienetai</string>
@@ -2661,7 +2646,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="get_discount_title">Gaukite %1$d %2$s su %3$s nuolaida.</string>
     <string name="cancel_subscription">Nutraukti prenumeratą</string>
     <string name="shared_string_example">Pavyzdys</string>
-    <string name="navigate_point_format_utm">"UTM  Standartas"</string>
+    <string name="navigate_point_format_utm">UTM Standartas</string>
     <string name="change_default_settings">Pakeisti nustatymą</string>
     <string name="language_and_output">Kalba ir išvestis</string>
     <string name="reset_to_default">Atstatyti numatytąsias reikšmes</string>
@@ -2780,4 +2765,15 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_add_photo">Pridėti nuotrauką</string>
     <string name="register_opr_create_new_account">Sukurti naują paskyrą</string>
     <string name="register_opr_have_account">Aš jau turiu paskyrą</string>
+    <string name="shared_string_subtype">Potipis</string>
+    <string name="shared_string_api_key">API raktas</string>
+    <string name="test_route_calculation">Patikrinti maršruto apskaičiavimą</string>
+    <string name="routing_engine_vehicle_type_bike">Dviratis</string>
+    <string name="routing_engine_vehicle_type_car">Automobilis</string>
+    <string name="message_error_recheck_parameters">Įvyko klaida, patikrinkite paametrus</string>
+    <string name="copy_address">Kopijuoti adresą</string>
+    <string name="shared_string_folders">Folderiai</string>
+    <string name="select_folder">Pasirinkite folderį</string>
+    <string name="select_folder_descr">Pasirinkite folderį arba sukurkite naują</string>
+    <string name="upload_to_openstreetmap">Siųsti į OpenStreetMap</string>
 </resources>

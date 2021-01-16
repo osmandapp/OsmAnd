@@ -17,7 +17,7 @@ public interface SegmentActionsListener {
 
 	void scrollBy(int px);
 
-	void onPointSelected(double lat, double lon);
+	void onPointSelected(TrkSegment segment, double lat, double lon);
 
 	void openSplitInterval(GpxDisplayItem gpxItem, TrkSegment trkSegment);
 

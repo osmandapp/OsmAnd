@@ -38,7 +38,6 @@
     <string name="poi_copyshop">Kopieerwinkel</string>
     <string name="poi_curtain">Gordijnwinkel</string>
     <string name="poi_fabric">Stoffenwinkel</string>
-    <string name="poi_bedding">Beddenwinkel</string>
     <string name="poi_dive">Duikbenodigdheden</string>
     <string name="poi_doityourself">Bouwmarkt</string>
     <string name="poi_erotic">Sex-shop</string>
@@ -241,7 +240,6 @@
     <string name="poi_alpine_hut">Berghut</string>
     <string name="poi_chalet">Chalet</string>
     <string name="poi_monastery">Klooster</string>
-    <string name="poi_historic_monastery">Historisch klooster</string>
     <string name="poi_religion_taoist">Taoïsme</string>
     <string name="poi_place_of_worship">Gebedshuis</string>
     <string name="poi_religion_christian">Christelijk</string>
@@ -351,7 +349,6 @@
     <string name="poi_crematorium">Crematorium</string>
     <string name="poi_internet_cafe">Internetcafé</string>
     <string name="poi_bank">Bank</string>
-    <string name="poi_amenity_atm">Geldautomaat</string>
     <string name="poi_accountant">Accountant</string>
     <string name="poi_cave_entrance">Grot-ingang</string>
     <string name="poi_peak">Bergtop</string>
@@ -425,7 +422,6 @@
     <string name="poi_driving_school">Rijschool</string>
     <string name="poi_courthouse">Gerechtsgebouw</string>
     <string name="poi_healthcare_alternative">Alternatieve geneeskunde</string>
-    <string name="poi_healthcare_centre">Gezondheidscentrum</string>
     <string name="poi_midwife">Vroedvrouw</string>
     <string name="poi_occupational_therapist">Ergotherapeut</string>
     <string name="poi_healthcare_rehabilitation">Revalidatie</string>
@@ -537,7 +533,6 @@
     <string name="poi_service">Dienst</string>
     <string name="poi_rugby_union">Rugby unie</string>
     <string name="poi_rugby_league">Rugby competitie</string>
-    <string name="poi_team_handball">Handbal</string>
     <string name="poi_toboggan">Rodelen</string>
     <string name="poi_artwork">Kunst</string>
     <string name="poi_boundary_stone">Grenspaal</string>
@@ -697,7 +692,6 @@
     <string name="poi_quarter">Wijk</string>
     <string name="poi_residential">Woongebied</string>
     <string name="poi_sailing">Zeilen</string>
-    <string name="poi_general_tourist_attraction_yes">Algemene attractie</string>
     <string name="poi_wilderness_hut">Schuilhut</string>
     <string name="poi_hunting_lodge">Jachthut</string>
     <string name="poi_picnic_table">Picnictafel</string>
@@ -738,7 +732,6 @@
     <string name="poi_doors">Deuren</string>
     <string name="poi_fashion">Modezaak</string>
     <string name="poi_free_flying">Freeflying-toebehoren</string>
-    <string name="poi_furnace">Verwarmingsinstallatie</string>
     <string name="poi_garden_furniture">Tuinmeubelen</string>
     <string name="poi_leather">Lederwarenzaak</string>
     <string name="poi_music">Muziekwinkel</string>
@@ -834,7 +827,6 @@
     <string name="poi_recycling_bicycles">Fietsen</string>
     <string name="poi_landfill_waste_nuclear">Nucleair afval</string>
     <string name="poi_basin">Waterbekken</string>
-    <string name="poi_conservation">Beschermd gebied</string>
     <string name="poi_monitoring_station">Meetstation</string>
     <string name="poi_crane">Kraan</string>
     <string name="poi_brownfield">Braakliggend bouwterrein</string>
@@ -1209,7 +1201,6 @@
     <string name="poi_information_route_marker">Routemarkering</string>
     <string name="poi_information_hikingmap">Wandelkaart</string>
     <string name="poi_information_nature">Natuur</string>
-    <string name="poi_information_wildlife">Dieren/planten informatie</string>
     <string name="poi_information_history">Geschiedenis</string>
     <string name="poi_information_sign">Bordje</string>
     <string name="poi_information_audioguide">Audio-info</string>
@@ -1311,7 +1302,6 @@
     <string name="poi_aerialway_summer_access_both">Zomer: ingang en uitgang</string>
     <string name="poi_stars_1">1 (Toerist)</string>
     <string name="poi_rooms">Kamers</string>
-    <string name="poi_payment_none">Gratis</string>
     <string name="poi_seamark_dyke">Dijk (zeebaken)</string>
     <string name="poi_deadlock">Doodlopende weg</string>
     <string name="poi_stars_1s">1 S (Superior Tourist)</string>
@@ -1323,8 +1313,6 @@
     <string name="poi_stars_4s">4S (Superieur Eerste Klasse)</string>
     <string name="poi_stars_5">5 (Luxe)</string>
     <string name="poi_stars_5s">5S (Superieur Luxe)</string>
-    <string name="poi_stars_6">Sterren: 6</string>
-    <string name="poi_stars_7">Sterren: 7</string>
     <string name="poi_love_hotel">Ontmoetingshotel</string>
     <string name="poi_payment_coins_yes">Muntstukken</string>
     <string name="poi_payment_coins_no">Betaling met munten niet mogelijk</string>
@@ -2205,7 +2193,6 @@
     <string name="poi_inscription_e">Opschrift:O</string>
     <string name="poi_inscription_ne">Opschrift:NO</string>
     <string name="poi_construction_yes">In aanbouw</string>
-    <string name="poi_additional_atm_yes">Geldautomaat: ja</string>
     <string name="poi_atm_no">Geldautomaat: nee</string>
     <string name="poi_firepit">Vuurplaats</string>
     <string name="poi_street_cabinet">Verdeelkast</string>
@@ -3093,7 +3080,6 @@
     <string name="poi_water_source_main">Hoofdleiding</string>
     <string name="poi_water_source_pond">Vijver</string>
     <string name="poi_water_source_stream">Waterloop</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Citerne</string>
     <string name="poi_in_service_yes">In dienst: ja</string>
     <string name="poi_street_cabinet_power">Kast type: stroom</string>
     <string name="poi_street_cabinet_telecom">Kast type: telecom</string>

@@ -873,7 +873,6 @@
     <string name="error_calculating_route">Грешка при изчисляване на маршрута</string>
     <string name="error_calculating_route_occured">Възникна грешка при изчисляване на маршрута</string>
     <string name="empty_route_calculated">Грешка: Изчисленият маршрут е празен</string>
-    <string name="new_route_calculated_dist">Изчислен е нов маршрут, дистанция</string>
     <string name="arrived_at_destination">Пристигнахте в крайната цел</string>
     <string name="invalid_locations">Невалидни координати</string>
     <string name="go_back_to_osmand">Върни се на картата OsmAnd</string>
@@ -970,7 +969,6 @@
     <string name="osb_comment_dialog_error">Коментарът не може да бъде добавен.</string>
     <string name="poi_edit_title">Редактиране на POI</string>
     <string name="poi_create_title">Създай POI</string>
-    <string name="poi_error_poi_not_found">Точката не може да бъде намерена или избраното съдържа повече от една точка</string>
     <string name="poi_remove_confirm_template">Изтриване на {0} (enter comment)?</string>
     <string name="poi_remove_title">Изтриване на POI</string>
     <string name="shared_string_delete">Изтрий</string>
@@ -1765,7 +1763,6 @@
     <string name="number_of_rows_in_dash">Брой редове %1$s</string>
     <string name="dashboard_or_drawer_description">Можете да управлявате приложението чрез гъвкаво табло или чрез статично меню. Вашият избор може да бъде променен по-късно.</string>
     <string name="rendering_attr_horseRoutes_name">Пътеки за конна езда</string>
-    <string name="update">Обновяване на всеки</string>
     <string name="only_download_over_wifi">Сваляне само през WiFi</string>
     <string name="live_update">Актуализиране на момента</string>
     <string name="update_now">Актуализирай сега</string>
@@ -1925,8 +1922,6 @@
     <string name="first_usage_greeting">Получете упътвания и открийте нови места без да ползвате връзка към Интернет</string>
     <string name="shared_string_change">Промяна</string>
     <string name="search_my_location">Намери моето местоположение</string>
-    <string name="no_update_info_desc">Да не се проверява за нови версии, промоции свързани с OsmAnd</string>
-    <string name="no_update_info">Да не се показват актуализации</string>
     <string name="update_all_maps_now">Обновяване на всички карти сега\?</string>
     <string name="clear_tile_data">Изчистване на всички плочки</string>
     <string name="routing_attr_short_way_name">Икономичен маршрут</string>
@@ -2088,8 +2083,6 @@
     <string name="divider_descr">Елементи по-надолу, отделени с разделител.</string>
     <string name="shared_string_hidden">Скрити</string>
     <string name="hidden_items_descr">Тези елементи са скрити от менюто, но представените опции или добавки все още работят.</string>
-    <string name="wikipedia_poi_languages_promo">Някои статии в Уикипедия може да не са налични на вашия език, изберете езиците, на които статиите в Уикипедия ще се показват на картата.
-\nЩе можете да превключвате между всички налични езици, докато четете статията.</string>
     <string name="configure_profile">Настройване на профил</string>
     <string name="switch_profile">Превключване на профил</string>
     <string name="application_profile_changed">Профилът на приложението е променен на „%s“</string>

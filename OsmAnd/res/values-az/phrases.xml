@@ -97,7 +97,7 @@
 	<string name="poi_lighting_tower">İşıq qülləsi</string>
 	<string name="poi_recycling">Təkrar emal</string>
 
-	<string name="poi_recycling_container">Konteyner</string>
+    <string name="poi_recycling_container">Konteyner</string>
 	<string name="poi_recycling_glass">Şüşə</string>
 	<string name="poi_recycling_paper">Kağız</string>
 	<string name="poi_recycling_clothes">Geyimlər</string>
@@ -129,7 +129,7 @@
 	<string name="poi_tunnel">Tunel</string>
 	<string name="poi_bridge">Körpü</string>
 
-	<string name="poi_speed_camera">Sürət kamerası</string>
+    <string name="poi_speed_camera">Sürət kamerası</string>
 	<string name="poi_recycling_newspaper">Qəzet</string>
 	<string name="poi_recycling_mobile_phones">Mobil telefonlar</string>
 	<string name="poi_recycling_computers">Kompyuterlər</string>
@@ -138,12 +138,12 @@
 	<string name="poi_recycling_cars">Avtomobillər</string>
 	<string name="poi_recycling_bicycles">Velosipedlər</string>
 
-	<string name="poi_college">Kollec</string>
+    <string name="poi_college">Kollec</string>
 	<string name="poi_driving_school">Sürücülük məktəbi</string>
 	<string name="poi_school">Məktəb</string>
 	<string name="poi_university">Universitet</string>
 
-	<string name="poi_country">Ölkə</string>
+    <string name="poi_country">Ölkə</string>
 	<string name="poi_city">Şəhər</string>
 	<string name="poi_stadium">Stadion</string>
 	<string name="poi_sports_centre">İdman mərkəzi</string>
@@ -151,7 +151,7 @@
 <string name="poi_cafe">Kafe</string>
 	<string name="poi_internet_cafe">İnternet kafe</string>
 
-	<string name="poi_operational_status_open">Açıq</string>
+    <string name="poi_operational_status_open">Açıq</string>
 	<string name="poi_operational_status_closed">Bağlı</string>
 	<string name="poi_water_place_access_family">Ailə</string>
 	<string name="poi_service_vehicle_batteries_yes">Batareyalar</string>

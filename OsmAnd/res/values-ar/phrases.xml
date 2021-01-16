@@ -86,7 +86,6 @@
     <string name="poi_fishing">معدات الصيد</string>
     <string name="poi_florist">محل بيع الزهور</string>
     <string name="poi_frame">متجر اطارات الصور</string>
-    <string name="poi_furnace">متجر وحدات التدفئة</string>
     <string name="poi_furniture">متجر أثاث</string>
     <string name="poi_gift">دكان الهدايا</string>
     <string name="poi_shop_yes">متجر عام</string>
@@ -596,7 +595,6 @@
     <string name="poi_sanatorium">مصحة</string>
     <string name="poi_healthcare_alternative">طب بديل</string>
     <string name="poi_blood_bank">بنك دم</string>
-    <string name="poi_healthcare_centre">مركز طبي</string>
     <string name="poi_midwife">قابلة</string>
     <string name="poi_physiotherapist">أخصائي علاج طبيعي</string>
     <string name="poi_podiatrist">طبيب الأرجل</string>
@@ -712,7 +710,6 @@
     <string name="poi_smoking_area">منطقة للتدخين</string>
     <string name="poi_mortuary">ثلاجة الموتى</string>
     <string name="poi_crematorium">محرقة</string>
-    <string name="poi_amenity_atm">صراف آلي</string>
     <string name="poi_money_lender">قرض المال</string>
     <string name="poi_bureau_de_change">مكتب الصرافة</string>
     <string name="poi_accountant">محاسب</string>
@@ -1387,7 +1384,6 @@
     <string name="poi_futsal">كرة القدم داخل الصالات</string>
     <string name="poi_boxing">الملاكمة</string>
     <string name="poi_construction_yes">تحت الإنشاء</string>
-    <string name="poi_additional_atm_yes">صراف آلي : نعم</string>
     <string name="poi_atm_no">صراف آلي : لا يوجد</string>
     <string name="poi_fair_trade_yes">التجارة العادلة : نعم</string>
     <string name="poi_fair_trade_no">التجارة العادلة : لا يوجد</string>
@@ -1522,7 +1518,6 @@
     <string name="poi_health_specialty_orthopaedics_yes">طب العظام</string>
     <string name="poi_health_specialty_otolaryngology_yes">الأنف والأذن والحنجرة</string>
     <string name="poi_health_specialty_radiology_yes">الأشعة</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">المعالجة بالإشعاع</string>
     <string name="poi_health_specialty_dermatovenereology_yes">جلدية-تناسلية</string>
     <string name="poi_health_specialty_trauma_yes">الرضوض</string>
     <string name="poi_health_specialty_biology_yes">احياء سريرية</string>
@@ -1621,7 +1616,6 @@
     <string name="poi_park_ride_hov">مركبات فيها أكثر من شخص</string>
     <string name="poi_park_ride_tram">ترام</string>
     <string name="poi_park_ride_ferry">عبّارة</string>
-    <string name="poi_generator_source_biomass">مصدر الطاقة: الكتلة الحيوية</string>
     <string name="reddit">موقع Reddit</string>
     <string name="poi_park_ride">اصطف واركب</string>
     <string name="poi_rtsa_scale_filter">تصنيف الصعوبة</string>
@@ -2376,7 +2370,6 @@
     <string name="poi_street_cabinet_telecom">نوع الكبينة/الخزانة: اتصالات</string>
     <string name="poi_street_cabinet_power">نوع الكبينة/الخزانة: كهرباء</string>
     <string name="poi_in_service_yes">في الخدمة: نعم</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">صهريج</string>
     <string name="poi_water_source_stream">مجرى</string>
     <string name="poi_water_source_pond">بركه</string>
     <string name="poi_water_source_main">رئيسي</string>

@@ -23,9 +23,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
-import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.util.Algorithms;
 
@@ -77,7 +75,7 @@ public class SelectedGpxMenuController extends MenuController {
 		rightTitleButtonController.startIconId = R.drawable.ic_action_analyze_intervals;
 	}
 
-	private static class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxSelectionHelper.GpxDisplayItem> {
+	public static class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxSelectionHelper.GpxDisplayItem> {
 
 		private OsmandApplication app;
 
@@ -87,7 +85,7 @@ public class SelectedGpxMenuController extends MenuController {
 		private ProgressDialog progressDialog;
 		private WeakReference<MapActivity> activityRef;
 
-		OpenGpxDetailsTask(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, MapActivity mapActivity) {
+		public OpenGpxDetailsTask(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, MapActivity mapActivity) {
 			app = mapActivity.getMyApplication();
 			this.activityRef = new WeakReference<>(mapActivity);
 			this.selectedGpxFile = selectedGpxFile;
@@ -217,7 +215,7 @@ public class SelectedGpxMenuController extends MenuController {
 			if (gpxFile != null) {
 				OsmandApplication app = mapActivity.getMyApplication();
 				if (Algorithms.isEmpty(gpxFile.path)) {
-					saveAndShareCurrentGpx(app, gpxFile);
+					GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
 				} else {
 					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 				}
@@ -225,23 +223,6 @@ public class SelectedGpxMenuController extends MenuController {
 		} else {
 			super.share(latLon, title, "");
 		}
-	}
-
-	public void saveAndShareCurrentGpx(@NonNull final OsmandApplication app, @NonNull final GPXFile gpxFile) {
-		SaveGpxListener saveGpxListener = new SaveGpxListener() {
-			@Override
-			public void gpxSavingStarted() {
-
-			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				if (errorMessage == null) {
-					GpxUiHelper.shareGpx(app, new File(gpxFile.path));
-				}
-			}
-		};
-		new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public static class SelectedGpxPoint {

@@ -148,6 +148,7 @@ class TelegramApplication : Application() {
 	}
 
 	private fun startTelegramService(intent: Int) {
+		/*
 		var i = intent
 		val serviceIntent = Intent(this, TelegramService::class.java)
 		val telegramService = telegramService
@@ -158,6 +159,7 @@ class TelegramApplication : Application() {
 		serviceIntent.putExtra(TelegramService.USAGE_INTENT, i)
 		serviceIntent.putExtra(TelegramService.SEND_LOCATION_INTERVAL, settings.sendMyLocInterval)
 		ContextCompat.startForegroundService(this, serviceIntent)
+		 */
 	}
 
 	fun startMyLocationService() {

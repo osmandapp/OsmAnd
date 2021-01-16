@@ -54,34 +54,6 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	private var agpsDataLastTimeDownloaded: Long = 0
 	private val useMagneticFieldSensorCompass = false
 
-	// note, passive provider is from API_LEVEL 8 but it is a constant, we can check for it.
-	// constant should not be changed in future
-	// LocationManager.PASSIVE_PROVIDER
-	// put passive provider to first place
-	// find location
-	val firstTimeRunDefaultLocation: net.osmand.Location?
-		@SuppressLint("MissingPermission")
-		get() {
-			if (!AndroidUtils.isLocationPermissionAvailable(app)) {
-				return null
-			}
-			val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-			val ps = service.getProviders(true) ?: return null
-			val providers = ArrayList(ps)
-			val passiveFirst = providers.indexOf("passive")
-			if (passiveFirst > -1) {
-				providers.add(0, providers.removeAt(passiveFirst))
-			}
-			for (provider in providers) {
-				val location = convertLocation(service.getLastKnownLocation(provider))
-				if (location != null) {
-					return location
-				}
-			}
-			return null
-		}
-
-
 	private val gpsListener = object : LocationListener {
 		override fun onLocationChanged(location: Location?) {
 			if (location != null) {
@@ -120,7 +92,7 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 			if (System.currentTimeMillis() - agpsDataLastTimeDownloaded > AGPS_TO_REDOWNLOAD) {
 				//force an updated check for internet connectivity here before destroying A-GPS-data
 				if (app.isInternetConnectionAvailable(true)) {
-					redownloadAGPS()
+					//redownloadAGPS()
 				}
 			}
 		}
@@ -178,7 +150,6 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 			agpsDataLastTimeDownloaded = 0L
 			e.printStackTrace()
 		}
-
 	}
 
 	private fun getGpsStatusListener(service: LocationManager): GpsStatus.Listener {

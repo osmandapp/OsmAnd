@@ -34,7 +34,7 @@ public class SegmentsCard extends BaseCard {
 
 	@Override
 	public int getCardLayoutId() {
-		return R.layout.track_segments_container;
+		return R.layout.card_container;
 	}
 
 	@Override
