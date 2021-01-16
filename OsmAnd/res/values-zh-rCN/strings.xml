@@ -728,7 +728,6 @@
     <string name="error_calculating_route">无法计算路线。</string>
     <string name="error_calculating_route_occured">无法计算路线。</string>
     <string name="empty_route_calculated">错误：计算出的路线为空</string>
-    <string name="new_route_calculated_dist">新路线已计算出，距离</string>
     <string name="loading_data">正在加载数据…</string>
     <string name="reading_indexes">正在读取本地数据…</string>
     <string name="previous_run_crashed">OsmAnd 上次运行未能正常退出。日志文件位于 {0}。请报告这个问题，并提交此日志文件。</string>
@@ -782,7 +781,6 @@
     <string name="osb_comment_dialog_error">发生异常：备注未能添加</string>
     <string name="poi_edit_title">编辑兴趣点</string>
     <string name="poi_create_title">创建兴趣点</string>
-    <string name="poi_error_poi_not_found">节点未找到，或者设施不是单个节点，该情况尚不支持。</string>
     <string name="poi_remove_confirm_template">是否删除 {0} (输入备注)？</string>
     <string name="poi_remove_title">删除兴趣点</string>
     <string name="poi_remove_success">已删除</string>
@@ -1401,9 +1399,6 @@
     <string name="rendering_attr_contourWidth_name">等高线线宽</string>
     <string name="rendering_attr_hideWaterPolygons_description">水系</string>
     <string name="rendering_attr_hideWaterPolygons_name">隐藏水系</string>
-    <string name="legacy_search">旧版搜索</string>
-    <string name="show_legacy_search">显示旧版搜索</string>
-    <string name="show_legacy_search_desc">在抽屉列表中添加旧版搜索</string>
     <string name="routing_attr_allow_motorway_name">使用高速公路</string>
     <string name="routing_attr_allow_motorway_description">允许高速公路。</string>
     <string name="route_roundabout_short">利用 %1$d 退出并离开</string>
@@ -1446,8 +1441,6 @@
     <string name="allow_access_location">允许访问到的位置</string>
     <string name="first_usage_greeting">在没有互联网连接的情况下，取得指引与探索新地点</string>
     <string name="search_my_location">寻找我的位置</string>
-    <string name="no_update_info_desc">不检查版本更新或与 OsmAnd 有关折扣的信息</string>
-    <string name="no_update_info">不显示更新</string>
     <string name="update_all_maps_now">现在更新所有的地图吗？</string>
     <string name="clear_tile_data">清除所有的图砖</string>
     <string name="replace_favorite_confirmation">你确定你想要替换收藏的 %1$s？</string>
@@ -2221,7 +2214,6 @@
     <string name="poi_context_menu_modify_osm_change">修改 OSM 的变更</string>
     <string name="use_drawer_btn">使用菜单</string>
     <string name="dashboard_or_drawer_description">还有一种新的选择，主要控制通过灵活的仪表板或静态菜单的应用程序。总是可以在仪表板设置中更改您的选择。</string>
-    <string name="update">更新</string>
     <string name="only_download_over_wifi">只通过 WiFi 下载</string>
     <string name="live_update">实时更新</string>
     <string name="update_now">立即更新</string>
@@ -2492,8 +2484,6 @@
     <string name="get_osmand_live">获取 OsmAnd Live 以解锁全部功能：每日无限量地图下载与更新、所有付费与免费插件、维基百科、维基导游等等。</string>
     <string name="shared_string_bookmark">书签</string>
     <string name="how_to_open_wiki_title">如何打开维基百科文章？</string>
-    <string name="search_no_results_description">没有结果？
-\n请告诉我们这个问题。</string>
     <string name="download_wikipedia_label">下载维基百科数据</string>
     <string name="open_in_browser_wiki">在线打开条目</string>
     <string name="wiki_article_not_found">未找到条目</string>
@@ -2633,22 +2623,6 @@
     <string name="quick_action_gpx_tracks_hide">隐藏GPX轨迹</string>
     <string name="quick_action_gpx_tracks_show">显示GPX路径</string>
     <string name="add_destination_query">请先添加目的地</string>
-    <string name="release_3_3">• 新的“导向”屏幕：显示家与工作地点按钮、“上一条路径”按钮、活跃的GPX路径与标记，以及搜索记录
-\n
-\n • 额外的“路径详情”信息：道路类型及路面的种类、表面材质、陡峭度及平滑度
-\n
-\n • 支持各种交通工具的公交导航：地铁、巴士、轻轨……
-\n • 新的快捷操作：显示/隐藏路径及日间/夜间模式
-\n
-\n • 修复了德国、南非及魁北克部分区域显示为泛洪的问题
-\n
-\n • 对K ML及KMZ数据输入的额外支持
-\n
-\n • 修复了打开部分公交站点时程序崩溃的问题
-\n
-\n • 移除了免费版本中的Facebook及Firebase分析数据（不包含于OsmAnd+中）
-\n
-\n</string>
     <string name="use_osm_live_public_transport_description">为OsmAnd Live启用公共交通的变更情况。</string>
     <string name="add_start_and_end_points">添加起点与终点</string>
     <string name="rendering_attr_surface_unpaved_name">未铺设路面</string>
@@ -2682,15 +2656,6 @@
     <string name="rendering_attr_highway_class_cycleway_name">自行车道</string>
     <string name="angular_measeurement">角度单位</string>
     <string name="angular_measeurement_descr">更改方位角测量方式。</string>
-    <string name="release_3_3_7">• 在公共交通的中转站间显示时间
-\n
-\n • 修正了路径详情的用户界面
-\n
-\n • 修复了导航菜单和路径详情中的暗色主题
-\n
-\n • 在测距中显示方位角
-\n
-\n</string>
     <string name="files_failed">无法复制 %1$d 个文件 (%2$s)。</string>
     <string name="poi_cannot_be_found">无法找到节点或道路。</string>
     <string name="shared_string_total">一共</string>
@@ -2734,7 +2699,6 @@
     <string name="price_free">免费</string>
     <string name="cancel_subscription">取消订阅</string>
     <string name="units_and_formats">单位与格式</string>
-    <string name="appearance">外观</string>
     <string name="list_of_installed_plugins">已安装插件</string>
     <string name="configure_navigation">配置导航</string>
     <string name="general_settings_profile_descr">应用主题、单位、区域</string>

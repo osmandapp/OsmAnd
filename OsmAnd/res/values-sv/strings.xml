@@ -728,7 +728,6 @@ Nyttjat utrymme är {1} MB.
     <string name="osb_comment_dialog_error">Ett undantagsfel inträffade: kommentaren lades inte till</string>
     <string name="poi_edit_title">Redigera POI</string>
     <string name="poi_create_title">Skapa POI</string>
-    <string name="poi_error_poi_not_found">Noden kan inte hittas eller bekvämligheten består av flera noder och detta stöds inte än.</string>
     <string name="poi_remove_confirm_template">Ta bort {0} (ange kommentar)?</string>
     <string name="poi_remove_title">Ta bort POI</string>
     <string name="recording_is_recorded">Ljud/video spelas in. För att stoppa detta, tryck på AV-knappen på widgeten.</string>
@@ -804,7 +803,6 @@ Nyttjat utrymme är {1} MB.
     <string name="error_calculating_route">Fel vid ruttberäkningen</string>
     <string name="error_calculating_route_occured">Ett fel uppstod vid ruttberäkningen</string>
     <string name="empty_route_calculated">Fel: Den beräknade rutten är tom</string>
-    <string name="new_route_calculated_dist">Ny rutt beräknad, avstånd</string>
     <string name="invalid_locations">Ogiltiga koordinater</string>
     <string name="go_back_to_osmand">Tillbaka till OsmAnd-kartan</string>
     <string name="previous_run_crashed">Den senaste körningen av OsmAnd kraschade. Loggen finns i {0}. Rapportera felet och bifoga gärna loggfilen.</string>
@@ -1743,7 +1741,6 @@ Long %2$s</string>
     <string name="no_address_found">Ingen adress angiven</string>
     <string name="looking_up_address">Slår upp adressen</string>
     <string name="rendering_attr_horseRoutes_name">Hästleder</string>
-    <string name="update">Uppdatera varje</string>
     <string name="only_download_over_wifi">Hämta endast via WiFi</string>
     <string name="live_update">Direktuppdatering</string>
     <string name="update_now">Uppdatera nu</string>
@@ -1954,7 +1951,6 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="storage_place_description">OsmAnds lagringsplats för data (för kartor, GPX-filer med mera): %1$s.</string>
     <string name="give_permission">Bevilja tillstånd</string>
     <string name="allow_access_location">Tillåt platsåtkomst</string>
-    <string name="no_update_info">Visa inte uppdateringar</string>
     <string name="update_all_maps_now">Uppdatera alla kartor nu\?</string>
     <string name="routing_attr_short_way_name">Bränslesnål väg</string>
     <string name="routing_attr_short_way_description">Använd bränslesnål väg (oftast kortare).</string>
@@ -2077,7 +2073,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="average_speed">Medelhastighet</string>
     <string name="shared_string_time_moving">Tid i rörelse</string>
     <string name="max_speed">Högsta hastighet</string>
-    <string name="no_update_info_desc">Kontrollera inte efter uppdateringar om nya versioner eller rabatter relaterade till OsmAnd.</string>
     <string name="lang_sr_latn">Serbiska (latin)</string>
     <string name="configure_screen_quick_action">Snabbåtgärd</string>
     <string name="quick_action_item_action">Åtgärd %d</string>
@@ -2410,9 +2405,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="routing_attr_relief_smoothness_factor_name">Välj höjdfluktuation</string>
     <string name="auto_split_recording_title">Auto-split-inspelningar efter lucka</string>
     <string name="auto_split_recording_descr">Starta nytt segment efter en lucka av 6 min, nya spår efter lucka på 2 timmar eller nya filer efter ett längre gap om datumet har ändrats.</string>
-    <string name="legacy_search">Äldre Sök</string>
-    <string name="show_legacy_search">Visa äldre sök</string>
-    <string name="show_legacy_search_desc">Lägg till äldre sökning till lådlistan.</string>
     <string name="rendering_attr_surfaceIntegrity_name">Vägbaneintegritet</string>
     <string name="rendering_attr_hideOverground_name">Ytobjekt</string>
     <string name="osm_recipient_stat">Redigeringar %1$s, summan %2$s mBTC</string>
@@ -2687,17 +2679,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="quick_action_edit_actions">Redigera åtgärder</string>
     <string name="get_osmand_live">Skaffa OsmAnd Live för att låsa upp alla funktioner: Dagliga kartuppdateringar med obegränsat antal hämtningar, alla betal-och gratistillägg, Wikipedia, Wikivoyage och mycket mer.</string>
     <string name="unirs_render_descr">Ändring av standardstilen för att öka kontrasten av gång och cykelvägar. Använder färger från tidigare versioner av Mapink.</string>
-    <string name="release_3_0">• Nyhet: Stöd för globala frånkopplade reseguider. Refererade platser är länkade till kartan. Datan kommer initialt från Wikivoyage.
-\n
-\n • Wikipedia: Nytt utseende, aktiva länkar, stöd för bilder
-\n
-\n • Open Track UI: Stöd för waypoint-grupper
-\n
-\n • Kartmarkörer: Importering av valda grupper från GPX-filer, koordinatinmatning, nytt utseende 
-\n
-\n • OsmAnd Live-prenumeration stödjer nu alla OsmAnd funktioner
-\n
-\n</string>
     <string name="quick_action_page_list_descr">Att trycka på denna åtgärdsknapp bläddrar genom listan nedan.</string>
     <string name="poi_cannot_be_found">Kunde inte hitta nod eller väg.</string>
     <string name="search_no_results_feedback">Inga sökresultat?
@@ -2882,7 +2863,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="route_parameters_info">Inställningar för routing i den valda profilen \"%1$s\".</string>
     <string name="wake_time">Vakentid</string>
     <string name="units_and_formats">Enheter &amp; format</string>
-    <string name="appearance">Utseende</string>
     <string name="map_look_descr">Kartans utseende</string>
     <string name="map_look">Kartans utseende</string>
     <string name="list_of_installed_plugins">Installerade tillägg</string>
@@ -2915,7 +2895,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="plugins_settings">Tilläggsinställningar</string>
     <string name="app_mode_utv">Sida vid sida</string>
     <string name="files_copied">%1$d filer kopierades (%2$s).</string>
-    <string name="swap_start_and_destination">Växla start och mål</string>
     <string name="move_inside_category">Du kan bara flytta objekt inom den här kategorin.</string>
     <string name="developer_plugin">Utvecklar-plugin</string>
     <string name="replace_point_descr">Ersätt en annan punkt med den här</string>

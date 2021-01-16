@@ -684,18 +684,18 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		if (processNearestWiki() && nearestWiki.size() > 0) {
 			AmenityInfoRow wikiInfo = new AmenityInfoRow(
-					"nearest_wiki", R.drawable.ic_plugin_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")",
-					null, true,
-					getCollapsableView(view.getContext(), true, nearestWiki),
+					NEAREST_WIKI_KEY, R.drawable.ic_plugin_wikipedia, null,
+					app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")",
+					null, true, getCollapsableView(view.getContext(), true, nearestWiki, NEAREST_WIKI_KEY),
 					0, false, false, false, 1000, null, false, false, false, 0);
 			buildAmenityRow(view, wikiInfo);
 		}
 
 		if (processNearestPoi() && nearestPoi.size() > 0) {
 			AmenityInfoRow poiInfo = new AmenityInfoRow(
-					"nearest_poi", AmenityMenuController.getRightIconId(amenity), null, app.getString(R.string.speak_poi) + " (" + nearestPoi.size() + ")",
-					null, true,
-					getCollapsableView(view.getContext(), true, nearestPoi),
+					NEAREST_POI_KEY, AmenityMenuController.getRightIconId(amenity), null,
+					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")",
+					null, true, getCollapsableView(view.getContext(), true, nearestPoi, NEAREST_POI_KEY),
 					0, false, false, false, 1000, null, false, false, false, 0);
 			buildAmenityRow(view, poiInfo);
 		}

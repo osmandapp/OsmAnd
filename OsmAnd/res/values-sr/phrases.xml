@@ -460,7 +460,6 @@
     <string name="poi_veterinary">Ветеринар</string>
     <string name="poi_healthcare_alternative">Алтернативна медицина</string>
     <string name="poi_blood_bank">Банка крви</string>
-    <string name="poi_healthcare_centre">Медицински центар</string>
     <string name="poi_optometrist">Оптометрист</string>
     <string name="poi_physiotherapist">Физиотерапеут</string>
     <string name="poi_psychotherapist">Психотерапеут</string>
@@ -760,7 +759,6 @@
     <string name="poi_crematorium">Крематоријум</string>
     <string name="poi_internet_cafe">Интернет кафе</string>
     <string name="poi_bank">Банка</string>
-    <string name="poi_amenity_atm">АТМ</string>
     <string name="poi_payment_terminal">Терминал за плаћање</string>
     <string name="poi_money_lender">Новчане позајмице</string>
     <string name="poi_bureau_de_change">Мењачница</string>
@@ -3210,7 +3208,6 @@
     <string name="poi_street_cabinet_telecom">Тип кабинета: телекомски</string>
     <string name="poi_street_cabinet_power">Тип кабинета: енергетски</string>
     <string name="poi_in_service_yes">У употреби: да</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Цистерна</string>
     <string name="poi_water_source_stream">Ток</string>
     <string name="poi_water_source_pond">Понд</string>
     <string name="poi_water_source_main">Главни</string>

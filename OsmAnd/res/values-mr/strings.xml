@@ -233,7 +233,6 @@
     <string name="recalculate_route_to_your_location">परिवहन माध्यम:</string>
     <string name="mark_final_location_first">क्रुपया आधी इच्छिन स्थळ निवडा</string>
     <string name="failed_op">असफल</string>
-    <string name="new_route_calculated_dist">नविन मार्ग निवडला, अंतर</string>
     <string name="arrived_at_destination">आपण इच्छित स्थळी पोहोचला आहात</string>
     <string name="shared_string_close">बंद करा</string>
     <string name="loading_data">डेटा लोड करत आहे…</string>

@@ -80,7 +80,6 @@
     <string name="poi_historic_ruins">Historiske ruiner</string>
     <string name="poi_historic_ship">Historisk skip</string>
     <string name="poi_historic_mine">Historisk gruve</string>
-    <string name="poi_historic_monastery">Historisk kloster</string>
     <string name="poi_beacon">Fyrtårn</string>
     <string name="poi_shop_food">Dagligvarebutikk og supermarked</string>
     <string name="poi_emergency">Nødstilfelle</string>
@@ -135,7 +134,6 @@
     <string name="poi_car_sharing">Bildeling</string>
     <string name="poi_internet_cafe">Internett-kafé</string>
     <string name="poi_bank">Bank</string>
-    <string name="poi_amenity_atm">Minibank</string>
     <string name="poi_payment_terminal">Betalingsterminal</string>
     <string name="poi_bureau_de_change">Vekslingskontor</string>
     <string name="poi_fog_signal">Tåkesignal</string>

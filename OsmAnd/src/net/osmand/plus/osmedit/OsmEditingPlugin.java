@@ -456,7 +456,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean sendGPXFiles(final FragmentActivity activity, AvailableGPXFragment fragment, final GpxInfo... info) {
+	public boolean sendGPXFiles(final FragmentActivity activity, Fragment fragment, final GpxInfo... info) {
 		String name = settings.USER_NAME.get();
 		String pwd = settings.USER_PASSWORD.get();
 		String authToken = settings.USER_ACCESS_TOKEN.get();

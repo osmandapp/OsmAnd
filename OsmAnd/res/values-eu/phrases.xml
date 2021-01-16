@@ -81,7 +81,6 @@
     <string name="poi_erotic">Denda erotikoa</string>
     <string name="poi_fashion">Moda denda</string>
     <string name="poi_florist">Loradenda</string>
-    <string name="poi_furnace">Berogailu denda</string>
     <string name="poi_furniture">Altzari denda</string>
     <string name="poi_gift">Opari denda</string>
     <string name="poi_jewelry">Bitxi-denda</string>
@@ -289,7 +288,6 @@
     <string name="poi_water_source_main">Nagusia</string>
     <string name="poi_water_source_pond">Urmaela</string>
     <string name="poi_water_source_stream">Erreka</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Zisterna</string>
     <string name="poi_fire_extinguisher">Su-itzalgailua</string>
     <string name="poi_ambulance_station">Anbulantzia geltokia</string>
     <string name="poi_ford">Ibia</string>
@@ -514,7 +512,6 @@
     <string name="poi_dentist">Dentista</string>
     <string name="poi_sanatorium">Erietxea</string>
     <string name="poi_audiologist">Audiologia</string>
-    <string name="poi_healthcare_centre">Medikuntza zentroa</string>
     <string name="poi_midwife">Emagina</string>
     <string name="poi_occupational_therapist">Okupazio-terapeuta</string>
     <string name="poi_optometrist">Optometrista</string>
@@ -634,8 +631,6 @@
     <string name="poi_stars_4s">4S (Lehen klase gorena)</string>
     <string name="poi_stars_5">5 (Luxuzkoa)</string>
     <string name="poi_stars_5s">5S (Luxuzkoa gorena)</string>
-    <string name="poi_stars_6">Izarrak: 6</string>
-    <string name="poi_stars_7">Izarrak: 7</string>
     <string name="poi_vending_milk">Esnea</string>
     <string name="poi_vending_bread">Ogia</string>
     <string name="poi_vending_chewing_gums">Txikleak</string>
@@ -772,7 +767,6 @@
     <string name="poi_payment_visa_no">Ez dira Visa txartelak onartzen</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">Ez da MasterCard onartzen</string>
-    <string name="poi_payment_none">Doakoa</string>
     <string name="poi_payment_account_cards_yes">Kontu txartelak</string>
     <string name="poi_payment_account_cards_no">Ez dira kontu txartelak onartzen</string>
     <string name="poi_payment_maestro_yes">Maestro txartelak</string>
@@ -1327,7 +1321,6 @@
     <string name="poi_impromptu_no">Bat-batekoa: ez</string>
     <string name="poi_sanitary_dump_station_yes">Komuneko hondakinen estazioa: bai</string>
     <string name="poi_sanitary_dump_station_no">Komuneko hondakinen estazioa: ez</string>
-    <string name="poi_sanitary_dump_station_customers">Komuneko hondakinen estazioa: bezeroak besterik ez</string>
     <string name="poi_power_supply_yes">Bai</string>
     <string name="poi_power_supply_no">Elektrizitate iturria: ez</string>
     <string name="poi_power_supply_cee_17_blue">Elektrizitate iturria (entxufea): CEE 17 urdina</string>
@@ -1370,7 +1363,6 @@
     <string name="poi_social_facility_for_unemployed">Langabeak</string>
     <string name="poi_social_facility_for_diseased">Gaixoak</string>
     <string name="poi_social_facility_for_child_juvenile">Haurrak, gazteak</string>
-    <string name="poi_additional_atm_yes">Kutxazain automatikoa: bai</string>
     <string name="poi_atm_no">Kutxazain automatikoa: ez</string>
     <string name="poi_construction_yes">Eraikuntzan</string>
     <string name="poi_protected_area">Babestutako area</string>
@@ -1505,7 +1497,6 @@
     <string name="poi_mortuary">Beilatokia</string>
     <string name="poi_internet_cafe">Ziberkafea</string>
     <string name="poi_bank">Bankua</string>
-    <string name="poi_amenity_atm">Kutxazain automatikoa</string>
     <string name="poi_bureau_de_change">Moneta aldaketa</string>
     <string name="poi_accountant">Kontularia</string>
     <string name="poi_saddle">Zela</string>
@@ -1740,7 +1731,6 @@
     <string name="poi_waterway_turning_point">Ubidearen biraketa puntua</string>
     <string name="poi_groyne">Olatu horma</string>
     <string name="poi_power_cable_distribution_cabinet">Kableen banatze armairua</string>
-    <string name="poi_conservation">Kontserbazio landa</string>
     <string name="poi_brownfield">Kutsaturiko orubea</string>
     <string name="poi_greenfield">Orubea</string>
     <string name="poi_mineshaft">Meazulo</string>

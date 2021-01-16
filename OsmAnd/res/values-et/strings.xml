@@ -881,7 +881,6 @@
     <string name="route_parameters_info">Marsruutimise seaded valitud profiilis \"%1$s\".</string>
     <string name="wake_time">Aegumine peale ärkamist</string>
     <string name="units_and_formats">Ühikud ja formaadid</string>
-    <string name="appearance">Välimus</string>
     <string name="map_look_descr">Kaardi välimus</string>
     <string name="map_look">Kaardi välimus</string>
     <string name="list_of_installed_plugins">Paigaldatud laiendused</string>
@@ -2301,7 +2300,6 @@
     <string name="rec_split_storage_size">Salvestusruumi suurus</string>
     <string name="rec_split_storage_size_desc">Kõikide klippide poolt hõlmata lubatav andmemaht.</string>
     <string name="shared_string_not_selected">Valimata</string>
-    <string name="update">Uuenda</string>
     <string name="updates_size">Uuenduse maht</string>
     <string name="shared_string_type">Liik</string>
     <string name="starting_point">Lähtekoht</string>
@@ -3331,8 +3329,7 @@
     <string name="routing_attr_allow_classic_only_description">Klassikalises stiilis hooldatud marsruudid ainult ilma uisuradadeta. See hõlmab väiksema mootorsaaniga hooldatud marsruute ja suusatajate käsitsi tehtud radu.</string>
     <string name="routing_attr_difficulty_preference_name">Eelistatud raskusaste</string>
     <string name="routing_attr_difficulty_preference_description">Eelista selle raskusastmega marsruute, ehkki lühema marsruudi korral võib siiski esineda nii raskemaid kui lihtsamaid lõike.</string>
-    <string name="new_route_calculated_dist_dbg">Teekond: vahemaa %s, marsruuteri aeg %s 
-\nArvutamine: %.1f sek, %d teed, %d paani)</string>
+    <string name="new_route_calculated_dist_dbg">Teekond: vahemaa %1$s, marsruuteri aeg %2$s \nArvutamine: %3$.1f sek, %4$d teed, %5$d paani)</string>
     <string name="reset_confirmation_descr">Vajutades nupul %1$s kaovad kõik muudatused.</string>
     <string name="reset_all_profile_settings_descr">Lähtesta kõik profiiliseaded paigaldusjärgsesse olekusse.</string>
     <string name="reset_all_profile_settings">Kas asendame kõik profiiliseaded vaikeväärtustega\?</string>
@@ -3773,7 +3770,6 @@
 \n
 \nTellimusi saate hallata ja tühistada oma AppGallery seadetes.</string>
     <string name="osm_live_payment_desc_hw">Tellimuse eest võetakse tasu valitud perioodi kohta. Tühistage see igal ajal oma AppGallery\'s.</string>
-    <string name="use_complex_routing">Keeruka teekonna koostamine</string>
     <string name="osm_edit_logout_success">Väljalogitud</string>
     <string name="development">Arendus</string>
     <string name="clear_osm_token">Kustuta OpenStreetMap\'i OAuth\'i pääsuluba</string>

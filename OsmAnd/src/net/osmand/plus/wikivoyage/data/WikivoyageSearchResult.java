@@ -33,7 +33,6 @@ public class WikivoyageSearchResult {
 		TravelArticle article = new TravelArticle();
 		article.routeId = routeId;
 		article.title = articleTitle;
-
 		this.articleId = article.generateIdentifier();
 		this.imageTitle = imageTitle;
 		this.isPartOf = isPartOf;

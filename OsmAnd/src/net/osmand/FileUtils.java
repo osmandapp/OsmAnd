@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.Metadata;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -107,6 +105,7 @@ public class FileUtils {
 			SelectedGpxFile selected = helper.getSelectedFileByPath(src.getAbsolutePath());
 			app.getGpxDbHelper().rename(src, dest);
 			if (selected != null && selected.getGpxFile() != null) {
+				selected.resetSplitProcessed();
 				selected.getGpxFile().path = dest.getAbsolutePath();
 				helper.updateSelectedGpxFile(selected);
 			}

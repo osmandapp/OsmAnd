@@ -475,7 +475,6 @@
     <string name="poi_healthcare_alternative">Alternatīvā medicīna</string>
     <string name="poi_audiologist">Ausu ārsts</string>
     <string name="poi_blood_bank">Asins donoru centrs</string>
-    <string name="poi_healthcare_centre">Veselības centrs</string>
     <string name="poi_midwife">Vecmāte</string>
     <string name="poi_occupational_therapist">Terapeits</string>
     <string name="poi_optometrist">Optometrists</string>
@@ -747,7 +746,6 @@
     <string name="poi_crematorium">Krematorija</string>
     <string name="poi_internet_cafe">Interneta kafejnīca</string>
     <string name="poi_bank">Banka</string>
-    <string name="poi_amenity_atm">Bankomāts</string>
     <string name="poi_payment_terminal">Iemaksas terminālis</string>
     <string name="poi_pawnbroker">Lombards</string>
     <string name="poi_bitcoin_yes">Apmaksa ar bitcoin</string>
@@ -2448,7 +2446,6 @@
     <string name="poi_inscription_e">Uzraksts: A</string>
     <string name="poi_inscription_ne">Uzraksts: ZA</string>
     <string name="poi_construction_yes">Notiek celtniecība</string>
-    <string name="poi_additional_atm_yes">Bankomāti: ir</string>
     <string name="poi_atm_no">Bankomāti: nav</string>
     <string name="poi_firepit">Ugunsdzēšanas vieta</string>
     <string name="poi_fair_trade_yes">Fair trade: ir</string>
@@ -2703,7 +2700,6 @@
     <string name="poi_water_source_main">Galvenais</string>
     <string name="poi_water_source_pond">Dīķis</string>
     <string name="poi_water_source_stream">Caurplūde</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_in_service_yes">Lietošanā: jā</string>
     <string name="poi_street_cabinet_power">Skapja tips: elektrība</string>
     <string name="poi_street_cabinet_telecom">Skapja tips: telekomunikācijas</string>

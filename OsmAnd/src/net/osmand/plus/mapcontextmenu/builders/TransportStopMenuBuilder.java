@@ -23,6 +23,7 @@ public class TransportStopMenuBuilder extends MenuBuilder {
 			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, amenity);
 			builder.setLatLon(getLatLon());
 			builder.setLight(light);
+			builder.setShowNearestPoi(false);
 			builder.buildInternal(view);
 		}
 	}
