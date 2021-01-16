@@ -233,7 +233,7 @@
     <string name="shared_string_trip_recording">Registrado de kurso</string>
     <string name="shared_string_navigation">Navigi</string>
     <string name="osmand_running_in_background">Labori fone</string>
-    <string name="gps_wake_up_timer">Vek-intervalo de GPS</string>
+    <string name="gps_wake_up_timer">Vek-ofteco de GPS</string>
     <string name="favourites_edit_dialog_title">Informoj pri ŝatataj</string>
     <string name="simulate_your_location_stop_descr">Ĉesigi simuladon de pozicio.</string>
     <string name="simulate_your_location_descr">Simuli vian pozicion uzante komputitan kurson aŭ registritan GPX-spuron.</string>
@@ -587,17 +587,17 @@
     <string name="sleep_mode_stop_dialog">Ĉu ĉesigi GPS-an fonan reĝimon?</string>
     <string name="stop_navigation_service">Ĉesigi</string>
     <string name="confirm_every_run">Demandi ĉiam</string>
-    <string name="save_global_track_interval">Ĝenerala registrada intervalo</string>
-    <string name="background_service_int">GPS-a vekintervalo</string>
+    <string name="save_global_track_interval">Ĝenerala intertempo de registrado</string>
+    <string name="background_service_int">Vek-ofteco de GPS</string>
     <string name="enable_sleep_mode">Aktivigi GPS-an fonan reĝimon</string>
     <string name="save_track_to_gpx_globally_headline">Registri spuron laŭpete</string>
     <string name="save_track_to_gpx_globally_descr">Ĝeneralan registradon de pozicio al GPX‑dosiero oni povas (mal)aktivigi per la GPX‑registrada fenestraĵo sur la map‑ekrano.</string>
     <string name="save_current_track_descr">Konservi aktualan spuron kiel GPX-dosieron.</string>
     <string name="save_current_track">Konservi aktualan spuron</string>
     <string name="save_track_to_gpx_descrp">GPX-spuro estas aŭtomate konservata al dosierujo de spuroj dum navigado.</string>
-    <string name="save_track_interval_globally">Registrada intervalo</string>
-    <string name="save_track_interval">Registrada intervalo dum navigado</string>
-    <string name="save_track_interval_descr">Elekti intervalon por registri spurojn dum navigado</string>
+    <string name="save_track_interval_globally">Intertempo de registrado</string>
+    <string name="save_track_interval">Registrada intertempo dum navigado</string>
+    <string name="save_track_interval_descr">Elekti oftecon de registri spuron dum navigado</string>
     <string name="voice_provider_descr">Elekti gvidadan voĉon por navigado.</string>
     <string name="voice_provider">Gvidada voĉo</string>
     <string name="enable_proxy_title">Aktivigi HTTP-retperanton</string>
@@ -654,7 +654,7 @@
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu https://osmand.net).</string>
     <string name="none_selected_gpx">Unue elektu GPX‑dosieron per frapetadi.</string>
     <string name="local_index_select_gpx_file">Elektu kurson</string>
-    <string name="gpx_split_interval">Divid-intervalo</string>
+    <string name="gpx_split_interval">Intertempo de divido</string>
     <string name="sort_by_distance">Ordigi laŭ distanco</string>
     <string name="sort_by_name">Ordigi laŭ nomo</string>
     <string name="plugin_touringview_name">Turisma map-vido</string>
@@ -728,8 +728,8 @@
     <string name="gpx_info_average_speed">Mezuma rapido: %1$s</string>
     <string name="gpx_info_maximum_speed">Maksimuma rapido: %1$s</string>
     <string name="gpx_info_avg_altitude">Mezuma altitudo: %1$s</string>
-    <string name="gpx_info_diff_altitude">Altituda intervalo: %1$s</string>
-    <string name="gpx_timespan">Tempa intervalo: %1$s</string>
+    <string name="gpx_info_diff_altitude">Variejo de altitudo: %1$s</string>
+    <string name="gpx_timespan">Variejo de tempo: %1$s</string>
     <string name="gpx_info_asc_altitude">Desupro/alsupro: %1$s</string>
     <string name="gpx_timemoving">Tempo movante: %1$s</string>
     <string name="gpx_selection_segment_title">Segmento</string>
@@ -1121,7 +1121,7 @@
     <string name="bg_service_screen_lock_toast">Ekrano ŝlosita</string>
     <string name="map_widget_mini_route">Kurs-mapeto</string>
     <string name="show_cameras">Rapid-kontroliloj</string>
-    <string name="bg_service_interval">Agordi vekintervalon:</string>
+    <string name="bg_service_interval">Agordi vek‑oftecon:</string>
     <string name="show_traffic_warnings">Trafikaj avertoj</string>
     <string name="avoid_toll_roads">Sen pagendaj vojoj</string>
     <string name="continue_follow_previous_route_auto">Ĉu pluigi sekvi la antaŭan nefinitan kurson? (%1$s sekundoj)</string>
@@ -1291,8 +1291,8 @@
     <string name="local_openstreetmap_descr_title">Neunutempa (nesinkrona) redakto de OSM:</string>
     <string name="local_openstreetmap_settings">OSM-interesejoj/rimarkoj konservitaj en aparato</string>
     <string name="local_openstreetmap_settings_descr">Vidi kaj administri loke konservitajn OSM‑interesejojn/rimarkojn.</string>
-    <string name="live_monitoring_interval">Intervalo de enreta kurs-registrado</string>
-    <string name="live_monitoring_interval_descr">Difini intervalon de enreta kurs-registrado.</string>
+    <string name="live_monitoring_interval">Ofteco de enreta kursregistrado</string>
+    <string name="live_monitoring_interval_descr">Difini oftecon de enreta registrado de kurso.</string>
     <string name="live_monitoring_url">Adreso de enreta kurs-registrado</string>
     <string name="live_monitoring_url_descr">Difini la retadreson uzante la jenajn argumentojn: 
 \n lat={0} (latitudo), 
@@ -2172,7 +2172,7 @@
     <string name="route_altitude">Kursa altitudo</string>
     <string name="altitude_descent">Malsupreniro</string>
     <string name="altitude_ascent">Supreniro</string>
-    <string name="altitude_range">Altituda intervalo</string>
+    <string name="altitude_range">Variejo de altitudo</string>
     <string name="average_altitude">Mezuma altitudo</string>
     <string name="shared_string_time">Tempo</string>
     <string name="total_distance">Tuta distanco</string>
@@ -3810,7 +3810,7 @@
 \n
 \n</string>
     <string name="monitoring_control_start">Registri</string>
-    <string name="save_global_track_interval_descr">Elektu la intervalon de registrado por la ĝenerala registrado de spuro (aktivigebla per la fenestraĵo “registri spuron” sur la mapo).</string>
+    <string name="save_global_track_interval_descr">Elektu la intertempon de registrado por la ĝenerala registrado de spuro (aktivigebla per la fenestraĵo “registri spuron” sur la mapo).</string>
     <string name="simplified_track">Simpligita spuro</string>
     <string name="simplified_track_description">Nur la linio de kurso estos konservita, la navigadpunktoj estos forigitaj.</string>
     <string name="shared_string_file_name">Dosiernomo</string>
@@ -3968,4 +3968,9 @@
     <string name="select_folder">Elekti dosierujon</string>
     <string name="select_folder_descr">Elekti dosierujon aŭ krei novan</string>
     <string name="shared_string_empty">Malplena</string>
+    <string name="analyze_by_intervals">Analizi laŭ intertempoj (dividoj)</string>
+    <string name="upload_to_openstreetmap">Alŝuti al OpenStreetMap</string>
+    <string name="edit_track">Redakti spuron</string>
+    <string name="rename_track">Renomi spuron</string>
+    <string name="change_folder">Ŝanĝi dosierujon</string>
 </resources>
