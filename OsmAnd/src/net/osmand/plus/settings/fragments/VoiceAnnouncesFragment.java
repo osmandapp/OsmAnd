@@ -42,23 +42,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
 
 	private static final String MORE_VALUE = "MORE_VALUE";
-	private static final String ARRIVAL_DISTANCE_FACTOR = "arrival_distance_factor";
-
-	@Override
-	public void onDisplayPreferenceDialog(Preference preference) {
-		String prefId = preference.getKey();
-
-		if (prefId.equals(ARRIVAL_DISTANCE_FACTOR)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				AnnouncementTimeBottomSheet.showInstance(
-						fragmentManager, preference.getKey(), this, getSelectedAppMode()
-				);
-			}
-		} else {
-			super.onDisplayPreferenceDialog(preference);
-		}
-	}
 
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
@@ -317,6 +300,20 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		String prefId = preference.getKey();
+
+		if (settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				AnnouncementTimeBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode(), false);
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
 	}
 
 	@Override

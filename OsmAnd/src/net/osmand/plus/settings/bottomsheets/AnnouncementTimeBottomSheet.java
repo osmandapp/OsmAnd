@@ -5,11 +5,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
@@ -18,192 +24,159 @@ import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import static net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet.SELECTED_ENTRY_INDEX_KEY;
 
 
 public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
-        implements SeekBar.OnSeekBarChangeListener {
+		implements SeekBar.OnSeekBarChangeListener {
 
-    public static final String SELECTED_ENTRY_INDEX_KEY = "selected_entry_index_key";
-    public static final String TAG = AnnouncementTimeBottomSheet.class.getSimpleName();
-    private static final Log LOG = PlatformUtil.getLog(AnnouncementTimeBottomSheet.class);
+	public static final String TAG = AnnouncementTimeBottomSheet.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(AnnouncementTimeBottomSheet.class);
 
-    private OsmandApplication app;
+	private OsmandApplication app;
+	private AnnounceTimeDistances announceTimeDistances;
 
-    private AnnounceTimeDistances announceTimeDistances;
+	private ListPreferenceEx listPreference;
+	private int selectedEntryIndex = -1;
 
-    private ListPreferenceEx listPreference;
-    private int selectedEntryIndex = -1;
+	private TextViewEx tvSeekBarLabel;
+	private SeekBar seekBarArrival;
+	private ImageView ivArrow;
+	private TextViewEx tvIntervalsDescr;
 
-    private View rootView;
-    private TextViewEx tvSeekBarLabel;
-    private SeekBar seekBarArrival;
-    private ImageView ivArrow;
-    private TextViewEx tvIntervalsDescr;
+	private boolean collapsed = true;
 
-    private boolean collapsed = false;
+	@Override
+	public void createMenuItems(Bundle savedInstanceState) {
+		app = requiredMyApplication();
+		announceTimeDistances = new AnnounceTimeDistances(getAppMode(), app.getSettings());
 
-    @Override
-    public void createMenuItems(Bundle savedInstanceState) {
-        app = getMyApplication();
-        if (app == null) {
-            return;
-        }
+		listPreference = getListPreference();
+		if (listPreference == null || listPreference.getEntries() == null ||
+				listPreference.getEntryValues() == null) {
+			return;
+		}
+		if (savedInstanceState != null) {
+			selectedEntryIndex = savedInstanceState.getInt(SELECTED_ENTRY_INDEX_KEY);
+		} else {
+			selectedEntryIndex = listPreference.findIndexOfValue(listPreference.getValue());
+		}
 
-        announceTimeDistances = new AnnounceTimeDistances(getAppMode(), app.getSettings());
+		items.add(createBottomSheetItem());
+	}
 
-        listPreference = getListPreference();
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateViews();
+	}
 
-        if (listPreference == null || listPreference.getEntries() == null ||
-                listPreference.getEntryValues() == null) {
-            return;
-        }
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(SELECTED_ENTRY_INDEX_KEY, selectedEntryIndex);
+	}
 
-        if (savedInstanceState != null) {
-            selectedEntryIndex = savedInstanceState.getInt(SELECTED_ENTRY_INDEX_KEY);
-        } else {
-            selectedEntryIndex = listPreference.findIndexOfValue(listPreference.getValue());
-        }
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_cancel;
+	}
 
-        items.add(createBottomSheetItem());
-    }
+	@Override
+	protected int getRightBottomButtonTextId() {
+		return R.string.shared_string_apply;
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateViews();
-    }
+	@Override
+	protected void onRightBottomButtonClick() {
+		Object[] entryValues = listPreference.getEntryValues();
+		if (entryValues != null && selectedEntryIndex >= 0) {
+			Object value = entryValues[selectedEntryIndex];
+			if (listPreference.callChangeListener(value)) {
+				listPreference.setValue(value);
+			}
+			Fragment target = getTargetFragment();
+			if (target instanceof OnPreferenceChanged) {
+				((OnPreferenceChanged) target).onPreferenceChanged(listPreference.getKey());
+			}
+		}
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(SELECTED_ENTRY_INDEX_KEY, selectedEntryIndex);
-    }
+		dismiss();
+	}
 
-    @Override
-    protected int getDismissButtonTextId() {
-        return R.string.shared_string_cancel;
-    }
+	@Override
+	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+		if (progress != selectedEntryIndex) {
+			selectedEntryIndex = progress;
+			updateViews();
+		}
+	}
 
-    @Override
-    protected int getRightBottomButtonTextId() {
-        return R.string.shared_string_apply;
-    }
+	@Override
+	public void onStartTrackingTouch(SeekBar seekBar) {
+	}
 
-    @Override
-    protected void onRightBottomButtonClick() {
-        Object[] entryValues = listPreference.getEntryValues();
-        if (entryValues != null && selectedEntryIndex >= 0) {
-            Object value = entryValues[selectedEntryIndex];
-            if (listPreference.callChangeListener(value)) {
-                listPreference.setValue(value);
-            }
-            Fragment target = getTargetFragment();
-            if (target instanceof OnPreferenceChanged) {
-                ((OnPreferenceChanged) target).onPreferenceChanged(listPreference.getKey());
-            }
-        }
+	@Override
+	public void onStopTrackingTouch(SeekBar seekBar) {
+	}
 
-        dismiss();
-    }
+	private ListPreferenceEx getListPreference() {
+		return (ListPreferenceEx) getPreference();
+	}
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        if (progress != selectedEntryIndex) {
-            selectedEntryIndex = progress;
-            updateViews();
-        }
-    }
+	private BaseBottomSheetItem createBottomSheetItem() {
+		View rootView = UiUtilities.getInflater(getContext(), nightMode)
+				.inflate(R.layout.bottom_sheet_announcement_time, null);
 
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-    }
+		tvSeekBarLabel = rootView.findViewById(R.id.tv_seek_bar_label);
+		seekBarArrival = rootView.findViewById(R.id.seek_bar_arrival);
+		ivArrow = rootView.findViewById(R.id.iv_arrow);
+		tvIntervalsDescr = rootView.findViewById(R.id.tv_interval_descr);
 
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-    }
+		seekBarArrival.setOnSeekBarChangeListener(this);
+		seekBarArrival.setMax(listPreference.getEntries().length - 1);
+		rootView.findViewById(R.id.description_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				toggleDescriptionVisibility();
+			}
+		});
 
-    private ListPreferenceEx getListPreference() {
-        return (ListPreferenceEx) getPreference();
-    }
+		return new BaseBottomSheetItem.Builder()
+				.setCustomView(rootView)
+				.create();
+	}
 
-    private BaseBottomSheetItem createBottomSheetItem() {
-        rootView = UiUtilities.getInflater(getContext(), nightMode)
-                .inflate(R.layout.bottom_sheet_announcement_time, null);
+	private void updateViews() {
+		seekBarArrival.setProgress(selectedEntryIndex);
+		tvSeekBarLabel.setText(listPreference.getEntries()[selectedEntryIndex]);
 
-        tvSeekBarLabel = rootView.findViewById(R.id.tv_seek_bar_label);
-        seekBarArrival = rootView.findViewById(R.id.seek_bar_arrival);
-        ivArrow = rootView.findViewById(R.id.iv_arrow);
-        tvIntervalsDescr = rootView.findViewById(R.id.tv_interval_descr);
+		float value = (float) listPreference.getEntryValues()[selectedEntryIndex];
+		announceTimeDistances.setArrivalDistances(value);
+		tvIntervalsDescr.setText(announceTimeDistances.getIntervalsDescription(app));
+	}
 
-        seekBarArrival.setOnSeekBarChangeListener(this);
-        ivArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleViews();
-            }
-        });
+	private void toggleDescriptionVisibility() {
+		collapsed = !collapsed;
+		ivArrow.setImageResource(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
+		AndroidUiHelper.updateVisibility(tvIntervalsDescr, !collapsed);
+	}
 
-        setupIvIllustration();
-        setDividerColor();
-
-        return new BaseBottomSheetItem.Builder()
-                .setCustomView(rootView)
-                .create();
-    }
-
-    private void setupIvIllustration() {
-        int drawableId = nightMode ? R.drawable.img_help_announcement_time_night
-                : R.drawable.img_help_announcement_time_day;
-
-        ImageView ivIllustration = rootView.findViewById(R.id.iv_illustration);
-        ivIllustration.setImageResource(drawableId);
-    }
-
-    private void setDividerColor() {
-        int colorId = nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
-        View divider = rootView.findViewById(R.id.divider);
-        divider.setBackgroundColor(getResources().getColor(colorId));
-    }
-
-    private void updateViews() {
-        seekBarArrival.setProgress(selectedEntryIndex);
-        tvSeekBarLabel.setText(listPreference.getEntries()[selectedEntryIndex]);
-
-        float value = (float) listPreference.getEntryValues()[selectedEntryIndex];
-        announceTimeDistances.setArrivalDistances(value);
-        tvIntervalsDescr.setText(announceTimeDistances.getIntervalsDescription(app));
-    }
-
-    private void toggleViews() {
-        int drawableId = collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;
-        collapsed = !collapsed;
-        ivArrow.setImageResource(drawableId);
-
-        if (tvIntervalsDescr.getVisibility() == View.VISIBLE) {
-            tvIntervalsDescr.setVisibility(View.GONE);
-        } else {
-            tvIntervalsDescr.setVisibility(View.VISIBLE);
-        }
-    }
-
-    public static void showInstance(@NonNull FragmentManager fm, String prefKey, Fragment target,
-                                    @Nullable ApplicationMode appMode) {
-        try {
-            if (!fm.isStateSaved()) {
-                Bundle args = new Bundle();
-                args.putString(PREFERENCE_ID, prefKey);
-                AnnouncementTimeBottomSheet fragment = new AnnouncementTimeBottomSheet();
-                fragment.setArguments(args);
-                fragment.setAppMode(appMode);
-                fragment.setTargetFragment(target, 0);
-                fragment.show(fm, TAG);
-            }
-        } catch (RuntimeException e) {
-            LOG.error("showInstance", e);
-        }
-    }
+	public static void showInstance(@NonNull FragmentManager fm, String prefKey, Fragment target,
+									@Nullable ApplicationMode appMode, boolean usedOnMap) {
+		try {
+			if (!fm.isStateSaved()) {
+				Bundle args = new Bundle();
+				args.putString(PREFERENCE_ID, prefKey);
+				AnnouncementTimeBottomSheet fragment = new AnnouncementTimeBottomSheet();
+				fragment.setArguments(args);
+				fragment.setAppMode(appMode);
+				fragment.setUsedOnMap(usedOnMap);
+				fragment.setTargetFragment(target, 0);
+				fragment.show(fm, TAG);
+			}
+		} catch (RuntimeException e) {
+			LOG.error("showInstance", e);
+		}
+	}
 }

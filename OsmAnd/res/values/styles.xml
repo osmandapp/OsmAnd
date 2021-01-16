@@ -247,6 +247,7 @@
         <item name="checkboxStyle">@style/CheckboxStyle</item>
         <item name="radioButtonStyle">@style/RadioButtonStyle</item>
         <item name="text_input_background">@color/text_input_background_light</item>
+        <item name="image_help_announcement_time">@drawable/img_help_announcement_time_day</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -543,6 +544,7 @@
         <item name="checkboxStyle">@style/CheckboxStyle</item>
         <item name="radioButtonStyle">@style/RadioButtonStyle</item>
         <item name="text_input_background">@color/text_input_background_dark</item>
+        <item name="image_help_announcement_time">@drawable/img_help_announcement_time_night</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
