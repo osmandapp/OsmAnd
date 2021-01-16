@@ -87,7 +87,6 @@
     <string name="poi_florist">Kwětkarnja</string>
     <string name="poi_frame">Wobrazowe ramiki</string>
     <string name="poi_free_flying">free flying</string>
-    <string name="poi_furnace">Tepjenski wobchod</string>
     <string name="poi_furniture">Meblowy wobchod</string>
     <string name="poi_garden_centre">Zahrodniske potrjeby</string>
     <string name="poi_garden_furniture">Zahrodowe meble</string>
@@ -1290,7 +1289,6 @@
     <string name="poi_inscription_e">napismo:W</string>
     <string name="poi_inscription_ne">napismo:SW</string>
     <string name="poi_construction_yes">pod konstrukciju</string>
-    <string name="poi_additional_atm_yes">bankomat: haj</string>
     <string name="poi_atm_no">bankomat: ně</string>
     <string name="poi_protected_area">škitane pasmo</string>
     <string name="poi_addr_housename">mjeno domu</string>
@@ -1619,7 +1617,6 @@
     <string name="poi_smoking_area">kurjenski wobłuk</string>
     <string name="poi_mortuary">ćěłownja</string>
     <string name="poi_internet_cafe">internetownja</string>
-    <string name="poi_amenity_atm">bankomat</string>
     <string name="poi_payment_terminal">płaćenski terminal</string>
     <string name="poi_pawnbroker">zastawnja</string>
     <string name="poi_bureau_de_change">měnjernja</string>

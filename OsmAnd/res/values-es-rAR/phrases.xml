@@ -78,7 +78,6 @@
     <string name="poi_copyshop">Tienda de fotocopiado;Fotocopiadora</string>
     <string name="poi_curtain">Blanquería;Cortinas</string>
     <string name="poi_fabric">Tienda textil;Telas</string>
-    <string name="poi_bedding">Tienda de ropa de cama</string>
     <string name="poi_dive">Equipo de buceo</string>
     <string name="poi_doityourself">Mejoras para el hogar</string>
     <string name="poi_erotic">Artículos eróticos;Sexshop</string>
@@ -341,7 +340,6 @@
     <string name="poi_healthcare_alternative">Medicina alternativa</string>
     <string name="poi_audiologist">Otorrinolaringólogo;Audiólogo</string>
     <string name="poi_blood_bank">Banco de sangre</string>
-    <string name="poi_healthcare_centre">Centro médico</string>
     <string name="poi_midwife">Obstetra</string>
     <string name="poi_occupational_therapist">Terapeuta ocupacional</string>
     <string name="poi_optometrist">Oftalmólogo;Optometrista</string>
@@ -430,7 +428,6 @@
     <string name="poi_surfing">Surf</string>
     <string name="poi_swimming">Natación</string>
     <string name="poi_table_tennis">Tenis de mesa;Ping Pong</string>
-    <string name="poi_team_handball">Equipo de hándbol</string>
     <string name="poi_tennis">Tenis</string>
     <string name="poi_toboggan">Tobogán</string>
     <string name="poi_volleyball">Voley</string>
@@ -455,7 +452,6 @@
     <string name="poi_aquarium">Acuario</string>
     <string name="poi_theme_park">Parque temático</string>
     <string name="poi_attraction">Atracción turística</string>
-    <string name="poi_general_tourist_attraction_yes">Atracción turística general</string>
     <string name="poi_attraction_amusement_ride">Atracción de feria</string>
     <string name="poi_attraction_animal">Animal (atracción)</string>
     <string name="poi_attraction_big_wheel">Rueda de la fortuna;Noria;Vuelta al mundo</string>
@@ -494,7 +490,6 @@
     <string name="poi_internet_access_public">Conexión a Internet: público</string>
     <string name="poi_internet_access_service">Conexión a Internet: servicio</string>
     <string name="poi_monastery">Monasterio</string>
-    <string name="poi_historic_monastery">Monasterio histórico</string>
     <string name="poi_wayside_cross">Crucero;Cruz en el camino</string>
     <string name="poi_wayside_shrine">Ermita en el camino</string>
     <string name="poi_information">Información</string>
@@ -658,7 +653,6 @@
     <string name="poi_crematorium">Crematorio</string>
     <string name="poi_internet_cafe">Cibercafé</string>
     <string name="poi_bank">Banco</string>
-    <string name="poi_amenity_atm">Cajero automático</string>
     <string name="poi_payment_terminal">Terminal de pago</string>
     <string name="poi_money_lender">Prestamista</string>
     <string name="poi_pawnbroker">Casa de empeños;Prestamista</string>
@@ -816,7 +810,6 @@
     <string name="poi_coffee">Venta de café en granos</string>
     <string name="poi_pasta">Fábrica de pastas</string>
     <string name="poi_pastry">Pastelería</string>
-    <string name="poi_furnace">Artículos de calefacción</string>
     <string name="poi_garden_furniture">Muebles de jardín</string>
     <string name="poi_leather">Marroquinería;Tienda de cueros</string>
     <string name="poi_tyres">Tienda de neumáticos</string>
@@ -837,14 +830,11 @@
     <string name="poi_breakwater">Rompeolas</string>
     <string name="poi_power_cable_distribution_cabinet">Gabinete de distribución cableada</string>
     <string name="poi_basin">Cuenca</string>
-    <string name="poi_building_poi">Edificio</string>
     <string name="poi_crane">Grúa</string>
     <string name="poi_tree">Árbol</string>
     <string name="poi_abandoned">Abandonado</string>
     <string name="poi_disused">En desuso</string>
     <string name="poi_groyne">Espigón</string>
-    <string name="poi_conservation">Conservación del suelo</string>
-    <string name="poi_tourism_attraction">Atracción turística</string>
     <string name="poi_cutline">Cortafuegos forestal</string>
     <string name="poi_icn_ref">Nodo de red internacional de ciclismo</string>
     <string name="poi_ncn_ref">Nodo de red nacional de ciclismo</string>
@@ -984,7 +974,6 @@
     <string name="poi_recycling_cardboard">Cartón</string>
     <string name="poi_recycling_hardcore">Escombros</string>
     <string name="poi_recycling_chipboard">Cartón prensado</string>
-    <string name="poi_mill_pond">Laguna de molino</string>
     <string name="twitter">Twitter</string>
     <string name="poi_skype">Skype</string>
     <string name="poi_youtube">YouTube</string>
@@ -1164,7 +1153,6 @@
     <string name="poi_generator_source_geothermal">Fuente de energía: geotérmica</string>
     <string name="poi_generator_source_oil">Fuente de energía: petróleo</string>
     <string name="poi_generator_source_diesel">Fuente de energía: diésel</string>
-    <string name="poi_car_wash_self_service">Auto servicio</string>
     <string name="poi_int_name">Nombre internacional</string>
     <string name="poi_nat_name">Nombre nacional</string>
     <string name="poi_reg_name">Nombre regional</string>
@@ -1189,7 +1177,6 @@
     <string name="poi_information_route_marker">Marcador de ruta</string>
     <string name="poi_information_hikingmap">Mapa de senderismo</string>
     <string name="poi_information_nature">Naturaleza</string>
-    <string name="poi_information_wildlife">Información: Vida salvaje</string>
     <string name="poi_information_history">Historia</string>
     <string name="poi_information_sign">Señal</string>
     <string name="poi_information_audioguide">Audio-guía</string>
@@ -1312,8 +1299,6 @@
     <string name="poi_stars_4s">4S (Primera Clase Superior)</string>
     <string name="poi_stars_5">5 (Lujoso)</string>
     <string name="poi_stars_5s">5S (Lujoso Superior)</string>
-    <string name="poi_stars_6">Estrellas: 6</string>
-    <string name="poi_stars_7">Estrellas: 7</string>
     <string name="poi_rooms">Habitaciones</string>
     <string name="poi_love_hotel">Albergue transitorio;Telo;Motel;Hotel alojamiento</string>
     <string name="poi_internet_access_yes">Conexión a Internet: sí</string>
@@ -1340,7 +1325,6 @@
     <string name="poi_payment_visa_no">No acepta Visa</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">No acepta MasterCard</string>
-    <string name="poi_payment_none">Gratis</string>
     <string name="poi_payment_account_cards_yes">Tarjetas de cuenta</string>
     <string name="poi_payment_account_cards_no">No acepta tarjetas de cuenta</string>
     <string name="poi_payment_maestro_yes">Maestro</string>
@@ -1972,7 +1956,6 @@
     <string name="poi_impromptu_no">Improvisado: no</string>
     <string name="poi_sanitary_dump_station_yes">Estación de descarga sanitaria: sí</string>
     <string name="poi_sanitary_dump_station_no">Estación de descarga sanitaria: no</string>
-    <string name="poi_sanitary_dump_station_customers">Estación de descarga sanitaria sólo para clientes</string>
     <string name="poi_power_supply_yes">Sí</string>
     <string name="poi_power_supply_no">Fuente de alimentación: no</string>
     <string name="poi_power_supply_cee_7_4">Fuente de alimentación (enchufe): CEE 7/4</string>
@@ -2383,7 +2366,6 @@
     <string name="poi_inscription_e">Inscripción: E</string>
     <string name="poi_inscription_ne">Inscripción: NE</string>
     <string name="poi_construction_yes">En construcción</string>
-    <string name="poi_additional_atm_yes">Cajero automático: sí</string>
     <string name="poi_atm_no">Cajero automático: no</string>
     <string name="poi_firepit">Lugar para fogata</string>
     <string name="poi_street_cabinet">Gabinete exterior</string>
@@ -2479,7 +2461,6 @@
     <string name="poi_sanitary_dump_station">Estación de descarga sanitaria</string>
     <string name="poi_medical_system_western_yes">Occidental</string>
     <string name="poi_medical_system_chinese_yes">Chino tradicional</string>
-    <string name="poi_medical_system_unknown_yes">Sistema médico: Desconocido</string>
     <string name="poi_medical_system_ayurveeda_yes">Ayurveda</string>
     <string name="poi_medical_system_kampo_yes">Kampo</string>
     <string name="poi_medical_system_mongolian_yes">Mongol tradicional</string>
@@ -2503,17 +2484,12 @@
     <string name="poi_health_service_test_yes">Servicio de salud: análisis</string>
     <string name="poi_health_service_test_no">Servicio de salud: sin análisis</string>
     <string name="poi_health_facility_type_office">Consultorio médico</string>
-    <string name="poi_health_facility_type_hospital">Tipo de instalación médica: Hospital</string>
     <string name="poi_health_facility_type_field_hospital">Tipo de centro médico: hospital de campaña</string>
-    <string name="poi_health_facility_type_clinic">Tipo de instalación médica: Clínica</string>
-    <string name="poi_health_facility_type_health_centre">Tipo de instalación médica: Centro de salud</string>
     <string name="poi_health_facility_type_counselling_centre">Tipo de centro médico: centro de asesoría</string>
-    <string name="poi_health_facility_type_rehabilitation">Tipo de instalación médica: Rehabilitación</string>
     <string name="poi_health_facility_type_laboratory">Tipo de centro médico: laboratorio</string>
     <string name="poi_health_facility_type_therapy">Tipo de centro médico: terapia</string>
     <string name="poi_health_facility_type_department">Tipo de centro médico: departamento</string>
     <string name="poi_health_facility_type_dispensary">Tipo de centro médico: dispensario</string>
-    <string name="poi_health_facility_type_pharmacy">Tipo de instalación médica: Farmacia</string>
     <string name="poi_health_facility_type_first_aid">Tipo de centro médico: primeros auxilios</string>
     <string name="poi_health_facility_type_nursing_home">Tipo de centro médico: asilo de ancianos;Geriátrico</string>
     <string name="poi_health_facility_type_support_group_home">Tipo de centro médico: grupo de apoyo domiciliario</string>
@@ -2560,7 +2536,6 @@
     <string name="poi_counselling_type_marriage_yes">Asesoría (matrimonio): sí</string>
     <string name="poi_counselling_type_marriage_no">Asesoría (matrimonio): no</string>
     <string name="poi_counselling_type_nutrition_yes">Asesoría (nutrición): sí</string>
-    <string name="poi_counselling_type_nutrition_no">Asesoramiento (nutrición): No</string>
     <string name="poi_counselling_type_rehabilitation_yes">Asesoría (rehabilitación): sí</string>
     <string name="poi_counselling_type_rehabilitation_no">Asesoría (rehabilitación): no</string>
     <string name="poi_counselling_type_sexual_yes">Asesoría (sexual): sí</string>
@@ -2629,7 +2604,6 @@
     <string name="poi_water_source_main">Principal</string>
     <string name="poi_water_source_pond">Estanque</string>
     <string name="poi_water_source_stream">Arroyo</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_in_service_yes">En servicio: sí</string>
     <string name="poi_fire_hydrant_style_wsh">Estilo de hidrante: wsh</string>
     <string name="poi_street_cabinet_power">Tipo de gabinete: electricidad</string>
@@ -3564,8 +3538,6 @@
     <string name="poi_park_ride_hov">Vehículos de gran capacidad</string>
     <string name="poi_park_ride_tram">Tranvía</string>
     <string name="poi_park_ride_ferry">Transbordador (Ferri)</string>
-    <string name="poi_generator_source_biomass">Fuente de energía: biomasa</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Advertencia de peligro</string>
     <string name="poi_rtsa_scale_filter">Categoría de dificultad</string>
     <string name="poi_rtsa_scale_nc">s/c (sin categoría)</string>

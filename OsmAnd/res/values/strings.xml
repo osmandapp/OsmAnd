@@ -7,10 +7,11 @@
 	   1. To not produce duplicate strings (check by name if a string already exists)
 	   2. Every apostrophe (quote) is preceded by a backslash.
 	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
-	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
+	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
 
 -->
+
     <string name="announcement_time_title">Announcement time</string>
     <string name="announcement_time_descr">Announcement time of different voice prompts depends on prompt type, current navigation speed and default navigation speed.</string>
     <string name="announcement_time_intervals">Time and distance intervals</string>
@@ -22,6 +23,11 @@
     <string name="announcement_time_approach">Approach</string>
     <string name="announcement_time_passing">Passing</string>
     <string name="shared_string_sec">sec</string>
+    <string name="change_folder">Change folder</string>
+    <string name="rename_track">Rename track</string>
+    <string name="edit_track">Edit track</string>
+    <string name="upload_to_openstreetmap">Upload to OpenStreetMap</string>
+    <string name="analyze_by_intervals">Analyze by intervals (split interval)</string>
     <string name="shared_string_empty">Empty</string>
     <string name="select_folder_descr">Select folder or add new one</string>
     <string name="select_folder">Select folder</string>
@@ -1503,7 +1509,6 @@
     <string name="depth_contour_descr">Sea depth contour lines and seamarks.</string>
     <string name="sea_depth_thanks">Thank you for purchasing \'Nautical depth contours\'</string>
     <string name="index_item_depth_contours_osmand_ext">Nautical depth contours</string>
-
     <string name="index_item_world_wikivoyage">Worldwide Wikivoyage articles</string>
     <string name="index_item_depth_points_southern_hemisphere">Southern hemisphere nautical depth points</string>
     <string name="index_item_depth_points_northern_hemisphere">Northern hemisphere nautical depth points</string>
@@ -3681,7 +3686,7 @@
     <string name="error_calculating_route">Could not calculate route.</string>
     <string name="error_calculating_route_occured">Could not calculate route.</string>
     <string name="empty_route_calculated">The calculated route is empty.</string>
-    <string name="new_route_calculated_dist_dbg">Route: distance %s, router time %s \nCalculation: %.1f sec, %d roads, %d tiles)</string>
+    <string name="new_route_calculated_dist_dbg">Route: distance %1$s, router time %2$s \nCalculation: %3$.1f sec, %4$d roads, %5$d tiles)</string>
     <string name="arrived_at_destination">You have arrived.</string>
     <string name="invalid_locations">Invalid coordinates</string>
     <string name="go_back_to_osmand">Go back to map</string>

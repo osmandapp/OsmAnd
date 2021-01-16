@@ -21,7 +21,6 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.PlatformUtil
 import net.osmand.telegram.*
@@ -42,7 +41,7 @@ private const val SUGGESTED = 2
 private const val SHARE_LOCATION_CHAT = 1
 private const val DEFAULT_CHAT = 0
 
-private const val ADAPTER_UPDATE_INTERVAL_MIL = 5 * 1000L // 5 sec
+private const val ADAPTER_UPDATE_INTERVAL_MS = 5 * 1000L // 5 sec
 
 class MyLocationTabFragment : Fragment(), TelegramListener {
 
@@ -380,7 +379,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				updateContent()
 				startHandler()
 			}
-		}, ADAPTER_UPDATE_INTERVAL_MIL)
+		}, ADAPTER_UPDATE_INTERVAL_MS)
 	}
 
 	private fun animateStartSharingBtn(show: Boolean) {

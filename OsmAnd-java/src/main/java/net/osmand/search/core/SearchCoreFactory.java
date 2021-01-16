@@ -719,9 +719,10 @@ public class SearchCoreFactory {
 					results.put(res.pt.getKeyName(), res);
 				}
 			}
-			if (nmAdditional != null) {
-				addAditonals(nmAdditional, results, types.getOtherMapCategory());
-			}
+			// don't spam results with unsearchable additionals like 'description', 'email', ...
+			// if (nmAdditional != null) {
+			//	addAditonals(nmAdditional, results, types.getOtherMapCategory());
+			// }
 			for (PoiCategory c : categories) {
 				PoiTypeResult res = checkPoiType(nm, c);
 				if(res != null) {

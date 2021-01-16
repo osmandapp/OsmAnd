@@ -113,7 +113,6 @@
     <string name="apply_to_all_profiles">ပရိုဖိုင်းအားလုံးကိုပြောင်းလဲမည်</string>
     <string name="start_up_message_pref">စစခြင်းမက်ဆေ့ခ်ျ</string>
     <string name="turn_screen_on_info">မြေပုံကို screen သော့ခတ်မျက်နှာပြင်အပေါ်ထက်မှာပြမြည်။</string>
-    <string name="appearance">ပုံပန်းမျက်နှာပြင်</string>
     <string name="map_look_descr">မြေပုံမျက်နှာပြင်</string>
     <string name="list_of_installed_plugins">Installed လုတ်ထားသောပလပ်အင်များ</string>
     <string name="configure_navigation">လမ်းညွှန်ခြင်းဖွဲ့စည်းပုံ</string>

@@ -467,7 +467,6 @@
     <string name="error_calculating_route">경로 탐색 도중 오류</string>
     <string name="error_calculating_route_occured">경로를 찾는 도중 오류가 발생하였습니다</string>
     <string name="empty_route_calculated">탐색한 경로를 찾지 못하였습니다</string>
-    <string name="new_route_calculated_dist">새로운 경로를 찾았습니다, 거리</string>
     <string name="arrived_at_destination">도착지에 도착하였습니다</string>
     <string name="invalid_locations">좌표가 유효하지 않습니다!</string>
     <string name="go_back_to_osmand">OsmAnd 맵으로 되돌아감</string>
@@ -558,7 +557,6 @@
     <string name="osb_comment_dialog_error">예외발생: 설명이 추가되지 않았습니다</string>
     <string name="poi_edit_title">POI 편집</string>
     <string name="poi_create_title">POI 생성</string>
-    <string name="poi_error_poi_not_found">노드를 찾을 수 없거나 시설이 단일 노드가 아닙니다</string>
     <string name="poi_remove_confirm_template">{0}를 삭제할까요(정보를 입력하세요)?</string>
     <string name="poi_remove_title">POI 삭제</string>
     <string name="poi_remove_success">POI 가 성공적으로 삭제되었습니다</string>

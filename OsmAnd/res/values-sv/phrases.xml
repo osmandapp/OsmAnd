@@ -551,7 +551,6 @@
     <string name="poi_healthcare_alternative">Alternativ medicin</string>
     <string name="poi_audiologist">Audionom</string>
     <string name="poi_blood_bank">Blodbank</string>
-    <string name="poi_healthcare_centre">Vårdcentral</string>
     <string name="poi_midwife">Barnmorska</string>
     <string name="poi_occupational_therapist">Arbetsterapeut</string>
     <string name="poi_optometrist">Optiker</string>
@@ -945,7 +944,6 @@
     <string name="poi_crematorium">Krematorium</string>
     <string name="poi_internet_cafe">Internetcafé</string>
     <string name="poi_bank">Bank</string>
-    <string name="poi_amenity_atm">Bankomat</string>
     <string name="poi_payment_terminal">Betalterminal</string>
     <string name="poi_money_lender">Ockrare</string>
     <string name="poi_pawnbroker">Pantbank</string>
@@ -2505,7 +2503,6 @@
     <string name="poi_inscription_e">Inskription: Ö</string>
     <string name="poi_inscription_ne">Inskription: NÖ</string>
     <string name="poi_construction_yes">Under konstruktion</string>
-    <string name="poi_additional_atm_yes">Bankomat: ja</string>
     <string name="poi_atm_no">Bankomat: Nej</string>
     <string name="poi_firepit">Eldgrop</string>
     <string name="poi_street_cabinet">Gatuskåp</string>
@@ -2742,7 +2739,6 @@
     <string name="poi_water_source_main">Huvud</string>
     <string name="poi_water_source_pond">Damm</string>
     <string name="poi_water_source_stream">Vattendrag</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cistern</string>
     <string name="poi_in_service_yes">I tjänst: Ja</string>
     <string name="poi_street_cabinet_power">Skåptyp: el</string>
     <string name="poi_street_cabinet_telecom">Skåptyp: telekom</string>
