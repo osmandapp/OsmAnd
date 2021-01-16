@@ -3961,4 +3961,9 @@
     <string name="select_folder">選取資料夾</string>
     <string name="select_folder_descr">選取資料夾或新增</string>
     <string name="shared_string_empty">空</string>
+    <string name="analyze_by_intervals">按時間間隔分析（分割時間間隔）</string>
+    <string name="upload_to_openstreetmap">上傳到 OpenStreetMap</string>
+    <string name="edit_track">編輯軌跡</string>
+    <string name="rename_track">重新命名軌跡</string>
+    <string name="change_folder">變更資料夾</string>
 </resources>
