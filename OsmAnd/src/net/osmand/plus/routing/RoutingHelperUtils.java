@@ -8,9 +8,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -164,19 +161,20 @@ public class RoutingHelperUtils {
 	}
 
 
-	public static void checkAndUpdateStartLocation(@NonNull OsmandApplication app, LatLon newStartLocation) {
+	public static void checkAndUpdateStartLocation(@NonNull OsmandApplication app, LatLon newStartLocation, boolean force) {
 		if (newStartLocation != null) {
 			LatLon lastStartLocation = app.getSettings().getLastStartPoint();
-			if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation) > CACHE_RADIUS) {
+			if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation) > CACHE_RADIUS || force) {
 				app.getMapViewTrackingUtilities().detectDrivingRegion(newStartLocation);
 				app.getSettings().setLastStartPoint(newStartLocation);
 			}
 		}
 	}
 
-	public static void checkAndUpdateStartLocation(@NonNull OsmandApplication app, Location nextStartLocation) {
+	public static void checkAndUpdateStartLocation(@NonNull OsmandApplication app, Location nextStartLocation, boolean force) {
 		if (nextStartLocation != null) {
-			checkAndUpdateStartLocation(app, new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude()));
+			LatLon newStartLocation = new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude());
+			checkAndUpdateStartLocation(app, newStartLocation, force);
 		}
 	}
 }

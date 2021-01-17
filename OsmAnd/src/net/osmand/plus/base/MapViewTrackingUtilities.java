@@ -13,8 +13,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -22,10 +20,14 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -176,7 +178,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			locationProvider = location.getProvider();
 			if (settings.DRIVING_REGION_AUTOMATIC.get() && !drivingRegionUpdated && !app.isApplicationInitializing()) {
 				drivingRegionUpdated = true;
-				RoutingHelperUtils.checkAndUpdateStartLocation(app, location);
+				RoutingHelperUtils.checkAndUpdateStartLocation(app, location, true);
 			}
 		}
 		if (mapView != null) {
@@ -489,7 +491,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		@Override
 		protected void onPostExecute(WorldRegion worldRegion) {
 			if (worldRegion != null) {
+				DrivingRegion oldRegion = app.getSettings().DRIVING_REGION.get();
+
 				app.setupDrivingRegion(worldRegion);
+
+				DrivingRegion currentRegion = app.getSettings().DRIVING_REGION.get();
+				if (oldRegion.leftHandDriving != currentRegion.leftHandDriving) {
+					ApplicationMode mode = app.getRoutingHelper().getAppMode();
+					app.getRoutingHelper().onSettingsChanged(mode, true);
+				}
 			}
 		}
 	}
