@@ -167,7 +167,7 @@ public class RoutingHelperUtils {
 	public static void checkAndUpdateStartLocation(@NonNull OsmandApplication app, LatLon newStartLocation) {
 		if (newStartLocation != null) {
 			LatLon lastStartLocation = app.getSettings().getLastStartPoint();
-			if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation) > CACHE_RADIUS) {
+			if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation ) > CACHE_RADIUS || app.getSettings().DRIVING_REGION_AUTOMATIC.get() ) {
 				app.getMapViewTrackingUtilities().detectDrivingRegion(newStartLocation);
 				app.getSettings().setLastStartPoint(newStartLocation);
 			}
