@@ -134,6 +134,7 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
 		tvIntervalsDescr = rootView.findViewById(R.id.tv_interval_descr);
 
 		seekBarArrival.setOnSeekBarChangeListener(this);
+		seekBarArrival.setProgress(selectedEntryIndex);
 		seekBarArrival.setMax(listPreference.getEntries().length - 1);
 		rootView.findViewById(R.id.description_container).setOnClickListener(new View.OnClickListener() {
 			@Override
