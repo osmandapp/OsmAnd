@@ -1,17 +1,21 @@
 package net.osmand.plus.onlinerouting;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -66,14 +70,15 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 	private View view;
 	private ViewGroup segmentsContainer;
-	private ViewGroup scrollView;
 	private OnlineRoutingCard nameCard;
 	private OnlineRoutingCard typeCard;
 	private OnlineRoutingCard vehicleCard;
 	private OnlineRoutingCard apiKeyCard;
 	private OnlineRoutingCard exampleCard;
 	private View testResultsContainer;
-	private ViewTreeObserver.OnScrollChangedListener onScroll;
+	private ScrollView scrollView;
+	private ViewTreeObserver.OnGlobalLayoutListener onGlobalLayout;
+	private boolean isKeyboardShown = false;
 
 	private ApplicationMode appMode;
 
@@ -146,6 +151,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		});
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
@@ -154,21 +160,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		view = getInflater().inflate(
 				R.layout.online_routing_engine_fragment, container, false);
 		segmentsContainer = (ViewGroup) view.findViewById(R.id.segments_container);
-		scrollView = (ViewGroup) segmentsContainer.getParent();
-		onScroll = new ViewTreeObserver.OnScrollChangedListener() {
-			int pastY = 0;
-
-			@Override
-			public void onScrollChanged() {
-				int y = scrollView.getScrollY();
-				if (pastY != y) {
-					pastY = y;
-					View focus = view.findFocus();
-					AndroidUtils.hideSoftKeyboard(requireActivity(), focus);
-				}
-			}
-		};
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(onScroll);
+		scrollView = (ScrollView) segmentsContainer.getParent();
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 		}
@@ -186,13 +178,82 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		setupButtons();
 
 		updateCardViews(nameCard, typeCard, vehicleCard, exampleCard);
-		return view;
+
+		scrollView.setOnTouchListener(new View.OnTouchListener() {
+			int scrollViewY = 0;
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				int y = scrollView.getScrollY();
+				if (isKeyboardShown && scrollViewY != y) {
+					scrollViewY = y;
+					View focus = getActivity().getCurrentFocus();
+					if (focus != null) {
+						AndroidUtils.hideSoftKeyboard(requireActivity(), focus);
+						focus.clearFocus();
+					}
+				}
+				return false;
+			}
+		});
+
+		onGlobalLayout = new ViewTreeObserver.OnGlobalLayoutListener() {
+			private int layoutHeightPrevious;
+			private int layoutHeightMin;
+
+			@Override
+            public void onGlobalLayout() {
+
+                final ViewTreeObserver.OnGlobalLayoutListener listener = this;
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+
+                Rect visibleDisplayFrame = new Rect();
+                view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
+                int layoutHeight = visibleDisplayFrame.bottom;
+
+                if (layoutHeight < layoutHeightPrevious) {
+					isKeyboardShown = true;
+					layoutHeightMin = layoutHeight;
+				} else {
+                	isKeyboardShown = layoutHeight == layoutHeightMin;
+				}
+
+				if (layoutHeight != layoutHeightPrevious) {
+                    FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
+                    rootViewLayout.height = layoutHeight;
+                    view.requestLayout();
+                    layoutHeightPrevious = layoutHeight;
+                }
+
+                view.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.getViewTreeObserver().addOnGlobalLayoutListener(listener);
+                    }
+                });
+
+            }
+        };
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayout);
+        }
+
+        return view;
 	}
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		scrollView.getViewTreeObserver().removeOnScrollChangedListener(onScroll);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.getViewTreeObserver().removeOnGlobalLayoutListener(onGlobalLayout);
+        } else {
+            view.getViewTreeObserver().removeGlobalOnLayoutListener(onGlobalLayout);
+        }
 	}
 
 	private void setupNameCard() {
