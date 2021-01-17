@@ -44,10 +44,6 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -60,13 +56,17 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -871,18 +871,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showBottomMenuButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode()
 				&& !isInPlanRouteMode() && !contextMenuOpened && !isInChoosingRoutesMode()
-				&& !isInWaypointsChoosingMode() && !isInFollowTrackMode() && !isInTrackAppearanceMode();
+				&& !isInWaypointsChoosingMode() && !isInFollowTrackMode() && !isInTrackAppearanceMode()
+				&& !isInTrackMenuMode();
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
 		boolean showZoomButtons = !routeDialogOpened && !contextMenuOpened && !isInTrackAppearanceMode()
-				&& (!isInGpxApproximationMode() || !isPotrait())
+				&& !isInTrackMenuMode() && (!isInGpxApproximationMode() || !isPotrait())
 				&& !isInFollowTrackMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !portrait);
 		mapZoomIn.updateVisibility(showZoomButtons);
 		mapZoomOut.updateVisibility(showZoomButtons);
 
 		boolean forceHideCompass = routeDialogOpened || trackDialogOpened || isInMeasurementToolMode()
-				|| isInPlanRouteMode() || contextMenuOpened || isInChoosingRoutesMode()
+				|| isInPlanRouteMode() || contextMenuOpened || isInChoosingRoutesMode() || isInTrackMenuMode()
 				|| isInTrackAppearanceMode() || isInWaypointsChoosingMode() || isInFollowTrackMode();
 		compassHud.forceHideCompass = forceHideCompass;
 		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
@@ -894,7 +895,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		boolean showTopButtons = !routeDialogOpened && !trackDialogOpened && !contextMenuOpened
 				&& !isInMeasurementToolMode() && !isInPlanRouteMode()  && !isInChoosingRoutesMode()
-				&& !isInTrackAppearanceMode() && !isInWaypointsChoosingMode() && !isInFollowTrackMode();
+				&& !isInTrackAppearanceMode() && !isInWaypointsChoosingMode() && !isInFollowTrackMode()
+				&& !isInTrackMenuMode();
 		layersHud.updateVisibility(showTopButtons);
 		quickSearchHud.updateVisibility(showTopButtons);
 
@@ -1021,7 +1023,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 		boolean visible = !(tracked && rh.isFollowingMode()) && (!isInGpxApproximationMode() || !isPotrait());
 		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInPlanRouteMode()
-				&& !isInTrackAppearanceMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !isInFollowTrackMode() || !isPotrait()));
+				&& !isInTrackAppearanceMode() && !isInTrackMenuMode()
+				&& (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !isInFollowTrackMode() || !isPotrait()));
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
@@ -1342,6 +1345,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private boolean isInGpxApproximationMode() {
 		return mapActivity.getMapLayers().getMeasurementToolLayer().isTapsDisabled();
+	}
+
+	public boolean isInTrackMenuMode() {
+		return mapActivity.getTrackMenuFragment() != null && mapActivity.getTrackMenuFragment().isVisible();
 	}
 
 	private boolean isInChoosingRoutesMode() {

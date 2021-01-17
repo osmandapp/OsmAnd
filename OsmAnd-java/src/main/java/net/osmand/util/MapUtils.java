@@ -333,8 +333,8 @@ public class MapUtils {
 		});
 	}
 
-	public static String buildGeoUrl(double latitude, double longitude, int zoom) {
-		return "geo:" + ((float) latitude) + "," + ((float) longitude) + "?z=" + zoom;
+	public static String buildGeoUrl(String latitude, String longitude, int zoom) {
+		return "geo:" + latitude + "," + longitude + "?z=" + zoom;
 	}
 
 	// Examples
