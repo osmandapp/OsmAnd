@@ -505,8 +505,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		};
 		if (choice.value || map == null) {
 			runnable.run();
-		} else {
-			TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+		} else if (map instanceof FragmentActivity) {
+			FragmentActivity activity = (FragmentActivity) map;
+			TripRecordingBottomSheet.showInstance(activity.getSupportFragmentManager());
 		}
 	}
 
