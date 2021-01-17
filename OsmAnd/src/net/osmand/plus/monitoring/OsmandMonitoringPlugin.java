@@ -2,16 +2,28 @@ package net.osmand.plus.monitoring;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -42,15 +54,18 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.monitoring";
+	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
 	public static final int REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING = 208;
 
 	private MapActivity mapActivity;
-	private final OsmandSettings settings;
+	private OsmandSettings settings;
 	private TextInfoWidget monitoringControl;
-	private final LiveMonitoringHelper liveMonitoringHelper;
+	private LiveMonitoringHelper liveMonitoringHelper;
 	private boolean isSaving;
 	private boolean showDialogWhenActivityResumed;
 
@@ -147,9 +162,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static final int[] SECONDS = new int[]{0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
-	public static final int[] MINUTES = new int[]{2, 3, 5};
-	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[]{1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
+	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
+	public static final int[] MINUTES = new int[] {2, 3, 5};
+	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[] {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
 
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
@@ -167,10 +182,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
 		monitoringControl = new TextInfoWidget(map) {
 			long lastUpdateTime;
-
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				if (isSaving) {
+				if(isSaving){
 					setText(map.getString(R.string.shared_string_save), "");
 					setIcons(R.drawable.widget_monitoring_rec_big_day, R.drawable.widget_monitoring_rec_big_night);
 					return true;
@@ -198,7 +212,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				}
 
 				final boolean liveMonitoringEnabled = liveMonitoringHelper.isLiveMonitoringEnabled();
-				if (globalRecord) {
+				if(globalRecord) {
 					//indicates global recording (+background recording)
 					if (liveMonitoringEnabled) {
 						dn = R.drawable.widget_live_monitoring_rec_big_night;
@@ -316,10 +330,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		if (wasTrackMonitored) {
 			items.add(R.string.gpx_monitoring_stop);
 			items.add(R.string.gpx_start_new_segment);
-			if (settings.LIVE_MONITORING.get()) {
+			if(settings.LIVE_MONITORING.get()) {
 				items.add(R.string.live_monitoring_stop);
-			} else if (!settings.LIVE_MONITORING_URL.getProfileDefaultValue(settings.APPLICATION_MODE.get()).
-					equals(settings.LIVE_MONITORING_URL.get())) {
+			} else if(!settings.LIVE_MONITORING_URL.getProfileDefaultValue(settings.APPLICATION_MODE.get()).
+					equals(settings.LIVE_MONITORING_URL.get())){
 				items.add(R.string.live_monitoring_start);
 			}
 		} else {
@@ -333,14 +347,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		for (int i = 0; i < strings.length; i++) {
 			strings[i] = app.getString(items.get(i));
 		}
-		final int[] holder = new int[]{0};
+		final int[] holder = new int[] {0};
 		final Runnable run = new Runnable() {
 			public void run() {
 				int which = holder[0];
 				int item = items.get(which);
-				if (item == R.string.save_current_track) {
+				if(item == R.string.save_current_track){
 					saveCurrentTrack(null, activity);
-				} else if (item == R.string.gpx_monitoring_start) {
+				} else if(item == R.string.gpx_monitoring_start) {
 					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 						if (mapActivity != null) {
 							ActivityCompat.requestPermissions(mapActivity,
@@ -367,25 +381,31 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 								});
 						builder.show();
 					}
-				} else if (item == R.string.gpx_monitoring_stop) {
+				} else if(item == R.string.gpx_monitoring_stop) {
 					stopRecording();
-				} else if (item == R.string.gpx_start_new_segment) {
+				} else if(item == R.string.gpx_start_new_segment) {
 					app.getSavingTrackHelper().startNewSegment();
-				} else if (item == R.string.live_monitoring_stop) {
+				} else if(item == R.string.live_monitoring_stop) {
 					settings.LIVE_MONITORING.set(false);
-				} else if (item == R.string.live_monitoring_start) {
+				} else if(item == R.string.live_monitoring_start) {
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = settings.LIVE_MONITORING_INTERVAL.get();
-					settings.LIVE_MONITORING_INTERVAL.set(vs.value);
-					settings.LIVE_MONITORING.set(true);
-					TripRecordingBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager());
+					showIntervalChooseDialog(activity, app.getString(R.string.live_monitoring_interval) + " : %s",
+							app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES,
+							null, vs, showTrackSelection, new OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									settings.LIVE_MONITORING_INTERVAL.set(vs.value);
+									settings.LIVE_MONITORING.set(true);
+								}
+							});
 				}
 				if (monitoringControl != null) {
 					monitoringControl.updateInfo(null);
 				}
 			}
 		};
-		if (strings.length == 1) {
+		if(strings.length == 1) {
 			run.run();
 		} else {
 			bld.setItems(strings, new OnClickListener() {
@@ -458,7 +478,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void stopRecording() {
+	public void stopRecording(){
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
 		if (app.getNavigationService() != null) {
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
@@ -488,6 +508,146 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		} else {
 			TripRecordingBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager());
 		}
+	}
+
+	public static void showIntervalChooseDialog(final Activity activity, final String patternMsg,
+												String title, final int[] seconds, final int[] minutes,
+												final ValueHolder<Boolean> choice, final ValueHolder<Integer> v,
+												final boolean showTrackSelection, OnClickListener onclick) {
+		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+			return;
+		}
+		final OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+		boolean nightMode;
+		if (activity instanceof MapActivity) {
+			nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		} else {
+			nightMode = !app.getSettings().isLightContent();
+		}
+		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder dlg = new AlertDialog.Builder(themedContext);
+		dlg.setTitle(title);
+		LinearLayout ll = createIntervalChooseLayout(app, themedContext, patternMsg, seconds, minutes, choice, v, showTrackSelection, nightMode);
+		dlg.setView(ll);
+		dlg.setPositiveButton(R.string.shared_string_ok, onclick);
+		dlg.setNegativeButton(R.string.shared_string_cancel, null);
+		dlg.show();
+	}
+
+	public static LinearLayout createIntervalChooseLayout(final OsmandApplication app,
+														  final Context uiCtx,
+														  final String patternMsg, final int[] seconds,
+														  final int[] minutes, final ValueHolder<Boolean> choice,
+														  final ValueHolder<Integer> v,
+														  final boolean showTrackSelection, boolean nightMode) {
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		int textColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		int textColorSecondary = ContextCompat.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		int selectedModeColor = ContextCompat.getColor(uiCtx, appMode.getIconColorInfo().getColor(nightMode));
+		LinearLayout ll = new LinearLayout(uiCtx);
+		final int dp24 = AndroidUtils.dpToPx(uiCtx, 24f);
+		final int dp8 = AndroidUtils.dpToPx(uiCtx, 8f);
+		final TextView tv = new TextView(uiCtx);
+		tv.setPadding(dp24, dp8 * 2, dp24, dp8);
+		tv.setText(String.format(patternMsg, uiCtx.getString(R.string.int_continuosly)));
+		tv.setTextColor(textColorSecondary);
+
+		final int secondsLength = seconds.length;
+		final int minutesLength = minutes.length;
+		ViewGroup sliderContainer = UiUtilities.createSliderView(uiCtx, nightMode);
+		sliderContainer.setPadding(dp24, dp8, dp24, dp8);
+		Slider sp = sliderContainer.findViewById(R.id.slider);
+		UiUtilities.setupSlider(sp, nightMode, selectedModeColor, true);
+		sp.setValueTo(secondsLength + minutesLength - 1);
+		sp.setStepSize(1);
+		sp.addOnChangeListener(new Slider.OnChangeListener() {
+
+			@Override
+			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+				String s;
+				int progress = (int) value;
+				if(progress == 0) {
+					s = uiCtx.getString(R.string.int_continuosly);
+					v.value = 0;
+				} else {
+					if(progress < secondsLength) {
+						s = seconds[progress] + " " + uiCtx.getString(R.string.int_seconds);
+						v.value = seconds[progress] * 1000;
+					} else {
+						s = minutes[progress - secondsLength] + " " + uiCtx.getString(R.string.int_min);
+						v.value = minutes[progress - secondsLength] * 60 * 1000;
+					}
+				}
+				tv.setText(String.format(patternMsg, s));
+			}
+		});
+
+		for (int i = 0; i < secondsLength + minutesLength - 1; i++) {
+			if (i < secondsLength) {
+				if (v.value <= seconds[i] * 1000) {
+					sp.setValue(i);
+					break;
+				}
+			} else {
+				if (v.value <= minutes[i - secondsLength] * 1000 * 60) {
+					sp.setValue(i);
+					break;
+				}
+			}
+		}
+
+		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.addView(tv);
+		ll.addView(sliderContainer);
+		if (choice != null) {
+			final AppCompatCheckBox cb = new AppCompatCheckBox(uiCtx);
+			cb.setText(R.string.confirm_every_run);
+			cb.setTextColor(textColorPrimary);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+					LayoutParams.WRAP_CONTENT);
+			AndroidUtils.setMargins(lp, dp24, dp8, dp24, 0);
+			cb.setLayoutParams(lp);
+			AndroidUtils.setPadding(cb, dp8, 0, 0, 0);
+			cb.setChecked(!choice.value);
+			cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					choice.value = !isChecked;
+				}
+			});
+			UiUtilities.setupCompoundButton(cb, nightMode, PROFILE_DEPENDENT);
+			ll.addView(cb);
+		}
+
+		if (showTrackSelection) {
+			View divider = new View(uiCtx);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(uiCtx, 1f));
+			AndroidUtils.setMargins(lp, 0, dp8 * 2, 0, 0);
+			divider.setLayoutParams(lp);
+			divider.setBackgroundColor(uiCtx.getResources().getColor(nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
+			ll.addView(divider);
+
+			final AppCompatCheckBox cb = new AppCompatCheckBox(uiCtx);
+			cb.setText(R.string.shared_string_show_on_map);
+			cb.setTextColor(textColorPrimary);
+			lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+					LayoutParams.WRAP_CONTENT);
+			AndroidUtils.setMargins(lp, dp24, dp8 * 2, dp24, 0);
+			cb.setLayoutParams(lp);
+			AndroidUtils.setPadding(cb, dp8, 0, 0, 0);
+			cb.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
+			cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), isChecked, false);
+				}
+			});
+			UiUtilities.setupCompoundButton(cb, nightMode, PROFILE_DEPENDENT);
+			ll.addView(cb);
+		}
+
+		return ll;
 	}
 
 	@Override
