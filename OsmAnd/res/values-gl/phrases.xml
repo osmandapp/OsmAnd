@@ -145,7 +145,6 @@
     <string name="poi_veterinary">Veterinario</string>
     <string name="poi_healthcare_alternative">Medicina alternativa</string>
     <string name="poi_blood_bank">Banco de sangue</string>
-    <string name="poi_healthcare_centre">Centro médico</string>
     <string name="poi_midwife">Matrona</string>
     <string name="poi_occupational_therapist">Terapia ocupacional</string>
     <string name="poi_optometrist">Optómetra</string>
@@ -233,7 +232,6 @@
     <string name="poi_religion_shinto">Xintoísmo</string>
     <string name="poi_religion_taoist">Taoísmo</string>
     <string name="poi_monastery">Mosteiro</string>
-    <string name="poi_historic_monastery">Mosteiro histórico</string>
     <string name="poi_wayside_cross">Cruceiro</string>
     <string name="poi_information">Información</string>
     <string name="poi_clock">Reloxo</string>
@@ -328,7 +326,6 @@
     <string name="poi_crematorium">Crematorio</string>
     <string name="poi_internet_cafe">Cibercafé</string>
     <string name="poi_bank">Banco</string>
-    <string name="poi_amenity_atm">Caixeiro automático</string>
     <string name="poi_money_lender">Prestamista</string>
     <string name="poi_bureau_de_change">Oficina de cambio</string>
     <string name="poi_accountant">Contábel</string>
@@ -517,7 +514,6 @@
     <string name="poi_historic_ship">Embarcación histórica</string>
     <string name="poi_historic_mine">Mina histórica</string>
     <string name="poi_aquarium">Acuario</string>
-    <string name="poi_tourism_attraction">Atracción turística</string>
     <string name="poi_attraction_carousel">Carrusel</string>
     <string name="poi_attraction_maze">Labirinto</string>
     <string name="poi_attraction_roller_coaster">Montaña rusa</string>
@@ -588,7 +584,6 @@
     <string name="poi_rest_area">Área de repouso</string>
     <string name="poi_sport_motor">Deporte de motor</string>
     <string name="poi_boundary_stone">Marco</string>
-    <string name="poi_general_tourist_attraction_yes">Atracción turística xeral</string>
     <string name="poi_attraction_amusement_ride">Atracción de feira</string>
     <string name="poi_lodging">Aloxamento</string>
     <string name="poi_guest_house">Pensión</string>
@@ -772,7 +767,6 @@
     <string name="poi_pastry">Confeitaría</string>
     <string name="poi_vending_machine">Máquina expendedora</string>
     <string name="poi_baby_goods">Produtos de bebés</string>
-    <string name="poi_furnace">Tenda de calefacción</string>
     <string name="poi_garden_furniture">Mobiliario do xardín</string>
     <string name="poi_glaziery">Tenda de vidro</string>
     <string name="poi_tableware">Tenda de vaixelas</string>
@@ -889,7 +883,6 @@
     <string name="poi_craft_winery">Adega de viños</string>
     <string name="poi_pawnbroker">Prestamista</string>
     <string name="poi_information_nature">Natureza</string>
-    <string name="poi_information_wildlife">Marcador informativo: vida salvaxe</string>
     <string name="poi_information_history">Historia</string>
     <string name="poi_information_bicyclemap">Mapa ciclista</string>
     <string name="poi_information_tactile_map">Mapa táctil</string>
@@ -963,8 +956,6 @@
     <string name="poi_stars_4s">4 Superior</string>
     <string name="poi_stars_5">5</string>
     <string name="poi_stars_5s">5 Superior</string>
-    <string name="poi_stars_6">Estrelas: 6</string>
-    <string name="poi_stars_7">Estrelas: 7</string>
     <string name="poi_rooms">Habitacións</string>
     <string name="poi_payment_coins_yes">Moedas</string>
     <string name="poi_payment_coins_no">Non se admiten moedas</string>
@@ -987,7 +978,6 @@
     <string name="poi_payment_visa_no">Non se admiten tarxetas Visa</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">Non se admite MasterCard</string>
-    <string name="poi_payment_none">Gratis</string>
     <string name="poi_payment_maestro_yes">Tarxetas Maestro</string>
     <string name="poi_payment_maestro_no">Non se admiten tarxetas Maestro</string>
     <string name="poi_payment_american_express_yes">American Expres (AMEX)</string>
@@ -1733,7 +1723,6 @@
     <string name="poi_bicycle_yes">Bicicleta: si</string>
     <string name="poi_bicycle_no">Bicicleta: non</string>
     <string name="poi_atm">Caixeiro automático</string>
-    <string name="poi_additional_atm_yes">Caixeiro automático: si</string>
     <string name="poi_atm_no">Caixeiro automático: non</string>
     <string name="poi_brushless">Sen vasoira</string>
     <string name="poi_pharmacy_dispensing">Dispensa receitas médicas</string>
@@ -3425,7 +3414,6 @@
     <string name="poi_water_source_main">Principal</string>
     <string name="poi_water_source_pond">Lagoa</string>
     <string name="poi_water_source_stream">Regato</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_military_checkpoint">Posto de control militar</string>
     <string name="poi_bicycle_parking_lockers">Portelos</string>
     <string name="poi_bicycle_parking_streetpod">Rañura plástica</string>
@@ -3550,9 +3538,7 @@
     <string name="poi_park_ride_hov">Vehículos de grande capacidade</string>
     <string name="poi_park_ride_tram">Tranvía</string>
     <string name="poi_park_ride_ferry">Ferri</string>
-    <string name="poi_generator_source_biomass">Fonte de enerxía: biomasa</string>
     <string name="poi_rtsa_scale_filter">Categoría da dificultade</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Perigo</string>
     <string name="poi_rtsa_scale_nc">n/c</string>
     <string name="poi_rtsa_scale_nc_asterisk">n/c*</string>

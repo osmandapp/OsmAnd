@@ -148,11 +148,12 @@ public class DownloadOsmandIndexesHelper {
 			String date = "";
 			long dateModified = System.currentTimeMillis();
 			try {
-				ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
+				OsmandApplication app = settings.getContext();
+				ApplicationInfo appInfo = pm.getApplicationInfo(app.getPackageName(), 0);
 				dateModified =  new File(appInfo.sourceDir).lastModified();
 				date = AndroidUtils.formatDate((Context) settings.getContext(), dateModified);
 			} catch (NameNotFoundException e) {
-				//do nothing...
+				log.error(e);
 			}
 			List<AssetEntry> mapping = getBundledAssets(amanager);
 			for (AssetEntry asset : mapping) {

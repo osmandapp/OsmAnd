@@ -36,7 +36,6 @@
     <string name="poi_copyshop">Copisteria</string>
     <string name="poi_curtain">Butega pro su campègiu</string>
     <string name="poi_fabric">Butega de drapègios</string>
-    <string name="poi_bedding">Butega de banitas</string>
     <string name="poi_dive">Butega de artìculos pro imberghidura</string>
     <string name="poi_doityourself">Butega de artìculos pro su bricolage</string>
     <string name="poi_erotic">Butega de artìculos eròticos</string>
@@ -196,7 +195,6 @@
     <string name="poi_sanatorium">Sanatòriu</string>
     <string name="poi_healthcare_alternative">Meighina alternativa</string>
     <string name="poi_blood_bank">Banca de su sàmbene</string>
-    <string name="poi_healthcare_centre">Tzentru mèdicu</string>
     <string name="poi_midwife">Levadora</string>
     <string name="poi_optometrist">Optometrista</string>
     <string name="poi_physiotherapist">Fisioterapista</string>
@@ -289,7 +287,6 @@
     <string name="poi_religion_shinto">Shintoismu</string>
     <string name="poi_religion_taoist">Taoismu</string>
     <string name="poi_monastery">Monastèriu/Muristene</string>
-    <string name="poi_historic_monastery">Monastèriu/Muristene istòricu</string>
     <string name="poi_wayside_cross">Rughe istòrica</string>
     <string name="poi_wayside_shrine">Tabernàculu istòricu</string>
     <string name="poi_information">Informatziones</string>
@@ -413,7 +410,6 @@
     <string name="poi_crematorium">Brusiadorju</string>
     <string name="poi_internet_cafe">Ìnternet cafè</string>
     <string name="poi_bank">Banca</string>
-    <string name="poi_amenity_atm">Bancomat</string>
     <string name="poi_bitcoin_yes">Pagamentu Bitcoin</string>
     <string name="poi_cave_entrance">Intrada gruta</string>
     <string name="poi_peak">Cùcuru de unu monte</string>
@@ -660,7 +656,6 @@
     <string name="poi_landuse_railway">Àrea ferroviària</string>
     <string name="poi_field_hockey">Hockey in pradu</string>
     <string name="poi_sailing">Vela</string>
-    <string name="poi_general_tourist_attraction_yes">Atràida turìstica generale</string>
     <string name="poi_picnic_table">Mesa de picnic</string>
     <string name="poi_hanami">Hanami</string>
     <string name="poi_wine_cellar">Cantina</string>
@@ -733,7 +728,6 @@
     <string name="poi_candles">Butega de candelas</string>
     <string name="poi_fashion">Butega de moda</string>
     <string name="poi_free_flying">Artìculos pro Freefly (paracadutismu)</string>
-    <string name="poi_furnace">Butega de calorìferos</string>
     <string name="poi_garden_furniture">Butega de artìculos pro su giardinu</string>
     <string name="poi_leather">Butega de còrgiu</string>
     <string name="poi_tyres">Butega de pneumàticos</string>
@@ -744,7 +738,6 @@
     <string name="poi_pyrotechnics">Pirotècnica</string>
     <string name="poi_weapons">Armeria</string>
     <string name="poi_observation_tower">Turre de osservatzione</string>
-    <string name="poi_conservation">Àrea amparada</string>
     <string name="poi_crane">Grue</string>
     <string name="poi_country">Istadu</string>
     <string name="poi_cabin">Cabina</string>
@@ -792,7 +785,6 @@
     <string name="poi_perfumery">Butega de profumos</string>
     <string name="poi_ford_stepping_stones">Ponte de perdas</string>
     <string name="poi_aerialway_pylon">Turre de sa funivia</string>
-    <string name="poi_mill_pond">Istagnu de unu mulinu</string>
     <string name="poi_breakwater">Paraundas</string>
     <string name="poi_groyne">Paraundas (Groyne)</string>
     <string name="poi_power_cable_distribution_cabinet">Cabina de distributzione (elètrica o àteru)</string>
@@ -882,7 +874,6 @@
     <string name="poi_notary">Notàriu</string>
     <string name="poi_foundation">Ufìtziu de una fundatzione</string>
     <string name="poi_tax_advisor">Ufìtziu de cummertzialista</string>
-    <string name="poi_tourism_attraction">Atràida turìstica</string>
     <string name="poi_attraction_amusement_ride">Giostra</string>
     <string name="poi_attraction_roller_coaster">Montagnas russas</string>
     <string name="poi_attraction_slide">Làssina</string>
@@ -1210,7 +1201,6 @@
     <string name="poi_building">Edifìtziu</string>
     <string name="poi_information_guidepost">Indicadore de su caminu</string>
     <string name="poi_information_nature">Natura</string>
-    <string name="poi_information_wildlife">Sinnale de informatziones: fàuna agreste</string>
     <string name="poi_information_tactile_model">Modellu tàtile</string>
     <string name="poi_information_tactile_map">Mapa tàtile</string>
     <string name="poi_board_type_plants">Fundos/prantas</string>
@@ -1621,8 +1611,6 @@
     <string name="poi_stars_4s">4S (prima classe superiore)</string>
     <string name="poi_stars_5">5 (lussu)</string>
     <string name="poi_stars_5s">5S (lussu superiore)</string>
-    <string name="poi_stars_6">Isteddas: 6</string>
-    <string name="poi_stars_7">Isteddas: 7</string>
     <string name="poi_rooms">Aposentos</string>
     <string name="poi_love_hotel">Albergu de s’amore</string>
     <string name="poi_payment_coins_yes">Monedas</string>
@@ -1641,7 +1629,6 @@
     <string name="poi_payment_visa_no">No atzetat cartas Visa</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">No atzetat cartas MasterCard</string>
-    <string name="poi_payment_none">De badas</string>
     <string name="poi_seats">Banchinas</string>
     <string name="poi_backrest_yes">Ischinale: eja</string>
     <string name="poi_backrest_no">Ischinale: nono</string>
@@ -2558,7 +2545,6 @@
     <string name="poi_inscription_e">Iscritzione: E</string>
     <string name="poi_inscription_ne">Iscritzione: NE</string>
     <string name="poi_construction_yes">In costrutzione</string>
-    <string name="poi_additional_atm_yes">Bancomat: eja</string>
     <string name="poi_atm_no">Bancomat: nono</string>
     <string name="poi_firepit">Logu pro su fogu</string>
     <string name="poi_street_cabinet">Tzentralina</string>
@@ -2809,7 +2795,6 @@
     <string name="poi_water_source_main">Printzipale</string>
     <string name="poi_water_source_pond">Poju</string>
     <string name="poi_water_source_stream">Trainu</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Tzisterna</string>
     <string name="poi_in_service_yes">In servìtziu: eja</string>
     <string name="poi_street_cabinet_power">Casta de cabina: eletritzidade</string>
     <string name="poi_street_cabinet_telecom">Casta de cabina: telecomunicatziones</string>
@@ -3553,8 +3538,6 @@
     <string name="poi_park_ride_hov">Veìculos de capatzidade manna</string>
     <string name="poi_park_ride_tram">Tram</string>
     <string name="poi_park_ride_ferry">Navile</string>
-    <string name="poi_generator_source_biomass">Mitza de energia: biomassa</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Perìgulu</string>
     <string name="poi_rtsa_scale_filter">Categoria de dificultade</string>
     <string name="poi_rtsa_scale_nc">n/c</string>

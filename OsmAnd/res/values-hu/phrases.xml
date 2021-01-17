@@ -198,7 +198,6 @@
     <string name="poi_hairdresser">Fodrász</string>
     <string name="poi_car_rental">Autókölcsönző</string>
     <string name="poi_bank">Bank</string>
-    <string name="poi_amenity_atm">Bankautomata</string>
     <string name="poi_bureau_de_change">Pénzváltó</string>
     <string name="poi_accountant">Könyvelő</string>
     <string name="poi_cave_entrance">Barlangbejárat</string>
@@ -268,7 +267,6 @@
     <string name="poi_computer">Számítástechnikai bolt</string>
     <string name="poi_curtain">Függönybolt</string>
     <string name="poi_fabric">Méteráru</string>
-    <string name="poi_bedding">Ágyneműbolt</string>
     <string name="poi_dive">Búvárfelszerelés</string>
     <string name="poi_doityourself">Barkácsáruház</string>
     <string name="poi_fishing">Horgászfelszerelés</string>
@@ -398,7 +396,6 @@
     <string name="poi_nursing_home">Ápolóotthon</string>
     <string name="poi_baby_hatch">Inkubátor</string>
     <string name="poi_blood_bank">Vérellátó központ</string>
-    <string name="poi_healthcare_centre">Egészségügyi központ</string>
     <string name="poi_midwife">Szülésznő</string>
     <string name="poi_company">Vállalat</string>
     <string name="poi_insurance">Biztosító</string>
@@ -441,7 +438,6 @@
     <string name="poi_historic_ship">Történelmi hajó</string>
     <string name="poi_historic_mine">Történelmi bánya</string>
     <string name="poi_aquarium">Akvárium</string>
-    <string name="poi_general_tourist_attraction_yes">Turistalátványosság</string>
     <string name="poi_attraction_amusement_ride">Vidámparki játék</string>
     <string name="poi_attraction_animal">Állat (látványosság)</string>
     <string name="poi_attraction_big_wheel">Óriáskerék</string>
@@ -459,7 +455,6 @@
     <string name="poi_internet_access_wired">Internetcsatlakozás: kábel</string>
     <string name="poi_internet_access_public">Internetcsatlakozás: nyilvános</string>
     <string name="poi_internet_access_service">Internetcsatlakozás: segítenek</string>
-    <string name="poi_historic_monastery">Régi kolostor</string>
     <string name="poi_religious">Egyházi terület</string>
     <string name="poi_wayside_shrine">Út menti szentély</string>
     <string name="poi_travel_agent">Utazási iroda</string>
@@ -593,7 +588,6 @@
     <string name="poi_doors">Ajtók</string>
     <string name="poi_erotic">Szexbolt</string>
     <string name="poi_fashion">Divatüzlet</string>
-    <string name="poi_furnace">Fűtéstechnikai szaküzlet</string>
     <string name="poi_garden_furniture">Kertibútor-bolt</string>
     <string name="poi_gas">Palackozottgáz-bolt</string>
     <string name="poi_herbalist">Gyógynövénybolt</string>
@@ -715,7 +709,6 @@
     <string name="poi_recycling_bicycles">Kerékpár</string>
     <string name="poi_landfill_waste_nuclear">Radioaktívhulladék-lerakó</string>
     <string name="poi_basin">Vízgyűjtő</string>
-    <string name="poi_conservation">Védett terület</string>
     <string name="poi_monitoring_station">Megfigyelőállomás</string>
     <string name="poi_crane">Daru</string>
     <string name="poi_construction">Építkezés</string>
@@ -1086,7 +1079,6 @@
     <string name="poi_information_route_marker">Útjelzés</string>
     <string name="poi_information_hikingmap">Turistatérkép</string>
     <string name="poi_information_nature">Természet</string>
-    <string name="poi_information_wildlife">Információ: vadvilág</string>
     <string name="poi_information_history">Történelem</string>
     <string name="poi_information_sign">Jelzés</string>
     <string name="poi_information_audioguide">Audioguide</string>
@@ -1461,8 +1453,6 @@
     <string name="poi_stars_4s">**** S (első osztály superior)</string>
     <string name="poi_stars_5">***** (luxus)</string>
     <string name="poi_stars_5s">***** S (luxus superior)</string>
-    <string name="poi_stars_6">6 csillagos</string>
-    <string name="poi_stars_7">7 csillagos</string>
     <string name="poi_rooms">Szobák száma</string>
     <string name="poi_payment_coins_yes">Érme</string>
     <string name="poi_payment_coins_no">Érmét nem fogad el</string>
@@ -1484,7 +1474,6 @@
     <string name="poi_payment_visa_no">Visa kártyát nem fogad el</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">MasterCard kártyát nem fogad el</string>
-    <string name="poi_payment_none">Díjmentes</string>
     <string name="poi_payment_maestro_yes">Maestro kártyák</string>
     <string name="poi_payment_maestro_no">Maestro kártyát nem fogad el</string>
     <string name="poi_payment_american_express_yes">American Express (AMEX)</string>
@@ -2492,7 +2481,6 @@
     <string name="poi_official_name">Hivatalos név</string>
     <string name="poi_dolphin">Cölöpgúla</string>
     <string name="poi_construction_yes">Építés alatt</string>
-    <string name="poi_additional_atm_yes">Bankautomata</string>
     <string name="poi_atm_no">Bankautomata nincs</string>
     <string name="poi_firepit">Tűzrakóhely</string>
     <string name="poi_fair_trade_yes">Fair Trade</string>
@@ -2568,7 +2556,6 @@
     <string name="poi_water_source_main">Fő</string>
     <string name="poi_water_source_pond">Tó</string>
     <string name="poi_water_source_stream">Patak</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Ciszterna</string>
     <string name="poi_street_cabinet_power">Közműszekrény típusa: villamos energia</string>
     <string name="poi_street_cabinet_telecom">Közműszekrény típusa: távközlés</string>
     <string name="poi_street_cabinet_cable_tv">Közműszekrény típusa: kábeltelevízió</string>
@@ -3549,8 +3536,6 @@
     <string name="poi_park_ride_hov">Telekocsi</string>
     <string name="poi_park_ride_tram">Villamos</string>
     <string name="poi_park_ride_ferry">Komp</string>
-    <string name="poi_generator_source_biomass">Energiaforrás: biomassza</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Sugárkezelés</string>
     <string name="poi_hazard">Veszély</string>
     <string name="poi_rtsa_scale_filter">Nehézségi fok (az Orosz Túrasportszövetség skáláján)</string>
     <string name="poi_rtsa_scale_nc">N/A</string>

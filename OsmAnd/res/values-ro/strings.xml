@@ -711,7 +711,6 @@
     <string name="error_calculating_route">Eroare la calcularea rutei</string>
     <string name="error_calculating_route_occured">Eroare apărută în timpul calculării rutei</string>
     <string name="empty_route_calculated">Eroare: ruta calculată este vidă</string>
-    <string name="new_route_calculated_dist">O nouă rută a fost calculată, distanța</string>
     <string name="arrived_at_destination">Ați ajuns la destinație</string>
     <string name="invalid_locations">Coordonate invalide</string>
     <string name="go_back_to_osmand">Înapoi la harta OsmAnd</string>
@@ -811,7 +810,6 @@
     <string name="osb_comment_dialog_error">Nu s-a putut adăuga comentariul.</string>
     <string name="poi_edit_title">Editare POI</string>
     <string name="poi_create_title">Creează POI</string>
-    <string name="poi_error_poi_not_found">POI-ul nu poate fi găsit sau punctul de interes nu este singular</string>
     <string name="poi_remove_confirm_template">Ștergeți {0} (introduceți comentariu)?</string>
     <string name="poi_remove_title">Șterge POI</string>
     <string name="shared_string_delete">Șterge</string>
@@ -2121,7 +2119,6 @@
     <string name="feedback">Părere</string>
     <string name="contact_us">Contact</string>
     <string name="map_legend">Legendă hartă</string>
-    <string name="update">Actualizare</string>
     <string name="only_download_over_wifi">Descărcare doar pe Wi-Fi</string>
     <string name="live_update">Actualizări in timp real</string>
     <string name="update_now">Actualizați acum</string>
@@ -2414,7 +2411,6 @@
     <string name="more_transport_on_stop_hint">Mai multe optiuni de transport disponibile de la această oprire.</string>
     <string name="keep_passed_markers_descr">Marcajele adăugate ca grup de Favorite sau GPX waypoints marcate vor rămâne pe hartă.Dacă grupul nu este activ, markerii vor dispărea din hartă.</string>
     <string name="keep_passed_markers">Păstraţi markerii trecuţi pe hartă</string>
-    <string name="swap_start_and_destination">Schimba adresa de început și de sfârșit</string>
     <string name="default_speed_dialog_msg">Utilizat pentru estimarea timpului de sosire pentru tipul necunoscut de drumuri și pentru a limita viteza pentru toate drumurile (ar putea schimba ruta)</string>
     <string name="configure_profile_info">Setări pentru profil:</string>
     <string name="configure_profile">Configurează profilul</string>
@@ -2522,7 +2518,6 @@
     <string name="temporary_conditional_routing">Luați în considerare limitările temporare</string>
     <string name="route_parameters_info">Setări pentru rutare în profilul selectat \"%1$s\".</string>
     <string name="units_and_formats">Unități și formate</string>
-    <string name="appearance">Aspect</string>
     <string name="map_look_descr">Aspect hartă</string>
     <string name="list_of_installed_plugins">Plugin-uri instalate</string>
     <string name="general_settings_profile_descr">Temă aplicație, unități, regiune</string>
