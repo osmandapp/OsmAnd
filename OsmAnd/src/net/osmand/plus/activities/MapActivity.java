@@ -1408,6 +1408,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		updateMapSettings();
 		app.getPoiFilters().loadSelectedPoiFilters();
 		mapViewTrackingUtilities.updateSettings();
+		mapViewTrackingUtilities.resetDrivingRegionUpdate();
 		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
 		if (mapLayers.getMapInfoLayer() != null) {
 			mapLayers.getMapInfoLayer().recreateControls();
