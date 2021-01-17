@@ -376,6 +376,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				} else if (item == R.string.live_monitoring_start) {
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = settings.LIVE_MONITORING_INTERVAL.get();
+					settings.LIVE_MONITORING_INTERVAL.set(vs.value);
+					settings.LIVE_MONITORING.set(true);
 					TripRecordingBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}
 				if (monitoringControl != null) {

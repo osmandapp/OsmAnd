@@ -152,12 +152,13 @@ public class TripRecordingBottomSheetFragment extends MenuBottomSheetDialogFragm
 				}
 			}
 		}
-
-		confirmEveryRun.setChecked(!choiceLoggingInterval.value);
+		boolean isChecked = !choiceLoggingInterval.value;
+		confirmEveryRun.setChecked(isChecked);
+		setBackgroundAndPadding(isChecked, paddingSmall);
 		confirmEveryRun.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				choiceLoggingInterval.value = !isChecked;
+				setBackgroundAndPadding(isChecked, paddingSmall);
 			}
 		});
 
@@ -173,14 +174,18 @@ public class TripRecordingBottomSheetFragment extends MenuBottomSheetDialogFragm
 				}
 			});
 
-
-		setPaddingAndBackgroundForSwitchCompat(paddingSmall, confirmEveryRun, nightMode);
 		collapseInfoView();
 	}
 
-	private void setPaddingAndBackgroundForSwitchCompat(int paddingSmall, SwitchCompat backgroundColor, boolean nightMode) {
-		backgroundColor.setBackgroundResource(nightMode ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
-		backgroundColor.setPadding(paddingSmall, 0, paddingSmall, 0);
+	private void setBackgroundAndPadding(boolean isChecked, int paddingSmall) {
+		if (nightMode) {
+			confirmEveryRun.setBackgroundResource(
+					isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
+		} else {
+			confirmEveryRun.setBackgroundResource(
+					isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
+		}
+		confirmEveryRun.setPadding(paddingSmall, 0, paddingSmall, 0);
 	}
 
 	private void updateUpDownBtn() {
