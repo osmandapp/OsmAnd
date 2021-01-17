@@ -68,9 +68,8 @@ public class GpxDbHelper {
 	}
 
 	public boolean rename(File currentFile, File newFile) {
-		boolean res = db.rename(currentFile, newFile);
-		itemsCache.remove(currentFile);
-		return res;
+		GpxDataItem item = itemsCache.get(currentFile);
+		return db.rename(item, currentFile, newFile);
 	}
 
 	public boolean updateColor(GpxDataItem item, int color) {

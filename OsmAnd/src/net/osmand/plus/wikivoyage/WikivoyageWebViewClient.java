@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -119,7 +120,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 					fragmentManager.popBackStackImmediate();
 
 					File path = app.getTravelHelper().createGpxFile(article);
-					GPXUtilities.GPXFile gpxFile = article.getGpxFile();
+					GPXFile gpxFile = article.getGpxFile();
 					gpxFile.path = path.getAbsolutePath();
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 					MapActivity.launchMapActivityMoveToTop(activity);

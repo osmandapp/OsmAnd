@@ -216,7 +216,6 @@
     <string name="poi_healthcare_alternative">Medicina alternativa</string>
     <string name="poi_audiologist">Audiologia</string>
     <string name="poi_blood_bank">Banc de sang</string>
-    <string name="poi_healthcare_centre">Centre mèdic</string>
     <string name="poi_midwife">Infermeria obstètrico-ginecològica</string>
     <string name="poi_occupational_therapist">Teràpia ocupacional</string>
     <string name="poi_optometrist">Optometria</string>
@@ -284,7 +283,6 @@
     <string name="poi_paddle_tennis">Pàdel</string>
     <string name="poi_paragliding">Parapent</string>
     <string name="poi_pelota">Joc de pilota</string>
-    <string name="poi_bedding">Matalasseria</string>
     <string name="poi_gas">Gas liquat</string>
     <string name="poi_department_store">Gran magatzem</string>
     <string name="poi_car_parts">Recanvis de cotxe</string>
@@ -312,7 +310,6 @@
     <string name="poi_surfing">Surf</string>
     <string name="poi_swimming">Natació</string>
     <string name="poi_table_tennis">Ping-pong</string>
-    <string name="poi_team_handball">Handbol</string>
     <string name="poi_tennis">Tennis</string>
     <string name="poi_toboggan">Tobogan</string>
     <string name="poi_volleyball">Voleibol</string>
@@ -484,7 +481,6 @@
     <string name="poi_internet_access_public">Accés a Internet: públic</string>
     <string name="poi_internet_access_service">Accés a Internet: servei</string>
     <string name="poi_monastery">Monestir</string>
-    <string name="poi_historic_monastery">Monestir històric</string>
     <string name="poi_wayside_cross">Creu de terme</string>
     <string name="poi_wayside_shrine">Peto d\'ànimes</string>
     <string name="poi_information">Informació</string>
@@ -632,7 +628,6 @@
     <string name="poi_mortuary">Dipòsit de cadàvers</string>
     <string name="poi_crematorium">Crematori</string>
     <string name="poi_bank">Banc</string>
-    <string name="poi_amenity_atm">Caixer automàtic</string>
     <string name="poi_accountant">Comptable</string>
     <string name="poi_bitcoin_yes">Pagament amb bitcoins</string>
     <string name="poi_peak">Cim</string>
@@ -661,7 +656,6 @@
     <string name="poi_anchorage">Ancoratge</string>
     <string name="poi_anchor_berth">Punt d\'ancoratge</string>
     <string name="poi_road_obstacle">Obstacle</string>
-    <string name="poi_general_tourist_attraction_yes">Atracció turística</string>
     <string name="poi_club_art">Agrupació artística</string>
     <string name="poi_club_computer">Associació informàtica</string>
     <string name="poi_club_motorcycle">Club de motos</string>
@@ -834,9 +828,7 @@
     <string name="poi_breakwater">Escullera</string>
     <string name="poi_groyne">Espigó</string>
     <string name="poi_power_cable_distribution_cabinet">Quadre elèctric</string>
-    <string name="poi_conservation">Reserva natural</string>
     <string name="poi_crane">Grua</string>
-    <string name="poi_tourism_attraction">Atracció turística</string>
     <string name="poi_cutline">Tallafoc</string>
     <string name="poi_tree">Arbre</string>
     <string name="poi_highway_crossing">Pas de vianants</string>
@@ -867,7 +859,6 @@
     <string name="poi_enforcement_check">Control de trànsit: control</string>
     <string name="poi_enforcement_access">Control de trànsit: accés</string>
     <string name="poi_enforcement_toll">Control de trànsit: peatge</string>
-    <string name="poi_furnace">Botiga de calefactors</string>
     <string name="poi_trophy">Trofeus i distincions</string>
     <string name="poi_basin">Bassa</string>
     <string name="poi_bump_gate">Porta batent de tancament controlat</string>
@@ -983,7 +974,6 @@
     <string name="poi_recycling_cardboard">Cartró d\'embalar</string>
     <string name="poi_recycling_beverage_cartons">Envasos de cartró de begudes</string>
     <string name="poi_recycling_sheet_metal">Xapa metàl·lica</string>
-    <string name="poi_mill_pond">Bassa del molí</string>
     <string name="twitter">Twitter</string>
     <string name="poi_skype">Skype</string>
     <string name="poi_youtube">YouTube</string>
@@ -1442,8 +1432,6 @@
     <string name="poi_stars_4s">4S (Primera classe superior)</string>
     <string name="poi_stars_5">5 (Luxe)</string>
     <string name="poi_stars_5s">5S (Luxe superior)</string>
-    <string name="poi_stars_6">Estrelles: 6</string>
-    <string name="poi_stars_7">Estrelles: 7</string>
     <string name="poi_rooms">Habitacions</string>
     <string name="poi_love_hotel">Hotel per parelles</string>
     <string name="poi_payment_coins_yes">Monedes</string>
@@ -1468,7 +1456,6 @@
     <string name="poi_payment_visa_no">No s\'accepta tarja Visa</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">No s\'accepta Mastercard</string>
-    <string name="poi_payment_none">Sense cost</string>
     <string name="poi_payment_maestro_yes">Targetes Maestro</string>
     <string name="poi_payment_maestro_no">No s\'accepta tarja Maestro</string>
     <string name="poi_payment_american_express_yes">American Express (AMEX)</string>
@@ -1481,7 +1468,6 @@
     <string name="poi_payment_uta_no">No s\'accepten targes UTA</string>
     <string name="poi_tourism_yes">Element turístic</string>
     <string name="poi_water_point">Proveïment d\'aigua</string>
-    <string name="poi_information_wildlife">Indicador informatiu: fauna</string>
     <string name="poi_information_sign">Signe</string>
     <string name="poi_piste_grooming_classic">Clàssic</string>
     <string name="poi_piste_grooming_classic_skating">Clàssic + Patinatge</string>
@@ -1825,7 +1811,6 @@
     <string name="poi_impromptu_no">Acampada lliure: no</string>
     <string name="poi_sanitary_dump_station_yes">Estació de buidatge sanitari: sí</string>
     <string name="poi_sanitary_dump_station_no">Estació de buidatge sanitari: no</string>
-    <string name="poi_sanitary_dump_station_customers">Estació de buidatge sanitari: només clients</string>
     <string name="poi_power_supply_yes">Sí</string>
     <string name="poi_power_supply_no">Subministrament elèctric: no</string>
     <string name="poi_power_supply_cee_17_blue">Subministrament elèctric (endoll): CEE 17 blau</string>
@@ -2716,7 +2701,6 @@
     <string name="poi_water_source_main">Artèria</string>
     <string name="poi_water_source_pond">Estany</string>
     <string name="poi_water_source_stream">Riu</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_in_service_yes">En servei: sí</string>
     <string name="poi_aerodrome_type_international">Internacional</string>
     <string name="poi_aerodrome_type_regional">Regional</string>

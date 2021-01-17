@@ -75,7 +75,6 @@
     <string name="poi_copyshop">Reprografia</string>
     <string name="poi_curtain">Loja de cortinas</string>
     <string name="poi_fabric">Loja de tecidos</string>
-    <string name="poi_bedding">Loja de roupa de cama</string>
     <string name="poi_dive">Equipamento de mergulho</string>
     <string name="poi_doityourself">Bricolagem</string>
     <string name="poi_erotic">Sex shop</string>
@@ -291,7 +290,6 @@
     <string name="poi_healthcare_alternative">Medicina alternativa</string>
     <string name="poi_audiologist">Audiologista</string>
     <string name="poi_blood_bank">Banco de sangue</string>
-    <string name="poi_healthcare_centre">Centro médico</string>
     <string name="poi_midwife">Obstetra</string>
     <string name="poi_occupational_therapist">Terapeuta ocupacional</string>
     <string name="poi_optometrist">Optometrista</string>
@@ -439,7 +437,6 @@
     <string name="poi_surfing">Surf</string>
     <string name="poi_swimming">Natação</string>
     <string name="poi_table_tennis">Tênis de mesa</string>
-    <string name="poi_team_handball">Handebol olímpico</string>
     <string name="poi_tennis">Tênis</string>
     <string name="poi_toboggan">Tobogã</string>
     <string name="poi_volleyball">Voleibol</string>
@@ -464,7 +461,6 @@
     <string name="poi_aquarium">Aquário</string>
     <string name="poi_theme_park">Parque de diversões</string>
     <string name="poi_attraction">Atração turística</string>
-    <string name="poi_general_tourist_attraction_yes">Atração turística geral</string>
     <string name="poi_attraction_amusement_ride">Passeio de diversão</string>
     <string name="poi_attraction_animal">Animal (atração)</string>
     <string name="poi_attraction_big_wheel">Roda-gigante</string>
@@ -503,7 +499,6 @@
     <string name="poi_internet_access_public">Acesso à Internet: público</string>
     <string name="poi_internet_access_service">Acesso à Internet: serviço</string>
     <string name="poi_monastery">Mosteiro</string>
-    <string name="poi_historic_monastery">Mosteiro histórico</string>
     <string name="poi_wayside_cross">Cruz de beira de estrada</string>
     <string name="poi_wayside_shrine">Capelinha de beira de estrada</string>
     <string name="poi_information">Informação</string>
@@ -661,7 +656,6 @@
     <string name="poi_crematorium">Crematório</string>
     <string name="poi_internet_cafe">Cyber café</string>
     <string name="poi_bank">Agência bancária</string>
-    <string name="poi_amenity_atm">Caixa eletrônico</string>
     <string name="poi_payment_terminal">Terminal de pagamento</string>
     <string name="poi_money_lender">Financeira</string>
     <string name="poi_pawnbroker">Casa de penhores</string>
@@ -820,7 +814,6 @@
     <string name="poi_candles">Loja de velas</string>
     <string name="poi_fashion">Loja de moda</string>
     <string name="poi_free_flying">Artigos de voo livre</string>
-    <string name="poi_furnace">Artigos de calefação</string>
     <string name="poi_garden_furniture">Móveis para jardim</string>
     <string name="poi_leather">Artigos de couro</string>
     <string name="poi_music">Loja de discos musicais</string>
@@ -839,9 +832,7 @@
     <string name="poi_groyne">Estacada</string>
     <string name="poi_power_cable_distribution_cabinet">Cabine de distribuição elétrica</string>
     <string name="poi_basin">Bacia</string>
-    <string name="poi_building_poi">Edificio</string>
     <string name="poi_crane">Guindaste</string>
-    <string name="poi_tourism_attraction">Atração turística</string>
     <string name="poi_tree">Árvore</string>
     <string name="poi_icn_ref">Ponto de rede cicloviária internacional</string>
     <string name="poi_ncn_ref">Ponto de rede cicloviária nacional</string>
@@ -868,7 +859,6 @@
     <string name="poi_enforcement_mindistance">Fiscalização: distância mínima</string>
     <string name="poi_enforcement_access">Fiscalização: acesso</string>
     <string name="poi_enforcement_toll">Fiscalização: pedágio</string>
-    <string name="poi_conservation">Área de conservação</string>
     <string name="poi_collection_times">Horário de coleta</string>
     <string name="poi_enforcement_check">Fiscalização: verificação</string>
     <string name="poi_cutline">Linha de corte florestal</string>
@@ -984,7 +974,6 @@
     <string name="poi_crossing_traffic_signals">Com semáforos</string>
     <string name="poi_crossing_uncontrolled">Sem controle de tráfego</string>
     <string name="poi_crossing_unmarked">Não sinalizado</string>
-    <string name="poi_mill_pond">Lagoa do moinho</string>
     <string name="twitter">Twitter</string>
     <string name="poi_skype">Skype</string>
     <string name="poi_youtube">YouTube</string>
@@ -1160,7 +1149,6 @@
     <string name="poi_generator_source_geothermal">Fonte de energia: geotérmica</string>
     <string name="poi_generator_source_oil">Fonte de energia: petróleo</string>
     <string name="poi_generator_source_diesel">Fonte de energia: diesel</string>
-    <string name="poi_car_wash_self_service">Auto-serviço</string>
     <string name="poi_int_name">Nome internacional</string>
     <string name="poi_nat_name">Nome nacional</string>
     <string name="poi_reg_name">Nome regional</string>
@@ -1191,7 +1179,6 @@
     <string name="poi_information_route_marker">Marcador de rota</string>
     <string name="poi_information_hikingmap">Mapa de caminhadas</string>
     <string name="poi_information_nature">Natureza</string>
-    <string name="poi_information_wildlife">Ponto de informação: vida selvagem</string>
     <string name="poi_information_history">História</string>
     <string name="poi_information_sign">Placa</string>
     <string name="poi_information_audioguide">Audioguia</string>
@@ -1311,8 +1298,6 @@
     <string name="poi_stars_4s">4S (Primeira Classe Superior)</string>
     <string name="poi_stars_5">5 (Luxo)</string>
     <string name="poi_stars_5s">5S (Luxo Superior)</string>
-    <string name="poi_stars_6">Estrelas: 6</string>
-    <string name="poi_stars_7">Estrelas: 7</string>
     <string name="poi_rooms">Quartos</string>
     <string name="poi_love_hotel">Motel</string>
     <string name="poi_payment_coins_yes">Moedas</string>
@@ -1340,7 +1325,6 @@
     <string name="poi_payment_visa_no">Não aceita cartão Visa</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
     <string name="poi_payment_mastercard_no">Não aceita cartão MasterCard</string>
-    <string name="poi_payment_none">Grátis</string>
     <string name="poi_payment_account_cards_yes">Cartão de crédito</string>
     <string name="poi_payment_account_cards_no">Não aceita cartão de crédito</string>
     <string name="poi_payment_maestro_yes">Cartão Maestro</string>
@@ -1973,7 +1957,6 @@
     <string name="poi_caravans_no">Caravanas: não</string>
     <string name="poi_sanitary_dump_station_yes">Estação de descarga sanitária: sim</string>
     <string name="poi_sanitary_dump_station_no">Estação de descarga sanitária: não</string>
-    <string name="poi_sanitary_dump_station_customers">Estação de descarga sanitária: apenas para clientes</string>
     <string name="poi_power_supply_yes">Sim</string>
     <string name="poi_power_supply_no">Fonte de energia: não</string>
     <string name="poi_power_supply_cee_17_blue">Fonte de energia (tomada): CEE 17 azul</string>
@@ -2380,7 +2363,6 @@
     <string name="poi_inscription_e">Inscrição: E</string>
     <string name="poi_inscription_ne">Inscrição: NE</string>
     <string name="poi_construction_yes">Em construção</string>
-    <string name="poi_additional_atm_yes">Caixa eletrônico: sim</string>
     <string name="poi_atm_no">Caixa eletrônico: não</string>
     <string name="poi_forestry_compartment">Pôster: compartimento florestal</string>
     <string name="poi_forestry_allotment">Pôster: loteamento florestal</string>
@@ -2786,7 +2768,6 @@
     <string name="poi_water_source_main">Rede de água</string>
     <string name="poi_water_source_pond">Lagoa</string>
     <string name="poi_water_source_stream">Ribeirão/Rio</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_in_service_yes">Em serviço: sim</string>
     <string name="poi_street_cabinet_power">Tipo de gabinete: força</string>
     <string name="poi_street_cabinet_telecom">Tipo de gabinete: telecom</string>
@@ -3557,8 +3538,6 @@
     <string name="poi_park_ride_hov">Via para veículos com alta ocupação</string>
     <string name="poi_park_ride_tram">Bonde</string>
     <string name="poi_park_ride_ferry">Balsa</string>
-    <string name="poi_generator_source_biomass">Fonte de energia: biomassa</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Perigo</string>
     <string name="poi_rtsa_scale_filter">Categoria de dificuldade</string>
     <string name="poi_rtsa_scale_nc">n/c</string>

@@ -162,7 +162,6 @@
     <string name="poi_crematorium">Krematorij</string>
     <string name="poi_accountant">Računovodja</string>
     <string name="poi_bank">Banka</string>
-    <string name="poi_amenity_atm">Bankomat</string>
     <string name="poi_volcano">Vulkan</string>
     <string name="poi_crater">Krater</string>
     <string name="poi_river">Reka</string>
@@ -245,7 +244,6 @@
     <string name="poi_bed">Oprema za spalnice</string>
     <string name="poi_charity">Dobrodelna trgovina</string>
     <string name="poi_fabric">Trgovina z zavesami</string>
-    <string name="poi_bedding">Trgovina s posteljnino</string>
     <string name="poi_kitchen">Kuhinjsko pohištvo</string>
     <string name="poi_mobile_phone">Trgovina s telefonskimi aparati</string>
     <string name="poi_paint">Trgovina z barvami</string>
@@ -300,7 +298,6 @@
     <string name="poi_healthcare_alternative">Alternativna medicina</string>
     <string name="poi_audiologist">Avdiolog</string>
     <string name="poi_blood_bank">Krvna banka</string>
-    <string name="poi_healthcare_centre">Zdravstvena ustanova</string>
     <string name="poi_midwife">Babica</string>
     <string name="poi_occupational_therapist">Poklicni terapevt</string>
     <string name="poi_optometrist">Optik</string>
@@ -335,7 +332,6 @@
     <string name="poi_aquarium">Akvarij</string>
     <string name="poi_theme_park">Tematski park</string>
     <string name="poi_attraction">Turistična znamenitost</string>
-    <string name="poi_general_tourist_attraction_yes">Splošna turistična znamenitost</string>
     <string name="poi_attraction_carousel">Vrtiljak</string>
     <string name="poi_attraction_maze">Labirint</string>
     <string name="poi_hotel">Hotel</string>

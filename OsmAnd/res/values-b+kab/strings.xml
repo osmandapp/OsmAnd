@@ -194,7 +194,6 @@
     <string name="update_all">Sedɣi iten akk (%1$s MB)</string>
     <string name="enter_country_name">Sekcem isem n tmurt</string>
     <string name="other_menu_group">Wayeḍ</string>
-    <string name="update">Sedγi</string>
     <string name="update_now">Sedɣi tura</string>
     <string name="last_update">Asedɣi aneggaru : %s</string>
     <string name="update_time">Tallit n trarast</string>
@@ -216,7 +215,6 @@
     <string name="live_updates">Isdɣiten usriden</string>
     <string name="route_duration">Tanazagt :</string>
     <string name="no_inet_connection">Ulac tuqqna n Internet</string>
-    <string name="no_update_info">Ur d skanay isdγiten</string>
     <string name="shared_string_change">Senfel</string>
     <string name="restart_search">Ɛiwed a nadi</string>
     <string name="shared_string_search">Nadi</string>
@@ -660,7 +658,6 @@
     <string name="apply_to_current_profile">Snes kan i \"%1$s\"</string>
     <string name="apply_to_all_profiles">Snes i imavnuyen meṛṛa</string>
     <string name="start_up_message_pref">Izen n usenker</string>
-    <string name="appearance">Arwes</string>
     <string name="configure_profile">Sbadu amaɣnu</string>
     <string name="switch_profile">Beddel amaɣnu</string>
     <string name="application_profile_changed">Amaɣnu n usnas ittwabddel ɣer \"%s\"</string>
@@ -686,7 +683,6 @@
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="rendering_value_thick_name">Zzur</string>
     <string name="personal_category_name">Udmawan</string>
-    <string name="street_city">%1$s, %2$s</string>
     <string name="shared_string_revert">Tti</string>
     <string name="rendering_value_white_name">Amellal</string>
     <string name="shared_string_maps">Tikarḍiwin</string>

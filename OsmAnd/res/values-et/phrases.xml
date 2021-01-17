@@ -93,7 +93,6 @@
     <string name="poi_florist">Lillepood</string>
     <string name="poi_frame">Pildiraamid</string>
     <string name="poi_free_flying">Vabalangemistarvete pood</string>
-    <string name="poi_furnace">Küttekehade pood</string>
     <string name="poi_furniture">Mööblipood</string>
     <string name="poi_garden_centre">Aianduskeskus</string>
     <string name="poi_garden_furniture">Aiamööbli pood</string>
@@ -456,7 +455,6 @@
     <string name="poi_healthcare_alternative">Alternatiivmeditsiin</string>
     <string name="poi_audiologist">Audioloog</string>
     <string name="poi_blood_bank">Verepank</string>
-    <string name="poi_healthcare_centre">Meditsiinikeskus</string>
     <string name="poi_midwife">Ämmaemand</string>
     <string name="poi_occupational_therapist">Tööterapeut</string>
     <string name="poi_optometrist">Optometrist</string>
@@ -2728,7 +2726,6 @@
     <string name="poi_water_source_main">Veetrassil</string>
     <string name="poi_water_source_pond">Tiik</string>
     <string name="poi_water_source_stream">Oja</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Veemahuti</string>
     <string name="poi_in_service_yes">Kasutuses: jah</string>
     <string name="poi_street_cabinet_power">Kapi liik: toide</string>
     <string name="poi_street_cabinet_telecom">Kapi liik: telekommunikatsioon</string>

@@ -97,7 +97,6 @@
     <string name="poi_florist">Florista</string>
     <string name="poi_frame">Loja de molduras</string>
     <string name="poi_free_flying">Artigos de voo livre</string>
-    <string name="poi_furnace">Artigos de aquecimento</string>
     <string name="poi_furniture">Mobiliário</string>
     <string name="poi_garden_centre">Centro de jardinagem</string>
     <string name="poi_garden_furniture">Móveis para jardim</string>
@@ -118,7 +117,6 @@
     <string name="poi_deadlock">Impasse</string>
     <string name="poi_architecture_umgebinde">Arquitectura: casa grande alemã</string>
     <string name="poi_dolphin">Estrutura maritíma</string>
-    <string name="poi_additional_atm_yes">ATM: sim</string>
     <string name="poi_gas">Loja de gás líquido</string>
     <string name="poi_shop_yes">Loja genérica</string>
     <string name="poi_gift">Loja de presentes</string>
@@ -588,7 +586,6 @@
     <string name="poi_healthcare_alternative">Medicina alternativa</string>
     <string name="poi_audiologist">Audiologista</string>
     <string name="poi_blood_bank">Banco de sangue</string>
-    <string name="poi_healthcare_centre">Centro médico</string>
     <string name="poi_midwife">Obstetra</string>
     <string name="poi_occupational_therapist">Terapeuta ocupacional</string>
     <string name="poi_optometrist">Optometrista</string>
@@ -990,7 +987,6 @@
     <string name="poi_crematorium">Crematório</string>
     <string name="poi_internet_cafe">Cyber café</string>
     <string name="poi_bank">Agência bancária</string>
-    <string name="poi_amenity_atm">Caixa eletrônico</string>
     <string name="poi_atm">Caixa eletrônico</string>
     <string name="poi_payment_terminal">Terminal de pagamento</string>
     <string name="poi_money_lender">Financeira</string>
@@ -2752,7 +2748,6 @@
     <string name="poi_water_source_main">Rede de água</string>
     <string name="poi_water_source_pond">Lagoa</string>
     <string name="poi_water_source_stream">Ribeirão/Rio</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_in_service_yes">Em serviço: sim</string>
     <string name="poi_street_cabinet_power">Tipo de gabinete: força</string>
     <string name="poi_street_cabinet_telecom">Tipo de gabinete: telecom</string>
@@ -3547,7 +3542,6 @@
     <string name="poi_park_ride_hov">Via para veículos com alta ocupação</string>
     <string name="poi_park_ride_tram">Bonde</string>
     <string name="poi_park_ride_ferry">Balsa</string>
-    <string name="poi_generator_source_biomass">Fonte de energia: biomassa</string>
     <string name="poi_rtsa_scale_nc">n/c</string>
     <string name="poi_rtsa_scale_nc_asterisk">n/c*</string>
     <string name="poi_rtsa_scale_1a">1A</string>

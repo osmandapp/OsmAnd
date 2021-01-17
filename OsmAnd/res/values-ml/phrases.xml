@@ -9,7 +9,7 @@
 	<string name="poi_mobile_phone">സെല്‍ഫോണ്‍ കട</string>
 	<string name="poi_animal_shelter_bird">ബെര്‍ഡ് ഷെല്ട്ടര്‍</string>
 
-<string name="poi_boatyard">ബോട്ട് യാര്‍ഡ്</string>
+    <string name="poi_boatyard">ബോട്ട് യാര്‍ഡ്</string>
 	<string name="poi_shop_food">കടയും സൂപ്പര്‍മാര്‍ക്കറ്റും</string>
 	<string name="poi_emergency">എമെര്‍ജന്‍സി (അടിയന്തിരം)</string>
 	<string name="poi_filling_station">പെട്റോള്‍ പംബ്</string>
@@ -40,7 +40,7 @@
 	<string name="poi_military">മിലിട്ടറി</string>
 	<string name="poi_user_defined_other">"യൂസര്‍ ഡിഫൈന്ഡ് "</string>
 
-	<string name="poi_bakery">ബേക്കറി</string>
+    <string name="poi_bakery">ബേക്കറി</string>
 	<string name="poi_alcohol">"ബീവറേജസ് "</string>
 	<string name="poi_cheese">"ചീസ് ഷോപ് "</string>
 	<string name="poi_chocolate">"മിടായി കട "</string>
@@ -62,7 +62,7 @@
 	<string name="poi_vending_machine">"വെന്ഡിങ്ങ് മെഷിന്‍ "</string>
 	<string name="poi_wine">വൈന്‍ ഷോപ്</string>
 
-	<string name="poi_books">"പുസ്തക കട "</string>
+    <string name="poi_books">"പുസ്തക കട "</string>
 	<string name="poi_bicycle">സൈക്കിള്‍ കട</string>
 	<string name="poi_anime">"ആനിമെ ഷോപ് "</string>
 	<string name="poi_antiques">"പുരാവസ്തുവില്പന ശാല "</string>
@@ -84,8 +84,7 @@
 	<string name="poi_copyshop">"കോപ്പീ ഷോപ് "</string>
 	<string name="poi_curtain">കര്‍ടെയ്ന് സ്ടോര്‍</string>
 	<string name="poi_fabric">ഡ്രാപെരി ഷോപ്</string>
-	<string name="poi_bedding">"ബെഡ്ഡിങ്ങ് സ്ടോര്‍ "</string>
-	<string name="poi_dive">ഡൈവിങ്ങ് ഉപകരണങ്ങള്‍</string>
+    <string name="poi_dive">ഡൈവിങ്ങ് ഉപകരണങ്ങള്‍</string>
 	<string name="poi_doityourself">"ഹോം ഇംപ്രൂവ്മെന്റ് സ്ടോര്‍ "</string>
 	<string name="poi_erotic">ഇറോട്ടിക് ഷോപ്</string>
 	<string name="poi_fashion">ഫാഷ്യന്‍ ഷോപ്</string>
@@ -93,8 +92,7 @@
 	<string name="poi_florist">"പൂക്കട "</string>
 	<string name="poi_frame">"പിക്ചര്‍ ഫ്രേം ഷോപ് "</string>
 	<string name="poi_free_flying">"ഫ്രീ ഫ്ലയിംഗ് ഗുഡ്സ് സ്ടോര്‍ "</string>
-	<string name="poi_furnace">ഹീറ്റിങ്ങ് യൂണിട് സ്ടോര്‍</string>
-	<string name="poi_furniture">"ഫര്‍ണിച്ചര്‍ കട "</string>
+    <string name="poi_furniture">"ഫര്‍ണിച്ചര്‍ കട "</string>
 	<string name="poi_garden_centre">ഗാര്‍ഡന്‍ സെന്റര്‍</string>
 	<string name="poi_garden_furniture">"ഗാര്‍ഡന്‍ ഫര്‍ണിച്ചര്‍ കട "</string>
 	<string name="poi_gas">"ഗ്യാസ് ഏജന്സി "</string>
@@ -112,7 +110,7 @@
 		<string name="poi_transport_construction">ട്റാന്സ്പോര്‍ട്ട് കണ്‍സ്ട്ര്ക്ഷന്‍</string>
 		<string name="poi_palaeontological_site">പാലിയന്തോളജി സൈറ്റ്</string>
 
-	<string name="poi_deli">ഡെലി</string>
+    <string name="poi_deli">ഡെലി</string>
 	<string name="poi_doors">വാതിലുകള്‍</string>
 	<string name="poi_hardware">ഹാര്‍ഡ്വേര്‍ സ്ടോര്‍</string>
 	<string name="poi_hearing_aids">സ്റവണ സഹായി</string>
@@ -167,7 +165,7 @@
 	<string name="poi_weapons">കട (ആയുധങ്ങള്‍)</string>
 	<string name="poi_perfumery">കട (പെര്‍ഫ്യൂം)</string>
 
-	<string name="poi_police">പോലിസ്</string>
+    <string name="poi_police">പോലിസ്</string>
 	<string name="poi_fire_station">ഫയര്‍ സ്ടേഷന്‍</string>
 	<string name="poi_emergency_phone">എമെര്‍ജെന്സി ഫോണ്‍</string>
 	<string name="poi_fire_hydrant">അഗ്നിശമനി (fire hydrant)</string>
@@ -180,7 +178,7 @@
 	<string name="poi_ses_station">ഏസ് ഈ എസ് സ്ടേഷന്‍</string>
 	<string name="poi_emergency_access_point">എമെര്‍ജെന്‍സി അക്സെസ് പോയിന്റ്</string>
 
-	<string name="poi_ford">ചപ്പാത്ത്</string>
+    <string name="poi_ford">ചപ്പാത്ത്</string>
 	<string name="poi_mountain_pass">ചുരം</string>
 	<string name="poi_gate">ഗേറ്റ്</string>
 	<string name="poi_city_wall">നഗര കോട്ട</string>
@@ -197,7 +195,7 @@
 	<string name="poi_traffic_calming_island">വേഗനിയന്ത്റണം (ഐലന്റ്)</string>
 	<string name="poi_traffic_signals">ട്റാഫിക്ക് ലൈറ്റ്</string>
 
-	<string name="poi_car_repair">"കാര്‍ വര്‍ക്ക് ഷോപ്പ്  (റിപ്പയര്‍)"</string>
+    <string name="poi_car_repair">"കാര്‍ വര്‍ക്ക് ഷോപ്പ്  (റിപ്പയര്‍)"</string>
 	<string name="poi_service_tyres">ടയര്‍ സെര്‍വീസ്</string>
 	<string name="poi_vehicle_inspection">വാഹന പരിശോധന കേന്ദ്രം</string>
 	<string name="poi_car_wash">കാര്‍ വാഷ്</string>
@@ -233,7 +231,7 @@
 	<string name="poi_parking_entrance">പാര്‍ക്കിങ്ങ് എന്റ്റി</string>
 	<string name="poi_garages">ഗരേജ്</string>
 
-	<string name="poi_public_transport_platform">സ്ടോപ് (പബ്ളിക് ട്റാന്‍സ്പോര്‍ട്ട് )</string>
+    <string name="poi_public_transport_platform">സ്ടോപ് (പബ്ളിക് ട്റാന്‍സ്പോര്‍ട്ട് )</string>
 	<string name="poi_public_transport_platform_bus">ബസ് സ്ടോപ്പ്</string>
 	<string name="poi_public_transport_platform_trolleybus">ട്രോളിബസ് സ്ടോപ്പ്</string>
 	<string name="poi_bus_stop">ബസ് സ്ടോപ്</string>
@@ -250,30 +248,30 @@
 	<string name="poi_railway_buffer_stop">റയില്വേ ബഫെര്‍ സ്ടോപ്</string>
 	<string name="poi_taxi">ടാക്സി സ്ടാന്ഡ്</string>
 
-	<string name="poi_aerodrome">എയര്‍പോര്‍ട്ട്</string>
+    <string name="poi_aerodrome">എയര്‍പോര്‍ട്ട്</string>
 	<string name="poi_helipad">ഹെലിപ്പാട്</string>
 	<string name="poi_runway">റണ്വേ</string>
 	<string name="poi_aeroway_terminal">എയര്‍പോര്‍ട്ട് ടെര്‍മിനല്‍</string>
 	<string name="poi_aeroway_gate">എയര്‍പോര്‍ട്ട് ഗേറ്റ്</string>
 
-	<string name="poi_ferry_terminal">ഫെറി ടെര്‍മിനല്‍</string>
+    <string name="poi_ferry_terminal">ഫെറി ടെര്‍മിനല്‍</string>
 	<string name="poi_lighthouse">ലൈറ്റ്ഹൗസ്</string>
 
-	<string name="poi_bicycle_rental">വാടക സൈക്കിള്‍</string>
+    <string name="poi_bicycle_rental">വാടക സൈക്കിള്‍</string>
 	<string name="poi_bicycle_parking">സൈക്കിള്‍ പാര്‍ക്കിങ്ങ്</string>
 
-	<string name="poi_aerialway_station">എയര്‍പോര്‍ട്ട്</string>
+    <string name="poi_aerialway_station">എയര്‍പോര്‍ട്ട്</string>
 	<string name="poi_aerialway_cable_car">കേബിള്‍ കാര്‍</string>
 	<string name="poi_tunnel">ടണല്‍</string>
 	<string name="poi_bridge">പാലം</string>
 
-	<string name="poi_speed_camera">സ്പീഡ് ക്യാമറ</string>
+    <string name="poi_speed_camera">സ്പീഡ് ക്യാമറ</string>
 	<string name="poi_turning_circle">സര്‍ക്കിള്‍</string>
 	<string name="poi_motorway_junction">ജംഗ്ഷന്‍</string>
 	<string name="poi_junction">ജംഗ്ഷന്‍</string>
 	<string name="poi_rest_area">വിശ്റമ സ്ഥലം</string>
 
-	<string name="poi_water_well">കിണര്‍</string>
+    <string name="poi_water_well">കിണര്‍</string>
 	<string name="poi_standpipe">പൈപ്പ്(അഗ്നിശമനി)</string>
 	<string name="poi_water_works">ജലശേഖരണി</string>
 	<string name="poi_wastewater_plant">ജലശുദ്ദീകരണം</string>
@@ -290,7 +288,7 @@
 	<string name="poi_power_tower">പവര്‍ടവര്‍</string>
 	<string name="poi_power_pole">ഇലക്ട്രിക് പോസ്റ്റ്</string>
 
-	<string name="poi_post_office">പോസ്റ്റ് ഓഫീസ്</string>
+    <string name="poi_post_office">പോസ്റ്റ് ഓഫീസ്</string>
 	<string name="poi_post_box">പോസ്റ്റ് ബോക്സ്</string>
 	<string name="poi_telephone">ടെലിഫോണ്‍</string>
 	<string name="poi_communication_tower">കമ്മ്യൂണിക്കേഷന്‍ ടവര്‍</string>
@@ -300,9 +298,9 @@
 	<string name="poi_lighting_tower">ലൈറ്റിങ്ങ് ടവര്‍</string>
 	<string name="poi_telephone_exchange">ടെലിഫോണ്‍ എക്സേന്ജ്</string>
 
-	<string name="poi_recycling">റീസൈക്ക്ളിങ്ങ്</string>
+    <string name="poi_recycling">റീസൈക്ക്ളിങ്ങ്</string>
 
-	<string name="poi_recycling_centre">"റീസൈക്ക്ളിങ്ങ്  സെന്റര്‍"</string>
+    <string name="poi_recycling_centre">"റീസൈക്ക്ളിങ്ങ്  സെന്റര്‍"</string>
 	<string name="poi_recycling_container">കണ്‍ട്ടെയിനര്‍</string>
 	<string name="poi_recycling_glass">"ഗ്ളാസ്  റീസൈക്ക്ളിങ്ങ്"</string>
 	<string name="poi_recycling_paper">"റീസൈക്ക്ളിങ്ങ്  (പേപ്പര്‍)"</string>
@@ -368,7 +366,7 @@
 	<string name="poi_place_farm">കൃഷിത്തോട്ടം</string>
 	<string name="poi_residential">ജനവാസ സ്ഥലം</string>
 
-	<string name="poi_pharmacy">ഫാര്‍മസി</string>
+    <string name="poi_pharmacy">ഫാര്‍മസി</string>
 	<string name="poi_hospital">ആശുപത്രി</string>
 	<string name="poi_doctors">ഡോക്ടര്‍</string>
 	<string name="poi_clinic">ക്ലിനിക്ക്</string>
@@ -380,8 +378,7 @@
 	<string name="poi_healthcare_alternative">അല്ടെര്‍നേട്ടിവ് മെഡിസിന്‍</string>
 	<string name="poi_audiologist">ഓഡിയോളജിസ്ട്</string>
 	<string name="poi_blood_bank">രക്ത ബാങ്ക്</string>
-	<string name="poi_healthcare_centre">മെഡിക്കല്‍ സെന്റര്‍</string>
-	<string name="poi_midwife">പ്രസവശുശ്രൂഷിക</string>
+    <string name="poi_midwife">പ്രസവശുശ്രൂഷിക</string>
 	<string name="poi_occupational_therapist">ഒക്ക്യുപ്പേഷണല്‍ തെറാപ്പിസ്റ്റ്</string>
 	<string name="poi_optometrist">കണ്ണ് ഡോക്ടര്‍</string>
 	<string name="poi_physiotherapist">ഫിസിയോതെറാപ്പിസ്റ്റ്</string>
@@ -392,7 +389,7 @@
 	<string name="poi_healthcare_yes">മെഡിക്കല്‍ ഫസിലിറ്റി</string>
 	<string name="poi_paediatrics">ശിശുരോഗവിദഗ്ദന്‍</string>
 
-	<string name="poi_company">കമ്പനി</string>
+    <string name="poi_company">കമ്പനി</string>
 	<string name="poi_insurance">ഇന്ഷുറന്‍സ്</string>
 	<string name="poi_estate_agent">എസ്റ്റെറ്റ് ഏജന്റ്</string>
 	<string name="poi_lawyer">അഭിഭാഷകന്‍</string>
@@ -416,7 +413,7 @@
 	<string name="poi_foundation">ഫൗണ്ടേഷന്‍ ഓഫീസ്</string>
 	<string name="poi_tax_advisor">നികുതി വിദഗ്ദന്‍</string>
 
-	<string name="poi_stadium">സ്ടേഡിയം</string>
+    <string name="poi_stadium">സ്ടേഡിയം</string>
 	<string name="poi_sports_centre">സ്പോര്‍ട്സ് സെന്റര്‍</string>
 	<string name="poi_golf_course">ഗോള്‍ഫ് കോര്‍സ്</string>
 	<string name="poi_ice_rink">ഐസ് റിംഗ്</string>
@@ -479,7 +476,7 @@
 	<string name="poi_toboggan">ടോബൊഗ്ഗാന്‍</string>
 	<string name="poi_volleyball">വോളിബോള്‍</string>
 
-	<string name="poi_museum">മ്യൂസിയം</string>
+    <string name="poi_museum">മ്യൂസിയം</string>
 	<string name="poi_memorial">സ്മാരകം</string>
 	<string name="poi_artwork">കലാസൃഷ്ടി</string>
 	<string name="poi_archaeological_site">ആര്ക്കിയോളജിക്കല്‍ സൈറ്റ്</string>
@@ -500,7 +497,7 @@
 	<string name="poi_aquarium">അഖ്യേറിയം</string>
 	<string name="poi_theme_park">തീം പാര്‍ക്ക്</string>
 
-	<string name="poi_attraction">ടൂറിസ്റ്റ് അട്രാക്ഷന്‍</string>
+    <string name="poi_attraction">ടൂറിസ്റ്റ് അട്രാക്ഷന്‍</string>
 <string name="poi_tourism_yes">ടൂറിസ്റ്റിക് ഓബ്ജെക്ട്</string>
 	<string name="poi_attraction_amusement_ride">അമ്യൂസ്മെന്റ് റൈഡ്</string>
 	<string name="poi_attraction_animal">മൃഗങ്ങള്‍</string>
@@ -514,7 +511,7 @@
 	<string name="poi_attraction_train">കളിപ്പാട്ട തീവണ്ടി</string>
 	<string name="poi_attraction_water_slide">വാട്ടര്‍ സ്ലൈഡ്</string>
 
-	<string name="poi_lodging">ലോഡ്ജ്</string>
+    <string name="poi_lodging">ലോഡ്ജ്</string>
 	<string name="poi_hotel">ഹോട്ടല്‍</string>
 	<string name="poi_guest_house">ഗസ്റ്റ് ഹൗസ്</string>
 	<string name="poi_hostel">ഹോസ്റ്റെല്‍</string>
@@ -527,7 +524,7 @@
 	<string name="poi_lean_to">ടെന്റ്</string>
 	<string name="poi_hunting_lodge">നായാട്ട് ഗൃഹം</string>
 
-	<string name="poi_place_of_worship">ആരാധനാലയം</string>
+    <string name="poi_place_of_worship">ആരാധനാലയം</string>
 	<string name="poi_religion_christian">ക്രിസ്ട്യന്‍</string>
 	<string name="poi_religion_jewish">ജൂതമതം</string>
 	<string name="poi_religion_muslim">ഇസ്ളാം</string>
@@ -547,7 +544,7 @@
 	<string name="poi_religion_tenrikyo"/>
 	<string name="poi_religion_zoroastrian">സൗരാഷ്ട്രമതം</string>
 
-	<string name="poi_denomination_catholic">കത്തോലിക്ക വിഭാഗം</string>
+    <string name="poi_denomination_catholic">കത്തോലിക്ക വിഭാഗം</string>
 	<string name="poi_denomination_baptist">ബാപറ്റിസ്റ്റ്</string>
 	<string name="poi_denomination_roman_catholic">റൊമന്‍ കാത്തലിക്ക്</string>
 	<string name="poi_denomination_orthodox">ഓര്‍ത്ത്ഡോക്സ്</string>
@@ -606,7 +603,7 @@
 	<string name="poi_denomination_maronite">മാരോണിറ്റ്</string>
 	<string name="poi_denomination_mahayana">മഹായാന</string>
 
-	<string name="poi_internet_access_wlan">വൈഫൈ</string>
+    <string name="poi_internet_access_wlan">വൈഫൈ</string>
 	<string name="poi_internet_access_terminal">ഇന്റര്‍നെറ്റ് ടെര്‍മിനല്‍</string>
 	<string name="poi_internet_access_wired">ഇന്റര്‍നെറ്റ് (ഇതര്‍നെറ്റ്‌)</string>
 	<string name="poi_internet_access_public">ഇന്റര്‍നെറ്റ് (പബ്ളിക്ക്)</string>
@@ -614,7 +611,7 @@
 	<string name="poi_internet_access_yes">ഇന്റെര്‍നെറ്റ് (ഉണ്ട്)</string>
 	<string name="poi_internet_access_no">ഇന്റെര്‍നെറ്റ് (ഇല്ല)</string>
 
-	<string name="poi_monastery">മഠം</string>
+    <string name="poi_monastery">മഠം</string>
 <string name="poi_religious">മതസ്ഥാപനം</string>
 	<string name="poi_wayside_cross">കുരിശ്</string>
 	<string name="poi_wayside_shrine">കുരിശുപള്ളി</string>
@@ -652,12 +649,12 @@
 	<string name="poi_recycling_cars">കാര്‍ റീസൈക്ക്ളിങ്ങ്</string>
 	<string name="poi_recycling_bicycles">റീസൈക്ക്ളിങ്ങ്(സൈക്കിള്‍)</string>
 
-	<string name="poi_landfill">ലാന്റ് ഫില്‍</string>
+    <string name="poi_landfill">ലാന്റ് ഫില്‍</string>
 	<string name="poi_landfill_waste_nuclear">"റീസൈക്ക്ളിങ്ങ് (അണു  മാലിന്യയങ്ങള്‍)"</string>
 	<string name="poi_waste_disposal">മാലിന്യ സംസ്കരണം</string>
 	<string name="poi_waste_basket">ചവറ്റുകുട്ട</string>
 
-	<string name="poi_industrial">വ്യാവസായിക മേഖല</string>
+    <string name="poi_industrial">വ്യാവസായിക മേഖല</string>
 	<string name="poi_quarry">ഖനി</string>
 	<string name="poi_vineyard">മുന്തിരിത്തോട്ടം</string>
 	<string name="poi_orchard">ഫലോദ്യാനം</string>
@@ -667,9 +664,7 @@
 	<string name="poi_meadow">പുല്‍ത്തകിടി</string>
 	<string name="poi_landuse_railway">തീവണ്ടിപ്പാത</string>
 	<string name="poi_basin">ബെയ്സിന്‍</string>
-	<string name="poi_conservation">സംരക്ഷിത ഭൂമി</string>
-
-	<string name="poi_canal">കനാല്‍</string>
+    <string name="poi_canal">കനാല്‍</string>
 	<string name="poi_pier">കടല്‍പ്പാലം</string>
 	<string name="poi_surveillance">സര്‍വേയിലന്‍സ്</string>
 	<string name="poi_observatory">നിരീക്ഷണാലയം</string>
@@ -689,7 +684,7 @@
 	<string name="poi_smoking_isolated">പുകവലി അതിനായുള്ള റൂമില്‍ മാത്ര‌ം</string>
 	<string name="poi_smoking_dedicated">പുകവലിക്കായി</string>
 
-	<string name="poi_toll_yes">ടോള്‍</string>
+    <string name="poi_toll_yes">ടോള്‍</string>
 	<string name="poi_toll_no">"ടോളില്ല "</string>
 	<string name="poi_toll_hgv_yes">എച്ച് ജി വി ടോള്‍</string>
 	<string name="poi_tactile_paving_yes">ആണ്</string>
@@ -698,9 +693,9 @@
 	<string name="poi_traffic_signals_sound_no">"ഇല്ല "</string>
 	<string name="poi_traffic_signals_sound_walk">നടന്നു ക്രോസ് ചെയ്യാവുന്ന സമയം മാത്രം</string>
 
-	<string name="poi_rescue_station">റെസ്ക്യൂ സ്ടേ‌ഷന്‍</string>
+    <string name="poi_rescue_station">റെസ്ക്യൂ സ്ടേ‌ഷന്‍</string>
 
-	<string name="poi_services">സര്‍വീസ് ഏരിയ</string>
+    <string name="poi_services">സര്‍വീസ് ഏരിയ</string>
 	<string name="poi_mini_roundabout">ചെറിയ റൗണ്ടാന</string>
 	<string name="poi_railway_crossing">റയില്‍വെ ക്രോ‌സിങ്ങ്</string>
 	<string name="poi_railway_level_crossing">റയില്‍വെ ക്രോ‌സിങ്ങ്</string>
@@ -709,7 +704,7 @@
 	<string name="poi_leisure_common">പോതുവിശ്ര‌മമേഖല</string>
 	<string name="poi_garden">ഉദ്യാനം</string>
 
-	<string name="poi_heath">തരിശുഭൂമി</string>
+    <string name="poi_heath">തരിശുഭൂമി</string>
 	<string name="poi_grass">പുല്ല്</string>
 	<string name="poi_grassland">പുല്മേട്</string>
 	<string name="poi_scrub">കുറ്റിചെടികള്‍</string>
@@ -717,14 +712,14 @@
 	<string name="poi_logging">മരംമുറി</string>
 	<string name="poi_sand">മണല്‍</string>
 
-	<string name="poi_windfall">വിന്റ്ഫാള്‍</string>
+    <string name="poi_windfall">വിന്റ്ഫാള്‍</string>
 	<string name="poi_dead_wood">ഉണക്കമരം</string>
 
-	<string name="poi_passing_place">ക്രോ‌സിങ്ങ് സ്ഥലം</string>
+    <string name="poi_passing_place">ക്രോ‌സിങ്ങ് സ്ഥലം</string>
 	<string name="poi_level">നില</string>
 	<string name="poi_rtsa_scale">ആര്‍ ടി എസ് എ അളവ്</string>
 
-	<string name="poi_piste_difficulty_easy">എളുപ്പം</string>
+    <string name="poi_piste_difficulty_easy">എളുപ്പം</string>
 	<string name="poi_piste_difficulty_intermediate">സ്കിട്രേ‌യില്‍ :ഇന്റര്‍മീഡിയറ്റ്</string>
 	<string name="poi_piste_difficulty_advanced">അഡ്വാന്‍സ്ഡ്</string>
 	<string name="poi_piste_difficulty_novice">ഫ്രെ‌ഷര്‍ (നോവീസ്)</string>
@@ -738,18 +733,18 @@
 	<string name="poi_piste_grooming_no">"ഇല്ല "</string>
 	<string name="poi_piste_grooming_mogul">സ്കിട്രേ‌യില്‍ : ബംപുകള്‍</string>
 
-	<string name="poi_garden_type_residential">ഉദ്യാനം (ഗാര്‍ഹികം)</string>
+    <string name="poi_garden_type_residential">ഉദ്യാനം (ഗാര്‍ഹികം)</string>
 	<string name="poi_garden_type_community">ഉദ്യാനം(പോതു)</string>
 	<string name="poi_garden_type_private">ഉദ്യാനം (പ്രൈ‌വറ്റ്)</string>
 	<string name="poi_garden_type_botanical">ബോട്ടാണിക്കല്‍ ഗാര്‍ഡന്‍</string>
 
-	<string name="poi_garden_style_kitchen">അടുക്കളോദ്യാനം</string>
+    <string name="poi_garden_style_kitchen">അടുക്കളോദ്യാനം</string>
 	<string name="poi_garden_style_rosarium">ഉദ്യാനം (റോസ്)</string>
 	<string name="poi_garden_style_french">ഉദ്യാനം (ഫ്രെ‌ന്‍ജ് സ്ടൈല്‍)</string>
 	<string name="poi_garden_style_english">ഉദ്യാനം (ഇംഗ്ളീഷ് സ്ടൈല്‍)</string>
 	<string name="poi_garden_style_japanese">ഉദ്യാനം (ജാപനീസ് സ്ടൈല്‍)</string>
 
-	<string name="poi_capacity">ഇടം</string>
+    <string name="poi_capacity">ഇടം</string>
 	<string name="poi_capacity_disabled_yes">അതെ</string>
 	<string name="poi_capacity_disabled_no">അംഗവൈകല്യമുള്ളവര്‍ക്ക് പ്ര‌ത്യേകസ്ഥലമില്ല</string>
 	<string name="poi_capacity_disabled">അംഗവൈകല്യമുള്ളവര്‍ക്ക് പ്ര‌ത്യേകസ്ഥലം</string>
@@ -788,7 +783,7 @@
 	<string name="poi_drinking_water">കുടിവെള്ളം</string>
 	<string name="poi_barbecue">ബാര്‍ബിക്യൂ</string>
 
-	<string name="poi_craft_agricultural_engines">കൃഷിയന്ത്ര‌ങ്ങള്‍</string>
+    <string name="poi_craft_agricultural_engines">കൃഷിയന്ത്ര‌ങ്ങള്‍</string>
 	<string name="poi_craft_beekeeper">തേനീച്ചവളര്‍ത്തുലകാരന്‍</string>
 	<string name="poi_craft_blacksmith">കൊല്ലപ്പണിക്കാരന്‍</string>
 	<string name="poi_craft_brewery">ബ്രൂ‌വറി</string>
@@ -824,15 +819,14 @@
 	<string name="poi_crematorium">ശ്മശാനം</string>
 	<string name="poi_internet_cafe">ഇന്റര്‍നെറ്റ് കഫെ</string>
 
-	<string name="poi_bank">ബാങ്ക്</string>
-	<string name="poi_amenity_atm">എ ടി എം</string>
-	<string name="poi_payment_terminal">ക്യാഷ് കൗണ്ടര്‍</string>
+    <string name="poi_bank">ബാങ്ക്</string>
+    <string name="poi_payment_terminal">ക്യാഷ് കൗണ്ടര്‍</string>
 	<string name="poi_accountant">അക്കൗണ്ടന്റ്</string>
 	<string name="poi_cave_entrance">ഗുഹാകവാടം</string>
 	<string name="poi_capacity_parent_no">രക്ഷിതാക്കള്‍ക്കു പ്രെ‌ത്യേകസ്ഥലമില്ല</string>
 	<string name="poi_capacity_parent">രക്ഷിതാക്കള്‍ക്കുള്ള പ്രെ‌ത്യേകസ്ഥലം</string>
 
-	<string name="poi_aerialway_occupancy">ക്യാബിന്‍/കസേര/കാര്‍ ഇടങ്ങള്‍</string>
+    <string name="poi_aerialway_occupancy">ക്യാബിന്‍/കസേര/കാര്‍ ഇടങ്ങള്‍</string>
 	<string name="poi_aerialway_capacity">കപ്പാസിറ്റി (മണിക്കൂര്‍)</string>
 	<string name="poi_aerialway_duration">ശരാശരി യാത്രാ‌ സമയം</string>
 	<string name="poi_aerialway_access_entry">എന്റ്രീ‌</string>
@@ -842,11 +836,11 @@
 	<string name="poi_aerialway_summer_access_exit">എക്സിറ്റ്</string>
 	<string name="poi_aerialway_summer_access_both">എന്റ്രി‌യും എക്സിറ്റും</string>
 
-	<string name="poi_rooms">ലോഡ്ജ്</string>
+    <string name="poi_rooms">ലോഡ്ജ്</string>
 
-	<string name="poi_love_hotel">ഹോട്ടല്‍ (ലവ്)</string>
+    <string name="poi_love_hotel">ഹോട്ടല്‍ (ലവ്)</string>
 
-	<string name="poi_payment_coins_no">"നാണയം സ്വീകരിക്കില്ല "</string>
+    <string name="poi_payment_coins_no">"നാണയം സ്വീകരിക്കില്ല "</string>
 	<string name="poi_fuel_avia_type">ഇനം</string>
 	<string name="poi_payment_fuel_type">ഇന്ധന കാര്‍ഡുകള്‍</string>
 	<string name="poi_internet_access_type">ഇന്റെര്‍നെറ്റ് ഉപയോഗിക്കാനുള്ള വിധം</string>
@@ -912,7 +906,7 @@
 	<string name="poi_beach_surface_type">പ്ര‌തലം</string>
 	<string name="poi_nudism">നഗ്നത</string>
 
-<string name="poi_aerialway_chair_lift">ലിഫ്ട് (ചെയര്‍)</string>
+    <string name="poi_aerialway_chair_lift">ലിഫ്ട് (ചെയര്‍)</string>
 	<string name="poi_aerialway_t_bar">ലിഫ്ട്(റ്റി-ബാര്‍)</string>
 	<string name="poi_aerialway_j_bar">ജെ-ബാര്‍ ലിഫ്ട്</string>
 	<string name="poi_aerialway_platter">ലിഫ്ട്(പ്ളാറ്റര്‍)</string>
@@ -923,7 +917,7 @@
 	<string name="poi_aerialway_magic_carpet">കാര്‍പെറ്റ് ലിഫ്ട്</string>
 	<string name="poi_aerialway_pylon">ലിഫ്ട് (ഏരിയല്‍ പൈലോണ്‍)</string>
 
-	<string name="poi_waterway_turning_point">ജലയാനം തിരിക്കാനുള്ള സ്ഥലം</string>
+    <string name="poi_waterway_turning_point">ജലയാനം തിരിക്കാനുള്ള സ്ഥലം</string>
 	<string name="poi_watermill">മില്ല് (വാട്ടര്‍)</string>
 	<string name="poi_works">വര്‍ക്സ്</string>
 	<string name="poi_mineshaft">"മൈനിലേ കുത്തനെയുള്ള തുരങ്കം "</string>
@@ -939,14 +933,14 @@
 	<string name="poi_bunker_silo">ഭൂഗര്‍ഭ നിലവറ</string>
 	<string name="poi_storage_tank">സംഭരണ ടാങ്ക്</string>
 
-	<string name="poi_college">" കോളേജ്"</string>
+    <string name="poi_college">" കോളേജ്"</string>
 	<string name="poi_driving_school">ഡ്രൈ‌വിങ്ങ് സ്കൂള്‍</string>
 	<string name="poi_kindergarten">കിന്റെര്‍ഗാര്‍ടെന്‍</string>
 	<string name="poi_school">സ്കൂള്‍</string>
 	<string name="poi_training">ട്രെയിനിങ്ങ് ഫസിലിറ്റി</string>
 	<string name="poi_university">സര്‍വകലാശാല</string>
 
-	<string name="poi_social_facility">സോഷ്യല്‍ ഫസിലിറ്റി</string>
+    <string name="poi_social_facility">സോഷ്യല്‍ ഫസിലിറ്റി</string>
 	<string name="poi_courthouse">സിവില്‍ ഓഫീസ്</string>
 	<string name="poi_prison">ജയില്‍</string>
 	<string name="poi_register_office">രജിസ്ട്രാ‌ര്‍ ഓഫീസ്</string>
@@ -996,7 +990,7 @@
 	<string name="poi_club_tourism">"ടൂറിസം ക്ലബ് "</string>
 	<string name="poi_club_charity">"ചാരിറ്റി ക്ലബ് "</string>
 
-	<string name="poi_piste">"സ്കിട്രേ‌യില്‍ "</string>
+    <string name="poi_piste">"സ്കിട്രേ‌യില്‍ "</string>
 	<string name="poi_piste_downhill">സ്കിട്രേ‌യില്‍ (മലചെരുവില്‍)</string>
 	<string name="poi_piste_nordic">സ്കിട്രേ‌യില്‍ (നോര്‍ഡിക്)</string>
 	<string name="poi_piste_skitour">സ്കിട്രേ‌യില്‍ (സ്കിടൂര്‍)</string>
@@ -1008,7 +1002,7 @@
 	<string name="poi_piste_ice_skate">ഐസ് റിംഗ്</string>
 	<string name="poi_ski_rental">സ്കി റെന്റല്‍</string>
 
-	<string name="poi_library">വായനശാല</string>
+    <string name="poi_library">വായനശാല</string>
 	<string name="poi_arts_centre">ആര്‍ട്സ് സെന്റര്‍</string>
 	<string name="poi_casino">കാസിനൊ</string>
 	<string name="poi_community_centre">കമ്മ്യൂണിറ്റി സെന്റര്‍</string>
@@ -1017,7 +1011,7 @@
 	<string name="poi_theatre_genre_circus">സര്‍ക്കസ്</string>
 	<string name="poi_trail_riding_station">"കുതിര സവാരിക്കുള്ള പാത "</string>
 
-	<string name="poi_craft_basket_maker">കൊട്ട നിര്‍മാതാവ്</string>
+    <string name="poi_craft_basket_maker">കൊട്ട നിര്‍മാതാവ്</string>
 	<string name="poi_craft_boatbuilder">ബോട്ട് നിര്‍മാതാവ്</string>
 	<string name="poi_craft_caterer">കേറ്റെറര്‍</string>
 	<string name="poi_craft_hvac">ഏസി,ഹീറ്റിങ്ങ്, ഫാനുകള്‍</string>
@@ -1040,7 +1034,7 @@
 	<string name="poi_craft_upholsterer">അപ് ഹോള്‍സ്റ്റര്‍</string>
 	<string name="poi_craft_window_construction">ജനല്‍ നിര്‍മ്മാണം</string>
 
-	<string name="poi_funeral_directors">കര്‍മ്മി</string>
+    <string name="poi_funeral_directors">കര്‍മ്മി</string>
 	<string name="poi_craft_computer">കമ്പ്യൂട്ടര്‍</string>
 	<string name="poi_beauty_salon_nails">മാനിക്യൂര്‍</string>
 	<string name="poi_massage">മസ്സാജ് സലോണ്‍</string>
@@ -1052,7 +1046,7 @@
 	<string name="poi_bureau_de_change">ഫോറിന്‍ എക്സേഞ്ച്</string>
 	<string name="poi_bitcoin_yes">ബിട്കോയിന്‍ പെയ്മെന്റ്</string>
 
-	<string name="poi_peak">കൊടുമുടി</string>
+    <string name="poi_peak">കൊടുമുടി</string>
 	<string name="poi_saddle">ജീനി</string>
 	<string name="poi_volcano">അഗ്നിപര്‍വതം</string>
 	<string name="poi_crater">അഗ്നിപര്‍വ്വതമുഖം</string>
@@ -1077,7 +1071,7 @@
 	<string name="poi_island">ദീപ്</string>
 	<string name="poi_islet">ചെറുദ്വീപ്</string>
 
-	<string name="poi_anchorage">ആങ്കറേജ്</string>
+    <string name="poi_anchorage">ആങ്കറേജ്</string>
 	<string name="poi_anchor_berth">ആങ്കര്‍ ബെര്‍ത്ത്</string>
 	<string name="poi_beacon">ബീക്കണ്‍</string>
 	<string name="poi_beacon_cardinal">കാര്‍ഡിനല്‍ ബീക്കണ്‍</string>
@@ -1098,7 +1092,7 @@
 	<string name="poi_seamark_rock">സീമാര്‍ക്ക് (റോക്ക്)</string>
 	<string name="poi_seamark_wreck">സീമാര്‍ക്ക്:കപ്പല്‍ചേദം</string>
 
-	<string name="poi_military_landuse">മിലിട്ടറി ഏരിയ</string>
+    <string name="poi_military_landuse">മിലിട്ടറി ഏരിയ</string>
 	<string name="poi_military_airfield">മിലിട്ടറി എയര്‍ഫീല്‍ഡ്</string>
 	<string name="poi_military_bunker">മിലിട്ടറി ബങ്കര്‍</string>
 	<string name="poi_military_barracks">ബാരക്കുകള്‍</string>
@@ -1108,7 +1102,7 @@
 	<string name="poi_military_naval_base">മിലിട്ടറി നാവികത്താവളം</string>
 	<string name="poi_military_nuclear_explosion_site">അണുസ്പോടനമേഖല</string>
 
-	<string name="poi_wiki_place">വിക്കിപീഡിയ</string>
+    <string name="poi_wiki_place">വിക്കിപീഡിയ</string>
 	<string name="poi_wiki_lang_en">ഇംഗ്ലീഷ് വിക്കി</string>
 	<string name="poi_wiki_lang_ar">അറബിക് വിക്കി</string>
 	<string name="poi_wiki_lang_be">ബെലാറസിയന്‍ വിക്കി</string>
@@ -1157,7 +1151,7 @@
 	<string name="poi_wiki_lang_vo">വൊളാപ്ക് വിക്കി</string>
 	<string name="poi_wiki_lang_zh">ചൈനീസ് വിക്കി</string>
 
-	<string name="poi_bollard">മാര്‍ഗതടസം(ബോള്ളാര്‍ഡ്)</string>
+    <string name="poi_bollard">മാര്‍ഗതടസം(ബോള്ളാര്‍ഡ്)</string>
 	<string name="poi_cycle_barrier">സൈക്കിള്‍ തടസം</string>
 	<string name="poi_motorcycle_barrier">മോട്ടോര്‍സൈക്കിള്‍ ബാരിയര്‍</string>
 	<string name="poi_block">"ബ്ലോക്ക് "</string>
@@ -1181,9 +1175,9 @@
 	<string name="poi_entrance">അകത്തേക്കുള്ള വഴി</string>
 	<string name="poi_entrance_exit">"പുറത്തേക്കുള്ള വഴി "</string>
 
-	<string name="poi_highway_crossing">ഹൈവേ ക്രോ‌സിങ്ങ്</string>
+    <string name="poi_highway_crossing">ഹൈവേ ക്രോ‌സിങ്ങ്</string>
 
-	<string name="poi_icn_ref">ഇന്റെര്‍നാഷണല്‍ സൈക്ക്ളിങ്ങ് നെറ്റ്വര്‍ക്ക് നോഡ്</string>
+    <string name="poi_icn_ref">ഇന്റെര്‍നാഷണല്‍ സൈക്ക്ളിങ്ങ് നെറ്റ്വര്‍ക്ക് നോഡ്</string>
 	<string name="poi_ncn_ref">നാഷണല്‍ സൈക്ക്ളിങ്ങ് നെറ്റ്വര്‍ക്ക് നോഡ്</string>
 	<string name="poi_rcn_ref">റീജിയണല്‍ സൈക്ക്ളിങ്ങ് നെറ്റ്വര്‍ക്ക് നോഡ്</string>
 	<string name="poi_lcn_ref">ലോക്കല്‍ സൈക്ക്ളിങ്ങ് നെറ്റ്വര്‍ക്ക് നോഡ്</string>
@@ -1192,13 +1186,13 @@
 	<string name="poi_rwn_ref">"റീജിയണല്‍ ഹൈക്കിങ്ങ്  നെറ്റ്വര്‍ക്ക് നോഡ്"</string>
 	<string name="poi_lwn_ref">ലോക്കല്‍ ഹൈക്കിങ്ങ് നെറ്റ്വര്‍ക്ക് നോഡ്</string>
 
-	<string name="poi_route_hiking_iwn_poi">"ഇന്റെര്‍നാഷണല്‍ ഹൈക്കിങ്ങ്  റൂട്ട് "</string>
+    <string name="poi_route_hiking_iwn_poi">"ഇന്റെര്‍നാഷണല്‍ ഹൈക്കിങ്ങ്  റൂട്ട് "</string>
 	<string name="poi_route_hiking_nwn_poi">"നാഷണല്‍ ഹൈക്കിങ്ങ്  റൂട്ട് "</string>
 	<string name="poi_route_hiking_rwn_poi">റീജിയണല്‍ ഹൈക്കിങ്ങ് റൂട്ട്</string>
 	<string name="poi_route_hiking_lwn_poi">"ലോക്കല്‍ ഹൈക്കിങ്ങ് റൂട്ട് "</string>
 	<string name="poi_route_hiking_ref_poi">ഹൈക്കിങ്ങ് റൂട്ട് റെഫറന്‍സ്</string>
 
-	<string name="poi_opening_hours">തുറക്കുന്ന സമയം</string>
+    <string name="poi_opening_hours">തുറക്കുന്ന സമയം</string>
 	<string name="poi_collection_times">കളക്ഷന്‍ ടൈംസ്</string>
 	<string name="poi_description">വിവരണം</string>
 	<string name="poi_phone">ഫോണ്‍</string>
@@ -1222,7 +1216,7 @@
 	<string name="poi_abandoned_poi">"ഉപേക്ഷിക്കപ്പെട്ട  വസ്തു"</string>
 	<string name="poi_disused">"ഉപയോഗമില്ലാത്ത "</string>
 
-	<string name="poi_operator">" പ്രവര്‍ത്തകന്‍"</string>
+    <string name="poi_operator">" പ്രവര്‍ത്തകന്‍"</string>
 	<string name="poi_brand">ബ്രാന്റ്</string>
 	<string name="poi_fee_yes">ഉണ്ട്</string>
 	<string name="poi_fee_no">"ഇല്ല "</string>
@@ -1248,7 +1242,7 @@
 	<string name="poi_wheelchair_limited">പരിമിതം</string>
 	<string name="poi_wholesale">മൊത്തക്കച്ചവടം</string>
 
-	<string name="poi_access_private">സ്വകാര്യ വഴി</string>
+    <string name="poi_access_private">സ്വകാര്യ വഴി</string>
 	<string name="poi_access_no">തടസം</string>
 	<string name="poi_access_destination">ലക്ഷ്യസ്ഥാനത്തേക്കുള്ള വഴി</string>
 	<string name="poi_access_permissive">പെര്‍മിസ്സിവ്</string>
@@ -1256,7 +1250,7 @@
 	<string name="poi_access_delivery">സെര്‍വീസ് ആക്സസ്</string>
 	<string name="poi_access_agricultural">കൃഷിയാവശ്യങ്ങള്‍ക്ക്</string>
 
-	<string name="poi_content_silage">കണ്ടന്റ് : സിലേജ്</string>
+    <string name="poi_content_silage">കണ്ടന്റ് : സിലേജ്</string>
 	<string name="poi_content_water">കണ്ടന്റ് : ജലം</string>
 	<string name="poi_content_slurry">കണ്ടന്റ് : സ്ളറി</string>
 	<string name="poi_content_oil">കണ്ടന്റ് : എണ്ണ</string>
@@ -1273,30 +1267,30 @@
 	<string name="poi_content_salt">കണ്ടന്റ് : ഉപ്പ്</string>
 	<string name="poi_content_grain">കണ്ടന്റ് : ഗ്രെയ്ന്‍</string>
 
-	<string name="poi_nudism_yes">അനുവദനീയം</string>
+    <string name="poi_nudism_yes">അനുവദനീയം</string>
 	<string name="poi_nudism_no">നിരോധിത‌ം</string>
 	<string name="poi_nudism_obligatory">നിര്‍ബന്ധിതം</string>
 	<string name="poi_nudism_customary">പതിവ്</string>
 	<string name="poi_nudism_permissive">ആകാം</string>
 
-	<string name="poi_trade_building_supplies">വീട്നിര്‍മ്മാണസാമഗ്രികള്‍</string>
+    <string name="poi_trade_building_supplies">വീട്നിര്‍മ്മാണസാമഗ്രികള്‍</string>
 	<string name="poi_trade_plumbing">പ്ളംബിങ്ങ് സാമഗ്രികള്‍</string>
 	<string name="poi_trade_wood">തടി സാമഗ്രികള്‍</string>
 	<string name="poi_trade_agricultural_supplies">കൃഷിസാധനഗങ്ങള്‍</string>
 	<string name="poi_trade_tile">ടൈല്‍ സപ്ളൈസ്</string>
 
-	<string name="poi_population">ജനസമൂഹം</string>
+    <string name="poi_population">ജനസമൂഹം</string>
 	<string name="poi_parking_underground">ബേസ്മെന്റ്</string>
 	<string name="poi_parking_multi_storey">ബഹുനില</string>
 
-	<string name="poi_bicycle_parking_anchors">ആങ്കര്‍</string>
+    <string name="poi_bicycle_parking_anchors">ആങ്കര്‍</string>
 	<string name="poi_bicycle_parking_stands">സൈക്കിള്‍ സ്ടാന്റ്</string>
 	<string name="poi_bicycle_parking_building">പ്രെത്യേക കെട്ടിടം</string>
 	<string name="poi_bicycle_parking_shed">ഷെഡ്</string>
 	<string name="poi_bicycle_parking_bollard">ബൊല്ലാര്‍ഡ്</string>
 	<string name="poi_bicycle_parking_informal">ഇന്‍ഫോര്‍മല്‍</string>
 
-	<string name="poi_leaf_type_mixed">"ഇടകലര്‍ന്ന "</string>
+    <string name="poi_leaf_type_mixed">"ഇടകലര്‍ന്ന "</string>
 	<string name="poi_species">ഇനം</string>
 	<string name="poi_genus">ഇനം</string>
 	<string name="poi_trees_olive">ഒലീവ്</string>
@@ -1323,10 +1317,10 @@
 	<string name="poi_trees_coffea">കാപ്പിച്ചെടി</string>
 	<string name="poi_trees_pomegranate">പൊമൊഗ്രാനെറ്റ്</string>
 
-	<string name="poi_urban">നാഗരികം</string>
+    <string name="poi_urban">നാഗരികം</string>
 	<string name="poi_rural">ഗ്രാമീണം</string>
 
-	<string name="poi_enforcement_traffic_signals">നിയന്ത്രണം: സ്ടോപ് ലൈറ്റ്</string>
+    <string name="poi_enforcement_traffic_signals">നിയന്ത്രണം: സ്ടോപ് ലൈറ്റ്</string>
 	<string name="poi_enforcement_maxspeed">നിയന്ത്രണം: പരമാവധി വേഗം</string>
 	<string name="poi_enforcement_maxheight">നിയന്ത്രണം: പരമാവധി ഉയരം</string>
 	<string name="poi_enforcement_mindistance">നിയന്ത്രണം: കുറഞ്ഞ ദൂരം</string>
@@ -1334,7 +1328,7 @@
 	<string name="poi_enforcement_access">നിയന്ത്രണം: വഴി</string>
 	<string name="poi_enforcement_toll">നിയന്ത്രണം: ടോള്‍</string>
 
-	<string name="poi_animal_shelter">അനിമല്‍ ഷെല്‍ട്ടര്‍</string>
+    <string name="poi_animal_shelter">അനിമല്‍ ഷെല്‍ട്ടര്‍</string>
 	<string name="poi_animal_shelter_dog">ഷെല്ട്ടര്‍:നായ</string>
 	<string name="poi_animal_shelter_cat">ഷെല്ട്ടര്‍:പൂച്ച</string>
 	<string name="poi_animal_shelter_dog_cat">"ഷെല്ട്ട: പട്ടി, പൂച്ച "</string>
@@ -1342,9 +1336,9 @@
 	<string name="poi_backrest_yes">"ബാക്ക് റെസ്ട് : ഉണ്ട് "</string>
 	<string name="poi_backrest_no">"ബാക്ക് റെസ്ട് :ഇല്ല "</string>
 
-	<string name="poi_intermittent">"ഇടവിട്ടുള്ള "</string>
+    <string name="poi_intermittent">"ഇടവിട്ടുള്ള "</string>
 
-	<string name="poi_building">കെട്ടിടം</string>
+    <string name="poi_building">കെട്ടിടം</string>
 	<string name="poi_generator_source_coal">"ഊര്‍ജ്ജ ഉറവിടം:കല്ക്കരി "</string>
 	<string name="poi_generator_source_gas">ഊര്‍ജ്ജ ഉറവിടം:ഗ്യാസ്</string>
 	<string name="poi_generator_source_nuclear">ഊര്‍ജ്ജ ഉറവിടം: അണുശക്തി</string>
@@ -1355,25 +1349,25 @@
 	<string name="poi_generator_source_oil">ഊര്‍ജ്ജ ഉറവിടം:എണ്ണ</string>
 	<string name="poi_generator_source_diesel">ഊര്‍ജ്ജ ഉറവിടം: ഡീസല്‍</string>
 
-	<string name="poi_int_name">അന്താരാഷ്ട്ര നാമം</string>
+    <string name="poi_int_name">അന്താരാഷ്ട്ര നാമം</string>
 	<string name="poi_nat_name">നാമം(ദേശീയം)</string>
 	<string name="poi_reg_name">_പേര്:(റീജിയണല്‍</string>
 	<string name="poi_loc_name">പ്രാദേശിക നാമം</string>
 	<string name="poi_old_name">പഴയ പേര്</string>
 	<string name="poi_alt_name">ഇതരനാമം</string>
 
-	<string name="poi_pump_manual">മാനുവല്‍</string>
+    <string name="poi_pump_manual">മാനുവല്‍</string>
 	<string name="poi_pump_powered">പവേര്‍ഡ്</string>
 	<string name="poi_pump_no">"പമ്പില്ല "</string>
 	<string name="poi_pump_yes">ഉണ്ട്</string>
 
-	<string name="poi_water_characteristic_mineral">മിനറ</string>
+    <string name="poi_water_characteristic_mineral">മിനറ</string>
 	<string name="poi_water_characteristic_mud">ചെളി</string>
 	<string name="poi_water_characteristic_sulfuric">സള്‍ഫ്യൂരിക്</string>
 
-	<string name="poi_cuisine">ഭക്ഷണമെനു</string>
+    <string name="poi_cuisine">ഭക്ഷണമെനു</string>
 
-	<string name="poi_information_guidepost">ഗൈഡ് പോസ്ട്</string>
+    <string name="poi_information_guidepost">ഗൈഡ് പോസ്ട്</string>
 	<string name="poi_information_board">ബോര്‍ഡ്</string>
 	<string name="poi_information_map">മാപ്പ്</string>
 	<string name="poi_information_office">"ഓഫീസ് "</string>
@@ -1468,7 +1462,7 @@
 	<string name="poi_internet_access_fee_yes">ഇന്റെര്‍നെറ്റ്- പേയ്ഡ്</string>
 	<string name="poi_internet_access_fee_no">ഇന്റെര്‍നെറ്റ് - ഫ്രീ</string>
 
-	<string name="poi_diet_vegetarian_only">വെജിറ്റെറിയന്‍ ഭക്ഷണം മാത്ര‌ം</string>
+    <string name="poi_diet_vegetarian_only">വെജിറ്റെറിയന്‍ ഭക്ഷണം മാത്ര‌ം</string>
 	<string name="poi_diet_vegetarian_yes">വെജിറ്റെറിയന്‍ ഭക്ഷണം</string>
 	<string name="poi_diet_vegetarian_no">വെജിറ്റെറിയന്‍ ഭക്ഷണം ഇല്ല</string>
 	<string name="poi_diet_vegetarian_few">വെജിറ്റെറിയന്‍ ഭക്ഷണം : അല്പം</string>
@@ -1489,24 +1483,24 @@
 	<string name="poi_diet_lactose_free_no">"പാലുപയോഗിക്കാത്ത ഭക്ഷണം ഇല്ല "</string>
 	<string name="poi_diet_pescetarian_yes">"മത്സ്യോത്പന്ന  ഭക്ഷണം"</string>
 
-	<string name="poi_drive_in_yes">ആണ്</string>
+    <string name="poi_drive_in_yes">ആണ്</string>
 	<string name="poi_drive_in_no">ഡ്രൈവ് ഇന്‍ ഇല്ല</string>
 	<string name="poi_drive_through_yes">ആണ്</string>
 	<string name="poi_drive_through_no">ഡ്രൈവ് ത്രൂ അല്ല</string>
 
-	<string name="poi_brewery_additional">ബ്രൂ‌വറിയുടെ പേര്</string>
+    <string name="poi_brewery_additional">ബ്രൂ‌വറിയുടെ പേര്</string>
 	<string name="poi_microbrewery_yes">മൈക്രോബ്രൂവറി</string>
 	<string name="poi_microbrewery_no">മൈക്രോ‌ബ്രൂ‌വറി ഇല്ല</string>
 
-	<string name="poi_takeaway_yes">പാര്‍സല്‍</string>
+    <string name="poi_takeaway_yes">പാര്‍സല്‍</string>
 	<string name="poi_takeaway_no">പാര്‍സല്‍ ഇല്ല</string>
 	<string name="poi_takeaway_only">പാര്‍സല്‍ മാത്രം</string>
 
-	<string name="poi_delivery_yes">വിതരണം</string>
+    <string name="poi_delivery_yes">വിതരണം</string>
 	<string name="poi_delivery_no">വിതരണം ഇല്ല</string>
 	<string name="poi_delivery_only">വിതരണം മാത്രം</string>
 
-	<string name="poi_outdoor_seating_yes">പുറത്ത് സീറ്റിങ്ങ്:ഉണ്ട്</string>
+    <string name="poi_outdoor_seating_yes">പുറത്ത് സീറ്റിങ്ങ്:ഉണ്ട്</string>
 	<string name="poi_outdoor_seating_no">"ഔട് ഡോര്‍ സീറ്റിങ്ങില്ല "</string>
 	<string name="poi_outdoor_seating_terrace">ഔട്ട്ഡോര്‍ സീറ്റിങ്ങ്:ടെറസ്സ്</string>
 	<string name="poi_outdoor_seating_sidewalk">നടപ്പാതയിലെ ഇരിപ്പിടങ്ങള്‍</string>
@@ -1514,13 +1508,13 @@
 	<string name="poi_outdoor_seating_garden">ഉദ്യാനം</string>
 	<string name="poi_outdoor_seating_patio">പേഷിയൊയിലെ ഇരുപ്പിടങ്ങള്‍</string>
 
-	<string name="poi_cocktails_yes">ഉണ്ട്</string>
+    <string name="poi_cocktails_yes">ഉണ്ട്</string>
 
-	<string name="poi_second_hand_yes">സെക്കന്റ് ഹാന്ഡ് സാധനങ്ങള്‍</string>
+    <string name="poi_second_hand_yes">സെക്കന്റ് ഹാന്ഡ് സാധനങ്ങള്‍</string>
 	<string name="poi_second_hand_no">"സെക്കന്റ് ഹാന്ഡ് സാധനങ്ങളില്ല "</string>
 	<string name="poi_second_hand_only">സെക്കന്റ് ഹാന്ഡ് സാധനങ്ങള്‍ മാത്രം</string>
 
-	<string name="poi_service_parts">സ്പേയര്‍ പാര്‍ട്സ്</string>
+    <string name="poi_service_parts">സ്പേയര്‍ പാര്‍ട്സ്</string>
 	<string name="poi_service_dealer">ഡീലര്‍</string>
 	<string name="poi_service_repair">റിപ്പയര്‍</string>
 	<string name="poi_service_repair_no">റിപ്പയര്‍ ഇല്ല</string>
@@ -1535,10 +1529,10 @@
 	<string name="poi_brushless_no">ബ്രഷുള്ളത്</string>
 	<string name="poi_car_wash_no">"കാര്‍ വാഷ് ഇല്ല "</string>
 
-	<string name="poi_aeroway_fuel">വിമാന ഇന്ധനം നിറക്കുന്ന സ്ഥലം</string>
+    <string name="poi_aeroway_fuel">വിമാന ഇന്ധനം നിറക്കുന്ന സ്ഥലം</string>
 	<string name="poi_public_bath">പൊതു കുളിയിടം</string>
 
-	<string name="poi_male_yes">പുരുഷമ്മാര്‍</string>
+    <string name="poi_male_yes">പുരുഷമ്മാര്‍</string>
 	<string name="poi_male_no">"പുരുഷമ്മാര്‍ക്കു പ്രവേശനമില്ല "</string>
 	<string name="poi_female_yes">സ്ത്രീകള്‍</string>
 	<string name="poi_female_no">"സ്ത്രീകള്‍ക്ക്  പ്രവേശനമില്ല "</string>
@@ -1553,13 +1547,13 @@
 	<string name="poi_toilets_access_community">ടോയിലെറ്റ് : കമ്മ്യൂണിറ്റി</string>
 	<string name="poi_toilets_access_public">പബ്ളിക് ടോയിലെറ്റ്</string>
 
-	<string name="poi_diaper_yes">ഡയപ്പര്‍ ചേഞ്ച് ചെയ്യാനുള്ള മേശ</string>
+    <string name="poi_diaper_yes">ഡയപ്പര്‍ ചേഞ്ച് ചെയ്യാനുള്ള മേശ</string>
 	<string name="poi_diaper_no">ഡയപ്പര്‍ ചേഞ്ച് ചെയ്യാനുള്ള മേശ ഇല്ല</string>
 	<string name="poi_diaper_room">ഡയപ്പര്‍ ചേഞ്ച് ചെയ്യാനുള്ള റൂം</string>
 
-	<string name="poi_maxstay">"സമയ നിയന്ത്രിത പാര്‍ക്കിങ്ങ് "</string>
+    <string name="poi_maxstay">"സമയ നിയന്ത്രിത പാര്‍ക്കിങ്ങ് "</string>
 
-	<string name="poi_vending_parking_tickets">പാര്‍ക്കിങ്ങ് ടിക്കറ്റ്സ്</string>
+    <string name="poi_vending_parking_tickets">പാര്‍ക്കിങ്ങ് ടിക്കറ്റ്സ്</string>
 	<string name="poi_vending_cigarettes">സിഗറെറ്റ്</string>
 	<string name="poi_vending_excrement_bags">എക്സ്ക്രിമെന്റ് ബാഗ്</string>
 	<string name="poi_vending_public_transport_tickets">പൊതു ഗതാഗത ടിക്കറ്റുകള്‍</string>
@@ -1594,9 +1588,9 @@
 	<string name="poi_vending_ice_cream">ഐസ്ക്രീം</string>
 	<string name="poi_vending_sim_cards">സിം കാര്‍ഡ്സ്</string>
 
-	<string name="poi_branch">ബ്രാഞ്ച്</string>
+    <string name="poi_branch">ബ്രാഞ്ച്</string>
 
-	<string name="poi_memorial_war">യുദ്ധ സ്മാരകം</string>
+    <string name="poi_memorial_war">യുദ്ധ സ്മാരകം</string>
 	<string name="poi_memorial_plaque">ഫലകം</string>
 	<string name="poi_memorial_statue">പ്രതിമ</string>
 	<string name="poi_memorial_stone">ശില</string>
@@ -1608,7 +1602,7 @@
 	<string name="poi_inscription">മുദ്രണം</string>
 	<string name="poi_historic_quarry">ചരിത്രപ്രാധാന്യമുള്ള ഖനി</string>
 
-	<string name="poi_resource_aggregate">സംഗ്രഹം</string>
+    <string name="poi_resource_aggregate">സംഗ്രഹം</string>
 	<string name="poi_resource_antimony">ആന്റിമണി</string>
 	<string name="poi_resource_asbestos">ആസ്ബെസ്ടോസ്</string>
 	<string name="poi_resource_barite">ബരൈറ്റ്</string>
@@ -1659,7 +1653,7 @@
 	<string name="poi_resource_zinc">സിങ്ക്</string>
 	<string name="poi_resource_zircon">സിര്‍ക്കോണ്‍</string>
 
-	<string name="poi_wetland_wet_meadow">പുല്‍ത്തകിടി</string>
+    <string name="poi_wetland_wet_meadow">പുല്‍ത്തകിടി</string>
 	<string name="poi_wetland_marsh">"ചതുപ്പ് "</string>
 	<string name="poi_wetland_saltmarsh">"ഉപ്പ് വെള്ളം കയറുന്ന ചതുപ്പ് "</string>
 	<string name="poi_wetland_mangrove">കണ്ടല്‍വൃക്ഷം</string>
@@ -1667,21 +1661,21 @@
 	<string name="poi_wetland_fen">"ചതുപ്പ് "</string>
 	<string name="poi_wetland_mud">ചെളി</string>
 
-	<string name="poi_beach_sand">മണല്‍</string>
+    <string name="poi_beach_sand">മണല്‍</string>
 	<string name="poi_beach_shingle">ഷിങ്കിള്‍</string>
 	<string name="poi_beach_rocky">പാറ</string>
 
-	<string name="poi_chimney">ചിമ്മെനി</string>
+    <string name="poi_chimney">ചിമ്മെനി</string>
 	<string name="poi_palm">പന</string>
 	<string name="poi_cypress">സൈപ്രസ്</string>
 	<string name="poi_flagpole">പതാകമരം</string>
 
-	<string name="poi_bench_yes">ഉണ്ട്</string>
+    <string name="poi_bench_yes">ഉണ്ട്</string>
 	<string name="poi_bench_no">ബെഞ്ചില്ല</string>
 	<string name="poi_bin_yes">ബാസ്കറ്റ്</string>
 	<string name="poi_bin_no">"ബാസ്കറ്റ് ഇല്ല "</string>
 
-	<string name="poi_shelter_type_public_transport">പൊതു ഗതാഗത സംവിധാനം</string>
+    <string name="poi_shelter_type_public_transport">പൊതു ഗതാഗത സംവിധാനം</string>
 	<string name="poi_shelter_type_picnic_shelter">"പിക്നിക് "</string>
 	<string name="poi_shelter_type_weather_shelter">കാലവസ്ഥ</string>
 	<string name="poi_shelter_type_lean_to">ഷെഡ്</string>
@@ -1694,7 +1688,7 @@
 	<string name="poi_shelter_type_tent">ഷെല്ട്ടര്‍:ടെന്റ്</string>
 	<string name="poi_shelter_type_abandoned">"ഉപേക്ഷിക്കപ്പെട്ട ഷെല്‍ട്ടെര്‍ "</string>
 
-	<string name="poi_internet_access_type_wlan">വൈ-ഫൈ</string>
+    <string name="poi_internet_access_type_wlan">വൈ-ഫൈ</string>
 	<string name="poi_internet_access_type_terminal">ഇന്റര്‍നെറ്റ് ടെര്‍മിനല്‍</string>
 	<string name="poi_internet_access_type_wired">വയര്‍ഡ്</string>
 	<string name="poi_internet_access_type_public">ഇന്റര്‍നെറ്റ് (പബ്ളിക്ക്)</string>
@@ -1702,12 +1696,12 @@
 	<string name="poi_internet_access_type_no">"ഇന്റെര്‍നെറ്റ്  ഇല്ല"</string>
 	<string name="poi_internet_access_type_yes">"ഇന്റെര്‍നെറ്റ് സേവനം ഉണ്ട് "</string>
 
-	<string name="poi_maxwidth">പരമാവധി വീതി</string>
+    <string name="poi_maxwidth">പരമാവധി വീതി</string>
 	<string name="poi_iata">ഐ എ ടി എ കോഡ്</string>
 	<string name="poi_icao">ഐ സി എ ഒ കോഡ്</string>
 	<string name="poi_faa">എഫ് എ എ കോഡ്</string>
-	
-	<string name="poi_artwork_type_sculpture">കലാസൃഷ്ടി: ശില്‍പം</string>
+
+    <string name="poi_artwork_type_sculpture">കലാസൃഷ്ടി: ശില്‍പം</string>
 	<string name="poi_artwork_type_statue">കലാസൃഷ്ടി:പ്രതിമ</string>
 	<string name="poi_artwork_type_mural">കലാസൃഷ്ടി: ചുവര്‍ച്ചിത്രം</string>
 	<string name="poi_artwork_type_architecture">കലാസൃഷ്ടി: വാസ്തുവിദ്യ</string>
@@ -1721,11 +1715,11 @@
 	<string name="poi_artwork_type_stele">കലാസൃഷ്ടി:ഫലകം</string>
 	<string name="poi_artwork_type_fountain">കലാസൃഷ്ടി: ജലധാരാ</string>
 
-	<string name="poi_width">വീതി</string>
+    <string name="poi_width">വീതി</string>
 
-	<string name="poi_architect_name">ശില്പി</string>
+    <string name="poi_architect_name">ശില്പി</string>
 
-	<string name="poi_architecture_modern">വാസ്തുവിദ്യ: മോഡേണ്‍</string>
+    <string name="poi_architecture_modern">വാസ്തുവിദ്യ: മോഡേണ്‍</string>
 	<string name="poi_architecture_stalinist_neoclassicism">വാസ്തുവിദ്യ: സ്റ്റാലിനിസ്റ്റ് നീയൊക്ളാസിസം</string>
 	<string name="poi_architecture_eclectic">വാസ്തുവിദ്യ : എക്ലെടിക്</string>
 	<string name="poi_architecture_new_objectivity">വാസ്തുവിദ്യ : ന്യൂ ഓബ്ജെക്ടിവിറ്റി</string>
@@ -1745,7 +1739,7 @@
 	<string name="poi_architecture_renaissance">"വാസ്തുവിദ്യ :  റിനായ്സെന്‍സ്"</string>
 	<string name="poi_architecture_romanesque">വാസ്തുവിദ്യ: റോമനെസ്ക്യു</string>
 
-	<string name="poi_tunnel_waterway">വാട്ടര്‍ ടണല്‍</string>
+    <string name="poi_tunnel_waterway">വാട്ടര്‍ ടണല്‍</string>
 	<string name="poi_tunnel_car">ടണല്‍</string>
 	<string name="poi_tunnel_pedestrian">ടണല്‍ (നടവഴി)</string>
 	<string name="poi_tunnel_railway">റെയില്‍വേ ടണല്‍</string>
@@ -1776,10 +1770,10 @@
 	<string name="poi_bridge_movable_transporter">നീക്കാവുന്ന പാലം ഇനം : ട്രാന്‍സ്പോര്‍ട്ടര്‍</string>
 	<string name="poi_bridge_movable_retractable">നീക്കാവുന്ന പാലം ഇനം : മടക്കാവുന്നത്</string>
 
-	<string name="poi_lit_yes">ലൈറ്റ് :ഉണ്ട്</string>
+    <string name="poi_lit_yes">ലൈറ്റ് :ഉണ്ട്</string>
 	<string name="poi_lit_no">"ലൈറ്റ് : ഇല്ല "</string>
 
-	<string name="poi_surface_unpaved">പ്ര‌തലം : പരുക്കന്‍</string>
+    <string name="poi_surface_unpaved">പ്ര‌തലം : പരുക്കന്‍</string>
 	<string name="poi_surface_paved">"പ്ര‌തലം : ടാര്‍ ചെയ്തത് "</string>
 	<string name="poi_surface_asphalt">"പ്ര‌തലം : ടാര്‍ ചെയ്തത് "</string>
 	<string name="poi_surface_concrete">പ്ര‌തലം : കോണ്‍ക്രീറ്റ്</string>
@@ -1803,7 +1797,7 @@
 	<string name="poi_surface_salt">"പ്ര‌തലം:ഉപ്പ് "</string>
 	<string name="poi_surface_snow">"പ്ര‌തലം:മഞ്ഞ് "</string>
 
-	<string name="poi_route_bus_ref">ബസ്</string>
+    <string name="poi_route_bus_ref">ബസ്</string>
 	<string name="poi_route_share_taxi_ref">ഷെയര്‍ ടാക്സി</string>
 	<string name="poi_route_trolleybus_ref">ട്രോളിബസ്</string>
 	<string name="poi_route_tram_ref">"ട്രാം "</string>
@@ -1813,13 +1807,13 @@
 	<string name="poi_route_funicular_ref">കേബിള്‍കാര്‍</string>
 	<string name="poi_route_ferry_ref">"ഫെറി "</string>
 
-	<string name="poi_route_railway_ref">തീവണ്ടിപ്പാത</string>
+    <string name="poi_route_railway_ref">തീവണ്ടിപ്പാത</string>
 
-	<string name="poi_historic_yes">"ചരിത്രപ്രാധാന്യമുള്ള വസ്തു "</string>
+    <string name="poi_historic_yes">"ചരിത്രപ്രാധാന്യമുള്ള വസ്തു "</string>
 	<string name="poi_surveillance_yes">"സര്‍വേയിലന്‍സ് : ഉണ്ട് "</string>
 	<string name="poi_shop_additional_yes">ഷോപ്പിലുള്ളത്</string>
 
-	<string name="poi_service_bicycle_retail_yes">റീടെയില്‍</string>
+    <string name="poi_service_bicycle_retail_yes">റീടെയില്‍</string>
 	<string name="poi_service_bicycle_retail_no">സൈക്കിള്‍ വില്‍പനയില്ല</string>
 	<string name="poi_service_bicycle_repair_yes">സൈക്കിള്‍ റിപ്പെയര്‍</string>
 	<string name="poi_service_bicycle_repair_no">"സൈക്കിള്‍ റിപ്പെയര്‍ ഇല്ല "</string>
@@ -1836,9 +1830,9 @@
 	<string name="poi_service_bicycle_second_hand_yes">സെക്കന്റ് ഹാന്റ് സൈക്കിള്‍ വില്‍പന</string>
 	<string name="poi_service_bicycle_second_hand_no">"സെക്കന്റ് ഹാന്റ് സൈക്കിള്‍ വില്‍പന ഇല്ല "</string>
 
-	<string name="poi_wildlife_hide">വന്യമൃഗനിരീഷണസ്ഥലം</string>
+    <string name="poi_wildlife_hide">വന്യമൃഗനിരീഷണസ്ഥലം</string>
 
-	<string name="poi_training_language">ഭാക്ഷ പരിശീലനം</string>
+    <string name="poi_training_language">ഭാക്ഷ പരിശീലനം</string>
 	<string name="poi_training_music">സംഗീതപരിശീലനം</string>
 	<string name="poi_training_dance">നൃത്തപരിശീലനം</string>
 	<string name="poi_training_sport">കായിക പരിശീലനം</string>
@@ -1850,9 +1844,9 @@
 	<string name="poi_training_aviation">വ്യേമയാനപരിശീലനം</string>
 	<string name="poi_training_hairdressing">ഹെയര്‍ ഡ്രെസ്സിങ്ങ് പരിശീലനം</string>
 
-	<string name="poi_monument_yes">സ്മാരകസൗധമായ വസ്തു</string>
+    <string name="poi_monument_yes">സ്മാരകസൗധമായ വസ്തു</string>
 
-	<string name="poi_industrial_oil">തരം : എണ്ണക്കമ്പനി</string>
+    <string name="poi_industrial_oil">തരം : എണ്ണക്കമ്പനി</string>
 	<string name="poi_industrial_wellsite">തരം:കിണര്‍</string>
 	<string name="poi_industrial_factory">തരം:ഫാക്ടറി</string>
 	<string name="poi_industrial_gas">"തരം: ഗ്യാസ്  ഇന്‍ഡസ്ട്രി  "</string>
@@ -1869,7 +1863,7 @@
 	<string name="poi_industrial_port">"തരം : പോര്‍ട്ട് "</string>
 	<string name="poi_industrial_depot">തരം: സംഭരണശാല</string>
 
-	<string name="poi_note">"കുറിപ്പ് "</string>
+    <string name="poi_note">"കുറിപ്പ് "</string>
 	<string name="poi_watering_place">വാട്ടറിങ്ങ് പ്ളേസ്</string>
 	<string name="poi_animal_boarding">മൃഗങ്ങളുടെ ബോര്‍ഡിങ്ങ്</string>
 	<string name="poi_animal_boarding_dog">"നായ ബോര്‍ഡിങ്ങ് "</string>
@@ -1877,16 +1871,16 @@
 	<string name="poi_animal_boarding_dog_cat">"പൂച്ച, നായ ബോര്‍ഡിങ്ങ് "</string>
 	<string name="poi_animal_boarding_horse">കുതിര ബോര്‍ഡിങ്ങ്</string>
 
-	<string name="poi_historic_aircraft">"ചരിത്രപ്രധാനമായ  വിമാനം"</string>
+    <string name="poi_historic_aircraft">"ചരിത്രപ്രധാനമായ  വിമാനം"</string>
 
-	<string name="poi_honey">തേന്‍ കട</string>
+    <string name="poi_honey">തേന്‍ കട</string>
 
-	<string name="poi_elevator_yes">എലിവേറ്റര്‍</string>
+    <string name="poi_elevator_yes">എലിവേറ്റര്‍</string>
 	<string name="poi_elevator_no">"എലിവേറ്റര്‍ ഇല്ല "</string>
 
-	<string name="poi_technical_monument">സാങ്കേതിക സ്മാരകസൗധം</string>
+    <string name="poi_technical_monument">സാങ്കേതിക സ്മാരകസൗധം</string>
 
-	<string name="poi_office_camping">"ക്യാമ്പിങ്ങ്  ഓഫീസ്"</string>
+    <string name="poi_office_camping">"ക്യാമ്പിങ്ങ്  ഓഫീസ്"</string>
 	<string name="poi_model_aerodrome">വിമാനത്താവള മോഡല്‍</string>
 	<string name="poi_guide">ഗൈഡ് ഓഫീസ്</string>
 	<string name="poi_quango">ഓട്ടോണോമസ് ഗവണ്മെന്റ് ഇന്സ്ടിറ്റൂഷന്‍</string>
@@ -1897,21 +1891,21 @@
 	<string name="poi_parish">പാരിഷ് ഓഫീസ്</string>
 	<string name="poi_publisher">പബ്ളിഷിങ്ങ് ഓഫീസ്</string>
 
-	<string name="poi_fuel_91ul">വ്യോമ ഇന്ധനം 91 അണ്‍ലെഡഡ്</string>
+    <string name="poi_fuel_91ul">വ്യോമ ഇന്ധനം 91 അണ്‍ലെഡഡ്</string>
 	<string name="poi_fuel_100ll">വ്യോമ ഇന്ധനം 100 ലോലെഡ്</string>
 	<string name="poi_fuel_autogas">പെട്രോള്‍</string>
 	<string name="poi_fuel_jeta1">വ്യോമ ഇന്ധനം ജെറ്റ് എ-1</string>
 	<string name="poi_fuel_adblue">അഡ്ബ്ളൂ ഇന്ധനം</string>
 
-	<string name="poi_fuel_wood">ഇന്ധനം: വിറക്</string>
+    <string name="poi_fuel_wood">ഇന്ധനം: വിറക്</string>
 	<string name="poi_fuel_charcoal">ഇന്ധനം: ചാര്‍ക്കോള്‍</string>
 	<string name="poi_fuel_coal">ഇന്ധനം : കല്ക്കരി</string>
 
-	<string name="poi_street_lamp">"തെരുവ് വിളക്ക് "</string>
+    <string name="poi_street_lamp">"തെരുവ് വിളക്ക് "</string>
 
-	<string name="poi_escape_lane">എസ്കേപ് ലൈന്‍</string>
+    <string name="poi_escape_lane">എസ്കേപ് ലൈന്‍</string>
 
-	<string name="poi_crop_rice">"കൃഷി : നെല്ല് "</string>
+    <string name="poi_crop_rice">"കൃഷി : നെല്ല് "</string>
 	<string name="poi_crop_grass">വിള: പുല്ല്</string>
 	<string name="poi_crop_corn">കൃഷി : ചോളം</string>
 	<string name="poi_crop_cereal">കൃഷി:സെറിയല്‍</string>
@@ -1937,11 +1931,11 @@
 	<string name="poi_crop_asparagus">കൃഷി : അസ്പരാഗസ്</string>
 	<string name="poi_crop_flowers">കൃഷി: പൂക്കള്‍</string>
 
-	<string name="poi_surveillance_indoor">സര്‍വേയിലന്‍സ് : ഇന്‍ഡോര്‍</string>
+    <string name="poi_surveillance_indoor">സര്‍വേയിലന്‍സ് : ഇന്‍ഡോര്‍</string>
 	<string name="poi_surveillance_outdoor">സര്‍വേയിലന്‍സ് : ഔട്ട്ഡോര്‍</string>
 	<string name="poi_surveillance_public">"സര്‍വേയിലന്‍സ് : പബ്ളിക് "</string>
 
-	<string name="poi_clothes_women">സ്ത്രീ‌കളുടെ</string>
+    <string name="poi_clothes_women">സ്ത്രീ‌കളുടെ</string>
 	<string name="poi_clothes_underwear">"അടിവസ്ത്രങ്ങള്‍ "</string>
 	<string name="poi_clothes_men">പുരുഷന്‍മാരുടെ</string>
 	<string name="poi_clothes_wedding">വിവാഹവസ്ത്രങ്ങള്‍</string>
@@ -1965,15 +1959,15 @@
 	<string name="poi_clothes_dance">നൃത്തവേഷങ്ങള്‍</string>
 	<string name="poi_clothes_military">മിലിട്ടറി</string>
 
-	<string name="poi_historic_milestone">ചരിത്രനേട്ടം</string>
+    <string name="poi_historic_milestone">ചരിത്രനേട്ടം</string>
 
-	<string name="poi_shoes_children">കുട്ടികളുടെ</string>
+    <string name="poi_shoes_children">കുട്ടികളുടെ</string>
 	<string name="poi_shoes_women">സ്ത്രീ‌കളുടെ</string>
 	<string name="poi_shoes_sport">"സ്പോര്‍ട്സ് "</string>
 	<string name="poi_shoes_men">പുരുഷന്‍മാരുടെ</string>
 	<string name="poi_shoes_orthopedic">"ഓര്‍ത്തോപീഡിക് "</string>
 
-	<string name="poi_historic_manor">ഹിസ്ടോറിക്ക് മാനര്‍</string>
+    <string name="poi_historic_manor">ഹിസ്ടോറിക്ക് മാനര്‍</string>
 	<string name="poi_castle_type_stately">"പ്രൗഡഗംഭീരമായ കോട്ട "</string>
 	<string name="poi_castle_type_defensive">സുരക്ഷ കോട്ട</string>
 	<string name="poi_castle_type_fortress">പ്രതിരോധ കോട്ട</string>
@@ -1983,16 +1977,16 @@
 	<string name="poi_castle_type_castrum">കോട്ട : കാസ്ട്രം</string>
 	<string name="poi_castle_type_shiro">കോട്ട :ഷിറോ</string>
 
-	<string name="poi_massage_thai">തായി</string>
+    <string name="poi_massage_thai">തായി</string>
 	<string name="poi_massage_sexual">സെക്സ്വല്‍</string>
 	<string name="poi_massage_chinese">ചൈനീസ്</string>
 	<string name="poi_massage_yes">മസ്സാജ് സേവനങ്ങള്‍</string>
 	<string name="poi_massage_therapeutic">ചികിത്സ</string>
 
-	<string name="poi_sauna_yes">സോന സേവനം</string>
+    <string name="poi_sauna_yes">സോന സേവനം</string>
 	<string name="poi_solarium_yes">സൊളെരിയം സേവനം</string>
 
-	<string name="poi_tents_yes">അനുവദനീയം</string>
+    <string name="poi_tents_yes">അനുവദനീയം</string>
 	<string name="poi_tents_no">ടെന്റ് അനുവദനീയമല്ല</string>
 	<string name="poi_openfire_yes">തീ അനുവദനീയം</string>
 	<string name="poi_openfire_no">തീ അനുവദനീയമല്ല</string>
@@ -2016,23 +2010,22 @@
 	<string name="poi_impromptu_no">"ഇമ്പ്രോപ്ടു അല്ല "</string>
 	<string name="poi_sanitary_dump_station_yes">സാനിട്ടറി ഡമ്പ് സ്ടേഷന്‍</string>
 	<string name="poi_sanitary_dump_station_no">"സാനിട്ടറി ഡമ്പ് സ്ടേഷന്‍ അല്ല "</string>
-	<string name="poi_sanitary_dump_station_customers">സാനിട്ടറി ഡമ്പ് സ്ടേഷന്‍ : ഇടപാടുകാര്‍ക്ക് മാത്രം</string>
-	<string name="poi_power_supply_yes">ഉണ്ട്</string>
+    <string name="poi_power_supply_yes">ഉണ്ട്</string>
 	<string name="poi_power_supply_no">"പവര്‍ സപ്ളൈ ഇല്ല "</string>
 	<string name="poi_power_supply_cee_17_blue">പവര്‍ സപ്ളൈ (സോക്കറ്റ്): CEE 17 ബ്ളൂ</string>
 	<string name="poi_power_supply_cee_7_4">സോക്കറ്റ് : CEE 7/4 ( 3 പിന്‍ ജര്‍മന്‍)</string>
 	<string name="poi_power_supply_cee_7_5">സോക്കറ്റ് : CEE 7/4 ( 3 പിന്‍ ഫ്രെഞ്ച് )</string>
 	<string name="poi_power_supply_nema_5_15">സോക്കറ്റ് : NEMA 5-15 ( 3 പിന്‍ അമേരിക്കന്‍)</string>
 
-	<string name="poi_capacity_tents">ടെന്റുകളുടെ കൂടിയ എണ്ണം</string>
+    <string name="poi_capacity_tents">ടെന്റുകളുടെ കൂടിയ എണ്ണം</string>
 	<string name="poi_capacity_caravans">കാരവാനുകളുടെ കൂടിയ എണ്ണം</string>
 	<string name="poi_dog_yes">നായകള്‍ അനുവദനീയം</string>
 	<string name="poi_dog_no">"നായകള്‍ അനുവദനീയമല്ല "</string>
 
-	<string name="poi_refugee_yes">അഭയാര്‍ത്ഥികള്‍ക്കുള്ള സൗകര്യങ്ങള്‍</string>
+    <string name="poi_refugee_yes">അഭയാര്‍ത്ഥികള്‍ക്കുള്ള സൗകര്യങ്ങള്‍</string>
 	<string name="poi_refugee_no">"അഭയാര്‍ത്ഥികള്‍ പാടില്ല "</string>
 
-	<string name="poi_social_facility_group_home">സാമൂഹികസൗകര്യം: ഗ്രൂപ് ഹോം</string>
+    <string name="poi_social_facility_group_home">സാമൂഹികസൗകര്യം: ഗ്രൂപ് ഹോം</string>
 	<string name="poi_social_facility_assisted_living">അസിസ്റ്റ്ഡ് ലിവിങ്ങ്</string>
 	<string name="poi_social_facility_outreach">ഔട്ട് റീച്ച്</string>
 	<string name="poi_social_facility_food_bank">ഭക്ഷണവിതരണം</string>
@@ -2041,7 +2034,7 @@
 	<string name="poi_social_facility_workshop">പണിശാല</string>
 	<string name="poi_social_facility_day_care">ഡേ കെയര്‍</string>
 
-	<string name="poi_social_facility_for_senior">വൃദ്ധര്‍</string>
+    <string name="poi_social_facility_for_senior">വൃദ്ധര്‍</string>
 	<string name="poi_social_facility_for_child">കുട്ടികള്‍</string>
 	<string name="poi_social_facility_for_orphan">അനാഥര്‍</string>
 	<string name="poi_social_facility_for_disabled">അംഗപരിമിതര്‍</string>
@@ -2055,7 +2048,7 @@
 	<string name="poi_social_facility_for_diseased">രോഗികള്‍</string>
 	<string name="poi_social_facility_for_child_juvenile">കുട്ടികള്‍, യുവാക്കള്‍</string>
 
-	<string name="poi_theatre_genre_philharmonic">ഫില്‍ഹാര്‍മോണിക് ഇനം</string>
+    <string name="poi_theatre_genre_philharmonic">ഫില്‍ഹാര്‍മോണിക് ഇനം</string>
 	<string name="poi_theatre_genre_musical">സംഗീതമയമായ</string>
 	<string name="poi_theatre_genre_drama">നാടകം</string>
 	<string name="poi_theatre_genre_opera">ഒപെറാ</string>
@@ -2067,7 +2060,7 @@
 	<string name="poi_theatre_genre_ballet">ബാലറ്റ്</string>
 	<string name="poi_theatre_genre_shadow_play">നിഴല്‍ക്കൂത്ത്</string>
 
-	<string name="poi_bandstand">"ബാന്റ് സ്ടാന്റ് "</string>
+    <string name="poi_bandstand">"ബാന്റ് സ്ടാന്റ് "</string>
 	<string name="poi_kiln">ചൂള</string>
 	<string name="poi_product_brick">ഉല്‍പന്നം: ഇഷ്ടിക</string>
 	<string name="poi_product_quicklime">ഉല്‍പന്നം: കുമ്മായം</string>
@@ -2077,11 +2070,11 @@
 	<string name="poi_product_charcoal">ഉല്‍പന്നം: ചാര്‍ക്കോള്‍</string>
 	<string name="poi_product_meat">"ഉല്‍പന്നം:  ഇറച്ചി "</string>
 
-	<string name="poi_wheelchair_description">വീല്‍ചെയര്‍ ഉപയോക്താക്കള്‍ക്കുള്ള വിവരങ്ങള്‍</string>
+    <string name="poi_wheelchair_description">വീല്‍ചെയര്‍ ഉപയോക്താക്കള്‍ക്കുള്ള വിവരങ്ങള്‍</string>
 	<string name="poi_blind_description">അന്ധര്‍ക്കുള്ള വിവരങ്ങള്‍</string>
 	<string name="poi_deaf_description">കേള്‍വിയില്ലാവര്‍ക്കുള്ള വിവരണം</string>
 
-	<string name="poi_highway_steps">സ്ടേയര്‍</string>
+    <string name="poi_highway_steps">സ്ടേയര്‍</string>
 	<string name="poi_handrail_yes">"കൈതാങ്ങി ഉണ്ട് "</string>
 	<string name="poi_handrail_no">"കൈതാങ്ങി ഇല്ല "</string>
 	<string name="poi_ramp_yes">"റാംപ് ഉണ്ട് "</string>
@@ -2099,13 +2092,13 @@
 	<string name="poi_step_condition_uneven">"ക്രമമല്ലാത്ത  പടികള്‍"</string>
 	<string name="poi_step_condition_rough">" പരുപരുത്ത  പടികള്‍"</string>
 
-	<string name="poi_cairn">കെയണ്‍</string>
+    <string name="poi_cairn">കെയണ്‍</string>
 
-	<string name="poi_memorial_fassade_decoration">ഫസ്സെഡ് ഡെക്കറേഷന്‍</string>
+    <string name="poi_memorial_fassade_decoration">ഫസ്സെഡ് ഡെക്കറേഷന്‍</string>
 	<string name="poi_defibrillator">ഡീഫിബ്രില്ലേറ്റര്‍</string>
 	<string name="poi_defibrillator_yes">ഡീഫിബ്രില്ലേറ്റര്‍ ഉണ്ട്</string>
 
-	<string name="poi_tomb_war_grave">തരം: യുദ്ധക്കല്ലറ</string>
+    <string name="poi_tomb_war_grave">തരം: യുദ്ധക്കല്ലറ</string>
 	<string name="poi_tomb_tumulus">"തരം: മണ്‍കൂന "</string>
 	<string name="poi_tomb_rock_cut">തരം: ഗുഹ</string>
 	<string name="poi_tomb_hypogeum">തരം: ഭൂഗര്‍ഭം</string>
@@ -2116,7 +2109,7 @@
 	<string name="poi_tomb_crypt">തരം:നിലവറ</string>
 	<string name="poi_tomb_pyramid">തരം: പിരമിഡ്</string>
 
-	<string name="poi_historic_civilization_ancient_roman">പുരാതന റോമന്‍ നാഗരികത (753 BC – 284 AD)</string>
+    <string name="poi_historic_civilization_ancient_roman">പുരാതന റോമന്‍ നാഗരികത (753 BC – 284 AD)</string>
 	<string name="poi_historic_civilization_nuragic">"നുറജിക്  നാഗരികത (18th c. BC – 2nd c. AD)"</string>
 	<string name="poi_historic_civilization_etruscan">എട്രുസ്കാന്‍ നാഗരികത (12th – 6th c. BC)</string>
 	<string name="poi_historic_civilization_prehistoric">"ചരിത്രാതീതകാലത്തുള്ള  നാഗരികത"</string>
@@ -2137,16 +2130,16 @@
 	<string name="poi_historic_civilization_minoan">മിനോവന്‍ നാഗരികത</string>
 	<string name="poi_historic_civilization_tiahuanacota">ടിയാഹുവാനകോട്ടാ നാഗരികത</string>
 
-	<string name="poi_animal_training">മൃഗപരിശീലനം</string>
+    <string name="poi_animal_training">മൃഗപരിശീലനം</string>
 	<string name="poi_animal_training_dog">ശ്വാനന്‍</string>
 	<string name="poi_animal_training_horse">കുതിര</string>
 
-	<string name="poi_horse_yes">കുതിര അനുവദനീയം</string>
+    <string name="poi_horse_yes">കുതിര അനുവദനീയം</string>
 	<string name="poi_horse_no">"കുതിര അനുവദനീയമല്ല "</string>
 	<string name="poi_animal_yes">മൃഗങ്ങള്‍ അനുവദനീയം</string>
 	<string name="poi_animal_no">"മൃഗങ്ങള്‍ അനുവദനീയമല്ല "</string>
 
-	<string name="poi_historic_period_nuragic">"ചരിത്രകാലഘട്ടം: നുറാജിക് "</string>
+    <string name="poi_historic_period_nuragic">"ചരിത്രകാലഘട്ടം: നുറാജിക് "</string>
 	<string name="poi_historic_period_stone_bronze_undetermined">ചരിത്രകാലഘട്ടം: ശിലായുഗം/ലോഹയുഗം</string>
 	<string name="poi_historic_period_bronze_age">ചരിത്രകാലഘട്ടം: പിച്ചളയുഗം</string>
 	<string name="poi_historic_period_principate">ചരിത്രകാലഘട്ടം: പ്രിന്സിപേറ്റ് (27 BC-284 AD)</string>
@@ -2180,16 +2173,16 @@
 	<string name="poi_historic_period_classical">ചരിത്രകാലഘട്ടം:ക്ളാസിക്ക(എപോക് IV, 374 AC – 900 AC))</string>
 	<string name="poi_historic_period_imperial">ചരിത്രകാലഘട്ടം:ഇമ്പീരിയല്‍ (എപോക് V, 900 AC – 1200 AC)</string>
 
-	<string name="poi_historic_era_paleolithic">ചരിത്രയുഗം:രണ്ടാം ശിലായുഗം (2.6 million years – 10000 BP)</string>
+    <string name="poi_historic_era_paleolithic">ചരിത്രയുഗം:രണ്ടാം ശിലായുഗം (2.6 million years – 10000 BP)</string>
 	<string name="poi_historic_era_mesolithic">ചരിത്രയുഗം:മധ്യശിലായുഗം (15000 വര്‍ഷം മുമ്പ് മുതല്‍)</string>
 	<string name="poi_historic_era_neolithic">ചരിത്രയുഗം:ശിലായുഗാന്ത്യം(10000 വര്‍ഷം മുമ്പ് മുതല്‍)</string>
 	<string name="poi_historic_era_chalcolithic">ചരിത്രയുഗം:ചെമ്പ് യുഗം (4000-3000 BC.)</string>
 
-	<string name="poi_historic_stone">ചരിത്രപ്രാധാന്യമുള്ള ശില</string>
+    <string name="poi_historic_stone">ചരിത്രപ്രാധാന്യമുള്ള ശില</string>
 	<string name="poi_stone_type_conciliation_cross">തരം :അനുരജ്ഞന കുരിശ്</string>
 	<string name="poi_stone_type_coat_of_arms">തരം: രാജമുദ്ര</string>
 
-	<string name="poi_material_wood">മെറ്റീരിയല്‍ : തടി</string>
+    <string name="poi_material_wood">മെറ്റീരിയല്‍ : തടി</string>
 	<string name="poi_material_metal">മെറ്റീരിയല്‍ : ലോഹം</string>
 	<string name="poi_material_reinforced_concrete">മെറ്റീരിയല്‍ : കോണ്‍ക്രീറ്റ് (റീ ഇന്‍ഫോര്‍സ്ഡ്)</string>
 	<string name="poi_material_concrete">"മെറ്റീരിയല്‍ : കോണ്‍ക്രീറ്റ് "</string>
@@ -2209,7 +2202,7 @@
 	<string name="poi_material_marble">മെറ്റീരിയല്‍ : മാര്‍ബിള്‍</string>
 	<string name="poi_material_aluminium">മെറ്റീരിയല്‍ :അലുമിനിയം</string>
 
-	<string name="poi_site_type_megalith">"പുരതന പാറകൊണ്ടുള്ള നിര്‍മ്മിതി "</string>
+    <string name="poi_site_type_megalith">"പുരതന പാറകൊണ്ടുള്ള നിര്‍മ്മിതി "</string>
 	<string name="poi_site_type_tumulus">"മണ്‍കൂന "</string>
 	<string name="poi_site_type_fortification">മതില്‍</string>
 	<string name="poi_site_type_settlement">സെറ്റില്‍മെന്റ്</string>
@@ -2225,38 +2218,38 @@
 	<string name="poi_building_type_synagogue">സിനഗോഗ്</string>
 	<string name="poi_building_type_shrine">കുരിശുപള്ളി</string>
 
-	<string name="poi_cross">കുരിശ്</string>
+    <string name="poi_cross">കുരിശ്</string>
 	<string name="poi_summit_cross">മലമുകളിലെ കുരിശ്</string>
 
-	<string name="poi_prison_camp">പഴയ തടവറ</string>
+    <string name="poi_prison_camp">പഴയ തടവറ</string>
 	<string name="poi_concentration_camp">"കോണ്‍സെന്റ്രേഷന്‍ ക്യാംപ് "</string>
 	<string name="poi_pow_camp">"പി ഓ ഡബ്ളൂ ക്യാമ്പ് "</string>
 	<string name="poi_labor_camp">"ലേബര്‍ ക്യാമ്പ് "</string>
 	<string name="poi_concentration_camp_nazism">തരം: നാസി</string>
 	<string name="poi_concentration_camp_gulag">തരം: ഗുലാഗ്</string>
 
-	<string name="poi_temperature">താപനില</string>
+    <string name="poi_temperature">താപനില</string>
 	<string name="poi_bathing_yes">കുളിക്കാനുള്ള സൗകര്യം</string>
 	<string name="poi_bathing_no">"കുളിക്കാനുള്ള സൗകര്യമില്ല "</string>
 
-	<string name="poi_boat_storage">ബോട്ട് സ്ടോറേജ്</string>
+    <string name="poi_boat_storage">ബോട്ട് സ്ടോറേജ്</string>
 
-	<string name="poi_cargo_passengers">യാത്രക്കാര്‍</string>
+    <string name="poi_cargo_passengers">യാത്രക്കാര്‍</string>
 	<string name="poi_cargo_vehicle">വാഹനങ്ങള്‍</string>
 	<string name="poi_cargo_bicycle">"സൈക്കിള്‍ "</string>
 	<string name="poi_cargo_container">കണ്ടെയിനര്‍</string>
 	<string name="poi_cargo_hgv">എച്ച് ജി വി</string>
 
-	<string name="poi_fitness_station">"ഫിറ്റ്നെസ്  സ്റ്റേഷന്‍"</string>
+    <string name="poi_fitness_station">"ഫിറ്റ്നെസ്  സ്റ്റേഷന്‍"</string>
 
-	<string name="poi_wiki_lang_ml">"മലയാളം വിക്കി "</string>
+    <string name="poi_wiki_lang_ml">"മലയാളം വിക്കി "</string>
 	<string name="poi_brushless">ബ്രഷില്ലാത്തത്</string>
 	<string name="poi_aerialway_gondola">ഗൊന്ഡോള</string>
 	<string name="poi_weir">വീര്‍</string>
 	<string name="poi_funicular">കേബിള്‍കാര്‍</string>
 	<string name="poi_craft_winery">വൈനറി</string>
 
-	<string name="poi_biergarten">ബീയര്‍ പാര്‍ലര്‍</string>
+    <string name="poi_biergarten">ബീയര്‍ പാര്‍ലര്‍</string>
 	<string name="poi_buoy_safe_water">സേഫ് വാട്ടര്‍ ബീക്കണ്‍</string>
 	<string name="poi_buoy_special_purpose">പ്ര‌ത്യേകാവശ്യത്തിനുള്ള ബീക്കണ്</string>
 	<string name="poi_distance_mark">"ദൂര സൂചിക "</string>
@@ -2264,7 +2257,7 @@
 	<string name="poi_bicycle_parking_wall_loops">"ഭിത്തിയിലുള്ള കൊളുത്ത് "</string>
 	<string name="poi_deadlock">തടസ്സം</string>
 
-	<string name="poi_information_history">ചരിത്രം</string>
+    <string name="poi_information_history">ചരിത്രം</string>
 	<string name="poi_information_bicyclemap">സൈക്കിള്‍ ഭൂപടം</string>
 	<string name="poi_information_tactile_map">ടാക്ടൈല്‍ മാപ്പ്</string>
 	<string name="poi_board_type_notice">ബുള്ളറ്റിന്‍ ബോര്‍ഡ്</string>
@@ -2273,32 +2266,32 @@
 	<string name="poi_board_type_technology">സാങ്കേതികവിവരങ്ങള്‍</string>
 	<string name="poi_board_type_astronomy">വാനനിരീക്ഷണം</string>
 
-	<string name="poi_commercial">"കൊമേഴ്സ്യല്‍ ലാന്റ് യൂസ് "</string>
+    <string name="poi_commercial">"കൊമേഴ്സ്യല്‍ ലാന്റ് യൂസ് "</string>
 	<string name="poi_retail">റീടെയില്‍ ലാന്റ് യൂസ്</string>
 
-	<string name="poi_fireplace_yes">ഉണ്ട്</string>
+    <string name="poi_fireplace_yes">ഉണ്ട്</string>
 	<string name="poi_fireplace_no">"ഫയര്‍ പ്ളേസ് ഇല്ല "</string>
 
-	<string name="poi_covered_yes">ആണ്</string>
+    <string name="poi_covered_yes">ആണ്</string>
 	<string name="poi_covered_no">"കവേര്‍ഡല്ല "</string>
 
-	<string name="poi_sculptor">ശില്പി</string>
+    <string name="poi_sculptor">ശില്പി</string>
 
-	<string name="poi_conveying_yes">കണ്‍വേയിങ്ങാണ്</string>
+    <string name="poi_conveying_yes">കണ്‍വേയിങ്ങാണ്</string>
 
-	<string name="poi_bridge_ref">പാലത്തിന്റെ അടയാളം</string>
+    <string name="poi_bridge_ref">പാലത്തിന്റെ അടയാളം</string>
 	<string name="poi_tunnel_ref">ടണല്‍ അടയാളം</string>
 
-	<string name="poi_ref">അടയാളം</string>
+    <string name="poi_ref">അടയാളം</string>
 
-	<string name="poi_wiki_lang_ta">"തമിഴ് വിക്കി "</string>
+    <string name="poi_wiki_lang_ta">"തമിഴ് വിക്കി "</string>
 	<string name="poi_wiki_lang_ur">"ഉറുദു വിക്കി "</string>
 	<string name="poi_craft_electronics_repair">ഇലെക്ട്രോണിക് റിപെയര്‍</string>
 	<string name="poi_fireworks">പടക്ക കട</string>
 
-	<string name="poi_aerialway_length">ദൂരം</string>
+    <string name="poi_aerialway_length">ദൂരം</string>
 
-	<string name="poi_health_specialty_general_yes">ജെനറല്‍ പ്രാക്ടീഷണര്‍</string>
+    <string name="poi_health_specialty_general_yes">ജെനറല്‍ പ്രാക്ടീഷണര്‍</string>
 	<string name="poi_health_specialty_ophthalmology_yes">ഓഫ്താല്‍മോളജി (നേത്രരോഗങ്ങള്‍)</string>
 	<string name="poi_health_specialty_gynaecology_yes">ഗൈനക്കോളജി(ഗര്‍ഭാശയ സംബന്ധമായ)</string>
 	<string name="poi_health_specialty_internal_medicine_yes">ഇന്റേണല്‍ മെഡിസിന്‍</string>
@@ -2326,16 +2319,16 @@
 	<string name="poi_health_specialty_herbalism_yes">ഹെര്‍ബലിസം</string>
 	<string name="poi_building_type_pyramid">കെട്ടിട ഇനം: പിരമിഡ്</string>
 
-	<string name="poi_fitness_centre">"ഫിറ്റ്നെസ്  സെന്റര്‍"</string>
+    <string name="poi_fitness_centre">"ഫിറ്റ്നെസ്  സെന്റര്‍"</string>
 	<string name="poi_fitness">"ഫിറ്റ്നെസ്  "</string>
 
-	<string name="poi_billiards">ബില്ലിയാര്‍ഡ്സ്</string>
+    <string name="poi_billiards">ബില്ലിയാര്‍ഡ്സ്</string>
 
-	<string name="poi_badminton">ബാഡ്മിന്റന്‍</string>
+    <string name="poi_badminton">ബാഡ്മിന്റന്‍</string>
 	<string name="poi_judo">ജൂഡോ</string>
 	<string name="poi_official_name">ഔദ്യോദിക നാമം</string>
 
-	<string name="poi_inscription_n">മുദ്രണം:N</string>
+    <string name="poi_inscription_n">മുദ്രണം:N</string>
 	<string name="poi_inscription_nw">മുദ്രണം:വടക്കുപടിഞ്ഞാറു് (NW)</string>
 	<string name="poi_inscription_w">മുദ്രണം :W</string>
 	<string name="poi_inscription_sw">മുദ്രണം : തെക്കുപടിഞ്ഞാറു് (SW)</string>
@@ -2344,21 +2337,20 @@
 	<string name="poi_inscription_e">മുദ്രണം:E</string>
 	<string name="poi_inscription_ne">മുദ്രണം: വടക്കുകിഴക്കു് (NE)</string>
 
-	<string name="poi_construction_yes">നിര്‍മ്മാണം</string>
-	<string name="poi_additional_atm_yes">എ ടി എം ഉണ്ട്</string>
-	<string name="poi_atm_no">എ ടി എം ഇല്ല</string>
+    <string name="poi_construction_yes">നിര്‍മ്മാണം</string>
+    <string name="poi_atm_no">എ ടി എം ഇല്ല</string>
 
-	<string name="poi_firepit">ഫയര്‍പിറ്റ്</string>
+    <string name="poi_firepit">ഫയര്‍പിറ്റ്</string>
 	<string name="poi_street_cabinet">"വഴിയോരത്തെ പെട്ടി "</string>
 
-	<string name="poi_protected_area">സംരക്ഷിത സ്ഥലം</string>
+    <string name="poi_protected_area">സംരക്ഷിത സ്ഥലം</string>
 	<string name="poi_protection_title">സംരക്ഷിത നാമം</string>
 	<string name="poi_protection_object_historic">സംരക്ഷിത വസ്തു :പുരാതനം</string>
 	<string name="poi_protection_object_nature">"സംരക്ഷിത വസ്തു : പ്രകൃതി "</string>
 	<string name="poi_protection_object_habitat">സംരക്ഷിത വസ്തു : വാസസ്ഥലം</string>
 	<string name="poi_protection_object_water">സംരക്ഷിത വസ്തു : ജലം</string>
 
-	<string name="poi_nuclear_explosion_country">അണുസ്പോടനം :രാജ്യം</string>
+    <string name="poi_nuclear_explosion_country">അണുസ്പോടനം :രാജ്യം</string>
 	<string name="poi_nuclear_explosion_site">അണുസ്പോടനമേഖല</string>
 	<string name="poi_nuclear_explosion_type_underground_shaft">അണുസ്പോടന വിധം: ഭൂഗര്‍ഭം,ഷാഫ്ട്</string>
 	<string name="poi_nuclear_explosion_type_underground_tunnel">അണുസ്പോടന വിധം: ഭൂഗര്‍ഭം,ടണല്‍</string>
@@ -2387,22 +2379,22 @@
 	<string name="poi_addr_housename">ഗൃഹനാമം</string>
 	<string name="poi_religion">മതപരമായ സാമഗ്രികള്‍</string>
 
-	<string name="poi_plant_nursery">ചെടി നര്‍സറി</string>
+    <string name="poi_plant_nursery">ചെടി നര്‍സറി</string>
 
-	<string name="poi_compressed_air_yes">കാറ്റ്(ടയര്‍) ഉണ്ട്</string>
+    <string name="poi_compressed_air_yes">കാറ്റ്(ടയര്‍) ഉണ്ട്</string>
 	<string name="poi_compressed_air_no">"കാറ്റ്(ടയര്‍) ഇല്ല "</string>
 
-	<string name="poi_car_wash_yes">കാര്‍ വാഷ് ഉണ്ട്</string>
+    <string name="poi_car_wash_yes">കാര്‍ വാഷ് ഉണ്ട്</string>
 
-	<string name="poi_vacuum_cleaner_yes">ഉണ്ട്</string>
+    <string name="poi_vacuum_cleaner_yes">ഉണ്ട്</string>
 	<string name="poi_vacuum_cleaner_no">"വാക്യും ക്ളീനര്‍ ഇല്ല "</string>
 	<string name="poi_amenity_vacuum_cleaner">വാക്യും ക്ളീനര്‍</string>
 
-	<string name="poi_water_tap">"വാട്ടര്‍ ടാപ് "</string>
+    <string name="poi_water_tap">"വാട്ടര്‍ ടാപ് "</string>
 	<string name="poi_button_operated_yes">ബട്ടണ്‍ ഓപറേറ്റഡ്</string>
 	<string name="poi_button_operated_no">"ബട്ടണ്‍ ഓപറേറ്റഡ് അല്ല "</string>
 
-	<string name="poi_free_flying_site_takeoff">ടേകോഫ്</string>
+    <string name="poi_free_flying_site_takeoff">ടേകോഫ്</string>
 	<string name="poi_free_flying_site_landing">ലാന്റിങ്ങ്</string>
 	<string name="poi_free_flying_paragliding_yes">പാരഗ്ലൈഡിങ്ങ്</string>
 	<string name="poi_free_flying_paragliding_no">"പാരഗ്ലൈഡിങ്ങ് ഇല്ല "</string>
@@ -2412,7 +2404,7 @@
 	<string name="poi_medical_system_sidda_yes">സിദ്ദാ</string>
 	<string name="poi_medical_system_unani_yes">യുനാനി</string>
 
-	<string name="poi_health_service_nursing_yes">ആരോഗ്യ സേവനം: നര്‍സിങ്ങ്</string>
+    <string name="poi_health_service_nursing_yes">ആരോഗ്യ സേവനം: നര്‍സിങ്ങ്</string>
 	<string name="poi_health_service_nursing_no">"ആരോഗ്യ സേവനം: നര്‍സിങ്ങ് ഇല്ല "</string>
 	<string name="poi_health_service_counselling_yes">ആരോഗ്യ സേവനം: കൗണ്‍സലിങ്ങ്</string>
 	<string name="poi_health_service_counselling_no">"ആരോഗ്യ സേവനം: കൗണ്‍സലിങ്ങ് ഇല്ല "</string>
@@ -2429,7 +2421,7 @@
 	<string name="poi_health_service_test_yes">ആരോഗ്യ സേവനം: ടെസ്റ്റ്</string>
 	<string name="poi_health_service_test_no">"ആരോഗ്യ സേവനം: ടെസ്റ്റ് ഇല്ല "</string>
 
-	<string name="poi_health_facility_type_office">മെഡിക്കല്‍ ഓഫീസ്</string>
+    <string name="poi_health_facility_type_office">മെഡിക്കല്‍ ഓഫീസ്</string>
 	<string name="poi_health_facility_type_field_hospital">"ആരോഗ്യ കേന്ദ്രം: ഫീല്‍ഡ് ആശുപത്രി "</string>
 	<string name="poi_health_facility_type_counselling_centre">ആരോഗ്യ കേന്ദ്രം: കൗണ്‍സലിങ്ങ് സെന്റര്‍</string>
 	<string name="poi_health_facility_type_laboratory">ആരോഗ്യ കേന്ദ്രം: ലാബോറട്ടറി</string>
@@ -2440,14 +2432,14 @@
 	<string name="poi_health_facility_type_nursing_home">ആരോഗ്യ കേന്ദ്രം: നര്‍സിങ്ങ് ഹോം</string>
 	<string name="poi_health_facility_type_support_group_home">ആരോഗ്യ സേവനം: സപ്പോര്‍ട്ട് ഗ്രൂപ് ഹോം</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">പാലിയേറ്റീവ് മെഡിസിന്‍</string>
+    <string name="poi_health_specialty_palliative_medicine_yes">പാലിയേറ്റീവ് മെഡിസിന്‍</string>
 
-	<string name="poi_fire_hydrant_type_underground">ഭൂഗര്‍ഭം</string>
+    <string name="poi_fire_hydrant_type_underground">ഭൂഗര്‍ഭം</string>
 	<string name="poi_fire_hydrant_type_pillar">തൂണ്‍</string>
 	<string name="poi_fire_hydrant_type_pond">കുളം</string>
 	<string name="poi_fire_hydrant_type_wall">ഭിത്തി</string>
 
-	<string name="poi_health_amenity_type_first_aid_kit">ഫസ്ട് എയിഡ് കിറ്റ്</string>
+    <string name="poi_health_amenity_type_first_aid_kit">ഫസ്ട് എയിഡ് കിറ്റ്</string>
 	<string name="poi_health_person_type_healer">ഹീലര്‍</string>
 	<string name="poi_health_person_type_midwife">മിഡ്വൈഫ്</string>
 	<string name="poi_health_person_type_nurse">നര്‍സ്</string>
@@ -2465,13 +2457,13 @@
 	<string name="poi_home_visit_yes">ഗൃഹസന്ദര്‍ശനം ഉണ്ട്</string>
 	<string name="poi_home_visit_no">"ഗൃഹസന്ദര്‍ശനമില്ല "</string>
 
-	<string name="poi_disease_malaria_yes">മലേറിയ</string>
+    <string name="poi_disease_malaria_yes">മലേറിയ</string>
 	<string name="poi_disease_autism_yes">ഓട്ടിസം</string>
 	<string name="poi_disease_autism_no">"ഓട്ടിസം ഇല്ല "</string>
 	<string name="poi_disease_aids_yes">എയിഡ്സ്</string>
 	<string name="poi_disease_aids_no">"എയിഡ്സ് ഇല്ല "</string>
 
-	<string name="poi_office_physician">ഫിസിഷ്യന്റെ ഓഫീസ്</string>
+    <string name="poi_office_physician">ഫിസിഷ്യന്റെ ഓഫീസ്</string>
 	<string name="poi_office_therapist">തെറാപിസ്റ്റ് ഓഫീസ്</string>
 	<string name="poi_office_podologist">പൊഡൊളജിസ്ട് ഓഫീസ്</string>
 	<string name="poi_water_source_main">പ്രധാന</string>
@@ -2499,21 +2491,21 @@
 	<string name="poi_crossing_supervision_attendant">ക്രോസിങ്ങ് മേല്‍നോട്ടം: കാവല്‍ക്കാരന്‍</string>
 	<string name="poi_crossing_supervision_camera">ക്രോസിങ്ങ് മേല്‍നോട്ടം : ക്യാമറ</string>
 
-	<string name="poi_dispensing_yes">വിതരണം ഉണ്ട്</string>
+    <string name="poi_dispensing_yes">വിതരണം ഉണ്ട്</string>
 	<string name="poi_dispensing_no">"വിതരണം ഇല്ല "</string>
 
-	<string name="poi_aerodrome_type_international">ഇന്റെര്‍നാഷണല്‍</string>
+    <string name="poi_aerodrome_type_international">ഇന്റെര്‍നാഷണല്‍</string>
 	<string name="poi_aerodrome_type_regional">റീജിയണല്‍</string>
 	<string name="poi_aerodrome_type_public">പബ്ളിക്</string>
 	<string name="poi_aerodrome_type_military">മിലിട്ടറി</string>
 	<string name="poi_aerodrome_type_military_public">"മിലിട്ടറി/പബ്ളിക് "</string>
 	<string name="poi_aerodrome_type_private">പ്രൈവറ്റ്</string>
 
-	<string name="poi_length">ദൂരം</string>
+    <string name="poi_length">ദൂരം</string>
 
-	<string name="poi_wiki_link">വിക്കിപീഡിയ</string>
+    <string name="poi_wiki_link">വിക്കിപീഡിയ</string>
 
-	<string name="poi_diet">ഭക്ഷണം</string>
+    <string name="poi_diet">ഭക്ഷണം</string>
 	<string name="poi_massage_type">മസ്സാജ് ഇനം</string>
 	<string name="poi_tents">ടെന്റുകള്‍</string>
 	<string name="poi_caravans">കാരവാനുകള്‍</string>
@@ -2523,7 +2515,7 @@
 	<string name="poi_compressed_air_filter">എയര്‍</string>
 	<string name="poi_vacuum_cleaner_filter">വാക്യും ക്ളീനര്‍</string>
 
-<string name="poi_waterway_fuel">ബോട്ടുകള്‍ക്കുള്ള പെട്റോള്‍ പംബ്</string>
+    <string name="poi_waterway_fuel">ബോട്ടുകള്‍ക്കുള്ള പെട്റോള്‍ പംബ്</string>
 	<string name="poi_ice_hockey">ഐസ് ഹോക്കീ</string>
 	<string name="poi_club_sailing">സെയിലിങ്ങ് ക്ളബ്</string>
 	<string name="poi_wiki_lang_bs">ബോസ്നിയന്‍ വിക്കി</string>
@@ -2557,7 +2549,7 @@
 	<string name="poi_payment_sube_no">എസ്യൂബിഇ കാര്‍ഡ് സ്വീകാര്യമല്ല</string>
 	<string name="poi_description_payment">പണമടക്കാനുള്ള വിവരണം</string>
 
-	<string name="poi_diet_vegetarian_filter_yes">"വെജിറ്റെറിയന്‍ "</string>
+    <string name="poi_diet_vegetarian_filter_yes">"വെജിറ്റെറിയന്‍ "</string>
 	<string name="poi_diet_vegan_filter_yes">"വെജിറ്റെറിയന്‍ "</string>
 	<string name="poi_diet_gluten_free_filter_yes">ഗ്ളൂടെന്‍ ഫ്രീ ഭക്ഷണം</string>
 	<string name="poi_diet_kosher_filter_yes">കോഷ</string>
@@ -2576,13 +2568,13 @@
 	<string name="poi_water_heater_yes">വാട്ടര്‍ ഹീറ്റര്‍:ഉണ്ട്</string>
 	<string name="poi_water_heater_no">"വാട്ടര്‍ ഹീറ്റര്‍:ഇല്ല "</string>
 
-	<string name="poi_parking_surface">തരം: ഉപരിതലം</string>
+    <string name="poi_parking_surface">തരം: ഉപരിതലം</string>
 	<string name="poi_capacity_beds">ബെഡുകള്‍(ഇടം)</string>
 
-	<string name="poi_disease_malaria_no">മലേറിയ:ഇല്ല</string>
+    <string name="poi_disease_malaria_no">മലേറിയ:ഇല്ല</string>
 	<string name="poi_office_midwife">പ്രസവശുശ്രൂഷികയുടെ ഓഫീസ്</string>
 
-	<string name="poi_fire_hydrant_diameter">അഗ്നിശമനി (fire hydrant) വ്യാസം</string>
+    <string name="poi_fire_hydrant_diameter">അഗ്നിശമനി (fire hydrant) വ്യാസം</string>
 	<string name="poi_fire_hydrant_count">അഗ്നിശമനി (fire hydrant) എണ്ണം</string>
 	<string name="poi_fire_hydrant_flow_capacity">അഗ്നിശമനി (fire hydrant) ഫ്ളോ കപാസിറ്റി</string>
 	<string name="poi_fire_hydrant_position_green">അഗ്നിശമനി (fire hydrant)സ്ഥാനം: പുല്‍തകിടി</string>
@@ -2590,9 +2582,9 @@
 	<string name="poi_bicycle_parking_lockers">ലോക്കറുകള്‍</string>
 	<string name="poi_depth">ആഴം</string>
 
-	<string name="poi_payment_troika_no">ട്രോയിക കാര്‍ഡ് സ്വീകാര്യമല്ല</string>
+    <string name="poi_payment_troika_no">ട്രോയിക കാര്‍ഡ് സ്വീകാര്യമല്ല</string>
 
-	<string name="poi_display_yes">ഡിസ്പ്ളേ:ഉണ്ട്</string>
+    <string name="poi_display_yes">ഡിസ്പ്ളേ:ഉണ്ട്</string>
 	<string name="poi_display_no">"ഡിസ്പ്ളേ:ഇല്ല "</string>
 	<string name="poi_display_analog_yes">അനലോഗ് ഡിസ്പ്ളേ</string>
 	<string name="poi_display_digital_yes">" ഡിജിറ്റല്‍ ഡിസ്പ്ളേ"</string>
@@ -2602,15 +2594,15 @@
 	<string name="poi_organic_no">"ആഹാരം(ഓര്‍ഗാനിക് ):അല്ല "</string>
 	<string name="poi_organic_only">ആഹാരം(ഓര്‍ഗാനിക് ) മാത്രം</string>
 
-	<string name="poi_diplomatic_consulate_general">കോണ്സുലേറ്റ് ജനറല്‍</string>
+    <string name="poi_diplomatic_consulate_general">കോണ്സുലേറ്റ് ജനറല്‍</string>
 	<string name="poi_diplomatic_high_commission">ഹൈക്കമ്മീഷന്‍</string>
 
-	<string name="poi_water_tank">ജലസംഭരണ ടാങ്ക്</string>
+    <string name="poi_water_tank">ജലസംഭരണ ടാങ്ക്</string>
 
-	<string name="poi_toilets_disposal_chemical">ടോയ്ലറ്റ് ഇനം: കെമിക്കല്‍</string>
+    <string name="poi_toilets_disposal_chemical">ടോയ്ലറ്റ് ഇനം: കെമിക്കല്‍</string>
 	<string name="poi_toilets_disposal_bucket">ടോയ്ലറ്റ് ഇനം: ബക്കറ്റ്</string>
 
-	<string name="poi_xmas">ക്രിസ്മസ്</string>
+    <string name="poi_xmas">ക്രിസ്മസ്</string>
 	<string name="poi_xmas_market">ക്രിസ്തുമസ് ചന്ത</string>
 	<string name="poi_xmas_pyramid">ക്രിസ്തുമസ് പിരമിഡ്</string>
 	<string name="poi_xmas_shop">"ക്രിസ്മസ് ഷോപ്പ് "</string>
@@ -2619,7 +2611,7 @@
 	<string name="poi_xmas_opening_hours">ക്രിസ്മസ്: തുറക്കുന്ന സമയം</string>
 	<string name="poi_xmas_url">ക്രിസ്മസ്:വെബ്സൈറ്റ്</string>
 
-	<string name="poi_cuisine_coffee">കാപ്പി</string>
+    <string name="poi_cuisine_coffee">കാപ്പി</string>
 	<string name="poi_cuisine_sandwich">സാന്‍ഡ്‌വിച്ച്</string>
 	<string name="poi_cuisine_ice_cream">ഐസ്ക്രീം</string>
 	<string name="poi_cuisine_seafood">മത്സ്യാഹാരം</string>

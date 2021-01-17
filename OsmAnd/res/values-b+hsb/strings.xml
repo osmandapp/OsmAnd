@@ -753,7 +753,6 @@
     <string name="error_calculating_route">Njemóžach čaru wobličić</string>
     <string name="error_calculating_route_occured">Njemóžach čaru wobličić</string>
     <string name="empty_route_calculated">Wobličena čara je prózdna</string>
-    <string name="new_route_calculated_dist">Nowa čara wobličena, zdalenosć</string>
     <string name="arrived_at_destination">Cil docpěty</string>
     <string name="invalid_locations">Njepłaćiwe koordinaty</string>
     <string name="go_back_to_osmand">Wróćo k OsmAnd</string>
@@ -1142,7 +1141,6 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="other_menu_group">druhe</string>
     <string name="planning_trip_item">Jězbu planować</string>
-    <string name="update">Aktualizowanje</string>
     <string name="last_update">Poslednje aktualizowanje: %s</string>
     <string name="last_map_change">Poslednja změna karty: %s</string>
     <string name="weekly">tydźensce</string>
@@ -1246,7 +1244,6 @@
     <string name="new_filter">Nowy filter</string>
     <string name="osmand_plus_banner_desc">Njewobmjezowane sćehnjenje kartow, aktualizacijow a zapiski Wikipedije.</string>
     <string name="search_my_location">Moje stejišćo namakać</string>
-    <string name="no_update_info">Nowe wersije njepokazać</string>
     <string name="update_all_maps_now">Wšitke karty nětko aktualizować?</string>
     <string name="replace_favorite_confirmation">Sy sej wěsty/a, zo chceš narunać faworit %1$s?</string>
     <string name="coords_search">Pytanje za koordinatami</string>
