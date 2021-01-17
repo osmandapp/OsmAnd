@@ -140,6 +140,7 @@
 		<attr name="btn_radio_button_center" format="reference"/>
 		<attr name="bg_dash_line" format="reference"/>
 		<attr name="text_input_background" format="reference"/>
+		<attr name="image_help_announcement_time" format="reference"/>
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
