@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 
+import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -36,7 +37,7 @@ public class ShareMenu extends BaseMenuController {
 	public enum ShareItem {
 		MESSAGE(R.drawable.ic_action_message, R.string.shared_string_send),
 		CLIPBOARD(R.drawable.ic_action_copy, R.string.shared_string_copy),
-		ADDRESS(R.drawable.ic_action_copy, R.string.copy_address),
+		ADDRESS(R.drawable.ic_action_street_name, R.string.copy_address),
 		NAME(R.drawable.ic_action_copy, R.string.copy_location_name),
 		COORDINATES(R.drawable.ic_action_copy, R.string.copy_coordinates),
 		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
@@ -99,10 +100,13 @@ public class ShareMenu extends BaseMenuController {
 		if (mapActivity == null) {
 			return;
 		}
+		String lat = LocationConvert.convertLatitude(latLon.getLatitude(), LocationConvert.FORMAT_DEGREES, false);
+		String lon = LocationConvert.convertLongitude(latLon.getLongitude(), LocationConvert.FORMAT_DEGREES, false);
+		lat = lat.substring(0, lat.length() - 1);
+		lon = lon.substring(0, lon.length() - 1);
 		final int zoom = mapActivity.getMapView().getZoom();
-		final String geoUrl = MapUtils.buildGeoUrl(latLon.getLatitude(), latLon.getLongitude(), zoom);
-		final String httpUrl = "https://osmand.net/go?lat=" + ((float) latLon.getLatitude())
-				+ "&lon=" + ((float) latLon.getLongitude()) + "&z=" + zoom;
+		final String geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
+		final String httpUrl = "https://osmand.net/go?lat=" + lat + "&lon=" + lon + "&z=" + zoom;
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(title)) {
 			sb.append(title).append("\n");

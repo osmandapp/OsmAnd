@@ -140,6 +140,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
 import net.osmand.plus.settings.fragments.DataStorageFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmAndMapLayersView;
@@ -2222,6 +2223,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public SnapTrackWarningFragment getSnapTrackWarningBottomSheet() {
 		return getFragment(SnapTrackWarningFragment.TAG);
+	}
+
+	@NonNull
+	public TrackMenuFragment getTrackMenuFragment() {
+		return getFragment(TrackMenuFragment.TAG);
 	}
 
 	public void backToConfigureProfileFragment() {

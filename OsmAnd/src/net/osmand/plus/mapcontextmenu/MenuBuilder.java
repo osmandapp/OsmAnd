@@ -66,8 +66,10 @@ import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
 import net.osmand.plus.openplacereviews.OPRConstants;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchToolbarController;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
@@ -100,6 +102,8 @@ public class MenuBuilder {
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
 	protected static final String[] arrowChars = new String[] {"=>", " - "};
+	protected final String NEAREST_WIKI_KEY = "nearest_wiki_key";
+	protected final String NEAREST_POI_KEY = "nearest_poi_key";
 
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
@@ -353,19 +357,20 @@ public class MenuBuilder {
 
 	protected void buildNearestWikiRow(View view) {
 		buildNearestRow(view, nearestWiki, processNearestWiki(),
-				R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around));
+				R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around), NEAREST_WIKI_KEY);
 	}
 
 	protected void buildNearestPoiRow(View view) {
-		buildNearestRow(view, nearestPoi, processNearestPoi(),
-				nearestPoi.isEmpty() ? 0 : AmenityMenuController.getRightIconId(nearestPoi.get(0)),
-				app.getString(R.string.speak_poi));
+		if (amenity != null) {
+			buildNearestRow(view, nearestPoi, processNearestPoi(), AmenityMenuController.getRightIconId(amenity),
+					app.getString(R.string.speak_poi) + " \"" + AmenityMenuController.getTypeStr(amenity) + "\" (" + nearestPoi.size() + ")", NEAREST_POI_KEY);
+		}
 	}
 
-	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, boolean process, int iconId, String text) {
+	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, boolean process, int iconId, String text, String amenityKey) {
 		if (process && nearestAmenities.size() > 0) {
 			buildRow(view, iconId, null, text + " (" + nearestAmenities.size() + ")", 0, true,
-					getCollapsableView(view.getContext(), true, nearestAmenities), false, 0, false, null, false);
+					getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey), false, 0, false, null, false);
 		}
 	}
 
@@ -1155,8 +1160,8 @@ public class MenuBuilder {
 		return new CollapsableView(textView, this, collapsed);
 	}
 
-	protected CollapsableView getCollapsableView(Context context, boolean collapsed, List<Amenity> nearestAmenities) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+	protected CollapsableView getCollapsableView(Context context, boolean collapsed, List<Amenity> nearestAmenities, String nearestPoiType) {
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		for (final Amenity poi : nearestAmenities) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
@@ -1164,6 +1169,8 @@ public class MenuBuilder {
 			if (Algorithms.isBlank(name)) {
 				name = AmenityMenuController.getTypeStr(poi);
 			}
+			float dist = (float) MapUtils.getDistance(latLon, poi.getLocation());
+			name += " (" + OsmAndFormatter.getFormattedDistance(dist, app) + ")";
 			button.setText(name);
 
 			button.setOnClickListener(new View.OnClickListener() {
@@ -1176,8 +1183,50 @@ public class MenuBuilder {
 			});
 			view.addView(button);
 		}
-
+		PoiUIFilter filter = getPoiFilterForType(nearestPoiType);
+		if (filter != null) {
+			view.addView(createShowAllButton(context, filter));
+		}
 		return new CollapsableView(view, this, collapsed);
+	}
+
+	private View createShowAllButton(Context context, final PoiUIFilter filter) {
+		TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
+		buttonShowAll.setText(app.getString(R.string.shared_string_show_on_map));
+		buttonShowAll.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
+				poiFiltersHelper.clearSelectedPoiFilters();
+				poiFiltersHelper.addSelectedPoiFilter(filter);
+				final QuickSearchToolbarController controller = new QuickSearchToolbarController();
+				controller.setTitle(filter.getName());
+				controller.setOnBackButtonClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						mapContextMenu.show();
+					}
+				});
+				controller.setOnTitleClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						mapActivity.showQuickSearch(filter);
+					}
+				});
+				controller.setOnCloseButtonClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						poiFiltersHelper.clearSelectedPoiFilters();
+						mapActivity.hideTopToolbar(controller);
+						mapActivity.refreshMap();
+					}
+				});
+				mapContextMenu.hideMenues();
+				mapActivity.showTopToolbar(controller);
+				mapActivity.refreshMap();
+			}
+		});
+		return buttonShowAll;
 	}
 
 	protected LinearLayout buildCollapsableContentView(Context context, boolean collapsed, boolean needMargin) {
@@ -1243,15 +1292,31 @@ public class MenuBuilder {
 
 	protected boolean processNearestPoi() {
 		if (showNearestPoi && latLon != null && amenity != null) {
-			PoiCategory pc = amenity.getType();
-			PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-			PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + pt.getKeyName());
+			PoiUIFilter filter = getPoiFilterForAmenity(amenity);
 			if (filter != null) {
 				nearestPoi = getSortedAmenities(filter, latLon);
 				return true;
 			}
 		}
 		return false;
+	}
+
+	private PoiUIFilter getPoiFilterForType(String nearestPoiType) {
+		if (NEAREST_POI_KEY.equals(nearestPoiType)) {
+			return getPoiFilterForAmenity(amenity);
+		} else if (NEAREST_WIKI_KEY.equals(nearestPoiType)) {
+			return app.getPoiFilters().getTopWikiPoiFilter();
+		}
+		return null;
+	}
+
+	private PoiUIFilter getPoiFilterForAmenity(Amenity amenity) {
+		if (amenity != null) {
+			PoiCategory category = amenity.getType();
+			PoiType poiType = category.getPoiTypeByKeyName(amenity.getSubType());
+			return app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + poiType.getKeyName());
+		}
+		return null;
 	}
 
 	private List<Amenity> getSortedAmenities(PoiUIFilter filter, final LatLon latLon) {
@@ -1273,8 +1338,8 @@ public class MenuBuilder {
 		return nearestAmenities;
 	}
 
-	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter wikiPoiFilter) {
-		return wikiPoiFilter.searchAmenities(rect.top, rect.left,
+	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {
+		return filter.searchAmenities(rect.top, rect.left,
 				rect.bottom, rect.right, -1, null);
 	}
 

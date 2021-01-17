@@ -82,7 +82,10 @@ public class OptionsCard extends BaseCard {
 		items.add(createShareItem());
 
 		if (fileAvailable) {
-			items.add(createUploadOsmItem());
+			BaseBottomSheetItem uploadOsmItem = createUploadOsmItem();
+			if (uploadOsmItem != null) {
+				items.add(uploadOsmItem);
+			}
 			items.add(createDividerItem());
 			items.add(createEditItem());
 			items.add(createRenameItem());

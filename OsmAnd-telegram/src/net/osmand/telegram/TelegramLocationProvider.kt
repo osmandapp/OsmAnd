@@ -3,22 +3,20 @@ package net.osmand.telegram
 import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.*
-import android.location.GpsStatus
 import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
-import android.os.Bundle
+import android.os.Looper
 import android.util.Log
+import com.google.android.gms.location.*
 import net.osmand.PlatformUtil
 import net.osmand.data.LatLon
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.util.MapUtils
 import java.util.*
+import kotlin.math.atan2
 
 class TelegramLocationProvider(private val app: TelegramApplication) : SensorEventListener {
 
 	private var lastTimeGPSLocationFixed: Long = 0
-	private var gpsSignalLost: Boolean = false
 
 	private var sensorRegistered = false
 	private val mGravs = FloatArray(3)
@@ -45,30 +43,28 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	var lastKnownLocation: net.osmand.Location? = null
 		private set
 
-	val gpsInfo = GPSInfo()
+	private var fusedLocationProviderClient: FusedLocationProviderClient? = null
+	private val locationRequest = LocationRequest().apply {
+		interval = 1000
+		fastestInterval = 500
+		maxWaitTime = 2000
+		priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+	}
+	private val locationCallback = object : LocationCallback() {
+		override fun onLocationResult(locationResult: LocationResult?) {
+			super.onLocationResult(locationResult)
+			val lastLocation = locationResult?.lastLocation
+			if (lastLocation != null) {
+				lastTimeGPSLocationFixed = lastLocation.time
+			}
+			setLocation(convertLocation(lastLocation))
+		}
+	}
 
 	private val locationListeners = ArrayList<TelegramLocationListener>()
 	private val compassListeners = ArrayList<TelegramCompassListener>()
-	private var gpsStatusListener: GpsStatus.Listener? = null
 	private val mRotationM = FloatArray(9)
-	private var agpsDataLastTimeDownloaded: Long = 0
 	private val useMagneticFieldSensorCompass = false
-
-	private val gpsListener = object : LocationListener {
-		override fun onLocationChanged(location: Location?) {
-			if (location != null) {
-				lastTimeGPSLocationFixed = location.time
-			}
-			setLocation(convertLocation(location))
-		}
-
-		override fun onProviderDisabled(provider: String) {}
-
-		override fun onProviderEnabled(provider: String) {}
-
-		override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
-	}
-	private val networkListeners = LinkedList<LocationListener>()
 
 	val lastKnownLocationLatLon: LatLon?
 		get() = if (lastKnownLocation != null) {
@@ -87,107 +83,18 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 
 	@SuppressLint("MissingPermission")
 	fun resumeAllUpdates() {
-		val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-		if (app.isInternetConnectionAvailable) {
-			if (System.currentTimeMillis() - agpsDataLastTimeDownloaded > AGPS_TO_REDOWNLOAD) {
-				//force an updated check for internet connectivity here before destroying A-GPS-data
-				if (app.isInternetConnectionAvailable(true)) {
-					//redownloadAGPS()
-				}
-			}
+		if (AndroidUtils.isLocationPermissionAvailable(app) && fusedLocationProviderClient == null) {
+			fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(app)
 		}
-		if (AndroidUtils.isLocationPermissionAvailable(app)) {
-			service.addGpsStatusListener(getGpsStatusListener(service))
-			try {
-				service.requestLocationUpdates(
-					LocationManager.GPS_PROVIDER,
-					GPS_TIMEOUT_REQUEST.toLong(),
-					GPS_DIST_REQUEST.toFloat(),
-					gpsListener
-				)
-			} catch (e: IllegalArgumentException) {
-				Log.d(PlatformUtil.TAG, "GPS location provider not available") //$NON-NLS-1$
-			}
 
-			// try to always ask for network provide : it is faster way to find location
-
-			val providers = service.getProviders(true) ?: return
-			for (provider in providers) {
-				if (provider == null || provider == LocationManager.GPS_PROVIDER) {
-					continue
-				}
-				try {
-					val networkListener = NetworkListener()
-					service.requestLocationUpdates(
-						provider,
-						GPS_TIMEOUT_REQUEST.toLong(),
-						GPS_DIST_REQUEST.toFloat(),
-						networkListener
-					)
-					networkListeners.add(networkListener)
-				} catch (e: IllegalArgumentException) {
-					Log.d(
-						PlatformUtil.TAG,
-						"$provider location provider not available"
-					) //$NON-NLS-1$
-				}
-
-			}
+		try {
+			fusedLocationProviderClient?.requestLocationUpdates(
+					locationRequest, locationCallback, Looper.myLooper())
+		} catch (unlikely: SecurityException) {
+			Log.d(PlatformUtil.TAG, "Lost location permissions. Couldn't request updates. $unlikely")
 		}
 
 		registerOrUnregisterCompassListener(true)
-	}
-
-	private fun redownloadAGPS() {
-		try {
-			val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-			service.sendExtraCommand(LocationManager.GPS_PROVIDER, "delete_aiding_data", null)
-			val bundle = Bundle()
-			service.sendExtraCommand("gps", "force_xtra_injection", bundle)
-			service.sendExtraCommand("gps", "force_time_injection", bundle)
-			agpsDataLastTimeDownloaded = System.currentTimeMillis()
-		} catch (e: Exception) {
-			agpsDataLastTimeDownloaded = 0L
-			e.printStackTrace()
-		}
-	}
-
-	private fun getGpsStatusListener(service: LocationManager): GpsStatus.Listener {
-		gpsStatusListener = object : GpsStatus.Listener {
-			private var gpsStatus: GpsStatus? = null
-
-			@SuppressLint("MissingPermission")
-			override fun onGpsStatusChanged(event: Int) {
-				try {
-					gpsStatus = service.getGpsStatus(gpsStatus)
-				} catch (e: Exception) {
-					e.printStackTrace()
-				}
-				updateGPSInfo(gpsStatus)
-				updateLocation(lastKnownLocation)
-			}
-		}
-		return gpsStatusListener!!
-	}
-
-	private fun updateGPSInfo(s: GpsStatus?) {
-		var fixed = false
-		var n = 0
-		var u = 0
-		if (s != null) {
-			val iterator = s.satellites.iterator()
-			while (iterator.hasNext()) {
-				val g = iterator.next()
-				n++
-				if (g.usedInFix()) {
-					u++
-					fixed = true
-				}
-			}
-		}
-		gpsInfo.fixed = fixed
-		gpsInfo.foundSatellites = n
-		gpsInfo.usedSatellites = u
 	}
 
 	fun updateScreenOrientation(orientation: Int) {
@@ -217,12 +124,12 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	@Synchronized
 	fun registerOrUnregisterCompassListener(register: Boolean) {
 		if (sensorRegistered && !register) {
-			Log.d(PlatformUtil.TAG, "Disable sensor") //$NON-NLS-1$
+			Log.d(PlatformUtil.TAG, "Disable sensor")
 			(app.getSystemService(Context.SENSOR_SERVICE) as SensorManager).unregisterListener(this)
 			sensorRegistered = false
 			heading = null
 		} else if (!sensorRegistered && register) {
-			Log.d(PlatformUtil.TAG, "Enable sensor") //$NON-NLS-1$
+			Log.d(PlatformUtil.TAG, "Enable sensor")
 			val sensorMgr = app.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 			if (useMagneticFieldSensorCompass) {
 				var s: Sensor? = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
@@ -360,7 +267,7 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	}
 
 	private fun getAngle(sinA: Float, cosA: Float) = MapUtils.unifyRotationTo360(
-		(Math.atan2(sinA.toDouble(), cosA.toDouble()) * 180 / Math.PI).toFloat()
+		(atan2(sinA.toDouble(), cosA.toDouble()) * 180 / Math.PI).toFloat()
 	)
 
 	private fun updateLocation(loc: net.osmand.Location?) {
@@ -369,31 +276,11 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 		}
 	}
 
-	private fun useOnlyGPS() =
-		System.currentTimeMillis() - lastTimeGPSLocationFixed < NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS
-
-	// Working with location checkListeners
-	private inner class NetworkListener : LocationListener {
-
-		override fun onLocationChanged(location: Location) {
-			if (!useOnlyGPS()) {
-				setLocation(convertLocation(location))
-			}
-		}
-
-		override fun onProviderDisabled(provider: String) {}
-
-		override fun onProviderEnabled(provider: String) {}
-
-		override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
-	}
-
 	private fun stopLocationRequests() {
-		val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-		service.removeGpsStatusListener(gpsStatusListener)
-		service.removeUpdates(gpsListener)
-		while (!networkListeners.isEmpty()) {
-			service.removeUpdates(networkListeners.poll())
+		try {
+			fusedLocationProviderClient?.removeLocationUpdates(locationCallback)
+		} catch (unlikely: SecurityException) {
+			Log.d(PlatformUtil.TAG, "Lost location permissions. Couldn't remove updates. $unlikely")
 		}
 	}
 
@@ -403,17 +290,7 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	}
 
 	private fun setLocation(location: net.osmand.Location?) {
-		if (location == null) {
-			updateGPSInfo(null)
-		}
-		if (location != null) {
-			if (gpsSignalLost) {
-				gpsSignalLost = false
-			}
-		}
 		this.lastKnownLocation = location
-
-		// Update information
 		updateLocation(this.lastKnownLocation)
 	}
 
@@ -424,20 +301,9 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 		}
 	}
 
-	class GPSInfo {
-		var foundSatellites = 0
-		var usedSatellites = 0
-		var fixed = false
-	}
-
 	companion object {
 
 		private const val INTERVAL_TO_CLEAR_SET_LOCATION = 30 * 1000
-
-		private const val GPS_TIMEOUT_REQUEST = 0
-		private const val GPS_DIST_REQUEST = 0
-		private const val NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000
-		private const val AGPS_TO_REDOWNLOAD = 16L * 60 * 60 * 1000 // 16 hours
 
 		fun convertLocation(l: Location?): net.osmand.Location? {
 			if (l == null) {

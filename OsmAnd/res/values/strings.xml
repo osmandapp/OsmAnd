@@ -11,6 +11,18 @@
 	Thx - Hardy
 
 -->
+
+    <string name="announcement_time_title">Announcement time</string>
+    <string name="announcement_time_descr">Announcement time of different voice prompts depends on prompt type, current navigation speed and default navigation speed.</string>
+    <string name="announcement_time_intervals">Time and distance intervals</string>
+    <string name="shared_string_turn">Turn</string>
+    <string name="announcement_time_arrive">Arrive at destination</string>
+    <string name="announcement_time_off_route">Off route</string>
+    <string name="announcement_time_prepare">Prepare</string>
+    <string name="announcement_time_prepare_long">Long prepare</string>
+    <string name="announcement_time_approach">Approach</string>
+    <string name="announcement_time_passing">Passing</string>
+    <string name="shared_string_sec">sec</string>
     <string name="show_track_on_map">Show track on map</string>
     <string name="start_recording">Start recording</string>
     <string name="change_folder">Change folder</string>

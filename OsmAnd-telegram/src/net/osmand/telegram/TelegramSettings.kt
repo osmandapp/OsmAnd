@@ -1,7 +1,6 @@
 package net.osmand.telegram
 
 import android.content.Context
-import android.location.LocationManager
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import androidx.annotation.ColorRes
