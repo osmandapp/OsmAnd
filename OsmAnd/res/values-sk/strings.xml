@@ -3955,7 +3955,6 @@
     <string name="routing_engine_vehicle_type_foot">Chôdza</string>
     <string name="routing_engine_vehicle_type_bike">Bicykel</string>
     <string name="routing_engine_vehicle_type_car">Auto</string>
-    <string name="message_error_recheck_parameters">Chyba, skontrolujte parametre</string>
     <string name="copy_address">Kopírovať adresu</string>
     <string name="online_routing_engine">Online navigačná služba</string>
     <string name="online_routing_engines">Online navigačné služby</string>

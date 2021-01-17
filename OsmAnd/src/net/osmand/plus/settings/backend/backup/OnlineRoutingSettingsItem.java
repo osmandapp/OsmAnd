@@ -106,7 +106,7 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 		try {
 			OnlineRoutingHelper.readFromJson(json, items);
-		} catch (JSONException e) {
+		} catch (JSONException | IllegalArgumentException e) {
 			warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 			throw new IllegalArgumentException("Json parse error", e);
 		}

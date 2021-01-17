@@ -17,10 +17,10 @@ public class OnlineRoutingEngineDataObject extends ProfileDataObject {
 	}
 
 	@Override
-	public int compareTo(@NonNull ProfileDataObject another) {
-		if (another instanceof OnlineRoutingEngineDataObject) {
-			OnlineRoutingEngineDataObject anotherEngine = (OnlineRoutingEngineDataObject) another;
-			return Integer.compare(this.order, anotherEngine.order);
+	public int compareTo(@NonNull ProfileDataObject profileDataObject) {
+		if (profileDataObject instanceof OnlineRoutingEngineDataObject) {
+			OnlineRoutingEngineDataObject another = (OnlineRoutingEngineDataObject) profileDataObject;
+			return (this.order < another.order) ? -1 : ((this.order == another.order) ? 0 : 1);
 		}
 		return 0;
 	}

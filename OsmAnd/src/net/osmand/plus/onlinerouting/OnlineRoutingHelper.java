@@ -156,7 +156,7 @@ public class OnlineRoutingHelper {
 			try {
 				JSONObject json = new JSONObject(jsonString);
 				readFromJson(json, engines);
-			} catch (JSONException e) {
+			} catch (JSONException | IllegalArgumentException e) {
 				LOG.debug("Error when reading engines from JSON ", e);
 			}
 		}

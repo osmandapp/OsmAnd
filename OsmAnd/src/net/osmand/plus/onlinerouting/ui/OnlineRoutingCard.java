@@ -156,7 +156,7 @@ public class OnlineRoutingCard extends BaseCard {
 	public void hideFieldBoxError() {
 		hideElements(tvErrorText);
 		if (fieldBoxHelperTextShowed) {
-			showElements(tvErrorText);
+			showElements(tvHelperText);
 		}
 	}
 

@@ -15,6 +15,8 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.util.Algorithms.isEmpty;
+
 public class GraphhopperEngine extends OnlineRoutingEngine {
 
 	public GraphhopperEngine(@Nullable Map<String, String> params) {
@@ -62,11 +64,11 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 					.append('&');
 		}
 		String vehicle = get(EngineParameter.VEHICLE_KEY);
-		if (vehicle != null) {
+		if (isEmpty(vehicle)) {
 			sb.append("vehicle=").append(vehicle);
 		}
 		String apiKey = get(EngineParameter.API_KEY);
-		if (apiKey != null) {
+		if (isEmpty(apiKey)) {
 			sb.append('&').append("key=").append(apiKey);
 		}
 	}

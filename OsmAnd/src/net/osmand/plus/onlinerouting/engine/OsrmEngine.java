@@ -15,6 +15,8 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.util.Algorithms.isEmpty;
+
 public class OsrmEngine extends OnlineRoutingEngine {
 
 	public OsrmEngine(@Nullable Map<String, String> params) {

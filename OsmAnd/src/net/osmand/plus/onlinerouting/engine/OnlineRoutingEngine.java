@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.util.Algorithms.isEmpty;
+
 public abstract class OnlineRoutingEngine implements Cloneable {
 
 	public final static String ONLINE_ROUTING_ENGINE_PREFIX = "online_routing_engine_";
@@ -33,7 +35,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	private final Set<EngineParameter> allowedParameters = new HashSet<>();
 
 	public OnlineRoutingEngine(@Nullable Map<String, String> params) {
-		if (!Algorithms.isEmpty(params)) {
+		if (!isEmpty(params)) {
 			this.params.putAll(params);
 		}
 		collectAllowedVehiclesInternal();
@@ -62,13 +64,13 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	private String getStandardName(@NonNull Context ctx) {
 		String base = getBaseName(ctx);
 		String index = get(EngineParameter.NAME_INDEX);
-		return !Algorithms.isEmpty(index) ? base + " " + index : base;
+		return !isEmpty(index) ? base + " " + index : base;
 	}
 
 	@NonNull
 	public String getBaseName(@NonNull Context ctx) {
 		String vehicleTitle = getSelectedVehicleName(ctx);
-		if (Algorithms.isEmpty(vehicleTitle)) {
+		if (isEmpty(vehicleTitle)) {
 			return getType().getTitle();
 		} else {
 			String pattern = ctx.getString(R.string.ltr_or_rtl_combine_via_dash);
@@ -79,7 +81,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@NonNull
 	public String getBaseUrl() {
 		String customUrl = get(EngineParameter.CUSTOM_URL);
-		if (Algorithms.isEmpty(customUrl)) {
+		if (isEmpty(customUrl)) {
 			return getStandardUrl();
 		}
 		return customUrl;
@@ -184,10 +186,6 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@Override
 	public Object clone() {
 		return OnlineRoutingFactory.createEngine(getType(), getParams());
-	}
-
-	protected boolean isEmpty(@Nullable String s) {
-		return Algorithms.isEmpty(s);
 	}
 
 	@NonNull

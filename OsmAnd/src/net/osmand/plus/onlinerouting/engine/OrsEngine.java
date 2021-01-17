@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.util.Algorithms.isEmpty;
+
 public class OrsEngine extends OnlineRoutingEngine {
 
 	public OrsEngine(@Nullable Map<String, String> params) {

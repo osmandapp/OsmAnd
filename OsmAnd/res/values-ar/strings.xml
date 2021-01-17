@@ -4023,7 +4023,6 @@
     <string name="routing_engine_vehicle_type_foot">قدم</string>
     <string name="routing_engine_vehicle_type_bike">دراجة هوائية</string>
     <string name="routing_engine_vehicle_type_car">سيارة</string>
-    <string name="message_error_recheck_parameters">خطأ، أعد التحقق من المعايير</string>
     <string name="copy_address">نسخ العنوان</string>
     <string name="online_routing_engine">محرك التوجيه عبر الإنترنت</string>
     <string name="online_routing_engines">محركات التوجيه عبر الإنترنت</string>

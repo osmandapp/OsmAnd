@@ -3957,7 +3957,6 @@
     <string name="routing_engine_vehicle_type_foot">A pee</string>
     <string name="routing_engine_vehicle_type_bike">Bitzicleta</string>
     <string name="routing_engine_vehicle_type_car">Màchina</string>
-    <string name="message_error_recheck_parameters">Errore, torra a verificare sos paràmetros</string>
     <string name="copy_address">Còpia s\'indiritzu</string>
     <string name="online_routing_engine">Motore de càrculu in lìnia</string>
     <string name="online_routing_engines">Motores de càrculu in lìnia</string>
