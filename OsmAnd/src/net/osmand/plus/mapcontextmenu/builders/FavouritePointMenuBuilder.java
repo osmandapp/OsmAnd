@@ -59,9 +59,9 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, boolean process, int iconId, String text) {
+	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, boolean process, int iconId, String text, String amenityKey) {
 		if (originObject == null || !(originObject instanceof Amenity)) {
-			super.buildNearestRow(view, nearestAmenities, process, iconId, text);
+			super.buildNearestRow(view, nearestAmenities, process, iconId, text, amenityKey);
 		}
 	}
 

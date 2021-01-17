@@ -43,6 +43,7 @@ public class TravelArticle {
 	String aggregatedPartOf;
 
 	long lastModified;
+	boolean gpxFileRead;
 
 	@NonNull
 	public TravelArticleIdentifier generateIdentifier() {
@@ -237,14 +238,13 @@ public class TravelArticle {
 			TravelArticleIdentifier that = (TravelArticleIdentifier) o;
 			return areLatLonEqual(that.lat, that.lon, lat, lon) &&
 					Algorithms.objectEquals(file, that.file) &&
-					Algorithms.stringsEqual(title, that.title) &&
 					Algorithms.stringsEqual(routeId, that.routeId) &&
 					Algorithms.stringsEqual(routeSource, that.routeSource);
 		}
 
 		@Override
 		public int hashCode() {
-			return Algorithms.hash(file, lat, lon, title, routeId, routeSource);
+			return Algorithms.hash(file, lat, lon, routeId, routeSource);
 		}
 
 		private static boolean areLatLonEqual(double lat1, double lon1, double lat2, double lon2) {

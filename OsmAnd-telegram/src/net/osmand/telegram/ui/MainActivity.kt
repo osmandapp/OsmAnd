@@ -447,8 +447,10 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 	
 	private fun runOnUi(action: (() -> Unit)) {
-		if (!paused) {
-			runOnUiThread(action)
+		runOnUiThread {
+			if (!paused) {
+				action()
+			}
 		}
 	}
 

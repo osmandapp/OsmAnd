@@ -29,8 +29,7 @@
 	<string name="poi_fabric">Drapery shop</string>
 	<string name="poi_erotic">Erotic shop</string>
 	<string name="poi_fashion">Fashion shop</string>
-	<string name="poi_furnace">Heating units shop</string>
-	<string name="poi_furniture">Furniture shop</string>
+    <string name="poi_furniture">Furniture shop</string>
 	<string name="poi_garden_centre">Garden centre</string>
 	<string name="poi_garden_furniture">Garden furniture shop</string>
 	<string name="poi_gas">Liquid gas shop</string>
@@ -66,53 +65,50 @@
 	<string name="poi_weapons">Weapons shop</string>
 	<string name="poi_perfumery">Perfume shop</string>
 
-	<string name="poi_traffic_signals">Traffic signal</string>
+    <string name="poi_traffic_signals">Traffic signal</string>
 
-	<string name="poi_service_tyres">Tyres</string>
+    <string name="poi_service_tyres">Tyres</string>
 	<string name="poi_fuel">Petrol station</string>
 
-	<string name="poi_railway_station">Railway station</string>
+    <string name="poi_railway_station">Railway station</string>
 	<string name="poi_railway_platform">Railway platform</string>
 	<string name="poi_halt">Railway stop</string>
 	<string name="poi_subway_entrance">Underground entrance</string>
 	<string name="poi_subway_station">Underground station</string>
 	<string name="poi_railway_buffer_stop">Railway buffer stop</string>
 
-	<string name="poi_recycling_centre">Type: recycling centre</string>
+    <string name="poi_recycling_centre">Type: recycling centre</string>
 
-	<string name="poi_waste_disposal">Waste disposal</string>
+    <string name="poi_waste_disposal">Waste disposal</string>
 	<string name="poi_waste_basket">Waste basket</string>
 
-	<string name="poi_landuse_railway">Railway area</string>
+    <string name="poi_landuse_railway">Railway area</string>
+    <string name="poi_sports_centre">Sports centre</string>
 
-	<string name="poi_healthcare_centre">Healthcare centre</string>
+    <string name="poi_club_theatre">Theatre club</string>
 
-	<string name="poi_sports_centre">Sports centre</string>
+    <string name="poi_arts_centre">Arts centre</string>
 
-	<string name="poi_club_theatre">Theatre club</string>
-
-	<string name="poi_arts_centre">Arts centre</string>
-
-	<string name="poi_community_centre">Community centre</string>
+    <string name="poi_community_centre">Community centre</string>
 	<string name="poi_social_centre">Social centre</string>
 	<string name="poi_theatre">Theatre</string>
 
-	<string name="poi_harbour_basin">Harbour basin</string>
+    <string name="poi_harbour_basin">Harbour basin</string>
 	<string name="poi_seamark_harbour">Harbour</string>
 
-	<string name="poi_crossing_traffic_signals">With traffic signals</string>
+    <string name="poi_crossing_traffic_signals">With traffic signals</string>
 
-	<string name="poi_railway_crossing">Railway crossing</string>
+    <string name="poi_railway_crossing">Railway crossing</string>
 
-	<string name="poi_tunnel_railway">Railway tunnel</string>
+    <string name="poi_tunnel_railway">Railway tunnel</string>
 	<string name="poi_bridge_railway">Railway bridge</string>
 
-	<string name="poi_route_railway_ref">Route of a railway</string>
+    <string name="poi_route_railway_ref">Route of a railway</string>
 
-	<string name="poi_historic_railway_station">Historic railway station</string>
+    <string name="poi_historic_railway_station">Historic railway station</string>
 	<string name="poi_historic_railway">Historic railway</string>
 
-	<string name="poi_counselling_type_addiction_yes">Counselling (addiction): yes</string>
+    <string name="poi_counselling_type_addiction_yes">Counselling (addiction): yes</string>
 	<string name="poi_counselling_type_addiction_no">Counselling (addiction): no</string>
 	<string name="poi_counselling_type_antenatal_yes">Counselling (antenatal): yes</string>
 	<string name="poi_counselling_type_antenatal_no">Counselling (antenatal): no</string>

@@ -1769,6 +1769,10 @@ public class BinaryMapIndexReader {
 			return limit != -1 && searchResults.size() > limit;
 		}
 
+		public void setLimit(int limit) {
+			this.limit = limit;
+		}
+
 		public boolean isCancelled() {
 			if (this.interrupted) {
 				return interrupted;

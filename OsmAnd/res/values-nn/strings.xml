@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_coloredBuildings_name">Farga bygningar</string>
-    
-    
-    
     <string name="continue_navigation">Hald fram navigering</string>
     <string name="pause_navigation">Stopp navigering mellombels</string>
     <string name="rendering_attr_subwayMode_name">T-banemodus</string>
@@ -29,12 +26,8 @@
     <string name="rendering_attr_showSurfaceGrade_name">Vis vegkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Vis vegdekke</string>
     <string name="rendering_attr_showCycleRoutes_name">Vis sykkelruter</string>
-    
-    
-    
     <string name="sort_by_distance">Sorter etter avstand</string>
     <string name="sort_by_name">Sorter etter namn</string>
-    
     <string name="show_zoom_buttons_navigation_descr">Vis forstørringsknappar ved navigering</string>
     <string name="show_zoom_buttons_navigation">Vis forstørringsknappar</string>
     <string name="save_as_favorites_points">Lagra som favorittgruppe</string>
@@ -58,30 +51,12 @@
     <string name="shared_string_tracks">Spor</string>
     <string name="shared_string_my_favorites">Mine favorittar</string>
     <string name="shared_string_my_places">Mine stadar</string>
-    
-    
-    
-    
-    
-	
-	<string name="rendering_value_pink_name">rosa</string>
-	
-	<string name="rendering_value_brown_name">brun</string>
-	
-	
-	
-	
-	
-    
+    <string name="rendering_value_pink_name">rosa</string>
+    <string name="rendering_value_brown_name">brun</string>
     <string name="osmo_edit_color">Vis fargar</string>
-    
-    
-    
-    
-	<string name="int_days">dagar</string>
+    <string name="int_days">dagar</string>
     <string name="osmo_connect_menu">Kopla til</string>
     <string name="shared_string_description">Skildring</string>
-    
     <string name="lang_zh">Kinesisk</string>
     <string name="lang_pt_br">Portugisisk (Brasil)</string>
     <string name="lang_en">Engelsk</string>
@@ -139,9 +114,7 @@
     <string name="shared_string_select_on_map">Vel på kartet …</string>
     <string name="shared_string_favorite">Favoritt …</string>
     <string name="route_info">Ruteinformasjon</string>
-    
-	
-	<string name="routing_attr_avoid_ferries_name">Unngår ferjer</string>
+    <string name="routing_attr_avoid_ferries_name">Unngår ferjer</string>
 	<string name="routing_attr_avoid_ferries_description">Unngå ferjer</string>
 	<string name="routing_attr_weight_name">Maksvekt</string>
 	<string name="copying_osmand_files">Kopierer OsmAnd-filer</string>
@@ -154,16 +127,12 @@
     <string name="app_mode_motorcycle">Motorsykkel</string>
     <string name="app_mode_boat">Båt</string>
     <string name="app_mode_aircraft">Fly</string>
-    
     <string name="shared_string_delete_all">Slett alt</string>
     <string name="shared_string_and">og</string>
     <string name="shared_string_or">eller</string>
-	
     <string name="base_world_map">Globalt grunnkart</string>
-	
-	<string name="about_version">Versjon:</string>
+    <string name="about_version">Versjon:</string>
     <string name="shared_string_about">Om</string>
-    
     <string name="edit_tilesource_maxzoom">Maksforstørring</string>
     <string name="edit_tilesource_minzoom">Minste forstørring</string>
     <string name="edit_tilesource_url_to_load">Adresse</string>
@@ -173,12 +142,10 @@
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa og Asia</string>
     <string name="route_descr_map_location">Kart:</string>
-    
     <string name="route_to">Til:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Frå:</string>
-	
-	<string name="app_mode_default">Vis kart</string>
+    <string name="app_mode_default">Vis kart</string>
 	<string name="settings_preset">Standardprofil</string>
 	<string name="destination_point">Mål %1$s</string>
     <string name="please_select_address">Vel først by eller gate</string>
@@ -192,7 +159,6 @@
     <string name="distance_measurement_start_editing">Start redigering</string>
     <string name="distance_measurement_finish_editing">Fullfør redigering</string>
     <string name="distance_measurement_clear_route">Fjern alle punkta</string>
-    
     <string name="distance_measurement_load_gpx">Opna GPX-fil</string>
     <string name="use_kalman_filter_compass">Bruk Kalman-filter</string>
     <string name="use_magnetic_sensor">Bruk magnetisk sensor</string>
@@ -221,10 +187,7 @@
 	<string name="prefer_in_routing_descr">Føretrekk motorvegar</string>
     <string name="max_speed_none">ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    
     <string name="download_hillshade_maps">Fjellskugge-lag</string>
-    
-    
     <string name="local_indexes_cat_srtm">Høgdekurvedata</string>
     <string name="recording_context_menu_show">Vis</string>
     <string name="recording_photo_description">Foto %1$s av %2$s</string>
@@ -247,7 +210,6 @@
     <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Lyd-/video-notat</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
-    
     <string name="map_widget_audionotes">Lydnotat</string>
     <string name="audionotes_plugin_description">Ta lyd- eller videonotat under turen</string>
     <string name="audionotes_plugin_name">Lyd-/videonotat</string>
@@ -261,9 +223,7 @@
     <string name="download_roads_only_maps">Kart med berre vegar</string>
     <string name="rendering_attr_alpineHiking_name">Fjellturkart</string>
     <string name="rendering_attr_noAdminboundaries_name">Gøym grenser</string>
-	
-	
-	<string name="map_widget_max_speed">Fartsgrense</string>
+    <string name="map_widget_max_speed">Fartsgrense</string>
     <string name="no_buildings_found">Fann ingen bygningar.</string>
     <string name="rendering_attr_showRoadMaps_name">Kart med berre vegar</string>
     <string name="safe_mode">Sikkermodus</string>

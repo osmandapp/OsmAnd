@@ -1,8 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'ivy-publish'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'com.github.osmandapp.osmand'
-version = '2.0.0'
 
 android {
     compileSdkVersion 28
@@ -22,6 +21,33 @@ android {
             manifest.srcFile "AndroidManifest.xml"
             aidl.srcDirs = ["src"]
             java.srcDirs = ["src"]
+        }
+    }
+}
+
+afterEvaluate {
+    publishing {
+        repositories {    
+            ivy {
+                url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
+            }
+        }
+
+        publications {
+             release(IvyPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+                organisation = 'net.osmand'
+                module = 'android-aidl-lib'
+                revision = 'master-snapshot'
+             }
+             debug(IvyPublication) {
+                // Applies the component for the release build variant.
+                from components.debug
+                organisation = 'net.osmand'
+                module = 'android-aidl-lib'
+                revision = 'master-snapshot'
+             }
         }
     }
 }
