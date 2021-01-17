@@ -859,10 +859,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
 		boolean trackDialogOpened = mapActivity.getTrackDetailsMenu().isVisible();
-		boolean trackMenuFragmentOpened = false;
-		if (mapActivity.getTrackMenuFragment() != null && mapActivity.getTrackMenuFragment().isVisible()) {
-			trackMenuFragmentOpened = true;
-		}
 		boolean contextMenuOpened = !mapActivity.getContextMenu().shouldShowTopControls();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
@@ -875,18 +871,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showBottomMenuButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode()
 				&& !isInPlanRouteMode() && !contextMenuOpened && !isInChoosingRoutesMode()
-				&& !isInWaypointsChoosingMode() && !isInFollowTrackMode() && !isInTrackAppearanceMode();
+				&& !isInWaypointsChoosingMode() && !isInFollowTrackMode() && !isInTrackAppearanceMode()
+				&& !isInTrackMenuMode();
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
 		boolean showZoomButtons = !routeDialogOpened && !contextMenuOpened && !isInTrackAppearanceMode()
-				&& (!isInGpxApproximationMode() || !isPotrait())
+				&& !isInTrackMenuMode() && (!isInGpxApproximationMode() || !isPotrait())
 				&& !isInFollowTrackMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !portrait);
 		mapZoomIn.updateVisibility(showZoomButtons);
 		mapZoomOut.updateVisibility(showZoomButtons);
 
-		boolean forceHideCompass = routeDialogOpened || trackDialogOpened || trackMenuFragmentOpened || isInMeasurementToolMode()
-				|| isInPlanRouteMode() || contextMenuOpened || isInChoosingRoutesMode()
+		boolean forceHideCompass = routeDialogOpened || trackDialogOpened || isInMeasurementToolMode()
+				|| isInPlanRouteMode() || contextMenuOpened || isInChoosingRoutesMode() || isInTrackMenuMode()
 				|| isInTrackAppearanceMode() || isInWaypointsChoosingMode() || isInFollowTrackMode();
 		compassHud.forceHideCompass = forceHideCompass;
 		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
@@ -896,9 +893,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (layersHud.setIconResId(appMode.getIconRes())) {
 			layersHud.update(app, isNight);
 		}
-		boolean showTopButtons = !routeDialogOpened && !trackDialogOpened && !trackMenuFragmentOpened && !contextMenuOpened
+		boolean showTopButtons = !routeDialogOpened && !trackDialogOpened && !contextMenuOpened
 				&& !isInMeasurementToolMode() && !isInPlanRouteMode()  && !isInChoosingRoutesMode()
-				&& !isInTrackAppearanceMode() && !isInWaypointsChoosingMode() && !isInFollowTrackMode();
+				&& !isInTrackAppearanceMode() && !isInWaypointsChoosingMode() && !isInFollowTrackMode()
+				&& !isInTrackMenuMode();
 		layersHud.updateVisibility(showTopButtons);
 		quickSearchHud.updateVisibility(showTopButtons);
 
@@ -1025,7 +1023,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 		boolean visible = !(tracked && rh.isFollowingMode()) && (!isInGpxApproximationMode() || !isPotrait());
 		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInPlanRouteMode()
-				&& !isInTrackAppearanceMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !isInFollowTrackMode() || !isPotrait()));
+				&& !isInTrackAppearanceMode() && !isInTrackMenuMode()
+				&& (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !isInFollowTrackMode() || !isPotrait()));
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
@@ -1346,6 +1345,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private boolean isInGpxApproximationMode() {
 		return mapActivity.getMapLayers().getMeasurementToolLayer().isTapsDisabled();
+	}
+
+	public boolean isInTrackMenuMode() {
+		return mapActivity.getTrackMenuFragment() != null && mapActivity.getTrackMenuFragment().isVisible();
 	}
 
 	private boolean isInChoosingRoutesMode() {

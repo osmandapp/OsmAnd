@@ -71,7 +71,6 @@ import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
-import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.util.Algorithms;
 
@@ -115,7 +114,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private OptionsCard optionsCard;
 
 	private TrackChartPoints trackChartPoints;
-	private MapControlsLayer.MapHudButton layersHud;
 
 	private int menuTitleHeight;
 
@@ -197,7 +195,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			view.setOnLongClickListener(closeOnLongTap);
 			bottomNav = view.findViewById(R.id.bottom_navigation);
 			routeMenuTopShadowAll = view.findViewById(R.id.route_menu_top_shadow_all);
 			headerTitle = view.findViewById(R.id.title);
@@ -220,15 +217,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		return view;
 	}
-
-	private View.OnLongClickListener closeOnLongTap = new View.OnLongClickListener() {
-
-		@Override
-		public boolean onLongClick(View view) {
-			dismiss();
-			return true;
-		}
-	};
 
 	private void updateHeader() {
 		if (menuType == TrackMenuType.OPTIONS) {
