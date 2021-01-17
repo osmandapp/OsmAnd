@@ -8,14 +8,14 @@ import android.widget.TextView;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -193,7 +193,8 @@ public class MapMarkersWidgetsFactory {
 				|| map.isTopToolbarActive()
 				|| !map.getContextMenu().shouldShowTopControls()
 				|| map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
-				|| map.getMapLayers().getMapMarkersLayer().isInPlanRouteMode()) {
+				|| map.getMapLayers().getMapMarkersLayer().isInPlanRouteMode()
+				|| map.getMapLayers().getMapControlsLayer().isInTrackMenuMode()) {
 			updateVisibility(false);
 			return;
 		}

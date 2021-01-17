@@ -208,6 +208,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				params.gravity = Gravity.BOTTOM | Gravity.START;
 				bottomNav.setLayoutParams(params);
 			}
+
 			setupCards();
 			updateHeader();
 			setupButtons(view);
@@ -295,6 +296,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitTrackAppearanceMode();
+		updateStatusBarColor();
 	}
 
 	@Override
