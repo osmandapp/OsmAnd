@@ -3948,4 +3948,7 @@
     <string name="profile_type_osmand_string">Perfil de OsmAnd</string>
     <string name="profile_by_default_description">Elige el perfil que será usado al iniciar la aplicación.</string>
     <string name="voice_prompts_timetable">Tiempo de indicaciones por voz</string>
+    <string name="select_folder">Seleccionar carpeta</string>
+    <string name="shared_string_folders">Carpetas</string>
+    <string name="change_folder">Cambiar carpeta</string>
 </resources>
