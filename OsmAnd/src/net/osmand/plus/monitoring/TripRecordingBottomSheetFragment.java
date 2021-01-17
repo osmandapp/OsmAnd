@@ -35,11 +35,9 @@ import net.osmand.plus.widgets.TextViewEx;
 public class TripRecordingBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = TripRecordingBottomSheetFragment.class.getSimpleName();
-	SwitchCompat confirmEveryRun;
-	boolean showTrackOnMap;
-	ImageView upDownBtn;
+	private SwitchCompat confirmEveryRun;
+	private ImageView upDownBtn;
 	private boolean infoExpanded;
-	private MapActivity mapActivity;
 	private GpxSelectionHelper.SelectedGpxFile selectedGpxFile;
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -57,6 +55,9 @@ public class TripRecordingBottomSheetFragment extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		app = requiredMyApplication();
+		settings = app.getSettings();
+
 		View itemView = UiUtilities.getInflater(getMapActivity(), nightMode).inflate(
 				R.layout.trip_recording_fragment, null, false);
 		BaseBottomSheetItem descriptionItem = new BottomSheetItemWithDescription.Builder()
@@ -66,22 +67,7 @@ public class TripRecordingBottomSheetFragment extends MenuBottomSheetDialogFragm
 
 		items.add(descriptionItem);
 
-		app = getMyApplication();
-		if (app == null) {
-			return;
-		}
-
-		mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-
-		Context context = getContext();
-		if (context == null) {
-			return;
-		}
-
-		settings = app.getSettings();
+		final Context context = getContext();
 
 		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		final int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
@@ -101,7 +87,8 @@ public class TripRecordingBottomSheetFragment extends MenuBottomSheetDialogFragm
 		trackAppearanceIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile);
+				dismiss();
+				TrackAppearanceFragment.showInstance(getMapActivity(), selectedGpxFile);
 			}
 		});
 
@@ -137,14 +124,14 @@ public class TripRecordingBottomSheetFragment extends MenuBottomSheetDialogFragm
 				String s;
 				int progress = (int) value;
 				if (progress == 0) {
-					s = getContext().getString(R.string.int_continuosly);
+					s = context.getString(R.string.int_continuosly);
 					loggingInterval.value = 0;
 				} else {
 					if (progress < secondsLength) {
-						s = SECONDS[progress] + " " + getContext().getString(R.string.int_seconds);
+						s = SECONDS[progress] + " " + context.getString(R.string.int_seconds);
 						loggingInterval.value = SECONDS[progress] * 1000;
 					} else {
-						s = MINUTES[progress - secondsLength] + " " + getContext().getString(R.string.int_min);
+						s = MINUTES[progress - secondsLength] + " " + context.getString(R.string.int_min);
 						loggingInterval.value = MINUTES[progress - secondsLength] * 60 * 1000;
 					}
 				}
@@ -166,18 +153,17 @@ public class TripRecordingBottomSheetFragment extends MenuBottomSheetDialogFragm
 			}
 		}
 
-		if (choiceLoggingInterval != null) {
-			confirmEveryRun.setChecked(!choiceLoggingInterval.value);
-			confirmEveryRun.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					choiceLoggingInterval.value = !isChecked;
-				}
-			});
-		}
+		confirmEveryRun.setChecked(!choiceLoggingInterval.value);
+		confirmEveryRun.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				choiceLoggingInterval.value = !isChecked;
+			}
+		});
 
-		if (showTrackOnMap) {
+
 			SwitchCompat showTrackOnMapButton = showTrackOnMapView.findViewById(R.id.switch_button);
+			showTrackOnMapButton.setChecked(true);
 			showTrackOnMapButton.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
 			showTrackOnMapButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -186,7 +172,7 @@ public class TripRecordingBottomSheetFragment extends MenuBottomSheetDialogFragm
 					app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), isChecked, false);
 				}
 			});
-		}
+
 
 		setPaddingAndBackgroundForSwitchCompat(paddingSmall, confirmEveryRun, nightMode);
 		collapseInfoView();

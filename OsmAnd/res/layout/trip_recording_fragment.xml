@@ -3,25 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/content_padding"
-        android:paddingLeft="@dimen/content_padding"
-        android:paddingTop="@dimen/bottom_sheet_content_margin"
-        android:paddingEnd="@dimen/content_padding"
-        android:paddingRight="@dimen/content_padding">
+    android:orientation="vertical"
+    android:paddingStart="@dimen/content_padding"
+    android:paddingLeft="@dimen/content_padding"
+    android:paddingTop="@dimen/bottom_sheet_content_margin"
+    android:paddingEnd="@dimen/content_padding"
+    android:paddingRight="@dimen/content_padding">
 
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/content_padding"
             android:letterSpacing="@dimen/text_button_letter_spacing"
             android:text="@string/monitoring_settings"
             android:textSize="@dimen/default_list_text_size"
@@ -103,5 +98,5 @@
 
     </LinearLayout>
 
-</LinearLayout>
+
 

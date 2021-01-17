@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:minHeight="@dimen/bottom_sheet_selected_item_title_height">
 
@@ -13,9 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="?attr/selectableItemBackground"
-        android:paddingEnd="0dp"
-        android:paddingRight="0dp">
+        android:background="?attr/selectableItemBackground">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -44,7 +41,7 @@
             android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
             android:layout_marginEnd="@dimen/content_padding_half"
             android:layout_marginRight="@dimen/content_padding_half"
-            android:checked="true" />
+            tools:checked="true" />
 
     </LinearLayout>
 
@@ -63,8 +60,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon_after_divider"
-            android:layout_width="@dimen/standard_icon_size"
-            android:layout_height="@dimen/standard_icon_size"
+            style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+            android:layout_width="@dimen/acceptable_touch_radius"
+            android:layout_height="@dimen/acceptable_touch_radius"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginRight="@dimen/content_padding"

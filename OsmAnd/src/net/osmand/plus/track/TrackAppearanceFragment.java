@@ -42,6 +42,8 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapillary.MapillaryFiltersFragment;
+import net.osmand.plus.monitoring.TripRecordingBottomSheetFragment;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -160,8 +162,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			public void handleOnBackPressed() {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					dismissImmediate();
-					mapActivity.launchPrevActivityIntent();
+					TripRecordingBottomSheetFragment fragment = mapActivity.getTripRecordingBottomSheetFragment();
+					if (fragment != null) {
+						fragment.show(mapActivity.getSupportFragmentManager(), TripRecordingBottomSheetFragment.TAG);
+					} else {
+						dismissImmediate();
+						mapActivity.launchPrevActivityIntent();
+					}
 				}
 			}
 		});
