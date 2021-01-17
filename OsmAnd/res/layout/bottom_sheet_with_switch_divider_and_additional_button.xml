@@ -14,8 +14,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="?attr/selectableItemBackground"
-        android:paddingStart="@dimen/content_padding"
-        android:paddingLeft="@dimen/content_padding"
         android:paddingEnd="0dp"
         android:paddingRight="0dp">
 
@@ -37,8 +35,8 @@
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/compound_button"
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -46,10 +44,7 @@
             android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
             android:layout_marginEnd="@dimen/content_padding_half"
             android:layout_marginRight="@dimen/content_padding_half"
-            android:background="@null"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false" />
+            android:checked="true" />
 
     </LinearLayout>
 
@@ -67,13 +62,13 @@
             android:background="?attr/divider_color_basic" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/test"
+            android:id="@+id/icon_after_divider"
             android:layout_width="@dimen/standard_icon_size"
             android:layout_height="@dimen/standard_icon_size"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginRight="@dimen/content_padding"
-            app:srcCompat="@drawable/ic_action_info_dark" />
+            app:srcCompat="@drawable/ic_action_track_line_bold_color" />
 
     </LinearLayout>
 

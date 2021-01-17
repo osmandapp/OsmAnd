@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.ListItemTitle"
-            tools:text="Some title"/>
+            tools:text="Some title" />
 
         <TextView
             android:id="@+id/description"
@@ -45,7 +45,7 @@
             android:maxLines="2"
             android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
             android:textColor="@null"
-            tools:text="Some description"/>
+            tools:text="Some description" />
     </LinearLayout>
 
     <androidx.appcompat.widget.SwitchCompat
