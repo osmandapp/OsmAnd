@@ -3956,7 +3956,6 @@
     <string name="test_route_calculation">Obliczanie trasy testowej</string>
     <string name="routing_engine_vehicle_type_bike">Rower</string>
     <string name="routing_engine_vehicle_type_car">Samochód</string>
-    <string name="message_error_recheck_parameters">Błąd, ponownie sprawdź parametry</string>
     <string name="copy_address">Skopiuj adres</string>
     <string name="routing_engine_vehicle_type_driving">Jazda</string>
     <string name="routing_engine_vehicle_type_foot">Stopa</string>

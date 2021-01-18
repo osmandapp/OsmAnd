@@ -1,4 +1,4 @@
-package net.osmand.plus.onlinerouting;
+package net.osmand.plus.onlinerouting.ui;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,9 +43,12 @@ public class OnlineRoutingCard extends BaseCard {
 	private OsmandTextFieldBoxes textFieldBoxes;
 	private EditText editText;
 	private TextView tvHelperText;
+	private TextView tvErrorText;
 	private View bottomDivider;
 	private View button;
 	private OnTextChangedListener onTextChangedListener;
+	private boolean fieldBoxHelperTextShowed;
+
 	private ApplicationMode appMode;
 
 	public OnlineRoutingCard(@NonNull MapActivity mapActivity, boolean nightMode, ApplicationMode appMode) {
@@ -69,6 +73,7 @@ public class OnlineRoutingCard extends BaseCard {
 		textFieldBoxes = view.findViewById(R.id.field_box);
 		editText = view.findViewById(R.id.edit_text);
 		tvHelperText = view.findViewById(R.id.helper_text);
+		tvErrorText = view.findViewById(R.id.error_text);
 		bottomDivider = view.findViewById(R.id.bottom_divider);
 		button = view.findViewById(R.id.button);
 
@@ -88,7 +93,7 @@ public class OnlineRoutingCard extends BaseCard {
 			public void afterTextChanged(Editable s) {
 				if (onTextChangedListener != null) {
 					boolean editedByUser = editText.getTag() == null;
-					String text = editText.getText().toString();
+					String text = editText.getText().toString().trim();
 					onTextChangedListener.onTextChanged(editedByUser, text);
 				}
 			}
@@ -115,9 +120,9 @@ public class OnlineRoutingCard extends BaseCard {
 		tvHeaderSubtitle.setText(subtitle);
 	}
 
-	public void setSelectionMenu(List<HorizontalSelectionItem> items,
-	                             String selectedItemTitle,
-	                             final CallbackWithObject<HorizontalSelectionItem> callback) {
+	public void setSelectionMenu(@NonNull List<HorizontalSelectionItem> items,
+	                             @NonNull String selectedItemTitle,
+	                             @NonNull final CallbackWithObject<HorizontalSelectionItem> callback) {
 		showElements(rvSelectionMenu);
 		rvSelectionMenu.setLayoutManager(
 				new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
@@ -152,15 +157,31 @@ public class OnlineRoutingCard extends BaseCard {
 
 	public void setFieldBoxHelperText(@NonNull String helperText) {
 		showElements(fieldBoxContainer, tvHelperText);
+		fieldBoxHelperTextShowed = true;
 		tvHelperText.setText(helperText);
 	}
 
+	public void showFieldBoxError(@NonNull String errorText) {
+		showElements(fieldBoxContainer, tvErrorText);
+		hideElements(tvHelperText);
+		tvErrorText.setText(errorText);
+	}
+
+	public void hideFieldBoxError() {
+		hideElements(tvErrorText);
+		if (fieldBoxHelperTextShowed) {
+			showElements(tvHelperText);
+		}
+	}
+
 	public void setEditedText(@NonNull String text) {
-		editText.setTag("");    // needed to indicate that the text was edited programmatically
+		showElements(fieldBoxContainer);
+		editText.setTag("");    // indicate that the text was edited programmatically
 		editText.setText(text);
 		editText.setTag(null);
 	}
 
+	@NonNull
 	public String getEditedText() {
 		return editText.getText().toString();
 	}
@@ -169,7 +190,8 @@ public class OnlineRoutingCard extends BaseCard {
 		showElements(bottomDivider);
 	}
 
-	public void setButton(String title, OnClickListener listener) {
+	public void setButton(@NonNull String title,
+	                      @NonNull OnClickListener listener) {
 		showElements(button);
 		button.setOnClickListener(listener);
 		UiUtilities.setupDialogButton(nightMode, button, DialogButtonType.PRIMARY, title);
@@ -199,11 +221,11 @@ public class OnlineRoutingCard extends BaseCard {
 		AndroidUiHelper.setVisibility(View.GONE, views);
 	}
 
-	public void setOnTextChangedListener(OnTextChangedListener onTextChangedListener) {
+	public void setOnTextChangedListener(@Nullable OnTextChangedListener onTextChangedListener) {
 		this.onTextChangedListener = onTextChangedListener;
 	}
 
 	public interface OnTextChangedListener {
-		void onTextChanged(boolean editedByUser, String text);
+		void onTextChanged(boolean editedByUser, @NonNull String text);
 	}
 }

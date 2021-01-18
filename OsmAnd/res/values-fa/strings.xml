@@ -3953,5 +3953,4 @@
     <string name="routing_engine_vehicle_type_foot">پا</string>
     <string name="routing_engine_vehicle_type_bike">دوچرخه</string>
     <string name="routing_engine_vehicle_type_car">خودرو</string>
-    <string name="message_error_recheck_parameters">خطا، پارامترها را بازبینی کنید</string>
 </resources>

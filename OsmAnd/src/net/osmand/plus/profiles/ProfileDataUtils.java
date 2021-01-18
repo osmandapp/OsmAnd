@@ -5,7 +5,7 @@ import android.content.Context;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GeneralRouter;
@@ -56,7 +56,22 @@ public class ProfileDataUtils {
 		Collections.sort(fileNames, new Comparator<String>() {
 			@Override
 			public int compare(String s, String t1) {
-				return s.equals(OSMAND_NAVIGATION) ? -1 : t1.equals(OSMAND_NAVIGATION) ? 1 : s.compareToIgnoreCase(t1);
+				// OsmAnd navigation should be at the top of the list
+				if (s.equals(OSMAND_NAVIGATION)) {
+					return -1;
+				} else if (t1.equals(OSMAND_NAVIGATION)) {
+					return 1;
+
+				// Online navigation should be at the bottom of the list
+				} else if (s.equals(ONLINE_NAVIGATION)) {
+					return 1;
+				} else if (t1.equals(ONLINE_NAVIGATION)) {
+					return -1;
+
+				// Other sorted by file names
+				} else {
+					return s.compareToIgnoreCase(t1);
+				}
 			}
 		});
 		for (String fileName : fileNames) {
@@ -71,9 +86,11 @@ public class ProfileDataUtils {
 
 	public static List<OnlineRoutingEngineDataObject> getOnlineRoutingProfiles(OsmandApplication app) {
 		List<OnlineRoutingEngineDataObject> objects = new ArrayList<>();
-		for (OnlineRoutingEngine engine : app.getOnlineRoutingHelper().getEngines()) {
+		List<OnlineRoutingEngine> engines = app.getOnlineRoutingHelper().getEngines();
+		for (int i = 0; i < engines.size(); i++) {
+			OnlineRoutingEngine engine = engines.get(i);
 			objects.add(new OnlineRoutingEngineDataObject(
-					engine.getName(app), engine.getBaseUrl(), engine.getStringKey()));
+					engine.getName(app), engine.getBaseUrl(), engine.getStringKey(), i));
 		}
 		return objects;
 	}

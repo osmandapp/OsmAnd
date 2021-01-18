@@ -3953,7 +3953,6 @@
     <string name="routing_engine_vehicle_type_foot">步行</string>
     <string name="routing_engine_vehicle_type_bike">自行車</string>
     <string name="routing_engine_vehicle_type_car">汽車</string>
-    <string name="message_error_recheck_parameters">錯誤，重新檢查參數</string>
     <string name="copy_address">複製地址</string>
     <string name="online_routing_engine">線上路線計算引擎</string>
     <string name="online_routing_engines">線上路線計算引擎</string>

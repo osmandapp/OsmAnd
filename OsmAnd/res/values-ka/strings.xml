@@ -2449,7 +2449,6 @@
     <string name="subscription_paused_title">OsmAndის გამოწერა დაპაუზებულია</string>
     <string name="subscription_on_hold_title">OsmAndის გამოწერა შეჩერებულია</string>
     <string name="online_routing_example_hint">URL ყველა პარამეტრით აი ასეთი იქნება:</string>
-    <string name="message_error_recheck_parameters">შეცდომა, გადაამოწმეთ პარამეტრები</string>
     <string name="mapillary_image">Mapillary-ის გამოსახულება</string>
     <string name="mapillary_widget">Mapillary-ის ღილაკი</string>
     <string name="srtm_color_scheme">ფერთა გამა</string>

@@ -3962,7 +3962,6 @@
     <string name="routing_engine_vehicle_type_foot">Zu Fuß</string>
     <string name="routing_engine_vehicle_type_bike">Fahrrad</string>
     <string name="routing_engine_vehicle_type_car">Auto</string>
-    <string name="message_error_recheck_parameters">Fehler, Parameter erneut prüfen</string>
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
     <string name="copy_address">Adresse kopieren</string>

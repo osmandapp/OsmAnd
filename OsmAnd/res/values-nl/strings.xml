@@ -3916,7 +3916,6 @@
     <string name="routing_engine_vehicle_type_foot">Te voet</string>
     <string name="routing_engine_vehicle_type_bike">Fiets</string>
     <string name="routing_engine_vehicle_type_car">Auto</string>
-    <string name="message_error_recheck_parameters">Fout, controleer parameters opnieuw</string>
     <string name="copy_address">Kopieer adres</string>
     <string name="online_routing_engine">Online routeplanningssysteem</string>
     <string name="online_routing_engines">Online routeplanningssystemen</string>

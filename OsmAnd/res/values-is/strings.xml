@@ -3965,6 +3965,5 @@
     <string name="routing_engine_vehicle_type_foot">Gangandi</string>
     <string name="routing_engine_vehicle_type_bike">Hjólandi</string>
     <string name="routing_engine_vehicle_type_car">Bíll</string>
-    <string name="message_error_recheck_parameters">Villa, yfirfarðu breytur</string>
     <string name="copy_address">Afrita heimilisfang</string>
 </resources>
