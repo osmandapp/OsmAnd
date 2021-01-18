@@ -60,6 +60,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private static final String ENGINE_VEHICLE_TYPE_KEY = "engine_vehicle_type";
 	private static final String ENGINE_CUSTOM_VEHICLE_KEY = "engine_custom_vehicle";
 	private static final String ENGINE_API_KEY_KEY = "engine_api_key";
+	private static final String INIT_ENGINE_NAME_KEY = "init_engine_name";
+	private static final String INIT_ENGINE_SERVER_KEY = "init_engine_server";
+	private static final String INIT_ENGINE_SERVER_URL_KEY = "init_engine_server_url";
+	private static final String INIT_ENGINE_VEHICLE_TYPE_KEY = "init_engine_vehicle_type";
+	private static final String INIT_ENGINE_CUSTOM_VEHICLE_KEY = "init_engine_custom_vehicle";
+	private static final String INIT_ENGINE_API_KEY_KEY = "init_engine_api_key";
 	private static final String EXAMPLE_LOCATION_KEY = "example_location";
 	private static final String APP_MODE_KEY = "app_mode";
 	private static final String EDITED_ENGINE_KEY = "edited_engine_key";
@@ -173,7 +179,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		setupExampleCard();
 		setupResultsContainer();
 		addSpaceSegment();
-		engine.cloneIn(initEngine);
 
 		setupButtons();
 
@@ -257,7 +262,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupNameCard() {
-		nameCard = new OnlineRoutingCard(mapActivity, isNightMode());
+		nameCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		nameCard.build(mapActivity);
 		nameCard.setDescription(getString(R.string.select_nav_profile_dialog_message));
 		nameCard.setEditedText(engine.getName(app));
@@ -275,7 +280,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupTypeCard() {
-		typeCard = new OnlineRoutingCard(mapActivity, isNightMode());
+		typeCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		typeCard.build(mapActivity);
 		typeCard.setHeaderTitle(getString(R.string.shared_string_type));
 		List<HorizontalSelectionItem> serverItems = new ArrayList<>();
@@ -310,7 +315,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupVehicleCard() {
-		vehicleCard = new OnlineRoutingCard(mapActivity, isNightMode());
+		vehicleCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		vehicleCard.build(mapActivity);
 		vehicleCard.setHeaderTitle(getString(R.string.shared_string_vehicle));
 		List<HorizontalSelectionItem> vehicleItems = new ArrayList<>();
@@ -322,20 +327,20 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 					@Override
 					public boolean processResult(HorizontalSelectionItem result) {
 						VehicleType vehicle = (VehicleType) result.getObject();
+						vehicleCard.updateBottomMarginSelectionMenu(vehicle != VehicleType.CUSTOM ? 0
+								: getResources().getDimensionPixelSize(R.dimen.content_padding)
+						);
 						if (engine.vehicleType != vehicle) {
 							engine.vehicleType = vehicle;
 							updateCardViews(nameCard, vehicleCard, exampleCard);
-							if (vehicle == VehicleType.CUSTOM) {
-								vehicleCard.updateBottomMarginSelectionMenu((int) getResources().getDimension(R.dimen.content_padding));
-							}  else {
-								vehicleCard.updateBottomMarginSelectionMenu(0);
-							}
 							return true;
 						}
 						return false;
 					}
 				});
-		vehicleCard.updateBottomMarginSelectionMenu(0);
+		vehicleCard.updateBottomMarginSelectionMenu(engine.vehicleType != VehicleType.CUSTOM ? 0
+				: getResources().getDimensionPixelSize(R.dimen.content_padding)
+		);
 		vehicleCard.setFieldBoxLabelText(getString(R.string.shared_string_custom));
 		vehicleCard.setOnTextChangedListener(new OnTextChangedListener() {
 			@Override
@@ -353,7 +358,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupApiKeyCard() {
-		apiKeyCard = new OnlineRoutingCard(mapActivity, isNightMode());
+		apiKeyCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		apiKeyCard.build(mapActivity);
 		apiKeyCard.setHeaderTitle(getString(R.string.shared_string_api_key));
 		apiKeyCard.setFieldBoxLabelText(getString(R.string.keep_it_empty_if_not));
@@ -370,7 +375,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupExampleCard() {
-		exampleCard = new OnlineRoutingCard(mapActivity, isNightMode());
+		exampleCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		exampleCard.build(mapActivity);
 		exampleCard.setHeaderTitle(getString(R.string.shared_string_example));
 		List<HorizontalSelectionItem> locationItems = new ArrayList<>();
@@ -603,6 +608,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		outState.putString(ENGINE_VEHICLE_TYPE_KEY, engine.vehicleType.name());
 		outState.putString(ENGINE_CUSTOM_VEHICLE_KEY, engine.customVehicleKey);
 		outState.putString(ENGINE_API_KEY_KEY, engine.apiKey);
+		outState.putString(INIT_ENGINE_NAME_KEY, initEngine.customName);
+		outState.putString(INIT_ENGINE_SERVER_KEY, initEngine.type.name());
+		outState.putString(INIT_ENGINE_SERVER_URL_KEY, initEngine.customServerUrl);
+		outState.putString(INIT_ENGINE_VEHICLE_TYPE_KEY, initEngine.vehicleType.name());
+		outState.putString(INIT_ENGINE_CUSTOM_VEHICLE_KEY, initEngine.customVehicleKey);
+		outState.putString(INIT_ENGINE_API_KEY_KEY, initEngine.apiKey);
 		outState.putString(EXAMPLE_LOCATION_KEY, selectedLocation.name());
 		if (appMode != null) {
 			outState.putString(APP_MODE_KEY, appMode.getStringKey());
@@ -617,6 +628,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		engine.vehicleType = VehicleType.valueOf(savedState.getString(ENGINE_VEHICLE_TYPE_KEY));
 		engine.customVehicleKey = savedState.getString(ENGINE_CUSTOM_VEHICLE_KEY);
 		engine.apiKey = savedState.getString(ENGINE_API_KEY_KEY);
+		initEngine.customName = savedState.getString(INIT_ENGINE_NAME_KEY);
+		initEngine.type = EngineType.valueOf(savedState.getString(INIT_ENGINE_SERVER_KEY));
+		initEngine.customServerUrl = savedState.getString(INIT_ENGINE_SERVER_URL_KEY);
+		initEngine.vehicleType = VehicleType.valueOf(savedState.getString(INIT_ENGINE_VEHICLE_TYPE_KEY));
+		initEngine.customVehicleKey = savedState.getString(INIT_ENGINE_CUSTOM_VEHICLE_KEY);
+		initEngine.apiKey = savedState.getString(INIT_ENGINE_API_KEY_KEY);
 		selectedLocation = ExampleLocation.valueOf(savedState.getString(EXAMPLE_LOCATION_KEY));
 		appMode = ApplicationMode.valueOfStringKey(savedState.getString(APP_MODE_KEY), null);
 		editedEngineKey = savedState.getString(EDITED_ENGINE_KEY);
@@ -643,6 +660,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				engine.apiKey = editedEngine.getParameter(EngineParameter.API_KEY);
 			}
 		}
+		engine.cloneIn(initEngine);
 	}
 
 	private void dismiss() {
@@ -658,7 +676,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	public void showExitDialog() {
 		View focus = view.findFocus();
 		AndroidUtils.hideSoftKeyboard(requireMyActivity(), focus);
-
+		if (engine.customName != null && initEngine.customName == null) {
+			initEngine.customName = initEngine.getName(app);
+		}
 		if (!engine.equals(initEngine)) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
 					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
@@ -759,12 +779,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			if (obj == null || getClass() != obj.getClass()) return false;
 
 			OnlineRoutingEngineObject engine = (OnlineRoutingEngineObject) obj;
-			if (customName != engine.customName) return false;
+			if (!Algorithms.stringsEqual(customName, engine.customName)) return false;
 			if (type != engine.type) return false;
-			if (customServerUrl != engine.customServerUrl) return false;
+			if (!Algorithms.stringsEqual(getBaseUrl(), engine.getBaseUrl())) return false;
 			if (vehicleType != engine.vehicleType) return false;
-			if (customVehicleKey != engine.customVehicleKey) return false;
-			return apiKey == engine.apiKey;
+			if (!Algorithms.stringsEqual(getVehicleKey(), engine.getVehicleKey())) return false;
+			return Algorithms.isEmpty(apiKey) ? Algorithms.isEmpty(engine.apiKey) : Algorithms.stringsEqual(apiKey, engine.apiKey);
 		}
 	}
 }
