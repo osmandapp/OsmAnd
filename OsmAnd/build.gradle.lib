@@ -409,6 +409,7 @@ dependencies {
 		exclude group: "com.fasterxml.jackson.core"
 	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
-
 	implementation 'org.bouncycastle:bcpkix-jdk15on:1.56'
+
+	implementation 'com.google.android.gms:play-services-location:17.1.0'
 }
