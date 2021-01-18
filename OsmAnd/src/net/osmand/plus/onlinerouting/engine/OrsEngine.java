@@ -69,9 +69,9 @@ public class OrsEngine extends OnlineRoutingEngine {
 			LatLon start = path.get(0);
 			LatLon end = path.get(path.size() - 1);
 			sb.append('&').append("start=")
-					.append(start.getLatitude()).append(',').append(start.getLongitude());
+					.append(start.getLongitude()).append(',').append(start.getLatitude());
 			sb.append('&').append("end=")
-					.append(end.getLatitude()).append(',').append(end.getLongitude());
+					.append(end.getLongitude()).append(',').append(end.getLatitude());
 		}
 	}
 
@@ -84,8 +84,8 @@ public class OrsEngine extends OnlineRoutingEngine {
 		List<LatLon> track = new ArrayList<>();
 		for (int i = 0; i < array.length(); i++) {
 			JSONArray point = array.getJSONArray(i);
-			double lat = Double.parseDouble(point.getString(0));
-			double lon = Double.parseDouble(point.getString(1));
+			double lon = Double.parseDouble(point.getString(0));
+			double lat = Double.parseDouble(point.getString(1));
 			track.add(new LatLon(lat, lon));
 		}
 		return track;
