@@ -42,6 +42,7 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -160,8 +161,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			public void handleOnBackPressed() {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
+					TripRecordingBottomSheet fragment = mapActivity.getTripRecordingBottomSheet();
+					if (fragment != null) {
+						fragment.show();
+					} else {
+						mapActivity.launchPrevActivityIntent();
+					}
 					dismissImmediate();
-					mapActivity.launchPrevActivityIntent();
 				}
 			}
 		});
@@ -405,7 +411,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		}
 	}
 
-	public Drawable getTrackIcon(OsmandApplication app, String widthAttr, boolean showArrows, @ColorInt int color) {
+	public static Drawable getTrackIcon(OsmandApplication app, String widthAttr, boolean showArrows, @ColorInt int color) {
 		int widthIconId = getWidthIconId(widthAttr);
 		Drawable widthIcon = app.getUIUtilities().getPaintedIcon(widthIconId, color);
 
@@ -423,7 +429,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		return UiUtilities.getLayeredIcon(transparencyIcon, widthIcon, strokeIcon);
 	}
 
-	private Drawable getTransparencyIcon(OsmandApplication app, String widthAttr, @ColorInt int color) {
+	private static Drawable getTransparencyIcon(OsmandApplication app, String widthAttr, @ColorInt int color) {
 		int transparencyIconId = getTransparencyIconId(widthAttr);
 		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
 		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);

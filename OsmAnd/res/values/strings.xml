@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="show_track_on_map">Show track on map</string>
+    <string name="start_recording">Start recording</string>
     <string name="announcement_time_title">Announcement time</string>
     <string name="announcement_time_descr">Announcement time of different voice prompts depends on prompt type, current navigation speed and default navigation speed.</string>
     <string name="announcement_time_intervals">Time and distance intervals</string>
