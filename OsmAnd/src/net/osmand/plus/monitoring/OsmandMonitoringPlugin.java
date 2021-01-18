@@ -100,12 +100,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void updateLocation(Location location) {
 		liveMonitoringHelper.updateLocation(location);
 	}
-	
+
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_action_gps_info;
 	}
-	
+
 	@Override
 	public Drawable getAssetResourceImage() {
 		return app.getUIUtilities().getIcon(R.drawable.trip_recording);
@@ -140,7 +140,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		monitoringControl = createMonitoringControl(activity);
-		
+
 		layer.registerSideWidget(monitoringControl,
 				R.drawable.ic_action_play_dark, R.string.map_widget_monitoring, "monitoring", false, 30);
 		layer.recreateControls();
@@ -161,7 +161,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			}
 		}
 	}
-	
+
 	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
 	public static final int[] MINUTES = new int[] {2, 3, 5};
 	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[] {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
@@ -287,7 +287,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				controlDialog(map, true);
 			}
 
-			
+
 		});
 		return monitoringControl;
 	}
@@ -422,7 +422,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void saveCurrentTrack() {
 		saveCurrentTrack(null, null);
 	}
-	
+
 	public void saveCurrentTrack(@Nullable final Runnable onComplete) {
 		saveCurrentTrack(onComplete, null);
 	}
@@ -464,7 +464,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 						SaveGPXBottomSheetFragment.showInstance(((FragmentActivity) a).getSupportFragmentManager(), result.getFilenames());
 					}
 				}
-				
+
 				if (onComplete != null) {
 					onComplete.run();
 				}
@@ -506,14 +506,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		if (choice.value || map == null) {
 			runnable.run();
 		} else {
-			showIntervalChooseDialog(map, app.getString(R.string.save_track_interval_globally) + " : %s",
-					app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES, choice, vs, showTrackSelection,
-					new OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							runnable.run();
-						}
-					});
+			TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 		}
 	}
 
@@ -588,7 +581,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				tv.setText(String.format(patternMsg, s));
 			}
 		});
-		
+
 		for (int i = 0; i < secondsLength + minutesLength - 1; i++) {
 			if (i < secondsLength) {
 				if (v.value <= seconds[i] * 1000) {
