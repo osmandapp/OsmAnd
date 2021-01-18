@@ -3864,4 +3864,21 @@
     <string name="routing_attr_allow_streams_name">Tillat bekker og avløp</string>
     <string name="routing_attr_allow_intermittent_name">Tillat periodiske vannveier</string>
     <string name="routing_attr_allow_intermittent_description">Tillat periodiske vannveier</string>
+    <string name="shared_string_vehicle">Kjøretøy</string>
+    <string name="shared_string_api_key">API-nøkkel</string>
+    <string name="shared_string_server_url">Tjenernettadresse</string>
+    <string name="test_route_calculation">Test rutekalkulering</string>
+    <string name="routing_engine_vehicle_type_driving">Kjøring</string>
+    <string name="routing_engine_vehicle_type_foot">Til fots</string>
+    <string name="routing_engine_vehicle_type_bike">Sykkel</string>
+    <string name="routing_engine_vehicle_type_car">Bil</string>
+    <string name="copy_address">Kopier adresse</string>
+    <string name="shared_string_folders">Mapper</string>
+    <string name="select_folder">Velg mappe</string>
+    <string name="select_folder_descr">Velg mappe eller legg til en ny</string>
+    <string name="shared_string_empty">Tom</string>
+    <string name="edit_track">Rediger spor</string>
+    <string name="upload_to_openstreetmap">Last opp til OpenStreetMap</string>
+    <string name="rename_track">Gi spor nytt navn</string>
+    <string name="change_folder">Endre mappe</string>
 </resources>

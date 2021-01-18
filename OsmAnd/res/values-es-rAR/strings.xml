@@ -3967,4 +3967,13 @@
     <string name="copy_address">Copiar dirección</string>
     <string name="online_routing_engine">Motor de navegación en línea</string>
     <string name="online_routing_engines">Motores de navegación en línea</string>
+    <string name="shared_string_folders">Carpetas</string>
+    <string name="select_folder">Elegir carpeta</string>
+    <string name="select_folder_descr">Elegir carpeta o añadir una nueva</string>
+    <string name="shared_string_empty">Vacío</string>
+    <string name="analyze_by_intervals">Analizar por intervalos (intervalo de división)</string>
+    <string name="upload_to_openstreetmap">Subir a OpenStreetMap</string>
+    <string name="edit_track">Editar traza</string>
+    <string name="rename_track">Renombrar traza</string>
+    <string name="change_folder">Cambiar carpeta</string>
 </resources>
