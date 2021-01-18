@@ -324,6 +324,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 			return false;
 		}
+		hideVisibleMenues();
 		LatLon pointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 		menu.show(pointLatLon, null, null);
 
@@ -804,6 +805,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 
 		} else if (selectedObjects.size() > 1) {
+			hideVisibleMenues();
 			selectedObjectContextMenuProvider = null;
 			showContextMenuForSelectedObjects(pointLatLon, selectedObjects);
 			return true;
