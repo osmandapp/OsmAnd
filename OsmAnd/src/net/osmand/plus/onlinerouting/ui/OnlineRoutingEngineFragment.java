@@ -342,7 +342,11 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		apiKeyCard.setOnTextChangedListener(new OnTextChangedListener() {
 			@Override
 			public void onTextChanged(boolean editedByUser, @NonNull String text) {
-				engine.put(EngineParameter.API_KEY, text);
+				if (Algorithms.isBlank(text)) {
+					engine.remove(EngineParameter.API_KEY);
+				} else {
+					engine.put(EngineParameter.API_KEY, text);
+				}
 				updateCardViews(exampleCard);
 			}
 		});
