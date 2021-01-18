@@ -193,8 +193,7 @@ public class MapMarkersWidgetsFactory {
 				|| map.isTopToolbarActive()
 				|| !map.getContextMenu().shouldShowTopControls()
 				|| map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
-				|| map.getMapLayers().getMapMarkersLayer().isInPlanRouteMode()
-				|| map.getMapLayers().getMapControlsLayer().isInTrackMenuMode()) {
+				|| map.getMapLayers().getMapMarkersLayer().isInPlanRouteMode()) {
 			updateVisibility(false);
 			return;
 		}
