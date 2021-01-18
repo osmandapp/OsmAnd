@@ -12,8 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.jwetherell.openmap.common.MoreMath;
-
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -27,11 +25,11 @@ import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.util.List;
 
-import static com.jwetherell.openmap.common.LatLonPoint.EQUIVALENT_TOLERANCE;
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKIVOYAGE_DOMAIN;
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
 
@@ -43,6 +41,7 @@ import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
 public class WikivoyageWebViewClient extends WebViewClient {
 
 	private static final String TAG = WikivoyageWebViewClient.class.getSimpleName();
+	public static final int ROUNDING_ERROR = 3;
 
 	private OsmandApplication app;
 	private FragmentManager fragmentManager;
@@ -101,15 +100,15 @@ public class WikivoyageWebViewClient extends WebViewClient {
 					return true;
 				}
 				for (WptPt point : points) {
-					if (MoreMath.approximately_equal(point.getLatitude(), lat, EQUIVALENT_TOLERANCE * 2)
-							&& MoreMath.approximately_equal(point.getLongitude(), lon, EQUIVALENT_TOLERANCE * 2)) {
+					if (MapUtils.getDistance(point.getLatitude(), point.getLongitude(), lat, lon) < ROUNDING_ERROR) {
 						gpxPoint = point;
 						break;
 					}
 				}
 				if (gpxPoint != null) {
 					final OsmandSettings settings = app.getSettings();
-					settings.setMapLocationToShow(lat, lon,	settings.getLastKnownMapZoom(),
+					settings.setMapLocationToShow(gpxPoint.getLatitude(), gpxPoint.getLongitude(),
+							settings.getLastKnownMapZoom(),
 							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxPoint.name),
 							false,
 							gpxPoint);
