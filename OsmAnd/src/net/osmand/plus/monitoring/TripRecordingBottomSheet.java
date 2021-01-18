@@ -3,7 +3,6 @@ package net.osmand.plus.monitoring;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
@@ -40,8 +38,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.TrackAppearanceFragment;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
 
@@ -54,6 +50,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private ImageView upDownBtn;
 	private SwitchCompat confirmEveryRun;
+	private TextView intervalValueView;
 
 	private boolean infoExpanded;
 
@@ -79,8 +76,12 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		showTrackOnMapTitle.setText(R.string.show_track_on_map);
 
 		ImageView trackAppearanceIcon = showTrackOnMapView.findViewById(R.id.icon_after_divider);
-		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_track_line_bold_direction,
-				nightMode ? R.color.profile_icon_color_red_dark : R.color.profile_icon_color_red_light);
+
+		int color = settings.CURRENT_TRACK_COLOR.get();
+		String width = settings.CURRENT_TRACK_WIDTH.get();
+		boolean showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
+		Drawable drawable = TrackAppearanceFragment.getTrackIcon(app, width, showArrows, color);
+
 		trackAppearanceIcon.setImageDrawable(drawable);
 		trackAppearanceIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -106,37 +107,27 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		final int secondsLength = SECONDS.length;
 		final int minutesLength = MINUTES.length;
 
+		intervalValueView = itemView.findViewById(R.id.interval_value);
+		updateIntervalLegend();
+
 		RangeSlider intervalSlider = itemView.findViewById(R.id.interval_slider);
-		final TextView intervalValueView = itemView.findViewById(R.id.interval_value_view);
-		String text = getString(R.string.save_track_interval_globally);
-		String textValue = getString(R.string.int_continuosly);
-		String textAll = getString(R.string.ltr_or_rtl_combine_via_colon, text, textValue);
-		Typeface typeface = FontCache.getRobotoMedium(app);
-		SpannableString spannableString = UiUtilities.createCustomFontSpannable(typeface, textAll, textValue);
-		intervalValueView.setText(spannableString);
 		intervalSlider.setValueTo(secondsLength + minutesLength - 1);
 		intervalSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
 
 			@Override
 			public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-				String s;
 				int progress = (int) value;
 				if (progress == 0) {
-					s = getString(R.string.int_continuosly);
 					settings.SAVE_GLOBAL_TRACK_INTERVAL.set(0);
+				} else if (progress < secondsLength) {
+					settings.SAVE_GLOBAL_TRACK_INTERVAL.set(SECONDS[progress] * 1000);
 				} else {
-					if (progress < secondsLength) {
-						s = SECONDS[progress] + " " + getString(R.string.int_seconds);
-						settings.SAVE_GLOBAL_TRACK_INTERVAL.set(SECONDS[progress] * 1000);
-					} else {
-						s = MINUTES[progress - secondsLength] + " " + getString(R.string.int_min);
-						settings.SAVE_GLOBAL_TRACK_INTERVAL.set(MINUTES[progress - secondsLength] * 60 * 1000);
-					}
+					settings.SAVE_GLOBAL_TRACK_INTERVAL.set(MINUTES[progress - secondsLength] * 60 * 1000);
 				}
-				intervalValueView.setText(String.format(" : %s", s));
+				updateIntervalLegend();
 			}
 		});
-		for (int i = 0; i < secondsLength + minutesLength - 1; i++) {
+		for (int i = 0; i < secondsLength + minutesLength; i++) {
 			if (i < secondsLength) {
 				if (settings.SAVE_GLOBAL_TRACK_INTERVAL.get() <= SECONDS[i] * 1000) {
 					intervalSlider.setValues((float) i);
@@ -175,6 +166,25 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		updateUpDownBtn();
 	}
 
+	private void updateIntervalLegend() {
+		String text = getString(R.string.save_track_interval_globally);
+		String textValue;
+		int interval = settings.SAVE_GLOBAL_TRACK_INTERVAL.get();
+		if (interval == 0) {
+			textValue = getString(R.string.int_continuosly);
+		} else {
+			int seconds = interval / 1000;
+			if (seconds <= SECONDS[SECONDS.length - 1]) {
+				textValue = seconds + " " + getString(R.string.int_seconds);
+			} else {
+				textValue = (seconds / 60) + " " + getString(R.string.int_min);
+			}
+		}
+		String textAll = getString(R.string.ltr_or_rtl_combine_via_colon, text, textValue);
+		Typeface typeface = FontCache.getRobotoMedium(app);
+		SpannableString spannableString = UiUtilities.createCustomFontSpannable(typeface, textAll, textValue);
+		intervalValueView.setText(spannableString);
+	}
 
 	public void show() {
 		Dialog dialog = getDialog();
@@ -187,76 +197,6 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		Dialog dialog = getDialog();
 		if (dialog != null) {
 			dialog.hide();
-		}
-	}
-
-//	private void updateAppearanceIcon() {
-//		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), trackDrawInfo.getColor());
-//		trackIcon.setImageDrawable(icon);
-//	}
-
-	public static Drawable getTrackIcon(OsmandApplication app, String widthAttr, boolean showArrows, @ColorInt int color) {
-		int widthIconId = getWidthIconId(widthAttr);
-		Drawable widthIcon = app.getUIUtilities().getPaintedIcon(widthIconId, color);
-
-		int strokeIconId = getStrokeIconId(widthAttr);
-		int strokeColor = UiUtilities.getColorWithAlpha(Color.BLACK, 0.7f);
-		Drawable strokeIcon = app.getUIUtilities().getPaintedIcon(strokeIconId, strokeColor);
-
-		Drawable transparencyIcon = getTransparencyIcon(app, widthAttr, color);
-		if (showArrows) {
-			int arrowsIconId = getArrowsIconId(widthAttr);
-			int contrastColor = UiUtilities.getContrastColor(app, color, false);
-			Drawable arrows = app.getUIUtilities().getPaintedIcon(arrowsIconId, contrastColor);
-			return UiUtilities.getLayeredIcon(transparencyIcon, widthIcon, strokeIcon, arrows);
-		}
-		return UiUtilities.getLayeredIcon(transparencyIcon, widthIcon, strokeIcon);
-	}
-
-	private static Drawable getTransparencyIcon(OsmandApplication app, String widthAttr, @ColorInt int color) {
-		int transparencyIconId = getTransparencyIconId(widthAttr);
-		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
-		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
-		return app.getUIUtilities().getPaintedIcon(transparencyIconId, transparencyColor);
-	}
-
-	public static int getTransparencyIconId(String widthAttr) {
-		if (TRACK_WIDTH_BOLD.equals(widthAttr)) {
-			return R.drawable.ic_action_track_line_bold_transparency;
-		} else if (TRACK_WIDTH_MEDIUM.equals(widthAttr)) {
-			return R.drawable.ic_action_track_line_medium_transparency;
-		} else {
-			return R.drawable.ic_action_track_line_thin_transparency;
-		}
-	}
-
-	public static int getArrowsIconId(String widthAttr) {
-		if (TRACK_WIDTH_BOLD.equals(widthAttr)) {
-			return R.drawable.ic_action_track_line_bold_direction;
-		} else if (TRACK_WIDTH_MEDIUM.equals(widthAttr)) {
-			return R.drawable.ic_action_track_line_medium_direction;
-		} else {
-			return R.drawable.ic_action_track_line_thin_direction;
-		}
-	}
-
-	public static int getStrokeIconId(String widthAttr) {
-		if (TRACK_WIDTH_BOLD.equals(widthAttr)) {
-			return R.drawable.ic_action_track_line_bold_stroke;
-		} else if (TRACK_WIDTH_MEDIUM.equals(widthAttr)) {
-			return R.drawable.ic_action_track_line_medium_stroke;
-		} else {
-			return R.drawable.ic_action_track_line_thin_stroke;
-		}
-	}
-
-	public static int getWidthIconId(String widthAttr) {
-		if (TRACK_WIDTH_BOLD.equals(widthAttr)) {
-			return R.drawable.ic_action_track_line_bold_color;
-		} else if (TRACK_WIDTH_MEDIUM.equals(widthAttr)) {
-			return R.drawable.ic_action_track_line_medium_color;
-		} else {
-			return R.drawable.ic_action_track_line_thin_color;
 		}
 	}
 
@@ -325,7 +265,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TripRecordingBottomSheet.TAG) == null) {
+		if (!fragmentManager.isStateSaved()) {
 			TripRecordingBottomSheet fragment = new TripRecordingBottomSheet();
 			fragment.show(fragmentManager, TAG);
 		}

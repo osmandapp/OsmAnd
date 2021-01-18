@@ -44,23 +44,13 @@
 		android:orientation="horizontal">
 
 		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/title2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:ellipsize="end"
-			android:maxLines="1"
-			android:text="@string/save_track_interval_globally"
-			android:textSize="@dimen/default_list_text_size" />
-
-		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/interval_value_view"
+			android:id="@+id/interval_value"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:ellipsize="end"
 			android:maxLines="1"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_medium"
 			tools:text="Interval value" />
 
 		<androidx.appcompat.widget.AppCompatImageView
