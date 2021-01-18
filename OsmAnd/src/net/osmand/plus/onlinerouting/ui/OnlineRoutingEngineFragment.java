@@ -658,6 +658,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void restoreState(@NonNull Bundle savedState) {
+		editedEngineKey = savedState.getString(EngineParameter.KEY.name());
 		initEngine = createInitStateEngine();
 		String typeKey = savedState.getString(ENGINE_TYPE_KEY);
 		EngineType type = EngineType.getTypeByName(typeKey);
@@ -671,7 +672,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		customVehicleKey = savedState.getString(ENGINE_CUSTOM_VEHICLE_KEY);
 		selectedLocation = ExampleLocation.valueOf(savedState.getString(EXAMPLE_LOCATION_KEY));
 		appMode = ApplicationMode.valueOfStringKey(savedState.getString(APP_MODE_KEY), null);
-		editedEngineKey = savedState.getString(EngineParameter.KEY.name());
 	}
 
 	private void initState() {
