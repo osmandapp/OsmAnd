@@ -151,8 +151,8 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		boolean checked = !settings.SAVE_GLOBAL_TRACK_REMEMBER.get();
 		confirmEveryRun = itemView.findViewById(R.id.confirm_every_run);
-		confirmEveryRun.setBackgroundResource(nightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
 		confirmEveryRun.setChecked(checked);
+		setBackgroundAndPadding(checked, paddingSmall);
 		confirmEveryRun.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -160,8 +160,6 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(!isChecked);
 			}
 		});
-		setBackgroundAndPadding(checked, paddingSmall);
-		UiUtilities.setupCompoundButton(confirmEveryRun, nightMode, PROFILE_DEPENDENT);
 
 		SwitchCompat showTrackOnMapButton = showTrackOnMapView.findViewById(R.id.switch_button);
 		showTrackOnMapButton.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
