@@ -7,8 +7,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
-import net.osmand.plus.onlinerouting.OnlineRoutingEngine.EngineParameter;
+import net.osmand.plus.onlinerouting.EngineParameter;
+import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 
 import org.json.JSONException;
@@ -93,8 +94,8 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 		int number = 0;
 		while (true) {
 			number++;
-			OnlineRoutingEngine renamedItem = OnlineRoutingEngine.createNewEngine(item.getType(), item.getVehicleKey(), item.getParams());
-			renamedItem.putParameter(EngineParameter.CUSTOM_NAME, renamedItem.getName(app) + "_" + number);
+			OnlineRoutingEngine renamedItem = OnlineRoutingFactory.createEngine(item.getType(), item.getParams());
+			renamedItem.put(EngineParameter.CUSTOM_NAME, renamedItem.getName(app) + "_" + number);
 			if (!isDuplicate(renamedItem)) {
 				return renamedItem;
 			}
@@ -105,7 +106,7 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 		try {
 			OnlineRoutingHelper.readFromJson(json, items);
-		} catch (JSONException e) {
+		} catch (JSONException | IllegalArgumentException e) {
 			warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 			throw new IllegalArgumentException("Json parse error", e);
 		}

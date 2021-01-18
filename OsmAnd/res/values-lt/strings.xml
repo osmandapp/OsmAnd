@@ -2770,7 +2770,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="test_route_calculation">Patikrinti maršruto apskaičiavimą</string>
     <string name="routing_engine_vehicle_type_bike">Dviratis</string>
     <string name="routing_engine_vehicle_type_car">Automobilis</string>
-    <string name="message_error_recheck_parameters">Įvyko klaida, patikrinkite paametrus</string>
     <string name="copy_address">Kopijuoti adresą</string>
     <string name="shared_string_folders">Folderiai</string>
     <string name="select_folder">Pasirinkite folderį</string>

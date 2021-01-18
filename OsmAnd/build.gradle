@@ -108,18 +108,25 @@ android {
 			manifest.srcFile "AndroidManifest-debug.xml"
 		}
 		full {
-			java.srcDirs = ["src-google"]
+			java.srcDirs = ["src-nogms", "src-google"]
+		}
+		fullGms {
+			java.srcDirs = ["src-gms", "src-google"]
 		}
 		free {
-			java.srcDirs = ["src-google"]
+			java.srcDirs = ["src-nogms", "src-google"]
+			manifest.srcFile "AndroidManifest-free.xml"
+		}
+		freeGms {
+			java.srcDirs = ["src-gms", "src-google"]
 			manifest.srcFile "AndroidManifest-free.xml"
 		}
 		freedev {
-			java.srcDirs = ["src-google"]
+			java.srcDirs = ["src-nogms", "src-google"]
 			manifest.srcFile "AndroidManifest-freedev.xml"
 		}
 		freehuawei {
-			java.srcDirs = ["src-huawei"]
+			java.srcDirs = ["src-nogms", "src-google"]
 			manifest.srcFile "AndroidManifest-freehuawei.xml"
 		}
 
@@ -172,7 +179,15 @@ android {
 			dimension "version"
 			applicationId "net.osmand"
 		}
+		freeGms {
+			dimension "version"
+			applicationId "net.osmand"
+		}
 		full {
+			dimension "version"
+			applicationId "net.osmand.plus"
+		}
+		fullGms {
 			dimension "version"
 			applicationId "net.osmand.plus"
 		}
@@ -507,8 +522,10 @@ dependencies {
 		exclude group: "com.fasterxml.jackson.core"
 	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
+	implementation "org.bouncycastle:bcpkix-jdk15on:1.56"
 
 	freehuaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
 
-	implementation "org.bouncycastle:bcpkix-jdk15on:1.56"
+	freeGmsImplementation 'com.google.android.gms:play-services-location:17.1.0'
+	fullGmsImplementation 'com.google.android.gms:play-services-location:17.1.0'
 }

@@ -3968,7 +3968,6 @@ Lon %2$s</string>
     <string name="routing_engine_vehicle_type_foot">Pé</string>
     <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
     <string name="routing_engine_vehicle_type_car">Coche</string>
-    <string name="message_error_recheck_parameters">Erro, verifica novamente os parámetros</string>
     <string name="copy_address">Copiar enderezo</string>
     <string name="voice_prompts_timetable">Horarios dos avisos por voz</string>
     <string name="online_routing_engine">Motor de navegación en liña</string>

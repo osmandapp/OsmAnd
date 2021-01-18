@@ -1822,6 +1822,25 @@ public class GPXUtilities {
 			}
 			serializer.endTag(null, "metadata");
 
+			for (WptPt l : file.points) {
+				serializer.startTag(null, "wpt"); //$NON-NLS-1$
+				writeWpt(format, serializer, l);
+				serializer.endTag(null, "wpt"); //$NON-NLS-1$
+			}
+
+			for (Route track : file.routes) {
+				serializer.startTag(null, "rte"); //$NON-NLS-1$
+				writeNotNullText(serializer, "name", track.name);
+				writeNotNullText(serializer, "desc", track.desc);
+
+				for (WptPt p : track.points) {
+					serializer.startTag(null, "rtept"); //$NON-NLS-1$
+					writeWpt(format, serializer, p);
+					serializer.endTag(null, "rtept"); //$NON-NLS-1$
+				}
+				writeExtensions(serializer, track);
+				serializer.endTag(null, "rte"); //$NON-NLS-1$
+			}
 
 			for (Track track : file.tracks) {
 				if (!track.generalTrack) {
@@ -1842,26 +1861,6 @@ public class GPXUtilities {
 					writeExtensions(serializer, track);
 					serializer.endTag(null, "trk"); //$NON-NLS-1$
 				}
-			}
-
-			for (Route track : file.routes) {
-				serializer.startTag(null, "rte"); //$NON-NLS-1$
-				writeNotNullText(serializer, "name", track.name);
-				writeNotNullText(serializer, "desc", track.desc);
-
-				for (WptPt p : track.points) {
-					serializer.startTag(null, "rtept"); //$NON-NLS-1$
-					writeWpt(format, serializer, p);
-					serializer.endTag(null, "rtept"); //$NON-NLS-1$
-				}
-				writeExtensions(serializer, track);
-				serializer.endTag(null, "rte"); //$NON-NLS-1$
-			}
-
-			for (WptPt l : file.points) {
-				serializer.startTag(null, "wpt"); //$NON-NLS-1$
-				writeWpt(format, serializer, l);
-				serializer.endTag(null, "wpt"); //$NON-NLS-1$
 			}
 
 			writeExtensions(serializer, file);

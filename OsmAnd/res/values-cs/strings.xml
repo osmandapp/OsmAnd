@@ -3960,7 +3960,6 @@
     <string name="routing_engine_vehicle_type_foot">Chůze</string>
     <string name="routing_engine_vehicle_type_bike">Kolo</string>
     <string name="routing_engine_vehicle_type_car">Auto</string>
-    <string name="message_error_recheck_parameters">Chyba, zkontrolujte parametry</string>
     <string name="copy_address">Kopírovat adresu</string>
     <string name="online_routing_engine">Online navigační služba</string>
     <string name="online_routing_engines">Online navigační služby</string>

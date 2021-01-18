@@ -20,7 +20,7 @@ public abstract class StringBundleWriter {
 
 	public void writeBundle() {
 		for (Entry<String, Item<?>> entry : bundle.getMap().entrySet()) {
-			writeItem(entry.getKey(), entry.getValue());
+			writeItem("osmand:" + entry.getKey(), entry.getValue());
 		}
 	}
 }

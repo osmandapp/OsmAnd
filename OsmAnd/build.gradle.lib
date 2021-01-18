@@ -38,7 +38,7 @@ android {
 			jni.srcDirs = []
 			jniLibs.srcDirs = ["libs"]
 			aidl.srcDirs = ["src"]
-			java.srcDirs = ["src", "src-google"]
+			java.srcDirs = ["src", "src-gms", "src-google"]
 			resources.srcDirs = ["src"]
 			renderscript.srcDirs = ["src"]
 			res.srcDirs = ["res"]
@@ -409,6 +409,7 @@ dependencies {
 		exclude group: "com.fasterxml.jackson.core"
 	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
-
 	implementation 'org.bouncycastle:bcpkix-jdk15on:1.56'
+
+	implementation 'com.google.android.gms:play-services-location:17.1.0'
 }
