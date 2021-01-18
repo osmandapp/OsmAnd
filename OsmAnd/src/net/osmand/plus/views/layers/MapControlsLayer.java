@@ -877,7 +877,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		menuControl.updateVisibility(showBottomMenuButtons);
 
 		boolean showZoomButtons = !routeDialogOpened && !contextMenuOpened && !isInTrackAppearanceMode()
-				&& !isInTrackMenuMode() && (!isInGpxApproximationMode() || !isPotrait())
+				&& (!isInGpxApproximationMode() || !isPotrait())
 				&& !isInFollowTrackMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !portrait);
 		mapZoomIn.updateVisibility(showZoomButtons);
 		mapZoomOut.updateVisibility(showZoomButtons);
