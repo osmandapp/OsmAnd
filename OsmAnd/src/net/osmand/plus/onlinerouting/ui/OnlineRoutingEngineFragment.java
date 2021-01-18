@@ -62,13 +62,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 	private static final String ENGINE_TYPE_KEY = "engine_type";
 	private static final String ENGINE_CUSTOM_VEHICLE_KEY = "engine_custom_vehicle";
-	private static final String ENGINE_API_KEY_KEY = "engine_api_key";
-	private static final String INIT_ENGINE_NAME_KEY = "init_engine_name";
-	private static final String INIT_ENGINE_SERVER_KEY = "init_engine_server";
-	private static final String INIT_ENGINE_SERVER_URL_KEY = "init_engine_server_url";
-	private static final String INIT_ENGINE_VEHICLE_TYPE_KEY = "init_engine_vehicle_type";
-	private static final String INIT_ENGINE_CUSTOM_VEHICLE_KEY = "init_engine_custom_vehicle";
-	private static final String INIT_ENGINE_API_KEY_KEY = "init_engine_api_key";
 	private static final String EXAMPLE_LOCATION_KEY = "example_location";
 	private static final String APP_MODE_KEY = "app_mode";
 	private static final String EDITED_ENGINE_KEY = "edited_engine_key";
@@ -92,6 +85,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private boolean isKeyboardShown = false;
 
 	private OnlineRoutingEngine engine;
+	private OnlineRoutingEngine initEngine;
 	private String customVehicleKey;
 	private ExampleLocation selectedLocation;
 	private String editedEngineKey;
@@ -208,23 +202,13 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			view.getViewTreeObserver().removeOnGlobalLayoutListener(onGlobalLayout);
-		} else {
-			view.getViewTreeObserver().removeGlobalOnLayoutListener(onGlobalLayout);
-		}
-	}
-
 	private void setupToolbar(Toolbar toolbar) {
 		ImageView navigationIcon = toolbar.findViewById(R.id.close_button);
 		navigationIcon.setImageResource(R.drawable.ic_action_close);
 		navigationIcon.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				showExitDialog();
 			}
 		});
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
@@ -581,25 +565,11 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				exampleCard.setEditedText(getTestUrl());
 			}
 		}
-		engine.cloneIn(initEngine);
-	}
-
-	private void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			if (!fragmentManager.isStateSaved()) {
-				fragmentManager.popBackStack();
-			}
-		}
 	}
 
 	public void showExitDialog() {
 		View focus = view.findFocus();
 		AndroidUtils.hideSoftKeyboard(mapActivity, focus);
-		if (engine.customName != null && initEngine.customName == null) {
-			initEngine.customName = initEngine.getName(app);
-		}
 		if (!engine.equals(initEngine)) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(mapActivity,
 					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
@@ -622,6 +592,16 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		warningDialog.setMessage(getString(message));
 		warningDialog.setNegativeButton(negButton, null);
 		return warningDialog;
+	}
+
+	private void dismiss() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
+		}
 	}
 
 	private boolean isNightMode() {
@@ -648,6 +628,16 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+			view.getViewTreeObserver().removeOnGlobalLayoutListener(onGlobalLayout);
+		} else {
+			view.getViewTreeObserver().removeGlobalOnLayoutListener(onGlobalLayout);
+		}
+	}
+
+	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		saveState(outState);
@@ -668,6 +658,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void restoreState(@NonNull Bundle savedState) {
+		initEngine = createInitStateEngine();
 		String typeKey = savedState.getString(ENGINE_TYPE_KEY);
 		EngineType type = EngineType.getTypeByName(typeKey);
 		engine = OnlineRoutingFactory.createEngine(type);
@@ -684,22 +675,30 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void initState() {
+		initEngine = createInitStateEngine();
 		selectedLocation = ExampleLocation.values()[0];
+		engine = (OnlineRoutingEngine) initEngine.clone();
+		if (Algorithms.objectEquals(engine.getSelectedVehicleType(), CUSTOM_VEHICLE)) {
+			customVehicleKey = engine.get(EngineParameter.VEHICLE_KEY);
+		} else {
+			customVehicleKey = "";
+		}
+	}
+
+	private OnlineRoutingEngine createInitStateEngine() {
+		OnlineRoutingEngine engine;
 		OnlineRoutingEngine editedEngine = helper.getEngineByKey(editedEngineKey);
 		if (editedEngine != null) {
 			engine = (OnlineRoutingEngine) editedEngine.clone();
-			if (Algorithms.objectEquals(engine.getSelectedVehicleType(), CUSTOM_VEHICLE)) {
-				customVehicleKey = engine.get(EngineParameter.VEHICLE_KEY);
-			}
 		} else {
 			engine = OnlineRoutingFactory.createEngine(EngineType.values()[0]);
 			String vehicle = engine.getAllowedVehicles().get(0).getKey();
 			engine.put(EngineParameter.VEHICLE_KEY, vehicle);
-			customVehicleKey = "";
 			if (editedEngineKey != null) {
 				engine.put(EngineParameter.KEY, editedEngineKey);
 			}
 		}
+		return engine;
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
@@ -713,59 +712,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			fm.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG).commitAllowingStateLoss();
-		}
-	}
-
-	private static class OnlineRoutingEngineObject {
-		private String customName;
-		private EngineType type;
-		private String customServerUrl;
-		private VehicleType vehicleType;
-		private String customVehicleKey;
-		private String apiKey;
-
-		public String getVehicleKey() {
-			if (vehicleType == VehicleType.CUSTOM) {
-				return customVehicleKey;
-			}
-			return vehicleType.getKey();
-		}
-
-		public String getName(Context ctx) {
-			if (customName != null) {
-				return customName;
-			}
-			return OnlineRoutingEngine.getStandardName(ctx, type, getVehicleKey());
-		}
-
-		public String getBaseUrl() {
-			if (Algorithms.isEmpty(customServerUrl)) {
-				return type.getStandardUrl();
-			}
-			return customServerUrl;
-		}
-
-		public void cloneIn(OnlineRoutingEngineObject clone) {
-			clone.customName = customName;
-			clone.type = type;
-			clone.customServerUrl = customServerUrl;
-			clone.vehicleType = vehicleType;
-			clone.customVehicleKey = customVehicleKey;
-			clone.apiKey = apiKey;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj) return true;
-			if (obj == null || getClass() != obj.getClass()) return false;
-
-			OnlineRoutingEngineObject engine = (OnlineRoutingEngineObject) obj;
-			if (!Algorithms.stringsEqual(customName, engine.customName)) return false;
-			if (type != engine.type) return false;
-			if (!Algorithms.stringsEqual(getBaseUrl(), engine.getBaseUrl())) return false;
-			if (vehicleType != engine.vehicleType) return false;
-			if (!Algorithms.stringsEqual(getVehicleKey(), engine.getVehicleKey())) return false;
-			return Algorithms.isEmpty(apiKey) ? Algorithms.isEmpty(engine.apiKey) : Algorithms.stringsEqual(apiKey, engine.apiKey);
 		}
 	}
 }

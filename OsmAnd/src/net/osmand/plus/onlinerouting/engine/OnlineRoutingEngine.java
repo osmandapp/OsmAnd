@@ -192,4 +192,14 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	public static String generateKey() {
 		return ONLINE_ROUTING_ENGINE_PREFIX + System.currentTimeMillis();
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof OnlineRoutingEngine)) return false;
+
+		OnlineRoutingEngine engine = (OnlineRoutingEngine) o;
+		if (getType() != engine.getType()) return false;
+		return Algorithms.objectEquals(getParams(), engine.getParams());
+	}
 }
