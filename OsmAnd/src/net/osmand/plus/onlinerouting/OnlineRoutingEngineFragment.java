@@ -1,18 +1,28 @@
 package net.osmand.plus.onlinerouting;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -51,6 +61,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private static final String ENGINE_VEHICLE_TYPE_KEY = "engine_vehicle_type";
 	private static final String ENGINE_CUSTOM_VEHICLE_KEY = "engine_custom_vehicle";
 	private static final String ENGINE_API_KEY_KEY = "engine_api_key";
+	private static final String INIT_ENGINE_NAME_KEY = "init_engine_name";
+	private static final String INIT_ENGINE_SERVER_KEY = "init_engine_server";
+	private static final String INIT_ENGINE_SERVER_URL_KEY = "init_engine_server_url";
+	private static final String INIT_ENGINE_VEHICLE_TYPE_KEY = "init_engine_vehicle_type";
+	private static final String INIT_ENGINE_CUSTOM_VEHICLE_KEY = "init_engine_custom_vehicle";
+	private static final String INIT_ENGINE_API_KEY_KEY = "init_engine_api_key";
 	private static final String EXAMPLE_LOCATION_KEY = "example_location";
 	private static final String APP_MODE_KEY = "app_mode";
 	private static final String EDITED_ENGINE_KEY = "edited_engine_key";
@@ -67,10 +83,14 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private OnlineRoutingCard apiKeyCard;
 	private OnlineRoutingCard exampleCard;
 	private View testResultsContainer;
+	private ScrollView scrollView;
+	private OnGlobalLayoutListener onGlobalLayout;
+	private boolean isKeyboardShown = false;
 
 	private ApplicationMode appMode;
 
 	private OnlineRoutingEngineObject engine;
+	private OnlineRoutingEngineObject initEngine;
 	private ExampleLocation selectedLocation;
 	private String editedEngineKey;
 
@@ -122,21 +142,32 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		mapActivity = getMapActivity();
 		helper = app.getOnlineRoutingHelper();
 		engine = new OnlineRoutingEngineObject();
+		initEngine = new OnlineRoutingEngineObject();
 		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
 		} else {
 			initState();
 		}
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					showExitDialog();
+				}
+			}
+		});
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
-	                         @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
+							 @Nullable ViewGroup container,
+							 @Nullable Bundle savedInstanceState) {
 		view = getInflater().inflate(
 				R.layout.online_routing_engine_fragment, container, false);
 		segmentsContainer = (ViewGroup) view.findViewById(R.id.segments_container);
+		scrollView = (ScrollView) segmentsContainer.getParent();
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 		}
@@ -153,11 +184,84 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		setupButtons();
 
 		updateCardViews(nameCard, typeCard, vehicleCard, exampleCard);
+
+		scrollView.setOnTouchListener(new View.OnTouchListener() {
+			int scrollViewY = 0;
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				int y = scrollView.getScrollY();
+				if (isKeyboardShown && scrollViewY != y) {
+					scrollViewY = y;
+					View focus = mapActivity.getCurrentFocus();
+					if (focus != null) {
+						AndroidUtils.hideSoftKeyboard(mapActivity, focus);
+						focus.clearFocus();
+					}
+				}
+				return false;
+			}
+		});
+
+		onGlobalLayout = new ViewTreeObserver.OnGlobalLayoutListener() {
+			private int layoutHeightPrevious;
+			private int layoutHeightMin;
+
+			@Override
+			public void onGlobalLayout() {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				} else {
+					view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+				}
+
+				Rect visibleDisplayFrame = new Rect();
+				view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
+				int layoutHeight = visibleDisplayFrame.bottom;
+
+				if (layoutHeight < layoutHeightPrevious) {
+					isKeyboardShown = true;
+					layoutHeightMin = layoutHeight;
+				} else {
+					isKeyboardShown = layoutHeight == layoutHeightMin;
+				}
+
+				if (layoutHeight != layoutHeightPrevious) {
+					FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
+					rootViewLayout.height = layoutHeight;
+					view.requestLayout();
+					layoutHeightPrevious = layoutHeight;
+				}
+
+				view.post(new Runnable() {
+					@Override
+					public void run() {
+						view.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayout);
+					}
+				});
+
+			}
+		};
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+			view.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayout);
+		}
+
 		return view;
 	}
 
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+			view.getViewTreeObserver().removeOnGlobalLayoutListener(onGlobalLayout);
+		} else {
+			view.getViewTreeObserver().removeGlobalOnLayoutListener(onGlobalLayout);
+		}
+	}
+
 	private void setupNameCard() {
-		nameCard = new OnlineRoutingCard(mapActivity, isNightMode());
+		nameCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		nameCard.build(mapActivity);
 		nameCard.setDescription(getString(R.string.select_nav_profile_dialog_message));
 		nameCard.setEditedText(engine.getName(app));
@@ -175,7 +279,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupTypeCard() {
-		typeCard = new OnlineRoutingCard(mapActivity, isNightMode());
+		typeCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		typeCard.build(mapActivity);
 		typeCard.setHeaderTitle(getString(R.string.shared_string_type));
 		List<HorizontalSelectionItem> serverItems = new ArrayList<>();
@@ -210,7 +314,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupVehicleCard() {
-		vehicleCard = new OnlineRoutingCard(mapActivity, isNightMode());
+		vehicleCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		vehicleCard.build(mapActivity);
 		vehicleCard.setHeaderTitle(getString(R.string.shared_string_vehicle));
 		List<HorizontalSelectionItem> vehicleItems = new ArrayList<>();
@@ -247,7 +351,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupApiKeyCard() {
-		apiKeyCard = new OnlineRoutingCard(mapActivity, isNightMode());
+		apiKeyCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		apiKeyCard.build(mapActivity);
 		apiKeyCard.setHeaderTitle(getString(R.string.shared_string_api_key));
 		apiKeyCard.setFieldBoxLabelText(getString(R.string.keep_it_empty_if_not));
@@ -264,7 +368,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupExampleCard() {
-		exampleCard = new OnlineRoutingCard(mapActivity, isNightMode());
+		exampleCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		exampleCard.build(mapActivity);
 		exampleCard.setHeaderTitle(getString(R.string.shared_string_example));
 		List<HorizontalSelectionItem> locationItems = new ArrayList<>();
@@ -284,7 +388,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 						return false;
 					}
 				});
-		exampleCard.setFieldBoxHelperText(getString(R.string.online_routing_example_hint));
+		exampleCard.setDescription(getString(R.string.online_routing_example_hint));
+		exampleCard.showFieldBox();
 		exampleCard.setButton(getString(R.string.test_route_calculation), new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -315,7 +420,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		navigationIcon.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				showExitDialog();
 			}
 		});
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
@@ -370,7 +475,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				} else {
 					vehicleCard.hideFieldBox();
 				}
-
+				int contentPadding = getResources().getDimensionPixelSize(R.dimen.content_padding);
+				vehicleCard.updateBottomMarginSelectionMenu(engine.vehicleType != VehicleType.CUSTOM ? 0 : contentPadding);
 			} else if (exampleCard.equals(card)) {
 				exampleCard.setEditedText(getTestUrl());
 			}
@@ -385,7 +491,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				showExitDialog();
 			}
 		});
 
@@ -496,6 +602,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		outState.putString(ENGINE_VEHICLE_TYPE_KEY, engine.vehicleType.name());
 		outState.putString(ENGINE_CUSTOM_VEHICLE_KEY, engine.customVehicleKey);
 		outState.putString(ENGINE_API_KEY_KEY, engine.apiKey);
+		outState.putString(INIT_ENGINE_NAME_KEY, initEngine.customName);
+		outState.putString(INIT_ENGINE_SERVER_KEY, initEngine.type.name());
+		outState.putString(INIT_ENGINE_SERVER_URL_KEY, initEngine.customServerUrl);
+		outState.putString(INIT_ENGINE_VEHICLE_TYPE_KEY, initEngine.vehicleType.name());
+		outState.putString(INIT_ENGINE_CUSTOM_VEHICLE_KEY, initEngine.customVehicleKey);
+		outState.putString(INIT_ENGINE_API_KEY_KEY, initEngine.apiKey);
 		outState.putString(EXAMPLE_LOCATION_KEY, selectedLocation.name());
 		if (appMode != null) {
 			outState.putString(APP_MODE_KEY, appMode.getStringKey());
@@ -510,6 +622,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		engine.vehicleType = VehicleType.valueOf(savedState.getString(ENGINE_VEHICLE_TYPE_KEY));
 		engine.customVehicleKey = savedState.getString(ENGINE_CUSTOM_VEHICLE_KEY);
 		engine.apiKey = savedState.getString(ENGINE_API_KEY_KEY);
+		initEngine.customName = savedState.getString(INIT_ENGINE_NAME_KEY);
+		initEngine.type = EngineType.valueOf(savedState.getString(INIT_ENGINE_SERVER_KEY));
+		initEngine.customServerUrl = savedState.getString(INIT_ENGINE_SERVER_URL_KEY);
+		initEngine.vehicleType = VehicleType.valueOf(savedState.getString(INIT_ENGINE_VEHICLE_TYPE_KEY));
+		initEngine.customVehicleKey = savedState.getString(INIT_ENGINE_CUSTOM_VEHICLE_KEY);
+		initEngine.apiKey = savedState.getString(INIT_ENGINE_API_KEY_KEY);
 		selectedLocation = ExampleLocation.valueOf(savedState.getString(EXAMPLE_LOCATION_KEY));
 		appMode = ApplicationMode.valueOfStringKey(savedState.getString(APP_MODE_KEY), null);
 		editedEngineKey = savedState.getString(EDITED_ENGINE_KEY);
@@ -536,13 +654,47 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				engine.apiKey = editedEngine.getParameter(EngineParameter.API_KEY);
 			}
 		}
+		engine.cloneIn(initEngine);
 	}
 
 	private void dismiss() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			activity.onBackPressed();
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack();
+			}
 		}
+	}
+
+	public void showExitDialog() {
+		View focus = view.findFocus();
+		AndroidUtils.hideSoftKeyboard(mapActivity, focus);
+		if (engine.customName != null && initEngine.customName == null) {
+			initEngine.customName = initEngine.getName(app);
+		}
+		if (!engine.equals(initEngine)) {
+			AlertDialog.Builder dismissDialog = createWarningDialog(mapActivity,
+					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
+			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dismiss();
+				}
+			});
+			dismissDialog.show();
+		} else {
+			dismiss();
+		}
+	}
+
+	private AlertDialog.Builder createWarningDialog(Activity activity, int title, int message, int negButton) {
+		Context themedContext = UiUtilities.getThemedContext(activity, isNightMode());
+		AlertDialog.Builder warningDialog = new AlertDialog.Builder(themedContext);
+		warningDialog.setTitle(getString(title));
+		warningDialog.setMessage(getString(message));
+		warningDialog.setNegativeButton(negButton, null);
+		return warningDialog;
 	}
 
 	private boolean isNightMode() {
@@ -564,8 +716,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @NonNull ApplicationMode appMode,
-	                                String editedEngineKey) {
+									@NonNull ApplicationMode appMode,
+									String editedEngineKey) {
 		FragmentManager fm = activity.getSupportFragmentManager();
 		if (!fm.isStateSaved() && fm.findFragmentByTag(OnlineRoutingEngineFragment.TAG) == null) {
 			OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();
@@ -604,6 +756,29 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				return type.getStandardUrl();
 			}
 			return customServerUrl;
+		}
+
+		public void cloneIn(OnlineRoutingEngineObject clone) {
+			clone.customName = customName;
+			clone.type = type;
+			clone.customServerUrl = customServerUrl;
+			clone.vehicleType = vehicleType;
+			clone.customVehicleKey = customVehicleKey;
+			clone.apiKey = apiKey;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) return true;
+			if (obj == null || getClass() != obj.getClass()) return false;
+
+			OnlineRoutingEngineObject engine = (OnlineRoutingEngineObject) obj;
+			if (!Algorithms.stringsEqual(customName, engine.customName)) return false;
+			if (type != engine.type) return false;
+			if (!Algorithms.stringsEqual(getBaseUrl(), engine.getBaseUrl())) return false;
+			if (vehicleType != engine.vehicleType) return false;
+			if (!Algorithms.stringsEqual(getVehicleKey(), engine.getVehicleKey())) return false;
+			return Algorithms.isEmpty(apiKey) ? Algorithms.isEmpty(engine.apiKey) : Algorithms.stringsEqual(apiKey, engine.apiKey);
 		}
 	}
 }
