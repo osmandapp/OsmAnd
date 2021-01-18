@@ -38,7 +38,7 @@ android {
 			jni.srcDirs = []
 			jniLibs.srcDirs = ["libs"]
 			aidl.srcDirs = ["src"]
-			java.srcDirs = ["src", "src-google"]
+			java.srcDirs = ["src", "src-gms", "src-google"]
 			resources.srcDirs = ["src"]
 			renderscript.srcDirs = ["src"]
 			res.srcDirs = ["res"]
