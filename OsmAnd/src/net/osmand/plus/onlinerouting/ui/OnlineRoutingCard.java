@@ -5,11 +5,13 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +26,7 @@ import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
 import java.util.List;
@@ -46,9 +49,12 @@ public class OnlineRoutingCard extends BaseCard {
 	private OnTextChangedListener onTextChangedListener;
 	private boolean fieldBoxHelperTextShowed;
 
-	public OnlineRoutingCard(@NonNull MapActivity mapActivity, boolean nightMode) {
+	private ApplicationMode appMode;
+
+	public OnlineRoutingCard(@NonNull MapActivity mapActivity, boolean nightMode, ApplicationMode appMode) {
 		super(mapActivity);
 		this.nightMode = nightMode;
+		this.appMode = appMode;
 	}
 
 	@Override
@@ -70,6 +76,9 @@ public class OnlineRoutingCard extends BaseCard {
 		tvErrorText = view.findViewById(R.id.error_text);
 		bottomDivider = view.findViewById(R.id.bottom_divider);
 		button = view.findViewById(R.id.button);
+
+		int activeColor = ContextCompat.getColor(app, appMode.getIconColorInfo().getColor(nightMode));
+		textFieldBoxes.setPrimaryColor(activeColor);
 
 		editText.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -129,6 +138,11 @@ public class OnlineRoutingCard extends BaseCard {
 			}
 		});
 		rvSelectionMenu.setAdapter(adapter);
+	}
+
+	public void updateBottomMarginSelectionMenu(int bottomMargin) {
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rvSelectionMenu.getLayoutParams();
+		params.bottomMargin = bottomMargin;
 	}
 
 	public void setDescription(@NonNull String description) {
