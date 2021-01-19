@@ -1004,17 +1004,12 @@ public class SearchUICore {
 					String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
 
 					int cmp = 0;
-
-					if (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)) {
-						cmp = 1;
-					} else if (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2)) {
-						cmp = -1;
-					} 
-					
-					if (cmp != 0) {
-						return cmp;
+					boolean subtypeFilter1 = FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1);
+					boolean subtypeFilter2 = FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2);
+					if (subtypeFilter1 != subtypeFilter2) {
+						// to filter second
+						return subtypeFilter1 ? 1 : -1;
 					}
-
 					cmp = c.collator.compare(type1, type2);
 					if (cmp != 0) {
 						return cmp;

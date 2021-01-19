@@ -182,10 +182,10 @@ public class Building extends MapObject {
 	
 	@Override
 	public String toString() {
-		if(interpolationInterval !=0){
-			return name+"-"+name2 +" (+"+interpolationInterval+") ";
-		} else if(interpolationType != null) {
-			return name+"-"+name2 +" ("+interpolationType+") ";
+		if (interpolationInterval != 0) {
+			return name + "-" + name2 + " (+" + interpolationInterval + ") ";
+		} else if (interpolationType != null) {
+			return name + "-" + name2 + " (" + interpolationType + ") ";
 		}
 		return name;
 	}
