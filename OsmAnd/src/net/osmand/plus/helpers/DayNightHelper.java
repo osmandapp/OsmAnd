@@ -110,7 +110,7 @@ public class DayNightHelper implements SensorEventListener {
 	public SunriseSunset getSunriseSunset() {
 		Location lastKnownLocation = app.getLocationProvider().getLastKnownLocation();
 		if (lastKnownLocation == null) {
-			lastKnownLocation = app.getLocationProvider().getFirstTimeRunDefaultLocation();
+			lastKnownLocation = app.getLocationProvider().getFirstTimeRunDefaultLocation(null);
 		}
 		if (lastKnownLocation == null) {
 			return null;

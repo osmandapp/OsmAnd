@@ -389,8 +389,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	@Nullable
-	public net.osmand.Location getFirstTimeRunDefaultLocation() {
-		return isLocationPermissionAvailable(app) ? locationServiceHelper.getFirstTimeRunDefaultLocation() : null;
+	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable final OsmAndLocationListener locationListener) {
+		return isLocationPermissionAvailable(app)
+				? locationServiceHelper.getFirstTimeRunDefaultLocation(locationListener != null ? new LocationServiceHelper.LocationCallback() {
+			@Override
+			public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
+				locationListener.updateLocation(locations.isEmpty() ? null : locations.get(0));
+			}
+		} : null) : null;
 	}
 
 	public synchronized void registerOrUnregisterCompassListener(boolean register) {

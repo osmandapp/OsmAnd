@@ -125,7 +125,7 @@ public class LocationServiceHelperImpl extends LocationServiceHelper implements 
 	}
 
 	@Nullable
-	public net.osmand.Location getFirstTimeRunDefaultLocation() {
+	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable LocationCallback locationCallback) {
 		LocationManager locationManager = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 		List<String> providers = new ArrayList<>(locationManager.getProviders(true));
 		// note, passive provider is from API_LEVEL 8 but it is a constant, we can check for it.
