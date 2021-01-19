@@ -172,6 +172,7 @@ public class TravelObfHelper implements TravelHelper {
 		res.title = Algorithms.isEmpty(title) ? amenity.getName() : title;
 		res.content = amenity.getDescription(lang);
 		res.isPartOf = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.IS_PART, lang));
+		res.isParentOf = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.IS_PARENT_OF, lang));
 		res.lat = amenity.getLocation().getLatitude();
 		res.lon = amenity.getLocation().getLongitude();
 		res.imageTitle = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.IMAGE_TITLE, null));
@@ -400,64 +401,29 @@ public class TravelObfHelper implements TravelHelper {
 		Map<String, List<WikivoyageSearchResult>> navMap = new HashMap<>();
 		Set<String> headers = new LinkedHashSet<>();
 		Map<String, WikivoyageSearchResult> headerObjs = new HashMap<>();
-		Map<File, List<Amenity>> amenityMap = new HashMap<>();
-		for (BinaryMapIndexReader reader : getReaders()) {
-			try {
-				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0,
-						Integer.MAX_VALUE, 0, Integer.MAX_VALUE, -1, getSearchFilter(false), new ResultMatcher<Amenity>() {
-
-							@Override
-							public boolean publish(Amenity amenity) {
-								String isPartOf = amenity.getTagContent(Amenity.IS_PART, lang);
-								if (Algorithms.stringsEqual(title, isPartOf)) {
-									return true;
-								} else if (parts != null && parts.length > 0) {
-									String title = amenity.getName(lang);
-									title = Algorithms.isEmpty(title) ? amenity.getName() : title;
-									for (int i = 0; i < parts.length; i++) {
-										String part = parts[i];
-										if (i == 0 && Algorithms.stringsEqual(part, title) || Algorithms.stringsEqual(part, isPartOf)) {
-											return true;
-										}
-									}
-								}
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return false;
-							}
-						});
-				List<Amenity> amenities = reader.searchPoi(req);
-				if (!Algorithms.isEmpty(amenities)) {
-					amenityMap.put(reader.getFile(), amenities);
-				}
-			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
-			}
-		}
 		if (parts != null && parts.length > 0) {
 			headers.addAll(Arrays.asList(parts));
-			headers.add(title);
 		}
-		if (!Algorithms.isEmpty(amenityMap)) {
-			for (Entry<File, List<Amenity>> entry : amenityMap.entrySet()) {
-				File file = entry.getKey();
-				for (Amenity amenity : entry.getValue()) {
-					Set<String> nameLangs = getLanguages(amenity);
-					if (nameLangs.contains(lang)) {
-						TravelArticle a = readArticle(file, amenity, lang, false);
-						WikivoyageSearchResult rs = new WikivoyageSearchResult(a, new ArrayList<>(nameLangs));
-						List<WikivoyageSearchResult> l = navMap.get(rs.isPartOf);
-						if (l == null) {
-							l = new ArrayList<>();
-							navMap.put(rs.isPartOf, l);
-						}
-						l.add(rs);
-						if (headers.contains(a.getTitle())) {
-							headerObjs.put(a.getTitle(), rs);
-						}
+
+		for (String header : headers) {
+			TravelArticle parentArticle = getParentArticleByTitle(header, lang);
+			if (parentArticle == null) {
+				continue;
+			}
+			navMap.put(header, new ArrayList<WikivoyageSearchResult>());
+			String[] isParentOf = parentArticle.isParentOf.split(";");
+			for (String childTitle : isParentOf) {
+				if (!childTitle.isEmpty()) {
+					WikivoyageSearchResult searchResult = new WikivoyageSearchResult("", childTitle, null,
+							null, Collections.singletonList(lang));
+					List<WikivoyageSearchResult> resultList = navMap.get(header);
+					if (resultList == null) {
+						resultList = new ArrayList<>();
+						navMap.put(header, resultList);
+					}
+					resultList.add(searchResult);
+					if (headers.contains(childTitle)) {
+						headerObjs.put(childTitle, searchResult);
 					}
 				}
 			}
@@ -480,6 +446,41 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		return res;
+	}
+
+	private TravelArticle getParentArticleByTitle(final String title, final String lang) {
+		TravelArticle article = null;
+		final List<Amenity> amenities = new ArrayList<>();
+		for (BinaryMapIndexReader reader : getReaders()) {
+			try {
+				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+						0, 0, title, 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, getSearchFilter(false),
+						new ResultMatcher<Amenity>() {
+							boolean done = false;
+
+							@Override
+							public boolean publish(Amenity amenity) {
+								if (Algorithms.stringsEqual(title, Algorithms.emptyIfNull(amenity.getName(lang)))) {
+									amenities.add(amenity);
+									done = true;
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return done;
+							}
+						}, null);
+				reader.searchPoiByName(req);
+			} catch (IOException e) {
+				LOG.error(e.getMessage());
+			}
+			if (!Algorithms.isEmpty(amenities)) {
+				article = readArticle(reader.getFile(), amenities.get(0), lang, false);
+			}
+		}
+		return article;
 	}
 
 	@Override
