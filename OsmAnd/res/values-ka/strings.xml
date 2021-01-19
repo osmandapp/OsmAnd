@@ -2757,4 +2757,14 @@
     <string name="rendering_attr_surface_fine_gravel_name">ქვიშა</string>
     <string name="rendering_attr_surface_paving_stones_name">ხრეში</string>
     <string name="rendering_attr_surface_grass_paver_name">ბალახიანი</string>
+    <string name="items_added">დამატებულია</string>
+    <string name="profile_type_custom_string">მორგებული პროფილი</string>
+    <string name="multimedia_rec_split_title">ჩანაწერის გაყოფა</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">უჯრედული ქსელები</string>
+    <string name="layer_osm_edits">OSM ჩასწორებები</string>
+    <string name="shared_string_osmand_usage">OsmAnd-ის გამოყენება</string>
+    <string name="gpx_join_gaps">ღრეჩოების შეერთება</string>
+    <string name="quick_action_add_create_items">შექმნა</string>
+    <string name="custom_search">მორგებული ძებნა</string>
+    <string name="shared_string_empty">ცარიელი</string>
 </resources>

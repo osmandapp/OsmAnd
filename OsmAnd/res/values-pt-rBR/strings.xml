@@ -3962,4 +3962,9 @@
     <string name="select_folder">Selecione a pasta</string>
     <string name="select_folder_descr">Selecione a pasta ou adicione uma nova</string>
     <string name="shared_string_empty">Vazio</string>
+    <string name="analyze_by_intervals">Analisar por intervalos (intervalo de divisão)</string>
+    <string name="upload_to_openstreetmap">Carregar para OpenStreetMap</string>
+    <string name="edit_track">Editar trilha</string>
+    <string name="rename_track">Renomear trilha</string>
+    <string name="change_folder">Mudar pasta</string>
 </resources>

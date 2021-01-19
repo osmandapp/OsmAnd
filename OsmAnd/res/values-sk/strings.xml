@@ -3962,4 +3962,9 @@
     <string name="select_folder">Zvoľte priečinok</string>
     <string name="select_folder_descr">Zvoľte priečinok alebo pridajte nový</string>
     <string name="shared_string_empty">Prázdne</string>
+    <string name="analyze_by_intervals">Analyzovať podľa intervalov (rozdeliť interval)</string>
+    <string name="upload_to_openstreetmap">Nahrať do OpenStreetMap</string>
+    <string name="edit_track">Upraviť stopu</string>
+    <string name="rename_track">Premenovať stopu</string>
+    <string name="change_folder">Zmeniť priečinok</string>
 </resources>

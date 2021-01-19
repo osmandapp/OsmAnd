@@ -3967,4 +3967,9 @@
     <string name="select_folder">Zvolte složku</string>
     <string name="select_folder_descr">Zvolte složku nebo vytvořte novou</string>
     <string name="shared_string_empty">Prázdné</string>
+    <string name="analyze_by_intervals">Analyzovat podle intervalů (rozdělit interval)</string>
+    <string name="upload_to_openstreetmap">Nahrát do OpenStreetMap</string>
+    <string name="edit_track">Editovat stopu</string>
+    <string name="rename_track">Přejmenovat stopu</string>
+    <string name="change_folder">Změnit složku</string>
 </resources>

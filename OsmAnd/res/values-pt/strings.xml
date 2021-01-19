@@ -3934,4 +3934,30 @@
 \n• Cores personalizadas para favoritos e pontos de rotas de trilhos
 \n
 \n</string>
+    <string name="edit_online_routing_engine">Editar o mecanismo de roteamento online</string>
+    <string name="shared_string_subtype">Subtipo</string>
+    <string name="shared_string_vehicle">Veículo</string>
+    <string name="shared_string_api_key">Chave de API</string>
+    <string name="shared_string_server_url">URL do servidor</string>
+    <string name="shared_string_enter_param">Digite o param</string>
+    <string name="keep_it_empty_if_not">Mantenha-o vazio se não</string>
+    <string name="online_routing_example_hint">O URL com todos os parâmetros parecerá-se assim:</string>
+    <string name="test_route_calculation">Cálculo da rota de teste</string>
+    <string name="routing_engine_vehicle_type_driving">Condução</string>
+    <string name="routing_engine_vehicle_type_foot">Pé</string>
+    <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
+    <string name="routing_engine_vehicle_type_car">Carro</string>
+    <string name="message_error_recheck_parameters">Erro, verifique novamente os parâmetros</string>
+    <string name="copy_address">Copiar endereço</string>
+    <string name="online_routing_engine">Mecanismo de roteamento online</string>
+    <string name="online_routing_engines">Mecanismos de roteamento online</string>
+    <string name="shared_string_folders">Pastas</string>
+    <string name="select_folder">Selecionar pasta</string>
+    <string name="select_folder_descr">Selecione a pasta ou adicione uma</string>
+    <string name="shared_string_empty">Vazio</string>
+    <string name="analyze_by_intervals">Analisar por intervalos (intervalo dividido)</string>
+    <string name="upload_to_openstreetmap">Enviar ao OpenStreetMap</string>
+    <string name="edit_track">Editar trilho</string>
+    <string name="rename_track">Renomear trilho</string>
+    <string name="change_folder">Mudar pasta</string>
 </resources>
