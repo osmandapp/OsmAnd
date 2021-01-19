@@ -68,10 +68,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 				.setCustomView(itemView)
 				.create());
 
-		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		final int paddingSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-
-		items.add(new DividerSpaceItem(context, padding));
 
 		LinearLayout showTrackOnMapView = itemView.findViewById(R.id.show_track_on_map);
 		TextView showTrackOnMapTitle = showTrackOnMapView.findViewById(R.id.title);
