@@ -29,9 +29,6 @@ android {
 }
 
 def replaceNoTranslate(line) {
-	if (line.contains("\"versionFeatures\"")) {
-		return line.replaceAll(">[^<]*<", ">" + "" + "<")
-	}
 	return line;
 }
 
