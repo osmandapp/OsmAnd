@@ -57,6 +57,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
@@ -122,6 +123,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -167,11 +170,13 @@ public class OsmandAidlApi {
 
 	private static final String AIDL_REFRESH_MAP = "aidl_refresh_map";
 	private static final String AIDL_SET_MAP_LOCATION = "aidl_set_map_location";
+	private static final String AIDL_SET_LOCATION = "aidl_set_location";
 	private static final String AIDL_LATITUDE = "aidl_latitude";
 	private static final String AIDL_LONGITUDE = "aidl_longitude";
 	private static final String AIDL_ZOOM = "aidl_zoom";
 	private static final String AIDL_ROTATION = "aidl_rotation";
 	private static final String AIDL_ANIMATED = "aidl_animated";
+	private static final String AIDL_TIME_TO_NOT_USE_OTHER_GPS = "aidl_time_to_not_use_other_gps";
 
 	private static final String AIDL_START_NAME = "aidl_start_name";
 	private static final String AIDL_START_LAT = "aidl_start_lat";
@@ -232,6 +237,7 @@ public class OsmandAidlApi {
 	private MapActivity mapActivity;
 
 	private boolean mapActivityActive = false;
+	private boolean hasCustomLocation = false;
 
 	public OsmandAidlApi(OsmandApplication app) {
 		this.app = app;
@@ -263,6 +269,7 @@ public class OsmandAidlApi {
 		registerHideSqliteDbFileReceiver(mapActivity);
 		registerExecuteQuickActionReceiver(mapActivity);
 		registerLockStateReceiver(mapActivity);
+		registerSetLocationReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		this.mapActivity = mapActivity;
@@ -901,6 +908,50 @@ public class OsmandAidlApi {
 			}
 		};
 		registerReceiver(lockStateReceiver, mapActivity, AIDL_LOCK_STATE);
+	}
+
+	private void registerSetLocationReceiver(MapActivity mapActivity) {
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		BroadcastReceiver setLocationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				final MapActivity mapActivity = mapActivityRef.get();
+				if (mapActivity == null) {
+					return;
+				}
+
+				double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
+				double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
+				long timeToNotUseOtherGPS = intent.getLongExtra(AIDL_TIME_TO_NOT_USE_OTHER_GPS, 0);
+
+				if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
+					mapActivity.setMapLocation(lat, lon);
+					mapActivity.refreshMap();
+					hasCustomLocation = true;
+					net.osmand.Location location = new net.osmand.Location("OsmAnd", lat, lon);
+					app.getLocationProvider().setCustomLocation(location);
+				}
+
+				final OsmAndLocationProvider.OsmAndLocationListener listener = new OsmAndLocationProvider.OsmAndLocationListener() {
+					@Override
+					public void updateLocation(Location location) {
+						mapActivity.setMapLocation(location.getLatitude(), location.getLongitude());
+						mapActivity.refreshMap();
+					}
+				};
+
+				new Timer().schedule(new TimerTask() {
+					@Override
+					public void run() {
+						if (app.getLocationProvider() != null) {
+							hasCustomLocation = false;
+							app.getLocationProvider().addLocationListener(listener);
+						}
+					}
+				}, timeToNotUseOtherGPS);
+			}
+		};
+		registerReceiver(setLocationReceiver, mapActivity, AIDL_SET_LOCATION);
 	}
 
 	public void registerMapLayers(@NonNull MapActivity mapActivity) {
@@ -2403,6 +2454,20 @@ public class OsmandAidlApi {
 	public boolean removeRoadBlock(ABlockedRoad road) {
 		app.getAvoidSpecificRoads().removeImpassableRoad(new LatLon(road.getLatitude(), road.getLongitude()));
 		return true;
+	}
+
+	public boolean setLocation(double latitude, double longitude, long timeToNotUseOtherGPS) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_SET_LOCATION);
+		intent.putExtra(AIDL_LATITUDE, latitude);
+		intent.putExtra(AIDL_LONGITUDE, longitude);
+		intent.putExtra(AIDL_TIME_TO_NOT_USE_OTHER_GPS, timeToNotUseOtherGPS);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	public boolean hasCustomLocation() {
+		return hasCustomLocation;
 	}
 
 	private static class FileCopyInfo {

@@ -796,6 +796,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (locationSimulation.isRouteAnimating()) {
 			return;
 		}
+		if (app.getAidlApi().hasCustomLocation() && isNotSimulatedLocation(location)) {
+			return;
+		}
 		if (location != null) {
 			notifyGpsLocationRecovered();
 		}
@@ -812,10 +815,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		setLocation(location);
 	}
 
-	private void setLocation(net.osmand.Location location) { if (location == null) {
+	private void setLocation(net.osmand.Location location) {
+		if (location == null) {
 			updateGPSInfo(null);
 		}
-
+		if (app.getAidlApi().hasCustomLocation() && isNotSimulatedLocation(location)) {
+			return;
+		}
 		if (location != null) {
 			// // use because there is a bug on some devices with location.getTime()
 			lastTimeLocationFixed = System.currentTimeMillis();
@@ -848,6 +854,22 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		
 		// Update information
 		updateLocation(this.location);
+	}
+
+	public void setCustomLocation(net.osmand.Location location) {
+		if (locationSimulation.isRouteAnimating()) {
+			return;
+		}
+		if (location != null) {
+			notifyGpsLocationRecovered();
+		}
+		// notify about lost location
+		scheduleCheckIfGpsLost(location);
+
+		app.getSavingTrackHelper().updateLocation(location, heading);
+		OsmandPlugin.updateLocationPlugins(location);
+		app.getRoutingHelper().updateLocation(location);
+		app.getWaypointHelper().locationChanged(location);
 	}
 
 	private void notifyGpsLocationRecovered() {
