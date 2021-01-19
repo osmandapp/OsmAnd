@@ -193,7 +193,7 @@ public class ShareDialog {
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 			activity.startActivity(intent);
 		} else {
-			if (Version.isMarketEnabled((OsmandApplication) activity.getApplication())) {
+			if (Version.isMarketEnabled()) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 				builder.setMessage(activity.getString(R.string.zxing_barcode_scanner_not_found));
 				builder.setPositiveButton(activity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {

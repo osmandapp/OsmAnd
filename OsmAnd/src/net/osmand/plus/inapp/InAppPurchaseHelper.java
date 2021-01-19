@@ -212,7 +212,7 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	protected void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppCommand command) {
-		if (isDeveloperVersion || (!Version.isGooglePlayEnabled(ctx) && !Version.isHuawei(ctx))) {
+		if (isDeveloperVersion || (!Version.isGooglePlayEnabled() && !Version.isHuawei())) {
 			notifyDismissProgress(taskType);
 			stop(true);
 			return;

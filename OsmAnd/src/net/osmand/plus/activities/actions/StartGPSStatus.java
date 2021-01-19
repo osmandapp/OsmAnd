@@ -180,7 +180,7 @@ public class StartGPSStatus extends OsmAndAction {
 			intent.addCategory(Intent.CATEGORY_LAUNCHER);
 			mapActivity.startActivity(intent);
 		} else {
-			if (Version.isMarketEnabled(getMyApplication())) {
+			if (Version.isMarketEnabled()) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 				builder.setMessage(mapActivity. getString(R.string.gps_status_app_not_found));
 				builder.setPositiveButton(mapActivity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {

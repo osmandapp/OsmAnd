@@ -71,16 +71,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 
 	private void setupSafeModePref() {
 		SwitchPreferenceEx safeMode = findPreference(settings.SAFE_MODE.getId());
-		if (!Version.isBlackberry(app)) {
-			safeMode.setDescription(getString(R.string.safe_mode_description));
-			safeMode.setIconSpaceReserved(false);
-			// disable the switch if the library cannot be used
-			if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || settings.NATIVE_RENDERING_FAILED.get()) {
-				safeMode.setEnabled(false);
-				safeMode.setChecked(true);
-			}
-		} else {
-			safeMode.setVisible(false);
+		safeMode.setDescription(getString(R.string.safe_mode_description));
+		safeMode.setIconSpaceReserved(false);
+		// disable the switch if the library cannot be used
+		if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || settings.NATIVE_RENDERING_FAILED.get()) {
+			safeMode.setEnabled(false);
+			safeMode.setChecked(true);
 		}
 	}
 
