@@ -97,10 +97,9 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		setupArrivalAnnouncementPref();
 		setupVoiceProviderPref();
 
-		if (!Version.isBlackberry(app)) {
-			setupAudioStreamGuidancePref();
-			setupInterruptMusicPref();
-		}
+		setupAudioStreamGuidancePref();
+		setupInterruptMusicPref();
+
 		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
 		setupSpeakCamerasPref();
 		setupSpeedCamerasAlert();
