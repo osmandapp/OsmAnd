@@ -298,12 +298,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		mapEmptyStateAllowedPref.setTitle(getString(R.string.use_trackball));
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.use_trackball_descr));
 
-		boolean visible = false;
-		if (!Version.isBlackberry(app)) {
-			int nav = getResources().getConfiguration().navigation;
-			visible = nav == Configuration.NAVIGATION_DPAD || nav == Configuration.NAVIGATION_TRACKBALL ||
-					nav == Configuration.NAVIGATION_WHEEL || nav == Configuration.NAVIGATION_UNDEFINED;
-		}
+		int nav = getResources().getConfiguration().navigation;
+		boolean visible = nav == Configuration.NAVIGATION_DPAD || nav == Configuration.NAVIGATION_TRACKBALL ||
+				nav == Configuration.NAVIGATION_WHEEL || nav == Configuration.NAVIGATION_UNDEFINED;
 		mapEmptyStateAllowedPref.setVisible(visible);
 	}
 

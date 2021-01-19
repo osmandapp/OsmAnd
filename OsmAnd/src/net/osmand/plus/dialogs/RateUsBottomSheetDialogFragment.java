@@ -108,7 +108,7 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 	public static boolean shouldShow(OsmandApplication app) {
 		long firstInstalledDays = app.getAppInitializer().getFirstInstalledDays();
 		//Do not show dialog if not google play version or more than 350 days left from the first start
-		if (!Version.isGooglePlayEnabled(app) || firstInstalledDays > 350) {
+		if (!Version.isGooglePlayEnabled() || firstInstalledDays > 350) {
 			return false;
 		}
 		OsmandSettings settings = app.getSettings();
