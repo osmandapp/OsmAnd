@@ -40,6 +40,7 @@ import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.Horizonta
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.onlinerouting.engine.EngineType;
@@ -243,6 +244,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			public void onTextChanged(boolean changedByUser, @NonNull String text) {
 				if (changedByUser) {
 					engine.put(EngineParameter.CUSTOM_NAME, text);
+					engine.remove(EngineParameter.NAME_INDEX);
 					checkCustomNameUnique(engine);
 				}
 			}
@@ -448,18 +450,13 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
 	private void generateUniqueNameIfNeeded() {
 		if (engine.get(EngineParameter.CUSTOM_NAME) == null) {
-			engine.remove(EngineParameter.NAME_INDEX);
-			if (hasNameDuplicate(engine.getName(app))) {
-				int index = 0;
-				do {
-					engine.put(EngineParameter.NAME_INDEX, String.valueOf(++index));
-				} while (hasNameDuplicate(engine.getName(app)));
-			}
+			List<OnlineRoutingEngine> cachedEngines = helper.getEnginesExceptMentionedKeys(editedEngineKey);
+			OnlineRoutingUtils.generateUniqueName(app, engine, cachedEngines);
 		}
 	}
 
 	private void checkCustomNameUnique(@NonNull OnlineRoutingEngine engine) {
-		if (hasNameDuplicate(engine.getName(app))) {
+		if (hasNameDuplicate(engine)) {
 			nameCard.showFieldBoxError(getString(R.string.message_name_is_already_exists));
 			saveButton.setEnabled(false);
 		} else {
@@ -468,13 +465,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private boolean hasNameDuplicate(@NonNull String name) {
-		for (OnlineRoutingEngine engine : helper.getEnginesExceptMentioned(editedEngineKey)) {
-			if (Algorithms.objectEquals(engine.getName(app), name)) {
-				return true;
-			}
-		}
-		return false;
+	private boolean hasNameDuplicate(@NonNull OnlineRoutingEngine engine) {
+		List<OnlineRoutingEngine> cachedEngines = helper.getEnginesExceptMentionedKeys(editedEngineKey);
+		return OnlineRoutingUtils.hasNameDuplicate(app, engine.getName(app), cachedEngines);
 	}
 
 	private void onSaveEngine() {

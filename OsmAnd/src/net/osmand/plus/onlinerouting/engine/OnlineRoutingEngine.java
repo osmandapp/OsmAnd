@@ -52,23 +52,16 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	@NonNull
 	public String getName(@NonNull Context ctx) {
-		String customName = get(EngineParameter.CUSTOM_NAME);
-		if (customName != null) {
-			return customName;
-		} else {
-			return getStandardName(ctx);
+		String name = get(EngineParameter.CUSTOM_NAME);
+		if (name == null) {
+			name = getStandardName(ctx);
 		}
-	}
-
-	@NonNull
-	private String getStandardName(@NonNull Context ctx) {
-		String base = getBaseName(ctx);
 		String index = get(EngineParameter.NAME_INDEX);
-		return !isEmpty(index) ? base + " " + index : base;
+		return !isEmpty(index) ? name + " " + index : name;
 	}
 
 	@NonNull
-	public String getBaseName(@NonNull Context ctx) {
+	public String getStandardName(@NonNull Context ctx) {
 		String vehicleTitle = getSelectedVehicleName(ctx);
 		if (isEmpty(vehicleTitle)) {
 			return getType().getTitle();
