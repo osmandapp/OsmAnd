@@ -3,31 +3,24 @@ package net.osmand.plus.onlinerouting;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
-import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,10 +28,6 @@ import java.util.Map;
 public class OnlineRoutingHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(OnlineRoutingHelper.class);
-
-	private static final String ITEMS = "items";
-	private static final String TYPE = "type";
-	private static final String PARAMS = "params";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -56,7 +45,7 @@ public class OnlineRoutingHelper {
 	}
 
 	@NonNull
-	public List<OnlineRoutingEngine> getEnginesExceptMentioned(@Nullable String ... excludeKeys) {
+	public List<OnlineRoutingEngine> getEnginesExceptMentionedKeys(@Nullable String... excludeKeys) {
 		List<OnlineRoutingEngine> engines = getEngines();
 		if (excludeKeys != null) {
 			for (String key : excludeKeys) {
@@ -70,6 +59,16 @@ public class OnlineRoutingHelper {
 	@Nullable
 	public OnlineRoutingEngine getEngineByKey(@Nullable String stringKey) {
 		return cachedEngines.get(stringKey);
+	}
+
+	@Nullable
+	public OnlineRoutingEngine getEngineByName(@Nullable String name) {
+		for (OnlineRoutingEngine engine : getEngines()) {
+			if (Algorithms.objectEquals(engine.getName(app), name)) {
+				return engine;
+			}
+		}
+		return null;
 	}
 
 	@NonNull
@@ -155,7 +154,7 @@ public class OnlineRoutingHelper {
 		if (!Algorithms.isEmpty(jsonString)) {
 			try {
 				JSONObject json = new JSONObject(jsonString);
-				readFromJson(json, engines);
+				OnlineRoutingUtils.readFromJson(json, engines);
 			} catch (JSONException | IllegalArgumentException e) {
 				LOG.debug("Error when reading engines from JSON ", e);
 			}
@@ -167,7 +166,7 @@ public class OnlineRoutingHelper {
 		if (!Algorithms.isEmpty(cachedEngines)) {
 			try {
 				JSONObject json = new JSONObject();
-				writeToJson(json, getEngines());
+				OnlineRoutingUtils.writeToJson(json, getEngines());
 				settings.ONLINE_ROUTING_ENGINES.set(json.toString());
 			} catch (JSONException e) {
 				LOG.debug("Error when writing engines to JSON ", e);
@@ -175,46 +174,5 @@ public class OnlineRoutingHelper {
 		} else {
 			settings.ONLINE_ROUTING_ENGINES.set(null);
 		}
-	}
-
-	public static void readFromJson(@NonNull JSONObject json,
-	                                @NonNull List<OnlineRoutingEngine> engines) throws JSONException {
-		if (!json.has("items")) {
-			return;
-		}
-		Gson gson = new Gson();
-		Type typeToken = new TypeToken<HashMap<String, String>>() {
-		}.getType();
-		JSONArray itemsJson = json.getJSONArray(ITEMS);
-		for (int i = 0; i < itemsJson.length(); i++) {
-			JSONObject object = itemsJson.getJSONObject(i);
-			if (object.has(TYPE) && object.has(PARAMS)) {
-				EngineType type = EngineType.getTypeByName(object.getString(TYPE));
-				String paramsString = object.getString(PARAMS);
-				HashMap<String, String> params = gson.fromJson(paramsString, typeToken);
-				OnlineRoutingEngine engine = OnlineRoutingFactory.createEngine(type, params);
-				if (!Algorithms.isEmpty(engine.getStringKey())) {
-					engines.add(engine);
-				}
-			}
-		}
-	}
-
-	public static void writeToJson(@NonNull JSONObject json,
-	                               @NonNull List<OnlineRoutingEngine> engines) throws JSONException {
-		JSONArray jsonArray = new JSONArray();
-		Gson gson = new Gson();
-		Type type = new TypeToken<HashMap<String, String>>() {
-		}.getType();
-		for (OnlineRoutingEngine engine : engines) {
-			if (Algorithms.isEmpty(engine.getStringKey())) {
-				continue;
-			}
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put(TYPE, engine.getType().name());
-			jsonObject.put(PARAMS, gson.toJson(engine.getParams(), type));
-			jsonArray.put(jsonObject);
-		}
-		json.put(ITEMS, jsonArray);
 	}
 }

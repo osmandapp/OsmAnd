@@ -20,11 +20,11 @@ public class Version {
 	private final static String UTM_REF = "&referrer=utm_source%3Dosmand";
 
 	public static boolean isHuawei() {
-		return "huawei".contains(getBuildFlavor());
+		return getBuildFlavor().contains("huawei");
 	}
 
 	private static boolean isAmazon() {
-		return "amazon".contains(getBuildFlavor());
+		return getBuildFlavor().contains("amazon");
 	}
 
 	private static String getBuildFlavor() {
