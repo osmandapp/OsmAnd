@@ -3972,4 +3972,11 @@
     <string name="edit_track">Redakti spuron</string>
     <string name="rename_track">Renomi spuron</string>
     <string name="change_folder">Ŝanĝi dosierujon</string>
+    <string name="routing_engine_vehicle_type_small_truck">Kamioneto</string>
+    <string name="routing_engine_vehicle_type_truck">Kamiono</string>
+    <string name="routing_engine_vehicle_type_scooter">Skotero</string>
+    <string name="routing_engine_vehicle_type_racingbike">Biciklo vetkura</string>
+    <string name="routing_engine_vehicle_type_mtb">Montbiciklo</string>
+    <string name="message_server_error">Servila eraro: %1$s</string>
+    <string name="message_name_is_already_exists">Tiu ĉi nomo jam estas uzata</string>
 </resources>
