@@ -192,7 +192,8 @@ public class TravelObfHelper implements TravelHelper {
 		GPXFile gpxFile = null;
 		List<Amenity> pointList = getPointList(article);
 		if (!Algorithms.isEmpty(pointList)) {
-			gpxFile = new GPXFile(article.getTitle(), article.getLang(), "");
+			gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
+			gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
 			for (Amenity amenity : pointList) {
 				WptPt wptPt = createWptPt(amenity, article.getLang());
 				gpxFile.addPoint(wptPt);
