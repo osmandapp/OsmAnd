@@ -349,17 +349,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		if (!settings.isLastKnownMapLocation()) {
 			// show first time when application ran
+			final WeakReference<MapActivity> activityRef = new WeakReference<>(this);
 			net.osmand.Location location = app.getLocationProvider().getFirstTimeRunDefaultLocation(new OsmAndLocationListener() {
 				@Override
 				public void updateLocation(Location location) {
-					if (app.getLocationProvider().getLastKnownLocation() == null) {
-						setMapInitialLatLon(location);
+					MapActivity a = activityRef.get();
+					if (AndroidUtils.isActivityNotDestroyed(a) && app.getLocationProvider().getLastKnownLocation() == null) {
+						setMapInitialLatLon(a.mapView, location);
 					}
 				}
 			});
 			mapViewTrackingUtilities.setMapLinkedToLocation(true);
 			if (location != null) {
-				setMapInitialLatLon(location);
+				setMapInitialLatLon(mapView, location);
 			}
 		}
 		addDialogProvider(mapActions);
@@ -384,7 +386,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mIsDestroyed = false;
 	}
 
-	private void setMapInitialLatLon(@Nullable Location location) {
+	private void setMapInitialLatLon(@NonNull OsmandMapTileView mapView, @Nullable Location location) {
 		if (location != null) {
 			mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			mapView.setIntZoom(14);
