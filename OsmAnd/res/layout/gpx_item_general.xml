@@ -145,7 +145,6 @@
                         osmand:typeface="@string/font_roboto_medium"
                         tools:text="3:32:44" />
 
-
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -159,6 +158,12 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/list_divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -168,13 +173,15 @@
             android:layout_marginRight="@dimen/content_padding_small"
             android:background="?attr/dashboard_divider" />
 
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/start_end_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="13dp"
-            android:paddingBottom="11dp">
+            android:paddingTop="@dimen/context_menu_first_line_top_margin"
+            android:paddingBottom="@dimen/content_padding_small">
 
             <LinearLayout
                 android:layout_width="0dp"
