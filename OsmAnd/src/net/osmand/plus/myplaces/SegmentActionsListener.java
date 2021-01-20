@@ -21,7 +21,7 @@ public interface SegmentActionsListener {
 
 	void openSplitInterval(GpxDisplayItem gpxItem, TrkSegment trkSegment);
 
-	void showOptionsPopupMenu(View view, TrkSegment trkSegment, boolean confirmDeletion);
+	void showOptionsPopupMenu(View view, TrkSegment trkSegment, boolean confirmDeletion, GpxDisplayItem gpxItem);
 
 	void openAnalyzeOnMap(GpxDisplayItem gpxItem, List<ILineDataSet> dataSets, GPXTabItemType tabType);
 }

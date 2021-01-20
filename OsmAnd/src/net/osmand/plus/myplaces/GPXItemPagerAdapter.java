@@ -275,17 +275,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_SPEED);
 			}
 		});
-		if (gpxFile.showCurrentTrack) {
-			view.findViewById(R.id.split_interval).setVisibility(View.GONE);
-		} else {
-			view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					openSplitIntervalScreen();
-				}
-			});
-		}
-		ImageView overflowMenu = view.findViewById(R.id.overflow_menu);
+		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
 		if (!gpxItem.group.getTrack().generalTrack) {
 			setupOptionsPopupMenu(overflowMenu, false);
 		} else {
@@ -293,13 +283,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 	}
 
-	private void setupOptionsPopupMenu(ImageView overflowMenu, final boolean confirmDeletion) {
-		overflowMenu.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_overflow_menu_white));
+	private void setupOptionsPopupMenu(TextView overflowMenu, final boolean confirmDeletion) {
 		overflowMenu.setVisibility(View.VISIBLE);
 		overflowMenu.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				actionsListener.showOptionsPopupMenu(view, getTrkSegment(), confirmDeletion);
+				actionsListener.showOptionsPopupMenu(view, getTrkSegment(), confirmDeletion, gpxItem);
 			}
 		});
 	}
@@ -359,17 +348,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
 			}
 		});
-		if (gpxFile.showCurrentTrack) {
-			view.findViewById(R.id.split_interval).setVisibility(View.GONE);
-		} else {
-			view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					openSplitIntervalScreen();
-				}
-			});
-		}
-		ImageView overflowMenu = view.findViewById(R.id.overflow_menu);
+		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
 		if (!gpxItem.group.getTrack().generalTrack) {
 			setupOptionsPopupMenu(overflowMenu, false);
 		} else {
@@ -436,17 +415,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 			}
 		});
-		if (gpxFile.showCurrentTrack) {
-			view.findViewById(R.id.split_interval).setVisibility(View.GONE);
-		} else {
-			view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					openSplitIntervalScreen();
-				}
-			});
-		}
-		ImageView overflowMenu = view.findViewById(R.id.overflow_menu);
+		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
 		if (!gpxItem.group.getTrack().generalTrack) {
 			setupOptionsPopupMenu(overflowMenu, true);
 		} else {
