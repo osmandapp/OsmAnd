@@ -109,15 +109,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private TextView headerTitle;
 	private ImageView headerIcon;
 	private BottomNavigationView bottomNav;
-	private TrackMenuType menuType = TrackMenuType.TRACK;
+	private TrackMenuType menuType = TrackMenuType.OVERVIEW;
 	private SegmentsCard segmentsCard;
 	private OptionsCard optionsCard;
+	private OverviewCard overviewCard;
 
 	private TrackChartPoints trackChartPoints;
 
 	private int menuTitleHeight;
 
 	public enum TrackMenuType {
+		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
 		TRACK(R.id.action_track, R.string.shared_string_gpx_tracks),
 		POINTS(R.id.action_points, R.string.shared_string_gpx_points),
 		OPTIONS(R.id.action_options, R.string.shared_string_options);
@@ -234,7 +236,19 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity != null) {
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
-			if (menuType == TrackMenuType.TRACK) {
+			if (menuType == TrackMenuType.OVERVIEW) {
+				if (overviewCard != null && overviewCard.getView() != null) {
+					ViewGroup parent = (ViewGroup) overviewCard.getView().getParent();
+					if (parent != null) {
+						parent.removeAllViews();
+					}
+					cardsContainer.addView(overviewCard.getView());
+				} else {
+					overviewCard = new OverviewCard(mapActivity, displayHelper, this);
+					overviewCard.setListener(this);
+					cardsContainer.addView(overviewCard.build(mapActivity));
+				}
+			} else if (menuType == TrackMenuType.TRACK) {
 				if (segmentsCard != null && segmentsCard.getView() != null) {
 					ViewGroup parent = (ViewGroup) segmentsCard.getView().getParent();
 					if (parent != null) {
@@ -415,7 +429,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity == null) {
 			return;
 		}
-		if (card instanceof OptionsCard) {
+		if (card instanceof OptionsCard || card instanceof OverviewCard) {
 			final GPXFile gpxFile = getGpx();
 			if (buttonIndex == SHOW_ON_MAP_BUTTON_INDEX) {
 				boolean gpxFileSelected = !isGpxFileSelected(app, gpxFile);
@@ -567,7 +581,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		BottomNavigationView bottomNav = view.findViewById(R.id.bottom_navigation);
 		bottomNav.setItemIconTintList(navColorStateList);
 		bottomNav.setItemTextColor(navColorStateList);
-		bottomNav.setSelectedItemId(R.id.action_track);
+		bottomNav.setSelectedItemId(R.id.action_overview);
 		bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
