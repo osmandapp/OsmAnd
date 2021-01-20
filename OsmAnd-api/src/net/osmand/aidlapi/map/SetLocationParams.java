@@ -7,13 +7,11 @@ import net.osmand.aidlapi.AidlParams;
 
 public class SetLocationParams extends AidlParams {
 
-    private double latitude;
-    private double longitude;
+    private ALocation location;
     private long timeToNotUseOtherGPS;
 
-    public SetLocationParams(double latitude, double longitude, long timeToNotUseOtherGPS) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public SetLocationParams(ALocation location, long timeToNotUseOtherGPS) {
+        this.location = location;
         this.timeToNotUseOtherGPS = timeToNotUseOtherGPS;
     }
 
@@ -33,12 +31,8 @@ public class SetLocationParams extends AidlParams {
         }
     };
 
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
+    public ALocation getLocation() {
+        return location;
     }
 
     public long getTimeToNotUseOtherGPS() {
@@ -47,15 +41,14 @@ public class SetLocationParams extends AidlParams {
 
     @Override
     public void writeToBundle(Bundle bundle) {
-        bundle.putDouble("latitude", latitude);
-        bundle.putDouble("longitude", longitude);
+        bundle.putParcelable("location", location);
         bundle.putLong("aidl_time_to_not_use_other_gps", timeToNotUseOtherGPS);
     }
 
     @Override
     protected void readFromBundle(Bundle bundle) {
-        latitude = bundle.getDouble("latitude");
-        longitude = bundle.getDouble("longitude");
+        bundle.setClassLoader(ALocation.class.getClassLoader());
+        location = bundle.getParcelable("location");
         timeToNotUseOtherGPS = bundle.getLong("aidl_time_to_not_use_other_gps");
     }
 }

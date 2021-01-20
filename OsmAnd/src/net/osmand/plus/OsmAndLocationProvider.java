@@ -97,6 +97,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private long cachedLocationTimeFix = 0;
 	private net.osmand.Location cachedLocation;
+	private net.osmand.Location customLocation;
 
 	private boolean sensorRegistered = false;
 	private float[] mGravs = new float[3];
@@ -796,7 +797,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (locationSimulation.isRouteAnimating()) {
 			return;
 		}
-		if (app.getAidlApi().hasCustomLocation() && isNotSimulatedLocation(location)) {
+		if (hasCustomLocation() && isNotSimulatedLocation(location)) {
 			return;
 		}
 		if (location != null) {
@@ -810,6 +811,15 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		app.getRoutingHelper().updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
 	}
+
+	public void setCustomLocation(net.osmand.Location location) {
+		customLocation = location;
+		setLocation(location);
+	}
+
+	private boolean hasCustomLocation() {
+		return customLocation != null;
+	}
 	
 	public void setLocationFromSimulation(net.osmand.Location location) {
 		setLocation(location);
@@ -819,7 +829,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (location == null) {
 			updateGPSInfo(null);
 		}
-		if (app.getAidlApi().hasCustomLocation() && isNotSimulatedLocation(location)) {
+		if (hasCustomLocation() && isNotSimulatedLocation(location)) {
 			return;
 		}
 		if (location != null) {
@@ -854,22 +864,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		
 		// Update information
 		updateLocation(this.location);
-	}
-
-	public void setCustomLocation(net.osmand.Location location) {
-		if (locationSimulation.isRouteAnimating()) {
-			return;
-		}
-		if (location != null) {
-			notifyGpsLocationRecovered();
-		}
-		// notify about lost location
-		scheduleCheckIfGpsLost(location);
-
-		app.getSavingTrackHelper().updateLocation(location, heading);
-		OsmandPlugin.updateLocationPlugins(location);
-		app.getRoutingHelper().updateLocation(location);
-		app.getWaypointHelper().locationChanged(location);
 	}
 
 	private void notifyGpsLocationRecovered() {
