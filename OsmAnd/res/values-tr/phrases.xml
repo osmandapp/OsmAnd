@@ -194,7 +194,7 @@
     <string name="poi_fuel">Gaz istasyonu;Benzin istasyonu;Dolum istasyonu;Petrol istasyonu</string>
     <string name="poi_fuel_diesel">Dizel</string>
     <string name="poi_fuel_gtl_diesel">GTL dizel</string>
-    <string name="poi_fuel_hgv_diesel">TIR dizel</string>
+    <string name="poi_fuel_hgv_diesel">Ağır yük aracı dizeli</string>
     <string name="poi_fuel_biodiesel">Bio dizel</string>
     <string name="poi_fuel_lpg">LPG</string>
     <string name="poi_fuel_octane_80">80 Oktan</string>
@@ -215,7 +215,7 @@
     <string name="poi_fuel_biogas">Biyogaz</string>
     <string name="poi_fuel_lh2">Sıvı hidrojen</string>
     <string name="poi_fuel_electricity">Elektrik</string>
-    <string name="poi_electricity_combined_charging">Şarj istasyonu</string>
+    <string name="poi_electricity_combined_charging">Şarj istasyonu; Elektrikli araç şarj istasyonu; EA şarj istasyonu; Elektrikli şarj noktası; Şarj noktası; Elektronik şarj istasyonu; Elektrikli araç besleme ekipmanı</string>
     <string name="poi_vehicle_ramp">Araç rampa</string>
     <string name="poi_compressed_air">Basınçlı hava</string>
     <string name="poi_parking">Otopark</string>
@@ -1187,7 +1187,7 @@
     <string name="poi_car_pooling">Sürüş paylaşım noktası</string>
     <string name="poi_park_ride">Park ve sürüş</string>
     <string name="poi_access_mofa">Mofa erişimi</string>
-    <string name="poi_access_hgv">Ağır vasıta erişimi</string>
+    <string name="poi_access_hgv">Ağır yük aracı erişimi</string>
     <string name="poi_access_goods">Hafif ticari araç erişimi</string>
     <string name="poi_berth">Demirleme yeri</string>
     <string name="poi_buoy_installation">Yükleme şamandırası</string>
@@ -1436,7 +1436,7 @@
     <string name="poi_traffic_signals_sound_yes">Evet</string>
     <string name="poi_traffic_signals_sound_no">Ses: hayır</string>
     <string name="poi_traffic_signals_sound_walk">Sadece yürümeye izin verildiğinde</string>
-    <string name="poi_toll_hgv_yes">Ağır vasıta geçiş ücreti</string>
+    <string name="poi_toll_hgv_yes">Ağır yük aracı geçiş ücreti</string>
     <string name="poi_rescue_station">Kurtarma istasyonu</string>
     <string name="poi_bicycle_parking_anchors">Çapalar</string>
     <string name="poi_services">Servis alanı</string>
@@ -3133,4 +3133,9 @@
     <string name="poi_street_cabinet_cable_tv">Dolap türü: kablo tv</string>
     <string name="poi_street_cabinet_telecom">Dolap türü: telefon</string>
     <string name="poi_street_cabinet_power">Dolap türü: elektrik</string>
+    <string name="poi_hgv_unsuitable">Ağır yük aracı erişimi: uygun değil</string>
+    <string name="poi_hgv_discouraged">Ağır yük aracı erişimi: önerilmiyor</string>
+    <string name="poi_hgv_agricultural">Ağır yük aracı erişimi: tarım</string>
+    <string name="poi_hgv_no">Ağır yük aracı erişimi: hayır</string>
+    <string name="poi_hgv_private">Ağır yük aracı erişimi: özel</string>
 </resources>

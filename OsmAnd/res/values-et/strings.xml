@@ -3946,4 +3946,6 @@
     <string name="reverse_all_points">Pööra kõik punktid ümber</string>
     <string name="profile_by_default_description">Vali rakenduse käivitamisel kasutatav profiil.</string>
     <string name="shared_string_last_used">Viimati kasutatud</string>
+    <string name="message_server_error">Serveri viga: %1$s</string>
+    <string name="message_name_is_already_exists">Selline nimi on juba olemas</string>
 </resources>
