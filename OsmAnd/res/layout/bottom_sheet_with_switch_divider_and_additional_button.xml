@@ -8,6 +8,8 @@
     android:gravity="center_vertical"
     android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
     android:paddingStart="@dimen/content_padding"
+    android:paddingEnd="@dimen/content_padding"
+    android:paddingRight="@dimen/content_padding"
     android:paddingLeft="@dimen/content_padding">
 
     <LinearLayout
@@ -44,8 +46,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/bottom_sheet_content_margin"
             android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
-            android:layout_marginEnd="@dimen/content_padding"
-            android:layout_marginRight="@dimen/content_padding"
+            android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+            android:layout_marginRight="@dimen/bottom_sheet_content_margin"
             tools:checked="true" />
 
     </LinearLayout>
@@ -66,11 +68,11 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon_after_divider"
             style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-            android:layout_width="@dimen/acceptable_touch_radius"
-            android:layout_height="@dimen/acceptable_touch_radius"
+            android:layout_width="@dimen/favorites_icon_right_margin"
+            android:layout_height="@dimen/favorites_icon_right_margin"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/content_padding"
             android:layout_marginLeft="@dimen/content_padding"
-            android:layout_marginRight="@dimen/content_padding"
             app:srcCompat="@drawable/ic_action_track_line_bold_color" />
 
     </LinearLayout>

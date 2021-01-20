@@ -83,6 +83,7 @@
             app:thumbRadius="@dimen/content_padding_small_half"
             app:trackColorActive="@color/profile_icon_color_blue_light"
             app:trackColorInactive="#4D007EB3"
+            app:tickColorInactive="#007EB3"
             app:trackHeight="@dimen/slider_track_height"
             tools:visibility="visible" />
 
@@ -97,7 +98,6 @@
             android:text="@string/confirm_every_run"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
-            android:visibility="gone"
             osmand:typeface="@string/font_roboto_regular"
             tools:visibility="visible" />
     </LinearLayout>
