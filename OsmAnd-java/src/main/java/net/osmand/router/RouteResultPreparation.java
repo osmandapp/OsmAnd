@@ -1189,6 +1189,7 @@ public class RouteResultPreparation {
 		RouteSegmentResult last = rr;
 		RouteSegmentResult firstRoundabout = rr;
 		RouteSegmentResult lastRoundabout = rr;
+		
 		for (int j = i; j < result.size(); j++) {
 			RouteSegmentResult rnext = result.get(j);
 			last = rnext;
@@ -1218,9 +1219,9 @@ public class RouteResultPreparation {
 		// usually covers less than expected
 		float turnAngleBasedOnCircle = (float) -MapUtils.degreesDiff(firstRoundabout.getBearingBegin(), lastRoundabout.getBearingEnd() + 180);
 		if(Math.abs(turnAngleBasedOnOutRoads - turnAngleBasedOnCircle) > 180) {
-			t.setTurnAngle(turnAngleBasedOnCircle ) ;
+			t.setTurnAngle(turnAngleBasedOnCircle) ;
 		} else {
-			t.setTurnAngle((turnAngleBasedOnCircle + turnAngleBasedOnOutRoads) / 2) ;
+			t.setTurnAngle(turnAngleBasedOnOutRoads) ;
 		}
 		return t;
 	}
