@@ -37,7 +37,6 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.SegmentActionsListener;
-import net.osmand.plus.myplaces.SegmentGPXAdapter;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -54,19 +53,15 @@ import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
 public class OverviewCard extends BaseCard {
 
 	private RecyclerView rvOverview;
-	private ImageView direction;
-	private TextView distanceText;
-	private MapContextMenu menu;
 	private View showButton;
 	private View appearanceButton;
 	private View editButton;
 	private View directionsButton;
 
-	private TrackDisplayHelper displayHelper;
-	private GPXFile gpxFile;
-	private GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT};
-	private SegmentGPXAdapter adapter;
-	private SegmentActionsListener listener;
+	private final TrackDisplayHelper displayHelper;
+	private final GPXFile gpxFile;
+	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT};
+	private final SegmentActionsListener listener;
 
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull TrackDisplayHelper displayHelper,
 						@NonNull SegmentActionsListener listener) {
@@ -83,9 +78,6 @@ public class OverviewCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-//		ViewGroup container = (ViewGroup) view;
-//		container.removeAllViews();
-
 		int iconColorDef = R.color.icon_color_active_light;
 		int iconColorPres = R.color.active_buttons_and_links_text_dark;
 		boolean fileAvailable = gpxFile.path != null && !gpxFile.showCurrentTrack;
@@ -96,9 +88,9 @@ public class OverviewCard extends BaseCard {
 		directionsButton = view.findViewById(R.id.directions_button);
 		rvOverview = view.findViewById(R.id.recycler_overview);
 
-		menu = mapActivity.getContextMenu();
-		distanceText = (TextView) view.findViewById(R.id.distance);
-		direction = (ImageView) view.findViewById(R.id.direction);
+		MapContextMenu menu = mapActivity.getContextMenu();
+		TextView distanceText = (TextView) view.findViewById(R.id.distance);
+		ImageView direction = (ImageView) view.findViewById(R.id.direction);
 		UpdateLocationViewCache updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
 		app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, menu.getLatLon());
 
@@ -109,10 +101,10 @@ public class OverviewCard extends BaseCard {
 			initDirectionsButton(iconColorDef, iconColorPres);
 		}
 
-		initSegments();
+		initStatBlocks();
 	}
 
-	void initSegments() {
+	void initStatBlocks() {
 		GpxDisplayItem gpxItem = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes)).get(0);
 		GPXTrackAnalysis analysis = gpxItem.analysis;
 		boolean joinSegments = displayHelper.isJoinSegments();
@@ -123,21 +115,26 @@ public class OverviewCard extends BaseCard {
 		String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
 		String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
 
-		SegmentItem sDistance = new SegmentItem(app.getResources().getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
+		StatBlock sDistance = new StatBlock(app.getResources().getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
 				R.drawable.ic_action_track_16, R.color.icon_color_default_light, LineGraphType.ALTITUDE, LineGraphType.SPEED);
-		SegmentItem sAscent = new SegmentItem(app.getResources().getString(R.string.altitude_ascent), asc, R.drawable.ic_action_arrow_up_16, R.color.gpx_chart_red, LineGraphType.SLOPE, null);
-		SegmentItem sDescent = new SegmentItem(app.getResources().getString(R.string.altitude_descent), desc, R.drawable.ic_action_arrow_down_16, R.color.gpx_pale_green, LineGraphType.ALTITUDE, LineGraphType.SLOPE);
-		SegmentItem sAvSpeed = new SegmentItem(app.getResources().getString(R.string.average_speed), avg, R.drawable.ic_action_speed_16, R.color.icon_color_default_light, LineGraphType.SPEED, null);
-		SegmentItem sMaxSpeed = new SegmentItem(app.getResources().getString(R.string.max_speed), max, R.drawable.ic_action_max_speed_16, R.color.icon_color_default_light, LineGraphType.SPEED, null);
-		SegmentItem sTimeSpan = new SegmentItem(app.getResources().getString(R.string.shared_string_time_span), Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()),
+		StatBlock sAscent = new StatBlock(app.getResources().getString(R.string.altitude_ascent), asc,
+				R.drawable.ic_action_arrow_up_16, R.color.gpx_chart_red, LineGraphType.SLOPE, null);
+		StatBlock sDescent = new StatBlock(app.getResources().getString(R.string.altitude_descent), desc,
+				R.drawable.ic_action_arrow_down_16, R.color.gpx_pale_green, LineGraphType.ALTITUDE, LineGraphType.SLOPE);
+		StatBlock sAvSpeed = new StatBlock(app.getResources().getString(R.string.average_speed), avg,
+				R.drawable.ic_action_speed_16, R.color.icon_color_default_light, LineGraphType.SPEED, null);
+		StatBlock sMaxSpeed = new StatBlock(app.getResources().getString(R.string.max_speed), max,
+				R.drawable.ic_action_max_speed_16, R.color.icon_color_default_light, LineGraphType.SPEED, null);
+		StatBlock sTimeSpan = new StatBlock(app.getResources().getString(R.string.shared_string_time_span),
+				Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()),
 				R.drawable.ic_action_time_span_16, R.color.icon_color_default_light, LineGraphType.SPEED, null);
 
 		LinearLayoutManager llManager = new LinearLayoutManager(app);
 		llManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 		rvOverview.setLayoutManager(llManager);
 		rvOverview.setItemAnimator(new DefaultItemAnimator());
-		List<SegmentItem> items = Arrays.asList(sDistance, sAscent, sDescent, sAvSpeed, sMaxSpeed, sTimeSpan);
-		final SegmentItemAdapter siAdapter = new SegmentItemAdapter(items);
+		List<StatBlock> items = Arrays.asList(sDistance, sAscent, sDescent, sAvSpeed, sMaxSpeed, sTimeSpan);
+		final StatBlockAdapter siAdapter = new StatBlockAdapter(items);
 		rvOverview.setAdapter(siAdapter);
 		rvOverview.addItemDecoration(new HorizontalDividerDecoration(app));
 	}
@@ -225,45 +222,45 @@ public class OverviewCard extends BaseCard {
 		});
 	}
 
-	private class SegmentItemAdapter extends RecyclerView.Adapter<SegmentItemAdapter.SegmentItemViewHolder> {
-		private final List<SegmentItem> segmentItems;
+	private class StatBlockAdapter extends RecyclerView.Adapter<StatBlockAdapter.StatBlockViewHolder> {
+		private final List<StatBlock> StatBlocks;
 
-		public SegmentItemAdapter(List<SegmentItem> segmentItems) {
-			this.segmentItems = segmentItems;
+		public StatBlockAdapter(List<StatBlock> StatBlocks) {
+			this.StatBlocks = StatBlocks;
 		}
 
 		@Override
 		public int getItemCount() {
-			return segmentItems.size();
+			return StatBlocks.size();
 		}
 
 		@NonNull
 		@Override
-		public SegmentItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		public StatBlockViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 			View itemView = LayoutInflater.from(parent.getContext())
-					.inflate(R.layout.item_gpx_action_segment, parent, false);
-			return new SegmentItemViewHolder(itemView);
+					.inflate(R.layout.item_gpx_stat_block, parent, false);
+			return new StatBlockViewHolder(itemView);
 		}
 
 		@Override
-		public void onBindViewHolder(SegmentItemViewHolder holder, int position) {
-			SegmentItem item = segmentItems.get(position);
+		public void onBindViewHolder(StatBlockViewHolder holder, int position) {
+			StatBlock item = StatBlocks.get(position);
 			holder.bind(item);
 		}
 
-		class SegmentItemViewHolder extends RecyclerView.ViewHolder {
+		class StatBlockViewHolder extends RecyclerView.ViewHolder {
 			private final TextViewEx valueText;
 			private final TextView titleText;
 			private final AppCompatImageView imageView;
 
-			SegmentItemViewHolder(View view) {
+			StatBlockViewHolder(View view) {
 				super(view);
 				valueText = view.findViewById(R.id.value);
 				titleText = view.findViewById(R.id.title);
 				imageView = view.findViewById(R.id.image);
 			}
 
-			public void bind(final SegmentItem overviewItem) {
+			public void bind(final StatBlock overviewItem) {
 				valueText.setText(overviewItem.value);
 				valueText.setTextColor(app.getResources().getColor(R.color.active_color_primary_light));
 				titleText.setText(overviewItem.title);
@@ -289,10 +286,10 @@ public class OverviewCard extends BaseCard {
 
 		public HorizontalDividerDecoration(Context context) {
 			int[] ATTRS = new int[]{android.R.attr.listDivider};
-			final TypedArray a = context.obtainStyledAttributes(ATTRS);
-			divider = a.getDrawable(0);
-			a.recycle();
-//			mDivider = getMyApplication().getUIUtilities().getIcon(R.drawable.divider_solid, R.color.divider_color_light); //todo change drawable
+			final TypedArray ta = context.obtainStyledAttributes(ATTRS);
+			divider = ta.getDrawable(0);
+//			DrawableCompat.setTint(divider, context.getResources().getColor(R.color.divider_color_light)); //todo change drawable color
+			ta.recycle();
 		}
 
 		@Override
@@ -323,7 +320,7 @@ public class OverviewCard extends BaseCard {
 		}
 	}
 
-	private class SegmentItem {
+	private static class StatBlock {
 		private String title;
 		private String value;
 		private int imageResId;
@@ -331,60 +328,12 @@ public class OverviewCard extends BaseCard {
 		private LineGraphType firstType;
 		private LineGraphType secondType;
 
-		public SegmentItem(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId, LineGraphType firstType, LineGraphType secondType) {
+		public StatBlock(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId, LineGraphType firstType, LineGraphType secondType) {
 			this.title = title;
 			this.value = value;
 			this.imageResId = imageResId;
 			this.imageColorId = imageColorId;
 			this.firstType = firstType;
-			this.secondType = secondType;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public void setTitle(String title) {
-			this.title = title;
-		}
-
-		public String getValue() {
-			return value;
-		}
-
-		public void setValue(String value) {
-			this.value = value;
-		}
-
-		public int getImageResId() {
-			return imageResId;
-		}
-
-		public void setImageResId(int imageResId) {
-			this.imageResId = imageResId;
-		}
-
-		public int getImageColorId() {
-			return imageColorId;
-		}
-
-		public void setImageColorId(int imageColorId) {
-			this.imageColorId = imageColorId;
-		}
-
-		public LineGraphType getFirstType() {
-			return firstType;
-		}
-
-		public void setFirstType(LineGraphType firstType) {
-			this.firstType = firstType;
-		}
-
-		public LineGraphType getSecondType() {
-			return secondType;
-		}
-
-		public void getSecondType(LineGraphType secondType) {
 			this.secondType = secondType;
 		}
 

@@ -221,6 +221,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void updateHeader() {
+		ViewGroup headerContainer = (ViewGroup) routeMenuTopShadowAll;
+		if (overviewCard != null && overviewCard.getView() != null) {
+			headerContainer.removeView(overviewCard.getView());
+		}
 		if (menuType == TrackMenuType.OPTIONS) {
 			headerTitle.setText(menuType.titleId);
 			AndroidUiHelper.updateVisibility(headerIcon, false);
@@ -228,7 +232,27 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			String fileName = Algorithms.getFileWithoutDirs(getGpx().path);
 			headerTitle.setText(GpxUiHelper.getGpxTitle(fileName));
 			AndroidUiHelper.updateVisibility(headerIcon, true);
+			if (menuType == TrackMenuType.OVERVIEW) {
+				if (overviewCard != null && overviewCard.getView() != null) {
+					ViewGroup parent = ((ViewGroup) overviewCard.getView().getParent());
+					if (parent != null) {
+						parent.removeView(overviewCard.getView());
+					}
+					headerContainer.addView(overviewCard.getView());
+				} else {
+					overviewCard = new OverviewCard(getMapActivity(), displayHelper, this);
+					overviewCard.setListener(this);
+					headerContainer.addView(overviewCard.build(getMapActivity()));
+				}
+			}
 		}
+		runLayoutListener();
+		headerContainer.post(new Runnable() {
+			@Override
+			public void run() {
+				openMenuScreen(menuType == TrackMenuType.OVERVIEW ? MenuState.HEADER_ONLY : MenuState.HALF_SCREEN, false);
+			}
+		});
 	}
 
 	private void setupCards() {
@@ -236,19 +260,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity != null) {
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
-			if (menuType == TrackMenuType.OVERVIEW) {
-				if (overviewCard != null && overviewCard.getView() != null) {
-					ViewGroup parent = (ViewGroup) overviewCard.getView().getParent();
-					if (parent != null) {
-						parent.removeAllViews();
-					}
-					cardsContainer.addView(overviewCard.getView());
-				} else {
-					overviewCard = new OverviewCard(mapActivity, displayHelper, this);
-					overviewCard.setListener(this);
-					cardsContainer.addView(overviewCard.build(mapActivity));
-				}
-			} else if (menuType == TrackMenuType.TRACK) {
+			if (menuType == TrackMenuType.TRACK) {
 				if (segmentsCard != null && segmentsCard.getView() != null) {
 					ViewGroup parent = (ViewGroup) segmentsCard.getView().getParent();
 					if (parent != null) {

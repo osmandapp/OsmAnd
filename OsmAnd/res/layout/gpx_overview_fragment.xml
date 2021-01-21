@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         tools:itemCount="4"
         tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_gpx_action_segment" />
+        tools:listitem="@layout/item_gpx_stat_block" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -54,6 +54,7 @@
         android:layout_marginEnd="@dimen/content_padding"
         android:layout_marginRight="@dimen/content_padding"
         android:layout_marginTop="@dimen/content_padding_half"
+        android:layout_marginBottom="@dimen/content_padding"
         android:weightSum="4"
         android:orientation="horizontal">
         <!-- todo stretch buttons correctly -->

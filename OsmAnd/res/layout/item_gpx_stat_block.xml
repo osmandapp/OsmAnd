@@ -5,8 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
-    <!--android:paddingLeft="@dimen/content_padding"
-    android:paddingRight="@dimen/content_padding"-->
 
     <LinearLayout
         android:layout_width="wrap_content"
