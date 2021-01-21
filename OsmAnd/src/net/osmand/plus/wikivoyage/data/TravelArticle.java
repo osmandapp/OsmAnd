@@ -31,6 +31,7 @@ public class TravelArticle {
 	String title;
 	String content;
 	String isPartOf;
+	String isParentOf = "";
 	double lat = Double.NaN;
 	double lon = Double.NaN;
 	String imageTitle;
