@@ -3111,7 +3111,7 @@
     <string name="app_mode_campervan">Дім на колесах</string>
     <string name="rendering_attr_showLez_description">Показати на мапі зони низьких викидів. Не впливає на маршрутизацію.</string>
     <string name="rendering_attr_showLez_name">Показати зони низьких викидів</string>
-    <string name="temporary_conditional_routing">Враховувати часові обмеження</string>
+    <string name="temporary_conditional_routing">Враховувати тимчасові обмеження</string>
     <string name="shared_string_default">Усталений</string>
     <string name="new_route_calculated_dist_dbg">Маршрут: відстань %1$s, час навігації %2$s \nРозрахунок: %3$.1f с, %4$d доріг, %5$d тайлів)</string>
     <string name="lang_oc">Окситанська</string>
