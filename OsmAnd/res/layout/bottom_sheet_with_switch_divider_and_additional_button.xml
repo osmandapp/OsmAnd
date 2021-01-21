@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:baselineAligned="false"
     android:gravity="center_vertical"
     android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
-    android:baselineAligned="false">
+    android:paddingStart="@dimen/content_padding"
+    android:paddingEnd="@dimen/content_padding"
+    android:paddingRight="@dimen/content_padding"
+    android:paddingLeft="@dimen/content_padding">
 
     <LinearLayout
         android:id="@+id/basic_item_body"
@@ -28,6 +32,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:paddingTop="@dimen/content_padding_small"
+                android:paddingBottom="@dimen/content_padding"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 tools:text="Some title" />
 
@@ -40,8 +46,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/bottom_sheet_content_margin"
             android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
-            android:layout_marginEnd="@dimen/content_padding_half"
-            android:layout_marginRight="@dimen/content_padding_half"
+            android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+            android:layout_marginRight="@dimen/bottom_sheet_content_margin"
             tools:checked="true" />
 
     </LinearLayout>
@@ -62,11 +68,11 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon_after_divider"
             style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-            android:layout_width="@dimen/acceptable_touch_radius"
-            android:layout_height="@dimen/acceptable_touch_radius"
+            android:layout_width="@dimen/favorites_icon_right_margin"
+            android:layout_height="@dimen/favorites_icon_right_margin"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/content_padding"
             android:layout_marginLeft="@dimen/content_padding"
-            android:layout_marginRight="@dimen/content_padding"
             app:srcCompat="@drawable/ic_action_track_line_bold_color" />
 
     </LinearLayout>

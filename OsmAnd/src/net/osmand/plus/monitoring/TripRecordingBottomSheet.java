@@ -31,7 +31,6 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -50,8 +49,9 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private ImageView upDownBtn;
 	private SwitchCompat confirmEveryRun;
+	private RangeSlider intervalSlider;
 	private TextView intervalValueView;
-
+	private LinearLayout container;
 	private boolean infoExpanded;
 
 	@Override
@@ -66,10 +66,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 				.setCustomView(itemView)
 				.create());
 
-		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		final int paddingSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-
-		items.add(new DividerSpaceItem(context, padding));
 
 		LinearLayout showTrackOnMapView = itemView.findViewById(R.id.show_track_on_map);
 		TextView showTrackOnMapTitle = showTrackOnMapView.findViewById(R.id.title);
@@ -110,8 +107,10 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		intervalValueView = itemView.findViewById(R.id.interval_value);
 		updateIntervalLegend();
 
-		RangeSlider intervalSlider = itemView.findViewById(R.id.interval_slider);
+		container = itemView.findViewById(R.id.always_ask_and_range_slider_container);
+		intervalSlider = itemView.findViewById(R.id.interval_slider);
 		intervalSlider.setValueTo(secondsLength + minutesLength - 1);
+		container.setVisibility(View.GONE);
 		intervalSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
 
 			@Override
@@ -218,7 +217,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void toggleInfoView() {
 		infoExpanded = !infoExpanded;
-		AndroidUiHelper.updateVisibility(confirmEveryRun, infoExpanded);
+		AndroidUiHelper.updateVisibility(container, infoExpanded);
 		updateUpDownBtn();
 	}
 
