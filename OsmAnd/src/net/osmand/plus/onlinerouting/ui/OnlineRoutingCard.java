@@ -123,8 +123,8 @@ public class OnlineRoutingCard extends BaseCard {
 	}
 
 	public void setSelectionMenu(@NonNull List<HorizontalSelectionItem> items,
-	                             @NonNull String selectedItemTitle,
-	                             @NonNull final CallbackWithObject<HorizontalSelectionItem> callback) {
+								 @NonNull String selectedItemTitle,
+								 @NonNull final CallbackWithObject<HorizontalSelectionItem> callback) {
 		showElements(rvSelectionMenu);
 		rvSelectionMenu.setLayoutManager(
 				new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
@@ -166,6 +166,10 @@ public class OnlineRoutingCard extends BaseCard {
 		textFieldBoxes.setLabelText(labelText);
 	}
 
+	public void hideFieldBoxLabel() {
+		textFieldBoxes.makeCompactPadding();
+	}
+
 	public void setFieldBoxHelperText(@NonNull String helperText) {
 		showElements(fieldBoxContainer, tvHelperText);
 		fieldBoxHelperTextShowed = true;
@@ -202,7 +206,7 @@ public class OnlineRoutingCard extends BaseCard {
 	}
 
 	public void setButton(@NonNull String title,
-	                      @NonNull OnClickListener listener) {
+						  @NonNull OnClickListener listener) {
 		showElements(button);
 		button.setOnClickListener(listener);
 		UiUtilities.setupDialogButton(nightMode, button, DialogButtonType.PRIMARY, title);

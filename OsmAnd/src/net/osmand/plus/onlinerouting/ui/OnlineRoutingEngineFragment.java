@@ -359,6 +359,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		exampleCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		exampleCard.build(mapActivity);
 		exampleCard.setHeaderTitle(getString(R.string.shared_string_example));
+		exampleCard.hideFieldBoxLabel();
 		List<HorizontalSelectionItem> locationItems = new ArrayList<>();
 		for (ExampleLocation location : ExampleLocation.values()) {
 			locationItems.add(new HorizontalSelectionItem(location.getName(), location));
