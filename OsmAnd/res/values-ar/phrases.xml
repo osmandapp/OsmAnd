@@ -3669,4 +3669,10 @@
     <string name="poi_waste_transfer_station">محطة نقل نفايات</string>
     <string name="poi_weightbridge">ميزان المركبات</string>
     <string name="poi_ranger_station">مكتب الحارس</string>
+    <string name="poi_diplomatic_services_citizen_services_filter">خدمات المواطن</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">تأشيرات الهجرة</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">تأشيرات لغير المهاجرين</string>
+    <string name="poi_liaison_filter">اتصال</string>
+    <string name="poi_consulate_filter">قنصلية</string>
+    <string name="poi_embassy_filter">سفارة</string>
 </resources>
