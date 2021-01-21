@@ -684,11 +684,12 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public void initAppStatusVariables() {
+		OsmandApplication app = getMyApplication();
 		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null
-				&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication());
+				&& !InAppPurchaseHelper.isContourLinesPurchased(app);
 		nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
-		freeVersion = Version.isFreeVersion(getMyApplication());
-		OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		freeVersion = Version.isFreeVersion(app);
+		SRTMPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
 
 	}

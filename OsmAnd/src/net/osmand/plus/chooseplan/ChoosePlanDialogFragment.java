@@ -118,7 +118,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				case SEA_DEPTH_MAPS:
 					return InAppPurchaseHelper.isDepthContoursPurchased(ctx);
 				case CONTOUR_LINES_HILLSHADE_MAPS:
-					return OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null;
+					return OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isContourLinesPurchased(ctx);
 			}
 			return false;
 		}

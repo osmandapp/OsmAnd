@@ -14,14 +14,11 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -31,6 +28,9 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
@@ -88,13 +88,13 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean needsInstallation() {
-		return super.needsInstallation() && !InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+		return super.needsInstallation()
+				&& !InAppPurchaseHelper.isContourLinesPurchased(app);
 	}
 
 	@Override
 	protected boolean pluginAvailable(OsmandApplication app) {
 		return super.pluginAvailable(app)
-				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
 				|| InAppPurchaseHelper.isContourLinesPurchased(app);
 	}
 

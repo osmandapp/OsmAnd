@@ -30,7 +30,8 @@ public class ChoosePlanFreeBannerDialogFragment extends ChoosePlanDialogFragment
 
 	private final OsmAndFeature[] planTypeFeatures = {
 			OsmAndFeature.WIKIPEDIA_OFFLINE,
-			OsmAndFeature.WIKIVOYAGE_OFFLINE,
+			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
+			OsmAndFeature.SEA_DEPTH_MAPS,
 			OsmAndFeature.UNLIMITED_DOWNLOADS,
 			OsmAndFeature.MONTHLY_MAP_UPDATES,
 	};
