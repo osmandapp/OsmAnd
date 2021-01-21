@@ -1187,11 +1187,14 @@ public class RouteResultPreparation {
 			RouteSegmentResult rr) {
 		int exit = 1;
 		RouteSegmentResult last = rr;
+		RouteSegmentResult firstRoundabout = rr;
+		RouteSegmentResult lastRoundabout = rr;
 		
 		for (int j = i; j < result.size(); j++) {
 			RouteSegmentResult rnext = result.get(j);
 			last = rnext;
 			if (rnext.getObject().roundabout()) {
+				lastRoundabout = rnext;
 				boolean plus = rnext.getStartPointIndex() < rnext.getEndPointIndex();
 				int k = rnext.getStartPointIndex();
 				if (j == i) {
@@ -1213,7 +1216,13 @@ public class RouteResultPreparation {
 		TurnType t = TurnType.getExitTurn(exit, 0, leftSide);
 		// usually covers more than expected
 		float turnAngleBasedOnOutRoads = (float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd());
-		t.setTurnAngle(turnAngleBasedOnOutRoads) ;
+		float turnAngleBasedOnCircle = (float) -MapUtils.degreesDiff(firstRoundabout.getBearingBegin(), lastRoundabout.getBearingEnd() + 180);
+		if (Math.abs(turnAngleBasedOnOutRoads) > 120) {
+			// correctly identify if angle is +- 180, so we approach from left or right side
+			t.setTurnAngle(turnAngleBasedOnCircle) ;
+		} else {
+			t.setTurnAngle(turnAngleBasedOnOutRoads) ;
+		}
 		return t;
 	}
 	
