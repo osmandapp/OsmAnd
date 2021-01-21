@@ -1218,7 +1218,7 @@ public class RouteResultPreparation {
 		float turnAngleBasedOnOutRoads = (float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd());
 		// usually covers less than expected
 		float turnAngleBasedOnCircle = (float) -MapUtils.degreesDiff(firstRoundabout.getBearingBegin(), lastRoundabout.getBearingEnd() + 180);
-		if(Math.abs(turnAngleBasedOnOutRoads - turnAngleBasedOnCircle) > 180) {
+		if((Math.abs(turnAngleBasedOnOutRoads) - Math.abs(turnAngleBasedOnCircle)) > 1) {
 			t.setTurnAngle(turnAngleBasedOnCircle) ;
 		} else {
 			t.setTurnAngle(turnAngleBasedOnOutRoads) ;
