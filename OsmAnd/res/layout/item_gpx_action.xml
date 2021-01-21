@@ -7,8 +7,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/filled"
-        android:layout_width="@dimen/context_menu_top_right_button_min_width"
-        android:layout_height="@dimen/context_menu_controller_height"
+        android:layout_width="@dimen/fab_recycler_view_padding_bottom"
+        android:layout_height="@dimen/setting_list_item_small_height"
         tools:alpha="0.1"
         tools:srcCompat="@drawable/bg_topbar_shield_exit_ref" />
 
