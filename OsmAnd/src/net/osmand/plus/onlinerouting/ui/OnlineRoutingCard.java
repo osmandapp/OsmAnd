@@ -25,8 +25,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
-import net.osmand.plus.onlinerouting.VehicleType;
-import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
@@ -137,23 +135,15 @@ public class OnlineRoutingCard extends BaseCard {
 				if (callback.processResult(item)) {
 					adapter.setSelectedItem(item);
 				}
-				Object obj = item.getObject();
-				updateBottomMarginSelectionMenu(obj);
 			}
 		});
-		Object item = adapter.getItemByTitle(selectedItemTitle).getObject();
-		updateBottomMarginSelectionMenu(item);
 		rvSelectionMenu.setAdapter(adapter);
 	}
 
-	private void updateBottomMarginSelectionMenu(Object item) {
-		if (item instanceof VehicleType) {
-			VehicleType vt = (VehicleType) item;
-			boolean hasPadding = vt.equals(OnlineRoutingEngine.CUSTOM_VEHICLE);
-			ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rvSelectionMenu.getLayoutParams();
-			int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
-			params.bottomMargin = hasPadding ? contentPadding : 0;
-		}
+	private void updateBottomMarginSelectionMenu() {
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rvSelectionMenu.getLayoutParams();
+		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		params.bottomMargin = isVisibleViewsBelowSelectionMenu() ? contentPadding : 0;
 	}
 
 	public void setDescription(@NonNull String description) {
@@ -230,10 +220,20 @@ public class OnlineRoutingCard extends BaseCard {
 
 	private void showElements(View... views) {
 		AndroidUiHelper.setVisibility(View.VISIBLE, views);
+		updateBottomMarginSelectionMenu();
 	}
 
 	private void hideElements(View... views) {
 		AndroidUiHelper.setVisibility(View.GONE, views);
+		updateBottomMarginSelectionMenu();
+	}
+
+	private boolean isVisibleViewsBelowSelectionMenu() {
+		return isVisible(tvDescription) || isVisible(fieldBoxContainer) || isVisible(button);
+	}
+
+	public boolean isVisible(View view) {
+		return view.getVisibility() == View.VISIBLE;
 	}
 
 	public void setOnTextChangedListener(@Nullable OnTextChangedListener onTextChangedListener) {
