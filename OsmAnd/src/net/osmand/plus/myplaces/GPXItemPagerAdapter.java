@@ -55,6 +55,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
@@ -588,7 +590,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	@Override
 	public View getCustomTabView(@NonNull ViewGroup parent, int position) {
-		View tab = LayoutInflater.from(parent.getContext()).inflate(R.layout.gpx_tab, parent, false);
+		View tab = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_group_radion_buttons, parent, false);
+		buttonsTabType(tabTypes, tab);
 		tab.setTag(tabTypes[position].name());
 		deselect(tab);
 		return tab;
@@ -596,35 +599,29 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	@Override
 	public void select(View tab) {
-		GPXTabItemType tabType = GPXTabItemType.valueOf((String) tab.getTag());
-		ImageView img = tab.findViewById(R.id.tab_image);
-		switch (tabs.getTabSelectionType()) {
-			case ALPHA:
-				img.setAlpha(tabs.getTabTextSelectedAlpha());
-				break;
-			case SOLID_COLOR:
-				img.setImageDrawable(iconsCache.getPaintedIcon(tabType.getIconId(), tabs.getTextColor()));
-				break;
-		}
 	}
 
 	@Override
 	public void deselect(View tab) {
-		GPXTabItemType tabType = GPXTabItemType.valueOf((String) tab.getTag());
-		ImageView img = tab.findViewById(R.id.tab_image);
-		switch (tabs.getTabSelectionType()) {
-			case ALPHA:
-				img.setAlpha(tabs.getTabTextAlpha());
-				break;
-			case SOLID_COLOR:
-				img.setImageDrawable(iconsCache.getPaintedIcon(tabType.getIconId(), tabs.getTabInactiveTextColor()));
-				break;
-		}
 	}
 
 	@Override
 	public View getViewAtPosition(int position) {
 		return views.get(position);
+	}
+
+	private void buttonsTabType(GPXTabItemType tabType, View tab) {
+		switch (tabType) {
+			case GPX_TAB_ITEM_GENERAL:
+				UiUtilities.updateCustomRadioButtonsGroup(app, tab, false, UiUtilities.CustomRadioButtonTypeGroup.START);
+				break;
+			case GPX_TAB_ITEM_ALTITUDE:
+				UiUtilities.updateCustomRadioButtonsGroup(app, tab, false, UiUtilities.CustomRadioButtonTypeGroup.CENTER);
+				break;
+			case GPX_TAB_ITEM_SPEED:
+				UiUtilities.updateCustomRadioButtonsGroup(app, tab, false, UiUtilities.CustomRadioButtonTypeGroup.END);
+				break;
+		}
 	}
 
 	void updateChart(int position) {
