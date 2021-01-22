@@ -2,7 +2,6 @@ package net.osmand.plus.routing;
 
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 
@@ -20,16 +19,14 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.Version;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GeneralRouter;
@@ -48,21 +45,16 @@ import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GeoPolylineParserUtil;
 import net.osmand.util.MapUtils;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.xml.sax.SAXException;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1210,8 +1202,12 @@ public class RouteProvider {
 	private RouteCalculationResult findOnlineRoute(RouteCalculationParams params) throws IOException, JSONException {
 		OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
 		String stringKey = params.mode.getRoutingProfile();
-		List<LatLon> route = helper.calculateRouteOnline(helper.getEngineByKey(stringKey), getFullPathFromParams(params));
-		if (!route.isEmpty()) {
+		OnlineRoutingEngine engine = helper.getEngineByKey(stringKey);
+		List<LatLon> route = null;
+		if (engine != null) {
+			route = helper.calculateRouteOnline(engine, getFullPathFromParams(params));
+		}
+		if (!Algorithms.isEmpty(route)) {
 			List<Location> res = new ArrayList<>();
 			for (LatLon pt : route) {
 				WptPt wpt = new WptPt();

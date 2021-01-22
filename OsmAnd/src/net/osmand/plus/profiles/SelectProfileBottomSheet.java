@@ -39,8 +39,9 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
-import net.osmand.plus.onlinerouting.OnlineRoutingEngineFragment;
+import net.osmand.plus.onlinerouting.ui.OnlineRoutingEngineFragment;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -250,7 +251,7 @@ public class SelectProfileBottomSheet extends BasePreferenceBottomSheet {
 		tvTitle.setText(profile.getName());
 		tvDescription.setText(profile.getDescription());
 
-		boolean isSelected = setupSelected && profile.getStringKey().equals(selectedItemKey);
+		boolean isSelected = setupSelected && Algorithms.objectEquals(profile.getStringKey(), selectedItemKey);
 		int iconColor;
 		if (dialogMode == DialogMode.NAVIGATION_PROFILE) {
 			iconColor = isSelected ? activeColorResId : iconDefaultColorResId;

@@ -2597,7 +2597,7 @@
     <string name="update_is_available">קיים עדכון</string>
     <string name="download_file">הורדת קובץ</string>
     <string name="start_editing_card_image_text">מדריך התיירות המקוון שכל אחד יכול לערוך.</string>
-    <string name="welcome_to_open_beta_description">מדריכי התיירות מבוססים על ויקימסע. ניתן לבדוק את כל האפשרויות במהלך הבטא הפתוחה בחינם. לאחר סיום תקופת הבטא, מדריכי התיירות יהיו זמינים לנרשמי OsmAnd ללא הגבלה ולבעלי OsmAnd+‎.</string>
+    <string name="welcome_to_open_beta_description">מדריכי התיירות מבוססים על ויקימסע. ניתן לבדוק את כל האפשרויות במהלך הבטא הפתוחה בחינם.</string>
     <string name="start_editing_card_description">ניתן וכדאי לערוך כל ערך בוויקימסע. השיתוף דורש את הידע, הניסיון, הכישרון ואת תשומת הלב שלך.</string>
     <string name="start_editing">להתחיל בעריכה</string>
     <string name="get_unlimited_access">קבלת גישה בלתי מוגבלת</string>
@@ -3963,7 +3963,6 @@
     <string name="routing_engine_vehicle_type_foot">ברגל</string>
     <string name="routing_engine_vehicle_type_bike">אופנוע</string>
     <string name="routing_engine_vehicle_type_car">מכונית</string>
-    <string name="message_error_recheck_parameters">שגיאה, נא לבדוק את המשתנים מחדש</string>
     <string name="copy_address">העתקת כתובת</string>
     <string name="online_routing_engine">מנוע ניווט מקוון</string>
     <string name="online_routing_engines">מנועי ניווט מקוונים</string>
@@ -3976,4 +3975,15 @@
     <string name="edit_track">עריכת מסלול</string>
     <string name="rename_track">שינוי שם מסלול</string>
     <string name="change_folder">החלפת תיקייה</string>
+    <string name="announcement_time_title">זמן ההכרזה</string>
+    <string name="start_recording">התחלת הקלטה</string>
+    <string name="routing_engine_vehicle_type_wheelchair">כסא גלגלים</string>
+    <string name="routing_engine_vehicle_type_walking">הליכה</string>
+    <string name="routing_engine_vehicle_type_small_truck">משאית קטנה</string>
+    <string name="routing_engine_vehicle_type_truck">משאית</string>
+    <string name="routing_engine_vehicle_type_scooter">קטנוע</string>
+    <string name="routing_engine_vehicle_type_racingbike">אופנוע מרוצים</string>
+    <string name="routing_engine_vehicle_type_mtb">אופני הרים</string>
+    <string name="message_server_error">שגיאת שרת: %1$s</string>
+    <string name="message_name_is_already_exists">השם כבר קיים</string>
 </resources>

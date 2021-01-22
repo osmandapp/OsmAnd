@@ -4,20 +4,24 @@ import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Binder;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.helpers.LocationServiceHelper;
+import net.osmand.plus.helpers.LocationServiceHelper.LocationCallback;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
-public class NavigationService extends Service implements LocationListener {
+import java.util.List;
+
+public class NavigationService extends Service {
 
 	public static class NavigationServiceBinder extends Binder {
 	}
@@ -29,11 +33,11 @@ public class NavigationService extends Service implements LocationListener {
 
 	private final NavigationServiceBinder binder = new NavigationServiceBinder();
 
-	private String serviceOffProvider;
 	private OsmandSettings settings;
 
 	protected int usedBy = 0;
 	private OsmAndLocationProvider locationProvider;
+	private LocationServiceHelper locationServiceHelper;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -72,21 +76,37 @@ public class NavigationService extends Service implements LocationListener {
 		settings = app.getSettings();
 		usedBy = intent.getIntExtra(USAGE_INTENT, 0);
 
-		// use only gps provider
-		serviceOffProvider = LocationManager.GPS_PROVIDER;
 		locationProvider = app.getLocationProvider();
+		locationServiceHelper = app.createLocationServiceHelper();
 		app.setNavigationService(this);
 
 		// request location updates
-		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		try {
-			locationManager.requestLocationUpdates(serviceOffProvider, 0, 0, NavigationService.this);
+			locationServiceHelper.requestLocationUpdates(new LocationCallback() {
+				@Override
+				public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
+					if (!locations.isEmpty()) {
+						Location location = locations.get(locations.size() - 1);
+						if (!settings.MAP_ACTIVITY_ENABLED.get()) {
+							locationProvider.setLocationFromService(location);
+						}
+					}
+				}
+
+				@Override
+				public void onLocationAvailability(boolean locationAvailable) {
+					if (!locationAvailable) {
+						OsmandApplication app = (OsmandApplication) getApplication();
+						if (app != null) {
+							app.showToastMessage(getString(R.string.off_router_service_no_gps_available));
+						}
+					}
+				}
+			});
 		} catch (SecurityException e) {
 			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show();
-			Log.d(PlatformUtil.TAG, "Location service permission not granted"); //$NON-NLS-1$
 		} catch (IllegalArgumentException e) {
 			Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show();
-			Log.d(PlatformUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
 		}
 
 		// registering icon at top level
@@ -117,11 +137,10 @@ public class NavigationService extends Service implements LocationListener {
 		app.setNavigationService(null);
 		usedBy = 0;
 		// remove updates
-		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		try {
-			locationManager.removeUpdates(this);
+			locationServiceHelper.removeLocationUpdates();
 		} catch (SecurityException e) {
-			Log.d(PlatformUtil.TAG, "Location service permission not granted"); //$NON-NLS-1$
+			// Location service permission not granted
 		}
 		// remove notification
 		stopForeground(Boolean.TRUE);
@@ -132,29 +151,6 @@ public class NavigationService extends Service implements LocationListener {
 				app.getNotificationHelper().refreshNotifications();
 			}
 		}, 500);
-	}
-
-	@Override
-	public void onLocationChanged(Location l) {
-		if (l != null && !settings.MAP_ACTIVITY_ENABLED.get()) {
-			net.osmand.Location location = OsmAndLocationProvider.convertLocation(l, (OsmandApplication) getApplication());
-			locationProvider.setLocationFromService(location);
-		}
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		Toast.makeText(this, getString(R.string.off_router_service_no_gps_available), Toast.LENGTH_LONG).show();
-	}
-
-
-	@Override
-	public void onProviderEnabled(String provider) {
-	}
-
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
 
 	@Override

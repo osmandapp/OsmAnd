@@ -54,7 +54,7 @@
         <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
     </style>
 
-    <style name="FirstSplashScreenFreeDev" parent="SplashScreenBaseTheme">
+    <style name="FirstSplashScreenNightlyFree" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_free_dev</item>
     </style>
 

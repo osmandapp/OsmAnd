@@ -2705,7 +2705,7 @@
     <string name="update_is_available">Aktualisierung verfügbar</string>
     <string name="download_file">Datei herunterladen</string>
     <string name="start_editing_card_image_text">Der kostenlose weltweite Reiseführer, den jeder bearbeiten kann.</string>
-    <string name="welcome_to_open_beta_description">Die Reisefüher basieren derzeit auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos. Danach steht die Reiseführerfunktionalität den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ zur Verfügung.</string>
+    <string name="welcome_to_open_beta_description">Die Reisefüher basieren derzeit auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos.</string>
     <string name="start_editing_card_description">Sie können und sollten Artikel auf Wikivoyage bearbeiten. Teilen Sie Wissen, Erfahrung, Talent und Ihre Aufmerksamkeit.</string>
     <string name="start_editing">Bearbeitung starten</string>
     <string name="get_unlimited_access">Erhalten Sie unbegrenzten Zugang</string>
@@ -3962,7 +3962,6 @@
     <string name="routing_engine_vehicle_type_foot">Zu Fuß</string>
     <string name="routing_engine_vehicle_type_bike">Fahrrad</string>
     <string name="routing_engine_vehicle_type_car">Auto</string>
-    <string name="message_error_recheck_parameters">Fehler, Parameter erneut prüfen</string>
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
     <string name="copy_address">Adresse kopieren</string>
@@ -3973,4 +3972,30 @@
     <string name="select_folder">Ordner auswählen</string>
     <string name="select_folder_descr">Ordner auswählen oder neuen hinzufügen</string>
     <string name="shared_string_empty">Leer</string>
+    <string name="analyze_by_intervals">Nach Intervallen auswerten (geteiltes Intervall)</string>
+    <string name="upload_to_openstreetmap">Hochladen zu OpenStreetMap</string>
+    <string name="edit_track">Track editieren</string>
+    <string name="rename_track">Track umbenennen</string>
+    <string name="change_folder">Ordner ändern</string>
+    <string name="shared_string_turn">Abbiegung</string>
+    <string name="announcement_time_intervals">Zeit- und Distanzintervalle</string>
+    <string name="announcement_time_descr">Der Ansagezeitpunkt der verschiedenen Sprachansagen hängt vom Ansagetyp, der aktuellen Navigationsgeschwindigkeit und der Standard-Navigationsgeschwindigkeit ab.</string>
+    <string name="announcement_time_title">Ansagezeitpunkt</string>
+    <string name="start_recording">Aufzeichnung starten</string>
+    <string name="show_track_on_map">Track auf der Karte anzeigen</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Rollstuhl</string>
+    <string name="routing_engine_vehicle_type_hiking">Wandern</string>
+    <string name="routing_engine_vehicle_type_walking">Fußgänger</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">E-Bike fahren</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Straßenradsport</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Bergradsport</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Normales Radfahren</string>
+    <string name="routing_engine_vehicle_type_hgv">Lkw</string>
+    <string name="routing_engine_vehicle_type_small_truck">Kleintransporter</string>
+    <string name="routing_engine_vehicle_type_truck">Lkw</string>
+    <string name="routing_engine_vehicle_type_scooter">Motorroller</string>
+    <string name="routing_engine_vehicle_type_racingbike">Rennrad</string>
+    <string name="routing_engine_vehicle_type_mtb">Mountainbike</string>
+    <string name="message_server_error">Server-Fehler: %1$s</string>
+    <string name="message_name_is_already_exists">Der Name ist bereits vorhanden</string>
 </resources>

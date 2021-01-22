@@ -27,7 +27,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
-import static net.osmand.plus.onlinerouting.OnlineRoutingEngine.ONLINE_ROUTING_ENGINE_PREFIX;
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.ONLINE_ROUTING_ENGINE_PREFIX;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DIALOG_MODE_KEY;

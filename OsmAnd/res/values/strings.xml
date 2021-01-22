@@ -12,6 +12,23 @@
 
 -->
 
+    <string name="message_name_is_already_exists">The name is already exists</string>
+    <string name="message_server_error">Server error: %1$s</string>
+    <string name="routing_engine_vehicle_type_mtb">MTB</string>
+    <string name="routing_engine_vehicle_type_racingbike">Racing bike</string>
+    <string name="routing_engine_vehicle_type_scooter">Scooter</string>
+    <string name="routing_engine_vehicle_type_truck">Truck</string>
+    <string name="routing_engine_vehicle_type_small_truck">Small truck</string>
+    <string name="routing_engine_vehicle_type_hgv">HGV</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Regular cycling</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Road cycling</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Mountain cycling</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Electric cycling</string>
+    <string name="routing_engine_vehicle_type_walking">Walking</string>
+    <string name="routing_engine_vehicle_type_hiking">Hiking</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Wheelchair</string>
+    <string name="show_track_on_map">Show track on map</string>
+    <string name="start_recording">Start recording</string>
     <string name="announcement_time_title">Announcement time</string>
     <string name="announcement_time_descr">Announcement time of different voice prompts depends on prompt type, current navigation speed and default navigation speed.</string>
     <string name="announcement_time_intervals">Time and distance intervals</string>
@@ -35,7 +52,6 @@
     <string name="online_routing_engines">Online routing engines</string>
     <string name="online_routing_engine">Online routing engine</string>
     <string name="copy_address">Copy address</string>
-    <string name="message_error_recheck_parameters">Error, recheck parameters</string>
     <string name="routing_engine_vehicle_type_car">Car</string>
     <string name="routing_engine_vehicle_type_bike">Bike</string>
     <string name="routing_engine_vehicle_type_foot">Foot</string>
@@ -1172,7 +1188,7 @@
 	<string name="update_is_available">Update available</string>
 	<string name="download_file">Download file</string>
     <string name="start_editing_card_image_text">The free worldwide travel guide anyone can edit.</string>
-    <string name="welcome_to_open_beta_description">Travel guides are currently based on Wikivoyage. Test all features during open beta testing for free. Afterwards, travel guides will be available to subscribers of OsmAnd Unlimited and owners of OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Travel guides are currently based on Wikivoyage. Test all features during open beta testing for free.</string>
     <string name="start_editing_card_description">You can and should edit any article on Wikivoyage. Share knowledge, experience, talent, and your attention.</string>
     <string name="start_editing">Start editing</string>
     <string name="get_unlimited_access">Get unlimited access</string>

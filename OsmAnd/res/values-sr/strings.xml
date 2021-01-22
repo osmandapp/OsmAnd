@@ -2375,7 +2375,7 @@
     <string name="wiki_article_search_text">Претражујем одговарајући вики чланак</string>
     <string name="wiki_article_not_found">Чланак није нађен</string>
     <string name="how_to_open_wiki_title">Како да отворите чланке са Википедије?</string>
-    <string name="welcome_to_open_beta_description">Туристички водичи су тренутно базирани на Wikivoyage-у. Тестирајте све функционалности бесплатно. После тога, туристички водичи ће бити доступни само претплатницима на OsmAnd Unlimited и власницима OsmAnd+-а.</string>
+    <string name="welcome_to_open_beta_description">Туристички водичи су тренутно базирани на Wikivoyage-у. Тестирајте све функционалности бесплатно.</string>
     <string name="start_editing_card_description">Можете и требали бисте да мењате било који чланак на Wikivoyage-у, а и надамо се да хоћете. Делите Ваше знање, искуство, таленат и пажњу.</string>
     <string name="monthly_map_updates">Месечна ажурирања карата</string>
     <string name="daily_map_updates">Сатна ажурирања карата</string>

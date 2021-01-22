@@ -2717,7 +2717,7 @@
     <string name="update_is_available">Uppfærsla er tiltæk</string>
     <string name="download_file">Sækja skrá</string>
     <string name="start_editing_card_image_text">Frjálsa ferðagreinasafnið sem allir geta lagað og breytt.</string>
-    <string name="welcome_to_open_beta_description">Ferðaupplýsingar eru byggðar á Wikivoyage. Á meðan opnum forprófunum stendur hefurðu tækifæri til að meta alla eiginleikans ókeypis og án kvaða. Eftir að forprófunum lýkur, munu ferðaupplýsingar standa áskrifendum OsmAnd Unlimited og eigendum OsmAnd+ til boða.</string>
+    <string name="welcome_to_open_beta_description">Ferðaupplýsingar eru byggðar á Wikivoyage. Á meðan opnum forprófunum stendur hefurðu tækifæri til að meta alla eiginleikans ókeypis og án kvaða.</string>
     <string name="start_editing_card_description">Þú getur breytt hvaða grein sem er á Wikivoyage. Við þörfnumst þekkingar þinnar, reynslu, hæfileika og áhuga þíns.</string>
     <string name="start_editing">Hefja breytingar</string>
     <string name="get_unlimited_access">Fáðu ótakmarkaðan aðgang</string>
@@ -3965,6 +3965,5 @@
     <string name="routing_engine_vehicle_type_foot">Gangandi</string>
     <string name="routing_engine_vehicle_type_bike">Hjólandi</string>
     <string name="routing_engine_vehicle_type_car">Bíll</string>
-    <string name="message_error_recheck_parameters">Villa, yfirfarðu breytur</string>
     <string name="copy_address">Afrita heimilisfang</string>
 </resources>

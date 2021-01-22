@@ -2436,7 +2436,7 @@ Lon %2$s</string>
     <string name="read_wikipedia_offline_description">Obteña unha subscrición do OsmAnd ao Vivo para ler artigos da Wikipedia e Wikiviaxes, sen conexión.</string>
     <string name="purchase_cancelled_dialog_title">Cancelaches a subscrición do OsmAnd ao Vivo</string>
     <string name="osmand_team">Equipa do OsmAnd</string>
-    <string name="welcome_to_open_beta_description">Os guieiros de viaxe, baséanse actualmente na Wikiviaxes. Proba tódolos trazos durante as probas beta abertas, de balde. Despois, os guieiros turísticas estarán dispoñíbeis para os subscritores do \"OsmAnd Ilimitado\" e os propietarios do \"OsmAnd+\".</string>
+    <string name="welcome_to_open_beta_description">Os guieiros de viaxe, baséanse actualmente na Wikiviaxes. Proba tódolos trazos durante as probas beta abertas, de balde.</string>
     <string name="wikivoyage_travel_guide_descr">Os guieiros dos lugares máis interesantes do planeta, no OsmAnd e sen conexión á Internet.</string>
     <string name="unlock_all_features">Desbloqueares tódalas características do OsmAnd</string>
     <string name="purchase_dialog_title">Escoller plan</string>
@@ -3968,7 +3968,6 @@ Lon %2$s</string>
     <string name="routing_engine_vehicle_type_foot">Pé</string>
     <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
     <string name="routing_engine_vehicle_type_car">Coche</string>
-    <string name="message_error_recheck_parameters">Erro, verifica novamente os parámetros</string>
     <string name="copy_address">Copiar enderezo</string>
     <string name="voice_prompts_timetable">Horarios dos avisos por voz</string>
     <string name="online_routing_engine">Motor de navegación en liña</string>

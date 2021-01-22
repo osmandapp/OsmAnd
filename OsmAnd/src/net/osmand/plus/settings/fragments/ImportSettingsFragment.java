@@ -36,7 +36,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;

@@ -70,6 +70,8 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -118,6 +120,7 @@ import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -346,11 +349,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		if (!settings.isLastKnownMapLocation()) {
 			// show first time when application ran
-			net.osmand.Location location = app.getLocationProvider().getFirstTimeRunDefaultLocation();
+			final WeakReference<MapActivity> activityRef = new WeakReference<>(this);
+			net.osmand.Location location = app.getLocationProvider().getFirstTimeRunDefaultLocation(new OsmAndLocationListener() {
+				@Override
+				public void updateLocation(Location location) {
+					MapActivity a = activityRef.get();
+					if (AndroidUtils.isActivityNotDestroyed(a) && app.getLocationProvider().getLastKnownLocation() == null) {
+						setMapInitialLatLon(a.mapView, location);
+					}
+				}
+			});
 			mapViewTrackingUtilities.setMapLinkedToLocation(true);
 			if (location != null) {
-				mapView.setLatLon(location.getLatitude(), location.getLongitude());
-				mapView.setIntZoom(14);
+				setMapInitialLatLon(mapView, location);
 			}
 		}
 		addDialogProvider(mapActions);
@@ -373,6 +384,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.setLockUIAdapter(this);
 		mapActivityKeyListener = new MapActivityKeyListener(this);
 		mIsDestroyed = false;
+	}
+
+	private void setMapInitialLatLon(@NonNull OsmandMapTileView mapView, @Nullable Location location) {
+		if (location != null) {
+			mapView.setLatLon(location.getLatitude(), location.getLongitude());
+			mapView.setIntZoom(14);
+		}
 	}
 
 	public void exitFromFullScreen(View view) {
@@ -1408,6 +1426,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		updateMapSettings();
 		app.getPoiFilters().loadSelectedPoiFilters();
 		mapViewTrackingUtilities.updateSettings();
+		mapViewTrackingUtilities.resetDrivingRegionUpdate();
 		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
 		if (mapLayers.getMapInfoLayer() != null) {
 			mapLayers.getMapInfoLayer().recreateControls();
@@ -2204,6 +2223,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(MeasurementToolFragment.TAG);
 	}
 
+	public TripRecordingBottomSheet getTripRecordingBottomSheet() {
+		return getFragment(TripRecordingBottomSheet.TAG);
+	}
+
 	public ChooseRouteFragment getChooseRouteFragment() {
 		return getFragment(ChooseRouteFragment.TAG);
 	}
@@ -2220,7 +2243,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(SnapTrackWarningFragment.TAG);
 	}
 
-	@NonNull
 	public TrackMenuFragment getTrackMenuFragment() {
 		return getFragment(TrackMenuFragment.TAG);
 	}

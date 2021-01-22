@@ -2708,7 +2708,7 @@
     <string name="update_is_available">Agiornamentu disponìbile</string>
     <string name="download_file">Iscàrriga documentu</string>
     <string name="start_editing_card_image_text">Sa ghia turìstica lìbera pro totu su mundu chi totus podent megiorare.</string>
-    <string name="welcome_to_open_beta_description">Sas ghias de biàgiu sunt basadas in subra de Wikivoyage. Proa totu sas funtzionalidades suas de badas pro su tempus chi at a durare sa beta aberta. A pustis de sa fine de custu perìodu, imbetzes, at a èssere disponìbile petzi pro abbonados a OsmAnd Unlimited e a chie tenet OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Sas ghias de biàgiu sunt basadas in subra de Wikivoyage. Proa totu sas funtzionalidades suas de badas pro su tempus chi at a durare sa beta aberta.</string>
     <string name="start_editing_card_description">Podes acontzare cale si siat artìculu in Wikivoyage. Cumpartzi connoschèntzias, esperièntzias, talentu e s\'atentzione tua.</string>
     <string name="start_editing">Incumintza a modificare</string>
     <string name="get_unlimited_access">Otene s’atzessu illimitadu</string>
@@ -3957,7 +3957,6 @@
     <string name="routing_engine_vehicle_type_foot">A pee</string>
     <string name="routing_engine_vehicle_type_bike">Bitzicleta</string>
     <string name="routing_engine_vehicle_type_car">Màchina</string>
-    <string name="message_error_recheck_parameters">Errore, torra a verificare sos paràmetros</string>
     <string name="copy_address">Còpia s\'indiritzu</string>
     <string name="online_routing_engine">Motore de càrculu in lìnia</string>
     <string name="online_routing_engines">Motores de càrculu in lìnia</string>

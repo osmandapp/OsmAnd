@@ -1,14 +1,17 @@
-package net.osmand.plus.onlinerouting;
+package net.osmand.plus.onlinerouting.ui;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +25,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
+import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
 import java.util.List;
@@ -39,13 +45,18 @@ public class OnlineRoutingCard extends BaseCard {
 	private OsmandTextFieldBoxes textFieldBoxes;
 	private EditText editText;
 	private TextView tvHelperText;
+	private TextView tvErrorText;
 	private View bottomDivider;
 	private View button;
 	private OnTextChangedListener onTextChangedListener;
+	private boolean fieldBoxHelperTextShowed;
 
-	public OnlineRoutingCard(@NonNull MapActivity mapActivity, boolean nightMode) {
+	private ApplicationMode appMode;
+
+	public OnlineRoutingCard(@NonNull MapActivity mapActivity, boolean nightMode, ApplicationMode appMode) {
 		super(mapActivity);
 		this.nightMode = nightMode;
+		this.appMode = appMode;
 	}
 
 	@Override
@@ -64,8 +75,12 @@ public class OnlineRoutingCard extends BaseCard {
 		textFieldBoxes = view.findViewById(R.id.field_box);
 		editText = view.findViewById(R.id.edit_text);
 		tvHelperText = view.findViewById(R.id.helper_text);
+		tvErrorText = view.findViewById(R.id.error_text);
 		bottomDivider = view.findViewById(R.id.bottom_divider);
 		button = view.findViewById(R.id.button);
+
+		int activeColor = ContextCompat.getColor(app, appMode.getIconColorInfo().getColor(nightMode));
+		textFieldBoxes.setPrimaryColor(activeColor);
 
 		editText.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -80,7 +95,7 @@ public class OnlineRoutingCard extends BaseCard {
 			public void afterTextChanged(Editable s) {
 				if (onTextChangedListener != null) {
 					boolean editedByUser = editText.getTag() == null;
-					String text = editText.getText().toString();
+					String text = editText.getText().toString().trim();
 					onTextChangedListener.onTextChanged(editedByUser, text);
 				}
 			}
@@ -107,9 +122,9 @@ public class OnlineRoutingCard extends BaseCard {
 		tvHeaderSubtitle.setText(subtitle);
 	}
 
-	public void setSelectionMenu(List<HorizontalSelectionItem> items,
-	                             String selectedItemTitle,
-	                             final CallbackWithObject<HorizontalSelectionItem> callback) {
+	public void setSelectionMenu(@NonNull List<HorizontalSelectionItem> items,
+	                             @NonNull String selectedItemTitle,
+	                             @NonNull final CallbackWithObject<HorizontalSelectionItem> callback) {
 		showElements(rvSelectionMenu);
 		rvSelectionMenu.setLayoutManager(
 				new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
@@ -122,9 +137,23 @@ public class OnlineRoutingCard extends BaseCard {
 				if (callback.processResult(item)) {
 					adapter.setSelectedItem(item);
 				}
+				Object obj = item.getObject();
+				updateBottomMarginSelectionMenu(obj);
 			}
 		});
+		Object item = adapter.getItemByTitle(selectedItemTitle).getObject();
+		updateBottomMarginSelectionMenu(item);
 		rvSelectionMenu.setAdapter(adapter);
+	}
+
+	private void updateBottomMarginSelectionMenu(Object item) {
+		if (item instanceof VehicleType) {
+			VehicleType vt = (VehicleType) item;
+			boolean hasPadding = vt.equals(OnlineRoutingEngine.CUSTOM_VEHICLE);
+			ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rvSelectionMenu.getLayoutParams();
+			int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+			params.bottomMargin = hasPadding ? contentPadding : 0;
+		}
 	}
 
 	public void setDescription(@NonNull String description) {
@@ -139,15 +168,31 @@ public class OnlineRoutingCard extends BaseCard {
 
 	public void setFieldBoxHelperText(@NonNull String helperText) {
 		showElements(fieldBoxContainer, tvHelperText);
+		fieldBoxHelperTextShowed = true;
 		tvHelperText.setText(helperText);
 	}
 
+	public void showFieldBoxError(@NonNull String errorText) {
+		showElements(fieldBoxContainer, tvErrorText);
+		hideElements(tvHelperText);
+		tvErrorText.setText(errorText);
+	}
+
+	public void hideFieldBoxError() {
+		hideElements(tvErrorText);
+		if (fieldBoxHelperTextShowed) {
+			showElements(tvHelperText);
+		}
+	}
+
 	public void setEditedText(@NonNull String text) {
-		editText.setTag("");    // needed to indicate that the text was edited programmatically
+		showElements(fieldBoxContainer);
+		editText.setTag("");    // indicate that the text was edited programmatically
 		editText.setText(text);
 		editText.setTag(null);
 	}
 
+	@NonNull
 	public String getEditedText() {
 		return editText.getText().toString();
 	}
@@ -156,7 +201,8 @@ public class OnlineRoutingCard extends BaseCard {
 		showElements(bottomDivider);
 	}
 
-	public void setButton(String title, OnClickListener listener) {
+	public void setButton(@NonNull String title,
+	                      @NonNull OnClickListener listener) {
 		showElements(button);
 		button.setOnClickListener(listener);
 		UiUtilities.setupDialogButton(nightMode, button, DialogButtonType.PRIMARY, title);
@@ -186,11 +232,11 @@ public class OnlineRoutingCard extends BaseCard {
 		AndroidUiHelper.setVisibility(View.GONE, views);
 	}
 
-	public void setOnTextChangedListener(OnTextChangedListener onTextChangedListener) {
+	public void setOnTextChangedListener(@Nullable OnTextChangedListener onTextChangedListener) {
 		this.onTextChangedListener = onTextChangedListener;
 	}
 
 	public interface OnTextChangedListener {
-		void onTextChanged(boolean editedByUser, String text);
+		void onTextChanged(boolean editedByUser, @NonNull String text);
 	}
 }

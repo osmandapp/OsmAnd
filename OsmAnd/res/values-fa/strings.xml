@@ -2734,7 +2734,7 @@
     <string name="update_is_available">به‌روزرسانی وجود دارد</string>
     <string name="download_file">دانلود فایل</string>
     <string name="start_editing_card_image_text">راهنمای سفر رایگان با پوشش جهانی که همه می‌توانند آن را ویرایش کنند.</string>
-    <string name="welcome_to_open_beta_description">راهنمای «مسافرت» هم‌اکنون بر پایهٔ ویکی‌سفر ساخته شده است. در دورهٔ آزمایش همگانیِ نسخهٔ بتا می‌توانید همهٔ قابلیت‌های آن را به‌رایگان ارزیابی کنید. با پایان دورهٔ آزمایشی، «مسافرت» در اختیار مشترکان نسخهٔ نامحدود OsmAnd و دارندگان OsmAnd+‎ خواهد بود.</string>
+    <string name="welcome_to_open_beta_description">راهنمای «مسافرت» هم‌اکنون بر پایهٔ ویکی‌سفر ساخته شده است. در دورهٔ آزمایش همگانیِ نسخهٔ بتا می‌توانید همهٔ قابلیت‌های آن را به‌رایگان ارزیابی کنید.</string>
     <string name="start_editing_card_description">شما می‌توانید هر یک از مقالات ویکی‌سفر را ویرایش کنید. امیدواریم با انجام این کار دیگران را در دانش، تجربه، استعداد و توجهتان سهیم کنید.</string>
     <string name="start_editing">شروع ویرایش</string>
     <string name="get_unlimited_access">گرفتن دسترسی نامحدود</string>
@@ -3953,5 +3953,4 @@
     <string name="routing_engine_vehicle_type_foot">پا</string>
     <string name="routing_engine_vehicle_type_bike">دوچرخه</string>
     <string name="routing_engine_vehicle_type_car">خودرو</string>
-    <string name="message_error_recheck_parameters">خطا، پارامترها را بازبینی کنید</string>
 </resources>

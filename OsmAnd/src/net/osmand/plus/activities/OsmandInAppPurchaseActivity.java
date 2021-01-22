@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,16 +15,12 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseInitCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.liveupdates.OsmLiveRestartBottomSheetDialogFragment;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import org.apache.commons.logging.Log;
 
@@ -59,7 +54,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (app.getSettings().isInternetConnectionAvailable()
 					&& isInAppPurchaseAllowed()
-					&& isInAppPurchaseSupported(purchaseHelper)) {
+					&& isInAppPurchaseSupported()) {
 				this.purchaseHelper = purchaseHelper;
 			}
 		}
@@ -160,9 +155,8 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		return false;
 	}
 
-	public boolean isInAppPurchaseSupported(InAppPurchaseHelper purchaseHelper) {
-		OsmandApplication app = getMyApplication();
-		return Version.isGooglePlayEnabled(app) || Version.isHuawei(app);
+	public boolean isInAppPurchaseSupported() {
+		return Version.isGooglePlayEnabled() || Version.isHuawei();
 	}
 
 	@Override
@@ -210,7 +204,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 		onInAppPurchaseItemPurchased(sku);
 		fireInAppPurchaseItemPurchasedOnFragments(fragmentManager, sku, active);
-		if (purchaseHelper != null && purchaseHelper.getContourLines().getSku().equals(sku)) {
+		if (purchaseHelper != null && purchaseHelper.getFullVersion().getSku().equals(sku)) {
 			if (!(this instanceof MapActivity)) {
 				finish();
 			}

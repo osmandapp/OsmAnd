@@ -425,7 +425,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 				measurementToolLayer.isInMeasurementMode() ||
                 mapMarkersLayer.isInPlanRouteMode() ||
                 gpxLayer.isInTrackAppearanceMode() ||
-                mapControlsLayer.isInTrackMenuMode() ||
                 mapRouteInfoMenu.isVisible() ||
                 MapRouteInfoMenu.chooseRoutesVisible ||
                 MapRouteInfoMenu.waypointsVisible ||

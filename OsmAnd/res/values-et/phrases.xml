@@ -643,7 +643,7 @@
     <string name="poi_fuel_jeta1">Jet A-1 kütus</string>
     <string name="poi_mountain_pass">Mäekuru</string>
     <string name="poi_waterway_fuel">Paatide bensiinijaam</string>
-    <string name="poi_electricity_combined_charging">Laadimisjaam</string>
+    <string name="poi_electricity_combined_charging">Laadimisjaam;Elektriautode laadimisjaam;Elektriauto laadimine;Laadimispunkt;Elektriautode laadimispunkt</string>
     <string name="poi_park_ride_ferry">Parvlaev</string>
     <string name="poi_9pin">Üheksa kurikaga keegel</string>
     <string name="poi_10pin">Kümne kurikaga keegel</string>
@@ -3877,4 +3877,8 @@
     <string name="poi_diplomatic_services_non_immigrant_visas_no">Ei</string>
     <string name="poi_waste_transfer_station">Jäätmejaam</string>
     <string name="poi_lavoir">Avalik pesumaja</string>
+    <string name="poi_swimming_area">Ujumiskoht</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Tunnel nahkhiirtele</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Sild nahkhiirtele</string>
+    <string name="poi_wildlife_crossing">Metsloomade teeületuskoht</string>
 </resources>

@@ -7,9 +7,11 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.onlinerouting.OnlineRoutingEngine;
-import net.osmand.plus.onlinerouting.OnlineRoutingEngine.EngineParameter;
+import net.osmand.plus.onlinerouting.EngineParameter;
+import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +21,8 @@ import java.util.List;
 
 public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRoutingEngine> {
 
-	private OnlineRoutingHelper onlineRoutingHelper;
+	private OnlineRoutingHelper helper;
+	private List<OnlineRoutingEngine> otherEngines;
 
 	public OnlineRoutingSettingsItem(@NonNull OsmandApplication app, @NonNull List<OnlineRoutingEngine> items) {
 		super(app, null, items);
@@ -36,8 +39,9 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	@Override
 	protected void init() {
 		super.init();
-		onlineRoutingHelper = app.getOnlineRoutingHelper();
-		existingItems = new ArrayList<>(onlineRoutingHelper.getEngines());
+		helper = app.getOnlineRoutingHelper();
+		existingItems = new ArrayList<>(helper.getEngines());
+		otherEngines = new ArrayList<>(existingItems);
 	}
 
 	@NonNull
@@ -66,12 +70,18 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 
 			for (OnlineRoutingEngine duplicate : duplicateItems) {
 				if (shouldReplace) {
-					onlineRoutingHelper.deleteEngine(duplicate.getStringKey());
+					OnlineRoutingEngine cachedEngine = helper.getEngineByKey(duplicate.getStringKey());
+					if (cachedEngine == null) {
+						cachedEngine = helper.getEngineByName(duplicate.getName(app));
+					}
+					if (cachedEngine != null) {
+						helper.deleteEngine(cachedEngine);
+					}
 				}
 				appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
 			}
 			for (OnlineRoutingEngine engine : appliedItems) {
-				onlineRoutingHelper.saveEngine(engine);
+				helper.saveEngine(engine);
 			}
 		}
 	}
@@ -79,8 +89,8 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	@Override
 	public boolean isDuplicate(@NonNull OnlineRoutingEngine routingEngine) {
 		for (OnlineRoutingEngine engine : existingItems) {
-			if (engine.getStringKey().equals(routingEngine.getStringKey())
-					|| engine.getName(app).equals(routingEngine.getName(app))) {
+			if (Algorithms.objectEquals(engine.getStringKey(), routingEngine.getStringKey())
+					|| Algorithms.objectEquals(engine.getName(app), routingEngine.getName(app))) {
 				return true;
 			}
 		}
@@ -90,22 +100,18 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	@NonNull
 	@Override
 	public OnlineRoutingEngine renameItem(@NonNull OnlineRoutingEngine item) {
-		int number = 0;
-		while (true) {
-			number++;
-			OnlineRoutingEngine renamedItem = OnlineRoutingEngine.createNewEngine(item.getType(), item.getVehicleKey(), item.getParams());
-			renamedItem.putParameter(EngineParameter.CUSTOM_NAME, renamedItem.getName(app) + "_" + number);
-			if (!isDuplicate(renamedItem)) {
-				return renamedItem;
-			}
-		}
+		OnlineRoutingEngine renamedItem = (OnlineRoutingEngine) item.clone();
+		OnlineRoutingUtils.generateUniqueName(app, renamedItem, otherEngines);
+		renamedItem.remove(EngineParameter.KEY);
+		otherEngines.add(renamedItem);
+		return renamedItem;
 	}
 
 	@Override
 	void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 		try {
-			OnlineRoutingHelper.readFromJson(json, items);
-		} catch (JSONException e) {
+			OnlineRoutingUtils.readFromJson(json, items);
+		} catch (JSONException | IllegalArgumentException e) {
 			warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 			throw new IllegalArgumentException("Json parse error", e);
 		}
@@ -115,7 +121,7 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	void writeItemsToJson(@NonNull JSONObject json) {
 		if (!items.isEmpty()) {
 			try {
-				OnlineRoutingHelper.writeToJson(json, items);
+				OnlineRoutingUtils.writeToJson(json, items);
 			} catch (JSONException e) {
 				warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 				SettingsHelper.LOG.error("Failed write to json", e);
