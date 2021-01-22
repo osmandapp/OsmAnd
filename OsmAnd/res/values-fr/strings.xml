@@ -2714,7 +2714,7 @@
     <string name="paid_app">Application payante</string>
     <string name="paid_plugin">Greffon payant</string>
     <string name="popular_destinations">Destinations populaires</string>
-    <string name="welcome_to_open_beta_description">Les guides de voyage s’appuient sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement. Par la suite, les guides de voyage seront accessibles aux abonnés de OsmAnd illimité ainsi qu\'aux propriétaires d\'OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Les guides de voyage s’appuient sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement.</string>
     <string name="wiki_article_search_text">Recherche de l\'article Wiki correspondant</string>
     <string name="osmand_team">Équipe OsmAnd</string>
     <string name="maps_you_need_descr">D\'après les articles que vous avez marqué comme favori, nous vous conseillons de télécharger les cartes suivantes :</string>

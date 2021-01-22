@@ -2705,7 +2705,7 @@
     <string name="update_is_available">Aktualisierung verfügbar</string>
     <string name="download_file">Datei herunterladen</string>
     <string name="start_editing_card_image_text">Der kostenlose weltweite Reiseführer, den jeder bearbeiten kann.</string>
-    <string name="welcome_to_open_beta_description">Die Reisefüher basieren derzeit auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos. Danach steht die Reiseführerfunktionalität den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ zur Verfügung.</string>
+    <string name="welcome_to_open_beta_description">Die Reisefüher basieren derzeit auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos.</string>
     <string name="start_editing_card_description">Sie können und sollten Artikel auf Wikivoyage bearbeiten. Teilen Sie Wissen, Erfahrung, Talent und Ihre Aufmerksamkeit.</string>
     <string name="start_editing">Bearbeitung starten</string>
     <string name="get_unlimited_access">Erhalten Sie unbegrenzten Zugang</string>
