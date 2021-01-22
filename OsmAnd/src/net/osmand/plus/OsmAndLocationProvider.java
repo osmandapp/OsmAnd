@@ -45,6 +45,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -93,6 +94,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private SimulationProvider simulatePosition = null;
 
 	private long cachedLocationTimeFix = 0;
+	private long timeToNotUseOtherGPS = 0;
 	private net.osmand.Location cachedLocation;
 	private net.osmand.Location customLocation;
 
@@ -727,11 +729,21 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 	}
 
-	public void setLocationFromService(net.osmand.Location location) {
-		if (locationSimulation.isRouteAnimating()) {
-			return;
+	public void setCustomLocation(net.osmand.Location location, long ignoreLocationsTime) {
+		timeToNotUseOtherGPS = System.currentTimeMillis() + ignoreLocationsTime;
+		customLocation = location;
+		setLocation(location);
+	}
+
+	private boolean shouldIgnoreLocation(net.osmand.Location location) {
+		if (customLocation != null && timeToNotUseOtherGPS >= System.currentTimeMillis()) {
+			return location == null || !Algorithms.stringsEqual(customLocation.getProvider(), location.getProvider());
 		}
-		if (hasCustomLocation() && isNotSimulatedLocation(location)) {
+		return false;
+	}
+
+	public void setLocationFromService(net.osmand.Location location) {
+		if (locationSimulation.isRouteAnimating() || shouldIgnoreLocation(location)) {
 			return;
 		}
 		if (location != null) {
@@ -745,27 +757,19 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		app.getRoutingHelper().updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
 	}
-
-	public void setCustomLocation(net.osmand.Location location) {
-		customLocation = location;
-		setLocation(location);
-	}
-
-	private boolean hasCustomLocation() {
-		return customLocation != null;
-	}
 	
 	public void setLocationFromSimulation(net.osmand.Location location) {
 		setLocation(location);
 	}
 
 	private void setLocation(net.osmand.Location location) {
+		if (shouldIgnoreLocation(location)) {
+			return;
+		}
 		if (location == null) {
 			updateGPSInfo(null);
 		}
-		if (hasCustomLocation() && isNotSimulatedLocation(location)) {
-			return;
-		}
+
 		if (location != null) {
 			// // use because there is a bug on some devices with location.getTime()
 			lastTimeLocationFixed = System.currentTimeMillis();

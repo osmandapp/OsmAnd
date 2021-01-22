@@ -42,13 +42,13 @@ public class SetLocationParams extends AidlParams {
     @Override
     public void writeToBundle(Bundle bundle) {
         bundle.putParcelable("location", location);
-        bundle.putLong("aidl_time_to_not_use_other_gps", timeToNotUseOtherGPS);
+        bundle.putLong("timeToNotUseOtherGPS", timeToNotUseOtherGPS);
     }
 
     @Override
     protected void readFromBundle(Bundle bundle) {
         bundle.setClassLoader(ALocation.class.getClassLoader());
         location = bundle.getParcelable("location");
-        timeToNotUseOtherGPS = bundle.getLong("aidl_time_to_not_use_other_gps");
+        timeToNotUseOtherGPS = bundle.getLong("timeToNotUseOtherGPS");
     }
 }

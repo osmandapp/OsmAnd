@@ -58,7 +58,6 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
@@ -124,8 +123,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -915,11 +912,13 @@ public class OsmandAidlApi {
 		BroadcastReceiver setLocationReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
+				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
 				ALocation aLocation = intent.getParcelableExtra(AIDL_LOCATION);
 				long timeToNotUseOtherGPS = intent.getLongExtra(AIDL_TIME_TO_NOT_USE_OTHER_GPS, 0);
 
-				if (aLocation != null && !Double.isNaN(aLocation.getLatitude()) && !Double.isNaN(aLocation.getLongitude())) {
-					Location location = new Location(app.getPackageName());
+				if (!Algorithms.isEmpty(packName) && aLocation != null
+						&& !Double.isNaN(aLocation.getLatitude()) && !Double.isNaN(aLocation.getLongitude())) {
+					Location location = new Location(packName);
 					location.setLatitude(aLocation.getLatitude());
 					location.setLongitude(aLocation.getLongitude());
 					location.setTime(aLocation.getTime());
@@ -938,14 +937,7 @@ public class OsmandAidlApi {
 					if (aLocation.hasVerticalAccuracy()) {
 						location.setVerticalAccuracy(aLocation.getVerticalAccuracy());
 					}
-					app.getLocationProvider().setCustomLocation(location);
-
-					app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							app.getLocationProvider().setCustomLocation(null);
-						}
-					}, timeToNotUseOtherGPS);
+					app.getLocationProvider().setCustomLocation(location, timeToNotUseOtherGPS);
 				}
 			}
 		};
@@ -2454,10 +2446,11 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public boolean setLocation(ALocation location, long timeToNotUseOtherGPS) {
+	public boolean setLocation(String packName, ALocation location, long timeToNotUseOtherGPS) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_SET_LOCATION);
 		intent.putExtra(AIDL_LOCATION, location);
+		intent.putExtra(AIDL_PACKAGE_NAME, packName);
 		intent.putExtra(AIDL_TIME_TO_NOT_USE_OTHER_GPS, timeToNotUseOtherGPS);
 		app.sendBroadcast(intent);
 		return true;

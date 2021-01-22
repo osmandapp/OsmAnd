@@ -1450,7 +1450,8 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				if (params != null) {
 					OsmandAidlApi api = getApi("setLocation");
-					return api != null && api.setLocation(params.getLocation(), params.getTimeToNotUseOtherGPS());
+					String packName = getCallingAppPackName();
+					return api != null && api.setLocation(packName, params.getLocation(), params.getTimeToNotUseOtherGPS());
 				}
 			} catch (Exception e) {
 				handleException(e);
