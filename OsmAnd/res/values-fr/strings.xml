@@ -3961,7 +3961,7 @@
     <string name="announcement_time_prepare">Préparation</string>
     <string name="announcement_time_prepare_long">Longue préparation</string>
     <string name="announcement_time_arrive">Arrivé à destination</string>
-    <string name="shared_string_turn">Tourner</string>
+    <string name="shared_string_turn">Bifurcation</string>
     <string name="show_track_on_map">Afficher la trace sur la carte</string>
     <string name="routing_engine_vehicle_type_scooter">Trottinette</string>
     <string name="routing_engine_vehicle_type_small_truck">Camionnette</string>
@@ -3979,5 +3979,15 @@
     <string name="routing_engine_vehicle_type_mtb">VTT</string>
     <string name="message_server_error">Erreur serveur : %1$s</string>
     <string name="message_name_is_already_exists">Ce nom existe déjà</string>
-    <string name="routing_engine_vehicle_type_hgv">Poids lourds</string>
+    <string name="routing_engine_vehicle_type_hgv">Poids lourd</string>
+    <string name="announcement_time_passing">Durée</string>
+    <string name="analyze_by_intervals">Analyser par intervalles (fractionner)</string>
+    <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
+    <string name="announcement_time_descr">Le délai d\'annonce des alertes vocales dépend du type d\'annonce, de la vitesse actuelle et du type de navigation.</string>
+    <string name="announcement_time_title">Délai de l\'annonce</string>
+    <string name="announcement_time_off_route">Hors de l\'itinéraire prévu</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Vélo de route</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Vélo tout terrain</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Vélo électrique</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Vélo</string>
 </resources>
