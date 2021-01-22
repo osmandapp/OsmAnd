@@ -512,8 +512,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void showTestResults(final boolean resultOk,
-	                             final @NonNull String message,
-	                             final @NonNull ExampleLocation location) {
+								 final @NonNull String message,
+								 final @NonNull ExampleLocation location) {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
@@ -568,6 +568,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	public void showExitDialog() {
 		View focus = view.findFocus();
 		AndroidUtils.hideSoftKeyboard(mapActivity, focus);
+		if (hasNameDuplicate(initEngine)) {
+			List<OnlineRoutingEngine> cachedEngines = helper.getEnginesExceptMentionedKeys(editedEngineKey);
+			OnlineRoutingUtils.generateUniqueName(app, initEngine, cachedEngines);
+		}
 		if (!engine.equals(initEngine)) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(mapActivity,
 					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
@@ -700,8 +704,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @NonNull ApplicationMode appMode,
-	                                @Nullable String editedEngineKey) {
+									@NonNull ApplicationMode appMode,
+									@Nullable String editedEngineKey) {
 		FragmentManager fm = activity.getSupportFragmentManager();
 		if (!fm.isStateSaved() && fm.findFragmentByTag(OnlineRoutingEngineFragment.TAG) == null) {
 			OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();
