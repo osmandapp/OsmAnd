@@ -1215,13 +1215,27 @@ public class RouteResultPreparation {
 		// combine all roundabouts
 		TurnType t = TurnType.getExitTurn(exit, 0, leftSide);
 		// usually covers more than expected
-		float turnAngleBasedOnOutRoads = (float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd());
-		float turnAngleBasedOnCircle = (float) -MapUtils.degreesDiff(firstRoundabout.getBearingBegin(), lastRoundabout.getBearingEnd() + 180);
+		float fr = last.getBearingBegin();
+		float sr = prev.getBearingEnd();
+		float fs = firstRoundabout.getBearingBegin();
+		float ss = lastRoundabout.getBearingEnd();
+		
+		float turnAngleBasedOnOutRoads = (float) MapUtils.degreesDiff(fr, sr);
+		float proc = (float) MapUtils.degreesDiff(fs, ss) * 50 / Math.abs(ss * 2);
+		float turnAngleBasedOnCircle;
+
+		if (fs < 0) {
+			turnAngleBasedOnCircle = -(float) 3.6 * proc;
+		} else
+			turnAngleBasedOnCircle = (float) 3.6 * proc;
+
 		if (Math.abs(turnAngleBasedOnOutRoads) > 120) {
 			// correctly identify if angle is +- 180, so we approach from left or right side
-			t.setTurnAngle(turnAngleBasedOnCircle) ;
+			t.setTurnAngle(turnAngleBasedOnCircle);
+		} else if (turnAngleBasedOnCircle == 0) {
+			t.setTurnAngle(turnAngleBasedOnOutRoads);
 		} else {
-			t.setTurnAngle(turnAngleBasedOnOutRoads) ;
+			t.setTurnAngle((turnAngleBasedOnCircle + turnAngleBasedOnOutRoads) / 2);
 		}
 		return t;
 	}
