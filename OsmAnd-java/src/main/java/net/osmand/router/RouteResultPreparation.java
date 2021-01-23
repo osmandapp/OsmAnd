@@ -1222,7 +1222,7 @@ public class RouteResultPreparation {
 		// 3. calculate angle difference
 		// This method doesn't work if you go from S to N touching only 1 point of roundabout, 
 		// but it is very important to identify very sharp or very large angle to understand did you pass whole roundabout or small entrance
-		float turnAngleBasedOnCircle = (float) -MapUtils.degreesDiff(firstRoundabout.getBearingBegin(), lastRoundabout.getBearingEnd() + 180);
+		float turnAngleBasedOnCircle = (float) MapUtils.degreesDiff(firstRoundabout.getBearingBegin(), lastRoundabout.getBearingEnd() + 180);
 		if (Math.abs(turnAngleBasedOnOutRoads) > 120) {
 			// correctly identify if angle is +- 180, so we approach from left or right side
 			t.setTurnAngle(turnAngleBasedOnCircle) ;
