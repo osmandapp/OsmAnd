@@ -50,12 +50,14 @@ public class DescriptionCard extends BaseCard {
         readBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GpxReadDescriptionDialogFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml);
             }
         });
         TextViewEx editBtn = view.findViewById(R.id.btn_edit);
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GpxEditDescriptionDialogFragment.showInstance(mapActivity, descriptionHtml);
             }
         });
     }
