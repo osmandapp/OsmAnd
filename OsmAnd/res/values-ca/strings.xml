@@ -2713,7 +2713,7 @@
     <string name="osmand_team">Equip OsmAnd</string>
     <string name="paid_app">Aplicació de pagament</string>
     <string name="paid_plugin">Connector de pagament</string>
-    <string name="welcome_to_open_beta_description">Les guies de viatge es basen en Viquiviatges. Proveu totes les funcions durant la fase oberta de proves, de franc. Després, les guies de viatge estaran disponibles per als subscriptors de OsmAnd Il·limitat i els propietaris de OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Les guies de viatge es basen en Viquiviatges. Proveu totes les funcions durant la fase oberta de proves, de franc.</string>
     <string name="wikivoyage_travel_guide_descr">Guies dels llocs més interessants del planeta, dins OsmAnd, sense cap connexió a Internet.</string>
     <string name="in_app_purchase">Compres des de l\'aplicació</string>
     <string name="in_app_purchase_desc">Pagament únic</string>

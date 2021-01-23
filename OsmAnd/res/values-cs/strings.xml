@@ -2769,7 +2769,7 @@
     <string name="default_render_descr">Obecný styl. Čisté vykreslování hustě osídlených měst. Obsahuje vrstevnice, trasy, kvalita povrchu cest, omezení přístupu, čísla cest, značení dle SAC, objekty pro vodní sporty.</string>
     <string name="travel_card_download_descr">Stáhněte si cestovní průvodce Wikivoyage a prohlížejte články o místech po celém světě bez připojení na internet.</string>
     <string name="start_editing_card_image_text">Bezplatný cestovní průvodce, který může upravovat každý.</string>
-    <string name="welcome_to_open_beta_description">Cestovní průvodci jsou nyní založené na Wikivoyage. Všechny jejich funkce můžete otestovat zdarma během beta testování. Poté budou zpřístupněny předplatitelům služby OsmAnd Live a uživatelům OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Cestovní průvodci jsou nyní založené na Wikivoyage. Všechny jejich funkce můžete otestovat zdarma během beta testování.</string>
     <string name="start_editing_card_description">Můžete (a měli byste) upravovat libovolný článek na Wikivoyage. Sdílejte znalosti, zkušenosti, talent a svoji pozornost.</string>
     <string name="ask_for_location_permission">Pro pokračování prosím udělte OsmAndu oprávnění pro přístup k poloze.</string>
     <string name="rendering_value_black_name">Černá</string>
