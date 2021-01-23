@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<!--	<item-->
-<!--		android:id="@+id/action_overview"-->
-<!--		android:icon="@drawable/ic_action_trail_overview"-->
-<!--		android:title="@string/shared_string_overview" />-->
+
+	<item
+		android:id="@+id/action_overview"
+		android:icon="@drawable/ic_action_trail_overview"
+		android:title="@string/shared_string_overview" />
 
 	<item
 		android:id="@+id/action_track"

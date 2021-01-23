@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="context_menu_edit_descr">Edit description</string>
+    <string name="context_menu_read_full">Read full</string>
     <string name="message_name_is_already_exists">The name is already exists</string>
     <string name="message_server_error">Server error: %1$s</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
