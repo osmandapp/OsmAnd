@@ -117,6 +117,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private TrackChartPoints trackChartPoints;
 
 	private int menuTitleHeight;
+	private String gpxTitle;
 
 	public enum TrackMenuType {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
@@ -162,6 +163,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 
+	@Override
+	public int getInitialMenuState() {
+		return MenuState.HEADER_ONLY;
+	}
+
 	public TrackDisplayHelper getDisplayHelper() {
 		return displayHelper;
 	}
@@ -186,6 +192,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 			}
 			displayHelper.setGpx(selectedGpxFile.getGpxFile());
+			String fileName = Algorithms.getFileWithoutDirs(getGpx().path);
+			gpxTitle = GpxUiHelper.getGpxTitle(fileName);
 		}
 	}
 
@@ -203,7 +211,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			headerIcon = view.findViewById(R.id.icon_view);
 
 			if (isPortrait()) {
-				updateCardsLayout();
+				View mainView = getMainView();
+				View topShadow = getTopShadow();
+				FrameLayout bottomContainer = getBottomContainer();
+				topShadow.setVisibility(View.VISIBLE);
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
 			} else {
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -220,39 +232,33 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		return view;
 	}
 
+	private void setHeaderTitle(String text, boolean iconVisibility) {
+		headerTitle.setText(text);
+		AndroidUiHelper.updateVisibility(headerIcon, iconVisibility);
+	}
+
 	private void updateHeader() {
 		ViewGroup headerContainer = (ViewGroup) routeMenuTopShadowAll;
-		if (overviewCard != null && overviewCard.getView() != null) {
-			headerContainer.removeView(overviewCard.getView());
-		}
-		if (menuType == TrackMenuType.OPTIONS) {
-			headerTitle.setText(menuType.titleId);
-			AndroidUiHelper.updateVisibility(headerIcon, false);
-		} else {
-			String fileName = Algorithms.getFileWithoutDirs(getGpx().path);
-			headerTitle.setText(GpxUiHelper.getGpxTitle(fileName));
-			AndroidUiHelper.updateVisibility(headerIcon, true);
-			if (menuType == TrackMenuType.OVERVIEW) {
-				if (overviewCard != null && overviewCard.getView() != null) {
-					ViewGroup parent = ((ViewGroup) overviewCard.getView().getParent());
-					if (parent != null) {
-						parent.removeView(overviewCard.getView());
-					}
-					headerContainer.addView(overviewCard.getView());
-				} else {
-					overviewCard = new OverviewCard(getMapActivity(), displayHelper, this);
-					overviewCard.setListener(this);
-					headerContainer.addView(overviewCard.build(getMapActivity()));
+		if (menuType == TrackMenuType.OVERVIEW) {
+			setHeaderTitle(gpxTitle, true);
+			if (overviewCard != null && overviewCard.getView() != null) {
+				ViewGroup parent = ((ViewGroup) overviewCard.getView().getParent());
+				if (parent != null) {
+					parent.removeView(overviewCard.getView());
 				}
+				headerContainer.addView(overviewCard.getView());
+			} else {
+				overviewCard = new OverviewCard(getMapActivity(), displayHelper, this);
+				overviewCard.setListener(this);
+				headerContainer.addView(overviewCard.build(getMapActivity()));
 			}
+		} else {
+			if (overviewCard != null && overviewCard.getView() != null) {
+				headerContainer.removeView(overviewCard.getView());
+			}
+			boolean isOptions = menuType == TrackMenuType.OPTIONS;
+			setHeaderTitle(isOptions ? app.getString(menuType.titleId) : gpxTitle, !isOptions);
 		}
-		runLayoutListener();
-		headerContainer.post(new Runnable() {
-			@Override
-			public void run() {
-				openMenuScreen(menuType == TrackMenuType.OVERVIEW ? MenuState.HEADER_ONLY : MenuState.HALF_SCREEN, false);
-			}
-		});
 	}
 
 	private void setupCards() {
@@ -573,7 +579,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	private void updateCardsLayout() {
+	/*private void updateCardsLayout() {
 		View mainView = getMainView();
 		if (mainView != null) {
 			View topShadow = getTopShadow();
@@ -586,7 +592,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
 			}
 		}
-	}
+	}*/
 
 	private void setupButtons(View view) {
 		ColorStateList navColorStateList = AndroidUtils.createBottomNavColorStateList(getContext(), isNightMode());
@@ -814,7 +820,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			Bundle args = new Bundle();
 			args.putString(TRACK_FILE_NAME, path);
 			args.putBoolean(CURRENT_RECORDING, showCurrentTrack);
-			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HALF_SCREEN);
+			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
 
 			TrackMenuFragment fragment = new TrackMenuFragment();
 			fragment.setArguments(args);
