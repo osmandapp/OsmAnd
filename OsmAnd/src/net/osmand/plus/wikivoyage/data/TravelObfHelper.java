@@ -404,6 +404,9 @@ public class TravelObfHelper implements TravelHelper {
 		Map<String, WikivoyageSearchResult> headerObjs = new HashMap<>();
 		if (parts != null && parts.length > 0) {
 			headers.addAll(Arrays.asList(parts));
+			if (!Algorithms.isEmpty(article.isParentOf)) {
+				headers.add(title);
+			}
 		}
 
 		for (String header : headers) {
