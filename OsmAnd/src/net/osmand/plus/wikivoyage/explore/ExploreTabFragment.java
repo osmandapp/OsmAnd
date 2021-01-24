@@ -28,6 +28,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
@@ -36,6 +37,7 @@ import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
 
 import java.io.IOException;
@@ -183,7 +185,11 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 						List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
 						for (TravelArticle article : popularArticles) {
-							items.add(new ArticleTravelCard(app, nightMode, article, fm));
+							if (article instanceof TravelGpx) {
+								items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, fm));
+							} else {
+								items.add(new ArticleTravelCard(app, nightMode, article, fm));
+							}
 						}
 					}
 				}
