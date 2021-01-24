@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -23,12 +29,6 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet.SELECTED_ENTRY_INDEX_KEY;
 
@@ -172,20 +172,19 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
 
 	private void setProfileColorToSeekBar() {
 		int color = ContextCompat.getColor(app, getAppMode().getIconColorInfo().getColor(nightMode));
-		int alpha = 70;
 
 		LayerDrawable seekBarProgressLayer =
 				(LayerDrawable) ContextCompat.getDrawable(app, R.drawable.seekbar_progress_announcement_time);
 
 		GradientDrawable background = (GradientDrawable) seekBarProgressLayer.findDrawableByLayerId(R.id.background);
 		background.setColor(color);
-		background.setAlpha(alpha);
+		background.setAlpha(70);
 
 		GradientDrawable progress = (GradientDrawable) seekBarProgressLayer.findDrawableByLayerId(R.id.progress);
 		progress.setColor(color);
 		Drawable clippedProgress = new ClipDrawable(progress, Gravity.CENTER_VERTICAL | Gravity.START, 1);
 
-		seekBarArrival.setProgressDrawable(new LayerDrawable(new Drawable[]{
+		seekBarArrival.setProgressDrawable(new LayerDrawable(new Drawable[] {
 				background, clippedProgress
 		}));
 
