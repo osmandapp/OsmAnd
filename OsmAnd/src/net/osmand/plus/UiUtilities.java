@@ -513,13 +513,13 @@ public class UiUtilities {
 		GradientDrawable background = new GradientDrawable();
 		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
 		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
-		GradientDrawable startButtonSharpCorner = new GradientDrawable();
-		startButtonSharpCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
+		GradientDrawable startButtonRoundedCorner = new GradientDrawable();
+		startButtonRoundedCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
 		GradientDrawable endButtonRoundedCorner = new GradientDrawable();
 		endButtonRoundedCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
 		GradientDrawable centerButtonSharpCorner = new GradientDrawable();
 		centerButtonSharpCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
-		setStartEndCenterRoundedCorner(roundedCorner, isLayoutRtl, startButtonSharpCorner, endButtonRoundedCorner, centerButtonSharpCorner);
+		setStartEndCenterRoundedCorner(roundedCorner, isLayoutRtl, startButtonRoundedCorner, endButtonRoundedCorner, centerButtonSharpCorner);
 
 		if (buttonType == CustomRadioButtonTypeGroup.START) {
 			if (isLayoutRtl) {
@@ -527,33 +527,57 @@ public class UiUtilities {
 			} else {
 				background.setCornerRadii(new float[]{roundedCorner, roundedCorner, 0, 0, 0, 0, roundedCorner, roundedCorner});
 			}
-			endButtonContainer.setBackground(endButtonRoundedCorner);
-			endButtonText.setTextColor(activeColor);
-			centerButtonContainer.setBackground(centerButtonSharpCorner);
-			centerButtonText.setTextColor(activeColor);
-			endButtonText.setTextColor(activeColor);
-			startButtonContainer.setBackgroundDrawable(background);
-			startButtonText.setTextColor(textColor);
-		} else if (buttonType == CustomRadioButtonTypeGroup.CENTER){
-			endButtonContainer.setBackground(endButtonRoundedCorner);
-			endButtonText.setTextColor(activeColor);
-			startButtonContainer.setBackground(startButtonSharpCorner);
-			startButtonText.setTextColor(activeColor);
-			endButtonText.setTextColor(activeColor);
+
+			if (endButtonContainer != null && centerButtonContainer != null) {
+				endButtonContainer.setBackground(endButtonRoundedCorner);
+				endButtonText.setTextColor(activeColor);
+				centerButtonContainer.setBackground(centerButtonSharpCorner);
+				centerButtonText.setTextColor(activeColor);
+				startButtonContainer.setBackgroundDrawable(background);
+				startButtonText.setTextColor(textColor);
+			} else if (centerButtonContainer != null) {
+				centerButtonContainer.setBackground(endButtonRoundedCorner);
+				centerButtonText.setTextColor(activeColor);
+				startButtonContainer.setBackgroundDrawable(background);
+				startButtonText.setTextColor(textColor);
+			} else if (endButtonContainer != null) {
+				endButtonContainer.setBackground(endButtonRoundedCorner);
+				endButtonText.setTextColor(activeColor);
+				startButtonContainer.setBackgroundDrawable(background);
+				startButtonText.setTextColor(textColor);
+			} else if (endButtonContainer == null && centerButtonContainer == null) {
+				background.setCornerRadii(new float[]{roundedCorner, roundedCorner, roundedCorner, roundedCorner, roundedCorner, roundedCorner, roundedCorner, roundedCorner});
+				startButtonContainer.setBackgroundDrawable(background);
+				startButtonText.setTextColor(textColor);
+			}
+
+		} else if (buttonType == CustomRadioButtonTypeGroup.CENTER) {
 			centerButtonContainer.setBackgroundDrawable(background);
 			centerButtonText.setTextColor(textColor);
+			startButtonContainer.setBackground(startButtonRoundedCorner);
+			startButtonText.setTextColor(activeColor);
+			if (endButtonContainer != null) {
+				endButtonContainer.setBackground(endButtonRoundedCorner);
+				endButtonText.setTextColor(activeColor);
+			} else {
+				endButtonRoundedCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
+				centerButtonContainer.setBackgroundDrawable(endButtonRoundedCorner);
+				centerButtonText.setTextColor(textColor);
+			}
 		} else {
 			if (isLayoutRtl) {
 				background.setCornerRadii(new float[]{roundedCorner, roundedCorner, 0, 0, 0, 0, roundedCorner, roundedCorner});
 			} else {
 				background.setCornerRadii(new float[]{0, 0, roundedCorner, roundedCorner, roundedCorner, roundedCorner, 0, 0});
 			}
+			startButtonContainer.setBackground(startButtonRoundedCorner);
+			startButtonText.setTextColor(activeColor);
 			endButtonContainer.setBackgroundDrawable(background);
 			endButtonText.setTextColor(textColor);
-			startButtonContainer.setBackground(startButtonSharpCorner);
-			startButtonText.setTextColor(activeColor);
-			centerButtonContainer.setBackground(centerButtonSharpCorner);
-			centerButtonText.setTextColor(activeColor);
+			if (centerButtonContainer != null) {
+				centerButtonContainer.setBackground(centerButtonSharpCorner);
+				centerButtonText.setTextColor(activeColor);
+			}
 		}
 	}
 

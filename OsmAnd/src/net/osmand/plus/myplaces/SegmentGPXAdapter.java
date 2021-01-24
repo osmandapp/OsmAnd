@@ -73,13 +73,7 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 
 		PagerSlidingTabStrip tabLayout = row.findViewById(R.id.sliding_tabs);
 		tabLayout.setTabBackground(R.color.color_transparent);
-		tabLayout.setIndicatorColorResource(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-		tabLayout.setIndicatorBgColorResource(nightMode ? R.color.divider_color_dark : R.color.divider_color_light);
-		tabLayout.setIndicatorHeight(AndroidUtils.dpToPx(context, 1f));
-		if (!nightMode) {
-			tabLayout.setTextColor(tabLayout.getIndicatorColor());
-			tabLayout.setTabInactiveTextColor(ContextCompat.getColor(row.getContext(), R.color.text_color_secondary_light));
-		}
+		tabLayout.setIndicatorHeight(AndroidUtils.dpToPx(context, 0));
 		tabLayout.setTextSize(AndroidUtils.spToPx(context, 12f));
 		tabLayout.setShouldExpand(true);
 		WrapContentHeightViewPager pager = row.findViewById(R.id.pager);

@@ -644,7 +644,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			type = UiUtilities.CustomRadioButtonTypeGroup.END;
 		}
 		View parent = (View) tab.getParent();
-		UiUtilities.updateCustomRadioButtonsGroup(app,parent , false, type);
+		UiUtilities.updateCustomRadioButtonsGroup(app, parent, false, type);
 
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) parent.getLayoutParams();
 		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);

@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-
+    <include layout="@layout/list_item_divider"/>
 
     <net.osmand.plus.views.controls.PagerSlidingTabStrip
         android:id="@+id/sliding_tabs"
