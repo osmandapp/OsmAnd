@@ -2186,7 +2186,7 @@
     <string name="update_is_available">Atualização disponível</string>
     <string name="download_file">Descarregar ficheiro</string>
     <string name="start_editing_card_image_text">O mundo livre guia de viagem, que qualquer pessoa pode editar.</string>
-    <string name="welcome_to_open_beta_description">Os guias de viagem estão atualmente baseados no Wikivoyage. Teste todos os recursos gratuitamente durante o teste aberto beta. Posteriormente os guias de viagem estarão disponíveis para assinantes do OsmAnd Unlimited e proprietários da OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Os guias de viagem estão atualmente baseados no Wikivoyage. Teste todos os recursos gratuitamente durante o teste aberto beta.</string>
     <string name="start_editing_card_description">Pode e deve editar qualquer artigo no Wikivoyage. Partilhe saber, experiência, talento e a sua atenção.</string>
     <string name="start_editing">Começar a editar</string>
     <string name="get_unlimited_access">Obter acesso ilimitado</string>

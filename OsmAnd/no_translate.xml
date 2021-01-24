@@ -12,7 +12,6 @@
     <string name="ga_api_key">UA-28342846-2</string>
     <string name="ga_dispatchPeriod">10</string>
     <string name="ga_debug">true</string>
-    <string name="versionFeatures">+play_market -amazon -blackberry</string>
     <string name="openstreetmap_copyright"><a href="https://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
     <string name="app_edition"></string>
     <string name="support_email">support@osmand.net</string>

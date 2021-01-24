@@ -19,7 +19,6 @@ public class ChoosePlanWikipediaDialogFragment extends ChoosePlanFreeBannerDialo
 
 	private final OsmAndFeature[] planTypeFeatures = {
 			OsmAndFeature.WIKIPEDIA_OFFLINE,
-			OsmAndFeature.WIKIVOYAGE_OFFLINE,
 			OsmAndFeature.UNLIMITED_DOWNLOADS,
 			OsmAndFeature.MONTHLY_MAP_UPDATES,
 	};

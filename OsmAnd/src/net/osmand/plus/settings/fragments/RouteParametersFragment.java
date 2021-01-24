@@ -171,15 +171,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private void setupNativePublicTransport() {
-		if (!Version.isBlackberry(app)) {
-			SwitchPreferenceEx setupNativePublicTransport = createSwitchPreferenceEx(settings.PT_SAFE_MODE.getId(),
-					R.string.use_native_pt, R.layout.preference_with_descr_dialog_and_switch);
-			setupNativePublicTransport.setDescription(getString(R.string.use_native_pt_desc));
-			setupNativePublicTransport.setSummaryOn(R.string.shared_string_enabled);
-			setupNativePublicTransport.setSummaryOff(R.string.shared_string_disabled);
-			setupNativePublicTransport.setIconSpaceReserved(true);
-			getPreferenceScreen().addPreference(setupNativePublicTransport);
-		}
+		SwitchPreferenceEx setupNativePublicTransport = createSwitchPreferenceEx(settings.PT_SAFE_MODE.getId(),
+				R.string.use_native_pt, R.layout.preference_with_descr_dialog_and_switch);
+		setupNativePublicTransport.setDescription(getString(R.string.use_native_pt_desc));
+		setupNativePublicTransport.setSummaryOn(R.string.shared_string_enabled);
+		setupNativePublicTransport.setSummaryOff(R.string.shared_string_disabled);
+		setupNativePublicTransport.setIconSpaceReserved(true);
+		getPreferenceScreen().addPreference(setupNativePublicTransport);
 	}
 
 	private void setupOsmLiveForRoutingPref() {

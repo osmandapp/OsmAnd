@@ -10,7 +10,7 @@
             android:value="fb792288460976727"/>
         <activity
             android:name="net.osmand.plus.activities.MapActivity"
-            android:theme="@style/FirstSplashScreenFreeDev"
+            android:theme="@style/FirstSplashScreenNightlyFree"
             tools:replace="android:theme"/>
         <service
             android:name="net.osmand.plus.NavigationService"

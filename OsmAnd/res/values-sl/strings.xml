@@ -2779,7 +2779,7 @@
     <string name="purchase_cancelled_dialog_descr">Obnovite naročilo za uporabo vseh zmožnosti programa:</string>
     <string name="maps_you_need_descr">Na osnovi shranjenih zaznamkov je priporočljivo prejeti zemljevide:</string>
     <string name="travel_card_download_descr">Prejmite popotniške vodnike Wikivoyage za pregled prispevkov različnih svetovnih krajev brez povezave na internet.</string>
-    <string name="welcome_to_open_beta_description">Popotniški vodniki so zasnovani po vsebinah Wikivoyage. Storitev je na voljo brezplačno med preizkušanjem delovanja različice beta. Po tem obdobju bodo vodniki na voljo le uporabnikom paketov OsmAnd Neomejeno in OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Popotniški vodniki so zasnovani po vsebinah Wikivoyage. Storitev je na voljo brezplačno med preizkušanjem delovanja različice beta.</string>
     <string name="start_editing_card_description">Vsakdo lahko (in tudi zaželeno je) ureja prispevke na WikiVoyage. Skupno znanje, izkušnje in mnenja povečajo kakovost vsebine.</string>
     <string name="welcome_to_open_beta">Dobrodošli v različici Open beta</string>
     <string name="wikivoyage_travel_guide_descr">Krajevno shranjeni vodniki po najbolj zanimivih krajih sveta, prikazani v programu OsmAnd, tudi na mestih, kjer ni povezave z internetom.</string>

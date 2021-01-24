@@ -17,7 +17,7 @@ public abstract class BaseTravelCard {
 	protected OsmandApplication app;
 	protected boolean nightMode;
 
-	public BaseTravelCard(OsmandApplication app, boolean nightMode) {
+	public BaseTravelCard(@NonNull OsmandApplication app, boolean nightMode) {
 		this.app = app;
 		this.nightMode = nightMode;
 	}

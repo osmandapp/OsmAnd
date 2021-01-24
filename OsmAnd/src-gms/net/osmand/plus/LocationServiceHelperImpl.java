@@ -131,15 +131,17 @@ public class LocationServiceHelperImpl extends LocationServiceHelper {
 	}
 
 	@Nullable
-	public net.osmand.Location getFirstTimeRunDefaultLocation() {
-		final net.osmand.Location[] location = {null};
-		/*
+	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable final LocationCallback locationCallback) {
+		if (locationCallback == null) {
+			return null;
+		}
 		try {
 			Task<Location> lastLocation = fusedLocationProviderClient.getLastLocation();
 			lastLocation.addOnSuccessListener(new OnSuccessListener<Location>() {
 				@Override
 				public void onSuccess(Location loc) {
-					location[0] = convertLocation(loc);
+					locationCallback.onLocationResult(loc != null
+							? Collections.singletonList(convertLocation(loc)) : Collections.<net.osmand.Location>emptyList() );
 				}
 			});
 		} catch (SecurityException e) {
@@ -147,8 +149,7 @@ public class LocationServiceHelperImpl extends LocationServiceHelper {
 		} catch (IllegalArgumentException e) {
 			LOG.debug("GPS location provider not available");
 		}
-		*/
-		return location[0];
+		return null;
 	}
 
 	@Nullable

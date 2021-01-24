@@ -954,17 +954,15 @@ public class SearchUICore {
 				break;
 			}
 			case COMPARE_AMENITY_TYPE_ADDITIONAL: {
-				if(o1.object instanceof AbstractPoiType && o2.object instanceof AbstractPoiType ) {
-					boolean additional1 = ((AbstractPoiType) o1.object).isAdditional();
-					boolean additional2 = ((AbstractPoiType) o2.object).isAdditional();
-					if (additional1 != additional2) {
-						// -1 - means 1st is less than 2nd
-						return additional1 ? 1 : -1;
-					}
+				boolean additional1 = o1.object instanceof AbstractPoiType && ((AbstractPoiType) o1.object).isAdditional();
+				boolean additional2 = o2.object instanceof AbstractPoiType && ((AbstractPoiType) o2.object).isAdditional();
+				if (additional1 != additional2) {
+					// -1 - means 1st is less than 2nd
+					return additional1 ? 1 : -1;
 				}
 				break;
 			}
-			case COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT: 
+			case COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT:
 				double ps1 = o1.parentSearchResult == null ? 0 : o1.parentSearchResult.getSearchDistance(c.loc);
 				double ps2 = o2.parentSearchResult == null ? 0 : o2.parentSearchResult.getSearchDistance(c.loc);
 				if (ps1 != ps2) {
@@ -1004,17 +1002,12 @@ public class SearchUICore {
 					String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
 
 					int cmp = 0;
-
-					if (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)) {
-						cmp = 1;
-					} else if (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2)) {
-						cmp = -1;
-					} 
-					
-					if (cmp != 0) {
-						return cmp;
+					boolean subtypeFilter1 = FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1);
+					boolean subtypeFilter2 = FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2);
+					if (subtypeFilter1 != subtypeFilter2) {
+						// to filter second
+						return subtypeFilter1 ? 1 : -1;
 					}
-
 					cmp = c.collator.compare(type1, type2);
 					if (cmp != 0) {
 						return cmp;
@@ -1047,12 +1040,17 @@ public class SearchUICore {
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
-			for(ResultCompareStep step : ResultCompareStep.values()) {
+			List<ResultCompareStep> steps = new ArrayList<>();
+			for (ResultCompareStep step : ResultCompareStep.values()) {
 				int r = step.compare(o1, o2, this);
-				if(r != 0) {
+				steps.add(step);
+				if (r != 0) {
+					// debug crashes and identify non-transitive comparision
+					// LOG.debug(String.format("%d: %s o1='%s' o2='%s'", r, steps, o1, o2));
 					return r;
 				}
 			}
+			// LOG.debug(String.format("EQUAL: o1='%s' o2='%s'", o1, o2));
 			return 0;
 		}
 

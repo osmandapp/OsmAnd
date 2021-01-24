@@ -2621,7 +2621,7 @@
     <string name="gpx_file_desc">GPX - sobib ekspordiks JOSM või teistesse OSM redaktoritesse.</string>
     <string name="osm_edits_export_desc">Ekspordi kas OSM märkmetena, huvipunktidena või mõlemana.</string>
     <string name="purchase_dialog_travel_description">Võrguühenduseta reisijuhi funktsioonide saamiseks osta üks järgmistest:</string>
-    <string name="welcome_to_open_beta_description">Reisijuhid põhinevad praegu Wikivoyage\'il. Testige beetaversiooni ajal kõiki funktsioone tasuta. Pärast seda on reisijuhid kättesaadavad piiranguteta OsmAnd tellijatele ja OsmAnd+ omanikele.</string>
+    <string name="welcome_to_open_beta_description">Reisijuhid põhinevad praegu Wikivoyage\'il. Testige beetaversiooni ajal kõiki funktsioone tasuta.</string>
     <string name="start_editing_card_description">Saate ja peaksite redigeerima kõiki artikleid Wikivoyage\'is. Jagage teadmisi, kogemusi, annet ja oma tähelepanu.</string>
     <string name="open_in_browser_wiki">Ava artikkel veebis</string>
     <string name="nautical_render_descr">Merel navigeerimiseks. Sisaldab poisid, tuletorne, jõeteid, mereteid ja tähiseid, sadamaid, meremärkide teenuseid ja sügavuskontuure.</string>
@@ -3946,4 +3946,6 @@
     <string name="reverse_all_points">Pööra kõik punktid ümber</string>
     <string name="profile_by_default_description">Vali rakenduse käivitamisel kasutatav profiil.</string>
     <string name="shared_string_last_used">Viimati kasutatud</string>
+    <string name="message_server_error">Serveri viga: %1$s</string>
+    <string name="message_name_is_already_exists">Selline nimi on juba olemas</string>
 </resources>

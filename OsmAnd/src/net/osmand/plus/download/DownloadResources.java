@@ -352,9 +352,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				continue;
 			}
 			if (ii.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE) {
-				if (InAppPurchaseHelper.isDepthContoursPurchased(app)
-						|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
-						|| nauticalMaps.size() == 0) {
+				if (InAppPurchaseHelper.isDepthContoursPurchased(app) || nauticalMaps.size() == 0) {
 					nauticalMaps.addItem(ii);
 				}
 				continue;
