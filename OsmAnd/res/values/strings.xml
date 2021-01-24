@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="delete_online_routing_engine">Delete this online routing engine?</string>
     <string name="message_name_is_already_exists">The name is already exists</string>
     <string name="message_server_error">Server error: %1$s</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
