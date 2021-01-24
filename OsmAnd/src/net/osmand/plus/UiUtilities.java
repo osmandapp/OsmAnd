@@ -560,7 +560,7 @@ public class UiUtilities {
 				endButtonContainer.setBackground(endButtonRoundedCorner);
 				endButtonText.setTextColor(activeColor);
 			} else {
-				endButtonRoundedCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
+				endButtonRoundedCorner.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
 				centerButtonContainer.setBackgroundDrawable(endButtonRoundedCorner);
 				centerButtonText.setTextColor(textColor);
 			}
