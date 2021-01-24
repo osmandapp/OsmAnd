@@ -31,11 +31,9 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.widgets.TextViewEx;
@@ -88,19 +86,12 @@ public class OverviewCard extends BaseCard {
 		directionsButton = view.findViewById(R.id.directions_button);
 		rvOverview = view.findViewById(R.id.recycler_overview);
 
-		MapContextMenu menu = mapActivity.getContextMenu();
-		TextView distanceText = (TextView) view.findViewById(R.id.distance);
-		ImageView direction = (ImageView) view.findViewById(R.id.direction);
-		UpdateLocationViewCache updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
-		app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, menu.getLatLon());
-
 		initShowButton(iconColorDef, iconColorPres);
 		initAppearanceButton(iconColorDef, iconColorPres);
 		if (fileAvailable) {
 			initEditButton(iconColorDef, iconColorPres);
 			initDirectionsButton(iconColorDef, iconColorPres);
 		}
-
 		initStatBlocks();
 	}
 

@@ -33,6 +33,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -42,10 +43,12 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.ContextMenuFragment;
@@ -54,6 +57,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.OpenGpxDetailsTask;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
@@ -96,7 +100,7 @@ import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
-		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener {
+		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OsmAndLocationListener {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
@@ -118,6 +122,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private int menuTitleHeight;
 	private String gpxTitle;
+	private UpdateLocationViewCache updateLocationViewCache;
+	private MapContextMenu menu;
+	private Location location = null;
 
 	public enum TrackMenuType {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
@@ -209,6 +216,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			routeMenuTopShadowAll = view.findViewById(R.id.route_menu_top_shadow_all);
 			headerTitle = view.findViewById(R.id.title);
 			headerIcon = view.findViewById(R.id.icon_view);
+			updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
+			menu = ((MapActivity) getActivity()).getContextMenu();
+			location = app.getLocationProvider().getLastKnownLocation();
 
 			if (isPortrait()) {
 				View mainView = getMainView();
@@ -338,6 +348,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity != null && trackChartPoints != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
 		}
+		startLocationUpdate();
 	}
 
 	@Override
@@ -347,6 +358,41 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
 		}
+		stopLocationUpdate();
+	}
+
+	@Override
+	public void updateLocation(final Location location) {
+		this.location = location;
+		getMyApplication().runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				updateDistanceDirection();
+			}
+		});
+	}
+
+	private void updateDistanceDirection() {
+		OsmandApplication app = getMyApplication();
+		FragmentActivity activity = getActivity();
+		View view = overviewCard.getView();
+		if (app != null && activity != null && view != null) {
+			TextView distanceText = (TextView) view.findViewById(R.id.distance);
+			ImageView direction = (ImageView) view.findViewById(R.id.direction);
+			app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, menu.getLatLon());
+		}
+	}
+
+	private void startLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		app.getLocationProvider().addLocationListener(this);
+		location = app.getLocationProvider().getLastKnownLocation();
+		updateLocation(location);
+	}
+
+	private void stopLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		app.getLocationProvider().removeLocationListener(this);
 	}
 
 	@Override
