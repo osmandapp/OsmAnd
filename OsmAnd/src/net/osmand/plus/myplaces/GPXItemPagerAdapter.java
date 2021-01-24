@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -23,6 +24,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -78,7 +80,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private boolean chartClicked;
 
 
-	public GPXItemPagerAdapter(@NonNull PagerSlidingTabStrip tabs,
+	public GPXItemPagerAdapter(@NonNull final PagerSlidingTabStrip tabs,
 							   @NonNull GpxDisplayItem gpxItem,
 							   @NonNull TrackDisplayHelper displayHelper,
 							   @NonNull SegmentActionsListener actionsListener) {
@@ -89,6 +91,34 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		this.actionsListener = actionsListener;
 		app = (OsmandApplication) tabs.getContext().getApplicationContext();
 		iconsCache = app.getUIUtilities();
+
+		tabs.setOnPageChangeListener(new OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int arg0) {
+				UiUtilities.CustomRadioButtonTypeGroup type;
+				if (arg0 == 0) {
+					type = UiUtilities.CustomRadioButtonTypeGroup.START;
+				} else if (arg0 == 1) {
+					type = UiUtilities.CustomRadioButtonTypeGroup.CENTER;
+				} else {
+					type = UiUtilities.CustomRadioButtonTypeGroup.END;
+				}
+
+				View parent = (View) tabs.getChildAt(0);
+				UiUtilities.updateCustomRadioButtonsGroup(app, parent, false, type);
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+
+			}
+		});
+
 		fetchTabTypes();
 	}
 
@@ -588,7 +618,15 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	@Override
 	public View getCustomTabView(@NonNull ViewGroup parent, int position) {
-		View tab = LayoutInflater.from(parent.getContext()).inflate(R.layout.gpx_tab, parent, false);
+		int layoutId;
+		if (position == 0) {
+			layoutId = R.layout.left_button_container;
+		} else if (position == 1) {
+			layoutId = R.layout.center_button_container;
+		} else {
+			layoutId = R.layout.right_button_container;
+		}
+		View tab = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
 		tab.setTag(tabTypes[position].name());
 		deselect(tab);
 		return tab;
@@ -597,29 +635,25 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	@Override
 	public void select(View tab) {
 		GPXTabItemType tabType = GPXTabItemType.valueOf((String) tab.getTag());
-		ImageView img = tab.findViewById(R.id.tab_image);
-		switch (tabs.getTabSelectionType()) {
-			case ALPHA:
-				img.setAlpha(tabs.getTabTextSelectedAlpha());
-				break;
-			case SOLID_COLOR:
-				img.setImageDrawable(iconsCache.getPaintedIcon(tabType.getIconId(), tabs.getTextColor()));
-				break;
+		UiUtilities.CustomRadioButtonTypeGroup type;
+		if (tabType == GPXTabItemType.GPX_TAB_ITEM_GENERAL) {
+			type = UiUtilities.CustomRadioButtonTypeGroup.START;
+		} else if (tabType == GPXTabItemType.GPX_TAB_ITEM_ALTITUDE) {
+			type = UiUtilities.CustomRadioButtonTypeGroup.CENTER;
+		} else {
+			type = UiUtilities.CustomRadioButtonTypeGroup.END;
 		}
+		View parent = (View) tab.getParent();
+		UiUtilities.updateCustomRadioButtonsGroup(app,parent , false, type);
+
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) parent.getLayoutParams();
+		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int containerMargin = app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_margin_small);
+		AndroidUtils.setMargins(params, contentPadding, containerMargin, contentPadding, containerMargin);
 	}
 
 	@Override
 	public void deselect(View tab) {
-		GPXTabItemType tabType = GPXTabItemType.valueOf((String) tab.getTag());
-		ImageView img = tab.findViewById(R.id.tab_image);
-		switch (tabs.getTabSelectionType()) {
-			case ALPHA:
-				img.setAlpha(tabs.getTabTextAlpha());
-				break;
-			case SOLID_COLOR:
-				img.setImageDrawable(iconsCache.getPaintedIcon(tabType.getIconId(), tabs.getTabInactiveTextColor()));
-				break;
-		}
 	}
 
 	@Override

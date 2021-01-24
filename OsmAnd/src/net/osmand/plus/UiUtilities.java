@@ -90,6 +90,12 @@ public class UiUtilities {
 		END,
 	}
 
+	public enum CustomRadioButtonTypeGroup {
+		START,
+		CENTER,
+		END,
+	}
+
 	public UiUtilities(OsmandApplication app) {
 		this.app = app;
 	}
@@ -482,6 +488,87 @@ public class UiUtilities {
 			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			startButtonText.setTextColor(activeColor);
 		}
+	}
+
+	public static void updateCustomRadioButtonsGroup(Context app, View buttonsView, boolean nightMode,
+													 CustomRadioButtonTypeGroup buttonType) {
+		int activeColor = ContextCompat.getColor(app, nightMode
+				? R.color.active_color_primary_dark
+				: R.color.active_color_primary_light);
+		int inActiveColor = ContextCompat.getColor(app, nightMode
+				? R.color.text_color_secondary_dark
+				: R.color.text_color_secondary_light);
+		int textColor = ContextCompat.getColor(app, nightMode
+				? R.color.text_color_primary_dark
+				: R.color.text_color_primary_light);
+		int roundedCorner = AndroidUtils.dpToPx(app, 4);
+		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
+
+		TextView startButtonText = buttonsView.findViewById(R.id.left_button);
+		View startButtonContainer = buttonsView.findViewById(R.id.left_button_container);
+		TextView centerButtonText = buttonsView.findViewById(R.id.center_button);
+		View centerButtonContainer = buttonsView.findViewById(R.id.center_button_container);
+		TextView endButtonText = buttonsView.findViewById(R.id.right_button);
+		View endButtonContainer = buttonsView.findViewById(R.id.right_button_container);
+		GradientDrawable background = new GradientDrawable();
+		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
+		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
+		GradientDrawable startButtonSharpCorner = new GradientDrawable();
+		startButtonSharpCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
+		GradientDrawable endButtonRoundedCorner = new GradientDrawable();
+		endButtonRoundedCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
+		GradientDrawable centerButtonSharpCorner = new GradientDrawable();
+		centerButtonSharpCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
+		setStartEndCenterRoundedCorner(roundedCorner, isLayoutRtl, startButtonSharpCorner, endButtonRoundedCorner, centerButtonSharpCorner);
+
+		if (buttonType == CustomRadioButtonTypeGroup.START) {
+			if (isLayoutRtl) {
+				background.setCornerRadii(new float[]{0, 0, roundedCorner, roundedCorner, roundedCorner, roundedCorner, 0, 0});
+			} else {
+				background.setCornerRadii(new float[]{roundedCorner, roundedCorner, 0, 0, 0, 0, roundedCorner, roundedCorner});
+			}
+			endButtonContainer.setBackground(endButtonRoundedCorner);
+			endButtonText.setTextColor(activeColor);
+			centerButtonContainer.setBackground(centerButtonSharpCorner);
+			centerButtonText.setTextColor(activeColor);
+			endButtonText.setTextColor(activeColor);
+			startButtonContainer.setBackgroundDrawable(background);
+			startButtonText.setTextColor(textColor);
+		} else if (buttonType == CustomRadioButtonTypeGroup.CENTER){
+			endButtonContainer.setBackground(endButtonRoundedCorner);
+			endButtonText.setTextColor(activeColor);
+			startButtonContainer.setBackground(startButtonSharpCorner);
+			startButtonText.setTextColor(activeColor);
+			endButtonText.setTextColor(activeColor);
+			centerButtonContainer.setBackgroundDrawable(background);
+			centerButtonText.setTextColor(textColor);
+		} else {
+			if (isLayoutRtl) {
+				background.setCornerRadii(new float[]{roundedCorner, roundedCorner, 0, 0, 0, 0, roundedCorner, roundedCorner});
+			} else {
+				background.setCornerRadii(new float[]{0, 0, roundedCorner, roundedCorner, roundedCorner, roundedCorner, 0, 0});
+			}
+			endButtonContainer.setBackgroundDrawable(background);
+			endButtonText.setTextColor(textColor);
+			startButtonContainer.setBackground(startButtonSharpCorner);
+			startButtonText.setTextColor(activeColor);
+			centerButtonContainer.setBackground(centerButtonSharpCorner);
+			centerButtonText.setTextColor(activeColor);
+		}
+	}
+
+	private static void setStartEndCenterRoundedCorner(int roundedCorner, boolean isLayoutRtl, GradientDrawable startButtonRoundedCorner, GradientDrawable endButtonRoundedCorner, GradientDrawable centerButtonSharpCorner) {
+		if (isLayoutRtl) {
+			startButtonRoundedCorner.setCornerRadii(new float[]{0, 0, roundedCorner, roundedCorner, roundedCorner, roundedCorner, 0, 0});
+		} else {
+			startButtonRoundedCorner.setCornerRadii(new float[]{roundedCorner, roundedCorner, 0, 0, 0, 0, roundedCorner, roundedCorner});
+		}
+		if (isLayoutRtl) {
+			endButtonRoundedCorner.setCornerRadii(new float[]{roundedCorner, roundedCorner, 0, 0, 0, 0, roundedCorner, roundedCorner});
+		} else {
+			endButtonRoundedCorner.setCornerRadii(new float[]{0, 0, roundedCorner, roundedCorner, roundedCorner, roundedCorner, 0, 0});
+		}
+		centerButtonSharpCorner.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
 	}
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
