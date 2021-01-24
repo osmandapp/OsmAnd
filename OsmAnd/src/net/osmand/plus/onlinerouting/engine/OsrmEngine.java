@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
+import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.util.GeoPolylineParserUtil;
 
@@ -60,15 +61,17 @@ public class OsrmEngine extends OnlineRoutingEngine {
 		}
 		sb.append('?');
 		sb.append("overview=full");
+		sb.append('&').append("steps=true");
 	}
 
 	@NonNull
 	@Override
-	public List<LatLon> parseServerResponse(@NonNull String content) throws JSONException {
+	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                 boolean leftSideNavigation) throws JSONException {
 		JSONObject obj = new JSONObject(content);
-		return GeoPolylineParserUtil.parse(
-				obj.getJSONArray("routes").getJSONObject(0).getString("geometry"),
-				GeoPolylineParserUtil.PRECISION_5);
+		String encoded = obj.getJSONArray("routes").getJSONObject(0).getString("geometry");
+		List<LatLon> route = GeoPolylineParserUtil.parse(encoded, GeoPolylineParserUtil.PRECISION_5);
+		return new OnlineRoutingResponse(route, null);
 	}
 
 	@Override

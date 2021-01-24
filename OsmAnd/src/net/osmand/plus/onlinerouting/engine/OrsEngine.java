@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
+import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
 
 import org.json.JSONArray;
@@ -77,7 +78,8 @@ public class OrsEngine extends OnlineRoutingEngine {
 
 	@NonNull
 	@Override
-	public List<LatLon> parseServerResponse(@NonNull String content) throws JSONException {
+	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                 boolean leftSideNavigation) throws JSONException {
 		JSONObject obj = new JSONObject(content);
 		JSONArray array = obj.getJSONArray("features").getJSONObject(0)
 				.getJSONObject("geometry").getJSONArray("coordinates");
@@ -88,7 +90,7 @@ public class OrsEngine extends OnlineRoutingEngine {
 			double lat = Double.parseDouble(point.getString(1));
 			track.add(new LatLon(lat, lon));
 		}
-		return track;
+		return new OnlineRoutingResponse(track, null);
 	}
 
 	@Override

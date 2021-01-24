@@ -711,7 +711,7 @@ public class RouteCalculationResult {
 		if (directions != null && directions.size() > 1) {
 			for (int i = 1; i < directions.size();) {
 				RouteDirectionInfo r = directions.get(i);
-				if (r.getTurnType().getValue() == TurnType.C) {
+				if (r.getTurnType() != null && r.getTurnType().getValue() == TurnType.C) {
 					RouteDirectionInfo prev = directions.get(i - 1);
 					prev.setAverageSpeed((prev.distance + r.distance)
 							/ (prev.distance / prev.getAverageSpeed() + r.distance / r.getAverageSpeed()));

@@ -21,6 +21,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -1203,20 +1204,20 @@ public class RouteProvider {
 		OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
 		String stringKey = params.mode.getRoutingProfile();
 		OnlineRoutingEngine engine = helper.getEngineByKey(stringKey);
-		List<LatLon> route = null;
+		OnlineRoutingResponse response = null;
 		if (engine != null) {
-			route = helper.calculateRouteOnline(engine, getFullPathFromParams(params));
+			response = helper.calculateRouteOnline(engine, getFullPathFromParams(params), params.leftSide);
 		}
-		if (!Algorithms.isEmpty(route)) {
+		if (response != null && !Algorithms.isEmpty(response.getRoute())) {
 			List<Location> res = new ArrayList<>();
-			for (LatLon pt : route) {
+			for (LatLon pt : response.getRoute()) {
 				WptPt wpt = new WptPt();
 				wpt.lat = pt.getLatitude();
 				wpt.lon = pt.getLongitude();
 				res.add(createLocation(wpt));
 			}
 			params.intermediates = null;
-			return new RouteCalculationResult(res, null, params, null, true);
+			return new RouteCalculationResult(res, response.getDirections(), params, null, true);
 		} else {
 			return new RouteCalculationResult("Route is empty");
 		}

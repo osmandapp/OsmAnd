@@ -9,6 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
+import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.util.Algorithms;
 
@@ -91,7 +92,8 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	                                    @NonNull List<LatLon> path);
 
 	@NonNull
-	public abstract List<LatLon> parseServerResponse(@NonNull String content) throws JSONException;
+	public abstract OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                          boolean leftSideNavigation) throws JSONException;
 
 	@NonNull
 	public abstract String getStandardUrl();
