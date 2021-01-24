@@ -130,7 +130,7 @@ public class TravelObfHelper implements TravelHelper {
 	@Nullable
 	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang, boolean readPoints) {
 		TravelArticle article = null;
-		Map<String, TravelArticle> articles = readArticles(file, amenity, readPoints);
+		Map<String, TravelArticle> articles = readArticles(file, amenity, false);
 		if (!Algorithms.isEmpty(articles)) {
 			TravelArticleIdentifier newArticleId = articles.values().iterator().next().generateIdentifier();
 			cachedArticles.put(newArticleId, articles);
@@ -536,8 +536,7 @@ public class TravelObfHelper implements TravelHelper {
 
 							@Override
 							public boolean publish(Amenity amenity) {
-								if (Algorithms.stringsEqual(articleId.routeId, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID, null)))
-										&& Algorithms.stringsEqual(articleId.routeSource, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE, null))) || isDbArticle) {
+								if (Algorithms.stringsEqual(articleId.routeId, Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID, null))) || isDbArticle) {
 									amenities.add(amenity);
 									done = true;
 								}
@@ -552,7 +551,7 @@ public class TravelObfHelper implements TravelHelper {
 
 				if (!Double.isNaN(articleId.lat)) {
 					req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS);
-					if (!Algorithms.isEmpty(articleId.routeId)) {
+					if (!Algorithms.isEmpty(articleId.title)) {
 						reader.searchPoiByName(req);
 					} else {
 						reader.searchPoi(req);
