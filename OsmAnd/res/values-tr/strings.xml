@@ -2839,7 +2839,7 @@
     <string name="update_is_available">Güncelleme mevcut</string>
     <string name="download_file">Dosyayı indir</string>
     <string name="start_editing_card_image_text">Herkesin düzenleyebileceği ücretsiz dünya çapında seyahat rehberi.</string>
-    <string name="welcome_to_open_beta_description">Seyahat rehberleri şu anda Wikivoyage\'ı temel almaktadır. Açık beta testi sırasında tüm özellikleri ücretsiz test edin. Daha sonra seyahat rehberleri OsmAnd Unlimited aboneleri ve OsmAnd+ sahipleri için mevcut olacaktır.</string>
+    <string name="welcome_to_open_beta_description">Seyahat rehberleri şu anda Wikivoyage\'ı temel almaktadır. Açık beta testi sırasında tüm özellikleri ücretsiz test edin.</string>
     <string name="start_editing_card_description">Wikivoyage üzerindeki herhangi bir makaleyi düzenleyebilirsiniz. Bilgi, deneyim, yetenek ve dikkatinizi paylaşın.</string>
     <string name="start_editing">Düzenlemeye başla</string>
     <string name="welcome_to_open_beta">Açık betaya hoş geldiniz</string>

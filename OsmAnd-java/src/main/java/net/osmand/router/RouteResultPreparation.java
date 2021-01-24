@@ -1216,9 +1216,15 @@ public class RouteResultPreparation {
 		TurnType t = TurnType.getExitTurn(exit, 0, leftSide);
 		// usually covers more than expected
 		float turnAngleBasedOnOutRoads = (float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd());
-		// usually covers less than expected
-		float turnAngleBasedOnCircle = (float) -MapUtils.degreesDiff(firstRoundabout.getBearingBegin(), lastRoundabout.getBearingEnd() + 180);
-		if(Math.abs(turnAngleBasedOnOutRoads - turnAngleBasedOnCircle) > 180) {
+		// Angle based on circle method tries 
+		// 1. to calculate antinormal to roundabout circle on roundabout entrance and 
+		// 2. normal to roundabout circle on roundabout exit
+		// 3. calculate angle difference
+		// This method doesn't work if you go from S to N touching only 1 point of roundabout, 
+		// but it is very important to identify very sharp or very large angle to understand did you pass whole roundabout or small entrance
+		float turnAngleBasedOnCircle = (float) MapUtils.degreesDiff(firstRoundabout.getBearingBegin(), lastRoundabout.getBearingEnd() + 180);
+		if (Math.abs(turnAngleBasedOnOutRoads) > 120) {
+			// correctly identify if angle is +- 180, so we approach from left or right side
 			t.setTurnAngle(turnAngleBasedOnCircle) ;
 		} else {
 			t.setTurnAngle(turnAngleBasedOnOutRoads) ;

@@ -2704,7 +2704,7 @@
     <string name="update_is_available">有更新可用</string>
     <string name="download_file">下載檔案</string>
     <string name="start_editing_card_image_text">人人都可編輯的自由全球旅行指南。</string>
-    <string name="welcome_to_open_beta_description">目前旅遊指南是基於維基導遊。在公開測試期間，測試所有的功能為免費。在這之後，旅遊指南功能將只提供給 OsmAnd Unlimited 的訂戶與 OsmAnd+ 的擁有者。</string>
+    <string name="welcome_to_open_beta_description">目前旅遊指南是基於維基導遊。在公開測試期間，測試所有的功能為免費。</string>
     <string name="start_editing_card_description">您可以也應該在維基導遊上編輯任何文章。分享知識、經驗、才能與您關心的東西。</string>
     <string name="start_editing">開始編輯</string>
     <string name="get_unlimited_access">取得無限制的存取</string>

@@ -27,6 +27,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_half"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
 		android:lineSpacingMultiplier="1.1"
@@ -70,8 +71,6 @@
 		android:maxHeight="2dp"
 		android:paddingTop="11dp"
 		android:paddingBottom="11dp"
-		android:progressDrawable="@drawable/seekbar_progress_announcement_time"
-		android:thumb="@drawable/seekbar_thumb_announcement_time"
 		osmand:tickMark="@drawable/seekbar_tickmark_announcement_time"
 		tools:max="3"
 		tools:progress="1" />

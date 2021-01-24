@@ -2673,7 +2673,7 @@
     <string name="maps_you_need_descr">Baseado nos artigos que você marcou, recomendamos você baixar os seguintes mapas:</string>
     <string name="maps_you_need">Mapas que você precisa</string>
     <string name="travel_card_download_descr">Baixe os guias de viagem Wikivoyage para ver artigos sobre lugares ao redor do mundo sem conexão à Internet.</string>
-    <string name="welcome_to_open_beta_description">Os guias de viagem atualmente baseiam-se no Wikivoyage. Teste todos os recursos durante o teste beta aberto, de graça. Depois, os guias estarão disponíveis para assinantes OsmAnd Unlimited e proprietários do OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Os guias de viagem atualmente baseiam-se no Wikivoyage. Teste todos os recursos durante o teste beta aberto, de graça.</string>
     <string name="download_wikipedia_description">Baixe artigos da Wikipédia por %1$s para lê-los offline.</string>
     <string name="wiki_article_search_text">Procurando o artigo wiki correspondente</string>
     <string name="shared_string_bookmark">Marcar</string>

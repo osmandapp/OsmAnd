@@ -1189,7 +1189,7 @@
 	<string name="update_is_available">Update available</string>
 	<string name="download_file">Download file</string>
     <string name="start_editing_card_image_text">The free worldwide travel guide anyone can edit.</string>
-    <string name="welcome_to_open_beta_description">Travel guides are currently based on Wikivoyage. Test all features during open beta testing for free. Afterwards, travel guides will be available to subscribers of OsmAnd Unlimited and owners of OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Travel guides are currently based on Wikivoyage. Test all features during open beta testing for free.</string>
     <string name="start_editing_card_description">You can and should edit any article on Wikivoyage. Share knowledge, experience, talent, and your attention.</string>
     <string name="start_editing">Start editing</string>
     <string name="get_unlimited_access">Get unlimited access</string>

@@ -2,6 +2,7 @@ package net.osmand.aidlapi;
 
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.SetMapLocationParams;
+import net.osmand.aidlapi.map.SetLocationParams;
 
 import net.osmand.aidlapi.favorite.group.AFavoriteGroup;
 import net.osmand.aidlapi.favorite.group.AddFavoriteGroupParams;
@@ -901,4 +902,6 @@ interface IOsmAndAidlInterface {
     boolean addRoadBlock(in AddBlockedRoadParams params);
 
     boolean removeRoadBlock(in RemoveBlockedRoadParams params);
+
+    boolean setLocation(in SetLocationParams params);
 }
