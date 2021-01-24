@@ -2710,7 +2710,7 @@
     <string name="update_is_available">Ĝisdatigo disponeblas</string>
     <string name="download_file">Elŝuti dosieron</string>
     <string name="start_editing_card_image_text">Senpaga/libera vojaĝ-gvidilo redaktebla de ĉiu.</string>
-    <string name="welcome_to_open_beta_description">Vojaĝaj gvidiloj baziĝas sur Vikivojaĝo. Provu ĉiujn eblojn dum beta-testado senpage. Poste vojaĝaj gvidiloj estos disponeblaj al abonantoj de OsmAnd Unlimited kaj aĉetintoj de OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Vojaĝaj gvidiloj baziĝas sur Vikivojaĝo. Provu ĉiujn eblojn dum beta-testado senpage.</string>
     <string name="start_editing_card_description">Vi povas (kaj bonvole fari tion) redakti iujn ajn artikolojn de Vikivojaĝo. Kunhavigu vian scion, sperton, talenton kaj prizorgon.</string>
     <string name="start_editing">Komenci redakti</string>
     <string name="get_unlimited_access">Akiri senliman atingon</string>
@@ -3989,4 +3989,15 @@
     <string name="routing_engine_vehicle_type_cycling_road">Ŝosea biciklado</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Kutima biciklado</string>
     <string name="routing_engine_vehicle_type_hgv">Peza kamiono</string>
+    <string name="shared_string_sec">s</string>
+    <string name="announcement_time_passing">Pasado</string>
+    <string name="announcement_time_approach">Alproksimiĝado</string>
+    <string name="announcement_time_prepare_long">Longa preparado</string>
+    <string name="announcement_time_prepare">Preparado</string>
+    <string name="announcement_time_off_route">Devojiĝo de kurso</string>
+    <string name="announcement_time_arrive">Atingo al celo</string>
+    <string name="shared_string_turn">Turno</string>
+    <string name="announcement_time_intervals">Interspacoj distancaj kaj tempaj</string>
+    <string name="announcement_time_descr">Tempo de anonco de diversaj voĉaj sciigoj dependas de ilia specoj, nuna naviga kaj implicita naviga rapido.</string>
+    <string name="announcement_time_title">Tempo de anonco</string>
 </resources>

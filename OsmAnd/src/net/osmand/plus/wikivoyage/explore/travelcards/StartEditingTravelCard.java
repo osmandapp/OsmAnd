@@ -1,13 +1,12 @@
 package net.osmand.plus.wikivoyage.explore.travelcards;
 
-import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
@@ -18,11 +17,11 @@ public class StartEditingTravelCard extends BaseTravelCard {
 
 	public static final int TYPE = 1;
 
-	private Context context;
+	private final FragmentActivity activity;
 
-	public StartEditingTravelCard(OsmandApplication app, Activity context, boolean nightMode) {
-		super(app, nightMode);
-		this.context = context;
+	public StartEditingTravelCard(@NonNull FragmentActivity activity, boolean nightMode) {
+		super((OsmandApplication) activity.getApplication(), nightMode);
+		this.activity = activity;
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class StartEditingTravelCard extends BaseTravelCard {
 			holder.button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					WikipediaDialogFragment.showFullArticle(context,
+					WikipediaDialogFragment.showFullArticle(activity,
 							Uri.parse("https://" + app.getLanguage().toLowerCase() + ".m.wikivoyage.org"), nightMode);
 				}
 			});

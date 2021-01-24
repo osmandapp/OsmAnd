@@ -2724,7 +2724,7 @@
     <string name="update_is_available">Je dostupná aktualizácia</string>
     <string name="download_file">Stiahnuť súbor</string>
     <string name="start_editing_card_image_text">Voľný cestovný sprievodca po svete, ktorý môže upravovať každý.</string>
-    <string name="welcome_to_open_beta_description">Cestovní sprievodcovia sú založení na Wikivoyage. Vyskúšajte všetky funkcie počas otvoreného betatestovania zadarmo. Potom budú cestovní sprievodcovia dostupní predplatiteľom Neobmedzeného OsmAnd a používateľom OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Cestovní sprievodcovia sú založení na Wikivoyage. Vyskúšajte všetky funkcie počas otvoreného betatestovania zadarmo.</string>
     <string name="start_editing_card_description">Môžete upravovať články na Wikivoyage. Zdieľajte znalosti, skúsenosti, talent a vašu pozornosť.</string>
     <string name="start_editing">Začať upravovať</string>
     <string name="welcome_to_open_beta">Vitajte v otvorenej beta verzii</string>
