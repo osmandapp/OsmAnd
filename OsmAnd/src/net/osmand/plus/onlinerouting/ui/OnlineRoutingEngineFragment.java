@@ -12,7 +12,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.FrameLayout;
@@ -44,9 +43,9 @@ import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
 import net.osmand.plus.onlinerouting.VehicleType;
-import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
+import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
@@ -703,90 +702,85 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void showShadowBelowButtons() {
-		if (onScroll != null) {
-			scrollView.getViewTreeObserver().addOnScrollChangedListener(onScroll);
-		} else {
-			initShowShadowOnScrollListener();
-			showShadowBelowButtons();
-		}
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(getShowShadowOnScrollListener());
 	}
 
 	private void showButtonsAboveKeyboard() {
-		if (onGlobalLayout != null) {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-				view.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayout);
-			}
-		} else {
-			initShowButtonsOnGlobalListener();
-			showButtonsAboveKeyboard();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+			view.getViewTreeObserver().addOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
 		}
 	}
 
-	private void initShowShadowOnScrollListener() {
-		onScroll = new OnScrollChangedListener() {
-			@Override
-			public void onScrollChanged() {
-				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-				if (scrollToBottomAvailable) {
-					showShadowButton();
-				} else {
-					hideShadowButton();
+	private OnScrollChangedListener getShowShadowOnScrollListener() {
+		if (onScroll == null) {
+			onScroll = new OnScrollChangedListener() {
+				@Override
+				public void onScrollChanged() {
+					boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+					if (scrollToBottomAvailable) {
+						showShadowButton();
+					} else {
+						hideShadowButton();
+					}
 				}
-			}
-		};
+			};
+		}
+		return onScroll;
 	}
 
-	private void initShowButtonsOnGlobalListener() {
-		onGlobalLayout = new ViewTreeObserver.OnGlobalLayoutListener() {
-			private int layoutHeightPrevious;
-			private int layoutHeightMin;
+	private OnGlobalLayoutListener getShowButtonsOnGlobalListener() {
+		if (onGlobalLayout == null) {
+			onGlobalLayout = new OnGlobalLayoutListener() {
+				private int layoutHeightPrevious;
+				private int layoutHeightMin;
 
-			@Override
-			public void onGlobalLayout() {
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				} else {
-					view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-				}
-
-				Rect visibleDisplayFrame = new Rect();
-				view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-				int layoutHeight = visibleDisplayFrame.bottom;
-
-				if (layoutHeight < layoutHeightPrevious) {
-					isKeyboardShown = true;
-					layoutHeightMin = layoutHeight;
-				} else {
-					isKeyboardShown = layoutHeight == layoutHeightMin;
-				}
-
-				if (layoutHeight != layoutHeightPrevious) {
-					FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
-					rootViewLayout.height = layoutHeight;
-					view.requestLayout();
-					layoutHeightPrevious = layoutHeight;
-				}
-
-				view.post(new Runnable() {
-					@Override
-					public void run() {
-						view.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayout);
+				@Override
+				public void onGlobalLayout() {
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					} else {
+						view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 					}
-				});
 
-			}
-		};
+					Rect visibleDisplayFrame = new Rect();
+					view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
+					int layoutHeight = visibleDisplayFrame.bottom;
+
+					if (layoutHeight < layoutHeightPrevious) {
+						isKeyboardShown = true;
+						layoutHeightMin = layoutHeight;
+					} else {
+						isKeyboardShown = layoutHeight == layoutHeightMin;
+					}
+
+					if (layoutHeight != layoutHeightPrevious) {
+						FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
+						rootViewLayout.height = layoutHeight;
+						view.requestLayout();
+						layoutHeightPrevious = layoutHeight;
+					}
+
+					view.post(new Runnable() {
+						@Override
+						public void run() {
+							view.getViewTreeObserver().addOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
+						}
+					});
+				}
+			};
+		}
+		return onGlobalLayout;
 	}
 
 	private void removeOnScrollListener() {
-		scrollView.getViewTreeObserver().removeOnScrollChangedListener(onScroll);
+		scrollView.getViewTreeObserver().removeOnScrollChangedListener(getShowShadowOnScrollListener());
 	}
 
 	private void removeOnGlobalLayoutListener() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			view.getViewTreeObserver().removeOnGlobalLayoutListener(onGlobalLayout);
+			view.getViewTreeObserver().removeOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
 		} else {
-			view.getViewTreeObserver().removeGlobalOnLayoutListener(onGlobalLayout);
+			view.getViewTreeObserver().removeGlobalOnLayoutListener(getShowButtonsOnGlobalListener());
 		}
 	}
 

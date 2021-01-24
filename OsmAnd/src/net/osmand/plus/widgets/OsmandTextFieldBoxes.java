@@ -29,5 +29,4 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 		int paddingH = getResources().getDimensionPixelSize(R.dimen.route_info_card_details_margin);
 		inputLayout.setPadding(0, paddingH, 0, paddingH);
 	}
-
 }
