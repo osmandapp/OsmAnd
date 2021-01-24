@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -25,6 +26,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 
@@ -58,13 +60,6 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		setupToolbar(view);
 		setupImage(view);
 		setupWebView(view);
-
-		view.findViewById(R.id.btn_edit).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				GpxEditDescriptionDialogFragment.showInstance(getMyActivity(), getArgument(CONTENT_KEY));
-			}
-		});
 
 		return view;
 	}
@@ -153,7 +148,7 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		});
 	}
 
-	private void setupWebView(View view) {
+	private void setupWebView(final View view) {
 		webView = view.findViewById(R.id.content);
 		webView.setScrollbarFadingEnabled(true);
 		webView.setVerticalScrollBarEnabled(false);
@@ -163,6 +158,13 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		webView.getSettings().setDomStorageEnabled(true);
 		webView.getSettings().setLoadWithOverviewMode(true);
 		webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+		webView.setWebViewClient(new WebViewClient() {
+			@Override
+			public void onPageCommitVisible(WebView webView, String url) {
+				super.onPageCommitVisible(webView, url);
+				setupDependentViews(view);
+			}
+		});
 		loadWebviewData();
 	}
 
@@ -173,6 +175,21 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			String encoded = Base64.encodeToString(content.getBytes(), Base64.NO_PADDING);
 			webView.loadData(encoded, "text/html", "base64");
 		}
+	}
+
+	private void setupDependentViews(final View view) {
+		TextViewEx readBtn = view.findViewById(R.id.btn_edit);
+		readBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				GpxEditDescriptionDialogFragment.showInstance(getMyActivity(), getArgument(CONTENT_KEY));
+			}
+		});
+		AndroidUiHelper.setVisibility(View.VISIBLE,
+				readBtn, view.findViewById(R.id.divider), view.findViewById(R.id.bottom_empty_space));
+		int backgroundColor = isNightMode(false) ?
+				R.color.activity_background_color_dark : R.color.activity_background_color_light;
+		view.findViewById(R.id.root).setBackgroundResource(backgroundColor);
 	}
 
 	private String getColoredContent(String content) {

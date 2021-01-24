@@ -94,7 +94,7 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
                     log.error(errorMessage);
                 }
 
-                trackMenuFragment.onGpxChanged();
+                trackMenuFragment.updateContent();
                 if (readGpxFragment != null) {
                     Bundle args = readGpxFragment.getArguments();
                     if (args != null) {

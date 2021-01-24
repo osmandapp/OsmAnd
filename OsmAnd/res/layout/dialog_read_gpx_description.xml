@@ -1,95 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?attr/activity_background_basic">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="?attr/list_background_color">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/pstsTabBackground">
+	<com.google.android.material.appbar.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/pstsTabBackground">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/action_bar_height"
-            app:titleTextColor="?attr/list_background_color" />
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/action_bar_height"
+			app:titleTextColor="?attr/list_background_color" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="?attr/list_background_color">
+		<LinearLayout
+			android:id="@+id/ll"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:background="?attr/list_background_color">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/main_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:adjustViewBounds="true"
-                        tools:visibility="visible"
-                        tools:src="@drawable/img_help_announcement_time_day"/>
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/main_image"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone"
+				android:adjustViewBounds="true"
+				tools:visibility="visible"
+				tools:src="@drawable/img_help_announcement_time_day"/>
 
-                    <net.osmand.plus.widgets.WebViewEx
-                        android:id="@+id/content"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/content_padding"
-                        android:layout_marginStart="@dimen/content_padding"
-                        android:layout_marginEnd="@dimen/content_padding"
-                        android:background="@color/color_transparent" />
+			<net.osmand.plus.widgets.WebViewEx
+				android:id="@+id/content"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/content_padding"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:background="@color/color_transparent" />
 
-                    <View
-                        android:id="@+id/divider1"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/divider_color" />
+			<View
+				android:id="@+id/divider"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="?attr/divider_color"
+				android:visibility="gone"
+				tools:visibility="visible"/>
 
-                    <net.osmand.plus.widgets.TextViewEx
-                        android:id="@+id/btn_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/content_padding"
-                        android:layout_marginStart="@dimen/content_padding"
-                        android:layout_marginTop="@dimen/context_menu_padding_margin_small"
-                        android:layout_marginBottom="@dimen/context_menu_padding_margin_small"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/context_menu_padding_margin_small"
-                        android:paddingStart="@dimen/context_menu_padding_margin_small"
-                        android:paddingEnd="@dimen/context_menu_padding_margin_small"
-                        android:drawablePadding="@dimen/list_content_padding_large"
-                        osmand:drawableLeftCompat="@drawable/ic_action_edit_dark"
-                        osmand:drawableStartCompat="@drawable/ic_action_edit_dark"
-                        osmand:drawableTint="?attr/active_color_basic"
-                        android:text="@string/shared_string_edit"
-                        android:textColor="?attr/active_color_basic"
-                        android:textSize="@dimen/default_list_text_size"
-                        osmand:typeface="@string/font_roboto_medium" />
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/btn_edit"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/context_menu_padding_margin_small"
+				android:layout_marginBottom="@dimen/context_menu_padding_margin_small"
+				android:gravity="center_vertical"
+				android:padding="@dimen/context_menu_padding_margin_small"
+				android:paddingStart="@dimen/context_menu_padding_margin_small"
+				android:paddingEnd="@dimen/context_menu_padding_margin_small"
+				android:drawablePadding="@dimen/list_content_padding_large"
+				osmand:drawableLeftCompat="@drawable/ic_action_edit_dark"
+				osmand:drawableStartCompat="@drawable/ic_action_edit_dark"
+				osmand:drawableTint="?attr/active_color_basic"
+				android:visibility="gone"
+				android:text="@string/shared_string_edit"
+				android:textColor="?attr/active_color_basic"
+				android:textSize="@dimen/default_list_text_size"
+				osmand:typeface="@string/font_roboto_medium"
+				tools:visibility="visible" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/divider_color" />
+			<FrameLayout
+				android:id="@+id/bottom_empty_space"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/card_row_min_height"
+				android:foreground="@drawable/bg_contextmenu_shadow"
+				android:foregroundGravity="top|fill_horizontal"
+				android:visibility="gone"
+				tools:visibility="visible">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/card_row_min_height"
-                        android:background="?attr/activity_background_basic"/>
+				<View
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:background="?attr/activity_background_basic" />
+			</FrameLayout>
 
-                </LinearLayout>
+		</LinearLayout>
 
-    </ScrollView>
+	</ScrollView>
 
 </LinearLayout>

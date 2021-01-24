@@ -196,8 +196,4 @@ public class FileUtils {
 	public interface RenameCallback {
 		void renamedTo(File file);
 	}
-
-	public interface GpxEditedCallback {
-		void onGpxChanged();
-	}
 }
