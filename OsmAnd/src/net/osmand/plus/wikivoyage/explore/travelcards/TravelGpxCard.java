@@ -8,11 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
-import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
@@ -38,17 +38,21 @@ public class TravelGpxCard extends BaseTravelCard {
 		if (viewHolder instanceof TravelGpxVH) {
 			final TravelGpxVH holder = (TravelGpxVH) viewHolder;
 			holder.title.setText(article.getTitle());
-			holder.content.setText(WikiArticleHelper.getPartialContent(article.getContent()));
-			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance,app));
-			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp,app));
-			holder.diffElevationDown.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationDown,app));
+			Drawable icon = getActiveIcon(R.drawable.ic_action_user_account_16);
+			holder.user.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+			holder.user.setText(WikiArticleHelper.getPartialContent(article.user));
+			AndroidUtils.setBackground(app, holder.user, nightMode, R.drawable.btn_border_bg_light, R.drawable.btn_border_bg_dark);
+			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
+			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));
+			holder.diffElevationDown.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationDown, app));
 			holder.leftButton.setText(app.getString(R.string.shared_string_view));
 			View.OnClickListener readClickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					if (fragmentManager != null) {
-						WikivoyageArticleDialogFragment.showInstance(app, fragmentManager,
-								article.generateIdentifier(), article.getLang());
+//						WikivoyageArticleDialogFragment.showInstance(app, fragmentManager,
+//								article.generateIdentifier(), article.getLang());
+						app.getTravelHelper().createGpxFile(article);
 					}
 				}
 			};
@@ -86,7 +90,7 @@ public class TravelGpxCard extends BaseTravelCard {
 	public static class TravelGpxVH extends RecyclerView.ViewHolder {
 
 		final TextView title;
-		final TextView content;
+		final TextView user;
 		final TextView distance;
 		final TextView diffElevationUp;
 		final TextView diffElevationDown;
@@ -98,7 +102,7 @@ public class TravelGpxCard extends BaseTravelCard {
 		public TravelGpxVH(final View itemView) {
 			super(itemView);
 			title = itemView.findViewById(R.id.title);
-			content = itemView.findViewById(R.id.content);
+			user = itemView.findViewById(R.id.user_name);
 			distance = itemView.findViewById(R.id.distance);
 			diffElevationUp = itemView.findViewById(R.id.diff_ele_up);
 			diffElevationDown = itemView.findViewById(R.id.diff_ele_down);

@@ -180,20 +180,21 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 				List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
 				for (TravelArticle article : popularArticles) {
-				if (article instanceof TravelGpx) {
-					items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, fm));
-				} else {
-					items.add(new ArticleTravelCard(app, nightMode, article, activity.getSupportFragmentManager()));
+					if (article instanceof TravelGpx) {
+						items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, activity.getSupportFragmentManager()));
+					} else {
+						items.add(new ArticleTravelCard(app, nightMode, article, activity.getSupportFragmentManager()));
+					}
 				}
-			}
-			items.add(new StartEditingTravelCard(activity, nightMode));
-			adapter.setItems(items);
-			final DownloadIndexesThread downloadThread = app.getDownloadThread();
-			if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-				waitForIndexes = true;
-				downloadThread.runReloadIndexFilesSilent();
-			} else {
-				checkDownloadIndexes();
+				items.add(new StartEditingTravelCard(activity, nightMode));
+				adapter.setItems(items);
+				final DownloadIndexesThread downloadThread = app.getDownloadThread();
+				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+					waitForIndexes = true;
+					downloadThread.runReloadIndexFilesSilent();
+				} else {
+					checkDownloadIndexes();
+				}
 			}
 		}
 	}
