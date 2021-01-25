@@ -575,7 +575,7 @@ public class MenuBuilder {
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
 		Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		bmp.compress(Bitmap.CompressFormat.PNG, 70, os);
+		bmp.compress(Bitmap.CompressFormat.JPEG, 90, os);
 		return os.toByteArray();
 	}
 
