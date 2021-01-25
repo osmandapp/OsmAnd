@@ -351,7 +351,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity != null && trackChartPoints != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
 		}
-		updateHeader();
 		startLocationUpdate();
 	}
 
@@ -734,7 +733,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void showOptionsPopupMenu(View view, final TrkSegment segment, final boolean confirmDeletion) {
+	public void showOptionsPopupMenu(View view, final TrkSegment segment, final boolean confirmDeletion, final GpxDisplayItem gpxItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			IconPopupMenu optionsPopupMenu = new IconPopupMenu(activity, view.findViewById(R.id.overflow_menu));
@@ -742,6 +741,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			optionsPopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
 			menu.findItem(R.id.action_edit).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_edit_dark));
 			menu.findItem(R.id.action_delete).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
+			if (getGpx().showCurrentTrack) {
+				menu.findItem(R.id.split_interval).setVisible(false);
+			} else {
+				menu.findItem(R.id.split_interval).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_split_interval));
+			}
 			optionsPopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -766,6 +770,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 							builder.show();
 						}
 						return true;
+					} else if (i == R.id.split_interval) {
+						openSplitInterval(gpxItem, segment);
 					}
 					return false;
 				}
@@ -819,7 +825,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (selectedGpxFile != null) {
-					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
+					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT});
 					selectedGpxFile.setDisplayGroups(groups, app);
 					selectedGpxFile.processPoints(app);
 				}

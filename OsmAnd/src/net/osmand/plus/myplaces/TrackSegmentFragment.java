@@ -304,14 +304,19 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 	}
 
 	@Override
-	public void showOptionsPopupMenu(View view, final TrkSegment segment, final boolean confirmDeletion) {
+	public void showOptionsPopupMenu(View view, final TrkSegment segment, final boolean confirmDeletion, final GpxDisplayItem gpxItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			optionsPopupMenu = new IconPopupMenu(activity, view.findViewById(R.id.overflow_menu));
-			Menu menu = optionsPopupMenu.getMenu();
+			IconPopupMenu optionsPopupMenu = new IconPopupMenu(activity, view.findViewById(R.id.overflow_menu));
+			final Menu menu = optionsPopupMenu.getMenu();
 			optionsPopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
 			menu.findItem(R.id.action_edit).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_edit_dark));
 			menu.findItem(R.id.action_delete).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
+			if (displayHelper.getGpx().showCurrentTrack) {
+				menu.findItem(R.id.split_interval).setVisible(false);
+			} else {
+				menu.findItem(R.id.split_interval).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_split_interval));
+			}
 			optionsPopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -336,6 +341,8 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							builder.show();
 						}
 						return true;
+					} else if (i == R.id.split_interval) {
+						openSplitInterval(gpxItem, segment);
 					}
 					return false;
 				}
