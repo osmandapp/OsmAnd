@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/list_background_color"
-    android:orientation="vertical">
+    android:background="?attr/list_background_color">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -15,21 +14,41 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
+        android:id="@+id/segments_scroll"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/dialog_button_ex_height">
 
         <LinearLayout
             android:id="@+id/segments_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dialog_button_ex_height"
+            android:paddingBottom="@dimen/context_menu_buttons_bottom_height" />
 
     </ScrollView>
 
-    <include
-        layout="@layout/bottom_buttons"
+    <LinearLayout
+        android:id="@+id/control_buttons"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_button_ex_height" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/buttons_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shadow" />
+
+        <include
+            layout="@layout/bottom_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_button_ex_height"
+            android:layout_gravity="bottom" />
+
+    </LinearLayout>
+
+</FrameLayout>
