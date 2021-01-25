@@ -3,9 +3,11 @@ package net.osmand.plus.onlinerouting.engine;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
+import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.util.GeoPolylineParserUtil;
 
@@ -24,7 +26,8 @@ public class OsrmEngine extends OnlineRoutingEngine {
 	}
 
 	@Override
-	public @NonNull EngineType getType() {
+	public @NonNull
+	EngineType getType() {
 		return EngineType.OSRM;
 	}
 
@@ -35,7 +38,8 @@ public class OsrmEngine extends OnlineRoutingEngine {
 	}
 
 	@Override
-	protected void collectAllowedParameters() { }
+	protected void collectAllowedParameters() {
+	}
 
 	@Override
 	protected void collectAllowedVehicles(@NonNull List<VehicleType> vehicles) {
@@ -60,15 +64,21 @@ public class OsrmEngine extends OnlineRoutingEngine {
 		}
 		sb.append('?');
 		sb.append("overview=full");
+		sb.append('&').append("steps=true");
 	}
 
-	@NonNull
+	@Nullable
 	@Override
-	public List<LatLon> parseServerResponse(@NonNull String content) throws JSONException {
+	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                 boolean leftSideNavigation) throws JSONException {
 		JSONObject obj = new JSONObject(content);
-		return GeoPolylineParserUtil.parse(
-				obj.getJSONArray("routes").getJSONObject(0).getString("geometry"),
-				GeoPolylineParserUtil.PRECISION_5);
+		String encoded = obj.getJSONArray("routes").getJSONObject(0).getString("geometry");
+		List<LatLon> points = GeoPolylineParserUtil.parse(encoded, GeoPolylineParserUtil.PRECISION_5);
+		if (!isEmpty(points)) {
+			List<Location> route = convertRouteToLocationsList(points);
+			return new OnlineRoutingResponse(route, null);
+		}
+		return null;
 	}
 
 	@Override

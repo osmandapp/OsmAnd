@@ -5,11 +5,15 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
+import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.routing.RouteProvider;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -28,7 +32,8 @@ import static net.osmand.util.Algorithms.isEmpty;
 public abstract class OnlineRoutingEngine implements Cloneable {
 
 	public final static String ONLINE_ROUTING_ENGINE_PREFIX = "online_routing_engine_";
-	public static final VehicleType CUSTOM_VEHICLE = new VehicleType("", R.string.shared_string_custom);
+	public final static VehicleType CUSTOM_VEHICLE = new VehicleType("", R.string.shared_string_custom);
+	public final static int INVALID_ID = -1;
 
 	private final Map<String, String> params = new HashMap<>();
 	private final List<VehicleType> allowedVehicles = new ArrayList<>();
@@ -72,15 +77,6 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@NonNull
-	public String getBaseUrl() {
-		String customUrl = get(EngineParameter.CUSTOM_URL);
-		if (isEmpty(customUrl)) {
-			return getStandardUrl();
-		}
-		return customUrl;
-	}
-
-	@NonNull
 	public String getFullUrl(@NonNull List<LatLon> path) {
 		StringBuilder sb = new StringBuilder(getBaseUrl());
 		makeFullUrl(sb, path);
@@ -91,10 +87,34 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	                                    @NonNull List<LatLon> path);
 
 	@NonNull
-	public abstract List<LatLon> parseServerResponse(@NonNull String content) throws JSONException;
+	public String getBaseUrl() {
+		String customUrl = get(EngineParameter.CUSTOM_URL);
+		if (isEmpty(customUrl)) {
+			return getStandardUrl();
+		}
+		return customUrl;
+	}
 
 	@NonNull
 	public abstract String getStandardUrl();
+
+	@Nullable
+	public abstract OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                          boolean leftSideNavigation) throws JSONException;
+
+	@NonNull
+	protected List<Location> convertRouteToLocationsList(@NonNull List<LatLon> route) {
+		List<Location> result = new ArrayList<>();
+		if (!isEmpty(route)) {
+			for (LatLon pt : route) {
+				WptPt wpt = new WptPt();
+				wpt.lat = pt.getLatitude();
+				wpt.lon = pt.getLongitude();
+				result.add(RouteProvider.createLocation(wpt));
+			}
+		}
+		return result;
+	}
 
 	@NonNull
 	public Map<String, String> getParams() {
