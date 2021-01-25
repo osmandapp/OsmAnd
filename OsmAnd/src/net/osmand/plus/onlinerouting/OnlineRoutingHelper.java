@@ -25,6 +25,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.util.Algorithms.isEmpty;
+
 public class OnlineRoutingHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(OnlineRoutingHelper.class);
@@ -71,7 +73,15 @@ public class OnlineRoutingHelper {
 		return null;
 	}
 
-	@NonNull
+	@Nullable
+	public OnlineRoutingResponse calculateRouteOnline(@Nullable String stringKey,
+	                                                  @NonNull List<LatLon> path,
+	                                                  boolean leftSideNavigation) throws IOException, JSONException {
+		OnlineRoutingEngine engine = getEngineByKey(stringKey);
+		return engine != null ? calculateRouteOnline(engine, path, leftSideNavigation) : null;
+	}
+
+	@Nullable
 	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine,
 	                                                  @NonNull List<LatLon> path,
 	                                                  boolean leftSideNavigation) throws IOException, JSONException {
@@ -132,7 +142,7 @@ public class OnlineRoutingHelper {
 	@NonNull
 	private String createEngineKeyIfNeeded(@NonNull OnlineRoutingEngine engine) {
 		String key = engine.get(EngineParameter.KEY);
-		if (Algorithms.isEmpty(key)) {
+		if (isEmpty(key)) {
 			key = OnlineRoutingEngine.generateKey();
 			engine.put(EngineParameter.KEY, key);
 		}
@@ -152,7 +162,7 @@ public class OnlineRoutingHelper {
 	private List<OnlineRoutingEngine> readFromSettings() {
 		List<OnlineRoutingEngine> engines = new ArrayList<>();
 		String jsonString = settings.ONLINE_ROUTING_ENGINES.get();
-		if (!Algorithms.isEmpty(jsonString)) {
+		if (!isEmpty(jsonString)) {
 			try {
 				JSONObject json = new JSONObject(jsonString);
 				OnlineRoutingUtils.readFromJson(json, engines);
@@ -164,7 +174,7 @@ public class OnlineRoutingHelper {
 	}
 
 	private void saveCacheToSettings() {
-		if (!Algorithms.isEmpty(cachedEngines)) {
+		if (!isEmpty(cachedEngines)) {
 			try {
 				JSONObject json = new JSONObject();
 				OnlineRoutingUtils.writeToJson(json, getEngines());

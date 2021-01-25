@@ -22,7 +22,6 @@ import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
-import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
@@ -327,7 +326,7 @@ public class RouteProvider {
 		}
 	}
 
-	private static Location createLocation(WptPt pt){
+	public static Location createLocation(WptPt pt){
 		Location loc = new Location("OsmandRouteProvider");
 		loc.setLatitude(pt.lat);
 		loc.setLongitude(pt.lon);
@@ -1203,27 +1202,17 @@ public class RouteProvider {
 	private RouteCalculationResult findOnlineRoute(RouteCalculationParams params) throws IOException, JSONException {
 		OnlineRoutingHelper helper = params.ctx.getOnlineRoutingHelper();
 		String stringKey = params.mode.getRoutingProfile();
-		OnlineRoutingEngine engine = helper.getEngineByKey(stringKey);
-		OnlineRoutingResponse response = null;
-		if (engine != null) {
-			response = helper.calculateRouteOnline(engine, getFullPathFromParams(params), params.leftSide);
-		}
-		if (response != null && !Algorithms.isEmpty(response.getRoute())) {
-			List<Location> res = new ArrayList<>();
-			for (LatLon pt : response.getRoute()) {
-				WptPt wpt = new WptPt();
-				wpt.lat = pt.getLatitude();
-				wpt.lon = pt.getLongitude();
-				res.add(createLocation(wpt));
-			}
+		OnlineRoutingResponse response =
+				helper.calculateRouteOnline(stringKey, getPathFromParams(params), params.leftSide);
+		if (response != null) {
 			params.intermediates = null;
-			return new RouteCalculationResult(res, response.getDirections(), params, null, true);
+			return new RouteCalculationResult(response.getRoute(), response.getDirections(), params, null, true);
 		} else {
 			return new RouteCalculationResult("Route is empty");
 		}
 	}
 
-	private static List<LatLon> getFullPathFromParams(RouteCalculationParams params) {
+	private static List<LatLon> getPathFromParams(RouteCalculationParams params) {
 		List<LatLon> points = new ArrayList<>();
 		points.add(new LatLon(params.start.getLatitude(), params.start.getLongitude()));
 		if (Algorithms.isEmpty(params.intermediates)) {

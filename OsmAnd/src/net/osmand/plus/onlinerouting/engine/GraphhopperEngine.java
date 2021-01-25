@@ -3,6 +3,7 @@ package net.osmand.plus.onlinerouting.engine;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
@@ -28,8 +29,9 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 		super(params);
 	}
 
+	@NonNull
 	@Override
-	public @NonNull EngineType getType() {
+	public EngineType getType() {
 		return EngineType.GRAPHHOPPER;
 	}
 
@@ -79,7 +81,7 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 		sb.append('&').append("details=").append("lanes");
 	}
 
-	@NonNull
+	@Nullable
 	@Override
 	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
 	                                                 boolean leftSideNavigation) throws JSONException {
@@ -87,7 +89,9 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 		JSONObject root = obj.getJSONArray("paths").getJSONObject(0);
 
 		String encoded = root.getString("points");
-		List<LatLon> route = GeoPolylineParserUtil.parse(encoded, GeoPolylineParserUtil.PRECISION_5);
+		List<LatLon> points = GeoPolylineParserUtil.parse(encoded, GeoPolylineParserUtil.PRECISION_5);
+		if (isEmpty(points)) return null;
+		List<Location> route = convertRouteToLocationsList(points);
 
 		JSONArray instructions = root.getJSONArray("instructions");
 		List<RouteDirectionInfo> directions = new ArrayList<>();
@@ -158,7 +162,7 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 		} else if (sign == -6) {
 			// not yet used: leave roundabout
 
- 		} else if (sign == -3) {
+		} else if (sign == -3) {
 			// turn sharp left
 			id = TurnType.TSHL;
 
