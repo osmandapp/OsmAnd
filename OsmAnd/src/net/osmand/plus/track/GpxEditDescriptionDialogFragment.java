@@ -97,7 +97,7 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 					log.error(errorMessage);
 				}
 				MapActivity mapActivity = getMapActivity();
-				if (mapActivity == null || mapActivity.getTrackMenuFragment() == null) {
+				if (mapActivity != null && mapActivity.getTrackMenuFragment() != null) {
 					TrackMenuFragment trackMenuFragment = mapActivity.getTrackMenuFragment();
 					trackMenuFragment.updateContent();
 				}
