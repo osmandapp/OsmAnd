@@ -1,12 +1,18 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -133,6 +139,7 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
 		ivArrow = rootView.findViewById(R.id.iv_arrow);
 		tvIntervalsDescr = rootView.findViewById(R.id.tv_interval_descr);
 
+		setProfileColorToSeekBar();
 		seekBarArrival.setOnSeekBarChangeListener(this);
 		seekBarArrival.setProgress(selectedEntryIndex);
 		seekBarArrival.setMax(listPreference.getEntries().length - 1);
@@ -161,6 +168,31 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet
 		collapsed = !collapsed;
 		ivArrow.setImageResource(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
 		AndroidUiHelper.updateVisibility(tvIntervalsDescr, !collapsed);
+	}
+
+	private void setProfileColorToSeekBar() {
+		int color = ContextCompat.getColor(app, getAppMode().getIconColorInfo().getColor(nightMode));
+
+		LayerDrawable seekBarProgressLayer =
+				(LayerDrawable) ContextCompat.getDrawable(app, R.drawable.seekbar_progress_announcement_time);
+
+		GradientDrawable background = (GradientDrawable) seekBarProgressLayer.findDrawableByLayerId(R.id.background);
+		background.setColor(color);
+		background.setAlpha(70);
+
+		GradientDrawable progress = (GradientDrawable) seekBarProgressLayer.findDrawableByLayerId(R.id.progress);
+		progress.setColor(color);
+		Drawable clippedProgress = new ClipDrawable(progress, Gravity.CENTER_VERTICAL | Gravity.START, 1);
+
+		seekBarArrival.setProgressDrawable(new LayerDrawable(new Drawable[] {
+				background, clippedProgress
+		}));
+
+		LayerDrawable seekBarThumpLayer =
+				(LayerDrawable) ContextCompat.getDrawable(app, R.drawable.seekbar_thumb_announcement_time);
+		GradientDrawable thump = (GradientDrawable) seekBarThumpLayer.findDrawableByLayerId(R.id.thump);
+		thump.setColor(color);
+		seekBarArrival.setThumb(thump);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String prefKey, Fragment target,

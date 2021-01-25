@@ -6,19 +6,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 
 public class AddGpxPointBottomSheetHelper implements OnDismissListener {
@@ -73,7 +74,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 			public void onClick(View v) {
 				hide();
 				contextMenuLayer.cancelAddGpxPoint();
-				openTrackActivity();
+				onClose();
 			}
 		});
 	}
@@ -140,7 +141,16 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		if (contextMenu.isVisible() && contextMenu.isClosable()) {
 			contextMenu.close();
 		}
-		openTrackActivity();
+		onClose();
+	}
+
+	private void onClose() {
+		TrackMenuFragment fragment = mapActivity.getTrackMenuFragment();
+		if (fragment != null) {
+			fragment.show();
+		} else {
+			openTrackActivity();
+		}
 	}
 
 	private void openTrackActivity() {

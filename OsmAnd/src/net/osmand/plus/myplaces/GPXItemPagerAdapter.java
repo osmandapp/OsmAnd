@@ -38,6 +38,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.track.TrackDisplayHelper;
@@ -275,17 +276,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_SPEED);
 			}
 		});
-		if (gpxFile.showCurrentTrack) {
-			view.findViewById(R.id.split_interval).setVisibility(View.GONE);
-		} else {
-			view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					openSplitIntervalScreen();
-				}
-			});
-		}
-		ImageView overflowMenu = view.findViewById(R.id.overflow_menu);
+		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
 		if (!gpxItem.group.getTrack().generalTrack) {
 			setupOptionsPopupMenu(overflowMenu, false);
 		} else {
@@ -293,13 +284,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 	}
 
-	private void setupOptionsPopupMenu(ImageView overflowMenu, final boolean confirmDeletion) {
-		overflowMenu.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_overflow_menu_white));
+	private void setupOptionsPopupMenu(TextView overflowMenu, final boolean confirmDeletion) {
 		overflowMenu.setVisibility(View.VISIBLE);
 		overflowMenu.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				actionsListener.showOptionsPopupMenu(view, getTrkSegment(), confirmDeletion);
+				actionsListener.showOptionsPopupMenu(view, getTrkSegment(), confirmDeletion, gpxItem);
 			}
 		});
 	}
@@ -359,17 +349,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
 			}
 		});
-		if (gpxFile.showCurrentTrack) {
-			view.findViewById(R.id.split_interval).setVisibility(View.GONE);
-		} else {
-			view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					openSplitIntervalScreen();
-				}
-			});
-		}
-		ImageView overflowMenu = view.findViewById(R.id.overflow_menu);
+		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
 		if (!gpxItem.group.getTrack().generalTrack) {
 			setupOptionsPopupMenu(overflowMenu, false);
 		} else {
@@ -436,17 +416,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 			}
 		});
-		if (gpxFile.showCurrentTrack) {
-			view.findViewById(R.id.split_interval).setVisibility(View.GONE);
-		} else {
-			view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					openSplitIntervalScreen();
-				}
-			});
-		}
-		ImageView overflowMenu = view.findViewById(R.id.overflow_menu);
+		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
 		if (!gpxItem.group.getTrack().generalTrack) {
 			setupOptionsPopupMenu(overflowMenu, true);
 		} else {
@@ -687,8 +657,50 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	void openAnalyzeOnMap(GPXTabItemType tabType) {
-		List<ILineDataSet> ds = getDataSets(null, tabType, null, null);
-		actionsListener.openAnalyzeOnMap(gpxItem, ds, tabType);
+		List<ILineDataSet> dataSets = getDataSets(null, tabType, null, null);
+		prepareGpxItemChartTypes(gpxItem, dataSets);
+		actionsListener.openAnalyzeOnMap(gpxItem);
+	}
+
+	public static void prepareGpxItemChartTypes(GpxDisplayItem gpxItem, List<ILineDataSet> dataSets) {
+		WptPt wpt = null;
+		gpxItem.chartTypes = null;
+		if (dataSets != null && dataSets.size() > 0) {
+			gpxItem.chartTypes = new GPXDataSetType[dataSets.size()];
+			for (int i = 0; i < dataSets.size(); i++) {
+				OrderedLineDataSet orderedDataSet = (OrderedLineDataSet) dataSets.get(i);
+				gpxItem.chartTypes[i] = orderedDataSet.getDataSetType();
+			}
+			if (gpxItem.chartHighlightPos != -1) {
+				TrkSegment segment = null;
+				for (Track t : gpxItem.group.getGpx().tracks) {
+					for (TrkSegment s : t.segments) {
+						if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
+							segment = s;
+							break;
+						}
+					}
+					if (segment != null) {
+						break;
+					}
+				}
+				if (segment != null) {
+					OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
+					float distance = gpxItem.chartHighlightPos * dataSet.getDivX();
+					for (WptPt p : segment.points) {
+						if (p.distance >= distance) {
+							wpt = p;
+							break;
+						}
+					}
+				}
+			}
+		}
+		if (wpt != null) {
+			gpxItem.locationOnMap = wpt;
+		} else {
+			gpxItem.locationOnMap = gpxItem.locationStart;
+		}
 	}
 
 	private void openSplitIntervalScreen() {

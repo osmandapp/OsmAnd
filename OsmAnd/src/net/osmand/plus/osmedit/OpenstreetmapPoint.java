@@ -111,14 +111,14 @@ public class OpenstreetmapPoint extends OsmPoint {
 		boolean res = this.getName() != null && this.getName().equals(otherPoint.getName());
 		LatLon thisLatLon = new LatLon(this.getLatitude(), this.getLongitude());
 		LatLon otherLatLon = new LatLon(otherPoint.getLatitude(), otherPoint.getLongitude());
-		res = res || thisLatLon.equals(otherLatLon);
+		res = res && thisLatLon.equals(otherLatLon);
 		if (getType() != null)
-			res = res || getType().equals(otherPoint.getType());
+			res = res && getType().equals(otherPoint.getType());
 		if (getSubtype() != null)
-			res = res || getSubtype().equals(otherPoint.getSubtype());
+			res = res && getSubtype().equals(otherPoint.getSubtype());
 		if (getTagsString() != null)
-			res = res || getTagsString().equals(otherPoint.getTagsString());
-		res = res || getId() == otherPoint.getId();
+			res = res && getTagsString().equals(otherPoint.getTagsString());
+		res = res && getId() == otherPoint.getId();
 		return res;
 	}
 

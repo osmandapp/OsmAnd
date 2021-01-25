@@ -449,6 +449,10 @@ public class GPXUtilities {
 		public String getArticleLang() {
 			return getExtensionsToRead().get("article_lang");
 		}
+
+		public String getDescription() {
+			return getExtensionsToRead().get("desc");
+		}
 	}
 
 	public static class Author extends GPXExtensions {

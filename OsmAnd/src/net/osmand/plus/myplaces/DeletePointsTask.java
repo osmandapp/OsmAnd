@@ -15,14 +15,14 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Set;
 
-class DeletePointsTask extends AsyncTask<Void, Void, Void> {
+public class DeletePointsTask extends AsyncTask<Void, Void, Void> {
 
 	private OsmandApplication app;
 	private GPXFile gpx;
 	private Set<GpxDisplayItem> selectedItems;
 	private WeakReference<OnPointsDeleteListener> listenerRef;
 
-	DeletePointsTask(OsmandApplication app, GPXFile gpxFile, Set<GpxDisplayItem> selectedItems, OnPointsDeleteListener listener) {
+	public DeletePointsTask(OsmandApplication app, GPXFile gpxFile, Set<GpxDisplayItem> selectedItems, OnPointsDeleteListener listener) {
 		this.app = app;
 		this.gpx = gpxFile;
 		this.selectedItems = selectedItems;

@@ -3,15 +3,21 @@ package net.osmand.plus.onlinerouting.engine;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
+import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.router.TurnType;
 import net.osmand.util.GeoPolylineParserUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +29,9 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 		super(params);
 	}
 
+	@NonNull
 	@Override
-	public @NonNull EngineType getType() {
+	public EngineType getType() {
 		return EngineType.GRAPHHOPPER;
 	}
 
@@ -71,15 +78,49 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 		if (!isEmpty(apiKey)) {
 			sb.append('&').append("key=").append(apiKey);
 		}
+		sb.append('&').append("details=").append("lanes");
 	}
 
-	@NonNull
+	@Nullable
 	@Override
-	public List<LatLon> parseServerResponse(@NonNull String content) throws JSONException {
+	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                 boolean leftSideNavigation) throws JSONException {
 		JSONObject obj = new JSONObject(content);
-		return GeoPolylineParserUtil.parse(
-				obj.getJSONArray("paths").getJSONObject(0).getString("points"),
-				GeoPolylineParserUtil.PRECISION_5);
+		JSONObject root = obj.getJSONArray("paths").getJSONObject(0);
+
+		String encoded = root.getString("points");
+		List<LatLon> points = GeoPolylineParserUtil.parse(encoded, GeoPolylineParserUtil.PRECISION_5);
+		if (isEmpty(points)) return null;
+		List<Location> route = convertRouteToLocationsList(points);
+
+		JSONArray instructions = root.getJSONArray("instructions");
+		List<RouteDirectionInfo> directions = new ArrayList<>();
+		for (int i = 0; i < instructions.length(); i++) {
+			JSONObject item = instructions.getJSONObject(i);
+			int sign = Integer.parseInt(item.getString("sign"));
+			int distance = (int) Math.round(Double.parseDouble(item.getString("distance")));
+			String description = item.getString("text");
+			String streetName = item.getString("street_name");
+			int timeInSeconds = (int) Math.round(Integer.parseInt(item.getString("time")) / 1000f);
+			JSONArray interval = item.getJSONArray("interval");
+			int startPointOffset = interval.getInt(0);
+			int endPointOffset = interval.getInt(1);
+
+			float averageSpeed = (float) distance / timeInSeconds;
+			TurnType turnType = identifyTurnType(sign, leftSideNavigation);
+			// TODO turnType.setTurnAngle()
+
+			RouteDirectionInfo direction = new RouteDirectionInfo(averageSpeed, turnType);
+			direction.routePointOffset = startPointOffset;
+			if (turnType != null && turnType.isRoundAbout()) {
+				direction.routeEndPointOffset = endPointOffset;
+			}
+			direction.setDescriptionRoute(description);
+			direction.setStreetName(streetName);
+			direction.setDistance(distance);
+			directions.add(direction);
+		}
+		return new OnlineRoutingResponse(route, directions);
 	}
 
 	@Override
@@ -91,5 +132,83 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 			sb.append(message);
 		}
 		return obj.has("paths");
+	}
+
+	/**
+	 * @param sign - a number which specifies the turn type to show (Graphhopper API value)
+	 * @return a TurnType object defined in OsmAnd which is equivalent to a value from the Graphhopper API
+	 *
+	 * For future compatibility it is important that all clients
+	 * are able to handle also unknown instruction sign numbers
+	 */
+	@Nullable
+	public static TurnType identifyTurnType(int sign, boolean leftSide) {
+		int id = INVALID_ID;
+
+		if (sign == -98) {
+			// an U-turn without the knowledge
+			// if it is a right or left U-turn
+			id = TurnType.TU;
+
+		} else if (sign == -8) {
+			// a left U-turn
+			leftSide = false;
+			id = TurnType.TU;
+
+		} else if (sign == -7) {
+			// keep left
+			id = TurnType.KL;
+
+		} else if (sign == -6) {
+			// not yet used: leave roundabout
+
+		} else if (sign == -3) {
+			// turn sharp left
+			id = TurnType.TSHL;
+
+		} else if (sign == -2) {
+			// turn left
+			id = TurnType.TL;
+
+		} else if (sign == -1) {
+			// turn slight left
+			id = TurnType.TSLL;
+
+		} else if (sign == 0) {
+			// continue on street
+			id = TurnType.C;
+
+		} else if (sign == 1) {
+			// turn slight right
+			id = TurnType.TSLR;
+
+		} else if (sign == 2) {
+			// turn right
+			id = TurnType.TR;
+
+		} else if (sign == 3) {
+			// turn sharp right
+			id = TurnType.TSHR;
+
+		} else if (sign == 4) {
+			// the finish instruction before the last point
+
+		} else if (sign == 5) {
+			// the instruction before a via point
+
+		} else if (sign == 6) {
+			// the instruction before entering a roundabout
+			id = TurnType.RNDB;
+
+		} else if (sign == 7) {
+			// keep right
+			id = TurnType.KR;
+
+		} else if (sign == 8) {
+			// a right U-turn
+			id = TurnType.TRU;
+		}
+
+		return id != INVALID_ID ? TurnType.valueOf(id, leftSide) : null;
 	}
 }
