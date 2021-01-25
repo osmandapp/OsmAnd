@@ -160,7 +160,7 @@
     <string name="local_openstreetmap_delete">Vymazať úpravu</string>
     <string name="local_openstreetmap_descr_title">Asynchrónne upravovanie OSM:</string>
     <string name="local_openstreetmap_settings">OSM POI/poznámky uložené v zariadení</string>
-    <string name="local_openstreetmap_settings_descr">Zobraziť a spravovať OSM bodu záujmu/poznámky uložené v databáze v zariadení.</string>
+    <string name="local_openstreetmap_settings_descr">Zobraziť a spravovať OSM body záujmu/poznámky uložené v databáze v zariadení.</string>
     <string name="live_monitoring_interval_descr">Určiť interval stopovania naživo.</string>
     <string name="live_monitoring_interval">Interval stopovania naživo</string>
     <string name="live_monitoring_url_descr">Zadajte webovú adresu stopovania naživo so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -698,7 +698,7 @@
     <string name="edit_filter_create_message">Filter \'%1$s\' bol vytvorený</string>
     <string name="unknown_from_location">Východzí bod nebol zatiaľ zistený.</string>
     <string name="confirm_interrupt_download">Zrušiť sťahovanie\?</string>
-    <string name="basemap_was_selected_to_download">Základná potrebná pre základné funkcie aplikácie bola zaradená na stiahnutie.</string>
+    <string name="basemap_was_selected_to_download">Základná mapa potrebná pre základné funkcie aplikácie bola zaradená na stiahnutie.</string>
     <string name="shared_string_name">Názov</string>
     <string name="favourites_edit_dialog_category">Kategória</string>
     <string name="navigate_point_format_D">DDD.DDDDD</string>
@@ -1091,7 +1091,7 @@
     <string name="index_item_world_altitude_correction">Svetové korekcie nadmorskej výšky</string>
     <string name="index_item_world_seamarks">Svetové námorné značky</string>
     <string name="index_item_world_bitcoin_payments">Svetové platby bitcoinom</string>
-    <string name="index_item_world_basemap">Svetová základná mapa</string>
+    <string name="index_item_world_basemap">Svetová prehľadová mapa</string>
     <string name="index_item_world_ski">Svetová lyžiarska mapa</string>
     <string name="lang_hr">Chorvátsky (Hrvatski)</string>
     <string name="lang_zh">Čínsky (中国的)</string>
@@ -2696,7 +2696,7 @@
     <string name="shared_string_bookmark">Záložka</string>
     <string name="hide_full_description">Skryť celý popis</string>
     <string name="show_full_description">Zobraziť celý popis</string>
-    <string name="off_road_render_descr">Pre jazdenie mimo cesty v teréne (off-road) založený na štýle \'Topo\' a pre použitie s podkladovou mapou zo zelených satelitných snímok. Znížená hrúbka ciest, zvýšená hrúbka poľných ciest, chorníkov, cyklistických a iných trás.</string>
+    <string name="off_road_render_descr">Pre jazdenie mimo cesty v teréne (off-road) založený na štýle \'Topo\' a pre použitie s podkladovou mapou zo zelených satelitných snímok. Znížená hrúbka ciest, zvýšená hrúbka poľných ciest, chodníkov, cyklistických a iných trás.</string>
     <string name="nautical_render_descr">Pre námornú navigáciu. Obsahuje bóje, majáky, vodné cesty, morské trasy a značky, prístavy, námorné služby a hĺbkové vrstevnice.</string>
     <string name="ski_map_render_descr">Pre lyžovanie. Obsahuje zjazdovky, lyžiarske vleky a iné objekty pre lyžiarov. Druhoradé objekty na mape sú menej výrazné.</string>
     <string name="light_rs_render_descr">Jednoduchý štýl pre navigáciu auta. Príjemný nočný režim, vrstevnice, kontrastné oranžové cesty, druhoradé objekty na mape sú menej výrazné.</string>
