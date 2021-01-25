@@ -1,13 +1,14 @@
 package net.osmand.plus.track;
 
-import android.text.TextUtils;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.R;
@@ -16,16 +17,15 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.util.Algorithms;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
+import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
 
 public class DescriptionCard extends BaseCard {
 
 	private final GPXFile gpxFile;
 
-	public DescriptionCard(MapActivity mapActivity, GPXFile gpxFile) {
+	public DescriptionCard(@NonNull MapActivity mapActivity, @NonNull GPXFile gpxFile) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 	}
@@ -37,9 +37,11 @@ public class DescriptionCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		if (gpxFile == null || gpxFile.metadata == null || gpxFile.metadata.getDescription() == null) {
+		if (gpxFile.metadata == null || gpxFile.metadata.getDescription() == null) {
 			AndroidUiHelper.updateVisibility(view, false);
 			return;
+		} else {
+			AndroidUiHelper.updateVisibility(view, true);
 		}
 
 		final String title = gpxFile.metadata.getArticleTitle();
@@ -62,31 +64,15 @@ public class DescriptionCard extends BaseCard {
 		editBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				GpxEditDescriptionDialogFragment.showInstance(mapActivity, descriptionHtml);
+				GpxEditDescriptionDialogFragment.showInstance(mapActivity, descriptionHtml, null);
 			}
 		});
-	}
-
-	@Nullable
-	private String getMetadataImageLink(@NonNull GPXUtilities.Metadata metadata) {
-		String link = metadata.link;
-		if (!TextUtils.isEmpty(link)) {
-			String lowerCaseLink = link.toLowerCase();
-			if (lowerCaseLink.contains(".jpg")
-					|| lowerCaseLink.contains(".jpeg")
-					|| lowerCaseLink.contains(".png")
-					|| lowerCaseLink.contains(".bmp")
-					|| lowerCaseLink.contains(".webp")) {
-				return link;
-			}
-		}
-		return null;
 	}
 
 	private String getFirstParagraph(String descriptionHtml) {
 		if (descriptionHtml != null) {
 			String firstParagraph = WikiArticleHelper.getPartialContent(descriptionHtml);
-			if (!TextUtils.isEmpty(firstParagraph)) {
+			if (!Algorithms.isEmpty(firstParagraph)) {
 				return firstParagraph;
 			}
 		}
@@ -113,5 +99,4 @@ public class DescriptionCard extends BaseCard {
 			}
 		});
 	}
-
 }

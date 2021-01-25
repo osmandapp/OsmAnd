@@ -15,16 +15,21 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.FileUtils.RenameCallback;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -48,8 +53,6 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
-import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.OpenGpxDetailsTask;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
@@ -58,7 +61,6 @@ import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
-import net.osmand.plus.myplaces.GPXTabItemType;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.SegmentActionsListener;
@@ -76,14 +78,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.List;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
 import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
@@ -224,8 +218,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 			if (isPortrait()) {
 				AndroidUiHelper.updateVisibility(getTopShadow(), true);
-				AndroidUtils.setBackground(view.getContext(), getBottomContainer(), isNightMode(),
-						R.color.list_background_color_light, R.color.list_background_color_dark);
 			} else {
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -662,21 +654,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			}
 		}
 	}
-
-	/*private void updateCardsLayout() {
-		View mainView = getMainView();
-		if (mainView != null) {
-			View topShadow = getTopShadow();
-			FrameLayout bottomContainer = getBottomContainer();
-			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
-				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
-			} else {
-				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
-			}
-		}
-	}*/
 
 	private void setupButtons(View view) {
 		ColorStateList navColorStateList = AndroidUtils.createBottomNavColorStateList(getContext(), isNightMode());

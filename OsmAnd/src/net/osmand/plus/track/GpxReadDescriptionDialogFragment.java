@@ -15,47 +15,69 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
-
-import org.apache.commons.logging.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
+import net.osmand.util.Algorithms;
 
 public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = GpxReadDescriptionDialogFragment.class.getSimpleName();
-	private static final Log log = PlatformUtil.getLog(GpxReadDescriptionDialogFragment.class);
 
-	public static final String TITLE_KEY = "title_key";
-	public static final String IMAGE_URL_KEY = "image_url_key";
-	public static final String CONTENT_KEY = "content_key";
-
-	WebViewEx webView;
-
+	private static final String TITLE_KEY = "title_key";
+	private static final String IMAGE_URL_KEY = "image_url_key";
+	private static final String CONTENT_KEY = "content_key";
 	private static final int EDIT_ID = 1;
+
+	private WebViewEx webView;
+
+	private String title;
+	private String imageUrl;
+	private String contentHtml;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Bundle args = getArguments();
+		if (savedInstanceState != null) {
+			readBundle(savedInstanceState);
+		} else if (args != null) {
+			readBundle(args);
+		}
+	}
+
+	private void readBundle(Bundle bundle) {
+		title = bundle.getString(TITLE_KEY);
+		imageUrl = bundle.getString(IMAGE_URL_KEY);
+		contentHtml = bundle.getString(CONTENT_KEY);
+	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.dialog_read_gpx_description, container, false);
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		View view = themedInflater.inflate(R.layout.dialog_read_gpx_description, container, false);
 
 		setupToolbar(view);
 		setupImage(view);
@@ -73,7 +95,10 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		if (item.getItemId() == EDIT_ID) {
-			GpxEditDescriptionDialogFragment.showInstance(getMyActivity(), getArgument(CONTENT_KEY));
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				GpxEditDescriptionDialogFragment.showInstance(activity, contentHtml, this);
+			}
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -95,6 +120,14 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(TITLE_KEY, title);
+		outState.putString(IMAGE_URL_KEY, imageUrl);
+		outState.putString(CONTENT_KEY, contentHtml);
+	}
+
 	private void setupToolbar(View view) {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		getMyActivity().setSupportActionBar(toolbar);
@@ -107,8 +140,7 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 
-		String title = getArgument(TITLE_KEY);
-		if (title != null) {
+		if (!Algorithms.isEmpty(title)) {
 			toolbar.setTitle(title);
 			int titleColor = AndroidUtils.resolveAttribute(ctx, R.attr.pstsTextColor);
 			toolbar.setTitleTextColor(ContextCompat.getColor(ctx, titleColor));
@@ -123,7 +155,6 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void setupImage(View view) {
-		final String imageUrl = getArgument(IMAGE_URL_KEY);
 		if (imageUrl == null) {
 			return;
 		}
@@ -168,8 +199,13 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		loadWebviewData();
 	}
 
+	public void updateContent(String content) {
+		contentHtml = content;
+		loadWebviewData();
+	}
+
 	private void loadWebviewData() {
-		String content = getArgument(CONTENT_KEY);
+		String content = contentHtml;
 		if (content != null) {
 			content = isNightMode(false) ? getColoredContent(content) : content;
 			String encoded = Base64.encodeToString(content.getBytes(), Base64.NO_PADDING);
@@ -182,7 +218,10 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		readBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				GpxEditDescriptionDialogFragment.showInstance(getMyActivity(), getArgument(CONTENT_KEY));
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					GpxEditDescriptionDialogFragment.showInstance(activity, contentHtml, GpxReadDescriptionDialogFragment.this);
+				}
 			}
 		});
 		AndroidUiHelper.setVisibility(View.VISIBLE,
@@ -193,27 +232,20 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private String getColoredContent(String content) {
-		return "<body style=\"color:white;\">\n" +
-				content +
-				"</body>\n";
+		return "<body style=\"color:white;\">\n" + content + "</body>\n";
 	}
 
-	private String getArgument(String key) {
-		Bundle args = getArguments();
-		if (args == null) {
-			return null;
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String title, @NonNull String imageUrl, @NonNull String description) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			Bundle args = new Bundle();
+			args.putString(TITLE_KEY, title);
+			args.putString(IMAGE_URL_KEY, imageUrl);
+			args.putString(CONTENT_KEY, description);
+
+			GpxReadDescriptionDialogFragment fragment = new GpxReadDescriptionDialogFragment();
+			fragment.setArguments(args);
+			fragment.show(fragmentManager, GpxReadDescriptionDialogFragment.TAG);
 		}
-		return args.getString(key);
-	}
-
-	public static void showInstance(AppCompatActivity activity, String title, String imageUrl, String description) {
-		Bundle args = new Bundle();
-		args.putString(GpxReadDescriptionDialogFragment.TITLE_KEY, title);
-		args.putString(GpxReadDescriptionDialogFragment.IMAGE_URL_KEY, imageUrl);
-		args.putString(GpxReadDescriptionDialogFragment.CONTENT_KEY, description);
-
-		GpxReadDescriptionDialogFragment fragment = new GpxReadDescriptionDialogFragment();
-		fragment.setArguments(args);
-		fragment.show(activity.getSupportFragmentManager(), GpxReadDescriptionDialogFragment.TAG);
 	}
 }

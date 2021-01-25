@@ -109,16 +109,13 @@
 
 	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:minHeight="@dimen/card_row_min_height"
-		android:layout_weight="1"
-		android:foreground="@drawable/bg_contextmenu_shadow"
-		android:foregroundGravity="top|fill_horizontal">
+		android:layout_height="wrap_content"
+		android:background="?attr/activity_background_basic">
 
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:background="?attr/activity_background_basic" />
+		<include
+			android:id="@+id/shadow"
+			layout="@layout/card_bottom_divider" />
+
 	</FrameLayout>
 
 </LinearLayout>

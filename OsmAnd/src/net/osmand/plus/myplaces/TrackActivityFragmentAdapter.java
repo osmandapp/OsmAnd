@@ -34,7 +34,6 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Metadata;
 import net.osmand.GPXUtilities.WptPt;
@@ -409,7 +408,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	@Nullable
-	private String getMetadataImageLink(@NonNull Metadata metadata) {
+	public static String getMetadataImageLink(@NonNull Metadata metadata) {
 		String link = metadata.link;
 		if (!TextUtils.isEmpty(link)) {
 			String lowerCaseLink = link.toLowerCase();
