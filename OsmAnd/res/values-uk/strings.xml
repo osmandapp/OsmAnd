@@ -22,12 +22,12 @@
     <string name="offline_navigation_not_available">Автономна навігація OsmAnd тимчасово не доступна.</string>
     <string name="left_side_navigation">Лівосторонній рух</string>
     <string name="left_side_navigation_descr">Для країн з лівостороннім рухом.</string>
-    <string name="unknown_from_location">Початкове місцезнаходження ще не визначено.</string>
+    <string name="unknown_from_location">Початкове місцеперебування ще не визначено.</string>
     <string name="unknown_location">Розташування ще не визначено.</string>
     <string name="modify_transparency">Встановити прозорість (0 – прозорий, 255 – непрозорий)</string>
     <string name="confirm_interrupt_download">Скасувати завантаження\?</string>
     <string name="first_time_msg">Дякуємо за користування OsmAnd. Завантажуйте регіональні дані для користування в автономному режимі за допомогою пункту меню \'Налаштування\' → \'Керування мапами\' для перегляду мап, пошуку адрес, POI, громадського транспорту тощо.</string>
-    <string name="basemap_was_selected_to_download">Основна мапа, необхідна для забезпечення основних можливостей, знаходиться у черзі завантаження.</string>
+    <string name="basemap_was_selected_to_download">Основна мапа, необхідна для забезпечення основних можливостей, перебуває у черзі завантаження.</string>
     <string name="select_index_file_to_download">Нічого не знайдено. Якщо Ви не знайшли свій регіон, Ви можете створити його самостійно (див. https://osmand.net).</string>
     <string name="local_indexes_cat_tile">Мережеві та кешовані растрові мапи</string>
     <string name="local_indexes_cat_map">Звичайні мапи (векторні)</string>
@@ -312,8 +312,8 @@
     <string name="send_location_way_choose_title">Поділитись, використовуючи</string>
     <string name="send_location_sms_pattern">Координати: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Щоб побачити розташування, перейдіть за веб-посиланням %1$s або intent-посиланням Android %2$s</string>
-    <string name="send_location">Надіслати місцезнаходження</string>
-    <string name="context_menu_item_share_location">Поділитись місцезнаходженням</string>
+    <string name="send_location">Надіслати місцеперебування</string>
+    <string name="context_menu_item_share_location">Поділитись місцеперебуванням</string>
     <string name="add_waypoint_dialog_added">Маршрутну точку GPX \"{0}\" додано</string>
     <string name="add_waypoint_dialog_title">Додати точку до записаного треку</string>
     <string name="amenity_type_administrative">Адміністративні</string>
@@ -575,7 +575,7 @@
     <string name="shared_string_close">Закрити</string>
     <string name="loading_data">Дані завантажуються…</string>
     <string name="reading_indexes">Зчитування даних…</string>
-    <string name="previous_run_crashed">Помилка у роботі застосунку. Файл журналу знаходиться тут {0}. Будь ласка, напишіть розробнику про помилку (з вкладеним журнальним файлом).</string>
+    <string name="previous_run_crashed">Помилка роботи застосунку. Файл журналу розміщено тут {0}. Повідомте розробника про помилку (з вкладеним файлом журналу).</string>
     <string name="saving_gpx_tracks">Збереження GPX-файлу…</string>
     <string name="finished_task">Закінчено</string>
     <string name="use_online_routing_descr">Використовувати Інтернет для прокладання маршруту.</string>
@@ -843,7 +843,7 @@
     <string name="safe_mode_description">Запустити програму в безпечному режимі (використовує повільніші Android-функції замість власних).</string>
     <string name="safe_mode">Безпечний режим</string>
     <string name="native_library_not_running">Програму запущено в безпечному режимі (вимкніть його в \'Налаштуваннях\').</string>
-    <string name="audionotes_location_not_defined">Оберіть \"Використати місцезнаходження...\" для прив\'язки нотатки до даного місцезнаходження.</string>
+    <string name="audionotes_location_not_defined">Виберіть \"Використати місцеперебування...\" для прив\'язки нотатки до поточного розташування.</string>
     <string name="background_service_is_enabled_question">Службу OsmAnd у тлі досі запущено. Зупинити її роботу також\?</string>
     <string name="close_changeset">Закрити набір змін</string>
     <string name="zxing_barcode_scanner_not_found">Програма \'ZXing Barcode Scanner\' не встановлена. Шукати в Google Play?</string>
@@ -1589,7 +1589,7 @@
     <string name="lang_ceb">Себуанська</string>
     <string name="archive_wikipedia_data">У Вас є старі несумісні дані з Вікіпедії. Заархівувати їх?</string>
     <string name="download_wikipedia_files">Завантажити додаткові дані з Вікіпедії (%1$s Мб)\?</string>
-    <string name="gps_network_not_enabled">Служба визначення місцезнаходження вимкнена. Увімкнути?</string>
+    <string name="gps_network_not_enabled">Служба визначення розташування вимкнена. Увімкнути\?</string>
     <string name="disable_recording_once_app_killed">Запобігти самостійному логуваню</string>
     <string name="shared_string_import2osmand">Імпортувати до OsmAnd</string>
     <string name="read_full_article">Читати повну статтю (мережево)</string>
@@ -1656,7 +1656,7 @@
     <string name="go_to_map">Показати мапу</string>
     <string name="simulate_initial_startup">Імітувати перший запуск застосунку</string>
     <string name="share_geo">гео:</string>
-    <string name="share_menu_location">Поділитись місцезнаходженням</string>
+    <string name="share_menu_location">Поділитись місцеперебуванням</string>
     <string name="shared_string_send">Надіслати</string>
     <string name="favorite_category_dublicate_message">Будь ласка, використовуйте назву категорії, яка ще не існує.</string>
     <string name="favorite_category_name">Назва категорії</string>
@@ -1790,7 +1790,7 @@
     <string name="share_osm_edits_subject">OSM правки, поширені через OsmAnd</string>
     <string name="rendering_attr_hideProposed_name">Заплановані обʼєкти</string>
     <string name="save_poi_without_poi_type_message">Ви дійсно хочете зберегти POI, не вказавши його тип?</string>
-    <string name="no_location_permission">Надання доступу до даних про місцезнаходження.</string>
+    <string name="no_location_permission">Надання доступу до даних про місцеперебування.</string>
     <string name="no_camera_permission">Надання доступу до камери.</string>
     <string name="no_microphone_permission">Надання доступу до мікрофона.</string>
     <string name="route_distance">Відстань:</string>
@@ -2039,7 +2039,7 @@
     <string name="location_not_found">Неможливо визначити місце розташування</string>
     <string name="no_inet_connection">З’єднання з Інтернетом відсутнє</string>
     <string name="no_inet_connection_desc_map">Необхідно завантажити мапи.</string>
-    <string name="search_location">Визначення місцезнаходження…</string>
+    <string name="search_location">Визначення місцеперебування…</string>
     <string name="storage_free_space">Вільне місце</string>
     <string name="storage_place_description">Сховище даних OsmAnd (мапи, файли з треками, тощо): %1$s.</string>
     <string name="give_permission">Дати дозвіл</string>
@@ -2210,7 +2210,7 @@
     <string name="restart_search">Шукати знову</string>
     <string name="increase_search_radius">Збільшити радіус пошуку</string>
     <string name="nothing_found">Нічого не знайдено</string>
-    <string name="private_access_routing_req">Місце призначення знаходиться в області з приватним доступом. Дозволити доступ по приватних дорогах для цієї подорожі\?</string>
+    <string name="private_access_routing_req">Місце призначення розташовано в області з приватним доступом. Дозволити доступ до приватних доріг у цій подорожі\?</string>
     <string name="nothing_found_descr">Змініть пошуковий запит або ж розширте пошуковий радіус.</string>
     <string name="quick_action_showhide_osmbugs_title">Показати/приховати OSM-нотатки</string>
     <string name="quick_action_osmbugs_show">Показати OSM-нотатки</string>
@@ -2304,12 +2304,12 @@
 \n</string>
     <string name="osmand_extended_description_part4">Катання на лижах 
 \nOsmAnd-втулок лижних мап дозволяє бачити лижні траси з рівнем складності та деякою додатковими відомостями на зразок розташування підйомників та інших об’єктів.</string>
-    <string name="osmand_extended_description_part5">Їзда на велосипеді 
-\n• Знаходьте велосипедні доріжки на мапі 
-\n• GPS-навігація у велосипедному режимі будує маршрут з використанням велосипедних доріжок 
-\n• Ви можете бачити свою швидкість та висотне положення 
-\n• Опція запису GPX дозволяє вам записувати Вашу подорож та ділитися нею 
-\n• Через додатковий втулок Ви можете увімкнути відображення горизонталей та рельєфу</string>
+    <string name="osmand_extended_description_part5">Їзда на велосипеді
+\n• Знаходьте велосипедні доріжки на мапі
+\n• GPS-навігація у велосипедному режимі будує маршрут з використанням велосипедних доріжок
+\n• Ви можете бачити свою швидкість та висотне положення
+\n• Параметр запису GPX дозволяє вам записувати вашу подорож та ділитися нею
+\n• Через додатковий втулок ви можете увімкнути показ горизонталей та рельєфу</string>
     <string name="osmand_extended_description_part6">Прогулянки, походи, екскурсія по місту 
 \n• Мапа показує доріжки для прогулянок та походів 
 \n• Вікіпедія Вашою обраною мовою може багато розповісти під час екскурсії містом 
@@ -2382,9 +2382,9 @@
     <string name="osmand_plus_extended_description_part7">Безпосередній вклад у OSM
 \n• Звітуйте про помилки в даних
 \n• Вивантажуйте GPX-треки в OSM безпосередньо з програми
-\n• Додавайте POI (цікаві точки) та безпосередньо вивантажуйте їх в OSM (чи пізніше, якщо зараз Ви в офлайні)
-\n• Опція запису подорожі також і в режимі тла (в той час як пристрій знаходиться в сплячому режимі)
-\nOsmAnd — вільне й відкрите програмне забезпечення, що активно розвивається. Кожен може внести свій вклад, звітуючи про помилки, поліпшуючи переклад чи розробляючи нові функції. Також проєкт покладається на фінансові внески для оплати розробки та тестування нових функціональних можливостей.
+\n• Додавайте POI (цікаві точки) та безпосередньо вивантажуйте їх в OSM (чи пізніше, якщо зараз ви в автономному режимі)
+\n• Параметр запису подорожі також і в тлі (коли пристрій перебуває в режимі сну)
+\nOsmAnd — вільне й відкрите програмне забезпечення, що активно розвивається. Кожен може допомогти, звітуючи про помилки, поліпшуючи переклад чи розробляючи нові функції. Також проєкт покладається на фінансові внески для оплати розробки та тестування нових функціональних можливостей.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Приблизне охоплення мап та якість: 
 \n • Західна Європа: **** 
@@ -2505,7 +2505,7 @@
     <string name="order_by">Сортувати за:</string>
     <string name="use_location">Використовувати розташування</string>
     <string name="add_location_as_first_point_descr">Додати Ваше місце розташування як точку початку при плануванні маршруту.</string>
-    <string name="my_location">Моє місцезнаходження</string>
+    <string name="my_location">Моє місцеперебування</string>
     <string name="shared_string_finish">Фініш</string>
     <string name="plan_route">Планувати маршрут</string>
     <string name="shared_string_sort">Впорядкувати</string>
@@ -3339,11 +3339,11 @@
     <string name="multimedia_notes_prefs_descr">Розмір зображення, якість звуку та відео</string>
     <string name="osm_editing_prefs_descr">Логін, пароль, редагування в безмережному режимі</string>
     <string name="accessibility_prefs_descr">Оберіть значок, колір та назву</string>
-    <string name="live_monitoring_descr">Дозволяє ділитися поточним місцезнаходженням, використовуючи запис поїздки.</string>
+    <string name="live_monitoring_descr">Дозволяє ділитися поточним місцеперебуванням, використовуючи запис поїздки.</string>
     <string name="live_monitoring">Мережеве відстеження</string>
     <string name="save_track_logging_accuracy">Точність журналювання</string>
     <string name="tracks_view_descr">Ви можете знайти всі записи в %1$s або в теці OsmAnd за допомогою файлового провідника.</string>
-    <string name="multimedia_notes_view_descr">Ваші нотатки OSM знаходяться в %1$s.</string>
+    <string name="multimedia_notes_view_descr">Ваші нотатки OSM розміщено в %1$s.</string>
     <string name="video_notes">Відеонотатки</string>
     <string name="photo_notes">Фотонотатки</string>
     <string name="route_recalculation">Перерахунок маршруту</string>
