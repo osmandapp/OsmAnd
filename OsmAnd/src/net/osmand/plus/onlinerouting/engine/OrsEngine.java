@@ -3,9 +3,11 @@ package net.osmand.plus.onlinerouting.engine;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
+import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
 
 import org.json.JSONArray;
@@ -24,8 +26,9 @@ public class OrsEngine extends OnlineRoutingEngine {
 		super(params);
 	}
 
+	@NonNull
 	@Override
-	public @NonNull EngineType getType() {
+	public EngineType getType() {
 		return EngineType.ORS;
 	}
 
@@ -75,20 +78,25 @@ public class OrsEngine extends OnlineRoutingEngine {
 		}
 	}
 
-	@NonNull
+	@Nullable
 	@Override
-	public List<LatLon> parseServerResponse(@NonNull String content) throws JSONException {
+	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                 boolean leftSideNavigation) throws JSONException {
 		JSONObject obj = new JSONObject(content);
 		JSONArray array = obj.getJSONArray("features").getJSONObject(0)
 				.getJSONObject("geometry").getJSONArray("coordinates");
-		List<LatLon> track = new ArrayList<>();
+		List<LatLon> points = new ArrayList<>();
 		for (int i = 0; i < array.length(); i++) {
 			JSONArray point = array.getJSONArray(i);
 			double lon = Double.parseDouble(point.getString(0));
 			double lat = Double.parseDouble(point.getString(1));
-			track.add(new LatLon(lat, lon));
+			points.add(new LatLon(lat, lon));
 		}
-		return track;
+		if (!isEmpty(points)) {
+			List<Location> route = convertRouteToLocationsList(points);
+			new OnlineRoutingResponse(route, null);
+		}
+		return null;
 	}
 
 	@Override
