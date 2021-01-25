@@ -122,14 +122,14 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		return R.string.shared_string_close;
 	}
 
-	protected static View getCustomButtonView(OsmandApplication app, ApplicationMode mode, boolean checked, boolean nightMode) {
+	public static View getCustomButtonView(OsmandApplication app, ApplicationMode mode, boolean checked, boolean nightMode) {
 		View customView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_preference_switch, null);
 		updateCustomButtonView(app, mode, customView, checked, nightMode);
 
 		return customView;
 	}
 
-	protected static void updateCustomButtonView(OsmandApplication app, ApplicationMode mode, View customView, boolean checked, boolean nightMode) {
+	public static void updateCustomButtonView(OsmandApplication app, ApplicationMode mode, View customView, boolean checked, boolean nightMode) {
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		View buttonView = customView.findViewById(R.id.button_container);
 
