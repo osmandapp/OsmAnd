@@ -59,7 +59,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 	private TrackDisplayHelper displayHelper;
 	private TrackActivityFragmentAdapter fragmentAdapter;
 	private SegmentGPXAdapter adapter;
-	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT};
+	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
 	private IconPopupMenu optionsPopupMenu;
 	private boolean updateEnable;
 
@@ -304,7 +304,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 	}
 
 	@Override
-	public void showOptionsPopupMenu(final View view, final TrkSegment segment, final boolean confirmDeletion, final GpxDisplayItem gpxItem) {
+	public void showOptionsPopupMenu(View view, final TrkSegment segment, final boolean confirmDeletion, final GpxDisplayItem gpxItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			IconPopupMenu optionsPopupMenu = new IconPopupMenu(activity, view.findViewById(R.id.overflow_menu));
@@ -312,8 +312,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			optionsPopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
 			menu.findItem(R.id.action_edit).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_edit_dark));
 			menu.findItem(R.id.action_delete).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
-			boolean isSelectedTrackRecordingNow = displayHelper.getGpx().showCurrentTrack;
-			if (isSelectedTrackRecordingNow) {
+			if (displayHelper.getGpx().showCurrentTrack) {
 				menu.findItem(R.id.split_interval).setVisible(false);
 			} else {
 				menu.findItem(R.id.split_interval).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_split_interval));
