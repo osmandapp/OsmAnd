@@ -1007,7 +1007,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					public void onClick(View v) {
 						FragmentActivity activity = getActivity();
 						if (activity != null) {
-							EditTrackGroupDialogFragment.showInstance(activity.getSupportFragmentManager(), group);
+							EditTrackGroupDialogFragment.showInstance(activity.getSupportFragmentManager(), group, null);
 						}
 					}
 				});

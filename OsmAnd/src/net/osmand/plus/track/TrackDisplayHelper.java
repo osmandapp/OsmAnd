@@ -1,14 +1,9 @@
 package net.osmand.plus.track;
 
-import android.app.Activity;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -17,10 +12,6 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.measurementtool.GpxData;
-import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -162,22 +153,5 @@ public class TrackDisplayHelper {
 			list.addAll(g.getModifiableList());
 		}
 		return list;
-	}
-
-	public void addNewGpxData(Activity activity) {
-		GPXFile gpxFile = getGpx();
-		GpxData gpxData = new GpxData(gpxFile);
-		WptPt pointToShow = gpxFile != null ? gpxFile.findPointToShow() : null;
-		if (pointToShow != null) {
-			LatLon location = new LatLon(pointToShow.getLatitude(), pointToShow.getLongitude());
-			final OsmandSettings settings = app.getSettings();
-			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-					settings.getLastKnownMapZoom(),
-					new PointDescription(PointDescription.POINT_TYPE_WPT, activity.getString(R.string.add_line)),
-					false,
-					gpxData
-			);
-			MapActivity.launchMapActivityMoveToTop(activity);
-		}
 	}
 }

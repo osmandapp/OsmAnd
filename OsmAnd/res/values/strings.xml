@@ -12,6 +12,9 @@
 
 -->
 
+    <string name="copy_to_map_favorites">Copy to favorites</string>
+    <string name="copy_to_map_markers">Copy to map markers</string>
+    <string name="delete_waypoints">Delete waypoints</string>
     <string name="context_menu_edit_descr">Edit description</string>
     <string name="context_menu_read_full">Read full</string>
     <string name="delete_online_routing_engine">Delete this online routing engine?</string>

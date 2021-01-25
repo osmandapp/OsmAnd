@@ -112,8 +112,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		return 0;
 	}
 
+	@Override
 	public float getMiddleStateKoef() {
 		return 0.5f;
+	}
+
+	@Override
+	public int getInitialMenuState() {
+		return MenuState.HALF_SCREEN;
 	}
 
 	public TrackDrawInfo getTrackDrawInfo() {

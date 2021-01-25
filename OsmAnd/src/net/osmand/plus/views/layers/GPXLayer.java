@@ -516,7 +516,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				for (WptPt wpt : getListStarPoints(g)) {
 					if (wpt.lat >= latLonBounds.bottom && wpt.lat <= latLonBounds.top
 							&& wpt.lon >= latLonBounds.left && wpt.lon <= latLonBounds.right
-							&& wpt != contextMenuLayer.getMoveableObject()) {
+							&& wpt != contextMenuLayer.getMoveableObject() && !isPointHidden(g, wpt)) {
 						pointFileMap.put(wpt, g);
 						MapMarker marker = null;
 						if (synced) {
@@ -777,6 +777,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return g.getGpxFile().getPoints();
 	}
 
+	private boolean isPointHidden(SelectedGpxFile selectedGpxFile, WptPt point) {
+		if (!Algorithms.isEmpty(selectedGpxFile.getHiddenGroups())) {
+			return selectedGpxFile.getHiddenGroups().contains(point.category);
+		} else {
+			return false;
+		}
+	}
+
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
 		return (Math.abs(objx - ex) <= radius && Math.abs(objy - ey) <= radius);
 	}
@@ -790,6 +798,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			List<WptPt> pts = getListStarPoints(g);
 			// int fcolor = g.getColor() == 0 ? clr : g.getColor();
 			for (WptPt n : pts) {
+				if (isPointHidden(g, n)) {
+					continue;
+				}
 				int x = (int) tb.getPixXFromLatLon(n.lat, n.lon);
 				int y = (int) tb.getPixYFromLatLon(n.lat, n.lon);
 				if (calculateBelongs(ex, ey, x, y, r)) {

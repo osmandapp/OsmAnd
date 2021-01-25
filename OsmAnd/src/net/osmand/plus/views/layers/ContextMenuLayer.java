@@ -574,7 +574,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void cancelAddGpxPoint() {
 		cancelApplyingNewMarkerPosition = true;
 		quitAddGpxPoint();
-		activity.getContextMenu().show();
 		applyingMarkerLatLon = null;
 	}
 
