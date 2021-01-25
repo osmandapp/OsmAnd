@@ -57,7 +57,7 @@ public class NetworkUtils {
 		}
 	}
 
-	public static String sendPostDataRequest(String urlText, InputStream data) {
+	public static String sendPostDataRequest(String urlText, String formName, String fileName, InputStream data) {
 		try {
 			log.info("POST : " + urlText);
 			HttpURLConnection conn = getHttpURLConnection(urlText);
@@ -69,7 +69,7 @@ public class NetworkUtils {
 			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
 			OutputStream ous = conn.getOutputStream();
 			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
-			ous.write(("Content-Disposition: form-data; name=\"" + "file" + "\"; filename=\"" + "image1" + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+			ous.write(("Content-Disposition: form-data; name=\"" + formName + "\"; filename=\"" + fileName + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
 			ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
 			Algorithms.streamCopy(data, ous);
 			ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
