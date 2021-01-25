@@ -23,16 +23,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.FileUtils.RenameCallback;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -56,8 +53,6 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
-import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.OpenGpxDetailsTask;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
@@ -66,7 +61,6 @@ import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
-import net.osmand.plus.myplaces.GPXTabItemType;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.SegmentActionsListener;
@@ -118,6 +112,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private TrackMenuType menuType = TrackMenuType.OVERVIEW;
 	private SegmentsCard segmentsCard;
 	private OptionsCard optionsCard;
+	private DescriptionCard descriptionCard;
 	private OverviewCard overviewCard;
 
 	private TrackChartPoints trackChartPoints;
@@ -223,8 +218,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 			if (isPortrait()) {
 				AndroidUiHelper.updateVisibility(getTopShadow(), true);
-				AndroidUtils.setBackground(view.getContext(), getBottomContainer(), isNightMode(),
-						R.color.list_background_color_light, R.color.list_background_color_dark);
 			} else {
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -299,6 +292,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					optionsCard.setListener(this);
 					cardsContainer.addView(optionsCard.build(mapActivity));
 				}
+			} else if (menuType == TrackMenuType.OVERVIEW) {
+				if (descriptionCard != null && descriptionCard.getView() != null) {
+					ViewGroup parent = ((ViewGroup) descriptionCard.getView().getParent());
+					if (parent != null) {
+						cardsContainer.removeView(descriptionCard.getView());
+					}
+					cardsContainer.addView(descriptionCard.getView());
+				} else {
+					descriptionCard = new DescriptionCard(getMapActivity(), displayHelper.getGpx());
+					cardsContainer.addView(descriptionCard.build(mapActivity));
+				}
 			}
 		}
 	}
@@ -347,6 +351,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity != null && trackChartPoints != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
 		}
+		updateHeader();
 		startLocationUpdate();
 	}
 
@@ -650,21 +655,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	/*private void updateCardsLayout() {
-		View mainView = getMainView();
-		if (mainView != null) {
-			View topShadow = getTopShadow();
-			FrameLayout bottomContainer = getBottomContainer();
-			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
-				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
-			} else {
-				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
-			}
-		}
-	}*/
-
 	private void setupButtons(View view) {
 		ColorStateList navColorStateList = AndroidUtils.createBottomNavColorStateList(getContext(), isNightMode());
 		BottomNavigationView bottomNav = view.findViewById(R.id.bottom_navigation);
@@ -694,6 +684,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		if (optionsCard != null) {
 			optionsCard.updateContent();
+		}
+		if (descriptionCard != null) {
+			descriptionCard.updateContent();
 		}
 		setupCards();
 	}
