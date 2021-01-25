@@ -29,7 +29,8 @@ import static net.osmand.util.Algorithms.isEmpty;
 public abstract class OnlineRoutingEngine implements Cloneable {
 
 	public final static String ONLINE_ROUTING_ENGINE_PREFIX = "online_routing_engine_";
-	public static final VehicleType CUSTOM_VEHICLE = new VehicleType("", R.string.shared_string_custom);
+	public final static VehicleType CUSTOM_VEHICLE = new VehicleType("", R.string.shared_string_custom);
+	public final static int INVALID_ID = -1;
 
 	private final Map<String, String> params = new HashMap<>();
 	private final List<VehicleType> allowedVehicles = new ArrayList<>();

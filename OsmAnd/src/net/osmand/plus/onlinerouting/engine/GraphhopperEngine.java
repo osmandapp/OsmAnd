@@ -76,18 +76,7 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 		if (!isEmpty(apiKey)) {
 			sb.append('&').append("key=").append(apiKey);
 		}
-		// available Graphhopper details data
-		sb.append('&').append("details=").append("street_name");
-		sb.append('&').append("details=").append("time");
-		sb.append('&').append("details=").append("distance");
-		sb.append('&').append("details=").append("max_speed");
-		sb.append('&').append("details=").append("toll");
-		sb.append('&').append("details=").append("road_class");
-		sb.append('&').append("details=").append("road_class_link");
-		sb.append('&').append("details=").append("road_access");
-		sb.append('&').append("details=").append("road_environment");
 		sb.append('&').append("details=").append("lanes");
-		sb.append('&').append("details=").append("surface");
 	}
 
 	@NonNull
@@ -105,15 +94,15 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 		for (int i = 0; i < instructions.length(); i++) {
 			JSONObject item = instructions.getJSONObject(i);
 			int sign = Integer.parseInt(item.getString("sign"));
-			double distance = Double.parseDouble(item.getString("distance"));
-			String text = item.getString("text");
+			int distance = (int) Math.round(Double.parseDouble(item.getString("distance")));
+			String description = item.getString("text");
 			String streetName = item.getString("street_name");
-			int time = Integer.parseInt(item.getString("time")) / 1000;
+			int timeInSeconds = (int) Math.round(Integer.parseInt(item.getString("time")) / 1000f);
 			JSONArray interval = item.getJSONArray("interval");
 			int startPointOffset = interval.getInt(0);
 			int endPointOffset = interval.getInt(1);
 
-			float averageSpeed = (float) distance / time;
+			float averageSpeed = (float) distance / timeInSeconds;
 			TurnType turnType = identifyTurnType(sign, leftSideNavigation);
 			// TODO turnType.setTurnAngle()
 
@@ -122,9 +111,9 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 			if (turnType != null && turnType.isRoundAbout()) {
 				direction.routeEndPointOffset = endPointOffset;
 			}
-			direction.setDescriptionRoute(text);
+			direction.setDescriptionRoute(description);
 			direction.setStreetName(streetName);
-			direction.setDistance((int) distance); // TODO convert to int correctly
+			direction.setDistance(distance);
 			directions.add(direction);
 		}
 		return new OnlineRoutingResponse(route, directions);
@@ -142,15 +131,15 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 	}
 
 	/**
-	 * @param sign a number which specifies the turn type to show (Graphhopper API)
-	 * @return TurnType object defined in OsmAnd which is similar to Graphhopper sign parameter
+	 * @param sign - a number which specifies the turn type to show (Graphhopper API value)
+	 * @return a TurnType object defined in OsmAnd which is equivalent to a value from the Graphhopper API
 	 *
 	 * For future compatibility it is important that all clients
 	 * are able to handle also unknown instruction sign numbers
 	 */
 	@Nullable
 	public static TurnType identifyTurnType(int sign, boolean leftSide) {
-		int id = -1;
+		int id = INVALID_ID;
 
 		if (sign == -98) {
 			// an U-turn without the knowledge
@@ -216,6 +205,6 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 			id = TurnType.TRU;
 		}
 
-		return id != -1 ? TurnType.valueOf(id, leftSide) : null;
+		return id != INVALID_ID ? TurnType.valueOf(id, leftSide) : null;
 	}
 }
