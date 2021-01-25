@@ -3,6 +3,7 @@ package net.osmand.plus.widgets;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import net.osmand.plus.R;
 
@@ -32,5 +33,14 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 
 	public void setGravityFloatingLabel(int gravity) {
 		floatingLabel.setGravity(gravity);
+	}
+
+	@Override
+	public void setLabelText(String labelText) {
+		super.setLabelText(labelText);
+		if (!floatingLabel.isSingleLine()) {
+			RelativeLayout.LayoutParams rl = (RelativeLayout.LayoutParams) floatingLabel.getLayoutParams();
+			rl.bottomMargin = rl.topMargin;
+		}
 	}
 }
