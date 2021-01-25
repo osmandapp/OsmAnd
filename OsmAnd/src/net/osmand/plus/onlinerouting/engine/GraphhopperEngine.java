@@ -64,11 +64,11 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 					.append('&');
 		}
 		String vehicle = get(EngineParameter.VEHICLE_KEY);
-		if (isEmpty(vehicle)) {
+		if (!isEmpty(vehicle)) {
 			sb.append("vehicle=").append(vehicle);
 		}
 		String apiKey = get(EngineParameter.API_KEY);
-		if (isEmpty(apiKey)) {
+		if (!isEmpty(apiKey)) {
 			sb.append('&').append("key=").append(apiKey);
 		}
 	}

@@ -43,12 +43,13 @@
 					android:paddingStart="@dimen/context_menu_padding_margin_default"
 					android:paddingLeft="@dimen/context_menu_padding_margin_default"
 					android:paddingEnd="@dimen/context_menu_padding_margin_default"
-					android:paddingRight="@dimen/context_menu_padding_margin_default">
+                    android:paddingRight="@dimen/context_menu_padding_margin_default"
+                    android:paddingBottom="@dimen/context_menu_direction_margin">
 
 					<LinearLayout
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="@dimen/context_menu_first_line_top_margin"
+						android:layout_marginTop="@dimen/context_menu_second_line_top_margin"
 						android:layout_marginEnd="@dimen/context_menu_padding_margin_default"
 						android:layout_marginRight="@dimen/context_menu_padding_margin_default"
 						android:layout_weight="1"
@@ -71,7 +72,8 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:layout_gravity="center_vertical"
-							tools:text="@string/amenity_type_finance" />
+							android:visibility="gone"
+                            tools:text="@string/amenity_type_finance" />
 
 					</LinearLayout>
 
@@ -79,7 +81,7 @@
 						android:id="@+id/icon_view"
 						android:layout_width="@dimen/map_widget_icon"
 						android:layout_height="@dimen/map_widget_icon"
-						android:layout_marginTop="@dimen/context_menu_padding_margin_default"
+                        android:layout_marginTop="@dimen/context_menu_second_line_top_margin"
 						android:tint="?attr/default_icon_color"
 						osmand:srcCompat="@drawable/ic_action_polygom_dark" />
 

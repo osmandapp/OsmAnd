@@ -45,6 +45,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -93,7 +94,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private SimulationProvider simulatePosition = null;
 
 	private long cachedLocationTimeFix = 0;
+	private long timeToNotUseOtherGPS = 0;
 	private net.osmand.Location cachedLocation;
+	private net.osmand.Location customLocation;
 
 	private boolean sensorRegistered = false;
 	private float[] mGravs = new float[3];
@@ -726,8 +729,21 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 	}
 
+	public void setCustomLocation(net.osmand.Location location, long ignoreLocationsTime) {
+		timeToNotUseOtherGPS = System.currentTimeMillis() + ignoreLocationsTime;
+		customLocation = location;
+		setLocation(location);
+	}
+
+	private boolean shouldIgnoreLocation(net.osmand.Location location) {
+		if (customLocation != null && timeToNotUseOtherGPS >= System.currentTimeMillis()) {
+			return location == null || !Algorithms.stringsEqual(customLocation.getProvider(), location.getProvider());
+		}
+		return false;
+	}
+
 	public void setLocationFromService(net.osmand.Location location) {
-		if (locationSimulation.isRouteAnimating()) {
+		if (locationSimulation.isRouteAnimating() || shouldIgnoreLocation(location)) {
 			return;
 		}
 		if (location != null) {
@@ -746,7 +762,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		setLocation(location);
 	}
 
-	private void setLocation(net.osmand.Location location) { if (location == null) {
+	private void setLocation(net.osmand.Location location) {
+		if (shouldIgnoreLocation(location)) {
+			return;
+		}
+		if (location == null) {
 			updateGPSInfo(null);
 		}
 

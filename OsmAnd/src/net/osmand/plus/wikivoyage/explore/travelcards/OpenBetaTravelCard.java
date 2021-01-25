@@ -5,22 +5,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 
 public class OpenBetaTravelCard extends BaseTravelCard {
 
 	public static final int TYPE = 0;
 
-	private FragmentManager fragmentManager;
+	private static boolean closed = false;
 
-	public OpenBetaTravelCard(OsmandApplication app, boolean nightMode, FragmentManager fragmentManager) {
-		super(app, nightMode);
-		this.fragmentManager = fragmentManager;
+	private final FragmentActivity activity;
+
+	public OpenBetaTravelCard(@NonNull FragmentActivity activity, boolean nightMode) {
+		super((OsmandApplication) activity.getApplication(), nightMode);
+		this.activity = activity;
+	}
+
+	public static boolean isClosed() {
+		return closed;
 	}
 
 	@Override
@@ -30,11 +36,14 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 			holder.title.setText(R.string.welcome_to_open_beta);
 			holder.description.setText(R.string.welcome_to_open_beta_description);
 			holder.backgroundImage.setImageResource(R.drawable.img_help_wikivoyage_articles);
-			holder.button.setText(R.string.get_unlimited_access);
+			//holder.button.setText(R.string.get_unlimited_access);
+			holder.button.setText(R.string.shared_string_close);
 			holder.button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					ChoosePlanDialogFragment.showWikivoyageInstance(fragmentManager);
+					closed = true;
+					((WikivoyageExploreActivity) activity).updateFragments();
+					//ChoosePlanDialogFragment.showWikivoyageInstance(activity.getSupportFragmentManager());
 				}
 			});
 		}

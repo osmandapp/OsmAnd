@@ -43,6 +43,7 @@ import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.map.ALatLon;
+import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -167,11 +168,14 @@ public class OsmandAidlApi {
 
 	private static final String AIDL_REFRESH_MAP = "aidl_refresh_map";
 	private static final String AIDL_SET_MAP_LOCATION = "aidl_set_map_location";
+	private static final String AIDL_SET_LOCATION = "aidl_set_location";
 	private static final String AIDL_LATITUDE = "aidl_latitude";
 	private static final String AIDL_LONGITUDE = "aidl_longitude";
 	private static final String AIDL_ZOOM = "aidl_zoom";
 	private static final String AIDL_ROTATION = "aidl_rotation";
 	private static final String AIDL_ANIMATED = "aidl_animated";
+	private static final String AIDL_LOCATION = "aidl_location";
+	private static final String AIDL_TIME_TO_NOT_USE_OTHER_GPS = "aidl_time_to_not_use_other_gps";
 
 	private static final String AIDL_START_NAME = "aidl_start_name";
 	private static final String AIDL_START_LAT = "aidl_start_lat";
@@ -263,6 +267,7 @@ public class OsmandAidlApi {
 		registerHideSqliteDbFileReceiver(mapActivity);
 		registerExecuteQuickActionReceiver(mapActivity);
 		registerLockStateReceiver(mapActivity);
+		registerSetLocationReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		this.mapActivity = mapActivity;
@@ -901,6 +906,42 @@ public class OsmandAidlApi {
 			}
 		};
 		registerReceiver(lockStateReceiver, mapActivity, AIDL_LOCK_STATE);
+	}
+
+	private void registerSetLocationReceiver(MapActivity mapActivity) {
+		BroadcastReceiver setLocationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
+				ALocation aLocation = intent.getParcelableExtra(AIDL_LOCATION);
+				long timeToNotUseOtherGPS = intent.getLongExtra(AIDL_TIME_TO_NOT_USE_OTHER_GPS, 0);
+
+				if (!Algorithms.isEmpty(packName) && aLocation != null
+						&& !Double.isNaN(aLocation.getLatitude()) && !Double.isNaN(aLocation.getLongitude())) {
+					Location location = new Location(packName);
+					location.setLatitude(aLocation.getLatitude());
+					location.setLongitude(aLocation.getLongitude());
+					location.setTime(aLocation.getTime());
+					if (aLocation.hasAltitude()) {
+						location.setAltitude(aLocation.getAltitude());
+					}
+					if (aLocation.hasSpeed()) {
+						location.setSpeed(aLocation.getSpeed());
+					}
+					if (aLocation.hasBearing()) {
+						location.setBearing(aLocation.getBearing());
+					}
+					if (aLocation.hasAccuracy()) {
+						location.setAccuracy(aLocation.getAccuracy());
+					}
+					if (aLocation.hasVerticalAccuracy()) {
+						location.setVerticalAccuracy(aLocation.getVerticalAccuracy());
+					}
+					app.getLocationProvider().setCustomLocation(location, timeToNotUseOtherGPS);
+				}
+			}
+		};
+		registerReceiver(setLocationReceiver, mapActivity, AIDL_SET_LOCATION);
 	}
 
 	public void registerMapLayers(@NonNull MapActivity mapActivity) {
@@ -2402,6 +2443,16 @@ public class OsmandAidlApi {
 
 	public boolean removeRoadBlock(ABlockedRoad road) {
 		app.getAvoidSpecificRoads().removeImpassableRoad(new LatLon(road.getLatitude(), road.getLongitude()));
+		return true;
+	}
+
+	public boolean setLocation(String packName, ALocation location, long timeToNotUseOtherGPS) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_SET_LOCATION);
+		intent.putExtra(AIDL_LOCATION, location);
+		intent.putExtra(AIDL_PACKAGE_NAME, packName);
+		intent.putExtra(AIDL_TIME_TO_NOT_USE_OTHER_GPS, timeToNotUseOtherGPS);
+		app.sendBroadcast(intent);
 		return true;
 	}
 

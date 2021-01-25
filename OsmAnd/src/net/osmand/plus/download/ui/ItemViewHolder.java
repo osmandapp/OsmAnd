@@ -134,8 +134,7 @@ public class ItemViewHolder {
 		srtmDisabled = context.isSrtmDisabled();
 		nauticalPluginDisabled = context.isNauticalPluginDisabled();
 		srtmNeedsInstallation = context.isSrtmNeedsInstallation();
-		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication())
-				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(context.getMyApplication());
+		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication());
 	}
 
 	public void bindIndexItem(final IndexItem indexItem) {

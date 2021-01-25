@@ -204,7 +204,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 		onInAppPurchaseItemPurchased(sku);
 		fireInAppPurchaseItemPurchasedOnFragments(fragmentManager, sku, active);
-		if (purchaseHelper != null && purchaseHelper.getContourLines().getSku().equals(sku)) {
+		if (purchaseHelper != null && purchaseHelper.getFullVersion().getSku().equals(sku)) {
 			if (!(this instanceof MapActivity)) {
 				finish();
 			}
