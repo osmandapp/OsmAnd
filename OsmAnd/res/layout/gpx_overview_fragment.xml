@@ -1,104 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_overview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/content_padding_small_half"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        tools:itemCount="4"
-        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_gpx_stat_block" />
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_overview"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding_small_half"
+		android:clipToPadding="false"
+		android:orientation="horizontal"
+		tools:itemCount="4"
+		tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/item_gpx_stat_block" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/content_padding"
-        android:layout_marginLeft="@dimen/content_padding"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/dash_margin"
-        android:paddingBottom="@dimen/dash_margin">
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:gravity="center"
+		android:orientation="horizontal"
+		android:paddingTop="@dimen/dash_margin"
+		android:paddingBottom="@dimen/dash_margin">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/direction"
-            android:layout_width="@dimen/context_menu_transport_icon_size"
-            android:layout_height="@dimen/context_menu_transport_icon_size"
-            osmand:srcCompat="@drawable/ic_direction_arrow" />
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/direction"
+			android:layout_width="@dimen/context_menu_transport_icon_size"
+			android:layout_height="@dimen/context_menu_transport_icon_size"
+			osmand:srcCompat="@drawable/ic_direction_arrow" />
 
-        <TextView
-            android:id="@+id/distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/content_padding_small_half"
-            android:layout_marginLeft="@dimen/content_padding_small_half"
-            android:maxLines="1"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="@dimen/default_desc_text_size"
-            tools:text="300 km" />
+		<TextView
+			android:id="@+id/distance"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding_small_half"
+			android:layout_marginLeft="@dimen/content_padding_small_half"
+			android:maxLines="1"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_desc_text_size"
+			tools:text="300 km" />
 
-    </LinearLayout>
+	</LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/content_padding"
-        android:layout_marginLeft="@dimen/content_padding"
-        android:layout_marginEnd="@dimen/content_padding"
-        android:layout_marginRight="@dimen/content_padding"
-        android:layout_marginTop="@dimen/content_padding_half"
-        android:layout_marginBottom="@dimen/content_padding"
-        android:weightSum="4"
-        android:orientation="horizontal">
-        <!-- todo stretch buttons correctly -->
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_half"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:orientation="horizontal"
+		android:weightSum="4">
+		<!-- todo stretch buttons correctly -->
 
-        <include
-            android:id="@+id/show_button"
-            android:layout_weight="1"
-            layout="@layout/item_gpx_action"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+		<include
+			android:id="@+id/show_button"
+			layout="@layout/item_gpx_action"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1" />
 
-        <Space
-            android:layout_width="@dimen/content_padding_half"
-            android:layout_height="match_parent" />
+		<Space
+			android:layout_width="@dimen/content_padding_half"
+			android:layout_height="match_parent" />
 
-        <include
-            android:id="@+id/appearance_button"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            layout="@layout/item_gpx_action" />
+		<include
+			android:id="@+id/appearance_button"
+			layout="@layout/item_gpx_action"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1" />
 
-        <Space
-            android:layout_width="@dimen/content_padding_half"
-            android:layout_height="match_parent" />
+		<Space
+			android:layout_width="@dimen/content_padding_half"
+			android:layout_height="match_parent" />
 
-        <include
-            android:id="@+id/edit_button"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            layout="@layout/item_gpx_action" />
+		<include
+			android:id="@+id/edit_button"
+			layout="@layout/item_gpx_action"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1" />
 
-        <Space
-            android:layout_width="@dimen/content_padding_half"
-            android:layout_height="match_parent" />
+		<Space
+			android:layout_width="@dimen/content_padding_half"
+			android:layout_height="match_parent" />
 
-        <include
-            android:id="@+id/directions_button"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            layout="@layout/item_gpx_action" />
+		<include
+			android:id="@+id/directions_button"
+			layout="@layout/item_gpx_action"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1" />
 
-    </LinearLayout>
+	</LinearLayout>
 
 </LinearLayout>

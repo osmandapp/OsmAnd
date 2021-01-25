@@ -20,25 +20,22 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,7 +55,7 @@ public class OverviewCard extends BaseCard {
 
 	private final TrackDisplayHelper displayHelper;
 	private final GPXFile gpxFile;
-	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT};
+	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
 	private final SegmentActionsListener listener;
 
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull TrackDisplayHelper displayHelper,
@@ -106,19 +103,19 @@ public class OverviewCard extends BaseCard {
 		String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
 		String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
 
-		StatBlock sDistance = new StatBlock(app.getResources().getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
-				R.drawable.ic_action_track_16, R.color.icon_color_default_light, LineGraphType.ALTITUDE, LineGraphType.SPEED);
-		StatBlock sAscent = new StatBlock(app.getResources().getString(R.string.altitude_ascent), asc,
-				R.drawable.ic_action_arrow_up_16, R.color.gpx_chart_red, LineGraphType.SLOPE, null);
-		StatBlock sDescent = new StatBlock(app.getResources().getString(R.string.altitude_descent), desc,
-				R.drawable.ic_action_arrow_down_16, R.color.gpx_pale_green, LineGraphType.ALTITUDE, LineGraphType.SLOPE);
-		StatBlock sAvSpeed = new StatBlock(app.getResources().getString(R.string.average_speed), avg,
-				R.drawable.ic_action_speed_16, R.color.icon_color_default_light, LineGraphType.SPEED, null);
-		StatBlock sMaxSpeed = new StatBlock(app.getResources().getString(R.string.max_speed), max,
-				R.drawable.ic_action_max_speed_16, R.color.icon_color_default_light, LineGraphType.SPEED, null);
-		StatBlock sTimeSpan = new StatBlock(app.getResources().getString(R.string.shared_string_time_span),
+		StatBlock sDistance = new StatBlock(app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
+				R.drawable.ic_action_track_16, R.color.icon_color_default_light, GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED);
+		StatBlock sAscent = new StatBlock(app.getString(R.string.altitude_ascent), asc,
+				R.drawable.ic_action_arrow_up_16, R.color.gpx_chart_red, GPXDataSetType.SLOPE, null);
+		StatBlock sDescent = new StatBlock(app.getString(R.string.altitude_descent), desc,
+				R.drawable.ic_action_arrow_down_16, R.color.gpx_pale_green, GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE);
+		StatBlock sAvSpeed = new StatBlock(app.getString(R.string.average_speed), avg,
+				R.drawable.ic_action_speed_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null);
+		StatBlock sMaxSpeed = new StatBlock(app.getString(R.string.max_speed), max,
+				R.drawable.ic_action_max_speed_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null);
+		StatBlock sTimeSpan = new StatBlock(app.getString(R.string.shared_string_time_span),
 				Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()),
-				R.drawable.ic_action_time_span_16, R.color.icon_color_default_light, LineGraphType.SPEED, null);
+				R.drawable.ic_action_time_span_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null);
 
 		LinearLayoutManager llManager = new LinearLayoutManager(app);
 		llManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -213,16 +210,17 @@ public class OverviewCard extends BaseCard {
 		});
 	}
 
-	private class StatBlockAdapter extends RecyclerView.Adapter<StatBlockAdapter.StatBlockViewHolder> {
-		private final List<StatBlock> StatBlocks;
+	private class StatBlockAdapter extends RecyclerView.Adapter<StatBlockViewHolder> {
+
+		private final List<StatBlock> statBlocks;
 
 		public StatBlockAdapter(List<StatBlock> StatBlocks) {
-			this.StatBlocks = StatBlocks;
+			this.statBlocks = StatBlocks;
 		}
 
 		@Override
 		public int getItemCount() {
-			return StatBlocks.size();
+			return statBlocks.size();
 		}
 
 		@NonNull
@@ -235,52 +233,65 @@ public class OverviewCard extends BaseCard {
 
 		@Override
 		public void onBindViewHolder(StatBlockViewHolder holder, int position) {
-			StatBlock item = StatBlocks.get(position);
-			holder.bind(item);
-		}
+			final StatBlock item = statBlocks.get(position);
 
-		class StatBlockViewHolder extends RecyclerView.ViewHolder {
-			private final TextViewEx valueText;
-			private final TextView titleText;
-			private final AppCompatImageView imageView;
+			holder.valueText.setText(item.value);
+			holder.titleText.setText(item.title);
+			holder.valueText.setTextColor(app.getResources().getColor(R.color.active_color_primary_light));
+			holder.titleText.setTextColor(app.getResources().getColor(R.color.text_color_secondary_light));
+			holder.itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					GpxDisplayItem gpxItem = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes)).get(0);
+					if (gpxItem != null && gpxItem.analysis != null) {
+						ArrayList<GPXDataSetType> list = new ArrayList<>();
+						if (item.firstType != null) {
+							list.add(item.firstType);
+						}
+						if (item.secondType != null) {
+							list.add(item.secondType);
+						}
+						if (list.size() > 0) {
+							gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
+						}
+						gpxItem.locationOnMap = gpxItem.locationStart;
 
-			StatBlockViewHolder(View view) {
-				super(view);
-				valueText = view.findViewById(R.id.value);
-				titleText = view.findViewById(R.id.title);
-				imageView = view.findViewById(R.id.image);
-			}
-
-			public void bind(final StatBlock overviewItem) {
-				valueText.setText(overviewItem.value);
-				valueText.setTextColor(app.getResources().getColor(R.color.active_color_primary_light));
-				titleText.setText(overviewItem.title);
-				titleText.setTextColor(app.getResources().getColor(R.color.text_color_secondary_light));
-				setImageDrawable(imageView, overviewItem.imageResId, overviewItem.imageColorId);
-				itemView.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						GpxDisplayItem gpxItem = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes)).get(0);
-						GPXTrackAnalysis analysis = gpxItem.analysis;
-						GpxDataItem gpxDataItem = displayHelper.getGpxDataItem();
-						boolean calcWithoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
-						List<ILineDataSet> dataSets = GpxUiHelper.getDataSets(new LineChart(app), app, analysis, overviewItem.firstType, overviewItem.secondType, calcWithoutGaps);
-						listener.openAnalyzeOnMap(gpxItem, dataSets, null);
+						listener.openAnalyzeOnMap(gpxItem);
 					}
-				});
-			}
+				}
+			});
+			setImageDrawable(holder.imageView, item.imageResId, item.imageColorId);
 		}
 	}
 
-	private class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
+	private static class StatBlockViewHolder extends RecyclerView.ViewHolder {
+
+		private final TextViewEx valueText;
+		private final TextView titleText;
+		private final AppCompatImageView imageView;
+
+		StatBlockViewHolder(View view) {
+			super(view);
+			valueText = view.findViewById(R.id.value);
+			titleText = view.findViewById(R.id.title);
+			imageView = view.findViewById(R.id.image);
+		}
+	}
+
+	private static class HorizontalDividerDecoration extends ItemDecoration {
+
 		private final Drawable divider;
+		private final int marginV;
+		private final int marginH;
 
 		public HorizontalDividerDecoration(Context context) {
-			int[] ATTRS = new int[]{android.R.attr.listDivider};
+			int[] ATTRS = new int[] {android.R.attr.listDivider};
 			final TypedArray ta = context.obtainStyledAttributes(ATTRS);
 			divider = ta.getDrawable(0);
 //			DrawableCompat.setTint(divider, context.getResources().getColor(R.color.divider_color_light)); //todo change drawable color
 			ta.recycle();
+			marginV = context.getResources().getDimensionPixelSize(R.dimen.map_small_button_margin);
+			marginH = context.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		}
 
 		@Override
@@ -289,10 +300,7 @@ public class OverviewCard extends BaseCard {
 		}
 
 		public void drawHorizontal(Canvas c, RecyclerView parent) {
-			final int marginV = parent.getContext().getResources().getDimensionPixelSize(R.dimen.map_small_button_margin);
-			final int marginH = parent.getContext().getResources().getDimensionPixelSize(R.dimen.content_padding);
-			final int childCount = parent.getChildCount();
-			for (int i = 0; i < childCount; i++) {
+			for (int i = 0; i < parent.getChildCount(); i++) {
 				final View child = parent.getChildAt(i);
 				final int left = child.getRight() - divider.getIntrinsicWidth() + marginH;
 				final int right = left + divider.getIntrinsicHeight();
@@ -305,21 +313,21 @@ public class OverviewCard extends BaseCard {
 
 		@Override
 		public void getItemOffsets(Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-			int marginV = parent.getContext().getResources().getDimensionPixelSize(R.dimen.map_small_button_margin);
-			int marginH = parent.getContext().getResources().getDimensionPixelSize(R.dimen.content_padding);
 			outRect.set(marginH - divider.getIntrinsicWidth(), marginV, marginH + divider.getIntrinsicWidth(), marginV);
 		}
 	}
 
 	private static class StatBlock {
-		private String title;
-		private String value;
-		private int imageResId;
-		private int imageColorId;
-		private LineGraphType firstType;
-		private LineGraphType secondType;
 
-		public StatBlock(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId, LineGraphType firstType, LineGraphType secondType) {
+		private final String title;
+		private final String value;
+		private final int imageResId;
+		private final int imageColorId;
+		private final GPXDataSetType firstType;
+		private final GPXDataSetType secondType;
+
+		public StatBlock(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId,
+						 GPXDataSetType firstType, GPXDataSetType secondType) {
 			this.title = title;
 			this.value = value;
 			this.imageResId = imageResId;
@@ -327,6 +335,5 @@ public class OverviewCard extends BaseCard {
 			this.firstType = firstType;
 			this.secondType = secondType;
 		}
-
 	}
 }

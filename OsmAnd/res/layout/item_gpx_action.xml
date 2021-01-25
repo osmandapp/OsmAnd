@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/filled"
-        android:layout_width="@dimen/fab_recycler_view_padding_bottom"
-        android:layout_height="@dimen/setting_list_item_small_height"
-        tools:alpha="0.1"
-        tools:srcCompat="@drawable/bg_topbar_shield_exit_ref" />
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/filled"
+		android:layout_width="@dimen/fab_recycler_view_padding_bottom"
+		android:layout_height="@dimen/setting_list_item_small_height"
+		tools:alpha="0.1"
+		tools:srcCompat="@drawable/bg_topbar_shield_exit_ref" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image"
-        android:layout_gravity="center"
-        android:layout_width="@dimen/standard_icon_size"
-        android:layout_height="@dimen/standard_icon_size"
-        tools:srcCompat="@drawable/ic_action_hide" />
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/image"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center"
+		tools:srcCompat="@drawable/ic_action_hide" />
 
 </FrameLayout>
