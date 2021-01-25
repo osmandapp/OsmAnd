@@ -465,7 +465,7 @@ public class GPXDatabase {
 		return false;
 	}
 
-	public boolean rename(File currentFile, File newFile) {
+	public boolean rename(@Nullable GpxDataItem item, File currentFile, File newFile) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null){
 			try {
@@ -478,6 +478,9 @@ public class GPXDatabase {
 								GPX_COL_DIR + " = ? " +
 						" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[] { newFileName, newFileDir, fileName, fileDir });
+				if (item != null) {
+					item.file = newFile;
+				}
 			} finally {
 				db.close();
 			}

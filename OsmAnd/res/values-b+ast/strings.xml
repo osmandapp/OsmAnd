@@ -622,7 +622,6 @@
     <string name="exit_without_saving">¿Colar ensin guardar\?</string>
     <string name="line">Llinia</string>
     <string name="shared_string_options">Opciones</string>
-    <string name="no_update_info">Nun amosar anovamientos</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="local_indexes_cat_av">Datos d\'audiu/videu</string>
     <string name="dropbox_plugin_name">Plugin pa Dropbox</string>
@@ -1181,7 +1180,6 @@
     <string name="renderers_descr">Esceuyi l\'aspeutu del renderizáu.</string>
     <string name="show_route">Detalles de la ruta</string>
     <string name="layer_map">Fonte del mapa…</string>
-    <string name="new_route_calculated_dist">Calculóse una ruta nueva, distancia</string>
     <string name="app_settings">Axustes de l\'aplicación</string>
     <string name="add_favorite_dialog_favourite_added_template">Amestóse\'l puntu favoritu «{0}».</string>
     <string name="av_camera_pic_size_descr">Esbilla\'l tamañu de les semeyes de la cámara interna.</string>
@@ -1220,7 +1218,7 @@
     <string name="popular_destinations">Destinos sonaos</string>
     <string name="paid_app">Aplicación de pagu</string>
     <string name="paid_plugin">Plugin de pagu</string>
-    <string name="welcome_to_open_beta_description">Anguaño les guíes de viaxes básense en Wikivoyage. Prueba de baldre toles carauterístiques na beta abierta. Dempués, eses guíes van tar disponibles pa los soscriptores d\'OsmAnd Unlimited y dueños dOsmAnd +.</string>
+    <string name="welcome_to_open_beta_description">Anguaño les guíes de viaxes básense en Wikivoyage. Prueba de baldre toles carauterístiques na beta abierta.</string>
     <string name="start_editing_card_description">Puedes y tendríes d\'editar cualesquier artículu de Wikivoyage. Comparti la conocencia, esperiencia, talentu y atención</string>
     <string name="get_unlimited_access">Consiguir l\'accesu ensin llende</string>
     <string name="all_markers_moved_to_history">Tolos marcadores del mapa moviéronse al historial</string>

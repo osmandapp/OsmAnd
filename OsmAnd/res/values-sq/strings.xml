@@ -4,20 +4,16 @@
     <string name="app_mode_motorcycle">Motoçikletë</string>
     <string name="app_mode_boat">Varkë</string>
     <string name="app_mode_aircraft">Avion</string>
-    
-    
     <string name="local_osm_changes_delete_all_confirm">Ju po fshini %1$d ndryshime nga OSM. A jeni i sigurt?</string>
     <string name="shared_string_delete_all">Fshij të gjitha</string>
     <string name="animate_routing_route_not_calculated">Ju lutem, fillimisht llogaritni rrugën</string>
     <string name="shared_string_remember_my_choice">Kujto zgjedhjen time</string>
-    
     <string name="shared_string_and">dhe</string>
     <string name="shared_string_or">ose</string>
 	<string name="auto_zoom_none">Nuk ka afrim automatik</string>
 	<string name="shared_string_no">Jo</string>
 	<string name="shared_string_yes">Po</string>
-	
-	<string name="about_version">Versioni :</string>
+    <string name="about_version">Versioni :</string>
     <string name="shared_string_about">Rreth</string>
     <string name="about_settings_descr">Informacion versioni, liçensat, anëtarët e projektit</string>
     <string name="local_index_tile_data_expire">Skadon (minuta): %1$s</string>

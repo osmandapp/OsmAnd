@@ -56,7 +56,6 @@
     <string name="poi_copyshop">Kopírovanie</string>
     <string name="poi_curtain">Závesy</string>
     <string name="poi_fabric">Látky</string>
-    <string name="poi_bedding">Posteľné prádlo</string>
     <string name="poi_dive">Potápačské vybavenie</string>
     <string name="poi_doityourself">Pre domácich kutilov</string>
     <string name="poi_erotic">Sexshop</string>
@@ -134,7 +133,7 @@
     <string name="poi_vehicle_inspection">Kontrola vozidla (technická/emisná)</string>
     <string name="poi_car_wash">Autoumyváreň</string>
     <string name="poi_fuel">Benzínová pumpa;Čerpacia stanica</string>
-    <string name="poi_electricity_combined_charging">Nabíjacia stanica</string>
+    <string name="poi_electricity_combined_charging">Nabíjacia stanica pre vozidlá</string>
     <string name="poi_vehicle_ramp">Servisná rampa na auto</string>
     <string name="poi_compressed_air">Stlačený vzduch</string>
     <string name="poi_parking">Parkovisko</string>
@@ -261,7 +260,6 @@
     <string name="poi_healthcare_alternative">Alternatívna medicína</string>
     <string name="poi_blood_bank">Krvná banka</string>
     <string name="poi_audiologist">Ušný doktor</string>
-    <string name="poi_healthcare_centre">Medicínske centrum</string>
     <string name="poi_midwife">Tehotenská asistentka</string>
     <string name="poi_healthcare_rehabilitation">Rehabilitácia</string>
     <string name="poi_healthcare_yes">Medicínske zariadenie</string>
@@ -344,7 +342,6 @@
     <string name="poi_internet_access_public">Internetové pripojenie: verejné</string>
     <string name="poi_internet_access_service">Internetové pripojenie: služba</string>
     <string name="poi_monastery">Kláštor</string>
-    <string name="poi_historic_monastery">Historický kláštor</string>
     <string name="poi_wayside_cross">Božie muky/Náboženský prícestný kríž</string>
     <string name="poi_wayside_shrine">Náboženská prícestná schránka</string>
     <string name="poi_information">Informácie</string>
@@ -436,7 +433,6 @@
     <string name="poi_crematorium">Krematórium</string>
     <string name="poi_internet_cafe">Internetová kaviareň</string>
     <string name="poi_bank">Banka</string>
-    <string name="poi_amenity_atm">Bankomat</string>
     <string name="poi_money_lender">Požičovňa peňazí</string>
     <string name="poi_pawnbroker">Záložňa</string>
     <string name="poi_bureau_de_change">Zmenáreň</string>
@@ -615,7 +611,6 @@
     <string name="poi_surfing">Surfovanie</string>
     <string name="poi_swimming">Plávanie</string>
     <string name="poi_table_tennis">Stolný tenis</string>
-    <string name="poi_team_handball">Tímová hádzaná</string>
     <string name="poi_tennis">Tenis</string>
     <string name="poi_toboggan">Šmykľavková dráha</string>
     <string name="poi_volleyball">Volejbal</string>
@@ -689,7 +684,6 @@
     <string name="poi_wood">Les</string>
     <string name="poi_observation_tower">Vyhliadková veža</string>
     <string name="poi_bell_tower">Zvonica</string>
-    <string name="poi_general_tourist_attraction_yes">Všeobecná turistická atrakcia</string>
     <string name="poi_cabin">Chatka</string>
     <string name="poi_lean_to">Trojstranný prístrešok</string>
     <string name="poi_picnic_table">Piknikový stôl</string>
@@ -802,7 +796,6 @@
     <string name="poi_pastry">Obchod so zákuskami</string>
     <string name="poi_candles">Obchod so sviečkami</string>
     <string name="poi_fashion">Módny butik</string>
-    <string name="poi_furnace">Obchod s kúrením</string>
     <string name="poi_garden_furniture">Obchod so záhradným nábytkom</string>
     <string name="poi_leather">Obchod s kožou</string>
     <string name="poi_music">Hudobniny</string>
@@ -821,12 +814,9 @@
     <string name="poi_groyne">Pobrežná hrádza</string>
     <string name="poi_power_cable_distribution_cabinet">Káblová rozvodná skriňa</string>
     <string name="poi_basin">Nádrž na dažďovú vodu</string>
-    <string name="poi_building_poi">Budova</string>
     <string name="poi_crane">Žeriav</string>
-    <string name="poi_tourism_attraction">Turistická atrakcia</string>
     <string name="poi_cutline">Výsek lesa</string>
     <string name="poi_tree">Strom</string>
-    <string name="poi_conservation">Chránené územie</string>
     <string name="poi_icn_ref">Bod medzinárodnej cyklistickej siete</string>
     <string name="poi_ncn_ref">Bod národnej cyklistickej siete</string>
     <string name="poi_rcn_ref">Bod regionálnej cyklistickej siete</string>
@@ -967,7 +957,6 @@
     <string name="poi_route_hiking_lwn_poi">Lokálna pešia trasa</string>
     <string name="poi_route_hiking_ref_poi">Číslo pešej trasy</string>
     <string name="poi_perfumery">Parfuméria</string>
-    <string name="poi_mill_pond">Mlynský rybník</string>
     <string name="poi_office_religion">Cirkevná kancelária</string>
     <string name="poi_association">Kancelária asociácie</string>
     <string name="poi_financial">Finančná kancelária</string>
@@ -1112,7 +1101,6 @@
     <string name="poi_generator_source_geothermal">Zdroj energie: geotermálny</string>
     <string name="poi_generator_source_oil">Zdroj energie: ropa</string>
     <string name="poi_generator_source_diesel">Zdroj energie: nafta</string>
-    <string name="poi_car_wash_self_service">Samoobslužné</string>
     <string name="poi_int_name">Medzinárodný názov</string>
     <string name="poi_nat_name">Národný názov</string>
     <string name="poi_reg_name">Regionálny názov</string>
@@ -1139,7 +1127,6 @@
     <string name="poi_information_terminal">Terminál</string>
     <string name="poi_information_hikingmap">Turistická mapa</string>
     <string name="poi_information_nature">Príroda</string>
-    <string name="poi_information_wildlife">Informačné značenie: živočíchy</string>
     <string name="poi_information_history">História</string>
     <string name="poi_information_sign">Značka</string>
     <string name="poi_information_bicyclemap">Cyklomapa</string>
@@ -1262,8 +1249,6 @@
     <string name="poi_stars_4s">4S (Vyššia prvá trieda)</string>
     <string name="poi_stars_5">5 (Luxusný)</string>
     <string name="poi_stars_5s">5S (Vyšší luxus)</string>
-    <string name="poi_stars_6">Počet hviezd: 6</string>
-    <string name="poi_stars_7">Počet hviezd: 7</string>
     <string name="poi_rooms">Počet izieb</string>
     <string name="poi_love_hotel">Hodinový hotel</string>
     <string name="poi_payment_coins_yes">Mince</string>
@@ -1301,7 +1286,6 @@
     <string name="poi_payment_visa_no">Neprijíma Visa karty</string>
     <string name="poi_payment_mastercard_yes">MasterCard karty</string>
     <string name="poi_payment_mastercard_no">Neprijíma MasterCard karty</string>
-    <string name="poi_payment_none">Bez poplatku</string>
     <string name="poi_payment_account_cards_yes">Účtové karty</string>
     <string name="poi_payment_account_cards_no">Neprijíma účtové karty</string>
     <string name="poi_payment_maestro_yes">Maestro karty</string>
@@ -1543,7 +1527,6 @@
     <string name="poi_fitness_centre">Fitnescentrum</string>
     <string name="poi_fitness">Fitness</string>
     <string name="poi_fitness_station">Miesto na cvičenie</string>
-    <string name="poi_additional_atm_yes">Bankomat: áno</string>
     <string name="poi_atm_no">Bankomat: nie</string>
     <string name="poi_highway_steps">Schody</string>
     <string name="poi_tunnel_pedestrian">Tunel pre peších</string>
@@ -1757,7 +1740,6 @@
     <string name="poi_water_source_main">Vodovod</string>
     <string name="poi_water_source_pond">Rybník</string>
     <string name="poi_water_source_stream">Potok</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
     <string name="poi_material_wood">Materiál: drevo</string>
     <string name="poi_material_metal">Materiál: kov</string>
     <string name="poi_material_reinforced_concrete">Materiál: posilnený betón</string>
@@ -3278,7 +3260,6 @@
     <string name="poi_memorial_jizo">Jizō</string>
     <string name="poi_memorial_prasat">Prasat</string>
     <string name="poi_denomination_assemblies_of_god">Apoštolská cirkev</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">Radiačná onkológia</string>
     <string name="poi_hazard">Nebezpečenstvo</string>
     <string name="poi_rtsa_scale_filter">Kategória obtiažnosti</string>
     <string name="poi_health_specialty_tropical_medicine_no">Zdravotná špecializácia: tropická medicína: nie</string>
@@ -3293,7 +3274,6 @@
     <string name="poi_park_ride_hov">Vozidlá vysoko obsadené</string>
     <string name="poi_park_ride_tram">Električka</string>
     <string name="poi_park_ride_ferry">Trajekt</string>
-    <string name="poi_generator_source_biomass">Zdroj energie: biomasa</string>
     <string name="poi_change_delete">Vymazaný objekt</string>
     <string name="poi_health_specialty_radiotherapy_yes">Rádioterapia</string>
     <string name="poi_climbing_crag">Áno</string>

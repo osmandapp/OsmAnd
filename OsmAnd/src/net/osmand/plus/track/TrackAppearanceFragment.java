@@ -42,6 +42,7 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -56,8 +57,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
-import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
@@ -113,12 +112,22 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		return 0;
 	}
 
+	@Override
 	public float getMiddleStateKoef() {
 		return 0.5f;
 	}
 
+	@Override
+	public int getInitialMenuState() {
+		return MenuState.HALF_SCREEN;
+	}
+
 	public TrackDrawInfo getTrackDrawInfo() {
 		return trackDrawInfo;
+	}
+
+	public void setSelectedGpxFile(SelectedGpxFile selectedGpxFile) {
+		this.selectedGpxFile = selectedGpxFile;
 	}
 
 	@Override
@@ -132,40 +141,25 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		app = requireMyApplication();
 		gpxDbHelper = app.getGpxDbHelper();
 
-		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
-			if (trackDrawInfo.isCurrentRecording()) {
-				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-			} else {
-				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(trackDrawInfo.getFilePath());
-			}
 			if (!selectedGpxFile.isShowCurrentTrack()) {
 				gpxDataItem = gpxDbHelper.getItem(new File(trackDrawInfo.getFilePath()));
 			}
 			showStartFinishIconsInitialValue = savedInstanceState.getBoolean(SHOW_START_FINISH_ICONS_INITIAL_VALUE_KEY,
 					app.getSettings().SHOW_START_FINISH_ICONS.get());
-		} else if (arguments != null) {
-			String gpxFilePath = arguments.getString(TRACK_FILE_NAME);
-			boolean currentRecording = arguments.getBoolean(CURRENT_RECORDING, false);
+		} else {
 			showStartFinishIconsInitialValue = app.getSettings().SHOW_START_FINISH_ICONS.get();
 
-			if (gpxFilePath == null && !currentRecording) {
-				log.error("Required extra '" + TRACK_FILE_NAME + "' is missing");
-				dismiss();
-				return;
-			}
-			if (currentRecording) {
+			if (selectedGpxFile.isShowCurrentTrack()) {
 				trackDrawInfo = new TrackDrawInfo(true);
 				trackDrawInfo.setColor(app.getSettings().CURRENT_TRACK_COLOR.get());
 				trackDrawInfo.setWidth(app.getSettings().CURRENT_TRACK_WIDTH.get());
 				trackDrawInfo.setShowArrows(app.getSettings().CURRENT_TRACK_SHOW_ARROWS.get());
 				trackDrawInfo.setShowStartFinish(app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.get());
-				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 			} else {
-				gpxDataItem = gpxDbHelper.getItem(new File(gpxFilePath));
+				gpxDataItem = gpxDbHelper.getItem(new File(selectedGpxFile.getGpxFile().path));
 				trackDrawInfo = new TrackDrawInfo(app, gpxDataItem, false);
-				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 			}
 			updateTrackColor();
 		}
@@ -173,8 +167,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			public void handleOnBackPressed() {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
+					TripRecordingBottomSheet fragment = mapActivity.getTripRecordingBottomSheet();
+					if (fragment != null) {
+						fragment.show();
+					} else {
+						mapActivity.launchPrevActivityIntent();
+					}
 					dismissImmediate();
-					mapActivity.launchPrevActivityIntent();
 				}
 			}
 		});
@@ -418,7 +417,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		}
 	}
 
-	public Drawable getTrackIcon(OsmandApplication app, String widthAttr, boolean showArrows, @ColorInt int color) {
+	public static Drawable getTrackIcon(OsmandApplication app, String widthAttr, boolean showArrows, @ColorInt int color) {
 		int widthIconId = getWidthIconId(widthAttr);
 		Drawable widthIcon = app.getUIUtilities().getPaintedIcon(widthIconId, color);
 
@@ -436,7 +435,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		return UiUtilities.getLayeredIcon(transparencyIcon, widthIcon, strokeIcon);
 	}
 
-	private Drawable getTransparencyIcon(OsmandApplication app, String widthAttr, @ColorInt int color) {
+	private static Drawable getTransparencyIcon(OsmandApplication app, String widthAttr, @ColorInt int color) {
 		int transparencyIconId = getTransparencyIconId(widthAttr);
 		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
 		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
@@ -726,8 +725,12 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		return totalScreenHeight - frameTotalHeight;
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, TrackAppearanceFragment fragment) {
+	public static boolean showInstance(@NonNull MapActivity mapActivity, @NonNull SelectedGpxFile selectedGpxFile) {
 		try {
+			TrackAppearanceFragment fragment = new TrackAppearanceFragment();
+			fragment.setSelectedGpxFile(selectedGpxFile);
+			fragment.setRetainInstance(true);
+
 			mapActivity.getSupportFragmentManager()
 					.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, fragment.getFragmentTag())

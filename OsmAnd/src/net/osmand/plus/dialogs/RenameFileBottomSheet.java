@@ -62,6 +62,8 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 				file = new File(path);
 			}
 			selectedFileName = savedInstanceState.getString(SELECTED_FILE_NAME_KEY);
+		} else {
+			selectedFileName = Algorithms.getFileNameWithoutExtension(file);
 		}
 		items.add(new TitleItem(getString(R.string.shared_string_rename)));
 
@@ -74,7 +76,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		nameTextBox.setDefaultHintTextColor(colorStateList);
 
 		editText = view.findViewById(R.id.name_edit_text);
-		editText.setText(selectedFileName != null ? selectedFileName : Algorithms.getFileNameWithoutExtension(file));
+		editText.setText(selectedFileName);
 		editText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -127,12 +129,13 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		File dest;
 		int index = file.getName().lastIndexOf('.');
 		String ext = index == -1 ? "" : file.getName().substring(index);
+		String newName = Algorithms.getFileNameWithoutExtension(selectedFileName);
 		if (SQLiteTileSource.EXT.equals(ext)) {
-			dest = renameSQLiteFile(app, file, selectedFileName + ext, null);
+			dest = renameSQLiteFile(app, file, newName + ext, null);
 		} else if (IndexConstants.GPX_FILE_EXT.equals(ext)) {
-			dest = renameGpxFile(app, file, selectedFileName + ext, false, null);
+			dest = renameGpxFile(app, file, newName + ext, false, null);
 		} else {
-			dest = renameFile(app, file, selectedFileName + ext, false, null);
+			dest = renameFile(app, file, newName + ext, false, null);
 		}
 		if (dest != null) {
 			Fragment fragment = getTargetFragment();

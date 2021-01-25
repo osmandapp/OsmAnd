@@ -459,7 +459,6 @@
     <string name="error_calculating_route">Impossible de calculer l\'itinéraire.</string>
     <string name="error_calculating_route_occured">Impossible de calculer l\'itinéraire.</string>
     <string name="empty_route_calculated">L\'itinéraire calculé est vide.</string>
-    <string name="new_route_calculated_dist">Itinéraire recalculé, distance</string>
     <string name="arrived_at_destination">Vous êtes arrivés.</string>
     <string name="invalid_locations">Coordonnées invalides</string>
     <string name="go_back_to_osmand">Retourner à la carte</string>
@@ -557,7 +556,6 @@
     <string name="osb_comment_dialog_error">Impossible d\'ajouter le commentaire.</string>
     <string name="poi_edit_title">Modifier le point d\'intérêt</string>
     <string name="poi_create_title">Créer un point d\'intérêt</string>
-    <string name="poi_error_poi_not_found">L\'objet est introuvable ou est composé de plusieurs nœuds, ce qui n\'est pas possible actuellement.</string>
     <string name="poi_remove_confirm_template">Supprimer {0} (commentaire) ?</string>
     <string name="poi_remove_title">Supprimer le point d\'intérêt</string>
     <string name="shared_string_delete">Supprimer</string>
@@ -1790,7 +1788,6 @@
     <string name="av_audio_bitrate_descr">Sélectionnez le bitrate audio</string>
     <string name="no_address_found">Impossible de déterminer l\'adresse</string>
     <string name="looking_up_address">Recherche de l\'adresse</string>
-    <string name="update">Mise à jour</string>
     <string name="only_download_over_wifi">Télécharger uniquement en WiFi</string>
     <string name="live_update">Mise à jour en temps réel</string>
     <string name="rendering_attr_horseRoutes_name">Randonnée à cheval</string>
@@ -1988,8 +1985,6 @@
     <string name="get_started">Démarrer</string>
     <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
     <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (habituellement plus court).</string>
-    <string name="no_update_info_desc">Ne pas vérifier les mises à jour ni les offres promotionnelles OsmAnd.</string>
-    <string name="no_update_info">Ne pas afficher les nouvelles versions</string>
     <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
     <string name="skip_map_downloading_desc">Aucune carte hors ligne n\'est installée. Vous pouvez sélectionner une carte dans la liste ou télécharger une carte plus tard depuis le menu « %1$s ».</string>
     <string name="search_another_country">Sélectionner une autre région</string>
@@ -2077,9 +2072,6 @@
     <string name="rendering_value_medium_w_name">Moyen</string>
     <string name="rendering_value_low_name">Faible</string>
     <string name="rendering_attr_contourDensity_description">Densité des courbes de niveaux</string>
-    <string name="legacy_search">Recherche héritée</string>
-    <string name="show_legacy_search">Afficher la recherche héritée</string>
-    <string name="show_legacy_search_desc">Ajouter la recherche héritée à la liste déroulante.</string>
     <string name="rendering_attr_hideWaterPolygons_name">Masquer l\'eau</string>
     <string name="configure_screen_quick_action">Action rapide</string>
     <string name="quick_action_item_action">Action %d</string>
@@ -2587,17 +2579,6 @@
     <string name="by_date">Par date</string>
     <string name="by_type">Par type</string>
     <string name="modify_the_search_query">Modifier votre recherche.</string>
-    <string name="release_3_0">• Nouveauté : guides de voyage hors ligne. Les données sont fournies par Wikivoyage
-\n 
-\n• Wikipedia : nouvelle apparence, liens cliquables, affichage des images
-\n 
-\n• Ouverture des traces : affichage de groupes d\'étapes
-\n 
-\n• Marques : import depuis des fichiers GPX, création par saisie de coordonnées, nouvelle apparence
-\n 
-\n• L\'abonnement OsmAnd Live inclut désormais toutes les fonctionnalités d\'OsmAnd.
-\n 
-\n</string>
     <string name="total_donations">Total des dons</string>
     <string name="av_locations_selected_desc">Fichier GPX comprenant les coordonnées et le contenu des notes sélectionnées.</string>
     <string name="av_locations_all_desc">Fichier GPX contenant les coordonnées et les notes.</string>
@@ -2733,7 +2714,7 @@
     <string name="paid_app">Application payante</string>
     <string name="paid_plugin">Greffon payant</string>
     <string name="popular_destinations">Destinations populaires</string>
-    <string name="welcome_to_open_beta_description">Les guides de voyage s’appuient sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement. Par la suite, les guides de voyage seront accessibles aux abonnés de OsmAnd illimité ainsi qu\'aux propriétaires d\'OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Les guides de voyage s’appuient sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement.</string>
     <string name="wiki_article_search_text">Recherche de l\'article Wiki correspondant</string>
     <string name="osmand_team">Équipe OsmAnd</string>
     <string name="maps_you_need_descr">D\'après les articles que vous avez marqué comme favori, nous vous conseillons de télécharger les cartes suivantes :</string>
@@ -2773,41 +2754,13 @@
     <string name="send_search_query_description">Vous êtes sur le point d\'envoyer la recherche : « %1$s » ainsi que votre position.
 \n 
 \nAucune donnée personnelle ne sera envoyée. Ces informations seront utilisées afin d\'améliorer l\'algorithme de recherche.</string>
-    <string name="search_no_results_description">Aucun résultat ?
-\nSignalez-le nous.</string>
     <string name="send_search_query">Envoyez votre recherche ?</string>
-    <string name="release_3_1">• Navigation : correction de la barre de progression, permutation facile entre le point de départ et le point d\'arrivée 
-\n 
-\n• Marque : correction pour l\'activation / désactivation des groupes, possibilité de masquer les marques sur la carte 
-\n 
-\n• Modifications OSM : possibilité de modifier les objets autres que les points et les routes, correction de la perte des commentaires et des notes, copie de sauvegarde des modifications 
-\n 
-\n• Amélioration de Wikipedia et Wikivoyage, les fichiers à jour sont déjà disponibles 
-\n 
-\n• Menu contextuel : correction de la taille des menus, correction des couleurs en mode nuit 
-\n 
-\n• Autres corrections
-\n</string>
     <string name="increase_search_radius_to">Augmenter le rayon de recherche à %1$s</string>
     <string name="thank_you_for_feedback">Merci pour vos retours</string>
     <string name="poi_cannot_be_found">Nœud ou Route introuvable.</string>
     <string name="search_no_results_feedback">Aucun résultat de recherche \? 
 \nSignalez-le nous</string>
     <string name="test_voice_desrc">Appuyez sur un bouton pour écoutez l\'annonce vocale correspondante afin d\'identifier les annonces erronées ou manquantes</string>
-    <string name="release_3_2_pre">• Correction du plantage au démarrage survenant pour certains appareils
-\n
-\n• Marques : affichage des marques traversées
-\n
-\n• L\'historique de recherche affiche désormais la dernière catégorie utilisée
-\n
-\n• Correction du plantage au démarrage si la carte contient des caractères non-latin
-\n 
-\n• Amélioration de la vitesse de rendu sur les appareils Android 8.0
-\n 
-\n• Support de la modification des polygones (greffon de Contribution à OSM)
-\n 
-\n• Mesure de distance : ajout de Mesurer dans le menu contextuel des actions</string>
-    <string name="commiting_way">Envoi de la direction…</string>
     <string name="ask_for_location_permission">Avant de poursuivre, veuillez accorder à OsmAnd l\'autorisation d’utiliser votre position.</string>
     <string name="rendering_value_black_name">Noir</string>
     <string name="more_transport_on_stop_hint">Autres moyens de transport disponibles à cet arrêt.</string>
@@ -2946,14 +2899,6 @@
     <string name="avoid_pt_types_descr">Sélectionnez les types de transports publics à éviter lors de la navigation :</string>
     <string name="avoid_pt_types">Éviter des types de transports …</string>
     <string name="quick_action_day_night_mode">Mode %s</string>
-    <string name="release_3_3">• Nouvel écran d\'indication des Directions : Boutons Domicile et Travail, Raccourci vers la route précédente, Liste des marqueurs actifs et des traces GPX actives, Recherche dans l\'historique
-\n• Informations supplémentaires dans \'Détails de la route\' : Type de route, Surface, Pente ...
-\n• Navigation avec les transports publics : métro, bus, tram ...
-\n• Nouvelles actions rapides pour afficher / masquer les traces et le mode jour / nuit
-\n• Correction de zones indiquées comme inondées en Allemagne, Afrique du Sud et au Québec
-\n• Prise en charge des imports KML et KMZ
-\n• Correction des plantages sur les arrêts de transports publics
-\n• Pour la version gratuite : retrait des analyses Facebook et Firebase (c\'était déjà le cas pour OsmAnd+).</string>
     <string name="shared_string_degrees">Degrés</string>
     <string name="shared_string_milliradians">Milliradians</string>
     <string name="angular_measeurement">Unité d\'angle</string>
@@ -2969,15 +2914,6 @@
     <string name="routing_attr_avoid_subway_description">Évite le métro et les transports ferrés</string>
     <string name="routing_attr_avoid_ferry_name">Éviter le ferry</string>
     <string name="routing_attr_avoid_ferry_description">Éviter le ferry</string>
-    <string name="release_3_3_7">• Affichage du temps d\'attente lors des correspondances
-\n
-\n • Correction d\'affichage pour les détails de l\'itinéraire
-\n
-\n • Correction du thème sombre lors de l\'affichage du menu et des détails de l\'itinéraire
-\n
-\n • Affichage de l’azimut lors de la mesure de distance.
-\n
-\n</string>
     <string name="send_log">Envoyer le journal</string>
     <string name="routing_attr_avoid_bus_description">Éviter le bus et le trolleybus</string>
     <string name="routing_attr_avoid_sett_name">Éviter les pavés</string>
@@ -3166,8 +3102,7 @@
     <string name="app_mode_campervan">Camping-car</string>
     <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur le calcul d\'itinéraire).</string>
     <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
-    <string name="new_route_calculated_dist_dbg">Itinéraire : distance %s, durée %s 
-\nCalculs : %.1f secondes, %d routes, %d tuiles)</string>
+    <string name="new_route_calculated_dist_dbg">Itinéraire : distance %1$s, durée %2$s \nCalculs : %3$.1f secondes, %4$d routes, %5$d tuiles)</string>
     <string name="lang_oc">Occitan</string>
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Camionnette</string>
@@ -3200,7 +3135,6 @@
     <string name="apply_to_all_profiles">Appliquer à tous les profils</string>
     <string name="start_up_message_pref">Message au démarrage</string>
     <string name="units_and_formats">Unités et formats</string>
-    <string name="appearance">Apparence</string>
     <string name="list_of_installed_plugins">Greffons installés</string>
     <string name="configure_navigation">Paramétrer la navigation</string>
     <string name="configure_profile">Configurer le profil</string>
@@ -3240,7 +3174,6 @@
     <string name="plugins_settings">Paramètres du greffon</string>
     <string name="get_discount_title">Payez %1$d %2$s et gagnez %3$s.</string>
     <string name="shared_string_by_default">Par défaut</string>
-    <string name="download_detaile_map">Téléchargez la carte détaillée de %s pour voir cette zone.</string>
     <string name="download_detailed_map">Pour voir les détails de cette zone, téléchargez la carte %s.</string>
     <string name="change_data_storage_full_description">Déplacer les fichiers de données OsmAnd vers la nouvelle destination \?
 \n%1$s &gt; %2$s</string>
@@ -3564,7 +3497,6 @@
     <string name="select_group">Sélectionnez un groupe</string>
     <string name="select_shape">Sélectionnez une forme</string>
     <string name="shared_string_circle">Cercle</string>
-    <string name="shared_string_rhomb">Losange</string>
     <string name="shared_string_square">Carré</string>
     <string name="shared_string_octagon">Octogone</string>
     <string name="app_mode_ski_touring">Ski de randonnée</string>
@@ -3704,7 +3636,6 @@
     <string name="shared_string_always">Toujours</string>
     <string name="screen_control">Contrôle de l\'écran</string>
     <string name="system_screen_timeout">Utiliser le délai système pour l’extinction de l\'écran</string>
-    <string name="turn_screen_on_options_descr">Options de réveil de l\'écran :</string>
     <string name="turn_screen_on_descr">Sélectionnez les options d\'allumage de l’écran (assurez-vous qu’OsmAnd est au premier plan au moment du verrouillage de l’appareil) :</string>
     <string name="turn_screen_on_navigation_instructions">Instructions de navigation</string>
     <string name="turn_screen_on_power_button_descr">Appuyez sur le bouton d\'alimentation de l\'appareil pour allumer l\'écran avec OsmAnd par dessus l’écran de verrouillage.</string>
@@ -3735,7 +3666,6 @@
     <string name="shared_string_meters">mètres</string>
     <string name="details_dialog_decr">Afficher ou masquer les autres détails sur la carte</string>
     <string name="shared_string_night_map">Carte nocturne</string>
-    <string name="shared_string_all_time">Tout le temps</string>
     <string name="turn_screen_on_power_button_disabled">Désactivé. Nécessite l\'option « Garder l\'écran allumé » sous « Délai d\'affichage de l\'écran ».</string>
     <string name="add_online_source">Ajouter une source en ligne</string>
     <string name="clear_tiles_warning">Appliquer ces modifications effacera les données mises en cache pour cette source de tuiles</string>
@@ -3894,7 +3824,6 @@
     <string name="use_native_pt_desc">Basculer vers le calcul d\'itinéraire Transport Public Java (sécurisé)</string>
     <string name="perform_oauth_authorization_description">Connectez-vous avec OAuth pour utiliser les fonctionnalités osmedit</string>
     <string name="what_is_new">Nouveautés</string>
-    <string name="use_complex_routing">Routage complexe</string>
     <string name="complex_routing_descr">Routage en 2 phases pour la navigation en voiture.</string>
     <string name="use_native_pt">Développement du transport public autochtone</string>
     <string name="perform_oauth_authorization">Connectez-vous avec OAuth</string>
@@ -4018,7 +3947,6 @@
     <string name="routing_engine_vehicle_type_foot">A pieds</string>
     <string name="routing_engine_vehicle_type_bike">Vélo</string>
     <string name="routing_engine_vehicle_type_car">Automobile</string>
-    <string name="message_error_recheck_parameters">Erreur, vérifiez les paramètres</string>
     <string name="add_online_routing_engine">Ajouter un moteur de routage en ligne</string>
     <string name="edit_online_routing_engine">Modifier le moteur de routage en ligne</string>
     <string name="online_routing_example_hint">L\'URL avec tous les paramètres sera de la forme :</string>
@@ -4029,4 +3957,37 @@
     <string name="select_folder">Sélectionnez le dossier</string>
     <string name="select_folder_descr">Sélectionnez un dossier ou créez-en un nouveau</string>
     <string name="shared_string_empty">Vide</string>
+    <string name="announcement_time_approach">Approche</string>
+    <string name="announcement_time_prepare">Préparation</string>
+    <string name="announcement_time_prepare_long">Longue préparation</string>
+    <string name="announcement_time_arrive">Arrivé à destination</string>
+    <string name="shared_string_turn">Bifurcation</string>
+    <string name="show_track_on_map">Afficher la trace sur la carte</string>
+    <string name="routing_engine_vehicle_type_scooter">Trottinette</string>
+    <string name="routing_engine_vehicle_type_small_truck">Camionnette</string>
+    <string name="upload_to_openstreetmap">Envoyer vers OpenStreetMap</string>
+    <string name="edit_track">Modifier la trace</string>
+    <string name="rename_track">Renommer la trace</string>
+    <string name="change_folder">Modifier le dossier</string>
+    <string name="shared_string_sec">sec</string>
+    <string name="start_recording">Démarrer l\'enregistrement</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Fauteuil roulant</string>
+    <string name="routing_engine_vehicle_type_hiking">Randonnée</string>
+    <string name="routing_engine_vehicle_type_walking">Marche</string>
+    <string name="routing_engine_vehicle_type_truck">Camion</string>
+    <string name="routing_engine_vehicle_type_racingbike">Vélo de course</string>
+    <string name="routing_engine_vehicle_type_mtb">VTT</string>
+    <string name="message_server_error">Erreur serveur : %1$s</string>
+    <string name="message_name_is_already_exists">Ce nom existe déjà</string>
+    <string name="routing_engine_vehicle_type_hgv">Poids lourd</string>
+    <string name="announcement_time_passing">Durée</string>
+    <string name="analyze_by_intervals">Analyser par intervalles (fractionner)</string>
+    <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
+    <string name="announcement_time_descr">Le délai d\'annonce des alertes vocales dépend du type d\'annonce, de la vitesse actuelle et du type de navigation.</string>
+    <string name="announcement_time_title">Délai de l\'annonce</string>
+    <string name="announcement_time_off_route">Hors de l\'itinéraire prévu</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Vélo de route</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Vélo tout terrain</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Vélo électrique</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Vélo</string>
 </resources>

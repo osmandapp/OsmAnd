@@ -57,6 +57,7 @@ import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.enums.DrivingRegion;
@@ -300,7 +301,11 @@ public class OsmandApplication extends MultiDexApplication {
 	public QuickActionRegistry getQuickActionRegistry() {
 		return quickActionRegistry;
 	}
-	
+
+	public LocationServiceHelper createLocationServiceHelper() {
+		return new LocationServiceHelperImpl(this);
+	}
+
 	public void setAppCustomization(OsmAndAppCustomization appCustomization) {
 		this.appCustomization = appCustomization;
 		this.appCustomization.setup(this);

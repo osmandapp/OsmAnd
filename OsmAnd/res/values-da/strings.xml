@@ -853,7 +853,6 @@
     <string name="error_calculating_route">Ruten kunne ikke beregnes.</string>
     <string name="error_calculating_route_occured">Ruten kunne ikke beregnes.</string>
     <string name="empty_route_calculated">Beregnet rute er tom.</string>
-    <string name="new_route_calculated_dist">Ny rute beregnet, afstand</string>
     <string name="arrived_at_destination">Ankommet.</string>
     <string name="invalid_locations">Ugyldige koordinater</string>
     <string name="go_back_to_osmand">Tilbage til kortet</string>
@@ -922,7 +921,6 @@
     <string name="default_buttons_commit">Udfør</string>
     <string name="amenity_type_geocache">Geocaching</string>
     <string name="commiting_node">Overfør knudepunkt…</string>
-    <string name="poi_error_poi_not_found">Knudepunkt kan ikke findes, eller faciliteter består af flere knudepunkter som endnu ikke er understøttet.</string>
     <string name="route_head">Lige ud</string>
     <string name="incremental_search_building">Søg efter bygning trinvist</string>
     <string name="Closest_Amenities">Nærmeste faciliteter</string>
@@ -1804,7 +1802,6 @@
     <string name="no_address_found">Kan ikke bestemme adresse</string>
     <string name="looking_up_address">Søger efter adressen</string>
     <string name="rendering_attr_horseRoutes_name">Rideruter</string>
-    <string name="update">Opdateringsinterval</string>
     <string name="only_download_over_wifi">Hent kun med Wi-Fi</string>
     <string name="live_update">Realtidsopdatering</string>
     <string name="update_now">Opdater nu</string>
@@ -2004,8 +2001,6 @@
     <string name="get_started">Kom i gang</string>
     <string name="update_all_maps_now">Opdater alle kort nu?</string>
     <string name="clear_tile_data">Ryd alle kortbrikker</string>
-    <string name="no_update_info_desc">Kontroller ikke for nye versioner eller rabatter.</string>
-    <string name="no_update_info">Vis ikke nye versioner</string>
     <string name="search_my_location">Find position</string>
     <string name="skip_map_downloading">Spring over hentning af kort</string>
     <string name="skip_map_downloading_desc">Der ikke nogen offline kort installeret. Vælg et kort fra listen eller hent senere via \'Menu - %1$s\'.</string>
@@ -2081,9 +2076,6 @@
     <string name="wiki_around">Wikipedia artikler i nærheden</string>
     <string name="routing_attr_allow_motorway_name">Brug motorveje</string>
     <string name="routing_attr_allow_motorway_description">Tillader motorveje.</string>
-    <string name="legacy_search">Legacy søgning</string>
-    <string name="show_legacy_search">Vis legacy søgning</string>
-    <string name="show_legacy_search_desc">Tilføj legacy søgning til sidemenuen.</string>
     <string name="lang_sr_latn">Serbisk (latinsk)</string>
     <string name="lang_zh_hk">Kinesisk (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vand</string>
@@ -2602,16 +2594,6 @@
     <string name="by_date">Efter dato</string>
     <string name="by_type">Efter type</string>
     <string name="modify_the_search_query">Ændr søgning.</string>
-    <string name="release_3_0">• Nyt: globale offline rejseguider. Henvisning til steder linker til kortet. Data fra Wikivoyage 
-\n 
-\n • Wikipedia: nyt udseende, aktive links, billeder understøttes nu 
-\n 
-\n • Åbn spor grænseflade: understøtter rutepunktsgrupper 
-\n 
-\n • Kortmarkører: import af udvalgte grupper fra GPX-filer, nyt udseende på koordinat indtastning 
-\n 
-\n • OsmAnd Live abonnement indeholder nu alle OsmAnd-funktioner 
-\n</string>
     <string name="av_locations_selected_desc">GPX-fil med koordinaterne og data for de valgte noter.</string>
     <string name="av_locations_all_desc">GPX-fil med koordinater og data for alle noter.</string>
     <string name="osm_recipient_stat">Redigeringer %1$s, sum %2$s mBTC</string>
@@ -2734,7 +2716,7 @@
     <string name="update_is_available">Opdatering er tilgængelig</string>
     <string name="download_file">Hent fil</string>
     <string name="start_editing_card_image_text">Den gratis verdensomspændende rejseguide, som alle kan redigere.</string>
-    <string name="welcome_to_open_beta_description">Rejseguide er baseret på Wikivoyage. Test alle funktionerne gratis i den åbne beta. Bagefter vil rejseguider være tilgængelig for abonnenter af OsmAnd ubegrænset og ejere af OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Rejseguide er baseret på Wikivoyage. Test alle funktionerne gratis i den åbne beta.</string>
     <string name="start_editing_card_description">Du kan og bør redigere en artikel på Wikivoyage. Del viden, erfaringer, talent og din opmærksomhed.</string>
     <string name="start_editing">Begynd redigering</string>
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
@@ -2787,44 +2769,13 @@
     <string name="send_search_query_description">Send søgestrengen: \"%1$s\" samt lokationen.
 \n 
 \nDer indsamles ingen personlige oplysninger, kun søgedata, der er nødvendige for at forbedre søgningen.</string>
-    <string name="search_no_results_description">Ingen resultater?
-\nRapporter det.</string>
     <string name="send_search_query">Send søgeforespørgsel?</string>
-    <string name="release_3_1">• Navigation: rettet statuslinje, hurtigt ombytning af start-og slutpunkt på ruten 
-\n
-\n• Kortmarkører: rettet tænd/sluk-grupper, evne til at skjule markører på kortet 
-\n
-\n• OSM redigering: mulighed for at redigere mærker for ikke-punkt objekter, rettet manglende kommentarer til noter, sikkerhedskopiering af redigeringer 
-\n
-\n• Forbedret Wikipedia og Wikivoyage fortolkning, opdaterede filer findes allerede 
-\n
-\n• Kontekstmenu: rettet transport farve i nat-tilstand, rettet yderligere menustørrelser 
-\n
-\n• Bådnavigation: understøtter flodnavigation 
-\n
-\n• Andre fejlrettelser 
-\n</string>
     <string name="increase_search_radius_to">Udvid søgeradius til %1$s</string>
     <string name="thank_you_for_feedback">Tak for tilbagemelding</string>
     <string name="poi_cannot_be_found">Node eller vej kan ikke findes.</string>
     <string name="search_no_results_feedback">Ingen søgeresultater?
 \nGiv tilbagemelding</string>
     <string name="test_voice_desrc">Tryk på en knap og lyt til den tilsvarende talemeddelelse for at høre, om den mangler eller er defekt</string>
-    <string name="commiting_way">Indsendelsesmåde…</string>
-    <string name="release_3_2_pre">• Løst nedbrud ved start, der opstod på nogle enheder 
-\n 
-\n • Ny Markør funktion: visning af de mærker, der allerede er nået 
-\n 
-\n • Søgehistorikken viser nu de kategorier, der er søgt efter tidligere 
-\n 
-\n • Løst nedbrud ved opstart, der opstod med ikke-latinske kort 
-\n 
-\n  • Forbedret renderingshastighed på Android 8.0 enheder 
-\n 
-\n  • Understøtter redigering af polygonobjekter (ikke-facilitet) 
-\n 
-\n  • Afstandsmåling: tilføjet knap til \"Afstandsmåling\" i handlinger i kontekstmenuen 
-\n</string>
     <string name="ask_for_location_permission">Giv OsmAnd adgang til placering for at fortsætte.</string>
     <string name="rendering_value_black_name">Sort</string>
     <string name="more_transport_on_stop_hint">Der er flere forbindelser ved dette stop.</string>
@@ -2905,23 +2856,6 @@
     <string name="quick_action_gpx_tracks_hide">Skjul GPX spor</string>
     <string name="quick_action_gpx_tracks_show">Vis GPX spor</string>
     <string name="add_destination_query">Angiv en destination først</string>
-    <string name="release_3_3">• Ny \'Rutevejledning\': viser hjem- og arbejdsstedsknapper, \'Forrige rute\' genvej, liste over aktive GPX-spor og markører, søgehistorik 
-\n 
-\n  • Yderligere information under \'Ruteoplysninger\': vejtyper, overflade, stejlhed, jævnhed 
-\n 
-\n  • Offentlig transportnavigation, understøtter alle former for transport: metro, bus, sporvogn osv. 
-\n 
-\n  • Ny hurtig genvej til vis/skjul spor og dag-/nattilstand 
-\n 
-\n  • Rettet at områder vises som oversvømmet i Tyskland, Sydafrika, Quebec 
-\n 
-\n  • Yderligere support for KML og KMZ import 
-\n 
-\n  • Rettet fejl ved åbning af visse offentlige transportstoppesteder 
-\n 
-\n  • Fjernet Facebook og Firebase analytics fra den gratis version (OsmAnd + indeholder dem ikke)
-\n
-\n</string>
     <string name="use_osm_live_public_transport_description">Aktivér offentlig transport for OsmAnd Live ændringer.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live offentlig transport</string>
     <string name="add_start_and_end_points">Tilføj afgangs-og ankomststed</string>
@@ -2998,15 +2932,6 @@
     <string name="routing_attr_avoid_subway_description">Undgår metro og letbane</string>
     <string name="routing_attr_avoid_ferry_name">Ingen færger</string>
     <string name="routing_attr_avoid_ferry_description">Undgår færger</string>
-    <string name="release_3_3_7">• Vis tid mellem overførsler i offentlig transport 
-\n 
-\n • Korrigeret brugergrænseflade til ruteoplysningerne 
-\n 
-\n • Rettet mørkt tema i Retningsmenuen og Rutedetaljer 
-\n 
-\n • Vis azimut i Mål afstand
-\n
-\n</string>
     <string name="send_log">Send log</string>
     <string name="files_moved">Flyttede %1$d filer (%2$s).</string>
     <string name="files_copied">Kopieret %1$d filer (%2$s).</string>
@@ -3031,7 +2956,6 @@
     <string name="choose_data_to_share">Vælg den type data der deles:</string>
     <string name="downloaded_maps">Hentede kort</string>
     <string name="visited_screens">Besøgte skærme</string>
-    <string name="colleted_data">Indsamlede data</string>
     <string name="collected_data_descr">Definer hvilke data der deles med OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Hjælper os med at forstå populariteten af land- og regionskort.</string>
     <string name="visited_screens_collect_descr">Hjælper os med at forstå populariteten af OsmAnd-funktionens.</string>
@@ -3087,8 +3011,6 @@
     <string name="third_party_routing_type">Tredjepartsruteplanlægning</string>
     <string name="application_profiles_descr">Vælg de profiler, der skal være synlige.</string>
     <string name="application_profiles">Programprofiler</string>
-    <string name="zoom_by_wunderlinq_descr">Skift kort zoom ved at rulle hjulet op og ned. Escape vender tilbage til WunderLINQ.</string>
-    <string name="zoom_by_wunderlinq">Brug WunderLINQ til styring</string>
     <string name="quick_action_need_to_add_item_to_list">Tilføj mindst ét punkt til listen i \'Hurtig Handling\' under \'Indstillinger\'</string>
     <string name="routing_attr_piste_type_downhill_name">Alpint/downhill skiløb</string>
     <string name="routing_attr_piste_type_downhill_description">Skiløjper til alpint skiløb eller downhill og adgang til skilifte.</string>
@@ -3193,8 +3115,8 @@
     <string name="rendering_attr_showLez_name">Vis Miljøzoner</string>
     <string name="temporary_conditional_routing">Overvej midlertidige begrænsninger</string>
     <string name="shared_string_default">Standard</string>
-    <string name="new_route_calculated_dist_dbg">Rute: afstand %s, rute tid %s 
-\nBeregning: %.1f s., %d veje, %d fliser</string>
+    <string name="new_route_calculated_dist_dbg">Rute: afstand %1$s, rute tid %2$s
+\nBeregning: %3$.1f s., %4$d veje, %5$d fliser</string>
     <string name="lang_oc">Occitansk</string>
     <string name="app_mode_wagon">Vogn</string>
     <string name="app_mode_pickup_truck">Pickup</string>
@@ -3233,7 +3155,6 @@
     <string name="route_parameters_info">Indstillinger for routing i den valgte profil \"%1$s\".</string>
     <string name="wake_time">Vågnetid</string>
     <string name="units_and_formats">Enheder &amp; formater</string>
-    <string name="appearance">Udseende</string>
     <string name="map_look_descr">Kortets udseende</string>
     <string name="map_look">Kortets udseende</string>
     <string name="list_of_installed_plugins">Installerede udvidelser</string>
@@ -3267,7 +3188,6 @@
     <string name="logcat_buffer">Logcat-buffer</string>
     <string name="plugins_settings">Udvidelsesindstillinger</string>
     <string name="shared_string_by_default">Som standard</string>
-    <string name="download_detaile_map">Hent detaljeret %s kort, for at se området.</string>
     <string name="download_detailed_map">Hent detaljeret %s kort, for at se området.</string>
     <string name="change_data_storage_full_description">Flyt datafiler til den nye destination\?
 \n%1$s&gt;%2$s</string>
@@ -3527,7 +3447,6 @@
     <string name="select_group">Vælg gruppe</string>
     <string name="select_shape">Vælg form</string>
     <string name="shared_string_circle">Cirkel</string>
-    <string name="shared_string_rhomb">Rhombe</string>
     <string name="shared_string_square">Firkant</string>
     <string name="shared_string_min">Min</string>
     <string name="use_system_screen_timeout_promo">Deaktiveret som standard, hvis programmet kører i forgrunden, slukkes skærmen ikke.
@@ -3582,8 +3501,6 @@
     <string name="shared_string_language">Sprog</string>
     <string name="shared_string_all_languages">Alle sprog</string>
     <string name="wiki_menu_download_descr">Yderligere kort er nødvendige for at se Wikipedia Interessepunkter på kortet.</string>
-    <string name="wikipedia_poi_languages_promo">Nogle Wikipedia-artikler er muligvis ikke tilgængelige på nogle sprog. Vælg de sprog, som Wikipedia-artikler skal vises på kortet.
-\nSkift mellem alle tilgængelige sprog, mens artiklen læses.</string>
     <string name="ui_customization_short_descr">Skuffeelementer, genvejsmenu</string>
     <string name="shared_string_drawer">Skuffe</string>
     <string name="ui_customization">Tilpasning af brugergrænseflade</string>

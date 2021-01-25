@@ -353,8 +353,6 @@
     <string name="rendering_attr_contourWidth_name">Եզրագծերի լայնությունը</string>
     <string name="rendering_attr_hideWaterPolygons_description">Ջուր</string>
     <string name="rendering_attr_hideWaterPolygons_name">Թաքցնել ջուրը</string>
-    <string name="legacy_search">Հին որոնման տեսակը</string>
-    <string name="show_legacy_search">Ցույց տալ հին որոնման տեսակը</string>
     <string name="routing_attr_allow_motorway_name">Օգտագործել մայրուղի</string>
     <string name="routing_attr_allow_motorway_description">Թույլատրում է ավտոմայրուղիներ։</string>
     <string name="upload_osm_note_description">Վերբեռնել ձեր OSM նշումը անանուն կամ ձեր OpenStreetMap.org պրոֆիլի միջոցով:</string>
@@ -429,8 +427,6 @@
     <string name="translit_names">Transliterate անունները</string>
     <string name="first_usage_greeting">Ստացեք երթուղիներ և հայտնաբերեք նոր վայրեր առանց ինտերնետ կապի</string>
     <string name="search_my_location">Գտնել իմ դիրքը</string>
-    <string name="no_update_info_desc">Չստուգել թարմացումների համար կամ թարմացումներ կապված OsmAnd-ի զեղչեր հետ։</string>
-    <string name="no_update_info">Չցուցադրել թարմացումներ/նոր տարբերակներ</string>
     <string name="update_all_maps_now">Թարմացնել բոլոր քարտեզները հիմա?</string>
     <string name="clear_tile_data">Ջնջել բոլոր տայլերը</string>
     <string name="routing_attr_short_way_name">Վառելիք տնտեսող ճանապարհ</string>
@@ -1569,7 +1565,6 @@
 \n• Երթուղին վերահաշվարկվում է եթե դուք շեղվում եք նրանից
 \n• Որոնեք ըստ հասցեյի, տեսակի (օրինակ`Րեստորան, հյուրանոց, բենզալցակայան, թանգարան) կամ ըստ աշխարհագրական կոորդինատների
 \n</string>
-    <string name="show_legacy_search_desc">"Ավելացնել  մենյուի ցանկում հին որոնումը։"</string>
     <string name="rec_split_desc">Վերագրանցել կլիպները(clips), երբ սահմանվաշ պահեստային ծավալը գերազանցում է։</string>
     <string name="osmand_plus_extended_description_part3">Քարտեզի դիտում
 \n• Ցուցադրում է ձեր դիրքը և կողմնորոշումը
@@ -2246,7 +2241,6 @@
     <string name="error_calculating_route">Հնարավոր չէ հաշվարկել երթուղին։</string>
     <string name="error_calculating_route_occured">Հնարավոր չէ հաշվարկել երթուղին։</string>
     <string name="empty_route_calculated">Հնարավոր չէ երթուղին հաշվարկել։</string>
-    <string name="new_route_calculated_dist">Նոր երթուղի հաշվարկվեց, հեռավորությունը</string>
     <string name="arrived_at_destination">Դուք ժամանել եք։</string>
     <string name="invalid_locations">Սխալ կոորդինատներ</string>
     <string name="go_back_to_osmand">Վերադառնալ քարտեզին</string>
@@ -2321,7 +2315,6 @@
     <string name="favourites_remove_dialog_success">Կետ «{0}» ջնջվել է «Սիրված»-ից։</string>
     <string name="poi_edit_title">Խմբագրել POI</string>
     <string name="poi_create_title">Ստեղծել POI</string>
-    <string name="poi_error_poi_not_found">Հանգույցը չի կարող գտնվել, կամ poi բաղկացած է մի քանի հանգույցներից, որ առայժմ չի աջակցվվում։</string>
     <string name="poi_remove_confirm_template">Ջնջել {0} (comment)\?</string>
     <string name="poi_remove_title">POI ջնջում</string>
     <string name="poi_remove_success">Նջված է</string>
@@ -2437,7 +2430,6 @@
     <string name="use_drawer_btn">Օգտագործել Մենյու</string>
     <string name="dashboard_or_drawer_title">Վահանակը կամ Մենյու</string>
     <string name="dashboard_or_drawer_description">Ստատիկ Մենյուի փոխարեն, դուք կարող եք օգտագործել նոր ինտերֆեյսը որպես Վահանակ էջ: Ձեր ընտրությունը միշտ կարող է փոփոխվել վահանակի կարգավորումներում:</string>
-    <string name="update">Թարմացնել</string>
     <string name="only_download_over_wifi">Ներբեռնել միայն WiFi-ի միջոցով</string>
     <string name="live_update">Ավտո-թարմացում</string>
     <string name="update_now">Թարմացնել հիմա</string>
@@ -2581,18 +2573,6 @@
     <string name="additional_actions">Լրացուցիչ գործողություններ</string>
     <string name="av_locations_selected_desc">GPX ֆայլը կոորդինատներով և ընտրված գրառումների տվյալներով:</string>
     <string name="av_locations_all_desc">GPX ֆայլը կոորդինատներով և բոլոր նշումների տվյալները։</string>
-    <string name="release_3_0">• Նոր Ճամփորդության մենյու. Դիտեք WikiVoyage- ի հոդվածները առանց ինտերնետի օգտագործման 
-\n 
-\n • Wikipedia՝ նոր տեսք, ակտիվ հղումներ, պատկերներ 
-\n 
-\n • Open Track UI՝ ցուցադրում waypoint խմբերը 
-\n 
-\n • Քարտեզի մարկերներ՝ Ընտրված խմբերի ներմուծում GPX ֆայլերից, կոորդինատների մուտքագրման նոր տեսքը 
-\n 
-\n • OsmAnd Live բաժանորդագրությունը այժմ ներառում է բոլոր OsmAnd առանձնահատկությունները 
-\n 
-\n 
-\n</string>
     <string name="modify_the_search_query">Փոխեք որոնման հարցումը:</string>
     <string name="shared_string_actions">Գործողություններ</string>
     <string name="shared_string_marker">Մարկեր</string>
@@ -2708,7 +2688,7 @@
     <string name="maps_you_need_descr">Հիմնվելով ձեր պահպանած հոդվածներից, խորհուրդ ենք տալիս ներբեռնել հետեւյալ քարտեզները՝</string>
     <string name="travel_card_download_descr">Ներբեռնեք Wikivoyage-ի ուղևորության ուղեցույցները` աշխարհի նշանավոր տեղերի մասին հոդվածներ դիտելու համար առանց ինտերնետի:</string>
     <string name="start_editing_card_image_text">Աշխարհի ուղեցույց, որը կարող է խմբագրել ցանկացած մեկը:</string>
-    <string name="welcome_to_open_beta_description">Ուղեւորության ուղեցույցները ներկայումս հիմնված են Wikivoyage-ի վրա: Փորձեք անվճար բոլոր հնարավորությունները բետա տեստավորման ժամանակ: Հետագայում ուղեցույցը հասանելի կլինի OsmAnd Unlimited-ի և OsmAnd+ սեփականատերերի համար։</string>
+    <string name="welcome_to_open_beta_description">Ուղեւորության ուղեցույցները ներկայումս հիմնված են Wikivoyage-ի վրա: Փորձեք անվճար բոլոր հնարավորությունները բետա տեստավորման ժամանակ:</string>
     <string name="wikivoyage_travel_guide_descr">Տեսեք ուղեցույցները, OsmAnd-ում աշխարհի ամենահետաքրքիր վայրերը, առանց ինտերնետին միանալու:</string>
     <string name="purchase_dialog_travel_description">Գնեք հետեւյալներից մեկը, որպեսզի ստանաք ճանապարհորդական հոդվածները անցանց՝</string>
     <string name="purchase_dialog_subtitle">Ընտրեք համապատասխան կետը</string>
@@ -2786,26 +2766,6 @@
     <string name="poi_cannot_be_found">Հանգույցը կամ ճանապարհը հնարավոր չէ գտնել:</string>
     <string name="search_no_results_feedback">Որոնման արդյունքներ չկան\?
 \nՀետադարձ կապ հաստատեք մեզ հետ</string>
-    <string name="release_3_2_pre">• Ուղղած է հավելվածի փլուզումը մեկնարկի ժամանակ որոշ սարքերի վրա
-\n
-\n• Նոր ֆունկցիա մարկերների համար
-\n
-\n• Որոնման պատմությունը ցույց է տալիս, նախկինում որոնված կատեգորիաները</string>
-    <string name="release_3_1">"•Նավիգացիա. Ֆիկսված է առաջընթացի ցուցանիշ և երթուղու մեկնարկային և վերջնական կետի արագ փոխարինում
-\n
-\n• Քարտեզի մարկերներ. Ֆիկսված է խմբերի միացում/անջատում և քարտեզից մարկերները թաքցնելու ունակությունը
-\n
-\n• OSM Edit: Ոչ պիտանի օբյեկտների և ուղիների պիտակների խմբագրման հբարավորություն
-\n
-\n• Բարելավել Wikipedia-ի և Wikivoyage-ի վերլուծությունը, թարմացված ֆայլերը արդեն հասանելի են
-\n
-\n• Համատեքստի մենյու. Գիշերային ռեժիմում ֆիկսվեց փոխադրամիջոցների վահաններ, ֆիկսվեց լրացուցիչ մենյուի չափերը
-\n
-\n • Այլ սխալների ուղղում
-\n
-\n
-\n "</string>
-    <string name="commiting_way">Ճանապարհի ուղղում…</string>
     <string name="increase_search_radius_to">Ավելացնել որոնման շառավիղը մինև %1$s</string>
     <string name="send_search_query_description">Մենք կուղարկենք ձեր որոնման հարցումը՝ \"%1$s\", ինչպես նաև ձեր գտնվելու վայրը։
 \n 
@@ -2856,7 +2816,6 @@
     <string name="route_parameters_info">Կարգավորումները ազդում են երթուղու կառուցման վրա: Կկիրառվի ընտրված պրոֆիլի համար՝ %1$s։</string>
     <string name="wake_time">Զարթոնքի ժամանակը</string>
     <string name="units_and_formats">Չափման միավորներ և ձեւաչափեր</string>
-    <string name="appearance">Արտաքին տեսք</string>
     <string name="map_look_descr">Քարտեզի տեսքը</string>
     <string name="map_look">Քարտեզի տեսքը</string>
     <string name="list_of_installed_plugins">Տեղադրված plugin-ները</string>

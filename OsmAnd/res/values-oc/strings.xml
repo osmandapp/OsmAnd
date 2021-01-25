@@ -65,15 +65,6 @@
     <string name="routing_attr_avoid_subway_description">Evita mètro e transvai</string>
     <string name="routing_attr_avoid_ferry_name">Evita lo fèrri (barcatiera)</string>
     <string name="routing_attr_avoid_ferry_description">Evita lo fèrri (barcatiera)</string>
-    <string name="release_3_3_7">"• Mòstra lo temps de transferiment per lo  transpòrt public 
-\n 
-\n• Corregida la vista per lo menut de la Rota 
-\n 
-\n• Tèma nocturne corregit dins lo menut Adreiça e per lo menut de la Rota 
-\n 
-\n• Mostra l\'azimut dins la mesura de la distància
-\n
-\n"</string>
     <string name="shared_string_degrees">Gra</string>
     <string name="shared_string_milliradians">Milliradiants</string>
     <string name="angular_measeurement">Unitat angulària</string>

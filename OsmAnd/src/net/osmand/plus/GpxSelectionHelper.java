@@ -45,10 +45,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 public class GpxSelectionHelper {
 
@@ -60,6 +62,7 @@ public class GpxSelectionHelper {
 	private static final String BACKUPMODIFIEDTIME = "backupTime";
 	private static final String COLOR = "color";
 	private static final String SELECTED_BY_USER = "selected_by_user";
+	private static final String HIDDEN_GROUPS = "hidden_groups";
 
 	private OsmandApplication app;
 	private SavingTrackHelper savingTrackHelper;
@@ -577,7 +580,10 @@ public class GpxSelectionHelper {
 						} else if (obj.has(BACKUP)) {
 							selectedGpxFilesBackUp.put(gpx, gpx.modifiedTime);
 						} else {
-							selectGpxFile(gpx, true, false, true, selectedByUser, false);
+							SelectedGpxFile file = selectGpxFile(gpx, true, false, true, selectedByUser, false);
+							if (obj.has(HIDDEN_GROUPS)) {
+								readHiddenGroups(file, obj.getString(HIDDEN_GROUPS));
+							}
 						}
 						gpx.addGeneralTrack();
 					} else if (obj.has(CURRENT_TRACK)) {
@@ -596,6 +602,33 @@ public class GpxSelectionHelper {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private String saveHiddenGroups(SelectedGpxFile selectedGpxFile) {
+		StringBuilder stringBuilder = new StringBuilder();
+		Iterator<String> it = selectedGpxFile.hiddenGroups.iterator();
+		while (it.hasNext()) {
+			String name = it.next();
+			stringBuilder.append(name != null ? name : " ");
+			if (it.hasNext()) {
+				stringBuilder.append(",");
+			}
+		}
+		return stringBuilder.toString();
+	}
+
+	public void readHiddenGroups(SelectedGpxFile selectedGpxFile, String text) {
+		StringTokenizer toks = new StringTokenizer(text, ",");
+		Set<String> res = new HashSet<>();
+		while (toks.hasMoreTokens()) {
+			String token = toks.nextToken();
+			if (!Algorithms.isBlank(token)) {
+				res.add(token);
+			} else {
+				res.add(null);
+			}
+		}
+		selectedGpxFile.hiddenGroups = res;
 	}
 
 	private int parseColor(String color) {
@@ -619,6 +652,7 @@ public class GpxSelectionHelper {
 						if (s.gpxFile.getColor(0) != 0) {
 							obj.put(COLOR, Algorithms.colorToString(s.gpxFile.getColor(0)));
 						}
+						obj.put(HIDDEN_GROUPS, saveHiddenGroups(s));
 					}
 					obj.put(SELECTED_BY_USER, s.selectedByUser);
 				} catch (JSONException e) {
@@ -765,6 +799,7 @@ public class GpxSelectionHelper {
 		private GPXFile gpxFile;
 		private GPXTrackAnalysis trackAnalysis;
 
+		private Set<String> hiddenGroups = new HashSet<>();
 		private List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
 		private List<GpxDisplayGroup> displayGroups;
 
@@ -832,6 +867,18 @@ public class GpxSelectionHelper {
 			return processedPointsToDisplay;
 		}
 
+		public Set<String> getHiddenGroups() {
+			return Collections.unmodifiableSet(hiddenGroups);
+		}
+
+		public void addHiddenGroups(String group) {
+			hiddenGroups.add(group);
+		}
+
+		public void removeHiddenGroups(String group) {
+			hiddenGroups.remove(group);
+		}
+
 		public GPXFile getGpxFile() {
 			return gpxFile;
 		}
@@ -859,6 +906,10 @@ public class GpxSelectionHelper {
 
 		public int getColor() {
 			return color;
+		}
+
+		public void resetSplitProcessed() {
+			splitProcessed = false;
 		}
 
 		public List<GpxDisplayGroup> getDisplayGroups(OsmandApplication app) {

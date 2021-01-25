@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
@@ -26,6 +25,7 @@ import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.util.List;
@@ -41,6 +41,7 @@ import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
 public class WikivoyageWebViewClient extends WebViewClient {
 
 	private static final String TAG = WikivoyageWebViewClient.class.getSimpleName();
+	public static final int ROUNDING_ERROR = 3;
 
 	private OsmandApplication app;
 	private FragmentManager fragmentManager;
@@ -85,29 +86,29 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		} else if (isWebPage) {
 			WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
-			if (article != null) {
+			if (article != null && article.getGpxFile() != null) {
 				List<WptPt> points = article.getGpxFile().getPoints();
 				WptPt gpxPoint = null;
 				String coordinates = url.replace(PREFIX_GEO, "");
 				double lat;
 				double lon;
 				try {
-					lat = Double.valueOf(coordinates.substring(0, coordinates.indexOf(",")));
-					lon = Double.valueOf(coordinates.substring(coordinates.indexOf(",") + 1,
-							coordinates.length()));
+					lat = Double.parseDouble(coordinates.substring(0, coordinates.indexOf(",")));
+					lon = Double.parseDouble(coordinates.substring(coordinates.indexOf(",") + 1));
 				} catch (NumberFormatException e) {
 					Log.w(TAG, e.getMessage(), e);
 					return true;
 				}
 				for (WptPt point : points) {
-					if (point.getLatitude() == lat && point.getLongitude() == lon) {
+					if (MapUtils.getDistance(point.getLatitude(), point.getLongitude(), lat, lon) < ROUNDING_ERROR) {
 						gpxPoint = point;
 						break;
 					}
 				}
 				if (gpxPoint != null) {
 					final OsmandSettings settings = app.getSettings();
-					settings.setMapLocationToShow(lat, lon,	settings.getLastKnownMapZoom(),
+					settings.setMapLocationToShow(gpxPoint.getLatitude(), gpxPoint.getLongitude(),
+							settings.getLastKnownMapZoom(),
 							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxPoint.name),
 							false,
 							gpxPoint);

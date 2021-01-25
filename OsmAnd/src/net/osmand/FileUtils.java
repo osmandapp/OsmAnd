@@ -1,5 +1,6 @@
 package net.osmand;
 
+import android.os.AsyncTask;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -107,9 +108,12 @@ public class FileUtils {
 			SelectedGpxFile selected = helper.getSelectedFileByPath(src.getAbsolutePath());
 			app.getGpxDbHelper().rename(src, dest);
 			if (selected != null && selected.getGpxFile() != null) {
+				selected.resetSplitProcessed();
 				selected.getGpxFile().path = dest.getAbsolutePath();
 				helper.updateSelectedGpxFile(selected);
 			}
+			RenameGpxAsyncTask renameGpxAsyncTask = new RenameGpxAsyncTask(app, dest);
+			renameGpxAsyncTask.execute();
 			return dest;
 		}
 		return null;
@@ -196,5 +200,35 @@ public class FileUtils {
 
 	public interface RenameCallback {
 		void renamedTo(File file);
+	}
+
+	private static class RenameGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
+
+		private OsmandApplication app;
+		private File file;
+
+		private RenameGpxAsyncTask(@NonNull OsmandApplication app, @NonNull File file) {
+			this.app = app;
+			this.file = file;
+		}
+
+		@Override
+		protected Exception doInBackground(Void... voids) {
+			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
+
+			GPXFile gpxFile;
+			if (selected != null && selected.getGpxFile() != null) {
+				gpxFile = selected.getGpxFile();
+			} else {
+				gpxFile = GPXUtilities.loadGPXFile(file);
+			}
+			if (gpxFile.metadata == null) {
+				gpxFile.metadata = new Metadata();
+			}
+			gpxFile.metadata.name = Algorithms.getFileNameWithoutExtension(file.getName());
+
+			return GPXUtilities.writeGpxFile(file, gpxFile);
+		}
 	}
 }

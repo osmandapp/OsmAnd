@@ -927,7 +927,6 @@
     <string name="error_calculating_route">Ezin izan da ibilbidea kalkulatu.</string>
     <string name="error_calculating_route_occured">Ezin izan da ibilbidea kalkulatu.</string>
     <string name="empty_route_calculated">Kalkulatutako ibilbidea hutsik dago.</string>
-    <string name="new_route_calculated_dist">Ibilbide berria kalkulatua, distantzia</string>
     <string name="arrived_at_destination">Iritsi zara.</string>
     <string name="invalid_locations">Baliogabeko koordenatuak</string>
     <string name="go_back_to_osmand">Itzuli mapara</string>
@@ -1025,7 +1024,6 @@
     <string name="osb_comment_dialog_error">Ezin izan da iruzkina gehitu.</string>
     <string name="poi_edit_title">Editatu POI-a</string>
     <string name="poi_create_title">Sortu interesgune bat</string>
-    <string name="poi_error_poi_not_found">Ezin da nodoa aurkitu, edo zerbitzua hainbat nodoz osatuta dago, eta ez dago horretarako euskarririk oraindik.</string>
     <string name="poi_remove_confirm_template">{0} ezabatu (iruzkina)?</string>
     <string name="poi_remove_title">Ezabatu POI-a</string>
     <string name="shared_string_delete">Ezabatu</string>
@@ -1864,7 +1862,6 @@
     <string name="dashboard_or_drawer_description">Aplikazioa kontrol panel aldakor batetik ala finkatutako menu estatiko batetik kudeatzeko aukera dago. Erabakia aldatzeko aukera duzu kontrol panelaren ezarpenetan.</string>
     <string name="speak_poi">Inguruko POI</string>
     <string name="show_zoom_buttons_navigation_descr">Erakutsi zoom botoiak nabigazioan.</string>
-    <string name="update">Eguneratu</string>
     <string name="use_drawer_btn">Erabili menua</string>
     <string name="map_legend">Maparen legenda</string>
     <string name="save_poi_without_poi_type_message">Ziur interesgunea mota gabe gorde nahi duzula\?</string>
@@ -1996,8 +1993,6 @@ mapak eta nabigazioa</string>
 \n
 \nHau aktibatzean ikuspegia \'Negua eta eskia\' estilora aldatzen da, paisaia neguko egoeran bistaratuz. Hau atzera aldatu daiteke gehigarri hau desgaituz eta \'Konfiguratu mapa\' menuko \'Mapa estiloa\' aldatuz.</string>
     <string name="rendering_attr_hideOverground_name">Lur gaineko objektuak</string>
-    <string name="no_update_info_desc">Ez egiaztatu bertsio berriak edo OsmAnd-ekin erlazioa duten deskontuak.</string>
-    <string name="no_update_info">Ez erakutsi bertsio berriak</string>
     <string name="update_all_maps_now">Eguneratu mapa guztiak orain?</string>
     <string name="clear_tile_data">Garbitu tesela guztiak</string>
     <string name="routing_attr_short_way_name">Bide erregai-efizientea</string>
@@ -2078,9 +2073,6 @@ mapak eta nabigazioa</string>
     <string name="rendering_value_fine_name">Ongi</string>
     <string name="search_map_hint">Hiria edo eskualdea</string>
     <string name="wiki_around">Inguruko Wikipediako artikuluak</string>
-    <string name="legacy_search">Bilaketa zaharra</string>
-    <string name="show_legacy_search">Erakutsi bilaketa zaharra</string>
-    <string name="show_legacy_search_desc">Gehitu bilaketa zaharra tiraderako zerrendan.</string>
     <string name="routing_attr_allow_motorway_name">Erabili autobideak</string>
     <string name="routing_attr_allow_motorway_description">Erabili autobideak.</string>
     <string name="lang_sr_latn">Serbiera (latinoa)</string>
@@ -2730,7 +2722,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="maps_you_need">Behar dituzun mapak</string>
     <string name="travel_card_download_descr">Deskargatu Wikivoyage bidai gidak munduko tokien inguruko artikuluak ikusteko Internetera konexioa ez duzunean ere.</string>
     <string name="start_editing_card_image_text">Edonork idatzi dezakeen mundu osoko doako gida.</string>
-    <string name="welcome_to_open_beta_description">Bidai-gidak Wikivoyage-n oinarrituta daude. Probatu doan ezaugarri guztiak besta probatze garai irekian. Gero, Bidaia-gidak OsmAnd Unlimited harpidedunentzat eta OsmAnd+ erosleentzat egongo da eskuragarri.</string>
+    <string name="welcome_to_open_beta_description">Bidai-gidak Wikivoyage-n oinarrituta daude. Probatu doan ezaugarri guztiak besta probatze garai irekian.</string>
     <string name="start_editing_card_description">Wikivoyage-ko edozein artikulu aldatu dezakezu. Partekatu ezagutza, esperientzia, talentua eta zure atentzioa.</string>
     <string name="welcome_to_open_beta">Ongi etorri beta irekira</string>
     <string name="contour_lines_hillshade_maps">Sestra-kurbak eta erliebe-itzalak</string>
@@ -2760,17 +2752,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="mapnik_render_descr">\'Mapnik\' estilo lehenetsi zaharra. \'Mapnik\' estiloaren antzeko koloreak.</string>
     <string name="touring_view_render_descr">Errepiderako kontraste eta xehetasun handiko estiloa. Lehenetsitako estiloaren konfigurazio aukera guztiak ditu eta ahal beste xehetasun erakusten ditu, bereziki errepideak, bideak eta bestelako garraio-bideak. Bide moten arteko bereizketa bisual argia. Egunez, gauez zein naturan erabiltzeko egokia.</string>
     <string name="default_render_descr">Erabilera orokorrerako estiloa. Biztanle askoko hirietan garbia. sestra-kurbak, ibilbideak, zoladuraren kalitatea, sarbide-mugak, bideak SAC eskalaren arabera marrazten dira, ur kiroletarako elementuak.</string>
-    <string name="release_3_0">• Berria: Lineaz kanpoko bidi gida globalentzako euskarria. Aipatutako kokalekuak mapan estekatzen dira. Hasierako datuak Wikivoyage-tik.
-\n
-\n • Wikipedia: Itxura berria, esteka aktiboak, irudiak onartzen dira
-\n
-\n • Open Track UI: Bide-puntu taldeentzako euskarria
-\n
-\n • Mapa-markatzaileak: Inportatu hautatutako taldeak GPX fitxategietatik, korrdenatuen sarrera, itxura berria
-\n
-\n • OsmAnd Live harpidetzak orain OsmAnd ezaugarri guztiak onartzen ditu
-\n
-\n</string>
     <string name="access_intermediate_arrival_time">Tarteko iritsiera ordua</string>
     <string name="map_widget_intermediate_time">Tarteko denbora</string>
     <string name="quick_action_edit_actions">Editatu ekintzak</string>
@@ -2785,44 +2766,12 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="send_search_query_description">Zure bilaketa eta kokapena \"%1$s\" zerbitzarira bidaliko da. 
 \n 
 \nEz da informazio pertsonala biltzen, bilaketen datuak algoritmoa hobetzeko biltzen ditugu.</string>
-    <string name="search_no_results_description">Emaitzarik ez?
-\nEman iezaguzu horren berri.</string>
     <string name="send_search_query">Bilaketa-kontsulta bidali?</string>
     <string name="thank_you_for_feedback">Eskerrik asko zure iruzkinagatik</string>
     <string name="poi_cannot_be_found">Ezin izan da nodoa edo bidea aurkitu.</string>
     <string name="search_no_results_feedback">Bilaketaren emaitzarik ez?
 \nEgin iruzkin bat</string>
-    <string name="release_3_1">• Nabigazioa: Konpondu aurreratze barra, aldatu azkar ibilbide baten hasiera eta amaiera puntuen artean
-\n
-\n • Mapa-markatzaileak: konpondu piztu/itzali taldeak, markatzaileak mapatik ezkutatzeko aukera
-\n
-\n • OSM Edizioa: Puntuak ez diren objektuen eta bideen etiketak aldatzeko aukera, konpondu oharretan falta diren iruzkinak, edizioen babes-kopia
-\n
-\n • Hobetu Wikipedia eta Wikivoyage azterketa, eguneratutako fitxategiak eskuragarri daude
-\n
-\n • Testuinguru menua: konpondu garraio babesen kolorea gau moduan, konpondu menu gehigarrien tamainak
-\n
-\n • Ontzi bidezko nabigazioa: ubideen euskarria
-\n
-\n • Bestelako akatsen konponketak
-\n
-\n</string>
-    <string name="commiting_way">Bidea betetzen…</string>
     <string name="test_voice_desrc">Sakatu botoi bat eta entzun dagokion ahots-deskripzioa falta den edo gaizki dagoen antzemateko</string>
-    <string name="release_3_2_pre">• Gailu batzuetan gertatzen zen kaskatzea konponduta
-\n
-\n• Markatzaileen ezaugarri berria: Bistaratu iragandako markatzaileak
-\n
-\n• Bilaketa historiak aurretik bilatutako kategoriak bistaratzen ditu
-\n
-\n• Karaktere mapa ez latinoetan gertatzen zen kraskatzea konponduta 
-\n 
-\n • Android 8.0 gailuetan gertatzen ziren errendatze abiadura arazoak konponduta 
-\n 
-\n • Poligono objektuak editatzeko euskarria (Ez-zerbitzua) 
-\n 
-\n• Distantziaren neurketa: Neurketa botoia gehitu da laster-menuko ekintzetara 
-\n</string>
     <string name="ask_for_location_permission">Eman OsmAnd-i kokalekua eskuratzeko baimena jarraitzeko.</string>
     <string name="rendering_value_black_name">Beltza</string>
     <string name="search_street">Bilatu kalea</string>
@@ -2966,15 +2915,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="routing_attr_avoid_subway_description">Ekidin metroak eta tren arinak</string>
     <string name="routing_attr_avoid_ferry_name">Ferryrik ez</string>
     <string name="routing_attr_avoid_ferry_description">Ekidin ferryak</string>
-    <string name="release_3_3_7">"• Garraio publikoetan  transferentzien arteko denbora erakusten da
-\n
-\n • Interfaze zuzendua ibilbidearen xehetasunetan
-\n
-\n • Itxura iluna zuzendua, norabide menuan eta ibilbidearen xehetasunetan
-\n
-\n • Distantziaren neurketan azimuth erakusten da
-\n
-\n"</string>
     <string name="rendering_attr_surface_unpaved_name">Zolatu gabea</string>
     <string name="rendering_attr_surface_grass_paver_name">Belar zolatua</string>
     <string name="rendering_attr_surface_paved_name">Zolatua</string>
@@ -3008,7 +2948,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="choose_data_to_share">Aukeratu ze motako datuak partekatu nahi dituzun:</string>
     <string name="downloaded_maps">Deskargatutako mapak</string>
     <string name="visited_screens">Bisitatutako pantailak</string>
-    <string name="colleted_data">Jasotako datuak</string>
     <string name="collected_data_descr">Zehaztu zeintzuk datu baimentzen duzun OsmAnd-ek partekatzea.</string>
     <string name="downloaded_maps_collect_descr">Lagundu gaitzazu mapa eta eskualdeen erabilera ulertzen.</string>
     <string name="visited_screens_collect_descr">Lagundu gaitzazu OsmAnd-en ezaugarrien erabilera ulertzen.</string>
@@ -3176,8 +3115,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \n • Arazo konponketa gehiago
 \n
 \n</string>
-    <string name="new_route_calculated_dist_dbg">Ibilbidea: distantzia %s, iraupena %s 
-\nKalkulua: %.1f s, %d errepide, %d lauza)</string>
+    <string name="new_route_calculated_dist_dbg">Ibilbidea: distantzia %1$s, iraupena %2$s \nKalkulua: %3$.1f s, %4$d errepide, %5$d lauza)</string>
     <string name="lang_oc">Okzitaniera</string>
     <string name="app_mode_wagon">Bagoia</string>
     <string name="days_5">Egun</string>
@@ -3215,7 +3153,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="route_parameters_info">Ibilbide ezarpenak hautatutako \"%1$s.\" profilean.</string>
     <string name="wake_time">Esnatu ondorengo denbora-muga</string>
     <string name="units_and_formats">Unitate eta formatuak</string>
-    <string name="appearance">Itxura</string>
     <string name="map_look_descr">Maparen itxura</string>
     <string name="map_look">Maparen bista</string>
     <string name="list_of_installed_plugins">Instalatutako gehigarriak</string>
@@ -3278,25 +3215,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="routing_attr_width_name">Zabalera muga</string>
     <string name="routing_attr_width_description">Zehaztu baimendutako ibilgailuaren zabalera muga ibilbideetan.</string>
     <string name="avoid_in_routing_descr_">Saihestu ibilbide eta errepide mota batzuk</string>
-    <string name="release_3_3">"• \'Jarraibideak\' pantaila berria: Etxea eta lana botoiak bistaratzen ditu, \'aurreko ibilbidea\' lasterbidea, GPX lorratz eta markatzaile aktiboen zerrenda, bilaketa historiala
-\n
-\n • Informazio gehigarria \'Ibilbidearen xehetasunak\' atalean: errepide motak, zoladura, maldak, xamurtasuna
-\n
-\n • Garraio publiko bidezko nabigazioak mota guztietako garraioak onartzen ditu: metroa, autobusa, tranbia, eta abar
-\n
-\n • Ekintza azkar berria lorratzak erakutzi edo ezkutatzeko eta egun7gau moduetarako
-\n
-\n • Alemania, Hego Afrika eta Quebec-en urpetuta agertzen ziren zonaldeak konponduta
-\n
-\n •  KML eta KMZ inportaziorako euskarri gehigarria
-\n
-\n • Garraio publiko batzuk irekitzean gertatzen ziren kraskatzeak konponduta
-\n
-\n • Facebook eta Firebase analitikak kendu dira doako bertsiotik (OsmAnd+ bertsioak ez ditu)
-\n
-\n"</string>
     <string name="app_mode_pickup_truck">Kamioneta irekia</string>
-    <string name="swap_start_and_destination">Trukatu irteera eta helmuga</string>
     <string name="default_speed_dialog_msg">Errepide mota ezezagunetan iristeko ordua kalkulatzen du, eta errepide guztietako abiadura mugatzen du (ibilbidea alda lezake)</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB libre (%2$s GB-etatik)</string>
@@ -3409,7 +3328,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="reset_confirmation_descr">%1$s sakatzean zure aldaketak baztertuko dira.</string>
     <string name="reset_all_profile_settings_descr">Berrezarri profilaren ezarpenak instalazioan lehenetsitakoetara.</string>
     <string name="reset_all_profile_settings">Berrezarri profileko ezarpen guztiak\?</string>
-    <string name="ltr_or_rtl_combine">%1$s: %2$s</string>
     <string name="file_does_not_contain_routing_rules">\'%1$s\'-k ez dauka ibilbide araurik, hautatu beste fitxategiren bat.</string>
     <string name="not_support_file_type_with_ext">Onartutako %1$s luzapena duen fitxategi bat hautatu behar duzu.</string>
     <string name="import_from_file">Inportatu fitxategitik</string>
@@ -3485,12 +3403,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_menu">Menua</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Ibilbidea</string>
-    <string name="shared_string_custom_rendering_style">Errendatzeko estilo pertsonalizatua</string>
     <string name="shared_string_include_data">Gehitu datu osagarriak</string>
     <string name="import_profile_dialog_description">Inportatutako profilak datu osagarriak ditu. Sakatu Inportatu profileko datuak bakarrik inportatzeko edo hautatu datu gehigarriak.</string>
     <string name="export_profile_dialog_description">Datu osagarriak hauta ditzakezu profilarekin batera esportatzeko.</string>
-    <string name="navigation_notification_desc">Erakutsi sistemaren jakinarazpena nabigazioan zehar nabigazio argibideekin.</string>
-    <string name="navigation_notification">Nabigazio-jakinarazpena</string>
     <string name="shared_string_app_default_w_val">Aplikazioan lehenetsia (%s)</string>
     <string name="no_recalculation_setting">Birkalkulorik ez</string>
     <string name="route_recalculation_dist_title">Gutxieneko distantzia ibilbidea birkalkulatzeko</string>
@@ -3570,7 +3485,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="select_distance_route_will_recalc">Hautatu ibilbidea birkalkulatzeko distantzia.</string>
     <string name="recalculate_route_in_deviation">Birkalkulatu ibilbidea desbideratzekotan</string>
     <string name="shared_string_square">Laukia</string>
-    <string name="shared_string_rhomb">Erronboa</string>
     <string name="shared_string_circle">Zirkulua</string>
     <string name="select_shape">Hautatu forma</string>
     <string name="select_group">Hautatu taldea</string>
@@ -3721,7 +3635,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="screen_control">Pantailaren kontrola</string>
     <string name="system_screen_timeout_descr">Pantaila itzaltzen du sistemako pantailaren denbora-muga agortzean.</string>
     <string name="system_screen_timeout">Erabili sistemako pantailaren denbora-muga</string>
-    <string name="turn_screen_on_options_descr">Pantaila esnatzeko aukerak:</string>
     <string name="turn_screen_on_descr">Hautatu pantailako esnatzeko aukerak (ziurtatu OsmAnd lehen planoan dagoela gailua blokeatzean):</string>
     <string name="turn_screen_on_navigation_instructions_descr">Nabigazio instrukzio bakoitzak pantaila piztuko du.</string>
     <string name="turn_screen_on_navigation_instructions">Nabigaziorako argibideak</string>
@@ -4020,6 +3933,5 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="routing_engine_vehicle_type_foot">Oinez</string>
     <string name="routing_engine_vehicle_type_bike">Bizikleta</string>
     <string name="routing_engine_vehicle_type_car">Kotxea</string>
-    <string name="message_error_recheck_parameters">Errorea, egiaztatu parametroak berriro</string>
     <string name="copy_address">Kopiatu helbidea</string>
 </resources>

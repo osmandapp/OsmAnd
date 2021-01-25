@@ -3,26 +3,19 @@
 <string name="show_warnings_descr">Dangos cyfyngiad cyflymder, camerâu cyflymder a thwmpathau traffig</string>
 <string name="map_widget_fluorescent">Lliwiau fflwroleuol</string>
 <string name="map_widget_show_ruler">Mesurydd</string>
-
-<string name="map_widget_view_direction">Golwg cyfeiriad</string>
+    <string name="map_widget_view_direction">Golwg cyfeiriad</string>
 <string name="map_widget_transparent">Golwg tryloyw</string>
-
-
-<string name="bg_service_sleep_mode_off">Rhedeg yn y cefndir</string>
+    <string name="bg_service_sleep_mode_off">Rhedeg yn y cefndir</string>
 <string name="bg_service_sleep_mode_on">Atal y cefndir</string>
 <string name="int_continuosly">Parhaus</string>
 <string name="screen_is_locked">I ddatgloi\'r sgrin pwyswch yr eicon cloi</string>
 <string name="map_widget_top_text">Enw stryd</string>
 <string name="map_widget_config">Ffurfweddiad</string>
-
-<string name="map_widget_back_to_loc">Lle\'r ydw i</string>
+    <string name="map_widget_back_to_loc">Lle\'r ydw i</string>
 <string name="map_widget_lock_screen">Cloi\'e sgrin</string>
 <string name="map_widget_compass">Cwmpawd</string>
-
-<string name="map_widget_reset">Ailosod i\'r rhagosodiad</string>
-
-
-<string name="map_widget_parking">Parcio</string>
+    <string name="map_widget_reset">Ailosod i\'r rhagosodiad</string>
+    <string name="map_widget_parking">Parcio</string>
 <string name="map_widget_speed">Cyflymder</string>
 <string name="map_widget_distance">Targed</string>
 <string name="map_widget_altitude">Uchder</string>
@@ -35,54 +28,41 @@
 <string name="bg_service_screen_unlock">Sgrin datgloi</string>
 <string name="bg_service_screen_lock_toast">Mae\'r sgrin wedi cloi</string>
 <string name="bg_service_interval">Gosod cyfnod deffro:</string>
-
-
-<string name="show_cameras">Dangos camerâu cyflymder</string>
+    <string name="show_cameras">Dangos camerâu cyflymder</string>
 <string name="show_traffic_warnings">Dangos cyfyngiadau cyflymder</string>
 <string name="avoid_toll_roads">Osgoi tollffyrdd</string>
-
-<string name="continue_follow_previous_route_auto">Nid oedd y llywio diwethaf wedi ei gwblhau. Parhau i\'w ddilyn? (%1$s eiliad)</string>
+    <string name="continue_follow_previous_route_auto">Nid oedd y llywio diwethaf wedi ei gwblhau. Parhau i\'w ddilyn? (%1$s eiliad)</string>
 <string name="route_updated_loc_found">Bydd y daith yn cael ei ail-gyfrifo ar ôl canfod y lleoliad</string>
 <string name="osmand_parking_hours">Awr</string>
 <string name="osmand_parking_minutes">Munud</string>
 <string name="osmand_parking_position_description_add_time">Roedd y car wedi ei barcio yn:</string>
-
-<string name="use_compass_navigation_descr">Defnyddio cwmpawd lle nad yw\'r cyfeiriad wedi ei ganfod</string>
+    <string name="use_compass_navigation_descr">Defnyddio cwmpawd lle nad yw\'r cyfeiriad wedi ei ganfod</string>
 <string name="use_compass_navigation">Defnyddio cwmpawd</string>
 <string name="select_animate_speedup">Defnyddio cyflymu animeiddio taith</string>
 <string name="global_app_allocated_memory_descr">Cof Dynodedig %1$s MB (Terfyn Android %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Cof Dynodedig</string>
-
-
-<string name="layer_map_appearance">Ffurfweddu\'r sgrin</string>
+    <string name="layer_map_appearance">Ffurfweddu\'r sgrin</string>
 <string name="show_lanes">Dangos lonydd</string>
 <string name="avoid_unpaved">Osgoi ffyrdd heb wyneb caled</string>
 <string name="avoid_ferries">Osgoi fferïau</string>
 <string name="native_app_allocated_memory">Cyfanswm cof cynhenid</string>
-
-<string name="starting_point_too_far">Man cychwyn yn rhy bell o\'r ffordd agosaf</string>
+    <string name="starting_point_too_far">Man cychwyn yn rhy bell o\'r ffordd agosaf</string>
 <string name="shared_location">Lleoliad rhanedig</string>
 <string name="avoid_motorway">Ceisiwch osgoi traffyrdd</string>
 <string name="auto_zoom_map_descr">Zoom Auto mapio yn ôl eich cyflymder (tra map wedi eu cydamseru gyda\'r sefyllfa bresennol)</string>
 <string name="auto_zoom_map">Auto chwyddo map</string>
-
-<string name="snap_to_road_descr">Snap sefyllfa i ffyrdd yn ystod llywio</string>
+    <string name="snap_to_road_descr">Snap sefyllfa i ffyrdd yn ystod llywio</string>
 <string name="snap_to_road">Snap i\'r ffordd</string>
 <string name="osmand_short_description_80_chars">OsmAnd yn gais ffynhonnell agored ar gyfer llywio fapiau all-lein ac ar-lein</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd yn gais ffynhonnell agored ar gyfer llywio fapiau all-lein ac ar-lein</string>
-
-<string name="filterpoi_activity">Creu POI hidlo</string>
+    <string name="filterpoi_activity">Creu POI hidlo</string>
 <string name="recalculate_route_to_your_location">Dull trafnidiaeth:</string>
 <string name="select_navigation_mode">Dewiswch dull trafnidiaeth</string>
-
-<string name="day_night_info_description">Sunrise : %1$s \nSunset : %2$s</string>
+    <string name="day_night_info_description">Sunrise : %1$s \nSunset : %2$s</string>
 <string name="day_night_info">Dydd/nos info</string>
-
-<string name="map_widget_vector_attributes">Priodoleddau Rendro:</string>
+    <string name="map_widget_vector_attributes">Priodoleddau Rendro:</string>
 <string name="map_widget_renderer">Arddull rendro</string>
-
-
-<string name="native_app_allocated_memory_descr">Cyfanswm cof brodorol a ddyrennir gan app %1$s MB (Dalvik %2$s MB, arall %3$s MB).↵
+    <string name="native_app_allocated_memory_descr">Cyfanswm cof brodorol a ddyrennir gan app %1$s MB (Dalvik %2$s MB, arall %3$s MB).↵
 Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="osmand_parking_event">Codwch y car o barcio</string>
 <string name="osmand_parking_warning">Rhybudd</string>
@@ -108,8 +88,7 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="gpxup_trackable">Trackable</string>
 <string name="gpxup_private">Preifat</string>
 <string name="asap">cyn gynted â phosibl</string>
-
-<string name="route_roundabout">Cylchfan: cymryd %1$d allanfa ac yn mynd</string>
+    <string name="route_roundabout">Cylchfan: cymryd %1$d allanfa ac yn mynd</string>
 <string name="route_kl">Cadwch i\'r chwith ac ewch</string>
 <string name="route_kr">Cadwch i\'r dde ac ewch</string>
 <string name="rendering_attr_noPolygons_description">Gwneud yr holl nodweddion tir arwynebedd ar fap tryloyw</string>
@@ -127,12 +106,10 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="navpoint_search_desc">Cyfesurynnau</string>
 <string name="transport_search_desc">Cludiant chwilio</string>
 <string name="favourites_search_desc">Ffefrynnau chwilio</string>
-
-<string name="offline_navigation_not_available">OsmAnd llywio all-lein nad yw ar gael dros dro.</string>
+    <string name="offline_navigation_not_available">OsmAnd llywio all-lein nad yw ar gael dros dro.</string>
 <string name="left_side_navigation">Chwith-law gyrru</string>
 <string name="left_side_navigation_descr">Dewiswch ar gyfer gwledydd gyda chwith traffig</string>
-
-<string name="unknown_from_location">Nid yw man cychwyn hwn wedi\'i benderfynu eto</string>
+    <string name="unknown_from_location">Nid yw man cychwyn hwn wedi\'i benderfynu eto</string>
 <string name="unknown_location">Sefyllfa nad yw\'n hysbys eto</string>
 <string name="modify_transparency">Addasu tryloywder (0 - tryloyw, 255 - afloyw)</string>
 <string name="confirm_interrupt_download">Ydych chi eisiau i dorri ar draws llwytho ffeil?</string>
@@ -140,26 +117,18 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="select_index_file_to_download">Ni ddaethpwyd o hyd. Os gallwch ni all ddod o hyd i\'ch rhanbarth, gallwch wneud eich hun (gweler http://osmand.net).</string>
 <string name="local_indexes_cat_tile">Mapiau Ar-lein (teils)</string>
 <string name="local_indexes_cat_map">Fapiau all-lein (fector)</string>
-
-<string name="index_settings_descr">Lawrlwythwch, gweld y manylion, a rheoli mapiau all-lein</string>
+    <string name="index_settings_descr">Lawrlwythwch, gweld y manylion, a rheoli mapiau all-lein</string>
 <string name="map_online_plugin_is_not_installed">Galluogi mapiau plugin ar-lein i ddewis ffynonellau map gwahanol</string>
 <string name="map_online_data">Mapiau Ar-lein (teils)</string>
 <string name="map_online_data_descr">Defnyddio mapiau ar-lein (teils lawrlwytho a cache ar SD cerdyn)</string>
 <string name="shared_string_online_maps">Mapiau Ar-lein</string>
 <string name="online_map_settings_descr">Ffurfweddu ffynonellau teils ar-lein neu cached map</string>
-
-
-<string name="osmand_accessibility_description">Dangos gosodiadau ar gyfer nodweddion hygyrchedd arbennig.</string>
-
-
-
-<string name="osmand_development_plugin_description">Dangos gosodiadau ar gyfer nodweddion datblygu a debugging fel mordwyo hanimeiddio neu arddangos perfformiad rendro.</string>
+    <string name="osmand_accessibility_description">Dangos gosodiadau ar gyfer nodweddion hygyrchedd arbennig.</string>
+    <string name="osmand_development_plugin_description">Dangos gosodiadau ar gyfer nodweddion datblygu a debugging fel mordwyo hanimeiddio neu arddangos perfformiad rendro.</string>
 <string name="plugins_screen">Rheolwr ategyn</string>
-
-<string name="prefs_plugins_descr">Plugins galluogi lleoliadau modd arbenigol ac yn darparu swyddogaeth ychwanegol fel mapiau olrhain teils,, gweithredu dull cwsg, lleoliadau hygyrchedd, ac eraill.</string>
+    <string name="prefs_plugins_descr">Plugins galluogi lleoliadau modd arbenigol ac yn darparu swyddogaeth ychwanegol fel mapiau olrhain teils,, gweithredu dull cwsg, lleoliadau hygyrchedd, ac eraill.</string>
 <string name="prefs_plugins">Rheolwr ategyn</string>
-
-<string name="vector_maps_may_display_faster_on_some_devices">Mapiau fector debygol arddangos yn gyflymach. Efallai na gweithio\'n dda ar rai dyfeisiau.</string>
+    <string name="vector_maps_may_display_faster_on_some_devices">Mapiau fector debygol arddangos yn gyflymach. Efallai na gweithio\'n dda ar rai dyfeisiau.</string>
 <string name="play_commands_of_currently_selected_voice">Chwarae gorchmynion llais a ddewiswyd ar hyn o bryd</string>
 <string name="debugging_and_development">OsmAnd datblygu</string>
 <string name="native_rendering">Rendro Brodorol</string>

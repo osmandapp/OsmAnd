@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<!--	<item-->
-<!--		android:id="@+id/action_overview"-->
-<!--		android:icon="@drawable/ic_action_trail_overview"-->
-<!--		android:title="@string/shared_string_overview" />-->
+
+	<item
+		android:id="@+id/action_overview"
+		android:icon="@drawable/ic_action_trail_overview"
+		android:title="@string/shared_string_overview" />
 
 	<item
 		android:id="@+id/action_track"
 		android:icon="@drawable/ic_action_polygom_dark"
 		android:title="@string/shared_string_gpx_track" />
+
 	<item
 		android:id="@+id/action_points"
 		android:icon="@drawable/ic_action_waypoint"
 		android:title="@string/shared_string_gpx_points" />
 
-<!--	<item-->
-<!--		android:id="@+id/action_options"-->
-<!--		android:icon="@drawable/ic_overflow_menu_white"-->
-<!--		android:title="@string/shared_string_options" />-->
+	<item
+		android:id="@+id/action_options"
+		android:icon="@drawable/ic_overflow_menu_with_background"
+		android:title="@string/shared_string_options" />
 </menu>

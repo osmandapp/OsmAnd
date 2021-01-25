@@ -36,7 +36,6 @@
     <string name="poi_copyshop">فروشگاه چاپ و تکثیر</string>
     <string name="poi_curtain">پرده فروشی</string>
     <string name="poi_fabric">پارچه فروشی</string>
-    <string name="poi_bedding">پنبه زنی</string>
     <string name="poi_dive">تجهیزات غواصی</string>
     <string name="poi_doityourself">فروشگاه بهسازی خانه</string>
     <string name="poi_erotic"/>
@@ -251,7 +250,6 @@
     <string name="poi_healthcare_alternative">طب سنتی</string>
     <string name="poi_audiologist">شنوایی سنجی</string>
     <string name="poi_blood_bank">سازمان انتقال خون</string>
-    <string name="poi_healthcare_centre">مرکز پزشکی</string>
     <string name="poi_midwife">ماما</string>
     <string name="poi_occupational_therapist">کاردرمانی</string>
     <string name="poi_optometrist">چشم پزشکی</string>
@@ -388,7 +386,6 @@
     <string name="poi_religion_shinto">شینتو</string>
     <string name="poi_religion_taoist">تائوئیسم</string>
     <string name="poi_monastery">صومعه</string>
-    <string name="poi_historic_monastery">صومعه تاریخی</string>
     <string name="poi_wayside_cross"/>
     <string name="poi_wayside_shrine">زیارتگاه بین راهی</string>
     <string name="poi_information">اطلاعات</string>
@@ -529,7 +526,6 @@
     <string name="poi_crematorium">کوره جسد سوزی</string>
     <string name="poi_internet_cafe">کافی‌نت</string>
     <string name="poi_bank">بانک</string>
-    <string name="poi_amenity_atm">ATM</string>
     <string name="poi_money_lender">وام دهنده پول</string>
     <string name="poi_pawnbroker">بنگاه رهنی</string>
     <string name="poi_bureau_de_change">صرافی</string>
@@ -717,7 +713,6 @@
     <string name="poi_aerialway_summer_access_exit">دسترسی تابستانه: فقط خروج</string>
     <string name="poi_aerialway_summer_access_both">دسترسی تابستانه: ورود و خروج</string>
     <string name="poi_aerialway_length">درازا</string>
-    <string name="poi_additional_atm_yes">خودپرداز: بله</string>
     <string name="poi_addr_housename">نام خانه</string>
     <string name="poi_fireplace">شومینه</string>
     <string name="poi_seasonal">فصلی</string>

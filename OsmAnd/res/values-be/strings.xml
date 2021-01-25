@@ -945,7 +945,6 @@
     <string name="error_calculating_route">Не атрымалася разлічыць маршрут.</string>
     <string name="error_calculating_route_occured">Не атрымалася разлічыць маршрут.</string>
     <string name="empty_route_calculated">Разлічаны маршрут пусты.</string>
-    <string name="new_route_calculated_dist">Новы шлях разлічаны, адлегласць</string>
     <string name="arrived_at_destination">Вы прыбылі.</string>
     <string name="invalid_locations">Хібныя каардынаты</string>
     <string name="go_back_to_osmand">Вярнуцца да мапы</string>
@@ -1033,7 +1032,6 @@
     <string name="osb_comment_dialog_error">Не атрымалася дадаць каментар.</string>
     <string name="poi_edit_title">Рэдагаваць POI</string>
     <string name="poi_create_title">Стварыць POI</string>
-    <string name="poi_error_poi_not_found">Вузел не знойдзены або зручнасць (amenity) складаецца з некалькіх вузлоў, што не падтрымліваецца.</string>
     <string name="poi_remove_confirm_template">Выдаліць {0} (каментар)?</string>
     <string name="poi_remove_title">Выдаліць POI</string>
     <string name="poi_remove_success">Выдалена</string>
@@ -1838,7 +1836,6 @@
     <string name="route_distance">Адлегласць:</string>
     <string name="route_duration">Час:</string>
     <string name="rendering_attr_horseRoutes_name">Конныя маршруты</string>
-    <string name="update">Абнавіць</string>
     <string name="only_download_over_wifi">Спампоўваць толькі праз Wi-Fi</string>
     <string name="live_update">Аўтаабнаўленне</string>
     <string name="update_now">Абнавіць зараз</string>
@@ -2035,8 +2032,6 @@
     <string name="replace_favorite_confirmation">Вы сапраўды хочаце замяніць улюбёную мясціну %1$s\?</string>
     <string name="update_all_maps_now">Абнавіць усе мапы зараз?</string>
     <string name="clear_tile_data">Ачысціць кэш сеціўных мапаў</string>
-    <string name="no_update_info_desc">Не правяраць новыя версій і зніжкі ад OsmAnd.</string>
-    <string name="no_update_info">Не паказваць новыя версіі</string>
     <string name="skip_map_downloading">Прамінуць спампоўванне мапаў</string>
     <string name="skip_map_downloading_desc">У вас адсутнічаюць мапы. Вы можаце абраць мапу са спіса альбо спампаваць яе пазней праз \"Меню - %1$s\".</string>
     <string name="search_another_country">Абраць іншы рэгіён</string>
@@ -2109,10 +2104,7 @@
     <string name="routing_attr_allow_motorway_description">Дазваляе выкарыстоўваць аўтамагістралі.</string>
     <string name="lang_sr_latn">Сербская (лацінка)</string>
     <string name="lang_zh_hk">Кітайская (Ганконг)</string>
-    <string name="legacy_search">Састарэлы пошук</string>
-    <string name="show_legacy_search">Паказваць састарэлы пошук</string>
     <string name="rendering_attr_hideWaterPolygons_description">Ваду</string>
-    <string name="show_legacy_search_desc">Дадаць састарэлы пошук у спісе, што раскрываецца.</string>
     <string name="rendering_attr_contourWidth_name">Таўшчыня гарызанталяў</string>
     <string name="rendering_attr_contourWidth_description">Таўшчыня гарызанталяў (ізагіпсы)</string>
     <string name="rendering_attr_contourDensity_description">Шчыльнасць гарызанталяў</string>
@@ -2742,7 +2734,7 @@
     <string name="update_is_available">Даступна абнаўленне</string>
     <string name="download_file">Спампаваць файл</string>
     <string name="start_editing_card_image_text">Бясплатны сусветны турыстычны даведнік, які можа рэдагаваць кожны.</string>
-    <string name="welcome_to_open_beta_description">Турыстычныя даведнікі ў цяперашні час базуюцца на Wikivoyage. Тэстуйце усе функцыі бясплатна падчас адкрытага бэта-тэставання. Потым даведнікі будуць даступныя падпісантам OsmAnd Unlimited і карыстальнікам OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Турыстычныя даведнікі ў цяперашні час базуюцца на Wikivoyage. Тэстуйце усе функцыі бясплатна падчас адкрытага бэта-тэставання.</string>
     <string name="start_editing_card_description">Вам можна і варта рэдагаваць любы артыкул на Wikivoyage. Дзяліцеся ведамі, досведам, талентамі, і тым, што заўважылі.</string>
     <string name="start_editing">Пачаць рэдагаванне</string>
     <string name="get_unlimited_access">Атрымаць неабмежаваны доступ</string>
@@ -2809,17 +2801,6 @@
     <string name="unirs_render_descr">Мадыфікацыя прадвызначанага стылю для павялічэння кантрастнасці пешаходных і роварных дарог. Выкарыстоўвае старыя Mapnik-колеры.</string>
     <string name="get_osmand_live">Атрымайце OsmAnd Live, каб разблакаваць усе функцыі: штодзённыя абнаўленні мап з неабмежаванымі спампоўваннямі, усе платныя і бясплатныя ўбудовы, Вікіпедыю, Вікігід і шмат іншага.</string>
     <string name="quick_action_edit_actions">Рэдагаваць дзеянні</string>
-    <string name="release_3_0">• Новае: падтрымка аўтаномных турыстычных даведнікаў. Мясціны звязаныя з мапай. Зыходныя даныя ад Wikivoyage. 
-\n 
-\n • Вікіпедыя: новы выгляд, актыўныя спасылкі, падтрымка выяў 
-\n 
-\n • Open Track UI: падтрымка груп пунктаў шляху 
-\n 
-\n • Адзнакі мапы: імпарт абраных груп з GPX-файлаў, увод каардынат, новы выгляд 
-\n 
-\n • Падпіска OsmAnd Live цяпер падтрымлівае ўсе функцыі OsmAnd 
-\n 
-\n</string>
     <string name="error_notification_desc">Калі ласка, адпраўце здымак экрана з гэтым апавяшчэннем на support@osmand.net</string>
     <string name="coord_input_edit_point">Рэдагаваць пункт</string>
     <string name="coord_input_add_point">Дадаць пункт</string>
@@ -2830,31 +2811,13 @@
     <string name="send_search_query_description">Мы адправім ваш пашуковы запыт \"%1$s\", а таксама вашае месцазнаходжанне.
 \n
 \n Збіраюцца толькі агульныя звесткі, даныя пошуку выкарыстоўваюцца толькі для таго, каб палепшыць алгарытм пошуку.</string>
-    <string name="search_no_results_description">Няма вынікаў?
-\nРаспавядзіце нам аб гэтым.</string>
     <string name="send_search_query">Адправіць пашуковы запыт?</string>
     <string name="increase_search_radius_to">Павялічыць радыус пошуку да %1$s</string>
     <string name="thank_you_for_feedback">Дзякуй за Ваш водгук</string>
     <string name="poi_cannot_be_found">Не атрымалася знайсці вузел ці шлях.</string>
     <string name="search_no_results_feedback">Нічога не знойдзена\? 
 \nПакінце водгук</string>
-    <string name="commiting_way">Фіксуецца шлях…</string>
     <string name="test_voice_desrc">Націсніце на кнопку і паслухайце адпаведную галасавую падказку, каб выявіць адсутныя або пашкоджаныя падказкі</string>
-    <string name="release_3_1">• Навігацыя: выпраўленне індыкатару прагрэсу, хуткая замена пачатковага і канчатковага пунктаў маршруту 
-\n 
-\n • Адзнакі мапы: выпраўленне ўключэння/выключэння групаў, магчымасць хаваць адзнакі на мапе 
-\n 
-\n • Рэдагаванне OSM: магчымасць рэдагавання пазнак для некропкавых аб\'ектаў і шляхоў, выпраўленне адсутных каментароў на нататках, рэзервовае капіяванне правак 
-\n 
-\n • Паляпшэнне разбору Wikipedia і Wikivoyage, абноўленыя файлы ўжо даступныя 
-\n 
-\n • Кантэкстнае меню: выпраўленне колеру дарожных знакаў у начным рэжыме, выпраўленне памераў дадатковага меню 
-\n 
-\n • Рачная навігацыя: падтрымка фарватэру 
-\n 
-\n • Выпраўленне іншых хібаў 
-\n 
-\n</string>
     <string name="markers_remove_dialog_msg">Выдаліць адзнаку мапы «%s»\?</string>
     <string name="edit_map_marker">Рэдагаваць адзнаку мапы</string>
     <string name="third_party_application">Асобная праграма</string>
@@ -2865,21 +2828,6 @@
     <string name="keep_passed_markers">Пакінуць пройдзеныя адзнакі на мапе</string>
     <string name="more_transport_on_stop_hint">На гэтым прыпынку даступна шмат тыпаў грамадскага транспарту.</string>
     <string name="ask_for_location_permission">Калі ласка, дайце OsmAnd дазвол на месцазнаходжанне для працягу.</string>
-    <string name="release_3_2_pre">• Выпраўлена хіба пры запуску, што ўзнікала на некаторых прыладах 
-\n 
-\n • Новыя функцыі адзнак: паказваюцца ўжо пройдзенныя адзнакі
-\n 
-\n • Гісторыя пошуку зараз паказвае катэгорыі, што вы шукалі раней 
-\n 
-\n • Выпраўлена хіба пры запуску, што ўзнікала з нелацінскімі мапамі 
-\n 
-\n • Паляпшэнне хуткасці адмалёўкі на прыладах з Android 8.0 
-\n 
-\n • Падтрымка рэдагавання шматвугольных (нязручных) аб\'ектаў 
-\n 
-\n • Вымярэнне дыстанцый: дададзена кнопка «Вымярэнне» ў «Дзеянні» кантэкстнага меню 
-\n 
-\n</string>
     <string name="rendering_value_black_name">Чорны</string>
     <string name="osm_live_plan_pricing">План і цэны</string>
     <string name="osm_live_payment_monthly_title">Штомесячна</string>
@@ -2952,23 +2900,6 @@
     <string name="quick_action_gpx_tracks_show">Паказаць сляды</string>
     <string name="use_osm_live_public_transport_description">Уключыць грамадскі транспарт для змен OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Грамадскі транспарт OsmAnd Live</string>
-    <string name="release_3_3">• Новы экран «Напрамкі»: адлюстроўвае кнопкі напрамкаў дахаты і на працу, скарот «папярэдні маршрут», спіс актыўных GPX-слядоў і адзнак, гісторыю пошуку
-\n
-\n • Дадатковыя звесткі пад «Дэталі маршруту»: тыпы дарог, пакрыццё, пакатасць, гладкасць
-\n
-\n • Навігацыя грамадскага транспарту падтрымлівае ўсе тыпы: метро, аўтобус, трамвай і іншыя
-\n
-\n • Новыя хуткія дзеянні для паказу/схову слядоў і рэжымаў дзень/ноч
-\n
-\n • Выпраўленыя вобласці, якія выглядалі як затопленыя, у Германіі, Паўднёваё Афрыцы, Квебеку
-\n
-\n • Дадатковая падтрымка для KML- і KMZ-імпарту
-\n
-\n • Выпраўлена падзенне пры адкрыцці некаторых прыпынкаў грамадскага транспарту
-\n
-\n • Выдалена аналітыка Facebook і Firebase са свабоднай версіі (OsmAnd+ не ўключае яе)
-\n
-\n</string>
     <string name="transfers_size">%1$d перасадак</string>
     <string name="add_start_and_end_points">Дадаць пункт адпраўлення і пункт прызначэння</string>
     <string name="route_add_start_point">Дадаць пункт адпраўлення</string>
@@ -3043,16 +2974,6 @@
     <string name="routing_attr_avoid_subway_description">Пазбягаць метро і лёгкарэйкавага транспарту</string>
     <string name="routing_attr_avoid_ferry_name">Без паромаў</string>
     <string name="routing_attr_avoid_ferry_description">Пазбягаць паромаў</string>
-    <string name="release_3_3_7">• Адлюстраванне часу паміж перасадкамі ў грамадскім транспарцн
-\n
-\n • Выпраўлены інтэрфейс \"Падрабязнасці маршруту\"
-\n
-\n • Выпраўлена цёмная тэма для \"Маршрут\" і 
-\n\"Падрабязнасці маршруту\"
-\n
-\n • Пры вымярэнні адлегласці будзе адлюстроўвацца азімут
-\n
-\n</string>
     <string name="send_log">Адправіць журнал</string>
     <string name="files_moved">Перамешчана %1$d файлаў (%2$s).</string>
     <string name="files_copied">Скапіявана %1$d файлаў (%2$s).</string>
@@ -3281,15 +3202,14 @@
 \n</string>
     <string name="turn_screen_on_router">Абуджаць на паваротах</string>
     <string name="app_mode_campervan">Дом на колах</string>
-    <string name="new_route_calculated_dist_dbg">Маршрут: адлегласць %s, час навігацыі %s 
-\nРазлік: %.1f с, %d дарог, %d фрагментаў)</string>
+    <string name="new_route_calculated_dist_dbg">Маршрут: адлегласць %1$s, час навігацыі %2$s
+\nРазлік: %3$.1f с, %4$d дарог, %5$d фрагментаў)</string>
     <string name="lang_oc">Аксітанская</string>
     <string name="app_mode_pickup_truck">Пікап</string>
     <string name="turn_screen_on_info">Паказваць мапу падчас навігацыі на заблакаваным экране.</string>
     <string name="route_parameters_info">Налады пабудовы маршруту абранага профілю \"%1$s\".</string>
     <string name="wake_time">Час працы пасля абуджэння</string>
     <string name="units_and_formats">Адзінкі вымярэння і фарматы</string>
-    <string name="appearance">Выгляд</string>
     <string name="map_look_descr">Выгляд мапы</string>
     <string name="map_look">Выгляд мапы</string>
     <string name="list_of_installed_plugins">Усталяваныя убудовы</string>

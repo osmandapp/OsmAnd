@@ -388,7 +388,7 @@ public abstract class OsmandPlugin {
 	}
 
 	private static boolean updateMarketPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
-		boolean marketEnabled = Version.isMarketEnabled(app);
+		boolean marketEnabled = Version.isMarketEnabled();
 		boolean pckg = plugin.pluginAvailable(app);
 		boolean paid = plugin.isPaid();
 		if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {

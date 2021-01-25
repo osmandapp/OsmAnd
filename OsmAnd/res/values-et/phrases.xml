@@ -93,7 +93,6 @@
     <string name="poi_florist">Lillepood</string>
     <string name="poi_frame">Pildiraamid</string>
     <string name="poi_free_flying">Vabalangemistarvete pood</string>
-    <string name="poi_furnace">Küttekehade pood</string>
     <string name="poi_furniture">Mööblipood</string>
     <string name="poi_garden_centre">Aianduskeskus</string>
     <string name="poi_garden_furniture">Aiamööbli pood</string>
@@ -456,7 +455,6 @@
     <string name="poi_healthcare_alternative">Alternatiivmeditsiin</string>
     <string name="poi_audiologist">Audioloog</string>
     <string name="poi_blood_bank">Verepank</string>
-    <string name="poi_healthcare_centre">Meditsiinikeskus</string>
     <string name="poi_midwife">Ämmaemand</string>
     <string name="poi_occupational_therapist">Tööterapeut</string>
     <string name="poi_optometrist">Optometrist</string>
@@ -645,7 +643,7 @@
     <string name="poi_fuel_jeta1">Jet A-1 kütus</string>
     <string name="poi_mountain_pass">Mäekuru</string>
     <string name="poi_waterway_fuel">Paatide bensiinijaam</string>
-    <string name="poi_electricity_combined_charging">Laadimisjaam</string>
+    <string name="poi_electricity_combined_charging">Laadimisjaam;Elektriautode laadimisjaam;Elektriauto laadimine;Laadimispunkt;Elektriautode laadimispunkt</string>
     <string name="poi_park_ride_ferry">Parvlaev</string>
     <string name="poi_9pin">Üheksa kurikaga keegel</string>
     <string name="poi_10pin">Kümne kurikaga keegel</string>
@@ -2728,7 +2726,6 @@
     <string name="poi_water_source_main">Veetrassil</string>
     <string name="poi_water_source_pond">Tiik</string>
     <string name="poi_water_source_stream">Oja</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">Veemahuti</string>
     <string name="poi_in_service_yes">Kasutuses: jah</string>
     <string name="poi_street_cabinet_power">Kapi liik: toide</string>
     <string name="poi_street_cabinet_telecom">Kapi liik: telekommunikatsioon</string>
@@ -3880,4 +3877,8 @@
     <string name="poi_diplomatic_services_non_immigrant_visas_no">Ei</string>
     <string name="poi_waste_transfer_station">Jäätmejaam</string>
     <string name="poi_lavoir">Avalik pesumaja</string>
+    <string name="poi_swimming_area">Ujumiskoht</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Tunnel nahkhiirtele</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Sild nahkhiirtele</string>
+    <string name="poi_wildlife_crossing">Metsloomade teeületuskoht</string>
 </resources>

@@ -78,7 +78,6 @@
     <string name="poi_copyshop">複印店</string>
     <string name="poi_curtain">窗簾店</string>
     <string name="poi_fabric">布店</string>
-    <string name="poi_bedding">寢具商店</string>
     <string name="poi_dive">潛水裝備</string>
     <string name="poi_doityourself">住宅裝修用品店</string>
     <string name="poi_erotic">情趣商店</string>
@@ -340,7 +339,6 @@
     <string name="poi_healthcare_alternative">另類醫療</string>
     <string name="poi_audiologist">聽覺病矯治專家</string>
     <string name="poi_blood_bank">血庫</string>
-    <string name="poi_healthcare_centre">醫療中心</string>
     <string name="poi_midwife">助產士</string>
     <string name="poi_occupational_therapist">職能治療師</string>
     <string name="poi_optometrist">驗光師</string>
@@ -433,7 +431,6 @@
     <string name="poi_surfing">衝浪</string>
     <string name="poi_swimming">游泳</string>
     <string name="poi_table_tennis">桌球</string>
-    <string name="poi_team_handball">手球</string>
     <string name="poi_tennis">網球</string>
     <string name="poi_toboggan">雪橇</string>
     <string name="poi_volleyball">排球</string>
@@ -456,7 +453,6 @@
     <string name="poi_aquarium">水族館</string>
     <string name="poi_theme_park">主題公園</string>
     <string name="poi_attraction">旅遊景點</string>
-    <string name="poi_general_tourist_attraction_yes">一般旅遊景點</string>
     <string name="poi_attraction_amusement_ride">遊戲機</string>
     <string name="poi_attraction_animal">動物（遊樂園）</string>
     <string name="poi_attraction_big_wheel">摩天輪</string>
@@ -495,7 +491,6 @@
     <string name="poi_internet_access_public">網際網路存取：公共網路</string>
     <string name="poi_internet_access_service">網際網路存取：網路服務</string>
     <string name="poi_monastery">修道院</string>
-    <string name="poi_historic_monastery">古時的修道院</string>
     <string name="poi_wayside_cross">路邊十字架</string>
     <string name="poi_wayside_shrine">路邊神龕</string>
     <string name="poi_information">資訊</string>
@@ -659,7 +654,6 @@
     <string name="poi_crematorium">火葬場</string>
     <string name="poi_internet_cafe">網路咖啡館</string>
     <string name="poi_bank">銀行</string>
-    <string name="poi_amenity_atm">自動提款機</string>
     <string name="poi_payment_terminal">支付終端機</string>
     <string name="poi_money_lender">放款人</string>
     <string name="poi_pawnbroker">典當鋪</string>
@@ -819,7 +813,6 @@
     <string name="poi_pastry">糕點店</string>
     <string name="poi_candles">燈具店</string>
     <string name="poi_fashion">時尚服飾店</string>
-    <string name="poi_furnace">加熱元件店</string>
     <string name="poi_garden_furniture">園藝器具店</string>
     <string name="poi_free_flying">自由飛行用品店</string>
     <string name="poi_leather">皮革製品店</string>
@@ -839,9 +832,7 @@
     <string name="poi_groyne">丁壩</string>
     <string name="poi_power_cable_distribution_cabinet">電纜配線箱</string>
     <string name="poi_basin">盆地</string>
-    <string name="poi_conservation">保育土地</string>
     <string name="poi_crane">起重機</string>
-    <string name="poi_tourism_attraction">旅遊景點</string>
     <string name="poi_cutline">圖例</string>
     <string name="poi_tree">樹</string>
     <string name="poi_icn_ref">國際自行車網路節點</string>
@@ -983,7 +974,6 @@
     <string name="poi_recycling_animal_waste">動物廢棄物</string>
     <string name="poi_supervised_yes">有監管</string>
     <string name="poi_supervised_no">沒有監管</string>
-    <string name="poi_mill_pond">磨房水塘</string>
     <string name="twitter">推特</string>
     <string name="poi_skype">Skype</string>
     <string name="poi_youtube">Youtube</string>
@@ -1166,7 +1156,6 @@
     <string name="poi_generator_source_geothermal">能源：地熱</string>
     <string name="poi_generator_source_oil">能源：石油</string>
     <string name="poi_generator_source_diesel">能源：柴油</string>
-    <string name="poi_car_wash_self_service">自助服務</string>
     <string name="poi_ford_stepping_stones">踏石橋</string>
     <string name="poi_int_name">國際名稱</string>
     <string name="poi_nat_name">國家名稱</string>
@@ -1193,7 +1182,6 @@
     <string name="poi_information_nature">資訊標誌：大自然</string>
     <string name="poi_doors">門</string>
     <string name="poi_bicycle_parking_anchors">錨泊點</string>
-    <string name="poi_information_wildlife">資訊標誌：野生動物</string>
     <string name="poi_information_history">資訊標誌：歷史</string>
     <string name="poi_information_sign">標誌</string>
     <string name="poi_information_audioguide">導覽機</string>
@@ -1311,8 +1299,6 @@
     <string name="poi_stars_4s">星星：4 (超一流的)</string>
     <string name="poi_stars_5">星星：5 (豪華的)</string>
     <string name="poi_stars_5s">星星： 5S (超豪華的)</string>
-    <string name="poi_stars_6">星星： 6</string>
-    <string name="poi_stars_7">星星： 7</string>
     <string name="poi_rooms">房間</string>
     <string name="poi_love_hotel">情侶賓館</string>
     <string name="poi_payment_coins_yes">接受硬幣</string>
@@ -1337,7 +1323,6 @@
     <string name="poi_payment_visa_no">不接受 Visa 卡</string>
     <string name="poi_payment_mastercard_yes">接受萬事達卡</string>
     <string name="poi_payment_mastercard_no">不接受萬事達卡</string>
-    <string name="poi_payment_none">免費</string>
     <string name="poi_payment_account_cards_yes">接受帳戶卡</string>
     <string name="poi_payment_account_cards_no">不接受帳戶卡</string>
     <string name="poi_payment_maestro_yes">接受 Maestro 卡</string>
@@ -1985,7 +1970,6 @@
     <string name="poi_refugee_no">難民：無</string>
     <string name="poi_sanitary_dump_station_yes">汚水排放點：有</string>
     <string name="poi_sanitary_dump_station_no">汚水排放點：無</string>
-    <string name="poi_sanitary_dump_station_customers">衛生轉儲站：僅客戶</string>
     <string name="poi_social_facility_group_home">社會設施：團體家屋</string>
     <string name="poi_social_facility_assisted_living">社會設施：輔助生活</string>
     <string name="poi_social_facility_outreach">社會設施：推廣</string>
@@ -2524,7 +2508,6 @@
     <string name="poi_boxing">拳擊</string>
     <string name="poi_official_name">正式名稱</string>
     <string name="poi_construction_yes">工事中</string>
-    <string name="poi_additional_atm_yes">自動提款機︰有</string>
     <string name="poi_atm_no">ATM︰ 無</string>
     <string name="poi_firepit">火塘</string>
     <string name="poi_street_cabinet">街道電箱</string>
@@ -2783,7 +2766,6 @@
     <string name="poi_water_source_main">主要管道</string>
     <string name="poi_water_source_pond">池塘</string>
     <string name="poi_water_source_stream">河流</string>
-    <string name="poi_fire_hydrant_style_water_source_cistern">水槽</string>
     <string name="poi_in_service_yes">在職︰是的</string>
     <string name="poi_military_checkpoint">軍事檢查哨</string>
     <string name="poi_bicycle_parking_lockers">儲物櫃</string>
@@ -3556,8 +3538,6 @@
     <string name="poi_park_ride_hov">高承載車輛</string>
     <string name="poi_park_ride_tram">電車</string>
     <string name="poi_park_ride_ferry">渡船</string>
-    <string name="poi_generator_source_biomass">能源：生物能</string>
-    <string name="poi_health_specialty_radiotheraphy_yes">放射治療</string>
     <string name="poi_hazard">危險</string>
     <string name="poi_rtsa_scale_filter">難度分類</string>
     <string name="poi_health_specialty_radiotherapy_yes">放射治療</string>

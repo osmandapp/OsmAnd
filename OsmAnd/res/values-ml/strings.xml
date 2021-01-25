@@ -759,7 +759,6 @@
     <string name="faq_item_description">സ്ഥിരമായി ചോദിക്കുന്ന ചോദ്യങ്ങള്‍</string>
     <string name="use_dashboard_btn">ഡാഷ്ബോര്‍ഡ് ഉപയോഗിക്കുക</string>
     <string name="use_drawer_btn">മെനു ഉപയോഗിക്കുക</string>
-    <string name="update">" പരിഷ്ക്കരണം"</string>
     <string name="update_now">"ഇപ്പോള്‍ തന്നെ  പരിഷ്ക്കരിക്കുക "</string>
     <string name="update_time">സമയം പരിഷ്ക്കരിക്കുക</string>
     <string name="subcategories">ഉപവിഭാഗങ്ങള്‍</string>
@@ -781,8 +780,6 @@
     <string name="storage_place_description">ഓഎസ്എംആന്റിന്റെ വിവരസഭരണസ്ഥലം(മാപ്പുകള്‍ ,പാതകള്‍ മുതലായവക്കായി): %1$s.</string>
     <string name="give_permission">അനുമതി തരുക</string>
     <string name="allow_access_location">ഈ സ്ഥലത്ത് പ്രവേഷനാനുമതി നല്‍കുക</string>
-    <string name="no_update_info_desc">"ഓഎസ്എംആന്റിന്റെ  പുതിയപതിപ്പുകളേക്കുറിച്ചുള്ളതൊ, വിലക്കുറവ് സംബന്ധമായതോ ആയ ഒരു അപ്ഡേറ്റും കാണിക്കരുത്"</string>
-    <string name="no_update_info">അപ്ഡേറ്റുകള്‍ കാണിക്കരുത്</string>
     <string name="update_all_maps_now">എല്ലാ ഭൂപടങ്ങളും ഇപ്പോള്‍ അപ്ഡേറ്റ് ചെയ്യട്ടെ?</string>
     <string name="show_something_on_map">%1$s നെ ഭൂപടത്തില്‍ കാണിക്കുക</string>
     <string name="share_history_subject">ഓഎസ്എംആന്ഡ് വഴി പങ്കുവച്ചത്</string>
@@ -1142,7 +1139,6 @@
     <string name="mark_final_location_first">ദയവായി ആദ്യം ലക്ഷ്യസ്ഥാനം തെരഞ്ഞെടുക്കുക</string>
     <string name="closing_changeset">അടക്കുന്ന മാറ്റപട്ടിക…</string>
     <string name="commiting_node">നോഡ് ഉറപ്പിക്കുന്നു(Committing)…</string>
-    <string name="new_route_calculated_dist">"പുതിയ റൂട്ട്  കണ്ട് പിടിച്ചു, ദൂരം"</string>
     <string name="finished_task">പൂര്‍ണമായി</string>
     <string name="map_view_3d_descr">"3ഡി ഭൂപടദൃശ്യം സജീവമാക്കുക "</string>
     <string name="map_view_3d">ഭൂപടം 3ഡി ആയി കാണിക്കുക</string>
@@ -1805,24 +1801,6 @@
     <string name="poi_cannot_be_found">സ്ഥലമോ, വഴിയോ കണ്ടെത്താനായില്ല.</string>
     <string name="search_no_results_feedback">"തെരച്ചിലില്‍ ഒന്നും കണ്ടെത്തിയില്ലെ\?
 \nദയവായ് നിങ്ങളുടെ ഫീഡ്ബാക്ക്  തരുക"</string>
-    <string name="release_3_2_pre">"ചില ഉപകരണങ്ങളില്‍ തുടക്കത്തിലേ ക്രാഷ് പരിഹരിച്ചു
-\n
-\nപുതിയ മാര്‍ക്കര്‍ ഫീച്ചറുകള്‍ : ഇതുവരെ കടന്നുപോയ മാര്‍ക്കറുകള്‍ കാണിക്കുക 
-\n
-\nതെരച്ചില്‍ ചരിത്രം , നേരത്തെ തെരഞ്ഞ ഇനങ്ങള്‍ കൂടി കാണിക്കും
-\n
-\nലാറ്റിന്‍  ലിപിയല്ലാത്ത മാപ്പുകളില്‍ തുടക്കത്തിലേ ക്രാഷ് പരിഹരിച്ചു
-\n
-\nആന്ഡ്രോയ്ഡ് 8.0 ലെ ഗ്രാഫിക്സ് പെര്‍ഫോമന്‍സ് നന്നാക്കി 
-\n
-\nബഹുഭുജ-വസ്തുക്കള്‍ ക്രമീകരിക്കാം
-\n
-\nദൂരം അളക്കാന്‍: അളക്കാനുള്ള ബട്ടണ്‍ സന്ദര്‍ഭമെനുവിലെ പ്രവര്‍ത്തികളില്‍ ചേര്‍ക്കാം
-\n
-\n
-\n
-\n"</string>
-    <string name="commiting_way">വഴി ഉള്‍പെടുത്തുക…</string>
     <string name="increase_search_radius_to">"തിരച്ചില്‍  വൃത്തം  %1$s ലേക്ക് കൂട്ടുക "</string>
     <string name="send_search_query_description">"ഞങ്ങള്‍ നിങ്ങളൂടെ ചോദ്യം:  "\"%1$s\" , നിങ്ങളൂടെ സ്ഥാനം എന്നിവ അയക്കും. \n
         \n ഞങ്ങള്‍ നിങ്ങളൂടെ പേര്‍സണല്‍ ആയിട്ടുള്ള ഒരു വിവരവും ശേഖരിക്കുന്നില്ല , തെരച്ചില്‍ വിവരങ്ങള്‍ , സേര്‍ച്ച് അല്‍ഗോരിതം നന്നാക്കാനായ് മാത്രമാണ് ഉപയോഗിക്കുന്നത്.</string>
@@ -1926,20 +1904,6 @@
     <string name="how_to_open_wiki_title">വിക്കിപ്പീഡിയ ലേഖനം എങ്ങനെ തുറക്കാം\?</string>
     <string name="osm_live_subscriptions">സബ്സ്ക്രിപ്ഷനുകള്‍</string>
     <string name="powered_by_osmand">ഒസ്മണ്ട്</string>
-    <string name="release_3_1">"നാവിഗേഷന്‍: പ്രോഗ്രസ് ബാര്‍ ശരിയാക്കി, റൂട്ടിന്റെ തുടക്കവും ഒടുക്കവും വേഗത്തില്‍ തിരിച്ചിടാം 
-\n
-\nമാപ്പ് മാര്‍ക്കറുകള്‍: ഗ്രൂപ്പ് ഓണ്‍/ഓഫ് ശരിയാക്കി, മാര്‍ക്കറുകള്‍ മറയ്ക്കാനാവും 
-\n
-\nഓഎസ്എം തിരുത്തലുകള്‍: വഴികളും മറ്റു വസ്തുക്കളും ചേര്‍ക്കാം , കുറിപ്പുകളില്‍ കമന്റുകള്‍ ചേര്‍ക്കാം, തിരുത്തുകള്‍ക്ക് ബാക്ക് അപ്പ് 
-\n
-\nവിക്കിപ്പീഡിയ, വിക്കിവോയേജ്  എന്നിവയുടെ പ്രവര്‍ത്തനങ്ങള്‍ മെച്ചപ്പെടുത്തിയിരിക്കുന്നു , പുതുക്കിയ ഫയലുകള്‍ ലഭ്യമാണ് 
-\n
-\nകോന്റെക്സ്ട് മെനു: ട്രാന്സ്പോര്‍ട്ട് ഷീല്‍ഡ് കളര്‍ രാത്രിക്കാഴ്ചക്കായ് ശരിപ്പെടുത്തിയിരിക്കുന്നു, കൂടുതല്‍ മെനു സൈസ്  ചേര്‍ത്തിരിക്കുന്നു
-\n
-\nബോട്ട് നാവിഗേഷന്‍: മെച്ചപ്പെടുത്തിയിരിക്കുന്നു 
-\n
-\nമറ്റു ബഗ് ഫിക്സുകള്‍ 
-\n"</string>
     <string name="off_road_render_descr">❢</string>
     <string name="read_wikipedia_offline_description">"വിക്കിപീഡിയയും വിക്കിവൊയേജ് ലേഖനങ്ങള്‍ ഓഫ്ലൈനായ് വായിക്കാന്‍ ഓഎസ്എം ആന്‍ഡ് ലൈവ്  വരിക്കാരനാവുക."</string>
     <string name="how_to_open_link">ലിങ്ക് എങ്ങനെ തുറക്കണം\?</string>
@@ -2629,7 +2593,7 @@
     <string name="monthly_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: എല്ലാ മാസവും every month</string>
     <string name="daily_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: ഓരോ മണിക്കൂറും every hour</string>
     <string name="start_editing_card_image_text">ആർക്കും എഡിറ്റുചെയ്യാൻ കഴിയുന്ന സ്വതന്ത്ര ലോകവ്യാപക യാത്ര ഗൈഡ്.</string>
-    <string name="welcome_to_open_beta_description">"ട്രാവൽ ഗൈഡുകൾ നിലവിൽ വിക്കിവൊയേജ് അടിസ്ഥാനമാക്കിയുള്ളതാണ്. ബീറ്റ ടെസ്റ്റിംഗ് സമയത്ത് എല്ലാ സവിശേഷതകളും സൗജന്യ മായ് പരിശോധിക്കുക. അതിനുശേഷം| ഓസ് ആൻഡ് അൺലിംനെറ്റിന്റെ ഉടമസ്ഥർക്കും ഓസ്മണ്ട്+  (എഫ്-ഡ്രോയ്ഡ് ഉള്‍പ്പടെ) ഉടമസ്ഥർക്കും യാത്രാ ഗൈഡുകൾ ലഭ്യമാകും."</string>
+    <string name="welcome_to_open_beta_description">"ട്രാവൽ ഗൈഡുകൾ നിലവിൽ വിക്കിവൊയേജ് അടിസ്ഥാനമാക്കിയുള്ളതാണ്. ബീറ്റ ടെസ്റ്റിംഗ് സമയത്ത് എല്ലാ സവിശേഷതകളും സൗജന്യ മായ് പരിശോധിക്കുക."</string>
     <string name="start_editing_card_description">വിക്കിവൊയേജിലെ ഏതൊരു ആർട്ടിക്കിളും നിങ്ങള്‍ക്ക് തിരുത്താം. അറിവ്| അനുഭവം| കഴിവുകൾ| നിങ്ങളുടെ ശ്രദ്ധ എന്നിവ പങ്കിടാം</string>
     <string name="get_unlimited_access">പരിധിയില്ലാത്ത ആക്സസ്സ് നേടുക</string>
     <string name="welcome_to_open_beta">ബീറ്റയിലേക്ക് വേര്‍ഷനിലേക്ക് സ്വാഗതം</string>
@@ -2693,20 +2657,6 @@
     <string name="quick_action_gpx_tracks_hide">GPX ട്രാക്കുകൾ മറയ്ക്കുക</string>
     <string name="quick_action_gpx_tracks_show">GPX ട്രാക്കുകൾ കാണിക്കുക</string>
     <string name="add_destination_query">ആദ്യം ലക്ഷ്യസ്ഥാനം ചേർക്കുക</string>
-    <string name="release_3_3">"\"• പുതിയ \'ഡയറക്ഷന്‍\' സ്ക്രീൻ: ഹോം, വർക്ക് ഡെസ്റ്റിനേഷൻ ബട്ടണുകൾ, \'മുൻ റൂട്ട്\' കുറുക്കുവഴി, സജീവ ജിപിഎക്സ് ട്രാക്കുകളുടെയും മാർക്കറുകളുടെയും ലിസ്റ്റ്, തിരയൽ ചരിത്രം എന്നിവ പ്രദർശിപ്പിക്കുന്നു.
-\n • റൂട്ട് വിശദാംശങ്ങളുടെ ഒപ്പം കൂടുതൽ വിവരങ്ങൾ: റോഡ് തരങ്ങൾ, ഉപരിതലം, കയറ്റം, നിലവാരം...
-\n
-\n • എല്ലാ തരവുമുള്ള  പൊതു ഗതാഗത നാവിഗേഷൻ: മെട്രോ, ബസ്, ട്രാം മുതലായവ.
-\n
-\n • ട്രാക്കുകളും പകല്‍/ രാത്രി മോഡുകൾ പ്രദർശിപ്പിക്കുകയും മറയ്ക്കുകയും ചെയ്യുന്ന പുതിയ ക്വിക്ക് ആക്ഷന്‍
-\n • ജർമ്മനി, ദക്ഷിണാഫ്രിക്ക, ക്യുബെക് എന്നിവിടങ്ങളിൽ വെള്ളപ്പൊക്കമെന്ന് പ്രദർശിപ്പിക്കപ്പെട്ട പ്രദേശങ്ങൾ ശരിയാക്കി
-\n
-\n KML, KMZ ഇമ്പോർട്ടിനുള്ള അധിക പിന്തുണ
-\n
-\n • ചില പൊതുഗതാഗത സ്റ്റോപ്പുകൾ തുറക്കുന്നതിലെ തകരാറുകൾ പരിഹരിച്ചു
-\n
-\n • ഫ്രീ പതിപ്പിൽ നിന്നും  Facebook, Firebase അനലിറ്റിക്സ് നീക്കം ചെയ്തു (OsmAnd + അതിൽ ഉൾപ്പെടുത്തിയിട്ടില്ല)
-\n"</string>
     <string name="use_osm_live_public_transport_description">"OsmAnd ലൈവ് മാറ്റങ്ങൾക്കായി പൊതു ഗതാഗത സംവിധാനത്തെ  പ്രാപ്തമാക്കുക."</string>
     <string name="use_osm_live_public_transport">"ഓഎസ്എംആന്റ്  ലൈവ് പൊതു ഗതാഗതം"</string>
     <string name="transfers_size">"%1$d  കൈമാറ്റങ്ങൾ"</string>
@@ -2782,12 +2732,6 @@
     <string name="routing_attr_avoid_subway_description">ഭൂഗർഭ റെയിൽവേ/ലൈറ്റ്വെയിറ്റ് റെയിൽവേ ഗതാഗതം ഒഴിവാക്കുക</string>
     <string name="routing_attr_avoid_ferry_name">കടത്തുവള്ളം ഒഴിവാക്കുക</string>
     <string name="routing_attr_avoid_ferry_description">കടത്തുവള്ളം ഒഴിവാക്കുക</string>
-    <string name="release_3_3_7">• പൊതു ഗതാഗതം മാറിക്കയറുന്നതിനുള്ള സമയം കാണിക്കും
-\n റൂട്ട് വിശദാംശങ്ങൾക്ക് ശരിയായി UI ഉണ്ട്
-\n ദിശാസൂചന മെനുവിലും റൂട്ട് വിശദാംശങ്ങളിലും ഇരുണ്ട തീമുകൾ പരിഹരിച്ചു
-\n • അളവ് ദൂരത്തിൽ അസിംത് പ്രദർശിപ്പിക്കുക
-\n\"
-\n</string>
     <string name="send_log">ലോഗ് അയയ്ക്കുക</string>
     <string name="files_moved">%1$d ഫയലുകൾ (%2$s) നീക്കി.</string>
     <string name="files_copied">"%1$d  ഫയലുകൾ (%2$s) പകർത്തി."</string>

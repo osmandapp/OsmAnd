@@ -89,13 +89,7 @@
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="arrival_distance_factor"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/arrival_distance" />
-
-    <Preference
-        android:key="voice_prompts_timetable"
-        android:layout="@layout/preference_with_descr"
-        android:persistent="false"
-        android:title="@string/voice_prompts_timetable" />
+		android:title="@string/announcement_time_title" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"

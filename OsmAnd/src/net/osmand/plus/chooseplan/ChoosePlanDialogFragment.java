@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -120,7 +118,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				case SEA_DEPTH_MAPS:
 					return InAppPurchaseHelper.isDepthContoursPurchased(ctx);
 				case CONTOUR_LINES_HILLSHADE_MAPS:
-					return OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null;
+					return OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isContourLinesPurchased(ctx);
 			}
 			return false;
 		}
@@ -216,7 +214,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			infoDescription.setText(getInfoDescription());
 		}
 		TextViewEx planInfoDescription = (TextViewEx) view.findViewById(R.id.plan_info_description);
-		planInfoDescription.setText(Version.isHuawei(app)
+		planInfoDescription.setText(Version.isHuawei()
 				? R.string.osm_live_payment_subscription_management_hw : R.string.osm_live_payment_subscription_management);
 		ViewGroup osmLiveCard = buildOsmLiveCard(ctx, cardsContainer);
 		if (osmLiveCard != null) {

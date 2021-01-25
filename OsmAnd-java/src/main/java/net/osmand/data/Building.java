@@ -106,25 +106,42 @@ public class Building extends MapObject {
 	
 
 	public float interpolation(String hno) {
-		if(getInterpolationType() != null || getInterpolationInterval() > 0 
-				//|| checkNameAsInterpolation() // disable due to situation in NL #4284 
-				) {
+		if (getInterpolationType() != null || getInterpolationInterval() > 0
+		// || checkNameAsInterpolation() // disable due to situation in NL #4284
+		) {
 			int num = Algorithms.extractFirstIntegerNumber(hno);
 			String fname = super.getName();
 			int numB = Algorithms.extractFirstIntegerNumber(fname);
-			int numT = numB; 
+			int numT = numB;
+			String sname = getName2();
+			if (getInterpolationType() == BuildingInterpolation.ALPHABETIC) {
+				if (num != numB) {
+					// currently not supported
+					return -1;
+				}
+				int hint = (int) hno.charAt(hno.length() - 1);
+				int fch = (int) fname.charAt(fname.length() - 1);
+				int sch = sname.charAt(sname.length() - 1);
+				if (fch == sch) {
+					return -1;
+				}
+				float res = ((float) hint - fch) / (((float) sch - fch));
+				if (res > 1 || res < 0) {
+					return -1;
+				} 
+				return res;
+			}
 			if (num >= numB) {
-				String sname = getName2();
-				if(fname.contains("-") && sname == null){
+				if (fname.contains("-") && sname == null) {
 					int l = fname.indexOf('-');
 					sname = fname.substring(l + 1, fname.length());
 				}
 				if (sname != null) {
 					numT = Algorithms.extractFirstIntegerNumber(sname);
-					if(numT < num) {
+					if (numT < num) {
 						return -1;
 					}
-				} 
+				}
 				if (getInterpolationType() == BuildingInterpolation.EVEN && num % 2 == 1) {
 					return -1;
 				}
@@ -137,8 +154,8 @@ public class Building extends MapObject {
 			} else {
 				return -1;
 			}
-			if(numT > numB){
-				return ((float)num - numB) / (((float)numT - numB));
+			if (numT > numB) {
+				return ((float) num - numB) / (((float) numT - numB));
 			}
 			return 0;
 		}
@@ -165,10 +182,10 @@ public class Building extends MapObject {
 	
 	@Override
 	public String toString() {
-		if(interpolationInterval !=0){
-			return name+"-"+name2 +" (+"+interpolationInterval+") ";
-		} else if(interpolationType != null) {
-			return name+"-"+name2 +" ("+interpolationType+") ";
+		if (interpolationInterval != 0) {
+			return name + "-" + name2 + " (+" + interpolationInterval + ") ";
+		} else if (interpolationType != null) {
+			return name + "-" + name2 + " (" + interpolationType + ") ";
 		}
 		return name;
 	}

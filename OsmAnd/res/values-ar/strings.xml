@@ -1554,7 +1554,6 @@
     <string name="contact_us">اتصل بنا</string>
     <string name="poi_context_menu_modify_osm_change">تعديل OSM</string>
     <string name="dashboard_or_drawer_title">لوحة التحكم أو شريط المراقبة</string>
-    <string name="update">التحديث</string>
     <string name="only_download_over_wifi">Wi-Fi فقط</string>
     <string name="live_update">تحديث مباشر</string>
     <string name="last_update">آخر تحديث: %s</string>
@@ -2827,7 +2826,7 @@
     <string name="touring_view_render_descr">أسلوب الملاحة مع التباين العالي والحد الأعلى من التفاصيل. يتضمن كل خيارات النمط الافتراضي أوسماند، مع عرض أكبر قدر ممكن من التفاصيل ، ولا سيما الطرق والمسارات وطرق السفر الأخرى. التمييز الواضح بين \"جولة الأطلس\" بين أنواع الطرق. مناسبة للاستخدام النهاري والليلي وفي الهواء الطلق.</string>
     <string name="default_render_descr">أسلوب الغرض العام. تقديم نظافة مبسطة في المدن المكتظة بالسكان. الملامح الرئيسية: خطوط الكنتور ، والطرق ، وجودة السطح ، والقيود المفروضة على الوصول ، ودروع الطريق ، والمسارات التي تظهر وفقاً لمقياس SAC ، وميزات رياضة الماء الأبيض.</string>
     <string name="travel_card_download_descr">قم بتنزيل أدلة السفر هذه من ويكي الرحلات لعرض مقالات حول الأماكن في العالم بدون إنترنت.</string>
-    <string name="welcome_to_open_beta_description">دليل السفر حاليا على أساس Wikivoyage. اختبار كافة الميزات أثناء اختبار بيتا المفتوحة مجانا.بعد ذلك، وأدلة السفر ستكون متاحة للمشتركين في أوسماند غير المحدود و اصحاب +أوسماند.</string>
+    <string name="welcome_to_open_beta_description">دليل السفر حاليا على أساس Wikivoyage. اختبار كافة الميزات أثناء اختبار بيتا المفتوحة مجانا.</string>
     <string name="av_locations_selected_desc">ملف GPX مع الإحداثيات والبيانات من الملاحظات المحددة.</string>
     <string name="av_locations_all_desc">ملف GPX مع الإحداثيات والبيانات من كافة الملاحظات.</string>
     <!--string name="release_3_0">• جديد: دعم للسفر دون اتصال عالمية وأدلة. وترتبط المواقع المشار إليها على الخريطة. الحصول على البيانات الأولية من ويكيفوياجي.
@@ -3128,7 +3127,6 @@
     <string name="turn_screen_on_info">إظهار الخريطة على شاشة القفل أثناء التنقل.</string>
     <string name="wake_time">المهلة بعد الاستيقاظ</string>
     <string name="units_and_formats">الوحدات والأشكال</string>
-    <string name="appearance">المظهر</string>
     <string name="map_look_descr">مظهر الخريطة</string>
     <string name="map_look">نظرة علي الخريطة</string>
     <string name="list_of_installed_plugins">الإضافات المثبتة</string>
@@ -3357,8 +3355,8 @@
     <string name="sett_generic_ext_input">لوحة المفاتيح</string>
     <string name="sett_wunderlinq_ext_input">وندرلينك</string>
     <string name="sett_parrot_ext_input">ببغاء</string>
-    <string name="new_route_calculated_dist_dbg">المسار: المسافة%s، وقت التوجيه %s.
-\nالحساب: %.1f ث، %d طريق، %d تجانب)</string>
+    <string name="new_route_calculated_dist_dbg">المسار: المسافة%2$s، وقت التوجيه %1$s.
+\nالحساب: %3$.1f ث، %4$d طريق، %5$d تجانب)</string>
     <string name="lang_oc">الأوكيتانية</string>
     <string name="get_discount_second_part">ثم %1$s</string>
     <string name="apply_to_current_profile">تطبيق فقط على \"%1$s\"</string>
@@ -3549,7 +3547,6 @@
     <string name="select_distance_route_will_recalc">حدد المسافة التي سيتم بعدها إعادة حساب المسار.</string>
     <string name="recalculate_route_in_deviation">إعادة حساب المسار في حالة الانحراف</string>
     <string name="shared_string_square">مربع</string>
-    <string name="shared_string_rhomb">معين</string>
     <string name="shared_string_circle">دائرة</string>
     <string name="select_shape">تحديد الشكل</string>
     <string name="select_group">تحديد المجموعة</string>
@@ -3699,7 +3696,6 @@
     <string name="screen_control">التحكم في الشاشة</string>
     <string name="system_screen_timeout_descr">إيقاف تشغيل الشاشة بعد انتهاء مهلة شاشة النظام.</string>
     <string name="system_screen_timeout">استخدام مهلة انطفاء شاشة النظام</string>
-    <string name="turn_screen_on_options_descr">خيارات تنبيه الشاشة:</string>
     <string name="turn_screen_on_descr">حدد خيارات تنبيه الشاشة (تأكد من وجود أوسماند في المقدمة عند قفل الجهاز):</string>
     <string name="turn_screen_on_navigation_instructions_descr">ستقوم كل تعليمات تنقل بتشغيل الشاشة.</string>
     <string name="turn_screen_on_navigation_instructions">تعليمات الملاحة</string>
@@ -3743,7 +3739,6 @@
     <string name="shared_string_meters">أمتار</string>
     <string name="details_dialog_decr">إظهار أو إخفاء التفاصيل الإضافية للخريطة</string>
     <string name="shared_string_night_map">خريطة ليلية</string>
-    <string name="shared_string_all_time">كل الوقت</string>
     <string name="turn_screen_on_power_button_disabled">ذوي الاحتياجات الخاصه. يتطلب \"إبقاء الشاشة قيد تشغيل\" تحت \"المهلة بعد الاستيقاظ\".</string>
     <string name="vessel_height_limit_description">ضبط الارتفاع لتجنب الجسور المنخفضة. ضع في اعتبارك أنه إذا كان الجسر متحركاً ، فسوف نستخدم ارتفاعه في الحالة المفتوحة.</string>
     <string name="add_online_source">إضافة مصدر عبر الإنترنت</string>
@@ -3905,7 +3900,6 @@
     <string name="development">تطوير</string>
     <string name="use_live_public_transport">بيانات أوسماند لايف</string>
     <string name="use_live_routing">بيانات أوسماند لايف</string>
-    <string name="use_complex_routing">التوجيه المركب</string>
     <string name="complex_routing_descr">التوجيه على مرحلتين لملاحة السيارة.</string>
     <string name="use_native_pt">تطوير النقل العام المحلي</string>
     <string name="use_native_pt_desc">قم بالتبديل إلى جافا (الآمن) حساب توجيه النقل العام</string>
@@ -4015,4 +4009,58 @@
     <string name="routing_attr_allow_intermittent_description">السماح بالممرات المائية المتقطعة</string>
     <string name="routing_attr_allow_intermittent_name">السماح بالممرات المائية المتقطعة</string>
     <string name="voice_prompts_timetable">مطالبة صوتية</string>
+    <string name="add_online_routing_engine">إضافة محرك توجيه عبر الإنترنت</string>
+    <string name="edit_online_routing_engine">تعديل محرك التوجيه عبر الإنترنت</string>
+    <string name="shared_string_subtype">النوع الفرعي</string>
+    <string name="shared_string_vehicle">مركبة</string>
+    <string name="shared_string_api_key">مفتاح API</string>
+    <string name="keep_it_empty_if_not">احتفظ بها فارغة إذا لم تكن كذلك</string>
+    <string name="shared_string_server_url">عنوان URL السيرفر</string>
+    <string name="shared_string_enter_param">أدخل المعيار</string>
+    <string name="online_routing_example_hint">عنوان موقع URL مع جميع المعايير سوف يبدو مثل هذا:</string>
+    <string name="test_route_calculation">اختبار حساب مسار</string>
+    <string name="routing_engine_vehicle_type_driving">القيادة</string>
+    <string name="routing_engine_vehicle_type_foot">قدم</string>
+    <string name="routing_engine_vehicle_type_bike">دراجة هوائية</string>
+    <string name="routing_engine_vehicle_type_car">سيارة</string>
+    <string name="copy_address">نسخ العنوان</string>
+    <string name="online_routing_engine">محرك التوجيه عبر الإنترنت</string>
+    <string name="online_routing_engines">محركات التوجيه عبر الإنترنت</string>
+    <string name="shared_string_folders">المجلدات</string>
+    <string name="select_folder">تحديد مجلد</string>
+    <string name="select_folder_descr">تحديد مجلد أو إضافة واحد جديد</string>
+    <string name="shared_string_empty">فارغ</string>
+    <string name="analyze_by_intervals">التحليل حسب الفواصل الزمنية (الفاصل الزمني)</string>
+    <string name="upload_to_openstreetmap">رفع إلى خريطة الشارع المفتوح</string>
+    <string name="edit_track">تحرير المسار</string>
+    <string name="rename_track">تسمية المسار</string>
+    <string name="change_folder">تغيير المجلد</string>
+    <string name="shared_string_sec">ثانية</string>
+    <string name="announcement_time_passing">تمرير</string>
+    <string name="announcement_time_approach">طريقة</string>
+    <string name="announcement_time_prepare_long">تحضير طويل</string>
+    <string name="announcement_time_prepare">إعداد</string>
+    <string name="announcement_time_off_route">إيقاف المسار</string>
+    <string name="announcement_time_arrive">الوصول إلى الوجهة</string>
+    <string name="shared_string_turn">منعطف</string>
+    <string name="announcement_time_intervals">الوقت والمسافة</string>
+    <string name="announcement_time_descr">وقت الإعلان عن مختلف المطالبات الصوتية يعتمد على نوع موجه، وسرعة التنقل الحالية وسرعة التنقل الافتراضية.</string>
+    <string name="announcement_time_title">وقت الإعلان</string>
+    <string name="start_recording">بدء التسجيل</string>
+    <string name="show_track_on_map">عرض المسار على الخريطة</string>
+    <string name="routing_engine_vehicle_type_wheelchair">منحدرات</string>
+    <string name="routing_engine_vehicle_type_hiking">مشي</string>
+    <string name="routing_engine_vehicle_type_walking">مشي</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">ركوب الدراجات الكهربائية</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">ركوب الدراجات الجبلية</string>
+    <string name="routing_engine_vehicle_type_cycling_road">ركوب الدراجات على الطرق</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">ركوب الدراجات</string>
+    <string name="routing_engine_vehicle_type_hgv">مركبات الحمولة الثقيلة</string>
+    <string name="routing_engine_vehicle_type_small_truck">شاحنة صغيرة</string>
+    <string name="routing_engine_vehicle_type_truck">شاحنة</string>
+    <string name="routing_engine_vehicle_type_scooter">سكوتر</string>
+    <string name="routing_engine_vehicle_type_racingbike">سباق الدراجات</string>
+    <string name="routing_engine_vehicle_type_mtb">MTB</string>
+    <string name="message_server_error">خطأ في الخادم: %1$s</string>
+    <string name="message_name_is_already_exists">الاسم موجود بالفعل</string>
 </resources>

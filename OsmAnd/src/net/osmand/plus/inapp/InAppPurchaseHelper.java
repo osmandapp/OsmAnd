@@ -153,11 +153,15 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	public static boolean isDepthContoursPurchased(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx) || ctx.getSettings().DEPTH_CONTOURS_PURCHASED.get();
+		return Version.isDeveloperBuild(ctx)
+				|| Version.isPaidVersion(ctx)
+				|| ctx.getSettings().DEPTH_CONTOURS_PURCHASED.get();
 	}
 
 	public static boolean isContourLinesPurchased(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx) || ctx.getSettings().CONTOUR_LINES_PURCHASED.get();
+		return Version.isDeveloperBuild(ctx)
+				|| Version.isPaidVersion(ctx)
+				|| ctx.getSettings().CONTOUR_LINES_PURCHASED.get();
 	}
 
 	public InAppPurchases getInAppPurchases() {
@@ -212,7 +216,7 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	protected void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppCommand command) {
-		if (isDeveloperVersion || (!Version.isGooglePlayEnabled(ctx) && !Version.isHuawei(ctx))) {
+		if (isDeveloperVersion || (!Version.isGooglePlayEnabled() && !Version.isHuawei())) {
 			notifyDismissProgress(taskType);
 			stop(true);
 			return;

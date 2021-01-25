@@ -1266,7 +1266,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="error_calculating_route">Nie ŭdalosia različyć maršrut</string>
     <string name="error_calculating_route_occured">Nie ŭdalosia različyć maršrut</string>
     <string name="empty_route_calculated">Različany maršrut pusty</string>
-    <string name="new_route_calculated_dist">Novy šlach raźličany, adlehłaść</string>
     <string name="arrived_at_destination">Vy prybyli ŭ punkt pryznačeńnia</string>
     <string name="invalid_locations">Niesapraŭdnyja kaardynaty</string>
     <string name="go_back_to_osmand">Viarnucca da mapy OsmAnd</string>
@@ -1359,7 +1358,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="osb_comment_dialog_error">Nie atrymalasia dadać kamientar</string>
     <string name="poi_edit_title">Pravіć POI</string>
     <string name="poi_create_title">Stvaryć POI</string>
-    <string name="poi_error_poi_not_found">Vuziel nie znojdzieny abo zručnasć (amenity) skladajecca z niekaĺkich vuzloŭ, što nie padtrymlivajecca.</string>
     <string name="poi_remove_confirm_template">Vydalić {0} (kamientar)?</string>
     <string name="poi_remove_title">Vydalić POI</string>
     <string name="shared_string_delete">Vydalić</string>
@@ -1940,7 +1938,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="use_drawer_btn">Vykarystoŭvać meniu</string>
     <string name="dashboard_or_drawer_title">Panel kіravańnia cі meniu</string>
     <string name="dashboard_or_drawer_description">Prapanujecca vybar asnoŭnaha eliemientu kiravannia prahramaju praz paneĺ kiravannia abo statyčnaje mieniu. Vaš vybar moža być zmienieny ŭ naladach haloŭnaha ekrana.</string>
-    <string name="update">Abnavіć kožny</string>
     <string name="only_download_over_wifi">Ściahvać toĺki praz Wi-Fi</string>
     <string name="live_update">Biahučaje abnaŭleńnie</string>
     <string name="update_now">Abnavіć zaraz</string>
@@ -1983,8 +1980,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="allow_access_location">Dazvolić dostup da miescaznachodžańnia</string>
     <string name="first_usage_greeting">Prakladvajcie maršruty i adkryvajcie novyja miescy biez Internet-padlučennia</string>
     <string name="search_my_location">Znajsci maju pazicyju</string>
-    <string name="no_update_info_desc">Nie praviarać novyja viersij i znižki ad OsmAnd.</string>
-    <string name="no_update_info">Nie pakazvać novyja viersii</string>
     <string name="update_all_maps_now">Abnavić usie mapy zaraz?</string>
     <string name="clear_tile_data">Ačyścіć keš siecіŭnych mapaŭ</string>
     <string name="routing_attr_short_way_name">Paliŭna-aščadny maršrut</string>
@@ -2232,9 +2227,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="rendering_value_low_name">Nizkaja</string>
     <string name="rendering_attr_contourWidth_name">Taŭščynia haryzantaliaŭ</string>
     <string name="rendering_value_high_name">Vysokaja</string>
-    <string name="legacy_search">Sastarely pošuk</string>
-    <string name="show_legacy_search">Pakazvać sastarely pošuk</string>
-    <string name="show_legacy_search_desc">Dadać sastarely pošuk u spisie, što raskryvajecca.</string>
     <string name="wiki_around">Blizkija artykuly ŭ Vikipedyi</string>
     <string name="route_roundabout_short">Zbočcie na %1$d źjeździe</string>
     <string name="gpx_no_tracks_title">U vas jašče niama GPX-fajlaŭ</string>
@@ -2710,7 +2702,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="update_is_available">Abnaŭliennie dastupnaje</string>
     <string name="download_file">Spampavać fajl</string>
     <string name="start_editing_card_image_text">Biasplatny susvietny turystyčny daviednik, jaki moža redahavać kožny.</string>
-    <string name="welcome_to_open_beta_description">Turystyčnyja daviedniki ŭ ciapierašni čas bazujucca na asnovie Wikivoyage. Testujcie usie funkcyi biasplatna padčas adkrytaha beta-testavannia. Potym daviedniki buduć dastupnyja padpiščykam OsmAnd Unlimited i ŭladaĺnikam OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Turystyčnyja daviedniki ŭ ciapierašni čas bazujucca na asnovie Wikivoyage. Testujcie usie funkcyi biasplatna padčas adkrytaha beta-testavannia.</string>
     <string name="start_editing_card_description">Vam možna i varta redahavać liuby artykul na Wikivoyage. Dzialiciesia viedami, vopytam, talientam i vašaj ŭvahaj</string>
     <string name="start_editing">Pačać redahavańnie</string>
     <string name="get_unlimited_access">Atrymać nieabmiežavany dostup</string>
@@ -2741,17 +2733,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_travel_book">Dzionnik padarožžaŭ</string>
     <string name="download_images">Spampavać vyjavy</string>
     <string name="error_notification_desc">Kali laska, adpraŭcie zdymak ekrana z hetym apaviaščenniem na support@osmand.net</string>
-    <string name="release_3_0">• Novaje: padtrymka svietavych aŭtanomnych turystyčnych daviednikaŭ. Spasylačnyja miasciny zviazany z mapaj. Zychodnyja danyja ad Wikivoyage. 
-\n 
-\n • Vikipiedyja: novy vyhliad, aktyŭnyja spasylki, padtrymka vyjaŭ 
-\n 
-\n • Open Track UI: padtrymka hrup šliachavych kropak 
-\n 
-\n • Paznaki mapy: impart abranych hrup z GPX-fajlaŭ, uvod kaardynat, novy vyhliad 
-\n 
-\n • Padpiska OsmAnd Live ciapier padtrymlivaje ŭsie funkcyi OsmAnd 
-\n 
-\n</string>
     <string name="access_intermediate_arrival_time">Pramiežkavy čas prybyccia</string>
     <string name="map_widget_intermediate_time">Pramiežkavy čas</string>
     <string name="download_wikipedia_description">Spampavać artykuly Vikipedyi dlia %1$s dlia aŭtanomnaha čytannia.</string>
@@ -2770,30 +2751,13 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_world">Sviet</string>
     <string name="send_search_query_description">My adpravim vaš pašukovy zapyt «%1$s», a taksama vašaje miescaznachodžannie. \n
         \n Zbirajucca toĺki niepierasanaĺnyja danyja, danyja pošuku vykarystoŭvajucca toĺki dlia taho, kab paliepšyć alharytm pošuku.</string>
-    <string name="search_no_results_description">Niama vynikaŭ?
-\nRaspaviadzicie nam ab hetym.</string>
     <string name="send_search_query">Adpravić pašukovy zapyt?</string>
     <string name="increase_search_radius_to">Pavialičyć radyus pošuku da %1$s</string>
     <string name="thank_you_for_feedback">Dziakuj za Vaš vodhuk</string>
     <string name="poi_cannot_be_found">Vuziel ci šliach nie znajdzieny.</string>
     <string name="search_no_results_feedback">Niama vynikaŭ pošuku?
 \nDajcie nam vodhuk</string>
-    <string name="commiting_way">Fiksujecca šliach…</string>
     <string name="test_voice_desrc">Nacisnicie na knopku i pasluchajcie adpaviednuju halasavuju padkazku, kab vyznačyć adsutnyja abo paškodžanyja padkazki.</string>
-    <string name="release_3_1">• Navihacyja: vypraŭliennie indykataru prahresu, chutkaja zamiena pačatkovaha i kančatkovaha punktaŭ maršrutu
-\n 
-\n• Adznaki mapy: vypraŭliennie ŭkliučennia/vykliučennia hrupaŭ, mahčymasć chavać adznaki na mapie
-\n 
-\n• Redahavannie OSM: mahčymasć redahavannia paznak dlia niekropkavych abjektaŭ i šliachoŭ, vypraŭliennie adsutnych kamientaroŭ na natatkach, reziervovaje kapijavannie pravak
-\n 
-\n• Paliapšennie razboru Wikipedia i Wikivoyage, abnoŭlienyja fajly ŭžo dastupnyja
-\n
-\n• Kantekstnaje mieniu: vypraŭliennie kolieru darožnych znakaŭ u načnym režymie, vypraŭliennie pamieraŭ dadatkovaha mieniu
-\n 
-\n• Račnaja navihacyja: padtrymka farvateru
-\n 
-\n• Vypraŭliennie inšych chibaŭ
-\n</string>
     <string name="markers_remove_dialog_msg">Vydalić adznaku mapy «%s»\?</string>
     <string name="edit_map_marker">Redahavać paznaku mapy</string>
     <string name="third_party_application">Asobny dadatak</string>
@@ -2804,20 +2768,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="keep_passed_markers">Pakinuć projdzienyja paknaki na mapie</string>
     <string name="more_transport_on_stop_hint">Na hetym prypynku josć boĺš hramadskaha transpartu.</string>
     <string name="ask_for_location_permission">Kali laska, dajcie OsmAnd dazvol na miescaznachodžannie dlia praciahu.</string>
-    <string name="release_3_2_pre">• Vypraŭliena chiba pry zapusku, što ŭznikala na niekatorych pryladach
-\n 
-\n• Novyja funkcyi adznak: pakazvajucca ŭžo projdziennyja adznaki
-\n 
-\n• Historyja pošuku zaraz pakazvaje katehoryi, što vy šukali raniej
-\n 
-\n• Vypraŭliena chiba pry zapusku, što ŭznikala z nielacinskimi mapami
-\n 
-\n• Paliapšennie chutkasci admalioŭki na pryladach z Android 8.0
-\n 
-\n• Padtrymka redahavannia šmatvuhoĺnych (niazručnych) abjektaŭ
-\n 
-\n• Vymiarennie dystancyj: dadadziena knopka «Vymiarennie» ŭ «Dziejanni» kantekstnaha mieniu
-\n</string>
     <string name="rendering_value_black_name">Čorny</string>
     <string name="osm_live_plan_pricing">Plan i ceny</string>
     <string name="osm_live_payment_monthly_title">Štomiesiačna</string>
@@ -2888,22 +2838,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="routeInfo_surface_name">Pavierchnia</string>
     <string name="routeInfo_smoothness_name">Hladkasć</string>
     <string name="routeInfo_steepness_name">Pakatasć</string>
-    <string name="release_3_3">• Novy ekran «Napramki»: adliustroŭvaje knopki napramkaŭ dachaty i na pracu, skarot «papiaredni maršrut», spis aktyŭnych GPX-sliadoŭ i adznak, historyju pošuku
-\n
-\n • Dadatkovyja zviestki pad «Detali maršrutu»: typy daroh, pakryccio, pakatasć, hladkasć
-\n
-\n • Navihacyja hramadskaha transpartu padtrymlivaje ŭsie typy: mietro, aŭtobus, tramvaj i inšyja
-\n
-\n • Novyja chutkija dziejanni dlia pakazu/schovu sliadoŭ i režymaŭ dzień/noč
-\n
-\n • Vypraŭlienyja voblasci, jakija vyhliadali jak zatoplienyja, u Hiermanii, Paŭdniovajo Afrycy, Kviebieku
-\n
-\n • Dadatkovaja padtrymka dlia KML- i KMZ-impartu
-\n
-\n • Vypraŭliena padziennie pry adkrycci niekatorych prypynkaŭ hramadskaha transpartu
-\n
-\n • Vydaliena analityka Facebook i Firebase sa svabodnaj viersii (OsmAnd+ nie ŭkliučaje jaje)
-\n</string>
     <string name="use_osm_live_public_transport_description">Ukliučyć hramadski transpart dlia zmien OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Hramadski transpart OsmAnd Live</string>
     <string name="routing_attr_avoid_tram_name">Pazbiahać tramvajaŭ</string>
@@ -2918,11 +2852,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="routing_attr_avoid_subway_description">Pazbiahać mietro i liohkarejkavaha transpartu</string>
     <string name="routing_attr_avoid_ferry_name">Pazbiahać paromaŭ</string>
     <string name="routing_attr_avoid_ferry_description">Pazbiahać paromaŭ</string>
-    <string name="release_3_3_7">• Adliustravannie času pamiž pierasadkami ŭ hramadskim transparcn
-\n • Vypraŭlieny interfiejs \"Padrabiaznasci maršrutu\"
-\n • Vypraŭliena ciomnaja tema dlia \"Maršrut\" i \"Padrabiaznasci maršrutu\"
-\n • Pry vymiarenni adliehlasci budzie adliustroŭvacca azimut
-\n</string>
     <string name="shared_string_degrees">Hradusy</string>
     <string name="shared_string_milliradians">Miliradyjany</string>
     <string name="angular_measeurement">Adzinki vuhloŭ</string>

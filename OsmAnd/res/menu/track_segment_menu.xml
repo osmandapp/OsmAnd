@@ -9,4 +9,9 @@
         android:id="@+id/action_delete"
         android:icon="@drawable/ic_action_remove_dark"
         android:title="@string/shared_string_delete"/>
+
+    <item
+        android:id="@+id/split_interval"
+        android:icon="@drawable/ic_action_split_interval"
+        android:title="@string/gpx_split_interval"/>
 </menu>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingBottom="@dimen/bottom_sheet_exit_button_margin">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:gravity="center_vertical"
+		android:text="@string/announcement_time_title"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		osmand:typeface="@string/font_roboto_medium" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_half"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:lineSpacingMultiplier="1.1"
+		android:text="@string/announcement_time_descr"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		osmand:typeface="@string/font_roboto_regular" />
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/iv_illustration"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:adjustViewBounds="true"
+		osmand:srcCompat="?attr/image_help_announcement_time" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/tv_seek_bar_label"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:textColor="?attr/active_color_basic"
+		android:textSize="@dimen/default_list_text_size"
+		osmand:typeface="@string/font_roboto_medium"
+		tools:text="Normal" />
+
+	<SeekBar
+		android:id="@+id/seek_bar_arrival"
+		style="@style/Widget.AppCompat.SeekBar.Discrete"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/pages_item_margin"
+		android:maxHeight="2dp"
+		android:paddingTop="11dp"
+		android:paddingBottom="11dp"
+		osmand:tickMark="@drawable/seekbar_tickmark_announcement_time"
+		tools:max="3"
+		tools:progress="1" />
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:background="?attr/divider_color_basic" />
+
+	<LinearLayout
+		android:id="@+id/description_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:orientation="horizontal"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/announcement_time_intervals"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_regular" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/iv_arrow"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:tint="?attr/default_icon_color"
+			app:srcCompat="@drawable/ic_action_arrow_down" />
+
+	</LinearLayout>
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/tv_interval_descr"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:lineSpacingMultiplier="@dimen/line_spacing_multiplier_description"
+		android:textSize="@dimen/default_list_text_size"
+		android:visibility="gone"
+		osmand:typeface="@string/font_roboto_regular"
+		tools:text="Turn
+        \n   • Prepare: 315 - 320 m, 110 sec.
+        \n   • Approach: 60 - 65 m, 20 sec.
+        \n   • Passing: 5 - 10 m, 3 sec.
+        \nArrive at destination: 5 - 10 m, 2 sec.
+        \nOff-route: 25 - 30 m, 9 sec.
+        \nTraffic warnings
+        \n   • Approach: 5 - 10 m, 3 sec.
+        \n   • Passing: 15 - 20 m, 4 sec.
+        \nWaypoint / Favourite / POI
+        \n   • Approach: 80 - 85 m, 25 sec
+        \n   • Passing: 20 - 25 m, 7 sec. "
+		tools:visibility="visible" />
+
+</LinearLayout>

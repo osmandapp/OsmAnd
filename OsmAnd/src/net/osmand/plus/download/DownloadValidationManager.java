@@ -217,7 +217,7 @@ public class DownloadValidationManager {
 			AlertDialog.Builder msg = new AlertDialog.Builder(getActivity());
 			msg.setTitle(R.string.free_version_title);
 			msg.setMessage(msgTx);
-			if (Version.isMarketEnabled(getMyApplication())) {
+			if (Version.isMarketEnabled()) {
 				msg.setPositiveButton(R.string.install_paid, new DialogInterface.OnClickListener() {
 
 					@Override

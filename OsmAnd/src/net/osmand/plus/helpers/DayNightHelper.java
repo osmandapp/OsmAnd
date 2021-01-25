@@ -43,10 +43,10 @@ public class DayNightHelper implements SensorEventListener {
 
 	private static final Log log = PlatformUtil.getLog(DayNightHelper.class);
 	
-	private final OsmandApplication osmandApplication;
+	private final OsmandApplication app;
 
-	public DayNightHelper(OsmandApplication osmandApplication) {
-		this.osmandApplication = osmandApplication;
+	public DayNightHelper(OsmandApplication app) {
+		this.app = app;
 	}
 
 	private DayNightHelper listener;
@@ -56,11 +56,11 @@ public class DayNightHelper implements SensorEventListener {
 	private StateChangedListener<Boolean> sensorStateListener;
 
 	public boolean isNightModeForMapControls() {
-		return isNightModeForMapControlsForProfile(osmandApplication.getSettings().APPLICATION_MODE.get());
+		return isNightModeForMapControlsForProfile(app.getSettings().APPLICATION_MODE.get());
 	}
 
 	public boolean isNightModeForMapControlsForProfile(ApplicationMode mode) {
-		if (osmandApplication.getSettings().isLightContentForMode(mode)) {
+		if (app.getSettings().isLightContentForMode(mode)) {
 			return isNightModeForProfile(mode);
 		} else {
 			return true;
@@ -72,11 +72,11 @@ public class DayNightHelper implements SensorEventListener {
 	 * @return true if day is supposed to be 
 	 */
 	public boolean isNightMode() {
-		return isNightModeForProfile(osmandApplication.getSettings().APPLICATION_MODE.get());
+		return isNightModeForProfile(app.getSettings().APPLICATION_MODE.get());
 	}
 
 	public boolean isNightModeForProfile(ApplicationMode mode) {
-		DayNightMode dayNightMode = osmandApplication.getSettings().DAYNIGHT_MODE.getModeValue(mode);
+		DayNightMode dayNightMode = app.getSettings().DAYNIGHT_MODE.getModeValue(mode);
 		if (dayNightMode.isDay()) {
 			return false;
 		} else if (dayNightMode.isNight()) {
@@ -108,24 +108,23 @@ public class DayNightHelper implements SensorEventListener {
 	}
 	
 	public SunriseSunset getSunriseSunset() {
-		Location lastKnownLocation = osmandApplication.getLocationProvider().getLastKnownLocation();
-		if(lastKnownLocation == null) {
-			lastKnownLocation = osmandApplication.getLocationProvider().getFirstTimeRunDefaultLocation();
+		Location lastKnownLocation = app.getLocationProvider().getLastKnownLocation();
+		if (lastKnownLocation == null) {
+			lastKnownLocation = app.getLocationProvider().getFirstTimeRunDefaultLocation(null);
 		}
 		if (lastKnownLocation == null) {
 			return null;
 		}
 		double longitude = lastKnownLocation.getLongitude();
 		Date actualTime = new Date();
-		SunriseSunset daynightSwitch = new SunriseSunset(lastKnownLocation.getLatitude(),
+		return new SunriseSunset(lastKnownLocation.getLatitude(),
 				longitude < 0 ? 360 + longitude : longitude,
 				actualTime, TimeZone.getDefault());
-		return daynightSwitch;
 	}
 
 	public void stopSensorIfNeeded() {
 		if (listener != null) {
-			SensorManager mSensorManager = (SensorManager) osmandApplication
+			SensorManager mSensorManager = (SensorManager) app
 					.getSystemService(Context.SENSOR_SERVICE);
 			Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 			mSensorManager.unregisterListener(listener, mLight);
@@ -135,9 +134,9 @@ public class DayNightHelper implements SensorEventListener {
 
 	public void startSensorIfNeeded(StateChangedListener<Boolean> sensorStateListener) {
 		this.sensorStateListener = sensorStateListener;
-		DayNightMode dayNightMode = osmandApplication.getSettings().DAYNIGHT_MODE.get();
+		DayNightMode dayNightMode = app.getSettings().DAYNIGHT_MODE.get();
 		if (listener == null && dayNightMode.isSensor()) {
-			SensorManager mSensorManager = (SensorManager) osmandApplication.getSystemService(Context.SENSOR_SERVICE);
+			SensorManager mSensorManager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
 			Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 			List<Sensor> list = mSensorManager.getSensorList(Sensor.TYPE_LIGHT);
 			log.info("Light sensors:" + list.size()); //$NON-NLS-1$
