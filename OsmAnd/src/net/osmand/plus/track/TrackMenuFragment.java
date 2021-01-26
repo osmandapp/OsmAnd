@@ -152,6 +152,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private int menuTitleHeight;
 	private int toolbarHeightPx;
+	private boolean mapPositionAdjusted;
 
 	public enum TrackMenuType {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
@@ -455,9 +456,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		adjustMapPosition(getHeight());
+	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int currentMenuState, int previousMenuState) {
+		super.onContextMenuStateChanged(fragment, currentMenuState, previousMenuState);
+		if (currentMenuState != MenuState.FULL_SCREEN && (currentMenuState != previousMenuState || !mapPositionAdjusted)) {
+			adjustMapPosition(getViewY());
+		}
 	}
 
 	@Override
@@ -760,15 +763,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	@Override
-	protected int applyPosY(int currentY, boolean needCloseMenu, boolean needMapAdjust, int previousMenuState, int newMenuState, int dZoom, boolean animated) {
-		int y = super.applyPosY(currentY, needCloseMenu, needMapAdjust, previousMenuState, newMenuState, dZoom, animated);
-		if (needMapAdjust) {
-			adjustMapPosition(y);
-		}
-		return y;
-	}
-
 	public void updateToolbar(int y, boolean animated) {
 		final MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -821,6 +815,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			if (r.left != 0 && r.right != 0) {
 				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
 			}
+			mapPositionAdjusted = true;
 		}
 	}
 
