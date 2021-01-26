@@ -24,11 +24,13 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -93,38 +95,43 @@ public class OverviewCard extends BaseCard {
 	}
 
 	void initStatBlocks() {
-		GpxDisplayItem gpxItem = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes)).get(0);
-		GPXTrackAnalysis analysis = gpxItem.analysis;
-		boolean joinSegments = displayHelper.isJoinSegments();
-		float totalDistance = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-		float timeSpan = !joinSegments && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
-		String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-		String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
-		String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-		String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
+		List<GpxDisplayGroup> groups = displayHelper.getOriginalGroups(filterTypes);
+		if (!Algorithms.isEmpty(groups)) {
+			GpxDisplayItem gpxItem = TrackDisplayHelper.flatten(groups).get(0);
+			GPXTrackAnalysis analysis = gpxItem.analysis;
+			boolean joinSegments = displayHelper.isJoinSegments();
+			float totalDistance = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+			float timeSpan = !joinSegments && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+			String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
+			String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+			String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
+			String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
 
-		StatBlock sDistance = new StatBlock(app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
-				R.drawable.ic_action_track_16, R.color.icon_color_default_light, GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED);
-		StatBlock sAscent = new StatBlock(app.getString(R.string.altitude_ascent), asc,
-				R.drawable.ic_action_arrow_up_16, R.color.gpx_chart_red, GPXDataSetType.SLOPE, null);
-		StatBlock sDescent = new StatBlock(app.getString(R.string.altitude_descent), desc,
-				R.drawable.ic_action_arrow_down_16, R.color.gpx_pale_green, GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE);
-		StatBlock sAvSpeed = new StatBlock(app.getString(R.string.average_speed), avg,
-				R.drawable.ic_action_speed_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null);
-		StatBlock sMaxSpeed = new StatBlock(app.getString(R.string.max_speed), max,
-				R.drawable.ic_action_max_speed_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null);
-		StatBlock sTimeSpan = new StatBlock(app.getString(R.string.shared_string_time_span),
-				Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()),
-				R.drawable.ic_action_time_span_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null);
+			StatBlock sDistance = new StatBlock(app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
+					R.drawable.ic_action_track_16, R.color.icon_color_default_light, GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED);
+			StatBlock sAscent = new StatBlock(app.getString(R.string.altitude_ascent), asc,
+					R.drawable.ic_action_arrow_up_16, R.color.gpx_chart_red, GPXDataSetType.SLOPE, null);
+			StatBlock sDescent = new StatBlock(app.getString(R.string.altitude_descent), desc,
+					R.drawable.ic_action_arrow_down_16, R.color.gpx_pale_green, GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE);
+			StatBlock sAvSpeed = new StatBlock(app.getString(R.string.average_speed), avg,
+					R.drawable.ic_action_speed_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null);
+			StatBlock sMaxSpeed = new StatBlock(app.getString(R.string.max_speed), max,
+					R.drawable.ic_action_max_speed_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null);
+			StatBlock sTimeSpan = new StatBlock(app.getString(R.string.shared_string_time_span),
+					Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()),
+					R.drawable.ic_action_time_span_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null);
 
-		LinearLayoutManager llManager = new LinearLayoutManager(app);
-		llManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-		rvOverview.setLayoutManager(llManager);
-		rvOverview.setItemAnimator(new DefaultItemAnimator());
-		List<StatBlock> items = Arrays.asList(sDistance, sAscent, sDescent, sAvSpeed, sMaxSpeed, sTimeSpan);
-		final StatBlockAdapter siAdapter = new StatBlockAdapter(items);
-		rvOverview.setAdapter(siAdapter);
-		rvOverview.addItemDecoration(new HorizontalDividerDecoration(app));
+			LinearLayoutManager llManager = new LinearLayoutManager(app);
+			llManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+			rvOverview.setLayoutManager(llManager);
+			rvOverview.setItemAnimator(new DefaultItemAnimator());
+			List<StatBlock> items = Arrays.asList(sDistance, sAscent, sDescent, sAvSpeed, sMaxSpeed, sTimeSpan);
+			final StatBlockAdapter siAdapter = new StatBlockAdapter(items);
+			rvOverview.setAdapter(siAdapter);
+			rvOverview.addItemDecoration(new HorizontalDividerDecoration(app));
+		} else {
+			AndroidUiHelper.updateVisibility(rvOverview, false);
+		}
 	}
 
 	private void initShowButton(final int iconColorDef, final int iconColorPres) {

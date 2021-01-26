@@ -9,6 +9,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -98,6 +99,7 @@ import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCa
 public class MenuBuilder {
 
 	private static final int PICK_IMAGE = 1231;
+	private static final int MAX_IMAGE_LENGTH = 2048;
 	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
@@ -505,10 +507,11 @@ public class MenuBuilder {
 	}
 
 	private void uploadImageToPlace(InputStream image) {
-		InputStream serverData = new ByteArrayInputStream(compressImage(image));
+		InputStream serverData = new ByteArrayInputStream(compressImageToJpeg(image));
 		final String baseUrl = OPRConstants.getBaseUrl(app);
+		// all these should be constant
 		String url = baseUrl + "api/ipfs/image";
-		String response = NetworkUtils.sendPostDataRequest(url, serverData);
+		String response = NetworkUtils.sendPostDataRequest(url, "file", "compressed.jpeg", serverData);
 		if (response != null) {
 			int res = 0;
 			try {
@@ -571,11 +574,27 @@ public class MenuBuilder {
 		}
 	}
 
-	private byte[] compressImage(InputStream image) {
+	private byte[] compressImageToJpeg(InputStream image) {
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
 		Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		bmp.compress(Bitmap.CompressFormat.PNG, 70, os);
+		int h = bmp.getHeight();
+		int w = bmp.getWidth();
+		boolean scale = false;
+		while (w > MAX_IMAGE_LENGTH || h > MAX_IMAGE_LENGTH) {
+			w = w / 2;
+			h = h / 2;
+			scale = true;
+		}
+		if (scale) {
+			Matrix matrix = new Matrix();
+			matrix.postScale(w, h);
+			Bitmap resizedBitmap = Bitmap.createBitmap(
+					bmp, 0, 0, w, h, matrix, false);
+			bmp.recycle();
+			bmp = resizedBitmap;
+		}
+		bmp.compress(Bitmap.CompressFormat.JPEG, 90, os);
 		return os.toByteArray();
 	}
 
