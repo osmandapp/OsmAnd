@@ -78,7 +78,7 @@ public class OverviewCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		int iconColorDef = R.color.icon_color_active_light;
+		int iconColorDef = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
 		int iconColorPres = R.color.active_buttons_and_links_text_dark;
 		boolean fileAvailable = gpxFile.path != null && !gpxFile.showCurrentTrack;
 
@@ -157,7 +157,7 @@ public class OverviewCard extends BaseCard {
 							@ColorRes int iconColorDef, @ColorRes int iconColorPres, @Nullable final StatBlockCallback callback) {
 		final AppCompatImageView icon = item.findViewById(R.id.image);
 		final AppCompatImageView filled = item.findViewById(R.id.filled);
-		filled.setImageResource(R.drawable.bg_topbar_shield_exit_ref);
+		filled.setImageResource(nightMode ? R.drawable.bg_plugin_logo_enabled_dark : R.drawable.bg_topbar_shield_exit_ref);
 		filled.setAlpha(0.1f);
 		if (callback != null) {
 			callback.run(icon);
@@ -168,12 +168,12 @@ public class OverviewCard extends BaseCard {
 		item.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (callback != null) {
-					callback.run(icon);
-				}
 				CardListener listener = getListener();
 				if (listener != null) {
 					listener.onCardButtonPressed(OverviewCard.this, buttonIndex);
+					if (callback != null) {
+						callback.run(icon);
+					}
 				}
 			}
 		});
@@ -236,10 +236,13 @@ public class OverviewCard extends BaseCard {
 		@Override
 		public void onBindViewHolder(StatBlockViewHolder holder, int position) {
 			final StatBlock item = statBlocks.get(position);
+			final int textColor = nightMode ?
+					app.getResources().getColor(R.color.active_color_primary_dark)
+					: app.getResources().getColor(R.color.active_color_primary_light);
 
 			holder.valueText.setText(item.value);
 			holder.titleText.setText(item.title);
-			holder.valueText.setTextColor(app.getResources().getColor(R.color.active_color_primary_light));
+			holder.valueText.setTextColor(textColor);
 			holder.titleText.setTextColor(app.getResources().getColor(R.color.text_color_secondary_light));
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
