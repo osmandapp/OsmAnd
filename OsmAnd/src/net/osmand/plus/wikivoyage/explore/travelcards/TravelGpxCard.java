@@ -89,15 +89,15 @@ public class TravelGpxCard extends BaseTravelCard {
 
 	public static class TravelGpxVH extends RecyclerView.ViewHolder {
 
-		final TextView title;
-		final TextView user;
-		final TextView distance;
-		final TextView diffElevationUp;
-		final TextView diffElevationDown;
-		final TextView leftButton;
-		final TextView rightButton;
-		final View divider;
-		final View shadow;
+		public final TextView title;
+		public final TextView user;
+		public final TextView distance;
+		public final TextView diffElevationUp;
+		public final TextView diffElevationDown;
+		public final TextView leftButton;
+		public final TextView rightButton;
+		public final View divider;
+		public final View shadow;
 
 		public TravelGpxVH(final View itemView) {
 			super(itemView);

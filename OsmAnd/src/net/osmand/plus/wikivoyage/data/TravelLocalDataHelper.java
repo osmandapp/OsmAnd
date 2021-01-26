@@ -143,6 +143,9 @@ public class TravelLocalDataHelper {
 	@Nullable
 	private TravelArticle getArticle(String title, String lang) {
 		for (TravelArticle article : savedArticles) {
+			if (article.lang == null && lang == null && article.title != null && article.title.equals(title)) {
+				return article;
+			}
 			if (article.title != null && article.title.equals(title) && article.lang != null && article.lang.equals(lang)) {
 				return article;
 			}
@@ -477,12 +480,23 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					conn.execSQL("DELETE FROM " + BOOKMARKS_TABLE_NAME +
-									" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
-									" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
-									" AND " + BOOKMARKS_COL_LANG + " = ?" +
-									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{article.title, article.routeId, article.lang, travelBook});
+					String query;
+					Object[] parameters;
+					if (article.lang == null) {
+						query = "DELETE FROM " + BOOKMARKS_TABLE_NAME +
+								" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
+								" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
+								" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
+						parameters = new Object[]{article.title, article.routeId, travelBook};
+					} else {
+						query = "DELETE FROM " + BOOKMARKS_TABLE_NAME +
+								" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
+								" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
+								" AND " + BOOKMARKS_COL_LANG + " = ?" +
+								" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
+						parameters = new Object[]{article.title, article.routeId, article.lang, travelBook};
+					}
+					conn.execSQL(query, parameters);
 				} finally {
 					conn.close();
 				}
@@ -537,7 +551,12 @@ public class TravelLocalDataHelper {
 
 		@NonNull
 		private TravelArticle readSavedArticle(SQLiteCursor cursor) {
-			TravelArticle res = new TravelArticle();
+			TravelArticle res;
+			if (cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_LANG)) == null) {
+				res = new TravelGpx();
+			} else {
+				res = new TravelArticle();
+			}
 			res.title = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_ARTICLE_TITLE));
 			res.lang = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_LANG));
 			res.aggregatedPartOf = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_IS_PART_OF));

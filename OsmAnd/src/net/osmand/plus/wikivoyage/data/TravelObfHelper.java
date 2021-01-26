@@ -8,11 +8,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
@@ -48,6 +50,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import static net.osmand.GPXUtilities.WptPt;
 import static net.osmand.GPXUtilities.writeGpxFile;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_DOWN;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_UP;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class TravelObfHelper implements TravelHelper {
@@ -168,25 +174,26 @@ public class TravelObfHelper implements TravelHelper {
 	private Map<String, TravelArticle> readRoutePoint(File file, Amenity amenity) {
 		Map<String, TravelArticle> articles = new HashMap<>();
 		TravelGpx res = new TravelGpx();
+		res.file = file;
 		String title = amenity.getName("en");
 		res.title = capitalizeFirstLetter(getGpxTitle(Algorithms.isEmpty(title) ? amenity.getName() : title));
 		res.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
 		try {
-			res.totalDistance = Float.parseFloat(Algorithms.emptyIfNull(amenity.getTagContent("distance")));
+			res.totalDistance = Float.parseFloat(Algorithms.emptyIfNull(amenity.getTagContent(DISTANCE)));
 		} catch (NumberFormatException e) {
 			LOG.debug(e.getMessage(), e);
 		}
 		try {
-			res.diffElevationUp = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent("diff_ele_up")));
+			res.diffElevationUp = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_UP)));
 		} catch (NumberFormatException e) {
 			LOG.debug(e.getMessage(), e);
 		}
 		try {
-			res.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent("diff_ele_down")));
+			res.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_DOWN)));
 		} catch (NumberFormatException e) {
 			LOG.debug(e.getMessage(), e);
 		}
-		res.user = Algorithms.emptyIfNull(amenity.getTagContent("user"));
+		res.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
 		articles.put("en", res);
 		return articles;
 	}
@@ -251,6 +258,66 @@ public class TravelObfHelper implements TravelHelper {
 				WptPt wptPt = createWptPt(amenity, article.getLang());
 				gpxFile.addPoint(wptPt);
 			}
+		}
+		return gpxFile;
+	}
+
+	@Nullable
+	private GPXFile buildTravelGpxFile(@NonNull final TravelGpx article) {
+		String routeId = article.getRouteId();
+		final String ref = routeId.substring(routeId.length() - 3);
+		final List<BinaryMapDataObject> segmentList = new ArrayList<>();
+
+		for (BinaryMapIndexReader reader : getReaders()) {
+			try {
+				if (article.file != null && !article.file.equals(reader.getFile())) {
+					continue;
+				}
+				BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(
+						0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15, null,
+						new ResultMatcher<BinaryMapDataObject>() {
+							@Override
+							public boolean publish(BinaryMapDataObject object) {
+								if (object.getPointsLength() > 1) {
+									if (object.getObjectNames().get(2).equals(ref)
+											&& capitalizeFirstLetter(getGpxTitle(object.getObjectNames().get(1))).equals(article.title)) {
+										segmentList.add(object);
+									}
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
+				reader.searchMapIndex(sr);
+				if (!Algorithms.isEmpty(segmentList)) {
+					break;
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		GPXFile gpxFile = null;
+		if (!segmentList.isEmpty()) {
+			GPXUtilities.Track track = new GPXUtilities.Track();
+			for (BinaryMapDataObject segment : segmentList) {
+				List<WptPt> pointList = new ArrayList<>();
+				GPXUtilities.TrkSegment trkSegment = new GPXUtilities.TrkSegment();
+				for (int i = 0; i < segment.getPointsLength(); i++) {
+					WptPt point = new WptPt();
+					point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
+					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
+					pointList.add(point);
+				}
+				trkSegment.points = pointList;
+				track.segments.add(trkSegment);
+			}
+			gpxFile = new GPXFile(article.getTitle(), article.getLang(), "");
+			gpxFile.tracks = new ArrayList<>();
+			gpxFile.tracks.add(track);
 		}
 		return gpxFile;
 	}
@@ -744,7 +811,12 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public File createGpxFile(@NonNull final TravelArticle article) {
-		final GPXFile gpx = article.getGpxFile();
+		final GPXFile gpx;
+		if (article instanceof TravelGpx) {
+			gpx = buildTravelGpxFile((TravelGpx) article);
+		} else {
+			gpx = article.getGpxFile();
+		}
 		File file = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
 		writeGpxFile(file, gpx);
 		return file;

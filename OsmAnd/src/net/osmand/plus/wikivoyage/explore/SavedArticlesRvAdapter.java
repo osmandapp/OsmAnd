@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,16 +18,20 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +39,8 @@ import java.util.List;
 public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	private static final int HEADER_TYPE = 0;
-	private static final int ITEM_TYPE = 1;
+	private static final int ARTICLE_TYPE = 1;
+	private static final int GPX_TYPE = 2;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -45,6 +52,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	private final Drawable readIcon;
 	private final Drawable deleteIcon;
 	private PicassoUtils picasso;
+	boolean nightMode;
 
 	public void setListener(Listener listener) {
 		this.listener = listener;
@@ -54,21 +62,34 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		this.app = app;
 		this.settings = app.getSettings();
 		picasso = PicassoUtils.getPicasso(app);
+		nightMode = !app.getSettings().isLightContent();
+		readIcon = getActiveIcon(R.drawable.ic_action_read_article);
+		deleteIcon = getActiveIcon(R.drawable.ic_action_read_later_fill);
+	}
 
-		int colorId = settings.isLightContent()
-				? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
-		UiUtilities ic = app.getUIUtilities();
-		readIcon = ic.getIcon(R.drawable.ic_action_read_article, colorId);
-		deleteIcon = ic.getIcon(R.drawable.ic_action_read_later_fill, colorId);
+	private Drawable getActiveIcon(@DrawableRes int iconId) {
+		int colorId = nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light;
+		return app.getUIUtilities().getIcon(iconId, colorId);
 	}
 
 	@NonNull
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		boolean header = viewType == HEADER_TYPE;
-		int layoutId = header ? R.layout.wikivoyage_list_header : R.layout.wikivoyage_article_card;
-		View itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
-		return header ? new HeaderVH(itemView) : new ItemVH(itemView);
+		switch (viewType) {
+			case HEADER_TYPE:
+				return new HeaderVH(inflate(parent, R.layout.wikivoyage_list_header));
+			case ARTICLE_TYPE:
+				return new ItemVH(inflate(parent, R.layout.wikivoyage_article_card));
+			case GPX_TYPE:
+				return new TravelGpxCard.TravelGpxVH(inflate(parent, R.layout.wikivoyage_travel_gpx_card));
+			default:
+				throw new RuntimeException("Unsupported view type: " + viewType);
+		}
+	}
+
+	@NonNull
+	private View inflate(@NonNull ViewGroup parent, @LayoutRes int layoutId) {
+		return LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
 	}
 
 	@Override
@@ -77,7 +98,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			final HeaderVH holder = (HeaderVH) viewHolder;
 			holder.title.setText((String) getItem(position));
 			holder.description.setText(String.valueOf(items.size() - 1));
-		} else {
+		} else if (viewHolder instanceof ItemVH) {
 			final ItemVH holder = (ItemVH) viewHolder;
 			TravelArticle article = (TravelArticle) getItem(position);
 			final String url = TravelArticle.getImageUrl(article.getImageTitle(), false);
@@ -111,6 +132,50 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			holder.rightButton.setCompoundDrawablesWithIntrinsicBounds(null, null, deleteIcon, null);
 			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
 			holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
+		} else if (viewHolder instanceof TravelGpxCard.TravelGpxVH) {
+			final TravelGpx article = (TravelGpx) getItem(position);
+			final TravelGpxCard.TravelGpxVH holder = (TravelGpxCard.TravelGpxVH) viewHolder;
+			holder.title.setText(article.getTitle());
+			Drawable icon = getActiveIcon(R.drawable.ic_action_user_account_16);
+			holder.user.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+			holder.user.setText(WikiArticleHelper.getPartialContent(article.user));
+			AndroidUtils.setBackground(app, holder.user, nightMode, R.drawable.btn_border_bg_light, R.drawable.btn_border_bg_dark);
+			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
+			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));
+			holder.diffElevationDown.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationDown, app));
+			holder.leftButton.setText(app.getString(R.string.shared_string_view));
+			View.OnClickListener readClickListener = new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					app.getTravelHelper().createGpxFile(article);
+				}
+			};
+			holder.leftButton.setOnClickListener(readClickListener);
+			holder.itemView.setOnClickListener(readClickListener);
+			holder.leftButton.setCompoundDrawablesWithIntrinsicBounds(readIcon, null, null, null);
+			updateSaveButton(holder, article);
+		}
+	}
+
+	private void updateSaveButton(final TravelGpxCard.TravelGpxVH holder, final TravelGpx article) {
+		if (article != null) {
+			final TravelLocalDataHelper helper = app.getTravelHelper().getBookmarksHelper();
+			final boolean saved = helper.isArticleSaved(article);
+			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
+			holder.rightButton.setText(saved ? R.string.shared_string_remove : R.string.shared_string_save);
+			holder.rightButton.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
+			holder.rightButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (saved) {
+						helper.removeArticleFromSaved(article);
+					} else {
+						app.getTravelHelper().createGpxFile(article);
+						helper.addArticleToSaved(article);
+					}
+					updateSaveButton(holder, article);
+				}
+			});
 		}
 	}
 
@@ -118,8 +183,10 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	public int getItemViewType(int position) {
 		if (getItem(position) instanceof String) {
 			return HEADER_TYPE;
+		} else if (getItem(position) instanceof TravelGpx) {
+			return GPX_TYPE;
 		}
-		return ITEM_TYPE;
+		return ARTICLE_TYPE;
 	}
 
 	@Override
