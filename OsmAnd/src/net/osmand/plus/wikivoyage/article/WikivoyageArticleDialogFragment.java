@@ -44,6 +44,7 @@ import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -148,6 +149,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				FragmentManager fm = getFragmentManager();
 				if (article == null || activity == null || fm == null) {
 					return;
+				}
+				if (activity instanceof WikivoyageExploreActivity) {
+					WikivoyageExploreActivity exploreActivity = (WikivoyageExploreActivity) activity;
+					exploreActivity.setArticle(article);
 				}
 				TravelHelper travelHelper = getMyApplication().getTravelHelper();
 				File file = travelHelper.createGpxFile(article);
