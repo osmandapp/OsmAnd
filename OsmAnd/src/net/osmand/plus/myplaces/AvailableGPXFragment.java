@@ -72,7 +72,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
@@ -104,7 +103,7 @@ import java.util.Set;
 import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.TrackMenuFragment.OPEN_TRACK_MENU;
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 import static net.osmand.util.Algorithms.formatDuration;
 import static net.osmand.util.Algorithms.objectEquals;
@@ -345,7 +344,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				public void onClick(View v) {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						openTrack(activity, null);
+						openTrack(activity, null, storeState());
 					}
 				}
 			});
@@ -412,17 +411,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		ImageView pointsI = (ImageView) currentGpxView.findViewById(R.id.points_icon);
 		pointsI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_waypoint_16));
 		updateCurrentTrack();
-	}
-
-	public static void openTrack(Context context, File file) {
-		Bundle bundle = new Bundle();
-		bundle.putBoolean(OPEN_TRACK_MENU, true);
-		if (file == null) {
-			bundle.putBoolean(TrackActivity.CURRENT_RECORDING, true);
-		} else {
-			bundle.putString(TrackActivity.TRACK_FILE_NAME, file.getAbsolutePath());
-		}
-		MapActivity.launchMapActivityMoveToTop(context, null, null, bundle);
 	}
 
 	public void reloadTracks() {
@@ -834,7 +822,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			app.showToastMessage(R.string.file_can_not_be_moved);
 		}
   }
-      
+
 	public void renamedTo(File file) {
 		reloadTracks();
 	}
@@ -1609,7 +1597,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		GpxInfo item = allGpxAdapter.getChild(groupPosition, childPosition);
 
 		if (!selectionMode) {
-			openTrack(getActivity(), item.file);
+			openTrack(getActivity(), item.file, storeState());
 		} else {
 			if (!selectedItems.contains(item)) {
 				selectedItems.add(item);

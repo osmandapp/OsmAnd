@@ -1,7 +1,6 @@
 package net.osmand.plus.measurementtool;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -10,21 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-
-import static net.osmand.plus.myplaces.AvailableGPXFragment.openTrack;
 
 public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -62,7 +58,7 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 					public void onClick(View v) {
 						FragmentActivity activity = getActivity();
 						if (activity != null && !Algorithms.isEmpty(fileName)) {
-							openTrack(activity, new File(fileName));
+							TrackMenuFragment.openTrack(activity, new File(fileName), null);
 						}
 						dismiss();
 					}

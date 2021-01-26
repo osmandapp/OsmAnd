@@ -20,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -28,8 +29,6 @@ import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-
-import static net.osmand.plus.myplaces.AvailableGPXFragment.openTrack;
 
 public class WptPtMenuBuilder extends MenuBuilder {
 
@@ -180,7 +179,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					openTrack(mapActivity, new File(gpxFile.path));
+					TrackMenuFragment.openTrack(mapActivity, new File(gpxFile.path), null);
 				}
 			});
 			view.addView(button);

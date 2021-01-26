@@ -22,8 +22,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer;
 
 import java.io.File;
 
-import static net.osmand.plus.myplaces.AvailableGPXFragment.openTrack;
-
 public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	private final View view;
 	private final TextView title;
@@ -151,7 +149,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		if (fragment != null) {
 			fragment.show();
 		} else {
-			openTrack(mapActivity, new File(newGpxPoint.getGpx().path));
+			TrackMenuFragment.openTrack(mapActivity, new File(newGpxPoint.getGpx().path), null);
 		}
 	}
 

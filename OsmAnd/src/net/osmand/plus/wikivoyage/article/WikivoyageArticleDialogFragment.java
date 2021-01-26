@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.osmand.plus.myplaces.AvailableGPXFragment.openTrack;
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
 import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
 
 
@@ -151,7 +151,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				}
 				TravelHelper travelHelper = getMyApplication().getTravelHelper();
 				File file = travelHelper.createGpxFile(article);
-				openTrack(activity, new File(file.getAbsolutePath()));
+				openTrack(activity, new File(file.getAbsolutePath()), null);
 			}
 		});
 
