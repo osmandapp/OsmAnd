@@ -362,7 +362,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(@NonNull final TravelArticle article) {
+	public synchronized Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(@NonNull final TravelArticle article) {
 		final String lang = article.getLang();
 		final String title = article.getTitle();
 		if (TextUtils.isEmpty(lang) || TextUtils.isEmpty(title)) {
