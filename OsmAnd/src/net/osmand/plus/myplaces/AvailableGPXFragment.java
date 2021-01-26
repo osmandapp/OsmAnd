@@ -13,8 +13,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +25,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -103,14 +100,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.OPEN_GPX_REQUEST;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.TrackMenuFragment.OPEN_TRACK_MENU;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-import static net.osmand.util.Algorithms.collectDirs;
 import static net.osmand.util.Algorithms.formatDuration;
 import static net.osmand.util.Algorithms.objectEquals;
 import static net.osmand.util.Algorithms.removeAllFiles;
@@ -348,10 +343,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			currentGpxView.findViewById(R.id.current_track_info).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
-					newIntent.putExtra(TrackActivity.CURRENT_RECORDING, true);
-					newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(newIntent);
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						openTrack(activity, null);
+					}
 				}
 			});
 			listView.addHeaderView(currentGpxView);
@@ -419,16 +414,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		updateCurrentTrack();
 	}
 
-	public static void openTrack(Activity a, final File f) {
-		Intent newIntent = new Intent(a, ((OsmandApplication) a.getApplication()).getAppCustomization().getTrackActivity());
-		// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+	public static void openTrack(Activity activity, final File f) {
+		Bundle bundle = new Bundle();
+		bundle.putBoolean(OPEN_TRACK_MENU, true);
 		if (f == null) {
-			newIntent.putExtra(TrackActivity.CURRENT_RECORDING, true);
+			bundle.putBoolean(TrackActivity.CURRENT_RECORDING, true);
 		} else {
-			newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, f.getAbsolutePath());
+			bundle.putString(TrackActivity.TRACK_FILE_NAME, f.getAbsolutePath());
 		}
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		a.startActivityForResult(newIntent, OPEN_GPX_REQUEST);
+		MapActivity.launchMapActivityMoveToTop(activity, null, null, bundle);
 	}
 
 	public void reloadTracks() {
