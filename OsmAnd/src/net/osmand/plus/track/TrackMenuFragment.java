@@ -270,7 +270,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			setupToolbar();
 			updateHeader();
 			setupButtons(view);
-			enterTrackAppearanceMode();
 			runLayoutListener();
 		}
 		return view;
@@ -458,7 +457,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int currentMenuState, int previousMenuState) {
 		super.onContextMenuStateChanged(fragment, currentMenuState, previousMenuState);
-		if (currentMenuState != MenuState.FULL_SCREEN && (currentMenuState != previousMenuState || !mapPositionAdjusted)) {
+
+		boolean changed = currentMenuState != previousMenuState;
+		if (changed) {
+			updateControlsVisibility(true);
+		}
+		if (currentMenuState != MenuState.FULL_SCREEN && (changed || !mapPositionAdjusted)) {
 			adjustMapPosition(getViewY());
 		}
 	}
@@ -466,7 +470,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		exitTrackAppearanceMode();
 		updateStatusBarColor();
 	}
 
@@ -477,6 +480,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity != null && trackChartPoints != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
 		}
+		updateControlsVisibility(true);
 		startLocationUpdate();
 	}
 
@@ -487,6 +491,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
 		}
+		updateControlsVisibility(false);
 		stopLocationUpdate();
 	}
 
@@ -572,26 +577,25 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		updateContent();
 	}
 
-	private void enterTrackAppearanceMode() {
+	public void updateControlsVisibility(boolean menuVisible) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel,
-					R.id.map_center_info);
+			boolean topControlsVisible = shouldShowTopControls(menuVisible);
+			boolean bottomControlsVisible = shouldShowBottomControls(menuVisible);
+			MapContextMenu.updateControlsVisibility(mapActivity, topControlsVisible, bottomControlsVisible);
 		}
 	}
 
-	private void exitTrackAppearanceMode() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel,
-					R.id.map_center_info,
-					R.id.map_search_button);
-		}
+	public boolean shouldShowTopControls() {
+		return shouldShowTopControls(isVisible());
+	}
+
+	public boolean shouldShowTopControls(boolean menuVisible) {
+		return !menuVisible || !isPortrait() || getCurrentMenuState() == MenuState.HEADER_ONLY;
+	}
+
+	public boolean shouldShowBottomControls(boolean menuVisible) {
+		return !menuVisible || !isPortrait();
 	}
 
 	@Override
