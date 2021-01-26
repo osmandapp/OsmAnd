@@ -259,6 +259,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 			if (isPortrait()) {
 				AndroidUiHelper.updateVisibility(getTopShadow(), true);
+				AndroidUiHelper.updateVisibility(view.findViewById(R.id.map_my_location_button), false);
 			} else {
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
