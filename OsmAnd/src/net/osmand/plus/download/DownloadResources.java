@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -358,7 +359,9 @@ public class DownloadResources extends DownloadResourceGroup {
 				continue;
 			}
 			if (ii.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
-				wikivoyageMaps.addItem(ii);
+				if (app.getTravelHelper() instanceof TravelDbHelper) {
+					wikivoyageMaps.addItem(ii);
+				}
 				continue;
 			}
 			if (ii.getType() == DownloadActivityType.TRAVEL_FILE) {

@@ -56,7 +56,7 @@ public class TravelObfHelper implements TravelHelper {
 	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
 	public static final int POPULAR_ARTICLES_SEARCH_RADIUS = 100000;
 	public static final int ARTICLE_SEARCH_RADIUS = 50000;
-	public static final int MAX_POPULAR_ARTICLES_COUNT = 100;
+	public static final int MAX_POPULAR_ARTICLES_COUNT = 30;
 
 	private final OsmandApplication app;
 	private final Collator collator;
@@ -510,7 +510,7 @@ public class TravelObfHelper implements TravelHelper {
 				}
 			}
 		}
-		if (article == null) {
+		if (article == null && articles == null) {
 			article = findArticleById(articleId, lang);
 		}
 		if (article != null && !article.gpxFileRead && forceReadPoints) {
