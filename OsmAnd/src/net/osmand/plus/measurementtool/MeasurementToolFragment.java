@@ -104,6 +104,7 @@ import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCo
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
+import static net.osmand.plus.myplaces.AvailableGPXFragment.openTrack;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
@@ -1914,11 +1915,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				GpxData gpxData = editingCtx.getGpxData();
 				GPXFile gpx = gpxData != null ? gpxData.getGpxFile() : null;
 				if (gpx != null) {
-					Intent newIntent = new Intent(mapActivity, app.getAppCustomization().getTrackActivity());
-					newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
-					newIntent.putExtra(TrackActivity.OPEN_TRACKS_LIST, true);
-					newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(newIntent);
+					openTrack(mapActivity, new File(gpx.path));
 				}
 			}
 			editingCtx.resetRouteSettingsListener();

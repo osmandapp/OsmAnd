@@ -66,6 +66,7 @@ import static net.osmand.IndexConstants.SQLITE_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.IndexConstants.WPT_CHART_FILE_EXT;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.plus.myplaces.AvailableGPXFragment.openTrack;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
@@ -596,10 +597,7 @@ public class ImportHelper {
 
 	private void showGpxInDetailsActivity(String gpxFilePath) {
 		if (!Algorithms.isEmpty(gpxFilePath)) {
-			Intent newIntent = new Intent(activity, app.getAppCustomization().getTrackActivity());
-			newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxFilePath);
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			activity.startActivity(newIntent);
+			openTrack(activity, new File(gpxFilePath));
 		}
 	}
 

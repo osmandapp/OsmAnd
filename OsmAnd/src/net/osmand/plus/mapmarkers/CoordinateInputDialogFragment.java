@@ -92,6 +92,7 @@ import java.util.Locale;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 import static android.content.Context.CLIPBOARD_SERVICE;
+import static net.osmand.plus.myplaces.AvailableGPXFragment.openTrack;
 
 public class CoordinateInputDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -1097,11 +1098,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								Intent intent = new Intent(app, app.getAppCustomization().getTrackActivity());
-								intent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
-								intent.putExtra(TrackActivity.TRACK_FILE_NAME, getGpx().path);
-								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-								startActivity(intent);
+								openTrack(app, new File(getGpx().path));
 							}
 						});
 				UiUtilities.setupSnackbar(snackbar, !lightTheme);

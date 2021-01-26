@@ -110,6 +110,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener {
 
+	public static final String OPEN_TRACK_MENU = "open_track_menu";
+
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
 
@@ -199,7 +201,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {//
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();

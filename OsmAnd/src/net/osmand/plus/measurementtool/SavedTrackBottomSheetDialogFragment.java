@@ -24,6 +24,8 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 
+import static net.osmand.plus.myplaces.AvailableGPXFragment.openTrack;
+
 public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SavedTrackBottomSheetDialogFragment.class.getSimpleName();
@@ -60,11 +62,7 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 					public void onClick(View v) {
 						FragmentActivity activity = getActivity();
 						if (activity != null && !Algorithms.isEmpty(fileName)) {
-							OsmandApplication app = ((OsmandApplication) activity.getApplication());
-							Intent newIntent = new Intent(activity, app.getAppCustomization().getTrackActivity());
-							newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, fileName);
-							newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							activity.startActivity(newIntent);
+							openTrack(activity, new File(fileName));
 						}
 						dismiss();
 					}

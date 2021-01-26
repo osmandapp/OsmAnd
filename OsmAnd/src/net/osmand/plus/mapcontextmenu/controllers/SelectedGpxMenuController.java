@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
@@ -17,9 +16,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
@@ -45,21 +42,9 @@ public class SelectedGpxMenuController extends MenuController {
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				OsmandApplication app = mapActivity.getMyApplication();
 				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-				if (Version.isDeveloperVersion(app)) {
-					mapActivity.getContextMenu().hide(false);
-					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile.getGpxFile().path, selectedGpxFile.isShowCurrentTrack());
-				} else {
-					Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
-					if (selectedGpxFile.isShowCurrentTrack()) {
-						intent.putExtra(TrackActivity.CURRENT_RECORDING, true);
-					} else {
-						intent.putExtra(TrackActivity.TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
-					}
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					mapActivity.startActivity(intent);
-				}
+				mapActivity.getContextMenu().hide(false);
+				TrackMenuFragment.showInstance(mapActivity, selectedGpxFile.getGpxFile().path, selectedGpxFile.isShowCurrentTrack());
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);

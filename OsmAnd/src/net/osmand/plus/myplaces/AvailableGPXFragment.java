@@ -414,15 +414,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		updateCurrentTrack();
 	}
 
-	public static void openTrack(Activity activity, final File f) {
+	public static void openTrack(Context context, File file) {
 		Bundle bundle = new Bundle();
 		bundle.putBoolean(OPEN_TRACK_MENU, true);
-		if (f == null) {
+		if (file == null) {
 			bundle.putBoolean(TrackActivity.CURRENT_RECORDING, true);
 		} else {
-			bundle.putString(TrackActivity.TRACK_FILE_NAME, f.getAbsolutePath());
+			bundle.putString(TrackActivity.TRACK_FILE_NAME, file.getAbsolutePath());
 		}
-		MapActivity.launchMapActivityMoveToTop(activity, null, null, bundle);
+		MapActivity.launchMapActivityMoveToTop(context, null, null, bundle);
 	}
 
 	public void reloadTracks() {

@@ -42,12 +42,14 @@ import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptions
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.GROUPS_MARKERS_MENU;
 import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.HISTORY_MARKERS_MENU;
+import static net.osmand.plus.myplaces.AvailableGPXFragment.openTrack;
 
 public class MapMarkersDialogFragment extends DialogFragment implements OnGroupSyncedListener {
 
@@ -486,11 +488,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								Intent intent = new Intent(mapActivity, getMyApplication().getAppCustomization().getTrackActivity());
-								intent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxPath);
-								intent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
-								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-								startActivity(intent);
+								openTrack(mapActivity, new File(gpxPath));
 							}
 						});
 				UiUtilities.setupSnackbar(snackbar, !lightTheme);

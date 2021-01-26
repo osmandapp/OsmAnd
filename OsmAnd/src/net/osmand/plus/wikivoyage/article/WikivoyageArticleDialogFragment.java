@@ -27,14 +27,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -53,6 +51,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.osmand.plus.myplaces.AvailableGPXFragment.openTrack;
 import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
 
 
@@ -151,11 +150,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 					return;
 				}
 				TravelHelper travelHelper = getMyApplication().getTravelHelper();
-				File path = travelHelper.createGpxFile(article);
-				Intent newIntent = new Intent(activity, getMyApplication().getAppCustomization().getTrackActivity());
-				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, path.getAbsolutePath());
-				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(newIntent);
+				File file = travelHelper.createGpxFile(article);
+				openTrack(activity, new File(file.getAbsolutePath()));
 			}
 		});
 
