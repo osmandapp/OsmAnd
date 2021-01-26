@@ -3999,4 +3999,6 @@
     <string name="delete_waypoints">Apagar ponto fixo</string>
     <string name="copy_to_map_markers">Copiar para marcadores de mapa</string>
     <string name="copy_to_map_favorites">Copiar para favoritos</string>
+    <string name="delete_online_routing_engine">Excluir este mecanismo de roteamento online\?</string>
+    <string name="context_menu_read_full">Ler na íntegra</string>
 </resources>
