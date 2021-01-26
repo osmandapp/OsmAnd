@@ -3343,7 +3343,7 @@
     <string name="live_monitoring">Мережеве відстеження</string>
     <string name="save_track_logging_accuracy">Точність журналювання</string>
     <string name="tracks_view_descr">Ви можете знайти всі записи в %1$s або в теці OsmAnd за допомогою файлового провідника.</string>
-    <string name="multimedia_notes_view_descr">Ваші нотатки OSM розміщено в %1$s.</string>
+    <string name="multimedia_notes_view_descr">Ваші примітки OSM розміщено в %1$s.</string>
     <string name="video_notes">Відеопримітки</string>
     <string name="photo_notes">Фотопримітки</string>
     <string name="route_recalculation">Перерахунок маршруту</string>
