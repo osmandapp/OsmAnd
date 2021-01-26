@@ -32,6 +32,8 @@
         android:background="?attr/dashboard_divider" />
 
     <LinearLayout
+        android:id="@+id/interval_view_container"
+        android:background="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center_vertical"
@@ -40,6 +42,7 @@
         android:paddingStart="@dimen/content_padding"
         android:paddingLeft="@dimen/content_padding"
         android:paddingTop="@dimen/bottom_sheet_content_margin"
+        android:paddingBottom="@dimen/bottom_sheet_content_margin"
         android:paddingEnd="@dimen/content_padding"
         android:paddingRight="@dimen/content_padding">
 
@@ -106,8 +109,6 @@
         android:id="@+id/second_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="@dimen/content_padding"
-        android:layout_marginBottom="@dimen/bottom_sheet_content_margin_small"
         android:background="?attr/dashboard_divider" />
 
 </LinearLayout>

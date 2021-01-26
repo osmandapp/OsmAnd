@@ -7,15 +7,16 @@
     android:baselineAligned="false"
     android:gravity="center_vertical"
     android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
-    android:paddingStart="@dimen/content_padding"
-    android:paddingEnd="@dimen/content_padding"
-    android:paddingRight="@dimen/content_padding"
-    android:paddingLeft="@dimen/content_padding">
+    >
 
     <LinearLayout
         android:id="@+id/basic_item_body"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:paddingStart="@dimen/content_padding"
+        android:paddingEnd="@dimen/content_padding"
+        android:paddingRight="@dimen/content_padding"
+        android:paddingLeft="@dimen/content_padding"
         android:layout_weight="1"
         android:background="?attr/selectableItemBackground">
 
@@ -46,8 +47,9 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/bottom_sheet_content_margin"
             android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
-            android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
-            android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             tools:checked="true" />
 
     </LinearLayout>
@@ -73,6 +75,8 @@
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/content_padding"
             android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
             app:srcCompat="@drawable/ic_action_track_line_bold_color" />
 
     </LinearLayout>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
@@ -18,10 +19,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.RangeSlider;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
@@ -49,9 +52,10 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private ImageView upDownBtn;
 	private SwitchCompat confirmEveryRun;
-	private RangeSlider intervalSlider;
 	private TextView intervalValueView;
 	private LinearLayout container;
+	private LinearLayout expandHideIntervalContainer;
+	private View divider;
 	private boolean infoExpanded;
 
 	@Override
@@ -92,8 +96,10 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		});
 
+		divider = itemView.findViewById(R.id.second_divider);
+		expandHideIntervalContainer = itemView.findViewById(R.id.interval_view_container);
 		upDownBtn = itemView.findViewById(R.id.up_down_button);
-		upDownBtn.setOnClickListener(new View.OnClickListener() {
+		expandHideIntervalContainer.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -108,8 +114,11 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		updateIntervalLegend();
 
 		container = itemView.findViewById(R.id.always_ask_and_range_slider_container);
-		intervalSlider = itemView.findViewById(R.id.interval_slider);
+		RangeSlider intervalSlider = itemView.findViewById(R.id.interval_slider);
 		intervalSlider.setValueTo(secondsLength + minutesLength - 1);
+		int currentModeColorRes = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
+		int currentModeColor = ContextCompat.getColor(app, currentModeColorRes);
+		UiUtilities.setupSlider(intervalSlider, nightMode, currentModeColor, true);
 		container.setVisibility(View.GONE);
 		intervalSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
 
@@ -126,6 +135,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 				updateIntervalLegend();
 			}
 		});
+
 		for (int i = 0; i < secondsLength + minutesLength; i++) {
 			if (i < secondsLength) {
 				if (settings.SAVE_GLOBAL_TRACK_INTERVAL.get() <= SECONDS[i] * 1000) {
@@ -151,13 +161,19 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		});
 
-		SwitchCompat showTrackOnMapButton = showTrackOnMapView.findViewById(R.id.switch_button);
+		final SwitchCompat showTrackOnMapButton = showTrackOnMapView.findViewById(R.id.switch_button);
 		showTrackOnMapButton.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
-		showTrackOnMapButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
+		View basicItem = itemView.findViewById(R.id.basic_item_body);
+		basicItem.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), isChecked, false);
+			public void onClick(View v) {
+				if (showTrackOnMapButton.isChecked()) {
+					showTrackOnMapButton.setChecked(false);
+					app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), false, false);
+				} else {
+					showTrackOnMapButton.setChecked(true);
+					app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), true, false);
+				}
 			}
 		});
 		UiUtilities.setupCompoundButton(showTrackOnMapButton, nightMode, PROFILE_DEPENDENT);
@@ -217,6 +233,16 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void toggleInfoView() {
 		infoExpanded = !infoExpanded;
+		ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) divider.getLayoutParams();
+		if (getMapActivity() != null) {
+			final int dp8 = AndroidUtils.dpToPx(getMapActivity(), 8f);
+			final int dp16 = AndroidUtils.dpToPx(getMapActivity(), 16f);
+			if (infoExpanded) {
+				AndroidUtils.setMargins(marginParams, 0, dp16, 0, dp8);
+			} else {
+				AndroidUtils.setMargins(marginParams, 0, 0, 0, dp8);
+			}
+		}
 		AndroidUiHelper.updateVisibility(container, infoExpanded);
 		updateUpDownBtn();
 	}
