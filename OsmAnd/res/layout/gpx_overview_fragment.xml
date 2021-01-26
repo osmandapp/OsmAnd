@@ -48,55 +48,60 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="@dimen/content_padding"
-		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_height="@dimen/setting_list_item_small_height"
+		android:layout_marginStart="@dimen/card_padding"
+		android:layout_marginLeft="@dimen/card_padding"
 		android:layout_marginTop="@dimen/content_padding_half"
-		android:layout_marginEnd="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/card_padding"
+		android:layout_marginRight="@dimen/card_padding"
 		android:layout_marginBottom="@dimen/content_padding"
+		android:baselineAligned="false"
+		android:minHeight="@dimen/context_menu_controller_height"
 		android:orientation="horizontal"
 		android:weightSum="4">
-		<!-- todo stretch buttons correctly -->
 
 		<include
 			android:id="@+id/show_button"
 			layout="@layout/item_gpx_action"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginStart="@dimen/list_item_button_padding"
+			android:layout_marginLeft="@dimen/list_item_button_padding"
+			android:layout_marginEnd="@dimen/list_item_button_padding"
+			android:layout_marginRight="@dimen/list_item_button_padding"
 			android:layout_weight="1" />
-
-		<Space
-			android:layout_width="@dimen/content_padding_half"
-			android:layout_height="match_parent" />
 
 		<include
 			android:id="@+id/appearance_button"
 			layout="@layout/item_gpx_action"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginStart="@dimen/list_item_button_padding"
+			android:layout_marginLeft="@dimen/list_item_button_padding"
+			android:layout_marginEnd="@dimen/list_item_button_padding"
+			android:layout_marginRight="@dimen/list_item_button_padding"
 			android:layout_weight="1" />
-
-		<Space
-			android:layout_width="@dimen/content_padding_half"
-			android:layout_height="match_parent" />
 
 		<include
 			android:id="@+id/edit_button"
 			layout="@layout/item_gpx_action"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginStart="@dimen/list_item_button_padding"
+			android:layout_marginLeft="@dimen/list_item_button_padding"
+			android:layout_marginEnd="@dimen/list_item_button_padding"
+			android:layout_marginRight="@dimen/list_item_button_padding"
 			android:layout_weight="1" />
-
-		<Space
-			android:layout_width="@dimen/content_padding_half"
-			android:layout_height="match_parent" />
 
 		<include
 			android:id="@+id/directions_button"
 			layout="@layout/item_gpx_action"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginStart="@dimen/list_item_button_padding"
+			android:layout_marginLeft="@dimen/list_item_button_padding"
+			android:layout_marginEnd="@dimen/list_item_button_padding"
+			android:layout_marginRight="@dimen/list_item_button_padding"
 			android:layout_weight="1" />
 
 	</LinearLayout>
