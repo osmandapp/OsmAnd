@@ -3,7 +3,6 @@ package net.osmand.plus.widgets;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import net.osmand.plus.R;
 
@@ -38,9 +37,18 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 	@Override
 	public void setLabelText(String labelText) {
 		super.setLabelText(labelText);
-		if (!floatingLabel.isSingleLine()) {
-			RelativeLayout.LayoutParams rl = (RelativeLayout.LayoutParams) floatingLabel.getLayoutParams();
-			rl.bottomMargin = rl.topMargin;
-		}
+		floatingLabel.post(new Runnable() {
+			@Override
+			public void run() {
+				if (floatingLabel.getLineCount() > 1) {
+					inputLayout.setPadding(
+							inputLayout.getPaddingLeft(),
+							inputLayout.getPaddingTop() + getResources().getDimensionPixelSize(R.dimen.pages_item_padding),
+							inputLayout.getPaddingRight(),
+							inputLayout.getPaddingBottom()
+					);
+				}
+			}
+		});
 	}
 }
