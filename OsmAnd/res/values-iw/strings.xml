@@ -3986,4 +3986,11 @@
     <string name="routing_engine_vehicle_type_mtb">אופני הרים</string>
     <string name="message_server_error">שגיאת שרת: %1$s</string>
     <string name="message_name_is_already_exists">השם כבר קיים</string>
+    <string name="announcement_time_off_route">סטייה ממסלול</string>
+    <string name="announcement_time_arrive">הגעה ליעד</string>
+    <string name="show_track_on_map">הצגת המסלול על המפה</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">רכיבה חשמלית</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">רכיבת הרים</string>
+    <string name="routing_engine_vehicle_type_cycling_road">רכיבת כביש</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">רכיבה רגילה</string>
 </resources>
