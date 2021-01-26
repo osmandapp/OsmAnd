@@ -1,7 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,19 +28,20 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersSortByDef;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnPointsSavedListener;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersSortByDef;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
+import net.osmand.plus.track.TrackMenuFragment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -167,7 +167,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 		viewPager.setAdapter(adapter);
 
 		progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
-		
+
 		TextView toolbarTitle = mainView.findViewById(R.id.map_markers_toolbar_title);
 		bottomNav = mainView.findViewById(R.id.map_markers_bottom_navigation);
 		toolbarTitle.setTextColor(ContextCompat.getColor(getContext(), lightTheme ? R.color.active_buttons_and_links_text_light : R.color.text_color_primary_dark));
@@ -486,11 +486,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								Intent intent = new Intent(mapActivity, getMyApplication().getAppCustomization().getTrackActivity());
-								intent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxPath);
-								intent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
-								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-								startActivity(intent);
+								TrackMenuFragment.openTrack(mapActivity, new File(gpxPath), null);
 							}
 						});
 				UiUtilities.setupSnackbar(snackbar, !lightTheme);

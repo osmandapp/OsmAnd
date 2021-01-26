@@ -153,12 +153,12 @@ public class GpxSelectionHelper {
 		return followTrackListener;
 	}
 
-	private static class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
+	public static class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
 		private File fileToLoad;
 		private CallbackWithObject<GPXFile> callback;
 
-		GpxFileLoaderTask(File fileToLoad, CallbackWithObject<GPXFile> callback) {
+		public GpxFileLoaderTask(File fileToLoad, CallbackWithObject<GPXFile> callback) {
 			this.fileToLoad = fileToLoad;
 			this.callback = callback;
 		}

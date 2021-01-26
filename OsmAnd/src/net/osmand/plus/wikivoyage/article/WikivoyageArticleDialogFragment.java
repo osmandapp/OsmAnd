@@ -34,7 +34,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -47,6 +46,7 @@ import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper.GpxReadCallback;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
 import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
 
 
@@ -152,12 +153,13 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				if (article == null || activity == null || fm == null) {
 					return;
 				}
+				if (activity instanceof WikivoyageExploreActivity) {
+					WikivoyageExploreActivity exploreActivity = (WikivoyageExploreActivity) activity;
+					exploreActivity.setArticle(article);
+				}
 				TravelHelper travelHelper = getMyApplication().getTravelHelper();
-				File path = travelHelper.createGpxFile(article);
-				Intent newIntent = new Intent(activity, getMyApplication().getAppCustomization().getTrackActivity());
-				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, path.getAbsolutePath());
-				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(newIntent);
+				File file = travelHelper.createGpxFile(article);
+				openTrack(activity, new File(file.getAbsolutePath()), null);
 			}
 		});
 		trackButton.setVisibility(View.GONE);
