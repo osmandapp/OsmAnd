@@ -491,7 +491,7 @@
     <string name="route_kr">靠右行驶</string>
     <string name="rendering_attr_noPolygons_name">隐藏多边形</string>
     <string name="rendering_attr_appMode_name">渲染模式</string>
-    <string name="rendering_attr_contourLines_name"/>
+    <string name="rendering_attr_contourLines_name">显示等高线</string>
     <string name="rendering_attr_hmRendered_name">显示更多地图细节</string>
     <string name="local_index_routing_data">路线规划数据</string>
     <string name="navigate_point_format">格式</string>
@@ -1120,7 +1120,7 @@
     <string name="do_not_send_anonymous_app_usage">不要发送匿名应用使用统计信息</string>
     <string name="restore_purchases">恢复购买内容</string>
     <string name="shared_string_visible">可见性</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd 会搜集您打开应用的哪一部分的信息。您的位置永远不会被发送至服务器，您输入进应用的任何数据或者浏览的区域、搜索内容和下载内容同样不会被搜集。</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd 只会搜集您打开应用的那一部分的信息。您的位置永远不会被发送至服务器，您输入进应用的任何数据或者浏览的区域、搜索内容和下载内容同样不会被搜集。</string>
     <string name="do_not_show_startup_messages">不要在启动时显示信息</string>
     <string name="full_version_thanks">感谢您购买完整版本的 OsmAnd！</string>
     <string name="shared_string_action_name">操作名称</string>
@@ -1915,7 +1915,7 @@
     <string name="map_widget_av_notes">音频/视频注记</string>
     <string name="audionotes_location_not_defined">轻触\"使用位置 …\"以在此添加注记。</string>
     <string name="map_widget_audionotes">音频注记</string>
-    <string name="rendering_attr_alpineHiking_name"/>
+    <string name="rendering_attr_alpineHiking_name">高山远足表(SAC)</string>
     <string name="rendering_attr_alpineHiking_description">依据 SAC 分级计算路径</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">徒步旅行符号叠加层</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">根据 OSMC 轨迹渲染路径。</string>
@@ -3112,4 +3112,16 @@
     <string name="add_address">添加地址</string>
     <string name="access_hint_enter_address">输入地址</string>
     <string name="monitoring_control_start">REC</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd将为选择的配置文件连接路线点。</string>
+    <string name="add_point_before">在之前添加点</string>
+    <string name="add_point_after">在之后添加点</string>
+    <string name="route_point">路线点</string>
+    <string name="save_as_route_point">保存为路线点</string>
+    <string name="route_point_one">路线点1</string>
+    <string name="save_route_point">保存路线点</string>
+    <string name="live_monitoring_max_interval_to_send">用于在线跟踪的时间缓冲区</string>
+    <string name="quick_action_add_gpx">添加轨迹航点</string>
+    <string name="context_menu_item_add_waypoint">添加轨迹航点</string>
+    <string name="save_track_to_gpx_globally">将轨迹记录到GPX文件</string>
+    <string name="disable_recording_once_app_killed_descrp">当应用程序被杀死时，跟踪日志将被暂停（通过最近的应用程序）。（OsmAnd背景指示会从Android通知栏中消失）。</string>
 </resources>

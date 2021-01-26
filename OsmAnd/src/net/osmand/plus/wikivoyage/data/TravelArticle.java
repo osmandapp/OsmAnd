@@ -44,6 +44,7 @@ public class TravelArticle {
 	String aggregatedPartOf;
 
 	long lastModified;
+	boolean gpxFileReading;
 	boolean gpxFileRead;
 
 	@NonNull

@@ -3964,4 +3964,22 @@
     <string name="select_folder">Ischerta sa cartella</string>
     <string name="select_folder_descr">Ischerta una cartella o crea·nde una noa</string>
     <string name="shared_string_empty">Bòidu</string>
+    <string name="announcement_time_intervals">Intervallos de tempus e de distàntzia</string>
+    <string name="start_recording">Incumintza a registrare</string>
+    <string name="show_track_on_map">Ammustra sa rasta in sa mapa</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Cadira a rodas</string>
+    <string name="routing_engine_vehicle_type_hiking">Escursionismu</string>
+    <string name="routing_engine_vehicle_type_walking">A pee</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Tziclismu elètricu</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Tziclismu de monte</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Tziclismu in carreras</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Tziclismu regulare</string>
+    <string name="routing_engine_vehicle_type_hgv">Veìculu de trasportu</string>
+    <string name="routing_engine_vehicle_type_small_truck">Camioneta</string>
+    <string name="routing_engine_vehicle_type_truck">Càmion</string>
+    <string name="routing_engine_vehicle_type_scooter">Motorinu (Scooter)</string>
+    <string name="routing_engine_vehicle_type_racingbike">Bitzicleta de cursa</string>
+    <string name="routing_engine_vehicle_type_mtb">MTB (motosilurante)</string>
+    <string name="message_server_error">Errore de su serbidore: %1$s</string>
+    <string name="message_name_is_already_exists">Su nùmene esistit giai</string>
 </resources>

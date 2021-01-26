@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -75,14 +76,15 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			return;
 		}
 
-		article = getMyApplication().getTravelHelper().getArticleById(articleId, selectedLang);
+		OsmandApplication app = requiredMyApplication();
+		article = app.getTravelHelper().getArticleById(articleId, selectedLang, false, null);
 		if (article == null) {
 			return;
 		}
 		parentsList = new ArrayList<>(Arrays.asList(article.getAggregatedPartOf().split(",")));
 
 		Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap
-				= getMyApplication().getTravelHelper().getNavigationMap(article);
+				= app.getTravelHelper().getNavigationMap(article);
 
 		items.add(new TitleItem(getString(R.string.shared_string_navigation)));
 
