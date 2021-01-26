@@ -4002,4 +4002,10 @@
     <string name="announcement_time_off_route">Abweichung von der Route</string>
     <string name="announcement_time_arrive">Ankunft am Ziel</string>
     <string name="announcement_time_approach">Annährung ans Ziel</string>
+    <string name="context_menu_read_full">Vollständig lesen</string>
+    <string name="delete_online_routing_engine">Dieses Online-Routingmodul löschen\?</string>
+    <string name="context_menu_edit_descr">Beschreibung bearbeiten</string>
+    <string name="delete_waypoints">Wegpunkte löschen</string>
+    <string name="copy_to_map_favorites">In Favoriten kopieren</string>
+    <string name="copy_to_map_markers">In Kartenmarkierungen kopieren</string>
 </resources>
