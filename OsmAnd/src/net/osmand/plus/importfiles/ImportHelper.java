@@ -29,7 +29,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
@@ -37,6 +36,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
@@ -596,10 +596,7 @@ public class ImportHelper {
 
 	private void showGpxInDetailsActivity(String gpxFilePath) {
 		if (!Algorithms.isEmpty(gpxFilePath)) {
-			Intent newIntent = new Intent(activity, app.getAppCustomization().getTrackActivity());
-			newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxFilePath);
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			activity.startActivity(newIntent);
+			TrackMenuFragment.openTrack(activity, new File(gpxFilePath), null);
 		}
 	}
 

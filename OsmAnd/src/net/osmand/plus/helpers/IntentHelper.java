@@ -27,6 +27,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -37,6 +38,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
+import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 
 public class IntentHelper {
@@ -248,6 +251,12 @@ public class IntentHelper {
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
 						break;
 				}
+				mapActivity.setIntent(null);
+			}
+			if (intent.hasExtra(TrackMenuFragment.OPEN_TRACK_MENU)) {
+				String path = intent.getStringExtra(TRACK_FILE_NAME);
+				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
+				TrackMenuFragment.showInstance(mapActivity, path, currentRecording);
 				mapActivity.setIntent(null);
 			}
 		}

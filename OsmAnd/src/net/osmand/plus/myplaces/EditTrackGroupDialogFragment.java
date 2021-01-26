@@ -81,11 +81,15 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		}
 		items.add(new TitleItem(getCategoryName(app, group.getName())));
 
+		boolean trackPoints = group.getType() == GpxDisplayItemType.TRACK_POINTS;
 		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(group.getGpx().path);
-		if (group.getType() == GpxDisplayItemType.TRACK_POINTS && selectedGpxFile != null) {
+		if (trackPoints && selectedGpxFile != null) {
 			items.add(createShowOnMapItem(selectedGpxFile));
 		}
 		items.add(createEditNameItem());
+		if (trackPoints) {
+			items.add(createChangeColorItem());
+		}
 		items.add(new OptionsDividerItem(app));
 
 //		items.add(createCopyToMarkersItem());
@@ -272,8 +276,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final View changeColorView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.change_fav_color, null);
-		((ImageView) changeColorView.findViewById(R.id.change_color_icon))
-				.setImageDrawable(getContentIcon(R.drawable.ic_action_appearance));
+		ImageView icon = ((ImageView) changeColorView.findViewById(R.id.change_color_icon));
+		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_appearance));
+		int margin = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
+		UiUtilities.setMargins(icon, 0, 0, margin, 0);
 		updateColorView((ImageView) changeColorView.findViewById(R.id.colorImage));
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(changeColorView)
