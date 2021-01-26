@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
@@ -45,6 +45,7 @@ import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.plus.wikivoyage.data.TravelHelper.GpxReadCallback;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.util.Algorithms;
 
@@ -75,6 +76,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	private TravelArticle article;
 
 	private TextView trackButton;
+	private ProgressBar gpxProgress;
 	private TextView saveBtn;
 
 	private WikivoyageWebViewClient webViewClient;
@@ -158,6 +160,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				startActivity(newIntent);
 			}
 		});
+		trackButton.setVisibility(View.GONE);
+		gpxProgress = mainView.findViewById(R.id.gpx_progress);
+		gpxProgress.setVisibility(View.GONE);
 
 		saveBtn = (TextView) mainView.findViewById(R.id.save_button);
 
@@ -305,19 +310,23 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			selectedLang = langs.get(0);
 		}
 		articleToolbarText.setText("");
-		article = getMyApplication().getTravelHelper().getArticleById(articleId, selectedLang);
+		article = getMyApplication().getTravelHelper().getArticleById(articleId, selectedLang, true,
+				new GpxReadCallback() {
+					@Override
+					public void onGpxFileReading() {
+						updateTrackButton(true, null);
+					}
+
+					@Override
+					public void onGpxFileRead(@Nullable GPXFile gpxFile) {
+						updateTrackButton(false, gpxFile);
+					}
+				});
 		if (article == null) {
 			return;
 		}
 		webViewClient.setArticle(article);
 		articleToolbarText.setText(article.getTitle());
-		GPXFile gpxFile = article.getGpxFile();
-		if (gpxFile != null && gpxFile.getPointsSize() > 0) {
-			trackButton.setVisibility(View.VISIBLE);
-			trackButton.setText(getString(R.string.shared_string_gpx_points) + " (" + gpxFile.getPointsSize() + ")");
-		} else {
-			trackButton.setVisibility(View.GONE);
-		}
 
 		TravelLocalDataHelper ldh = getMyApplication().getTravelHelper().getBookmarksHelper();
 		ldh.addToHistory(article);
@@ -325,6 +334,21 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		updateSaveButton();
 		selectedLangTv.setText(Algorithms.capitalizeFirstLetter(selectedLang));
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(), "text/html", "UTF-8", null);
+	}
+
+	private void updateTrackButton(boolean processing, @Nullable GPXFile gpxFile) {
+		if (processing) {
+			trackButton.setVisibility(View.GONE);
+			gpxProgress.setVisibility(View.VISIBLE);
+		} else {
+			if (gpxFile != null && gpxFile.getPointsSize() > 0) {
+				trackButton.setVisibility(View.VISIBLE);
+				trackButton.setText(getString(R.string.shared_string_gpx_points) + " (" + gpxFile.getPointsSize() + ")");
+			} else {
+				trackButton.setVisibility(View.GONE);
+			}
+			gpxProgress.setVisibility(View.GONE);
+		}
 	}
 
 	@NonNull
