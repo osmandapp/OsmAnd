@@ -513,7 +513,7 @@ public class TravelObfHelper implements TravelHelper {
 		if (article == null && articles == null) {
 			article = findArticleById(articleId, lang);
 		}
-		if (article != null && !article.gpxFileRead && forceReadPoints) {
+		if (article != null && !article.gpxFileRead && forceReadPoints && !Algorithms.isEmpty(lang)) {
 			article.gpxFile = buildGpxFile(article);
 			article.gpxFileRead = true;
 		}
