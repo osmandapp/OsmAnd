@@ -1,17 +1,13 @@
 package net.osmand.plus.track;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
@@ -22,11 +18,17 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.widgets.EditTextEx;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
@@ -37,6 +39,8 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
 	private EditTextEx editableHtml;
 
+	private String htmlCode;
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,11 +50,16 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		View view = themedInflater.inflate(R.layout.dialog_edit_gpx_description, container, false);
 
 		editableHtml = view.findViewById(R.id.description);
+		editableHtml.requestFocus();
 
 		view.findViewById(R.id.btn_close).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				if (shouldClose()) {
+					dismiss();
+				} else {
+					showDismissDialog();
+				}
 			}
 		});
 
@@ -58,7 +67,7 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			@Override
 			public void onClick(View v) {
 				Editable editable = editableHtml.getText();
-				if (!Algorithms.isEmpty(editable) && !saveGpx(editable.toString())) {
+				if (editable != null && !saveGpx(editable.toString())) {
 					dismiss();
 				}
 			}
@@ -66,13 +75,41 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
 		Bundle args = getArguments();
 		if (args != null) {
-			String html = args.getString(CONTENT_KEY);
-			if (html != null) {
-				editableHtml.setText(html);
+			htmlCode = args.getString(CONTENT_KEY);
+			if (htmlCode != null) {
+				editableHtml.setText(htmlCode);
 			}
 		}
 
 		return view;
+	}
+
+
+
+	private boolean shouldClose() {
+		Editable editable = editableHtml.getText();
+		if (htmlCode == null || editable == null || editable.toString() == null) {
+			return true;
+		}
+		if (htmlCode.equals(editable.toString())) {
+			return true;
+		}
+		return false;
+	}
+
+	private void showDismissDialog() {
+		Context themedContext = UiUtilities.getThemedContext(getMapActivity(), isNightMode(false));
+		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
+		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
+		dismissDialog.setMessage(getString(R.string.exit_without_saving));
+		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
+		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dismiss();
+			}
+		});
+		dismissDialog.show();
 	}
 
 	private boolean saveGpx(final String html) {
