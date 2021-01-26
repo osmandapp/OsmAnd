@@ -18,7 +18,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration;
@@ -125,12 +124,9 @@ public class OverviewCard extends BaseCard {
 					R.drawable.ic_action_time_span_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null, ITEM_TIME);
 
 			final StatBlockAdapter sbAdapter = new StatBlockAdapter(items);
-			LinearLayoutManager llManager = new LinearLayoutManager(app);
-			llManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-			rvOverview.setLayoutManager(llManager);
-			rvOverview.setItemAnimator(new DefaultItemAnimator());
-			rvOverview.setAdapter(sbAdapter);
+			rvOverview.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
 			rvOverview.addItemDecoration(new HorizontalDividerDecoration(app));
+			rvOverview.setAdapter(sbAdapter);
 		}
 	}
 
@@ -305,7 +301,7 @@ public class OverviewCard extends BaseCard {
 		}
 
 		public void drawHorizontal(Canvas c, RecyclerView parent) {
-			for (int i = 0; i < parent.getChildCount(); i++) {
+			for (int i = 0; i < parent.getChildCount() - 1; i++) {
 				final View child = parent.getChildAt(i);
 				final int left = child.getRight() - divider.getIntrinsicWidth() + marginH;
 				final int right = left + divider.getIntrinsicHeight();
@@ -317,8 +313,8 @@ public class OverviewCard extends BaseCard {
 		}
 
 		@Override
-		public void getItemOffsets(Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-			outRect.set(marginH - divider.getIntrinsicWidth(), marginV, marginH + divider.getIntrinsicWidth(), marginV);
+		public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+			outRect.set(marginH - divider.getIntrinsicWidth(), 0, marginH + divider.getIntrinsicWidth(), 0);
 		}
 	}
 
