@@ -79,7 +79,9 @@ public class OsmNotesPoint extends OsmPoint {
 		LatLon thisPos = new LatLon(latitude, longitude);
 		LatLon thatPos = new LatLon(that.latitude, that.longitude);
 		boolean res = thisPos.equals(thatPos);
-		res = res || text != null && text.equals(that.text);
+		if (text != null) {
+			res = res && text.equals(that.text);
+		}
 		return res;
 	}
 

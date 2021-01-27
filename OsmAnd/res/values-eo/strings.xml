@@ -4000,4 +4000,10 @@
     <string name="announcement_time_intervals">Interspacoj distancaj kaj tempaj</string>
     <string name="announcement_time_descr">Tempo de anonco de diversaj voĉaj sciigoj dependas de ilia specoj, nuna naviga kaj implicita naviga rapido.</string>
     <string name="announcement_time_title">Tempo de anonco</string>
+    <string name="copy_to_map_favorites">Kopii al ŝatataj</string>
+    <string name="delete_online_routing_engine">Ĉu forigi tiun ĉi enretan navigilon\?</string>
+    <string name="context_menu_read_full">Legi pli</string>
+    <string name="context_menu_edit_descr">Redakti priskribon</string>
+    <string name="delete_waypoints">Forigi navigadpunktojn</string>
+    <string name="copy_to_map_markers">Kopii al map‑markoj</string>
 </resources>

@@ -549,7 +549,7 @@ public class TravelDbHelper implements TravelHelper {
 
 	@Override
 	@Nullable
-	public TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @NonNull String lang) {
+	public TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle res = null;
 		SQLiteConnection conn = openConnection();
 		String routeId = articleId.routeId;
@@ -566,24 +566,27 @@ public class TravelDbHelper implements TravelHelper {
 		if (res == null) {
 			res = localDataHelper.getSavedArticle(articleId.file, articleId.routeId, lang);
 		}
+		if (res != null && callback != null) {
+			callback.onGpxFileRead(res.gpxFile);
+		}
 		return res;
 	}
 
 	@Nullable
 	@Override
-	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull final String lang) {
-		return getArticleByTitle(title, new QuadRect(), lang);
+	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+		return getArticleByTitle(title, new QuadRect(), lang, readGpx, callback);
 	}
 
 	@Nullable
 	@Override
-	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull LatLon latLon, @NonNull final String lang) {
-		return getArticleByTitle(title, new QuadRect(), lang);
+	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull LatLon latLon, @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+		return getArticleByTitle(title, new QuadRect(), lang, readGpx, callback);
 	}
 
 	@Nullable
 	@Override
-	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull QuadRect rect, @NonNull final String lang) {
+	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull QuadRect rect, @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle res = null;
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
@@ -595,6 +598,9 @@ public class TravelDbHelper implements TravelHelper {
 				}
 				cursor.close();
 			}
+		}
+		if (res != null && callback != null) {
+			callback.onGpxFileRead(res.gpxFile);
 		}
 		return res;
 	}
