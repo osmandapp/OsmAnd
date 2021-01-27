@@ -103,7 +103,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 
 	public interface ContextMenuFragmentListener {
 		void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated);
-		void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState);
+		void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState, int previousMenuState);
 		void onContextMenuDismiss(@NonNull ContextMenuFragment fragment);
 	}
 
@@ -815,7 +815,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 
 		ContextMenuFragmentListener listener = this.listener;
 		if (listener != null) {
-			listener.onContextMenuStateChanged(this, newMenuState);
+			listener.onContextMenuStateChanged(this, newMenuState, currentMenuState);
 		}
 	}
 
@@ -971,7 +971,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 
 						ContextMenuFragmentListener listener = ContextMenuFragment.this.listener;
 						if (listener != null) {
-							listener.onContextMenuStateChanged(ContextMenuFragment.this, getCurrentMenuState());
+							int menuState = getCurrentMenuState();
+							listener.onContextMenuStateChanged(ContextMenuFragment.this, menuState, menuState);
 						}
 					}
 				}

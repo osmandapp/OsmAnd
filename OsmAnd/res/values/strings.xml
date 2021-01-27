@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+
+    <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
     <string name="uploading_count">Uploading %1$d of %2$d</string>
     <string name="upload_photo_completed">Upload completed</string>

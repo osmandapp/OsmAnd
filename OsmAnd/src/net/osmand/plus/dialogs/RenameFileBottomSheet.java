@@ -99,7 +99,9 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateFileName(String name) {
-		if (!Algorithms.isEmpty(name) && ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find()) {
+		if (Algorithms.isBlank(name)) {
+			nameTextBox.setError(getString(R.string.empty_filename));
+		} else if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find()) {
 			nameTextBox.setError(getString(R.string.file_name_containes_illegal_char));
 		} else {
 			selectedFileName = name;

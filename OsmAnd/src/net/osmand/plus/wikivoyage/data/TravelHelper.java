@@ -3,6 +3,8 @@ package net.osmand.plus.wikivoyage.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
@@ -13,6 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface TravelHelper {
+
+	interface GpxReadCallback {
+		void onGpxFileReading();
+		void onGpxFileRead(@Nullable GPXFile gpxFile);
+	}
 
 	TravelLocalDataHelper getBookmarksHelper();
 
@@ -29,19 +36,19 @@ public interface TravelHelper {
 	List<TravelArticle> getPopularArticles();
 
 	@NonNull
-	Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(@NonNull final TravelArticle article);
+	Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(@NonNull TravelArticle article);
 
 	@Nullable
-	TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @NonNull String lang);
+	TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback);
 
 	@Nullable
-	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull final String lang);
+	TravelArticle getArticleByTitle(@NonNull String title, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback);
 
 	@Nullable
-	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull LatLon latLon, @NonNull final String lang);
+	TravelArticle getArticleByTitle(@NonNull String title, @NonNull LatLon latLon, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback);
 
 	@Nullable
-	TravelArticle getArticleByTitle(@NonNull String title, @NonNull QuadRect rect, @NonNull String lang);
+	TravelArticle getArticleByTitle(@NonNull String title, @NonNull QuadRect rect, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback);
 
 	@Nullable
 	TravelArticleIdentifier getArticleId(@NonNull String title, @NonNull String lang);
@@ -50,10 +57,10 @@ public interface TravelHelper {
 	ArrayList<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId);
 
 	@NonNull
-	String getGPXName(@NonNull final TravelArticle article);
+	String getGPXName(@NonNull TravelArticle article);
 
 	@NonNull
-	File createGpxFile(@NonNull final TravelArticle article);
+	File createGpxFile(@NonNull TravelArticle article);
 
 	// TODO: this method should be deleted once TravelDBHelper is deleted
 	@Nullable

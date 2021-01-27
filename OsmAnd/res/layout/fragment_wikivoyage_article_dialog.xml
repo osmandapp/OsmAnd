@@ -145,6 +145,14 @@
 				tools:drawableStart="@drawable/ic_action_markers_dark"
 				android:paddingEnd="@dimen/bottom_sheet_content_padding_small" />
 
+			<ProgressBar
+				android:id="@+id/gpx_progress"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:padding="@dimen/bottom_sheet_content_padding_small"
+				android:visibility="gone" />
+
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/save_button"
 				android:layout_width="wrap_content"

@@ -4001,4 +4001,10 @@
     <string name="routing_engine_vehicle_type_racingbike">Yarış bisikleti</string>
     <string name="message_server_error">Sunucu hatası: %1$s</string>
     <string name="message_name_is_already_exists">Ad zaten var</string>
+    <string name="delete_waypoints">Ara noktaları sil</string>
+    <string name="copy_to_map_markers">Harita işaretleyicilerine kopyala</string>
+    <string name="copy_to_map_favorites">Sık kullanılanlara kopyala</string>
+    <string name="delete_online_routing_engine">Bu çevrim içi yönlendirme motoru silinsin mi\?</string>
+    <string name="context_menu_read_full">Tamamını oku</string>
+    <string name="context_menu_edit_descr">Açıklamayı düzenle</string>
 </resources>

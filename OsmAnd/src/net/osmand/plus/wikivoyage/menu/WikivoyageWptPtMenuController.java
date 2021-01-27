@@ -10,6 +10,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
@@ -38,13 +39,14 @@ public class WikivoyageWptPtMenuController extends WptPtMenuController {
 	}
 
 	private static TravelArticle getTravelArticle(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
-		SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFile(wpt);
+		OsmandApplication app = mapActivity.getMyApplication();
+		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
 		GPXFile gpxFile = selectedGpxFile != null ? selectedGpxFile.getGpxFile() : null;
 		Metadata metadata = gpxFile != null ? gpxFile.metadata : null;
 		String title = metadata != null ? metadata.getArticleTitle() : null;
 		String lang = metadata != null ? metadata.getArticleLang() : null;
 		if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(lang)) {
-			return mapActivity.getMyApplication().getTravelHelper().getArticleByTitle(title, new LatLon(wpt.lat, wpt.lon), lang);
+			return app.getTravelHelper().getArticleByTitle(title, new LatLon(wpt.lat, wpt.lon), lang, false, null);
 		}
 		return null;
 	}
