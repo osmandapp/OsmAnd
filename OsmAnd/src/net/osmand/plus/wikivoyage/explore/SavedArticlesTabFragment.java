@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,12 +18,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,13 +48,21 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 
 		final View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
 
-		adapter = new SavedArticlesRvAdapter(app);
+		adapter = new SavedArticlesRvAdapter(app, getActivity());
 		adapter.setListener(new SavedArticlesRvAdapter.Listener() {
 			@Override
 			public void openArticle(TravelArticle article) {
-				FragmentManager fm = getFragmentManager();
-				if (fm != null) {
-					WikivoyageArticleDialogFragment.showInstance(app, fm, article.generateIdentifier(), article.getLang());
+				if (article instanceof TravelGpx) {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						File file = app.getTravelHelper().createGpxFile(article);
+						TrackMenuFragment.openTrack(getActivity(), file, null);
+					}
+				} else {
+					FragmentManager fm = getFragmentManager();
+					if (fm != null) {
+						WikivoyageArticleDialogFragment.showInstance(app, fm, article.generateIdentifier(), article.getLang());
+					}
 				}
 			}
 		});

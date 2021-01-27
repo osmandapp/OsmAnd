@@ -11,6 +11,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -25,6 +26,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
@@ -33,6 +35,7 @@ import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +61,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		this.listener = listener;
 	}
 
-	SavedArticlesRvAdapter(OsmandApplication app) {
+	SavedArticlesRvAdapter(OsmandApplication app, FragmentActivity activity) {
 		this.app = app;
 		this.settings = app.getSettings();
 		picasso = PicassoUtils.getPicasso(app);
@@ -147,7 +150,9 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			View.OnClickListener readClickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					app.getTravelHelper().createGpxFile(article);
+					if (listener != null) {
+						listener.openArticle(article);
+					}
 				}
 			};
 			holder.leftButton.setOnClickListener(readClickListener);

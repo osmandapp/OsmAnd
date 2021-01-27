@@ -12,11 +12,12 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+
+import java.io.File;
 
 public class TravelGpxCard extends BaseTravelCard {
 
@@ -52,14 +53,8 @@ public class TravelGpxCard extends BaseTravelCard {
 				@Override
 				public void onClick(View v) {
 					if (activity != null) {
-						app.getTravelHelper().createGpxFile(article);
-						final OsmandSettings settings = app.getSettings();
-						settings.setMapLocationToShow(article.getLat(), article.getLon(),
-								settings.getLastKnownMapZoom(),
-								null,
-								false,
-								article.getGpxFile());
-						MapActivity.launchMapActivityMoveToTop(activity);
+						File file = app.getTravelHelper().createGpxFile(article);
+						TrackMenuFragment.openTrack(activity, file, null);
 					}
 				}
 			};
