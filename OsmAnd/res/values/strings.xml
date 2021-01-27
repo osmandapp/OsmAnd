@@ -13,6 +13,10 @@
 -->
 
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
+    <string name="uploaded_count">Uploaded %1$d of %2$d</string>
+    <string name="uploading_count">Uploading %1$d of %2$d</string>
+    <string name="upload_photo_completed">Upload completed</string>
+    <string name="upload_photo">Uploading</string>
     <string name="copy_to_map_favorites">Copy to favorites</string>
     <string name="copy_to_map_markers">Copy to map markers</string>
     <string name="delete_waypoints">Delete waypoints</string>
