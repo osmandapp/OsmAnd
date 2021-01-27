@@ -1,14 +1,14 @@
 package net.osmand.plus.track;
 
 import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.R;
@@ -18,6 +18,9 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.util.Algorithms;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
 
@@ -37,11 +40,8 @@ public class DescriptionCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		if (gpxFile.metadata == null || gpxFile.metadata.getDescription() == null) {
-			AndroidUiHelper.updateVisibility(view, false);
-			return;
-		} else {
-			AndroidUiHelper.updateVisibility(view, true);
+		if (gpxFile.metadata == null) {
+			gpxFile.metadata = new GPXUtilities.Metadata();
 		}
 
 		final String title = gpxFile.metadata.getArticleTitle();
@@ -49,6 +49,34 @@ public class DescriptionCard extends BaseCard {
 		final String descriptionHtml = gpxFile.metadata.getDescription();
 
 		setupImage(imageUrl);
+
+		if (Algorithms.isBlank(descriptionHtml)) {
+			showAddBtn();
+		} else {
+			showDescription(title, imageUrl, descriptionHtml);
+		}
+	}
+
+	private void showAddBtn() {
+		LinearLayout descriptionContainer = view.findViewById(R.id.description_container);
+		FrameLayout addBtn = view.findViewById(R.id.btn_add);
+
+		addBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				GpxEditDescriptionDialogFragment.showInstance(getMapActivity(), "", null);
+			}
+		});
+		AndroidUiHelper.updateVisibility(descriptionContainer, false);
+		AndroidUiHelper.updateVisibility(addBtn, true);
+	}
+
+	private void showDescription(final String title, final String imageUrl, final String descriptionHtml) {
+		LinearLayout descriptionContainer = view.findViewById(R.id.description_container);
+		FrameLayout addBtn = view.findViewById(R.id.btn_add);
+
+		AndroidUiHelper.updateVisibility(descriptionContainer, true);
+		AndroidUiHelper.updateVisibility(addBtn, false);
 
 		TextViewEx tvDescription = view.findViewById(R.id.description);
 		tvDescription.setText(getFirstParagraph(descriptionHtml));
@@ -60,6 +88,7 @@ public class DescriptionCard extends BaseCard {
 				GpxReadDescriptionDialogFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml);
 			}
 		});
+
 		TextViewEx editBtn = view.findViewById(R.id.btn_edit);
 		editBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
