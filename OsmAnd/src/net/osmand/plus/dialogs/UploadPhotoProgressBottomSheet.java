@@ -33,7 +33,6 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 
 	private int progress;
 	private int maxProgress;
-	String descriptionProgress;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -46,6 +45,7 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 		progressBar = view.findViewById(R.id.progress_bar);
 		progressBar.setMax(maxProgress);
 		String titleProgress = getString(progress == maxProgress? R.string.upload_photo_completed: R.string.upload_photo);
+		String descriptionProgress;
 		if (progress == maxProgress) {
 			descriptionProgress = getString(R.string.uploaded_count, progress, maxProgress);
 		} else {
