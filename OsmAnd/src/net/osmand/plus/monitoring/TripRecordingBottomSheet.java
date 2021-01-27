@@ -253,6 +253,16 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
+	protected int getRightButtonHeight(){
+		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+	}
+
+	@Override
+	protected int getDismissButtonHeight(){
+		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+	}
+
+	@Override
 	protected int getRightBottomButtonTextId() {
 		return R.string.start_recording;
 	}

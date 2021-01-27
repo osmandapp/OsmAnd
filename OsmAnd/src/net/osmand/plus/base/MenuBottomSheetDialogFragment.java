@@ -268,6 +268,18 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		dismissButtonStringRes = stringRes;
 	}
 
+	protected int getDismissButtonHeight(){
+		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height_small);
+	}
+
+	protected int getRightButtonHeight(){
+		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height_small);
+	}
+
+	protected int getThirdButtonHeight(){
+		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height_small);
+	}
+
 	protected DialogButtonType getDismissButtonType() {
 		return DialogButtonType.SECONDARY;
 	}
@@ -360,6 +372,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	private void setupDismissButton() {
 		dismissButton = buttonsContainer.findViewById(R.id.dismiss_button);
+		android.widget.LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getDismissButtonHeight());
+		dismissButton.setLayoutParams(lp);
 		int buttonTextId = getDismissButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
 			UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), buttonTextId);
@@ -376,6 +390,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	private void setupRightButton() {
 		rightButton = buttonsContainer.findViewById(R.id.right_bottom_button);
+		android.widget.LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getRightButtonHeight());
+		rightButton.setLayoutParams(lp);
 		int buttonTextId = getRightBottomButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
 			UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomButtonType(), buttonTextId);
@@ -398,6 +414,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected void setupThirdButton() {
 		thirdButton = buttonsContainer.findViewById(R.id.third_button);
+		android.widget.LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getThirdButtonHeight());
+		thirdButton.setLayoutParams(lp);
 		int buttonTextId = getThirdBottomButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
 			UiUtilities.setupDialogButton(nightMode, thirdButton, getThirdBottomButtonType(), buttonTextId);
