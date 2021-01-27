@@ -36,6 +36,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.edit.Way;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -56,6 +57,7 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -2390,6 +2392,32 @@ public class BinaryMapIndexReader {
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
+			
+			String[] words = query.split(" ");
+			if (words.length > 1) {
+				List<String> listWords = Arrays.asList(words);
+
+				Comparator<String> commonWordsComparator = new Comparator<String>() {
+
+					@Override
+					public int compare(String o1, String o2) {
+						int i1 = CommonWords.getCommonSearch(o1.toLowerCase());
+						int i2 = CommonWords.getCommonSearch(o2.toLowerCase());
+						if (i1 != i2) {
+							if (i1 == -1) {
+								return -1;
+							} else if (i2 == -1) {
+								return 1;
+							}
+							return -SearchPhrase.icompare(i1, i2);
+						}
+						return 1;
+					}
+				};
+
+				Collections.sort(listWords, commonWordsComparator);
+				query = listWords.get(0);
+			}
 			switch (tag) {
 			case 0:
 				return charMatches;
