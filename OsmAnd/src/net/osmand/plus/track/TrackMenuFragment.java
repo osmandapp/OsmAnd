@@ -60,7 +60,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -1044,14 +1043,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, Bundle prevIntentParams) {
-		Bundle bundle = new Bundle();
-		bundle.putBoolean(OPEN_TRACK_MENU, true);
-		if (file == null) {
-			bundle.putBoolean(TrackActivity.CURRENT_RECORDING, true);
+		boolean currentRecording = file == null;
+		String path = file != null ? file.getAbsolutePath() : null;
+		if (context instanceof MapActivity) {
+			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording);
 		} else {
-			bundle.putString(TrackActivity.TRACK_FILE_NAME, file.getAbsolutePath());
+			Bundle bundle = new Bundle();
+			bundle.putString(TRACK_FILE_NAME, path);
+			bundle.putBoolean(OPEN_TRACK_MENU, true);
+			bundle.putBoolean(CURRENT_RECORDING, currentRecording);
+			MapActivity.launchMapActivityMoveToTop(context, prevIntentParams, null, bundle);
 		}
-		MapActivity.launchMapActivityMoveToTop(context, prevIntentParams, null, bundle);
 	}
 
 	public static void showInstance(@NonNull final MapActivity mapActivity, @Nullable String path, boolean showCurrentTrack) {
