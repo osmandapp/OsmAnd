@@ -50,7 +50,7 @@ public class DescriptionCard extends BaseCard {
 
 		setupImage(imageUrl);
 
-		if (descriptionHtml == null || Algorithms.isEmpty(descriptionHtml.trim())) {
+		if (Algorithms.isBlank(descriptionHtml)) {
 			showAddBtn();
 		} else {
 			showDescription(title, imageUrl, descriptionHtml);
@@ -73,7 +73,10 @@ public class DescriptionCard extends BaseCard {
 
 	private void showDescription(final String title, final String imageUrl, final String descriptionHtml) {
 		LinearLayout descriptionContainer = view.findViewById(R.id.description_container);
+		FrameLayout addBtn = view.findViewById(R.id.btn_add);
+
 		AndroidUiHelper.updateVisibility(descriptionContainer, true);
+		AndroidUiHelper.updateVisibility(addBtn, false);
 
 		TextViewEx tvDescription = view.findViewById(R.id.description);
 		tvDescription.setText(getFirstParagraph(descriptionHtml));

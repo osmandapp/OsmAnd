@@ -84,17 +84,12 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		return view;
 	}
 
-
-
 	private boolean shouldClose() {
 		Editable editable = editableHtml.getText();
 		if (htmlCode == null || editable == null || editable.toString() == null) {
 			return true;
 		}
-		if (htmlCode.equals(editable.toString())) {
-			return true;
-		}
-		return false;
+		return htmlCode.equals(editable.toString());
 	}
 
 	private void showDismissDialog() {
