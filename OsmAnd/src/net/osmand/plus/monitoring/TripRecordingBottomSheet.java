@@ -229,13 +229,13 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 	private void toggleInfoView() {
 		infoExpanded = !infoExpanded;
 		ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) divider.getLayoutParams();
-			final int dp8 = AndroidUtils.dpToPx(app, 8f);
-			final int dp16 = AndroidUtils.dpToPx(app, 16f);
-			if (infoExpanded) {
-				AndroidUtils.setMargins(marginParams, 0, dp16, 0, dp8);
-			} else {
-				AndroidUtils.setMargins(marginParams, 0, 0, 0, dp8);
-			}
+		final int dp8 = AndroidUtils.dpToPx(app, 8f);
+		final int dp16 = AndroidUtils.dpToPx(app, 16f);
+		if (infoExpanded) {
+			AndroidUtils.setMargins(marginParams, 0, dp16, 0, dp8);
+		} else {
+			AndroidUtils.setMargins(marginParams, 0, 0, 0, dp8);
+		}
 		AndroidUiHelper.updateVisibility(container, infoExpanded);
 		updateUpDownBtn();
 	}
