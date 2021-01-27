@@ -5,13 +5,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
@@ -22,15 +24,15 @@ public class TravelGpxCard extends BaseTravelCard {
 
 	private final TravelGpx article;
 	private final Drawable readIcon;
-	private final FragmentManager fragmentManager;
+	private final FragmentActivity activity;
 	private boolean isLastItem;
 
 	public TravelGpxCard(@NonNull OsmandApplication app, boolean nightMode, @NonNull TravelGpx article,
-	                     @NonNull FragmentManager fragmentManager) {
+	                     @NonNull FragmentActivity activity) {
 		super(app, nightMode);
 		this.article = article;
 		readIcon = getActiveIcon(R.drawable.ic_action_read_article);
-		this.fragmentManager = fragmentManager;
+		this.activity = activity;
 	}
 
 	@Override
@@ -49,10 +51,15 @@ public class TravelGpxCard extends BaseTravelCard {
 			View.OnClickListener readClickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (fragmentManager != null) {
-//						WikivoyageArticleDialogFragment.showInstance(app, fragmentManager,
-//								article.generateIdentifier(), article.getLang());
+					if (activity != null) {
 						app.getTravelHelper().createGpxFile(article);
+						final OsmandSettings settings = app.getSettings();
+						settings.setMapLocationToShow(article.getLat(), article.getLon(),
+								settings.getLastKnownMapZoom(),
+								null,
+								false,
+								article.getGpxFile());
+						MapActivity.launchMapActivityMoveToTop(activity);
 					}
 				}
 			};

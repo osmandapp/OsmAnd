@@ -177,6 +177,8 @@ public class TravelObfHelper implements TravelHelper {
 		res.file = file;
 		String title = amenity.getName("en");
 		res.title = capitalizeFirstLetter(getGpxTitle(Algorithms.isEmpty(title) ? amenity.getName() : title));
+		res.lat = amenity.getLocation().getLatitude();
+		res.lon = amenity.getLocation().getLongitude();
 		res.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
 		try {
 			res.totalDistance = Float.parseFloat(Algorithms.emptyIfNull(amenity.getTagContent(DISTANCE)));
@@ -319,6 +321,7 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile.tracks = new ArrayList<>();
 			gpxFile.tracks.add(track);
 		}
+		article.gpxFile = gpxFile;
 		return gpxFile;
 	}
 

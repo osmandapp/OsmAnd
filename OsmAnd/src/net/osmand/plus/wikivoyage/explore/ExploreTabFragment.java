@@ -181,7 +181,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 				List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
 				for (TravelArticle article : popularArticles) {
 					if (article instanceof TravelGpx) {
-						items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, activity.getSupportFragmentManager()));
+						items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, getActivity()));
 					} else {
 						items.add(new ArticleTravelCard(app, nightMode, article, activity.getSupportFragmentManager()));
 					}
