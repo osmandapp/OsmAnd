@@ -2,9 +2,9 @@ package net.osmand.plus.track;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,10 +18,12 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -30,6 +32,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -125,8 +128,10 @@ public class OverviewCard extends BaseCard {
 
 			final StatBlockAdapter sbAdapter = new StatBlockAdapter(items);
 			rvOverview.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
-			rvOverview.addItemDecoration(new HorizontalDividerDecoration(app));
+//			rvOverview.addItemDecoration(new HorizontalDividerDecoration(app, nightMode));
 			rvOverview.setAdapter(sbAdapter);
+		} else {
+			AndroidUiHelper.updateVisibility(rvOverview, false);
 		}
 	}
 
@@ -265,6 +270,10 @@ public class OverviewCard extends BaseCard {
 				}
 			});
 			setImageDrawable(holder.imageView, item.imageResId, item.imageColorId);
+			AndroidUtils.setBackgroundColor(view.getContext(), holder.divider, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
+			if (position == statBlocks.size() - 1) {
+				AndroidUiHelper.setVisibility(View.GONE, holder.divider);
+			}
 		}
 	}
 
@@ -273,12 +282,14 @@ public class OverviewCard extends BaseCard {
 		private final TextViewEx valueText;
 		private final TextView titleText;
 		private final AppCompatImageView imageView;
+		private final View divider;
 
 		StatBlockViewHolder(View view) {
 			super(view);
 			valueText = view.findViewById(R.id.value);
 			titleText = view.findViewById(R.id.title);
 			imageView = view.findViewById(R.id.image);
+			divider = view.findViewById(R.id.divider);
 		}
 	}
 
@@ -288,12 +299,8 @@ public class OverviewCard extends BaseCard {
 		private final int marginV;
 		private final int marginH;
 
-		public HorizontalDividerDecoration(Context context) {
-			int[] ATTRS = {android.R.attr.listDivider};
-			final TypedArray ta = context.obtainStyledAttributes(ATTRS);
-			divider = ta.getDrawable(0);
-//			DrawableCompat.setTint(divider, context.getResources().getColor(R.color.divider_color_light)); //todo change drawable color
-			ta.recycle();
+		public HorizontalDividerDecoration(Context context, boolean nightMode) {
+			divider = new ColorDrawable(ContextCompat.getColor(context, nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
 			marginV = context.getResources().getDimensionPixelSize(R.dimen.map_small_button_margin);
 			marginH = context.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		}
