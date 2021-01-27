@@ -54,7 +54,6 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 	private SwitchCompat confirmEveryRun;
 	private TextView intervalValueView;
 	private LinearLayout container;
-	private LinearLayout expandHideIntervalContainer;
 	private View divider;
 	private boolean infoExpanded;
 
@@ -97,7 +96,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 
 		divider = itemView.findViewById(R.id.second_divider);
-		expandHideIntervalContainer = itemView.findViewById(R.id.interval_view_container);
+		LinearLayout expandHideIntervalContainer = itemView.findViewById(R.id.interval_view_container);
 		upDownBtn = itemView.findViewById(R.id.up_down_button);
 		expandHideIntervalContainer.setOnClickListener(new View.OnClickListener() {
 
@@ -167,13 +166,9 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		basicItem.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (showTrackOnMapButton.isChecked()) {
-					showTrackOnMapButton.setChecked(false);
-					app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), false, false);
-				} else {
-					showTrackOnMapButton.setChecked(true);
-					app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), true, false);
-				}
+				boolean checked = !showTrackOnMapButton.isChecked();
+				showTrackOnMapButton.setChecked(checked);
+				app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), checked, false);
 			}
 		});
 		UiUtilities.setupCompoundButton(showTrackOnMapButton, nightMode, PROFILE_DEPENDENT);
@@ -234,15 +229,13 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 	private void toggleInfoView() {
 		infoExpanded = !infoExpanded;
 		ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) divider.getLayoutParams();
-		if (getMapActivity() != null) {
-			final int dp8 = AndroidUtils.dpToPx(getMapActivity(), 8f);
-			final int dp16 = AndroidUtils.dpToPx(getMapActivity(), 16f);
+			final int dp8 = AndroidUtils.dpToPx(app, 8f);
+			final int dp16 = AndroidUtils.dpToPx(app, 16f);
 			if (infoExpanded) {
 				AndroidUtils.setMargins(marginParams, 0, dp16, 0, dp8);
 			} else {
 				AndroidUtils.setMargins(marginParams, 0, 0, 0, dp8);
 			}
-		}
 		AndroidUiHelper.updateVisibility(container, infoExpanded);
 		updateUpDownBtn();
 	}

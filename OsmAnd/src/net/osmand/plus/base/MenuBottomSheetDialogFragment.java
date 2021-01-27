@@ -372,8 +372,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	private void setupDismissButton() {
 		dismissButton = buttonsContainer.findViewById(R.id.dismiss_button);
-		android.widget.LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getDismissButtonHeight());
-		dismissButton.setLayoutParams(lp);
+		dismissButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getDismissButtonHeight()));
 		int buttonTextId = getDismissButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
 			UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), buttonTextId);
@@ -390,8 +389,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	private void setupRightButton() {
 		rightButton = buttonsContainer.findViewById(R.id.right_bottom_button);
-		android.widget.LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getRightButtonHeight());
-		rightButton.setLayoutParams(lp);
+		rightButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getRightButtonHeight()));
 		int buttonTextId = getRightBottomButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
 			UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomButtonType(), buttonTextId);
@@ -414,8 +412,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected void setupThirdButton() {
 		thirdButton = buttonsContainer.findViewById(R.id.third_button);
-		android.widget.LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getThirdButtonHeight());
-		thirdButton.setLayoutParams(lp);
+		thirdButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getThirdButtonHeight()));
 		int buttonTextId = getThirdBottomButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
 			UiUtilities.setupDialogButton(nightMode, thirdButton, getThirdBottomButtonType(), buttonTextId);
