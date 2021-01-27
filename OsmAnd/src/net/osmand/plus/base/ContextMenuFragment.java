@@ -946,6 +946,11 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	protected void runLayoutListener() {
+		runLayoutListener(null);
+	}
+
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+	protected void runLayoutListener(final Runnable runnable) {
 		if (view != null) {
 			ViewTreeObserver vto = view.getViewTreeObserver();
 			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -973,6 +978,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 						if (listener != null) {
 							int menuState = getCurrentMenuState();
 							listener.onContextMenuStateChanged(ContextMenuFragment.this, menuState, menuState);
+						}
+						if (runnable != null) {
+							runnable.run();
 						}
 					}
 				}
