@@ -2,6 +2,7 @@ package net.osmand.plus.onlinerouting.ui;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -79,6 +80,7 @@ public class OnlineRoutingCard extends BaseCard {
 
 		int activeColor = ContextCompat.getColor(app, appMode.getIconColorInfo().getColor(nightMode));
 		textFieldBoxes.setPrimaryColor(activeColor);
+		textFieldBoxes.setGravityFloatingLabel(Gravity.START);
 
 		editText.addTextChangedListener(new TextWatcher() {
 			@Override
