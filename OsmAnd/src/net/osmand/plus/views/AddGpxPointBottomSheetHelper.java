@@ -1,6 +1,5 @@
 package net.osmand.plus.views;
 
-import android.content.Intent;
 import android.graphics.PointF;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,13 +13,14 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+
+import java.io.File;
 
 public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	private final View view;
@@ -149,16 +149,8 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		if (fragment != null) {
 			fragment.show();
 		} else {
-			openTrackActivity();
+			TrackMenuFragment.openTrack(mapActivity, new File(newGpxPoint.getGpx().path), null);
 		}
-	}
-
-	private void openTrackActivity() {
-		Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
-		newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, newGpxPoint.getGpx().path);
-		newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		mapActivity.startActivity(newIntent);
 	}
 
 	public static class NewGpxPoint {

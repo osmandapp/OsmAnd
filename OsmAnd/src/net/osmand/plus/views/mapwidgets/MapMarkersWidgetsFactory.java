@@ -191,7 +191,7 @@ public class MapMarkersWidgetsFactory {
 				|| map.getMapRouteInfoMenu().isVisible()
 				|| addressTopBar.getVisibility() == View.VISIBLE
 				|| map.isTopToolbarActive()
-				|| !map.getContextMenu().shouldShowTopControls()
+				|| map.shouldHideTopControls()
 				|| map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
 				|| map.getMapLayers().getMapMarkersLayer().isInPlanRouteMode()) {
 			updateVisibility(false);
