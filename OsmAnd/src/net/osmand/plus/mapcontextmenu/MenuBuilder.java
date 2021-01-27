@@ -36,7 +36,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -76,8 +75,6 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -91,7 +88,6 @@ import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCa
 public class MenuBuilder {
 
 	private static final int PICK_IMAGE = 1231;
-	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
 	protected static final String[] arrowChars = new String[] {"=>", " - "};
@@ -124,7 +120,6 @@ public class MenuBuilder {
 	private String preferredMapLang;
 	private String preferredMapAppLang;
 	private boolean transliterateNames;
-	private View view;
 	private View photoButton;
 
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
@@ -261,7 +256,6 @@ public class MenuBuilder {
 	}
 
 	public void build(View view) {
-		this.view = view;
 		firstRow = true;
 		hidden = false;
 		buildTopInternal(view);

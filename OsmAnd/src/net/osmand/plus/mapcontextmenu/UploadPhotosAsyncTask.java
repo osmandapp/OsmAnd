@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -7,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -15,7 +18,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.UploadPhotoWithProgressBarBottomSheet;
+import net.osmand.plus.dialogs.UploadPhotoProgressBottomSheet;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.openplacereviews.OPRConstants;
@@ -42,7 +45,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	private final OsmandApplication app;
 	private final WeakReference<MapActivity> activityRef;
-	private UploadPhotoWithProgressBarBottomSheet progress;
+	private UploadPhotosListener listener;
 
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
 	private final LatLon latLon;
@@ -66,7 +69,20 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 	protected void onPreExecute() {
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
-			progress = UploadPhotoWithProgressBarBottomSheet.showInstance(activity.getSupportFragmentManager(), data.size());
+			FragmentManager manager = activity.getSupportFragmentManager();
+			listener = UploadPhotoProgressBottomSheet.showInstance(manager, data.size(), new OnDismissListener() {
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					cancel(false);
+				}
+			});
+		}
+	}
+
+	@Override
+	protected void onProgressUpdate(Integer... values) {
+		if (listener != null) {
+			listener.uploadPhotosProgressUpdate(values[0]);
 		}
 	}
 
@@ -77,22 +93,15 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 			}
 			Uri uri = data.get(i);
 			handleSelectedImage(uri);
-			publishProgress(i);
+			publishProgress(i + 1);
 		}
 		return null;
 	}
 
 	@Override
-	protected void onProgressUpdate(Integer... values) {
-		if (progress != null) {
-			progress.onProgressUpdate(values[0]);
-		}
-	}
-
-	@Override
 	protected void onPostExecute(Void aVoid) {
-		if (progress != null) {
-			progress.onUploadingFinished();
+		if (listener != null) {
+			listener.uploadPhotosFinished();
 		}
 	}
 
@@ -158,12 +167,11 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	//This method runs on non main thread
 	private void checkTokenAndShowScreen() {
-		final String baseUrl = OPRConstants.getBaseUrl(app);
-		final String name = app.getSettings().OPR_USERNAME.get();
-		final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
+		String baseUrl = OPRConstants.getBaseUrl(app);
+		String name = app.getSettings().OPR_USERNAME.get();
+		String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
 		if (openDBAPI.checkPrivateKeyValid(baseUrl, name, privateKey)) {
-			String str = app.getString(R.string.cannot_upload_image);
-			app.showToastMessage(str);
+			app.showToastMessage(R.string.cannot_upload_image);
 		} else {
 			app.runInUIThread(new Runnable() {
 				@Override
@@ -199,5 +207,14 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		}
 		bmp.compress(Bitmap.CompressFormat.JPEG, 90, os);
 		return os.toByteArray();
+	}
+
+
+	public interface UploadPhotosListener {
+
+		void uploadPhotosProgressUpdate(int progress);
+
+		void uploadPhotosFinished();
+
 	}
 }
