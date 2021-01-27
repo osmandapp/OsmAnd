@@ -4063,4 +4063,10 @@
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="message_server_error">خطأ في الخادم: %1$s</string>
     <string name="message_name_is_already_exists">الاسم موجود بالفعل</string>
+    <string name="delete_online_routing_engine">هل تريد حذف محرك التوجيه عبر الإنترنت؟</string>
+    <string name="context_menu_read_full">قراءة كاملة</string>
+    <string name="context_menu_edit_descr">تحرير الوصف</string>
+    <string name="delete_waypoints">حذف نقاط الطريق</string>
+    <string name="copy_to_map_markers">نسخ لعلامات الخريطة</string>
+    <string name="copy_to_map_favorites">نسخ للمفضلة</string>
 </resources>
