@@ -70,7 +70,6 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -1566,6 +1565,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (!getDashboard().isVisible() && mapLayers.getMapControlsLayer() != null) {
 			mapLayers.getMapControlsLayer().showMapControlsIfHidden();
 		}
+	}
+
+	public boolean shouldHideTopControls() {
+		boolean hideTopControls = !mapContextMenu.shouldShowTopControls();
+
+		TrackMenuFragment fragment = getTrackMenuFragment();
+		if (fragment != null) {
+			hideTopControls = hideTopControls || !fragment.shouldShowTopControls();
+		}
+
+		return hideTopControls;
 	}
 
 	public OsmandMapTileView getMapView() {

@@ -974,7 +974,7 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			}
-			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls() || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
+			if (map.isTopToolbarActive() || map.shouldHideTopControls() || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
 				updateVisibility(false);
 			} else if (showClosestWaypointFirstInAddress && updateWaypoint()) {
 				updateVisibility(true);
@@ -1232,7 +1232,7 @@ public class MapInfoWidgetsFactory {
 
 		@SuppressLint("SetTextI18n")
 		public boolean updateInfo() {
-			boolean visible = settings.SHOW_COORDINATES_WIDGET.get() && map.getContextMenu().shouldShowTopControls()
+			boolean visible = settings.SHOW_COORDINATES_WIDGET.get() && !map.shouldHideTopControls()
 					&& map.getMapRouteInfoMenu().shouldShowTopControls() && !map.isTopToolbarActive()
 					&& !map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
 					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible
