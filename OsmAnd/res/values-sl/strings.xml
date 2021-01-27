@@ -3305,4 +3305,8 @@
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="message_server_error">Napaka strežnika: %1$s</string>
     <string name="message_name_is_already_exists">To ime že obstaja</string>
+    <string name="context_menu_read_full">Preberi v celoti</string>
+    <string name="context_menu_edit_descr">Uredi opis</string>
+    <string name="delete_waypoints">Brisanje točk</string>
+    <string name="copy_to_map_markers">Kopiraj na oznake na zemljevidu</string>
 </resources>
