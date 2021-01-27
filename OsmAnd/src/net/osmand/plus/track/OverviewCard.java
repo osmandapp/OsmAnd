@@ -123,9 +123,15 @@ public class OverviewCard extends BaseCard {
 					Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()),
 					R.drawable.ic_action_time_span_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null, ITEM_TIME);
 
-			final StatBlockAdapter sbAdapter = new StatBlockAdapter(items);
-			rvOverview.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
-			rvOverview.setAdapter(sbAdapter);
+			if (Algorithms.isEmpty(items)) {
+				AndroidUiHelper.updateVisibility(rvOverview, false);
+			} else {
+				final StatBlockAdapter sbAdapter = new StatBlockAdapter(items);
+				rvOverview.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
+				rvOverview.setAdapter(sbAdapter);
+			}
+		} else {
+			AndroidUiHelper.updateVisibility(rvOverview, false);
 		}
 	}
 
@@ -252,9 +258,7 @@ public class OverviewCard extends BaseCard {
 			});
 			setImageDrawable(holder.imageView, item.imageResId, item.imageColorId);
 			AndroidUtils.setBackgroundColor(view.getContext(), holder.divider, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
-			if (position == statBlocks.size() - 1) {
-				AndroidUiHelper.setVisibility(View.GONE, holder.divider);
-			}
+			AndroidUiHelper.updateVisibility(holder.divider, position != statBlocks.size() - 1);
 		}
 	}
 
@@ -301,7 +305,9 @@ public class OverviewCard extends BaseCard {
 			StatBlock statBlock = new StatBlock(title, value, imageResId, imageColorId, firstType, secondType, itemType);
 			switch (statBlock.itemType) {
 				case ITEM_DISTANCE: {
-					listItems.add(statBlock);
+					if (analysis.totalDistance != 0f) {
+						listItems.add(statBlock);
+					}
 					break;
 				}
 				case ITEM_ALTITUDE: {
