@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
@@ -49,6 +48,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static net.osmand.GPXUtilities.Track;
+import static net.osmand.GPXUtilities.TrkSegment;
 import static net.osmand.GPXUtilities.WptPt;
 import static net.osmand.GPXUtilities.writeGpxFile;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
@@ -69,6 +70,8 @@ public class TravelObfHelper implements TravelHelper {
 	public static final int ARTICLE_SEARCH_RADIUS = 50000;
 	public static final int GPX_TRACKS_SEARCH_RADIUS = 10000;
 	public static final int MAX_POPULAR_ARTICLES_COUNT = 30;
+	public static final int REF_KEY = 2;
+	public static final int NAME_KEY = 1;
 
 	private final OsmandApplication app;
 	private final Collator collator;
@@ -178,7 +181,7 @@ public class TravelObfHelper implements TravelHelper {
 		TravelGpx res = new TravelGpx();
 		res.file = file;
 		String title = amenity.getName("en");
-		res.title = capitalizeFirstLetter(getGpxTitle(Algorithms.isEmpty(title) ? amenity.getName() : title));
+		res.title = createTitle(Algorithms.isEmpty(title) ? amenity.getName() : title);
 		res.lat = amenity.getLocation().getLatitude();
 		res.lon = amenity.getLocation().getLongitude();
 		res.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
@@ -265,8 +268,8 @@ public class TravelObfHelper implements TravelHelper {
 							@Override
 							public boolean publish(BinaryMapDataObject object) {
 								if (object.getPointsLength() > 1) {
-									if (object.getObjectNames().get(2).equals(ref)
-											&& capitalizeFirstLetter(getGpxTitle(object.getObjectNames().get(1))).equals(article.title)) {
+									if (object.getObjectNames().get(REF_KEY).equals(ref)
+											&& createTitle(object.getObjectNames().get(NAME_KEY)).equals(article.title)) {
 										segmentList.add(object);
 									}
 								}
@@ -288,17 +291,15 @@ public class TravelObfHelper implements TravelHelper {
 		}
 		GPXFile gpxFile = null;
 		if (!segmentList.isEmpty()) {
-			GPXUtilities.Track track = new GPXUtilities.Track();
+			Track track = new Track();
 			for (BinaryMapDataObject segment : segmentList) {
-				List<WptPt> pointList = new ArrayList<>();
-				GPXUtilities.TrkSegment trkSegment = new GPXUtilities.TrkSegment();
+				TrkSegment trkSegment = new TrkSegment();
 				for (int i = 0; i < segment.getPointsLength(); i++) {
 					WptPt point = new WptPt();
 					point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
 					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
-					pointList.add(point);
+					trkSegment.points.add(point);
 				}
-				trkSegment.points = pointList;
 				track.segments.add(trkSegment);
 			}
 			gpxFile = new GPXFile(article.getTitle(), article.getLang(), "");
@@ -307,6 +308,10 @@ public class TravelObfHelper implements TravelHelper {
 		}
 		article.gpxFile = gpxFile;
 		return gpxFile;
+	}
+
+	private String createTitle(String name) {
+		return capitalizeFirstLetter(getGpxTitle(name));
 	}
 
 	@NonNull

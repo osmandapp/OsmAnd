@@ -48,7 +48,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 
 		final View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
 
-		adapter = new SavedArticlesRvAdapter(app, getActivity());
+		adapter = new SavedArticlesRvAdapter(app);
 		adapter.setListener(new SavedArticlesRvAdapter.Listener() {
 			@Override
 			public void openArticle(TravelArticle article) {

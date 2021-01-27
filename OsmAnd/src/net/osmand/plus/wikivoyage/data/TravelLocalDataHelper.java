@@ -480,23 +480,12 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					String query;
-					Object[] parameters;
-					if (article.lang == null) {
-						query = "DELETE FROM " + BOOKMARKS_TABLE_NAME +
-								" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
-								" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
-								" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
-						parameters = new Object[]{article.title, article.routeId, travelBook};
-					} else {
-						query = "DELETE FROM " + BOOKMARKS_TABLE_NAME +
-								" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
-								" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
-								" AND " + BOOKMARKS_COL_LANG + " = ?" +
-								" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
-						parameters = new Object[]{article.title, article.routeId, article.lang, travelBook};
-					}
-					conn.execSQL(query, parameters);
+					String query = "DELETE FROM " + BOOKMARKS_TABLE_NAME +
+							" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
+							" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
+							" AND " + BOOKMARKS_COL_LANG + ((article.lang != null) ? " = '" + article.lang + "'" : " IS NULL") +
+							" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
+					conn.execSQL(query, new Object[]{article.title, article.routeId, travelBook});
 				} finally {
 					conn.close();
 				}
