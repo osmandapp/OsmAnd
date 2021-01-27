@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="copy_to_map_favorites">Copy to favorites</string>
     <string name="copy_to_map_markers">Copy to map markers</string>
     <string name="delete_waypoints">Delete waypoints</string>

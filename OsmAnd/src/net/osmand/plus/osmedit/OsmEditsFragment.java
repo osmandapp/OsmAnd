@@ -295,8 +295,12 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						uploadItems(osmEditsSelected.toArray(new OsmPoint[0]));
-						mode.finish();
+						if (Algorithms.isEmpty(osmEditsSelected)) {
+							app.showToastMessage(R.string.toast_select_edits_for_upload);
+						} else {
+							uploadItems(osmEditsSelected.toArray(new OsmPoint[0]));
+							mode.finish();
+						}
 						return true;
 					}
 				});
