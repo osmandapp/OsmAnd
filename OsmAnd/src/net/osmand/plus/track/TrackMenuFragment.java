@@ -270,7 +270,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			setupToolbar();
 			updateHeader();
 			setupButtons(view);
-			runLayoutListener();
+			calculateLayoutAndUpdateMenuState();
 		}
 		return view;
 	}
@@ -797,7 +797,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	protected void onHeaderClick() {
-		adjustMapPosition(getViewY());
+		updateMenuState();
 	}
 
 	private void adjustMapPosition(int y) {
@@ -837,12 +837,32 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						menuType = type;
 						setupCards();
 						updateHeader();
+						calculateLayoutAndUpdateMenuState();
 						break;
 					}
 				}
 				return true;
 			}
 		});
+	}
+
+	private void calculateLayoutAndUpdateMenuState() {
+		runLayoutListener(new Runnable() {
+			@Override
+			public void run() {
+				updateMenuState();
+			}
+		});
+	}
+
+	private void updateMenuState() {
+		if (menuType == TrackMenuType.OPTIONS) {
+			openMenuFullScreen();
+		} else if (menuType == TrackMenuType.OVERVIEW) {
+			openMenuHeaderOnly();
+		} else {
+			openMenuHalfScreen();
+		}
 	}
 
 	@Override
