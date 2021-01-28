@@ -87,7 +87,6 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 
 	@Override
 	public void uploadPhotosFinished() {
-		updateProgress(maxProgress);
 		if (progress == maxProgress) {
 			uploadedPhotosCounter.setText((getString(R.string.uploaded_count, progress, maxProgress)));
 			setDismissButtonTextId(R.string.shared_string_close);
