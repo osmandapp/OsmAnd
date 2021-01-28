@@ -175,10 +175,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			if (!Version.isPaidVersion(app) && !OpenBetaTravelCard.isClosed()) {
 				items.add(new OpenBetaTravelCard(activity, nightMode));
 			}
-			if (app.getTravelHelper().isAnyTravelBookPresent()) {
+			List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
+			if (!popularArticles.isEmpty()) {
 				items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
-
-				List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
 				for (TravelArticle article : popularArticles) {
 					if (article instanceof TravelGpx) {
 						items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, getActivity()));
@@ -186,15 +185,15 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 						items.add(new ArticleTravelCard(app, nightMode, article, activity.getSupportFragmentManager()));
 					}
 				}
-				items.add(new StartEditingTravelCard(activity, nightMode));
-				adapter.setItems(items);
-				final DownloadIndexesThread downloadThread = app.getDownloadThread();
-				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-					waitForIndexes = true;
-					downloadThread.runReloadIndexFilesSilent();
-				} else {
-					checkDownloadIndexes();
-				}
+			}
+			items.add(new StartEditingTravelCard(activity, nightMode));
+			adapter.setItems(items);
+			final DownloadIndexesThread downloadThread = app.getDownloadThread();
+			if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+				waitForIndexes = true;
+				downloadThread.runReloadIndexFilesSilent();
+			} else {
+				checkDownloadIndexes();
 			}
 		}
 	}
