@@ -1200,7 +1200,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 					}
 
-					TrackAppearanceFragment.showInstance(this, selectedGpxFile);
+					TrackAppearanceFragment.showInstance(this, selectedGpxFile, null);
 				} else if (toShow instanceof QuadRect) {
 					QuadRect qr = (QuadRect) toShow;
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
