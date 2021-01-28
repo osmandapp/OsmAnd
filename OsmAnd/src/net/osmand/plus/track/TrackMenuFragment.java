@@ -808,7 +808,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	protected void onHeaderClick() {
-		adjustMapPosition(getViewY());
+		updateMenuState();
 	}
 
 	private void adjustMapPosition(int y) {
@@ -848,7 +848,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						menuType = type;
 						setupCards();
 						updateHeader();
-						updateMenuState();
+						runLayoutListener(new Runnable() {
+							@Override
+							public void run() {
+								updateMenuState();
+							}
+						});
 						break;
 					}
 				}
@@ -857,21 +862,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		});
 	}
 
-
 	private void updateMenuState() {
-		runLayoutListener(new Runnable() {
-
-			@Override
-			public void run() {
-				if (menuType == TrackMenuType.OPTIONS) {
-					openMenuFullScreen();
-				} else if (menuType == TrackMenuType.OVERVIEW) {
-					openMenuHeaderOnly();
-				} else {
-					openMenuHalfScreen();
-				}
-			}
-		});
+		if (menuType == TrackMenuType.OPTIONS) {
+			openMenuFullScreen();
+		} else if (menuType == TrackMenuType.OVERVIEW) {
+			openMenuHeaderOnly();
+		} else {
+			openMenuHalfScreen();
+		}
 	}
 
 	@Override
