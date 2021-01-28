@@ -48,6 +48,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import gnu.trove.iterator.TIntObjectIterator;
+
 import static net.osmand.GPXUtilities.Track;
 import static net.osmand.GPXUtilities.TrkSegment;
 import static net.osmand.GPXUtilities.WptPt;
@@ -70,8 +72,8 @@ public class TravelObfHelper implements TravelHelper {
 	public static final int ARTICLE_SEARCH_RADIUS = 50000;
 	public static final int GPX_TRACKS_SEARCH_RADIUS = 10000;
 	public static final int MAX_POPULAR_ARTICLES_COUNT = 30;
-	public static final int REF_KEY = 2;
-	public static final int NAME_KEY = 1;
+	public static final String REF_TAG = "ref";
+	public static final String NAME_TAG = "name";
 
 	private final OsmandApplication app;
 	private final Collator collator;
@@ -163,7 +165,7 @@ public class TravelObfHelper implements TravelHelper {
 	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang, boolean readPoints, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		Map<String, TravelArticle> articles;
-		if (amenity.getSubType().equals(ROUTE_TRACK)) {
+		if (Algorithms.objectEquals(amenity.getSubType(), ROUTE_TRACK)) {
 			articles = readRoutePoint(file, amenity);
 		} else {
 			articles = readArticles(file, amenity);
@@ -268,8 +270,8 @@ public class TravelObfHelper implements TravelHelper {
 							@Override
 							public boolean publish(BinaryMapDataObject object) {
 								if (object.getPointsLength() > 1) {
-									if (object.getObjectNames().get(REF_KEY).equals(ref)
-											&& createTitle(object.getObjectNames().get(NAME_KEY)).equals(article.title)) {
+									if (getTagValue(object, REF_TAG).equals(ref)
+											&& createTitle(getTagValue(object, NAME_TAG)).equals(article.title)) {
 										segmentList.add(object);
 									}
 								}
@@ -308,6 +310,19 @@ public class TravelObfHelper implements TravelHelper {
 		}
 		article.gpxFile = gpxFile;
 		return gpxFile;
+	}
+
+	private String getTagValue(BinaryMapDataObject object, String tag) {
+		BinaryMapIndexReader.MapIndex mi = object.getMapIndex();
+		TIntObjectIterator<String> it = object.getObjectNames().iterator();
+		while (it.hasNext()) {
+			it.advance();
+			BinaryMapIndexReader.TagValuePair tp = mi.decodeType(it.key());
+			if (tp.tag.equals(tag)) {
+				return it.value();
+			}
+		}
+		return "";
 	}
 
 	private String createTitle(String name) {

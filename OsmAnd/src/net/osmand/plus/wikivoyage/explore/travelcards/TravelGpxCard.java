@@ -13,7 +13,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.track.TrackMenuFragment;
-import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
@@ -43,7 +42,7 @@ public class TravelGpxCard extends BaseTravelCard {
 			holder.title.setText(article.getTitle());
 			Drawable icon = getActiveIcon(R.drawable.ic_action_user_account_16);
 			holder.user.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-			holder.user.setText(WikiArticleHelper.getPartialContent(article.user));
+			holder.user.setText(article.user);
 			AndroidUtils.setBackground(app, holder.user, nightMode, R.drawable.btn_border_bg_light, R.drawable.btn_border_bg_dark);
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
 			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));
