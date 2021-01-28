@@ -143,8 +143,8 @@ public class TravelLocalDataHelper {
 	@Nullable
 	private TravelArticle getArticle(String title, String lang) {
 		for (TravelArticle article : savedArticles) {
-			if (article.title != null && article.title.equals(title)
-					&& (article.lang != null && article.lang.equals(lang) || article.lang == null && lang == null)) {
+			if (Algorithms.stringsEqual(article.title, title)
+					&& Algorithms.stringsEqual(article.lang, lang)) {
 				return article;
 			}
 		}

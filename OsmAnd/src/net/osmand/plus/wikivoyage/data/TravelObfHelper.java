@@ -165,7 +165,7 @@ public class TravelObfHelper implements TravelHelper {
 	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang, boolean readPoints, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		Map<String, TravelArticle> articles;
-		if (Algorithms.objectEquals(amenity.getSubType(), ROUTE_TRACK)) {
+		if (ROUTE_TRACK.equals(amenity.getSubType())) {
 			articles = readRoutePoint(file, amenity);
 		} else {
 			articles = readArticles(file, amenity);
