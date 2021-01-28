@@ -480,12 +480,12 @@ public class SettingsHelper {
 		typesMap.putAll(getMyPlacesItems());
 		typesMap.putAll(getResourcesItems());
 
-		return getFilteredSettingsItems(typesMap, settingsTypes, null, export);
+		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.<SettingsItem>emptyList(), export);
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(
 			Map<ExportSettingsType, List<?>> allSettingsMap, List<ExportSettingsType> settingsTypes,
-			List<SettingsItem> settingsItems, boolean export
+			@NonNull List<SettingsItem> settingsItems, boolean export
 	) {
 		List<SettingsItem> filteredSettingsItems = new ArrayList<>();
 		for (ExportSettingsType settingsType : settingsTypes) {
