@@ -24,4 +24,8 @@
     <string name="osmand_purchases_item">ওএসএমও কেনাকাটা</string>
     <string name="legend_item_description">একটি মানচিত্রের প্রতীকের জন্য গাইড</string>
     <string name="navigation_profiles_item">ন্যাভিগেশন প্রোফাইল</string>
+    <string name="av_locations">অবস্থানগুলো</string>
+    <string name="shared_string_navigation">দিক নির্ণয়</string>
+    <string name="m_s">মি/সে</string>
+    <string name="nm">নটিকাল মাইল</string>
 </resources>

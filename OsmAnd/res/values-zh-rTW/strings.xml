@@ -3993,4 +3993,10 @@
     <string name="routing_engine_vehicle_type_mtb">登山車</string>
     <string name="message_server_error">伺服器錯誤：%1$s</string>
     <string name="message_name_is_already_exists">名稱已存在</string>
+    <string name="delete_online_routing_engine">刪除此線上路線引擎？</string>
+    <string name="context_menu_read_full">讀取全部</string>
+    <string name="context_menu_edit_descr">編輯描述</string>
+    <string name="delete_waypoints">刪除航點</string>
+    <string name="copy_to_map_markers">複製到地圖標記</string>
+    <string name="copy_to_map_favorites">複製到收藏</string>
 </resources>
