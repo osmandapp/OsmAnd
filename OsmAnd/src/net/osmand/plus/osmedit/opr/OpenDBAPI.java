@@ -77,13 +77,15 @@ public class OpenDBAPI {
 		if (error == null) {
 			String responseStr = response.toString();
 			try {
-				Map<String, String> tagMap = new Gson().fromJson(
+				Map<String, String> map = new Gson().fromJson(
 						responseStr, new TypeToken<HashMap<String, String>>() {
 						}.getType()
 				);
-				if (Algorithms.isEmpty(tagMap) && tagMap.containsKey("blockchain-name")) {
-					String blockchainName = tagMap.get("blockchain-name");
+				if (Algorithms.isEmpty(map) && map.containsKey("blockchain-name")) {
+					String blockchainName = map.get("blockchain-name");
 					app.getSettings().OPR_BLOCKCHAIN_NAME.set(blockchainName);
+				} else {
+					return false;
 				}
 			} catch (JsonSyntaxException e) {
 				return false;
