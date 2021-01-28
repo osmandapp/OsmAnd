@@ -90,7 +90,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 				if (mapActivity != null) {
 					hide();
 					SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-					TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile);
+					TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, TripRecordingBottomSheet.this);
 				}
 			}
 		});

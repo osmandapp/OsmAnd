@@ -138,6 +138,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private ImageView searchButton;
 	private EditText searchEditText;
 	private TextView toolbarTextView;
+	private ViewGroup headerContainer;
 	private View routeMenuTopShadowAll;
 	private BottomNavigationView bottomNav;
 
@@ -226,11 +227,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		FragmentActivity activity = requireMyActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					mapActivity.launchPrevActivityIntent();
+				if (getCurrentMenuState() != MenuState.HEADER_ONLY && isPortrait()) {
+					openMenuHeaderOnly();
+				} else {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null && mapActivity.getSupportFragmentManager().getBackStackEntryCount() == 1) {
+						mapActivity.launchPrevActivityIntent();
+					}
+					dismiss();
 				}
-				dismiss();
 			}
 		});
 	}
@@ -249,6 +254,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (view != null) {
 			bottomNav = view.findViewById(R.id.bottom_navigation);
 			routeMenuTopShadowAll = view.findViewById(R.id.route_menu_top_shadow_all);
+			headerContainer = view.findViewById(R.id.header_container);
 			headerTitle = view.findViewById(R.id.title);
 			headerIcon = view.findViewById(R.id.icon_view);
 			toolbarContainer = view.findViewById(R.id.context_menu_toolbar_container);
@@ -258,7 +264,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 			if (isPortrait()) {
 				AndroidUiHelper.updateVisibility(getTopShadow(), true);
-				AndroidUiHelper.updateVisibility(view.findViewById(R.id.map_my_location_button), false);
 			} else {
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -281,7 +286,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void updateHeader() {
-		ViewGroup headerContainer = (ViewGroup) routeMenuTopShadowAll;
 		if (menuType == TrackMenuType.OVERVIEW) {
 			setHeaderTitle(gpxTitle, true);
 			if (overviewCard != null && overviewCard.getView() != null) {
@@ -463,7 +467,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			updateControlsVisibility(true);
 		}
 		if (currentMenuState != MenuState.FULL_SCREEN && (changed || !mapPositionAdjusted)) {
-			adjustMapPosition(getViewY());
+			adjustMapPosition(getMenuStatePosY(currentMenuState));
 		}
 	}
 
@@ -659,7 +663,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				app.getSelectedGpxHelper().selectGpxFile(gpxFile, gpxFileSelected, false);
 				mapActivity.refreshMap();
 			} else if (buttonIndex == APPEARANCE_BUTTON_INDEX) {
-				TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile);
+				TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, this);
 			} else if (buttonIndex == DIRECTIONS_BUTTON_INDEX) {
 				MapActivityActions mapActions = mapActivity.getMapActions();
 				if (app.getRoutingHelper().isFollowingMode()) {
