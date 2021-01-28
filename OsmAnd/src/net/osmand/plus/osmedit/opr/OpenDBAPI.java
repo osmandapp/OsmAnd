@@ -81,7 +81,7 @@ public class OpenDBAPI {
 						responseStr, new TypeToken<HashMap<String, String>>() {
 						}.getType()
 				);
-				if (Algorithms.isEmpty(map) && map.containsKey("blockchain-name")) {
+				if (!Algorithms.isEmpty(map) && map.containsKey("blockchain-name")) {
 					String blockchainName = map.get("blockchain-name");
 					app.getSettings().OPR_BLOCKCHAIN_NAME.set(blockchainName);
 				} else {
