@@ -230,11 +230,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				if (getCurrentMenuState() != MenuState.HEADER_ONLY && isPortrait()) {
 					openMenuHeaderOnly();
 				} else {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null && mapActivity.getSupportFragmentManager().getBackStackEntryCount() == 1) {
-						mapActivity.launchPrevActivityIntent();
-					}
 					dismiss();
+
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						MapContextMenu contextMenu = mapActivity.getContextMenu();
+						if (contextMenu.isActive() && contextMenu.getPointDescription() != null
+								&& contextMenu.getPointDescription().isGpxPoint()) {
+							contextMenu.show();
+						} else {
+							mapActivity.launchPrevActivityIntent();
+						}
+					}
 				}
 			}
 		});
