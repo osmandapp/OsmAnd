@@ -480,19 +480,21 @@ public class SettingsHelper {
 		typesMap.putAll(getMyPlacesItems());
 		typesMap.putAll(getResourcesItems());
 
-		return getFilteredSettingsItems(typesMap, settingsTypes, export);
+		return getFilteredSettingsItems(typesMap, settingsTypes, null, export);
 	}
 
-	public List<SettingsItem> getFilteredSettingsItems(Map<ExportSettingsType, List<?>> allSettingsMap,
-													   List<ExportSettingsType> settingsTypes, boolean export) {
-		List<SettingsItem> settingsItems = new ArrayList<>();
+	public List<SettingsItem> getFilteredSettingsItems(
+			Map<ExportSettingsType, List<?>> allSettingsMap, List<ExportSettingsType> settingsTypes,
+			List<SettingsItem> settingsItems, boolean export
+	) {
+		List<SettingsItem> filteredSettingsItems = new ArrayList<>();
 		for (ExportSettingsType settingsType : settingsTypes) {
 			List<?> settingsDataObjects = allSettingsMap.get(settingsType);
 			if (settingsDataObjects != null) {
-				settingsItems.addAll(prepareSettingsItems(settingsDataObjects, export));
+				filteredSettingsItems.addAll(prepareSettingsItems(settingsDataObjects, settingsItems, export));
 			}
 		}
-		return settingsItems;
+		return filteredSettingsItems;
 	}
 
 	public Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsByCategory(boolean addProfiles) {
@@ -693,8 +695,8 @@ public class SettingsHelper {
 		return files;
 	}
 
-	public List<SettingsItem> prepareSettingsItems(List<?> data, boolean export) {
-		List<SettingsItem> settingsItems = new ArrayList<>();
+	public List<SettingsItem> prepareSettingsItems(List<?> data, List<SettingsItem> settingsItems, boolean export) {
+		List<SettingsItem> result = new ArrayList<>();
 		List<QuickAction> quickActions = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
@@ -719,9 +721,9 @@ public class SettingsHelper {
 				try {
 					File file = (File) object;
 					if (file.getName().endsWith(IndexConstants.GPX_FILE_EXT)) {
-						settingsItems.add(new GpxSettingsItem(app, file));
+						result.add(new GpxSettingsItem(app, file));
 					} else {
-						settingsItems.add(new FileSettingsItem(app, file));
+						result.add(new FileSettingsItem(app, file));
 					}
 				} catch (IllegalArgumentException e) {
 					LOG.warn("Trying to export unsuported file type", e);
@@ -746,65 +748,136 @@ public class SettingsHelper {
 			} else if (object instanceof HistoryEntry) {
 				historyEntries.add((HistoryEntry) object);
 			} else if (object instanceof GlobalSettingsItem) {
-				settingsItems.add((GlobalSettingsItem) object);
+				result.add((GlobalSettingsItem) object);
 			} else if (object instanceof OnlineRoutingEngine) {
 				onlineRoutingEngines.add((OnlineRoutingEngine) object);
 			}
 		}
 		if (!quickActions.isEmpty()) {
-			settingsItems.add(new QuickActionsSettingsItem(app, quickActions));
+			result.add(new QuickActionsSettingsItem(app, getBaseQuickActionsSettingsItem(settingsItems), quickActions));
 		}
 		if (!poiUIFilters.isEmpty()) {
-			settingsItems.add(new PoiUiFiltersSettingsItem(app, poiUIFilters));
+			result.add(new PoiUiFiltersSettingsItem(app, getBasePoiUiFiltersSettingsItem(settingsItems), poiUIFilters));
 		}
 		if (!tileSourceTemplates.isEmpty()) {
-			settingsItems.add(new MapSourcesSettingsItem(app, tileSourceTemplates));
+			result.add(new MapSourcesSettingsItem(app, getBaseMapSourcesSettingsItem(settingsItems), tileSourceTemplates));
 		}
 		if (!avoidRoads.isEmpty()) {
-			settingsItems.add(new AvoidRoadsSettingsItem(app, avoidRoads));
+			result.add(new AvoidRoadsSettingsItem(app, getBaseAvoidRoadsSettingsItem(settingsItems), avoidRoads));
 		}
 		if (!appModeBeans.isEmpty()) {
 			for (ApplicationModeBean modeBean : appModeBeans) {
 				if (export) {
 					ApplicationMode mode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
 					if (mode != null) {
-						settingsItems.add(new ProfileSettingsItem(app, mode));
+						result.add(new ProfileSettingsItem(app, mode));
 					}
 				} else {
-					settingsItems.add(new ProfileSettingsItem(app, null, modeBean));
+					result.add(new ProfileSettingsItem(app, getBaseProfileSettingsItem(modeBean, settingsItems), modeBean));
 				}
 			}
 		}
 		if (!osmNotesPointList.isEmpty()) {
-			settingsItems.add(new OsmNotesSettingsItem(app, osmNotesPointList));
+			OsmNotesSettingsItem baseItem = getBaseItem(SettingsItemType.OSM_NOTES, OsmNotesSettingsItem.class, settingsItems);
+			result.add(new OsmNotesSettingsItem(app, baseItem, osmNotesPointList));
 		}
 		if (!osmEditsPointList.isEmpty()) {
-			settingsItems.add(new OsmEditsSettingsItem(app, osmEditsPointList));
+			OsmEditsSettingsItem baseItem = getBaseItem(SettingsItemType.OSM_EDITS, OsmEditsSettingsItem.class, settingsItems);
+			result.add(new OsmEditsSettingsItem(app, baseItem, osmEditsPointList));
 		}
 		if (!favoriteGroups.isEmpty()) {
-			settingsItems.add(new FavoritesSettingsItem(app, favoriteGroups));
+			FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
+			result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
 		}
 		if (!markersGroups.isEmpty()) {
 			List<MapMarker> mapMarkers = new ArrayList<>();
 			for (MapMarkersGroup group : markersGroups) {
 				mapMarkers.addAll(group.getMarkers());
 			}
-			settingsItems.add(new MarkersSettingsItem(app, mapMarkers));
+			MarkersSettingsItem baseItem = getBaseItem(SettingsItemType.ACTIVE_MARKERS, MarkersSettingsItem.class, settingsItems);
+			result.add(new MarkersSettingsItem(app, baseItem, mapMarkers));
 		}
 		if (!markersHistoryGroups.isEmpty()) {
 			List<MapMarker> mapMarkers = new ArrayList<>();
 			for (MapMarkersGroup group : markersHistoryGroups) {
 				mapMarkers.addAll(group.getMarkers());
 			}
-			settingsItems.add(new HistoryMarkersSettingsItem(app, mapMarkers));
+			HistoryMarkersSettingsItem baseItem = getBaseItem(SettingsItemType.HISTORY_MARKERS, HistoryMarkersSettingsItem.class, settingsItems);
+			result.add(new HistoryMarkersSettingsItem(app, baseItem, mapMarkers));
 		}
 		if (!historyEntries.isEmpty()) {
-			settingsItems.add(new SearchHistorySettingsItem(app, historyEntries));
+			SearchHistorySettingsItem baseItem = getBaseItem(SettingsItemType.SEARCH_HISTORY, SearchHistorySettingsItem.class, settingsItems);
+			result.add(new SearchHistorySettingsItem(app, baseItem, historyEntries));
 		}
 		if (!onlineRoutingEngines.isEmpty()) {
-			settingsItems.add(new OnlineRoutingSettingsItem(app, onlineRoutingEngines));
+			OnlineRoutingSettingsItem baseItem = getBaseItem(SettingsItemType.ONLINE_ROUTING_ENGINES, OnlineRoutingSettingsItem.class, settingsItems);
+			result.add(new OnlineRoutingSettingsItem(app, baseItem, onlineRoutingEngines));
 		}
-		return settingsItems;
+		return result;
+	}
+
+	@Nullable
+	private ProfileSettingsItem getBaseProfileSettingsItem(ApplicationModeBean modeBean, List<SettingsItem> settingsItems) {
+		for (SettingsItem settingsItem : settingsItems) {
+			if (settingsItem.getType() == SettingsItemType.PROFILE) {
+				ProfileSettingsItem profileItem = (ProfileSettingsItem) settingsItem;
+				ApplicationModeBean bean = profileItem.getModeBean();
+				if (Algorithms.objectEquals(bean.stringKey, modeBean.stringKey) && Algorithms.objectEquals(bean.userProfileName, modeBean.userProfileName)) {
+					return profileItem;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private QuickActionsSettingsItem getBaseQuickActionsSettingsItem(List<SettingsItem> settingsItems) {
+		for (SettingsItem settingsItem : settingsItems) {
+			if (settingsItem.getType() == SettingsItemType.QUICK_ACTIONS) {
+				return (QuickActionsSettingsItem) settingsItem;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private PoiUiFiltersSettingsItem getBasePoiUiFiltersSettingsItem(List<SettingsItem> settingsItems) {
+		for (SettingsItem settingsItem : settingsItems) {
+			if (settingsItem.getType() == SettingsItemType.POI_UI_FILTERS) {
+				return (PoiUiFiltersSettingsItem) settingsItem;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private MapSourcesSettingsItem getBaseMapSourcesSettingsItem(List<SettingsItem> settingsItems) {
+		for (SettingsItem settingsItem : settingsItems) {
+			if (settingsItem.getType() == SettingsItemType.MAP_SOURCES) {
+				return (MapSourcesSettingsItem) settingsItem;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private AvoidRoadsSettingsItem getBaseAvoidRoadsSettingsItem(List<SettingsItem> settingsItems) {
+		for (SettingsItem settingsItem : settingsItems) {
+			if (settingsItem.getType() == SettingsItemType.AVOID_ROADS) {
+				return (AvoidRoadsSettingsItem) settingsItem;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private <T> T getBaseItem(SettingsItemType settingsItemType, Class<T> clazz, List<SettingsItem> settingsItems) {
+		for (SettingsItem settingsItem : settingsItems) {
+			if (settingsItem.getType() == settingsItemType && clazz.isInstance(settingsItem)) {
+				return clazz.cast(settingsItem);
+			}
+		}
+		return null;
 	}
 
 	public static Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsToOperateByCategory(List<SettingsItem> items, boolean importComplete) {

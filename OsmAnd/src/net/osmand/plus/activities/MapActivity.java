@@ -652,7 +652,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onNewIntent(final Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
-		intentHelper.parseLaunchIntents();
+		if (!intentHelper.parseLaunchIntents()) {
+			intentHelper.parseContentIntent();
+		}
 	}
 
 	@Override
