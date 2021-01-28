@@ -490,6 +490,7 @@ public class UiUtilities {
 		}
 	}
 
+
 	public static void updateCustomRadioButtonsGroup(Context app, View buttonsView, boolean nightMode,
 													 CustomRadioButtonTypeGroup buttonType) {
 		int activeColor = ContextCompat.getColor(app, nightMode
@@ -513,12 +514,14 @@ public class UiUtilities {
 		GradientDrawable background = new GradientDrawable();
 		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
 		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
+
 		GradientDrawable startButtonRoundedCorner = new GradientDrawable();
 		startButtonRoundedCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
 		GradientDrawable endButtonRoundedCorner = new GradientDrawable();
 		endButtonRoundedCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
 		GradientDrawable centerButtonSharpCorner = new GradientDrawable();
 		centerButtonSharpCorner.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(inActiveColor, 0.5f));
+
 		setStartEndCenterRoundedCorner(roundedCorner, isLayoutRtl, startButtonRoundedCorner, endButtonRoundedCorner, centerButtonSharpCorner);
 
 		if (buttonType == CustomRadioButtonTypeGroup.START) {
@@ -564,6 +567,7 @@ public class UiUtilities {
 				centerButtonContainer.setBackgroundDrawable(endButtonRoundedCorner);
 				centerButtonText.setTextColor(textColor);
 			}
+			
 		} else {
 			if (isLayoutRtl) {
 				background.setCornerRadii(new float[]{roundedCorner, roundedCorner, 0, 0, 0, 0, roundedCorner, roundedCorner});
@@ -594,6 +598,7 @@ public class UiUtilities {
 		}
 		centerButtonSharpCorner.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
 	}
+
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
 		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
@@ -747,7 +752,7 @@ public class UiUtilities {
 		int activeDisableColor = getColorWithAlpha(activeColor, 0.25f);
 		ColorStateList activeCsl = new ColorStateList(states, new int[] {activeColor, activeDisableColor});
 		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
-		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {inactiveColor, inactiveColor});
+		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {activeDisableColor, inactiveColor});
 		slider.setTrackActiveTintList(activeCsl);
 		slider.setTrackInactiveTintList(inactiveCsl);
 		slider.setHaloTintList(activeCsl);

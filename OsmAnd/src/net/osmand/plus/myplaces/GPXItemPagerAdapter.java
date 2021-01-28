@@ -78,16 +78,19 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private SegmentActionsListener actionsListener;
 
 	private boolean chartClicked;
+	private boolean nightMode;
 
 
 	public GPXItemPagerAdapter(@NonNull final PagerSlidingTabStrip tabs,
 							   @NonNull GpxDisplayItem gpxItem,
 							   @NonNull TrackDisplayHelper displayHelper,
-							   @NonNull SegmentActionsListener actionsListener) {
+							   @NonNull SegmentActionsListener actionsListener,
+							   final boolean nightMode) {
 		super();
 		this.tabs = tabs;
 		this.gpxItem = gpxItem;
 		this.displayHelper = displayHelper;
+		this.nightMode = nightMode;
 		this.actionsListener = actionsListener;
 		app = (OsmandApplication) tabs.getContext().getApplicationContext();
 		iconsCache = app.getUIUtilities();
@@ -106,7 +109,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				}
 
 				View parent = (View) tabs.getChildAt(0);
-				UiUtilities.updateCustomRadioButtonsGroup(app, parent, false, type);
+				UiUtilities.updateCustomRadioButtonsGroup(app, parent, nightMode, type);
 			}
 
 			@Override
@@ -644,7 +647,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			type = UiUtilities.CustomRadioButtonTypeGroup.END;
 		}
 		View parent = (View) tab.getParent();
-		UiUtilities.updateCustomRadioButtonsGroup(app, parent, false, type);
+		UiUtilities.updateCustomRadioButtonsGroup(app, parent, nightMode, type);
 
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) parent.getLayoutParams();
 		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);

@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -21,7 +22,6 @@ import java.util.List;
 
 public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 
-	private OsmandApplication app;
 	private TrackDisplayHelper displayHelper;
 	private SegmentActionsListener listener;
 	private boolean nightMode;
@@ -31,7 +31,7 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 							 @NonNull SegmentActionsListener listener,
 							 boolean nightMode) {
 		super(context, R.layout.gpx_list_item_tab_content, items);
-		this.app = (OsmandApplication) context.getApplicationContext();
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		this.displayHelper = displayHelper;
 		this.listener = listener;
 		this.nightMode = nightMode;
@@ -56,7 +56,7 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 			WrapContentHeightViewPager pager = row.findViewById(R.id.pager);
 			PagerSlidingTabStrip tabLayout = row.findViewById(R.id.sliding_tabs);
 
-			pager.setAdapter(new GPXItemPagerAdapter(tabLayout, item, displayHelper, listener));
+			pager.setAdapter(new GPXItemPagerAdapter(tabLayout, item, displayHelper, listener, nightMode));
 			if (create) {
 				tabLayout.setViewPager(pager);
 			} else {
