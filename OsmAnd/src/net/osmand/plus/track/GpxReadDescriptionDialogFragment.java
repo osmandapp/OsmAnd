@@ -3,6 +3,7 @@ package net.osmand.plus.track;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -14,14 +15,6 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -38,6 +31,14 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.util.Algorithms;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
@@ -181,10 +182,16 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
 	private void setupWebView(final View view) {
 		webView = view.findViewById(R.id.content);
+		webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+		if (Build.VERSION.SDK_INT >= 19) {
+			webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+		}
+		else {
+			webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+		}
 		webView.setScrollbarFadingEnabled(true);
 		webView.setVerticalScrollBarEnabled(false);
 		webView.setBackgroundColor(Color.TRANSPARENT);
-		webView.setLayerType(WebView.LAYER_TYPE_HARDWARE, null);
 		webView.getSettings().setTextZoom((int) (getResources().getConfiguration().fontScale * 100f));
 		webView.getSettings().setDomStorageEnabled(true);
 		webView.getSettings().setLoadWithOverviewMode(true);

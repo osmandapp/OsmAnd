@@ -150,7 +150,8 @@ public class TravelLocalDataHelper {
 	@Nullable
 	private TravelArticle getArticle(String title, String lang) {
 		for (TravelArticle article : savedArticles) {
-			if (article.title != null && article.title.equals(title) && article.lang != null && article.lang.equals(lang)) {
+			if (Algorithms.stringsEqual(article.title, title)
+					&& Algorithms.stringsEqual(article.lang, lang)) {
 				return article;
 			}
 		}
@@ -503,12 +504,12 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					conn.execSQL("DELETE FROM " + BOOKMARKS_TABLE_NAME +
-									" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
-									" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
-									" AND " + BOOKMARKS_COL_LANG + " = ?" +
-									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{article.title, article.routeId, article.lang, travelBook});
+					String query = "DELETE FROM " + BOOKMARKS_TABLE_NAME +
+							" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
+							" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
+							" AND " + BOOKMARKS_COL_LANG + ((article.lang != null) ? " = '" + article.lang + "'" : " IS NULL") +
+							" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
+					conn.execSQL(query, new Object[]{article.title, article.routeId, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -563,7 +564,12 @@ public class TravelLocalDataHelper {
 
 		@NonNull
 		private TravelArticle readSavedArticle(SQLiteCursor cursor) {
-			TravelArticle res = new TravelArticle();
+			TravelArticle res;
+			if (cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_LANG)) == null) {
+				res = new TravelGpx();
+			} else {
+				res = new TravelArticle();
+			}
 			res.title = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_ARTICLE_TITLE));
 			res.lang = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_LANG));
 			res.aggregatedPartOf = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_IS_PART_OF));

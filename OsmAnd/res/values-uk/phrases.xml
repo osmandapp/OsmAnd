@@ -2790,7 +2790,7 @@
     <string name="poi_crop_rice">Вирощується культура: рис</string>
     <string name="poi_nuclear_explosion_type_cratering_burst">Вид вибуху: неглибокого закладення</string>
     <string name="poi_provided_for_adult_yes">Послуги надаються дорослим: так</string>
-    <string name="poi_xmas_note">Різдво: нотатка</string>
+    <string name="poi_xmas_note">Різдво: примітка</string>
     <string name="poi_cuisine_wings">Крильця</string>
     <string name="poi_cuisine_jamaican">Ямайська</string>
     <string name="poi_outdoor_seating_pedestrian_zone">Місця на відкритому повітрі: пішохідна зона</string>
@@ -3019,7 +3019,7 @@
     <string name="poi_drink_wine_yes">Вино: так</string>
     <string name="poi_vending_drinks_food">Напої і закуски</string>
     <string name="poi_wetland_saltmarsh">Болото, періодично затоплюване морською водою</string>
-    <string name="poi_note">Нотатка</string>
+    <string name="poi_note">Примітка</string>
     <string name="poi_crop_flowers">Вирощується культура: квіти</string>
     <string name="poi_water_heater_no">Водонагрівач: відсутній</string>
     <string name="poi_free_flying_site_orientation_e">Орієнтація майданчика для вільного польоту: схід (E)</string>

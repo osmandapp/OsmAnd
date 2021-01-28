@@ -91,6 +91,13 @@
 
 		</LinearLayout>
 
+		<LinearLayout
+			android:id="@+id/header_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
+			android:orientation="vertical" />
+
 		<FrameLayout
 			android:id="@+id/bottom_container"
 			android:layout_width="match_parent"
@@ -190,6 +197,8 @@
 		</androidx.appcompat.widget.Toolbar>
 
 	</com.google.android.material.appbar.AppBarLayout>
+
+	<include layout="@layout/context_menu_controls" />
 
 	<com.google.android.material.bottomnavigation.BottomNavigationView
 		android:id="@+id/bottom_navigation"

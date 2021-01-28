@@ -29,6 +29,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
@@ -37,6 +38,7 @@ import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
 
 import java.io.IOException;
@@ -178,17 +180,21 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 				List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
 				for (TravelArticle article : popularArticles) {
-					items.add(new ArticleTravelCard(app, nightMode, article, activity.getSupportFragmentManager()));
+					if (article instanceof TravelGpx) {
+						items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, getActivity()));
+					} else {
+						items.add(new ArticleTravelCard(app, nightMode, article, activity.getSupportFragmentManager()));
+					}
 				}
-			}
-			items.add(new StartEditingTravelCard(activity, nightMode));
-			adapter.setItems(items);
-			final DownloadIndexesThread downloadThread = app.getDownloadThread();
-			if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-				waitForIndexes = true;
-				downloadThread.runReloadIndexFilesSilent();
-			} else {
-				checkDownloadIndexes();
+				items.add(new StartEditingTravelCard(activity, nightMode));
+				adapter.setItems(items);
+				final DownloadIndexesThread downloadThread = app.getDownloadThread();
+				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+					waitForIndexes = true;
+					downloadThread.runReloadIndexFilesSilent();
+				} else {
+					checkDownloadIndexes();
+				}
 			}
 		}
 	}
