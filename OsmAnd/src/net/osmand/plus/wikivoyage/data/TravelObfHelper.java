@@ -485,7 +485,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Nullable
 	private TravelArticle getCachedArticle(@NonNull TravelArticleIdentifier articleId, @NonNull String lang,
-										   boolean forceReadPoints, @Nullable GpxReadCallback callback) {
+										   boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		Map<String, TravelArticle> articles = cachedArticles.get(articleId);
 		if (articles != null) {
@@ -502,9 +502,9 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		if (article == null && articles == null) {
-			article = findArticleById(articleId, lang, callback);
+			article = findArticleById(articleId, lang, readGpx, callback);
 		}
-		if (article != null && forceReadPoints && !Algorithms.isEmpty(lang)) {
+		if (article != null && readGpx && !Algorithms.isEmpty(lang)) {
 			readGpxFile(article, callback);
 		}
 		return article;
@@ -518,8 +518,8 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
-	private TravelArticle findArticleById(@NonNull final TravelArticleIdentifier articleId,
-										  final String lang, @Nullable GpxReadCallback callback) {
+	private synchronized TravelArticle findArticleById(@NonNull final TravelArticleIdentifier articleId,
+													   final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		final boolean isDbArticle = articleId.file != null && articleId.file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);
 		final List<Amenity> amenities = new ArrayList<>();
@@ -562,7 +562,7 @@ public class TravelObfHelper implements TravelHelper {
 				LOG.error(e.getMessage());
 			}
 			if (!Algorithms.isEmpty(amenities)) {
-				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang, true, callback);
+				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang, readGpx, callback);
 			}
 		}
 		return article;
@@ -585,7 +585,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Nullable
 	@Override
-	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull QuadRect rect,
+	public synchronized TravelArticle getArticleByTitle(@NonNull final String title, @NonNull QuadRect rect,
 										   @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		final List<Amenity> amenities = new ArrayList<>();

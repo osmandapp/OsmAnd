@@ -1,6 +1,9 @@
 package net.osmand.plus.wikivoyage.data;
 
 
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -98,6 +101,10 @@ public class TravelLocalDataHelper {
 			dbHelper.removeHistoryItem(lastItem);
 			historyMap.remove(key);
 		}
+	}
+
+	public boolean hasSavedArticles() {
+		return !savedArticles.isEmpty() || dbHelper.hasSavedArticles();
 	}
 
 	@NonNull
@@ -436,6 +443,25 @@ public class TravelLocalDataHelper {
 				}
 			}
 			return res;
+		}
+
+		boolean hasSavedArticles() {
+			int count = 0;
+			SQLiteConnection conn = openConnection(true);
+			if (conn != null) {
+				try {
+					SQLiteCursor cursor = conn.rawQuery("SELECT COUNT(*) FROM " + BOOKMARKS_TABLE_NAME, null);
+					if (cursor != null) {
+						if (cursor.moveToFirst()) {
+							count = cursor.getInt(0);
+						}
+						cursor.close();
+					}
+				} finally {
+					conn.close();
+				}
+			}
+			return count > 0;
 		}
 
 		void addSavedArticle(@NonNull TravelArticle article) {

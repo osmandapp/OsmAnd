@@ -210,6 +210,8 @@ public class OsmandApplication extends MultiDexApplication {
 			File mapillaryVectorTilesPath = new File(tilesPath, TileSourceManager.getMapillaryVectorSource().getName());
 			Algorithms.removeAllFiles(mapillaryRasterTilesPath);
 			Algorithms.removeAllFiles(mapillaryVectorTilesPath);
+			// Remove travel sqlite db files
+			removeSqliteDbTravelFiles();
 		}
 
 		checkPreferredLocale();
@@ -232,6 +234,17 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean isExternalStorageDirectoryReadOnly() {
 		return externalStorageDirectoryReadOnly;
+	}
+
+	private void removeSqliteDbTravelFiles() {
+		File[] files = getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
+		if (files != null) {
+			for (File file : files) {
+				if (file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
+					file.delete();
+				}
+			}
+		}
 	}
 
 	@Override
