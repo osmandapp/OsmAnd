@@ -186,7 +186,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public int getToolbarHeight() {
-		return toolbarHeightPx;
+		return isPortrait() ? toolbarHeightPx : 0;
 	}
 
 	public float getMiddleStateKoef() {
@@ -286,6 +286,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			setupToolbar();
 			updateHeader();
 			setupButtons(view);
+			updateCardsLayout();
 			calculateLayoutAndUpdateMenuState();
 		}
 		return view;
@@ -440,6 +441,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					cardsContainer.addView(pointsCard.build(mapActivity));
 				}
 			}
+		}
+	}
+
+	private void updateCardsLayout() {
+		FrameLayout bottomContainer = getBottomContainer();
+		if (menuType == TrackMenuType.OPTIONS) {
+			AndroidUtils.setBackground(app, bottomContainer, isNightMode(),
+					R.color.list_background_color_light, R.color.list_background_color_dark);
+		} else {
+			AndroidUtils.setBackground(app, bottomContainer, isNightMode(),
+					R.color.activity_background_color_light, R.color.activity_background_color_dark);
 		}
 	}
 
@@ -852,6 +864,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						menuType = type;
 						setupCards();
 						updateHeader();
+						updateCardsLayout();
 						calculateLayoutAndUpdateMenuState();
 						break;
 					}
