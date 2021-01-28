@@ -273,13 +273,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			runLayoutListener(new Runnable() {
 				@Override
 				public void run() {
-					if (menuType == TrackMenuType.OPTIONS) {
-						openMenuFullScreen();
-					} else if (menuType == TrackMenuType.OVERVIEW) {
-						openMenuHeaderOnly();
-					} else {
-						openMenuHalfScreen();
-					}
+					updateMenuState();
 				}
 			});
 		}
