@@ -193,6 +193,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		return 0.5f;
 	}
 
+	public int getMinY() {
+		return getFullScreenTopPosY();
+	}
+
 	@Override
 	public int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
