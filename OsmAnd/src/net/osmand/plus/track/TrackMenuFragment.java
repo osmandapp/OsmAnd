@@ -227,11 +227,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		FragmentActivity activity = requireMyActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					mapActivity.launchPrevActivityIntent();
+				if (getCurrentMenuState() != MenuState.HEADER_ONLY && isPortrait()) {
+					openMenuHeaderOnly();
+				} else {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null && mapActivity.getSupportFragmentManager().getBackStackEntryCount() == 1) {
+						mapActivity.launchPrevActivityIntent();
+					}
+					dismiss();
 				}
-				dismiss();
 			}
 		});
 	}
