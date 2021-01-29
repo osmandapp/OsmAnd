@@ -3,10 +3,15 @@ package net.osmand.plus.osmedit.opr;
 import android.net.TrafficStats;
 import android.os.Build;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -27,6 +32,7 @@ import java.security.KeyPair;
 import java.security.Security;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -40,7 +46,7 @@ public class OpenDBAPI {
 	public static final String PURPOSE = "osmand-android";
 	private static final Log log = PlatformUtil.getLog(SecUtils.class);
 	private static final String checkLoginEndpoint = "api/auth/user-check-loginkey?";
-	private static final String LOGIN_SUCCESS_MESSAGE = "{\"result\":\"OK\"}";
+	private static final String LOGIN_SUCCESS_MESSAGE = "\"result\":\"OK\"";
 	private static final int THREAD_ID = 11200;
 
 	/*
@@ -51,7 +57,7 @@ public class OpenDBAPI {
 	 * Need to encode key
 	 * Do not call on mainThread
 	 */
-	public boolean checkPrivateKeyValid(String baseUrl, String username, String privateKey) {
+	public boolean checkPrivateKeyValid(OsmandApplication app, String baseUrl, String username, String privateKey) {
 		String url = null;
 		try {
 			String purposeParam = "purpose=" + PURPOSE;
@@ -65,9 +71,29 @@ public class OpenDBAPI {
 		} catch (UnsupportedEncodingException e) {
 			return false;
 		}
+
 		StringBuilder response = new StringBuilder();
-		return (NetworkUtils.sendGetRequest(url,null,response) == null) &&
-				response.toString().contains(LOGIN_SUCCESS_MESSAGE);
+		String error = NetworkUtils.sendGetRequest(url, null, response);
+		if (error == null) {
+			String responseStr = response.toString();
+			try {
+				Map<String, String> map = new Gson().fromJson(
+						responseStr, new TypeToken<HashMap<String, String>>() {
+						}.getType()
+				);
+				if (!Algorithms.isEmpty(map) && map.containsKey("blockchain-name")) {
+					String blockchainName = map.get("blockchain-name");
+					app.getSettings().OPR_BLOCKCHAIN_NAME.set(blockchainName);
+				} else {
+					return false;
+				}
+			} catch (JsonSyntaxException e) {
+				return false;
+			}
+			return responseStr.contains(LOGIN_SUCCESS_MESSAGE);
+		} else {
+			return false;
+		}
 	}
 
 	public int uploadImage(String[] placeId, String baseUrl, String privateKey, String username, String image, StringBuilder sb) throws FailedVerificationException {

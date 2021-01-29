@@ -19,6 +19,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -37,6 +38,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
@@ -165,16 +167,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		}
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					TripRecordingBottomSheet fragment = mapActivity.getTripRecordingBottomSheet();
-					if (fragment != null) {
-						fragment.show();
-					} else {
-						mapActivity.launchPrevActivityIntent();
-					}
-					dismissImmediate();
-				}
+				dismiss();
 			}
 		});
 	}
@@ -383,6 +376,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			adjustMapPosition(y);
 		}
 		return y;
+	}
+
+	@Override
+	public void onContextMenuDismiss(@NonNull ContextMenuFragment fragment) {
+		Fragment target = getTargetFragment();
+		if (target instanceof TripRecordingBottomSheet) {
+			((TripRecordingBottomSheet) target).show();
+		}
 	}
 
 	private void updateAppearanceIcon() {
@@ -725,11 +726,12 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		return totalScreenHeight - frameTotalHeight;
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, @NonNull SelectedGpxFile selectedGpxFile) {
+	public static boolean showInstance(@NonNull MapActivity mapActivity, @NonNull SelectedGpxFile selectedGpxFile, Fragment target) {
 		try {
 			TrackAppearanceFragment fragment = new TrackAppearanceFragment();
-			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setRetainInstance(true);
+			fragment.setSelectedGpxFile(selectedGpxFile);
+			fragment.setTargetFragment(target, 0);
 
 			mapActivity.getSupportFragmentManager()
 					.beginTransaction()

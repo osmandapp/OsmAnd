@@ -131,12 +131,12 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 			try {
 				StringBuilder error = new StringBuilder();
 				String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
-				String username = app.getSettings().OPR_USERNAME.get();
+				String name = app.getSettings().OPR_BLOCKCHAIN_NAME.get();
 				res = openDBAPI.uploadImage(
 						placeId,
 						baseUrl,
 						privateKey,
-						username,
+						name,
 						response, error);
 				if (res != 200) {
 					app.showToastMessage(error.toString());
@@ -170,7 +170,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		String baseUrl = OPRConstants.getBaseUrl(app);
 		String name = app.getSettings().OPR_USERNAME.get();
 		String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
-		if (openDBAPI.checkPrivateKeyValid(baseUrl, name, privateKey)) {
+		if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
 			app.showToastMessage(R.string.cannot_upload_image);
 		} else {
 			app.runInUIThread(new Runnable() {
