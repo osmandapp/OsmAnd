@@ -4001,4 +4001,9 @@
     <string name="copy_to_map_favorites">Copiar para favoritos</string>
     <string name="delete_online_routing_engine">Excluir este mecanismo de roteamento online\?</string>
     <string name="context_menu_read_full">Ler na íntegra</string>
+    <string name="upload_photo">Carregando</string>
+    <string name="upload_photo_completed">Carreamento concluído</string>
+    <string name="uploading_count">Carregando %1$d de %2$d</string>
+    <string name="uploaded_count">Carregado %1$d de %2$d</string>
+    <string name="toast_select_edits_for_upload">Selecione as edições para carregamento</string>
 </resources>

@@ -292,10 +292,6 @@ public class DownloadActivityType {
 
 
 	public IndexItem parseIndexItem(OsmandApplication ctx, XmlPullParser parser) {
-		if (TRAVEL_FILE == this && !Version.isDeveloperVersion(ctx)) {
-			//todo remove "if" when .travel.obf will be used in production
-			return null;
-		}
 		String name = parser.getAttributeValue(null, "name"); //$NON-NLS-1$
 		if (!isAccepted(name)) {
 			return null;
