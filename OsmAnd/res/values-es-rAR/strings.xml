@@ -3982,7 +3982,7 @@
     <string name="announcement_time_prepare">Preparar</string>
     <string name="announcement_time_off_route">Fuera de la ruta</string>
     <string name="announcement_time_arrive">Has llegado al destino</string>
-    <string name="shared_string_turn">Giro</string>
+    <string name="shared_string_turn">Girar</string>
     <string name="announcement_time_intervals">Intervalos de tiempo y distancia</string>
     <string name="announcement_time_descr">El tiempo de anuncio de las diferentes indicaciones por voz depende del tipo de mensaje, la velocidad de navegación actual y la velocidad de navegación predefinida.</string>
     <string name="announcement_time_title">Tiempo de anuncio</string>
@@ -4003,4 +4003,10 @@
     <string name="routing_engine_vehicle_type_mtb">Bicicleta de montaña</string>
     <string name="message_server_error">Error de servidor: %1$s</string>
     <string name="message_name_is_already_exists">El nombre ya existe</string>
+    <string name="delete_online_routing_engine">¿Borrar este motor de navegación en línea\?</string>
+    <string name="context_menu_read_full">Leer completo</string>
+    <string name="context_menu_edit_descr">Editar descripción</string>
+    <string name="delete_waypoints">Borrar puntos de referencia</string>
+    <string name="copy_to_map_markers">Copiar a «Marcadores del mapa»</string>
+    <string name="copy_to_map_favorites">Copiar a favoritos</string>
 </resources>
