@@ -2430,7 +2430,7 @@
     <string name="average">平均</string>
     <string name="of">%1$d 的 %2$d</string>
     <string name="ascent_descent">上升/下降</string>
-    <string name="moving_time">移動時間</string>
+    <string name="moving_time">運動時間</string>
     <string name="max_min">最大/最小</string>
     <string name="min_max">最小/最大</string>
     <string name="rendering_value_translucent_pink_name">半透明粉紅色</string>
@@ -3999,4 +3999,9 @@
     <string name="delete_waypoints">刪除航點</string>
     <string name="copy_to_map_markers">複製到地圖標記</string>
     <string name="copy_to_map_favorites">複製到收藏</string>
+    <string name="upload_photo">正在上傳</string>
+    <string name="upload_photo_completed">已完成上傳</string>
+    <string name="uploading_count">正在上傳 %1$d，共 %2$d</string>
+    <string name="uploaded_count">已上傳 %1$d，共 %2$d</string>
+    <string name="toast_select_edits_for_upload">選取要上傳的檔案</string>
 </resources>

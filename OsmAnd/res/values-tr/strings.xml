@@ -2332,7 +2332,7 @@
     <string name="access_autoannounce_period">Otomatik-sesli-bildirim periyodu</string>
     <string name="no_waypoints_found">Uğranacak-ara-noktalar bulunamadı</string>
     <string name="lang_es_us">İspanyolca (Amerikan)</string>
-    <string name="moving_time">Hareket Zamanı</string>
+    <string name="moving_time">Hareket halindeki zaman</string>
     <string name="purchase_dialog_title">Plan seçin</string>
     <string name="purchase_dialog_travel_description">Çevrim dışı seyahat rehberi işlevselliğini almak için aşağıdakilerden birini satın alın:</string>
     <string name="purchase_dialog_subtitle">Uygun ögeyi seçin</string>
@@ -4007,4 +4007,9 @@
     <string name="delete_online_routing_engine">Bu çevrim içi yönlendirme motoru silinsin mi\?</string>
     <string name="context_menu_read_full">Tamamını oku</string>
     <string name="context_menu_edit_descr">Açıklamayı düzenle</string>
+    <string name="upload_photo">Karşıya yükleniyor</string>
+    <string name="upload_photo_completed">Karşıya yükleme tamamlandı</string>
+    <string name="uploading_count">%1$d / %2$d karşıya yükleniyor</string>
+    <string name="uploaded_count">%1$d / %2$d karşıya yüklendi</string>
+    <string name="toast_select_edits_for_upload">Karşıya yüklenecek düzenlemeleri seçin</string>
 </resources>
