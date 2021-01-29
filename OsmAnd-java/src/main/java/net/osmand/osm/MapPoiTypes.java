@@ -915,14 +915,18 @@ public class MapPoiTypes {
 			if (!otag.equals(tag) && !otag.equals("name")) {
 				PoiType pat = poiTypesByTag.get(otag + "/" + e.getValue());
 				if (pat == null) {
-					for(String splValue : e.getValue().split(";")) {
+					for (String splValue : e.getValue().split(";")) {
 						PoiType ps = poiTypesByTag.get(otag + "/" + splValue.trim());
-						if(ps != null) {
+						if (ps != null) {
 							a.setAdditionalInfo(ps.getKeyName(), splValue.trim());
 						}
 					}
 					pat = poiTypesByTag.get(otag);
+					if (pat == null && otag.startsWith("tag_")) {
+						a.addProfileTag(e);
+					}
 				}
+
 				if (pat != null && pat.isAdditional()) {
 					a.setAdditionalInfo(pat.getKeyName(), e.getValue());
 				}
