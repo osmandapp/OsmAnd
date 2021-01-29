@@ -2433,7 +2433,7 @@
     <string name="average">Mezumo</string>
     <string name="of">%1$d el %2$d</string>
     <string name="ascent_descent">Supreniroj/malsupreniroj</string>
-    <string name="moving_time">Movada tempo</string>
+    <string name="moving_time">Tempo dum movo</string>
     <string name="max_min">Maks./min.</string>
     <string name="min_max">Min./maks.</string>
     <string name="rendering_value_translucent_pink_name">Rozkolora diafana</string>
@@ -4006,4 +4006,9 @@
     <string name="context_menu_edit_descr">Redakti priskribon</string>
     <string name="delete_waypoints">Forigi navigadpunktojn</string>
     <string name="copy_to_map_markers">Kopii al map‑markoj</string>
+    <string name="upload_photo">Sendado</string>
+    <string name="upload_photo_completed">Sendado finita</string>
+    <string name="uploading_count">Sendado de %1$d el %2$d</string>
+    <string name="uploaded_count">Sendis %1$d el %2$d</string>
+    <string name="toast_select_edits_for_upload">Elektu redaktojn por sendi</string>
 </resources>
