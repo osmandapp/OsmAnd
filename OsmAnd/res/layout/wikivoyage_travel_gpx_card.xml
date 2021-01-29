@@ -184,6 +184,7 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:background="?attr/btn_border_bg"
+							android:visibility="gone"
 							android:layout_marginLeft="@dimen/content_padding_half"
 							android:layout_marginStart="@dimen/content_padding_half">
 

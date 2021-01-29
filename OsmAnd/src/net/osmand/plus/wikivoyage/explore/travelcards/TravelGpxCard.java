@@ -16,6 +16,7 @@ import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 
@@ -43,9 +44,12 @@ public class TravelGpxCard extends BaseTravelCard {
 			holder.title.setText(article.getTitle());
 			holder.userIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_user_account_16));
 			holder.user.setText(article.user);
-			ProfileIcons profileRes = ProfileIcons.valueOf(article.profile.toUpperCase());
-			holder.profileIcon.setImageDrawable(getActiveIcon(profileRes.getResId()));
-			holder.profile.setText(profileRes.getTitleId());
+			if(!Algorithms.isEmpty(article.profile)) {
+				ProfileIcons profileRes = ProfileIcons.valueOf(article.profile.toUpperCase());
+				holder.profileIcon.setImageDrawable(getActiveIcon(profileRes.getResId()));
+				holder.profile.setText(profileRes.getTitleId());
+				holder.profileLabel.setVisibility(View.VISIBLE);
+			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
 			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));
 			holder.diffElevationDown.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationDown, app));
@@ -97,6 +101,7 @@ public class TravelGpxCard extends BaseTravelCard {
 		public final ImageView userIcon;
 		public final TextView profile;
 		public final ImageView profileIcon;
+		public final View profileLabel;
 		public final TextView distance;
 		public final TextView diffElevationUp;
 		public final TextView diffElevationDown;
@@ -112,6 +117,7 @@ public class TravelGpxCard extends BaseTravelCard {
 			userIcon = itemView.findViewById(R.id.user_icon);
 			profile = itemView.findViewById(R.id.profile);
 			profileIcon = itemView.findViewById(R.id.profile_icon);
+			profileLabel = itemView.findViewById(R.id.profile_label);
 			distance = itemView.findViewById(R.id.distance);
 			diffElevationUp = itemView.findViewById(R.id.diff_ele_up);
 			diffElevationDown = itemView.findViewById(R.id.diff_ele_down);

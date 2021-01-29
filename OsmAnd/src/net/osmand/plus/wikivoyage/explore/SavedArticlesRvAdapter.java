@@ -18,12 +18,12 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
@@ -31,10 +31,12 @@ import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
-import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard.*;
 
 public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -81,7 +83,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			case ARTICLE_TYPE:
 				return new ItemVH(inflate(parent, R.layout.wikivoyage_article_card));
 			case GPX_TYPE:
-				return new TravelGpxCard.TravelGpxVH(inflate(parent, R.layout.wikivoyage_travel_gpx_card));
+				return new TravelGpxVH(inflate(parent, R.layout.wikivoyage_travel_gpx_card));
 			default:
 				throw new RuntimeException("Unsupported view type: " + viewType);
 		}
@@ -132,14 +134,18 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			holder.rightButton.setCompoundDrawablesWithIntrinsicBounds(null, null, deleteIcon, null);
 			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
 			holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
-		} else if (viewHolder instanceof TravelGpxCard.TravelGpxVH) {
+		} else if (viewHolder instanceof TravelGpxVH) {
 			final TravelGpx article = (TravelGpx) getItem(position);
-			final TravelGpxCard.TravelGpxVH holder = (TravelGpxCard.TravelGpxVH) viewHolder;
+			final TravelGpxVH holder = (TravelGpxVH) viewHolder;
 			holder.title.setText(article.getTitle());
-			Drawable icon = getActiveIcon(R.drawable.ic_action_user_account_16);
-			holder.user.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-			holder.user.setText(WikiArticleHelper.getPartialContent(article.user));
-			AndroidUtils.setBackground(app, holder.user, nightMode, R.drawable.btn_border_bg_light, R.drawable.btn_border_bg_dark);
+			holder.userIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_user_account_16));
+			holder.user.setText(article.user);
+			if(!Algorithms.isEmpty(article.profile)) {
+				ProfileIcons profileRes = ProfileIcons.valueOf(article.profile.toUpperCase());
+				holder.profileIcon.setImageDrawable(getActiveIcon(profileRes.getResId()));
+				holder.profile.setText(profileRes.getTitleId());
+				holder.profileLabel.setVisibility(View.VISIBLE);
+			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
 			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));
 			holder.diffElevationDown.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationDown, app));
@@ -159,7 +165,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		}
 	}
 
-	private void updateSaveButton(final TravelGpxCard.TravelGpxVH holder, final TravelGpx article) {
+	private void updateSaveButton(final TravelGpxVH holder, final TravelGpx article) {
 		if (article != null) {
 			final TravelLocalDataHelper helper = app.getTravelHelper().getBookmarksHelper();
 			final boolean saved = helper.isArticleSaved(article);
