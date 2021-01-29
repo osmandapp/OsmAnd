@@ -30,6 +30,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchFreeBannerListItem;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -97,8 +98,8 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(OsmandMapTileView mapView,
-	                                               ContextMenuAdapter adapter,
-	                                               final MapActivity mapActivity) {
+												   ContextMenuAdapter adapter,
+												   final MapActivity mapActivity) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 
 			@Override
@@ -113,7 +114,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId,
-			                                  final int pos, boolean isChecked, int[] viewCoordinates) {
+											  final int pos, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == R.string.shared_string_wikipedia) {
 					toggleWikipediaPoi(isChecked, new CallbackWithObject<Boolean>() {
 						@Override
@@ -189,24 +190,48 @@ public class WikipediaPlugin extends OsmandPlugin {
 		return !isShowAllLanguages() && getLanguagesToShow() != null;
 	}
 
+	public boolean hasCustomSettings(ApplicationMode profile) {
+		return !isShowAllLanguages(profile) && getLanguagesToShow(profile) != null;
+	}
+
 	public boolean hasLanguagesFilter() {
 		return settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.get() != null;
+	}
+
+	public boolean hasLanguagesFilter(ApplicationMode profile) {
+		return settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.getModeValue(profile) != null;
 	}
 
 	public boolean isShowAllLanguages() {
 		return settings.GLOBAL_WIKIPEDIA_POI_ENABLED.get();
 	}
 
+	public boolean isShowAllLanguages(ApplicationMode mode) {
+		return settings.GLOBAL_WIKIPEDIA_POI_ENABLED.getModeValue(mode);
+	}
+
 	public void setShowAllLanguages(boolean showAllLanguages) {
 		settings.GLOBAL_WIKIPEDIA_POI_ENABLED.set(showAllLanguages);
+	}
+
+	public void setShowAllLanguages(ApplicationMode mode, boolean showAllLanguages) {
+		settings.GLOBAL_WIKIPEDIA_POI_ENABLED.setModeValue(mode, showAllLanguages);
 	}
 
 	public List<String> getLanguagesToShow() {
 		return settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.getStringsList();
 	}
 
+	public List<String> getLanguagesToShow(ApplicationMode mode) {
+		return settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.getStringsListForProfile(mode);
+	}
+
 	public void setLanguagesToShow(List<String> languagesToShow) {
 		settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.setStringsList(languagesToShow);
+	}
+
+	public void setLanguagesToShow(ApplicationMode mode, List<String> languagesToShow) {
+		settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.setStringsListForProfile(mode, languagesToShow);
 	}
 
 	public void toggleWikipediaPoi(boolean enable, CallbackWithObject<Boolean> callback) {
