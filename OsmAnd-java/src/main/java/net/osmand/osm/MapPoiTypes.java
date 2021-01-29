@@ -922,11 +922,7 @@ public class MapPoiTypes {
 						}
 					}
 					pat = poiTypesByTag.get(otag);
-					if (pat == null && otag.startsWith("tag_")) {
-						a.addProfileTag(e);
 					}
-				}
-
 				if (pat != null && pat.isAdditional()) {
 					a.setAdditionalInfo(pat.getKeyName(), e.getValue());
 				}

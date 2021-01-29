@@ -179,26 +179,6 @@ public class Amenity extends MapObject {
 		}
 	}
 
-	public void addProfileTag(Entry<String, String> e) {
-		if (getAdditionalInfo("profile") == null) {
-			if (e.getKey().startsWith("tag_")) {
-				switch (e.getValue().trim()) {
-					case "bicycle":
-					case "cycling":
-					case "mtb":
-						setAdditionalInfo("profile", "bicycle");
-						break;
-					case "hiking":
-					case "hike":
-					case "walking":
-					case "walk":
-						setAdditionalInfo("profile", "pedestrian");
-						break;
-				}
-			}
-		}
-	}
-
 	@Override
 	public String toStringEn() {
 		return super.toStringEn() + ": " + type.getKeyName() + ":" + subType;
