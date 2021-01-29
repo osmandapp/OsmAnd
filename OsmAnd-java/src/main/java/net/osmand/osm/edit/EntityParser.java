@@ -193,9 +193,9 @@ public class EntityParser {
 					if (wbs != null) {
 						am.setAdditionalInfo("wikipedia", wbs);
 					}
-					String tagCategory = getTagCategory(entity);
-					if (tagCategory != null) {
-						am.setAdditionalInfo("profile", tagCategory);
+					String profileName = getProfileName(entity);
+					if (profileName != null) {
+						am.setAdditionalInfo("profile", profileName);
 					}
 					if (checkAmenitiesToAdd(am, amenitiesList) && !"no".equals(am.getSubType())) {
 						amenitiesList.add(am);
@@ -206,7 +206,7 @@ public class EntityParser {
 		return amenitiesList;
 	}
 
-	private static String getTagCategory(Entity e) {
+	private static String getProfileName(Entity e) {
 		Map<String, String> tags = e.getTags();
 		for (String key : tags.keySet()) {
 			if (key.startsWith("tag_")) {
