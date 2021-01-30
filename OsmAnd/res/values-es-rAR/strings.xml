@@ -2438,7 +2438,7 @@
     <string name="average">Promedio</string>
     <string name="of">%1$d de %2$d</string>
     <string name="ascent_descent">Ascenso/Descenso</string>
-    <string name="moving_time">Tiempo moviéndose</string>
+    <string name="moving_time">Tiempo en movimiento</string>
     <string name="max_min">Máx/Min</string>
     <string name="min_max">Min/Máx</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
@@ -4009,4 +4009,9 @@
     <string name="delete_waypoints">Borrar puntos de referencia</string>
     <string name="copy_to_map_markers">Copiar a «Marcadores del mapa»</string>
     <string name="copy_to_map_favorites">Copiar a favoritos</string>
+    <string name="upload_photo">Subiendo</string>
+    <string name="upload_photo_completed">Subida completa</string>
+    <string name="uploading_count">Subiendo %1$d de %2$d</string>
+    <string name="uploaded_count">Se subieron %1$d de %2$d</string>
+    <string name="toast_select_edits_for_upload">Marcar ediciones a subir</string>
 </resources>
