@@ -44,11 +44,11 @@ public class TravelGpxCard extends BaseTravelCard {
 			holder.title.setText(article.getTitle());
 			holder.userIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_user_account_16));
 			holder.user.setText(article.user);
-			if(!Algorithms.isEmpty(article.profile)) {
-				ProfileIcons profileRes = ProfileIcons.valueOf(article.profile.toUpperCase());
-				holder.profileIcon.setImageDrawable(getActiveIcon(profileRes.getResId()));
-				holder.profile.setText(profileRes.getTitleId());
-				holder.profileLabel.setVisibility(View.VISIBLE);
+			if (!Algorithms.isEmpty(article.activityType)) {
+				ProfileIcons profileRes = ProfileIcons.valueOf(article.activityType.toUpperCase());
+				holder.activityTypeIcon.setImageDrawable(getActiveIcon(profileRes.getResId()));
+				holder.activityType.setText(profileRes.getTitleId());
+				holder.activityTypeLabel.setVisibility(View.VISIBLE);
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
 			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));
@@ -99,9 +99,9 @@ public class TravelGpxCard extends BaseTravelCard {
 		public final TextView title;
 		public final TextView user;
 		public final ImageView userIcon;
-		public final TextView profile;
-		public final ImageView profileIcon;
-		public final View profileLabel;
+		public final TextView activityType;
+		public final ImageView activityTypeIcon;
+		public final View activityTypeLabel;
 		public final TextView distance;
 		public final TextView diffElevationUp;
 		public final TextView diffElevationDown;
@@ -115,9 +115,9 @@ public class TravelGpxCard extends BaseTravelCard {
 			title = itemView.findViewById(R.id.title);
 			user = itemView.findViewById(R.id.user_name);
 			userIcon = itemView.findViewById(R.id.user_icon);
-			profile = itemView.findViewById(R.id.profile);
-			profileIcon = itemView.findViewById(R.id.profile_icon);
-			profileLabel = itemView.findViewById(R.id.profile_label);
+			activityType = itemView.findViewById(R.id.activity_type);
+			activityTypeIcon = itemView.findViewById(R.id.activity_type_icon);
+			activityTypeLabel = itemView.findViewById(R.id.activity_type_label);
 			distance = itemView.findViewById(R.id.distance);
 			diffElevationUp = itemView.findViewById(R.id.diff_ele_up);
 			diffElevationDown = itemView.findViewById(R.id.diff_ele_down);

@@ -140,11 +140,11 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			holder.title.setText(article.getTitle());
 			holder.userIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_user_account_16));
 			holder.user.setText(article.user);
-			if(!Algorithms.isEmpty(article.profile)) {
-				ProfileIcons profileRes = ProfileIcons.valueOf(article.profile.toUpperCase());
-				holder.profileIcon.setImageDrawable(getActiveIcon(profileRes.getResId()));
-				holder.profile.setText(profileRes.getTitleId());
-				holder.profileLabel.setVisibility(View.VISIBLE);
+			if(!Algorithms.isEmpty(article.activityType)) {
+				ProfileIcons activityRes = ProfileIcons.valueOf(article.activityType.toUpperCase());
+				holder.activityTypeIcon.setImageDrawable(getActiveIcon(activityRes.getResId()));
+				holder.activityType.setText(activityRes.getTitleId());
+				holder.activityTypeLabel.setVisibility(View.VISIBLE);
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
 			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));

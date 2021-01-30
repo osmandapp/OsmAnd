@@ -193,10 +193,6 @@ public class EntityParser {
 					if (wbs != null) {
 						am.setAdditionalInfo("wikipedia", wbs);
 					}
-					String profileName = getProfileName(entity);
-					if (profileName != null) {
-						am.setAdditionalInfo("profile", profileName);
-					}
 					if (checkAmenitiesToAdd(am, amenitiesList) && !"no".equals(am.getSubType())) {
 						amenitiesList.add(am);
 					}
@@ -204,26 +200,6 @@ public class EntityParser {
 			}
 		}
 		return amenitiesList;
-	}
-
-	private static String getProfileName(Entity e) {
-		Map<String, String> tags = e.getTags();
-		for (String key : tags.keySet()) {
-			if (key.startsWith("tag_")) {
-				switch (tags.get(key).trim()) {
-					case "bicycle":
-					case "cycling":
-					case "mtb":
-						return "bicycle";
-					case "hiking":
-					case "hike":
-					case "walking":
-					case "walk":
-						return "pedestrian";
-				}
-			}
-		}
-		return null;
 	}
 
 	private static boolean checkAmenitiesToAdd(Amenity a, List<Amenity> amenitiesList){

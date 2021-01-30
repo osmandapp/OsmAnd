@@ -58,7 +58,7 @@ import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.PROFILE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
@@ -204,7 +204,7 @@ public class TravelObfHelper implements TravelHelper {
 			LOG.debug(e.getMessage(), e);
 		}
 		res.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
-		res.profile = Algorithms.emptyIfNull(amenity.getTagContent(PROFILE));
+		res.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
 		articles.put("en", res);
 		return articles;
 	}

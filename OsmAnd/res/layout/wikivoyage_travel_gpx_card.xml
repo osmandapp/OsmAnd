@@ -180,7 +180,7 @@
 						</LinearLayout>
 
 						<LinearLayout
-							android:id="@+id/profile_label"
+							android:id="@+id/activity_type_label"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:background="?attr/btn_border_bg"
@@ -189,7 +189,7 @@
 							android:layout_marginStart="@dimen/content_padding_half">
 
 							<androidx.appcompat.widget.AppCompatImageView
-								android:id="@+id/profile_icon"
+								android:id="@+id/activity_type_icon"
 								android:layout_width="@dimen/poi_icon_size"
 								android:layout_height="@dimen/poi_icon_size"
 								android:layout_gravity="center_vertical"
@@ -199,7 +199,7 @@
 								tools:src="@drawable/ic_action_bicycle_dark" />
 
 							<net.osmand.plus.widgets.TextViewEx
-								android:id="@+id/profile"
+								android:id="@+id/activity_type"
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:gravity="center_vertical"
