@@ -178,10 +178,6 @@ public class OsmAndAppCustomization {
 		return MapActivity.class;
 	}
 
-	public Class<TrackActivity> getTrackActivity() {
-		return TrackActivity.class;
-	}
-
 	public Class<FavoritesActivity> getFavoritesActivity() {
 		return FavoritesActivity.class;
 	}

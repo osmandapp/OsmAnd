@@ -13,16 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.IndexConstants;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.IndexConstants;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -33,6 +31,9 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.TrackMenuFragment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -153,7 +154,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					AvailableGPXFragment.openTrack(getActivity(), null);
+					TrackMenuFragment.openTrack(getActivity(), null, null);
 				}
 			});
 			view.findViewById(R.id.divider_dash).setVisibility(View.VISIBLE);
@@ -172,7 +173,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					AvailableGPXFragment.openTrack(getActivity(), f);
+					TrackMenuFragment.openTrack(getActivity(), f, null);
 				}
 			});
 			ImageButton showOnMap = ((ImageButton) v.findViewById(R.id.show_on_map));

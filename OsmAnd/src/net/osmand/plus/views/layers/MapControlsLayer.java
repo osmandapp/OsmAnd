@@ -859,30 +859,30 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
 		boolean trackDialogOpened = mapActivity.getTrackDetailsMenu().isVisible();
-		boolean contextMenuOpened = !mapActivity.getContextMenu().shouldShowTopControls();
+		boolean shouldHideTopControls = mapActivity.shouldHideTopControls();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		boolean routeDialogOpened = mapRouteInfoMenu.isVisible() || (showRouteCalculationControls && mapRouteInfoMenu.needShowMenu());
-		updateMyLocationVisibility(backToLocationControl, rh, routeDialogOpened || contextMenuOpened);
+		updateMyLocationVisibility(backToLocationControl, rh, routeDialogOpened || shouldHideTopControls);
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_info_dark : R.drawable.ic_action_gdirections_dark);
 
 		updateRoutePlaningButton(rh, routePlanningMode);
 
 		boolean showBottomMenuButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode()
-				&& !isInPlanRouteMode() && !contextMenuOpened && !isInChoosingRoutesMode()
+				&& !isInPlanRouteMode() && !shouldHideTopControls && !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode() && !isInFollowTrackMode() && !isInTrackAppearanceMode();
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
-		boolean showZoomButtons = !routeDialogOpened && !contextMenuOpened && !isInTrackAppearanceMode()
+		boolean showZoomButtons = !routeDialogOpened && !shouldHideTopControls && !isInTrackAppearanceMode()
 				&& (!isInGpxApproximationMode() || !isPotrait())
 				&& !isInFollowTrackMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !portrait);
 		mapZoomIn.updateVisibility(showZoomButtons);
 		mapZoomOut.updateVisibility(showZoomButtons);
 
 		boolean forceHideCompass = routeDialogOpened || trackDialogOpened || isInMeasurementToolMode()
-				|| isInPlanRouteMode() || contextMenuOpened || isInChoosingRoutesMode()
+				|| isInPlanRouteMode() || shouldHideTopControls || isInChoosingRoutesMode()
 				|| isInTrackAppearanceMode() || isInWaypointsChoosingMode() || isInFollowTrackMode();
 		compassHud.forceHideCompass = forceHideCompass;
 		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
@@ -892,7 +892,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (layersHud.setIconResId(appMode.getIconRes())) {
 			layersHud.update(app, isNight);
 		}
-		boolean showTopButtons = !routeDialogOpened && !trackDialogOpened && !contextMenuOpened
+		boolean showTopButtons = !routeDialogOpened && !trackDialogOpened && !shouldHideTopControls
 				&& !isInMeasurementToolMode() && !isInPlanRouteMode()  && !isInChoosingRoutesMode()
 				&& !isInTrackAppearanceMode() && !isInWaypointsChoosingMode() && !isInFollowTrackMode();
 		layersHud.updateVisibility(showTopButtons);

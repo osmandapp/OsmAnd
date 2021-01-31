@@ -20,6 +20,8 @@ import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard.StartEditingTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard.DownloadUpdateVH;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard.TravelGpxVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard.NeededMapsVH;
 
@@ -48,6 +50,9 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			case ArticleTravelCard.TYPE:
 				return new ArticleTravelVH(inflate(parent, R.layout.wikivoyage_article_card));
 
+			case TravelGpxCard.TYPE:
+				return new TravelGpxVH(inflate(parent, R.layout.wikivoyage_travel_gpx_card));
+
 			case TravelDownloadUpdateCard.TYPE:
 				return new DownloadUpdateVH(inflate(parent, R.layout.travel_download_update_card));
 
@@ -74,6 +79,10 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			HeaderTravelCard headerTravelCard = (HeaderTravelCard) item;
 			headerTravelCard.setArticleItemCount(getArticleItemCount());
 			headerTravelCard.bindViewHolder(viewHolder);
+		} else if (viewHolder instanceof ArticleTravelVH && item instanceof TravelGpxCard) {
+			TravelGpxCard travelGpxCard = (TravelGpxCard) item;
+			travelGpxCard.setLastItem(position == getLastArticleItemIndex());
+			travelGpxCard.bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof ArticleTravelVH && item instanceof ArticleTravelCard) {
 			ArticleTravelCard articleTravelCard = (ArticleTravelCard) item;
 			articleTravelCard.setLastItem(position == getLastArticleItemIndex());
@@ -96,7 +105,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	public int getArticleItemCount() {
 		int count = 0;
 		for (BaseTravelCard o : items) {
-			if (o instanceof ArticleTravelCard) {
+			if (o instanceof ArticleTravelCard || o instanceof TravelGpxCard) {
 				count++;
 			}
 		}
@@ -106,7 +115,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	private int getLastArticleItemIndex() {
 		for (int i = items.size() - 1; i > 0; i--) {
 			BaseTravelCard o = items.get(i);
-			if (o instanceof ArticleTravelCard) {
+			if (o instanceof ArticleTravelCard || o instanceof TravelGpxCard) {
 				return i;
 			}
 		}

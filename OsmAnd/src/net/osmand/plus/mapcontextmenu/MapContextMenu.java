@@ -22,18 +22,17 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapcontextmenu.MenuController.ContextMenuToolbarController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
@@ -47,12 +46,14 @@ import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
-import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
@@ -570,16 +571,19 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void updateControlsVisibility(boolean menuVisible) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			int topControlsVisibility = shouldShowTopControls(menuVisible) ? View.VISIBLE : View.GONE;
-			mapActivity.findViewById(R.id.map_center_info).setVisibility(topControlsVisibility);
-			mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(topControlsVisibility);
-			mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(topControlsVisibility);
-
-			int bottomControlsVisibility = shouldShowBottomControls(menuVisible) ? View.VISIBLE : View.GONE;
-			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(bottomControlsVisibility);
-
-			mapActivity.refreshMap();
+			boolean topControlsVisible = shouldShowTopControls(menuVisible);
+			boolean bottomControlsVisible = shouldShowBottomControls(menuVisible);
+			updateControlsVisibility(mapActivity, topControlsVisible, bottomControlsVisible);
 		}
+	}
+
+	public static void updateControlsVisibility(@NonNull MapActivity mapActivity, boolean topControlsVisible, boolean bottomControlsVisible) {
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_center_info), topControlsVisible);
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), topControlsVisible);
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), topControlsVisible);
+		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.bottom_controls_container), bottomControlsVisible);
+
+		mapActivity.refreshMap();
 	}
 
 	public boolean shouldShowTopControls() {

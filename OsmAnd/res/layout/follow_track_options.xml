@@ -99,34 +99,7 @@
 
 	</LinearLayout>
 
-	<FrameLayout
-		android:id="@+id/map_controls_container"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom"
-		tools:visibility="invisible">
-
-		<include
-			layout="@layout/map_ruler"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="start|bottom"
-			android:layout_marginStart="@dimen/fab_margin_right"
-			android:layout_marginLeft="@dimen/fab_margin_right"
-			android:layout_marginEnd="@dimen/fab_margin_right"
-			android:layout_marginRight="@dimen/fab_margin_right" />
-
-		<include
-			layout="@layout/map_hud_controls"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="end|bottom"
-			android:layout_marginStart="@dimen/fab_margin_right"
-			android:layout_marginLeft="@dimen/fab_margin_right"
-			android:layout_marginEnd="@dimen/fab_margin_right"
-			android:layout_marginRight="@dimen/fab_margin_right" />
-
-	</FrameLayout>
+	<include layout="@layout/context_menu_controls" />
 
 	<LinearLayout
 		android:id="@+id/control_buttons"

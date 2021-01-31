@@ -815,7 +815,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	@Override
-	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState) {
+	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState, int previousMenuState) {
 		LockableViewPager viewPager = this.viewPager;
 		RouteDetailsFragment current = getCurrentFragment();
 		if (viewPager != null && fragment == current) {
