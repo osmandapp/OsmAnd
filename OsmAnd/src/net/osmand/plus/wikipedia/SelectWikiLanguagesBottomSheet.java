@@ -1,8 +1,12 @@
 package net.osmand.plus.wikipedia;
 
+import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -11,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -124,6 +130,12 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
+	@Nullable
+	public MapActivity getMapActivity() {
+		Activity activity = getActivity();
+		return (MapActivity) activity;
+	}
+
 	private void initLanguagesData() {
 		languages = new ArrayList<>();
 
@@ -188,10 +200,42 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 				localesForSaving.add(language.getLocale());
 			}
 		}
-		wikiPlugin.setLanguagesToShow(localesForSaving);
-		wikiPlugin.setShowAllLanguages(isGlobalWikiPoiEnabled);
-		wikiPlugin.updateWikipediaState();
+		applyPreferenceWithSnackBar(localesForSaving, isGlobalWikiPoiEnabled);
 		dismiss();
+	}
+
+	protected final void applyPreference(boolean applyToAllProfiles, List<String> localesForSaving, boolean global) {
+		if (applyToAllProfiles) {
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				wikiPlugin.setLanguagesToShow(mode, localesForSaving);
+				wikiPlugin.setShowAllLanguages(mode, global);
+			}
+		} else {
+			wikiPlugin.setLanguagesToShow(localesForSaving);
+			wikiPlugin.setShowAllLanguages(global);
+		}
+
+		wikiPlugin.updateWikipediaState();
+	}
+
+	protected void applyPreferenceWithSnackBar(final List<String> localesForSaving, final boolean global) {
+		applyPreference(false, localesForSaving, global);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			String modeName = appMode.toHumanString();
+			String text = app.getString(R.string.changes_applied_to_profile, modeName);
+			SpannableString message = UiUtilities.createSpannableString(text, new StyleSpan(Typeface.BOLD), modeName);
+			Snackbar snackbar = Snackbar.make(mapActivity.getLayout(), message, Snackbar.LENGTH_LONG)
+					.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							applyPreference(true, localesForSaving, global);
+						}
+					});
+			UiUtilities.setupSnackbarVerticalLayout(snackbar);
+			UiUtilities.setupSnackbar(snackbar, nightMode);
+			snackbar.show();
+		}
 	}
 
 	private View getCustomButtonView() {
@@ -265,7 +309,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity,
-	                                boolean usedOnMap) {
+									boolean usedOnMap) {
 		SelectWikiLanguagesBottomSheet fragment = new SelectWikiLanguagesBottomSheet();
 		fragment.setUsedOnMap(usedOnMap);
 		fragment.show(mapActivity.getSupportFragmentManager(), SelectWikiLanguagesBottomSheet.TAG);
