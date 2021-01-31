@@ -4008,4 +4008,9 @@
     <string name="delete_waypoints">Wegpunkte löschen</string>
     <string name="copy_to_map_favorites">In Favoriten kopieren</string>
     <string name="copy_to_map_markers">In Kartenmarkierungen kopieren</string>
+    <string name="upload_photo">Lade hoch</string>
+    <string name="upload_photo_completed">Hochladen abgeschlossen</string>
+    <string name="uploading_count">Lade %1$d von %2$d hoch</string>
+    <string name="uploaded_count">%1$d von %2$d hochgeladen</string>
+    <string name="toast_select_edits_for_upload">Bearbeitungen zum Hochladen auswählen</string>
 </resources>
