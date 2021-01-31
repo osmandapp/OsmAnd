@@ -94,7 +94,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				+ TRACK_COL_DATE + ", " + TRACK_COL_HEADING + ")"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 
-		insertPointsScript = "INSERT INTO " + POINT_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
+		insertPointsScript = "INSERT INTO " + POINT_NAME + " (" + POINT_COL_LAT + ", " + POINT_COL_LON + ", "
+				+ POINT_COL_DATE + ", " + POINT_COL_DESCRIPTION + ", " + POINT_COL_NAME + ", "
+				+ POINT_COL_CATEGORY + ", " + POINT_COL_COLOR + ", " + POINT_COL_ICON + ", "
+				+ POINT_COL_BACKGROUND + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Override
