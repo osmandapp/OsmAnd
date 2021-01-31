@@ -2739,4 +2739,15 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="routing_engine_vehicle_type_foot">Kävely</string>
     <string name="routing_engine_vehicle_type_bike">Polkupyörä</string>
     <string name="routing_engine_vehicle_type_car">Auto</string>
+    <string name="message_server_error">Palvelimen virhe: %1$s</string>
+    <string name="message_name_is_already_exists">Nimi on jo käytössä</string>
+    <string name="context_menu_read_full">Lue kaikki</string>
+    <string name="context_menu_edit_descr">Muokkaa kuvausta</string>
+    <string name="copy_to_map_markers">Kopioi karttamerkkeihin</string>
+    <string name="copy_to_map_favorites">Kopioi suosikkeihin</string>
+    <string name="upload_photo">Lähetetään</string>
+    <string name="upload_photo_completed">Lähetys valmis</string>
+    <string name="uploading_count">Lähetetty %1$d muutosta %2$d muutoksesta</string>
+    <string name="uploaded_count">Lähetettiin %1$d muutosta %2$d muutoksesta</string>
+    <string name="toast_select_edits_for_upload">Valitse lähetettävät muutokset</string>
 </resources>
