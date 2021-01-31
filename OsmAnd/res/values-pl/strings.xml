@@ -2345,7 +2345,7 @@
     <string name="average">Średnia</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Podjazd/zjazd</string>
-    <string name="moving_time">Czas w ruchu</string>
+    <string name="moving_time">Czas poruszania</string>
     <string name="max_min">Maks./min.</string>
     <string name="quick_action_resume_pause_navigation">Zatrzymaj/wznów nawigację</string>
     <string name="quick_action_resume_pause_navigation_descr">Przycisk do wstrzymania lub wznowienia nawigacji.</string>
@@ -3998,4 +3998,14 @@
     <string name="message_name_is_already_exists">Taka nazwa już istnieje</string>
     <string name="online_routing_engine">Silnik wyznaczania tras online</string>
     <string name="online_routing_engines">Silniki wyznaczania tras online</string>
+    <string name="context_menu_read_full">Przeczytaj całość</string>
+    <string name="context_menu_edit_descr">Edytuj opis</string>
+    <string name="delete_waypoints">Usuń punkty trasy</string>
+    <string name="copy_to_map_markers">Skopiuj do znaczników mapy</string>
+    <string name="copy_to_map_favorites">Skopiuj do ulubionych</string>
+    <string name="upload_photo">Wysyłanie</string>
+    <string name="upload_photo_completed">Przesyłanie zakończone</string>
+    <string name="uploading_count">Przesyłanie %1$d z %2$d</string>
+    <string name="uploaded_count">Przesłano %1$d z %2$d</string>
+    <string name="toast_select_edits_for_upload">Wybierz zmiany do przesłania</string>
 </resources>

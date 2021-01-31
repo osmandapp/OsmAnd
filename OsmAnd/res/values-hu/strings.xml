@@ -4000,4 +4000,9 @@
     <string name="delete_waypoints">Útpontok törlése</string>
     <string name="copy_to_map_markers">Másolás a térképjelölők közé</string>
     <string name="copy_to_map_favorites">Másolás a kedvencek közé</string>
+    <string name="upload_photo">Felöltés folyamatban</string>
+    <string name="upload_photo_completed">Feltöltés befejezve</string>
+    <string name="uploading_count">%1$d / %2$d feltöltés alatt</string>
+    <string name="uploaded_count">%1$d / %2$d feltöltve</string>
+    <string name="toast_select_edits_for_upload">Szerkesztések kijelölése feltöltéshez</string>
 </resources>

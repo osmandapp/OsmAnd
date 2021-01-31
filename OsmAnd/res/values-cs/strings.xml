@@ -2314,7 +2314,7 @@
     <string name="average">Průměr</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Stoupání/Klesání</string>
-    <string name="moving_time">Čas pohybu</string>
+    <string name="moving_time">Doba pohybu</string>
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
     <string name="quick_action_resume_pause_navigation">Pozastavit/pokračovat v navigaci</string>
@@ -4000,4 +4000,15 @@
     <string name="routing_engine_vehicle_type_mtb">Horské kolo</string>
     <string name="message_server_error">Chyba serveru: %1$s</string>
     <string name="message_name_is_already_exists">Název již existuje</string>
+    <string name="delete_online_routing_engine">Odstranit tuto online navigační službu\?</string>
+    <string name="context_menu_read_full">Přečíst celé</string>
+    <string name="context_menu_edit_descr">Upravit popis</string>
+    <string name="delete_waypoints">Odstranit body trasy</string>
+    <string name="copy_to_map_markers">Kopírovat do mapových značek</string>
+    <string name="copy_to_map_favorites">Kopírovat do oblíbených</string>
+    <string name="upload_photo">Nahrávání</string>
+    <string name="upload_photo_completed">Nahrávání dokončeno</string>
+    <string name="uploading_count">Nahrávám %1$d z %2$d</string>
+    <string name="uploaded_count">Nahráno %1$d z %2$d</string>
+    <string name="toast_select_edits_for_upload">Vyberte úpravy pro nahrání</string>
 </resources>
