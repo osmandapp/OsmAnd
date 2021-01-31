@@ -728,6 +728,8 @@ public class SettingsHelper {
 				} catch (IllegalArgumentException e) {
 					LOG.warn("Trying to export unsuported file type", e);
 				}
+			} else if (object instanceof FileSettingsItem) {
+				result.add((FileSettingsItem) object);
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
 			} else if (object instanceof ApplicationModeBean) {
@@ -754,16 +756,20 @@ public class SettingsHelper {
 			}
 		}
 		if (!quickActions.isEmpty()) {
-			result.add(new QuickActionsSettingsItem(app, getBaseQuickActionsSettingsItem(settingsItems), quickActions));
+			QuickActionsSettingsItem baseItem = getBaseItem(SettingsItemType.QUICK_ACTIONS, QuickActionsSettingsItem.class, settingsItems);
+			result.add(new QuickActionsSettingsItem(app, baseItem, quickActions));
 		}
 		if (!poiUIFilters.isEmpty()) {
-			result.add(new PoiUiFiltersSettingsItem(app, getBasePoiUiFiltersSettingsItem(settingsItems), poiUIFilters));
+			PoiUiFiltersSettingsItem baseItem = getBaseItem(SettingsItemType.POI_UI_FILTERS, PoiUiFiltersSettingsItem.class, settingsItems);
+			result.add(new PoiUiFiltersSettingsItem(app, baseItem, poiUIFilters));
 		}
 		if (!tileSourceTemplates.isEmpty()) {
-			result.add(new MapSourcesSettingsItem(app, getBaseMapSourcesSettingsItem(settingsItems), tileSourceTemplates));
+			MapSourcesSettingsItem baseItem = getBaseItem(SettingsItemType.MAP_SOURCES, MapSourcesSettingsItem.class, settingsItems);
+			result.add(new MapSourcesSettingsItem(app, baseItem, tileSourceTemplates));
 		}
 		if (!avoidRoads.isEmpty()) {
-			result.add(new AvoidRoadsSettingsItem(app, getBaseAvoidRoadsSettingsItem(settingsItems), avoidRoads));
+			AvoidRoadsSettingsItem baseItem = getBaseItem(SettingsItemType.AVOID_ROADS, AvoidRoadsSettingsItem.class, settingsItems);
+			result.add(new AvoidRoadsSettingsItem(app, baseItem, avoidRoads));
 		}
 		if (!appModeBeans.isEmpty()) {
 			for (ApplicationModeBean modeBean : appModeBeans) {
@@ -825,46 +831,6 @@ public class SettingsHelper {
 				if (Algorithms.objectEquals(bean.stringKey, modeBean.stringKey) && Algorithms.objectEquals(bean.userProfileName, modeBean.userProfileName)) {
 					return profileItem;
 				}
-			}
-		}
-		return null;
-	}
-
-	@Nullable
-	private QuickActionsSettingsItem getBaseQuickActionsSettingsItem(List<SettingsItem> settingsItems) {
-		for (SettingsItem settingsItem : settingsItems) {
-			if (settingsItem.getType() == SettingsItemType.QUICK_ACTIONS) {
-				return (QuickActionsSettingsItem) settingsItem;
-			}
-		}
-		return null;
-	}
-
-	@Nullable
-	private PoiUiFiltersSettingsItem getBasePoiUiFiltersSettingsItem(List<SettingsItem> settingsItems) {
-		for (SettingsItem settingsItem : settingsItems) {
-			if (settingsItem.getType() == SettingsItemType.POI_UI_FILTERS) {
-				return (PoiUiFiltersSettingsItem) settingsItem;
-			}
-		}
-		return null;
-	}
-
-	@Nullable
-	private MapSourcesSettingsItem getBaseMapSourcesSettingsItem(List<SettingsItem> settingsItems) {
-		for (SettingsItem settingsItem : settingsItems) {
-			if (settingsItem.getType() == SettingsItemType.MAP_SOURCES) {
-				return (MapSourcesSettingsItem) settingsItem;
-			}
-		}
-		return null;
-	}
-
-	@Nullable
-	private AvoidRoadsSettingsItem getBaseAvoidRoadsSettingsItem(List<SettingsItem> settingsItems) {
-		for (SettingsItem settingsItem : settingsItems) {
-			if (settingsItem.getType() == SettingsItemType.AVOID_ROADS) {
-				return (AvoidRoadsSettingsItem) settingsItem;
 			}
 		}
 		return null;
