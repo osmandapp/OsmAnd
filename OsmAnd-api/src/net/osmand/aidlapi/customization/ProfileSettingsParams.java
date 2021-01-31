@@ -16,7 +16,7 @@ public class ProfileSettingsParams extends AidlParams {
 
 	public static final String VERSION_KEY = "version";
 	public static final String REPLACE_KEY = "replace";
-	public static final String SILENT_IMPORT_KEY = "silent_import";
+	public static final String SILENT_IMPORT_KEY = "silentImport";
 	public static final String LATEST_CHANGES_KEY = "latestChanges";
 	public static final String PROFILE_SETTINGS_URI_KEY = "profileSettingsUri";
 	private Uri profileSettingsUri;
