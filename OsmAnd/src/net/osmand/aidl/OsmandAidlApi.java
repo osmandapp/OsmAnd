@@ -2296,13 +2296,13 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	public boolean importProfileV2(final Uri profileUri, ArrayList<String> settingsTypeKeys, boolean replace,
-								   String latestChanges, int version) {
+	public boolean importProfileV2(final Uri profileUri, List<String> settingsTypeKeys, boolean replace,
+								   boolean silent, String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
-			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, settingsTypeKeys);
+			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, new ArrayList<>(settingsTypeKeys));
 			bundle.putBoolean(REPLACE_KEY, replace);
-			bundle.putBoolean(SILENT_IMPORT_KEY, true);
+			bundle.putBoolean(SILENT_IMPORT_KEY, silent);
 			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
 			bundle.putInt(SettingsHelper.SETTINGS_VERSION_KEY, version);
 
