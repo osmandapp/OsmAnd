@@ -149,6 +149,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private Location lastLocation;
 	private UpdateLocationViewCache updateLocationViewCache;
 	private boolean locationUpdateStarted;
+	private LatLon latLon;
 
 	private int menuTitleHeight;
 	private int toolbarHeightPx;
@@ -257,6 +258,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public void setSelectedGpxFile(SelectedGpxFile selectedGpxFile) {
 		this.selectedGpxFile = selectedGpxFile;
+	}
+
+	public void setLatLon(LatLon latLon) {
+		this.latLon = latLon;
 	}
 
 	@Override
@@ -556,10 +561,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		MapActivity mapActivity = getMapActivity();
 		View view = overviewCard.getView();
 		if (mapActivity != null && view != null) {
-			MapContextMenu menu = mapActivity.getContextMenu();
 			TextView distanceText = (TextView) view.findViewById(R.id.distance);
 			ImageView direction = (ImageView) view.findViewById(R.id.direction);
-			app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, menu.getLatLon());
+			app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, latLon);
 		}
 	}
 
@@ -1113,7 +1117,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
 		}
 		if (selectedGpxFile != null) {
-			showInstance(mapActivity, selectedGpxFile);
+			showInstance(mapActivity, selectedGpxFile, null);
 		} else if (!Algorithms.isEmpty(path)) {
 			String title = app.getString(R.string.loading_smth, "");
 			final ProgressDialog progress = ProgressDialog.show(mapActivity, title, app.getString(R.string.loading_data));
@@ -1126,7 +1130,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (mapActivity != null) {
 						OsmandApplication app = mapActivity.getMyApplication();
 						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(result, true, false);
-						showInstance(mapActivity, selectedGpxFile);
+						showInstance(mapActivity, selectedGpxFile, null);
 					}
 					if (progress != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 						progress.dismiss();
@@ -1138,7 +1142,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, SelectedGpxFile selectedGpxFile) {
+	public static boolean showInstance(@NonNull MapActivity mapActivity, SelectedGpxFile selectedGpxFile, @Nullable LatLon latLon) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
@@ -1147,6 +1151,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setArguments(args);
 			fragment.setRetainInstance(true);
 			fragment.setSelectedGpxFile(selectedGpxFile);
+
+			if (latLon != null) {
+				fragment.setLatLon(latLon);
+			} else {
+				QuadRect rect = selectedGpxFile.getGpxFile().getRect();
+				LatLon latLonRect = new LatLon(rect.centerY(), rect.centerX());
+				fragment.setLatLon(latLonRect);
+			}
 
 			mapActivity.getSupportFragmentManager()
 					.beginTransaction()
