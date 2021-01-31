@@ -212,7 +212,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 			}
 		} else {
 			wikiPlugin.setLanguagesToShow(localesForSaving);
-			wikiPlugin.setShowAllLanguages(isGlobalWikiPoiEnabled);
+			wikiPlugin.setShowAllLanguages(global);
 		}
 
 		wikiPlugin.updateWikipediaState();
