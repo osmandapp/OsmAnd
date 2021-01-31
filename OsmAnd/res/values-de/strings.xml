@@ -3972,7 +3972,7 @@
     <string name="select_folder">Ordner auswählen</string>
     <string name="select_folder_descr">Ordner auswählen oder neuen hinzufügen</string>
     <string name="shared_string_empty">Leer</string>
-    <string name="analyze_by_intervals">Nach Intervallen auswerten (geteiltes Intervall)</string>
+    <string name="analyze_by_intervals">Nach Intervallen auswerten</string>
     <string name="upload_to_openstreetmap">Hochladen zu OpenStreetMap</string>
     <string name="edit_track">Track editieren</string>
     <string name="rename_track">Track umbenennen</string>
