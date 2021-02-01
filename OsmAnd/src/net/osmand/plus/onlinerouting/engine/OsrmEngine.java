@@ -8,7 +8,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
-import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -77,19 +76,17 @@ public class OsrmEngine extends OnlineRoutingEngine {
 
 	@Nullable
 	@Override
-	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	public OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
 	                                                 @NonNull OsmandApplication app,
 	                                                 boolean leftSideNavigation) throws JSONException {
-		JSONObject obj = new JSONObject(content);
-		JSONObject routeInfo = obj.getJSONArray("routes").getJSONObject(0);
-		String encodedPoints = routeInfo.getString("geometry");
+		String encodedPoints = root.getString("geometry");
 		List<LatLon> points = GeoPolylineParserUtil.parse(encodedPoints, GeoPolylineParserUtil.PRECISION_5);
 		if (isEmpty(points)) return null;
 
 		List<Location> route = convertRouteToLocationsList(points);
 		List<RouteDirectionInfo> directions = new ArrayList<>();
 		int startSearchingId = 0;
-		JSONArray legs = routeInfo.getJSONArray("legs");
+		JSONArray legs = root.getJSONArray("legs");
 		for (int i = 0; i < legs.length(); i++) {
 			JSONObject leg = legs.getJSONObject(i);
 			if (!leg.has("steps")) continue;
@@ -226,14 +223,15 @@ public class OsrmEngine extends OnlineRoutingEngine {
 		return id != null ? TurnType.valueOf(id, leftSide) : null;
 	}
 
+	@NonNull
 	@Override
-	public boolean parseServerMessage(@NonNull StringBuilder sb,
-	                                  @NonNull String content) throws JSONException {
-		JSONObject obj = new JSONObject(content);
-		if (obj.has("message")) {
-			String message = obj.getString("message");
-			sb.append(message);
-		}
-		return obj.has("routes");
+	protected String getErrorMessageKey() {
+		return "message";
+	}
+
+	@NonNull
+	@Override
+	protected String getRootArrayKey() {
+		return "routes";
 	}
 }

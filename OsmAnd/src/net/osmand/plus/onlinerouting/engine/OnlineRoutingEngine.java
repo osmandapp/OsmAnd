@@ -12,12 +12,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
-import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.util.Algorithms;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -98,10 +100,31 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@NonNull
 	public abstract String getStandardUrl();
 
+	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                 @NonNull OsmandApplication app,
+	                                                 boolean leftSideNavigation) throws JSONException {
+		JSONObject root = parseRootResponseObject(content);
+		return root != null ? parseServerResponse(root, app, leftSideNavigation) : null;
+	}
+
 	@Nullable
-	public abstract OnlineRoutingResponse parseServerResponse(@NonNull String content,
-	                                                          @NonNull OsmandApplication app,
-	                                                          boolean leftSideNavigation) throws JSONException;
+	protected abstract OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
+	                                                             @NonNull OsmandApplication app,
+	                                                             boolean leftSideNavigation) throws JSONException;
+
+	@Nullable
+	protected JSONObject parseRootResponseObject(@NonNull String content) throws JSONException {
+		JSONObject fullJSON = new JSONObject(content);
+		String responseArrayKey = getRootArrayKey();
+		JSONArray array = null;
+		if (fullJSON.has(responseArrayKey)) {
+			array = fullJSON.getJSONArray(responseArrayKey);
+		}
+		return array != null && array.length() > 0 ? array.getJSONObject(0) : null;
+	}
+
+	@NonNull
+	protected abstract String getRootArrayKey();
 
 	@NonNull
 	protected List<Location> convertRouteToLocationsList(@NonNull List<LatLon> route) {
@@ -161,7 +184,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return allowedParameters.contains(key);
 	}
 
-	protected void allowParameters(@NonNull EngineParameter ... allowedParams) {
+	protected void allowParameters(@NonNull EngineParameter... allowedParams) {
 		allowedParameters.addAll(Arrays.asList(allowedParams));
 	}
 
@@ -193,18 +216,24 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return CUSTOM_VEHICLE;
 	}
 
-	public abstract boolean parseServerMessage(@NonNull StringBuilder sb,
-	                                           @NonNull String content) throws JSONException;
+	public boolean checkServerResponse(@NonNull StringBuilder errorMessage,
+	                                   @NonNull String content) throws JSONException {
+		JSONObject obj = new JSONObject(content);
+		String messageKey = getErrorMessageKey();
+		if (obj.has(messageKey)) {
+			String message = obj.getString(messageKey);
+			errorMessage.append(message);
+		}
+		return obj.has(getRootArrayKey());
+	}
+
+	@NonNull
+	protected abstract String getErrorMessageKey();
 
 	@NonNull
 	@Override
 	public Object clone() {
 		return OnlineRoutingFactory.createEngine(getType(), getParams());
-	}
-
-	@NonNull
-	public static String generateKey() {
-		return ONLINE_ROUTING_ENGINE_PREFIX + System.currentTimeMillis();
 	}
 
 	@Override
@@ -215,5 +244,28 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		OnlineRoutingEngine engine = (OnlineRoutingEngine) o;
 		if (getType() != engine.getType()) return false;
 		return Algorithms.objectEquals(getParams(), engine.getParams());
+	}
+
+	@NonNull
+	public static String generateKey() {
+		return ONLINE_ROUTING_ENGINE_PREFIX + System.currentTimeMillis();
+	}
+
+	public static class OnlineRoutingResponse {
+		private List<Location> route;
+		private List<RouteDirectionInfo> directions;
+
+		public OnlineRoutingResponse(List<Location> route, List<RouteDirectionInfo> directions) {
+			this.route = route;
+			this.directions = directions;
+		}
+
+		public List<Location> getRoute() {
+			return route;
+		}
+
+		public List<RouteDirectionInfo> getDirections() {
+			return directions;
+		}
 	}
 }
