@@ -1,6 +1,7 @@
 package net.osmand.plus.wikivoyage.article;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -339,17 +340,20 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	}
 
 	private void updateTrackButton(boolean processing, @Nullable GPXFile gpxFile) {
-		if (processing) {
-			trackButton.setVisibility(View.GONE);
-			gpxProgress.setVisibility(View.VISIBLE);
-		} else {
-			if (gpxFile != null && gpxFile.getPointsSize() > 0) {
-				trackButton.setVisibility(View.VISIBLE);
-				trackButton.setText(getString(R.string.shared_string_gpx_points) + " (" + gpxFile.getPointsSize() + ")");
-			} else {
+		Context ctx = getContext();
+		if (ctx != null) {
+			if (processing) {
 				trackButton.setVisibility(View.GONE);
+				gpxProgress.setVisibility(View.VISIBLE);
+			} else {
+				if (gpxFile != null && gpxFile.getPointsSize() > 0) {
+					trackButton.setVisibility(View.VISIBLE);
+					trackButton.setText(ctx.getString(R.string.shared_string_gpx_points) + " (" + gpxFile.getPointsSize() + ")");
+				} else {
+					trackButton.setVisibility(View.GONE);
+				}
+				gpxProgress.setVisibility(View.GONE);
 			}
-			gpxProgress.setVisibility(View.GONE);
 		}
 	}
 

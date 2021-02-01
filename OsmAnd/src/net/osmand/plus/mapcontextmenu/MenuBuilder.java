@@ -421,7 +421,7 @@ public class MenuBuilder {
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							if (openDBAPI.checkPrivateKeyValid(baseUrl, name, privateKey)) {
+							if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
 								app.runInUIThread(new Runnable() {
 									@Override
 									public void run() {
