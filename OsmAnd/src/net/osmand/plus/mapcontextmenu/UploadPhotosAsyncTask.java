@@ -128,7 +128,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 	private boolean uploadImageToPlace(InputStream image) {
 		boolean success = false;
 		InputStream serverData = new ByteArrayInputStream(compressImageToJpeg(image));
-		final String baseUrl = OPRConstants.getBaseUrl(app);
+		String baseUrl = OPRConstants.getBaseUrl(app);
 		// all these should be constant
 		String url = baseUrl + "api/ipfs/image";
 		String response = NetworkUtils.sendPostDataRequest(url, "file", "compressed.jpeg", serverData);
@@ -146,18 +146,16 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 						response, error);
 				if (res != 200) {
 					app.showToastMessage(error.toString());
-				} else {
-					//ok, continue
 				}
 			} catch (FailedVerificationException e) {
 				LOG.error(e);
 				checkTokenAndShowScreen();
-
 			}
 			if (res != 200) {
 				//image was uploaded but not added to blockchain
 				checkTokenAndShowScreen();
 			} else {
+				success = true;
 				String str = app.getString(R.string.successfully_uploaded_pattern, 1, 1);
 				app.showToastMessage(str);
 				//refresh the image
@@ -166,7 +164,6 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 				if (activity != null) {
 					MenuBuilder.execute(new GetImageCardsTask(activity, latLon, params, imageCardListener));
 				}
-				success = true;
 			}
 		} else {
 			checkTokenAndShowScreen();
