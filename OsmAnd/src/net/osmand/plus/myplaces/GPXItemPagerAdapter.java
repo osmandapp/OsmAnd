@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -24,7 +24,6 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -37,6 +36,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.CustomRadioButtonType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
@@ -44,7 +44,6 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.track.TrackDisplayHelper;
-import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 import net.osmand.util.Algorithms;
@@ -53,6 +52,7 @@ import net.osmand.util.MapUtils;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -74,7 +74,6 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private GpxDisplayItem gpxItem;
 	private GPXTabItemType[] tabTypes;
 
-	private PagerSlidingTabStrip tabs;
 	private SparseArray<View> views = new SparseArray<>();
 	private SegmentActionsListener actionsListener;
 
@@ -82,47 +81,17 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private boolean nightMode;
 
 
-	public GPXItemPagerAdapter(@NonNull final PagerSlidingTabStrip tabs,
+	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
 							   @NonNull GpxDisplayItem gpxItem,
 							   @NonNull TrackDisplayHelper displayHelper,
-							   @NonNull SegmentActionsListener actionsListener,
-							   final boolean nightMode) {
+							   boolean nightMode, @NonNull SegmentActionsListener actionsListener) {
 		super();
-		this.tabs = tabs;
+		this.app = app;
 		this.gpxItem = gpxItem;
-		this.displayHelper = displayHelper;
 		this.nightMode = nightMode;
+		this.displayHelper = displayHelper;
 		this.actionsListener = actionsListener;
-		app = (OsmandApplication) tabs.getContext().getApplicationContext();
 		iconsCache = app.getUIUtilities();
-
-		tabs.setOnPageChangeListener(new OnPageChangeListener() {
-
-			@Override
-			public void onPageSelected(int arg0) {
-				UiUtilities.CustomRadioButtonTypeGroup type;
-				if (arg0 == 0) {
-					type = UiUtilities.CustomRadioButtonTypeGroup.START;
-				} else if (arg0 == 1) {
-					type = UiUtilities.CustomRadioButtonTypeGroup.CENTER;
-				} else {
-					type = UiUtilities.CustomRadioButtonTypeGroup.END;
-				}
-
-				View parent = (View) tabs.getChildAt(0);
-				UiUtilities.updateCustomRadioButtonsGroup(app, parent, nightMode, type);
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-
-			}
-		});
-
 		fetchTabTypes();
 	}
 
@@ -589,44 +558,60 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return view == object;
 	}
 
+	int singleTabLayoutId[] = {R.layout.center_button_container};
+	int doubleTabsLayoutIds[] = {R.layout.left_button_container, R.layout.right_button_container};
+	int tripleTabsLayoutIds[] = {R.layout.left_button_container, R.layout.center_button_container, R.layout.right_button_container};
+
 	@Override
 	public View getCustomTabView(@NonNull ViewGroup parent, int position) {
 		int layoutId;
-		if (position == 0) {
-			layoutId = R.layout.left_button_container;
-		} else if (position == 1) {
-			layoutId = R.layout.center_button_container;
+		int count = getCount();
+		if (count == 1) {
+			layoutId = singleTabLayoutId[position];
+		} else if (count == 2) {
+			layoutId = doubleTabsLayoutIds[position];
 		} else {
-			layoutId = R.layout.right_button_container;
+			layoutId = tripleTabsLayoutIds[position];
 		}
 		View tab = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
 		tab.setTag(tabTypes[position].name());
-		deselect(tab);
 		return tab;
 	}
 
 	@Override
 	public void select(View tab) {
 		GPXTabItemType tabType = GPXTabItemType.valueOf((String) tab.getTag());
-		UiUtilities.CustomRadioButtonTypeGroup type;
-		if (tabType == GPXTabItemType.GPX_TAB_ITEM_GENERAL) {
-			type = UiUtilities.CustomRadioButtonTypeGroup.START;
-		} else if (tabType == GPXTabItemType.GPX_TAB_ITEM_ALTITUDE) {
-			type = UiUtilities.CustomRadioButtonTypeGroup.CENTER;
-		} else {
-			type = UiUtilities.CustomRadioButtonTypeGroup.END;
-		}
+		int index = Arrays.asList(tabTypes).indexOf(tabType);
 		View parent = (View) tab.getParent();
-		UiUtilities.updateCustomRadioButtonsGroup(app, parent, nightMode, type);
-
-		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) parent.getLayoutParams();
-		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
-		int containerMargin = app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_margin_small);
-		AndroidUtils.setMargins(params, contentPadding, containerMargin, contentPadding, containerMargin);
+		UiUtilities.updateCustomRadioButtons(app, parent, nightMode, getCustomRadioButtonType(index));
 	}
 
 	@Override
 	public void deselect(View tab) {
+
+	}
+
+	@Override
+	public void tabStylesUpdated(View tabsContainer, int currentPosition) {
+		ViewGroup.MarginLayoutParams params = (MarginLayoutParams) tabsContainer.getLayoutParams();
+		params.height = app.getResources().getDimensionPixelSize(R.dimen.dialog_button_height);
+		tabsContainer.setLayoutParams(params);
+		UiUtilities.updateCustomRadioButtons(app, tabsContainer, nightMode, getCustomRadioButtonType(currentPosition));
+	}
+
+	private CustomRadioButtonType getCustomRadioButtonType(int index) {
+		int count = getCount();
+		CustomRadioButtonType type = CustomRadioButtonType.CENTER;
+		if (count == 2) {
+			type = index > 0 ? CustomRadioButtonType.END : CustomRadioButtonType.START;
+		} else if (count == 3) {
+			if (index == 0) {
+				type = CustomRadioButtonType.START;
+			} else if (index == 2) {
+				type = CustomRadioButtonType.END;
+			}
+		}
+		return type;
 	}
 
 	@Override

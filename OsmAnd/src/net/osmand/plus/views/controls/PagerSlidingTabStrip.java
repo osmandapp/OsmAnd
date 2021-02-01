@@ -68,6 +68,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		public View getCustomTabView(@NonNull ViewGroup parent, int position);
 		public void select(View tab);
 		public void deselect(View tab);
+		public void tabStylesUpdated(View tabsContainer, int currentPosition);
 	}
 
 	public interface OnTabReselectedListener {
@@ -307,6 +308,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		}
 	}
 
+	public int getCurrentPosition() {
+		return currentPosition;
+	}
+
 	private void addTab(final int position, CharSequence title, View tabView) {
 		TextView textView = (TextView) tabView.findViewById(R.id.tab_title);
 		if (textView != null) {
@@ -332,42 +337,32 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private void updateTabStyles() {
 		tabsContainer.setBackgroundResource(tabBackgroundResId);
-		for (int i = 0; i < tabCount; i++) {
-			View v = tabsContainer.getChildAt(i);
-			v.setBackgroundResource(tabBackgroundResId);
-			v.setPadding(tabPadding, v.getPaddingTop(), tabPadding, v.getPaddingBottom());
-			TextView tab_title = (TextView) v.findViewById(R.id.tab_title);
+		if (pager.getAdapter() instanceof CustomTabProvider) {
+			((CustomTabProvider) pager.getAdapter()).tabStylesUpdated(tabsContainer, currentPosition);
+		} else {
+			for (int i = 0; i < tabCount; i++) {
+				View v = tabsContainer.getChildAt(i);
+				v.setBackgroundResource(tabBackgroundResId);
+				v.setPadding(tabPadding, v.getPaddingTop(), tabPadding, v.getPaddingBottom());
 
-			if (tab_title != null) {
-				tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize);
-				tab_title.setTypeface(tabTypeface, pager.getCurrentItem() == i ? tabTypefaceSelectedStyle : tabTypefaceStyle);
-				switch (tabSelectionType) {
-					case ALPHA:
-						float alpha = pager.getCurrentItem() == i ? tabTextSelectedAlpha : tabTextAlpha;
-						tab_title.setAlpha(alpha);
-						tab_title.setTextColor(tabTextColor);
-						break;
-					case SOLID_COLOR:
-						tab_title.setAlpha(OPAQUE);
-						tab_title.setTextColor(pager.getCurrentItem() == i ? tabTextColor : tabInactiveTextColor);
-						break;
-				}
-
-				// setAllCaps() is only available from API 14, so the upper case is made manually if we are on a
-				// pre-ICS-build
-				if (textAllCaps) {
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-						tab_title.setAllCaps(true);
-					} else {
-						tab_title.setText(tab_title.getText().toString().toUpperCase(locale));
+				TextView tabTitle = v.findViewById(R.id.tab_title);
+				if (tabTitle != null) {
+					tabTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize);
+					tabTitle.setTypeface(tabTypeface, pager.getCurrentItem() == i ? tabTypefaceSelectedStyle : tabTypefaceStyle);
+					switch (tabSelectionType) {
+						case ALPHA:
+							float alpha = pager.getCurrentItem() == i ? tabTextSelectedAlpha : tabTextAlpha;
+							tabTitle.setAlpha(alpha);
+							tabTitle.setTextColor(tabTextColor);
+							break;
+						case SOLID_COLOR:
+							tabTitle.setAlpha(OPAQUE);
+							tabTitle.setTextColor(pager.getCurrentItem() == i ? tabTextColor : tabInactiveTextColor);
+							break;
 					}
-				}
-			}
-			if (pager.getAdapter() instanceof CustomTabProvider) {
-				if (pager.getCurrentItem() == i) {
-					((CustomTabProvider) pager.getAdapter()).select(v);
-				} else {
-					((CustomTabProvider) pager.getAdapter()).deselect(v);
+					if (textAllCaps) {
+						tabTitle.setAllCaps(true);
+					}
 				}
 			}
 		}
@@ -558,39 +553,41 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private void notSelected(View tab) {
 		if (tab != null) {
-			TextView title = (TextView) tab.findViewById(R.id.tab_title);
-			if (title != null) {
-				title.setTypeface(tabTypeface, tabTypefaceStyle);
-				switch (tabSelectionType) {
-					case ALPHA:
-						title.setAlpha(tabTextAlpha);
-						break;
-					case SOLID_COLOR:
-						title.setTextColor(tabInactiveTextColor);
-						break;
-				}
-			}
 			if (pager.getAdapter() instanceof CustomTabProvider) {
 				((CustomTabProvider) pager.getAdapter()).deselect(tab);
+			} else {
+				TextView title = tab.findViewById(R.id.tab_title);
+				if (title != null) {
+					title.setTypeface(tabTypeface, tabTypefaceStyle);
+					switch (tabSelectionType) {
+						case ALPHA:
+							title.setAlpha(tabTextAlpha);
+							break;
+						case SOLID_COLOR:
+							title.setTextColor(tabInactiveTextColor);
+							break;
+					}
+				}
 			}
 		}
 	}
 
 	private void selected(View tab) {
 		if (tab != null) {
-			TextView title = (TextView) tab.findViewById(R.id.tab_title);
-			if (title != null) {
-				title.setTypeface(tabTypeface, tabTypefaceSelectedStyle);
-				switch (tabSelectionType) {
-					case ALPHA:
-						title.setAlpha(tabTextSelectedAlpha);
-						break;
-					case SOLID_COLOR:
-						title.setTextColor(tabTextColor);
-						break;
-				}
-				if (pager.getAdapter() instanceof CustomTabProvider) {
-					((CustomTabProvider) pager.getAdapter()).select(tab);
+			if (pager.getAdapter() instanceof CustomTabProvider) {
+				((CustomTabProvider) pager.getAdapter()).select(tab);
+			} else {
+				TextView title = tab.findViewById(R.id.tab_title);
+				if (title != null) {
+					title.setTypeface(tabTypeface, tabTypefaceSelectedStyle);
+					switch (tabSelectionType) {
+						case ALPHA:
+							title.setAlpha(tabTextSelectedAlpha);
+							break;
+						case SOLID_COLOR:
+							title.setTextColor(tabTextColor);
+							break;
+					}
 				}
 			}
 		}
