@@ -931,7 +931,7 @@
     <string name="files_limit">%1$d resterende bestanden</string>
     <string name="available_downloads_left">%1$d resterende bestanden nog te downloaden</string>
     <string name="install_paid">Volledige versie</string>
-    <string name="cancel_route">Annuleer route</string>
+    <string name="cancel_route">Annuleer route \?</string>
     <string name="cancel_navigation">Stop navigatie</string>
     <string name="clear_destination">Bestemming wissen</string>
     <string name="use_magnetic_sensor_descr">Gebruik magnetische sensor in plaats van oriëntatiesensor voor het kompas.</string>
@@ -3726,31 +3726,31 @@
     <string name="plan_a_route">Plan een route</string>
     <string name="use_two_phase_routing">Gebruik de twee-fase A* route berekening methode</string>
     <string name="shared_string_graph">Grafiek</string>
-    <string name="message_graph_will_be_available_after_recalculation">Wacht op de herberekening van de route.
-\nDe grafiek is beschikbaar na herberekening.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Wacht totdat route herberekend is.
+\nNa herberekening is de grafiek zichtbaar.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="import_track_descr">Kies een trackbestand om te volgen of importeer het, vanaf uw apparaat.</string>
     <string name="app_mode_gap">Onderbreking</string>
     <string name="shared_string_custom">Aangepast</string>
     <string name="perform_oauth_authorization_description">Voer een OAuth-login uit om osm edit functies te gebruiken</string>
-    <string name="release_3_5">"• Bijgewerkte app- en profielinstellingen: instellingen zijn nu gerangschikt op type. Elk profiel kan afzonderlijk worden aangepast.
+    <string name="release_3_5">• Bijgewerkte app- en profielinstellingen: instellingen zijn nu gerangschikt op type. Elk profiel kan afzonderlijk worden aangepast.
 \n
-\n  • Nieuw dialoogvenster voor het downloaden van kaarten waarin wordt voorgesteld een kaart te downloaden tijdens het browsen
+\n • Nieuw dialoogvenster voor het downloaden van kaarten waarin wordt voorgesteld een kaart te downloaden tijdens het browsen
 \n
-\n  • Donkere thema-fixes
+\n • Donkere thema-fixes
 \n
-\n  • Verschillende routeringsproblemen over de hele wereld opgelost
+\n • Verschillende routeringsproblemen over de hele wereld opgelost
 \n
-\n  • Bijgewerkte basiskaart met meer gedetailleerd wegennet
+\n • Bijgewerkte basiskaart met meer gedetailleerd wegennet
 \n
-\n  • Vaste overstroomde gebieden over de hele wereld
+\n • Vaste overstroomde gebieden over de hele wereld
 \n
-\n  • Skirouting: hoogteprofiel en routecomplexiteit toegevoegd aan de routedetails
+\n • Skirouting: hoogteprofiel en routecomplexiteit toegevoegd aan de routedetails
 \n
-\n  • Andere bugs opgelost
+\n • Andere bugs opgelost
 \n
-\n"</string>
-    <string name="release_3_6">"• Profielen: nu kunt u de volgorde wijzigen, het pictogram voor de kaart instellen, alle instellingen voor basisprofielen wijzigen en ze terugzetten naar de standaardinstellingen
+\n</string>
+    <string name="release_3_6">• Profielen: nu kunt u de volgorde wijzigen, het pictogram voor de kaart instellen, alle instellingen voor basisprofielen wijzigen en ze terugzetten naar de standaardinstellingen
 \n
 \n • Exitnummer toegevoegd in de navigatie
 \n
@@ -3758,23 +3758,23 @@
 \n
 \n • Herwerkt instellingenscherm voor snelle toegang tot alle profielen
 \n
-\n  • Optie toegevoegd om instellingen van een ander profiel te kopiëren
+\n • Optie toegevoegd om instellingen van een ander profiel te kopiëren
 \n
-\n  • Mogelijkheid toegevoegd om een volgorde te wijzigen of POI-categorieën in Zoeken te verbergen
+\n • Mogelijkheid toegevoegd om een volgorde te wijzigen of POI-categorieën in Zoeken te verbergen
 \n
-\n  • Correct uitgelijnde POI-pictogrammen op de kaart
+\n • Correct uitgelijnde POI-pictogrammen op de kaart
 \n
-\n  • Zonsondergang / zonsopganggegevens toegevoegd om de kaart te configureren
+\n • Zonsondergang / zonsopganggegevens toegevoegd om de kaart te configureren
 \n
-\n  • Thuis/werk-pictogrammen toegevoegd op de kaart
+\n • Thuis/werk-pictogrammen toegevoegd op de kaart
 \n
-\n  • Ondersteuning toegevoegd voor meerdere regels beschrijving bij Instellingen
+\n • Ondersteuning toegevoegd voor meerdere regels beschrijving bij Instellingen
 \n
 \n • Correcte transliteratie toegevoegd aan de kaart van Japan
 \n
-\n  • Antarctica-kaart toegevoegd
+\n • Antarctica-kaart toegevoegd
 \n
-\n"</string>
+\n</string>
     <string name="what_is_new">Wat is er nieuw</string>
     <string name="snowmobile_render_descr">Voor sneeuwscooter, rijden met speciale wegen en tracks.</string>
     <string name="set_working_days_to_continue">Stel aantal werkdagen in om door te gaan</string>
@@ -3837,7 +3837,7 @@
     <string name="osm_edit_logout_success">Uitloggen gelukt</string>
     <string name="file_already_imported">Bestand is reeds geïmporteerd in OsmAnd</string>
     <string name="shared_string_local_maps">Lokale kaarten</string>
-    <string name="icon_group_amenity">Aangenaam</string>
+    <string name="icon_group_amenity">Voorziening</string>
     <string name="icon_group_special">Speciaal</string>
     <string name="icon_group_transport">Transport</string>
     <string name="icon_group_service">Onderhoud</string>
@@ -3856,7 +3856,7 @@
     <string name="open_street_map_login_mode">U moet inloggen om wijzigingen te uploaden.
 \n
 \nU kunt inloggen met de veilige OAuth-methode of uw loginnaam en wachtwoord gebruiken.</string>
-    <string name="use_login_password">Inloggen met gebruikersnaam en wachtwoord.</string>
+    <string name="use_login_password">Inloggen met gebruikersnaam en wachtwoord</string>
     <string name="login_account">Account</string>
     <string name="user_login">Gebruikersnaam</string>
     <string name="manage_subscription">Abonnement beheren</string>
@@ -3993,4 +3993,9 @@
     <string name="delete_waypoints">Waypoints verwijderen</string>
     <string name="copy_to_map_markers">Kopiëren naar Markeervlaggetjes</string>
     <string name="copy_to_map_favorites">Kopiëren naar Favorieten</string>
+    <string name="upload_photo">Opladen</string>
+    <string name="upload_photo_completed">Opladen voltooid</string>
+    <string name="uploading_count">Aan het opladen %1$d van %2$d</string>
+    <string name="uploaded_count">Opgeladen %1$d van %2$d</string>
+    <string name="toast_select_edits_for_upload">Selecteer de op te laden wijzigingen</string>
 </resources>
