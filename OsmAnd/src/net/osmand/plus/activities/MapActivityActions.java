@@ -928,7 +928,7 @@ public class MapActivityActions implements DialogProvider {
 						MapActivity.clearPrevActivityIntent();
 						TravelHelper travelHelper = getMyApplication().getTravelHelper();
 						travelHelper.initializeDataOnAppStartup();
-						if (!travelHelper.isAnyTravelBookPresent()) {
+						if (!travelHelper.isAnyTravelBookPresent() && !travelHelper.getBookmarksHelper().hasSavedArticles()) {
 							WikivoyageWelcomeDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 						} else {
 							Intent intent = new Intent(mapActivity, WikivoyageExploreActivity.class);

@@ -29,6 +29,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
@@ -37,6 +38,7 @@ import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
 
 import java.io.IOException;
@@ -173,12 +175,15 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			if (!Version.isPaidVersion(app) && !OpenBetaTravelCard.isClosed()) {
 				items.add(new OpenBetaTravelCard(activity, nightMode));
 			}
-			if (app.getTravelHelper().isAnyTravelBookPresent()) {
+			List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
+			if (!popularArticles.isEmpty()) {
 				items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
-
-				List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
 				for (TravelArticle article : popularArticles) {
-					items.add(new ArticleTravelCard(app, nightMode, article, activity.getSupportFragmentManager()));
+					if (article instanceof TravelGpx) {
+						items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, getActivity()));
+					} else {
+						items.add(new ArticleTravelCard(app, nightMode, article, activity.getSupportFragmentManager()));
+					}
 				}
 			}
 			items.add(new StartEditingTravelCard(activity, nightMode));

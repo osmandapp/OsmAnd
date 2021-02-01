@@ -47,7 +47,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -76,6 +75,7 @@ import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -1914,11 +1914,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				GpxData gpxData = editingCtx.getGpxData();
 				GPXFile gpx = gpxData != null ? gpxData.getGpxFile() : null;
 				if (gpx != null) {
-					Intent newIntent = new Intent(mapActivity, app.getAppCustomization().getTrackActivity());
-					newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
-					newIntent.putExtra(TrackActivity.OPEN_TRACKS_LIST, true);
-					newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(newIntent);
+					TrackMenuFragment.openTrack(mapActivity, new File(gpx.path), null);
 				}
 			}
 			editingCtx.resetRouteSettingsListener();

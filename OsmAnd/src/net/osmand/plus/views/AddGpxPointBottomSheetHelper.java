@@ -1,25 +1,26 @@
 package net.osmand.plus.views;
 
-import android.content.Intent;
 import android.graphics.PointF;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+
+import java.io.File;
 
 public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	private final View view;
@@ -73,7 +74,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 			public void onClick(View v) {
 				hide();
 				contextMenuLayer.cancelAddGpxPoint();
-				openTrackActivity();
+				onClose();
 			}
 		});
 	}
@@ -140,15 +141,16 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		if (contextMenu.isVisible() && contextMenu.isClosable()) {
 			contextMenu.close();
 		}
-		openTrackActivity();
+		onClose();
 	}
 
-	private void openTrackActivity() {
-		Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
-		newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, newGpxPoint.getGpx().path);
-		newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		mapActivity.startActivity(newIntent);
+	private void onClose() {
+		TrackMenuFragment fragment = mapActivity.getTrackMenuFragment();
+		if (fragment != null) {
+			fragment.show();
+		} else {
+			TrackMenuFragment.openTrack(mapActivity, new File(newGpxPoint.getGpx().path), null);
+		}
 	}
 
 	public static class NewGpxPoint {

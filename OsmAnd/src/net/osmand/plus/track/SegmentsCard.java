@@ -22,7 +22,6 @@ public class SegmentsCard extends BaseCard {
 
 	private TrackDisplayHelper displayHelper;
 	private GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
-	private SegmentGPXAdapter adapter;
 	private SegmentActionsListener listener;
 
 	public SegmentsCard(@NonNull MapActivity mapActivity, @NonNull TrackDisplayHelper displayHelper,

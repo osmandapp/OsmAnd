@@ -82,7 +82,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 	}
 
 	@Override
-	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState) {
+	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState, int previousMenuState) {
 		updateMapControlsVisibility(menuState);
 	}
 

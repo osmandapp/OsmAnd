@@ -70,7 +70,6 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -652,7 +651,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onNewIntent(final Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
-		intentHelper.parseLaunchIntents();
+		if (!intentHelper.parseLaunchIntents()) {
+			intentHelper.parseContentIntent();
+		}
 	}
 
 	@Override
@@ -1201,7 +1202,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 					}
 
-					TrackAppearanceFragment.showInstance(this, selectedGpxFile);
+					TrackAppearanceFragment.showInstance(this, selectedGpxFile, null);
 				} else if (toShow instanceof QuadRect) {
 					QuadRect qr = (QuadRect) toShow;
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
@@ -1568,6 +1569,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	public boolean shouldHideTopControls() {
+		boolean hideTopControls = !mapContextMenu.shouldShowTopControls();
+
+		TrackMenuFragment fragment = getTrackMenuFragment();
+		if (fragment != null) {
+			hideTopControls = hideTopControls || !fragment.shouldShowTopControls();
+		}
+
+		return hideTopControls;
+	}
+
 	public OsmandMapTileView getMapView() {
 		return mapView;
 	}
@@ -1628,8 +1640,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		launchMapActivityMoveToTop(activity, null);
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, Bundle intentParams) {
-		launchMapActivityMoveToTop(activity, intentParams, null, null);
+	public static void launchMapActivityMoveToTop(Context activity, Bundle prevIntentParams) {
+		launchMapActivityMoveToTop(activity, prevIntentParams, null, null);
 	}
 
 	public static void clearPrevActivityIntent() {

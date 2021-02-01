@@ -29,6 +29,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -167,7 +168,7 @@ public class SaveGPXBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			}
 			FragmentActivity activity = getActivity();
 			if (openTrack && activity != null) {
-				AvailableGPXFragment.openTrack(activity, file);
+				TrackMenuFragment.openTrack(activity, file, null);
 			}
 		}
 	}

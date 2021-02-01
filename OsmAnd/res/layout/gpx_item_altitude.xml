@@ -1,368 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="?attr/bg_color">
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+	<com.github.mikephil.charting.charts.LineChart
+		android:id="@+id/chart"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/list_item_description_width"
+		android:layout_gravity="center_vertical" />
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"/>
+	<LinearLayout
+		android:id="@+id/gpx_join_gaps_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:minHeight="@dimen/card_row_min_height"
+		android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/gpx_join_gaps_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:minHeight="@dimen/card_row_min_height"
-            android:orientation="horizontal">
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/gpx_join_gaps_text"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:gravity="center_vertical"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:text="@string/join_segments"
+			android:textColor="?android:attr/textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_regular" />
 
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/gpx_join_gaps_text"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:text="@string/join_segments"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="@dimen/default_list_text_size"
-                osmand:typeface="@string/font_roboto_regular"
-	            android:paddingStart="@dimen/content_padding"
-	            android:paddingEnd="@dimen/content_padding" />
+		<androidx.appcompat.widget.SwitchCompat
+			android:id="@+id/gpx_join_gaps_switch"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:background="@null"
+			android:clickable="false"
+			android:focusable="false"
+			android:focusableInTouchMode="false"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding" />
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/gpx_join_gaps_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:clickable="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-	            android:paddingEnd="@dimen/content_padding"
-	            android:paddingStart="@dimen/content_padding" />
+	</LinearLayout>
 
-        </LinearLayout>
+	<LinearLayout
+		android:id="@+id/average_range"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingTop="@dimen/context_menu_first_line_top_margin"
+		android:paddingBottom="@dimen/content_padding_small">
 
-        <LinearLayout
-            android:id="@+id/average_range"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="13dp"
-            android:paddingBottom="11dp">
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding_small"
+			android:layout_marginRight="@dimen/content_padding_small"
+			android:layout_weight="1"
+			android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-	            android:paddingStart="16dp">
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/average_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    osmand:srcCompat="@drawable/ic_action_altitude_average"/>
+				<TextView
+					android:id="@+id/average_desc"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:text="@string/average_altitude"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="18dp"
-	                android:layout_marginStart="18dp">
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/average_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:text="40 m" />
 
-                    <net.osmand.plus.widgets.TextViewEx
-                        android:id="@+id/average_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        tools:text="40 m"
-                        android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
-                        android:textSize="@dimen/default_desc_text_size"/>
+			</LinearLayout>
 
-                    <TextView
-                        android:id="@+id/average_desc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/average_altitude"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="@dimen/default_sub_text_size"/>
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/average_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/poi_icon_size"
+				android:layout_marginTop="@dimen/subHeaderPadding"
+				osmand:srcCompat="@drawable/ic_action_altitude_average" />
 
-                </LinearLayout>
+		</LinearLayout>
 
-            </LinearLayout>
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding_small"
+			android:layout_marginLeft="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_weight="1"
+			android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-	            android:paddingStart="16dp">
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/range_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    osmand:srcCompat="@drawable/ic_action_altitude_average"/>
+				<TextView
+					android:id="@+id/range_desc"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:text="@string/altitude_range"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="18dp"
-	                android:layout_marginStart="18dp">
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/range_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:text="30m - 53m" />
 
-                    <net.osmand.plus.widgets.TextViewEx
-                        android:id="@+id/range_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        tools:text="30m - 53m"
-                        android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
-                        android:textSize="@dimen/default_desc_text_size"/>
+			</LinearLayout>
 
-                    <TextView
-                        android:id="@+id/range_desc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/altitude_range"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="@dimen/default_sub_text_size"/>
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/range_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/poi_icon_size"
+				android:layout_marginTop="@dimen/subHeaderPadding"
+				osmand:srcCompat="@drawable/ic_action_altitude_average" />
 
-                </LinearLayout>
+		</LinearLayout>
 
-            </LinearLayout>
+	</LinearLayout>
 
-        </LinearLayout>
+	<LinearLayout
+		android:id="@+id/list_divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/list_divider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginStart="@dimen/content_padding_small"
+			android:layout_marginLeft="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding_small"
+			android:layout_marginRight="@dimen/content_padding_small"
+			android:background="?attr/dashboard_divider" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="8dp"
-	            android:paddingStart="16dp"
-	            android:paddingEnd="8dp">
+	</LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?attr/dashboard_divider"/>
+	<LinearLayout
+		android:id="@+id/ascent_descent"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingTop="@dimen/context_menu_first_line_top_margin"
+		android:paddingBottom="@dimen/content_padding_small">
 
-            </LinearLayout>
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding_small"
+			android:layout_marginRight="@dimen/content_padding_small"
+			android:layout_weight="1"
+			android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:paddingLeft="8dp"
-                android:paddingRight="16dp"
-	            android:paddingStart="8dp"
-	            android:paddingEnd="16dp">
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?attr/dashboard_divider"/>
+				<TextView
+					android:id="@+id/ascent_desc"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:text="@string/altitude_ascent"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size" />
 
-            </LinearLayout>
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/ascent_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:text="174" />
 
-        </LinearLayout>
+			</LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ascent_descent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="13dp"
-            android:paddingBottom="11dp">
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/ascent_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/poi_icon_size"
+				android:layout_marginTop="@dimen/subHeaderPadding"
+				osmand:srcCompat="@drawable/ic_action_altitude_ascent" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-	            android:paddingStart="16dp">
+		</LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ascent_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    osmand:srcCompat="@drawable/ic_action_altitude_ascent"/>
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding_small"
+			android:layout_marginRight="@dimen/content_padding_small"
+			android:layout_weight="1"
+			android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="18dp"
-	                android:layout_marginStart="18dp">
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
 
-                    <net.osmand.plus.widgets.TextViewEx
-                        android:id="@+id/ascent_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        tools:text="174"
-                        android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
-                        android:textSize="@dimen/default_desc_text_size"/>
+				<TextView
+					android:id="@+id/descent_desc"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:text="@string/altitude_descent"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size" />
 
-                    <TextView
-                        android:id="@+id/ascent_desc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/altitude_ascent"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="@dimen/default_sub_text_size"/>
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/descent_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:text="164" />
 
-                </LinearLayout>
+			</LinearLayout>
 
-            </LinearLayout>
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/descent_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/poi_icon_size"
+				android:layout_marginTop="@dimen/subHeaderPadding"
+				osmand:srcCompat="@drawable/ic_action_altitude_descent" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-	            android:paddingStart="16dp">
+		</LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/descent_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    osmand:srcCompat="@drawable/ic_action_altitude_descent"/>
+	</LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="18dp"
-	                android:layout_marginStart="18dp">
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider" />
 
-                    <net.osmand.plus.widgets.TextViewEx
-                        android:id="@+id/descent_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        tools:text="164"
-                        android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
-                        android:textSize="@dimen/default_desc_text_size"/>
+	<LinearLayout
+		android:id="@+id/details_view"
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:gravity="center"
+		android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/descent_desc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/altitude_descent"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="@dimen/default_sub_text_size"/>
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/analyze_on_map"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="?attr/selectableItemBackground"
+			android:gravity="start|center_vertical"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:text="@string/analyze_on_map"
+			android:textColor="?attr/color_dialog_buttons"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_regular" />
 
-                </LinearLayout>
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/overflow_menu"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="?attr/selectableItemBackground"
+			android:gravity="end|center_vertical"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:text="@string/shared_string_options"
+			android:textColor="?attr/color_dialog_buttons"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_regular" />
 
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/dashboard_divider"/>
-
-        <LinearLayout
-            android:id="@+id/details_view"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <ImageButton
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:id="@+id/overflow_menu"
-                android:background="@null"
-                android:paddingRight="16dp"
-                android:paddingLeft="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                tools:src="@drawable/ic_overflow_menu_dark"
-	            android:paddingStart="16dp"
-	            android:paddingEnd="16dp" />
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:background="?attr/selectableItemBackground"
-                android:id="@+id/split_interval"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:gravity="start|center_vertical"
-                android:textColor="?attr/color_dialog_buttons"
-                android:textSize="@dimen/default_sub_text_size"
-                osmand:textAllCapsCompat="true"
-                osmand:typeface="@string/font_roboto_medium"
-                android:text="@string/gpx_split_interval"
-	            android:paddingEnd="16dp"
-	            android:paddingStart="16dp" />
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:background="?attr/selectableItemBackground"
-                android:id="@+id/analyze_on_map"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:gravity="end|center_vertical"
-                android:textColor="?attr/color_dialog_buttons"
-                android:textSize="@dimen/default_sub_text_size"
-                osmand:textAllCapsCompat="true"
-                osmand:typeface="@string/font_roboto_medium"
-                android:text="@string/analyze_on_map"
-	            android:paddingEnd="16dp"
-	            android:paddingStart="16dp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+	</LinearLayout>
 
 </LinearLayout>

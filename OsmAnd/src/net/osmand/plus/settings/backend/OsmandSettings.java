@@ -1171,6 +1171,9 @@ public class OsmandSettings {
 	public final OsmandPreference<String> OPR_USERNAME =
 			new StringPreference(this, "opr_username_secret", "").makeGlobal();
 
+	public final OsmandPreference<String> OPR_BLOCKCHAIN_NAME =
+			new StringPreference(this, "opr_blockchain_name", "").makeGlobal();
+
 	// this value boolean is synchronized with settings_pref.xml preference offline POI/Bugs edition
 	public final OsmandPreference<Boolean> OFFLINE_EDITION = new BooleanPreference(this, "offline_osm_editing", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> USE_DEV_URL = new BooleanPreference(this, "use_dev_url", false).makeGlobal().makeShared();

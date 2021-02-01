@@ -1,21 +1,19 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Looper;
+import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -38,14 +36,12 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -53,6 +49,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
+import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
@@ -78,13 +75,6 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-import org.openplacereviews.opendb.util.exception.FailedVerificationException;
-
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -98,7 +88,6 @@ import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCa
 public class MenuBuilder {
 
 	private static final int PICK_IMAGE = 1231;
-	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
 	protected static final String[] arrowChars = new String[] {"=>", " - "};
@@ -131,7 +120,6 @@ public class MenuBuilder {
 	private String preferredMapLang;
 	private String preferredMapAppLang;
 	private boolean transliterateNames;
-	private View view;
 	private View photoButton;
 
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
@@ -268,7 +256,6 @@ public class MenuBuilder {
 	}
 
 	public void build(View view) {
-		this.view = view;
 		firstRow = true;
 		hidden = false;
 		buildTopInternal(view);
@@ -423,7 +410,7 @@ public class MenuBuilder {
 				if (false) {
 					AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 				} else {
-					registerResultListener(view);
+					registerResultListener();
 					final String baseUrl = OPRConstants.getBaseUrl(app);
 					final String name = app.getSettings().OPR_USERNAME.get();
 					final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
@@ -434,13 +421,16 @@ public class MenuBuilder {
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							if (openDBAPI.checkPrivateKeyValid(baseUrl, name, privateKey)) {
+							if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
 								app.runInUIThread(new Runnable() {
 									@Override
 									public void run() {
 										Intent intent = new Intent();
 										intent.setType("image/*");
 										intent.setAction(Intent.ACTION_GET_CONTENT);
+										if (Build.VERSION.SDK_INT > 18) {
+											intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+										}
 										mapActivity.startActivityForResult(Intent.createChooser(intent,
 												mapActivity.getString(R.string.select_picture)), PICK_IMAGE);
 									}
@@ -470,113 +460,31 @@ public class MenuBuilder {
 				false, null, false);
 	}
 
-	private void registerResultListener(final View view) {
-		mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE, new ActivityResultListener.
-				OnActivityResultListener() {
+	private void registerResultListener() {
+		mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE, new OnActivityResultListener() {
 			@Override
 			public void onResult(int resultCode, Intent resultData) {
 				if (resultData != null) {
-					handleSelectedImage(view, resultData.getData());
+					List<Uri> imagesUri = new ArrayList<>();
+					Uri data = resultData.getData();
+					if (data != null) {
+						imagesUri.add(data);
+					}
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						ClipData clipData = resultData.getClipData();
+						if (clipData != null) {
+							for (int i = 0; i < clipData.getItemCount(); i++) {
+								Uri uri = resultData.getClipData().getItemAt(i).getUri();
+								if (uri != null) {
+									imagesUri.add(uri);
+								}
+							}
+						}
+					}
+					execute(new UploadPhotosAsyncTask(mapActivity, imagesUri, getLatLon(), placeId, getAdditionalCardParams(), imageCardListener));
 				}
 			}
 		}));
-	}
-
-	private void handleSelectedImage(final View view, final Uri uri) {
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				InputStream inputStream = null;
-				try {
-					inputStream = app.getContentResolver().openInputStream(uri);
-					if (inputStream != null) {
-						uploadImageToPlace(inputStream);
-					}
-				} catch (Exception e) {
-					LOG.error(e);
-					String str = app.getString(R.string.cannot_upload_image);
-					showToastMessage(str);
-				} finally {
-					Algorithms.closeStream(inputStream);
-				}
-			}
-		});
-		t.start();
-	}
-
-	private void uploadImageToPlace(InputStream image) {
-		InputStream serverData = new ByteArrayInputStream(compressImage(image));
-		final String baseUrl = OPRConstants.getBaseUrl(app);
-		String url = baseUrl + "api/ipfs/image";
-		String response = NetworkUtils.sendPostDataRequest(url, serverData);
-		if (response != null) {
-			int res = 0;
-			try {
-				StringBuilder error = new StringBuilder();
-				String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
-				String username = app.getSettings().OPR_USERNAME.get();
-				res = openDBAPI.uploadImage(
-						placeId,
-						baseUrl,
-						privateKey,
-						username,
-						response, error);
-				if (res != 200) {
-					showToastMessage(error.toString());
-				} else {
-					//ok, continue
-				}
-			} catch (FailedVerificationException e) {
-				LOG.error(e);
-				checkTokenAndShowScreen();
-			}
-			if (res != 200) {
-				//image was uploaded but not added to blockchain
-				checkTokenAndShowScreen();
-			} else {
-				String str = app.getString(R.string.successfully_uploaded_pattern, 1, 1);
-				showToastMessage(str);
-				//refresh the image
-				execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
-			}
-		} else {
-			checkTokenAndShowScreen();
-		}
-	}
-
-	private void showToastMessage(final String str) {
-		new Handler(Looper.getMainLooper()).post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(mapActivity.getBaseContext(), str, Toast.LENGTH_LONG).show();
-			}
-		});
-	}
-
-	//This method runs on non main thread
-	private void checkTokenAndShowScreen() {
-		final String baseUrl = OPRConstants.getBaseUrl(app);
-		final String name = app.getSettings().OPR_USERNAME.get();
-		final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
-		if (openDBAPI.checkPrivateKeyValid(baseUrl, name, privateKey)) {
-			String str = app.getString(R.string.cannot_upload_image);
-			showToastMessage(str);
-		} else {
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
-				}
-			});
-		}
-	}
-
-	private byte[] compressImage(InputStream image) {
-		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
-		Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		bmp.compress(Bitmap.CompressFormat.PNG, 70, os);
-		return os.toByteArray();
 	}
 
 	private void startLoadingImages() {

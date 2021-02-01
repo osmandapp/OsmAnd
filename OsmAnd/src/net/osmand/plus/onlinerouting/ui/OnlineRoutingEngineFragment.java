@@ -12,8 +12,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -23,6 +23,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -42,9 +43,9 @@ import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
 import net.osmand.plus.onlinerouting.VehicleType;
-import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
+import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
@@ -82,7 +83,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private View testResultsContainer;
 	private View saveButton;
 	private ScrollView scrollView;
+	private AppCompatImageView buttonsShadow;
 	private OnGlobalLayoutListener onGlobalLayout;
+	private OnScrollChangedListener onScroll;
 	private boolean isKeyboardShown = false;
 
 	private OnlineRoutingEngine engine;
@@ -112,7 +115,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		});
 	}
 
-	@SuppressLint("ClickableViewAccessibility")
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
@@ -121,7 +123,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		view = getInflater().inflate(
 				R.layout.online_routing_engine_fragment, container, false);
 		segmentsContainer = (ViewGroup) view.findViewById(R.id.segments_container);
-		scrollView = (ScrollView) segmentsContainer.getParent();
+		scrollView = (ScrollView) view.findViewById(R.id.segments_scroll);
+		buttonsShadow = (AppCompatImageView) view.findViewById(R.id.buttons_shadow);
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 		}
@@ -138,67 +141,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		generateUniqueNameIfNeeded();
 		updateCardViews(nameCard, typeCard, vehicleCard, exampleCard);
 
-		scrollView.setOnTouchListener(new View.OnTouchListener() {
-			int scrollViewY = 0;
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				int y = scrollView.getScrollY();
-				if (isKeyboardShown && scrollViewY != y) {
-					scrollViewY = y;
-					View focus = mapActivity.getCurrentFocus();
-					if (focus != null) {
-						AndroidUtils.hideSoftKeyboard(mapActivity, focus);
-						focus.clearFocus();
-					}
-				}
-				return false;
-			}
-		});
-
-		onGlobalLayout = new ViewTreeObserver.OnGlobalLayoutListener() {
-			private int layoutHeightPrevious;
-			private int layoutHeightMin;
-
-			@Override
-			public void onGlobalLayout() {
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				} else {
-					view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-				}
-
-				Rect visibleDisplayFrame = new Rect();
-				view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-				int layoutHeight = visibleDisplayFrame.bottom;
-
-				if (layoutHeight < layoutHeightPrevious) {
-					isKeyboardShown = true;
-					layoutHeightMin = layoutHeight;
-				} else {
-					isKeyboardShown = layoutHeight == layoutHeightMin;
-				}
-
-				if (layoutHeight != layoutHeightPrevious) {
-					FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
-					rootViewLayout.height = layoutHeight;
-					view.requestLayout();
-					layoutHeightPrevious = layoutHeight;
-				}
-
-				view.post(new Runnable() {
-					@Override
-					public void run() {
-						view.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayout);
-					}
-				});
-
-			}
-		};
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			view.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayout);
-		}
+		showShadowBelowButtons();
+		showButtonsAboveKeyboard();
+		hideKeyboardOnScroll();
 
 		return view;
 	}
@@ -223,8 +168,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			actionBtn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					onDeleteEngine();
-					dismiss();
+					delete(mapActivity);
 				}
 			});
 		} else {
@@ -359,6 +303,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		exampleCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		exampleCard.build(mapActivity);
 		exampleCard.setHeaderTitle(getString(R.string.shared_string_example));
+		exampleCard.hideFieldBoxLabel();
 		List<HorizontalSelectionItem> locationItems = new ArrayList<>();
 		for (ExampleLocation location : ExampleLocation.values()) {
 			locationItems.add(new HorizontalSelectionItem(location.getName(), location));
@@ -390,7 +335,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private void setupResultsContainer() {
 		testResultsContainer = getInflater().inflate(
 				R.layout.bottom_sheet_item_with_descr_64dp, segmentsContainer, false);
-		testResultsContainer.setVisibility(View.INVISIBLE);
+		testResultsContainer.setVisibility(View.GONE);
 		segmentsContainer.addView(testResultsContainer);
 	}
 
@@ -480,6 +425,22 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		helper.deleteEngine(engine);
 	}
 
+	private void delete(Activity activity) {
+		if (engine != null) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, isNightMode()));
+			builder.setMessage(getString(R.string.delete_online_routing_engine));
+			builder.setNegativeButton(R.string.shared_string_no, null);
+			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					onDeleteEngine();
+					dismiss();
+				}
+			});
+			builder.create().show();
+		}
+	}
+
 	private boolean isEditingMode() {
 		return editedEngineKey != null;
 	}
@@ -511,8 +472,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	private void showTestResults(final boolean resultOk,
-	                             final @NonNull String message,
-	                             final @NonNull ExampleLocation location) {
+								 final @NonNull String message,
+								 final @NonNull ExampleLocation location) {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
@@ -528,6 +489,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 					tvTitle.setText(String.format(getString(R.string.message_server_error), message));
 				}
 				tvDescription.setText(location.getName());
+				scrollView.post(new Runnable() {
+					@Override
+					public void run() {
+						scrollView.scrollTo(0, scrollView.getChildAt(0).getBottom());
+					}
+				});
 			}
 		});
 	}
@@ -567,6 +534,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	public void showExitDialog() {
 		View focus = view.findFocus();
 		AndroidUtils.hideSoftKeyboard(mapActivity, focus);
+		if (hasNameDuplicate(initEngine)) {
+			List<OnlineRoutingEngine> cachedEngines = helper.getEnginesExceptMentionedKeys(editedEngineKey);
+			OnlineRoutingUtils.generateUniqueName(app, initEngine, cachedEngines);
+		}
 		if (!engine.equals(initEngine)) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(mapActivity,
 					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
@@ -627,11 +598,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			view.getViewTreeObserver().removeOnGlobalLayoutListener(onGlobalLayout);
-		} else {
-			view.getViewTreeObserver().removeGlobalOnLayoutListener(onGlobalLayout);
-		}
+		removeOnGlobalLayoutListener();
+		removeOnScrollListener();
 	}
 
 	@Override
@@ -699,8 +667,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @NonNull ApplicationMode appMode,
-	                                @Nullable String editedEngineKey) {
+									@NonNull ApplicationMode appMode,
+									@Nullable String editedEngineKey) {
 		FragmentManager fm = activity.getSupportFragmentManager();
 		if (!fm.isStateSaved() && fm.findFragmentByTag(OnlineRoutingEngineFragment.TAG) == null) {
 			OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();
@@ -710,5 +678,123 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG).commitAllowingStateLoss();
 		}
+	}
+
+	@SuppressLint("ClickableViewAccessibility")
+	private void hideKeyboardOnScroll() {
+		scrollView.setOnTouchListener(new View.OnTouchListener() {
+			int scrollViewY = 0;
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				int y = scrollView.getScrollY();
+				if (isKeyboardShown && scrollViewY != y) {
+					scrollViewY = y;
+					View focus = mapActivity.getCurrentFocus();
+					if (focus != null) {
+						AndroidUtils.hideSoftKeyboard(mapActivity, focus);
+						focus.clearFocus();
+					}
+				}
+				return false;
+			}
+		});
+	}
+
+	private void showShadowBelowButtons() {
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(getShowShadowOnScrollListener());
+	}
+
+	private void showButtonsAboveKeyboard() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+			view.getViewTreeObserver().addOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
+		}
+	}
+
+	private OnScrollChangedListener getShowShadowOnScrollListener() {
+		if (onScroll == null) {
+			onScroll = new OnScrollChangedListener() {
+				@Override
+				public void onScrollChanged() {
+					boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+					if (scrollToBottomAvailable) {
+						showShadowButton();
+					} else {
+						hideShadowButton();
+					}
+				}
+			};
+		}
+		return onScroll;
+	}
+
+	private OnGlobalLayoutListener getShowButtonsOnGlobalListener() {
+		if (onGlobalLayout == null) {
+			onGlobalLayout = new OnGlobalLayoutListener() {
+				private int layoutHeightPrevious;
+				private int layoutHeightMin;
+
+				@Override
+				public void onGlobalLayout() {
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					} else {
+						view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+					}
+
+					Rect visibleDisplayFrame = new Rect();
+					view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
+					int layoutHeight = visibleDisplayFrame.bottom;
+
+					if (layoutHeight < layoutHeightPrevious) {
+						isKeyboardShown = true;
+						layoutHeightMin = layoutHeight;
+					} else {
+						isKeyboardShown = layoutHeight == layoutHeightMin;
+					}
+
+					if (layoutHeight != layoutHeightPrevious) {
+						FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
+						rootViewLayout.height = layoutHeight;
+						view.requestLayout();
+						layoutHeightPrevious = layoutHeight;
+					}
+
+					view.post(new Runnable() {
+						@Override
+						public void run() {
+							view.getViewTreeObserver().addOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
+						}
+					});
+				}
+			};
+		}
+		return onGlobalLayout;
+	}
+
+	private void removeOnScrollListener() {
+		scrollView.getViewTreeObserver().removeOnScrollChangedListener(getShowShadowOnScrollListener());
+	}
+
+	private void removeOnGlobalLayoutListener() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+			view.getViewTreeObserver().removeOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
+		} else {
+			view.getViewTreeObserver().removeGlobalOnLayoutListener(getShowButtonsOnGlobalListener());
+		}
+	}
+
+	private void showShadowButton() {
+		buttonsShadow.setVisibility(View.VISIBLE);
+		buttonsShadow.animate()
+				.alpha(0.8f)
+				.setDuration(200)
+				.setListener(null);
+	}
+
+	private void hideShadowButton() {
+		buttonsShadow.animate()
+				.alpha(0f)
+				.setDuration(200);
 	}
 }

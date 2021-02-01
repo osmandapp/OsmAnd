@@ -543,7 +543,7 @@
     <string name="left_side_navigation">Circolazione a sinistra</string>
     <string name="left_side_navigation_descr">Per i paesi in cui si guida nella parte sinistra della strada.</string>
     <string name="unknown_from_location">Posizione di partenza non ancora determinata.</string>
-    <string name="confirm_interrupt_download">Annulla il download del file\?</string>
+    <string name="confirm_interrupt_download">Annulla il download\?</string>
     <string name="basemap_was_selected_to_download">La mappa di base necessaria per il funzionamento è in coda per il download.</string>
     <string name="map_online_plugin_is_not_installed">Abilita il plugin \'Mappe Online\' per scegliere altre sorgenti di mappe</string>
     <string name="map_online_data">Mappe online e a tasselli</string>
@@ -929,7 +929,7 @@
     <string name="favourites_list_activity">Seleziona Preferito</string>
     <string name="local_openstreetmap_act_title">Modifiche OSM</string>
     <string name="download_using_mobile_internet">Non connesso al Wi-Fi. Usare la connessione a Internet attuale per il download\?</string>
-    <string name="cancel_route">Cancellare il percorso\?</string>
+    <string name="cancel_route">Ignora il percorso\?</string>
     <string name="cancel_navigation">Interrompere la navigazione</string>
     <string name="clear_destination">Cancella la destinazione</string>
     <string name="other_location">Altra</string>
@@ -1399,7 +1399,7 @@
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">Ok</string>
     <string name="shared_string_cancel">Annulla</string>
-    <string name="shared_string_dismiss">Annulla</string>
+    <string name="shared_string_dismiss">Ignora</string>
     <string name="shared_string_yes">Sì</string>
     <string name="shared_string_no">No</string>
     <string name="shared_string_on">Acceso</string>
@@ -1989,7 +1989,7 @@
     <string name="first_usage_greeting">Ottieni indicazioni e scopri nuovi luoghi senza una connessione a Internet</string>
     <string name="search_another_country">Scegli un\'altra regione</string>
     <string name="skip_map_downloading_desc">Non hai mappe offline installate. Si può scegliere una mappa dalla lista o scaricarle in seguito andando su \'Menù - %1$s\'.</string>
-    <string name="osm_live_payment_desc">Il costo della sottoscrizione verrà addebitato ogni mese. Puoi scegliere di annullare la sottoscrizione su Google Play in ogni momento.</string>
+    <string name="osm_live_payment_desc">La sottoscrizione viene addebitata ogni mese. Puoi annullarla su Google Play in ogni momento.</string>
     <string name="donation_to_osm">Donazione per la comunità di OpenStreetMap</string>
     <string name="donation_to_osm_desc">Parte della tua donazione verrà inviata agli utenti che fanno modifiche su OpenStreetMap. Il costo della sottoscrizione rimane inalterato.</string>
     <string name="osm_live_subscription_desc">La sottoscrizione attiva aggiornamenti orari, quotidiani e settimanali e la possibilità di scaricare senza limiti tutte le mappe del mondo.</string>
@@ -3134,7 +3134,7 @@
     <string name="coordinates_format_info">Il formato selezionato sarà applicato per tutta l\'app.</string>
     <string name="pref_selected_by_default_for_profiles">Questa impostazione è selezionata di default per i profili: %s</string>
     <string name="change_default_settings">Cambia impostazioni</string>
-    <string name="discard_changes">Annulla cambiamenti</string>
+    <string name="discard_changes">Annulla modifiche</string>
     <string name="apply_to_current_profile">Applica solo a \"%1$s\"</string>
     <string name="apply_to_all_profiles">Applica a tutti i profili</string>
     <string name="start_up_message_pref">Messaggio di avvio</string>
@@ -3704,7 +3704,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Abilita per controllare il livello di zoom della mappa con i pulsanti del volume del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Pulsanti volume come zoom</string>
     <string name="please_provide_point_name_error">Per favore indica un nome per il punto</string>
-    <string name="quick_action_remove_next_destination_descr">Il punto di destinazione corrente sul percorso verrà eliminato. Se sarà la Destinazione, la navigazione verrà interrotta.</string>
+    <string name="quick_action_remove_next_destination_descr">Elimina la destinazione successiva nel percorso. Se questa è la destinazione finale, la navigazione si fermerà.</string>
     <string name="search_download_wikipedia_maps">Scarica mappe Wikipedia</string>
     <string name="plugin_wikipedia_description">Ottieni informazioni sui punti di interesse da Wikipedia. È la tua guida tascabile offline - basta abilitare il plugin Wikipedia e goderti gli articoli sugli oggetti intorno a te.</string>
     <string name="app_mode_enduro_motorcycle">Moto da enduro</string>

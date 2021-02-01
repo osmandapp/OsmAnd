@@ -1526,7 +1526,7 @@
     <string name="voice_data_not_supported">Taledataversjon som ikke støttes</string>
     <string name="background_router_service_descr">Sporer posisjonen din mens skjermen er slått av.</string>
     <string name="share_fav_subject">Favoritter delt via OsmAnd</string>
-    <string name="import_file_favourites">Lagre data som GPX-fil eller importere rutepunkter til Favoritter\?</string>
+    <string name="import_file_favourites">Lagre data som GPX-fil eller importere rutepunkter til favoritter\?</string>
     <string name="coords_format_descr">Format for geografiske koordinater.</string>
     <string name="coords_format">Koordinatformat</string>
     <string name="map_widget_search">Søk</string>
@@ -3919,4 +3919,18 @@
     <string name="routing_engine_vehicle_type_cycling_regular">Vanlig sykling</string>
     <string name="message_server_error">Tjenerfeil: %1$s</string>
     <string name="message_name_is_already_exists">Navnet finnes allerede</string>
+    <string name="analyze_by_intervals">Analyser ved intervaller (delt intervall)</string>
+    <string name="announcement_time_off_route">Ruteavvik</string>
+    <string name="routing_engine_vehicle_type_hgv">Stor lastebil</string>
+    <string name="delete_online_routing_engine">Slett denne nettbaserte rutingsmotoren\?</string>
+    <string name="context_menu_read_full">Les hele</string>
+    <string name="delete_waypoints">Slett rutepunkt</string>
+    <string name="app_mode_gap">Luke</string>
+    <string name="login_open_street_map">Logg inn på OpenStreetMap</string>
+    <string name="user_login">Logg inn</string>
+    <string name="announcement_time_passing">Tidsforbruk</string>
+    <string name="announcement_time_approach">Ankomst</string>
+    <string name="context_menu_edit_descr">Rediger beskrivelse</string>
+    <string name="copy_to_map_markers">Kopier til kartmarkører</string>
+    <string name="copy_to_map_favorites">Kopier til favoritter</string>
 </resources>

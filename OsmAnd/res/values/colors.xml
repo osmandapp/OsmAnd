@@ -274,6 +274,7 @@
 	<color name="gpx_chart_green_label">#197d2a</color>
 
 	<color name="gpx_split_segment_icon_color">#b3b3b3</color>
+	<color name="gpx_pale_green">#87CC70</color>
 
 	<color name="map_background_color_light">#fafafa</color>
 	<color name="map_background_color_dark">#101821</color>

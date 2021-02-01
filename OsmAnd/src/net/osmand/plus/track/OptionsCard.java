@@ -74,7 +74,9 @@ public class OptionsCard extends BaseCard {
 			items.add(createDirectionsItem());
 		}
 		items.add(createDividerItem());
-		items.add(createJoinGapsItem());
+		if (gpxFile.getGeneralTrack() != null) {
+			items.add(createJoinGapsItem());
+		}
 		items.add(createAnalyzeOnMapItem());
 		items.add(createAnalyzeByIntervalsItem());
 
