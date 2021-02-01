@@ -1,20 +1,21 @@
 package net.osmand.binary;
 
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntLongHashMap;
-import gnu.trove.set.hash.TLongHashSet;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
 
+import org.apache.commons.logging.Log;
+
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.WireFormat;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntLongHashMap;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -29,11 +30,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.WireFormat;
-
 public class BinaryMapPoiReaderAdapter {
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapPoiReaderAdapter.class);
 
@@ -41,7 +37,7 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int CATEGORY_MASK = (1 << SHIFT_BITS_CATEGORY) - 1;
 	private static final int ZOOM_TO_SKIP_FILTER_READ = 6;
 	private static final int ZOOM_TO_SKIP_FILTER = 3;
-	private static final int BUCKET_SEARCH_BY_NAME = 5;
+	private static final int BUCKET_SEARCH_BY_NAME = 15; // should be bigger 100? 
 
 	public static class PoiSubType {
 		public boolean text;
@@ -296,7 +292,6 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	protected void searchPoiByName(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
-		HashMap<String, TIntLongHashMap> offsetsMap = new HashMap<>();
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		String query = normalizeSearchPoiByNameQuery(req.nameQuery);
 		CollatorStringMatcher matcher = new CollatorStringMatcher(query,
@@ -316,48 +311,18 @@ public class BinaryMapPoiReaderAdapter {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
 				// here offsets are sorted by distance
-				offsetsMap = readPoiNameIndex(matcher.getCollator(), query, req);
+				offsets = readPoiNameIndex(matcher.getCollator(), query, req);
 				codedIS.popLimit(oldLimit);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
 				// also offsets can be randomly skipped by limit
 				Integer[] offKeys = new Integer[offsets.size()];
-				if (offsetsMap.size() > 0) {
-					List<HashSet<Integer>> setKeys = new ArrayList<>();
-					for (Entry<String, TIntLongHashMap> item : offsetsMap.entrySet()) {
-						TIntLongHashMap sets = item.getValue();
-
-						Integer[] offKeysFinal = new Integer[sets.size()];
-						int[] keys = sets.keys();
-						for (int i = 0; i < keys.length; i++) {
-							offKeysFinal[i] = keys[i];
-						}
-						offsets.putAll(sets);
-						HashSet<Integer> generalSet = new HashSet<Integer>(Arrays.asList(offKeysFinal));
-						setKeys.add(generalSet);
-					}
-					HashSet<Integer> firstSet = new HashSet<Integer>();
-					HashSet<Integer> secondSet = new HashSet<Integer>();
-					HashSet<Integer> finalSet = new HashSet<Integer>();
-					for (HashSet<Integer> keySet : setKeys) {
-						if (setKeys.size() == 1) {
-							finalSet.addAll(keySet);
-						} else {
-							if (firstSet.size() == 0) {
-								firstSet.addAll(keySet);
-							} else {
-								secondSet.addAll(firstSet);
-								secondSet.retainAll(keySet);
-								finalSet.addAll(secondSet);
-							}
-						}
+				if (offsets.size() > 0) {
+					int[] keys = offsets.keys();
+					for (int i = 0; i < keys.length; i++) {
+						offKeys[i] = keys[i];
 					}
 					final TIntLongHashMap foffsets = offsets;
-					offKeys = finalSet.toArray(new Integer[finalSet.size()]);
-					for (Integer key : offKeys) {
-						foffsets.put(key, offsets.get(key));
-					}
-
 					Arrays.sort(offKeys, new Comparator<Integer>() {
 						@Override
 						public int compare(Integer object1, Integer object2) {
@@ -401,54 +366,65 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private HashMap<String,TIntLongHashMap> readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req) throws IOException {
-		HashMap<String, TIntArrayList> dataOffsetsMap = null;
-		HashMap<String, TIntLongHashMap> offsetsMap = new HashMap<>();
+	private TIntLongHashMap readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req) throws IOException {
+		TIntLongHashMap offsets = new TIntLongHashMap();
+		List<TIntArrayList> listOffsets = null;
+		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
 		int offset = 0;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				return offsetsMap;
+				return offsets;
 			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER: {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
-				dataOffsetsMap = new HashMap<>();
 				offset = codedIS.getTotalBytesRead();
-				map.readIndexedStringTable(instance, query, "", dataOffsetsMap, 0);
+				List<String> queries = Arrays.asList(query.split(" "));
+				TIntArrayList charsList = new TIntArrayList(queries.size());
+				listOffsets = new ArrayList<TIntArrayList>(queries.size());
+				while(listOffsets.size() < queries.size()) {
+					charsList.add(0);
+					listOffsets.add(new TIntArrayList());
+				}
+				map.readIndexedStringTable(instance, queries, "", listOffsets, charsList);
 				codedIS.popLimit(oldLimit);
 				break;
 			}
 			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER: {
-				offsetsMap = new HashMap<>();
-				if (dataOffsetsMap != null) {
-					for (Entry<String, TIntArrayList> item : dataOffsetsMap.entrySet()) {
-						TIntLongHashMap offsets = new TIntLongHashMap();
-						TIntArrayList dataOffsets = item.getValue();
-						String word = item.getKey();
+				if (listOffsets != null) {
+					for (TIntArrayList dataOffsets : listOffsets) {
+						TIntLongHashMap offsetMap = new TIntLongHashMap();
+						listOfSepOffsets.add(offsetMap);
 						dataOffsets.sort(); // 1104125
 						for (int i = 0; i < dataOffsets.size(); i++) {
 							codedIS.seek(dataOffsets.get(i) + offset);
 							int len = codedIS.readRawVarint32();
 							int oldLim = codedIS.pushLimit(len);
-							readPoiNameIndexData(offsets, req);
+							readPoiNameIndexData(offsetMap, req);
 							codedIS.popLimit(oldLim);
-
-							if (offsetsMap.containsKey(word)) {
-								offsetsMap.get(word).putAll(offsets);
-							} else {
-								TIntLongHashMap map = new TIntLongHashMap();
-								map.putAll(offsets);
-								offsetsMap.put(word, map);
+							if (req.isCancelled()) {
+								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+								return offsets;
 							}
 						}
 					}
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-					return offsetsMap;
+				}
+				if (listOfSepOffsets.size() > 0) {
+					offsets.putAll(listOfSepOffsets.get(0));
+					for (int j = 1; j < listOfSepOffsets.size(); j++) {
+						TIntLongHashMap mp = listOfSepOffsets.get(j);
+						// offsets.retainAll(mp); -- calculate intresection of mp & offsets
+						for (int chKey : offsets.keys()) {
+							if (!mp.containsKey(chKey)) {
+								offsets.remove(chKey);
+							}
+						}
+					}
 				}
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-				return offsetsMap;
+				return offsets;
 			}
 			default:
 				skipUnknownField(t);

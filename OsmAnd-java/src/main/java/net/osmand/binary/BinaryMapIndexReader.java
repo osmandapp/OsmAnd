@@ -2385,127 +2385,76 @@ public class BinaryMapIndexReader {
 
 	}
 
-	int readIndexedStringTable(Collator instance, String query, String prefix, HashMap<String, TIntArrayList> map, int charMatches) throws IOException {
+	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets, TIntArrayList charMatchesList) throws IOException {
 		String key = null;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				return charMatches;
+				return;
 			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
 				key = codedIS.readString();
-				if(prefix.length() > 0){
+				if (prefix.length() > 0) {
 					key = prefix + key;
 				}
-				// check query is part of key (the best matching)
-				if(CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
-					if(query.length() >= charMatches){
-						if(query.length() > charMatches){
-							charMatches = query.length();
-							map.clear();
+				for (int i = 0; i < queries.size(); i++) {
+					int charMatches = charMatchesList.get(i);
+					if (charMatches < 0) {
+						continue;
+					}
+					String query = queries.get(i);
+					// check query is part of key (the best matching)
+					if (CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+						if (query.length() >= charMatches) {
+							if (query.length() > charMatches) {
+								charMatchesList.set(i, query.length());
+								listOffsets.get(i).clear();
+							}
+						} else {
+							charMatchesList.set(i, -1);
+						}
+						// check key is part of query
+					} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+						if (key.length() >= charMatches) {
+							if (key.length() > charMatches) {
+								charMatchesList.set(i, key.length());
+								listOffsets.get(i).clear();
+							}
+						} else {
+							charMatchesList.set(i, -1);
 						}
 					} else {
-						key = null;
+						charMatchesList.set(i, -1);
 					}
-					// check key is part of query
-				} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
-					if (key.length() >= charMatches) {
-						if (key.length() > charMatches) {
-							charMatches = key.length();
-							map.clear();
-						}
-					} else {
-						key = null;
-					}
-				} else {
-					key = null;
-				}
-				break;
-			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER:
-				int val = readInt();
-				if (key != null) {
-					String[] words = query.split(" ");
-					String keyByWord = null;
-					for (String w : words) {
-						if (instance.equals(w.substring(0, charMatches), key)) {
-							keyByWord = w;
-						}
-					}
-					if (map.containsKey(keyByWord)) {
-						map.get(keyByWord).add(val);
-					} else {
-						TIntArrayList list = new TIntArrayList();
-						list.add(val);
-						map.put(keyByWord, list);
-					}
-				}
-				break;
-			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
-				int len = codedIS.readRawVarint32();
-				int oldLim = codedIS.pushLimit(len);
-				if (key != null) {
-					charMatches = readIndexedStringTable(instance, query, key, map, charMatches);
-				} else {
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-				}
-				codedIS.popLimit(oldLim);
-				break;
-			default:
-				skipUnknownField(t);
-				break;
-			}
-		}
-	}
-	
-	int readIndexedStringTable(Collator instance, String query, String prefix, TIntArrayList list, int charMatches) throws IOException {
-		String key = null;
-		while (true) {
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				return charMatches;
-			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
-				key = codedIS.readString();
-				if(prefix.length() > 0){
-					key = prefix + key;
-				}
-				// check query is part of key (the best matching)
-				if(CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)){
-					if(query.length() >= charMatches){
-						if(query.length() > charMatches){
-							charMatches = query.length();
-							list.clear();
-						}
-					} else {
-						key = null;
-					}
-					// check key is part of query
-				} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
-					if (key.length() >= charMatches) {
-						if (key.length() > charMatches) {
-							charMatches = key.length();
-							list.clear();
-						}
-					} else {
-						key = null;
-					}
-				} else {
-					key = null;
 				}
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
 				int val = readInt();
-				if (key != null) {
-					list.add(val);
+				for (int i = 0; i < queries.size(); i++) {
+					if (charMatchesList.get(i) >= 0) {
+						listOffsets.get(i).add(val);
+					}
 				}
 				break;
 			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
 				int len = codedIS.readRawVarint32();
 				int oldLim = codedIS.pushLimit(len);
-				if (key != null) {
-					charMatches = readIndexedStringTable(instance, query, key, list, charMatches);
+				boolean shouldWeReadSubtable = false;
+				for (int i = 0; i < queries.size(); i++) {
+					if (charMatchesList.get(i) >= 0) {
+						shouldWeReadSubtable = true;
+					}
+				}
+				if (shouldWeReadSubtable && key != null) {
+					TIntArrayList subcharMatchesList = new TIntArrayList(charMatchesList);
+					readIndexedStringTable(instance, queries, key, listOffsets, subcharMatchesList);
+					// looks like true
+					for (int i = 0; i < queries.size(); i++) {
+						if (subcharMatchesList.get(i) >= charMatchesList.get(i)) {
+							charMatchesList.set(i, subcharMatchesList.get(i));
+						}
+					}	
 				} else {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
