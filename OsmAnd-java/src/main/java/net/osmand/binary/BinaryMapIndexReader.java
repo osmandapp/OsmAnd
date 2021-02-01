@@ -2161,7 +2161,7 @@ public class BinaryMapIndexReader {
 	private static boolean testAddressSearch = false;
 	private static boolean testAddressSearchName = false;
 	private static boolean testAddressJustifySearch = false;
-	private static boolean testPoiSearch = false;
+	private static boolean testPoiSearch = true;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = true;
 	
@@ -2177,7 +2177,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File("/home/madwasp79/OsmAnd-maps/Poly_center2.obf");
+		fl = new File("/Users/plotva/work/osmand/maps/Wikivoyage.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
@@ -2325,7 +2325,7 @@ public class BinaryMapIndexReader {
 
 	private static void testPoiSearchByName(BinaryMapIndexReader reader) throws IOException {
 		println("Searching by name...");
-		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "Art",
+		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "central ukraine",
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
 		
 		reader.searchPoiByName(req);
@@ -2385,6 +2385,79 @@ public class BinaryMapIndexReader {
 
 	}
 
+	int readIndexedStringTable(Collator instance, String query, String prefix, HashMap<String, TIntArrayList> map, int charMatches) throws IOException {
+		String key = null;
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return charMatches;
+			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
+				key = codedIS.readString();
+				if(prefix.length() > 0){
+					key = prefix + key;
+				}
+				// check query is part of key (the best matching)
+				if(CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
+					if(query.length() >= charMatches){
+						if(query.length() > charMatches){
+							charMatches = query.length();
+							map.clear();
+						}
+					} else {
+						key = null;
+					}
+					// check key is part of query
+				} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
+					if (key.length() >= charMatches) {
+						if (key.length() > charMatches) {
+							charMatches = key.length();
+							map.clear();
+						}
+					} else {
+						key = null;
+					}
+				} else {
+					key = null;
+				}
+				break;
+			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER:
+				int val = readInt();
+				if (key != null) {
+					String[] words = query.split(" ");
+					String keyByWord = null;
+					for (String w : words) {
+						if (instance.equals(w.substring(0, charMatches), key)) {
+							keyByWord = w;
+						}
+					}
+					if (map.containsKey(keyByWord)) {
+						map.get(keyByWord).add(val);
+					} else {
+						TIntArrayList list = new TIntArrayList();
+						list.add(val);
+						map.put(keyByWord, list);
+					}
+				}
+				break;
+			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
+				int len = codedIS.readRawVarint32();
+				int oldLim = codedIS.pushLimit(len);
+				if (key != null) {
+					charMatches = readIndexedStringTable(instance, query, key, map, charMatches);
+				} else {
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				}
+				codedIS.popLimit(oldLim);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
 	int readIndexedStringTable(Collator instance, String query, String prefix, TIntArrayList list, int charMatches) throws IOException {
 		String key = null;
 		while (true) {
