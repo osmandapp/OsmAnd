@@ -34,6 +34,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,14 +46,13 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	private final OsmandApplication app;
 	private final WeakReference<MapActivity> activityRef;
-	private UploadPhotosListener listener;
-
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
 	private final LatLon latLon;
 	private final List<Uri> data;
 	private final String[] placeId;
 	private final Map<String, String> params;
 	private final GetImageCardsListener imageCardListener;
+	private UploadPhotosListener listener;
 
 	public UploadPhotosAsyncTask(MapActivity activity, List<Uri> data, LatLon latLon, String[] placeId,
 								 Map<String, String> params, GetImageCardsListener imageCardListener) {
@@ -87,13 +87,16 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 	}
 
 	protected Void doInBackground(Void... uris) {
+		List<Uri> uploadedPhotoUris = new ArrayList<>();
 		for (int i = 0; i < data.size(); i++) {
 			if (isCancelled()) {
 				break;
 			}
 			Uri uri = data.get(i);
-			handleSelectedImage(uri);
-			publishProgress(i + 1);
+			if (handleSelectedImage(uri)) {
+				uploadedPhotoUris.add(uri);
+				publishProgress(uploadedPhotoUris.size());
+			}
 		}
 		return null;
 	}
@@ -105,12 +108,13 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		}
 	}
 
-	private void handleSelectedImage(final Uri uri) {
+	private boolean handleSelectedImage(final Uri uri) {
+		boolean success = false;
 		InputStream inputStream = null;
 		try {
 			inputStream = app.getContentResolver().openInputStream(uri);
 			if (inputStream != null) {
-				uploadImageToPlace(inputStream);
+				success = uploadImageToPlace(inputStream);
 			}
 		} catch (Exception e) {
 			LOG.error(e);
@@ -118,11 +122,13 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		} finally {
 			Algorithms.closeStream(inputStream);
 		}
+		return success;
 	}
 
-	private void uploadImageToPlace(InputStream image) {
+	private boolean uploadImageToPlace(InputStream image) {
+		boolean success = false;
 		InputStream serverData = new ByteArrayInputStream(compressImageToJpeg(image));
-		final String baseUrl = OPRConstants.getBaseUrl(app);
+		String baseUrl = OPRConstants.getBaseUrl(app);
 		// all these should be constant
 		String url = baseUrl + "api/ipfs/image";
 		String response = NetworkUtils.sendPostDataRequest(url, "file", "compressed.jpeg", serverData);
@@ -140,8 +146,6 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 						response, error);
 				if (res != 200) {
 					app.showToastMessage(error.toString());
-				} else {
-					//ok, continue
 				}
 			} catch (FailedVerificationException e) {
 				LOG.error(e);
@@ -151,6 +155,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 				//image was uploaded but not added to blockchain
 				checkTokenAndShowScreen();
 			} else {
+				success = true;
 				String str = app.getString(R.string.successfully_uploaded_pattern, 1, 1);
 				app.showToastMessage(str);
 				//refresh the image
@@ -163,6 +168,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		} else {
 			checkTokenAndShowScreen();
 		}
+		return success;
 	}
 
 	//This method runs on non main thread
