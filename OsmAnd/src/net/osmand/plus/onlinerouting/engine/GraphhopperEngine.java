@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
@@ -84,6 +85,7 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 	@Nullable
 	@Override
 	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                 @NonNull OsmandApplication app,
 	                                                 boolean leftSideNavigation) throws JSONException {
 		JSONObject obj = new JSONObject(content);
 		JSONObject root = obj.getJSONArray("paths").getJSONObject(0);
@@ -97,24 +99,24 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 		List<RouteDirectionInfo> directions = new ArrayList<>();
 		for (int i = 0; i < instructions.length(); i++) {
 			JSONObject item = instructions.getJSONObject(i);
-			int sign = Integer.parseInt(item.getString("sign"));
-			int distance = (int) Math.round(Double.parseDouble(item.getString("distance")));
+			int sign = item.getInt("sign");
+			int distance = (int) Math.round(item.getDouble("distance"));
 			String description = item.getString("text");
 			String streetName = item.getString("street_name");
-			int timeInSeconds = (int) Math.round(Integer.parseInt(item.getString("time")) / 1000f);
+			int timeInSeconds = Math.round(item.getInt("time") / 1000f);
 			JSONArray interval = item.getJSONArray("interval");
 			int startPointOffset = interval.getInt(0);
 			int endPointOffset = interval.getInt(1);
 
 			float averageSpeed = (float) distance / timeInSeconds;
 			TurnType turnType = identifyTurnType(sign, leftSideNavigation);
+			if (turnType == null) {
+				turnType = TurnType.straight();
+			}
 			// TODO turnType.setTurnAngle()
 
 			RouteDirectionInfo direction = new RouteDirectionInfo(averageSpeed, turnType);
 			direction.routePointOffset = startPointOffset;
-			if (turnType != null && turnType.isRoundAbout()) {
-				direction.routeEndPointOffset = endPointOffset;
-			}
 			direction.setDescriptionRoute(description);
 			direction.setStreetName(streetName);
 			direction.setDistance(distance);
@@ -143,7 +145,7 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 	 */
 	@Nullable
 	public static TurnType identifyTurnType(int sign, boolean leftSide) {
-		int id = INVALID_ID;
+		Integer id = null;
 
 		if (sign == -98) {
 			// an U-turn without the knowledge
@@ -192,6 +194,7 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 
 		} else if (sign == 4) {
 			// the finish instruction before the last point
+			id = TurnType.C;
 
 		} else if (sign == 5) {
 			// the instruction before a via point
@@ -209,6 +212,6 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 			id = TurnType.TRU;
 		}
 
-		return id != INVALID_ID ? TurnType.valueOf(id, leftSide) : null;
+		return id != null ? TurnType.valueOf(id, leftSide) : null;
 	}
 }
