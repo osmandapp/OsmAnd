@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
@@ -81,6 +82,7 @@ public class OrsEngine extends OnlineRoutingEngine {
 	@Nullable
 	@Override
 	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                 @NonNull OsmandApplication app,
 	                                                 boolean leftSideNavigation) throws JSONException {
 		JSONObject obj = new JSONObject(content);
 		JSONArray array = obj.getJSONArray("features").getJSONObject(0)
