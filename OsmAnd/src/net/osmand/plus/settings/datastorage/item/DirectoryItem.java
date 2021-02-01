@@ -3,9 +3,9 @@ package net.osmand.plus.settings.datastorage.item;
 public class DirectoryItem {
 
 	private final String absolutePath;
-	private final boolean goDeeper;
+	private final boolean processInternalDirectories;
 	private final CheckingType checkingType;
-	private final boolean skipOther;
+	private final boolean skipUnmatchedInDirectory;
 
 	public enum CheckingType {
 		EXTENSIONS,
@@ -13,28 +13,28 @@ public class DirectoryItem {
 	}
 
 	public DirectoryItem(String absolutePath,
-	                     boolean goDeeper,
+	                     boolean processInternalDirectories,
 	                     CheckingType checkingType,
-	                     boolean skipOther) {
+	                     boolean skipUnmatchedInDirectory) {
 		this.absolutePath = absolutePath;
-		this.goDeeper = goDeeper;
+		this.processInternalDirectories = processInternalDirectories;
 		this.checkingType = checkingType;
-		this.skipOther = skipOther;
+		this.skipUnmatchedInDirectory = skipUnmatchedInDirectory;
 	}
 
 	public String getAbsolutePath() {
 		return absolutePath;
 	}
 
-	public boolean isGoDeeper() {
-		return goDeeper;
+	public boolean shouldProcessInternalDirectories() {
+		return processInternalDirectories;
 	}
 
 	public CheckingType getCheckingType() {
 		return checkingType;
 	}
 
-	public boolean isSkipOther() {
-		return skipOther;
+	public boolean shouldSkipUnmatchedInDirectory() {
+		return skipUnmatchedInDirectory;
 	}
 }

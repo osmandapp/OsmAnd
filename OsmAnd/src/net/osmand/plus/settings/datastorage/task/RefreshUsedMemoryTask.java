@@ -2,6 +2,8 @@ package net.osmand.plus.settings.datastorage.task;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.settings.datastorage.DataStorageHelper.UpdateMemoryInfoUIAdapter;
 import net.osmand.plus.settings.datastorage.item.DirectoryItem;
 import net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType;
@@ -10,146 +12,189 @@ import net.osmand.plus.settings.datastorage.item.MemoryItem;
 import java.io.File;
 
 import static net.osmand.plus.settings.datastorage.DataStorageFragment.UI_REFRESH_TIME_MS;
+import static net.osmand.util.Algorithms.objectEquals;
 
 public class RefreshUsedMemoryTask extends AsyncTask<MemoryItem, Void, Void> {
-	private UpdateMemoryInfoUIAdapter listener;
-	private File rootDir;
-	private MemoryItem otherMemory;
-	private String[] directoriesToAvoid;
-	private String[] prefixesToAvoid;
-	private String taskKey;
+	private final UpdateMemoryInfoUIAdapter uiAdapter;
+	private final File root;
+	private final MemoryItem otherMemoryItem;
+	private final String[] directoriesToSkip;
+	private final String[] filePrefixesToSkip;
+	private final String tag;
 	private long lastRefreshTime;
 
-	public RefreshUsedMemoryTask(UpdateMemoryInfoUIAdapter listener, MemoryItem otherMemory, File rootDir, String[] directoriesToAvoid, String[] prefixesToAvoid, String taskKey) {
-		this.listener = listener;
-		this.otherMemory = otherMemory;
-		this.rootDir = rootDir;
-		this.directoriesToAvoid = directoriesToAvoid;
-		this.prefixesToAvoid = prefixesToAvoid;
-		this.taskKey = taskKey;
+	public RefreshUsedMemoryTask(UpdateMemoryInfoUIAdapter uiAdapter,
+	                             MemoryItem otherMemoryItem,
+	                             File root,
+	                             String[] directoriesToSkip,
+	                             String[] filePrefixesToSkip,
+	                             String tag) {
+		this.uiAdapter = uiAdapter;
+		this.otherMemoryItem = otherMemoryItem;
+		this.root = root;
+		this.directoriesToSkip = directoriesToSkip;
+		this.filePrefixesToSkip = filePrefixesToSkip;
+		this.tag = tag;
 	}
 
 	@Override
 	protected Void doInBackground(MemoryItem... items) {
 		lastRefreshTime = System.currentTimeMillis();
-		if (rootDir.canRead()) {
-			calculateMultiTypes(rootDir, items);
+		if (root.canRead()) {
+			calculateMultiTypes(root, items);
 		}
 		return null;
 	}
 
-	private void calculateMultiTypes(File rootDir, MemoryItem... items) {
+	private void calculateMultiTypes(File rootDir,
+	                                 MemoryItem... items) {
 		File[] subFiles = rootDir.listFiles();
+		if (subFiles != null) {
+			for (File file : subFiles) {
+				if (isCancelled()) break;
 
-		for (File file : subFiles) {
-			if (isCancelled()) {
-				break;
-			}
-			nextFile : {
 				if (file.isDirectory()) {
-					//check current directory should be avoid
-					if (directoriesToAvoid != null) {
-						for (String directoryToAvoid : directoriesToAvoid) {
-							if (file.getAbsolutePath().equals(directoryToAvoid)) {
-								break nextFile;
-							}
-						}
+					if (!shouldSkipDirectory(file)) {
+						processDirectory(file, items);
 					}
-					//check current directory matched items type
-					for (MemoryItem item : items) {
-						DirectoryItem[] directories = item.getDirectories();
-						if (directories == null) {
-							continue;
-						}
-						for (DirectoryItem dir : directories) {
-							if (file.getAbsolutePath().equals(dir.getAbsolutePath())
-									|| (file.getAbsolutePath().startsWith(dir.getAbsolutePath()))) {
-								if (dir.isGoDeeper()) {
-									calculateMultiTypes(file, items);
-									break nextFile;
-								} else if (dir.isSkipOther()) {
-									break nextFile;
-								}
-							}
-						}
-					}
-					//current directory did not match to any type
-					otherMemory.addBytes(getDirectorySize(file));
+
 				} else if (file.isFile()) {
-					//check current file should be avoid
-					if (prefixesToAvoid != null) {
-						for (String prefixToAvoid : prefixesToAvoid) {
-							if (file.getName().toLowerCase().startsWith(prefixToAvoid.toLowerCase())) {
-								break nextFile;
-							}
-						}
+					if (!shouldSkipFile(file)) {
+						processFile(rootDir, file, items);
 					}
-					//check current file matched items type
-					for (MemoryItem item : items) {
-						DirectoryItem[] directories = item.getDirectories();
-						if (directories == null) {
-							continue;
-						}
-						for (DirectoryItem dir : directories) {
-							if (rootDir.getAbsolutePath().equals(dir.getAbsolutePath())
-									|| (rootDir.getAbsolutePath().startsWith(dir.getAbsolutePath()) && dir.isGoDeeper())) {
-								CheckingType checkingType = dir.getCheckingType();
-								switch (checkingType) {
-									case EXTENSIONS : {
-										String[] extensions = item.getExtensions();
-										if (extensions != null) {
-											for (String extension : extensions) {
-												if (file.getAbsolutePath().endsWith(extension)) {
-													item.addBytes(file.length());
-													break nextFile;
-												}
-											}
-										} else {
-											item.addBytes(file.length());
-											break nextFile;
-										}
-										break ;
-									}
-									case PREFIX : {
-										String[] prefixes = item.getPrefixes();
-										if (prefixes != null) {
-											for (String prefix : prefixes) {
-												if (file.getName().toLowerCase().startsWith(prefix.toLowerCase())) {
-													item.addBytes(file.length());
-													break nextFile;
-												}
-											}
-										} else {
-											item.addBytes(file.length());
-											break nextFile;
-										}
-										break ;
-									}
-								}
-								if (dir.isSkipOther()) {
-									break nextFile;
-								}
-							}
-						}
-					}
-					//current file did not match any type
-					otherMemory.addBytes(file.length());
 				}
+				refreshUI();
 			}
-			refreshUI();
 		}
 	}
 
-	private long getDirectorySize(File dir) {
+	private boolean shouldSkipDirectory(@NonNull File dir) {
+		if (directoriesToSkip != null) {
+			for (String dirToSkipPath : directoriesToSkip) {
+				String dirPath = dir.getAbsolutePath();
+				if (objectEquals(dirPath, dirToSkipPath)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean shouldSkipFile(@NonNull File file) {
+		if (filePrefixesToSkip != null) {
+			String fileName = file.getName().toLowerCase();
+			for (String prefixToAvoid : filePrefixesToSkip) {
+				String prefix = prefixToAvoid.toLowerCase();
+				if (fileName.startsWith(prefix)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private void processDirectory(@NonNull File directory,
+	                              @NonNull MemoryItem... items) {
+		String directoryPath = directory.getAbsolutePath();
+		for (MemoryItem memoryItem : items) {
+			DirectoryItem[] allowedDirectories = memoryItem.getDirectories();
+			if (allowedDirectories != null) {
+				for (DirectoryItem allowedDir : allowedDirectories) {
+					String allowedDirPath = allowedDir.getAbsolutePath();
+					if (objectEquals(directoryPath, allowedDirPath)
+							|| (directoryPath.startsWith(allowedDirPath))) {
+						if (allowedDir.shouldProcessInternalDirectories()) {
+							calculateMultiTypes(directory, items);
+							return;
+						} else if (allowedDir.shouldSkipUnmatchedInDirectory()) {
+							return;
+						}
+					}
+				}
+			}
+		}
+		// Current directory did not match to any type
+		otherMemoryItem.addBytes(calculateFolderSize(directory));
+	}
+
+	private void processFile(@NonNull File rootDir,
+	                         @NonNull File file,
+	                         @NonNull MemoryItem... items) {
+		for (MemoryItem item : items) {
+			DirectoryItem[] allowedDirectories = item.getDirectories();
+			if (allowedDirectories == null) continue;
+			String rootDirPath = rootDir.getAbsolutePath();
+
+			for (DirectoryItem allowedDir : allowedDirectories) {
+				String allowedDirPath = allowedDir.getAbsolutePath();
+				boolean processInternal = allowedDir.shouldProcessInternalDirectories();
+				if (objectEquals(rootDirPath, allowedDirPath)
+						|| (rootDirPath.startsWith(allowedDirPath) && processInternal)) {
+					CheckingType checkingType = allowedDir.getCheckingType();
+					switch (checkingType) {
+						case EXTENSIONS: {
+							if (isSuitableExtension(file, item)) {
+								item.addBytes(file.length());
+								return;
+							}
+							break;
+						}
+						case PREFIX: {
+							if (isSuitablePrefix(file, item)) {
+								item.addBytes(file.length());
+								return;
+							}
+							break;
+						}
+					}
+					if (allowedDir.shouldSkipUnmatchedInDirectory()) {
+						return;
+					}
+				}
+			}
+		}
+		// Current file did not match any type
+		otherMemoryItem.addBytes(file.length());
+	}
+
+	private boolean isSuitableExtension(@NonNull File file,
+	                                    @NonNull MemoryItem item) {
+		String[] extensions = item.getExtensions();
+		if (extensions != null) {
+			for (String extension : extensions) {
+				if (file.getAbsolutePath().endsWith(extension)) {
+					return true;
+				}
+			}
+		}
+		return extensions == null;
+	}
+
+	private boolean isSuitablePrefix(@NonNull File file,
+	                                 @NonNull MemoryItem item) {
+		String[] prefixes = item.getPrefixes();
+		if (prefixes != null) {
+			for (String prefix : prefixes) {
+				if (file.getName().toLowerCase().startsWith(prefix.toLowerCase())) {
+					return true;
+				}
+			}
+		}
+		return prefixes == null;
+	}
+
+	private long calculateFolderSize(@NonNull File dir) {
 		long bytes = 0;
 		if (dir.isDirectory()) {
 			File[] files = dir.listFiles();
+			if (files == null) return 0;
+
 			for (File file : files) {
 				if (isCancelled()) {
 					break;
 				}
 				if (file.isDirectory()) {
-					bytes += getDirectorySize(file);
+					bytes += calculateFolderSize(file);
 				} else if (file.isFile()) {
 					bytes += file.length();
 				}
@@ -161,16 +206,16 @@ public class RefreshUsedMemoryTask extends AsyncTask<MemoryItem, Void, Void> {
 	@Override
 	protected void onProgressUpdate(Void... values) {
 		super.onProgressUpdate(values);
-		if (listener != null) {
-			listener.onMemoryInfoUpdate();
+		if (uiAdapter != null) {
+			uiAdapter.onMemoryInfoUpdate();
 		}
 	}
 
 	@Override
 	protected void onPostExecute(Void aVoid) {
 		super.onPostExecute(aVoid);
-		if (listener != null) {
-			listener.onFinishUpdating(taskKey);
+		if (uiAdapter != null) {
+			uiAdapter.onFinishUpdating(tag);
 		}
 	}
 

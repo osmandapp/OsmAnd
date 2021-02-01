@@ -39,7 +39,7 @@ public class DataStorageHelper {
 	public final static String MANUALLY_SPECIFIED = "manually_specified";
 
 	public final static String MAPS_MEMORY = "maps_memory_used";
-	public final static String SRTM_AND_HILLSHADE_MEMORY = "contour_lines_and_hillshade_memory";
+	public final static String TERRAIN_MEMORY = "terrain_memory_used";
 	public final static String TRACKS_MEMORY = "tracks_memory_used";
 	public final static String NOTES_MEMORY = "notes_memory_used";
 	public final static String TILES_MEMORY = "tiles_memory_used";
@@ -52,7 +52,7 @@ public class DataStorageHelper {
 
 	private ArrayList<MemoryItem> memoryItems = new ArrayList<>();
 	private MemoryItem mapsMemory;
-	private MemoryItem srtmAndHillshadeMemory;
+	private MemoryItem terrainMemory;
 	private MemoryItem tracksMemory;
 	private MemoryItem notesMemory;
 	private MemoryItem tilesMemory;
@@ -186,15 +186,15 @@ public class DataStorageHelper {
 				.createItem();
 		memoryItems.add(mapsMemory);
 
-		srtmAndHillshadeMemory = MemoryItem.builder()
-				.setKey(SRTM_AND_HILLSHADE_MEMORY)
+		terrainMemory = MemoryItem.builder()
+				.setKey(TERRAIN_MEMORY)
 				.setExtensions(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
 				.setDirectories(
 						createDirectory((SRTM_INDEX_DIR), true, EXTENSIONS, false),
 						createDirectory((TILES_INDEX_DIR), false, PREFIX, true))
 				.setPrefixes("Hillshade")
 				.createItem();
-		memoryItems.add(srtmAndHillshadeMemory);
+		memoryItems.add(terrainMemory);
 
 		tracksMemory = MemoryItem.builder()
 				.setKey(TRACKS_MEMORY)
@@ -267,13 +267,13 @@ public class DataStorageHelper {
 	public RefreshUsedMemoryTask calculateMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener) {
 		File rootDir = new File(currentStoragePath);
 		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(listener, otherMemory, rootDir, null, null, OTHER_MEMORY);
-		task.execute(mapsMemory, srtmAndHillshadeMemory, tracksMemory, notesMemory);
+		task.execute(mapsMemory, terrainMemory, tracksMemory, notesMemory);
 		return task;
 	}
 
 	public RefreshUsedMemoryTask calculateTilesMemoryUsed(UpdateMemoryInfoUIAdapter listener) {
 		File rootDir = new File(tilesMemory.getDirectories()[0].getAbsolutePath());
-		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(listener, otherMemory, rootDir, null, srtmAndHillshadeMemory.getPrefixes(), TILES_MEMORY);
+		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(listener, otherMemory, rootDir, null, terrainMemory.getPrefixes(), TILES_MEMORY);
 		task.execute(tilesMemory);
 		return task;
 	}
@@ -290,11 +290,11 @@ public class DataStorageHelper {
 	}
 
 	public DirectoryItem createDirectory(@NonNull String relativePath,
-	                                     boolean goDeeper,
+	                                     boolean processInternalDirectories,
 	                                     CheckingType checkingType,
-	                                     boolean skipOther) {
+	                                     boolean skipUnmatchedInDirectory) {
 		String path = app.getAppPath(relativePath).getAbsolutePath();
-		return new DirectoryItem(path, goDeeper, checkingType, skipOther);
+		return new DirectoryItem(path, processInternalDirectories, checkingType, skipUnmatchedInDirectory);
 	}
 
 	public static String getFormattedMemoryInfo(long bytes, String[] formatStrings) {
