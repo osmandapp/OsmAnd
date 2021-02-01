@@ -1206,7 +1206,7 @@ public class RouteProvider {
 				helper.calculateRouteOnline(stringKey, getPathFromParams(params), params.leftSide);
 		if (response != null) {
 			params.intermediates = null;
-			return new RouteCalculationResult(response.getRoute(), response.getDirections(), params, null, true);
+			return new RouteCalculationResult(response.getRoute(), response.getDirections(), params, null, false);
 		} else {
 			return new RouteCalculationResult("Route is empty");
 		}

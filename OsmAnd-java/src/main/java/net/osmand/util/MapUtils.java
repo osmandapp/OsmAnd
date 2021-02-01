@@ -668,8 +668,13 @@ public class MapUtils {
 
 	public static boolean areLatLonEqual(Location l1, Location l2) {
 		return l1 == null && l2 == null
-				|| (l1 != null && l2 != null && Math.abs(l1.getLatitude() - l2.getLatitude()) < 0.00001
-				&& Math.abs(l1.getLongitude() - l2.getLongitude()) < 0.00001);
+				|| (l2 != null && areLatLonEqual(l1, l2.getLatitude(), l2.getLongitude()));
+	}
+
+	public static boolean areLatLonEqual(Location l, double lat, double lon) {
+		return l != null
+				&& Math.abs(l.getLatitude() - lat) < 0.00001
+				&& Math.abs(l.getLongitude() - lon) < 0.00001;
 	}
 	
 	public static LatLon rhumbDestinationPoint(LatLon latLon, double distance, double bearing){
