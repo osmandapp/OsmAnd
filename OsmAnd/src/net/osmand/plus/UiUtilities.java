@@ -87,6 +87,7 @@ public class UiUtilities {
 
 	public enum CustomRadioButtonType {
 		START,
+		CENTER,
 		END,
 	}
 
@@ -456,6 +457,8 @@ public class UiUtilities {
 
 		TextView startButtonText = buttonsView.findViewById(R.id.left_button);
 		View startButtonContainer = buttonsView.findViewById(R.id.left_button_container);
+		TextView centerButtonText = buttonsView.findViewById(R.id.center_button);
+		View centerButtonContainer = buttonsView.findViewById(R.id.center_button_container);
 		TextView endButtonText = buttonsView.findViewById(R.id.right_button);
 		View endButtonContainer = buttonsView.findViewById(R.id.right_button_container);
 		GradientDrawable background = new GradientDrawable();
@@ -471,9 +474,27 @@ public class UiUtilities {
 			endButtonText.setTextColor(activeColor);
 			startButtonContainer.setBackgroundDrawable(background);
 			startButtonText.setTextColor(textColor);
+
+			if (centerButtonContainer != null) {
+				centerButtonText.setTextColor(activeColor);
+				centerButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			}
+		} else if (buttonType == CustomRadioButtonType.CENTER) {
+			background.setCornerRadii(new float[] {0, 0, 0, 0, 0, 0, 0, 0});
+			centerButtonContainer.setBackgroundDrawable(background);
+			centerButtonText.setTextColor(textColor);
+
+			if (endButtonContainer != null) {
+				endButtonText.setTextColor(activeColor);
+				endButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			}
+			if (startButtonContainer != null) {
+				startButtonText.setTextColor(activeColor);
+				startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			}
 		} else {
 			if (isLayoutRtl) {
-				background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
+				background.setCornerRadii(new float[] {radius, radius, 0, 0, 0, 0, radius, radius});
 			} else {
 				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
 			}
@@ -481,6 +502,11 @@ public class UiUtilities {
 			endButtonText.setTextColor(textColor);
 			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			startButtonText.setTextColor(activeColor);
+
+			if (centerButtonContainer != null) {
+				centerButtonText.setTextColor(activeColor);
+				centerButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			}
 		}
 	}
 
