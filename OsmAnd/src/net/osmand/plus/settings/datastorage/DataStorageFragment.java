@@ -1,8 +1,7 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.settings.datastorage;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -26,7 +25,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -34,20 +32,21 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.settings.datastorage.item.MemoryItem;
+import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.settings.datastorage.task.MoveFilesTask;
+import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
+import net.osmand.plus.settings.datastorage.task.ReloadDataTask;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static net.osmand.plus.settings.fragments.DataStorageHelper.INTERNAL_STORAGE;
-import static net.osmand.plus.settings.fragments.DataStorageHelper.MANUALLY_SPECIFIED;
-import static net.osmand.plus.settings.fragments.DataStorageHelper.OTHER_MEMORY;
-import static net.osmand.plus.settings.fragments.DataStorageHelper.TILES_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.CHOSEN_DIRECTORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_PATH;
@@ -60,17 +59,17 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
 	private final static String OSMAND_USAGE = "osmand_usage";
 
-	private ArrayList<DataStorageMenuItem> menuItems;
-	private ArrayList<DataStorageMemoryItem> memoryItems;
+	private ArrayList<StorageItem> storageItems;
+	private ArrayList<MemoryItem> memoryItems;
 	private ArrayList<CheckBoxPreference> dataStorageRadioButtonsGroup;
 	private Preference changeButton;
-	private DataStorageMenuItem currentDataStorage;
+	private StorageItem currentDataStorage;
 	private String tmpManuallySpecifiedPath;
 	private DataStorageHelper dataStorageHelper;
 	private boolean calculateTilesBtnPressed;
 	
-	private DataStorageHelper.RefreshMemoryUsedInfo calculateMemoryTask;
-	private DataStorageHelper.RefreshMemoryUsedInfo calculateTilesMemoryTask;
+	private RefreshUsedMemoryTask calculateMemoryTask;
+	private RefreshUsedMemoryTask calculateTilesMemoryTask;
 
 	private OsmandApplication app;
 	private OsmandActionBarActivity activity;
@@ -95,11 +94,11 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			return;
 		}
 
-		menuItems = dataStorageHelper.getStorageItems();
+		storageItems = dataStorageHelper.getStorageItems();
 		memoryItems = dataStorageHelper.getMemoryInfoItems();
 		dataStorageRadioButtonsGroup = new ArrayList<>();
 
-		for (DataStorageMenuItem item : menuItems) {
+		for (StorageItem item : storageItems) {
 			CheckBoxPreference preference = new CheckBoxPreference(activity);
 			preference.setKey(item.getKey());
 			preference.setTitle(item.getTitle());
@@ -136,7 +135,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			Bundle resultData = (Bundle) newValue;
 			if (resultData.containsKey(ChangeDataStorageBottomSheet.TAG)) {
 				boolean moveMaps = resultData.getBoolean(MOVE_DATA);
-				DataStorageMenuItem newDataStorage = resultData.getParcelable(CHOSEN_DIRECTORY);
+				StorageItem newDataStorage = resultData.getParcelable(CHOSEN_DIRECTORY);
 				if (newDataStorage != null) {
 					if (tmpManuallySpecifiedPath != null) {
 						String directory = tmpManuallySpecifiedPath;
@@ -154,9 +153,9 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 				if (pathChanged) {
 					tmpManuallySpecifiedPath = resultData.getString(NEW_PATH);
 					if (tmpManuallySpecifiedPath != null) {
-						DataStorageMenuItem manuallySpecified = null;
+						StorageItem manuallySpecified = null;
 						try {
-							manuallySpecified = (DataStorageMenuItem) dataStorageHelper.getManuallySpecified().clone();
+							manuallySpecified = (StorageItem) dataStorageHelper.getManuallySpecified().clone();
 							manuallySpecified.setDirectory(tmpManuallySpecifiedPath);
 						} catch (CloneNotSupportedException e) {
 							return false;
@@ -170,7 +169,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			//show necessary dialog
 			String key = preference.getKey();
 			if (key != null) {
-				DataStorageMenuItem newDataStorage = dataStorageHelper.getStorage(key);
+				StorageItem newDataStorage = dataStorageHelper.getStorage(key);
 				if (newDataStorage != null) {
 					if (!currentDataStorage.getKey().equals(newDataStorage.getKey())) {
 						if (newDataStorage.getType() == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT
@@ -212,7 +211,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		
 		final View itemView = holder.itemView;
 		if (preference instanceof CheckBoxPreference) {
-			DataStorageMenuItem item = dataStorageHelper.getStorage(key);
+			StorageItem item = dataStorageHelper.getStorage(key);
 			if (item != null) {
 				TextView tvTitle = itemView.findViewById(android.R.id.title);
 				TextView tvSummary = itemView.findViewById(R.id.summary);
@@ -267,7 +266,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			TextView tvSummary = itemView.findViewById(R.id.summary);
 			tvSummary.setText(DataStorageHelper.getFormattedMemoryInfo(totalUsageBytes, memoryUnitsFormats));
 		} else {
-			for (DataStorageMemoryItem mi : memoryItems) {
+			for (MemoryItem mi : memoryItems) {
 				if (key.equals(mi.getKey())) {
 					TextView tvMemory = itemView.findViewById(R.id.memory);
 					String summary = "";
@@ -326,7 +325,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	}
 
 	private void showFolderSelectionDialog() {
-		DataStorageMenuItem manuallySpecified = dataStorageHelper.getManuallySpecified();
+		StorageItem manuallySpecified = dataStorageHelper.getManuallySpecified();
 		if (manuallySpecified != null) {
 			SelectFolderBottomSheet.showInstance(getFragmentManager(), manuallySpecified.getKey(),
 					manuallySpecified.getDirectory(), DataStorageFragment.this,
@@ -335,11 +334,11 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		}
 	}
 
-	private void moveData(final DataStorageMenuItem currentStorage, final DataStorageMenuItem newStorage) {
+	private void moveData(final StorageItem currentStorage, final StorageItem newStorage) {
 		File fromDirectory = new File(currentStorage.getDirectory());
 		File toDirectory = new File(newStorage.getDirectory());
 		@SuppressLint("StaticFieldLeak")
-		MoveFilesToDifferentDirectory task = new MoveFilesToDifferentDirectory(activity, fromDirectory, toDirectory) {
+		MoveFilesTask task = new MoveFilesTask(activity, fromDirectory, toDirectory) {
 
 
 			@NonNull
@@ -405,7 +404,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private void confirm(OsmandApplication app, OsmandActionBarActivity activity, DataStorageMenuItem newStorageDirectory, boolean silentRestart) {
+	private void confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory, boolean silentRestart) {
 		String newDirectory = newStorageDirectory.getDirectory();
 		int type = newStorageDirectory.getType();
 		File newDirectoryFile = new File(newDirectory);
@@ -454,7 +453,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	}
 
 	protected void reloadData() {
-		new ReloadData(activity, app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		new ReloadDataTask(activity, app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	@Override
@@ -467,200 +466,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		updateAllSettings();
 		if (taskKey != null && taskKey.equals(TILES_MEMORY)) {
 			app.getSettings().OSMAND_USAGE_SPACE.set(dataStorageHelper.getTotalUsedBytes());
-		}
-	}
-
-	public static class MoveFilesToDifferentDirectory extends AsyncTask<Void, Void, Boolean> {
-
-		protected WeakReference<OsmandActionBarActivity> activity;
-		private WeakReference<Context> context;
-		private File from;
-		private File to;
-		protected ProgressImplementation progress;
-		private Runnable runOnSuccess;
-		private int movedCount;
-		private long movedSize;
-		private int copiedCount;
-		private long copiedSize;
-		private int failedCount;
-		private long failedSize;
-		private String exceptionMessage;
-
-		public MoveFilesToDifferentDirectory(OsmandActionBarActivity activity, File from, File to) {
-			this.activity = new WeakReference<>(activity);
-			this.context = new WeakReference<>((Context) activity);
-			this.from = from;
-			this.to = to;
-		}
-
-		public void setRunOnSuccess(Runnable runOnSuccess) {
-			this.runOnSuccess = runOnSuccess;
-		}
-
-		public int getMovedCount() {
-			return movedCount;
-		}
-
-		public int getCopiedCount() {
-			return copiedCount;
-		}
-
-		public int getFailedCount() {
-			return failedCount;
-		}
-
-		public long getMovedSize() {
-			return movedSize;
-		}
-
-		public long getCopiedSize() {
-			return copiedSize;
-		}
-
-		public long getFailedSize() {
-			return failedSize;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			Context ctx = context.get();
-			if (context == null) {
-				return;
-			}
-			movedCount = 0;
-			copiedCount = 0;
-			failedCount = 0;
-			progress = ProgressImplementation.createProgressDialog(
-					ctx, ctx.getString(R.string.copying_osmand_files),
-					ctx.getString(R.string.copying_osmand_files_descr, to.getPath()),
-					ProgressDialog.STYLE_HORIZONTAL);
-		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			Context ctx = context.get();
-			if (ctx == null) {
-				return;
-			}
-			if (result != null) {
-				if (result.booleanValue() && runOnSuccess != null) {
-					runOnSuccess.run();
-				} else if (!result.booleanValue()) {
-					Toast.makeText(ctx, ctx.getString(R.string.shared_string_io_error) + ": " + exceptionMessage, Toast.LENGTH_LONG).show();
-				}
-			}
-			try {
-				if (progress.getDialog().isShowing()) {
-					progress.getDialog().dismiss();
-				}
-			} catch (Exception e) {
-				//ignored
-			}
-		}
-
-		private void movingFiles(File f, File t, int depth) throws IOException {
-			Context ctx = context.get();
-			if (ctx == null) {
-				return;
-			}
-			if (depth <= 2) {
-				progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), -1);
-			}
-			if (f.isDirectory()) {
-				t.mkdirs();
-				File[] lf = f.listFiles();
-				if (lf != null) {
-					for (int i = 0; i < lf.length; i++) {
-						if (lf[i] != null) {
-							movingFiles(lf[i], new File(t, lf[i].getName()), depth + 1);
-						}
-					}
-				}
-				f.delete();
-			} else if (f.isFile()) {
-				if (t.exists()) {
-					Algorithms.removeAllFiles(t);
-				}
-				boolean rnm = false;
-				long fileSize = f.length();
-				try {
-					rnm = f.renameTo(t);
-					movedCount++;
-					movedSize += fileSize;
-				} catch (RuntimeException e) {
-				}
-				if (!rnm) {
-					FileInputStream fin = new FileInputStream(f);
-					FileOutputStream fout = new FileOutputStream(t);
-					try {
-						progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), (int) (f.length() / 1024));
-						Algorithms.streamCopy(fin, fout, progress, 1024);
-						copiedCount++;
-						copiedSize += fileSize;
-					} catch (IOException e) {
-						failedCount++;
-						failedSize += fileSize;
-					} finally {
-						fin.close();
-						fout.close();
-					}
-					f.delete();
-				}
-			}
-			if (depth <= 2) {
-				progress.finishTask();
-			}
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			to.mkdirs();
-			try {
-				movingFiles(from, to, 0);
-			} catch (IOException e) {
-				exceptionMessage = e.getMessage();
-				return false;
-			}
-			return true;
-		}
-
-	}
-
-	public static class ReloadData extends AsyncTask<Void, Void, Boolean> {
-		private WeakReference<Context> ctx;
-		protected ProgressImplementation progress;
-		private OsmandApplication app;
-
-		public ReloadData(Context ctx, OsmandApplication app) {
-			this.ctx = new WeakReference<>(ctx);
-			this.app = app;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			Context c = ctx.get();
-			if (c == null) {
-				return;
-			}
-			progress = ProgressImplementation.createProgressDialog(c, c.getString(R.string.loading_data),
-					c.getString(R.string.loading_data), ProgressDialog.STYLE_HORIZONTAL);
-		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			try {
-				if (progress.getDialog().isShowing()) {
-					progress.getDialog().dismiss();
-				}
-			} catch (Exception e) {
-				//ignored
-			}
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			app.getResourceManager().reloadIndexes(progress, new ArrayList<String>());
-			return true;
 		}
 	}
 }
