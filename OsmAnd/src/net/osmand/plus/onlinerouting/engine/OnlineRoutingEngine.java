@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingFactory;
@@ -33,7 +34,6 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	public final static String ONLINE_ROUTING_ENGINE_PREFIX = "online_routing_engine_";
 	public final static VehicleType CUSTOM_VEHICLE = new VehicleType("", R.string.shared_string_custom);
-	public final static int INVALID_ID = -1;
 
 	private final Map<String, String> params = new HashMap<>();
 	private final List<VehicleType> allowedVehicles = new ArrayList<>();
@@ -100,6 +100,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	@Nullable
 	public abstract OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	                                                          @NonNull OsmandApplication app,
 	                                                          boolean leftSideNavigation) throws JSONException;
 
 	@NonNull

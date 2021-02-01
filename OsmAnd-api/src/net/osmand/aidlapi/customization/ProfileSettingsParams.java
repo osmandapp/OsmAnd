@@ -8,6 +8,7 @@ import net.osmand.aidlapi.AidlParams;
 import net.osmand.aidlapi.profile.AExportSettingsType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static net.osmand.aidlapi.profile.ExportProfileParams.SETTINGS_TYPE_KEY;
 
@@ -15,17 +16,17 @@ public class ProfileSettingsParams extends AidlParams {
 
 	public static final String VERSION_KEY = "version";
 	public static final String REPLACE_KEY = "replace";
-	public static final String SILENT_IMPORT_KEY = "silent_import";
+	public static final String SILENT_IMPORT_KEY = "silentImport";
 	public static final String LATEST_CHANGES_KEY = "latestChanges";
 	public static final String PROFILE_SETTINGS_URI_KEY = "profileSettingsUri";
 	private Uri profileSettingsUri;
 	private String latestChanges;
 	private int version;
-	private ArrayList<String> settingsTypeKeyList = new ArrayList<>();
+	private List<String> settingsTypeKeyList = new ArrayList<>();
 	private boolean silent;
 	private boolean replace;
 
-	public ProfileSettingsParams(Uri profileSettingsUri, ArrayList<AExportSettingsType> settingsTypeList, boolean replace,
+	public ProfileSettingsParams(Uri profileSettingsUri, List<AExportSettingsType> settingsTypeList, boolean replace,
 	                             boolean silent, String latestChanges, int version) {
 		this.profileSettingsUri = profileSettingsUri;
 		for (AExportSettingsType settingsType : settingsTypeList) {
@@ -65,7 +66,7 @@ public class ProfileSettingsParams extends AidlParams {
 		return profileSettingsUri;
 	}
 
-	public ArrayList<String> getSettingsTypeKeys() {
+	public List<String> getSettingsTypeKeys() {
 		return settingsTypeKeyList;
 	}
 
@@ -82,7 +83,7 @@ public class ProfileSettingsParams extends AidlParams {
 		bundle.putInt(VERSION_KEY, version);
 		bundle.putString(LATEST_CHANGES_KEY, latestChanges);
 		bundle.putParcelable(PROFILE_SETTINGS_URI_KEY, profileSettingsUri);
-		bundle.putStringArrayList(SETTINGS_TYPE_KEY, settingsTypeKeyList);
+		bundle.putStringArrayList(SETTINGS_TYPE_KEY, new ArrayList<>(settingsTypeKeyList));
 		bundle.putBoolean(REPLACE_KEY, replace);
 		bundle.putBoolean(SILENT_IMPORT_KEY, silent);
 	}

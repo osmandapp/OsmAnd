@@ -82,12 +82,12 @@ public class OnlineRoutingHelper {
 	}
 
 	@Nullable
-	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine,
-	                                                  @NonNull List<LatLon> path,
-	                                                  boolean leftSideNavigation) throws IOException, JSONException {
+	private OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine,
+	                                                   @NonNull List<LatLon> path,
+	                                                   boolean leftSideNavigation) throws IOException, JSONException {
 		String url = engine.getFullUrl(path);
 		String content = makeRequest(url);
-		return engine.parseServerResponse(content, leftSideNavigation);
+		return engine.parseServerResponse(content, app, leftSideNavigation);
 	}
 
 	@NonNull
