@@ -381,7 +381,12 @@ public class BinaryMapPoiReaderAdapter {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
 				offset = codedIS.getTotalBytesRead();
-				List<String> queries = Arrays.asList(query.split(" "));
+				List<String> queries = new ArrayList<>();
+				for (String word : query.split(" ")) {
+					if (word.trim().length() > 0) {
+						queries.add(word.trim());
+					}
+				}
 				TIntArrayList charsList = new TIntArrayList(queries.size());
 				listOffsets = new ArrayList<TIntArrayList>(queries.size());
 				while(listOffsets.size() < queries.size()) {
