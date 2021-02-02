@@ -573,8 +573,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		} else {
 			layoutId = tripleTabsLayoutIds[position];
 		}
-		View tab = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
+		ViewGroup tab = (ViewGroup) UiUtilities.getInflater(parent.getContext(), nightMode).inflate(layoutId, parent, false);
 		tab.setTag(tabTypes[position].name());
+		TextView title = (TextView) tab.getChildAt(0);
+		if (title != null) {
+			title.setText(getPageTitle(position));
+		}
 		return tab;
 	}
 
