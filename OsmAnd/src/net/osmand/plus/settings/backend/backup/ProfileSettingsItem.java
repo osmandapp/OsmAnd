@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.lang3.StringUtils;
 
 public class ProfileSettingsItem extends OsmandSettingsItem {
 
@@ -124,7 +125,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 		if (Algorithms.isEmpty(modeBean.userProfileName)) {
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
 			if (appMode != null) {
-				modeBean.userProfileName = app.getString(appMode.getNameKeyResource());
+				modeBean.userProfileName = appMode.toHumanString();
 			}
 		}
 		int number = 0;
