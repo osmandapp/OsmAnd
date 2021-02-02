@@ -22,6 +22,8 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.datastorage.DataStorageHelper;
+import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -181,7 +183,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		externalStorageDir.setIcon(getActiveIcon(R.drawable.ic_action_folder));
 
 		DataStorageHelper holder = new DataStorageHelper(app);
-		DataStorageMenuItem currentStorage = holder.getCurrentStorage();
+		StorageItem currentStorage = holder.getCurrentStorage();
 		long totalUsed = app.getSettings().OSMAND_USAGE_SPACE.get();
 		if (totalUsed > 0) {
 			String[] usedMemoryFormats = new String[] {

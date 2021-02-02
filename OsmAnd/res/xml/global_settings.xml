@@ -22,7 +22,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
 		android:title="@string/application_dir"
-		app:fragment="net.osmand.plus.settings.fragments.DataStorageFragment"
+		app:fragment="net.osmand.plus.settings.datastorage.DataStorageFragment"
 		tools:icon="@drawable/ic_action_folder" />
 
 	<Preference
