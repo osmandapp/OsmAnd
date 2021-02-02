@@ -21,7 +21,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
-import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;

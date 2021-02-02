@@ -8,7 +8,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
-import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.router.TurnType;
@@ -84,12 +83,9 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 
 	@Nullable
 	@Override
-	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	public OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
 	                                                 @NonNull OsmandApplication app,
 	                                                 boolean leftSideNavigation) throws JSONException {
-		JSONObject obj = new JSONObject(content);
-		JSONObject root = obj.getJSONArray("paths").getJSONObject(0);
-
 		String encoded = root.getString("points");
 		List<LatLon> points = GeoPolylineParserUtil.parse(encoded, GeoPolylineParserUtil.PRECISION_5);
 		if (isEmpty(points)) return null;
@@ -216,14 +212,15 @@ public class GraphhopperEngine extends OnlineRoutingEngine {
 		return id != null ? TurnType.valueOf(id, leftSide) : null;
 	}
 
+	@NonNull
 	@Override
-	public boolean parseServerMessage(@NonNull StringBuilder sb,
-	                                  @NonNull String content) throws JSONException {
-		JSONObject obj = new JSONObject(content);
-		if (obj.has("message")) {
-			String message = obj.getString("message");
-			sb.append(message);
-		}
-		return obj.has("paths");
+	protected String getErrorMessageKey() {
+		return "message";
+	}
+
+	@NonNull
+	@Override
+	protected String getRootArrayKey() {
+		return "paths";
 	}
 }
