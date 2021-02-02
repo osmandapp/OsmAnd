@@ -283,8 +283,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				if (appMode != null) {
 					profileName = appMode.toHumanString();
 				} else {
-					String defaultProfileName = StringUtils.capitalize(modeBean.stringKey);
-					profileName = defaultProfileName;
+					profileName = StringUtils.capitalize(modeBean.stringKey);
 				}
 			}
 			builder.setTitle(profileName);
