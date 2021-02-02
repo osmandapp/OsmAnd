@@ -1528,7 +1528,7 @@
     <string name="distance">מרחק</string>
     <string name="average">ממוצע</string>
     <string name="of">%1$d מתוך %2$d</string>
-    <string name="moving_time">זמן תנועה</string>
+    <string name="moving_time">זמן בתנועה</string>
     <string name="max_min">מרבי/מזערי</string>
     <string name="min_max">מזערי/מרבי</string>
     <string name="index_tours">סיורים</string>
@@ -4001,4 +4001,16 @@
     <string name="delete_waypoints">מחיקת נקודות דרך</string>
     <string name="copy_to_map_markers">העתקה לסמני המפה</string>
     <string name="copy_to_map_favorites">העתקה למועדפים</string>
+    <string name="shared_string_sec">שנ׳</string>
+    <string name="announcement_time_passing">מעבר</string>
+    <string name="announcement_time_approach">הגעה</string>
+    <string name="announcement_time_prepare_long">הכנה ממושכת</string>
+    <string name="announcement_time_prepare">הכנה</string>
+    <string name="shared_string_turn">פנייה</string>
+    <string name="announcement_time_intervals">הפרשי זמן ומרחק</string>
+    <string name="upload_photo">מתבצעת שליחה</string>
+    <string name="upload_photo_completed">השליחה הושלמה</string>
+    <string name="uploading_count">נשלחות %1$d מתוך %2$d</string>
+    <string name="uploaded_count">נשלחו %1$d מתוך %2$d</string>
+    <string name="toast_select_edits_for_upload">נא לבחור עריכות לשליחה</string>
 </resources>

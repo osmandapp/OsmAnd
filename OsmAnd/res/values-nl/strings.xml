@@ -931,7 +931,7 @@
     <string name="files_limit">%1$d resterende bestanden</string>
     <string name="available_downloads_left">%1$d resterende bestanden nog te downloaden</string>
     <string name="install_paid">Volledige versie</string>
-    <string name="cancel_route">Annuleer route</string>
+    <string name="cancel_route">Annuleer route \?</string>
     <string name="cancel_navigation">Stop navigatie</string>
     <string name="clear_destination">Bestemming wissen</string>
     <string name="use_magnetic_sensor_descr">Gebruik magnetische sensor in plaats van oriëntatiesensor voor het kompas.</string>
@@ -2178,8 +2178,8 @@
     <string name="shared_string_time_span">Tijdsduur</string>
     <string name="shared_string_time_moving">Tijd in beweging</string>
     <string name="routing_attr_driving_style_name">Rijstijl</string>
-    <string name="routing_attr_height_obstacles_name">Gebruik hoogtegegevens</string>
-    <string name="routing_attr_height_obstacles_description">Factor in hoogtegegevens (van SRTM, ASTER en EU-DEM data).</string>
+    <string name="routing_attr_height_obstacles_name">Hoogtegegevens gebruiken</string>
+    <string name="routing_attr_height_obstacles_description">Gebruik hoogtegegevens (van SRTM, ASTER en EU-DEM data) bij bepalen route.</string>
     <string name="shared_string_gpx_track">Track</string>
     <string name="right_side_navigation">Rechts rijdend</string>
     <string name="driving_region_automatic">Automatisch</string>
@@ -3320,9 +3320,9 @@
     <string name="route_recalculation">Route herberekening</string>
     <string name="accessibility_announce">Meld</string>
     <string name="login_and_pass">Gebruikersnaam en wachtwoord</string>
-    <string name="plugin_global_prefs_info">Deze instellingen hebben betrekking op alle profielen</string>
+    <string name="plugin_global_prefs_info">Deze plugin-instellingen hebben betrekking op alle profielen</string>
     <string name="osm_editing">OSM Bewerking</string>
-    <string name="osm_edits_view_descr">U kan al uw niet geüploade bewerkingen of OSM fouten zien in %1$s. Geüploade punten ziet u niet meer.</string>
+    <string name="osm_edits_view_descr">U kunt alle niet-geüploade bewerkingen of OSM-opmerkingen zien in %1$s. Geüploade wijzigingen ziet u niet meer.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Tijdens navigatie of beweging getoond icoon.</string>
     <string name="select_map_icon_descr">Bij rust getoond icoon.</string>
@@ -3667,8 +3667,8 @@
     <string name="next_segment">Volgende segment</string>
     <string name="all_next_segments">Alle volgende segmenten</string>
     <string name="all_next_segments_will_be_recalc">Alle volgende segmenten worden opnieuw berekend met het geselecteerde profiel.</string>
-    <string name="whole_track">De ganse track</string>
-    <string name="route_between_points_whole_track_button_desc">De ganse track wordt herberekend volgens het geselecteerde profiel.</string>
+    <string name="whole_track">De gehele route</string>
+    <string name="route_between_points_whole_track_button_desc">De gehele route wordt herberekend volgens het geselecteerde profiel.</string>
     <string name="pass_whole_track_descr">Punt van de track om te navigeren</string>
     <string name="shared_string_save_as_gpx">Bewaar als nieuw trackbestand</string>
     <string name="save_as_new_track">Bewaar als nieuwe track</string>
@@ -3726,31 +3726,31 @@
     <string name="plan_a_route">Plan een route</string>
     <string name="use_two_phase_routing">Gebruik de twee-fase A* route berekening methode</string>
     <string name="shared_string_graph">Grafiek</string>
-    <string name="message_graph_will_be_available_after_recalculation">Wacht op de herberekening van de route.
-\nDe grafiek is beschikbaar na herberekening.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Wacht totdat route herberekend is.
+\nNa herberekening is de grafiek zichtbaar.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="import_track_descr">Kies een trackbestand om te volgen of importeer het, vanaf uw apparaat.</string>
-    <string name="app_mode_gap">Kloof</string>
-    <string name="shared_string_custom">Op maat</string>
+    <string name="app_mode_gap">Onderbreking</string>
+    <string name="shared_string_custom">Aangepast</string>
     <string name="perform_oauth_authorization_description">Voer een OAuth-login uit om osm edit functies te gebruiken</string>
-    <string name="release_3_5">"• Bijgewerkte app- en profielinstellingen: instellingen zijn nu gerangschikt op type. Elk profiel kan afzonderlijk worden aangepast.
+    <string name="release_3_5">• Bijgewerkte app- en profielinstellingen: instellingen zijn nu gerangschikt op type. Elk profiel kan afzonderlijk worden aangepast.
 \n
-\n  • Nieuw dialoogvenster voor het downloaden van kaarten waarin wordt voorgesteld een kaart te downloaden tijdens het browsen
+\n • Nieuw dialoogvenster voor het downloaden van kaarten waarin wordt voorgesteld een kaart te downloaden tijdens het browsen
 \n
-\n  • Donkere thema-fixes
+\n • Donkere thema-fixes
 \n
-\n  • Verschillende routeringsproblemen over de hele wereld opgelost
+\n • Verschillende routeringsproblemen over de hele wereld opgelost
 \n
-\n  • Bijgewerkte basiskaart met meer gedetailleerd wegennet
+\n • Bijgewerkte basiskaart met meer gedetailleerd wegennet
 \n
-\n  • Vaste overstroomde gebieden over de hele wereld
+\n • Vaste overstroomde gebieden over de hele wereld
 \n
-\n  • Skirouting: hoogteprofiel en routecomplexiteit toegevoegd aan de routedetails
+\n • Skirouting: hoogteprofiel en routecomplexiteit toegevoegd aan de routedetails
 \n
-\n  • Andere bugs opgelost
+\n • Andere bugs opgelost
 \n
-\n"</string>
-    <string name="release_3_6">"• Profielen: nu kunt u de volgorde wijzigen, het pictogram voor de kaart instellen, alle instellingen voor basisprofielen wijzigen en ze terugzetten naar de standaardinstellingen
+\n</string>
+    <string name="release_3_6">• Profielen: nu kunt u de volgorde wijzigen, het pictogram voor de kaart instellen, alle instellingen voor basisprofielen wijzigen en ze terugzetten naar de standaardinstellingen
 \n
 \n • Exitnummer toegevoegd in de navigatie
 \n
@@ -3758,23 +3758,23 @@
 \n
 \n • Herwerkt instellingenscherm voor snelle toegang tot alle profielen
 \n
-\n  • Optie toegevoegd om instellingen van een ander profiel te kopiëren
+\n • Optie toegevoegd om instellingen van een ander profiel te kopiëren
 \n
-\n  • Mogelijkheid toegevoegd om een volgorde te wijzigen of POI-categorieën in Zoeken te verbergen
+\n • Mogelijkheid toegevoegd om een volgorde te wijzigen of POI-categorieën in Zoeken te verbergen
 \n
-\n  • Correct uitgelijnde POI-pictogrammen op de kaart
+\n • Correct uitgelijnde POI-pictogrammen op de kaart
 \n
-\n  • Zonsondergang / zonsopganggegevens toegevoegd om de kaart te configureren
+\n • Zonsondergang / zonsopganggegevens toegevoegd om de kaart te configureren
 \n
-\n  • Thuis/werk-pictogrammen toegevoegd op de kaart
+\n • Thuis/werk-pictogrammen toegevoegd op de kaart
 \n
-\n  • Ondersteuning toegevoegd voor meerdere regels beschrijving bij Instellingen
+\n • Ondersteuning toegevoegd voor meerdere regels beschrijving bij Instellingen
 \n
 \n • Correcte transliteratie toegevoegd aan de kaart van Japan
 \n
-\n  • Antarctica-kaart toegevoegd
+\n • Antarctica-kaart toegevoegd
 \n
-\n"</string>
+\n</string>
     <string name="what_is_new">Wat is er nieuw</string>
     <string name="snowmobile_render_descr">Voor sneeuwscooter, rijden met speciale wegen en tracks.</string>
     <string name="set_working_days_to_continue">Stel aantal werkdagen in om door te gaan</string>
@@ -3837,47 +3837,47 @@
     <string name="osm_edit_logout_success">Uitloggen gelukt</string>
     <string name="file_already_imported">Bestand is reeds geïmporteerd in OsmAnd</string>
     <string name="shared_string_local_maps">Lokale kaarten</string>
-    <string name="icon_group_amenity">Aangenaam</string>
+    <string name="icon_group_amenity">Voorziening</string>
     <string name="icon_group_special">Speciaal</string>
     <string name="icon_group_transport">Transport</string>
     <string name="icon_group_service">Onderhoud</string>
     <string name="icon_group_symbols">Symbolen</string>
     <string name="icon_group_sport">Sport</string>
-    <string name="icon_group_emergency">Noodtoestand</string>
+    <string name="icon_group_emergency">Noodgevallen</string>
     <string name="icon_group_travel">Reizen</string>
     <string name="empty_state_my_tracks_desc">Trackbestanden importeren of opnemen</string>
     <string name="quick_action_add_gpx">Track waypoint toevoegen</string>
     <string name="marker_save_as_track">Opslaan als trackbestand</string>
     <string name="monitoring_control_start">Rec</string>
     <string name="message_you_need_add_two_points_to_show_graphs">U moet minimaal twee punten toevoegen</string>
-    <string name="login_open_street_map">Login op OpenStreetMap</string>
-    <string name="login_open_street_map_org">Login op OpenStreetMap.org</string>
-    <string name="sign_in_with_open_street_map">Login met OpenStreetMap</string>
-    <string name="open_street_map_login_mode">U moet inloggen om nieuwe of gewijzigde wijzigingen te uploaden.
+    <string name="login_open_street_map">Inloggen bij OpenStreetMap</string>
+    <string name="login_open_street_map_org">Inloggen bij OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Aanmelden via OpenStreetMap (OAuth)</string>
+    <string name="open_street_map_login_mode">U moet inloggen om wijzigingen te uploaden.
 \n
-\nU kunt inloggen met de veilige OAuth-methode of uw login en wachtwoord gebruiken.</string>
-    <string name="use_login_password">Gebruik uw login gegevens</string>
+\nU kunt inloggen met de veilige OAuth-methode of uw loginnaam en wachtwoord gebruiken.</string>
+    <string name="use_login_password">Inloggen met gebruikersnaam en wachtwoord</string>
     <string name="login_account">Account</string>
-    <string name="user_login">Inloggen</string>
+    <string name="user_login">Gebruikersnaam</string>
     <string name="manage_subscription">Abonnement beheren</string>
     <string name="subscription_payment_issue_title">Er is een probleem met uw abonnement. Klik op de knop om naar de Google Play-abonnementsinstellingen te gaan om uw betalingsmethode te corrigeren.</string>
     <string name="subscription_expired_title">OsmAnd Live-abonnement is verlopen</string>
     <string name="subscription_paused_title">OsmAnd Live-abonnement is gepauzeerd</string>
-    <string name="subscription_on_hold_title">Het OsmAnd Live-abonnement is op wacht gezet</string>
-    <string name="markers_history">Markeervlaggen geschiedenis</string>
+    <string name="subscription_on_hold_title">Het OsmAnd Live-abonnement is opgeschort</string>
+    <string name="markers_history">Markeervlaggetjes-geschiedenis</string>
     <string name="send_files_to_openstreetmap">Stuur het GPX-bestand naar OpenStreetMap</string>
     <string name="enter_text_separated">Voer tags in, gescheiden door komma\'s.</string>
-    <string name="gpx_upload_public_visibility_descr">Openbaar betekent dat de trace openbaar zal worden getoond in Uw GPS-sporen en in openbare GPS-traceerlijsten. Gegevens die via de API worden geleverd, verwijzen niet naar uw traceerpagina. Tijdaanduidingen van de traceerpunten zijn niet beschikbaar via de openbare GPS-API en de punten zijn niet chronologisch gerangschikt. Andere gebruikers kunnen de onbewerkte tracering echter nog steeds downloaden van de openbare traceringslijst en eventuele tijdaanduiding erin.</string>
-    <string name="gpx_upload_private_visibility_descr">Privé betekent dat de trace niet in openbare vermeldingen zal verschijnen, maar trackpoints ervan zullen nog steeds beschikbaar zijn via de openbare GPS API zonder tijdaanduiding, maar zullen niet chronologisch worden gerangschikt.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Identificeerbaar betekent dat de trace openbaar wordt getoond in uw GPS-sporen en in openbare GPS-trace-lijsten, dat wil zeggen dat andere gebruikers de onbewerkte trace kunnen downloaden en deze aan uw gebruikersnaam kunnen koppelen. Gegevens die via de trackpoints-API worden aangeboden, verwijzen naar uw oorspronkelijke tracepagina. Tijdaanduidingen van de traceerpunten zijn beschikbaar via de openbare GPS-API.</string>
-    <string name="gpx_upload_trackable_visibility_descr">Trackbaar betekent dat de trace niet in openbare vermeldingen zal verschijnen, maar trackpoints ervan zullen nog steeds beschikbaar zijn via de openbare GPS API met tijdaanduiding. Andere gebruikers kunnen alleen verwerkte trackpoints downloaden van uw trace die niet rechtstreeks aan u kunnen worden gekoppeld.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Publiek\" betekent dat de track openbaar wordt getoond in \"Jouw GPS-tracks\" en in openbare GPS-track-lijsten. Trackpoints die d.m.v. de API worden gedownload zullen niet aan je oorspronkelijke trackpagina refereren. Tijden in de tracks zijn niet beschikbaar in de publieke GPS API, maar de punten zullen wel chronologisch geordend zijn. Echter, andere gebruikers kunnen de track van de openbare GPS-track-lijsten downloaden met alle tijdinformatie.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Persoonlijk\" betekent dat de track niet wordt getoond in openbare GPS-track-lijsten, maar de trackpunten zijn wel beschikbaar in volgorde van tijd door de publieke GPS API, maar zonder tijdinformatie.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificeerbaar\" betekent dat de trace openbaar wordt getoond in uw GPS-sporen en in openbare GPS-trace-lijsten. Dat wil zeggen dat andere gebruikers de onbewerkte trace kunnen downloaden en deze aan uw gebruikersnaam kunnen koppelen. Gegevens die via de trackpoints-API worden aangeboden, verwijzen naar uw oorspronkelijke tracepagina. Tijdaanduidingen van de traceerpunten zijn beschikbaar via de openbare GPS-API.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Traceerbaar\" betekent dat de track niet wordt getoond in openbare GPS-track-lijsten maar de trackpunten zijn wel beschikbaar door de publieke GPS API met tijdinformatie. Andere gebruikers kunnen alleen bewerkte trackpunten downloaden die niet aan jou herleid kunnen worden.</string>
     <string name="osm_edit_close_note">Sluit OSM Note</string>
     <string name="osm_edit_comment_note">Opmerking maken bij OSM-nota</string>
-    <string name="osm_login_descr">U kunt inloggen met de veilige OAuth-methode of uw login en wachtwoord gebruiken.</string>
+    <string name="osm_login_descr">U kunt inloggen met de veilige OAuth-methode, of uw loginnaam en wachtwoord gebruiken.</string>
     <string name="shared_string_add_photo">Een foto toevoegen</string>
     <string name="register_on_openplacereviews">Registreer u op
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Foto\'s zijn afkomstig van het open data-project OpenPlaceReviews.org. Om uw foto\'s te uploaden, moet u zich aanmelden op deze website.</string>
+    <string name="register_on_openplacereviews_desc">Foto\'s zijn afkomstig van het open data-project OpenPlaceReviews.org. Om uw foto\'s te uploaden, moet u zich aanmelden op hun website.</string>
     <string name="register_opr_create_new_account">Maak een nieuw account aan</string>
     <string name="register_opr_have_account">Ik heb al een account</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
@@ -3954,4 +3954,48 @@
     <string name="routing_attr_allow_intermittent_name">Laat regelmatig droogvallende waterwegen toe</string>
     <string name="shared_string_enter_param">Geef een parameter</string>
     <string name="keep_it_empty_if_not">Laat leeg indien niet</string>
+    <string name="analyze_by_intervals">Analyseren met intervallen</string>
+    <string name="upload_to_openstreetmap">Uploaden naar OpenStreetMap</string>
+    <string name="edit_track">GPX-track bewerken</string>
+    <string name="rename_track">GPX-track hernoemen</string>
+    <string name="change_folder">Map wijzigen</string>
+    <string name="shared_string_sec">sec</string>
+    <string name="announcement_time_approach">Bij nadering</string>
+    <string name="announcement_time_passing">Bij passeren</string>
+    <string name="announcement_time_prepare_long">Ruime vooraankondiging</string>
+    <string name="announcement_time_prepare">Vooraankondiging</string>
+    <string name="announcement_time_off_route">Afwijking van de route</string>
+    <string name="announcement_time_arrive">Aankomst op bestemming</string>
+    <string name="shared_string_turn">Bocht</string>
+    <string name="announcement_time_intervals">Tijd- en afstandsintervallen</string>
+    <string name="announcement_time_descr">De aankondigingstijd van verschillende aankondigen hangt af van type en huidige snelheid.</string>
+    <string name="announcement_time_title">Aankondigingstijd</string>
+    <string name="start_recording">Start opname</string>
+    <string name="show_track_on_map">Toon GPX-track op de kaart</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Rolstoel</string>
+    <string name="routing_engine_vehicle_type_hiking">Hiken</string>
+    <string name="routing_engine_vehicle_type_walking">Wandelen</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Elektische Fiets</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Mountainbiken</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Fietsen</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Normaal Fietsen</string>
+    <string name="routing_engine_vehicle_type_hgv">Vrachtwagen</string>
+    <string name="routing_engine_vehicle_type_small_truck">Kleine Vrachtwagen</string>
+    <string name="routing_engine_vehicle_type_truck">Vrachtwagen</string>
+    <string name="routing_engine_vehicle_type_scooter">Scooter</string>
+    <string name="routing_engine_vehicle_type_racingbike">Racefiets</string>
+    <string name="routing_engine_vehicle_type_mtb">Mountainbike</string>
+    <string name="message_server_error">Server fout: %1$s</string>
+    <string name="message_name_is_already_exists">Deze naam bestaat al</string>
+    <string name="delete_online_routing_engine">Deze Online-routeservice verwijderen\?</string>
+    <string name="context_menu_read_full">Helemaal inlezen</string>
+    <string name="context_menu_edit_descr">Beschrijving bewerken</string>
+    <string name="delete_waypoints">Waypoints verwijderen</string>
+    <string name="copy_to_map_markers">Kopiëren naar Markeervlaggetjes</string>
+    <string name="copy_to_map_favorites">Kopiëren naar Favorieten</string>
+    <string name="upload_photo">Opladen</string>
+    <string name="upload_photo_completed">Opladen voltooid</string>
+    <string name="uploading_count">Aan het opladen %1$d van %2$d</string>
+    <string name="uploaded_count">Opgeladen %1$d van %2$d</string>
+    <string name="toast_select_edits_for_upload">Selecteer de op te laden wijzigingen</string>
 </resources>

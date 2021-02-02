@@ -2434,7 +2434,7 @@
     <string name="average">Priemer</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Stúpanie/Klesanie</string>
-    <string name="moving_time">Trvanie presunu</string>
+    <string name="moving_time">Čas v pohybe</string>
     <string name="max_min">Max/Min</string>
     <string name="quick_action_resume_pause_navigation">Pozastaviť/pokračovať navigáciu</string>
     <string name="quick_action_resume_pause_navigation_descr">Tlačidlo pre pozastavenie alebo pokračovanie navigácie.</string>
@@ -3995,4 +3995,15 @@
     <string name="message_server_error">Chyba servera: %1$s</string>
     <string name="message_name_is_already_exists">Názov už existuje</string>
     <string name="shared_string_turn">Odbočiť</string>
+    <string name="delete_online_routing_engine">Odstrániť túto online navigačnú službu\?</string>
+    <string name="context_menu_read_full">Prečítať celé</string>
+    <string name="context_menu_edit_descr">Upraviť popis</string>
+    <string name="delete_waypoints">Odstrániť body trasy</string>
+    <string name="copy_to_map_markers">Skopírovať do mapových značiek</string>
+    <string name="copy_to_map_favorites">Skopírovať do obľúbených</string>
+    <string name="upload_photo">Odosielanie</string>
+    <string name="upload_photo_completed">Odoslanie dokončené</string>
+    <string name="uploading_count">Odosiela sa %1$d z %2$d</string>
+    <string name="uploaded_count">Odoslané %1$d z %2$d</string>
+    <string name="toast_select_edits_for_upload">Zvoľte úpravy na odoslanie</string>
 </resources>

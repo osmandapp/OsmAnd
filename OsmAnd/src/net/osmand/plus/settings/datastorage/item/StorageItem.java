@@ -1,11 +1,11 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.settings.datastorage.item;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.IdRes;
 
-public class DataStorageMenuItem implements Parcelable, Cloneable {
+public class StorageItem implements Parcelable, Cloneable {
 
 	private String key;
 	private int type;
@@ -15,8 +15,12 @@ public class DataStorageMenuItem implements Parcelable, Cloneable {
 	@IdRes
 	private int iconResId;
 
-	private DataStorageMenuItem(String key, int type, String title, String description,
-	                            String directory, int iconResId) {
+	private StorageItem(String key,
+	                    int type,
+	                    String title,
+	                    String description,
+	                    String directory,
+	                    int iconResId) {
 		this.key = key;
 		this.type = type;
 		this.title = title;
@@ -25,7 +29,7 @@ public class DataStorageMenuItem implements Parcelable, Cloneable {
 		this.iconResId = iconResId;
 	}
 
-	private DataStorageMenuItem(Parcel in) {
+	private StorageItem(Parcel in) {
 		key = in.readString();
 		type = in.readInt();
 		title = in.readString();
@@ -99,16 +103,16 @@ public class DataStorageMenuItem implements Parcelable, Cloneable {
 		dest.writeString(directory);
 	}
 
-	public static final Parcelable.Creator<DataStorageMenuItem> CREATOR = new Parcelable.Creator<DataStorageMenuItem>() {
+	public static final Parcelable.Creator<StorageItem> CREATOR = new Parcelable.Creator<StorageItem>() {
 
 		@Override
-		public DataStorageMenuItem createFromParcel(Parcel source) {
-			return new DataStorageMenuItem(source);
+		public StorageItem createFromParcel(Parcel source) {
+			return new StorageItem(source);
 		}
 
 		@Override
-		public DataStorageMenuItem[] newArray(int size) {
-			return new DataStorageMenuItem[size];
+		public StorageItem[] newArray(int size) {
+			return new StorageItem[size];
 		}
 	};
 
@@ -151,14 +155,14 @@ public class DataStorageMenuItem implements Parcelable, Cloneable {
 			return this;
 		}
 
-		public DataStorageMenuItem createItem() {
-			return new DataStorageMenuItem(key, type, title, description, directory, iconResId);
+		public StorageItem createItem() {
+			return new StorageItem(key, type, title, description, directory, iconResId);
 		}
 	}
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		return DataStorageMenuItem.builder()
+		return StorageItem.builder()
 				.setKey(this.key)
 				.setTitle(this.title)
 				.setDescription(this.description)

@@ -3948,4 +3948,9 @@
     <string name="shared_string_last_used">Viimati kasutatud</string>
     <string name="message_server_error">Serveri viga: %1$s</string>
     <string name="message_name_is_already_exists">Selline nimi on juba olemas</string>
+    <string name="toast_select_edits_for_upload">Vali tehtud muudatused üleslaadimiseks</string>
+    <string name="uploaded_count">Üleslaaditud %1$d/%2$d</string>
+    <string name="uploading_count">Laadin üles muudatusi %1$d/%2$d</string>
+    <string name="upload_photo_completed">Sai üleslaaditud</string>
+    <string name="upload_photo">Laadin üles</string>
 </resources>

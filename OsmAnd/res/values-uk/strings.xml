@@ -2436,7 +2436,7 @@
     <string name="average">Середнє</string>
     <string name="of">%1$d зі %2$d</string>
     <string name="ascent_descent">Підйом/спуск</string>
-    <string name="moving_time">Час руху</string>
+    <string name="moving_time">Час у русі</string>
     <string name="max_min">Макс/мін</string>
     <string name="min_max">Мін/макс</string>
     <string name="rendering_value_translucent_pink_name">Напівпрозорий рожевий</string>
@@ -4005,4 +4005,9 @@
     <string name="delete_waypoints">Видалити маршрутні точки</string>
     <string name="copy_to_map_markers">Копіювати до позначок мапи</string>
     <string name="copy_to_map_favorites">Копіювати до закладок</string>
+    <string name="upload_photo">Вивантаження</string>
+    <string name="upload_photo_completed">Вивантаження завершено</string>
+    <string name="uploading_count">Вивантаження %1$d з %2$d</string>
+    <string name="uploaded_count">Вивантажено %1$d з %2$d</string>
+    <string name="toast_select_edits_for_upload">Виберіть зміни для вивантаження</string>
 </resources>

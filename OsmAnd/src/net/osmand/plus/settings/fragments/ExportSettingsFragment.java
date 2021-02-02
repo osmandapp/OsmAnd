@@ -36,6 +36,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -150,7 +151,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			showExportProgressDialog();
 			File tempDir = FileUtils.getTempDir(app);
 			String fileName = getFileName();
-			List<SettingsItem> items = app.getSettingsHelper().prepareSettingsItems(adapter.getData(), true);
+			List<SettingsItem> items = app.getSettingsHelper().prepareSettingsItems(adapter.getData(), Collections.<SettingsItem>emptyList(), true);
 			progress.setMax(getMaxProgress(items));
 			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
 		}

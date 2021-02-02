@@ -19,13 +19,13 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.DataStorageMenuItem;
+import net.osmand.plus.settings.datastorage.item.StorageItem;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 
-import static net.osmand.plus.settings.fragments.DataStorageHelper.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
 
 public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 
@@ -39,8 +39,8 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 	public final static String MOVE_DATA = "move_data";
 	public final static String CHOSEN_DIRECTORY = "chosen_storage";
 
-	private DataStorageMenuItem currentDirectory;
-	private DataStorageMenuItem newDirectory;
+	private StorageItem currentDirectory;
+	private StorageItem newDirectory;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -126,11 +126,11 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 		items.add(baseItem);
 	}
 
-	public void setCurrentDirectory(DataStorageMenuItem currentDirectory) {
+	public void setCurrentDirectory(StorageItem currentDirectory) {
 		this.currentDirectory = currentDirectory;
 	}
 
-	public void setNewDirectory(DataStorageMenuItem newDirectory) {
+	public void setNewDirectory(StorageItem newDirectory) {
 		this.newDirectory = newDirectory;
 	}
 
@@ -158,8 +158,8 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 		return true;
 	}
 
-	public static boolean showInstance(FragmentManager fm, String prefId, DataStorageMenuItem currentDirectory,
-	                                   DataStorageMenuItem newDirectory, Fragment target, boolean usedOnMap) {
+	public static boolean showInstance(FragmentManager fm, String prefId, StorageItem currentDirectory,
+	                                   StorageItem newDirectory, Fragment target, boolean usedOnMap) {
 		try {
 			if (fm.findFragmentByTag(TAG) == null) {
 				Bundle args = new Bundle();
