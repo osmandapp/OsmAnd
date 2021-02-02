@@ -73,6 +73,7 @@ import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomShee
 import net.osmand.plus.settings.bottomsheets.EditTextPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.MultiSelectPreferencesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
+import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;

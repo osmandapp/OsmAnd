@@ -14,10 +14,10 @@
 		android:title="@string/shared_string_maps"/>
 
 	<Preference
-		android:key="contour_lines_and_hillshade_memory"
+		android:key="terrain_memory_used"
 		android:layout="@layout/data_storage_memory_used_item"
 		android:icon="@drawable/ic_map"
-		android:title="@string/contour_lines_and_hillshade"/>
+		android:title="@string/hillshade_slope_contour_lines"/>
 	
 	<Preference
 		android:key="tracks_memory_used"

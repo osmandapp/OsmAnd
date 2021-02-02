@@ -1,16 +1,18 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.settings.datastorage.item;
 
-public class DataStorageMemoryItem {
-	public final static int EXTENSIONS = 0;
-	public final static int PREFIX = 1;
-	
+public class MemoryItem {
+
 	private String key;
-	private String[] extensions;
-	private String[] prefixes;
-	private Directory[] directories;
+	private final String[] extensions;
+	private final String[] prefixes;
+	private final DirectoryItem[] directories;
 	private long usedMemoryBytes;
 
-	private DataStorageMemoryItem(String key, String[] extensions, String[] prefixes, long usedMemoryBytes, Directory[] directories) {
+	private MemoryItem(String key,
+	                   String[] extensions,
+	                   String[] prefixes,
+	                   long usedMemoryBytes,
+	                   DirectoryItem[] directories) {
 		this.key = key;
 		this.extensions = extensions;
 		this.prefixes = prefixes;
@@ -42,7 +44,7 @@ public class DataStorageMemoryItem {
 		return prefixes;
 	}
 
-	public Directory[] getDirectories() {
+	public DirectoryItem[] getDirectories() {
 		return directories;
 	}
 
@@ -54,7 +56,7 @@ public class DataStorageMemoryItem {
 		private String key;
 		private String[] extensions;
 		private String[] prefixes;
-		private Directory[] directories;
+		private DirectoryItem[] directories;
 		private long usedMemoryBytes;
 
 		public DataStorageMemoryItemBuilder setKey(String key) {
@@ -72,7 +74,7 @@ public class DataStorageMemoryItem {
 			return this;
 		}
 		
-		public DataStorageMemoryItemBuilder setDirectories(Directory ... directories) {
+		public DataStorageMemoryItemBuilder setDirectories(DirectoryItem... directories) {
 			this.directories = directories;
 			return this;
 		}
@@ -82,38 +84,8 @@ public class DataStorageMemoryItem {
 			return this;
 		}
 		
-		public DataStorageMemoryItem createItem() {
-			return new DataStorageMemoryItem(key, extensions, prefixes, usedMemoryBytes, directories);
-		}
-	}
-	
-	public static class Directory {
-		private String absolutePath;
-		private boolean goDeeper;
-		private int checkingType;
-		private boolean skipOther;
-
-		public Directory(String absolutePath, boolean goDeeper, int checkingType, boolean skipOther) {
-			this.absolutePath = absolutePath;
-			this.goDeeper = goDeeper;
-			this.checkingType = checkingType;
-			this.skipOther = skipOther;
-		}
-
-		public String getAbsolutePath() {
-			return absolutePath;
-		}
-
-		public boolean isGoDeeper() {
-			return goDeeper;
-		}
-
-		public int getCheckingType() {
-			return checkingType;
-		}
-
-		public boolean isSkipOther() {
-			return skipOther;
+		public MemoryItem createItem() {
+			return new MemoryItem(key, extensions, prefixes, usedMemoryBytes, directories);
 		}
 	}
 }
