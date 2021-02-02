@@ -462,9 +462,9 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	}
 	
 	@Override
-	public void onFinishUpdating(String taskKey) {
+	public void onFinishUpdating(String tag) {
 		updateAllSettings();
-		if (taskKey != null && taskKey.equals(TILES_MEMORY)) {
+		if (tag != null && tag.equals(TILES_MEMORY)) {
 			app.getSettings().OSMAND_USAGE_SPACE.set(dataStorageHelper.getTotalUsedBytes());
 		}
 	}

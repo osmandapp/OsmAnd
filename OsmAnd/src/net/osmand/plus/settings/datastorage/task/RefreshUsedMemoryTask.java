@@ -97,16 +97,16 @@ public class RefreshUsedMemoryTask extends AsyncTask<MemoryItem, Void, Void> {
 	                              @NonNull MemoryItem... items) {
 		String directoryPath = directory.getAbsolutePath();
 		for (MemoryItem memoryItem : items) {
-			DirectoryItem[] allowedDirectories = memoryItem.getDirectories();
-			if (allowedDirectories != null) {
-				for (DirectoryItem allowedDir : allowedDirectories) {
-					String allowedDirPath = allowedDir.getAbsolutePath();
+			DirectoryItem[] targetDirectories = memoryItem.getDirectories();
+			if (targetDirectories != null) {
+				for (DirectoryItem targetDirectory : targetDirectories) {
+					String allowedDirPath = targetDirectory.getAbsolutePath();
 					if (objectEquals(directoryPath, allowedDirPath)
 							|| (directoryPath.startsWith(allowedDirPath))) {
-						if (allowedDir.shouldProcessInternalDirectories()) {
+						if (targetDirectory.shouldProcessInternalDirectories()) {
 							calculateMultiTypes(directory, items);
 							return;
-						} else if (allowedDir.shouldSkipUnmatchedInDirectory()) {
+						} else if (!targetDirectory.shouldAddUnmatchedToOtherMemory()) {
 							return;
 						}
 					}
@@ -121,16 +121,16 @@ public class RefreshUsedMemoryTask extends AsyncTask<MemoryItem, Void, Void> {
 	                         @NonNull File file,
 	                         @NonNull MemoryItem... items) {
 		for (MemoryItem item : items) {
-			DirectoryItem[] allowedDirectories = item.getDirectories();
-			if (allowedDirectories == null) continue;
+			DirectoryItem[] targetDirectories = item.getDirectories();
+			if (targetDirectories == null) continue;
 			String rootDirPath = rootDir.getAbsolutePath();
 
-			for (DirectoryItem allowedDir : allowedDirectories) {
-				String allowedDirPath = allowedDir.getAbsolutePath();
-				boolean processInternal = allowedDir.shouldProcessInternalDirectories();
+			for (DirectoryItem targetDirectory : targetDirectories) {
+				String allowedDirPath = targetDirectory.getAbsolutePath();
+				boolean processInternal = targetDirectory.shouldProcessInternalDirectories();
 				if (objectEquals(rootDirPath, allowedDirPath)
 						|| (rootDirPath.startsWith(allowedDirPath) && processInternal)) {
-					CheckingType checkingType = allowedDir.getCheckingType();
+					CheckingType checkingType = targetDirectory.getCheckingType();
 					switch (checkingType) {
 						case EXTENSIONS: {
 							if (isSuitableExtension(file, item)) {
@@ -147,7 +147,7 @@ public class RefreshUsedMemoryTask extends AsyncTask<MemoryItem, Void, Void> {
 							break;
 						}
 					}
-					if (allowedDir.shouldSkipUnmatchedInDirectory()) {
+					if (!targetDirectory.shouldAddUnmatchedToOtherMemory()) {
 						return;
 					}
 				}

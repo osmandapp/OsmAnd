@@ -67,6 +67,11 @@ public class DataStorageHelper {
 	}
 
 	private void prepareData() {
+		initStorageItems();
+		initUsedMemoryItems();
+	}
+
+	private void initStorageItems() {
 		OsmandSettings settings = app.getSettings();
 		if (settings.getExternalStorageDirectoryTypeV19() >= 0) {
 			currentStorageType = settings.getExternalStorageDirectoryTypeV19();
@@ -169,20 +174,18 @@ public class DataStorageHelper {
 		if (currentDataStorage == null) {
 			currentDataStorage = manuallySpecified;
 		}
-
-		initMemoryUsed();
 	}
 
-	private void initMemoryUsed() {
+	private void initUsedMemoryItems() {
 		mapsMemory = MemoryItem.builder()
 				.setKey(MAPS_MEMORY)
 				.setExtensions(IndexConstants.BINARY_MAP_INDEX_EXT)
 				.setDirectories(
-						createDirectory((MAPS_PATH), false, EXTENSIONS, false),
-						createDirectory((ROADS_INDEX_DIR), true, EXTENSIONS, false),
-						createDirectory((WIKI_INDEX_DIR), true, EXTENSIONS, false),
-						createDirectory((WIKIVOYAGE_INDEX_DIR), true, EXTENSIONS, false),
-						createDirectory((BACKUP_INDEX_DIR), true, EXTENSIONS, false))
+						createDirectory(MAPS_PATH, false, EXTENSIONS, true),
+						createDirectory(ROADS_INDEX_DIR, true, EXTENSIONS, true),
+						createDirectory(WIKI_INDEX_DIR, true, EXTENSIONS, true),
+						createDirectory(WIKIVOYAGE_INDEX_DIR, true, EXTENSIONS, true),
+						createDirectory(BACKUP_INDEX_DIR, true, EXTENSIONS, true))
 				.createItem();
 		memoryItems.add(mapsMemory);
 
@@ -190,8 +193,8 @@ public class DataStorageHelper {
 				.setKey(TERRAIN_MEMORY)
 				.setExtensions(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
 				.setDirectories(
-						createDirectory((SRTM_INDEX_DIR), true, EXTENSIONS, false),
-						createDirectory((TILES_INDEX_DIR), false, PREFIX, true))
+						createDirectory(SRTM_INDEX_DIR, true, EXTENSIONS, true),
+						createDirectory(TILES_INDEX_DIR, false, PREFIX, false))
 				.setPrefixes("Hillshade")
 				.createItem();
 		memoryItems.add(terrainMemory);
@@ -200,7 +203,7 @@ public class DataStorageHelper {
 				.setKey(TRACKS_MEMORY)
 //				.setExtensions(IndexConstants.GPX_FILE_EXT, ".gpx.bz2")
 				.setDirectories(
-						createDirectory((GPX_INDEX_DIR), true, EXTENSIONS, false))
+						createDirectory(GPX_INDEX_DIR, true, EXTENSIONS, true))
 				.createItem();
 		memoryItems.add(tracksMemory);
 
@@ -208,7 +211,7 @@ public class DataStorageHelper {
 				.setKey(NOTES_MEMORY)
 //				.setExtensions("")
 				.setDirectories(
-						createDirectory((AV_INDEX_DIR), true, EXTENSIONS, false))
+						createDirectory(AV_INDEX_DIR, true, EXTENSIONS, true))
 				.createItem();
 		memoryItems.add(notesMemory);
 
@@ -216,7 +219,7 @@ public class DataStorageHelper {
 				.setKey(TILES_MEMORY)
 //				.setExtensions("")
 				.setDirectories(
-						createDirectory((TILES_INDEX_DIR), true, EXTENSIONS, false))
+						createDirectory(TILES_INDEX_DIR, true, EXTENSIONS, true))
 				.createItem();
 		memoryItems.add(tilesMemory);
 
@@ -264,9 +267,9 @@ public class DataStorageHelper {
 		return memoryItems;
 	}
 
-	public RefreshUsedMemoryTask calculateMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener) {
+	public RefreshUsedMemoryTask calculateMemoryUsedInfo(UpdateMemoryInfoUIAdapter uiAdapter) {
 		File rootDir = new File(currentStoragePath);
-		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(listener, otherMemory, rootDir, null, null, OTHER_MEMORY);
+		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(uiAdapter, otherMemory, rootDir, null, null, OTHER_MEMORY);
 		task.execute(mapsMemory, terrainMemory, tracksMemory, notesMemory);
 		return task;
 	}
@@ -292,9 +295,9 @@ public class DataStorageHelper {
 	public DirectoryItem createDirectory(@NonNull String relativePath,
 	                                     boolean processInternalDirectories,
 	                                     CheckingType checkingType,
-	                                     boolean skipUnmatchedInDirectory) {
+	                                     boolean addUnmatchedToOtherMemory) {
 		String path = app.getAppPath(relativePath).getAbsolutePath();
-		return new DirectoryItem(path, processInternalDirectories, checkingType, skipUnmatchedInDirectory);
+		return new DirectoryItem(path, processInternalDirectories, checkingType, addUnmatchedToOtherMemory);
 	}
 
 	public static String getFormattedMemoryInfo(long bytes, String[] formatStrings) {
@@ -312,7 +315,7 @@ public class DataStorageHelper {
 
 		void onMemoryInfoUpdate();
 		
-		void onFinishUpdating(String taskKey);
+		void onFinishUpdating(String tag);
 
 	}
 }

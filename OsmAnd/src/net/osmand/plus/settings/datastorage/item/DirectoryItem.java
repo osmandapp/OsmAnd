@@ -5,7 +5,7 @@ public class DirectoryItem {
 	private final String absolutePath;
 	private final boolean processInternalDirectories;
 	private final CheckingType checkingType;
-	private final boolean skipUnmatchedInDirectory;
+	private final boolean addUnmatchedToOtherMemory;
 
 	public enum CheckingType {
 		EXTENSIONS,
@@ -15,11 +15,11 @@ public class DirectoryItem {
 	public DirectoryItem(String absolutePath,
 	                     boolean processInternalDirectories,
 	                     CheckingType checkingType,
-	                     boolean skipUnmatchedInDirectory) {
+	                     boolean addUnmatchedToOtherMemory) {
 		this.absolutePath = absolutePath;
 		this.processInternalDirectories = processInternalDirectories;
 		this.checkingType = checkingType;
-		this.skipUnmatchedInDirectory = skipUnmatchedInDirectory;
+		this.addUnmatchedToOtherMemory = addUnmatchedToOtherMemory;
 	}
 
 	public String getAbsolutePath() {
@@ -34,7 +34,7 @@ public class DirectoryItem {
 		return checkingType;
 	}
 
-	public boolean shouldSkipUnmatchedInDirectory() {
-		return skipUnmatchedInDirectory;
+	public boolean shouldAddUnmatchedToOtherMemory() {
+		return addUnmatchedToOtherMemory;
 	}
 }
