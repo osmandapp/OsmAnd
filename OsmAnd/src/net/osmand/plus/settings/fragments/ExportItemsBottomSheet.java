@@ -61,7 +61,6 @@ import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedLi
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -280,13 +279,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			String profileName = modeBean.userProfileName;
 			if (Algorithms.isEmpty(profileName)) {
 				ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
-				if (appMode != null) {
-					profileName = appMode.toHumanString();
-				} else {
-					String defaultProfileName = StringUtils.capitalize(modeBean.stringKey);
-					profileName = defaultProfileName;
-					modeBean.userProfileName = defaultProfileName;
-				}
+				profileName = appMode.toHumanString();
 			}
 			builder.setTitle(profileName);
 

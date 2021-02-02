@@ -33,7 +33,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -92,11 +91,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				String profileName = modeBean.userProfileName;
 				if (Algorithms.isEmpty(profileName)) {
 					ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
-					try {
-						profileName = app.getString(appMode.getNameKeyResource());
-					} catch (Exception e) {
-						profileName = StringUtils.capitalize(modeBean.stringKey);
-					}
+					profileName = app.getString(appMode.getNameKeyResource());
 				}
 				itemHolder.title.setText(profileName);
 				String routingProfile = "";
