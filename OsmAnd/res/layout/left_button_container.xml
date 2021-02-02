@@ -8,7 +8,7 @@
 	android:layout_weight="1">
 
 	<net.osmand.plus.widgets.TextViewEx
-		android:id="@+id/tab_title"
+		android:id="@+id/left_button"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:background="?attr/selectableItemBackground"
