@@ -62,6 +62,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -279,7 +280,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			String profileName = modeBean.userProfileName;
 			if (Algorithms.isEmpty(profileName)) {
 				ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
-				profileName = appMode.toHumanString();
+				if (appMode != null) {
+					profileName = appMode.toHumanString();
+				} else {
+					String defaultProfileName = StringUtils.capitalize(modeBean.stringKey);
+					profileName = defaultProfileName;
+				}
 			}
 			builder.setTitle(profileName);
 
