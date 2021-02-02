@@ -99,16 +99,19 @@ public class RefreshUsedMemoryTask extends AsyncTask<MemoryItem, Void, Void> {
 		for (MemoryItem memoryItem : items) {
 			DirectoryItem[] targetDirectories = memoryItem.getDirectories();
 			if (targetDirectories != null) {
-				for (DirectoryItem targetDirectory : targetDirectories) {
-					String allowedDirPath = targetDirectory.getAbsolutePath();
-					if (objectEquals(directoryPath, allowedDirPath)
-							|| (directoryPath.startsWith(allowedDirPath))) {
-						if (targetDirectory.shouldProcessInternalDirectories()) {
-							calculateMultiTypes(directory, items);
-							return;
-						} else if (!targetDirectory.shouldAddUnmatchedToOtherMemory()) {
-							return;
-						}
+				for (DirectoryItem dir : targetDirectories) {
+					String allowedDirPath = dir.getAbsolutePath();
+					boolean isPerfectlyMatch = objectEquals(directoryPath, allowedDirPath);
+					boolean isParentDirectory = !isPerfectlyMatch && (directoryPath.startsWith(allowedDirPath));
+					boolean isMatchDirectory = isPerfectlyMatch || isParentDirectory;
+					if (isPerfectlyMatch) {
+						calculateMultiTypes(directory, items);
+						return;
+					} else if (isParentDirectory && dir.shouldProcessInternalDirectories()) {
+						calculateMultiTypes(directory, items);
+						return;
+					} else if (isMatchDirectory && !dir.shouldAddUnmatchedToOtherMemory()) {
+						return;
 					}
 				}
 			}
@@ -122,7 +125,7 @@ public class RefreshUsedMemoryTask extends AsyncTask<MemoryItem, Void, Void> {
 	                         @NonNull MemoryItem... items) {
 		for (MemoryItem item : items) {
 			DirectoryItem[] targetDirectories = item.getDirectories();
-			if (targetDirectories == null) continue;
+			if (targetDirectories == null) return;
 			String rootDirPath = rootDir.getAbsolutePath();
 
 			for (DirectoryItem targetDirectory : targetDirectories) {
