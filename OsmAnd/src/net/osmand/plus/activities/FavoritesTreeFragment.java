@@ -89,6 +89,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public static final int IMPORT_FAVOURITES_ID = 7;
 	public static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
 
+	private static final int MAX_POINTS_IN_DESCRIPTION = 100;
+
 	private FavouritesAdapter favouritesAdapter;
 	private FavouritesDbHelper helper;
 
@@ -611,23 +613,28 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		StringBuilder html = new StringBuilder();
 		html.append("<h1>My Favorites</h1>");
 
-		int MAX_AMOUNT_OF_POINTS = 100;
 		int addedPoints = 0;
 		for (FavoriteGroup group : groups) {
-			html.append("<h3>" + group.getDisplayName(app) + "</h3>");
+			html.append("<h3>").append(group.getDisplayName(app)).append("</h3>");
 			for (FavouritePoint fp : group.getPoints()) {
-				if (addedPoints >= MAX_AMOUNT_OF_POINTS) {
+				if (addedPoints >= MAX_POINTS_IN_DESCRIPTION) {
 					break;
 				}
 
 				float lat = (float) fp.getLatitude();
 				float lon = (float) fp.getLongitude();
 				String url = "geo:" + lat + "," + lon + "?m=" + fp.getName();
-				html.append("<p>" + fp.getDisplayName(app) + " - <a href=\"" + url + "\">geo:"
-						+ lat + "," + lon + "</a><br></p>");
+				html.append("<p>")
+						.append(fp.getDisplayName(app))
+						.append(" - <a href=\"")
+						.append(url)
+						.append("\">geo:")
+						.append(lat).append(",").append(lon)
+						.append("</a><br></p>");
 				addedPoints++;
 			}
-			if (addedPoints >= MAX_AMOUNT_OF_POINTS) {
+
+			if (addedPoints >= MAX_POINTS_IN_DESCRIPTION) {
 				html.append("<p>...</p>");
 				break;
 			}
