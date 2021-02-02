@@ -3986,4 +3986,10 @@
     <string name="context_menu_read_full">Читать полностью</string>
     <string name="context_menu_edit_descr">Редактировать описание</string>
     <string name="delete_waypoints">Удалить путевые точки</string>
+    <string name="routing_engine_vehicle_type_hgv">HGV</string>
+    <string name="upload_photo">Отправка</string>
+    <string name="upload_photo_completed">Отправка завершена</string>
+    <string name="uploading_count">Отправка %1$d из %2$d</string>
+    <string name="uploaded_count">Отправлено %1$d из %2$d</string>
+    <string name="toast_select_edits_for_upload">Выберите правки для отправки</string>
 </resources>
