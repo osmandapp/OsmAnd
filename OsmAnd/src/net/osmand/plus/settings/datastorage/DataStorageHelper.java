@@ -195,7 +195,7 @@ public class DataStorageHelper {
 				.setDirectories(
 						createDirectory(SRTM_INDEX_DIR, true, EXTENSIONS, true),
 						createDirectory(TILES_INDEX_DIR, false, PREFIX, false))
-				.setPrefixes("Hillshade")
+				.setPrefixes("Hillshade", "Slope")
 				.createItem();
 		memoryItems.add(terrainMemory);
 
