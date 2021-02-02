@@ -37,7 +37,7 @@ public class OsmAndFormatter {
 	public final static float METERS_IN_KILOMETER = 1000f;
 	public final static float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
 	public final static float METERS_IN_ONE_NAUTICALMILE = 1852f; // 1852
-	
+
 	public final static float YARDS_IN_ONE_METER = 1.0936f;
 	public final static float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
@@ -166,7 +166,7 @@ public class OsmAndFormatter {
 			} else {
 				generator *= 2;
 			}
-			
+
 			if (point == mainUnitInMeter && metersInSecondUnit * mainUnitInMeter * 0.9f <= generator) {
 				point = 1 / metersInSecondUnit;
 				generator = 1;
@@ -189,14 +189,14 @@ public class OsmAndFormatter {
 		}
 		return roundDist;
 	}
-	
+
 	public static String getFormattedRoundDistanceKm(float meters, int digits, OsmandApplication ctx) {
 		int mainUnitStr = R.string.km;
 		float mainUnitInMeters = METERS_IN_KILOMETER;
 		if (digits == 0) {
 			return (int) (meters / mainUnitInMeters + 0.5) + " " + ctx.getString(mainUnitStr); //$NON-NLS-1$
 		} else if (digits == 1) {
-			return fixed1.format(((float) meters) / mainUnitInMeters) + " " + ctx.getString(mainUnitStr); 
+			return fixed1.format(((float) meters) / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
 		} else {
 			return fixed2.format(((float) meters) / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
 		}
@@ -216,10 +216,10 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedAzimuth(float bearing, AngularConstants angularConstant) {
-		while(bearing < -180.0) {
+		while (bearing < -180.0) {
 			bearing += 360;
 		}
-		while(bearing > 360.0) {
+		while (bearing > 360.0) {
 			bearing -= 360;
 		}
 		switch (angularConstant) {
@@ -306,7 +306,7 @@ public class OsmAndFormatter {
 			return ((int) (alt * FEET_IN_ONE_METER + 0.5)) + " " + ctx.getString(R.string.foot);
 		}
 	}
-	
+
 	public static String getFormattedSpeed(float metersperseconds, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		SpeedConstants mc = settings.SPEED_SYSTEM.get();
@@ -344,8 +344,8 @@ public class OsmAndFormatter {
 			if (minperkm >= 10) {
 				return ((int) Math.round(minperkm)) + " " + mc.toShortString(ctx);
 			} else {
-				int mph10 = (int) Math.round(minperkm * 10f);
-				return (mph10 / 10f) + " " + mc.toShortString(ctx);
+				int seconds = (int) minperkm * 60 + (int) Math.round((minperkm % 1) * 60);
+				return Algorithms.formatDuration(seconds, false) + " " + mc.toShortString(ctx);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_MILE) {
 			if (metersperseconds < 0.111111111) {
@@ -367,22 +367,22 @@ public class OsmAndFormatter {
 			return (kmh10 / 10f) + " " + SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
 		}
 	}
-	
-	
+
+
 	public static String toPublicString(CityType t, Context ctx) {
 		switch (t) {
-		case CITY:
-			return ctx.getString(R.string.city_type_city);
-		case HAMLET:
-			return ctx.getString(R.string.city_type_hamlet);
-		case TOWN:
-			return ctx.getString(R.string.city_type_town);
-		case VILLAGE:
-			return ctx.getString(R.string.city_type_village);
-		case SUBURB:
-			return ctx.getString(R.string.city_type_suburb);
-		default:
-			break;
+			case CITY:
+				return ctx.getString(R.string.city_type_city);
+			case HAMLET:
+				return ctx.getString(R.string.city_type_hamlet);
+			case TOWN:
+				return ctx.getString(R.string.city_type_town);
+			case VILLAGE:
+				return ctx.getString(R.string.city_type_village);
+			case SUBURB:
+				return ctx.getString(R.string.city_type_suburb);
+			default:
+				break;
 		}
 		return "";
 	}
@@ -393,7 +393,7 @@ public class OsmAndFormatter {
 		String typeName = amenity.getSubType();
 		if (pt != null) {
 			typeName = pt.getTranslation();
-		} else if(typeName != null){
+		} else if (typeName != null) {
 			typeName = Algorithms.capitalizeFirstLetterAndLowercase(typeName.replace('_', ' '));
 		}
 		String localName = amenity.getName(locale, transliterate);
@@ -498,17 +498,17 @@ public class OsmAndFormatter {
 			result.append(formatCoordinate(lat, outputFormat)).append(" ").append(formatCoordinate(lon, outputFormat));
 		} else if (outputFormat == FORMAT_DEGREES || outputFormat == FORMAT_MINUTES || outputFormat == FORMAT_SECONDS) {
 			result
-				.append(formatCoordinate(lat, outputFormat)).append(" ")
-				.append(lat > 0 ? NORTH : SOUTH).append(", ")
-				.append(formatCoordinate(lon, outputFormat)).append(" ")
-				.append(lon > 0 ? EAST : WEST);
-		}  else if (outputFormat == UTM_FORMAT) {
+					.append(formatCoordinate(lat, outputFormat)).append(" ")
+					.append(lat > 0 ? NORTH : SOUTH).append(", ")
+					.append(formatCoordinate(lon, outputFormat)).append(" ")
+					.append(lon > 0 ? EAST : WEST);
+		} else if (outputFormat == UTM_FORMAT) {
 			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
 			result
-				.append(pnt.zone_number)
-				.append(pnt.zone_letter).append(" ")
-				.append((long) pnt.easting).append(" ")
-				.append((long) pnt.northing);
+					.append(pnt.zone_number)
+					.append(pnt.zone_letter).append(" ")
+					.append((long) pnt.easting).append(" ")
+					.append((long) pnt.northing);
 		} else if (outputFormat == OLC_FORMAT) {
 			String r;
 			try {
@@ -527,21 +527,21 @@ public class OsmAndFormatter {
 		}
 		return result.toString();
 	}
-	
+
 	private static String formatCoordinate(double coordinate, int outputType) {
-		
+
 		if (coordinate < -180.0 || coordinate > 180.0 || Double.isNaN(coordinate)) {
 			return "Error. Wrong coordinates data!";
 		}
 		if ((outputType != FORMAT_DEGREES) && (outputType != FORMAT_MINUTES) && (outputType
-			!= FORMAT_SECONDS) && (outputType != FORMAT_DEGREES_SHORT)) {
-			return "Unknown Output Format!"; 
+				!= FORMAT_SECONDS) && (outputType != FORMAT_DEGREES_SHORT)) {
+			return "Unknown Output Format!";
 		}
 
 		DecimalFormat degDf = new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US));
 		DecimalFormat minDf = new DecimalFormat("00.000", new DecimalFormatSymbols(Locale.US));
 		DecimalFormat secDf = new DecimalFormat("00.0", new DecimalFormatSymbols(Locale.US));
-		
+
 		StringBuilder sb = new StringBuilder();
 
 		if (coordinate < 0) {
@@ -557,11 +557,11 @@ public class OsmAndFormatter {
 			sb.append(degDf.format(coordinate)).append(DELIMITER_DEGREES);
 		} else if (outputType == FORMAT_MINUTES) {
 			sb.append(minDf.format(formatCoordinate(coordinate, sb, DELIMITER_DEGREES)))
-				.append(DELIMITER_MINUTES);
+					.append(DELIMITER_MINUTES);
 		} else {
 			sb.append(secDf.format(formatCoordinate(
-				formatCoordinate(coordinate, sb, DELIMITER_DEGREES), sb, DELIMITER_MINUTES)))
-				.append(DELIMITER_SECONDS);
+					formatCoordinate(coordinate, sb, DELIMITER_DEGREES), sb, DELIMITER_MINUTES)))
+					.append(DELIMITER_SECONDS);
 		}
 		return sb.toString();
 	}
