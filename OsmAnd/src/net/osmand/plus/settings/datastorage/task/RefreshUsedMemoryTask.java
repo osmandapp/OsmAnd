@@ -125,7 +125,7 @@ public class RefreshUsedMemoryTask extends AsyncTask<MemoryItem, Void, Void> {
 	                         @NonNull MemoryItem... items) {
 		for (MemoryItem item : items) {
 			DirectoryItem[] targetDirectories = item.getDirectories();
-			if (targetDirectories == null) return;
+			if (targetDirectories == null) continue;
 			String rootDirPath = rootDir.getAbsolutePath();
 
 			for (DirectoryItem targetDirectory : targetDirectories) {
