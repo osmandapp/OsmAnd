@@ -92,9 +92,10 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				String profileName = modeBean.userProfileName;
 				if (Algorithms.isEmpty(profileName)) {
 					ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
-					try {
-						profileName = app.getString(appMode.getNameKeyResource());
-					} catch (Exception e) {
+					profileName = appMode.toHumanString();
+					if (appMode != null) {
+						profileName = appMode.toHumanString();
+					} else {
 						profileName = StringUtils.capitalize(modeBean.stringKey);
 					}
 				}
