@@ -16,7 +16,8 @@ OsmAndCore_*.aar
 *.iml
 .settings
 .idea
-.project
+**/.project
+**/.classpath
 out/
 
 # Huawei
