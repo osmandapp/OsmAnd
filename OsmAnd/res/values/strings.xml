@@ -12,6 +12,19 @@
 
 -->
 
+    <string name="activity_type_car">Car</string>
+    <string name="activity_type_motorbike">Motorbike</string>
+    <string name="activity_type_offroad">Off-road</string>
+    <string name="activity_type_walking">Walking</string>
+    <string name="activity_type_running">Running</string>
+    <string name="activity_type_hiking">Hiking</string>
+    <string name="activity_type_cycling">Cycling</string>
+    <string name="activity_type_mountainbike">Mountainbike</string>
+    <string name="activity_type_racing">Racing</string>
+    <string name="activity_type_riding">Riding</string>
+    <string name="activity_type_snowmobile">Snowmobile</string>
+    <string name="activity_type_winter">Winter</string>
+    <string name="activity_type_water">Water</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>

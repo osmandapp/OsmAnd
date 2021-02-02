@@ -1,29 +1,58 @@
 package net.osmand.osm;
 
 public enum RouteActivityType {
-	WATER("Water", "yellow"),  WINTER("Winter", "yellow"), SNOWMOBILE("Snowmobile", "yellow"), RIDING("Riding", "yellow"), RACING("Racing", "yellow"),
-	MOUNTAINBIKE("Mountainbike", "blue"), CYCLING("Cycling", "blue"),
-	HIKING("Hiking", "orange"),  RUNNING("Running", "orange"), WALKING("Walking", "orange"),
-	OFFROAD("Off-road", "yellow"), 
-	MOTORBIKE("Motorbike", "green"), CAR("Car", "green");
+	WATER("Water", "yellow", "ic_action_motorboat", "activity_type_water"),
+	WINTER("Winter", "yellow", "ic_action_skiing", "activity_type_winter"),
+	SNOWMOBILE("Snowmobile", "yellow", "ic_action_snowmobile", "activity_type_snowmobile"),
+	RIDING("Riding", "yellow", "ic_action_horse", "activity_type_riding"),
+	RACING("Racing", "yellow", "ic_action_point_destination", "activity_type_racing"),
+	MOUNTAINBIKE("Mountainbike", "blue", "ic_action_bicycle_dark", "activity_type_mountainbike"),
+	CYCLING("Cycling", "blue", "ic_action_bicycle_dark", "activity_type_cycling"),
+	HIKING("Hiking", "orange", "ic_action_trekking_dark", "activity_type_hiking"),
+	RUNNING("Running", "orange", "ic_action_pedestrian_dark", "activity_type_running"),
+	WALKING("Walking", "orange", "ic_action_pedestrian_dark", "activity_type_walking"),
+	OFFROAD("Off-road", "yellow", "ic_action_offroad", "activity_type_offroad"),
+	MOTORBIKE("Motorbike", "green", "ic_action_motorcycle_dark", "activity_type_motorbike"),
+	CAR("Car", "green", "ic_action_car_dark", "activity_type_car");
 	// less specific bottom order
 
 	String name;
 	String color;
+	String icon;
+	String title;
 
-	private RouteActivityType(String nm, String clr) {
+	RouteActivityType(String nm, String clr, String icon, String title) {
 		this.name = nm;
 		this.color = clr;
+		this.icon = icon;
+		this.title = title;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getColor() {
 		return color;
 	}
-	
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public static RouteActivityType getTypeFromName(String name) {
+		for (RouteActivityType rat : values()) {
+			if (rat.name().equalsIgnoreCase(name)) {
+				return rat;
+			}
+		}
+		return null;
+	}
+
 	public static RouteActivityType getTypeFromTags(String[] tags) {
 		RouteActivityType activityType = null;
 		for (String tg : tags) {
@@ -36,7 +65,7 @@ public enum RouteActivityType {
 		}
 		return activityType;
 	}
-	
+
 	public static RouteActivityType convertFromOsmGPXTag(String tg) {
 		String t = tg.toLowerCase();
 		if ("mountain hiking".equalsIgnoreCase(t)) {
@@ -214,5 +243,4 @@ public enum RouteActivityType {
 		}
 		return null;
 	}
-
 }
