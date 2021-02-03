@@ -51,8 +51,8 @@ public class EditPOIMenuController extends MenuController {
 					OsmandSettings settings = app.getSettings();
 					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
 					boolean isLogged = client.isValidToken()
-							|| !Algorithms.isEmpty(settings.USER_NAME.get())
-							&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
+							|| !Algorithms.isEmpty(settings.OSM_USER_NAME.get())
+							&& !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
 
 					if (point instanceof OpenstreetmapPoint) {
 						if (isLogged) {

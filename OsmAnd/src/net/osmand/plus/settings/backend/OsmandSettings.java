@@ -1121,8 +1121,8 @@ public class OsmandSettings {
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<String> USER_NAME = new StringPreference(this, "user_name", "").makeGlobal().makeShared();
-	public final OsmandPreference<String> USER_DISPLAY_NAME = new StringPreference(this, "user_display_name", "").makeGlobal().makeShared();
+	public final OsmandPreference<String> OSM_USER_NAME = new StringPreference(this, "user_name", "").makeGlobal().makeShared();
+	public final OsmandPreference<String> OSM_USER_DISPLAY_NAME = new StringPreference(this, "user_display_name", "").makeGlobal().makeShared();
 
 	public static final String BILLING_USER_DONATION_WORLD_PARAMETER = "";
 	public static final String BILLING_USER_DONATION_NONE_PARAMETER = "none";
@@ -1156,13 +1156,13 @@ public class OsmandSettings {
 			new StringPreference(this, "user_osm_bug_name", "NoName/OsmAnd").makeGlobal().makeShared();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<String> USER_PASSWORD =
+	public final OsmandPreference<String> OSM_USER_PASSWORD =
 			new StringPreference(this, "user_password", "").makeGlobal().makeShared();
 
-	public final OsmandPreference<String> USER_ACCESS_TOKEN =
+	public final OsmandPreference<String> OSM_USER_ACCESS_TOKEN =
 			new StringPreference(this, "user_access_token", "").makeGlobal();
 
-	public final OsmandPreference<String> USER_ACCESS_TOKEN_SECRET =
+	public final OsmandPreference<String> OSM_USER_ACCESS_TOKEN_SECRET =
 			new StringPreference(this, "user_access_token_secret", "").makeGlobal();
 
 	public final OsmandPreference<String> OPR_ACCESS_TOKEN =
@@ -1176,11 +1176,11 @@ public class OsmandSettings {
 
 	// this value boolean is synchronized with settings_pref.xml preference offline POI/Bugs edition
 	public final OsmandPreference<Boolean> OFFLINE_EDITION = new BooleanPreference(this, "offline_osm_editing", true).makeGlobal().makeShared();
-	public final OsmandPreference<Boolean> USE_DEV_URL = new BooleanPreference(this, "use_dev_url", false).makeGlobal().makeShared();
+	public final OsmandPreference<Boolean> OSM_USE_DEV_URL = new BooleanPreference(this, "use_dev_url", false).makeGlobal().makeShared();
 
 	public String getOsmUrl() {
 		String osmUrl;
-		if (USE_DEV_URL.get()) {
+		if (OSM_USE_DEV_URL.get()) {
 			osmUrl = "https://master.apis.dev.openstreetmap.org/";
 		} else {
 			osmUrl = "https://api.openstreetmap.org/";
