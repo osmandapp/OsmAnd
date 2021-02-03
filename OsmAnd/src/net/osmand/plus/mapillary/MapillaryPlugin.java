@@ -63,11 +63,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean isVisible() {
-		return false;
-	}
-
-	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_action_mapillary;
 	}

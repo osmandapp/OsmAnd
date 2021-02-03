@@ -273,7 +273,7 @@ public abstract class OsmandPlugin {
 
 		allPlugins.clear();
 
-		enableHiddenPlugin(app, enabledPlugins, new MapillaryPlugin(app));
+		allPlugins.add(new MapillaryPlugin(app));
 		enableHiddenPlugin(app, enabledPlugins, new WikipediaPlugin(app));
 
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
