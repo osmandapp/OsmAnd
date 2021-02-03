@@ -29,6 +29,8 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.transition.AutoTransition;
 import androidx.transition.Scene;
 import androidx.transition.Transition;
@@ -71,7 +73,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment;
+import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment.UpdateMapRouteMenuListener;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
@@ -870,16 +872,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void showProfileBottomSheetDialog() {
-		final AppModesBottomSheetDialogFragment fragment = new ConfigureAppModesBottomSheetDialogFragment();
-		fragment.setUsedOnMap(true);
-		fragment.setUpdateMapRouteMenuListener(new AppModesBottomSheetDialogFragment.UpdateMapRouteMenuListener() {
-			@Override
-			public void updateAppModeMenu() {
-				updateApplicationModes();
-			}
-		});
-		getMapActivity().getSupportFragmentManager().beginTransaction()
-				.add(fragment, ConfigureAppModesBottomSheetDialogFragment.TAG).commitAllowingStateLoss();
+		FragmentActivity activity = getMapActivity();
+		if (activity != null) {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			ConfigureAppModesBottomSheetDialogFragment.showInstance(manager, true, new UpdateMapRouteMenuListener() {
+				@Override
+				public void updateAppModeMenu() {
+					updateApplicationModes();
+				}
+			});
+		}
 	}
 
 	private void updateApplicationMode(ApplicationMode mode, ApplicationMode next) {
