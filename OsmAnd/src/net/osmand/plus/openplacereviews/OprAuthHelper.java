@@ -1,5 +1,7 @@
 package net.osmand.plus.openplacereviews;
 
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
@@ -14,7 +16,6 @@ public class OprAuthHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final OpenDBAPI openDBAPI = new OpenDBAPI();
 	private final Set<OprAuthorizationListener> listeners = new HashSet<>();
 
 	public OprAuthHelper(@NonNull OsmandApplication app) {
@@ -44,7 +45,7 @@ public class OprAuthHelper {
 				&& !Algorithms.isEmpty(settings.OPR_ACCESS_TOKEN.get());
 	}
 
-	public void notifyAndRemoveListeners() {
+	private void notifyAndRemoveListeners() {
 		for (OprAuthorizationListener listener : listeners) {
 			listener.authorizationCompleted();
 		}
@@ -52,7 +53,40 @@ public class OprAuthHelper {
 	}
 
 	public void authorize(final String token, final String username) {
+		CheckOprAuthTask checkOprAuthTask = new CheckOprAuthTask(app, token, username);
+		checkOprAuthTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	}
 
+	private static class CheckOprAuthTask extends AsyncTask<Void, Void, Boolean> {
+
+		private final OsmandApplication app;
+		private final OpenDBAPI openDBAPI = new OpenDBAPI();
+
+		private final String token;
+		private final String username;
+
+		private CheckOprAuthTask(@NonNull OsmandApplication app, String token, String username) {
+			this.app = app;
+			this.token = token;
+			this.username = username;
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			String baseUrl = OPRConstants.getBaseUrl(app);
+			return openDBAPI.checkPrivateKeyValid(app, baseUrl, username, token);
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (result) {
+				app.getSettings().OPR_ACCESS_TOKEN.set(token);
+				app.getSettings().OPR_USERNAME.set(username);
+			} else {
+				app.getOprAuthHelper().resetAuthorization();
+			}
+			app.getOprAuthHelper().notifyAndRemoveListeners();
+		}
 	}
 
 	public interface OprAuthorizationListener {
