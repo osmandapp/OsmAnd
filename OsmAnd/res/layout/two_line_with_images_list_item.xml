@@ -100,7 +100,7 @@
             android:paddingRight="@dimen/context_menu_progress_padding_left"
             android:text="@string/buy"
             android:textColor="@color/text_color_tab_active_light"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </LinearLayout>
 

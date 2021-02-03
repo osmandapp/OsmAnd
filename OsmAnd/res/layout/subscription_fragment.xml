@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/context_menu_action_buttons_height"
         android:background="?attr/pstsTabBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal">
