@@ -84,7 +84,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		additionalData.put("tags", tagstring);
 		additionalData.put("visibility", visibility);
 		return NetworkUtils.uploadFile(url, f,
-				settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(),
+				settings.OSM_USER_NAME.get() + ":" + settings.OSM_USER_PASSWORD.get(),
 				adapter.getClient(),
 				"file",
 				true, additionalData);
@@ -138,7 +138,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 		StringBuilder responseBody = new StringBuilder();
-		String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
+		String token = settings.OSM_USER_NAME.get() + ":" + settings.OSM_USER_PASSWORD.get(); //$NON-NLS-1$
 		connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		connection.setDoInput(true);
 		if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -322,9 +322,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
 				if (n instanceof Node) {
-					writeNode((Node) n, info, ser, changeSetId, settings.USER_NAME.get());
+					writeNode((Node) n, info, ser, changeSetId, settings.OSM_USER_NAME.get());
 				} else if (n instanceof Way) {
-					writeWay((Way) n, info, ser, changeSetId, settings.USER_NAME.get());
+					writeWay((Way) n, info, ser, changeSetId, settings.OSM_USER_NAME.get());
 				}
 				ser.endTag(null, OsmPoint.stringAction.get(action));
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$

@@ -68,6 +68,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.openplacereviews.OprAuthHelper;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -159,6 +160,7 @@ public class OsmandApplication extends MultiDexApplication {
 	GpxDbHelper gpxDbHelper;
 	QuickActionRegistry quickActionRegistry;
 	OsmOAuthHelper osmOAuthHelper;
+	OprAuthHelper oprAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
 
@@ -392,6 +394,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public OsmOAuthHelper getOsmOAuthHelper() {
 		return osmOAuthHelper;
+	}
+
+	public OprAuthHelper getOprAuthHelper() {
+		return oprAuthHelper;
 	}
 
 	public synchronized DownloadIndexesThread getDownloadThread() {

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,8 +48,8 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 		userNameEditText = view.findViewById(R.id.name_edit_text);
 		passwordEditText = view.findViewById(R.id.password_edit_text);
 
-		String name = app.getSettings().USER_NAME.get();
-		String password = app.getSettings().USER_PASSWORD.get();
+		String name = app.getSettings().OSM_USER_NAME.get();
+		String password = app.getSettings().OSM_USER_PASSWORD.get();
 
 		if (savedInstanceState != null) {
 			name = savedInstanceState.getString(USER_NAME_KEY, null);
@@ -96,8 +95,8 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = requiredMyApplication();
 
-		app.getSettings().USER_NAME.set(userNameEditText.getText().toString());
-		app.getSettings().USER_PASSWORD.set(passwordEditText.getText().toString());
+		app.getSettings().OSM_USER_NAME.set(userNameEditText.getText().toString());
+		app.getSettings().OSM_USER_PASSWORD.set(passwordEditText.getText().toString());
 
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof ValidateOsmLoginListener) {
