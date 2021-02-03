@@ -625,11 +625,14 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private List<RoutingParameter> getReliefParameters() {
 		List<RoutingParameter> reliefFactorParameters = new ArrayList<>();
-		Map<String, RoutingParameter> parameters = app.getRouter(applicationMode).getParameters();
-		for (Map.Entry<String, RoutingParameter> entry : parameters.entrySet()) {
-			RoutingParameter routingParameter = entry.getValue();
-			if (RELIEF_SMOOTHNESS_FACTOR.equals(routingParameter.getGroup())) {
-				reliefFactorParameters.add(routingParameter);
+		GeneralRouter router = app.getRouter(applicationMode);
+		if (router != null) {
+			Map<String, RoutingParameter> parameters = router.getParameters();
+			for (Map.Entry<String, RoutingParameter> entry : parameters.entrySet()) {
+				RoutingParameter routingParameter = entry.getValue();
+				if (RELIEF_SMOOTHNESS_FACTOR.equals(routingParameter.getGroup())) {
+					reliefFactorParameters.add(routingParameter);
+				}
 			}
 		}
 		return reliefFactorParameters;

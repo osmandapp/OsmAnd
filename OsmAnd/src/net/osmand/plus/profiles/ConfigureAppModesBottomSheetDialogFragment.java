@@ -1,7 +1,11 @@
 package net.osmand.plus.profiles;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.R;
+import net.osmand.plus.profiles.ConfigureProfileMenuAdapter.ProfileSelectedListener;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,8 +13,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSheetDialogFragment<ConfigureProfileMenuAdapter> 
-		implements ConfigureProfileMenuAdapter.ProfileSelectedListener {
+public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSheetDialogFragment<ConfigureProfileMenuAdapter>
+		implements ProfileSelectedListener {
 
 	public static final String TAG = "ConfigureAppModesBottomSheetDialogFragment";
 
@@ -55,5 +59,16 @@ public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSh
 			selectedModes.remove(item);
 		}
 		ApplicationMode.changeProfileAvailability(item, isChecked, getMyApplication());
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean usedOnMap, UpdateMapRouteMenuListener listener) {
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			ConfigureAppModesBottomSheetDialogFragment fragment = new ConfigureAppModesBottomSheetDialogFragment();
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setUpdateMapRouteMenuListener(listener);
+			fragmentManager.beginTransaction()
+					.add(fragment, TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }
