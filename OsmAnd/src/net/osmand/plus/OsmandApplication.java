@@ -24,6 +24,8 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
@@ -910,6 +912,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return customRoutingConfigs.get(key);
 	}
 
+	@NonNull
 	public RoutingConfiguration.Builder getRoutingConfigForMode(ApplicationMode mode) {
 		RoutingConfiguration.Builder builder = null;
 		String routingProfileKey = mode.getRoutingProfile();
@@ -923,11 +926,13 @@ public class OsmandApplication extends MultiDexApplication {
 		return builder != null ? builder : getDefaultRoutingConfig();
 	}
 
+	@Nullable
 	public GeneralRouter getRouter(ApplicationMode mode) {
 		Builder builder = getRoutingConfigForMode(mode);
 		return getRouter(builder, mode);
 	}
 
+	@Nullable
 	public GeneralRouter getRouter(Builder builder, ApplicationMode am) {
 		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
 		if (router == null && am.getParent() != null) {
