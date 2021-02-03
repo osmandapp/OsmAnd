@@ -16,10 +16,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -37,15 +39,22 @@ public class OprStartFragment extends BaseOsmAndFragment implements OprAuthoriza
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		View v = UiUtilities.getInflater(requireMyActivity(), nightMode).inflate(R.layout.fragment_opr_login, container,
-				false);
-		View createAccount = v.findViewById(R.id.register_opr_create_account);
-		v.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
+
+		View v = UiUtilities.getInflater(requireMyActivity(), nightMode).inflate(R.layout.fragment_opr_login, container, false);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), v);
+
+		Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+		int icBackResId = AndroidUtils.getNavigationIconResId(v.getContext());
+		toolbar.setNavigationIcon(getContentIcon(icBackResId));
+		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View view) {
+			public void onClick(View v) {
 				dismiss();
 			}
 		});
+
+		View createAccount = v.findViewById(R.id.register_opr_create_account);
 		UiUtilities.setupDialogButton(nightMode, createAccount, UiUtilities.DialogButtonType.PRIMARY,
 				R.string.register_opr_create_new_account);
 		createAccount.setOnClickListener(new View.OnClickListener() {

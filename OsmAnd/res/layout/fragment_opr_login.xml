@@ -1,36 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?attr/bg_color"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
 
-	<LinearLayout
+	<androidx.appcompat.widget.Toolbar
 		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/toolbar_height"
-		android:layout_marginTop="@dimen/dialog_content_margin">
+		android:gravity="center_vertical"
+		android:padding="0dp" />
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/back_button"
-			style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_gravity="start"
-			android:contentDescription="@string/shared_string_back"
-			app:srcCompat="@drawable/ic_arrow_back"
-			app:tint="@color/icon_color_default_light" />
-
-	</LinearLayout>
-
-	<androidx.core.widget.NestedScrollView
+	<ScrollView
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_below="@id/toolbar"
-		android:layout_above="@id/buttons">
+		android:layout_height="0dp"
+		android:layout_weight="1">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -49,7 +35,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginTop="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_small"
 				android:layout_marginRight="@dimen/content_padding"
 				android:layout_marginBottom="@dimen/dashPadding"
 				android:gravity="center_horizontal"
@@ -68,23 +54,25 @@
 				android:layout_marginTop="@dimen/dashPadding"
 				android:layout_marginRight="@dimen/content_padding"
 				android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
-				app:typeface="@string/font_roboto_regular"
 				android:text="@string/register_on_openplacereviews_desc"
 				android:textColor="?android:textColorPrimary"
+				android:textColorLink="@color/icon_color_active_light"
 				android:textSize="@dimen/default_list_text_size"
-				android:textColorLink="@color/icon_color_active_light" />
+				app:typeface="@string/font_roboto_regular" />
+
 		</LinearLayout>
-	</androidx.core.widget.NestedScrollView>
+
+	</ScrollView>
 
 	<LinearLayout
 		android:id="@+id/buttons"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginTop="@dimen/content_padding_small"
 		android:layout_marginRight="@dimen/content_padding"
 		android:layout_marginBottom="@dimen/content_padding_small"
-		android:layout_alignParentBottom="true"
 		android:orientation="vertical">
 
 		<include
@@ -102,4 +90,4 @@
 
 	</LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
