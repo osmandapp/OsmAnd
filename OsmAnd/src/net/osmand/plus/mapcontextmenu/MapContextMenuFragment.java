@@ -58,6 +58,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -1674,6 +1675,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								line2MeasuredHeight = line2.getMeasuredHeight();
 							}
 
+							int customAddressLineHeight = 0;
+							View customAddressLine = view.findViewById(R.id.context_menu_custom_address_line);
+							if (customAddressLine.getVisibility() == View.VISIBLE) {
+								customAddressLineHeight = customAddressLine.getMeasuredHeight();
+							}
+
 							int line3Height = 0;
 							View line3Container = view.findViewById(R.id.additional_info_row_container);
 							if (line3Container.getVisibility() == View.VISIBLE) {
@@ -1717,12 +1724,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 									titleHeight = line1.getMeasuredHeight() + line2MeasuredHeight;
 								}
 								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight
-										+ titleButtonHeight + downloadButtonsHeight
+										+ titleButtonHeight + customAddressLineHeight + downloadButtonsHeight
 										+ titleBottomButtonHeight + additionalButtonsHeight + titleProgressHeight + line3Height;
 								dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight
 										- (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 							} else {
-								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight
+								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight - customAddressLineHeight
 										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - additionalButtonsHeight - titleProgressHeight - line3Height;
 								menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
 										+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
@@ -1818,12 +1825,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			line1.setText(menu.getTitleStr());
 			toolbarTextView.setText(menu.getTitleStr());
 			// Text line 2
-			LinearLayout line2layout = view.findViewById(R.id.context_menu_line2_layout);
 			TextView line2 = view.findViewById(R.id.context_menu_line2);
+			LinearLayout customAddressLine = view.findViewById(R.id.context_menu_custom_address_line);
+			customAddressLine.removeAllViews();
 			if (menu.hasCustomAddressLine()) {
-				line2layout.removeAllViews();
-				menu.buildCustomAddressLine(line2layout);
+				menu.buildCustomAddressLine(customAddressLine);
+				AndroidUiHelper.updateVisibility(line2, false);
+				AndroidUiHelper.updateVisibility(customAddressLine, true);
 			} else {
+				AndroidUiHelper.updateVisibility(line2, true);
+				AndroidUiHelper.updateVisibility(customAddressLine, false);
 				String typeStr = menu.getTypeStr();
 				String streetStr = menu.getStreetStr();
 				StringBuilder line2Str = new StringBuilder();
