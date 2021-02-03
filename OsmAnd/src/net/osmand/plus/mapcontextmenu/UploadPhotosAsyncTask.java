@@ -180,7 +180,9 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	private byte[] compressImageToJpeg(InputStream image) {
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
-		Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
+		BitmapFactory.Options opts = new BitmapFactory.Options();
+		opts.inSampleSize = 4;
+		Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream, null, opts);
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		int h = bmp.getHeight();
 		int w = bmp.getWidth();
