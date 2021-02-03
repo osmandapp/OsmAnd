@@ -212,13 +212,13 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	protected List<ImageCard> getImageCards(@NonNull Map<String, String> params,
+	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params,
 											@Nullable Map<String, String> additionalParams,
 											@Nullable GetImageCardsListener listener) {
 		return Collections.emptyList();
 	}
 
-	protected ImageCard createImageCard(@NonNull JSONObject imageObject) {
+	protected ImageCard createContextMenuImageCard(@NonNull JSONObject imageObject) {
 		return null;
 	}
 
@@ -882,16 +882,16 @@ public abstract class OsmandPlugin {
 		return collection;
 	}
 
-	public static void populateImageCards(@NonNull List<ImageCard> imageCards, @NonNull Map<String, String> params,
+	public static void populateContextMenuImageCards(@NonNull List<ImageCard> imageCards, @NonNull Map<String, String> params,
 										  @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			imageCards.addAll(plugin.getImageCards(params, additionalParams, listener));
+			imageCards.addAll(plugin.getContextMenuImageCards(params, additionalParams, listener));
 		}
 	}
 
 	public static ImageCard createImageCardForJson(@NonNull JSONObject imageObject) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			ImageCard imageCard = plugin.createImageCard(imageObject);
+			ImageCard imageCard = plugin.createContextMenuImageCard(imageObject);
 			if (imageCard != null) {
 				return imageCard;
 			}

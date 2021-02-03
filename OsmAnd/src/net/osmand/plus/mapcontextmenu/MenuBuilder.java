@@ -63,6 +63,7 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
 import net.osmand.plus.openplacereviews.OPRConstants;
+import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -91,7 +92,7 @@ import java.util.Set;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
-public class MenuBuilder implements UploadPhotosListener {
+public class MenuBuilder {
 
 	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	private static final int PICK_IMAGE = 1231;
@@ -171,25 +172,6 @@ public class MenuBuilder implements UploadPhotosListener {
 		if (onlinePhotoCardsRow != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
 		}
-	}
-
-	@Override
-	public void uploadPhotosSuccess(final String response) {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-					try {
-						ImageCard imageCard = ImageCard.createCardOpr(mapActivity, new JSONObject(response));
-						if (imageCard != null) {
-							addImageCard(imageCard);
-						}
-					} catch (JSONException e) {
-						LOG.error(e);
-					}
-				}
-			}
-		});
 	}
 
 	public interface CollapseExpandListener {
@@ -512,7 +494,27 @@ public class MenuBuilder implements UploadPhotosListener {
 							}
 						}
 					}
-					execute(new UploadPhotosAsyncTask(mapActivity, imagesUri, placeId, MenuBuilder.this));
+					UploadPhotosListener listener = new UploadPhotosListener() {
+						@Override
+						public void uploadPhotosSuccess(final String response) {
+							app.runInUIThread(new Runnable() {
+								@Override
+								public void run() {
+									if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+										try {
+											ImageCard imageCard = OpenPlaceReviewsPlugin.createCardOpr(mapActivity, new JSONObject(response));
+											if (imageCard != null) {
+												addImageCard(imageCard);
+											}
+										} catch (JSONException e) {
+											LOG.error(e);
+										}
+									}
+								}
+							});
+						}
+					};
+					execute(new UploadPhotosAsyncTask(mapActivity, imagesUri, placeId, listener));
 				}
 			}
 		}));

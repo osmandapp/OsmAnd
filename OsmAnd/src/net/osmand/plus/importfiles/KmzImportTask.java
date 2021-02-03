@@ -49,7 +49,7 @@ class KmzImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 				ZipEntry entry;
 				while ((entry = zis.getNextEntry()) != null) {
 					if (entry.getName().endsWith(KML_SUFFIX)) {
-						InputStream gpxStream = convertKmlToGpxStream(is);
+						InputStream gpxStream = convertKmlToGpxStream(zis);
 						if (gpxStream != null) {
 							fileSize = gpxStream.available();
 							return GPXUtilities.loadGPXFile(gpxStream);

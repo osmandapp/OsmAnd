@@ -189,14 +189,6 @@ public abstract class ImageCard extends AbstractCard {
 		return imageCard;
 	}
 
-	public static ImageCard createCardOpr(MapActivity mapActivity, JSONObject imageObject) {
-		ImageCard imageCard = null;
-		if (imageObject.has("cid")) {
-			imageCard = new IPFSImageCard(mapActivity, imageObject);
-		}
-		return imageCard;
-	}
-
 	public double getCa() {
 		return ca;
 	}
@@ -432,6 +424,7 @@ public abstract class ImageCard extends AbstractCard {
 		protected List<ImageCard> doInBackground(Void... voids) {
 			TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
 			List<ImageCard> result = new ArrayList<>();
+			OsmandPlugin.populateContextMenuImageCards(result, listener);
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
 				pms.put("lat", "" + (float) latLon.getLatitude());
@@ -448,7 +441,7 @@ public abstract class ImageCard extends AbstractCard {
 				if (!Algorithms.isEmpty(preferredLang)) {
 					pms.put("lang", preferredLang);
 				}
-				OsmandPlugin.populateImageCards(result, pms, params, listener);
+				OsmandPlugin.populateContextMenuImageCards(result, pms, params, listener);
 
 				String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place", pms,
 						"Requesting location images...", false, false);
