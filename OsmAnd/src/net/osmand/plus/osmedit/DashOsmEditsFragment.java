@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.*;
+import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 
 /**
  * Created by Denis
@@ -149,7 +149,9 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 	@Override
 	public void authorizationCompleted() {
-		SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{selectedPoint});
+		if (selectedPoint != null) {
+			SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[] {selectedPoint});
+		}
 	}
 
 	@Override
