@@ -1,12 +1,16 @@
-package net.osmand.plus.mapcontextmenu.builders.cards;
+package net.osmand.plus.openplacereviews;
 
 
 import android.view.View;
+
 import androidx.core.content.ContextCompat;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.util.Algorithms;
+
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;

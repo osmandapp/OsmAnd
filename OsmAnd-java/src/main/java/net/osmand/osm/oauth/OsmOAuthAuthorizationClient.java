@@ -94,6 +94,10 @@ public class OsmOAuthAuthorizationClient {
         return accessToken;
     }
 
+    public OAuth1RequestToken getRequestToken() {
+        return requestToken;
+    }
+
     public Response performRequestWithoutAuth(String url, String requestMethod, String requestBody)
             throws InterruptedException, ExecutionException, IOException {
         Verb verb = parseRequestMethod(requestMethod);

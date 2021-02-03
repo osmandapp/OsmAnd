@@ -21,7 +21,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
-import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
@@ -1206,7 +1206,7 @@ public class RouteProvider {
 				helper.calculateRouteOnline(stringKey, getPathFromParams(params), params.leftSide);
 		if (response != null) {
 			params.intermediates = null;
-			return new RouteCalculationResult(response.getRoute(), response.getDirections(), params, null, true);
+			return new RouteCalculationResult(response.getRoute(), response.getDirections(), params, null, false);
 		} else {
 			return new RouteCalculationResult("Route is empty");
 		}

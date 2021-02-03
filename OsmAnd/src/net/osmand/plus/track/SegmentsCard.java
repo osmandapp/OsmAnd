@@ -47,7 +47,7 @@ public class SegmentsCard extends BaseCard {
 			WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 			PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
 
-			pager.setAdapter(new GPXItemPagerAdapter(tabLayout, displayItem, displayHelper, listener));
+			pager.setAdapter(new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode, listener));
 			tabLayout.setViewPager(pager);
 
 			container.addView(segmentView);

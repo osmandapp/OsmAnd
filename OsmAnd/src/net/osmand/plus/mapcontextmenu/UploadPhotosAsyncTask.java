@@ -13,14 +13,11 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.UploadPhotoProgressBottomSheet;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.openplacereviews.OPRConstants;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
@@ -34,8 +31,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
@@ -45,24 +42,18 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	private final OsmandApplication app;
 	private final WeakReference<MapActivity> activityRef;
-	private UploadPhotosListener listener;
-
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
-	private final LatLon latLon;
 	private final List<Uri> data;
 	private final String[] placeId;
-	private final Map<String, String> params;
-	private final GetImageCardsListener imageCardListener;
+	private final UploadPhotosListener listener;
+	private UploadPhotosProgressListener progressListener;
 
-	public UploadPhotosAsyncTask(MapActivity activity, List<Uri> data, LatLon latLon, String[] placeId,
-								 Map<String, String> params, GetImageCardsListener imageCardListener) {
+	public UploadPhotosAsyncTask(MapActivity activity, List<Uri> data, String[] placeId, UploadPhotosListener listener) {
 		app = (OsmandApplication) activity.getApplicationContext();
 		activityRef = new WeakReference<>(activity);
 		this.data = data;
-		this.latLon = latLon;
-		this.params = params;
 		this.placeId = placeId;
-		this.imageCardListener = imageCardListener;
+		this.listener = listener;
 	}
 
 	@Override
@@ -70,7 +61,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			listener = UploadPhotoProgressBottomSheet.showInstance(manager, data.size(), new OnDismissListener() {
+			progressListener = UploadPhotoProgressBottomSheet.showInstance(manager, data.size(), new OnDismissListener() {
 				@Override
 				public void onDismiss(DialogInterface dialog) {
 					cancel(false);
@@ -81,36 +72,40 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	@Override
 	protected void onProgressUpdate(Integer... values) {
-		if (listener != null) {
-			listener.uploadPhotosProgressUpdate(values[0]);
+		if (progressListener != null) {
+			progressListener.uploadPhotosProgressUpdate(values[0]);
 		}
 	}
 
 	protected Void doInBackground(Void... uris) {
+		List<Uri> uploadedPhotoUris = new ArrayList<>();
 		for (int i = 0; i < data.size(); i++) {
 			if (isCancelled()) {
 				break;
 			}
 			Uri uri = data.get(i);
-			handleSelectedImage(uri);
-			publishProgress(i + 1);
+			if (handleSelectedImage(uri)) {
+				uploadedPhotoUris.add(uri);
+				publishProgress(uploadedPhotoUris.size());
+			}
 		}
 		return null;
 	}
 
 	@Override
 	protected void onPostExecute(Void aVoid) {
-		if (listener != null) {
-			listener.uploadPhotosFinished();
+		if (progressListener != null) {
+			progressListener.uploadPhotosFinished();
 		}
 	}
 
-	private void handleSelectedImage(final Uri uri) {
+	private boolean handleSelectedImage(final Uri uri) {
+		boolean success = false;
 		InputStream inputStream = null;
 		try {
 			inputStream = app.getContentResolver().openInputStream(uri);
 			if (inputStream != null) {
-				uploadImageToPlace(inputStream);
+				success = uploadImageToPlace(inputStream);
 			}
 		} catch (Exception e) {
 			LOG.error(e);
@@ -118,11 +113,13 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		} finally {
 			Algorithms.closeStream(inputStream);
 		}
+		return success;
 	}
 
-	private void uploadImageToPlace(InputStream image) {
+	private boolean uploadImageToPlace(InputStream image) {
+		boolean success = false;
 		InputStream serverData = new ByteArrayInputStream(compressImageToJpeg(image));
-		final String baseUrl = OPRConstants.getBaseUrl(app);
+		String baseUrl = OPRConstants.getBaseUrl(app);
 		// all these should be constant
 		String url = baseUrl + "api/ipfs/image";
 		String response = NetworkUtils.sendPostDataRequest(url, "file", "compressed.jpeg", serverData);
@@ -140,8 +137,6 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 						response, error);
 				if (res != 200) {
 					app.showToastMessage(error.toString());
-				} else {
-					//ok, continue
 				}
 			} catch (FailedVerificationException e) {
 				LOG.error(e);
@@ -151,18 +146,16 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 				//image was uploaded but not added to blockchain
 				checkTokenAndShowScreen();
 			} else {
-				String str = app.getString(R.string.successfully_uploaded_pattern, 1, 1);
-				app.showToastMessage(str);
+				success = true;
 				//refresh the image
-
-				MapActivity activity = activityRef.get();
-				if (activity != null) {
-					MenuBuilder.execute(new GetImageCardsTask(activity, latLon, params, imageCardListener));
+				if (listener != null) {
+					listener.uploadPhotosSuccess(response);
 				}
 			}
 		} else {
 			checkTokenAndShowScreen();
 		}
+		return success;
 	}
 
 	//This method runs on non main thread
@@ -209,12 +202,17 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		return os.toByteArray();
 	}
 
-
-	public interface UploadPhotosListener {
+	public interface UploadPhotosProgressListener {
 
 		void uploadPhotosProgressUpdate(int progress);
 
 		void uploadPhotosFinished();
+
+	}
+
+	public interface UploadPhotosListener {
+
+		void uploadPhotosSuccess(String response);
 
 	}
 }

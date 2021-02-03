@@ -9,6 +9,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -82,12 +83,12 @@ public class OnlineRoutingHelper {
 	}
 
 	@Nullable
-	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine,
-	                                                  @NonNull List<LatLon> path,
-	                                                  boolean leftSideNavigation) throws IOException, JSONException {
+	private OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine,
+	                                                   @NonNull List<LatLon> path,
+	                                                   boolean leftSideNavigation) throws IOException, JSONException {
 		String url = engine.getFullUrl(path);
 		String content = makeRequest(url);
-		return engine.parseServerResponse(content, leftSideNavigation);
+		return engine.parseServerResponse(content, app, leftSideNavigation);
 	}
 
 	@NonNull

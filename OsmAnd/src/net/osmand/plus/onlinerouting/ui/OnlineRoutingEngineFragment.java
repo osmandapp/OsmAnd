@@ -458,15 +458,15 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				StringBuilder message = new StringBuilder();
+				StringBuilder errorMessage = new StringBuilder();
 				boolean resultOk = false;
 				try {
 					String response = helper.makeRequest(exampleCard.getEditedText());
-					resultOk = requestedEngine.parseServerMessage(message, response);
+					resultOk = requestedEngine.checkServerResponse(errorMessage, response);
 				} catch (IOException | JSONException e) {
-					message.append(e.toString());
+					errorMessage.append(e.toString());
 				}
-				showTestResults(resultOk, message.toString(), location);
+				showTestResults(resultOk, errorMessage.toString(), location);
 			}
 		}).start();
 	}

@@ -140,7 +140,7 @@ public class TurnType {
 		r.setTurnAngle(angle);
 		return r;
 	}
-	
+
 	
 	private TurnType(int vl) {
 		this.value = vl;
@@ -154,6 +154,10 @@ public class TurnType {
 
 	public boolean isLeftSide() {
 		return value == RNLB || value == TRU;
+	}
+
+	public void setExitOut(int exitOut) {
+		this.exitOut = exitOut;
 	}
 
 	public void setTurnAngle(float turnAngle) {

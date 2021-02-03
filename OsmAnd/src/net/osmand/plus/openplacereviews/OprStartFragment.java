@@ -16,18 +16,21 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.openplacereviews.OprAuthHelper.OprAuthorizationListener;
 
 import org.apache.commons.logging.Log;
 
-public class OprStartFragment extends BaseOsmAndFragment {
+public class OprStartFragment extends BaseOsmAndFragment implements OprAuthorizationListener {
 	private static final String TAG = OprStartFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(OprStartFragment.class);
 	private static final String openPlaceReviewsUrl = "OpenPlaceReviews.org";
@@ -36,18 +39,22 @@ public class OprStartFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		View v = UiUtilities.getInflater(requireMyActivity(), nightMode).inflate(R.layout.fragment_opr_login, container,
-				false);
-		View createAccount = v.findViewById(R.id.register_opr_create_account);
-		v.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
+
+		View v = UiUtilities.getInflater(requireMyActivity(), nightMode).inflate(R.layout.fragment_opr_login, container, false);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), v);
+
+		Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+		int icBackResId = AndroidUtils.getNavigationIconResId(v.getContext());
+		toolbar.setNavigationIcon(getContentIcon(icBackResId));
+		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View view) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					activity.getSupportFragmentManager().popBackStack();
-				}
+			public void onClick(View v) {
+				dismiss();
 			}
 		});
+
+		View createAccount = v.findViewById(R.id.register_opr_create_account);
 		UiUtilities.setupDialogButton(nightMode, createAccount, UiUtilities.DialogButtonType.PRIMARY,
 				R.string.register_opr_create_new_account);
 		createAccount.setOnClickListener(new View.OnClickListener() {
@@ -70,14 +77,14 @@ public class OprStartFragment extends BaseOsmAndFragment {
 	}
 
 	private void handleHaveAccount() {
-		String url = OPRConstants.getLoginUrl(requireContext());
+		String url = OPRConstants.getLoginUrl(requireMyApplication());
 		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 		CustomTabsIntent customTabsIntent = builder.build();
 		customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
 	}
 
 	private void handleCreateAccount() {
-		String url = OPRConstants.getRegisterUrl(requireContext());
+		String url = OPRConstants.getRegisterUrl(requireMyApplication());
 		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 		CustomTabsIntent customTabsIntent = builder.build();
 		customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
@@ -114,6 +121,17 @@ public class OprStartFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	@Override
+	public void authorizationCompleted() {
+		dismiss();
+	}
+
+	protected void dismiss() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().popBackStack();
+		}
+	}
 
 	public static void showInstance(@NonNull FragmentManager fm) {
 		try {

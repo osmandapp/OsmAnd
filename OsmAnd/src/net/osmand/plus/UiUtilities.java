@@ -51,6 +51,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
@@ -87,6 +88,7 @@ public class UiUtilities {
 
 	public enum CustomRadioButtonType {
 		START,
+		CENTER,
 		END,
 	}
 
@@ -454,10 +456,10 @@ public class UiUtilities {
 		int radius = AndroidUtils.dpToPx(app, 4);
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
 
-		TextView startButtonText = buttonsView.findViewById(R.id.left_button);
 		View startButtonContainer = buttonsView.findViewById(R.id.left_button_container);
-		TextView endButtonText = buttonsView.findViewById(R.id.right_button);
+		View centerButtonContainer = buttonsView.findViewById(R.id.center_button_container);
 		View endButtonContainer = buttonsView.findViewById(R.id.right_button_container);
+
 		GradientDrawable background = new GradientDrawable();
 		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
 		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
@@ -467,20 +469,56 @@ public class UiUtilities {
 			} else {
 				background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
 			}
+			TextView startButtonText = startButtonContainer.findViewById(R.id.left_button);
+			TextView endButtonText = endButtonContainer.findViewById(R.id.right_button);
+
 			endButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			endButtonText.setTextColor(activeColor);
 			startButtonContainer.setBackgroundDrawable(background);
 			startButtonText.setTextColor(textColor);
+
+			if (centerButtonContainer != null) {
+				TextView centerButtonText = centerButtonContainer.findViewById(R.id.center_button);
+				centerButtonText.setTextColor(activeColor);
+				centerButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			}
+		} else if (buttonType == CustomRadioButtonType.CENTER) {
+			background.setCornerRadii(new float[] {0, 0, 0, 0, 0, 0, 0, 0});
+			centerButtonContainer.setBackgroundDrawable(background);
+			AndroidUiHelper.updateVisibility(centerButtonContainer, true);
+
+			TextView centerButtonText = centerButtonContainer.findViewById(R.id.center_button);
+			centerButtonText.setTextColor(textColor);
+
+			if (endButtonContainer != null) {
+				TextView endButtonText = endButtonContainer.findViewById(R.id.right_button);
+				endButtonText.setTextColor(activeColor);
+				endButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			}
+			if (startButtonContainer != null) {
+				TextView startButtonText = startButtonContainer.findViewById(R.id.left_button);
+				startButtonText.setTextColor(activeColor);
+				startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			}
 		} else {
 			if (isLayoutRtl) {
-				background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
+				background.setCornerRadii(new float[] {radius, radius, 0, 0, 0, 0, radius, radius});
 			} else {
 				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
 			}
+			TextView startButtonText = startButtonContainer.findViewById(R.id.left_button);
+			TextView endButtonText = endButtonContainer.findViewById(R.id.right_button);
+
 			endButtonContainer.setBackgroundDrawable(background);
 			endButtonText.setTextColor(textColor);
 			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			startButtonText.setTextColor(activeColor);
+
+			if (centerButtonContainer != null) {
+				TextView centerButtonText = centerButtonContainer.findViewById(R.id.center_button);
+				centerButtonText.setTextColor(activeColor);
+				centerButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			}
 		}
 	}
 
