@@ -277,26 +277,19 @@ public abstract class OsmandPlugin {
 
 	public static void initPlugins(@NonNull OsmandApplication app) {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
-
 		allPlugins.clear();
-
-		enableHiddenPlugin(app, enabledPlugins, new WikipediaPlugin(app));
-
-		allPlugins.add(new MapillaryPlugin(app));
+		enablePluginByDefault(app, enabledPlugins, new WikipediaPlugin(app));
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app));
-
-		// ? questionable - definitely not market plugin
-//		checkMarketPlugin(app, enabledPlugins, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
 		checkMarketPlugin(app, enabledPlugins, new NauticalMapsPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new SkiMapsPlugin(app));
-
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new ParkingPositionPlugin(app));
-		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
-		allPlugins.add(new OpenPlaceReviewsPlugin(app));
+		enablePluginByDefault(app, enabledPlugins, new OpenPlaceReviewsPlugin(app));
+		enablePluginByDefault(app, enabledPlugins, new MapillaryPlugin(app));
+		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
 		loadCustomPlugins(app);
@@ -388,7 +381,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	private static void enableHiddenPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
+	private static void enablePluginByDefault(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
 		allPlugins.add(plugin);
 		if (!enabledPlugins.contains(plugin.getId()) && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
 			enabledPlugins.add(plugin.getId());
