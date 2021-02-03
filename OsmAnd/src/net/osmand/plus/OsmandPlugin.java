@@ -69,6 +69,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class OsmandPlugin {
@@ -211,7 +212,9 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	protected List<ImageCard> getImageCards(@Nullable GetImageCardsListener listener) {
+	protected List<ImageCard> getImageCards(@NonNull Map<String, String> params,
+											@Nullable Map<String, String> additionalParams,
+											@Nullable GetImageCardsListener listener) {
 		return Collections.emptyList();
 	}
 
@@ -273,9 +276,9 @@ public abstract class OsmandPlugin {
 
 		allPlugins.clear();
 
-		allPlugins.add(new MapillaryPlugin(app));
 		enableHiddenPlugin(app, enabledPlugins, new WikipediaPlugin(app));
 
+		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app));
@@ -875,9 +878,10 @@ public abstract class OsmandPlugin {
 		return collection;
 	}
 
-	public static void populateImageCards(@NonNull List<ImageCard> imageCards, @Nullable GetImageCardsListener listener) {
+	public static void populateImageCards(@NonNull List<ImageCard> imageCards, @NonNull Map<String, String> params,
+										  @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
-			imageCards.addAll(p.getImageCards(listener));
+			imageCards.addAll(p.getImageCards(params, additionalParams, listener));
 		}
 	}
 
