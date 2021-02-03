@@ -890,8 +890,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private void updateMenuState() {
 		if (menuType == TrackMenuType.OPTIONS) {
 			openMenuFullScreen();
-		} else if (menuType == TrackMenuType.OVERVIEW) {
-			openMenuHeaderOnly();
 		} else {
 			openMenuHalfScreen();
 		}
