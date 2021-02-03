@@ -8,6 +8,8 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
+import net.osmand.plus.views.layers.POIMapLayer;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -29,11 +31,23 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 	}
 
 	@Override
-	protected void buildDescription(View view) {
+	protected void buildDescription(final View view) {
 		final String desc = descTokens.get(KEY_DESCRIPTION);
-		if (!Algorithms.isEmpty(desc)) {
-			buildDescriptionRow(view, app.getString(R.string.shared_string_description), desc, 0, 10, true);
+		if (Algorithms.isEmpty(desc)) {
+			return;
 		}
+
+		final String textPrefix = app.getString(R.string.shared_string_description);
+		View.OnClickListener clickListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, desc, textPrefix);
+			}
+		};
+
+		buildRow(view, null, null, textPrefix, WikiArticleHelper.getPartialContent(desc), 0,
+				null, false, null, true, 10,
+				false, false, false, clickListener, true);
 	}
 
 	@Override
