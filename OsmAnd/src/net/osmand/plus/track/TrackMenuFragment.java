@@ -1130,7 +1130,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (mapActivity != null) {
 						OsmandApplication app = mapActivity.getMyApplication();
 						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(result, true, false);
-						showInstance(mapActivity, selectedGpxFile, null);
+						if (selectedGpxFile != null) {
+							showInstance(mapActivity, selectedGpxFile, null);
+						}
 					}
 					if (progress != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 						progress.dismiss();
@@ -1142,7 +1144,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, SelectedGpxFile selectedGpxFile, @Nullable LatLon latLon) {
+	public static boolean showInstance(@NonNull MapActivity mapActivity, @NonNull SelectedGpxFile selectedGpxFile, @Nullable LatLon latLon) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
