@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
@@ -24,6 +25,8 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -32,8 +35,9 @@ import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchFreeBannerListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.DownloadedRegionsLayer;
+import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
@@ -42,6 +46,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
@@ -88,6 +93,11 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityResume(MapActivity activity) {
+		this.mapActivity = activity;
+	}
+
+	@Override
+	public void mapActivityResumeOnTop(MapActivity activity) {
 		this.mapActivity = activity;
 	}
 
@@ -434,5 +444,26 @@ public class WikipediaPlugin extends OsmandPlugin {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params, @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
+		List<ImageCard> imageCards = new ArrayList<>();
+		if (mapActivity != null) {
+			if (additionalParams != null) {
+				String wikidataId = additionalParams.get(Amenity.WIKIDATA);
+				if (wikidataId != null) {
+					additionalParams.remove(Amenity.WIKIDATA);
+					WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, imageCards);
+				}
+				String wikimediaContent = additionalParams.get(Amenity.WIKIMEDIA_COMMONS);
+				if (wikimediaContent != null) {
+					additionalParams.remove(Amenity.WIKIMEDIA_COMMONS);
+					WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, imageCards);
+				}
+				params.putAll(additionalParams);
+			}
+		}
+		return imageCards;
 	}
 }

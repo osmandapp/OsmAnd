@@ -61,7 +61,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	private EditText noteText;
 
 	private boolean isLoginOAuth() {
-		return !Algorithms.isEmpty(settings.USER_DISPLAY_NAME.get());
+		return !Algorithms.isEmpty(settings.OSM_USER_DISPLAY_NAME.get());
 	}
 
 	@Override
@@ -150,8 +150,8 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	}
 
 	private void updateAccountName() {
-		String userNameOAuth = settings.USER_DISPLAY_NAME.get();
-		String userNameOpenID = settings.USER_NAME.get();
+		String userNameOAuth = settings.OSM_USER_DISPLAY_NAME.get();
+		String userNameOpenID = settings.OSM_USER_NAME.get();
 		String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
 		accountName.setText(userName);
 		updateSignIn(uploadAnonymously.isChecked());
@@ -230,7 +230,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	private boolean isLogged() {
 		OsmOAuthAuthorizationAdapter adapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
 		return adapter.isValidToken()
-				|| !Algorithms.isEmpty(settings.USER_NAME.get())
-				&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
+				|| !Algorithms.isEmpty(settings.OSM_USER_NAME.get())
+				&& !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
 	}
 }

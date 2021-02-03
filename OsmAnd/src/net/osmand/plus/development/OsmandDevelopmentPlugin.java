@@ -143,8 +143,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public void disable(OsmandApplication app) {
-		if (app.getSettings().USE_DEV_URL.get()) {
-			app.getSettings().USE_DEV_URL.set(false);
+		if (app.getSettings().OSM_USE_DEV_URL.get()) {
+			app.getSettings().OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
 		}
 		super.disable(app);

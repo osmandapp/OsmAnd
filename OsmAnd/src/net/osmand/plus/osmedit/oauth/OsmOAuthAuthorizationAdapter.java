@@ -42,7 +42,7 @@ public class OsmOAuthAuthorizationAdapter {
         DefaultApi10a api10a;
         String key;
         String secret;
-        if (app.getSettings().USE_DEV_URL.get()) {
+        if (app.getSettings().OSM_USE_DEV_URL.get()) {
             api10a = new OsmOAuthAuthorizationClient.OsmDevApi();
             key = app.getString(R.string.osm_oauth_developer_key);
             secret = app.getString(R.string.osm_oauth_developer_secret);
@@ -68,8 +68,8 @@ public class OsmOAuthAuthorizationAdapter {
     }
 
     public void restoreToken() {
-        String token = app.getSettings().USER_ACCESS_TOKEN.get();
-        String tokenSecret = app.getSettings().USER_ACCESS_TOKEN_SECRET.get();
+        String token = app.getSettings().OSM_USER_ACCESS_TOKEN.get();
+        String tokenSecret = app.getSettings().OSM_USER_ACCESS_TOKEN_SECRET.get();
         if (!(token.isEmpty() || tokenSecret.isEmpty())) {
             client.setAccessToken(new OAuth1AccessToken(token, tokenSecret));
         } else {
@@ -83,8 +83,8 @@ public class OsmOAuthAuthorizationAdapter {
 
     private void saveToken() {
         OAuth1AccessToken accessToken = client.getAccessToken();
-        app.getSettings().USER_ACCESS_TOKEN.set(accessToken.getToken());
-        app.getSettings().USER_ACCESS_TOKEN_SECRET.set(accessToken.getTokenSecret());
+        app.getSettings().OSM_USER_ACCESS_TOKEN.set(accessToken.getToken());
+        app.getSettings().OSM_USER_ACCESS_TOKEN_SECRET.set(accessToken.getTokenSecret());
     }
 
     private void loadWebView(ViewGroup root, boolean nightMode, String url) {
@@ -172,7 +172,7 @@ public class OsmOAuthAuthorizationAdapter {
             } catch (XmlPullParserException e) {
                 log.error(e);
             }
-            app.getSettings().USER_DISPLAY_NAME.set(userName);
+            app.getSettings().OSM_USER_DISPLAY_NAME.set(userName);
         }
 
         public String getUserName() throws InterruptedException, ExecutionException, IOException, XmlPullParserException {
