@@ -238,7 +238,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected ImageCard createImageCard(@NonNull JSONObject imageObject) {
+	protected ImageCard createContextMenuImageCard(@NonNull JSONObject imageObject) {
 		ImageCard imageCard = null;
 		if (mapActivity != null) {
 			try {

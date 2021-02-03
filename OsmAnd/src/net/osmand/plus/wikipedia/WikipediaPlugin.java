@@ -447,7 +447,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected List<ImageCard> getImageCards(@NonNull Map<String, String> params, @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
+	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params, @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
 		List<ImageCard> imageCards = new ArrayList<>();
 		if (mapActivity != null) {
 			if (additionalParams != null) {
