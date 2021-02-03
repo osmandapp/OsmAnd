@@ -218,6 +218,10 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
+	protected ImageCard createImageCard(@NonNull JSONObject imageObject) {
+		return null;
+	}
+
 	/**
 	 * Plugin was installed
 	 */
@@ -880,9 +884,19 @@ public abstract class OsmandPlugin {
 
 	public static void populateImageCards(@NonNull List<ImageCard> imageCards, @NonNull Map<String, String> params,
 										  @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
-		for (OsmandPlugin p : getEnabledPlugins()) {
-			imageCards.addAll(p.getImageCards(params, additionalParams, listener));
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			imageCards.addAll(plugin.getImageCards(params, additionalParams, listener));
 		}
+	}
+
+	public static ImageCard createImageCardForJson(@NonNull JSONObject imageObject) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			ImageCard imageCard = plugin.createImageCard(imageObject);
+			if (imageCard != null) {
+				return imageCard;
+			}
+		}
+		return null;
 	}
 
 	public static boolean isPackageInstalled(String packageInfo, Context ctx) {

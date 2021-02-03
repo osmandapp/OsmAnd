@@ -26,8 +26,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.mapillary.MapillaryContributeCard;
-import net.osmand.plus.mapillary.MapillaryImageCard;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -45,10 +43,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import static net.osmand.plus.mapillary.MapillaryPlugin.TYPE_MAPILLARY_CONTRIBUTE;
+import static net.osmand.plus.mapillary.MapillaryPlugin.TYPE_MAPILLARY_PHOTO;
+
 public abstract class ImageCard extends AbstractCard {
 
-	public static String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
-	public static String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
 
 	private static final Log LOG = PlatformUtil.getLog(ImageCard.class);
 	protected String type;
@@ -180,11 +179,7 @@ public abstract class ImageCard extends AbstractCard {
 		try {
 			if (imageObject.has("type")) {
 				String type = imageObject.getString("type");
-				if (TYPE_MAPILLARY_PHOTO.equals(type)) {
-					imageCard = new MapillaryImageCard(mapActivity, imageObject);
-				} else if (TYPE_MAPILLARY_CONTRIBUTE.equals(type)) {
-					imageCard = new MapillaryContributeCard(mapActivity, imageObject);
-				} else {
+				if (!TYPE_MAPILLARY_CONTRIBUTE.equals(type) && !TYPE_MAPILLARY_PHOTO.equals(type)) {
 					imageCard = new UrlImageCard(mapActivity, imageObject);
 				}
 			}
@@ -466,7 +461,10 @@ public abstract class ImageCard extends AbstractCard {
 							try {
 								JSONObject imageObject = (JSONObject) images.get(i);
 								if (imageObject != JSONObject.NULL) {
-									ImageCard imageCard = ImageCard.createCard(mapActivity, imageObject);
+									ImageCard imageCard = OsmandPlugin.createImageCardForJson(imageObject);
+									if (imageCard == null) {
+										imageCard = ImageCard.createCard(mapActivity, imageObject);
+									}
 									if (imageCard != null) {
 										result.add(imageCard);
 									}
