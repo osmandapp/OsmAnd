@@ -51,6 +51,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.UploadPhotosAsyncTask.UploadPhotosListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
@@ -62,7 +63,6 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
 import net.osmand.plus.openplacereviews.OPRConstants;
-import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -138,16 +138,14 @@ public class MenuBuilder implements UploadPhotosListener {
 		}
 
 		@Override
-		public void onPlaceIdAcquired(String[] placeId) {
+		public void onPlaceIdAcquired(final String[] placeId) {
 			MenuBuilder.this.placeId = placeId;
-			if (placeId.length < 2 || OsmandPlugin.getEnabledPlugin(OpenPlaceReviewsPlugin.class) == null) {
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						photoButton.setVisibility(View.GONE);
-					}
-				});
-			}
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					AndroidUiHelper.updateVisibility(photoButton, placeId.length >= 2);
+				}
+			});
 		}
 
 		@Override
@@ -479,9 +477,7 @@ public class MenuBuilder implements UploadPhotosListener {
 				}
 			}
 		});
-		if (OsmandPlugin.getEnabledPlugin(OpenPlaceReviewsPlugin.class) == null) {
-			view.setVisibility(View.GONE);
-		}
+		AndroidUiHelper.updateVisibility(view, false);
 		photoButton = view;
 		return view;
 	}

@@ -35,6 +35,8 @@ import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -206,6 +208,10 @@ public abstract class OsmandPlugin {
 	}
 
 	protected List<PoiUIFilter> getCustomPoiFilters() {
+		return Collections.emptyList();
+	}
+
+	protected List<ImageCard> getImageCards(@Nullable GetImageCardsListener listener) {
 		return Collections.emptyList();
 	}
 
@@ -736,7 +742,6 @@ public abstract class OsmandPlugin {
 		return l;
 	}
 
-
 	public static void onMapActivityCreate(MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityCreate(activity);
@@ -868,6 +873,12 @@ public abstract class OsmandPlugin {
 			if (fragmentData != null) collection.add(fragmentData);
 		}
 		return collection;
+	}
+
+	public static void populateImageCards(@NonNull List<ImageCard> imageCards, @Nullable GetImageCardsListener listener) {
+		for (OsmandPlugin p : getEnabledPlugins()) {
+			imageCards.addAll(p.getImageCards(listener));
+		}
 	}
 
 	public static boolean isPackageInstalled(String packageInfo, Context ctx) {
