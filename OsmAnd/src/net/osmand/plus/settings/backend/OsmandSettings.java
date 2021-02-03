@@ -1174,6 +1174,8 @@ public class OsmandSettings {
 	public final OsmandPreference<String> OPR_BLOCKCHAIN_NAME =
 			new StringPreference(this, "opr_blockchain_name", "").makeGlobal();
 
+	public final OsmandPreference<Boolean> OPR_USE_DEV_URL = new BooleanPreference(this, "opr_use_dev_url", false).makeGlobal().makeShared();
+
 	// this value boolean is synchronized with settings_pref.xml preference offline POI/Bugs edition
 	public final OsmandPreference<Boolean> OFFLINE_EDITION = new BooleanPreference(this, "offline_osm_editing", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> OSM_USE_DEV_URL = new BooleanPreference(this, "use_dev_url", false).makeGlobal().makeShared();
@@ -1186,6 +1188,10 @@ public class OsmandSettings {
 			osmUrl = "https://api.openstreetmap.org/";
 		}
 		return osmUrl;
+	}
+
+	public String getOprUrl() {
+		return ctx.getString(OPR_USE_DEV_URL.get() ? R.string.dev_opr_base_url : R.string.opr_base_url);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
