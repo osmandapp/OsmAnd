@@ -105,24 +105,51 @@
                                 android:id="@+id/donationCheckbox"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginLeft="16dp"
-                                android:paddingStart="34dp"
-                                android:paddingLeft="34dp"
+                                android:layout_marginTop="@dimen/context_menu_second_line_top_margin"
+                                android:layout_marginStart="@dimen/list_content_padding"
+                                android:layout_marginLeft="@dimen/list_content_padding"
+                                android:paddingStart="@dimen/local_size_height"
+                                android:paddingLeft="@dimen/local_size_height"
+                                android:paddingEnd="@dimen/local_size_height"
+                                android:paddingRight="@dimen/local_size_height"
                                 android:text="@string/donation_to_osm" />
 
-                            <TextView
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/list_content_padding_large"
-                                android:layout_marginLeft="@dimen/context_menu_progress_padding_left"
-                                android:layout_marginEnd="@dimen/context_menu_progress_padding_left"
-                                android:layout_marginRight="@dimen/context_menu_progress_padding_left"
-                                android:paddingStart="@dimen/subHeaderPadding"
-                                android:paddingLeft="@dimen/subHeaderPadding"
-                                android:paddingEnd="@dimen/subHeaderPadding"
-                                android:paddingRight="@dimen/subHeaderPadding"
-                                android:text="@string/donation_to_osm_desc" />
+                                android:minHeight="56dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/list_content_padding_large"
+                                    android:layout_marginLeft="@dimen/context_menu_progress_padding_left"
+                                    android:layout_marginEnd="@dimen/context_menu_progress_padding_left"
+                                    android:layout_marginRight="@dimen/context_menu_progress_padding_left"
+                                    android:paddingStart="@dimen/subHeaderPadding"
+                                    android:paddingLeft="@dimen/subHeaderPadding"
+                                    android:paddingEnd="@dimen/subHeaderPadding"
+                                    android:paddingRight="@dimen/subHeaderPadding"
+                                    android:textColor="?android:textColorPrimary"
+                                    android:textSize="@dimen/default_list_text_size"
+                                    android:text="@string/donation_to_osm" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/list_content_padding_large"
+                                    android:layout_marginLeft="@dimen/context_menu_progress_padding_left"
+                                    android:layout_marginEnd="@dimen/context_menu_progress_padding_left"
+                                    android:layout_marginRight="@dimen/context_menu_progress_padding_left"
+                                    android:paddingStart="@dimen/subHeaderPadding"
+                                    android:paddingLeft="@dimen/subHeaderPadding"
+                                    android:paddingEnd="@dimen/subHeaderPadding"
+                                    android:paddingRight="@dimen/subHeaderPadding"
+                                    android:text="@string/donation_to_osm_desc"
+                                    android:textColor="?android:attr/textColorSecondary"/>
+                            </LinearLayout>
+
 
                         </LinearLayout>
 
@@ -169,8 +196,10 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:paddingStart="2dp"
-                                    android:paddingLeft="2dp"
+                                    android:paddingStart="@dimen/subHeaderPadding"
+                                    android:paddingEnd="@dimen/subHeaderPadding"
+                                    android:paddingLeft="@dimen/subHeaderPadding"
+                                    android:paddingRight="@dimen/subHeaderPadding"
                                     android:text="@string/osm_live_support_region"
                                     android:textColor="?android:attr/textColorSecondary" />
 
@@ -178,7 +207,6 @@
                                     android:id="@+id/selectCountryEdit"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
-                                    android:editable="false"
                                     android:paddingStart="2dp"
                                     android:paddingLeft="2dp"
                                     android:paddingEnd="0dp"
