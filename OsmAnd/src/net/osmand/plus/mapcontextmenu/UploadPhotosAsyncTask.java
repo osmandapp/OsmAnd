@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 
@@ -29,6 +28,7 @@ import org.openplacereviews.opendb.util.exception.FailedVerificationException;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -116,7 +116,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		return success;
 	}
 
-	private boolean uploadImageToPlace(InputStream image) {
+	private boolean uploadImageToPlace(InputStream image) throws IOException {
 		boolean success = false;
 		InputStream serverData = new ByteArrayInputStream(compressImageToJpeg(image));
 		String baseUrl = OPRConstants.getBaseUrl(app);
@@ -178,27 +178,31 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		}
 	}
 
-	private byte[] compressImageToJpeg(InputStream image) {
+	private byte[] compressImageToJpeg(InputStream image) throws IOException {
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
+		bufferedInputStream.mark(1024 * 200);
 		BitmapFactory.Options opts = new BitmapFactory.Options();
-		opts.inSampleSize = 4;
-		Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream, null, opts);
+		opts.inJustDecodeBounds = true;
+		BitmapFactory.decodeStream(bufferedInputStream, null, opts);
+		int w = opts.outWidth;
+		int h = opts.outHeight;
+		bufferedInputStream.reset();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		int h = bmp.getHeight();
-		int w = bmp.getWidth();
 		boolean scale = false;
+		int divider = 1;
 		while (w > MAX_IMAGE_LENGTH || h > MAX_IMAGE_LENGTH) {
-			w = w / 2;
-			h = h / 2;
+			w /= 2;
+			h /= 2;
+			divider *= 2;
 			scale = true;
 		}
+		Bitmap bmp;
 		if (scale) {
-			Matrix matrix = new Matrix();
-			matrix.postScale(w, h);
-			Bitmap resizedBitmap = Bitmap.createBitmap(
-					bmp, 0, 0, w, h, matrix, false);
-			bmp.recycle();
-			bmp = resizedBitmap;
+			opts = new BitmapFactory.Options();
+			opts.inSampleSize = divider;
+			bmp = BitmapFactory.decodeStream(bufferedInputStream, null, opts);
+		} else {
+			bmp = BitmapFactory.decodeStream(bufferedInputStream);
 		}
 		bmp.compress(Bitmap.CompressFormat.JPEG, 90, os);
 		return os.toByteArray();
