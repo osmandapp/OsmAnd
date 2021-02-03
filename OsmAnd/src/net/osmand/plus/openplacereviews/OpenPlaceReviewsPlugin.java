@@ -88,8 +88,8 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 
 	@Override
 	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params,
-											@Nullable Map<String, String> additionalParams,
-											@Nullable GetImageCardsListener listener) {
+													   @Nullable Map<String, String> additionalParams,
+													   @Nullable GetImageCardsListener listener) {
 		List<ImageCard> imageCards = new ArrayList<>();
 		if (mapActivity != null) {
 			Object object = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObject();
@@ -109,6 +109,15 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 			}
 		}
 		return imageCards;
+	}
+
+	@Override
+	protected ImageCard createContextMenuImageCard(@NonNull JSONObject imageObject) {
+		ImageCard imageCard = null;
+		if (mapActivity != null && imageObject != JSONObject.NULL) {
+			imageCard = createCardOpr(mapActivity, imageObject);
+		}
+		return imageCard;
 	}
 
 	private void getPicturesForPlace(List<ImageCard> result, String response) {
