@@ -2,6 +2,7 @@ package net.osmand.plus.openplacereviews;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 
@@ -85,7 +87,9 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected List<ImageCard> getContextMenuImageCards(@Nullable GetImageCardsListener listener) {
+	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params,
+											@Nullable Map<String, String> additionalParams,
+											@Nullable GetImageCardsListener listener) {
 		List<ImageCard> imageCards = new ArrayList<>();
 		if (mapActivity != null) {
 			Object object = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObject();

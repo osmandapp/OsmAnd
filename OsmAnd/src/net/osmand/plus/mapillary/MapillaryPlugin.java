@@ -17,26 +17,33 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -47,10 +54,17 @@ import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
+	public static String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
+	public static String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
+
 	public static final String ID = "osmand.mapillary";
 	private static final String MAPILLARY_PACKAGE_ID = "app.mapillary";
 
+	private static final Log LOG = PlatformUtil.getLog(OpenPlaceReviewsPlugin.class);
+
 	private OsmandSettings settings;
+
+	private MapActivity mapActivity;
 
 	private MapillaryRasterLayer rasterLayer;
 	private MapillaryVectorLayer vectorLayer;
@@ -60,11 +74,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public MapillaryPlugin(OsmandApplication app) {
 		super(app);
 		settings = app.getSettings();
-	}
-
-	@Override
-	public boolean isVisible() {
-		return false;
 	}
 
 	@Override
@@ -226,6 +235,41 @@ public class MapillaryPlugin extends OsmandPlugin {
 			}
 			mapActivity.refreshMap();
 		}
+	}
+
+	@Override
+	protected ImageCard createContextMenuImageCard(@NonNull JSONObject imageObject) {
+		ImageCard imageCard = null;
+		if (mapActivity != null) {
+			try {
+				if (imageObject.has("type")) {
+					String type = imageObject.getString("type");
+					if (TYPE_MAPILLARY_PHOTO.equals(type)) {
+						imageCard = new MapillaryImageCard(mapActivity, imageObject);
+					} else if (TYPE_MAPILLARY_CONTRIBUTE.equals(type)) {
+						imageCard = new MapillaryContributeCard(mapActivity, imageObject);
+					}
+				}
+			} catch (JSONException e) {
+				LOG.error(e);
+			}
+		}
+		return imageCard;
+	}
+
+	@Override
+	public void mapActivityResume(MapActivity activity) {
+		this.mapActivity = activity;
+	}
+
+	@Override
+	public void mapActivityResumeOnTop(MapActivity activity) {
+		this.mapActivity = activity;
+	}
+
+	@Override
+	public void mapActivityPause(MapActivity activity) {
+		this.mapActivity = null;
 	}
 
 	public static boolean openMapillary(FragmentActivity activity, String imageKey) {

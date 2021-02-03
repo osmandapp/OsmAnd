@@ -63,7 +63,6 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
 import net.osmand.plus.openplacereviews.OPRConstants;
-import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -502,7 +501,7 @@ public class MenuBuilder {
 								public void run() {
 									if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 										try {
-											ImageCard imageCard = OpenPlaceReviewsPlugin.createCardOpr(mapActivity, new JSONObject(response));
+											ImageCard imageCard = OsmandPlugin.createImageCardForJson(new JSONObject(response));
 											if (imageCard != null) {
 												addImageCard(imageCard);
 											}

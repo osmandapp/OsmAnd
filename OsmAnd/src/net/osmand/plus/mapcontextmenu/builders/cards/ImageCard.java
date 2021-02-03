@@ -19,7 +19,6 @@ import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -27,9 +26,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.mapillary.MapillaryContributeCard;
-import net.osmand.plus.mapillary.MapillaryImageCard;
-import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -47,10 +43,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import static net.osmand.plus.mapillary.MapillaryPlugin.TYPE_MAPILLARY_CONTRIBUTE;
+import static net.osmand.plus.mapillary.MapillaryPlugin.TYPE_MAPILLARY_PHOTO;
+
 public abstract class ImageCard extends AbstractCard {
 
-	public static String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
-	public static String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
 
 	private static final Log LOG = PlatformUtil.getLog(ImageCard.class);
 	protected String type;
@@ -182,11 +179,7 @@ public abstract class ImageCard extends AbstractCard {
 		try {
 			if (imageObject.has("type")) {
 				String type = imageObject.getString("type");
-				if (TYPE_MAPILLARY_PHOTO.equals(type)) {
-					imageCard = new MapillaryImageCard(mapActivity, imageObject);
-				} else if (TYPE_MAPILLARY_CONTRIBUTE.equals(type)) {
-					imageCard = new MapillaryContributeCard(mapActivity, imageObject);
-				} else {
+				if (!TYPE_MAPILLARY_CONTRIBUTE.equals(type) && !TYPE_MAPILLARY_PHOTO.equals(type)) {
 					imageCard = new UrlImageCard(mapActivity, imageObject);
 				}
 			}
@@ -419,7 +412,7 @@ public abstract class ImageCard extends AbstractCard {
 		}
 
 		public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon,
-		                         @Nullable Map<String, String> params, GetImageCardsListener listener) {
+								 @Nullable Map<String, String> params, GetImageCardsListener listener) {
 			this.mapActivity = mapActivity;
 			this.app = mapActivity.getMyApplication();
 			this.latLon = latLon;
@@ -428,10 +421,9 @@ public abstract class ImageCard extends AbstractCard {
 		}
 
 		@Override
-		protected List<ImageCard> doInBackground(Void... params) {
+		protected List<ImageCard> doInBackground(Void... voids) {
 			TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
 			List<ImageCard> result = new ArrayList<>();
-			OsmandPlugin.populateContextMenuImageCards(result, listener);
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
 				pms.put("lat", "" + (float) latLon.getLatitude());
@@ -448,19 +440,8 @@ public abstract class ImageCard extends AbstractCard {
 				if (!Algorithms.isEmpty(preferredLang)) {
 					pms.put("lang", preferredLang);
 				}
-				if (this.params != null) {
-					String wikidataId = this.params.get(Amenity.WIKIDATA);
-					if (wikidataId != null) {
-						this.params.remove(Amenity.WIKIDATA);
-						WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, result);
-					}
-					String wikimediaContent = this.params.get(Amenity.WIKIMEDIA_COMMONS);
-					if (wikimediaContent != null) {
-						this.params.remove(Amenity.WIKIMEDIA_COMMONS);
-						WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, result);
-					}
-					pms.putAll(this.params);
-				}
+				OsmandPlugin.populateContextMenuImageCards(result, pms, params, listener);
+
 				String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place", pms,
 						"Requesting location images...", false, false);
 
@@ -472,7 +453,10 @@ public abstract class ImageCard extends AbstractCard {
 							try {
 								JSONObject imageObject = (JSONObject) images.get(i);
 								if (imageObject != JSONObject.NULL) {
-									ImageCard imageCard = ImageCard.createCard(mapActivity, imageObject);
+									ImageCard imageCard = OsmandPlugin.createImageCardForJson(imageObject);
+									if (imageCard == null) {
+										imageCard = ImageCard.createCard(mapActivity, imageObject);
+									}
 									if (imageCard != null) {
 										result.add(imageCard);
 									}
