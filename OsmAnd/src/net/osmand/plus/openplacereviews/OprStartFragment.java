@@ -24,10 +24,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.openplacereviews.OprAuthHelper.OprAuthorizationListener;
 
 import org.apache.commons.logging.Log;
 
-public class OprStartFragment extends BaseOsmAndFragment {
+public class OprStartFragment extends BaseOsmAndFragment implements OprAuthorizationListener {
 	private static final String TAG = OprStartFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(OprStartFragment.class);
 	private static final String openPlaceReviewsUrl = "OpenPlaceReviews.org";
@@ -42,10 +43,7 @@ public class OprStartFragment extends BaseOsmAndFragment {
 		v.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					activity.getSupportFragmentManager().popBackStack();
-				}
+				dismiss();
 			}
 		});
 		UiUtilities.setupDialogButton(nightMode, createAccount, UiUtilities.DialogButtonType.PRIMARY,
@@ -70,14 +68,14 @@ public class OprStartFragment extends BaseOsmAndFragment {
 	}
 
 	private void handleHaveAccount() {
-		String url = OPRConstants.getLoginUrl(requireContext());
+		String url = OPRConstants.getLoginUrl(requireMyApplication());
 		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 		CustomTabsIntent customTabsIntent = builder.build();
 		customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
 	}
 
 	private void handleCreateAccount() {
-		String url = OPRConstants.getRegisterUrl(requireContext());
+		String url = OPRConstants.getRegisterUrl(requireMyApplication());
 		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 		CustomTabsIntent customTabsIntent = builder.build();
 		customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
@@ -114,6 +112,17 @@ public class OprStartFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	@Override
+	public void authorizationCompleted() {
+		dismiss();
+	}
+
+	protected void dismiss() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().popBackStack();
+		}
+	}
 
 	public static void showInstance(@NonNull FragmentManager fm) {
 		try {

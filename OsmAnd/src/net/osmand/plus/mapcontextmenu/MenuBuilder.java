@@ -47,7 +47,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
@@ -61,6 +60,7 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
 import net.osmand.plus.openplacereviews.OPRConstants;
+import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -133,7 +133,7 @@ public class MenuBuilder {
 		@Override
 		public void onPlaceIdAcquired(String[] placeId) {
 			MenuBuilder.this.placeId = placeId;
-			if (placeId.length < 2) {
+			if (placeId.length < 2 || OsmandPlugin.getEnabledPlugin(OpenPlaceReviewsPlugin.class) == null) {
 				app.runInUIThread(new Runnable() {
 					@Override
 					public void run() {
@@ -157,6 +157,16 @@ public class MenuBuilder {
 			}
 		}
 	};
+
+	public void addImageCard(ImageCard card) {
+		if (onlinePhotoCards.size() == 1 && onlinePhotoCards.get(0) instanceof NoImagesCard) {
+			onlinePhotoCards.clear();
+		}
+		onlinePhotoCards.add(0, card);
+		if (onlinePhotoCardsRow != null) {
+			onlinePhotoCardsRow.setCards(onlinePhotoCards);
+		}
+	}
 
 	public interface CollapseExpandListener {
 		void onCollapseExpand(boolean collapsed);
@@ -443,8 +453,7 @@ public class MenuBuilder {
 				}
 			}
 		});
-		//TODO This feature is under development
-		if (!Version.isDeveloperVersion(app)) {
+		if (OsmandPlugin.getEnabledPlugin(OpenPlaceReviewsPlugin.class) == null) {
 			view.setVisibility(View.GONE);
 		}
 		photoButton = view;

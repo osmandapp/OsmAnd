@@ -38,6 +38,7 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
@@ -133,7 +134,7 @@ public abstract class OsmandPlugin {
 	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		if (activity != null) {
 			// called from UI
-			for (ApplicationMode appMode: getAddedAppModes()) {
+			for (ApplicationMode appMode : getAddedAppModes()) {
 				ApplicationMode.changeProfileAvailability(appMode, true, app);
 			}
 		}
@@ -282,6 +283,7 @@ public abstract class OsmandPlugin {
 		checkMarketPlugin(app, enabledPlugins, new ParkingPositionPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
+		allPlugins.add(new OpenPlaceReviewsPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
 		loadCustomPlugins(app);

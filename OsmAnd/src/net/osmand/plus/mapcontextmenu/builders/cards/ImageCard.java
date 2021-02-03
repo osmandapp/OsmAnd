@@ -22,6 +22,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -29,6 +30,7 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
 import net.osmand.plus.openplacereviews.OPRConstants;
+import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.util.Algorithms;
 
@@ -198,7 +200,7 @@ public abstract class ImageCard extends AbstractCard {
 		return imageCard;
 	}
 
-	private static ImageCard createCardOpr(MapActivity mapActivity, JSONObject imageObject) {
+	public static ImageCard createCardOpr(MapActivity mapActivity, JSONObject imageObject) {
 		ImageCard imageCard = null;
 		if (imageObject.has("cid")) {
 			imageCard = new IPFSImageCard(mapActivity, imageObject);
@@ -464,7 +466,7 @@ public abstract class ImageCard extends AbstractCard {
 			TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
 			List<ImageCard> result = new ArrayList<>();
 			Object o = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObject();
-			if (o instanceof Amenity) {
+			if (o instanceof Amenity && OsmandPlugin.getEnabledPlugin(OpenPlaceReviewsPlugin.class) != null) {
 				Amenity am = (Amenity) o;
 				long amenityId = am.getId() >> 1;
 				String baseUrl = OPRConstants.getBaseUrl(app);
