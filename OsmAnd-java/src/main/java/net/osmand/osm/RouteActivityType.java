@@ -1,19 +1,19 @@
 package net.osmand.osm;
 
 public enum RouteActivityType {
-	WATER("Water", "yellow", "ic_action_motorboat", "activity_type_water"),
-	WINTER("Winter", "yellow", "ic_action_skiing", "activity_type_winter"),
-	SNOWMOBILE("Snowmobile", "yellow", "ic_action_snowmobile", "activity_type_snowmobile"),
-	RIDING("Riding", "yellow", "ic_action_horse", "activity_type_riding"),
-	RACING("Racing", "yellow", "ic_action_point_destination", "activity_type_racing"),
-	MOUNTAINBIKE("Mountainbike", "blue", "ic_action_bicycle_dark", "activity_type_mountainbike"),
-	CYCLING("Cycling", "blue", "ic_action_bicycle_dark", "activity_type_cycling"),
-	HIKING("Hiking", "orange", "ic_action_trekking_dark", "activity_type_hiking"),
-	RUNNING("Running", "orange", "ic_action_pedestrian_dark", "activity_type_running"),
-	WALKING("Walking", "orange", "ic_action_pedestrian_dark", "activity_type_walking"),
-	OFFROAD("Off-road", "yellow", "ic_action_offroad", "activity_type_offroad"),
-	MOTORBIKE("Motorbike", "green", "ic_action_motorcycle_dark", "activity_type_motorbike"),
-	CAR("Car", "green", "ic_action_car_dark", "activity_type_car");
+	WATER("Water", "yellow", "mx_special_kayak", "activity_type_water"),
+	WINTER("Winter", "yellow", "mx_special_skiing", "activity_type_winter"),
+	SNOWMOBILE("Snowmobile", "yellow", "mx_special_snowmobile", "activity_type_snowmobile"),
+	RIDING("Riding", "yellow", "mx_special_horse", "activity_type_riding"),
+	RACING("Racing", "yellow", "mx_raceway", "activity_type_racing"),
+	MOUNTAINBIKE("Mountainbike", "blue", "mx_sport_cycling", "activity_type_mountainbike"),
+	CYCLING("Cycling", "blue", "mx_special_bicycle", "activity_type_cycling"),
+	HIKING("Hiking", "orange", "mx_special_trekking", "activity_type_hiking"),
+	RUNNING("Running", "orange", "mx_running", "activity_type_running"),
+	WALKING("Walking", "orange", " mx_special_walking", "activity_type_walking"),
+	OFFROAD("Off-road", "yellow", "mx_special_offroad", "activity_type_offroad"),
+	MOTORBIKE("Motorbike", "green", "mx_special_motorcycle", "activity_type_motorbike"),
+	CAR("Car", "green", "mx_shop_car", "activity_type_car");
 	// less specific bottom order
 
 	String name;
