@@ -1219,7 +1219,7 @@
     <string name="display_zoom_level">显示缩放等级：%1$s</string>
     <string name="online_map">在线地图</string>
     <string name="roads_only">仅道路</string>
-    <string name="device_memory">设备内存</string>
+    <string name="device_memory">设备储存</string>
     <string name="first_usage_item">初次使用</string>
     <string name="tips_and_tricks_descr">常见问题、最近修改和其它内容。</string>
     <string name="faq_item_description">常见问题</string>
