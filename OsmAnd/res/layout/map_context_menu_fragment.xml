@@ -61,6 +61,13 @@
                             android:layout_gravity="center_vertical"
                             android:text="@string/amenity_type_finance"/>
 
+	                    <LinearLayout
+		                    android:id="@+id/context_menu_custom_address_line"
+		                    android:layout_width="wrap_content"
+		                    android:layout_height="wrap_content"
+		                    android:orientation="horizontal"
+		                    android:visibility="gone" />
+
                     </LinearLayout>
 
                 </LinearLayout>

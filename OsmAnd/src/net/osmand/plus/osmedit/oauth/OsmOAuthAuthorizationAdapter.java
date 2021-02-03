@@ -6,8 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-
 import com.github.scribejava.core.builder.api.DefaultApi10a;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
@@ -129,7 +127,7 @@ public class OsmOAuthAuthorizationAdapter {
         }
 
         @Override
-        protected void onPostExecute(@NonNull OAuth1RequestToken requestToken) {
+        protected void onPostExecute(OAuth1RequestToken requestToken) {
             if (requestToken != null) {
                 loadWebView(rootLayout, nightMode, client.getService().getAuthorizationUrl(requestToken));
             } else {
@@ -148,9 +146,11 @@ public class OsmOAuthAuthorizationAdapter {
 
         @Override
         protected Void doInBackground(String... oauthVerifier) {
-            client.authorize(oauthVerifier[0]);
-            saveToken();
-            updateUserName();
+            if (client.getRequestToken() != null) {
+                client.authorize(oauthVerifier[0]);
+                saveToken();
+                updateUserName();
+            }
             return null;
         }
 
