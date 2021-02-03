@@ -102,6 +102,14 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean init(@NonNull OsmandApplication app, Activity activity) {
+		if (activity instanceof MapActivity) {
+			mapActivity = (MapActivity) activity;
+		}
+		return true;
+	}
+
+	@Override
 	public void registerLayers(MapActivity activity) {
 		createLayers();
 		registerWidget(activity);

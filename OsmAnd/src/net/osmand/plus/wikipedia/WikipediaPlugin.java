@@ -1,5 +1,6 @@
 package net.osmand.plus.wikipedia;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -104,6 +105,14 @@ public class WikipediaPlugin extends OsmandPlugin {
 	@Override
 	public void mapActivityPause(MapActivity activity) {
 		this.mapActivity = null;
+	}
+
+	@Override
+	public boolean init(@NonNull OsmandApplication app, Activity activity) {
+		if (activity instanceof MapActivity) {
+			mapActivity = (MapActivity) activity;
+		}
+		return true;
 	}
 
 	@Override

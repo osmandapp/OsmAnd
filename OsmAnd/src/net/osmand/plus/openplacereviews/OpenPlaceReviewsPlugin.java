@@ -1,5 +1,6 @@
 package net.osmand.plus.openplacereviews;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -44,7 +45,6 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	public String getId() {
 		return ID;
 	}
-
 
 	@Override
 	public String getName() {
@@ -169,6 +169,14 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 			arr[i] = array.optString(i);
 		}
 		return arr;
+	}
+
+	@Override
+	public boolean init(@NonNull OsmandApplication app, Activity activity) {
+		if (activity instanceof MapActivity) {
+			mapActivity = (MapActivity) activity;
+		}
+		return true;
 	}
 
 	@Override
