@@ -120,7 +120,7 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 							try {
 								JSONObject imageObject = (JSONObject) images.get(i);
 								if (imageObject != JSONObject.NULL) {
-									ImageCard imageCard = ImageCard.createCardOpr(mapActivity, imageObject);
+									ImageCard imageCard = createCardOpr(mapActivity, imageObject);
 									if (imageCard != null) {
 										result.add(imageCard);
 									}
@@ -135,6 +135,14 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 		} catch (Exception e) {
 			LOG.error(e);
 		}
+	}
+
+	public static ImageCard createCardOpr(MapActivity mapActivity, JSONObject imageObject) {
+		ImageCard imageCard = null;
+		if (imageObject.has("cid")) {
+			imageCard = new IPFSImageCard(mapActivity, imageObject);
+		}
+		return imageCard;
 	}
 
 	private static String[] getIdFromResponse(String response) {

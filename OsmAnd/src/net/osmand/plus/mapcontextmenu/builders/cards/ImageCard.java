@@ -196,14 +196,6 @@ public abstract class ImageCard extends AbstractCard {
 		return imageCard;
 	}
 
-	public static ImageCard createCardOpr(MapActivity mapActivity, JSONObject imageObject) {
-		ImageCard imageCard = null;
-		if (imageObject.has("cid")) {
-			imageCard = new IPFSImageCard(mapActivity, imageObject);
-		}
-		return imageCard;
-	}
-
 	public double getCa() {
 		return ca;
 	}
