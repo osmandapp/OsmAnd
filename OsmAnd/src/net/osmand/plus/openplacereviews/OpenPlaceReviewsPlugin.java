@@ -85,7 +85,7 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected List<ImageCard> getImageCards(@Nullable GetImageCardsListener listener) {
+	protected List<ImageCard> getContextMenuImageCards(@Nullable GetImageCardsListener listener) {
 		List<ImageCard> imageCards = new ArrayList<>();
 		if (mapActivity != null) {
 			Object object = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObject();

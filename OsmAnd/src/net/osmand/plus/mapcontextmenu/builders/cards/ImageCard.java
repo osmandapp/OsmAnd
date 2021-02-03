@@ -431,7 +431,7 @@ public abstract class ImageCard extends AbstractCard {
 		protected List<ImageCard> doInBackground(Void... params) {
 			TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
 			List<ImageCard> result = new ArrayList<>();
-			OsmandPlugin.populateImageCards(result, listener);
+			OsmandPlugin.populateContextMenuImageCards(result, listener);
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
 				pms.put("lat", "" + (float) latLon.getLatitude());

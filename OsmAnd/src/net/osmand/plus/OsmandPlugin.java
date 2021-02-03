@@ -211,7 +211,7 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	protected List<ImageCard> getImageCards(@Nullable GetImageCardsListener listener) {
+	protected List<ImageCard> getContextMenuImageCards(@Nullable GetImageCardsListener listener) {
 		return Collections.emptyList();
 	}
 
@@ -875,9 +875,9 @@ public abstract class OsmandPlugin {
 		return collection;
 	}
 
-	public static void populateImageCards(@NonNull List<ImageCard> imageCards, @Nullable GetImageCardsListener listener) {
+	public static void populateContextMenuImageCards(@NonNull List<ImageCard> imageCards, @Nullable GetImageCardsListener listener) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
-			imageCards.addAll(p.getImageCards(listener));
+			imageCards.addAll(p.getContextMenuImageCards(listener));
 		}
 	}
 
