@@ -5,7 +5,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,9 +47,13 @@ public class TravelGpxCard extends BaseTravelCard {
 			holder.user.setText(article.user);
 			RouteActivityType activityType = RouteActivityType.getTypeFromName(article.activityType);
 			if (activityType != null) {
-				holder.activityTypeIcon.setImageDrawable(getActivityTypeIcon(activityType));
-				holder.activityType.setText(getActivityTypeName(activityType));
-				holder.activityTypeLabel.setVisibility(View.VISIBLE);
+				int iconId = getActivityTypeIcon(activityType);
+				int titleId = getActivityTypeTitle(activityType);
+				if (iconId > 0 && titleId > 0) {
+					holder.activityTypeIcon.setImageDrawable(getActiveIcon(iconId));
+					holder.activityType.setText(titleId);
+					holder.activityTypeLabel.setVisibility(View.VISIBLE);
+				}
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
 			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));
@@ -71,14 +77,14 @@ public class TravelGpxCard extends BaseTravelCard {
 		}
 	}
 
-	private Drawable getActivityTypeIcon(RouteActivityType activityType) {
-		int iconId = app.getResources().getIdentifier(activityType.getIcon(), "drawable", app.getPackageName());
-		return getActiveIcon(iconId > 0 ? iconId : R.drawable.ic_action_route_distance);
+	@DrawableRes
+	private int getActivityTypeIcon(RouteActivityType activityType) {
+		return app.getResources().getIdentifier(activityType.getIcon(), "drawable", app.getPackageName());
 	}
 
-	private int getActivityTypeName(RouteActivityType activityType) {
-		int titleId = app.getResources().getIdentifier(activityType.getTitle(), "string", app.getPackageName());
-		return titleId > 0 ? titleId : R.string.layer_route;
+	@StringRes
+	private int getActivityTypeTitle(RouteActivityType activityType) {
+		return app.getResources().getIdentifier(activityType.getTitle(), "string", app.getPackageName());
 	}
 
 	private void updateSaveButton(final TravelGpxVH holder) {
