@@ -48,6 +48,7 @@ import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.MapMarkersMode;
+import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -653,7 +654,7 @@ public class OsmandSettings {
 	public static final String NUMBER_OF_FREE_DOWNLOADS_ID = "free_downloads_v3";
 
 	// this value string is synchronized with settings_pref.xml preference name
-	private final OsmandPreference<String> PLUGINS = new StringPreference(this, "enabled_plugins", MapillaryPlugin.ID).makeGlobal().makeShared();
+	private final OsmandPreference<String> PLUGINS = new StringPreference(this, "enabled_plugins", MapillaryPlugin.ID + "," + OpenPlaceReviewsPlugin.ID).makeGlobal().makeShared();
 
 	public Set<String> getEnabledPlugins() {
 		String plugs = PLUGINS.get();

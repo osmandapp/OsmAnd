@@ -32,7 +32,7 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OpenPlaceReviewsPlugin.class);
 
-	private static final String ID = "osmand.openplacereviews";
+	public static final String ID = "osmand.openplacereviews";
 
 	private MapActivity mapActivity;
 
