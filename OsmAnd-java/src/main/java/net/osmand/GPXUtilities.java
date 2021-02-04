@@ -11,6 +11,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedInputStream;
@@ -2141,7 +2142,9 @@ public class GPXUtilities {
 		SimpleDateFormat formatMillis = new SimpleDateFormat(GPX_TIME_FORMAT_MILLIS, Locale.US);
 		formatMillis.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
-			XmlPullParser parser = PlatformUtil.newXMLPullParser();
+			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+			factory.setNamespaceAware(true);
+			XmlPullParser parser = factory.newPullParser();
 			parser.setInput(getUTF8Reader(f));
 			Track routeTrack = new Track();
 			TrkSegment routeTrackSegment = new TrkSegment();
