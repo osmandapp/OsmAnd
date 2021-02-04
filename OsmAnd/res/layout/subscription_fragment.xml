@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +7,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/context_menu_action_buttons_height"
         android:background="?attr/pstsTabBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -19,19 +19,19 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:contentDescription="@string/shared_string_close"
-            app:srcCompat="@drawable/ic_action_remove_dark"/>
+            app:srcCompat="@drawable/ic_action_remove_dark" />
 
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="@string/osm_live_subscription"
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_list_text_size_large"
             android:textStyle="bold"
-            app:typeface="@string/font_roboto_regular"
-	        android:layout_marginStart="20dp" />
+            app:typeface="@string/font_roboto_regular" />
 
     </LinearLayout>
 
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/card_bottom_divider"/>
+        <include layout="@layout/card_bottom_divider" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -67,8 +67,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:minHeight="56dp"
                             android:orientation="horizontal">
 
@@ -76,54 +76,81 @@
                                 android:layout_width="56dp"
                                 android:layout_height="48dp"
                                 android:scaleType="center"
-                                app:srcCompat="@drawable/ic_action_osm_live"
-                                android:tint="@color/osmand_orange"/>
+                                android:tint="@color/osmand_orange"
+                                app:srcCompat="@drawable/ic_action_osm_live" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
                                 android:layout_marginLeft="16dp"
-                                android:layout_marginRight="16dp"
                                 android:layout_marginTop="8dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginRight="16dp"
+                                android:paddingStart="2dp"
                                 android:paddingLeft="2dp"
                                 android:text="@string/osm_live_subscription_desc"
-                                android:textColor="?android:attr/textColorPrimary"
-	                            android:layout_marginEnd="16dp"
-	                            android:paddingStart="2dp"
-	                            android:layout_marginStart="16dp" />
+                                android:textColor="?android:attr/textColorPrimary" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
                             android:layout_marginTop="4dp"
+                            android:layout_marginBottom="8dp"
                             android:minHeight="56dp"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/donationCheckbox"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp"
-                                android:paddingLeft="34dp"
-                                android:text="@string/donation_to_osm"
-	                            android:paddingStart="34dp"
-	                            android:layout_marginStart="16dp" />
+                                android:layout_marginTop="@dimen/context_menu_second_line_top_margin"
+                                android:layout_marginStart="@dimen/list_content_padding"
+                                android:layout_marginLeft="@dimen/list_content_padding"
+                                android:paddingStart="@dimen/local_size_height"
+                                android:paddingLeft="@dimen/local_size_height"
+                                android:paddingEnd="@dimen/local_size_height"
+                                android:paddingRight="@dimen/local_size_height"
+                                android:text="@string/donation_to_osm" />
 
-                            <TextView
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="72dp"
-                                android:layout_marginRight="16dp"
-                                android:layout_marginTop="8dp"
-                                android:paddingLeft="2dp"
-                                android:text="@string/donation_to_osm_desc"
-                                android:textColor="?android:attr/textColorSecondary"
-	                            android:layout_marginEnd="16dp"
-	                            android:layout_marginStart="72dp"
-	                            android:paddingStart="2dp" />
+                                android:minHeight="56dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/list_content_padding_large"
+                                    android:layout_marginLeft="@dimen/context_menu_progress_padding_left"
+                                    android:layout_marginEnd="@dimen/context_menu_progress_padding_left"
+                                    android:layout_marginRight="@dimen/context_menu_progress_padding_left"
+                                    android:paddingStart="@dimen/subHeaderPadding"
+                                    android:paddingLeft="@dimen/subHeaderPadding"
+                                    android:paddingEnd="@dimen/subHeaderPadding"
+                                    android:paddingRight="@dimen/subHeaderPadding"
+                                    android:textColor="?android:textColorPrimary"
+                                    android:textSize="@dimen/default_list_text_size"
+                                    android:text="@string/donation_to_osm" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/list_content_padding_large"
+                                    android:layout_marginLeft="@dimen/context_menu_progress_padding_left"
+                                    android:layout_marginEnd="@dimen/context_menu_progress_padding_left"
+                                    android:layout_marginRight="@dimen/context_menu_progress_padding_left"
+                                    android:paddingStart="@dimen/subHeaderPadding"
+                                    android:paddingLeft="@dimen/subHeaderPadding"
+                                    android:paddingEnd="@dimen/subHeaderPadding"
+                                    android:paddingRight="@dimen/subHeaderPadding"
+                                    android:text="@string/donation_to_osm_desc"
+                                    android:textColor="?android:attr/textColorSecondary"/>
+                            </LinearLayout>
+
 
                         </LinearLayout>
 
@@ -140,13 +167,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginBottom="6dp"
-                            android:background="?attr/dashboard_divider"/>
+                            android:background="?attr/dashboard_divider" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
                             android:layout_marginTop="4dp"
+                            android:layout_marginBottom="8dp"
                             android:minHeight="56dp"
                             android:orientation="horizontal">
 
@@ -155,47 +182,48 @@
                                 android:layout_width="56dp"
                                 android:layout_height="48dp"
                                 android:scaleType="center"
-                                app:srcCompat="@drawable/ic_world_globe_dark"/>
+                                app:srcCompat="@drawable/ic_world_globe_dark" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
                                 android:layout_marginLeft="16dp"
-                                android:layout_marginRight="16dp"
                                 android:layout_marginTop="8dp"
-                                android:orientation="vertical"
-	                            android:layout_marginStart="16dp"
-	                            android:layout_marginEnd="16dp">
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginRight="16dp"
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:paddingLeft="2dp"
+                                    android:paddingStart="@dimen/subHeaderPadding"
+                                    android:paddingEnd="@dimen/subHeaderPadding"
+                                    android:paddingLeft="@dimen/subHeaderPadding"
+                                    android:paddingRight="@dimen/subHeaderPadding"
                                     android:text="@string/osm_live_support_region"
-                                    android:textColor="?android:attr/textColorSecondary"
-	                                android:paddingStart="2dp" />
+                                    android:textColor="?android:attr/textColorSecondary" />
 
                                 <net.osmand.plus.widgets.AutoCompleteTextViewEx
                                     android:id="@+id/selectCountryEdit"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
-                                    app:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
-                                    app:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
-                                    android:editable="false"
+                                    android:paddingStart="2dp"
                                     android:paddingLeft="2dp"
+                                    android:paddingEnd="0dp"
                                     android:paddingRight="0dp"
                                     android:text="Ukraine"
-	                                android:paddingStart="2dp"
-	                                android:paddingEnd="0dp" />
+                                    app:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
+                                    app:drawableRightCompat="@drawable/ic_action_arrow_drop_down" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
+                                    android:paddingStart="2dp"
                                     android:paddingLeft="2dp"
                                     android:text="@string/osm_live_region_desc"
-                                    android:textColor="?android:attr/textColorSecondary"
-	                                android:paddingStart="2dp" />
+                                    android:textColor="?android:attr/textColorSecondary" />
 
 
                             </LinearLayout>
@@ -213,21 +241,21 @@
                                 android:layout_width="56dp"
                                 android:layout_height="48dp"
                                 android:scaleType="center"
-                                app:srcCompat="@drawable/ic_action_message"/>
+                                app:srcCompat="@drawable/ic_action_message" />
 
                             <EditText
                                 android:id="@+id/emailEdit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
                                 android:layout_marginLeft="16dp"
+                                android:layout_marginEnd="16dp"
                                 android:layout_marginRight="16dp"
                                 android:hint="@string/shared_string_email_address"
                                 android:inputType="textEmailAddress"
-                                android:paddingLeft="2dp"
-	                            android:layout_marginStart="16dp"
-	                            android:layout_marginEnd="16dp"
-	                            android:paddingStart="2dp" />
+                                android:paddingStart="2dp"
+                                android:paddingLeft="2dp" />
 
                         </LinearLayout>
 
@@ -235,14 +263,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginStart="72dp"
                             android:layout_marginLeft="72dp"
+                            android:layout_marginEnd="16dp"
                             android:layout_marginRight="16dp"
+                            android:paddingStart="2dp"
                             android:paddingLeft="2dp"
                             android:text="@string/osm_live_email_desc"
-                            android:textColor="?android:attr/textColorSecondary"
-	                        android:paddingStart="2dp"
-	                        android:layout_marginStart="72dp"
-	                        android:layout_marginEnd="16dp" />
+                            android:textColor="?android:attr/textColorSecondary" />
 
 
                         <LinearLayout
@@ -261,21 +289,21 @@
                                     android:layout_width="56dp"
                                     android:layout_height="48dp"
                                     android:scaleType="center"
-                                    app:srcCompat="@drawable/ic_action_user"/>
+                                    app:srcCompat="@drawable/ic_action_user" />
 
                                 <EditText
                                     android:id="@+id/userNameEdit"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="16dp"
                                     android:layout_marginLeft="16dp"
+                                    android:layout_marginEnd="16dp"
                                     android:layout_marginRight="16dp"
                                     android:hint="@string/osm_live_user_public_name"
                                     android:inputType="text"
-                                    android:paddingLeft="2dp"
-	                                android:layout_marginEnd="16dp"
-	                                android:layout_marginStart="16dp"
-	                                android:paddingStart="2dp" />
+                                    android:paddingStart="2dp"
+                                    android:paddingLeft="2dp" />
 
 
                             </LinearLayout>
@@ -284,16 +312,16 @@
                                 android:id="@+id/hideUserNameCheckbox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="12dp"
+                                android:layout_marginStart="72dp"
                                 android:layout_marginLeft="72dp"
-                                android:layout_marginRight="16dp"
                                 android:layout_marginTop="8dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:paddingStart="4dp"
                                 android:paddingLeft="4dp"
                                 android:text="@string/osm_live_hide_user_name"
-                                android:textColor="?android:attr/textColorPrimary"
-	                            android:layout_marginEnd="16dp"
-	                            android:paddingStart="4dp"
-	                            android:layout_marginStart="72dp" />
+                                android:textColor="?android:attr/textColorPrimary" />
 
                         </LinearLayout>
 
@@ -303,35 +331,35 @@
                         android:id="@+id/editModeBottomView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:visibility="visible">
 
                         <Button
                             android:id="@+id/saveChangesButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="72dp"
                             android:layout_marginLeft="72dp"
+                            android:layout_marginEnd="16dp"
                             android:layout_marginRight="16dp"
                             android:background="?attr/btn_round"
+                            android:paddingStart="16dp"
                             android:paddingLeft="16dp"
+                            android:paddingEnd="16dp"
                             android:paddingRight="16dp"
                             android:text="@string/shared_string_save_changes"
-                            android:textColor="@color/color_white"
-	                        android:layout_marginStart="72dp"
-	                        android:layout_marginEnd="16dp"
-	                        android:paddingStart="16dp"
-	                        android:paddingEnd="16dp" />
+                            android:textColor="@color/color_white" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <include layout="@layout/card_bottom_divider"/>
+                <include layout="@layout/card_bottom_divider" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="16dp"/>
+                    android:layout_height="16dp" />
 
             </LinearLayout>
 

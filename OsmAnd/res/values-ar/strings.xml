@@ -4069,4 +4069,9 @@
     <string name="delete_waypoints">حذف نقاط الطريق</string>
     <string name="copy_to_map_markers">نسخ لعلامات الخريطة</string>
     <string name="copy_to_map_favorites">نسخ للمفضلة</string>
+    <string name="upload_photo">يتم الرفع</string>
+    <string name="upload_photo_completed">اكتمال الرفع</string>
+    <string name="uploading_count">رفع %1$d من %2$d</string>
+    <string name="uploaded_count">تم رفع %1$d من %2$d</string>
+    <string name="toast_select_edits_for_upload">تحديد التعديلات للتحميل</string>
 </resources>

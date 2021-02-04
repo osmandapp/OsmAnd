@@ -344,8 +344,8 @@ public class OsmAndFormatter {
 			if (minperkm >= 10) {
 				return ((int) Math.round(minperkm)) + " " + mc.toShortString(ctx);
 			} else {
-				int mph10 = (int) Math.round(minperkm * 10f);
-				return (mph10 / 10f) + " " + mc.toShortString(ctx);
+				int seconds = Math.round(minperkm * 60);
+				return Algorithms.formatDuration(seconds, false) + " " + mc.toShortString(ctx);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_MILE) {
 			if (metersperseconds < 0.111111111) {
