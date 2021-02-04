@@ -4,16 +4,13 @@ import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LocationServiceHelper.LocationCallback;
 import net.osmand.plus.notifications.OsmandNotification;
@@ -137,10 +134,12 @@ public class NavigationService extends Service {
 		app.setNavigationService(null);
 		usedBy = 0;
 		// remove updates
-		try {
-			locationServiceHelper.removeLocationUpdates();
-		} catch (SecurityException e) {
-			// Location service permission not granted
+		if (locationServiceHelper != null) {
+			try {
+				locationServiceHelper.removeLocationUpdates();
+			} catch (SecurityException e) {
+				// Location service permission not granted
+			}
 		}
 		// remove notification
 		stopForeground(Boolean.TRUE);
