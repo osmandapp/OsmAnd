@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiType;
@@ -51,19 +52,18 @@ public class EditPOIMenuController extends MenuController {
 					OsmandSettings settings = app.getSettings();
 					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
 					boolean isLogged = client.isValidToken()
-							|| !Algorithms.isEmpty(settings.USER_NAME.get())
-							&& !Algorithms.isEmpty(settings.USER_PASSWORD.get());
+							|| !Algorithms.isEmpty(settings.OSM_USER_NAME.get())
+							&& !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
 
+					FragmentManager fragmentManager = activity.getSupportFragmentManager();
 					if (point instanceof OpenstreetmapPoint) {
 						if (isLogged) {
-							SendPoiBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
-									new OsmPoint[]{getOsmPoint()});
+							SendPoiBottomSheetFragment.showInstance(fragmentManager, new OsmPoint[] {point});
 						} else {
-							LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), null);
+							LoginBottomSheetFragment.showInstance(fragmentManager, null);
 						}
 					} else if (point instanceof OsmNotesPoint) {
-						SendOsmNoteBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
-								new OsmPoint[]{getOsmPoint()});
+						SendOsmNoteBottomSheetFragment.showInstance(fragmentManager, new OsmPoint[] {point});
 					}
 				}
 			}

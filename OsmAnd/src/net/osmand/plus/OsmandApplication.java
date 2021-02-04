@@ -24,6 +24,8 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
@@ -68,6 +70,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.openplacereviews.OprAuthHelper;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -159,6 +162,7 @@ public class OsmandApplication extends MultiDexApplication {
 	GpxDbHelper gpxDbHelper;
 	QuickActionRegistry quickActionRegistry;
 	OsmOAuthHelper osmOAuthHelper;
+	OprAuthHelper oprAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
 
@@ -392,6 +396,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public OsmOAuthHelper getOsmOAuthHelper() {
 		return osmOAuthHelper;
+	}
+
+	public OprAuthHelper getOprAuthHelper() {
+		return oprAuthHelper;
 	}
 
 	public synchronized DownloadIndexesThread getDownloadThread() {
@@ -910,6 +918,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return customRoutingConfigs.get(key);
 	}
 
+	@NonNull
 	public RoutingConfiguration.Builder getRoutingConfigForMode(ApplicationMode mode) {
 		RoutingConfiguration.Builder builder = null;
 		String routingProfileKey = mode.getRoutingProfile();
@@ -923,11 +932,13 @@ public class OsmandApplication extends MultiDexApplication {
 		return builder != null ? builder : getDefaultRoutingConfig();
 	}
 
+	@Nullable
 	public GeneralRouter getRouter(ApplicationMode mode) {
 		Builder builder = getRoutingConfigForMode(mode);
 		return getRouter(builder, mode);
 	}
 
+	@Nullable
 	public GeneralRouter getRouter(Builder builder, ApplicationMode am) {
 		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
 		if (router == null && am.getParent() != null) {

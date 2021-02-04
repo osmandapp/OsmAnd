@@ -301,7 +301,12 @@ public class ApplicationMode {
 	}
 
 	public boolean isCustomProfile() {
-		return !defaultValues.contains(this);
+		for (ApplicationMode mode : defaultValues) {
+			if (Algorithms.stringsEqual(mode.getStringKey(), getStringKey())) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
