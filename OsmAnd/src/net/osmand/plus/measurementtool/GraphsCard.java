@@ -19,8 +19,8 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.AndroidUtils;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,10 +30,10 @@ import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
+import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CustomGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CustomGraphAdapter.LegendViewType;
-import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper.RefreshMapCallback;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
@@ -422,7 +422,7 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 			GpxUiHelper.setupGPXChart(commonGraphAdapter.getChart(), 4, 24f, 16f, !nightMode, true);
 			List<ILineDataSet> dataSets = GpxUiHelper.getDataSets(commonGraphAdapter.getChart(),
 					app, analysis, firstType, secondType, false);
-			return !Algorithms.isEmpty(dataSets) ? new LineData(dataSets) : null;
+			return new LineData(dataSets);
 		}
 	}
 
@@ -447,12 +447,11 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 		@Override
 		public BarData getChartData() {
 			GpxUiHelper.setupHorizontalGPXChart(app, customGraphAdapter.getChart(), 5, 9, 24, true, nightMode);
-			BarData data = null;
 			if (!Algorithms.isEmpty(statistics.elements)) {
-				data = GpxUiHelper.buildStatisticChart(app, customGraphAdapter.getChart(),
+				return GpxUiHelper.buildStatisticChart(app, customGraphAdapter.getChart(),
 						statistics, analysis, true, nightMode);
 			}
-			return data;
+			return new BarData();
 		}
 	}
 }
