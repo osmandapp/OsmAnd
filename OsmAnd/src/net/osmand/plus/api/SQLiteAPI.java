@@ -1,6 +1,7 @@
 package net.osmand.plus.api;
 
 
+import androidx.annotation.Nullable;
 
 public interface SQLiteAPI {
 
@@ -55,8 +56,6 @@ public interface SQLiteAPI {
 		
 		void close();
 
-		
-		
 	}
 	
 	public interface SQLiteStatement {
@@ -80,8 +79,10 @@ public interface SQLiteAPI {
 		void bindBlob(int i, byte[] val);
 
 	}
-	
-	public SQLiteConnection getOrCreateDatabase(String name, boolean readOnly);
-	
-	public SQLiteConnection openByAbsolutePath(String path, boolean readOnly);
+
+	@Nullable
+	SQLiteConnection getOrCreateDatabase(String name, boolean readOnly);
+
+	@Nullable
+	SQLiteConnection openByAbsolutePath(String path, boolean readOnly);
 }
