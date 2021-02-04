@@ -90,9 +90,12 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
         if (voiceDir.getName().contains("tts")) {
             return false;
         }
-        for (File f : voiceDir.listFiles()) {
-            if (f.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-                return true;
+        File[] files = voiceDir.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+                    return true;
+                }
             }
         }
         return false;
