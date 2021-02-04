@@ -92,12 +92,6 @@ public class NavigationService extends Service {
 
 				@Override
 				public void onLocationAvailability(boolean locationAvailable) {
-					if (!locationAvailable) {
-						OsmandApplication app = (OsmandApplication) getApplication();
-						if (app != null) {
-							app.showToastMessage(getString(R.string.off_router_service_no_gps_available));
-						}
-					}
 				}
 			});
 		} catch (SecurityException e) {
