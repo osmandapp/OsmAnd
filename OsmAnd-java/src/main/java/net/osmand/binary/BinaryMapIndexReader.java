@@ -2163,7 +2163,7 @@ public class BinaryMapIndexReader {
 	private static boolean testAddressJustifySearch = false;
 	private static boolean testPoiSearch = true;
 	private static boolean testPoiSearchOnPath = false;
-	private static boolean testTransportSearch = true;
+	private static boolean testTransportSearch = false;
 	
 	private static int sleft = MapUtils.get31TileNumberX(27.55079);
 	private static int sright = MapUtils.get31TileNumberX(27.55317);
@@ -2177,7 +2177,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File("/Users/plotva/work/osmand/maps/Wikivoyage.obf");
+		fl = new File(System.getProperty("maps") +"/Wikivoyage.obf__");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
@@ -2385,8 +2385,10 @@ public class BinaryMapIndexReader {
 
 	}
 
-	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets, TIntArrayList charMatchesList) throws IOException {
+	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets, TIntArrayList matchedCharacters) throws IOException {
 		String key = null;
+		boolean[] matched = new boolean[matchedCharacters.size()];
+		boolean shouldWeReadSubtable = false;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -2398,41 +2400,41 @@ public class BinaryMapIndexReader {
 				if (prefix.length() > 0) {
 					key = prefix + key;
 				}
+				shouldWeReadSubtable = false;
 				for (int i = 0; i < queries.size(); i++) {
-					int charMatches = charMatchesList.get(i);
-					if (charMatches < 0) {
+					int charMatches = matchedCharacters.get(i);
+					String query = queries.get(i);
+					matched[i] = false;
+					if (query == null) {
 						continue;
 					}
-					String query = queries.get(i);
+					
 					// check query is part of key (the best matching)
 					if (CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 						if (query.length() >= charMatches) {
 							if (query.length() > charMatches) {
-								charMatchesList.set(i, query.length());
+								matchedCharacters.set(i, query.length());
 								listOffsets.get(i).clear();
 							}
-						} else {
-							charMatchesList.set(i, -1);
+							matched[i] = true;
 						}
 						// check key is part of query
 					} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 						if (key.length() >= charMatches) {
 							if (key.length() > charMatches) {
-								charMatchesList.set(i, key.length());
+								matchedCharacters.set(i, key.length());
 								listOffsets.get(i).clear();
 							}
-						} else {
-							charMatchesList.set(i, -1);
+							matched[i] = true;
 						}
-					} else {
-						charMatchesList.set(i, -1);
 					}
+					shouldWeReadSubtable |= matched[i];
 				}
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
 				int val = readInt();
 				for (int i = 0; i < queries.size(); i++) {
-					if (charMatchesList.get(i) >= 0) {
+					if (matched[i]) {
 						listOffsets.get(i).add(val);
 					}
 				}
@@ -2440,21 +2442,15 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
 				int len = codedIS.readRawVarint32();
 				int oldLim = codedIS.pushLimit(len);
-				boolean shouldWeReadSubtable = false;
-				for (int i = 0; i < queries.size(); i++) {
-					if (charMatchesList.get(i) >= 0) {
-						shouldWeReadSubtable = true;
-					}
-				}
 				if (shouldWeReadSubtable && key != null) {
-					TIntArrayList subcharMatchesList = new TIntArrayList(charMatchesList);
-					readIndexedStringTable(instance, queries, key, listOffsets, subcharMatchesList);
-					// looks like true
-					for (int i = 0; i < queries.size(); i++) {
-						if (subcharMatchesList.get(i) >= charMatchesList.get(i)) {
-							charMatchesList.set(i, subcharMatchesList.get(i));
+					List<String> subqueries = new ArrayList<>(queries);
+					// reset query so we don't search what was not matched
+					for(int i = 0; i < queries.size(); i++) {
+						if(!matched[i]) {
+							subqueries.set(i, null);
 						}
-					}	
+					}
+					readIndexedStringTable(instance, subqueries, key, listOffsets, matchedCharacters);
 				} else {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
