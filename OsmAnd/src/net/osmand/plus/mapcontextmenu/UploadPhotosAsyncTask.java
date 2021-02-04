@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 
@@ -102,10 +101,11 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 	private boolean handleSelectedImage(final Uri uri) {
 		boolean success = false;
 		InputStream inputStream = null;
+		int[] imageDimensions = null;
 		try {
 			inputStream = app.getContentResolver().openInputStream(uri);
 			if (inputStream != null) {
-				success = uploadImageToPlace(inputStream);
+				imageDimensions = calcImageDimensions(inputStream);
 			}
 		} catch (Exception e) {
 			LOG.error(e);
@@ -113,12 +113,27 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		} finally {
 			Algorithms.closeStream(inputStream);
 		}
+		if (imageDimensions != null && imageDimensions.length == 2) {
+			try {
+				inputStream = app.getContentResolver().openInputStream(uri);
+				if (inputStream != null) {
+					int width = imageDimensions[0];
+					int height = imageDimensions[1];
+					success = uploadImageToPlace(inputStream, width, height);
+				}
+			} catch (Exception e) {
+				LOG.error(e);
+				app.showToastMessage(R.string.cannot_upload_image);
+			} finally {
+				Algorithms.closeStream(inputStream);
+			}
+		}
 		return success;
 	}
 
-	private boolean uploadImageToPlace(InputStream image) {
+	private boolean uploadImageToPlace(InputStream image, int width, int height) {
 		boolean success = false;
-		InputStream serverData = new ByteArrayInputStream(compressImageToJpeg(image));
+		InputStream serverData = new ByteArrayInputStream(compressImageToJpeg(image, width, height));
 		String baseUrl = OPRConstants.getBaseUrl(app);
 		// all these should be constant
 		String url = baseUrl + "api/ipfs/image";
@@ -178,28 +193,35 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		}
 	}
 
-	private byte[] compressImageToJpeg(InputStream image) {
+	private int[] calcImageDimensions(InputStream image) {
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
 		BitmapFactory.Options opts = new BitmapFactory.Options();
-		opts.inSampleSize = 4;
-		Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream, null, opts);
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		int h = bmp.getHeight();
-		int w = bmp.getWidth();
+		opts.inJustDecodeBounds = true;
+		BitmapFactory.decodeStream(bufferedInputStream, null, opts);
+		return new int[] { opts.outWidth, opts.outHeight };
+	}
+
+	private byte[] compressImageToJpeg(InputStream image, int width, int height) {
+		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
+		int w = width;
+		int h = height;
 		boolean scale = false;
+		int divider = 1;
 		while (w > MAX_IMAGE_LENGTH || h > MAX_IMAGE_LENGTH) {
-			w = w / 2;
-			h = h / 2;
+			w /= 2;
+			h /= 2;
+			divider *= 2;
 			scale = true;
 		}
+		Bitmap bmp;
 		if (scale) {
-			Matrix matrix = new Matrix();
-			matrix.postScale(w, h);
-			Bitmap resizedBitmap = Bitmap.createBitmap(
-					bmp, 0, 0, w, h, matrix, false);
-			bmp.recycle();
-			bmp = resizedBitmap;
+			BitmapFactory.Options opts = new BitmapFactory.Options();
+			opts.inSampleSize = divider;
+			bmp = BitmapFactory.decodeStream(bufferedInputStream, null, opts);
+		} else {
+			bmp = BitmapFactory.decodeStream(bufferedInputStream);
 		}
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		bmp.compress(Bitmap.CompressFormat.JPEG, 90, os);
 		return os.toByteArray();
 	}
