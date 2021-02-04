@@ -318,7 +318,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
-		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+		FragmentActivity fragmentActivity = (FragmentActivity) activity;
+		TripRecordingActiveBottomSheet.showInstance(fragmentActivity.getSupportFragmentManager());
+		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		final boolean nightMode;
 		if (activity instanceof MapActivity) {
 			nightMode = app.getDaynightHelper().isNightModeForMapControls();

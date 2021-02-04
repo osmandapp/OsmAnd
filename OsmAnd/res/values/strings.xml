@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="on_pause">On pause</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
