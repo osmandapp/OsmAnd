@@ -6,6 +6,8 @@
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
 	android:minHeight="@dimen/favorites_list_item_height"
+	android:paddingTop="@dimen/list_header_settings_top_margin"
+	android:paddingBottom="@dimen/list_header_settings_top_margin"
 	android:orientation="horizontal">
 
 	<androidx.appcompat.widget.AppCompatImageView
@@ -58,7 +60,7 @@
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
 				android:contentDescription="@string/distance"
-				osmand:srcCompat="@drawable/ic_action_split_interval" />
+				osmand:srcCompat="@drawable/ic_action_distance_16" />
 
 			<TextView
 				android:id="@+id/distance"

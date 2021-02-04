@@ -62,6 +62,7 @@ import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -206,15 +207,19 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (mapActivity != null) {
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
-
 			if (gpxFile == null || selectingTrack) {
 				setupTracksCard();
 			} else {
+				boolean isTrackContainsMultiSegment = gpxFile.getNonEmptySegmentsCount() > 1;
 				String fileName = null;
 				File file = null;
 				if (!Algorithms.isEmpty(gpxFile.path)) {
 					file = new File(gpxFile.path);
-					fileName = file.getName();
+					if (isTrackContainsMultiSegment) {
+						fileName = Algorithms.getFileNameWithoutExtension(file.getName());
+					} else {
+						fileName = Algorithms.getFileNameWithoutExtension(file.getName());
+					}
 				} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
 					fileName = gpxFile.tracks.get(0).name;
 				}
@@ -489,9 +494,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			GPXInfo gpxInfo = card.getGpxInfoList().get(index);
 			String fileName = gpxInfo.getFileName();
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
-			if (selectedGpxFile != null) {
+			boolean isTrackContainsMultiSegment = selectedGpxFile.getGpxFile().getNonEmptySegmentsCount() > 1;
+			if (selectedGpxFile != null && !isTrackContainsMultiSegment) {
 				selectTrackToFollow(selectedGpxFile.getGpxFile());
 				updateSelectionMode(false);
+			} else if (selectedGpxFile != null && isTrackContainsMultiSegment) {
+				TrackSelectSegmentBottomSheet.showInstance(getFragmentManager(), selectedGpxFile);
 			} else {
 				CallbackWithObject<GPXFile[]> callback = new CallbackWithObject<GPXFile[]>() {
 					@Override
@@ -701,6 +709,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			adjustMapPosition(getHeight());
 		}
 	}
+
 
 	@Override
 	public void routeWasCancelled() {
