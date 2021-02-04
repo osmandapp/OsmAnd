@@ -4,10 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
@@ -29,6 +25,10 @@ import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 public class WptPtMenuBuilder extends MenuBuilder {
 
@@ -52,10 +52,22 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildDescription(View view) {
-		if (!Algorithms.isEmpty(wpt.desc)) {
-			buildDescriptionRow(view, app.getString(R.string.shared_string_description), wpt.desc, 0, 10, true);
+	protected void buildDescription(final View view) {
+		if (Algorithms.isEmpty(wpt.desc)) {
+			return;
 		}
+
+		final String textPrefix = app.getString(R.string.shared_string_description);
+		View.OnClickListener clickListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				POIMapLayer.showDescriptionDialog(view.getContext(), app, wpt.desc, textPrefix);
+			}
+		};
+
+		buildRow(view, null, null, textPrefix, wpt.desc, 0,
+				null, false, null, true, 10,
+				false, false, false, clickListener, matchWidthDivider);
 	}
 
 	@Override

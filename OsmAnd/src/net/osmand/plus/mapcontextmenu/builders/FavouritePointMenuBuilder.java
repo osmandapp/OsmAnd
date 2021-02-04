@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -19,17 +17,17 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
-import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class FavouritePointMenuBuilder extends MenuBuilder {
 
@@ -84,23 +82,11 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildDescription(final View view) {
-		final String desc = fav.getDescription();
-		if (Algorithms.isEmpty(desc)) {
-			return;
+	protected void buildDescription(View view) {
+		String desc = fav.getDescription();
+		if (!Algorithms.isEmpty(desc)) {
+			buildDescriptionRow(view, desc);
 		}
-
-		final String textPrefix = app.getString(R.string.shared_string_description);
-		View.OnClickListener clickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, desc, textPrefix);
-			}
-		};
-
-		buildRow(view, null, null, textPrefix, WikiArticleHelper.getPartialContent(desc), 0,
-				null, false, null, true, 10,
-				false, false, false, clickListener, true);
 	}
 
 	private void buildGroupFavouritesView(View view) {
