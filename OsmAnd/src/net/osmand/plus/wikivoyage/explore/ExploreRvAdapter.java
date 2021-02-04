@@ -19,7 +19,6 @@ import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard.OpenBet
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard.StartEditingTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
-import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard.DownloadUpdateVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard.TravelGpxVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
@@ -53,12 +52,10 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			case TravelGpxCard.TYPE:
 				return new TravelGpxVH(inflate(parent, R.layout.wikivoyage_travel_gpx_card));
 
-			case TravelDownloadUpdateCard.TYPE:
-				return new DownloadUpdateVH(inflate(parent, R.layout.travel_download_update_card));
-
 			case HeaderTravelCard.TYPE:
 				return new HeaderTravelVH(inflate(parent, R.layout.wikivoyage_list_header));
 
+			case TravelDownloadUpdateCard.TYPE:
 			case TravelNeededMapsCard.TYPE:
 				return new NeededMapsVH(inflate(parent, R.layout.travel_needed_maps_card));
 
@@ -205,7 +202,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		if(onlyProgress) {
 			TravelDownloadUpdateCard dc = this.downloadCard;
 			if(dc != null) {
-				dc.updateProgresBar();
+				dc.updateView();
 			}
 			return;
 		}
