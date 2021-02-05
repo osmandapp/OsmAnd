@@ -314,6 +314,10 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	public void populateData() {
+		populateData(false);
+	}
+
+	public void populateData(final boolean showMore) {
 		switchProgressBarVisibility(true);
 		if (app.isApplicationInitializing()) {
 			final WeakReference<WikivoyageExploreActivity> activityRef = new WeakReference<>(this);
@@ -326,12 +330,12 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 				public void onFinish(AppInitializer init) {
 					WikivoyageExploreActivity activity = activityRef.get();
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						new LoadWikivoyageData(activity).execute();
+						new LoadWikivoyageData(activity, showMore).execute();
 					}
 				}
 			});
 		} else {
-			new LoadWikivoyageData(this).execute();
+			new LoadWikivoyageData(this, showMore).execute();
 		}
 	}
 
@@ -380,19 +384,21 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		updateFragments();
 	}
 
-	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
+	public static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
 
 		private final WeakReference<WikivoyageExploreActivity> activityRef;
 		private final TravelHelper travelHelper;
+		private final boolean showMore;
 
-		LoadWikivoyageData(WikivoyageExploreActivity activity) {
+		LoadWikivoyageData(WikivoyageExploreActivity activity, boolean showMore) {
 			travelHelper = activity.getMyApplication().getTravelHelper();
 			activityRef = new WeakReference<>(activity);
+			this.showMore = showMore;
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			travelHelper.initializeDataToDisplay();
+			travelHelper.initializeDataToDisplay(showMore);
 			return null;
 		}
 

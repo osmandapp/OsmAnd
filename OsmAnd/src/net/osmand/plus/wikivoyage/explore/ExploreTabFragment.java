@@ -36,6 +36,7 @@ import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelButtonCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
@@ -44,6 +45,8 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity.*;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
 
@@ -172,17 +175,37 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			if (!Version.isPaidVersion(app) && !OpenBetaTravelCard.isClosed()) {
 				items.add(new OpenBetaTravelCard(activity, nightMode));
 			}
-			List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
+			final List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
 			if (!popularArticles.isEmpty()) {
 				items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
 				for (TravelArticle article : popularArticles) {
 					if (article instanceof TravelGpx) {
-						items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, getActivity()));
+						items.add(new TravelGpxCard(app, nightMode, (TravelGpx) article, activity));
 					} else {
 						items.add(new ArticleTravelCard(app, nightMode, article, activity.getSupportFragmentManager()));
 					}
 				}
 			}
+
+			TravelButtonCard travelButtonCard = new TravelButtonCard(app, nightMode);
+			travelButtonCard.setListener(new TravelNeededMapsCard.CardListener() {
+				@Override
+				public void onPrimaryButtonClick() {
+					new LoadWikivoyageData(ExploreTabFragment.this.getExploreActivity(), true).execute();
+				}
+
+				@Override
+				public void onSecondaryButtonClick() {
+
+				}
+
+				@Override
+				public void onIndexItemClick(IndexItem item) {
+
+				}
+			});
+			items.add(travelButtonCard);
+
 			items.add(new StartEditingTravelCard(activity, nightMode));
 			adapter.setItems(items);
 			final DownloadIndexesThread downloadThread = app.getDownloadThread();

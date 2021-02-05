@@ -18,6 +18,8 @@ import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard.OpenBetaTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard.StartEditingTravelVH;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelButtonCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelButtonCard.TravelButtonVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard.TravelGpxVH;
@@ -54,6 +56,9 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 			case HeaderTravelCard.TYPE:
 				return new HeaderTravelVH(inflate(parent, R.layout.wikivoyage_list_header));
+
+			case TravelButtonCard.TYPE:
+				return new TravelButtonVH(inflate(parent, R.layout.wikivoyage_button_card));
 
 			case TravelDownloadUpdateCard.TYPE:
 			case TravelNeededMapsCard.TYPE:
@@ -112,6 +117,9 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	private int getLastArticleItemIndex() {
 		for (int i = items.size() - 1; i > 0; i--) {
 			BaseTravelCard o = items.get(i);
+			if (o instanceof TravelButtonCard) {
+				return 0;
+			}
 			if (o instanceof ArticleTravelCard || o instanceof TravelGpxCard) {
 				return i;
 			}

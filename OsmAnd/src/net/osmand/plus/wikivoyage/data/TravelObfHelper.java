@@ -68,9 +68,7 @@ public class TravelObfHelper implements TravelHelper {
 	public static final String ROUTE_ARTICLE = "route_article";
 	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
 	public static final String ROUTE_TRACK = "route_track";
-	public static final int POPULAR_ARTICLES_SEARCH_RADIUS = 100000;
 	public static final int ARTICLE_SEARCH_RADIUS = 50000;
-	public static final int GPX_TRACKS_SEARCH_RADIUS = 10000;
 	public static final int MAX_POPULAR_ARTICLES_COUNT = 30;
 	public static final String REF_TAG = "ref";
 	public static final String NAME_TAG = "name";
@@ -81,6 +79,10 @@ public class TravelObfHelper implements TravelHelper {
 	private List<TravelArticle> popularArticles = new ArrayList<>();
 	private final Map<TravelArticleIdentifier, Map<String, TravelArticle>> cachedArticles = new ConcurrentHashMap<>();
 	private final TravelLocalDataHelper localDataHelper;
+	private int searchRadius = ARTICLE_SEARCH_RADIUS;
+	private int count = 0;
+	private int page = 0;
+	final List<Pair<File, Amenity>> amenities = new ArrayList<>();
 
 	public TravelObfHelper(OsmandApplication app) {
 		this.app = app;
@@ -98,48 +100,54 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Override
-	public void initializeDataToDisplay() {
+	public void initializeDataToDisplay(boolean showMore) {
 		localDataHelper.refreshCachedData();
-		loadPopularArticles();
+		loadPopularArticles(showMore);
 	}
 
 	@NonNull
-	public synchronized List<TravelArticle> loadPopularArticles() {
+	public synchronized List<TravelArticle> loadPopularArticles(boolean showMore) {
 		String lang = app.getLanguage();
 		List<TravelArticle> popularArticles = new ArrayList<>();
-		final List<Pair<File, Amenity>> amenities = new ArrayList<>();
-		final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
-		for (final BinaryMapIndexReader reader : getReaders()) {
-			try {
-				searchAmenity(amenities, location, reader, POPULAR_ARTICLES_SEARCH_RADIUS, -1, ROUTE_ARTICLE);
-				searchAmenity(amenities, location, reader, GPX_TRACKS_SEARCH_RADIUS, 15, ROUTE_TRACK);
-			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
+		if (amenities.size() - count < MAX_POPULAR_ARTICLES_COUNT) {
+			final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
+			for (final BinaryMapIndexReader reader : getReaders()) {
+				try {
+					searchAmenity(amenities, location, reader, searchRadius, -1, ROUTE_ARTICLE);
+					searchAmenity(amenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK);
+				} catch (Exception e) {
+					LOG.error(e.getMessage(), e);
+				}
 			}
+			if (amenities.size() > 0) {
+				Collections.sort(amenities, new Comparator<Pair<File, Amenity>>() {
+					@Override
+					public int compare(Pair article1, Pair article2) {
+						int d1 = (int) (MapUtils.getDistance(((Amenity) article1.second).getLocation(), location));
+						int d2 = (int) (MapUtils.getDistance(((Amenity) article2.second).getLocation(), location));
+						return d1 < d2 ? -1 : (d1 == d2 ? 0 : 1);
+					}
+				});
+			}
+			searchRadius *= 2;
 		}
 
-		if (amenities.size() > 0) {
-			Collections.sort(amenities, new Comparator<Pair<File, Amenity>>() {
-				@Override
-				public int compare(Pair article1, Pair article2) {
-					int d1 = (int) (MapUtils.getDistance(((Amenity) article1.second).getLocation(), location));
-					int d2 = (int) (MapUtils.getDistance(((Amenity) article2.second).getLocation(), location));
-					return d1 < d2 ? -1 : (d1 == d2 ? 0 : 1);
-				}
-			});
-			for (Pair<File, Amenity> amenity : amenities) {
-				if (!Algorithms.isEmpty(amenity.second.getName(lang))) {
-					TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
-					if (article != null) {
-						popularArticles.add(article);
-						if (popularArticles.size() >= MAX_POPULAR_ARTICLES_COUNT) {
-							break;
-						}
+		int lastIndex;
+		for (lastIndex = count; lastIndex < amenities.size() - 1; lastIndex++) {
+			Pair<File, Amenity> amenity = amenities.get(lastIndex);
+			if (!Algorithms.isEmpty(amenity.second.getName(lang))) {
+				TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
+				if (article != null) {
+					popularArticles.add(article);
+					this.popularArticles.add(article);
+					if (this.popularArticles.size() >= (page + 1) * MAX_POPULAR_ARTICLES_COUNT) {
+						page++;
+						break;
 					}
 				}
 			}
 		}
-		this.popularArticles = popularArticles;
+		count = ++lastIndex;
 		return popularArticles;
 	}
 
@@ -172,8 +180,10 @@ public class TravelObfHelper implements TravelHelper {
 		}
 		if (!Algorithms.isEmpty(articles)) {
 			TravelArticleIdentifier newArticleId = articles.values().iterator().next().generateIdentifier();
-			cachedArticles.put(newArticleId, articles);
-			article = getCachedArticle(newArticleId, lang, readPoints, callback);
+			if (!cachedArticles.containsKey(newArticleId)) {
+				cachedArticles.put(newArticleId, articles);
+				article = getCachedArticle(newArticleId, lang, readPoints, callback);
+			}
 		}
 		return article;
 	}
