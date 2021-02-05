@@ -678,8 +678,9 @@ public class TravelObfHelper implements TravelHelper {
 
 							@Override
 							public boolean publish(Amenity amenity) {
-								if (Algorithms.stringsEqual(articleId.routeId,
-										Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID))) || isDbArticle) {
+								if (Algorithms.stringsEqual(articleId.title, Algorithms.emptyIfNull(amenity.getName(lang)))
+										&& (Algorithms.stringsEqual(articleId.routeId,
+										Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID))) || isDbArticle)) {
 									amenities.add(amenity);
 									done = true;
 								}
