@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -37,7 +38,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	private static final Log LOG = PlatformUtil.getLog(UploadPhotosAsyncTask.class);
 
-	private static final int MAX_IMAGE_LENGTH = 2048;
+	private static final int IMAGE_MAX_SIZE = 4096;
 
 	private final OsmandApplication app;
 	private final WeakReference<MapActivity> activityRef;
@@ -133,7 +134,12 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	private boolean uploadImageToPlace(InputStream image, int width, int height) {
 		boolean success = false;
-		InputStream serverData = new ByteArrayInputStream(compressImageToJpeg(image, width, height));
+		byte[] jpegImageBytes = compressImageToJpeg(image, width, height);
+		if (jpegImageBytes == null || jpegImageBytes.length == 0) {
+			app.showToastMessage(R.string.cannot_upload_image);
+			return false;
+		}
+		InputStream serverData = new ByteArrayInputStream(jpegImageBytes);
 		String baseUrl = OPRConstants.getBaseUrl(app);
 		// all these should be constant
 		String url = baseUrl + "api/ipfs/image";
@@ -201,13 +207,14 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		return new int[] { opts.outWidth, opts.outHeight };
 	}
 
+	@Nullable
 	private byte[] compressImageToJpeg(InputStream image, int width, int height) {
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
 		int w = width;
 		int h = height;
 		boolean scale = false;
 		int divider = 1;
-		while (w > MAX_IMAGE_LENGTH || h > MAX_IMAGE_LENGTH) {
+		while (w > IMAGE_MAX_SIZE || h > IMAGE_MAX_SIZE) {
 			w /= 2;
 			h /= 2;
 			divider *= 2;
@@ -221,9 +228,13 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		} else {
 			bmp = BitmapFactory.decodeStream(bufferedInputStream);
 		}
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		bmp.compress(Bitmap.CompressFormat.JPEG, 90, os);
-		return os.toByteArray();
+		if (bmp != null) {
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			bmp.compress(Bitmap.CompressFormat.JPEG, 90, os);
+			return os.toByteArray();
+		} else {
+			return null;
+		}
 	}
 
 	public interface UploadPhotosProgressListener {
