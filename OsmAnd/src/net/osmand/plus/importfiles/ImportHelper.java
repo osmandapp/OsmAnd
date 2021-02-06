@@ -1,6 +1,7 @@
 package net.osmand.plus.importfiles;
 
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,13 +10,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -418,7 +419,7 @@ public class ImportHelper {
 								final boolean useImportDir, boolean forceImportFavourites, boolean showInDetailsActivity) {
 		if (result != null) {
 			if (result.error != null) {
-				Toast.makeText(activity, result.error.getMessage(), Toast.LENGTH_LONG).show();
+				app.showToastMessage(result.error.getMessage());
 				if (gpxImportCompleteListener != null) {
 					gpxImportCompleteListener.onImportComplete(false);
 				}
@@ -439,34 +440,36 @@ public class ImportHelper {
 				}
 			}
 		} else {
-			new AlertDialog.Builder(activity)
-					.setTitle(R.string.shared_string_import2osmand)
-					.setMessage(R.string.import_gpx_failed_descr)
-					.setNeutralButton(R.string.shared_string_permissions, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-							intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-							Uri uri = Uri.fromParts("package", app.getPackageName(), null);
-							intent.setData(uri);
-							app.startActivity(intent);
-							if (gpxImportCompleteListener != null) {
-								gpxImportCompleteListener.onImportComplete(false);
+			if (AndroidUtils.isActivityNotDestroyed(activity)) {
+				new AlertDialog.Builder(activity)
+						.setTitle(R.string.shared_string_import2osmand)
+						.setMessage(R.string.import_gpx_failed_descr)
+						.setNeutralButton(R.string.shared_string_permissions, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+								intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+								Uri uri = Uri.fromParts("package", app.getPackageName(), null);
+								intent.setData(uri);
+								app.startActivity(intent);
+								if (gpxImportCompleteListener != null) {
+									gpxImportCompleteListener.onImportComplete(false);
+								}
 							}
-						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (gpxImportCompleteListener != null) {
-								gpxImportCompleteListener.onImportComplete(false);
+						})
+						.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								if (gpxImportCompleteListener != null) {
+									gpxImportCompleteListener.onImportComplete(false);
+								}
 							}
-						}
-					})
-					.show();
+						})
+						.show();
+			}
 		}
 		if (forceImportFavourites) {
-			final Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
+			Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			newIntent.putExtra(TAB_ID, GPX_TAB);
 			activity.startActivity(newIntent);
@@ -577,7 +580,7 @@ public class ImportHelper {
 					showPlanRouteFragment();
 				}
 			} else {
-				Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
+				app.showToastMessage(warning);
 			}
 		}
 
@@ -619,26 +622,27 @@ public class ImportHelper {
 										 final boolean forceImportFavourites, final boolean forceImportGpx) {
 		if (gpxFile == null || gpxFile.isPointsEmpty()) {
 			if (forceImportFavourites) {
-				final DialogInterface.OnClickListener importAsTrackListener = new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						switch (which) {
-							case DialogInterface.BUTTON_POSITIVE:
-								handleResult(gpxFile, fileName, fileSize, save, useImportDir, true);
-								break;
-							case DialogInterface.BUTTON_NEGATIVE:
-								dialog.dismiss();
-								break;
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					OnClickListener importAsTrackListener = new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							switch (which) {
+								case DialogInterface.BUTTON_POSITIVE:
+									handleResult(gpxFile, fileName, fileSize, save, useImportDir, true);
+									break;
+								case DialogInterface.BUTTON_NEGATIVE:
+									dialog.dismiss();
+									break;
+							}
 						}
-					}
-				};
-
-				new AlertDialog.Builder(activity)
-						.setTitle(R.string.import_track)
-						.setMessage(activity.getString(R.string.import_track_desc, fileName))
-						.setPositiveButton(R.string.shared_string_import, importAsTrackListener)
-						.setNegativeButton(R.string.shared_string_cancel, importAsTrackListener)
-						.show();
+					};
+					new AlertDialog.Builder(activity)
+							.setTitle(R.string.import_track)
+							.setMessage(activity.getString(R.string.import_track_desc, fileName))
+							.setPositiveButton(R.string.shared_string_import, importAsTrackListener)
+							.setNegativeButton(R.string.shared_string_cancel, importAsTrackListener)
+							.show();
+				}
 			} else {
 				handleResult(gpxFile, fileName, fileSize, save, useImportDir, false);
 			}

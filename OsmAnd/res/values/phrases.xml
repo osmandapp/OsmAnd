@@ -4332,5 +4332,12 @@
 	<string name="poi_wildlife_crossing_bat_bridge">Bat bridge</string>
 	<string name="poi_wildlife_crossing_bat_tunnel">Bat tunnel</string>
 
+	<string name="poi_piste_ski_jump">Ski jump</string>
+	<string name="poi_piste_name">Piste name</string>
+	<string name="poi_gladed_yes">Gladed: yes</string>
+	<string name="poi_patrolled_yes">Patrolled: yes</string>
+	<string name="poi_patrolled_no">Patrolled: no</string>
+	<string name="poi_piste_status_open">Piste status: open</string>
+	<string name="poi_piste_status_closed">Piste status: closed</string>
 
 </resources>
