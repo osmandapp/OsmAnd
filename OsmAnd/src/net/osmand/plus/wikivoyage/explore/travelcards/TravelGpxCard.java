@@ -7,10 +7,10 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.osm.RouteActivityType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -20,6 +20,8 @@ import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 import java.io.File;
+
+import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 public class TravelGpxCard extends BaseTravelCard {
 
@@ -48,12 +50,11 @@ public class TravelGpxCard extends BaseTravelCard {
 			RouteActivityType activityType = RouteActivityType.getTypeFromName(article.activityType);
 			if (activityType != null) {
 				int iconId = getActivityTypeIcon(activityType);
-				int titleId = getActivityTypeTitle(activityType);
-				if (iconId > 0 && titleId > 0) {
+				if (iconId > 0) {
 					holder.activityTypeIcon.setImageDrawable(getActiveIcon(iconId));
-					holder.activityType.setText(titleId);
-					holder.activityTypeLabel.setVisibility(View.VISIBLE);
 				}
+				holder.activityType.setText(getActivityTypeTitle(activityType));
+				holder.activityTypeLabel.setVisibility(View.VISIBLE);
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
 			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));
@@ -79,12 +80,12 @@ public class TravelGpxCard extends BaseTravelCard {
 
 	@DrawableRes
 	private int getActivityTypeIcon(RouteActivityType activityType) {
-		return app.getResources().getIdentifier(activityType.getIcon(), "drawable", app.getPackageName());
+		return app.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", app.getPackageName());
 	}
 
-	@StringRes
-	private int getActivityTypeTitle(RouteActivityType activityType) {
-		return app.getResources().getIdentifier(activityType.getTitle(), "string", app.getPackageName());
+	private String getActivityTypeTitle(RouteActivityType activityType) {
+		return AndroidUtils.getActivityTypeStringPropertyName(app, activityType.getName(),
+				capitalizeFirstLetterAndLowercase(activityType.getName()));
 	}
 
 	private void updateSaveButton(final TravelGpxVH holder) {

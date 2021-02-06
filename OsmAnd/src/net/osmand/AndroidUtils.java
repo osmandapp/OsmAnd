@@ -951,6 +951,12 @@ public class AndroidUtils {
 		return value != null ? value : propertyValue;
 	}
 
+
+	public static String getActivityTypeStringPropertyName(Context ctx, String propertyName, String defValue) {
+		String value = getStringByProperty(ctx, "activity_type_" + propertyName + "_name");
+		return value != null ? value : defValue;
+	}
+
 	private static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
 		try {
 			Field field = R.string.class.getField(property);

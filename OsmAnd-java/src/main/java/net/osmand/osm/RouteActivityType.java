@@ -1,31 +1,29 @@
 package net.osmand.osm;
 
 public enum RouteActivityType {
-	WATER("Water", "yellow", "mx_special_kayak", "activity_type_water"),
-	WINTER("Winter", "yellow", "mx_special_skiing", "activity_type_winter"),
-	SNOWMOBILE("Snowmobile", "yellow", "mx_special_snowmobile", "activity_type_snowmobile"),
-	RIDING("Riding", "yellow", "mx_special_horse", "activity_type_riding"),
-	RACING("Racing", "yellow", "mx_raceway", "activity_type_racing"),
-	MOUNTAINBIKE("Mountainbike", "blue", "mx_sport_cycling", "activity_type_mountainbike"),
-	CYCLING("Cycling", "blue", "mx_special_bicycle", "activity_type_cycling"),
-	HIKING("Hiking", "orange", "mx_special_trekking", "activity_type_hiking"),
-	RUNNING("Running", "orange", "mx_running", "activity_type_running"),
-	WALKING("Walking", "orange", " mx_special_walking", "activity_type_walking"),
-	OFFROAD("Off-road", "yellow", "mx_special_offroad", "activity_type_offroad"),
-	MOTORBIKE("Motorbike", "green", "mx_special_motorcycle", "activity_type_motorbike"),
-	CAR("Car", "green", "mx_shop_car", "activity_type_car");
+	WATER("water", "yellow", "special_kayak"),
+	WINTER("winter", "yellow", "special_skiing"),
+	SNOWMOBILE("snowmobile", "yellow", "special_snowmobile"),
+	RIDING("riding", "yellow", "special_horse"),
+	RACING("racing", "yellow", "raceway"),
+	MOUNTAINBIKE("mountainbike", "blue", "sport_cycling"),
+	CYCLING("cycling", "blue", "special_bicycle"),
+	HIKING("hiking", "orange", "special_trekking"),
+	RUNNING("running", "orange", "running"),
+	WALKING("walking", "orange", "special_walking"),
+	OFFROAD("offroad", "yellow", "special_offroad"),
+	MOTORBIKE("motorbike", "green", "special_motorcycle"),
+	CAR("car", "green", "shop_car");
 	// less specific bottom order
 
 	String name;
 	String color;
 	String icon;
-	String title;
 
-	RouteActivityType(String nm, String clr, String icon, String title) {
+	RouteActivityType(String nm, String clr, String icon) {
 		this.name = nm;
 		this.color = clr;
 		this.icon = icon;
-		this.title = title;
 	}
 
 	public String getName() {
@@ -38,10 +36,6 @@ public enum RouteActivityType {
 
 	public String getIcon() {
 		return icon;
-	}
-
-	public String getTitle() {
-		return title;
 	}
 
 	public static RouteActivityType getTypeFromName(String name) {
