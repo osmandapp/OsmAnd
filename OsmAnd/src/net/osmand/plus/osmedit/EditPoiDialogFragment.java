@@ -542,6 +542,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 									mapActivity.getContextMenu().showOrUpdate(
 											new LatLon(point.getLatitude(), point.getLongitude()),
 											plugin.getOsmEditsLayer(mapActivity).getObjectName(point), point);
+									mapActivity.getMapLayers().getContextMenuLayer().updateContextMenu();
 								}
 							}
 
@@ -869,6 +870,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 										mapActivity.getContextMenu().showOrUpdate(
 												new LatLon(point.getLatitude(), point.getLongitude()),
 												plugin.getOsmEditsLayer(mapActivity).getObjectName(point), point);
+										mapActivity.getMapLayers().getContextMenuLayer().updateContextMenu();
 									}
 								} else {
 									Toast.makeText(activity, R.string.poi_remove_success, Toast.LENGTH_LONG)

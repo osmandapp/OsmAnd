@@ -387,6 +387,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 							PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_OSM_BUG, obj.local.getText());
 							activity.getContextMenu().show(new LatLon(obj.local.getLatitude(), obj.local.getLongitude()),
 									pd, obj.local);
+							activity.getMapLayers().getContextMenuLayer().updateContextMenu();
 						}
 					} else {
 						if (action == Action.REOPEN) {
