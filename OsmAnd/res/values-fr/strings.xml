@@ -2382,7 +2382,7 @@
     <string name="store_tracks_in_monthly_directories">Enregistrer les traces dans des dossiers mensuels</string>
     <string name="store_tracks_in_monthly_directories_descrp">Enregistrer les traces dans des sous-dossiers organisés par mois (par exemple 2018-01).</string>
     <string name="of">%1$d de %2$d</string>
-    <string name="moving_time">Durée de déplacement</string>
+    <string name="moving_time">Durée de mouvement</string>
     <string name="min_max">Min / Max</string>
     <string name="rendering_value_translucent_pink_name">Rose translucide</string>
     <string name="quick_action_resume_pause_navigation">Suspendre / Reprendre la Navigation</string>
@@ -3981,7 +3981,7 @@
     <string name="message_name_is_already_exists">Ce nom existe déjà</string>
     <string name="routing_engine_vehicle_type_hgv">Poids lourd</string>
     <string name="announcement_time_passing">Durée</string>
-    <string name="analyze_by_intervals">Analyser par intervalles (fractionner)</string>
+    <string name="analyze_by_intervals">Analyser par intervalles de fractionnement</string>
     <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
     <string name="announcement_time_descr">Le délai d\'annonce des alertes vocales dépend du type d\'annonce, de la vitesse actuelle et du type de navigation.</string>
     <string name="announcement_time_title">Délai de l\'annonce</string>
@@ -4001,4 +4001,8 @@
     <string name="uploaded_count">%1$d sur %2$d envoyé</string>
     <string name="upload_photo">Envoi en cours</string>
     <string name="upload_photo_completed">Envoi terminé</string>
+    <string name="hillshade_slope_contour_lines">Ombrage du relief / Pente / Courbes de niveaux</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Utilisez test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Se connecter à OpenPlaceReviews</string>
 </resources>
