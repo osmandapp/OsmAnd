@@ -112,7 +112,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		boolean validToken = isValidToken();
 		Preference nameAndPasswordPref = findPreference(OSM_LOGOUT);
 		if (validToken || isLoginExists()) {
-			String userName = validToken ? settings.USER_DISPLAY_NAME.get() : settings.USER_NAME.get();
+			String userName = validToken ? settings.OSM_USER_DISPLAY_NAME.get() : settings.OSM_USER_NAME.get();
 			nameAndPasswordPref.setVisible(true);
 			nameAndPasswordPref.setSummary(userName);
 			nameAndPasswordPref.setIcon(getContentIcon(R.drawable.ic_action_user_account));
@@ -126,7 +126,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private boolean isLoginExists() {
-		return !Algorithms.isEmpty(settings.USER_NAME.get()) && !Algorithms.isEmpty(settings.USER_PASSWORD.get());
+		return !Algorithms.isEmpty(settings.OSM_USER_NAME.get()) && !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
 	}
 
 	private void setupOfflineEditingPref() {
@@ -140,7 +140,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private void setupUseDevUrlPref() {
-		SwitchPreferenceEx useDevUrlPref = findPreference(settings.USE_DEV_URL.getId());
+		SwitchPreferenceEx useDevUrlPref = findPreference(settings.OSM_USE_DEV_URL.getId());
 		if (OsmandPlugin.isDevelopment()) {
 			Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_laptop);
 			useDevUrlPref.setDescription(getString(R.string.use_dev_url_descr));
@@ -176,8 +176,8 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
-		if (settings.USE_DEV_URL.getId().equals(prefId) && newValue instanceof Boolean) {
-			settings.USE_DEV_URL.set((Boolean) newValue);
+		if (settings.OSM_USE_DEV_URL.getId().equals(prefId) && newValue instanceof Boolean) {
+			settings.OSM_USE_DEV_URL.set((Boolean) newValue);
 			osmLogout();
 			return true;
 		}
@@ -220,7 +220,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	@Override
 	public void onPreferenceChanged(String prefId) {
-		if (settings.USE_DEV_URL.getId().equals(prefId)) {
+		if (settings.OSM_USE_DEV_URL.getId().equals(prefId)) {
 			osmLogout();
 		}
 		updateAllSettings();

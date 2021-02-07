@@ -663,17 +663,19 @@ public class PoiFiltersHelper {
 
 		private SQLiteConnection openConnection(boolean readonly) {
 			conn = context.getSQLiteAPI().getOrCreateDatabase(DATABASE_NAME, readonly);
-			if (conn.getVersion() < DATABASE_VERSION) {
+			if (conn != null && conn.getVersion() < DATABASE_VERSION) {
 				if (readonly) {
 					conn.close();
 					conn = context.getSQLiteAPI().getOrCreateDatabase(DATABASE_NAME, false);
 				}
-				int version = conn.getVersion();
-				conn.setVersion(DATABASE_VERSION);
-				if (version == 0) {
-					onCreate(conn);
-				} else {
-					onUpgrade(conn, version, DATABASE_VERSION);
+				if (conn != null) {
+					int version = conn.getVersion();
+					conn.setVersion(DATABASE_VERSION);
+					if (version == 0) {
+						onCreate(conn);
+					} else {
+						onUpgrade(conn, version, DATABASE_VERSION);
+					}
 				}
 			}
 			return conn;

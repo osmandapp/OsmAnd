@@ -23,7 +23,9 @@ public class PlatformUtil {
 	}
 	
 	public static XmlPullParser newXMLPullParser() throws XmlPullParserException{
-		return new org.kxml2.io.KXmlParser();
+		org.kxml2.io.KXmlParser xmlParser = new org.kxml2.io.KXmlParser();
+		xmlParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true);
+		return xmlParser;
 	}
 
 	public static XmlSerializer newSerializer() {

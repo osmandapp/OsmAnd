@@ -47,7 +47,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 
 	private boolean isLoginOAuth(OsmandSettings settings) {
-		return !Algorithms.isEmpty(settings.USER_DISPLAY_NAME.get());
+		return !Algorithms.isEmpty(settings.OSM_USER_DISPLAY_NAME.get());
 	}
 
 	@Override
@@ -68,8 +68,8 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		messageEditText.setSelection(messageEditText.getText().length());
 		final TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
 		OsmandSettings settings = app.getSettings();
-		String userNameOAuth = settings.USER_DISPLAY_NAME.get();
-		String userNameOpenID = settings.USER_NAME.get();
+		String userNameOAuth = settings.OSM_USER_DISPLAY_NAME.get();
+		String userNameOpenID = settings.OSM_USER_NAME.get();
 		String userName = isLoginOAuth(settings) ? userNameOAuth : userNameOpenID;
 		accountName.setText(userName);
 		final int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);

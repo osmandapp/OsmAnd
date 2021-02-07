@@ -38,6 +38,11 @@ public class ProfileSettingsParams extends AidlParams {
 		this.silent = silent;
 	}
 
+	public ProfileSettingsParams(Uri profileSettingsUri, List<AExportSettingsType> settingsTypeList,
+								 boolean replace, String latestChanges, int version) {
+		this(profileSettingsUri, settingsTypeList, replace, false, latestChanges, version);
+	}
+
 	public ProfileSettingsParams(Parcel in) {
 		readFromParcel(in);
 	}

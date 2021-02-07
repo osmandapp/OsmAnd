@@ -1,14 +1,16 @@
 package net.osmand.plus.api;
 
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-
-import org.apache.commons.logging.Log;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import androidx.annotation.Nullable;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+
+import org.apache.commons.logging.Log;
 
 public class SQLiteAPIImpl implements SQLiteAPI {
 
@@ -20,6 +22,7 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 	}
 
 	@SuppressLint("InlinedApi")
+	@Nullable
 	@Override
 	public SQLiteConnection getOrCreateDatabase(String name, boolean readOnly) {
 		android.database.sqlite.SQLiteDatabase db = null;
@@ -29,13 +32,12 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 		} catch (RuntimeException e) {
 			LOG.error(e.getMessage(), e);
 		}
-		if(db == null) {
+		if (db == null) {
 			return null;
 		}
-		return new SQLiteDatabaseWrapper(db) ;
+		return new SQLiteDatabaseWrapper(db);
 	}
-	
-	
+
 	public class SQLiteDatabaseWrapper implements SQLiteConnection {
 		android.database.sqlite.SQLiteDatabase ds;
 
@@ -206,15 +208,15 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 		
 	}
 
-
+	@Nullable
 	@Override
 	public SQLiteConnection openByAbsolutePath(String path, boolean readOnly) {
 		// fix http://stackoverflow.com/questions/26937152/workaround-for-nexus-9-sqlite-file-write-operations-on-external-dirs
 		android.database.sqlite.SQLiteDatabase db = SQLiteDatabase.openDatabase(path, null,
-				readOnly? SQLiteDatabase.OPEN_READONLY : (SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING));
-		if(db == null) {
+				readOnly ? SQLiteDatabase.OPEN_READONLY : (SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING));
+		if (db == null) {
 			return null;
 		}
-		return new SQLiteDatabaseWrapper(db) ;
+		return new SQLiteDatabaseWrapper(db);
 	}
 }

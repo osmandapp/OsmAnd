@@ -12,7 +12,14 @@
 
 -->
 
-    <string name="on_pause">On pause</string>
+    <string name="track_recording_description">Are you sure you want to stop recording?\nAll unsaved data will be lost.</string>
+    <string name="track_recording_title">Track recording stopped</string>
+    <string name="track_recording_save_and_stop">Save and stop recording</string>
+    <string name="track_recording_stop_without_saving">Stop without saving</string>
+    <string name="login_open_place_reviews">Login to OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews is a community-driven project about public places such as restaurants, hotels, museums, waypoints. It collects all public information about them such as photos, reviews, links to other systems link OpenStreetMap, Wikipedia.\n\nAll OpenPlaceReview data is open and available to everyone: http://openplacereviews.org/data.\n\nYou can read more at: http://openplacereviews.org</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
