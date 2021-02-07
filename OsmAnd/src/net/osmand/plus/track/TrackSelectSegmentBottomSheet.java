@@ -3,8 +3,8 @@ package net.osmand.plus.track;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +19,7 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -26,8 +27,10 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -60,13 +63,16 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 
 		String titleGpxTrack = Algorithms.getFileWithoutDirs(file.getGpxFile().path);
 		Typeface typeface = FontCache.getRobotoMedium(app);
-		SpannableString spannable = UiUtilities.createCustomFontSpannable(typeface, titleGpxTrack, titleGpxTrack, titleGpxTrack);
+		String selectSegmentDescription = getString(R.string.select_segments_description, titleGpxTrack);
+		SpannableString gpxTrackName = new SpannableString(selectSegmentDescription);
+		int startIndex = selectSegmentDescription.indexOf(titleGpxTrack);
 		int descriptionColor = getResolvedColor(nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
-		ForegroundColorSpan colorSpan = new ForegroundColorSpan(descriptionColor);
-		spannable.setSpan(colorSpan, 0, titleGpxTrack.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		int endIndex = startIndex + titleGpxTrack.length();
+		gpxTrackName.setSpan(new CustomTypefaceSpan(typeface), startIndex, endIndex, 0);
+		gpxTrackName.setSpan(new ForegroundColorSpan(descriptionColor), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.select_segments_description, spannable))
+				.setDescription(gpxTrackName)
 				.setCustomView(itemView)
 				.create());
 
@@ -92,17 +98,19 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 	private void selectSegmentToFollow(TrkSegment segment, GpxSelectionHelper.SelectedGpxFile file) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
+			TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
+			RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 			List<GPXUtilities.WptPt> points = segment.points;
 			if (!points.isEmpty()) {
 				ApplicationMode mode = ApplicationMode.valueOfStringKey(points.get(0).getProfileType(), null);
 				if (mode != null) {
-					getMyApplication().getRoutingHelper().setAppMode(mode);
-					getMyApplication().initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
+					routingHelper.setAppMode(mode);
+					mapActivity.getMyApplication().initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
 				}
 			}
 			mapActivity.getMapActions().setGPXRouteParams(file.getGpxFile());
-			getMyApplication().getTargetPointsHelper().updateRouteAndRefresh(true);
-			getMyApplication().getRoutingHelper().onSettingsChanged(true);
+			targetPointsHelper.updateRouteAndRefresh(true);
+			routingHelper.onSettingsChanged(true);
 		}
 	}
 }
