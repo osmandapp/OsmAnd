@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -19,8 +17,8 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -28,6 +26,8 @@ import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class FavouritePointMenuBuilder extends MenuBuilder {
 
@@ -85,7 +85,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	protected void buildDescription(View view) {
 		String desc = fav.getDescription();
 		if (!Algorithms.isEmpty(desc)) {
-			buildDescriptionRow(view, app.getString(R.string.shared_string_description), desc, 0, 10, true);
+			buildDescriptionRow(view, desc);
 		}
 	}
 

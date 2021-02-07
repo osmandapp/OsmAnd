@@ -2,8 +2,6 @@ package net.osmand.plus.wikivoyage.menu;
 
 import android.view.View;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -11,6 +9,8 @@ import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
+
+import androidx.annotation.NonNull;
 
 public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 
@@ -30,11 +30,12 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 
 	@Override
 	protected void buildDescription(View view) {
-		final String desc = descTokens.get(KEY_DESCRIPTION);
+		String desc = descTokens.get(KEY_DESCRIPTION);
 		if (!Algorithms.isEmpty(desc)) {
-			buildDescriptionRow(view, app.getString(R.string.shared_string_description), desc, 0, 10, true);
+			buildDescriptionRow(view, desc);
 		}
 	}
+
 
 	@Override
 	protected void prepareDescription(final WptPt wpt, View view) {
