@@ -302,8 +302,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		webView.getSettings().setTextZoom((int) (app.getResources().getConfiguration().fontScale * 100f));
 		boolean light = app.getSettings().isLightContent();
 		int textColor = ContextCompat.getColor(app, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
-		String rgbHex = Integer.toHexString(textColor).substring(2, 8);
-		html = "<body style=\"color:#" + rgbHex + ";\">" + html + "</body>";
+		String rgbHex = Algorithms.colorToString(textColor);
+		html = "<body style=\"color:" + rgbHex + ";\">" + html + "</body>";
 		String encoded = Base64.encodeToString(html.getBytes(), Base64.NO_PADDING);
 		webView.loadData(encoded, "text/html", "base64");
 
