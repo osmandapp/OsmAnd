@@ -3992,4 +3992,13 @@
     <string name="uploading_count">Отправка %1$d из %2$d</string>
     <string name="uploaded_count">Отправлено %1$d из %2$d</string>
     <string name="toast_select_edits_for_upload">Выберите правки для отправки</string>
+    <string name="hillshade_slope_contour_lines">Рельеф / Уклон/ Контурные линии</string>
+    <string name="shared_string_vehicle">Транспортное средство</string>
+    <string name="routing_engine_vehicle_type_bike">Велосипед</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Электрический велосипед</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Горный велосипед</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Шоссейный велосипед</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Обычный велосипед</string>
+    <string name="routing_engine_vehicle_type_racingbike">Гоночный велосипед</string>
+    <string name="routing_engine_vehicle_type_mtb">Горный велосипед</string>
 </resources>
