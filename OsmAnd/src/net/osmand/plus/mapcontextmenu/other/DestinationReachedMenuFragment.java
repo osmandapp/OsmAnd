@@ -40,9 +40,14 @@ public class DestinationReachedMenuFragment extends Fragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		MapActivity mapActivity = getMapActivity();
-		if (menu == null && mapActivity != null) {
+		if (mapActivity == null) {
+			return;
+		}
+		if (menu == null) {
 			menu = new DestinationReachedMenu(mapActivity);
 		}
+		// Resume automatic trip recording after reaching a destination
+		mapActivity.getMyApplication().getRoutingHelper().setFollowingMode(true);
 	}
 
 	@Nullable
