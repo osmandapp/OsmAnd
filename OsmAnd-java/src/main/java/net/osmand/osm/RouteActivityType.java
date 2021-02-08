@@ -5,6 +5,8 @@ import java.util.List;
 
 public class RouteActivityType {
 	private static final List<RouteActivityType> values = new ArrayList<>();
+	public static final String DEFAULT_ICON = "special_marker";
+	public static final String DEFAULT_COLOR = "orange";
 
 	public static final RouteActivityType WATER = createType("water", "yellow").icon("special_kayak").reg();
 	public static final RouteActivityType WINTER = createType("winter", "yellow").icon("special_skiing").reg();
@@ -47,7 +49,7 @@ public class RouteActivityType {
 				return rat;
 			}
 		}
-		return null;
+		return createType(name.toLowerCase(), DEFAULT_COLOR).icon(DEFAULT_ICON).reg();
 	}
 
 	private static RouteActivityTypeBuilder createType(String name, String color) {
