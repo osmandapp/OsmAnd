@@ -1,6 +1,7 @@
 package net.osmand.plus.base;
 
 import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -884,32 +885,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 				updateMainViewLayout(posY);
 			}
 			if (animated) {
-				mainView.animate().y(posY)
-						.setDuration(ANIMATION_DURATION)
-						.setInterpolator(new DecelerateInterpolator())
-						.setListener(new AnimatorListenerAdapter() {
-
-							boolean canceled = false;
-
-							@Override
-							public void onAnimationCancel(Animator animation) {
-								canceled = true;
-							}
-
-							@Override
-							public void onAnimationEnd(Animator animation) {
-								if (!canceled) {
-									if (needCloseMenu && isHideable()) {
-										dismiss();
-									} else {
-										updateMainViewLayout(posY);
-										if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-											doAfterMenuStateChange(previousMenuState, newMenuState);
-										}
-									}
-								}
-							}
-						}).start();
+				animateMainView(posY, needCloseMenu, previousMenuState, newMenuState);
 			} else {
 				if (needCloseMenu && isHideable()) {
 					dismiss();
@@ -929,10 +905,37 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 		return posY;
 	}
 
-	public void animateView(@NonNull View view, int y) {
+	protected void animateMainView(final int posY, final boolean needCloseMenu, final int previousMenuState, final int newMenuState) {
+		animateView(mainView, posY, new AnimatorListenerAdapter() {
+
+			boolean canceled = false;
+
+			@Override
+			public void onAnimationCancel(Animator animation) {
+				canceled = true;
+			}
+
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				if (!canceled) {
+					if (needCloseMenu && isHideable()) {
+						dismiss();
+					} else {
+						updateMainViewLayout(posY);
+						if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+							doAfterMenuStateChange(previousMenuState, newMenuState);
+						}
+					}
+				}
+			}
+		});
+	}
+
+	public void animateView(@NonNull View view, int y, @Nullable AnimatorListener listener) {
 		view.animate().y(y)
 				.setDuration(ANIMATION_DURATION)
 				.setInterpolator(new DecelerateInterpolator())
+				.setListener(listener)
 				.start();
 	}
 
