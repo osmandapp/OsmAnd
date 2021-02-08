@@ -1,29 +1,32 @@
 package net.osmand.osm;
 
-public enum RouteActivityType {
-	WATER("water", "yellow", "special_kayak"),
-	WINTER("winter", "yellow", "special_skiing"),
-	SNOWMOBILE("snowmobile", "yellow", "special_snowmobile"),
-	RIDING("riding", "yellow", "special_horse"),
-	RACING("racing", "yellow", "raceway"),
-	MOUNTAINBIKE("mountainbike", "blue", "sport_cycling"),
-	CYCLING("cycling", "blue", "special_bicycle"),
-	HIKING("hiking", "orange", "special_trekking"),
-	RUNNING("running", "orange", "running"),
-	WALKING("walking", "orange", "special_walking"),
-	OFFROAD("offroad", "yellow", "special_offroad"),
-	MOTORBIKE("motorbike", "green", "special_motorcycle"),
-	CAR("car", "green", "shop_car");
-	// less specific bottom order
+import java.util.ArrayList;
+import java.util.List;
 
+public class RouteActivityType {
+	private static final List<RouteActivityType> values = new ArrayList<>();
+
+	public static final RouteActivityType WATER = createType("water", "yellow").icon("special_kayak").reg();
+	public static final RouteActivityType WINTER = createType("winter", "yellow").icon("special_skiing").reg();
+	public static final RouteActivityType SNOWMOBILE = createType("snowmobile", "yellow").icon("special_snowmobile").reg();
+	public static final RouteActivityType RIDING = createType("riding", "yellow").icon("special_horse").reg();
+	public static final RouteActivityType RACING = createType("racing", "yellow").icon("raceway").reg();
+	public static final RouteActivityType MOUNTAINBIKE = createType("mountainbike", "blue").icon("sport_cycling").reg();
+	public static final RouteActivityType CYCLING = createType("cycling", "blue").icon("special_bicycle").reg();
+	public static final RouteActivityType HIKING = createType("hiking", "orange").icon("special_trekking").reg();
+	public static final RouteActivityType RUNNING = createType("running", "orange").icon("running").reg();
+	public static final RouteActivityType WALKING = createType("walking", "orange").icon("special_walking").reg();
+	public static final RouteActivityType OFFROAD = createType("offroad", "yellow").icon("special_offroad").reg();
+	public static final RouteActivityType MOTORBIKE = createType("motorbike", "green").icon("special_motorcycle").reg();
+	public static final RouteActivityType CAR = createType("car", "green").icon("shop_car").reg();
+	// less specific bottom order
 	String name;
 	String color;
 	String icon;
 
-	RouteActivityType(String nm, String clr, String icon) {
+	RouteActivityType(String nm, String clr) {
 		this.name = nm;
 		this.color = clr;
-		this.icon = icon;
 	}
 
 	public String getName() {
@@ -39,12 +42,18 @@ public enum RouteActivityType {
 	}
 
 	public static RouteActivityType getTypeFromName(String name) {
-		for (RouteActivityType rat : values()) {
-			if (rat.name().equalsIgnoreCase(name)) {
+		for (RouteActivityType rat : values) {
+			if (rat.name.equalsIgnoreCase(name)) {
 				return rat;
 			}
 		}
 		return null;
+	}
+
+	private static RouteActivityTypeBuilder createType(String name, String color) {
+		RouteActivityTypeBuilder builder = new RouteActivityTypeBuilder();
+		builder.routeActivityType = new RouteActivityType(name, color);
+		return builder;
 	}
 
 	public static RouteActivityType getTypeFromTags(String[] tags) {
@@ -52,7 +61,7 @@ public enum RouteActivityType {
 		for (String tg : tags) {
 			RouteActivityType rat = RouteActivityType.convertFromOsmGPXTag(tg);
 			if (rat != null) {
-				if (activityType == null || activityType.ordinal() > rat.ordinal()) {
+				if (activityType == null || values.indexOf(activityType) > values.indexOf(rat)) {
 					activityType = rat;
 				}
 			}
@@ -236,5 +245,20 @@ public enum RouteActivityType {
 			return RACING;
 		}
 		return null;
+	}
+
+	public static class RouteActivityTypeBuilder {
+
+		private RouteActivityType routeActivityType;
+
+		public RouteActivityTypeBuilder icon(String icon) {
+			routeActivityType.icon = icon;
+			return this;
+		}
+
+		private RouteActivityType reg() {
+			values.add(routeActivityType);
+			return routeActivityType;
+		}
 	}
 }
