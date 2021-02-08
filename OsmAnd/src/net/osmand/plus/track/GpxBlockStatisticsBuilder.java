@@ -190,7 +190,7 @@ public class GpxBlockStatisticsBuilder {
 		ITEM_DISTANCE,
 		ITEM_ALTITUDE,
 		ITEM_SPEED,
-		ITEM_TIME;
+		ITEM_TIME
 	}
 
 	private class BlockStatisticsAdapter extends RecyclerView.Adapter<BlockStatisticsViewHolder> {
@@ -292,3 +292,4 @@ public class GpxBlockStatisticsBuilder {
 		}
 	}
 }
+//
