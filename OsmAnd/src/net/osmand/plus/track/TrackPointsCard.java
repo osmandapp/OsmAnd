@@ -26,6 +26,8 @@ import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.OsmAndCollator;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -173,6 +175,12 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		GpxDisplayItem item = adapter.getChild(groupPosition, childPosition);
+		if (item != null && item.locationStart != null) {
+			LatLon location = new LatLon(item.locationStart.lat, item.locationStart.lon);
+			PointDescription description = new PointDescription(PointDescription.POINT_TYPE_WPT, item.name);
+			mapActivity.getContextMenu().show(location, description, item.locationStart);
+		}
 		return true;
 	}
 
