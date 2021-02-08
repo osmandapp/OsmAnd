@@ -49,6 +49,7 @@ import net.osmand.util.Algorithms;
 import java.lang.ref.WeakReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimeZone;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
@@ -102,6 +103,8 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		app = requiredMyApplication();
 		OsmandSettings settings = app.getSettings();
 		Context context = requireContext();
+		final FragmentManager fragmentManager = getFragmentManager();
+		final Fragment targetFragment = getTargetFragment();
 
 		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
 		View itemView = inflater.inflate(R.layout.trip_recording_active_fragment, null, false);
@@ -119,12 +122,14 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		);
 		statusIcon.setImageDrawable(statusDrawable);
 
-		String timeTrackSaved = String.valueOf(app.getSavingTrackHelper().getLastTimeUpdated());
-		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");
+		long timeTrackSaved = app.getSavingTrackHelper().getLastTimeUpdated();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		Date resultDate = new Date(timeTrackSaved);
+		String sdfFormatted = sdf.format(resultDate);
 		CharSequence formattedTimeTrackSaved = null;
 		try {
-			long time = sdf.parse(timeTrackSaved).getTime();
+			long time = sdf.parse(sdfFormatted).getTime();
 			long now = System.currentTimeMillis();
 			formattedTimeTrackSaved =
 					DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
@@ -186,17 +191,23 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			public void onClick(View v) {
 				final GPXUtilities.GPXFile gpxFile = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
 				new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
 			}
 		});
 
 		buttonStop.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentManager fragmentManager = getFragmentManager();
-				Fragment targetFragment = getTargetFragment();
-				if (fragmentManager != null && targetFragment != null) {
+				if (fragmentManager != null) {
 					StopTrackRecordingBottomFragment.showInstance(fragmentManager, targetFragment);
+				}
+			}
+		});
+
+		buttonClear.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (fragmentManager != null) {
+					ClearRecordedDataBottomSheetFragment.showInstance(fragmentManager, targetFragment);
 				}
 			}
 		});
