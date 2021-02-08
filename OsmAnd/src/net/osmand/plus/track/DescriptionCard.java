@@ -4,6 +4,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
@@ -16,13 +19,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.widgets.TextViewEx;
-import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.util.Algorithms;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
-
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
+import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
 
 public class DescriptionCard extends BaseCard {
 
@@ -96,16 +96,6 @@ public class DescriptionCard extends BaseCard {
 				GpxEditDescriptionDialogFragment.showInstance(mapActivity, descriptionHtml, null);
 			}
 		});
-	}
-
-	private String getFirstParagraph(String descriptionHtml) {
-		if (descriptionHtml != null) {
-			String firstParagraph = WikiArticleHelper.getPartialContent(descriptionHtml);
-			if (!Algorithms.isEmpty(firstParagraph)) {
-				return firstParagraph;
-			}
-		}
-		return descriptionHtml;
 	}
 
 	private void setupImage(final String imageUrl) {
