@@ -102,26 +102,18 @@ public class ClearRecordedDataBottomSheetFragment extends MenuBottomSheetDialogF
 	@Override
 	public void onResume() {
 		super.onResume();
-		// Replace later with tTripRecordingActiveBottomSheet.hide()
 		Fragment target = getTargetFragment();
 		if (target instanceof TripRecordingActiveBottomSheet) {
-			Dialog dialog = ((TripRecordingActiveBottomSheet) target).getDialog();
-			if (dialog != null) {
-				dialog.hide();
-			}
+			((TripRecordingActiveBottomSheet) target).hide();
 		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		// Replace later with tTripRecordingActiveBottomSheet.show()
 		Fragment target = getTargetFragment();
 		if (target instanceof TripRecordingActiveBottomSheet) {
-			Dialog dialog = ((TripRecordingActiveBottomSheet) target).getDialog();
-			if (dialog != null) {
-				dialog.show();
-			}
+			((TripRecordingActiveBottomSheet) target).show();
 		}
 	}
 

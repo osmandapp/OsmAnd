@@ -22,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -843,7 +842,8 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		boolean isTripRecordingPluginOn = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null;
+		final OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		boolean isTripRecordingPluginOn = monitoringPlugin != null;
 		if (isTripRecordingPluginOn) {
 			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_widget_monitoring, mapActivity)
 					.setId(DRAWER_TRIP_RECORDING_ID)
@@ -853,12 +853,15 @@ public class MapActivityActions implements DialogProvider {
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							app.logEvent("trip_recording_open");
 							MapActivity.clearPrevActivityIntent();
-							TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+							if (monitoringPlugin.isRecordingStarted()) {
+								TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+							} else {
+								TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+							}
 							return true;
 						}
 					}).createItem());
 		}
-
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
 				.setId(DRAWER_DIRECTIONS_ID)

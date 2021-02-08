@@ -280,6 +280,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		app.getSavingTrackHelper().startNewSegment();
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 		app.startNavigationService(NavigationService.USED_BY_GPX);
+		TripRecordingActiveBottomSheet.showInstance(getFragmentManager());
 		dismiss();
 	}
 

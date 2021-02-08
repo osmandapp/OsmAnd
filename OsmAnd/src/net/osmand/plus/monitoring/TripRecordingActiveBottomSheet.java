@@ -103,8 +103,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		app = requiredMyApplication();
 		OsmandSettings settings = app.getSettings();
 		Context context = requireContext();
-		final FragmentManager fragmentManager = getFragmentManager();
-		final Fragment targetFragment = getTargetFragment();
 
 		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
 		View itemView = inflater.inflate(R.layout.trip_recording_active_fragment, null, false);
@@ -194,11 +192,12 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			}
 		});
 
+		final FragmentManager fragmentManager = getFragmentManager();
 		buttonStop.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (fragmentManager != null) {
-					StopTrackRecordingBottomFragment.showInstance(fragmentManager, targetFragment);
+					StopTrackRecordingBottomFragment.showInstance(fragmentManager, TripRecordingActiveBottomSheet.this);
 				}
 			}
 		});
@@ -207,7 +206,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			@Override
 			public void onClick(View v) {
 				if (fragmentManager != null) {
-					ClearRecordedDataBottomSheetFragment.showInstance(fragmentManager, targetFragment);
+					ClearRecordedDataBottomSheetFragment.showInstance(fragmentManager, TripRecordingActiveBottomSheet.this);
 				}
 			}
 		});
@@ -292,6 +291,13 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			return (MapActivity) activity;
 		}
 		return null;
+	}
+
+	public void show() {
+		Dialog dialog = getDialog();
+		if (dialog != null) {
+			dialog.show();
+		}
 	}
 
 	public void hide() {
