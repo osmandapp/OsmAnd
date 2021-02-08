@@ -206,7 +206,7 @@
 		android:layout_height="@dimen/context_menu_action_buttons_height"
 		android:layout_gravity="bottom"
 		android:background="?attr/wikivoyage_card_bg_color"
-		osmand:itemBackground="?attr/wikivoyage_card_bg_color"
+		osmand:itemBackground="?attr/bottom_navigation_item_background"
 		osmand:itemIconTint="@color/bottom_navigation_color_selector_light"
 		osmand:itemTextColor="@color/bottom_navigation_color_selector_light"
 		osmand:labelVisibilityMode="labeled"

@@ -249,6 +249,7 @@
         <item name="text_input_background">@color/text_input_background_light</item>
         <item name="image_help_announcement_time">@drawable/img_help_announcement_time_day</item>
         <item name="switch_button_active">@color/switch_button_active_light</item>
+        <item name="bottom_navigation_item_background">@drawable/bottom_navigation_item_bg_light</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -547,6 +548,7 @@
         <item name="text_input_background">@color/text_input_background_dark</item>
         <item name="image_help_announcement_time">@drawable/img_help_announcement_time_night</item>
         <item name="switch_button_active">@color/switch_button_active_dark</item>
+        <item name="bottom_navigation_item_background">@drawable/bottom_navigation_item_bg_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

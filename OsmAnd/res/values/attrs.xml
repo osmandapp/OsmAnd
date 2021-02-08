@@ -142,6 +142,7 @@
 		<attr name="text_input_background" format="reference"/>
 		<attr name="image_help_announcement_time" format="reference"/>
 		<attr name="switch_button_active" format="reference" />
+		<attr name="bottom_navigation_item_background" format="reference" />
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
