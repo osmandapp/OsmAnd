@@ -133,7 +133,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		if (mapControlsView != null) {
 			int zoomY = y - getMapControlsHeight();
 			if (animated) {
-				fragment.animateView(mapControlsView, zoomY);
+				fragment.animateView(mapControlsView, zoomY, null);
 			} else {
 				mapControlsView.setY(zoomY);
 			}

@@ -155,6 +155,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private LatLon latLon;
 
 	private int menuTitleHeight;
+	private int menuHeaderHeight;
 	private int toolbarHeightPx;
 	private boolean mapPositionAdjusted;
 
@@ -300,7 +301,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			updateHeader();
 			setupButtons(view);
 			updateCardsLayout();
-			calculateLayoutAndUpdateMenuState();
+			if (menuType == TrackMenuType.OVERVIEW && isPortrait()) {
+				calculateLayoutAndShowHeader();
+			} else {
+				calculateLayoutAndUpdateMenuState();
+			}
 		}
 		return view;
 	}
@@ -484,8 +489,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	protected void calculateLayout(View view, boolean initLayout) {
-		menuTitleHeight = routeMenuTopShadowAll.getHeight()
-				+ bottomNav.getHeight();
+		menuHeaderHeight = headerContainer.getHeight();
+		menuTitleHeight = routeMenuTopShadowAll.getHeight() + bottomNav.getHeight();
 		super.calculateLayout(view, initLayout);
 	}
 
@@ -909,6 +914,20 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			@Override
 			public void run() {
 				updateMenuState();
+			}
+		});
+	}
+
+	private void calculateLayoutAndShowHeader() {
+		runLayoutListener(new Runnable() {
+			@Override
+			public void run() {
+				int posY = getViewHeight() - menuHeaderHeight - menuTitleHeight - getShadowHeight();
+				if (posY < getViewY()) {
+					updateMainViewLayout(posY);
+				}
+				animateMainView(posY, false, getCurrentMenuState(), getCurrentMenuState());
+				updateMapControlsPos(TrackMenuFragment.this, posY, true);
 			}
 		});
 	}
