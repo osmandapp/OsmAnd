@@ -1257,7 +1257,9 @@ public class MenuBuilder {
 				controller.setOnBackButtonClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						mapContextMenu.show();
+						if (mapContextMenu != null) {
+							mapContextMenu.show();
+						}
 					}
 				});
 				controller.setOnTitleClickListener(new OnClickListener() {
