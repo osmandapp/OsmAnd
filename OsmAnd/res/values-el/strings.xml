@@ -778,7 +778,7 @@
     <string name="context_menu_item_update_map">Ενημέρωση χάρτη</string>
     <string name="context_menu_item_create_poi">Δημιουργία ΣΕ</string>
     <string name="shared_string_yes">Ναι</string>
-    <string name="shared_string_cancel">Ακύρωση</string>
+    <string name="shared_string_cancel">Άκυρο</string>
     <string name="shared_string_apply">Εφαρμογή</string>
     <string name="shared_string_no">Όχι</string>
     <string name="add_favorite_dialog_top_text">Εισαγωγή ονόματος αγαπημένου</string>
@@ -1270,7 +1270,7 @@
     <string name="dash_download_new_one">Λήψη Νέου Χάρτη</string>
     <string name="map_locale">Γλώσσα χάρτη</string>
     <string name="rendering_attr_roadStyle_name">Μορφή δρόμου</string>
-    <string name="rendering_value_default_name">Προκαθορισμένο</string>
+    <string name="rendering_value_default_name">Προεπιλογή</string>
     <string name="rendering_value_orange_name">Πορτοκαλί</string>
     <string name="traffic_warning_railways">Διασταύρωση σιδηροτροχιάς</string>
     <string name="show_railway_warnings">Διασταυρώσεις σιδηροτροχιάς</string>
@@ -1467,7 +1467,7 @@
     <string name="track_segments">Τμήματα διαδρομής</string>
     <string name="track_points">Σημεία της διαδρομής</string>
     <string name="location_on_map">Τοποθεσία:\n Γ. Πλ %1$s\n Γ. Μηκ %2$s</string>
-    <string name="rendering_value__name">Προκαθορισμένο</string>
+    <string name="rendering_value__name">Προεπιλογή</string>
     <string name="print_route">Εκτύπωση διαδρομής</string>
     <string name="osmand_parking_overdue">εκπρόθεσμο</string>
     <string name="simulate_your_location">Προσομοίωση της θέση σας</string>
@@ -3013,7 +3013,7 @@
     <string name="rendering_attr_showLez_description">Εμφάνιση στον χάρτη ζωνών για χαμηλή εκπομπή καυσαερίων. Δεν επηρεάζει τη δρομολόγηση.</string>
     <string name="rendering_attr_showLez_name">Εμφάνιση ζωνών χαμηλής εκπομπής καυσαερίων</string>
     <string name="temporary_conditional_routing">Λάβετε υπόψη τους προσωρινούς περιορισμούς</string>
-    <string name="shared_string_default">Προεπιλεγμένο</string>
+    <string name="shared_string_default">Προεπιλογή</string>
     <string name="app_mode_pickup_truck">Ημιφορτηγό</string>
     <string name="day">Ημέρα</string>
     <string name="days_2_4">Ημέρες</string>
