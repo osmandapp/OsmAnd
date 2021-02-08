@@ -1099,7 +1099,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
-			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording);
+			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording, null);
 		} else {
 			Bundle bundle = new Bundle();
 			bundle.putString(TRACK_FILE_NAME, path);
@@ -1109,7 +1109,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	public static void showInstance(@NonNull final MapActivity mapActivity, @Nullable String path, boolean showCurrentTrack) {
+	public static void showInstance(@NonNull final MapActivity mapActivity, @Nullable String path,
+									boolean showCurrentTrack, @Nullable final LatLon latLon) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		SelectedGpxFile selectedGpxFile;
 		if (showCurrentTrack) {
@@ -1118,7 +1119,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
 		}
 		if (selectedGpxFile != null) {
-			showInstance(mapActivity, selectedGpxFile, null);
+			showInstance(mapActivity, selectedGpxFile, latLon);
 		} else if (!Algorithms.isEmpty(path)) {
 			String title = app.getString(R.string.loading_smth, "");
 			final ProgressDialog progress = ProgressDialog.show(mapActivity, title, app.getString(R.string.loading_data));
@@ -1132,7 +1133,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						OsmandApplication app = mapActivity.getMyApplication();
 						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(result, true, false);
 						if (selectedGpxFile != null) {
-							showInstance(mapActivity, selectedGpxFile, null);
+							showInstance(mapActivity, selectedGpxFile, latLon);
 						}
 					}
 					if (progress != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
