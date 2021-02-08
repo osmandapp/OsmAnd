@@ -22,6 +22,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.openplacereviews.OPRConstants;
+import net.osmand.plus.openplacereviews.OprAuthHelper.OprAuthorizationListener;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -256,7 +257,7 @@ public class IntentHelper {
 			if (intent.hasExtra(TrackMenuFragment.OPEN_TRACK_MENU)) {
 				String path = intent.getStringExtra(TRACK_FILE_NAME);
 				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
-				TrackMenuFragment.showInstance(mapActivity, path, currentRecording);
+				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, null);
 				mapActivity.setIntent(null);
 			}
 		}
@@ -326,8 +327,8 @@ public class IntentHelper {
 			if (uri.toString().startsWith(OPRConstants.OPR_OAUTH_PREFIX)) {
 				String token = uri.getQueryParameter("opr-token");
 				String username = uri.getQueryParameter("opr-nickname");
-				app.getSettings().OPR_ACCESS_TOKEN.set(token);
-				app.getSettings().OPR_USERNAME.set(username);
+				app.getOprAuthHelper().addListener(getOprAuthorizationListener());
+				app.getOprAuthHelper().authorize(token, username);
 				mapActivity.setIntent(null);
 				return true;
 			}
@@ -342,6 +343,19 @@ public class IntentHelper {
 				for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
 					if (fragment instanceof OsmAuthorizationListener) {
 						((OsmAuthorizationListener) fragment).authorizationCompleted();
+					}
+				}
+			}
+		};
+	}
+
+	private OprAuthorizationListener getOprAuthorizationListener() {
+		return new OprAuthorizationListener() {
+			@Override
+			public void authorizationCompleted() {
+				for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
+					if (fragment instanceof OprAuthorizationListener) {
+						((OprAuthorizationListener) fragment).authorizationCompleted();
 					}
 				}
 			}

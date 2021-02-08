@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -11,25 +12,27 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuBuilder;
-import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuController;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class WptPtMenuController extends MenuController {
 
 	private WptPt wpt;
 	private MapMarker mapMarker;
 
-	public WptPtMenuController(@NonNull MenuBuilder menuBuilder,  @NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
+	public WptPtMenuController(@NonNull MenuBuilder menuBuilder, @NonNull MapActivity mapActivity,
+							   @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
 		super(menuBuilder, pointDescription, mapActivity);
 		this.wpt = wpt;
 		MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
@@ -37,11 +40,34 @@ public class WptPtMenuController extends MenuController {
 		if (mapMarker == null) {
 			mapMarker = markersHelper.getMapMarker(new LatLon(wpt.lat, wpt.lon));
 		}
+
+		TitleButtonController openTrackButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					GpxSelectionHelper selectionHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
+					SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedGPXFile(wpt);
+					if (selectedGpxFile != null) {
+						String path = selectedGpxFile.getGpxFile().path;
+						TrackMenuFragment.showInstance(mapActivity, path, selectedGpxFile.isShowCurrentTrack(), new LatLon(wpt.lon, wpt.lat));
+					}
+				}
+			}
+		};
+		openTrackButtonController.startIconId = R.drawable.ic_action_polygom_dark;
+		openTrackButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
+
 		if (mapMarker != null) {
-			MapMarkerMenuController markerMenuController =
-					new MapMarkerMenuController(mapActivity, mapMarker.getPointDescription(mapActivity), mapMarker);
+			PointDescription description = mapMarker.getPointDescription(mapActivity);
+			MapMarkerMenuController markerMenuController = new MapMarkerMenuController(mapActivity, description, mapMarker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
+
+			additionalButtonsControllers = new ArrayList<>();
+			additionalButtonsControllers.add(Pair.<TitleButtonController, TitleButtonController>create(openTrackButtonController, null));
+		} else {
+			leftTitleButtonController = openTrackButtonController;
 		}
 	}
 
@@ -143,10 +169,6 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	public static WptPtMenuController getInstance(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
-		WptPtMenuController controller = WikivoyageWptPtMenuController.getInstance(mapActivity, pointDescription, wpt);
-		if (controller == null) {
-			controller = new WptPtMenuController(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
-		}
-		return controller;
+		return new WptPtMenuController(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
 	}
 }

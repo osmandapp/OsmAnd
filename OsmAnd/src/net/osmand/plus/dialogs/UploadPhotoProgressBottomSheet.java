@@ -19,9 +19,9 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.mapcontextmenu.UploadPhotosAsyncTask.UploadPhotosListener;
+import net.osmand.plus.mapcontextmenu.UploadPhotosAsyncTask.UploadPhotosProgressListener;
 
-public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragment implements UploadPhotosListener {
+public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragment implements UploadPhotosProgressListener {
 
 	public static final String TAG = UploadPhotoProgressBottomSheet.class.getSimpleName();
 
@@ -103,7 +103,7 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 		return uploadingFinished ? R.string.shared_string_close : R.string.shared_string_cancel;
 	}
 
-	public static UploadPhotosListener showInstance(@NonNull FragmentManager fragmentManager, int maxProgress, OnDismissListener listener) {
+	public static UploadPhotosProgressListener showInstance(@NonNull FragmentManager fragmentManager, int maxProgress, OnDismissListener listener) {
 		UploadPhotoProgressBottomSheet fragment = new UploadPhotoProgressBottomSheet();
 		fragment.setRetainInstance(true);
 		fragment.setMaxProgress(maxProgress);

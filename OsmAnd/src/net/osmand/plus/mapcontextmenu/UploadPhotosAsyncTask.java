@@ -4,23 +4,20 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.UploadPhotoProgressBottomSheet;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.openplacereviews.OPRConstants;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
@@ -36,33 +33,27 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	private static final Log LOG = PlatformUtil.getLog(UploadPhotosAsyncTask.class);
 
-	private static final int MAX_IMAGE_LENGTH = 2048;
+	private static final int IMAGE_MAX_SIZE = 4096;
 
 	private final OsmandApplication app;
 	private final WeakReference<MapActivity> activityRef;
 	private final OpenDBAPI openDBAPI = new OpenDBAPI();
-	private final LatLon latLon;
 	private final List<Uri> data;
 	private final String[] placeId;
-	private final Map<String, String> params;
-	private final GetImageCardsListener imageCardListener;
-	private UploadPhotosListener listener;
+	private final UploadPhotosListener listener;
+	private UploadPhotosProgressListener progressListener;
 
-	public UploadPhotosAsyncTask(MapActivity activity, List<Uri> data, LatLon latLon, String[] placeId,
-								 Map<String, String> params, GetImageCardsListener imageCardListener) {
+	public UploadPhotosAsyncTask(MapActivity activity, List<Uri> data, String[] placeId, UploadPhotosListener listener) {
 		app = (OsmandApplication) activity.getApplicationContext();
 		activityRef = new WeakReference<>(activity);
 		this.data = data;
-		this.latLon = latLon;
-		this.params = params;
 		this.placeId = placeId;
-		this.imageCardListener = imageCardListener;
+		this.listener = listener;
 	}
 
 	@Override
@@ -70,7 +61,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			listener = UploadPhotoProgressBottomSheet.showInstance(manager, data.size(), new OnDismissListener() {
+			progressListener = UploadPhotoProgressBottomSheet.showInstance(manager, data.size(), new OnDismissListener() {
 				@Override
 				public void onDismiss(DialogInterface dialog) {
 					cancel(false);
@@ -81,8 +72,8 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	@Override
 	protected void onProgressUpdate(Integer... values) {
-		if (listener != null) {
-			listener.uploadPhotosProgressUpdate(values[0]);
+		if (progressListener != null) {
+			progressListener.uploadPhotosProgressUpdate(values[0]);
 		}
 	}
 
@@ -103,18 +94,19 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 
 	@Override
 	protected void onPostExecute(Void aVoid) {
-		if (listener != null) {
-			listener.uploadPhotosFinished();
+		if (progressListener != null) {
+			progressListener.uploadPhotosFinished();
 		}
 	}
 
 	private boolean handleSelectedImage(final Uri uri) {
 		boolean success = false;
 		InputStream inputStream = null;
+		int[] imageDimensions = null;
 		try {
 			inputStream = app.getContentResolver().openInputStream(uri);
 			if (inputStream != null) {
-				success = uploadImageToPlace(inputStream);
+				imageDimensions = calcImageDimensions(inputStream);
 			}
 		} catch (Exception e) {
 			LOG.error(e);
@@ -122,12 +114,32 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		} finally {
 			Algorithms.closeStream(inputStream);
 		}
+		if (imageDimensions != null && imageDimensions.length == 2) {
+			try {
+				inputStream = app.getContentResolver().openInputStream(uri);
+				if (inputStream != null) {
+					int width = imageDimensions[0];
+					int height = imageDimensions[1];
+					success = uploadImageToPlace(inputStream, width, height);
+				}
+			} catch (Exception e) {
+				LOG.error(e);
+				app.showToastMessage(R.string.cannot_upload_image);
+			} finally {
+				Algorithms.closeStream(inputStream);
+			}
+		}
 		return success;
 	}
 
-	private boolean uploadImageToPlace(InputStream image) {
+	private boolean uploadImageToPlace(InputStream image, int width, int height) {
 		boolean success = false;
-		InputStream serverData = new ByteArrayInputStream(compressImageToJpeg(image));
+		byte[] jpegImageBytes = compressImageToJpeg(image, width, height);
+		if (jpegImageBytes == null || jpegImageBytes.length == 0) {
+			app.showToastMessage(R.string.cannot_upload_image);
+			return false;
+		}
+		InputStream serverData = new ByteArrayInputStream(jpegImageBytes);
 		String baseUrl = OPRConstants.getBaseUrl(app);
 		// all these should be constant
 		String url = baseUrl + "api/ipfs/image";
@@ -156,13 +168,9 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 				checkTokenAndShowScreen();
 			} else {
 				success = true;
-				String str = app.getString(R.string.successfully_uploaded_pattern, 1, 1);
-				app.showToastMessage(str);
 				//refresh the image
-
-				MapActivity activity = activityRef.get();
-				if (activity != null) {
-					MenuBuilder.execute(new GetImageCardsTask(activity, latLon, params, imageCardListener));
+				if (listener != null) {
+					listener.uploadPhotosSuccess(response);
 				}
 			}
 		} else {
@@ -191,36 +199,55 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		}
 	}
 
-	private byte[] compressImageToJpeg(InputStream image) {
+	private int[] calcImageDimensions(InputStream image) {
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
-		Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		int h = bmp.getHeight();
-		int w = bmp.getWidth();
-		boolean scale = false;
-		while (w > MAX_IMAGE_LENGTH || h > MAX_IMAGE_LENGTH) {
-			w = w / 2;
-			h = h / 2;
-			scale = true;
-		}
-		if (scale) {
-			Matrix matrix = new Matrix();
-			matrix.postScale(w, h);
-			Bitmap resizedBitmap = Bitmap.createBitmap(
-					bmp, 0, 0, w, h, matrix, false);
-			bmp.recycle();
-			bmp = resizedBitmap;
-		}
-		bmp.compress(Bitmap.CompressFormat.JPEG, 90, os);
-		return os.toByteArray();
+		BitmapFactory.Options opts = new BitmapFactory.Options();
+		opts.inJustDecodeBounds = true;
+		BitmapFactory.decodeStream(bufferedInputStream, null, opts);
+		return new int[] { opts.outWidth, opts.outHeight };
 	}
 
+	@Nullable
+	private byte[] compressImageToJpeg(InputStream image, int width, int height) {
+		BufferedInputStream bufferedInputStream = new BufferedInputStream(image);
+		int w = width;
+		int h = height;
+		boolean scale = false;
+		int divider = 1;
+		while (w > IMAGE_MAX_SIZE || h > IMAGE_MAX_SIZE) {
+			w /= 2;
+			h /= 2;
+			divider *= 2;
+			scale = true;
+		}
+		Bitmap bmp;
+		if (scale) {
+			BitmapFactory.Options opts = new BitmapFactory.Options();
+			opts.inSampleSize = divider;
+			bmp = BitmapFactory.decodeStream(bufferedInputStream, null, opts);
+		} else {
+			bmp = BitmapFactory.decodeStream(bufferedInputStream);
+		}
+		if (bmp != null) {
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			bmp.compress(Bitmap.CompressFormat.JPEG, 90, os);
+			return os.toByteArray();
+		} else {
+			return null;
+		}
+	}
 
-	public interface UploadPhotosListener {
+	public interface UploadPhotosProgressListener {
 
 		void uploadPhotosProgressUpdate(int progress);
 
 		void uploadPhotosFinished();
+
+	}
+
+	public interface UploadPhotosListener {
+
+		void uploadPhotosSuccess(String response);
 
 	}
 }

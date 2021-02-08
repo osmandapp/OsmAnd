@@ -63,11 +63,11 @@ public class LocationServiceHelperImpl extends LocationServiceHelper {
 
 				// Sets the fastest rate for active location updates. This interval is exact, and your
 				// application will never receive updates more frequently than this value.
-				.setFastestInterval(50)
+				//.setFastestInterval(50)
 
 				// Sets the maximum time when batched location updates are delivered. Updates may be
 				// delivered sooner than this interval.
-				.setMaxWaitTime(200)
+				.setMaxWaitTime(0)
 
 				.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 

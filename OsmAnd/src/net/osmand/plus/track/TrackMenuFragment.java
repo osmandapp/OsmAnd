@@ -312,7 +312,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 				headerContainer.addView(overviewCard.getView());
 			} else {
-				overviewCard = new OverviewCard(getMapActivity(), displayHelper, this);
+				overviewCard = new OverviewCard(getMapActivity(), displayHelper, this, selectedGpxFile);
 				overviewCard.setListener(this);
 				headerContainer.addView(overviewCard.build(getMapActivity()));
 			}
@@ -890,8 +890,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private void updateMenuState() {
 		if (menuType == TrackMenuType.OPTIONS) {
 			openMenuFullScreen();
-		} else if (menuType == TrackMenuType.OVERVIEW) {
-			openMenuHeaderOnly();
 		} else {
 			openMenuHalfScreen();
 		}
@@ -899,6 +897,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public void updateContent() {
+		if (overviewCard != null) {
+			overviewCard.updateContent();
+		}
 		if (segmentsCard != null) {
 			segmentsCard.updateContent();
 		}
@@ -1098,7 +1099,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
-			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording);
+			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording, null);
 		} else {
 			Bundle bundle = new Bundle();
 			bundle.putString(TRACK_FILE_NAME, path);
@@ -1108,7 +1109,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	public static void showInstance(@NonNull final MapActivity mapActivity, @Nullable String path, boolean showCurrentTrack) {
+	public static void showInstance(@NonNull final MapActivity mapActivity, @Nullable String path,
+									boolean showCurrentTrack, @Nullable final LatLon latLon) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		SelectedGpxFile selectedGpxFile;
 		if (showCurrentTrack) {
@@ -1117,7 +1119,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
 		}
 		if (selectedGpxFile != null) {
-			showInstance(mapActivity, selectedGpxFile, null);
+			showInstance(mapActivity, selectedGpxFile, latLon);
 		} else if (!Algorithms.isEmpty(path)) {
 			String title = app.getString(R.string.loading_smth, "");
 			final ProgressDialog progress = ProgressDialog.show(mapActivity, title, app.getString(R.string.loading_data));
@@ -1130,7 +1132,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (mapActivity != null) {
 						OsmandApplication app = mapActivity.getMyApplication();
 						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(result, true, false);
-						showInstance(mapActivity, selectedGpxFile, null);
+						if (selectedGpxFile != null) {
+							showInstance(mapActivity, selectedGpxFile, latLon);
+						}
 					}
 					if (progress != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 						progress.dismiss();
@@ -1142,7 +1146,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, SelectedGpxFile selectedGpxFile, @Nullable LatLon latLon) {
+	public static boolean showInstance(@NonNull MapActivity mapActivity, @NonNull SelectedGpxFile selectedGpxFile, @Nullable LatLon latLon) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);

@@ -2,73 +2,46 @@ package net.osmand.plus.track;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.widgets.TextViewEx;
-import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
 import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.OverviewCard.StatBlock.ItemType.*;
 
 public class OverviewCard extends BaseCard {
 
-	private RecyclerView rvOverview;
 	private View showButton;
 	private View appearanceButton;
 	private View editButton;
 	private View directionsButton;
-
-	private final TrackDisplayHelper displayHelper;
-	private final GPXFile gpxFile;
-	private final GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
-	private final SegmentActionsListener listener;
-	private boolean gpxFileSelected;
-	private GpxDisplayItem gpxItem;
+	private final SegmentActionsListener actionsListener;
+	private final SelectedGpxFile selectedGpxFile;
+	private final GpxBlockStatisticsBuilder blockStatisticsBuilder;
 
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull TrackDisplayHelper displayHelper,
-						@NonNull SegmentActionsListener listener) {
+						@NonNull SegmentActionsListener actionsListener, SelectedGpxFile selectedGpxFile) {
 		super(mapActivity);
-		this.displayHelper = displayHelper;
-		this.listener = listener;
-		gpxFile = displayHelper.getGpx();
-		gpxFileSelected = isGpxFileSelected(app, gpxFile);
-		List<GpxDisplayGroup> groups = displayHelper.getOriginalGroups(filterTypes);
-		if (!Algorithms.isEmpty(groups)) {
-			gpxItem = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes)).get(0);
-		}
+		this.actionsListener = actionsListener;
+		this.selectedGpxFile = selectedGpxFile;
+		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, displayHelper);
 	}
 
 	@Override
@@ -80,13 +53,15 @@ public class OverviewCard extends BaseCard {
 	protected void updateContent() {
 		int iconColorDef = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
 		int iconColorPres = R.color.active_buttons_and_links_text_dark;
+		GPXFile gpxFile = getGPXFile();
 		boolean fileAvailable = gpxFile.path != null && !gpxFile.showCurrentTrack;
 
 		showButton = view.findViewById(R.id.show_button);
 		appearanceButton = view.findViewById(R.id.appearance_button);
 		editButton = view.findViewById(R.id.edit_button);
 		directionsButton = view.findViewById(R.id.directions_button);
-		rvOverview = view.findViewById(R.id.recycler_overview);
+		RecyclerView blocksView = view.findViewById(R.id.recycler_overview);
+		blockStatisticsBuilder.setBlocksView(blocksView);
 
 		initShowButton(iconColorDef, iconColorPres);
 		initAppearanceButton(iconColorDef, iconColorPres);
@@ -94,51 +69,16 @@ public class OverviewCard extends BaseCard {
 			initEditButton(iconColorDef, iconColorPres);
 			initDirectionsButton(iconColorDef, iconColorPres);
 		}
-		initStatBlocks();
+		blockStatisticsBuilder.initStatBlocks(actionsListener, getActiveColor(), nightMode);
 	}
 
-	void initStatBlocks() {
-		if (gpxItem != null) {
-			GPXTrackAnalysis analysis = gpxItem.analysis;
-			boolean joinSegments = displayHelper.isJoinSegments();
-			float totalDistance = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-			float timeSpan = !joinSegments && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
-			String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-			String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
-			String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-			String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
-			List<StatBlock> items = new ArrayList<>();
-
-			StatBlock.prepareData(analysis, items, app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
-					R.drawable.ic_action_track_16, R.color.icon_color_default_light, GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED, ITEM_DISTANCE);
-			StatBlock.prepareData(analysis, items, app.getString(R.string.altitude_ascent), asc,
-					R.drawable.ic_action_arrow_up_16, R.color.gpx_chart_red, GPXDataSetType.SLOPE, null, ITEM_ALTITUDE);
-			StatBlock.prepareData(analysis, items, app.getString(R.string.altitude_descent), desc,
-					R.drawable.ic_action_arrow_down_16, R.color.gpx_pale_green, GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE, ITEM_ALTITUDE);
-			StatBlock.prepareData(analysis, items, app.getString(R.string.average_speed), avg,
-					R.drawable.ic_action_speed_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null, ITEM_SPEED);
-			StatBlock.prepareData(analysis, items, app.getString(R.string.max_speed), max,
-					R.drawable.ic_action_max_speed_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null, ITEM_SPEED);
-			StatBlock.prepareData(analysis, items, app.getString(R.string.shared_string_time_span),
-					Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()),
-					R.drawable.ic_action_time_span_16, R.color.icon_color_default_light, GPXDataSetType.SPEED, null, ITEM_TIME);
-
-			if (Algorithms.isEmpty(items)) {
-				AndroidUiHelper.updateVisibility(rvOverview, false);
-			} else {
-				final StatBlockAdapter sbAdapter = new StatBlockAdapter(items);
-				rvOverview.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
-				rvOverview.setAdapter(sbAdapter);
-			}
-		} else {
-			AndroidUiHelper.updateVisibility(rvOverview, false);
-		}
+	private GPXFile getGPXFile() {
+		return selectedGpxFile.getGpxFile();
 	}
 
 	@DrawableRes
 	private int getActiveShowHideIcon() {
-		gpxFileSelected = isGpxFileSelected(app, gpxFile);
-		return gpxFileSelected ? R.drawable.ic_action_view : R.drawable.ic_action_hide;
+		return isGpxFileSelected(app, getGPXFile()) ? R.drawable.ic_action_view : R.drawable.ic_action_hide;
 	}
 
 	private void initShowButton(final int iconColorDef, final int iconColorPres) {
@@ -206,136 +146,5 @@ public class OverviewCard extends BaseCard {
 				return false;
 			}
 		});
-	}
-
-	private class StatBlockAdapter extends RecyclerView.Adapter<StatBlockViewHolder> {
-
-		private final List<StatBlock> statBlocks;
-
-		public StatBlockAdapter(List<StatBlock> StatBlocks) {
-			this.statBlocks = StatBlocks;
-		}
-
-		@Override
-		public int getItemCount() {
-			return statBlocks.size();
-		}
-
-		@NonNull
-		@Override
-		public StatBlockViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-			View itemView = LayoutInflater.from(parent.getContext())
-					.inflate(R.layout.item_gpx_stat_block, parent, false);
-			return new StatBlockViewHolder(itemView);
-		}
-
-		@Override
-		public void onBindViewHolder(StatBlockViewHolder holder, int position) {
-			final StatBlock item = statBlocks.get(position);
-			holder.valueText.setText(item.value);
-			holder.titleText.setText(item.title);
-			holder.valueText.setTextColor(getActiveColor());
-			holder.titleText.setTextColor(app.getResources().getColor(R.color.text_color_secondary_light));
-			holder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (gpxItem != null && gpxItem.analysis != null) {
-						ArrayList<GPXDataSetType> list = new ArrayList<>();
-						if (gpxItem.analysis.hasElevationData || gpxItem.analysis.isSpeedSpecified() || gpxItem.analysis.hasSpeedData) {
-							if (item.firstType != null) {
-								list.add(item.firstType);
-							}
-							if (item.secondType != null) {
-								list.add(item.secondType);
-							}
-						}
-						gpxItem.chartTypes = list.size() > 0 ? list.toArray(new GPXDataSetType[0]) : null;
-						gpxItem.locationOnMap = gpxItem.locationStart;
-
-						listener.openAnalyzeOnMap(gpxItem);
-					}
-				}
-			});
-			setImageDrawable(holder.imageView, item.imageResId, item.imageColorId);
-			AndroidUtils.setBackgroundColor(view.getContext(), holder.divider, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
-			AndroidUiHelper.updateVisibility(holder.divider, position != statBlocks.size() - 1);
-		}
-	}
-
-	private static class StatBlockViewHolder extends RecyclerView.ViewHolder {
-
-		private final TextViewEx valueText;
-		private final TextView titleText;
-		private final AppCompatImageView imageView;
-		private final View divider;
-
-		StatBlockViewHolder(View view) {
-			super(view);
-			valueText = view.findViewById(R.id.value);
-			titleText = view.findViewById(R.id.title);
-			imageView = view.findViewById(R.id.image);
-			divider = view.findViewById(R.id.divider);
-		}
-	}
-
-	protected static class StatBlock {
-
-		private final String title;
-		private final String value;
-		private final int imageResId;
-		private final int imageColorId;
-		private final GPXDataSetType firstType;
-		private final GPXDataSetType secondType;
-		private final ItemType itemType;
-
-		public StatBlock(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId,
-						 GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
-			this.title = title;
-			this.value = value;
-			this.imageResId = imageResId;
-			this.imageColorId = imageColorId;
-			this.firstType = firstType;
-			this.secondType = secondType;
-			this.itemType = itemType;
-		}
-
-		public static void prepareData(GPXTrackAnalysis analysis, List<StatBlock> listItems, String title,
-									   String value, @DrawableRes int imageResId, @ColorRes int imageColorId,
-									   GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
-			StatBlock statBlock = new StatBlock(title, value, imageResId, imageColorId, firstType, secondType, itemType);
-			switch (statBlock.itemType) {
-				case ITEM_DISTANCE: {
-					if (analysis.totalDistance != 0f) {
-						listItems.add(statBlock);
-					}
-					break;
-				}
-				case ITEM_ALTITUDE: {
-					if (analysis.hasElevationData) {
-						listItems.add(statBlock);
-					}
-					break;
-				}
-				case ITEM_SPEED: {
-					if (analysis.isSpeedSpecified()) {
-						listItems.add(statBlock);
-					}
-					break;
-				}
-				case ITEM_TIME: {
-					if (analysis.hasSpeedData) {
-						listItems.add(statBlock);
-					}
-					break;
-				}
-			}
-		}
-
-		public enum ItemType {
-			ITEM_DISTANCE,
-			ITEM_ALTITUDE,
-			ITEM_SPEED,
-			ITEM_TIME;
-		}
 	}
 }

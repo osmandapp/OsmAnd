@@ -1,7 +1,6 @@
 package net.osmand.plus.track;
 
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +86,6 @@ public class GpxBlockStatisticsBuilder {
 		updatingStats = new Runnable() {
 			@Override
 			public void run() {
-				Log.d("BlockStatisticsBuilder", "run: working");
 				if (bsAdapter != null) {
 					initItems();
 					bsAdapter.setItems(items);
@@ -168,7 +166,6 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public class StatBlock {
-
 		private final String title;
 		private final String value;
 		private final int imageResId;

@@ -69,10 +69,10 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		messageField = sendGpxView.findViewById(R.id.message_field);
 
 		TextView accountName = sendGpxView.findViewById(R.id.user_name);
-		if (!Algorithms.isEmpty(settings.USER_DISPLAY_NAME.get())) {
-			accountName.setText(settings.USER_DISPLAY_NAME.get());
+		if (!Algorithms.isEmpty(settings.OSM_USER_DISPLAY_NAME.get())) {
+			accountName.setText(settings.OSM_USER_DISPLAY_NAME.get());
 		} else {
-			accountName.setText(settings.USER_NAME.get());
+			accountName.setText(settings.OSM_USER_NAME.get());
 		}
 
 		String fileName = gpxInfos[0].getFileName();

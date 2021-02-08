@@ -1,10 +1,6 @@
 package net.osmand.binary;
 
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntLongHashMap;
-import gnu.trove.set.hash.TLongHashSet;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +8,14 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.WireFormat;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntLongHashMap;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -26,11 +30,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.WireFormat;
-
 public class BinaryMapPoiReaderAdapter {
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapPoiReaderAdapter.class);
 
@@ -38,7 +37,7 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int CATEGORY_MASK = (1 << SHIFT_BITS_CATEGORY) - 1;
 	private static final int ZOOM_TO_SKIP_FILTER_READ = 6;
 	private static final int ZOOM_TO_SKIP_FILTER = 3;
-	private static final int BUCKET_SEARCH_BY_NAME = 5;
+	private static final int BUCKET_SEARCH_BY_NAME = 15; // should be bigger 100? 
 
 	public static class PoiSubType {
 		public boolean text;
@@ -332,7 +331,7 @@ public class BinaryMapPoiReaderAdapter {
 					});
 					int p = BUCKET_SEARCH_BY_NAME * 3;
 					if (p < offKeys.length) {
-						for (int i = p + BUCKET_SEARCH_BY_NAME; ; i += BUCKET_SEARCH_BY_NAME) {
+						for (int i = p + BUCKET_SEARCH_BY_NAME;; i += BUCKET_SEARCH_BY_NAME) {
 							if (i > offKeys.length) {
 								Arrays.sort(offKeys, p, offKeys.length);
 								break;
@@ -343,7 +342,6 @@ public class BinaryMapPoiReaderAdapter {
 						}
 					}
 				}
-
 
 				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
 						"ms. Found " + offKeys.length + " subtrees");
@@ -370,7 +368,8 @@ public class BinaryMapPoiReaderAdapter {
 
 	private TIntLongHashMap readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
-		TIntArrayList dataOffsets = null;
+		List<TIntArrayList> listOffsets = null;
+		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
 		int offset = 0;
 		while (true) {
 			int t = codedIS.readTag();
@@ -381,24 +380,51 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER: {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
-				dataOffsets = new TIntArrayList();
 				offset = codedIS.getTotalBytesRead();
-				map.readIndexedStringTable(instance, query, "", dataOffsets, 0);
+				List<String> queries = new ArrayList<>();
+				for (String word : query.split(" ")) {
+					if (word.trim().length() > 0) {
+						queries.add(word.trim());
+					}
+				}
+				TIntArrayList charsList = new TIntArrayList(queries.size());
+				listOffsets = new ArrayList<TIntArrayList>(queries.size());
+				while(listOffsets.size() < queries.size()) {
+					charsList.add(0);
+					listOffsets.add(new TIntArrayList());
+				}
+				map.readIndexedStringTable(instance, queries, "", listOffsets, charsList);
 				codedIS.popLimit(oldLimit);
 				break;
 			}
 			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER: {
-				if (dataOffsets != null) {
-					dataOffsets.sort(); // 1104125
-					for (int i = 0; i < dataOffsets.size(); i++) {
-						codedIS.seek(dataOffsets.get(i) + offset);
-						int len = codedIS.readRawVarint32();
-						int oldLim = codedIS.pushLimit(len);
-						readPoiNameIndexData(offsets, req);
-						codedIS.popLimit(oldLim);
-						if (req.isCancelled()) {
-							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-							return offsets;
+				if (listOffsets != null) {
+					for (TIntArrayList dataOffsets : listOffsets) {
+						TIntLongHashMap offsetMap = new TIntLongHashMap();
+						listOfSepOffsets.add(offsetMap);
+						dataOffsets.sort(); // 1104125
+						for (int i = 0; i < dataOffsets.size(); i++) {
+							codedIS.seek(dataOffsets.get(i) + offset);
+							int len = codedIS.readRawVarint32();
+							int oldLim = codedIS.pushLimit(len);
+							readPoiNameIndexData(offsetMap, req);
+							codedIS.popLimit(oldLim);
+							if (req.isCancelled()) {
+								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+								return offsets;
+							}
+						}
+					}
+				}
+				if (listOfSepOffsets.size() > 0) {
+					offsets.putAll(listOfSepOffsets.get(0));
+					for (int j = 1; j < listOfSepOffsets.size(); j++) {
+						TIntLongHashMap mp = listOfSepOffsets.get(j);
+						// offsets.retainAll(mp); -- calculate intresection of mp & offsets
+						for (int chKey : offsets.keys()) {
+							if (!mp.containsKey(chKey)) {
+								offsets.remove(chKey);
+							}
 						}
 					}
 				}
