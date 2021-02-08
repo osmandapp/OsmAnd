@@ -4030,7 +4030,7 @@
     <string name="select_folder">تحديد مجلد</string>
     <string name="select_folder_descr">تحديد مجلد أو إضافة واحد جديد</string>
     <string name="shared_string_empty">فارغ</string>
-    <string name="analyze_by_intervals">التحليل حسب الفواصل الزمنية (الفاصل الزمني)</string>
+    <string name="analyze_by_intervals">تحليل حسب الفاصل الزمني</string>
     <string name="upload_to_openstreetmap">رفع إلى خريطة الشارع المفتوح</string>
     <string name="edit_track">تحرير المسار</string>
     <string name="rename_track">تسمية المسار</string>
