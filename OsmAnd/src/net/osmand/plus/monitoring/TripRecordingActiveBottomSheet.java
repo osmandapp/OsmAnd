@@ -6,13 +6,17 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
+import android.text.format.DateUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,10 +29,15 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -36,15 +45,24 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
+import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
+
+import java.lang.ref.WeakReference;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
@@ -65,6 +83,44 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	private final Handler handler = new Handler();
 	private Runnable updatingGPS;
 
+	SaveGpxAsyncTask.SaveGpxListener saveGpxListener = new SaveGpxAsyncTask.SaveGpxListener() {
+
+		@Override
+		public void gpxSavingStarted() {
+
+		}
+
+		@Override
+		public void gpxSavingFinished(Exception errorMessage) {
+			String gpxFileName = Algorithms.getFileWithoutDirs(app.getSavingTrackHelper().getCurrentTrack().getGpxFile().path);
+			final MapActivity mapActivity = getMapActivity();
+			final Context context = getContext();
+			SavingTrackHelper helper = app.getSavingTrackHelper();
+			final SavingTrackHelper.SaveGpxResult result = helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
+			if (mapActivity != null && context != null) {
+				Snackbar snackbar = Snackbar.make(mapActivity.getLayout(),
+						getString(R.string.shared_string_file_is_saved, gpxFileName),
+						Snackbar.LENGTH_LONG)
+						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+								final FragmentActivity fragmentActivity = mapActivityRef.get();
+								SaveGPXBottomSheetFragment.showInstance(fragmentActivity.getSupportFragmentManager(), result.getFilenames());
+							}
+						});
+				View view = snackbar.getView();
+				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+				params.gravity = Gravity.TOP;
+				AndroidUtils.setMargins(params, 0, AndroidUtils.getStatusBarHeight(context), 0, 0);
+				view.setLayoutParams(params);
+				UiUtilities.setupSnackbar(snackbar, nightMode);
+				snackbar.show();
+			}
+		}
+
+	};
+
 	public void setSelectedGpxFile(SelectedGpxFile selectedGpxFile) {
 		this.selectedGpxFile = selectedGpxFile;
 	}
@@ -81,16 +137,45 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		this.searchingGPS = searchingGPS;
 	}
 
+	public static void showInstance(@NonNull FragmentManager fragmentManager, SelectedGpxFile selectedGpxFile,
+									boolean wasTrackMonitored, boolean hasDataToSave, boolean searchingGPS) {
+		if (!fragmentManager.isStateSaved()) {
+			TripRecordingActiveBottomSheet fragment = new TripRecordingActiveBottomSheet();
+			fragment.setSelectedGpxFile(selectedGpxFile);
+			fragment.setWasTrackMonitored(wasTrackMonitored);
+			fragment.setHasDataToSave(hasDataToSave);
+			fragment.setSearchingGPS(searchingGPS);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 		settings = app.getSettings();
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
+		final FragmentManager fragmentManager = getFragmentManager();
+		final Fragment targetFragment = getTargetFragment();
 
 		View itemView = inflater.inflate(R.layout.trip_recording_active_fragment, null, false);
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setCustomView(itemView)
 				.create());
+
+		long timeTrackSaved = app.getSavingTrackHelper().getLastTimeUpdated();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z");
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		Date resultDate = new Date(timeTrackSaved);
+		String sdfFormatted = sdf.format(resultDate);
+		CharSequence formattedTimeTrackSaved = null;
+		try {
+			long time = sdf.parse(sdfFormatted).getTime();
+			long now = System.currentTimeMillis();
+			formattedTimeTrackSaved =
+					DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		View buttonClear = itemView.findViewById(R.id.button_clear);
 		View buttonStart = itemView.findViewById(R.id.button_start);
@@ -100,7 +185,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 		createItem(buttonClear, ItemType.CLEAR_DATA, hasDataToSave, null);
 		createItem(buttonStart, ItemType.START_SEGMENT, wasTrackMonitored, null);
-		createItem(buttonSave, ItemType.SAVE, hasDataToSave, "...");
+		createItem(buttonSave, ItemType.SAVE, hasDataToSave, (String) formattedTimeTrackSaved);
 		createItem(buttonPause, wasTrackMonitored ? ItemType.PAUSE : ItemType.RESUME, true, null);
 		createItem(buttonStop, ItemType.STOP, true, null);
 
@@ -177,6 +262,32 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 				app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), checked, false);
 				setShowOnMapBackgroundInactive(basicItemBody, app, checked, nightMode);
 				createItem(additionalButton, ItemType.APPEARANCE, checked, null);
+			}
+		});
+
+		buttonSave.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final GPXUtilities.GPXFile gpxFile = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
+				new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			}
+		});
+
+		buttonStop.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (fragmentManager != null) {
+					StopTrackRecordingBottomFragment.showInstance(fragmentManager, targetFragment);
+				}
+			}
+		});
+
+		buttonClear.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (fragmentManager != null) {
+					ClearRecordedDataBottomSheetFragment.showInstance(fragmentManager, targetFragment);
+				}
 			}
 		});
 	}
@@ -420,17 +531,5 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	@Override
 	protected boolean useVerticalButtons() {
 		return true;
-	}
-
-	public static void showInstance(@NonNull FragmentManager fragmentManager, SelectedGpxFile selectedGpxFile,
-									boolean wasTrackMonitored, boolean hasDataToSave, boolean searchingGPS) {
-		if (!fragmentManager.isStateSaved()) {
-			TripRecordingActiveBottomSheet fragment = new TripRecordingActiveBottomSheet();
-			fragment.setSelectedGpxFile(selectedGpxFile);
-			fragment.setWasTrackMonitored(wasTrackMonitored);
-			fragment.setHasDataToSave(hasDataToSave);
-			fragment.setSearchingGPS(searchingGPS);
-			fragment.show(fragmentManager, TAG);
-		}
 	}
 }

@@ -13,6 +13,10 @@
 -->
 
     <string name="on_pause">On pause</string>
+    <string name="track_recording_description">Are you sure you want to stop recording?\nAll unsaved data will be lost.</string>
+    <string name="track_recording_title">Track recording stopped</string>
+    <string name="track_recording_save_and_stop">Save and stop recording</string>
+    <string name="track_recording_stop_without_saving">Stop without saving</string>
     <string name="login_open_place_reviews">Login to OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
