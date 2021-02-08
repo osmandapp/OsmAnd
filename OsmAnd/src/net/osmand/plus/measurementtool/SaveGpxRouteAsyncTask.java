@@ -10,11 +10,11 @@ import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Metadata;
 import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.GPXUtilities.Metadata;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -104,6 +104,10 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
                 MeasurementToolFragment.showGpxOnMap(app, gpx, false);
             }
         }
+        if (res == null) {
+            savedGpxFile.addGeneralTrack();
+        }
+
         return res;
     }
 
