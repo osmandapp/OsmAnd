@@ -828,7 +828,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	protected void onHeaderClick() {
-		updateMenuState();
+		if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
+			updateMenuState();
+		}
 	}
 
 	private void adjustMapPosition(int y) {
