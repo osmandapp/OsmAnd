@@ -8,8 +8,10 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
@@ -69,9 +72,10 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		public void gpxSavingFinished(Exception errorMessage) {
 			String gpxFileName = Algorithms.getFileWithoutDirs(app.getSavingTrackHelper().getCurrentTrack().getGpxFile().path);
 			final MapActivity mapActivity = getMapActivity();
+			final Context context = getContext();
 			SavingTrackHelper helper = app.getSavingTrackHelper();
 			final SavingTrackHelper.SaveGpxResult result = helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
-			if (mapActivity != null) {
+			if (mapActivity != null && context != null) {
 				Snackbar snackbar = Snackbar.make(mapActivity.getLayout(),
 						getString(R.string.shared_string_file_is_saved, gpxFileName),
 						Snackbar.LENGTH_LONG)
@@ -83,9 +87,13 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 								SaveGPXBottomSheetFragment.showInstance(fragmentActivity.getSupportFragmentManager(), result.getFilenames());
 							}
 						});
+				View view = snackbar.getView();
+				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+				params.gravity = Gravity.TOP;
+				AndroidUtils.setMargins(params, 0, AndroidUtils.getStatusBarHeight(context), 0, 0);
+				view.setLayoutParams(params);
 				UiUtilities.setupSnackbar(snackbar, nightMode);
 				snackbar.show();
-				dismiss();
 			}
 		}
 
@@ -309,6 +317,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		START_SEGMENT(R.string.gpx_start_new_segment, R.drawable.ic_action_new_segment),
 		SAVE(R.string.shared_string_save, R.drawable.ic_action_save_to_file),
 		PAUSE(R.string.shared_string_pause, R.drawable.ic_pause),
+		RESUME(R.string.shared_string_pause, R.drawable.ic_play_dark),
 		STOP(R.string.shared_string_control_stop, R.drawable.ic_action_rec_stop);
 
 		@StringRes
