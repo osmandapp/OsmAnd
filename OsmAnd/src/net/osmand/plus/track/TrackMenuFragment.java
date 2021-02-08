@@ -312,7 +312,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 				headerContainer.addView(overviewCard.getView());
 			} else {
-				overviewCard = new OverviewCard(getMapActivity(), displayHelper, this);
+				overviewCard = new OverviewCard(getMapActivity(), displayHelper, this, selectedGpxFile);
 				overviewCard.setListener(this);
 				headerContainer.addView(overviewCard.build(getMapActivity()));
 			}
@@ -897,6 +897,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public void updateContent() {
+		if (overviewCard != null) {
+			overviewCard.updateContent();
+		}
 		if (segmentsCard != null) {
 			segmentsCard.updateContent();
 		}
