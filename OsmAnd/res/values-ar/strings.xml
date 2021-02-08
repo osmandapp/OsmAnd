@@ -4074,4 +4074,13 @@
     <string name="uploading_count">رفع %1$d من %2$d</string>
     <string name="uploaded_count">تم رفع %1$d من %2$d</string>
     <string name="toast_select_edits_for_upload">تحديد التعديلات للتحميل</string>
+    <string name="hillshade_slope_contour_lines">التضاريس / الانحدار / الخطوط المحيطية</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews هو مشروع يحركه المجتمع حول الأماكن العامة مثل المطاعم والفنادق والمتاحف ونقاط الطريق. يقوم بجمع جميع المعلومات العامة المتعلقة بهم مثل الصور والتعليقات والروابط إلى ارتباط الأنظمة الأخرى OpenStreetMap و Wikipedia.
+\n
+\nجميع بيانات OpenPlaceReview مفتوحة ومتاحة للجميع: http://openplacereviews.org/data.
+\n
+\nيمكنك قراءة المزيد على: http://openplacereviews.org</string>
+    <string name="open_place_reviews">مراجعات الأمكنة</string>
+    <string name="opr_use_dev_url">استخدام test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">الدخول إلى OpenPlaceReviews</string>
 </resources>
