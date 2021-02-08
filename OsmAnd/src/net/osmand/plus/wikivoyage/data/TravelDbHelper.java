@@ -174,9 +174,9 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@Override
-	public void initializeDataToDisplay(boolean showMore) {
+	public void initializeDataToDisplay() {
 		localDataHelper.refreshCachedData();
-		loadPopularArticles(showMore);
+		loadPopularArticles();
 	}
 
 
@@ -283,7 +283,7 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@NonNull
-	public List<TravelArticle> loadPopularArticles(boolean showMore) {
+	public List<TravelArticle> loadPopularArticles() {
 		String language = application.getLanguage();
 		SQLiteConnection conn = openConnection();
 		if (conn == null) {

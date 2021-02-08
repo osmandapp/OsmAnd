@@ -191,7 +191,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			travelButtonCard.setListener(new TravelNeededMapsCard.CardListener() {
 				@Override
 				public void onPrimaryButtonClick() {
-					new LoadWikivoyageData(ExploreTabFragment.this.getExploreActivity(), true).execute();
+					if (activity instanceof WikivoyageExploreActivity) {
+						new LoadWikivoyageData((WikivoyageExploreActivity) activity).execute();
+					}
 				}
 
 				@Override

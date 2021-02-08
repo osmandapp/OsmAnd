@@ -17,6 +17,7 @@ public interface TravelHelper {
 
 	interface GpxReadCallback {
 		void onGpxFileReading();
+
 		void onGpxFileRead(@Nullable GPXFile gpxFile);
 	}
 
@@ -24,7 +25,7 @@ public interface TravelHelper {
 
 	void initializeDataOnAppStartup();
 
-	void initializeDataToDisplay(boolean showMore);
+	void initializeDataToDisplay();
 
 	boolean isAnyTravelBookPresent();
 
@@ -35,7 +36,7 @@ public interface TravelHelper {
 	List<TravelArticle> getPopularArticles();
 
 	@NonNull
-	List<TravelArticle> loadPopularArticles(boolean showMore);
+	List<TravelArticle> loadPopularArticles();
 
 	@NonNull
 	Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(@NonNull TravelArticle article);

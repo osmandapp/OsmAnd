@@ -100,13 +100,13 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Override
-	public void initializeDataToDisplay(boolean showMore) {
+	public void initializeDataToDisplay() {
 		localDataHelper.refreshCachedData();
-		loadPopularArticles(showMore);
+		loadPopularArticles();
 	}
 
 	@NonNull
-	public synchronized List<TravelArticle> loadPopularArticles(boolean showMore) {
+	public synchronized List<TravelArticle> loadPopularArticles() {
 		String lang = app.getLanguage();
 		List<TravelArticle> popularArticles = new ArrayList<>();
 		if (amenities.size() - count < MAX_POPULAR_ARTICLES_COUNT) {
@@ -123,9 +123,13 @@ public class TravelObfHelper implements TravelHelper {
 				Collections.sort(amenities, new Comparator<Pair<File, Amenity>>() {
 					@Override
 					public int compare(Pair article1, Pair article2) {
-						int d1 = (int) (MapUtils.getDistance(((Amenity) article1.second).getLocation(), location));
-						int d2 = (int) (MapUtils.getDistance(((Amenity) article2.second).getLocation(), location));
-						return d1 < d2 ? -1 : (d1 == d2 ? 0 : 1);
+						Amenity amenity1 = (Amenity) article1.second;
+						double d1 = MapUtils.getDistance(amenity1.getLocation(), location)
+								/ (ROUTE_ARTICLE.equals(amenity1.getSubType()) ? 5 : 1);
+						Amenity amenity2 = (Amenity) article2.second;
+						double d2 = MapUtils.getDistance(amenity2.getLocation(), location)
+								/ (ROUTE_ARTICLE.equals(amenity2.getSubType()) ? 5 : 1);
+						return Double.compare(d1, d2);
 					}
 				});
 			}
