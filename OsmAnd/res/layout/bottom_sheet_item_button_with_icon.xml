@@ -34,7 +34,6 @@
 				android:layout_height="wrap_content"
 				android:duplicateParentState="true"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:letterSpacing="@dimen/description_letter_spacing"
 				osmand:typeface="@string/font_roboto_medium"
 				tools:text="Title"
 				tools:textColor="@color/text_color_secondary_light" />
@@ -47,7 +46,7 @@
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/default_desc_text_size"
 				android:visibility="gone"
-				osmand:letterSpacing="@dimen/description_letter_spacing"
+				android:letterSpacing="@dimen/description_letter_spacing"
 				osmand:typeface="@string/font_roboto_medium"
 				tools:text="Description"
 				tools:visibility="visible" />

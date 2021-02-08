@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,34 +23,84 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import net.osmand.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
+
+import java.lang.ref.WeakReference;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = TripRecordingActiveBottomSheet.class.getSimpleName();
-
 	private OsmandApplication app;
-	private OsmandSettings settings;
+	SaveGpxAsyncTask.SaveGpxListener saveGpxListener = new SaveGpxAsyncTask.SaveGpxListener() {
+
+		@Override
+		public void gpxSavingStarted() {
+
+		}
+
+		@Override
+		public void gpxSavingFinished(Exception errorMessage) {
+			String gpxFileName = Algorithms.getFileWithoutDirs(app.getSavingTrackHelper().getCurrentTrack().getGpxFile().path);
+			final MapActivity mapActivity = getMapActivity();
+			SavingTrackHelper helper = app.getSavingTrackHelper();
+			final SavingTrackHelper.SaveGpxResult result = helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
+			if (mapActivity != null) {
+				Snackbar snackbar = Snackbar.make(mapActivity.getLayout(),
+						getString(R.string.shared_string_file_is_saved, gpxFileName),
+						Snackbar.LENGTH_LONG)
+						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+								final FragmentActivity fragmentActivity = mapActivityRef.get();
+								SaveGPXBottomSheetFragment.showInstance(fragmentActivity.getSupportFragmentManager(), result.getFilenames());
+							}
+						});
+				UiUtilities.setupSnackbar(snackbar, nightMode);
+				snackbar.show();
+				dismiss();
+			}
+		}
+
+	};
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (!fragmentManager.isStateSaved()) {
+			TripRecordingActiveBottomSheet fragment = new TripRecordingActiveBottomSheet();
+			fragment.show(fragmentManager, TAG);
+		}
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
-		settings = app.getSettings();
+		OsmandSettings settings = app.getSettings();
 		Context context = requireContext();
 
 		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
@@ -67,6 +119,19 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		);
 		statusIcon.setImageDrawable(statusDrawable);
 
+		String timeTrackSaved = String.valueOf(app.getSavingTrackHelper().getLastTimeUpdated());
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		CharSequence formattedTimeTrackSaved = null;
+		try {
+			long time = sdf.parse(timeTrackSaved).getTime();
+			long now = System.currentTimeMillis();
+			formattedTimeTrackSaved =
+					DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 		View buttonClear = itemView.findViewById(R.id.button_clear);
 		View buttonStart = itemView.findViewById(R.id.button_start);
 		View buttonSave = itemView.findViewById(R.id.button_save);
@@ -75,7 +140,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 		createButton(buttonClear, ItemType.CLEAR_DATA, true, null);
 		createButton(buttonStart, ItemType.START_SEGMENT, true, null);
-		createButton(buttonSave, ItemType.SAVE, true, "17 min. ago");
+		createButton(buttonSave, ItemType.SAVE, true, (String) formattedTimeTrackSaved);
 		createButton(buttonPause, ItemType.PAUSE, true, null);
 		createButton(buttonStop, ItemType.STOP, true, null);
 
@@ -116,6 +181,25 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		});
 		UiUtilities.setupCompoundButton(showTrackOnMapButton, nightMode, PROFILE_DEPENDENT);
 
+		buttonSave.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final GPXUtilities.GPXFile gpxFile = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
+				new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+			}
+		});
+
+		buttonStop.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentManager fragmentManager = getFragmentManager();
+				Fragment targetFragment = getTargetFragment();
+				if (fragmentManager != null && targetFragment != null) {
+					StopTrackRecordingBottomFragment.showInstance(fragmentManager, targetFragment);
+				}
+			}
+		});
 	}
 
 	private void createButton(View view, ItemType type, boolean enabled, @Nullable String description) {
@@ -148,35 +232,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		AndroidUiHelper.updateVisibility(desc, isShowDesc);
 		UiUtilities.setMargins(title, 0, isShowDesc ? 0 : marginSingle, 0, isShowDesc ? 0 : marginSingle);
 		desc.setText(description);
-	}
-
-	enum ItemType {
-		SEARCHING_GPS(R.string.searching_gps, R.drawable.ic_action_gps_info),
-		RECORDING(R.string.recording_default_name, R.drawable.ic_action_track_recordable),
-		ON_PAUSE(R.string.on_pause, R.drawable.ic_pause),
-		CLEAR_DATA(R.string.clear_recorded_data, R.drawable.ic_action_delete_dark),
-		START_SEGMENT(R.string.gpx_start_new_segment, R.drawable.ic_action_new_segment),
-		SAVE(R.string.shared_string_save, R.drawable.ic_action_save_to_file),
-		PAUSE(R.string.shared_string_pause, R.drawable.ic_pause),
-		STOP(R.string.shared_string_control_stop, R.drawable.ic_action_rec_stop);
-
-		@StringRes
-		private int titleId;
-		@DrawableRes
-		private int iconId;
-
-		ItemType(@StringRes int titleId, @DrawableRes int iconId) {
-			this.titleId = titleId;
-			this.iconId = iconId;
-		}
-
-		public int getTitleId() {
-			return titleId;
-		}
-
-		public int getIconId() {
-			return iconId;
-		}
 	}
 
 	@ColorRes
@@ -235,10 +290,32 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
-			TripRecordingActiveBottomSheet fragment = new TripRecordingActiveBottomSheet();
-			fragment.show(fragmentManager, TAG);
+	enum ItemType {
+		SEARCHING_GPS(R.string.searching_gps, R.drawable.ic_action_gps_info),
+		RECORDING(R.string.recording_default_name, R.drawable.ic_action_track_recordable),
+		ON_PAUSE(R.string.on_pause, R.drawable.ic_pause),
+		CLEAR_DATA(R.string.clear_recorded_data, R.drawable.ic_action_delete_dark),
+		START_SEGMENT(R.string.gpx_start_new_segment, R.drawable.ic_action_new_segment),
+		SAVE(R.string.shared_string_save, R.drawable.ic_action_save_to_file),
+		PAUSE(R.string.shared_string_pause, R.drawable.ic_pause),
+		STOP(R.string.shared_string_control_stop, R.drawable.ic_action_rec_stop);
+
+		@StringRes
+		private int titleId;
+		@DrawableRes
+		private int iconId;
+
+		ItemType(@StringRes int titleId, @DrawableRes int iconId) {
+			this.titleId = titleId;
+			this.iconId = iconId;
+		}
+
+		public int getTitleId() {
+			return titleId;
+		}
+
+		public int getIconId() {
+			return iconId;
 		}
 	}
 }

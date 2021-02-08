@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -62,6 +63,8 @@ import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.monitoring.TripRecordingActiveBottomSheet;
+import net.osmand.plus.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.ProfileDataUtils;
@@ -98,6 +101,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_P
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
@@ -838,6 +842,22 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).createItem());
+
+		boolean isTripRecordingPluginOn = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null;
+		if (isTripRecordingPluginOn) {
+			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_widget_monitoring, mapActivity)
+					.setId(DRAWER_TRIP_RECORDING_ID)
+					.setIcon(R.drawable.ic_action_track_recordable)
+					.setListener(new ItemClickListener() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+							app.logEvent("trip_recording_open");
+							MapActivity.clearPrevActivityIntent();
+							TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+							return true;
+						}
+					}).createItem());
+		}
 
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)

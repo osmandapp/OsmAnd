@@ -43,6 +43,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.track.TrackDisplayHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -318,9 +319,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
-		FragmentActivity fragmentActivity = (FragmentActivity) activity;
-		TripRecordingActiveBottomSheet.showInstance(fragmentActivity.getSupportFragmentManager());
-		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		final boolean nightMode;
 		if (activity instanceof MapActivity) {
 			nightMode = app.getDaynightHelper().isNightModeForMapControls();
@@ -329,6 +328,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 		AlertDialog.Builder bld = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 		final TIntArrayList items = new TIntArrayList();
+		FragmentActivity fragmentActivity = (FragmentActivity) activity;
+		TripRecordingActiveBottomSheet.showInstance(fragmentActivity.getSupportFragmentManager());
 		if (wasTrackMonitored) {
 			items.add(R.string.gpx_monitoring_stop);
 			items.add(R.string.gpx_start_new_segment);
@@ -417,7 +418,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					run.run();
 				}
 			});
-			bld.show();
+//			bld.show();
 		}
 	}
 
@@ -538,7 +539,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public static LinearLayout createIntervalChooseLayout(final OsmandApplication app,
-	                                                      final Context uiCtx,
+														  final Context uiCtx,
 														  final String patternMsg, final int[] seconds,
 														  final int[] minutes, final ValueHolder<Boolean> choice,
 														  final ValueHolder<Integer> v,
@@ -598,7 +599,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				}
 			}
 		}
-		
+
 		ll.setOrientation(LinearLayout.VERTICAL);
 		ll.addView(tv);
 		ll.addView(sliderContainer);
