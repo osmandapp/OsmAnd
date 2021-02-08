@@ -2971,7 +2971,7 @@
     <string name="app_mode_skiing">Лижі</string>
     <string name="base_profile_descr_ski">Лижі</string>
     <string name="show_compass_ruler">Показати компас-лінійку</string>
-    <string name="hide_compass_ruler">Приховати компас-лінійку</string>
+    <string name="hide_compass_ruler">Сховати компас-лінійку</string>
     <string name="select_icon_profile_dialog_title">Оберіть значок</string>
     <string name="settings_routing_mode_string">Режим: %s</string>
     <string name="settings_derived_routing_mode_string">Користувацький режим, похідний від: %s</string>
@@ -2988,7 +2988,7 @@
     <string name="profile_alert_need_save_title">Зберегти зміни</string>
     <string name="profile_alert_need_save_msg">Спочатку збережіть зміни в профілі</string>
     <string name="profile_alert_delete_title">Видалити профіль</string>
-    <string name="profile_alert_delete_msg">Ви дійсно хочете видалити профіль %s\?</string>
+    <string name="profile_alert_delete_msg">Ви дійсно хочете видалити профіль «%s»</string>
     <string name="select_base_profile_dialog_title">Виберіть профіль для початку</string>
     <string name="process_downloading_service">Служба завантаження OsmAnd</string>
     <string name="shared_string_color_magenta">Пурпуровий</string>
@@ -3302,7 +3302,7 @@
     <string name="added_profiles_descr">Профілі, додані втулком</string>
     <string name="shared_string_turn_off">Вимкнути</string>
     <string name="new_plugin_added">Нова втулка додана</string>
-    <string name="join_segments">Приєднати частки</string>
+    <string name="join_segments">Об’єднати сегменти</string>
     <string name="add_new_profile_q">Додати новий профіль \'%1$s\'\?</string>
     <string name="save_heading">Зберегти заголовок</string>
     <string name="save_heading_descr">Зберегти заголовок для кожної точки треку під час запису.</string>
@@ -3736,7 +3736,7 @@
     <string name="track_coloring_solid">Суцільний</string>
     <string name="plan_route_last_edited">В останнє змінено</string>
     <string name="plan_route_import_track">Імпортувати трек</string>
-    <string name="plan_route_open_existing_track">Переглянути наявний трек</string>
+    <string name="plan_route_open_existing_track">Відкрити наявний трек</string>
     <string name="plan_route_create_new_route">Створити новий маршрут</string>
     <string name="plan_route_select_track_file_for_open">Виберіть який файл з треком відкрити.</string>
     <string name="shared_string_done">Готово</string>
@@ -3966,7 +3966,7 @@
     <string name="select_folder">Вибрати теку</string>
     <string name="select_folder_descr">Виберіть теку або додайте нову</string>
     <string name="shared_string_empty">Порожньо</string>
-    <string name="analyze_by_intervals">Аналіз за інтервалами (розділений інтервал)</string>
+    <string name="analyze_by_intervals">Аналізувати розділені інтервали</string>
     <string name="upload_to_openstreetmap">Відвантажити на OpenStreetMap</string>
     <string name="edit_track">Редагувати трек</string>
     <string name="rename_track">Перейменувати трек</string>
@@ -4010,4 +4010,5 @@
     <string name="uploading_count">Вивантаження %1$d з %2$d</string>
     <string name="uploaded_count">Вивантажено %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Виберіть зміни для вивантаження</string>
+    <string name="hillshade_slope_contour_lines">Рельєф місцевості / Схили / Горизонталі</string>
 </resources>

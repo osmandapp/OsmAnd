@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.view.ViewGroup;
 
 import com.github.scribejava.core.builder.api.DefaultApi10a;
+import com.github.scribejava.core.exceptions.OAuthException;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
@@ -170,6 +171,8 @@ public class OsmOAuthAuthorizationAdapter {
             } catch (IOException e) {
                 log.error(e);
             } catch (XmlPullParserException e) {
+                log.error(e);
+            } catch (OAuthException e) {
                 log.error(e);
             }
             app.getSettings().OSM_USER_DISPLAY_NAME.set(userName);

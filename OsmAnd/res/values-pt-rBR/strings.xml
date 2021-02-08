@@ -3782,7 +3782,7 @@
     <string name="plan_route_change_route_type_before">Alterar o tipo de rota antes</string>
     <string name="plan_route_change_route_type_after">Alterar o tipo de rota após</string>
     <string name="simplified_track">Trilha simplificada</string>
-    <string name="simplified_track_description">Apenas a linha da rota será salva, os waypoints serão excluídos.</string>
+    <string name="simplified_track_description">Apenas a linha da rota será salva, os pontos de passagem serão excluídos.</string>
     <string name="shared_string_file_name">Nome do arquivo</string>
     <string name="number_of_gpx_files_selected_pattern">%s arquivos de trilha selecionados</string>
     <string name="disable_recording_once_app_killed_descrp">O registro de trilhas fará uma pausa quando o aplicativo for encerrado (por meio de aplicativos recentes). (A indicação de segundo plano do OsmAnd desaparece da barra de notificação do Android.)</string>
@@ -3962,7 +3962,7 @@
     <string name="select_folder">Selecione a pasta</string>
     <string name="select_folder_descr">Selecione a pasta ou adicione uma nova</string>
     <string name="shared_string_empty">Vazio</string>
-    <string name="analyze_by_intervals">Analisar por intervalos (intervalo de divisão)</string>
+    <string name="analyze_by_intervals">Analisar intervalos de divisão</string>
     <string name="upload_to_openstreetmap">Carregar para OpenStreetMap</string>
     <string name="edit_track">Editar trilha</string>
     <string name="rename_track">Renomear trilha</string>
@@ -4006,4 +4006,5 @@
     <string name="uploading_count">Carregando %1$d de %2$d</string>
     <string name="uploaded_count">Carregado %1$d de %2$d</string>
     <string name="toast_select_edits_for_upload">Selecione as edições para carregamento</string>
+    <string name="hillshade_slope_contour_lines">Sombras de relevo / Encostas / Curvas de nível</string>
 </resources>

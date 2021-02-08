@@ -2415,7 +2415,7 @@
     <string name="distance_moving">Vzdialenosť opravená</string>
     <string name="shared_string_permissions">Povolenia</string>
     <string name="import_gpx_failed_descr">Nepodarilo sa naimportovať súbor. Prosím zabezpečte, že OsmAnd má oprávnenie čítať súbor.</string>
-    <string name="map_widget_ruler_control">Polomerové pravítko</string>
+    <string name="map_widget_ruler_control">Kruhové pravítko</string>
     <string name="shared_string_reset">Resetovať</string>
     <string name="shared_string_reload">Znovu načítať</string>
     <string name="mapillary_menu_descr_tile_cache">Znovu načítať dlaždice pre získanie aktuálnych dát.</string>
@@ -3580,7 +3580,7 @@
     <string name="tracker_item">Stopovanie OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Rýchla akcia</string>
-    <string name="radius_ruler_item">Polomerové pravítko</string>
+    <string name="radius_ruler_item">Kruhové pravítko</string>
     <string name="measure_distance_item">Merať vzdialenosť</string>
     <string name="travel_item">Cestovanie (Wikivoyage a Wikipédia)</string>
     <string name="map_markers_item">Mapové značky</string>
@@ -3962,7 +3962,7 @@
     <string name="select_folder">Zvoľte priečinok</string>
     <string name="select_folder_descr">Zvoľte priečinok alebo pridajte nový</string>
     <string name="shared_string_empty">Prázdne</string>
-    <string name="analyze_by_intervals">Analyzovať podľa intervalov (rozdeliť interval)</string>
+    <string name="analyze_by_intervals">Analyzovať rozdelené intervaly</string>
     <string name="upload_to_openstreetmap">Nahrať do OpenStreetMap</string>
     <string name="edit_track">Upraviť stopu</string>
     <string name="rename_track">Premenovať stopu</string>
@@ -4006,4 +4006,5 @@
     <string name="uploading_count">Odosiela sa %1$d z %2$d</string>
     <string name="uploaded_count">Odoslané %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Zvoľte úpravy na odoslanie</string>
+    <string name="hillshade_slope_contour_lines">Tieňované svahy / Sklony svahov / Vrstevnice</string>
 </resources>

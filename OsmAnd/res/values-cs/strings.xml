@@ -3425,7 +3425,7 @@
     <string name="gpx_direction_arrows">Směrové šipky</string>
     <string name="plan_route_last_edited">Naposledy upraveno</string>
     <string name="plan_route_import_track">Importovat trasu</string>
-    <string name="plan_route_open_existing_track">Otevřít existující trasu</string>
+    <string name="plan_route_open_existing_track">Otevřít existující stopu</string>
     <string name="plan_route_create_new_route">Vytvořit novou trasu</string>
     <string name="plan_route_select_track_file_for_open">Vyberte stopu k otevření.</string>
     <string name="shared_string_done">Hotovo</string>
@@ -3442,10 +3442,10 @@
     <string name="quick_action_add_gpx">Přidat mezicíl</string>
     <string name="map_widget_monitoring">Záznam trasy</string>
     <string name="marker_save_as_track">Uložit jako soubor trasy</string>
-    <string name="follow_track">Sledovat trasu</string>
+    <string name="follow_track">Sledovat stopu</string>
     <string name="follow_track_descr">Zvolte soubor trasy, kterou chcete sledovat</string>
     <string name="import_track_descr">Zvolte soubor stopy, kterou chcete sledovat, nebo jej importujte ze svého zařízení.</string>
-    <string name="select_another_track">Zvolit jinou trasu</string>
+    <string name="select_another_track">Zvolit jinou stopu</string>
     <string name="navigate_to_track_descr">Navigovat z mé polohy k trase</string>
     <string name="pass_whole_track_descr">Bod trasy pro navigování</string>
     <string name="start_of_the_track">Začátek trasy</string>
@@ -3490,7 +3490,7 @@
     <string name="save_track_to_gpx_globally">Ukládat trasu do GPX souboru</string>
     <string name="shared_string_gpx_route">Trasa ze stopy</string>
     <string name="empty_state_my_tracks">Přidat soubory stop</string>
-    <string name="simplified_track">Zjednodušená trasa</string>
+    <string name="simplified_track">Zjednodušená stopa</string>
     <string name="simplified_track_description">Uloží se pouze linie trasy, mezicíle budou odstraněny.</string>
     <string name="shared_string_file_name">Název souboru</string>
     <string name="number_of_gpx_files_selected_pattern">%s vybraných souborů stop</string>
@@ -3505,7 +3505,7 @@
     <string name="only_selected_segment_recalc">Pouze vybraný úsek bude přepočítán pomocí vybraného profilu.</string>
     <string name="all_next_segments_will_be_recalc">Všechny následující úseky budou přepočítány pomocí vybraného profilu.</string>
     <string name="all_previous_segments_will_be_recalc">Všechny předcházející úseky budou přepočítány pomocí vybraného profilu.</string>
-    <string name="open_saved_track">Otevřít uloženou trasu</string>
+    <string name="open_saved_track">Otevřít uloženou stopu</string>
     <string name="shared_string_is_saved">je uloženo</string>
     <string name="one_point_error">Přidejte prosím alespoň dva body.</string>
     <string name="shared_string_redo">Znovu</string>
@@ -3967,7 +3967,7 @@
     <string name="select_folder">Zvolte složku</string>
     <string name="select_folder_descr">Zvolte složku nebo vytvořte novou</string>
     <string name="shared_string_empty">Prázdné</string>
-    <string name="analyze_by_intervals">Analyzovat podle intervalů (rozdělit interval)</string>
+    <string name="analyze_by_intervals">Analyzovat rozdělené intervaly</string>
     <string name="upload_to_openstreetmap">Nahrát do OpenStreetMap</string>
     <string name="edit_track">Editovat stopu</string>
     <string name="rename_track">Přejmenovat stopu</string>
@@ -4011,4 +4011,13 @@
     <string name="uploading_count">Nahrávám %1$d z %2$d</string>
     <string name="uploaded_count">Nahráno %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Vyberte úpravy pro nahrání</string>
+    <string name="hillshade_slope_contour_lines">Stínované svahy / Sklon svahů / Vrstevnice</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews je komunitní projekt o veřejných místech, jako jsou restaurace, hotely, muzea a další. Shromažďuje o nich veškeré veřejné informace, např. fotografie, hodnocení, odkazy do dalších systémů jako OpenStreetMap či Wikipedie.
+\n
+\nVšechna data OpenPlaceReviews jsou otevřená a přístupná každému: http://openplacereviews.org/data.
+\n
+\nPřečtěte si více na http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Použít test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Přihlásit se do OpenPlaceReviews</string>
 </resources>

@@ -3694,7 +3694,7 @@
     <string name="quick_action_showhide_mapillary_title">Mapillary ein-/ausblenden</string>
     <string name="quick_action_mapillary_hide">Mapillary ausblenden</string>
     <string name="quick_action_mapillary_show">Mapillary anzeigen</string>
-    <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum ein- oder ausblenden der Mapillary-Layer auf der Karte.</string>
+    <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum Ein- oder Ausblenden des Mapillary-Layers auf der Karte.</string>
     <string name="uninstall_speed_cameras">Blitzer deinstallieren</string>
     <string name="shared_string_legal">Rechtliches</string>
     <string name="speed_camera_pois">Blitzer-POIs</string>
@@ -4013,4 +4013,13 @@
     <string name="uploading_count">Lade %1$d von %2$d hoch</string>
     <string name="uploaded_count">%1$d von %2$d hochgeladen</string>
     <string name="toast_select_edits_for_upload">Bearbeitungen zum Hochladen auswählen</string>
+    <string name="hillshade_slope_contour_lines">Relief / Hangneigung / Höhenlinien</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews ist ein von der Gemeinschaft betriebenes Projekt über öffentliche Orte wie Restaurants, Hotels, Museen, Wegpunkte. Es sammelt alle öffentlichen Informationen über sie wie Fotos, Bewertungen, Links zu anderen Systemen, Link OpenStreetMap, Wikipedia.
+\n
+\nAlle OpenPlaceReview-Daten sind offen und für jedermann zugänglich: http://openplacereviews.org/data.
+\n
+\nMehr Informationen finden Sie unter: http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">test.openplacereviews.org verwenden</string>
+    <string name="login_open_place_reviews">Anmelden bei OpenPlaceReviews</string>
 </resources>

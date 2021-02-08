@@ -3,9 +3,11 @@ package net.osmand.plus.views.layers;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.text.util.Linkify;
+import android.util.Base64;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
+import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -272,7 +275,39 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	public static void showDescriptionDialog(Context ctx, OsmandApplication app, String text, String title) {
-		showText(ctx, app, text, title);
+		final TextView textView = new TextView(ctx);
+		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		int textMargin = dpToPx(app, 10f);
+		boolean light = app.getSettings().isLightContent();
+		textView.setLayoutParams(llTextParams);
+		textView.setPadding(textMargin, textMargin, textMargin, textMargin);
+		textView.setTextSize(16);
+		textView.setTextColor(ContextCompat.getColor(app, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setAutoLinkMask(Linkify.ALL);
+		textView.setLinksClickable(true);
+		textView.setText(text);
+
+		showText(ctx, app, textView, title);
+	}
+
+	public static void showHtmlDescriptionDialog(Context ctx, OsmandApplication app, String html, String title) {
+		final WebViewEx webView = new WebViewEx(ctx);
+		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		webView.setLayoutParams(llTextParams);
+		int margin = dpToPx(app, 10f);
+		webView.setPadding(margin, margin, margin, margin);
+		webView.setScrollbarFadingEnabled(true);
+		webView.setVerticalScrollBarEnabled(false);
+		webView.setBackgroundColor(Color.TRANSPARENT);
+		webView.getSettings().setTextZoom((int) (app.getResources().getConfiguration().fontScale * 100f));
+		boolean light = app.getSettings().isLightContent();
+		int textColor = ContextCompat.getColor(app, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
+		String rgbHex = Algorithms.colorToString(textColor);
+		html = "<body style=\"color:" + rgbHex + ";\">" + html + "</body>";
+		String encoded = Base64.encodeToString(html.getBytes(), Base64.NO_PADDING);
+		webView.loadData(encoded, "text/html", "base64");
+
+		showText(ctx, app, webView, title);
 	}
 
 	static int getResIdFromAttribute(final Context ctx, final int attr) {
@@ -284,7 +319,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return typedvalueattr.resourceId;
 	}
 
-	private static void showText(final Context ctx, final OsmandApplication app, final String text, String title) {
+	private static void showText(final Context ctx, final OsmandApplication app, final View view, String title) {
 		final Dialog dialog = new Dialog(ctx,
 				app.getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 
@@ -306,24 +341,12 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			}
 		});
 
-		final TextView textView = new TextView(ctx);
-		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		int textMargin = dpToPx(app, 10f);
-		boolean light = app.getSettings().isLightContent();
-		textView.setLayoutParams(llTextParams);
-		textView.setPadding(textMargin, textMargin, textMargin, textMargin);
-		textView.setTextSize(16);
-		textView.setTextColor(ContextCompat.getColor(app, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
-		textView.setAutoLinkMask(Linkify.ALL);
-		textView.setLinksClickable(true);
-		textView.setText(text);
-
 		ScrollView scrollView = new ScrollView(ctx);
 		ll.addView(topBar);
 		LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 0);
 		lp.weight = 1;
 		ll.addView(scrollView, lp);
-		scrollView.addView(textView);
+		scrollView.addView(view);
 
 		dialog.setContentView(ll);
 		dialog.setCancelable(true);
