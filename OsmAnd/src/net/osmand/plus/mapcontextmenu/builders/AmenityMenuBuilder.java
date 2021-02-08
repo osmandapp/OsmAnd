@@ -2,10 +2,8 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.view.Gravity;
@@ -14,10 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -31,7 +25,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -66,6 +59,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
@@ -259,38 +255,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 
 		if (isWiki) {
-			TextViewEx button = new TextViewEx(new ContextThemeWrapper(view.getContext(), light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
-			LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(36f));
-			AndroidUtils.setMargins(llWikiButtonParams, dpToPx(16f), 0, 0, dpToPx(16f));
-			button.setLayoutParams(llWikiButtonParams);
-			button.setTypeface(FontCache.getRobotoMedium(app));
-			button.setBackgroundResource(light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
-			button.setTextSize(14);
-			int paddingSides = dpToPx(10f);
-			button.setPadding(paddingSides, 0, paddingSides, 0);
-			ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(view.getContext(), !light,
-					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
-					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
-			button.setTextColor(buttonColorStateList);
-			button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-			button.setSingleLine(true);
-			button.setEllipsize(TextUtils.TruncateAt.END);
-			button.setOnClickListener(new View.OnClickListener() {
+			buildReadFullButton(llText, app.getString(R.string.context_menu_read_full_article), new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					WikipediaDialogFragment.showInstance(mapActivity, amenity);
 				}
 			});
-			button.setAllCaps(true);
-			button.setText(R.string.context_menu_read_full_article);
-			Drawable normal = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
-					light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
-			Drawable pressed = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
-					light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
-			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button, Build.VERSION.SDK_INT >= 21
-					? AndroidUtils.createPressedStateListDrawable(normal, pressed) : normal, null, null, null);
-			button.setCompoundDrawablePadding(dpToPx(8f));
-			llText.addView(button);
 		}
 
 		((LinearLayout) view).addView(baseView);

@@ -74,6 +74,7 @@ import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -801,18 +802,98 @@ public class MenuBuilder {
 		return ll;
 	}
 
-	public View buildDescriptionRow(final View view, final String textPrefix, final String description, int textColor,
-	                                int textLinesLimit, boolean matchWidthDivider) {
-		OnClickListener clickListener = new OnClickListener() {
+	public View buildDescriptionRow(final View view, final String description) {
+
+		final String descriptionLabel = app.getString(R.string.shared_string_description);
+		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				POIMapLayer.showDescriptionDialog(view.getContext(), app, description, textPrefix);
+				POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, description, descriptionLabel);
 			}
 		};
 
-		return buildRow(view, null, null, textPrefix, description, textColor,
-				null, false, null, true, textLinesLimit,
-				false, false, false, clickListener, matchWidthDivider);
+		if (!isFirstRow()) {
+			buildRowDivider(view);
+		}
+
+		LinearLayout baseView = new LinearLayout(view.getContext());
+		baseView.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		baseView.setLayoutParams(llBaseViewParams);
+
+		LinearLayout ll = new LinearLayout(view.getContext());
+		ll.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		ll.setLayoutParams(llParams);
+		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				copyToClipboard(description, view.getContext());
+				return true;
+			}
+		});
+
+		baseView.addView(ll);
+
+		// Text
+		LinearLayout llText = new LinearLayout(view.getContext());
+		llText.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llTextViewParams.weight = 1f;
+		AndroidUtils.setMargins(llTextViewParams, 0, 0, dpToPx(10f), 0);
+		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
+		llText.setLayoutParams(llTextViewParams);
+		ll.addView(llText);
+
+		// Description label
+		TextViewEx textPrefixView = new TextViewEx(view.getContext());
+		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		AndroidUtils.setMargins(llTextParams, dpToPx(16f), dpToPx(8f), 0, 0);
+		textPrefixView.setLayoutParams(llTextParams);
+		textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+		textPrefixView.setTextSize(12);
+		textPrefixView.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark));
+		textPrefixView.setMinLines(1);
+		textPrefixView.setMaxLines(1);
+		textPrefixView.setText(descriptionLabel);
+		llText.addView(textPrefixView);
+
+		// Description
+		TextViewEx textView = new TextViewEx(view.getContext());
+		LinearLayout.LayoutParams llDescriptionParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		AndroidUtils.setMargins(llDescriptionParams, dpToPx(16f), dpToPx(2f), 0, dpToPx(8f));
+		textView.setLayoutParams(llDescriptionParams);
+		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+		textView.setTextSize(16);
+		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setText(WikiArticleHelper.getPartialContent(description));
+
+		if (Linkify.addLinks(textView, Linkify.ALL)) {
+			textView.setMovementMethod(null);
+			int linkTextColor = ContextCompat.getColor(view.getContext(), light ?
+					R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+			textView.setLinkTextColor(linkTextColor);
+			textView.setOnTouchListener(new ClickableSpanTouchListener());
+			AndroidUtils.removeLinkUnderline(textView);
+		}
+		textView.setMinLines(1);
+		textView.setMaxLines(10);
+		textView.setEllipsize(TextUtils.TruncateAt.END);
+		llText.addView(textView);
+
+		// Read Full button
+		buildReadFullButton(llText, app.getString(R.string.context_menu_read_full), onClickListener);
+
+		if (onClickListener != null) {
+			ll.setOnClickListener(onClickListener);
+		}
+		((LinearLayout) view).addView(baseView);
+
+		rowBuilt();
+		setDividerWidth(true);
+
+		return ll;
 	}
 
 	protected void showDialog(String text, final String actionType, final String dataPrefix, final View v) {
@@ -906,6 +987,38 @@ public class MenuBuilder {
 		horizontalLine.setLayoutParams(llHorLineParams);
 		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_divider_light : R.color.ctx_menu_bottom_view_divider_dark));
 		((LinearLayout) view).addView(horizontalLine);
+	}
+
+	protected void buildReadFullButton(LinearLayout container, String btnText, View.OnClickListener onClickListener) {
+		Context ctx = container.getContext();
+
+		TextViewEx button = new TextViewEx(new ContextThemeWrapper(ctx, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
+		LinearLayout.LayoutParams llButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(36f));
+		AndroidUtils.setMargins(llButtonParams, dpToPx(16f), 0, 0, dpToPx(16f));
+		button.setLayoutParams(llButtonParams);
+		button.setTypeface(FontCache.getRobotoMedium(app));
+		button.setBackgroundResource(light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
+		button.setTextSize(14);
+		int paddingSides = dpToPx(10f);
+		button.setPadding(paddingSides, 0, paddingSides, 0);
+		ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(ctx, !light,
+				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
+				R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
+		button.setTextColor(buttonColorStateList);
+		button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+		button.setSingleLine(true);
+		button.setEllipsize(TextUtils.TruncateAt.END);
+		button.setOnClickListener(onClickListener);
+		button.setAllCaps(true);
+		button.setText(btnText);
+		Drawable normal = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
+				light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
+		Drawable pressed = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
+				light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button, Build.VERSION.SDK_INT >= 21
+				? AndroidUtils.createPressedStateListDrawable(normal, pressed) : normal, null, null, null);
+		button.setCompoundDrawablePadding(dpToPx(8f));
+		container.addView(button);
 	}
 
 	public boolean hasCustomAddressLine() {
