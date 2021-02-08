@@ -4013,4 +4013,7 @@
     <string name="uploading_count">נשלחות %1$d מתוך %2$d</string>
     <string name="uploaded_count">נשלחו %1$d מתוך %2$d</string>
     <string name="toast_select_edits_for_upload">נא לבחור עריכות לשליחה</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">להשתמש ב־test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">כניסה ל־OpenPlaceReviews</string>
 </resources>
