@@ -105,31 +105,42 @@ android {
 		nightlyFree {
 			dimension "version"
 			applicationId "net.osmand.dev"
+			resValue "string", "app_name", "OsmAnd Nightly"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION").toInteger() : ""
 			// resConfig "en"
 		}
 		androidFull {
 			dimension "version"
 			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd~"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION").toInteger() : ""
 		}
 		gplayFree {
 			dimension "version"
 			applicationId "net.osmand"
+			resValue "string", "app_name", "OsmAnd"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION").toInteger() : ""
 		}
 		gplayFull {
 			dimension "version"
 			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd+"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION").toInteger() : ""
 		}
 		amazonFree {
 			dimension "version"
 			applicationId "net.osmand"
+			resValue "string", "app_name", "OsmAnd"
 		}
 		amazonFull {
 			dimension "version"
 			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd+"
 		}
 		huawei {
 			dimension "version"
 			applicationId "net.osmand.huawei"
+			resValue "string", "app_name", "OsmAnd"
 		}
 
         // Build that includes 3D OpenGL release
@@ -151,19 +162,6 @@ android {
 		}
 	}
 
-}
-
-def replaceNoTranslate(line) {
-	if (line.contains("\"app_name\"") && System.getenv("TARGET_APP_PLUS_NAME")) {
-		return line.replaceAll(">[^<]*<", ">" + System.getenv("TARGET_APP_PLUS_NAME") + "<")
-	}
-	if (line.contains("\"app_name_free\"") && System.getenv("TARGET_APP_FREE_NAME")) {
-		return line.replaceAll(">[^<]*<", ">" + System.getenv("TARGET_APP_FREE_NAME") + "<")
-	}
-	if (line.contains("\"app_edition\"") && System.getenv("APP_EDITION")) {
-		return line.replaceAll(">[^<]*<", ">" + System.getenv("APP_EDITION") + "<")
-	}
-	return line;
 }
 
 afterEvaluate {

@@ -4,10 +4,8 @@
 	
     <application
         android:icon="@mipmap/icon_nightly"
+        android:label="@string/app_name_free"
         tools:replace="android:icon">
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="fb792288460976727"/>
         <activity
             android:name="net.osmand.plus.activities.MapActivity"
             android:theme="@style/FirstSplashScreenNightlyFree"
