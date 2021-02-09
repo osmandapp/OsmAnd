@@ -31,11 +31,13 @@ import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.CustomIndexItem;
+import net.osmand.plus.download.DisplayItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.MultiIndexItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -43,6 +45,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.util.List;
 
 public class ItemViewHolder {
 
@@ -137,24 +140,25 @@ public class ItemViewHolder {
 		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication());
 	}
 
-	public void bindIndexItem(final IndexItem indexItem) {
-		bindIndexItem(indexItem, null);
+	public void bindIndexItem(final DisplayItem displayItem) {
+		bindIndexItem(displayItem, null);
 	}
 
-	public void bindIndexItem(final IndexItem indexItem, final String cityName) {
+	public void bindIndexItem(final DisplayItem displayItem, final String cityName) {
 		initAppStatusVariables();
-		boolean isDownloading = context.getDownloadThread().isDownloading(indexItem);
+		boolean isDownloading = displayItem.isDownloading(context.getDownloadThread());
 		int progress = -1;
-		if (context.getDownloadThread().getCurrentDownloadingItem() == indexItem) {
+		if (context.getDownloadThread().getCurrentDownloadingItem() == displayItem) {
 			progress = context.getDownloadThread().getCurrentDownloadingItemProgress();
 		}
-		boolean disabled = checkDisabledAndClickAction(indexItem);
+		boolean disabled = checkDisabledAndClickAction(displayItem);
 		/// name and left item
 		String name;
-		if(showTypeInName) {
-			name = indexItem.getType().getString(context);
+		boolean isMultiIndexItem = displayItem instanceof MultiIndexItem;
+		if(showTypeInName || isMultiIndexItem) {
+			name = displayItem.getType().getString(context);
 		} else {
-			name = indexItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName);
+			name = ((IndexItem) displayItem).getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName);
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		nameTextView.setText(text);
@@ -164,43 +168,59 @@ public class ItemViewHolder {
 			nameTextView.setTextColor(textColorSecondary);
 		}
 		int color = textColorSecondary;
-		if(indexItem.isDownloaded() && !isDownloading) {
-			int colorId = indexItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
+		if(displayItem.isDownloaded() && !isDownloading) {
+			int colorId = displayItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
 			color = context.getResources().getColor(colorId);
 		}
-		if (indexItem.isDownloaded()) {
+		if (displayItem.isDownloaded()) {
 			leftImageView.setImageDrawable(getContentIcon(context,
-					indexItem.getType().getIconResource(), color));
+					displayItem.getType().getIconResource(), color));
 		} else if (disabled) {
 			leftImageView.setImageDrawable(getContentIcon(context,
-					indexItem.getType().getIconResource(), textColorSecondary));
+					displayItem.getType().getIconResource(), textColorSecondary));
 		} else {
 			leftImageView.setImageDrawable(getContentIcon(context,
-					indexItem.getType().getIconResource()));
+					displayItem.getType().getIconResource()));
 		}
 		descrTextView.setTextColor(textColorSecondary);
 		if (!isDownloading) {
 			progressBar.setVisibility(View.GONE);
 			descrTextView.setVisibility(View.VISIBLE);
-			if (indexItem instanceof CustomIndexItem && (((CustomIndexItem) indexItem).getSubName(context) != null)) {
-				descrTextView.setText(((CustomIndexItem) indexItem).getSubName(context));
-			} else if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
+			if (displayItem instanceof CustomIndexItem && (((CustomIndexItem) displayItem).getSubName(context) != null)) {
+				descrTextView.setText(((CustomIndexItem) displayItem).getSubName(context));
+			} else if (displayItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
 				descrTextView.setText(context.getString(R.string.depth_contour_descr));
-			} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
-					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
-					|| indexItem.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
+			} else if ((displayItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+					|| displayItem.getType() == DownloadActivityType.HILLSHADE_FILE
+					|| displayItem.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
 				if (showTypeInName) {
 					descrTextView.setText("");
 				} else {
-					descrTextView.setText(indexItem.getType().getString(context));
+					descrTextView.setText(displayItem.getType().getString(context));
 				}
-			} else if (showTypeInDesc) {
-				descrTextView.setText(indexItem.getType().getString(context) +
-						" • " + indexItem.getSizeDescription(context) +
-						" • " + (showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
+			} else if (isMultiIndexItem) {
+				MultiIndexItem item = (MultiIndexItem) displayItem;
+				String columnFormat = context.getString(R.string.ltr_or_rtl_combine_via_colon);
+				String allRegionsTitle = context.getString(R.string.shared_strings_all_regions);
+				int regionsCount = item.getAllIndexes().size();
+				String regionsCountDescription =
+						String.format(columnFormat, allRegionsTitle, String.valueOf(regionsCount));
+				String downloadSizeDescription = item.getSizeToDownloadDescription(context);
+				String boldPointFormat =
+						context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
+				String fullDescription =
+						String.format(boldPointFormat, regionsCountDescription, downloadSizeDescription);
+				descrTextView.setText(fullDescription);
 			} else {
-				descrTextView.setText(indexItem.getSizeDescription(context) + " • " +
-						(showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
+				IndexItem item = (IndexItem) displayItem;
+				if (showTypeInDesc) {
+					descrTextView.setText(item.getType().getString(context) +
+							" • " + item.getSizeDescription(context) +
+							" • " + (showRemoteDate ? item.getRemoteDate(dateFormat) : item.getLocalDate(dateFormat)));
+				} else {
+					descrTextView.setText(item.getSizeDescription(context) + " • " +
+							(showRemoteDate ? item.getRemoteDate(dateFormat) : item.getLocalDate(dateFormat)));
+				}
 			}
 
 		} else {
@@ -209,15 +229,15 @@ public class ItemViewHolder {
 			progressBar.setProgress(progress);
 			
 			if (showProgressInDesc) {
-				double mb = indexItem.getArchiveSizeMB();
+				double mb = displayItem.getArchiveSizeMB();
 				String v ;
 				if (progress != -1) {
 					v = context.getString(R.string.value_downloaded_of_max, mb * progress / 100, mb);
 				} else {
 					v = context.getString(R.string.file_size_in_mb, mb);
 				}
-				if(showTypeInDesc && indexItem.getType() == DownloadActivityType.ROADS_FILE) {
-					descrTextView.setText(indexItem.getType().getString(context) + " • " + v);
+				if(showTypeInDesc && displayItem.getType() == DownloadActivityType.ROADS_FILE) {
+					descrTextView.setText(displayItem.getType().getString(context) + " • " + v);
 				} else {
 					descrTextView.setText(v);
 				}
@@ -241,28 +261,29 @@ public class ItemViewHolder {
 		}
 	}
 
-	protected void download(IndexItem indexItem, DownloadResourceGroup parentOptional) {
+	protected void download(DisplayItem item, DownloadResourceGroup parentOptional) {
 		boolean handled = false;
-		if(parentOptional != null) {
+		if(parentOptional != null && item instanceof IndexItem) {
+			IndexItem indexItem = (IndexItem) item;
 			WorldRegion region = DownloadResourceGroup.getRegion(parentOptional);
 			context.setDownloadItem(region, indexItem.getTargetFile(context.getMyApplication()).getAbsolutePath());
 		}
-		if (indexItem.getType() == DownloadActivityType.ROADS_FILE && parentOptional != null) {
+		if (item.getType() == DownloadActivityType.ROADS_FILE && parentOptional != null) {
 			for (IndexItem ii : parentOptional.getIndividualResources()) {
 				if (ii.getType() == DownloadActivityType.NORMAL_FILE) {
 					if (ii.isDownloaded()) {
 						handled = true;
-						confirmDownload(indexItem);
+						confirmDownload(item);
 					}
 					break;
 				}
 			}
 		}		
 		if(!handled) {
-			context.startDownload(indexItem);
+			startDownload(item);
 		}
 	}
-	private void confirmDownload(final IndexItem indexItem) {
+	private void confirmDownload(final DisplayItem item) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setTitle(R.string.are_you_sure);
 		builder.setMessage(R.string.confirm_download_roadmaps);
@@ -270,15 +291,29 @@ public class ItemViewHolder {
 				R.string.shared_string_download, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if (indexItem != null) {
-							context.startDownload(indexItem);
+						if (item != null) {
+							startDownload(item);
 						}
 					}
 				});
 		builder.show();
 	}
 
-	private boolean checkDisabledAndClickAction(final IndexItem item) {
+	private void startDownload(DisplayItem item) {
+		if (item instanceof MultiIndexItem) {
+			MultiIndexItem multiIndexItem = (MultiIndexItem) item;
+			List<IndexItem> indexes = multiIndexItem.getIndexesToDownload();
+			if (!Algorithms.isEmpty(indexes)) {
+				IndexItem[] indexesArray = new IndexItem[indexes.size()];
+				context.startDownload(indexes.toArray(indexesArray));
+			}
+		} else if (item instanceof IndexItem) {
+			IndexItem indexItem = (IndexItem) item;
+			context.startDownload(indexItem);
+		}
+	}
+
+	private boolean checkDisabledAndClickAction(final DisplayItem item) {
 		RightButtonAction clickAction = getClickAction(item);
 		boolean disabled = clickAction != RightButtonAction.DOWNLOAD;
 		OnClickListener action = getRightButtonAction(item, clickAction);
@@ -290,16 +325,26 @@ public class ItemViewHolder {
 		} else {
 			rightButton.setVisibility(View.GONE);
 			rightImageButton.setVisibility(View.VISIBLE);
-			final boolean isDownloading = context.getDownloadThread().isDownloading(item);
+			final boolean isDownloading = item.isDownloading(context.getDownloadThread());
 			if (isDownloading) {
 				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_remove_dark));
 				rightImageButton.setContentDescription(context.getString(R.string.shared_string_cancel));
-			} else if(item.isDownloaded() && !item.isOutdated()) {
-				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_overflow_menu_white));
-				rightImageButton.setContentDescription(context.getString(R.string.shared_string_more));
-			} else {
-				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
-				rightImageButton.setContentDescription(context.getString(R.string.shared_string_download));
+			} else if (item instanceof IndexItem) {
+				if(item.isDownloaded() && !item.isOutdated()) {
+					rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_overflow_menu_white));
+					rightImageButton.setContentDescription(context.getString(R.string.shared_string_more));
+				} else {
+					rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
+					rightImageButton.setContentDescription(context.getString(R.string.shared_string_download));
+				}
+			} else if (item instanceof MultiIndexItem) {
+				MultiIndexItem multiIndexItem = (MultiIndexItem) item;
+				if (multiIndexItem.hasMapsToDownload()) {
+					rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_multi_download));
+					rightImageButton.setContentDescription(context.getString(R.string.shared_string_download));
+				} else {
+					rightImageButton.setVisibility(View.GONE);
+				}
 			}
 			rightImageButton.setOnClickListener(action);
 		}
@@ -308,30 +353,30 @@ public class ItemViewHolder {
 	}
 
 	@SuppressLint("DefaultLocale")
-	public RightButtonAction getClickAction(final IndexItem indexItem) {
+	public RightButtonAction getClickAction(final DisplayItem item) {
 		RightButtonAction clickAction = RightButtonAction.DOWNLOAD;
-		if (indexItem.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)
+		if (item.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)
 				&& nauticalPluginDisabled) {
 			clickAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
-		} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
-				|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
-				|| indexItem.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
+		} else if ((item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+				|| item.getType() == DownloadActivityType.HILLSHADE_FILE
+				|| item.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
 			if (srtmNeedsInstallation) {
 				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_PURCHASE;
 			} else {
 				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
 			}
 
-		} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE
+		} else if (item.getType() == DownloadActivityType.WIKIPEDIA_FILE
 				&& !Version.isPaidVersion(context.getMyApplication())) {
 			clickAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
-		} else if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
+		} else if (item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
 			clickAction = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 		}
 		return clickAction;
 	}
 
-	public OnClickListener getRightButtonAction(final IndexItem item, final RightButtonAction clickAction) {
+	public OnClickListener getRightButtonAction(final DisplayItem item, final RightButtonAction clickAction) {
 		if (clickAction != RightButtonAction.DOWNLOAD) {
 			return new View.OnClickListener() {
 				@Override
@@ -370,7 +415,7 @@ public class ItemViewHolder {
 				}
 			};
 		} else {
-			final boolean isDownloading = context.getDownloadThread().isDownloading(item);
+			final boolean isDownloading = item.isDownloading(context.getDownloadThread());
 			return new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -380,17 +425,26 @@ public class ItemViewHolder {
 						} else {
 							context.makeSureUserCancelDownload(item);
 						}
-					} else if(item.isDownloaded() && !item.isOutdated()){
-						contextMenu(v, item, item.getRelatedGroup());
-					} else {
-						download(item, item.getRelatedGroup());
+					} else if (item instanceof IndexItem) {
+						if(item.isDownloaded() && !item.isOutdated()){
+							contextMenu(v, item, item.getRelatedGroup());
+						} else {
+							download(item, item.getRelatedGroup());
+						}
+					} else if (item instanceof MultiIndexItem) {
+						if (((MultiIndexItem) item).hasMapsToDownload()) {
+							download(item, item.getRelatedGroup());
+						}
 					}
 				}
 			};
 		}
 	}
 
-	protected void contextMenu(View v, final IndexItem indexItem, final DownloadResourceGroup parentOptional) {
+	protected void contextMenu(View v, final DisplayItem displayItem, final DownloadResourceGroup parentOptional) {
+		if (!(displayItem instanceof IndexItem)) return;
+		final IndexItem indexItem = (IndexItem) displayItem;
+
 		final PopupMenu optionsMenu = new PopupMenu(context, v);
 		MenuItem item;
 		
@@ -401,27 +455,7 @@ public class ItemViewHolder {
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
-					LocalIndexType tp = LocalIndexType.MAP_DATA;
-					if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
-						tp = LocalIndexType.TILES_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.SLOPE_FILE) {
-						tp = LocalIndexType.TILES_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.ROADS_FILE) {
-						tp = LocalIndexType.MAP_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
-						tp = LocalIndexType.SRTM_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
-						tp = LocalIndexType.MAP_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
-						tp = LocalIndexType.MAP_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.TRAVEL_FILE) {
-						tp = LocalIndexType.MAP_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.FONT_FILE) {
-						tp = LocalIndexType.FONT_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
-						tp = indexItem.getBasename().contains("tts") ? LocalIndexType.TTS_VOICE_DATA
-								: LocalIndexType.VOICE_DATA;
-					}
+					LocalIndexType tp = getLocalIndexType(indexItem);
 					final LocalIndexInfo info = new LocalIndexInfo(tp, fl, false, context.getMyApplication());
 					AlertDialog.Builder confirm = new AlertDialog.Builder(context);
 					confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
@@ -451,6 +485,31 @@ public class ItemViewHolder {
 		});
 		
 		optionsMenu.show();
+	}
+
+	private LocalIndexType getLocalIndexType(DisplayItem displayItem) {
+		LocalIndexType tp = LocalIndexType.MAP_DATA;
+		if (displayItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
+			tp = LocalIndexType.TILES_DATA;
+		} else if (displayItem.getType() == DownloadActivityType.SLOPE_FILE) {
+			tp = LocalIndexType.TILES_DATA;
+		} else if (displayItem.getType() == DownloadActivityType.ROADS_FILE) {
+			tp = LocalIndexType.MAP_DATA;
+		} else if (displayItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+			tp = LocalIndexType.SRTM_DATA;
+		} else if (displayItem.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
+			tp = LocalIndexType.MAP_DATA;
+		} else if (displayItem.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
+			tp = LocalIndexType.MAP_DATA;
+		} else if (displayItem.getType() == DownloadActivityType.TRAVEL_FILE) {
+			tp = LocalIndexType.MAP_DATA;
+		} else if (displayItem.getType() == DownloadActivityType.FONT_FILE) {
+			tp = LocalIndexType.FONT_DATA;
+		} else if (displayItem.getType() == DownloadActivityType.VOICE_FILE) {
+			tp = displayItem.getBasename().contains("tts") ? LocalIndexType.TTS_VOICE_DATA
+					: LocalIndexType.VOICE_DATA;
+		}
+		return tp;
 	}
 
 	private Drawable getContentIcon(DownloadActivity context, int resourceId) {

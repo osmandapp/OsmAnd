@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class IndexItem implements Comparable<IndexItem> {
+public class IndexItem implements Comparable<IndexItem>, DisplayItem {
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
 	
 	String description;
@@ -48,14 +48,17 @@ public class IndexItem implements Comparable<IndexItem> {
 		this.type = tp;
 	}
 
+	@Override
 	public DownloadActivityType getType() {
 		return type;
 	}
-	
+
+	@Override
 	public void setRelatedGroup(DownloadResourceGroup relatedGroup) {
 		this.relatedGroup = relatedGroup;
 	}
-	
+
+	@Override
 	public DownloadResourceGroup getRelatedGroup() {
 		return relatedGroup;
 	}
@@ -223,7 +226,10 @@ public class IndexItem implements Comparable<IndexItem> {
 		return type.getVisibleDescription(this, clctx);
 	}
 
-	
+	@Override
+	public boolean isDownloading(DownloadIndexesThread thread) {
+		return thread.isDownloading(this);
+	}
 
 	public String getDate(java.text.DateFormat format) {
 		return format.format(new Date(timestamp));

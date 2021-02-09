@@ -192,7 +192,7 @@ public class DownloadValidationManager {
 	}
 
 
-	public void makeSureUserCancelDownload(FragmentActivity ctx, final IndexItem item) {
+	public void makeSureUserCancelDownload(FragmentActivity ctx, final DisplayItem item) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		bld.setTitle(ctx.getString(R.string.shared_string_cancel));
 		bld.setMessage(R.string.confirm_interrupt_download);

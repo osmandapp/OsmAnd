@@ -239,6 +239,16 @@ public class DownloadIndexesThread {
 		}
 	}
 
+	public void cancelDownload(DisplayItem item) {
+		if (item instanceof MultiIndexItem) {
+			MultiIndexItem multiIndexItem = (MultiIndexItem) item;
+			cancelDownload(multiIndexItem.getAllIndexes());
+		} else if (item instanceof IndexItem) {
+			IndexItem indexItem = (IndexItem) item;
+			cancelDownload(indexItem);
+		}
+	}
+
 	public void cancelDownload(IndexItem item) {
 		app.logMapDownloadEvent("cancel", item);
 		if (currentDownloadingItem == item) {

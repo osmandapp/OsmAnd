@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -112,6 +113,10 @@ public class DownloadActivityType {
 
 	public static DownloadActivityType getIndexType(String tagName) {
 		return byTag.get(tagName);
+	}
+
+	public static Collection<DownloadActivityType> values() {
+		return byTag.values();
 	}
 	
 	protected static String addVersionToExt(String ext, int version) {

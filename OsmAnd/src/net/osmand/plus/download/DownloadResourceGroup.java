@@ -8,6 +8,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,8 +21,8 @@ public class DownloadResourceGroup {
 
 	private final DownloadResourceGroupType type;
 	private final DownloadResourceGroup parentGroup;
-	// ASSERT: individualResources are not empty if and only if groups are empty
-	private final List<IndexItem> individualResources;
+	// ASSERT: individualDisplayItems are not empty if and only if groups are empty
+	private final List<DisplayItem> individualDisplayItems;
 	private final List<DownloadResourceGroup> groups;
 	protected final String id;
 
@@ -107,10 +108,10 @@ public class DownloadResourceGroup {
 	public DownloadResourceGroup(DownloadResourceGroup parentGroup, DownloadResourceGroupType type, String id) {
 		boolean flat = type.containsIndexItem();
 		if (flat) {
-			this.individualResources = new ArrayList<IndexItem>();
+			this.individualDisplayItems = new ArrayList<DisplayItem>();
 			this.groups = null;
 		} else {
-			this.individualResources = null;
+			this.individualDisplayItems = null;
 			this.groups = new ArrayList<DownloadResourceGroup>();
 		}
 		this.id = id;
@@ -173,7 +174,7 @@ public class DownloadResourceGroup {
 			DownloadResourceGroup regionMaps = getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
 			if(regionMaps != null && regionMaps.size() == 1 && parentGroup != null && parentGroup.getParentGroup() != null && 
 					isEmpty(getSubGroupById(DownloadResourceGroupType.SUBREGIONS.getDefaultId()))) {
-				IndexItem item = regionMaps.individualResources.get(0);
+				IndexItem item = regionMaps.getIndividualResources().get(0);
 				DownloadResourceGroup screenParent = parentGroup.getParentGroup();
 				if(item.getType() == DownloadActivityType.HILLSHADE_FILE) {
 					DownloadResourceGroup hillshades = 
@@ -183,7 +184,7 @@ public class DownloadResourceGroup {
 						screenParent.addGroup(hillshades);
 					}
 					hillshades.addItem(item);
-					regionMaps.individualResources.remove(0);
+					regionMaps.individualDisplayItems.remove(0);
 				} else if (item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 					DownloadResourceGroup hillshades = screenParent
 							.getSubGroupById(DownloadResourceGroupType.SRTM_HEADER.getDefaultId());
@@ -192,7 +193,7 @@ public class DownloadResourceGroup {
 						screenParent.addGroup(hillshades);
 					}
 					hillshades.addItem(item);
-					regionMaps.individualResources.remove(0);
+					regionMaps.individualDisplayItems.remove(0);
 				}
 				
 			}
@@ -221,35 +222,42 @@ public class DownloadResourceGroup {
 			}
 		}
 		groups.add(g);
-		if (g.individualResources != null) {
-			final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
-			final OsmandApplication app = getRoot().app;
-			final OsmandRegions osmandRegions = app.getRegions();
-			Collections.sort(g.individualResources, new Comparator<IndexItem>() {
-				@Override
-				public int compare(IndexItem lhs, IndexItem rhs) {
-					int lli = lhs.getType().getOrderIndex();
-					int rri = rhs.getType().getOrderIndex();
-					if(lli < rri) {
-						return -1; 
-					} else if(lli > rri) {
-						return 1;
-					}
+		sortDisplayItems(g.individualDisplayItems);
+	}
 
+	protected void sortDisplayItems(List<DisplayItem> items) {
+		if (Algorithms.isEmpty(items)) return;
+		final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
+		final OsmandApplication app = getRoot().app;
+		final OsmandRegions osmandRegions = app.getRegions();
+		Collections.sort(items, new Comparator<DisplayItem>() {
+			@Override
+			public int compare(DisplayItem i1, DisplayItem i2) {
+				int lli = i1.getType().getOrderIndex();
+				int rri = i2.getType().getOrderIndex();
+				if(lli < rri) {
+					return -1;
+				} else if(lli > rri) {
+					return 1;
+				}
+				if (i1 instanceof IndexItem && i2 instanceof IndexItem) {
+					IndexItem lhs = (IndexItem) i1;
+					IndexItem rhs = (IndexItem) i2;
 					return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
 							rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
 				}
-			});
-		}
+				return 0;
+			}
+		});
 	}
 	
-	public void addItem(IndexItem i) {
+	public void addItem(DisplayItem i) {
 		i.setRelatedGroup(this);
-		individualResources.add(i);
+		individualDisplayItems.add(i);
 	}
 	
 	public boolean isEmpty() {
-		return isEmpty(individualResources) && isEmpty(groups);
+		return isEmpty(individualDisplayItems) && isEmpty(groups);
 	}
 
 	private boolean isEmpty(List<?> l) {
@@ -265,7 +273,7 @@ public class DownloadResourceGroup {
 	}
 	
 	public int size() {
-		return groups != null ? groups.size() : individualResources.size();
+		return groups != null ? groups.size() : individualDisplayItems.size();
 	}
 	
 	public DownloadResourceGroup getGroupByIndex(int ind) {
@@ -275,9 +283,9 @@ public class DownloadResourceGroup {
 		return null;
 	}
 	
-	public IndexItem getItemByIndex(int ind) {
-		if (individualResources != null && ind >= 0 && ind < individualResources.size()) {
-			return individualResources.get(ind);
+	public Object getItemByIndex(int ind) {
+		if (individualDisplayItems != null && ind >= 0 && ind < individualDisplayItems.size()) {
+			return individualDisplayItems.get(ind);
 		}
 		return null;
 	}
@@ -306,7 +314,19 @@ public class DownloadResourceGroup {
 	}
 	
 	public List<IndexItem> getIndividualResources() {
+		List<IndexItem> individualResources = new ArrayList<>();
+		if (individualDisplayItems != null) {
+			for (DisplayItem item : individualDisplayItems) {
+				if (item instanceof IndexItem) {
+					individualResources.add((IndexItem) item);
+				}
+			}
+		}
 		return individualResources;
+	}
+
+	public List<DisplayItem> getIndividualDisplayItems() {
+		return individualDisplayItems;
 	}
 	
 	public WorldRegion getRegion() {
