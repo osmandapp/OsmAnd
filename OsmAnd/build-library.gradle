@@ -28,10 +28,6 @@ android {
 	}
 }
 
-def replaceNoTranslate(line) {
-	return line;
-}
-
 afterEvaluate {
 	android.libraryVariants.all { variant ->
 		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
