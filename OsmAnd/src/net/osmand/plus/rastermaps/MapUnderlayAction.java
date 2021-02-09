@@ -15,19 +15,19 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
@@ -141,14 +141,9 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 				settings.MAP_UNDERLAY.set(null);
 				activity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
 				settings.MAP_UNDERLAY_PREVIOUS.set(null);
-
-
 			}
-			final CommonPreference<Boolean> hidePolygonsPref =
-					activity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
-			hidePolygonsPref.set(hasUnderlay);
-
 			plugin.updateMapLayers(activity.getMapView(), settings.MAP_UNDERLAY, activity.getMapLayers());
+			activity.refreshMapComplete();
 			Toast.makeText(activity, activity.getString(R.string.quick_action_map_underlay_switch,
 					getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
 		}

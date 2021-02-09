@@ -109,7 +109,7 @@ public class ContourLinesMenu {
 								@Override
 								public void run() {
 									mapActivity.getDashboard().refreshContent(true);
-									SRTMPlugin.refreshMapComplete(mapActivity);
+									mapActivity.refreshMapComplete();
 								}
 							});
 						}
@@ -123,7 +123,7 @@ public class ContourLinesMenu {
 								item.setDescription(plugin.getPrefDescription(app, contourLinesProp, pref));
 								adapter.notifyDataSetChanged();
 							}
-							SRTMPlugin.refreshMapComplete(mapActivity);
+							mapActivity.refreshMapComplete();
 						}
 					});
 				} else if (itemId == colorSchemeStringId) {
@@ -135,7 +135,7 @@ public class ContourLinesMenu {
 								item.setDescription(plugin.getPrefDescription(app, colorSchemeProp, colorPref));
 								adapter.notifyDataSetChanged();
 							}
-							SRTMPlugin.refreshMapComplete(mapActivity);
+							mapActivity.refreshMapComplete();
 						}
 					});
 				} else if (itemId == R.string.srtm_plugin_name) {
@@ -150,7 +150,7 @@ public class ContourLinesMenu {
 								item.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref));
 								adapter.notifyDataSetChanged();
 							}
-							SRTMPlugin.refreshMapComplete(mapActivity);
+							mapActivity.refreshMapComplete();
 						}
 					});
 				} else if (contourDensityProp != null && itemId == contourDensityName.hashCode()) {
@@ -162,7 +162,7 @@ public class ContourLinesMenu {
 								item.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref));
 								adapter.notifyDataSetChanged();
 							}
-							SRTMPlugin.refreshMapComplete(mapActivity);
+							mapActivity.refreshMapComplete();
 						}
 					});
 				}

@@ -40,7 +40,7 @@ public class TerrainAction extends QuickAction {
 						OsmandPlugin.enablePlugin(activity, activity.getMyApplication(), plugin, true);
 					}
 					plugin.updateLayers(activity.getMapView(), activity);
-					SRTMPlugin.refreshMapComplete(activity);
+					activity.refreshMapComplete();
 				}
 			});
 		}
