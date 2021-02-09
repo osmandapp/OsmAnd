@@ -219,9 +219,8 @@ public class TransportLinesMenu {
 		return transportPrefs;
 	}
 
-
 	private static void refreshMap(MapActivity mapActivity) {
-		ConfigureMapMenu.refreshMapComplete(mapActivity);
+		mapActivity.refreshMapComplete();
 		mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
 	}
 

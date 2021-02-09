@@ -110,6 +110,7 @@ import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
 import static net.osmand.plus.track.TrackPointsCard.ADD_WAYPOINT_INDEX;
 import static net.osmand.plus.track.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
@@ -823,6 +824,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				} else {
 					pointsCard.setSelectionMode(true);
 				}
+			} else if (buttonIndex == OPEN_WAYPOINT_INDEX) {
+				dismiss();
 			}
 		}
 	}

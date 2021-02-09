@@ -261,11 +261,6 @@ public class ConfigureMapMenu {
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 	}
 
-	public static void refreshMapComplete(final MapActivity activity) {
-		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
-		activity.updateMapSettings();
-		activity.getMapView().refreshMap(true);
-	}
 
 	private void createRenderingAttributeItems(List<RenderingRuleProperty> customRules,
 											   final ContextMenuAdapter adapter, final MapActivity activity,
@@ -347,7 +342,7 @@ public class ConfigureMapMenu {
 									public void onClick(View v) {
 										int which = (int) v.getTag();
 										view.getSettings().DAYNIGHT_MODE.set(DayNightMode.values()[which]);
-										refreshMapComplete(activity);
+										activity.refreshMapComplete();
 										activity.getDashboard().refreshContent(true);
 										// adapter.getItem(pos).setDescription(s, getDayNightDescr(activity));
 										// ad.notifyDataSetInvalidated();
@@ -466,7 +461,7 @@ public class ConfigureMapMenu {
 									public void onClick(View v) {
 										int which = (int) v.getTag();
 										view.getSettings().TEXT_SCALE.set(txtValues[which]);
-										refreshMapComplete(activity);
+										activity.refreshMapComplete();
 										adapter.getItem(pos).setDescription(getScale(activity));
 										ad.notifyDataSetInvalidated();
 									}
@@ -568,7 +563,7 @@ public class ConfigureMapMenu {
 								int index = dlg.getListView().getCheckedItemPosition();
 								view.getSettings().MAP_PREFERRED_LOCALE.set(
 										txtIds[index]);
-								refreshMapComplete(activity);
+								activity.refreshMapComplete();
 								String localeDescr = txtIds[index];
 								localeDescr = localeDescr == null || localeDescr.isEmpty() ? activity
 										.getString(R.string.local_map_names) : localeDescr;
@@ -712,7 +707,7 @@ public class ConfigureMapMenu {
 						}
 						adapter.getItem(pos).setColorRes(ContextMenuItem.INVALID_ID);
 						a.notifyDataSetInvalidated();
-						refreshMapComplete(activity);
+						activity.refreshMapComplete();
 						activity.getMapLayers().updateLayers(activity.getMapView());
 					} else {
 						if (UI_CATEGORY_DETAILS.equals(category)) {
@@ -883,7 +878,7 @@ public class ConfigureMapMenu {
 					adapter.getItem(pos).setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				}
 				a.notifyDataSetInvalidated();
-				refreshMapComplete(activity);
+				activity.refreshMapComplete();
 				activity.getMapLayers().updateLayers(activity.getMapView());
 			}
 		});
@@ -1041,7 +1036,7 @@ public class ConfigureMapMenu {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							pref.set(!pref.get());
-							refreshMapComplete(activity);
+							activity.refreshMapComplete();
 							return false;
 						}
 					})
@@ -1096,7 +1091,7 @@ public class ConfigureMapMenu {
 											} else {
 												pref.set(p.getPossibleValues()[which - 1]);
 											}
-											refreshMapComplete(activity);
+											activity.refreshMapComplete();
 											String description = AndroidUtils.getRenderingStringPropertyValue(activity, pref.get());
 											adapter.getItem(pos).setDescription(description);
 										}
