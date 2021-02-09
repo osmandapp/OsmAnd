@@ -396,7 +396,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 						Snackbar snackbar = Snackbar.make(mapActivity.getLayout(),
 								getString(R.string.shared_string_file_is_saved, gpxFileName),
 								Snackbar.LENGTH_LONG)
-								.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+								.setAction(R.string.shared_string_rename, new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
 										final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
