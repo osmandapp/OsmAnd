@@ -29,17 +29,16 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadTilesDialog;
-import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.dialogs.RasterMapMenu;
+import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -54,6 +53,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_U
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
@@ -66,6 +66,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	private MapTileLayer overlayLayer;
 	private MapTileLayer underlayLayer;
+	private StateChangedListener<String> underlayListener;
 	private StateChangedListener<Integer> overlayLayerListener;
 
 	public OsmandRasterMapsPlugin(OsmandApplication app) {
@@ -101,6 +102,20 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	@Override
 	public String getHelpFileName() {
 		return "feature_articles/online-maps-plugin.html";
+	}
+
+	@Override
+	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
+		final CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty("noPolygons");
+		underlayListener = new StateChangedListener<String>() {
+			@Override
+			public void stateChanged(String change) {
+				hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+			}
+		};
+		// mapView.addLayer(overlayLayer, 0.7f);
+		settings.MAP_UNDERLAY.addListener(underlayListener);
+		return true;
 	}
 
 	@Override
@@ -147,10 +162,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			mapView.removeLayer(underlayLayer);
 			underlayLayer.setMap(null);
 		}
-		if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY &&
+		if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY &&
 				underlayLayer.getMap() != null || underlayLayer.getMapTileAdapter() != null) {
 			layers.getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY, true);
-		} else if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY &&
+		} else if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY &&
 				overlayLayer.getMap() != null || overlayLayer.getMapTileAdapter() != null) {
 			layers.getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
 		} else {
@@ -339,7 +354,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 											adapter.notifyDataSetChanged();
 
-											RasterMapMenu.refreshMapComplete(mapActivity);
+											refreshMapComplete(mapActivity);
 										}
 									}
 								}

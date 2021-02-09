@@ -15,6 +15,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.render.RenderingRuleProperty;
 
+import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
 
@@ -52,8 +53,7 @@ public class ContourLinesAction extends QuickAction {
 						if (selected && !plugin.isActive() && !plugin.needsInstallation()) {
 							OsmandPlugin.enablePlugin(activity, app, plugin, true);
 						}
-
-						SRTMPlugin.refreshMapComplete(activity);
+						refreshMapComplete(activity);
 					}
 				}
 			});

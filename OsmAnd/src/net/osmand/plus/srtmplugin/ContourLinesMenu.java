@@ -24,6 +24,7 @@ import net.osmand.render.RenderingRuleProperty;
 import java.io.IOException;
 import java.util.List;
 
+import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
@@ -109,7 +110,7 @@ public class ContourLinesMenu {
 								@Override
 								public void run() {
 									mapActivity.getDashboard().refreshContent(true);
-									SRTMPlugin.refreshMapComplete(mapActivity);
+									refreshMapComplete(mapActivity);
 								}
 							});
 						}
@@ -123,7 +124,7 @@ public class ContourLinesMenu {
 								item.setDescription(plugin.getPrefDescription(app, contourLinesProp, pref));
 								adapter.notifyDataSetChanged();
 							}
-							SRTMPlugin.refreshMapComplete(mapActivity);
+							refreshMapComplete(mapActivity);
 						}
 					});
 				} else if (itemId == colorSchemeStringId) {
@@ -135,7 +136,7 @@ public class ContourLinesMenu {
 								item.setDescription(plugin.getPrefDescription(app, colorSchemeProp, colorPref));
 								adapter.notifyDataSetChanged();
 							}
-							SRTMPlugin.refreshMapComplete(mapActivity);
+							refreshMapComplete(mapActivity);
 						}
 					});
 				} else if (itemId == R.string.srtm_plugin_name) {
@@ -150,7 +151,7 @@ public class ContourLinesMenu {
 								item.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref));
 								adapter.notifyDataSetChanged();
 							}
-							SRTMPlugin.refreshMapComplete(mapActivity);
+							refreshMapComplete(mapActivity);
 						}
 					});
 				} else if (contourDensityProp != null && itemId == contourDensityName.hashCode()) {
@@ -162,7 +163,7 @@ public class ContourLinesMenu {
 								item.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref));
 								adapter.notifyDataSetChanged();
 							}
-							SRTMPlugin.refreshMapComplete(mapActivity);
+							refreshMapComplete(mapActivity);
 						}
 					});
 				}

@@ -13,6 +13,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 
+import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
+
 public class TerrainAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(30,
@@ -40,7 +42,7 @@ public class TerrainAction extends QuickAction {
 						OsmandPlugin.enablePlugin(activity, activity.getMyApplication(), plugin, true);
 					}
 					plugin.updateLayers(activity.getMapView(), activity);
-					SRTMPlugin.refreshMapComplete(activity);
+					refreshMapComplete(activity);
 				}
 			});
 		}

@@ -44,6 +44,7 @@ import java.util.List;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -505,12 +506,6 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public void disable(OsmandApplication app) {
-	}
-
-	public static void refreshMapComplete(final MapActivity activity) {
-		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
-		activity.updateMapSettings();
-		activity.getMapView().refreshMap(true);
 	}
 
 	private static boolean isNightMode(Activity activity, OsmandApplication app) {
