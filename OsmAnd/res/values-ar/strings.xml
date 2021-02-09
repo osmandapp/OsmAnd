@@ -1964,8 +1964,7 @@
 \nليست هناك حاجة لتحميل خريطة خاصة،الرؤية يتم إنشاؤها من خلال خرائطنا المحلية. 
 \n 
 \nهذه الرؤية يمكن التراجع عنها إما عن طريق تعطيلها هنا، أو تغيير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>Online OSM</u> تصنيف الخريطة مع الصور.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> تصنيف الخريطة مع الصور.</string>
     <string name="background_service_wait_int_descr">تعيين الحد الأقصى لوقت الانتظار لكل إصلاح موقع في الخلفية.</string>
     <string name="background_service_wait_int">الانتظار الأقصى للإصلاح</string>
     <string name="voice_data_not_supported">إصدار غير معتمد من البيانات الصوتية</string>
@@ -2074,7 +2073,7 @@
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
-    <string name="wiki_around">مقالات ويكيبيديا قريبة</string>
+    <string name="wiki_around">مقالات ويكيبيديا القريبة</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
@@ -2618,7 +2617,7 @@
     <string name="south_abbreviation">ج</string>
     <string name="north_abbreviation">ش</string>
     <string name="optional_point_name">اسم النقطة</string>
-    <string name="transport_nearby_routes_within">الطرق القريبة في الداخل</string>
+    <string name="transport_nearby_routes_within">الطرق الداخلية المجاورة</string>
     <string name="enter_the_file_name">أدخل اسم الملف.</string>
     <string name="map_import_error">خطأ أثناء استرجاع الخريطة</string>
     <string name="map_imported_successfully">تمت عملية استيراد الخريطة</string>
@@ -3945,7 +3944,7 @@
     <string name="login_account">الحساب</string>
     <string name="user_login">تسجيل الدخول</string>
     <string name="gpx_upload_trackable_visibility_descr">\"إمكانية التتبع\" تعني أن التتبع لا يظهر في أي قوائم عامة ولكن نقاط التتبع المعالجة مع طوابع زمنية صادرة عنها(التي لا يمكن أن تكون مرتبطة بك مباشرة) ستظهر خلال التنزيلات من واجهة برمجة التطبيقات GPS API العامة.</string>
-    <string name="markers_history">سجل تاريخ العلامات</string>
+    <string name="markers_history">سِجل تاريخ العلامات</string>
     <string name="send_files_to_openstreetmap">أرسل ملف GPX إلى OpenStreetMap</string>
     <string name="enter_text_separated">أدخل العلامات مفصولة بفاصلة.</string>
     <string name="gpx_upload_private_visibility_descr">\"خاص\"يعني أن التتبع لن يظهر في أي قوائم عامة ، ولكن نقاط التتبع الصادرة عنه ستظل متاحة من خلال واجهة برمجة تطبيقات GPS API العامة بدون طوابع زمنية ولكن لن يتم ترتيبها ترتيبًا زمنيًا.</string>
