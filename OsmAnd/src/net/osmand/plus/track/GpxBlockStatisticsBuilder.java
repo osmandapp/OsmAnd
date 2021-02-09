@@ -89,6 +89,7 @@ public class GpxBlockStatisticsBuilder {
 				if (bsAdapter != null) {
 					initItems();
 					bsAdapter.setItems(items);
+					AndroidUiHelper.updateVisibility(blocksView, !Algorithms.isEmpty(items));
 				}
 				int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
 				handler.postDelayed(this, Math.max(1000, interval));
@@ -272,7 +273,7 @@ public class GpxBlockStatisticsBuilder {
 		public void setItems(List<StatBlock> statBlocks) {
 			this.statBlocks.clear();
 			this.statBlocks.addAll(statBlocks);
-			notifyItemRangeChanged(0, getItemCount());
+			notifyDataSetChanged();
 		}
 	}
 

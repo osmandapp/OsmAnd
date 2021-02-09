@@ -360,10 +360,10 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void addActionsToAdapter(final double latitude,
-	                                final double longitude,
-	                                final ContextMenuAdapter adapter,
-	                                Object selectedObj,
-	                                boolean configureMenu) {
+									final double longitude,
+									final ContextMenuAdapter adapter,
+									Object selectedObj,
+									boolean configureMenu) {
 		ItemBuilder itemBuilder = new ItemBuilder();
 
 		adapter.addItem(itemBuilder
@@ -543,17 +543,17 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu) {
+											   boolean useIntermediatePointsByDefault, boolean showMenu) {
 		enterRoutePlanningModeGivenGpx(gpxFile, from, fromName, useIntermediatePointsByDefault, showMenu, MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
+											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu, menuState);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
+											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -843,7 +843,8 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		boolean isTripRecordingPluginOn = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null;
+		final OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		boolean isTripRecordingPluginOn = monitoringPlugin != null;
 		if (isTripRecordingPluginOn) {
 			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_widget_monitoring, mapActivity)
 					.setId(DRAWER_TRIP_RECORDING_ID)
@@ -853,7 +854,13 @@ public class MapActivityActions implements DialogProvider {
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							app.logEvent("trip_recording_open");
 							MapActivity.clearPrevActivityIntent();
-							TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+							if (monitoringPlugin.isHasDataToSave() || monitoringPlugin.isWasTrackMonitored()) {
+								TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
+										monitoringPlugin.getCurrentTrack(), monitoringPlugin.isWasTrackMonitored(),
+										monitoringPlugin.isHasDataToSave(), monitoringPlugin.isSearchingGPS());
+							} else {
+								TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+							}
 							return true;
 						}
 					}).createItem());
@@ -1107,7 +1114,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	private String getProfileDescription(OsmandApplication app, ApplicationMode mode,
-	                                     Map<String, ProfileDataObject> profilesObjects, String defaultDescription) {
+										 Map<String, ProfileDataObject> profilesObjects, String defaultDescription) {
 		String description = defaultDescription;
 
 		String routingProfileKey = mode.getRoutingProfile();

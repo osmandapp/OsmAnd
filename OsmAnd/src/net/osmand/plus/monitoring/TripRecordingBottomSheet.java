@@ -28,6 +28,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -246,12 +247,12 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected int getRightButtonHeight(){
+	protected int getRightButtonHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 	}
 
 	@Override
-	protected int getDismissButtonHeight(){
+	protected int getDismissButtonHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 	}
 
@@ -280,6 +281,9 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		app.getSavingTrackHelper().startNewSegment();
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 		app.startNavigationService(NavigationService.USED_BY_GPX);
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		TripRecordingActiveBottomSheet.showInstance(getMapActivity().getSupportFragmentManager(),
+				plugin.getCurrentTrack(), plugin.isWasTrackMonitored(), plugin.isHasDataToSave(), plugin.isSearchingGPS());
 		dismiss();
 	}
 
