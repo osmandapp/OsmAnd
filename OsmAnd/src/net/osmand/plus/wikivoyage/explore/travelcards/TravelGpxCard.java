@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 
@@ -47,10 +48,14 @@ public class TravelGpxCard extends BaseTravelCard {
 			holder.title.setText(article.getTitle());
 			holder.userIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_user_account_16));
 			holder.user.setText(article.user);
-			RouteActivityType activityType = RouteActivityType.getTypeFromName(article.activityType);
-			holder.activityTypeIcon.setImageDrawable(getActiveIcon(getActivityTypeIcon(activityType)));
-			holder.activityType.setText(getActivityTypeTitle(activityType));
-			holder.activityTypeLabel.setVisibility(View.VISIBLE);
+			String activityTypeKey = article.activityType;
+			if (!Algorithms.isEmpty(activityTypeKey)) {
+				RouteActivityType activityType = RouteActivityType.getOrCreateTypeFromName(activityTypeKey);
+				int activityTypeIcon = getActivityTypeIcon(activityType);
+				holder.activityTypeIcon.setImageDrawable(getActiveIcon(activityTypeIcon));
+				holder.activityType.setText(getActivityTypeTitle(activityType));
+				holder.activityTypeLabel.setVisibility(View.VISIBLE);
+			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
 			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));
 			holder.diffElevationDown.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationDown, app));
@@ -75,7 +80,8 @@ public class TravelGpxCard extends BaseTravelCard {
 
 	@DrawableRes
 	private int getActivityTypeIcon(RouteActivityType activityType) {
-		return app.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", app.getPackageName());
+		int iconId = app.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", app.getPackageName());
+		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
 	}
 
 	private String getActivityTypeTitle(RouteActivityType activityType) {

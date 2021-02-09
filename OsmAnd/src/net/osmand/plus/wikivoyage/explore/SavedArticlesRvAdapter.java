@@ -18,12 +18,13 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
+import net.osmand.osm.RouteActivityType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard.*;
+import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -140,10 +142,12 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			holder.title.setText(article.getTitle());
 			holder.userIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_user_account_16));
 			holder.user.setText(article.user);
-			if(!Algorithms.isEmpty(article.activityType)) {
-				ProfileIcons activityRes = ProfileIcons.valueOf(article.activityType.toUpperCase());
-				holder.activityTypeIcon.setImageDrawable(getActiveIcon(activityRes.getResId()));
-				holder.activityType.setText(activityRes.getTitleId());
+			String activityTypeKey = article.activityType;
+			if (!Algorithms.isEmpty(activityTypeKey)) {
+				RouteActivityType activityType = RouteActivityType.getOrCreateTypeFromName(activityTypeKey);
+				int activityTypeIcon = getActivityTypeIcon(activityType);
+				holder.activityTypeIcon.setImageDrawable(getActiveIcon(activityTypeIcon));
+				holder.activityType.setText(getActivityTypeTitle(activityType));
 				holder.activityTypeLabel.setVisibility(View.VISIBLE);
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
@@ -163,6 +167,17 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			holder.leftButton.setCompoundDrawablesWithIntrinsicBounds(readIcon, null, null, null);
 			updateSaveButton(holder, article);
 		}
+	}
+
+	@DrawableRes
+	private int getActivityTypeIcon(RouteActivityType activityType) {
+		int iconId = app.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", app.getPackageName());
+		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
+	}
+
+	private String getActivityTypeTitle(RouteActivityType activityType) {
+		return AndroidUtils.getActivityTypeStringPropertyName(app, activityType.getName(),
+				capitalizeFirstLetterAndLowercase(activityType.getName()));
 	}
 
 	private void updateSaveButton(final TravelGpxVH holder, final TravelGpx article) {

@@ -43,7 +43,7 @@ public class RouteActivityType {
 		return icon;
 	}
 
-	public static RouteActivityType getTypeFromName(String name) {
+	public static RouteActivityType getOrCreateTypeFromName(String name) {
 		for (RouteActivityType rat : values) {
 			if (rat.name.equalsIgnoreCase(name)) {
 				return rat;
