@@ -3355,8 +3355,8 @@
     <string name="sett_generic_ext_input">لوحة المفاتيح</string>
     <string name="sett_wunderlinq_ext_input">وندرلينك</string>
     <string name="sett_parrot_ext_input">ببغاء</string>
-    <string name="new_route_calculated_dist_dbg">"المسار: المسافة%1$s، الوقت  %2$s.
-\nالحساب: %3$.1f ث، %4$d طريق، %5$d تجانب"</string>
+    <string name="new_route_calculated_dist_dbg">المسار: المسافة%1$s، الوقت %2$s.
+\nالحساب: %3$.1f ث، %4$d طريق، %5$d تجانب</string>
     <string name="lang_oc">الأوكيتانية</string>
     <string name="get_discount_second_part">ثم %1$s</string>
     <string name="apply_to_current_profile">تطبيق فقط على \"%1$s\"</string>
