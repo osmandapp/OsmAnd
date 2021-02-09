@@ -16,6 +16,14 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
@@ -31,14 +39,6 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.util.Algorithms;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
@@ -242,7 +242,7 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		return "<body style=\"color:white;\">\n" + content + "</body>\n";
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String title, @NonNull String imageUrl, @NonNull String description) {
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String title, @Nullable String imageUrl, @NonNull String description) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			Bundle args = new Bundle();
