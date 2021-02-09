@@ -593,7 +593,7 @@ public class GpxUiHelper {
 							}
 						}
 						if (activity instanceof MapActivity) {
-							ConfigureMapMenu.refreshMapComplete((MapActivity) activity);
+							((MapActivity) activity).refreshMapComplete();
 						}
 					}
 					GPXFile currentGPX = null;

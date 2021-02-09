@@ -53,7 +53,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_U
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
@@ -113,7 +112,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
 			}
 		};
-		// mapView.addLayer(overlayLayer, 0.7f);
 		settings.MAP_UNDERLAY.addListener(underlayListener);
 		return true;
 	}
@@ -354,7 +352,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 											adapter.notifyDataSetChanged();
 
-											refreshMapComplete(mapActivity);
+											mapActivity.refreshMapComplete();
 										}
 									}
 								}

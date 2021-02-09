@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
 
 public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
@@ -144,7 +143,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 				settings.MAP_UNDERLAY_PREVIOUS.set(null);
 			}
 			plugin.updateMapLayers(activity.getMapView(), settings.MAP_UNDERLAY, activity.getMapLayers());
-			refreshMapComplete(activity);
+			activity.refreshMapComplete();
 			Toast.makeText(activity, activity.getString(R.string.quick_action_map_underlay_switch,
 					getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
 		}

@@ -96,7 +96,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
 
 public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInformationListener {
 	private static final org.apache.commons.logging.Log LOG =
@@ -779,7 +778,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					plugin.registerLayers(mapActivity);
 				}
 			}
-			refreshMapComplete(mapActivity);
+			mapActivity.refreshMapComplete();
 		} else if (visibleType == DashboardType.WIKIPEDIA) {
 			refreshContent(true);
 		}

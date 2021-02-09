@@ -44,7 +44,6 @@ import java.util.List;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -308,9 +307,8 @@ public class SRTMPlugin extends OsmandPlugin {
 									item.setSelected(selected);
 									adapter.notifyDataSetChanged();
 								}
-								refreshMapComplete(mapActivity);
+								mapActivity.refreshMapComplete();
 							}
-
 						}
 					});
 				} else if (itemId == R.string.shared_string_terrain) {
@@ -329,7 +327,7 @@ public class SRTMPlugin extends OsmandPlugin {
 								adapter.notifyDataSetChanged();
 							}
 							updateLayers(mapView, mapActivity);
-							refreshMapComplete(mapActivity);
+							mapActivity.refreshMapComplete();
 						}
 					});
 				}
@@ -487,7 +485,7 @@ public class SRTMPlugin extends OsmandPlugin {
 						} else {
 							pref.set(possibleValues[which - 1]);
 						}
-						refreshMapComplete(activity);
+						activity.refreshMapComplete();
 					}
 				}
 		);

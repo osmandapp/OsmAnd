@@ -20,7 +20,6 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
 
 public class RasterMapMenu {
 	private static final String TAG = "RasterMapMenu";
@@ -107,12 +106,12 @@ public class RasterMapMenu {
 						@Override
 						public void run() {
 							plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
-							refreshMapComplete(mapActivity);
+							mapActivity.refreshMapComplete();
 						}
 					});
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
-					refreshMapComplete(mapActivity);
+					mapActivity.refreshMapComplete();
 				} else if (itemId == R.string.show_transparency_seekbar) {
 					if (isChecked) {
 						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);

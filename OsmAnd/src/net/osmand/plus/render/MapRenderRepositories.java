@@ -753,11 +753,6 @@ public class MapRenderRepositories {
 
 			now = System.currentTimeMillis();
 			Bitmap bmp;
-//			boolean transparent = false;
-//			RenderingRuleProperty rr = storage.PROPS.get("noPolygons");
-//			if (rr != null) {
-//				transparent = renderingReq.getIntPropertyValue(rr) > 0;
-//			}
 
 			// 1. generate image step by step
 			Bitmap reuse = prevBmp;
