@@ -1212,7 +1212,7 @@
     <string name="poi_description">Περιγραφή</string>
     <string name="poi_phone">Τηλέφωνο</string>
     <string name="poi_website">Ιστότοπος</string>
-    <string name="poi_email">Ηλ. διεύθυνση</string>
+    <string name="poi_email">Ηλεκτρονικό ταχυδρομείο</string>
     <string name="poi_fax">Τηλεομοιότυπο (φαξ)</string>
     <string name="facebook">Facebook</string>
     <string name="twitter">Twitter</string>

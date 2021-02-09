@@ -36,9 +36,9 @@ android {
 
 	defaultConfig {
 		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 15
-		versionCode 390
+		versionCode 400
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "3.9.0"
+		versionName "4.0.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -105,31 +105,45 @@ android {
 		nightlyFree {
 			dimension "version"
 			applicationId "net.osmand.dev"
+			resValue "string", "app_name", "OsmAnd Nightly"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
 			// resConfig "en"
 		}
 		androidFull {
 			dimension "version"
 			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd~"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
 		}
 		gplayFree {
 			dimension "version"
 			applicationId "net.osmand"
+			resValue "string", "app_name", "OsmAnd"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
 		}
 		gplayFull {
 			dimension "version"
 			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd+"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
 		}
 		amazonFree {
 			dimension "version"
 			applicationId "net.osmand"
+			resValue "string", "app_name", "OsmAnd"
+			resValue "string", "app_edition", ""
 		}
 		amazonFull {
 			dimension "version"
 			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd+"
+			resValue "string", "app_edition", ""
 		}
 		huawei {
 			dimension "version"
 			applicationId "net.osmand.huawei"
+			resValue "string", "app_name", "OsmAnd"
+			resValue "string", "app_edition", ""
 		}
 
         // Build that includes 3D OpenGL release
@@ -154,19 +168,6 @@ android {
 		}
 	}
 
-}
-
-def replaceNoTranslate(line) {
-	if (line.contains("\"app_name\"") && System.getenv("TARGET_APP_NAME")) {
-		return line.replaceAll(">[^<]*<", ">" + System.getenv("TARGET_APP_NAME") + "<")
-	}
-	if (line.contains("\"app_name_free\"") && System.getenv("TARGET_APP_NAME")) {
-		return line.replaceAll(">[^<]*<", ">" + System.getenv("TARGET_APP_NAME") + "<")
-	}
-	if (line.contains("\"app_edition\"") && System.getenv("APP_EDITION")) {
-		return line.replaceAll(">[^<]*<", ">" + System.getenv("APP_EDITION") + "<")
-	}
-	return line;
 }
 
 afterEvaluate {

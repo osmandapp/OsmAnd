@@ -20,6 +20,7 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
 
+
 public class RasterMapMenu {
 	private static final String TAG = "RasterMapMenu";
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
@@ -105,12 +106,12 @@ public class RasterMapMenu {
 						@Override
 						public void run() {
 							plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
-							refreshMapComplete(mapActivity);
+							mapActivity.refreshMapComplete();
 						}
 					});
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
-					refreshMapComplete(mapActivity);
+					mapActivity.refreshMapComplete();
 				} else if (itemId == R.string.show_transparency_seekbar) {
 					if (isChecked) {
 						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);
@@ -179,11 +180,5 @@ public class RasterMapMenu {
 				type == RasterMapType.OVERLAY ? LayerTransparencySeekbarMode.OVERLAY : LayerTransparencySeekbarMode.UNDERLAY;
 		LayerTransparencySeekbarMode seekbarMode = app.getSettings().LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		return seekbarMode == LayerTransparencySeekbarMode.UNDEFINED || seekbarMode == currentMapTypeSeekbarMode;
-	}
-
-	public static void refreshMapComplete(final MapActivity activity) {
-		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
-		activity.updateMapSettings();
-		activity.getMapView().refreshMap(true);
 	}
 }
