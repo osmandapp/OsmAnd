@@ -131,16 +131,19 @@ android {
 			dimension "version"
 			applicationId "net.osmand"
 			resValue "string", "app_name", "OsmAnd"
+			resValue "string", "app_edition", ""
 		}
 		amazonFull {
 			dimension "version"
 			applicationId "net.osmand.plus"
 			resValue "string", "app_name", "OsmAnd+"
+			resValue "string", "app_edition", ""
 		}
 		huawei {
 			dimension "version"
 			applicationId "net.osmand.huawei"
 			resValue "string", "app_name", "OsmAnd"
+			resValue "string", "app_edition", ""
 		}
 
         // Build that includes 3D OpenGL release
