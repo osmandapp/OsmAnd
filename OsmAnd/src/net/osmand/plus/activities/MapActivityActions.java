@@ -515,6 +515,10 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void setGPXRouteParams(GPXFile result) {
+		setGPXRouteParams(result, -1);
+	}
+
+	public void setGPXRouteParams(GPXFile result, int selectedSegment) {
 		if (result == null) {
 			mapActivity.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
@@ -522,6 +526,7 @@ public class MapActivityActions implements DialogProvider {
 			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, settings);
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
+			params.setSelectedSegment(selectedSegment);
 			List<Location> ps = params.getPoints(settings.getContext());
 			mapActivity.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);

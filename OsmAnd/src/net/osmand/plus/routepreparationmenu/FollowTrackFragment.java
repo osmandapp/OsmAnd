@@ -502,6 +502,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					updateSelectionMode(false);
 				} else {
 					TrackSelectSegmentBottomSheet.showInstance(fragmentManager, selectedGpxFile);
+					selectTrackToFollow(selectedGpxFile.getGpxFile());
+					updateSelectionMode(true);
 				}
 			} else {
 				CallbackWithObject<GPXFile[]> callback = new CallbackWithObject<GPXFile[]>() {
@@ -530,7 +532,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
 				}
 			}
-			mapActivity.getMapActions().setGPXRouteParams(gpxFile);
+			mapActivity.getMapActions().setGPXRouteParams(gpxFile, 1);
 			app.getTargetPointsHelper().updateRouteAndRefresh(true);
 			app.getRoutingHelper().onSettingsChanged(true);
 		}
