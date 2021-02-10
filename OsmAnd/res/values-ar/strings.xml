@@ -979,7 +979,7 @@
     <string name="map_source">مصدر الخريطة</string>
     <string name="layer_amenity_label">عرض أسماء المفضلة</string>
     <string name="map_locale">لغة الخريطة</string>
-    <string name="rendering_category_details">التفاصيل</string>
+    <string name="rendering_category_details">تفاصيل إضافية</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
     <string name="rotate_map_to_bearing">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة في الأعلى</string>
