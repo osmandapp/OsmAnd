@@ -471,7 +471,7 @@
     <string name="index_name_africa">إفريقيا</string>
     <string name="index_name_asia">آسيا</string>
     <string name="index_name_oceania">أستراليا و أوقيانوسيا</string>
-    <string name="routing_settings">التوجيه</string>
+    <string name="routing_settings">التوجيه مع الطرق</string>
     <string name="routing_settings_descr">ضبط خاص لكل وضع من أوضاع الملاحة.</string>
     <string name="index_settings">إدارة بيانات الخرائط</string>
     <string name="general_settings">إعدادات عامة</string>
@@ -721,8 +721,8 @@
     <string name="gpx_option_reverse_route">عكس اتجاه المسار</string>
     <string name="gpx_option_destination_point">استخدم الوجهة الحالية</string>
     <string name="gpx_option_from_start_point">يمر على طول المسار باكمله</string>
-    <string name="switch_to_vector_map_to_see">خريطة التنقل متوفرة لهذا الموقع فعلها عبر
-\n
+    <string name="switch_to_vector_map_to_see">خريطة التنقل متوفرة لهذا الموقع فعلها عبر 
+\n 
 \n\'القائمة\' ← \'ضبط الخريطة\' ← \'مصدر الخريطة\' ← \'الخريطة المحملة\'.</string>
     <string name="choose_audio_stream">مصدر التوجيه الصوتي</string>
     <string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي.</string>
