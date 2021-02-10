@@ -100,12 +100,15 @@ public class GpxBlockStatisticsBuilder {
 		GPXFile gpxFile = getGPXFile();
 		GpxDisplayItem gpxDisplayItem = null;
 		GPXTrackAnalysis analysis = null;
+		boolean withoutGaps = false;
 		if (gpxFile.tracks.size() > 0) {
 			gpxDisplayItem = getDisplayItem(gpxFile);
-			analysis = gpxDisplayItem.analysis;
 		}
-		if (gpxDisplayItem != null && analysis != null) {
-			boolean withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+		if (gpxDisplayItem != null) {
+			analysis = gpxDisplayItem.analysis;
+			withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+		}
+		if (analysis != null) {
 			float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 			float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
 			String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
