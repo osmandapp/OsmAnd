@@ -4023,4 +4023,17 @@
 \nכל הנתונים של OpenPlaceReview הם פתוחים וזמינים לציבור הרחב: http://openplacereviews.org/data.
 \n
 \nניתן לקרוא עוד באתר: http://openplacereviews.org</string>
+    <string name="activity_type_water_name">מים</string>
+    <string name="activity_type_winter_name">חורף</string>
+    <string name="activity_type_snowmobile_name">אופנוע שלג</string>
+    <string name="activity_type_riding_name">רכיבה</string>
+    <string name="activity_type_racing_name">מירוץ</string>
+    <string name="activity_type_mountainbike_name">אופני הרים</string>
+    <string name="activity_type_cycling_name">רכיבת אופניים</string>
+    <string name="activity_type_hiking_name">טיול שטח</string>
+    <string name="activity_type_running_name">ריצה</string>
+    <string name="activity_type_walking_name">הליכה</string>
+    <string name="activity_type_offroad_name">שטח</string>
+    <string name="activity_type_motorbike_name">אופנוע</string>
+    <string name="activity_type_car_name">מכונית</string>
 </resources>
