@@ -28,11 +28,11 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -278,12 +278,11 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		app.getSavingTrackHelper().startNewSegment();
+		SavingTrackHelper helper = app.getSavingTrackHelper();
+		helper.startNewSegment();
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 		app.startNavigationService(NavigationService.USED_BY_GPX);
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
-		TripRecordingActiveBottomSheet.showInstance(getMapActivity().getSupportFragmentManager(),
-				plugin.getCurrentTrack(), plugin.isWasTrackMonitored(), plugin.isHasDataToSave(), plugin.isSearchingGPS());
+		TripRecordingActiveBottomSheet.showInstance(getMapActivity().getSupportFragmentManager(), helper.getCurrentTrack());
 		dismiss();
 	}
 

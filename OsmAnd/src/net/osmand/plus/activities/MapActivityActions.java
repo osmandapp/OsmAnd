@@ -22,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -854,10 +853,8 @@ public class MapActivityActions implements DialogProvider {
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							app.logEvent("trip_recording_open");
 							MapActivity.clearPrevActivityIntent();
-							if (monitoringPlugin.isHasDataToSave() || monitoringPlugin.isWasTrackMonitored()) {
-								TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
-										monitoringPlugin.getCurrentTrack(), monitoringPlugin.isWasTrackMonitored(),
-										monitoringPlugin.isHasDataToSave(), monitoringPlugin.isSearchingGPS());
+							if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
+								TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), monitoringPlugin.getCurrentTrack());
 							} else {
 								TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 							}

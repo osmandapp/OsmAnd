@@ -37,10 +37,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -74,9 +72,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	private OsmandSettings settings;
 	private SavingTrackHelper helper;
 	private SelectedGpxFile selectedGpxFile;
-	private boolean wasTrackMonitored = false;
-	private boolean hasDataToSave = false;
-	private boolean searchingGPS = false;
 
 	private View statusContainer;
 	private View buttonSave;
@@ -94,26 +89,22 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		this.selectedGpxFile = selectedGpxFile;
 	}
 
-	public void setWasTrackMonitored(boolean wasTrackMonitored) {
-		this.wasTrackMonitored = wasTrackMonitored;
+	public boolean hasDataToSave() {
+		return app.getSavingTrackHelper().hasDataToSave();
 	}
 
-	public void setHasDataToSave(boolean hasDataToSave) {
-		this.hasDataToSave = hasDataToSave;
+	public boolean searchingGPS() {
+		return app.getLocationProvider().getLastKnownLocation() == null;
 	}
 
-	public void setSearchingGPS(boolean searchingGPS) {
-		this.searchingGPS = searchingGPS;
+	public boolean wasTrackMonitored() {
+		return settings != null && settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, SelectedGpxFile selectedGpxFile,
-									boolean wasTrackMonitored, boolean hasDataToSave, boolean searchingGPS) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, SelectedGpxFile selectedGpxFile) {
 		if (!fragmentManager.isStateSaved()) {
 			TripRecordingActiveBottomSheet fragment = new TripRecordingActiveBottomSheet();
 			fragment.setSelectedGpxFile(selectedGpxFile);
-			fragment.setWasTrackMonitored(wasTrackMonitored);
-			fragment.setHasDataToSave(hasDataToSave);
-			fragment.setSearchingGPS(searchingGPS);
 			fragment.show(fragmentManager, TAG);
 		}
 	}
@@ -137,9 +128,9 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		final View buttonPause = itemView.findViewById(R.id.button_pause);
 		View buttonStop = itemView.findViewById(R.id.button_stop);
 
-		createItem(buttonClear, ItemType.CLEAR_DATA, hasDataToSave, null);
-		createItem(buttonStart, ItemType.START_SEGMENT, wasTrackMonitored, null);
-		createItem(buttonPause, wasTrackMonitored ? ItemType.PAUSE : ItemType.RESUME, true, null);
+		createItem(buttonClear, ItemType.CLEAR_DATA, hasDataToSave(), null);
+		createItem(buttonStart, ItemType.START_SEGMENT, wasTrackMonitored(), null);
+		createItem(buttonPause, wasTrackMonitored() ? ItemType.PAUSE : ItemType.RESUME, true, null);
 		createItem(buttonStop, ItemType.STOP, true, null);
 
 		statusContainer = itemView.findViewById(R.id.status_container);
@@ -210,7 +201,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		buttonClear.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (fragmentManager != null && hasDataToSave) {
+				if (fragmentManager != null && hasDataToSave()) {
 					ClearRecordedDataBottomSheetFragment.showInstance(fragmentManager, TripRecordingActiveBottomSheet.this);
 				}
 			}
@@ -219,7 +210,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		buttonStart.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (wasTrackMonitored) {
+				if (wasTrackMonitored()) {
 					helper.startNewSegment();
 				}
 			}
@@ -228,7 +219,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		buttonSave.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (hasDataToSave) {
+				if (hasDataToSave()) {
 					final GPXFile gpxFile = getGPXFile();
 					new SaveCurrentTrackTask(app, gpxFile, createSaveListener(new Runnable() {
 						@Override
@@ -247,14 +238,13 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		buttonPause.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				boolean wasTrackMonitored = !settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+				boolean wasTrackMonitored = !wasTrackMonitored();
 				createItem(buttonPause, wasTrackMonitored ? ItemType.PAUSE : ItemType.RESUME, true, null);
 				if (!wasTrackMonitored) {
 					blockStatisticsBuilder.stopUpdatingStatBlocks();
 				} else {
 					blockStatisticsBuilder.runUpdatingStatBlocks();
 				}
-				TripRecordingActiveBottomSheet.this.wasTrackMonitored = wasTrackMonitored;
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(wasTrackMonitored);
 				updateStatus();
 			}
@@ -273,7 +263,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	private void updateStatus() {
 		TextView statusTitle = statusContainer.findViewById(R.id.text_status);
 		AppCompatImageView statusIcon = statusContainer.findViewById(R.id.icon_status);
-		ItemType status = searchingGPS ? ItemType.SEARCHING_GPS : !wasTrackMonitored ? ItemType.ON_PAUSE : ItemType.RECORDING;
+		ItemType status = searchingGPS() ? ItemType.SEARCHING_GPS : !wasTrackMonitored() ? ItemType.ON_PAUSE : ItemType.RECORDING;
 		statusTitle.setText(status.getTitleId());
 		int colorText = status.equals(ItemType.SEARCHING_GPS) ? getSecondaryTextColorId(nightMode) : getOsmandIconColorId(nightMode);
 		statusTitle.setTextColor(ContextCompat.getColor(app, colorText));
@@ -348,9 +338,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			@Override
 			public void run() {
 				int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
-				OsmAndLocationProvider locationProvider = app.getLocationProvider();
-				Location lastKnownLocation = locationProvider.getLastKnownLocation();
-				searchingGPS = lastKnownLocation == null;
 				updateStatus();
 				handler.postDelayed(this, Math.max(1000, interval));
 			}
@@ -367,7 +354,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			@Override
 			public void run() {
 				String time = getTimeTrackSaved();
-				createItem(buttonSave, ItemType.SAVE, hasDataToSave, !Algorithms.isEmpty(time) ? time : null);
+				createItem(buttonSave, ItemType.SAVE, hasDataToSave(), !Algorithms.isEmpty(time) ? time : null);
 				handler.postDelayed(this, 60000);
 			}
 		};
