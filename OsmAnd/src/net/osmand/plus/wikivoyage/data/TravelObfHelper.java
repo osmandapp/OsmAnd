@@ -80,9 +80,8 @@ public class TravelObfHelper implements TravelHelper {
 	private final Map<TravelArticleIdentifier, Map<String, TravelArticle>> cachedArticles = new ConcurrentHashMap<>();
 	private final TravelLocalDataHelper localDataHelper;
 	private int searchRadius = ARTICLE_SEARCH_RADIUS;
-	private int count = 0;
-	private int page = 0;
-	final List<Pair<File, Amenity>> amenities = new ArrayList<>();
+	private int foundAmenitiesIndex = 0;
+	private final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 
 	public TravelObfHelper(OsmandApplication app) {
 		this.app = app;
@@ -100,7 +99,13 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Override
-	public void initializeDataToDisplay() {
+	public void initializeDataToDisplay(boolean resetData) {
+		if (resetData) {
+			foundAmenities.clear();
+			foundAmenitiesIndex = 0;
+			popularArticles.clear();
+			searchRadius = ARTICLE_SEARCH_RADIUS;
+		}
 		localDataHelper.refreshCachedData();
 		loadPopularArticles();
 	}
@@ -108,19 +113,19 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	public synchronized List<TravelArticle> loadPopularArticles() {
 		String lang = app.getLanguage();
-		List<TravelArticle> popularArticles = new ArrayList<>();
-		if (amenities.size() - count < MAX_POPULAR_ARTICLES_COUNT) {
+		List<TravelArticle> popularArticles = new ArrayList<>(this.popularArticles);
+		if (foundAmenities.size() - foundAmenitiesIndex < MAX_POPULAR_ARTICLES_COUNT) {
 			final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
 			for (final BinaryMapIndexReader reader : getReaders()) {
 				try {
-					searchAmenity(amenities, location, reader, searchRadius, -1, ROUTE_ARTICLE);
-					searchAmenity(amenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK);
+					searchAmenity(foundAmenities, location, reader, searchRadius, -1, ROUTE_ARTICLE);
+					searchAmenity(foundAmenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK);
 				} catch (Exception e) {
 					LOG.error(e.getMessage(), e);
 				}
 			}
-			if (amenities.size() > 0) {
-				Collections.sort(amenities, new Comparator<Pair<File, Amenity>>() {
+			if (foundAmenities.size() > 0) {
+				Collections.sort(foundAmenities, new Comparator<Pair<File, Amenity>>() {
 					@Override
 					public int compare(Pair article1, Pair article2) {
 						Amenity amenity1 = (Amenity) article1.second;
@@ -136,22 +141,21 @@ public class TravelObfHelper implements TravelHelper {
 			searchRadius *= 2;
 		}
 
-		int lastIndex;
-		for (lastIndex = count; lastIndex < amenities.size() - 1; lastIndex++) {
-			Pair<File, Amenity> amenity = amenities.get(lastIndex);
+		int pagesCount = popularArticles.size() / MAX_POPULAR_ARTICLES_COUNT;
+		while (foundAmenitiesIndex < foundAmenities.size() - 1) {
+			Pair<File, Amenity> amenity = foundAmenities.get(foundAmenitiesIndex);
 			if (!Algorithms.isEmpty(amenity.second.getName(lang))) {
 				TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
-				if (article != null) {
+				if (article != null && !popularArticles.contains(article)) {
 					popularArticles.add(article);
-					this.popularArticles.add(article);
-					if (this.popularArticles.size() >= (page + 1) * MAX_POPULAR_ARTICLES_COUNT) {
-						page++;
+					if (popularArticles.size() >= (pagesCount + 1) * MAX_POPULAR_ARTICLES_COUNT) {
 						break;
 					}
 				}
 			}
+			foundAmenitiesIndex++;
 		}
-		count = ++lastIndex;
+		this.popularArticles = popularArticles;
 		return popularArticles;
 	}
 
@@ -184,10 +188,8 @@ public class TravelObfHelper implements TravelHelper {
 		}
 		if (!Algorithms.isEmpty(articles)) {
 			TravelArticleIdentifier newArticleId = articles.values().iterator().next().generateIdentifier();
-			if (!cachedArticles.containsKey(newArticleId)) {
-				cachedArticles.put(newArticleId, articles);
-				article = getCachedArticle(newArticleId, lang, readPoints, callback);
-			}
+			cachedArticles.put(newArticleId, articles);
+			article = getCachedArticle(newArticleId, lang, readPoints, callback);
 		}
 		return article;
 	}
@@ -628,8 +630,8 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Override
-	public TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @NonNull String lang,
-										boolean readGpx, @Nullable GpxReadCallback callback) {
+	public TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @Nullable String lang,
+	                                    boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle article = getCachedArticle(articleId, lang, readGpx, callback);
 		if (article == null) {
 			article = localDataHelper.getSavedArticle(articleId.file, articleId.routeId, lang);
@@ -641,8 +643,8 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Nullable
-	private TravelArticle getCachedArticle(@NonNull TravelArticleIdentifier articleId, @NonNull String lang,
-										   boolean readGpx, @Nullable GpxReadCallback callback) {
+	private TravelArticle getCachedArticle(@NonNull TravelArticleIdentifier articleId, @Nullable String lang,
+	                                       boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		Map<String, TravelArticle> articles = cachedArticles.get(articleId);
 		if (articles != null) {

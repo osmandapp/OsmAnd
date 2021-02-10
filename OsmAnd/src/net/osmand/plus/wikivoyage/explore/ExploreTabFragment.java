@@ -192,7 +192,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 				@Override
 				public void onPrimaryButtonClick() {
 					if (activity instanceof WikivoyageExploreActivity) {
-						new LoadWikivoyageData((WikivoyageExploreActivity) activity).execute();
+						new LoadWikivoyageData((WikivoyageExploreActivity) activity,false).execute();
 					}
 				}
 

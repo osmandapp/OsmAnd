@@ -25,7 +25,7 @@ public interface TravelHelper {
 
 	void initializeDataOnAppStartup();
 
-	void initializeDataToDisplay();
+	void initializeDataToDisplay(boolean resetData);
 
 	boolean isAnyTravelBookPresent();
 
@@ -36,13 +36,10 @@ public interface TravelHelper {
 	List<TravelArticle> getPopularArticles();
 
 	@NonNull
-	List<TravelArticle> loadPopularArticles();
-
-	@NonNull
 	Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(@NonNull TravelArticle article);
 
 	@Nullable
-	TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback);
+	TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @Nullable String lang, boolean readGpx, @Nullable GpxReadCallback callback);
 
 	@Nullable
 	TravelArticle getArticleByTitle(@NonNull String title, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback);
