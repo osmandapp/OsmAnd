@@ -11,6 +11,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,7 @@ public class GpxBlockStatisticsBuilder {
 
 	private BlockStatisticsAdapter adapter;
 	private final List<StatBlock> items = new ArrayList<>();
+	private boolean blocksClickable = true;
 
 	private final Handler handler = new Handler();
 	private Runnable updatingItems;
@@ -49,6 +51,10 @@ public class GpxBlockStatisticsBuilder {
 	public GpxBlockStatisticsBuilder(OsmandApplication app, SelectedGpxFile selectedGpxFile) {
 		this.app = app;
 		this.selectedGpxFile = selectedGpxFile;
+	}
+
+	public void setBlocksClickable(boolean blocksClickable) {
+		this.blocksClickable = blocksClickable;
 	}
 
 	public void setBlocksView(RecyclerView blocksView) {
@@ -63,7 +69,7 @@ public class GpxBlockStatisticsBuilder {
 		return selectedGpxFile.getGpxFile();
 	}
 
-	public void initStatBlocks(SegmentActionsListener actionsListener, @ColorInt int activeColor, boolean nightMode) {
+	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor, boolean nightMode) {
 		initItems();
 		boolean isNotEmpty = !Algorithms.isEmpty(items);
 		AndroidUiHelper.updateVisibility(blocksView, isNotEmpty);
@@ -237,7 +243,7 @@ public class GpxBlockStatisticsBuilder {
 				@Override
 				public void onClick(View v) {
 					GPXTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
-					if (analysis != null) {
+					if (blocksClickable && analysis != null && actionsListener != null) {
 						ArrayList<GPXDataSetType> list = new ArrayList<>();
 						if (analysis.hasElevationData || analysis.isSpeedSpecified() || analysis.hasSpeedData) {
 							if (item.firstType != null) {

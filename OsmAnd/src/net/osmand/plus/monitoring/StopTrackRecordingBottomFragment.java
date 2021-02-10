@@ -1,12 +1,13 @@
 package net.osmand.plus.monitoring;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -15,7 +16,9 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.widgets.TextViewEx;
 
 import androidx.annotation.DimenRes;
@@ -33,6 +36,16 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private OsmandMonitoringPlugin plugin;
+	private GPXFile gpxFile;
+	private SaveGpxListener saveGpxListener;
+
+	public void setGpxFile(GPXFile gpxFile) {
+		this.gpxFile = gpxFile;
+	}
+
+	public void setSaveGpxListener(SaveGpxListener saveGpxListener) {
+		this.saveGpxListener = saveGpxListener;
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -118,7 +131,8 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 			app.getSavingTrackHelper().clearRecordedData(true);
 		} else if (tag == ButtonType.SAVE_AND_STOP) {
 			if (plugin != null && settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-				plugin.saveCurrentTrack();
+				new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				plugin.stopRecording();
 				app.getNotificationHelper().refreshNotifications();
 			}
 		}
@@ -169,9 +183,11 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 		return true;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
+	public static void showInstance(GPXFile gpxFile, SaveGpxListener saveGpxListener, @NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
 		if (!fragmentManager.isStateSaved()) {
 			StopTrackRecordingBottomFragment fragment = new StopTrackRecordingBottomFragment();
+			fragment.setGpxFile(gpxFile);
+			fragment.setSaveGpxListener(saveGpxListener);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}

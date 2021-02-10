@@ -90,7 +90,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	private final Handler handler = new Handler();
 	private Runnable updatingGPS;
 	private Runnable updatingTimeTrackSaved;
-	private SaveGpxListener saveGpxListener;
 
 	private GPXFile getGPXFile() {
 		return selectedGpxFile.getGpxFile();
@@ -145,7 +144,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 		createItem(buttonClear, ItemType.CLEAR_DATA, hasDataToSave, null);
 		createItem(buttonStart, ItemType.START_SEGMENT, wasTrackMonitored, null);
-//		createItem(buttonSave, ItemType.SAVE, hasDataToSave, getTimeTrackSaved());
 		createItem(buttonPause, wasTrackMonitored ? ItemType.PAUSE : ItemType.RESUME, true, null);
 		createItem(buttonStop, ItemType.STOP, true, null);
 
@@ -153,8 +151,9 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		updateStatus();
 
 		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
-		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, null);
+		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile);
 		blockStatisticsBuilder.setBlocksView(statBlocks);
+		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.initStatBlocks(null, ContextCompat.getColor(app, getActiveTextColorId(nightMode)), nightMode);
 
 		LinearLayout showTrackOnMapView = itemView.findViewById(R.id.show_track_on_map);
@@ -226,18 +225,17 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			@Override
 			public void onClick(View v) {
 				if (wasTrackMonitored) {
-
+					helper.startNewSegment();
 				}
 			}
 		});
 
-		setSaveListener();
 		buttonSave.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (hasDataToSave) {
 					final GPXFile gpxFile = getGPXFile();
-					new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					new SaveCurrentTrackTask(app, gpxFile, createSaveListener()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
 			}
 		});
@@ -263,7 +261,8 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			@Override
 			public void onClick(View v) {
 				if (fragmentManager != null) {
-					StopTrackRecordingBottomFragment.showInstance(fragmentManager, TripRecordingActiveBottomSheet.this);
+					final GPXFile gpxFile = getGPXFile();
+					StopTrackRecordingBottomFragment.showInstance(gpxFile, createSaveListener(), fragmentManager, TripRecordingActiveBottomSheet.this);
 				}
 			}
 		});
@@ -307,6 +306,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			AndroidUiHelper.updateVisibility(desc, isShowDesc);
 			UiUtilities.setMargins(title, 0, marginDesc, 0, marginDesc);
 			desc.setText(description);
+			type.setTextColor(desc, app, false, false, nightMode);
 		}
 	}
 
@@ -378,43 +378,41 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		handler.post(updatingTimeTrackSaved);
 	}
 
-	private void setSaveListener() {
-		if (saveGpxListener == null) {
-			saveGpxListener = new SaveGpxListener() {
+	private SaveGpxListener createSaveListener() {
+		return new SaveGpxListener() {
 
-				@Override
-				public void gpxSavingStarted() {
-				}
+			@Override
+			public void gpxSavingStarted() {
+			}
 
-				@Override
-				public void gpxSavingFinished(Exception errorMessage) {
-					String gpxFileName = Algorithms.getFileWithoutDirs(getGPXFile().path);
-					final MapActivity mapActivity = getMapActivity();
-					final Context context = getContext();
-					final SaveGpxResult result = helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
-					if (mapActivity != null && context != null) {
-						Snackbar snackbar = Snackbar.make(mapActivity.getLayout(),
-								getString(R.string.shared_string_file_is_saved, gpxFileName),
-								Snackbar.LENGTH_LONG)
-								.setAction(R.string.shared_string_rename, new View.OnClickListener() {
-									@Override
-									public void onClick(View view) {
-										final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-										final FragmentActivity fragmentActivity = mapActivityRef.get();
-										SaveGPXBottomSheetFragment.showInstance(fragmentActivity.getSupportFragmentManager(), result.getFilenames());
-									}
-								});
-						View view = snackbar.getView();
-						FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
-						params.gravity = Gravity.TOP;
-						AndroidUtils.setMargins(params, 0, AndroidUtils.getStatusBarHeight(context), 0, 0);
-						view.setLayoutParams(params);
-						UiUtilities.setupSnackbar(snackbar, nightMode);
-						snackbar.show();
-					}
+			@Override
+			public void gpxSavingFinished(Exception errorMessage) {
+				String gpxFileName = Algorithms.getFileWithoutDirs(getGPXFile().path);
+				final MapActivity mapActivity = getMapActivity();
+				final Context context = getContext();
+				final SaveGpxResult result = helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
+				if (mapActivity != null && context != null) {
+					Snackbar snackbar = Snackbar.make(mapActivity.getLayout(),
+							getString(R.string.shared_string_file_is_saved, gpxFileName),
+							Snackbar.LENGTH_LONG)
+							.setAction(R.string.shared_string_rename, new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+									final FragmentActivity fragmentActivity = mapActivityRef.get();
+									SaveGPXBottomSheetFragment.showInstance(fragmentActivity.getSupportFragmentManager(), result.getFilenames());
+								}
+							});
+					View view = snackbar.getView();
+					FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+					params.gravity = Gravity.TOP;
+					AndroidUtils.setMargins(params, 0, AndroidUtils.getStatusBarHeight(context), 0, 0);
+					view.setLayoutParams(params);
+					UiUtilities.setupSnackbar(snackbar, nightMode);
+					snackbar.show();
 				}
-			};
-		}
+			}
+		};
 	}
 
 	@Nullable
@@ -508,12 +506,12 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 		public void setTintedIcon(AppCompatImageView iv, Context context, boolean enabled, boolean pressed, boolean nightMode) {
 			if (iv != null) {
-				int iconColor = ContextCompat.getColor(context,
-						enabled ? pressed ? getPressedColorId(nightMode)
-								: this == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
-								: getActiveIconColorId(nightMode) : getSecondaryIconColorId(nightMode));
-				Drawable icon = UiUtilities.createTintedDrawable(context, iconId, iconColor);
-				iv.setImageDrawable(icon);
+				Drawable icon = AppCompatResources.getDrawable(context, iconId);
+				int iconColor = enabled ? pressed ? getPressedColorId(nightMode)
+						: this == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
+						: getActiveIconColorId(nightMode) : getSecondaryIconColorId(nightMode);
+				Drawable tintedIcon = UiUtilities.tintDrawable(icon, ContextCompat.getColor(context, iconColor));
+				iv.setImageDrawable(tintedIcon);
 				if (this == ItemType.STOP) {
 					int stopSize = iv.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
 					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(stopSize, stopSize);
