@@ -4001,4 +4001,11 @@
     <string name="routing_engine_vehicle_type_cycling_regular">Обычный велосипед</string>
     <string name="routing_engine_vehicle_type_racingbike">Гоночный велосипед</string>
     <string name="routing_engine_vehicle_type_mtb">Горный велосипед</string>
+    <string name="activity_type_cycling_name">Езда на велосипеде</string>
+    <string name="activity_type_hiking_name">Пеший туризм</string>
+    <string name="activity_type_running_name">Бег</string>
+    <string name="activity_type_walking_name">Пешеход</string>
+    <string name="activity_type_offroad_name">Внедорожник</string>
+    <string name="activity_type_motorbike_name">Мотоцикл</string>
+    <string name="activity_type_car_name">Автомобиль</string>
 </resources>
