@@ -3135,7 +3135,7 @@
     <string name="routing_attr_piste_type_sled_name">雪橇</string>
     <string name="routing_profile_geocoding">地理编码</string>
     <string name="button_rate">评分</string>
-    <string name="shared_string_swap">切换</string>
+    <string name="shared_string_swap">变道</string>
     <string name="dd_dddddd_format">度度.度度度度度度°</string>
     <string name="dd_mm_ss_format">度度°分分′秒秒″</string>
     <string name="nautical_renderer">航海</string>
