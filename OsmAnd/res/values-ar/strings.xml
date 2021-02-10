@@ -1073,7 +1073,7 @@
     <string name="impassable_road">تجنب الطرق…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">طرق السكك الحديدية</string>
     <string name="rendering_attr_tramRoutes_name">خطوط الترام</string>
-    <string name="rendering_category_routes">الطرق</string>
+    <string name="rendering_category_routes">المسارات الرياضية</string>
     <string name="rendering_category_transport">وسائل المواصلات</string>
     <string name="rendering_category_others">سمات أخرى للخريطة</string>
     <string name="map_widget_appearance_rem">العناصر الأخرى</string>
