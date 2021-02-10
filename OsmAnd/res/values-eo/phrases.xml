@@ -3881,4 +3881,11 @@
     <string name="poi_wildlife_crossing_bat_bridge">Ponto por vespertoj</string>
     <string name="poi_wildlife_crossing">Trairejo por sovaĝaj bestoj</string>
     <string name="poi_swimming_area">Naĝejo natura</string>
+    <string name="poi_piste_status_closed">Stato de skivojo: fermita</string>
+    <string name="poi_piste_status_open">Stato de skivojo: malfermita</string>
+    <string name="poi_patrolled_no">Kontrolata: ne</string>
+    <string name="poi_patrolled_yes">Kontrolata: jes</string>
+    <string name="poi_gladed_yes">Senarbigita: jes</string>
+    <string name="poi_piste_name">Nomo de skivojo</string>
+    <string name="poi_piste_ski_jump">Skisaltejo</string>
 </resources>
