@@ -2663,7 +2663,7 @@
     <string name="shared_string_travel_book">旅游书</string>
     <string name="download_images">下载图片</string>
     <string name="rendering_value_black_name">黑色</string>
-    <string name="rendering_attr_surface_wood_name">木</string>
+    <string name="rendering_attr_surface_wood_name">木头</string>
     <string name="app_mode_subway">地铁</string>
     <string name="app_mode_horse">骑马</string>
     <string name="shared_string_color_magenta">品红色</string>
@@ -2839,7 +2839,7 @@
     <string name="show_closed_notes">显示关闭的注记</string>
     <string name="osm_edit_closed_note">关闭的OSM注记</string>
     <string name="add_online_source">添加在线资源</string>
-    <string name="rendering_attr_highway_class_bridleway_name"/>
+    <string name="rendering_attr_highway_class_bridleway_name">驮道</string>
     <string name="rendering_attr_surface_gravel_name">砾石</string>
     <string name="rendering_attr_surface_sett_name">比利时石砌路</string>
     <string name="routing_attr_allow_expert_name">允许专家路线</string>
