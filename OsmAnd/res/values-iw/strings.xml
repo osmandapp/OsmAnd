@@ -3970,7 +3970,7 @@
     <string name="select_folder">בחירת תקינה</string>
     <string name="select_folder_descr">נא לבחור תיקייה או להוסיף אחת חדשה</string>
     <string name="shared_string_empty">ריק</string>
-    <string name="analyze_by_intervals">ניתוח לפי מרווחים (פיצול מרווחים)</string>
+    <string name="analyze_by_intervals">ניתוח מרווחי פיצול</string>
     <string name="upload_to_openstreetmap">העלאה ל־OpenStreetMap</string>
     <string name="edit_track">עריכת מסלול</string>
     <string name="rename_track">שינוי שם מסלול</string>
@@ -4016,4 +4016,11 @@
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">להשתמש ב־test.openplacereviews.org</string>
     <string name="login_open_place_reviews">כניסה ל־OpenPlaceReviews</string>
+    <string name="announcement_time_descr">זמן ההכרזה של ההנחיות הקוליות השונות תלוי בסוג ההכרזה, במהירות הניווט הנוכחית ובמהירות הניווט כבררת מחדל.</string>
+    <string name="hillshade_slope_contour_lines">הצללה / מדרון / קווי מתאר</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews הוא מיזם בהובלת הקהילה בנוגע למקומות ציבוריים כגון מסעדות, מלונות, מוזיאונים ונקודות דרך. הוא אוסף מידע ציבורי עליהם כגון תמונות, סקירות, קישורים למערכות אחרות שמקושרות ל־OpenStreetMap, ויקיפדיה.
+\n
+\nכל הנתונים של OpenPlaceReview הם פתוחים וזמינים לציבור הרחב: http://openplacereviews.org/data.
+\n
+\nניתן לקרוא עוד באתר: http://openplacereviews.org</string>
 </resources>
