@@ -417,7 +417,7 @@
     <string name="osmand_parking_pm">مساء</string>
     <string name="osmand_parking_am">صباحاً</string>
     <string name="osmand_parking_position_name">مكان للوقوف</string>
-    <string name="osmand_parking_plugin_description">يساعد هذا الملحق بحفظ الأماكن التي ركنت بها سيارتك والوقت المتبقي للركن (في حالة وجود وقت محدد).
+    <string name="osmand_parking_plugin_description">يساعد هذا الملحق بحفظ الأماكن التي ركنت بها سيارتك والوقت المتبقي للركن (في حالة وجود وقت محدد). 
 \nكل من المكان والزمن متواجدان على لوحة التحكم وكذلك في المؤشرات على شاشة الخريطة. يمكن إضافة منبه إلى التقويم للتذكير.</string>
     <string name="osmand_parking_plugin_name">مكان الموقف</string>
     <string name="context_menu_item_add_parking_point">موقف السيارة</string>
@@ -557,11 +557,11 @@
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
     <string name="local_osm_changes_delete_all_confirm">هل تريد حذف %1$d من التعديلات؟</string>
     <string name="shared_string_delete_all">احذف الكل</string>
-    <string name="osmand_srtm_long_description_1000_chars">يوفر هذا الملحق طبقة خط كنتوري وطبقة للتضاريس ظاهرة على الخريطة الأساسية للتطبيق. هذه الوظيفة ستكون محل تقدير من طرف الرياضيين، المتنزهين، الرحالة، وكل من هو مهتم بجمال ورخاء الطبيعة.
-\n
+    <string name="osmand_srtm_long_description_1000_chars">يوفر هذا الملحق طبقة خط كنتوري وطبقة للتضاريس ظاهرة على الخريطة الأساسية للتطبيق. هذه الوظيفة ستكون محل تقدير من طرف الرياضيين، المتنزهين، الرحالة، وكل من هو مهتم بجمال ورخاء الطبيعة. 
+\n 
 \nالبيانات العالمية (بين 70 درجة شمالا و70 جنوبا) مبنية حسب قياسات SRTM (مكوك رادار البعثة الطبوغرافية) وASTER (المكوك المتقدم الخاص بالانبعاث الحراري والانعكاس الإشعاعي)، أداة تصوير على متن Terra، القمر الصناعي الرئيسي لنظام رصد الأرض التابع لناسا. ASTER هو جهد تعاوني فيما بين وكالة ناسا، وزارة الاقتصاد اليابانية، التجارة والصناعة (METI)، و أنظمة الفضاء اليابانية (J-spacesystems).</string>
-    <string name="srtm_plugin_description">يوفر هذا الملحق خطوط كنتورية وطبقة تضاريس (طبيعية) تظهر على خرائط أوسماند. هذه الوظيفة ستعجب كثيرا الرياضيين، المتجولين، الرحالة، و كل من تهمه بنية التضاريس الطبيعية (يرجى ملاحظة أن بيانات الخطوط الكنتورية/أو المساعدة منفصلة ، وتتوفر تنزيلات إضافية بعد تنشيط الملحق.)
-\nالبيانات العالمية (ما بين 70 درجة شمالاً و70 جنوباً) مبنية على مقاييس SRTM (مكوك رادار البعثة الطبوغرافية) و ASTER (الانبعاث الحراري الفضائي المتقدم والإنعكاس الإشعاعي)، أداة التصوير على متن Terra، القمر الصناعي الرئيسي لنظام رصد الأرض التابع لناسا.
+    <string name="srtm_plugin_description">يوفر هذا الملحق خطوط كنتورية وطبقة تضاريس (طبيعية) تظهر على خرائط أوسماند. هذه الوظيفة ستعجب كثيرا الرياضيين، المتجولين، الرحالة، و كل من تهمه بنية التضاريس الطبيعية (يرجى ملاحظة أن بيانات الخطوط الكنتورية/أو المساعدة منفصلة ، وتتوفر تنزيلات إضافية بعد تنشيط الملحق.) 
+\nالبيانات العالمية (ما بين 70 درجة شمالاً و70 جنوباً) مبنية على مقاييس SRTM (مكوك رادار البعثة الطبوغرافية) و ASTER (الانبعاث الحراري الفضائي المتقدم والإنعكاس الإشعاعي)، أداة التصوير على متن Terra، القمر الصناعي الرئيسي لنظام رصد الأرض التابع لناسا. 
 \n ASTER هو جهد تعاوني بين كل من وكالة ناسا، وزارة الاقتصاد اليابانية، التجارة والصناعة (METI)، ونظم الفضاء اليابانية (J-spacesystems).</string>
     <string name="osmand_long_description_1000_chars">أوسماند (اتجاهات التنقل الآلية OSM) 
 \n 
@@ -585,10 +585,10 @@
 \n - لا توجد إمكانية الوصول دون اتصال إلى النقاط المهمة في ويكيبيديا 
 \n 
 \n يجري تطوير أوسماند بنشاط ويعتمد مشروعنا والتقدم المستمر على المساهمات المالية لتطوير واختبار وظائف جديدة. يرجى النظر في شراء أوسماند+ ، أو تمويل ميزات جديدة محددة أو تقديم تبرع عام على https://osmand.net.</string>
-    <string name="osmand_rastermaps_plugin_description">هذا الملحق يمكنك من الوصول إلى أنواع عديدة من خرائط النت (تدعى بالقطع أو النقطية)، من قطع OSM مسبقة ( مثل Mapnik) إلى صور أقمار وطبقات مخصصة كخرائط الطقس، الخرائط الجيولوجية، طبقات التضاريس...إلخ.
-\n
-\nكل من هذه الخرائط يمكن أن تستخدم إما كخرائط رئيسية (قاعدية) تظهر على واجهة التطبيق، أو كطبقة فوقية أو تحتية لخريطة قاعدية آخرى( كخرائط التطبيق المحلية). لجعل أي طبقة تحتية خريطة أكثر وضوحا، بعض عناصر خرائط التطبيق التوجيهيه يمكن إخفاءها في قائمة \'ضبط الخريطة\' حسب الرغبة.
-\n
+    <string name="osmand_rastermaps_plugin_description">هذا الملحق يمكنك من الوصول إلى أنواع عديدة من خرائط النت (تدعى بالقطع أو النقطية)، من قطع OSM مسبقة ( مثل Mapnik) إلى صور أقمار وطبقات مخصصة كخرائط الطقس، الخرائط الجيولوجية، طبقات التضاريس...إلخ. 
+\n 
+\nكل من هذه الخرائط يمكن أن تستخدم إما كخرائط رئيسية (قاعدية) تظهر على واجهة التطبيق، أو كطبقة فوقية أو تحتية لخريطة قاعدية آخرى( كخرائط التطبيق المحلية). لجعل أي طبقة تحتية خريطة أكثر وضوحا، بعض عناصر خرائط التطبيق التوجيهيه يمكن إخفاءها في قائمة \'ضبط الخريطة\' حسب الرغبة. 
+\n 
 \nأجزاء الخرائط يمكن الحصول عليها من مصادر إنترنت، أو تحضيرها للإستخدام دون إنترنت ( ونسخها يدويا إلى مجلد بيانات التطبيق) كقاعدة بيانات SQLite والتي يمكن إنتاجها عن طريق مجموعة متنوعة من أدوات تحضير الخرائط المستقلة.</string>
     <string name="update_poi_does_not_change_indexes">التغييرات POI داخل التطبيق لا تؤثرعلى ملفات الخرائط المحملة، يتم حفظ التغييرات إلى ملف محلي بدلا من ذلك.</string>
     <string name="av_camera_focus_descr">وضع تركيز الكاميرا:</string>
@@ -933,7 +933,7 @@
     <string name="waypoint_visit_after">زيارة بعد</string>
     <string name="waypoint_visit_before">زيارة قبل</string>
     <string name="simulate_your_location">محاكاة تخيلية</string>
-    <string name="short_location_on_map">خط العرض %1$s
+    <string name="short_location_on_map">خط العرض %1$s 
 \nخط الطول %2$s</string>
     <string name="tips_and_tricks_descr">الأسئلة الشائعة، التغييرات الحديثة، وأخرى.</string>
     <string name="routing_settings_2">إعدادات الملاحة</string>
@@ -1025,8 +1025,8 @@
     <string name="rename_failed">فشل في إعادة التسمية.</string>
     <string name="back_to_map">عودة إلى الخريطة</string>
     <string name="share_note">شارك ملاحظة</string>
-    <string name="location_on_map">الموقع:
-\n Lat %1$s
+    <string name="location_on_map">الموقع: 
+\n Lat %1$s 
 \n Lon %2$s</string>
     <string name="notes">ملاحظات</string>
     <string name="online_map">خريطة إنترنت</string>
@@ -1606,10 +1606,10 @@
     <string name="route_duration">الزمن :</string>
     <string name="route_tr">انعطف يميناً</string>
     <string name="route_tl">انعطف يسارا واذهب</string>
-    <string name="plugin_nautical_descr">هذا الملحق يوفير خرائط بحرية للزوارق والمراكب الشراعية وأنواع أخرى من الرياضات المائية.
-\n
-\nخريطة خاصة إضافية للتطبيق ستقدم كل علامات الملاحة البحرية سواء داخلية أو شاطئية وكذلك جدول للرموز. وصف كل وجهة ملاحة يوفر التفاصيل اللازمة للتعرف عليها ومعانيها (الفئة، الشكل، اللون، التسلسل، المرجع...إلخ.).
-\n
+    <string name="plugin_nautical_descr">هذا الملحق يوفير خرائط بحرية للزوارق والمراكب الشراعية وأنواع أخرى من الرياضات المائية. 
+\n 
+\nخريطة خاصة إضافية للتطبيق ستقدم كل علامات الملاحة البحرية سواء داخلية أو شاطئية وكذلك جدول للرموز. وصف كل وجهة ملاحة يوفر التفاصيل اللازمة للتعرف عليها ومعانيها (الفئة، الشكل، اللون، التسلسل، المرجع...إلخ.). 
+\n 
 \nللعودة إلى واحدة من أنماط الخريطة التقليدية، ببساطة إما عطل هذا الملحق مرة أخرى أو غير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">عدد خطوط التوجيه</string>
@@ -1657,7 +1657,7 @@
     <string name="select_voice_provider">اختر التوجيه الصوتي</string>
     <string name="select_voice_provider_descr">اختر أو قم بتحميل التوجيه الصوتي الخاص بلغتك.</string>
     <string name="no_location_permission">منح الوصول إلى بيانات الموقع.</string>
-    <string name="rendering_attr_horseRoutes_name">طرق الخيول</string>
+    <string name="rendering_attr_horseRoutes_name">مسارات الخيول</string>
     <string name="shared_string_hide">إخفاء</string>
     <string name="av_video_quality_low">جودة أقل</string>
     <string name="av_video_quality_high">أعلى جودة</string>
@@ -1870,7 +1870,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">تلوين وفق الانتماء للشبكة</string>
     <string name="rendering_value_walkingRoutesOSMC_name">تلوين وفق رمز تنزه OSMC</string>
     <string name="shared_string_logoff">خروج</string>
-    <string name="local_recordings_delete_all_confirm">حذف الملاحظات %1$d؟</string>
+    <string name="local_recordings_delete_all_confirm">هل أنت متأكد من أنك تريد حذف الملاحظات %1$d؟</string>
     <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تحميل خريطة خاصة محلياً.</string>
     <string name="save_track_to_gpx_globally_descr">تسجيل الموقع العام إلى ملف GPX يمكن تشغيله أو إيقافه باستخدام نافذة تسجيل GPX على الشاشة خريطة.</string>
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1).</string>
@@ -1891,8 +1891,8 @@
     <string name="shared_string_others">أخرى</string>
     <string name="local_index_action_do">%1$s %2$s عنصر ؟</string>
     <string name="amenity_type_geocache">البيانات الجغرافية المؤقتة</string>
-    <string name="record_plugin_description">هذا الملحق يفعل وظيفة تسجيل وحفظ المسارات الخاصة بك عبر الضغط على نافذة GPX على شاشة الخريطة، أو كذلك تسجيل كافة طرق الملاحة الخاص بك تلقائيا إلى ملف GPX.
-\n
+    <string name="record_plugin_description">هذا الملحق يفعل وظيفة تسجيل وحفظ المسارات الخاصة بك عبر الضغط على نافذة GPX على شاشة الخريطة، أو كذلك تسجيل كافة طرق الملاحة الخاص بك تلقائيا إلى ملف GPX. 
+\n 
 \nالمسارات المسجلة يمكن مشاركتها مع أصدقائك أو استخدامها كمساهمات ل OSM . الرياضيون يمكنهم استخدام المسارات المسجلة لمتابعة تدريباتهم. بعض تحليل المسار الابتدائية يمكن القيام بها مباشرة في التطبيق، مثل توقيت الدورات، ومتوسط السرعة...الخ، و يمكن أيضا تحليل المسارات باستعمال أدوات تحليل جانبية لاحقا.</string>
     <string name="missing_write_external_storage_permission">أوسماند ليس لديه إذن لاستخدام ذاكرة البطاقة</string>
     <string name="save_poi_without_poi_type_message">هل تريد حقا حفظ POI بدون تحديد نوعه؟</string>
@@ -1990,8 +1990,8 @@
     <string name="activate_seamarks_plugin">يرجى تفعيل ملحق المعالم البحرية</string>
     <string name="value_downloaded_of_max">%1$.1f من %2$.1f مب</string>
     <string name="file_size_in_mb">%.1f مب</string>
-    <string name="plugin_ski_descr">يضع هذا الملحق بين يديك تفاصيل منحدرات تزلج عالمية، مسارات تزلج عبر كامل البلاد، التلفريك ومصاعد التزلج. الطرقات والمعابر مبينة بألوان حسب الصعوبة،
-\n
+    <string name="plugin_ski_descr">يضع هذا الملحق بين يديك تفاصيل منحدرات تزلج عالمية، مسارات تزلج عبر كامل البلاد، التلفريك ومصاعد التزلج. الطرقات والمعابر مبينة بألوان حسب الصعوبة، 
+\n 
 \nومصورة بنمط خريطة مميز \'شتوي\' تمثل مناظر الطبيعة بلون مثلج شتوي.</string>
     <string name="rendering_attr_hideOverground_name">أشياء فوق سطح الأرض</string>
     <string name="shared_string_change">تغيير</string>
@@ -2163,7 +2163,7 @@
     <string name="quick_action_btn_tutorial_descr">قم بالضغط على الزر لفترة أطوَل ثم اسحبه لتغيير مكانه على الشاشة.</string>
     <string name="rendering_attr_depthContours_name">معالم العمق البحري</string>
     <string name="auto_split_recording_title">تقسيم المسارات آلياً إلى أجزاء بعد كل فراغ</string>
-    <string name="navigate_point_olc_info_short">تقصير رمز التموضع المفتوح
+    <string name="navigate_point_olc_info_short">تقصير رمز التموضع المفتوح 
 \n يُرجى تقديم رمزٍ كامل</string>
     <string name="quick_action_duplicate">اسم الاختصار السريع مكرر</string>
     <string name="quick_action_bug_descr">سوف تكون تتمة هذه الرسالة تلقائية في المجال المخصص للتعليق.</string>
@@ -2419,7 +2419,7 @@
     <string name="quick_action_duplicates">اسم الاختصار السريع المحدد قيد الاستخدام، لقد تم تغييره إلى %1$s لتجنب التكرار.</string>
     <string name="quick_action_page_list_descr">الضغط على زر الإجراء سيطبق أحد الأنماط من القائمة أدناه.</string>
     <string name="route_points_category_name">تنقلاتك على هذا الطريق</string>
-    <string name="navigate_point_olc_info_area">OLC الصالحة بالكامل\nتمثل المنطقة: %1$s x %2$s</string>
+    <string name="navigate_point_olc_info_area">OLC الصالحة بالكامل تمثل المنطقة: %1$s x %2$s</string>
     <string name="wrong_user_name">اسم المستخدم خاطئ</string>
     <string name="shared_string_to">إلى</string>
     <string name="mapillary_menu_date_from">مِن</string>
