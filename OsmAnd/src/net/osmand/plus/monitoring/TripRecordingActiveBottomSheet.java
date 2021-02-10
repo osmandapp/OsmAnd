@@ -62,11 +62,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
@@ -261,8 +256,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			@Override
 			public void onClick(View v) {
 				if (fragmentManager != null) {
-					final GPXFile gpxFile = getGPXFile();
-					StopTrackRecordingBottomFragment.showInstance(gpxFile, createSaveListener(), fragmentManager, TripRecordingActiveBottomSheet.this);
+					StopTrackRecordingBottomFragment.showInstance(getMapActivity(), fragmentManager, TripRecordingActiveBottomSheet.this);
 				}
 			}
 		});
@@ -311,20 +305,14 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	private String getTimeTrackSaved() {
-		long timeTrackSaved = helper.getLastTimeUpdated();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z", Locale.getDefault());
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-		Date resultDate = new Date(timeTrackSaved);
-		String sdfFormatted = sdf.format(resultDate);
-		CharSequence formattedTimeTrackSaved = null;
-		try {
-			long time = sdf.parse(sdfFormatted).getTime();
+		if (helper.time != 0) {
+			long timeTrackSaved = helper.time;
 			long now = System.currentTimeMillis();
-			formattedTimeTrackSaved = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
-		} catch (ParseException e) {
-			log.error(e);
+			CharSequence time = DateUtils.getRelativeTimeSpanString(timeTrackSaved, now, DateUtils.MINUTE_IN_MILLIS);
+			return String.valueOf(time);
+		} else {
+			return null;
 		}
-		return String.valueOf(formattedTimeTrackSaved);
 	}
 
 	@Override
@@ -406,7 +394,8 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 					View view = snackbar.getView();
 					FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
 					params.gravity = Gravity.TOP;
-					AndroidUtils.setMargins(params, 0, AndroidUtils.getStatusBarHeight(context), 0, 0);
+					final int dp16 = AndroidUtils.dpToPx(mapActivity, 16f);
+					AndroidUtils.setMargins(params, 0, AndroidUtils.getStatusBarHeight(context) + dp16, 0, 0);
 					view.setLayoutParams(params);
 					UiUtilities.setupSnackbar(snackbar, nightMode);
 					snackbar.show();
@@ -438,26 +427,30 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	private static void setItemBackgroundActive(LinearLayout view, Context context, boolean nightMode) {
+	private static void setItemBackgroundActive(LinearLayout view, Context context,
+												boolean nightMode) {
 		Drawable background = AppCompatResources.getDrawable(context,
 				nightMode ? R.drawable.btn_background_active_dark : R.drawable.btn_background_active_light);
 		view.setBackgroundDrawable(background);
 	}
 
-	private static void setItemBackgroundInactive(LinearLayout view, Context context, boolean nightMode) {
+	private static void setItemBackgroundInactive(LinearLayout view, Context context,
+												  boolean nightMode) {
 		Drawable background = AppCompatResources.getDrawable(context,
 				nightMode ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_inactive_light);
 		view.setBackgroundDrawable(background);
 	}
 
-	private static void setShowOnMapBackgroundActive(LinearLayout view, Context context, boolean checked, boolean nightMode) {
+	private static void setShowOnMapBackgroundActive(LinearLayout view, Context context,
+													 boolean checked, boolean nightMode) {
 		Drawable background = AppCompatResources.getDrawable(context,
 				nightMode ? checked ? R.drawable.btn_background_active_dark : R.drawable.btn_background_stroked_active_dark
 						: checked ? R.drawable.btn_background_active_light : R.drawable.btn_background_stroked_active_light);
 		view.setBackgroundDrawable(background);
 	}
 
-	private static void setShowOnMapBackgroundInactive(LinearLayout view, Context context, boolean checked, boolean nightMode) {
+	private static void setShowOnMapBackgroundInactive(LinearLayout view, Context context,
+													   boolean checked, boolean nightMode) {
 		Drawable background = AppCompatResources.getDrawable(context,
 				nightMode ? checked ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_stroked_inactive_dark
 						: checked ? R.drawable.btn_background_inactive_light : R.drawable.btn_background_stroked_inactive_light);
