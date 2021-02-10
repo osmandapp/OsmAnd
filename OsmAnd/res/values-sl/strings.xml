@@ -3356,4 +3356,11 @@
     <string name="uploading_count">Poteka pošiljanje %1$d od %2$d</string>
     <string name="uploaded_count">Poslano %1$d od %2$d</string>
     <string name="toast_select_edits_for_upload">Izbor sprememb za pošiljanje</string>
+    <string name="activity_type_mountainbike_name">Gorsko kolesarjenje</string>
+    <string name="activity_type_cycling_name">Kolesarjenje</string>
+    <string name="activity_type_hiking_name">Pohod</string>
+    <string name="activity_type_running_name">Tek</string>
+    <string name="activity_type_walking_name">Hoja</string>
+    <string name="activity_type_motorbike_name">Motor</string>
+    <string name="activity_type_car_name">Avto</string>
 </resources>
