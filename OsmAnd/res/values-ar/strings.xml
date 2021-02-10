@@ -1172,7 +1172,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">طرق الحافلات الكهربائية</string>
     <string name="rendering_attr_busRoutes_name">طرق الحافلات</string>
     <string name="rendering_attr_subwayMode_name">سكك قطار الأنفاق</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">تاكسي مشاركة الطرق</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">شارك طرق التاكسي</string>
     <string name="speed_limit_exceed_message">حدد حد السرعة المسموح به لتلقي تنبيه صوتي إذا ما تجاوزته.</string>
     <string name="traffic_warning_border_control">مراقبة الحدود</string>
     <string name="traffic_warning_payment">كشك الرسوم</string>
