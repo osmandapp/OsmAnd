@@ -3334,7 +3334,7 @@
     <string name="routing_attr_allow_expert_name">السماح بطرق المتخصصين</string>
     <string name="routing_attr_allow_expert_description">طرق صعبة للغاية ، مع عقبات خطيرة والمناطق المحيطة بها.</string>
     <string name="routing_attr_allow_skating_only_name">السماح بالتزلج على الطرق فقط</string>
-    <string name="routing_attr_allow_skating_only_description">طرق مصممة للأسلوب الحر أو التزلج فقط بدون المسارات الكلاسيكية.</string>
+    <string name="routing_attr_allow_skating_only_description">الطريق مصممة خصيصا بحرية أو التزلج على الجليد.</string>
     <string name="routing_attr_allow_classic_only_name">السماح للطرق الكلاسيكية فقط</string>
     <string name="routing_attr_allow_classic_only_description">تم إعداد الطرق للأسلوب الكلاسيكي فقط دون مسارات التزلج. يشمل ذلك الطرق التي يتم إعدادها بواسطة عربة ثلجية أصغر مع زحلقة مرنة ومسارات مصنوعة يدوياً بواسطة المتزلجين.</string>
     <string name="routing_attr_difficulty_preference_name">الصعوبة المفضلة</string>
