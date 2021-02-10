@@ -71,14 +71,11 @@ public class GpxBlockStatisticsBuilder {
 
 	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor, boolean nightMode) {
 		initItems();
-		boolean isNotEmpty = !Algorithms.isEmpty(items);
-		AndroidUiHelper.updateVisibility(blocksView, isNotEmpty);
-		if (isNotEmpty) {
-			adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor, nightMode);
-			adapter.setItems(items);
-			blocksView.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
-			blocksView.setAdapter(adapter);
-		}
+		adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor, nightMode);
+		adapter.setItems(items);
+		blocksView.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
+		blocksView.setAdapter(adapter);
+		AndroidUiHelper.updateVisibility(blocksView, !Algorithms.isEmpty(items));
 	}
 
 	public void stopUpdatingStatBlocks() {
@@ -90,11 +87,11 @@ public class GpxBlockStatisticsBuilder {
 		updatingItems = new Runnable() {
 			@Override
 			public void run() {
+				initItems();
 				if (adapter != null) {
-					initItems();
 					adapter.setItems(items);
-					AndroidUiHelper.updateVisibility(blocksView, !Algorithms.isEmpty(items));
 				}
+				AndroidUiHelper.updateVisibility(blocksView, !Algorithms.isEmpty(items));
 				int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
 				handler.postDelayed(this, Math.max(1000, interval));
 			}

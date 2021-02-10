@@ -77,7 +77,7 @@
 		android:id="@+id/show_track_on_map"
 		layout="@layout/bottom_sheet_with_switch_divider_and_additional_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/context_menu_buttons_bottom_height"
+		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginTop="@dimen/content_padding_half"
