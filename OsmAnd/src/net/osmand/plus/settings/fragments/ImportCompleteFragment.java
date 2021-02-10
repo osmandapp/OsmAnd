@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickActionListFragment;
@@ -97,6 +99,10 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				dismissFragment();
 			}
 		});
+		if (app.getLocaleHelper().needRestart()) {
+			app.getLocaleHelper().setNeedRestart(false);
+			setupRestartButton(root);
+		}
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
@@ -237,6 +243,25 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			default:
 				return FavoritesActivity.FAV_TAB;
 		}
+	}
+
+	private void setupRestartButton(View root) {
+		View buttonsDivider = root.findViewById(R.id.buttons_divider);
+		View buttonContainer = root.findViewById(R.id.button_restart_container);
+		AndroidUiHelper.setVisibility(View.VISIBLE, buttonsDivider, buttonContainer);
+
+		TextView btnRestart = root.findViewById(R.id.button_restart);
+		btnRestart.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity instanceof MapActivity) {
+					MapActivity.doRestart(activity);
+				} else {
+					android.os.Process.killProcess(android.os.Process.myPid());
+				}
+			}
+		});
 	}
 
 	@Override

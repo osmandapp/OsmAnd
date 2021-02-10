@@ -29,6 +29,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -193,6 +194,7 @@ public class SettingsHelper {
 		private File file;
 		private SettingsImportListener listener;
 		private List<SettingsItem> items;
+		private LocaleHelper localeHelper;
 
 		ImportItemsAsyncTask(@NonNull File file,
 							 @Nullable SettingsImportListener listener,
@@ -201,6 +203,12 @@ public class SettingsHelper {
 			this.file = file;
 			this.listener = listener;
 			this.items = items;
+			localeHelper = app.getLocaleHelper();
+		}
+
+		@Override
+		protected void onPreExecute() {
+			localeHelper.listenLocaleChanges();
 		}
 
 		@Override
@@ -218,6 +226,7 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(Boolean success) {
+			localeHelper.stopListeningLocaleChanges();
 			finishImport(listener, success, items);
 		}
 	}

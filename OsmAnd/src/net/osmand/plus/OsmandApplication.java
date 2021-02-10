@@ -59,6 +59,7 @@ import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
@@ -165,6 +166,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OprAuthHelper oprAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
+	LocaleHelper localeHelper;
 
 	private Resources localizedResources;
 	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
@@ -400,6 +402,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public OprAuthHelper getOprAuthHelper() {
 		return oprAuthHelper;
+	}
+
+	public LocaleHelper getLocaleHelper() {
+		return localeHelper;
 	}
 
 	public synchronized DownloadIndexesThread getDownloadThread() {
@@ -717,7 +723,6 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	
 	public TargetPointsHelper getTargetPointsHelper() {
 		return targetPointsHelper;
 	}

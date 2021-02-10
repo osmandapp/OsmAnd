@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="restart">Restart</string>
     <string name="login_open_place_reviews">Login to OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
