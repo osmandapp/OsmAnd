@@ -770,7 +770,7 @@
     <string name="mile_per_hour">ميل ساعة</string>
     <string name="mile">ميل</string>
     <string name="send_location_way_choose_title">شارك المكان باستخدام</string>
-    <string name="send_location_sms_pattern">الموقع: %1$s
+    <string name="send_location_sms_pattern">الموقع: %1$s 
 \n%2$s</string>
     <string name="send_location_email_pattern">إتبع رابط متصفح الويب لمشاهدة المكان %1$s أو استعمل رابط أندرويد الخاص %2$s</string>
     <string name="send_location">إرسال الموقع</string>
@@ -992,7 +992,7 @@
     <string name="record_plugin_name">تسجيل المسار</string>
     <string name="save_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار أثناء الملاحة</string>
     <string name="voice">صوت مسج</string>
-    <string name="get_directions">الاتجاهات</string>
+    <string name="get_directions">التوجيه مع الطرق</string>
     <string name="show_point_options">استخدام الموقع…</string>
     <string name="favorite">مفضلة</string>
     <string name="speak_favorites">نقاط مفضلة مجاورة</string>
@@ -1895,8 +1895,8 @@
     <string name="missing_write_external_storage_permission">أوسماند ليس لديه إذن لاستخدام ذاكرة البطاقة</string>
     <string name="save_poi_without_poi_type_message">هل تريد حقا حفظ POI بدون تحديد نوعه؟</string>
     <string name="dashboard_or_drawer_description">هناك خيار جديد لتحكم بشكل مرن بالتطبيق عبر لوحة القياس أو القائمة الثابتة. اختيارك يمكن تغييره دائما في إعدادات لوحة القياس.</string>
-    <string name="osmand_routing_experimental">ملاحة أوسماند دون نت ميزة تجريبية وهي لا تعمل لمسافات تزيد عن 20 كم.
-\n
+    <string name="osmand_routing_experimental">ملاحة أوسماند دون نت ميزة تجريبية وهي لا تعمل لمسافات تزيد عن 20 كم. 
+\n 
 \n خدمة الملاحة حولت مؤقتا إلى CloudMade على الإنترنت.</string>
     <string name="build_installed">إصدار {0} تثبيت بنجاح ({1}).</string>
     <string name="downloading_build">جار تحميل الإصدار…</string>
@@ -1969,7 +1969,7 @@
     <string name="voice_data_corrupted">البيانات الصوتية المحددة تالفة</string>
     <string name="sd_unmounted">بطاقة الذاكرة غير متاحة. 
 \nلن تكون قادرا على رؤية الخرائط أو العثور على أماكن.</string>
-    <string name="sd_mounted_ro">بطاقة الذاكرة في وضع القراءة فقط.
+    <string name="sd_mounted_ro">بطاقة الذاكرة في وضع القراءة فقط. 
 \n يمكنك فقط مشاهدة الخريطة المحملة مسبقاً ولا يمكنك التحميل من الإنترنت.</string>
     <string name="route_tshr">انعطف يميناً بشكل حاد</string>
     <string name="route_tshl">انعطف يساراً بشكل حاد</string>
@@ -1979,7 +1979,7 @@
     <string name="transport_search_after">المسار اللاحق للرحلة</string>
     <string name="use_fast_recalculation_desc">حساب الجزء الأول فقط من الطريق للرحلات الطويلة.</string>
     <string name="shared_string_undo">إلغاء</string>
-    <string name="offline_maps_and_navigation">خرائط محلية
+    <string name="offline_maps_and_navigation">خرائط محلية 
 \nوملاحة</string>
     <string name="commit_poi">إنشاء إحداثية POI</string>
     <string name="number_of_rows_in_dash">عدد الصفوف في الدفعة %1$s</string>
@@ -2088,7 +2088,7 @@
     <string name="configure_screen_quick_action">إجراءات سريعة</string>
     <string name="quick_action_item_action">إجراء %d</string>
     <string name="quick_action_item_screen">شاشة %d</string>
-    <string name="quick_action_add_marker">إضافة علامة خريطة</string>
+    <string name="quick_action_add_marker">إضافة توجيه مباشر للخريطة</string>
     <string name="quick_action_add_poi">إضافة POI</string>
     <string name="quick_action_map_style">نمط الخريطة</string>
     <string name="quick_action_map_style_switch">نمط الخرائط تغير ل \"%s\".</string>
@@ -3354,8 +3354,8 @@
     <string name="sett_generic_ext_input">لوحة المفاتيح</string>
     <string name="sett_wunderlinq_ext_input">وندرلينك</string>
     <string name="sett_parrot_ext_input">ببغاء</string>
-    <string name="new_route_calculated_dist_dbg">المسار: المسافة%1$s، الوقت %2$s.
-\nالحساب: %3$.1f ث، %4$d طريق، %5$d تجانب</string>
+    <string name="new_route_calculated_dist_dbg">المسار: المسافة%2$s، وقت التوجيه %1$s. 
+\nالحساب: %3$.1f ث، %4$d طريق، %5$d تجانب)</string>
     <string name="lang_oc">الأوكيتانية</string>
     <string name="get_discount_second_part">ثم %1$s</string>
     <string name="apply_to_current_profile">تطبيق فقط على \"%1$s\"</string>
