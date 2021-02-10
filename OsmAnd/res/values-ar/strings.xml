@@ -1378,7 +1378,7 @@
     <string name="osm_live_not_active">خامل</string>
     <string name="osm_live_enter_email">الرجاء إدخال عنوان بريد إلكتروني صالح</string>
     <string name="osm_live_enter_user_name">أدخل اسم عمومي</string>
-    <string name="osm_live_thanks">شكرا لدعمكم أوسماند!
+    <string name="osm_live_thanks">شكرا لدعمكم أوسماند! 
 \nلتنشيط جميع الميزات الجديدة ، تحتاج إلى إعادة تشغيل أوسماند.</string>
     <string name="osm_live_subscription_settings">إعدادات الاشتراك</string>
     <string name="shared_string_widgets">شريط جانبي</string>
@@ -1392,7 +1392,7 @@
     <string name="app_mode_train">قطار</string>
     <string name="current_track">المسار الحالي</string>
     <string name="map_widget_battery">مستوى البطارية</string>
-    <string name="change_markers_position">تغيير موقع العلامة</string>
+    <string name="change_markers_position">تغيير موقع التوجيه المباشر</string>
     <string name="follow_us">تابعنا</string>
     <string name="access_direction_audio_feedback">اتجاه صدى الصوت</string>
     <string name="use_osm_live_routing">الملاحة عبر أوسماند لايف</string>
@@ -1413,7 +1413,7 @@
     <string name="map_mode">مظهرالخريطة</string>
     <string name="rendering_value_thin_name">رقيقة</string>
     <string name="rendering_value_medium_name">متوسط</string>
-    <string name="no_map_markers_found">أضف علامات عبر الخريطة</string>
+    <string name="no_map_markers_found">لم تضف توجيه مباشر على الخريطة</string>
     <string name="no_waypoints_found">لم يتم العثور على نقاط الطريق</string>
     <string name="report">التقرير</string>
     <string name="storage_permission_restart_is_required">سمح الآن للتطبيق بالكتابة على وحدة التخزين الخارجية. الرجاء إعادة تشغيله يدويا.</string>
@@ -1432,7 +1432,7 @@
     <string name="osm_live_region_desc">سيتم إرسال جزء من التبرع إلى مستخدمي OSM الذين يقومون بإرسال التغييرات إلى الخريطة في تلك المنطقة.</string>
     <string name="osm_live_ask_for_purchase">يرجى شراء اشتراك أوسماند لايف أولا</string>
     <string name="osm_live_header">يُتيحُ لك هذا الاشتراك الحصول على التحديثات كُل ساعة لجميع الخرائط حول العالم. 
-\nجزء من الدخل سيعود إلى مجتمع OSM ويُدفَع لكل مساهمة.
+\nجزء من الدخل سيعود إلى مجتمع OSM ويُدفَع لكل مساهمة. 
 \nإن كنت تحب أوسماند وOSM وترغب في الدّعم، هذه هي الطريقة المُثلى للقيام بذلك.</string>
     <string name="map_markers_other">وجهات أخرى</string>
     <string name="upload_anonymously">رفع كمستخدم مجهول</string>
@@ -1474,7 +1474,7 @@
     <string name="file_name_containes_illegal_char">حرف غير قانوني في اسم الملف</string>
     <string name="reports_for">تقرير عن</string>
     <string name="world_maps">خرائط العالم</string>
-    <string name="move_marker_bottom_sheet_title">حرك الخريطة لتغيير مكان العلامة</string>
+    <string name="move_marker_bottom_sheet_title">حرك الخريطة لتغيير مكان التوجيه المباشر</string>
     <!-- string name="lat_lon_pattern">خط العرض: %1$.5f خط الطول: %2$.5f</string -->
     <string name="access_direction_audio_feedback_descr">إشارة صوتية عند اتجاه نقطة الوصول.</string>
     <string name="access_direction_haptic_feedback_descr">حدد اتجاه النقطة المستهدفة بالاهتزاز.</string>
@@ -1490,7 +1490,7 @@
     <string name="rendering_value_bold_name">عريض</string>
     <string name="anonymous_user_hint">المستخدم المجهول لا يمكنه : 
 \n- إنشاء مجموعة; 
-\n- مزامنة المجموعات والأجهزة مع السيرفر;
+\n- مزامنة المجموعات والأجهزة مع السيرفر; 
 \n- إدارة المجموعات والأجهزة من خلال لوحة تحكم خاصة على الموقع.</string>
     <string name="hello">تطبيق الملاحة أوسماند</string>
     <string name="update_poi_error_loading">خطأ أثناء تحميل البيانات من الخادم.</string>
@@ -2073,7 +2073,7 @@
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
-    <string name="wiki_around">مقالات ويكيبيديا القريبة</string>
+    <string name="wiki_around">مقالات ويكيبيديا قريبة</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
