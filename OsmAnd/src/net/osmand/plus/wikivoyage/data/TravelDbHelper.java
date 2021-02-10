@@ -174,7 +174,7 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@Override
-	public void initializeDataToDisplay() {
+	public void initializeDataToDisplay(boolean resetData) {
 		localDataHelper.refreshCachedData();
 		loadPopularArticles();
 	}
@@ -292,7 +292,7 @@ public class TravelDbHelper implements TravelHelper {
 		}
 		String LANG_WHERE = " WHERE " + ARTICLES_COL_LANG + " = '" + language + "'";
 		SQLiteCursor cursor = conn.rawQuery(POP_ARTICLES_TABLE_SELECT + LANG_WHERE, null);
-		if(cursor == null) {
+		if (cursor == null) {
 			return popularArticles;
 		}
 		// read popular articles
@@ -549,13 +549,13 @@ public class TravelDbHelper implements TravelHelper {
 
 	@Override
 	@Nullable
-	public TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+	public TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @Nullable String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle res = null;
 		SQLiteConnection conn = openConnection();
 		String routeId = articleId.routeId;
-		if (conn != null && !Algorithms.isEmpty(routeId)) {
+		if (conn != null && !Algorithms.isEmpty(routeId) && lang != null) {
 			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_TRIP_ID + " = ? AND "
-					+ ARTICLES_COL_LANG + " = ?", new String[] { routeId, lang });
+					+ ARTICLES_COL_LANG + " = ?", new String[]{routeId, lang});
 			if (cursor != null) {
 				if (cursor.moveToFirst()) {
 					res = readArticle(cursor);

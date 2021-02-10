@@ -69,9 +69,7 @@ public class TravelObfHelper implements TravelHelper {
 	public static final String ROUTE_ARTICLE = "route_article";
 	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
 	public static final String ROUTE_TRACK = "route_track";
-	public static final int POPULAR_ARTICLES_SEARCH_RADIUS = 100000;
 	public static final int ARTICLE_SEARCH_RADIUS = 50000;
-	public static final int GPX_TRACKS_SEARCH_RADIUS = 10000;
 	public static final int MAX_POPULAR_ARTICLES_COUNT = 30;
 	public static final String REF_TAG = "ref";
 	public static final String NAME_TAG = "name";
@@ -82,6 +80,9 @@ public class TravelObfHelper implements TravelHelper {
 	private List<TravelArticle> popularArticles = new ArrayList<>();
 	private final Map<TravelArticleIdentifier, Map<String, TravelArticle>> cachedArticles = new ConcurrentHashMap<>();
 	private final TravelLocalDataHelper localDataHelper;
+	private int searchRadius = ARTICLE_SEARCH_RADIUS;
+	private int foundAmenitiesIndex = 0;
+	private final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 
 	public TravelObfHelper(OsmandApplication app) {
 		this.app = app;
@@ -99,7 +100,13 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Override
-	public void initializeDataToDisplay() {
+	public void initializeDataToDisplay(boolean resetData) {
+		if (resetData) {
+			foundAmenities.clear();
+			foundAmenitiesIndex = 0;
+			popularArticles.clear();
+			searchRadius = ARTICLE_SEARCH_RADIUS;
+		}
 		localDataHelper.refreshCachedData();
 		loadPopularArticles();
 	}
@@ -107,38 +114,47 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	public synchronized List<TravelArticle> loadPopularArticles() {
 		String lang = app.getLanguage();
-		List<TravelArticle> popularArticles = new ArrayList<>();
-		final List<Pair<File, Amenity>> amenities = new ArrayList<>();
-		final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
-		for (final BinaryMapIndexReader reader : getReaders()) {
-			try {
-				searchAmenity(amenities, location, reader, POPULAR_ARTICLES_SEARCH_RADIUS, -1, ROUTE_ARTICLE);
-				searchAmenity(amenities, location, reader, GPX_TRACKS_SEARCH_RADIUS, 15, ROUTE_TRACK);
-			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
+		List<TravelArticle> popularArticles = new ArrayList<>(this.popularArticles);
+		if (foundAmenities.size() - foundAmenitiesIndex < MAX_POPULAR_ARTICLES_COUNT) {
+			final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
+			for (final BinaryMapIndexReader reader : getReaders()) {
+				try {
+					searchAmenity(foundAmenities, location, reader, searchRadius, -1, ROUTE_ARTICLE);
+					searchAmenity(foundAmenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK);
+				} catch (Exception e) {
+					LOG.error(e.getMessage(), e);
+				}
 			}
+			if (foundAmenities.size() > 0) {
+				Collections.sort(foundAmenities, new Comparator<Pair<File, Amenity>>() {
+					@Override
+					public int compare(Pair article1, Pair article2) {
+						Amenity amenity1 = (Amenity) article1.second;
+						double d1 = MapUtils.getDistance(amenity1.getLocation(), location)
+								/ (ROUTE_ARTICLE.equals(amenity1.getSubType()) ? 5 : 1);
+						Amenity amenity2 = (Amenity) article2.second;
+						double d2 = MapUtils.getDistance(amenity2.getLocation(), location)
+								/ (ROUTE_ARTICLE.equals(amenity2.getSubType()) ? 5 : 1);
+						return Double.compare(d1, d2);
+					}
+				});
+			}
+			searchRadius *= 2;
 		}
 
-		if (amenities.size() > 0) {
-			Collections.sort(amenities, new Comparator<Pair<File, Amenity>>() {
-				@Override
-				public int compare(Pair article1, Pair article2) {
-					int d1 = (int) (MapUtils.getDistance(((Amenity) article1.second).getLocation(), location));
-					int d2 = (int) (MapUtils.getDistance(((Amenity) article2.second).getLocation(), location));
-					return d1 < d2 ? -1 : (d1 == d2 ? 0 : 1);
-				}
-			});
-			for (Pair<File, Amenity> amenity : amenities) {
-				if (!Algorithms.isEmpty(amenity.second.getName(lang))) {
-					TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
-					if (article != null) {
-						popularArticles.add(article);
-						if (popularArticles.size() >= MAX_POPULAR_ARTICLES_COUNT) {
-							break;
-						}
+		int pagesCount = popularArticles.size() / MAX_POPULAR_ARTICLES_COUNT;
+		while (foundAmenitiesIndex < foundAmenities.size() - 1) {
+			Pair<File, Amenity> amenity = foundAmenities.get(foundAmenitiesIndex);
+			if (!Algorithms.isEmpty(amenity.second.getName(lang))) {
+				TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
+				if (article != null && !popularArticles.contains(article)) {
+					popularArticles.add(article);
+					if (popularArticles.size() >= (pagesCount + 1) * MAX_POPULAR_ARTICLES_COUNT) {
+						break;
 					}
 				}
 			}
+			foundAmenitiesIndex++;
 		}
 		this.popularArticles = popularArticles;
 		return popularArticles;
@@ -616,8 +632,8 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Override
-	public TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @NonNull String lang,
-										boolean readGpx, @Nullable GpxReadCallback callback) {
+	public TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @Nullable String lang,
+	                                    boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle article = getCachedArticle(articleId, lang, readGpx, callback);
 		if (article == null) {
 			article = localDataHelper.getSavedArticle(articleId.file, articleId.routeId, lang);
@@ -629,8 +645,8 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Nullable
-	private TravelArticle getCachedArticle(@NonNull TravelArticleIdentifier articleId, @NonNull String lang,
-										   boolean readGpx, @Nullable GpxReadCallback callback) {
+	private TravelArticle getCachedArticle(@NonNull TravelArticleIdentifier articleId, @Nullable String lang,
+	                                       boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		Map<String, TravelArticle> articles = cachedArticles.get(articleId);
 		if (articles != null) {

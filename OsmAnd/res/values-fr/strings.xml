@@ -4005,4 +4005,13 @@
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Utilisez test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Se connecter à OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Eau</string>
+    <string name="activity_type_winter_name">Hiver</string>
+    <string name="activity_type_snowmobile_name">Motoneige</string>
+    <string name="activity_type_cycling_name">Vélo</string>
+    <string name="activity_type_mountainbike_name">VTT</string>
+    <string name="activity_type_hiking_name">Randonnée</string>
+    <string name="activity_type_running_name">Course à pied</string>
+    <string name="activity_type_walking_name">Marche</string>
+    <string name="activity_type_car_name">Voiture</string>
 </resources>
