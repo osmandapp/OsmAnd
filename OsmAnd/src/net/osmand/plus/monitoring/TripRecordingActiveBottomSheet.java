@@ -230,7 +230,15 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			public void onClick(View v) {
 				if (hasDataToSave) {
 					final GPXFile gpxFile = getGPXFile();
-					new SaveCurrentTrackTask(app, gpxFile, createSaveListener()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					new SaveCurrentTrackTask(app, gpxFile, createSaveListener(new Runnable() {
+						@Override
+						public void run() {
+							blockStatisticsBuilder.stopUpdatingStatBlocks();
+							blockStatisticsBuilder.runUpdatingStatBlocks();
+							stopUpdatingTimeTrackSaved();
+							runUpdatingTimeTrackSaved();
+						}
+					})).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
 			}
 		});
@@ -366,7 +374,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		handler.post(updatingTimeTrackSaved);
 	}
 
-	private SaveGpxListener createSaveListener() {
+	private SaveGpxListener createSaveListener(@Nullable final Runnable callback) {
 		return new SaveGpxListener() {
 
 			@Override
@@ -399,6 +407,9 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 					view.setLayoutParams(params);
 					UiUtilities.setupSnackbar(snackbar, nightMode);
 					snackbar.show();
+					if (callback != null) {
+						callback.run();
+					}
 				}
 			}
 		};
