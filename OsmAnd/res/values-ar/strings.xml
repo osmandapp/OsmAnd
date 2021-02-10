@@ -3328,7 +3328,7 @@
     <string name="routing_attr_piste_type_sled_name">تزلج</string>
     <string name="routing_attr_piste_type_sled_description">منحدرات لاستخدام الزلاجات.</string>
     <string name="routing_attr_allow_intermediate_name">السماح بالمسارات المتوسطة</string>
-    <string name="routing_attr_allow_intermediate_description">طرق أكثر صعوبة مع أقسام أكثر حدة. بعض العقبات ينبغي تجنبها.</string>
+    <string name="routing_attr_allow_intermediate_description">طرق أكثر صعوبة مع أقسام أكثر حدة. بعض العقبات التي ينبغي تجنبها.</string>
     <string name="routing_attr_allow_advanced_name">السماح للطرق المتقدمة</string>
     <string name="routing_attr_allow_advanced_description">طرق صعبة ، مع عقبات خطيرة وأقسام شديدة الانحدار.</string>
     <string name="routing_attr_allow_expert_name">السماح بطرق المتخصصين</string>
