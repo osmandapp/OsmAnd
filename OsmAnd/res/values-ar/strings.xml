@@ -1613,7 +1613,7 @@
 \nللعودة إلى واحدة من أنماط الخريطة التقليدية، ببساطة إما عطل هذا الملحق مرة أخرى أو غير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">عدد خطوط التوجيه</string>
-    <string name="map_markers">علامات الخريطة</string>
+    <string name="map_markers">التوجيه المباشر</string>
     <string name="routing_attr_avoid_borders_name">تخطي الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
     <string name="search_categories">الفئات</string>
@@ -1635,7 +1635,7 @@
     <string name="map_marker_2nd">التوجيه المباشرالثاني للخريطة</string>
     <string name="shared_string_add_to_map_markers">إضافة إلى التوجيه المباشر</string>
     <string name="clear_active_markers_q">حذف كافة التوجيه المباشرالنشط على الخريطة؟</string>
-    <string name="map_marker">علامة خريطة</string>
+    <string name="map_marker">توجيه مباشر على الخريطة</string>
     <string name="show_polygons">عرض المضلعات</string>
     <string name="shared_string_status">الحالة</string>
     <string name="shared_string_save_changes">حفظ التعديلات</string>
