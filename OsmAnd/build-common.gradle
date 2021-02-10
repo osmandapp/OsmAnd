@@ -106,15 +106,6 @@ android {
 	}
 }
 
-task updateNoTranslate(type: Copy) {
-	from('.') {
-		include 'no_translate.xml'
-		filter {
-			line -> replaceNoTranslate(line);
-		}
-	}
-	into 'res/values/'
-}
 
 task validateTranslate {
 	println "Validating translations"
@@ -145,10 +136,6 @@ task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
 	include "**/*.js"
-}
-
-task cleanNoTranslate(type: Delete) {
-	delete('res/values/no_translate.xml')
 }
 
 task collectFonts(type: Copy) {
@@ -262,7 +249,6 @@ task collectExternalResources {
 			copyMapShaderIcons,
 			copyMapPOIIcons,
 			copyLargePOIIcons,
-			updateNoTranslate,
 			validateTranslate,
 			copyWidgetIcons,
 			copyWidgetIconsHdpi,

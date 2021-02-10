@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -13,18 +15,23 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Metadata;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.util.Algorithms;
 
+import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
 import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
 
 public class OverviewCard extends BaseCard {
 
@@ -36,12 +43,11 @@ public class OverviewCard extends BaseCard {
 	private final SelectedGpxFile selectedGpxFile;
 	private final GpxBlockStatisticsBuilder blockStatisticsBuilder;
 
-	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull TrackDisplayHelper displayHelper,
-						@NonNull SegmentActionsListener actionsListener, SelectedGpxFile selectedGpxFile) {
+	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull SegmentActionsListener actionsListener, SelectedGpxFile selectedGpxFile) {
 		super(mapActivity);
 		this.actionsListener = actionsListener;
 		this.selectedGpxFile = selectedGpxFile;
-		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, displayHelper);
+		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile);
 	}
 
 	@Override
@@ -63,6 +69,7 @@ public class OverviewCard extends BaseCard {
 		RecyclerView blocksView = view.findViewById(R.id.recycler_overview);
 		blockStatisticsBuilder.setBlocksView(blocksView);
 
+		setupDescription();
 		initShowButton(iconColorDef, iconColorPres);
 		initAppearanceButton(iconColorDef, iconColorPres);
 		if (fileAvailable) {
@@ -123,6 +130,31 @@ public class OverviewCard extends BaseCard {
 		Drawable icon = resId != null ? app.getUIUtilities().getIcon(resId, color)
 				: UiUtilities.tintDrawable(iv.getDrawable(), getResolvedColor(color));
 		iv.setImageDrawable(icon);
+	}
+
+	private void setupDescription() {
+		GPXFile gpxFile = getGPXFile();
+		if (gpxFile.metadata == null) {
+			gpxFile.metadata = new Metadata();
+		}
+
+		TextView description = view.findViewById(R.id.description);
+		final String descriptionHtml = gpxFile.metadata.getDescription();
+		if (Algorithms.isBlank(descriptionHtml)) {
+			AndroidUiHelper.updateVisibility(description, false);
+		} else {
+			description.setText(getFirstParagraph(descriptionHtml));
+			description.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					GPXFile gpxFile = getGPXFile();
+					String title = gpxFile.metadata.getArticleTitle();
+					String imageUrl = getMetadataImageLink(gpxFile.metadata);
+					GpxReadDescriptionDialogFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml);
+				}
+			});
+			AndroidUiHelper.updateVisibility(description, true);
+		}
 	}
 
 	private void setOnTouchItem(View item, final ImageView image, final ImageView filled, @DrawableRes final Integer resId, @ColorRes final int colorDef, @ColorRes final int colorPres) {

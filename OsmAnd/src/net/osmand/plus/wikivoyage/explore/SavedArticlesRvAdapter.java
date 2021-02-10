@@ -20,6 +20,7 @@ import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
+import net.osmand.osm.RouteActivityType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -31,10 +32,13 @@ import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
-import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard.*;
+import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -81,7 +85,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			case ARTICLE_TYPE:
 				return new ItemVH(inflate(parent, R.layout.wikivoyage_article_card));
 			case GPX_TYPE:
-				return new TravelGpxCard.TravelGpxVH(inflate(parent, R.layout.wikivoyage_travel_gpx_card));
+				return new TravelGpxVH(inflate(parent, R.layout.wikivoyage_travel_gpx_card));
 			default:
 				throw new RuntimeException("Unsupported view type: " + viewType);
 		}
@@ -132,14 +136,20 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			holder.rightButton.setCompoundDrawablesWithIntrinsicBounds(null, null, deleteIcon, null);
 			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
 			holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
-		} else if (viewHolder instanceof TravelGpxCard.TravelGpxVH) {
+		} else if (viewHolder instanceof TravelGpxVH) {
 			final TravelGpx article = (TravelGpx) getItem(position);
-			final TravelGpxCard.TravelGpxVH holder = (TravelGpxCard.TravelGpxVH) viewHolder;
+			final TravelGpxVH holder = (TravelGpxVH) viewHolder;
 			holder.title.setText(article.getTitle());
-			Drawable icon = getActiveIcon(R.drawable.ic_action_user_account_16);
-			holder.user.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-			holder.user.setText(WikiArticleHelper.getPartialContent(article.user));
-			AndroidUtils.setBackground(app, holder.user, nightMode, R.drawable.btn_border_bg_light, R.drawable.btn_border_bg_dark);
+			holder.userIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_user_account_16));
+			holder.user.setText(article.user);
+			String activityTypeKey = article.activityType;
+			if (!Algorithms.isEmpty(activityTypeKey)) {
+				RouteActivityType activityType = RouteActivityType.getOrCreateTypeFromName(activityTypeKey);
+				int activityTypeIcon = getActivityTypeIcon(activityType);
+				holder.activityTypeIcon.setImageDrawable(getActiveIcon(activityTypeIcon));
+				holder.activityType.setText(getActivityTypeTitle(activityType));
+				holder.activityTypeLabel.setVisibility(View.VISIBLE);
+			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
 			holder.diffElevationUp.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationUp, app));
 			holder.diffElevationDown.setText(OsmAndFormatter.getFormattedAlt(article.diffElevationDown, app));
@@ -159,7 +169,18 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		}
 	}
 
-	private void updateSaveButton(final TravelGpxCard.TravelGpxVH holder, final TravelGpx article) {
+	@DrawableRes
+	private int getActivityTypeIcon(RouteActivityType activityType) {
+		int iconId = app.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", app.getPackageName());
+		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
+	}
+
+	private String getActivityTypeTitle(RouteActivityType activityType) {
+		return AndroidUtils.getActivityTypeStringPropertyName(app, activityType.getName(),
+				capitalizeFirstLetterAndLowercase(activityType.getName()));
+	}
+
+	private void updateSaveButton(final TravelGpxVH holder, final TravelGpx article) {
 		if (article != null) {
 			final TravelLocalDataHelper helper = app.getTravelHelper().getBookmarksHelper();
 			final boolean saved = helper.isArticleSaved(article);

@@ -35,7 +35,7 @@
     <string name="avoid_motorway">避開高速路</string>
     <string name="auto_zoom_map">自动缩放地图</string>
     <string name="recalculate_route_to_your_location">運輸方式：</string>
-    <string name="select_navigation_mode">選擇傳輸模式</string>
+    <string name="select_navigation_mode">运输模式：</string>
     <string name="map_widget_renderer">地图风格</string>
     <string name="map_widget_fluorescent">熒光路線</string>
     <string name="map_widget_show_ruler">統治者</string>
@@ -430,9 +430,9 @@
     <string name="local_indexes_cat_srtm">等高线数据</string>
     <string name="av_def_action_video">录制视频</string>
     <string name="av_def_action_audio">录制音频</string>
-    <string name="av_widget_action_descr">选择缺省窗体动作。</string>
+    <string name="av_widget_action_descr">默认小部件操作：</string>
     <string name="av_widget_action">缺省窗体动作</string>
-    <string name="av_video_format_descr">选择视频输出格式。</string>
+    <string name="av_video_format_descr">视频输出格式：</string>
     <string name="av_video_format">视频输出格式</string>
     <string name="av_use_external_recorder_descr">使用系统程序录制视频。</string>
     <string name="av_use_external_camera_descr">使用系统程序拍照</string>
@@ -481,7 +481,7 @@
     <string name="map_widget_mini_route">路线小地图</string>
     <string name="bg_service_interval">设置唤醒间隔：</string>
     <string name="continue_follow_previous_route_auto">上次导航未完成。是否继续？(%1$s 秒)</string>
-    <string name="select_animate_speedup">选择模拟导航速度</string>
+    <string name="select_animate_speedup">路线模拟速度：</string>
     <string name="global_app_allocated_memory_descr">已分配内存 %1$s MB (Android 限制 %2$s MB，Dalvik %3$s MB)。</string>
     <string name="shared_location">分享位置</string>
     <string name="osmand_parking_lim_text">有时间限制</string>
@@ -555,7 +555,7 @@
     <string name="animate_route">开始模拟导航</string>
     <string name="file_can_not_be_renamed">文件无法重命名。</string>
     <string name="file_with_name_already_exists">同名文件已存在。</string>
-    <string name="poi_query_by_name_matches_categories">找到多个满足查询的POI类别：</string>
+    <string name="poi_query_by_name_matches_categories">找到了几个相关的 POI 类别。</string>
     <string name="data_to_search_poi_not_available">用于搜索POI的本地数据不存在。</string>
     <string name="poi_filter_by_name">按名称搜索</string>
     <string name="old_poi_file_should_be_deleted">兴趣点数据文件 \'%1$s\' 是多余的，可以删除。</string>
@@ -2020,7 +2020,7 @@
     <string name="first_time_msg">感谢您使用 OsmAnd。对于此应用程序的许多功能，您需要一些地区的离线数据，您可以透过\'设置\' -&gt; \'管理地图文件\'来下载。之后您可浏览地图、位置的地址、查看兴趣点以及寻找大众运输工具。</string>
     <string name="basemap_was_selected_to_download">底图为某些特别的应用功能必需使用的，并且缺省为下载。</string>
     <string name="prefs_plugins_descr">启动插件的高级设置和更多的附加功能。</string>
-    <string name="play_commands_of_currently_selected_voice">用所选择的语音播放指令</string>
+    <string name="play_commands_of_currently_selected_voice">通过播放通知选择语音和测试：</string>
     <string name="back_to_location">回到目前位置</string>
     <string name="direction_style_sidewise">横向（8 个扇区）</string>
     <string name="direction_style_clockwise">顺时针（12 个扇区）</string>
@@ -2663,7 +2663,7 @@
     <string name="shared_string_travel_book">旅游书</string>
     <string name="download_images">下载图片</string>
     <string name="rendering_value_black_name">黑色</string>
-    <string name="rendering_attr_surface_wood_name">木</string>
+    <string name="rendering_attr_surface_wood_name">木头</string>
     <string name="app_mode_subway">地铁</string>
     <string name="app_mode_horse">骑马</string>
     <string name="shared_string_color_magenta">品红色</string>
@@ -2674,7 +2674,7 @@
     <string name="points_of_interests">兴趣点（POI）</string>
     <string name="shared_string_capacity">容量</string>
     <string name="rendering_attr_surface_metal_name">金属</string>
-    <string name="rendering_attr_highway_class_path_name">路径</string>
+    <string name="rendering_attr_highway_class_path_name">走道</string>
     <string name="app_mode_helicopter">直升机</string>
     <string name="app_mode_skiing">滑雪</string>
     <string name="base_profile_descr_ski">滑雪</string>
@@ -2839,7 +2839,7 @@
     <string name="show_closed_notes">显示关闭的注记</string>
     <string name="osm_edit_closed_note">关闭的OSM注记</string>
     <string name="add_online_source">添加在线资源</string>
-    <string name="rendering_attr_highway_class_bridleway_name"/>
+    <string name="rendering_attr_highway_class_bridleway_name">驮道</string>
     <string name="rendering_attr_surface_gravel_name">砾石</string>
     <string name="rendering_attr_surface_sett_name">比利时石砌路</string>
     <string name="routing_attr_allow_expert_name">允许专家路线</string>
@@ -3068,7 +3068,7 @@
     <string name="expire_time">到期时间</string>
     <string name="tiles_storage_descr">选择如何储存下载的数据。</string>
     <string name="export_import_quick_actions_with_profiles_promo">你可以在应用配置中导入导出快捷操作。</string>
-    <string name="delete_all_actions_message_q">你确定要删除％d快捷操作吗？</string>
+    <string name="delete_all_actions_message_q">你确定要不可撤销地删除 %d 快捷操作吗？</string>
     <string name="speed_cameras_legal_descr">在某些国家或地区，使用测速摄像头提示应用是非法的。
 \n
 \n你需要根据你所在的国家的法律作出选择。
@@ -3124,4 +3124,79 @@
     <string name="context_menu_item_add_waypoint">添加轨迹航点</string>
     <string name="save_track_to_gpx_globally">将轨迹记录到GPX文件</string>
     <string name="disable_recording_once_app_killed_descrp">当应用程序被杀死时，跟踪日志将被暂停（通过最近的应用程序）。（OsmAnd背景指示会从Android通知栏中消失）。</string>
+    <string name="add_online_routing_engine">添加在线路线引擎</string>
+    <string name="edit_online_routing_engine">编辑在线路线引擎</string>
+    <string name="shared_string_subtype">子类型</string>
+    <string name="shared_string_vehicle">车辆</string>
+    <string name="shared_string_api_key">API 密钥</string>
+    <string name="shared_string_server_url">服务器 URL</string>
+    <string name="shared_string_enter_param">输入参数</string>
+    <string name="keep_it_empty_if_not">否则请保持空白</string>
+    <string name="test_route_calculation">测试路线计算</string>
+    <string name="routing_engine_vehicle_type_driving">驾驶</string>
+    <string name="routing_engine_vehicle_type_car">汽车</string>
+    <string name="copy_address">复制地址</string>
+    <string name="online_routing_engine">在线路线引擎</string>
+    <string name="online_routing_engines">在线路线引擎</string>
+    <string name="shared_string_folders">文件夹</string>
+    <string name="select_folder">选择文件夹</string>
+    <string name="select_folder_descr">选择文件夹或添加新文件夹</string>
+    <string name="upload_to_openstreetmap">上传到 OpenStreetMap</string>
+    <string name="edit_track">编辑轨迹</string>
+    <string name="rename_track">重命名轨迹</string>
+    <string name="change_folder">更改文件夹</string>
+    <string name="shared_string_sec">秒</string>
+    <string name="announcement_time_passing">通过</string>
+    <string name="announcement_time_prepare_long">长时间准备</string>
+    <string name="announcement_time_prepare">准备</string>
+    <string name="announcement_time_off_route">偏离路线</string>
+    <string name="announcement_time_arrive">到达目的地</string>
+    <string name="shared_string_turn">转弯</string>
+    <string name="announcement_time_intervals">时间和距离间隔</string>
+    <string name="announcement_time_descr">不同语音提示的公告时间取决于提示类型、当前导航速度和默认导航速度。</string>
+    <string name="announcement_time_title">公告时间</string>
+    <string name="start_recording">开始录制</string>
+    <string name="show_track_on_map">在地图上显示轨迹</string>
+    <string name="routing_engine_vehicle_type_wheelchair">轮椅</string>
+    <string name="routing_engine_vehicle_type_hiking">徒步</string>
+    <string name="routing_engine_vehicle_type_walking">步行</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">电动自行车</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">山地自行车</string>
+    <string name="routing_engine_vehicle_type_cycling_road">公路自行车</string>
+    <string name="routing_engine_vehicle_type_hgv">重型货车</string>
+    <string name="routing_engine_vehicle_type_small_truck">小型卡车</string>
+    <string name="routing_engine_vehicle_type_truck">卡车</string>
+    <string name="routing_engine_vehicle_type_scooter">踏板车</string>
+    <string name="routing_engine_vehicle_type_racingbike">竞速自行车</string>
+    <string name="routing_engine_vehicle_type_mtb">山地车</string>
+    <string name="message_server_error">服务器错误：%1$s</string>
+    <string name="delete_online_routing_engine">删除这个在线路线引擎？</string>
+    <string name="message_name_is_already_exists">名字已经存在</string>
+    <string name="context_menu_read_full">阅读全文</string>
+    <string name="context_menu_edit_descr">编辑描述</string>
+    <string name="delete_waypoints">删除航点</string>
+    <string name="copy_to_map_markers">复制到地图标记</string>
+    <string name="copy_to_map_favorites">复制到收藏</string>
+    <string name="upload_photo">上传中</string>
+    <string name="upload_photo_completed">上传完成</string>
+    <string name="uploading_count">正在上传 %1$d，共 %2$d</string>
+    <string name="toast_select_edits_for_upload">选择要上传的编辑</string>
+    <string name="uploaded_count">已上传 %1$d，共 %2$d</string>
+    <string name="hillshade_slope_contour_lines">山体阴影/斜坡/等高线</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews 是一个社区驱动的项目，关于公共场所，如餐馆，酒店，博物馆，航点。它收集了所有关于它们的公共信息，如照片、评论、链接到其他系统的 OpenStreetMap、维基百科。
+\n
+\n所有 OpenPlaceReview 的数据都是开放的，所有人都可以使用：http://openplacereviews.org/data。
+\n
+\n你可以在以下网站阅读更多信息：http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">使用 test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">登录 OpenPlaceReviews</string>
+    <string name="activity_type_winter_name">冬季</string>
+    <string name="activity_type_snowmobile_name">雪地摩托</string>
+    <string name="activity_type_riding_name">骑行</string>
+    <string name="activity_type_cycling_name">骑车</string>
+    <string name="activity_type_hiking_name">健行</string>
+    <string name="activity_type_running_name">跑步</string>
+    <string name="activity_type_walking_name">步行</string>
+    <string name="activity_type_motorbike_name">摩托车</string>
 </resources>
