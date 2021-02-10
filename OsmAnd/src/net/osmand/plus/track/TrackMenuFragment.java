@@ -326,7 +326,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 				headerContainer.addView(overviewCard.getView());
 			} else {
-				overviewCard = new OverviewCard(getMapActivity(), displayHelper, this, selectedGpxFile);
+				overviewCard = new OverviewCard(getMapActivity(), this, selectedGpxFile);
 				overviewCard.setListener(this);
 				headerContainer.addView(overviewCard.build(getMapActivity()));
 			}
@@ -760,7 +760,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						segment = segments.get(0);
 					}
 				}
-				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
+				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT};
 				List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 				if (segment != null && !Algorithms.isEmpty(items)) {
 					SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, items.get(0), segment);
@@ -1013,6 +1013,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void openAnalyzeOnMap(GpxDisplayItem gpxItem) {
 		TrackDetailsMenu trackDetailsMenu = getMapActivity().getTrackDetailsMenu();
 		trackDetailsMenu.setGpxItem(gpxItem);
+		trackDetailsMenu.setSelectedGpxFile(selectedGpxFile);
 		trackDetailsMenu.show();
 		hide();
 	}
@@ -1110,7 +1111,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (selectedGpxFile != null) {
-					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
+					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[]{GpxDisplayItemType.TRACK_SEGMENT});
 					selectedGpxFile.setDisplayGroups(groups, app);
 					selectedGpxFile.processPoints(app);
 				}
