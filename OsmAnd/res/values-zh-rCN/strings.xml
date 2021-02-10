@@ -2674,7 +2674,7 @@
     <string name="points_of_interests">兴趣点（POI）</string>
     <string name="shared_string_capacity">容量</string>
     <string name="rendering_attr_surface_metal_name">金属</string>
-    <string name="rendering_attr_highway_class_path_name">路径</string>
+    <string name="rendering_attr_highway_class_path_name">走道</string>
     <string name="app_mode_helicopter">直升机</string>
     <string name="app_mode_skiing">滑雪</string>
     <string name="base_profile_descr_ski">滑雪</string>
