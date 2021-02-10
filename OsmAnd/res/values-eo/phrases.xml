@@ -3888,4 +3888,7 @@
     <string name="poi_gladed_yes">Senarbigita: jes</string>
     <string name="poi_piste_name">Nomo de skivojo</string>
     <string name="poi_piste_ski_jump">Skisaltejo</string>
+    <string name="poi_mobile_library">Movebla biblioteko (haltloko)</string>
+    <string name="poi_summit_register_no">Pint‑taglibro: ne</string>
+    <string name="poi_summit_register_yes">Pint‑taglibro: jes</string>
 </resources>
