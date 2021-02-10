@@ -100,7 +100,7 @@ public class GpxBlockStatisticsBuilder {
 		GPXFile gpxFile = getGPXFile();
 		GpxDisplayItem gpxDisplayItem = null;
 		GPXTrackAnalysis analysis = null;
-		boolean withoutGaps = false;
+		boolean withoutGaps = true;
 		if (gpxFile.tracks.size() > 0) {
 			gpxDisplayItem = getDisplayItem(gpxFile);
 		}
