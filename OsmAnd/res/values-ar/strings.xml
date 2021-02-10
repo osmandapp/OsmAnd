@@ -1832,7 +1832,7 @@
     <string name="osm_edit_commented_note">ملاحظة OSM معلق عليها</string>
     <string name="rendering_attr_pisteGrooming_name">مسار زلق</string>
     <string name="world_ski_missing">لإظهار خرائط التزلج، يجب تحميل خريطة خاصة محلية.</string>
-    <string name="rendering_attr_publicTransportMode_name">حافلة، عربة وغيرها</string>
+    <string name="rendering_attr_publicTransportMode_name">حافلة، ترامواي وغيرها</string>
     <string name="osm_edit_created_note">إنشاء ملاحظة OSM</string>
     <string name="osn_add_dialog_error">حدث استثناء: لم يتم إنشاء الملاحظة.</string>
     <string name="osn_close_dialog_error">حدث استثناء: لم يتم غلق الملاحظة.</string>
