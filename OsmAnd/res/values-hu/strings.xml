@@ -3166,7 +3166,7 @@
     <string name="routing_attr_allow_expert_description">Rendkívül nehéz útvonalak veszélyes akadályokkal és környezettel.</string>
     <string name="routing_attr_allow_skating_only_name">Csak korcsolyázó mozgással futható utak engedélyezése</string>
     <string name="routing_attr_allow_skating_only_description">Szabad vagy korcsolyázó stílushoz karbantartott utak, klasszikus nyomok nélkül.</string>
-    <string name="routing_attr_allow_classic_only_description">Klasszikus stílushoz karbantartott útvonalak, korcsolyázó nyomok nélkül. Ide tartoznak a kisebb hójárókkal karbantartott lazább pályájú útvonalak és a síelők által kézzel karbantartott nyomok is.</string>
+    <string name="routing_attr_allow_classic_only_description">Klasszikus stílushoz karbantartott útvonalak, korcsolyázó nyomok nélkül. Ide tartoznak a kisebb motoros szánokkal karbantartott lazább pályájú útvonalak és a síelők által kézzel karbantartott nyomok is.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">1. osztály (burkolt)</string>
     <string name="rendering_attr_highway_class_track_grade2_name">2. osztály (kavicsos)</string>
     <string name="rendering_attr_highway_class_track_grade3_name">3. osztály (kemény földút)</string>
@@ -3961,7 +3961,7 @@
     <string name="select_folder">Mappa kijelölése</string>
     <string name="select_folder_descr">Mappa kijelölése vagy új hozzáadása</string>
     <string name="shared_string_empty">Üres</string>
-    <string name="analyze_by_intervals">Intervallumonkénti elemzés (felosztási intervallumok)</string>
+    <string name="analyze_by_intervals">Elemzés felosztási intervallumonként</string>
     <string name="upload_to_openstreetmap">Feltöltés az OpenStreetMapre</string>
     <string name="edit_track">Nyomvonal szerkesztése</string>
     <string name="rename_track">Nyomvonal átnevezése</string>
@@ -4005,4 +4005,26 @@
     <string name="uploading_count">%1$d / %2$d feltöltés alatt</string>
     <string name="uploaded_count">%1$d / %2$d feltöltve</string>
     <string name="toast_select_edits_for_upload">Szerkesztések kijelölése feltöltéshez</string>
+    <string name="activity_type_snowmobile_name">Motoros szán</string>
+    <string name="hillshade_slope_contour_lines">Domborzatárnyékolás / lejtés / szintvonalak</string>
+    <string name="open_place_reviews_plugin_description">Az OpenPlaceReviews egy közösségvezérelt projekt nyilvános helyekről (éttermek, szállodák, múzeumok, útpontok). Minden nyilvános információt összegyűjt róluk, például fényképeket, értékelésüket, más rendszerek – OpenStreetMap, Wikipedia – linkeket.
+\n
+\nMinden OpenPlaceReview-adat nyitott és mindenki számára elérhető itt: https://openplacereviews.org/data.
+\n
+\nBővebben itt olvashat: https://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">A test.openplacereviews.org használata</string>
+    <string name="login_open_place_reviews">Bejelentkezés az OpenPlaceReviews-ba</string>
+    <string name="activity_type_water_name">Víz</string>
+    <string name="activity_type_winter_name">Tél</string>
+    <string name="activity_type_riding_name">Lovaglás</string>
+    <string name="activity_type_racing_name">Versenykerékpározás</string>
+    <string name="activity_type_mountainbike_name">Hegyi kerékpározás</string>
+    <string name="activity_type_cycling_name">Kerékpározás</string>
+    <string name="activity_type_hiking_name">Túrázás</string>
+    <string name="activity_type_running_name">Futás</string>
+    <string name="activity_type_walking_name">Séta</string>
+    <string name="activity_type_offroad_name">Terepjáró</string>
+    <string name="activity_type_motorbike_name">Motorkerékpár</string>
+    <string name="activity_type_car_name">Személyautó</string>
 </resources>
