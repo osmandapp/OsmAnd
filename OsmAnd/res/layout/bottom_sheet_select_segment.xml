@@ -16,7 +16,7 @@
 		android:paddingTop="@dimen/measurement_tool_menu_title_padding_top"
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding_small">
+		android:paddingBottom="@dimen/measurement_tool_button_padding_top">
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/title"
@@ -44,19 +44,16 @@
 			android:textSize="@dimen/default_list_text_size"
 			osmand:typeface="@string/font_roboto_regular" />
 
-		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/title_gpx_track"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:ellipsize="end"
-			android:gravity="center_vertical"
-			android:letterSpacing="@dimen/text_button_letter_spacing"
-			android:maxLines="1"
-			android:textColor="?attr/color_dialog_buttons"
-			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_medium"
-			tools:text="Track title" />
+
 	</LinearLayout>
+
+	<include
+		android:id="@+id/gpx_track_container"
+		layout="@layout/gpx_track_item"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/dashPluginMargin" />
+
 
 	<View
 		android:layout_width="match_parent"

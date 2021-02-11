@@ -16,5 +16,7 @@
     <item name="av_notes_widget_state_audio" type="id"/>
     <item name="av_notes_widget_state_video" type="id"/>
     <item name="av_notes_widget_state_photo" type="id"/>
+    <item type="id" name="icon1" />
+    <item type="id" name="icon2" />
 
 </resources>

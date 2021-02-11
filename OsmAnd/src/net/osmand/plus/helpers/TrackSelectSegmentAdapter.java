@@ -12,13 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.GPXDatabase;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -27,9 +24,8 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackSelectS
 	private final OsmandApplication app;
 	private final LayoutInflater themedInflater;
 	private final UiUtilities iconsCache;
-	private GpxTrackAdapter.OnItemClickListener onItemClickListener;
-
 	private final List<TrkSegment> segments;
+	private GpxTrackAdapter.OnItemClickListener onItemClickListener;
 
 	public TrackSelectSegmentAdapter(Context ctx, List<TrkSegment> segments) {
 		app = (OsmandApplication) ctx.getApplicationContext();
@@ -62,7 +58,6 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackSelectS
 		long time = getSegmentTime(segment);
 		holder.time.setText(OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)));
 		holder.distance.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
-//		updateTrackSegmentInfoView(holder, info, gpxSegmentList, dataItem, app);
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -107,12 +102,6 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackSelectS
 	@Override
 	public int getItemCount() {
 		return segments.size();
-	}
-
-	private void updateTrackSegmentInfoView(TrackSelectSegmentAdapter.TrackViewHolder holder, MeasurementEditingContext info, GpxSelectionHelper.SelectedGpxFile gpxSegmentList,
-											GPXDatabase.GpxDataItem dataItem,
-											OsmandApplication app) {
-
 	}
 
 
