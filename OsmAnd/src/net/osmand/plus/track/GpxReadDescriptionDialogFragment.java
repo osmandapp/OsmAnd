@@ -200,7 +200,9 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			@Override
 			public void onPageCommitVisible(WebView webView, String url) {
 				super.onPageCommitVisible(webView, url);
-				setupDependentViews(view);
+				if (getActivity() != null) {
+					setupDependentViews(view);
+				}
 			}
 		});
 		loadWebviewData();
