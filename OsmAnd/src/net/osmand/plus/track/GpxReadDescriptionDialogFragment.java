@@ -233,7 +233,8 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		});
 		AndroidUiHelper.setVisibility(View.VISIBLE,
 				readBtn, view.findViewById(R.id.divider), view.findViewById(R.id.bottom_empty_space));
-		int backgroundColor = isNightMode(false) ?
+		boolean nightMode = getActivity() != null && isNightMode(false);
+		int backgroundColor = nightMode ?
 				R.color.activity_background_color_dark : R.color.activity_background_color_light;
 		view.findViewById(R.id.root).setBackgroundResource(backgroundColor);
 	}
