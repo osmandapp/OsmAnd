@@ -3881,4 +3881,14 @@
     <string name="poi_wildlife_crossing_bat_tunnel">Fledermaustunnel</string>
     <string name="poi_wildlife_crossing_bat_bridge">Fledermausbrücke</string>
     <string name="poi_wildlife_crossing">Wildwechsel</string>
+    <string name="poi_mobile_library">Halteposition der Fahrbücherei</string>
+    <string name="poi_summit_register_no">Gipfelbuch: nein</string>
+    <string name="poi_summit_register_yes">Gipfelbuch: ja</string>
+    <string name="poi_piste_status_closed">Pistenstatus: geschlossen</string>
+    <string name="poi_piste_status_open">Pistenstatus: geöffnet</string>
+    <string name="poi_patrolled_no">Bewacht: nein</string>
+    <string name="poi_patrolled_yes">Bewacht: ja</string>
+    <string name="poi_gladed_yes">Geglättet: ja</string>
+    <string name="poi_piste_name">Pistenname</string>
+    <string name="poi_piste_ski_jump">Skispringen</string>
 </resources>
