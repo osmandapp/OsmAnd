@@ -61,8 +61,9 @@ public class GpxBlockStatisticsBuilder {
 		this.blocksView = blocksView;
 	}
 
-	private GpxDisplayItem getDisplayItem(GPXFile gpxFile) {
-		return GpxUiHelper.makeGpxDisplayItem(app, gpxFile);
+	@Nullable
+	public GpxDisplayItem getDisplayItem(GPXFile gpxFile) {
+		return gpxFile.tracks.size() > 0 ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile) : null;
 	}
 
 	private GPXFile getGPXFile() {
@@ -101,12 +102,9 @@ public class GpxBlockStatisticsBuilder {
 
 	public void initItems() {
 		GPXFile gpxFile = getGPXFile();
-		GpxDisplayItem gpxDisplayItem = null;
+		GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
 		GPXTrackAnalysis analysis = null;
 		boolean withoutGaps = true;
-		if (gpxFile.tracks.size() > 0) {
-			gpxDisplayItem = getDisplayItem(gpxFile);
-		}
 		if (gpxDisplayItem != null) {
 			analysis = gpxDisplayItem.analysis;
 			withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();

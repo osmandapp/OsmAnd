@@ -103,7 +103,7 @@
 		android:layout_marginBottom="@dimen/content_padding" />
 
 	<include
-		android:id="@+id/button_start"
+		android:id="@+id/button_segment"
 		layout="@layout/bottom_sheet_button_with_icon"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

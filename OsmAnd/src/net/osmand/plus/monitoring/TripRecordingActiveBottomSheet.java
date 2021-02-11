@@ -123,13 +123,13 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 				.create());
 
 		View buttonClear = itemView.findViewById(R.id.button_clear);
-		View buttonStart = itemView.findViewById(R.id.button_start);
+		View buttonSegment = itemView.findViewById(R.id.button_segment);
 		buttonSave = itemView.findViewById(R.id.button_save);
 		final View buttonPause = itemView.findViewById(R.id.button_pause);
 		View buttonStop = itemView.findViewById(R.id.button_stop);
 
 		createItem(buttonClear, ItemType.CLEAR_DATA, hasDataToSave(), null);
-		createItem(buttonStart, ItemType.START_SEGMENT, wasTrackMonitored(), null);
+		createItem(buttonSegment, ItemType.START_SEGMENT, wasTrackMonitored(), null);
 		createItem(buttonPause, wasTrackMonitored() ? ItemType.PAUSE : ItemType.RESUME, true, null);
 		createItem(buttonStop, ItemType.STOP, true, null);
 
@@ -208,11 +208,13 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			}
 		});
 
-		buttonStart.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
+		buttonSegment.findViewById(R.id.button_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (wasTrackMonitored()) {
+					blockStatisticsBuilder.stopUpdatingStatBlocks();
 					helper.startNewSegment();
+					blockStatisticsBuilder.runUpdatingStatBlocks();
 				}
 			}
 		});
@@ -288,9 +290,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			type.setTextColor(title, app, enabled, false, nightMode);
 		}
 
-		setItemBackgroundInactive(button != null ? button : (LinearLayout) view, app, nightMode);
-		type.changeOnTouch(button != null ? button : (LinearLayout) view, icon, title, app, enabled, nightMode);
-
 		TextViewEx desc = view.findViewById(R.id.desc);
 		if (desc != null) {
 			boolean isShowDesc = !Algorithms.isBlank(description);
@@ -300,6 +299,9 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			desc.setText(description);
 			type.setTextColor(desc, app, false, false, nightMode);
 		}
+
+		setItemBackgroundInactive(button != null ? button : (LinearLayout) view, app, nightMode);
+		type.changeOnTouch(button != null ? button : (LinearLayout) view, icon, title, app, enabled, nightMode);
 	}
 
 	private String getTimeTrackSaved() {
@@ -521,15 +523,15 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 						switch (event.getAction()) {
 							case MotionEvent.ACTION_DOWN: {
 								setItemBackgroundActive(button, context, nightMode);
-								setTintedIcon(iv, context, enabled, true, nightMode);
-								setTextColor(tv, context, enabled, true, nightMode);
+								setTintedIcon(iv, context, true, true, nightMode);
+								setTextColor(tv, context, true, true, nightMode);
 								break;
 							}
 							case MotionEvent.ACTION_UP:
 							case MotionEvent.ACTION_CANCEL: {
 								setItemBackgroundInactive(button, context, nightMode);
-								setTintedIcon(iv, context, enabled, false, nightMode);
-								setTextColor(tv, context, enabled, false, nightMode);
+								setTintedIcon(iv, context, true, false, nightMode);
+								setTextColor(tv, context, true, false, nightMode);
 								break;
 							}
 						}
