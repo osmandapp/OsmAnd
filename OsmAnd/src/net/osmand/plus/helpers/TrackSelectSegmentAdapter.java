@@ -109,12 +109,6 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackSelectS
 		this.onItemClickListener = onItemClickListener;
 	}
 
-	public interface OnItemClickListener {
-
-		void onItemClick(int position);
-
-	}
-
 	static class TrackViewHolder extends RecyclerView.ViewHolder {
 
 		ImageView icon;

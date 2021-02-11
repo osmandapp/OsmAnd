@@ -493,17 +493,15 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (mapActivity != null && index < card.getGpxInfoList().size()) {
 			GPXInfo gpxInfo = card.getGpxInfoList().get(index);
 			String fileName = gpxInfo.getFileName();
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+			GPXFile GPXFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName).getGpxFile();
 			FragmentManager fragmentManager = getFragmentManager();
-			if (selectedGpxFile != null && fragmentManager != null) {
-				boolean isTrackContainsMultiSegment = selectedGpxFile.getGpxFile().getNonEmptySegmentsCount() > 1;
+			if (GPXFile != null && fragmentManager != null) {
+				boolean isTrackContainsMultiSegment = GPXFile.getNonEmptySegmentsCount() > 1;
 				if (!isTrackContainsMultiSegment) {
-					selectTrackToFollow(selectedGpxFile.getGpxFile());
+					selectTrackToFollow(GPXFile);
 					updateSelectionMode(false);
 				} else {
-					TrackSelectSegmentBottomSheet.showInstance(fragmentManager, selectedGpxFile);
-					selectTrackToFollow(selectedGpxFile.getGpxFile());
-					updateSelectionMode(true);
+					TrackSelectSegmentBottomSheet.showInstance(fragmentManager, GPXFile);
 				}
 			} else {
 				CallbackWithObject<GPXFile[]> callback = new CallbackWithObject<GPXFile[]>() {

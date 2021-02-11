@@ -8,15 +8,16 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper;
@@ -27,7 +28,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
@@ -47,10 +48,11 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 	private GPXUtilities.GPXFile gpxFile;
 	private OsmandApplication app;
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GpxSelectionHelper.SelectedGpxFile selectedFile) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GPXUtilities.GPXFile gpxFile) {
 		if (!fragmentManager.isStateSaved()) {
 			TrackSelectSegmentBottomSheet fragment = new TrackSelectSegmentBottomSheet();
-			fragment.selectedFile = selectedFile;
+			fragment.setRetainInstance(true);
+			fragment.gpxFile = gpxFile;
 			fragment.show(fragmentManager, TAG);
 		}
 	}
@@ -68,7 +70,6 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		}
 
 		mapActivity = (MapActivity) getActivity();
-		gpxFile = selectedFile.getGpxFile();
 		String titleGpxTrack = Algorithms.getFileWithoutDirs(gpxFile.path);
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		String selectSegmentDescription = getString(R.string.select_segments_description, titleGpxTrack);
@@ -79,23 +80,28 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		gpxTrackName.setSpan(new CustomTypefaceSpan(typeface), startIndex, endIndex, 0);
 		gpxTrackName.setSpan(new ForegroundColorSpan(descriptionColor), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		items.add(new BottomSheetItemWithDescription.Builder()
-				.setDescription(gpxTrackName)
+		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(itemView)
 				.create());
 
 		LinearLayout gpxTrackContainer = itemView.findViewById(R.id.gpx_track_container);
 		GPXUtilities.GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
-		ImageView icon = gpxTrackContainer.findViewById(R.id.icon);
-		icon.setId(R.id.icon1);
+		AppCompatImageView icon = gpxTrackContainer.findViewById(R.id.icon);
+		int sidePadding = AndroidUtils.dpToPx(mapActivity, 16f);
+
 		TextView name = gpxTrackContainer.findViewById(R.id.name);
+		TextView description = itemView.findViewById(R.id.description);
 		TextView distance = gpxTrackContainer.findViewById(R.id.distance);
 		TextView pointsCount = gpxTrackContainer.findViewById(R.id.points_count);
 		TextView time = gpxTrackContainer.findViewById(R.id.time);
-
+		LinearLayout container = gpxTrackContainer.findViewById(R.id.container);
+		LinearLayout containerNameAndReadSection = gpxTrackContainer.findViewById(R.id.name_and_read_section_container);
+		container.setPadding(sidePadding, 0, 0, 0);
+		containerNameAndReadSection.setPadding(sidePadding, 0, 0, 0);
 		icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
 		name.setText(titleGpxTrack);
+		description.setText(gpxTrackName);
 		distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 		pointsCount.setText(String.valueOf(analysis.wptPoints));
 		time.setText(analysis.isTimeSpecified() ? Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) : "");
@@ -103,7 +109,7 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		final RecyclerView recyclerView = itemView.findViewById(R.id.gpx_segment_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setNestedScrollingEnabled(false);
-		final List<TrkSegment> segments = selectedFile.getPointsToDisplay();
+		final List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(true);
 		adapterSegments = new TrackSelectSegmentAdapter(requireContext(), segments);
 		adapterSegments.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
 			@Override
