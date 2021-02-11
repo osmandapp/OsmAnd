@@ -70,6 +70,7 @@ public class TravelObfHelper implements TravelHelper {
 	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
 	public static final String ROUTE_TRACK = "route_track";
 	public static final int ARTICLE_SEARCH_RADIUS = 50000;
+	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30000;
 	public static final int MAX_POPULAR_ARTICLES_COUNT = 30;
 	public static final String REF_TAG = "ref";
 	public static final String NAME_TAG = "name";
@@ -231,6 +232,24 @@ public class TravelObfHelper implements TravelHelper {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
 				return subcategory.equals(filterSubcategory);
+			}
+
+			@Override
+			public boolean isEmpty() {
+				return false;
+			}
+		};
+	}
+
+	@NonNull
+	private SearchPoiTypeFilter getSubcategoriesSearchFilter(final String... filterSubcategory) {
+		return new SearchPoiTypeFilter() {
+			@Override
+			public boolean accept(PoiCategory type, String subcategory) {
+				for (String filterSubcategory : filterSubcategory) {
+					return subcategory.equals(filterSubcategory);
+				}
+				return false;
 			}
 
 			@Override
@@ -681,53 +700,143 @@ public class TravelObfHelper implements TravelHelper {
 
 	private synchronized TravelArticle findArticleById(@NonNull final TravelArticleIdentifier articleId,
 													   final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+		final List<Pair<File, Amenity>> amenities = new ArrayList<>();
 		TravelArticle article = null;
-		final boolean isDbArticle = articleId.file != null && articleId.file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);
-		final List<Amenity> amenities = new ArrayList<>();
-		for (BinaryMapIndexReader reader : getReaders()) {
+		SearchRequest<Amenity> req = null;
+		for (final BinaryMapIndexReader reader : getReaders()) {
 			try {
-				if (articleId.file != null && !articleId.file.equals(reader.getFile()) && !isDbArticle) {
-					continue;
+				if (articleId.file != null && articleId.file.equals(reader.getFile())) {
+					if (articleId.file.lastModified() == reader.getFile().lastModified()) {
+						req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
+								Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+								getSubcategoriesSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
+									boolean done = false;
+
+									@Override
+									public boolean publish(Amenity amenity) {
+										if (Algorithms.stringsEqual(articleId.routeId,
+												Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID)))) {
+											amenities.add(new Pair<>(reader.getFile(), amenity));
+											done = true;
+										}
+										return false;
+									}
+
+									@Override
+									public boolean isCancelled() {
+										return done;
+									}
+								}, null);
+						req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS);
+					} else {
+						req = getEqualsTitleRequest(articleId, lang, amenities, reader);
+						req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS / 10);
+					}
 				}
-				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
-						Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-						getSearchFilter(ROUTE_ARTICLE), new ResultMatcher<Amenity>() {
-							boolean done = false;
-
-							@Override
-							public boolean publish(Amenity amenity) {
-								if (Algorithms.stringsEqual(articleId.routeId,
-										Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID))) || isDbArticle) {
-									amenities.add(amenity);
-									done = true;
-								}
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return done;
-							}
-						}, null);
-
-				if (!Double.isNaN(articleId.lat)) {
-					req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS);
-					if (!Algorithms.isEmpty(articleId.title)) {
-						reader.searchPoiByName(req);
+				if (req != null) {
+					if (!Double.isNaN(articleId.lat)) {
+						if (!Algorithms.isEmpty(articleId.title)) {
+							reader.searchPoiByName(req);
+						} else {
+							reader.searchPoi(req);
+						}
 					} else {
 						reader.searchPoi(req);
 					}
-				} else {
-					reader.searchPoi(req);
+					break;
 				}
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
-			if (!Algorithms.isEmpty(amenities)) {
-				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang, readGpx, callback);
+		}
+		if (amenities.isEmpty()) {
+			for (BinaryMapIndexReader reader : getReaders()) {
+				try {
+					req = getEqualsTitleRequest(articleId, lang, amenities, reader);
+					req.setBBoxRadius(articleId.lat, articleId.lon, SAVED_ARTICLE_SEARCH_RADIUS);
+					if (!Double.isNaN(articleId.lat)) {
+						if (!Algorithms.isEmpty(articleId.title)) {
+							reader.searchPoiByName(req);
+						} else {
+							reader.searchPoi(req);
+						}
+					} else {
+						reader.searchPoi(req);
+					}
+				} catch (IOException e) {
+					LOG.error(e.getMessage());
+				}
 			}
 		}
+		if (amenities.isEmpty()) {
+			for (final BinaryMapIndexReader reader : getReaders()) {
+				try {
+					req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
+							Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+							getSubcategoriesSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
+								boolean done = false;
+
+								@Override
+								public boolean publish(Amenity amenity) {
+									if (Algorithms.stringsEqual(articleId.routeId,
+											Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID)))
+											&& Algorithms.stringsEqual(articleId.routeSource,
+											Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE)))) {
+										amenities.add(new Pair<>(reader.getFile(), amenity));
+										done = true;
+									}
+									return false;
+								}
+
+								@Override
+								public boolean isCancelled() {
+									return done;
+								}
+							}, null);
+					req.setBBoxRadius(articleId.lat, articleId.lon, SAVED_ARTICLE_SEARCH_RADIUS);
+					if (!Double.isNaN(articleId.lat)) {
+						if (!Algorithms.isEmpty(articleId.title)) {
+							reader.searchPoiByName(req);
+						} else {
+							reader.searchPoi(req);
+						}
+					} else {
+						reader.searchPoi(req);
+					}
+				} catch (IOException e) {
+					LOG.error(e.getMessage());
+				}
+			}
+		}
+		if (!Algorithms.isEmpty(amenities)) {
+			article = cacheTravelArticles(amenities.get(0).first, amenities.get(0).second, lang, readGpx, callback);
+		}
 		return article;
+	}
+
+	private SearchRequest<Amenity> getEqualsTitleRequest(@NonNull final TravelArticleIdentifier articleId,
+														 final String lang, final List<Pair<File, Amenity>> amenities,
+														 final BinaryMapIndexReader reader) {
+		return BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
+				Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+				getSubcategoriesSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
+					boolean done = false;
+
+					@Override
+					public boolean publish(Amenity amenity) {
+						if (Algorithms.stringsEqual(Algorithms.emptyIfNull(articleId.title),
+								Algorithms.emptyIfNull(amenity.getName(lang)))) {
+							amenities.add(new Pair<>(reader.getFile(), amenity));
+							done = true;
+						}
+						return false;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return done;
+					}
+				}, null);
 	}
 
 	@Nullable
