@@ -493,22 +493,28 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (mapActivity != null && index < card.getGpxInfoList().size()) {
 			GPXInfo gpxInfo = card.getGpxInfoList().get(index);
 			String fileName = gpxInfo.getFileName();
-			GPXFile GPXFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName).getGpxFile();
-			FragmentManager fragmentManager = getFragmentManager();
-			if (GPXFile != null && fragmentManager != null) {
-				boolean isTrackContainsMultiSegment = GPXFile.getNonEmptySegmentsCount() > 1;
-				if (!isTrackContainsMultiSegment) {
-					selectTrackToFollow(GPXFile);
-					updateSelectionMode(false);
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+			if (selectedGpxFile != null) {
+				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				if (gpxFile.getNonEmptySegmentsCount() > 1) {
+					TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), gpxFile);
 				} else {
-					TrackSelectSegmentBottomSheet.showInstance(fragmentManager, GPXFile);
+					updateSelectionMode(false);
+					selectTrackToFollow(gpxFile);
 				}
 			} else {
 				CallbackWithObject<GPXFile[]> callback = new CallbackWithObject<GPXFile[]>() {
 					@Override
 					public boolean processResult(GPXFile[] result) {
-						selectTrackToFollow(result[0]);
-						updateSelectionMode(false);
+						MapActivity mapActivity = getMapActivity();
+						if (mapActivity != null) {
+							if (result[0].getNonEmptySegmentsCount() > 1) {
+								TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), result[0]);
+							} else {
+								updateSelectionMode(false);
+								selectTrackToFollow(result[0]);
+							}
+						}
 						return true;
 					}
 				};
