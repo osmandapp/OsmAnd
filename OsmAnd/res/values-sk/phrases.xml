@@ -240,8 +240,8 @@
     <string name="poi_city">Mesto (nad 100 tis.obyv.)</string>
     <string name="poi_town">Mesto (10 tis.-100 tis.obyv.)</string>
     <string name="poi_village">Obec (200-10 tis.obyv.)</string>
-    <string name="poi_hamlet">Osada/Samota</string>
-    <string name="poi_isolated_dwelling">Izolované obydlie</string>
+    <string name="poi_hamlet">Osada</string>
+    <string name="poi_isolated_dwelling">Samota/kopanica</string>
     <string name="poi_suburb">Mestský obvod</string>
     <string name="poi_neighbourhood">Okolie (v meste)</string>
     <string name="poi_locality">Oblasť</string>

@@ -3887,4 +3887,8 @@
     <string name="poi_patrolled_yes">Патрулюється: так</string>
     <string name="poi_piste_name">Назва траси</string>
     <string name="poi_piste_ski_jump">Cтрибки на лижах</string>
+    <string name="poi_summit_register_no">Реєстр вершин: ні</string>
+    <string name="poi_summit_register_yes">Реєстр вершин: так</string>
+    <string name="poi_gladed_yes">Розчищена поляна: так</string>
+    <string name="poi_mobile_library">Місце зупинка мобільної бібліотеки</string>
 </resources>

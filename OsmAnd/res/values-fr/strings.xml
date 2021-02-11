@@ -4014,4 +4014,7 @@
     <string name="activity_type_running_name">Course à pied</string>
     <string name="activity_type_walking_name">Marche</string>
     <string name="activity_type_car_name">Voiture</string>
+    <string name="activity_type_riding_name">Promenade</string>
+    <string name="activity_type_offroad_name">Voies non revêtues</string>
+    <string name="activity_type_motorbike_name">Moto</string>
 </resources>

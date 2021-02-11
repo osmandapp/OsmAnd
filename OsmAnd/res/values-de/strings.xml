@@ -4022,4 +4022,16 @@
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">test.openplacereviews.org verwenden</string>
     <string name="login_open_place_reviews">Anmelden bei OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Wasser</string>
+    <string name="activity_type_winter_name">Winter</string>
+    <string name="activity_type_snowmobile_name">Schneemobil</string>
+    <string name="activity_type_riding_name">Reiten</string>
+    <string name="activity_type_mountainbike_name">Mountainbike</string>
+    <string name="activity_type_cycling_name">Fahrrad</string>
+    <string name="activity_type_hiking_name">Wandern</string>
+    <string name="activity_type_running_name">Laufen</string>
+    <string name="activity_type_walking_name">Fußgänger</string>
+    <string name="activity_type_offroad_name">Geländegängig</string>
+    <string name="activity_type_motorbike_name">Motorrad</string>
+    <string name="activity_type_car_name">Auto</string>
 </resources>

@@ -135,7 +135,7 @@
     <string name="mile">мл</string>
     <string name="km">км</string>
     <string name="m">м</string>
-    <string name="nm">мор.м.</string>
+    <string name="nm">nmi</string>
     <string name="min_mile">хв/м</string>
     <string name="min_km">хв/км</string>
     <string name="nm_h">вузл</string>
