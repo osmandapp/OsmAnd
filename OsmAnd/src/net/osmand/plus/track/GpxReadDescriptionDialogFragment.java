@@ -200,7 +200,9 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			@Override
 			public void onPageCommitVisible(WebView webView, String url) {
 				super.onPageCommitVisible(webView, url);
-				setupDependentViews(view);
+				if (view != null && getActivity() != null) {
+					setupDependentViews(view);
+				}
 			}
 		});
 		loadWebviewData();
@@ -233,8 +235,7 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		});
 		AndroidUiHelper.setVisibility(View.VISIBLE,
 				readBtn, view.findViewById(R.id.divider), view.findViewById(R.id.bottom_empty_space));
-		boolean nightMode = getActivity() != null && isNightMode(false);
-		int backgroundColor = nightMode ?
+		int backgroundColor = isNightMode(false) ?
 				R.color.activity_background_color_dark : R.color.activity_background_color_light;
 		view.findViewById(R.id.root).setBackgroundResource(backgroundColor);
 	}
