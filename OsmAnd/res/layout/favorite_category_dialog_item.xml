@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+	<Button
+		android:id="@+id/button"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/selectableItemBackground"
+		android:gravity="start|center_vertical"
+		android:letterSpacing="@dimen/text_button_letter_spacing"
+		android:paddingStart="10dp"
+		android:paddingLeft="10dp"
+		android:paddingEnd="10dp"
+		android:paddingRight="10dp"
+		android:textAllCaps="false"
+		android:textColor="?attr/textColorAlertDialogListItem"
+		android:textSize="@dimen/default_list_text_size"
 		osmand:drawableLeftCompat="@drawable/ic_action_folder"
 		osmand:drawableStartCompat="@drawable/ic_action_folder"
-		android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="?attr/selectableItemBackground"
-        android:text="Restaurant"
-        android:gravity="start|center_vertical"
-        android:textSize="@dimen/default_list_text_size"
-        android:textAllCaps="false"
-	    android:textColor="?attr/textColorAlertDialogListItem"
-	    android:paddingStart="10dp"
-	    android:paddingEnd="10dp" />
+		tools:text="@string/poi_filter_restaurants" />
 
 </LinearLayout>
