@@ -2518,13 +2518,13 @@
     <string name="add_location_as_first_point_descr">أضف موقعك كنقطة أولى لتخطيط طريق مثالي.</string>
     <string name="my_location">موقعي</string>
     <string name="shared_string_finish">إنهاء</string>
-    <string name="plan_route">مخطط طريق</string>
+    <string name="plan_route">قياس المسافة</string>
     <string name="shared_string_sort">فرز</string>
     <string name="coordinate_input">إدخال إحداثية</string>
     <string name="marker_save_as_track_descr">تصدير علاماتك إلى ملف يمكنك تحديده هنا:</string>
     <string name="move_to_history">نقل إلى السجل</string>
     <string name="group_will_be_removed_after_restart">سيتم إزالة المجموعة بعد إعادة تشغيل التطبيق.</string>
-    <string name="shared_string_markers">العلامات</string>
+    <string name="shared_string_markers">التوجيه المباشر</string>
     <string name="coordinates_format">نمط الإحداثيات</string>
     <string name="use_system_keyboard">لوحة مفاتيح النظام</string>
     <string name="fast_coordinates_input_descr">اختر نسق إدخال الأحداثيات. يمكنك دائماً تغييره بالنقر على خيارات.</string>
@@ -2546,7 +2546,7 @@
     <string name="enter_new_name">أدخل اسم جديد</string>
     <string name="shared_string_back">عودة</string>
     <string name="shared_string_view">عرض</string>
-    <string name="waypoints_added_to_map_markers">تمت إضافة نقاط الطريق إلى علامات الخريطة</string>
+    <string name="waypoints_added_to_map_markers">تمت إضافة نقاط الطريق إلى التوجيه المباشر للخريطة</string>
     <string name="wrong_input">إدخال خاطئ</string>
     <string name="import_gpx_file_description">يمكن استيرادها كنقاط مفضلة، أو كملف GPX.</string>
     <string name="import_as_gpx">استيراد كملف GPX</string>
@@ -2590,7 +2590,7 @@
     <string name="shared_string_left">اليسار</string>
     <string name="shared_string_paste">لصق</string>
     <string name="go_to_next_field">الانتقال إلى الحقل التالي</string>
-    <string name="rename_marker">إعادة تسمية العلامة</string>
+    <string name="rename_marker">إعادة تسمية التوجيه المباشر</string>
     <string name="total_donations">مجموع التبرعات</string>
     <string name="rendering_attr_hidePOILabels_name">تسميات POI</string>
     <string name="shared_string_without_name">بدون اسم</string>
@@ -2854,7 +2854,7 @@
     <string name="show_guide_line_descr">خط مباشر من موقعك إلى الهدف.</string>
     <string name="show_arrows_descr">عرض سهم واحد أو اثنين ليشير إلى الوجهة النشطة.</string>
     <string name="distance_indication_descr">طريقة عرض المسافة من موقعي إلى الوجهات النشطة.</string>
-    <string name="active_markers_descr">حدد عدد مؤشرات الاتجاه.</string>
+    <string name="active_markers_descr">عدد الأسهم تجاه الوجهات النشطة ( للملاحة في الصحراء).</string>
     <string name="rendering_value_black_name">أسود</string>
     <string name="shared_string_launch">تشغيل</string>
     <string name="lang_gn_py">الغوارانية</string>
