@@ -2504,7 +2504,7 @@
     <string name="do_not_use_animations_descr">لإيقاف تشغيل الخريطة المتحركة.</string>
     <string name="keep_showing_on_map">إبقاء القياس على الخريطة</string>
     <string name="exit_without_saving">خروج بدون الحفظ؟</string>
-    <string name="show_guide_line">إظهار خطوط الاتجاه</string>
+    <string name="show_guide_line">رسم خط توجيه</string>
     <string name="show_arrows_on_the_map">عرض الأسهم على الخريطة</string>
     <string name="show_passed">عرض المتجاوز</string>
     <string name="hide_passed">إخفاء المتجاوز</string>
