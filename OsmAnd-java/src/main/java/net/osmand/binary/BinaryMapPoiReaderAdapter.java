@@ -714,9 +714,7 @@ public class BinaryMapPoiReaderAdapter {
 		Amenity am = null;
 		int x = 0;
 		int y = 0;
-		int preciseX = 0;
-		int preciseY = 0;
-		boolean isPrecised = false;
+		int precisionXY = 0;
 		boolean hasLocation = false;
 		StringBuilder retValue = new StringBuilder();
 		PoiCategory amenityType = null;
@@ -745,8 +743,11 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				if (hasLocation) {
-					if (isPrecised) {
-						am.setLocation(MapUtils.get31LatitudeY(preciseY), MapUtils.get31LongitudeX(preciseX));
+					if (precisionXY != 0) {
+						int[] xy = MapUtils.calculateFinalXYFromBaseAndPrecisionXY(24, 26, precisionXY, x >> 7, y >> 7, true);
+						int x31 = xy[0] << 5;
+						int y31 = xy[1] << 5;
+						am.setLocation(MapUtils.get31LatitudeY(y31), MapUtils.get31LongitudeX(x31));
 					} else {
 						am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
 					}
@@ -839,21 +840,9 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBoxDataAtom.NOTE_FIELD_NUMBER:
 				am.setDescription(codedIS.readString());
 				break;
-			case OsmandOdb.OsmAndPoiBoxDataAtom.PRECISEDX_FIELD_NUMBER:
+			case OsmandOdb.OsmAndPoiBoxDataAtom.PRECISIONXY_FIELD_NUMBER:
 				if (hasLocation) {
-					preciseX = codedIS.readSInt32() + x;
-				}
-				break;
-			case OsmandOdb.OsmAndPoiBoxDataAtom.PRECISEDY_FIELD_NUMBER:
-				if (hasLocation) {
-					preciseY = codedIS.readSInt32() + y;
-					if (checkBounds) {
-						if (left31 > preciseX || right31 < preciseX || top31 > preciseY || bottom31 < preciseY) {
-							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-							return null;
-						}
-					}
-					isPrecised = true;
+					precisionXY = codedIS.readInt32();
 				}
 				break;
 			default:

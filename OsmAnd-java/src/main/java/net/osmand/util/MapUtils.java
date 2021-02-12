@@ -48,12 +48,12 @@ public class MapUtils {
         'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '~'
     };
-    
-	public static int calculateFromBaseZoomPrecisionXY(int bazeZoom, int finalZoom, int xBase, int yBase) {
-		int px = xBase;
-		int py = yBase;
+
+	public static int calculateFromBaseZoomPrecisionXY(int baseZoom, int finalZoom, int xFinal, int yFinal) {
+		int px = xFinal;
+		int py = yFinal;
 		int precisionNumber = 1;
-		for (int zoom = finalZoom - 1; zoom >= bazeZoom; zoom--) {
+		for (int zoom = finalZoom - 1; zoom >= baseZoom; zoom--) {
 			int x = px / 2; // (int) MapUtils.getTileNumberX(zoom, lon);
 			int y = py / 2; // (int) MapUtils.getTileNumberY(zoom, lat);
 			int deltax = px - x * 2;
@@ -67,7 +67,7 @@ public class MapUtils {
 			px = x;
 			py = y;
 		}
-		System.out.println(String.format("Bits: %d %s (%d)", Integer.toBinaryString(precisionNumber).length(), Integer.toBinaryString(precisionNumber), precisionNumber));
+		// System.out.println(String.format("Bits: %d %s (%d)", Integer.toBinaryString(precisionNumber).length(), Integer.toBinaryString(precisionNumber), precisionNumber));
 		return precisionNumber;
 	}
 

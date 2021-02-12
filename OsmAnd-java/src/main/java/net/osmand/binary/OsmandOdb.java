@@ -54372,41 +54372,23 @@ public final class OsmandOdb {
     com.google.protobuf.ByteString
         getTextValuesBytes(int index);
 
-    // optional sint32 preciseDx = 16;
+    // optional int32 precisionXY = 16;
     /**
-     * <code>optional sint32 preciseDx = 16;</code>
+     * <code>optional int32 precisionXY = 16;</code>
      *
      * <pre>
-     * diff between deltas of 28 and 24 zooms
+     * precision in 1-xy-xy-xy binary format
      * </pre>
      */
-    boolean hasPreciseDx();
+    boolean hasPrecisionXY();
     /**
-     * <code>optional sint32 preciseDx = 16;</code>
+     * <code>optional int32 precisionXY = 16;</code>
      *
      * <pre>
-     * diff between deltas of 28 and 24 zooms
+     * precision in 1-xy-xy-xy binary format
      * </pre>
      */
-    int getPreciseDx();
-
-    // optional sint32 preciseDy = 17;
-    /**
-     * <code>optional sint32 preciseDy = 17;</code>
-     *
-     * <pre>
-     * diff between deltas of 28 and 24 zooms
-     * </pre>
-     */
-    boolean hasPreciseDy();
-    /**
-     * <code>optional sint32 preciseDy = 17;</code>
-     *
-     * <pre>
-     * diff between deltas of 28 and 24 zooms
-     * </pre>
-     */
-    int getPreciseDy();
+    int getPrecisionXY();
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.OsmAndPoiBoxDataAtom}
@@ -54577,12 +54559,7 @@ public final class OsmandOdb {
             }
             case 128: {
               bitField0_ |= 0x00000200;
-              preciseDx_ = input.readSInt32();
-              break;
-            }
-            case 136: {
-              bitField0_ |= 0x00000400;
-              preciseDy_ = input.readSInt32();
+              precisionXY_ = input.readInt32();
               break;
             }
           }
@@ -55094,52 +55071,28 @@ public final class OsmandOdb {
       return textValues_.getByteString(index);
     }
 
-    // optional sint32 preciseDx = 16;
-    public static final int PRECISEDX_FIELD_NUMBER = 16;
-    private int preciseDx_;
+    // optional int32 precisionXY = 16;
+    public static final int PRECISIONXY_FIELD_NUMBER = 16;
+    private int precisionXY_;
     /**
-     * <code>optional sint32 preciseDx = 16;</code>
+     * <code>optional int32 precisionXY = 16;</code>
      *
      * <pre>
-     * diff between deltas of 28 and 24 zooms
+     * precision in 1-xy-xy-xy binary format
      * </pre>
      */
-    public boolean hasPreciseDx() {
+    public boolean hasPrecisionXY() {
       return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
-     * <code>optional sint32 preciseDx = 16;</code>
+     * <code>optional int32 precisionXY = 16;</code>
      *
      * <pre>
-     * diff between deltas of 28 and 24 zooms
+     * precision in 1-xy-xy-xy binary format
      * </pre>
      */
-    public int getPreciseDx() {
-      return preciseDx_;
-    }
-
-    // optional sint32 preciseDy = 17;
-    public static final int PRECISEDY_FIELD_NUMBER = 17;
-    private int preciseDy_;
-    /**
-     * <code>optional sint32 preciseDy = 17;</code>
-     *
-     * <pre>
-     * diff between deltas of 28 and 24 zooms
-     * </pre>
-     */
-    public boolean hasPreciseDy() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
-    }
-    /**
-     * <code>optional sint32 preciseDy = 17;</code>
-     *
-     * <pre>
-     * diff between deltas of 28 and 24 zooms
-     * </pre>
-     */
-    public int getPreciseDy() {
-      return preciseDy_;
+    public int getPrecisionXY() {
+      return precisionXY_;
     }
 
     private void initFields() {
@@ -55156,8 +55109,7 @@ public final class OsmandOdb {
       note_ = "";
       textCategories_ = java.util.Collections.emptyList();
       textValues_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      preciseDx_ = 0;
-      preciseDy_ = 0;
+      precisionXY_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -55219,10 +55171,7 @@ public final class OsmandOdb {
         output.writeBytes(15, textValues_.getByteString(i));
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeSInt32(16, preciseDx_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeSInt32(17, preciseDy_);
+        output.writeInt32(16, precisionXY_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -55307,11 +55256,7 @@ public final class OsmandOdb {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(16, preciseDx_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(17, preciseDy_);
+          .computeInt32Size(16, precisionXY_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -55455,10 +55400,8 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000800);
         textValues_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00001000);
-        preciseDx_ = 0;
+        precisionXY_ = 0;
         bitField0_ = (bitField0_ & ~0x00002000);
-        preciseDy_ = 0;
-        bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
 
@@ -55547,11 +55490,7 @@ public final class OsmandOdb {
         if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.preciseDx_ = preciseDx_;
-        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
-          to_bitField0_ |= 0x00000400;
-        }
-        result.preciseDy_ = preciseDy_;
+        result.precisionXY_ = precisionXY_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -55647,11 +55586,8 @@ public final class OsmandOdb {
           }
           onChanged();
         }
-        if (other.hasPreciseDx()) {
-          setPreciseDx(other.getPreciseDx());
-        }
-        if (other.hasPreciseDy()) {
-          setPreciseDy(other.getPreciseDy());
+        if (other.hasPrecisionXY()) {
+          setPrecisionXY(other.getPrecisionXY());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -56634,100 +56570,51 @@ public final class OsmandOdb {
         return this;
       }
 
-      // optional sint32 preciseDx = 16;
-      private int preciseDx_ ;
+      // optional int32 precisionXY = 16;
+      private int precisionXY_ ;
       /**
-       * <code>optional sint32 preciseDx = 16;</code>
+       * <code>optional int32 precisionXY = 16;</code>
        *
        * <pre>
-       * diff between deltas of 28 and 24 zooms
+       * precision in 1-xy-xy-xy binary format
        * </pre>
        */
-      public boolean hasPreciseDx() {
+      public boolean hasPrecisionXY() {
         return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       /**
-       * <code>optional sint32 preciseDx = 16;</code>
+       * <code>optional int32 precisionXY = 16;</code>
        *
        * <pre>
-       * diff between deltas of 28 and 24 zooms
+       * precision in 1-xy-xy-xy binary format
        * </pre>
        */
-      public int getPreciseDx() {
-        return preciseDx_;
+      public int getPrecisionXY() {
+        return precisionXY_;
       }
       /**
-       * <code>optional sint32 preciseDx = 16;</code>
+       * <code>optional int32 precisionXY = 16;</code>
        *
        * <pre>
-       * diff between deltas of 28 and 24 zooms
+       * precision in 1-xy-xy-xy binary format
        * </pre>
        */
-      public Builder setPreciseDx(int value) {
+      public Builder setPrecisionXY(int value) {
         bitField0_ |= 0x00002000;
-        preciseDx_ = value;
+        precisionXY_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional sint32 preciseDx = 16;</code>
+       * <code>optional int32 precisionXY = 16;</code>
        *
        * <pre>
-       * diff between deltas of 28 and 24 zooms
+       * precision in 1-xy-xy-xy binary format
        * </pre>
        */
-      public Builder clearPreciseDx() {
+      public Builder clearPrecisionXY() {
         bitField0_ = (bitField0_ & ~0x00002000);
-        preciseDx_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional sint32 preciseDy = 17;
-      private int preciseDy_ ;
-      /**
-       * <code>optional sint32 preciseDy = 17;</code>
-       *
-       * <pre>
-       * diff between deltas of 28 and 24 zooms
-       * </pre>
-       */
-      public boolean hasPreciseDy() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
-      }
-      /**
-       * <code>optional sint32 preciseDy = 17;</code>
-       *
-       * <pre>
-       * diff between deltas of 28 and 24 zooms
-       * </pre>
-       */
-      public int getPreciseDy() {
-        return preciseDy_;
-      }
-      /**
-       * <code>optional sint32 preciseDy = 17;</code>
-       *
-       * <pre>
-       * diff between deltas of 28 and 24 zooms
-       * </pre>
-       */
-      public Builder setPreciseDy(int value) {
-        bitField0_ |= 0x00004000;
-        preciseDy_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional sint32 preciseDy = 17;</code>
-       *
-       * <pre>
-       * diff between deltas of 28 and 24 zooms
-       * </pre>
-       */
-      public Builder clearPreciseDy() {
-        bitField0_ = (bitField0_ & ~0x00004000);
-        preciseDy_ = 0;
+        precisionXY_ = 0;
         onChanged();
         return this;
       }
@@ -65234,38 +65121,38 @@ public final class OsmandOdb {
       "tegories\030\003 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\"i\n" +
       "\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001" +
       "(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 .OsmAnd." +
-      "OBF.OsmAndPoiBoxDataAtom\"\226\002\n\024OsmAndPoiBo",
+      "OBF.OsmAndPoiBoxDataAtom\"\205\002\n\024OsmAndPoiBo",
       "xDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncat" +
       "egories\030\004 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\022\014\n\004" +
       "name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024" +
       "\n\014openingHours\030\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005ph" +
       "one\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCategorie" +
-      "s\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\022\021\n\tpreciseDx" +
-      "\030\020 \001(\021\022\021\n\tpreciseDy\030\021 \001(\021\"\032\n\007IdTable\022\017\n\007" +
-      "routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n\004type" +
-      "\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030" +
-      "\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022\022\n\npo",
-      "intTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022\r\n\005ty" +
-      "pes\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stringName" +
-      "s\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004name\030\001" +
-      " \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.OsmAndR" +
-      "outingIndex.RouteEncodingRule\022>\n\trootBox" +
-      "es\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex" +
-      ".RouteDataBox\022A\n\014basemapBoxes\030\004 \003(\0132+.Os" +
-      "mAnd.OBF.OsmAndRoutingIndex.RouteDataBox" +
-      "\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAndRout" +
-      "ingIndex.RouteDataBlock\032;\n\021RouteEncoding",
-      "Rule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007" +
-      " \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021\022\r\n\005r" +
-      "ight\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022" +
-      "\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132+.Os" +
-      "mAnd.OBF.OsmAndRoutingIndex.RouteDataBox" +
-      "\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(\0132\023.O" +
-      "smAnd.OBF.IdTable\022*\n\013dataObjects\030\006 \003(\0132\025" +
-      ".OsmAnd.OBF.RouteData\0221\n\014restrictions\030\007 " +
-      "\003(\0132\033.OsmAnd.OBF.RestrictionData\022,\n\013stri" +
-      "ngTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTableB\036",
-      "\n\021net.osmand.binaryB\tOsmandOdb"
+      "s\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013precision" +
+      "XY\030\020 \001(\005\"\032\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017" +
+      "RestrictionData\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 " +
+      "\002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteDat" +
+      "a\022\016\n\006points\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n",
+      "\npointNames\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007rout" +
+      "eId\030\014 \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\304\005\n\022OsmAn" +
+      "dRoutingIndex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003" +
+      "(\01320.OsmAnd.OBF.OsmAndRoutingIndex.Route" +
+      "EncodingRule\022>\n\trootBoxes\030\003 \003(\0132+.OsmAnd" +
+      ".OBF.OsmAndRoutingIndex.RouteDataBox\022A\n\014" +
+      "basemapBoxes\030\004 \003(\0132+.OsmAnd.OBF.OsmAndRo" +
+      "utingIndex.RouteDataBox\022=\n\006blocks\030\005 \003(\0132" +
+      "-.OsmAnd.OBF.OsmAndRoutingIndex.RouteDat" +
+      "aBlock\032;\n\021RouteEncodingRule\022\013\n\003tag\030\003 \002(\t",
+      "\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDat" +
+      "aBox\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top" +
+      "\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 " +
+      "\001(\007\022:\n\005boxes\030\007 \003(\0132+.OsmAnd.OBF.OsmAndRo" +
+      "utingIndex.RouteDataBox\032\303\001\n\016RouteDataBlo" +
+      "ck\022$\n\007idTable\030\005 \001(\0132\023.OsmAnd.OBF.IdTable" +
+      "\022*\n\013dataObjects\030\006 \003(\0132\025.OsmAnd.OBF.Route" +
+      "Data\0221\n\014restrictions\030\007 \003(\0132\033.OsmAnd.OBF." +
+      "RestrictionData\022,\n\013stringTable\030\010 \001(\0132\027.O" +
+      "smAnd.OBF.StringTableB\036\n\021net.osmand.bina",
+      "ryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -65523,7 +65410,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndPoiBoxDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiBoxDataAtom_descriptor,
-              new java.lang.String[] { "Dx", "Dy", "Categories", "Subcategories", "Name", "NameEn", "Id", "OpeningHours", "Site", "Phone", "Note", "TextCategories", "TextValues", "PreciseDx", "PreciseDy", });
+              new java.lang.String[] { "Dx", "Dy", "Categories", "Subcategories", "Name", "NameEn", "Id", "OpeningHours", "Site", "Phone", "Note", "TextCategories", "TextValues", "PrecisionXY", });
           internal_static_OsmAnd_OBF_IdTable_descriptor =
             getDescriptor().getMessageTypes().get(36);
           internal_static_OsmAnd_OBF_IdTable_fieldAccessorTable = new
