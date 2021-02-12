@@ -56,7 +56,11 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackSelectS
 
 		double distance = getDistance(segment);
 		long time = getSegmentTime(segment);
-		holder.time.setText(OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)));
+		if (time != 1) {
+			holder.time.setText(OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)));
+		} else {
+			holder.time.setText("");
+		}
 		holder.distance.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override

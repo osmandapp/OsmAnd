@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -43,7 +43,6 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 
 	public static final String TAG = TrackSelectSegmentBottomSheet.class.getSimpleName();
 	protected TrackSelectSegmentAdapter adapterSegments;
-	private GpxSelectionHelper.SelectedGpxFile selectedFile;
 	private MapActivity mapActivity;
 	private GPXUtilities.GPXFile gpxFile;
 	private OsmandApplication app;
@@ -89,7 +88,10 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 
 		AppCompatImageView icon = gpxTrackContainer.findViewById(R.id.icon);
 		int sidePadding = AndroidUtils.dpToPx(mapActivity, 16f);
+		int bottomTopPadding = AndroidUtils.dpToPx(mapActivity, 2f);
 
+		LinearLayout readContainer = gpxTrackContainer.findViewById(R.id.read_section);
+		readContainer.setPadding(0, bottomTopPadding, 0, bottomTopPadding);
 		TextView name = gpxTrackContainer.findViewById(R.id.name);
 		TextView description = itemView.findViewById(R.id.description);
 		TextView distance = gpxTrackContainer.findViewById(R.id.distance);
@@ -102,8 +104,11 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
 		name.setText(titleGpxTrack);
 		description.setText(gpxTrackName);
+		distance.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		pointsCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		pointsCount.setText(String.valueOf(analysis.wptPoints));
+		time.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		time.setText(analysis.isTimeSpecified() ? Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) : "");
 
 		final RecyclerView recyclerView = itemView.findViewById(R.id.gpx_segment_list);
