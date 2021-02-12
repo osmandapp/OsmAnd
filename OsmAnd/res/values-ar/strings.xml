@@ -2075,7 +2075,7 @@
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
-    <string name="wiki_around">مقالات ويكيبيديا القريبة</string>
+    <string name="wiki_around">مقالات ويكيبيديا مجاورة</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
@@ -3384,7 +3384,7 @@
     <string name="select_color">اختر اللون</string>
     <string name="edit_profiles_descr">لا يمكنك حذف أوضاع أوسماند الافتراضية ، ولكن يمكنك تعطيلها في الشاشة السابقة ، أو نقلها إلى الأسفل.</string>
     <string name="edit_profiles">تحرير الأوضاع</string>
-    <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على قواعد حسابات المسار.</string>
+    <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على كييفية حساب المسارات.</string>
     <string name="profile_appearance">مظهر الوضع</string>
     <string name="choose_icon_color_name">اختر الايقونة واللون والاسم</string>
     <string name="reorder_profiles">تحرير قائمة الأوضاع</string>
