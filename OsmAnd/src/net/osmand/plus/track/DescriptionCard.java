@@ -1,5 +1,7 @@
 package net.osmand.plus.track;
 
+import android.content.Context;
+import android.os.Build;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -8,6 +10,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PicassoUtils;
@@ -21,6 +24,7 @@ import net.osmand.util.Algorithms;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
 
@@ -59,8 +63,9 @@ public class DescriptionCard extends BaseCard {
 
 	private void showAddBtn() {
 		LinearLayout descriptionContainer = view.findViewById(R.id.description_container);
-		FrameLayout addBtn = view.findViewById(R.id.btn_add);
+		View addBtn = view.findViewById(R.id.btn_add);
 
+		setupButton(addBtn);
 		addBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -81,7 +86,8 @@ public class DescriptionCard extends BaseCard {
 		TextViewEx tvDescription = view.findViewById(R.id.description);
 		tvDescription.setText(getFirstParagraph(descriptionHtml));
 
-		TextViewEx readBtn = view.findViewById(R.id.btn_read_full);
+		View readBtn = view.findViewById(R.id.btn_read_full);
+		setupButton(readBtn);
 		readBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -89,7 +95,8 @@ public class DescriptionCard extends BaseCard {
 			}
 		});
 
-		TextViewEx editBtn = view.findViewById(R.id.btn_edit);
+		View editBtn = view.findViewById(R.id.btn_edit);
+		setupButton(editBtn);
 		editBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -106,6 +113,15 @@ public class DescriptionCard extends BaseCard {
 			}
 		}
 		return descriptionHtml;
+	}
+
+	private void setupButton(View button) {
+		Context ctx = button.getContext();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(ctx, button, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+		} else {
+			AndroidUtils.setBackground(button, ContextCompat.getDrawable(ctx, R.drawable.btn_unstroked));
+		}
 	}
 
 	private void setupImage(final String imageUrl) {
