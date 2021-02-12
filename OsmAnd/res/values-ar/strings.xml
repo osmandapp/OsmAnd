@@ -2561,8 +2561,8 @@
     <string name="shared_string_edited">مُعدلة</string>
     <string name="shared_string_added">تمت الإضافة</string>
     <string name="modify_the_search_query">تعديل طلب البحث.</string>
-    <string name="marker_activated">تم تنشيط العلامة %s.</string>
-    <string name="one_tap_active_descr">انقر على العلامة في الخريطة لجعلها بالاعلى بدون فتح القائمة.</string>
+    <string name="marker_activated">تم تنشيط التوجيه المباشر %s.</string>
+    <string name="one_tap_active_descr">انقر على التوجيه المباشر في الخريطة لجعله الاعلى بدون فتح القائمة.</string>
     <string name="empty_state_av_notes">تدوين ملاحظات!</string>
     <string name="without_time_limit">بدون حد زمني</string>
     <string name="context_menu_read_full_article">اقرأ المقال كاملا</string>
@@ -2580,10 +2580,10 @@
     <string name="by_date">حسب التاريخ</string>
     <string name="by_type">حسب النوع</string>
     <string name="shared_string_more_without_dots">المزيد</string>
-    <string name="appearance_on_the_map">المظهر على الخريطة</string>
+    <string name="appearance_on_the_map">التوجيه المباشر</string>
     <string name="shared_string_gpx_waypoints">نقاط المسار</string>
     <string name="add_group">إضافة مجموعة</string>
-    <string name="empty_state_markers_active">إنشاء علامات الخريطة !</string>
+    <string name="empty_state_markers_active">قم بإنشاء التوجيه المباشر على الخريطة !</string>
     <string name="empty_state_markers_groups">استيراد مجموعات</string>
     <string name="digits_quantity">عدد الأرقام</string>
     <string name="shared_string_right">اليمين</string>
@@ -2698,7 +2698,7 @@
     <string name="download_all">تنزيل الكل</string>
     <string name="shared_string_restart">إعادة تشغيل التطبيق</string>
     <string name="shared_string_bookmark">إشارة مرجعية</string>
-    <string name="waypoints_removed_from_map_markers">نقاط بالطريق تم إزالتها من علامات الخريطة</string>
+    <string name="waypoints_removed_from_map_markers">نقاط بالطريق تم إزالتها من التوجيه المباشر للخريطة</string>
     <string name="powered_by_osmand">بواسطة أوسماند</string>
     <string name="osm_live_plan_pricing">الأسعار والاشتراك</string>
     <string name="osm_live_payment_monthly_title">شهري</string>
@@ -2720,7 +2720,7 @@
     <string name="shared_string_restore">استعادة</string>
     <string name="third_party_application">تطبيق من طرف ثالث</string>
     <string name="keep_passed_markers_descr">عند التفعيل سيبقى التوجيه المباشر المضاف من مجموعة إحداثيات أو من نقاط طريق على الخريطة عند اختيار \"تجاوز التوجيه المباشر\". إذا كانت المجموعة غير نشطة ستختفي الوجهات المباشرة من الخريطة.</string>
-    <string name="keep_passed_markers">إبقاء العلامات المتجاوزة على الخريطة</string>
+    <string name="keep_passed_markers">إبقاء التوجيه المباشر المتجاوز</string>
     <string name="more_transport_on_stop_hint">هناك المزيد من وسائل النقل في هذا الموقف.</string>
     <string name="ask_for_location_permission">يرجى إعطاء إذن تحديد الموقع للتطبيق لكي يواصل.</string>
     <string name="thank_you_for_feedback">شكرا على الرد</string>
@@ -2848,7 +2848,7 @@
     <string name="empty_state_av_notes_desc">إضافة ملاحظة صوتية أو فيديو أو صورة لكل نقطة على الخريطة، باستخدام قائمة السياق أو القطعة.</string>
     <string name="looking_for_tracks_with_waypoints">ابحث عن المسارات مع نقاط الطريق</string>
     <string name="add_track_to_markers_descr">حدد مسار لإضافة نقاط الطريق إلى العلامات(يتم سرد المسارات فقط مع نقاط الطريق).</string>
-    <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر العلامة.</string>
+    <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر التوجيه المباشر.</string>
     <string name="empty_state_markers_groups_desc">يمكنك استيراد المجموعات المفضلة أو نقاط المسار كتوجيه.</string>
     <string name="empty_state_markers_history_desc">ستظهر العلامات التي تم تجاوزها على هذه الشاشة.</string>
     <string name="show_guide_line_descr">عرض خط الاتجاه من موقعك إلى العلامة النشطة.</string>
