@@ -2178,7 +2178,7 @@
     <string name="total_distance">المسافة الإجمالية</string>
     <string name="lang_ber">البربرية</string>
     <string name="points_delete_multiple_succesful">تم حذف النقطة أو النقاط بنجاح.</string>
-    <string name="points_delete_multiple">حذف %1$d نقطة؟</string>
+    <string name="points_delete_multiple">حذف %1$d نقطة. هل أنت متأكد ؟</string>
     <string name="shared_string_max">أقصى</string>
     <string name="shared_string_start_time">وقت البدء</string>
     <string name="shared_string_end_time">وقت الانتهاء</string>
@@ -2474,7 +2474,7 @@
     <string name="add_point_before">إضافة نقطة قبل</string>
     <string name="add_point_after">إضافة نقطة بعد</string>
     <string name="shared_string_options">خيارات</string>
-    <string name="measurement_tool_snap_to_road_descr">سيتم توصيل النقاط بطرق الوضع المحدد.</string>
+    <string name="measurement_tool_snap_to_road_descr">سيتم توصيل النقاط بمسارات الوضع المحدد.</string>
     <string name="measurement_tool_save_as_new_track_descr">يمكنك حفظ النقاط إما كنقاط طريق أو كخط.</string>
     <string name="choose_navigation_type">اختر وضع الملاحة</string>
     <string name="add_route_points">إضافة نقاط مسار</string>
@@ -2487,12 +2487,12 @@
     <string name="map_orientation_change_in_accordance_with_speed">عتبة توجيه الخريطة</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">حدد أدناه على أي سرعة يتغير توجيه الخريطة من \'اتجاه الحركة\' إلى \'البوصلة\'.</string>
     <string name="all_markers_moved_to_history">تم نقل جميع العلامات إلى السجل</string>
-    <string name="marker_moved_to_history">تم نقل العلامة إلى السجل</string>
-    <string name="marker_moved_to_active">العلامة انتقلت كنشطة</string>
+    <string name="marker_moved_to_history">تم نقل التوجيه المباشر إلى السجل</string>
+    <string name="marker_moved_to_active">التوجيه المباشر انتقل كنشط</string>
     <string name="shared_string_list">قائمة</string>
     <string name="shared_string_groups">مجموعات</string>
     <string name="passed">آخر استخدام : %1$s</string>
-    <string name="make_active">تنشيط العلامة</string>
+    <string name="make_active">تنشيط التوجيه المباشر</string>
     <string name="today">اليوم</string>
     <string name="yesterday">أمس</string>
     <string name="last_seven_days">آخر ٧ أيام</string>
@@ -2505,10 +2505,10 @@
     <string name="keep_showing_on_map">إبقاء القياس على الخريطة</string>
     <string name="exit_without_saving">خروج بدون الحفظ؟</string>
     <string name="show_guide_line">رسم خط توجيه</string>
-    <string name="show_arrows_on_the_map">عرض الأسهم على الخريطة</string>
+    <string name="show_arrows_on_the_map">سهم متجه للهدف</string>
     <string name="show_passed">عرض المتجاوز</string>
     <string name="hide_passed">إخفاء المتجاوز</string>
-    <string name="remove_from_map_markers">إزالة من \"علامات الخريطة\"</string>
+    <string name="remove_from_map_markers">إزالة من \"التوجيه المباشر\"</string>
     <string name="descendingly">تنازلي</string>
     <string name="ascendingly">تصاعدي</string>
     <string name="date_added">تاريخ الإضافة</string>
