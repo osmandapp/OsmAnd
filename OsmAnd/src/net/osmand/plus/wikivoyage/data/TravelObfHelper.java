@@ -747,7 +747,6 @@ public class TravelObfHelper implements TravelHelper {
 			try {
 				if (articleId.file != null && articleId.file.equals(reader.getFile())) {
 					if (lastModified == reader.getFile().lastModified()) {
-
 						req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
 								Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 								getSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
@@ -770,8 +769,10 @@ public class TravelObfHelper implements TravelHelper {
 								}, null);
 						req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS);
 					} else {
-						req = getEqualsTitleRequest(articleId, lang, amenities, reader);
-						req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS / 10);
+						if (!Algorithms.isEmpty(articleId.title)) {
+							req = getEqualsTitleRequest(articleId, lang, amenities, reader);
+							req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS / 10);
+						}
 					}
 				}
 				if (req != null) {
@@ -790,17 +791,13 @@ public class TravelObfHelper implements TravelHelper {
 				LOG.error(e.getMessage());
 			}
 		}
-		if (amenities.isEmpty()) {
+		if (amenities.isEmpty() && !Algorithms.isEmpty(articleId.title)) {
 			for (BinaryMapIndexReader reader : getReaders()) {
 				try {
 					req = getEqualsTitleRequest(articleId, lang, amenities, reader);
 					req.setBBoxRadius(articleId.lat, articleId.lon, SAVED_ARTICLE_SEARCH_RADIUS);
 					if (!Double.isNaN(articleId.lat)) {
-						if (!Algorithms.isEmpty(articleId.title)) {
-							reader.searchPoiByName(req);
-						} else {
-							reader.searchPoi(req);
-						}
+						reader.searchPoiByName(req);
 					} else {
 						reader.searchPoi(req);
 					}
