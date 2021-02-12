@@ -3290,7 +3290,7 @@
     <string name="added_profiles_descr">Profils ajoutés par le greffon</string>
     <string name="shared_string_turn_off">Désactiver</string>
     <string name="new_plugin_added">Nouveau greffon ajouté</string>
-    <string name="join_segments">Relier les segments</string>
+    <string name="join_segments">Joindre les segments</string>
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
