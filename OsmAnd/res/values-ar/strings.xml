@@ -2853,7 +2853,7 @@
     <string name="empty_state_markers_history_desc">ستظهر العلامات التي تم تجاوزها على هذه الشاشة.</string>
     <string name="show_guide_line_descr">خط مباشر من موقعك إلى الهدف.</string>
     <string name="show_arrows_descr">عرض سهم واحد أو اثنين ليشير إلى الوجهة النشطة.</string>
-    <string name="distance_indication_descr">طريقة عرض المسافة من موقعي إلى العلامات النشطة.</string>
+    <string name="distance_indication_descr">طريقة عرض المسافة من موقعي إلى الوجهات النشطة.</string>
     <string name="active_markers_descr">حدد عدد مؤشرات الاتجاه.</string>
     <string name="rendering_value_black_name">أسود</string>
     <string name="shared_string_launch">تشغيل</string>
