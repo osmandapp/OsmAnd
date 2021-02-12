@@ -2133,7 +2133,7 @@
     <string name="poi_water_characteristic_mineral">المعدنيه</string>
     <string name="poi_pump_powered">تعمل بالطاقة</string>
     <string name="poi_pump_manual">يدوي</string>
-    <string name="poi_source_biomass">مصدر الطاقة: الكتلة الحيوية</string>
+    <string name="poi_generator_source_biomass">مصدر الطاقة: الكتلة الحيوية</string>
     <string name="poi_deadlock">طريق مسدود</string>
     <string name="poi_architecture_umgebinde">العمارة: umgebinde</string>
     <string name="poi_architecture_constructivism">العمارة: البنائية</string>
