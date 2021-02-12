@@ -496,8 +496,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void onClick(View v) {
 				if (isFollowTrackMode()) {
 					startTrackNavigation();
-				} else {
+				} else if (editingCtx.isNewData() || editingCtx.hasChanges()) {
 					saveChanges(FinalSaveAction.SHOW_SNACK_BAR_AND_CLOSE, false);
+				} else {
+					if (mapActivity != null) {
+						dismiss(mapActivity, false);
+					}
 				}
 			}
 		});
