@@ -186,28 +186,28 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 					}
 				}
 			}
-
-			TravelButtonCard travelButtonCard = new TravelButtonCard(app, nightMode);
-			travelButtonCard.setListener(new TravelNeededMapsCard.CardListener() {
-				@Override
-				public void onPrimaryButtonClick() {
-					if (activity instanceof WikivoyageExploreActivity) {
-						new LoadWikivoyageData((WikivoyageExploreActivity) activity,false).execute();
+			if (app.getTravelHelper().isAnyTravelBookPresent()) {
+				TravelButtonCard travelButtonCard = new TravelButtonCard(app, nightMode);
+				travelButtonCard.setListener(new TravelNeededMapsCard.CardListener() {
+					@Override
+					public void onPrimaryButtonClick() {
+						if (activity instanceof WikivoyageExploreActivity) {
+							new LoadWikivoyageData((WikivoyageExploreActivity) activity, false).execute();
+						}
 					}
-				}
 
-				@Override
-				public void onSecondaryButtonClick() {
+					@Override
+					public void onSecondaryButtonClick() {
 
-				}
+					}
 
-				@Override
-				public void onIndexItemClick(IndexItem item) {
+					@Override
+					public void onIndexItemClick(IndexItem item) {
 
-				}
-			});
-			items.add(travelButtonCard);
-
+					}
+				});
+				items.add(travelButtonCard);
+			}
 			items.add(new StartEditingTravelCard(activity, nightMode));
 			adapter.setItems(items);
 			final DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -248,11 +248,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	}
 
 	private void addIndexItemCards(List<IndexItem> mainIndexItem, List<IndexItem> neededIndexItems) {
-		this.mainIndexItems.clear();
-		this.mainIndexItems.addAll(mainIndexItem);
+		final OsmandApplication app = getMyApplication();
+		if (app != null && !app.getTravelHelper().isAnyTravelBookPresent()) {
+			this.mainIndexItems.clear();
+			this.mainIndexItems.addAll(mainIndexItem);
+			addDownloadUpdateCard();
+		}
 		this.neededIndexItems.clear();
 		this.neededIndexItems.addAll(neededIndexItems);
-		addDownloadUpdateCard();
 		addNeededMapsCard();
 	}
 
