@@ -42,7 +42,7 @@ public interface TravelHelper {
 	TravelArticle getArticleById(@NonNull TravelArticleIdentifier articleId, @Nullable String lang, boolean readGpx, @Nullable GpxReadCallback callback);
 
 	@Nullable
-	TravelArticle checkExistedArticle(@Nullable TravelArticle article,@Nullable TravelArticleIdentifier articleId, @Nullable String lang, boolean readGpx, @Nullable GpxReadCallback callback);
+	TravelArticle findSavedArticle(@NonNull TravelArticle savedArticle);
 
 	@Nullable
 	TravelArticle getArticleByTitle(@NonNull String title, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback);

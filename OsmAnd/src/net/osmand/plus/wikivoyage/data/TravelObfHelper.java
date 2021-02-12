@@ -227,22 +227,7 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@NonNull
-	private SearchPoiTypeFilter getSearchFilter(final String filterSubcategory) {
-		return new SearchPoiTypeFilter() {
-			@Override
-			public boolean accept(PoiCategory type, String subcategory) {
-				return subcategory.equals(filterSubcategory);
-			}
-
-			@Override
-			public boolean isEmpty() {
-				return false;
-			}
-		};
-	}
-
-	@NonNull
-	private SearchPoiTypeFilter getSubcategoriesSearchFilter(final String... filterSubcategory) {
+	private SearchPoiTypeFilter getSearchFilter(final String... filterSubcategory) {
 		return new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
@@ -698,25 +683,64 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
-	private synchronized TravelArticle findArticleById(@NonNull TravelArticleIdentifier articleId,
-													   String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
-		return checkExistedArticle(null, articleId, lang, readGpx, callback);
+	private synchronized TravelArticle findArticleById(@NonNull final TravelArticleIdentifier articleId,
+	                                                   String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+		TravelArticle article = null;
+		final boolean isDbArticle = articleId.file != null && articleId.file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);
+		final List<Amenity> amenities = new ArrayList<>();
+		for (BinaryMapIndexReader reader : getReaders()) {
+			try {
+				if (articleId.file != null && !articleId.file.equals(reader.getFile()) && !isDbArticle) {
+					continue;
+				}
+				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
+						Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+						getSearchFilter(ROUTE_ARTICLE), new ResultMatcher<Amenity>() {
+							boolean done = false;
+
+							@Override
+							public boolean publish(Amenity amenity) {
+								if (Algorithms.stringsEqual(articleId.routeId,
+										Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID))) || isDbArticle) {
+									amenities.add(amenity);
+									done = true;
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return done;
+							}
+						}, null);
+
+				if (!Double.isNaN(articleId.lat)) {
+					req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS);
+					if (!Algorithms.isEmpty(articleId.title)) {
+						reader.searchPoiByName(req);
+					} else {
+						reader.searchPoi(req);
+					}
+				} else {
+					reader.searchPoi(req);
+				}
+			} catch (IOException e) {
+				LOG.error(e.getMessage());
+			}
+			if (!Algorithms.isEmpty(amenities)) {
+				article = cacheTravelArticles(reader.getFile(), amenities.get(0), lang, readGpx, callback);
+			}
+		}
+		return article;
 	}
 
 	@Override
-	public synchronized TravelArticle checkExistedArticle(@Nullable TravelArticle checkedArticle,
-														  @Nullable TravelArticleIdentifier articleId,
-														  @Nullable String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+	public synchronized TravelArticle findSavedArticle(@NonNull TravelArticle savedArticle) {
 		final List<Pair<File, Amenity>> amenities = new ArrayList<>();
 		TravelArticle article = null;
-		long lastModified;
-		if (checkedArticle != null) {
-			articleId = checkedArticle.generateIdentifier();
-			lang = checkedArticle.getLang();
-			lastModified = checkedArticle.getLastModified();
-		} else {
-			lastModified = articleId.file.lastModified();
-		}
+		TravelArticleIdentifier articleId = savedArticle.generateIdentifier();
+		String lang = savedArticle.getLang();
+		long lastModified = savedArticle.getLastModified();
 		final TravelArticleIdentifier finalArticleId = articleId;
 		SearchRequest<Amenity> req = null;
 		for (final BinaryMapIndexReader reader : getReaders()) {
@@ -726,7 +750,7 @@ public class TravelObfHelper implements TravelHelper {
 
 						req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
 								Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-								getSubcategoriesSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
+								getSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
 									boolean done = false;
 
 									@Override
@@ -790,7 +814,7 @@ public class TravelObfHelper implements TravelHelper {
 				try {
 					req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
 							Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-							getSubcategoriesSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
+							getSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
 								boolean done = false;
 
 								@Override
@@ -826,17 +850,17 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		if (!Algorithms.isEmpty(amenities)) {
-			article = cacheTravelArticles(amenities.get(0).first, amenities.get(0).second, lang, readGpx, callback);
+			article = cacheTravelArticles(amenities.get(0).first, amenities.get(0).second, lang, false, null);
 		}
 		return article;
 	}
 
 	private SearchRequest<Amenity> getEqualsTitleRequest(@NonNull final TravelArticleIdentifier articleId,
-														 final String lang, final List<Pair<File, Amenity>> amenities,
-														 final BinaryMapIndexReader reader) {
+	                                                     final String lang, final List<Pair<File, Amenity>> amenities,
+	                                                     final BinaryMapIndexReader reader) {
 		return BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
 				Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-				getSubcategoriesSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
+				getSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
 					boolean done = false;
 
 					@Override
@@ -859,14 +883,14 @@ public class TravelObfHelper implements TravelHelper {
 	@Nullable
 	@Override
 	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull final String lang,
-										   boolean readGpx, @Nullable GpxReadCallback callback) {
+	                                       boolean readGpx, @Nullable GpxReadCallback callback) {
 		return getArticleByTitle(title, new QuadRect(), lang, readGpx, callback);
 	}
 
 	@Nullable
 	@Override
 	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull LatLon latLon,
-										   @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+	                                       @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), ARTICLE_SEARCH_RADIUS);
 		return getArticleByTitle(title, rect, lang, readGpx, callback);
 	}
@@ -874,7 +898,7 @@ public class TravelObfHelper implements TravelHelper {
 	@Nullable
 	@Override
 	public synchronized TravelArticle getArticleByTitle(@NonNull final String title, @NonNull QuadRect rect,
-										   @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+	                                                    @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		final List<Amenity> amenities = new ArrayList<>();
 		int x = 0;

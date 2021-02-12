@@ -424,9 +424,7 @@ public class TravelLocalDataHelper {
 						if (cursor.moveToFirst()) {
 							do {
 								TravelArticle dbArticle = readSavedArticle(cursor);
-								dbArticle.generateIdentifier();
-								TravelArticle article = context.getTravelHelper().checkExistedArticle(dbArticle,
-										null,null, false, null);
+								TravelArticle article = context.getTravelHelper().findSavedArticle(dbArticle);
 								if (article != null && article.getLastModified() > dbArticle.getLastModified()) {
 									updateSavedArticle(dbArticle, article);
 									res.add(article);
