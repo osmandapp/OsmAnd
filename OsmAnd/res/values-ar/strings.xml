@@ -2713,13 +2713,13 @@
     <string name="osm_live_payment_renews_annually">يجدد سنويا</string>
     <string name="osm_live_payment_header">حدد فترة الدفع المناسبة لك:</string>
     <string name="osm_live_payment_contribute_descr">تبرعات مساعدة صندوق رسم الخرائط OSM.</string>
-    <string name="markers_remove_dialog_msg">حذف العلامة \'%s\'؟</string>
-    <string name="edit_map_marker">تعديل العلامة</string>
+    <string name="markers_remove_dialog_msg">حذف التوجيه المباشر \'%s\'؟</string>
+    <string name="edit_map_marker">تعديل التوجيه المباشر</string>
     <string name="search_street">بحث عن شارع</string>
     <string name="start_search_from_city">اختر المدينة أولاً</string>
     <string name="shared_string_restore">استعادة</string>
     <string name="third_party_application">تطبيق من طرف ثالث</string>
-    <string name="keep_passed_markers_descr">عند التفعيل ستبقى العلامات المضافة من مجموعة إحداثيات أو من نقاط طريق على الخريطة عند اختيار \"تجاوز العلامة\". إذا كانت المجموعة غير نشطة ستختفي العلامات من الخريطة.</string>
+    <string name="keep_passed_markers_descr">عند التفعيل سيبقى التوجيه المباشر المضاف من مجموعة إحداثيات أو من نقاط طريق على الخريطة عند اختيار \"تجاوز التوجيه المباشر\". إذا كانت المجموعة غير نشطة ستختفي الوجهات المباشرة من الخريطة.</string>
     <string name="keep_passed_markers">إبقاء العلامات المتجاوزة على الخريطة</string>
     <string name="more_transport_on_stop_hint">هناك المزيد من وسائل النقل في هذا الموقف.</string>
     <string name="ask_for_location_permission">يرجى إعطاء إذن تحديد الموقع للتطبيق لكي يواصل.</string>
@@ -2998,7 +2998,7 @@
     <string name="years_5">سنوات</string>
     <string name="months_3">ثلاثة أشهر</string>
     <string name="price_free">مجاناً</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">إظهار شبكة طرق الدارجات الهوائية</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">إظهار شبكة مسارات الدارجات الهوائية</string>
     <string name="download_map_dialog">نافذة تحميل الخريطة</string>
     <string name="dialogs_and_notifications_title">النوافذ والإشعارات</string>
     <string name="dialogs_and_notifications_descr">التحكم في النوافذ المنبثقة ، ومربعات الحوار والإشعارات.</string>
@@ -3048,7 +3048,7 @@
     <string name="routing_attr_prefer_unpaved_name">تفضيل الطرق الغير معبدة</string>
     <string name="routing_attr_prefer_unpaved_description">تفضيل الطرق الغير معبدة.</string>
     <string name="update_all_maps">تحديث كل الخرائط</string>
-    <string name="update_all_maps_q">تحديث (%1$d) خريطة؟</string>
+    <string name="update_all_maps_q">هل أنت متأكد من رغبتك بتحديث (%1$d) خريطة؟</string>
     <string name="release_3_5">• تحديث التطبيق وإعدادات الأوضاع: يتم ترتيب الإعدادات الآن حسب النوع. يمكن تخصيص كل وضع بشكل منفصل. 
 \n 
 \n • نافذة جديدة لتنزيل الخريطة المقترحة أثناء تصفح الخرائط 
@@ -3384,7 +3384,7 @@
     <string name="select_color">اختر اللون</string>
     <string name="edit_profiles_descr">لا يمكنك حذف أوضاع أوسماند الافتراضية ، ولكن يمكنك تعطيلها في الشاشة السابقة ، أو نقلها إلى الأسفل.</string>
     <string name="edit_profiles">تحرير الأوضاع</string>
-    <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على قواعد حسابات الطرق.</string>
+    <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على قواعد حسابات المسار.</string>
     <string name="profile_appearance">مظهر الوضع</string>
     <string name="choose_icon_color_name">اختر الايقونة واللون والاسم</string>
     <string name="reorder_profiles">تحرير قائمة الأوضاع</string>
@@ -3540,7 +3540,7 @@
     <string name="restore_all_profile_settings">استعادة جميع إعدادات الوضع؟</string>
     <string name="saving_new_profile">حفظ الوضع الجديد</string>
     <string name="profile_backup_failed">لا يمكن عمل نسخة احتياطية لهذا الوضع.</string>
-    <string name="clear_recorded_data_warning">مسح البيانات المسجلة؟</string>
+    <string name="clear_recorded_data_warning">هل أنت متأكد من أنك تريد مسح البيانات المسجلة؟</string>
     <string name="importing_from">استيراد البيانات من %1$s</string>
     <string name="shared_string_importing">استيراد</string>
     <string name="checking_for_duplicate_description">OsmAnd تحقق %1$s للتكرارات مع العناصر الموجودة في التطبيق. 
@@ -3709,7 +3709,7 @@
     <string name="turn_screen_on_power_button">زر الطاقة</string>
     <string name="turn_screen_on_proximity_sensor">مستشعر القرب</string>
     <string name="turn_screen_on_wake_time_descr">حدد مهلة الشاشة بعد الاستيقاظ. (\"%1$s\" لا ينطبق أي مهلة.)</string>
-    <string name="keep_screen_on">إبقاء الشاشة تعمل</string>
+    <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
     <string name="keep_screen_off">إبقاء الشاشة مطفأة</string>
     <string name="screen_timeout_descr">إذا تم تفعيل \"%1$s\" ، فسوف يعتمد وقت النشاط على ذلك.</string>
     <string name="pseudo_mercator_projection">إسقاط ميركاتور الوهمي</string>
