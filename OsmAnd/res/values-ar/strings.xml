@@ -376,7 +376,7 @@
 \n التطبيق في الخلفية</string>
     <string name="bg_service_sleep_mode_on">إيقاف 
 \n التشغيل في الخلفية</string>
-    <string name="map_widget_config">عدادات الشاشة</string>
+    <string name="map_widget_config">الاختصارات</string>
     <string name="map_widget_back_to_loc">أين أنا</string>
     <string name="map_widget_lock_screen">اقفل الشاشة</string>
     <string name="map_widget_compass">البوصلة</string>
@@ -1272,7 +1272,7 @@
     <string name="uploading">جار الرفع…</string>
     <string name="search_history_city">مدينة: {0}</string>
     <string name="transport">نقل</string>
-    <string name="transport_Routes">الطرق</string>
+    <string name="transport_Routes">طرق</string>
     <string name="map_screen_orientation">وضعية الشاشة</string>
     <string name="map_orientation_landscape">عرضي</string>
     <string name="map_orientation_portrait">طولي</string>
@@ -3330,7 +3330,7 @@
     <string name="routing_attr_piste_type_skitour_description">طرق لجولات التزلج.</string>
     <string name="routing_attr_piste_type_sled_name">تزلج</string>
     <string name="routing_attr_piste_type_sled_description">منحدرات لاستخدام الزلاجات.</string>
-    <string name="routing_attr_allow_intermediate_name">السماح بالطرق المتوسطة</string>
+    <string name="routing_attr_allow_intermediate_name">السماح بالمسارات المتوسطة</string>
     <string name="routing_attr_allow_intermediate_description">طرق أكثر صعوبة مع أقسام أكثر حدة. بعض العقبات التي ينبغي تجنبها.</string>
     <string name="routing_attr_allow_advanced_name">السماح للطرق المتقدمة</string>
     <string name="routing_attr_allow_advanced_description">طرق صعبة ، مع عقبات خطيرة وأقسام شديدة الانحدار.</string>
@@ -3357,8 +3357,8 @@
     <string name="sett_generic_ext_input">لوحة المفاتيح</string>
     <string name="sett_wunderlinq_ext_input">وندرلينك</string>
     <string name="sett_parrot_ext_input">ببغاء</string>
-    <string name="new_route_calculated_dist_dbg">المسار: المسافة%1$s، الوقت %2$s.
-\nالحساب: %3$.1fث ، %4$dطريق ، %5$dتجانب</string>
+    <string name="new_route_calculated_dist_dbg">المسار: المسافة%2$s، وقت التوجيه %1$s.
+\nالحساب: %3$.1f ث، %4$d طريق، %5$d تجانب)</string>
     <string name="lang_oc">الأوكيتانية</string>
     <string name="get_discount_second_part">ثم %1$s</string>
     <string name="apply_to_current_profile">تطبيق فقط على \"%1$s\"</string>
