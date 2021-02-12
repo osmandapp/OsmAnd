@@ -698,15 +698,32 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
-	private synchronized TravelArticle findArticleById(@NonNull final TravelArticleIdentifier articleId,
-													   final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+	private synchronized TravelArticle findArticleById(@NonNull TravelArticleIdentifier articleId,
+													   String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+		return checkExistedArticle(null, articleId, lang, readGpx, callback);
+	}
+
+	@Override
+	public synchronized TravelArticle checkExistedArticle(@Nullable TravelArticle checkedArticle,
+														  @Nullable TravelArticleIdentifier articleId,
+														  @Nullable String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		final List<Pair<File, Amenity>> amenities = new ArrayList<>();
 		TravelArticle article = null;
+		long lastModified;
+		if (checkedArticle != null) {
+			articleId = checkedArticle.generateIdentifier();
+			lang = checkedArticle.getLang();
+			lastModified = checkedArticle.getLastModified();
+		} else {
+			lastModified = articleId.file.lastModified();
+		}
+		final TravelArticleIdentifier finalArticleId = articleId;
 		SearchRequest<Amenity> req = null;
 		for (final BinaryMapIndexReader reader : getReaders()) {
 			try {
 				if (articleId.file != null && articleId.file.equals(reader.getFile())) {
-					if (articleId.file.lastModified() == reader.getFile().lastModified()) {
+					if (lastModified == reader.getFile().lastModified()) {
+
 						req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
 								Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 								getSubcategoriesSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
@@ -714,7 +731,7 @@ public class TravelObfHelper implements TravelHelper {
 
 									@Override
 									public boolean publish(Amenity amenity) {
-										if (Algorithms.stringsEqual(articleId.routeId,
+										if (Algorithms.stringsEqual(finalArticleId.routeId,
 												Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID)))) {
 											amenities.add(new Pair<>(reader.getFile(), amenity));
 											done = true;
@@ -778,9 +795,9 @@ public class TravelObfHelper implements TravelHelper {
 
 								@Override
 								public boolean publish(Amenity amenity) {
-									if (Algorithms.stringsEqual(articleId.routeId,
+									if (Algorithms.stringsEqual(finalArticleId.routeId,
 											Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID)))
-											&& Algorithms.stringsEqual(articleId.routeSource,
+											&& Algorithms.stringsEqual(finalArticleId.routeSource,
 											Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE)))) {
 										amenities.add(new Pair<>(reader.getFile(), amenity));
 										done = true;

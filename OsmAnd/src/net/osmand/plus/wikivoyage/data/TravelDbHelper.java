@@ -605,6 +605,12 @@ public class TravelDbHelper implements TravelHelper {
 		return res;
 	}
 
+	@Override
+	public TravelArticle checkExistedArticle(@Nullable TravelArticle article, @Nullable TravelArticleIdentifier articleId,
+											 @Nullable String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+		return article;
+	}
+
 	@Nullable
 	@Override
 	public TravelArticleIdentifier getArticleId(@NonNull String title, @NonNull String lang) {
