@@ -3531,7 +3531,7 @@
     <string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
     <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
     <string name="poi_historic_tank">Tank historique</string>
-    <string name="poi_source_biomass">Source d\'énergie : biomasse</string>
+    <string name="poi_generator_source_biomass">Source d\'énergie : biomasse</string>
     <string name="poi_cuisine_buschenschank">Buschenschank</string>
     <string name="poi_cuisine_deli">Épicerie fine</string>
     <string name="poi_motorcycle_type_dualsport">Trail (moto)</string>
