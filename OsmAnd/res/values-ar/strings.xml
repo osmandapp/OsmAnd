@@ -367,7 +367,7 @@
     <string name="day_night_info">مواقيت الشروق والغروب</string>
     <string name="map_widget_vector_attributes">سمات التقديم</string>
     <string name="map_widget_renderer">نمط الخريطة</string>
-    <string name="layer_map_appearance">الاختصارات</string>
+    <string name="layer_map_appearance">عدادات الشاشة</string>
     <string name="map_widget_fluorescent">طرق فلورية</string>
     <string name="map_widget_show_ruler">مسطرة</string>
     <string name="map_widget_view_direction">عرض الاتجاه</string>
@@ -376,7 +376,7 @@
 \n التطبيق في الخلفية</string>
     <string name="bg_service_sleep_mode_on">إيقاف 
 \n التشغيل في الخلفية</string>
-    <string name="map_widget_config">الاختصارات</string>
+    <string name="map_widget_config">عدادات الشاشة</string>
     <string name="map_widget_back_to_loc">أين أنا</string>
     <string name="map_widget_lock_screen">اقفل الشاشة</string>
     <string name="map_widget_compass">البوصلة</string>
@@ -592,22 +592,26 @@
 \nأجزاء الخرائط يمكن الحصول عليها من مصادر إنترنت، أو تحضيرها للإستخدام دون إنترنت ( ونسخها يدويا إلى مجلد بيانات التطبيق) كقاعدة بيانات SQLite والتي يمكن إنتاجها عن طريق مجموعة متنوعة من أدوات تحضير الخرائط المستقلة.</string>
     <string name="update_poi_does_not_change_indexes">التغييرات POI داخل التطبيق لا تؤثرعلى ملفات الخرائط المحملة، يتم حفظ التغييرات إلى ملف محلي بدلا من ذلك.</string>
     <string name="av_camera_focus_descr">وضع تركيز الكاميرا:</string>
-    <string name="osmand_plus_long_description_1000_chars">أوسماند+ (OSM اتجاهات التنقل التلقائية) 
-\n عبارة عن تطبيق ملاحة مفتوح المصدر مع إمكانية الوصول إلى العديد من بيانات عالمية للموقع. كل بيانات الخرائط (خرائط التوجيه أو الخرائط الجزئية) يمكن تخزينها في ذاكرة الجهاز للإستخدام دون إنترنت. يوفر التطبيق كذلك وظائف توجيه بما في ذلك التوجيه الصوتي. 
-\n 
-\nبعض الميزات الأساسية: 
-\n - تشغيل كامل دون إنترنت( خزن خرائط التوجيه أو الخرائط الجزئية المنزلة في ذاكرة الجهاز) 
-\n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت 
-\n - تحميل غير محدود لخرائط البلدان أو المناطق مباشرة من التطبيق 
-\n - ميزة ويكيبيديا المحلية ( قم بتحميل نقاط الاهتمام لويكيبيديا)، الأمثل لمشاهدة المعالم الأثرية 
-\n - يمكن تراكب عدة طبقات للخرائط، ك GPX أو مسارات الملاحة، مواقع ذات الاهتمام ، الأماكن المفضلة، الحدود الكنتورية، أماكن توقف النقل العمومي، خرائط إضافية بشفافية قابلة للتعديل 
-\n - البحث عن العناوين وأماكن الاهتمام دون إنترنت 
-\n - تحديد الطريق لمسافات متوسطة المدى 
-\n - وضع السيارة، الدراجة والمشاة متوفر مع: 
-\n - تبديل اختياري آلي لوضع الرؤية في الليل/النهار 
-\n - تكبير اختياري حسب السرعة 
-\n - محاذاة اختيارية للخريطة حسب البوصلة أو اتجاه الحركة 
-\n - توجيه اختياري للممر، عرض الحد الأقصى للسرعة، أصوات TTS (نص إلى كلام) أو أخرى مسجلة
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (اتجاهات التنقل الآلي OSM)
+\n
+\nOsmAnd+ هو تطبيق تنقل برمجي مفتوح المصدر مع إمكانية الوصول إلى مجموعة متنوعة من بيانات OSM العالمية. يمكن تخزين جميع بيانات الخرائط (خرائط المتجهات أو المربعات) على بطاقة ذاكرة الهاتف للاستخدام دون اتصال. يتم أيضًا تقديم وظائف التوجيه دون اتصال بالإنترنت ، بما في ذلك التوجيه الصوتي خطوة بخطوة.
+\n
+\nOsmAnd+ هو إصدار التطبيق المدفوع ، بشرائه فإنك تدعم المشروع ، وتمول تطوير ميزات جديدة ، وتتلقى آخر التحديثات.
+\n
+\nبعض الميزات الأساسية:
+\n- الوظائف الكاملة غير المتصلة بالإنترنت (تخزين خرائط المتجهات أو الخرائط التي تم تنزيلها في تخزين الجهاز)
+\n- خرائط متجهية مدمجة غير متصلة بالإنترنت متاحة للعالم بأسره
+\n- تنزيل غير محدود لخرائط البلد أو المنطقة مباشرة من التطبيق
+\n- ميزة ويكيبيديا غير المتصلة بالإنترنت (تنزيل Wikipedia POIs) ، رائعة لمشاهدة معالم المدينة
+\n- تراكب العديد من طبقات الخرائط الممكنة ، مثل GPX أو مسارات التنقل ، ونقاط الاهتمام ، والمفضلة ، وخطوط الكنتور ، ومحطات النقل العام ، والخرائط الإضافية بشفافية قابلة للتخصيص
+\n
+\n- البحث عن العناوين والأماكن (نقاط الاهتمام) دون اتصال بالإنترنت
+\n- التوجيه دون اتصال للمسافات متوسطة المدى
+\n- أوضاع السيارة والدراجات والمشاة مع اختيارية:
+\n- التبديل التلقائي للرؤية النهارية / الليلية
+\n- تكبير الخريطة حسب السرعة
+\n- محاذاة الخريطة وفقًا للبوصلة أو اتجاه الحركة
+\n- توجيه المسار ، وعرض حدود السرعة ، والأصوات المسجلة وتحويل النص إلى كلام
 \n</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/الملاحظات تم رفعها</string>
     <string name="live_monitoring_url_descr">تحديد عنوان ويب مع بناء جملة المعلمة: اللات = {0}، خط الطول = {1}، والطابع الزمني = {2}، HDOP = {3}، {4 ارتفاع =}، والسرعة = {5}، واضعة = {6}.</string>
@@ -1610,7 +1614,7 @@
 \n 
 \nللعودة إلى واحدة من أنماط الخريطة التقليدية، ببساطة إما عطل هذا الملحق مرة أخرى أو غير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
-    <string name="active_markers">عدد خطوط التوجيه</string>
+    <string name="active_markers">العلامات النشطة</string>
     <string name="map_markers">العلامات</string>
     <string name="routing_attr_avoid_borders_name">تخطي الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
@@ -2071,7 +2075,7 @@
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
-    <string name="wiki_around">مقالات ويكيبيديا القريبة</string>
+    <string name="wiki_around">مقالات ويكيبيديا المجاورة</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
@@ -2500,8 +2504,8 @@
     <string name="do_not_use_animations_descr">لإيقاف تشغيل الخريطة المتحركة.</string>
     <string name="keep_showing_on_map">إبقاء القياس على الخريطة</string>
     <string name="exit_without_saving">خروج بدون الحفظ؟</string>
-    <string name="show_guide_line">رسم خط توجيه</string>
-    <string name="show_arrows_on_the_map">سهم متجه للهدف</string>
+    <string name="show_guide_line">إظهار خطوط الاتجاه</string>
+    <string name="show_arrows_on_the_map">عرض الأسهم على الخريطة</string>
     <string name="show_passed">عرض المتجاوز</string>
     <string name="hide_passed">إخفاء المتجاوز</string>
     <string name="remove_from_map_markers">إزالة من \"علامات الخريطة\"</string>
@@ -2593,8 +2597,8 @@
     <string name="parked_at">توقفت عند</string>
     <string name="add_favourites_group_to_markers_descr">حدد مفضلة لإضافتها إلى العلامات.</string>
     <string name="favourites_group">مجموعة مفضلة</string>
-    <string name="shared_string_two">خطين</string>
-    <string name="shared_string_one">خط</string>
+    <string name="shared_string_two">إثنان</string>
+    <string name="shared_string_one">واحد</string>
     <string name="osm_recipient_stat">التعديلات %1$s, المبلغ %2$s mBTC</string>
     <string name="osm_recipients_label">مساهمي OSM المستفيدون</string>
     <string name="winter_and_ski_renderer">الشتاء و التزحلق</string>
@@ -2716,7 +2720,7 @@
     <string name="shared_string_restore">استعادة</string>
     <string name="third_party_application">تطبيق من طرف ثالث</string>
     <string name="keep_passed_markers_descr">عند التفعيل ستبقى العلامات المضافة من مجموعة إحداثيات أو من نقاط طريق على الخريطة عند اختيار \"تجاوز العلامة\". إذا كانت المجموعة غير نشطة ستختفي العلامات من الخريطة.</string>
-    <string name="keep_passed_markers">إبقاء العلامات المتجاوزة</string>
+    <string name="keep_passed_markers">إبقاء العلامات المتجاوزة على الخريطة</string>
     <string name="more_transport_on_stop_hint">هناك المزيد من وسائل النقل في هذا الموقف.</string>
     <string name="ask_for_location_permission">يرجى إعطاء إذن تحديد الموقع للتطبيق لكي يواصل.</string>
     <string name="thank_you_for_feedback">شكرا على الرد</string>
@@ -2847,10 +2851,10 @@
     <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر العلامة.</string>
     <string name="empty_state_markers_groups_desc">يمكنك استيراد المجموعات المفضلة أو نقاط المسار كتوجيه.</string>
     <string name="empty_state_markers_history_desc">ستظهر العلامات التي تم تجاوزها على هذه الشاشة.</string>
-    <string name="show_guide_line_descr">خط مباشر من موقعك إلى الهدف.</string>
+    <string name="show_guide_line_descr">عرض خط الاتجاه من موقعك إلى العلامة النشطة.</string>
     <string name="show_arrows_descr">عرض سهم واحد أو اثنين ليشير إلى الوجهة النشطة.</string>
-    <string name="distance_indication_descr">طريقة عرض المسافة من موقعي إلى الوجهات النشطة.</string>
-    <string name="active_markers_descr">عدد الأسهم تجاه الوجهات النشطة ( للملاحة في الصحراء).</string>
+    <string name="distance_indication_descr">طريقة عرض المسافة من موقعي إلى العلامات النشطة.</string>
+    <string name="active_markers_descr">حدد عدد مؤشرات الاتجاه.</string>
     <string name="rendering_value_black_name">أسود</string>
     <string name="shared_string_launch">تشغيل</string>
     <string name="lang_gn_py">الغوارانية</string>
@@ -3705,7 +3709,7 @@
     <string name="turn_screen_on_power_button">زر الطاقة</string>
     <string name="turn_screen_on_proximity_sensor">مستشعر القرب</string>
     <string name="turn_screen_on_wake_time_descr">حدد مهلة الشاشة بعد الاستيقاظ. (\"%1$s\" لا ينطبق أي مهلة.)</string>
-    <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
+    <string name="keep_screen_on">إبقاء الشاشة تعمل</string>
     <string name="keep_screen_off">إبقاء الشاشة مطفأة</string>
     <string name="screen_timeout_descr">إذا تم تفعيل \"%1$s\" ، فسوف يعتمد وقت النشاط على ذلك.</string>
     <string name="pseudo_mercator_projection">إسقاط ميركاتور الوهمي</string>
@@ -3815,7 +3819,7 @@
     <string name="route_between_points_desc">حدد كيفية توصيل النقاط، بخط مستقيم، أو حساب مسار بينها على النحو المحدد أدناه.</string>
     <string name="whole_track">مسار كامل</string>
     <string name="next_segment">المقطع التالي</string>
-    <string name="route_between_points_warning_desc">بعد ذلك ، ألقط مسارك بأقرب طريق مسموح به باستخدام أحد أوضاع التنقل الخاصة بك لاستخدام هذا الخيار.</string>
+    <string name="route_between_points_warning_desc">بعد ذلك ، التقط مسارك بأقرب طريق مسموح به باستخدام أحد أوضاع التنقل الخاصة بك لاستخدام هذا الخيار.</string>
     <string name="threshold_distance">بداية المسافة</string>
     <string name="street_level_imagery">صور للشارع</string>
     <string name="plan_route_exit_dialog_descr">تجاهل كافة التغييرات لمخطط الطريق؟</string>
@@ -4082,7 +4086,7 @@
 \nجميع بيانات OpenPlaceReview مفتوحة ومتاحة للجميع: http://openplacereviews.org/data.
 \n
 \nيمكنك قراءة المزيد على: http://openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="open_place_reviews">فتح مراجعات المكان</string>
     <string name="opr_use_dev_url">استخدام test.openplacereviews.org</string>
     <string name="login_open_place_reviews">الدخول إلى OpenPlaceReviews</string>
     <string name="activity_type_water_name">ماء</string>
