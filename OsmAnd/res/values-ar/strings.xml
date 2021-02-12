@@ -2597,7 +2597,7 @@
     <string name="parked_at">توقفت عند</string>
     <string name="add_favourites_group_to_markers_descr">حدد مفضلة لإضافتها إلى العلامات.</string>
     <string name="favourites_group">مجموعة مفضلة</string>
-    <string name="shared_string_two">إثنان</string>
+    <string name="shared_string_two">خطين</string>
     <string name="shared_string_one">واحد</string>
     <string name="osm_recipient_stat">التعديلات %1$s, المبلغ %2$s mBTC</string>
     <string name="osm_recipients_label">مساهمي OSM المستفيدون</string>
