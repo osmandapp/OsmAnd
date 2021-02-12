@@ -2,19 +2,16 @@ package net.osmand.plus.track;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -27,7 +24,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.util.Algorithms;
@@ -35,7 +31,6 @@ import net.osmand.util.Algorithms;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -47,7 +42,6 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	private static final String TITLE_KEY = "title_key";
 	private static final String IMAGE_URL_KEY = "image_url_key";
 	private static final String CONTENT_KEY = "content_key";
-	private static final int EDIT_ID = 1;
 
 	private WebViewEx webView;
 
@@ -94,34 +88,6 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-		if (item.getItemId() == EDIT_ID) {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				GpxEditDescriptionDialogFragment.showInstance(activity, contentHtml, this);
-			}
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-		menu.clear();
-		OsmandApplication app = getMyApplication();
-		int color = AndroidUtils.resolveAttribute(app, R.attr.pstsTextColor);
-		MenuItem menuItem = menu.add(0, EDIT_ID, 0, app.getString(R.string.shared_string_edit));
-		menuItem.setIcon(getIcon(R.drawable.ic_action_edit_dark, color));
-		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				return onOptionsItemSelected(item);
-			}
-		});
-		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-	}
-
-	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(TITLE_KEY, title);
@@ -130,29 +96,29 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void setupToolbar(View view) {
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		getMyActivity().setSupportActionBar(toolbar);
-		setHasOptionsMenu(true);
-		toolbar.setClickable(true);
-
-		Context ctx = getMyActivity();
-		int iconColor = AndroidUtils.resolveAttribute(ctx, R.attr.pstsTextColor);
-		Drawable icBack = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, iconColor);
-		toolbar.setNavigationIcon(icBack);
-		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-
-		if (!Algorithms.isEmpty(title)) {
-			toolbar.setTitle(title);
-			int titleColor = AndroidUtils.resolveAttribute(ctx, R.attr.pstsTextColor);
-			toolbar.setTitleTextColor(ContextCompat.getColor(ctx, titleColor));
-		}
-
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+		View back = view.findViewById(R.id.toolbar_back);
+		back.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(final View v) {
+			public void onClick(View v) {
 				dismiss();
 			}
 		});
+
+		View edit = view.findViewById(R.id.toolbar_edit);
+		edit.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					GpxEditDescriptionDialogFragment.showInstance(activity, contentHtml, GpxReadDescriptionDialogFragment.this);
+				}
+			}
+		});
+
+		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
+		if (!Algorithms.isEmpty(title)) {
+			toolbarTitle.setText(title);
+		}
 	}
 
 	private void setupImage(View view) {
@@ -214,15 +180,23 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	private void loadWebviewData() {
 		String content = contentHtml;
 		if (content != null) {
-			content = isNightMode(false) ? getColoredContent(content) : content;
+			content = isNightMode(true) ? getColoredContent(content) : content;
 			String encoded = Base64.encodeToString(content.getBytes(), Base64.NO_PADDING);
 			webView.loadData(encoded, "text/html", "base64");
 		}
 	}
 
 	private void setupDependentViews(final View view) {
-		TextViewEx readBtn = view.findViewById(R.id.btn_edit);
-		readBtn.setOnClickListener(new View.OnClickListener() {
+		View editBtn = view.findViewById(R.id.btn_edit);
+
+		Context ctx = editBtn.getContext();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(ctx, editBtn, isNightMode(true), R.drawable.ripple_light, R.drawable.ripple_dark);
+		} else {
+			AndroidUtils.setBackground(editBtn, ContextCompat.getDrawable(ctx, R.drawable.btn_unstroked));
+		}
+
+		editBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				FragmentActivity activity = getActivity();
@@ -232,7 +206,7 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 		AndroidUiHelper.setVisibility(View.VISIBLE,
-				readBtn, view.findViewById(R.id.divider), view.findViewById(R.id.bottom_empty_space));
+				editBtn, view.findViewById(R.id.divider), view.findViewById(R.id.bottom_empty_space));
 		int backgroundColor = isNightMode(false) ?
 				R.color.activity_background_color_dark : R.color.activity_background_color_light;
 		view.findViewById(R.id.root).setBackgroundResource(backgroundColor);
