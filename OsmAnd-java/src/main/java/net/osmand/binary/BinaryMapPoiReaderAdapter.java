@@ -840,17 +840,21 @@ public class BinaryMapPoiReaderAdapter {
 				am.setDescription(codedIS.readString());
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.PRECISEDX_FIELD_NUMBER:
-				preciseX = (codedIS.readSInt32() + (px << (26 - zoom))) << 5;
+				if (hasLocation) {
+					preciseX = codedIS.readSInt32() + x;
+				}
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.PRECISEDY_FIELD_NUMBER:
-				preciseY = (codedIS.readSInt32() + (py << (26 - zoom))) << 5;
-				if (checkBounds) {
-					if (left31 > preciseX || right31 < preciseX || top31 > preciseY || bottom31 < preciseY) {
-						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-						return null;
+				if (hasLocation) {
+					preciseY = codedIS.readSInt32() + y;
+					if (checkBounds) {
+						if (left31 > preciseX || right31 < preciseX || top31 > preciseY || bottom31 < preciseY) {
+							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+							return null;
+						}
 					}
+					isPrecised = true;
 				}
-				isPrecised = true;
 				break;
 			default:
 				skipUnknownField(t);
