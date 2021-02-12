@@ -3881,4 +3881,14 @@
     <string name="poi_wildlife_crossing_bat_bridge">Pontes pro tzintzimurreddos</string>
     <string name="poi_wildlife_crossing">Logu de atraessamentu de sa fàuna areste</string>
     <string name="poi_swimming_area">Logu pro nadare</string>
+    <string name="poi_mobile_library">Positzione de firmada de sa biblioteca mòbile</string>
+    <string name="poi_summit_register_no">Registru de su cùcuru: nono</string>
+    <string name="poi_summit_register_yes">Registru de su cùcuru: eja</string>
+    <string name="poi_piste_status_closed">Istadu de sa pista: serrada</string>
+    <string name="poi_piste_status_open">Istadu de sa pista: aberta</string>
+    <string name="poi_patrolled_no">Controllada: nono</string>
+    <string name="poi_patrolled_yes">Controllada: eja</string>
+    <string name="poi_gladed_yes">Cun àrbores: eja</string>
+    <string name="poi_piste_name">Nùmene de sa pista</string>
+    <string name="poi_piste_ski_jump">Brincu cun sos iscì</string>
 </resources>

@@ -3959,7 +3959,7 @@
     <string name="shared_string_empty">Vide</string>
     <string name="announcement_time_approach">Approche</string>
     <string name="announcement_time_prepare">Préparation</string>
-    <string name="announcement_time_prepare_long">Longue préparation</string>
+    <string name="announcement_time_prepare_long">Préparation longue</string>
     <string name="announcement_time_arrive">Arrivé à destination</string>
     <string name="shared_string_turn">Bifurcation</string>
     <string name="show_track_on_map">Afficher la trace sur la carte</string>
@@ -4017,4 +4017,10 @@
     <string name="activity_type_riding_name">Promenade</string>
     <string name="activity_type_offroad_name">Voies non revêtues</string>
     <string name="activity_type_motorbike_name">Moto</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews est un projet communautaire sur les lieux publics comme les restaurants, hôtels, musées… Il recueille toutes les informations publiques les concernant telles que des photos, des avis, des liens vers d\'autres systèmes, des liens vers OpenStreetMap ou Wikipedia.
+\n
+\nToutes les données d\'OpenPlaceReview sont ouvertes et accessibles à tous sur http://openplacereviews.org/data.
+\n
+\nPour en savoir, consultez http://openplacereviews.org.</string>
+    <string name="activity_type_racing_name">Course automobile</string>
 </resources>

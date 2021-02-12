@@ -4034,4 +4034,7 @@
     <string name="activity_type_offroad_name">Geländegängig</string>
     <string name="activity_type_motorbike_name">Motorrad</string>
     <string name="activity_type_car_name">Auto</string>
+    <string name="announcement_time_prepare">Vorbereiten</string>
+    <string name="shared_string_sec">sek</string>
+    <string name="activity_type_racing_name">Rennsport</string>
 </resources>

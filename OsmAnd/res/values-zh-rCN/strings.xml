@@ -3321,4 +3321,102 @@
     <string name="marker_save_as_track">保存为轨迹文件</string>
     <string name="number_of_gpx_files_selected_pattern">%s 个轨迹文件已选择</string>
     <string name="save_global_track_interval_descr">指定一般轨迹记录的记录间隔（通过地图上的“行程记录”小组件开启）。</string>
+    <string name="only_selected_segment_recalc">只有选定的片段将使用选定的配置文件重新计算。</string>
+    <string name="all_next_segments_will_be_recalc">所有后续的片段将使用选定的配置文件重新计算。</string>
+    <string name="all_previous_segments_will_be_recalc">所有以前的片段将使用选定的配置文件重新计算。</string>
+    <string name="open_saved_track">打开保存的轨迹</string>
+    <string name="shared_string_is_saved">已保存</string>
+    <string name="one_point_error">请至少添加两个点。</string>
+    <string name="sort_last_modified">上次修改</string>
+    <string name="sort_name_descending">名称：Z – A</string>
+    <string name="sort_name_ascending">名称：A – Z</string>
+    <string name="start_finish_icons">开始和结束图标</string>
+    <string name="contour_lines_thanks">感谢你购买“等高线”</string>
+    <string name="routing_attr_avoid_footways_description">避开人行道</string>
+    <string name="routing_attr_avoid_footways_name">避开人行道</string>
+    <string name="use_live_public_transport">OsmAnd Live 数据</string>
+    <string name="use_live_routing">OsmAnd Live 数据</string>
+    <string name="use_native_pt">本地公共交通发展</string>
+    <string name="use_native_pt_desc">切换到 Java（安全）公共交通路线计算</string>
+    <string name="perform_oauth_authorization_description">用 OAuth 登录使以用 osmedit 功能</string>
+    <string name="perform_oauth_authorization">通过 Oauth 登录</string>
+    <string name="clear_osm_token">清除 OpenStreetMap OAuth 令牌</string>
+    <string name="osm_edit_logout_success">注销</string>
+    <string name="file_already_imported">文件已经在 OsmAnd 中导入</string>
+    <string name="shared_string_graph">图表</string>
+    <string name="message_graph_will_be_available_after_recalculation">请等待。
+\n重新计算路线后，就可以得到图表。</string>
+    <string name="shared_string_local_maps">本地地图</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="icon_group_amenity">便利设施</string>
+    <string name="icon_group_special">特殊</string>
+    <string name="voice_prompts_timetable">语音提示时间</string>
+    <string name="elevation_data">你可以使用海拔数据来计算行程的上升/下降</string>
+    <string name="subscription_expired_title">OsmAnd Live 订阅已过期</string>
+    <string name="subscription_paused_title">OsmAnd Live 订阅已暂停</string>
+    <string name="subscription_on_hold_title">OsmAnd Live 订阅已暂停</string>
+    <string name="send_files_to_openstreetmap">将 GPX 文件发送到 OpenStreetMap</string>
+    <string name="enter_text_separated">输入以逗号分隔的标签。</string>
+    <string name="gpx_upload_public_visibility_descr">\"公开 \"是指在您的GPS轨迹和公开的GPS轨迹列表中公开显示该轨迹，并在公开的轨迹列表中以原始形式显示时间戳。通过API提供的数据不引用您的跟踪页面。通过公开的GPS API无法获得跟踪点的时间戳，而且跟踪点也不是按时间顺序排列的。</string>
+    <string name="gpx_upload_private_visibility_descr">\"私有 \"意味着该轨迹不会出现在任何公开的列表中，但可以通过公开的GPS API以非同步的顺序获得其中的轨迹点，但没有时间戳。</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"可识别 \"意味着该轨迹将公开显示在您的GPS轨迹和公共GPS轨迹列表中，即其他用户将能够下载原始轨迹，并与您的用户名相关联。通过trackpoints API服务的GPS API中公开的有时间戳的跟踪点数据将引用您的原始跟踪页面。</string>
+    <string name="gpx_upload_trackable_visibility_descr">“可追踪”意味着该轨迹不会出现在任何公开的列表中，但经过处理的轨迹点与其中的时间戳（不能直接与你关联）会通过从公共 GPS API 下载。</string>
+    <string name="osm_edit_close_note">关闭 OSM 注记</string>
+    <string name="osm_edit_comment_note">评论 OSM 注记</string>
+    <string name="osm_login_descr">你可以使用安全的 OAuth 方式登录，或者使用你的登录名和密码。</string>
+    <string name="shared_string_add_photo">添加照片</string>
+    <string name="register_on_openplacereviews">注册
+\nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">照片由 OpenPlaceReviews.org 开放数据项目提供。为了上传你的照片，你需要在他们的网站上注册。</string>
+    <string name="register_opr_create_new_account">创建新帐户</string>
+    <string name="register_opr_have_account">我已经有一个账户</string>
+    <string name="shared_string_search_history">搜索历史记录</string>
+    <string name="app_mode_kayak">皮艇</string>
+    <string name="app_mode_motorboat">摩托艇</string>
+    <string name="cannot_upload_image">无法上传图像，请稍后再试</string>
+    <string name="select_picture">选择图片</string>
+    <string name="shared_string_resources">资源</string>
+    <string name="approximate_file_size">近似文件大小</string>
+    <string name="select_data_to_export">选择要导出到文件的数据。</string>
+    <string name="file_size_needed_for_import">导入需要</string>
+    <string name="export_not_enough_space_descr">您的设备只有 %1$s 空闲空间。请腾出一些空间或取消选择一些要导出的项目。</string>
+    <string name="export_not_enough_space">空间不足</string>
+    <string name="select_groups_for_import">选择要导入的组。</string>
+    <string name="select_items_for_import">选择要导入的项目。</string>
+    <string name="add_to_mapillary">添加到 Mapillary</string>
+    <string name="add_to_opr">添加到 OpenPlaceReviews</string>
+    <string name="use_dev_url_descr">改用 dev.openstreetmap.org 而不是 openstreetmap.org 来测试上传 OSM 注记 / 兴趣点 / GPX。</string>
+    <string name="use_dev_url">使用 dev.openstreetmap.org</string>
+    <string name="add_photos_descr">OsmAnd显示来自多个来源的照片。
+\nOpenPlaceReviews--POI照片。
+\nMapillary - 街道级图像。
+\n网络/维基媒体--根据OpenStreetMap数据的POI照片。</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="app_mode_light_aircraft">轻型飞机</string>
+    <string name="plan_route_split_before">拆分前</string>
+    <string name="plan_route_split_after">拆分后</string>
+    <string name="profile_type_osmand_string">OsmAnd 配置文件</string>
+    <string name="profile_type_user_string">用户配置文件</string>
+    <string name="release_3_9">- 增加了导出和导入所有数据的选项，包括设置、资源、我的地方。
+\n
+\n - 规划路线：带有路线的轨道段的图形，并增加了创建和编辑多个轨道段的功能。
+\n
+\n - 为OpenStreetMap增加了OAuth认证方法，改进了OSM对话框的用户界面。
+\n
+\n - 支持自定义颜色的收藏夹和跟踪航点。
+\n
+\n</string>
+    <string name="reverse_all_points">反转所有点</string>
+    <string name="profile_by_default_description">选择将在应用程序启动时使用的配置文件。</string>
+    <string name="shared_string_last_used">上次使用</string>
+    <string name="routing_attr_prefer_hiking_routes_description">偏好徒步路线</string>
+    <string name="online_routing_example_hint">包含所有参数的 URL 如下所示：</string>
+    <string name="routing_engine_vehicle_type_foot">步行</string>
+    <string name="routing_engine_vehicle_type_bike">自行车</string>
+    <string name="shared_string_empty">空</string>
+    <string name="announcement_time_approach">接近</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">一般自行车</string>
+    <string name="activity_type_racing_name">赛车</string>
+    <string name="activity_type_mountainbike_name">山地车</string>
+    <string name="activity_type_offroad_name">越野</string>
 </resources>
