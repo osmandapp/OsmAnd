@@ -2480,6 +2480,7 @@ public class GPXUtilities {
 				firstSegment.routeSegments = routeSegments;
 				firstSegment.routeTypes = routeTypes;
 			}
+		gpxFile.addGeneralTrack();
 		} catch (Exception e) {
 			gpxFile.error = e;
 			log.error("Error reading gpx", e); //$NON-NLS-1$
