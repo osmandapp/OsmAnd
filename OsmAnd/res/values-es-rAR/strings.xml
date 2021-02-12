@@ -3674,7 +3674,7 @@
     <string name="height_limit_description">Proporciona la altura del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos altos.</string>
     <string name="weight_limit_description">Proporciona el peso del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos pesados.</string>
     <string name="screen_timeout">Tiempo de espera de la pantalla</string>
-    <string name="shared_string_tones">tonos</string>
+    <string name="shared_string_tones">toneladas</string>
     <string name="shared_string_meters">metros</string>
     <string name="details_dialog_decr">Muestra u oculta los detalles adicionales del mapa</string>
     <string name="shared_string_night_map">Mapa nocturno</string>
@@ -4022,4 +4022,17 @@
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Acceder a OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Agua</string>
+    <string name="activity_type_winter_name">Invierno</string>
+    <string name="activity_type_snowmobile_name">Motonieve</string>
+    <string name="activity_type_riding_name">Equitación</string>
+    <string name="activity_type_racing_name">Carreras</string>
+    <string name="activity_type_mountainbike_name">Bicicleta de montaña</string>
+    <string name="activity_type_cycling_name">Bicicleta</string>
+    <string name="activity_type_hiking_name">Senderismo</string>
+    <string name="activity_type_running_name">Correr</string>
+    <string name="activity_type_walking_name">Peatón</string>
+    <string name="activity_type_offroad_name">Todo terreno</string>
+    <string name="activity_type_motorbike_name">Motocicleta</string>
+    <string name="activity_type_car_name">Automóvil</string>
 </resources>
