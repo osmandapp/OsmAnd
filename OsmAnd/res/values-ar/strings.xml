@@ -329,7 +329,7 @@
     <string name="local_osm_changes_backup">نسخ الاحتياطي كتعديل OSM</string>
     <string name="files_limit">%1$d ملف بقى</string>
     <string name="osmand_background_plugin_description">يظهر الإعدادات لتمكين التتبع والملاحة في وضعية السكون ( الشاشة مغلقة ) عبر إيقاظ دوري لجهاز GPS.</string>
-    <string name="precise_routing_mode_descr">تمكين لحساب الطرق بدقة دون أخطاء. لا يزال محدود المسافة وبطيء.</string>
+    <string name="precise_routing_mode_descr">تمكين لحساب المسارات بدقة دون أخطاء. لا يزال محدود المسافة وبطيء.</string>
     <string name="recording_photo_description">صورة %1$s %2$s</string>
     <string name="dropbox_plugin_description">مزامنة المسارات والملاحظات الصوتية / الفيديو مع حساب Dropbox الخاص بك.</string>
     <string name="av_video_format_descr">تنسيق الفيديو الناتج:</string>
@@ -1075,7 +1075,7 @@
     <string name="impassable_road">تجنب الطرق…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">طرق السكك الحديدية</string>
     <string name="rendering_attr_tramRoutes_name">خطوط الترام</string>
-    <string name="rendering_category_routes">الطرق</string>
+    <string name="rendering_category_routes">المسارات الرياضية</string>
     <string name="rendering_category_transport">وسائل المواصلات</string>
     <string name="rendering_category_others">سمات أخرى للخريطة</string>
     <string name="map_widget_appearance_rem">العناصر الأخرى</string>
@@ -1174,7 +1174,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">طرق الحافلات الكهربائية</string>
     <string name="rendering_attr_busRoutes_name">طرق الحافلات</string>
     <string name="rendering_attr_subwayMode_name">سكك قطار الأنفاق</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">تاكسي المشاركة بالطريق</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">شارك طرق التاكسي</string>
     <string name="speed_limit_exceed_message">حدد حد السرعة المسموح به لتلقي تنبيه صوتي إذا ما تجاوزته.</string>
     <string name="traffic_warning_border_control">مراقبة الحدود</string>
     <string name="traffic_warning_payment">كشك الرسوم</string>
@@ -1188,7 +1188,7 @@
     <string name="rendering_attr_hideAccess_name">قيود الدخول</string>
     <string name="rendering_attr_showAccess_name">عرض قيود الدخول</string>
     <string name="rendering_attr_showSurfaces_name">عرض سطح الطريق</string>
-    <string name="rendering_attr_showCycleRoutes_name">إظهار طرق الدراجات</string>
+    <string name="rendering_attr_showCycleRoutes_name">إظهار مسارات الدراجات</string>
     <string name="delay_navigation_start">بدء التوجيه المفصل تلقائياً</string>
     <string name="gpx_info_subtracks">مسارات فرعية: %1$s</string>
     <string name="gpx_info_waypoints">نقاط الطريق: %1$s</string>
@@ -1614,8 +1614,8 @@
 \n 
 \nللعودة إلى واحدة من أنماط الخريطة التقليدية، ببساطة إما عطل هذا الملحق مرة أخرى أو غير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
-    <string name="active_markers">العلامات النشطة</string>
-    <string name="map_markers">العلامات</string>
+    <string name="active_markers">عدد خطوط التوجيه</string>
+    <string name="map_markers">التوجيه المباشر</string>
     <string name="routing_attr_avoid_borders_name">تخطي الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
     <string name="search_categories">الفئات</string>
@@ -1659,7 +1659,7 @@
     <string name="select_voice_provider">اختر التوجيه الصوتي</string>
     <string name="select_voice_provider_descr">اختر أو قم بتحميل التوجيه الصوتي الخاص بلغتك.</string>
     <string name="no_location_permission">منح الوصول إلى بيانات الموقع.</string>
-    <string name="rendering_attr_horseRoutes_name">طرق الخيول</string>
+    <string name="rendering_attr_horseRoutes_name">مسارات الخيول</string>
     <string name="shared_string_hide">إخفاء</string>
     <string name="av_video_quality_low">جودة أقل</string>
     <string name="av_video_quality_high">أعلى جودة</string>
@@ -1872,7 +1872,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">تلوين وفق الانتماء للشبكة</string>
     <string name="rendering_value_walkingRoutesOSMC_name">تلوين وفق رمز تنزه OSMC</string>
     <string name="shared_string_logoff">خروج</string>
-    <string name="local_recordings_delete_all_confirm">حذف الملاحظات %1$d؟</string>
+    <string name="local_recordings_delete_all_confirm">هل أنت متأكد من أنك تريد حذف الملاحظات %1$d؟</string>
     <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تحميل خريطة خاصة محلياً.</string>
     <string name="save_track_to_gpx_globally_descr">تسجيل الموقع العام إلى ملف GPX يمكن تشغيله أو إيقافه باستخدام نافذة تسجيل GPX على الشاشة خريطة.</string>
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1).</string>
