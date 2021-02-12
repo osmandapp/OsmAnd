@@ -153,7 +153,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			for (IndexItem indexItem : indexItems) {
 				downloadsSize += indexItem.getSize();
 			}
-			String updateAllText = getActivity().getString(R.string.update_all, downloadsSize >> 20);
+			String updateAllText = getActivity().getString(
+					R.string.update_all, String.valueOf(downloadsSize >> 20));
 			updateAllButton.setText(updateAllText);
 			updateAllButton.setOnClickListener(new View.OnClickListener() {
 				@Override

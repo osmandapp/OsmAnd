@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -112,6 +113,10 @@ public class DownloadActivityType {
 
 	public static DownloadActivityType getIndexType(String tagName) {
 		return byTag.get(tagName);
+	}
+
+	public static Collection<DownloadActivityType> values() {
+		return byTag.values();
 	}
 	
 	protected static String addVersionToExt(String ext, int version) {
@@ -318,7 +323,7 @@ public class DownloadActivityType {
 		}
 	}
 
-	public String getVisibleDescription(IndexItem indexItem, Context ctx) {
+	public String getVisibleDescription(DownloadItem downloadItem, Context ctx) {
 		if (this == SRTM_COUNTRY_FILE) {
 			return ctx.getString(R.string.download_srtm_maps);
 		} else if (this == WIKIPEDIA_FILE) {
@@ -337,20 +342,20 @@ public class DownloadActivityType {
 		return "";
 	}
 	
-	public String getVisibleName(IndexItem indexItem, Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
+	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
 		if (this == VOICE_FILE) {
-			String fileName = indexItem.fileName;
+			String fileName = downloadItem.getFileName();
 			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
-				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
+				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(downloadItem));
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
+				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(downloadItem));
 			}
-			return getBasename(indexItem);
+			return getBasename(downloadItem);
 		}
 		if (this == FONT_FILE) {
-			return FileNameTranslationHelper.getFontName(ctx, getBasename(indexItem));
+			return FileNameTranslationHelper.getFontName(ctx, getBasename(downloadItem));
 		}
-		final String basename = getBasename(indexItem);
+		final String basename = getBasename(downloadItem);
 		if (basename.endsWith(FileNameTranslationHelper.WIKI_NAME)) {
 			return FileNameTranslationHelper.getWikiName(ctx, basename);
 		}
@@ -442,8 +447,8 @@ public class DownloadActivityType {
 	}
 
 
-	public String getBasename(IndexItem indexItem) {
-		String fileName = indexItem.fileName;
+	public String getBasename(DownloadItem downloadItem) {
+		String fileName = downloadItem.getFileName();
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 		}
@@ -458,7 +463,7 @@ public class DownloadActivityType {
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
 		}
-		if (indexItem.getType() == WIKIVOYAGE_FILE &&
+		if (downloadItem.getType() == WIKIVOYAGE_FILE &&
 				fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT.length());
 		}

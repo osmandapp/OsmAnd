@@ -10,9 +10,9 @@ import android.widget.TextView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.download.CustomIndexItem;
+import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.IndexItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +52,9 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 	public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
 	                         View convertView, ViewGroup parent) {
 		final Object child = getChild(groupPosition, childPosition);
-		if (child instanceof IndexItem) {
+		if (child instanceof DownloadItem) {
 
-			IndexItem item = (IndexItem) child;
+			DownloadItem item = (DownloadItem) child;
 			DownloadResourceGroup group = getGroupObj(groupPosition);
 			ItemViewHolder viewHolder;
 			if (convertView != null && convertView.getTag() instanceof ItemViewHolder) {

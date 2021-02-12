@@ -17,11 +17,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
 
+import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
@@ -31,11 +34,13 @@ import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.CustomIndexItem;
+import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.MultipleIndexItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -43,6 +48,8 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemViewHolder {
 
@@ -137,24 +144,24 @@ public class ItemViewHolder {
 		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication());
 	}
 
-	public void bindIndexItem(final IndexItem indexItem) {
-		bindIndexItem(indexItem, null);
+	public void bindIndexItem(final DownloadItem downloadItem) {
+		bindIndexItem(downloadItem, null);
 	}
 
-	public void bindIndexItem(final IndexItem indexItem, final String cityName) {
+	public void bindIndexItem(final DownloadItem downloadItem, final String cityName) {
 		initAppStatusVariables();
-		boolean isDownloading = context.getDownloadThread().isDownloading(indexItem);
+		boolean isDownloading = downloadItem.isDownloading(context.getDownloadThread());
 		int progress = -1;
-		if (context.getDownloadThread().getCurrentDownloadingItem() == indexItem) {
+		if (context.getDownloadThread().getCurrentDownloadingItem() == downloadItem) {
 			progress = context.getDownloadThread().getCurrentDownloadingItemProgress();
 		}
-		boolean disabled = checkDisabledAndClickAction(indexItem);
+		boolean disabled = checkDisabledAndClickAction(downloadItem);
 		/// name and left item
 		String name;
 		if(showTypeInName) {
-			name = indexItem.getType().getString(context);
+			name = downloadItem.getType().getString(context);
 		} else {
-			name = indexItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName);
+			name = downloadItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName);
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		nameTextView.setText(text);
@@ -164,43 +171,78 @@ public class ItemViewHolder {
 			nameTextView.setTextColor(textColorSecondary);
 		}
 		int color = textColorSecondary;
-		if(indexItem.isDownloaded() && !isDownloading) {
-			int colorId = indexItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
+		if(downloadItem.isDownloaded() && !isDownloading) {
+			int colorId = downloadItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
 			color = context.getResources().getColor(colorId);
 		}
-		if (indexItem.isDownloaded()) {
+		if (downloadItem.isDownloaded()) {
 			leftImageView.setImageDrawable(getContentIcon(context,
-					indexItem.getType().getIconResource(), color));
+					downloadItem.getType().getIconResource(), color));
 		} else if (disabled) {
 			leftImageView.setImageDrawable(getContentIcon(context,
-					indexItem.getType().getIconResource(), textColorSecondary));
+					downloadItem.getType().getIconResource(), textColorSecondary));
 		} else {
 			leftImageView.setImageDrawable(getContentIcon(context,
-					indexItem.getType().getIconResource()));
+					downloadItem.getType().getIconResource()));
 		}
 		descrTextView.setTextColor(textColorSecondary);
 		if (!isDownloading) {
 			progressBar.setVisibility(View.GONE);
 			descrTextView.setVisibility(View.VISIBLE);
-			if (indexItem instanceof CustomIndexItem && (((CustomIndexItem) indexItem).getSubName(context) != null)) {
-				descrTextView.setText(((CustomIndexItem) indexItem).getSubName(context));
-			} else if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
+			if (downloadItem instanceof CustomIndexItem && (((CustomIndexItem) downloadItem).getSubName(context) != null)) {
+				descrTextView.setText(((CustomIndexItem) downloadItem).getSubName(context));
+			} else if (downloadItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
 				descrTextView.setText(context.getString(R.string.depth_contour_descr));
-			} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
-					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
-					|| indexItem.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
+			} else if ((downloadItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+					|| downloadItem.getType() == DownloadActivityType.HILLSHADE_FILE
+					|| downloadItem.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
 				if (showTypeInName) {
 					descrTextView.setText("");
 				} else {
-					descrTextView.setText(indexItem.getType().getString(context));
+					descrTextView.setText(downloadItem.getType().getString(context));
 				}
-			} else if (showTypeInDesc) {
-				descrTextView.setText(indexItem.getType().getString(context) +
-						" • " + indexItem.getSizeDescription(context) +
-						" • " + (showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
+			} else if (downloadItem instanceof MultipleIndexItem) {
+				MultipleIndexItem item = (MultipleIndexItem) downloadItem;
+				String allRegionsHeader = context.getString(R.string.shared_strings_all_regions);
+				String regionsHeader = context.getString(R.string.regions);
+				String allRegionsCount = String.valueOf(item.getAllIndexes().size());
+				String leftToDownloadCount = String.valueOf(item.getIndexesToDownload().size());
+				String header;
+				String count;
+				if (item.hasActualDataToDownload()) {
+					if (!item.isDownloaded()) {
+						header = allRegionsHeader;
+						count = leftToDownloadCount;
+					} else {
+						header = regionsHeader;
+						count = String.format(
+								context.getString(R.string.ltr_or_rtl_combine_via_slash),
+								leftToDownloadCount,
+								allRegionsCount);
+					}
+				} else {
+					header = allRegionsHeader;
+					count = allRegionsCount;
+				}
+				String fullDescription =
+						context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
+				if (item.hasActualDataToDownload()) {
+					fullDescription = context.getString(
+							R.string.ltr_or_rtl_combine_via_bold_point, fullDescription,
+							item.getSizeDescription(context));
+				}
+				descrTextView.setText(fullDescription);
 			} else {
-				descrTextView.setText(indexItem.getSizeDescription(context) + " • " +
-						(showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
+				IndexItem item = (IndexItem) downloadItem;
+				String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
+				String type = item.getType().getString(context);
+				String size = item.getSizeDescription(context);
+				String date = showRemoteDate ? item.getRemoteDate(dateFormat) : item.getLocalDate(dateFormat);
+				String fullDescription = String.format(pattern, size, date);
+				if (showTypeInDesc) {
+					fullDescription = String.format(pattern, type, fullDescription);
+				}
+				descrTextView.setText(fullDescription);
 			}
 
 		} else {
@@ -209,18 +251,19 @@ public class ItemViewHolder {
 			progressBar.setProgress(progress);
 			
 			if (showProgressInDesc) {
-				double mb = indexItem.getArchiveSizeMB();
+				double mb = downloadItem.getArchiveSizeMB();
 				String v ;
 				if (progress != -1) {
 					v = context.getString(R.string.value_downloaded_of_max, mb * progress / 100, mb);
 				} else {
 					v = context.getString(R.string.file_size_in_mb, mb);
 				}
-				if(showTypeInDesc && indexItem.getType() == DownloadActivityType.ROADS_FILE) {
-					descrTextView.setText(indexItem.getType().getString(context) + " • " + v);
-				} else {
-					descrTextView.setText(v);
+				String fullDescription = v;
+				if(showTypeInDesc && downloadItem.getType() == DownloadActivityType.ROADS_FILE) {
+					fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_bold_point,
+							downloadItem.getType().getString(context), fullDescription);
 				}
+				descrTextView.setText(fullDescription);
 				descrTextView.setVisibility(View.VISIBLE);
 			} else {
 				descrTextView.setVisibility(View.GONE);
@@ -241,44 +284,7 @@ public class ItemViewHolder {
 		}
 	}
 
-	protected void download(IndexItem indexItem, DownloadResourceGroup parentOptional) {
-		boolean handled = false;
-		if(parentOptional != null) {
-			WorldRegion region = DownloadResourceGroup.getRegion(parentOptional);
-			context.setDownloadItem(region, indexItem.getTargetFile(context.getMyApplication()).getAbsolutePath());
-		}
-		if (indexItem.getType() == DownloadActivityType.ROADS_FILE && parentOptional != null) {
-			for (IndexItem ii : parentOptional.getIndividualResources()) {
-				if (ii.getType() == DownloadActivityType.NORMAL_FILE) {
-					if (ii.isDownloaded()) {
-						handled = true;
-						confirmDownload(indexItem);
-					}
-					break;
-				}
-			}
-		}		
-		if(!handled) {
-			context.startDownload(indexItem);
-		}
-	}
-	private void confirmDownload(final IndexItem indexItem) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setTitle(R.string.are_you_sure);
-		builder.setMessage(R.string.confirm_download_roadmaps);
-		builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
-				R.string.shared_string_download, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (indexItem != null) {
-							context.startDownload(indexItem);
-						}
-					}
-				});
-		builder.show();
-	}
-
-	private boolean checkDisabledAndClickAction(final IndexItem item) {
+	private boolean checkDisabledAndClickAction(final DownloadItem item) {
 		RightButtonAction clickAction = getClickAction(item);
 		boolean disabled = clickAction != RightButtonAction.DOWNLOAD;
 		OnClickListener action = getRightButtonAction(item, clickAction);
@@ -290,15 +296,15 @@ public class ItemViewHolder {
 		} else {
 			rightButton.setVisibility(View.GONE);
 			rightImageButton.setVisibility(View.VISIBLE);
-			final boolean isDownloading = context.getDownloadThread().isDownloading(item);
+			final boolean isDownloading = item.isDownloading(context.getDownloadThread());
 			if (isDownloading) {
 				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_remove_dark));
 				rightImageButton.setContentDescription(context.getString(R.string.shared_string_cancel));
-			} else if(item.isDownloaded() && !item.isOutdated()) {
+			} else if(!item.hasActualDataToDownload()) {
 				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_overflow_menu_white));
 				rightImageButton.setContentDescription(context.getString(R.string.shared_string_more));
 			} else {
-				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
+				rightImageButton.setImageDrawable(getContentIcon(context, getDownloadActionIconId(item)));
 				rightImageButton.setContentDescription(context.getString(R.string.shared_string_download));
 			}
 			rightImageButton.setOnClickListener(action);
@@ -307,31 +313,37 @@ public class ItemViewHolder {
 		return disabled;
 	}
 
+	private int getDownloadActionIconId(@NonNull DownloadItem item) {
+		return item instanceof MultipleIndexItem ?
+				R.drawable.ic_action_multi_download :
+				R.drawable.ic_action_import;
+	}
+
 	@SuppressLint("DefaultLocale")
-	public RightButtonAction getClickAction(final IndexItem indexItem) {
+	public RightButtonAction getClickAction(final DownloadItem item) {
 		RightButtonAction clickAction = RightButtonAction.DOWNLOAD;
-		if (indexItem.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)
+		if (item.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)
 				&& nauticalPluginDisabled) {
 			clickAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
-		} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
-				|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
-				|| indexItem.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
+		} else if ((item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+				|| item.getType() == DownloadActivityType.HILLSHADE_FILE
+				|| item.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
 			if (srtmNeedsInstallation) {
 				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_PURCHASE;
 			} else {
 				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
 			}
 
-		} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE
+		} else if (item.getType() == DownloadActivityType.WIKIPEDIA_FILE
 				&& !Version.isPaidVersion(context.getMyApplication())) {
 			clickAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
-		} else if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
+		} else if (item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
 			clickAction = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 		}
 		return clickAction;
 	}
 
-	public OnClickListener getRightButtonAction(final IndexItem item, final RightButtonAction clickAction) {
+	public OnClickListener getRightButtonAction(final DownloadItem item, final RightButtonAction clickAction) {
 		if (clickAction != RightButtonAction.DOWNLOAD) {
 			return new View.OnClickListener() {
 				@Override
@@ -370,7 +382,7 @@ public class ItemViewHolder {
 				}
 			};
 		} else {
-			final boolean isDownloading = context.getDownloadThread().isDownloading(item);
+			final boolean isDownloading = item.isDownloading(context.getDownloadThread());
 			return new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -380,8 +392,8 @@ public class ItemViewHolder {
 						} else {
 							context.makeSureUserCancelDownload(item);
 						}
-					} else if(item.isDownloaded() && !item.isOutdated()){
-						contextMenu(v, item, item.getRelatedGroup());
+					} else if(!item.hasActualDataToDownload()){
+						showContextMenu(v, item, item.getRelatedGroup());
 					} else {
 						download(item, item.getRelatedGroup());
 					}
@@ -390,52 +402,21 @@ public class ItemViewHolder {
 		}
 	}
 
-	protected void contextMenu(View v, final IndexItem indexItem, final DownloadResourceGroup parentOptional) {
-		final PopupMenu optionsMenu = new PopupMenu(context, v);
+	protected void showContextMenu(View v,
+	                               final DownloadItem downloadItem,
+	                               final DownloadResourceGroup parentOptional) {
+		OsmandApplication app = context.getMyApplication();
+		PopupMenu optionsMenu = new PopupMenu(context, v);
 		MenuItem item;
-		
-		final File fl = indexItem.getTargetFile(context.getMyApplication());
-		if (fl.exists()) {
-			item = optionsMenu.getMenu().add(R.string.shared_string_remove).setIcon(
-							context.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
+
+		final List<File> downloadedFiles = downloadItem.getDownloadedFiles(app);
+		if (!Algorithms.isEmpty(downloadedFiles)) {
+			item = optionsMenu.getMenu().add(R.string.shared_string_remove)
+					.setIcon(getThemedIcon(context, R.drawable.ic_action_remove_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
-					LocalIndexType tp = LocalIndexType.MAP_DATA;
-					if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
-						tp = LocalIndexType.TILES_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.SLOPE_FILE) {
-						tp = LocalIndexType.TILES_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.ROADS_FILE) {
-						tp = LocalIndexType.MAP_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
-						tp = LocalIndexType.SRTM_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
-						tp = LocalIndexType.MAP_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
-						tp = LocalIndexType.MAP_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.TRAVEL_FILE) {
-						tp = LocalIndexType.MAP_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.FONT_FILE) {
-						tp = LocalIndexType.FONT_DATA;
-					} else if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
-						tp = indexItem.getBasename().contains("tts") ? LocalIndexType.TTS_VOICE_DATA
-								: LocalIndexType.VOICE_DATA;
-					}
-					final LocalIndexInfo info = new LocalIndexInfo(tp, fl, false, context.getMyApplication());
-					AlertDialog.Builder confirm = new AlertDialog.Builder(context);
-					confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							new LocalIndexOperationTask(context, null, LocalIndexOperationTask.DELETE_OPERATION)
-									.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
-						}
-					});
-					confirm.setNegativeButton(R.string.shared_string_no, null);
-					String fn = FileNameTranslationHelper.getFileName(context, context.getMyApplication().getRegions(),
-							indexItem.getVisibleName(context, context.getMyApplication().getRegions()));
-					confirm.setMessage(context.getString(R.string.delete_confirmation_msg, fn));
-					confirm.show();
+					confirmRemove(downloadItem, downloadedFiles);
 					return true;
 				}
 			});
@@ -445,12 +426,142 @@ public class ItemViewHolder {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				download(indexItem, parentOptional);
+				download(downloadItem, parentOptional);
 				return true;
 			}
 		});
-		
+
 		optionsMenu.show();
+	}
+
+	protected void download(DownloadItem item, DownloadResourceGroup parentOptional) {
+		boolean handled = false;
+		if (parentOptional != null && item instanceof IndexItem) {
+			IndexItem indexItem = (IndexItem) item;
+			WorldRegion region = DownloadResourceGroup.getRegion(parentOptional);
+			context.setDownloadItem(region, indexItem.getTargetFile(context.getMyApplication()).getAbsolutePath());
+		}
+		if (item.getType() == DownloadActivityType.ROADS_FILE && parentOptional != null) {
+			for (IndexItem ii : parentOptional.getIndividualResources()) {
+				if (ii.getType() == DownloadActivityType.NORMAL_FILE) {
+					if (ii.isDownloaded()) {
+						handled = true;
+						confirmDownload(item);
+					}
+					break;
+				}
+			}
+		}
+		if(!handled) {
+			startDownload(item);
+		}
+	}
+	private void confirmDownload(final DownloadItem item) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle(R.string.are_you_sure);
+		builder.setMessage(R.string.confirm_download_roadmaps);
+		builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
+				R.string.shared_string_download, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if (item != null) {
+							startDownload(item);
+						}
+					}
+				});
+		builder.show();
+	}
+
+	private void startDownload(DownloadItem item) {
+		if (item instanceof MultipleIndexItem) {
+			MultipleIndexItem multipleIndexItem = (MultipleIndexItem) item;
+			List<IndexItem> indexes;
+			if (multipleIndexItem.hasActualDataToDownload()) {
+				// download left regions
+				indexes = multipleIndexItem.getIndexesToDownload();
+			} else {
+				// download all regions again
+				indexes = multipleIndexItem.getAllIndexes();
+			}
+			IndexItem[] indexesArray = new IndexItem[indexes.size()];
+			context.startDownload(indexes.toArray(indexesArray));
+		} else if (item instanceof IndexItem) {
+			IndexItem indexItem = (IndexItem) item;
+			context.startDownload(indexItem);
+		}
+	}
+
+	private void confirmRemove(@NonNull final DownloadItem downloadItem,
+	                           @NonNull final List<File> downloadedFiles) {
+		OsmandApplication app = context.getMyApplication();
+		AlertDialog.Builder confirm = new AlertDialog.Builder(context);
+
+		String message;
+		if (downloadedFiles.size() > 1) {
+			message = context.getString(R.string.delete_number_files_question, downloadedFiles.size());
+		} else {
+			OsmandRegions regions = app.getRegions();
+			String visibleName = downloadItem.getVisibleName(context, regions);
+			String fileName = FileNameTranslationHelper.getFileName(context, regions, visibleName);
+			message = context.getString(R.string.delete_confirmation_msg, fileName);
+		}
+		confirm.setMessage(message);
+
+		confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				LocalIndexType type = getLocalIndexType(downloadItem);
+				remove(type, downloadedFiles);
+			}
+		});
+		confirm.setNegativeButton(R.string.shared_string_no, null);
+
+		confirm.show();
+	}
+
+	private void remove(@NonNull LocalIndexType type,
+	                    @NonNull List<File> filesToDelete) {
+		OsmandApplication app = context.getMyApplication();
+		LocalIndexOperationTask removeTask = new LocalIndexOperationTask(
+				context,
+				null,
+				LocalIndexOperationTask.DELETE_OPERATION);
+		LocalIndexInfo[] params = new LocalIndexInfo[filesToDelete.size()];
+		for (int i = 0; i < filesToDelete.size(); i++) {
+			File file = filesToDelete.get(i);
+			params[i] = new LocalIndexInfo(type, file, false, app);
+		}
+		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+	}
+
+	@NonNull
+	private LocalIndexType getLocalIndexType(@NonNull DownloadItem downloadItem) {
+		LocalIndexType type = LocalIndexType.MAP_DATA;
+		if (downloadItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
+			type = LocalIndexType.TILES_DATA;
+		} else if (downloadItem.getType() == DownloadActivityType.SLOPE_FILE) {
+			type = LocalIndexType.TILES_DATA;
+		} else if (downloadItem.getType() == DownloadActivityType.ROADS_FILE) {
+			type = LocalIndexType.MAP_DATA;
+		} else if (downloadItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+			type = LocalIndexType.SRTM_DATA;
+		} else if (downloadItem.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
+			type = LocalIndexType.MAP_DATA;
+		} else if (downloadItem.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
+			type = LocalIndexType.MAP_DATA;
+		} else if (downloadItem.getType() == DownloadActivityType.TRAVEL_FILE) {
+			type = LocalIndexType.MAP_DATA;
+		} else if (downloadItem.getType() == DownloadActivityType.FONT_FILE) {
+			type = LocalIndexType.FONT_DATA;
+		} else if (downloadItem.getType() == DownloadActivityType.VOICE_FILE) {
+			type = downloadItem.getBasename().contains("tts") ? LocalIndexType.TTS_VOICE_DATA
+					: LocalIndexType.VOICE_DATA;
+		}
+		return type;
+	}
+
+	private Drawable getThemedIcon(DownloadActivity context, int resourceId) {
+		return context.getMyApplication().getUIUtilities().getThemedIcon(resourceId);
 	}
 
 	private Drawable getContentIcon(DownloadActivity context, int resourceId) {

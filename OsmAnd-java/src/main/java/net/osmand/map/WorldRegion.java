@@ -40,6 +40,7 @@ public class WorldRegion implements Serializable {
 	protected String regionDownloadName;
 	protected boolean regionMapDownload;
 	protected LatLon regionCenter;
+	protected RegionBoundingBox boundingBox;
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -181,5 +182,33 @@ public class WorldRegion implements Serializable {
 			res++;
 		}
 		return res;
+	}
+
+	public static boolean isFirstRegionInsideTheSecond(WorldRegion first,
+	                                                   WorldRegion second) {
+		RegionBoundingBox bbox1 = first.boundingBox;
+		RegionBoundingBox bbox2 = second.boundingBox;
+		if ((bbox1.minX > bbox2.minX) && (bbox1.maxX < bbox2.maxX)) {
+			if ((bbox1.minY > bbox2.minY) && (bbox1.maxY < bbox2.maxY)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static class RegionBoundingBox {
+
+		double minX;
+		double maxX;
+		double minY;
+		double maxY;
+
+		public RegionBoundingBox(double minX, double maxX, double minY, double maxY) {
+			this.minX = minX;
+			this.maxX = maxX;
+			this.minY = minY;
+			this.maxY = maxY;
+		}
+
 	}
 }

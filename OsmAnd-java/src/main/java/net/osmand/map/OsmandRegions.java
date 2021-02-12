@@ -10,6 +10,7 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
+import net.osmand.map.WorldRegion.RegionBoundingBox;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
@@ -436,6 +437,7 @@ public class OsmandRegions {
 			cx /= object.getPointsLength();
 			cy /= object.getPointsLength();
 			rd.regionCenter = new LatLon(MapUtils.get31LatitudeY((int) cy), MapUtils.get31LongitudeX((int) cx));
+			rd.boundingBox = findBoundingBox(object);
 		}
 
 		rd.regionParentFullName = mapIndexFields.get(mapIndexFields.parentFullName, object);
@@ -459,6 +461,43 @@ public class OsmandRegions {
 		rd.regionSearchText = getSearchIndex(object);
 		rd.regionMapDownload = isDownloadOfType(object, MAP_TYPE);
 		return rd;
+	}
+
+	private RegionBoundingBox findBoundingBox(BinaryMapDataObject object) {
+		if (object.getPointsLength() == 0) {
+			return new RegionBoundingBox(0, 0, 0, 0);
+		}
+
+		double currentX = object.getPoint31XTile(0);
+		double currentY = object.getPoint31YTile(0);
+		double minX = currentX;
+		double maxX = currentX;
+		double minY = currentY;
+		double maxY = currentY;
+
+		if (object.getPointsLength() > 1) {
+			for (int i = 1; i < object.getPointsLength(); i++) {
+				currentX = object.getPoint31XTile(i);
+				currentY = object.getPoint31YTile(i);
+				if (currentX > maxX) {
+					maxX = currentX;
+				} else if (currentX < minX) {
+					minX = currentX;
+				}
+				if (currentY > maxY) {
+					maxY = currentY;
+				} else if (currentY < minY) {
+					minY = currentY;
+				}
+			}
+		}
+
+		minX = MapUtils.get31LongitudeX((int) minX);
+		maxX = MapUtils.get31LongitudeX((int) maxX);
+		double revertedMinY = MapUtils.get31LatitudeY((int) maxY);
+		double revertedMaxY = MapUtils.get31LatitudeY((int) minY);
+
+		return new RegionBoundingBox(minX, maxX, revertedMinY, revertedMaxY);
 	}
 
 	private String getSearchIndex(BinaryMapDataObject object) {

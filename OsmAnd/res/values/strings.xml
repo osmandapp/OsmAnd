@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="delete_number_files_question">Delete %1$d files?</string>
+    <string name="shared_strings_all_regions">All regions</string>
     <string name="activity_type_car_name">Car</string>
     <string name="activity_type_motorbike_name">Motorbike</string>
     <string name="activity_type_offroad_name">Off-road</string>

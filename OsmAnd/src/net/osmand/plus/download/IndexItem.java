@@ -1,12 +1,9 @@
 package net.osmand.plus.download;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -16,9 +13,11 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class IndexItem implements Comparable<IndexItem> {
+public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
 	
 	String description;
@@ -27,43 +26,44 @@ public class IndexItem implements Comparable<IndexItem> {
 	long timestamp;
 	long contentSize;
 	long containerSize;
-	DownloadActivityType type;
 	boolean extra;
 	
 	// Update information
 	boolean outdated;
 	boolean downloaded;
 	long localTimestamp;
-	DownloadResourceGroup relatedGroup;
 
-
-	public IndexItem(String fileName, String description, long timestamp, String size, long contentSize,
-			long containerSize, @NonNull DownloadActivityType tp) {
+	public IndexItem(String fileName,
+	                 String description,
+	                 long timestamp,
+	                 String size,
+	                 long contentSize,
+	                 long containerSize,
+	                 @NonNull DownloadActivityType type) {
+		super(type);
 		this.fileName = fileName;
 		this.description = description;
 		this.timestamp = timestamp;
 		this.size = size;
 		this.contentSize = contentSize;
 		this.containerSize = containerSize;
-		this.type = tp;
 	}
 
-	public DownloadActivityType getType() {
-		return type;
-	}
-	
-	public void setRelatedGroup(DownloadResourceGroup relatedGroup) {
-		this.relatedGroup = relatedGroup;
-	}
-	
-	public DownloadResourceGroup getRelatedGroup() {
-		return relatedGroup;
-	}
-
+	@Override
 	public String getFileName() {
 		return fileName;
 	}
 
+	@NonNull
+	@Override
+	public List<File> getDownloadedFiles(OsmandApplication app) {
+		File targetFile = getTargetFile(app);
+		List<File> result = new ArrayList<>();
+		if (targetFile.exists()) {
+			result.add(targetFile);
+		}
+		return result;
+	}
 
 	public String getDescription() {
 		return description;
@@ -89,10 +89,14 @@ public class IndexItem implements Comparable<IndexItem> {
 		return ((double)containerSize) / (1 << 20);
 	}
 
-	public String getSizeDescription(Context ctx) {
-		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, "MB");
+	@Override
+	protected double getSizeToDownloadInMb() {
+		try {
+			return Double.parseDouble(size);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
-	
 
 	public DownloadEntry createDownloadEntry(OsmandApplication ctx) {
 		String fileName = this.fileName;
@@ -132,11 +136,8 @@ public class IndexItem implements Comparable<IndexItem> {
 		return type.getTargetFileName(this);
 	}
 
-	public String getBasename() {
-		return type.getBasename(this);
-	}
-
-	public File getTargetFile(OsmandApplication ctx) {
+	@NonNull
+	public File getTargetFile(@NonNull OsmandApplication ctx) {
 		String basename = getTranslatedBasename();
 		return new File(type.getDownloadFolder(ctx, this), basename + type.getUnzipExtension(ctx, this));
 	}
@@ -190,7 +191,7 @@ public class IndexItem implements Comparable<IndexItem> {
 				&& getType() != DownloadActivityType.HILLSHADE_FILE
 				&& getType() != DownloadActivityType.SLOPE_FILE;
 	}
-	
+
 	public void setOutdated(boolean outdated) {
 		this.outdated = outdated;
 	}
@@ -198,7 +199,12 @@ public class IndexItem implements Comparable<IndexItem> {
 	public void setDownloaded(boolean downloaded) {
 		this.downloaded = downloaded;
 	}
-	
+
+	@Override
+	public boolean hasActualDataToDownload() {
+		return !isDownloaded() || isOutdated();
+	}
+
 	public void setLocalTimestamp(long localTimestamp) {
 		this.localTimestamp = localTimestamp;
 	}
@@ -211,19 +217,10 @@ public class IndexItem implements Comparable<IndexItem> {
 		return downloaded;
 	}
 
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
-		return type.getVisibleName(this, ctx, osmandRegions, true);
+	@Override
+	public boolean isDownloading(DownloadIndexesThread thread) {
+		return thread.isDownloading(this);
 	}
-
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
-		return type.getVisibleName(this, ctx, osmandRegions, includingParent);
-	}
-
-	public String getVisibleDescription(OsmandApplication clctx) {
-		return type.getVisibleDescription(this, clctx);
-	}
-
-	
 
 	public String getDate(java.text.DateFormat format) {
 		return format.format(new Date(timestamp));

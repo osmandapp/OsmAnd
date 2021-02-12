@@ -56,7 +56,8 @@ public class CustomIndexItem extends IndexItem {
 	}
 
 	@Override
-	public File getTargetFile(OsmandApplication ctx) {
+	@NonNull
+	public File getTargetFile(@NonNull OsmandApplication ctx) {
 		String basename = getTranslatedBasename();
 		if (!Algorithms.isEmpty(subfolder)) {
 			basename = subfolder + "/" + basename;
