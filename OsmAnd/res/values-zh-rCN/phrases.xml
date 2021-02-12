@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="poi_fuel_avia_type"/>
+    <string name="poi_fuel_avia_type">燃料类型（avia）</string>
     <string name="poi_payment_type">支付类别</string>
     <string name="poi_clothes_type">类型</string>
     <string name="poi_shoes_type">类型</string>
@@ -285,7 +285,7 @@
     <string name="poi_xmas">圣诞节</string>
     <string name="poi_xmas_shop">圣诞店</string>
     <string name="poi_xmas_tree">圣诞树</string>
-    <string name="poi_cuisine_pizza">比萨</string>
+    <string name="poi_cuisine_pizza">披萨</string>
     <string name="poi_cuisine_burger">汉堡</string>
     <string name="poi_cuisine_coffee">咖啡</string>
     <string name="poi_cuisine_sandwich">三明治</string>
@@ -733,4 +733,36 @@
     <string name="poi_physiotherapist">物理治疗师</string>
     <string name="poi_trees_rubber">橡胶</string>
     <string name="poi_resource_mineral_oil">矿物油</string>
+    <string name="poi_seasonal_wet_season">雨季</string>
+    <string name="poi_seasonal_dry_season">旱季</string>
+    <string name="poi_brand">品牌</string>
+    <string name="poi_operator">经营者</string>
+    <string name="poi_cuisine">菜品</string>
+    <string name="poi_motorcycle_type">摩托车类型</string>
+    <string name="poi_vacuum_cleaner_filter">吸尘器</string>
+    <string name="poi_compressed_air_filter">压缩空气</string>
+    <string name="poi_social_facility_for">目标群体</string>
+    <string name="poi_medical_system">医疗系统</string>
+    <string name="poi_tents">帐篷</string>
+    <string name="poi_massage_type">按摩类型</string>
+    <string name="poi_diet">饮食</string>
+    <string name="poi_nudism">裸体主义</string>
+    <string name="poi_beach_surface_type">表面</string>
+    <string name="poi_seasonal">季节性</string>
+    <string name="poi_fireplace">壁炉</string>
+    <string name="poi_drive_through">驾车经过</string>
+    <string name="poi_delivery">交货</string>
+    <string name="poi_piste_difficulty">滑雪道难度</string>
+    <string name="poi_backcountry">偏远地区</string>
+    <string name="poi_scout_camp">童子军营地</string>
+    <string name="poi_information_contents">内容</string>
+    <string name="poi_star_rating">星级</string>
+    <string name="poi_city_capital">首都</string>
+    <string name="poi_pump">泵</string>
+    <string name="poi_ferry_terminal_cargo">货物</string>
+    <string name="poi_covered">已覆盖</string>
+    <string name="poi_vending_type">自动售货机类型</string>
+    <string name="poi_resource_slate_iron_ore_copper">板岩；铁矿石；铜</string>
+    <string name="poi_craft_scaffolder">脚手架</string>
+    <string name="poi_wreck">沉船</string>
 </resources>
