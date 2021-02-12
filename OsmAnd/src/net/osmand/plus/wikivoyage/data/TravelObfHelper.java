@@ -115,47 +115,49 @@ public class TravelObfHelper implements TravelHelper {
 	public synchronized List<TravelArticle> loadPopularArticles() {
 		String lang = app.getLanguage();
 		List<TravelArticle> popularArticles = new ArrayList<>(this.popularArticles);
-		if (foundAmenities.size() - foundAmenitiesIndex < MAX_POPULAR_ARTICLES_COUNT) {
-			final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
-			for (final BinaryMapIndexReader reader : getReaders()) {
-				try {
-					searchAmenity(foundAmenities, location, reader, searchRadius, -1, ROUTE_ARTICLE);
-					searchAmenity(foundAmenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK);
-				} catch (Exception e) {
-					LOG.error(e.getMessage(), e);
-				}
-			}
-			if (foundAmenities.size() > 0) {
-				Collections.sort(foundAmenities, new Comparator<Pair<File, Amenity>>() {
-					@Override
-					public int compare(Pair article1, Pair article2) {
-						Amenity amenity1 = (Amenity) article1.second;
-						double d1 = MapUtils.getDistance(amenity1.getLocation(), location)
-								/ (ROUTE_ARTICLE.equals(amenity1.getSubType()) ? 5 : 1);
-						Amenity amenity2 = (Amenity) article2.second;
-						double d2 = MapUtils.getDistance(amenity2.getLocation(), location)
-								/ (ROUTE_ARTICLE.equals(amenity2.getSubType()) ? 5 : 1);
-						return Double.compare(d1, d2);
-					}
-				});
-			}
-			searchRadius *= 2;
-		}
-
-		int pagesCount = popularArticles.size() / MAX_POPULAR_ARTICLES_COUNT;
-		while (foundAmenitiesIndex < foundAmenities.size() - 1) {
-			Pair<File, Amenity> amenity = foundAmenities.get(foundAmenitiesIndex);
-			if (!Algorithms.isEmpty(amenity.second.getName(lang))) {
-				TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
-				if (article != null && !popularArticles.contains(article)) {
-					popularArticles.add(article);
-					if (popularArticles.size() >= (pagesCount + 1) * MAX_POPULAR_ARTICLES_COUNT) {
-						break;
+		int pagesCount;
+		do {
+			if (foundAmenities.size() - foundAmenitiesIndex < MAX_POPULAR_ARTICLES_COUNT) {
+				final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
+				for (final BinaryMapIndexReader reader : getReaders()) {
+					try {
+						searchAmenity(foundAmenities, location, reader, searchRadius, -1, ROUTE_ARTICLE);
+						searchAmenity(foundAmenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK);
+					} catch (Exception e) {
+						LOG.error(e.getMessage(), e);
 					}
 				}
+				if (foundAmenities.size() > 0) {
+					Collections.sort(foundAmenities, new Comparator<Pair<File, Amenity>>() {
+						@Override
+						public int compare(Pair article1, Pair article2) {
+							Amenity amenity1 = (Amenity) article1.second;
+							double d1 = MapUtils.getDistance(amenity1.getLocation(), location)
+									/ (ROUTE_ARTICLE.equals(amenity1.getSubType()) ? 5 : 1);
+							Amenity amenity2 = (Amenity) article2.second;
+							double d2 = MapUtils.getDistance(amenity2.getLocation(), location)
+									/ (ROUTE_ARTICLE.equals(amenity2.getSubType()) ? 5 : 1);
+							return Double.compare(d1, d2);
+						}
+					});
+				}
+				searchRadius *= 2;
 			}
-			foundAmenitiesIndex++;
-		}
+			pagesCount = popularArticles.size() / MAX_POPULAR_ARTICLES_COUNT;
+			while (foundAmenitiesIndex < foundAmenities.size() - 1) {
+				Pair<File, Amenity> amenity = foundAmenities.get(foundAmenitiesIndex);
+				if (!Algorithms.isEmpty(amenity.second.getName(lang))) {
+					TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
+					if (article != null && !popularArticles.contains(article)) {
+						popularArticles.add(article);
+						if (popularArticles.size() >= (pagesCount + 1) * MAX_POPULAR_ARTICLES_COUNT) {
+							break;
+						}
+					}
+				}
+				foundAmenitiesIndex++;
+			}
+		} while (popularArticles.size() < (pagesCount + 1) * MAX_POPULAR_ARTICLES_COUNT);
 		this.popularArticles = popularArticles;
 		return popularArticles;
 	}
