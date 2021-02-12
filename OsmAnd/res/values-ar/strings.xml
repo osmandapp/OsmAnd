@@ -3736,7 +3736,7 @@
     <string name="default_screen_timeout">مهلة الشاشة الافتراضية</string>
     <string name="export_import_quick_actions_with_profiles_promo">يمكنك تصدير أو استيراد إجراءات سريعة باستخدام أوضاع التطبيق .</string>
     <string name="shared_string_delete_all_q">حذف الكل؟</string>
-    <string name="delete_all_actions_message_q">حذف الاختصارات السريعة %d نهائيًا؟</string>
+    <string name="delete_all_actions_message_q">هل أنت متأكد من رغبتك في حذف الاختصارات السريعة %d نهائيًا؟</string>
     <string name="screen_timeout">مهلة الشاشة</string>
     <string name="shared_string_tones">نغمات</string>
     <string name="width_limit_description">أدل بعرض مركبتك، قد يتم تطبيق بعض القيود على المركبات العريضة.</string>
@@ -3793,7 +3793,7 @@
     <string name="osm_edit_closed_note">أغلق ملاحظة OSM</string>
     <string name="set_working_days_to_continue">تحتاج إلى تعيين أيام العمل للمتابعة</string>
     <string name="route_between_points">المسار بين النقاط</string>
-    <string name="plan_a_route">تخطيط لطريق</string>
+    <string name="plan_a_route">قياس المسافة</string>
     <string name="add_to_a_track">إضافة إلى مسار</string>
     <string name="add_hidden_group_info">لن تكون النقطة المضافة مرئية على الخريطة، نظرًا لأن المجموعة المحددة مخفية، يمكنك العثور عليها في \"%s\".</string>
     <string name="track_show_start_finish_icons">إظهار رموز البدء والانتهاء</string>
@@ -3819,7 +3819,7 @@
     <string name="route_between_points_desc">حدد كيفية توصيل النقاط، بخط مستقيم، أو حساب مسار بينها على النحو المحدد أدناه.</string>
     <string name="whole_track">مسار كامل</string>
     <string name="next_segment">المقطع التالي</string>
-    <string name="route_between_points_warning_desc">بعد ذلك ، التقط مسارك بأقرب طريق مسموح به باستخدام أحد أوضاع التنقل الخاصة بك لاستخدام هذا الخيار.</string>
+    <string name="route_between_points_warning_desc">بعد ذلك ، ألقط مسارك بأقرب طريق مسموح به باستخدام أحد أوضاع التنقل الخاصة بك لاستخدام هذا الخيار.</string>
     <string name="threshold_distance">بداية المسافة</string>
     <string name="street_level_imagery">صور للشارع</string>
     <string name="plan_route_exit_dialog_descr">هل أنت متأكد أنك تريد إغلاق مسار الرحلة دون حفظ؟ سوف تفقد كل التغييرات؟</string>
