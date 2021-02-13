@@ -32,6 +32,7 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GpxBlockStatisticsBuilder {
@@ -232,12 +233,10 @@ public class GpxBlockStatisticsBuilder {
 		public void onBindViewHolder(BlockStatisticsViewHolder holder, int position) {
 			final StatBlock item = items.get(position);
 			holder.valueText.setText(item.value);
-			holder.titleText.setText(item.title);
-			if (updateRunning) {
-				holder.titleText.setWidth(app.getResources().getDimensionPixelSize(R.dimen.map_route_buttons_width));
-			}
 			holder.valueText.setTextColor(activeColor);
+			holder.titleText.setText(item.title);
 			holder.titleText.setTextColor(app.getResources().getColor(R.color.text_color_secondary_light));
+			holder.titleText.setWidth(calculateWidthWithin(item.title, item.value));
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -269,6 +268,14 @@ public class GpxBlockStatisticsBuilder {
 			this.items.addAll(items);
 			notifyDataSetChanged();
 		}
+	}
+
+	public int calculateWidthWithin(String... texts) {
+		int textSize = app.getResources().getDimensionPixelSize(R.dimen.default_desc_text_size);
+		int textWidth = AndroidUtils.getTextMaxWidth(textSize, Arrays.asList(texts));
+		int minWidth = AndroidUtils.dpToPx(app, 60);
+		int maxWidth = AndroidUtils.dpToPx(app, 120);
+		return Math.min(maxWidth, Math.max(minWidth, textWidth));
 	}
 
 	private class BlockStatisticsViewHolder extends RecyclerView.ViewHolder {

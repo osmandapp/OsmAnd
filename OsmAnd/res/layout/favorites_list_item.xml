@@ -93,6 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+					android:layout_marginTop="1sp"
                     android:contentDescription="@string/show_view_angle"
                     osmand:srcCompat="@drawable/ic_direction_arrow" />
 
