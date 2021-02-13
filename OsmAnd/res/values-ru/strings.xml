@@ -4012,4 +4012,10 @@
     <string name="login_open_place_reviews">Вход в OpenPlaceReviews</string>
     <string name="activity_type_snowmobile_name">Снегоход</string>
     <string name="activity_type_mountainbike_name">Горный велосипед</string>
+    <string name="routing_engine_vehicle_type_driving">Вождение</string>
+    <string name="routing_engine_vehicle_type_foot">Пешком</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Вода</string>
+    <string name="activity_type_winter_name">Зима</string>
+    <string name="activity_type_riding_name">Верховая езда</string>
 </resources>
