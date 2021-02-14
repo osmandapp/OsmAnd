@@ -538,7 +538,7 @@
     <string name="general_settings_descr">配置应用的显示与公用设置。</string>
     <string name="global_app_settings">应用程序全局设置</string>
     <string name="download_files_not_enough_space">可用空间不足以下载 %1$s MB (可用空间：%2$s)。</string>
-    <string name="download_files_question_space">下载 {0} 个文件？ 
+    <string name="download_files_question_space">下载 {0} 个文件？
 \n 将使用 {1} MB（共有{2} MB）。</string>
     <string name="use_transparent_map_theme">透明主题</string>
     <string name="native_library_not_supported">此设备不支持本地库。</string>
@@ -1308,7 +1308,6 @@
     <string name="distance_moving">距离已修正</string>
     <string name="no_photos_descr">这里没有照片。</string>
     <string name="routing_attr_short_way_name">节油道路</string>
-    <string name="routing_attr_short_way_description">使用节油道路（通常更短）。</string>
     <string name="configure_screen_quick_action">快捷操作</string>
     <string name="shared_string_show_all">显示全部</string>
     <string name="osmand_plus_short_description_80_chars">全球移动地图浏览，以及使用离线和在线 OSM 地图进行导航</string>
