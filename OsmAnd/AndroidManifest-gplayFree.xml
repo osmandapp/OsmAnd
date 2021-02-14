@@ -4,7 +4,7 @@
 
     <application
         android:icon="@mipmap/icon_free"
-		android:label="@string/app_name_free"
+		android:label="@string/app_name"
         tools:replace="android:icon, android:label">
 
         <meta-data

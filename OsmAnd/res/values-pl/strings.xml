@@ -4005,4 +4005,25 @@
     <string name="uploading_count">Przesyłanie %1$d z %2$d</string>
     <string name="uploaded_count">Przesłano %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Wybierz zmiany do przesłania</string>
+    <string name="hillshade_slope_contour_lines">Wzniesienia / Nachylenie / Linie konturowe</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews to społeczny projekt dotyczący miejsc publicznych, takich jak restauracje, hotele, muzea, punkty trasy. Gromadzi wszystkie publiczne informacje o nich, takie jak zdjęcia, recenzje, linki do innych systemów, link OpenStreetMap, Wikipedia.
+\n
+\nWszystkie dane OpenPlaceReview są otwarte i dostępne dla każdego: http://openplacereviews.org/data.
+\n
+\nMożesz przeczytać więcej na: http://openplacereviews.org</string>
+    <string name="opr_use_dev_url">Użyj test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Zaloguj się do OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Woda</string>
+    <string name="activity_type_winter_name">Zima</string>
+    <string name="activity_type_snowmobile_name">Skuter</string>
+    <string name="activity_type_riding_name">Jazda konna</string>
+    <string name="activity_type_racing_name">Wyścigi</string>
+    <string name="activity_type_mountainbike_name">Kolarstwo górskie</string>
+    <string name="activity_type_cycling_name">Kolarstwo</string>
+    <string name="activity_type_hiking_name">Turystyka piesza</string>
+    <string name="activity_type_running_name">Bieganie</string>
+    <string name="activity_type_walking_name">Pieszo</string>
+    <string name="activity_type_motorbike_name">Motocykl</string>
+    <string name="activity_type_offroad_name">Poza drogą</string>
+    <string name="activity_type_car_name">Samochód</string>
 </resources>

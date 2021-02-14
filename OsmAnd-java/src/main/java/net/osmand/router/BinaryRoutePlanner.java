@@ -658,7 +658,7 @@ public class BinaryRoutePlanner {
 							break;
 						}
 					}
-					if (rv == viaId && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+					if (rv == viaId && via && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
 						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
 						break;
 					}
@@ -675,7 +675,7 @@ public class BinaryRoutePlanner {
 						}
 					}
 
-					if (rv == viaId && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+					if (rv == viaId && via && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
 						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
 						break;
 					}

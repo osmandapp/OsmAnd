@@ -333,6 +333,17 @@ public class WikiArticleHelper {
 		return res.toString();
 	}
 
+	@Nullable
+	public static String getFirstParagraph(String descriptionHtml) {
+		if (descriptionHtml != null) {
+			String firstParagraph = WikiArticleHelper.getPartialContent(descriptionHtml);
+			if (!Algorithms.isEmpty(firstParagraph)) {
+				return firstParagraph;
+			}
+		}
+		return descriptionHtml;
+	}
+
 	public static String buildTravelUrl(String url, String lang) {
 		String title = url.replace(" ", "_");
 		try {

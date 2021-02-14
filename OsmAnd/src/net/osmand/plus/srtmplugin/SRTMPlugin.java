@@ -307,9 +307,8 @@ public class SRTMPlugin extends OsmandPlugin {
 									item.setSelected(selected);
 									adapter.notifyDataSetChanged();
 								}
-								refreshMapComplete(mapActivity);
+								mapActivity.refreshMapComplete();
 							}
-
 						}
 					});
 				} else if (itemId == R.string.shared_string_terrain) {
@@ -328,7 +327,7 @@ public class SRTMPlugin extends OsmandPlugin {
 								adapter.notifyDataSetChanged();
 							}
 							updateLayers(mapView, mapActivity);
-							refreshMapComplete(mapActivity);
+							mapActivity.refreshMapComplete();
 						}
 					});
 				}
@@ -486,7 +485,7 @@ public class SRTMPlugin extends OsmandPlugin {
 						} else {
 							pref.set(possibleValues[which - 1]);
 						}
-						refreshMapComplete(activity);
+						activity.refreshMapComplete();
 					}
 				}
 		);
@@ -505,12 +504,6 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public void disable(OsmandApplication app) {
-	}
-
-	public static void refreshMapComplete(final MapActivity activity) {
-		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
-		activity.updateMapSettings();
-		activity.getMapView().refreshMap(true);
 	}
 
 	private static boolean isNightMode(Activity activity, OsmandApplication app) {

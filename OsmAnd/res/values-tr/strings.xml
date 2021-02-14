@@ -2225,7 +2225,7 @@
     <string name="marker_save_as_track_descr">İşaretleyicilerinizi şu GPX dosyasına aktarın:</string>
     <string name="show_arrows_on_the_map">Haritada yön gösterici okları göster</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd seçilmiş profil için rotalı noktalara bağlanacak.</string>
-    <string name="none_point_error">Lütfen en az bir nokta ekleyiniz.</string>
+    <string name="none_point_error">Lütfen en az bir nokta ekleyin.</string>
     <string name="measurement_tool_action_bar">Haritayı görüntüle ve nokta ekle</string>
     <string name="store_tracks_in_monthly_directories">Kaydedilmiş izlenen yolları aylık klasörlerde depola</string>
     <string name="mapillary_menu_filter_description">Resimleri göndericiye, tarihe ya da türüne göre filtreleyin. Sadece yakın mesafe yakınlaştırmasında etkin.</string>
@@ -3736,7 +3736,7 @@
     <string name="track_coloring_solid">Koyu</string>
     <string name="plan_route_last_edited">Son düzenleme</string>
     <string name="plan_route_import_track">Yolu içe aktar</string>
-    <string name="plan_route_open_existing_track">Mevcut yolu aç</string>
+    <string name="plan_route_open_existing_track">Var olan yolu aç</string>
     <string name="plan_route_create_new_route">Yeni güzergah oluştur</string>
     <string name="plan_route_select_track_file_for_open">Açmak için bir yol dosyası seçin.</string>
     <string name="shared_string_done">Bitti</string>
@@ -3965,7 +3965,7 @@
     <string name="select_folder">Klasör seç</string>
     <string name="select_folder_descr">Klasör seçin veya yeni bir tane ekleyin</string>
     <string name="shared_string_empty">Boş</string>
-    <string name="analyze_by_intervals">Aralıklara göre analiz et (bölme aralığı)</string>
+    <string name="analyze_by_intervals">Bölünmüş aralıkları analiz et</string>
     <string name="upload_to_openstreetmap">OpenStreetMap\'e yükle</string>
     <string name="edit_track">Yolu düzenle</string>
     <string name="rename_track">Yolu yeniden adlandır</string>
@@ -4009,4 +4009,26 @@
     <string name="uploading_count">%1$d / %2$d karşıya yükleniyor</string>
     <string name="uploaded_count">%1$d / %2$d karşıya yüklendi</string>
     <string name="toast_select_edits_for_upload">Karşıya yüklenecek düzenlemeleri seçin</string>
+    <string name="hillshade_slope_contour_lines">tepe gölgesi / yamaç / eş yükselti eğrileri</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews, restoranlar, oteller, müzeler, ara noktalar gibi halka açık yerler hakkında topluluk tarafından yürütülen bir projedir. Fotoğraflar, yorumlar, OpenStreetMap, Wikipedia gibi diğer sistemlere bağlantılar gibi onlar hakkındaki tüm halka açık bilgileri toplar.
+\n
+\nTüm OpenPlaceReview verileri açık ve herkes tarafından kullanılabilir: http://openplacereviews.org/data
+\n
+\nDaha fazlasını şu adresten okuyabilirsiniz: http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">test.openplacereviews.org adresini kullan</string>
+    <string name="login_open_place_reviews">OpenPlaceReviews\'te oturum aç</string>
+    <string name="activity_type_water_name">Su</string>
+    <string name="activity_type_winter_name">Kış</string>
+    <string name="activity_type_snowmobile_name">Kar arabası</string>
+    <string name="activity_type_riding_name">Binme</string>
+    <string name="activity_type_racing_name">Yarış</string>
+    <string name="activity_type_mountainbike_name">Dağ bisikleti</string>
+    <string name="activity_type_cycling_name">Bisiklet sürme</string>
+    <string name="activity_type_hiking_name">Yürüyüş</string>
+    <string name="activity_type_running_name">Koşma</string>
+    <string name="activity_type_walking_name">Yürüme</string>
+    <string name="activity_type_offroad_name">Arazi</string>
+    <string name="activity_type_motorbike_name">Motosiklet</string>
+    <string name="activity_type_car_name">Araba</string>
 </resources>

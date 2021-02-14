@@ -228,9 +228,9 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		}
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
-			MapActivity a = (MapActivity) activity;
-			ConfigureMapMenu.refreshMapComplete(a);
-			a.getMapLayers().updateLayers(a.getMapView());
+			MapActivity mapActivity = (MapActivity) activity;
+			mapActivity.refreshMapComplete();
+			mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
 		}
 		super.onDismiss(dialog);
 	}

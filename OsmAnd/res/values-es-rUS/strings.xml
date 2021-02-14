@@ -771,25 +771,25 @@
 \n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
-\n 
-\nOsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz. 
-\n 
-\n OsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
-\n 
-\n Algunas de las funciones fundamentales: 
-\n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
-\n - Mapas mundiales vectoriales compactos disponibles 
-\n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación 
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-\n 
-\n - Búsqueda sin conexión de direcciones y sitios (PDI) 
-\n - Rutas sin conexión para distancias de rango medio 
-\n - Modos de automóvil, bicicleta y peatón con opcional: 
-\n - Cambio automático de modo diurno/nocturno 
-\n - Zoom del mapa según la velocidad 
-\n - Alineación del mapa, según brújula o dirección del movimiento 
-\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)
+\n
+\n OsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz.
+\n
+\n OsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones.
+\n
+\n Algunas de las funciones fundamentales:
+\n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
+\n - Mapas mundiales vectoriales compactos disponibles
+\n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación
+\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+\n
+\n - Búsqueda sin conexión de direcciones y sitios (PDI)
+\n - Rutas sin conexión para distancias de rango medio
+\n - Modos de automóvil, bicicleta y peatón con opcional:
+\n - Cambio automático de modo diurno/nocturno
+\n - Zoom del mapa según la velocidad
+\n - Alineación del mapa, según brújula o dirección del movimiento
+\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
 \n</string>
     <string name="filterpoi_activity">Crear filtro PDI</string>
     <string name="recalculate_route_to_your_location">Modo transporte:</string>
@@ -1221,8 +1221,7 @@
     <string name="osmand_net_previously_installed">Todos los datos sin conexión en la versión vieja de OsmAnd son compatibles con la nueva versión, pero los puntos de Favoritos deben exportarse desde la versión vieja y luego, importarse en la nueva.</string>
     <string name="build_installed">Compilación {0} instalada ({1}).</string>
     <string name="downloading_build">Descargando compilación…</string>
-    <string name="install_selected_build">¿Instalar OsmAnd?
-\nVersión: {0}
+    <string name="install_selected_build">¿Instalar OsmAnd {0}\?
 \nFecha: {1}
 \nTamaño: {2} MB</string>
     <string name="loading_builds_failed">Error al recuperar la lista de compilaciones de OsmAnd</string>
@@ -2061,7 +2060,7 @@
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="gpx_no_tracks_title">Sin archivos de trazas aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos de trazas a la carpeta</string>
-    <string name="gpx_add_track">Añadir GPX</string>
+    <string name="gpx_add_track">Añadir más…</string>
     <string name="shared_string_appearance">Aspecto</string>
     <string name="rendering_value_fine_name">Muy fino</string>
     <string name="route_calculation">Cálculo de la ruta</string>
@@ -2436,7 +2435,7 @@
     <string name="average">Promedio</string>
     <string name="of">%1$d de %2$d</string>
     <string name="ascent_descent">Ascenso/Descenso</string>
-    <string name="moving_time">Tiempo moviéndose</string>
+    <string name="moving_time">Tiempo en movimiento</string>
     <string name="max_min">Máx/Min</string>
     <string name="min_max">Min/Máx</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
@@ -3648,7 +3647,7 @@
     <string name="system_screen_timeout">Usar el tiempo de espera de la pantalla del sistema</string>
     <string name="storage_format">Formato de almacenamiento</string>
     <string name="sqlite_db_file">Archivo SQLiteDB</string>
-    <string name="shared_string_tones">tonos</string>
+    <string name="shared_string_tones">toneladas</string>
     <string name="shared_string_night_map">Mapa nocturno</string>
     <string name="shared_string_meters">metros</string>
     <string name="shared_string_delete_all_q">¿Borrar todo\?</string>
@@ -3726,8 +3725,8 @@
     <string name="route_between_points">Ruta entre puntos</string>
     <string name="plan_a_route">Planificar ruta</string>
     <string name="osm_edit_closed_note">Nota de OSM cerrada</string>
-    <string name="gpx_split_interval_none_descr">Marca la opción de división deseada: por tiempo o por distancia.</string>
-    <string name="gpx_split_interval_descr">Marca el intervalo en el que se mostrarán las marcas con distancia o tiempo en la traza.</string>
+    <string name="gpx_split_interval_none_descr">Elige la opción de división deseada: por tiempo o por distancia.</string>
+    <string name="gpx_split_interval_descr">Elige el intervalo de la traza en el que se mostrarán las marcas con la distancia o el tiempo.</string>
     <string name="gpx_direction_arrows">Flechas de dirección</string>
     <string name="app_mode_wheelchair_forward">Silla de ruedas (hacia adelante)</string>
     <string name="app_mode_wheelchair">Silla de ruedas</string>
@@ -3944,32 +3943,93 @@
     <string name="profile_type_user_string">Perfil de usuario</string>
     <string name="profile_type_osmand_string">Perfil de OsmAnd</string>
     <string name="profile_by_default_description">Elige el perfil que será usado al iniciar la aplicación.</string>
-    <string name="voice_prompts_timetable">Tiempo de indicaciones por voz</string>
+    <string name="voice_prompts_timetable">Tiempo de los avisos por voz</string>
     <string name="select_folder">Elegir carpeta</string>
     <string name="shared_string_folders">Carpetas</string>
     <string name="change_folder">Cambiar carpeta</string>
-    <string name="add_online_routing_engine"></string>
-    <string name="edit_online_routing_engine"></string>
-    <string name="shared_string_subtype"></string>
-    <string name="shared_string_vehicle"></string>
-    <string name="shared_string_api_key"></string>
-    <string name="shared_string_server_url"></string>
-    <string name="shared_string_enter_param"></string>
-    <string name="keep_it_empty_if_not"></string>
-    <string name="online_routing_example_hint"></string>
-    <string name="test_route_calculation"></string>
-    <string name="routing_engine_vehicle_type_driving"></string>
-    <string name="routing_engine_vehicle_type_foot"></string>
-    <string name="routing_engine_vehicle_type_bike"></string>
-    <string name="routing_engine_vehicle_type_car"></string>
-    <string name="message_error_recheck_parameters"></string>
-    <string name="copy_address"></string>
-    <string name="online_routing_engine"></string>
-    <string name="online_routing_engines"></string>
-    <string name="select_folder_descr"></string>
-    <string name="shared_string_empty"></string>
-    <string name="analyze_by_intervals"></string>
-    <string name="upload_to_openstreetmap"></string>
-    <string name="edit_track"></string>
-    <string name="rename_track"></string>
+    <string name="add_online_routing_engine">Añadir motor de navegación en línea</string>
+    <string name="edit_online_routing_engine">Editar motor de navegación en línea</string>
+    <string name="shared_string_subtype">Subtipo</string>
+    <string name="shared_string_vehicle">Vehículo</string>
+    <string name="shared_string_api_key">Clave de la API</string>
+    <string name="shared_string_server_url">URL del servidor</string>
+    <string name="shared_string_enter_param">Ingresa parámetro</string>
+    <string name="keep_it_empty_if_not">Si no, mantenerlo vacío</string>
+    <string name="online_routing_example_hint">La URL con todos los parámetros se verá así:</string>
+    <string name="test_route_calculation">Cálculo de la ruta de prueba</string>
+    <string name="routing_engine_vehicle_type_driving">Automóvil</string>
+    <string name="routing_engine_vehicle_type_foot">Peatón</string>
+    <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
+    <string name="routing_engine_vehicle_type_car">Automóvil</string>
+    <string name="message_error_recheck_parameters"/>
+    <string name="copy_address">Copiar dirección</string>
+    <string name="online_routing_engine">Motor de navegación en línea</string>
+    <string name="online_routing_engines">Motores de navegación en línea</string>
+    <string name="select_folder_descr">Elegir carpeta o añadir una nueva</string>
+    <string name="shared_string_empty">Vacío</string>
+    <string name="analyze_by_intervals">Analizar intervalos divididos</string>
+    <string name="upload_to_openstreetmap">Subir a OpenStreetMap</string>
+    <string name="edit_track">Editar traza</string>
+    <string name="rename_track">Renombrar traza</string>
+    <string name="uploading_count">Subiendo %1$d de %2$d</string>
+    <string name="uploaded_count">Se subieron %1$d de %2$d</string>
+    <string name="upload_photo_completed">Subida completa</string>
+    <string name="upload_photo">Subiendo</string>
+    <string name="toast_select_edits_for_upload">Marcar ediciones a subir</string>
+    <string name="start_recording">Iniciar grabación</string>
+    <string name="show_track_on_map">Mostrar traza en el mapa</string>
+    <string name="shared_string_turn">Girar</string>
+    <string name="shared_string_sec">seg</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Silla de ruedas</string>
+    <string name="routing_engine_vehicle_type_walking">Peatón</string>
+    <string name="routing_engine_vehicle_type_truck">Camión</string>
+    <string name="routing_engine_vehicle_type_small_truck">Camión pequeño</string>
+    <string name="routing_engine_vehicle_type_scooter">Motoneta</string>
+    <string name="routing_engine_vehicle_type_racingbike">Bicicleta de carreras</string>
+    <string name="routing_engine_vehicle_type_mtb">Bicicleta de montaña</string>
+    <string name="routing_engine_vehicle_type_hiking">Senderismo</string>
+    <string name="routing_engine_vehicle_type_hgv">Vehículos pesados</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Ciclismo de ruta</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Ciclismo regular</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Ciclismo de montaña</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Ciclismo eléctrico</string>
+    <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews es un proyecto impulsado por la comunidad sobre lugares públicos como restaurantes, hoteles, museos, puntos de referencia. Recoge toda la información pública sobre ellos como fotos, reseñas, enlaces a otros servicios como OpenStreetMap y Wikipedia.
+\n
+\nTodos los datos de OpenPlaceReviews son abiertos y están disponibles para todos: http://openplacereviews.org/data.
+\n
+\nPuedes leer más en: https://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="message_server_error">Error de servidor: %1$s</string>
+    <string name="message_name_is_already_exists">El nombre ya existe</string>
+    <string name="login_open_place_reviews">Acceder a OpenPlaceReviews</string>
+    <string name="hillshade_slope_contour_lines">Sombreado / Pendiente / Curvas de nivel</string>
+    <string name="delete_waypoints">Borrar puntos de referencia</string>
+    <string name="delete_online_routing_engine">¿Borrar este motor de navegación en línea\?</string>
+    <string name="copy_to_map_markers">Copiar a «Marcadores del mapa»</string>
+    <string name="copy_to_map_favorites">Copiar a favoritos</string>
+    <string name="context_menu_read_full">Leer completo</string>
+    <string name="context_menu_edit_descr">Editar descripción</string>
+    <string name="announcement_time_title">Tiempo de anuncio</string>
+    <string name="announcement_time_prepare_long">Preparación larga</string>
+    <string name="announcement_time_prepare">Preparar</string>
+    <string name="announcement_time_passing">Pasando</string>
+    <string name="announcement_time_off_route">Fuera de la ruta</string>
+    <string name="announcement_time_intervals">Intervalos de tiempo y distancia</string>
+    <string name="announcement_time_descr">El tiempo de anuncio de las diferentes indicaciones por voz depende del tipo de mensaje, la velocidad de navegación actual y la velocidad de navegación predefinida.</string>
+    <string name="announcement_time_arrive">Has llegado al destino</string>
+    <string name="announcement_time_approach">Acercarse</string>
+    <string name="activity_type_winter_name">Invierno</string>
+    <string name="activity_type_water_name">Agua</string>
+    <string name="activity_type_walking_name">Peatón</string>
+    <string name="activity_type_snowmobile_name">Motonieve</string>
+    <string name="activity_type_running_name">Correr</string>
+    <string name="activity_type_riding_name">Equitación</string>
+    <string name="activity_type_racing_name">Carreras</string>
+    <string name="activity_type_offroad_name">Todo terreno</string>
+    <string name="activity_type_mountainbike_name">Bicicleta de montaña</string>
+    <string name="activity_type_motorbike_name">Motocicleta</string>
+    <string name="activity_type_hiking_name">Senderismo</string>
+    <string name="activity_type_cycling_name">Bicicleta</string>
+    <string name="activity_type_car_name">Automóvil</string>
 </resources>

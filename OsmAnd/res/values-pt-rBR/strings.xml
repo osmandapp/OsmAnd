@@ -217,7 +217,7 @@
     <string name="proxy_pref_descr">Especifique um servidor proxy.</string>
     <string name="settings_privacy">Privacidade</string>
     <string name="shared_string_gpx_points">Pontos</string>
-    <string name="navigation_over_track">Iniciar a navegação pela trilha?</string>
+    <string name="navigation_over_track">Iniciar a navegação ao longo da trilha\?</string>
     <string name="speak_pedestrian">Faixas de pedestre</string>
     <string name="rendering_attr_roadStyle_name">Estilo das vias</string>
     <string name="avoid_roads_msg">Obter uma rota alternativa, selecionando quais vias evitar</string>
@@ -4004,4 +4004,25 @@
     <string name="uploaded_count">Carregado %1$d de %2$d</string>
     <string name="toast_select_edits_for_upload">Selecione as edições para carregamento</string>
     <string name="hillshade_slope_contour_lines">Sombras de relevo / Encostas / Curvas de nível</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews é um projeto conduzido pela comunidade sobre locais públicos como restaurantes, hotéis, museus, pontos de passagem. Ele coleta todas as informações públicas sobre eles, como fotos, comentários, links para outros sistemas, link OpenStreetMap, Wikipédia.
+\n
+\nTodos os dados do OpenPlaceReview estão abertos e disponíveis para todos: http://openplacereviews.org/data.
+\n
+\nVocê pode ler mais em: http://openplacereviews.org</string>
+    <string name="activity_type_motorbike_name">Motorbike</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Entrar para OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Água</string>
+    <string name="activity_type_winter_name">Inverno</string>
+    <string name="activity_type_snowmobile_name">Moto de neve</string>
+    <string name="activity_type_riding_name">Equitação</string>
+    <string name="activity_type_racing_name">Corrida</string>
+    <string name="activity_type_mountainbike_name">Mountainbike</string>
+    <string name="activity_type_cycling_name">Ciclismo</string>
+    <string name="activity_type_hiking_name">Caminhada</string>
+    <string name="activity_type_running_name">Corrida</string>
+    <string name="activity_type_walking_name">A pé</string>
+    <string name="activity_type_offroad_name">Fora de estrada</string>
+    <string name="activity_type_car_name">Carro</string>
 </resources>

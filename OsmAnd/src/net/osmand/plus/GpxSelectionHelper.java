@@ -209,9 +209,10 @@ public class GpxSelectionHelper {
 	}
 
 	public SelectedGpxFile getSelectedGPXFile(WptPt point) {
-		for (SelectedGpxFile g : selectedGPXFiles) {
-			if (g.getGpxFile().containsPoint(point)) {
-				return g;
+		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
+			GPXFile gpxFile = selectedGpxFile.getGpxFile();
+			if (gpxFile.containsPoint(point) || gpxFile.containsRoutePoint(point)) {
+				return selectedGpxFile;
 			}
 		}
 		return null;

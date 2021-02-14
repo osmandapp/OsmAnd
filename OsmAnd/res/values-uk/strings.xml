@@ -1391,7 +1391,7 @@
     <string name="settings_privacy">Приватність</string>
     <string name="shared_string_gpx_points">Точки</string>
     <string name="shared_string_my_location">Моя позиція</string>
-    <string name="navigation_over_track">Почати навігацію уздовж треку?</string>
+    <string name="navigation_over_track">Почати навігацію по треку\?</string>
     <string name="avoid_roads_msg">Прокласти альтернативний маршрут, вибравши дороги, яких варто уникати</string>
     <string name="speak_pedestrian">Пішохідні переходи</string>
     <string name="rendering_attr_roadStyle_name">Стиль доріг</string>
@@ -1823,7 +1823,7 @@
     <string name="starting_point">Відправна точка</string>
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
-    <string name="nm">мор.м.</string>
+    <string name="nm">nmi</string>
     <string name="nm_h">вузлів</string>
     <string name="update_time">Час оновлення</string>
     <string name="updates_size">Розмір оновлення</string>
@@ -4008,4 +4008,25 @@
     <string name="uploaded_count">Вивантажено %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Виберіть зміни для вивантаження</string>
     <string name="hillshade_slope_contour_lines">Рельєф місцевості / Схили / Горизонталі</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews — це громадський проєкт про громадські місця, такі як ресторани, готелі, музеї, точки шляху. Він збирає всі загальнодоступні дані про них, такі як світлини, відгуки, посилання на інші системи, посилання OpenStreetMap, Вікіпедія.
+\n
+\nУсі дані OpenPlaceReview відкриті та доступні всім: http://openplacereviews.org/data.
+\n
+\nВи можете прочитати більше за адресою: http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Використати test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Увійти до OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Вода</string>
+    <string name="activity_type_winter_name">Зима</string>
+    <string name="activity_type_snowmobile_name">Снігохід</string>
+    <string name="activity_type_riding_name">Їзда</string>
+    <string name="activity_type_racing_name">Перегони</string>
+    <string name="activity_type_walking_name">Ходьба</string>
+    <string name="activity_type_mountainbike_name">Гірський велосипед</string>
+    <string name="activity_type_offroad_name">Бездоріжжя</string>
+    <string name="activity_type_cycling_name">Їзда на велосипеді</string>
+    <string name="activity_type_hiking_name">піший туризм</string>
+    <string name="activity_type_running_name">Біг</string>
+    <string name="activity_type_car_name">Автомобіль</string>
+    <string name="activity_type_motorbike_name">Мотоцикл</string>
 </resources>

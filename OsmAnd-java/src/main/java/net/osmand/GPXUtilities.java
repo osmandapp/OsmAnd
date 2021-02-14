@@ -1255,6 +1255,10 @@ public class GPXUtilities {
 			return g;
 		}
 
+		public boolean containsRoutePoint(WptPt point) {
+			return getRoutePoints().contains(point);
+		}
+
 		public List<WptPt> getRoutePoints() {
 			List<WptPt> points = new ArrayList<>();
 			for (int i = 0; i < routes.size(); i++) {

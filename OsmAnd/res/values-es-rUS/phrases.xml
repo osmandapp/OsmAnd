@@ -844,7 +844,7 @@
     <string name="poi_nwn_ref">Nodo de red nacional de senderismo</string>
     <string name="poi_rwn_ref">Nodo de red regional de senderismo</string>
     <string name="poi_lwn_ref">Nodo de red local de senderismo</string>
-    <string name="poi_opening_hours">Horario de atención;Horario de apertura</string>
+    <string name="poi_opening_hours">Horario de apertura</string>
     <string name="poi_collection_times">Horario de recolección</string>
     <string name="poi_description">Descripción</string>
     <string name="poi_phone">Teléfono</string>
@@ -2723,7 +2723,7 @@
     <string name="poi_aquaculture_mussels">Acuicultura: mejillones</string>
     <string name="poi_min_age">Edad mínima</string>
     <string name="poi_organic_yes">Sí</string>
-    <string name="poi_organic_no">No</string>
+    <string name="poi_organic_no">Productos orgánicos: no</string>
     <string name="poi_organic_only">Únicamente</string>
     <string name="poi_traffic_mirror">Espejo de tráfico</string>
     <string name="poi_diplomatic_consulate">Consulado</string>
@@ -3582,7 +3582,7 @@
     <string name="poi_charcoal_pile">Carbonera;Pila de carbón</string>
     <string name="poi_historic_tank">Tanque histórico</string>
     <string name="poi_hookah_lounge">Bar de cachimbas;Salón Hookah</string>
-    <string name="poi_source_biomass">Fuente de energía: biomasa</string>
+    <string name="poi_generator_source_biomass">Fuente de energía: biomasa</string>
     <string name="poi_snowmobile_filter">Acceso para motonieves</string>
     <string name="poi_access_bus">Acceso para autobuses</string>
     <string name="poi_access_caravan">Acceso para caravanas</string>
@@ -3868,7 +3868,7 @@
     <string name="poi_lavoir">Lavadero público de ropa</string>
     <string name="poi_waste_transfer_station">Estación de transferencia de residuos</string>
     <string name="poi_weightbridge">Báscula puente</string>
-    <string name="poi_ranger_station">Estación de guardabosque</string>
+    <string name="poi_ranger_station">Estación de guardabosques</string>
     <string name="poi_water_source_lake">Lago</string>
     <string name="poi_water_source_river">Río</string>
     <string name="poi_water_source_well">Pozo</string>
@@ -3881,4 +3881,14 @@
     <string name="poi_wildlife_crossing_bat_bridge">Puente para murciélagos</string>
     <string name="poi_wildlife_crossing">Cruce de vida silvestre</string>
     <string name="poi_swimming_area">Área de natación</string>
+    <string name="poi_summit_register_yes">Registro de la cumbre: sí</string>
+    <string name="poi_summit_register_no">Registro de la cumbre: no</string>
+    <string name="poi_piste_status_open">Estado de la pista: abierto</string>
+    <string name="poi_piste_status_closed">Estado de la pista: cerrado</string>
+    <string name="poi_piste_ski_jump">Salto con esquís</string>
+    <string name="poi_piste_name">Nombre de la pista</string>
+    <string name="poi_patrolled_yes">Patrullado: sí</string>
+    <string name="poi_patrolled_no">Patrullado: no</string>
+    <string name="poi_mobile_library">Biblioteca móvil (parada)</string>
+    <string name="poi_gladed_yes">Arboleda: sí</string>
 </resources>
