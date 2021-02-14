@@ -279,7 +279,6 @@
     <string name="poi_filter_fuel">Gorivo</string>
     <string name="auto_zoom_map_descr">Približevanje zemljevida glede na hitrost vožnje (zemljevid se usklajuje s trenutnim mestom).</string>
     <string name="auto_zoom_map">Samodejna povečava zemljevida</string>
-    <string name="snap_to_road_descr">Med navigacijo pripni položaj na ceste.</string>
     <string name="snap_to_road">Pripni na cesto</string>
     <string name="osmand_short_description_80_chars">OsmAnd je odprtokodni program za navigacijo z uporabo shranjenih ali spletnih zemljevidov</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd je odprtokodni program za navigacijo z uporabo shranjenih ali spletnih zemljevidov</string>
@@ -1985,7 +1984,6 @@
     <string name="route_stops_before">%1$s se zaustavi pred</string>
     <string name="rendering_attr_hideOverground_name">Ne izriši nadzemnih zgradb</string>
     <string name="routing_attr_short_way_name">Pot z najmanjšo porabo goriva</string>
-    <string name="routing_attr_short_way_description">Prednostno izberi pot z najmanjšo porabo goriva (običajno najkrajša).</string>
     <string name="replace_favorite_confirmation">Ali ste prepričani, da želite zamenjati priljubljeno točko %1$s?</string>
     <string name="shared_string_change">Spremeni</string>
     <string name="get_started">Kako začeti ...</string>

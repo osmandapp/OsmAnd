@@ -742,7 +742,6 @@
     <string name="avoid_motorway">Sin autopistas</string>
     <string name="auto_zoom_map_descr">Nivel de zoom según la velocidad (mientras el mapa se sincroniza con la ubicación actual).</string>
     <string name="auto_zoom_map">Zoom automático del mapa</string>
-    <string name="snap_to_road_descr">Ajusta la ubicación al camino durante la navegación.</string>
     <string name="snap_to_road">Ajustar al camino</string>
     <string name="interrupt_music_descr">Las indicaciones por voz pausan la reproducción de música.</string>
     <string name="interrupt_music">Pausar música</string>
@@ -1992,7 +1991,6 @@
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
     <string name="routing_attr_short_way_name">Ruta de bajo consumo (corta)</string>
-    <string name="routing_attr_short_way_description">Usa la ruta de menor consumo en combustible (usualmente la más corta).</string>
     <string name="replace_favorite_confirmation">¿Reemplazar el Favorito «%1$s»?</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
@@ -3934,7 +3932,6 @@
     <string name="plan_route_add_new_segment">Añadir nuevo segmento</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemán (casual)</string>
-    <string name="elevation_data">Puedes usar los datos de elevación para tener en cuenta el ascenso y descenso del viaje</string>
     <string name="app_mode_light_aircraft">Avión ligero</string>
     <string name="shared_string_last_used">Usado por última vez</string>
     <string name="routing_attr_prefer_hiking_routes_name">Preferir rutas de senderismo</string>

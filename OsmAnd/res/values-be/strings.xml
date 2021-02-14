@@ -232,7 +232,6 @@
     <string name="avoid_motorway">Без аўтамагістраляў</string>
     <string name="auto_zoom_map_descr">Узровень павелічэння згодна вашай хуткасці (калі мапа сінхранізуецца з цяперашнім становішчам).</string>
     <string name="auto_zoom_map">Аўтаматычнае памяншэнне/павелічэнне</string>
-    <string name="snap_to_road_descr">Прывязвацца да дарог падчас навігацыі.</string>
     <string name="snap_to_road">Прывязвацца да дарог</string>
     <string name="osmand_play_title_30_chars">OsmAnd Мапы і навігацыя</string>
     <string name="osmand_short_description_80_chars">Прагляд глабальнай мабільнай мапы і навігатар для аўтаномных і сеціўных мапаў OSM</string>
@@ -2028,7 +2027,6 @@
     <string name="shared_string_change">Змяніць</string>
     <string name="get_started">Пачаць</string>
     <string name="routing_attr_short_way_name">Паліўна-ашчадны маршрут</string>
-    <string name="routing_attr_short_way_description">Разлічвае паліва-ашчадны маршрут (звычайна найкарацейшы).</string>
     <string name="replace_favorite_confirmation">Вы сапраўды хочаце замяніць улюбёную мясціну %1$s\?</string>
     <string name="update_all_maps_now">Абнавіць усе мапы зараз?</string>
     <string name="clear_tile_data">Ачысціць кэш сеціўных мапаў</string>

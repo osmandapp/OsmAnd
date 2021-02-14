@@ -1308,7 +1308,6 @@
     <string name="distance_moving">距离已修正</string>
     <string name="no_photos_descr">这里没有照片。</string>
     <string name="routing_attr_short_way_name">节油道路</string>
-    <string name="routing_attr_short_way_description">使用节油道路（通常更短）。</string>
     <string name="configure_screen_quick_action">快捷操作</string>
     <string name="shared_string_show_all">显示全部</string>
     <string name="osmand_plus_short_description_80_chars">全球移动地图浏览，以及使用离线和在线 OSM 地图进行导航</string>
@@ -1931,8 +1930,7 @@
     <string name="show_warnings_descr">配置交通警告（车速限制、强制停止、减速带），测速相机警告和车道信息</string>
     <string name="use_compass_navigation_descr">没有检测到朝向的时候使用罗盘。</string>
     <string name="auto_zoom_map_descr">根据你的速度（地图与当前的位置同步）自动缩放地图</string>
-    <string name="snap_to_road_descr">在导航过程中对齐道路的位置。</string>
-    <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) 
+    <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions)
 \n
 \n OsmAnd 是开放源代码的导航应用程序，访问各式各样的全球性 OpenStreetMap（简称 OSM 开放街道地图）数据。所有数据（矢量图或地图图砖）可存放于手机的记忆卡上，可用作离线与在线导航，包含转弯提醒
 \n (turn by turn) 语音导航。一些主要功能： - 完整的离线功能（存放下载的矢量图或地图图砖于设备存储器） - 提供细致的全球离线矢量数据 - 直接从应用程序下载各国或区域数据 - 可叠加不同的多种地图层于自订的透明度，如 GPX 或导航轨迹、兴趣点、我的收藏、公共运输站 - 离线查寻地址、场所 (POI) - 中程距离的离线使用路线 - 汽车、自行车、步行模式有下列选项： - 可选择自动日夜模式切换 - 可依据速度选择地图缩放 - 可依据罗盘或运动方向选择地图选择对齐方式 - 可选的车道引导、速限显示、使用真人语音或 TTS 语音 OsmAnd 免费版限制: - 地图下载数量  - 无法使用离线维基百科的 POI OsmAnd 正在积极开发我们的项目，并且它的更进一步发展依赖于提供资金的捐助，用以资助发展和新功能的测试。请考虑购买 OsmAnd+，或资助特定的新功能或在 osmand.net 网站上做一些一般捐助。 "</string>

@@ -32,7 +32,6 @@
     <string name="poi_filter_fuel">Palivo</string>
     <string name="add_tag">Pridať značku</string>
     <string name="btn_advanced_mode">Pokročilý režim…</string>
-    <string name="snap_to_road_descr">Prichytiť pozíciu k cestám počas navigácie.</string>
     <string name="snap_to_road">Prichytiť k ceste</string>
     <string name="avoid_motorway">Žiadne diaľnice</string>
     <string name="layer_map_appearance">Konfigurovať obrazovku</string>
@@ -1989,7 +1988,6 @@
     <string name="shared_string_change">Zmeniť</string>
     <string name="get_started">Začať</string>
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
-    <string name="routing_attr_short_way_description">Použiť ekonomickú trasu (obyčajne kratšia).</string>
     <string name="replace_favorite_confirmation">Naozaj chcete nahradiť Obľúbený bod %1$s?</string>
     <string name="skip_map_downloading">Preskočiť sťahovanie máp</string>
     <string name="skip_map_downloading_desc">Nemáte nainštalovanú žiadnu offline mapu. Môžete vybrať mapu zo zoznamu alebo stiahnuť mapy neskôr cez \"Menu - %1$s\".</string>
@@ -3914,7 +3912,6 @@
     <string name="gpx_upload_private_visibility_descr">\"Súkromná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale body trasy z nej v budú dostupné v neusporiadanom poradí cez verejné GPS rozhranie (API) bez časových pečiatok.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identifikovateľná\" znamená, že trasa sa zobrazí verejne vo vašich GPS stopách a vo verejných zoznamoch GPS stôp, tzn. iní používatelia budú môcť stiahnuť nespracovanú trasu a prepojiť su s vašim používateľkým menom. Verejné body trasy s časovými pečiatkami poskytované cez GPS rozhranie (API) budú odkazovať na vašu pôvodnú stránku s trasou.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Sledovateľná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale spracované body trasy s časovými pečiatkami (ktoré nie je možné spojiť s vami), budú dostupné na stiahnutie cez verejné GPS rozhranie (API).</string>
-    <string name="elevation_data">Údaje o nadmorskej výške môžete použiť na zaznamenanie stúpania / klesania vašej cesty</string>
     <string name="app_mode_light_aircraft">Ľahké lietadlo</string>
     <string name="plan_route_join_segments">Prepojte segmenty</string>
     <string name="plan_route_split_before">Rozdeliť predtým</string>

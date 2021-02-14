@@ -880,7 +880,6 @@
     <string name="non_optimal_route_calculation">Швидка побудова маршруту (можливо неоптимальна)</string>
     <string name="show_warnings_descr">Налаштування попередження про дорожній рух (обмеження швидкості, вимушені зупинки, штучні нерівності, тунелі), попередження про камери контролю швидкості, відомості про смуги руху.</string>
     <string name="avoid_motorway">Уник. автомагістралей</string>
-    <string name="snap_to_road_descr">Прив\'язуватися до доріг під час навігації.</string>
     <string name="snap_to_road">Прив’язуватися до доріг</string>
     <string name="osmand_short_description_80_chars">Перегляд та навігація в автономному та мережевому режимах мапами OSM</string>
     <string name="osmand_plus_short_description_80_chars">Перегляд та навігація в автономному та мережевому режимах мапами ОСМ</string>
@@ -2049,7 +2048,6 @@
     <string name="update_all_maps_now">Оновити усі мапи зараз?</string>
     <string name="clear_tile_data">Очистити кеш мережевих мап</string>
     <string name="routing_attr_short_way_name">Паливно-ефективний шлях</string>
-    <string name="routing_attr_short_way_description">Розраховувати паливо-ощадний маршрут (зазвичай найкоротший).</string>
     <string name="replace_favorite_confirmation">Ви впевнені, що хочете замінити закладку %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Надземні об’єкти</string>
     <string name="shared_string_change">Змінити</string>
@@ -3918,7 +3916,6 @@
     <string name="select_picture">Вибрати зображення</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Німецька (неформальна)</string>
-    <string name="elevation_data">Ви можете використовувати дані про висоту, щоб врахувати підйом/спуск у вашої подорожі</string>
     <string name="app_mode_light_aircraft">Легкий літак</string>
     <string name="plan_route_join_segments">Об’єднати сегменти</string>
     <string name="plan_route_split_before">Розділити перед</string>

@@ -356,7 +356,6 @@
     <string name="avoid_motorway">Peruna autostrada</string>
     <string name="auto_zoom_map_descr">Ismanniamentu mapa relativu a sa lestresa (si sa mapa est sincronizzata cun sa positzione currente).</string>
     <string name="auto_zoom_map">Ismanniamentu automàticu mapa</string>
-    <string name="snap_to_road_descr">Arrea sa positzione in subra de sos caminos durante sa navigatzione.</string>
     <string name="snap_to_road">Arrea in subra de sos caminos</string>
     <string name="interrupt_music_descr">Sos annùntzios vocales ponent sa mùsica in pàusa.</string>
     <string name="interrupt_music">Firma sa mùsica</string>
@@ -1989,7 +1988,6 @@
     <string name="advanced_coords_search">Chirca avantzada cun coordinadas</string>
     <string name="route_stops_before">%1$s firmadas in antis</string>
     <string name="routing_attr_short_way_name">Àndala prus de atòliu pro sos consumos</string>
-    <string name="routing_attr_short_way_description">Issèbera s\'àndala prus de atòliu pro sos consumos (sa prus curtza, de sòlitu).</string>
     <string name="replace_favorite_confirmation">Seguru ses de bòlere sostituire su preferidu %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Ogetos subra de terra</string>
     <string name="shared_string_change">Càmbia</string>
@@ -3916,7 +3914,6 @@
     <string name="select_picture">Ischerta un\'immàgine</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Tedescu (informale)</string>
-    <string name="elevation_data">Podes impreare sos datos de s\'artària pro valutare s\'Artziada / Achirrada pro su biàgiu tuo</string>
     <string name="app_mode_light_aircraft">Aèreu lèbiu</string>
     <string name="plan_route_join_segments">Auni sos segmentos</string>
     <string name="plan_route_split_before">Iscroba in antis de</string>
