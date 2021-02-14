@@ -127,6 +127,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
+	private final LocaleHelper localeHelper = new LocaleHelper(this);
 
 	// start variables
 	ResourceManager resourceManager;
@@ -166,7 +167,6 @@ public class OsmandApplication extends MultiDexApplication {
 	OprAuthHelper oprAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
-	LocaleHelper localeHelper = new LocaleHelper(this);
 
 	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -419,7 +419,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
+	public void onConfigurationChanged(@NonNull Configuration newConfig) {
 		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null && !newConfig.locale.getLanguage().equals(preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
@@ -434,12 +434,10 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public static final int PROGRESS_DIALOG = 5;
-
 	public void checkApplicationIsBeingInitialized(Activity activity, AppInitializeListener listener) {
 		// start application if it was previously closed
 		startApplication();
-		if(listener != null) {
+		if (listener != null) {
 			appInitializer.addListener(listener);
 		}
 	}
@@ -812,29 +810,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return s;
 	}
 
-	public String getCountry() {
-		String country;
-		Locale preferredLocale = localeHelper.getPreferredLocale();
-		if (preferredLocale != null) {
-			country = preferredLocale.getCountry();
-		} else {
-			country = Locale.getDefault().getCountry();
-		}
-		return country;
-	}
-	
 	public String getLanguage() {
-		String lang;
-		Locale preferredLocale = localeHelper.getPreferredLocale();
-		if (preferredLocale != null) {
-			lang = preferredLocale.getLanguage();
-		} else {
-			lang = Locale.getDefault().getLanguage();
-		}
-		if (lang != null && lang.length() > 3) {
-			lang = lang.substring(0, 2).toLowerCase();
-		}
-		return lang;
+		return localeHelper.getLanguage();
 	}
 
 	@Override

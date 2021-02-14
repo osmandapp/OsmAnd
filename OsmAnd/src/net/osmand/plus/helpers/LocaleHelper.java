@@ -12,13 +12,13 @@ import java.util.Locale;
 
 public class LocaleHelper implements StateChangedListener<String> {
 
-	private Resources localizedResources;
-	private Locale preferredLocale;
+	private final OsmandApplication app;
+
 	private Locale defaultLocale;
+	private Locale preferredLocale;
+	private Resources localizedResources;
 
 	private boolean needRestart = false;
-
-	private OsmandApplication app;
 
 	public LocaleHelper(OsmandApplication app) {
 		this.app = app;
@@ -83,6 +83,18 @@ public class LocaleHelper implements StateChangedListener<String> {
 		}
 	}
 
+	public Resources getLocalizedResources() {
+		return localizedResources;
+	}
+
+	public Locale getPreferredLocale() {
+		return preferredLocale;
+	}
+
+	public Locale getDefaultLocale() {
+		return defaultLocale;
+	}
+
 	public void listenLocaleChanges() {
 		app.getSettings().PREFERRED_LOCALE.addListener(this);
 	}
@@ -99,21 +111,32 @@ public class LocaleHelper implements StateChangedListener<String> {
 		this.needRestart = needRestart;
 	}
 
-	public Resources getLocalizedResources() {
-		return localizedResources;
-	}
-
-	public Locale getPreferredLocale() {
-		return preferredLocale;
-	}
-
-	public Locale getDefaultLocale() {
-		return defaultLocale;
-	}
-
 	@Override
 	public void stateChanged(String change) {
 		needRestart = true;
 		checkPreferredLocale();
+	}
+
+	public String getCountry() {
+		String country;
+		if (preferredLocale != null) {
+			country = preferredLocale.getCountry();
+		} else {
+			country = Locale.getDefault().getCountry();
+		}
+		return country;
+	}
+
+	public String getLanguage() {
+		String lang;
+		if (preferredLocale != null) {
+			lang = preferredLocale.getLanguage();
+		} else {
+			lang = Locale.getDefault().getLanguage();
+		}
+		if (lang != null && lang.length() > 3) {
+			lang = lang.substring(0, 2).toLowerCase();
+		}
+		return lang;
 	}
 }
