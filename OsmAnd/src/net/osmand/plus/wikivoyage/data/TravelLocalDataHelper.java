@@ -1,9 +1,5 @@
 package net.osmand.plus.wikivoyage.data;
 
-
-import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDatabase;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -428,7 +424,7 @@ public class TravelLocalDataHelper {
 						if (cursor.moveToFirst()) {
 							do {
 								TravelArticle dbArticle = readSavedArticle(cursor);
-								TravelArticle article = context.getTravelHelper().getArticleById(dbArticle.generateIdentifier(), dbArticle.lang, false, null);
+								TravelArticle article = context.getTravelHelper().findSavedArticle(dbArticle);
 								if (article != null && article.getLastModified() > dbArticle.getLastModified()) {
 									updateSavedArticle(dbArticle, article);
 									res.add(article);

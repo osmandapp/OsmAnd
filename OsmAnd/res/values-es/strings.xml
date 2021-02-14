@@ -825,7 +825,6 @@
 \n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas 
 \n</string>
     <string name="avoid_motorway">Sin autopistas</string>
-    <string name="snap_to_road_descr">Ajusta la ubicación al camino durante la navegación.</string>
     <string name="snap_to_road">Ajustar al camino</string>
     <string name="context_menu_item_first_intermediate_point">Añadir como primer destino intermedio</string>
     <string name="context_menu_item_last_intermediate_point">Añadir como último destino intermedio</string>
@@ -1988,7 +1987,6 @@
     <string name="update_all_maps_now">¿Actualizar todos los mapas ahora?</string>
     <string name="clear_tile_data">Limpiar todas las teselas</string>
     <string name="routing_attr_short_way_name">Ruta de bajo consumo (corta)</string>
-    <string name="routing_attr_short_way_description">Usa la ruta de menor consumo en combustible (usualmente la más corta).</string>
     <string name="replace_favorite_confirmation">¿Reemplazar el Favorito «%1$s»?</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
     <string name="shared_string_change">Cambiar</string>
@@ -3927,7 +3925,6 @@
     <string name="select_items_for_import">Seleccione los elementos que se importarán.</string>
     <string name="use_dev_url_descr">Cambie para usar dev.openstreetmap.org en lugar de openstreetmap.org para probar la carga de OSM Note / POI / GPX.</string>
     <string name="use_dev_url">Usar dev.openstreetmap.org</string>
-    <string name="elevation_data">Puede utilizar los datos de elevación para tener en cuenta el ascenso/descenso de su viaje</string>
     <string name="app_mode_light_aircraft">Aeronave ligera</string>
     <string name="plan_route_join_segments">Unir segmentos</string>
     <string name="plan_route_split_before">Dividir antes</string>

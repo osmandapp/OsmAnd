@@ -344,7 +344,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				public void onClick(View v) {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						openTrack(activity, null, storeState());
+						openTrack(activity, null, storeState(), getString(R.string.shared_string_tracks));
 					}
 				}
 			});
@@ -1597,7 +1597,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		GpxInfo item = allGpxAdapter.getChild(groupPosition, childPosition);
 
 		if (!selectionMode) {
-			openTrack(getActivity(), item.file, storeState());
+			openTrack(getActivity(), item.file, storeState(), getString(R.string.shared_string_tracks));
 		} else {
 			if (!selectedItems.contains(item)) {
 				selectedItems.add(item);

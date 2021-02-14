@@ -503,7 +503,6 @@
     <string name="show_warnings_descr">پیکربندی‌های مربوط به هشدارهای ترافیکی (مانند محدودیت‌های سرعت، توقف‌های اجباری، سرعتگیرها، تونل‌ها)، اخطارهای دوربین سرعت و اطلاعات خط عبوری را انجام دهید.</string>
     <string name="use_compass_navigation_descr">اگر جهت شناسایی نشد از قطب‌نما استفاده شود.</string>
     <string name="avoid_motorway">آزادراه</string>
-    <string name="snap_to_road_descr">در هنگام ناوبری، موقعیت را به جاده‌ها بچسبان.</string>
     <string name="snap_to_road">چسبیدن به راه</string>
     <string name="osmand_play_title_30_chars">نقشه و ناوبری با OsmAnd</string>
     <string name="osmand_short_description_80_chars">برنامهٔ همراه برای مشاهدهٔ نقشه جهانی و ناوبری با نقشه‌های آفلاین و آنلاین OSM</string>
@@ -1651,7 +1650,6 @@
     <string name="update_all_maps_now">اکنون همهٔ نقشه‌ها را به‌روز می‌کنید؟</string>
     <string name="clear_tile_data">پاک‌کردن همهٔ کاشی‌ها</string>
     <string name="routing_attr_short_way_name">راه صرفه‌جویی سوخت</string>
-    <string name="routing_attr_short_way_description">انتخاب راه مناسب برای مصرف سوخت کمتر (معمولاً کوتاه‌تر).</string>
     <string name="replace_favorite_confirmation">آیا این نقطهٔ جدید را جانشین «%1$s» می‌کنید؟</string>
     <string name="rendering_attr_hideOverground_name">اشیای روی زمین</string>
     <string name="shared_string_change">تغییر</string>

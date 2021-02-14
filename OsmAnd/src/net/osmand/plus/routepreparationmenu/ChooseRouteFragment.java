@@ -767,7 +767,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			int pagesY = y - getPagesViewHeight() + fragment.getShadowHeight() +
 					(Build.VERSION.SDK_INT >= 21 ? AndroidUtils.getStatusBarHeight(pagesView.getContext()) : 0);
 			if (animated) {
-				fragment.animateView(pagesView, pagesY);
+				fragment.animateView(pagesView, pagesY, null);
 			} else {
 				pagesView.setY(pagesY);
 			}
@@ -780,7 +780,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			int zoomY = y - getZoomButtonsHeight() +
 					(Build.VERSION.SDK_INT >= 21 ? AndroidUtils.getStatusBarHeight(zoomButtonsView.getContext()) : 0);
 			if (animated) {
-				fragment.animateView(zoomButtonsView, zoomY);
+				fragment.animateView(zoomButtonsView, zoomY, null);
 			} else {
 				zoomButtonsView.setY(zoomY);
 			}

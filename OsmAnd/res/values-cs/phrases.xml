@@ -3561,7 +3561,7 @@
     <string name="poi_charcoal_pile">Milíř</string>
     <string name="poi_historic_tank">Historický tank</string>
     <string name="poi_hookah_lounge">Salonek s vodní dýmkou</string>
-    <string name="poi_source_biomass">Zdroj energie: biomasa</string>
+    <string name="poi_generator_source_biomass">Zdroj energie: biomasa</string>
     <string name="poi_glacier_type_hanging">Převislý</string>
     <string name="poi_glacier_type_shelf">Šelfový</string>
     <string name="poi_substation_compensation">Kompenzační</string>

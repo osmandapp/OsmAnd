@@ -15,7 +15,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -92,7 +91,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 			view.getSettings().RENDERER.set(params);
 
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
-			ConfigureMapMenu.refreshMapComplete(activity);
+			activity.refreshMapComplete();
 
 			Toast.makeText(activity, activity.getString(R.string.quick_action_map_style_switch,
 					getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();

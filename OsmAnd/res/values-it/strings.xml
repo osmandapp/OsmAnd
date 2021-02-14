@@ -791,7 +791,6 @@
 \n - Allineamento della mappa in base alla direzione o alla bussola 
 \n - Indicazioni di corsia, indicazione del limite di velocità, voci registrate e dal testo-alla-voce
 \n</string>
-    <string name="snap_to_road_descr">Blocca la posizione sulle strade durante la navigazione.</string>
     <string name="snap_to_road">Blocca sulle strade</string>
     <string name="avoid_motorway">Evita le autostrade</string>
     <string name="intermediate_point_too_far">La destinazione intermedia %1$s è troppo lontana dalla strada più vicina.</string>
@@ -1981,7 +1980,6 @@
     <string name="lang_hsb">Sorabo superiore</string>
     <string name="rendering_attr_hideOverground_name">Oggetti sopra il terreno</string>
     <string name="routing_attr_short_way_name">Percorso più efficiente rispetto ai consumi</string>
-    <string name="routing_attr_short_way_description">Utilizza la via migliore rispetto ai consumi (di solito la più breve).</string>
     <string name="replace_favorite_confirmation">Sei sicuro di voler sostituire il preferito %1$s?</string>
     <string name="shared_string_change">Cambia</string>
     <string name="get_started">Inizia</string>
@@ -3910,7 +3908,6 @@
     <string name="select_picture">Scegli la foto</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Tedesco (informale)</string>
-    <string name="elevation_data">Puoi utililizzare i dati dell\'altitudine per valutare la Salita/Discesa del tuo percorso</string>
     <string name="app_mode_light_aircraft">Ultraleggeri</string>
     <string name="plan_route_split_after">Spezza dopo</string>
     <string name="plan_route_add_new_segment">Aggiungi un nuovo segmento</string>

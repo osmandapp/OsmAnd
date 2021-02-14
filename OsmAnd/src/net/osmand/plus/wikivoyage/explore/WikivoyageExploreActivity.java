@@ -326,12 +326,12 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 				public void onFinish(AppInitializer init) {
 					WikivoyageExploreActivity activity = activityRef.get();
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						new LoadWikivoyageData(activity).execute();
+						new LoadWikivoyageData(activity,true).execute();
 					}
 				}
 			});
 		} else {
-			new LoadWikivoyageData(this).execute();
+			new LoadWikivoyageData(this,true).execute();
 		}
 	}
 
@@ -380,19 +380,21 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		updateFragments();
 	}
 
-	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
+	public static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
 
 		private final WeakReference<WikivoyageExploreActivity> activityRef;
 		private final TravelHelper travelHelper;
+		private final boolean resetData;
 
-		LoadWikivoyageData(WikivoyageExploreActivity activity) {
+		LoadWikivoyageData(WikivoyageExploreActivity activity, boolean resetData) {
 			travelHelper = activity.getMyApplication().getTravelHelper();
 			activityRef = new WeakReference<>(activity);
+			this.resetData = resetData;
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			travelHelper.initializeDataToDisplay();
+			travelHelper.initializeDataToDisplay(resetData);
 			return null;
 		}
 
