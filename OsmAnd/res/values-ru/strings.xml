@@ -4018,7 +4018,7 @@
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_riding_name">Верховая езда</string>
-    <string name="reverse_all_points">Повернуть все точки</string>
+    <string name="reverse_all_points">Инвертировать все точки</string>
     <string name="routing_attr_allow_streams_description">Разрешить ручьи и стоки</string>
     <string name="routing_attr_allow_streams_name">Разрешить ручьи и стоки</string>
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews - это управляемый сообществом проект об общественных местах, таких как рестораны, отели, музеи, путевые точки. Он собирает всю общедоступную информацию о них, такую как фотографии, обзоры, ссылки на другие системы, ссылки OpenStreetMap, Wikipedia.
