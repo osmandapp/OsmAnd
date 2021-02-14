@@ -599,7 +599,7 @@
     <string name="map_version_changed_info">Спампаваць новую версію праграмы, каб мець магчымасць выкарыстоўваць новыя файлы мапаў.</string>
     <string name="poi_filter_nominatim">Сеціўны Nominatim</string>
     <string name="search_position_current_location_search">Вызначэнне становішча…</string>
-    <string name="search_position_current_location_found">Маё становішча (знойдзена)</string>
+    <string name="search_position_current_location_found">Маё месцазнаходжанне (знойдзена)</string>
     <string name="search_position_address">Адрас…</string>
     <string name="search_position_favorites">Улюбёныя мясціны…</string>
     <string name="shared_string_undefined">Нявызначана</string>
@@ -2556,7 +2556,7 @@
     <string name="hide_passed">Схаваць пройдзеныя</string>
     <string name="use_location">Выкарыстоўваць становішча</string>
     <string name="add_location_as_first_point_descr">Дадаць ваша становішча як пункт адпраўлення пры планаванні маршруту.</string>
-    <string name="my_location">Маё становішча</string>
+    <string name="my_location">Маё месцазнаходжанне</string>
     <string name="shared_string_finish">Фініш</string>
     <string name="plan_route">Планаваць маршрут</string>
     <string name="shared_string_sort">Упарадкаваць</string>
