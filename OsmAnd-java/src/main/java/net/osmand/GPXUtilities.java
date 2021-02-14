@@ -60,7 +60,8 @@ public class GPXUtilities {
 
 	private final static NumberFormat latLonFormat = new DecimalFormat("0.00#####", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
-	private final static NumberFormat decimalFormat = new DecimalFormat("#.###", new DecimalFormatSymbols(
+	// speed, ele, hdop
+	private final static NumberFormat decimalFormat = new DecimalFormat("#.#", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
 
 	public enum GPXColor {
