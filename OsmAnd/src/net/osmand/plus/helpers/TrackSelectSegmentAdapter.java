@@ -16,16 +16,18 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.TrackSelectSegmentAdapter.TrackViewHolder;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackSelectSegmentAdapter.TrackViewHolder> {
+public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHolder> {
+
 	private final OsmandApplication app;
 	private final LayoutInflater themedInflater;
 	private final UiUtilities iconsCache;
 	private final List<TrkSegment> segments;
-	private GpxTrackAdapter.OnItemClickListener onItemClickListener;
+	private OnItemClickListener onItemClickListener;
 
 	public TrackSelectSegmentAdapter(Context ctx, List<TrkSegment> segments) {
 		app = (OsmandApplication) ctx.getApplicationContext();
@@ -36,17 +38,17 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackSelectS
 
 	@NonNull
 	@Override
-	public TrackSelectSegmentAdapter.TrackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+	public TrackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View view = themedInflater.inflate(R.layout.gpx_segment_list_item, parent, false);
 		ImageView distanceIcon = view.findViewById(R.id.distance_icon);
 		distanceIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
 		ImageView timeIcon = view.findViewById(R.id.time_icon);
 		timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
-		return new TrackSelectSegmentAdapter.TrackViewHolder(view);
+		return new TrackViewHolder(view);
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final TrackSelectSegmentAdapter.TrackViewHolder holder, final int position) {
+	public void onBindViewHolder(@NonNull final TrackViewHolder holder, int position) {
 		holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
 
 		TrkSegment segment = segments.get(position);
@@ -72,8 +74,12 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackSelectS
 		});
 	}
 
+	@Override
+	public int getItemCount() {
+		return segments.size();
+	}
+
 	private long getSegmentTime(TrkSegment segment) {
-		long segmentTime;
 		long startTime = Long.MAX_VALUE;
 		long endTime = Long.MIN_VALUE;
 		for (int i = 0; i < segment.points.size(); i++) {
@@ -84,9 +90,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackSelectS
 				endTime = Math.max(endTime, time);
 			}
 		}
-		segmentTime = endTime - startTime;
-
-		return segmentTime;
+		return endTime - startTime;
 	}
 
 	private double getDistance(TrkSegment segment) {
@@ -99,18 +103,17 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackSelectS
 			}
 			prevPoint = point;
 		}
-
 		return distance;
 	}
 
-	@Override
-	public int getItemCount() {
-		return segments.size();
+	public void setAdapterListener(OnItemClickListener onItemClickListener) {
+		this.onItemClickListener = onItemClickListener;
 	}
 
+	public interface OnItemClickListener {
 
-	public void setAdapterListener(GpxTrackAdapter.OnItemClickListener onItemClickListener) {
-		this.onItemClickListener = onItemClickListener;
+		void onItemClick(int position);
+
 	}
 
 	static class TrackViewHolder extends RecyclerView.ViewHolder {

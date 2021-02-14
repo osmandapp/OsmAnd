@@ -45,7 +45,6 @@
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_regular" />
 
-
 	</LinearLayout>
 
 	<include
@@ -54,7 +53,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/dashPluginMargin" />
-
 
 	<View
 		android:layout_width="match_parent"

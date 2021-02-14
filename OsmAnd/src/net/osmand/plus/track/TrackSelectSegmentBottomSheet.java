@@ -9,31 +9,30 @@ import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.helpers.TrackSelectSegmentAdapter.OnItemClickListener;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -42,33 +41,18 @@ import java.util.List;
 public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = TrackSelectSegmentBottomSheet.class.getSimpleName();
-	protected TrackSelectSegmentAdapter adapterSegments;
-	private MapActivity mapActivity;
-	private GPXUtilities.GPXFile gpxFile;
-	private OsmandApplication app;
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GPXUtilities.GPXFile gpxFile) {
-		if (!fragmentManager.isStateSaved()) {
-			TrackSelectSegmentBottomSheet fragment = new TrackSelectSegmentBottomSheet();
-			fragment.setRetainInstance(true);
-			fragment.gpxFile = gpxFile;
-			fragment.show(fragmentManager, TAG);
-		}
-	}
+	private OsmandApplication app;
+	private GPXFile gpxFile;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		app = requiredMyApplication();
 		Context context = requireContext();
 
 		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
 		View itemView = inflater.inflate(R.layout.bottom_sheet_select_segment, null, false);
 
-		app = getMyApplication();
-		if (app == null) {
-			return;
-		}
-
-		mapActivity = (MapActivity) getActivity();
 		String titleGpxTrack = Algorithms.getFileWithoutDirs(gpxFile.path);
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		String selectSegmentDescription = getString(R.string.select_segments_description, titleGpxTrack);
@@ -86,9 +70,9 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		LinearLayout gpxTrackContainer = itemView.findViewById(R.id.gpx_track_container);
 		GPXUtilities.GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
-		AppCompatImageView icon = gpxTrackContainer.findViewById(R.id.icon);
-		int sidePadding = AndroidUtils.dpToPx(mapActivity, 16f);
-		int bottomTopPadding = AndroidUtils.dpToPx(mapActivity, 2f);
+		ImageView icon = gpxTrackContainer.findViewById(R.id.icon);
+		int sidePadding = AndroidUtils.dpToPx(context, 16f);
+		int bottomTopPadding = AndroidUtils.dpToPx(context, 2f);
 
 		LinearLayout readContainer = gpxTrackContainer.findViewById(R.id.read_section);
 		readContainer.setPadding(0, bottomTopPadding, 0, bottomTopPadding);
@@ -111,15 +95,19 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		time.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		time.setText(analysis.isTimeSpecified() ? Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) : "");
 
-		final RecyclerView recyclerView = itemView.findViewById(R.id.gpx_segment_list);
+		RecyclerView recyclerView = itemView.findViewById(R.id.gpx_segment_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setNestedScrollingEnabled(false);
-		final List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(true);
-		adapterSegments = new TrackSelectSegmentAdapter(requireContext(), segments);
-		adapterSegments.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
+
+		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+		TrackSelectSegmentAdapter adapterSegments = new TrackSelectSegmentAdapter(context, segments);
+		adapterSegments.setAdapterListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
-				//select segment
+				Fragment fragment = getTargetFragment();
+				if (fragment instanceof OnSegmentSelectedListener) {
+					((OnSegmentSelectedListener) fragment).onSegmentSelect(gpxFile, position);
+				}
 				dismiss();
 			}
 		});
@@ -128,30 +116,27 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		gpxTrackContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				selectSegmentToFollow(gpxFile);
+				Fragment fragment = getTargetFragment();
+				if (fragment instanceof OnSegmentSelectedListener) {
+					((OnSegmentSelectedListener) fragment).onSegmentSelect(gpxFile, -1);
+				}
 				dismiss();
 			}
 		});
 
 	}
 
-	private void selectSegmentToFollow(GPXUtilities.GPXFile gpxFile) {
-		if (mapActivity != null) {
-			this.gpxFile = gpxFile;
-			TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-			RoutingHelper routingHelper = app.getRoutingHelper();
-			List<GPXUtilities.WptPt> points = gpxFile.getRoutePoints();
-			if (!points.isEmpty()) {
-				ApplicationMode mode = ApplicationMode.valueOfStringKey(points.get(0).getProfileType(), null);
-				if (mode != null) {
-					routingHelper.setAppMode(mode);
-					app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
-				}
-			}
-			mapActivity.getMapActions().setGPXRouteParams(gpxFile);
-			targetPointsHelper.updateRouteAndRefresh(true);
-			routingHelper.onSettingsChanged(true);
+	public interface OnSegmentSelectedListener {
+		void onSegmentSelect(GPXFile gpxFile, int selectedSegment);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GPXFile gpxFile, @Nullable Fragment target) {
+		if (!fragmentManager.isStateSaved()) {
+			TrackSelectSegmentBottomSheet fragment = new TrackSelectSegmentBottomSheet();
+			fragment.setRetainInstance(true);
+			fragment.setTargetFragment(target, 0);
+			fragment.gpxFile = gpxFile;
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }
-

@@ -63,7 +63,8 @@ import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
-import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
@@ -76,7 +77,7 @@ import java.util.List;
 
 
 public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
-		IRouteInformationListener, MapControlsLayer.MapControlsThemeInfoProvider {
+		IRouteInformationListener, MapControlsThemeInfoProvider, OnSegmentSelectedListener {
 
 	public static final String TAG = FollowTrackFragment.class.getName();
 
@@ -207,24 +208,24 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (mapActivity != null) {
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
+
 			if (gpxFile == null || selectingTrack) {
 				setupTracksCard();
 			} else {
-				boolean isTrackContainsMultiSegment = gpxFile.getNonEmptySegmentsCount() > 1;
 				String fileName = null;
 				File file = null;
 				if (!Algorithms.isEmpty(gpxFile.path)) {
 					file = new File(gpxFile.path);
-					if (isTrackContainsMultiSegment) {
-						fileName = Algorithms.getFileNameWithoutExtension(file.getName());
-					} else {
-						fileName = Algorithms.getFileNameWithoutExtension(file.getName());
-					}
+					fileName = Algorithms.getFileNameWithoutExtension(file.getName());
 				} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
 					fileName = gpxFile.tracks.get(0).name;
 				}
 				if (Algorithms.isEmpty(fileName)) {
 					fileName = app.getString(R.string.shared_string_gpx_track);
+				}
+				GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+				if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
+					fileName = fileName + " segment " + (routeParams.getSelectedSegment() + 1);
 				}
 				sortButton.setVisibility(View.GONE);
 				GPXInfo gpxInfo = new GPXInfo(fileName, file != null ? file.lastModified() : 0, file != null ? file.length() : 0);
@@ -497,10 +498,10 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				if (gpxFile.getNonEmptySegmentsCount() > 1) {
-					TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), gpxFile);
+					TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), gpxFile, this);
 				} else {
-					updateSelectionMode(false);
 					selectTrackToFollow(gpxFile);
+					updateSelectionMode(false);
 				}
 			} else {
 				CallbackWithObject<GPXFile[]> callback = new CallbackWithObject<GPXFile[]>() {
@@ -509,10 +510,10 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						MapActivity mapActivity = getMapActivity();
 						if (mapActivity != null) {
 							if (result[0].getNonEmptySegmentsCount() > 1) {
-								TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), result[0]);
+								TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), result[0], FollowTrackFragment.this);
 							} else {
-								updateSelectionMode(false);
 								selectTrackToFollow(result[0]);
+								updateSelectionMode(false);
 							}
 						}
 						return true;
@@ -536,7 +537,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
 				}
 			}
-			mapActivity.getMapActions().setGPXRouteParams(gpxFile, 1);
+			mapActivity.getMapActions().setGPXRouteParams(gpxFile);
 			app.getTargetPointsHelper().updateRouteAndRefresh(true);
 			app.getRoutingHelper().onSettingsChanged(true);
 		}
@@ -719,7 +720,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-
 	@Override
 	public void routeWasCancelled() {
 
@@ -733,5 +733,19 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	protected String getThemeInfoProviderTag() {
 		return TAG;
+	}
+
+	@Override
+	public void onSegmentSelect(GPXFile gpxFile, int selectedSegment) {
+		selectTrackToFollow(gpxFile);
+		if (selectedSegment != -1) {
+			GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+			if (paramsBuilder != null) {
+				paramsBuilder.setSelectedSegment(selectedSegment);
+				app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
+				app.getRoutingHelper().onSettingsChanged(true);
+			}
+		}
+		updateSelectionMode(false);
 	}
 }
