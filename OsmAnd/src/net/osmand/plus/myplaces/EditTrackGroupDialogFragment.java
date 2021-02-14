@@ -192,9 +192,9 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private BaseBottomSheetItem createCopyToMarkersItem(final GPXFile gpxFile) {
-		final MapMarkersGroup markersGroup = getOrCreateMarkersGroup(gpxFile);
-		final Set<String> categories = markersGroup.getWptCategories();
-		final boolean synced = categories != null && categories.contains(group.getName());
+		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(gpxFile);
+		final boolean synced = markersGroup != null && (Algorithms.isEmpty(markersGroup.getWptCategories())
+				|| markersGroup.getWptCategories().contains(group.getName()));
 
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(synced ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_copy))
@@ -203,18 +203,25 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						updateGroupWptCategory(gpxFile, markersGroup, categories, synced);
+						updateGroupWptCategory(gpxFile, synced);
 						dismiss();
 					}
 				})
 				.create();
 	}
 
-	private void updateGroupWptCategory(GPXFile gpxFile, MapMarkersGroup markersGroup, Set<String> categories, boolean synced) {
+	private void updateGroupWptCategory(GPXFile gpxFile, boolean synced) {
 		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
 		if (selectedGpxFile == null) {
 			selectedGpxHelper.selectGpxFile(gpxFile, true, false, false, false, false);
 		}
+		boolean groupCreated = false;
+		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(gpxFile);
+		if (markersGroup == null) {
+			groupCreated = true;
+			markersGroup = mapMarkersHelper.addOrEnableGroup(gpxFile);
+		}
+		Set<String> categories = markersGroup.getWptCategories();
 		Set<String> selectedCategories = new HashSet<>();
 		if (categories != null) {
 			selectedCategories.addAll(categories);
@@ -224,16 +231,14 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		} else {
 			selectedCategories.add(group.getName());
 		}
-		mapMarkersHelper.updateGroupWptCategories(markersGroup, selectedCategories);
-		mapMarkersHelper.runSynchronization(markersGroup);
-	}
-
-	private MapMarkersGroup getOrCreateMarkersGroup(GPXFile gpxFile) {
-		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(gpxFile);
-		if (markersGroup == null) {
-			markersGroup = mapMarkersHelper.addOrEnableGroup(gpxFile);
+		if (Algorithms.isEmpty(selectedCategories)) {
+			mapMarkersHelper.removeMarkersGroup(markersGroup);
+		} else {
+			mapMarkersHelper.updateGroupWptCategories(markersGroup, selectedCategories);
+			if (!groupCreated) {
+				mapMarkersHelper.runSynchronization(markersGroup);
+			}
 		}
-		return markersGroup;
 	}
 
 	private BaseBottomSheetItem createCopyToFavoritesItem() {

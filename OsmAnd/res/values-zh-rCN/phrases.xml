@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="poi_fuel_avia_type"/>
+    <string name="poi_fuel_avia_type">燃料类型（avia）</string>
     <string name="poi_payment_type">支付类别</string>
     <string name="poi_clothes_type">类型</string>
     <string name="poi_shoes_type">类型</string>
@@ -68,7 +68,7 @@
     <string name="poi_telescope_type">类型</string>
     <string name="poi_outdoor_seating">户外座位</string>
     <string name="poi_smoking">吸烟</string>
-    <string name="poi_takeaway">外带</string>
+    <string name="poi_takeaway">外卖</string>
     <string name="poi_cocktails">鸡尾酒</string>
     <string name="poi_washing_machine">洗衣机</string>
     <string name="poi_motorcycle_services">服务</string>
@@ -87,7 +87,7 @@
     <string name="poi_social_facility_type">类型</string>
     <string name="poi_zoo_type">类型</string>
     <string name="poi_shop">商店</string>
-    <string name="poi_emergency">急</string>
+    <string name="poi_emergency">紧急救助</string>
     <string name="poi_man_made">人造</string>
     <string name="poi_landuse">土地利用</string>
     <string name="poi_administrative">行政</string>
@@ -97,7 +97,7 @@
     <string name="poi_tourism">旅游</string>
     <string name="poi_sightseeing">遊覽</string>
     <string name="poi_accomodation">住宿</string>
-    <string name="poi_entertainment">闲暇</string>
+    <string name="poi_entertainment">休闲娱乐</string>
     <string name="poi_finance">金融</string>
     <string name="poi_natural">自然</string>
     <string name="poi_military">军事</string>
@@ -285,7 +285,7 @@
     <string name="poi_xmas">圣诞节</string>
     <string name="poi_xmas_shop">圣诞店</string>
     <string name="poi_xmas_tree">圣诞树</string>
-    <string name="poi_cuisine_pizza">比萨</string>
+    <string name="poi_cuisine_pizza">披萨</string>
     <string name="poi_cuisine_burger">汉堡</string>
     <string name="poi_cuisine_coffee">咖啡</string>
     <string name="poi_cuisine_sandwich">三明治</string>
@@ -360,7 +360,7 @@
     <string name="poi_recycling_furniture">家具</string>
     <string name="poi_tower">塔</string>
     <string name="poi_capital">是</string>
-    <string name="poi_town">镇</string>
+    <string name="poi_town">乡镇</string>
     <string name="poi_village">村</string>
     <string name="poi_hamlet">村庄</string>
     <string name="poi_suburb">市郊</string>
@@ -500,7 +500,7 @@
     <string name="poi_drive_through_yes">是</string>
     <string name="poi_microbrewery_yes">是</string>
     <string name="poi_takeaway_filter_yes">是</string>
-    <string name="poi_takeaway_yes">外带</string>
+    <string name="poi_takeaway_yes">外卖</string>
     <string name="poi_delivery_filter_yes">是</string>
     <string name="poi_outdoor_seating_filter_yes">是</string>
     <string name="poi_cocktails_yes">是</string>
@@ -733,4 +733,40 @@
     <string name="poi_physiotherapist">物理治疗师</string>
     <string name="poi_trees_rubber">橡胶</string>
     <string name="poi_resource_mineral_oil">矿物油</string>
+    <string name="poi_seasonal_wet_season">雨季</string>
+    <string name="poi_seasonal_dry_season">旱季</string>
+    <string name="poi_brand">品牌</string>
+    <string name="poi_operator">经营者</string>
+    <string name="poi_cuisine">菜品</string>
+    <string name="poi_motorcycle_type">摩托车类型</string>
+    <string name="poi_vacuum_cleaner_filter">吸尘器</string>
+    <string name="poi_compressed_air_filter">压缩空气</string>
+    <string name="poi_social_facility_for">目标群体</string>
+    <string name="poi_medical_system">医疗系统</string>
+    <string name="poi_tents">帐篷</string>
+    <string name="poi_massage_type">按摩类型</string>
+    <string name="poi_diet">饮食</string>
+    <string name="poi_nudism">裸体主义</string>
+    <string name="poi_beach_surface_type">表面</string>
+    <string name="poi_seasonal">季节性</string>
+    <string name="poi_fireplace">壁炉</string>
+    <string name="poi_drive_through">驾车经过</string>
+    <string name="poi_delivery">交货</string>
+    <string name="poi_piste_difficulty">滑雪道难度</string>
+    <string name="poi_backcountry">偏远地区</string>
+    <string name="poi_scout_camp">童子军营地</string>
+    <string name="poi_information_contents">内容</string>
+    <string name="poi_star_rating">星级</string>
+    <string name="poi_city_capital">首都</string>
+    <string name="poi_pump">泵</string>
+    <string name="poi_ferry_terminal_cargo">货物</string>
+    <string name="poi_covered">已覆盖</string>
+    <string name="poi_vending_type">自动售货机类型</string>
+    <string name="poi_resource_slate_iron_ore_copper">板岩；铁矿石；铜</string>
+    <string name="poi_craft_scaffolder">脚手架</string>
+    <string name="poi_wreck">沉船</string>
+    <string name="poi_pile">桩</string>
+    <string name="poi_charging_station">充电站</string>
+    <string name="poi_takeaway_no">无外卖</string>
+    <string name="poi_takeaway_only">仅限外卖</string>
 </resources>

@@ -505,7 +505,6 @@
     <string name="get_for">%1$s മേടിക്കുക</string>
     <string name="si_mi_meters">"മൈല്‍/മീറ്റര്‍ "</string>
     <string name="routing_attr_short_way_name">"മൈലേജ് കൂടുതലുള്ള വഴി "</string>
-    <string name="routing_attr_short_way_description">മൈലേജ് കൂടുതലുള്ള വഴി ഉപയോഗിക്കുക</string>
     <string name="get_started">തുടങ്ങുക</string>
     <string name="back_to_search">തെരച്ചിലിലോട്ട് തിരിച്ച് പോവുക</string>
     <string name="confirmation_to_delete_history_items">തെരഞ്ഞെടുത്തവ ഹിസ്റ്ററിയില്‍ നിന്നും നീക്കട്ടെ?</string>
@@ -978,7 +977,6 @@
     <string name="index_srtm_parts">കഷണങ്ങള്‍</string>
     <string name="close_changeset">"ചേഞ്ച്സെറ്റ്  അടയ്ക്കുക"</string>
     <string name="show_warnings_title">മുന്നറിയിപ്പുകള്‍ കാണിക്കുക…</string>
-    <string name="snap_to_road_descr">റോഡില്‍ തന്നെ നിന്ന് വഴികാട്ടുക</string>
     <string name="context_menu_item_add_parking_point">"പാര്‍ക്കിങ്ങ് ആയി രേഖപ്പെടുത്തുക "</string>
     <string name="support_new_features">"പുതിയതായുള്ള  സവിശേഷതകള്‍ "</string>
     <string name="show_ruler_level">സ്കേല്‍ കാണിക്കുക</string>

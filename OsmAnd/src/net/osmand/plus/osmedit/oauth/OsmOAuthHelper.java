@@ -54,18 +54,18 @@ public class OsmOAuthHelper {
 
 	public void resetAuthorization() {
 		if (isValidToken()) {
-			settings.USER_ACCESS_TOKEN.resetToDefault();
-			settings.USER_ACCESS_TOKEN_SECRET.resetToDefault();
+			settings.OSM_USER_ACCESS_TOKEN.resetToDefault();
+			settings.OSM_USER_ACCESS_TOKEN_SECRET.resetToDefault();
 			authorizationAdapter.resetToken();
 		} else if (isLoginExists()) {
-			settings.USER_NAME.resetToDefault();
-			settings.USER_PASSWORD.resetToDefault();
+			settings.OSM_USER_NAME.resetToDefault();
+			settings.OSM_USER_PASSWORD.resetToDefault();
 		}
 		updateAdapter();
 	}
 
 	private boolean isLoginExists() {
-		return !Algorithms.isEmpty(settings.USER_NAME.get()) && !Algorithms.isEmpty(settings.USER_PASSWORD.get());
+		return !Algorithms.isEmpty(settings.OSM_USER_NAME.get()) && !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
 	}
 
 	public void notifyAndRemoveListeners() {

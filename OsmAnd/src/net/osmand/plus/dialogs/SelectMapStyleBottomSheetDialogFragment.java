@@ -140,7 +140,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			OsmandMapTileView view = mapActivity.getMapView();
 			view.getSettings().RENDERER.set(selectedStyle);
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
-			ConfigureMapMenu.refreshMapComplete(mapActivity);
+			mapActivity.refreshMapComplete();
 			mapActivity.getDashboard().refreshContent(true);
 		} else {
 			Toast.makeText(mapActivity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();

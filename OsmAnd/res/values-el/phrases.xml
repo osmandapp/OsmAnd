@@ -1212,7 +1212,7 @@
     <string name="poi_description">Περιγραφή</string>
     <string name="poi_phone">Τηλέφωνο</string>
     <string name="poi_website">Ιστότοπος</string>
-    <string name="poi_email">Ηλ. διεύθυνση</string>
+    <string name="poi_email">Ηλεκτρονικό ταχυδρομείο</string>
     <string name="poi_fax">Τηλεομοιότυπο (φαξ)</string>
     <string name="facebook">Facebook</string>
     <string name="twitter">Twitter</string>
@@ -3534,7 +3534,7 @@
     <string name="poi_climbing_crag">Ναι</string>
     <string name="reddit">Reddit</string>
     <string name="poi_historic_tank">Ιστορική δεξαμενή</string>
-    <string name="poi_source_biomass">Πηγή ενέργειας: βιομάζα</string>
+    <string name="poi_generator_source_biomass">Πηγή ενέργειας: βιομάζα</string>
     <string name="poi_snowmobile_filter">Πρόσβαση σε χιονοόχημα</string>
     <string name="poi_access_bus">Πρόσβαση σε λεωφορείο</string>
     <string name="poi_access_caravan">Πρόσβαση σε τροχόσπιτο</string>

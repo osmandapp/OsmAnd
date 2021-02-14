@@ -26,6 +26,8 @@ import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.OsmAndCollator;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -57,6 +59,7 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 
 	public static final int ADD_WAYPOINT_INDEX = 0;
 	public static final int DELETE_WAYPOINTS_INDEX = 1;
+	public static final int OPEN_WAYPOINT_INDEX = 2;
 
 	private final TrackDisplayHelper displayHelper;
 	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS};
@@ -173,6 +176,17 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		GpxDisplayItem item = adapter.getChild(groupPosition, childPosition);
+		if (item != null && item.locationStart != null) {
+			CardListener cardListener = getListener();
+			if (cardListener != null) {
+				cardListener.onCardButtonPressed(this, OPEN_WAYPOINT_INDEX);
+			}
+
+			LatLon location = new LatLon(item.locationStart.lat, item.locationStart.lon);
+			PointDescription description = new PointDescription(PointDescription.POINT_TYPE_WPT, item.name);
+			mapActivity.getContextMenu().show(location, description, item.locationStart);
+		}
 		return true;
 	}
 

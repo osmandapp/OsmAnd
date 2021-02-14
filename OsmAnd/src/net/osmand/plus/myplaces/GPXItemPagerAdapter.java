@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.CustomRadioButtonType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
@@ -42,7 +44,6 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.track.TrackDisplayHelper;
-import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 import net.osmand.util.Algorithms;
@@ -51,6 +52,7 @@ import net.osmand.util.MapUtils;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -72,23 +74,23 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private GpxDisplayItem gpxItem;
 	private GPXTabItemType[] tabTypes;
 
-	private PagerSlidingTabStrip tabs;
 	private SparseArray<View> views = new SparseArray<>();
 	private SegmentActionsListener actionsListener;
 
 	private boolean chartClicked;
+	private boolean nightMode;
 
 
-	public GPXItemPagerAdapter(@NonNull PagerSlidingTabStrip tabs,
+	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
 							   @NonNull GpxDisplayItem gpxItem,
 							   @NonNull TrackDisplayHelper displayHelper,
-							   @NonNull SegmentActionsListener actionsListener) {
+							   boolean nightMode, @NonNull SegmentActionsListener actionsListener) {
 		super();
-		this.tabs = tabs;
+		this.app = app;
 		this.gpxItem = gpxItem;
+		this.nightMode = nightMode;
 		this.displayHelper = displayHelper;
 		this.actionsListener = actionsListener;
-		app = (OsmandApplication) tabs.getContext().getApplicationContext();
 		iconsCache = app.getUIUtilities();
 		fetchTabTypes();
 	}
@@ -556,40 +558,64 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return view == object;
 	}
 
+	int singleTabLayoutId[] = {R.layout.center_button_container};
+	int doubleTabsLayoutIds[] = {R.layout.left_button_container, R.layout.right_button_container};
+	int tripleTabsLayoutIds[] = {R.layout.left_button_container, R.layout.center_button_container, R.layout.right_button_container};
+
 	@Override
 	public View getCustomTabView(@NonNull ViewGroup parent, int position) {
-		View tab = LayoutInflater.from(parent.getContext()).inflate(R.layout.gpx_tab, parent, false);
+		int layoutId;
+		int count = getCount();
+		if (count == 1) {
+			layoutId = singleTabLayoutId[position];
+		} else if (count == 2) {
+			layoutId = doubleTabsLayoutIds[position];
+		} else {
+			layoutId = tripleTabsLayoutIds[position];
+		}
+		ViewGroup tab = (ViewGroup) UiUtilities.getInflater(parent.getContext(), nightMode).inflate(layoutId, parent, false);
 		tab.setTag(tabTypes[position].name());
-		deselect(tab);
+		TextView title = (TextView) tab.getChildAt(0);
+		if (title != null) {
+			title.setText(getPageTitle(position));
+		}
 		return tab;
 	}
 
 	@Override
 	public void select(View tab) {
 		GPXTabItemType tabType = GPXTabItemType.valueOf((String) tab.getTag());
-		ImageView img = tab.findViewById(R.id.tab_image);
-		switch (tabs.getTabSelectionType()) {
-			case ALPHA:
-				img.setAlpha(tabs.getTabTextSelectedAlpha());
-				break;
-			case SOLID_COLOR:
-				img.setImageDrawable(iconsCache.getPaintedIcon(tabType.getIconId(), tabs.getTextColor()));
-				break;
-		}
+		int index = Arrays.asList(tabTypes).indexOf(tabType);
+		View parent = (View) tab.getParent();
+		UiUtilities.updateCustomRadioButtons(app, parent, nightMode, getCustomRadioButtonType(index));
 	}
 
 	@Override
 	public void deselect(View tab) {
-		GPXTabItemType tabType = GPXTabItemType.valueOf((String) tab.getTag());
-		ImageView img = tab.findViewById(R.id.tab_image);
-		switch (tabs.getTabSelectionType()) {
-			case ALPHA:
-				img.setAlpha(tabs.getTabTextAlpha());
-				break;
-			case SOLID_COLOR:
-				img.setImageDrawable(iconsCache.getPaintedIcon(tabType.getIconId(), tabs.getTabInactiveTextColor()));
-				break;
+
+	}
+
+	@Override
+	public void tabStylesUpdated(View tabsContainer, int currentPosition) {
+		ViewGroup.MarginLayoutParams params = (MarginLayoutParams) tabsContainer.getLayoutParams();
+		params.height = app.getResources().getDimensionPixelSize(R.dimen.dialog_button_height);
+		tabsContainer.setLayoutParams(params);
+		UiUtilities.updateCustomRadioButtons(app, tabsContainer, nightMode, getCustomRadioButtonType(currentPosition));
+	}
+
+	private CustomRadioButtonType getCustomRadioButtonType(int index) {
+		int count = getCount();
+		CustomRadioButtonType type = CustomRadioButtonType.CENTER;
+		if (count == 2) {
+			type = index > 0 ? CustomRadioButtonType.END : CustomRadioButtonType.START;
+		} else if (count == 3) {
+			if (index == 0) {
+				type = CustomRadioButtonType.START;
+			} else if (index == 2) {
+				type = CustomRadioButtonType.END;
+			}
 		}
+		return type;
 	}
 
 	@Override

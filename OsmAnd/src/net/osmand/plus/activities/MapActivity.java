@@ -136,10 +136,10 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
-import net.osmand.plus.settings.fragments.DataStorageFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -651,7 +651,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onNewIntent(final Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
-		intentHelper.parseLaunchIntents();
+		if (!intentHelper.parseLaunchIntents()) {
+			intentHelper.parseContentIntent();
+		}
 	}
 
 	@Override
@@ -1660,6 +1662,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void refreshMap() {
 		getMapView().refreshMap();
+	}
+
+	public void refreshMapComplete() {
+		getMyApplication().getResourceManager().getRenderer().clearCache();
+		updateMapSettings();
+		getMapView().refreshMap(true);
 	}
 
 	public View getLayout() {

@@ -1,21 +1,13 @@
 package net.osmand.plus.osmedit.oauth;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-
-import androidx.annotation.NonNull;
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content.ContextCompat;
 
 import com.github.scribejava.core.builder.api.DefaultApi10a;
+import com.github.scribejava.core.exceptions.OAuthException;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
@@ -24,7 +16,6 @@ import com.github.scribejava.core.model.Verb;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
-import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
@@ -52,7 +43,7 @@ public class OsmOAuthAuthorizationAdapter {
         DefaultApi10a api10a;
         String key;
         String secret;
-        if (app.getSettings().USE_DEV_URL.get()) {
+        if (app.getSettings().OSM_USE_DEV_URL.get()) {
             api10a = new OsmOAuthAuthorizationClient.OsmDevApi();
             key = app.getString(R.string.osm_oauth_developer_key);
             secret = app.getString(R.string.osm_oauth_developer_secret);
@@ -78,8 +69,8 @@ public class OsmOAuthAuthorizationAdapter {
     }
 
     public void restoreToken() {
-        String token = app.getSettings().USER_ACCESS_TOKEN.get();
-        String tokenSecret = app.getSettings().USER_ACCESS_TOKEN_SECRET.get();
+        String token = app.getSettings().OSM_USER_ACCESS_TOKEN.get();
+        String tokenSecret = app.getSettings().OSM_USER_ACCESS_TOKEN_SECRET.get();
         if (!(token.isEmpty() || tokenSecret.isEmpty())) {
             client.setAccessToken(new OAuth1AccessToken(token, tokenSecret));
         } else {
@@ -93,8 +84,8 @@ public class OsmOAuthAuthorizationAdapter {
 
     private void saveToken() {
         OAuth1AccessToken accessToken = client.getAccessToken();
-        app.getSettings().USER_ACCESS_TOKEN.set(accessToken.getToken());
-        app.getSettings().USER_ACCESS_TOKEN_SECRET.set(accessToken.getTokenSecret());
+        app.getSettings().OSM_USER_ACCESS_TOKEN.set(accessToken.getToken());
+        app.getSettings().OSM_USER_ACCESS_TOKEN_SECRET.set(accessToken.getTokenSecret());
     }
 
     private void loadWebView(ViewGroup root, boolean nightMode, String url) {
@@ -137,7 +128,7 @@ public class OsmOAuthAuthorizationAdapter {
         }
 
         @Override
-        protected void onPostExecute(@NonNull OAuth1RequestToken requestToken) {
+        protected void onPostExecute(OAuth1RequestToken requestToken) {
             if (requestToken != null) {
                 loadWebView(rootLayout, nightMode, client.getService().getAuthorizationUrl(requestToken));
             } else {
@@ -156,9 +147,11 @@ public class OsmOAuthAuthorizationAdapter {
 
         @Override
         protected Void doInBackground(String... oauthVerifier) {
-            client.authorize(oauthVerifier[0]);
-            saveToken();
-            updateUserName();
+            if (client.getRequestToken() != null) {
+                client.authorize(oauthVerifier[0]);
+                saveToken();
+                updateUserName();
+            }
             return null;
         }
 
@@ -179,8 +172,10 @@ public class OsmOAuthAuthorizationAdapter {
                 log.error(e);
             } catch (XmlPullParserException e) {
                 log.error(e);
+            } catch (OAuthException e) {
+                log.error(e);
             }
-            app.getSettings().USER_DISPLAY_NAME.set(userName);
+            app.getSettings().OSM_USER_DISPLAY_NAME.set(userName);
         }
 
         public String getUserName() throws InterruptedException, ExecutionException, IOException, XmlPullParserException {

@@ -3582,7 +3582,7 @@
     <string name="poi_charcoal_pile">Kohlenmeiler</string>
     <string name="poi_historic_tank">Historischer Panzer</string>
     <string name="poi_hookah_lounge">Wasserpfeifen-Lounge</string>
-    <string name="poi_source_biomass">Energiequelle: Biomasse</string>
+    <string name="poi_generator_source_biomass">Energiequelle: Biomasse</string>
     <string name="poi_snowmobile_filter">Zufahrt Schneemobil</string>
     <string name="poi_access_bus">Anbindung Linienbus</string>
     <string name="poi_access_caravan">Zufahrt Wohnwagen</string>
@@ -3881,4 +3881,14 @@
     <string name="poi_wildlife_crossing_bat_tunnel">Fledermaustunnel</string>
     <string name="poi_wildlife_crossing_bat_bridge">Fledermausbrücke</string>
     <string name="poi_wildlife_crossing">Wildwechsel</string>
+    <string name="poi_mobile_library">Halteposition der Fahrbücherei</string>
+    <string name="poi_summit_register_no">Gipfelbuch: nein</string>
+    <string name="poi_summit_register_yes">Gipfelbuch: ja</string>
+    <string name="poi_piste_status_closed">Pistenstatus: geschlossen</string>
+    <string name="poi_piste_status_open">Pistenstatus: geöffnet</string>
+    <string name="poi_patrolled_no">Bewacht: nein</string>
+    <string name="poi_patrolled_yes">Bewacht: ja</string>
+    <string name="poi_gladed_yes">Geglättet: ja</string>
+    <string name="poi_piste_name">Pistenname</string>
+    <string name="poi_piste_ski_jump">Skispringen</string>
 </resources>

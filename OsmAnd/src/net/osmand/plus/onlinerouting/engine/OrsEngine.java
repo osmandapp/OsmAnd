@@ -5,9 +5,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
-import net.osmand.plus.onlinerouting.OnlineRoutingResponse;
 import net.osmand.plus.onlinerouting.VehicleType;
 
 import org.json.JSONArray;
@@ -80,11 +80,10 @@ public class OrsEngine extends OnlineRoutingEngine {
 
 	@Nullable
 	@Override
-	public OnlineRoutingResponse parseServerResponse(@NonNull String content,
+	public OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
+	                                                 @NonNull OsmandApplication app,
 	                                                 boolean leftSideNavigation) throws JSONException {
-		JSONObject obj = new JSONObject(content);
-		JSONArray array = obj.getJSONArray("features").getJSONObject(0)
-				.getJSONObject("geometry").getJSONArray("coordinates");
+		JSONArray array = root.getJSONObject("geometry").getJSONArray("coordinates");
 		List<LatLon> points = new ArrayList<>();
 		for (int i = 0; i < array.length(); i++) {
 			JSONArray point = array.getJSONArray(i);
@@ -99,14 +98,15 @@ public class OrsEngine extends OnlineRoutingEngine {
 		return null;
 	}
 
+	@NonNull
 	@Override
-	public boolean parseServerMessage(@NonNull StringBuilder sb,
-	                                  @NonNull String content) throws JSONException {
-		JSONObject obj = new JSONObject(content);
-		if (obj.has("error")) {
-			String message = obj.getString("error");
-			sb.append(message);
-		}
-		return obj.has("features");
+	protected String getErrorMessageKey() {
+		return "error";
+	}
+
+	@NonNull
+	@Override
+	protected String getRootArrayKey() {
+		return "features";
 	}
 }

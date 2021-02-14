@@ -880,7 +880,6 @@
     <string name="non_optimal_route_calculation">Швидка побудова маршруту (можливо неоптимальна)</string>
     <string name="show_warnings_descr">Налаштування попередження про дорожній рух (обмеження швидкості, вимушені зупинки, штучні нерівності, тунелі), попередження про камери контролю швидкості, відомості про смуги руху.</string>
     <string name="avoid_motorway">Уник. автомагістралей</string>
-    <string name="snap_to_road_descr">Прив\'язуватися до доріг під час навігації.</string>
     <string name="snap_to_road">Прив’язуватися до доріг</string>
     <string name="osmand_short_description_80_chars">Перегляд та навігація в автономному та мережевому режимах мапами OSM</string>
     <string name="osmand_plus_short_description_80_chars">Перегляд та навігація в автономному та мережевому режимах мапами ОСМ</string>
@@ -1392,7 +1391,7 @@
     <string name="settings_privacy">Приватність</string>
     <string name="shared_string_gpx_points">Точки</string>
     <string name="shared_string_my_location">Моя позиція</string>
-    <string name="navigation_over_track">Почати навігацію уздовж треку?</string>
+    <string name="navigation_over_track">Почати навігацію по треку\?</string>
     <string name="avoid_roads_msg">Прокласти альтернативний маршрут, вибравши дороги, яких варто уникати</string>
     <string name="speak_pedestrian">Пішохідні переходи</string>
     <string name="rendering_attr_roadStyle_name">Стиль доріг</string>
@@ -1824,7 +1823,7 @@
     <string name="starting_point">Відправна точка</string>
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
-    <string name="nm">мор.м.</string>
+    <string name="nm">nmi</string>
     <string name="nm_h">вузлів</string>
     <string name="update_time">Час оновлення</string>
     <string name="updates_size">Розмір оновлення</string>
@@ -2049,7 +2048,6 @@
     <string name="update_all_maps_now">Оновити усі мапи зараз?</string>
     <string name="clear_tile_data">Очистити кеш мережевих мап</string>
     <string name="routing_attr_short_way_name">Паливно-ефективний шлях</string>
-    <string name="routing_attr_short_way_description">Розраховувати паливо-ощадний маршрут (зазвичай найкоротший).</string>
     <string name="replace_favorite_confirmation">Ви впевнені, що хочете замінити закладку %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Надземні об’єкти</string>
     <string name="shared_string_change">Змінити</string>
@@ -2436,7 +2434,7 @@
     <string name="average">Середнє</string>
     <string name="of">%1$d зі %2$d</string>
     <string name="ascent_descent">Підйом/спуск</string>
-    <string name="moving_time">Час руху</string>
+    <string name="moving_time">Час у русі</string>
     <string name="max_min">Макс/мін</string>
     <string name="min_max">Мін/макс</string>
     <string name="rendering_value_translucent_pink_name">Напівпрозорий рожевий</string>
@@ -2971,7 +2969,7 @@
     <string name="app_mode_skiing">Лижі</string>
     <string name="base_profile_descr_ski">Лижі</string>
     <string name="show_compass_ruler">Показати компас-лінійку</string>
-    <string name="hide_compass_ruler">Приховати компас-лінійку</string>
+    <string name="hide_compass_ruler">Сховати компас-лінійку</string>
     <string name="select_icon_profile_dialog_title">Оберіть значок</string>
     <string name="settings_routing_mode_string">Режим: %s</string>
     <string name="settings_derived_routing_mode_string">Користувацький режим, похідний від: %s</string>
@@ -2988,7 +2986,7 @@
     <string name="profile_alert_need_save_title">Зберегти зміни</string>
     <string name="profile_alert_need_save_msg">Спочатку збережіть зміни в профілі</string>
     <string name="profile_alert_delete_title">Видалити профіль</string>
-    <string name="profile_alert_delete_msg">Ви дійсно хочете видалити профіль %s\?</string>
+    <string name="profile_alert_delete_msg">Ви дійсно хочете видалити профіль «%s»</string>
     <string name="select_base_profile_dialog_title">Виберіть профіль для початку</string>
     <string name="process_downloading_service">Служба завантаження OsmAnd</string>
     <string name="shared_string_color_magenta">Пурпуровий</string>
@@ -3302,7 +3300,7 @@
     <string name="added_profiles_descr">Профілі, додані втулком</string>
     <string name="shared_string_turn_off">Вимкнути</string>
     <string name="new_plugin_added">Нова втулка додана</string>
-    <string name="join_segments">Приєднати частки</string>
+    <string name="join_segments">Об’єднати сегменти</string>
     <string name="add_new_profile_q">Додати новий профіль \'%1$s\'\?</string>
     <string name="save_heading">Зберегти заголовок</string>
     <string name="save_heading_descr">Зберегти заголовок для кожної точки треку під час запису.</string>
@@ -3736,7 +3734,7 @@
     <string name="track_coloring_solid">Суцільний</string>
     <string name="plan_route_last_edited">В останнє змінено</string>
     <string name="plan_route_import_track">Імпортувати трек</string>
-    <string name="plan_route_open_existing_track">Переглянути наявний трек</string>
+    <string name="plan_route_open_existing_track">Відкрити наявний трек</string>
     <string name="plan_route_create_new_route">Створити новий маршрут</string>
     <string name="plan_route_select_track_file_for_open">Виберіть який файл з треком відкрити.</string>
     <string name="shared_string_done">Готово</string>
@@ -3918,7 +3916,6 @@
     <string name="select_picture">Вибрати зображення</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Німецька (неформальна)</string>
-    <string name="elevation_data">Ви можете використовувати дані про висоту, щоб врахувати підйом/спуск у вашої подорожі</string>
     <string name="app_mode_light_aircraft">Легкий літак</string>
     <string name="plan_route_join_segments">Об’єднати сегменти</string>
     <string name="plan_route_split_before">Розділити перед</string>
@@ -3966,7 +3963,7 @@
     <string name="select_folder">Вибрати теку</string>
     <string name="select_folder_descr">Виберіть теку або додайте нову</string>
     <string name="shared_string_empty">Порожньо</string>
-    <string name="analyze_by_intervals">Аналіз за інтервалами (розділений інтервал)</string>
+    <string name="analyze_by_intervals">Аналізувати розділені інтервали</string>
     <string name="upload_to_openstreetmap">Відвантажити на OpenStreetMap</string>
     <string name="edit_track">Редагувати трек</string>
     <string name="rename_track">Перейменувати трек</string>
@@ -4005,4 +4002,31 @@
     <string name="delete_waypoints">Видалити маршрутні точки</string>
     <string name="copy_to_map_markers">Копіювати до позначок мапи</string>
     <string name="copy_to_map_favorites">Копіювати до закладок</string>
+    <string name="upload_photo">Вивантаження</string>
+    <string name="upload_photo_completed">Вивантаження завершено</string>
+    <string name="uploading_count">Вивантаження %1$d з %2$d</string>
+    <string name="uploaded_count">Вивантажено %1$d з %2$d</string>
+    <string name="toast_select_edits_for_upload">Виберіть зміни для вивантаження</string>
+    <string name="hillshade_slope_contour_lines">Рельєф місцевості / Схили / Горизонталі</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews — це громадський проєкт про громадські місця, такі як ресторани, готелі, музеї, точки шляху. Він збирає всі загальнодоступні дані про них, такі як світлини, відгуки, посилання на інші системи, посилання OpenStreetMap, Вікіпедія.
+\n
+\nУсі дані OpenPlaceReview відкриті та доступні всім: http://openplacereviews.org/data.
+\n
+\nВи можете прочитати більше за адресою: http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Використати test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Увійти до OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Вода</string>
+    <string name="activity_type_winter_name">Зима</string>
+    <string name="activity_type_snowmobile_name">Снігохід</string>
+    <string name="activity_type_riding_name">Їзда</string>
+    <string name="activity_type_racing_name">Перегони</string>
+    <string name="activity_type_walking_name">Ходьба</string>
+    <string name="activity_type_mountainbike_name">Гірський велосипед</string>
+    <string name="activity_type_offroad_name">Бездоріжжя</string>
+    <string name="activity_type_cycling_name">Їзда на велосипеді</string>
+    <string name="activity_type_hiking_name">піший туризм</string>
+    <string name="activity_type_running_name">Біг</string>
+    <string name="activity_type_car_name">Автомобіль</string>
+    <string name="activity_type_motorbike_name">Мотоцикл</string>
 </resources>

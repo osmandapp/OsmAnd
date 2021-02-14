@@ -3582,7 +3582,7 @@
     <string name="poi_charcoal_pile">Pilha de carvão</string>
     <string name="poi_historic_tank">Tanque histórico</string>
     <string name="poi_hookah_lounge">Salão do cachimbo de água</string>
-    <string name="poi_source_biomass">Fonte de energia: biomassa</string>
+    <string name="poi_generator_source_biomass">Fonte de energia: biomassa</string>
     <string name="poi_access_motorcycle">Acesso de motocicletas</string>
     <string name="poi_access_mofa">Acesso de bicicleta motorizada</string>
     <string name="poi_access_hgv">Acesso de veículos pesados</string>
@@ -3881,4 +3881,14 @@
     <string name="poi_wildlife_crossing_bat_tunnel">Túnel para morcego</string>
     <string name="poi_wildlife_crossing_bat_bridge">Ponte para morcego</string>
     <string name="poi_wildlife_crossing">Travessia de vida selvagem</string>
+    <string name="poi_mobile_library">Posição de parada da biblioteca móvel</string>
+    <string name="poi_summit_register_no">Registro de conferência: não</string>
+    <string name="poi_summit_register_yes">Registro de conferência: sim</string>
+    <string name="poi_piste_status_closed">Status da pista: fechada</string>
+    <string name="poi_piste_status_open">Status da pista: aberta</string>
+    <string name="poi_patrolled_no">Patrulhado: não</string>
+    <string name="poi_patrolled_yes">Patrulhado: sim</string>
+    <string name="poi_gladed_yes">Satisfeito: sim</string>
+    <string name="poi_piste_name">Nome da pista</string>
+    <string name="poi_piste_ski_jump">Salto de esqui</string>
 </resources>

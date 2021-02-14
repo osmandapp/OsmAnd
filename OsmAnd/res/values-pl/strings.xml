@@ -796,7 +796,6 @@
 \nOsmAnd jest aktywnie rozwijany i dalszy rozwój jest uzależniony od wkładu pieniężnego na finansowanie rozwoju i testowania nowych funkcjonalności. Proszę rozważyć zakup OsmAnd+, lub finansowanie konkretnych nowych funkcji lub dokonania ogólnej darowizny na https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
     <string name="avoid_motorway">Unikaj autostrad</string>
-    <string name="snap_to_road_descr">Przyciąga położenie do dróg podczas nawigacji.</string>
     <string name="snap_to_road">Przyciąganie do drogi</string>
     <string name="day_night_info">Informacja o dniu/nocy</string>
     <string name="map_widget_vector_attributes">Atrybuty renderowania</string>
@@ -1993,7 +1992,6 @@
     <string name="shared_string_change">Zmień</string>
     <string name="get_started">Rozpocznij</string>
     <string name="routing_attr_short_way_name">Ekonomiczna trasa</string>
-    <string name="routing_attr_short_way_description">Użyj trasy oszczędzającej paliwo (zwykle najkrótszej).</string>
     <string name="replace_favorite_confirmation">Zastąpić ulubiony punkt %1$s?</string>
     <string name="skip_map_downloading">Pomiń pobieranie map</string>
     <string name="first_usage_greeting">Otrzymuj wskazówki dojazdu i odkrywaj nowe miejsca bez połączenia z Internetem</string>
@@ -2345,7 +2343,7 @@
     <string name="average">Średnia</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Podjazd/zjazd</string>
-    <string name="moving_time">Czas w ruchu</string>
+    <string name="moving_time">Czas poruszania</string>
     <string name="max_min">Maks./min.</string>
     <string name="quick_action_resume_pause_navigation">Zatrzymaj/wznów nawigację</string>
     <string name="quick_action_resume_pause_navigation_descr">Przycisk do wstrzymania lub wznowienia nawigacji.</string>
@@ -3920,7 +3918,6 @@
     <string name="lang_de_casual">Niemiecki (styl potoczny)</string>
     <string name="gpx_upload_public_visibility_descr">\"Publiczny\" oznacza, że ślad jest pokazywany publicznie w śladach GPS i na publicznych listach śladów GPS oraz na publicznej liście śladów z surowymi znacznikami czasowymi. Dane obsługiwane przez API nie odnoszą się do strony śladów. Znaczniki czasu punktów śladowych nie są dostępne za pośrednictwem publicznego API GPS, a punkty śladowe nie są uporządkowane chronologicznie.</string>
     <string name="app_mode_light_aircraft">Lekki samolot</string>
-    <string name="elevation_data">Możesz użyć danych wysokości, aby uwzględnić wzniesienie / zejście podczas podróży</string>
     <string name="plan_route_join_segments">Połącz segmenty</string>
     <string name="plan_route_split_before">Podziel przed</string>
     <string name="plan_route_split_after">Podziel po</string>
@@ -3998,4 +3995,35 @@
     <string name="message_name_is_already_exists">Taka nazwa już istnieje</string>
     <string name="online_routing_engine">Silnik wyznaczania tras online</string>
     <string name="online_routing_engines">Silniki wyznaczania tras online</string>
+    <string name="context_menu_read_full">Przeczytaj całość</string>
+    <string name="context_menu_edit_descr">Edytuj opis</string>
+    <string name="delete_waypoints">Usuń punkty trasy</string>
+    <string name="copy_to_map_markers">Skopiuj do znaczników mapy</string>
+    <string name="copy_to_map_favorites">Skopiuj do ulubionych</string>
+    <string name="upload_photo">Wysyłanie</string>
+    <string name="upload_photo_completed">Przesyłanie zakończone</string>
+    <string name="uploading_count">Przesyłanie %1$d z %2$d</string>
+    <string name="uploaded_count">Przesłano %1$d z %2$d</string>
+    <string name="toast_select_edits_for_upload">Wybierz zmiany do przesłania</string>
+    <string name="hillshade_slope_contour_lines">Wzniesienia / Nachylenie / Linie konturowe</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews to społeczny projekt dotyczący miejsc publicznych, takich jak restauracje, hotele, muzea, punkty trasy. Gromadzi wszystkie publiczne informacje o nich, takie jak zdjęcia, recenzje, linki do innych systemów, link OpenStreetMap, Wikipedia.
+\n
+\nWszystkie dane OpenPlaceReview są otwarte i dostępne dla każdego: http://openplacereviews.org/data.
+\n
+\nMożesz przeczytać więcej na: http://openplacereviews.org</string>
+    <string name="opr_use_dev_url">Użyj test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Zaloguj się do OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Woda</string>
+    <string name="activity_type_winter_name">Zima</string>
+    <string name="activity_type_snowmobile_name">Skuter</string>
+    <string name="activity_type_riding_name">Jazda konna</string>
+    <string name="activity_type_racing_name">Wyścigi</string>
+    <string name="activity_type_mountainbike_name">Kolarstwo górskie</string>
+    <string name="activity_type_cycling_name">Kolarstwo</string>
+    <string name="activity_type_hiking_name">Turystyka piesza</string>
+    <string name="activity_type_running_name">Bieganie</string>
+    <string name="activity_type_walking_name">Pieszo</string>
+    <string name="activity_type_motorbike_name">Motocykl</string>
+    <string name="activity_type_offroad_name">Poza drogą</string>
+    <string name="activity_type_car_name">Samochód</string>
 </resources>

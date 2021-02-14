@@ -795,7 +795,6 @@
     <string name="poi_filter_sightseeing">Besigtigingstoere</string>
     <string name="show_warnings_descr">Verstel verkeer waarskuwings (spoedbeperkings, geforseerde stoppe, spoedhobbels), spoed kameras, en laan inligting</string>
 	<string name="avoid_motorway">Vermy snelweë</string>
-	<string name="snap_to_road_descr">Knip posisie aan paaie vas gedurende navigasie</string>
 	<string name="snap_to_road">Knip vas aan pad</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions) is `n ope bron navigasie toepassing met toegang tot `n wye verskeidenheid wêreldwye OpenStreetMap (OSM) inligting. Alle kaart inligting (vektor of teël kaarte) kan gestoor word op die foon geheue kaart vir aflyn gebruik. OsmAnd bied ook aan- en aflyn routeberekening funksionaliteit insluitend draai-vir-draai stem begeleiding. Sommige van die kern funksies: - Volledege aflyn funksionaliteit (stoor afgelaaide vektor of teël kaarte in `n kiesbare leër) - Kompakte aflyn vektor kaarte vir die hele wëreld beskikbaar - aflaai van land of streek kaarte direk uit die toepassing - Oorlegging van verskeie kaart lae moontlik, bv GPX of navigasie spore, Belangepunte, gunstelinge, kontoerlyne, publieke vervoer haltes, ekstra kaarte met verstelbare deurskynendheid - Aflyn

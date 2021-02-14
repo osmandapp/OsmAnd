@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -56,7 +55,7 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 			WrapContentHeightViewPager pager = row.findViewById(R.id.pager);
 			PagerSlidingTabStrip tabLayout = row.findViewById(R.id.sliding_tabs);
 
-			pager.setAdapter(new GPXItemPagerAdapter(tabLayout, item, displayHelper, listener));
+			pager.setAdapter(new GPXItemPagerAdapter(app, item, displayHelper, nightMode, listener));
 			if (create) {
 				tabLayout.setViewPager(pager);
 			} else {
@@ -72,15 +71,8 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 		View row = UiUtilities.getInflater(context, nightMode).inflate(R.layout.gpx_list_item_tab_content, root, false);
 
 		PagerSlidingTabStrip tabLayout = row.findViewById(R.id.sliding_tabs);
-		tabLayout.setTabBackground(R.color.color_transparent);
-		tabLayout.setIndicatorColorResource(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-		tabLayout.setIndicatorBgColorResource(nightMode ? R.color.divider_color_dark : R.color.divider_color_light);
-		tabLayout.setIndicatorHeight(AndroidUtils.dpToPx(context, 1f));
-		if (!nightMode) {
-			tabLayout.setTextColor(tabLayout.getIndicatorColor());
-			tabLayout.setTabInactiveTextColor(ContextCompat.getColor(row.getContext(), R.color.text_color_secondary_light));
-		}
-		tabLayout.setTextSize(AndroidUtils.spToPx(context, 12f));
+		tabLayout.setTabBackground(AndroidUtils.resolveAttribute(context, R.attr.btn_bg_border_inactive));
+		tabLayout.setIndicatorHeight(0);
 		tabLayout.setShouldExpand(true);
 		WrapContentHeightViewPager pager = row.findViewById(R.id.pager);
 		pager.setSwipeable(false);

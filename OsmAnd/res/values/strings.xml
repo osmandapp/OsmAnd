@@ -12,6 +12,30 @@
 
 -->
 
+    <string name="elevation_data_descr">Routing could avoid strong uphills</string>
+    <string name="map_orientation_threshold_descr">Don\'t rotate map view if speed is less than a threshold</string>
+    <string name="snap_to_road_descr">Current location icon will be snapped to the current navigation route</string>
+    <string name="routing_attr_driving_style_description">Select driving purpose to get shorter, faster or safer route</string>
+    <string name="routing_attr_short_way_description">Optimized shorter route (energy saving)</string>
+    <string name="temporary_conditional_routing_descr">Use road restrictions that are active now on the map</string>
+    <string name="activity_type_car_name">Car</string>
+    <string name="activity_type_motorbike_name">Motorbike</string>
+    <string name="activity_type_offroad_name">Off-road</string>
+    <string name="activity_type_walking_name">Walking</string>
+    <string name="activity_type_running_name">Running</string>
+    <string name="activity_type_hiking_name">Hiking</string>
+    <string name="activity_type_cycling_name">Cycling</string>
+    <string name="activity_type_mountainbike_name">Mountainbike</string>
+    <string name="activity_type_racing_name">Racing</string>
+    <string name="activity_type_riding_name">Riding</string>
+    <string name="activity_type_snowmobile_name">Snowmobile</string>
+    <string name="activity_type_winter_name">Winter</string>
+    <string name="activity_type_water_name">Water</string>
+    <string name="login_open_place_reviews">Login to OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews is a community-driven project about public places such as restaurants, hotels, museums, waypoints. It collects all public information about them such as photos, reviews, links to other systems link OpenStreetMap, Wikipedia.\n\nAll OpenPlaceReview data is open and available to everyone: http://openplacereviews.org/data.\n\nYou can read more at: http://openplacereviews.org</string>
+    <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
     <string name="segments_count">Segment %1$d</string>
@@ -58,7 +82,7 @@
     <string name="rename_track">Rename track</string>
     <string name="edit_track">Edit track</string>
     <string name="upload_to_openstreetmap">Upload to OpenStreetMap</string>
-    <string name="analyze_by_intervals">Analyze by intervals (split interval)</string>
+    <string name="analyze_by_intervals">Analyze split intervals</string>
     <string name="shared_string_empty">Empty</string>
     <string name="select_folder_descr">Select folder or add new one</string>
     <string name="select_folder">Select folder</string>
@@ -102,7 +126,6 @@
     <string name="plan_route_split_before">Split before</string>
     <string name="plan_route_join_segments">Join segments</string>
     <string name="app_mode_light_aircraft">Light aircraft</string>
-    <string name="elevation_data">You can use elevation data to account for ascent/descent of your trip</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos as per OpenStreetMap data.</string>
     <string name="use_dev_url">Use dev.openstreetmap.org</string>
@@ -1729,7 +1752,6 @@
     <string name="update_all_maps_now">Update all maps now?</string>
     <string name="clear_tile_data">Clear all tiles</string>
     <string name="routing_attr_short_way_name">Fuel-efficient way</string>
-    <string name="routing_attr_short_way_description">Use fuel-efficient way (usually shorter).</string>
     <string name="replace_favorite_confirmation">Are you sure you want to replace Favorite %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Overground objects</string>
     <string name="shared_string_change">Change</string>
@@ -2893,7 +2915,6 @@
     <string name="avoid_motorway">No motorways</string>
     <string name="auto_zoom_map_descr">Zoom level according to your speed (while map is synchronized with current position).</string>
     <string name="auto_zoom_map">Auto zoom map</string>
-    <string name="snap_to_road_descr">Snap position to roads during navigation.</string>
     <string name="snap_to_road">Snap to road</string>
     <string name="interrupt_music_descr">Voice prompts pause music playback.</string>
     <string name="interrupt_music">Pause music</string>

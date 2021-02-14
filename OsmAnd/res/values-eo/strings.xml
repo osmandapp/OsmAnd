@@ -654,7 +654,7 @@
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu https://osmand.net).</string>
     <string name="none_selected_gpx">Unue elektu GPX‑dosieron per frapetadi.</string>
     <string name="local_index_select_gpx_file">Elektu kurson</string>
-    <string name="gpx_split_interval">Intertempo de divido</string>
+    <string name="gpx_split_interval">Fragmento</string>
     <string name="sort_by_distance">Ordigi laŭ distanco</string>
     <string name="sort_by_name">Ordigi laŭ nomo</string>
     <string name="plugin_touringview_name">Turisma map-vido</string>
@@ -1056,7 +1056,6 @@
     <string name="avoid_motorway">Sen aŭtovojojn</string>
     <string name="auto_zoom_map">Aŭtomate skali mapon</string>
     <string name="auto_zoom_map_descr">Skali mapon depende de via rapido (kiam mapo estas samtempigita kun aktuala pozicio).</string>
-    <string name="snap_to_road_descr">Proksimumigi pozicion al vojo dum navigado.</string>
     <string name="snap_to_road">Proksimumigi al vojo</string>
     <string name="interrupt_music">Paŭzigi muzikon</string>
     <string name="interrupt_music_descr">Voĉaj anoncoj paǔzigas ludadon de muziko.</string>
@@ -1991,7 +1990,6 @@
     <string name="shared_string_change">Ŝanĝi</string>
     <string name="get_started">Ekigi</string>
     <string name="routing_attr_short_way_name">Brulaĵ-ŝparema kurso</string>
-    <string name="routing_attr_short_way_description">Kalkuli brulaĵ-ŝpareman kurson (kutime plej mallongan).</string>
     <string name="replace_favorite_confirmation">Ĉu vi volas anstataŭigi la ŝatatan ejon %1$s?</string>
     <string name="clear_tile_data">Forviŝi ĉiujn kahelojn</string>
     <string name="update_all_maps_now">Ĉu ĝisdatigi ĉiujn mapojn nun?</string>
@@ -2405,7 +2403,7 @@
     <string name="mapillary_action_descr">Kontribui viajn strat-nivelajn vidaĵojn pri tiu ĉi loko al Mapillary.</string>
     <string name="plugin_mapillary_descr">Strat-nivelaj fotoj por ĉiuj. Esplori lokojn, kunlabori kaj foti la mondon.</string>
     <string name="online_photos">Enretaj fotoj</string>
-    <string name="no_photos_descr">Neniuj fotoj tie ĉi.</string>
+    <string name="no_photos_descr">Neniu foto tie ĉi.</string>
     <string name="shared_string_install">Instali</string>
     <string name="improve_coverage_mapillary">Pliigi fotan atingon de Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Instalu la aplikaĵon Mapillary por aldoni fotojn al tiu ĉi loko sur la mapo.</string>
@@ -2433,7 +2431,7 @@
     <string name="average">Mezumo</string>
     <string name="of">%1$d el %2$d</string>
     <string name="ascent_descent">Supreniroj/malsupreniroj</string>
-    <string name="moving_time">Movada tempo</string>
+    <string name="moving_time">Tempo dum movo</string>
     <string name="max_min">Maks./min.</string>
     <string name="min_max">Min./maks.</string>
     <string name="rendering_value_translucent_pink_name">Rozkolora diafana</string>
@@ -3919,7 +3917,6 @@
     <string name="select_picture">Elektu bildon</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Germana (ordinara)</string>
-    <string name="elevation_data">Vi povas uzi datumojn pri altitudo por kalkuli suprenirojn/malsuprenirojn de via kurso</string>
     <string name="app_mode_light_aircraft">Malpeza aviadilo</string>
     <string name="plan_route_join_segments">Kunigi segmentojn</string>
     <string name="plan_route_split_before">Dividi antaŭ</string>
@@ -3967,7 +3964,7 @@
     <string name="select_folder">Elekti dosierujon</string>
     <string name="select_folder_descr">Elekti dosierujon aŭ krei novan</string>
     <string name="shared_string_empty">Malplena</string>
-    <string name="analyze_by_intervals">Analizi laŭ intertempoj (dividoj)</string>
+    <string name="analyze_by_intervals">Analizi laŭ fragmentoj</string>
     <string name="upload_to_openstreetmap">Alŝuti al OpenStreetMap</string>
     <string name="edit_track">Redakti spuron</string>
     <string name="rename_track">Renomi spuron</string>
@@ -4006,4 +4003,31 @@
     <string name="context_menu_edit_descr">Redakti priskribon</string>
     <string name="delete_waypoints">Forigi navigadpunktojn</string>
     <string name="copy_to_map_markers">Kopii al map‑markoj</string>
+    <string name="upload_photo">Sendado</string>
+    <string name="upload_photo_completed">Sendado finita</string>
+    <string name="uploading_count">Sendado de %1$d el %2$d</string>
+    <string name="uploaded_count">Sendis %1$d el %2$d</string>
+    <string name="toast_select_edits_for_upload">Elektu redaktojn por sendi</string>
+    <string name="hillshade_slope_contour_lines">Nivelombrumo / dekliveco / nivelkurboj</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews estas komunuma projekto pri publikaj lokoj, kiel restoracioj, hoteloj, muzeoj, rekoniloj, ktp. Ĝi kolektas diversajn publikajn informojn pri tiuj punktoj: fotojn, opiniojn, ligilojn al OpenStreetMap kaj Vikipedio.
+\n
+\nĈiuj OpenPlaceReview‑datumoj estas malfermaj kaj disponeblaj por ĉiu: http://openplacereviews.org/data
+\n
+\nPliaj informoj ĉe http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Uzi test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Ensaluti al OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Akvo</string>
+    <string name="activity_type_winter_name">Vintro</string>
+    <string name="activity_type_snowmobile_name">Motorsledo</string>
+    <string name="activity_type_riding_name">Rajdado</string>
+    <string name="activity_type_racing_name">Kurkonkurso</string>
+    <string name="activity_type_mountainbike_name">Montbiciklo</string>
+    <string name="activity_type_cycling_name">Biciklado</string>
+    <string name="activity_type_hiking_name">Marŝado</string>
+    <string name="activity_type_running_name">Kurado</string>
+    <string name="activity_type_walking_name">Piedirado</string>
+    <string name="activity_type_offroad_name">Ekstervoje</string>
+    <string name="activity_type_motorbike_name">Motorciklo</string>
+    <string name="activity_type_car_name">Aŭto</string>
 </resources>

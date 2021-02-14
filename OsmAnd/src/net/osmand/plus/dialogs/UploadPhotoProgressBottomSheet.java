@@ -19,9 +19,9 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.mapcontextmenu.UploadPhotosAsyncTask.UploadPhotosListener;
+import net.osmand.plus.mapcontextmenu.UploadPhotosAsyncTask.UploadPhotosProgressListener;
 
-public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragment implements UploadPhotosListener {
+public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragment implements UploadPhotosProgressListener {
 
 	public static final String TAG = UploadPhotoProgressBottomSheet.class.getSimpleName();
 
@@ -33,6 +33,7 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 
 	private int progress;
 	private int maxProgress;
+	private boolean uploadingFinished;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -44,17 +45,12 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 		uploadedPhotosCounter = view.findViewById(R.id.description);
 		progressBar = view.findViewById(R.id.progress_bar);
 		progressBar.setMax(maxProgress);
-		String titleProgress = getString(progress == maxProgress? R.string.upload_photo_completed: R.string.upload_photo);
-		String descriptionProgress;
-		if (progress == maxProgress) {
-			descriptionProgress = getString(R.string.uploaded_count, progress, maxProgress);
-		} else {
-			descriptionProgress = getString(R.string.uploading_count, progress, maxProgress);
-		}
+
+		int descriptionId = uploadingFinished ? R.string.uploaded_count : R.string.uploading_count;
 
 		BaseBottomSheetItem descriptionItem = new BottomSheetItemWithDescription.Builder()
-				.setDescription(descriptionProgress)
-				.setTitle(titleProgress)
+				.setDescription(getString(descriptionId, progress, maxProgress))
+				.setTitle(getString(uploadingFinished ? R.string.upload_photo_completed : R.string.upload_photo))
 				.setCustomView(view)
 				.create();
 		items.add(descriptionItem);
@@ -74,9 +70,10 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	private void updateProgress(int progress) {
+		int descriptionId = uploadingFinished ? R.string.uploaded_count : R.string.uploading_count;
 		progressBar.setProgress(progress);
-		uploadedPhotosCounter.setText((getString(R.string.uploading_count, progress, maxProgress)));
-		uploadedPhotosTitle.setText(progress == maxProgress ? R.string.upload_photo_completed : R.string.upload_photo);
+		uploadedPhotosCounter.setText(getString(descriptionId, progress, maxProgress));
+		uploadedPhotosTitle.setText(uploadingFinished ? R.string.upload_photo_completed : R.string.upload_photo);
 	}
 
 	@Override
@@ -87,12 +84,9 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 
 	@Override
 	public void uploadPhotosFinished() {
-		updateProgress(maxProgress);
-		if (progress == maxProgress) {
-			uploadedPhotosCounter.setText((getString(R.string.uploaded_count, progress, maxProgress)));
-			setDismissButtonTextId(R.string.shared_string_close);
-			UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), getDismissButtonTextId());
-		}
+		uploadingFinished = true;
+		updateProgress(progress);
+		UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), getDismissButtonTextId());
 	}
 
 	@Override
@@ -104,7 +98,12 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	public static UploadPhotosListener showInstance(@NonNull FragmentManager fragmentManager, int maxProgress, OnDismissListener listener) {
+	@Override
+	protected int getDismissButtonTextId() {
+		return uploadingFinished ? R.string.shared_string_close : R.string.shared_string_cancel;
+	}
+
+	public static UploadPhotosProgressListener showInstance(@NonNull FragmentManager fragmentManager, int maxProgress, OnDismissListener listener) {
 		UploadPhotoProgressBottomSheet fragment = new UploadPhotoProgressBottomSheet();
 		fragment.setRetainInstance(true);
 		fragment.setMaxProgress(maxProgress);

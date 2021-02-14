@@ -20,7 +20,6 @@
     <string name="avoid_motorway">Όχι αυτοκινητόδρομους</string>
     <string name="auto_zoom_map_descr">Επίπεδο εστίασης χάρτη ανάλογα με την ταχύτητά σας (ενώ ο χάρτης συγχρονίζεται με την τρέχουσα θέση).</string>
     <string name="auto_zoom_map">Αυτόματη εστίαση χάρτη</string>
-    <string name="snap_to_road_descr">Προσανατολισμός στους δρόμους κατά τη διάρκεια της πλοήγησης.</string>
     <string name="snap_to_road">Προσανατολισμός στο δρόμο</string>
     <string name="osmand_short_description_80_chars">Προβολή φορητού παγκόσμιου χάρτη &amp; πλοήγηση για χάρτες OSM χωρίς και με διαδίκτυο</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Αυτοματοποιημένες Οδηγίες Πλοήγησης)
@@ -267,7 +266,7 @@
     <string name="offline_edition">Επεξεργασία χωρίς διαδίκτυο</string>
     <string name="offline_edition_descr">Χρήση πάντα της επεξεργασίας χωρίς διαδίκτυο.</string>
     <string name="update_poi_does_not_change_indexes">Οι αλλαγές στα ΣΕ μέσω της εφαρμογής δεν επηρεάζουν τα ληφθέντα αρχεία χάρτη, οι αλλαγές αποθηκεύονται ως αρχείο στη συσκευή σας.</string>
-    <string name="local_openstreetmap_uploading">Αποστολή …</string>
+    <string name="local_openstreetmap_uploading">Αποστολή…</string>
     <string name="local_openstreetmap_were_uploaded">{0} ΣΕ/Οι σημειώσεις απεστάλησαν</string>
     <string name="local_openstreetmap_uploadall">Αποστολή όλων</string>
     <string name="local_openstreetmap_upload">Αποστολή επεξεργασίας στο OSM</string>
@@ -778,7 +777,7 @@
     <string name="context_menu_item_update_map">Ενημέρωση χάρτη</string>
     <string name="context_menu_item_create_poi">Δημιουργία ΣΕ</string>
     <string name="shared_string_yes">Ναι</string>
-    <string name="shared_string_cancel">Ακύρωση</string>
+    <string name="shared_string_cancel">Άκυρο</string>
     <string name="shared_string_apply">Εφαρμογή</string>
     <string name="shared_string_no">Όχι</string>
     <string name="add_favorite_dialog_top_text">Εισαγωγή ονόματος αγαπημένου</string>
@@ -813,7 +812,7 @@
     <string name="edit_filter_delete_dialog_title">Διαγραφή αυτού του φίλτρου;</string>
     <string name="edit_filter_delete_message">Το φίλτρο \'%1$s\' διαγράφηκε</string>
     <string name="edit_filter_create_message">Το φίλτρο \'%1$s\' δημιουργήθηκε</string>
-    <string name="email">ηλ. διεύθυνση</string>
+    <string name="email">ηλεκτρονικό ταχυδρομείο</string>
     <string name="intermediate_point_too_far">Ο ενδιάμεσος προορισμός %1$s είναι πολύ μακριά από τον πλησιέστερο δρόμο.</string>
     <string name="arrived_at_intermediate_point">Φτάσατε στον ενδιάμεσο προορισμό σας</string>
     <string name="context_menu_item_intermediate_point">Προσθήκη ως ενδιάμεσου προορισμού</string>
@@ -1175,7 +1174,7 @@
     <string name="keep_informing_never">Μόνο χειροκίνητα (πατήστε το βέλος)</string>
     <string name="keep_informing">Επανάληψη οδηγιών πλοήγησης</string>
     <string name="import_file_favourites">Αποθήκευση δεδομένων ως αρχείο GPX ή εισαγωγή σημείων διαδρομής στα \'Αγαπημένα\';</string>
-    <string name="shared_string_share">Διαμοιρασμός</string>
+    <string name="shared_string_share">Κοινοποίηση</string>
     <string name="navigation_intent_invalid">Μη έγκυρη μορφή: %s</string>
     <string name="stop_navigation_service">Διακοπή</string>
     <string name="sleep_mode_stop_dialog">Διακοπή λειτουργίας παρασκηνίου του GPS;</string>
@@ -1270,7 +1269,7 @@
     <string name="dash_download_new_one">Λήψη Νέου Χάρτη</string>
     <string name="map_locale">Γλώσσα χάρτη</string>
     <string name="rendering_attr_roadStyle_name">Μορφή δρόμου</string>
-    <string name="rendering_value_default_name">Προκαθορισμένο</string>
+    <string name="rendering_value_default_name">Προεπιλογή</string>
     <string name="rendering_value_orange_name">Πορτοκαλί</string>
     <string name="traffic_warning_railways">Διασταύρωση σιδηροτροχιάς</string>
     <string name="show_railway_warnings">Διασταυρώσεις σιδηροτροχιάς</string>
@@ -1467,7 +1466,7 @@
     <string name="track_segments">Τμήματα διαδρομής</string>
     <string name="track_points">Σημεία της διαδρομής</string>
     <string name="location_on_map">Τοποθεσία:\n Γ. Πλ %1$s\n Γ. Μηκ %2$s</string>
-    <string name="rendering_value__name">Προκαθορισμένο</string>
+    <string name="rendering_value__name">Προεπιλογή</string>
     <string name="print_route">Εκτύπωση διαδρομής</string>
     <string name="osmand_parking_overdue">εκπρόθεσμο</string>
     <string name="simulate_your_location">Προσομοίωση της θέση σας</string>
@@ -1965,7 +1964,6 @@
     <string name="update_all_maps_now">Θέλετε να ενημερώσετε όλους τους χάρτες τώρα;</string>
     <string name="clear_tile_data">Καθαρισμός όλων των πλακιδίων</string>
     <string name="routing_attr_short_way_name">Διαδρομή με οικονομία καυσίμων</string>
-    <string name="routing_attr_short_way_description">Χρησιμοποιήστε τη διαδρομή με οικονομία καυσίμων (συνήθως συντομότερη).</string>
     <string name="replace_favorite_confirmation">Είσαστε σίγουρος/η ότι θέλετε να αντικαταστήσετε το Αγαπημένο %1$s;</string>
     <string name="rendering_attr_hideOverground_name">Υπέργεια αντικείμενα</string>
     <string name="shared_string_change">Αλλαγή</string>
@@ -3013,7 +3011,7 @@
     <string name="rendering_attr_showLez_description">Εμφάνιση στον χάρτη ζωνών για χαμηλή εκπομπή καυσαερίων. Δεν επηρεάζει τη δρομολόγηση.</string>
     <string name="rendering_attr_showLez_name">Εμφάνιση ζωνών χαμηλής εκπομπής καυσαερίων</string>
     <string name="temporary_conditional_routing">Λάβετε υπόψη τους προσωρινούς περιορισμούς</string>
-    <string name="shared_string_default">Προεπιλεγμένο</string>
+    <string name="shared_string_default">Προεπιλογή</string>
     <string name="app_mode_pickup_truck">Ημιφορτηγό</string>
     <string name="day">Ημέρα</string>
     <string name="days_2_4">Ημέρες</string>
@@ -3385,7 +3383,7 @@
     <string name="monitoring_min_accuracy_descr_recommendation">Σύσταση: Είναι δύσκολο να προβλεφθεί τι θα εγγραφεί και τι όχι, ίσως είναι καλύτερο να απενεργοποιήσετε αυτό το φίλτρο.</string>
     <string name="monitoring_min_accuracy_descr_remark">Παρατήρηση: Εάν το GPS είχε απενεργοποιηθεί αμέσως πριν μια εγγραφή, το πρώτο μετρούμενο σημείο μπορεί να έχει μειωμένη ακρίβεια, έτσι μπορεί να θέλουμε να περιμένουμε λιγάκι πριν την καταγραφή σημείου (ή να εγγράψουμε τα καλύτερα 3 διαδοχικά σημεία, κλπ.), αλλά αυτό δεν έχει ακόμα υλοποιηθεί.</string>
     <string name="monitoring_min_distance_descr">Αυτό το φίλτρο αποφεύγει διπλά σημεία να εγγραφούν όταν έχει συμβεί πολύ λίγη ενεργή κίνηση, καθιστώντας καλύτερη τη χωροταξική εμφάνιση των ιχνών που δεν επεξεργάζονται αργότερα.</string>
-    <string name="button_rate">Τιμή</string>
+    <string name="button_rate">Βαθμολόγηση</string>
     <string name="monitoring_min_distance_descr_side_effect">Παράπλευρα αποτελέσματα: Περίοδοι σε ακινησία δεν καταγράφονται καθόλου ή μόνο με ένα σημείο καθεμιά. Μικρές (πραγματικός κόσμος) κινήσεις (π.χ. πλάγιες, για να σημειώσουν έξοδο στο ταξίδι σας) μπορεί να φιλτραριστούν. Το αρχείο σας περιέχει λιγότερες πληροφορίες για μετεπεξεργασία και έχει χειρότερα στατιστικά φιλτράροντας προφανώς περιττά σημεία κατά τον χρόνο εγγραφής, ενώ δυνητικά διατηρεί παράσιτα που προκαλούνται από κακή λήψη ή επιπτώσεις κυκλωμάτων GPS.</string>
     <string name="monitoring_min_distance_descr_recommendation">Σύσταση: Ρύθμιση 5 μέτρων μπορεί να λειτουργήσει καλά για σας, εάν δεν χρειάζεστε να πιάσετε λεπτομέρειες πιο ακριβείς από αυτό και δεν θέλετε να πάρετε δεδομένα σε ακινησία.</string>
     <string name="live_monitoring_time_buffer">Ενδιάμεσος χρόνος</string>

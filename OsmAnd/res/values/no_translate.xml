@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">OsmAnd~</string>
-    <string name="app_name_free">OsmAnd Nightly</string>
+    <!-- Part of build.gradle -->
+    <!-- <string name="app_name">OsmAnd~</string> -->
+    <!-- <string name="app_edition"></string> -->
     <!-- string name="app_version_suffix"></string -->
 
     <!-- Not translatable -->
@@ -9,11 +10,7 @@
     <string name="srtm_plugin_price">€2,99</string>
     <string name="sea_depth_maps_price">€1,39</string>
     <string name="osm_live">OsmAnd Live</string>
-    <string name="ga_api_key">UA-28342846-2</string>
-    <string name="ga_dispatchPeriod">10</string>
-    <string name="ga_debug">true</string>
     <string name="openstreetmap_copyright"><a href="https://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
-    <string name="app_edition"></string>
     <string name="support_email">support@osmand.net</string>
     <string name="preferred_locale_no_translate">Display language</string>
     <string name="system_locale_no_translate">Device language</string>

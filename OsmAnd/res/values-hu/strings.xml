@@ -822,7 +822,6 @@
 \n</string>
     <string name="osmand_plus_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM térképekkel</string>
     <string name="avoid_motorway">Autópálya nélkül</string>
-    <string name="snap_to_road_descr">Úthoz rögzítés navigáció közben.</string>
     <string name="snap_to_road">Úthoz illesztés</string>
     <string name="add_as_last_destination_point">Hozzáadás utolsó köztes célpontként</string>
     <string name="add_as_first_destination_point">Hozzáadás első köztes célpontként</string>
@@ -2010,7 +2009,6 @@
     <string name="update_all_maps_now">Frissíted most az összes térképet?</string>
     <string name="clear_tile_data">Összes csempe törlése</string>
     <string name="routing_attr_short_way_name">Üzemanyag-takarékos útvonal</string>
-    <string name="routing_attr_short_way_description">Üzemanyag-takarékos útvonal tervezése (általában rövidebb).</string>
     <string name="replace_favorite_confirmation">Lecseréled a(z) %1$s Kedvencet\?</string>
     <string name="driving_region_australia">Ausztrália</string>
     <string name="get_for">Beszerzés %1$s-ért</string>
@@ -3166,7 +3164,7 @@
     <string name="routing_attr_allow_expert_description">Rendkívül nehéz útvonalak veszélyes akadályokkal és környezettel.</string>
     <string name="routing_attr_allow_skating_only_name">Csak korcsolyázó mozgással futható utak engedélyezése</string>
     <string name="routing_attr_allow_skating_only_description">Szabad vagy korcsolyázó stílushoz karbantartott utak, klasszikus nyomok nélkül.</string>
-    <string name="routing_attr_allow_classic_only_description">Klasszikus stílushoz karbantartott útvonalak, korcsolyázó nyomok nélkül. Ide tartoznak a kisebb hójárókkal karbantartott lazább pályájú útvonalak és a síelők által kézzel karbantartott nyomok is.</string>
+    <string name="routing_attr_allow_classic_only_description">Klasszikus stílushoz karbantartott útvonalak, korcsolyázó nyomok nélkül. Ide tartoznak a kisebb motoros szánokkal karbantartott lazább pályájú útvonalak és a síelők által kézzel karbantartott nyomok is.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">1. osztály (burkolt)</string>
     <string name="rendering_attr_highway_class_track_grade2_name">2. osztály (kavicsos)</string>
     <string name="rendering_attr_highway_class_track_grade3_name">3. osztály (kemény földút)</string>
@@ -3912,7 +3910,6 @@
     <string name="select_picture">Kép kijelölése</string>
     <string name="lang_de_casual">német (tegeződő)</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="elevation_data">A magassági adatok felhasználásával figyelembe veheti az utazás során az emelkedést / lejtést</string>
     <string name="app_mode_light_aircraft">Könnyű légi jármű</string>
     <string name="plan_route_split_before">Elvágás előtte</string>
     <string name="plan_route_split_after">Elvágás utána</string>
@@ -3961,7 +3958,7 @@
     <string name="select_folder">Mappa kijelölése</string>
     <string name="select_folder_descr">Mappa kijelölése vagy új hozzáadása</string>
     <string name="shared_string_empty">Üres</string>
-    <string name="analyze_by_intervals">Intervallumonkénti elemzés (felosztási intervallumok)</string>
+    <string name="analyze_by_intervals">Elemzés felosztási intervallumonként</string>
     <string name="upload_to_openstreetmap">Feltöltés az OpenStreetMapre</string>
     <string name="edit_track">Nyomvonal szerkesztése</string>
     <string name="rename_track">Nyomvonal átnevezése</string>
@@ -4000,4 +3997,31 @@
     <string name="delete_waypoints">Útpontok törlése</string>
     <string name="copy_to_map_markers">Másolás a térképjelölők közé</string>
     <string name="copy_to_map_favorites">Másolás a kedvencek közé</string>
+    <string name="upload_photo">Felöltés folyamatban</string>
+    <string name="upload_photo_completed">Feltöltés befejezve</string>
+    <string name="uploading_count">%1$d / %2$d feltöltés alatt</string>
+    <string name="uploaded_count">%1$d / %2$d feltöltve</string>
+    <string name="toast_select_edits_for_upload">Szerkesztések kijelölése feltöltéshez</string>
+    <string name="activity_type_snowmobile_name">Motoros szán</string>
+    <string name="hillshade_slope_contour_lines">Domborzatárnyékolás / lejtés / szintvonalak</string>
+    <string name="open_place_reviews_plugin_description">Az OpenPlaceReviews egy közösségvezérelt projekt nyilvános helyekről (éttermek, szállodák, múzeumok, útpontok). Minden nyilvános információt összegyűjt róluk, például fényképeket, értékelésüket, más rendszerek – OpenStreetMap, Wikipedia – linkeket.
+\n
+\nMinden OpenPlaceReview-adat nyitott és mindenki számára elérhető itt: https://openplacereviews.org/data.
+\n
+\nBővebben itt olvashat: https://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">A test.openplacereviews.org használata</string>
+    <string name="login_open_place_reviews">Bejelentkezés az OpenPlaceReviews-ba</string>
+    <string name="activity_type_water_name">Víz</string>
+    <string name="activity_type_winter_name">Tél</string>
+    <string name="activity_type_riding_name">Lovaglás</string>
+    <string name="activity_type_racing_name">Versenykerékpározás</string>
+    <string name="activity_type_mountainbike_name">Hegyi kerékpározás</string>
+    <string name="activity_type_cycling_name">Kerékpározás</string>
+    <string name="activity_type_hiking_name">Túrázás</string>
+    <string name="activity_type_running_name">Futás</string>
+    <string name="activity_type_walking_name">Séta</string>
+    <string name="activity_type_offroad_name">Terepjáró</string>
+    <string name="activity_type_motorbike_name">Motorkerékpár</string>
+    <string name="activity_type_car_name">Személyautó</string>
 </resources>

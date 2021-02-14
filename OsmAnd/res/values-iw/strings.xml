@@ -47,7 +47,6 @@
     <string name="avoid_motorway">ללא כבישים סלולים</string>
     <string name="auto_zoom_map_descr">תקריב המפה בהתאמה אוטומטית למהירות (בעוד שהמפה מסתנכרנת עם המיקום הנוכחי).</string>
     <string name="auto_zoom_map">שינוי תקריב אוטומטי במפה</string>
-    <string name="snap_to_road_descr">הצמדת המיקום לדרכים במהלך הניווט.</string>
     <string name="snap_to_road">הצמדה לדרך</string>
     <string name="osmand_short_description_80_chars">OsmAnd הנו יישומון צפייה במפות וניווט עם מפות מקוונות ובלתי מקוונות של OSM</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd הנו יישום ניווט בקוד פתוח עבור מפות מקוונות ובלתי מקוונות</string>
@@ -1528,7 +1527,7 @@
     <string name="distance">מרחק</string>
     <string name="average">ממוצע</string>
     <string name="of">%1$d מתוך %2$d</string>
-    <string name="moving_time">זמן תנועה</string>
+    <string name="moving_time">זמן בתנועה</string>
     <string name="max_min">מרבי/מזערי</string>
     <string name="min_max">מזערי/מרבי</string>
     <string name="index_tours">סיורים</string>
@@ -2023,7 +2022,6 @@
     <string name="update_all_maps_now">לעדכן את כל המפות כעת?</string>
     <string name="clear_tile_data">מחיקת כל האריחים</string>
     <string name="routing_attr_short_way_name">דרך חסכונית בדלק</string>
-    <string name="routing_attr_short_way_description">שימוש בדרך חסכונית בדלק (בד״כ קצרה יותר).</string>
     <string name="replace_favorite_confirmation">להחליף את המועדף %1$s?</string>
     <string name="rendering_attr_hideOverground_name">עצמים מעל הקרקע</string>
     <string name="shared_string_change">שינוי</string>
@@ -3920,7 +3918,6 @@
     <string name="select_picture">בחירת תמונה</string>
     <string name="lang_de_casual">גרמנית (עממית)</string>
     <string name="ltr_or_rtl_combine_via_star">‏%1$s‏ * %2$s</string>
-    <string name="elevation_data">אפשר להשתמש בנתוני רום לצורך חישוב עליה/ירידה במהלך הטיול</string>
     <string name="app_mode_light_aircraft">כלי טיס קל</string>
     <string name="plan_route_join_segments">צירוף מקטעים</string>
     <string name="plan_route_split_before">לפצל לפני</string>
@@ -3970,7 +3967,7 @@
     <string name="select_folder">בחירת תקינה</string>
     <string name="select_folder_descr">נא לבחור תיקייה או להוסיף אחת חדשה</string>
     <string name="shared_string_empty">ריק</string>
-    <string name="analyze_by_intervals">ניתוח לפי מרווחים (פיצול מרווחים)</string>
+    <string name="analyze_by_intervals">ניתוח מרווחי פיצול</string>
     <string name="upload_to_openstreetmap">העלאה ל־OpenStreetMap</string>
     <string name="edit_track">עריכת מסלול</string>
     <string name="rename_track">שינוי שם מסלול</string>
@@ -4001,4 +3998,39 @@
     <string name="delete_waypoints">מחיקת נקודות דרך</string>
     <string name="copy_to_map_markers">העתקה לסמני המפה</string>
     <string name="copy_to_map_favorites">העתקה למועדפים</string>
+    <string name="shared_string_sec">שנ׳</string>
+    <string name="announcement_time_passing">מעבר</string>
+    <string name="announcement_time_approach">הגעה</string>
+    <string name="announcement_time_prepare_long">הכנה ממושכת</string>
+    <string name="announcement_time_prepare">הכנה</string>
+    <string name="shared_string_turn">פנייה</string>
+    <string name="announcement_time_intervals">הפרשי זמן ומרחק</string>
+    <string name="upload_photo">מתבצעת שליחה</string>
+    <string name="upload_photo_completed">השליחה הושלמה</string>
+    <string name="uploading_count">נשלחות %1$d מתוך %2$d</string>
+    <string name="uploaded_count">נשלחו %1$d מתוך %2$d</string>
+    <string name="toast_select_edits_for_upload">נא לבחור עריכות לשליחה</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">להשתמש ב־test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">כניסה ל־OpenPlaceReviews</string>
+    <string name="announcement_time_descr">זמן ההכרזה של ההנחיות הקוליות השונות תלוי בסוג ההכרזה, במהירות הניווט הנוכחית ובמהירות הניווט כבררת מחדל.</string>
+    <string name="hillshade_slope_contour_lines">הצללה / מדרון / קווי מתאר</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews הוא מיזם בהובלת הקהילה בנוגע למקומות ציבוריים כגון מסעדות, מלונות, מוזיאונים ונקודות דרך. הוא אוסף מידע ציבורי עליהם כגון תמונות, סקירות, קישורים למערכות אחרות שמקושרות ל־OpenStreetMap, ויקיפדיה.
+\n
+\nכל הנתונים של OpenPlaceReview הם פתוחים וזמינים לציבור הרחב: http://openplacereviews.org/data.
+\n
+\nניתן לקרוא עוד באתר: http://openplacereviews.org</string>
+    <string name="activity_type_water_name">מים</string>
+    <string name="activity_type_winter_name">חורף</string>
+    <string name="activity_type_snowmobile_name">אופנוע שלג</string>
+    <string name="activity_type_riding_name">רכיבה</string>
+    <string name="activity_type_racing_name">מירוץ</string>
+    <string name="activity_type_mountainbike_name">אופני הרים</string>
+    <string name="activity_type_cycling_name">רכיבת אופניים</string>
+    <string name="activity_type_hiking_name">טיול שטח</string>
+    <string name="activity_type_running_name">ריצה</string>
+    <string name="activity_type_walking_name">הליכה</string>
+    <string name="activity_type_offroad_name">שטח</string>
+    <string name="activity_type_motorbike_name">אופנוע</string>
+    <string name="activity_type_car_name">מכונית</string>
 </resources>

@@ -1506,7 +1506,7 @@
     <string name="poi_hazard_additional_minefield">Fare: Minefelt</string>
     <string name="poi_hazard_additional_avalanche">Fare: Snøskred</string>
     <string name="poi_hazard_additional_flood">Fare: Oversvømmelse</string>
-    <string name="poi_source_biomass">Energikilde: Biomasse</string>
+    <string name="poi_generator_source_biomass">Energikilde: Biomasse</string>
     <string name="poi_motorhome_yes">Ja</string>
     <string name="poi_bus_yes">Ja</string>
     <string name="poi_snowmobile_yes">Ja</string>

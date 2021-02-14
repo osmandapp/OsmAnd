@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -87,6 +88,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public static final int SELECT_MAP_MARKERS_ACTION_MODE_ID = 6;
 	public static final int IMPORT_FAVOURITES_ID = 7;
 	public static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
+
+	private static final int MAX_POINTS_IN_DESCRIPTION = 100;
 
 	private FavouritesAdapter favouritesAdapter;
 	private FavouritesDbHelper helper;
@@ -606,28 +609,38 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		}
 	}
 
-	private StringBuilder generateHtmlPrint(List<FavoriteGroup> groups) {
+	private String generateHtmlPrint(List<FavoriteGroup> groups) {
 		StringBuilder html = new StringBuilder();
 		html.append("<h1>My Favorites</h1>");
+
+		int addedPoints = 0;
 		for (FavoriteGroup group : groups) {
-			html.append("<h3>" + group.getDisplayName(app) + "</h3>");
+			html.append("<h3>").append(group.getDisplayName(app)).append("</h3>");
 			for (FavouritePoint fp : group.getPoints()) {
-				String url = "geo:" + ((float) fp.getLatitude()) + "," + ((float) fp.getLongitude()) + "?m=" + fp.getName();
-				html.append("<p>" + fp.getDisplayName(app) + " - " + "<a href=\"" + url + "\">geo:"
-						+ ((float) fp.getLatitude()) + "," + ((float) fp.getLongitude()) + "</a><br>");
-				if (fp.isAddressSpecified()) {
-					html.append(": " + fp.getAddress());
-					html.append("<br>");
+				if (addedPoints >= MAX_POINTS_IN_DESCRIPTION) {
+					break;
 				}
-				if (!Algorithms.isEmpty(fp.getDescription())) {
-					html.append(": " + fp.getDescription());
-				}
-				html.append("</p>");
+
+				float lat = (float) fp.getLatitude();
+				float lon = (float) fp.getLongitude();
+				String url = "geo:" + lat + "," + lon + "?m=" + fp.getName();
+				html.append("<p>")
+						.append(fp.getDisplayName(app))
+						.append(" - <a href=\"")
+						.append(url)
+						.append("\">geo:")
+						.append(lat).append(",").append(lon)
+						.append("</a><br></p>");
+				addedPoints++;
+			}
+
+			if (addedPoints >= MAX_POINTS_IN_DESCRIPTION) {
+				html.append("<p>...</p>");
+				break;
 			}
 		}
-		return html;
+		return html.toString();
 	}
-
 
 	private void shareFavourites() {
 		if (favouritesAdapter.isEmpty()) {
@@ -646,6 +659,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 			File src = null;
 			File dst = null;
+			Spanned descriptionOfPoints;
 
 			@Override
 			protected void onPreExecute() {
@@ -662,9 +676,15 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 			@Override
 			protected Void doInBackground(Void... params) {
+				List<FavoriteGroup> groups;
 				if (group != null) {
 					helper.saveFile(group.getPoints(), dst);
+					groups = new ArrayList<>();
+					groups.add(group);
+				} else {
+					groups = getMyApplication().getFavorites().getFavoriteGroups();
 				}
+				descriptionOfPoints = Html.fromHtml(generateHtmlPrint(groups));
 				return null;
 			}
 
@@ -680,19 +700,12 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 						Algorithms.fileCopy(src, dst);
 					}
 					final Intent sendIntent = new Intent();
-					sendIntent.setAction(Intent.ACTION_SEND);
-					List<FavoriteGroup> groups;
-					if (group != null) {
-						groups = new ArrayList<>();
-						groups.add(group);
-					} else {
-						groups = getMyApplication().getFavorites().getFavoriteGroups();
-					}
-					sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtmlPrint(groups).toString()));
-					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
-					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), dst));
-					sendIntent.setType("text/plain");
-					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					sendIntent.setAction(Intent.ACTION_SEND)
+							.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject))
+							.putExtra(Intent.EXTRA_TEXT, descriptionOfPoints)
+							.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), dst))
+							.setType("text/plain")
+							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 					startActivity(sendIntent);
 				} catch (IOException e) {
 					Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -35,9 +35,12 @@ import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
@@ -66,6 +69,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class OsmandPlugin {
@@ -133,7 +137,7 @@ public abstract class OsmandPlugin {
 	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		if (activity != null) {
 			// called from UI
-			for (ApplicationMode appMode: getAddedAppModes()) {
+			for (ApplicationMode appMode : getAddedAppModes()) {
 				ApplicationMode.changeProfileAvailability(appMode, true, app);
 			}
 		}
@@ -208,6 +212,16 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
+	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params,
+											@Nullable Map<String, String> additionalParams,
+											@Nullable GetImageCardsListener listener) {
+		return Collections.emptyList();
+	}
+
+	protected ImageCard createContextMenuImageCard(@NonNull JSONObject imageObject) {
+		return null;
+	}
+
 	/**
 	 * Plugin was installed
 	 */
@@ -263,25 +277,19 @@ public abstract class OsmandPlugin {
 
 	public static void initPlugins(@NonNull OsmandApplication app) {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
-
 		allPlugins.clear();
-
-		enableHiddenPlugin(app, enabledPlugins, new MapillaryPlugin(app));
-		enableHiddenPlugin(app, enabledPlugins, new WikipediaPlugin(app));
-
+		enablePluginByDefault(app, enabledPlugins, new WikipediaPlugin(app));
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app));
-
-		// ? questionable - definitely not market plugin
-//		checkMarketPlugin(app, enabledPlugins, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
 		checkMarketPlugin(app, enabledPlugins, new NauticalMapsPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new SkiMapsPlugin(app));
-
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new ParkingPositionPlugin(app));
-		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
+		enablePluginByDefault(app, enabledPlugins, new OpenPlaceReviewsPlugin(app));
+		enablePluginByDefault(app, enabledPlugins, new MapillaryPlugin(app));
+		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
 		loadCustomPlugins(app);
@@ -373,7 +381,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	private static void enableHiddenPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
+	private static void enablePluginByDefault(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
 		allPlugins.add(plugin);
 		if (!enabledPlugins.contains(plugin.getId()) && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
 			enabledPlugins.add(plugin.getId());
@@ -734,7 +742,6 @@ public abstract class OsmandPlugin {
 		return l;
 	}
 
-
 	public static void onMapActivityCreate(MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityCreate(activity);
@@ -866,6 +873,23 @@ public abstract class OsmandPlugin {
 			if (fragmentData != null) collection.add(fragmentData);
 		}
 		return collection;
+	}
+
+	public static void populateContextMenuImageCards(@NonNull List<ImageCard> imageCards, @NonNull Map<String, String> params,
+										  @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			imageCards.addAll(plugin.getContextMenuImageCards(params, additionalParams, listener));
+		}
+	}
+
+	public static ImageCard createImageCardForJson(@NonNull JSONObject imageObject) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			ImageCard imageCard = plugin.createContextMenuImageCard(imageObject);
+			if (imageCard != null) {
+				return imageCard;
+			}
+		}
+		return null;
 	}
 
 	public static boolean isPackageInstalled(String packageInfo, Context ctx) {

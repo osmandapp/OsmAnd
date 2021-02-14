@@ -217,7 +217,7 @@
     <string name="proxy_pref_descr">Especifique um servidor proxy.</string>
     <string name="settings_privacy">Privacidade</string>
     <string name="shared_string_gpx_points">Pontos</string>
-    <string name="navigation_over_track">Iniciar a navegação pela trilha?</string>
+    <string name="navigation_over_track">Iniciar a navegação ao longo da trilha\?</string>
     <string name="speak_pedestrian">Faixas de pedestre</string>
     <string name="rendering_attr_roadStyle_name">Estilo das vias</string>
     <string name="avoid_roads_msg">Obter uma rota alternativa, selecionando quais vias evitar</string>
@@ -578,7 +578,6 @@
     <string name="route_from">De:</string>
     <string name="settings_preset">Perfil predefinido</string>
     <string name="settings_preset_descr">Configurações de exibição e navegação de mapa são gravadas por perfil de uso. Defina seu perfil padrão aqui.</string>
-    <string name="snap_to_road_descr">Ajustar posição às vias próximas durante a navegação.</string>
     <string name="snap_to_road">Ajustar com a via</string>
     <string name="osmand_short_description_80_chars">OsmAnd é um aplicativo de navegação de código aberto para mapas off-line e on-line</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (Direções de Navegação Automatizada do OSM) 
@@ -1876,7 +1875,6 @@
     <string name="access_disable_wrong_direction_recalc_descr">Desabilitar recálculo de rota se só estiver se movendo na direção oposta.</string>
     <string name="follow_us">Siga-nos</string>
     <string name="routing_attr_short_way_name">Via mais econômica</string>
-    <string name="routing_attr_short_way_description">Utilizar caminho econômico (geralmente mais curto).</string>
     <string name="edit_filter">Editar categorias</string>
     <string name="subcategories">Subcategorias</string>
     <string name="selected_categories">Categorias selecionadas</string>
@@ -3782,7 +3780,7 @@
     <string name="plan_route_change_route_type_before">Alterar o tipo de rota antes</string>
     <string name="plan_route_change_route_type_after">Alterar o tipo de rota após</string>
     <string name="simplified_track">Trilha simplificada</string>
-    <string name="simplified_track_description">Apenas a linha da rota será salva, os waypoints serão excluídos.</string>
+    <string name="simplified_track_description">Apenas a linha da rota será salva, os pontos de passagem serão excluídos.</string>
     <string name="shared_string_file_name">Nome do arquivo</string>
     <string name="number_of_gpx_files_selected_pattern">%s arquivos de trilha selecionados</string>
     <string name="disable_recording_once_app_killed_descrp">O registro de trilhas fará uma pausa quando o aplicativo for encerrado (por meio de aplicativos recentes). (A indicação de segundo plano do OsmAnd desaparece da barra de notificação do Android.)</string>
@@ -3914,7 +3912,6 @@
     <string name="select_picture">Selecione a foto</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemão (casual)</string>
-    <string name="elevation_data">Você pode usar dados de elevação para contabilizar a subida/descida de sua viagem</string>
     <string name="app_mode_light_aircraft">Avião leve</string>
     <string name="release_3_9">"• Adicionada opção para exportar e importar todos os dados, incluindo configurações, recursos, meus lugares
 \n
@@ -3962,7 +3959,7 @@
     <string name="select_folder">Selecione a pasta</string>
     <string name="select_folder_descr">Selecione a pasta ou adicione uma nova</string>
     <string name="shared_string_empty">Vazio</string>
-    <string name="analyze_by_intervals">Analisar por intervalos (intervalo de divisão)</string>
+    <string name="analyze_by_intervals">Analisar intervalos de divisão</string>
     <string name="upload_to_openstreetmap">Carregar para OpenStreetMap</string>
     <string name="edit_track">Editar trilha</string>
     <string name="rename_track">Renomear trilha</string>
@@ -4001,4 +3998,31 @@
     <string name="copy_to_map_favorites">Copiar para favoritos</string>
     <string name="delete_online_routing_engine">Excluir este mecanismo de roteamento online\?</string>
     <string name="context_menu_read_full">Ler na íntegra</string>
+    <string name="upload_photo">Carregando</string>
+    <string name="upload_photo_completed">Carreamento concluído</string>
+    <string name="uploading_count">Carregando %1$d de %2$d</string>
+    <string name="uploaded_count">Carregado %1$d de %2$d</string>
+    <string name="toast_select_edits_for_upload">Selecione as edições para carregamento</string>
+    <string name="hillshade_slope_contour_lines">Sombras de relevo / Encostas / Curvas de nível</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews é um projeto conduzido pela comunidade sobre locais públicos como restaurantes, hotéis, museus, pontos de passagem. Ele coleta todas as informações públicas sobre eles, como fotos, comentários, links para outros sistemas, link OpenStreetMap, Wikipédia.
+\n
+\nTodos os dados do OpenPlaceReview estão abertos e disponíveis para todos: http://openplacereviews.org/data.
+\n
+\nVocê pode ler mais em: http://openplacereviews.org</string>
+    <string name="activity_type_motorbike_name">Motorbike</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Entrar para OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Água</string>
+    <string name="activity_type_winter_name">Inverno</string>
+    <string name="activity_type_snowmobile_name">Moto de neve</string>
+    <string name="activity_type_riding_name">Equitação</string>
+    <string name="activity_type_racing_name">Corrida</string>
+    <string name="activity_type_mountainbike_name">Mountainbike</string>
+    <string name="activity_type_cycling_name">Ciclismo</string>
+    <string name="activity_type_hiking_name">Caminhada</string>
+    <string name="activity_type_running_name">Corrida</string>
+    <string name="activity_type_walking_name">A pé</string>
+    <string name="activity_type_offroad_name">Fora de estrada</string>
+    <string name="activity_type_car_name">Carro</string>
 </resources>
