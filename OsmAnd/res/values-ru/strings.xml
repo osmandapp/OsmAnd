@@ -4018,4 +4018,5 @@
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_riding_name">Верховая езда</string>
+    <string name="reverse_all_points">Повернуть все точки</string>
 </resources>
