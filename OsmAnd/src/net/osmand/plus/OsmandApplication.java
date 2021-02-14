@@ -166,12 +166,9 @@ public class OsmandApplication extends MultiDexApplication {
 	OprAuthHelper oprAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
-	LocaleHelper localeHelper;
+	LocaleHelper localeHelper = new LocaleHelper(this);
 
-	private Resources localizedResources;
 	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
-	private Locale preferredLocale;
-	private Locale defaultLocale;
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 
@@ -220,7 +217,7 @@ public class OsmandApplication extends MultiDexApplication {
 			removeSqliteDbTravelFiles();
 		}
 
-		checkPreferredLocale();
+		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
@@ -423,6 +420,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
+		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null && !newConfig.locale.getLanguage().equals(preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
 			// ugly fix ! On devices after 4.0 screen is blinking when you rotate device!
@@ -433,47 +431,6 @@ public class OsmandApplication extends MultiDexApplication {
 			Locale.setDefault(preferredLocale);
 		} else {
 			super.onConfigurationChanged(newConfig);
-		}
-	}
-
-
-	public void checkPreferredLocale() {
-		Configuration config = getBaseContext().getResources().getConfiguration();
-
-		String pl = osmandSettings.PREFERRED_LOCALE.get();
-		String[] split = pl.split("_");
-		String lang = split[0];
-		String country = (split.length > 1) ? split[1] : "";
-
-		if (defaultLocale == null) {
-			defaultLocale = Locale.getDefault();
-		}
-		if (!Algorithms.isEmpty(lang)) {
-			if (!Algorithms.isEmpty(country)) {
-				preferredLocale = new Locale(lang, country);
-			} else {
-				preferredLocale = new Locale(lang);
-			}
-		}
-		Locale selectedLocale = null;
-
-		if (!Algorithms.isEmpty(lang) && !config.locale.equals(preferredLocale)) {
-			selectedLocale = preferredLocale;
-		} else if (Algorithms.isEmpty(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
-			selectedLocale = defaultLocale;
-			preferredLocale = null;
-		}
-		if (selectedLocale != null) {
-			Locale.setDefault(selectedLocale);
-			config.locale = selectedLocale;
-			config.setLayoutDirection(selectedLocale);
-
-			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-			if (android.os.Build.VERSION.SDK_INT >= 17) {
-				Configuration conf = new Configuration(config);
-				conf.locale = selectedLocale;
-				localizedResources = createConfigurationContext(conf).getResources();
-			}
 		}
 	}
 
@@ -828,7 +785,7 @@ public class OsmandApplication extends MultiDexApplication {
 				themeResId = R.style.OsmandLightTheme;
 			}
 		}
-		setLanguage(c);
+		localeHelper.setLanguage(c);
 		c.setTheme(themeResId);
 	}
 
@@ -855,25 +812,9 @@ public class OsmandApplication extends MultiDexApplication {
 		return s;
 	}
 
-	public void setLanguage(Context context) {
-		if (preferredLocale != null) {
-			Configuration config = context.getResources().getConfiguration();
-			String lang = preferredLocale.getLanguage();
-			if (!Algorithms.isEmpty(lang) && !config.locale.getLanguage().equals(lang)) {
-				preferredLocale = new Locale(lang);
-				Locale.setDefault(preferredLocale);
-				config.locale = preferredLocale;
-				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
-			} else if (Algorithms.isEmpty(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
-				Locale.setDefault(defaultLocale);
-				config.locale = defaultLocale;
-				getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-			}
-		}
-	}
-
 	public String getCountry() {
 		String country;
+		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null) {
 			country = preferredLocale.getCountry();
 		} else {
@@ -884,6 +825,7 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	public String getLanguage() {
 		String lang;
+		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null) {
 			lang = preferredLocale.getLanguage();
 		} else {
@@ -897,11 +839,12 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public AssetManager getAssets() {
-		return localizedResources != null ? localizedResources.getAssets() : super.getAssets();
+		return getResources() != null ? getResources().getAssets() : super.getAssets();
 	}
 
 	@Override
 	public Resources getResources() {
+		Resources localizedResources = localeHelper.getLocalizedResources();
 		return localizedResources != null ? localizedResources : super.getResources();
 	}
 
