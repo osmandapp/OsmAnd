@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import net.osmand.plus.OsmandApplication;
@@ -15,18 +16,17 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
+import net.osmand.plus.monitoring.TripRecordingActiveBottomSheet.ItemType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.TextViewEx;
 
-import androidx.annotation.DimenRes;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragment implements View.OnClickListener {
+public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = StopTrackRecordingBottomFragment.class.getSimpleName();
 
@@ -34,7 +34,7 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 	private MapActivity mapActivity;
 	private OsmandSettings settings;
 	private OsmandMonitoringPlugin plugin;
-	private ButtonType tag = ButtonType.CANCEL;
+	private ItemType tag = ItemType.CANCEL;
 
 	public void setMapActivity(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -45,6 +45,9 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 		app = requiredMyApplication();
 		settings = app.getSettings();
 		plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
+		int verticalSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(app.getString(R.string.track_recording_description))
@@ -54,81 +57,92 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
 				.create());
 
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
+		items.add(new DividerSpaceItem(app, verticalBig));
 
 		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(setupButton(inflater, ButtonType.STOP_AND_DISCARD))
-				.setOnClickListener(this)
+				.setCustomView(setupButton(inflater, ItemType.STOP_AND_DISCARD))
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						tag = ItemType.STOP_AND_DISCARD;
+						if (plugin != null && settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+							plugin.stopRecording();
+							app.getNotificationHelper().refreshNotifications();
+						}
+						app.getSavingTrackHelper().clearRecordedData(true);
+						dismiss();
+					}
+				})
 				.create());
 
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(setupButton(inflater, ButtonType.SAVE_AND_STOP))
-				.setOnClickListener(this)
-				.create());
+		items.add(new DividerSpaceItem(app, verticalBig));
 
 		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(setupButton(inflater, ButtonType.CANCEL))
-				.setOnClickListener(this)
+				.setCustomView(setupButton(inflater, ItemType.SAVE_AND_STOP))
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						tag = ItemType.SAVE_AND_STOP;
+						if (plugin != null && settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+							plugin.saveCurrentTrack(null, mapActivity);
+							app.getNotificationHelper().refreshNotifications();
+						}
+						dismiss();
+					}
+				})
 				.create());
+
+		items.add(new DividerSpaceItem(app, verticalSmall));
+
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(setupButton(inflater, ItemType.CANCEL))
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						tag = ItemType.CANCEL;
+						dismiss();
+					}
+				})
+				.create());
+
+		items.add(new DividerSpaceItem(app, verticalSmall));
 	}
 
-	private View setupButton(LayoutInflater inflater, ButtonType type) {
-		View button = inflater.inflate(R.layout.bottom_sheet_item_button_with_icon, null);
+	private View setupButton(LayoutInflater inflater, ItemType type) {
+		View button = inflater.inflate(R.layout.bottom_sheet_button_with_icon, null);
 		button.setTag(type);
 		Context context = button.getContext();
+		LinearLayout container = button.findViewById(R.id.button_container);
+		container.setClickable(false);
+		container.setFocusable(false);
 
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 		int horizontal = context.getResources().getDimensionPixelSize(R.dimen.content_padding);
-		int top = context.getResources().getDimensionPixelSize(type.topMarginRes);
-		int bottom = context.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		params.setMargins(horizontal, top, horizontal, bottom);
+		params.setMargins(horizontal, 0, horizontal, 0);
 		button.setLayoutParams(params);
 
-		UiUtilities.setupDialogButton(nightMode, button, type.effect, type.titleId);
+		UiUtilities.setupDialogButton(nightMode, button, type.getEffect(), type.getTitleId());
 
 		TextViewEx title = button.findViewById(R.id.button_text);
 		int margin = context.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_medium);
 		UiUtilities.setMargins(title, 0, margin, 0, margin);
 
 		int colorRes;
-		if (type.effect == DialogButtonType.SECONDARY_HARMFUL) {
+		if (type.getEffect() == DialogButtonType.SECONDARY_HARMFUL) {
 			colorRes = R.color.color_osm_edit_delete;
 		} else {
 			colorRes = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 		}
 		AppCompatImageView icon = button.findViewById(R.id.icon);
-		icon.setImageDrawable(getIcon(type.iconRes, colorRes));
+		icon.setImageDrawable(getIcon(type.getIconId(), colorRes));
 
-		if (type == ButtonType.STOP_AND_DISCARD) {
+		if (type == ItemType.STOP_AND_DISCARD) {
 			int size = context.getResources().getDimensionPixelSize(R.dimen.map_widget_height);
 			LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(size, size);
 			icon.setLayoutParams(iconParams);
 		}
 
 		return button;
-	}
-
-	@Override
-	public void onClick(View v) {
-		Object o = v.getTag();
-		if (!(o instanceof ButtonType)) {
-			return;
-		}
-
-		tag = (ButtonType) o;
-		if (tag == ButtonType.STOP_AND_DISCARD) {
-			if (plugin != null && settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-				plugin.stopRecording();
-				app.getNotificationHelper().refreshNotifications();
-			}
-			app.getSavingTrackHelper().clearRecordedData(true);
-		} else if (tag == ButtonType.SAVE_AND_STOP) {
-			if (plugin != null && settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-				plugin.saveCurrentTrack(null, mapActivity);
-				app.getNotificationHelper().refreshNotifications();
-			}
-		}
-		dismiss();
 	}
 
 	@Override
@@ -143,32 +157,11 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (tag == ButtonType.CANCEL) {
+		if (tag == ItemType.CANCEL) {
 			Fragment target = getTargetFragment();
 			if (target instanceof TripRecordingActiveBottomSheet) {
 				((TripRecordingActiveBottomSheet) target).show();
 			}
-		}
-	}
-
-	enum ButtonType {
-		STOP_AND_DISCARD(R.string.track_recording_stop_without_saving, R.drawable.ic_action_rec_stop, R.dimen.dialog_content_margin, DialogButtonType.SECONDARY_HARMFUL),
-		SAVE_AND_STOP(R.string.track_recording_save_and_stop, R.drawable.ic_action_save_to_file, R.dimen.content_padding_small, DialogButtonType.SECONDARY),
-		CANCEL(R.string.shared_string_cancel, R.drawable.ic_action_close, R.dimen.zero, DialogButtonType.SECONDARY);
-
-		@StringRes
-		private final int titleId;
-		@DrawableRes
-		private final int iconRes;
-		@DimenRes
-		private final int topMarginRes;
-		private final DialogButtonType effect;
-
-		ButtonType(int titleId, int iconRes, int topMarginRes, DialogButtonType type) {
-			this.titleId = titleId;
-			this.iconRes = iconRes;
-			this.topMarginRes = topMarginRes;
-			this.effect = type;
 		}
 	}
 

@@ -42,6 +42,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
@@ -67,6 +68,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 	public static final String TAG = TripRecordingActiveBottomSheet.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(TripRecordingActiveBottomSheet.class);
+	private static final String UPDATE_CURRENT_GPX_FILE = "update_current_gpx_file";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -137,6 +139,11 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		updateStatus();
 
 		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
+		if (savedInstanceState != null) {
+			if (savedInstanceState.containsKey(UPDATE_CURRENT_GPX_FILE) && savedInstanceState.getBoolean(UPDATE_CURRENT_GPX_FILE)) {
+				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+			}
+		}
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile);
 		blockStatisticsBuilder.setBlocksView(statBlocks);
 		blockStatisticsBuilder.setBlocksClickable(false);
@@ -262,17 +269,29 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		});
 	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(UPDATE_CURRENT_GPX_FILE, true);
+	}
+
 	private void updateStatus() {
 		TextView statusTitle = statusContainer.findViewById(R.id.text_status);
 		AppCompatImageView statusIcon = statusContainer.findViewById(R.id.icon_status);
 		ItemType status = searchingGPS() ? ItemType.SEARCHING_GPS : !wasTrackMonitored() ? ItemType.ON_PAUSE : ItemType.RECORDING;
-		statusTitle.setText(status.getTitleId());
+		Integer titleId = status.getTitleId();
+		if (titleId != null) {
+			statusTitle.setText(titleId);
+		}
 		int colorText = status.equals(ItemType.SEARCHING_GPS) ? getSecondaryTextColorId(nightMode) : getOsmandIconColorId(nightMode);
 		statusTitle.setTextColor(ContextCompat.getColor(app, colorText));
-		int colorDrawable = ContextCompat.getColor(app,
-				status.equals(ItemType.SEARCHING_GPS) ? getSecondaryIconColorId(nightMode) : getOsmandIconColorId(nightMode));
-		Drawable statusDrawable = UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, status.getIconId()), colorDrawable);
-		statusIcon.setImageDrawable(statusDrawable);
+		Integer iconId = status.getIconId();
+		if (iconId != null) {
+			int colorDrawable = ContextCompat.getColor(app,
+					status.equals(ItemType.SEARCHING_GPS) ? getSecondaryIconColorId(nightMode) : getOsmandIconColorId(nightMode));
+			Drawable statusDrawable = UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, iconId), colorDrawable);
+			statusIcon.setImageDrawable(statusDrawable);
+		}
 	}
 
 	private void createItem(View view, ItemType type, boolean enabled, @Nullable String description) {
@@ -281,13 +300,14 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 		AppCompatImageView icon = view.findViewById(R.id.icon);
 		if (icon != null) {
-			type.setTintedIcon(icon, app, enabled, false, nightMode);
+			setTintedIcon(icon, app, enabled, false, nightMode, type);
 		}
 
 		TextView title = view.findViewById(R.id.button_text);
-		if (title != null) {
-			title.setText(type.getTitleId());
-			type.setTextColor(title, app, enabled, false, nightMode);
+		Integer titleId = type.getTitleId();
+		if (title != null && titleId != null) {
+			title.setText(titleId);
+			setTextColor(title, app, enabled, false, nightMode, type);
 		}
 
 		TextViewEx desc = view.findViewById(R.id.desc);
@@ -295,13 +315,15 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			boolean isShowDesc = !Algorithms.isBlank(description);
 			int marginDesc = isShowDesc ? 0 : app.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_medium);
 			AndroidUiHelper.updateVisibility(desc, isShowDesc);
-			UiUtilities.setMargins(title, 0, marginDesc, 0, marginDesc);
+			if (title != null) {
+				UiUtilities.setMargins(title, 0, marginDesc, 0, marginDesc);
+			}
 			desc.setText(description);
-			type.setTextColor(desc, app, false, false, nightMode);
+			setTextColor(desc, app, false, false, nightMode, type);
 		}
 
 		setItemBackgroundInactive(button != null ? button : (LinearLayout) view, app, nightMode);
-		type.changeOnTouch(button != null ? button : (LinearLayout) view, icon, title, app, enabled, nightMode);
+		changeOnTouch(button != null ? button : (LinearLayout) view, icon, title, app, enabled, nightMode, type);
 	}
 
 	private String getTimeTrackSaved() {
@@ -457,89 +479,102 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		view.setBackgroundDrawable(background);
 	}
 
-	enum ItemType {
-		SHOW_TRACK(R.string.shared_string_show_on_map, null),
-		APPEARANCE(null, null),
-		SEARCHING_GPS(R.string.searching_gps, R.drawable.ic_action_gps_info),
-		RECORDING(R.string.recording_default_name, R.drawable.ic_action_track_recordable),
-		ON_PAUSE(R.string.on_pause, R.drawable.ic_pause),
-		CLEAR_DATA(R.string.clear_recorded_data, R.drawable.ic_action_delete_dark),
-		START_SEGMENT(R.string.gpx_start_new_segment, R.drawable.ic_action_new_segment),
-		SAVE(R.string.shared_string_save, R.drawable.ic_action_save_to_file),
-		PAUSE(R.string.shared_string_pause, R.drawable.ic_pause),
-		RESUME(R.string.shared_string_resume, R.drawable.ic_play_dark),
-		STOP(R.string.shared_string_control_stop, R.drawable.ic_action_rec_stop);
+	public enum ItemType {
+		SHOW_TRACK(R.string.shared_string_show_on_map, null, null),
+		APPEARANCE(null, null, null),
+		SEARCHING_GPS(R.string.searching_gps, R.drawable.ic_action_gps_info, null),
+		RECORDING(R.string.recording_default_name, R.drawable.ic_action_track_recordable, null),
+		ON_PAUSE(R.string.on_pause, R.drawable.ic_pause, null),
+		CLEAR_DATA(R.string.clear_recorded_data, R.drawable.ic_action_delete_dark, UiUtilities.DialogButtonType.SECONDARY_HARMFUL),
+		START_SEGMENT(R.string.gpx_start_new_segment, R.drawable.ic_action_new_segment, null),
+		SAVE(R.string.shared_string_save, R.drawable.ic_action_save_to_file, null),
+		PAUSE(R.string.shared_string_pause, R.drawable.ic_pause, null),
+		RESUME(R.string.shared_string_resume, R.drawable.ic_play_dark, null),
+		STOP(R.string.shared_string_control_stop, R.drawable.ic_action_rec_stop, null),
+		STOP_AND_DISCARD(R.string.track_recording_stop_without_saving, R.drawable.ic_action_rec_stop, DialogButtonType.SECONDARY_HARMFUL),
+		SAVE_AND_STOP(R.string.track_recording_save_and_stop, R.drawable.ic_action_save_to_file, DialogButtonType.SECONDARY),
+		CANCEL(R.string.shared_string_cancel, R.drawable.ic_action_close, DialogButtonType.SECONDARY);
 
 		@StringRes
 		private final Integer titleId;
 		@DrawableRes
 		private final Integer iconId;
+		private final DialogButtonType effect;
 
-		ItemType(@Nullable @StringRes Integer titleId, @Nullable @DrawableRes Integer iconId) {
+		ItemType(@Nullable @StringRes Integer titleId, @Nullable @DrawableRes Integer iconId, @Nullable DialogButtonType effect) {
 			this.titleId = titleId;
 			this.iconId = iconId;
+			this.effect = effect;
 		}
 
+		@Nullable
 		public Integer getTitleId() {
 			return titleId;
 		}
 
+		@Nullable
 		public Integer getIconId() {
 			return iconId;
 		}
 
-		public void setTextColor(TextView tv, Context context, boolean enabled, boolean pressed, boolean nightMode) {
-			if (tv != null) {
-				tv.setTextColor(ContextCompat.getColor(context,
-						enabled ? pressed ? getPressedColorId(nightMode)
-								: this == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
-								: getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode)));
+		@Nullable
+		public DialogButtonType getEffect() {
+			return effect;
+		}
+	}
+
+	public void setTextColor(TextView tv, Context context, boolean enabled, boolean pressed, boolean nightMode, ItemType type) {
+		if (tv != null) {
+			tv.setTextColor(ContextCompat.getColor(context,
+					enabled ? pressed ? getPressedColorId(nightMode)
+							: type == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
+							: getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode)));
+		}
+	}
+
+	public void setTintedIcon(AppCompatImageView iv, Context context, boolean enabled, boolean pressed, boolean nightMode, ItemType type) {
+		Integer iconId = type.getIconId();
+		if (iv != null && iconId != null) {
+			Drawable icon = AppCompatResources.getDrawable(context, iconId);
+			int iconColor = enabled ? pressed ? getPressedColorId(nightMode)
+					: type == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
+					: getActiveIconColorId(nightMode) : getSecondaryIconColorId(nightMode);
+			Drawable tintedIcon = UiUtilities.tintDrawable(icon, ContextCompat.getColor(context, iconColor));
+			iv.setImageDrawable(tintedIcon);
+			if (type == ItemType.STOP) {
+				int stopSize = iv.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(stopSize, stopSize);
+				iv.setLayoutParams(params);
 			}
 		}
+	}
 
-		public void setTintedIcon(AppCompatImageView iv, Context context, boolean enabled, boolean pressed, boolean nightMode) {
-			if (iv != null) {
-				Drawable icon = AppCompatResources.getDrawable(context, iconId);
-				int iconColor = enabled ? pressed ? getPressedColorId(nightMode)
-						: this == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
-						: getActiveIconColorId(nightMode) : getSecondaryIconColorId(nightMode);
-				Drawable tintedIcon = UiUtilities.tintDrawable(icon, ContextCompat.getColor(context, iconColor));
-				iv.setImageDrawable(tintedIcon);
-				if (this == ItemType.STOP) {
-					int stopSize = iv.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
-					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(stopSize, stopSize);
-					iv.setLayoutParams(params);
-				}
-			}
-		}
-
-		@SuppressLint("ClickableViewAccessibility")
-		private void changeOnTouch(final LinearLayout button, @Nullable final AppCompatImageView iv, @Nullable final TextView tv,
-								   final Context context, final boolean enabled, final boolean nightMode) {
-			button.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					if (enabled) {
-						switch (event.getAction()) {
-							case MotionEvent.ACTION_DOWN: {
-								setItemBackgroundActive(button, context, nightMode);
-								setTintedIcon(iv, context, true, true, nightMode);
-								setTextColor(tv, context, true, true, nightMode);
-								break;
-							}
-							case MotionEvent.ACTION_UP:
-							case MotionEvent.ACTION_CANCEL: {
-								setItemBackgroundInactive(button, context, nightMode);
-								setTintedIcon(iv, context, true, false, nightMode);
-								setTextColor(tv, context, true, false, nightMode);
-								break;
-							}
+	@SuppressLint("ClickableViewAccessibility")
+	private void changeOnTouch(final LinearLayout button, @Nullable final AppCompatImageView iv, @Nullable final TextView tv,
+							   final Context context, final boolean enabled, final boolean nightMode, final ItemType type) {
+		button.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (enabled) {
+					switch (event.getAction()) {
+						case MotionEvent.ACTION_DOWN: {
+							setItemBackgroundActive(button, context, nightMode);
+							setTintedIcon(iv, context, true, true, nightMode, type);
+							setTextColor(tv, context, true, true, nightMode, type);
+							break;
+						}
+						case MotionEvent.ACTION_UP:
+						case MotionEvent.ACTION_CANCEL: {
+							setItemBackgroundInactive(button, context, nightMode);
+							setTintedIcon(iv, context, true, false, nightMode, type);
+							setTextColor(tv, context, true, false, nightMode, type);
+							break;
 						}
 					}
-					return false;
 				}
-			});
-		}
+				return false;
+			}
+		});
 	}
 
 	@ColorRes
