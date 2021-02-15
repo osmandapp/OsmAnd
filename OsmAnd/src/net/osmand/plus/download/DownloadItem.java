@@ -35,8 +35,7 @@ public abstract class DownloadItem {
 
 	@NonNull
 	public String getSizeDescription(Context ctx) {
-		String size = String.format(Locale.US, "%.2f", getSizeToDownloadInMb());
-		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, "MB");
+		return getFormattedMb(ctx, getSizeToDownloadInMb());
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
@@ -51,6 +50,7 @@ public abstract class DownloadItem {
 		return type.getVisibleDescription(this, ctx);
 	}
 
+	@NonNull
 	public String getBasename() {
 		return type.getBasename(this);
 	}
@@ -65,11 +65,17 @@ public abstract class DownloadItem {
 
 	public abstract boolean hasActualDataToDownload();
 
-	public abstract boolean isDownloading(DownloadIndexesThread thread);
+	public abstract boolean isDownloading(@NonNull DownloadIndexesThread thread);
 
 	public abstract String getFileName();
 
 	@NonNull
-	public abstract List<File> getDownloadedFiles(OsmandApplication app);
+	public abstract List<File> getDownloadedFiles(@NonNull OsmandApplication app);
+
+	@NonNull
+	public static String getFormattedMb(@NonNull Context ctx, double sizeInMb) {
+		String size = String.format(Locale.US, "%.2f", sizeInMb);
+		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, "MB");
+	}
 
 }

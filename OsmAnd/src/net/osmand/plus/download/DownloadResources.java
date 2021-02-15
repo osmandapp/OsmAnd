@@ -481,9 +481,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		if (group != null) {
 			boolean listModified = false;
 			List<IndexItem> indexesList = group.getIndividualResources();
+			List<WorldRegion> regionsToCollect = removeDuplicateRegions(subRegions);
 			for (DownloadActivityType type : DownloadActivityType.values()) {
 				if (!doesListContainIndexWithType(indexesList, type)) {
-					List<IndexItem> indexesFromSubRegions = collectIndexesOfType(subRegions, type);
+					List<IndexItem> indexesFromSubRegions = collectIndexesOfType(regionsToCollect, type);
 					if (indexesFromSubRegions != null) {
 						group.addItem(new MultipleIndexItem(region, indexesFromSubRegions, type));
 						listModified = true;
@@ -510,7 +511,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	@Nullable
 	private List<IndexItem> collectIndexesOfType(@NonNull List<WorldRegion> regions,
 	                                             @NonNull DownloadActivityType type) {
-		Map<WorldRegion, IndexItem> collectedIndexes = new LinkedHashMap<>();
+		List<IndexItem> collectedIndexes = new ArrayList<>();
 		for (WorldRegion region : regions) {
 			List<IndexItem> regionIndexes = getIndexItems(region);
 			boolean found = false;
@@ -518,36 +519,33 @@ public class DownloadResources extends DownloadResourceGroup {
 				for (IndexItem index : regionIndexes) {
 					if (index.getType() == type) {
 						found = true;
-						collectedIndexes.put(region, index);
+						collectedIndexes.add(index);
 						break;
 					}
 				}
 			}
 			if (!found) return null;
 		}
-		return removeDuplicates(collectedIndexes);
+		return collectedIndexes;
 	}
 
-	private List<IndexItem> removeDuplicates(Map<WorldRegion, IndexItem> collectedIndexes) {
-		List<WorldRegion> regions = new ArrayList<>(collectedIndexes.keySet());
-		// collect duplicates
+	private List<WorldRegion> removeDuplicateRegions(List<WorldRegion> regions) {
 		Set<WorldRegion> duplicates = new HashSet<>();
 		for (int i = 0; i < regions.size() - 1; i++) {
 			WorldRegion r1 = regions.get(i);
 			for (int j = i + 1; j < regions.size(); j++) {
 				WorldRegion r2 = regions.get(j);
 				if (r1.containsRegion(r2)) {
-					duplicates.add(r1);
-				} else if (r2.containsRegion(r1)) {
 					duplicates.add(r2);
+				} else if (r2.containsRegion(r1)) {
+					duplicates.add(r1);
 				}
 			}
 		}
-		// remove duplicates
-		for (WorldRegion key : duplicates) {
-			collectedIndexes.remove(key);
+		for (WorldRegion region : duplicates) {
+			regions.remove(region);
 		}
-		return new ArrayList<>(collectedIndexes.values());
+		return regions;
 	}
 
 	private void buildRegionsGroups(WorldRegion region, DownloadResourceGroup group) {

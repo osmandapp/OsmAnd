@@ -40,6 +40,8 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.MultipleIndexesUiHelper;
+import net.osmand.plus.download.MultipleIndexesUiHelper.SelectItemsToDownloadListener;
 import net.osmand.plus.download.MultipleIndexItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -65,17 +67,17 @@ public class ItemViewHolder {
 	private boolean depthContoursPurchased;
 
 	protected final DownloadActivity context;
-	
+
 	private int textColorPrimary;
 	private int textColorSecondary;
-	
+
 	boolean showTypeInDesc;
 	boolean showTypeInName;
 	boolean showParentRegionName;
 	boolean showRemoteDate;
 	boolean silentCancelDownload;
 	boolean showProgressInDesc;
-	
+
 	private DateFormat dateFormat;
 
 
@@ -87,7 +89,7 @@ public class ItemViewHolder {
 		ASK_FOR_FULL_VERSION_PURCHASE,
 		ASK_FOR_DEPTH_CONTOURS_PURCHASE
 	}
-	
+
 
 	public ItemViewHolder(View view, DownloadActivity context) {
 		this.context = context;
@@ -110,28 +112,28 @@ public class ItemViewHolder {
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		textColorSecondary = typedValue.data;
 	}
-	
+
 	public void setShowRemoteDate(boolean showRemoteDate) {
 		this.showRemoteDate = showRemoteDate;
 	}
-	
-	
+
+
 	public void setShowParentRegionName(boolean showParentRegionName) {
 		this.showParentRegionName = showParentRegionName;
 	}
-	
+
 	public void setShowProgressInDescr(boolean b) {
 		showProgressInDesc = b;
 	}
-	
+
 	public void setSilentCancelDownload(boolean silentCancelDownload) {
 		this.silentCancelDownload = silentCancelDownload;
 	}
-	
+
 	public void setShowTypeInDesc(boolean showTypeInDesc) {
 		this.showTypeInDesc = showTypeInDesc;
 	}
-	
+
 	public void setShowTypeInName(boolean showTypeInName) {
 		this.showTypeInName = showTypeInName;
 	}
@@ -236,7 +238,7 @@ public class ItemViewHolder {
 				String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
 				String type = item.getType().getString(context);
 				String size = item.getSizeDescription(context);
-				String date = showRemoteDate ? item.getRemoteDate(dateFormat) : item.getLocalDate(dateFormat);
+				String date = item.getDate(dateFormat, showRemoteDate);
 				String fullDescription = String.format(pattern, size, date);
 				if (showTypeInDesc) {
 					fullDescription = String.format(pattern, type, fullDescription);
@@ -248,7 +250,7 @@ public class ItemViewHolder {
 			progressBar.setVisibility(View.VISIBLE);
 			progressBar.setIndeterminate(progress == -1);
 			progressBar.setProgress(progress);
-			
+
 			if (showProgressInDesc) {
 				double mb = downloadItem.getArchiveSizeMB();
 				String v ;
@@ -267,7 +269,7 @@ public class ItemViewHolder {
 			} else {
 				descrTextView.setVisibility(View.GONE);
 			}
-			
+
 		}
 	}
 
@@ -308,7 +310,7 @@ public class ItemViewHolder {
 			}
 			rightImageButton.setOnClickListener(action);
 		}
-		
+
 		return disabled;
 	}
 
@@ -473,21 +475,24 @@ public class ItemViewHolder {
 
 	private void startDownload(DownloadItem item) {
 		if (item instanceof MultipleIndexItem) {
-			MultipleIndexItem multipleIndexItem = (MultipleIndexItem) item;
-			List<IndexItem> indexes;
-			if (multipleIndexItem.hasActualDataToDownload()) {
-				// download left regions
-				indexes = multipleIndexItem.getIndexesToDownload();
-			} else {
-				// download all regions again
-				indexes = multipleIndexItem.getAllIndexes();
-			}
-			IndexItem[] indexesArray = new IndexItem[indexes.size()];
-			context.startDownload(indexes.toArray(indexesArray));
+			selectIndexesToDownload((MultipleIndexItem) item);
 		} else if (item instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) item;
 			context.startDownload(indexItem);
 		}
+	}
+
+	private void selectIndexesToDownload(MultipleIndexItem item) {
+		OsmandApplication app = context.getMyApplication();
+		MultipleIndexesUiHelper.showDialog(item, context, app, dateFormat, showRemoteDate,
+				new SelectItemsToDownloadListener() {
+					@Override
+					public void onItemsToDownloadSelected(List<IndexItem> indexes) {
+						IndexItem[] indexesArray = new IndexItem[indexes.size()];
+						context.startDownload(indexes.toArray(indexesArray));
+					}
+				}
+		);
 	}
 
 	private void confirmRemove(@NonNull final DownloadItem downloadItem,

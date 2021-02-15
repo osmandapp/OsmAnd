@@ -2,6 +2,8 @@ package net.osmand.plus.download;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
@@ -446,9 +448,11 @@ public class DownloadActivityType {
 		return fileName;
 	}
 
-
-	public String getBasename(DownloadItem downloadItem) {
+	@NonNull
+	public String getBasename(@NonNull DownloadItem downloadItem) {
 		String fileName = downloadItem.getFileName();
+		if (Algorithms.isEmpty(fileName)) return fileName;
+
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 		}

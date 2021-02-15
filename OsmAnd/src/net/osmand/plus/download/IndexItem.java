@@ -57,7 +57,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 
 	@NonNull
 	@Override
-	public List<File> getDownloadedFiles(OsmandApplication app) {
+	public List<File> getDownloadedFiles(@NonNull OsmandApplication app) {
 		File targetFile = getTargetFile(app);
 		if (targetFile.exists()) {
 			return Collections.singletonList(targetFile);
@@ -166,6 +166,10 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		}
 		return "";
 	}
+
+	public String getDate(@NonNull DateFormat dateFormat, boolean remote) {
+		return remote ? getRemoteDate(dateFormat) : getLocalDate(dateFormat);
+	}
 	
 	public String getRemoteDate(DateFormat dateFormat) {
 		if(timestamp <= 0) {
@@ -175,7 +179,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	}
 	
 	
-	public String getLocalDate(DateFormat dateFormat) {
+	private String getLocalDate(@NonNull DateFormat dateFormat) {
 		if(localTimestamp <= 0) {
 			return "";
 		}
@@ -214,7 +218,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	}
 
 	@Override
-	public boolean isDownloading(DownloadIndexesThread thread) {
+	public boolean isDownloading(@NonNull DownloadIndexesThread thread) {
 		return thread.isDownloading(this);
 	}
 

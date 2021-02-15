@@ -45,7 +45,7 @@ public class MultipleIndexItem extends DownloadItem {
 	}
 
 	@Override
-	public boolean isDownloading(DownloadIndexesThread thread) {
+	public boolean isDownloading(@NonNull DownloadIndexesThread thread) {
 		for (IndexItem item : items) {
 			if (thread.isDownloading(item)) {
 				return true;
@@ -76,7 +76,7 @@ public class MultipleIndexItem extends DownloadItem {
 
 	@NonNull
 	@Override
-	public List<File> getDownloadedFiles(OsmandApplication app) {
+	public List<File> getDownloadedFiles(@NonNull OsmandApplication app) {
 		List<File> result = new ArrayList<>();
 		for (IndexItem item : items) {
 			result.addAll(item.getDownloadedFiles(app));
