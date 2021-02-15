@@ -71,7 +71,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		nightMode = !settings.isLightContent();
 
 		int themeId = nightMode ? R.style.OsmandDarkTheme_NoActionbar : R.style.OsmandLightTheme_NoActionbar_LightStatusBar;
-		app.setLanguage(this);
+		app.getLocaleHelper().setLanguage(this);
 		setTheme(themeId);
 		super.onCreate(savedInstanceState);
 

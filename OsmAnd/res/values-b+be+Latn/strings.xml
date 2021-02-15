@@ -562,7 +562,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="avoid_motorway">Paźbiahać aŭtamahіstralaŭ</string>
     <string name="auto_zoom_map_descr">Uzrovień pavieličennia zhodna vašaj chutkasci (kali mapa sinchranizujecca z ciapierašnim stanoviščam).</string>
     <string name="auto_zoom_map">Aŭtamatyčnaje pamianšeńnie/pavieličeńnie</string>
-    <string name="snap_to_road_descr">Pryviazvacca da daroh padčas navihacyi.</string>
     <string name="snap_to_road">Pryviazvacca da daroh</string>
     <string name="interrupt_music_descr">Halasavyja padkazki prypyniajuć muzyku, a nie toĺki pryhlušajuć jaje.</string>
     <string name="interrupt_music">Pierapynieńnie muzykі</string>
@@ -1983,7 +1982,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="update_all_maps_now">Abnavić usie mapy zaraz?</string>
     <string name="clear_tile_data">Ačyścіć keš siecіŭnych mapaŭ</string>
     <string name="routing_attr_short_way_name">Paliŭna-aščadny maršrut</string>
-    <string name="routing_attr_short_way_description">Različvaje paliva-aščadny maršrut (zvyčajna najkaraciejšy).</string>
     <string name="replace_favorite_confirmation">Vy sapraŭdy chočacie zamianić upadabanaje %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Nadziemnyja abjekty</string>
     <string name="shared_string_change">Źmianіć</string>

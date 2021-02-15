@@ -156,6 +156,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		timeConditionalRouting.setIcon(getRoutingPrefIcon(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId()));
 		timeConditionalRouting.setSummaryOn(R.string.shared_string_on);
 		timeConditionalRouting.setSummaryOff(R.string.shared_string_off);
+		timeConditionalRouting.setDescription(R.string.temporary_conditional_routing_descr);
 		getPreferenceScreen().addPreference(timeConditionalRouting);
 	}
 
@@ -580,6 +581,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey, List<RoutingParameter> routingParameters) {
 		String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(groupKey.replace('_', ' '));
 		String title = AndroidUtils.getRoutingStringPropertyName(app, groupKey, defaultTitle);
+		String description  = AndroidUtils.getRoutingStringPropertyDescription(app, groupKey, "");
 		ApplicationMode am = getSelectedAppMode();
 
 		Object[] entryValues = new Object[routingParameters.size()];
@@ -599,6 +601,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		routingListPref.setPersistent(false);
 		routingListPref.setValue(selectedParameterId);
 		routingListPref.setIcon(getRoutingPrefIcon(groupKey));
+		if (!Algorithms.isEmpty(defaultTitle)) {
+			routingListPref.setDescription(description);
+		}
 
 		return routingListPref;
 	}

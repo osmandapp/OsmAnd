@@ -605,6 +605,11 @@ public class TravelDbHelper implements TravelHelper {
 		return res;
 	}
 
+	@Override
+	public TravelArticle findSavedArticle(@NonNull TravelArticle savedArticle) {
+		return savedArticle;
+	}
+
 	@Nullable
 	@Override
 	public TravelArticleIdentifier getArticleId(@NonNull String title, @NonNull String lang) {

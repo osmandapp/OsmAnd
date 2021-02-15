@@ -237,7 +237,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 		final SettingsHelper.SettingsImportListener importListener = new SettingsHelper.SettingsImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items) {
+			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}

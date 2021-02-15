@@ -20,7 +20,6 @@
     <string name="avoid_motorway">Όχι αυτοκινητόδρομους</string>
     <string name="auto_zoom_map_descr">Επίπεδο εστίασης χάρτη ανάλογα με την ταχύτητά σας (ενώ ο χάρτης συγχρονίζεται με την τρέχουσα θέση).</string>
     <string name="auto_zoom_map">Αυτόματη εστίαση χάρτη</string>
-    <string name="snap_to_road_descr">Προσανατολισμός στους δρόμους κατά τη διάρκεια της πλοήγησης.</string>
     <string name="snap_to_road">Προσανατολισμός στο δρόμο</string>
     <string name="osmand_short_description_80_chars">Προβολή φορητού παγκόσμιου χάρτη &amp; πλοήγηση για χάρτες OSM χωρίς και με διαδίκτυο</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Αυτοματοποιημένες Οδηγίες Πλοήγησης)
@@ -1965,7 +1964,6 @@
     <string name="update_all_maps_now">Θέλετε να ενημερώσετε όλους τους χάρτες τώρα;</string>
     <string name="clear_tile_data">Καθαρισμός όλων των πλακιδίων</string>
     <string name="routing_attr_short_way_name">Διαδρομή με οικονομία καυσίμων</string>
-    <string name="routing_attr_short_way_description">Χρησιμοποιήστε τη διαδρομή με οικονομία καυσίμων (συνήθως συντομότερη).</string>
     <string name="replace_favorite_confirmation">Είσαστε σίγουρος/η ότι θέλετε να αντικαταστήσετε το Αγαπημένο %1$s;</string>
     <string name="rendering_attr_hideOverground_name">Υπέργεια αντικείμενα</string>
     <string name="shared_string_change">Αλλαγή</string>

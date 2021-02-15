@@ -651,7 +651,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	private void updateTitle(String address) {
-		nameStr = address;
+		setNameStr(address);
 		getPointDescription().setName(address);
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null)

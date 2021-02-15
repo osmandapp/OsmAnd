@@ -138,6 +138,10 @@ public abstract class MenuTitleController {
 		}
 	}
 
+	public void setNameStr(@Nullable String nameStr) {
+		this.nameStr = nameStr != null ? nameStr : "";
+	}
+
 	protected boolean needStreetName() {
 		MenuController menuController = getMenuController();
 		boolean res = getObject() != null || Algorithms.isEmpty(getPointDescription().getName());
@@ -165,28 +169,28 @@ public abstract class MenuTitleController {
 
 	protected void acquireNameAndType() {
 		String firstNameStr = "";
-		nameStr = "";
 		typeStr = "";
 		commonTypeStr = "";
 		streetStr = "";
+		setNameStr("");
 
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
 			firstNameStr = menuController.getFirstNameStr();
-			nameStr = menuController.getNameStr();
+			setNameStr(menuController.getNameStr());
 			typeStr = menuController.getTypeStr();
 			commonTypeStr = menuController.getCommonTypeStr();
 		}
 
 		if (Algorithms.isEmpty(nameStr)) {
-			nameStr = typeStr;
+			setNameStr(typeStr);
 			typeStr = commonTypeStr;
 		} else if (Algorithms.isEmpty(typeStr)) {
 			typeStr = commonTypeStr;
 		}
 
 		if (!Algorithms.isEmpty(firstNameStr)) {
-			nameStr = firstNameStr + " (" + nameStr + ")";
+			setNameStr(firstNameStr + " (" + nameStr + ")");
 		}
 	}
 
@@ -204,7 +208,7 @@ public abstract class MenuTitleController {
 					}
 
 					if (displayStreetNameInTitle()) {
-						nameStr = streetStr;
+						setNameStr(streetStr);
 						getPointDescription().setName(nameStr);
 					}
 					onSearchAddressDone();

@@ -781,7 +781,6 @@
     <string name="int_continuosly">En continu</string>
     <string name="osmand_short_description_80_chars">Logiciel de cartographie et de navigation fonctionnant avec des cartes OSM hors-ligne et en ligne</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors-ligne ou en ligne</string>
-    <string name="snap_to_road_descr">Déplacer la position sur la route en cours de navigation.</string>
     <string name="snap_to_road">Déplacer sur la route</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
 \n 
@@ -1984,7 +1983,6 @@
     <string name="shared_string_change">Modifier</string>
     <string name="get_started">Démarrer</string>
     <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
-    <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (habituellement plus court).</string>
     <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
     <string name="skip_map_downloading_desc">Aucune carte hors ligne n\'est installée. Vous pouvez sélectionner une carte dans la liste ou télécharger une carte plus tard depuis le menu « %1$s ».</string>
     <string name="search_another_country">Sélectionner une autre région</string>
@@ -3290,7 +3288,7 @@
     <string name="added_profiles_descr">Profils ajoutés par le greffon</string>
     <string name="shared_string_turn_off">Désactiver</string>
     <string name="new_plugin_added">Nouveau greffon ajouté</string>
-    <string name="join_segments">Relier les segments</string>
+    <string name="join_segments">Joindre les segments</string>
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
@@ -3907,7 +3905,6 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Allemand (courant)</string>
     <string name="app_mode_light_aircraft">Aviation légère</string>
-    <string name="elevation_data">Vous pouvez utiliser l\'altitude pour prendre en compte le dénivellé de votre itinéraire</string>
     <string name="gpx_upload_trackable_visibility_descr">« Traçable » signifie que la trace ne s\'affichera pas dans les listes publiques, mais que les points de cheminement horodatés qu\'elle contient seront téléchargeables depuis l\'API GPS publique (ces points sont traités afin de n\'avoir aucun lien direct avec vous).</string>
     <string name="release_3_9">• Ajout d\'une option pour exporter et importer toutes les données, y compris les paramètres, les ressources, mes lieux
 \n

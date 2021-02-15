@@ -3823,5 +3823,11 @@
     <string name="poi_recycling_small_electrical_appliances">Маленькія электрапрыборы</string>
     <string name="poi_beehive">Вулей</string>
     <string name="poi_nuts">Крама арэхаў</string>
-    <string name="poi_fuel_lng"></string>
+    <string name="poi_fuel_lng"/>
+    <string name="poi_diplomatic_services_citizen_services_filter">Паслугі для грамадзян</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Іміграцыйныя візы</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">Неіміграцыйныя візы</string>
+    <string name="poi_liaison_filter">Сувязь</string>
+    <string name="poi_consulate_filter">Консульства</string>
+    <string name="poi_embassy_filter">Амбасада</string>
 </resources>

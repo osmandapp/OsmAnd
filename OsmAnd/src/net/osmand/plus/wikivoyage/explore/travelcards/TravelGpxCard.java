@@ -7,16 +7,19 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.osm.RouteActivityType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.util.Algorithms;
 
@@ -64,8 +67,18 @@ public class TravelGpxCard extends BaseTravelCard {
 				@Override
 				public void onClick(View v) {
 					if (activity != null) {
-						File file = app.getTravelHelper().createGpxFile(article);
-						TrackMenuFragment.openTrack(activity, file, null);
+						app.getTravelHelper().getArticleById(article.generateIdentifier(), null, true,
+								new TravelHelper.GpxReadCallback() {
+									@Override
+									public void onGpxFileReading() {
+									}
+
+									@Override
+									public void onGpxFileRead(@Nullable GPXUtilities.GPXFile gpxFile) {
+										File file = app.getTravelHelper().createGpxFile(article);
+										TrackMenuFragment.openTrack(activity, file, null);
+									}
+								});
 					}
 				}
 			};
@@ -102,7 +115,6 @@ public class TravelGpxCard extends BaseTravelCard {
 					if (saved) {
 						helper.removeArticleFromSaved(article);
 					} else {
-						app.getTravelHelper().createGpxFile(article);
 						helper.addArticleToSaved(article);
 					}
 					updateSaveButton(holder);
