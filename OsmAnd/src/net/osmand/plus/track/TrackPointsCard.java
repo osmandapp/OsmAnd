@@ -109,6 +109,10 @@ public class TrackPointsCard extends BaseCard implements OnChildClickListener, O
 		expandAllGroups();
 	}
 
+	public List<GpxDisplayGroup> getGroups() {
+		return adapter.groups;
+	}
+
 	private void addActions(LayoutInflater inflater) {
 		View view = inflater.inflate(R.layout.preference_category_with_descr, listView, false);
 		TextView title = view.findViewById(android.R.id.title);
