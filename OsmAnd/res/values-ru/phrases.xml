@@ -3879,4 +3879,10 @@
     <string name="poi_ranger_station">Станция рейнджеров</string>
     <string name="poi_swimming_area">Место для купания</string>
     <string name="poi_wildlife_crossing">Экодук</string>
+    <string name="poi_piste_status_closed">Состояние трассы: закрыта</string>
+    <string name="poi_piste_status_open">Состояние трассы: открыта</string>
+    <string name="poi_patrolled_no">Патрулируется: нет</string>
+    <string name="poi_patrolled_yes">Патрулируется: да</string>
+    <string name="poi_piste_name">Название трассы</string>
+    <string name="poi_piste_ski_jump">Лыжный трамплин</string>
 </resources>

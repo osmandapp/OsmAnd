@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickActionListFragment;
@@ -50,14 +52,16 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	private RecyclerView recyclerView;
 	private List<SettingsItem> settingsItems;
 	private String fileName;
+	private boolean needRestart;
 	private boolean nightMode;
 
 	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
-									@NonNull String fileName) {
+									@NonNull String fileName, boolean needRestart) {
 		ImportCompleteFragment fragment = new ImportCompleteFragment();
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFileName(fileName);
 		fragment.setRetainInstance(true);
+		fragment.setNeedRestart(needRestart);
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(SETTINGS_LIST_TAG)
@@ -97,6 +101,9 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				dismissFragment();
 			}
 		});
+		if (needRestart) {
+			setupRestartButton(root);
+		}
 		if (Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(app, root);
 		}
@@ -239,6 +246,25 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	private void setupRestartButton(View root) {
+		View buttonsDivider = root.findViewById(R.id.buttons_divider);
+		View buttonContainer = root.findViewById(R.id.button_restart_container);
+		AndroidUiHelper.setVisibility(View.VISIBLE, buttonsDivider, buttonContainer);
+
+		TextView btnRestart = root.findViewById(R.id.button_restart);
+		btnRestart.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
+				if (activity instanceof MapActivity) {
+					MapActivity.doRestart(activity);
+				} else {
+					android.os.Process.killProcess(android.os.Process.myPid());
+				}
+			}
+		});
+	}
+
 	@Override
 	public int getStatusBarColorId() {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
@@ -250,5 +276,9 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public void setNeedRestart(boolean needRestart) {
+		this.needRestart = needRestart;
 	}
 }

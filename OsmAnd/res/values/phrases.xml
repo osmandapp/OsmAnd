@@ -4339,10 +4339,10 @@
 	<string name="poi_patrolled_no">Patrolled: no</string>
 	<string name="poi_piste_status_open">Piste status: open</string>
 	<string name="poi_piste_status_closed">Piste status: closed</string>
-
 	<string name="poi_summit_register_yes">Summit register: yes</string>
 	<string name="poi_summit_register_no">Summit register: no</string>
-
 	<string name="poi_mobile_library">Mobile library stop position</string>
+	<string name="poi_conference_centre">Conference centre</string>
+	<string name="poi_geodesist">Geodesist</string>
 
 </resources>

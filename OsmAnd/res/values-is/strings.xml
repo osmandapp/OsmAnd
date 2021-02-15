@@ -1374,7 +1374,6 @@
     <string name="get_it">Ná í það</string>
     <string name="get_for">Ná í það fyrir %1$s</string>
     <string name="routing_attr_short_way_name">Leið með hagkvæmri eldsneytisnýtingu</string>
-    <string name="routing_attr_short_way_description">Nota leið með hagkvæmri eldsneytisnýtingu (venjulega styttri).</string>
     <string name="replace_favorite_confirmation">Ertu viss að þú viljir skipta út eftirlætinu %1$s?</string>
     <string name="confirmation_to_delete_history_items">Fjarlægja valin atriði úr breytingaskránni?</string>
     <string name="change_markers_position">Breyta staðsetningu kortamerkis</string>
@@ -1835,7 +1834,6 @@
     <string name="close_changeset">Loka breytingasetti</string>
     <string name="use_compass_navigation_descr">Nota áttavita þegar stefna finnst ekki á annan máta.</string>
     <string name="auto_zoom_map_descr">Sjálfvirkur aðdráttur korts miðað við hraða þinn (á meðan kort er samstillt við virka staðsetningu).</string>
-    <string name="snap_to_road_descr">Staðsetning grípi í vegi á meðan leiðsögn stendur.</string>
     <string name="interrupt_music_descr">Gera hlé á tónlist á meðan talskilaboð eru flutt.</string>
     <string name="do_not_send_anonymous_app_usage">Ekki senda nafnlausar upplýsingar um notkun forritsins</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sendir almennar upplýsingar um þá hluta forritsins sem þó opnar. Við söfnum ekki neinum gögnum um staðsetningar eða hegðun notenda, né heldur um neitt af því sem notendur setja inn til leitar, niðurhald eða skoðunar.</string>
@@ -3904,7 +3902,6 @@
     <string name="register_on_openplacereviews_desc">Ljósmyndir eru í boði frá opna gagnaverkefninu OpenPlaceReviews.org. Til að geta sent inn myndir þarftu að skrá þig á vefsvæðinu þeirra.</string>
     <string name="osm_edit_comment_note">Gera athugasemd við OSM-minnispunkt</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Rekjanlegt\" þýðir að ferillinn birtist ekki á neinum opinberum listum, en meðhöndlaðir ferilpunktar með tímamerkjum úr ferlinum (sem ekki er hægt að tengja beint við þig) munu birtast í gögnum sem eru sótt í gegnum opinbert GPS API-forritsviðmót.</string>
-    <string name="elevation_data">Þú getur notað hæðargögn til útreikninga á hækkun/lækkun í ferðunum þínum</string>
     <string name="add_photos_descr">OsmAnd birtir ljósmyndir frá ýmsum þjónustum:
 \nOpenPlaceReviews - ljósmyndir POI-merkisstaða;
 \nMapillary - myndefni í götuhæð;

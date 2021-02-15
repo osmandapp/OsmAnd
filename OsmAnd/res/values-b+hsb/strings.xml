@@ -444,7 +444,6 @@
     <string name="avoid_motorway">Awtodróhi wobeńć</string>
     <string name="auto_zoom_map_descr">Přiměrja wulkosć karty wotpowědujo aktualnej spěšnosći (karta so z tuchwilnym stejišćom synchronizuje).</string>
     <string name="auto_zoom_map">Awtomatiski zoom</string>
-    <string name="snap_to_road_descr">W běhu nawigacije poziciski dypk na dróhach zdźeržować.</string>
     <string name="snap_to_road">Na dróze wostać</string>
     <string name="interrupt_music_descr">Připowědźenje přetorhnje hudźbu.</string>
     <string name="interrupt_music">Wothrawanje hudźby přetorhować</string>
@@ -1360,7 +1359,6 @@
     <string name="give_permission">Dowolić</string>
     <string name="allow_access_location">Přistup k stejišću dowolić</string>
     <string name="routing_attr_short_way_name">Naftu lutowacy puć</string>
-    <string name="routing_attr_short_way_description">Naftu lutowacy puć wužić (zwjetša krótši).</string>
     <string name="confirmation_to_delete_history_items">Wubrane objekty z archiwa wotstronić?</string>
     <string name="select_map_marker">Chorhojčku wubrać</string>
     <string name="map_markers_other">Druhe chorhojčki</string>

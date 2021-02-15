@@ -781,7 +781,6 @@
     <string name="day_night_info">Denní/noční info</string>
     <string name="map_widget_renderer">Styl mapy</string>
     <string name="avoid_motorway">Žádné dálnice</string>
-    <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace.</string>
     <string name="map_widget_vector_attributes">Vlastnosti vykreslování</string>
     <string name="poi_filter_parking">Parkoviště</string>
     <string name="poi_filter_public_transport">Veřejná doprava</string>
@@ -2004,7 +2003,6 @@
     <string name="update_all_maps_now">Aktualizovat všechny mapy ihned?</string>
     <string name="clear_tile_data">Vymazat všechny dlaždice</string>
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
-    <string name="routing_attr_short_way_description">Použít ekonomickou trasu (obvykle kratší).</string>
     <string name="replace_favorite_confirmation">Opravdu chcete nahradit Oblíbené místo „%1$s“\?</string>
     <string name="rendering_attr_hideOverground_name">Nadzemní objekty</string>
     <string name="shared_string_change">Změnit</string>
@@ -3919,7 +3917,6 @@
     <string name="use_dev_url">Použít dev.openstreetmap.org</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Němčina (hovorová)</string>
-    <string name="elevation_data">Můžete použít výšková data pro započítání výstupu/sestupu na trase</string>
     <string name="app_mode_light_aircraft">Lehké letadlo</string>
     <string name="plan_route_join_segments">Spojit úseky</string>
     <string name="plan_route_split_before">Rozdělit před</string>

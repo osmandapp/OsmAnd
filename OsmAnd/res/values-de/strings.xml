@@ -97,7 +97,6 @@
     <string name="avoid_motorway">Keine Autobahnen</string>
     <string name="auto_zoom_map_descr">Kartenvergrößerung der Geschwindigkeit anpassen (während der Kartennachführung).</string>
     <string name="auto_zoom_map">Automatische Vergrößerung</string>
-    <string name="snap_to_road_descr">Standort während der Navigation auf Straßen einrasten.</string>
     <string name="snap_to_road">Auf Straße einrasten</string>
     <string name="osmand_play_title_30_chars">OsmAnd Karten &amp; Navigation</string>
     <string name="osmand_short_description_80_chars">Globale Landkarten- und Navigationsanwendung für Offline- und Online-OSM-Karten</string>
@@ -1999,7 +1998,6 @@
     <string name="route_stops_before">%1$s Haltestellen davor</string>
     <string name="rendering_attr_hideOverground_name">Oberirdische Objekte</string>
     <string name="routing_attr_short_way_name">Kraftstoffsparende Route</string>
-    <string name="routing_attr_short_way_description">Kraftstoffsparende Route verwenden (in der Regel kürzer).</string>
     <string name="replace_favorite_confirmation">Wollen Sie den Favoriten \'%1$s\' wirklich ersetzen?</string>
     <string name="shared_string_change">Ändern</string>
     <string name="get_started">Erste Schritte</string>
@@ -3923,7 +3921,6 @@
     <string name="cannot_upload_image">Bild kann nicht hochgeladen werden, bitte versuchen Sie es später erneut</string>
     <string name="select_picture">Bild auswählen</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="elevation_data">Sie können Höhendaten verwenden, um Steigungen und Gefälle auf Ihrer Reise zu berücksichtigen</string>
     <string name="app_mode_light_aircraft">Kleinflugzeug</string>
     <string name="plan_route_split_before">Teilen vor</string>
     <string name="plan_route_split_after">Teilen nach</string>
@@ -4034,7 +4031,8 @@
     <string name="activity_type_offroad_name">Geländegängig</string>
     <string name="activity_type_motorbike_name">Motorrad</string>
     <string name="activity_type_car_name">Auto</string>
-    <string name="announcement_time_prepare">Vorbereiten</string>
+    <string name="announcement_time_prepare">Zweite Ankündigung (mittlere Distanz)</string>
     <string name="shared_string_sec">sek</string>
     <string name="activity_type_racing_name">Rennsport</string>
+    <string name="announcement_time_prepare_long">Erste Ankündigung (größere Distanz)</string>
 </resources>
