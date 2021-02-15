@@ -1,6 +1,7 @@
 package net.osmand.map;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
@@ -40,7 +41,7 @@ public class WorldRegion implements Serializable {
 	protected String regionDownloadName;
 	protected boolean regionMapDownload;
 	protected LatLon regionCenter;
-	protected RegionBoundingBox boundingBox;
+	protected QuadRect boundingBox;
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -184,31 +185,10 @@ public class WorldRegion implements Serializable {
 		return res;
 	}
 
-	public static boolean isFirstRegionInsideTheSecond(WorldRegion first,
-	                                                   WorldRegion second) {
-		RegionBoundingBox bbox1 = first.boundingBox;
-		RegionBoundingBox bbox2 = second.boundingBox;
-		if ((bbox1.minX > bbox2.minX) && (bbox1.maxX < bbox2.maxX)) {
-			if ((bbox1.minY > bbox2.minY) && (bbox1.maxY < bbox2.maxY)) {
-				return true;
-			}
+	public boolean containsRegion(WorldRegion region) {
+		if (this.boundingBox != null && region.boundingBox != null) {
+			return this.boundingBox.contains(region.boundingBox);
 		}
 		return false;
-	}
-
-	public static class RegionBoundingBox {
-
-		double minX;
-		double maxX;
-		double minY;
-		double maxY;
-
-		public RegionBoundingBox(double minX, double maxX, double minY, double maxY) {
-			this.minX = minX;
-			this.maxX = maxX;
-			this.minY = minY;
-			this.maxY = maxY;
-		}
-
 	}
 }

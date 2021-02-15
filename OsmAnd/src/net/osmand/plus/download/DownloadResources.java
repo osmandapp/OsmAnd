@@ -533,13 +533,13 @@ public class DownloadResources extends DownloadResourceGroup {
 		// collect duplicates
 		Set<WorldRegion> duplicates = new HashSet<>();
 		for (int i = 0; i < regions.size() - 1; i++) {
-			WorldRegion firstRegion = regions.get(i);
+			WorldRegion r1 = regions.get(i);
 			for (int j = i + 1; j < regions.size(); j++) {
-				WorldRegion secondRegion = regions.get(j);
-				if (WorldRegion.isFirstRegionInsideTheSecond(firstRegion, secondRegion)) {
-					duplicates.add(firstRegion);
-				} else if (WorldRegion.isFirstRegionInsideTheSecond(secondRegion, firstRegion)) {
-					duplicates.add(secondRegion);
+				WorldRegion r2 = regions.get(j);
+				if (r1.containsRegion(r2)) {
+					duplicates.add(r1);
+				} else if (r2.containsRegion(r1)) {
+					duplicates.add(r2);
 				}
 			}
 		}

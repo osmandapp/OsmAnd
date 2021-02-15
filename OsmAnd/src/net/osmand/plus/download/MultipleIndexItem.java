@@ -104,7 +104,7 @@ public class MultipleIndexItem extends DownloadItem {
 		double totalSizeMb = 0.0d;
 		for (IndexItem item : items) {
 			if (item.hasActualDataToDownload()) {
-				totalSizeMb += Double.parseDouble(item.size);
+				totalSizeMb += item.getSizeToDownloadInMb();
 			}
 		}
 		return totalSizeMb;

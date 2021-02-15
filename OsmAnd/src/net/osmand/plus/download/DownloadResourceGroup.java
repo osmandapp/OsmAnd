@@ -21,7 +21,7 @@ public class DownloadResourceGroup {
 
 	private final DownloadResourceGroupType type;
 	private final DownloadResourceGroup parentGroup;
-	// ASSERT: individualDisplayItems are not empty if and only if groups are empty
+	// ASSERT: individualDownloadItems are not empty if and only if groups are empty
 	private final List<DownloadItem> individualDownloadItems;
 	private final List<DownloadResourceGroup> groups;
 	protected final String id;

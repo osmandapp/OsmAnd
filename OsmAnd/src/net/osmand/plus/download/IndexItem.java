@@ -7,13 +7,14 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -58,11 +59,10 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	@Override
 	public List<File> getDownloadedFiles(OsmandApplication app) {
 		File targetFile = getTargetFile(app);
-		List<File> result = new ArrayList<>();
 		if (targetFile.exists()) {
-			result.add(targetFile);
+			return Collections.singletonList(targetFile);
 		}
-		return result;
+		return Collections.emptyList();
 	}
 
 	public String getDescription() {
@@ -91,11 +91,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 
 	@Override
 	protected double getSizeToDownloadInMb() {
-		try {
-			return Double.parseDouble(size);
-		} catch (Exception e) {
-			return 0;
-		}
+		return Algorithms.parseDoubleSilently(size, 0.0);
 	}
 
 	public DownloadEntry createDownloadEntry(OsmandApplication ctx) {

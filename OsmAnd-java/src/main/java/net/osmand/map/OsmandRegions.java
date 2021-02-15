@@ -10,7 +10,6 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
-import net.osmand.map.WorldRegion.RegionBoundingBox;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
@@ -463,9 +462,9 @@ public class OsmandRegions {
 		return rd;
 	}
 
-	private RegionBoundingBox findBoundingBox(BinaryMapDataObject object) {
+	private QuadRect findBoundingBox(BinaryMapDataObject object) {
 		if (object.getPointsLength() == 0) {
-			return new RegionBoundingBox(0, 0, 0, 0);
+			return new QuadRect(0, 0, 0, 0);
 		}
 
 		double currentX = object.getPoint31XTile(0);
@@ -497,7 +496,7 @@ public class OsmandRegions {
 		double revertedMinY = MapUtils.get31LatitudeY((int) maxY);
 		double revertedMaxY = MapUtils.get31LatitudeY((int) minY);
 
-		return new RegionBoundingBox(minX, maxX, revertedMinY, revertedMaxY);
+		return new QuadRect(minX, revertedMinY, maxX, revertedMaxY);
 	}
 
 	private String getSearchIndex(BinaryMapDataObject object) {

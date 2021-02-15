@@ -48,7 +48,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemViewHolder {
@@ -412,7 +411,7 @@ public class ItemViewHolder {
 		final List<File> downloadedFiles = downloadItem.getDownloadedFiles(app);
 		if (!Algorithms.isEmpty(downloadedFiles)) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_remove)
-					.setIcon(getThemedIcon(context, R.drawable.ic_action_remove_dark));
+					.setIcon(getContentIcon(context, R.drawable.ic_action_remove_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -558,10 +557,6 @@ public class ItemViewHolder {
 					: LocalIndexType.VOICE_DATA;
 		}
 		return type;
-	}
-
-	private Drawable getThemedIcon(DownloadActivity context, int resourceId) {
-		return context.getMyApplication().getUIUtilities().getThemedIcon(resourceId);
 	}
 
 	private Drawable getContentIcon(DownloadActivity context, int resourceId) {

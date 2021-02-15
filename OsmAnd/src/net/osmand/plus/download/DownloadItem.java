@@ -35,9 +35,8 @@ public abstract class DownloadItem {
 
 	@NonNull
 	public String getSizeDescription(Context ctx) {
-		String pattern = ctx.getString(R.string.ltr_or_rtl_combine_via_space);
 		String size = String.format(Locale.US, "%.2f", getSizeToDownloadInMb());
-		return String.format(pattern, size, "MB");
+		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, "MB");
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
@@ -48,8 +47,8 @@ public abstract class DownloadItem {
 		return type.getVisibleName(this, ctx, osmandRegions, includingParent);
 	}
 
-	public String getVisibleDescription(OsmandApplication clctx) {
-		return type.getVisibleDescription(this, clctx);
+	public String getVisibleDescription(OsmandApplication ctx) {
+		return type.getVisibleDescription(this, ctx);
 	}
 
 	public String getBasename() {
