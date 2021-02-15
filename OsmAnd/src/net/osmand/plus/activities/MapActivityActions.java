@@ -843,8 +843,7 @@ public class MapActivityActions implements DialogProvider {
 				}).createItem());
 
 		final OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
-		boolean isTripRecordingPluginOn = monitoringPlugin != null;
-		if (isTripRecordingPluginOn) {
+		if (monitoringPlugin != null) {
 			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_widget_monitoring, mapActivity)
 					.setId(DRAWER_TRIP_RECORDING_ID)
 					.setIcon(R.drawable.ic_action_track_recordable)

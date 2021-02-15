@@ -1,9 +1,9 @@
 package net.osmand.plus.monitoring;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -14,7 +14,6 @@ import android.util.TypedValue;
 import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -29,6 +28,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,6 +69,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	public static final String TAG = TripRecordingActiveBottomSheet.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(TripRecordingActiveBottomSheet.class);
 	private static final String UPDATE_CURRENT_GPX_FILE = "update_current_gpx_file";
+	private static final int GENERAL_UPDATE_INTERVAL = 1000;
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -100,7 +101,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	public boolean wasTrackMonitored() {
-		return settings != null && settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, SelectedGpxFile selectedGpxFile) {
@@ -154,7 +155,10 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 		final LinearLayout buttonShow = showTrackContainer.findViewById(R.id.basic_item_body);
 		TextView showTrackTitle = buttonShow.findViewById(R.id.title);
-		showTrackTitle.setText(ItemType.SHOW_TRACK.getTitleId());
+		Integer showTitle = ItemType.SHOW_TRACK.getTitleId();
+		if (showTitle != null) {
+			showTrackTitle.setText(showTitle);
+		}
 		showTrackTitle.setTextColor(ContextCompat.getColor(app, getActiveIconColorId(nightMode)));
 		showTrackTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
 		Typeface typeface = FontCache.getFont(app, app.getResources().getString(R.string.font_roboto_medium));
@@ -194,15 +198,18 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			}
 		});
 		createItem(buttonAppearance, ItemType.APPEARANCE, showTrackOnMapButton.isChecked(), null);
-		setShowOnMapBackgroundInactive(buttonShow, app, showTrackOnMapButton.isChecked(), nightMode);
+		setShowOnMapBackground(buttonShow, app, showTrackOnMapButton.isChecked(), nightMode);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			buttonShow.setBackgroundTintList(null);
+		}
 		buttonShow.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				boolean checked = !showTrackOnMapButton.isChecked();
 				showTrackOnMapButton.setChecked(checked);
 				app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), checked, false);
-				setShowOnMapBackgroundInactive(buttonShow, app, checked, nightMode);
 				createItem(buttonAppearance, ItemType.APPEARANCE, checked, null);
+				setShowOnMapBackground(buttonShow, app, checked, nightMode);
 			}
 		});
 
@@ -248,7 +255,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			@Override
 			public void onClick(View v) {
 				boolean wasTrackMonitored = !wasTrackMonitored();
-				createItem(buttonPause, wasTrackMonitored ? ItemType.PAUSE : ItemType.RESUME, true, null);
 				if (!wasTrackMonitored) {
 					blockStatisticsBuilder.stopUpdatingStatBlocks();
 				} else {
@@ -256,6 +262,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 				}
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(wasTrackMonitored);
 				updateStatus();
+				createItem(buttonPause, wasTrackMonitored ? ItemType.PAUSE : ItemType.RESUME, true, null);
 			}
 		});
 
@@ -300,14 +307,14 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 		AppCompatImageView icon = view.findViewById(R.id.icon);
 		if (icon != null) {
-			setTintedIcon(icon, app, enabled, false, nightMode, type);
+			setTintedIcon(icon, enabled, nightMode, type);
 		}
 
 		TextView title = view.findViewById(R.id.button_text);
 		Integer titleId = type.getTitleId();
 		if (title != null && titleId != null) {
 			title.setText(titleId);
-			setTextColor(title, app, enabled, false, nightMode, type);
+			setTextColor(title, enabled, nightMode, type);
 		}
 
 		TextViewEx desc = view.findViewById(R.id.desc);
@@ -319,16 +326,15 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 				UiUtilities.setMargins(title, 0, marginDesc, 0, marginDesc);
 			}
 			desc.setText(description);
-			setTextColor(desc, app, false, false, nightMode, type);
+			setTextColor(desc, false, nightMode, type);
 		}
 
-		setItemBackgroundInactive(button != null ? button : (LinearLayout) view, app, nightMode);
-		changeOnTouch(button != null ? button : (LinearLayout) view, icon, title, app, enabled, nightMode, type);
+		setItemBackground(button != null ? button : (LinearLayout) view, enabled);
 	}
 
 	private String getTimeTrackSaved() {
-		if (helper.time != 0) {
-			long timeTrackSaved = helper.time;
+		long timeTrackSaved = helper.getLastTimeFileSaved();
+		if (timeTrackSaved != 0) {
 			long now = System.currentTimeMillis();
 			CharSequence time = DateUtils.getRelativeTimeSpanString(timeTrackSaved, now, DateUtils.MINUTE_IN_MILLIS);
 			return String.valueOf(time);
@@ -363,7 +369,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			public void run() {
 				int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
 				updateStatus();
-				handler.postDelayed(this, Math.max(1000, interval));
+				handler.postDelayed(this, Math.max(GENERAL_UPDATE_INTERVAL, interval));
 			}
 		};
 		handler.post(updatingGPS);
@@ -379,7 +385,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			public void run() {
 				String time = getTimeTrackSaved();
 				createItem(buttonSave, ItemType.SAVE, hasDataToSave(), !Algorithms.isEmpty(time) ? time : null);
-				handler.postDelayed(this, 60000);
+				handler.postDelayed(this, GENERAL_UPDATE_INTERVAL);
 			}
 		};
 		handler.post(updatingTimeTrackSaved);
@@ -449,36 +455,6 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	private static void setItemBackgroundActive(LinearLayout view, Context context,
-												boolean nightMode) {
-		Drawable background = AppCompatResources.getDrawable(context,
-				nightMode ? R.drawable.btn_background_active_dark : R.drawable.btn_background_active_light);
-		view.setBackgroundDrawable(background);
-	}
-
-	private static void setItemBackgroundInactive(LinearLayout view, Context context,
-												  boolean nightMode) {
-		Drawable background = AppCompatResources.getDrawable(context,
-				nightMode ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_inactive_light);
-		view.setBackgroundDrawable(background);
-	}
-
-	private static void setShowOnMapBackgroundActive(LinearLayout view, Context context,
-													 boolean checked, boolean nightMode) {
-		Drawable background = AppCompatResources.getDrawable(context,
-				nightMode ? checked ? R.drawable.btn_background_active_dark : R.drawable.btn_background_stroked_active_dark
-						: checked ? R.drawable.btn_background_active_light : R.drawable.btn_background_stroked_active_light);
-		view.setBackgroundDrawable(background);
-	}
-
-	private static void setShowOnMapBackgroundInactive(LinearLayout view, Context context,
-													   boolean checked, boolean nightMode) {
-		Drawable background = AppCompatResources.getDrawable(context,
-				nightMode ? checked ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_stroked_inactive_dark
-						: checked ? R.drawable.btn_background_inactive_light : R.drawable.btn_background_stroked_inactive_light);
-		view.setBackgroundDrawable(background);
-	}
-
 	public enum ItemType {
 		SHOW_TRACK(R.string.shared_string_show_on_map, null, null),
 		APPEARANCE(null, null, null),
@@ -523,58 +499,56 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	public void setTextColor(TextView tv, Context context, boolean enabled, boolean pressed, boolean nightMode, ItemType type) {
+	private void setItemBackground(LinearLayout view, boolean enabled) {
+		Drawable background = AppCompatResources.getDrawable(app, R.drawable.btn_background_inactive_light);
+		if (background != null && enabled) {
+			ColorStateList iconColorStateList = AndroidUtils.createPressedColorStateList(
+					app, getInactiveButtonColorId(nightMode), getActiveButtonColorId(nightMode)
+			);
+			DrawableCompat.setTintList(background, iconColorStateList);
+		} else {
+			UiUtilities.tintDrawable(background, ContextCompat.getColor(app, getInactiveButtonColorId(nightMode)));
+		}
+		view.setBackgroundDrawable(background);
+	}
+
+	private static void setShowOnMapBackground(LinearLayout view, Context context, boolean checked, boolean nightMode) {
+		Drawable background = AppCompatResources.getDrawable(context,
+				nightMode ? checked ? R.drawable.btn_background_inactive_dark : R.drawable.btn_background_stroked_inactive_dark
+						: checked ? R.drawable.btn_background_inactive_light : R.drawable.btn_background_stroked_inactive_light);
+		view.setBackgroundDrawable(background);
+	}
+
+	public void setTextColor(TextView tv, boolean enabled, boolean nightMode, ItemType type) {
 		if (tv != null) {
-			tv.setTextColor(ContextCompat.getColor(context,
-					enabled ? pressed ? getPressedColorId(nightMode)
-							: type == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
-							: getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode)));
+			ColorStateList textColorStateList = AndroidUtils.createPressedColorStateList(
+					app, enabled ? type == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
+							: getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode),
+					getPressedColorId(nightMode)
+			);
+			tv.setTextColor(textColorStateList);
 		}
 	}
 
-	public void setTintedIcon(AppCompatImageView iv, Context context, boolean enabled, boolean pressed, boolean nightMode, ItemType type) {
+	public void setTintedIcon(AppCompatImageView iv, boolean enabled, boolean nightMode, ItemType type) {
 		Integer iconId = type.getIconId();
 		if (iv != null && iconId != null) {
-			Drawable icon = AppCompatResources.getDrawable(context, iconId);
-			int iconColor = enabled ? pressed ? getPressedColorId(nightMode)
-					: type == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
-					: getActiveIconColorId(nightMode) : getSecondaryIconColorId(nightMode);
-			Drawable tintedIcon = UiUtilities.tintDrawable(icon, ContextCompat.getColor(context, iconColor));
-			iv.setImageDrawable(tintedIcon);
+			Drawable icon = AppCompatResources.getDrawable(app, iconId);
+			ColorStateList iconColorStateList = AndroidUtils.createPressedColorStateList(
+					app, enabled ? type == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
+							: getActiveIconColorId(nightMode) : getSecondaryIconColorId(nightMode),
+					getPressedColorId(nightMode)
+			);
+			if (icon != null) {
+				DrawableCompat.setTintList(icon, iconColorStateList);
+			}
+			iv.setImageDrawable(icon);
 			if (type == ItemType.STOP) {
 				int stopSize = iv.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
 				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(stopSize, stopSize);
 				iv.setLayoutParams(params);
 			}
 		}
-	}
-
-	@SuppressLint("ClickableViewAccessibility")
-	private void changeOnTouch(final LinearLayout button, @Nullable final AppCompatImageView iv, @Nullable final TextView tv,
-							   final Context context, final boolean enabled, final boolean nightMode, final ItemType type) {
-		button.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (enabled) {
-					switch (event.getAction()) {
-						case MotionEvent.ACTION_DOWN: {
-							setItemBackgroundActive(button, context, nightMode);
-							setTintedIcon(iv, context, true, true, nightMode, type);
-							setTextColor(tv, context, true, true, nightMode, type);
-							break;
-						}
-						case MotionEvent.ACTION_UP:
-						case MotionEvent.ACTION_CANCEL: {
-							setItemBackgroundInactive(button, context, nightMode);
-							setTintedIcon(iv, context, true, false, nightMode, type);
-							setTextColor(tv, context, true, false, nightMode, type);
-							break;
-						}
-					}
-				}
-				return false;
-			}
-		});
 	}
 
 	@ColorRes
@@ -595,6 +569,16 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	@ColorRes
 	private static int getSecondaryIconColorId(boolean nightMode) {
 		return nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
+	}
+
+	@ColorRes
+	private static int getActiveButtonColorId(boolean nightMode) {
+		return nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light;
+	}
+
+	@ColorRes
+	private static int getInactiveButtonColorId(boolean nightMode) {
+		return nightMode ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
 	}
 
 	@ColorRes

@@ -121,7 +121,9 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 		params.setMargins(horizontal, 0, horizontal, 0);
 		button.setLayoutParams(params);
 
-		UiUtilities.setupDialogButton(nightMode, button, type.getEffect(), type.getTitleId());
+		if (type.getTitleId() != null) {
+			UiUtilities.setupDialogButton(nightMode, button, type.getEffect(), type.getTitleId());
+		}
 
 		TextViewEx title = button.findViewById(R.id.button_text);
 		int margin = context.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_medium);
@@ -134,7 +136,9 @@ public class StopTrackRecordingBottomFragment extends MenuBottomSheetDialogFragm
 			colorRes = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 		}
 		AppCompatImageView icon = button.findViewById(R.id.icon);
-		icon.setImageDrawable(getIcon(type.getIconId(), colorRes));
+		if (type.getIconId() != null) {
+			icon.setImageDrawable(getIcon(type.getIconId(), colorRes));
+		}
 
 		if (type == ItemType.STOP_AND_DISCARD) {
 			int size = context.getResources().getDimensionPixelSize(R.dimen.map_widget_height);
