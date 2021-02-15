@@ -797,7 +797,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void startNavigation() {
 		OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		routingHelper.saveNavigatingMode();
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
 			if (app.getSettings().APPLICATION_MODE.get() != routingHelper.getAppMode()) {

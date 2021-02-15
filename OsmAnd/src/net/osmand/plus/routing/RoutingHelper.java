@@ -79,7 +79,6 @@ public class RoutingHelper {
 	private boolean routeWasFinished;
 
 	private ApplicationMode mode;
-	private ApplicationMode navigatingMode;
 
 	private static boolean isDeviatedFromRoute = false;
 	private long deviateFromRouteDetected = 0;
@@ -899,13 +898,5 @@ public class RoutingHelper {
 		if (route.isCalculated()) {
 			voiceRouter.newRouteIsCalculated(true);
 		}
-	}
-
-	public void saveNavigatingMode() {
-		navigatingMode = mode;
-	}
-
-	public ApplicationMode getNavigatingAppMode() {
-		return navigatingMode;
 	}
 }

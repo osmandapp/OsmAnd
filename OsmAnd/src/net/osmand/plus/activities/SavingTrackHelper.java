@@ -19,6 +19,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.Version;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -78,6 +79,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private SelectedGpxFile currentTrack;
 	private int points;
 	private int trkPoints = 0;
+
+	private ApplicationMode lastRoutingApplicationMode;
 
 	public SavingTrackHelper(OsmandApplication ctx) {
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
@@ -440,12 +443,15 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		} else {
 			heading = NO_HEADING;
 		}
+		if (ctx.getRoutingHelper().isFollowingMode()) {
+			lastRoutingApplicationMode = settings.getApplicationMode();
+		}
 		boolean record = false;
 		if (location != null && OsmAndLocationProvider.isNotSimulatedLocation(location)
 				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 			if (settings.SAVE_TRACK_TO_GPX.get()
 					&& locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()
-					&& ctx.getRoutingHelper().getNavigatingAppMode() == settings.APPLICATION_MODE.get()) {
+					&& (ctx.getRoutingHelper().isFollowingMode() || lastRoutingApplicationMode == settings.getApplicationMode())) {
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
 					&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
@@ -708,7 +714,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		OsmandSettings settings = ctx.getSettings();
 		return OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null
 				&& settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || settings.SAVE_TRACK_TO_GPX.get()
-				&& ctx.getRoutingHelper().getNavigatingAppMode() == settings.APPLICATION_MODE.get();
+				&& (ctx.getRoutingHelper().isFollowingMode() || lastRoutingApplicationMode == settings.getApplicationMode());
 	}
 
 	public float getDistance() {
