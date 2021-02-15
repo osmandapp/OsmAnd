@@ -6,6 +6,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.R;
@@ -13,17 +14,18 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 
 public class TrackEditCard extends BaseCard {
 
-	private GPXInfo gpxInfo;
+	private GPXFile gpxFile;
 
-	public TrackEditCard(MapActivity mapActivity, GPXInfo gpxInfo) {
+	public TrackEditCard(MapActivity mapActivity, GPXFile gpxFile) {
 		super(mapActivity);
-		this.gpxInfo = gpxInfo;
+		this.gpxFile = gpxFile;
 	}
 
 	@Override
@@ -50,9 +52,24 @@ public class TrackEditCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		String fileName = Algorithms.getFileWithoutDirs(gpxInfo.getFileName());
-		String title = GpxUiHelper.getGpxTitle(fileName);
+		String fileName = null;
+		File file = null;
+		if (!Algorithms.isEmpty(gpxFile.path)) {
+			file = new File(gpxFile.path);
+			fileName = gpxFile.path;
+		} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
+			fileName = gpxFile.tracks.get(0).name;
+		}
+		if (Algorithms.isEmpty(fileName)) {
+			fileName = app.getString(R.string.shared_string_gpx_track);
+		}
+		GPXInfo gpxInfo = new GPXInfo(gpxFile.path, file != null ? file.lastModified() : 0, file != null ? file.length() : 0);
 		GpxDataItem dataItem = getDataItem(gpxInfo);
+		String title = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(fileName));
+		GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
+			title = title + " segment " + (routeParams.getSelectedSegment() + 1);
+		}
 		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, dataItem, false, app);
 
 		ImageButton editButton = view.findViewById(R.id.show_on_map);

@@ -67,7 +67,6 @@ import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedList
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -212,24 +211,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (gpxFile == null || selectingTrack) {
 				setupTracksCard();
 			} else {
-				String fileName = null;
-				File file = null;
-				if (!Algorithms.isEmpty(gpxFile.path)) {
-					file = new File(gpxFile.path);
-					fileName = Algorithms.getFileNameWithoutExtension(file.getName());
-				} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
-					fileName = gpxFile.tracks.get(0).name;
-				}
-				if (Algorithms.isEmpty(fileName)) {
-					fileName = app.getString(R.string.shared_string_gpx_track);
-				}
-				GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
-				if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
-					fileName = fileName + " segment " + (routeParams.getSelectedSegment() + 1);
-				}
 				sortButton.setVisibility(View.GONE);
-				GPXInfo gpxInfo = new GPXInfo(fileName, file != null ? file.lastModified() : 0, file != null ? file.length() : 0);
-				TrackEditCard importTrackCard = new TrackEditCard(mapActivity, gpxInfo);
+				TrackEditCard importTrackCard = new TrackEditCard(mapActivity, gpxFile);
 				importTrackCard.setListener(this);
 				cardsContainer.addView(importTrackCard.build(mapActivity));
 
