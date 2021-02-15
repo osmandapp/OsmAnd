@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="delete_number_files_question">Delete %1$d files?</string>
+    <string name="shared_strings_all_regions">All regions</string>
     <string name="restart">Restart</string>
     <string name="elevation_data_descr">Routing could avoid strong uphills</string>
     <string name="map_orientation_threshold_descr">Don\'t rotate map view if speed is less than a threshold</string>
