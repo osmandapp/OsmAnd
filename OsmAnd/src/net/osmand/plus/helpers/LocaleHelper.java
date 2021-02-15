@@ -10,15 +10,13 @@ import net.osmand.util.Algorithms;
 
 import java.util.Locale;
 
-public class LocaleHelper implements StateChangedListener<String> {
+public class LocaleHelper {
 
 	private final OsmandApplication app;
 
 	private Locale defaultLocale;
 	private Locale preferredLocale;
 	private Resources localizedResources;
-
-	private boolean needRestart = false;
 
 	public LocaleHelper(OsmandApplication app) {
 		this.app = app;
@@ -93,28 +91,6 @@ public class LocaleHelper implements StateChangedListener<String> {
 
 	public Locale getDefaultLocale() {
 		return defaultLocale;
-	}
-
-	public void listenLocaleChanges() {
-		app.getSettings().PREFERRED_LOCALE.addListener(this);
-	}
-
-	public void stopListeningLocaleChanges() {
-		app.getSettings().PREFERRED_LOCALE.removeListener(this);
-	}
-
-	public boolean needRestart() {
-		return needRestart;
-	}
-
-	public void setNeedRestart(boolean needRestart) {
-		this.needRestart = needRestart;
-	}
-
-	@Override
-	public void stateChanged(String change) {
-		needRestart = true;
-		checkPreferredLocale();
 	}
 
 	public String getCountry() {

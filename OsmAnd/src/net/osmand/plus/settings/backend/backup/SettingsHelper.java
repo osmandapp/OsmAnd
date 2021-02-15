@@ -11,6 +11,7 @@ import net.osmand.Collator;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -111,7 +112,7 @@ public class SettingsHelper {
 	private Map<File, ExportAsyncTask> exportAsyncTasks = new HashMap<>();
 
 	public interface SettingsImportListener {
-		void onSettingsImportFinished(boolean succeed, @NonNull List<SettingsItem> items);
+		void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items);
 	}
 
 	public interface SettingsCollectListener {
@@ -173,7 +174,7 @@ public class SettingsHelper {
 		}
 	}
 
-	private void finishImport(@Nullable SettingsImportListener listener, boolean success, @NonNull List<SettingsItem> items) {
+	private void finishImport(@Nullable SettingsImportListener listener, boolean success, @NonNull List<SettingsItem> items, boolean needRestart) {
 		importTask = null;
 		List<String> warnings = new ArrayList<>();
 		for (SettingsItem item : items) {
@@ -183,18 +184,19 @@ public class SettingsHelper {
 			app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
 		}
 		if (listener != null) {
-			listener.onSettingsImportFinished(success, items);
+			listener.onSettingsImportFinished(success, needRestart, items);
 		}
 	}
 
 	@SuppressLint("StaticFieldLeak")
 	private class ImportItemsAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
-		private SettingsImporter importer;
-		private File file;
-		private SettingsImportListener listener;
-		private List<SettingsItem> items;
-		private LocaleHelper localeHelper;
+		private final SettingsImporter importer;
+		private final File file;
+		private final SettingsImportListener listener;
+		private final List<SettingsItem> items;
+		private final StateChangedListener<String> localeListener;
+		private boolean needRestart = false;
 
 		ImportItemsAsyncTask(@NonNull File file,
 							 @Nullable SettingsImportListener listener,
@@ -203,12 +205,17 @@ public class SettingsHelper {
 			this.file = file;
 			this.listener = listener;
 			this.items = items;
-			localeHelper = app.getLocaleHelper();
+			localeListener = new StateChangedListener<String>() {
+				@Override
+				public void stateChanged(String change) {
+					needRestart = true;
+				}
+			};
 		}
 
 		@Override
 		protected void onPreExecute() {
-			localeHelper.listenLocaleChanges();
+			app.getSettings().PREFERRED_LOCALE.addListener(localeListener);
 		}
 
 		@Override
@@ -226,8 +233,8 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(Boolean success) {
-			localeHelper.stopListeningLocaleChanges();
-			finishImport(listener, success, items);
+			app.getSettings().PREFERRED_LOCALE.removeListener(localeListener);
+			finishImport(listener, success, items, needRestart);
 		}
 	}
 
@@ -348,7 +355,7 @@ public class SettingsHelper {
 		protected void onPreExecute() {
 			ImportAsyncTask importTask = SettingsHelper.this.importTask;
 			if (importTask != null && !importTask.importDone) {
-				finishImport(importListener, false, items);
+				finishImport(importListener, false, items, false);
 			}
 			SettingsHelper.this.importTask = this;
 		}

@@ -52,14 +52,16 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	private RecyclerView recyclerView;
 	private List<SettingsItem> settingsItems;
 	private String fileName;
+	private boolean needRestart;
 	private boolean nightMode;
 
 	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
-									@NonNull String fileName) {
+									@NonNull String fileName, boolean needRestart) {
 		ImportCompleteFragment fragment = new ImportCompleteFragment();
 		fragment.setSettingsItems(settingsItems);
 		fragment.setFileName(fileName);
 		fragment.setRetainInstance(true);
+		fragment.setNeedRestart(needRestart);
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(SETTINGS_LIST_TAG)
@@ -99,8 +101,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				dismissFragment();
 			}
 		});
-		if (app.getLocaleHelper().needRestart()) {
-			app.getLocaleHelper().setNeedRestart(false);
+		if (needRestart) {
 			setupRestartButton(root);
 		}
 		if (Build.VERSION.SDK_INT >= 21) {
@@ -275,5 +276,9 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public void setNeedRestart(boolean needRestart) {
+		this.needRestart = needRestart;
 	}
 }
