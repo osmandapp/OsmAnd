@@ -45,10 +45,8 @@ import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
-import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.MapMarkersMode;
-import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -1389,6 +1387,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference(this, "gpx_routing_calculate_osmand_route", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference(this, "gpx_routing_calculate_rtept", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference(this, "calc_gpx_route", false).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Integer> GPX_ROUTE_SEGMENT = new IntPreference(this, "gpx_route_segment", -1).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOW_START_FINISH_ICONS = new BooleanPreference(this, "show_start_finish_icons", true).makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference(this, "avoid_toll_roads", false).makeProfile().cache();
@@ -2594,7 +2593,7 @@ public class OsmandSettings {
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 
-	public static final String[] TTS_AVAILABLE_VOICES = new String[]{
+	public static final String[] TTS_AVAILABLE_VOICES = new String[] {
 			"de", "en", "es", "fr", "it", "ja", "nl", "pl", "pt", "ru", "zh"
 	};
 	// this value string is synchronized with settings_pref.xml preference name

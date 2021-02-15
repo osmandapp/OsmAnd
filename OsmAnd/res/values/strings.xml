@@ -39,6 +39,9 @@
     <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
+    <string name="segments_count">Segment %1$d</string>
+    <string name="select_segments_description">%1$s contains more than one segment, you need to select the needed part for the navigation.</string>
+    <string name="select_segments">Select segments</string>
     <string name="uploading_count">Uploading %1$d of %2$d</string>
     <string name="upload_photo_completed">Upload completed</string>
     <string name="upload_photo">Uploading</string>
