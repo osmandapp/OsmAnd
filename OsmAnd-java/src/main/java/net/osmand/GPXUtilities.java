@@ -60,7 +60,8 @@ public class GPXUtilities {
 
 	private final static NumberFormat latLonFormat = new DecimalFormat("0.00#####", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
-	private final static NumberFormat decimalFormat = new DecimalFormat("#.###", new DecimalFormatSymbols(
+	// speed, ele, hdop
+	private final static NumberFormat decimalFormat = new DecimalFormat("#.#", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
 
 	public enum GPXColor {
@@ -1253,6 +1254,10 @@ public class GPXUtilities {
 			}
 			g.prepareInformation(fileTimestamp, splitSegments.toArray(new SplitSegment[0]));
 			return g;
+		}
+
+		public boolean containsRoutePoint(WptPt point) {
+			return getRoutePoints().contains(point);
 		}
 
 		public List<WptPt> getRoutePoints() {
@@ -2476,6 +2481,7 @@ public class GPXUtilities {
 				firstSegment.routeSegments = routeSegments;
 				firstSegment.routeTypes = routeTypes;
 			}
+		gpxFile.addGeneralTrack();
 		} catch (Exception e) {
 			gpxFile.error = e;
 			log.error("Error reading gpx", e); //$NON-NLS-1$

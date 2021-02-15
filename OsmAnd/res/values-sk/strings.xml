@@ -32,7 +32,6 @@
     <string name="poi_filter_fuel">Palivo</string>
     <string name="add_tag">Pridať značku</string>
     <string name="btn_advanced_mode">Pokročilý režim…</string>
-    <string name="snap_to_road_descr">Prichytiť pozíciu k cestám počas navigácie.</string>
     <string name="snap_to_road">Prichytiť k ceste</string>
     <string name="avoid_motorway">Žiadne diaľnice</string>
     <string name="layer_map_appearance">Konfigurovať obrazovku</string>
@@ -1989,7 +1988,6 @@
     <string name="shared_string_change">Zmeniť</string>
     <string name="get_started">Začať</string>
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
-    <string name="routing_attr_short_way_description">Použiť ekonomickú trasu (obyčajne kratšia).</string>
     <string name="replace_favorite_confirmation">Naozaj chcete nahradiť Obľúbený bod %1$s?</string>
     <string name="skip_map_downloading">Preskočiť sťahovanie máp</string>
     <string name="skip_map_downloading_desc">Nemáte nainštalovanú žiadnu offline mapu. Môžete vybrať mapu zo zoznamu alebo stiahnuť mapy neskôr cez \"Menu - %1$s\".</string>
@@ -3914,9 +3912,8 @@
     <string name="gpx_upload_private_visibility_descr">\"Súkromná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale body trasy z nej v budú dostupné v neusporiadanom poradí cez verejné GPS rozhranie (API) bez časových pečiatok.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identifikovateľná\" znamená, že trasa sa zobrazí verejne vo vašich GPS stopách a vo verejných zoznamoch GPS stôp, tzn. iní používatelia budú môcť stiahnuť nespracovanú trasu a prepojiť su s vašim používateľkým menom. Verejné body trasy s časovými pečiatkami poskytované cez GPS rozhranie (API) budú odkazovať na vašu pôvodnú stránku s trasou.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Sledovateľná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale spracované body trasy s časovými pečiatkami (ktoré nie je možné spojiť s vami), budú dostupné na stiahnutie cez verejné GPS rozhranie (API).</string>
-    <string name="elevation_data">Údaje o nadmorskej výške môžete použiť na zaznamenanie stúpania / klesania vašej cesty</string>
     <string name="app_mode_light_aircraft">Ľahké lietadlo</string>
-    <string name="plan_route_join_segments">Prepojte segmenty</string>
+    <string name="plan_route_join_segments">Spojiť úseky</string>
     <string name="plan_route_split_before">Rozdeliť predtým</string>
     <string name="plan_route_split_after">Rozdeliť po</string>
     <string name="plan_route_add_new_segment">Pridať nový segment</string>
@@ -4007,4 +4004,25 @@
     <string name="uploaded_count">Odoslané %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Zvoľte úpravy na odoslanie</string>
     <string name="hillshade_slope_contour_lines">Tieňované svahy / Sklony svahov / Vrstevnice</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews je komunitný projekt o verejných miestach ako reštaurácie, hotely, múzeá, body trasy. Zhromažďuje o nich verejné informácie ako fotografie, hodnotenia, odkazy na iné databázy ako OpenStreetMap, Wikipédia.
+\n
+\nVšetky údaje OpenPlaceReview data sú dostupné každému: http://openplacereviews.org/data.
+\n
+\nViac sa môžete dočítať na: http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Použiť test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Prihlásiť sa do OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Voda</string>
+    <string name="activity_type_winter_name">Zima</string>
+    <string name="activity_type_snowmobile_name">Snežný skúter</string>
+    <string name="activity_type_riding_name">Jazda na koni</string>
+    <string name="activity_type_racing_name">Preteky</string>
+    <string name="activity_type_mountainbike_name">Horský bicykel</string>
+    <string name="activity_type_cycling_name">Cyklistika</string>
+    <string name="activity_type_hiking_name">Turistika</string>
+    <string name="activity_type_running_name">Beh</string>
+    <string name="activity_type_walking_name">Chôdza</string>
+    <string name="activity_type_offroad_name">Jazda mimo cesty</string>
+    <string name="activity_type_motorbike_name">Motorka</string>
+    <string name="activity_type_car_name">Auto</string>
 </resources>

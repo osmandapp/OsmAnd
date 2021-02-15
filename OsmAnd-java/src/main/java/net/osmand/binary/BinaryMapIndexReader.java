@@ -83,7 +83,7 @@ public class BinaryMapIndexReader {
 
 	public final static int TRANSPORT_STOP_ZOOM = 24;
 	public static final int SHIFT_COORDINATES = 5;
-	public static final int LABEL_ZOOM_ENCODE = 26;
+	public static final int LABEL_ZOOM_ENCODE = 31 - SHIFT_COORDINATES;
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
 	public static boolean READ_STATS = false;
 	public static final SearchPoiTypeFilter ACCEPT_ALL_POI_TYPE_FILTER = new SearchPoiTypeFilter() {

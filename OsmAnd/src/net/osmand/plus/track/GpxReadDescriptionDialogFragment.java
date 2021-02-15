@@ -166,7 +166,9 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			@Override
 			public void onPageCommitVisible(WebView webView, String url) {
 				super.onPageCommitVisible(webView, url);
-				setupDependentViews(view);
+				if (getActivity() != null) {
+					setupDependentViews(view);
+				}
 			}
 		});
 		loadWebviewData();
@@ -216,7 +218,7 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		return "<body style=\"color:white;\">\n" + content + "</body>\n";
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String title, @NonNull String imageUrl, @NonNull String description) {
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String title, @Nullable String imageUrl, @NonNull String description) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			Bundle args = new Bundle();

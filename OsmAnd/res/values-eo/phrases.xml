@@ -3582,7 +3582,7 @@
     <string name="poi_charcoal_pile">Karbigejo</string>
     <string name="poi_historic_tank">Tanko historia</string>
     <string name="poi_hookah_lounge">Salono por fumi akvopipon</string>
-    <string name="poi_source_biomass">Energifonto: biomaso</string>
+    <string name="poi_generator_source_biomass">Energifonto: biomaso</string>
     <string name="poi_snowmobile_filter">Aliro por motorsledoj</string>
     <string name="poi_access_bus">Aliro por aŭtobusoj</string>
     <string name="poi_access_caravan">Aliro por kampad-postveturiloj</string>
@@ -3881,4 +3881,14 @@
     <string name="poi_wildlife_crossing_bat_bridge">Ponto por vespertoj</string>
     <string name="poi_wildlife_crossing">Trairejo por sovaĝaj bestoj</string>
     <string name="poi_swimming_area">Naĝejo natura</string>
+    <string name="poi_piste_status_closed">Stato de skivojo: fermita</string>
+    <string name="poi_piste_status_open">Stato de skivojo: malfermita</string>
+    <string name="poi_patrolled_no">Kontrolata: ne</string>
+    <string name="poi_patrolled_yes">Kontrolata: jes</string>
+    <string name="poi_gladed_yes">Senarbigita: jes</string>
+    <string name="poi_piste_name">Nomo de skivojo</string>
+    <string name="poi_piste_ski_jump">Skisaltejo</string>
+    <string name="poi_mobile_library">Movebla biblioteko (haltloko)</string>
+    <string name="poi_summit_register_no">Pint‑taglibro: ne</string>
+    <string name="poi_summit_register_yes">Pint‑taglibro: jes</string>
 </resources>

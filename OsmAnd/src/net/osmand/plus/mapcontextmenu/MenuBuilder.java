@@ -1369,7 +1369,9 @@ public class MenuBuilder {
 		if (amenity != null) {
 			PoiCategory category = amenity.getType();
 			PoiType poiType = category.getPoiTypeByKeyName(amenity.getSubType());
-			return app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + poiType.getKeyName());
+			if (poiType != null) {
+				return app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + poiType.getKeyName());
+			}
 		}
 		return null;
 	}

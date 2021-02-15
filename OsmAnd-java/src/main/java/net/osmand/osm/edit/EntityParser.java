@@ -21,7 +21,7 @@ import net.osmand.osm.edit.Relation.RelationMember;
 import net.osmand.util.Algorithms;
 
 public class EntityParser {
-	
+
 	public static void parseMapObject(MapObject mo, Entity e, Map<String, String> tags) {
 		mo.setId(e.getId());
 		if(mo instanceof Amenity) {
@@ -123,7 +123,7 @@ public class EntityParser {
 			mo.setName(ref);
 		}
 	}
-	
+
 	private static void setNameFromBrand(MapObject mo, Map<String, String> tags) {
 		String ref = tags.get(OSMTagKey.BRAND.getValue());
 		if(ref != null){
@@ -140,7 +140,7 @@ public class EntityParser {
 			op += " [" + ref + "]";
 		mo.setName(op);
 	}
-	
+
 
 	private static String getWebSiteURL(Map<String, String> tagValues, boolean checkWikipedia) {
 		String siteUrl = null;
@@ -170,14 +170,14 @@ public class EntityParser {
 		}
 		return siteUrl;
 	}
-	
-	
+
+
 	public static List<Amenity> parseAmenities(MapPoiTypes poiTypes, Entity entity, Map<String, String> tags,
 			List<Amenity> amenitiesList) {
 		amenitiesList.clear();
 		// it could be collection of amenities
 		boolean relation = entity instanceof Relation;
-		boolean purerelation = relation && 
+		boolean purerelation = relation &&
 				!("multipolygon".equals(tags.get("type")) || "boundary".equals(tags.get("type")));
 		Collection<Map<String, String>> it = MapRenderingTypes.splitTagsIntoDifferentObjects(tags);
 		for (Map<String, String> ts : it) {
@@ -201,9 +201,7 @@ public class EntityParser {
 		}
 		return amenitiesList;
 	}
-	
-	
-	
+
 	private static boolean checkAmenitiesToAdd(Amenity a, List<Amenity> amenitiesList){
 		// check amenity for duplication
 		for(Amenity b : amenitiesList){
@@ -212,9 +210,9 @@ public class EntityParser {
 			}
 		}
 		return true;
-		
+
 	}
-	
+
 	public static Building parseBuilding(Entity e){
 		Building b = new Building();
 		parseMapObject(b, e, e.getTags());
@@ -228,7 +226,7 @@ public class EntityParser {
 			List<Node> nodes = ((Way) e).getNodes();
 			for(int i = 0; i < nodes.size(); i++) {
 				Node node = nodes.get(i);
-				if(node != null && "yes".equals(node.getTag(OSMTagKey.ENTRANCE)) && 
+				if(node != null && "yes".equals(node.getTag(OSMTagKey.ENTRANCE)) &&
 						!Algorithms.isEmpty(node.getTag(OSMTagKey.REF))) {
 					b.addEntrance(node.getTag(OSMTagKey.REF), node.getLatLon());
 				}
@@ -236,11 +234,11 @@ public class EntityParser {
 		}
 		return b;
 	}
-	
+
 	public static City parseCity(Node el) {
 		return parseCity(el, CityType.valueFromString(el.getTag(OSMTagKey.PLACE.getValue())));
 	}
-	
+
 	public static City parseCity(Entity el, CityType t) {
 		if(t == null) {
 			return null;
@@ -252,15 +250,15 @@ public class EntityParser {
 		c.setIsin(isin);
 		return c;
 	}
-	
-	
+
+
 	public static TransportRoute parserRoute(Relation r, String ref){
 		TransportRoute rt = new TransportRoute();
 		parseMapObject(rt, r, r.getTags());
 		rt.setRef(ref);
 		return rt;
 	}
-	
+
 	public static TransportStop parseTransportStop(Entity e){
 		TransportStop st = new TransportStop();
 		parseMapObject(st, e, e.getTags());

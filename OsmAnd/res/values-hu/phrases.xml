@@ -54,7 +54,7 @@
     <string name="poi_service_tyres">Autógumi-szerelő</string>
     <string name="poi_car_wash">Autómosó</string>
     <string name="poi_fuel">Benzinkút;Töltőállomás;Gázolajtöltő-állomás</string>
-    <string name="poi_electricity_combined_charging">Elektromos töltőállomás</string>
+    <string name="poi_electricity_combined_charging">Elektromos töltőállomás;Elektromos autó töltése;Villanyautó töltése;Elektromos töltőpont</string>
     <string name="poi_compressed_air">Sűrített levegő</string>
     <string name="poi_parking">Parkoló</string>
     <string name="poi_motorcycle_parking">Motorkerékpár-parkoló</string>
@@ -3582,7 +3582,7 @@
     <string name="poi_charcoal_pile">Faszénégető boksa</string>
     <string name="poi_historic_tank">Történelmi harckocsi</string>
     <string name="poi_hookah_lounge">Vízipipázó társalgóhely</string>
-    <string name="poi_source_biomass">Energiaforrás: biomassza</string>
+    <string name="poi_generator_source_biomass">Energiaforrás: biomassza</string>
     <string name="poi_taxi_office">Taxiiroda</string>
     <string name="poi_cellar_entrance">Pincebejárat</string>
     <string name="poi_craft_builder">Kőműves</string>
@@ -3879,4 +3879,14 @@
     <string name="poi_wildlife_crossing_bat_tunnel">Denevéralagút</string>
     <string name="poi_wildlife_crossing_bat_bridge">Denevérhíd</string>
     <string name="poi_wildlife_crossing">Vadátjáró</string>
+    <string name="poi_summit_register_no">Csúcsnapló nincs</string>
+    <string name="poi_summit_register_yes">Csúcsnapló van</string>
+    <string name="poi_patrolled_no">Hegyi mentő nincs</string>
+    <string name="poi_patrolled_yes">Hegyi mentő van</string>
+    <string name="poi_gladed_yes">Erdei pálya</string>
+    <string name="poi_mobile_library">Mozgó könyvtár tartózkodási helye</string>
+    <string name="poi_piste_status_closed">Pálya állapota: zárva</string>
+    <string name="poi_piste_status_open">Pálya állapota: nyitva</string>
+    <string name="poi_piste_name">Pálya neve</string>
+    <string name="poi_piste_ski_jump">Síugrósánc</string>
 </resources>

@@ -52,8 +52,7 @@ public class ContourLinesAction extends QuickAction {
 						if (selected && !plugin.isActive() && !plugin.needsInstallation()) {
 							OsmandPlugin.enablePlugin(activity, app, plugin, true);
 						}
-
-						SRTMPlugin.refreshMapComplete(activity);
+						activity.refreshMapComplete();
 					}
 				}
 			});
