@@ -4,20 +4,25 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.List;
 
 public class TrackEditCard extends BaseCard {
 
@@ -74,6 +79,24 @@ public class TrackEditCard extends BaseCard {
 			title = app.getResources().getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + title;
 		}
 		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, dataItem, false, app);
+
+		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
+			TextView distanceView = view.findViewById(R.id.distance);
+			TextView timeView = view.findViewById(R.id.time);
+			TextView pointsView = view.findViewById(R.id.points_count);
+			List<GPXUtilities.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+			GPXUtilities.TrkSegment segment = segments.get(routeParams.getSelectedSegment());
+			int point = segment.points.size();
+			double distance = TrackSelectSegmentAdapter.getDistance(segment);
+			long time = TrackSelectSegmentAdapter.getSegmentTime(segment);
+			if (time != 1) {
+				timeView.setText(OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)));
+			} else {
+				timeView.setText("");
+			}
+			distanceView.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
+			pointsView.setText(String.valueOf(point));
+		}
 
 		ImageButton editButton = view.findViewById(R.id.show_on_map);
 		editButton.setVisibility(View.VISIBLE);
