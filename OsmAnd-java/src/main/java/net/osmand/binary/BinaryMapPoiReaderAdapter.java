@@ -37,7 +37,12 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int CATEGORY_MASK = (1 << SHIFT_BITS_CATEGORY) - 1;
 	private static final int ZOOM_TO_SKIP_FILTER_READ = 6;
 	private static final int ZOOM_TO_SKIP_FILTER = 3;
-	private static final int BUCKET_SEARCH_BY_NAME = 15; // should be bigger 100? 
+	private static final int BUCKET_SEARCH_BY_NAME = 15; // should be bigger 100?
+	private static final int BASE_POI_SHIFT = SHIFT_BITS_CATEGORY;// 7
+	private static final int FINAL_POI_SHIFT = BinaryMapIndexReader.SHIFT_COORDINATES;// 5
+	private static final int BASE_POI_ZOOM = 31 - BASE_POI_SHIFT;// 24 zoom
+	private static final int FINAL_POI_ZOOM = 31 - FINAL_POI_SHIFT;// 26 zoom
+
 
 	public static class PoiSubType {
 		public boolean text;
@@ -744,9 +749,9 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				if (hasLocation) {
 					if (precisionXY != 0) {
-						int[] xy = MapUtils.calculateFinalXYFromBaseAndPrecisionXY(24, 26, precisionXY, x >> 7, y >> 7, true);
-						int x31 = xy[0] << 5;
-						int y31 = xy[1] << 5;
+						int[] xy = MapUtils.calculateFinalXYFromBaseAndPrecisionXY(BASE_POI_ZOOM, FINAL_POI_ZOOM, precisionXY, x >> BASE_POI_SHIFT, y >> BASE_POI_SHIFT, true);
+						int x31 = xy[0] << FINAL_POI_SHIFT;
+						int y31 = xy[1] << FINAL_POI_SHIFT;
 						am.setLocation(MapUtils.get31LatitudeY(y31), MapUtils.get31LongitudeX(x31));
 					} else {
 						am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
@@ -754,10 +759,10 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				return am;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER:
-				x = (codedIS.readSInt32() + (px << (24 - zoom))) << 7;
+				x = (codedIS.readSInt32() + (px << (BASE_POI_ZOOM - zoom))) << BASE_POI_SHIFT;
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DY_FIELD_NUMBER:
-				y = (codedIS.readSInt32() + (py << (24 - zoom))) << 7;
+				y = (codedIS.readSInt32() + (py << (BASE_POI_ZOOM - zoom))) << BASE_POI_SHIFT;
 				req.numberOfVisitedObjects++;
 				if (checkBounds) {
 					if (left31 > x || right31 < x || top31 > y || bottom31 < y) {
