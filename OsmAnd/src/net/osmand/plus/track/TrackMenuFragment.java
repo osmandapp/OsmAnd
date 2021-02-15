@@ -332,8 +332,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				headerContainer.addView(overviewCard.build(getMapActivity()));
 			}
 			GpxBlockStatisticsBuilder blocksBuilder = overviewCard.getBlockStatisticsBuilder();
-			if (isCurrentRecordingTrack() && !blocksBuilder.isUpdateRunning()) {
-				blocksBuilder.runUpdatingStatBlocks();
+			if (isCurrentRecordingTrack()) {
+				blocksBuilder.runUpdatingStatBlocksIfNeeded();
 			}
 		} else {
 			if (overviewCard != null && overviewCard.getView() != null) {
@@ -551,8 +551,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		updateControlsVisibility(true);
 		startLocationUpdate();
 		GpxBlockStatisticsBuilder blockStats = overviewCard.getBlockStatisticsBuilder();
-		if (menuType == TrackMenuType.OVERVIEW && isCurrentRecordingTrack() && !blockStats.isUpdateRunning()) {
-			blockStats.runUpdatingStatBlocks();
+		if (menuType == TrackMenuType.OVERVIEW && isCurrentRecordingTrack()) {
+			blockStats.runUpdatingStatBlocksIfNeeded();
 		}
 	}
 
