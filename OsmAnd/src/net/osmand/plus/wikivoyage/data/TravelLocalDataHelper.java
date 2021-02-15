@@ -7,13 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,6 +32,8 @@ import java.util.Set;
 
 
 public class TravelLocalDataHelper {
+
+	private static final Log LOG = PlatformUtil.getLog(TravelLocalDataHelper.class);
 
 	private static final int HISTORY_ITEMS_LIMIT = 300;
 
@@ -189,7 +197,7 @@ public class TravelLocalDataHelper {
 
 	private static class WikivoyageLocalDataDbHelper {
 
-		private static final int DB_VERSION = 7;
+		private static final int DB_VERSION = 8;
 		private static final String DB_NAME = "wikivoyage_local_data";
 
 		private static final String HISTORY_TABLE_NAME = "wikivoyage_search_history";
@@ -227,6 +235,7 @@ public class TravelLocalDataHelper {
 		private static final String BOOKMARKS_COL_CONTENT_JSON = "content_json";
 		private static final String BOOKMARKS_COL_CONTENT = "content";
 		private static final String BOOKMARKS_COL_LAST_MODIFIED = "last_modified";
+		private static final String BOOKMARKS_COL_GPX_GZ = "gpx_gz";
 
 		private static final String BOOKMARKS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 				BOOKMARKS_TABLE_NAME + " (" +
@@ -240,7 +249,8 @@ public class TravelLocalDataHelper {
 				BOOKMARKS_COL_ROUTE_ID + " TEXT, " +
 				BOOKMARKS_COL_CONTENT_JSON + " TEXT, " +
 				BOOKMARKS_COL_CONTENT + " TEXT, " +
-				BOOKMARKS_COL_LAST_MODIFIED + " long" + ");";
+				BOOKMARKS_COL_LAST_MODIFIED + " long, " +
+				BOOKMARKS_COL_GPX_GZ + " blob" + ");";
 
 		private static final String BOOKMARKS_TABLE_SELECT = "SELECT " +
 				BOOKMARKS_COL_ARTICLE_TITLE + ", " +
@@ -253,7 +263,8 @@ public class TravelLocalDataHelper {
 				BOOKMARKS_COL_ROUTE_ID + ", " +
 				BOOKMARKS_COL_CONTENT_JSON + ", " +
 				BOOKMARKS_COL_CONTENT + ", " +
-				BOOKMARKS_COL_LAST_MODIFIED +
+				BOOKMARKS_COL_LAST_MODIFIED + ", " +
+				BOOKMARKS_COL_GPX_GZ +
 				" FROM " + BOOKMARKS_TABLE_NAME;
 
 		private final OsmandApplication context;
@@ -321,6 +332,9 @@ public class TravelLocalDataHelper {
 						" WHERE " + BOOKMARKS_COL_CONTENT + " is null");
 				conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME +
 						" SET " + BOOKMARKS_COL_PARTIAL_CONTENT + " = null");
+			}
+			if (oldVersion < 8) {
+				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_GPX_GZ + " blob");
 			}
 		}
 
@@ -465,35 +479,48 @@ public class TravelLocalDataHelper {
 			return count > 0;
 		}
 
-		void addSavedArticle(@NonNull TravelArticle article) {
-			String travelBook = article.getTravelBook(context);
+		void addSavedArticle(@NonNull final TravelArticle article) {
+			final String travelBook = article.getTravelBook(context);
 			if (travelBook == null) {
 				return;
 			}
-			SQLiteConnection conn = openConnection(false);
-			if (conn != null) {
-				try {
-					String query = "INSERT INTO " + BOOKMARKS_TABLE_NAME + " (" +
-							BOOKMARKS_COL_ARTICLE_TITLE + ", " +
-							BOOKMARKS_COL_LANG + ", " +
-							BOOKMARKS_COL_IS_PART_OF + ", " +
-							BOOKMARKS_COL_IMAGE_TITLE + ", " +
-							BOOKMARKS_COL_TRAVEL_BOOK + ", " +
-							BOOKMARKS_COL_LAT + ", " +
-							BOOKMARKS_COL_LON + ", " +
-							BOOKMARKS_COL_ROUTE_ID + ", " +
-							BOOKMARKS_COL_CONTENT_JSON + ", " +
-							BOOKMARKS_COL_CONTENT + ", " +
-							BOOKMARKS_COL_LAST_MODIFIED +
-							") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-					conn.execSQL(query, new Object[]{article.title, article.lang,
-							article.aggregatedPartOf, article.imageTitle,
-							travelBook, article.lat, article.lon, article.routeId, article.contentsJson,
-							article.content, article.getFile().lastModified()});
-				} finally {
-					conn.close();
-				}
-			}
+			context.getTravelHelper().getArticleById(article.generateIdentifier(), article.lang, true,
+					new TravelHelper.GpxReadCallback() {
+						@Override
+						public void onGpxFileReading() {
+
+						}
+
+						@Override
+						public void onGpxFileRead(@Nullable GPXUtilities.GPXFile gpxFile) {
+							SQLiteConnection conn = openConnection(false);
+							if (conn != null) {
+								try {
+									String query = "INSERT INTO " + BOOKMARKS_TABLE_NAME + " (" +
+											BOOKMARKS_COL_ARTICLE_TITLE + ", " +
+											BOOKMARKS_COL_LANG + ", " +
+											BOOKMARKS_COL_IS_PART_OF + ", " +
+											BOOKMARKS_COL_IMAGE_TITLE + ", " +
+											BOOKMARKS_COL_TRAVEL_BOOK + ", " +
+											BOOKMARKS_COL_LAT + ", " +
+											BOOKMARKS_COL_LON + ", " +
+											BOOKMARKS_COL_ROUTE_ID + ", " +
+											BOOKMARKS_COL_CONTENT_JSON + ", " +
+											BOOKMARKS_COL_CONTENT + ", " +
+											BOOKMARKS_COL_LAST_MODIFIED + ", " +
+											BOOKMARKS_COL_GPX_GZ +
+											") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+									conn.execSQL(query, new Object[]{article.title, article.lang,
+											article.aggregatedPartOf, article.imageTitle,
+											travelBook, article.lat, article.lon, article.routeId, article.contentsJson,
+											article.content, article.getFile().lastModified(),
+											Algorithms.stringToGzip(GPXUtilities.asString(article.gpxFile))});
+								} finally {
+									conn.close();
+								}
+							}
+						}
+					});
 		}
 
 		void removeSavedArticle(@NonNull TravelArticle article) {
@@ -583,6 +610,15 @@ public class TravelLocalDataHelper {
 			if (!Algorithms.isEmpty(travelBook)) {
 				res.file = context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR + travelBook);
 				res.lastModified = cursor.getLong(cursor.getColumnIndex(BOOKMARKS_COL_LAST_MODIFIED));
+			}
+			try {
+				byte[] blob = cursor.getBlob(cursor.getColumnIndex(BOOKMARKS_COL_GPX_GZ));
+				if (blob != null) {
+					String gpxContent = Algorithms.gzipToString(blob);
+					res.gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
+				}
+			} catch (IOException e) {
+				LOG.error(e.getMessage(), e);
 			}
 			return res;
 		}
