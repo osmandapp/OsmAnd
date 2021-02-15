@@ -116,46 +116,50 @@ public class TravelObfHelper implements TravelHelper {
 	public synchronized List<TravelArticle> loadPopularArticles() {
 		String lang = app.getLanguage();
 		List<TravelArticle> popularArticles = new ArrayList<>(this.popularArticles);
-		if (foundAmenities.size() - foundAmenitiesIndex < MAX_POPULAR_ARTICLES_COUNT) {
-			final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
-			for (final BinaryMapIndexReader reader : getReaders()) {
-				try {
-					searchAmenity(foundAmenities, location, reader, searchRadius, -1, ROUTE_ARTICLE);
-					searchAmenity(foundAmenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK);
-				} catch (Exception e) {
-					LOG.error(e.getMessage(), e);
-				}
-			}
-			if (foundAmenities.size() > 0) {
-				Collections.sort(foundAmenities, new Comparator<Pair<File, Amenity>>() {
-					@Override
-					public int compare(Pair article1, Pair article2) {
-						Amenity amenity1 = (Amenity) article1.second;
-						double d1 = MapUtils.getDistance(amenity1.getLocation(), location)
-								/ (ROUTE_ARTICLE.equals(amenity1.getSubType()) ? 5 : 1);
-						Amenity amenity2 = (Amenity) article2.second;
-						double d2 = MapUtils.getDistance(amenity2.getLocation(), location)
-								/ (ROUTE_ARTICLE.equals(amenity2.getSubType()) ? 5 : 1);
-						return Double.compare(d1, d2);
+		int pagesCount;
+		if (isAnyTravelBookPresent()) {
+			do {
+				if (foundAmenities.size() - foundAmenitiesIndex < MAX_POPULAR_ARTICLES_COUNT) {
+					final LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
+					for (final BinaryMapIndexReader reader : getReaders()) {
+						try {
+							searchAmenity(foundAmenities, location, reader, searchRadius, -1, ROUTE_ARTICLE);
+							searchAmenity(foundAmenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK);
+						} catch (Exception e) {
+							LOG.error(e.getMessage(), e);
+						}
 					}
-				});
-			}
-			searchRadius *= 2;
-		}
-
-		int pagesCount = popularArticles.size() / MAX_POPULAR_ARTICLES_COUNT;
-		while (foundAmenitiesIndex < foundAmenities.size() - 1) {
-			Pair<File, Amenity> amenity = foundAmenities.get(foundAmenitiesIndex);
-			if (!Algorithms.isEmpty(amenity.second.getName(lang))) {
-				TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
-				if (article != null && !popularArticles.contains(article)) {
-					popularArticles.add(article);
-					if (popularArticles.size() >= (pagesCount + 1) * MAX_POPULAR_ARTICLES_COUNT) {
-						break;
+					if (foundAmenities.size() > 0) {
+						Collections.sort(foundAmenities, new Comparator<Pair<File, Amenity>>() {
+							@Override
+							public int compare(Pair article1, Pair article2) {
+								Amenity amenity1 = (Amenity) article1.second;
+								double d1 = MapUtils.getDistance(amenity1.getLocation(), location)
+										/ (ROUTE_ARTICLE.equals(amenity1.getSubType()) ? 5 : 1);
+								Amenity amenity2 = (Amenity) article2.second;
+								double d2 = MapUtils.getDistance(amenity2.getLocation(), location)
+										/ (ROUTE_ARTICLE.equals(amenity2.getSubType()) ? 5 : 1);
+								return Double.compare(d1, d2);
+							}
+						});
 					}
+					searchRadius *= 2;
 				}
-			}
-			foundAmenitiesIndex++;
+				pagesCount = popularArticles.size() / MAX_POPULAR_ARTICLES_COUNT;
+				while (foundAmenitiesIndex < foundAmenities.size() - 1) {
+					Pair<File, Amenity> amenity = foundAmenities.get(foundAmenitiesIndex);
+					if (!Algorithms.isEmpty(amenity.second.getName(lang))) {
+						TravelArticle article = cacheTravelArticles(amenity.first, amenity.second, lang, false, null);
+						if (article != null && !popularArticles.contains(article)) {
+							popularArticles.add(article);
+							if (popularArticles.size() >= (pagesCount + 1) * MAX_POPULAR_ARTICLES_COUNT) {
+								break;
+							}
+						}
+					}
+					foundAmenitiesIndex++;
+				}
+			} while (popularArticles.size() < (pagesCount + 1) * MAX_POPULAR_ARTICLES_COUNT);
 		}
 		this.popularArticles = popularArticles;
 		return popularArticles;
@@ -669,7 +673,7 @@ public class TravelObfHelper implements TravelHelper {
 		if (article == null && articles == null) {
 			article = findArticleById(articleId, lang, readGpx, callback);
 		}
-		if (article != null && readGpx && !Algorithms.isEmpty(lang)) {
+		if (article != null && readGpx && (!Algorithms.isEmpty(lang) || article instanceof TravelGpx)) {
 			readGpxFile(article, callback);
 		}
 		return article;
@@ -1003,11 +1007,7 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public File createGpxFile(@NonNull TravelArticle article) {
 		final GPXFile gpx;
-		if (article instanceof TravelGpx) {
-			gpx = buildTravelGpxFile((TravelGpx) article);
-		} else {
-			gpx = article.getGpxFile();
-		}
+		gpx = article.getGpxFile();
 		File file = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
 		writeGpxFile(file, gpx);
 		return file;
@@ -1043,13 +1043,17 @@ public class TravelObfHelper implements TravelHelper {
 		@Override
 		protected GPXFile doInBackground(Void... voids) {
 			GPXFile gpxFile = null;
-			List<Amenity> pointList = getPointList(article);
-			if (!Algorithms.isEmpty(pointList)) {
-				gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
-				gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
-				for (Amenity amenity : pointList) {
-					WptPt wptPt = createWptPt(amenity, article.getLang());
-					gpxFile.addPoint(wptPt);
+			if (article instanceof TravelGpx) {
+				gpxFile = buildTravelGpxFile((TravelGpx) article);
+			} else {
+				List<Amenity> pointList = getPointList(article);
+				if (!Algorithms.isEmpty(pointList)) {
+					gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
+					gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
+					for (Amenity amenity : pointList) {
+						WptPt wptPt = createWptPt(amenity, article.getLang());
+						gpxFile.addPoint(wptPt);
+					}
 				}
 			}
 			return gpxFile;
