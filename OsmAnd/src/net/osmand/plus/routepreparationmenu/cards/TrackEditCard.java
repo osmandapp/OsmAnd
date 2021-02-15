@@ -21,7 +21,7 @@ import java.io.File;
 
 public class TrackEditCard extends BaseCard {
 
-	private GPXFile gpxFile;
+	private final GPXFile gpxFile;
 
 	public TrackEditCard(MapActivity mapActivity, GPXFile gpxFile) {
 		super(mapActivity);
@@ -63,12 +63,15 @@ public class TrackEditCard extends BaseCard {
 		if (Algorithms.isEmpty(fileName)) {
 			fileName = app.getString(R.string.shared_string_gpx_track);
 		}
+
 		GPXInfo gpxInfo = new GPXInfo(gpxFile.path, file != null ? file.lastModified() : 0, file != null ? file.length() : 0);
 		GpxDataItem dataItem = getDataItem(gpxInfo);
 		String title = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(fileName));
 		GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
 		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
-			title = title + " segment " + (routeParams.getSelectedSegment() + 1);
+			int selectedSegmentCount = routeParams.getSelectedSegment() + 1;
+			int totalSegmentCount = routeParams.getFile().getNonEmptyTrkSegments(false).size();
+			title = app.getResources().getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + title;
 		}
 		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, dataItem, false, app);
 

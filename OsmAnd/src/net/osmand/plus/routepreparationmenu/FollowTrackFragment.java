@@ -721,13 +721,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void onSegmentSelect(GPXFile gpxFile, int selectedSegment) {
 		selectTrackToFollow(gpxFile);
-		if (selectedSegment != -1) {
 			GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 			if (paramsBuilder != null) {
 				paramsBuilder.setSelectedSegment(selectedSegment);
 				app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
 				app.getRoutingHelper().onSettingsChanged(true);
-			}
 		}
 		updateSelectionMode(false);
 	}
