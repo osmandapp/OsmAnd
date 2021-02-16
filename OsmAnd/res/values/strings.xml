@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="app_restart_required">Application restart required to apply some settings.</string>
     <string name="on_pause">On pause</string>
     <string name="track_recording_description">Are you sure you want to stop recording?\nAll unsaved data will be lost.</string>
     <string name="track_recording_title">Track recording stopped</string>
