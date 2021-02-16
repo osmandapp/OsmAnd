@@ -97,9 +97,6 @@ public class GpxBlockStatisticsBuilder {
 
 	public void runUpdatingStatBlocksIfNeeded() {
 		if (!isUpdateRunning()) {
-			if (handler.hasCallbacks(updatingItems)) {
-				stopUpdatingStatBlocks();
-			}
 			updatingItems = new Runnable() {
 				@Override
 				public void run() {
