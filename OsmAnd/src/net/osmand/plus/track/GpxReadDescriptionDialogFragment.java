@@ -1,5 +1,7 @@
 package net.osmand.plus.track;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -8,6 +10,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -93,6 +96,25 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		outState.putString(TITLE_KEY, title);
 		outState.putString(IMAGE_URL_KEY, imageUrl);
 		outState.putString(CONTENT_KEY, contentHtml);
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+		Activity ctx = getActivity();
+		int themeId = isNightMode(true) ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+		Dialog dialog = new Dialog(ctx, themeId);
+		Window window = dialog.getWindow();
+		if (window != null) {
+			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
+			}
+			if (Build.VERSION.SDK_INT >= 21) {
+				int statusBarColor = isNightMode(true) ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+				window.setStatusBarColor(ContextCompat.getColor(ctx, statusBarColor));
+			}
+		}
+		return dialog;
 	}
 
 	private void setupToolbar(View view) {
@@ -195,7 +217,7 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(ctx, editBtn, isNightMode(true), R.drawable.ripple_light, R.drawable.ripple_dark);
 		} else {
-			AndroidUtils.setBackground(editBtn, ContextCompat.getDrawable(ctx, R.drawable.btn_unstroked));
+			AndroidUtils.setBackground(ctx, editBtn, isNightMode(true), R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
 		}
 
 		editBtn.setOnClickListener(new View.OnClickListener() {

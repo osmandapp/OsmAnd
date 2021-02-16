@@ -126,7 +126,7 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(ctx, btnSave, isNightMode(true), R.drawable.ripple_light, R.drawable.ripple_dark);
 		} else {
-			AndroidUtils.setBackground(btnSave, ContextCompat.getDrawable(ctx, R.drawable.btn_unstroked));
+			AndroidUtils.setBackground(ctx, btnSave, isNightMode(true), R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
 		}
 	}
 

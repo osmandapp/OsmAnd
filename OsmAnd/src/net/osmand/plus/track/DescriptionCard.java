@@ -24,7 +24,6 @@ import net.osmand.util.Algorithms;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
 
@@ -120,7 +119,7 @@ public class DescriptionCard extends BaseCard {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(ctx, button, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 		} else {
-			AndroidUtils.setBackground(button, ContextCompat.getDrawable(ctx, R.drawable.btn_unstroked));
+			AndroidUtils.setBackground(ctx, button, nightMode, R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
 		}
 	}
 
