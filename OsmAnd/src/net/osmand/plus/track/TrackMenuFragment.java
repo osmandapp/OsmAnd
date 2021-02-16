@@ -234,7 +234,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		displayHelper.setGpx(selectedGpxFile.getGpxFile());
 		String fileName = Algorithms.getFileWithoutDirs(getGpx().path);
-		gpxTitle = GpxUiHelper.getGpxTitle(fileName);
+		gpxTitle = !isCurrentRecordingTrack() ? GpxUiHelper.getGpxTitle(fileName)
+				: app.getResources().getString(R.string.shared_string_currently_recording_track);
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
 		FragmentActivity activity = requireMyActivity();
@@ -333,8 +334,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				overviewCard.setListener(this);
 				headerContainer.addView(overviewCard.build(getMapActivity()));
 			}
+			GpxBlockStatisticsBuilder blocksBuilder = overviewCard.getBlockStatisticsBuilder();
+			if (isCurrentRecordingTrack()) {
+				blocksBuilder.runUpdatingStatBlocksIfNeeded();
+			}
 		} else {
 			if (overviewCard != null && overviewCard.getView() != null) {
+				overviewCard.getBlockStatisticsBuilder().stopUpdatingStatBlocks();
 				headerContainer.removeView(overviewCard.getView());
 			}
 			boolean isOptions = menuType == TrackMenuType.OPTIONS;
@@ -547,6 +553,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		updateControlsVisibility(true);
 		startLocationUpdate();
+		GpxBlockStatisticsBuilder blockStats = overviewCard.getBlockStatisticsBuilder();
+		if (menuType == TrackMenuType.OVERVIEW && isCurrentRecordingTrack()) {
+			blockStats.runUpdatingStatBlocksIfNeeded();
+		}
 	}
 
 	@Override
@@ -558,6 +568,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		updateControlsVisibility(false);
 		stopLocationUpdate();
+		overviewCard.getBlockStatisticsBuilder().stopUpdatingStatBlocks();
 	}
 
 	@Override
@@ -1144,6 +1155,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				updateContent();
 			}
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private boolean isCurrentRecordingTrack() {
+		return app.getSavingTrackHelper().getCurrentTrack() == selectedGpxFile;
 	}
 
 	private void hide() {

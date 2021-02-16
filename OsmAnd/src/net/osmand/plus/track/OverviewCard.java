@@ -43,6 +43,10 @@ public class OverviewCard extends BaseCard {
 	private final SelectedGpxFile selectedGpxFile;
 	private final GpxBlockStatisticsBuilder blockStatisticsBuilder;
 
+	public GpxBlockStatisticsBuilder getBlockStatisticsBuilder() {
+		return blockStatisticsBuilder;
+	}
+
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull SegmentActionsListener actionsListener, SelectedGpxFile selectedGpxFile) {
 		super(mapActivity);
 		this.actionsListener = actionsListener;

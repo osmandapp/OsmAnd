@@ -38,21 +38,23 @@
 		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginLeft="@dimen/content_padding"
-		android:gravity="center"
-		android:orientation="horizontal"
-		android:paddingTop="@dimen/dash_margin"
-		android:paddingBottom="@dimen/dash_margin">
+		android:layout_marginTop="@dimen/dash_margin"
+		android:layout_marginBottom="@dimen/dash_margin"
+		android:orientation="horizontal">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/direction"
 			android:layout_width="@dimen/context_menu_transport_icon_size"
 			android:layout_height="@dimen/context_menu_transport_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginTop="1sp"
 			osmand:srcCompat="@drawable/ic_direction_arrow" />
 
 		<TextView
 			android:id="@+id/distance"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
 			android:layout_marginStart="@dimen/content_padding_small_half"
 			android:layout_marginLeft="@dimen/content_padding_small_half"
 			android:maxLines="1"

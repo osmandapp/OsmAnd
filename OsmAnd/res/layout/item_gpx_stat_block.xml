@@ -6,7 +6,7 @@
 	android:layout_height="@dimen/list_header_height"
 	android:layout_marginStart="@dimen/content_padding"
 	android:layout_marginLeft="@dimen/content_padding"
-	android:gravity="center_vertical"
+	android:gravity="start|center_vertical"
 	android:orientation="horizontal">
 
 	<LinearLayout
@@ -14,14 +14,13 @@
 		android:layout_height="match_parent"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
-		android:gravity="center_vertical"
-		android:maxWidth="@dimen/grid_menu_item_width"
+		android:gravity="start|center_vertical"
 		android:orientation="vertical">
 
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:gravity="center_vertical"
+			android:gravity="start|center_vertical"
 			android:orientation="horizontal"
 			android:weightSum="2">
 
@@ -61,8 +60,10 @@
 			android:layout_height="wrap_content"
 			android:background="@null"
 			android:ellipsize="end"
+			android:gravity="start|center_vertical"
 			android:lines="1"
 			android:maxWidth="@dimen/grid_menu_item_width"
+			android:minWidth="@dimen/map_route_buttons_width"
 			android:textColor="?android:attr/textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
 			tools:text="@string/distance" />
