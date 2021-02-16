@@ -451,7 +451,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 			if (settings.SAVE_TRACK_TO_GPX.get()
 					&& locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()
-					&& (ctx.getRoutingHelper().isFollowingMode() || lastRoutingApplicationMode == settings.getApplicationMode())) {
+					&& lastRoutingApplicationMode == settings.getApplicationMode()) {
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
 					&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
@@ -714,7 +714,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		OsmandSettings settings = ctx.getSettings();
 		return OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null
 				&& settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || settings.SAVE_TRACK_TO_GPX.get()
-				&& (ctx.getRoutingHelper().isFollowingMode() || lastRoutingApplicationMode == settings.getApplicationMode());
+				&& lastRoutingApplicationMode == settings.getApplicationMode();
 	}
 
 	public float getDistance() {
