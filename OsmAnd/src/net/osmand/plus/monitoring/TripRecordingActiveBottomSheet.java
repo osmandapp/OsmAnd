@@ -231,7 +231,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 				if (wasTrackMonitored()) {
 					blockStatisticsBuilder.stopUpdatingStatBlocks();
 					helper.startNewSegment();
-					blockStatisticsBuilder.runUpdatingStatBlocks();
+					blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
 				}
 			}
 		});
@@ -245,7 +245,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 						@Override
 						public void run() {
 							blockStatisticsBuilder.stopUpdatingStatBlocks();
-							blockStatisticsBuilder.runUpdatingStatBlocks();
+							blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
 							stopUpdatingTimeTrackSaved();
 							runUpdatingTimeTrackSaved();
 						}
@@ -261,7 +261,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 				if (!wasTrackMonitored) {
 					blockStatisticsBuilder.stopUpdatingStatBlocks();
 				} else {
-					blockStatisticsBuilder.runUpdatingStatBlocks();
+					blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
 				}
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(wasTrackMonitored);
 				updateStatus();
@@ -386,7 +386,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	@Override
 	public void onResume() {
 		super.onResume();
-		blockStatisticsBuilder.runUpdatingStatBlocks();
+		blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
 		runUpdatingGPS();
 		runUpdatingTimeTrackSaved();
 	}
