@@ -282,7 +282,10 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment {
 		helper.startNewSegment();
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 		app.startNavigationService(NavigationService.USED_BY_GPX);
-		TripRecordingActiveBottomSheet.showInstance(getMapActivity().getSupportFragmentManager(), helper.getCurrentTrack());
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			TripRecordingActiveBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), helper.getCurrentTrack());
+		}
 		dismiss();
 	}
 

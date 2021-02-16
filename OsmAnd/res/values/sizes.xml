@@ -413,6 +413,4 @@
 
 	<dimen name="radioButtonSize">32dp</dimen>
 	<dimen name="checkBoxSize">24dp</dimen>
-
-	<dimen name="zero">0dp</dimen>
 </resources>

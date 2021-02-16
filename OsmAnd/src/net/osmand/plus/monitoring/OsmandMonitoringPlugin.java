@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
@@ -326,13 +327,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
+		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 		if (hasDataToSave() || wasTrackMonitored()) {
-			FragmentActivity fragmentActivity = (FragmentActivity) activity;
-			TripRecordingActiveBottomSheet.showInstance(fragmentActivity.getSupportFragmentManager(), getCurrentTrack());
+			TripRecordingActiveBottomSheet.showInstance(fragmentManager, getCurrentTrack());
 		} else {
-			FragmentActivity fragmentActivity = (FragmentActivity) activity;
-			TripRecordingBottomSheet.showInstance(fragmentActivity.getSupportFragmentManager());
+			TripRecordingBottomSheet.showInstance(fragmentManager);
 		}
+
 		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		final boolean nightMode;
 		if (activity instanceof MapActivity) {

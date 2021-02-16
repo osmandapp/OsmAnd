@@ -1,5 +1,6 @@
 package net.osmand.plus.monitoring;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -27,9 +28,9 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,7 +48,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
@@ -69,7 +70,8 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 	public static final String TAG = TripRecordingActiveBottomSheet.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(TripRecordingActiveBottomSheet.class);
 	private static final String UPDATE_CURRENT_GPX_FILE = "update_current_gpx_file";
-	private static final int GENERAL_UPDATE_INTERVAL = 1000;
+	private static final int GENERAL_UPDATE_GPS_INTERVAL = 1000;
+	private static final int GENERAL_UPDATE_SAVE_INTERVAL = 1000;
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -121,7 +123,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		final FragmentManager fragmentManager = getFragmentManager();
 
 		View itemView = inflater.inflate(R.layout.trip_recording_active_fragment, null, false);
-		items.add(new BottomSheetItemWithDescription.Builder()
+		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(itemView)
 				.create());
 
@@ -141,7 +143,8 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
 		if (savedInstanceState != null) {
-			if (savedInstanceState.containsKey(UPDATE_CURRENT_GPX_FILE) && savedInstanceState.getBoolean(UPDATE_CURRENT_GPX_FILE)) {
+			if (savedInstanceState.containsKey(UPDATE_CURRENT_GPX_FILE)
+					&& savedInstanceState.getBoolean(UPDATE_CURRENT_GPX_FILE)) {
 				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 			}
 		}
@@ -332,6 +335,43 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		setItemBackground(button != null ? button : (LinearLayout) view, enabled);
 	}
 
+	protected static View createButton(LayoutInflater inflater, ItemType type, boolean nightMode) {
+		View button = inflater.inflate(R.layout.bottom_sheet_button_with_icon, null);
+		button.setTag(type);
+		Context context = button.getContext();
+		LinearLayout container = button.findViewById(R.id.button_container);
+		container.setClickable(false);
+		container.setFocusable(false);
+
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+		int horizontal = context.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		params.setMargins(horizontal, 0, horizontal, 0);
+		button.setLayoutParams(params);
+
+		if (type.getTitleId() != null) {
+			UiUtilities.setupDialogButton(nightMode, button, type.getEffect(), type.getTitleId());
+		}
+
+		TextViewEx title = button.findViewById(R.id.button_text);
+		int margin = context.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_medium);
+		UiUtilities.setMargins(title, 0, margin, 0, margin);
+
+		int colorRes;
+		if (type.getEffect() == UiUtilities.DialogButtonType.SECONDARY_HARMFUL) {
+			colorRes = R.color.color_osm_edit_delete;
+		} else {
+			colorRes = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
+		}
+		AppCompatImageView icon = button.findViewById(R.id.icon);
+		if (type.getIconId() != null) {
+			Drawable drawable = AppCompatResources.getDrawable(context, type.getIconId());
+			UiUtilities.tintDrawable(drawable, ContextCompat.getColor(context, colorRes));
+			icon.setImageDrawable(drawable);
+		}
+
+		return button;
+	}
+
 	private String getTimeTrackSaved() {
 		long timeTrackSaved = helper.getLastTimeFileSaved();
 		if (timeTrackSaved != 0) {
@@ -369,7 +409,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			public void run() {
 				int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
 				updateStatus();
-				handler.postDelayed(this, Math.max(GENERAL_UPDATE_INTERVAL, interval));
+				handler.postDelayed(this, Math.max(GENERAL_UPDATE_GPS_INTERVAL, interval));
 			}
 		};
 		handler.post(updatingGPS);
@@ -385,7 +425,7 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 			public void run() {
 				String time = getTimeTrackSaved();
 				createItem(buttonSave, ItemType.SAVE, hasDataToSave(), !Algorithms.isEmpty(time) ? time : null);
-				handler.postDelayed(this, GENERAL_UPDATE_INTERVAL);
+				handler.postDelayed(this, GENERAL_UPDATE_SAVE_INTERVAL);
 			}
 		};
 		handler.post(updatingTimeTrackSaved);
@@ -405,22 +445,23 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 				final Context context = getContext();
 				final SaveGpxResult result = helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
 				if (mapActivity != null && context != null) {
-					Snackbar snackbar = Snackbar.make(mapActivity.getLayout(),
-							getString(R.string.shared_string_file_is_saved, gpxFileName),
+					final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+					final FragmentManager fragmentManager = mapActivityRef.get().getSupportFragmentManager();
+					@SuppressLint({"StringFormatInvalid", "LocalSuppress"})
+					Snackbar snackbar = Snackbar.make(getView(),
+							app.getResources().getString(R.string.shared_string_file_is_saved, gpxFileName),
 							Snackbar.LENGTH_LONG)
 							.setAction(R.string.shared_string_rename, new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {
-									final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-									final FragmentActivity fragmentActivity = mapActivityRef.get();
-									SaveGPXBottomSheetFragment.showInstance(fragmentActivity.getSupportFragmentManager(), result.getFilenames());
+									fragmentManager.beginTransaction().remove(TripRecordingActiveBottomSheet.this).commitAllowingStateLoss();
+									SaveGPXBottomSheetFragment.showInstance(fragmentManager, result.getFilenames());
 								}
 							});
 					View view = snackbar.getView();
-					FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+					CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) view.getLayoutParams();
 					params.gravity = Gravity.TOP;
-					final int dp16 = AndroidUtils.dpToPx(mapActivity, 16f);
-					AndroidUtils.setMargins(params, 0, AndroidUtils.getStatusBarHeight(context) + dp16, 0, 0);
+					AndroidUtils.setMargins(params, 0, AndroidUtils.getStatusBarHeight(context), 0, 0);
 					view.setLayoutParams(params);
 					UiUtilities.setupSnackbar(snackbar, nightMode);
 					snackbar.show();
@@ -521,11 +562,9 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 
 	public void setTextColor(TextView tv, boolean enabled, boolean nightMode, ItemType type) {
 		if (tv != null) {
-			ColorStateList textColorStateList = AndroidUtils.createPressedColorStateList(
-					app, enabled ? type == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
-							: getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode),
-					getPressedColorId(nightMode)
-			);
+			int activeColorId = type == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete : getActiveTextColorId(nightMode);
+			int normalColorId = enabled ? activeColorId : getSecondaryTextColorId(nightMode);
+			ColorStateList textColorStateList = AndroidUtils.createPressedColorStateList(app, normalColorId, getPressedColorId(nightMode));
 			tv.setTextColor(textColorStateList);
 		}
 	}
@@ -534,11 +573,9 @@ public class TripRecordingActiveBottomSheet extends MenuBottomSheetDialogFragmen
 		Integer iconId = type.getIconId();
 		if (iv != null && iconId != null) {
 			Drawable icon = AppCompatResources.getDrawable(app, iconId);
-			ColorStateList iconColorStateList = AndroidUtils.createPressedColorStateList(
-					app, enabled ? type == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete
-							: getActiveIconColorId(nightMode) : getSecondaryIconColorId(nightMode),
-					getPressedColorId(nightMode)
-			);
+			int activeColorId = type == ItemType.CLEAR_DATA ? R.color.color_osm_edit_delete : getActiveIconColorId(nightMode);
+			int normalColorId = enabled ? activeColorId : getSecondaryIconColorId(nightMode);
+			ColorStateList iconColorStateList = AndroidUtils.createPressedColorStateList(app, normalColorId, getPressedColorId(nightMode));
 			if (icon != null) {
 				DrawableCompat.setTintList(icon, iconColorStateList);
 			}
