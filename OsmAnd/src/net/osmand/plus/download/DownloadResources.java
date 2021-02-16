@@ -40,22 +40,22 @@ public class DownloadResources extends DownloadResourceGroup {
 	private Map<String, String> indexFileNames = new LinkedHashMap<>();
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
 	private List<IndexItem> rawResources;
-	private Map<WorldRegion, List<IndexItem> > groupByRegion;
+	private Map<WorldRegion, List<IndexItem>> groupByRegion;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
 	public static final String WORLD_SEAMARKS_KEY = "world_seamarks";
 	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
 	public static final String WORLD_SEAMARKS_OLD_KEY = "world_seamarks_basemap";
 	public static final String WORLD_SEAMARKS_OLD_NAME = "World_seamarks_basemap";
+	public static final String WIKIVOYAGE_FILE_FILTER = "wikivoyage";
 	private static final Log LOG = PlatformUtil.getLog(DownloadResources.class);
 
-	
-	
+
 	public DownloadResources(OsmandApplication app) {
 		super(null, DownloadResourceGroupType.WORLD, "");
 		this.region = app.getRegions().getWorldRegion();
 		this.app = app;
 	}
-	
+
 	public List<IndexItem> getItemsToUpdate() {
 		return itemsToUpdate;
 	}
@@ -365,7 +365,9 @@ public class DownloadResources extends DownloadResourceGroup {
 				continue;
 			}
 			if (ii.getType() == DownloadActivityType.TRAVEL_FILE) {
-				wikivoyageMaps.addItem(ii);
+				if (ii.getFileName().contains(WIKIVOYAGE_FILE_FILTER)) {
+					wikivoyageMaps.addItem(ii);
+				}
 				continue;
 			}
 			String basename = ii.getBasename().toLowerCase();

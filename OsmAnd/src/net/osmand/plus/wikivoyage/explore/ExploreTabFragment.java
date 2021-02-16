@@ -46,6 +46,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.download.DownloadResources.WIKIVOYAGE_FILE_FILTER;
 import static net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity.*;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
@@ -403,7 +404,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			List<IndexItem> allWikivoyageItems = app.getDownloadThread().getIndexes().getWikivoyageItems();
 			if (allWikivoyageItems != null) {
 				for (IndexItem item : allWikivoyageItems) {
-					if (!item.isDownloaded() && !mainItems.contains(item)) {
+					if (!item.isDownloaded()
+							&& !mainItems.contains(item)
+							&& item.getFileName().contains(WIKIVOYAGE_FILE_FILTER)) {
 						mainItems.add(item);
 					}
 				}
