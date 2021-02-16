@@ -51,7 +51,6 @@
 <string name="avoid_motorway">Ceisiwch osgoi traffyrdd</string>
 <string name="auto_zoom_map_descr">Zoom Auto mapio yn ôl eich cyflymder (tra map wedi eu cydamseru gyda\'r sefyllfa bresennol)</string>
 <string name="auto_zoom_map">Auto chwyddo map</string>
-    <string name="snap_to_road_descr">Snap sefyllfa i ffyrdd yn ystod llywio</string>
 <string name="snap_to_road">Snap i\'r ffordd</string>
 <string name="osmand_short_description_80_chars">OsmAnd yn gais ffynhonnell agored ar gyfer llywio fapiau all-lein ac ar-lein</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd yn gais ffynhonnell agored ar gyfer llywio fapiau all-lein ac ar-lein</string>

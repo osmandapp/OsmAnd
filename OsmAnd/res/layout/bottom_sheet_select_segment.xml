@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/measurement_tool_menu_title_padding_top"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/measurement_tool_button_padding_top">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/widget_turn_lane_margin"
+			android:ellipsize="end"
+			android:gravity="center_vertical"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:lineSpacingExtra="@dimen/titleLineSpacingExtra"
+			android:maxLines="1"
+			android:text="@string/select_segments"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_medium" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/list_header_settings_top_margin"
+			android:letterSpacing="@dimen/description_letter_spacing"
+			android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+			android:lineSpacingExtra="@dimen/descriptionLineSpacingExtra"
+			android:text="@string/select_segments_description"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_desc_text_size"
+			osmand:typeface="@string/font_roboto_regular" />
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/gpx_track_container"
+		layout="@layout/gpx_track_item"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/dashPluginMargin" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/gpx_segment_list"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		tools:itemCount="1"
+		tools:listitem="@layout/gpx_segment_list_item">
+
+	</androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

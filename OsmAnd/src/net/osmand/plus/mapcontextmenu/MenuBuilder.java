@@ -808,7 +808,11 @@ public class MenuBuilder {
 		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, description, descriptionLabel);
+				if (description.contains("</")) {
+					POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, description, descriptionLabel);
+				} else {
+					POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, description, descriptionLabel);
+				}
 			}
 		};
 
@@ -1369,7 +1373,9 @@ public class MenuBuilder {
 		if (amenity != null) {
 			PoiCategory category = amenity.getType();
 			PoiType poiType = category.getPoiTypeByKeyName(amenity.getSubType());
-			return app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + poiType.getKeyName());
+			if (poiType != null) {
+				return app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + poiType.getKeyName());
+			}
 		}
 		return null;
 	}

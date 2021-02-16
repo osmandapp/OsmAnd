@@ -1675,6 +1675,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (Algorithms.isEmpty(fileName)) {
 					fileName = app.getString(R.string.shared_string_gpx_track);
 				}
+				GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+
+				if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
+					int selectedSegmentCount = routeParams.getSelectedSegment() + 1;
+					int totalSegmentCount = routeParams.getFile().getNonEmptyTrkSegments(false).size();
+					fileName = app.getResources().getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + fileName;
+				}
 				title.setText(GpxUiHelper.getGpxTitle(fileName));
 				description.setText(R.string.follow_track);
 				buttonDescription.setText(R.string.shared_string_add);

@@ -127,6 +127,17 @@ public class Algorithms {
 		return def;
 	}
 
+	public static double parseDoubleSilently(String input, double def) {
+		if (input != null && input.length() > 0) {
+			try {
+				return Double.parseDouble(input);
+			} catch (NumberFormatException e) {
+				return def;
+			}
+		}
+		return def;
+	}
+
 	public static String getFileNameWithoutExtension(File f) {
 		return getFileNameWithoutExtension(f.getName());
 	}

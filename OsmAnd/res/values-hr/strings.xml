@@ -1421,4 +1421,49 @@
     <string name="keep_both">Zadrzi oboje</string>
     <string name="import_duplicates_title">Neke stavke već postoje</string>
     <string name="select_data_to_import">Odaberite podatke koje želite uvesti.</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Invalidska kolica</string>
+    <string name="routing_engine_vehicle_type_hiking">Planinarenje</string>
+    <string name="routing_engine_vehicle_type_walking">Pješačenje</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Električni biciklizam</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Planinski biciklizam</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Cestovni biciklizam</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Standardni biciklizam</string>
+    <string name="routing_engine_vehicle_type_hgv">Teretni kamion</string>
+    <string name="routing_engine_vehicle_type_small_truck">Mali kamion</string>
+    <string name="routing_engine_vehicle_type_truck">Kamion</string>
+    <string name="routing_engine_vehicle_type_scooter">Skuter</string>
+    <string name="routing_engine_vehicle_type_racingbike">Trkaći bicikl</string>
+    <string name="routing_engine_vehicle_type_mtb">Planinski bicikl</string>
+    <string name="message_server_error">Pogreška na poslužitelju: %1$s</string>
+    <string name="message_name_is_already_exists">Ovo ime već postoji</string>
+    <string name="delete_online_routing_engine">Izbrisati ovaj mrežni usmjerivač\?</string>
+    <string name="context_menu_edit_descr">Uredi opis</string>
+    <string name="delete_waypoints">Obriši putne točke</string>
+    <string name="copy_to_map_markers">Kopiraj u oznake na karti</string>
+    <string name="copy_to_map_favorites">Kopiraj u favorite</string>
+    <string name="upload_photo">Prenošenje</string>
+    <string name="upload_photo_completed">Prijenos završen</string>
+    <string name="uploading_count">Prenosi se %1$d od %2$d</string>
+    <string name="uploaded_count">Preneseno %1$d od %2$d</string>
+    <string name="toast_select_edits_for_upload">Odaberite uređivanja za prijenos</string>
+    <string name="hillshade_slope_contour_lines">Linije padine / Kosine / Konture</string>
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews je projekt, razvijan od strane zajednice, koji daje informacije o mjestima kao što su restorani, hoteli, muzeji, putne točke. Ovaj projekt sakuplja sve javne informacije o tim mjestima, kao što su slike, recenzije, linkovi na druge sustave OpenStreetMap, Wikipedia.
+\n
+\nSvi OpenPlaceReview podaci su javni i dostupni svima: http://openplacereviews.org/data.
+\n
+\nPročitajte više na: http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Koristiti test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Prijavite se za OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Voda</string>
+    <string name="activity_type_winter_name">Zima</string>
+    <string name="activity_type_snowmobile_name">Motorne sanke</string>
+    <string name="activity_type_racing_name">Trkanje</string>
+    <string name="activity_type_mountainbike_name">Planinski bicikl</string>
+    <string name="activity_type_cycling_name">Bicikliranje</string>
+    <string name="activity_type_hiking_name">Planinarenje</string>
+    <string name="activity_type_running_name">Trčanje</string>
+    <string name="activity_type_walking_name">Pješačenje</string>
+    <string name="activity_type_motorbike_name">Motocikl</string>
+    <string name="activity_type_car_name">Auto</string>
 </resources>

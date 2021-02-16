@@ -154,7 +154,6 @@
     <string name="rendering_attr_showRoadMaps_name">Yollar-sadece haritalar</string>
     <string name="show_warnings_descr">Trafik uyarıları (hız sınırları, zorunlu duruşlar, hız tümsekleri, tüneller), hız kamerası uyarıları ve şerit bilgilerini ayarlayın.</string>
     <string name="use_compass_navigation_descr">Başka bir başlık algılanmadığında pusulayı kullan.</string>
-    <string name="snap_to_road_descr">Navigasyon sırasında konumu yola tuttur.</string>
     <string name="snap_to_road">Yola tuttur</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
 \n 
@@ -1962,7 +1961,6 @@
     <string name="get_it">Al</string>
     <string name="si_mi_meters">Mil/metre</string>
     <string name="routing_attr_short_way_name">Yakıt-tasarruflu yol</string>
-    <string name="routing_attr_short_way_description">Yakıt tasarruflu yolu kullan (çoğunlukla daha kısadır).</string>
     <string name="add_new_folder">Yeni klasör ekle</string>
     <string name="points_delete_multiple_succesful">Nokta(lar) silindi.</string>
     <string name="shared_string_gpx_track">Takip et</string>
@@ -3920,7 +3918,6 @@
     <string name="cannot_upload_image">Resim yüklenemiyor, lütfen daha sonra tekrar deneyin</string>
     <string name="select_picture">Resim seç</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="elevation_data">Yolculuğunuzun yükselme/alçalma değerlerini hesaplamak için yükseklik verilerini kullanabilirsiniz</string>
     <string name="app_mode_light_aircraft">Hafif uçak</string>
     <string name="plan_route_join_segments">Bölümleri birleştir</string>
     <string name="plan_route_split_before">Önce böl</string>

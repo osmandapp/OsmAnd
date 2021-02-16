@@ -1155,7 +1155,6 @@
 \n — подсказки полосы движения, отображение ограничения скорости, предварительно записанные и синтезированные голосовые подсказки
 \n</string>
     <string name="avoid_motorway">Без автомагистралей</string>
-    <string name="snap_to_road_descr">Привязывать позицию к дороге во время навигации.</string>
     <string name="snap_to_road">Привязка к дороге</string>
     <string name="intermediate_point_too_far">Промежуточный пункт %1$s слишком далеко от ближайшей дороги.</string>
     <string name="arrived_at_intermediate_point">Вы прибыли в промежуточный пункт</string>
@@ -2198,7 +2197,6 @@
     <string name="update_all_maps_now">Обновить все карты сейчас?</string>
     <string name="clear_tile_data">Удалить из кеша</string>
     <string name="routing_attr_short_way_name">Снижать расход топлива</string>
-    <string name="routing_attr_short_way_description">Использование топливо-сберегающего пути (обычно короче).</string>
     <string name="replace_favorite_confirmation">Вы уверены, что хотите заменить избранные %1$s\?</string>
     <string name="shared_string_change">Изменить</string>
     <string name="get_started">Начать</string>
@@ -3938,13 +3936,12 @@
     <string name="select_folder">Выбор папки</string>
     <string name="select_folder_descr">Выберите папку или добавьте новую</string>
     <string name="voice_prompts_timetable">Время голосовых подсказок</string>
-    <string name="elevation_data">Можно использовать данные о высотах для учёта подъёма/спуска поездки</string>
     <string name="routing_attr_prefer_hiking_routes_description">Предпочитать пешеходные маршруты</string>
     <string name="shared_string_subtype">Подтип</string>
     <string name="shared_string_enter_param">Введите параметр</string>
     <string name="routing_engine_vehicle_type_walking">Пешеход</string>
     <string name="routing_engine_vehicle_type_scooter">Самокат</string>
-    <string name="analyze_by_intervals">Анализ по интервалам (по отдельности)</string>
+    <string name="analyze_by_intervals">Анализ по интервалам</string>
     <string name="announcement_time_prepare_long">Заблаговременно</string>
     <string name="announcement_time_prepare">Заранее</string>
     <string name="announcement_time_passing">При прохождении</string>
@@ -4001,4 +3998,21 @@
     <string name="routing_engine_vehicle_type_cycling_regular">Обычный велосипед</string>
     <string name="routing_engine_vehicle_type_racingbike">Гоночный велосипед</string>
     <string name="routing_engine_vehicle_type_mtb">Горный велосипед</string>
+    <string name="activity_type_cycling_name">Езда на велосипеде</string>
+    <string name="activity_type_hiking_name">Пеший туризм</string>
+    <string name="activity_type_running_name">Бег</string>
+    <string name="activity_type_walking_name">Пешеход</string>
+    <string name="activity_type_offroad_name">Внедорожник</string>
+    <string name="activity_type_motorbike_name">Мотоцикл</string>
+    <string name="activity_type_car_name">Автомобиль</string>
+    <string name="opr_use_dev_url">Использовать test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Вход в OpenPlaceReviews</string>
+    <string name="activity_type_snowmobile_name">Снегоход</string>
+    <string name="activity_type_mountainbike_name">Горный велосипед</string>
+    <string name="routing_engine_vehicle_type_driving">Вождение</string>
+    <string name="routing_engine_vehicle_type_foot">Пешком</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="activity_type_water_name">Вода</string>
+    <string name="activity_type_winter_name">Зима</string>
+    <string name="activity_type_riding_name">Верховая езда</string>
 </resources>
