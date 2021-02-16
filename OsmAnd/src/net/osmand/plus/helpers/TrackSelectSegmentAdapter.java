@@ -79,7 +79,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 		return segments.size();
 	}
 
-	private long getSegmentTime(TrkSegment segment) {
+	public static long getSegmentTime(TrkSegment segment) {
 		long startTime = Long.MAX_VALUE;
 		long endTime = Long.MIN_VALUE;
 		for (int i = 0; i < segment.points.size(); i++) {
@@ -93,7 +93,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 		return endTime - startTime;
 	}
 
-	private double getDistance(TrkSegment segment) {
+	public static double getDistance(TrkSegment segment) {
 		double distance = 0;
 		WptPt prevPoint = null;
 		for (int i = 0; i < segment.points.size(); i++) {
