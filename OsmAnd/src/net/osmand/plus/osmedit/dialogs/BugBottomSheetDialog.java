@@ -64,6 +64,9 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		textBox.setDefaultHintTextColor(colorStateList);
 		noteText = osmNoteView.findViewById(R.id.name_edit_text);
 		noteText.setText(text);
+		if (noteText.requestFocus()) {
+			AndroidUtils.showSoftKeyboard(getActivity(), noteText);
+		}
 
 		BaseBottomSheetItem editOsmNote = new BaseBottomSheetItem.Builder()
 				.setCustomView(osmNoteView)
