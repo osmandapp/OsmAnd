@@ -11,6 +11,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
@@ -30,10 +32,16 @@ import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GpxBlockStatisticsBuilder {
+
+	private static final Log log = PlatformUtil.getLog(GpxBlockStatisticsBuilder.class);
+	private static final int GENERAL_UPDATE_INTERVAL = 1000;
 
 	private final OsmandApplication app;
 	private RecyclerView blocksView;
@@ -41,6 +49,7 @@ public class GpxBlockStatisticsBuilder {
 
 	private BlockStatisticsAdapter adapter;
 	private final List<StatBlock> items = new ArrayList<>();
+	private boolean blocksClickable = true;
 
 	private final Handler handler = new Handler();
 	private Runnable updatingItems;
@@ -51,28 +60,34 @@ public class GpxBlockStatisticsBuilder {
 		this.selectedGpxFile = selectedGpxFile;
 	}
 
+	public boolean isUpdateRunning() {
+		return updateRunning;
+	}
+
+	public void setBlocksClickable(boolean blocksClickable) {
+		this.blocksClickable = blocksClickable;
+	}
+
 	public void setBlocksView(RecyclerView blocksView) {
 		this.blocksView = blocksView;
 	}
 
-	private GpxDisplayItem getDisplayItem(GPXFile gpxFile) {
-		return GpxUiHelper.makeGpxDisplayItem(app, gpxFile);
+	@Nullable
+	public GpxDisplayItem getDisplayItem(GPXFile gpxFile) {
+		return gpxFile.tracks.size() > 0 ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile) : null;
 	}
 
 	private GPXFile getGPXFile() {
 		return selectedGpxFile.getGpxFile();
 	}
 
-	public void initStatBlocks(SegmentActionsListener actionsListener, @ColorInt int activeColor, boolean nightMode) {
+	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor, boolean nightMode) {
 		initItems();
-		boolean isNotEmpty = !Algorithms.isEmpty(items);
-		AndroidUiHelper.updateVisibility(blocksView, isNotEmpty);
-		if (isNotEmpty) {
-			adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor, nightMode);
-			adapter.setItems(items);
-			blocksView.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
-			blocksView.setAdapter(adapter);
-		}
+		adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor, nightMode);
+		adapter.setItems(items);
+		blocksView.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
+		blocksView.setAdapter(adapter);
+		AndroidUiHelper.updateVisibility(blocksView, !Algorithms.isEmpty(items));
 	}
 
 	public void stopUpdatingStatBlocks() {
@@ -80,30 +95,29 @@ public class GpxBlockStatisticsBuilder {
 		updateRunning = false;
 	}
 
-	public void runUpdatingStatBlocks() {
-		updatingItems = new Runnable() {
-			@Override
-			public void run() {
-				if (adapter != null) {
+	public void runUpdatingStatBlocksIfNeeded() {
+		if (!isUpdateRunning()) {
+			updatingItems = new Runnable() {
+				@Override
+				public void run() {
 					initItems();
-					adapter.setItems(items);
+					if (adapter != null) {
+						adapter.setItems(items);
+					}
 					AndroidUiHelper.updateVisibility(blocksView, !Algorithms.isEmpty(items));
+					int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
+					updateRunning = handler.postDelayed(this, Math.max(GENERAL_UPDATE_INTERVAL, interval));
 				}
-				int interval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
-				handler.postDelayed(this, Math.max(1000, interval));
-			}
-		};
-		updateRunning = handler.post(updatingItems);
+			};
+			updateRunning = handler.post(updatingItems);
+		}
 	}
 
 	public void initItems() {
 		GPXFile gpxFile = getGPXFile();
-		GpxDisplayItem gpxDisplayItem = null;
+		GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
 		GPXTrackAnalysis analysis = null;
 		boolean withoutGaps = true;
-		if (gpxFile.tracks.size() > 0) {
-			gpxDisplayItem = getDisplayItem(gpxFile);
-		}
 		if (gpxDisplayItem != null) {
 			analysis = gpxDisplayItem.analysis;
 			withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
@@ -165,7 +179,7 @@ public class GpxBlockStatisticsBuilder {
 		}
 	}
 
-	public class StatBlock {
+	public static class StatBlock {
 		private final String title;
 		private final String value;
 		private final int imageResId;
@@ -201,6 +215,9 @@ public class GpxBlockStatisticsBuilder {
 		@ColorInt
 		private final int activeColor;
 		private final boolean nightMode;
+		private final int minWidthPx;
+		private final int maxWidthPx;
+		private final int textSize;
 
 		public BlockStatisticsAdapter(GpxDisplayItem displayItem, SegmentActionsListener actionsListener,
 									  @ColorInt int activeColor, boolean nightMode) {
@@ -208,6 +225,9 @@ public class GpxBlockStatisticsBuilder {
 			this.actionsListener = actionsListener;
 			this.activeColor = activeColor;
 			this.nightMode = nightMode;
+			minWidthPx = AndroidUtils.dpToPx(app, 60f);
+			maxWidthPx = AndroidUtils.dpToPx(app, 120f);
+			textSize = app.getResources().getDimensionPixelSize(R.dimen.default_desc_text_size);
 		}
 
 		@Override
@@ -227,17 +247,15 @@ public class GpxBlockStatisticsBuilder {
 		public void onBindViewHolder(BlockStatisticsViewHolder holder, int position) {
 			final StatBlock item = items.get(position);
 			holder.valueText.setText(item.value);
-			holder.titleText.setText(item.title);
-			if (updateRunning) {
-				holder.titleText.setWidth(app.getResources().getDimensionPixelSize(R.dimen.map_route_buttons_width));
-			}
 			holder.valueText.setTextColor(activeColor);
+			holder.titleText.setText(item.title);
 			holder.titleText.setTextColor(app.getResources().getColor(R.color.text_color_secondary_light));
+			holder.titleText.setWidth(calculateWidthWithin(item.title, item.value));
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					GPXTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
-					if (analysis != null) {
+					if (blocksClickable && analysis != null && actionsListener != null) {
 						ArrayList<GPXDataSetType> list = new ArrayList<>();
 						if (analysis.hasElevationData || analysis.isSpeedSpecified() || analysis.hasSpeedData) {
 							if (item.firstType != null) {
@@ -264,9 +282,14 @@ public class GpxBlockStatisticsBuilder {
 			this.items.addAll(items);
 			notifyDataSetChanged();
 		}
+
+		public int calculateWidthWithin(String... texts) {
+			int textWidth = AndroidUtils.getTextMaxWidth(textSize, Arrays.asList(texts));
+			return Math.min(maxWidthPx, Math.max(minWidthPx, textWidth));
+		}
 	}
 
-	private class BlockStatisticsViewHolder extends RecyclerView.ViewHolder {
+	private static class BlockStatisticsViewHolder extends RecyclerView.ViewHolder {
 
 		private final TextViewEx valueText;
 		private final TextView titleText;

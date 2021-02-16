@@ -380,7 +380,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		AndroidUiHelper.updateVisibility(dismissButton, buttonTextId != DEFAULT_VALUE);
 	}
 
-	private void setupRightButton() {
+	protected void setupRightButton() {
 		rightButton = buttonsContainer.findViewById(R.id.right_bottom_button);
 		rightButton.getLayoutParams().height = getRightButtonHeight();
 		int buttonTextId = getRightBottomButtonTextId();

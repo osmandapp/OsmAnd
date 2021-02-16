@@ -85,6 +85,7 @@ android {
 		}
 		amazonFree {
 			java.srcDirs = ["src-nogms", "src-google"]
+			manifest.srcFile "AndroidManifest-gplayFree.xml"
 		}
 		amazonFull {
 			java.srcDirs = ["src-nogms", "src-google"]

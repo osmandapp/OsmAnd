@@ -1,6 +1,7 @@
 package net.osmand.map;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
@@ -40,6 +41,7 @@ public class WorldRegion implements Serializable {
 	protected String regionDownloadName;
 	protected boolean regionMapDownload;
 	protected LatLon regionCenter;
+	protected QuadRect boundingBox;
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -181,5 +183,12 @@ public class WorldRegion implements Serializable {
 			res++;
 		}
 		return res;
+	}
+
+	public boolean containsRegion(WorldRegion region) {
+		if (this.boundingBox != null && region.boundingBox != null) {
+			return this.boundingBox.contains(region.boundingBox);
+		}
+		return false;
 	}
 }

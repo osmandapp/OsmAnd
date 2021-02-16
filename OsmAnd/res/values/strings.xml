@@ -12,6 +12,14 @@
 
 -->
 
+    <string name="app_restart_required">Application restart required to apply some settings.</string>
+    <string name="on_pause">On pause</string>
+    <string name="track_recording_description">Are you sure you want to stop recording?\nAll unsaved data will be lost.</string>
+    <string name="track_recording_title">Track recording stopped</string>
+    <string name="track_recording_save_and_stop">Save and stop recording</string>
+    <string name="track_recording_stop_without_saving">Stop without saving</string>
+    <string name="delete_number_files_question">Delete %1$d files?</string>
+    <string name="shared_strings_all_regions">All regions</string>
     <string name="restart">Restart</string>
     <string name="elevation_data_descr">Routing could avoid strong uphills</string>
     <string name="map_orientation_threshold_descr">Don\'t rotate map view if speed is less than a threshold</string>
@@ -39,6 +47,9 @@
     <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
+    <string name="segments_count">Segment %1$d</string>
+    <string name="select_segments_description">%1$s contains more than one segment, you need to select the needed part for the navigation.</string>
+    <string name="select_segments">Select segments</string>
     <string name="uploading_count">Uploading %1$d of %2$d</string>
     <string name="upload_photo_completed">Upload completed</string>
     <string name="upload_photo">Uploading</string>

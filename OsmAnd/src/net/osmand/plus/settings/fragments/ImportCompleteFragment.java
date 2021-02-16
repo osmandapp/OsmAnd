@@ -102,6 +102,8 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			}
 		});
 		if (needRestart) {
+			description.append("\n\n");
+			description.append(app.getString(R.string.app_restart_required));
 			setupRestartButton(root);
 		}
 		if (Build.VERSION.SDK_INT >= 21) {

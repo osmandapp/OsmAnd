@@ -134,6 +134,9 @@ public class FailSafeFuntions {
 								if(settings.GPX_ROUTE_CALC.get()) {
 									gpxRoute.setCalculateOsmAndRoute(true);
 								}
+								if (settings.GPX_ROUTE_SEGMENT.get() != -1) {
+									gpxRoute.setSelectedSegment(settings.GPX_ROUTE_SEGMENT.get());
+								}
 							} else {
 								gpxRoute = null;
 							}

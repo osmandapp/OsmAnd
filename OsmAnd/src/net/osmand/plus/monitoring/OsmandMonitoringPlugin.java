@@ -1,9 +1,7 @@
 package net.osmand.plus.monitoring;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -19,18 +17,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -51,8 +49,6 @@ import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
-
-import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
@@ -162,9 +158,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
-	public static final int[] MINUTES = new int[] {2, 3, 5};
-	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[] {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
+	public static final int[] SECONDS = new int[]{0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
+	public static final int[] MINUTES = new int[]{2, 3, 5};
+	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[]{1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
 
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
@@ -182,9 +178,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
 		monitoringControl = new TextInfoWidget(map) {
 			long lastUpdateTime;
+
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				if(isSaving){
+				if (isSaving) {
 					setText(map.getString(R.string.shared_string_save), "");
 					setIcons(R.drawable.widget_monitoring_rec_big_day, R.drawable.widget_monitoring_rec_big_night);
 					return true;
@@ -212,7 +209,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				}
 
 				final boolean liveMonitoringEnabled = liveMonitoringHelper.isLiveMonitoringEnabled();
-				if(globalRecord) {
+				if (globalRecord) {
 					//indicates global recording (+background recording)
 					if (liveMonitoringEnabled) {
 						dn = R.drawable.widget_live_monitoring_rec_big_night;
@@ -317,8 +314,27 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
+	public SelectedGpxFile getCurrentTrack() {
+		return app.getSavingTrackHelper().getCurrentTrack();
+	}
+
+	public boolean wasTrackMonitored() {
+		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+	}
+
+	public boolean hasDataToSave() {
+		return app.getSavingTrackHelper().hasDataToSave();
+	}
+
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
-		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
+		if (hasDataToSave() || wasTrackMonitored()) {
+			TripRecordingActiveBottomSheet.showInstance(fragmentManager, getCurrentTrack());
+		} else {
+			TripRecordingBottomSheet.showInstance(fragmentManager);
+		}
+
+		/*final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		final boolean nightMode;
 		if (activity instanceof MapActivity) {
 			nightMode = app.getDaynightHelper().isNightModeForMapControls();
@@ -415,8 +431,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					run.run();
 				}
 			});
-			bld.show();
-		}
+//			bld.show();
+		}*/
 	}
 
 	public void saveCurrentTrack() {
@@ -478,7 +494,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void stopRecording(){
+	public void stopRecording() {
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
 		if (app.getNavigationService() != null) {
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
@@ -536,7 +552,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public static LinearLayout createIntervalChooseLayout(final OsmandApplication app,
-	                                                      final Context uiCtx,
+														  final Context uiCtx,
 														  final String patternMsg, final int[] seconds,
 														  final int[] minutes, final ValueHolder<Boolean> choice,
 														  final ValueHolder<Integer> v,
@@ -567,11 +583,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 				String s;
 				int progress = (int) value;
-				if(progress == 0) {
+				if (progress == 0) {
 					s = uiCtx.getString(R.string.int_continuosly);
 					v.value = 0;
 				} else {
-					if(progress < secondsLength) {
+					if (progress < secondsLength) {
 						s = seconds[progress] + " " + uiCtx.getString(R.string.int_seconds);
 						v.value = seconds[progress] * 1000;
 					} else {
@@ -596,7 +612,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				}
 			}
 		}
-		
+
 		ll.setOrientation(LinearLayout.VERTICAL);
 		ll.addView(tv);
 		ll.addView(sliderContainer);
