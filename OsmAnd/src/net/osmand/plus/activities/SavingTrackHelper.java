@@ -79,6 +79,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private SelectedGpxFile currentTrack;
 	private int points;
 	private int trkPoints = 0;
+	private long lastTimeFileSaved;
 
 	private ApplicationMode lastRoutingApplicationMode;
 
@@ -258,6 +259,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
 					GpxDataItem item = new GpxDataItem(fout, analysis);
 					ctx.getGpxDbHelper().add(item);
+					lastTimeFileSaved = fout.lastModified();
 				}
 			}
 		}
@@ -735,6 +737,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	public long getLastTimeUpdated() {
 		return lastTimeUpdated;
+	}
+
+	public long getLastTimeFileSaved() {
+		return lastTimeFileSaved;
+	}
+
+	public void setLastTimeFileSaved(long lastTimeFileSaved) {
+		this.lastTimeFileSaved = lastTimeFileSaved;
 	}
 
 	public GPXFile getCurrentGpx() {

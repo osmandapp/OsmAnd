@@ -12,6 +12,11 @@
 
 -->
 
+    <string name="on_pause">On pause</string>
+    <string name="track_recording_description">Are you sure you want to stop recording?\nAll unsaved data will be lost.</string>
+    <string name="track_recording_title">Track recording stopped</string>
+    <string name="track_recording_save_and_stop">Save and stop recording</string>
+    <string name="track_recording_stop_without_saving">Stop without saving</string>
     <string name="delete_number_files_question">Delete %1$d files?</string>
     <string name="shared_strings_all_regions">All regions</string>
     <string name="restart">Restart</string>
