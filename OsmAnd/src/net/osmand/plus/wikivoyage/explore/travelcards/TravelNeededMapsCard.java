@@ -111,7 +111,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 			boolean downloading = downloadThread.isDownloading(item);
 			boolean currentDownloading = downloading && downloadThread.getCurrentDownloadingItem() == item;
 			boolean lastItem = i == items.size() - 1;
-			View view = holder.itemsContainer.getChildAt(i);
+			final View view = holder.itemsContainer.getChildAt(i);
 
 			if (item.isDownloaded()) {
 				view.setOnClickListener(null);
@@ -131,12 +131,23 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 			if (item.isDownloaded()) {
 				iconAction.setVisibility(View.GONE);
 				buttonAction.setVisibility(View.GONE);
+
 			} else {
-				boolean showBtn = !paidVersion && item.getType() == DownloadActivityType.WIKIPEDIA_FILE;
+				boolean showBtn = !paidVersion
+						&& (item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+						|| item.getType() == DownloadActivityType.TRAVEL_FILE);
 				iconAction.setVisibility(showBtn ? View.GONE : View.VISIBLE);
 				buttonAction.setVisibility(showBtn ? View.VISIBLE : View.GONE);
-				if (!showBtn) {
+				if (showBtn) {
+					buttonAction.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							view.callOnClick();
+						}
+					});
+				} else {
 					iconAction.setImageDrawable(downloading ? cancelIcon : downloadIcon);
+					buttonAction.setOnClickListener(null);
 				}
 			}
 
@@ -178,7 +189,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 	 * @return true if button is visible, false otherwise.
 	 */
 	private boolean updateSecondaryButton(NeededMapsVH vh) {
-		vh.secondaryBtnContainer.setVisibility(View.VISIBLE);
+		vh.secondaryBtnContainer.setVisibility(Version.isPaidVersion(app) ? View.VISIBLE : View.GONE);
 		vh.secondaryBtn.setText(isDownloading() ? R.string.shared_string_cancel : R.string.later);
 		vh.secondaryBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -195,7 +206,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 	 * @return true if button is visible, false otherwise.
 	 */
 	private boolean updatePrimaryButton(NeededMapsVH vh) {
-		if (showPrimaryButton()) {
+		if (showPrimaryButton() && Version.isPaidVersion(app)) {
 			boolean enabled = isInternetAvailable();
 			vh.primaryBtnContainer.setVisibility(View.VISIBLE);
 			vh.primaryBtnContainer.setBackgroundResource(getPrimaryBtnBgRes(enabled));

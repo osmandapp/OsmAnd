@@ -156,7 +156,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 	public void addNeededMapsCard(TravelNeededMapsCard card) {
 		this.neededMapsCard = card;
-		if (neededMapsCardExists(getNeededMapsCardPosition())) {
+		if (isCardExists(getNeededMapsCardPosition(), TravelNeededMapsCard.TYPE)) {
 			updateNeededMapsCard(false);
 		} else if (addItem(getNeededMapsCardPosition(), card)) {
 			notifyDataSetChanged();
@@ -164,15 +164,15 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	}
 
 	public void updateNeededMapsCard(boolean onlyProgress) {
-		if(onlyProgress) {
+		if (onlyProgress) {
 			TravelNeededMapsCard nd = this.neededMapsCard;
-			if(nd != null) {
+			if (nd != null) {
 				nd.updateView();
 			}
 			return;
 		}
 		int pos = getNeededMapsCardPosition();
-		if (neededMapsCardExists(pos)) {
+		if (isCardExists(pos, TravelNeededMapsCard.TYPE)) {
 			notifyItemChanged(pos);
 		}
 	}
@@ -180,42 +180,39 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	public void removeNeededMapsCard() {
 		this.neededMapsCard = null;
 		int pos = getNeededMapsCardPosition();
-		if (neededMapsCardExists(pos)) {
+		if (isCardExists(pos, TravelNeededMapsCard.TYPE)) {
 			removeItem(pos);
 			notifyItemRemoved(pos);
 		}
 	}
 
 	private int getNeededMapsCardPosition() {
-		if (downloadUpdateCardExists(FIRST_POSITION)) {
+		if (isCardExists(FIRST_POSITION, TravelDownloadUpdateCard.TYPE)) {
 			return SECOND_POSITION;
 		}
 		return FIRST_POSITION;
 	}
 
-	private boolean neededMapsCardExists(int position) {
-		return items.size() > position && items.get(position).getCardType() == TravelNeededMapsCard.TYPE;
-	}
-
 	public void addDownloadUpdateCard(TravelDownloadUpdateCard card) {
 		this.downloadCard = card;
-		if (downloadUpdateCardExists(getDownloadUpdateCardPosition())) {
+		int pos = getDownloadUpdateCardPosition();
+		if (isCardExists(pos, TravelDownloadUpdateCard.TYPE)) {
 			updateDownloadUpdateCard(false);
-		} else if (addItem(getDownloadUpdateCardPosition(), card)) {
+		} else if (addItem(pos, card)) {
 			notifyDataSetChanged();
 		}
 	}
 
 	public void updateDownloadUpdateCard(boolean onlyProgress) {
-		if(onlyProgress) {
+		if (onlyProgress) {
 			TravelDownloadUpdateCard dc = this.downloadCard;
-			if(dc != null) {
+			if (dc != null) {
 				dc.updateView();
 			}
 			return;
 		}
 		int pos = getDownloadUpdateCardPosition();
-		if (downloadUpdateCardExists(pos)) {
+		if (isCardExists(pos, TravelDownloadUpdateCard.TYPE)) {
 			notifyItemChanged(pos);
 		}
 	}
@@ -223,7 +220,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	public void removeDownloadUpdateCard() {
 		this.downloadCard = null;
 		int pos = getDownloadUpdateCardPosition();
-		if (downloadUpdateCardExists(pos)) {
+		if (isCardExists(pos, TravelDownloadUpdateCard.TYPE)) {
 			removeItem(pos);
 			notifyItemRemoved(pos);
 		}
@@ -233,7 +230,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		return FIRST_POSITION;
 	}
 
-	private boolean downloadUpdateCardExists(int position) {
-		return items.size() > position && items.get(position).getCardType() == TravelDownloadUpdateCard.TYPE;
+	private boolean isCardExists(int position, int cardType) {
+		return items.size() > position && items.get(position).getCardType() == cardType;
 	}
 }

@@ -287,7 +287,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 				@Override
 				public void onIndexItemClick(IndexItem item) {
-					if (item.getType() == DownloadActivityType.WIKIPEDIA_FILE && !Version.isPaidVersion(app)) {
+					if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+							|| item.getType() == DownloadActivityType.TRAVEL_FILE) && !Version.isPaidVersion(app)) {
 						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
 							ChoosePlanDialogFragment.showWikipediaInstance(fm);
@@ -342,7 +343,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 				@Override
 				public void onIndexItemClick(IndexItem item) {
-					if (item.getType() == DownloadActivityType.WIKIPEDIA_FILE && !Version.isPaidVersion(app)) {
+					if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+							|| item.getType() == DownloadActivityType.TRAVEL_FILE) && !Version.isPaidVersion(app)) {
 						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
 							ChoosePlanDialogFragment.showWikipediaInstance(fm);

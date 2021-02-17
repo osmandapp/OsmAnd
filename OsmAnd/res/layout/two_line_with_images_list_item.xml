@@ -94,13 +94,13 @@
             android:layout_marginRight="@dimen/list_header_padding"
             android:minWidth="@dimen/list_header_height"
             android:minHeight="@dimen/list_content_padding_large"
-            android:paddingStart="@dimen/context_menu_progress_padding_left"
-            android:paddingLeft="@dimen/context_menu_progress_padding_left"
-            android:paddingEnd="@dimen/context_menu_progress_padding_left"
-            android:paddingRight="@dimen/context_menu_progress_padding_left"
+            android:paddingStart="@dimen/bottom_sheet_exit_button_margin"
+            android:paddingLeft="@dimen/bottom_sheet_exit_button_margin"
+            android:paddingEnd="@dimen/bottom_sheet_exit_button_margin"
+            android:paddingRight="@dimen/bottom_sheet_exit_button_margin"
             android:text="@string/buy"
             android:textColor="@color/text_color_tab_active_light"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
     </LinearLayout>
 
